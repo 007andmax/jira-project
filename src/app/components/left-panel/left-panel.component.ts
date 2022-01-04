@@ -5,6 +5,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
+import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devices.component';
 import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-documents.component';
 import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-settings.component';
 import { LeftPanelSupportComponent } from './left-panel-support/left-panel-support.component';
@@ -31,6 +32,7 @@ export class LeftPanelComponent implements OnInit {
   @ViewChild('panelSupport') panelSupport: LeftPanelSupportComponent;
   @ViewChild('panelTickets') panelTickets: LeftPanelTicketsComponent;
   @ViewChild('panelUsers') panelUsers: LeftPanelUsersComponent;
+  @ViewChild('panelDevices') panelDevices: LeftPanelDevicesComponent;
 
 
   /**
@@ -138,6 +140,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/ticket-report`)) this.state = 'ticket-report';
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
+          if (window.location.href.includes(`/devices`)) this.state = 'new-devices';
 
 
 
@@ -227,6 +230,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-add-documents') this.goToLink('documents/add');
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
+      if (this.state === 'new-devices') this.goToLink('devices');
 
 
       if (this.state === 'byProducts' ||

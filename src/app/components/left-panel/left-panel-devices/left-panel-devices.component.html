@@ -1,0 +1,21 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-icon --devices"></div>
+    <div class="app-left-panel__menu-title">Devices</div>
+    <div class="app-left-panel__menu-arrow"></div>
+</div>
+<ul
+    class="app-left-panel__menu-expand top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+      [ngClass]="{'--active':type === 'Dashboard'  && activePage === 'new-devices'}"
+      (click)="onFilter('Dashboard')"
+    >
+        Dashboard
+    </li>
+</ul>
+

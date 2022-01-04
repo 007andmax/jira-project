@@ -462,6 +462,7 @@ import { ReportDeviceProcessorramComponent } from './components/reports/reports/
 import { ReportDeviceDiskspaceComponent } from './components/reports/reports/report-device-diskspace/report-device-diskspace.component';
 import { ApplicationbycompanyReportComponent } from './components/reports/reports/applicationbycompany-report/applicationbycompany-report.component';
 import { DevicesComponent } from './components/devices/devices.component';
+import { LeftPanelDevicesComponent } from './components/left-panel/left-panel-devices/left-panel-devices.component';
 
 declare var $: any;
 /**
@@ -880,7 +881,8 @@ declare var $: any;
     ReportDeviceProcessorramComponent,
     ReportDeviceDiskspaceComponent,
     ApplicationbycompanyReportComponent,
-    DevicesComponent
+    DevicesComponent,
+    LeftPanelDevicesComponent
   ],
   imports: [
     BrowserModule,

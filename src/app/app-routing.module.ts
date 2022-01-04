@@ -324,7 +324,7 @@ const routes: Routes = [
     component: CompanyDeviceBetaComponent,
   },
   {
-    path: ':company/company/:id/newdevices',
+    path: ':company/devices',
     component: DevicesComponent,
   },
   {

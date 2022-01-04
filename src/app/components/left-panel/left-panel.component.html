@@ -50,6 +50,12 @@
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-documents>
+    <app-left-panel-devices
+        #panelDevices
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state">
+    </app-left-panel-devices>
     <hr class="app-left-panel__divider">
     <app-left-panel-reports
         [activePage]="state"
