@@ -23,6 +23,7 @@
                   id="dropdownServices"
                   [(ngModel)]="tagFilterValue"
                   class="pointer"
+                  placeholder="Search by companies,devices,works stations etc...."
                   [matChipInputFor]="chipList"
                   (keyup.enter)="add($event.target.value)"
 
@@ -57,6 +58,7 @@
                       </th>
                       <th
                           class="company-devices-table__device-name pointer"
+                          (click)="onFilter('Name')"
                       >
                           Device Name
                           <span class="qt-table-modern__sorting"></span>

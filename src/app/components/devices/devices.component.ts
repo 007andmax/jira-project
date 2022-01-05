@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DeviceFilter } from './class/devices';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class DevicesComponent implements OnInit {
   operatingSystem: any = undefined;
   kafkaMessage: any;
   showPreloader: boolean = true;
+  currentCompany: any = null;
+  filter: DeviceFilter = new DeviceFilter();
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -30,15 +33,18 @@ export class DevicesComponent implements OnInit {
     private toastr: ToastrService,
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
-    public companiesStateService: CompaniesStateService
+    private companiesService: CompaniesService,
   ) { }
 
   ngOnInit() {
-    this.techCompnayGuid = this.companiesStateService.currentCompany.id;
     this.leftPanelStateService.changeStateWithoutNavigate(
       "new-devices"
     );
-    this.setPreviewDataDevice();
+    this.companiesService.getTechCompany().subscribe(data => {
+      this.currentCompany = data;
+      this.techCompnayGuid = this.currentCompany.id;
+      this.setPreviewDataDevice();
+    });
   }
 
   setPreviewDataDevice() {
@@ -171,5 +177,9 @@ export class DevicesComponent implements OnInit {
         this.cd.detectChanges();
       }
     });
+  }
+
+  onFilter(field){
+    this.filter.onFilter(field, this.assetList);
   }
 }

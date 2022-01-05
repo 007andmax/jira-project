@@ -142,17 +142,18 @@
 }
 
 img.Online-Search {
-  width: 22px;
-  height: 19px;
-  padding: 1px 1px 0 3px;
+  width: 25px;
+  height: 25px;
   object-fit: contain;
+  margin-top: 4px;
 }
+
 
 .StarRectangle {
   width: 32px;
   height: 28px;
-  margin: -32px 0 0 695px;
-  padding: 6px 8px;
+  margin: -32px 0 0 700px;
+  padding: 5px 8px;
   border-radius: 4px;
   background-color: #f4f6f8;
 }
@@ -164,7 +165,7 @@ img.Online-Search {
 .SearchRectangle {
     width: 705px;
     height: 36px;
-    margin: -28px 0px 0px 30px;
+    margin: -33px 0px 0px 30px;
     padding: 2px 4px 2px 11px;
     border-radius: 4px;
     //border: solid 1px #919eab;
