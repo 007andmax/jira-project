@@ -1,9 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { RemoteControlService } from '../device/_services/remoteControl.service';
 import { DeviceFilter } from './class/devices';
 
 
@@ -13,6 +16,7 @@ import { DeviceFilter } from './class/devices';
   styleUrls: ['./devices.component.scss']
 })
 export class DevicesComponent implements OnInit {
+  @ViewChild("templatePowersell") template;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -26,6 +30,15 @@ export class DevicesComponent implements OnInit {
   showPreloader: boolean = true;
   currentCompany: any = null;
   filter: DeviceFilter = new DeviceFilter();
+  temporaryCommand: string = "";
+  assetId: number;
+  powershellmsg: string = "";
+  closeResult = "";
+  loading: boolean = false;
+  _id: string = "";
+  restServerAddress = "";
+  remoteConnectPort = 0;
+
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -34,6 +47,10 @@ export class DevicesComponent implements OnInit {
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
+    private companiesStateService: CompaniesStateService,
+    private ngZone: NgZone,
+    private modalService: NgbModal,
+    private remoteControlService: RemoteControlService,
   ) { }
 
   ngOnInit() {
@@ -44,6 +61,7 @@ export class DevicesComponent implements OnInit {
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.setPreviewDataDevice();
+      this.onPowerShellCommand();
     });
   }
 
@@ -182,4 +200,176 @@ export class DevicesComponent implements OnInit {
   onFilter(field){
     this.filter.onFilter(field, this.assetList);
   }
+
+  gotoDetailDevice(Guid: string) {
+    localStorage.setItem("company_id", this.companyId);
+    const type = "workstation";
+    var url = `/#/${this.companiesStateService
+      .getCurrentCompany()
+      .name.replaceAll(" ", "")}/device/dashboard/${type}/${Guid}`;
+    window.open(url, "_blank");
+  }
+
+  sendCommand(command, assetId){
+    let data: any = {};
+    this.assetId = assetId;
+    if(command === 'ura') {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "UninstallRemoteAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if(command === 'ira') {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "InstallRemoteAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if (command === 'd') {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "UninstallAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if (command === 'u') {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "UpdateAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+  }
+
+  onPowerShellCommand() {
+    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
+      let item = resp.find((x) => x.key == this.assetId);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          if (
+            item.Value.startsWith("Failed") ||
+            item.Value.startsWith("This")
+          ) {
+            this.powershellmsg = item.Value.startsWith("Failed")
+              ? this.powershellmsg + "<br/> Do you want to force restart?"
+              : this.powershellmsg + "<br/> Do you want to force shutdown?";
+            this.modalService.open(this.template, {
+              windowClass: "modal-md",
+              centered: true,
+            });
+          }
+        });
+      }
+    });
+  }
+
+  decline() {
+    this.modalService.dismissAll();
+  }
+
+  Reboot(assetID) {
+    let data: any = {};
+    if (this.temporaryCommand == "r") {
+      data.AssetID = assetID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Restart-Computer -force";
+      this.agentService.SendPowerShellCommand(data);
+      this.decline();
+      this.toastr.success(
+        "Rebooting computer now, please wait for a min to get it restarted"
+      );
+    }
+    if (this.temporaryCommand == "s") {
+      data.AssetID = assetID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Stop-Computer -force";
+      this.agentService.SendPowerShellCommand(data);
+      this.decline();
+      this.toastr.success("Shutting down computer now.");
+    }
+  }
+
+  openModal(template,CompanyGuid) {
+    this._id = CompanyGuid;
+    this.modalService
+        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+  }
+
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  createConnection(type) {
+    this.loading = true;
+    let data = {
+      assetId: this._id,
+      type: type,
+      companyId: localStorage.getItem("company_id"),
+    };
+    this.remoteControlService
+      .createConnection2(data)
+      .pipe()
+      .subscribe(
+        (resp) => {
+          this.loading = false;
+          if (type === "CSS") {
+            this.getConstant(resp.sessionId);
+          } else {
+            this.getConstant(resp.sessionId);
+          }
+        },
+        (error) => {
+          this.toastr.error("Something went wrong please try again.");
+        }
+      );
+  }
+
+  getConstant(sessionId) {
+    this.remoteControlService
+      .getConstant()
+      .pipe()
+      .subscribe(
+        (resp) => {
+          this.restServerAddress = resp["rest.server.url"];
+          this.remoteConnectPort = resp["remote.connect.port"];
+          let url =
+            "quicktech://connect?serverIP=" +
+            this.restServerAddress +
+            "&port=" +
+            this.remoteConnectPort +
+            "&sessionID=" +
+            sessionId;
+          window.open(url, "_self");
+        },
+        (error) => { }
+      );
+  }
+
+  getViewer() {
+    this.loading = true;
+    this.remoteControlService
+      .getViewer()
+      .pipe()
+      .subscribe(
+        (resp) => {
+          this.loading = false;
+        },
+        (error) => { }
+      );
+  }
+
 }

@@ -70,8 +70,8 @@
                           <span class="qt-pl-30">IP address</span>
                       </th>
                       <th class="company-devices-table__device-agent">Agent</th>
-                      <th class="company-devices-table__go-to"></th>
                       <th class="company-devices-table__connect"></th>
+                      <th class="company-devices-table__go-to"></th>
                       <th class="company-devices-table__menu"></th>
                   </tr>
               </thead>
@@ -149,7 +149,7 @@
                   company-devices-table-device-name
                   qt-ff-gm qt-df qt-ai-c
                 ">
-                                      <span [textContent]="asset.Title ? asset.Title: asset.Name"></span>
+                                      <span [textContent]="asset.Title"></span>
                                   </div>
                                   <span
                                       class="company-device-desc"
@@ -208,16 +208,14 @@
                           </div>
                           </td>
                           <td class="company-devices-table__windows">
-                            <span
-                            class="company-devices-table__ip-windows-text"
-                            [textContent]="asset.Caption"
-                        ></span>
+                            <div>
+                              <span [textContent]="asset.Caption"></span>
+                            </div>
                           </td>
                           <td class="company-devices-table__ip-address">
-                            <span
-                            class="qt-pl-30 company-devices-table__ip-address-text"
-                            [textContent]="asset.InternalIPAddress"
-                            ></span>
+                            <div class="qt-pl-30">
+                              <span [textContent]="asset.InternalIPAddress"></span>
+                            </div>
                           </td>
                           <td class="company-devices-table__device-agent">
                             <div class="qt-df qt-fd-c">
@@ -235,9 +233,85 @@
 
                           </div>
                           </td>
-                          <td class="company-devices-table__go-to"></td>
-                          <td class="company-devices-table__connect"></td>
-                          <td class="company-devices-table__menu"></td>
+                          <td class="company-devices-table__connect">
+                            <div class="qt-ic-c icon__device-connect qt-sz-24 qt-bgsz-16"></div>
+                          </td>
+                          <td class="company-devices-table__go-to">
+                            <ng-template
+                                    #tipDeviceDetail
+                                    class="tooltip"
+                                >
+                                    Device Detail
+                                </ng-template>
+                                <div
+                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                    placement="top"
+                                    *ngIf="asset.ID"
+                                    [ngbTooltip]="tipDeviceDetail"
+                                    (click)="gotoDetailDevice(asset.Guid)"
+                                ></div>
+                          </td>
+                          <td class="company-devices-table__menu">
+                            <div
+                                    class="company-devices-table__menu-body"
+                                    ngbDropdown
+                                    placement="bottom-right"
+                                    container="body"
+                                >
+                                    <div
+                                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                                        ngbDropdownToggle
+                                    ></div>
+                                    <ul
+                                        class="qt-dropdown-menu invoice-items-dropdown"
+                                        ngbDropdownMenu
+                                    >
+                                        <li
+                                            *ngIf="asset && asset.CanRemoteControl"
+                                            class="pointer"
+                                            (click)="openModal(template,asset.CompanyGuid)"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__remote-access qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Remote control
+                                        </li>
+                                        <li
+                                            *ngIf="asset.CanRemoteControl && asset.online"
+                                            class="pointer"
+                                            (click)="sendCommand('ura', asset.ID)"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__uninstall qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Uninstall Remote Agent
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            (click)="sendCommand('u',asset.ID)"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__update qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Update Agent
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            (click)="sendCommand('d',asset.ID)"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__uninstall-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Uninstall Agent
+                                        </li>
+                                        <li
+                                            *ngIf="!asset.CanRemoteControl && asset.online"
+                                            class="pointer"
+                                            (click)="sendCommand('ira', asset.ID)"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__install qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Install Remote Agent
+                                        </li>
+                                    </ul>
+                                </div>
+                          </td>
                       </tr>
                   </tbody>
               </table>
@@ -250,6 +324,78 @@
   </div>
 </div>
 
+<ng-template #templatePowersell>
+  <div class="modal-content restart-modal">
+      <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button
+              type="button"
+              class="close"
+              (click)="decline()"
+              data-dismiss="modal"
+              aria-label="Close"
+          >
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <p [innerHTML]="powershellmsg"></p>
+      </div>
+      <div class="modal-footer">
+          <button
+              type="button"
+              class="btn btn-danger"
+              (click)="Reboot(assetId)"
+          >
+              Yes
+          </button>
+          <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="decline()"
+          >
+              No
+          </button>
+      </div>
+  </div>
+</ng-template>
 
+<ng-template #template let-modal>
+  <div class="modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="remote-area">
+          <ul class="list-unstyled">
+              <li>
+                  <span class="remote-ico">
+                      <img
+                          src="/html/assets/img/device/quicktech-connect.svg"
+                          alt="quicktech-connect"
+                      >
+                  </span>
+                  <div class="remote-info">
+                      <h3>Quicktech Connect</h3>
+                      <p>
+                          Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
+                      </p>
+                      <a (click)="createConnection('CSS');" class="btn btn-primary">
+                          Launch Quicktech Connect
+                      </a>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div class="viewer-footer">
+          <p>
+              You may need to download and install the viewer
+          </p>
+          <a (click)="getViewer();" class="btn btn-dowanload">
+              Download Viewer
+          </a>
+      </div>
+  </div>
+</ng-template>
 
 

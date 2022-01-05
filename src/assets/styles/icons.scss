@@ -713,6 +713,18 @@
   &__computer-green {
     background-image: url("/assets/img/icons/computer-green.svg");
   }
+  &__update {
+    background-image: url("/assets/img/icons/update.svg");
+  }
+  &__uninstall-agent {
+    background-image: url("/assets/img/icons/uninstall-agent.svg");
+  }
+  &__install {
+    background-image: url("/assets/img/icons/install.svg");
+  }
+  &__device-connect {
+    background-image: url("/assets/img/icons/device-connect.svg");
+  }
 
   &.--updated {
     position: relative;

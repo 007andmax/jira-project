@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>C038BF1B-4971-4771-9CC5-E09EC2DCE43B</title>
+    <g id="Device-List" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="1h-More-Option" transform="translate(-1216.000000, -430.000000)" stroke="#4F5F79" stroke-width="1.5">
+            <g id="Group-17-Copy-2" transform="translate(1200.000000, 286.000000)">
+                <g id="Group-9-Copy-3" transform="translate(0.000000, 136.000000)">
+                    <g id="Actions-/-Install" transform="translate(16.000000, 8.000000)">
+                        <path d="M15,3 L15,13 C15,13.5522847 14.5522847,14 14,14 L2,14 C1.44771525,14 1,13.5522847 1,13 L1,3" id="Shape"></path>
+                        <g id="Group-19" transform="translate(8.000000, 6.000000) scale(1, -1) translate(-8.000000, -6.000000) translate(5.000000, 2.000000)">
+                            <line x1="3" y1="-1.39888101e-14" x2="3" y2="8" id="Path-2" fill="#FFFFFF"></line>
+                            <polyline id="Path-3" transform="translate(3.000000, 1.534790) scale(1, -1) translate(-3.000000, -1.534790) " points="4.88498131e-15 -1.99840144e-15 3 3.06958008 6 -1.31681775e-15"></polyline>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
