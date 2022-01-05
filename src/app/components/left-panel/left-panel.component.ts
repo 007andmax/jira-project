@@ -164,6 +164,7 @@ export class LeftPanelComponent implements OnInit {
       this.panelTickets.close();
       this.panelUsers.close();
       this.panelDocuments.close();
+      this.panelDevices.close();
 
       this.panelCompanies.openPanel();
       this.panelCompanies.togglePanel(true);

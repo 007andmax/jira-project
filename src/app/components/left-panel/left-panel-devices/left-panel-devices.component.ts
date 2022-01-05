@@ -43,4 +43,8 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.goToState('new-devices');
   }
 
+  public close() {
+    this.open = false;
+  }
+
 }
