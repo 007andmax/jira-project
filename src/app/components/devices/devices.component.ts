@@ -38,6 +38,7 @@ export class DevicesComponent implements OnInit {
   _id: string = "";
   restServerAddress = "";
   remoteConnectPort = 0;
+  companyGuid: string = "";
 
 
   constructor(
@@ -289,8 +290,9 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  openModal(template,CompanyGuid) {
-    this._id = CompanyGuid;
+  openModal(template,Guid,companyGuid) {
+    this._id = Guid;
+    this.companyGuid = companyGuid;
     this.modalService
         .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
         .result.then(
@@ -318,7 +320,7 @@ export class DevicesComponent implements OnInit {
     let data = {
       assetId: this._id,
       type: type,
-      companyId: localStorage.getItem("company_id"),
+      companyId: this.companyGuid,
     };
     this.remoteControlService
       .createConnection2(data)

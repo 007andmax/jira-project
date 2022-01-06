@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
-import { NgbDatepicker } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbDatepicker, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
@@ -65,13 +65,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   notesDescription: string = "";
   kafkaMessage: any = "";
   securityUpdate: number;
+  closeResult:string = "";
+  windowUpdatePendingList: [] = [];
 
   constructor(
     private agentService: AgentService,
     private toastr: ToastrService,
     private activateRoute: ActivatedRoute,
     private kafkaStateService: KafkaStateService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private modalService: NgbModal,
+    private ngZone: NgZone
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -93,6 +97,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (item) {
         this.kafkaMessage = JSON.parse(item.Value);
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+        this.windowUpdatePendingList = this.kafkaMessage.PendingWindowsUpdates;
         this.cd.detectChanges();
       }
     }
@@ -541,5 +546,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  getPendingWindowUpdate(template){
+    this.ngZone.run(() => {
+    this.modalService
+        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

@@ -269,7 +269,7 @@
                                         <li
                                             *ngIf="asset && asset.CanRemoteControl"
                                             class="pointer"
-                                            (click)="openModal(template,asset.CompanyGuid)"
+                                            (click)="openModal(template,asset.Guid,asset.CompanyGuid)"
                                             ngbDropdownItem
                                         >
                                             <div class="icon__remote-access qt-bg-contain qt-sz-16 qt-mr-8"></div>

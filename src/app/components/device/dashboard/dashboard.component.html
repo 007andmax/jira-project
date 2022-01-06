@@ -262,7 +262,7 @@
                                             >
                                         </figure>
                                         <h4>Security Update</h4>
-                                        <span *ngIf="securityUpdate != undefined">{{ securityUpdate }} missing Updates</span>
+                                        <span *ngIf="securityUpdate != undefined" (click)="getPendingWindowUpdate(template)">{{ securityUpdate }} missing Updates</span>
                                         <span *ngIf="securityUpdate == undefined">&nbsp;</span>
                                     </li>
                                 </ul>
@@ -591,3 +591,37 @@
         </div>
     </div>
 </main>
+
+
+<ng-template #template let-modal>
+  <div class="modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="remote-area">
+          <table>
+            <thead>
+              <tr>
+                <th>UpdateId</th>
+                <th>Title</th>
+                <th>Reboot</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of windowUpdatePendingList">
+                <td>{{data.UpdateID}}</td>
+                <td>{{data.Title}}</td>
+                <td>{{data.RebootIsRequired}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="viewer-footer">
+          <a  class="btn btn-dowanload">
+              Go to agent
+          </a>
+      </div>
+  </div>
+</ng-template>
+
