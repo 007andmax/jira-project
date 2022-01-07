@@ -65,6 +65,22 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public GetWindowUpdateList(ID,datas) {
+    const data = {
+      AssetID : ID,
+      Value: datas,
+      MessageType: "installIWindowsUpdate",
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.GetWindowUpdateList(ID,datas), 3000);
+    }
+  }
+
   public searchDeviceWithTag(data) {
     return this.http
       .post(

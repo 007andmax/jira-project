@@ -67,6 +67,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   securityUpdate: number;
   closeResult:string = "";
   windowUpdatePendingList: [] = [];
+  selected: number = 0;
+  reloadWindowUpdatePendingList: any[] = [];
+  check: any[] = [];
 
   constructor(
     private agentService: AgentService,
@@ -571,5 +574,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  postWindowUpdatePendint(i){
+    const index: any = { "ID": i };
+    let find = this.check.find(x=>x.ID == i);
+    let indexs = this.check.findIndex(x=>x.ID == i);
+    if(!find)
+    {
+      this.check.push(index);
+      this.selected = this.selected + 1;
+      this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
+    }
+    else
+    {
+      this.check.splice(indexs,1);
+      this.selected = this.selected -1;
+      this.reloadWindowUpdatePendingList.splice(indexs,1);
+    }
+  }
+
+  InstallUpdate(){
+    this.agentService.GetWindowUpdateList(this.asset.ID,this.reloadWindowUpdatePendingList);
   }
 }

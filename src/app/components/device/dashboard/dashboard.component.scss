@@ -801,7 +801,7 @@
 //modal-popup start
 
 .remote-area {
-  padding: 70px 48px 25px 48px;
+  padding: 5px 5px 5px 5px;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -868,7 +868,7 @@
   -moz-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
   background-color: #edf2f6;
-  padding: 26px 45px;
+  padding: 2px 45px;
   align-items: center;
   p {
       margin-bottom: 0;
@@ -889,6 +889,7 @@
   color: $primary-color;
   text-align: center;
   min-width: 134px;
+  margin-left: 360px;
   @include transition(0.4s);
   &:hover {
       background-color: $primary-color;
@@ -917,6 +918,46 @@ background-color: #FF0000;
 }
 .btn-update, .btn-uninstall {
   background-color:#e8e8e8 !important;
+}
+
+.modal-table
+{
+  overflow-y: hidden;
+  height: calc(100vh - 15rem);
+}
+.modal-table-body
+{
+  overflow-y: auto;
+  height: 100%;
+}
+
+.fixed{
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tabletitle{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.tablespace{
+  white-space:normal
+}
+
+.closebtn
+{
+  position:relative !important;
+  right:5px !important;
+  top:0px !important;
+}
+
+.tableth{
+  width:30px;
+}
+
+.tabletd{
+  width:30px;
 }
 
 // modal-popup end
