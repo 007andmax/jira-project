@@ -69,7 +69,7 @@ export class AgentService {
     const data = {
       AssetID : ID,
       Value: datas,
-      MessageType: "installIWindowsUpdate",
+      MessageType: "InstallWindowsUpdates",
     };
 
     if (this.wsService.IsKafkaConnected) {
