@@ -79,6 +79,10 @@
                             Device Name
                             <span class="qt-table-modern__sorting"></span>
                         </th>
+                        <th class="network-scan-table__os pointer" (click)="setSort('Os')">
+                          Operating System
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
                         <th class="network-scan-table__lan-ip pointer" (click)="setSort('ipAddress')">
                             Lan ip
                             <span class="qt-table-modern__sorting"></span>
@@ -101,7 +105,7 @@
                 <tbody *ngFor="let network of networkvalue">
                     <tr>
                         <td class="network-scan-table__check">
-                            <div class="d-f" *ngIf="!network.IsAgentInstalled">
+                            <div class="d-f" *ngIf="!network.IsAgentInstalled && network.OperatingSystem=='Windows'">
                                 <label class="qt-checkbox" [attr.for]="'device-' + network.ID">
                                     <input type="checkbox" [attr.id]="'device-' + network.ID"
                                         [(ngModel)]="network.selected" (change)="onSelectDevice()">
@@ -111,6 +115,7 @@
                         </td>
                         <td class="network-scan-table__device-name" [textContent]="network.HostName">
                         </td>
+                        <td class="network-scan-table__os" [textContent]="network.OperatingSystem"></td>
                         <td class="network-scan-table__lan-ip" [textContent]="network.IP"></td>
                         <td class="network-scan-table__manufacturer"
                             [textContent]="network.Manufacturer || 'not defined'"></td>

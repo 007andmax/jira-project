@@ -65,6 +65,16 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public nonAgentAsset(data) {
+      return this.http
+      .put(
+        `${this.apiAgent}agent/Asset/CreateNonAgentAsset`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
+
   public GetWindowUpdateList(ID,datas) {
     const data = {
       AssetID : ID,

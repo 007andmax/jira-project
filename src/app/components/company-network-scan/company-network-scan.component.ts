@@ -128,10 +128,33 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       let createdOn = data[0].CreatedOn;
       this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
       for (let i = 0; i < this.networkvalue.length; i++) {
+        if(this.networkvalue[i].OperatingSystem == "Windows")
+        {
+          this.nonAgentAsset(this.asset,this.networkvalue[i]);
+        }
         this.networkvalue[i].ID = i + 1;
         this.networkvalue[i].selected = false;
       }
     });
+  }
+
+  nonAgentAsset(assetValue,networkValue){
+    let data: any = {};
+    data.Guid = assetValue.Guid;
+    data.CompanyGuid = assetValue.CompanyGuid;
+    data.Name=networkValue.ID;
+    data.Tag= "";
+    data.Manufacturer =networkValue.Manufacturer ;
+    data.HardwareTypeID = "";
+    data.InternalIPAddress =networkValue.IP ,
+    data.ExternalIPAddress = "",
+    data.Location = "",
+    data.Site = "",
+    data.Description = "",
+    data.Title =networkValue.MacAddress
+    this.agentService.nonAgentAsset(data).subscribe((result)=>{
+
+    })
   }
 
 

@@ -206,6 +206,11 @@
           }
         }
       }
+      &__os{
+        width:132px;
+        min-width: 132px;
+        max-width: 132px;
+      }
       &__lan-ip {
         width: 115px;
         min-width: 115px;
