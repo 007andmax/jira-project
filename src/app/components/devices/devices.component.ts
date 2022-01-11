@@ -39,6 +39,7 @@ export class DevicesComponent implements OnInit {
   restServerAddress = "";
   remoteConnectPort = 0;
   companyGuid: string = "";
+  autosearchDevice: any[] = [];
 
 
   constructor(
@@ -372,6 +373,15 @@ export class DevicesComponent implements OnInit {
         },
         (error) => { }
       );
+  }
+
+  onSearchTag(Tag){
+    let req: any = {};
+    req.TechCompanyGuid = this.techCompnayGuid;
+    req.Criteria = Tag;
+      this.agentService.autoComplete(req).subscribe((result)=>{
+        this.autosearchDevice = result;
+      })
   }
 
 }

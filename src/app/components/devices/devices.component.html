@@ -26,6 +26,7 @@
                   placeholder="Search by companies,devices,works stations etc...."
                   [matChipInputFor]="chipList"
                   (keyup.enter)="add($event.target.value)"
+                  (keyup)="onSearchTag($event.target.value)"
 
               >
                       </mat-chip-list>
@@ -34,6 +35,11 @@
                   <div class="StarRectangle">
                     <img src="/assets/img/device/favourite.svg"
      class="Favourite">
+                  </div>
+                  <div class="Rectangle-11" style="Display:none">
+                    <div class="SubRectangle" *ngFor="let search of autosearchDevice">
+                        {{search}}
+                    </div>
                   </div>
                 </div>
       </div>

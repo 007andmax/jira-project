@@ -65,6 +65,16 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public autoComplete(data){
+    return this.http
+      .post(
+        `${this.apiAgent}agent/AutoComplete/Search`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) =>  this.decrypt128(data, this.key)));
+  }
+
   public nonAgentAsset(data) {
       return this.http
       .put(
@@ -78,7 +88,7 @@ export class AgentService {
   public GetWindowUpdateList(ID,datas) {
     const data = {
       AssetID : ID,
-      Value: datas,
+      Value: JSON.stringify(datas) ,
       MessageType: "InstallWindowsUpdates",
     };
 
