@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   kafkaMessage: any = "";
   securityUpdate: number;
   closeResult:string = "";
-  windowUpdatePendingList: [] = [];
+  windowUpdatePendingList: any[] = [];
   selected: number = 0;
   reloadWindowUpdatePendingList: any[] = [];
   check: any[] = [];
@@ -100,7 +100,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (item) {
         this.kafkaMessage = JSON.parse(item.Value);
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-        this.windowUpdatePendingList = this.kafkaMessage.PendingWindowsUpdates;
+        if(this.securityUpdate>0)
+        {
+          for(let i=0;i<this.securityUpdate;i++)
+          {
+            let data: any = {};
+            data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
+            data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
+            if(this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired=="0")
+            {
+              data.RebootIsRequired = "NeverReboots"
+            }
+            if(this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired=="1")
+            {
+              data.RebootIsRequired = "AlwaysRequiresReboot";
+            }
+            if(this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired=="2")
+            {
+              data.RebootIsRequired = "CanRequestReboot";
+            }
+            this.windowUpdatePendingList.push(data);
+          }
+        }
         this.cd.detectChanges();
       }
     }
