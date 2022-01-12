@@ -12,6 +12,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
@@ -44,6 +45,7 @@ export class MarketingComponent implements OnInit {
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   sub: Subscription = new Subscription();
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -149,6 +151,12 @@ export class MarketingComponent implements OnInit {
       this.listCustomSubscription = data;
     })
     this.sub.add(onGetListCustomSubscription);
+
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+    })
+    this.sub.add(onGetIndustry);
   }
 
   private onArchiveUsers(ids) {
@@ -255,7 +263,7 @@ export class MarketingComponent implements OnInit {
 
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies)
+    this.filter.onFilter(field, this.reqUsers, this.companies, this.industries)
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];

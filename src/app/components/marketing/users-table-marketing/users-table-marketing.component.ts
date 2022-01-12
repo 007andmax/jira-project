@@ -8,6 +8,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -31,6 +32,7 @@ export class UsersTableMarketingComponent implements OnInit {
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  @Input() industries: Array<CrmCompanyIndustry> = [];
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   constructor(private companiesStateService: CompaniesStateService,
@@ -63,6 +65,10 @@ export class UsersTableMarketingComponent implements OnInit {
     }).subscribe(data => {
       this.customSubscription.toggleIsUpdate(false);
     })
+  }
+  getUserIndustry() {
+    let find = this.industries.find(item => item.id === this.user.userIndustryId);
+    return (find) ? find.name : '';
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);

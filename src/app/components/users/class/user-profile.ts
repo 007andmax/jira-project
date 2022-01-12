@@ -26,6 +26,7 @@ export class UserProfile {
     jobDescription: string;
     jobTitleId: string;
     jobTypeId: string;
+    userIndustryId: string;
     constructor() {
 
     }
@@ -58,6 +59,7 @@ export class UserProfile {
         this.jobDescription = user.jobDescription;
         this.jobTitleId = user.jobTitleId;
         this.jobTypeId = user.jobTypeId;
+        this.userIndustryId = user.userIndustryId;
     }
     public editLogo(data) {
         this.avatar = data;
@@ -76,6 +78,9 @@ export class UserProfile {
     }
     public addPhoneNumber() {
         this.phoneNumbers.push(new PhoneNumber('OFFICE'));
+    }
+    public setUserIndustryId(data) {
+        this.userIndustryId = data;
     }
     public setRole(data) {
         this.role = data;

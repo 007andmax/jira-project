@@ -23,6 +23,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
+import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 
 @Component({
   selector: 'company-user',
@@ -44,6 +45,7 @@ export class CompanyUserComponent implements OnInit {
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('header') header: UsersHeaderComponent;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
@@ -156,6 +158,11 @@ export class CompanyUserComponent implements OnInit {
     })
     this.userListService.addSubscription(onGetListCustomSubscription);
     this.onInitSubscribe();
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+    })
+    this.userListService.addSubscription(onGetIndustry);
   }
   public onInitFilters(id) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === id);
@@ -264,7 +271,7 @@ export class CompanyUserComponent implements OnInit {
 
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies)
+    this.filter.onFilter(field, this.reqUsers, this.companies, this.industries)
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];

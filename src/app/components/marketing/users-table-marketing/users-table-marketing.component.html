@@ -43,8 +43,12 @@
     >
         <span>{{ getUserCompanyName() }}</span>
     </td>
-
-
+    <td
+        class="users-table__company"
+        (click)="showDetailUser()"
+    >
+        <span>{{ getUserIndustry() }}</span>
+    </td>
     <td
         class="users-table__contract-no"
         (click)="showDetailUser()"

@@ -42,8 +42,9 @@ export class User {
     selected: boolean = false;
     tags: Array<Tag> = [];
     jobDescription: string;
-    jobTitleId: null
-    jobTypeId: null
+    jobTitleId: string;
+    jobTypeId: string;
+    userIndustryId: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

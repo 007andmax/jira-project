@@ -22,6 +22,7 @@ export class UserAdd {
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
   defaultSubscriptions: UserDefaultSubscriptionAdd;
+  userIndustryId: string;
   constructor(data: UserProfile) {
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
       this.phoneNumbers = [];
@@ -44,6 +45,6 @@ export class UserAdd {
     this.jobDescription = data.jobDescription;
     this.jobTypeId = data.jobTypeId;
     this.jobTitleId = data.jobTitleId;
-
+    this.userIndustryId = data.userIndustryId;
   }
 }

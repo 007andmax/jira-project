@@ -117,6 +117,13 @@
                     </th>
                     <th
                         class="users-table__company pointer"
+                        (click)="onFilter('industry')"
+                    >
+                        Industry
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__company pointer"
                         (click)="onFilter('primaryEmail')"
                         *ngIf="type === TYPE_LIST_COMPANY_USERS"
                     >

@@ -20,6 +20,7 @@ import { Input } from 'hammerjs';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 
 @Component({
   selector: 'app-users-aside',
@@ -38,6 +39,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   validate: UserValidate = new UserValidate();
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
+  industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   sub: Subscription = new Subscription();
@@ -54,7 +56,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+    })
+    this.sub.add(onGetIndustry);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -70,6 +76,9 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       this.getClientsList(data);
     })
 
+  }
+  onSelectClientIndustry(item) {
+    this.user.setUserIndustryId((item) ? item.id : null);
   }
   getJobTypeList() {
     if (this.crmStateService.getJobTypeList().length === 0) {

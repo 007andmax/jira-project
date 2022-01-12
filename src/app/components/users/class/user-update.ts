@@ -27,6 +27,7 @@ export class UserUpdate {
   jobTypeId: string;
   customSubscriptionIds: Array<string> = [];
   defaultSubscriptions: UserDefaultSubscriptionAdd;
+  userIndustryId: string;
   constructor(data: UserProfile, user: User) {
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
@@ -60,5 +61,6 @@ export class UserUpdate {
     this.jobDescription = data.jobDescription;
     this.jobTitleId = data.jobTitleId;
     this.jobTypeId = data.jobTypeId;
+    this.userIndustryId = data.userIndustryId;
   }
 }

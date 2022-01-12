@@ -22,6 +22,7 @@ import { UserDefaultSubscription } from './class/user-default-subscription';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
+import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 
 @Component({
   selector: 'app-users',
@@ -44,6 +45,7 @@ export class UsersComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   sub: Subscription = new Subscription();
+  industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
@@ -166,6 +168,11 @@ export class UsersComponent implements OnInit {
       this.listCustomSubscription = data;
     })
     this.sub.add(onGetListCustomSubscription);
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+    })
+    this.sub.add(onGetIndustry);
   }
 
   private onArchiveUsers(ids) {
@@ -279,7 +286,7 @@ export class UsersComponent implements OnInit {
 
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies)
+    this.filter.onFilter(field, this.reqUsers, this.companies, this.industries)
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];

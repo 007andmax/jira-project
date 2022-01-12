@@ -108,6 +108,22 @@
             </div>
         </div>
         <div class="qt-df qt-mb-24">
+            <div class="qt-w50">
+                <app-drop-down
+                    #jobIndustryDp
+                    [class]="['light-dropdown', 'qt-select-input-40']"
+                    [placeholder]="'Select Industry'"
+                    [list]="industries"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [title]="'Industry'"
+                    [editItem]="selectedUserIndustry"
+                    (onSelectedItem)="onSelectClientIndustry($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-df qt-mb-24">
             <div class="qt-input-block job-description">
                 <label>Job Description</label>
                 <textarea

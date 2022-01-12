@@ -21,6 +21,7 @@ import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-a
 import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 
 @Component({
   selector: 'app-users-table',
@@ -36,6 +37,7 @@ export class UsersTableComponent implements OnInit {
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  @Input() industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
@@ -72,6 +74,10 @@ export class UsersTableComponent implements OnInit {
     }).subscribe(data => {
       this.customSubscription.toggleIsUpdate(false);
     })
+  }
+  getUserIndustry() {
+    let find = this.industries.find(item => item.id === this.user.userIndustryId);
+    return (find) ? find.name : '';
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
