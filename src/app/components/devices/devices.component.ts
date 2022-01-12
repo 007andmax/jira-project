@@ -42,6 +42,7 @@ export class DevicesComponent implements OnInit {
   autosearchDevice: any[] = [];
 
 
+
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
@@ -383,5 +384,4 @@ export class DevicesComponent implements OnInit {
         this.autosearchDevice = result;
       })
   }
-
 }

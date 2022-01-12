@@ -22,6 +22,7 @@
                           <input autofocus
                   id="dropdownServices"
                   [(ngModel)]="tagFilterValue"
+                  [matAutocomplete]="auto"
                   class="pointer"
                   placeholder="Search by companies,devices,works stations etc...."
                   [matChipInputFor]="chipList"
@@ -30,16 +31,16 @@
 
               >
                       </mat-chip-list>
+                      <mat-autocomplete  #auto="matAutocomplete">
+                          <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
+                            {{search}}
+                          </mat-option>
+                      </mat-autocomplete>
                     </mat-form-field>
                   </div>
                   <div class="StarRectangle">
                     <img src="/assets/img/device/favourite.svg"
      class="Favourite">
-                  </div>
-                  <div class="Rectangle-11" style="Display:none">
-                    <div class="SubRectangle" *ngFor="let search of autosearchDevice">
-                        {{search}}
-                    </div>
                   </div>
                 </div>
       </div>

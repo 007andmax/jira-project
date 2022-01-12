@@ -2792,3 +2792,9 @@ div#editor.angular-editor-textarea {
         max-height: inherit;
     }
 }
+
+.modal {
+  .modal-lg {
+    max-width: 760px !important;
+  }
+}

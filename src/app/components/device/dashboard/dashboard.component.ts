@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   notesDescription: string = "";
   kafkaMessage: any = "";
   securityUpdate: number;
-  closeResult:string = "";
+  closeResult: string = "";
   windowUpdatePendingList: any[] = [];
   selected: number = 0;
   reloadWindowUpdatePendingList: any[] = [];
@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._id = this.activateRoute.snapshot.params["id"];
 
     this.setPreviewDataDevice();
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e)=> this.onCurrentConfigError(e));
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e) => this.onCurrentConfigError(e));
   }
 
   onCurrentConfig(resp: any) {
@@ -100,24 +100,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (item) {
         this.kafkaMessage = JSON.parse(item.Value);
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-        if(this.securityUpdate>0)
-        {
-          for(let i=0;i<this.securityUpdate;i++)
-          {
+        if (this.securityUpdate > 0) {
+          for (let i = 0; i < this.securityUpdate; i++) {
             let data: any = {};
             data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
             data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
-            if(this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired=="0")
-            {
-              data.RebootIsRequired = "NeverReboots"
+            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
+              data.RebootIsRequired = "Never Reboots"
             }
-            if(this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired=="1")
-            {
-              data.RebootIsRequired = "AlwaysRequiresReboot";
+            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
+              data.RebootIsRequired = "Always Requires Reboot";
             }
-            if(this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired=="2")
-            {
-              data.RebootIsRequired = "CanRequestReboot";
+            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
+              data.RebootIsRequired = "Can Request Reboot";
             }
             this.windowUpdatePendingList.push(data);
           }
@@ -151,7 +146,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.asset = resp[0];
         localStorage.setItem(
           "deviceDetail_" + this._id,
-          JSON.stringify( this.asset)
+          JSON.stringify(this.asset)
         );
         this.asset.IsUpdated = true;
 
@@ -184,7 +179,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   AddTags(Tag) {
     //return if no tag
-    if(!Tag) {
+    if (!Tag) {
       return;
     }
     const newTag: any = { AssetID: this.asset.ID, Name: Tag };
@@ -411,8 +406,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           return a["Caption"].toLowerCase() > b["Caption"].toLowerCase()
             ? 1
             : b["Caption"].toLowerCase() > a["Caption"].toLowerCase()
-            ? -1
-            : 0;
+              ? -1
+              : 0;
         } else if (a["Caption"]) {
           return 1;
         } else if (b["Caption"]) {
@@ -423,13 +418,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDateChange(newDate: Date) {}
+  onDateChange(newDate: Date) { }
 
   updateAsset() {
-    this.asset.InstallDate =this.asset.InstallDate || '0001-01-01';
-    this.asset.LastRebootDate =this.asset.LastRebootDate || '0001-01-01';
-    this.asset.DeploymentDate =this.asset.DeploymentDate || '0001-01-01';
-    this.asset.WarrantyExpires =this.asset.WarrantyExpires || '0001-01-01';
+    this.asset.InstallDate = this.asset.InstallDate || '0001-01-01';
+    this.asset.LastRebootDate = this.asset.LastRebootDate || '0001-01-01';
+    this.asset.DeploymentDate = this.asset.DeploymentDate || '0001-01-01';
+    this.asset.WarrantyExpires = this.asset.WarrantyExpires || '0001-01-01';
 
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
@@ -536,18 +531,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-          ? "yellow"
-          : IsSystem == true
-          ? color
-          : "",
+            ? "yellow"
+            : IsSystem == true
+              ? color
+              : "",
       "background-color":
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-          ? "yellow"
-          : IsSystem == true
-          ? color
-          : "",
+            ? "yellow"
+            : IsSystem == true
+              ? color
+              : "",
     };
   }
 
@@ -557,10 +552,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-          ? "yellow"
-          : IsSystem == true
-          ? color
-          : "",
+            ? "yellow"
+            : IsSystem == true
+              ? color
+              : "",
     };
   }
 
@@ -572,10 +567,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  getPendingWindowUpdate(template){
+  getPendingWindowUpdate(template) {
     this.ngZone.run(() => {
-    this.modalService
-        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
+      this.modalService
+        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg' })
         .result.then(
           (result) => {
             this.closeResult = `Closed with: ${result}`;
@@ -597,25 +592,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  postWindowUpdatePendint(i){
+  postWindowUpdatePendint(i) {
     const index: any = { "ID": i };
-    let find = this.check.find(x=>x.ID == i);
-    let indexs = this.check.findIndex(x=>x.ID == i);
-    if(!find)
-    {
+    let find = this.check.find(x => x.ID == i);
+    let indexs = this.check.findIndex(x => x.ID == i);
+    if (!find) {
       this.check.push(index);
       this.selected = this.selected + 1;
       this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
     }
-    else
-    {
-      this.check.splice(indexs,1);
-      this.selected = this.selected -1;
-      this.reloadWindowUpdatePendingList.splice(indexs,1);
+    else {
+      this.check.splice(indexs, 1);
+      this.selected = this.selected - 1;
+      this.reloadWindowUpdatePendingList.splice(indexs, 1);
     }
   }
 
-  InstallUpdate(){
-    this.agentService.GetWindowUpdateList(this.asset.ID,this.reloadWindowUpdatePendingList);
+  InstallUpdate() {
+    this.agentService.GetWindowUpdateList(this.asset.ID, this.reloadWindowUpdatePendingList);
   }
 }
