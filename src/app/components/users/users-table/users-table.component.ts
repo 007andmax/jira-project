@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
@@ -22,6 +22,8 @@ import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users-table',
@@ -29,7 +31,7 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
   styleUrls: ['./users-table.component.scss'],
   providers: [UsersTableService]
 })
-export class UsersTableComponent implements OnInit {
+export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;
   @Input() user: User;
   @Input() type: string;
@@ -37,10 +39,11 @@ export class UsersTableComponent implements OnInit {
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
-  @Input() industries: Array<CrmCompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  sub: Subscription = new Subscription();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
@@ -52,7 +55,9 @@ export class UsersTableComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     private usersTableService: UsersTableService,
     public cd: ChangeDetectorRef,
+    private crmStateService: CrmStateService,
     private elRef: ElementRef) { }
+
 
   onChangeDefaultSubscriptions(subscriptions) {
     this.usersService.setSubscriptions(subscriptions.id, {
@@ -120,6 +125,13 @@ export class UsersTableComponent implements OnInit {
     this.usersStateService.onOpenEditAsige();
   }
   ngOnInit() {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+      this.cd.detectChanges();
+    })
+    this.sub.add(onGetIndustry);
+
 
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -178,5 +190,8 @@ export class UsersTableComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

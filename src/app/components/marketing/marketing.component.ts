@@ -135,6 +135,7 @@ export class MarketingComponent implements OnInit {
         this.reqUsers[reqIndex].userStatistic.ticketsSubmitted = prevValue;
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
+      this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
     this.usersStateService.closeDetailAside.subscribe(data => {

@@ -46,16 +46,16 @@
     </td>
     <td
         class="users-table__company"
-        (click)="showDetailUser()"
-    >
-        <span>{{ getUserIndustry() }}</span>
-    </td>
-    <td
-        class="users-table__company"
         *ngIf="type === TYPE_LIST_COMPANY_USERS"
         (click)="showDetailUser()"
     >
         <span>{{ user.primaryEmail }}</span>
+    </td>
+    <td
+        class="users-table__company"
+        (click)="showDetailUser()"
+    >
+        <span>{{ getUserIndustry() }}</span>
     </td>
     <td
         class="users-table__contract-no"
