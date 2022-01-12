@@ -55,6 +55,13 @@ export class User {
         }
 
     }
+    public onUpdate(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
+        this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
+        this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
+    }
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }

@@ -52,14 +52,14 @@ export class UsersStateService {
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allUsers[Index] = new User(newChange.data);
+        if (Index > -1) this.allUsers[Index].onUpdate(newChange.data);
         if (Index === -1) this.allUsers.unshift(new User(newChange.data));
         if (newChange.data.id === this.currentUser.id) this.onInitGetCurrentUser();
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
-          if (Index > -1) this.allUsers[Index] = new User(data);
+          if (Index > -1) this.allUsers[Index].onUpdate(data);
         });
       }
       if (newChange.action === 'USER_ONLINE') {

@@ -116,14 +116,14 @@ export class UsersComponent implements OnInit {
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
+        if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
         if (reqIndex === -1) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
           // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex] = new User(data.data);
+        if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
@@ -135,7 +135,7 @@ export class UsersComponent implements OnInit {
 
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = new User(user);
+          if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(user);
           if (this.showArchivedUsers) {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
 
