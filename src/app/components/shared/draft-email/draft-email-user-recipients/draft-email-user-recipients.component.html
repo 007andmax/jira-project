@@ -63,7 +63,7 @@
     <p *ngIf="showErrorClient">please choose Client</p>
     <p
         class="toggle-all-users"
-        [textContent]="'Show rest ' + selectedUsers.length + ' emails'"
+        [textContent]="'Show all ' + selectedUsers.length + ' emails'"
         *ngIf="!toggleAllUsers"
         (click)="toggleAllUsers = true"
     ></p>

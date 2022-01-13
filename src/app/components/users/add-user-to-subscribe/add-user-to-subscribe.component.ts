@@ -133,6 +133,9 @@ export class AddUserToSubscribeComponent implements OnInit {
           error => {
           }
         );
+    } else {
+      this.addBtn.setDisabled(false);
+      this.close();
     }
   }
   ngOnDestroy(): void {

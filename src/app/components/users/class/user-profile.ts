@@ -46,8 +46,8 @@ export class UserProfile {
                 return new PhoneNumber(item.typeNumber, number);
             })
         }
-        this.customSubscriptions = user.customSubscriptions;
-        this.defaultSubscriptions = user.defaultSubscriptions;
+        this.defaultSubscriptions = new UserDefaultSubscription(user.defaultSubscriptions);
+        this.customSubscriptions = user.customSubscriptions.map(item => new UserCustomSubscription(item));
         this.welcomeEmail = user.isEmailVerified;
         this.avatar = user.avatar;
         this.firstName = user.firstName;

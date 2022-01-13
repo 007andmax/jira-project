@@ -14,6 +14,7 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
 import { StatusColor } from '../../tickets/class/status-color';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
+import { UserChange } from '../class/user-change';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
@@ -90,6 +91,25 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.sub.add(stompClient);
+    let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
+      if (!this.open) return;
+      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
+        if (this.user.id === data.data.id) {
+          this.user.onEdit(data.data);
+          this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
+        }
+      }
+      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
+        data.data.forEach(user => {
+          if (this.user.id === user.id) {
+            this.user.onEdit(user);
+            this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
+          }
+        })
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(getChangeCompanies);
   }
   editUser() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getuserForEdit()))));
