@@ -6,6 +6,13 @@
         <div class="qt-aside-modern__header-title">User Detail</div>
         <div class="qt-df qt-ai-c">
             <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                (click)="editUser()"
+                placement="top"
+                container="body"
+                ngbTooltip="Edit"
+            ></div>
+            <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
                 (click)="showAsideForDraftEmail()"
                 placement="top"

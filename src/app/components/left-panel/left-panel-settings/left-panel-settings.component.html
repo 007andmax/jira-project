@@ -12,17 +12,17 @@
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <li
-        [ngClass]="{'--active':activePage === 'myprofile-component'}"
-        (click)="goToState('myprofile-component')"
+        [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
+        (click)="goToState('invoice-ticket-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
     >
-        My Profile Settings
+        Accounting
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'manage-tags-component'}"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
-        (click)="goToState('manage-tags-component')"
+        [ngClass]="{'--active':activePage === 'commission-component'}"
+        (click)="goToState('commission-component')"
     >
-        Tags
+        Commissions
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-profile-component'}"
@@ -32,11 +32,11 @@
         Company Profile
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'tech-component'}"
-        (click)="goToState('tech-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
+        [ngClass]="{'--active':activePage === 'crm-settings'}"
+        (click)="goToState('crm-settings')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
     >
-        Manage Tech Users
+        CRM Settings
     </li>
     <li
         [ngClass]="{'--active':activePage === 'email-setting-component'}"
@@ -46,11 +46,36 @@
         Email Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'taxes-component'}"
-        (click)="goToState('taxes-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAXES_SETTINGS')"
+        [ngClass]="{'--active':activePage === 'email-templete-component'}"
+        (click)="goToState('email-templete-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
     >
-        Taxes
+        Email Templetes
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'integrations-component'}"
+        (click)="goToState('integrations-component')"
+    >
+        Integrations
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'tech-component'}"
+        (click)="goToState('tech-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
+    >
+        Manage Tech Users
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'marketing-email'}"
+        (click)="goToState('marketing-email')"
+    >
+        Marketing Email
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'myprofile-component'}"
+        (click)="goToState('myprofile-component')"
+    >
+        My Profile Settings
     </li>
     <li
         [ngClass]="{'--active':activePage === 'permission-manage-component'}"
@@ -60,40 +85,6 @@
         Permission Management
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'email-templete-component'}"
-        (click)="goToState('email-templete-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
-    >
-        Email Templetes
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'crm-settings'}"
-        (click)="goToState('crm-settings')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
-    >
-        CRM Settings
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'ticket-settings'}"
-        (click)="goToState('ticket-settings')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
-    >
-        Ticket Settings
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'integrations-component'}"
-        (click)="goToState('integrations-component')"
-    >
-        Integrations
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
-        (click)="goToState('invoice-ticket-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
-    >
-        Accounting
-    </li>
-    <li
         [ngClass]="{'--active':activePage === 'products-settings'}"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PRODUCT_CATEGORY_SETTINGS')"
         (click)="goToState('products-settings')"
@@ -101,21 +92,30 @@
         Products
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'commission-component'}"
-        (click)="goToState('commission-component')"
-    >
-        Commissions
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'marketing-email'}"
-        (click)="goToState('marketing-email')"
-    >
-        Marketing Email
-    </li>
-    <li
         [ngClass]="{'--active':activePage === 'subscription-component'}"
         (click)="goToState('subscription-component')"
     >
         Subscription
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'manage-tags-component'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+        (click)="goToState('manage-tags-component')"
+    >
+        Tags
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'taxes-component'}"
+        (click)="goToState('taxes-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAXES_SETTINGS')"
+    >
+        Taxes
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'ticket-settings'}"
+        (click)="goToState('ticket-settings')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
+    >
+        Ticket Settings
     </li>
 </ul>

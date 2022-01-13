@@ -91,17 +91,19 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     });
     this.sub.add(stompClient);
   }
+  editUser() {
+    this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getuserForEdit()))));
+    this.usersStateService.onOpenEditAsige();
+  }
   onChangeJobDescription(event) {
     this.user.jobDescription = event.target.value;
   }
   onCheckEmail() {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.selectedCompany) this.onCheckValidPrimaryEmail();
-
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-
   }
   onUpdatePhoneNumber() {
     if (this.validate.isValidate(this.user)) this.updateUser();
