@@ -43,7 +43,7 @@ export class DevicesComponent implements OnInit {
   companyGuid: string = "";
   autosearchDevice: any[] = [];
   selectedCtrl = new FormControl();
-  @ViewChild('selectedInput') selectedInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
   constructor(
@@ -84,25 +84,33 @@ export class DevicesComponent implements OnInit {
       });
   }
 
-  searchDeviceTag(data:any){
-    this.agentService.searchDeviceWithTag(data).subscribe((resp)=>{
-          this.operatingSystem = [];
-          this.assetList = resp;
-          this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
-          this.assetList.forEach((element, index) => {
-            element.online = false;
-            this.assetList[index].Title =
-              element.Title != "" ? element.Title : element.Name;
-            this.OperatingSystem(element.ID, index);
-            this.GetCurrentConfig(element.ID);
-          });
+  searchDeviceTag(data: any) {
+    this.loading = true;
+    if (this.selectedTag.length == 0) {
+      this.autosearchDevice = [];
+    }
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+      this.loading = false;
+
+      this.operatingSystem = [];
+      this.assetList = resp;
+      this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
+
+      this.assetList.forEach((element, index) => {
+        element.online = false;
+        this.assetList[index].Title =
+          element.Title != "" ? element.Title : element.Name;
+        this.OperatingSystem(element.ID, index);
+        this.GetCurrentConfig(element.ID);
+      });
+
     })
     this.showPreloader = false;
   }
 
-  remove(index:number){
-    this.selectedTag.splice(index,1);
-    this.searchTag.splice(index,1);
+  remove(index: number) {
+    this.selectedTag.splice(index, 1);
+    this.searchTag.splice(index, 1);
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.selectedTag;
@@ -111,12 +119,15 @@ export class DevicesComponent implements OnInit {
 
   add(Tag): void {
     this.tagFilterValue = "";
+    
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
 
     if (Tag) {
       this.selectedTag.push(Tag);
       this.searchTag.push(Tag);
     }
-
+    
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.searchTag;
@@ -203,7 +214,7 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  onFilter(field){
+  onFilter(field) {
     this.filter.onFilter(field, this.assetList);
   }
 
@@ -216,16 +227,16 @@ export class DevicesComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  sendCommand(command, assetId){
+  sendCommand(command, assetId) {
     let data: any = {};
     this.assetId = assetId;
-    if(command === 'ura') {
+    if (command === 'ura') {
       this.temporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "UninstallRemoteAgent";
       this.agentService.SendPowerShellCommand(data);
     }
-    if(command === 'ira') {
+    if (command === 'ira') {
       this.temporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "InstallRemoteAgent";
@@ -295,19 +306,19 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  openModal(template,Guid,companyGuid) {
+  openModal(template, Guid, companyGuid) {
     this._id = Guid;
     this.companyGuid = companyGuid;
     this.modalService
-        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
-        .result.then(
-          (result) => {
-            this.closeResult = `Closed with: ${result}`;
-          },
-          (reason) => {
-            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
-          }
-        );
+      .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+        }
+      );
   }
 
   private getDismiss(reason: any): string {
@@ -379,13 +390,25 @@ export class DevicesComponent implements OnInit {
       );
   }
 
-  onSearchTag(Tag){
-    let req: any = {};
-    req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = Tag;
-      this.agentService.autoComplete(req).subscribe((result)=>{
+  onSearchTag(Tag) {
+    if ((Tag || '').length <= 2) {
+      return;
+    }
+    setTimeout(() => {
+      let req: any = {};
+      req.TechCompanyGuid = this.techCompnayGuid;
+      req.Criteria = Tag;
+      this.autosearchDevice = ['loading...'];
+      if (this.cd) {
+        this.cd.detectChanges();
+      }
+      this.agentService.autoComplete(req).subscribe((result) => {
         this.autosearchDevice = result;
-      })
+        if (this.cd) {
+          this.cd.detectChanges();
+        }
+      });
+    }, 500);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {

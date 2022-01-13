@@ -12,25 +12,20 @@
                     <mat-form-field class="example-chip-list" appearance="none">
                       <mat-chip-list #chipList>
                           <mat-chip *ngFor="let tag of selectedTag; let i=index" (removed)="remove(i)">
-                            {{tag}}
-                            <mat-icon
-                          matChipRemove
-                      >
-                          cancel
-                      </mat-icon>
+                            {{tag}} <mat-icon matChipRemove></mat-icon>
                           </mat-chip>
-                          <input autofocus
-                  id="dropdownServices"
-                  [formControl]="selectedCtrl"
-                  [(ngModel)]="tagFilterValue"
-                  [matAutocomplete]="auto"
-                  class="pointer"
-                  placeholder="Search by companies,devices,works stations etc...."
-                  [matChipInputFor]="chipList"
-                  (keyup.enter)="add($event.target.value)"
-                  (keyup)="onSearchTag($event.target.value)"
-
-              >
+                          <input #dropdownServices
+                        autofocus
+                        id="dropdownServices"
+                        [formControl]="selectedCtrl"
+                        [(ngModel)]="tagFilterValue"
+                        [matAutocomplete]="auto"
+                        class="pointer"
+                        placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
+                        [matChipInputFor]="chipList"
+                        (keyup.enter)="add($event.target.value)"
+                        (keyup)="onSearchTag($event.target.value)"
+                    >
                       </mat-chip-list>
                       <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)">
                           <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
@@ -40,7 +35,7 @@
                     </mat-form-field>
                   </div>
                   <div class="StarRectangle">
-                    <img src="/assets/img/device/favourite.svg"
+                    <img src="/assets/img/favourite-active.svg"
      class="Favourite">
                   </div>
                 </div>

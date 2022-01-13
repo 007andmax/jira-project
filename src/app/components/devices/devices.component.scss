@@ -136,7 +136,7 @@
   height: 36px;
   margin: 24px 4px 24px 30px;
   padding: 4px 4px 4px 11px;
-  border-radius: 4px;
+  @include border-radius(4px);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
   background-color: #fff;
 }
@@ -151,11 +151,11 @@ img.Online-Search {
 
 .StarRectangle {
   width: 32px;
-  height: 28px;
-  margin: -32px 0 0 700px;
+  height: 32px;
+  margin: -34px 0 0 700px;
   padding: 5px 8px;
   border-radius: 4px;
-  background-color: #f4f6f8;
+  background-color: #637382;
 }
 
 .Favourite {
@@ -181,9 +181,10 @@ img.Online-Search {
 }
 
 input.mat-chip-input {
-  margin: 3px;
+  margin: 4px;
   flex: 1 0 150px;
-  height: 35px;
+  height: 38px;
+  font-size: 12px;
 }
 
 .Rectangle-11 {
@@ -198,17 +199,23 @@ input.mat-chip-input {
 }
 
 .SubRectangle{
-  width: 741px;
+  width: 744px;
   height: 32px;
   margin: 0 1px 0 0;
   padding: 6px 15px 4px;
+  background-color: #fff;
+  font-size: 12px;
+}
+
+::ng-deep .cdk-overlay-container .mat-autocomplete-panel .mat-option:hover {
   background-color: #edf2f6;
+  color:#000;
 }
 
 ::ng-deep .mat-autocomplete-panel.extended {
   width: 744px;
-  height: 187px;
-  margin: 2px 35px 665px -10px;
+  height: 387px;
+  margin: -12px 40px 0 -18px;
 }
 
 ::ng-deep .mat-standard-chip.mat-chip-with-trailing-icon{
@@ -216,15 +223,32 @@ input.mat-chip-input {
   padding-bottom: 7px;
   padding-right: 7px;
   padding-left: 12px;
-  background-color: azure;
+  background-color: #f8f9fa;
+  border: solid 1px #edf2f6;
+  @include border-radius(4px);
+  color: #212b36;
+  font-size: 12px;
+  margin-bottom: 6px !important;
 }
 
+.mat-standard-chip .mat-chip-remove.mat-icon {
+  color:#000;
+  height: 16px;
+  width: 16px;
+  object-fit: contain;
+  margin:0;
+}
 
+.mat-chip.mat-standard-chip .mat-chip-remove:before {
+  background: url(/assets/img/tag-close.svg) no-repeat;
+}
 
+::ng-deep .cdk-overlay-pane {
+  width: 766px !important;
+  min-width: 766px;
+  left:-24px !important;
+}
 
-
-
-
-
-
-
+.mat-option {
+  font-size: 12px;  
+}
