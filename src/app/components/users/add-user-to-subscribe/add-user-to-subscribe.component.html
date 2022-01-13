@@ -120,9 +120,12 @@
             </button>
             <button
                 class="qt-button "
-                (click)="save()"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="save()"
             >
-                Save
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_SUBSCRIPTION_TYPE } from 'src/app/const/confirm';
 import { MODE_ADD_BY_MODAL } from 'src/app/const/user-subscription';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
@@ -27,6 +28,7 @@ export class AddUserToSubscribeComponent implements OnInit {
   showPreloader: boolean = true;
   isAddNewSubscription: boolean = false;
   @Input() users: Array<User> = [];
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   constructor(private marketingEmailService: MarketingEmailService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
@@ -113,6 +115,7 @@ export class AddUserToSubscribeComponent implements OnInit {
     }
   }
   save() {
+    this.addBtn.setDisabled(true);
     let subscriptions = [];
     this.selectedSubscriptions.forEach(subscription => {
       let users = this.users.filter(user => !user.customSubscriptions.find(customSubscription => customSubscription.id === subscription.id))
@@ -124,6 +127,7 @@ export class AddUserToSubscribeComponent implements OnInit {
         catchError(error => of(undefined)))))
         .subscribe(
           () => {
+            this.addBtn.setDisabled(false);
             this.close();
           },
           error => {

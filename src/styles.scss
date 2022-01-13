@@ -698,6 +698,14 @@ documents-edit-info {
       content: "Taxes" !important;
     }
   }
+  draft-email-user-recipients {
+    .hide-all-user {
+      .mat-form-field-infix {
+        max-height: 48px !important;
+        overflow: auto !important;
+      }
+    }
+  }
   app-draft-email-recipients {
     > .col-md-12 {
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
@@ -819,7 +827,7 @@ documents-edit-info {
   padding: 24px;
   position: relative;
   border-radius: 5px;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,.20);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -2851,7 +2859,6 @@ app-quotes-item {
   }
   .company-time-zone-drop-down {
     .report-caret-icon {
-
       @media (max-width: 767px) {
         right: 15px;
       }

@@ -27,6 +27,7 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   userEmails = [];
   userList = [];
   reqUsersList = [];
+  toggleAllUsers: boolean = false;
   @Input() selectedClient = null;
   @Input() accountType: string = 'CLIENT';
   @Input() usersSelected: Array<User> = [];

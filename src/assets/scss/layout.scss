@@ -355,16 +355,16 @@ body {
             resize: none;
         }
     }
-   .dataTable {
-     input {
-       border-color: transparent;
-       background-color: transparent;
-       &:hover,
-       &:focus {
-         border-color: transparent;
-       }
-     }
-   }
+    .dataTable {
+        input {
+            border-color: transparent;
+            background-color: transparent;
+            &:hover,
+            &:focus {
+                border-color: transparent;
+            }
+        }
+    }
     select.cmn-select {
         @include app-none();
         background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
@@ -2867,7 +2867,7 @@ body {
     .angular-editor-textarea {
         background-color: transparent !important;
         padding: 15px 16px !important;
-        height: 155px !important;
+        //height: 155px !important;
         overflow-x: hidden;
         overflow-y: auto;
     }

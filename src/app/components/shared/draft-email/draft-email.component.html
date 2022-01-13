@@ -41,7 +41,7 @@
                 (onCompanyEmails)="onChangeCompanyEmails($event)"
             ></draft-email-user-recipients>
         </div>
-        <div>
+        <div class="draft-email-container">
             <div class="qt-pt-24 qt-w100 draft-email-sidebar__editor-tab">
                 <div
                     class="draft-email-sidebar__editor-tab-item"
@@ -59,7 +59,10 @@
                 </div>
             </div>
             <div class="qt-w100 editor-container qt-mt-0">
-                <div style="position:relative;">
+                <div
+                    style="position:relative;"
+                    [ngStyle]="{'height':((tab == 'plain') ? '100%' : 'auto')}"
+                >
                     <angular-editor
                         *ngIf="tab == 'plain'"
                         [(ngModel)]="messageContent"
@@ -152,9 +155,12 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onSend()"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onSend()"
             >
-                Send Email
+                <span *ngIf="!addBtn.isBlock()">Send Email</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"
