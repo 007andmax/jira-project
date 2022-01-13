@@ -604,13 +604,6 @@ app-invoices-item,app-payment-item {
   }
   &.aside-preview {
     width: 960px;
-    .user-detail-statictics {
-      .tabs .active::after {
-        bottom: -13px;
-        height: 2px;
-        z-index: 1;
-      }
-    }
   }
   .user-detail-statictics {
     thead {

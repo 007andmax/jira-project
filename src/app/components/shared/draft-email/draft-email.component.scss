@@ -65,8 +65,9 @@
 }
 /deep/ .draft-email-container {
   height: 100%;
+  flex: 100%;
   .editor-container {
-    height: 100%;
+    height: calc(100% - 26px);
     .email-text-block {
       height: calc(100% - 220px);
     }
@@ -77,7 +78,7 @@
       height: 100%;
     }
     .angular-editor-wrapper {
-      height: calc(100% - 275px);
+      height: calc(100% - 60px);
     }
   }
 }

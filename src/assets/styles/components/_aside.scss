@@ -161,7 +161,12 @@
       }
     }
   }
-
+  &.draft-email-aside {
+    .qt-aside-modern__content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   &.--large {
     width: 642px;
 
