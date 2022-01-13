@@ -1,4 +1,6 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
@@ -40,7 +42,8 @@ export class DevicesComponent implements OnInit {
   remoteConnectPort = 0;
   companyGuid: string = "";
   autosearchDevice: any[] = [];
-
+  selectedCtrl = new FormControl();
+  @ViewChild('selectedInput') selectedInput: ElementRef<HTMLInputElement>;
 
 
   constructor(
@@ -383,5 +386,11 @@ export class DevicesComponent implements OnInit {
       this.agentService.autoComplete(req).subscribe((result)=>{
         this.autosearchDevice = result;
       })
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.selectedTag.push(event.option.viewValue);
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
   }
 }

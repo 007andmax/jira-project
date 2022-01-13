@@ -21,6 +21,7 @@
                           </mat-chip>
                           <input autofocus
                   id="dropdownServices"
+                  [formControl]="selectedCtrl"
                   [(ngModel)]="tagFilterValue"
                   [matAutocomplete]="auto"
                   class="pointer"
@@ -31,7 +32,7 @@
 
               >
                       </mat-chip-list>
-                      <mat-autocomplete  #auto="matAutocomplete">
+                      <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)">
                           <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
                             {{search}}
                           </mat-option>

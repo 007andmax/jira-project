@@ -205,7 +205,19 @@ input.mat-chip-input {
   background-color: #edf2f6;
 }
 
+::ng-deep .mat-autocomplete-panel.extended {
+  width: 744px;
+  height: 187px;
+  margin: 2px 35px 665px -10px;
+}
 
+::ng-deep .mat-standard-chip.mat-chip-with-trailing-icon{
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 7px;
+  padding-left: 12px;
+  background-color: azure;
+}
 
 
 

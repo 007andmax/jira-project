@@ -621,6 +621,9 @@
                 <td class="tablespace">{{data.Title}}</td>
                 <td class="tablespace">{{data.RebootIsRequired}}</td>
               </tr>
+              <tr *ngIf="windowUpdatePendingList.length<=0">
+                {{ securityUpdate }} missing Updates
+              </tr>
             </tbody>
           </table>
       </div>
