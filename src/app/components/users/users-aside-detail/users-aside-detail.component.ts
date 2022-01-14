@@ -97,6 +97,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         if (this.user.id === data.data.id) {
           this.user.onEdit(data.data);
           this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
+          this.usersStateService.setUserForEdit(new User(data.data));
         }
       }
       if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
@@ -104,6 +105,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
           if (this.user.id === user.id) {
             this.user.onEdit(user);
             this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
+            this.usersStateService.setUserForEdit(new User(data.data));
           }
         })
       }
