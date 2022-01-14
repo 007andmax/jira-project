@@ -24,7 +24,6 @@ export class DraftEmailComponent implements OnInit {
     spellcheck: false,
     height: '100%',
     minHeight: '5rem',
-    maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
     translate: 'no',

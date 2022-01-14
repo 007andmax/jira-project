@@ -69,7 +69,7 @@
   .editor-container {
     height: calc(100% - 26px);
     .email-text-block {
-      height: calc(100% - 220px);
+      height: 100%;
     }
   }
   angular-editor {
