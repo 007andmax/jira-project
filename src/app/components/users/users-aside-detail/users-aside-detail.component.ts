@@ -112,6 +112,31 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
+    this.onInitSubscribe();
+  }
+  getLogoUrl() {
+    if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
+    if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
+    if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
+  private onInitSubscribe() {
+    setTimeout(() => {
+
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+        if (newChange.action === 'SUBSCRIPTION_SAVED') {
+
+          if (this.user.id === newChange.data.userId) {
+            this.user.changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.user.changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          }
+
+          this.cd.detectChanges();
+        }
+      });
+      this.sub.add(stompClient);
+
+    }, 3000);
   }
   editUser() {
     this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.usersStateService.getuserForEdit()))));

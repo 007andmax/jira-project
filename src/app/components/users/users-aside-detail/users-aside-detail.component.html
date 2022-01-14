@@ -29,11 +29,22 @@
         <div class="user-detail-info">
             <div class="user-detail-aside__header d-f jc-sb ai-c">
                 <div class="d-f">
-                    <div
+                    <div class="upload-photo__img-block">
+                        <img
+                            class="upload-photo__avatar"
+                            *ngIf="user.avatar"
+                            [src]="getLogoUrl()"
+                        >
+                        <div
+                            class="upload-photo__no-avatar-icon icon__upload-avtar"
+                            *ngIf="!user.avatar"
+                        ></div>
+                    </div>
+                    <!-- <div
                         class="user-detail-aside__header-avatar"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
-                    ></div>
+                    ></div> -->
                     <div>
                         <div class="d-f ai-c">
                             <div class="user-detail-aside__header-company">

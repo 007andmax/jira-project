@@ -30,7 +30,12 @@ export class UserProfile {
     constructor() {
 
     }
-
+    public changeDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
+    }
+    public changeCustomSubscriptions(data) {
+        this.customSubscriptions = data;
+    }
     public setTags(data) {
         this.tags = data;
     }

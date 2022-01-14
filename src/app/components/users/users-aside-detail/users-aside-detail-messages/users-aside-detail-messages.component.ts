@@ -62,7 +62,7 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
     return moment(new Date(date)).format('DD MMM');
   }
   public getTime(date) {
-    return moment(new Date(date)).format('HH:MM A');
+    return moment(new Date(date)).format('hh:mm A');
   }
   public trackById(index, item) {
     return item.id;
