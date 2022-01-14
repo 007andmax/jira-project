@@ -85,6 +85,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         if (this.user.id === newChange.data.userId) {
           this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
           this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+
           console.log("this.user", this.user);
         }
         this.cd.detectChanges();
@@ -129,6 +132,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
           if (this.user.id === newChange.data.userId) {
             this.user.changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
             this.user.changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+
           }
 
           this.cd.detectChanges();

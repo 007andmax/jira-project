@@ -26,12 +26,13 @@ import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-ty
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
   styleUrls: ['./users-aside-edit.component.scss'],
-  providers: [UsersAsideService]
+  providers: [UsersAsideService, TicketsListService]
 })
 export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public opened = false;
@@ -54,6 +55,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   @ViewChild('jobIndustryDp') jobIndustryDp: DropDownComponent;
 
   constructor(private imageCropperStateService: ImageCropperStateService,
+    public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,

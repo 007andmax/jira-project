@@ -1,3 +1,16 @@
 .job-description {
     width: 100%;
 }
+.user__header-avatar {
+    width: 64px;
+    height: 64px;
+    margin-right: 12px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #ffffff;
+}

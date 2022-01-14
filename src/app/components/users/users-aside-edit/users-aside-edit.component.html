@@ -12,11 +12,17 @@
     <div class="qt-aside-modern__content">
         <div class="upload-photo qt-mb-24">
             <div class="upload-photo__img-block">
-                <img
+                <div
+                    *ngIf="user.avatar"
+                    class="user__header-avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+                <!-- <img
                     class="upload-photo__avatar"
                     *ngIf="user.avatar"
                     [src]="getLogoUrl()"
-                >
+                > -->
                 <div
                     class="upload-photo__no-avatar-icon icon__upload-avtar"
                     *ngIf="!user.avatar"
