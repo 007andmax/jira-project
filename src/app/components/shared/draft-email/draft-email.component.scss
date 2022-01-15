@@ -66,6 +66,7 @@
 /deep/ .draft-email-container {
   height: 100%;
   flex: 100%;
+  max-height: calc(100% - 190px);
   .editor-container {
     height: calc(100% - 26px);
     .email-text-block {
