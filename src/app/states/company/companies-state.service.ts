@@ -40,10 +40,12 @@ export class CompaniesStateService {
       this.onInitGetCompanies(data);
     })
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
+      if (newChange.data.id === this.currentCompany.id) return;
       if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
+        console.log("Index", Index);
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);

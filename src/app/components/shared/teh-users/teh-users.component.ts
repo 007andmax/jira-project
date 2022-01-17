@@ -50,12 +50,23 @@ export class TehUsersComponent implements OnInit, OnDestroy {
         let index = this.editUsers.findIndex(user => user.id === item.id);
         if (index > -1) {
           item.selected = true;
-          this.selectedUsers = [item];
+          this.selectedUsers.push(item);
         }
       })
     }
     this.onInitClearState();
     this.checUsersForEdit();
+  }
+
+  public resetEditMode() {
+    this.selectedUsers = [];
+    this.usersList.forEach(item => {
+      let index = this.editUsers.findIndex(user => user.id === item.id);
+      if (index > -1) {
+        item.selected = true;
+        this.selectedUsers.push(item);
+      }
+    })
   }
 
   /**

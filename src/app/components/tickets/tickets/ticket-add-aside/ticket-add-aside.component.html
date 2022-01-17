@@ -180,8 +180,11 @@
                 >
                 </div>
                 <app-teh-users
+                    #techUsersDp
                     *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
+                    [editMode]="true"
+                    [editUsers]="shareUsersList"
                     (usersChange)="onChangeShareUsers($event)"
                 ></app-teh-users>
                 <div class="assigned-users-list">

@@ -20,6 +20,7 @@ import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.s
 import { Subscription } from 'rxjs';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
+import { TehUsersComponent } from 'src/app/components/shared/teh-users/teh-users.component';
 
 
 
@@ -35,6 +36,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('companyDP') companyDP: DropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('techUsersDp') techUsersDp: TehUsersComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
@@ -156,6 +158,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         return user;
       });
       this.shareUsersList = list;
+      this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
 
 
@@ -165,12 +168,14 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.users = [];
       this.devices = [];
       this.shareUsersList = [];
+      this.techUsersDp.resetEditMode();
     }
     let selectedUser = this.techUsersList.find(user => user.id === this.ticketAdd.assignedUser);
     if (selectedUser) {
       let user = new TechUserItem(selectedUser);
       user.selected = true;
       this.shareUsersList.push(user);
+      this.techUsersDp.resetEditMode();
     }
     this.deviceDP.clearClient();
     this.userDP.clearClient();
@@ -188,7 +193,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
       if (!findSharedUser) this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
       this.ticketValidate.resetClientUser();
-
+      this.techUsersDp.resetEditMode();
     } else {
       //  this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
@@ -203,6 +208,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         let user = new TechUserItem(this.techUsersList[indexTechUser]);
         user.selected = true;
         this.shareUsersList.push(user);
+        this.techUsersDp.resetEditMode();
       }
 
     } else {
@@ -225,6 +231,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     let index = this.shareUsersList.findIndex(shareUser => shareUser.id === id);
     if (index > -1) {
       this.shareUsersList.splice(index, 1);
+      this.techUsersDp.resetEditMode();
     }
   }
   getTechUserList() {
