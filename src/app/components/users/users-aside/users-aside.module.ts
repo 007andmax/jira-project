@@ -7,6 +7,7 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 
 @NgModule({
     declarations: [UsersAsideComponent
@@ -19,7 +20,8 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
         DropDownModule,
         CompanySubscriptionModule,
         CompanyTagsModule,
-        DisabledBtnModule
+        DisabledBtnModule,
+        TextAreaModule
     ],
     exports: [UsersAsideComponent]
 

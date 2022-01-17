@@ -83,6 +83,7 @@ import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update
 import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
+import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 
 declare var $: any;
 
@@ -104,6 +105,10 @@ declare var $: any;
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
     ModalSessionScreenComponent,
+    ModalAddUpdateTicketComponent,
+    ModalAgentLinkComponent,
+    ModalAddUsersNotifyComponent,
+    ModalEditCategoryProductComponent
   ],
   imports: [
     BrowserModule,
@@ -145,6 +150,7 @@ declare var $: any;
     DeviceModule,
     HeaderModule,
     BreadcrumbsModule,
+    UsersAsideDetailModule
   ],
   entryComponents: [
     ModalQuoteComponent,

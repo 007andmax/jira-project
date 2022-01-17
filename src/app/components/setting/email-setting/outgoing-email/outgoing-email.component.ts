@@ -8,7 +8,8 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
-import { DisabledBtnDirective } from "src/app/directives/disabled-btn.directive";
+import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
+
 
 @Component({
   selector: "app-outgoing-email",

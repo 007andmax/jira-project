@@ -9,6 +9,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesModule } from '../../shared/taxes/taxes.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         TextAreaModule,
         TaxesModule,
         NumberModule,
-        DropDownModule
+        DropDownModule,
+        DecimalNumberModule
     ],
     exports: [InventoryAddAsideComponent]
 

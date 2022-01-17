@@ -12,7 +12,8 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+
 
 @Component({
   selector: 'app-ticket-profile-form-update-services',

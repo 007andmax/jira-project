@@ -153,7 +153,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
-  private addCreatedUser() {
+  public addCreatedUser() {
     if (this.ticketProfile.createdUser) {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);

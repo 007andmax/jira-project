@@ -7,7 +7,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { InventoryChange } from 'src/app/components/inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-profile-form-update-products',

@@ -10,11 +10,11 @@ import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { DELETE_TECH_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 declare var $;
 

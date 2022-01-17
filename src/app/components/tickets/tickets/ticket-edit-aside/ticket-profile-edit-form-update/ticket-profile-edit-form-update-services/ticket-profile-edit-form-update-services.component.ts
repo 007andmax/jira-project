@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfileService } from '../../../class/ticket-profile-service';

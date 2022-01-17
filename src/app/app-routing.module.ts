@@ -142,8 +142,7 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/products-settings',
-    component: ProductsSettingsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/products-settings/products-settings.module#ProductsSettingsModule',
     canActivate: [PermissionProductsSettingsService]
   },
   {
@@ -171,14 +170,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/ticket-settings',
-    component: TicketSettingsPageComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/ticket-settings-page/ticket-settings-page.module#TicketSettingsPageModule',
     canActivate: [PermissionTicketSettingsService]
-  },
-  {
-    path: ':company/setting/glnumber',
-    loadChildren: './components/setting/gl-number/gl-number-settings.module#GlNumberSettingsModule'
-
   },
   {
     path: ':company/setting/permission',
@@ -198,14 +191,12 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/accounting',
-    loadChildren: './components/setting/invoice-tickets/invoice-tickets.module#InvoiceTicketsModule',
+    loadChildren: './components/setting/accounting/accounting-settings.module#AccoutingSettingsModule',
     canActivate: [PermissionAccountingSettingsService]
 
   },
   {
-    path: ':company/setting/crm-settings',
-    component: CrmSettingsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/crm-settings/crm-settings.module#CrmSettingsModule',
     canActivate: [PermissionCrmSettingsService]
   },
   {

@@ -52,6 +52,9 @@ import { TicketProfileUpdatesServiceEditComponent } from './ticket-profile-updat
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.module';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
+import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
+import { TicketProfileEditFormUpdateProductsComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
+import { TicketProfileEditFormUpdateServicesComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
 
 
 @NgModule({
@@ -87,7 +90,9 @@ import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/
         TicketProfileUpdatesProductEditComponent,
         TicketProfileUpdatesServiceInfoComponent,
         TicketProfileUpdatesServiceEditComponent,
-
+        TicketProfileEditFormUpdateComponent,
+        TicketProfileEditFormUpdateProductsComponent,
+        TicketProfileEditFormUpdateServicesComponent
 
     ],
     imports: [
