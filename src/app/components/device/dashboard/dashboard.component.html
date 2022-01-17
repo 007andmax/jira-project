@@ -606,7 +606,7 @@
       <div class="remote-area">
           <table class="fixed">
             <thead>
-              <tr>
+              <tr *ngIf="windowUpdatePendingList.length<=0 ? isButtonhide: isButtonVisible">
                 <th class="tableth"></th>
                 <th class="title">Title</th>
                 <th>Reboot</th>
@@ -614,20 +614,24 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
-                <td class="tabletd"><input
+                <td class="tabletd" *ngIf="!isOverlay"><input
                   type="checkbox"
                   (change)="postWindowUpdatePendint(i)"
-              ></td>
+              >
+            </td>
+            <td *ngIf="isOverlay" class="tabletd">
+              <div class="loader"></div>
+            </td>
                 <td class="tablespace">{{data.Title}}</td>
                 <td class="tablespace">{{data.RebootIsRequired}}</td>
               </tr>
               <tr *ngIf="windowUpdatePendingList.length<=0">
-                {{ securityUpdate }} missing Updates
+                <td class="missing">{{ securityUpdate }} missing Updates</td>
               </tr>
             </tbody>
           </table>
       </div>
-      <div class="viewer-footer ">
+      <div class="viewer-footer" *ngIf="windowUpdatePendingList.length<=0 ? isButtonhide: isButtonVisible">
           <a  class="btn btn-dowanload footer" [ngClass]="selected<=0? 'disabled': '' " (click)="InstallUpdate()">
             Install
         </a>

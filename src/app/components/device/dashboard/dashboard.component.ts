@@ -70,6 +70,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selected: number = 0;
   reloadWindowUpdatePendingList: any[] = [];
   check: any[] = [];
+  isButtonVisible = true;
+  isButtonhide = false;
+  isOverlay = false;
 
   constructor(
     private agentService: AgentService,
@@ -610,5 +613,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   InstallUpdate() {
     this.agentService.GetWindowUpdateList(this.asset.ID, this.reloadWindowUpdatePendingList);
+
+    if(this.check.length){
+      this.isOverlay = true;
+      setTimeout(()=>{
+        this.isOverlay = false;
+      },3000)
+    }
   }
 }
