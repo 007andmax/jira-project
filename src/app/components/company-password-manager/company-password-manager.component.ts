@@ -45,9 +45,9 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
         if (this.passwordManagerListService.getBlockList()) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index] = new PasswordRecord(newChange.data);
+        if (index > -1) this.recordsData[index].onUpdate(newChange.data);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-        if (indexList > -1) this.list_records[indexList] = new PasswordRecord(newChange.data);
+        if (indexList > -1) this.list_records[indexList].onUpdate(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);

@@ -23,6 +23,7 @@ import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
 import { TagsStateService } from './states/tags/tags-state.service';
 import { DocumentsStateService } from './states/documents/documents-state.service';
 import { AppStateService } from './states/app/app-state.service';
+import { CrmStateService } from './states/crm/crm-state.service';
 
 
 /**
@@ -41,12 +42,14 @@ export class AppComponent implements OnInit {
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
+  toggMobileleLeftPanel: boolean = false;
   hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
+  state: string = '';
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -74,7 +77,8 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
+    private crmStateService: CrmStateService,
 
   ) { }
 
@@ -84,7 +88,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events
       .subscribe((event) => {
-        if (this.router.url.includes('/device/')) {
+        if (this.router.url.includes('/device') && !this.router.url.includes('/devices') && !this.router.url.includes('/device-ip-summary')) {
           this.main_page = PAGE_DEVICE;
         } else {
           this.main_page = PAGE_MAIN;
@@ -101,6 +105,7 @@ export class AppComponent implements OnInit {
     this.constantsStateService.onInit();
     this.tagsStateService.onInit();
     this.documentsStateService.onInit();
+    this.crmStateService.onInit();
     //  this.userService.getCurrentUser();
 
     this.websocketService.initializeWebSocketConnection();
@@ -122,6 +127,10 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
+      this.cd.detectChanges();
+    })
+    this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
+      this.toggMobileleLeftPanel = data;
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
@@ -159,6 +168,13 @@ export class AppComponent implements OnInit {
       /*if (this.router.url === "/") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);*/
     })
+    this.appService.onToggleMobileAside.subscribe(data => {
+      if (data) document.querySelector("html").classList.add("--scrollLock");
+      if (!data) document.querySelector("html").classList.remove("--scrollLock");
+    })
+    this.leftPanelStateService.onChangeState.subscribe(data => {
+      this.state = data;
+    })
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
@@ -170,6 +186,18 @@ export class AppComponent implements OnInit {
       this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
+    // if ((<any>document.body.querySelector("#userback_button_container")) && (<any>document.body.querySelector("#userback_button_container")).style.display == "" && this.appService.checkMobile()) (<any>document.body.querySelector("#userback_button_container")).style.display = "none";
+
+
+  }
+  goToTickets() {
+    this.leftPanelStateService.goToState('new-tickets');
+  }
+  goToPasswordManager() {
+    this.leftPanelStateService.goToState('password-manager');
+  }
+  goToCompanies() {
+    this.leftPanelStateService.goToState('new-companies');
   }
   public setShowLockScreen(data) {
     this.showLockScreen = data;

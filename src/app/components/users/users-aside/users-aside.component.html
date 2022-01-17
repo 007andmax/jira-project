@@ -95,14 +95,31 @@
             </div>
             <div class="qt-w50">
                 <app-drop-down
-                    [title]="'Designation'"
-                    [placeholder]="'Select Designation'"
-                    [list]="allTitles"
+                    #jobTitleDp
+                    [title]="'Job Title'"
+                    [placeholder]="'Select Job Title'"
+                    [list]="jobTitleList"
+                    [field]="'name'"
                     [search]="true"
                     [change]="true"
-                    [add]="true"
-                    (onSelectedItem)="onSelectDesignation($event)"
+                    (onSelectedItem)="onSelectJobTitle($event)"
                 ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-input-block job-description">
+                <label>Job Description</label>
+                <textarea
+                    id="description-global-note"
+                    (input)="onChangeJobDescription($event)"
+                    class="terms-n-conditions__textarea qt-textarea"
+                    placeholder="Enter job description"
+                    appTextArea
+                    maxlength="500"
+                    cols="30"
+                    [default]="3"
+                    rows="3"
+                ></textarea>
             </div>
         </div>
         <div class="qt-w100 qt-mb-24">
@@ -125,10 +142,10 @@
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
                 >
-                    <div class="qt-df qt-jc-sb">
+                    <div class="qt-df qt-jc-sb qt-ai-c">
                         <label>Primary Phone</label>
                         <span
-                            class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
                             (click)="addPhoneNumber()"
                             *ngIf="user.phoneNumbers.length < 3"
                         >
@@ -200,10 +217,10 @@
                             class="qt-input-block"
                             [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
                         >
-                            <div class="qt-df qt-jc-sb">
+                            <div class="qt-df qt-jc-sb qt-ai-c">
                                 <label>Additional phone</label>
                                 <span
-                                    class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                                    class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
                                     (click)="removePhoneNumber(i)"
                                 >
                                     Remove Phone
@@ -260,11 +277,11 @@
             </div>
             <div class="qt-w50">
                 <app-drop-down
+                    #jobTypeDp
                     [title]="'User Type'"
-                    [field]="'title'"
+                    [field]="'name'"
                     [placeholder]="'Select User Type'"
                     [list]="userTypes"
-                    [editItem]="selectedUserType"
                     [isBlockClear]="true"
                     (onSelectedItem)="onSelectRole($event)"
                 ></app-drop-down>
@@ -280,6 +297,7 @@
         <app-company-tags
             class="users-filter-tags"
             [placement]="'top'"
+            [blockUserTag]="true"
             (tagsChange)="onChangeTags($event)"
         ></app-company-tags>
     </div>

@@ -70,6 +70,9 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
 
     return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
   }
+  public resetShowLoadMoreUpdates() {
+    this.showLoadMoreUpdates = true;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

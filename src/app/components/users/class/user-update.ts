@@ -5,7 +5,6 @@ import { User } from './user';
 import { UserProfile } from './user-profile';
 
 export class UserUpdate {
-  role: string;
   phoneNumbers: Array<UserPhoneNumber>;
   subscription: UserSubscription;
   welcomeEmail: boolean = true;
@@ -22,20 +21,19 @@ export class UserUpdate {
   priority: number;
   userEnabled: boolean;
   tags: Array<any> = [];
+  jobDescription: string;
+  jobTitleId: string;
+  jobTypeId: string;
   constructor(data: UserProfile, user: User) {
-    this.role = data.role;
-
-
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
         return new UserPhoneNumber(null, item.number, item.typeNumber, null);
-
       } else {
-
+        if (user.phoneNumbers.length <= index) return new UserPhoneNumber(null, item.number, item.typeNumber, null);
         return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
-
       }
     });
+    if (this.phoneNumbers.length === 1 && this.phoneNumbers[0].number === "") this.phoneNumbers = [];
 
     this.subscription = new UserSubscription(user.subscription.id, data.subscription.invoice, data.subscription.ticket, data.subscription.ticketManager);
     this.welcomeEmail = data.welcomeEmail;
@@ -55,5 +53,8 @@ export class UserUpdate {
     this.tags = data.tags.map(item => {
       return { id: item.id }
     })
+    this.jobDescription = data.jobDescription;
+    this.jobTitleId = data.jobTitleId;
+    this.jobTypeId = data.jobTypeId;
   }
 }

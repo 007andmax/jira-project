@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 /deep/.send-modal-center .new-companies-content {
   &__modal--header {
     border-top-right-radius: 10px;
@@ -19,7 +21,7 @@
 }
 
 /deep/.ngb-dp-arrow-btn {
-  background-color: #3ba5fa !important;
+  background-color: $primary-1 !important;
 }
 
 /deep/.date-picker i {

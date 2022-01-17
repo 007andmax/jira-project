@@ -16,6 +16,7 @@ import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -49,6 +50,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    private quoteStateService: QuoteStateService,
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
@@ -73,7 +75,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
-      this.categoriesSelect.reset(this.categories);
+      if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(getOnCategries);
     this.cd.detectChanges();
@@ -109,6 +111,31 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       this.validate.resetCategory();
     }
     if (!data) this.inventory.category = null;
+  }
+  changeMarkup(val) {
+    let value = Number(val);
+    this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
+    this.inventory.markup = this.roundingMarkup(value);
+  }
+  changeSales(val) {
+    let value = Number(val);
+    this.inventory.sale = value;
+    this.inventory.markup = this.getMarkups();
+  }
+  changeCost(val) {
+    let value = Number(val);
+    this.inventory.cost = value;
+    this.inventory.markup = this.getMarkups();
+  }
+  public getMarkups() {
+    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
+    return 0;
+  }
+  private roundingMarkup(markup) {
+    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
+  }
+  private isInteger(num): boolean {
+    return (num ^ 0) === num;
   }
   onAddGlNumber(data) {
     this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {

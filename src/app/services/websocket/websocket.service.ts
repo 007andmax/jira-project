@@ -28,6 +28,7 @@ import { Stomp } from '@stomp/stompjs';
 import { environment } from 'src/environments/environment';
 import * as SockJS from 'sockjs-client';
 import { ConstantsService } from '../constants/constants.service';
+import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 
 
 /**
@@ -72,7 +73,8 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
-    private constantsService: ConstantsService
+    private constantsService: ConstantsService,
+    private crmRealTimeService: CrmRealTimeService
 
   ) {
   }
@@ -111,6 +113,7 @@ export class WebsocketService {
       that.subsribeToTags();
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
+      that.subsribeToCrm();
     }
     this.stompClient.debug = (data) => {
       console.log("debug", data);
@@ -318,6 +321,19 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/number/TICKET`, (message) => {
         var newChange = JSON.parse(message.body);
         this.ticketsRealTimeService.handleRealTimeChangesActualNumber(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToCrm() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/crm`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.crmRealTimeService.handleRealTimeChanges(newChange);
 
       });
 

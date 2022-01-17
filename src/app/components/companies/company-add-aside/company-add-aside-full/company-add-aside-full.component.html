@@ -163,14 +163,15 @@
             <app-drop-down
                 #role
                 [class]="['light-dropdown', 'qt-select-input-40']"
-                [placeholder]="'Select Designation'"
-                [list]="allTitles"
+                [placeholder]="'Select Job title'"
+                [list]="jobTitleList"
+                [field]="'name'"
                 [search]="true"
                 [change]="true"
-                [title]="'Designation'"
+                [title]="'Job title'"
                 [maxlength]="30"
                 [add]="true"
-                (onSelectedItem)="onSelectDesignation($event)"
+                (onSelectedItem)="onSelectJobTitle($event)"
             >
             </app-drop-down>
         </div>
@@ -275,9 +276,10 @@
     </div>
     <div class="col-md-6">
         <app-drop-down
+            #serviceTypeDp
             [class]="['light-dropdown', 'qt-select-input-40']"
             [placeholder]="'Select Service Type'"
-            [field]="'title'"
+            [field]="'name'"
             [list]="serviceTypes"
             [search]="true"
             [change]="true"

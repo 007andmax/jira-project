@@ -141,7 +141,7 @@ svg.nvd3-svg {
 }
 
 .nvd3 .nv-background {
-  fill: white;
+  fill: $white;
   fill-opacity: 0;
 }
 
@@ -201,7 +201,7 @@ svg.nvd3-svg {
 }
 
 .nvd3.nv-pie path {
-  stroke: #fff;
+  stroke: $white;
   stroke-width: 1px;
   stroke-opacity: 1;
 }

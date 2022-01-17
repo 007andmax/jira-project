@@ -8,6 +8,7 @@ import { UserAdd } from './user-add';
 import { Tag } from 'src/app/interfaces/tag/tag';
 
 export class UserProfile {
+    id: string;
     role: string = 'USER';
     phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
     subscription: Subscriptions;
@@ -19,6 +20,9 @@ export class UserProfile {
     designation: string;
     companyId: string;
     tags: Array<Tag> = [];
+    jobDescription: string;
+    jobTitleId: string;
+    jobTypeId: string;
     constructor() {
         this.subscription = {
             invoice: false, ticket: true, ticketManager: false
@@ -28,6 +32,7 @@ export class UserProfile {
         this.tags = data;
     }
     public onEdit(user: User) {
+        this.id = user.id;
         this.role = user.role;
         if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers) {
             this.phoneNumbers = [new PhoneNumber('OFFICE')];
@@ -49,7 +54,9 @@ export class UserProfile {
         this.designation = user.designation;
         this.companyId = user.company.id;
         this.tags = user.tags;
-
+        this.jobDescription = user.jobDescription;
+        this.jobTitleId = user.jobTitleId;
+        this.jobTypeId = user.jobTypeId;
     }
     public editLogo(data) {
         this.avatar = data;
@@ -71,6 +78,12 @@ export class UserProfile {
     }
     public setRole(data) {
         this.role = data;
+    }
+    public setJobTitleId(data) {
+        this.jobTitleId = data;
+    }
+    public setJobTypeId(data) {
+        this.jobTypeId = data;
     }
     public getRole() {
         return this.role;

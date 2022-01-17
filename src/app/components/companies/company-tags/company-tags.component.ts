@@ -32,8 +32,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   @Input() editItems: Array<string>;
   @Input() placement: string;
+  @Input() showLabel: boolean = true;
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
+  @Input() blockUserTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();
@@ -75,7 +77,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   */
   onCheckEditItem() {
     if (this.editItems) this.editItems.forEach(item => {
-      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+      let find = this.tags.find(tag => tag.id === item);
+      if (find) this.selectedTag.push(find);
     })
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
@@ -85,7 +88,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public setEditItems(data) {
     this.editItems = data;
     this.editItems.forEach(item => {
-      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+      let find = this.tags.find(tag => tag.id === item);
+      if (find) this.selectedTag.push(find);
     })
   }
   public clearWithOutChanges() {
@@ -227,6 +231,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public remove(index): void {
     if (index >= 0) {
+      if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
       this.cd.detectChanges();

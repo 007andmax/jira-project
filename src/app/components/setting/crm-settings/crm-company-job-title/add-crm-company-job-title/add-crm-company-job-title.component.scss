@@ -1,0 +1,36 @@
+@import "./src/assets/styles/variable";
+
+.tax-name {
+    width: 260px;
+    @media only screen and (max-width: 576px) {
+        width: 105px;
+    }
+}
+.add-job-title-name {
+    position: relative;
+    width: auto;
+    input {
+        margin: 6px 0px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        outline: none;
+        font-weight: 500;
+        color: $primary-2;
+        &:hover,
+        &:focus {
+            border-color: $gray-600;
+        }
+        &::placeholder {
+            font-weight: 400;
+            color: $gray-600;
+        }
+    }
+}
+tr {
+    td {
+        border-bottom: 1px solid #edf2f6 !important;
+        padding: 7px 15px 7px 0;
+    }
+}

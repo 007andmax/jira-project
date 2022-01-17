@@ -4,8 +4,8 @@ import { reqInventoryAdd } from 'src/app/interfaces/inventory/req-inventory-add'
 import { reqInventoryEdit } from 'src/app/interfaces/inventory/req-inventory-edit';
 export class InventoryItem {
     versionedId: import("../../../interfaces/versioned-id").VersionedId;
-    cost: number;
-    sale: number;
+    cost: number = 0;
+    sale: number = 0;
     ilc: string;
     manufacture: string;
     glNumber: GlNumber;
@@ -14,6 +14,7 @@ export class InventoryItem {
     companyId: string;
     billable: boolean;
     taxIds: Array<String>
+    markup: number = 0;
     active: boolean = true;
     constructor(data = null) {
         if (data != null) {

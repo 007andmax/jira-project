@@ -22,7 +22,6 @@
     </div>
 </div>
 <ul class="app-left-panel__menu-expand">
-    <!-- (click)="goToState('company-dashboard')" -->
     <li
         [ngClass]="{'--active':activePage === 'company-dashboard'}"
         (click)="goToCompanySection('dashboard')"
@@ -78,7 +77,6 @@
     <li
         [ngClass]="{'--active':activePage === 'company-documents'}"
         (click)="goToCompanySection('documents')"
-        *ngIf="isShowDoucments()"
     >
         Documents
     </li>

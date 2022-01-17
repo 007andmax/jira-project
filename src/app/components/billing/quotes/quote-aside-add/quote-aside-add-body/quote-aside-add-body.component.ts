@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/invoice-tickets/invoice-tickets.service';
+import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { Service } from 'src/app/interfaces/service/service';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { EmailSettingService } from "../email-setting.service";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
@@ -8,6 +8,7 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
+import { DisabledBtnDirective } from "src/app/directives/disabled-btn.directive";
 
 @Component({
   selector: "app-outgoing-email",
@@ -82,7 +83,7 @@ export class OutgoingEmailComponent implements OnInit {
   @Input() savedSMTPSettingsInput: any;
   @Input() portIsEmptyInput: any;
   @Input() usedEmailViaInput: any;
-
+  @ViewChild('testServerBtn') testServerBtn: DisabledBtnDirective;
   constructor(
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,
@@ -122,7 +123,14 @@ export class OutgoingEmailComponent implements OnInit {
         ]
       ],
       password: ["", [Validators.required]],
-      id: [""]
+      id: [""],
+      testEmail: [
+        "",
+        [
+          Validators.maxLength(128),
+          Validators.pattern(this.emailPattern)
+        ]
+      ],
     });
 
     this.SMTPSettingsInput();
@@ -197,6 +205,19 @@ export class OutgoingEmailComponent implements OnInit {
       password: this.smtp.password
     });
   }
+  onEnableTestEmail(value) {
+    this.smtp.sendTestEmail = value;
+    this.smtpForm.patchValue({
+      testEmail: ""
+    });
+    this.smtpForm.get('testEmail').clearValidators();
+    if (value) {
+      this.smtpForm.get('testEmail').setValidators([Validators.required,
+      Validators.maxLength(128),
+      Validators.pattern(this.emailPattern)]);
+    }
+    console.log("this.smtp", this.smtp);
+  }
 
   /**
    * smtp settings
@@ -209,7 +230,7 @@ export class OutgoingEmailComponent implements OnInit {
         if (response) {
           this.smtp = response.smtpSettings;
           this.supportMailBox = response.supportMailBox;
-
+          console.log("this.smtp", this.smtp);
           this.smtp.testEmail = response.login;
           this.savedSMTPSettings = response;
           this.portIsEmpty = !response.port;
@@ -395,8 +416,9 @@ export class OutgoingEmailComponent implements OnInit {
    */
   saveSMTP(form, isTest) {
     this.submitted = true;
-    this.loading = true; $(".loading").css("display", "block");
+
     if (this.isSMTPLoginUnique) {
+      console.log("this.smtpForm", this.smtpForm);
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
@@ -406,8 +428,9 @@ export class OutgoingEmailComponent implements OnInit {
         this.smtp.exeption = false;
         this.disableFields = !!isTest;
 
-        this.smtp.sendTestEmail = !!isTest;
-
+        //  this.smtp.sendTestEmail = !!isTest;
+        this.smtp.testEmail = this.smtpForm.value.testEmail;
+        this.loading = true; $(".loading").css("display", "block");
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
             this.loading = false; $(".loading").css("display", "none");
@@ -450,6 +473,19 @@ export class OutgoingEmailComponent implements OnInit {
       this.loading = false; $(".loading").css("display", "none");
       this.isSMTPLoginUnique = false;
     }
+  }
+  checkTestServer() {
+    this.testServerBtn.setDisabled(true);
+    this.settingService.checkTestServer({
+      "login": this.smtpForm.value.login,
+      "password": this.smtpForm.value.password,
+      "domain": this.smtpForm.value.domain,
+      "port": this.smtpForm.value.port,
+      "encryptionType": this.smtpForm.value.encryptionType
+    }).subscribe((data: any) => {
+
+      this.testServerBtn.setDisabled(false);
+    })
   }
 
   /**

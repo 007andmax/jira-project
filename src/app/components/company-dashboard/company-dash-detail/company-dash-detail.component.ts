@@ -15,6 +15,13 @@ import { TicketProfileFormService } from '../../../../app/components/tickets/tic
 import { CompanyServiceType } from '../../companies/class/company-service-type';
 import { CompanyDetaill } from './company-detailing';
 import { ActivatedRoute } from '@angular/router';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { USERS } from 'src/app/const/emails';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -55,6 +62,7 @@ export class CompanyDashDetailComponent implements OnInit {
   tagSaved: boolean = false;
   sub: Subscription = new Subscription();
   tags = [];
+  tab: string = "dashboard";
   closeResult: string = '';
   modalReference: any;
   @Output() totalTicketsChanged: EventEmitter<number> = new EventEmitter();
@@ -265,7 +273,8 @@ export class CompanyDashDetailComponent implements OnInit {
   selectedRating = 0;
   unSelectedRating = 0;
   ratingSaved: boolean = false;
-
+  usersList = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   public constructor(private companiesService: CompaniesService,
     private toaster: ToastrService,
     private downloadAgentStateService: DownloadAgentStateService,
@@ -274,6 +283,11 @@ export class CompanyDashDetailComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
     public activateRoute: ActivatedRoute,
+    private leftPanelStateService: LeftPanelStateService,
+    private usersStateService: UsersStateService,
+    public appService: AppService,
+    private draftEmailStateService: DraftEmailStateService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -284,64 +298,114 @@ export class CompanyDashDetailComponent implements OnInit {
       this.getCompanyDetails();
     });
     this.sub.add(subscription);
+    let onChangeCompanies = this.companiesStateService.onChangeCompanies.subscribe(data => {
+      if (data.action === "COMPANY_EDITED" && data.data.id === this.companyDetail.id) {
+        this.companyDetail.onEditMode(data.data);
+        this.companyDetailing = this.companyDetail.getDataForDashboard();
+        this.setCompanyData(data.data);
+      }
+    })
+    this.sub.add(onChangeCompanies);
     this.currentService = new TicketProfileFormService();
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
   }
 
   public onChangeStartTimePicker(data) {
     this.currentService.setDurationStart(data);
   }
-
+  public showAsideForDraftEmail(user) {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(user);
+    this.draftEmailStateService.toggleAsideForAdd();
+  }
   public onChangeEndTimePicker(data) {
     this.currentService.setDurationEnd(data);
   }
+  setTab(data) {
+    this.tab = data;
+    if (this.tab === 'users') {
+      this.usersList = this.usersStateService.getAllUsers().filter(item => (!item.deletedAt) && item.accountType !== "TECH" && item.company.id === this.companyDetail.id).sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+        1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    }
+  }
+  public getJobTitle(user) {
+    let find = this.jobTitleList.find(item => item.id === user.jobTitleId);
+    return (find) ? find.name : "";
+  }
+  getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return '';
 
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / cover no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+    } else {
+      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
+    }
+  };
+  getNameForAvatar(user) {
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
+  getUserName(user) {
+    return `${user.firstName} ${user.lastName}`;
+  }
   getCompanyDetails() {
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
       this.companyDetail.onEditMode(data);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
-      if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
-        this.unSelectedRating = 5
-      } else {
-        this.selectedRating = this.companyDetailing.reputation;
-        this.unSelectedRating = 5 - this.selectedRating;
-      }
-      // this.companyDetail = data;
-      this.companyChanged.emit(this.companyDetail);
-      this.companyNameChanged.emit(this.companyDetailing.name);
-      this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
-      this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
-      this.tags = this.companyDetailing.tags;
-      let day = moment(new Date()).format('dddd');
-      this.workingDays = data.workingDays;
-      if (this.workingDays.length !== 0) {
-        let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
-        if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
-          this.companyOpen = 'Opens';
-        } else {
-          this.companyOpen = 'Close';
-        }
-        this.workingDays.forEach((element, index) => {
-          element.checked = false;
-          let e1: any, s1: any;
-          if (element.startTime !== 0 && element.endTime !== 0) {
-            element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
-            s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
-            element.sTime = new Date('01/01/1990 ' + s1)
-            e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
-            element.eTime = new Date('01/01/1990 ' + e1)
-            element.checked = true
-            let current = parseInt(moment(new Date()).format('hh'));
-            if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
-              this.closingSoon = true;
-            }
-          }
-        });
-      }
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.setCompanyData(data);
     })
     this.sub.add(getCompany);
+  }
+  private setCompanyData(data) {
+    if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
+      this.unSelectedRating = 5
+    } else {
+      this.selectedRating = this.companyDetailing.reputation;
+      this.unSelectedRating = 5 - this.selectedRating;
+    }
+    // this.companyDetail = data;
+    this.companyChanged.emit(this.companyDetail);
+    this.companyNameChanged.emit(this.companyDetailing.name);
+    this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
+    this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
+    this.tags = this.companyDetailing.tags;
+    let day = moment(new Date()).format('dddd');
+    this.workingDays = data.workingDays;
+    if (this.workingDays.length !== 0) {
+      let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
+      if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
+        this.companyOpen = 'Opens';
+      } else {
+        this.companyOpen = 'Close';
+      }
+      this.workingDays.forEach((element, index) => {
+        element.checked = false;
+        let e1: any, s1: any;
+        if (element.startTime !== 0 && element.endTime !== 0) {
+          element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
+          s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
+          element.sTime = new Date('01/01/1990 ' + s1)
+          e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
+          element.eTime = new Date('01/01/1990 ' + e1)
+          element.checked = true
+          let current = parseInt(moment(new Date()).format('hh'));
+          if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
+            this.closingSoon = true;
+          }
+        }
+      });
+    }
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
 
   public onChangeTags(tags) {
@@ -352,7 +416,9 @@ export class CompanyDashDetailComponent implements OnInit {
     this.tagSaved = true;
     this.saveCompany();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
   getCharacter(name) {
     return name === null || name === '' ? '' : name[0] + name[1];
   }
@@ -441,9 +507,17 @@ export class CompanyDashDetailComponent implements OnInit {
       return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
     }
   }
-
+  checkLogo() {
+    return (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id || this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo && this.companyDetail.logo.base64 && !this.companyDetail.logo.cropped) return this.companyDetail.logo.base64;
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id) return `/file/${this.companyDetail.logo.cropped.id}`;
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id) return `/file/${this.companyDetail.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   saveCompany() {
-    let savecompany = this.companiesService.editWoringHours(this.companyDetail).subscribe((data: any) => {
+    let savecompany = this.companiesService.editWoringHours(this.companyDetail.getDataForUpdate()).subscribe((data: any) => {
       let msg = 'Working hours updated successfully';
       if (this.tagSaved == true) {
         msg = 'Tags saved successfully';
@@ -489,19 +563,13 @@ export class CompanyDashDetailComponent implements OnInit {
 
   open(content: any) {
     this.tagsState.setTagsFromtEdit(this.tags);
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours' });
   }
   openTag(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' });
   }
   openMap(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' });
   }
 
   deleteTag(index: number) {
@@ -587,6 +655,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (fromHours < 10) {
       fHours = '0' + fromHours;
     }
+    if (fromHours === 24) fHours = "00";
 
     let fMinutes = '';
     if (fromMinutes < 10) {
@@ -613,7 +682,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (toHours < 10) {
       tHours = '0' + toHours;
     }
-
+    if (toHours === 24) tHours = "00";
     let tMinutes = '';
     if (toMinutes < 10) {
       tMinutes = '0' + toMinutes;
@@ -625,7 +694,9 @@ export class CompanyDashDetailComponent implements OnInit {
     const value = h + ':' + m;
     return value;
   }
-
+  public back() {
+    this.leftPanelStateService.goToState('new-companies');
+  }
   changeRating(index, type) {
     let rating = 0;
     if (type === 'selected') {

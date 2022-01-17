@@ -11,7 +11,7 @@ export class GlNumberStateService {
   glNumbers: Array<GlNumber> = [];
   onChangeGlNumbers: EventEmitter<GlNumberChange> = new EventEmitter();
   onGetGLNumbers: EventEmitter<any> = new EventEmitter();
-
+  listGlNumbersForRemove: Array<GlNumber> = [];
   constructor(private glNumberService: GlNumberService,
     private glNumberRealTimeService: GlNumberRealTimeService
   ) { }
@@ -46,6 +46,12 @@ export class GlNumberStateService {
         this.onInitGetGLNumbers(this.glNumbers);
       }
     })
+  }
+  public setListGlNumbersForRemove(data) {
+    this.listGlNumbersForRemove = data;
+  }
+  public getListGlNumbersForRemove() {
+    return this.listGlNumbersForRemove;
   }
   public getOnGlNumbers() {
     return this.onGetGLNumbers;

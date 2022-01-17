@@ -5,6 +5,7 @@ import { REMOVE_CREDENTIAL } from 'src/app/const/confirm';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { NetworkScanStateService } from 'src/app/states/network-scan/network-scan-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
+import { PasswordRecordCategories } from '../../password-manager/class/password-record-categories';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NetworkScanCredential } from '../class/network-scan-credential';
 
@@ -16,6 +17,7 @@ import { NetworkScanCredential } from '../class/network-scan-credential';
 export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   open: boolean = false;
   list: Array<NetworkScanCredential> = [];
+  categoryAgent: PasswordRecordCategories;
   @Input() companyId: string;
   @Output() onSelect = new EventEmitter<any>();
   sub: Subscription = new Subscription();
@@ -54,6 +56,12 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangeRealTime);
+    if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
+    this.categoryAgent = this.passwordManagerStateService.getCategories().find(item => item.name === "AGENT");
+    let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+      this.categoryAgent = data.find(item => item.name === "AGENT");
+    })
+    this.sub.add(onGetCategories);
   }
   onSelectCredential(data) {
     this.onSelect.emit(data);

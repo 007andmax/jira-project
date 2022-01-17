@@ -3,8 +3,6 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketProfile } from '../class/ticket-profile';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
-import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -26,6 +24,15 @@ import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-pa
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ModalAddUpdateTicketComponent } from 'src/app/services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
+import { AppService } from 'src/app/states/app/app.service';
+import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
+import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
+import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
+import { StatusColor } from '../../class/status-color';
+import { find } from 'rxjs-compat/operator/find';
+import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -36,17 +43,20 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
+  @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
+  @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketProfileUpdatesComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
+  openedMobileUpdate = false;
+  openedMobileEditUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
   showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
-  statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
@@ -61,6 +71,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    private modalService: NgbModal,
+    public appService: AppService,
+    private devicesStateService: DevicesStateService,
+    private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -80,6 +94,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.ticketMessage.reset();
+      this.ticketProfileUpdates.resetShowLoadMoreUpdates();
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
@@ -88,9 +104,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-    this.ticketsStateService.getOnInitStatus().subscribe(data => {
-      this.statusColor = data;
-    })
+
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_FOREVER) {
@@ -124,7 +138,14 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.opened) {
-        if (this.ticketProfile.id === data.id) this.ticketProfile[data.field] = data.value;
+        if (this.ticketProfile.id === data.id) {
+          if (data.field === "agent.deviceId") {
+            let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
+            this.ticketProfile.agent.label = device.label;
+          }
+          this.ticketProfile[data.field] = data.value;
+        }
+        this.cd.detectChanges();
       }
     });
     this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
@@ -147,6 +168,36 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
+      if (!this.opened || this.addUsersNotifyStateService.getAction() !== USERS_TO_EDIT_TICKET) return;
+      this.onSelectAssignedUser(data);
+      if (this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
+        let ids = this.listAssignedUser.map(item => {
+          return item.id;
+        })
+        this.ticketsService.addAssignUsers(this.ticketProfile.id, ids).subscribe(data => {
+
+        })
+      }
+    })
+    this.sub.add(onChangeAssignedUser);
+    this.ticketStateService.onSetTabUpdate.subscribe(data => {
+      this.openedMobileUpdate = (data !== null);
+    })
+    this.ticketStateService.onEditUpdate.subscribe(data => {
+      this.openedMobileEditUpdate = true;
+    })
+  }
+  showDetailUser() {
+    if (this.appService.checkMobile()) return;
+    let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+    this.usersStateService.showDetailUser(user);
+    (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
+    //  (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "3";
+
+  }
+  showModalAddUpdate() {
+    const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update' });
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
@@ -227,8 +278,11 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
 
   }
-
+  updateAndCloseMobile() {
+    this.updateForm.updateAndClose();
+  }
   toggleSubject() {
+    if (this.appService.checkMobile()) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -238,6 +292,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
+    if (this.appService.checkMobile()) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
     this.modeDescription = 'view';
@@ -272,6 +327,13 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = data;
   }
   onToggleAddAssignedUser() {
+    if (this.appService.checkMobile()) {
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+      modalRef.componentInstance.userList = this.getUsersForAssign();
+      modalRef.componentInstance.selectedUsers = this.listAssignedUser;
+      this.addUsersNotifyStateService.setAction(USERS_TO_EDIT_TICKET);
+      return;
+    }
     this.showAddAssignedUser = !this.showAddAssignedUser;
 
     if (!this.showAddAssignedUser && this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
@@ -333,9 +395,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     let type = (date.getHours() >= 12) ? 'pm' : 'am';
     return `${moment(date).format('DD MMM YYYY')}, ${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`
   }
-  getStyleStatus(field) {
-    return { 'border-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null, 'background-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].backgroundColor : null, 'color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null }
-  }
   parseTicketSource() {
     if (!this.ticketProfile.ticketSource) {
       return '';
@@ -367,6 +426,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
     this.ticketMessage.reset();
+    this.appService.toggleMobileAside(false);
+    this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

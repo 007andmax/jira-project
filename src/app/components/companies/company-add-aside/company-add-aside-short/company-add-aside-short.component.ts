@@ -39,7 +39,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     }
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }

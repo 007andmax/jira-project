@@ -84,23 +84,22 @@
                                 <span class="dropdown-menu-qt__item-icon icon__set-privilege"></span>
                                 Set {{ user.firstName }} Privilege
                                 <ul
-                                    class="dropdown-menu-qt__submenu dropdown-menu"
+                                    class="dropdown-menu-qt__submenu dropdown-menu set-role-user-dropdown"
                                     *ngIf="showPrivilege"
                                 >
-                                    <li
-                                        *ngIf="user.role !== 'USER'"
-                                        ngbDropdownItem
-                                        (click)="changeUserRole(user,'USER')"
+                                    <ng-template
+                                        ngFor
+                                        let-type
+                                        [ngForOf]="userTypes"
+                                        [ngForTrackBy]="trackById"
                                     >
-                                        User
-                                    </li>
-                                    <li
-                                        ngbDropdownItem
-                                        *ngIf="user.role !== 'ADMIN'"
-                                        (click)="changeUserRole(user,'ADMIN')"
-                                    >
-                                        Administrator
-                                    </li>
+                                        <li
+                                            ngbDropdownItem
+                                            (click)="changeUserRole(user,type.id)"
+                                            [textContent]="type.name"
+                                        >
+                                        </li>
+                                    </ng-template>
                                 </ul>
                             </li>
                             <li (click)="showSubscription = !showSubscription">

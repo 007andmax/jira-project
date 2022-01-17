@@ -1,8 +1,8 @@
-<tr
-    (click)="showInfo()"
+<div
+    class="qt-table-modern__row qt-table-modern__row--lg"
     [ngClass]="{'--selected':company.selected}"
 >
-    <td class="companies-table__check">
+    <div class="companies-table__check">
         <label class="checkbox-container">
             <input
                 type="checkbox"
@@ -11,8 +11,8 @@
             >
             <span class="checkbox-mark"></span>
         </label>
-    </td>
-    <td
+    </div>
+    <div
         class="companies-table__name pointer"
         (click)="goToDashboard()"
     >
@@ -40,51 +40,53 @@
                 <p class="desktop-hidden company-phone">979-431-8937</p>
             </div>
         </div>
-    </td>
-    <td
+    </div>
+    <div
         class="companies-table__address pointer"
         (click)="goToDashboard()"
     >
         {{location}}
-    </td>
-    <td
+    </div>
+    <div
         class="companies-table__primary-contact pointer"
         (click)="goToDashboard()"
     >
-        <p
-            class="name"
-            [textContent]="getUserName()"
-        ></p>
-        <p
-            class="phone"
-            [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
-        ></p>
-    </td>
-    <td
+        <div>
+            <p
+                class="name"
+                [textContent]="getUserName()"
+            ></p>
+            <p
+                class="phone"
+                [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
+            ></p>
+        </div>
+    </div>
+    <div
         (click)="goToDashboard()"
         class="companies-table__email-address pointer"
         [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
     >
-    </td>
-    <td
+    </div>
+    <div
         (click)="goToDashboard()"
         class="companies-table__tickets pointer"
         [textContent]="company.companyStatistic.ticketsSubmitted || '0'"
     >
-    </td>
-    <td
+    </div>
+    <div
         (click)="goToDashboard()"
         class="companies-table__devices pointer"
         [textContent]="countDevices"
     >
-    </td>
-    <td
+    </div>
+    <div
         (click)="goToDashboard()"
         class="companies-table__users pointer"
         [textContent]="countUsers"
     >
-    </td>
-    <td class="companies-table__download-btn  pointer">
+    </div>
+    <div class="companies-table__download-btn  pointer">
         <button
             class="mob-hidden qt-df"
             (click)="downloadAgent()"
@@ -108,8 +110,8 @@
                 class="icn-16 restore-company"
             ></i>
         </button>
-    </td>
-    <td class="companies-table__menu pointer">
+    </div>
+    <div class="companies-table__menu pointer">
         <div
             class="grey-dropdown right with-icons"
             *ngIf="!showArchivedCompanies"
@@ -140,5 +142,5 @@
                 </button>
             </div>
         </div>
-    </td>
-</tr>
+    </div>
+</div>

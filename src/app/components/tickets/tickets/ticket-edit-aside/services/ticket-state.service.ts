@@ -12,6 +12,8 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 })
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
+  onSetTabUpdate: EventEmitter<any> = new EventEmitter();
+  onEditUpdate: EventEmitter<any> = new EventEmitter();
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
   closedTicket: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
@@ -25,6 +27,12 @@ export class TicketStateService {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setEditUpdate(data) {
+    this.onEditUpdate.emit(data);
+  }
+  public setTabUpdate(data) {
+    this.onSetTabUpdate.emit(data);
   }
   public onTicketClosed() {
     this.closedTicket.emit(null);

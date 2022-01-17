@@ -1,3 +1,6 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .qt-aside {
   &__body {
     padding: 0;
@@ -19,32 +22,117 @@
     width: 752px;
     overflow: auto;
     position: relative;
-    border-left: 1px solid #edf2f6;
+    border-left: 1px solid $background;
 
     /deep/ .mat-form-field-label {
       padding-left: 24px;
       line-height: 1.5;
     }
-    /deep/ .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    /deep/
+      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+      .mat-form-field-label {
       // line-height: 1;
       // padding-left: 38px;
       padding-left: 28px;
       font-size: 11px;
       transform: translateY(-17px);
     }
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
-.prelaoder-body {
-  display: block;
-  position: absolute;
-  z-index: 1000;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  background-color: #ffffff;
-}
+  .prelaoder-body {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: $white;
+  }
   &__header {
     padding: 24px 24px 24px 32px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px 16px;
+    }
+
+    &-client-info {
+      display: flex;
+
+      @media (max-width: 767px) {
+        order: 1;
+      }
+    }
+
+    &-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      @media (max-width: 767px) {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        right: 0;
+        background: $white;
+        padding: 12px 16px;
+        z-index: 2;
+      }
+    }
+
+    &-subject {
+      display: none;
+      margin: 44px 0 10px;
+      @extend %h6-sb;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+  }
+
+  .qt-aside-modern__footer.updata-close {
+    display: none;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: $white;
+      z-index: 1;
+      padding: 12px 16px;
+    }
+  }
+
+  .collapse-arrow {
+    @media (max-width: 767px) {
+      width: 36px;
+      height: 36px;
+      transform: none;
+      top: 10px;
+      left: 18px;
+      background-color: $primary-1;
+      background-image: url("/assets/img/icons/collapse-arrow-white.svg");
+      z-index: 3;
+      box-shadow: none;
+      border: none;
+    }
+  }
+
+  app-ticket-change-status {
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 15px;
+      left: 64px;
+      z-index: 3;
+    }
   }
 
   &__header-avatar {
@@ -58,9 +146,8 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    color: white;
+    color: $white;
   }
-
 
   &__header-company {
     font-size: 13px;
@@ -69,7 +156,7 @@
   }
 
   &__header-info {
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
   }
 
@@ -81,7 +168,7 @@
   .divider-point {
     width: 4px;
     height: 4px;
-    background-color: #9ca5b6;
+    background-color: $gray-600;
     border-radius: 50%;
     margin: 2px 6px;
     display: inline-block;
@@ -89,12 +176,13 @@
 
   &__more-users-title {
     font-size: 12px;
-    color: #16a4fa;
+    color: $primary-1;
     margin-left: 10px;
     cursor: pointer;
   }
 
-  &__attach, &__users{
+  &__attach,
+  &__users {
     width: 24px;
     height: 24px;
     background-repeat: no-repeat;
@@ -107,7 +195,8 @@
     margin-right: 16px;
     width: 16px;
   }
-  &__users-linked-author, &__users-linked-partner {
+  &__users-linked-author,
+  &__users-linked-partner {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -118,16 +207,16 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    color: white;
+    color: $white;
     font-weight: 600;
     position: relative;
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       width: 16px;
       height: 16px;
-      border: 1px solid #c4cbd5;
-      background: white;
+      border: 1px solid $gray-500;
+      background: $white;
       border-radius: 50%;
       bottom: -7px;
     }
@@ -142,13 +231,13 @@
     margin-left: 4px;
   }
   &__users-linked-divider {
-    background: #dfe3e8;
+    background: $gray-400;
     width: 1px;
     margin: 0 16px;
   }
-   &__users-linked-partner {
-       margin-right: 4px;
-   }
+  &__users-linked-partner {
+    margin-right: 4px;
+  }
 
   .more-users-avatars {
     margin-left: 5px;
@@ -157,7 +246,7 @@
     &__avatar {
       width: 26px;
       height: 26px;
-      border: solid 2px #ffffff;
+      border: solid 2px $white;
       border-radius: 50%;
       background-position: center;
       background-size: cover;
@@ -166,7 +255,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      color: $white;
       font-weight: 500;
       font-size: 10px;
       font-weight: 700;
@@ -183,9 +272,12 @@
   }
 
   &__ticket-subject {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 10px
+    @extend %h4-sb;
+    margin-bottom: 10px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 
   &__ticket-subject-edit {
@@ -196,15 +288,15 @@
     margin-right: -12px;
     span {
       padding: 8px 14px 8px 12px;
-      border: solid 1px #9ca5b6;
+      border: solid 1px $gray-600;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
       border-right: none;
-      color: #9ca5b6;
+      color: $gray-600;
     }
     input {
       padding: 8px 14px;
-      border: solid 1px #9ca5b6;
+      border: solid 1px $gray-600;
       flex-grow: 1;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
@@ -218,42 +310,49 @@
 
   &__ticket-description {
     font-size: 13px;
-    color: #4f5f79;
+    color: $gray-800;
   }
 
   &__ticket-description-edit {
     margin-left: -12px;
     margin-right: -12px;
-    textarea,#ticket-note {
+    textarea,
+    #ticket-note {
       height: 76px;
       border-radius: 5px;
-      border: solid 1px #9ca5b6;
+      border: solid 1px $gray-600;
       width: 100%;
       padding: 8px 12px;
       font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
     }
-    #ticket-note
-    {
+    #ticket-note {
       min-height: 92px;
       max-height: 400px;
-      background-color: #ffffff;
+      background-color: $white;
       overflow: auto;
       height: auto;
-      
-    } 
+
+      @media (max-width: 767px) {
+        min-height: 20px;
+        padding: 0;
+        border: none;
+        line-height: 20px;
+        color: $primary-2;
+      }
+    }
   }
 
   &__claimed-info {
     position: relative;
     padding: 0 32px;
-    color: #4f5f79;
+    color: $gray-800;
     margin-bottom: 10px;
   }
 
   &__claimed-info-lines {
     position: absolute;
-    border: 1px solid   #dfe3e8;
+    border: 1px solid $gray-400;
     border-left: none;
     border-right: none;
     width: calc(100% - 64px);
@@ -262,79 +361,81 @@
   }
 
   &__claimed-date {
-    border: 1px solid #dfe3e8;
+    border: 1px solid $gray-400;
     border-radius: 15px;
     padding: 2px 14px;
     z-index: 1;
-    background: white;
+    background: $white;
   }
 
-//       <!--  TICKET SUBTASK   -->
-   &__subtasks {
-     padding: 0 32px;
-     margin-bottom: 32px;
-   }
-   .subtask {
-      &__header {
-        padding: 10px 0;
-      }
-      &__header-title {
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: 10px;
-      }
+  //       <!--  TICKET SUBTASK   -->
+  &__subtasks {
+    padding: 0 32px;
+    margin-bottom: 32px;
+  }
+  .subtask {
+    &__header {
+      padding: 10px 0;
+    }
+    &__header-title {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 10px;
+    }
 
-      &__header-add-task {
-        color: #16a4fa;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-      }
+    &__header-add-task {
+      color: $primary-1;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-      &__line {
-        border-bottom: 1px solid #dfe3e8;
-        &:last-child {
-          border-bottom: none;
-        }
+    &__line {
+      border-bottom: 1px solid $gray-400;
+      &:last-child {
+        border-bottom: none;
       }
+    }
 
-      &__done-status {
-        border-radius: 50%;
-        margin-right: 8px;
-        height: 24px;
-        width: 24px;
-        background-repeat: no-repeat;
-        background-size: contain;
-      }
+    &__done-status {
+      border-radius: 50%;
+      margin-right: 8px;
+      height: 24px;
+      width: 24px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
 
-      &__input {
-        flex-grow: 1;
-        border: none;
-        margin-right: 8px;
-        height: 40px;
-        outline: none;
-        font-size: 13px;
-      }
+    &__input {
+      flex-grow: 1;
+      border: none;
+      margin-right: 8px;
+      height: 40px;
+      outline: none;
+      font-size: 13px;
+    }
 
-      &__date {
-        font-size: 12px;
-        margin-right: 8px;
-      }
+    &__date {
+      font-size: 12px;
+      margin-right: 8px;
+    }
 
-      &__user-photo, &__date-icon, &__user-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background-size: cover;
-        background-position: center;
-      }
+    &__user-photo,
+    &__date-icon,
+    &__user-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+    }
 
-      &__date-icon {
-        margin-right: 8px;
-      }
-   }
+    &__date-icon {
+      margin-right: 8px;
+    }
+  }
 
-// aside menu
+  // aside menu
 
   &__menu {
     width: 48px;
@@ -346,54 +447,55 @@
     overflow: auto;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
   }
-
 }
 
 .qt-modal-circle-button {
-    width: 32px;
-    height: 32px;
-    border: solid 1px #dfe3e8;
-    background-color: #ffffff;
-    margin-left: 8px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border: solid 1px $gray-400;
+  background-color: $white;
+  margin-left: 8px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 .ticket-updates {
   padding: 24px 32px;
-  background-color: #f9fafb;
+  background-color: $gray-100;
   font-size: 13px;
 
   &__count {
     font-weight: 600;
   }
   &__ticket-photo {
-      width: 32px;
-      height: 32px;
-      background-position: center;
-      background-size: cover;
-      border-radius: 50%;
-      margin-right: 16px;
+    width: 32px;
+    height: 32px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 16px;
   }
 
   &__content {
     flex-grow: 1;
   }
 
-  &__author-line, &__message-line {
+  &__author-line,
+  &__message-line {
     margin-bottom: 8px;
   }
 
   &__author {
-      font-weight: 600;
+    font-weight: 600;
   }
   &__add-note {
-      color: #9ca5b6;
-      cursor: pointer;
+    color: $gray-600;
+    cursor: pointer;
   }
-  &__edit, &__delete{
+  &__edit,
+  &__delete {
     width: 24px;
     height: 24px;
     background-repeat: no-repeat;
@@ -402,22 +504,21 @@
     cursor: pointer;
   }
 
-
   &__update-info {
     font-size: 12px;
   }
   &__people-added {
-    color: #9ca5b6;
+    color: $gray-600;
     margin-right: 8px;
   }
 
   &__photo-people {
-     width: 24px;
-     height: 24px;
-     margin-right: 2px;
-     border-radius: 50%;
-     background-position: center;
-     background-size: cover;
+    width: 24px;
+    height: 24px;
+    margin-right: 2px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
   }
   &__ticket-info-container {
     margin: 15px 0 8px -48px;
@@ -429,8 +530,8 @@
   }
   &__ticket-body {
     padding: 8px;
-    background-color: white;
-    border: solid 1px #dfe3e8;
+    background-color: $white;
+    border: solid 1px $gray-400;
   }
   &__done-status {
     width: 24px;
@@ -550,10 +651,10 @@
   &__service-tag-completed {
     height: 20px;
     line-height: 12px;
-    color: #2ec866;
+    color: $success;
     font-size: 10px;
-    border-color: #2ec866;
-    background: white;
+    border-color: $success;
+    background: $white;
     margin-right: 32px;
   }
 }
@@ -565,8 +666,8 @@
   &__item {
     border-radius: 10px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: dashed 1px #c5cdd5;
-    background-color: #ffffff;
+    border: dashed 1px $gray-500;
+    background-color: $white;
     padding: 16px;
     display: flex;
     margin-bottom: 16px;
@@ -585,15 +686,14 @@
     line-height: 1.54;
   }
 
-
   &__item-btn {
     padding: 14px 20px;
     white-space: nowrap;
     font-size: 13px;
-    color: #ffffff;
+    color: $white;
     font-weight: 600;
     border-radius: 4px;
-    background-color: #16a4fa;
+    background-color: $primary-1;
     height: 40px;
     line-height: normal;
     border: none;
@@ -617,28 +717,31 @@
   &__item-desc-text {
     font-size: 12px;
     line-height: 1.33;
-    color: #4f5f79;
+    color: $gray-800;
     margin-top: 2px;
+
+    @media (max-width: 767px) {
+      margin: 16px 0;
+    }
   }
 }
 
-
 .cps-block {
   padding: 20px 40px;
-  border-top: 1px solid #f9fafb;
+  border-top: 1px solid $gray-100;
 
   &__header {
     margin-bottom: 20px;
   }
   &__photo {
-     width: 32px;
-     height: 32px;
-     border-radius: 50%;
-     background-size: cover;
-     background-position: center;
-     margin-right: 18px;
-   }
-   &__nav {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin-right: 18px;
+  }
+  &__nav {
     padding: 0;
     display: flex;
     list-style: none;
@@ -648,7 +751,7 @@
     font-size: 13px;
     font-weight: 600;
     margin-right: 30px;
-    color: #4f5f79;
+    color: $gray-800;
     cursor: pointer;
     padding-left: 25px;
     background-repeat: no-repeat;
@@ -657,59 +760,85 @@
     position: relative;
 
     &.active {
-      color: #16a4fa;
+      color: $primary-1;
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -10px;
         height: 3px;
         width: calc(100% + 5px);
-        background: #16a4fa;
+        background: $primary-1;
         left: 0;
         border-radius: 100px;
       }
     }
-
-
   }
 
   &__content-textarea {
     height: 104px;
     width: 100%;
     border-radius: 4px;
-    border: solid 1px #c4cbd5;
+    border: solid 1px $gray-500;
     padding: 16px;
   }
 }
 
-
-
-
-
-
-/deep/ app-ticket-profile-form-update {
+/deep/ app-ticket-profile-form-update,
+ticket-profile-edit-form-update {
   position: relative;
   flex: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  @media (max-width: 767px) {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    padding-bottom: 72px;
+    display: none;
+  }
+
+  &.--open {
+    display: flex;
+  }
 }
 
 /deep/ .cps-block {
   box-shadow: 0px -5px 9px -6px rgba(0, 0, 0, 0.15);
 }
 
-
 app-ticket-change-status {
   cursor: pointer;
 }
 
-
 app-ticket-edit-aside-right-panel {
   display: flex;
 }
-[contenteditable=true]:empty:before{
+[contenteditable="true"]:empty:before {
   content: attr(placeholder);
   pointer-events: none;
   display: block; /* For Firefox */
+}
+.mobile-action-btn {
+  display: none;
+  width: 48px;
+  height: 48px;
+  background: #16a4fa url("/assets/img/icons/add-product.svg") 16px 16px no-repeat;
+  box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
+  position: fixed;
+  right: 16px;
+  bottom: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+.clear-bottom-padding {
+  padding-bottom: 0px !important;
 }

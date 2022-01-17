@@ -1,0 +1,19 @@
+.col-md-6,
+.col-md-12,
+.col-md-4,
+.col-md-3,
+.col-md-5 {
+    @media (max-width: 767px) {
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-top: 16px;
+        &:first-child {
+            margin-top: 0px;
+        }
+    }
+}
+.details-background {
+    @media (max-width: 767px) {
+        padding: 16px;
+    }
+}

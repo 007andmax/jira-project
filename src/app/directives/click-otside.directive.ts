@@ -1,7 +1,8 @@
 import { Directive, HostListener, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[appClickOtside]'
+  selector: '[appClickOtside]',
+  exportAs: 'click'
 })
 export class ClickOtsideDirective {
   @Input() init: boolean = false;
@@ -13,5 +14,11 @@ export class ClickOtsideDirective {
     if (!this.init) return;
     if ($(event.target).parents(this.class).length != 0) return;
     this.onOutSide.emit(true);
+  }
+  public setInit(data) {
+    this.init = data;
+  }
+  public getInit() {
+    return this.init;
   }
 }

@@ -38,7 +38,7 @@ export class PaymentInvoice {
             if (item.selected) sumAmountReceived += item.paymentAmount;
         })
         sumAmountReceived = parseFloat((sumAmountReceived).toFixed(2));
-        this.amountReceived = (sumAmountReceived === amountReceived);
+        this.amountReceived = (sumAmountReceived === parseFloat((amountReceived).toFixed(2)));
         return this.amountReceived;
     }
     public isValidateEditAside(amountReceived: number, paymentData: Array<PaymentData>) {

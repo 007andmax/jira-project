@@ -70,6 +70,19 @@ import { DefaultServicesEditModule } from './components/billing/default-services
 import { DeviceModule } from './components/device/device-root.module';
 import { HeaderModule } from './components/header/header.module';
 import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.module';
+import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
+import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
+import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
+import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
 
 declare var $: any;
 
@@ -144,8 +157,12 @@ declare var $: any;
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
     ModalSessionScreenComponent,
+    ModalAddUpdateTicketComponent,
+    ModalAgentLinkComponent,
+    ModalAddUsersNotifyComponent,
+    ModalEditCategoryProductComponent
+    // RecurringTicketsComponent
   ],
-
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -153,6 +170,15 @@ declare var $: any;
       multi: true,
     },
     PermissionDasnboardBillingService,
+    PermissionManageTagsService,
+    PermissionProductsSettingsService,
+    PermissionsTechUsersService,
+    PermissionEmailSettingService,
+    PermissionTaxesSettingsService,
+    PermissionTicketSettingsService,
+    PermissionEmailTempleteService,
+    PermissionAccountingSettingsService,
+    PermissionCrmSettingsService
   ],
   bootstrap: [AppComponent]
 })

@@ -54,6 +54,7 @@ export class TicketProfile {
     unread: boolean;
     updates: Array<TicketProfileUpdate> = [];
     userCompanies: Array<string> = [];
+    customStatus: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

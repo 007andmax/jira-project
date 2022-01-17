@@ -6,7 +6,6 @@ import { UserAvatar } from './user-avatar';
 import { UserProfile } from './user-profile';
 
 export class UserAdd {
-  role: string = 'USER';
   phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
   subscription: Subscriptions;
   welcomeEmail: boolean = true;
@@ -16,9 +15,11 @@ export class UserAdd {
   primaryEmail: string;
   designation: string;
   companyId: string;
+  jobDescription: string;
   tags: Array<any> = [];
+  jobTitleId: string;
+  jobTypeId: string;
   constructor(data: UserProfile) {
-    this.role = data.role;
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
       this.phoneNumbers = [];
 
@@ -37,6 +38,9 @@ export class UserAdd {
     this.tags = data.tags.map(item => {
       return { id: item.id };
     })
+    this.jobDescription = data.jobDescription;
+    this.jobTypeId = data.jobTypeId;
+    this.jobTitleId = data.jobTitleId;
 
   }
 }

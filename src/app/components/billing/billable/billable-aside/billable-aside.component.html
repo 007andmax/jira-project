@@ -1,4 +1,7 @@
-<div class="billing-page__aside qt-aside-modern --x-large" *ngIf="opened">
+<div
+    class="billing-page__aside qt-aside-modern --x-large"
+    *ngIf="opened"
+>
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">New Invoice</div>
         <div
@@ -10,11 +13,11 @@
                 *ngIf="billableTaimer && !billableTaimer.isFinished"
             ></div>
             <div
-                class="qt-fs-13 qt-ff-gr qt-mr-16 qt-color-dark-light"
+                class="qt-fs-13 qt-fw-400 qt-mr-16 qt-color-dark-light"
                 *ngIf="billableTaimer && !billableTaimer.isFinished"
             >
                 <span
-                    class="qt-ff-gm qt-color-dark"
+                    class="qt-fw-600 qt-color-dark"
                     [textContent]="billableTaimer.getTimeText()"
                 ></span>
                 mins remaining until unlock
@@ -24,7 +27,7 @@
                 *ngIf="billableTaimer && billableTaimer.isFinished"
             ></div>
             <div
-                class="qt-fs-13 qt-ff-gr qt-mr-16 qt-color-dark-light"
+                class="qt-fs-13 qt-fw-400 qt-mr-16 qt-color-dark-light"
                 *ngIf="billableTaimer && billableTaimer.isFinished"
             >
                 Invoice has been expired and it cannot be saved
@@ -61,7 +64,10 @@
     >
         <div class="loading"></div>
     </div>
-    <div class="qt-aside-modern__footer">
+    <div
+        class="qt-aside-modern__footer"
+        *ngIf="!showPreloader"
+    >
         <div class="qt-df">
             <div
                 class="qt-pos-rel"

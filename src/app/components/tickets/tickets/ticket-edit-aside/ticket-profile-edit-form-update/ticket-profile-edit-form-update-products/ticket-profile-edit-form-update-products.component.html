@@ -1,0 +1,83 @@
+<div class="cps-block__products-block">
+    <div class="product-item">
+        <div class="product-item__first-line d-f">
+            <app-product-list
+                [type]="'TICKET'"
+                [editItem]="editProduct.item"
+                #productDP
+                class="product-item__prodect-list"
+                (selectedProductItem)="onChangeProduct($event)"
+            ></app-product-list>
+        </div>
+        <div class="d-f">
+            <label class="product-item__serial-num-input">
+                <input
+                    class="product-item__input serial-num"
+                    [(ngModel)]="editProduct.serialNumber"
+                    type="text"
+                >
+            </label>
+            <label class="product-item__cost-input">
+                <input
+                    class="product-item__input cost"
+                    number
+                    [money]="true"
+                    [ngModel]="editProduct.item.cost"
+                    (blur)="onValidateSaleCost()"
+                    appToFixed
+                    (ngModelChange)="onChangeCost($event)"
+                >
+            </label>
+            <label class="product-item__qty-input">
+                <input
+                    class="product-item__input qty"
+                    [(ngModel)]="editProduct.quantity"
+                >
+            </label>
+            <label class="product-item__price-input">
+                <input
+                    class="product-item__input price"
+                    [ngClass]="{'--input-error':!valdiateSaleCost}"
+                    number
+                    [money]="true"
+                    [ngModel]="editProduct.item.sale"
+                    (blur)="onValidateSaleCost()"
+                    appToFixed
+                    (ngModelChange)="onChangeSale($event)"
+                >
+                <mat-error
+                    class="qt-tooltip-error"
+                    *ngIf="!valdiateSaleCost"
+                >
+                    Product price can not be lower than cost
+                </mat-error>
+            </label>
+            <label class="product-item__discount-input">
+                <input
+                    class="product-item__input discount"
+                    [(ngModel)]="editProduct.discountAmount"
+                    type="text"
+                >
+            </label>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button"
+                [ngClass]="{'--loading':isUpdate}"
+                appDisabledBtn
+                #updateMobileBtn="disabled"
+                (onClick)="saveProduct()"
+            >
+                <span
+                    class="ng-star-inserted"
+                    *ngIf="!isUpdate"
+                >
+                    Save
+                </span>
+                <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

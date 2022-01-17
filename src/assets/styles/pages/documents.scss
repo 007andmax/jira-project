@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .documents-page {
   .qt-page-list__header-filters {
     .qt-dropdown input,
@@ -22,8 +24,8 @@
         padding-left: 5px;
         text-transform: uppercase;
         font-size: 8px;
-        font-family: "Graphik-Semibold", sans-serif;
-        color: #fff;
+        font-weight: $fw-semi-bold;
+        color: $white;
         top: -1px;
         left: -1px;
       }
@@ -35,17 +37,17 @@
       //width: -moz-max-content;
       //width: max-content;
       width: 100%;
-      min-width: 300px;
+      min-width: 250px;
     }
     &__create-by {
-      width: 150px;
-      max-width: 150px;
-      min-width: 150px;
+      width: 140px;
+      max-width: 140px;
+      min-width: 140px;
     }
     &__created-date {
-      width: 110px;
-      max-width: 110px;
-      min-width: 110px;
+      width: 116px;
+      max-width: 116px;
+      min-width: 116px;
     }
     &__review-date {
       width: 110px;
@@ -90,7 +92,8 @@
     line-height: 1;
 
     .title {
-      font-family: Graphik-Medium, sans-serif;
+      font-weight: $fw-medium;
+      color: $primary-2;
     }
   }
 
@@ -109,14 +112,14 @@
       li {
         height: 48px;
         padding: 14px 12px 14px 20px;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-semi-bold;
       }
     }
   }
 
   .filter-users-documents {
     .icn-remove-old {
-      top: calc(50% - 8px) !important;
+      top: calc(50% - 6px) !important;
     }
   }
 
@@ -130,7 +133,7 @@
 }
 
 .qt-dropdown-menu li.remove-item {
-  border-top: 1px solid #dfe3e8;
+  border-top: 1px solid $gray-400;
   padding-top: 8px;
   padding-bottom: 8px;
   margin-top: 8px;
@@ -152,7 +155,7 @@
   position: relative;
   padding: 4px;
   border-radius: 4px;
-  background-color: #edf0f2;
+  background-color: $gray-300;
   border: none;
 
   .input-group {
@@ -175,7 +178,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid $gray-400;
     width: 48px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
   }
@@ -183,7 +186,7 @@
 
 .documents-details {
   .qt-aside-modern__footer {
-    border-top: 1px solid #edf0f2;
+    border-top: 1px solid $gray-300;
   }
   app-documents-add-header,
   app-documents-add-footer {
@@ -228,7 +231,7 @@
 
   margin-right: 480px;
   //overflow: auto;
-  background-color: #fff;
+  background-color: $white;
 
   &.qt-page-list {
     display: flex;

@@ -1,10 +1,14 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
+        <div
+            class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"
+            (click)="toggleMobileLeftPanel()"
+        ></div>
         <div class="qt-page-list__header-title-line--left">
-            <h3
+            <h6
                 class="qt-page-list__header-title"
                 [textContent]="title"
-            ></h3>
+            ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="d-f ai-c">
@@ -23,51 +27,111 @@
                 <button
                     class="qt-btn --outline-blue qt-mr-8"
                     (click)="clearAll()"
-                    *ngIf="countFilter > 0"
+                    *ngIf="countFilter > 0 && !appService.checkMobile()"
                 >
                     Clear all
                 </button>
                 <button
                     class="qt-btn filter-button qt-mr-8 d-f"
-                    [ngClass]="{'active':!toggleFilter}"
-                    (click)="toggleFilter = !toggleFilter"
-                    [textContent]="getTextCountFilters()"
-                ></button>
+                    [ngClass]="{'active':toggleFilter,
+                'is-exist-filters':isExistFilters()}"
+                    (click)="onToggleFilter(!toggleFilter)"
+                >
+                    <span [textContent]="getTextCountFilters()"></span>
+                </button>
                 <button
-                    class="qt-btn --outline-blue"
+                    class="qt-btn --outline-blue qt-d-md-none"
                     (click)="onAddTicket()"
                 >
                     Add ticket
                 </button>
+                <div class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"></div>
             </div>
         </div>
     </div>
-
-
-
     <div class="qt-page-list__header-filters">
         <app-tickets-filter
             class="qt-w100"
             #filter
             (changeCountFilter)="onChangeCountFilter($event)"
-            [hidden]="toggleFilter"
+            [hidden]="!toggleFilter"
+            (onClose)="onToggleFilter(false)"
         ></app-tickets-filter>
     </div>
-
-
-
+    <!-- <div class="qt-page-list__header-thead-container"> -->
+    <!-- <table class="qt-table-modern qt-page-list__header-thead"> -->
+    <!-- <thead> -->
+    <!-- <tr> -->
+    <!-- <th class="ticket-table__requested-by">Requested By</th> -->
+    <!-- <th class="ticket-table__subject">Subject</th> -->
+    <!-- <th class="ticket-table__company">Company</th> -->
+    <!-- <th class="ticket-table__assignee">Assignee</th> -->
+    <!-- <th class="ticket-table__status">Status</th> -->
+    <!-- <th class="ticket-table__created-date">Created Date</th> -->
+    <!-- </tr> -->
+    <!-- </thead> -->
+    <!-- </table> -->
+    <!-- </div> -->
+    <!-- Mobile Version -->
     <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th class="ticket-table__requested-by">Requested By</th>
-                    <th class="ticket-table__subject">Subject</th>
-                    <th class="ticket-table__company">Company</th>
-                    <th class="ticket-table__assignee">Assignee</th>
-                    <th class="ticket-table__status">Status</th>
-                    <th class="ticket-table__created-date">Created Date</th>
-                </tr>
-            </thead>
-        </table>
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-page-list__header-thead__row">
+                <div class="ticket-table__requested-by">Requested By</div>
+                <div class="ticket-table__subject">Subject</div>
+                <div class="ticket-table__company">Company</div>
+                <div class="ticket-table__assignee">Assignee</div>
+                <div class="ticket-table__status">Status</div>
+                <div class="ticket-table__created-date">Created Date</div>
+            </div>
+        </div>
     </div>
+</div>
+<div
+    class="list-filters"
+    *ngIf="ticketsFilter.selectedCompany || 
+    ticketsFilter.selectedTechUser ||
+    ticketsFilter.selectedUser ||
+    ticketsFilter.selectedStatus ||
+    ticketsFilter.tags.length > 0"
+>
+    <mat-form-field>
+        <mat-chip-list aria-label="Fruit selection">
+            <mat-chip
+                *ngIf="ticketsFilter.selectedCompany"
+                (removed)="filter.companyDp.clearClient();refreshFilters()"
+            >
+                {{ticketsFilter.selectedCompany.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="ticketsFilter.selectedTechUser"
+                (removed)="filter.techUsersDp.clearClient();refreshFilters()"
+            >
+                {{getUserName(ticketsFilter.selectedTechUser)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="ticketsFilter.selectedUser"
+                (removed)="filter.usersDp.clearClient();refreshFilters()"
+            >
+                {{getUserName(ticketsFilter.selectedUser)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="ticketsFilter.selectedStatus"
+                (removed)="filter.statusDp.clearClient();refreshFilters()"
+                class="status"
+            >
+                {{getStatus(ticketsFilter.selectedStatus)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngFor="let tag of ticketsFilter.tags; let i = index"
+                (removed)="filter.tagsDp.remove(i);refreshFilters()"
+            >
+                {{tag.word}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </mat-form-field>
 </div>

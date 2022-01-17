@@ -18,6 +18,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
+import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -54,6 +55,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    private quoteStateService: QuoteStateService,
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
@@ -76,7 +78,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
-      this.categoriesSelect.reset(this.categories);
+      if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(getOnCategries);
     this.onEditInventory();
@@ -94,6 +96,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
       this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
+      this.inventory.markup = this.getMarkups();
       //   this.description.update();
       this.cd.detectChanges();
     })
@@ -147,11 +150,30 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.description = event.target.value;
 
   }
-  onChangeCost(event) {
-    this.inventory.cost = event.target.value;
+  onChangeCost(val) {
+    let value = Number(val);
+    this.inventory.cost = value;
+    this.inventory.markup = this.getMarkups();
   }
-  onChangeSale(event) {
-    this.inventory.sale = event.target.value;
+  changeMarkup(val) {
+    let value = Number(val);
+    this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
+    this.inventory.markup = this.roundingMarkup(value);
+  }
+  private roundingMarkup(markup) {
+    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
+  }
+  private isInteger(num): boolean {
+    return (num ^ 0) === num;
+  }
+  public getMarkups() {
+    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
+    return 0;
+  }
+  onChangeSale(val) {
+    let value = Number(val);
+    this.inventory.sale = value;
+    this.inventory.markup = this.getMarkups();
   }
   public onPastDescription(value) {
     this.validate.resetDescription();

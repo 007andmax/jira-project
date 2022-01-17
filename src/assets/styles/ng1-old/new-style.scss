@@ -1,7 +1,7 @@
 .btn {
   display: inline-block;
   margin-bottom: 0;
-  color: #fff;
+  color: $white;
   text-align: center;
   vertical-align: middle;
   touch-action: manipulation;
@@ -30,7 +30,7 @@
   line-height: 3;
   border: none; }
 .btn:focus, .btn:hover, .btn:active, .btn.active {
-  color: #fff;
+  color: $white;
   text-decoration: none !important;
   outline-color: transparent !important;
   outline-style: none !important; }
@@ -47,8 +47,8 @@
   background-color: #3D7BA7;
   border-color: #3D7BA7; }
 .btn-success {
-  background-color: #90c56b;
-  border-color: #90c56b; }
+  background-color: $success;
+  border-color: $success; }
 .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active {
   background-color: #668C4D;
   border-color: #668C4D; }

@@ -12,6 +12,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-profile-form-update-services',
@@ -19,10 +20,15 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-pro
   styleUrls: ['./ticket-profile-form-update-services.component.scss']
 })
 export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
+  isUpdate: boolean = false;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
   @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceTimepickerComponent;
   @ViewChild('serviceDP') serviceDP: ServicesListComponent;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @Output() onUpdateMobile = new EventEmitter();
+  @Output() onAddMoreMobile = new EventEmitter();
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   areTicketsTerminated: boolean = false;
   areTicketsPresented: boolean = false;
@@ -63,7 +69,22 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
   }
-
+  initUpdateMobile() {
+    this.isUpdate = true;
+    this.updateMobileBtn.setDisabled(true);
+    this.addMoreMobileBtn.setDisabled(true);
+  }
+  updateMobile() {
+    this.onUpdateMobile.emit(null);
+  }
+  addMoreMobile() {
+    this.onAddMoreMobile.emit(null);
+  }
+  public complateUpdateMobile() {
+    this.isUpdate = false;
+    this.addMoreMobileBtn.setDisabled(false);
+    this.updateMobileBtn.setDisabled(false);
+  }
   private getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
     this.areTicketsPresented = this.ticketStateService.isTicketsTerminated();

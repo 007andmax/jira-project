@@ -34,7 +34,9 @@ export class LeftPanelInventoryComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
-
+  public goToState() {
+    this.onChangeState.emit('inventory');
+  }
   selectCategory(category) {
     this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);
@@ -53,9 +55,7 @@ export class LeftPanelInventoryComponent implements OnInit {
       this.countOfCategories = 10;
     }
   }
-  public goToState() {
-    this.onChangeState.emit('inventory');
-  }
+
   deleteCategory(category) {
     this.confirmStateService.setConfirmAction(DELETE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });

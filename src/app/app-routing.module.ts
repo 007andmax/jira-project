@@ -12,13 +12,12 @@ import { TaxesSettingsComponent } from './components/setting/taxes/taxes.compone
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
-import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
-import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
+import { GlNumberSettingsComponent } from './components/setting/accounting/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -58,7 +57,20 @@ import { DocumentsTemplatesComponent } from './components/documents/documents-te
 import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
 //import { HomeComponent } from './components/home/home.component';
+import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
+import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
+import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 
 const routes: Routes = [
 
@@ -123,9 +135,16 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/tags',
-    loadChildren: './components/setting/manage-tags/manage-tags.module#ManageTagsModule'
+    loadChildren: './components/setting/manage-tags/manage-tags.module#ManageTagsModule',
+    canActivate: [PermissionManageTagsService]
 
 
+  },
+  {
+    path: ':company/setting/products-settings',
+    component: ProductsSettingsComponent,
+    pathMatch: 'full',
+    canActivate: [PermissionProductsSettingsService]
   },
   {
     path: ':company/setting/companyprofile',
@@ -134,18 +153,27 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/techUsers',
-    loadChildren: './components/setting/tech-users/tech-users.module#TechUsersModule'
+    loadChildren: './components/setting/tech-users/tech-users.module#TechUsersModule',
+    canActivate: [PermissionsTechUsersService]
 
   },
   {
     path: ':company/setting/emailSetting',
-    loadChildren: './components/setting/email-setting/email-setting.module#EmailSettingModule'
+    loadChildren: './components/setting/email-setting/email-setting.module#EmailSettingModule',
+    canActivate: [PermissionEmailSettingService]
 
   },
   {
     path: ':company/setting/taxes',
-    loadChildren: './components/setting/taxes/taxes-settings.module#TaxesSettingsModule'
+    loadChildren: './components/setting/taxes/taxes-settings.module#TaxesSettingsModule',
+    canActivate: [PermissionTaxesSettingsService]
 
+  },
+  {
+    path: ':company/setting/ticket-settings',
+    component: TicketSettingsPageComponent,
+    pathMatch: 'full',
+    canActivate: [PermissionTicketSettingsService]
   },
   {
     path: ':company/setting/glnumber',
@@ -159,7 +187,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/emailTemplete',
-    loadChildren: './components/setting/email-templete/email-templete.module#EmailTempleteModule'
+    loadChildren: './components/setting/email-templete/email-templete.module#EmailTempleteModule',
+    canActivate: [PermissionEmailTempleteService]
 
   },
   {
@@ -168,9 +197,16 @@ const routes: Routes = [
 
   },
   {
-    path: ':company/setting/invoiceTickets',
-    loadChildren: './components/setting/invoice-tickets/invoice-tickets.module#InvoiceTicketsModule'
+    path: ':company/setting/accounting',
+    loadChildren: './components/setting/invoice-tickets/invoice-tickets.module#InvoiceTicketsModule',
+    canActivate: [PermissionAccountingSettingsService]
 
+  },
+  {
+    path: ':company/setting/crm-settings',
+    component: CrmSettingsComponent,
+    pathMatch: 'full',
+    canActivate: [PermissionCrmSettingsService]
   },
   {
     path: ':company/setting/commission',

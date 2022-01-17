@@ -3,7 +3,11 @@
   &.--large {
     margin-left: $left-panel-mini-width;
   }
+  @media (max-width: 767px) {
+    margin-left: 0;
+    padding: 64px 8px 0;
+  }
 }
-.main-container {	
-  background-color: transparent;	
+.main-container {
+  background-color: transparent;
 }

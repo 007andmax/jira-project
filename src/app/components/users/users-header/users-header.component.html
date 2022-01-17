@@ -1,10 +1,10 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
-            <h3
+            <h6
                 class="qt-page-list__header-title"
                 [textContent]="'All Users (' + count + ')'"
-            ></h3>
+            ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
@@ -21,7 +21,7 @@
                 >
                     <div [textContent]="getSelectedCount() + ' Users Selected'"></div>
                     <div
-                        class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-25 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
                         *ngIf="!isExistArchiveUser()"
                         (click)="showAsideForDraftEmail()"
                     >
@@ -29,7 +29,7 @@
                         <div>Send email</div>
                     </div>
                     <div
-                        class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
                         *ngIf="!isExistArchiveUser() && !isExistPrimaryContact() && currentUser && currentUser.checkPermission('ARCHIVE_USERS')"
                         (click)="delete()"
                     >
@@ -43,7 +43,7 @@
                     (click)="toggleFilter  = !toggleFilter"
                 >
                     <span
-                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>

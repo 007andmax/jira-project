@@ -12,6 +12,10 @@ import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 import { TYPE_LIST_ALL_USERS } from '../../const/users';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -20,6 +24,7 @@ import { TYPE_LIST_ALL_USERS } from '../../const/users';
   providers: [UserListService]
 })
 export class UsersComponent implements OnInit {
+  idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];
   reqUsers: Array<User> = [];
@@ -30,7 +35,9 @@ export class UsersComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -38,6 +45,7 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
+    private crmStateService: CrmStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -92,7 +100,7 @@ export class UsersComponent implements OnInit {
 
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
 
-      if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
+      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
@@ -103,7 +111,6 @@ export class UsersComponent implements OnInit {
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex] = new User(data.data);
-
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
@@ -111,7 +118,7 @@ export class UsersComponent implements OnInit {
       }
 
 
-      if (data.action === 'USERS_DEARCHIVED') {
+      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
 
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
@@ -124,7 +131,7 @@ export class UsersComponent implements OnInit {
         })
 
       }
-      if (data.action === 'USER_SUBMITTED_TICKET') {
+      if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         const Index = this.users.findIndex((item) => item.id === data.data.id);
         var prevValue = this.reqUsers[reqIndex].userStatistic.ticketsSubmitted || 0;
@@ -134,8 +141,18 @@ export class UsersComponent implements OnInit {
       }
     })
     this.userListService.addSubscription(getChangeCompanies);
+    this.usersStateService.closeDetailAside.subscribe(data => {
+      this.setIdDetailUser('');
+    })
     this.onInitSubscribe();
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+
   }
+
   private onArchiveUsers(ids) {
 
     let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
@@ -146,6 +163,9 @@ export class UsersComponent implements OnInit {
 
     })
     this.userListService.addSubscription(archiveUser);
+  }
+  setIdDetailUser(data) {
+    this.idDetailUser = data;
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');

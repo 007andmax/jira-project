@@ -6,6 +6,8 @@ import { TicketChangeField } from '../../components/tickets/tickets/class/ticket
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
+import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
+import { StatusColor } from 'src/app/components/tickets/class/status-color';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ export class TicketsStateService {
   listType: string = "USERS";
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
+  ticketStatusForRemove: TicketStatus = null;
+  listTicketStatusForRemove: Array<TicketStatus> = [];
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -25,13 +29,15 @@ export class TicketsStateService {
   filter: EventEmitter<any> = new EventEmitter();
   updateCounts: EventEmitter<any> = new EventEmitter();
   colorStatus: EventEmitter<any> = new EventEmitter();
-  status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
   typeFilter: EventEmitter<any> = new EventEmitter();
   tagsFilter: EventEmitter<any> = new EventEmitter();
+  onGetTicketsStatus: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+  listStatusColor: Array<StatusColor> = [];
+  ticketsStatus: Array<TicketStatus> = [];
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -42,6 +48,22 @@ export class TicketsStateService {
       }
     })
     this.ticketsRealTimeService.changeTickets.subscribe(newChange => {
+
+      if (newChange.action === 'TICKET_STATUS_REMOVED') {
+        let index = this.ticketsStatus.findIndex(item => item.id === newChange.data);
+        this.ticketsStatus.splice(index, 1);
+        this.onGetTicketsStatus.emit(this.ticketsStatus);
+      }
+      if (newChange.action === 'TICKET_STATUS_EDITED') {
+        let index = this.ticketsStatus.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.ticketsStatus[index] = new TicketStatus(newChange.data);
+        this.onGetTicketsStatus.emit(this.ticketsStatus);
+      }
+      if (newChange.action === 'TICKET_STATUS_SAVED') {
+
+        this.ticketsStatus.push(new TicketStatus(newChange.data))
+        this.onGetTicketsStatus.emit(this.ticketsStatus);
+      }
 
       if (newChange.action === 'CREATED_TICKET') {
         this.addTicket.emit(newChange.data);
@@ -56,11 +78,36 @@ export class TicketsStateService {
       if (newChange.action === 'TICKET_DELETED') this.removeTicket.emit(newChange.data);
       if (newChange.action === 'TICKET_BILLABLE') this.changeFieldTicket.emit(new TicketChangeField("isBillable", newChange.data.id, newChange.data.isBillable));
       if (newChange.action === 'TICKET_INVOICED') this.changeFieldTicket.emit(new TicketChangeField("hasInvoice", newChange.data.id, newChange.data.hasInvoice));
-      if (newChange.action === 'LINKED_AGENT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("agent", newChange.data.id, (newChange.data.deviceId) ? { deviceId: newChange.data.deviceId } : null));
+      if (newChange.action === 'LINKED_AGENT_CHANGED') {
+        newChange.data.ticketIds.forEach(item => {
+          this.changeFieldTicket.emit(new TicketChangeField("agent.deviceId", item, (newChange.data.deviceId) ? newChange.data.deviceId : null));
+        });
+      }
       if (newChange.action === 'DISCOUNT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id, newChange.data.discount));
     })
+    this.ticketsService.getTicketStatus().subscribe((data: any) => {
+      this.ticketsStatus = data.map(item => new TicketStatus(item));
+      this.onGetTicketsStatus.emit(this.ticketsStatus);
+    })
+  }
+  public getListTicketStatusForRemove() {
+    return this.listTicketStatusForRemove;
+  }
+  public setListTicketStatusForRemove(data) {
+    this.listTicketStatusForRemove = data;
+  }
+  public getTicketsStatus() {
+    return this.ticketsStatus;
+  }
+  public setTicketStatusForRemove(data) {
+    this.ticketStatusForRemove = data;
+  }
+  public getTicketStatusForRemove() {
+    return this.ticketStatusForRemove;
+  }
 
-
+  public getListStatusColor() {
+    return this.listStatusColor;
   }
   public getTicketsCounts() {
     return this.ticketsCounts;
@@ -125,10 +172,8 @@ export class TicketsStateService {
     this.filter.emit(data);
   }
   public onColorStatus(data) {
+    this.listStatusColor = data;
     this.colorStatus.emit(data);
-  }
-  public onInitStatus(data) {
-    this.status.emit(data);
   }
   public onToggleAddTicket() {
     this.toggleAddTicket.emit(null);
@@ -144,9 +189,6 @@ export class TicketsStateService {
   }
   public getOnInitColor() {
     return this.colorStatus;
-  }
-  public getOnInitStatus() {
-    return this.status;
   }
   public getOnInitCount() {
     return this.count;

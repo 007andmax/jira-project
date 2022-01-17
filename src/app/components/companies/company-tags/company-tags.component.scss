@@ -1,3 +1,6 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .device-user-wrap {
   * {
     width: 100%;
@@ -8,8 +11,10 @@
   margin-top: 0px !important;
   .qt-checkbox {
     .text-content {
-      padding: 3px 0 0px;
+      @extend %body-m;
+      margin-top: -2px;
       flex: 1;
+
     }
     .name,
     .description {
@@ -21,14 +26,13 @@
     }
 
     .name {
-      font-family: Graphik-Medium, sans-serif;
-      color: #454f5b;
+      font-weight: $fw-medium;
+      color: $primary-2;
     }
 
     .description {
-      margin-top: 6px;
-      color: #637382;
-      font-size: 12px;
+      color: $gray-700;
+      @extend %сaption-l;
     }
 
     span {
@@ -50,7 +54,7 @@
 
       .qt-checkbox {
         width: 100%;
-        /*  min-height: 30px;*/
+        min-height: auto;
         max-height: 50px;
         height: auto;
         align-items: flex-start;
@@ -63,22 +67,25 @@
   min-height: 40px;
   padding: 4px 4px 0;
   font-size: 13px;
-  border: 1px solid #c4cbd5;
+  border: 1px solid $gray-400;
   border-radius: 4px;
   width: 100%;
   display: flex;
   flex-flow: row wrap;
-  background-color: #fff;
+  background-color: $white;
 }
 .select-wrapper {
   position: absolute;
   width: 366px;
-  background: white;
+  background: $white;
   height: 220px;
   margin-top: 5px;
   border-radius: 3px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   z-index: 9999;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
   .tab-wrapper {
     display: flex;
     padding: 0 20px;
@@ -91,15 +98,14 @@
       align-items: center;
       padding: 0 12px;
       border-bottom: 2px solid transparent;
-      font-family: Graphik-Medium, sans-serif;
-      color: #4f5f79;
+      color: $gray-800;
       font-size: 13px;
       transition: all 0.3s;
-      font-weight: bold;
+      font-weight: 700;
       &.active,
       &:hover {
-        color: #16a4fa;
-        border-bottom: 2px solid #16a4fa;
+        color: $primary-1;
+        border-bottom: 2px solid $primary-1;
       }
     }
   }
@@ -121,14 +127,14 @@
       label {
         width: auto;
         height: 16px;
-        font-size: 13px;
+        @extend %body-m;
         display: flex;
         align-items: center;
       }
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #c4cbd5;
+      background-color: $gray-400;
     }
     &::-webkit-scrollbar {
       width: 4px;
@@ -136,13 +142,13 @@
   }
 }
 .selected-user {
-  border: 1px solid #edf2f6;
+  border: 1px solid $background;
   border-radius: 3px;
   padding: 0 5px;
   height: 32px;
   display: flex;
   align-items: center;
-  background: #f8f9fa;
+  background: $gray-100;
   margin: 0 4px 4px 0;
   i {
     position: static;

@@ -1,6 +1,8 @@
+@import './src/assets/styles/variable';
+
 .quote-aside-preview-table {
   th {
-    border-top: solid 1px #dfe3e8;
-    background-color: #f9fafb;
+    border-top: solid 1px $gray-400;
+    background-color: $gray-100;
   }
 }

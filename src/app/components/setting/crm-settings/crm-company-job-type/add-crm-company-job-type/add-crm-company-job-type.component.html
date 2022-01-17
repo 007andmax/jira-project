@@ -1,0 +1,32 @@
+<tr
+    class="add-crm-job-type-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-crm-job-type-container'"
+    (onOutSide)="save()"
+>
+    <td></td>
+    <td
+        class="tax-name add-job-type-name"
+        [ngClass]="{'--input-error' : disableCreate}"
+    >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="disableCreate"
+        >
+            This job type is already occupied
+        </mat-error>
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Category"
+            [(ngModel)]="name"
+            (input)="checkDublicate()"
+            (keyup)="onKeyUp($event)"
+            maxlength="30"
+            required
+        >
+    </td>
+    <td class="action"></td>
+</tr>

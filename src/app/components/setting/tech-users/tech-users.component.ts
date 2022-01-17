@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,11 @@ import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DELETE_TECH_USER } from 'src/app/const/confirm';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 declare var $;
 
@@ -43,9 +48,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   cropAvatar: any;
   fileAvatar: any = null; // return result when first time image upload
   popup: boolean;
-  deletepopup: boolean;
   userId: any;
   IdList: any;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('editBtn') editBtn: DisabledBtnDirective;
+  sub: Subscription = new Subscription();
   constructor(
     private techUsersService: TechUsersService,
     private formBuilder: FormBuilder,
@@ -54,6 +61,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
   ) {
 
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
@@ -98,6 +107,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.getUsers();
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersComponent');
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
+          this.removeTechUser();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   ngAfterViewInit(): void { }
@@ -179,8 +196,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
               // this.emailNotification(this.techUserIdList);
               IdList1 = this.IdList.concat(this.techUserIdList);
             }
+            this.emailNotification(this.techUserIdList);
+            //  this.allEmailNotification(IdList1);
           }
-          this.allEmailNotification(IdList1);
+
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
@@ -229,9 +248,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.IdList.forEach(element => {
               this.archivedtechUseremailNotificationList.push(eNotifications[element]);
             });
-            this.techUserIdList.forEach(element => {
-              this.techUseremailNotificationList.push(eNotifications[element]);
-            });
+            this.techUseremailNotificationList = eNotifications;
           }
         })
       )
@@ -327,7 +344,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
-    this.deletepopup = true;
+    this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.cd.detectChanges();
   }
 
@@ -344,7 +363,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         .pipe(
           map(archiveUser => {
             this.loading = false; $(".loading").css("display", "none");
-            this.deletepopup = false;
             // deleted techuser.
             // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
             //   this.techUsers.splice(
@@ -532,8 +550,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         subscription: {}
       };
       this.loading = true; $(".loading").css("display", "block");
+      this.addBtn.setDisabled(true);
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
+          this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
           this.loading = false; $(".loading").css("display", "none");
           this.create = false;
@@ -541,12 +561,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (savedTechUsre && savedTechUsre.id) {
             this.saveUsersEmailNotifications(savedTechUsre.id);
           }
+
         },
         error => {
+          this.addBtn.setDisabled(false);
           this.create = false;
           this.loading = false; $(".loading").css("display", "none");
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
+
         }
       );
     } else {
@@ -704,11 +727,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       : null;
 
     this.loading = true; $(".loading").css("display", "block");
+    this.editBtn.setDisabled(true);
     this.techUsersService
       .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
       .subscribe(
         res => {
           // this.getUsers();
+          this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
           this.techUserForm.reset();
           if (this.techUserIdList) {
@@ -718,12 +743,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           this.selectedTechUser = null;
           this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
+
         },
         error => {
+          this.editBtn.setDisabled(false);
           this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
+
         }
       );
 
@@ -755,6 +783,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     $('body').removeClass('ng7');
+    this.sub.unsubscribe();
     // Do not forget to unsubscribe the event
   }
 

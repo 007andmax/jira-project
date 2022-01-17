@@ -8,12 +8,15 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
-import { ItemStatus } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/item-status';
+import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
+import { StatusColor } from '../../../class/status-color';
+import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
+import { TicketStatusFilter } from '../class/ticket-status-filter';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -25,9 +28,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
   @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
-  selectedCompany: Company = null;
+  public selectedCompany: Company = null;
   selectedTechUser: string = null;
   selectedStatus: string = null;
   selectedUser: string = null;
@@ -37,10 +41,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
-  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')]
+  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
+  ticketsStatus: Array<TicketStatusFilter> = [];
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   sub: Subscription = new Subscription();
+  @Output() onClose = new EventEmitter();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
@@ -49,6 +55,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    public appService: AppService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -86,15 +93,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.backgroundColor, item.borderColor);
+        return new StatusColor(item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
     })
-    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
-      let ticketsColor = new TicketsColor(data);
-      this.ticketsStateService.onInitStatus(ticketsColor);
-    })
     //    this.getCounts();
 
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
@@ -103,25 +106,36 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateCounts);
-
-
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item));
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
+    })
+    this.sub.add(onGetTicketsStatus);
   }
   public onClearAll() {
 
     if (!this.companyDp.isDisabled) this.ticketsFilter.setCompany(null);
     this.ticketsFilter.setTechUser(null);
     this.ticketsFilter.setUser(null);
+    if (this.ticketsFilter.selectedStatus) {
+      this.listType = "ALL";
+      this.ticketsFilter.setListType("ALL");
+    }
     this.ticketsFilter.setStatus(null);
+    this.ticketsFilter.setTags([]);
     this.usersDp.clearWithOutChanges();
     if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
-
-    this.listType = "ALL";
-    this.ticketsFilter.setListType("ALL");
+    this.tagsDp.clearWithOutChanges();
+    this.ticketsFilter.setCustomStatus(false);
+    //  this.listType = "ALL";
+    // this.ticketsFilter.setListType("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
+    if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
+    if (this.appService.checkMobile()) this.close();
   }
 
   public onChangeCounterFilter() {
@@ -140,7 +154,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
-
+  close() {
+    this.onClose.emit(null);
+  }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -152,8 +168,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   public setTypeFilter(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    if (type !== 'RECURRING_TICKETS') this.getCount();
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      if (type !== 'RECURRING_TICKETS') this.getCount();
+    }
+
   }
 
   public onGetUsers(data) {
@@ -187,12 +206,13 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
     }
 
-
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    }
   }
-  onSelectTechUser(item) {
+  public onSelectTechUser(item) {
 
     if (!item) {
       this.ticketsFilter.setTechUser(null);
@@ -205,25 +225,35 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
 
     }
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    }
 
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-    this.onChangeCounterFilter();
   }
 
-  onSelectStatus(item) {
+  public onSelectStatus(item) {
     if (!item) {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);
-
+      this.ticketsFilter.setCustomStatus(false);
     } else {
-      this.ticketsFilter.setStatus(item.status);
-      this.setTypeFilter(item.status);
+      this.ticketsFilter.setStatus(item.name);
+      let findStatus = this.listsStatus.find(status => status.title === item.title);
+      if (findStatus) {
+        this.ticketsFilter.setCustomStatus(false);
+        this.setTypeFilter(findStatus.status);
+      } else {
+        this.ticketsFilter.setCustomStatus(true);
+        this.setTypeFilter("OPEN");
+      }
+
     }
     this.onChangeCounterFilter();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
   }
-  onSelectUser(item) {
+  public onSelectUser(item) {
 
     if (!item) {
       this.ticketsFilter.setUser(null);
@@ -236,20 +266,32 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
 
     }
-    if (!this.blockFilterUser) {
+
+    if (!this.blockFilterUser && !this.appService.checkMobile()) {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
     }
     this.blockFilterUser = false;
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) this.onChangeCounterFilter();
   }
 
   onChangeTags(tags) {
     //   this.ticketsStateService.onChangeTagsFilter(tags);
     this.ticketsFilter.setTags(tags);
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    }
+
+  }
+
+  applyFilters() {
+
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
+    if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.onChangeCounterFilter();
+    this.close();
   }
   getTechUserList() {
     return this.techUsersList.map(item => {

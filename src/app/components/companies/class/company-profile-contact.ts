@@ -1,28 +1,28 @@
 export class CompanyProfileContact {
-    firstName:string;
-    phoneNumbers:any;
-    lastName:string;
-    primaryEmail:string;
-    subscription:any;
-    designation:string;
-    avatar:string;
-    id:string;
-    constructor () {
+    firstName: string;
+    phoneNumbers: any;
+    lastName: string;
+    primaryEmail: string;
+    subscription: any;
+    jobTitleId: string;
+    avatar: string;
+    id: string;
+    constructor() {
         this.firstName = null;
         this.phoneNumbers = [{
             number: '',
             typeNumber: 'OFFICE'
         }];
         this.lastName = null,
-        this.primaryEmail = null,
-        this.subscription = {
-            invoice: true,
-            ticket: true,
-            ticketManager:  false
-        }
+            this.primaryEmail = null,
+            this.subscription = {
+                invoice: true,
+                ticket: true,
+                ticketManager: false
+            }
     }
     public fullVersion() {
-        this.designation = null;
+        this.jobTitleId = null;
     }
-   
+
 }

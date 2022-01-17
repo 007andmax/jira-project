@@ -40,6 +40,9 @@
         height: 260px;
         overflow: hidden;
         margin: 4px 0 0 !important;
+        @media (max-width: 767px) {
+          width: 100% !important;
+        }
         .content {
             height: 100%;
 

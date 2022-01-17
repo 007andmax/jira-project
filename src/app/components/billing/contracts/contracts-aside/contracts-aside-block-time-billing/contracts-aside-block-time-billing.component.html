@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="qt-pt-15 qt-pl-32 qt-pr-32 qt-pb-24 contracts-page__gray-block">
-        <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-16">Select how you bill your customer</div>
+        <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-dark qt-mb-16">Select how you bill your customer</div>
         <div class="qt-df qt-mb-24">
             <div class="qt-input-block --required qt-w25 qt-mr-16">
                 <label>Included block time</label>
@@ -141,7 +141,7 @@
                 ></app-invoice-form-ticket-edit-taxes>
             </div>
         </div>
-        <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-16">
+        <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-dark qt-mb-16">
             Create Customer services to track used block time hours
         </div>
         <div class="table-last-icon-wrapper qt-mb-16">
@@ -185,7 +185,7 @@
                 <div class="qt-toggle__circle"></div>
             </div>
             <div>
-                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
                     Track and bill services outside of included block time services
                 </div>
                 <div class="qt-mt-4 qt-fs-12 qt-lh-133 qt-color-dark-light">
@@ -236,7 +236,7 @@
                 >
                     <div class="qt-toggle__circle"></div>
                 </div>
-                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
                     Enable Time Rollover of unused hours for following month
                 </div>
             </div>
@@ -244,7 +244,7 @@
                 class="qt-df qt-ai-c"
                 *ngIf="toggleTimeRollover"
             >
-                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light qt-mr-8">Max roll over hours:</div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light qt-mr-8">Max roll over hours:</div>
                 <div class="qt-input-block max-roll-over-input">
                     <input
                         decimalNumber
@@ -265,7 +265,7 @@
                 >
                     <div class="qt-toggle__circle"></div>
                 </div>
-                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
                     Notify to Agents/User when block time has been used
                 </div>
             </div>
@@ -274,13 +274,13 @@
                 *ngIf="toggleNotifyAgentsUser"
             >
                 <div
-                    class="qt-fs-12 qt-ff-gm qt-mr-16 qt-color-info qt-pointer"
+                    class="qt-fs-12 qt-fw-600 qt-mr-16 qt-color-info qt-pointer"
                     (click)="clearAllSelectedUsers()"
                 >
                     Select None
                 </div>
                 <div
-                    class="qt-fs-12 qt-ff-gm qt-mr-8 qt-color-info qt-pointer"
+                    class="qt-fs-12 qt-fw-600 qt-mr-8 qt-color-info qt-pointer"
                     (click)="selectAllUsers()"
                 >
                     Select All
@@ -310,7 +310,7 @@
                 >
                     <div class="qt-toggle__circle"></div>
                 </div>
-                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
             </div>
             <div
                 class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"

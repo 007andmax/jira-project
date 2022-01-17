@@ -1,49 +1,88 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .ticket-add-aside {
   .ticket-priority {
-      width: 160px;
-      font-size: 12px;
+    width: 160px;
+    font-size: 12px;
+    @media (max-width: 767px) {
+      display: none;
+    }
 
-      .dropdown-toggle {
-        height: 32px;
-        border: none;
-        background-color: white;
+    .dropdown-toggle {
+      height: 32px;
+      border: none;
+      background-color: $white;
+    }
+    .default-value {
+      top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .icon__close {
+    @media (max-width: 767px) {
+      background-image: url("/assets/img/icons/close-white.svg");
+    }
+  }
+  .qt-input-line {
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+
+    .qt-input-block {
+      @media (max-width: 767px) {
+        margin: 0 0 16px 0;
       }
-      .default-value {
-        top: 0;
-        height: 100%;
-        display: flex;
-        align-items: center;
+
+      &:last-child {
+        @media (max-width: 767px) {
+          margin: 0;
+        }
       }
+    }
   }
 
+  .users-to-notify {
+    margin-top: 0;
+  }
+
+  &__priority-level-input {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
 }
 
-.qt-aside{
+.qt-aside {
   &__title {
     margin-right: 24px;
   }
 
   &__ticket-name {
-    font-size: 12px;
-    color: #4f5f79;
+    @extend %сaption-l-sb;
+    color: $gray-800;
     margin-right: 16px;
-    font-weight: 600;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 
   .create-ticket-btn {
     margin-right: 16px;
     width: 140px;
   }
-
 }
-
-
 
 .users-to-notify {
   margin-top: 35px;
   &__title {
-    font-weight: 600;
-    font-size: 12px;
+    @extend %сaption-l-sb;
+    color: $primary-2;
     margin-bottom: 14px;
   }
 
@@ -52,15 +91,15 @@
   }
 
   /deep/ #dropdownTehuser {
-      max-height: 24px;
-      max-width: 24px;
-      border-radius: 50%;
-      margin-right: 4px;
-      overflow: hidden;
-      color: transparent;
-      background-image: url('/assets/img/icons/assign-user.svg');
-      background-size: cover;
-      background-repeat: no-repeat;
+    max-height: 24px;
+    max-width: 24px;
+    border-radius: 50%;
+    margin-right: 4px;
+    overflow: hidden;
+    color: transparent;
+    background-image: url("/assets/img/icons/adduser.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   &__add_users {
@@ -69,86 +108,90 @@
     background-size: contain;
     border-radius: 50%;
     cursor: pointer;
-   }
+  }
 
   /deep/ .select-wrapper.dropdown-assign-ticket {
-      right: unset;
-      bottom: 45px;
-      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+    right: unset;
+    bottom: 45px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
   }
 }
 
 .assigned-users-list {
-    display: flex;
+  display: flex;
 
-    .default-user-avatar {
-      width: 24px;
-      height: 24px;
-    }
+  .default-user-avatar {
+    width: 24px;
+    height: 24px;
+  }
 
-   .assigned-ticket-user__item {
-      width: 24px;
-      height: 24px;
-      margin-right: 2px;
-      position: relative;
-      font-size: 10px;
-      cursor: pointer;
+  .assigned-ticket-user__item {
+    width: 24px;
+    height: 24px;
+    margin-right: 2px;
+    position: relative;
+    font-size: 10px;
+    cursor: pointer;
 
-
-  .assigned-ticket-user__checkmark {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
+    .assigned-ticket-user__checkmark {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
 
       &:before {
         position: absolute;
-        content: '';
+        content: "";
         width: 16px;
         height: 16px;
-        border: 1px solid #c4cbd5;
-        background: white;
+        border: 1px solid $gray-500;
+        background: $white;
         border-radius: 50%;
         bottom: -7px;
       }
     }
 
-      input {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center;
+    input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
 
-        &:checked ~ .assigned-ticket-user__checkmark {
-          &:before {
-            background-image: url('/assets/img/icons/selected.svg');
-            border: none;
-          }
-
+      &:checked ~ .assigned-ticket-user__checkmark {
+        &:before {
+          background-image: url("/assets/img/icons/selected.svg");
+          border: none;
         }
       }
     }
+  }
 }
 .assigned-users-type {
   display: flex;
-}
-.assigned-users-type-clients {
-  border-right: 1px solid #ccc;
 }
 #add-ticket-describe-issue {
   height: auto;
   min-height: 64px;
 }
-[contenteditable=true]:empty:before{
+[contenteditable="true"]:empty:before {
   content: attr(placeholder);
   pointer-events: none;
   display: block; /* For Firefox */
+}
+.device-user {
+  width: 24px;
+  height: 24px;
+}
+.qt-input-block__label {
+  &::after {
+    display: none;
+  }
 }

@@ -3,7 +3,7 @@
     [ngClass]="class"
 >
     <div class="qt-inputs-row">
-        <div class="create-product__col --required">
+        <div class="create-product__col qt-flex-md-100 --required">
             <mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getManufactureIsExist()"
@@ -20,7 +20,7 @@
                 placeholder="Enter Item Number"
             >
         </div>
-        <div class="create-product__col --required">
+        <div class="create-product__col qt-flex-md-100 --required">
             <mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getILCIsExist()"
@@ -36,7 +36,7 @@
                 placeholder="Enter ILC Number"
             >
         </div>
-        <div class="create-product__col">
+        <div class="create-product__col qt-flex-md-100">
             <p class="label-name">GL Number</p>
             <app-select-search
                 [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
@@ -73,22 +73,18 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="create-product-taxes-select">
-            <app-taxes
-                [selectedTax]="defaultSelectedTax"
-                (taxesChange)="onTaxesChange($event)"
-            ></app-taxes>
-        </div>
-        <div class="create-product__col --required">
+        <div class="create-product__col qt-w-md-50 --required">
             <p class="label-name">Cost</p>
             <input
                 class="qt-input-40 inventory-add-body__input"
                 [ngClass]="{'--input-error' : !validate.getCostSale()}"
                 type="text"
-                number
-                [money]="true"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
-                [(ngModel)]="inventory.cost"
+                (onChange)="changeCost($event)"
+                [value]="inventory.cost"
                 placeholder="Enter Cost"
             >
             <mat-error
@@ -98,7 +94,18 @@
                 Cost cannot be higher than Price
             </mat-error>
         </div>
-        <div class="create-product__col --required">
+        <div class="create-product__col qt-w-md-50 --required">
+            <p class="label-name">Markup %</p>
+            <input
+                class="qt-input-40 inventory-add-body__input"
+                type="text"
+                decimalNumber
+                (onChange)="changeMarkup($event)"
+                [value]="inventory.markup"
+                placeholder="Enter Markup"
+            >
+        </div>
+        <div class="create-product__col qt-w-md-50 --required">
             <mat-error
                 class="qt-tooltip-error"
                 *ngIf="!validate.getSale()"
@@ -110,13 +117,23 @@
                 class="qt-input-40 inventory-add-body__input"
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getSale()}"
-                number
-                [money]="true"
-                [(ngModel)]="inventory.sale"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                [value]="inventory.sale"
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
                 (input)="validate.resetSale()"
+                (onChange)="changeSales($event)"
                 placeholder="Enter Price"
             >
+        </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="create-product-taxes-select qt-flex-md-100">
+            <app-taxes
+                [selectedTax]="defaultSelectedTax"
+                (taxesChange)="onTaxesChange($event)"
+            ></app-taxes>
         </div>
     </div>
     <div class="qt-inputs-row">

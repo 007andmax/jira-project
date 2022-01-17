@@ -4,6 +4,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyValdiate } from '../class/company-validate';
 import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-company-add-aside',
@@ -18,6 +19,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
+    public appService: AppService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.version = 'short';
     this.company = new CompanyProfile();
     this.validate = new CompanyValdiate();
+    if (this.appService.checkMobile()) this.appService.toggleMobileAside(false);
     this.cd.detectChanges();
   }
 
@@ -41,6 +44,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onShowAside() {
     let getShowAsideForAdd = this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
     })
     this.sub.add(getShowAsideForAdd);
   }

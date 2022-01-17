@@ -27,6 +27,7 @@ export class DevicesStateService {
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
+  preloaderDevices: boolean = true;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -40,9 +41,12 @@ export class DevicesStateService {
         Object.keys(data).forEach(key => {
           if (data[key]) data[key] = data[key].map(item => new Device(item));
         })
+        this.preloaderDevices = false;
         this.setAllDevices(data);
         this.onInitGetDevices(data);
+
       }, err => {
+        this.preloaderDevices = false;
         this.setAllDevices(null);
         this.onInitGetDevices(null);
       })
@@ -100,6 +104,9 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  public getPreloaderDevices() {
+    return this.preloaderDevices;
   }
   public setLabel(companyId, id, label) {
     this.allDevices[companyId].forEach(element => {

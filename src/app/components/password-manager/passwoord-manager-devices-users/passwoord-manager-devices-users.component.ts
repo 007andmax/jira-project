@@ -9,4 +9,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 export class PasswoordManagerDevicesUsersComponent extends DropDownComponent {
 
 
+  isIOSDevice() {
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
 }

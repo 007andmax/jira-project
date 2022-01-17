@@ -22,6 +22,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { TicketStateService } from '../services/ticket-state.service';
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { AppService } from 'src/app/states/app/app.service';
+import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
+import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -36,6 +40,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
   @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
   @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
@@ -49,28 +55,32 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   @Output() onClosed = new EventEmitter();
   showAddUpdateUser = false;
   isUpdate: boolean = false;
+  isUpdateMobile: boolean = false;
   isUpdateAndClose: boolean = false;
   files: any[] = [];
   tab: string = "NOTE";
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
-  constructor(private ticketsStateService: TicketsStateService,
+  constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
-    private usersStateService: UsersStateService,
-    private ticketsService: TicketsService,
+    public usersStateService: UsersStateService,
+    public ticketsService: TicketsService,
     private elRef: ElementRef,
-    private modalService: NgbModal,
+    public modalService: NgbModal,
     private devicesService: DevicesService,
     private supportService: SupportService,
-    private supportStateService: SupportStateService,
-    private devicesRealTimeService: DevicesRealTimeService,
-    private draftEmailService: DraftEmailService,
+    public supportStateService: SupportStateService,
+    public devicesRealTimeService: DevicesRealTimeService,
+    public draftEmailService: DraftEmailService,
     private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
-    private ticketStateService: TicketStateService,
+    public ticketStateService: TicketStateService,
+    public appService: AppService,
+    public addUsersNotifyStateService: AddUsersNotifyStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
     this.supportStateService.getHandleSendMode().subscribe(data => {
       let draftEmail: DraftEmail = new DraftEmail();
@@ -105,6 +115,17 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       if (this.remoteSession) this.removeSession();
     })
     this.sub.add(getOnEditTicket);
+    this.ticketStateService.onSetTabUpdate.subscribe(data => {
+      this.setTab(data);
+    })
+    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
+      if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_UPDATE) {
+        this.ticketProfileFormUpdate.clearShares();
+        data.forEach(element => this.ticketProfileFormUpdate.toggleShares(element));
+
+      }
+    })
+    this.sub.add(onChangeAssignedUser);
   }
   onConnectRemoteAccess(data) {
     this.companyIdForSupport = data.companyId;
@@ -146,10 +167,13 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   public reset() {
     if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").value = "";
-    this.tab = "NOTE";
+    if (!this.appService.checkMobile()) this.tab = "NOTE";
     this.files = [];
     this.showAddUpdateUser = false;
     this.ticketProfileFormUpdate = new TicketProfileFormUpdate();
+  }
+  closeMobile() {
+    this.ticketStateService.setTabUpdate(null);
   }
   getUsersForUpdate() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
@@ -157,6 +181,10 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
     return [...techusers, ...clientUsers];
+  }
+  updateMobile() {
+    this.isUpdateMobile = true;
+    this.update();
   }
   update() {
     if (this.tab === "NOTE") {
@@ -176,6 +204,11 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   onUpdateTicket(data) {
     this.updateBtn.setDisabled(true);
+    if (this.appService.checkMobile()) {
+      if (this.tab === "PRODUCT") this.selectProducts.initUpdateMobile();
+      if (this.tab === "SERVICE") this.selectServices.initUpdateMobile();
+    }
+    if (this.updateMobileBtn) this.updateMobileBtn.setDisabled(true);
     this.isUpdate = true;
     this.ticketsService.updateTicket(data).subscribe(data => {
       this.isUpdate = false;
@@ -189,9 +222,18 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.updateBtn.setDisabled(false);
+      if (this.updateMobileBtn) this.updateMobileBtn.setDisabled(false);
+      if (this.isUpdateMobile) this.closeMobile();
+      if (this.appService.checkMobile()) {
+        if (this.tab === "PRODUCT") this.selectProducts.complateUpdateMobile();
+        if (this.tab === "SERVICE") this.selectServices.complateUpdateMobile();
+      }
+      this.isUpdateMobile = false;
     }, err => {
       this.isUpdate = false;
+      this.isUpdateMobile = false;
       this.updateBtn.setDisabled(false);
+      if (this.updateMobileBtn) this.updateMobileBtn.setDisabled(false);
     })
   }
   updateAndClose() {
@@ -216,6 +258,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
     }
+    if (this.tab == null) this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
   }
   onUpdateTicketAndClose(data) {
 
@@ -263,7 +306,20 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate.setServices(data);
   }
   onToggleAddUpdateUser() {
+    if (this.appService.checkMobile()) {
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+      modalRef.componentInstance.userList = this.getUsersForAssign();
+      modalRef.componentInstance.selectedUsers = this.usersStateService.getAllUsers().filter(item => this.ticketProfileFormUpdate.shares.find(share => share.user.id === item.id))
+      this.addUsersNotifyStateService.setAction(USERS_TO_ADD_UPDATE);
+      return;
+    }
     this.showAddUpdateUser = !this.showAddUpdateUser;
+  }
+  getUsersForAssign() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+
   }
   onSelectUpdateUser(data) {
     this.lisUpdateUser = data;

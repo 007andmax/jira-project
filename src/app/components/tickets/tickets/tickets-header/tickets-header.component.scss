@@ -1,4 +1,5 @@
-@import "../../../../../assets/styles/variable";
+//@import "../../../../../assets/styles/variable";
+@import "./src/assets/styles/variable";
 
 .tickets-list-search {
   margin-right: 8px;
@@ -9,15 +10,73 @@
   background-repeat: no-repeat;
   background-position: 10px center;
   background-size: 16px;
-  background-color: white;
-  color: #16a4fa;
-  color: #364656;
+  background-color: $white;
+  color: $primary-2;
   border: none;
-  background-image: url(../../../../../assets/img/icons/filter.svg);
-
+  background-image: url("../../../../../assets/img/icons/filter.svg");
+  @media (max-width: 767px) {
+    background-image: url("/assets/img/icons/filter-white.svg");
+    background-color: transparent;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
+    padding: 0;
+  }
+  span {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
   &.active {
+    color: $primary-1;
     background-color: #16a4fa10;
     border: none;
     background-image: url(../../../../../assets/img/icons/filter-active.svg);
+  }
+}
+.icon__search-white {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+.list-filters {
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  margin: -8px -8px 8px -8px;
+  /deep/.mat-form-field-infix {
+    overflow: auto;
+    border: none;
+    border-radius: 0px;
+  }
+  /deep/.mat-chip-list-wrapper {
+    width: fit-content;
+    margin: 0px;
+    flex-wrap: unset;
+    .mat-standard-chip {
+      margin: 0px 8px 0px 0px;
+    }
+  }
+}
+.status {
+  text-transform: capitalize;
+}
+.is-exist-filters {
+  position: relative;
+  &::before {
+    @media (max-width: 767px) {
+      display: block;
+    }
+    display: none;
+    content: " ";
+    position: absolute;
+    top: 1px;
+    right: 0px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff5263;
+    border-radius: 10px;
   }
 }

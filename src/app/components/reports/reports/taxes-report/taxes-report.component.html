@@ -23,14 +23,14 @@
     </div>
     <div class="header-product-list-ticket" *ngIf="taxes.lines.length > 0">
       <!--HEADER-->
-      <h3 [textContent]="taxes.techCompanyName"></h3>
+      <h5 class="qt-fw-600 qt-mb-6 qt-mt-20" [textContent]="taxes.techCompanyName"></h5>
       <p *ngIf="taxes.type ==='DETAILED' ">Account Recivable for <span [textContent]="taxes.clientCompanyName"></span>
       </p>
     </div>
-    
+
      <div>
-       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
-     
+       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>
+
      </div>
   <app-report-footer></app-report-footer>
    </div>

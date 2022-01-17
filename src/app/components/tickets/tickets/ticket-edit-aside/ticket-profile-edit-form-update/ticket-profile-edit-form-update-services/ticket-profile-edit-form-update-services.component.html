@@ -1,0 +1,86 @@
+<div class="cps-block__service-block">
+    <div class="service-item">
+        <div class="service-item__first-line d-f relative">
+            <app-services-list
+                class="service-item__input device"
+                #serviceDP
+                [type]="'TICKET'"
+                [editItem]="editService.item"
+                [ngClass]="{'--input-error':!validate}"
+                [itemList]="servicesList"
+                (selectedServicesItem)="selectService($event)"
+            ></app-services-list>
+            <mat-error
+                class="qt-tooltip-error --max-width"
+                *ngIf="!validate"
+            >
+                The Service is required
+            </mat-error>
+            <app-ticket-profile-updates-service-timepicker
+                [validate]="validateQuantity"
+                [errorMessage]="'You have to set any time value'"
+                (onChangeStart)="onChangeStartTimePicker($event)"
+                (onChangeEnd)="onChangeEndTimePicker($event)"
+                (onSetEnd)="onSetDurationEnd($event)"
+                #editTimePicker
+                [quantity]="quantity"
+                [editMode]="true"
+                [start]="durationStart"
+                [end]="durationEnd"
+                *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+            ></app-ticket-profile-updates-service-timepicker>
+            <app-ticket-profile-updates-service-duration
+                #durationPicker
+                [validate]="validateQuantity"
+                [errorMessage]="'You have to set any time value'"
+                [editMode]="true"
+                [hour]="hours"
+                [minute]="minutes"
+                (onChange)="onChangeDuration($event)"
+                *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
+            ></app-ticket-profile-updates-service-duration>
+            <app-date-picker
+                #datePicker
+                [placement]="'top'"
+                [editMode]="true"
+                [editDate]="editService.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
+                [useMinDate]="false"
+                (onChange)="onChangeDatePicker($event)"
+            ></app-date-picker>
+        </div>
+        <div>
+            <div class="editable-description editable-chat">
+                <textarea
+                    name="cps-chat"
+                    class="cps-block__content-textarea"
+                    appTextArea
+                    [(ngModel)]="editService.description"
+                    maxlength="500"
+                    cols="5"
+                    rows="1"
+                    id="service-description"
+                    placeholder="Write ticket conversation here…"
+                ></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button"
+                [ngClass]="{'--loading':isUpdate}"
+                appDisabledBtn
+                #updateMobileBtn="disabled"
+                (onClick)="saveService()"
+            >
+                <span
+                    class="ng-star-inserted"
+                    *ngIf="!isUpdate"
+                >
+                    Save
+                </span>
+                <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@
     .report-caret-icon {
       position: absolute;
       top: 17px !important;
-      right: 11px;
+      right: 12px;
     }
 
     .dropdown-menu {
@@ -30,9 +30,9 @@
         text-align: left;
       }
       &:hover {
-        background: #f9fafb;
+        background: $gray-100;
         button {
-          color: #4c5c6f;
+          color: $gray-800;
         }
       }
     }

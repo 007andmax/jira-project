@@ -1,0 +1,216 @@
+<div
+    class="invoices-page__aside qt-aside-modern --x-large aside-preview user-aside-detail-page__aside"
+    *ngIf="open"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">User Detail</div>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
+                (click)="showAsideForDraftEmail()"
+                placement="top"
+                container="body"
+                [ngbTooltip]="'Draft Email'"
+            ></div>
+            <div
+                class="icon__close qt-aside-modern__header-close"
+                (click)="close()"
+            ></div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content --no-padding --no-footer ">
+        <div class="user-detail-info">
+            <div class="user-detail-aside__header d-f jc-sb ai-c">
+                <div class="d-f">
+                    <div
+                        class="user-detail-aside__header-avatar"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
+                    <div>
+                        <div class="d-f ai-c">
+                            <div class="user-detail-aside__header-company">
+                                <span [textContent]="ticketsListService.getUserName(user)"></span>
+                            </div>
+                        </div>
+                        <div class="user-detail-aside__header-info">
+                            <span [textContent]="user.designation"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="user-detail-aside__divider">
+            <div class="user-detail__row-info">
+                <div class="qt-input-block qt-mb-16">
+                    <label class="qt-mb-4">Company</label>
+                    <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    <app-drop-down
+                        class="user-detail-edit-company"
+                        [placeholder]="'Company'"
+                        [field]="'name'"
+                        [list]="companies"
+                        [search]="true"
+                        [change]="true"
+                        [heightInput]="'32px'"
+                        [editItem]="selectedCompany"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectCompany($event)"
+                    >
+                    </app-drop-down>
+                </div>
+                <div
+                    class="qt-input-block qt-mb-16"
+                    [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
+                >
+                    <label class="qt-mb-4">Email Address</label>
+                    <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    <input
+                        type="text"
+                        [(ngModel)]="user.primaryEmail"
+                        (blur)="onCheckEmail()"
+                        placeholder="Enter Email"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getPrimaryContactEmail()"
+                    >
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getExistPrimaryContactEmail()"
+                    >
+                        The email address is already occupied
+                    </mat-error>
+                </div>
+                <div
+                    class="qt-input-block"
+                    [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
+                >
+                    <label class="qt-mb-4">Contact No.</label>
+                    <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    <input
+                        type="text"
+                        class="qt-w100"
+                        [(ngModel)]="user.phoneNumbers[0].number"
+                        (input)="onCheckPhoneNumber(0)"
+                        (blur)="onUpdatePhoneNumber()"
+                        placeholder="Enter Primary Phone"
+                        prefix="+1"
+                        mask=" (000) 000-0000"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getPhoneNumber(0)"
+                    >
+                        Phone number is required
+                    </mat-error>
+                </div>
+            </div>
+            <hr class="user-detail-aside__divider">
+            <div class="user-detail__row-info">
+                <div class="user-detail__row-info-line user-detail-aside-subscription">
+                    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
+                        <div class="user-detail__row-info-label">Subscription</div>
+                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    </div>
+                    <app-company-subscription
+                        [editItem]="user.subscription"
+                        (subscribeChange)="onChangeSubscriptions($event)"
+                    ></app-company-subscription>
+                    <!-- <app-user-table-subscription
+                        class="users-table__subscription--dropdown"
+                        [subscription]="user.subscription"
+                        (onChange)="onChangeSubscriptions($event)"
+                    ></app-user-table-subscription> -->
+                </div>
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label qt-mb-4">Job description</div>
+                    <div
+                        class="user-detail__row-info-value"
+                        [ngClass]="{'container':!showFullJobDescription}"
+                    >
+                        <span
+                            [textContent]="getJobDescription(user.jobDescription)"
+                            (click)="toggleEditJobDescription = true"
+                            *ngIf="!toggleEditJobDescription"
+                        ></span>
+                        <button
+                            *ngIf="!showFullJobDescription && user.jobDescription && user.jobDescription.length > 120 && !toggleEditJobDescription"
+                            (click)="showFullJobDescription = !showFullJobDescription"
+                            class="read-more"
+                        >
+                            read more...
+                        </button>
+                        <textarea
+                            id="description-global-note"
+                            *ngIf="toggleEditJobDescription"
+                            [value]="user.jobDescription"
+                            (input)="onChangeJobDescription($event)"
+                            (blur)="updateUser()"
+                            class="terms-n-conditions__textarea qt-textarea"
+                            placeholder="Enter job description"
+                            appTextArea
+                            cols="30"
+                            [default]="3"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                </div>
+                <hr class="user-detail-aside__divider">
+                <div class="user-detail__row-info-line">
+                    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-4">
+                        <div class="user-detail__row-info-label">Tags</div>
+                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    </div>
+                    <app-company-tags
+                        #companyTags
+                        [showLabel]="false"
+                        [selectedTag]="user.tags"
+                        [placement]="'top'"
+                        [blockUserTag]="true"
+                        (tagsChange)="onChangeTags($event)"
+                    ></app-company-tags>
+                </div>
+            </div>
+        </div>
+        <div class="  user-detail-statictics">
+            <div class="tabs">
+                <span
+                    class="pointer"
+                    [ngClass]="{'active':tab === 'tickets'}"
+                    (click)="setTab('tickets')"
+                >
+                    Tickets
+                </span>
+                <span
+                    class="pointer"
+                    [ngClass]="{'active':tab === 'passwords'}"
+                    (click)="setTab('passwords')"
+                >
+                    Passwords
+                </span>
+                <span
+                    class="pointer"
+                    [ngClass]="{'active':tab === 'documents'}"
+                    (click)="setTab('documents')"
+                >
+                    Documents
+                </span>
+            </div>
+            <users-aside-detail-tickets
+                *ngIf="tab === 'tickets'"
+                #ticketsDetail
+                [setUser]="user"
+            ></users-aside-detail-tickets>
+            <users-aside-detail-documents
+                *ngIf="tab === 'documents'"
+                [user]="user"
+            ></users-aside-detail-documents>
+            <users-aside-detail-passwords
+                *ngIf="tab === 'passwords'"
+                [user]="user"
+            ></users-aside-detail-passwords>
+        </div>
+    </div>
+</div>

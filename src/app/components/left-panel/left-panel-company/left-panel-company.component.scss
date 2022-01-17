@@ -1,15 +1,17 @@
+@import './src/assets/styles/variable';
+
 .active {
-    background: #3e4b61;
-     color: #16a4fa;
-    border-left: 2px solid #16a4fa;
+    background: $gray-800;
+     color: $primary-1;
+    border-left: 2px solid $primary-1;
 }
 .category-item {
     &:hover {
-        color: #16a4fa;
+        color: $primary-1;
     }
 }
 .category-name  {
-    color: white;
+    color: $white;
 }
 
 
@@ -33,7 +35,7 @@ _menu-info {
     .empty-logo {
       width: 24px;
       height: 24px;
-      border: 1px solid gray;
+      border: 1px solid $gray-800;
       border-radius: 100%;
       display: flex;
       justify-content: center;

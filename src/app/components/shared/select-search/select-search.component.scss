@@ -1,8 +1,11 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 .no-valid {
-    border: 1px solid red !important;
+    border: 1px solid $error !important;
 }
 .disabled {
-  background-color: #ebebe4;
+  background-color: $gray-400;
   cursor: default !important;
 }
 /deep/.qt-dropdown {
@@ -10,14 +13,14 @@
   &.with-placeholder {
     height: 40px;
     border-radius: 3px;
-    border: 1px solid #c4cbd5;
+    border: 1px solid $gray-500;
     .placeholder {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: #9ca5b6;
-      font-size: 13px;
+      color: $gray-600;
+      @extend %body-m;
     }
     .selected {
       background: transparent;
@@ -38,7 +41,7 @@
     }
   }
   .dropdown-menu {
-    background: #fff;
+    background: $white;
     width: 100%;
     top: auto;
     max-height: 190px;
@@ -46,7 +49,7 @@
     position: absolute;
     .dropdown-item {
       outline: none;
-      background: #fff;
+      background: $white;
       width: 100%;
       height: 38px;
       display: block;
@@ -54,16 +57,16 @@
       justify-content: flex-start;
       padding: 0 20px;
       border: none;
-      font-size: 14px;
+      @extend %body-m-m;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       transition: all .3s;
-      color: #4c5c6f;
+      color: $primary-2;
       &:hover {
-        color: #fff;
-        background: #16a4fa;
+        color: $white;
+        background: $primary-1;
       }
     }
   }
@@ -71,11 +74,13 @@
      height: 40px;
      padding: 10px 14px;
      border-radius: 4px;
-     border: solid 1px #c4cbd5;
-     background-color: #ffffff;
+     border: solid 1px $gray-500;
+     background-color: $white;
+     color: $gray-800;
      width: 100%;
-     &:placeholder {
-        color: #9ca5b6;
+     @extend %body-m;
+     &::placeholder {
+        color: $gray-600;
      }
   }
   .icn-remove-old,
@@ -83,14 +88,13 @@
     position: absolute;
     cursor: pointer;
   }
-  .report-caret-icon {
-    top: calc(50% - 2px) !important;
-    right: 15px;
-  }
   .icn-remove-old {
-    //top: calc(50% - 5px) !important;
-    top: calc(50% - 8px) !important;
+    top: calc(50% - 6px);
     right: 12px;
+
+    @media (max-width: 767px) {
+      top: calc(50% - 11px) !important;
+    }
   }
   &.right {
     .dropdown-menu {
@@ -111,7 +115,7 @@
 .qt-dropdown {
   .dropdown-menu {
     &::-webkit-scrollbar-thumb {
-      background-color: #16a4fa;
+      background-color: $primary-1;
     }
   }
 }

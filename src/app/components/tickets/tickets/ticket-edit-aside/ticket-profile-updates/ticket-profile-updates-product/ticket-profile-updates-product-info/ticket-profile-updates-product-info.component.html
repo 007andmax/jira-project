@@ -15,18 +15,20 @@
             <div class="ticket-updates__ticket-title">
                 <pre [textContent]="product.item.description"></pre>
             </div>
-            <div
-                class="ticket-updates__ticket-price"
-                [textContent]="'$' + getPrice()"
-            ></div>
-            <div
-                class="ticket-updates__ticket-qty"
-                [textContent]="product.quantity"
-            ></div>
-            <div
-                class="ticket-updates__ticket-total"
-                [textContent]="'$' + getTotal(product.price,product.quantity)"
-            ></div>
+            <div class="ticket-updates__ticket-data">
+                <div
+                    class="ticket-updates__ticket-price"
+                    [textContent]="'$' + getPrice()"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-qty"
+                    [textContent]="product.quantity"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-total"
+                    [textContent]="'$' + getTotal(product.price,product.quantity)"
+                ></div>
+            </div>
             <app-date-picker
                 [isDisabled]="isBlockChange"
                 placement="top"
@@ -77,6 +79,15 @@
                 <li
                     ngbDropdownItem
                     (click)="edit()"
+                    *ngIf="!isIOSDevice()"
+                >
+                    <i class="icn-16 edit-grey-ng2"></i>
+                    Edit
+                </li>
+                <li
+                    ngbDropdownItem
+                    (touchstart)="edit()"
+                    *ngIf="isIOSDevice()"
                 >
                     <i class="icn-16 edit-grey-ng2"></i>
                     Edit
@@ -84,8 +95,17 @@
                 <li
                     ngbDropdownItem
                     (click)="removeProduct()"
+                    *ngIf="!isIOSDevice()"
                 >
-                    <i class="icn-16 archive-grey-ng2"></i>
+                    <i class="icn-16 icon__remove"></i>
+                    Delete
+                </li>
+                <li
+                    ngbDropdownItem
+                    (touchstart)="removeProduct()"
+                    *ngIf="isIOSDevice()"
+                >
+                    <i class="icn-16 icon__remove"></i>
                     Delete
                 </li>
             </ul>

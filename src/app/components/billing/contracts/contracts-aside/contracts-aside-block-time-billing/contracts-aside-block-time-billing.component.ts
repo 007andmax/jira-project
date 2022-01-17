@@ -214,7 +214,10 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
           let names = Object.keys(data);
           this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {

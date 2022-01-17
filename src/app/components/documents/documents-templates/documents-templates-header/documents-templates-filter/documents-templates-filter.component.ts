@@ -20,7 +20,7 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
   ngOnInit() {
     this.documentsStateService.onGetCategoriesTemplate.subscribe(data => {
       this.categories = data;
-      this.categoryDp.reset(this.categories);
+      if (this.categoryDp) this.categoryDp.reset(this.categories);
     })
   }
   public onSelectCategory(data) {

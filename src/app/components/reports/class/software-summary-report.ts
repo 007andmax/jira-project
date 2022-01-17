@@ -12,7 +12,7 @@ export class SoftwareSummaryReport {
     softwareSummaryWithInstallDate: boolean = true;
     soft: any = [];
     preloaderSoft: boolean = false;
-
+    preloaderDevices: boolean = false;
     date = new Date();
     constructor(data = null) {
         if (data != null) {
@@ -33,6 +33,9 @@ export class SoftwareSummaryReport {
     }
     public setPreloaderSoft(data) {
         this.preloaderSoft = data;
+    }
+    public setPreloaderDevices(data) {
+        this.preloaderDevices = data;
     }
     public setCompanyId(data) {
         this.companyId = data;

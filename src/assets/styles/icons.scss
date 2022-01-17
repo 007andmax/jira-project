@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .icn-64 {
   display: block;
   width: 64px;
@@ -160,8 +162,40 @@
   &__close {
     background-image: url("/assets/img/icons/close.svg");
   }
+  &__close-mobile {
+    background-image: url("/assets/img/icons/close-mobile.svg");
+  }
+  &__menu-white {
+    background-image: url("/assets/img/icons/menu-white.svg");
+  }
+  &__tickets-gray {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
+    mask-image: url("/assets/img/icons/tickets-gray.svg");
+  }
+  &__password-manager-gray {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+    // background-image: url("/assets/img/icons/password-manager-gray.svg");
+  }
+  &__company-gray {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
+    mask-image: url("/assets/img/icons/company-gray.svg");
+  }
   &__remove {
     background-image: url("/assets/img/icons/remove.svg");
+  }
+  &__remove-disabled {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
+  }
+  &__remove-blue {
+    background-color: #16a4fa;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
   }
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");
@@ -181,11 +215,17 @@
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
+  &__products-new {
+    background-image: url("/assets/img/icons/products-new.svg");
+  }
   &__service {
     background-image: url("/assets/img/icons/service.svg");
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
+  }
+  &__service-new {
+    background-image: url("/assets/img/icons/service-new.svg");
   }
   &__quick-support {
     background-image: url("/assets/img/icons/quick-support-gray.svg");
@@ -232,6 +272,9 @@
   &__user-account {
     background-image: url("/assets/img/icons/local-user-account.svg");
   }
+  &__users-gray {
+    background-image: url("/assets/img/icons/users-gray.svg");
+  }
   &__get-direction {
     background-image: url("/assets/img/icons/get-direction.svg");
   }
@@ -259,11 +302,20 @@
   &__close {
     background-image: url("/assets/img/icons/tag-close.svg");
   }
+  &__close-white {
+    background-image: url("/assets/img/icons/close-white.svg");
+  }
+  &__snapshot {
+    background-image: url("/assets/img/icons/snapshot.svg");
+  }
   &__more {
     background-image: url("/assets/img/icons/more-vertical-ng2.png");
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
+  }
+  &__claim-edit-ticket {
+    background-image: url("/assets/img/icons/claim-edit-ticket.svg");
   }
   &__ticket-status {
     background: url("/assets/img/icons/ticket-status.svg");
@@ -276,6 +328,9 @@
   }
   &__archive {
     background-image: url("/assets/img/icons/archive.svg");
+  }
+  &__archive-blue {
+    background-image: url("/assets/img/icons/archive-blue.svg");
   }
   &__email-dark {
     background-image: url("/assets/img/icons/email-dark.svg");
@@ -437,6 +492,9 @@
   &__edit {
     background-image: url("/assets/img/icons/edit.svg");
   }
+  &__edit-gray {
+    background-image: url("/assets/img/icons/edit-gray.svg");
+  }
   &__email-dark {
     background-image: url("/assets/img/icons/email-dark.svg");
   }
@@ -467,6 +525,12 @@
 
   &__block-time-billing {
     background-image: url("/assets/img/icons/block-time-billing.svg");
+  }
+  &__billing-gray {
+    background-image: url("/assets/img/icons/billing-gray.svg");
+  }
+  &__inventory-gray {
+    background-image: url("/assets/img/icons/inventory-gray.svg");
   }
   &__contract-claim-ticket {
     background-image: url("/assets/img/icons/contract-claim-ticket.svg");
@@ -519,6 +583,9 @@
   }
   &__search {
     background-image: url("/assets/img/icons/search.svg");
+  }
+  &__search-white {
+    background-image: url("/assets/img/icons/search-white.svg");
   }
   &__search-gray {
     background-image: url("/assets/img/icons/search-gray.svg");
@@ -689,6 +756,12 @@
   &__link-gray {
     background-image: url("/assets/img/icons/link-gray.svg");
   }
+  &__unlink {
+    background-image: url("/assets/img/icons/unlink.svg");
+  }
+  &__disable {
+    background-image: url("/assets/img/icons/disable.svg");
+  }
   &__clone-document {
     background-image: url("/assets/img/icons/clone-document.svg");
   }
@@ -742,14 +815,14 @@
       position: absolute;
       top: -2px;
       right: -2px;
-      border: solid 2px #ffffff;
-      background-color: #2ec866;
+      border: solid 2px $white;
+      background-color: $success;
       border-radius: 50%;
     }
   }
   &.--offline {
     &::before {
-      background-color: #ff5263;
+      background-color: $error;
     }
   }
 }
@@ -767,13 +840,34 @@
   background-size: contain;
   display: inline-block;
 
+  @media (max-width: 767px) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
+  }
+
   &.--high {
     background-image: url("/assets/img/icons/priority-high.png");
+
+    @media (max-width: 767px) {
+      background: $error;
+    }
   }
   &.--medium {
     background-image: url("/assets/img/icons/priority-medium.png");
+
+    @media (max-width: 767px) {
+      background: $warning;
+    }
   }
   &.--low {
     background-image: url("/assets/img/icons/priority-low.png");
+
+    @media (max-width: 767px) {
+      background: $success;
+    }
   }
 }

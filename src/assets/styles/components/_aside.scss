@@ -1,11 +1,10 @@
+@import "./src/assets/styles/variable";
+
 .qt-aside-modern {
-  color: #4f5f79;
-  background: white;
+  color: $gray-800;
+  background: $white;
   width: 592px;
-  position: absolute;
-  border-left: 1px solid #dfe3e8;
-  height: 100%;
-  right: 0;
+  border-left: 1px solid $gray-400;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   position: fixed;
   top: $header-height;
@@ -13,8 +12,158 @@
   height: calc(100vh - #{$header-height});
   z-index: 5;
 
+  @media (max-width: 767px) {
+    width: 100%;
+    top: 0;
+    height: 100%;
+    border: none;
+    padding-bottom: 128px;
+  }
+
+  &.password-edit-aside {
+    .qt-aside-modern__header {
+      @media (max-width: 767px) {
+        position: relative;
+      }
+    }
+
+    .password-edit-aside__body {
+      > div {
+        @media (max-width: 767px) {
+          padding: 16px 16px 0;
+        }
+      }
+      .password-history-body {
+        @media (max-width: 767px) {
+          padding: 0;
+        }
+      }
+    }
+
+    .header-circle-icon {
+      @media (max-width: 767px) {
+        left: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 0;
+        background-image: url("/assets/img/icons/remove-red.svg");
+        background-color: transparent;
+        border: none;
+      }
+    }
+
+    .password-edit-aside__info {
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+      }
+
+      input,
+      textarea {
+        @media (max-width: 767px) {
+          width: 100%;
+          border: solid 1px $gray-500;
+          margin-top: 8px;
+        }
+      }
+      input {
+        @media (max-width: 767px) {
+          height: 40px !important;
+        }
+      }
+
+      textarea {
+        @media (max-width: 767px) {
+          height: 80px;
+        }
+      }
+
+      app-date-picker {
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+
+        .date-picker {
+          @media (max-width: 767px) {
+            width: 100%;
+          }
+
+          i {
+            @media (max-width: 767px) {
+              top: 19px;
+            }
+          }
+        }
+      }
+    }
+
+    .password-edit-aside__info-password {
+      @media (max-width: 767px) {
+        align-items: flex-end;
+      }
+
+      .password-edit-aside__info-title {
+        @media (max-width: 767px) {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      input {
+        @media (max-width: 767px) {
+          flex: 1;
+          border-radius: 4px 0 0 4px;
+          border-right: transparent;
+        }
+      }
+
+      .icon__view,
+      .icon__hide,
+      .icon__copy-gray {
+        @media (max-width: 767px) {
+          border: 1px solid $gray-500;
+          height: 40px;
+          margin-left: 0;
+          width: 40px;
+          background-size: 18px;
+          border-radius: 0 4px 4px 0;
+          background-position: center;
+          background-color: $gray-100;
+        }
+      }
+
+      .icon__hide {
+        @media (max-width: 767px) {
+          border-radius: 0;
+          border-right: transparent;
+        }
+      }
+
+      .icon__copy-gray {
+        @media (max-width: 767px) {
+          border-radius: 0 4px 4px 0;
+        }
+      }
+    }
+  }
+
+  &.password-edit-aside,
+  &.draft-email-aside {
+    .qt-aside-modern__header-close {
+      @media (max-width: 767px) {
+        position: absolute;
+        left: 16px;
+        background-size: 20px;
+        background-image: url("/assets/img/icons/close-white.svg");
+      }
+    }
+  }
+
   &.--large {
     width: 642px;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   &.--x-large {
@@ -23,19 +172,45 @@
 
   &__header {
     height: 56px;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #dfe3e8;
+    background-color: $gray-100;
+    border-bottom: 1px solid $gray-400;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-left: 32px;
     padding-right: 16px;
+
+    @media (max-width: 767px) {
+      position: relative;
+      background-color: $primary-2;
+    }
+
+    &-info {
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: center;
+        order: 1;
+      }
+    }
   }
 
   &__header-title {
+    //@extend %h5-sb; // TODO check Cascading for @extand
     font-size: 20px;
-    font-family: Graphik-Medium, sans-serif;
-    color: #364656;
+    line-height: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: $primary-2;
+
+    @media (max-width: 767px) {
+      color: $white;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      flex: 1;
+      text-align: center;
+      letter-spacing: 0;
+    }
   }
 
   &__header-close {
@@ -45,6 +220,10 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
   }
 
   &__content {
@@ -52,8 +231,14 @@
     overflow: auto;
     height: calc(100% - 127px);
 
+    @media (max-width: 767px) {
+      height: 100%;
+      padding: 16px;
+      height: 100%;
+    }
+
     &.--no-footer {
-      height: calc(100% - 67px);;
+      height: calc(100% - 67px);
     }
 
     &.--less-padding {
@@ -70,19 +255,48 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 767px) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: $white;
+      padding: 16px;
+      z-index: 1;
+    }
+
+    > div {
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+
+    .qt-button {
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+      }
+
+      &.--gray {
+        @media (max-width: 767px) {
+          order: -1;
+          margin-right: 12px;
+        }
+      }
+    }
   }
 }
-
 
 .qt-aside {
   .ng-sidebar {
     width: 592px;
     height: calc(100vh - #{$header-height});
-
   }
 
   &__header {
-    background-color: #E7F5FE;
+    background-color: $gray-200;
     padding: 26px 24px 26px 39px;
     display: flex;
   }
@@ -92,13 +306,30 @@
     height: 24px;
     background-size: contain;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+      position: absolute;
+      top: 50%;
+      left: 26px;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &__title {
+    //font-weight: 500;
+    color: $primary-2;
+    //@extend %h5-sb; // TODO fix priority extend
     font-size: 20px;
-    font-weight: 500;
-    color: #364656;
+    line-height: 28px;
     font-weight: 600;
+    letter-spacing: -0.5px;
+
+    @media (max-width: 767px) {
+      color: $white;
+      font-size: 16px; // TODO add extend in media
+      line-height: 24;
+      letter-spacing: 0;
+    }
   }
 
   &__body {
@@ -112,4 +343,3 @@
     display: flex;
   }
 }
-

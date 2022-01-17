@@ -1,9 +1,11 @@
+@import "./src/assets/styles/variable";
+
 .company-email {
   word-break: break-all;
 }
 .--selected {
   td {
-    background: #f4fbff;
-    border-color: #16a4fa;
+    background: $gray-100;
+    border-color: $primary-1;
   }
 }

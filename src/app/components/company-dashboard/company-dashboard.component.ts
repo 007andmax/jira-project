@@ -2,6 +2,7 @@ import { NgModule, ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbDropdownToggle, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/states/app/app.service';
 import { Company } from '../../interfaces/company/company';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
@@ -26,6 +27,7 @@ export class CompanyDashboardComponent implements OnInit {
 
   constructor(
     public cd: ChangeDetectorRef,
+    public appService: AppService,
     private leftPanelStateService: LeftPanelStateService,
     public contractsStateService: ContractsStateService) { }
 

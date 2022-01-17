@@ -55,6 +55,14 @@ export class TicketsService {
     let data = { id: id, subject: subject, note: note, companyId: companyId };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
   }
+  public removeTicketStatus(ticket_id) {
+    return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`).pipe(
+      tap(data => {
+        this.toastrService.success("Status removed successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public restoreFromSpam(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);
@@ -132,6 +140,28 @@ export class TicketsService {
   public changeStatus(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/status`, data);
+  }
+  public addStatus(name, color) {
+
+    return this.http.post(this.apiUrl + `ticket/status`, { name: name, color: color }).pipe(
+      tap(data => {
+        this.toastrService.success("Status created successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editStatus(data) {
+
+    return this.http.put(this.apiUrl + `ticket/status`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Status edited successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public getTicketStatus() {
+
+    return this.http.get(this.apiUrl + `ticket/status`);
   }
   public reportAsSpamTicket(id, value) {
     let data = { value: value };

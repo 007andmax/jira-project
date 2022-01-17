@@ -1,5 +1,6 @@
 <div
     class="ticket-edit-aside qt-aside d-f"
+    [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
     [hidden]="!opened"
 >
     <div
@@ -15,7 +16,7 @@
         </div>
         <div class="qt-aside__body ticket-edit-aside__body">
             <div class="ticket-edit-aside__header d-f jc-sb ai-c">
-                <div class="d-f">
+                <div class="ticket-edit-aside__header-client-info">
                     <div
                         class="ticket-edit-aside__header-avatar"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
@@ -44,7 +45,11 @@
                                     (mouseenter)="userCompanyTooltip.show($event.target)"
                                     (mouseleave)="userCompanyTooltip.hide()"
                                 ></span>
-                                <span [textContent]="' - ' + getNameCreateUser()"></span>
+                                <span
+                                    class="pointer"
+                                    [textContent]="' - ' + getNameCreateUser()"
+                                    (click)="showDetailUser()"
+                                ></span>
                                 <div
                                     *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts()"
                                     ngbDropdownMenu
@@ -78,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-f ai-c">
+                <div class="ticket-edit-aside__header-menu">
                     <div
                         class="ticket-edit-aside__more-users-title"
                         *ngIf="listAssignedUser.length > 3"
@@ -114,6 +119,16 @@
                         placement="top"
                         ngbTooltip="Settings"
                     ></app-ticket-profile-actions>
+                </div>
+                <div
+                    class="ticket-edit-aside__header-subject"
+                    [hidden]="modeSubject === 'edit'"
+                    (click)="toggleSubject()"
+                >
+                    <span [ngClass]="getClassType()"></span>
+                    <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
+                    <span>-</span>
+                    <span [textContent]="ticketProfile.subject"></span>
                 </div>
             </div>
             <app-ticket-edit-tags
@@ -152,6 +167,7 @@
                     <input
                         id="ticket-subject"
                         [value]="ticketProfile.subject"
+                        [readonly]="appService.checkMobile()"
                     >
                 </div>
                 <div
@@ -164,7 +180,7 @@
                     <div
                         class="form-control editor"
                         (blur)="modeDescription = 'edit'"
-                        contenteditable="true"
+                        [attr.contenteditable]="!appService.checkMobile()"
                         id="ticket-note"
                         placeholder="Enter description here"
                     ></div>
@@ -181,22 +197,48 @@
             ></app-ticket-message>
             <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
             <app-ticket-profile-updates
+                #ticketProfileUpdates
                 [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
                 (onFetchUpdates)="onFetchUpdates($event)"
                 [ticketProfile]="ticketProfile"
                 [updates]="ticketProfile.updates"
             ></app-ticket-profile-updates>
             <app-ticket-profile-form-update
+                [ngClass]="{'--open':openedMobileUpdate}"
                 (onClosed)="close()"
                 [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 #updateForm
                 [ticket]="ticketProfile"
                 [lisUpdateUser]="lisUpdateUser"
             ></app-ticket-profile-form-update>
+            <ticket-profile-edit-form-update
+                [ngClass]="{'--open':openedMobileEditUpdate}"
+                (onClosed)="openedMobileEditUpdate = false"
+                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || !appService.checkMobile()"
+                #editUpdateForm
+                [ticket]="ticketProfile"
+                [lisUpdateUser]="lisUpdateUser"
+            ></ticket-profile-edit-form-update>
         </div>
     </div>
     <app-ticket-edit-aside-right-panel
         #rightPanel
         [ticketProfile]="ticketProfile"
     ></app-ticket-edit-aside-right-panel>
+    <div
+        class="qt-aside-modern__footer updata-close"
+        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+    >
+        <button
+            class="qt-button"
+            (click)="updateAndCloseMobile()"
+        >
+            <span>Update & Close</span>
+        </button>
+    </div>
+    <div
+        class="mobile-action-btn"
+        (click)="showModalAddUpdate()"
+        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+    ></div>
 </div>

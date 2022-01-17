@@ -19,7 +19,7 @@
             <div class="qt-lh-154">
               <img class="company-logo qt-mb-8" [src]="getCompanyLogoUrl()">
 
-              <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="currentCompany.name"></div>
+              <div class="qt-fs-13 qt-color-dark qt-fw-600" [textContent]="currentCompany.name"></div>
               <div class="qt-fs-13" [textContent]="currentCompany.addresses[0].addressWithSuitNumberAndPostalCode"></div>
               <div class="qt-fs-13" [textContent]="(currentCompany.addresses[0].phoneNumbers.length > 0) ? currentCompany.addresses[0].phoneNumbers[0].number : ''"></div>
             </div>
@@ -29,14 +29,14 @@
 
           <div class="qt-df">
             <div class="payments-page__payment-info qt-pr-15" *ngIf="company">
-              <div class="qt-ff-sb qt-fs-16 qt-lh-133 qt-mb-4 qt-color-dark qt-df qt-ai-c">
+              <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-dark qt-df qt-ai-c">
                <div class="icon__verified qt-mr-5 qt-ic-c qt-sz-24"></div> Amount Received
               </div>
-              <div class="qt-fs-40 qt-ff-sb qt-lh-12 qt-color-dark" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
+              <div class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-dark" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
 
 
-              <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-ff-sb  qt-mb-8 qt-text-upper qt-color-light">Received From</div>
-              <div class="qt-fs-13 qt-ff-gm qt-color-dark qt-lh-154" [textContent]="company.name"></div>
+              <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-fw-600  qt-mb-8 qt-text-upper qt-color-light">Received From</div>
+              <div class="qt-fs-13 qt-fw-600 qt-color-dark qt-lh-154" [textContent]="company.name"></div>
                <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
               company.companyInfo.contacts[0].lastName"></div>
                <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"></div>
@@ -70,7 +70,7 @@
           <hr class="qt-divider qt-mt-40 qt-mb-16">
 
 
-          <div class="qt-fs-16 qt-ff-gm qt-color-dark qt-mb-12 qt-lh-163">Payment for</div>
+          <div class="qt-fs-16 qt-fw-600 qt-color-dark qt-mb-12 qt-lh-163">Payment for</div>
 
           <table class="payment-table">
             <thead>

@@ -4,7 +4,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 @Component({
   selector: 'software-summary-devices-dro-down',
   templateUrl: './software-summary-devices-dro-down.component.html',
-  styleUrls: ['./software-summary-devices-dro-down.component.css']
+  styleUrls: ['./software-summary-devices-dro-down.component.scss']
 })
 export class SoftwareSummaryDevicesDroDownComponent extends DropDownComponent {
 

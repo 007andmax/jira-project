@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .app-left-panel {
   display: block;
   //height: 100vh;
@@ -7,14 +9,70 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #212b36;
-  color: #fff;
+  background-color: $primary-2;
+  color: $white;
   transition: width 300ms;
 
   &__header {
     display: flex;
     justify-content: space-between;
     padding: 24px;
+
+    @media (max-width: 767px) {
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 16px;
+    }
+  }
+
+  &__systems-info {
+    display: none;
+
+    @media (max-width: 767px) {
+      flex: 100%;
+      display: flex;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    &-avatar {
+      @extend %сaption-l-sb;
+      @media (max-width: 767px) {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        margin-right: 10px;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-size: 10px;
+        font-weight: 700;
+      }
+    }
+
+    &-header {
+      color: $white;
+      margin-bottom: 4px;
+    }
+    &-name {
+      display: flex;
+      align-items: center;
+      @extend %сaption-l;
+      color: $gray-600;
+
+    }
+    &-circle {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: $success;
+      margin-right: 4px;
+    }
   }
 
   .app-left-panel__menu-info {
@@ -49,7 +107,13 @@
       background: transparent;
     }
     &::-webkit-scrollbar {
-      width: 0px;
+      width: 0;
+    }
+
+    @media (max-width: 767px) {
+      height: calc(100% - 160px);
+      padding-top: 16px;
+      border-top: 1px solid rgba(238,238,238, .08);
     }
   }
 
@@ -76,13 +140,21 @@
       letter-spacing: 1px;
       padding: 1px 3px;
       border-radius: 2px;
-      background-color: #ff5263;
+      background-color: $error;
       top: 100%;
       left: 0;
     }
   }
 
   &__header-resize-btn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
+    transition: transform 300ms;
+  }
+
+  &__header-open-btn {
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -107,14 +179,11 @@
   }
 
   &__menu-title {
-    font-size: 14px;
+    @extend %body-r-m;
     font-stretch: normal;
-    font-style: normal;
-    line-height: 1.43;
-    letter-spacing: normal;
-    color: #919eab;
+    color: $gray-600;
     white-space: nowrap;
-    font-family: Graphik-Medium, sans-serif;
+    font-weight: $fw-medium;
   }
 
   &__menu-icon {
@@ -154,6 +223,9 @@
     }
     &.--documents {
       background-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
+    }
+    &.--logout {
+      background-image: url("/assets/img/icons-left-sidebar/logout.svg");
     }
   }
 
@@ -214,13 +286,15 @@
     justify-content: space-between;
     padding: 0 24px 0 60px;
     cursor: pointer;
-    font-size: 13px;
-    color: #fff;
+    @extend %body-m;
+    color: $white;
     align-items: center;
     position: relative;
-    line-height: 1.1;
+    @media (max-width: 767px) {
+      margin-bottom: 8px;
+    }
     a {
-      color: white;
+      color: $white;
       position: absolute;
       width: 100%;
       height: 100%;
@@ -232,27 +306,33 @@
       padding-right: 24px;
     }
     &.--active {
-      color: #16a4fa;
-      font-family: Graphik-Medium, sans-serif;
-      background-color: #171e26;
+      color: $primary-1;
+      font-weight: 600;
+      background-color: darken($primary-2, 5%);
       a {
-        color: #16a4fa;
+        color: $primary-1;
       }
     }
     &:hover {
-      color: #16a4fa;
+      color: $primary-1;
       a {
-        color: #16a4fa;
+        color: $primary-1;
       }
     }
 
     input {
-      color: #212b36;
+      color: $primary-2;
     }
   }
 
   &__menu-expand.icon-list li {
     justify-content: flex-start;
+  }
+
+  @media (max-width: 767px) {
+    left: -100%;
+    width: 100%;
+    transition: .3s ease-in all;
   }
 }
 
@@ -288,7 +368,7 @@
     }
 
     &__menu.--active {
-      background: #171e26;
+      background: $primary-2;
       border-radius: 6px;
     }
 
@@ -306,13 +386,20 @@
   }
 }
 
+.app-left-panel.--open {
+  @media (max-width: 767px) {
+    left: 0;
+  }
+}
+
 .app-left-panel__menu.--active {
   .app-left-panel {
     &__menu-icon {
       opacity: 1;
     }
     &__menu-title {
-      color: #fff;
+      color: $white;
+      @extend %body-r-m;
     }
     &__menu-arrow {
       transform: rotate(180deg);

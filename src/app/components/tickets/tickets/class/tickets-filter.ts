@@ -21,8 +21,23 @@ export class TicketsFilter {
     selectedTechUser: User = null;
     selectedUser: User = null;
     selectedStatus: string = null;
+    size: number = 15;
+    customStatus: boolean = false;
     constructor() {
         this.onInitUser();
+    }
+    public setCustomStatus(data) {
+        this.customStatus = data;
+    }
+    public setFilter(data) {
+        this.tags = data.tags;
+        this.selectedCompany = data.selectedCompany;
+        this.selectedTechUser = data.selectedTechUser;
+        this.selectedUser = data.selectedUser;
+        this.selectedStatus = data.selectedStatus;
+    }
+    public setSize(data) {
+        this.size = data;
     }
     public setStatus(data) {
         this.selectedStatus = data;
@@ -61,7 +76,8 @@ export class TicketsFilter {
         this.listType = type;
         if (this.listType === "ALL") this.onInitAll();
         if (this.listType === "UNASSIGNED") this.onInitUnassigned();
-        if (this.listType === "OPEN") this.onInitOpen();
+        if (this.listType === "OPEN" && !this.customStatus) this.onInitOpen();
+        if (this.listType === "OPEN" && this.customStatus) this.onInitCustomOpen();
         if (this.listType === "CLOSED") this.onInitClosed();
         if (this.listType === "ON_HOLD") this.onInitOnhold();
         if (this.listType === "TRASH") this.onInitTrash();
@@ -160,6 +176,9 @@ export class TicketsFilter {
         this.payloadAll = this.getAllPayLoad();
         this.payloadAll.offset = 0;
     }
+    public onSetSizeAll() {
+        this.payloadAll.size = this.size;
+    }
     public onInitUnassigned() {
         this.payloadUnassigned = this.getUnassignedPayLoad();
         this.payloadUnassigned.offset = 0;
@@ -167,6 +186,10 @@ export class TicketsFilter {
     }
     public onInitOpen() {
         this.payloadOpen = this.getOpenPayLoad();
+        this.payloadOpen.offset = 0;
+    }
+    public onInitCustomOpen() {
+        this.payloadOpen = this.getCustomOpenPayLoad();
         this.payloadOpen.offset = 0;
     }
     public onInitClosed() {
@@ -274,6 +297,31 @@ export class TicketsFilter {
                             operator: "NOT_EQ",
                             values: [
                                 "COMPLETED"
+                            ]
+                        },
+                        {
+                            path: "ticketSource",
+                            operator: "NOT_EQ",
+                            values: [
+                                "FROM_RECURRING_TICKET"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    private getCustomOpenPayLoad() {
+        return {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+                {
+                    fieldFilterDtos: [
+                        {
+                            operator: "EQ",
+                            path: "status",
+                            values: [
+                                this.selectedStatus
                             ]
                         },
                         {
