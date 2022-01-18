@@ -212,8 +212,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.page_number += 1;
       this.showPreloader = false;
       this.showPendingPreloader = false;
-      this.invoicesFilter.onInitLeftOffset(false);
-      this.invoicesFilter.resetLeftOffset();
       this.cd.detectChanges();
     })
   }
