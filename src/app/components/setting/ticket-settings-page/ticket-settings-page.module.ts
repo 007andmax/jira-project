@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { Onlynumber } from 'src/app/helpers/Onlynumber';
 
 
 
@@ -16,7 +17,8 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
     declarations: [
         TicketSettingsPageComponent,
         TicketSettingsComponent,
-        TicketsStatusComponent
+        TicketsStatusComponent,
+        Onlynumber
     ],
     imports: [
         CommonModule,

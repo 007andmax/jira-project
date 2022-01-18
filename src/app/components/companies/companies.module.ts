@@ -21,6 +21,7 @@ import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.mod
 import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { CompanyTagsModule } from './company-tags/company-tags.module';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
     declarations: [CompaniesComponent,
@@ -43,7 +44,8 @@ import { CompanyTagsModule } from './company-tags/company-tags.module';
         PreparePhoneModule,
         DynamicTooltipModule,
         DropDownModule,
-        CompanyTagsModule
+        CompanyTagsModule,
+        MatIconModule
     ],
 
 
