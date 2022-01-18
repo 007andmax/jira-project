@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OutgoingEmailComponent } from './outgoing-email/outgoing-email.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailSettingRoutingModule } from './email-setting-routing.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 
@@ -20,7 +22,9 @@ import { EmailSettingRoutingModule } from './email-setting-routing.module';
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
-        EmailSettingRoutingModule
+        EmailSettingRoutingModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
 
 

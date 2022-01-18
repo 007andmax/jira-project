@@ -84,6 +84,7 @@ import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-n
 import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
+import { TextAreaModule } from './directives/text-area/text-area.module';
 
 declare var $: any;
 
@@ -150,7 +151,8 @@ declare var $: any;
     DeviceModule,
     HeaderModule,
     BreadcrumbsModule,
-    UsersAsideDetailModule
+    UsersAsideDetailModule,
+    TextAreaModule
   ],
   entryComponents: [
     ModalQuoteComponent,

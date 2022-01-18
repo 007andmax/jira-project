@@ -7,6 +7,7 @@ import { CompanyTimeZoneModule } from '../../companies/company-time-zone/company
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { CompanyProfileRoutingModule } from './company-profile-routing.module';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
 
@@ -22,7 +23,8 @@ import { CompanyProfileRoutingModule } from './company-profile-routing.module';
         MatSelectModule,
         MatChipsModule,
         FormsModule,
-        CompanyProfileRoutingModule
+        CompanyProfileRoutingModule,
+        DropDownModule
     ],
 
 

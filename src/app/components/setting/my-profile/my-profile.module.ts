@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { AgmCoreModule } from '@agm/core';
 import { MyProfileRoutingModule } from './my-profile-routing.module';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
 
@@ -31,7 +32,8 @@ import { MyProfileRoutingModule } from './my-profile-routing.module';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
         }),
-        MyProfileRoutingModule
+        MyProfileRoutingModule,
+        DropDownModule
     ],
 
 

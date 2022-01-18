@@ -15,8 +15,5 @@ import { AccountingSettingsRoutingModule } from './accounting-settings-routing.m
         NgbModule,
         AccountingSettingsRoutingModule
     ],
-
-
-
 })
 export class AccoutingSettingsModule { }

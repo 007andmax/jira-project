@@ -4,6 +4,8 @@ import { TechUsersComponent } from './tech-users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { TechUsersRoutingModule } from './tech-users-routing.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 
@@ -16,7 +18,9 @@ import { TechUsersRoutingModule } from './tech-users-routing.module';
         FormsModule,
         ReactiveFormsModule,
         ImageCropperModule,
-        TechUsersRoutingModule
+        TechUsersRoutingModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
 
 

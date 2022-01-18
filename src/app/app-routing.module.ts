@@ -193,9 +193,9 @@ const routes: Routes = [
     path: ':company/setting/accounting',
     loadChildren: './components/setting/accounting/accounting-settings.module#AccoutingSettingsModule',
     canActivate: [PermissionAccountingSettingsService]
-
   },
   {
+    path: ':company/setting/crm-settings',
     loadChildren: './components/setting/crm-settings/crm-settings.module#CrmSettingsModule',
     canActivate: [PermissionCrmSettingsService]
   },

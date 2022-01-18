@@ -6,7 +6,6 @@ import { TicketChangeStatusComponent } from './ticket-change-status/ticket-chang
 import { TicketProfileActionsComponent } from './ticket-profile-actions/ticket-profile-actions.component';
 import { TicketEditTagsComponent } from './ticket-edit-tags/ticket-edit-tags.component';
 import { AddAssignedUserComponent } from './add-assigned-user/add-assigned-user.component';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside.directive';
 import { TicketClaimInfoComponent } from './ticket-claim-info/ticket-claim-info.component';
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 import { TicketProfileAttachmentsComponent } from './ticket-profile-attachments/ticket-profile-attachments.component';
@@ -55,6 +54,7 @@ import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/
 import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileEditFormUpdateProductsComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
 import { TicketProfileEditFormUpdateServicesComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 
 @NgModule({
@@ -63,7 +63,6 @@ import { TicketProfileEditFormUpdateServicesComponent } from './ticket-profile-e
         TicketProfileActionsComponent,
         TicketEditTagsComponent,
         AddAssignedUserComponent,
-        ClickOtsideDirective,
         TicketClaimInfoComponent,
         TicketMessageComponent,
         TicketProfileAttachmentsComponent,
@@ -118,9 +117,10 @@ import { TicketProfileEditFormUpdateServicesComponent } from './ticket-profile-e
         PhoneModule,
         InfiniteScrollModule,
         TehUsersModule,
-        UploadAreaProgressModule
+        UploadAreaProgressModule,
+        ClickOtsideModule
 
     ],
-    exports: [TicketEditAsideComponent, ClickOtsideDirective,]
+    exports: [TicketEditAsideComponent,]
 })
 export class TicketEditAsideModule { }
