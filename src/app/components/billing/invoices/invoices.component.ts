@@ -115,8 +115,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       }
       if (data.action === 'INVOICE_DELETED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.invoices.splice(index, 1);
-        if (this.invoicesFilter.status !== '' && index > -1) {
+        if (index > -1) {
+          this.invoices.splice(index, 1);
           this.invoicesFilter.onInitLeftOffset(true);
           this.invoicesFilter.updateLeftOffset();
         }
