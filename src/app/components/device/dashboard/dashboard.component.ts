@@ -117,6 +117,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
               data.RebootIsRequired = "Can Request Reboot";
             }
+            data.loading = false;
             this.windowUpdatePendingList.push(data);
           }
         }
@@ -612,6 +613,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   InstallUpdate() {
+    for(let i=0;i< this.reloadWindowUpdatePendingList.length; i++) {
+      var item = this.windowUpdatePendingList.find(x=> x.UpdateID == this.reloadWindowUpdatePendingList[i].UpdateID);
+      if(item) {
+        item.loading = true;
+      }
+    }
+    
     this.agentService.GetWindowUpdateList(this.asset.ID, this.reloadWindowUpdatePendingList);
 
     if(this.check.length){

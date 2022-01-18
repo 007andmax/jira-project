@@ -262,8 +262,8 @@
                                             >
                                         </figure>
                                         <h4>Security Update</h4>
-                                        <span class="securityup" *ngIf="securityUpdate != undefined" (click)="getPendingWindowUpdate(template)">{{ securityUpdate }} missing Updates</span>
-                                        <span *ngIf="securityUpdate == undefined">&nbsp;</span>
+                                        <span class="securityup" *ngIf="securityUpdate" (click)="getPendingWindowUpdate(template)">{{ securityUpdate }} missing Updates</span>
+                                        <span *ngIf="!securityUpdate">&nbsp;</span>
                                     </li>
                                 </ul>
                             </div>
@@ -613,21 +613,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
-                <td class="tabletd" *ngIf="!isOverlay"><input
-                  type="checkbox"
-                  (change)="postWindowUpdatePendint(i)"
-              >
-            </td>
-            <td *ngIf="isOverlay" class="tabletd">
-              <div class="loader"></div>
-            </td>
-                <td class="tablespace">{{data.Title}}</td>
-                <td class="tablespace">{{data.RebootIsRequired}}</td>
-              </tr>
-              <tr *ngIf="windowUpdatePendingList.length<=0">
-                <td class="missing">{{ securityUpdate }} missing Updates</td>
-              </tr>
+                <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
+                    <td class="tabletd">
+                        <input
+                                type="checkbox"
+                                (change)="postWindowUpdatePendint(i)"
+                                *ngIf="!data.loading"
+                        />
+                        <div class="loader" *ngIf="data.loading"></div>
+                    </td>
+                    <td class="tablespace">{{data.Title}}</td>
+                    <td class="tablespace">{{data.RebootIsRequired}}</td>
+                </tr>
+                <tr *ngIf="windowUpdatePendingList.length<=0">
+                    <td class="missing">No missing Updates</td>
+                </tr>
             </tbody>
           </table>
       </div>

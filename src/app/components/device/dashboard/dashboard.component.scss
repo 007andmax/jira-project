@@ -976,14 +976,13 @@ background-color: #FF0000;
   width: 30px;
   padding-left: 260px;
   padding-top: 130px;
-  font-size: 30px;
+  font-size: 16px;
 }
 
 .loader {
   border-radius: 50%;
   width: 16px;
   height: 16px;
-  position: absolute;
   border: 0.35rem solid rgba(0, 0, 0, 0.2);
   border-top-color: black;
   animation: spin 1s infinite linear;
