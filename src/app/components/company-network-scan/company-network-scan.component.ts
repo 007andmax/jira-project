@@ -128,7 +128,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       let createdOn = data[0].CreatedOn;
       this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
       for (let i = 0; i < this.networkvalue.length; i++) {
-        if(this.networkvalue[i].OperatingSystem == "Windows")
+        if(this.networkvalue[i].OperatingSystem !== "Windows")
         {
           this.nonAgentAsset(this.asset,this.networkvalue[i]);
         }
@@ -141,10 +141,11 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   nonAgentAsset(assetValue,networkValue){
     let data: any = {};
     data.Guid = assetValue.Guid;
-    data.CompanyGuid = assetValue.CompanyGuid;
-    data.Name=networkValue.ID;
+    data.CompanyGuid = assetValue.CompanyID;
+    data.Name=networkValue.MacAddress;
     data.Tag= "";
     data.Manufacturer =networkValue.Manufacturer ;
+    data.Model = "";
     data.HardwareTypeID = "";
     data.InternalIPAddress =networkValue.IP ,
     data.ExternalIPAddress = "",
@@ -153,7 +154,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     data.Description = "",
     data.Title =networkValue.MacAddress
     this.agentService.nonAgentAsset(data).subscribe((result)=>{
-
     })
   }
 

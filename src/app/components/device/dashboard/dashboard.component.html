@@ -606,7 +606,7 @@
       <div class="remote-area">
           <table class="fixed">
             <thead>
-              <tr *ngIf="windowUpdatePendingList.length<=0 ? isButtonhide: isButtonVisible">
+              <tr *ngIf="windowUpdatePendingList.length<=0 ? false: true">
                 <th class="tableth"></th>
                 <th class="title">Title</th>
                 <th>Reboot</th>
@@ -631,7 +631,7 @@
             </tbody>
           </table>
       </div>
-      <div class="viewer-footer" *ngIf="windowUpdatePendingList.length<=0 ? isButtonhide: isButtonVisible">
+      <div class="viewer-footer" *ngIf="windowUpdatePendingList.length<=0 ? false: true">
           <a  class="btn btn-dowanload footer" [ngClass]="selected<=0? 'disabled': '' " (click)="InstallUpdate()">
             Install
         </a>
