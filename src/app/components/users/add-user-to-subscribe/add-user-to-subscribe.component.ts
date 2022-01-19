@@ -109,19 +109,26 @@ export class AddUserToSubscribeComponent implements OnInit {
   onAddedSubscription(data) {
     let subscription = new MarketingSubscriptionType(data);
     if (this.isAddNewSubscription) {
+      this.showAdd = false;
       this.onSelectSubscription(subscription);
       this.save();
       this.isAddNewSubscription = false;
     }
   }
   save() {
-    this.addBtn.setDisabled(true);
+
     let subscriptions = [];
     this.selectedSubscriptions.forEach(subscription => {
       let users = this.users.filter(user => !user.customSubscriptions.find(customSubscription => customSubscription.id === subscription.id))
       if (users.length > 0) subscriptions.push({ id: subscription.id, users: users.map(user => user.id) })
     })
-    if (this.showAdd) this.isAddNewSubscription = true;
+    console.log("this.isAddNewSubscription", this.isAddNewSubscription);
+    if (this.showAdd) {
+      this.isAddNewSubscription = true;
+      this.addBtn.setDisabled(true);
+      return;
+    }
+    this.addBtn.setDisabled(true);
     if (subscriptions.length > 0) {
       forkJoin(subscriptions.map(item => this.marketingEmailService.addUsers(item.id, item.users).pipe(map((res) => res),
         catchError(error => of(undefined)))))
