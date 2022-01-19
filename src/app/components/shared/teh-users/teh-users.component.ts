@@ -17,6 +17,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   set setUsers(value) {
     this.users = JSON.parse(JSON.stringify(value));
     this.usersList = JSON.parse(JSON.stringify(value));
+    console.log("this.usersList", this.usersList);
   }
   public usersList: Array<TechUserItem> = [];
   public showSelect = false;
