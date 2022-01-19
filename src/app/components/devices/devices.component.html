@@ -23,13 +23,13 @@
                         class="pointer"
                         placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
                         [matChipInputFor]="chipList"
-                        (keyup.enter)="add($event.target.value)"
+                        (keyup.enter)="add($event.target.value)"                        
                         (keyup)="onSearchTag($event.target.value)"
                     >
                       </mat-chip-list>
-                      <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)" (click)="add($event.target.value)">
                           <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
-                            {{search}}
+                            {{search.Result}} <span class="opt-icon" [ngClass]="search.Type"></span>
                           </mat-option>
                       </mat-autocomplete>
                     </mat-form-field>

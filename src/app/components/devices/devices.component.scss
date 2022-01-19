@@ -252,3 +252,38 @@ input.mat-chip-input {
 .mat-option {
   font-size: 12px;  
 }
+
+::ng-deep .opt-icon {  
+  margin: 4px;
+  margin-top: 16px;
+  height: 32px;
+  width: 32px;
+  float:right;
+  color: #212b36;
+  
+}
+
+.opt-icon.Company.Name {
+  background-image: url(/assets/img/icons/company.svg);
+  background-repeat: no-repeat;
+  margin-top: 8px !important;
+}
+.opt-icon.Software {
+  background-image: url(/assets/img/icons/software.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Asset.Tag {
+  background-image: url(/assets/img/icons/tag.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Manufacturer {
+  background-image: url(/assets/img/icons/company.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Asset.Name {
+  background-image: url(/assets/img/icons/devices.svg);
+  background-repeat: no-repeat;
+  margin-top: 8px !important;
+}
+

@@ -118,6 +118,7 @@ export class DevicesComponent implements OnInit {
   }
 
   add(Tag): void {
+    console.log('add event fired');
     this.tagFilterValue = "";
     
     this.selectedInput.nativeElement.value = '';
@@ -391,6 +392,7 @@ export class DevicesComponent implements OnInit {
   }
 
   onSearchTag(Tag) {
+    console.log('onSearchTag fired');
     if ((Tag || '').length <= 2) {
       return;
     }
@@ -412,8 +414,10 @@ export class DevicesComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log('selected fired');
     this.selectedTag.push(event.option.viewValue);
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
+    
   }
 }
