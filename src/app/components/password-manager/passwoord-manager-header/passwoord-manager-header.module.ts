@@ -6,7 +6,7 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
 import { PasswoordManagerDevicesUsersComponent } from '../passwoord-manager-devices-users/passwoord-manager-devices-users.component';
-import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PasswordManagerAddCategoryModule } from '../password-manager-add-category/password-manager-add-category.module';
@@ -14,7 +14,6 @@ import { PasswordManagerAddCategoryModule } from '../password-manager-add-catego
 @NgModule({
     declarations: [PasswoordManagerHeaderComponent,
         PasswoordManagerFiltersComponent,
-
         PasswoordManagerDevicesUsersComponent
     ],
     imports: [
@@ -24,12 +23,9 @@ import { PasswordManagerAddCategoryModule } from '../password-manager-add-catego
         MatSelectModule,
         MatChipsModule,
         NgbModule,
-        PasswordManagerAddCategoryModule
-
-
+        PasswordManagerAddCategoryModule,
+        MatIconModule
     ],
     exports: [PasswoordManagerHeaderComponent]
-
-
 })
 export class PasswoordManagerHeaderModule { }

@@ -9,11 +9,7 @@ import { DynamicTooltipComponent } from './dynamic-tooltip.component';
     ],
     imports: [
         CommonModule,
-
-
     ],
     exports: [DynamicTooltipComponent],
-
-
 })
 export class DynamicTooltipModule { }

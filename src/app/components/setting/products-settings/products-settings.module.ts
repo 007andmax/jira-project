@@ -4,6 +4,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsSettingsComponent } from './products-settings.component';
 import { ProductsSettingsRoutingModule } from './products-settings-routing.module';
 import { AddCategoryProductComponent } from './add-category-product/add-category-product.component';
+import { FormsModule } from '@angular/forms';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { MatFormFieldModule } from '@angular/material';
 
 
 
@@ -15,7 +19,11 @@ import { AddCategoryProductComponent } from './add-category-product/add-category
     imports: [
         CommonModule,
         NgbModule,
-        ProductsSettingsRoutingModule
+        ProductsSettingsRoutingModule,
+        FormsModule,
+        ClickOtsideModule,
+        DynamicTooltipModule,
+        MatFormFieldModule
     ],
 
 
