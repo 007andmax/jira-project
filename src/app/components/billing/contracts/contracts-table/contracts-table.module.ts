@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ContractsTableComponent } from './contracts-table.component';
 import { ContractsTableItemComponent } from './contracts-table-item/contracts-table-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -11,7 +12,7 @@ import { ContractsTableItemComponent } from './contracts-table-item/contracts-ta
     ],
     imports: [
         CommonModule,
-
+        NgbModule
 
     ],
     exports: [ContractsTableComponent]
