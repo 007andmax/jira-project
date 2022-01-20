@@ -211,6 +211,7 @@ export class OutgoingEmailComponent implements OnInit {
       testEmail: ""
     });
     this.smtpForm.get('testEmail').clearValidators();
+    this.smtpForm.get('testEmail').setErrors(null);
     if (value) {
       this.smtpForm.get('testEmail').setValidators([Validators.required,
       Validators.maxLength(128),
@@ -449,7 +450,7 @@ export class OutgoingEmailComponent implements OnInit {
           }
         );
       } else if (!this.smtp.useSMTP) {
-        this.toastr.error("useSMTP else if");
+
         this.smtp.login = "";
         this.smtp.password = "";
         this.smtpForm.patchValue({
@@ -459,6 +460,7 @@ export class OutgoingEmailComponent implements OnInit {
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
             this.loading = false; $(".loading").css("display", "none");
+            this.toastr.success("Saved Successfully");
           },
           (error: any) => {
             this.loading = false; $(".loading").css("display", "none");

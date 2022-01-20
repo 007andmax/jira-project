@@ -200,7 +200,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       if (this.action === QUOTE_MODAL_ACTION_EDIT) this.quoteStateService.saveSandModeEdit(this.data);
       if (this.action === QUOTE_MODAL_ACTION_ADD) this.quoteStateService.saveSandMode(this.data);
       if (this.action === QUOTE_MODAL_ACTION_LIST) this.quoteStateService.saveSandModeList(this.data);
-      if (this.action === SUPPORT_MODAL_ACTION_SEND) this.supportStateService.onHandleSendMode(this.data);
+      if (this.action === SUPPORT_MODAL_ACTION_SEND) this.supportStateService.onSendMessage(this.data);
       this.activeModal.close();
     } else {
       this.showError = true;

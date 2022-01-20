@@ -46,17 +46,19 @@ export class SupportComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.cd.detectChanges();
     })
-    this.supportStateService.getHandleSendMode().subscribe(data => {
-      let draftEmail: DraftEmail = new DraftEmail();
-      draftEmail.setContent(data.message);
-      draftEmail.setSubject(data.subject);
-      draftEmail.setRecipients(data.recipients);
-      this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
-        if (!this.cd['destroyed']) {
-          this.cd.detectChanges();
-        }
+    /*  let getHandleSendMode = this.supportStateService.getHandleSendMode().subscribe(data => {
+        let draftEmail: DraftEmail = new DraftEmail();
+        draftEmail.setContent(data.message);
+        draftEmail.setSubject(data.subject);
+        draftEmail.setRecipients(data.recipients);
+        console.log("draftEmail", draftEmail);
+        this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
+          if (!this.cd['destroyed']) {
+            this.cd.detectChanges();
+          }
+        })
       })
-    })
+      this.sub.add(getHandleSendMode);*/
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
