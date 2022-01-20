@@ -36,7 +36,6 @@ export class DevicesComponent implements OnInit {
   assetId: number;
   powershellmsg: string = "";
   closeResult = "";
-  loading: boolean = false;
   _id: string = "";
   restServerAddress = "";
   remoteConnectPort = 0;
@@ -85,12 +84,12 @@ export class DevicesComponent implements OnInit {
   }
 
   searchDeviceTag(data: any) {
-    this.loading = true;
+    this.showPreloader = true;
     if (this.selectedTag.length == 0) {
       this.autosearchDevice = [];
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
-      this.loading = false;
+      this.showPreloader = false;
 
       this.operatingSystem = [];
       this.assetList = resp;
@@ -104,38 +103,9 @@ export class DevicesComponent implements OnInit {
         this.GetCurrentConfig(element.ID);
       });
 
-    })
-    this.showPreloader = false;
+    });
   }
 
-  remove(index: number) {
-    this.selectedTag.splice(index, 1);
-    this.searchTag.splice(index, 1);
-    let req: any = {};
-    req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = this.selectedTag;
-    this.searchDeviceTag(req);
-  }
-
-  add(Tag): void {
-    console.log('add event fired');
-    this.tagFilterValue = "";
-    
-    this.selectedInput.nativeElement.value = '';
-    this.selectedCtrl.setValue(null);
-
-    if (Tag) {
-      this.selectedTag.push(Tag);
-      this.searchTag.push(Tag);
-    }
-    
-    let req: any = {};
-    req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = this.searchTag;
-
-    this.searchDeviceTag(req);
-
-  }
 
   toogleDevices() {
     this.assetList.forEach((item) => {
@@ -333,7 +303,7 @@ export class DevicesComponent implements OnInit {
   }
 
   createConnection(type) {
-    this.loading = true;
+    this.showPreloader = true;
     let data = {
       assetId: this._id,
       type: type,
@@ -344,7 +314,7 @@ export class DevicesComponent implements OnInit {
       .pipe()
       .subscribe(
         (resp) => {
-          this.loading = false;
+          this.showPreloader = false;
           if (type === "CSS") {
             this.getConstant(resp.sessionId);
           } else {
@@ -379,13 +349,13 @@ export class DevicesComponent implements OnInit {
   }
 
   getViewer() {
-    this.loading = true;
+    this.showPreloader = true;
     this.remoteControlService
       .getViewer()
       .pipe()
       .subscribe(
         (resp) => {
-          this.loading = false;
+          this.showPreloader = false;
         },
         (error) => { }
       );
@@ -418,6 +388,36 @@ export class DevicesComponent implements OnInit {
     this.selectedTag.push(event.option.viewValue);
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
+    this.add(event.option.viewValue);
+  }
+  
+  remove(index: number) {
+    this.selectedTag.splice(index, 1);
+    this.searchTag.splice(index, 1);
+    let req: any = {};
+    req.TechCompanyGuid = this.techCompnayGuid;
+    req.Criteria = this.selectedTag;
+    this.searchDeviceTag(req);
+  }
+
+  add(Tag): void {
+    console.log('add event fired');
+    this.tagFilterValue = "";
     
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    var findTag = this.selectedTag.find(x=> x == Tag);
+
+    if (Tag && !findTag) {
+      this.selectedTag.push(Tag);
+      this.searchTag.push(Tag);
+    }
+    
+    let req: any = {};
+    req.TechCompanyGuid = this.techCompnayGuid;
+    req.Criteria = this.searchTag;
+
+    this.searchDeviceTag(req);
+
   }
 }

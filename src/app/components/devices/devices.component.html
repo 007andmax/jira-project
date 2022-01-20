@@ -27,7 +27,7 @@
                         (keyup)="onSearchTag($event.target.value)"
                     >
                       </mat-chip-list>
-                      <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)" (click)="add($event.target.value)">
+                      <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)">
                           <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
                             {{search.Result}} <span class="opt-icon" [ngClass]="search.Type"></span>
                           </mat-option>
@@ -85,7 +85,7 @@
       <div class="qt-page-list__body">
           <div class="qt-page-list__body-table-container">
               <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
-                  <tbody>
+                  <tbody *ngIf="!showPreloader">
                       <tr class="company-device-hover" *ngFor="let asset of assetList">
                           <td class="company-devices-table__check">
                               <div class="d-f">
