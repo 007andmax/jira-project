@@ -11,6 +11,7 @@ import { CompanyTimeZoneModule } from '../company-time-zone/company-time-zone.mo
 import { CompanyTagsModule } from '../company-tags/company-tags.module';
 import { CompanyAssociateModule } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -29,7 +30,8 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         CompanyTimeZoneModule,
         CompanyTagsModule,
         CompanyAssociateModule,
-        TextAreaModule
+        TextAreaModule,
+        NgbModule
     ],
     exports: [CompanyAddAsideComponent]
 

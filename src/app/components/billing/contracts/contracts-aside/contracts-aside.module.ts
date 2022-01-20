@@ -57,7 +57,8 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         ContractsAsideUserDeviceServiceModule,
         ContractsAsideOtherServiceModule,
         ContractsAsideOtherProductModule,
-        NumberModule
+        NumberModule,
+
     ],
     exports: [ContractsAsideComponent]
 
