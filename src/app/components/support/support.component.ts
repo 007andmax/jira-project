@@ -1,16 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { DevicesService } from '../../services/devices/devices.service';
-import { DraftEmailService } from '../../services/draft-email/draft-email.service';
 import { SupportService } from '../../services/support/support.service';
-import { ConstantsStateService } from '../../states/constants/constants-state.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
-import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { SupportStateService } from '../../states/support/support-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices/company-devices-remote-access/company-devices-remote-access.component';
-import { DraftEmail } from '../shared/draft-email/class/draft-email';
 import { RemoteSession } from './class/remote-sessions';
 
 @Component({
@@ -28,13 +23,9 @@ export class SupportComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private supportService: SupportService,
     private supportStateService: SupportStateService,
-    private draftEmailService: DraftEmailService,
     private devicesRealTimeService: DevicesRealTimeService,
-    private devicesService: DevicesService,
     private modalService: NgbModal,
     private usersStateService: UsersStateService,
-    private constantsStateService: ConstantsStateService,
-    private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -46,19 +37,6 @@ export class SupportComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.cd.detectChanges();
     })
-    /*  let getHandleSendMode = this.supportStateService.getHandleSendMode().subscribe(data => {
-        let draftEmail: DraftEmail = new DraftEmail();
-        draftEmail.setContent(data.message);
-        draftEmail.setSubject(data.subject);
-        draftEmail.setRecipients(data.recipients);
-        console.log("draftEmail", draftEmail);
-        this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
-          if (!this.cd['destroyed']) {
-            this.cd.detectChanges();
-          }
-        })
-      })
-      this.sub.add(getHandleSendMode);*/
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {

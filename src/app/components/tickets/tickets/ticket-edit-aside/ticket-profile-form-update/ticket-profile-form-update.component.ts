@@ -13,13 +13,9 @@ import { RemoteSession } from 'src/app/components/support/class/remote-sessions'
 import { SupportService } from 'src/app/services/support/support.service';
 import { Subscription } from 'rxjs';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
-import { DraftEmail } from 'src/app/components/shared/draft-email/class/draft-email';
 import { DraftEmailService } from 'src/app/services/draft-email/draft-email.service';
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
-import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
-import { ConstantsStateService } from 'src/app/states/constants/constants-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DevicesService } from 'src/app/services/devices/devices.service';
 import { TicketStateService } from '../services/ticket-state.service';
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { AppService } from 'src/app/states/app/app.service';
@@ -67,13 +63,10 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     public ticketsService: TicketsService,
     private elRef: ElementRef,
     public modalService: NgbModal,
-    private devicesService: DevicesService,
     private supportService: SupportService,
     public supportStateService: SupportStateService,
     public devicesRealTimeService: DevicesRealTimeService,
     public draftEmailService: DraftEmailService,
-    private constantsStateService: ConstantsStateService,
-    private devicesStateService: DevicesStateService,
     public ticketStateService: TicketStateService,
     public appService: AppService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
@@ -82,18 +75,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
-    /*this.supportStateService.getHandleSendMode().subscribe(data => {
-      console.log("data", data);
-      let draftEmail: DraftEmail = new DraftEmail();
-      draftEmail.setContent(data.message);
-      draftEmail.setSubject(data.subject);
-      draftEmail.setRecipients(data.recipients);
-      this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
-        if (!this.cd['destroyed']) {
-          this.cd.detectChanges();
-        }
-      })
-    })*/
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
