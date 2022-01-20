@@ -9,7 +9,9 @@
     "build-prod": "node --max_old_space_size=3192 node_modules/@angular/cli/bin/ng build --prod --configuration=production --deploy-url=/html/",
     "test": "ng test",
     "lint": "ng lint",
-    "compodoc": "npx compodoc -p src/tsconfig.app.json"
+    "compodoc": "npx compodoc -p src/tsconfig.app.json",
+    "build-stats": "ng build --stats-json",
+    "analyze": "webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
   "dependencies": {
