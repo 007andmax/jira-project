@@ -12,6 +12,7 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
 import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { DndDirective } from 'src/app/directives/dnd.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -30,7 +31,8 @@ import { DndDirective } from 'src/app/directives/dnd.directive';
         TehUsersModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        UploadAreaProgressModule
+        UploadAreaProgressModule,
+        NgbModule
     ],
     exports: [TicketAddAsideComponent]
 })
