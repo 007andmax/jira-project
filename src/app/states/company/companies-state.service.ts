@@ -45,7 +45,6 @@ export class CompaniesStateService {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
-        console.log("Index", Index);
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
