@@ -23,6 +23,7 @@ import { NetworkScanInstallAgent } from './class/network-scan-install-agent';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
 import { installationStatuses } from './const/const';
 import { CompanyNetworkScanService } from './services/company-network-scan.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-company-network-scan',
@@ -109,7 +110,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       else {
         this.isGetDevices = false;
       }
-      this.showPreloader =false;
+      this.showPreloader = false;
     })
   }
 
@@ -127,34 +128,34 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       let data = JSON.parse(resp[0].Value);
       let createdOn = data[0].CreatedOn;
       this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
-      for (let i = 0; i < this.networkvalue.length; i++) {
-        if(this.networkvalue[i].OperatingSystem !== "Windows")
-        {
-          this.nonAgentAsset(this.asset,this.networkvalue[i]);
-        }
+      var asts = this.networkvalue.filter(x => x.OperatingSystem != 'Windows');
+      for (let i = 0; i < asts.length; i++) {
+        this.nonAgentAsset(this.networkvalue[i]);
         this.networkvalue[i].ID = i + 1;
         this.networkvalue[i].selected = false;
       }
     });
   }
 
-  nonAgentAsset(assetValue,networkValue){
+  nonAgentAsset(networkValue) {
     let data: any = {};
-    data.Guid = assetValue.Guid;
-    data.CompanyGuid = assetValue.CompanyID;
-    data.Name=networkValue.MacAddress;
-    data.Tag= "";
-    data.Manufacturer =networkValue.Manufacturer ;
+    data.Guid = uuidv4();
+    data.CompanyGuid = this.asset.CompanyGuid;
+    data.Name = networkValue.MacAddress;
+    data.Tag = "";
+    data.Manufacturer = networkValue.Manufacturer;
     data.Model = "";
     data.HardwareTypeID = "";
-    data.InternalIPAddress =networkValue.IP ,
-    data.ExternalIPAddress = "",
-    data.Location = "",
-    data.Site = "",
-    data.Description = "",
-    data.Title =networkValue.MacAddress
-    this.agentService.nonAgentAsset(data).subscribe((result)=>{
-    })
+    data.InternalIPAddress = networkValue.IP;
+    data.ExternalIPAddress = "";
+    data.Location = "";
+    data.Site = "";
+    data.Description = "";
+    data.Title = networkValue.MacAddress;
+    console.log(JSON.stringify(data));
+    
+    this.agentService.nonAgentAsset(data).subscribe((result) => {
+    });
   }
 
 

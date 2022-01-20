@@ -68,19 +68,21 @@ export class DevicesComponent implements OnInit {
       this.setPreviewDataDevice();
       this.onPowerShellCommand();
     });
+
+    this.showPreloader = false;
   }
 
-  setPreviewDataDevice() {
+  setPreviewDataDevice() {       
     this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.add(undefined);
-        this.CurrentUser();
-      });
+    .getAgentToken(
+      "QuickTech",
+      "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
+    )
+    .subscribe((data) => {
+      this.agentService.setAccessToken(data.AccessToken);
+      //this.add(undefined);
+      this.CurrentUser();
+    });
   }
 
   searchDeviceTag(data: any) {
@@ -103,6 +105,9 @@ export class DevicesComponent implements OnInit {
         this.GetCurrentConfig(element.ID);
       });
 
+      if(this.cd) {
+        this.cd.detectChanges();
+      }
     });
   }
 

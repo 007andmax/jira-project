@@ -84,7 +84,7 @@
   <div class="qt-df qt-fd-c qt-jc-sb">
       <div class="qt-page-list__body">
           <div class="qt-page-list__body-table-container">
-              <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
+              <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length > 0">
                   <tbody *ngIf="!showPreloader">
                       <tr class="company-device-hover" *ngFor="let asset of assetList">
                           <td class="company-devices-table__check">
