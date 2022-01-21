@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
-  main_page: string = PAGE_MAIN;
+  main_page: string;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
   state: string = '';
@@ -86,15 +86,11 @@ export class AppComponent implements OnInit {
    * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.router.events
-      .subscribe((event) => {
-        if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary')) {
-          this.main_page = PAGE_DEVICE;
-        } else {
-          this.main_page = PAGE_MAIN;
-        }
-      });
-
+    if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary')) {
+      this.main_page = PAGE_DEVICE;
+    } else {
+      this.main_page = PAGE_MAIN;
+    }
     this.devicesState.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();

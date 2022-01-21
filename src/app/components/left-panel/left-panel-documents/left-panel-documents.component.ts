@@ -47,7 +47,9 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     })
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
   }
 

@@ -67,7 +67,6 @@ import { MapModalModule } from './components/shared/map-modal/map-modal.module';
 import { InvoicesAsidePreviewModule } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.module';
 import { DefaultServicesAddModule } from './components/billing/default-services/default-services-add/default-services-add.module';
 import { DefaultServicesEditModule } from './components/billing/default-services/default-services-edit/default-services-edit.module';
-import { DeviceModule } from './components/device/device-root.module';
 import { HeaderModule } from './components/header/header.module';
 import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.module';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
@@ -85,6 +84,15 @@ import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 import { TextAreaModule } from './directives/text-area/text-area.module';
+import { AntivirusModule } from './components/device/antivirus/antivirus.module';
+import { FileModule } from './components/device/file-explorer/file-explorer.module';
+import { HardwareModule } from './components/device/hardware/hardware.module';
+import { PasswordModule } from './components/device/password/password.module';
+import { ServicesModule } from './components/device/services/services.module';
+import { SoftwareModule } from './components/device/software/software.module';
+import { StartupModule } from './components/device/startup-programes/startup-programes.module';
+import { TerminalModule } from './components/device/terminal/terminal.module';
+import { WindowsModule } from './components/device/windows-update/windows-update.module';
 
 declare var $: any;
 
@@ -148,11 +156,11 @@ declare var $: any;
     InvoicesAsidePreviewModule,
     DefaultServicesAddModule,
     DefaultServicesEditModule,
-    DeviceModule,
     HeaderModule,
     BreadcrumbsModule,
     UsersAsideDetailModule,
-    TextAreaModule
+    TextAreaModule,
+
   ],
   entryComponents: [
     ModalQuoteComponent,

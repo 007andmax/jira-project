@@ -272,46 +272,8 @@ const routes: Routes = [
 
   },
   {
-    path: ':company/device/dashboard/:type/:id',
-    loadChildren: './components/device/dashboard/dashboard.module#DashboardModule'
-  },
-  {
-    path: ':company/device/hardware/:type/:id',
-    loadChildren: './components/device/hardware/hardware.module#HardwareModule'
-
-  },
-  {
-    path: ':company/device/software/:type/:id',
-    loadChildren: './components/device/software/software.module#SoftwareModule'
-  },
-  {
-    path: ':company/device/service',
-    loadChildren: './components/device/services/services.module#ServicesModule'
-  },
-  {
-    path: ':company/device/antivirus',
-    loadChildren: './components/device/antivirus/antivirus.module#AntivirusModule'
-  },
-  {
-    path: ':company/device/terminal/:type/:id',
-    loadChildren: './components/device/terminal/terminal.module#TerminalModule'
-  },
-  {
-    path: ':company/device/password',
-    loadChildren: './components/device/password/password.module#PasswordModule'
-  },
-  {
-    path: ':company/device/window',
-    loadChildren: './components/device/windows-update/windows-update.module#WindowsModule'
-  },
-  {
-    path: ':company/device/startup',
-    loadChildren: './components/device/startup-programes/startup-programes.module#StartupModule'
-
-  },
-  {
-    path: ':company/device/file',
-    loadChildren: './components/device/file-explorer/file-explorer.module#FileModule'
+    path: ':company/device',
+    loadChildren: './components/device/device-root.module#DeviceModule',
 
   },
   {
