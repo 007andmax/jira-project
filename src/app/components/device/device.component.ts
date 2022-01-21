@@ -133,9 +133,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
       return;
     }
     this.kafkaMessage = JSON.parse(item.Value);
-    if (this.kafkaMessage.IdleTime) {
-      let Time = this.kafkaMessage.IdleTime.split("Idle for");
-      this.UpTime = Time[1] != "" ? Time[1] : "";
+    if (this.kafkaMessage.UpTime) {
+      this.UpTime = this.kafkaMessage.UpTime;
       this.cd.detectChanges();
     }
     if (!this.deviceDetail) {

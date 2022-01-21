@@ -392,6 +392,7 @@ export class DevicesComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log('selected fired');
     this.selectedTag.push(event.option.viewValue);
+    this.searchTag.push(event.option.viewValue);
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     this.add(event.option.viewValue);
