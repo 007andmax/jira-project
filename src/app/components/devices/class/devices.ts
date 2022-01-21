@@ -1,7 +1,7 @@
 import { FilterListTop } from "src/class/list/filter-list-top";
 
 export class DeviceFilter {
-  filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC")];
+  filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC"),new FilterListTop("CompanyName", "ASC")];
   constructor() {}
 
   public onFilter(field, devices) {
@@ -13,6 +13,16 @@ export class DeviceFilter {
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
           this.onFilterName(devices);
+        } else {
+          this.filterTop[index].filter = "DESC";
+          devices.reverse();
+        }
+      }
+      else if( field == "CompanyName") {
+        this.clearFilter();
+        if (sort === "" || sort === "DESC") {
+          this.filterTop[index].filter = "ASC";
+          this.onFilterCompanyName(devices);
         } else {
           this.filterTop[index].filter = "DESC";
           devices.reverse();
@@ -35,5 +45,19 @@ export class DeviceFilter {
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
+  }
+
+  public onFilterCompanyName(devices) {
+    devices.sort((a, b) =>
+      this.getCompanyNameDevice(a).toLowerCase() > this.getCompanyNameDevice(b).toLowerCase()
+        ? 1
+        : this.getCompanyNameDevice(b).toLowerCase() >
+          this.getCompanyNameDevice(a).toLowerCase()
+        ? -1
+        : 0
+    );
+  }
+  private getCompanyNameDevice(devicebeta) {
+    return devicebeta.CompanyName;
   }
 }

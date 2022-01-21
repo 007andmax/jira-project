@@ -91,6 +91,7 @@ export class DevicesComponent implements OnInit {
       this.autosearchDevice = [];
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+      this.onFilter('CompanyName');
       this.showPreloader = false;
 
       this.operatingSystem = [];
