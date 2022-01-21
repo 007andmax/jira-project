@@ -60,10 +60,17 @@
                       <th class="company-devices-table__device-type">
                       </th>
                       <th
-                          class="company-devices-table__device-name pointer"
+                          class="company-devices-table__dev-name pointer"
                           (click)="onFilter('Name')"
                       >
                           Device Name
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
+                      <th
+                          class="company-devices-table__company-name pointer"
+                          (click)="onFilter('CompanyName')"
+                      >
+                          Company
                           <span class="qt-table-modern__sorting"></span>
                       </th>
                       <th class="company-devices-table__logged-user pointer">Logged in user</th>
@@ -145,7 +152,7 @@
                             </div>
                         </div>
                           </td>
-                          <td class="company-devices-table__device-name">
+                          <td class="company-devices-table__dev-name">
                             <div>
                               <div class="qt-df qt-fd-c">
                                   <div class="
@@ -156,6 +163,22 @@
                                   </div>
                                   <span
                                       class="company-device-desc"
+                                      [textContent]
+                                  ></span>
+                              </div>
+                          </div>
+                          </td>
+                          <td class="company-devices-table__company-name">
+                            <div>
+                              <div class="qt-df qt-fd-c">
+                                  <div class="
+                  company-devices-table-company-name
+                  qt-ff-gm qt-df qt-ai-c
+                ">
+                                      <span [textContent]="asset.CompanyName"></span>
+                                  </div>
+                                  <span
+                                      class="company-name-desc"
                                       [textContent]
                                   ></span>
                               </div>
