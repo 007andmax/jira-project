@@ -93,7 +93,6 @@ export class AppComponent implements OnInit {
         } else {
           this.main_page = PAGE_MAIN;
         }
-        console.log("this.main_page", this.main_page);
       });
 
     this.devicesState.onInit();
@@ -165,7 +164,6 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      console.log("window.location.href", window.location.href);
       /*if (this.router.url === "/") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);*/
     })

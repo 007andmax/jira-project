@@ -207,8 +207,6 @@ export class LeftPanelComponent implements OnInit {
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
   onChangeState(data) {
-    console.log("data", data);
-    console.log("this.state", this.state);
     if (this.state !== data) {
       this.state = data;
       if (this.state === 'new-companies') this.goToLink(`companies`);

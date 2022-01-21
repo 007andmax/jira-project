@@ -217,7 +217,6 @@ export class OutgoingEmailComponent implements OnInit {
       Validators.maxLength(128),
       Validators.pattern(this.emailPattern)]);
     }
-    console.log("this.smtp", this.smtp);
   }
 
   /**
@@ -231,7 +230,6 @@ export class OutgoingEmailComponent implements OnInit {
         if (response) {
           this.smtp = response.smtpSettings;
           this.supportMailBox = response.supportMailBox;
-          console.log("this.smtp", this.smtp);
           this.smtp.testEmail = response.login;
           this.savedSMTPSettings = response;
           this.portIsEmpty = !response.port;
@@ -419,7 +417,6 @@ export class OutgoingEmailComponent implements OnInit {
     this.submitted = true;
 
     if (this.isSMTPLoginUnique) {
-      console.log("this.smtpForm", this.smtpForm);
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
