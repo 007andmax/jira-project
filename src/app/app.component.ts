@@ -88,11 +88,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events
       .subscribe((event) => {
-        if (this.router.url.includes('/device') && !this.router.url.includes('/devices') && !this.router.url.includes('/device-ip-summary')) {
+        if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary')) {
           this.main_page = PAGE_DEVICE;
         } else {
           this.main_page = PAGE_MAIN;
         }
+        console.log("this.main_page", this.main_page);
       });
 
     this.devicesState.onInit();
