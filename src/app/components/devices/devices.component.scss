@@ -264,28 +264,44 @@ input.mat-chip-input {
 }
 
 .opt-icon.Company.Name {
-  background-image: url(/assets/img/icons/company.svg);
+  background-image: url(/assets/img/auto/office-account.svg);
   background-repeat: no-repeat;
-  margin-top: 8px !important;
 }
 .opt-icon.Software {
-  background-image: url(/assets/img/icons/software.svg);
+  background-image: url(/assets/img/auto/software.svg);
   background-repeat: no-repeat;
 }
 .opt-icon.Asset.Tag {
-  background-image: url(/assets/img/icons/tag.svg);
+  background-image: url(/assets/img/auto/tag.svg);
   background-repeat: no-repeat;
 }
 .opt-icon.Manufacturer {
-  background-image: url(/assets/img/icons/company.svg);
-  background-repeat: no-repeat;
-  margin-top: 8px !important;
+  background-image: url(/assets/img/auto/manufacturer.svg);
+  background-repeat: no-repeat;  
 }
 
 .opt-icon.Asset.Name {
-  background-image: url(/assets/img/icons/devices.svg);
+  background-image: url(/assets/img/auto/devices.svg);
+  background-repeat: no-repeat;  
+}
+
+.opt-icon.OS {
+  background-image: url(/assets/img/auto/os.svg);
   background-repeat: no-repeat;
-  margin-top: 8px !important;
+}
+
+.opt-icon.OS.Version {
+  background-image: url(/assets/img/auto/os-version.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Model {
+  background-image: url(/assets/img/auto/model.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.CPU {
+  background-image: url(/assets/img/auto/cpu.svg);
+  background-repeat: no-repeat;
 }
 
 .company-devices-table__dev-name {
