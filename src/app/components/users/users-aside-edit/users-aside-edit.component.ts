@@ -253,6 +253,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.companiesState.onInitClear();
     this.selectedUserTitle = null;
     this.selectedUserType = null;
+    this.selectedUserIndustry = null;
     this.jobTitleDp.clearWithOutChanges();
     this.jobTypeDp.clearWithOutChanges();
     this.jobIndustryDp.clearWithOutChanges();

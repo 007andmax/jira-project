@@ -5,7 +5,13 @@
     <div
         class="list-custom-subscriptions"
         id="dropdownBasic"
+        *ngIf="listCustomSubscription.length === 0"
+    ></div>
+    <div
+        class="list-custom-subscriptions"
+        id="dropdownBasic"
         ngbDropdownToggle
+        *ngIf="listCustomSubscription.length > 0"
     >
         <ng-template
             ngFor
@@ -31,6 +37,7 @@
         class="select-wrapper"
         ngbDropdownMenu
         aria-labelledby="dropdownBasic"
+        *ngIf="listCustomSubscription.length > 0"
     >
         <div
             class="content"

@@ -102,7 +102,6 @@ add-marketing-subscription-type {
   padding: 0;
 }
 .modal-dialog__save-to-subscription {
-
 }
 .dataTable {
   position: relative;
@@ -229,4 +228,11 @@ tr.selected {
   position: absolute;
   top: 12px;
   right: 12px;
+}
+.no-exist-subscriptions {
+  display: flex;
+  flex: 1;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
 }

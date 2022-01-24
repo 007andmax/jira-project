@@ -9,7 +9,13 @@
     class="display dataTable"
     style="width:100%"
 >
-    <tbody>
+    <div
+        class="no-exist-subscriptions"
+        *ngIf="!showPreloader && marketingSubscriptionList.length === 0"
+    >
+        <span>No subscriptions yet</span>
+    </div>
+    <tbody *ngIf="!showPreloader && marketingSubscriptionList.length > 0">
         <add-marketing-subscription-type
             *ngIf="showAdd"
             [mode]="MODE_ADD_BY_MODAL"
