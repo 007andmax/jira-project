@@ -9,13 +9,7 @@
     class="display dataTable"
     style="width:100%"
 >
-    <div
-        class="no-exist-subscriptions"
-        *ngIf="!showPreloader && marketingSubscriptionList.length === 0"
-    >
-        <span>No subscriptions yet</span>
-    </div>
-    <tbody *ngIf="!showPreloader && marketingSubscriptionList.length > 0">
+    <tbody>
         <add-marketing-subscription-type
             *ngIf="showAdd"
             [mode]="MODE_ADD_BY_MODAL"
@@ -23,6 +17,12 @@
             (onClose)="showAdd = false"
             (onAdded)="onAddedSubscription($event)"
         ></add-marketing-subscription-type>
+        <div
+            class="no-exist-subscriptions"
+            *ngIf="!showPreloader && marketingSubscriptionList.length === 0"
+        >
+            <span>No subscriptions yet</span>
+        </div>
         <tr
             *ngFor="let item of marketingSubscriptionList; let i = index"
             appClickOtside

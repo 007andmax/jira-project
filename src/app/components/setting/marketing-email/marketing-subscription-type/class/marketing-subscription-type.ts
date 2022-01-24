@@ -29,8 +29,8 @@ export class MarketingSubscriptionType {
     }
     public onUpdate(data) {
         this.name = data.name;
-        this.subscribedCount = (data.subscribedCount) ? data.subscribedCount : this.subscribedCount;
-        this.unsubscribedCount = (data.unsubscribedCount) ? data.unsubscribedCount : this.unsubscribedCount;
+        this.subscribedCount = (data.subscribedCount || data.subscribedCount == 0) ? data.subscribedCount : this.subscribedCount;
+        this.unsubscribedCount = (data.unsubscribedCount || data.unsubscribedCount == 0) ? data.unsubscribedCount : this.unsubscribedCount;
     }
     public checkDublicate(list) {
         var duplicate = list.filter((item) => {
