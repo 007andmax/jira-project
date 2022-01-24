@@ -49,6 +49,18 @@
                   imageSrc ? "Change Logo" : "Upload Photo"
                 }}
                                     </label>
+                                    <label
+                                        for="profile-dp"
+                                        *ngIf="imageSrc"
+                                        (click)="deleteAvatar()"
+                                    >
+                                        <a
+                                            href="javascript:void(0)"
+                                            restore-default-button
+                                        >
+                                            Remove Photo
+                                        </a>
+                                    </label>
                                 </div>
                                 <span>Maximum size of 2MB. JPG, GIF, PNG</span>
                             </div>

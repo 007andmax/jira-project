@@ -12,11 +12,17 @@
     <div class="qt-aside-modern__content">
         <div class="upload-photo qt-mb-24">
             <div class="upload-photo__img-block">
-                <img
+                <div
+                    *ngIf="user.avatar"
+                    class="user__header-avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+                <!-- <img
                     class="upload-photo__avatar"
                     *ngIf="user.avatar"
                     [src]="getLogoUrl()"
-                >
+                > -->
                 <div
                     class="upload-photo__no-avatar-icon icon__upload-avtar"
                     *ngIf="!user.avatar"
@@ -104,6 +110,22 @@
                     [change]="true"
                     [editItem]="selectedUserTitle"
                     (onSelectedItem)="onSelectJobTitle($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-w50">
+                <app-drop-down
+                    #jobIndustryDp
+                    [class]="['light-dropdown', 'qt-select-input-40']"
+                    [placeholder]="'Select Industry'"
+                    [list]="industries"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [title]="'Industry'"
+                    [editItem]="selectedUserIndustry"
+                    (onSelectedItem)="onSelectClientIndustry($event)"
                 ></app-drop-down>
             </div>
         </div>
@@ -293,10 +315,18 @@
         </div>
         <div class="qt-w100 qt-input-block qt-mb-24">
             <label>Subscription</label>
-            <app-company-subscription
-                [editItem]="user.subscription"
-                (subscribeChange)="onChangeSubscriptions($event)"
-            ></app-company-subscription>
+            <user-default-subscription
+                [mode]="MODE_EDIT_SUBSCRIPTION"
+                [defaultSubscriptions]="user.defaultSubscriptions"
+                (onChange)="onChangeDefaultSubscriptions($event)"
+            ></user-default-subscription>
+        </div>
+        <div class="qt-w100 qt-input-block qt-mb-24">
+            <label>Marketing Subscription</label>
+            <user-custom-subscription
+                [customSubscriptions]="user.customSubscriptions"
+                (onChange)="onChangeCustomSubscriptions($event)"
+            ></user-custom-subscription>
         </div>
         <app-company-tags
             #companyTags

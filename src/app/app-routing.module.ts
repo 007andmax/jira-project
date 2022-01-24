@@ -71,6 +71,8 @@ import { PermissionEmailSettingService } from './components/setting/email-settin
 import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
 import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
+import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
+import { MarketingComponent } from './components/marketing/marketing.component';
 
 const routes: Routes = [
 
@@ -193,6 +195,11 @@ const routes: Routes = [
   {
     path: ':company/setting/integration',
     component: IntegrationsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: ':company/setting/marketing-email',
+    component: MarketingEmailComponent,
     pathMatch: 'full',
   },
   {
@@ -355,7 +362,11 @@ const routes: Routes = [
     component: DocumentsComponent,
 
   },
-
+  {
+    path: ':company/marketing',
+    component: MarketingComponent,
+    pathMatch: 'full'
+  },
 
 ];
 

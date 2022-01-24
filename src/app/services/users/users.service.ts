@@ -52,6 +52,11 @@ export class UsersService {
   public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current');
   }
+
+  public getMessagesUser(id, page) {
+    return this.http.get(this.apiUrl + `email/${id}/user?size=20&page=${page}`);
+  }
+
   public resetPrimaryContact(userId) {
     return this.http.get(this.apiUrl + '/company/resetPrimaryContact?userId=' + userId);
   }
@@ -59,8 +64,19 @@ export class UsersService {
     return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=' + idUser + '&isTechUser=false&companyId=' + companyId);
   }
 
-  public setSubscriptions(data) {
-    return this.http.put(this.apiUrl + `subscription/${data.id}`, data);
+  public setDefaultSubscriptions(id, subscriptions) {
+    return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
+  }
+  public setSubscriptions(id, subscriptions) {
+    return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
+  }
+
+
+  public addCustomSubscriptions(id, usersId) {
+    return this.http.put(this.apiUrl + `users/customSubscription/${id}`, usersId);
+  }
+  public removeCustomSubscriptions(subscription_id, user_id) {
+    return this.http.delete(this.apiUrl + `users/customSubscription/${user_id}?subscriptionId=${subscription_id}`);
   }
 
   public addUser(data) {

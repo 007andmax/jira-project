@@ -9,8 +9,8 @@
   width: 40px;
   height: 40px;
   margin-right: 12px;
-  background-position: center;
-  background-size: cover;
+  background-position: center !important;
+  background-size: cover !important;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@
   border-right: 1px solid $gray-300;
   flex-shrink: 0;
   overflow: auto;
-  height: calc(100% - 64px);
+  height: calc(100% - 40px);
 
   .user-detail__row-info {
     .mat-form-field {
@@ -67,7 +67,8 @@
 }
 users-aside-detail-tickets,
 users-aside-detail-documents,
-users-aside-detail-passwords {
+users-aside-detail-passwords,
+users-aside-detail-messages {
   height: 100%;
   flex: 1;
   display: flex;
@@ -165,5 +166,18 @@ users-aside-detail-passwords {
     .select-wrapper {
       width: 325px;
     }
+  }
+}
+.upload-photo__img-block {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  .upload-photo__avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
   }
 }

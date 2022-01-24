@@ -29,6 +29,8 @@ import { environment } from 'src/environments/environment';
 import * as SockJS from 'sockjs-client';
 import { ConstantsService } from '../constants/constants.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
+import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
+import { WebsocketStateService } from 'src/app/states/websocket/websocket-state.service';
 
 
 /**
@@ -74,7 +76,9 @@ export class WebsocketService {
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
     private constantsService: ConstantsService,
-    private crmRealTimeService: CrmRealTimeService
+    private crmRealTimeService: CrmRealTimeService,
+    private marketingEmailRealTimeService: MarketingEmailRealTimeService,
+    private websocketStateService: WebsocketStateService,
 
   ) {
   }
@@ -114,6 +118,9 @@ export class WebsocketService {
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
       that.subsribeToCrm();
+      that.subsribeToCustomSubscription();
+      console.log('1 ---------------', data);
+      if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {
       console.log("debug", data);
@@ -222,6 +229,20 @@ export class WebsocketService {
       });
     }, 3000);
   }
+
+  public subsribeToUserSubscriptions(id) {
+
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/subscription/${id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeSubscriptions(newChange);
+        if (message.body) {
+
+        }
+      });
+    }, 3000);
+  }
+
 
   /**
   * subscribe to recurring tickets realtime
@@ -500,6 +521,19 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/tagManagement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.tagsRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToCustomSubscription() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/customSubscription`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.marketingEmailRealTimeService.handleRealTimeChanges(newChange);
 
       });
 

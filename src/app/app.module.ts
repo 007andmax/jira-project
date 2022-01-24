@@ -488,6 +488,23 @@ import { AccountingSettingsComponent } from './components/setting/accounting/acc
 import { AccountingYearComponent } from './components/setting/accounting/accounting-year/accounting-year.component';
 import { AddGlNumberComponent } from './components/setting/accounting/gl-number/add-gl-number/add-gl-number.component';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
+import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
+import { MarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component';
+import { AddMarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.component';
+import { MarketingEmailUsersComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users.component';
+import { UsersAsideDetailMessagesComponent } from './components/users/users-aside-detail/users-aside-detail-messages/users-aside-detail-messages.component';
+import { MarketingEmailUsersItemComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
+import { MarketingEmailUsersAddComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
+import { UserDefaultSubscriptionComponent } from './components/users/users-aside/user-default-subscription/user-default-subscription.component';
+import { UserCustomSubscriptionComponent } from './components/users/users-aside/user-custom-subscription/user-custom-subscription.component';
+import { UserTableDefaultSubscriptionComponent } from './components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
+import { UserTableCustomSubscriptionComponent } from './components/users/users-table/user-table-custom-subscription/user-table-custom-subscription.component';
+import { UsersFilterSubscriptionsComponent } from './components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
+import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
+import { UsersAsideDetailMessagesFullBodyComponent } from './components/users/users-aside-detail/users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
+import { MarketingComponent } from './components/marketing/marketing.component';
+import { UsersTableMarketingComponent } from './components/marketing/users-table-marketing/users-table-marketing.component';
+import { LeftPanelMarketingComponent } from './components/left-panel/left-panel-marketing/left-panel-marketing.component';
 
 
 declare var $: any;
@@ -924,7 +941,24 @@ declare var $: any;
     CrmCompanyServiceTypeComponent,
     AddCrmCompanyServiceTypeComponent,
     CrmCompanyJobTypeComponent,
-    AddCrmCompanyJobTypeComponent
+    AddCrmCompanyJobTypeComponent,
+    MarketingEmailComponent,
+    MarketingSubscriptionTypeComponent,
+    AddMarketingSubscriptionTypeComponent,
+    MarketingEmailUsersComponent,
+    UsersAsideDetailMessagesComponent,
+    MarketingEmailUsersItemComponent,
+    MarketingEmailUsersAddComponent,
+    UserDefaultSubscriptionComponent,
+    UserCustomSubscriptionComponent,
+    UserTableDefaultSubscriptionComponent,
+    UserTableCustomSubscriptionComponent,
+    UsersFilterSubscriptionsComponent,
+    AddUserToSubscribeComponent,
+    UsersAsideDetailMessagesFullBodyComponent,
+    MarketingComponent,
+    UsersTableMarketingComponent,
+    LeftPanelMarketingComponent
   ],
   imports: [
     BrowserModule,
@@ -979,7 +1013,8 @@ declare var $: any;
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
-    ModalEditCategoryProductComponent
+    ModalEditCategoryProductComponent,
+    AddUserToSubscribeComponent
     // RecurringTicketsComponent
   ],
   exports: [

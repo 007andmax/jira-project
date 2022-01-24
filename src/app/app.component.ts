@@ -24,6 +24,7 @@ import { TagsStateService } from './states/tags/tags-state.service';
 import { DocumentsStateService } from './states/documents/documents-state.service';
 import { AppStateService } from './states/app/app-state.service';
 import { CrmStateService } from './states/crm/crm-state.service';
+import { MarketingEmailStateService } from './states/marketing-email/marketing-email-state.service';
 
 
 /**
@@ -79,6 +80,7 @@ export class AppComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
+    private marketingEmailStateService: MarketingEmailStateService,
 
   ) { }
 
@@ -106,6 +108,7 @@ export class AppComponent implements OnInit {
     this.tagsStateService.onInit();
     this.documentsStateService.onInit();
     this.crmStateService.onInit();
+    this.marketingEmailStateService.onInit();
     //  this.userService.getCurrentUser();
 
     this.websocketService.initializeWebSocketConnection();

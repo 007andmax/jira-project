@@ -19,6 +19,8 @@ import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-ty
 import { Input } from 'hammerjs';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 
 @Component({
   selector: 'app-users-aside',
@@ -33,9 +35,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   user: UserProfile = new UserProfile();
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   companies = [];
+  MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
   validate: UserValidate = new UserValidate();
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
+  industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   sub: Subscription = new Subscription();
@@ -52,7 +56,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+    })
+    this.sub.add(onGetIndustry);
     this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = data;
@@ -62,13 +70,15 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.usersStateService.getOpenAside().subscribe(data => {
       this.getJobTypeList();
       this.opened = true;
-      this.companySubscriptionState.onEditMode(this.user.subscription);
     })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
 
+  }
+  onSelectClientIndustry(item) {
+    this.user.setUserIndustryId((item) ? item.id : null);
   }
   getJobTypeList() {
     if (this.crmStateService.getJobTypeList().length === 0) {
@@ -110,10 +120,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   public onChangeTags(tags) {
     this.user.setTags(tags);
   }
-  onChangeSubscriptions(data) {
-
-    data.forEach(item => this.user.subscription[item.field] = item.selected);
-    //  this.user.setSubscriptions(data);
+  onChangeDefaultSubscriptions(data) {
+    this.user.setDefaultSubscriptions(data);
+  }
+  onChangeCustomSubscriptions(data) {
+    this.user.setCustomSubscriptions(data);
   }
   onCheckEmail() {
 

@@ -58,6 +58,7 @@ export class LeftPanelSettingsComponent implements OnInit {
       || state === 'commission-component'
       || state === 'ticket-settings'
       || state === 'crm-settings'
+      || state === 'marketing-email'
       || state === 'subscription-component')
   }
   openPanel() {

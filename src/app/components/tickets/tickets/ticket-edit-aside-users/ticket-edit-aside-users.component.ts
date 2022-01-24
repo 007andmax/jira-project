@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../../users/class/user';
 import { TicketsListService } from '../services/tickets-list.service';
@@ -10,6 +10,10 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from 'src/app/components/setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { UserDefaultSubscriptionAdd } from 'src/app/components/users/class/user-default-subscription-add';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UserDefaultSubscription } from 'src/app/components/users/class/user-default-subscription';
+import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
 
 @Component({
   selector: 'app-ticket-edit-aside-users',
@@ -36,6 +40,8 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
+    private usersRealTimeService: UsersRealTimeService,
     private crmStateService: CrmStateService,
     public ticketsListService: TicketsListService,) { }
 
@@ -57,6 +63,31 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       this.isOpenDropDown = false;
     });
     this.getJobTypeList();
+    this.onInitSubscribe();
+  }
+  private onInitSubscribe() {
+    setTimeout(() => {
+
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+        if (newChange.action === 'SUBSCRIPTION_SAVED') {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
+          if (reqIndex > -1) {
+            this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          }
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
+          if (userIndex > -1) {
+            console.log("newChange.data", newChange.data);
+            this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            console.log("this.users[userIndex]", this.users[userIndex]);
+          }
+          this.cd.detectChanges();
+        }
+      });
+      this.sub.add(stompClient);
+
+    }, 3000);
   }
   getJobTypeList() {
     if (this.crmStateService.getJobTypeList().length === 0) {
@@ -112,12 +143,19 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
 
     })
   };
+  isSeletedSubscription(user, field) {
+    return user.defaultSubscriptions[field].enabled;
+  }
   onChangeSubscriptions(field, user) {
-    let subscription = JSON.parse(JSON.stringify(user.subscription));
-    subscription[field] = !subscription[field];
-    this.usersService.setSubscriptions(subscription).subscribe(res => {
+    let subscriptions = JSON.parse(JSON.stringify(user.defaultSubscriptions));
+    subscriptions[field].enabled = !subscriptions[field].enabled;
+    this.usersService.setSubscriptions(subscriptions.id, {
+      ...new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+        subscriptions.ticketManagerSubscription.enabled,
+        subscriptions.invoiceSubscription.enabled)
+      , customSubscriptionIds: user.customSubscriptions.map(item => item.id)
+    }).subscribe(data => {
 
-      user.subscription = subscription;
     })
   }
 

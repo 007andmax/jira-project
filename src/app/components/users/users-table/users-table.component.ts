@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
@@ -14,9 +14,16 @@ import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/app/const/emails';
-import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
+import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
+import { UserDefaultSubscription } from '../class/user-default-subscription';
+import { UserCustomSubscription } from '../class/user-custom-subscription';
+import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users-table',
@@ -24,16 +31,21 @@ import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-ty
   styleUrls: ['./users-table.component.scss'],
   providers: [UsersTableService]
 })
-export class UsersTableComponent implements OnInit {
+export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;
   @Input() user: User;
   @Input() type: string;
   @Input() showArchivedUsers: boolean;
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
+  @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  industries: Array<CrmCompanyIndustry> = [];
+  @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  sub: Subscription = new Subscription();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
@@ -43,13 +55,34 @@ export class UsersTableComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     private usersTableService: UsersTableService,
     public cd: ChangeDetectorRef,
+    private crmStateService: CrmStateService,
     private elRef: ElementRef) { }
 
-  onChangeSubscriptions(data) {
-    this.usersService.setSubscriptions(data).subscribe(res => {
 
-      this.user.subscription = data;
+  onChangeDefaultSubscriptions(subscriptions) {
+    this.usersService.setSubscriptions(subscriptions.id, {
+      ...new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+        subscriptions.ticketManagerSubscription.enabled,
+        subscriptions.invoiceSubscription.enabled)
+      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
+    }).subscribe(data => {
+
     })
+  }
+  onChangeCustomSubscriptions(data) {
+    console.log("data", data);
+    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
+      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
+        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
+        this.user.defaultSubscriptions.invoiceSubscription.enabled)
+      , customSubscriptionIds: data.map(item => item.id)
+    }).subscribe(data => {
+      this.customSubscription.toggleIsUpdate(false);
+    })
+  }
+  getUserIndustry() {
+    let find = this.industries.find(item => item.id === this.user.userIndustryId);
+    return (find) ? find.name : '';
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
@@ -88,10 +121,17 @@ export class UsersTableComponent implements OnInit {
     })
   }
   edit() {
-    this.usersStateService.setUserForEdit(this.user);
+    this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
     this.usersStateService.onOpenEditAsige();
   }
   ngOnInit() {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+      this.cd.detectChanges();
+    })
+    this.sub.add(onGetIndustry);
+
 
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -150,5 +190,8 @@ export class UsersTableComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

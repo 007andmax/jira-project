@@ -19,7 +19,11 @@
     border: none;
     padding-bottom: 128px;
   }
-
+  &.users-page__aside {
+    .qt-aside-modern__content {
+      padding: 16px 32px;
+    }
+  }
   &.password-edit-aside {
     .qt-aside-modern__header {
       @media (max-width: 767px) {
@@ -157,7 +161,12 @@
       }
     }
   }
-
+  &.draft-email-aside {
+    .qt-aside-modern__content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   &.--large {
     width: 642px;
 

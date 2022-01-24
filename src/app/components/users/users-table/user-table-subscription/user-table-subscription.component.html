@@ -1,15 +1,90 @@
-<div ngbDropdown container="body">
-  <div class="grey-dropdown">
-    <div class="pointer subs-list"
-         id="dropdownBasic"
-         ngbDropdownToggle>
-      <div [textContent]="title"></div>
-      <i class="icn-sm report-caret-icon"></i>
+<div
+    ngbDropdown
+    container="body"
+>
+    <div class="grey-dropdown">
+        <div
+            class="pointer subs-list"
+            id="dropdownBasic"
+            ngbDropdownToggle
+        >
+            <div
+                *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
+                class="selected-item"
+            >
+                Invoice
+                <div class="icn-remove"></div>
+            </div>
+            <div
+                class
+                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
+            >
+                Ticket
+                <div class="icn-remove"></div>
+            </div>
+            <div
+                class
+                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
+            >
+                Ticket Manager
+                <div class="icn-remove"></div>
+            </div>
+            <ng-template
+                ngFor
+                let-custom
+                [ngForOf]="customSubscriptions"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    [ngClass]="{'active':custom.activated}"
+                    [textContent]="custom.name"
+                >
+                    <div class="icn-remove"></div>
+                </div>
+            </ng-template>
+            <i class="icn-sm report-caret-icon"></i>
+        </div>
+        <ul
+            class="qt-dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic"
+            *ngIf="false"
+        >
+            <li
+                ngbDropdownItem
+                *ngIf="defaultSubscriptions && defaultSubscriptions.invoice && defaultSubscriptions.invoice.enabled"
+                [ngClass]="{'active':defaultSubscriptions.invoice.activated}"
+                (click)="updateDefault('invoice')"
+            >
+                Invoice
+            </li>
+            <li
+                ngbDropdownItem
+                *ngIf="defaultSubscriptions && defaultSubscriptions.ticket && defaultSubscriptions.ticket.enabled"
+                [ngClass]="{'active':defaultSubscriptions.ticket.activated}"
+                (click)="updateDefault('ticket')"
+            >
+                Ticket
+            </li>
+            <ng-template
+                ngFor
+                let-custom
+                [ngForOf]="customSubscriptions"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <li
+                    ngbDropdownItem
+                    [ngClass]="{'active':custom.activated}"
+                    (click)="updateCustom(i)"
+                    [textContent]="custom.name"
+                >
+                </li>
+            </ng-template>
+        </ul>
     </div>
-    <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic">
-      <li ngbDropdownItem (click)="update('ticket')">Updates</li>
-      <li ngbDropdownItem (click)="update('invoice')">Invoice</li>
-      <li ngbDropdownItem (click)="update('ticketManager')">Ticket Manager</li>
-    </ul>
-  </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserCustomSubscription } from '../../class/user-custom-subscription';
+import { UserDefaultSubscription } from '../../class/user-default-subscription';
 import { UserSubscription } from '../../class/user-subscription';
 
 @Component({
@@ -7,27 +9,27 @@ import { UserSubscription } from '../../class/user-subscription';
   styleUrls: ['./user-table-subscription.component.scss']
 })
 export class UserTableSubscriptionComponent implements OnInit {
-  @Input() subscription: UserSubscription;
-  @Output() onChange = new EventEmitter();
-  list = [];
-  title: string = '';
+  @Input() defaultSubscriptions: UserDefaultSubscription;
+  @Input() customSubscriptions: Array<UserCustomSubscription> = [];
+  @Output() onChangeDefault = new EventEmitter();
+  @Output() onChangeCustom = new EventEmitter();
+
   constructor() { }
-  ngDoCheck() {
-    this.list = [];
-    this.title = '';
-    if (this.subscription.ticket) this.list.push('Updates');
-    if (this.subscription.invoice) this.list.push('Invoice');
-    if (this.subscription.ticketManager) this.list.push('Ticket Manager');
-    this.title = this.list.join(', ');
+
+  ngOnInit() {
 
   }
-  ngOnInit() {
-   
+
+  updateDefault(field) {
+    let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
+    subscription[field].activated = !subscription[field].activated;
+    this.onChangeDefault.emit(subscription);
+
   }
-  update(field) {
-    let subscription = JSON.parse(JSON.stringify(this.subscription));
-    subscription[field] = !subscription[field];
-    this.onChange.emit(subscription);
+  updateCustom(i) {
+    let subscription = JSON.parse(JSON.stringify(this.customSubscriptions));
+    subscription[i].activated = !subscription[i].activated;
+    this.onChangeCustom.emit(subscription);
 
   }
 

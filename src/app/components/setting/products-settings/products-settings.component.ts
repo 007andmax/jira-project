@@ -91,7 +91,8 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))
       .subscribe(
         () => {
-
+          this.inventoryStateService.setListCategoriesForRemove([]);
+          this.cd.detectChanges();
         },
         error => {
         }

@@ -1,0 +1,19 @@
+@import "./src/assets/styles/variable";
+
+.active {
+    background: $gray-800;
+    color: $primary-1;
+    border-left: 2px solid $primary-1;
+}
+.category-item {
+    &:hover {
+        color: $primary-1;
+    }
+}
+.category-name {
+    color: $white;
+}
+.list-marketing-container {
+    max-height: 400px;
+    overflow: auto;
+}

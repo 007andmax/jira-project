@@ -1,0 +1,71 @@
+<div
+    ngbDropdown
+    container="body"
+>
+    <div
+        class="list-custom-subscriptions"
+        id="dropdownBasic"
+        ngbDropdownToggle
+    >
+        <ng-template
+            ngFor
+            let-custom
+            [ngForOf]="customSubscriptions"
+            let-i="index"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                class="selected-item"
+                [ngClass]="{'active':custom.activated,
+            'no-active':!custom.activated}"
+            >
+                {{custom.name}}
+                <div
+                    class="icn-sm icn-remove qt-bg-contain qt-dib"
+                    (click)="selected(custom)"
+                ></div>
+            </div>
+        </ng-template>
+    </div>
+    <ul
+        class="select-wrapper"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <ng-template
+                ngFor
+                let-custom
+                [ngForOf]="listCustomSubscription"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    (click)="selected(custom)"
+                    class="company-tag-item"
+                    [ngClass]="{'is-hover':isSeleted(custom),'is-update':isUpdate}"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(custom)"
+                            [disabled]="isUpdate"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div
+                                class="name"
+                                [textContent]="custom.name"
+                            >
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
+    </ul>
+</div>

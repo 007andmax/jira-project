@@ -82,7 +82,7 @@
                             </li>
                             <li (click)="showPrivilege = !showPrivilege">
                                 <span class="dropdown-menu-qt__item-icon icon__set-privilege"></span>
-                                Set {{ user.firstName }} Privilege
+                                Set {{ user.firstName }} role
                                 <ul
                                     class="dropdown-menu-qt__submenu dropdown-menu set-role-user-dropdown"
                                     *ngIf="showPrivilege"
@@ -113,11 +113,11 @@
                                         <label
                                             class="checkbox-container dropdown-menu-qt__input-item"
                                             [attr.for]="'ticket-' + i"
-                                            (click)="onChangeSubscriptions('ticket',user)"
+                                            (click)="onChangeSubscriptions('ticketSubscription',user)"
                                         >
                                             <input
                                                 [attr.id]="'ticket-' + i"
-                                                [checked]="user.subscription.ticket"
+                                                [checked]="isSeletedSubscription(user,'ticketSubscription')"
                                                 type="checkbox"
                                             >
                                             <span class="checkbox-mark"></span>
@@ -128,11 +128,11 @@
                                         <label
                                             class="checkbox-container dropdown-menu-qt__input-item"
                                             [attr.for]="'invoice-' + i"
-                                            (click)="onChangeSubscriptions('invoice',user)"
+                                            (click)="onChangeSubscriptions('invoiceSubscription',user)"
                                         >
                                             <input
                                                 [attr.id]="'invoice-' + i"
-                                                [checked]="user.subscription.invoice"
+                                                [checked]="isSeletedSubscription(user,'invoiceSubscription')"
                                                 type="checkbox"
                                             >
                                             <span class="checkbox-mark"></span>
@@ -143,11 +143,11 @@
                                         <label
                                             class="checkbox-container dropdown-menu-qt__input-item"
                                             [attr.for]="'ticketManager-' + i"
-                                            (click)="onChangeSubscriptions('ticketManager',user)"
+                                            (click)="onChangeSubscriptions('ticketManagerSubscription',user)"
                                         >
                                             <input
                                                 [attr.id]="'ticketManager-' + i"
-                                                [checked]="user.subscription.ticketManager"
+                                                [checked]="isSeletedSubscription(user,'ticketManagerSubscription')"
                                                 type="checkbox"
                                             >
                                             <span class="checkbox-mark"></span>

@@ -1,0 +1,132 @@
+<div class="qt-df qt-ai-c qt-jc-sb qt-mb-24">
+    <h5 class="qt-fw-600 qt-color-dark">Save to Subscription</h5>
+    <div
+        class="icon__close qt-sz-20 qt-ic-c qt-bg-contain qt-ml-6 pointer"
+        (click)="close()"
+    ></div>
+</div>
+<table
+    class="display dataTable"
+    style="width:100%"
+>
+    <tbody>
+        <add-marketing-subscription-type
+            *ngIf="showAdd"
+            [mode]="MODE_ADD_BY_MODAL"
+            [marketingSubscriptionList]="marketingSubscriptionList"
+            (onClose)="showAdd = false"
+            (onAdded)="onAddedSubscription($event)"
+        ></add-marketing-subscription-type>
+        <tr
+            *ngFor="let item of marketingSubscriptionList; let i = index"
+            appClickOtside
+            [init]="item.isInitEdit && isSelectedForEdit(item)"
+            [ngClass]="['edit-crm-container-' + i , isSelected(item) ? 'manage-subscription-selected' : '']"
+            [class]="'.edit-crm-container-' + i"
+            (onOutSide)="onEditSubscription(item,$event)"
+            (click)="onSelectSubscription(item)"
+        >
+            <td
+                class="tax-name edit-category-name"
+                [ngClass]="{'--input-error' :  item.disableUpdate  }"
+            >
+                <span
+                    *ngIf="!isSelectedForEdit(item)"
+                    [textContent]="item.name"
+                ></span>
+                <input
+                    *ngIf="isSelectedForEdit(item)"
+                    type="text"
+                    class="form-input"
+                    placeholder="Enter Name Category"
+                    [(ngModel)]="item.name"
+                    appKeyUpEnter
+                    (onChange)="onEditSubscription(item,$event)"
+                    maxlength="30"
+                    (input)="item.onInitEdit(true);item.checkDublicate(marketingSubscriptionList)"
+                >
+                <mat-error
+                    class="qt-tooltip-error"
+                    *ngIf="item.disableUpdate"
+                >
+                    This Industry is already occupied
+                </mat-error>
+                <div
+                    *ngIf="!isEditMode && isSelected(item)"
+                    class="icon__active_subscription qt-sz-16 qt-bg-contain"
+                ></div>
+            </td>
+            <td
+                class="action"
+                *ngIf="isEditMode"
+            >
+                <a
+                    href="javascript:;"
+                    data-tooltip="Edit"
+                    class="edit"
+                    (click)="editSubscription(item)"
+                >
+                    <div class="icon__edit qt-bg-contain  qt-sz-16"></div>
+                </a>
+                <a
+                    href="javascript:;"
+                    data-tooltip="Remove"
+                    class="remove"
+                    (click)="removeSubscription(item)"
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        class="qt-aside-modern__footer"
+        *ngIf="!showPreloader"
+    >
+        <div class="qt-df">
+            <button
+                class="qt-btn --outline --small"
+                (click)="showAdd = true"
+            >
+                <div class="icon__create-list qt-sz-16 qt-bg-contain qt-mr-8 pointer"></div>
+                Create Subscription
+            </button>
+            <button
+                class="qt-btn --outline --small qt-ml-8 qt-mr-6"
+                (click)="toggleEditMode(!isEditMode)"
+            >
+                <div class="icon__manage qt-sz-16 qt-bg-contain qt-mr-6 pointer"></div>
+                Manage Subscription
+            </button>
+        </div>
+        <div class="qt-df">
+            <button
+                *ngIf="isEditMode"
+                class="qt-button --gray qt-mr-12"
+                (click)="toggleEditMode(!isEditMode)"
+            >
+                Back
+            </button>
+            <button
+                *ngIf="!isEditMode"
+                class="qt-button --gray qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button "
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="save()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</table>

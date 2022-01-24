@@ -1,4 +1,4 @@
-<tr [ngClass]="{'--selected': selected}">
+<tr [ngClass]="{'--selected': selected || user.selected}">
     <td class="users-table__check">
         <div class="d-f">
             <label
@@ -39,7 +39,7 @@
     </td>
     <td
         class="users-table__company"
-        *ngIf="type === TYPE_LIST_ALL_USERS"
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
     >
         <span>{{ getUserCompanyName() }}</span>
@@ -50,6 +50,12 @@
         (click)="showDetailUser()"
     >
         <span>{{ user.primaryEmail }}</span>
+    </td>
+    <td
+        class="users-table__company"
+        (click)="showDetailUser()"
+    >
+        <span>{{ getUserIndustry() }}</span>
     </td>
     <td
         class="users-table__contract-no"
@@ -79,15 +85,32 @@
             </div>
         </ng-template>
     </td>
-    <td class="users-table__subscription">
-        <app-user-table-subscription
+    <td
+        class="users-table__subscription"
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+    >
+        <user-table-default-subscription
             class="users-table__subscription--dropdown"
-            (onChange)="onChangeSubscriptions($event)"
-            [subscription]="user.subscription"
+            (onChangeDefault)="onChangeDefaultSubscriptions($event)"
+            [defaultSubscriptions]="user.defaultSubscriptions"
         >
-        </app-user-table-subscription>
+        </user-table-default-subscription>
     </td>
     <td
+        class="users-table__subscription"
+        *ngIf="type === TYPE_LIST_MARKETING_USERS"
+    >
+        <user-table-custom-subscription
+            #customSubscription
+            class="users-table__subscription--dropdown"
+            (onChangeCustom)="onChangeCustomSubscriptions($event)"
+            [listCustomSubscription]="listCustomSubscription"
+            [customSubscriptions]="user.customSubscriptions"
+        >
+        </user-table-custom-subscription>
+    </td>
+    <td
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
         class="users-table__tickets"
         [textContent]="user.userStatistic.ticketsSubmitted || 0"
         (click)="showDetailUser()"

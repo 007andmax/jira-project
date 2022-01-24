@@ -1,0 +1,109 @@
+<div
+    ngbDropdown
+    container="body"
+>
+    <div
+        class="list-default-subscriptions"
+        id="dropdownBasic"
+        ngbDropdownToggle
+    >
+        <div
+            *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated,
+        'no-active': !defaultSubscriptions.invoiceSubscription.activated}"
+            class="selected-item"
+        >
+            Invoice Updates
+            <div
+                class="icn-sm icn-remove qt-bg-contain qt-dib"
+                (click)="updateDefault('invoiceSubscription')"
+            ></div>
+        </div>
+        <div
+            class="selected-item"
+            *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated,
+        'no-active': !defaultSubscriptions.ticketSubscription.activated}"
+        >
+            Ticket Updates
+            <div
+                class="icn-sm icn-remove qt-bg-contain qt-dib"
+                (click)="updateDefault('ticketSubscription')"
+            ></div>
+        </div>
+        <div
+            class="selected-item"
+            *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated,
+        'no-active': !defaultSubscriptions.ticketManagerSubscription.activated}"
+        >
+            Ticket Manager
+            <div
+                class="icn-sm icn-remove qt-bg-contain qt-dib"
+                (click)="updateDefault('ticketManagerSubscription')"
+            ></div>
+        </div>
+    </div>
+    <div
+        class="select-wrapper"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <div
+                (click)="updateDefault('invoiceSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('invoiceSubscription')}"
+            >
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('invoiceSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Invoice Updates</div>
+                    </div>
+                </label>
+            </div>
+            <div
+                (click)="updateDefault('ticketSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('ticketSubscription')}"
+            >
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('ticketSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Ticket Updates</div>
+                    </div>
+                </label>
+            </div>
+            <div
+                (click)="updateDefault('ticketManagerSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('ticketManagerSubscription')}"
+            >
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('ticketManagerSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Ticket Manager</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
