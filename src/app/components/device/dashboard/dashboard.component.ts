@@ -4,7 +4,7 @@ import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-upl
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
-import { ModalDismissReasons, NgbDatepicker, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbActiveModal, NgbDatepicker, NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   reloadWindowUpdatePendingList: any[] = [];
   check: any[] = [];
   isOverlay = false;
+  installUpdateModal: NgbModalRef;
 
   constructor(
     private agentService: AgentService,
@@ -93,6 +94,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.setPreviewDataDevice();
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e) => this.onCurrentConfigError(e));
+    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
   }
 
   onCurrentConfig(resp: any) {
@@ -102,6 +104,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.kafkaMessage = JSON.parse(item.Value);
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
         if (this.securityUpdate > 0) {
+          this.windowUpdatePendingList = [];
           for (let i = 0; i < this.securityUpdate; i++) {
             let data: any = {};
             data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
@@ -127,6 +130,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onCurrentConfigError(err: any) {
     console.log('on current config error');
     this.toastr.error("Something went wrong getting real time data");
+  }
+
+  onInstallWindowsUpdates(resp: any) {
+    this.ngZone.run(() => {
+      this.modalService.dismissAll();
+      this.toastr.success(resp.Value);
+    });
+  }
+
+  onInstallWindowsUpdatesError(error: any) {
+    console.log('onInstallWindowsUpdatesError');
+    this.toastr.error("Something went wrong installing updates");
   }
 
   setPreviewDataDevice() {
@@ -611,20 +626,37 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   InstallUpdate() {
-    for(let i=0;i< this.reloadWindowUpdatePendingList.length; i++) {
-      var item = this.windowUpdatePendingList.find(x=> x.UpdateID == this.reloadWindowUpdatePendingList[i].UpdateID);
-      if(item) {
+    var clonedItems = [];
+    for (let i = 0; i < this.reloadWindowUpdatePendingList.length; i++) {
+      var itemToUpdate: any = {};
+      itemToUpdate.UpdateID = this.reloadWindowUpdatePendingList[i].UpdateID;
+      itemToUpdate.Title = this.reloadWindowUpdatePendingList[i].Title;
+      itemToUpdate.RebootIsRequired = this.reloadWindowUpdatePendingList[i].RebootIsRequired;
+
+      if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+        itemToUpdate.RebootIsRequired = "0";
+      }
+      else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+        itemToUpdate.RebootIsRequired = "1";
+      }
+      else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+        itemToUpdate.RebootIsRequired = "2";
+      }
+      clonedItems.push(itemToUpdate);
+
+      var item = this.windowUpdatePendingList.find(x => x.UpdateID == this.reloadWindowUpdatePendingList[i].UpdateID);
+      if (item) {
         item.loading = true;
       }
     }
 
-    this.agentService.GetWindowUpdateList(this.asset.ID, this.reloadWindowUpdatePendingList);
+    this.agentService.GetWindowUpdateList(this.asset.ID, clonedItems);
 
-    if(this.check.length){
+    if (this.check.length) {
       this.isOverlay = true;
-      setTimeout(()=>{
+      setTimeout(() => {
         this.isOverlay = false;
-      },3000)
+      }, 3000)
     }
   }
 }
