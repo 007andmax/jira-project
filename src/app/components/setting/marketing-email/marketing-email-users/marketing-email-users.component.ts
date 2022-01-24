@@ -60,8 +60,8 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let onUpdateUsersListInAside = this.marketingEmailStateService.onUpdateUsersListInAside.subscribe(res => {
-      if (this.opened) {
-        this.reqUsers = res.map(item => new MarketingEmailUsers(item));
+      if (this.opened && this.marketingSubscription.id === res.subscription.id) {
+        this.reqUsers = res.users.map(item => new MarketingEmailUsers(item));
         this.reqUsers.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
           1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
         this.users = this.reqUsers.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(this.word));
