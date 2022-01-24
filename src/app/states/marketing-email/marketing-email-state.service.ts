@@ -14,6 +14,7 @@ export class MarketingEmailStateService {
   listSubscriptionTypeForRemove = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   openAside: EventEmitter<any> = new EventEmitter();
+  isGetMarketing: boolean = false;
   onUpdateUsersListInAside: EventEmitter<any> = new EventEmitter();
   onGetListCustomSubscription: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService,
@@ -25,6 +26,7 @@ export class MarketingEmailStateService {
       this.listCustomSubscription.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
       this.onGetListCustomSubscription.emit(this.listCustomSubscription);
+      this.isGetMarketing = true;
     });
     this.marketingEmailRealTimeService.changeCrmArray.subscribe(data => {
       if (data.action === "CUSTOM_SUBSCRIPTION_CREATED") this.listCustomSubscription.push(new MarketingSubscriptionType(data.data));

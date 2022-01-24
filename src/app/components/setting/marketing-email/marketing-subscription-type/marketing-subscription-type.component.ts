@@ -44,6 +44,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     this.marketingSubscriptionList = this.marketingEmailStateService.getListCustomSubscription();
     if (this.marketingSubscriptionList.length > 0) this.showPreloader = false;
+    if (this.marketingEmailStateService.isGetMarketing) this.showPreloader = false;
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.marketingSubscriptionList = data;
       this.showPreloader = false;
