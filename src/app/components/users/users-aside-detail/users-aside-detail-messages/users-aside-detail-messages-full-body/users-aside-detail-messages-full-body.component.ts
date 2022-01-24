@@ -53,4 +53,7 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
   close() {
     this.opened = false;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

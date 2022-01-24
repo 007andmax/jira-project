@@ -215,15 +215,12 @@ export class UserFilter {
 
     }
     private onFilterIndustry(reqUsers, industries) {
-        console.log("onFilterIndustry");
         reqUsers.sort((a, b) => {
             let first = this.getIndustryName(a, industries);
             let next = this.getIndustryName(b, industries);
             return (first.toLowerCase() > next.toLowerCase()) ?
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
-
-
     }
 
     private onFilterPrimaryEmail(reqUsers) {

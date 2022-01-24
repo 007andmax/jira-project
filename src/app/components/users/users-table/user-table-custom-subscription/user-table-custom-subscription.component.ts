@@ -37,4 +37,7 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
   isSeleted(subscription) {
     return this.customSubscriptions.find(item => item.id === subscription.id);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

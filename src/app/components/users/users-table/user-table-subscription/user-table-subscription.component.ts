@@ -33,5 +33,7 @@ export class UserTableSubscriptionComponent implements OnInit {
 
   }
 
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }

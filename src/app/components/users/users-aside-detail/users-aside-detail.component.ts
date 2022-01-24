@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { USERS } from 'src/app/const/emails';
+import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -37,6 +38,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   tab: string = 'tickets';
   companies = [];
   selectedCompany = null;
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
@@ -87,8 +89,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
           this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           this.usersStateService.getuserForEdit().changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
           this.usersStateService.getuserForEdit().changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-
-          console.log("this.user", this.user);
         }
         this.cd.detectChanges();
       }
@@ -221,13 +221,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         data.invoiceSubscription.enabled)
       , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
     }).subscribe(res => {
-      /* this.user.setDefaultSubscriptions(new UserDefaultSubscription(data));
-       let keys = Object.keys(this.user.defaultSubscriptions);
-       console.log("keys", keys);
-       console.log("this.user.defaultSubscriptions", this.user.defaultSubscriptions);
-       for (let i = 0; i < keys.length; i++) {
-         if (keys[i] != "id") this.user.defaultSubscriptions[keys[i]].setIsExist(true);
-       }*/
     })
   }
   onChangeCustomSubscriptions(data) {
@@ -238,10 +231,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         this.user.defaultSubscriptions.invoiceSubscription.enabled)
       , customSubscriptionIds: data.map(item => item.id)
     }).subscribe(res => {
-      /*  this.user.setCustomSubscriptions(data);
-        this.user.customSubscriptions.forEach(item => {
-          item.setIsExist(true);
-        })*/
     })
   }
   ngOnDestroy(): void {

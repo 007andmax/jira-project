@@ -42,7 +42,6 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
       this.marketingSubscription = data;
       this.opened = true;
       this.marketingEmailService.getUsersList(data.id, data.getSubscribed()).subscribe((res: any) => {
-        console.log("res", res);
         this.users = res.map(item => new MarketingEmailUsers(item));
         this.reqUsers = res.map(item => new MarketingEmailUsers(item));
         this.users.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
@@ -61,9 +60,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let onUpdateUsersListInAside = this.marketingEmailStateService.onUpdateUsersListInAside.subscribe(res => {
-      console.log("res", res);
       if (this.opened) {
-
         this.reqUsers = res.map(item => new MarketingEmailUsers(item));
         this.reqUsers.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
           1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
@@ -108,5 +105,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

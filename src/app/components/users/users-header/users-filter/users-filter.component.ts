@@ -48,8 +48,6 @@ export class UsersFilterComponent implements OnInit {
     })
     this.sub.add(onGetIndustry);
     let onLeftPanelMarketingFilter = this.usersStateService.onLeftPanelMarketingFilter.subscribe((data) => {
-      console.log("data", data);
-
       this.subscriptionDp.clearCustomSubscription();
       this.filter.setCustomSubscriptions([]);
       if (data) {

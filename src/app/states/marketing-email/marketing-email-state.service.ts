@@ -25,10 +25,8 @@ export class MarketingEmailStateService {
       this.listCustomSubscription.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
       this.onGetListCustomSubscription.emit(this.listCustomSubscription);
-      //  this.usersStateService.setListCustomSubscription(data.map(item => new UserCustomSubscription(item)));
     });
     this.marketingEmailRealTimeService.changeCrmArray.subscribe(data => {
-      console.log("data", data);
       if (data.action === "CUSTOM_SUBSCRIPTION_CREATED") this.listCustomSubscription.push(new MarketingSubscriptionType(data.data));
       if (data.action === "CUSTOM_SUBSCRIPTION_DELETED") {
         let index = this.listCustomSubscription.findIndex(item => item.id === data.data);
@@ -41,7 +39,6 @@ export class MarketingEmailStateService {
       if (data.action === "MODIFIED_USERS_LIST") {
         let index = this.listCustomSubscription.findIndex(item => item.id === data.data.subscription.id);
         if (index > -1) this.listCustomSubscription[index].onUpdate(data.data.subscription);
-        console.log("this.listCustomSubscription[index]", this.listCustomSubscription[index]);
       }
       this.listCustomSubscription.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));

@@ -42,7 +42,6 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     if (this.listCustomSubscriptions.length > 0) this.setSubscriptions();
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscriptions = data;
-      console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
       this.setSubscriptions();
     })
     this.sub.add(onGetListCustomSubscription);
@@ -83,10 +82,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     let index = this.selectedSubscriptions.findIndex(custom => custom.id === subscription.id);
     if (index > -1) this.selectedSubscriptions.splice(index, 1);
     if (index == -1) this.selectedSubscriptions.push(subscription);
-
-
     this.defaultSubscriptions[field].enabled = !this.defaultSubscriptions[field].enabled;
-    console.log("this.defaultSubscriptions", this.defaultSubscriptions);
     if (!this.defaultSubscriptions.invoiceSubscription.enabled &&
       !this.defaultSubscriptions.ticketManagerSubscription.enabled &&
       !this.defaultSubscriptions.ticketSubscription.enabled) {
@@ -97,13 +93,9 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
 
   }
   updateCustom(item, subscription) {
-    console.log("updateCustom", item);
-
     let indexSubscription = this.selectedSubscriptions.findIndex(custom => custom.id === subscription.id);
     if (indexSubscription > -1) this.selectedSubscriptions.splice(indexSubscription, 1);
     if (indexSubscription == -1) this.selectedSubscriptions.push(subscription);
-
-
     let index = this.customSubscriptions.findIndex(custom => custom.id === item.id);
     if (index > -1) {
       this.customSubscriptions.splice(index, 1);
@@ -116,7 +108,6 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
 
   }
   toggleSubscription(item) {
-    console.log("item", item);
     this.tagCtrl.setValue(null);
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
     if (item.type === USER_SUBSCRIPTION_TYPE_DEFAULT) this.updateDefault(item.id, item);
@@ -133,5 +124,8 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

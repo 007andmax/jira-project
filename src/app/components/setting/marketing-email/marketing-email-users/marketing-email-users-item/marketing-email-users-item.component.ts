@@ -15,10 +15,8 @@ export class MarketingEmailUsersItemComponent implements OnInit {
   ngOnInit() {
   }
   selectUser() {
-    console.log("selectUser");
     this.user.selected = !this.user.selected;
     this.onSelect.emit(this.user);
-
   }
   parseNameUser(user) {
     return `${this.user.firstName} ${user.lastName}`;

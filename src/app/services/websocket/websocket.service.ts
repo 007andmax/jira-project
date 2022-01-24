@@ -119,7 +119,6 @@ export class WebsocketService {
       that.subsribeToDocumentsCategory();
       that.subsribeToCrm();
       that.subsribeToCustomSubscription();
-      console.log('1 ---------------', data);
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {

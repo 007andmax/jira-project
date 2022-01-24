@@ -65,7 +65,6 @@ export class MarketingComponent implements OnInit {
     this.filter = this.usersStateService.getFilter();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
-      console.log("data", data);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
@@ -185,10 +184,8 @@ export class MarketingComponent implements OnInit {
           }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
           if (userIndex > -1) {
-            console.log("newChange.data", newChange.data);
             this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
             this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
-            console.log("this.users[userIndex]", this.users[userIndex]);
           }
           this.cd.detectChanges();
         }

@@ -77,17 +77,14 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.currentUser = this.usersStateService.getCurrentUser();
   }
   public showAsideForDraftEmail() {
-
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
     if (this.userFilter.customSubscriptions.length === 1 && this.type === TYPE_LIST_MARKETING_USERS) {
       let users = this.reqUsers.filter(item => item.selected).filter(item => item.customSubscriptions.find(subscription => subscription.id === this.userFilter.customSubscriptions[0].id && subscription.activated));
-      console.log("users", users);
       this.draftEmailStateService.setSelectedUser(users);
     } else {
       this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
     }
-
     this.draftEmailStateService.toggleAsideForAdd();
   }
   delete() {

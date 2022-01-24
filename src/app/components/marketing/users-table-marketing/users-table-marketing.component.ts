@@ -56,7 +56,6 @@ export class UsersTableMarketingComponent implements OnInit {
     })
   }
   onChangeCustomSubscriptions(data) {
-    console.log("data", data);
     this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
       ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
         this.user.defaultSubscriptions.ticketManagerSubscription.enabled,

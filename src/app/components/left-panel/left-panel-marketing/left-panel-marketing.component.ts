@@ -92,5 +92,7 @@ export class LeftPanelMarketingComponent implements OnInit {
   ngOnDestroy(): void {
     this.leftPanelUsersService.onUnsubscribe();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }

@@ -70,7 +70,6 @@ export class AddUserToSubscribeComponent implements OnInit {
         catchError(error => of(undefined)))
         .subscribe(data => {
           item.onInitEdit(false);
-          console.log("event", event);
           if (event) event.target.blur();
         })
     }
@@ -94,7 +93,6 @@ export class AddUserToSubscribeComponent implements OnInit {
     let index = this.selectedSubscriptions.findIndex(subscription => subscription.id === item.id);
     if (index > -1) this.selectedSubscriptions.splice(index, 1);
     if (index === -1) this.selectedSubscriptions.push(item);
-    console.log("this.selectedSubscriptions", this.selectedSubscriptions);
   }
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
@@ -122,7 +120,6 @@ export class AddUserToSubscribeComponent implements OnInit {
       let users = this.users.filter(user => !user.customSubscriptions.find(customSubscription => customSubscription.id === subscription.id))
       if (users.length > 0) subscriptions.push({ id: subscription.id, users: users.map(user => user.id) })
     })
-    console.log("this.isAddNewSubscription", this.isAddNewSubscription);
     if (this.showAdd) {
       this.isAddNewSubscription = true;
       this.addBtn.setDisabled(true);

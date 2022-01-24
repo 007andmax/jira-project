@@ -34,7 +34,6 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
 
   }
   private getUsers() {
-    console.log("getUsers");
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

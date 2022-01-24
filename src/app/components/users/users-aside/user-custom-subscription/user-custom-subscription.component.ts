@@ -43,4 +43,7 @@ export class UserCustomSubscriptionComponent implements OnInit {
   public showPlaceholder() {
     return this.customSubscriptions.length > 0
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

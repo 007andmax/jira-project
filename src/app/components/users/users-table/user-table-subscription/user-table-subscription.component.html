@@ -56,17 +56,17 @@
         >
             <li
                 ngbDropdownItem
-                *ngIf="defaultSubscriptions && defaultSubscriptions.invoice && defaultSubscriptions.invoice.enabled"
-                [ngClass]="{'active':defaultSubscriptions.invoice.activated}"
-                (click)="updateDefault('invoice')"
+                *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
+                (click)="updateDefault('invoiceSubscription')"
             >
                 Invoice
             </li>
             <li
                 ngbDropdownItem
-                *ngIf="defaultSubscriptions && defaultSubscriptions.ticket && defaultSubscriptions.ticket.enabled"
-                [ngClass]="{'active':defaultSubscriptions.ticket.activated}"
-                (click)="updateDefault('ticket')"
+                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
+                (click)="updateDefault('ticketSubscription')"
             >
                 Ticket
             </li>

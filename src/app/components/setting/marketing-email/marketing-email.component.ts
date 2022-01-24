@@ -51,7 +51,6 @@ export class MarketingEmailComponent implements OnInit, OnDestroy {
       if (index > -1) list.splice(index, 1);
       this.marketingEmailStateService.setListSubscriptionTypeForRemove(list);
     }
-    // console.log("this.marketingEmailStateService.getListSubscriptionTypeForRemove()", this.marketingEmailStateService.getListSubscriptionTypeForRemove());
     this.cd.detectChanges();
   }
   removeList() {

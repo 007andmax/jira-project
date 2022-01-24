@@ -82,16 +82,12 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     this.onClose.emit(null);
   }
   private getUsers() {
-    console.log("getUsers");
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
     this.page_number += 1;
-
     let listFilter = this.reqUsers.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(this.search));
-
-
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];
@@ -99,12 +95,8 @@ export class MarketingEmailUsersAddComponent implements OnInit {
       usersList.push(listFilter[i]);
     }
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
-    console.log("this.users", this.users);
-    console.log("listFilter", listFilter.length);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-
-
   }
   public trackById(index, item) {
     return item.id;

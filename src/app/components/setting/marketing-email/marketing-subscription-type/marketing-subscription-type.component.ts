@@ -64,7 +64,6 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
         catchError(error => of(undefined)))
         .subscribe(data => {
           item.onInitEdit(false);
-          console.log("event", event);
           if (event) event.target.blur();
         })
     }
