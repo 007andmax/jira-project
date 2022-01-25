@@ -12,6 +12,7 @@ import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-d
 import { LeftPanelReportsComponent } from './left-panel-reports/left-panel-reports.component';
 import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-settings.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
+import { LeftPanelMarketingComponent } from './left-panel-marketing/left-panel-marketing.component';
 
 @NgModule({
     declarations: [LeftPanelComponent,
@@ -26,6 +27,7 @@ import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-compa
         LeftPanelReportsComponent,
         LeftPanelSettingsComponent,
         LeftPanelCompanyComponent,
+        LeftPanelMarketingComponent
 
     ],
     imports: [

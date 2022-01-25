@@ -9,7 +9,7 @@ import { UsersTableModule } from './users-table/users-table.module';
 import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
-    declarations: [UsersComponent
+    declarations: [UsersComponent,
     ],
     imports: [
         CommonModule,

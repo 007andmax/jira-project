@@ -3,13 +3,13 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { DraftEmail } from './class/draft-email';
 import { FilesInfo } from './class/files-Info';
 import { FilesInfoItem } from './class/files-Info-item';
-
 import { DraftEmailService } from 'src/app/services/draft-email/draft-email.service';
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DraftEmailValidate } from './class/draft-email-validate';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',

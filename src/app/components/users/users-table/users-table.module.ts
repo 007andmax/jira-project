@@ -8,6 +8,8 @@ import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.mod
 import { UserTableSubscriptionComponent } from './user-table-subscription/user-table-subscription.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserTableDefaultSubscriptionComponent } from './user-table-default-subscription/user-table-default-subscription.component';
+import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
 
 
 
@@ -15,7 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     declarations: [
         UsersTableComponent,
-        UserTableSubscriptionComponent
+        UserTableSubscriptionComponent,
+        UserTableDefaultSubscriptionComponent,
+        UserTableCustomSubscriptionComponent
     ],
     imports: [
         CommonModule,

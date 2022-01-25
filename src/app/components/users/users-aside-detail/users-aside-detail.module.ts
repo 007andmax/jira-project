@@ -16,6 +16,10 @@ import { UsersAsideDetailTicketsItemComponent } from './users-aside-detail-ticke
 import { UsersAsideDetailDocumentsItemComponent } from './users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
 import { DocumentsTemplatesInfoModule } from '../../documents/documents-templates/documents-templates-info/documents-templates-info.module';
 import { UsersAsideDetailPasswordsItemComponent } from './users-aside-detail-passwords/users-aside-detail-passwords-item/users-aside-detail-passwords-item.component';
+import { UserDefaultSubscriptionModule } from '../users-aside/user-default-subscription/user-default-subscription.module';
+import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscription/user-custom-subscription.module';
+import { UsersAsideDetailMessagesComponent } from './users-aside-detail-messages/users-aside-detail-messages.component';
+import { UsersAsideDetailMessagesFullBodyComponent } from './users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -24,7 +28,9 @@ import { UsersAsideDetailPasswordsItemComponent } from './users-aside-detail-pas
         UsersAsideDetailPasswordsComponent,
         UsersAsideDetailTicketsItemComponent,
         UsersAsideDetailDocumentsItemComponent,
-        UsersAsideDetailPasswordsItemComponent
+        UsersAsideDetailPasswordsItemComponent,
+        UsersAsideDetailMessagesComponent,
+        UsersAsideDetailMessagesFullBodyComponent
     ],
     imports: [
         CommonModule,
@@ -36,7 +42,9 @@ import { UsersAsideDetailPasswordsItemComponent } from './users-aside-detail-pas
         TextAreaModule,
         CompanyTagsModule,
         InfiniteScrollModule,
-        DocumentsTemplatesInfoModule
+        DocumentsTemplatesInfoModule,
+        UserDefaultSubscriptionModule,
+        UserCustomSubscriptionModule
     ],
     exports: [UsersAsideDetailComponent]
 

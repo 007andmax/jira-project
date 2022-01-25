@@ -7,6 +7,8 @@ import { DraftEmailUserRecipientsModule } from './draft-email-user-recipients/dr
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/mate
         MatIconModule,
         MatChipsModule,
         ReactiveFormsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
     exports: [DraftEmailComponent]
 

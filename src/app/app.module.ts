@@ -94,6 +94,8 @@ import { StartupModule } from './components/device/startup-programes/startup-pro
 import { TerminalModule } from './components/device/terminal/terminal.module';
 import { WindowsModule } from './components/device/windows-update/windows-update.module';
 import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
+import { AddMarketingSubscriptionTypeModule } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.module';
+import { AddUserToSubscribeModule } from './components/users/add-user-to-subscribe/add-user-to-subscribe.module';
 
 declare var $: any;
 
@@ -118,7 +120,8 @@ declare var $: any;
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
-    ModalEditCategoryProductComponent
+    ModalEditCategoryProductComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -161,6 +164,8 @@ declare var $: any;
     BreadcrumbsModule,
     UsersAsideDetailModule,
     TextAreaModule,
+    AddMarketingSubscriptionTypeModule,
+    AddUserToSubscribeModule
 
   ],
   entryComponents: [
@@ -178,7 +183,6 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
-    AddUserToSubscribeComponent
     // RecurringTicketsComponent
   ],
   providers: [

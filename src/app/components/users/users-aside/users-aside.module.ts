@@ -8,9 +8,14 @@ import { CompanySubscriptionModule } from '../../companies/company-subscription/
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { UserDefaultSubscriptionComponent } from './user-default-subscription/user-default-subscription.component';
+import { UserCustomSubscriptionComponent } from './user-custom-subscription/user-custom-subscription.component';
+import { UserDefaultSubscriptionModule } from './user-default-subscription/user-default-subscription.module';
+import { UserCustomSubscriptionModule } from './user-custom-subscription/user-custom-subscription.module';
 
 @NgModule({
-    declarations: [UsersAsideComponent
+    declarations: [UsersAsideComponent,
+
     ],
     imports: [
         CommonModule,
@@ -21,7 +26,9 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         CompanySubscriptionModule,
         CompanyTagsModule,
         DisabledBtnModule,
-        TextAreaModule
+        TextAreaModule,
+        UserDefaultSubscriptionModule,
+        UserCustomSubscriptionModule
     ],
     exports: [UsersAsideComponent]
 

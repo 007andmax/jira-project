@@ -193,8 +193,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/marketing-email',
-    component: MarketingEmailComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/marketing-email/marketing-email.module#MarketingEmailModule'
+
   },
   {
     path: ':company/setting/accounting',
@@ -327,8 +327,8 @@ const routes: Routes = [
   },
   {
     path: ':company/marketing',
-    component: MarketingComponent,
-    pathMatch: 'full'
+    loadChildren: './components/marketing/marketing.module#MarketingModule'
+
   },
 
 ];

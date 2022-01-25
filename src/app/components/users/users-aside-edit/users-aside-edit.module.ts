@@ -7,6 +7,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { UserDefaultSubscriptionModule } from '../users-aside/user-default-subscription/user-default-subscription.module';
+import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscription/user-custom-subscription.module';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -18,7 +20,9 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         DropDownModule,
         CompanySubscriptionModule,
         CompanyTagsModule,
-        TextAreaModule
+        TextAreaModule,
+        UserDefaultSubscriptionModule,
+        UserCustomSubscriptionModule
     ],
     exports: [UsersAsideEditComponent]
 
