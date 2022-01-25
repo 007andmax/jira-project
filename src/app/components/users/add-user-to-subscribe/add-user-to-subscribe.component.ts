@@ -48,11 +48,11 @@ export class AddUserToSubscribeComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    this.marketingSubscriptionList = this.marketingEmailStateService.getListCustomSubscription();
+    this.marketingSubscriptionList = JSON.parse(JSON.stringify(this.marketingEmailStateService.getListCustomSubscription())).map(item => new MarketingSubscriptionType(item));
     if (this.marketingSubscriptionList.length > 0) this.showPreloader = false;
     if (this.marketingEmailStateService.isGetMarketing) this.showPreloader = false;
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
-      this.marketingSubscriptionList = data;
+      this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item));;
       this.showPreloader = false;
       this.cd.detectChanges();
     })
@@ -72,6 +72,7 @@ export class AddUserToSubscribeComponent implements OnInit {
         .subscribe(data => {
           item.onInitEdit(false);
           if (event) event.target.blur();
+          this.selectedForEditSubscription = null;
         })
     }
   }
@@ -126,6 +127,8 @@ export class AddUserToSubscribeComponent implements OnInit {
       this.addBtn.setDisabled(true);
       return;
     }
+    let checkEdit = this.marketingSubscriptionList.find(item => item.isInitEdit);
+    if (checkEdit) return;
     this.addBtn.setDisabled(true);
     if (subscriptions.length > 0) {
       forkJoin(subscriptions.map(item => this.marketingEmailService.addUsers(item.id, item.users).pipe(map((res) => res),
