@@ -8,6 +8,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { UserFilter } from '../../class/user-filter';
+import { UsersFilterSubscriptionsComponent } from './users-filter-subscriptions/users-filter-subscriptions.component';
 
 @Component({
   selector: 'app-users-filter',
@@ -18,6 +19,7 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('titlesDp') titlesDp: DropDownComponent;
   @ViewChild('companiesDp') companiesDp: DropDownComponent;
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
+  @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
   companies = [];
   industries: Array<CrmCompanyIndustry> = [];
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -45,16 +47,39 @@ export class UsersFilterComponent implements OnInit {
       this.industries = data;
     })
     this.sub.add(onGetIndustry);
-  }
+    let onLeftPanelMarketingFilter = this.usersStateService.onLeftPanelMarketingFilter.subscribe((data) => {
+      this.subscriptionDp.clearCustomSubscription();
+      this.filter.setCustomSubscriptions([]);
+      if (data) {
+        this.subscriptionDp.toggleSubscription(this.subscriptionDp.reqSubscriptions.find(item => item.id === data.id));
+        this.filter.setCustomSubscriptions([data]);
+      }
+      this.onChangeCounterFilter();
 
+
+    })
+    this.sub.add(onLeftPanelMarketingFilter);
+  }
+  public onChangeDefaultSubscription(data) {
+    this.filter.setDefaultSubscriptions(data);
+    this.usersStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
+  onChangeCustomSubscription(data) {
+    this.filter.setCustomSubscriptions(data);
+    this.usersStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
   public onClearAll() {
 
     if (!this.companiesDp.isDisabled) this.filter.setCompany(null);
     this.filter.setClientIndustry(null);
     this.filter.setTitle(null);
+    this.filter.setDefaultSubscriptions(null);
+    this.filter.setCustomSubscriptions([]);
     this.titlesDp.clearWithOutChanges();
     this.industriesDp.clearWithOutChanges();
-
+    this.subscriptionDp.clearWithOutChanges();
     if (!this.companiesDp.isDisabled) this.companiesDp.clearWithOutChanges();
 
 
@@ -106,6 +131,7 @@ export class UsersFilterComponent implements OnInit {
     if (this.filter.title) count++;
     if (this.filter.company) count++;
     if (this.filter.clientIndustry) count++;
+    if (this.filter.defaultSubscriptions || this.filter.customSubscriptions.length > 0) count++;
     this.changeCountFilter.emit(count);
   }
 }

@@ -13,7 +13,7 @@ export class ClickOtsideDirective {
   clickout(event) {
     if (!this.init) return;
     if ($(event.target).parents(this.class).length != 0) return;
-    this.onOutSide.emit(true);
+    this.onOutSide.emit(event);
   }
   public setInit(data) {
     this.init = data;

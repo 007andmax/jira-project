@@ -82,7 +82,8 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   }
   onRemoveJobTitle(id) {
     this.crmService.removeJobTitle(id).subscribe(data => {
-
+      this.crmStateService.setListJobTitleForRemove([]);
+      this.cd.detectChanges();
     })
   }
   onSelect(event, item) {

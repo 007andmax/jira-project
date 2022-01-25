@@ -8,6 +8,8 @@ import { CompanyUpdate } from '../../components/companies/class/company-update';
 import { User } from '../../components/users/class/user';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { UsersStateService } from '../users/users-state.service';
+import { WebsocketStateService } from '../websocket/websocket-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +30,11 @@ export class CompaniesStateService {
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
-  isInitCurrentCompany: boolean = false;
+  isInitSubscriptions: boolean = false;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
+    private usersStateService: UsersStateService,
+    private websocketStateService: WebsocketStateService,
     private websocketService: WebsocketService) {
   }
   public onInit() {
@@ -40,6 +44,7 @@ export class CompaniesStateService {
       this.onInitGetCompanies(data);
     })
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
+      if (newChange.data.id === this.currentCompany.id) return;
       if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
@@ -51,18 +56,28 @@ export class CompaniesStateService {
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
     })
+    this.websocketStateService.onConnected.subscribe(data => {
+      if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
+        this.initSubscriptions();
+      }
+    })
   }
   public onInitGetCurrentCompany() {
     this.companiesService.getTechCompany().subscribe(data => {
       this.currentCompany = data;
       this.onCurrentCompany.emit(data);
-      if (!this.isInitCurrentCompany) {
-        this.websocketService.subsribeToGlNumber(this.currentCompany.id);
-        this.websocketService.subsribeToQuote(this.currentCompany.id);
-        this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+      if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
+        this.initSubscriptions();
       }
-      this.isInitCurrentCompany = true;
+
     })
+  }
+  private initSubscriptions() {
+    this.websocketService.subsribeToGlNumber(this.currentCompany.id);
+    this.websocketService.subsribeToQuote(this.currentCompany.id);
+    this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+    this.websocketService.subsribeToUserSubscriptions(this.currentCompany.id);
+    this.isInitSubscriptions = true;
   }
   public onInitFilter(data) {
     this.filter.emit(data);

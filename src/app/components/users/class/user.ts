@@ -4,6 +4,8 @@ import { UserSubscription } from './user-subscription';
 import { UserStatistic } from './user-statistic';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
+import { UserDefaultSubscription } from './user-default-subscription';
+import { UserCustomSubscription } from './user-custom-subscription';
 
 export class User {
     accountType: string;
@@ -31,7 +33,8 @@ export class User {
     secondaryEmail: any;
     startPage: any;
     status: any;
-    subscription: UserSubscription;
+    defaultSubscriptions: UserDefaultSubscription;
+    customSubscriptions: Array<UserCustomSubscription>;
     techRole: any;
     twoFactorAuthType: string;
     userEnabled: boolean;
@@ -39,19 +42,34 @@ export class User {
     selected: boolean = false;
     tags: Array<Tag> = [];
     jobDescription: string;
-    jobTitleId: null
-    jobTypeId: null
+    jobTitleId: string;
+    jobTypeId: string;
+    userIndustryId: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
+            this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
         }
 
     }
-
-    public changeSubscriptions(data) {
-        this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
+    public onUpdate(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
+        this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
+        this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
     }
+    public changeDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
+    }
+    public changeCustomSubscriptions(data) {
+        this.customSubscriptions = data;
+    }
+    /*  public changeSubscriptions(data) {
+          this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
+      }*/
 
 }

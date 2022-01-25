@@ -55,6 +55,13 @@
         [activePage]="state"
         class="qt-d-md-none"
     ></app-left-panel-users>
+    <left-panel-marketing
+        #panelMarketing
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+        class="qt-d-md-none"
+    ></left-panel-marketing>
     <app-left-panel-companies
         #panelCompanies
         (onOpenPanel)="onOpenPanel()"

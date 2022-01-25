@@ -3,6 +3,7 @@ import { UserSubscription } from './user-subscription';
 import { UserAvatar } from './user-avatar';
 import { User } from './user';
 import { UserProfile } from './user-profile';
+import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
 
 export class UserUpdate {
   phoneNumbers: Array<UserPhoneNumber>;
@@ -24,6 +25,9 @@ export class UserUpdate {
   jobDescription: string;
   jobTitleId: string;
   jobTypeId: string;
+  customSubscriptionIds: Array<string> = [];
+  defaultSubscriptions: UserDefaultSubscriptionAdd;
+  userIndustryId: string;
   constructor(data: UserProfile, user: User) {
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
@@ -34,8 +38,9 @@ export class UserUpdate {
       }
     });
     if (this.phoneNumbers.length === 1 && this.phoneNumbers[0].number === "") this.phoneNumbers = [];
+    this.defaultSubscriptions = new UserDefaultSubscriptionAdd(data.defaultSubscriptions.ticketSubscription.enabled, data.defaultSubscriptions.ticketManagerSubscription.enabled, data.defaultSubscriptions.invoiceSubscription.enabled);
+    this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
 
-    this.subscription = new UserSubscription(user.subscription.id, data.subscription.invoice, data.subscription.ticket, data.subscription.ticketManager);
     this.welcomeEmail = data.welcomeEmail;
     this.avatar = data.avatar;
     this.firstName = data.firstName;
@@ -56,5 +61,6 @@ export class UserUpdate {
     this.jobDescription = data.jobDescription;
     this.jobTitleId = data.jobTitleId;
     this.jobTypeId = data.jobTypeId;
+    this.userIndustryId = data.userIndustryId;
   }
 }

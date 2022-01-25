@@ -86,7 +86,8 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   }
   removeServiceType(id) {
     this.crmService.removeServiceType(id).subscribe(data => {
-
+      this.crmStateService.setListServiceTypeForRemove([]);
+      this.cd.detectChanges();
     })
   }
   onSelect(event, item) {

@@ -93,6 +93,7 @@ import { SoftwareModule } from './components/device/software/software.module';
 import { StartupModule } from './components/device/startup-programes/startup-programes.module';
 import { TerminalModule } from './components/device/terminal/terminal.module';
 import { WindowsModule } from './components/device/windows-update/windows-update.module';
+import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 
 declare var $: any;
 
@@ -176,7 +177,8 @@ declare var $: any;
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
-    ModalEditCategoryProductComponent
+    ModalEditCategoryProductComponent,
+    AddUserToSubscribeComponent
     // RecurringTicketsComponent
   ],
   providers: [

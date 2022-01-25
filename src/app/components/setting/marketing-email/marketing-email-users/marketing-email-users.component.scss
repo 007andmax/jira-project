@@ -1,0 +1,21 @@
+.job-description {
+    width: 100%;
+}
+marketing-email-users-item,
+marketing-email-users-add {
+    display: contents;
+}
+.users-page__aside {
+    max-width: 480px;
+}
+.global-search__close {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 6px);
+    cursor: pointer;
+}
+.qt-aside-modern__content {
+    height: calc(100% - 60px);
+}

@@ -28,7 +28,7 @@
     ></td>
     <td
         class="invoce-table__company"
-        [textContent]="company.name"
+        [textContent]="(company) ? company.name : ''"
     ></td>
     <td class="invoce-table__status">
         <span

@@ -28,12 +28,15 @@
     .user-item {
       &.active {
         background: $primary-1;
-        p {
-          color: $white;
-        }
       }
       &:hover {
         background-color: $gray-300;
+        p {
+          color: #454f5b !important;
+          &:last-child {
+            color: #919eab !important;
+          }
+        }
       }
     }
   }

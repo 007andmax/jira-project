@@ -1,0 +1,12 @@
+@import "./src/assets/styles/variable";
+
+.tax-name {
+    width: 260px;
+    @media only screen and (max-width: 576px) {
+        width: 105px;
+    }
+}
+.add-industry-name {
+    width: auto;
+}
+

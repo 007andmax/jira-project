@@ -243,7 +243,10 @@ table.qt-table-modern {
     }
 
     &__assignee {
-      flex: 1 0 148px;
+      //flex: 1 0 148px;
+      max-width: 168px;
+      width: 100%;
+      overflow: auto;
 
       @media (max-width: 767px) {
         display: none;

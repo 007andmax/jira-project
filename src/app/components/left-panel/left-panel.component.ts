@@ -107,8 +107,10 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
           if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
+          if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
 
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
+          if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
           if (window.location.href.includes(`/tickets`)) this.state = 'new-tickets';
@@ -245,7 +247,9 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'commission-component') this.goToLink('setting/commission');
       if (this.state === 'subscription-component') this.goToLink('setting/subscription');
       if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
+      if (this.state === 'marketing-email') this.goToLink('setting/marketing-email');
       if (this.state === 'new-users') this.goToLink('users');
+      if (this.state === 'marketing') this.goToLink('marketing');
       if (this.state === 'new-reports') this.goToLink('reports');
       if (this.state === 'new-tickets-dashboard') this.goToLink('tickets-dashboard');
       if (this.state === 'new-tickets') this.goToLink('tickets');

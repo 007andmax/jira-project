@@ -81,7 +81,8 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   }
   onRemoveIndustry(id) {
     this.crmService.removeIndustry(id).subscribe(data => {
-
+      this.crmStateService.setListIndustriesForRemove([]);
+      this.cd.detectChanges();
     })
   }
   onSelect(event, item) {

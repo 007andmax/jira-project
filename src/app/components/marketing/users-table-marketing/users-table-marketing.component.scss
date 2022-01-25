@@ -1,0 +1,28 @@
+.phones-numbers {
+    display: flex;
+    flex-direction: column;
+    .item-phone {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+.user-details {
+    display: flex;
+}
+.drop-down-users {
+    width: fit-content;
+}
+tr {
+    cursor: pointer;
+    &:hover {
+        td {
+            background: #f4fbff;
+            border-color: #16a4fa;
+        }
+    }
+}
+.users-table__name--profession {
+    color: #919eab;
+}

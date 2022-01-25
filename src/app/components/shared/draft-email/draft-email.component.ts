@@ -8,6 +8,8 @@ import { DraftEmailService } from 'src/app/services/draft-email/draft-email.serv
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DraftEmailValidate } from './class/draft-email-validate';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -20,9 +22,8 @@ export class DraftEmailComponent implements OnInit {
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
-    height: '10rem',
+    height: '100%',
     minHeight: '5rem',
-    maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
     translate: 'no',
@@ -60,10 +61,12 @@ export class DraftEmailComponent implements OnInit {
   action: string = null;
   tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
+  validate: DraftEmailValidate = new DraftEmailValidate();
   uploadFiles: Array<File> = [];
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
   ) { }
@@ -154,7 +157,11 @@ export class DraftEmailComponent implements OnInit {
     this.filesInfo.files.forEach(item => {
       if (!item.error) this.draftEmail.setAttachment(item.id)
     });
+
+    if (!this.validate.isValidate(this.draftEmail)) return;
+    this.addBtn.setDisabled(true);
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
+      this.addBtn.setDisabled(false);
       this.close();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

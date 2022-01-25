@@ -53,7 +53,10 @@
 }
 
 .icn-remove {
-  background: url("/assets/img/icons/close-16.png");
+  background-image: url("/assets/img/icons/close-16.png");
+}
+.icn-report-caret {
+  background-image: url("/assets/img/icons/report-caret.png");
 }
 
 .email-ng2 {
@@ -149,7 +152,12 @@
   &__assign-user {
     background-image: url("/assets/img/icons/assign-user.svg");
   }
-
+  &__remove-user {
+    background-image: url("/assets/img/icons/remove-user.svg");
+  }
+  &__list {
+    background-image: url("/assets/img/icons/list.svg");
+  }
   &__task-pending {
     background-image: url("/assets/img/icons/task-pending.svg");
     &.--done {
@@ -338,6 +346,12 @@
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
   }
+  &__manage {
+    background-image: url("/assets/img/icons/manage.svg");
+  }
+  &__create-list {
+    background-image: url("/assets/img/icons/create-list.svg");
+  }
   &__upload-company-logo {
     background-image: url("/assets/img/icons/upload-company-logo.svg");
   }
@@ -507,6 +521,9 @@
   &__add-document {
     background-image: url("/assets/img/icons/add-document.svg");
   }
+  &__active_subscription {
+    background-image: url("/assets/img/icons/active-company.svg");
+  }
   &__rename {
     background-image: url("/assets/img/icons/rename.svg");
   }
@@ -659,6 +676,9 @@
   &__go-to {
     background-image: url("/assets/img/icons/go-to.svg");
   }
+  &__go-to-blue {
+    background-image: url("/assets/img/icons/go-to-blue.svg");
+  }
   &__network {
     background-image: url("/assets/img/icons/network.svg");
   }
@@ -736,6 +756,12 @@
   }
   &__close-round {
     background-image: url("/assets/img/icons/close-round.svg");
+  }
+  &__unsubscribe-user {
+    background-image: url("/assets/img/icons/unsubscribe-user.svg");
+  }
+  &__subscribe-user {
+    background-image: url("/assets/img/icons/subscribe-user.svg");
   }
   &__create-folder {
     background-image: url("/assets/img/icons/create-folder.svg");

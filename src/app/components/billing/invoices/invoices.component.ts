@@ -29,7 +29,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public page_number: number = 0;
 
   // showPreviewInvoice: boolean = false;
-  offset: number = 20;
+  offset: number = 40;
   public direction: string = 'ASC';
   //previewInvoice: Invoice;
   selectedInvoices: Array<Invoice> = [];
@@ -54,6 +54,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
 
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
+      this.invoicesFilter.onInitLeftOffset(false);
+      this.invoicesFilter.resetLeftOffset();
       this.selectedInvoices = [];
       this.selectedCompanyId = null;
       this.invoicesFilter = data;
@@ -93,6 +95,10 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
         if (index > -1) this.invoices[index] = invoice;
+        if (data.action === 'INVOICE_ROLLBACK' && this.invoicesFilter.status !== '' && index > -1) {
+          this.invoicesFilter.onInitLeftOffset(true);
+          this.invoicesFilter.updateLeftOffset();
+        }
       }
       if (data.action === 'PAYMENT_RECEIVED') {
         data.data.forEach(element => {
@@ -100,11 +106,20 @@ export class InvoicesComponent implements OnInit, OnDestroy {
           let invoice = new Invoice(element);
           invoice.sum = invoice.totalSum;
           if (index > -1) this.invoices[index] = invoice;
+          if (this.invoicesFilter.status !== '' && index > -1) {
+            this.invoicesFilter.onInitLeftOffset(true);
+            this.invoicesFilter.updateLeftOffset();
+          }
         });
+
       }
       if (data.action === 'INVOICE_DELETED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.invoices.splice(index, 1);
+        if (index > -1) {
+          this.invoices.splice(index, 1);
+          this.invoicesFilter.onInitLeftOffset(true);
+          this.invoicesFilter.updateLeftOffset();
+        }
       }
       this.cd.detectChanges();
     })

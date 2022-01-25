@@ -6,6 +6,13 @@
         <div class="qt-aside-modern__header-title">User Detail</div>
         <div class="qt-df qt-ai-c">
             <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                (click)="editUser()"
+                placement="top"
+                container="body"
+                ngbTooltip="Edit"
+            ></div>
+            <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
                 (click)="showAsideForDraftEmail()"
                 placement="top"
@@ -22,6 +29,15 @@
         <div class="user-detail-info">
             <div class="user-detail-aside__header d-f jc-sb ai-c">
                 <div class="d-f">
+                    <!-- <div
+                        class="upload-photo__img-block"
+                        *ngIf="user.avatar"
+                    >
+                        <img
+                            class="upload-photo__avatar"
+                            [src]="getLogoUrl()"
+                        >
+                    </div> -->
                     <div
                         class="user-detail-aside__header-avatar"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
@@ -111,18 +127,25 @@
             <div class="user-detail__row-info">
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
-                        <div class="user-detail__row-info-label">Subscription</div>
+                        <div class="user-detail__row-info-label">Updates</div>
                         <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
                     </div>
-                    <app-company-subscription
-                        [editItem]="user.subscription"
-                        (subscribeChange)="onChangeSubscriptions($event)"
-                    ></app-company-subscription>
-                    <!-- <app-user-table-subscription
-                        class="users-table__subscription--dropdown"
-                        [subscription]="user.subscription"
-                        (onChange)="onChangeSubscriptions($event)"
-                    ></app-user-table-subscription> -->
+                    <user-default-subscription
+                        [mode]="MODE_EDIT_SUBSCRIPTION"
+                        [defaultSubscriptions]="user.defaultSubscriptions"
+                        (onChange)="onChangeDefaultSubscriptions($event)"
+                    ></user-default-subscription>
+                </div>
+                <div class="user-detail__row-info-line user-detail-aside-subscription">
+                    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
+                        <div class="user-detail__row-info-label">Marketing</div>
+                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    </div>
+                    <user-custom-subscription
+                        [classDropDown]="'user-aside-detail-custom-subscription'"
+                        [customSubscriptions]="user.customSubscriptions"
+                        (onChange)="onChangeCustomSubscriptions($event)"
+                    ></user-custom-subscription>
                 </div>
                 <div class="user-detail__row-info-line">
                     <div class="user-detail__row-info-label qt-mb-4">Job description</div>
@@ -197,6 +220,13 @@
                 >
                     Documents
                 </span>
+                <span
+                    class="pointer"
+                    [ngClass]="{'active':tab === 'messages'}"
+                    (click)="setTab('messages')"
+                >
+                    Messages
+                </span>
             </div>
             <users-aside-detail-tickets
                 *ngIf="tab === 'tickets'"
@@ -211,6 +241,11 @@
                 *ngIf="tab === 'passwords'"
                 [user]="user"
             ></users-aside-detail-passwords>
+            <users-aside-detail-messages
+                *ngIf="tab === 'messages'"
+                [user]="user"
+            ></users-aside-detail-messages>
         </div>
     </div>
 </div>
+<users-aside-detail-messages-full-body></users-aside-detail-messages-full-body>
