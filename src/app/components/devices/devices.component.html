@@ -23,7 +23,7 @@
                         class="pointer"
                         placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
                         [matChipInputFor]="chipList"
-                        (keyup.enter)="add($event.target.value)"                        
+                        (keyup.enter)="add($event.target.value)"
                         (keyup)="onSearchTag($event.target.value)"
                     >
                       </mat-chip-list>
@@ -259,6 +259,21 @@
 
                           </div>
                           </td>
+                          <td class="company-devices-table__go-to">
+                            <ng-template
+                                    #tipDeviceDetail
+                                    class="tooltip"
+                                >
+                                    Device Detail
+                                </ng-template>
+                                <div
+                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                    placement="top"
+                                    *ngIf="asset.ID"
+                                    [ngbTooltip]="tipDeviceDetail"
+                                    (click)="gotoDetailDevice(asset.Guid)"
+                                ></div>
+                          </td>
                           <td class="company-devices-table__connect">
                             <div
                             ngbDropdown
@@ -272,7 +287,7 @@
                                 Remote Access
                             </ng-template>
                             <div
-                                [hidden]="!(asset.online) || (asset.CanRemoteControl)"
+                                [hidden]="!(asset.online) || !(asset.CanRemoteControl)"
                                 class="
               qt-ic-c
               icon__quick-connect
@@ -301,21 +316,6 @@
                                 </div>
                             </div>
                         </div>
-                          </td>
-                          <td class="company-devices-table__go-to">
-                            <ng-template
-                                    #tipDeviceDetail
-                                    class="tooltip"
-                                >
-                                    Device Detail
-                                </ng-template>
-                                <div
-                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
-                                    placement="top"
-                                    *ngIf="asset.ID"
-                                    [ngbTooltip]="tipDeviceDetail"
-                                    (click)="gotoDetailDevice(asset.Guid)"
-                                ></div>
                           </td>
                           <td class="company-devices-table__menu">
                             <div
@@ -426,7 +426,7 @@
   </div>
 </ng-template>
 
-<ng-template #template let-modal>
+<ng-template #templateConnection let-modal>
   <div class="modal-body">
       <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
@@ -463,5 +463,58 @@
       </div>
   </div>
 </ng-template>
+
+<!-- <ng-template #templateConnection>
+  <div class="qt-modal company-devices-beta-remote-modal">
+      <div class="qt-modal__header">
+          <div
+              class="qt-modal__close icon__close qt-pointer"
+              (click)="close()"
+          ></div>
+          <div
+              class="qt-list-loading preloader"
+              *ngIf="isConnection"
+          >
+              Connecting
+              <div class="loader"></div>
+          </div>
+      </div>
+      <div class="qt-modal__body">
+          <div class="qt-df qt-mb-32">
+              <div class="qt-mr-16 connect-icon"></div>
+              <div>
+                  <div class="qt-fs-16 qt-color-dark qt-ff-sb qt-lh-163 company-devices-remote-modal__title">Quicktech Connect</div>
+                  <div class="qt-lh qt-color-dark-light qt-lh-154 qt-mb-16">
+                      Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
+                  </div>
+                  <button
+                      class="qt-btn --btn40h company-devices-remote-modal__button"
+                      (click)="downloadViewer()"
+                  >
+                      Download App
+                  </button>
+              </div>
+          </div>
+          <div class="qt-df">
+              <div class="qt-mr-16 remote-desctop-icon"></div>
+              <div>
+                  <div class="qt-fs-16 qt-color-dark qt-ff-sb qt-lh-163 company-devices-remote-modal__title">Remote Desktop</div>
+                  <div class="qt-lh qt-color-dark-light qt-lh-154 qt-mb-16">
+                      Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds
+        have elapsed.
+                  </div>
+                  <button
+                      class="qt-btn --btn40h company-devices-remote-modal__button"
+                      (click)="launchRemoteApp()"
+                  >
+                      Launch Application
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+</ng-template> -->
 
 

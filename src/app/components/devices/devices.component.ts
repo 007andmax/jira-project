@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } f
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Session } from 'inspector';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -19,6 +20,7 @@ import { DeviceFilter } from './class/devices';
 })
 export class DevicesComponent implements OnInit {
   @ViewChild("templatePowersell") template;
+  @ViewChild("templateConnection") templateconnection;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -42,6 +44,10 @@ export class DevicesComponent implements OnInit {
   companyGuid: string = "";
   autosearchDevice: any[] = [];
   selectedCtrl = new FormControl();
+  guid: number;
+  connectionType: string = "";
+  isConnection: boolean = false;
+
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -56,7 +62,7 @@ export class DevicesComponent implements OnInit {
     private ngZone: NgZone,
     private modalService: NgbModal,
     private remoteControlService: RemoteControlService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -68,11 +74,10 @@ export class DevicesComponent implements OnInit {
       this.setPreviewDataDevice();
       this.onPowerShellCommand();
     });
-
     this.showPreloader = false;
   }
 
-  setPreviewDataDevice() {       
+  setPreviewDataDevice() {
     this.agentService
     .getAgentToken(
       "QuickTech",
@@ -80,7 +85,7 @@ export class DevicesComponent implements OnInit {
     )
     .subscribe((data) => {
       this.agentService.setAccessToken(data.AccessToken);
-      //this.add(undefined);
+      this.add(undefined);
       this.CurrentUser();
     });
   }
@@ -308,12 +313,12 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  createConnection(type) {
+  createConnection() {
     this.showPreloader = true;
     let data = {
-      assetId: this._id,
-      type: type,
-      companyId: this.companyGuid,
+      assetId: this.guid,
+      type: this.connectionType,
+      companyId: this.companyId,
     };
     this.remoteControlService
       .createConnection2(data)
@@ -321,7 +326,7 @@ export class DevicesComponent implements OnInit {
       .subscribe(
         (resp) => {
           this.showPreloader = false;
-          if (type === "CSS") {
+          if (this.connectionType === "CSS") {
             this.getConstant(resp.sessionId);
           } else {
             this.getConstant(resp.sessionId);
@@ -397,7 +402,7 @@ export class DevicesComponent implements OnInit {
     this.selectedCtrl.setValue(null);
     this.add(event.option.viewValue);
   }
-  
+
   remove(index: number) {
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
@@ -410,7 +415,7 @@ export class DevicesComponent implements OnInit {
   add(Tag): void {
     console.log('add event fired');
     this.tagFilterValue = "";
-    
+
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     var findTag = this.selectedTag.find(x=> x == Tag);
@@ -419,12 +424,52 @@ export class DevicesComponent implements OnInit {
       this.selectedTag.push(Tag);
       this.searchTag.push(Tag);
     }
-    
+
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.searchTag;
 
     this.searchDeviceTag(req);
 
+  }
+
+  remoteAccess(connectionType, guid) {
+    this.guid = guid;
+    this.connectionType = connectionType;
+    this.modalService.open(this.templateconnection, {
+      windowClass: "modal-md",
+      centered: true,
+    });
+  }
+
+  close() {
+    this.modalService.dismissAll("Cross click");
+  }
+
+  downloadViewer() {
+    window.location.href = "/data/connection-viewer";
+  }
+
+  launchRemoteApp() {
+    let data = {
+      assetId: this.guid,
+      type: this.connectionType,
+      companyId: this.companyId,
+    };
+    this.remoteControlService
+      .createConnection2(data)
+      .pipe()
+      .subscribe(
+        (resp) => {
+          if (this.connectionType === "CSS") {
+            this.getConstant(resp.sessionId);
+          } else {
+            this.getConstant(resp.sessionId);
+          }
+        },
+        (error) => {
+          this.toastr.error("Something went wrong please try again.");
+        }
+      );
   }
 }
