@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -21,6 +22,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   search: string = "";
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() marketingSubscription: MarketingSubscriptionType;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   public page_number: number = 0;
   public infiniteScrollDisabled = false;
 
@@ -68,7 +70,9 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   }
   onAdd() {
     if (this.reqUsers.filter(item => item.selected).length > 0) {
+      this.addBtn.setDisabled(true);
       this.marketingEmailService.addUsers(this.marketingSubscription.id, this.reqUsers.filter(item => item.selected).map(item => item.id)).subscribe(data => {
+        this.addBtn.setDisabled(false);
         this.close();
       })
     }

@@ -43,9 +43,12 @@
         <button
             class="qt-button qt-mr-12"
             ngbDropdownItem
-            (click)="onAdd()"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="onAdd()"
         >
-            Save
+            <span *ngIf="!addBtn.isBlock()">Save</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
         <button
             class="qt-button --gray"
