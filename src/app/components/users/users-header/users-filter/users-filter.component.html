@@ -29,7 +29,7 @@
     ></users-filter-subscriptions>
     <app-drop-down
         #industriesDp
-        class="qt-w100"
+        class="qt-w100 qt-mr-8"
         [placeholder]="'Search By Industry'"
         [list]="industries"
         [field]="'name'"
@@ -38,4 +38,10 @@
         [heightInput]="'36px'"
         (onSelectedItem)="onSelectClientIndustry($event)"
     ></app-drop-down>
+    <app-company-tags
+        #tagsDp
+        [blockUserTag]="true"
+        class="filter-category tags dropdown companies-filter-tags"
+        (tagsChange)="onChangeTags($event)"
+    ></app-company-tags>
 </div>

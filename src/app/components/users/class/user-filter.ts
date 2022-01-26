@@ -5,6 +5,7 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { UserDefaultSubscription } from './user-default-subscription';
 import { UserCustomSubscription } from './user-custom-subscription';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CompanyTag } from '../../companies/company-tags/class/company-tag';
 
 export class UserFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
@@ -13,6 +14,7 @@ export class UserFilter {
     new FilterListTop('primaryEmail', ''),
     new FilterListTop('contact', ''),
     new FilterListTop('tickets', '')];
+    tags: Array<CompanyTag> = []
     clientType: string;
     company: string;
     clientIndustry: CrmCompanyIndustry;
@@ -28,13 +30,17 @@ export class UserFilter {
     public setCustomSubscriptions(data) {
         this.customSubscriptions = data;
     }
-    public setLeftFilters(clientType, company, clientIndustry, title, defaultSubscriptions, customSubscriptions) {
+    public setTags(data) {
+        this.tags = data;
+    }
+    public setLeftFilters(clientType, company, clientIndustry, title, defaultSubscriptions, customSubscriptions, tags) {
         this.clientType = clientType;
         this.company = company;
         this.clientIndustry = clientIndustry;
         this.title = title;
         this.defaultSubscriptions = defaultSubscriptions;
         this.customSubscriptions = customSubscriptions;
+        this.tags = tags;
     }
     public setCompany(data) {
         this.company = data;
@@ -58,7 +64,7 @@ export class UserFilter {
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
             //if (this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.defaultSubscriptions) && this.isUserCustomSubscription(item.customSubscriptions)) {
+            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? this.clientIndustry.id === item.userIndustryId : true) && this.isUserDefaultSubscription(item.defaultSubscriptions) && this.isUserCustomSubscription(item.customSubscriptions) && this.isUserTags(item.tags)) {
                 return true;
             } else {
                 return false;
@@ -67,6 +73,15 @@ export class UserFilter {
         })
         return list;
 
+    }
+    public isUserTags(list) {
+        let isExist = true;
+
+        this.tags.forEach(tag => {
+            let find = list.find(tagUser => tagUser.id === tag.id);
+            if (!find) isExist = false;
+        })
+        return isExist;
     }
     public isUserCustomSubscription(list) {
         let isExist = true;

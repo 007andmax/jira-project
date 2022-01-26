@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
@@ -20,6 +21,7 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('companiesDp') companiesDp: DropDownComponent;
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
+  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   companies = [];
   industries: Array<CrmCompanyIndustry> = [];
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -60,6 +62,11 @@ export class UsersFilterComponent implements OnInit {
     })
     this.sub.add(onLeftPanelMarketingFilter);
   }
+  public onChangeTags(data) {
+    this.filter.setTags(data);
+    this.usersStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
   public onChangeDefaultSubscription(data) {
     this.filter.setDefaultSubscriptions(data);
     this.usersStateService.onInitFilter(this.filter);
@@ -77,9 +84,11 @@ export class UsersFilterComponent implements OnInit {
     this.filter.setTitle(null);
     this.filter.setDefaultSubscriptions(null);
     this.filter.setCustomSubscriptions([]);
+    this.filter.setTags([]);
     this.titlesDp.clearWithOutChanges();
     this.industriesDp.clearWithOutChanges();
     this.subscriptionDp.clearWithOutChanges();
+    this.tagsDp.clearWithOutChanges();
     if (!this.companiesDp.isDisabled) this.companiesDp.clearWithOutChanges();
 
 
@@ -132,6 +141,7 @@ export class UsersFilterComponent implements OnInit {
     if (this.filter.company) count++;
     if (this.filter.clientIndustry) count++;
     if (this.filter.defaultSubscriptions || this.filter.customSubscriptions.length > 0) count++;
+    if (this.filter.tags.length > 0) count++;
     this.changeCountFilter.emit(count);
   }
 }

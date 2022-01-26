@@ -47,7 +47,7 @@ export class LeftPanelMarketingComponent implements OnInit {
     this.sub.add(onGetListCustomSubscription);
     this.usersStateService.getOnFilter().subscribe((data) => {
 
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
 
     })
   }

@@ -63,7 +63,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.userFilter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);
+      this.userFilter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
     })
     this.sub.add(geLefttFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
