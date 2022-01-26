@@ -7,6 +7,7 @@ export class InvoicesFilter {
     invoiceNumber: string;
     limit: number = 40;
     offset: number = 0;
+    amount: string = "";
     sortBy: string;
     startDate: number;
     status: string;
@@ -32,6 +33,7 @@ export class InvoicesFilter {
         endDate.setDate(endDate.getDate() + 1);
         return {
             companyName: this.companyName,
+            amount: (this.amount) ? this.amount : null,
             endDate: (this.endDate) ? moment(endDate).format('YYYY-MM-DD') : null,
             invoiceNumber: this.invoiceNumber,
             limit: this.limit,
@@ -72,5 +74,8 @@ export class InvoicesFilter {
     }
     public setInvoiceNumber(data) {
         this.invoiceNumber = data;
+    }
+    public setAmount(data) {
+        this.amount = data;
     }
 }
