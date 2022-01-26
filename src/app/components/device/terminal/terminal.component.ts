@@ -607,20 +607,6 @@ export class TerminalComponent implements OnInit {
 
   }
 
-  copyToTerminal(cmd, type, file) {
-      if(this.asset.online === true)
-      {
-        this.finalCommand = cmd;
-        this.sessionId = localStorage.getItem('uuid_' + this._id);
-        this.sendCommand(type, file);
-      }
-      else
-      {
-        this.toastr.error('The device is offline');
-      }
-
-  }
-
   sendCommand(type, file) {
     let data: command = {
       "companyId": localStorage.getItem('company_id'),
