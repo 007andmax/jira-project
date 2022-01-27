@@ -80,6 +80,11 @@
                         >
                     </div>
                 </div>
+                <app-upload-area
+                    #uplaodFile
+                    (changeFiles)="onChangeFiles($event)"
+                    class="ticket-fileupload"
+                ></app-upload-area>
                 <div
                     *ngIf="tab == 'plain'"
                     class="form-group"

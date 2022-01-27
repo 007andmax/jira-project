@@ -75,7 +75,9 @@ export class DraftEmailComponent implements OnInit {
     this.onShowAside();
 
   }
-
+  onChangeFiles(ids) {
+    this.draftEmail.setAttachments(ids);
+  }
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
       this.usersSelected = this.draftEmailStateService.getSelectedUsers();
