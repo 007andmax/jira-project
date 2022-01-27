@@ -21,13 +21,35 @@ max-width: unset;
 .outsideheader{
   padding: 30px;
   background-color:#edf2f6;
+  padding-right: 17px;
+  padding-left: 16px;
 }
 
 .reports-all{
   border-radius: 15px;
   background-color: #ffffff !important;
   height: auto !important;
+  padding-top: 32px !important;
+  padding-left: 1px;
 }
+
+.qt-page-list__search input{
+  width: 390px !important;
+}
+
+.reports-all .report ul {
+  list-style: none;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  color: var(--gray-900);
+}
+
+
+
+
 
 
 

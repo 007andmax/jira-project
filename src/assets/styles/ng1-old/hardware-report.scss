@@ -437,7 +437,7 @@
 .reports-all .col-sm-3 .report {
   background-color: #fff;
   border-radius: 2px 3px 3px 2px;
-  margin: 0 30px 30px 0;
+  margin: 1px 30px 30px;
   width: 100%;
   height: 186px;
   transition: all .3s;
@@ -461,10 +461,12 @@
 
 .reports-all .report p {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   position: relative;
   margin-bottom: 20px;
   margin-left: 40px;
+  height: 26px;
+  font-family: Inter;
 }
 
 .reports-all .report p:after {
@@ -475,6 +477,8 @@
     position: absolute;
     bottom: -9px;
     left: -40px;
+    border-top: 1px dashed #d7dfdb;
+
 }
 
 .reports-all .col-sm-4:last-child .report {
@@ -484,18 +488,20 @@
 .reports-all .report img {
   position: absolute;
   top: -3px;
-  width: 30px;
+  width: 24px;
+  height: 24px;
 }
 
 .reports-all .report ul {
   list-style: none;
   padding: 0 0 0 25px;
   margin: 0;
+  font-family: Inter;
+  line-height: 1.43;
 }
 
 .reports-all .report ul li {
   font-size: 14px;
-  font-weight: 300;
   margin-bottom: 12px;
   cursor: pointer;
   position: relative;
@@ -511,8 +517,8 @@
 
 .reports-all .report ul li:before {
   content: '';
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border: 2px solid #4ba9df;
   background-color: #fff;
   border-radius: 50%;

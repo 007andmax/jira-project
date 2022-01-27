@@ -18,9 +18,10 @@
   }
 
   &__header-title {
-    font-size: 16px;
+    font-size: 18px;
     font-family: Graphik-Semibold, sans-serif;
     margin: 0;
+    color: #212b36;
   }
 
   &__header-title-line {
@@ -100,10 +101,10 @@
       padding: 6px 8px 6px 40px;
       border-radius: 4px;
       background: #ffffff;
-      font-size: 13px;
+      font-size: 12px;
       outline: none;
       position: relative;
-
+      font-family: Inter;
       &::placeholder {
         color: #9ca5b6;
         opacity: 1;
