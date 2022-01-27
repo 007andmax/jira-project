@@ -61,6 +61,7 @@
                             <div class="messages-table__account-text">
                                 <span [innerHTML]="getHtml(getBody(message.body))"></span>
                             </div>
+                            <app-ticket-profile-attachments [attachments]="message.attachments"></app-ticket-profile-attachments>
                         </td>
                     </tr>
                 </ng-template>
