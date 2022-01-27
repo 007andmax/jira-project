@@ -89,5 +89,8 @@
                 <span [innerHTML]="getHtml( message.body)"></span>
             </div>
         </div>
+        <div class="message-full-body attachments-message">
+            <app-ticket-profile-attachments [attachments]="message.attachments"></app-ticket-profile-attachments>
+        </div>
     </div>
 </div>
