@@ -797,6 +797,12 @@ textarea {
   padding: 0 15px 20px;
 }
 
+.password-content__modal--content {
+  .date-picker-container {
+    min-width: 274px;
+  }
+}
+
 .form-control[disabled],
 input[disabled] {
   background-color: $gray-400;

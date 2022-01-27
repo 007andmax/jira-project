@@ -101,6 +101,7 @@
     <div class="qt-input-block qt-w100 input_inside_white_important">
         <label>Due Date</label>
         <app-date-picker
+            [placement]="'bottom-right'"
             [formatDate]="formatDate"
             [editMode]="true"
             [editDate]="invoice.invoiceDataDto.dueDate"

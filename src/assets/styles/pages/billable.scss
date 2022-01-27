@@ -43,7 +43,7 @@
 
     &__billable {
       width: 12%;
-      min-width: 135px;
+      min-width: 144px;
     }
 
   }
@@ -267,7 +267,9 @@
     }
   }
 
-
+  .qt-table-modern__sorting {
+    transform: translateY(2px);
+  }
 }
 
 app-invoice-preview {

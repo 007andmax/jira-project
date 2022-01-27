@@ -2886,6 +2886,17 @@ app-quotes-item {
   }
 }
 .new-companies-content__modal {
+  .qt-aside-modern__content {
+    .new-tax {
+      left: unset !important;
+      right: 0;
+    }
+  }
+  .add-tax-dropdown:after {
+    left: unset;
+    right: 14px;
+  }
+
   .icn-product-save {
     position: absolute;
     top: calc(50% - 4px) !important;

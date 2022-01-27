@@ -116,6 +116,7 @@
             <label class="qt-lh-154">Expiry Date</label>
             <app-date-picker
                 #expiryDate
+                [placement]="'bottom-right'"
                 [formatDate]="formatDate"
                 [editMode]="true"
                 [editDate]="quote.validUntil"
