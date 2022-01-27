@@ -9,6 +9,7 @@ import { CompanyTagsModule } from '../../companies/company-tags/company-tags.mod
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { UserDefaultSubscriptionModule } from '../users-aside/user-default-subscription/user-default-subscription.module';
 import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscription/user-custom-subscription.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -22,7 +23,8 @@ import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscri
         CompanyTagsModule,
         TextAreaModule,
         UserDefaultSubscriptionModule,
-        UserCustomSubscriptionModule
+        UserCustomSubscriptionModule,
+        NgbModule
     ],
     exports: [UsersAsideEditComponent]
 
