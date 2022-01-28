@@ -39,6 +39,19 @@
      class="Favourite">
                   </div>
                 </div>
+                <button class="qt-btn --outline-white qt-ml-8">
+                  <i class="
+                icon__email-dark
+                qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+                summaryemail
+              " (click)="sendEmail()"></i>
+              </button>
+              <button
+              class="qt-btn --outline-white qt-ml-8"
+              (click)="printPdf()"
+          >
+              <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+          </button>
       </div>
 
       <div class="qt-page-list__header-thead-container">
@@ -331,7 +344,7 @@
                                     <ul
                                         class="qt-dropdown-menu invoice-items-dropdown"
                                         ngbDropdownMenu
-                                    >                                        
+                                    >
                                         <li
                                             *ngIf="asset.CanRemoteControl && asset.online"
                                             class="pointer"
