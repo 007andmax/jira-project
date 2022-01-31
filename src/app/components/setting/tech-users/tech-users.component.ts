@@ -538,7 +538,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     if (this.isEmailIdUnique) {
-      const objTechUser = {
+      let objTechUser: any = {
         techRole: this.techUserForm.value.techRole
           ? this.techUserForm.value.techRole
           : this.techRoles[0],
