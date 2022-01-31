@@ -1,9 +1,9 @@
-@import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .qt-fileupload {
-  input[type=file] {
-    user-select:none;
+  input[type="file"] {
+    user-select: none;
     display: none;
   }
   &__label {
@@ -58,8 +58,6 @@
   }
 }
 
-
-
 .container {
   width: 450px;
   height: 200px;
@@ -110,14 +108,16 @@
     align-items: center;
     border: dashed 1px #979797;
     margin-bottom: 1rem;
-
+    position: relative;
     img.delete {
       margin-left: 0.5rem;
       cursor: pointer;
       align-self: flex-end;
     }
-
-
+    .icn-remove-old {
+      right: 0.5rem !important;
+      top: 0.5rem !important;
+    }
     display: flex;
     flex-grow: 1;
 
@@ -140,7 +140,7 @@
     }
 
     .info {
-      width: 100%
+      width: 100%;
     }
   }
 }

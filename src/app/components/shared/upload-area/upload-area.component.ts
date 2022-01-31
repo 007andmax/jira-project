@@ -54,8 +54,9 @@ export class UploadAreaComponent implements OnInit {
 
       return;
     } else {
-      if (this.files[index].size > 4000000) {
+      if (this.files[index].size > 4194304) {
         this.files[index].showError = true;
+        this.files[index].error = "The size is too big. You can upload a file up to 4MB in size."
         this.uploadFilesSimulator(index + 1);
         return;
       }
