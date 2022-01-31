@@ -539,7 +539,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
     if (this.isEmailIdUnique) {
       const objTechUser = {
-        avatar: this.cropAvatar || {},
         techRole: this.techUserForm.value.techRole
           ? this.techUserForm.value.techRole
           : this.techRoles[0],
@@ -549,6 +548,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         companyId: this.currentCompanyId,
         subscription: {}
       };
+      if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
       this.loading = true; $(".loading").css("display", "block");
       this.addBtn.setDisabled(true);
       this.techUsersService.createUser(objTechUser).subscribe(
