@@ -63,13 +63,6 @@
             </button>
         </ng-template>
     </div>
-    <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-		 <ng-template ngFor let-company [ngForOf]="companyList" [ngForTrackBy]="trackByIndex">
-	   <mat-option [value]="company.companyInfo.contacts[0]">
-		 {{company.companyInfo.contacts[0].primaryEmail}}
-	   </mat-option>
-	   </ng-template>
-	 </mat-autocomplete> -->
     <p *ngIf="showError">at least 1 user</p>
     <p *ngIf="showErrorClient">please choose Client</p>
     <p
