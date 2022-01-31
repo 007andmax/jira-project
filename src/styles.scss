@@ -2599,15 +2599,24 @@ app-quotes-item {
           }
         }
       }
+      ngb-datepicker {
+        border: none;
+      }
       .date-picker {
+        .ngb-dp-months {
+          padding: 0;
+        }
         .ngb-dp-month {
           width: 100%;
+          padding: 0;
           .ngb-dp-weekday {
             margin: 0 4px;
           }
         }
         .ngb-dp-day {
           margin: 0 3px;
+          width: 2rem;
+          height: 2rem;
         }
         .ngb-dp-arrow.right {
           .ngb-dp-navigation-chevron {
