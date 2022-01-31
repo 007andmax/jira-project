@@ -19,6 +19,7 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
     this.usersStateService.openMessageAside.subscribe(data => {
       this.message = data;
       this.opened = true;
+      document.body.querySelector("#message-body span").innerHTML = this.message.body;
 
     })
   }
