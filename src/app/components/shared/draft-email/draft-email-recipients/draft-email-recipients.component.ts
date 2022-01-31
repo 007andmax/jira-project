@@ -27,6 +27,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   companyEmails = [];
   companyList = [];
   reqCompanyList = [];
+  toggleAllUsers: boolean = false;
   @Input() companiesSelected: Array<Company> = [];
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;

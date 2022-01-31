@@ -698,7 +698,8 @@ documents-edit-info {
       content: "Taxes" !important;
     }
   }
-  draft-email-user-recipients {
+  draft-email-user-recipients,
+  app-draft-email-recipients {
     .hide-all-user {
       .mat-form-field-infix {
         max-height: 42px !important;

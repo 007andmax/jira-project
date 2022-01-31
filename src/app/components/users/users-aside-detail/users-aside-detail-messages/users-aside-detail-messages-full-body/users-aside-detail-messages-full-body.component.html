@@ -89,7 +89,10 @@
                 <span [innerHTML]="getHtml( message.body)"></span>
             </div>
         </div>
-        <div class="message-full-body attachments-message">
+        <div
+            class="message-full-body attachments-message"
+            *ngIf="message.attachments.length > 0"
+        >
             <app-ticket-profile-attachments [attachments]="message.attachments"></app-ticket-profile-attachments>
         </div>
     </div>

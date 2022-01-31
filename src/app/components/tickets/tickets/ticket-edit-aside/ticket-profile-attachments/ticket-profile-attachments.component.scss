@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .attachment-component {
   padding: 0 32px;
@@ -36,6 +36,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
     }
 
     &__header {
@@ -58,7 +59,7 @@
       font-size: 10px;
       color: $primary-2;
       line-height: 12px;
-  }
+    }
 
     &__show-hide-btn {
       width: 32px;
@@ -68,13 +69,12 @@
       border-radius: 50%;
       background-position: center;
       background-repeat: no-repeat;
-      background-image: url('/assets/img/icons/download.svg');
+      background-image: url("/assets/img/icons/download.svg");
 
       @media (max-width: 767px) {
         display: none;
       }
     }
-
 
     &__type {
       margin-right: 6px;
@@ -98,7 +98,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-image: url('/assets/img/icons/download-blue.svg');
+      background-image: url("/assets/img/icons/download-blue.svg");
       background-size: 20px;
       background-repeat: no-repeat;
       cursor: pointer;
@@ -129,7 +129,8 @@
         }
       }
     }
-    &.image\/jpg, &.image\/jpeg {
+    &.image\/jpg,
+    &.image\/jpeg {
       .attachment-item {
         &__type {
           background: $secondary-3;
@@ -158,6 +159,4 @@
       }
     }
   }
-
 }
-

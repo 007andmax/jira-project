@@ -2,8 +2,12 @@
     class="col-md-12 light-dropdown"
     ngbDropdown
     #products="ngbDropdown"
+    [ngClass]="{'hide-all-user':!toggleAllUsers}"
 >
-    <div ngbDropdownToggle>
+    <div
+        class="dropdown-recipients-body"
+        ngbDropdownToggle
+    >
         <mat-form-field>
             <mat-chip-list
                 #chipList
@@ -66,12 +70,19 @@
 	   </mat-option>
 	   </ng-template>
 	 </mat-autocomplete> -->
-
-
-
-
-
-
     <p *ngIf="showError">at least 1 user</p>
     <p *ngIf="showErrorClient">please choose Client</p>
+    <p
+        class="toggle-all-users"
+        [textContent]="'Show all ' + selectedCompanies.length + ' emails'"
+        *ngIf="!toggleAllUsers"
+        (click)="toggleAllUsers = true"
+    ></p>
+    <p
+        class="toggle-all-users"
+        *ngIf="toggleAllUsers"
+        (click)="toggleAllUsers = false"
+    >
+        Hide
+    </p>
 </div>
