@@ -27,7 +27,9 @@ export class LeftPanelDevicesComponent implements OnInit {
   }
 
   isSupportPage(state) {
-    return (state === 'new-devices');
+    return (state === 'new-devices' ||
+    state === 'new-device-summary');
+
   }
 
   openPanel(){

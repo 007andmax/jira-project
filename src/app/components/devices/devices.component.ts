@@ -11,6 +11,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CommonHttpServices } from '../device/_services/common_http.service';
+import { ExcelService } from '../device/_services/download_csv.service';
 import { RemoteControlService } from '../device/_services/remoteControl.service';
 import { ReportSendEmailComponent } from '../reports/report-additional-actions/report-send-email/report-send-email.component';
 import { DeviceFilter } from './class/devices';
@@ -74,6 +75,7 @@ export class DevicesComponent implements OnInit {
     private modalService: NgbModal,
     private remoteControlService: RemoteControlService,
     private commonHttpServices: CommonHttpServices,
+    private excelService: ExcelService,
   ) { }
 
   ngOnInit() {
@@ -98,6 +100,7 @@ export class DevicesComponent implements OnInit {
       )
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
+        this.getAllCompanyList();
         this.add(undefined);
         this.CurrentUser();
       });
@@ -694,6 +697,24 @@ export class DevicesComponent implements OnInit {
           }
         }
       );
+  }
+
+  downloadCsv() {
+    let downloadCsvList = [];
+    this.deviceSummaryList.forEach((element) => {
+      downloadCsvList.push([
+        element.Name.replace(",", " ") || "N/A",
+        element.Manufacturer.replace(",", " ") || "N/A",
+        element.Model.replace(",", " ") || "N/A",
+        element.SerialNumber || "N/A",
+      ]);
+    });
+    let fileName = "Device Summary Report List";
+    this.excelService.generateExcel(
+      downloadCsvList,
+      fileName,
+      "devicesummaryreport"
+    );
   }
 
 }

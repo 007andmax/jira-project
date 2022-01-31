@@ -1,3 +1,4 @@
+import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -341,6 +342,10 @@ const routes: Routes = [
     path: ':company/documents',
     component: DocumentsComponent,
 
+  },
+  {
+    path: ':company/devices/device-summary',
+    component: DevicesReportComponent,
   },
 
 

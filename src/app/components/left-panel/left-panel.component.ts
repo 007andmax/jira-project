@@ -141,6 +141,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
           if (window.location.href.includes(`/devices`)) this.state = 'new-devices';
+          if (window.location.href.includes(`/devices/device-summary`)) this.state == 'new-device-summary';
 
 
 
@@ -232,6 +233,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
+      if (this.state === 'new-device-summary') this.goToLink('devices/device-summary');
 
 
       if (this.state === 'byProducts' ||
