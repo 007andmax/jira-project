@@ -6,7 +6,7 @@ import {
   NgZone,
   OnDestroy
 } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 import {
   FormGroup,
   FormBuilder,
@@ -24,6 +24,9 @@ import { TimeZone } from '../../companies/company-time-zone/class/time-zone';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompanyTimeZoneStateService } from '../../companies/company-time-zone/services/company-time-zone-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 
 declare var google: any;
 declare var $: any;
@@ -99,7 +102,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   shortState = '';
   @ViewChild('search')
   public searchElementRef: ElementRef;
-
+  sub: Subscription = new Subscription();
   phone: string;
   constructor(
     private companyProfileService: CompanyProfileService,
@@ -109,7 +112,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private mapsAPILoader: MapsAPILoader,
     private settingStateService: SettingStateService,
     private companiesStateService: CompaniesStateService,
-    private companyTimeZoneState: CompanyTimeZoneStateService,
+    private imageCropperStateService: ImageCropperStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
     private ngZone: NgZone
   ) { }
 
@@ -151,9 +155,21 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     // load address autocomplete
     this.getAddressAutocomplete();
     this.settingStateService.setComponentName('CompanyProfileComponent');
+    this.onCroppImage();
   }
-
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      if (data) {
+        this.croppedImage = data.croppedImage;
+        this.cropIt();
+      }
+      // if (data) this.company.setLogo(data);
+    })
+    this.sub.add(getConfirm);
+  }
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $('body').removeClass('ng7');
   }
 
@@ -521,17 +537,18 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         this.toaster.info('Maximum size of 2MB');
         return;
       }
-      this.isCroppedImg = true;
+      //  this.isCroppedImg = true;
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
       this.loading = true; $(".loading").css("display", "block");
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           this.loading = false; $(".loading").css("display", "none");
           if (result) {
             this.fileAvatar = result;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
           }
         },
         error => {
