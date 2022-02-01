@@ -141,7 +141,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
           if (window.location.href.includes(`/devices`)) this.state = 'new-devices';
-          if (window.location.href.includes(`/devices/device-summary`)) this.state == 'new-device-summary';
+          if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
 
 
 
@@ -172,7 +172,10 @@ export class LeftPanelComponent implements OnInit {
     })
     this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
-      this.cd.detectChanges();
+      if(!this.cd['destroyed'])
+      {
+        this.cd.detectChanges();
+      }
     })
   }
   onOpenPanel() {
@@ -181,7 +184,10 @@ export class LeftPanelComponent implements OnInit {
   onToggleLeftPanel() {
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
-    this.cd.detectChanges();
+    if(!this.cd['destroyed'])
+    {
+      this.cd.detectChanges();
+    }
   }
 
   public goToLink(url) {
@@ -233,7 +239,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
-      if (this.state === 'new-device-summary') this.goToLink('devices/device-summary');
+      if (this.state === 'new-device-summary') this.goToLink('devices/reports');
 
 
       if (this.state === 'byProducts' ||
@@ -267,7 +273,10 @@ export class LeftPanelComponent implements OnInit {
 
 
       this.leftPanelStateService.changeState(this.state);
-      this.cd.detectChanges();
+      if(!this.cd['destroyed'])
+      {
+        this.cd.detectChanges();
+      }
     }
   }
 

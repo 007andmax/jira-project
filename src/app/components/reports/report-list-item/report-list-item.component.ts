@@ -17,6 +17,7 @@ export class ReportListItemComponent implements OnInit {
   ngOnInit() {
   }
   public goToState(state) {
+    debugger;
     localStorage.setItem('report', state);
     this.leftPanelStateService.goToState(state);
   }

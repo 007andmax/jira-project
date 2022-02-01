@@ -25,7 +25,10 @@ export class BreadcrumbsComponent implements OnInit {
         })
         this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
             this.state = data;
-            this.cd.detectChanges();
+            if(!this.cd['destroyed'])
+            {
+              this.cd.detectChanges();
+            }
         })
     }
     ngDoCheck() {
