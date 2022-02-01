@@ -294,6 +294,9 @@ input.ng-invalid.is-invalid {
         }
     }
 }
+.sidebar-popup {
+    z-index: 998;
+}
 .dp-area {
     float: none;
 }
