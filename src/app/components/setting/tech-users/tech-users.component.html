@@ -656,7 +656,11 @@
                 <input
                     type="file"
                     id="profile-dp"
+                    (change)="onSelectFile($event)"
+                    (click)="onInputClick($event)"
+                    accept="image/gif, image/jpeg, image/png, image/jpg"
                     style="display: none;"
+                    multiple
                 >
                 <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
                 <div class="static-link">
@@ -692,64 +696,6 @@
           </label> -->
                 </div>
                 <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-            </div>
-            <div
-                class="img-croparea"
-                *ngIf="isCroppedImg"
-            >
-                <div class="crop-inner">
-                    <div class="heading-area">
-                        <h2>Crop Photo</h2>
-                        <a
-                            href="javascript:;"
-                            class="close-btn"
-                            (click)="isCroppedImg = false"
-                        >
-                            remove
-                        </a>
-                    </div>
-                    <div class="cropping">
-                        <div class="img-crop">
-                            <!-- <image-cropper
-                [imageBase64]="imageBase64"
-                [imageChangedEvent]="imageChangedEvent"
-                [maintainAspectRatio]="false"
-                [aspectRatio]="4 / 3"
-                [resizeToWidth]="128"
-                format="png"
-                (imageCropped)="imageCropped($event)"
-              ></image-cropper> -->
-                            <image-cropper
-                                [imageChangedEvent]="imageChangedEvent"
-                                [maintainAspectRatio]="false"
-                                [aspectRatio]="4 / 3"
-                                [resizeToWidth]="128"
-                                format="png"
-                                (imageCropped)="imageCropped($event)"
-                            ></image-cropper>
-                        </div>
-                        <div class="preview">
-                            <h6>Profile Preview</h6>
-                            <img [src]="croppedImage?.base64">
-                        </div>
-                        <div class="btn-crops">
-                            <button
-                                type="button"
-                                class="btn btn-primary"
-                                (click)="cropIt()"
-                            >
-                                Crop Photo
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                (click)="closeModel()"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <form

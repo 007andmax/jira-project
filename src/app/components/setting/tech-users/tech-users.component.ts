@@ -15,6 +15,9 @@ import { DELETE_TECH_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 
 declare var $;
 
@@ -62,6 +65,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
+    private imageCropperStateService: ImageCropperStateService,
     private modalService: NgbModal,
   ) {
 
@@ -115,8 +120,19 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.onCroppImage();
   }
-
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      if (data) {
+        this.croppedImage = data.croppedImage;
+        this.cropIt();
+      }
+      // if (data) this.company.setLogo(data);
+    })
+    this.sub.add(getConfirm);
+  }
   ngAfterViewInit(): void { }
 
   // convenience getter for easy access to form fields
@@ -404,11 +420,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.loading = true; $(".loading").css("display", "block");
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           this.loading = false; $(".loading").css("display", "none");
           if (result) {
-            this.isCroppedImg = true;
+            //    this.isCroppedImg = true;
             this.fileAvatar = result;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
           }
         },
         error => {

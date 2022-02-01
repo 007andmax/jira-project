@@ -50,55 +50,6 @@
             </span>
         </div>
     </div>
-    <div
-        class="img-croparea"
-        *ngIf="false"
-    >
-        <div class="crop-inner">
-            <div class="heading-area">
-                <h2>Crop Photo</h2>
-                <a
-                    href="javascript:void(0)"
-                    class="close-btn"
-                    (click)="isCroppedImg = false"
-                >
-                    remove
-                </a>
-            </div>
-            <div class="cropping">
-                <div class="img-crop">
-                    <image-cropper
-                        [imageChangedEvent]="imageChangedEvent"
-                        [maintainAspectRatio]="false"
-                        [aspectRatio]="4 / 3"
-                        [resizeToWidth]="128"
-                        format="png"
-                        (imageCropped)="imageCropped($event)"
-                    ></image-cropper>
-                </div>
-                <div class="preview">
-                    <h6>Profile Preview</h6>
-                    <img [src]="croppedImage?.base64">
-                </div>
-                <div class="btn-crops">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="cropIt()"
-                    >
-                        Crop Photo
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        (click)="isCroppedImg = false"
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
     <form [formGroup]="profileForm">
         <div class="f-row">
             <div class="f-col col-50">

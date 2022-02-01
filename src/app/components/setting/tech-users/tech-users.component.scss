@@ -1,16 +1,16 @@
 /*** All css files include ***/
 
-@import '../../../../assets/scss/mixin';
-@import '../../../../assets/scss/custom';
-@import './src/assets/styles/variable';
-@import '../../../../assets/styles/fonts';
+@import "../../../../assets/scss/mixin";
+@import "../../../../assets/scss/custom";
+@import "./src/assets/styles/variable";
+@import "../../../../assets/styles/fonts";
 
-.page-container{
-    &.manage-tech{
+.page-container {
+    &.manage-tech {
         width: 936px;
-        .heading{
-            .heading-serach{
-                .stati-link{
+        .heading {
+            .heading-serach {
+                .stati-link {
                     font-weight: 600;
                     font-size: 12px;
                     font-style: normal;
@@ -20,42 +20,42 @@
                 }
             }
         }
-        .cmn-area{
+        .cmn-area {
             padding-top: 0;
-            @media only screen and (max-width:768px){
+            @media only screen and (max-width: 768px) {
                 padding: 25px;
             }
-
         }
     }
 }
-.mteh-data{
+.mteh-data {
     table {
-        @media only screen and (max-width:768px){
+        @media only screen and (max-width: 768px) {
             margin-bottom: 25px;
         }
-        th,td{
+        th,
+        td {
             -ms-box-sizing: border-box;
             -o-box-sizing: border-box;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
-        .tech-user{
+        .tech-user {
             width: 252px;
-            @media only screen and (max-width:768px){
+            @media only screen and (max-width: 768px) {
                 width: 200px;
             }
         }
-        .email{
+        .email {
             width: 228px;
-            @media only screen and (max-width:576px){
+            @media only screen and (max-width: 576px) {
                 display: none;
             }
             a {
                 color: $gray-800;
             }
-            span{
+            span {
                 font-size: 12px;
                 font-weight: normal;
                 line-height: 1.33;
@@ -64,21 +64,24 @@
                 display: block;
             }
         }
-        .e-note{width: 280px;position: relative;
-            @media only screen and (max-width:576px){
+        .e-note {
+            width: 280px;
+            position: relative;
+            @media only screen and (max-width: 576px) {
                 display: none;
             }
         }
-        .action{
+        .action {
             width: 90px;
-            @media only screen and (max-width:768px){
-                p{display: none;}
+            @media only screen and (max-width: 768px) {
+                p {
+                    display: none;
+                }
                 width: 70px;
             }
         }
     }
 }
-
 
 .t-user {
     display: flex;
@@ -90,7 +93,7 @@
         @include border-radius(50%);
         overflow: visible;
         position: relative;
-        &:not(.archiveUser)::after{
+        &:not(.archiveUser)::after {
             width: 10px;
             height: 10px;
             border: solid 2px $white;
@@ -100,7 +103,6 @@
             right: 0;
             bottom: 0;
             @include border-radius(50%);
-
         }
         .user-tech-dp {
             width: 40px;
@@ -109,26 +111,24 @@
             overflow: hidden;
             position: relative;
             display: inline-block;
-             img{
-                 width: 100%;
-                 height: 100%;
-                 object-fit: cover;
-             }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
-        &.online{
-            &::after{
+        &.online {
+            &::after {
                 background-color: $success;
             }
-
         }
-        &.away{
-            &::after{
+        &.away {
+            &::after {
                 background-color: $warning;
             }
-
         }
-        &.offline{
-            &::after{
+        &.offline {
+            &::after {
                 background-color: $gray-600;
             }
         }
@@ -151,11 +151,8 @@
         overflow: hidden;
         @include border-radius(50%);
         font-weight: 600;
-
     }
 }
-
-
 
 .t-info {
     display: inline-block;
@@ -177,48 +174,46 @@
     }
 }
 
-    .eml-ntl-list {
-        position: absolute;
-        width: 400px;
-        @include border-radius(4px);
-        -ms-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-        -o-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-        -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-        -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-        box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-        background-color: $white;
-        z-index: 1;
-        left: 0;
-        top: auto;
-        padding: 24px;
-        @include transition(0.4s);
-        overflow-y: hidden;
-        display: none;
-        @media only screen and (max-width:1024px){
-            left: auto;
-            right:20px;
-        }
-        &.opened{
-            display: block;
-        }
-        .email-note-wrape {
-            ul {
-                margin-bottom: 0;
-                li {
-                    margin-bottom: 15px;
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-
+.eml-ntl-list {
+    position: absolute;
+    width: 400px;
+    @include border-radius(4px);
+    -ms-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    background-color: $white;
+    z-index: 1;
+    left: 0;
+    top: auto;
+    padding: 24px;
+    @include transition(0.4s);
+    overflow-y: hidden;
+    display: none;
+    @media only screen and (max-width: 1024px) {
+        left: auto;
+        right: 20px;
+    }
+    &.opened {
+        display: block;
+    }
+    .email-note-wrape {
+        ul {
+            margin-bottom: 0;
+            li {
+                margin-bottom: 15px;
+                &:last-child {
+                    margin-bottom: 0;
                 }
             }
         }
-        h5{
-            margin-bottom: 15px;
-            color:$gray-800;
-
-        }
     }
+    h5 {
+        margin-bottom: 15px;
+        color: $gray-800;
+    }
+}
 .email-note-wrape {
     float: left;
     width: 100%;
@@ -226,7 +221,7 @@
 .email-dropdown {
     border-radius: 3px;
     border: solid 1px $background;
-    background: url('/assets/img/filter-dropdown.svg') no-repeat right 7px center $gray-100;
+    background: url("/assets/img/filter-dropdown.svg") no-repeat right 7px center $gray-100;
     background-size: 14px auto;
     width: auto;
     max-width: 200px;
@@ -251,23 +246,25 @@
 
 .invalid-feedback {
     // width: 100%;
-    margin-top: .25rem;
+    margin-top: 0.25rem;
     font-size: 80%;
     color: $error;
-  }
+}
 
-  input.ng-invalid.is-invalid {
+input.ng-invalid.is-invalid {
     border: 1px solid $error;
-  }
+}
 
+.email-note-wrape {
+    .cmn-checkbox {
+        input[type="checkbox"][readonly] + label {
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+}
 
-  .email-note-wrape{
-      .cmn-checkbox{
-        input[type="checkbox"][readonly] + label{cursor: not-allowed;pointer-events: none;}
-      }
-  }
-
-  .sidebar-popup.role-dlt {
+.sidebar-popup.role-dlt {
     .warn-msg {
         display: flex;
         flex-direction: row;
@@ -275,26 +272,28 @@
         background-color: $gray-400;
         padding: 8px 24px 8px 40px;
         @media only screen and (max-width: 768px) {
-          padding: 8px 24px 8px 24px;
+            padding: 8px 24px 8px 24px;
         }
         p {
-          font-size: 13px;
-          font-weight: normal;
-          line-height: 1.54;
-          letter-spacing: normal;
-          color: $primary-2;
-          margin-bottom: 0;
-          margin-left: 10px;
-          @media only screen and (max-width: 768px) {
-            br {
-              display: none;
+            font-size: 13px;
+            font-weight: normal;
+            line-height: 1.54;
+            letter-spacing: normal;
+            color: $primary-2;
+            margin-bottom: 0;
+            margin-left: 10px;
+            @media only screen and (max-width: 768px) {
+                br {
+                    display: none;
+                }
             }
-          }
-          a {
-              color: $primary-2;
-              text-decoration: underline !important;
-          }
+            a {
+                color: $primary-2;
+                text-decoration: underline !important;
+            }
         }
-
-      }
+    }
+}
+.dp-area {
+    float: none;
 }
