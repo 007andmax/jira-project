@@ -105,7 +105,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       this.deviceAntivirusReport.setCompanyId(null);
       this.deviceAntivirusReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.clearWithOutChanges();      
+      this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
       this.deviceAntivirusList = [];
     }
@@ -323,7 +323,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
   }
 
   goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   onFilter(field) {

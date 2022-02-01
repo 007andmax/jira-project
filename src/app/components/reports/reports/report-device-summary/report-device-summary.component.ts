@@ -373,7 +373,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   }
 
   public goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   sendEmail() {

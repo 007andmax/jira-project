@@ -43,12 +43,6 @@
                 [listTitles]="getListTitles('REMOTE_ACCESS',searchText)"
                 [listStates]="getListStates('REMOTE_ACCESS',searchText)"
             ></app-report-list-item>
-            <app-report-list-item
-                [img]="'/assets/img/icons/income.svg'"
-                [title]="'Income accounts'"
-                [listTitles]="getListTitles('INCOME_ACCOUNTS',searchText)"
-                [listStates]="getListStates('INCOME_ACCOUNTS',searchText)"
-            ></app-report-list-item>
         </div>
         <div class="col-sm-3">
             <app-report-list-item
@@ -93,11 +87,10 @@
                 [listStates]="getListStates('TAXES',searchText)"
             ></app-report-list-item>
             <app-report-list-item
-                *ngIf="getPermissions('VIEW_DEVICES_REPORTS')"
-                [img]="'/assets/img/icons/Report_devices.svg'"
-                [title]="'Devices'"
-                [listTitles]="getListTitles('DEVICES',searchText)"
-                [listStates]="getListStates('DEVICES',searchText)"
+                [img]="'/assets/img/icons/income.svg'"
+                [title]="'Income accounts'"
+                [listTitles]="getListTitles('INCOME_ACCOUNTS',searchText)"
+                [listStates]="getListStates('INCOME_ACCOUNTS',searchText)"
             ></app-report-list-item>
         </div>
     </div>

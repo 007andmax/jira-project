@@ -41,71 +41,6 @@ export class ReportsComponent implements OnInit {
       name: "Remote connection report",
       address: "remote-access",
     },
-    {
-      type: "DEVICES",
-      name: "Device Summary report",
-      address: "report-device-summary",
-    },
-    {
-      type: "DEVICES",
-      name: "Software Summary report",
-      address: "software-summary",
-    },
-    {
-      type: "DEVICES",
-      name: "Hardware Summary reports",
-      address: "hardware-summary",
-    },
-    {
-      type: "DEVICES",
-      name: "Device IP Summary report",
-      address: "device-ip-summary",
-    },
-    {
-      type: "DEVICES",
-      name: "Device Warranty report",
-      address: "report-device-warranty",
-    },
-    {
-      type: "DEVICES",
-      name: "Device Antivirus report",
-      address: "report-device-antivirus",
-    },
-    {
-      type: "DEVICES",
-      name: "Network IP report",
-      address: "network-ip-report",
-    },
-    {
-      type: "DEVICES",
-      name: "Network Detail report",
-      address: "network-detail-report",
-    },
-    {
-      type: "DEVICES",
-      name: "Network Adapter report",
-      address: "network-adapter-report",
-    },
-    {
-      type: "DEVICES",
-      name: "Device Deployment Warranty report",
-      address: "report-device-deploymentwarranty",
-    },
-    {
-      type: "DEVICES",
-      name: "Device Processor Ram report",
-      address: "report-device-processorram",
-    },
-    {
-      type: "DEVICES",
-      name: "Device Disk Space report",
-      address: "report-device-diskspace",
-    },
-    {
-      type: "DEVICES",
-      name: "Application By Company report",
-      address: "applicationbycompany-report",
-    },
     { type: "PERFORMANCE", name: "Tech sales report", address: "tech-sales" },
     { type: "PERFORMANCE", name: "Tech ticket report", address: "tech-ticket" },
     {
@@ -199,20 +134,6 @@ export class ReportsComponent implements OnInit {
             .map((x) => x.name)
         : this.reportList
             .filter((x) => x.type === "REMOTE_ACCESS")
-            .map((x) => x.name);
-    }
-
-    if (type === "DEVICES") {
-      return searchs !== ""
-        ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "DEVICES" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
-        : this.reportList
-            .filter((x) => x.type === "DEVICES")
             .map((x) => x.name);
     }
 
@@ -324,20 +245,6 @@ export class ReportsComponent implements OnInit {
             .map((x) => x.address)
         : this.reportList
             .filter((x) => x.type === "REMOTE_ACCESS")
-            .map((x) => x.address);
-    }
-
-    if (type === "DEVICES") {
-      return searchs !== ""
-        ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "DEVICES" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
-        : this.reportList
-            .filter((x) => x.type === "DEVICES")
             .map((x) => x.address);
     }
 

@@ -21,7 +21,7 @@ export class ItemReportComponent implements OnInit, OnDestroy {
     if (localStorage.report) this.report = localStorage.report;
   }
   back() {
-    this.leftPanelStateService.goToState('new-reports');
+   this.leftPanelStateService.goToState('new-reports' ||  'new-device-summary');
     /*  let body = document.querySelector('.main-container');
       var link = document.createElement('a');
       body.appendChild(link);
@@ -29,6 +29,10 @@ export class ItemReportComponent implements OnInit, OnDestroy {
       var e = document.createEvent('MouseEvents');
       e.initEvent('click', true, true);
       link.dispatchEvent(e);*/
+  }
+
+  backreport(){
+    this.leftPanelStateService.goToState('new-device-summary')
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)

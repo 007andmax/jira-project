@@ -102,7 +102,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       this.deviceProcessorRamReport.setCompanyId(null);
       this.deviceProcessorRamReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.clearWithOutChanges();      
+      this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
       this.deviceProcessorRamList = [];
     }
@@ -356,7 +356,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
   }
 
   goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   onFilter(field) {

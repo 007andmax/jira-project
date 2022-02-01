@@ -105,7 +105,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       this.deviceWarrantyReport.setCompanyId(null);
       this.deviceWarrantyReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.clearWithOutChanges();      
+      this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
       this.deviceWarrantyList = [];
     }
@@ -376,7 +376,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
   }
 
   goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   onFilter(field) {

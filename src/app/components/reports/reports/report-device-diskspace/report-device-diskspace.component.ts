@@ -102,7 +102,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
       this.deviceDiskSpaceReport.setCompanyId(null);
       this.deviceDiskSpaceReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.clearWithOutChanges();      
+      this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
       this.deviceDiskSpaceList = [];
     }
@@ -356,7 +356,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
   }
 
   goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   onFilter(field) {

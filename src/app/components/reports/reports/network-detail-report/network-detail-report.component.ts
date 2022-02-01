@@ -415,7 +415,7 @@ export class NetworkDetailReportComponent implements OnInit {
   }
 
   goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   onFilter(field) {

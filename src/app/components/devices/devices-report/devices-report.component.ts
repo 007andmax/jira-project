@@ -11,11 +11,11 @@ export class DevicesReportComponent implements OnInit {
   searchText: string = "";
   title: string = "Reports";
   devicereportList : Array<{type:string; name:string; address: string}>= [
-    {type: 'DEVICE', name:'Device Summary report', address:'devices-summary'},
+    {type: 'DEVICE', name:'Device Summary report', address:'report-device-summary'},
     {type: 'HARDWARE', name:'Hardware Summary reports', address:'hardware-summary'},
     {type: 'HARDWARE', name:'Device Processor Ram report', address:'report-device-processorram'},
     {type: 'HARDWARE', name:'Device Disk Space report', address:'report-device-diskspace'},
-    {type: 'NETWORK', name:'Device IP Summary report',  address: "device-ip-summary"},
+    {type: "NETWORK", name:"Device IP Summary report",  address: "device-ip-summary"},
     {type: 'NETWORK', name:'Network IP report',  address: "network-ip-report"},
     {type: 'NETWORK', name: "Network Detail report", address: "network-detail-report",},
     {type: 'NETWORK', name: "Network Adapter report", address: "network-adapter-report",},
@@ -40,6 +40,20 @@ export class DevicesReportComponent implements OnInit {
     return this.permissionsService.isAllowed(action);
   }
   public getListTitles(type, searchs) {
+
+    if (type === "DEVICE") {
+      return searchs !== ""
+        ? this.devicereportList
+            .filter(
+              (x) =>
+                x.type === "DEVICE" &&
+                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+            )
+            .map((x) => x.name)
+        : this.devicereportList
+            .filter((x) => x.type === "DEVICE")
+            .map((x) => x.name);
+    }
     if (type === "HARDWARE") {
       return searchs !== ""
         ? this.devicereportList
@@ -89,6 +103,10 @@ export class DevicesReportComponent implements OnInit {
             .filter((x) => x.type === "WARRANTY")
             .map((x) => x.name);
     }
+  }
+
+  public getListStates(type, searchs) {
+
     if (type === "DEVICE") {
       return searchs !== ""
         ? this.devicereportList
@@ -97,14 +115,11 @@ export class DevicesReportComponent implements OnInit {
                 x.type === "DEVICE" &&
                 x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
             )
-            .map((x) => x.name)
+            .map((x) => x.address)
         : this.devicereportList
             .filter((x) => x.type === "DEVICE")
-            .map((x) => x.name);
+            .map((x) => x.address);
     }
-  }
-
-  public getListStates(type, searchs) {
     if (type === "HARDWARE") {
       return searchs !== ""
         ? this.devicereportList
@@ -156,19 +171,6 @@ export class DevicesReportComponent implements OnInit {
             .map((x) => x.address)
         : this.devicereportList
             .filter((x) => x.type === "WARRANTY")
-            .map((x) => x.address);
-    }
-    if (type === "DEVICE") {
-      return searchs !== ""
-        ? this.devicereportList
-            .filter(
-              (x) =>
-                x.type === "DEVICE" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
-        : this.devicereportList
-            .filter((x) => x.type === "DEVICE")
             .map((x) => x.address);
     }
   }

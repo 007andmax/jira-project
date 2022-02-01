@@ -1,4 +1,3 @@
-import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -64,6 +63,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
 import { DeviceComponent } from './components/device/device.component';
 import { DevicesComponent } from './components/devices/devices.component';
+import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
+
 
 const routes: Routes = [
 

@@ -542,6 +542,6 @@ export class SoftwareSummaryReport1Component implements OnInit {
   }
 
   goToReportList() {
-    this.leftPanelStateService.goToState("new-reports");
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 }
