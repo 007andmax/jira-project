@@ -73,6 +73,8 @@ import { PermissionEmailTempleteService } from './components/setting/email-templ
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
+import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
+import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 
 const routes: Routes = [
 
@@ -263,6 +265,7 @@ const routes: Routes = [
   {
     path: ':company/billable',
     component: BillableComponent,
+    canActivate: [PermissionBillableService]
   },
   {
     path: ':company/default-services',
@@ -271,10 +274,12 @@ const routes: Routes = [
   {
     path: ':company/invoices',
     component: InvoicesComponent,
+    canActivate: [PermissionInvoicesService]
   },
   {
     path: ':company/billable-tickets',
     component: BillableTicketsComponent,
+    canActivate: [PermissionBillableService]
   },
   {
     path: ':company/contracts',

@@ -505,6 +505,7 @@ import { UsersAsideDetailMessagesFullBodyComponent } from './components/users/us
 import { MarketingComponent } from './components/marketing/marketing.component';
 import { UsersTableMarketingComponent } from './components/marketing/users-table-marketing/users-table-marketing.component';
 import { LeftPanelMarketingComponent } from './components/left-panel/left-panel-marketing/left-panel-marketing.component';
+import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 
 
 declare var $: any;
@@ -1035,7 +1036,8 @@ declare var $: any;
     PermissionTicketSettingsService,
     PermissionEmailTempleteService,
     PermissionAccountingSettingsService,
-    PermissionCrmSettingsService
+    PermissionCrmSettingsService,
+    PermissionInvoicesService
   ],
   bootstrap: [AppComponent]
 })
