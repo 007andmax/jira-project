@@ -345,7 +345,7 @@ const routes: Routes = [
 
   },
   {
-    path: ':company/devices/device-summary',
+    path: ':company/devices/reports',
     component: DevicesReportComponent,
   },
 

@@ -464,7 +464,6 @@ import { ApplicationbycompanyReportComponent } from './components/reports/report
 import { DevicesComponent } from './components/devices/devices.component';
 import { LeftPanelDevicesComponent } from './components/left-panel/left-panel-devices/left-panel-devices.component';
 import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
-//import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
 
 declare var $: any;
 /**

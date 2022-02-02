@@ -28,8 +28,9 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     setTimeout(() => {
       this.onInit = true;
       this.loadingInProgress = false;
+      if(this.cd) {
       this.cd.detectChanges();
-
+      }
     }, 1000);
   }
   public parseHTML(data) {
@@ -56,8 +57,5 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   };
   parseFloatValue(value) {
     return parseFloat(value);
-  }
-  public trackByIndex(index, item) {
-    return index;
   }
 }
