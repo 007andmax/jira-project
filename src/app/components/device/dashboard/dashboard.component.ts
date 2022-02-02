@@ -587,7 +587,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getPendingWindowUpdate(template) {
     this.ngZone.run(() => {
       this.modalService
-        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg' })
+        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', })
         .result.then(
           (result) => {
             this.closeResult = `Closed with: ${result}`;

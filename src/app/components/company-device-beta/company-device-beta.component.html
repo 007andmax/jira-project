@@ -5,16 +5,36 @@
                 class="qt-page-list__header-title"
                 [textContent]="'Devices'"
             ></h3>
-            <form method="GET">
-                <input
-                    type="search"
-                    class="form-input-search device-beta-search"
-                    [(ngModel)]="search"
-                    name="search"
-                    placeholder="Search Devices…"
-                    autocomplete="off"
-                >
-            </form>
+            <div class="Rectangle">
+              <img src="/assets/img/icons/search.svg"
+            class="Online-Search">
+            <div class="SearchRectangle">
+              <mat-form-field class="example-chip-list" appearance="none">
+                <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let tag of selectedTag; let i=index" (removed)="remove(i)">
+                      {{tag}} <mat-icon matChipRemove></mat-icon>
+                    </mat-chip>
+                    <input #dropdownServices
+                  autofocus
+                  id="dropdownServices"
+                  [formControl]="selectedCtrl"
+                  [(ngModel)]="tagFilterValue"
+                  [matAutocomplete]="auto"
+                  class="pointer"
+                  placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
+                  [matChipInputFor]="chipList"
+                  (keyup.enter)="add($event.target.value)"
+                  (keyup)="onSearchTag($event.target.value)"
+              >
+                </mat-chip-list>
+                <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
+                    <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
+                      {{search.Result}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
+                    </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
 
 
@@ -233,7 +253,7 @@
                           <td class="company-devices-table__device-agent">
                             <div class="qt-df qt-fd-c">
                               <span>
-                                <span>{{ asset.InstallDate | date: 'dd/MM/yyyy' }}</span>
+                                <span>{{ asset.VersionInstallDate | date: 'dd/MM/yyyy' }}</span>
                             </span>
                             <span
                                 *ngIf="asset.IsAgentCurrent"

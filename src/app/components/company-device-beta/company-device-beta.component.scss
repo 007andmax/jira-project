@@ -19,6 +19,62 @@
   margin: 0 25px 0 27px;
 }
 
+.Rectangle {
+  width: 744px;
+  height: 36px;
+  margin: 24px 4px 24px 30px;
+  padding: 4px 4px 4px 11px;
+  @include border-radius(4px);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+img.Online-Search {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  margin-top: 4px;
+}
+
+.SearchRectangle {
+  width: 705px;
+  height: 36px;
+  margin: -33px 0px 0px 30px;
+  padding: 2px 4px 2px 11px;
+  border-radius: 4px;
+  //border: solid 1px #919eab;
+  background-color: #fff;
+}
+
+.example-chip-list {
+  width: 94%;
+ }
+
+ .SubRectangle{
+  width: 744px;
+  height: 32px;
+  margin: 0 1px 0 0;
+  padding: 6px 15px 4px;
+  background-color: #fff;
+  font-size: 12px;
+ }
+
+::ng-deep .mat-autocomplete-panel.extended {
+  width: 744px;
+  height: 387px;
+  margin: -12px 40px 0 -18px;
+}
+
+::ng-deep .opt-icon {
+  margin: 4px;
+  margin-top: 16px;
+  height: 32px;
+  width: 32px;
+  float:right;
+  color: #212b36;
+
+}
+
 .icon-list i {
   display: block;
 }
@@ -129,3 +185,62 @@
     outline: none;
   }
 }
+
+.mat-form-field {
+  margin: -19px 0 0 -9px;
+}
+
+input.mat-chip-input {
+  margin: 4px;
+  flex: 1 0 150px;
+  height: 38px;
+  font-size: 12px;
+}
+
+::ng-deep .cdk-overlay-pane {
+  width: 766px !important;
+  min-width: 766px;
+  left:-24px !important;
+}
+
+.opt-icon.Company.Name {
+  background-image: url(/assets/img/auto/office-account.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Software {
+  background-image: url(/assets/img/auto/software.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Asset.Tag, .opt-icon.Tag {
+  background-image: url(/assets/img/auto/tag.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Manufacturer {
+  background-image: url(/assets/img/auto/manufacturer.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Asset.Name, .opt-icon.Asset.Title {
+  background-image: url(/assets/img/auto/devices.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.OS {
+  background-image: url(/assets/img/auto/os.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.OS.Version {
+  background-image: url(/assets/img/auto/os-version.svg);
+  background-repeat: no-repeat;
+}
+.opt-icon.Model {
+  background-image: url(/assets/img/auto/model.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.CPU {
+  background-image: url(/assets/img/auto/cpu.svg);
+  background-repeat: no-repeat;
+}
+

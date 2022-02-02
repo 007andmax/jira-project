@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild,} from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild,} from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
@@ -9,6 +10,8 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
+import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { CompaniesService } from "src/app/services/company/companies.service";
 
 @Component({
   selector: "app-company-device-beta",
@@ -48,6 +51,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
   networkData: any = undefined;
   operatingSystem: any = undefined;
   windowSystem: any = undefined;
+  selectedTag: any[] = [];
+  searchTag: any[] = [];
+  techCompnayGuid: string = "";
+  autosearchDevice: any[] = [];
+  selectedCtrl = new FormControl();
+  tagFilterValue: string = "";
+  currentCompany: any = null;
+  companyGuid: string ="";
+
+  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
+
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -59,7 +73,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private ngZone: NgZone,
-    private remoteControlService: RemoteControlService
+    private remoteControlService: RemoteControlService,
+    private companiesService: CompaniesService,
   ) {}
 
   ngOnInit() {
@@ -67,6 +82,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
+    this.companiesService.getTechCompany().subscribe(data => {
+      this.currentCompany = data;
+      this.techCompnayGuid = this.currentCompany.id;
+      this.companyGuid = this.currentCompany.id;
+      this.setPreviewDataDevice();
+      this.onPowerShellCommand();
+    });
+
     this.setPreviewDataDevice();
     this.onPowerShellCommand();
     this.onAck();
@@ -83,6 +106,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
         this.AssetDetail();
+       // this.add(undefined);
         this.CurrentUser();
       });
   }
@@ -113,6 +137,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   AssetDetail() {
     this.operatingSystem = [];
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+      debugger;
       this.assetList = resp;
       this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.assetList.forEach((element, index) => {
@@ -536,6 +561,96 @@ export class CompanyDeviceBetaComponent implements OnInit {
       .getCurrentCompany()
       .name.replaceAll(" ", "")}/device/dashboard/${type}/${Guid}`;
     window.open(url, "_blank");
+  }
+
+  onSearchTag(Tag) {
+    console.log('onSearchTag fired');
+    if ((Tag || '').length <= 2) {
+      return;
+    }
+    setTimeout(() => {
+      let req: any = {};
+      req.TechCompanyGuid = this.techCompnayGuid;
+      req.CompanyGuid = this.companyGuid
+      req.Criteria = Tag;
+      this.autosearchDevice = ['loading...'];
+      if (this.cd) {
+        this.cd.detectChanges();
+      }
+      this.agentService.autoComplete(req).subscribe((result) => {
+        this.autosearchDevice = result;
+        if (this.cd) {
+          this.cd.detectChanges();
+        }
+      });
+    }, 500);
+  }
+
+  selectedSearch(event: MatAutocompleteSelectedEvent): void {
+    console.log('selected fired');
+    this.selectedTag.push(event.option.viewValue);
+    this.searchTag.push(event.option.viewValue);
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    this.add(event.option.viewValue);
+  }
+
+  add(Tag): void {
+    console.log('add event fired');
+    this.tagFilterValue = "";
+
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    var findTag = this.selectedTag.find(x => x == Tag);
+
+    if (Tag && !findTag) {
+      this.selectedTag.push(Tag);
+      this.searchTag.push(Tag);
+    }
+
+    let req: any = {};
+    req.TechCompanyGuid = this.techCompnayGuid;
+    req.Criteria = this.searchTag;
+
+    this.searchDeviceTag(req);
+
+  }
+
+  searchDeviceTag(data: any) {
+    this.showPreloader = true;
+    if (this.selectedTag.length == 0) {
+      this.autosearchDevice = [];
+    }
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+      this.onFilter('CompanyName');
+      this.showPreloader = false;
+
+      this.operatingSystem = [];
+      this.assetList = resp;
+      this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
+      this.HardwareTypeList(this.assetList[0].CompanyGuid)
+
+      this.assetList.forEach((element, index) => {
+        element.online = false;
+        this.assetList[index].Title =
+          element.Title != "" ? element.Title : element.Name;
+        this.OperatingSystem(element.ID, index);
+        this.GetCurrentConfig(element.ID);
+      });
+
+      if (this.cd) {
+        this.cd.detectChanges();
+      }
+    });
+  }
+
+  remove(index: number) {
+    this.selectedTag.splice(index, 1);
+    this.searchTag.splice(index, 1);
+    let req: any = {};
+    req.TechCompanyGuid = this.techCompnayGuid;
+    req.Criteria = this.selectedTag;
+    this.searchDeviceTag(req);
   }
 
 }
