@@ -34,6 +34,7 @@ export class BillableItemComponent implements OnInit {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.item.id);
     this.salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
+    console.log("this.salesPerson", this.salesPerson);
   }
   ngDocheck() {
 

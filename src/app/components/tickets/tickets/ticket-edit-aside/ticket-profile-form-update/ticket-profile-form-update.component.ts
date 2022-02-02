@@ -75,6 +75,10 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.usersStateService.onGetCurrentUser.subscribe(data => {
+      this.currentUser = data;
+    })
+    console.log("this.currentUser", this.currentUser);
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
