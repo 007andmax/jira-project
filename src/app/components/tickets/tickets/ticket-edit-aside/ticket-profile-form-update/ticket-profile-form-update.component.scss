@@ -24,8 +24,8 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-size: cover;
-    background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
     margin-right: 18px;
 
     @media (max-width: 767px) {
@@ -157,8 +157,8 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-position: center;
-    background-size: cover;
+    background-position: center !important;
+    background-size: cover !important;
     font-size: 10px;
     text-align: center;
     align-items: center;
