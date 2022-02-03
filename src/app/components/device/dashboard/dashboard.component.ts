@@ -109,6 +109,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             let data: any = {};
             data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
             data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
+            data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
             if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
               data.RebootIsRequired = "Never Reboots"
             }
@@ -658,5 +659,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.isOverlay = false;
       }, 3000)
     }
+  }
+
+  sizeConvert(v1) {
+    let val1 = (parseInt(v1) / 1024 / 1024).toFixed(2);
+    return (parseFloat(val1)).toFixed(0);
   }
 }

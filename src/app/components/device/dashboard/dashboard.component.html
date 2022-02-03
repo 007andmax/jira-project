@@ -614,14 +614,11 @@
             <thead>
               <tr *ngIf="windowUpdatePendingList.length<=0 ? false: true">
                 <th class="tableth"></th>
-                <th class="title">Title</th>
-                <th  class="title">Reboot</th>
                 <th class="title">Description</th>
-                <th>Product</th>
-                <th >Class</th>
-                <th>Size</th>
-                <th >Hidden Patches</th>
-                <th>Installed</th>
+                <!-- <th  class="title">Reboot</th> -->
+                <th class="product">Product</th>
+                <th class="product">Class</th>
+                <th class="product">Size</th>
               </tr>
             </thead>
             <tbody>
@@ -635,7 +632,10 @@
                         <div class="loader" *ngIf="data.loading"></div>
                     </td>
                     <td class="tablespace">{{data.Title}}</td>
-                    <td class="tablespace">{{data.RebootIsRequired}}</td>
+                    <td class="tablespace">{{data.Product}}</td>
+                    <td class="tablespace">{{data.Categories}}</td>
+                    <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
+                    <!-- <td class="tablespace">{{data.RebootIsRequired}}</td> -->
                 </tr>
                 <tr *ngIf="windowUpdatePendingList.length<=0">
                     <td class="missing">No missing Updates</td>
