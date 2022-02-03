@@ -51,19 +51,8 @@
     <li
         [ngClass]="{'--active':activePage === 'new-contracts'}"
         (click)="goToState('new-contracts')"
+        *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
     >
         Contracts
-        <!-- <div class="expire-contract-notification">
-           *ngIf="showNotificationReview" 
-            <div>
-                Some contracts are about to expire, please review
-            </div>
-            <button
-                class="expire-contract-notification__button"
-                (click)="showNotificationReview = false"
-            >
-                Okay, Got it
-            </button>
-        </div> -->
     </li>
 </ul>

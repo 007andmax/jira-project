@@ -38,8 +38,15 @@
                         [money]="true"
                         [ngModel]="product.item.cost"
                         appToFixed
+                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                         (blur)="onValidateSaleCostProduct(i)"
                         (ngModelChange)="onChangeCostProduct($event, i)"
+                    >
+                    <input
+                        class="product-item__input cost"
+                        type="text"
+                        *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
+                        disabled
                     >
                 </label>
                 <label class="product-item__qty-input">

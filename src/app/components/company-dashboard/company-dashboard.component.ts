@@ -2,6 +2,7 @@ import { NgModule, ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbDropdownToggle, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { Company } from '../../interfaces/company/company';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
@@ -28,6 +29,7 @@ export class CompanyDashboardComponent implements OnInit {
   constructor(
     public cd: ChangeDetectorRef,
     public appService: AppService,
+    private permissionsService: PermissionsService,
     private leftPanelStateService: LeftPanelStateService,
     public contractsStateService: ContractsStateService) { }
 
@@ -50,5 +52,7 @@ export class CompanyDashboardComponent implements OnInit {
   companyNameChangedHandler(name: string) {
     this.companyName = name;
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
 }

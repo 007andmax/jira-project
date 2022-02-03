@@ -34,12 +34,14 @@
             <li
                 ngbDropdownItem
                 (click)="onAddService()"
+                *ngIf="getPermissions('MANAGE_SERVICES')"
             >
                 Service
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddProduct()"
+                *ngIf="getPermissions('MANAGE_PRODUCTS')"
             >
                 Product
             </li>

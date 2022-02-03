@@ -5,6 +5,7 @@ import { InventoryChange } from '../../inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 /**
  * Product list component
@@ -35,6 +36,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     public quoteStateService: QuoteStateService,
+    private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService) { }
 
 
@@ -132,6 +134,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.selectedProductItem.emit(null);
     //   this.editItem = null;
     this.selectedItem = false;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

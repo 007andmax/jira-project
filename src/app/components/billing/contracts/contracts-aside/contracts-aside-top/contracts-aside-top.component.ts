@@ -31,7 +31,7 @@ export class ContractsAsideTopComponent implements OnInit {
     this.sub.add(getOnCompanies);
   }
   getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    this.companies = data.filter(item => item.clientType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   onSelectType(data) {

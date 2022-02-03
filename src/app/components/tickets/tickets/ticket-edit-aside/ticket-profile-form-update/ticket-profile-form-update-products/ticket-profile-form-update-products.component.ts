@@ -8,6 +8,7 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { InventoryChange } from 'src/app/components/inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update-products',
@@ -27,6 +28,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
   constructor(private productService: ProductService,
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService) { }
 
 
@@ -120,6 +122,9 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
   }
   public getSelectedProducts() {
     return (this.currentProduct.item.versionedId) ? [...this.addedProductList, this.currentProduct] : this.addedProductList;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

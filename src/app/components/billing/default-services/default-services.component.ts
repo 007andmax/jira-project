@@ -8,6 +8,7 @@ import { DefaultServicesStateService } from 'src/app/states/default-services/def
 import { Subscription } from 'rxjs';
 import { DefaultServicesRealTimeService } from 'src/app/states/default-services/default-services-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'default-services',
@@ -26,6 +27,7 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private confirmStateService: ConfirmStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -78,6 +80,9 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
