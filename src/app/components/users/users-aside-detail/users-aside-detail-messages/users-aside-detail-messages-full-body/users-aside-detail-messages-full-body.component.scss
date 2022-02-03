@@ -142,3 +142,13 @@ h3 {
         padding: 0px !important;
     }
 }
+.toggle-all-users {
+    text-align: right;
+    color: #16a4fa;
+    cursor: pointer;
+    font-size: 12px;
+}
+.hide-all-user {
+    max-height: 50px !important;
+    overflow: hidden !important;
+}
