@@ -412,3 +412,81 @@ input.mat-chip-input {
       color: $white-color;
   }
 }
+
+.Save-to-Favourite {
+  margin: 1px 50px 16px 0;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 24px;
+  padding-top: 15px;
+  color: #212b36;
+}
+
+.Name {
+  width: 37px;
+  height: 20px;
+  margin: 0 44px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: #212b36;
+  padding-left: 24px;
+}
+
+.Rectangle-56-Copy {
+  width: 340px;
+  height: 40px;
+  margin: 8px 0 0;
+  padding: 10px 201px 10px 16px;
+  border-radius: 4px;
+  border: solid 1px #c4cbd5;
+  background-color: #fff;
+
+}
+
+.text{
+  padding-left: 24px;
+}
+
+.footer-area-modal {
+  margin-top: 30px;
+  margin-left: 24px;
+  padding-bottom: 24px;
+}
+
+.cancel{
+  margin-left: 12px;
+  color: #4f5f79;
+  border: solid 1px #c5cdd5;
+  background-color: white;
+  width: 76px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: #fff;
+
+}
+
+.save{
+  padding: 1px 16px;
+  border-radius: 4px;
+  border-color: #2e6da4;
+  background-color: #16a4fa;
+  width: 64px;
+  height: 40px;
+  color: #fff;
+  border: solid 1px #c5cdd5;
+}
+
+::ng-deep .modal-dialog{
+  margin-top: 1px !important;
+  left: 58% !important;
+  width: 500px;
+  top: 35% !important;
+  width: 388px !important;
+  margin-left: -46px !important;
+}

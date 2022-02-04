@@ -35,8 +35,14 @@
                     </mat-form-field>
                   </div>
                   <div class="StarRectangle">
+                    <a
+                    href="javascript:;"
+                    (click)="favourite(tag)"
+                >
+
                     <img src="/assets/img/favourite-active.svg"
      class="Favourite">
+    </a>
                   </div>
                 </div>
                 <button class="qt-btn --outline-white qt-ml-8">
@@ -478,3 +484,35 @@
   </div>
 </ng-template>
 
+
+<ng-template
+#tag
+let-modal
+class="modal-dialog"
+>
+  <div>
+    <div class="Save-to-Favourite">Save to Favourite</div>
+    <span class="Name">
+      Name
+    </span>
+    <div class="text">
+      <input class="Rectangle-56-Copy" [(ngModel)]="favouriteName" placeholder="Favourite List Name" type="text"/>
+    </div>
+    <div class="footer-area-modal">
+      <button
+          type="button"
+          class="save"
+          (click)="saveFavourite();modal.dismiss()"
+      >
+          Save
+      </button>
+      <button
+          type="button"
+          class="cancel"
+          (click)="modal.dismiss()"
+      >
+          Cancel
+      </button>
+  </div>
+  </div>
+</ng-template>

@@ -643,4 +643,23 @@ export class AgentService {
       setTimeout(() => this.GetStartupPrograms(asset_ID), 3000);
     }
   }
+
+  public createAssetSearch(data) {
+    return this.http
+    .put(
+      `${this.apiAgent}agent/AutoComplete/Search`,
+      this.encrypt128(this.key, JSON.stringify(data)),
+      { headers: this.getHeader(), responseType: "text" }
+    )
+    .pipe(map((data: string) => data));
+}
+
+public getByTechCompany(companyGuid) {
+  return this.http
+    .get(`${this.apiAgent}agent/AutoComplete/Search/${companyGuid}`, {
+      headers: this.getHeader(),
+      responseType: "text",
+    })
+    .pipe(map((data: string) => this.decrypt128(data, this.key)));
+}
 }

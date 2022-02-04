@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
@@ -59,6 +60,8 @@ export class DevicesComponent implements OnInit {
   clientName: string;
   loading = false;
   deviceSummaryList: any = [];
+  modalReference: any;
+  favouriteName: string;
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -717,4 +720,17 @@ export class DevicesComponent implements OnInit {
     );
   }
 
+ favourite(savefavourite){
+  this.modalReference =this.modalService.open(savefavourite, {ariaLabelledBy: "modal-basic-title" , centered: true, size:"sm"}).result.then((result) => {
+  this.closeResult = `Closed with: ${result}`;
+  });
+ }
+
+ saveFavourite(){
+   let req: any = {};
+   req.Criteria = this.selectedTag;
+   req.Name = this.favouriteName
+   this.agentService.createAssetSearch(req).subscribe((data:any) =>{
+  })
+ }
 }
