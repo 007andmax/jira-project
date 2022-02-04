@@ -17,6 +17,7 @@ export class UserDefaultSubscriptionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("defaultSubscriptions", this.defaultSubscriptions);
   }
   public showPlaceholder() {
     return this.defaultSubscriptions.invoiceSubscription.enabled ||

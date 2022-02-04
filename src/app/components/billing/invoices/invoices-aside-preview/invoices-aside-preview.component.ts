@@ -11,6 +11,7 @@ import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 @Component({
   selector: 'app-invoices-aside-preview',
   templateUrl: './invoices-aside-preview.component.html',
@@ -30,6 +31,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private invoiceStateService: InvoiceStateService,
+    private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     let openPreviewAside = this.invoiceStateService.openPreviewAside.subscribe(data => {
+      if (!this.getPermissions('VIEW_ACCOUNTING')) return;
       this.currentCompany = this.companiesStateService.getCurrentCompany();
       this.invoiceId = data;
       this.open = true;
@@ -134,6 +137,9 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

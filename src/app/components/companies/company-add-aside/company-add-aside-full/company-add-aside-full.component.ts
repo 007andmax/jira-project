@@ -216,7 +216,10 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.company.paymentTerms = item.value;
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
+    console.log("data", data);
+    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
+
+    // this.company.contacts[0].defaultSubscriptions = data;
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';

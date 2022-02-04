@@ -68,7 +68,12 @@ export class DashboardBillingComponent implements OnInit {
       this.accountingStartDate = new Date(data.accountingStartDate).getTime();
       this.topDashboard.setInvoiceAmountsStartDate(moment(this.accountingStartDate).format('YYYY/MM/DD'));
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
-      if (this.getPermissions('VIEW_ACCOUNTING')) this.getTops();
+      if (this.getPermissions('VIEW_ACCOUNTING')) {
+        this.getTops();
+      } else {
+        this.isTopReady = true;
+        this.checkReadyState();
+      }
       this.getDashboard("WEEKLY");
     })
   }
@@ -80,7 +85,12 @@ export class DashboardBillingComponent implements OnInit {
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
       this.cd.detectChanges();
       this.getDashboard(this.typeDashboard);
-      if (this.getPermissions('VIEW_ACCOUNTING')) this.getTops();
+      if (this.getPermissions('VIEW_ACCOUNTING')) {
+        this.getTops();
+      } else {
+        this.isTopReady = true;
+        this.checkReadyState();
+      }
       this.invoiceRevenue.updateStartDate();
       this.invoiceRevenue.getInvoiceRevenue();
 
