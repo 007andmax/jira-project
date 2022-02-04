@@ -602,9 +602,9 @@
 <ng-template #template let-modal>
   <div class="tabletitle">
     <span [textContent]="asset.Title"></span>
-          <button type="button" class="close pull-right closebtn" aria-label="Close" (click)="modal.dismiss('Cross click')">
-           <span aria-hidden="true">&times;</span>
-          </button>
+      <button type="button" class="close pull-right closebtn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+      </button>
   </div>
   <div class="modal-body">
     <div class="modal-table">
@@ -633,7 +633,7 @@
                     </td>
                     <td class="tablespace">{{data.Title}}</td>
                     <td class="tablespace">{{data.Product}}</td>
-                    <td class="tablespace">{{data.Categories}}</td>
+                    <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
                     <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
                     <!-- <td class="tablespace">{{data.RebootIsRequired}}</td> -->
                 </tr>
@@ -652,4 +652,6 @@
   </div>
   </div>
 </ng-template>
+
+<div class="favourite"></div>
 

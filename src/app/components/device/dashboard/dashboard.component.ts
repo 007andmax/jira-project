@@ -72,6 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   check: any[] = [];
   isOverlay = false;
   installUpdateModal: NgbModalRef;
+  categoriesName: string = "";
 
   constructor(
     private agentService: AgentService,
@@ -110,6 +111,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
             data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
             data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
+            data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[i].Name
             if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
               data.RebootIsRequired = "Never Reboots"
             }
@@ -663,6 +665,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   sizeConvert(v1) {
     let val1 = (parseInt(v1) / 1024 / 1024).toFixed(2);
-    return (parseFloat(val1)).toFixed(0);
+    return (parseFloat(val1)).toFixed(2);
+  }
+
+  categoriesSep(name:string){
+    this.categoriesName = "";
+    if (name.length > 0) {
+      let finalname = name.split(",");
+
+      for (let i = 0; i < finalname.length; i++) {
+        return finalname[i].split(",");
+      }
+    }
   }
 }
