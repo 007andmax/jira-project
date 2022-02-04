@@ -44,7 +44,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onShowAside() {
     let getShowAsideForAdd = this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
-      console.log("this.company", this.company);
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
     })
     this.sub.add(getShowAsideForAdd);

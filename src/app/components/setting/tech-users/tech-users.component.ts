@@ -124,12 +124,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         this.croppedImage = data.croppedImage;
         this.cropIt();
       }
-      // if (data) this.company.setLogo(data);
     })
     this.sub.add(getConfirm);
   }

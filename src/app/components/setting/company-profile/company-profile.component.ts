@@ -13,16 +13,13 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
-
 import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
 import { ToastrService } from 'ngx-toastr';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { MapsAPILoader } from '@agm/core';
-import { NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TimeZone } from '../../companies/company-time-zone/class/time-zone';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
-import { CompanyTimeZoneStateService } from '../../companies/company-time-zone/services/company-time-zone-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
@@ -36,16 +33,12 @@ declare var $: any;
   styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit, OnDestroy {
-  // @ViewChild(NgbDatepicker) dd: NgbDatepicker;
-  // @ViewChild(NgbDatepicker) d: NgbDatepicker;
   cProfileForm: FormGroup;
   accForm: FormGroup;
   workingHoursForm: FormGroup;
-
   submitted = false;
   isAddPhone = false;
   isCompanyNameUnique = true;
-
   url: '';
   imageSrc = '';
   constants: any;
@@ -58,7 +51,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   fromGoogle = false;
   public loading = false;
   public currentCompany: any;
-
   cProfile = {
     address: [],
     logo: {},
@@ -75,21 +67,18 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     'SATURDAY',
     'SUNDAY'
   ];
-
   defaultWorkingDay = {
     dayOfWeek: 'MONDAY',
     startTime: 28800,
     endTime: 61200,
     isSelected: false
   };
-
   config = {
     displayKey: 'first',
     limitTo: 3,
     search: true,
     searchOnKey: 'first'
   };
-  // addres google map
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -131,27 +120,18 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       supportMailBox: ''
     };
     this.createCProfileForm();
-
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
-
     this.getCompanyProfile();
     this.getConstants();
-
     this.getGroupedLocales();
-
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-
     // create search FormControl
     this.searchControl = new FormControl();
-
-    // set current position
-    // this.setCurrentPosition();
-
     // load address autocomplete
     this.getAddressAutocomplete();
     this.settingStateService.setComponentName('CompanyProfileComponent');
@@ -159,12 +139,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         this.croppedImage = data.croppedImage;
         this.cropIt();
       }
-      // if (data) this.company.setLogo(data);
     })
     this.sub.add(getConfirm);
   }
@@ -174,12 +152,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   getAddress(place: object) {
-    // this.address = place['formatted_address'];
-    // this.formattedAddress = place['formatted_address'];
-    // this.ngZone.run(() => this.formattedAddress = place['formatted_address']);
   }
-
-
 
   getAddressAutocomplete() {
     // load address Autocomplete
@@ -194,12 +167,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         this.ngZone.run(() => {
           // get the place result
           const place = (google.maps.places.PlaceResult = autocomplete.getPlace());
-
           // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
           // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -228,7 +199,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               this.shortState = place.address_components[i].short_name;
             }
           }
-
           this.zoom = 12;
         });
       });
@@ -290,7 +260,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
     } else {
       this.imageSrc = '';
-      // this.imageSrc = "../../../../../ng1/images/setting-module/upload-company-logo.svg";
     }
     if (this.currentCompany.addresses.length > 0) {
       const timeZone = this.currentCompany.addresses[0].timeZone;
@@ -350,11 +319,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 }
               }
             }
-
             this.cProfile.supportMailBox = res.supportMailBox;
-
             this.url = res.supportMailBox;
-
             this.cProfileForm.patchValue({
               name: res.name,
               url: res.domain,
@@ -362,14 +328,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
             });
-
             this.country = res.addresses.length > 0 ? res.addresses[0].country : '';
             this.countryCode = res.addresses.length > 0 ? res.addresses[0].countryCode : '';
             this.longCity = res.addresses.length > 0 ? res.addresses[0].longCity : '';
             this.shortCity = res.addresses.length > 0 ? res.addresses[0].shortCity : '';
             this.longState = res.addresses.length > 0 ? res.addresses[0].longState : '';
             this.shortState = res.addresses.length > 0 ? res.addresses[0].shortState : '';
-
             for (let i = 0; i < this.cProfile.address.length; i++) {
               const phoneNumbers = this.cProfile.address[i].phoneNumbers,
                 firstPhone = (phoneNumbers) ? phoneNumbers[0] : null,
@@ -377,7 +341,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                   phoneNumbers && phoneNumbers.length > 1
                     ? phoneNumbers[phoneNumbers.length - 1]
                     : '';
-
               if (firstPhone) {
                 this.cProfileForm.patchValue({
                   primaryId: firstPhone.id,
@@ -454,22 +417,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.companyProfileService.getGroupedLocales().subscribe(
       (res: any) => {
         if (res) {
-          // this.timezones = res;
-          const timeZonesMapped = [];
-
-          /*for (const prop in res) {
-            for (const timeZone in res[prop]) {
-              const group = res[prop][timeZone];
-              for (const index in group) {
-                const city = group[index];
-                timeZonesMapped.push({
-                  offset: parseInt(timeZone),
-                  country: prop,
-                  city: prop + '/' + city
-                });
-              }
-            }
-          }*/
           this.timezones = res.map(item => new TimeZone(item));;
         }
       },
@@ -488,7 +435,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.url = this.url
             ? this.url + '.' + res['website.dns']
             : res['website.dns'];
-          // this.cProfileForm.patchValue({ url: this.url });
         }
       },
       error => { }
@@ -542,7 +488,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
       this.loading = true; $(".loading").css("display", "block");
-
       this.settingService.fileAvatar(fromData).subscribe(
         (result: any) => {
           this.loading = false; $(".loading").css("display", "none");
@@ -553,7 +498,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
-
         }
       );
     }
@@ -585,7 +529,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             timeOut: 3000
           });
           this.getCompanyProfile();
-
           this.basic();
         },
         error => {
@@ -662,7 +605,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   cropIt() {
     this.isCroppedImg = false;
     let cropImage = {};
-
     if (this.fileAvatar !== undefined) {
       this.fileAvatar.base64 = undefined;
       cropImage = {
@@ -700,7 +642,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               res => {
                 if (res) {
                   this.getCompanyProfile();
-
                 }
               },
               error => {
@@ -734,13 +675,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         }
       };
       this.loading = true; $(".loading").css("display", "block");
-      // selectedWorkingHours.map((h: any, index: number) => {
-      //   // tslint:disable-next-line: no-string-literal
-      //   const from = document.getElementById('from-' + h.dayOfWeek)['value'];
-      //   // tslint:disable-next-line: no-string-literal
-      //   const to = document.getElementById('to-' + h.dayOfWeek)['value'];
-      //   h.workingHours = `from ${from} to ${to}`;
-      // });
       this.companyProfileService.workingTime(data).subscribe(
         res => {
           this.loading = false; $(".loading").css("display", "none");
@@ -798,19 +732,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     data['shortState'] = this.shortState;
     data['addressWithSuitNumberAndPostalCode'] = this.cProfile.address.length > 0 ? this.cProfile.address[0].addressWithSuitNumberAndPostalCode : '';
     data['fromGoogle'] = this.fromGoogle;
-    // this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
-    //   'suiteNumber'
-    // ).value;
-    // this.cProfile.address[0].timeZone.name = this.cProfileForm.value.timeZone
-    //   ? this.cProfileForm.value.timeZone.city
-    //   : '';
-    // this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; // this.cProfileForm.get("address").value;
-    // this.cProfile.address[0].postalCode = this.cProfileForm.get(
-    //   'postalCode'
-    // ).value;
-    /*    if (data['address'] == '') {
-          return;
-        }*/
     const phones = [];
     if (this.cProfileForm.value.primaryPhone) {
       phones.push({
@@ -826,7 +747,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         priority: 0
       });
     }
-
     if (this.cProfileForm.value.secondaryPhoneType) {
       phones.push({
         number: this.cProfileForm.get(
@@ -840,7 +760,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         ).value || ''
       });
     }
-
     data['phoneNumbers'] = phones;
     if (this.cProfile.name !== this.cProfileForm.get('name').value) {
       this.loading = true; $(".loading").css("display", "block");
@@ -908,11 +827,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       (!splitTime[1] || splitTime[1].length > 1
         ? parseInt(splitTime[1])
         : parseInt(splitTime[1] + '0')) || 0;
-
     if (minutes > 59) {
       minutes = 0;
     }
-
     if (hours > 23) {
       hours = 23;
     }
@@ -921,8 +838,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     );
     this.cProfile.timeSettings.workingDays[itemIndex].startTime =
       hours * 3600 + minutes * 60;
-    // this.cProfile.timeSettings.workingDays[workingday.id].startTime =
-    //   hours * 3600 + minutes * 60;
   }
 
   endTimeChange(workingday: any, endTime: any) {
@@ -935,11 +850,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       (!splitTime[1] || splitTime[1].length > 1
         ? parseInt(splitTime[1])
         : parseInt(splitTime[1] + '0')) || 0;
-
     if (minutes > 59) {
       minutes = 0;
     }
-
     if (hours > 23) {
       hours = 23;
     }
@@ -959,22 +872,17 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       splitWith = ' to ';
     const fromHours = Math.floor(from / 3600);
     const fromMinutes = Math.round(from / 60 - fromHours * 60);
-
     let fHours = '';
     if (fromHours < 10) {
       fHours = '0' + fromHours;
     }
-
     let fMinutes = '';
     if (fromMinutes < 10) {
       fMinutes = '0' + fromMinutes;
     }
-
     const h = fHours ? fHours : Number(fromHours) ? fromHours : 0;
     const m = fMinutes ? fMinutes : Number(fromMinutes) ? fromMinutes : 0;
-
     const value = h + ':' + m;
-
     return value;
   }
 
@@ -985,20 +893,16 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   toTime_convert(to) {
     const toHours = Math.floor(to / 3600);
     const toMinutes = Math.round(to / 60 - toHours * 60);
-
     let tHours = '';
     if (toHours < 10) {
       tHours = '0' + toHours;
     }
-
     let tMinutes = '';
     if (toMinutes < 10) {
       tMinutes = '0' + toMinutes;
     }
-
     const h = tHours !== '' ? tHours : toHours;
     const m = tMinutes !== '' ? tMinutes : toMinutes;
-
     const value = h + ':' + m;
     return value;
   }
@@ -1013,19 +917,14 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           (!splitTime[1] || splitTime[1].length > 1
             ? parseInt(splitTime[1])
             : parseInt(splitTime[1] + '0')) || 0;
-
       if (minutes > 59) {
         minutes = 0;
       }
-
       if (hours > 23) {
         hours = 23;
       }
-
       this.cProfile.timeSettings.workingDays[workingDay.id].startTime =
         hours * 3600 + minutes * 60;
-
-      // model[field] = hours * 3600 + minutes * 60;
     }
   }
 

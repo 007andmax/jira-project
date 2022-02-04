@@ -1,11 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CompaniesService } from 'src/app/services/company/companies.service';
-
 import { BillableProfile } from '../class/billable-profile';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CurrentUser } from 'src/class/current-user/current-user';
 import { User } from '../../../users/class/user';
 import { TicketsListService } from '../../../tickets/tickets/services/tickets-list.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
@@ -34,7 +31,6 @@ export class BillableItemComponent implements OnInit {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.item.id);
     this.salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
-    console.log("this.salesPerson", this.salesPerson);
   }
   ngDocheck() {
 
