@@ -63,6 +63,7 @@
         class="qt-d-md-none"
     ></left-panel-marketing>
     <app-left-panel-companies
+        *ngIf="getPermissions('VIEW_COMPANIES')"
         #panelCompanies
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"

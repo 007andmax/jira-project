@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -46,6 +47,7 @@ export class LeftPanelComponent implements OnInit {
     public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private appService: AppService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -280,5 +282,8 @@ export class LeftPanelComponent implements OnInit {
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
     return '/company/default/logo.jpg';
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import * as moment from 'moment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-product-edit',
@@ -20,6 +21,7 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
   valdiateSaleCost: boolean = true;
   constructor(private productService: ProductService,
     private ticketsService: TicketsService,
+    private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
@@ -52,6 +54,9 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
       this.onEdit.emit(null);
     })
 
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   cancelProduct() {
     this.onEdit.emit(null);
