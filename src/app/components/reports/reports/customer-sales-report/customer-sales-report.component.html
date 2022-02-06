@@ -3,7 +3,7 @@
  </div>
  <app-report-additional-actions [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'"  [fileName]="'sales_report'" [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
- <div class="product-list___ticket customer-sales-report__table" id="product-list-ticket-data" >
+ <div class="product-list___ticket" id="product-list-ticket-data" >
 
   <div  class="product-list-ticket acc-col" [ngStyle]="{'width': customerSalesReport.type === 'DETAILED' ? '1180px' :  null}"   style="height: 100%;" *ngIf="!loadingInProgress">
     <div class="report-header" [ngStyle]="{'width': (customerSalesReport.type === 'DETAILED') ? '1055px' : '' }">
@@ -23,7 +23,7 @@
         </p>
     </div>
 
-     <div>
+     <div class="customer-sales-report__table">
        <app-overview-report [headers]="headers" [list]="list"></app-overview-report>
        <div class="product-report-detail-customer clearfix" *ngIf="customerSalesReport.type === 'DETAILED'">
         <div class="col-md-3 pull-right">
