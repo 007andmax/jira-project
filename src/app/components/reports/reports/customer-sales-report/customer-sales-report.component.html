@@ -23,8 +23,8 @@
         </p>
     </div>
 
-     <div class="customer-sales-report__table">
-       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>
+     <div>
+       <app-overview-report class="customer-sales-report__table" [headers]="headers" [list]="list"></app-overview-report>
        <div class="product-report-detail-customer clearfix" *ngIf="customerSalesReport.type === 'DETAILED'">
         <div class="col-md-3 pull-right">
           <strong>Total Sales: <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span></strong>
