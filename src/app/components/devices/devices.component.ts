@@ -103,6 +103,9 @@ export class DevicesComponent implements OnInit {
       )
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
+        this.agentService.getAssetSearch().subscribe((resp)=>{
+          debugger;
+        });
         this.add(undefined);
         this.CurrentUser();
       });
