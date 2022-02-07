@@ -103,7 +103,6 @@ export class DevicesComponent implements OnInit {
       )
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
-        this.getAllCompanyList();
         this.add(undefined);
         this.CurrentUser();
       });
@@ -494,7 +493,7 @@ export class DevicesComponent implements OnInit {
   }
 
   sendEmail() {
-     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
+    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation = this.orientation;
     modalRef.componentInstance.report = this.report;
@@ -503,22 +502,13 @@ export class DevicesComponent implements OnInit {
     modalRef.componentInstance.accountType = this.accountType;
   }
 
-  getAllCompanyList() {
-    this.deviceSummaryList = [];
-    this.agentService.getDeviceSummaryByGuid("").subscribe((resp) => {
-      if (resp.length > 0) {
-        this.deviceSummaryList = resp;
-      }
-    });
-  }
-
   printPdf() {
     this.getPdfData();
   }
 
   getPdfData() {
     let pdfList = [];
-    this.deviceSummaryList.forEach((element) => {
+    this.assetList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer.replace(",", " ") || "N/A",
@@ -589,8 +579,8 @@ export class DevicesComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -704,7 +694,7 @@ export class DevicesComponent implements OnInit {
 
   downloadCsv() {
     let downloadCsvList = [];
-    this.deviceSummaryList.forEach((element) => {
+    this.assetList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer.replace(",", " ") || "N/A",
@@ -720,17 +710,24 @@ export class DevicesComponent implements OnInit {
     );
   }
 
- favourite(savefavourite){
-  this.modalReference =this.modalService.open(savefavourite, {ariaLabelledBy: "modal-basic-title" , centered: true, size:"sm"}).result.then((result) => {
-  this.closeResult = `Closed with: ${result}`;
-  });
- }
+  showDlg(savefavourite) {
+    if (this.selectedTag && this.selectedTag.length > 0) {
+      this.modalReference = this.modalService.open(savefavourite, { ariaLabelledBy: "modal-basic-title", centered: true, size: "sm" }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      });
+    }
+  }
 
- saveFavourite(){
-   let req: any = {};
-   req.Criteria = this.selectedTag;
-   req.Name = this.favouriteName
-   this.agentService.createAssetSearch(req).subscribe((data:any) =>{
-  })
- }
+  saveFavourite() {
+    let req: any = {};
+    req.Criteria = this.selectedTag;
+    req.Name = this.favouriteName
+    req.TechCompanyGuid = this.techCompnayGuid;
+    this.agentService.createAssetSearch(req).subscribe((data: any) => {
+      debugger;
+    },
+    (err)=> {
+      console.log(err);
+    })
+  }
 }

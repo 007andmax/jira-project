@@ -1,82 +1,55 @@
 <div class="qt-page-list company-devices-page">
-  <div class="qt-page-list__header --sticky">
-      <div class="qt-page-list__header-title-line--left">
-          <h3
-              class="qt-page-list__header-title"
-              [textContent]="'Devices'"
-          ></h3>
-                <div class="Rectangle">
-                    <img src="/assets/img/icons/search.svg"
-                  class="Online-Search">
-                  <div class="SearchRectangle">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line--left">
+            <h3 class="qt-page-list__header-title" [textContent]="'Devices'"></h3>
+            <div class="Rectangle">
+                <img src="/assets/img/icons/search.svg" class="Online-Search">
+                <div class="SearchRectangle">
                     <mat-form-field class="example-chip-list" appearance="none">
-                      <mat-chip-list #chipList>
-                          <mat-chip *ngFor="let tag of selectedTag; let i=index" (removed)="remove(i)">
-                            {{tag}} <mat-icon matChipRemove></mat-icon>
-                          </mat-chip>
-                          <input #dropdownServices
-                        autofocus
-                        id="dropdownServices"
-                        [formControl]="selectedCtrl"
-                        [(ngModel)]="tagFilterValue"
-                        [matAutocomplete]="auto"
-                        class="pointer"
-                        placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
-                        [matChipInputFor]="chipList"
-                        (keyup.enter)="add($event.target.value)"
-                        (keyup)="onSearchTag($event.target.value)"
-                    >
-                      </mat-chip-list>
-                      <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)">
-                          <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
-                            {{search.Result}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
-                          </mat-option>
-                      </mat-autocomplete>
+                        <mat-chip-list #chipList>
+                            <mat-chip *ngFor="let tag of selectedTag; let i=index" (removed)="remove(i)">
+                                {{tag}}
+                                <mat-icon matChipRemove></mat-icon>
+                            </mat-chip>
+                            <input #dropdownServices autofocus id="dropdownServices" [formControl]="selectedCtrl" [(ngModel)]="tagFilterValue" [matAutocomplete]="auto" class="pointer" placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
+                                [matChipInputFor]="chipList" (keyup.enter)="add($event.target.value)" (keyup)="onSearchTag($event.target.value)">
+                        </mat-chip-list>
+                        <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
+                                {{search.Result}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
+                            </mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
-                  </div>
-                  <div class="StarRectangle">
-                    <a
-                    href="javascript:;"
-                    (click)="favourite(tag)"
-                >
-
-                    <img src="/assets/img/favourite-active.svg"
-     class="Favourite">
-    </a>
-                  </div>
                 </div>
-                <button class="qt-btn --outline-white qt-ml-8">
-                  <i class="
-                icon__email-dark
-                qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
-                summaryemail
-              " (click)="sendEmail()"></i>
-              </button>
-              <button
-              class="qt-btn --outline-white qt-ml-8"
-              (click)="printPdf()"
-          >
-              <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+                <div class="StarRectangle">
+                    <a href="javascript:;" (click)="showDlg(tag)">
+
+                        <img src="/assets/img/favourite-active.svg" class="Favourite">
+                    </a>
+                </div>
+            </div>
+            <button class="qt-btn --outline-white qt-ml-32" (click)="sendEmail()">
+                <img src="/assets/img/icons/email-dark.svg">
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8" (click)="printPdf()">
+                <img src="/assets/img/icons/print.svg">
           </button>
-          <button
-          class="qt-btn --outline-white qt-ml-8"
-          (click)="downloadCsv()"
-      >
+            <button class="qt-btn --outline-white qt-ml-8" (click)="downloadCsv()">
           <i class="
         icon__download
         qt-za-16 qt-sz-16 qt-dib qt-bg-contain
         summarydownload
       "></i>
       </button>
-      </div>
+        </div>
 
-      <div class="qt-page-list__header-thead-container">
-          <table class="qt-table-modern qt-page-list__header-thead">
-              <thead>
-                  <tr>
-                      <th class="company-devices-table__check">
-                          <div class="d-f">
-                              <label class="qt-checkbox">
+        <div class="qt-page-list__header-thead-container">
+            <table class="qt-table-modern qt-page-list__header-thead">
+                <thead>
+                    <tr>
+                        <th class="company-devices-table__check">
+                            <div class="d-f">
+                                <label class="qt-checkbox">
                                   <input
                                       type="checkbox"
                                       [(ngModel)]="selectAllDevices"
@@ -84,48 +57,42 @@
                                   >
                                   <span></span>
                               </label>
-                          </div>
-                      </th>
-                      <th class="company-devices-table__device-type">
-                      </th>
-                      <th
-                          class="company-devices-table__dev-name pointer"
-                          (click)="onFilter('Name')"
-                      >
-                          Device Name
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th
-                          class="company-devices-table__company-name pointer"
-                          (click)="onFilter('CompanyName')"
-                      >
-                          Company
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th class="company-devices-table__logged-user pointer">Logged in user</th>
-                      <th class="company-devices-table__up-time">Up time</th>
-                      <th class="company-devices-table__windows">Windows</th>
-                      <th class="company-devices-table__ip-address">
-                          <span class="qt-pl-30">IP address</span>
-                      </th>
-                      <th class="company-devices-table__device-agent">Agent</th>
-                      <th class="company-devices-table__connect"></th>
-                      <th class="company-devices-table__go-to"></th>
-                      <th class="company-devices-table__menu"></th>
-                  </tr>
-              </thead>
-          </table>
-      </div>
-  </div>
-  <div class="qt-df qt-fd-c qt-jc-sb">
-      <div class="qt-page-list__body">
-          <div class="qt-page-list__body-table-container">
-              <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length > 0">
-                  <tbody *ngIf="!showPreloader">
-                      <tr class="company-device-hover" *ngFor="let asset of assetList">
-                          <td class="company-devices-table__check">
-                              <div class="d-f">
-                                  <label class="qt-checkbox">
+                            </div>
+                        </th>
+                        <th class="company-devices-table__device-type">
+                        </th>
+                        <th class="company-devices-table__dev-name pointer" (click)="onFilter('Name')">
+                            Device Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="company-devices-table__company-name pointer" (click)="onFilter('CompanyName')">
+                            Company
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="company-devices-table__logged-user pointer">Logged in user</th>
+                        <th class="company-devices-table__up-time">Up time</th>
+                        <th class="company-devices-table__windows">Windows</th>
+                        <th class="company-devices-table__ip-address">
+                            <span class="qt-pl-30">IP address</span>
+                        </th>
+                        <th class="company-devices-table__device-agent">Agent</th>
+                        <th class="company-devices-table__connect"></th>
+                        <th class="company-devices-table__go-to"></th>
+                        <th class="company-devices-table__menu"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="qt-df qt-fd-c qt-jc-sb">
+        <div class="qt-page-list__body">
+            <div class="qt-page-list__body-table-container">
+                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length > 0">
+                    <tbody *ngIf="!showPreloader">
+                        <tr class="company-device-hover" *ngFor="let asset of assetList">
+                            <td class="company-devices-table__check">
+                                <div class="d-f">
+                                    <label class="qt-checkbox">
                                       <input
                                           type="checkbox"
                                           [(ngModel)]="asset.selected"
@@ -133,36 +100,26 @@
                                       >
                                       <span></span>
                                   </label>
-                              </div>
-                          </td>
-                          <td class="company-devices-table__device-type">
-                            <div
-                            ngbDropdown
-                            placement="bottom-left"
-                            container="body"
-                            class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                            [ngClass]="{
+                                </div>
+                            </td>
+                            <td class="company-devices-table__device-type">
+                                <div ngbDropdown placement="bottom-left" container="body" class="qt-ic-c qt-pointer device-type-icon qt-sz-24" [ngClass]="{
             icon__computer:
             asset.iconName === 'Workstation' || !asset.iconName,
             icon__tablet: asset.iconName === 'Networking Hardware',
             icon__printer: asset.iconName === 'Printer',
             icon__server: asset.iconName === 'Server',
             '--ofline': !asset.online
-          }"
-                            ngbDropdownToggle
-                        >
-                            <div ngbDropdownMenu>
-                                <ul class="
+          }" ngbDropdownToggle>
+                                    <div ngbDropdownMenu>
+                                        <ul class="
                 icon-list
                 qt-dropdown-menu
                 --dropdown-icons
                 device-type-dropdown
               ">
-                                    <li
-                                        *ngFor="let hardwar of hardwareTypes"
-                                        (click)="setIcon(asset.ID, hardwar.ID)"
-                                    >
-                                        <span>
+                                            <li *ngFor="let hardwar of hardwareTypes" (click)="setIcon(asset.ID, hardwar.ID)">
+                                                <span>
                                             <i
                                                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
                                                 ngbDropdownItem
@@ -176,343 +133,222 @@
                     }"
                                             ></i>
                                         </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                          </td>
-                          <td class="company-devices-table__dev-name">
-                            <div>
-                              <div class="qt-df qt-fd-c">
-                                  <div class="
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__dev-name">
+                                <div>
+                                    <div class="qt-df qt-fd-c">
+                                        <div class="
                   company-devices-table-device-name
                   qt-ff-gm qt-df qt-ai-c
                 ">
-                                      <span [textContent]="asset.Title"></span>
-                                  </div>
-                                  <span
-                                      class="company-device-desc"
-                                      [textContent]
-                                  ></span>
-                              </div>
-                          </div>
-                          </td>
-                          <td class="company-devices-table__company-name">
-                            <div>
-                              <div class="qt-df qt-fd-c">
-                                  <div class="
+                                            <span [textContent]="asset.Title"></span>
+                                        </div>
+                                        <span class="company-device-desc" [textContent]></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__company-name">
+                                <div>
+                                    <div class="qt-df qt-fd-c">
+                                        <div class="
                   company-devices-table-company-name
                   qt-ff-gm qt-df qt-ai-c
                 ">
-                                      <span [textContent]="asset.CompanyName"></span>
-                                  </div>
-                                  <span
-                                      class="company-name-desc"
-                                      [textContent]
-                                  ></span>
-                              </div>
-                          </div>
-                          </td>
-                          <td class="company-devices-table__logged-user">
-                            <div class="qt-df qt-fd-c">
-                              <span
-                                  class="logged-name qt-ff-gm"
-                                  [textContent]="asset.CurrentUser || ''"
-                              ></span>
-                              <span
-                                  class="logged-time"
-                                  *ngIf="asset.IdelTime"
-                              >
+                                            <span [textContent]="asset.CompanyName"></span>
+                                        </div>
+                                        <span class="company-name-desc" [textContent]></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__logged-user">
+                                <div class="qt-df qt-fd-c">
+                                    <span class="logged-name qt-ff-gm" [textContent]="asset.CurrentUser || ''"></span>
+                                    <span class="logged-time" *ngIf="asset.IdelTime">
                                   Idle:
                                   <span>{{ asset.IdelTime }}</span>
-                              </span>
-                          </div>
-                          </td>
-                          <td class="company-devices-table__up-time">
-                            <div class="qt-df qt-fd-c">
-                              <span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__up-time">
+                                <div class="qt-df qt-fd-c">
+                                    <span>
                                   <span>{{ asset.IdelTime }}</span>
-                                  <ng-template
-                                      #tipOfflineDevice
-                                      class="tooltip"
-                                  >
-                                      <span>{{ asset.IdelTime }}</span>
-                                  </ng-template>
-                              </span>
-                              <span
-                                  *ngIf="
+                                    <ng-template #tipOfflineDevice class="tooltip">
+                                        <span>{{ asset.IdelTime }}</span>
+                                    </ng-template>
+                                    </span>
+                                    <span *ngIf="
                 asset.IdelTime != '' &&
                 asset.IdelTime != undefined &&
                 asset.IdelTime != null
-              "
-                                  class="uptime-tag qt-ff-gm"
-                                  [textContent]="'Online'"
-                              ></span>
-                              <span
-                                  *ngIf="
+              " class="uptime-tag qt-ff-gm" [textContent]="'Online'"></span>
+                                    <span *ngIf="
                 asset.IdelTime == '' ||
                 asset.IdelTime == undefined ||
                 asset.IdelTime == null
-              "
-                                  placement="top"
-                                  container="body"
-                                  [ngbTooltip]="tipOfflineDevice"
-                                  class="uptime-tag qt-ff-gm --offline"
-                                  [textContent]="'Offline'"
-                              ></span>
-                          </div>
-                          </td>
-                          <td class="company-devices-table__windows">
-                            <div>
-                              <span [textContent]="asset.Caption"></span>
-                            </div>
-                          </td>
-                          <td class="company-devices-table__ip-address">
-                            <div class="qt-pl-30">
-                              <span [textContent]="asset.InternalIPAddress"></span>
-                            </div>
-                          </td>
-                          <td class="company-devices-table__device-agent">
-                            <div class="qt-df qt-fd-c">
-                              <span>
+              " placement="top" container="body" [ngbTooltip]="tipOfflineDevice" class="uptime-tag qt-ff-gm --offline" [textContent]="'Offline'"></span>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__windows">
+                                <div>
+                                    <span [textContent]="asset.Caption"></span>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__ip-address">
+                                <div class="qt-pl-30">
+                                    <span [textContent]="asset.InternalIPAddress"></span>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__device-agent">
+                                <div class="qt-df qt-fd-c">
+                                    <span>
                                 <span>{{ asset.VersionInstallDate | date: 'dd/MM/yyyy' }}</span>
-                            </span>
-                            <span
-                                *ngIf="asset.IsAgentCurrent"
-                                class="agent-tag qt-ff-gm"
-                            >{{asset.CurrentVersion}}</span>
-                            <span
-                                *ngIf="!asset.IsAgentCurrent"
-                                class="agent-tag qt-ff-gm --offline"
-                            >{{asset.CurrentVersion}}</span>
+                                    </span>
+                                    <span *ngIf="asset.IsAgentCurrent" class="agent-tag qt-ff-gm">{{asset.CurrentVersion}}</span>
+                                    <span *ngIf="!asset.IsAgentCurrent" class="agent-tag qt-ff-gm --offline">{{asset.CurrentVersion}}</span>
 
-                          </div>
-                          </td>
-                          <td class="company-devices-table__go-to">
-                            <ng-template
-                                    #tipDeviceDetail
-                                    class="tooltip"
-                                >
+                                </div>
+                            </td>
+                            <td class="company-devices-table__go-to">
+                                <ng-template #tipDeviceDetail class="tooltip">
                                     Device Detail
                                 </ng-template>
-                                <div
-                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
-                                    placement="top"
-                                    *ngIf="asset.ID"
-                                    [ngbTooltip]="tipDeviceDetail"
-                                    (click)="gotoDetailDevice(asset.Guid)"
-                                ></div>
-                          </td>
-                          <td class="company-devices-table__connect">
-                            <div
-                            ngbDropdown
-                            container="body"
-                            placement="bottom-right"
-                        >
-                            <ng-template
-                                #tipRemoteAccess
-                                class="tooltip"
-                            >
-                                Remote Access
-                            </ng-template>
-                            <div
-                                [hidden]="!(asset.online) || !(asset.CanRemoteControl)"
-                                class="
+                                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16" placement="top" *ngIf="asset.ID" [ngbTooltip]="tipDeviceDetail" (click)="gotoDetailDevice(asset.Guid)"></div>
+                            </td>
+                            <td class="company-devices-table__connect">
+                                <div ngbDropdown container="body" placement="bottom-right">
+                                    <ng-template #tipRemoteAccess class="tooltip">
+                                        Remote Access
+                                    </ng-template>
+                                    <div [hidden]="!(asset.online) || !(asset.CanRemoteControl)" class="
               qt-ic-c
               icon__quick-connect
               qt-pointer qt-sz-24 qt-bg-contain
-            "
-                                placement="top"
-                                container="body"
-                                [ngbTooltip]="tipRemoteAccess"
-                                ngbDropdownToggle
-                            >
-                                <div ngbDropdownMenu>
-                                    <ul class="qt-dropdown-menu">
-                                        <li
-                                            (click)="remoteAccess('CSS', asset.Guid)"
-                                            ngbDropdownItem
-                                        >
-                                            QuickTech Connect
-                                        </li>
-                                        <li
-                                            (click)="remoteAccess('RDP', asset.Guid)"
-                                            ngbDropdownItem
-                                        >
-                                            Remote Desktop
-                                        </li>
-                                    </ul>
+            " placement="top" container="body" [ngbTooltip]="tipRemoteAccess" ngbDropdownToggle>
+                                        <div ngbDropdownMenu>
+                                            <ul class="qt-dropdown-menu">
+                                                <li (click)="remoteAccess('CSS', asset.Guid)" ngbDropdownItem>
+                                                    QuickTech Connect
+                                                </li>
+                                                <li (click)="remoteAccess('RDP', asset.Guid)" ngbDropdownItem>
+                                                    Remote Desktop
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                          </td>
-                          <td class="company-devices-table__menu">
-                            <div
-                                    class="company-devices-table__menu-body"
-                                    ngbDropdown
-                                    placement="bottom-right"
-                                    container="body"
-                                >
-                                    <div
-                                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
-                                        ngbDropdownToggle
-                                    ></div>
-                                    <ul
-                                        class="qt-dropdown-menu invoice-items-dropdown"
-                                        ngbDropdownMenu
-                                    >
-                                        <li
-                                            *ngIf="asset.CanRemoteControl && asset.online"
-                                            class="pointer"
-                                            (click)="sendCommand('ura', asset.ID)"
-                                            ngbDropdownItem
-                                        >
+                            </td>
+                            <td class="company-devices-table__menu">
+                                <div class="company-devices-table__menu-body" ngbDropdown placement="bottom-right" container="body">
+                                    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain" ngbDropdownToggle></div>
+                                    <ul class="qt-dropdown-menu invoice-items-dropdown" ngbDropdownMenu>
+                                        <li *ngIf="asset.CanRemoteControl && asset.online" class="pointer" (click)="sendCommand('ura', asset.ID)" ngbDropdownItem>
                                             <div class="icon__uninstall qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Uninstall Remote Agent
                                         </li>
-                                        <li
-                                            class="pointer"
-                                            (click)="sendCommand('u',asset.ID)"
-                                            ngbDropdownItem
-                                        >
+                                        <li class="pointer" (click)="sendCommand('u',asset.ID)" ngbDropdownItem>
                                             <div class="icon__update qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Update Agent
                                         </li>
-                                        <li
-                                            class="pointer"
-                                            (click)="sendCommand('d',asset.ID)"
-                                            ngbDropdownItem
-                                        >
+                                        <li class="pointer" (click)="sendCommand('d',asset.ID)" ngbDropdownItem>
                                             <div class="icon__uninstall-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Uninstall Agent
                                         </li>
-                                        <li
-                                            *ngIf="!asset.CanRemoteControl && asset.online"
-                                            class="pointer"
-                                            (click)="sendCommand('ira', asset.ID)"
-                                            ngbDropdownItem
-                                        >
+                                        <li *ngIf="!asset.CanRemoteControl && asset.online" class="pointer" (click)="sendCommand('ira', asset.ID)" ngbDropdownItem>
                                             <div class="icon__install qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Install Remote Agent
                                         </li>
                                     </ul>
                                 </div>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-          <div
-              class="loading"
-              *ngIf="showPreloader"
-          ></div>
-      </div>
-  </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="loading" *ngIf="showPreloader"></div>
+        </div>
+    </div>
 </div>
 
 <ng-template #templatePowersell>
-  <div class="modal-content restart-modal">
-      <div class="modal-header">
-          <h5 class="modal-title">Confirmation</h5>
-          <button
-              type="button"
-              class="close"
-              (click)="decline()"
-              data-dismiss="modal"
-              aria-label="Close"
-          >
+    <div class="modal-content restart-modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" (click)="decline()" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
-      </div>
-      <div class="modal-body">
-          <p [innerHTML]="powershellmsg"></p>
-      </div>
-      <div class="modal-footer">
-          <button
-              type="button"
-              class="btn btn-danger"
-              (click)="Reboot(assetId)"
-          >
+        </div>
+        <div class="modal-body">
+            <p [innerHTML]="powershellmsg"></p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="Reboot(assetId)">
               Yes
           </button>
-          <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="decline()"
-          >
+            <button type="button" class="btn btn-secondary" (click)="decline()">
               No
           </button>
-      </div>
-  </div>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template #templateConnection let-modal>
-  <div class="modal-body">
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <div class="modal-body">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
       </button>
 
-      <div class="remote-area">
-          <ul class="list-unstyled">
-              <li>
-                  <span class="remote-ico">
+        <div class="remote-area">
+            <ul class="list-unstyled">
+                <li>
+                    <span class="remote-ico">
                       <img
                           src="/html/assets/img/device/quicktech-connect.svg"
                           alt="quicktech-connect"
                       >
                   </span>
-                  <div class="remote-info">
-                      <h3>Quicktech Connect</h3>
-                      <p>
-                          Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
-                      </p>
-                      <a (click)="createConnection(connectionType);" class="btn btn-primary">
+                    <div class="remote-info">
+                        <h3>Quicktech Connect</h3>
+                        <p>
+                            Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
+                        </p>
+                        <a (click)="createConnection(connectionType);" class="btn btn-primary">
                           Launch Quicktech Connect
                       </a>
-                  </div>
-              </li>
-          </ul>
-      </div>
-      <div class="viewer-footer">
-          <p>
-              You may need to download and install the viewer
-          </p>
-          <a (click)="getViewer();" class="btn btn-dowanload">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="viewer-footer">
+            <p>
+                You may need to download and install the viewer
+            </p>
+            <a (click)="getViewer();" class="btn btn-dowanload">
               Download Viewer
           </a>
-      </div>
-  </div>
+        </div>
+    </div>
 </ng-template>
 
 
-<ng-template
-#tag
-let-modal
-class="modal-dialog"
->
-  <div>
-    <div class="Save-to-Favourite">Save to Favourite</div>
-    <span class="Name">
-      Name
-    </span>
-    <div class="text">
-      <input class="Rectangle-56-Copy" [(ngModel)]="favouriteName" placeholder="Favourite List Name" type="text"/>
+<ng-template #tag let-modal class="modal-dialog">
+    <div>
+        <div class="Save-to-Favourite">Save to Favourite</div>
+        <span class="Name"> Name</span>
+        <div class="text">
+            <input class="Rectangle-56-Copy" [(ngModel)]="favouriteName" placeholder="Favourite List Name" type="text" />
+        </div>
+        <div class="footer-area-modal">
+            <button type="button" class="save" (click)="saveFavourite();modal.dismiss()">
+                Save
+            </button>
+            <button type="button" class="cancel" (click)="modal.dismiss()">
+                Cancel
+            </button>
+        </div>
     </div>
-    <div class="footer-area-modal">
-      <button
-          type="button"
-          class="save"
-          (click)="saveFavourite();modal.dismiss()"
-      >
-          Save
-      </button>
-      <button
-          type="button"
-          class="cancel"
-          (click)="modal.dismiss()"
-      >
-          Cancel
-      </button>
-  </div>
-  </div>
 </ng-template>

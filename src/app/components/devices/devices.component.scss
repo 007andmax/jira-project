@@ -483,10 +483,17 @@ input.mat-chip-input {
 }
 
 ::ng-deep .modal-dialog{
-  margin-top: 1px !important;
-  left: 58% !important;
-  width: 500px;
-  top: 35% !important;
   width: 388px !important;
-  margin-left: -46px !important;
+}
+
+
+.qt-btn {  
+  width: 36px;
+  height: 36px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: #fff;    
+  color:#364656;  
+  font-size: 12px;
 }

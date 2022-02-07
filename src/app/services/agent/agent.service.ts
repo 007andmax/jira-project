@@ -21,7 +21,7 @@ export class AgentService {
   public constructor(
     private http: HttpClient,
     private wsService: WebsocketService
-  ) {}
+  ) { }
 
   encrypt128(keys, value) {
     var key = CryptoJS.enc.Utf8.parse(keys);
@@ -65,18 +65,18 @@ export class AgentService {
     this.AccessToken = data;
   }
 
-  public autoComplete(data){
+  public autoComplete(data) {
     return this.http
       .post(
         `${this.apiAgent}agent/AutoComplete/Search`,
         this.encrypt128(this.key, JSON.stringify(data)),
         { headers: this.getHeader(), responseType: "text" }
       )
-      .pipe(map((data: string) =>  this.decrypt128(data, this.key)));
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public nonAgentAsset(data) {
-      return this.http
+    return this.http
       .put(
         `${this.apiAgent}agent/Asset/CreateNonAgentAsset`,
         this.encrypt128(this.key, JSON.stringify(data)),
@@ -85,19 +85,19 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
-  public GetWindowUpdateList(ID,datas) {
+  public GetWindowUpdateList(ID, datas) {
     const data = {
-      AssetID : ID,
-      Value: JSON.stringify(datas) ,
+      AssetID: ID,
+      Value: JSON.stringify(datas),
       MessageType: "InstallWindowsUpdates",
     };
 
     if (this.wsService.IsKafkaConnected) {
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
-      setTimeout(() => this.GetWindowUpdateList(ID,datas), 3000);
+      setTimeout(() => this.GetWindowUpdateList(ID, datas), 3000);
     }
   }
 
@@ -108,40 +108,37 @@ export class AgentService {
         this.encrypt128(this.key, JSON.stringify(data)),
         { headers: this.getHeader(), responseType: "text" }
       )
-      .pipe(map((data: string) =>  this.decrypt128(data, this.key)));
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public servicePauseCommand(data:any)
-  {
+  public servicePauseCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
       console.log("sending servicepause command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.servicePauseCommand(data), 3000);
     }
   }
 
-  public serviceRestartCommand(data:any)
-  {
+  public serviceRestartCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
       console.log("sending servicerestart command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.serviceRestartCommand(data), 3000);
     }
   }
 
-  public serviceStartCommand(data:any)
-  {
+  public serviceStartCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
       console.log("sending servicestart command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.serviceStartCommand(data), 3000);
     }
@@ -149,90 +146,90 @@ export class AgentService {
 
   public getDeviceDiskDriveByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceDiskDrive/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceDiskDrive/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceProcessorRamByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceProcessorRam/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceProcessorRam/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceDeploymentWarrantyByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceDeploymentWarranty/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceDeploymentWarranty/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceNetworkAdapterByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceNetworkAdapter/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceNetworkAdapter/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceNetworkDetailByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceNetworkDetailed/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceNetworkDetailed/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceNetworkIPByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceNetworkIP/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceNetworkIP/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceAntivirusByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceAntivirus/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceAntivirus/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceWarrantyByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceWarranty/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceWarranty/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDeviceSummaryByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/DeviceSummary/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/DeviceSummary/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getCompanyApplicationByGuid(companyGuid) {
     return this.http
-      .get(`${this.apiAgent}report/CompanyApplication/${companyGuid}`,{
-          headers: this.getHeader(),
-          responseType: "text",
+      .get(`${this.apiAgent}report/CompanyApplication/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
@@ -247,18 +244,17 @@ export class AgentService {
       console.log("sending UninstallAgent command:" + data.MessageType);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.UninstallAgent(assetId), 3000);
     }
   }
-  public TerminalShellCommand(data:any)
-  {
+  public TerminalShellCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
       console.log("sending terminal command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.TerminalShellCommand(data), 3000);
     }
@@ -394,7 +390,7 @@ export class AgentService {
     if (this.wsService.IsKafkaConnected) {
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
     }
@@ -405,7 +401,7 @@ export class AgentService {
       console.log("sending powershell command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.SendPowerShellCommand(data), 3000);
     }
@@ -416,7 +412,7 @@ export class AgentService {
       console.log("sending network command:" + data);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.SendNetworkCommand(data), 3000);
     }
@@ -427,7 +423,7 @@ export class AgentService {
       console.log("sending network command:" + data);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.SendNetworkCommand(data), 3000);
     }
@@ -623,7 +619,7 @@ export class AgentService {
     if (this.wsService.IsKafkaConnected) {
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.GetService(asset_ID), 3000);
     }
@@ -638,7 +634,7 @@ export class AgentService {
     if (this.wsService.IsKafkaConnected) {
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
-        .subscribe(() => {});
+        .subscribe(() => { });
     } else {
       setTimeout(() => this.GetStartupPrograms(asset_ID), 3000);
     }
@@ -646,20 +642,20 @@ export class AgentService {
 
   public createAssetSearch(data) {
     return this.http
-    .put(
-      `${this.apiAgent}agent/AutoComplete/Search`,
-      this.encrypt128(this.key, JSON.stringify(data)),
-      { headers: this.getHeader(), responseType: "text" }
-    )
-    .pipe(map((data: string) => data));
-}
+      .put(
+        `${this.apiAgent}agent/AssetSearch`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
 
-public getByTechCompany(companyGuid) {
-  return this.http
-    .get(`${this.apiAgent}agent/AutoComplete/Search/${companyGuid}`, {
-      headers: this.getHeader(),
-      responseType: "text",
-    })
-    .pipe(map((data: string) => this.decrypt128(data, this.key)));
-}
+  public getByTechCompany(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}/agent/AssetSearch/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
 }
