@@ -15,6 +15,9 @@ import { DELETE_TECH_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 
 declare var $;
 
@@ -62,6 +65,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
+    private imageCropperStateService: ImageCropperStateService,
     private modalService: NgbModal,
   ) {
 
@@ -115,8 +120,17 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.onCroppImage();
   }
-
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (data) {
+        this.croppedImage = data.croppedImage;
+        this.cropIt();
+      }
+    })
+    this.sub.add(getConfirm);
+  }
   ngAfterViewInit(): void { }
 
   // convenience getter for easy access to form fields
@@ -404,11 +418,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.loading = true; $(".loading").css("display", "block");
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           this.loading = false; $(".loading").css("display", "none");
           if (result) {
-            this.isCroppedImg = true;
+            //    this.isCroppedImg = true;
             this.fileAvatar = result;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
           }
         },
         error => {
@@ -538,8 +553,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     if (this.isEmailIdUnique) {
-      const objTechUser = {
-        avatar: this.cropAvatar || {},
+      let objTechUser: any = {
         techRole: this.techUserForm.value.techRole
           ? this.techUserForm.value.techRole
           : this.techRoles[0],
@@ -549,6 +563,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         companyId: this.currentCompanyId,
         subscription: {}
       };
+      if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
       this.loading = true; $(".loading").css("display", "block");
       this.addBtn.setDisabled(true);
       this.techUsersService.createUser(objTechUser).subscribe(

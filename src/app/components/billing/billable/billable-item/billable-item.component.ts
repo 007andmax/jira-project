@@ -1,11 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CompaniesService } from 'src/app/services/company/companies.service';
-
 import { BillableProfile } from '../class/billable-profile';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { CurrentUser } from 'src/class/current-user/current-user';
 import { User } from '../../../users/class/user';
 import { TicketsListService } from '../../../tickets/tickets/services/tickets-list.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
 
 @Component({
@@ -13,7 +14,7 @@ export class PaymentsHeaderComponent implements OnInit {
   toggleFilter: boolean = true;
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  constructor() { }
+  constructor(private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
   }
@@ -28,5 +29,8 @@ export class PaymentsHeaderComponent implements OnInit {
   }
   onShowCreatePayment() {
     this.onCreatePayment.emit(null);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

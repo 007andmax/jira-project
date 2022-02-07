@@ -50,8 +50,9 @@
   &__user-avatar {
     width: 32px;
     height: 32px;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
     display: flex;
     justify-content: center;
     align-items: center;

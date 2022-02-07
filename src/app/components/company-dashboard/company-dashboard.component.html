@@ -34,7 +34,10 @@
                     <div class="cmp-board-info-row d-flex">
                         <div class="cmp-board-info-col d-flex">
                             <app-company-dash-revenue class="cmp-board-revenue cmn-box d-flex"></app-company-dash-revenue>
-                            <app-company-dash-invoice [companyName]="companyName"></app-company-dash-invoice>
+                            <app-company-dash-invoice
+                                *ngIf="getPermissions('VIEW_ACCOUNTING')"
+                                [companyName]="companyName"
+                            ></app-company-dash-invoice>
                         </div>
                         <div class="cmp-board-info-col d-flex">
                             <app-company-dash-contract *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"></app-company-dash-contract>

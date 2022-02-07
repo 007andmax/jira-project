@@ -237,7 +237,7 @@
         <div class="col-md-12">
             <p>Get Subscribe</p>
             <app-company-subscription
-                [editItem]="company.contacts[0].subscription"
+                [editItem]="company.contacts[0].defaultSubscriptions"
                 (subscribeChange)="onChangeSubscribe($event)"
             ></app-company-subscription>
         </div>

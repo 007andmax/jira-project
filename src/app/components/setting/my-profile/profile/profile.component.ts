@@ -22,6 +22,9 @@ import { MapsAPILoader } from '@agm/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CrmCompanyJobTitle } from '../../crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 
 // import { ToastrService } from 'ngx-toastr';
 
@@ -68,6 +71,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private usersStateService: UsersStateService,
     private crmStateService: CrmStateService,
+    private imageCropperStateService: ImageCropperStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
   ) {
     // this.getCurrentUser();
     // this.getUserProfile();
@@ -130,6 +135,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
+    this.onCroppImage();
+  }
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (data) {
+        this.croppedImage = data.croppedImage;
+        this.cropIt();
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   /**
@@ -316,16 +331,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   onSelectFile(event) {
     this.imageChangedEvent = event;
-    this.isCroppedImg = true;
+    // this.isCroppedImg = true;
 
     if (event.target.files && event.target.files[0]) {
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           if (result) {
             this.imageOrigin = result;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
           }
         },
         error => {

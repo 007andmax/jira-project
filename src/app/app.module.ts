@@ -507,6 +507,8 @@ import { UsersTableMarketingComponent } from './components/marketing/users-table
 import { LeftPanelMarketingComponent } from './components/left-panel/left-panel-marketing/left-panel-marketing.component';
 import { PermissionContractsService } from './components/billing/contracts/permission-contracts.service';
 import { PermissionCompanyService } from './components/companies/permission-company.service';
+import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
+import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 
 
 declare var $: any;
@@ -1039,7 +1041,9 @@ declare var $: any;
     PermissionAccountingSettingsService,
     PermissionCrmSettingsService,
     PermissionContractsService,
-    PermissionCompanyService
+    PermissionCompanyService,
+    PermissionBillableService,
+    PermissionInvoicesService
   ],
   bootstrap: [AppComponent]
 })

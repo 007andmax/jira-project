@@ -31,6 +31,7 @@ export class CompanyDashboardComponent implements OnInit {
     public appService: AppService,
     private permissionsService: PermissionsService,
     private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
     public contractsStateService: ContractsStateService) { }
 
   ngOnInit() {

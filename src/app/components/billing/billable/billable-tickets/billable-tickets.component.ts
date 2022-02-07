@@ -17,6 +17,7 @@ import { BillableRealTimeService } from 'src/app/states/billable/billable-real-t
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -44,6 +45,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -248,7 +250,9 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   }
   back() {
     this.leftPanelStateService.goToState('new-billable');
-
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.id;

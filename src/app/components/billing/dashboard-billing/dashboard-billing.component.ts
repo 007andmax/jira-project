@@ -11,6 +11,7 @@ import { TopDashboard } from './class/top-dashboard';
 import { DashboardSalesAnalyticsComponent } from './dashboard-sales-analytics/dashboard-sales-analytics.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { InvoiceRevenueComponent } from './invoice-revenue/invoice-revenue.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-dashboard-billing',
@@ -32,6 +33,7 @@ export class DashboardBillingComponent implements OnInit {
   constructor(private dashboardBillingService: DashboardBillingService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private leftPanelStateService: LeftPanelStateService,
     private companiesStateService: CompaniesStateService) { }
 
@@ -66,7 +68,12 @@ export class DashboardBillingComponent implements OnInit {
       this.accountingStartDate = new Date(data.accountingStartDate).getTime();
       this.topDashboard.setInvoiceAmountsStartDate(moment(this.accountingStartDate).format('YYYY/MM/DD'));
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
-      this.getTops();
+      if (this.getPermissions('VIEW_ACCOUNTING')) {
+        this.getTops();
+      } else {
+        this.isTopReady = true;
+        this.checkReadyState();
+      }
       this.getDashboard("WEEKLY");
     })
   }
@@ -78,7 +85,12 @@ export class DashboardBillingComponent implements OnInit {
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
       this.cd.detectChanges();
       this.getDashboard(this.typeDashboard);
-      this.getTops();
+      if (this.getPermissions('VIEW_ACCOUNTING')) {
+        this.getTops();
+      } else {
+        this.isTopReady = true;
+        this.checkReadyState();
+      }
       this.invoiceRevenue.updateStartDate();
       this.invoiceRevenue.getInvoiceRevenue();
 
@@ -94,6 +106,8 @@ export class DashboardBillingComponent implements OnInit {
       this.checkReadyState();
     })
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
 
 }

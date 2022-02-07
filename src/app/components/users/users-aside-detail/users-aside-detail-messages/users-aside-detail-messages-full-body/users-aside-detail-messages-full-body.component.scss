@@ -1,5 +1,5 @@
-@import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .qt-aside-modern {
     width: 600px;
@@ -78,6 +78,8 @@ h3 {
     min-width: 24px;
     border-radius: 50%;
     background-color: #7c77cb;
+    background-position: center !important;
+    background-size: cover !important;
     font-size: 12px;
     display: flex;
     align-items: center;

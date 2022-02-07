@@ -2599,7 +2599,13 @@ app-quotes-item {
           }
         }
       }
+      ngb-datepicker {
+        border: none;
+      }
       .date-picker {
+        .ngb-dp-months {
+          padding: 0;
+        }
         .ngb-dp-month {
           width: 100%;
           .ngb-dp-weekday {
@@ -2608,6 +2614,8 @@ app-quotes-item {
         }
         .ngb-dp-day {
           margin: 0 3px;
+          width: 2rem;
+          height: 2rem;
         }
         .ngb-dp-arrow.right {
           .ngb-dp-navigation-chevron {
@@ -2628,9 +2636,10 @@ app-quotes-item {
 }
 .date-picker {
   .ngb-dp-month-name {
-    background: $primary-1;
-    color: $white;
-    font-weight: 600;
+    background: $white;
+    color: $primary-2;
+    font-size: 16px;
+    font-weight: 500;
   }
   .custom-day {
     display: flex;
@@ -2638,18 +2647,51 @@ app-quotes-item {
     align-items: center;
     width: 100%;
     height: 100%;
-
-    &:hover {
-      background: $gray-400;
-      color: $gray-100;
-    }
     &.range {
       background: $primary-1;
       color: $white;
+      border-radius: 6px;
+      width: 2.2rem;
+      height: 1.8rem;
     }
+    &:hover,
     &.faded {
-      background: $gray-300;
-      color: #0f0f0f;
+      background-color: #e9f7ff;
+      color: $primary-2;
+      border-radius: 0;
+    }
+  }
+}
+.date-picker-container {
+  .btn-light {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ngb-dp-navigation-chevron {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+  [ngbDatepickerDayView] {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    .outside {
+      opacity: 1;
+      color: $gray-600;
+    }
+  }
+  .ngb-dp-months {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 1px;
+      width: calc(100% - 16px);
+      background-color: $gray-400;
     }
   }
 }
@@ -2852,6 +2894,17 @@ app-quotes-item {
   }
 }
 .new-companies-content__modal {
+  .qt-aside-modern__content {
+    .new-tax {
+      left: unset !important;
+      right: 0;
+    }
+  }
+  .add-tax-dropdown:after {
+    left: unset;
+    right: 14px;
+  }
+
   .icn-product-save {
     position: absolute;
     top: calc(50% - 4px) !important;
@@ -3113,9 +3166,6 @@ app-quotes-item {
     z-index: 99;
     font-weight: 600;
   }
-}
-ngb-datepicker {
-  border: none !important;
 }
 .new-companies-content__modal,
 .recurring-tickets-content__modal,
