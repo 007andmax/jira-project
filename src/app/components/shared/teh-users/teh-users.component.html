@@ -1,5 +1,4 @@
 <div
-    class
     ngbDropdown
     [autoClose]="'outside'"
 >
@@ -56,6 +55,7 @@
         class="teh-user-body"
         ngbDropdownMenu
         aria-labelledby="dropdownTehuser"
+        *ngIf="!isDisabled"
     >
         <div class="select-wrapper dropdown-assign-ticket fixed-assign">
             <div class="content">

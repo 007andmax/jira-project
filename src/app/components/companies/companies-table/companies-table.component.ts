@@ -19,6 +19,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Router } from '@angular/router';
 import { CompanyItem } from '../class/company-item';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -46,7 +47,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private router: Router,
     private draftEmailStateService: DraftEmailStateService,
-    private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
     private elRef: ElementRef) { }
 
   ngOnInit() {
@@ -163,7 +164,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

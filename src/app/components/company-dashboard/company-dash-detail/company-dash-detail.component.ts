@@ -22,6 +22,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { USERS } from 'src/app/const/emails';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -288,6 +289,7 @@ export class CompanyDashDetailComponent implements OnInit {
     public appService: AppService,
     private draftEmailStateService: DraftEmailStateService,
     private crmStateService: CrmStateService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -698,6 +700,7 @@ export class CompanyDashDetailComponent implements OnInit {
     this.leftPanelStateService.goToState('new-companies');
   }
   changeRating(index, type) {
+    if (!this.getPermissions('EDIT_COMPANIES')) return;
     let rating = 0;
     if (type === 'selected') {
       rating = index + 1;
@@ -718,6 +721,9 @@ export class CompanyDashDetailComponent implements OnInit {
   filterTime(time) {
     let data = this.workingHoursList.filter(val => val.value == time);
     return data[0].name;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }
 

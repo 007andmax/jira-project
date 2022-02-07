@@ -34,6 +34,7 @@ import { StatusColor } from '../../class/status-color';
 import { find } from 'rxjs-compat/operator/find';
 import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 import { Router } from '@angular/router';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -75,6 +76,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public appService: AppService,
     private router: Router,
+    private permissionsService: PermissionsService,
     private devicesStateService: DevicesStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesStateService: CompaniesStateService) { }
@@ -202,11 +204,14 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update' });
   }
   goToCompanyDashboard() {
-    if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts()) return;
+    if (!this.getPermissions('VIEW_COMPANIES') || this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts()) return;
     this.companiesStateService.setSelectedCompanyId(this.ticketProfile.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);
 
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;

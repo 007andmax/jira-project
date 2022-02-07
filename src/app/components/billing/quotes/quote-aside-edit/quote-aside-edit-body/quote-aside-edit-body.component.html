@@ -58,7 +58,7 @@
             <div
                 class="qt-fw-600 qt-mt-10 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
                 id="dropdownForm1"
-                *ngIf="quoteCompany"
+                *ngIf="quoteCompany && getPermissions('EDIT_COMPANIES')"
                 ngbDropdownToggle
                 (click)="onEditCustomer()"
             >
