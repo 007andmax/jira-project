@@ -5,12 +5,15 @@ export class PasswordRecordCategories {
     name: string;
     title: string;
     default: boolean;
-    constructor(data) {
-        let list = PASSWORD_RECORD_TYPES;
-        let findDefault = list.find(item => item.UPPERCASE === data.name);
-        this.id = data.id;
-        this.name = data.name;
-        this.default = data.default;
-        this.title = (findDefault) ? findDefault.TITLE : this.name;
+    constructor(data = null) {
+        if (data) {
+            let list = PASSWORD_RECORD_TYPES;
+            let findDefault = list.find(item => item.UPPERCASE === data.name);
+            this.id = data.id;
+            this.name = data.name;
+            this.default = data.default;
+            this.title = (findDefault) ? findDefault.TITLE : this.name;
+        }
+
     }
 }

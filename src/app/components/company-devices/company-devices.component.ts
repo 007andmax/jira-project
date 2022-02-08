@@ -42,8 +42,10 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
     let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
+      if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       if (this.devicesStateService.getAllDevices()) {
@@ -215,6 +217,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
+    this.companiesStateService.setCompanyRoutingId(null);
     this.sub.unsubscribe();
   }
 }

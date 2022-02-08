@@ -5,7 +5,7 @@ import { PasswordRecordCategories } from "./password-record-categories";
 export class PasswordRecordAdd {
     description: string = "";
     client: Company;
-    template: PasswordRecordCategories;
+    template: PasswordRecordCategories = new PasswordRecordCategories();
     ssid: string;
     userName: string;
     password: string;

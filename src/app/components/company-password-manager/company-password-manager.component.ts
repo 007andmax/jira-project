@@ -18,9 +18,11 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     window.scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-password-manager');
     this.companyId = this.activateRoute.snapshot.params['id'];
+    if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.companyId = params['id'];
+      if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
       this.companiesStateService.setSelectedCompanyId(this.companyId);
       this.getRecords();
     });
@@ -70,5 +72,9 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.onScroll();
       this.cd.detectChanges();
     });
+  }
+  public ngOnDestroy() {
+    this.sub.unsubscribe();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

@@ -95,9 +95,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
 
     this.header.setTitle("All Tickets");
     let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
+      if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companiesStateService.setSelectedCompanyId(id);
       let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
@@ -167,6 +169,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
   public trackById(index, item) {
     return item.id;

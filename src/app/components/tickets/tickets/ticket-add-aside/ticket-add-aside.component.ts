@@ -78,6 +78,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
+      console.log("this.companiesState.getCompanyRoutingId()", this.companiesState.getCompanyRoutingId());
+      if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
 
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
@@ -152,6 +154,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     });
   }
   onSelectCompany(item) {
+    console.log("item", item);
     if (item) {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));

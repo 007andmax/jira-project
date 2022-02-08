@@ -31,6 +31,7 @@ export class CompaniesStateService {
   filter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
   isInitSubscriptions: boolean = false;
+  companyRoutingId: string;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private usersStateService: UsersStateService,
@@ -71,6 +72,12 @@ export class CompaniesStateService {
       }
 
     })
+  }
+  public getCompanyRoutingId() {
+    return this.companyRoutingId;
+  }
+  public setCompanyRoutingId(data) {
+    this.companyRoutingId = data;
   }
   private initSubscriptions() {
     this.websocketService.subsribeToGlNumber(this.currentCompany.id);

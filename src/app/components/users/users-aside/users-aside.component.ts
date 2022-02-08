@@ -21,6 +21,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { Company } from 'src/app/interfaces/company/company';
 
 @Component({
   selector: 'app-users-aside',
@@ -42,6 +43,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   industries: Array<CrmCompanyIndustry> = [];
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
+  selectedCompany: Company;
   sub: Subscription = new Subscription();
   constructor(private imageCropperStateService: ImageCropperStateService,
     private usersStateService: UsersStateService,
@@ -70,6 +72,8 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.usersStateService.getOpenAside().subscribe(data => {
       this.getJobTypeList();
       this.opened = true;
+      if (this.opened && this.companiesStateService.getCompanyRoutingId()) this.onSelectCompany(this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId()));
+
     })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -155,9 +159,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.imageCropperStateService.uploadFileOnBrower(event);
   }
   public onSelectCompany(selectClient) {
+    this.selectedCompany = selectClient;
     this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
     if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
+
   }
   onAdd() {
     if (!this.validate.isValidate(this.user)) return;
@@ -176,6 +182,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    this.selectedCompany = null;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

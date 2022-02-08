@@ -66,9 +66,11 @@ export class CompanyUserComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate('company-user');
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
+      if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companiesStateService.setSelectedCompanyId(id);
       this.onInitFilters(id);
     });
@@ -315,6 +317,7 @@ export class CompanyUserComponent implements OnInit {
     })
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearFilter();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 
 }
