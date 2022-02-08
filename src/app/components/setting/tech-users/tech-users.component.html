@@ -15,6 +15,7 @@
                     href="javascript:;"
                     (click)="creatTechUsr()"
                     class="btn-outline"
+                    *ngIf="getPermissions('CREATE_USERS')"
                 >
                     Create Tech User
                 </a>
@@ -190,6 +191,7 @@
                                     href="javascript:;"
                                     data-tooltip="Edit"
                                     class="edit"
+                                    *ngIf="getPermissions('EDIT_USERS')"
                                     (click)="editTechUser(techUser)"
                                 >
                                     <img
@@ -201,6 +203,7 @@
                                     href="javascript:;"
                                     data-tooltip="remove"
                                     class="remove"
+                                    *ngIf="getPermissions('ARCHIVE_USERS')"
                                     (click)="removeUserConfirm(techUser)"
                                 >
                                     <img

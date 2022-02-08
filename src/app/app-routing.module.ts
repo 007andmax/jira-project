@@ -77,6 +77,7 @@ import { PermissionContractsService } from './components/billing/contracts/permi
 import { PermissionCompanyService } from './components/companies/permission-company.service';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
 
 const routes: Routes = [
 
@@ -101,7 +102,7 @@ const routes: Routes = [
     path: ':company/company/:id/user',
     component: CompanyUserComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionUsersService]
   },
   {
     path: ':company/company/:id/tickets',
@@ -132,7 +133,8 @@ const routes: Routes = [
   }, {
     path: ':company/users',
     component: UsersComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionUsersService]
   },
   {
     path: ':company/reports',
@@ -384,7 +386,8 @@ const routes: Routes = [
   {
     path: ':company/marketing',
     component: MarketingComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionUsersService]
   },
 
 ];

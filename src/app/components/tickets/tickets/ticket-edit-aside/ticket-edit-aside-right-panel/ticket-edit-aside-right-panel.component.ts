@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
@@ -11,7 +12,8 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
   type: string = '';
   toggleRightPanel: boolean = false;
   opened: boolean = false;
-  constructor(public cd: ChangeDetectorRef, ) { }
+  constructor(public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
   }
@@ -41,6 +43,9 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
   public close() {
     this.type = '';
     this.toggleRightPanel = false;
-    this.opened  =false;
+    this.opened = false;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

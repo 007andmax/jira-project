@@ -1,9 +1,36 @@
-<app-ticket-edit-aside-devices   [setCompanyId]="ticketProfile.company.id" *ngIf="toggleRightPanel && type === 'DEVICES'"></app-ticket-edit-aside-devices>
-<app-ticket-edit-aside-company-info [createdUser]="ticketProfile.createdUser" [setCompanyId]="ticketProfile.company.id" *ngIf="toggleRightPanel && type === 'COMPANY_INFO'"></app-ticket-edit-aside-company-info>
-<app-ticket-edit-aside-users [setCompanyId]="ticketProfile.company.id" *ngIf="toggleRightPanel && type === 'USERS'"></app-ticket-edit-aside-users>
+<app-ticket-edit-aside-devices
+    [setCompanyId]="ticketProfile.company.id"
+    *ngIf="toggleRightPanel && type === 'DEVICES'"
+></app-ticket-edit-aside-devices>
+<app-ticket-edit-aside-company-info
+    [createdUser]="ticketProfile.createdUser"
+    [setCompanyId]="ticketProfile.company.id"
+    *ngIf="toggleRightPanel && type === 'COMPANY_INFO'"
+></app-ticket-edit-aside-company-info>
+<app-ticket-edit-aside-users
+    [setCompanyId]="ticketProfile.company.id"
+    *ngIf="toggleRightPanel && type === 'USERS'"
+></app-ticket-edit-aside-users>
 <div class="ticket-edit-aside__menu">
-  <div class="aside-menu-item icon__panel-open" [ngClass]="{ 'opened': opened}"  (click)="togglePanel()"></div>
-  <div class="aside-menu-item icon__company-info" [ngClass]="{'active': type === 'COMPANY_INFO'}" (click)="toggleTypeOnPanel('COMPANY_INFO')"></div>
-  <div class="aside-menu-item icon__devices" [ngClass]="{'active': type === 'DEVICES'}" (click)="toggleTypeOnPanel('DEVICES')"></div>
-  <div class="aside-menu-item icon__users" [ngClass]="{'active': type === 'USERS'}" (click)="toggleTypeOnPanel('USERS')" ></div>
+    <div
+        class="aside-menu-item icon__panel-open"
+        [ngClass]="{ 'opened': opened}"
+        (click)="togglePanel()"
+    ></div>
+    <div
+        class="aside-menu-item icon__company-info"
+        [ngClass]="{'active': type === 'COMPANY_INFO'}"
+        (click)="toggleTypeOnPanel('COMPANY_INFO')"
+    ></div>
+    <div
+        class="aside-menu-item icon__devices"
+        [ngClass]="{'active': type === 'DEVICES'}"
+        (click)="toggleTypeOnPanel('DEVICES')"
+    ></div>
+    <div
+        class="aside-menu-item icon__users"
+        *ngIf="getPermissions('VIEW_USERS')"
+        [ngClass]="{'active': type === 'USERS'}"
+        (click)="toggleTypeOnPanel('USERS')"
+    ></div>
 </div>

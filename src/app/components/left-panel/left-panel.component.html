@@ -49,6 +49,7 @@
         [activePage]="state"
     ></app-left-panel-tickets>
     <app-left-panel-users
+        *ngIf="getPermissions('VIEW_USERS')"
         #panelUsers
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
@@ -56,6 +57,7 @@
         class="qt-d-md-none"
     ></app-left-panel-users>
     <left-panel-marketing
+        *ngIf="getPermissions('VIEW_USERS')"
         #panelMarketing
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"

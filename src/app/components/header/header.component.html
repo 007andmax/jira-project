@@ -29,6 +29,7 @@
             <li
                 ngbDropdownItem
                 (click)="onAddUser()"
+                *ngIf="getPermissions('CREATE_USERS')"
             >
                 Users
             </li>

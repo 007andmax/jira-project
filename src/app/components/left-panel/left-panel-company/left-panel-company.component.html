@@ -35,6 +35,7 @@
         Tickets
     </li>
     <li
+        *ngIf="getPermissions('VIEW_USERS')"
         [ngClass]="{'--active':activePage === 'company-user'}"
         (click)="goToCompanySection('user')"
     >

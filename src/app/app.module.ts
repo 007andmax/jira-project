@@ -509,6 +509,7 @@ import { PermissionContractsService } from './components/billing/contracts/permi
 import { PermissionCompanyService } from './components/companies/permission-company.service';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
 
 
 declare var $: any;
@@ -1043,7 +1044,8 @@ declare var $: any;
     PermissionContractsService,
     PermissionCompanyService,
     PermissionBillableService,
-    PermissionInvoicesService
+    PermissionInvoicesService,
+    PermissionUsersService
   ],
   bootstrap: [AppComponent]
 })

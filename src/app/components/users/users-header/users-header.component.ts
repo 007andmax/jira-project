@@ -21,6 +21,7 @@ import { MarketingEmailService } from 'src/app/services/marketing-email/marketin
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserFilter } from '../class/user-filter';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 
 
@@ -58,6 +59,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private usersService: UsersService,
     private marketingEmailService: MarketingEmailService,
+    private permissionsService: PermissionsService,
     private usersHeaderService: UsersHeaderService) {
   }
 
@@ -151,6 +153,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

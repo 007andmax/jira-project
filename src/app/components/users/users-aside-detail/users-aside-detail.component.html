@@ -11,6 +11,7 @@
                 placement="top"
                 container="body"
                 ngbTooltip="Edit"
+                *ngIf="getPermissions('EDIT_USERS')"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
@@ -70,6 +71,7 @@
                         [heightInput]="'32px'"
                         [editItem]="selectedCompany"
                         [isBlockClear]="true"
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         (onSelectedItem)="onSelectCompany($event)"
                     >
                     </app-drop-down>
@@ -85,6 +87,7 @@
                         [(ngModel)]="user.primaryEmail"
                         (blur)="onCheckEmail()"
                         placeholder="Enter Email"
+                        [attr.disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error
                         class="qt-tooltip-error"
@@ -114,6 +117,7 @@
                         placeholder="Enter Primary Phone"
                         prefix="+1"
                         mask=" (000) 000-0000"
+                        [attr.disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error
                         class="qt-tooltip-error"
@@ -131,6 +135,7 @@
                         <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
                     </div>
                     <user-default-subscription
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         [mode]="MODE_EDIT_SUBSCRIPTION"
                         [defaultSubscriptions]="user.defaultSubscriptions"
                         (onChange)="onChangeDefaultSubscriptions($event)"
@@ -142,6 +147,7 @@
                         <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
                     </div>
                     <user-custom-subscription
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         [classDropDown]="'user-aside-detail-custom-subscription'"
                         [customSubscriptions]="user.customSubscriptions"
                         (onChange)="onChangeCustomSubscriptions($event)"
@@ -177,6 +183,7 @@
                             cols="30"
                             [default]="3"
                             rows="3"
+                            [attr.disabled]="!getPermissions('EDIT_USERS')"
                         ></textarea>
                     </div>
                 </div>
@@ -192,6 +199,7 @@
                         [selectedTag]="user.tags"
                         [placement]="'top'"
                         [blockUserTag]="true"
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         (tagsChange)="onChangeTags($event)"
                     ></app-company-tags>
                 </div>

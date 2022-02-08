@@ -116,7 +116,7 @@ export class GlobalSearchComponent implements OnInit {
     this.list = [];
   }
   isShowType(type) {
-    if (type === 'TICKETS' || type === 'COMPANIES' && this.getPermissions('VIEW_COMPANIES') || type === 'USERS' || type === 'SERVICES' || type === 'PRODUCTS' || type === 'INVOICES') return true;
+    if (type === 'TICKETS' || type === 'COMPANIES' && this.getPermissions('VIEW_COMPANIES') || type === 'USERS' && this.getPermissions('VIEW_USERS') && this.getPermissions('EDIT_USERS') || type === 'SERVICES' || type === 'PRODUCTS' || type === 'INVOICES') return true;
     return false;
   }
   getFistLine(item) {

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { USERS } from 'src/app/const/emails';
 import { Company } from 'src/app/interfaces/company/company';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -43,6 +44,7 @@ export class UsersTableMarketingComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     private usersTableService: UsersTableService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private elRef: ElementRef) { }
 
   onChangeDefaultSubscriptions(subscriptions) {
@@ -159,6 +161,9 @@ export class UsersTableMarketingComponent implements OnInit {
     this.draftEmailStateService.resetSelectedUsers();
     this.draftEmailStateService.addSelectedUser(this.user);
     this.draftEmailStateService.toggleAsideForAdd();
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.id;
