@@ -9,7 +9,9 @@
     color: $primary-2;
   }
 }
-
+.no-pointer {
+  cursor: default;
+}
 .active {
   background-color: rgba($success, 0.1);
   color: $success;

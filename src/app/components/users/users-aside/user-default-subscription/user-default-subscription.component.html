@@ -1,14 +1,15 @@
 <div
     class="grey-dropdown filter-tags-body"
     ngbDropdown
-    container="body"
+    [container]="(isDisabled) ? null : 'body'"
 >
     <i class="icn-sm report-caret-icon"></i>
     <div
         class="user-subscription"
         id="dropdownServices"
         ngbDropdownToggle
-        [ngClass]="{'placeholder-subscription': !showPlaceholder()}"
+        [ngClass]="{'placeholder-subscription': !showPlaceholder(),
+    'no-pointer':isDisabled}"
     >
         <div
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"

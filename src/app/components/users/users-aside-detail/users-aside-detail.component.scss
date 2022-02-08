@@ -60,6 +60,11 @@
   height: calc(100% - 40px);
 
   .user-detail__row-info {
+    /deep/ input {
+      &:disabled {
+        background-color: #fff;
+      }
+    }
     .mat-form-field {
       margin-top: 0;
     }
