@@ -650,19 +650,9 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
-  public getAssetSearch() {
+  public getByTechCompany(techCompanyId) {
     return this.http
-      .post(
-        `${this.apiAgent}agent/AutoComplete/Search`,
-        this.encrypt128(this.key, ''),
-        { headers: this.getHeader(), responseType: "text" }
-      )
-      .pipe(map((data: string) => data));
-  }
-
-  public getByTechCompany(companyGuid) {
-    return this.http
-      .get(`${this.apiAgent}/agent/AssetSearch/${companyGuid}`, {
+      .get(`${this.apiAgent}agent/AssetSearch/GetByTechCompany?techCompanyGuid=${techCompanyId}`, {
         headers: this.getHeader(),
         responseType: "text",
       })

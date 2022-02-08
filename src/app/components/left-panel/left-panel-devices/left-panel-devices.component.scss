@@ -11,3 +11,27 @@
       color: #16a4fa;
   }
 }
+li.child-menu {
+  display:block;
+  width:100%;
+  height: auto;
+  padding-top:10px;
+
+}
+
+.app-left-panel__menu-expand li .menu-inner {
+  list-style: none;
+  padding-left: 15px;
+  padding-top: 15px;
+  margin-left: -15px;
+}
+
+.menu-inner .fav {
+  width: 14px;
+  height: 14px;
+  margin-right:4px;
+}
+
+.menu-inner li {
+  padding-left:15px;
+}

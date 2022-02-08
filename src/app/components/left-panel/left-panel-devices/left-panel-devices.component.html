@@ -1,27 +1,23 @@
-<div
-    class="app-left-panel__menu"
-    [ngClass]="{'--active': open}"
-    (click)="open = !open;openPanel()"
->
+<div class="app-left-panel__menu" [ngClass]="{'--active': open}" (click)="open = !open;openPanel()">
     <div class="app-left-panel__menu-icon --devices"></div>
     <div class="app-left-panel__menu-title">Devices</div>
     <div class="app-left-panel__menu-arrow"></div>
 </div>
-<ul
-    class="app-left-panel__menu-expand top-menu"
-    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
->
-    <li
-      [ngClass]="{'--active':type === 'Dashboard'  && activePage === 'new-devices'}"
-      (click)="onFilter('Dashboard')"
-    >
+<ul class="app-left-panel__menu-expand top-menu" [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}">
+    <li [ngClass]="{'--active':type === 'Dashboard'  && activePage === 'new-devices'}" (click)="onFilter('Dashboard')">
         Dashboard
     </li>
-    <li
-    class="app-left-panel__menu-expand-item-icon"
-    (click)="goToState('new-device-summary')"
->
-   Reports
-  </li>
+    <li class="app-left-panel__menu-expand-item-icon" [ngClass]="{'--active':type === 'Reports'  && activePage === 'new-device-summary'}" (click)="goToState('new-device-summary')">
+        Reports
+    </li>
+    <li class="app-left-panel__menu-expand-item-icon child-menu">
+        <img src="/assets/img/icons/favourite.svg" class="fav"/>
+        Favourite List
+        <ul class="menu-inner menu-expand-show">
+            <li *ngFor="let item of searches" class="menu-item-inner">
+                {{item.Name}}
+            </li>
+        </ul>
+    </li>
 </ul>
 

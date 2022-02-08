@@ -102,10 +102,7 @@ export class DevicesComponent implements OnInit {
         "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
       )
       .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetSearch().subscribe((resp)=>{
-          debugger;
-        });
+        this.agentService.setAccessToken(data.AccessToken);        
         this.add(undefined);
         this.CurrentUser();
       });
@@ -726,11 +723,13 @@ export class DevicesComponent implements OnInit {
     req.Criteria = this.selectedTag;
     req.Name = this.favouriteName
     req.TechCompanyGuid = this.techCompnayGuid;
+    req.IsActive = true;
     this.agentService.createAssetSearch(req).subscribe((data: any) => {
-      debugger;
+      this.modalService.dismissAll();
+      this.toastr.success('Your search is saved');
     },
     (err)=> {
-      console.log(err);
+      this.toastr.error('Error saving your search! Please try again');
     })
   }
 }
