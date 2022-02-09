@@ -236,6 +236,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'passwords'}"
                     (click)="setTab('passwords')"
+                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
                 >
                     Passwords
                 </span>
@@ -264,7 +265,7 @@
                 [user]="user"
             ></users-aside-detail-documents>
             <users-aside-detail-passwords
-                *ngIf="tab === 'passwords'"
+                *ngIf="tab === 'passwords' && getPermissions('VIEW_PASSWORD_SECTION')"
                 [user]="user"
             ></users-aside-detail-passwords>
             <users-aside-detail-messages

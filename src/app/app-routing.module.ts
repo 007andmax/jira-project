@@ -78,6 +78,7 @@ import { PermissionCompanyService } from './components/companies/permission-comp
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 import { PermissionUsersService } from './components/users/permission-users.service';
+import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
 
 const routes: Routes = [
 
@@ -90,7 +91,7 @@ const routes: Routes = [
   {
     path: ':company/password-manager',
     component: PasswordManagerComponent,
-
+    canActivate: [PermissionPasswordManagerService]
   },
   {
     path: ':company/company/:id/password-manager',

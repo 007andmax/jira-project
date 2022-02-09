@@ -84,6 +84,7 @@
         class="qt-d-md-none"
     ></app-left-panel-inventory>
     <app-left-panel-password-manager
+        *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-password-manager>
