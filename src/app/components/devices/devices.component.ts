@@ -62,6 +62,7 @@ export class DevicesComponent implements OnInit {
   deviceSummaryList: any = [];
   modalReference: any;
   favouriteName: string;
+  searchSubscription: any;
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -93,6 +94,18 @@ export class DevicesComponent implements OnInit {
       this.onPowerShellCommand();
     });
     this.showPreloader = false;
+    if (!this.searchSubscription) {
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
+        this.selectedTag = data.Criteria;
+        this.searchTag = this.selectedTag;
+        localStorage.removeItem("currentSearch");
+        this.add(undefined);
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 
   setPreviewDataDevice() {
@@ -102,7 +115,14 @@ export class DevicesComponent implements OnInit {
         "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
       )
       .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);        
+        this.agentService.setAccessToken(data.AccessToken);
+        let searchData: any = localStorage.getItem("currentSearch");
+        if (searchData) {
+          let searchObj = JSON.parse(searchData);
+          this.selectedTag = searchObj.Criteria;
+          this.searchTag = this.selectedTag;
+          localStorage.removeItem("currentSearch");
+        }
         this.add(undefined);
         this.CurrentUser();
       });
@@ -728,8 +748,8 @@ export class DevicesComponent implements OnInit {
       this.modalService.dismissAll();
       this.toastr.success('Your search is saved');
     },
-    (err)=> {
-      this.toastr.error('Error saving your search! Please try again');
-    })
+      (err) => {
+        this.toastr.error('Error saving your search! Please try again');
+      })
   }
 }

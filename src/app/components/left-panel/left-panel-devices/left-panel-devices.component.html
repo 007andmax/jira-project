@@ -11,13 +11,14 @@
         Reports
     </li>
     <li class="app-left-panel__menu-expand-item-icon child-menu">
-        <img src="/assets/img/icons/favourite.svg" class="fav"/>
-        Favourite List
-        <ul class="menu-inner menu-expand-show">
-            <li *ngFor="let item of searches" class="menu-item-inner">
+        <div> <img src="/assets/img/icons/favourite.svg" class="fav" /> Favourite List
+            <div [ngClass]="{'expand-search': !open1, 'collapse-search': open1}" (click)="toggleSearch()" ></div>
+        </div>
+
+        <ul class="menu-inner menu-expand-show" *ngIf="open1">
+            <li *ngFor="let item of searches" class="menu-item-inner" (click)="onFilter1('Dashboard', item)">
                 {{item.Name}}
             </li>
         </ul>
     </li>
 </ul>
-

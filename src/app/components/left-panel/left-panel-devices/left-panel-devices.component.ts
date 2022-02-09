@@ -25,7 +25,7 @@ export class LeftPanelDevicesComponent implements OnInit {
     private companiesService: CompaniesService) { }
 
   ngOnInit() {
-    this.open1=true;
+    this.open1 = true;
     this.companiesService.getTechCompany().subscribe(data => {
       this.company = data;
       this.agentService
@@ -69,7 +69,7 @@ export class LeftPanelDevicesComponent implements OnInit {
   }
 
   openSubPanel() {
-    
+
   }
 
   public goToState(state) {
@@ -85,4 +85,14 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.open = false;
   }
 
+  onFilter1(active, data) {
+    localStorage.setItem("currentSearch",JSON.stringify(data));
+    this.type = active;
+    this.goToState('new-devices');
+    this.leftPanelStateService.onSearchChanged(data);
+  }
+
+  toggleSearch() {
+    this.open1 = !this.open1;
+  }
 }
