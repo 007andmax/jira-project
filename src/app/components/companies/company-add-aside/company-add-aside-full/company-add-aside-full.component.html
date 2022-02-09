@@ -10,7 +10,16 @@
                 *ngIf="!company.logo"
             ></i>
             <div>
-                <div class="new-link">Upload Company logo</div>
+                <div class="new-link">
+                    Upload Company logo
+                    <span
+                        *ngIf="company.logo"
+                        class="remove-link pointer"
+                        (click)="removeLogo()"
+                    >
+                        Remove logo
+                    </span>
+                </div>
                 <p>Maximum size of 2MB. JPG, GIF, PNG</p>
             </div>
             <input

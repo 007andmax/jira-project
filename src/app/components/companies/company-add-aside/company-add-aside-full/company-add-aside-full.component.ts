@@ -39,6 +39,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
   locationIsinit: boolean = false;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
+  idUploadFile: string;
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() serviceTypeDp: DropDownComponent;
@@ -84,7 +85,14 @@ export class CompanyAddAsideFullComponent implements OnInit {
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
 
+      console.log("data", data);
+      if (data && this.company.logo) this.companiesService.removeAttachment(this.company.logo.origin.id).subscribe(res => {
+
+      });
       if (data) this.company.setLogo(data);
+      if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+
+      });
     })
     this.sub.add(getConfirm);
   }
@@ -97,12 +105,17 @@ export class CompanyAddAsideFullComponent implements OnInit {
       }
     })
   }
-
+  removeLogo() {
+    this.companiesService.removeAttachment(this.company.logo.origin.id).subscribe(data => {
+      this.company.editLogo(null);
+    })
+  }
   public uploadFileOnBrower(event) {
     if (event.target.value) {
       const file = event.target.files[0];
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
+        this.idUploadFile = res.id;
         this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64, res.id));
         event.target.value = null;
         this.cd.detectChanges();

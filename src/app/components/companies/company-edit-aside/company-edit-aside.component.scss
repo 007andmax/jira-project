@@ -27,3 +27,12 @@
         display: none;
     }
 }
+.new-link {
+    display: flex;
+    align-items: center;
+    .remove-link {
+        width: auto;
+        margin: 0px 0px 0px 20px !important;
+        color: red;
+    }
+}
