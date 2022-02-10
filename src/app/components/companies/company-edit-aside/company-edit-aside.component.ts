@@ -117,7 +117,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
 
   removeLogo() {
-    this.companiesService.removeAvatar(this.company.id, true).subscribe(data => {
+    this.companiesService.removeAvatar(this.company.id).subscribe(data => {
       this.company.editLogo(null);
     })
   }
@@ -319,7 +319,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         });
       }
       if (!this.opened || !data) return;
-      if (this.company.logo) this.companiesService.removeAvatar(this.company.id, true).subscribe(res => {
+      if (this.company.logo) this.companiesService.removeAvatar(this.company.id).subscribe(res => {
         this.editCompanyAvatar(data);
       })
       if (!this.company.logo) this.editCompanyAvatar(data);

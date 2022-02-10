@@ -18,6 +18,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 declare var $;
 
@@ -53,6 +54,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   popup: boolean;
   userId: any;
   IdList: any;
+  idUploadFile: string;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
@@ -68,6 +70,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private modalImageCropperStateService: ModalImageCropperStateService,
     private imageCropperStateService: ImageCropperStateService,
     private modalService: NgbModal,
+    private companiesService: CompaniesService,
   ) {
 
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
@@ -124,10 +127,26 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (data) {
-        this.croppedImage = data.croppedImage;
-        this.cropIt();
+      if (data) this.croppedImage = data.croppedImage;
+      if (this.create) {
+        if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+        });
+        if (this.cropAvatar && data) this.companiesService.removeAttachment(this.cropAvatar.origin.id).subscribe(res => {
+          this.cropIt();
+        });
+        if (!this.cropAvatar && data) this.cropIt();
       }
+      if (this.edit) {
+        if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+        });
+        if (data && this.selectedTechUser.avatar) this.settingService.deleteAvatar(this.selectedTechUser.id).subscribe(res => {
+          this.selectedTechUser.avatar = null;
+          this.cropIt();
+        });
+        if (data && !this.selectedTechUser.avatar) this.cropIt();
+      }
+
+
     })
     this.sub.add(getConfirm);
   }
@@ -423,12 +442,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (result) {
             //    this.isCroppedImg = true;
             this.fileAvatar = result;
+            this.idUploadFile = result.id;
             this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
+            event.target.value = null;
           }
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
           this.isCroppedImg = false;
+          event.target.value = null;
         }
       );
     }

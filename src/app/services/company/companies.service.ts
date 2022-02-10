@@ -157,9 +157,9 @@ export class CompaniesService {
   public removeAttachment(id) {
     return this.http.delete(this.apiUrl + `file/${id}`);
   }
-  removeAvatar(comapnyId: string, isDeleted: boolean) {
+  removeAvatar(comapnyId: string) {
     return this.http.delete(
-      `${this.apiUrl}company/${comapnyId}/${isDeleted}`,
+      `${this.apiUrl}company/${comapnyId}`,
       {}
     );
   }
