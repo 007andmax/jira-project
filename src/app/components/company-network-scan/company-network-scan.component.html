@@ -113,7 +113,9 @@
                                 </label>
                             </div>
                         </td>
-                        <td class="network-scan-table__device-name" [textContent]="network.HostName">
+                        <td class="network-scan-table__device-name">
+                           <input type="text" class="form-control sub-label-field" [(ngModel)]="network.Title" *ngIf="network.IsAgentInstalled ==false && network.OperatingSystem!='Windows'"/>
+                           <span *ngIf="network.IsAgentInstalled ==true || network.OperatingSystem =='Windows'">{{network.Name || network.Title}}</span>
                         </td>
                         <td class="network-scan-table__os" [textContent]="network.OperatingSystem"></td>
                         <td class="network-scan-table__lan-ip" [textContent]="network.IP"></td>
@@ -123,6 +125,9 @@
                         <td class="network-scan-table__status" [textContent]="network.IsAgentInstalled">
                         </td>
                         <td class="network-scan-table__delete">
+                            <button class="btn btn-primary btn-sm" (click)="AddAsset(network)" *ngIf="network.IsAgentInstalled ==false && network.OperatingSystem != 'Windows'">
+                                <img src="/assets/img/icons/add-white.svg" alt="Add" title="Add"/>
+                            </button>
                         </td>
                     </tr>
 
@@ -131,7 +136,7 @@
                 <div class="no-devices" *ngIf="noExistDevices">
                     <p>No Devices</p>
                 </div>
-                <div class="no-devices" *ngIf="networkvalue.length === 0">
+                <div class="no-devices" *ngIf="!this.masterAgent">
                     <p>Master Agent Offline</p>
                 </div>
             </table>

@@ -1,20 +1,48 @@
 .list-devices {
     height: fit-content;
 }
+
 app-company-network-scan-item {
     display: contents;
 }
+
 .cursor-default {
     cursor: default;
     .button-menu {
         cursor: pointer;
     }
 }
+
 .no-devices {
     position: absolute;
     left: calc(50% - 40px);
     top: 60px;
 }
+
 .offline-device {
     color: #bec2c7;
+}
+
+.sub-label-field {
+    border-width: 0;
+    &:hover,
+    &:focus {
+        border: solid 1px #c4cbd5;
+        border-width: 1px;
+        outline: 0;
+    }
+}
+
+.network-scan-table__delete {
+    width: 60px;
+    max-width: 60px;
+    min-width: 60px;
+}
+
+.btn.btn-sm {
+    min-width: 24px;
+    width:24px;
+    height: 24px;
+    min-height: 24px;
+    padding:0 !important;
 }

@@ -24,6 +24,7 @@ import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for
 import { installationStatuses } from './const/const';
 import { CompanyNetworkScanService } from './services/company-network-scan.service';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-network-scan',
@@ -68,7 +69,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private agentService: AgentService,
     public cd: ChangeDetectorRef,
     private kafkaStateService: KafkaStateService,
-    private ngZone: NgZone) { }
+    private ngZone: NgZone,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.kafkaStateService.onNetworkScan.subscribe((resp) => {
@@ -120,44 +122,50 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     let data: any = {};
     data.AssetID = Id;
     data.MessageType = "NetworkScan";
+    this.showMinPreloader = true;
     this.agentService.SendNetworkCommand(data);
   }
 
   onNetworkScan(resp: any) {
     this.ngZone.run(() => {
       let data = JSON.parse(resp[0].Value);
-      let createdOn = data[0].CreatedOn;
-      this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
-      var asts = this.networkvalue.filter(x => x.OperatingSystem != 'Windows');
-      for (let i = 0; i < asts.length; i++) {
-        this.nonAgentAsset(this.networkvalue[i]);
-        this.networkvalue[i].ID = i + 1;
-        this.networkvalue[i].selected = false;
+      if (data && data.length > 0) {
+        let createdOn = data[0].CreatedOn;
+        this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
       }
+      else {
+        this.noExistDevices = true;
+      }
+      this.showMinPreloader = false;
     });
   }
 
-  nonAgentAsset(networkValue) {
+  public AddAsset(item: any) {
     let data: any = {};
     data.Guid = uuidv4();
     data.CompanyGuid = this.asset.CompanyGuid;
-    data.Name = networkValue.MacAddress;
+    data.Name = item.Title ? item.Title :  item.MacAddress;
     data.Tag = "";
-    data.Manufacturer = networkValue.Manufacturer;
+    data.Manufacturer = item.Manufacturer;
     data.Model = "";
     data.HardwareTypeID = "";
-    data.InternalIPAddress = networkValue.IP;
+    data.InternalIPAddress = item.IP;
     data.ExternalIPAddress = "";
     data.Location = "";
     data.Site = "";
     data.Description = "";
-    data.Title = networkValue.MacAddress;
-    console.log(JSON.stringify(data));
-    
+    data.Title = item.Title ? item.Title :  item.MacAddress;
+    item.Guid = data.Guid;
+
     this.agentService.nonAgentAsset(data).subscribe((result) => {
+      this.toastr.success("Device added!");
+      item.IsAgentInstalled =true;
+    },
+    error => {
+      this.toastr.error("Error adding device, please try again!");
     });
   }
-
+  
 
   checkCanInstallAgent() {
     return this.checkSelected() && this.networkScanInstallAgent.getCredential();
