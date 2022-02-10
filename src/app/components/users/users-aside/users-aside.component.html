@@ -23,7 +23,16 @@
                 ></div>
             </div>
             <div>
-                <div class="upload-photo__title">Upload your photo</div>
+                <div class="upload-photo__title">
+                    Upload your photo
+                    <span
+                        *ngIf="user.avatar"
+                        class="remove-link pointer"
+                        (click)="removeLogo()"
+                    >
+                        Remove logo
+                    </span>
+                </div>
                 <div class="upload-photo__subtitle">Maximum size of 2MB. JPG, GIF, PNG</div>
             </div>
             <input
