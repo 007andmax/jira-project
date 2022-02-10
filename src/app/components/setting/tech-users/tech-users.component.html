@@ -379,12 +379,12 @@
                 <img
                     src="/html/assets/img/upload-photo.svg"
                     alt="user"
-                    *ngIf="!fileAvatar"
+                    *ngIf="!croppedImage"
                 >
                 <img
                     [src]="croppedImage?.base64"
                     alt="user"
-                    *ngIf="fileAvatar"
+                    *ngIf="croppedImage"
                 >
             </span>
             <div class="dp-info">
@@ -409,8 +409,8 @@
                     </label>
                     <label
                         for="profile-dp"
-                        (click)="deleteAvatar()"
-                        *ngIf="selectedTechUser?.avatar?.updatedAt"
+                        (click)="deleteAttachment()"
+                        *ngIf="croppedImage"
                     >
                         <a
                             href="javascript:void(0)"

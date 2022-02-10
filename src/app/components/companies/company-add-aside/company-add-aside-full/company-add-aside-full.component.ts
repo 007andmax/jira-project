@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
@@ -24,7 +24,7 @@ import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-
   templateUrl: './company-add-aside-full.component.html',
   styleUrls: ['./company-add-aside-full.component.scss']
 })
-export class CompanyAddAsideFullComponent implements OnInit {
+export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
@@ -226,5 +226,8 @@ export class CompanyAddAsideFullComponent implements OnInit {
   }
   public onChangeDescription(event) {
     this.company.description = event.target.value;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

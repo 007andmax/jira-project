@@ -460,13 +460,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     event.target.value = '';
   }
 
-  /**
-   * image croped event
-   */
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event;
-  }
-
   cropIt() {
     this.isCroppedImg = false;
     let cropImage = {};
@@ -612,7 +605,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     } else {
     }
   }
-
+  deleteAttachment() {
+    this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+      this.croppedImage = null;
+    });
+  }
   /**
    * delete avatar
    */
