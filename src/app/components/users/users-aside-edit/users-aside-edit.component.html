@@ -25,7 +25,7 @@
             </div>
             <div>
                 <div class="upload-photo__title">
-                    Upload your photo
+                    <span (click)="uploadFile.click()">Upload your photo</span>
                     <span
                         *ngIf="user.avatar"
                         class="remove-link pointer"
@@ -37,6 +37,7 @@
                 <div class="upload-photo__subtitle">Maximum size of 2MB. JPG, GIF, PNG</div>
             </div>
             <input
+                #uploadFile
                 id="upload-file"
                 class="upload-photo__input pointer"
                 type="file"

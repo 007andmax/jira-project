@@ -23,7 +23,7 @@
                 ></i>
                 <div>
                     <div class="new-link">
-                        Upload Company logo
+                        <span (click)="uploadFile.click()">Upload Company logo</span>
                         <span
                             *ngIf="company.logo"
                             class="remove-link pointer"
@@ -34,6 +34,7 @@
                     </div>
                     <p>Maximum size of 2MB. JPG, GIF, PNG</p>
                     <input
+                        #uploadFile
                         id="upload-file"
                         type="file"
                         (input)="uploadFileOnBrower($event)"

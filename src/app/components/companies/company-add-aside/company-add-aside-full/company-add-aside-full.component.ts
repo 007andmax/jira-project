@@ -111,31 +111,9 @@ export class CompanyAddAsideFullComponent implements OnInit {
     })
   }
   public uploadFileOnBrower(event) {
-    if (event.target.value) {
-      const file = event.target.files[0];
-      this.uploadFile(file).then((data: any) => {
-        let res = JSON.parse(data.response);
-        this.idUploadFile = res.id;
-        this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64, res.id));
-        event.target.value = null;
-        this.cd.detectChanges();
-      });
-    }
-  }
-  uploadFile(file) {
-    return new Promise((resolve, reject) => {
-      var fd = new FormData();
-      fd.append("file", file);
-      var xhr = new XMLHttpRequest();
-      xhr.addEventListener("load", (event) => {
-        resolve(xhr);
-      }, false);
-      xhr.addEventListener("error", (error) => {
-        reject(error);
-      }, false);
-      xhr.open("POST", "/file?isAvatar=true&ratio=1");
-      xhr.send(fd);
-    });
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
