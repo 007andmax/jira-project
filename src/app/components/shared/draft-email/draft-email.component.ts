@@ -10,6 +10,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DraftEmailValidate } from './class/draft-email-validate';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -76,7 +77,18 @@ export class DraftEmailComponent implements OnInit {
 
   }
   onChangeFiles(ids) {
-    this.draftEmail.setAttachments(ids);
+    console.log("ids", ids);
+    if (this.draftEmail.attachments.length > ids.length) {
+      this.draftEmail.attachments.forEach(item => {
+        let find = ids.find(id => id === item);
+        if (!find) {
+          this.draftEmailService.removeAttachment(item).subscribe(data => {
+
+          })
+        }
+      })
+    }
+    this.draftEmail.setAttachments(JSON.parse(JSON.stringify(ids)));
   }
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
@@ -89,6 +101,13 @@ export class DraftEmailComponent implements OnInit {
   }
 
   close() {
+    if (this.draftEmail.attachments.length > 0) {
+      forkJoin(
+        this.draftEmail.attachments.map(item => this.draftEmailService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
     this.opened = false;
     this.draftEmail = new DraftEmail();
     this.tab = 'plain';
