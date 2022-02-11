@@ -9,6 +9,8 @@
     <div class="new-companies-content__modal--content">
 
 
+
+
         <draft-email-user-recipients
             [selectedClient]="selectedClient"
             [accountType]="accountType"
@@ -24,6 +26,8 @@
             </div>
 
 
+
+
         </div>
         <div
             class="col-md-12 editor-container"
@@ -32,16 +36,25 @@
             <!-- EDITOR -->
 
 
+
+
             <div style="position:relative;">
                 <angular-editor
                     *ngIf="tab == 'plain'"
                     [(ngModel)]="messageContent"
                     [config]="editorConfig"
                 ></angular-editor>
-                <!-- <div *ngIf="tab == 'plain'" class="editor-container-attachments">
-              <i class="icn-16 icn-text-attachment"></i>
-              <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
-            </div> -->
+                <div
+                    *ngIf="tab == 'plain'"
+                    class="editor-container-attachments"
+                >
+                    <i class="icn-16 icn-text-attachment"></i>
+                    <input
+                        id="upload-file-email"
+                        type="file"
+                        (input)="uploadFileOnBrower($event)"
+                    >
+                </div>
             </div>
             <div
                 *ngIf="tab == 'plain'"
@@ -56,12 +69,8 @@
                         [ngForTrackBy]="trackByIndex"
                     >
                         <li [ngStyle]="filesInfo.files[i].error && {'background-color': '#fff2f2'}">
-
-
                             <span class="file-name">{{ file.name }}</span>
                             <span class="file-size">{{ file.size }}</span>
-
-
                             <a
                                 href="javascript:void(0)"
                                 class="hit-area pull-right"
@@ -73,6 +82,8 @@
                             </a>
 
 
+
+
                             <span
                                 class="pull-right"
                                 *ngIf="filesInfo.files[i].error"
@@ -80,6 +91,8 @@
                             >
                                 {{ filesInfo.files[i].message }}
                             </span>
+
+
 
 
                             <a
@@ -95,6 +108,8 @@
                             >
                                 <i class="icn-sm icn-reupload"></i>
                             </a>
+
+
 
 
                             <div
@@ -113,6 +128,8 @@
                             </div>
 
 
+
+
                         </li>
                     </ng-template>
                 </ul>
@@ -121,7 +138,11 @@
 
 
 
+
+
         </div>
+
+
 
 
         <div class="col-md-12 new-companies-content__modal--content-footer">

@@ -11,6 +11,7 @@ import { ReportsService } from 'src/app/services/reports/reports.service';
 import { ReportEmail } from '../../class/report-email';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-report-send-email',
@@ -93,6 +94,11 @@ export class ReportSendEmailComponent implements OnInit {
 
 
   close() {
+    if (this.filesInfo.files.length > 0) forkJoin(
+      this.filesInfo.files.map(item => this.draftEmailService.removeAttachment(item.id))
+    ).subscribe(result => {
+
+    });
     this.draftEmail = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
@@ -178,6 +184,9 @@ export class ReportSendEmailComponent implements OnInit {
   removeAttachment(index) {
 
     this.uploadFiles.splice(index);
+    this.draftEmailService.removeAttachment(this.filesInfo.files[index].id).subscribe(data => {
+
+    })
     this.filesInfo.files.splice(index);
   };
   setDisableUplaodFile(value) {
