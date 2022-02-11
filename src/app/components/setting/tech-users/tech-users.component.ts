@@ -223,6 +223,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           this.IdList = users.map(({ id }) => id);
           if (techUsers) {
             this.techUsers = techUsers;
+            console.log("this.techUsers", this.techUsers);
             this.techUserIdList = techUsers.map(({ id }) => id);
             var IdList1 = [];
             if (this.techUserIdList) {
@@ -359,6 +360,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.edit = true;
 
     this.selectedTechUser = techUser;
+    console.log("this.selectedTechUser", this.selectedTechUser);
     if (techUser) {
       const notification = this.techUseremailNotificationList[techUser.id];
       this.techUserForm.patchValue({

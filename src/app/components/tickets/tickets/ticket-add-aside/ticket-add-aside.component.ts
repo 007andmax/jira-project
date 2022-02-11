@@ -17,10 +17,11 @@ import { AppService } from 'src/app/states/app/app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
 import { TehUsersComponent } from 'src/app/components/shared/teh-users/teh-users.component';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 
 
@@ -63,6 +64,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     public appService: AppService,
     private modalService: NgbModal,
     private ticketStateService: TicketStateService,
+    private companiesService: CompaniesService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesState: CompaniesStateService,) { }
 
@@ -111,6 +113,13 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
   }
   closed() {
+    if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > 0) {
+      forkJoin(
+        this.ticketAdd.attachFileIds.map(item => this.companiesService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
     this.ticketAdd = new TicketAdd();
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
@@ -269,7 +278,17 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.ticketValidate.resetSubject();
   }
   onChangeFiles(ids) {
-    this.ticketAdd.setAttachFileIds(ids);
+    if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > ids.length) {
+      this.ticketAdd.attachFileIds.forEach(item => {
+        let find = ids.find(id => id === item);
+        if (!find) {
+          this.companiesService.removeAttachment(item).subscribe(data => {
+
+          })
+        }
+      })
+    }
+    this.ticketAdd.setAttachFileIds(JSON.parse(JSON.stringify(ids)));
   }
   onChangeShareUsers(data) {
     let shareUsersList = JSON.parse(JSON.stringify(this.shareUsersList));

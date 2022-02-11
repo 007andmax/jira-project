@@ -115,7 +115,36 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
           };
           //self.codox.init(config);
         },
-
+        'image.removed': function ($img) {
+          // Do something here.
+          // this is the editor instance.
+          console.log("image.removed", $img);
+          console.log(this);
+        },
+        'imageManager.imageDeleted': function (data) {
+          // Do something here.
+          // this is the editor instance.
+          console.log("imageManager.imageDeleted", data);
+          console.log(this);
+        },
+        'embedly.beforeRemove': function (embeded) {
+          // Do something here.
+          // this is the editor instance.
+          console.log("embedly.beforeRemove", embeded);
+          console.log(this);
+        },
+        'imageManager.beforeDeleteImage': function ($img) {
+          // Do something here.
+          // this is the editor instance.
+          console.log("imageManager.beforeDeleteImage", $img);
+          console.log(this);
+        },
+        'file.unlink': function (link) {
+          // Do something here.
+          // this is the editor instance.
+          console.log("file.unlink", link);
+          console.log(this);
+        },
         'image.uploaded': function ($img) {
           // Do something here.
           // this is the editor instance.
