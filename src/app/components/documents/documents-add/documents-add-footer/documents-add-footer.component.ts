@@ -80,7 +80,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
     console.log("removedAttachmentsIds", removedAttachmentsIds);
-
+    this.documentAdd = null;
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -106,9 +106,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     console.log("oldAttachments", oldAttachments);
     console.log("newAttachments", newAttachments);
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-    this.documentEdit.setContent(null);
-    this.documentEdit.setNewContent(null);
-    this.attachments = [];
+    this.documentEdit = null;
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -153,6 +151,27 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
         .subscribe(res => {
         });
     }
-    if (this.documentEdit) this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
+    if (this.documentEdit) {
+      var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+      let newAttachments = [];
+      let removedAttachments = [];
+      if (this.documentEdit.newContent) this.documentEdit.newContent.replace(urlRegex, function (url) {
+        newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+        return url;
+      });
+      this.attachments.forEach(item => {
+        if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+      })
+      console.log("this.attachments", this.attachments);
+      console.log("newAttachments", newAttachments);
+      console.log("removedAttachments", removedAttachments);
+      let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+
+      forkJoin(
+        [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+      )
+        .subscribe(res => {
+        });
+    }
   }
 }
