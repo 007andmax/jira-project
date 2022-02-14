@@ -41,13 +41,13 @@ export class DocumentsAddFooterComponent implements OnInit {
     if (this.templateId) {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
-        this.checkAttachments("", this.documentAdd.content);
+        this.checkAddAttachments(this.documentAdd.content);
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
-        this.checkAttachments("", this.documentAdd.content);
+        this.checkAddAttachments(this.documentAdd.content);
         this.goToDocumentsList();
       })
     }
@@ -61,6 +61,28 @@ export class DocumentsAddFooterComponent implements OnInit {
       this.toastrService.success("The new template been successfully created");
       this.appStateService.changeDetectorRef();
     }
+  }
+  checkAddAttachments(content) {
+    let contentAttachments = [];
+
+    let removedAttachments = [];
+    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+    content.replace(urlRegex, function (url) {
+      contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      return url;
+    });
+    console.log("contentAttachments", contentAttachments);
+    console.log("this.attachments", this.attachments);
+
+    /* this.attachments.forEach(item => {
+       if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+     })
+     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+     forkJoin(
+       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+     )
+       .subscribe(res => {
+       });*/
   }
   checkAttachments(content, newContent) {
     let oldAttachments = this.attachments;
