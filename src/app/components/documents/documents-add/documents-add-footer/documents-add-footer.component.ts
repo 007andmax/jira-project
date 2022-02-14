@@ -80,8 +80,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
     console.log("removedAttachmentsIds", removedAttachmentsIds);
-    this.documentAdd.setContent(null);
-    this.attachments = [];
+
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -104,6 +103,8 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     oldAttachments.forEach(item => {
       if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
+    console.log("oldAttachments", oldAttachments);
+    console.log("newAttachments", newAttachments);
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
     this.documentEdit.setContent(null);
     this.documentEdit.setNewContent(null);
@@ -143,7 +144,15 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
 
-    if (this.documentAdd) this.checkAddAttachments(this.documentAdd.content);
+    if (this.documentAdd) {
+      let removedAttachmentsIds = this.attachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+      console.log("removedAttachmentsIds", removedAttachmentsIds);
+      forkJoin(
+        [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+      )
+        .subscribe(res => {
+        });
+    }
     if (this.documentEdit) this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
   }
 }
