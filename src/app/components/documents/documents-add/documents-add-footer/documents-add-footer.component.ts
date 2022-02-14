@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
@@ -17,7 +17,7 @@ import { DocumentValidate } from '../class/document-validate';
   templateUrl: './documents-add-footer.component.html',
   styleUrls: ['./documents-add-footer.component.scss']
 })
-export class DocumentsAddFooterComponent implements OnInit {
+export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   @Input() requiredCompanyType: boolean;
   @Input() documentAdd: DocumentAdd;
   @Input() documentEdit: Document;
@@ -33,6 +33,7 @@ export class DocumentsAddFooterComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private router: Router,) { }
 
+
   ngOnInit() {
   }
   add(documentType) {
@@ -42,12 +43,14 @@ export class DocumentsAddFooterComponent implements OnInit {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
         this.checkAddAttachments(this.documentAdd.content);
+        this.documentAdd.setContent(null);
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
         this.checkAddAttachments(this.documentAdd.content);
+        this.documentAdd.setContent(null);
         this.goToDocumentsList();
       })
     }
@@ -128,10 +131,17 @@ export class DocumentsAddFooterComponent implements OnInit {
         this.appStateService.changeDetectorRef();
       }
       this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
+      this.documentEdit.setContent(null);
+      this.documentEdit.setNewContent(null);
       this.goToDocumentsList();
     })
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+
+    if (this.documentAdd) this.checkAddAttachments(this.documentAdd.content);
+    if (this.documentEdit) this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
   }
 }
