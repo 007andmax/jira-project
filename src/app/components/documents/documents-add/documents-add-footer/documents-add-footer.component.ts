@@ -78,6 +78,7 @@ export class DocumentsAddFooterComponent implements OnInit {
       if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    console.log("removedAttachmentsIds", removedAttachmentsIds);
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
