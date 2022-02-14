@@ -167,8 +167,10 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
 
         return url;
       });
-      allAttachments = [...new Set(...allAttachments, ...newAttachments, ...oldAttachments)];
-
+      allAttachments = [...allAttachments, ...newAttachments, ...oldAttachments];
+      allAttachments = allAttachments.filter((element, index) => {
+        return allAttachments.indexOf(element) === index;
+      });
       allAttachments.forEach(item => {
         if (!oldAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
       })
