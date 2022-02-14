@@ -43,14 +43,12 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
         this.checkAddAttachments(this.documentAdd.content);
-        this.documentAdd.setContent(null);
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
         this.checkAddAttachments(this.documentAdd.content);
-        this.documentAdd.setContent(null);
         this.goToDocumentsList();
       })
     }
@@ -70,7 +68,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
 
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    content.replace(urlRegex, function (url) {
+    if (content) content.replace(urlRegex, function (url) {
       contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
@@ -82,6 +80,8 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
     console.log("removedAttachmentsIds", removedAttachmentsIds);
+    this.documentAdd.setContent(null);
+    this.attachments = [];
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -93,11 +93,11 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     let newAttachments = [];
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    content.replace(urlRegex, function (url) {
+    if (content) content.replace(urlRegex, function (url) {
       oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
-    newContent.replace(urlRegex, function (url) {
+    if (newContent) newContent.replace(urlRegex, function (url) {
       newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
@@ -105,6 +105,9 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    this.documentEdit.setContent(null);
+    this.documentEdit.setNewContent(null);
+    this.attachments = [];
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -131,8 +134,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
         this.appStateService.changeDetectorRef();
       }
       this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
-      this.documentEdit.setContent(null);
-      this.documentEdit.setNewContent(null);
+
       this.goToDocumentsList();
     })
   }
