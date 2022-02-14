@@ -74,15 +74,15 @@ export class DocumentsAddFooterComponent implements OnInit {
     console.log("contentAttachments", contentAttachments);
     console.log("this.attachments", this.attachments);
 
-    /* this.attachments.forEach(item => {
-       if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-     })
-     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-     forkJoin(
-       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
-     )
-       .subscribe(res => {
-       });*/
+    this.attachments.forEach(item => {
+      if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+    })
+    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    forkJoin(
+      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+    )
+      .subscribe(res => {
+      });
   }
   checkAttachments(content, newContent) {
     let oldAttachments = this.attachments;
