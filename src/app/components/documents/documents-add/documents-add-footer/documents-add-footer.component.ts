@@ -169,7 +169,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       });
       allAttachments = [...allAttachments, ...newAttachments, ...oldAttachments];
       allAttachments.forEach(item => {
-        if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+        if (!oldAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
       })
       console.log("allAttachments", allAttachments);
       console.log("newAttachments", newAttachments);
