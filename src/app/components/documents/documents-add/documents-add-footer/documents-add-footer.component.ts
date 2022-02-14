@@ -154,15 +154,24 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     if (this.documentEdit) {
       var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
       let newAttachments = [];
+      let allAttachments = this.attachments;
+      let oldAttachments = [];
       let removedAttachments = [];
-      if (this.documentEdit.newContent) this.documentEdit.newContent.replace(urlRegex, function (url) {
-        newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      if (this.documentEdit.content) this.documentEdit.content.replace(urlRegex, function (url) {
+        oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+
         return url;
       });
-      this.attachments.forEach(item => {
+      if (this.documentEdit.newContent) this.documentEdit.newContent.replace(urlRegex, function (url) {
+        newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+
+        return url;
+      });
+      allAttachments = [...allAttachments, ...newAttachments, ...oldAttachments];
+      allAttachments.forEach(item => {
         if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
       })
-      console.log("this.attachments", this.attachments);
+      console.log("allAttachments", allAttachments);
       console.log("newAttachments", newAttachments);
       console.log("removedAttachments", removedAttachments);
       let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
