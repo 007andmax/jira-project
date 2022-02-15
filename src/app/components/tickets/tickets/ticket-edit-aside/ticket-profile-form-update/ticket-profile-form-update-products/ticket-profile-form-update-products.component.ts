@@ -72,17 +72,20 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
   public onChangeProduct(item, i) {
     this.addedProductList[i].setData(item, this.getItemOrger());
     this.addedProductList[i].valdiateSaleCost = true;
+    console.log("this.addedProductList[i]", this.addedProductList[i]);
   }
   public selectProduct(item) {
+
     if (item) this.currentProduct.setData(item, this.getItemOrger());
     if (!item) this.currentProduct = new TicketProfileFormProduct();
     this.currentProduct.valdiateSaleCost = true;
+    console.log("this.currentProduct", this.currentProduct);
   }
   public addProduct() {
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.currentProduct = new TicketProfileFormProduct();
     this.productDP.clear();
-
+    console.log("this.addedProductList", this.addedProductList);
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
@@ -119,7 +122,9 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     return ((find) ? false : true) && this.currentProduct.valdiateSaleCost;
   }
   public getSelectedProducts() {
-    return (this.currentProduct.item.versionedId) ? [...this.addedProductList, this.currentProduct] : this.addedProductList;
+    console.log("this.currentProduct", this.currentProduct);
+    console.log("this.addedProductList", this.addedProductList);
+    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
