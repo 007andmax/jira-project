@@ -79,7 +79,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     this.currentProduct.valdiateSaleCost = true;
   }
   public addProduct() {
-    this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.currentProduct = new TicketProfileFormProduct();
     this.productDP.clear();
 
