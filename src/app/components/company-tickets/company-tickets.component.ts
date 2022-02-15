@@ -59,7 +59,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onColorStatus(listColors);
     })
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
-      if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
+      if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
       }
     })
