@@ -26,7 +26,7 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
     })
   }
   getCountUsers() {
-    return this.message.recipientsFromSystem.length + this.message.otherRecipients.length;
+    return (this.message) ? this.message.recipientsFromSystem.length + this.message.otherRecipients.length : '';
   }
   getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '';
