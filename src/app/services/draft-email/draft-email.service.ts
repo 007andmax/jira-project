@@ -17,7 +17,9 @@ export class DraftEmailService {
     private http: HttpClient
   ) { }
 
-
+  public removeAttachment(id) {
+    return this.http.delete(this.apiUrl + `file/${id}`);
+  }
   public sendMessage(message) {
     return this.http.post(this.apiUrl + `email/customEmail`, message);
   }

@@ -1,8 +1,7 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .attachment-component {
   padding: 0 32px;
-  margin-bottom: 16px;
 
   @media (max-width: 767px) {
     padding: 0 16px;
@@ -11,6 +10,7 @@
   .attached-files-container {
     display: flex;
     flex-wrap: wrap;
+    margin-top: -8px;
 
     @media (max-width: 767px) {
       display: flex !important;
@@ -29,21 +29,23 @@
     display: flex;
     align-items: center;
     position: relative;
-    margin-bottom: 8px;
+    margin-top: 8px;
     font-size: 12px;
 
     p {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
     }
 
     &__header {
       border-bottom: 1px solid $gray-400;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
+      padding-bottom: 14px;
 
       @media (max-width: 767px) {
         border: none;
@@ -57,7 +59,7 @@
       font-size: 10px;
       color: $primary-2;
       line-height: 12px;
-  }
+    }
 
     &__show-hide-btn {
       width: 32px;
@@ -67,14 +69,12 @@
       border-radius: 50%;
       background-position: center;
       background-repeat: no-repeat;
-      margin-bottom: 8px;
-      background-image: url('/assets/img/icons/download.svg');
+      background-image: url("/assets/img/icons/download.svg");
 
       @media (max-width: 767px) {
         display: none;
       }
     }
-
 
     &__type {
       margin-right: 6px;
@@ -98,7 +98,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-image: url('/assets/img/icons/download-blue.svg');
+      background-image: url("/assets/img/icons/download-blue.svg");
       background-size: 20px;
       background-repeat: no-repeat;
       cursor: pointer;
@@ -129,7 +129,8 @@
         }
       }
     }
-    &.image\/jpg, &.image\/jpeg {
+    &.image\/jpg,
+    &.image\/jpeg {
       .attachment-item {
         &__type {
           background: $secondary-3;
@@ -158,6 +159,4 @@
       }
     }
   }
-
 }
-

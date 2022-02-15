@@ -45,4 +45,10 @@
         class="loading"
         *ngIf="showPreloader"
     ></div>
+    <div
+        class="no-exist-tickets"
+        *ngIf="!showPreloader && tickets.length === 0"
+    >
+        No tickets
+    </div>
 </div>
