@@ -49,6 +49,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   industries: Array<CrmCompanyIndustry> = [];
+  idUploadFile: string;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
@@ -65,6 +66,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     private tagsState: CompanyTagsStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     private crmStateService: CrmStateService,
+    private companiesService: CompaniesService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -115,19 +117,38 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetJobType);
   }
+  removeLogo() {
+    this.usersService.removeAvatar(this.user.id).subscribe(data => {
+      this.user.editLogo(null);
+    })
+  }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
-      this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
-        this.usersStateService.getuserForEdit().id, (data.edit) ? this.user.avatar.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
-          this.user.editLogo(res);
-        })
+      if (this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
+      if (this.opened && !data) {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+
+        });
+      }
+      if (!this.opened || !data) return;
+      if (this.user.avatar) this.usersService.removeAvatar(this.user.id).subscribe(res => {
+        this.editUserAvatar(data);
+      })
+      if (!this.user.avatar) this.editUserAvatar(data);
+
+
     })
     this.usersAsideService.addSubscription(getConfirm);
+  }
+  editUserAvatar(data) {
+    this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
+      this.usersStateService.getuserForEdit().id, (data.edit) ? this.user.avatar.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
+        this.user.editLogo(res);
+      })
   }
   onChangeDefaultSubscriptions(data) {
     this.user.setDefaultSubscriptions(data);
@@ -181,7 +202,9 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
   uploadFileOnBrower(event) {
     this.imageCropperStateService.setAction(CROPP_AVATAR_USER);
-    this.imageCropperStateService.uploadFileOnBrower(event);
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   public onSelectCompany(selectClient) {
     this.selectedCompany = selectClient;

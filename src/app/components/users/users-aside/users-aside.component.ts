@@ -22,6 +22,7 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { Company } from 'src/app/interfaces/company/company';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'app-users-aside',
@@ -41,6 +42,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   industries: Array<CrmCompanyIndustry> = [];
+  idUploadFile: string;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   selectedCompany: Company;
@@ -53,6 +55,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     public cd: ChangeDetectorRef,
+    private companiesService: CompaniesService,
     private crmStateService: CrmStateService,
     private modalService: NgbModal,) { }
 
@@ -102,15 +105,13 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
+      if (!this.opened || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
+      if (data && this.user.avatar) this.companiesService.removeAttachment(this.user.avatar.origin.id).subscribe(res => {
 
-
-      if (data.edit) {
-        //  this.company.editLogo(data);
-      } else {
-        this.user.setLogo(data);
-      }
-
+      });
+      if (data) this.user.setLogo(data);
+      if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+      });
     })
     this.usersAsideService.addSubscription(getConfirm);
   }
@@ -156,7 +157,9 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   uploadFileOnBrower(event) {
     this.imageCropperStateService.setAction(CROPP_AVATAR_USER);
-    this.imageCropperStateService.uploadFileOnBrower(event);
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   public onSelectCompany(selectClient) {
     this.selectedCompany = selectClient;
@@ -164,6 +167,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
 
+  }
+  removeLogo() {
+    this.companiesService.removeAttachment(this.user.avatar.origin.id).subscribe(data => {
+      this.user.editLogo(null);
+    })
   }
   onAdd() {
     if (!this.validate.isValidate(this.user)) return;

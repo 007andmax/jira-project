@@ -11,7 +11,7 @@ import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { SupportService } from 'src/app/services/support/support.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
 import { DraftEmailService } from 'src/app/services/draft-email/draft-email.service';
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
@@ -22,6 +22,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -69,6 +70,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     public draftEmailService: DraftEmailService,
     public ticketStateService: TicketStateService,
     public appService: AppService,
+    private companiesService: CompaniesService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
     public ticketsListService: TicketsListService) { }
 
@@ -368,6 +370,9 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
   deleteFile(index: number) {
+    this.companiesService.removeAttachment(this.ticketProfileFormUpdate.attachments[index].file.id).subscribe(data => {
+
+    })
     this.files.splice(index, 1);
     this.ticketProfileFormUpdate.removeFile(index);
   }
@@ -376,7 +381,17 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.remoteSession = null;
     })
   }
+  removeAllAttachments() {
+    if (this.ticketProfileFormUpdate.attachments.length > 0) {
+      forkJoin(
+        this.ticketProfileFormUpdate.attachments.map(item => this.companiesService.removeAttachment(item.file.id))
+      ).subscribe(result => {
+
+      });
+    }
+  }
   ngOnDestroy(): void {
+
     this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {

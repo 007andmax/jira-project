@@ -24,6 +24,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 declare var google: any;
 declare var $: any;
@@ -93,6 +94,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   public searchElementRef: ElementRef;
   sub: Subscription = new Subscription();
   phone: string;
+  idUploadFile: string;
   constructor(
     private companyProfileService: CompanyProfileService,
     private toaster: ToastrService,
@@ -103,6 +105,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private imageCropperStateService: ImageCropperStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
+    private companiesService: CompaniesService,
     private ngZone: NgZone
   ) { }
 
@@ -141,7 +144,18 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (data) {
         this.croppedImage = data.croppedImage;
-        this.cropIt();
+        if (this.imageSrc != '') this.companyProfileService
+          .removeAvatar(this.currentCompany.id)
+          .subscribe(res => {
+            this.cropIt();
+          })
+        if (this.imageSrc == '') this.cropIt();
+
+
+      } else {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+
+        });
       }
     })
     this.sub.add(getConfirm);
@@ -493,11 +507,14 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.loading = false; $(".loading").css("display", "none");
           if (result) {
             this.fileAvatar = result;
+            this.idUploadFile = result.id;
             this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
+            event.target.value = null;
           }
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
+          event.target.value = null;
         }
       );
     }
@@ -522,12 +539,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   deleteAvatar() {
     this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
-      .removeAvatar(this.currentCompany.id, true)
+      .removeAvatar(this.currentCompany.id)
       .subscribe(
         res => {
           this.toaster.success('Avatar Deleted Successfully', null, {
             timeOut: 3000
           });
+          this.imageSrc = '';
           this.getCompanyProfile();
           this.basic();
         },

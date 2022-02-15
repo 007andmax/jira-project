@@ -13,7 +13,7 @@ import { CompanyTimeZoneStateService } from '../company-time-zone/services/compa
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
-import { CROPP_AVATAR_COMPANY } from 'src/app/const/image-cropp';
+import { CROPP_AVATAR_COMPANY, EDIT_AVATAR_COMPANY } from 'src/app/const/image-cropp';
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../class/company-edit-logo';
@@ -57,6 +57,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   locationIsinit: boolean = false;
   selectedJobTitle: CrmCompanyJobTitle;
+  idUploadFile: string;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
@@ -115,7 +116,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.onEditCompany();
   }
 
-
+  removeLogo() {
+    this.companiesService.removeAvatar(this.company.id).subscribe(data => {
+      this.company.editLogo(null);
+    })
+  }
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);
     if (index > -1) return this.paymentMethods[index];
@@ -304,16 +309,33 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_COMPANY) return;
-      this.companiesService.editCompanyAvatar(this.company.id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
-        this.company.id, (data.edit) ? this.company.logo.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
-          this.company.editLogo(res);
-        })
+      if (this.imageCropperStateService.getAction() === EDIT_AVATAR_COMPANY) {
+        if (this.opened && data) this.editCompanyAvatar(data);
+        return;
+      }
+      if (this.opened && !data) {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+
+        });
+      }
+      if (!this.opened || !data) return;
+      if (this.company.logo) this.companiesService.removeAvatar(this.company.id).subscribe(res => {
+        this.editCompanyAvatar(data);
+      })
+      if (!this.company.logo) this.editCompanyAvatar(data);
+
     })
     this.sub.add(getConfirm);
   }
+  editCompanyAvatar(data) {
+    this.companiesService.editCompanyAvatar(this.company.id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
+      this.company.id, (data.edit) ? this.company.logo.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
+        this.company.editLogo(res);
+      })
+  }
   public onChangeAvatar() {
     this.downloadCompanyLogo().then(data => {
+      this.imageCropperStateService.setAction(EDIT_AVATAR_COMPANY);
       this.modalImageCropperStateService.onInitOpen(new ImageCroper(data, this.company.logo.origin.id, true));
       this.cd.detectChanges();
     })
@@ -380,7 +402,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   };
   public uploadFileOnBrower(event) {
     this.imageCropperStateService.setAction(CROPP_AVATAR_COMPANY);
-    this.imageCropperStateService.uploadFileOnBrower(event);
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   changeFile(file) {
     return new Promise((resolve, reject) => {
