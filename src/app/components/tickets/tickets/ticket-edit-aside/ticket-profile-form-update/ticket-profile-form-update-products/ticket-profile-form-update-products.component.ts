@@ -124,7 +124,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
   public getSelectedProducts() {
     console.log("this.currentProduct", this.currentProduct);
     console.log("this.addedProductList", this.addedProductList);
-    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList;
+    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
