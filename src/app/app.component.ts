@@ -157,8 +157,10 @@ export class AppComponent implements OnInit {
       }
     })
     this.usersStateService.onChangeUserPermissions.subscribe(data => {
-      this.usersStateService.changeUserPermissions(data);
-      this.cd.detectChanges();
+      if (this.companiesState.getCurrentCompany().id === data.company.id) {
+        this.usersStateService.changeUserPermissions(data.permissions);
+        this.cd.detectChanges();
+      }
     })
     this.appStateService.onChangeDetectorRef.subscribe(data => {
       setTimeout(() => {
