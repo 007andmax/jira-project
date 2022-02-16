@@ -180,6 +180,7 @@ export class DraftEmailComponent implements OnInit {
     this.addBtn.setDisabled(true);
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
       this.addBtn.setDisabled(false);
+      this.draftEmail.setAttachments([]);
       this.close();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
