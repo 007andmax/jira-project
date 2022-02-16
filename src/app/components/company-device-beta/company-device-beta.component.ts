@@ -137,7 +137,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   AssetDetail() {
     this.operatingSystem = [];
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
-      debugger;
       this.assetList = resp;
       this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.assetList.forEach((element, index) => {

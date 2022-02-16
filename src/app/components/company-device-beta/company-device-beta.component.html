@@ -211,7 +211,7 @@
                                   class="company-devices-table__ip-windows-text"
                                   [textContent]="asset.Caption"
                               ></span>
-                              <div class="company-devices-table__system-network-buttons">
+                              <div class="company-devices-table__system-network-buttons" *ngIf="asset.AgentVersion == '' ? false : true">
                                   <div
                                       class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                                       (click)="openAside('SYSTEM',asset)"
@@ -228,7 +228,7 @@
                                   </div>
                               </div>
                           </td>
-                            <td class="company-devices-table__ip-address">
+                            <td class="company-devices-table__ip-address" *ngIf="asset.AgentVersion == '' ? false : true">
                               <span
                                   class="qt-pl-30 company-devices-table__ip-address-text"
                                   [textContent]="asset.InternalIPAddress"
