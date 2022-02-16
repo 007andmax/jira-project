@@ -33,7 +33,7 @@
                 <a *ngIf="asset && asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="openModal(template)">
                     Remote Control
                 </a>
-                <a *ngIf="asset && !asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="sendCommand('ira',asset.ID)">
+                <a *ngIf="asset && !asset.CanRemoteControl && isNonAgentDevice" href="javascript:;" class="head-btn" (click)="sendCommand('ira',asset.ID)">
                     Install Remote Control Agent
                 </a>
                 <a *ngIf="asset && asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="sendCommand('ura',asset.ID)">
@@ -50,16 +50,16 @@
                         alt="Tempararyrestart"
                     >
                 </a> -->
-                <a href="javascript:;" (click)="sendCommand('r',asset.ID)" class="head-btn-info btn-refresh" title="Restart" [attr.data-tooltip]="'Restart'">
+                <a href="javascript:;" (click)="sendCommand('r',asset.ID)" class="head-btn-info btn-refresh" title="Restart" [attr.data-tooltip]="'Restart'" *ngIf="isNonAgentDevice">
                     <img src="/html/assets/img/device/restart.svg" alt="restart">
                 </a>
-                <a href="javascript:;" (click)="sendCommand('s',asset.ID)" class="head-btn-info btn-shutDown" title="Shutdown">
+                <a href="javascript:;" (click)="sendCommand('s',asset.ID)" class="head-btn-info btn-shutDown" title="Shutdown" *ngIf="isNonAgentDevice">
                     <img src="/html/assets/img/device/shutdown.svg" alt="shutdown">
                 </a>
-                <a href="javascript:;" (click)="sendCommand('u',asset.ID)" class="sub-head-counter" title="Update Agent">
+                <a href="javascript:;" (click)="sendCommand('u',asset.ID)" class="sub-head-counter" title="Update Agent" *ngIf="isNonAgentDevice">
                     <img src="/assets/img/device/install-gray.svg" alt="update agent">
                 </a>
-                <a href="javascript:;" (click)="sendCommand('d',asset.ID)" class="sub-head-counter" title="Uninstall Agent">
+                <a href="javascript:;" (click)="sendCommand('d',asset.ID)" class="sub-head-counter" title="Uninstall Agent" *ngIf="isNonAgentDevice">
                     <img src="/assets/img/device/remove-remote-agent-gray.svg" alt="uninstall agent">
                 </a>
             </div>

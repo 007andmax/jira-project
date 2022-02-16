@@ -39,7 +39,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled" *ngIf="isNonAgentDevice">
                                     <li>
                                         <span>Host Name</span>
                                         <span
@@ -174,10 +174,103 @@
                                       </div>
                                     </li>
                                 </ul>
+
+                                <ul class="list-unstyled" *ngIf="!isNonAgentDevice">
+                                  <li>
+                                      <span>Host Name</span>
+                                      <span
+                                          class="edit-field"
+                                          [attr.data-tooltip]="tooltip(20,asset.Name)"
+                                      >
+                                          <div>{{ displayValue(20,asset.Name) }}</div>
+                                      </span>
+                                  </li>
+                                  <li style="width:28%">
+                                      <span>Warranty Date</span>
+                                      <span class="edit-field">
+                                          <input
+                                              type="text"
+                                              class="form-control sub-label-field"
+                                              [(ngModel)]="asset.WarrantyExpires"
+                                              ngbDatepicker
+                                              #expire="ngbDatepicker"
+                                              (click)="expire.toggle()"
+                                              (dateSelect)="updateAsset()"
+                                          >
+                                      </span>
+                                  </li>
+                                  <li style="width:37%">
+                                    <span>Manufacturer</span>
+                                    <span class="edit-field">
+                                        <input
+                                            type="text"
+                                            class="form-control sub-label-field"
+                                            [(ngModel)]="asset.Manufacturer"
+                                            (blur)="updateAsset()"
+                                        >
+                                    </span>
+                                </li>
+                                <li>
+                                  <span>Site</span>
+                                  <span class="edit-field">
+                                      <input
+                                          type="text"
+                                          class="form-control sub-label-field"
+                                          [(ngModel)]="asset.Site"
+                                          (blur)="updateAsset()"
+                                      >
+                                  </span>
+                              </li>
+                                <li style="width:28%">
+                                  <span>Deployment Date</span>
+                                  <span class="edit-field">
+                                      <input
+                                          type="text"
+                                          class="form-control sub-label-field"
+                                          [(ngModel)]="asset.DeploymentDate"
+                                          ngbDatepicker
+                                          #deploy="ngbDatepicker"
+                                          (click)="deploy.toggle()"
+                                          (dateSelect)="updateAsset()"
+                                      >
+                                  </span>
+                              </li>
+                              <li style="width:28%">
+                                <span>Install Date</span>
+                                <span class="edit-field">
+                                    <input
+                                        type="text"
+                                        class="form-control sub-label-field"
+                                        [(ngModel)]="asset.InstallDate"
+                                        ngbDatepicker
+                                        #install="ngbDatepicker"
+                                        (click)="install.toggle()"
+                                        (dateSelect)="updateAsset()"
+                                    >
+                                </span>
+                            </li>
+                                <li>
+                                    <span>Asset Tag</span>
+                                    <span class="edit-field">
+                                        <input
+                                            type="text"
+                                            class="form-control sub-label-field"
+                                            [(ngModel)]="asset.Tag"
+                                            (blur)="updateAsset()"
+                                        >
+                                    </span>
+                                </li>
+                                <li style="width:28%">
+                                  <span>Last Reboot</span>
+                                  <div>
+                                      {{ asset.LastRebootDate | date: DateTimeFormat }}
+                                  </div>
+                              </li>
+                              </ul>
                             </div>
                         </div>
                         <div class="dashboard-row auto-marging">
-                            <div class="dashboard-col col-50 disk-drive">
+                            <div class="dashboard-col col-50 disk-drive" *ngIf="isNonAgentDevice">
                                 <h2>Disk Drives</h2>
                                 <ul class="list-unstyled">
                                     <li
@@ -236,7 +329,7 @@
                                   <span class="msg">{{'No Disk'}}</span>
                                 </div>
                             </div>
-                            <div class="dashboard-col col-50 services">
+                            <div class="dashboard-col col-50 services" *ngIf="isNonAgentDevice">
                                 <h2>Services</h2>
                                 <ul class="list-unstyled">
                                     <li [ngClass]="
@@ -615,7 +708,6 @@
               <tr *ngIf="windowUpdatePendingList.length<=0 ? false: true">
                 <th class="tableth"></th>
                 <th class="title">Description</th>
-                <!-- <th  class="title">Reboot</th> -->
                 <th class="product">Product</th>
                 <th class="product">Class</th>
                 <th class="product">Size</th>
@@ -635,7 +727,6 @@
                     <td class="tablespace">{{data.Product}}</td>
                     <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
                     <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
-                    <!-- <td class="tablespace">{{data.RebootIsRequired}}</td> -->
                 </tr>
                 <tr *ngIf="windowUpdatePendingList.length<=0">
                     <td class="missing">No missing Updates</td>

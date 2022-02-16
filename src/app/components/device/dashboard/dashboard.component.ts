@@ -73,6 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isOverlay = false;
   installUpdateModal: NgbModalRef;
   categoriesName: string = "";
+  isNonAgentDevice:boolean;
 
   constructor(
     private agentService: AgentService,
@@ -90,6 +91,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isNonAgentDevice = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
 
@@ -184,6 +186,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         if (this.minDate(this.asset.LastRebootDate)) {
           this.asset.LastRebootDate = "";
+        }
+
+        if(this.asset.AgentVersion == ""){
+          this.isNonAgentDevice = false;
         }
 
         this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);

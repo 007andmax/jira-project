@@ -47,6 +47,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   TemporaryCommand: string = "";
   assetId: number;
   currentCommand: string;
+  isNonAgentDevice:boolean;
 
   constructor(
     private modalService: NgbModal,
@@ -73,6 +74,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isNonAgentDevice = true;
     this.setPreviewDataDevice();
     this.type =
       window.location.href.split("/")[
@@ -123,6 +125,10 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
           this.deviceName = resp[0].Name;
           this.asset = resp[0];
+
+          if(resp[0].AgentVersion == ""){
+            this.isNonAgentDevice = false;
+          }
         });
       });
   }
