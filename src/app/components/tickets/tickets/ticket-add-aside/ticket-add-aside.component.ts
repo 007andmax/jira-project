@@ -103,6 +103,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.addBtn.setDisabled(true);
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
         this.addBtn.setDisabled(false);
+        this.ticketAdd.setAttachFileIds(null);
         this.closed();
       }, error => {
         this.addBtn.setDisabled(false);
