@@ -40,10 +40,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setListType(this.ticketsStateService.getListType());
     /* END */
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
-      console.log("data", data);
-      console.log("this.tickets.find(item => item.id == data.id)", this.tickets.find(item => item.id == data.id));
-      console.log("this.page_number", this.page_number);
-      console.log("this.showPreloader", this.showPreloader);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
         this.cd.detectChanges();

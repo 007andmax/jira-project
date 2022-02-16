@@ -65,21 +65,16 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   }
   checkAddAttachments(content) {
     let contentAttachments = [];
-
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
     if (content) content.replace(urlRegex, function (url) {
       contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
-    console.log("contentAttachments", contentAttachments);
-    console.log("this.attachments", this.attachments);
-
     this.attachments.forEach(item => {
       if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-    console.log("removedAttachmentsIds", removedAttachmentsIds);
     this.documentAdd = null;
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
@@ -103,8 +98,6 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     oldAttachments.forEach(item => {
       if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
-    console.log("oldAttachments", oldAttachments);
-    console.log("newAttachments", newAttachments);
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
     this.documentEdit = null;
     forkJoin(
@@ -141,10 +134,8 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
     return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
-
     if (this.documentAdd) {
       let removedAttachmentsIds = this.attachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-      console.log("removedAttachmentsIds", removedAttachmentsIds);
       forkJoin(
         [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
       )
@@ -164,7 +155,6 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       });
       if (this.documentEdit.newContent) this.documentEdit.newContent.replace(urlRegex, function (url) {
         newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
-
         return url;
       });
       allAttachments = [...allAttachments, ...newAttachments, ...oldAttachments];
@@ -174,11 +164,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       allAttachments.forEach(item => {
         if (!oldAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
       })
-      console.log("allAttachments", allAttachments);
-      console.log("newAttachments", newAttachments);
-      console.log("removedAttachments", removedAttachments);
       let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-
       forkJoin(
         [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
       )

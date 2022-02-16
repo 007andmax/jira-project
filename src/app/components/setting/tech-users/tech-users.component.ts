@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Observer, Subscription } from 'rxjs';
-
-import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
-
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
@@ -218,22 +215,17 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         (techUsers: any) => {
           this.loading = false; $(".loading").css("display", "none");
-          // this.archivedemailNotification(this.userlist);
           let users = this.userlist.filter(user => user.accountType.toLowerCase() === 'tech');
           this.IdList = users.map(({ id }) => id);
           if (techUsers) {
             this.techUsers = techUsers;
-            console.log("this.techUsers", this.techUsers);
             this.techUserIdList = techUsers.map(({ id }) => id);
             var IdList1 = [];
             if (this.techUserIdList) {
-              // this.emailNotification(this.techUserIdList);
               IdList1 = this.IdList.concat(this.techUserIdList);
             }
             this.emailNotification(this.techUserIdList);
-            //  this.allEmailNotification(IdList1);
           }
-
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
@@ -358,9 +350,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
     this.edit = true;
-
     this.selectedTechUser = techUser;
-    console.log("this.selectedTechUser", this.selectedTechUser);
     if (techUser) {
       const notification = this.techUseremailNotificationList[techUser.id];
       this.techUserForm.patchValue({

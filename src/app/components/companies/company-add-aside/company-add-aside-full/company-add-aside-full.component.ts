@@ -84,14 +84,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-
-      console.log("data", data);
       if (data && this.company.logo) this.companiesService.removeAttachment(this.company.logo.origin.id).subscribe(res => {
-
       });
       if (data) this.company.setLogo(data);
       if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
-
       });
     })
     this.sub.add(getConfirm);

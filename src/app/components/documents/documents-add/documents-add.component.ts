@@ -70,7 +70,6 @@ export class DocumentsAddComponent implements OnInit {
     })
   }
   onChangeAttachments(data) {
-    console.log("data", data);
     this.attachments = data;
   }
   onChangeContent(data) {

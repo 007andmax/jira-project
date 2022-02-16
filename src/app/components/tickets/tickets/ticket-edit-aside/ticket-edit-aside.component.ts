@@ -97,7 +97,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
-      console.log("this.ticketProfile", this.ticketProfile);
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -427,7 +426,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   close() {
     if (this.updateForm) this.updateForm.removeAllAttachments();
     this.ticketProfile = new TicketProfile();
-    console.log("this.ticketProfile", this.ticketProfile);
     this.opened = false;
     this.modeSubject = 'view';
     this.modeDescription = 'view';

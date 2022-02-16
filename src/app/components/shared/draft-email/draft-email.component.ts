@@ -74,16 +74,13 @@ export class DraftEmailComponent implements OnInit {
 
   ngOnInit() {
     this.onShowAside();
-
   }
   onChangeFiles(ids) {
-    console.log("ids", ids);
     if (this.draftEmail.attachments.length > ids.length) {
       this.draftEmail.attachments.forEach(item => {
         let find = ids.find(id => id === item);
         if (!find) {
           this.draftEmailService.removeAttachment(item).subscribe(data => {
-
           })
         }
       })

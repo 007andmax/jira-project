@@ -141,10 +141,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         this.croppedImage = data.croppedImage;
-        console.log("this.imageSrc", this.imageSrc);
         if (this.imageSrc != '') this.userService
           .removeAvatar(this.currentUser.id)
           .subscribe(res => {
@@ -153,7 +151,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         if (this.imageSrc == '') this.cropIt();
       } else {
         this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
-
         });
       }
     })
