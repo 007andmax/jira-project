@@ -89,7 +89,11 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.openAside = !this.openAside;
     this.onToggleAside.emit(this.openAside);
   }
+  onAddCategory(data) {
+    this.documentsService.addCategories(data).subscribe(data => {
 
+    })
+  }
   onChangeLinked(data: Array<DocumentCompanyUser>) {
     this.documentAdd.setLinked(data.filter(item => item.type === "USER").map(item => item.id),
       data.filter(item => item.type === "COMPANY").map(item => item.id));

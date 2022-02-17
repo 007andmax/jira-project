@@ -296,7 +296,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.updateForm.updateAndClose();
   }
   toggleSubject() {
-    if (this.appService.checkMobile()) return;
+    if (this.appService.checkMobile() || !this.getPermissions('EDIT_TICKETS')) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';

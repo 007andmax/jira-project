@@ -18,7 +18,6 @@
             [listStates]="getListStates('TAXES')"
         ></app-report-list-item>
         <app-report-list-item
-            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
             [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
             [title]="'Commissions'"
             [listTitles]="getListTitles('COMMISSIONS')"

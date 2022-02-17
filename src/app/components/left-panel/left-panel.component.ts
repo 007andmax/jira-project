@@ -283,6 +283,15 @@ export class LeftPanelComponent implements OnInit {
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
     return '/company/default/logo.jpg';
   }
+  public getAccessReports() {
+    return this.getPermissions("VIEW_SALES_REPORT") ||
+      this.getPermissions("VIEW_FINANCIAL_REPORT") ||
+      this.getPermissions("VIEW_PERFORMANCE_REPORT") ||
+      this.getPermissions("VIEW_REMOTE_ACCESS_REPORT") ||
+      this.getPermissions("VIEW_TAXES_REPORT") ||
+      this.getPermissions("VIEW_DEVICES_REPORTS") ||
+      this.getPermissions("VIEW_DEVICES_REPORTS")
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

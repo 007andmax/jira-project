@@ -35,6 +35,7 @@
                 class="cps-block__nav-item icon__quick-support"
                 [ngClass]="{'active':tab === 'QUICK_SUPPORT' }"
                 (click)="setTab('QUICK_SUPPORT')"
+                *ngIf="getPermissions('ALLOW_QUICK_CONNECT')"
             >
                 Quick Support
             </li>

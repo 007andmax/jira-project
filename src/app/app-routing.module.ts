@@ -79,6 +79,8 @@ import { PermissionInvoicesService } from './components/billing/invoices/permiss
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 import { PermissionUsersService } from './components/users/permission-users.service';
 import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
+import { PermissionSupportService } from './components/support/permission-support.service';
+import { PermissionReportsService } from './components/reports/permission-reports.service';
 
 const routes: Routes = [
 
@@ -144,7 +146,8 @@ const routes: Routes = [
   },
   {
     path: ':company/report/:id',
-    component: ItemReportComponent
+    component: ItemReportComponent,
+    canActivate: [PermissionReportsService]
   },
   {
     path: ':company/setting/myprofile',
@@ -372,7 +375,7 @@ const routes: Routes = [
   {
     path: ':company/quickSupport',
     component: SupportComponent,
-
+    canActivate: [PermissionSupportService]
   },
   {
     path: ':company/documents/templates',

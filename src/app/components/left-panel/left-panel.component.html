@@ -37,6 +37,7 @@
 <div class="app-left-panel__body">
     <app-left-panel-support
         #panelSupport
+        *ngIf="getPermissions('ALLOW_QUICK_CONNECT')"
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
@@ -97,6 +98,7 @@
     ></app-left-panel-documents>
     <hr class="app-left-panel__divider qt-d-md-none">
     <app-left-panel-reports
+        *ngIf="getAccessReports()"
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
         class="qt-d-md-none"

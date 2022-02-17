@@ -22,6 +22,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -69,6 +70,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     public draftEmailService: DraftEmailService,
     public ticketStateService: TicketStateService,
     public appService: AppService,
+    private permissionsService: PermissionsService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
     public ticketsListService: TicketsListService) { }
 
@@ -375,6 +377,9 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.supportService.deleteRemoteSession([this.remoteSession.id]).subscribe(data => {
       this.remoteSession = null;
     })
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
