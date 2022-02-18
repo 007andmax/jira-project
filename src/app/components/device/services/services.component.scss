@@ -11,9 +11,18 @@
     .description {
       width: 50% !important;
       padding: 0px;
+      white-space: pre-line;
     }
     .status {
       width: 10% !important;
+      padding: 0px;
+    }
+    .starttype{
+      width: 15% !important;
+      padding: 0px;
+    }
+    .accountName{
+      width: 17% !important;
       padding: 0px;
     }
     .action{

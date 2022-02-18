@@ -17,16 +17,19 @@
                     </div>
                 </div>
                 <div class="hp-device-info">
-                    <span class="device-icn">
+                    <span class="device-icn" *ngIf="UpTime != ''">
                         <img
                             src="/html/assets/img/device/uptime.svg"
                             alt="device"
                         >
                     </span>
-                    <div class="head-device">
+                    <div class="head-device" *ngIf="UpTime != ''">
                         <h6>Up Time</h6>
                         <h5>{{UpTime}}</h5>
                     </div>
+                    <div class="head-device" *ngIf="UpTime == ''">
+                      <h6>{{offline}}</h6>
+                  </div>
                 </div>
             </div>
             <div class="header-right">

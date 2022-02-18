@@ -48,6 +48,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   assetId: number;
   currentCommand: string;
   isNonAgentDevice:boolean;
+  offline : string = "Offline";
 
   constructor(
     private modalService: NgbModal,

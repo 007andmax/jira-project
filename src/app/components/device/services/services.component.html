@@ -64,6 +64,20 @@
                                       Status
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
+                                  <th
+                                     class="starttype"
+                                     (click)="onFilter('Startup')"
+                                  >
+                                    Startup Type
+                                    <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                     class="accountName"
+                                     (click)="onFilter('AccountName')"
+                                  >
+                                    Account Name
+                                    <span class="qt-table-modern__sorting"></span>
+                                  </th>
                                   <th class="action"></th>
                               </tr>
                           </thead>
@@ -74,6 +88,8 @@
                                   </td>
                                   <td class="description">{{service.Description || 'N/A'}}</td>
                                   <td class="status">{{ (service.Started=='True' ? 'Running' : 'Stopped')}}</td>
+                                  <td class="starttype"></td>
+                                  <td class="accountName"></td>
                                   <td class="action">
                                     <div *ngIf="service.Started=='False'">
                                       <div *ngIf="service.Started=='False'" [ngClass]="service.Loaded=='False' ? 'icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
