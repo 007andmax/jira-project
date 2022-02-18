@@ -6,9 +6,9 @@
               <div class="page-header">
                   <h3>Startup Programs</h3>
                   <div class="page-header-opt">
-                      
+
                   </div>
-                  <div class="download-print">
+                  <div class="download-print" *ngIf="startup > 0">
                       <form method="GET">
                           <input
                               type="search"
@@ -34,7 +34,7 @@
                   </div>
               </div>
               <!-- Page Content -->
-              <div class="contant-area">
+              <div class="contant-area" *ngIf="startup > 0">
                   <div class="table-wrap">
                       <table
                           #dataTable
@@ -64,28 +64,32 @@
                                   >
                                       User
                                       <span class="qt-table-modern__sorting"></span>
-                                  </th>                                 
+                                  </th>
                               </tr>
                           </thead>
                           <tbody class="startup-table">
                               <tr *ngFor="let item of startupList | serv: search; let i = index;">
-                                  
+
                                   <td class="s-name">
                                       <h5>{{item.Name || 'N/A'}}</h5>
                                   </td>
                                   <td class="command">{{item.Command || 'N/A'}}</td>
                                   <td class="user">{{item.User || 'N/A'}}</td>
-                                  
+
                               </tr>
                           </tbody>
                       </table>
                   </div>
               </div>
+            </div>
           </div>
-      </div>
+          <div class="Rectangle" *ngIf="startup <= 0">
+            <div class="offlineImg">
+              <img src="/assets/img/device/offline-icon-19.jpg">
+            </div>
+            <div class="device-offline">
+              Device Offline
+            </div>
+          </div>
   </div>
 </main>
-<div
-  class="loading"
-  *ngIf="loading"
-></div>

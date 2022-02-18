@@ -74,6 +74,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   installUpdateModal: NgbModalRef;
   categoriesName: string = "";
   isNonAgentDevice:boolean;
+  tab = "PendingWindows";
 
   constructor(
     private agentService: AgentService,
@@ -683,5 +684,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         return finalname[i].split(",");
       }
     }
+  }
+
+  onChangeTemplate(data) {
+    this.tab = data;
   }
 }

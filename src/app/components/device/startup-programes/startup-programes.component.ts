@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ExcelService } from '../_services/download_csv.service';
 import { CommonHttpServices } from '../_services/common_http.service';
 import * as moment from 'moment';
+import * as internal from 'assert';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class StartupComponent implements OnInit {
   public asset: any;
   public pdfUrl: string;
   public filter: StartupFilter = new StartupFilter();
+  startup : number = 0;
 
   constructor(
     private agentService: AgentService,
@@ -60,6 +62,7 @@ export class StartupComponent implements OnInit {
   }
 
   public onGetStartupPrograms(resp: any) {
+    this.startup = resp.length
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.startupList = JSON.parse(item.Value);

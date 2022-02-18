@@ -695,11 +695,34 @@
 <ng-template #template let-modal>
   <div class="tabletitle">
     <span [textContent]="asset.Title"></span>
+    <div class="documents-templates-panel__subheader">
+      <div
+          [ngClass]="{'--active':tab === 'PendingWindows'}"
+          (click)="onChangeTemplate('PendingWindows')"
+          class="documents-templates-panel__subheader-item pointer"
+      >
+         PendingWindows
+      </div>
+      <div
+          [ngClass]="{'--active':tab === 'InstalledWindows'}"
+          (click)="onChangeTemplate('InstalledWindows')"
+          class="documents-templates-panel__subheader-item pointer"
+      >
+          Install Windows
+      </div>
+      <div
+      [ngClass]="{'--active':tab === 'BlockedWindows'}"
+      (click)="onChangeTemplate('BlockedWindows')"
+      class="documents-templates-panel__subheader-item pointer"
+  >
+      Install Windows
+  </div>
+  </div>
       <button type="button" class="close pull-right closebtn" aria-label="Close" (click)="modal.dismiss('Cross click')">
        <span aria-hidden="true">&times;</span>
       </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" *ngIf="tab === 'PendingWindows'">
     <div class="modal-table">
       <div class="modal-table-body">
       <div class="remote-area">
@@ -738,6 +761,85 @@
           <a  class="btn btn-dowanload footer" [ngClass]="selected<=0? 'disabled': '' " (click)="InstallUpdate()">
             Install
         </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <div class="modal-body" *ngIf="tab === 'InstalledWindows'">
+    <div class="modal-table">
+      <div class="modal-table-body">
+      <div class="remote-area">
+          <table class="fixed">
+            <thead>
+              <tr *ngIf="windowUpdatePendingList.length<=0 ? false: true">
+                <th class="tableth"></th>
+                <th class="title">Description</th>
+                <th class="product">Product</th>
+                <th class="product">Class</th>
+                <th class="product">Size</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
+                    <td class="tabletd">
+                        <input
+                                type="checkbox"
+                                (change)="postWindowUpdatePendint(i)"
+                                *ngIf="!data.loading"
+                        />
+                        <div class="loader" *ngIf="data.loading"></div>
+                    </td>
+                    <td class="tablespace">{{data.Title}}</td>
+                    <td class="tablespace">{{data.Product}}</td>
+                    <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
+                    <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
+                </tr>
+                <tr *ngIf="windowUpdatePendingList.length<=0">
+                    <td class="missing">No missing Updates</td>
+                </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal-body" *ngIf="tab === 'BlockedWindows'">
+    <div class="modal-table">
+      <div class="modal-table-body">
+      <div class="remote-area">
+          <table class="fixed">
+            <thead>
+              <tr *ngIf="windowUpdatePendingList.length<=0 ? false: true">
+                <th class="tableth"></th>
+                <th class="title">Description</th>
+                <th class="product">Product</th>
+                <th class="product">Class</th>
+                <th class="product">Size</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
+                    <td class="tabletd">
+                        <input
+                                type="checkbox"
+                                (change)="postWindowUpdatePendint(i)"
+                                *ngIf="!data.loading"
+                        />
+                        <div class="loader" *ngIf="data.loading"></div>
+                    </td>
+                    <td class="tablespace">{{data.Title}}</td>
+                    <td class="tablespace">{{data.Product}}</td>
+                    <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
+                    <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
+                </tr>
+                <tr *ngIf="windowUpdatePendingList.length<=0">
+                    <td class="missing">No missing Updates</td>
+                </tr>
+            </tbody>
+          </table>
       </div>
     </div>
   </div>
