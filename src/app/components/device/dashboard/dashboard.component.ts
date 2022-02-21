@@ -75,6 +75,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   categoriesName: string = "";
   isNonAgentDevice:boolean;
   tab = "PendingWindows";
+  installedWindowsUpdateList: any[] = [];
+  installUpdate : number;
+  blockedWindowsUpdateList : any [] = [];
+  blockedNumber : number;
 
   constructor(
     private agentService: AgentService,
@@ -106,7 +110,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = JSON.parse(item.Value);
+
+        this.installUpdate = this.kafkaMessage.InstalledWindowsUpdates.length;
+        if(this.installUpdate > 0){
+          this.installedWindowsUpdateList = [];
+          for(let i=0; i< this.installUpdate ; i++){
+            let install : any = {};
+            install.UpdateID = this.kafkaMessage.InstalledWindowsUpdates[i].UpdateID;
+            install.Title = this.kafkaMessage.InstalledWindowsUpdates[i].Title;
+            install.Size = this.kafkaMessage.InstalledWindowsUpdates[i].Size;
+            //install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[i].Name
+            this.installedWindowsUpdateList.push(install);
+          }
+        }
+
+        this.blockedNumber = this.kafkaMessage.BlockedWindowsUpdates.length;
+        if(this.blockedNumber > 0){
+          this.blockedWindowsUpdateList = [];
+          for(let i=0; i< this.blockedNumber ; i++){
+            let blocked : any = {};
+            blocked.UpdateID = this.kafkaMessage.BlockedWindowsUpdates[i].UpdateID;
+            blocked.Title = this.kafkaMessage.BlockedWindowsUpdates[i].Title;
+            blocked.Size = this.kafkaMessage.BlockedWindowsUpdates[i].Size;
+
+            this.blockedWindowsUpdateList.push(blocked);
+          }
+        }
+
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+
         if (this.securityUpdate > 0) {
           this.windowUpdatePendingList = [];
           for (let i = 0; i < this.securityUpdate; i++) {

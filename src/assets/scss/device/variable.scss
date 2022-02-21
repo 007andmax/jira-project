@@ -1,4 +1,4 @@
-// Color Palette 
+// Color Palette
 
 $black-color: #000000;
 $white-color: #ffffff;
@@ -13,6 +13,64 @@ $metal:#4f5f79;
 $heavyMetal:#364656;
 $bodyColor:#f3f7f9;
 $border-color:#c4cbd5;
+$border-width:                1px !default;
+$border-radius:               .25rem !default;
+$border-radius-lg:            .3rem !default;
+$border-radius-sm:            .2rem !default;
+$enable-rounded:                              true !default;
+
+
+// Color system
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+$body-bg:                   $white !default;
+$body-color:                $gray-900 !default;
+$component-active-color:      $white !default;
+$component-active-bg:         theme-color("primary") !default;
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+  ),
+  $spacers
+);
+$link-color:                              theme-color("primary") !default;
+$link-decoration:                         none !default;
+$link-hover-color:                        darken($primary-color, 15%) !default;
+$link-hover-decoration:                   underline !default;
+// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+$emphasized-link-hover-darken-percentage: 15% !default;
+@mixin hover-focus() {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin border-top-radius($radius) {
+  @if $enable-rounded {
+    border-top-left-radius: valid-radius($radius);
+    border-top-right-radius: valid-radius($radius);
+  }
+}
+
+
 
 //== Modals
 $line-height-base:        1.428571429 !default; // 20/14
@@ -52,5 +110,28 @@ $modal-footer-border-color:   $modal-header-border-color !default;
 $modal-lg:                    900px !default;
 $modal-md:                    600px !default;
 $modal-sm:                    300px !default;
+
+//Nav
+
+$nav-link-padding-y:                .5rem !default;
+$nav-link-padding-x:                1rem !default;
+$nav-link-disabled-color:           $gray-600 !default;
+
+$nav-tabs-border-color:             $gray-300 !default;
+$nav-tabs-border-width:             $border-width !default;
+$nav-tabs-border-radius:            $border-radius !default;
+$nav-tabs-link-hover-border-color:  $gray-200 $gray-200 $nav-tabs-border-color !default;
+$nav-tabs-link-active-color:        $gray-700 !default;
+$nav-tabs-link-active-bg:           $body-bg !default;
+$nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
+
+$nav-pills-border-radius:           $border-radius !default;
+$nav-pills-link-active-color:       $component-active-color !default;
+$nav-pills-link-active-bg:          $component-active-bg !default;
+
+$nav-divider-color:                 $gray-200 !default;
+$nav-divider-margin-y:              $spacer / 2 !default;
+
+
 
 

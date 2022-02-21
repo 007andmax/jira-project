@@ -3,6 +3,8 @@
 @import '../../../../assets/scss/device/variable';
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
+@import '../../../../assets/scss/device/_nav';
+
 
 
 .cmn-wrapper.dashboard {
@@ -801,7 +803,7 @@
 //modal-popup start
 
 .remote-area {
-  padding: 5px 5px 5px 5px;
+  padding: 0px 5px 5px 5px;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -955,6 +957,7 @@ background-color: #FF0000;
 
 .tableth{
   width:30px;
+  padding-top: 70px !important;
 }
 
 .tabletd{
@@ -997,6 +1000,11 @@ background-color: #FF0000;
 .product{
   width: 130px;
 }
+
+ngb-tabset{
+  position: absolute !important;
+}
+
 // modal-popup end
 
 
