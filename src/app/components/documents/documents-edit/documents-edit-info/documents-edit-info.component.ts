@@ -26,6 +26,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
+      this.categoriesDp.reset(this.categories);
     })
     if (this.documentEdit.clientType) this.requiredCompanyType = true;
   }

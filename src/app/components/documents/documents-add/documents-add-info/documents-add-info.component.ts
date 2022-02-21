@@ -38,6 +38,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   @Input() templateId: string;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
+  @ViewChild('categoriesDp') categoriesDp: DropDownComponent;
   @ViewChild('linked') linked: DocumentsLinkedComponent;
   @ViewChild('reviewDp') reviewDp: DatePickerComponent;
   @Output() onToggleAside = new EventEmitter<any>();
@@ -60,6 +61,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
+      this.categoriesDp.reset(this.categories);
     })
     let currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() + 1);
