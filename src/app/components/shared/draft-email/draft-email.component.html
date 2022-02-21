@@ -62,9 +62,11 @@
                 <div
                     style="position:relative;"
                     [ngStyle]="{'height':((tab == 'plain') ? '100%' : 'auto')}"
+                    appDnd
+                    (fileDropped)="onFileDropped($event)"
+                    *ngIf="tab == 'plain'"
                 >
                     <angular-editor
-                        *ngIf="tab == 'plain'"
                         [(ngModel)]="messageContent"
                         [config]="editorConfig"
                     ></angular-editor>

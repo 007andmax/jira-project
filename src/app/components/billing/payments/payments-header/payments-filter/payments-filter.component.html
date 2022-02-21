@@ -29,8 +29,17 @@
         [(ngModel)]="paymentsFilter.invoiceNumber"
     >
     <app-multi-datepicker
-        class="qt-input-block invoices-date-filter"
+        class="qt-input-block invoices-date-filter qt-mr-8"
         #datesDp
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
+    <input
+        number
+        appKeyUpEnter
+        (onChange)="onSetAmountInvoice($event)"
+        (blur)="onSetAmountInvoice($event)"
+        placeholder="Enter amount"
+        class="qt-input h36 filter-invoice invoices-number-filter"
+        id="amount-filter"
+    >
 </div>
