@@ -16,10 +16,15 @@
         [value]="geTextDate()"
         readonly
     >
+    <app-dynamic-tooltip
+        [content]="'Date'"
+        [position]="'top'"
+        #dateTooltip
+    ></app-dynamic-tooltip>
     <button
         *ngIf="type === 'ICON'"
-        placement="top"
-        ngbTooltip="Date"
+        (mouseenter)="dateTooltip.show($event.target)"
+        (mouseleave)="dateTooltip.hide()"
         class="ticket-updates__date-icon icon__assign-date btn-icon-date-picker"
         ngbDropdownToggle
         [disabled]="isDisabled"
