@@ -79,6 +79,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   installUpdate : number;
   blockedWindowsUpdateList : any [] = [];
   blockedNumber : number;
+  categories: number;
 
   constructor(
     private agentService: AgentService,
@@ -119,7 +120,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             install.UpdateID = this.kafkaMessage.InstalledWindowsUpdates[i].UpdateID;
             install.Title = this.kafkaMessage.InstalledWindowsUpdates[i].Title;
             install.Size = this.kafkaMessage.InstalledWindowsUpdates[i].Size;
-            //install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[i].Name
+            this.categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories.length;
+            if(this.categories >0)
+            {
+              for(let j=0; j<this.categories; j++){
+                install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[j].Name
+              }
+            }
             this.installedWindowsUpdateList.push(install);
           }
         }
@@ -146,7 +153,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
             data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
             data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
-            data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[i].Name
+            this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
+            if(this.categories >0)
+            {
+              for(let j=0; j<this.categories; j++){
+                data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+              }
+            }
             if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
               data.RebootIsRequired = "Never Reboots"
             }

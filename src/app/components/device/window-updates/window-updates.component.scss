@@ -1,0 +1,44 @@
+.Rectangle {
+  width: 850px;
+  height: 250px;
+  margin: 50px 32px 10px 0px;
+  padding: 20px 24px 24px;
+  background-color: #fff;
+}
+
+.windowupdate {
+  width: 850px;
+  height: 450px;
+  margin: 10px 32px 20px 0px;
+  padding: 20px 24px 24px;
+  background-color: #fff;
+  overflow: auto;
+}
+
+.window{
+  margin-left: 20px;
+}
+
+.nav-item{
+  margin: 0 50px 0 0 !important;
+}
+
+.tablespace{
+  white-space: pre-wrap !important;
+  width: 10px !important;
+}
+
+.title{
+  width: 200px;
+}
+
+.product{
+  width: 130px;
+}
+
+.missing{
+  width: 30px;
+  padding-left: 260px;
+  padding-top: 130px;
+  font-size: 16px;
+}

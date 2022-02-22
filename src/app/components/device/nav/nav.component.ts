@@ -92,6 +92,10 @@ export class NavComponent implements OnInit {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/password/${this.type}/${this._id}`]);
   }
+  goToWindowUpdates() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/windows/${this.type}/${this._id}`]);
+  }
   getCurrentCompany() {
 
     this.commonHttpServices.getCurrentCompany()

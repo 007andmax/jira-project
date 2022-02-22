@@ -464,6 +464,7 @@ import { ApplicationbycompanyReportComponent } from './components/reports/report
 import { DevicesComponent } from './components/devices/devices.component';
 import { LeftPanelDevicesComponent } from './components/left-panel/left-panel-devices/left-panel-devices.component';
 import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
+import { WindowUpdatesComponent } from './components/device/window-updates/window-updates.component';
 
 declare var $: any;
 /**
@@ -885,6 +886,7 @@ declare var $: any;
     DevicesComponent,
     LeftPanelDevicesComponent,
     DevicesReportComponent,
+    WindowUpdatesComponent,
   ],
   imports: [
     BrowserModule,

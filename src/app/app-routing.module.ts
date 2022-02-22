@@ -64,6 +64,7 @@ import { CompanyDeviceBetaComponent } from './components/company-device-beta/com
 import { DeviceComponent } from './components/device/device.component';
 import { DevicesComponent } from './components/devices/devices.component';
 import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
+import { WindowUpdatesComponent } from './components/device/window-updates/window-updates.component';
 
 
 const routes: Routes = [
@@ -295,6 +296,10 @@ const routes: Routes = [
       {
         path: 'file/:type/:id',
         component: FileComponent
+      },
+      {
+        path: 'windows/:type/:id',
+        component: WindowUpdatesComponent
       },
     ]
   },

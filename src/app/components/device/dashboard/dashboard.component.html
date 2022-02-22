@@ -764,7 +764,7 @@
                 <tr *ngFor="let install of installedWindowsUpdateList; let i = index;">
                     <td class="tablespace">{{install.Title}}</td>
                     <td class="tablespace">{{install.Product}}</td>
-                    <td class="tablespace">{{install.Categories}}</td>
+                    <td class="tablespace">{{categoriesSep(install.Categories)}}</td>
                     <td class="tablespace">{{sizeConvert(install.Size)}} MB</td>
                 </tr>
                 <tr *ngIf="installedWindowsUpdateList.length<=0">
