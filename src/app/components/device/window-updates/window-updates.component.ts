@@ -36,7 +36,6 @@ export class WindowUpdatesComponent implements OnInit {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e) => this.onCurrentConfigError(e));
   }
   onCurrentConfig(resp: any) {
-    debugger
     if (this.asset.ID && this.asset.ID != 0) {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {

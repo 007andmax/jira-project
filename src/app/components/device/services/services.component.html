@@ -68,7 +68,7 @@
                                      class="starttype"
                                      (click)="onFilter('Startup')"
                                   >
-                                    Startup Type
+                                    Type
                                     <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
@@ -84,12 +84,12 @@
                           <tbody class="service-table">
                               <tr *ngFor="let service of serviceList | serv: search; let i = index; trackBy:trackByMethod">
                                   <td class="s-name">
-                                      <h5>{{service.Name || 'N/A'}}</h5>
+                                      <h5>{{service.DisplayName || 'N/A'}}</h5>
                                   </td>
                                   <td class="description">{{service.Description || 'N/A'}}</td>
                                   <td class="status">{{ (service.Started=='True' ? 'Running' : 'Stopped')}}</td>
-                                  <td class="starttype"></td>
-                                  <td class="accountName"></td>
+                                  <td class="starttype">{{service.StartMode}}</td>
+                                  <td class="accountName">{{service.startName}}</td>
                                   <td class="action">
                                     <div *ngIf="service.Started=='False'">
                                       <div *ngIf="service.Started=='False'" [ngClass]="service.Loaded=='False' ? 'icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
