@@ -122,3 +122,21 @@
 .btn-update, .btn-uninstall {
     background-color:#e8e8e8 !important;
 }
+.db-update-agent{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/device/install-gray.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+.db-uninstall{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/device/remove-remote-agent-gray.svg);
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  background-position: center;
+}

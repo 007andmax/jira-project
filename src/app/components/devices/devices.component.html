@@ -3,7 +3,8 @@
         <div class="qt-page-list__header-title-line--left">
             <h3 class="qt-page-list__header-title" [textContent]="'Devices'"></h3>
             <div class="Rectangle">
-                <img src="/assets/img/icons/search.svg" class="Online-Search">
+              <span class="qt-input-search"></span>
+                <!-- <img src="/assets/img/icons/search.svg" class="Online-Search"> -->
                 <div class="SearchRectangle">
                     <mat-form-field class="example-chip-list" appearance="none">
                         <mat-chip-list #chipList>
@@ -23,16 +24,15 @@
                 </div>
                 <div class="StarRectangle">
                     <a href="javascript:;" (click)="showDlg(tag)">
-
-                        <img src="/assets/img/favourite-active.svg" class="Favourite">
+                      <span class="Favourite"></span>
                     </a>
                 </div>
             </div>
             <button class="qt-btn --outline-white qt-ml-32" (click)="sendEmail()">
-                <img src="/assets/img/icons/email-dark.svg">
+              <span class="d-email"></span>
             </button>
             <button class="qt-btn --outline-white qt-ml-8" (click)="printPdf()">
-                <img src="/assets/img/icons/print.svg">
+              <span class="d-print"></span>
           </button>
             <button class="qt-btn --outline-white qt-ml-8" (click)="downloadCsv()">
           <i class="

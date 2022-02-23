@@ -60,10 +60,10 @@
                     <img src="/html/assets/img/device/shutdown.svg" alt="shutdown">
                 </a>
                 <a href="javascript:;" (click)="sendCommand('u',asset.ID)" class="sub-head-counter" title="Update Agent" *ngIf="isNonAgentDevice">
-                    <img src="/assets/img/device/install-gray.svg" alt="update agent">
+                  <span class="db-update-agent"></span>
                 </a>
                 <a href="javascript:;" (click)="sendCommand('d',asset.ID)" class="sub-head-counter" title="Uninstall Agent" *ngIf="isNonAgentDevice">
-                    <img src="/assets/img/device/remove-remote-agent-gray.svg" alt="uninstall agent">
+                  <span class="db-uninstall"></span>
                 </a>
             </div>
         </div>

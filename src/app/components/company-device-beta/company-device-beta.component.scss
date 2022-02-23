@@ -38,8 +38,8 @@ img.Online-Search {
 
 .SearchRectangle {
   width: 705px;
-  height: 36px;
-  margin: -33px 0px 0px 30px;
+  height: 30px;
+  margin: -3px 0px 0px 30px;
   padding: 2px 4px 2px 11px;
   border-radius: 4px;
   //border: solid 1px #919eab;
@@ -191,7 +191,7 @@ img.Online-Search {
 }
 
 input.mat-chip-input {
-  margin: 4px;
+  margin: 1px 0px 0px 15px;
   flex: 1 0 150px;
   height: 38px;
   font-size: 12px;
@@ -244,3 +244,11 @@ input.mat-chip-input {
   background-repeat: no-repeat;
 }
 
+span.qt-input-search:before {
+  width: 25px;
+  height: 25px;
+  margin-top: 15px;
+  background-image: url(/assets/img/icons/search.svg);
+  background-repeat: no-repeat;
+
+}

@@ -152,7 +152,7 @@ img.Online-Search {
 .StarRectangle {
   width: 32px;
   height: 32px;
-  margin: -34px 0 0 700px;
+  margin: -29px 0 0 700px;
   padding: 5px 8px;
   border-radius: 4px;
   background-color: #637382;
@@ -160,12 +160,20 @@ img.Online-Search {
 
 .Favourite {
   margin-bottom: 5px;
+  background-image: url(/assets/img/favourite-active.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
 }
 
 .SearchRectangle {
     width: 705px;
-    height: 36px;
-    margin: -33px 0px 0px 30px;
+    height: 30px;
+    margin: -3px 0px 0px 30px;
     padding: 2px 4px 2px 11px;
     border-radius: 4px;
     //border: solid 1px #919eab;
@@ -181,7 +189,7 @@ img.Online-Search {
 }
 
 input.mat-chip-input {
-  margin: 4px;
+  margin: 1px 0px 0px 10px;
   flex: 1 0 150px;
   height: 38px;
   font-size: 12px;
@@ -487,13 +495,46 @@ input.mat-chip-input {
 }
 
 
-.qt-btn {  
+.qt-btn {
   width: 36px;
   height: 36px;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-  background-color: #fff;    
-  color:#364656;  
+  background-color: #fff;
+  color:#364656;
   font-size: 12px;
+}
+
+span.qt-input-search:before {
+  width: 25px;
+  height: 25px;
+  margin-top: 15px;
+  background-image: url(/assets/img/icons/search.svg);
+  background-repeat: no-repeat;
+
+}
+
+.d-email{
+  margin-bottom: 5px;
+  background-image: url(/assets/img/icons/email-dark.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+}
+
+.d-print{
+  margin-bottom: 5px;
+  background-image: url(/assets/img/icons/print.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-position: center;
 }
