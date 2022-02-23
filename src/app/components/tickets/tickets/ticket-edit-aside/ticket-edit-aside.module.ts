@@ -8,7 +8,6 @@ import { TicketEditTagsComponent } from './ticket-edit-tags/ticket-edit-tags.com
 import { AddAssignedUserComponent } from './add-assigned-user/add-assigned-user.component';
 import { TicketClaimInfoComponent } from './ticket-claim-info/ticket-claim-info.component';
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
-import { TicketProfileAttachmentsComponent } from './ticket-profile-attachments/ticket-profile-attachments.component';
 import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/ticket-profile-form-update.component';
 import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
@@ -55,6 +54,7 @@ import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form
 import { TicketProfileEditFormUpdateProductsComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
 import { TicketProfileEditFormUpdateServicesComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { TicketProfileAttachmentsModule } from './ticket-profile-attachments/ticket-profile-attachments.module';
 
 
 @NgModule({
@@ -65,7 +65,6 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
         AddAssignedUserComponent,
         TicketClaimInfoComponent,
         TicketMessageComponent,
-        TicketProfileAttachmentsComponent,
         TicketProfileUpdatesComponent,
         TicketProfileFormUpdateComponent,
         TicketEditAsideRightPanelComponent,
@@ -118,7 +117,8 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
         InfiniteScrollModule,
         TehUsersModule,
         UploadAreaProgressModule,
-        ClickOtsideModule
+        ClickOtsideModule,
+        TicketProfileAttachmentsModule
 
     ],
     exports: [TicketEditAsideComponent,]

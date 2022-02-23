@@ -88,6 +88,7 @@ import { AddMarketingSubscriptionTypeModule } from './components/setting/marketi
 import { AddUserToSubscribeModule } from './components/users/add-user-to-subscribe/add-user-to-subscribe.module';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
 
 
 declare var $: any;
@@ -158,7 +159,8 @@ declare var $: any;
     UsersAsideDetailModule,
     TextAreaModule,
     AddMarketingSubscriptionTypeModule,
-    AddUserToSubscribeModule
+    AddUserToSubscribeModule,
+    PreviewAttachmentModule
 
   ],
   entryComponents: [

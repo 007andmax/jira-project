@@ -13,12 +13,13 @@ import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-ar
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { DndDirective } from 'src/app/directives/dnd.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-area.module';
 
 
 
 @NgModule({
     declarations: [TicketAddAsideComponent,
-        UploadAreaComponent,
+
         DndDirective
 
     ],
@@ -32,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DisabledBtnModule,
         PreloaderTicketModule,
         UploadAreaProgressModule,
-        NgbModule
+        NgbModule,
+        UploadAreaModule
     ],
     exports: [TicketAddAsideComponent]
 })

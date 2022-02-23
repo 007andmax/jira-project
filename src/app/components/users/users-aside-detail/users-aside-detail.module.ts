@@ -20,6 +20,7 @@ import { UserDefaultSubscriptionModule } from '../users-aside/user-default-subsc
 import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscription/user-custom-subscription.module';
 import { UsersAsideDetailMessagesComponent } from './users-aside-detail-messages/users-aside-detail-messages.component';
 import { UsersAsideDetailMessagesFullBodyComponent } from './users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
+import { TicketProfileAttachmentsModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -44,7 +45,8 @@ import { UsersAsideDetailMessagesFullBodyComponent } from './users-aside-detail-
         InfiniteScrollModule,
         DocumentsTemplatesInfoModule,
         UserDefaultSubscriptionModule,
-        UserCustomSubscriptionModule
+        UserCustomSubscriptionModule,
+        TicketProfileAttachmentsModule
     ],
     exports: [UsersAsideDetailComponent]
 

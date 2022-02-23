@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../preloader-ticket/preloader-ticket.module';
+import { UploadAreaModule } from '../upload-area/upload-area.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { PreloaderTicketModule } from '../preloader-ticket/preloader-ticket.modu
         ReactiveFormsModule,
         MatFormFieldModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        UploadAreaModule
     ],
     exports: [DraftEmailComponent]
 

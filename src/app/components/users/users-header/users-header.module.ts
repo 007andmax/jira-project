@@ -7,6 +7,7 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { UsersFilterSubscriptionsComponent } from './users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 
 
 
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         NgbModule,
         MatIconModule,
         ReactiveFormsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        CompanyTagsModule
     ],
     exports: [UsersHeaderComponent]
 })
