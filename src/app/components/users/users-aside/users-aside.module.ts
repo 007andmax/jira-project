@@ -12,6 +12,7 @@ import { UserDefaultSubscriptionComponent } from './user-default-subscription/us
 import { UserCustomSubscriptionComponent } from './user-custom-subscription/user-custom-subscription.component';
 import { UserDefaultSubscriptionModule } from './user-default-subscription/user-default-subscription.module';
 import { UserCustomSubscriptionModule } from './user-custom-subscription/user-custom-subscription.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [UsersAsideComponent,
@@ -28,7 +29,8 @@ import { UserCustomSubscriptionModule } from './user-custom-subscription/user-cu
         DisabledBtnModule,
         TextAreaModule,
         UserDefaultSubscriptionModule,
-        UserCustomSubscriptionModule
+        UserCustomSubscriptionModule,
+        NgbModule,
     ],
     exports: [UsersAsideComponent]
 
