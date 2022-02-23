@@ -134,6 +134,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     this.gadgets = [];
     this.currentTab = this.tabs[0];
     this.showSelect = false;
+    this.selectedUserAndDevices = [];
   }
   isSeleted(item) {
     return this.selectedUserAndDevices.find(element => element.id === item.id);

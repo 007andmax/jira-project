@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
@@ -17,7 +17,7 @@ import { DocumentValidate } from '../class/document-validate';
   templateUrl: './documents-add-footer.component.html',
   styleUrls: ['./documents-add-footer.component.scss']
 })
-export class DocumentsAddFooterComponent implements OnInit {
+export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   @Input() requiredCompanyType: boolean;
   @Input() documentAdd: DocumentAdd;
   @Input() documentEdit: Document;
@@ -33,6 +33,7 @@ export class DocumentsAddFooterComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private router: Router,) { }
 
+
   ngOnInit() {
   }
   add(documentType) {
@@ -41,13 +42,13 @@ export class DocumentsAddFooterComponent implements OnInit {
     if (this.templateId) {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
-        this.checkAttachments("", this.documentAdd.content);
+        this.checkAddAttachments(this.documentAdd.content);
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
         this.showNotificationAfterCreate(documentType);
-        this.checkAttachments("", this.documentAdd.content);
+        this.checkAddAttachments(this.documentAdd.content);
         this.goToDocumentsList();
       })
     }
@@ -62,16 +63,35 @@ export class DocumentsAddFooterComponent implements OnInit {
       this.appStateService.changeDetectorRef();
     }
   }
+  checkAddAttachments(content) {
+    let contentAttachments = [];
+    let removedAttachments = [];
+    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+    if (content) content.replace(urlRegex, function (url) {
+      contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      return url;
+    });
+    this.attachments.forEach(item => {
+      if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+    })
+    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    this.documentAdd = null;
+    forkJoin(
+      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+    )
+      .subscribe(res => {
+      });
+  }
   checkAttachments(content, newContent) {
     let oldAttachments = this.attachments;
     let newAttachments = [];
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    content.replace(urlRegex, function (url) {
+    if (content) content.replace(urlRegex, function (url) {
       oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
-    newContent.replace(urlRegex, function (url) {
+    if (newContent) newContent.replace(urlRegex, function (url) {
       newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
@@ -79,6 +99,7 @@ export class DocumentsAddFooterComponent implements OnInit {
       if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    this.documentEdit = null;
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -105,10 +126,50 @@ export class DocumentsAddFooterComponent implements OnInit {
         this.appStateService.changeDetectorRef();
       }
       this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
+
       this.goToDocumentsList();
     })
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+    if (this.documentAdd) {
+      let removedAttachmentsIds = this.attachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+      forkJoin(
+        [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+      )
+        .subscribe(res => {
+        });
+    }
+    if (this.documentEdit) {
+      var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+      let newAttachments = [];
+      let allAttachments = this.attachments;
+      let oldAttachments = [];
+      let removedAttachments = [];
+      if (this.documentEdit.content) this.documentEdit.content.replace(urlRegex, function (url) {
+        oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+
+        return url;
+      });
+      if (this.documentEdit.newContent) this.documentEdit.newContent.replace(urlRegex, function (url) {
+        newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+        return url;
+      });
+      allAttachments = [...allAttachments, ...newAttachments, ...oldAttachments];
+      allAttachments = allAttachments.filter((element, index) => {
+        return allAttachments.indexOf(element) === index;
+      });
+      allAttachments.forEach(item => {
+        if (!oldAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+      })
+      let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+      forkJoin(
+        [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+      )
+        .subscribe(res => {
+        });
+    }
   }
 }

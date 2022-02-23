@@ -9,7 +9,7 @@ import { User } from '../../../users/class/user';
 @Component({
   selector: 'draft-email-user-recipients',
   templateUrl: './draft-email-user-recipients.component.html',
-  styleUrls: ['./draft-email-user-recipients.component.css']
+  styleUrls: ['./draft-email-user-recipients.component.scss']
 })
 export class DraftEmailUserRecipientsComponent implements OnInit {
 

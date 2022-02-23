@@ -1,8 +1,10 @@
-import { NgModule, ChangeDetectorRef } from '@angular/core';
+import { NgModule, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbDropdownToggle, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from '../../interfaces/company/company';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
@@ -17,7 +19,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 @NgModule({
   imports: [NgbDropdownToggle, NgbModal]
 })
-export class CompanyDashboardComponent implements OnInit {
+export class CompanyDashboardComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   company: Company;
   totalTickets: number = 0;
@@ -29,7 +31,10 @@ export class CompanyDashboardComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public appService: AppService,
     private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
+    private companiesStateService: CompaniesStateService,
     public contractsStateService: ContractsStateService) { }
+
 
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate('company-dashboard');
@@ -50,5 +55,10 @@ export class CompanyDashboardComponent implements OnInit {
   companyNameChangedHandler(name: string) {
     this.companyName = name;
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+    this.companiesStateService.setCompanyRoutingId(null);
+  }
 }

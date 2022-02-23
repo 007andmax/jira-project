@@ -59,7 +59,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onColorStatus(listColors);
     })
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
-      if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
+      if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
         this.tickets.unshift(data);
       }
     })
@@ -95,9 +95,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
 
     this.header.setTitle("All Tickets");
     let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
+      if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companiesStateService.setSelectedCompanyId(id);
       let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
@@ -167,6 +169,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
   public trackById(index, item) {
     return item.id;

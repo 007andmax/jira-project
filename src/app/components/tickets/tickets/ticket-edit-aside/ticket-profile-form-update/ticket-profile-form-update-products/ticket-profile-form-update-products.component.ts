@@ -79,10 +79,9 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     this.currentProduct.valdiateSaleCost = true;
   }
   public addProduct() {
-    this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.currentProduct = new TicketProfileFormProduct();
     this.productDP.clear();
-
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
@@ -119,7 +118,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     return ((find) ? false : true) && this.currentProduct.valdiateSaleCost;
   }
   public getSelectedProducts() {
-    return (this.currentProduct.item.versionedId) ? [...this.addedProductList, this.currentProduct] : this.addedProductList;
+    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

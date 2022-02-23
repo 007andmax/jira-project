@@ -9,6 +9,7 @@ import { ARCHIVE_COMPANY, DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } fr
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 @Component({
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
@@ -27,6 +28,7 @@ export class InvoicesItemComponent implements OnInit {
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
     private appService: AppService,
+    private permissionsService: PermissionsService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
@@ -111,7 +113,7 @@ export class InvoicesItemComponent implements OnInit {
     })
   }
   onShowPreviewInvoice() {
-    this.onPreviewInvoice.emit(this.invoice);
+    if (this.getPermissions('VIEW_ACCOUNTING')) this.onPreviewInvoice.emit(this.invoice);
   }
   rollbackInvoice() {
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
@@ -130,5 +132,8 @@ export class InvoicesItemComponent implements OnInit {
   exportAsPDF() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
     this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

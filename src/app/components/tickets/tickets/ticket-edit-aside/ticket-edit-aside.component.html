@@ -38,8 +38,9 @@
                                     [disableTooltip]="!checkExistServicesProducts()"
                                 ></app-dynamic-tooltip>
                                 <span
-                                    [ngClass]="{'pointer': ticketProfile.ticketSource === 'FROM_EMAIL'}"
+                                    class="pointer"
                                     [textContent]="getCompanyName()"
+                                    (click)="goToCompanyDashboard()"
                                     id="dropdownCompany"
                                     ngbDropdownToggle
                                     (mouseenter)="userCompanyTooltip.show($event.target)"

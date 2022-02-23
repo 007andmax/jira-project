@@ -421,8 +421,8 @@ export class OutgoingEmailComponent implements OnInit {
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
-        // this.smtp.domain = this.smtpForm.value.domain;
-        // this.smtp.port = this.smtpForm.value.port;
+        this.smtp.domain = this.smtpForm.value.domain;
+        this.smtp.port = this.smtpForm.value.port;
         this.smtp.encryptionType = this.smtpForm.value.encryptionType;
         this.smtp.exeption = false;
         this.disableFields = !!isTest;

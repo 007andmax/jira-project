@@ -59,7 +59,10 @@
                 [contractsDashboard]="contractsDashboard"
             ></app-contracts-dashboard>
         </div>
-        <div class="qt-df qt-jc-sb">
+        <div
+            class="qt-df qt-jc-sb"
+            *ngIf="getPermissions('VIEW_ACCOUNTING')"
+        >
             <div class="contract-info-list qt-mr-16">
                 <app-top-dashboard
                     [title]="'Top Customer Sale'"

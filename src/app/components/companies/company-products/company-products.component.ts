@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import * as moment from "moment";
 import { ProductCompanyReport } from '../../reports/class/product-company-report';
 import { CompanyproductsFilter } from './class/company-products-filter';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './company-products.component.html',
   styleUrls: ['./company-products.component.scss']
 })
-export class CompanyProductsComponent implements OnInit {
+export class CompanyProductsComponent implements OnInit, OnDestroy {
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
   selectedClient = null;
   loadingInProgress: boolean = false;
@@ -29,9 +29,11 @@ export class CompanyProductsComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
 
+
   ngOnInit() {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.companiesStateService.setSelectedCompanyId(params['id']);
+      if (params['id']) this.companiesStateService.setCompanyRoutingId(params['id']);
     });
     this.sub.add(subscription);
     this.leftPanelStateService.changeStateWithoutNavigate('company-products');
@@ -98,5 +100,8 @@ export class CompanyProductsComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

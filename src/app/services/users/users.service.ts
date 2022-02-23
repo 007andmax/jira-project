@@ -92,6 +92,12 @@ export class UsersService {
 
     return this.http.post(this.apiUrl + `users/${id}/avatar`, data);
   }
+  removeAvatar(userId: string) {
+    return this.http.delete(
+      `${this.apiUrl}users/${userId}/avatar`,
+      {}
+    );
+  }
   public updateUser(data) {
 
     return this.http.put(this.apiUrl + `users/${data.id}`, data).pipe(

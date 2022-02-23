@@ -126,7 +126,23 @@
     }
   }
 }
-
+.dropdown-menu {
+  .ngb-dp-day,
+  .ngb-dp-week-number,
+  .ngb-dp-weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 1.8rem;
+  }
+  .ngb-dp-months {
+    padding: 0 8px 14px;
+  }
+  .ngb-dp-weekday {
+    color: $gray-600;
+  }
+}
 .date-picker {
   overflow-x: hidden;
   position: relative;
@@ -141,41 +157,60 @@
     pointer-events: none;
   }
   .dropdown-menu {
-    border: none;
-    box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+    border: solid 1px $gray-400;
   }
   .ngb-dp-header,
   .ngb-dp-weekdays {
-    background: $primary-1;
-    color: $white;
-    font-size: 14px;
-    font-weight: bold;
+    background: $white;
+    color: $gray-600;
+    font-size: 12px;
+    font-weight: 600;
     .small {
-      font-size: 14px;
+      font-size: 12px;
       font-style: normal;
     }
   }
+  .ngb-dp-header {
+    padding: 12px 16px;
+  }
   .ngb-dp-weekdays {
     pointer-events: none;
+    text-transform: uppercase;
+    border-bottom: none;
   }
   .ngb-dp-month-name {
-    font-size: 14px;
+    font-size: 16px;
+    margin-bottom: 6px;
   }
   .custom-select {
-    background: $primary-1;
-    border: 1px solid $white;
+    color: $primary-2;
+    background: $white;
+    border: 1px solid $gray-400;
     border-radius: 3px;
     cursor: pointer;
     outline: none;
+    font-weight: 400;
+    font-size: 13px;
+    height: 2rem;
+    line-height: 20px;
     &:first-child {
-      margin-right: 5px;
+      margin-right: 8px;
     }
   }
   .btn.btn-link {
     color: $white;
     min-width: 20px;
+    text-align: left;
     span {
       margin-bottom: 2px;
+      color: $gray-800;
+    }
+  }
+  .right {
+    .btn.btn-link {
+      text-align: right;
     }
   }
   .ngb-dp-day {
@@ -184,30 +219,34 @@
     div {
       transition: all 0.3s;
       border-radius: 3px;
+      font-size: 12px;
+      font-weight: 500;
       &:hover {
         background: $gray-300;
       }
     }
     .bg-primary {
       background: $primary-1;
+      color: $white;
       &:hover {
         background: $primary-1;
       }
     }
   }
   .date-picker-actions {
-    padding: 10px 20px 20px;
+    padding: 10px 12px 12px;
     button {
-      font-weight: 600;
-      font-size: 11px;
-      padding: 0 5px;
+      font-weight: 500;
+      padding: 4px 8px;
       height: 24px;
+      font-size: 12px;
       &:not(:last-child) {
-        margin-right: 10px;
+        margin-right: 8px;
       }
     }
   }
 }
+
 
 .left-panel-full-wrapper {
   .date-picker {
@@ -224,7 +263,7 @@
     width: 100%;
     left: 0;
     top: 45px;
-    max-height: 350px;
+    max-height: 354px;
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: $white;
@@ -356,9 +395,9 @@
     background: $white;
   }
   .dropdown-menu {
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05);
-    border: solid 1px $background;
-    border-radius: 3px;
+    border-radius: 4px;
+    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+    border: solid 1px $gray-400;
     cursor: default;
     overflow: hidden;
     top: calc(100% + -372px);
@@ -500,7 +539,16 @@
 .ngb-dp-today {
   .custom-day {
     background: $primary-1;
+    border-radius: 6px;
     color: $white;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    width: 2.2rem;
+    height: 1.8rem;
+    display: flex;
+    align-self: center;
+    justify-content: center;
   }
 }
 .company-time-zone-drop-down {

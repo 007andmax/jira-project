@@ -88,10 +88,10 @@ export class CompanyProfileService {
     return this.http.get(`${this.apiUrl}data/getConstants`);
   }
 
-  removeAvatar(comapnyId: string, isDeleted: boolean) {
+  removeAvatar(comapnyId: string) {
     // https://dev.quicktech.com/company/73221c72-f87c-4519-8235-c4b57ad1cc19/true
     return this.http.delete(
-      `${this.apiUrl}company/${comapnyId}/${isDeleted}`,
+      `${this.apiUrl}company/${comapnyId}`,
       {}
     );
   }

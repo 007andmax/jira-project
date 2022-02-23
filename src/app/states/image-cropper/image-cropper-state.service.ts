@@ -1,37 +1,40 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ModalImageCropperStateService } from '../../services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from '../../services/modal/modal-image-cropper/class/image-croper';
- 
- 
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageCropperStateService {
   onConfirm: EventEmitter<any> = new EventEmitter();
-  action:string = null;
-  constructor(private modalImageCropperStateService:ModalImageCropperStateService) { }
+  action: string = null;
+  constructor(private modalImageCropperStateService: ModalImageCropperStateService) { }
   public setConfirm(data) {
     this.onConfirm.emit(data);
   }
-  public getConfirm () {
+  public getConfirm() {
     return this.onConfirm;
   }
   public getAction() {
     return this.action;
   }
   public setAction(data) {
-    this.action =data;
+    this.action = data;
   }
   public uploadFileOnBrower(event) {
-     
-    if (event.target.value) {
-      const file = event.target.files[0];
-      this.uploadFile(file).then((data: any) => {
-        let res = JSON.parse(data.response);
-          this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
-      });
-    }  
+    return new Promise((resolve, reject) => {
+      if (event.target.value) {
+        const file = event.target.files[0];
+        this.uploadFile(file).then((data: any) => {
+          let res = JSON.parse(data.response);
+          this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64, res.id));
+          resolve(res);
+          event.target.value = null;
+        });
+      }
+    });
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {

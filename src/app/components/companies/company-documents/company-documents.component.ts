@@ -15,9 +15,11 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
 
   ngOnInit() {
     this.companyId = this.activateRoute.snapshot.params['id'];
+    if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.companyId = params['id'];
+      if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
       this.companiesStateService.setSelectedCompanyId(this.companyId);
       this.filter.setCompanyId(this.companyId);
       this.filter.setCompanyScope(true);
@@ -81,5 +83,9 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.list = [...templates, ...documents];
       this.showPreloader = false;
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

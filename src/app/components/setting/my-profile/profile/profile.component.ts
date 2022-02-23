@@ -22,6 +22,10 @@ import { MapsAPILoader } from '@agm/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CrmCompanyJobTitle } from '../../crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 // import { ToastrService } from 'ngx-toastr';
 
@@ -48,7 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public suffix = '';
   public currentUser: any;
   public profileForm: FormGroup;
-
+  idUploadFile: string;
   // addres google map
   public latitude: number;
   public longitude: number;
@@ -68,6 +72,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private usersStateService: UsersStateService,
     private crmStateService: CrmStateService,
+    private imageCropperStateService: ImageCropperStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
+    private companiesService: CompaniesService,
   ) {
     // this.getCurrentUser();
     // this.getUserProfile();
@@ -130,6 +137,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
+    this.onCroppImage();
+  }
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (data) {
+        this.croppedImage = data.croppedImage;
+        if (this.imageSrc != '') this.userService
+          .removeAvatar(this.currentUser.id)
+          .subscribe(res => {
+            this.cropIt();
+          })
+        if (this.imageSrc == '') this.cropIt();
+      } else {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+        });
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   /**
@@ -316,20 +341,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   onSelectFile(event) {
     this.imageChangedEvent = event;
-    this.isCroppedImg = true;
+    // this.isCroppedImg = true;
 
     if (event.target.files && event.target.files[0]) {
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           if (result) {
             this.imageOrigin = result;
+            this.idUploadFile = result.id;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
+            event.target.value = null;
           }
         },
         error => {
-
+          event.target.value = null;
         }
       );
     }

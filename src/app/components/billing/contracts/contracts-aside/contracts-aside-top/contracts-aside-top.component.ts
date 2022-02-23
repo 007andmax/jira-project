@@ -33,6 +33,8 @@ export class ContractsAsideTopComponent implements OnInit {
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    if (this.companiesState.getCompanyRoutingId()) this.companiesDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
+
   }
   onSelectType(data) {
     this.contractsStateService.setType(data);

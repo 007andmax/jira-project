@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
@@ -22,7 +22,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
   providers: [PasswordManagerListService]
 })
 
-export class PasswordManagerComponent implements OnInit {
+export class PasswordManagerComponent implements OnInit, OnDestroy {
   public recordsData: Array<PasswordRecord> = [];
   public list_records: Array<PasswordRecord> = [];
   public showPreloader: boolean = true;

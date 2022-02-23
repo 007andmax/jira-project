@@ -154,6 +154,16 @@ export class CompaniesService {
     });
   }
 
+  public removeAttachment(id) {
+    return this.http.delete(this.apiUrl + `file/${id}`);
+  }
+  removeAvatar(comapnyId: string) {
+    return this.http.delete(
+      `${this.apiUrl}company/${comapnyId}`,
+      {}
+    );
+  }
+
   public getTicketGraph(id, frequency) {
     return this.http.get(this.apiUrl + `dashboard/company?companyId=${id}&frequency=${frequency}`);
   }

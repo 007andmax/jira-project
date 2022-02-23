@@ -34,7 +34,7 @@
     <td class="quotes-table__status">
         <span
             class="tag__modern"
-            [ngClass]="[getStatusClass(quote.status),(quote.status === 'TICKETED' || quote.status === 'INVOICED') ? 'pointer' : '']"
+            [ngClass]="[getStatusClass(quote.status),(quote.status === 'TICKETED' || quote.status === 'INVOICED' && getPermissions('VIEW_ACCOUNTING')) ? 'pointer' : '']"
             [textContent]="getStatusText(quote.status)"
             (click)="openInvoiceTikcet()"
         >

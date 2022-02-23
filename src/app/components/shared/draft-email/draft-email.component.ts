@@ -9,6 +9,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DraftEmailValidate } from './class/draft-email-validate';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-draft-email',
@@ -73,9 +74,19 @@ export class DraftEmailComponent implements OnInit {
 
   ngOnInit() {
     this.onShowAside();
-
   }
-
+  onChangeFiles(ids) {
+    if (this.draftEmail.attachments.length > ids.length) {
+      this.draftEmail.attachments.forEach(item => {
+        let find = ids.find(id => id === item);
+        if (!find) {
+          this.draftEmailService.removeAttachment(item).subscribe(data => {
+          })
+        }
+      })
+    }
+    this.draftEmail.setAttachments(JSON.parse(JSON.stringify(ids)));
+  }
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
       this.usersSelected = this.draftEmailStateService.getSelectedUsers();
@@ -87,6 +98,13 @@ export class DraftEmailComponent implements OnInit {
   }
 
   close() {
+    if (this.draftEmail.attachments.length > 0) {
+      forkJoin(
+        this.draftEmail.attachments.map(item => this.draftEmailService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
     this.opened = false;
     this.draftEmail = new DraftEmail();
     this.tab = 'plain';
@@ -162,6 +180,7 @@ export class DraftEmailComponent implements OnInit {
     this.addBtn.setDisabled(true);
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
       this.addBtn.setDisabled(false);
+      this.draftEmail.setAttachments([]);
       this.close();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

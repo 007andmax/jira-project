@@ -1,66 +1,66 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .company-info-aside {
   padding: 24px;
   &__main-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   &__main-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  background-position: center;
-  font-weight: 600;
-  color: $white;
-  margin-bottom: 10px;
-  // border: solid 1px $gray-400;
-  background: $primary-1;
-  border: 1px solid rgba(22, 164, 250, 0.2);
-  overflow: hidden;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    font-weight: 600;
+    color: $white;
+    margin-bottom: 10px;
+    // border: solid 1px $gray-400;
+    background: $primary-1;
+    border: 1px solid rgba(22, 164, 250, 0.2);
+    overflow: hidden;
   }
   &__name {
-  font-size: 18px;
+    font-size: 18px;
   }
   &__email {
-  font-size: 13px;
-  margin-bottom: 12px;
-  color: $gray-800;
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: $gray-800;
   }
   &__rating {
-     display: flex;
+    display: flex;
   }
   &__star {
-   width: 16px;
-   height: 16px;
-   margin-right: 4px;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
   }
   &__divider {
-  border-top: 1px dashed $gray-400;
-  margin: 16px 0;
+    border-top: 1px dashed $gray-400;
+    margin: 16px 0;
   }
   &__row-info {
-  margin-top: 24px;
+    margin-top: 24px;
   }
   &__row-info-line {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
   }
   &__row-info-label {
-   font-size: 11px;
-   color: $gray-600;
-   line-height: 12px;
-   margin-bottom: 4px;
+    font-size: 11px;
+    color: $gray-600;
+    line-height: 12px;
+    margin-bottom: 4px;
   }
   &__row-info-value {
-   font-size: 13px;
-   line-height: 16px;
-   color: $gray-800;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-800;
   }
   &__get-direction {
     font-size: 11px;
@@ -72,9 +72,9 @@
     display: flex;
     align-items: center;
     .icon__get-direction {
-        width: 20px;
-        height: 20px;
-        margin-right: 4px;
+      width: 20px;
+      height: 20px;
+      margin-right: 4px;
     }
   }
   &__ticket-created {
@@ -100,10 +100,10 @@
 
   &__ticket-created-email,
   &__primary-contact-email {
-     font-size: 12px;
-     font-stretch: normal;
-     color: $gray-800;
-     line-height: 1.33;
+    font-size: 12px;
+    font-stretch: normal;
+    color: $gray-800;
+    line-height: 1.33;
   }
 
   &__ticket-created-avatar,
@@ -113,8 +113,8 @@
     border-radius: 50%;
     margin-right: 10px;
     min-width: 32px;
-    background-position: center;
-    background-size: cover;
+    background-position: center !important;
+    background-size: cover !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,15 +132,15 @@
     // margin-right: -9px;
   }
   &__history-block-title {
-   font-size: 12px;
-   font-weight: 600;
-   line-height: 1.33;
-   color: $gray-800;
-   margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.33;
+    color: $gray-800;
+    margin-bottom: 4px;
   }
   &__history-block-date {
-   font-size: 11px;
-   line-height: 1.45;
-   color: $gray-800;
+    font-size: 11px;
+    line-height: 1.45;
+    color: $gray-800;
   }
 }

@@ -84,18 +84,11 @@ import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { UsersAsideDetailModule } from './components/users/users-aside-detail/users-aside-detail.module';
 import { TextAreaModule } from './directives/text-area/text-area.module';
-import { AntivirusModule } from './components/device/antivirus/antivirus.module';
-import { FileModule } from './components/device/file-explorer/file-explorer.module';
-import { HardwareModule } from './components/device/hardware/hardware.module';
-import { PasswordModule } from './components/device/password/password.module';
-import { ServicesModule } from './components/device/services/services.module';
-import { SoftwareModule } from './components/device/software/software.module';
-import { StartupModule } from './components/device/startup-programes/startup-programes.module';
-import { TerminalModule } from './components/device/terminal/terminal.module';
-import { WindowsModule } from './components/device/windows-update/windows-update.module';
-import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 import { AddMarketingSubscriptionTypeModule } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.module';
 import { AddUserToSubscribeModule } from './components/users/add-user-to-subscribe/add-user-to-subscribe.module';
+import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
+import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+
 
 declare var $: any;
 
@@ -200,7 +193,9 @@ declare var $: any;
     PermissionTicketSettingsService,
     PermissionEmailTempleteService,
     PermissionAccountingSettingsService,
-    PermissionCrmSettingsService
+    PermissionCrmSettingsService,
+    PermissionBillableService,
+    PermissionInvoicesService
   ],
   bootstrap: [AppComponent]
 })

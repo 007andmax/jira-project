@@ -73,6 +73,8 @@ import { PermissionEmailTempleteService } from './components/setting/email-templ
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
+import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
+import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 
 const routes: Routes = [
 
@@ -251,8 +253,8 @@ const routes: Routes = [
 
   {
     path: ':company/billable',
-    loadChildren: './components/billing/billable/billable.module#BillableModule'
-
+    loadChildren: './components/billing/billable/billable.module#BillableModule',
+    canActivate: [PermissionBillableService]
   },
   {
     path: ':company/default-services',
@@ -260,13 +262,14 @@ const routes: Routes = [
   },
   {
     path: ':company/invoices',
-    loadChildren: './components/billing/invoices/invoices.module#InvoicesModule'
+    loadChildren: './components/billing/invoices/invoices.module#InvoicesModule',
+    canActivate: [PermissionInvoicesService]
 
   },
   {
     path: ':company/billable-tickets',
-    loadChildren: './components/billing/billable/billable-tickets/billable-tickets.module#BillableTicketsModule'
-
+    loadChildren: './components/billing/billable/billable-tickets/billable-tickets.module#BillableTicketsModule',
+    canActivate: [PermissionBillableService]
   },
   {
     path: ':company/contracts',

@@ -1,6 +1,6 @@
 <div
     class="qt-aside-modern users-page__aside"
-    *ngIf="opened"
+    [hidden]="!opened"
 >
     <div
         class="collapse-arrow icon__close"
@@ -8,7 +8,10 @@
     ></div>
     <div class="qt-aside-modern__content">
         <div class="message-full-header">
-            <div class="message-full-from">
+            <div
+                class="message-full-from"
+                *ngIf="message"
+            >
                 <div class="message-full-user">
                     <span
                         class="message-full-user-name"
@@ -36,7 +39,11 @@
                 <div class="message-full-to-text">
                     <span>To:</span>
                 </div>
-                <div class="message-full-to-list">
+                <div
+                    class="message-full-to-list"
+                    *ngIf="message"
+                    [ngClass]="{'hide-all-user':!toggleAllUsers}"
+                >
                     <ng-template
                         ngFor
                         let-user
@@ -82,12 +89,37 @@
                     </ng-template>
                 </div>
             </div>
+            <p
+                class="toggle-all-users"
+                [textContent]="'Show all ' + getCountUsers() + ' emails'"
+                *ngIf="!toggleAllUsers"
+                (click)="toggleAllUsers = true"
+            ></p>
+            <p
+                class="toggle-all-users"
+                *ngIf="toggleAllUsers"
+                (click)="toggleAllUsers = false"
+            >
+                Hide
+            </p>
         </div>
         <div class="message-full-body">
-            <h3 [textContent]="message.subject"></h3>
-            <div class="messages-table__account-text">
-                <span [innerHTML]="getHtml( message.body)"></span>
+            <h3
+                *ngIf="message"
+                [textContent]="message.subject"
+            ></h3>
+            <div
+                id="message-body"
+                class="messages-table__account-text"
+            >
+                <span></span>
             </div>
+        </div>
+        <div
+            class="message-full-body attachments-message"
+            *ngIf="message && message.attachments.length > 0"
+        >
+            <app-ticket-profile-attachments [attachments]="message.attachments"></app-ticket-profile-attachments>
         </div>
     </div>
 </div>

@@ -70,6 +70,8 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
 
   cancelConfirm() {
     this.closeModal();
+    this.imageCropperStateService.setConfirm(null);
+
   };
 
   approveConfirm() {

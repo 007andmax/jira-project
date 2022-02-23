@@ -11,6 +11,7 @@ import { ReportsService } from 'src/app/services/reports/reports.service';
 import { ReportEmail } from '../../class/report-email';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-report-send-email',
@@ -65,8 +66,6 @@ export class ReportSendEmailComponent implements OnInit {
   action: string = null;
   tab: string = 'plain';
   draftEmail: ReportEmail = new ReportEmail();
-  uploadFiles: Array<File> = [];
-  filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
   @Input() report: string = "";
@@ -98,8 +97,6 @@ export class ReportSendEmailComponent implements OnInit {
     this.messageContent = '';
     this.messageHTML = '';
     this.draftEmailStateService.onClear();
-    this.uploadFiles = [];
-    this.filesInfo = new FilesInfo();
     this.action = null;
     this.activeModal.dismiss('Cross click');
   }
@@ -108,49 +105,6 @@ export class ReportSendEmailComponent implements OnInit {
     this.draftEmail.setEmails(data);
   }
 
-  public uploadFileOnBrower(event) {
-
-    if (event.target.value) {
-      const file = event.target.files[0];
-
-      this.uploadFiles.push(file);
-      this.filesInfo.files.push(new FilesInfoItem());
-      let indexUploadFile = this.uploadFiles.length - 1;
-      let indexFileInfo = this.filesInfo.files.length - 1;
-      this.uploadFile(this.uploadFiles[indexUploadFile], this.filesInfo.files[indexFileInfo]).then((data: any) => {
-        let res = JSON.parse(data.response);
-        this.filesInfo.files[indexFileInfo].setFileId(res.id);
-        event.target.value = null;
-        this.setDisableUplaodFile(false);
-
-      }).catch(err => {
-        this.setDisableUplaodFile(false);
-        if (err.code === 400 || err.code === 500) {
-          let message = err.code === 500 ? 'Maximum upload size of 4 MB' : err.message;
-          this.filesInfo.files[indexFileInfo].setError(true, message, err.code);
-          this.filesInfo.quantityErrorFiles++;
-        }
-      })
-
-    }
-  }
-  reloadAttachment(fileInfo, file) {
-    if (fileInfo.error) return;
-    this.setDisableUplaodFile(true);
-    this.uploadFile(file, fileInfo).then((data: any) => {
-      let res = JSON.parse(data.response);
-      fileInfo.setFileId(res.id);
-      this.setDisableUplaodFile(false);
-    }).catch(err => {
-      this.setDisableUplaodFile(false);
-      if (err.code === 400 || err.code === 500) {
-        let message = err.code === 500 ? 'Maximum upload size of 4 MB' : err.message;
-        fileInfo.setError(true, message, err.code);
-        this.filesInfo.quantityErrorFiles++;
-      }
-    })
-
-  }
   onSend() {
 
     this.draftEmail.setContent(this.reportsStateService.parseReportContent(this.report));
@@ -174,43 +128,6 @@ export class ReportSendEmailComponent implements OnInit {
     }
 
   }
-
-  removeAttachment(index) {
-
-    this.uploadFiles.splice(index);
-    this.filesInfo.files.splice(index);
-  };
-  setDisableUplaodFile(value) {
-    this.elRef.nativeElement.querySelector('#upload-file-email').disabled = value;
-  }
-  uploadFile(file, fileInfo) {
-    return new Promise((resolve, reject) => {
-      this.setDisableUplaodFile(true);
-      if (file.size > 4194304) {
-        reject({ code: 500 });
-        return;
-      }
-      var fd = new FormData();
-      fd.append("file", file);
-      var xhr = new XMLHttpRequest();
-      xhr.upload.addEventListener("progress", (progress) => {
-        fileInfo.progress = 100 * (progress.loaded / progress.total);
-      }, false);
-      xhr.addEventListener("load", (event) => {
-        resolve(xhr);
-      }, false);
-      xhr.addEventListener("error", (error) => {
-        reject(error);
-      }, false);
-      xhr.open("POST", "/file?isAvatar=false");
-      xhr.send(fd);
-    });
-  }
-  styleProgressBar(progress) {
-    return {
-      width: progress + '%'
-    };
-  };
 
   trackByIndex(index, item) {
     return index;

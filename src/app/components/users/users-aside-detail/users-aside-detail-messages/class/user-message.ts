@@ -9,6 +9,7 @@ export class UserMessage {
     senderName: string;
     otherRecipients: []
     recipientsFromSystem: Array<UserMessageRecipient> = [];
+    attachments = [];
     constructor(data) {
         if (data) {
             for (const key in data) {

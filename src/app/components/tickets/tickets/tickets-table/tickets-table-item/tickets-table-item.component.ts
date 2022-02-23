@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Ticket } from '../../../class/ticket';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from 'src/app/components/users/class/user';
@@ -7,6 +7,7 @@ import * as moment from "moment";
 import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../../class/status-color';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -14,7 +15,7 @@ import { StatusColor } from '../../../class/status-color';
   styleUrls: ['./tickets-table-item.component.scss'],
   providers: [TicketsListService]
 })
-export class TicketsTableItemComponent implements OnInit {
+export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;
   @Input() set setTicket(value) {
     this.ticket = value;
@@ -28,13 +29,19 @@ export class TicketsTableItemComponent implements OnInit {
   requestedUser: User;
   indexNoAvatar: number = 0;
   listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
-
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService) { }
 
+
   ngOnInit() {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe(data => {
+      this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
+      this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
+    })
+    this.sub.add(getOnUsers);
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
@@ -70,6 +77,9 @@ export class TicketsTableItemComponent implements OnInit {
   }
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
   public trackById(index, item) {
     return item.id;

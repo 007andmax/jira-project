@@ -4,61 +4,65 @@
     #products="ngbDropdown"
     [ngClass]="{'hide-all-user':!toggleAllUsers}"
 >
-    <mat-form-field>
-        <mat-chip-list
-            #chipList
-            aria-label="Fruit selection"
-        >
-            <mat-chip
-                *ngFor="let user of selectedUsers; let i = index"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="remove(i)"
+    <div
+        class="dropdown-recipients-body"
+        ngbDropdownToggle
+    >
+        <mat-form-field>
+            <mat-chip-list
+                #chipList
+                aria-label="Fruit selection"
             >
-                {{user}}
-                <mat-icon
-                    matChipRemove
-                    *ngIf="removable"
+                <mat-chip
+                    *ngFor="let user of selectedUsers; let i = index"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(i)"
                 >
-                    cancel
-                </mat-icon>
-            </mat-chip>
-            <input
-                id="dropdownServices"
-                ngbDropdownToggle
-                placeholder="Add receipt email address"
-                #userInput
-                class="pointer"
-                [formControl]="userCtrl"
-                autocomplete="new-password"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (input)="onSearch($event)"
-                (keyup)="onKeyUp($event)"
-            >
-        </mat-chip-list>
-        <div
-            class="dropdown-menu unique-down"
-            ngbDropdownMenu
-            aria-labelledby="dropdownServices"
-        >
-            <ng-template
-                ngFor
-                let-user
-                [ngForOf]="userList"
-                [ngForTrackBy]="trackByIndex"
-            >
-                <button
-                    ngbDropdownItem
-                    class="dropdown-item"
-                    (click)="selected(user)"
-                    [textContent]="user.primaryEmail"
+                    {{user}}
+                    <mat-icon
+                        matChipRemove
+                        *ngIf="removable"
+                    >
+                        cancel
+                    </mat-icon>
+                </mat-chip>
+                <input
+                    id="dropdownServices"
+                    placeholder="Add receipt email address"
+                    #userInput
+                    class="pointer"
+                    [formControl]="userCtrl"
+                    autocomplete="new-password"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (input)="onSearch($event)"
+                    (keyup)="onKeyUp($event)"
                 >
-                </button>
-            </ng-template>
-        </div>
-    </mat-form-field>
+            </mat-chip-list>
+        </mat-form-field>
+    </div>
+    <div
+        class="dropdown-menu unique-down"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <ng-template
+            ngFor
+            let-user
+            [ngForOf]="userList"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected(user)"
+                [textContent]="user.primaryEmail"
+            >
+            </button>
+        </ng-template>
+    </div>
     <p *ngIf="showError">at least 1 user</p>
     <p *ngIf="showErrorClient">please choose Client</p>
     <p

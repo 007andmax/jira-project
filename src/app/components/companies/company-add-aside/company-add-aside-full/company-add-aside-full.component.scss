@@ -17,3 +17,15 @@
         padding: 16px;
     }
 }
+.new-link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .remove-link {
+        width: auto;
+        margin: 0px 0px 0px 20px !important;
+    }
+}
+#upload-file {
+    display: none !important;
+}

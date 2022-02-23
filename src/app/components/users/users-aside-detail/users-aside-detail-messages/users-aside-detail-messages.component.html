@@ -71,4 +71,10 @@
         class="loading"
         *ngIf="showPreloader"
     ></div>
+    <div
+        class="no-exist-messages"
+        *ngIf="!showPreloader && messages.length === 0"
+    >
+        No messages
+    </div>
 </div>

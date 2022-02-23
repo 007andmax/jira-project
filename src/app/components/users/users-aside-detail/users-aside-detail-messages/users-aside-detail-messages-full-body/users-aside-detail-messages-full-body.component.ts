@@ -12,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
   opened: boolean = false;
   message: UserMessage;
+  toggleAllUsers: boolean = false;
+
   constructor(private usersStateService: UsersStateService,
     private sanitized: DomSanitizer,) { }
 
@@ -19,8 +21,12 @@ export class UsersAsideDetailMessagesFullBodyComponent implements OnInit {
     this.usersStateService.openMessageAside.subscribe(data => {
       this.message = data;
       this.opened = true;
+      document.body.querySelector("#message-body span").innerHTML = this.message.body;
 
     })
+  }
+  getCountUsers() {
+    return (this.message) ? this.message.recipientsFromSystem.length + this.message.otherRecipients.length : '';
   }
   getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '';

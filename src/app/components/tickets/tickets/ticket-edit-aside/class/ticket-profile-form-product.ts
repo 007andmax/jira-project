@@ -10,7 +10,17 @@ export class TicketProfileFormProduct {
     discountType: string = "PERCENT";
     completed: boolean = true;
     valdiateSaleCost: boolean = true;
-    constructor() {
+    constructor(data = null) {
+        if (data) {
+            this.item = new TicketProfileFormItemProduct(data.item);
+            this.itemOrder = data.itemOrder;
+            this.quantity = data.quantity;
+            this.serialNumber = data.serialNumber;
+            this.discountAmount = data.discountAmount;
+            this.discountType = data.discountType;
+            this.completed = data.completed;
+            this.valdiateSaleCost = data.valdiateSaleCost;
+        }
     }
     public setData(data, index) {
         this.item = new TicketProfileFormItemProduct(data);

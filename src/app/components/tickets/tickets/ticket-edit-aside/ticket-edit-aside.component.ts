@@ -33,6 +33,7 @@ import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
 import { StatusColor } from '../../class/status-color';
 import { find } from 'rxjs-compat/operator/find';
 import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -73,6 +74,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     private appStateService: AppStateService,
     private modalService: NgbModal,
     public appService: AppService,
+    private router: Router,
     private devicesStateService: DevicesStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesStateService: CompaniesStateService) { }
@@ -198,6 +200,13 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
   showModalAddUpdate() {
     const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update' });
+  }
+  goToCompanyDashboard() {
+    if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts()) return;
+    this.companiesStateService.setSelectedCompanyId(this.ticketProfile.company.id);
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);
+
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
@@ -415,6 +424,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     return `, Agent - ${this.ticketProfile.agent.label}`;
   }
   close() {
+    if (this.updateForm) this.updateForm.removeAllAttachments();
     this.ticketProfile = new TicketProfile();
     this.opened = false;
     this.modeSubject = 'view';
