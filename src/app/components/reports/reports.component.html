@@ -31,13 +31,14 @@
         >
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_SALES_REPORT')"
-                [img]="'/assets/img/icons/sales.svg'"
+                class="d-sales"
                 [title]="'Sales'"
                 [listTitles]="getListTitles('SALES',searchText)"
                 [listStates]="getListStates('SALES',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_REMOTE_ACCESS_REPORT')"
+                class="d-remote-access"
                 [img]="'/assets/img/icons/remote-access2.svg'"
                 [title]="'Remote Access'"
                 [listTitles]="getListTitles('REMOTE_ACCESS',searchText)"
@@ -47,13 +48,13 @@
         <div class="col-sm-3">
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_FINANCIAL_REPORT')"
-                [img]="'/assets/img/icons/financial.svg'"
+                class="d-financial"
                 [title]="'Financial'"
                 [listTitles]="getListTitles('FINANCIAL',searchText)"
                 [listStates]="getListStates('FINANCIAL',searchText)"
             ></app-report-list-item>
             <app-report-list-item
-                [img]="'/assets/img/icons/Report_tickets.svg'"
+                class="d-report-ticket"
                 [title]="'Tickets'"
                 [listTitles]="getListTitles('TICKETS',searchText)"
                 [listStates]="getListStates('TICKETS',searchText)"
@@ -65,14 +66,14 @@
         >
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
-                [img]="'/assets/img/icons/performance.svg'"
+                class="d-performance"
                 [title]="'Performance'"
                 [listTitles]="getListTitles('PERFORMANCE',searchText)"
                 [listStates]="getListStates('PERFORMANCE',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
-                [img]="'/assets/img/icons/commision.svg'"
+                class="d-commision"
                 [title]="'Commissions'"
                 [listTitles]="getListTitles('COMMISSIONS',searchText)"
                 [listStates]="getListStates('COMMISSIONS',searchText)"
@@ -81,13 +82,13 @@
         <div class="col-sm-3">
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_TAXES_REPORT')"
-                [img]="'/assets/img/icons/taxes.svg'"
+                class="d-taxes"
                 [title]="'Taxes'"
                 [listTitles]="getListTitles('TAXES',searchText)"
                 [listStates]="getListStates('TAXES',searchText)"
             ></app-report-list-item>
             <app-report-list-item
-                [img]="'/assets/img/icons/income.svg'"
+                class="d-income"
                 [title]="'Income accounts'"
                 [listTitles]="getListTitles('INCOME_ACCOUNTS',searchText)"
                 [listStates]="getListStates('INCOME_ACCOUNTS',searchText)"

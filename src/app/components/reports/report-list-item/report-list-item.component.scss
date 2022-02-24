@@ -1,7 +1,135 @@
 .d-report{
   position: absolute;
   top: -3px;
+}
+
+
+.d-device {
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/devices.svg);
+  background-repeat: no-repeat;
   width: 24px;
   height: 24px;
+  background-position: center;
+}
+
+.d-warranty{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/taxes.svg);
   background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-hardware{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/device/operating-system.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-network{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/device/networkcard.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-software{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/software.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-sales{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/sales.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-remote-access{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/remote-access2.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-financial{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/financial.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-report-ticket{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/Report_tickets.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-performance{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/performance.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-commision{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/commision.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-taxes{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/taxes.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+}
+
+.d-income{
+  display: inline-block;
+  max-width: 100%;
+  background-image: url(/assets/img/icons/income.svg);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-position: center;
 }
