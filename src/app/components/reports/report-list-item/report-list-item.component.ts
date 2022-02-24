@@ -12,6 +12,7 @@ export class ReportListItemComponent implements OnInit {
   @Input() img: string;
   @Input() listTitles: Array<string> = [];
   @Input() listStates: Array<string> = [];
+  @Input() bgImageVariable: string;
   constructor(private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {

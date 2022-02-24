@@ -1,8 +1,9 @@
 <div class="report">
     <div>
         <p [textContent]="title"></p>
-        <img [src]="img"
-        >
+        <!-- <img [src]="img"
+        > -->
+        <div class="d-report" [style.background-image]="'url('+bgImageVariable+')'"></div>
         <ul>
             <!-- ui-sref="byProducts" -->
             <ng-template

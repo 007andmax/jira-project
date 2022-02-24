@@ -31,14 +31,14 @@
       >
       <app-report-list-item
           *ngIf="getPermissions('VIEW_DEVICE_REPORT')"
-          [img]="'/assets/img/icons/devices.svg'"
+          bgImageVariable="/assets/img/icons/devices.svg"
           [title]="'Device'"
           [listTitles]="getListTitles('DEVICE',searchText)"
           [listStates]="getListStates('DEVICE',searchText)"
       ></app-report-list-item>
       <app-report-list-item
       *ngIf="getPermissions('VIEW_WARRANTY_REPORT')"
-      [img]="'/assets/img/icons/taxes.svg'"
+      bgImageVariable="/assets/img/icons/taxes.svg"
       [title]="'Warranty'"
       [listTitles]="getListTitles('WARRANTY',searchText)"
       [listStates]="getListStates('WARRANTY',searchText)"
@@ -47,7 +47,7 @@
       <div class="col-sm-3">
         <app-report-list-item
         *ngIf="getPermissions('VIEW_HARDWARE_REPORT')"
-        [img]="'/assets/img/device/operating-system.svg'"
+        bgImageVariable="/assets/img/device/operating-system.svg"
         [title]="'Hardware'"
         [listTitles]="getListTitles('HARDWARE',searchText)"
         [listStates]="getListStates('HARDWARE',searchText)"
@@ -59,7 +59,7 @@
       >
         <app-report-list-item
         *ngIf="getPermissions('VIEW_NETWORK_REPORT')"
-        [img]="'/assets/img/device/networkcard.svg'"
+        bgImageVariable="/assets/img/device/networkcard.svg"
         [title]="'Network'"
         [listTitles]="getListTitles('NETWORK',searchText)"
          [listStates]="getListStates('NETWORK',searchText)"
@@ -68,7 +68,7 @@
       <div class="col-sm-3">
         <app-report-list-item
         *ngIf="getPermissions('VIEW_SOFTWARE_REPORT')"
-        [img]="'/assets/img/icons/software.svg'"
+        bgImageVariable="/assets/img/icons/software.svg"
         [title]="'Software'"
         [listTitles]="getListTitles('SOFTWARE',searchText)"
         [listStates]="getListStates('SOFTWARE',searchText)"

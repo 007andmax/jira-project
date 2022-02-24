@@ -80,6 +80,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   blockedWindowsUpdateList : any [] = [];
   blockedNumber : number;
   categories: number;
+  networkDisk: any = [];
 
   constructor(
     private agentService: AgentService,
@@ -173,6 +174,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.windowUpdatePendingList.push(data);
           }
         }
+        this.getNetworkDriveDetail(this.kafkaMessage.NetworkDrives);
         this.cd.detectChanges();
       }
     }
@@ -487,6 +489,51 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
         return 0;
       });
+    });
+  }
+
+  getNetworkDriveDetail(resp:any) {
+    let colors = ["#0057a8", "#00d8e7", "#16a4fa", "#0CB2B2", "#485EF0"];
+    let count = 0;
+    this.networkDisk = resp;
+
+    this.networkDisk.forEach((element) => {
+      if (element.IsSystem === true) {
+        element.color = "#2ec866";
+      } else {
+        element.color = colors[count];
+        count++;
+      }
+
+      if (count == 5) {
+        count = 0;
+      }
+
+      if (element.FreeSpace != "" && element.Size != "") {
+        let size = this.convertToGB(element.Size);
+        let free = this.convertToGB(element.FreeSpace);
+        let osize = parseInt(size) - parseInt(free);
+        element.percent = isNaN(Math.round((osize / parseInt(size)) * 100))
+          ? 0
+          : Math.round((osize / parseInt(size)) * 100);
+      } else {
+        element.percent = 0;
+      }
+    });
+
+    this.networkDisk.sort((a, b) => {
+      if (a["Caption"] && b["Caption"]) {
+        return a["Caption"].toLowerCase() > b["Caption"].toLowerCase()
+          ? 1
+          : b["Caption"].toLowerCase() > a["Caption"].toLowerCase()
+            ? -1
+            : 0;
+      } else if (a["Caption"]) {
+        return 1;
+      } else if (b["Caption"]) {
+        return -1;
+      }
+      return 0;
     });
   }
 
