@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild,} from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild, } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -58,7 +58,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   selectedCtrl = new FormControl();
   tagFilterValue: string = "";
   currentCompany: any = null;
-  companyGuid: string ="";
+  companyGuid: string = "";
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -75,7 +75,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private ngZone: NgZone,
     private remoteControlService: RemoteControlService,
     private companiesService: CompaniesService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.companyId = this.activateRoute.snapshot.params["id"];
@@ -98,17 +98,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.AssetDetail();
-       // this.add(undefined);
-        this.CurrentUser();
-      });
+    this.AssetDetail();
+    this.CurrentUser();
   }
 
   toogleDevices() {
@@ -143,26 +134,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.OperatingSystem(element.ID, index);
         this.GetCurrentConfig(element.ID);
       });
     });
     this.showPreloader = false;
-  }
-
-  OperatingSystem(value: any, index: any) {
-    this.agentService.getOperatingSystemByAssetId(value).subscribe((resp) => {
-      if (resp && resp.length > 0 && resp[0].Caption) {
-        this.operatingSystem.push(resp[0]);
-        this.assetList[index].Caption =
-          resp[0].Caption.replace("Microsoft", "") +
-          " " +
-          resp[0].OSArchitecture +
-          " " +
-          resp[0].Version;
-        this.assetList[index].OSArchitecture = resp[0].OSArchitecture;
-      }
-    });
   }
 
   GetCurrentConfig(assetID: any) {
@@ -276,24 +251,24 @@ export class CompanyDeviceBetaComponent implements OnInit {
     if (command === "ar") {
       this.agentService.UninstallAgent(assetId);
     }
-    if(command === 'ura') {
+    if (command === 'ura') {
       this.temporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "UninstallRemoteAgent";
       this.agentService.SendPowerShellCommand(data);
     }
-    if(command === 'ira') {
+    if (command === 'ira') {
       this.temporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "InstallRemoteAgent";
       this.agentService.SendPowerShellCommand(data);
     }
-    if(command === 'm') {
+    if (command === 'm') {
       this.agentService.getAssetByGuid(assetId).subscribe((resp) => {
         let cAsset = resp[0];
         cAsset.IsMasterAgent = true;
 
-        this.agentService.overrideAsset(cAsset).subscribe( result => {
+        this.agentService.overrideAsset(cAsset).subscribe(result => {
           this.toastr.success('Device set as master agent');
         });
 
@@ -333,7 +308,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
           window.open(url, "_self");
           this.isConnection = true;
         },
-        (error) => {}
+        (error) => { }
       );
   }
 
@@ -420,21 +395,21 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  openAside(type,asset){
+  openAside(type, asset) {
     this.open = true;
     this.tab = type;
-    this.assetData = this.assetList.find((x)=>x.Guid === asset.Guid);
+    this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
     this.Preloader = false;
   }
 
-  menuclose(){
+  menuclose() {
     this.open = false;
     this.tab = "SYSTEM";
   }
 
-  updateAsset(){
+  updateAsset() {
     this.agentService.overrideAsset(this.assetData).subscribe(
       (resp) => {
       },
@@ -461,16 +436,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
   }
 
-  updateOperationgSystem(id,asset){
-    let data = this.operatingSystem.find((x)=>x.AssetID === id);
+  updateOperationgSystem(id, asset) {
+    let data = this.operatingSystem.find((x) => x.AssetID === id);
     data.OSArchitecture = asset.OSArchitecture;
     this.agentService.overrideOperationSystem(data).subscribe(
-      (resp)=>{
+      (resp) => {
         this.setPreviewDataDevice();
-    },
-    (error)=>{
-      this.toastr.error("Something went wrong please try again.");
-    }
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
     );
 
   }
@@ -478,8 +453,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   getSoftwareDetail(asset) {
     this.softwareList = [];
     this.agentService.getSoftwareListByAssetId(asset.ID).subscribe((resp) => {
-      if(resp.length>0)
-      {
+      if (resp.length > 0) {
         this.softwareList = resp;
       }
     });
@@ -502,7 +476,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   public chackDefaultValue(value) {
-    return (!value || value === "") ? "N/A" : value.replace("Microsoft","");
+    return (!value || value === "") ? "N/A" : value.replace("Microsoft", "");
   }
 
   getLinkSpeed(value) {
@@ -524,13 +498,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
     return Date.now();
   }
 
-  onOperatingSystem(data,type) {
-    if(type === "Warranty")
-    {
+  onOperatingSystem(data, type) {
+    if (type === "Warranty") {
       this.assetData.WarrantyExpires = data || '0001-01-01';
     }
-    if(type === "Install")
-    {
+    if (type === "Install") {
       this.assetData.InstallDate = data || '0001-01-01';
     }
     this.agentService.overrideAsset(this.assetData).subscribe(
@@ -553,7 +525,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     return moment(new Date(value.year, value.month - 1, value.day)).format('YYYY/MM/DD');
   }
 
-  gotiDetailDevice(Guid:string){
+  gotiDetailDevice(Guid: string) {
     localStorage.setItem("company_id", this.companyId);
     const type = "workstation";
     var url = `/#/${this.companiesStateService

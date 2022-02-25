@@ -109,23 +109,15 @@ export class DevicesComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        let searchData: any = localStorage.getItem("currentSearch");
-        if (searchData) {
-          let searchObj = JSON.parse(searchData);
-          this.selectedTag = searchObj.Criteria;
-          this.searchTag = this.selectedTag;
-          localStorage.removeItem("currentSearch");
-        }
-        this.add(undefined);
-        this.CurrentUser();
-      });
+    let searchData: any = localStorage.getItem("currentSearch");
+    if (searchData) {
+      let searchObj = JSON.parse(searchData);
+      this.selectedTag = searchObj.Criteria;
+      this.searchTag = this.selectedTag;
+      localStorage.removeItem("currentSearch");
+    }
+    this.add(undefined);
+    this.CurrentUser();
   }
 
   searchDeviceTag(data: any) {
@@ -145,7 +137,6 @@ export class DevicesComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.OperatingSystem(element.ID, index);
         this.GetCurrentConfig(element.ID);
       });
 
@@ -195,21 +186,6 @@ export class DevicesComponent implements OnInit {
         this.toastr.success("HardwareType change successfully.");
       });
     }
-  }
-
-  OperatingSystem(value: any, index: any) {
-    this.agentService.getOperatingSystemByAssetId(value).subscribe((resp) => {
-      if (resp && resp.length > 0 && resp[0].Caption) {
-        this.operatingSystem.push(resp[0]);
-        this.assetList[index].Caption =
-          resp[0].Caption.replace("Microsoft", "") +
-          " " +
-          resp[0].OSArchitecture +
-          " " +
-          resp[0].Version;
-        this.assetList[index].OSArchitecture = resp[0].OSArchitecture;
-      }
-    });
   }
 
   GetCurrentConfig(assetID: any) {

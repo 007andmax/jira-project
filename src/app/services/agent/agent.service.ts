@@ -21,7 +21,15 @@ export class AgentService {
   public constructor(
     private http: HttpClient,
     private wsService: WebsocketService
-  ) { }
+  ) { 
+    this.getAgentToken(
+      "QuickTech",
+      "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
+    )
+    .subscribe((data) => {
+      this.setAccessToken(data.AccessToken);        
+    });
+  }
 
   encrypt128(keys, value) {
     var key = CryptoJS.enc.Utf8.parse(keys);
