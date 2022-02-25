@@ -68,19 +68,11 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-          if (resp.length > 0) {
-            this.asset = resp[0];
-            this.getSoftwareDetail(this.asset.ID);
-          }
-        });
+      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+        if (resp.length > 0) {
+          this.asset = resp[0];
+          this.getSoftwareDetail(this.asset.ID);
+        }
       });
   }
 

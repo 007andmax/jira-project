@@ -127,18 +127,10 @@ export class TerminalComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-          this.asset = resp[0];
-          this.GetCurrentConfig(resp[0].ID);
-          this.CurrentUser();
-        });
+      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+        this.asset = resp[0];
+        this.GetCurrentConfig(resp[0].ID);
+        this.CurrentUser();
       });
   }
 

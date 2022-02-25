@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
@@ -27,6 +27,7 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) expire: NgbDatepicker;
+  @ViewChild('searchInput') private searchInput: ElementRef;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   DateFormats = CONFIGCONSTANTS.DateFormat;
@@ -199,15 +200,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setPreviewDataDevice() {
     this.currentUser = localStorage.getItem("currentUser");
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.getAssetDetail();
-      });
+      this.getAssetDetail();
   }
 
   getAssetDetail() {
@@ -780,5 +773,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onChangeTemplate(data) {
     this.tab = data;
+  }
+
+  focusMyInput() {
+    setTimeout(() => this.searchInput.nativeElement.focus(), 0);
   }
 }

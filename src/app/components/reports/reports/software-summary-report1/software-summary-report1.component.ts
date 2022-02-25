@@ -66,17 +66,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        console.log("data", data);
-        this.agentService.setAccessToken(data.AccessToken);
-        this.companiesStateService.getOnCompanies().subscribe((data) => {
-          this.companies = this.getClientsList(data);
-        });
+      this.companiesStateService.getOnCompanies().subscribe((data) => {
+        this.companies = this.getClientsList(data);
       });
   }
   getClientsList(data) {

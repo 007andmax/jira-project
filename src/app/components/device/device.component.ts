@@ -115,22 +115,13 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        console.log("data", data);
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-          this.deviceName = resp[0].Name;
-          this.asset = resp[0];
+      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+        this.deviceName = resp[0].Name;
+        this.asset = resp[0];
 
-          if(resp[0].AgentVersion == ""){
-            this.isNonAgentDevice = false;
-          }
-        });
+        if(resp[0].AgentVersion == ""){
+          this.isNonAgentDevice = false;
+        }
       });
   }
 

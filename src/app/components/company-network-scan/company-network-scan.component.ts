@@ -88,15 +88,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
 
   getDevices() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.AssetDetail();
-      });
+      this.AssetDetail();
   }
 
   AssetDetail() {
@@ -165,7 +157,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.toastr.error("Error adding device, please try again!");
     });
   }
-  
+
 
   checkCanInstallAgent() {
     return this.checkSelected() && this.networkScanInstallAgent.getCredential();

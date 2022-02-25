@@ -28,16 +28,8 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.open1 = true;
     this.companiesService.getTechCompany().subscribe(data => {
       this.company = data;
-      this.agentService
-        .getAgentToken(
-          "QuickTech",
-          "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-        )
-        .subscribe((data) => {
-          this.agentService.setAccessToken(data.AccessToken);
-          this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
-            this.searches = res;
-          });
+        this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
+          this.searches = res;
         });
 
     });

@@ -325,7 +325,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <h4 class="d-network">Network Drives</h4>
+                                <h4 class="d-network" *ngIf="this.networkDisk != ''">Network Drives</h4>
                                 <ul class="list-unstyled">
                                   <li
                                       [ngStyle]="driveBorderColor(network.percent, network.IsSystem)"
@@ -422,6 +422,7 @@
                             <div class="dashboard-col col-50 tags" id="elementID">
                                 <div class="col-title">
                                     <h2>Tags</h2>
+                                    <span> <button mat-raised-button (click)="focusMyInput()">Tag Focus</button></span>
                                 </div>
                                 <div
                                     class="grey-dropdown"
@@ -440,6 +441,7 @@
                                         </mat-chip-list>
                                         <input autofocus
                                             id="dropdownServices"
+                                            #searchInput
                                             [(ngModel)]="tagFilterValue"
                                             ngbDropdownToggle
                                             class="pointer"

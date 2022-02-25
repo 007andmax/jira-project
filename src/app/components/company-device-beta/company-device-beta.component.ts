@@ -605,7 +605,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.OperatingSystem(element.ID, index);
         this.GetCurrentConfig(element.ID);
       });
 

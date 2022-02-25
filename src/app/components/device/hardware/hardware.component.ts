@@ -79,18 +79,10 @@ export class HardwareComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-          if (resp.length > 0) {
-            this.HardwareList(resp[0].ID);
-          }
-        });
+      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+        if (resp.length > 0) {
+          this.HardwareList(resp[0].ID);
+        }
       });
   }
 

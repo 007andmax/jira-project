@@ -43,19 +43,11 @@ export class ServicesComponent implements OnInit {
   }
 
   public getAllServicesList() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
-          this.asset = resp[0];
-          this.assetId = this.asset.ID;
-          this.agentService.GetService(this.assetId);
-          this.getReload(null);
-        });
+      this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
+        this.asset = resp[0];
+        this.assetId = this.asset.ID;
+        this.agentService.GetService(this.assetId);
+        this.getReload(null);
       });
   }
 

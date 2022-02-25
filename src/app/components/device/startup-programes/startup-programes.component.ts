@@ -46,18 +46,10 @@ export class StartupComponent implements OnInit {
   }
 
   public GetStartupPrograms() {
-    this.agentService
-      .getAgentToken(
-        "QuickTech",
-        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
-      )
-      .subscribe((data) => {
-        this.agentService.setAccessToken(data.AccessToken);
-        this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
-          this.asset = resp[0];
-          this.assetId = this.asset.ID;
-          this.agentService.GetStartupPrograms(this.assetId);
-        });
+      this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
+        this.asset = resp[0];
+        this.assetId = this.asset.ID;
+        this.agentService.GetStartupPrograms(this.assetId);
       });
   }
 
