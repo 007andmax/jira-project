@@ -252,3 +252,173 @@ span.qt-input-search:before {
   background-repeat: no-repeat;
 
 }
+
+.qt-btn.--outline-blue{
+  margin-left: 100px !important;
+}
+
+.device-add-aside {
+  .ticket-priority {
+      width: 160px;
+      font-size: 12px;
+
+      .dropdown-toggle {
+        height: 32px;
+        border: none;
+        background-color: white;
+      }
+      .default-value {
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+  }
+
+}
+
+.qt-aside-modern{
+right: -330px !important;
+top: -170px !important;
+}
+
+.Device-Name {
+  width: 83px;
+  height: 20px;
+  margin: 0 169px 6px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Device-Type {
+  width: 79px;
+  height: 20px;
+  margin: 0 449px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Asset-Tag {
+  width: 64px;
+  height: 20px;
+  margin: 0 6px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Model-No {
+  width: 64px;
+  height: 20px;
+  margin: 0 112px 6px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Install-Date {
+  width: 71px;
+  height: 20px;
+  margin: 0 185px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Warranty-Date {
+  width: 92px;
+  height: 20px;
+  margin: 0 164px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Manufacturer {
+  width: 86px;
+  height: 20px;
+  margin: 0 442px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Tags {
+  width: 32px;
+  height: 20px;
+  margin: 0 38px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Note {
+  width: 31px;
+  height: 20px;
+  margin: 0 380px 8px 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: var(--gray-900);
+}
+
+.Max-300-Words-limit {
+  width: 117px;
+  height: 16px;
+  margin: 8px 0 0 380px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: var(--gray-600);
+}
+

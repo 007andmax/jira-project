@@ -34,6 +34,12 @@
               </mat-form-field>
             </div>
           </div>
+          <span><button
+            class="qt-btn --outline-blue"
+            (click)="getAddDevice(templatedevice)"
+        >
+            Add Device
+        </button></span>
         </div>
 
 
@@ -833,5 +839,188 @@
         </div>
     </div>
 
+
+</ng-template>
+
+<ng-template #templatedevice let-modal class="modal-dialog">
+  <div
+    class="qt-aside-modern device-add-aside"
+    [hidden]="!opened"
+>
+    <div class="qt-aside-modern__header">
+        <div class="d-f ai-c">
+            <div class="qt-aside__title">Create New Device</div>
+        </div>
+        <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-input-block qt-input-line">
+            <label
+                for="add-device-name"
+                class="Device-Name"
+            >
+                Device Name
+            </label>
+            <input
+                id="add-device-name"
+                class="qt-input-block__input"
+                type="text"
+                placeholder="Write Device Name"
+            >
+        </div>
+        <div class="qt-input-block qt-input-line">
+            <label
+                for="add-device-type"
+                class="Device-Type"
+            >
+                Device Type
+            </label>
+            <app-drop-down
+            #deviceTp
+            [class]="['qt-dropdown']"
+            [placeholder]="'Select device type'"
+            [list]=""
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+        ></app-drop-down>
+        </div>
+        <div class="qt-input-line">
+            <div class="qt-input-block">
+              <label
+              for="add-asset-tag"
+              class="Asset-Tag"
+          >
+              Asset Tag
+          </label>
+          <input
+          id="add-asset-tag"
+          class="qt-input-block__input"
+          type="text"
+          placeholder="Enter asset tag"
+      >
+            </div>
+            <div class="qt-input-block">
+              <label
+              for="add-model-no"
+              class=".Model-No {
+                "
+          >
+              Model No.
+          </label>
+          <input
+          id="add-model-no"
+          class="qt-input-block__input"
+          type="text"
+          placeholder="Enter model no."
+      >
+            </div>
+        </div>
+        <div class="qt-input-line">
+            <div class="qt-input-block">
+                <span class="Install-Date">Install Date</span>
+                <app-date-picker
+                #reviewDp
+                [placement]="'top'"
+                [editMode]="true"
+                [useMinDate]="false"
+            ></app-date-picker>
+            </div>
+            <div class="qt-input-block">
+                <span class="Warranty-Date">Warranty Date</span>
+                <app-date-picker
+                #reviewDp
+                [placement]="'top'"
+                [editMode]="true"
+                [useMinDate]="false"
+            ></app-date-picker>
+            </div>
+        </div>
+        <div class="qt-input-block qt-input-line">
+          <label
+              for="add-manufacture"
+              class="Manufacturer"
+          >
+              Manufacture
+          </label>
+          <input
+              id="add-manufacture"
+              class="qt-input-block__input"
+              type="text"
+              placeholder="Enter Manufacture"
+          >
+      </div>
+      <div class="qt-input-block qt-input-line">
+        <label
+            for="add-tag"
+            class="Tags"
+        >
+            Tags
+        </label>
+        <mat-form-field>
+          <mat-chip-list #chipList>
+              <mat-chip
+                  *ngFor="let tag of selectedTag; let i = index"
+                  (removed)="remove(i)"
+              >
+                  {{ tag.Name }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+          </mat-chip-list>
+          <input autofocus
+              id="dropdownServices"
+              #searchInput
+              [(ngModel)]="tagFilterValue"
+              class="pointer"
+              [matChipInputFor]="chipList"
+              (keyup)="onSearchTag($event.target.value)"
+              (keyup.enter)="add($event.target.value)"
+          >
+      </mat-form-field>
+    </div>
+    <div class="qt-input-block qt-input-line">
+      <label
+          for="add-note"
+          class="Note"
+      >
+          Note
+      </label>
+     <textarea
+      id="add-note"
+     class="terms-n-conditions__textarea qt-textarea"
+     placeholder="Write note for device"
+     maxlength="300"
+     cols="40"
+     rows="2">
+     </textarea>
+     <span class="Max-300-Words-limit Caption-L">
+      Max 300 Words limit
+    </span>
+  </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save Device</span>
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
 
 </ng-template>

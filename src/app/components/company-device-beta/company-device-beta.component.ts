@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild, } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { AgentService } from "src/app/services/agent/agent.service";
@@ -12,6 +12,7 @@ import { RemoteControlService } from "../device/_services/remoteControl.service"
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { CompaniesService } from "src/app/services/company/companies.service";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-company-device-beta",
@@ -21,6 +22,7 @@ import { CompaniesService } from "src/app/services/company/companies.service";
 export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild("templatePowersell") template;
   @ViewChild("templateConnection") templateconnection;
+  @ViewChild("templatedevice") templatedevice;
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -59,6 +61,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
   tagFilterValue: string = "";
   currentCompany: any = null;
   companyGuid: string = "";
+  closeResult: string = '';
+  opened: boolean = false;
+  asset: any = undefined;
+
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -78,6 +84,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.opened = true;
     this.companyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
@@ -621,6 +628,35 @@ export class CompanyDeviceBetaComponent implements OnInit {
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.selectedTag;
     this.searchDeviceTag(req);
+  }
+
+  getAddDevice(templatedevice) {
+    this.ngZone.run(() => {
+      this.modalService
+        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', })
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  closed() {
+    this.modalService.dismissAll("Cross click");
   }
 
 }
