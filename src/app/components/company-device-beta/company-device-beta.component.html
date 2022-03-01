@@ -15,7 +15,6 @@
                     </mat-chip>
                     <input #dropdownServices
                   autofocus
-                  id="dropdownServices"
                   [formControl]="selectedCtrl"
                   [(ngModel)]="tagFilterValue"
                   [matAutocomplete]="auto"
@@ -842,7 +841,7 @@
 
 </ng-template>
 
-<ng-template #templatedevice let-modal class="modal-dialog">
+<ng-template #templatedevice>
   <div
     class="qt-aside-modern device-add-aside"
     [hidden]="!opened"
@@ -875,19 +874,19 @@
         </div>
         <div class="qt-input-block qt-input-line">
             <label
-                for="add-device-type"
                 class="Device-Type"
             >
                 Device Type
             </label>
             <app-drop-down
             #deviceTp
-            [class]="['qt-dropdown']"
+            [class]="['light-dropdown', 'qt-select-input-40']"
             [placeholder]="'Select device type'"
-            [list]=""
-            [field]="'name'"
+            [list]="hardwareTypes"
+            [field]="'Name'"
             [search]="true"
             [change]="true"
+            [add]="true"
         ></app-drop-down>
         </div>
         <div class="qt-input-line">
@@ -955,34 +954,92 @@
               placeholder="Enter Manufacture"
           >
       </div>
-      <div class="qt-input-block qt-input-line">
+      <!-- <div class="qt-input-block qt-input-line" id="elementID">
         <label
-            for="add-tag"
             class="Tags"
         >
             Tags
         </label>
-        <mat-form-field>
-          <mat-chip-list #chipList>
-              <mat-chip
-                  *ngFor="let tag of selectedTag; let i = index"
-                  (removed)="remove(i)"
-              >
-                  {{ tag.Name }}
-                  <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip>
-          </mat-chip-list>
-          <input autofocus
-              id="dropdownServices"
-              #searchInput
-              [(ngModel)]="tagFilterValue"
-              class="pointer"
-              [matChipInputFor]="chipList"
-              (keyup)="onSearchTag($event.target.value)"
-              (keyup.enter)="add($event.target.value)"
-          >
+        <div
+        class="grey-dropdown"
+        ngbDropdown
+        #products="ngbDropdown"
+    >
+        <mat-form-field appearance="none">
+            <mat-chip-list #chipList>
+                <mat-chip
+                    *ngFor="let tag of selectedtagdevice; let i = index"
+                    (removed)="onRemoveTag(i)"
+                >
+                    {{ tag.Name }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <input
+            autofocus
+            id="dropdownServices"
+            #searchInput
+            [(ngModel)]="tagFilter"
+            ngbDropdownToggle
+            class="pointer"
+            placeholder="eg. Window update, Monthly maintanace"
+            [matChipInputFor]="chipList"
+            >
+        </mat-form-field>
+        <div
+            class="dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownServices"
+        >
+            <ng-template
+                ngFor
+                let-tag
+                [ngForOf]="filteredTag"
+            >
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+
+                    [textContent]="tag.Name"
+                ></button>
+            </ng-template>
+        </div>
+    </div>
+    </div> -->
+
+    <div class="Rectangle qt-input-block qt-input-line">
+      <label
+      class="Tags"
+  >
+      Tags
+  </label>
+    <div class="SearchRectangletag">
+      <mat-form-field class="example-chip-list" appearance="none">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of selectedTagDevice; let i=index" (removed)="onRemoveTag(i)">
+              {{tag}} <mat-icon matChipRemove></mat-icon>
+            </mat-chip>
+            <input #dropdownServices
+          autofocus
+          [formControl]="selectedCtrl"
+          [(ngModel)]="tagFilter"
+          [matAutocomplete]="auto"
+          class="pointer"
+          placeholder="eg. Window update, Monthly maintanace"
+          [matChipInputFor]="chipList"
+          (keyup.enter)="addTag($event.target.value)"
+      >
+        </mat-chip-list>
+        <mat-autocomplete class="expanded" #auto="matAutocomplete" (optionSelected)="selectedSearchTag($event)">
+            <mat-option class="SubRectangle" *ngFor="let search of filteredTag">
+              {{search.Name}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
+            </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
+  </div>
+
+
     <div class="qt-input-block qt-input-line">
       <label
           for="add-note"

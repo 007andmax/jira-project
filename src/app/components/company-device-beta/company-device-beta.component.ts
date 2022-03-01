@@ -10,7 +10,7 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import { CompaniesService } from "src/app/services/company/companies.service";
 import * as _ from "lodash";
 
@@ -64,6 +64,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
   closeResult: string = '';
   opened: boolean = false;
   asset: any = undefined;
+  filteredTag = [];
+  selectedTagDevice: any[] = [];
+  tagSearch: any[] = [];
+  assetTag: any = [];
+  tagFilter: string = "";
+
 
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
@@ -136,12 +142,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.operatingSystem = [];
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.assetList = resp;
+      this.asset = resp[0];
       this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.assetList.forEach((element, index) => {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         this.GetCurrentConfig(element.ID);
+        this.getAssetTagDropDownDetail();
       });
     });
     this.showPreloader = false;
@@ -576,7 +584,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   add(Tag): void {
     console.log('add event fired');
     this.tagFilterValue = "";
-
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     var findTag = this.selectedTag.find(x => x == Tag);
@@ -659,4 +666,62 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.modalService.dismissAll("Cross click");
   }
 
+  getAssetTagDropDownDetail() {
+    this.agentService.getAssetTag().subscribe((resp) => {
+      this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+        this.selectedTagDevice = res;
+
+        if (this.selectedTagDevice.length !== 0) {
+          this.assetTag = resp;
+          this.filteredTag = _.differenceBy(resp, this.selectedTagDevice, "ID");
+        } else {
+          this.assetTag = resp;
+          this.filteredTag = resp;
+        }
+      });
+    });
+  }
+
+  addTag(tag): void {
+    console.log('add event fired');
+
+    this.tagFilter = "";
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    var findTag = this.selectedTagDevice.find(x => x == tag);
+
+    if (tag && !findTag) {
+      this.selectedTagDevice.push(tag);
+      this.tagSearch.push(tag);
+    }
+  }
+
+  onRemoveTag(index: number): void {
+    const removetag: any = {
+      ID: this.asset.ID,
+      ID2: this.selectedTagDevice[index].ID,
+      Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
+    };
+
+    this.agentService.removeAssetTag(removetag).subscribe(
+      (resp) => {
+        this.selectedTagDevice.splice(index, 1);
+        this.filteredTag = _.differenceBy(
+          this.assetTag,
+          this.selectedTagDevice,
+          "ID"
+        );
+      }
+    );
+  }
+
+
+  selectedSearchTag(event: MatAutocompleteSelectedEvent): void {
+    console.log('selected fired');
+    this.selectedTagDevice.push(event.option.viewValue);
+    this.tagSearch.push(event.option.viewValue);
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    this.addTag(event.option.viewValue);
+  }
 }
