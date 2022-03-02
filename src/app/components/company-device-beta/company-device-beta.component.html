@@ -869,16 +869,19 @@
                 id="add-device-name"
                 class="qt-input-block__input"
                 type="text"
+                [(ngModel)]="deviceName"
                 placeholder="Write Device Name"
             >
         </div>
         <div class="qt-input-block qt-input-line">
             <label
                 class="Device-Type"
+                for="devicetype"
             >
                 Device Type
             </label>
             <app-drop-down
+            id="devicetype"
             #deviceTp
             [class]="['light-dropdown', 'qt-select-input-40']"
             [placeholder]="'Select device type'"
@@ -887,6 +890,7 @@
             [search]="true"
             [change]="true"
             [add]="true"
+            (onSelectedItem)="getDeviceName($event.ID)"
         ></app-drop-down>
         </div>
         <div class="qt-input-line">
@@ -902,13 +906,13 @@
           class="qt-input-block__input"
           type="text"
           placeholder="Enter asset tag"
+          [(ngModel)]="assetTagName"
       >
             </div>
             <div class="qt-input-block">
               <label
               for="add-model-no"
-              class=".Model-No {
-                "
+              class=".Model-No"
           >
               Model No.
           </label>
@@ -917,6 +921,7 @@
           class="qt-input-block__input"
           type="text"
           placeholder="Enter model no."
+          [(ngModel)]="modelNo"
       >
             </div>
         </div>
@@ -924,19 +929,21 @@
             <div class="qt-input-block">
                 <span class="Install-Date">Install Date</span>
                 <app-date-picker
-                #reviewDp
+                #installed
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"
+                (onChange)="getDateInstalled($event)"
             ></app-date-picker>
             </div>
             <div class="qt-input-block">
                 <span class="Warranty-Date">Warranty Date</span>
                 <app-date-picker
-                #reviewDp
+                #warrenty
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"
+                (onChange)="getDateWarranty($event)"
             ></app-date-picker>
             </div>
         </div>
@@ -951,94 +958,31 @@
               id="add-manufacture"
               class="qt-input-block__input"
               type="text"
+              [(ngModel)]="manufacture"
               placeholder="Enter Manufacture"
           >
       </div>
-      <!-- <div class="qt-input-block qt-input-line" id="elementID">
-        <label
-            class="Tags"
-        >
-            Tags
-        </label>
-        <div
-        class="grey-dropdown"
-        ngbDropdown
-        #products="ngbDropdown"
-    >
-        <mat-form-field appearance="none">
-            <mat-chip-list #chipList>
-                <mat-chip
-                    *ngFor="let tag of selectedtagdevice; let i = index"
-                    (removed)="onRemoveTag(i)"
-                >
-                    {{ tag.Name }}
-                    <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
-            <input
-            autofocus
-            id="dropdownServices"
-            #searchInput
-            [(ngModel)]="tagFilter"
-            ngbDropdownToggle
-            class="pointer"
-            placeholder="eg. Window update, Monthly maintanace"
-            [matChipInputFor]="chipList"
-            >
-        </mat-form-field>
-        <div
-            class="dropdown-menu"
-            ngbDropdownMenu
-            aria-labelledby="dropdownServices"
-        >
-            <ng-template
-                ngFor
-                let-tag
-                [ngForOf]="filteredTag"
-            >
-                <button
-                    ngbDropdownItem
-                    class="dropdown-item"
-
-                    [textContent]="tag.Name"
-                ></button>
-            </ng-template>
-        </div>
-    </div>
-    </div> -->
-
-    <div class="Rectangle qt-input-block qt-input-line">
-      <label
-      class="Tags"
-  >
-      Tags
-  </label>
-    <div class="SearchRectangletag">
-      <mat-form-field class="example-chip-list" appearance="none">
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Tags</mat-label>
         <mat-chip-list #chipList>
-            <mat-chip *ngFor="let tag of selectedTagDevice; let i=index" (removed)="onRemoveTag(i)">
-              {{tag}} <mat-icon matChipRemove></mat-icon>
-            </mat-chip>
-            <input #dropdownServices
-          autofocus
-          [formControl]="selectedCtrl"
-          [(ngModel)]="tagFilter"
-          [matAutocomplete]="auto"
-          class="pointer"
-          placeholder="eg. Window update, Monthly maintanace"
-          [matChipInputFor]="chipList"
-          (keyup.enter)="addTag($event.target.value)"
-      >
+          <mat-chip
+          *ngFor="let tag of selectedTagDevice; let i=index" (removed)="onRemoveTag(i)">
+          {{tag}} <mat-icon matChipRemove></mat-icon>
+          </mat-chip>
+          <input
+            placeholder="eg. Window update, Monthly maintanace"
+            #fruitInput
+            [formControl]="selectedCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            (keyup.enter)="addTag($event.target.value)">
         </mat-chip-list>
-        <mat-autocomplete class="expanded" #auto="matAutocomplete" (optionSelected)="selectedSearchTag($event)">
-            <mat-option class="SubRectangle" *ngFor="let search of filteredTag">
-              {{search.Name}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
-            </mat-option>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearchTag($event)">
+          <mat-option *ngFor="let search of filteredTag">
+            {{search.Name}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
+          </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-    </div>
-  </div>
-
 
     <div class="qt-input-block qt-input-line">
       <label
@@ -1052,6 +996,7 @@
      class="terms-n-conditions__textarea qt-textarea"
      placeholder="Write note for device"
      maxlength="300"
+     [(ngModel)]="note"
      cols="40"
      rows="2">
      </textarea>
@@ -1066,7 +1011,7 @@
                 class="qt-button qt-mr-12"
                 appDisabledBtn
                 #addBtn="disabled"
-                (onClick)="add()"
+                (onClick)="saveDevice()"
             >
                 <span *ngIf="!addBtn.isBlock()">Save Device</span>
             </button>

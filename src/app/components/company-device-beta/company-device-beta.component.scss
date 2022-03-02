@@ -437,3 +437,12 @@ top: -170px !important;
   display: contents !important;
 }
 
+::ng-deep .mat-form-field-flex {
+  width: 520px !important;
+  position:relative !important;
+}
+
+::ng-deep .modal-content{
+  border: none !important;
+}
+

@@ -13,6 +13,7 @@ import { CompanyDeviceBetaFilter } from "./class/device-beta";
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import { CompaniesService } from "src/app/services/company/companies.service";
 import * as _ from "lodash";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: "app-company-device-beta",
@@ -69,8 +70,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
   tagSearch: any[] = [];
   assetTag: any = [];
   tagFilter: string = "";
-
-
+  deviceName: string;
+  deviceTypId: Number;
+  assetTagName: string;
+  modelNo: string;
+  installDate: Date;
+  warrantyDate: Date;
+  manufacture: string;
+  note: string;
+  devicename: string;
+  selectTag: string;
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -689,6 +698,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     var findTag = this.selectedTagDevice.find(x => x == tag);
+    this.selectTag = tag;
 
     if (tag && !findTag) {
       this.selectedTagDevice.push(tag);
@@ -723,5 +733,43 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     this.addTag(event.option.viewValue);
+  }
+
+  getDeviceName(ID) {
+    this.deviceTypId = ID;
+  }
+
+  getDateWarranty(date: any) {
+    let dateWarrantry = new Date(date.year, date.month, date.day);
+    this.warrantyDate = dateWarrantry;
+  }
+
+  getDateInstalled(date: any) {
+    let dateInstalled = new Date(date.year, date.month, date.day);
+    this.installDate = dateInstalled;
+  }
+
+  saveDevice() {
+    let data: any = {};
+    data.Guid = uuidv4();
+    data.Name = this.deviceName;
+    data.Title = this.deviceName;
+    data.HardwareTypeID = this.deviceTypId;
+    data.Tag = this.selectTag && this.selectTag.length > 0 ? this.selectTag : null;
+    data.Model = this.modelNo;
+    data.Manufacture = this.manufacture;
+    data.NoteDescription = this.note;
+    data.InstallDate = this.installDate;
+    data.Warrantry = this.warrantyDate;
+    data.CompanyGuid = this.asset.CompanyGuid;
+
+    this.agentService.nonAgentAsset(data).subscribe(
+      (result) => {
+      this.modalService.dismissAll();
+      this.toastr.success('Save non agent asset successfully');
+    },
+      (error) => {
+        this.toastr.error('Error saving your non agent asset! Please try again');
+      })
   }
 }
