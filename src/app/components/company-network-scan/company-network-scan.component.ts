@@ -54,6 +54,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   nets: [] = [];
   asset: any;
   assetName: any;
+  nonAgentVersionList: any[] = [];
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
@@ -96,7 +97,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       if (resp.length > 0) {
         this.isGetDevices = true
         this.assetList = resp;
-        this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
+        this.nonAgentVersionList = this.assetList.filter(x=>x.AgentVersion != "");
+        this.masterAgent = this.nonAgentVersionList.find(x => x.IsMasterAgent == true);
         if (this.masterAgent) {
           this.masterAgent.online = true;
         }
@@ -109,7 +111,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
 
   selectMasterNetwork(Id) {
-    this.asset = this.assetList.find((x) => x.ID == Id);
+    this.asset = this.nonAgentVersionList.find((x) => x.ID == Id);
     this.assetName = this.asset.Name;
     let data: any = {};
     data.AssetID = Id;
