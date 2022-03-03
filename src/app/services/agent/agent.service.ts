@@ -21,13 +21,13 @@ export class AgentService {
   public constructor(
     private http: HttpClient,
     private wsService: WebsocketService
-  ) { 
+  ) {
     this.getAgentToken(
       "QuickTech",
       "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
     )
     .subscribe((data) => {
-      this.setAccessToken(data.AccessToken);        
+      this.setAccessToken(data.AccessToken);
     });
   }
 
@@ -401,6 +401,21 @@ export class AgentService {
         .subscribe(() => { });
     } else {
       setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
+    }
+  }
+
+  public GetDeviceListConfig(asset_ID) {
+    const data = {
+      AssetID: asset_ID,
+      MessageType: "GetDeviceListConfig",
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => { });
+    } else {
+      setTimeout(() => this.GetDeviceListConfig(asset_ID), 3000);
     }
   }
 

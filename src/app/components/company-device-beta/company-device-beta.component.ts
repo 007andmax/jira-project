@@ -157,20 +157,22 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetCurrentConfig(element.ID);
+        this.GetDeviceListConfig(element.ID);
         this.getAssetTagDropDownDetail();
       });
     });
     this.showPreloader = false;
   }
 
-  GetCurrentConfig(assetID: any) {
-    this.agentService.GetCurrentConfig(assetID);
+  GetDeviceListConfig(assetID: any) {
+    this.agentService.GetDeviceListConfig(assetID);
   }
 
+
   CurrentUser() {
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
+        if(resp[0].Value != "Unknown message type received : GetDeviceListConfig:"){
         let asset = this.assetList.find((x) => x.ID === resp[0].key);
         if (asset) {
           this.kafkaMessage = JSON.parse(resp[0].Value);
@@ -179,8 +181,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
             let Time = this.kafkaMessage.IdleTime.split("Idle for");
             asset.IdelTime = Time[1] != "" ? Time[1] : "";
           }
+            asset.UpTime = this.kafkaMessage.UpTime;
         }
         asset.online = true;
+      }
         this.cd.detectChanges();
       }
     });
@@ -195,7 +199,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
           this.toastr.success(
             "Computer restarted and up now!"
           );
-          this.GetCurrentConfig(resp.data.AssetID);
+          this.GetDeviceListConfig(resp.data.AssetID)
         });
       }
     });
@@ -628,7 +632,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetCurrentConfig(element.ID);
+        this.GetDeviceListConfig(element.ID)
       });
 
       if (this.cd) {
