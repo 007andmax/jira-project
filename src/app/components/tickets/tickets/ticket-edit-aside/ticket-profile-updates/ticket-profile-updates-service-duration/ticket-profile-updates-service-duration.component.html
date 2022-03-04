@@ -1,34 +1,10 @@
-<!-- <igx-time-picker
-    id="timepicker2"
-    #picker
-    [ngClass]="{'--input-error-validate':!validate}"
-    format="HH:mm"
-    placeholder="time"
-    [itemsDelta]="{hours:1, minutes:step}"
-    (click)="show()"
-    [vertical]="true"
-    [mode]="mode"
-    [value]="date"
-    (onOpened)="onOpened($event)"
-    (onClosed)="onClosed()"
->
-    <ng-template igxTimePickerActions>
-        <div class="container action-buttons">
-            <button
-                igxButton="flat"
-                (click)="picker.okButtonClick();onSelected()"
-            >
-                Set it
-            </button>
-        </div>
-    </ng-template>
-</igx-time-picker> -->
 <div
     class="duration-container"
     ngbDropdown
 >
     <input
         type="text"
+        [ngClass]="{'--input-error-validate':!validate}"
         class="duration-container-input"
         id="dropdownDuration"
         [value]="getParseDate()"

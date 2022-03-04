@@ -22,6 +22,7 @@
 
 
 
+
                 <app-ticket-profile-updates-service-timepicker
                     (onSetEnd)="onSetDurationEnd($event)"
                     (onChangeStart)="onChangeStartTimePicker($event)"
@@ -34,7 +35,6 @@
                 ></app-ticket-profile-updates-service-timepicker>
                 <app-ticket-profile-updates-service-duration
                     (onChange)="onChangeDuration($event)"
-                    [editMode]="true"
                     [hour]="hours"
                     [minute]="minutes"
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
@@ -44,6 +44,7 @@
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
                     [textContent]="getDuration(quantity)"
                 ></div>
+
 
 
                 <div class="ticket-updates__date-icon icon__assign-date"></div>
@@ -69,6 +70,7 @@
 
 
 
+
         <span
             class="tag__modern ticket-updates__service-tag-completed"
             *ngIf="service.completed"
@@ -81,7 +83,9 @@
         ></span>
 
 
+
     </div>
+
 
 
     <div class="right-side-icons">
