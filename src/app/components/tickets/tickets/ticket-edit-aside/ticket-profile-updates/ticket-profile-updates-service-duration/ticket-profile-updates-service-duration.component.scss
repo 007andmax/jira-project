@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 /deep/ .igx-overlay__content {
   height: 297px !important;
@@ -7,6 +7,7 @@
   border: solid 1px $gray-400;
   border-radius: 4px;
   opacity: 0;
+  position: relative;
 
   @media (max-width: 767px) {
     width: 100% !important;
@@ -35,14 +36,13 @@
 
     &::before,
     &::after {
-      content: '\00a0Hour\00a0\00a0\00a0\00a0\00a0\0a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0 Minute';
+      content: "\00a0Hour\00a0\00a0\00a0\00a0\00a0\0a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0 Minute";
       font-size: 12px;
       position: absolute;
       top: 0;
       height: 32px;
       width: 100%;
       box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.05);
-      background: $white;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -51,17 +51,17 @@
 
       @media (max-width: 767px) {
         color: $primary-2;
-        content: 'Hour';
+        content: "Hour";
         background: transparent;
-        transform: translateX(-25%)
+        transform: translateX(-25%);
       }
     }
 
     &:after {
       content: "";
       @media (max-width: 767px) {
-        content: 'Minute';
-        transform: translateX(25%)
+        content: "Minute";
+        transform: translateX(25%);
       }
     }
   }
@@ -97,8 +97,8 @@
     max-width: 300px;
     align-items: center;
     &:before {
-      content: '';
-      background-image: url('/assets/img/icons/scroll-up.svg');
+      content: "";
+      background-image: url("/assets/img/icons/scroll-up.svg");
       background-size: cover;
       top: 6px;
       position: absolute;
@@ -108,8 +108,8 @@
       border-radius: 50%;
     }
     &:after {
-      content: '';
-      background-image: url('/assets/img/icons/scroll-down.svg');
+      content: "";
+      background-image: url("/assets/img/icons/scroll-down.svg");
       background-size: cover;
       bottom: 6px;
       position: absolute;
@@ -123,7 +123,6 @@
     }
   }
 }
-
 
 /deep/ app-ticket-profile-updates-service-duration {
   margin-right: 8px;
@@ -166,8 +165,6 @@
   .igx-input-group__bundle {
     box-shadow: none;
   }
-
-
 }
 
 .action-buttons {
@@ -181,9 +178,25 @@
     background: $primary-1;
     color: $white;
     width: 100%;
+    text-align: center;
   }
 }
-
 .--input-error-validate {
-      border: solid 1px $warning !important;
+  border: solid 1px $warning !important;
+}
+.app-drop-down__dropdown {
+  width: max-content;
+  max-height: 300px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
+}
+.duration-container-input {
+  height: 40px;
+  width: 105px;
+  border: solid 1px #c5cdd5;
+  border-radius: 4px;
+  padding: 10px 12px;
+  background: #ffffff;
+}
+.icn-remove-old {
+  top: 14px;
 }
