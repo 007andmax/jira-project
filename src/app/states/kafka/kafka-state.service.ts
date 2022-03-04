@@ -19,7 +19,8 @@ export class KafkaStateService {
   onGetService: EventEmitter<any> = new EventEmitter();
   onGetStartupPrograms: EventEmitter<any> = new EventEmitter();
   onInstallWindowsUpdates: EventEmitter<any> = new EventEmitter();
-  
+  onDeviceListConfig: EventEmitter<any> = new EventEmitter();
+
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
   public onInit() {
@@ -65,6 +66,9 @@ export class KafkaStateService {
         case "InstallWindowsUpdates":
           this.handleInstallWindowsUpdates(newChange);
           break;
+        case "GetDeviceListConfig":
+          this.handleGetDeviceListConfig(newChange);
+          break;
       }
     });
   }
@@ -83,6 +87,22 @@ export class KafkaStateService {
       Value: newChange.data.Value,
     });
     this.onCurrentConfig.emit(this.assetConfigMessage);
+  }
+
+  private handleGetDeviceListConfig(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onDeviceListConfig.emit(this.assetConfigMessage);
   }
 
   private handleRunPowershellCommand(newChange: any) {

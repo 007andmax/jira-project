@@ -415,6 +415,21 @@ export class AgentService {
     }
   }
 
+  public GetDeviceListConfig(asset_ID) {
+    const data = {
+      AssetID: asset_ID,
+      MessageType: "GetDeviceListConfig",
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => { });
+    } else {
+      setTimeout(() => this.GetDeviceListConfig(asset_ID), 3000);
+    }
+  }
+
   public SendPowerShellCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
       console.log("sending powershell command:" + data.Value);

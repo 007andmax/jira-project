@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild, } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { AgentService } from "src/app/services/agent/agent.service";
@@ -10,8 +10,10 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import { CompaniesService } from "src/app/services/company/companies.service";
+import * as _ from "lodash";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: "app-company-device-beta",
@@ -21,6 +23,7 @@ import { CompaniesService } from "src/app/services/company/companies.service";
 export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild("templatePowersell") template;
   @ViewChild("templateConnection") templateconnection;
+  @ViewChild("templatedevice") templatedevice;
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -59,6 +62,24 @@ export class CompanyDeviceBetaComponent implements OnInit {
   tagFilterValue: string = "";
   currentCompany: any = null;
   companyGuid: string = "";
+  closeResult: string = '';
+  opened: boolean = false;
+  asset: any = undefined;
+  filteredTag = [];
+  selectedTagDevice: any[] = [];
+  tagSearch: any[] = [];
+  assetTag: any = [];
+  tagFilter: string = "";
+  deviceName: string;
+  deviceTypId: Number;
+  assetTagName: string;
+  modelNo: string;
+  installDate: Date;
+  warrantyDate: Date;
+  manufacture: string;
+  note: string;
+  devicename: string;
+  selectTag: string;
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -78,6 +99,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.opened = true;
     this.companyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
@@ -129,24 +151,28 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.operatingSystem = [];
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.assetList = resp;
+      this.asset = resp[0];
       this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.assetList.forEach((element, index) => {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetCurrentConfig(element.ID);
+        this.GetDeviceListConfig(element.ID);
+        this.getAssetTagDropDownDetail();
       });
     });
     this.showPreloader = false;
   }
 
-  GetCurrentConfig(assetID: any) {
-    this.agentService.GetCurrentConfig(assetID);
+  GetDeviceListConfig(assetID: any) {
+    this.agentService.GetDeviceListConfig(assetID);
   }
 
+
   CurrentUser() {
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
+        if(resp[0].Value != "Unknown message type received : GetDeviceListConfig:"){
         let asset = this.assetList.find((x) => x.ID === resp[0].key);
         if (asset) {
           this.kafkaMessage = JSON.parse(resp[0].Value);
@@ -155,8 +181,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
             let Time = this.kafkaMessage.IdleTime.split("Idle for");
             asset.IdelTime = Time[1] != "" ? Time[1] : "";
           }
+            asset.UpTime = this.kafkaMessage.UpTime;
         }
         asset.online = true;
+      }
         this.cd.detectChanges();
       }
     });
@@ -171,7 +199,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
           this.toastr.success(
             "Computer restarted and up now!"
           );
-          this.GetCurrentConfig(resp.data.AssetID);
+          this.GetDeviceListConfig(resp.data.AssetID)
         });
       }
     });
@@ -569,7 +597,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   add(Tag): void {
     console.log('add event fired');
     this.tagFilterValue = "";
-
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
     var findTag = this.selectedTag.find(x => x == Tag);
@@ -605,7 +632,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetCurrentConfig(element.ID);
+        this.GetDeviceListConfig(element.ID)
       });
 
       if (this.cd) {
@@ -623,4 +650,130 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.searchDeviceTag(req);
   }
 
+  getAddDevice(templatedevice) {
+    this.ngZone.run(() => {
+      this.modalService
+        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', })
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  closed() {
+    this.modalService.dismissAll("Cross click");
+  }
+
+  getAssetTagDropDownDetail() {
+    this.agentService.getAssetTag().subscribe((resp) => {
+      this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+        this.selectedTagDevice = res;
+
+        if (this.selectedTagDevice.length !== 0) {
+          this.assetTag = resp;
+          this.filteredTag = _.differenceBy(resp, this.selectedTagDevice, "ID");
+        } else {
+          this.assetTag = resp;
+          this.filteredTag = resp;
+        }
+      });
+    });
+  }
+
+  addTag(tag): void {
+    console.log('add event fired');
+
+    this.tagFilter = "";
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    var findTag = this.selectedTagDevice.find(x => x == tag);
+    this.selectTag = tag;
+
+    if (tag && !findTag) {
+      this.selectedTagDevice.push(tag);
+      this.tagSearch.push(tag);
+    }
+  }
+
+  onRemoveTag(index: number): void {
+    const removetag: any = {
+      ID: this.asset.ID,
+      ID2: this.selectedTagDevice[index].ID,
+      Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
+    };
+
+    this.agentService.removeAssetTag(removetag).subscribe(
+      (resp) => {
+        this.selectedTagDevice.splice(index, 1);
+        this.filteredTag = _.differenceBy(
+          this.assetTag,
+          this.selectedTagDevice,
+          "ID"
+        );
+      }
+    );
+  }
+
+
+  selectedSearchTag(event: MatAutocompleteSelectedEvent): void {
+    console.log('selected fired');
+    this.selectedTagDevice.push(event.option.viewValue);
+    this.tagSearch.push(event.option.viewValue);
+    this.selectedInput.nativeElement.value = '';
+    this.selectedCtrl.setValue(null);
+    this.addTag(event.option.viewValue);
+  }
+
+  getDeviceName(ID) {
+    this.deviceTypId = ID;
+  }
+
+  getDateWarranty(date: any) {
+    let dateWarrantry = new Date(date.year, date.month, date.day);
+    this.warrantyDate = dateWarrantry;
+  }
+
+  getDateInstalled(date: any) {
+    let dateInstalled = new Date(date.year, date.month, date.day);
+    this.installDate = dateInstalled;
+  }
+
+  saveDevice() {
+    let data: any = {};
+    data.Guid = uuidv4();
+    data.Name = this.deviceName;
+    data.Title = this.deviceName;
+    data.HardwareTypeID = this.deviceTypId;
+    data.Tag = this.selectTag && this.selectTag.length > 0 ? this.selectTag : null;
+    data.Model = this.modelNo;
+    data.Manufacture = this.manufacture;
+    data.NoteDescription = this.note;
+    data.InstallDate = this.installDate;
+    data.Warrantry = this.warrantyDate;
+    data.CompanyGuid = this.asset.CompanyGuid;
+
+    this.agentService.nonAgentAsset(data).subscribe(
+      (result) => {
+      this.modalService.dismissAll();
+      this.toastr.success('Save non agent asset successfully');
+    },
+      (error) => {
+        this.toastr.error('Error saving your non agent asset! Please try again');
+      })
+  }
 }

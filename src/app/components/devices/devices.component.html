@@ -176,20 +176,20 @@
                             <td class="company-devices-table__up-time">
                                 <div class="qt-df qt-fd-c">
                                     <span>
-                                  <span>{{ asset.IdelTime }}</span>
+                                  <span>{{ asset.UpTime }}</span>
                                     <ng-template #tipOfflineDevice class="tooltip">
-                                        <span>{{ asset.IdelTime }}</span>
+                                        <span>{{ asset.UpTime }}</span>
                                     </ng-template>
                                     </span>
                                     <span *ngIf="
-                asset.IdelTime != '' &&
-                asset.IdelTime != undefined &&
-                asset.IdelTime != null
+                asset.UpTime != '' &&
+                asset.UpTime != undefined &&
+                asset.UpTime != null
               " class="uptime-tag qt-ff-gm" [textContent]="'Online'"></span>
                                     <span *ngIf="
-                asset.IdelTime == '' ||
-                asset.IdelTime == undefined ||
-                asset.IdelTime == null
+                asset.UpTime == '' ||
+                asset.UpTime == undefined ||
+                asset.UpTime == null
               " placement="top" container="body" [ngbTooltip]="tipOfflineDevice" class="uptime-tag qt-ff-gm --offline" [textContent]="'Offline'"></span>
                                 </div>
                             </td>
