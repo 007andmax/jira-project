@@ -21,14 +21,25 @@ export class AgentService {
   public constructor(
     private http: HttpClient,
     private wsService: WebsocketService
-  ) { 
+  ) {
+    this.ensureAccessToken();
+  }
+
+  public hasAccessToken() {
+    return this.AccessToken == "" ? false : true;
+  }
+  
+  ensureAccessToken(callback = null) {
     this.getAgentToken(
       "QuickTech",
       "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
     )
-    .subscribe((data) => {
-      this.setAccessToken(data.AccessToken);        
-    });
+      .subscribe((data) => {
+        this.setAccessToken(data.AccessToken);
+        if (callback) {
+          callback();
+        }
+      });
   }
 
   encrypt128(keys, value) {
@@ -594,6 +605,7 @@ export class AgentService {
   }
 
   public getAssetsByCompanyId(companyGuid) {
+
     return this.http
       .get(`${this.apiAgent}agent/Asset/Company/${companyGuid}`, {
         headers: this.getHeader(),

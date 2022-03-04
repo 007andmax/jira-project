@@ -22,7 +22,7 @@
                         </div>
                     </button>
                     <ul class="qt-dropdown-menu list-devices" ngbDropdownMenu>
-                        <ng-template ngFor let-agent [ngForOf]="assetList" [ngForTrackBy]="trackById">
+                        <ng-template ngFor let-agent [ngForOf]="filteredAssetList" [ngForTrackBy]="trackById">
                             <li class="pointer" ngbDropdownItem (click)="selectMasterNetwork(agent.ID)"
                                 [ngClass]="{'offline-device': !agent.IsMasterAgent}" [textContent]="agent.Title || agent.Name"></li>
                         </ng-template>

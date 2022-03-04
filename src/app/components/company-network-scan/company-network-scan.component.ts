@@ -49,6 +49,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   networkScanFilter: NetworkScanFilter = new NetworkScanFilter(new CompanyNetworkScanService);
   sub: Subscription = new Subscription();
   assetList: any[] = [];
+  filteredAssetList: any[] = [];
   kafkaMessage: any;
   networkvalue: any[] = [];
   nets: [] = [];
@@ -88,14 +89,23 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
 
   getDevices() {
-      this.AssetDetail();
+    if (!this.agentService.hasAccessToken()) {
+      setTimeout(() => {
+        this.getDevices();
+      }, 300);
+      return;
+    }
+    
+    this.AssetDetail();
   }
 
   AssetDetail() {
+    debugger;
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       if (resp.length > 0) {
         this.isGetDevices = true
         this.assetList = resp;
+        this.filteredAssetList = resp.filter(x => x.AgentVersion);
         this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
         if (this.masterAgent) {
           this.masterAgent.online = true;
@@ -136,7 +146,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     let data: any = {};
     data.Guid = uuidv4();
     data.CompanyGuid = this.asset.CompanyGuid;
-    data.Name = item.Title ? item.Title :  item.MacAddress;
+    data.Name = item.Title ? item.Title : item.MacAddress;
     data.Tag = "";
     data.Manufacturer = item.Manufacturer;
     data.Model = "";
@@ -146,16 +156,16 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     data.Location = "";
     data.Site = "";
     data.Description = "";
-    data.Title = item.Title ? item.Title :  item.MacAddress;
+    data.Title = item.Title ? item.Title : item.MacAddress;
     item.Guid = data.Guid;
 
     this.agentService.nonAgentAsset(data).subscribe((result) => {
       this.toastr.success("Device added!");
-      item.IsAgentInstalled =true;
+      item.IsAgentInstalled = true;
     },
-    error => {
-      this.toastr.error("Error adding device, please try again!");
-    });
+      error => {
+        this.toastr.error("Error adding device, please try again!");
+      });
   }
 
 
