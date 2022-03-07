@@ -4,7 +4,7 @@
       <div class="heading">
           <h1>Device Settings</h1>
           <span>
-          <div class="heading-serach">
+          <div class="heading-serach" *ngIf="devicebutton">
             <a
                 href="javascript:;"
                 class="btn-outline"
@@ -12,15 +12,33 @@
                 Add Device Type
             </a>
         </div>
+
+        <div class="heading-serach" *ngIf="manufacturebutton">
+          <a
+              href="javascript:;"
+              class="btn-outline"
+          >
+              Add Manufacture
+          </a>
+      </div>
+
+      <div class="heading-serach" *ngIf="modelbutton">
+        <a
+            href="javascript:;"
+            class="btn-outline"
+        >
+            Add Model
+        </a>
+    </div>
       </span>
       </div>
-      <ngb-tabset >
+      <ngb-tabset  (tabChange)="toggle($event)">
           <!-- Device Type -->
           <ngb-tab
               title="Device Type"
               id="tab1"
           >
-              <ng-template ngbTabContent>
+              <ng-template ngbTabContent >
                   <div class="cmn-area">
                       <div class="data-table-wrap">
                           <table
@@ -29,7 +47,8 @@
                           >
                               <thead>
                                   <tr>
-                                      <th class="t-name">Device Type</th>
+                                      <th class="t-name">Device Type
+                                      </th>
                                       <th class="t-name">Count</th>
                                       <th class="action">&nbsp;</th>
                                   </tr>
@@ -42,7 +61,7 @@
               </ng-template>
           </ngb-tab>
           <!-- Manufacture -->
-          <ngb-tab title="Manufacture">
+          <ngb-tab title="Manufacture" id="tab2">
               <ng-template ngbTabContent>
                   <div class="cmn-area">
                       <div class="data-table-wrap">
@@ -65,7 +84,7 @@
               </ng-template>
           </ngb-tab>
           <!-- Model -->
-          <ngb-tab title="Model">
+          <ngb-tab title="Model" id="tab3">
               <ng-template ngbTabContent>
                   <div class="cmn-area">
                       <div class="data-table-wrap">
