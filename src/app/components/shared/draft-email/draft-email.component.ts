@@ -11,6 +11,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DraftEmailValidate } from './class/draft-email-validate';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { forkJoin } from 'rxjs';
+import { UploadAreaComponent } from '../upload-area/upload-area.component';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -68,6 +69,7 @@ export class DraftEmailComponent implements OnInit {
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
   ) { }
@@ -120,9 +122,19 @@ export class DraftEmailComponent implements OnInit {
   onChangeCompanyEmails(data) {
     this.draftEmail.setRecipients(data);
   }
-
+  public onFileDropped(files: Array<any>) {
+    this.uplaodFile.onFileDropped(files);
+    /*  this.elRef.nativeElement.querySelector("#upload-file-email").files = files;
+      var event = new Event('input', {
+        bubbles: true,
+        cancelable: true,
+      });
+  
+  
+      this.elRef.nativeElement.querySelector("#upload-file-email").dispatchEvent(event);*/
+  }
   public uploadFileOnBrower(event) {
-
+    console.log("event", event);
     if (event.target.value) {
       const file = event.target.files[0];
 

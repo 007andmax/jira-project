@@ -60,11 +60,20 @@
             </div>
             <div class="qt-w100 editor-container qt-mt-0">
                 <div
+                    id="test-drag"
                     style="position:relative;"
                     [ngStyle]="{'height':((tab == 'plain') ? '100%' : 'auto')}"
+                    appDnd
+                    (fileDropped)="onFileDropped($event)"
+                    *ngIf="tab == 'plain'"
                 >
+                    <div class="file-background">
+                        <div class="file-background-mask"></div>
+                        <div class="file-background-footer">
+                            <p>Drop to Attach file</p>
+                        </div>
+                    </div>
                     <angular-editor
-                        *ngIf="tab == 'plain'"
                         [(ngModel)]="messageContent"
                         [config]="editorConfig"
                     ></angular-editor>
