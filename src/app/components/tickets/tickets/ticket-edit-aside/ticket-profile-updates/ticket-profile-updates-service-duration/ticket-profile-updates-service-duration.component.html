@@ -21,19 +21,19 @@
         class="app-drop-down__dropdown"
     >
         <div
-            class="igx-overlay__content"
+            class="durationoverlay__content"
             style="width: 200px; opacity: 1;"
         >
             <div
-                class="igx-time-picker igx-time-picker--dropdown igx-toggle"
+                class="durationtime-picker durationtime-picker--dropdown durationtoggle"
                 aria-hidden="false"
                 style="width: 64.15px;"
             >
-                <div class="igx-time-picker__main">
-                    <div class="igx-time-picker__body">
+                <div class="durationtime-picker__main">
+                    <div class="durationtime-picker__body">
                         <div
                             id="hours"
-                            class="igx-time-picker__column igx-time-picker__hourList ng-star-inserted"
+                            class="durationtime-picker__column durationtime-picker__hourList ng-star-inserted"
                             style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
                             (wheel)="onWheelHours($event)"
                         >
@@ -45,21 +45,15 @@
                                 [ngForTrackBy]="trackByIndex"
                             >
                                 <span
-                                    class="igx-time-picker__item ng-star-inserted"
-                                    [ngClass]="{'igx-time-picker__item--selected':item.selected}"
+                                    class="durationtime-picker__item ng-star-inserted"
+                                    [ngClass]="{'durationtime-picker__item--selected':item.selected}"
                                     (click)="setHours(i)"
                                     [textContent]="getParseValue(item.value)"
                                 ></span>
                             </ng-template>
-                            <!-- <span class="igx-time-picker__item ng-star-inserted">22</span>
-                            <span class="igx-time-picker__item ng-star-inserted">23</span>
-                            <span class="igx-time-picker__item ng-star-inserted igx-time-picker__item--selected">00</span>
-                            <span class="igx-time-picker__item ng-star-inserted">01</span>
-                            <span class="igx-time-picker__item ng-star-inserted">02</span>
-                            <span class="igx-time-picker__item ng-star-inserted">03</span> -->
                         </div>
                         <div
-                            class="igx-time-picker__column igx-time-picker__minuteList ng-star-inserted"
+                            class="durationtime-picker__column durationtime-picker__minuteList ng-star-inserted"
                             style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
                             (wheel)="onWheelMinutes($event)"
                         >
@@ -71,18 +65,12 @@
                                 [ngForTrackBy]="trackByIndex"
                             >
                                 <span
-                                    class="igx-time-picker__item ng-star-inserted"
-                                    [ngClass]="{'igx-time-picker__item--selected':item.selected}"
+                                    class="durationtime-picker__item ng-star-inserted"
+                                    [ngClass]="{'durationtime-picker__item--selected':item.selected}"
                                     (click)="setMinutes(i)"
                                     [textContent]="getParseValue(item.value)"
                                 ></span>
                             </ng-template>
-                            <!-- <span class="igx-time-picker__item ng-star-inserted">58</span>
-                            <span class="igx-time-picker__item ng-star-inserted">59</span>
-                            <span class="igx-time-picker__item igx-time-picker__item--selected ng-star-inserted">00</span>
-                            <span class="igx-time-picker__item ng-star-inserted">01</span>
-                            <span class="igx-time-picker__item ng-star-inserted">02</span>
-                            <span class="igx-time-picker__item ng-star-inserted">03</span> -->
                         </div>
                     </div>
                     <div class="container action-buttons ng-star-inserted">
