@@ -1,5 +1,56 @@
 @import "./src/assets/styles/variable";
 
+.igx-overlay__content {
+  pointer-events: all;
+  box-sizing: content-box;
+}
+.igx-time-picker {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 340px;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.igx-time-picker--dropdown {
+  min-width: 200px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
+}
+.igx-time-picker__main {
+  background: #fff;
+  flex: 1 1 auto;
+}
+.igx-time-picker__body {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+}
+.igx-time-picker__hourList {
+  text-align: right;
+}
+.igx-time-picker__column {
+  max-width: 64px;
+  height: 325px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+}
+.igx-time-picker__minuteList {
+  text-align: center;
+}
+.igx-time-picker__item {
+  width: 54px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /deep/ .igx-overlay__content {
   height: 297px !important;
   width: 180px !important;
