@@ -97,4 +97,10 @@
     >
         Subscription
     </li>
+    <li
+    [ngClass]="{'--active':activePage === 'device-setting-component'}"
+    (click)="goToState('device-setting-component')"
+>
+    Device Setting
+</li>
 </ul>

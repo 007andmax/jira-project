@@ -94,6 +94,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/invoiceTickets`)) this.state = 'invoice-ticket-component';
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
           if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
+          if (window.location.href.includes(`/setting/deviceSetting`)) this.state = 'device-setting-component';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
@@ -227,6 +228,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'invoice-ticket-component') this.goToLink('setting/invoiceTickets');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
       if (this.state === 'subscription-component') this.goToLink('setting/subscription');
+      if (this.state === 'device-setting-component') this.goToLink('setting/deviceSetting');
       if (this.state === 'new-users') this.goToLink('users');
       if (this.state === 'new-reports') this.goToLink('reports');
       if (this.state === 'new-tickets-dashboard') this.goToLink('tickets-dashboard');

@@ -465,6 +465,7 @@ import { DevicesComponent } from './components/devices/devices.component';
 import { LeftPanelDevicesComponent } from './components/left-panel/left-panel-devices/left-panel-devices.component';
 import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
 import { WindowUpdatesComponent } from './components/device/window-updates/window-updates.component';
+import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 
 declare var $: any;
 /**
@@ -887,6 +888,7 @@ declare var $: any;
     LeftPanelDevicesComponent,
     DevicesReportComponent,
     WindowUpdatesComponent,
+    DeviceSettingComponent,
   ],
   imports: [
     BrowserModule,

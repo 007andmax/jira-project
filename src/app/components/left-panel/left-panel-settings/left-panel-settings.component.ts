@@ -55,7 +55,8 @@ export class LeftPanelSettingsComponent implements OnInit {
       || state === 'integrations-component'
       || state === 'invoice-ticket-component'
       || state === 'commission-component'
-      || state === 'subscription-component')
+      || state === 'subscription-component'
+      || state === 'device-setting-component')
   }
   openPanel() {
     this.onOpenPanel.emit(null);
