@@ -4,30 +4,30 @@
   pointer-events: all;
   box-sizing: content-box;
 }
-.durationtime-picker {
+.duration-picker {
   display: flex;
   flex-flow: column nowrap;
   max-width: 340px;
   border-radius: 0.25rem;
   overflow: hidden;
 }
-.durationtime-picker--dropdown {
+.duration-picker--dropdown {
   min-width: 200px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
 }
-.durationtime-picker__main {
+.duration-picker__main {
   background: #fff;
   flex: 1 1 auto;
 }
-.durationtime-picker__body {
+.duration-picker__body {
   display: flex;
   padding: 10px 0;
   justify-content: center;
 }
-.durationtime-picker__hourList {
+.duration-picker__hourList {
   text-align: right;
 }
-.durationtime-picker__column {
+.duration-picker__column {
   max-width: 64px;
   height: 325px;
   padding: 0;
@@ -39,10 +39,10 @@
   color: rgba(0, 0, 0, 0.38);
   overflow: hidden;
 }
-.durationtime-picker__minuteList {
+.duration-picker__minuteList {
   text-align: center;
 }
-.durationtime-picker__item {
+.duration-picker__item {
   width: 54px;
   padding: 5px 10px;
   border-radius: 15px;
@@ -69,7 +69,7 @@
     background: $white;
   }
 
-  .durationtime-picker--dropdown {
+  .duration-picker--dropdown {
     height: 297px !important;
     width: 180px !important;
     min-width: 180px;
@@ -117,7 +117,7 @@
     }
   }
 
-  .durationtime-picker__item {
+  .duration-picker__item {
     font-size: 12px;
     padding: 0;
     width: 34px;
@@ -129,18 +129,18 @@
     }
   }
 
-  .durationtime-picker__body {
+  .duration-picker__body {
     height: 226px;
     padding: 0;
   }
 
-  .durationtime-picker__item--selected {
+  .duration-picker__item--selected {
     border: 1px solid $primary-1;
     color: $primary-1;
     font-weight: 600;
   }
 
-  .durationtime-picker__column {
+  .duration-picker__column {
     width: 100%;
     height: 226px;
     padding: 23px 0;
@@ -180,7 +180,7 @@
   width: 105px;
 }
 
-/deep/ durationtime-picker {
+/deep/ duration-picker {
   width: 100%;
   background: $white;
   height: 40px;

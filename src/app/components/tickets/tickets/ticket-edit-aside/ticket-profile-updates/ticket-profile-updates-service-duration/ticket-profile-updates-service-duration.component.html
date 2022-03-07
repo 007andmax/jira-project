@@ -25,15 +25,15 @@
             style="width: 200px; opacity: 1;"
         >
             <div
-                class="durationtime-picker durationtime-picker--dropdown durationtoggle"
+                class="duration-picker duration-picker--dropdown durationtoggle"
                 aria-hidden="false"
                 style="width: 64.15px;"
             >
-                <div class="durationtime-picker__main">
-                    <div class="durationtime-picker__body">
+                <div class="duration-picker__main">
+                    <div class="duration-picker__body">
                         <div
                             id="hours"
-                            class="durationtime-picker__column durationtime-picker__hourList ng-star-inserted"
+                            class="duration-picker__column duration-picker__hourList ng-star-inserted"
                             style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
                             (wheel)="onWheelHours($event)"
                         >
@@ -45,15 +45,15 @@
                                 [ngForTrackBy]="trackByIndex"
                             >
                                 <span
-                                    class="durationtime-picker__item ng-star-inserted"
-                                    [ngClass]="{'durationtime-picker__item--selected':item.selected}"
+                                    class="duration-picker__item ng-star-inserted"
+                                    [ngClass]="{'duration-picker__item--selected':item.selected}"
                                     (click)="setHours(i)"
                                     [textContent]="getParseValue(item.value)"
                                 ></span>
                             </ng-template>
                         </div>
                         <div
-                            class="durationtime-picker__column durationtime-picker__minuteList ng-star-inserted"
+                            class="duration-picker__column duration-picker__minuteList ng-star-inserted"
                             style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
                             (wheel)="onWheelMinutes($event)"
                         >
@@ -65,8 +65,8 @@
                                 [ngForTrackBy]="trackByIndex"
                             >
                                 <span
-                                    class="durationtime-picker__item ng-star-inserted"
-                                    [ngClass]="{'durationtime-picker__item--selected':item.selected}"
+                                    class="duration-picker__item ng-star-inserted"
+                                    [ngClass]="{'duration-picker__item--selected':item.selected}"
                                     (click)="setMinutes(i)"
                                     [textContent]="getParseValue(item.value)"
                                 ></span>
