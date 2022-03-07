@@ -8,9 +8,6 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 export class PermissionReportsService implements CanActivate {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-        console.log("route", route);
-        console.log("state", state);
-
         if (this.usersStateService.getCurrentUser()) {
             if (!(this.getPermissions("VIEW_SALES_REPORT") ||
                 this.getPermissions("VIEW_FINANCIAL_REPORT") ||

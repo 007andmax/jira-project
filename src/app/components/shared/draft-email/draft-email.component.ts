@@ -134,7 +134,6 @@ export class DraftEmailComponent implements OnInit {
       this.elRef.nativeElement.querySelector("#upload-file-email").dispatchEvent(event);*/
   }
   public uploadFileOnBrower(event) {
-    console.log("event", event);
     if (event.target.value) {
       const file = event.target.files[0];
 
