@@ -63,6 +63,7 @@
                                 class="footer-nav__list"
                                 [ngClass]="{'--active':state === 'new-companies'}"
                                 (click)="goToCompanies()"
+                                *ngIf="getPermissions('VIEW_COMPANIES')"
                             >
                                 <a
                                     href="javascript:;"
@@ -91,6 +92,7 @@
                                 class="footer-nav__list"
                                 [ngClass]="{'--active':state === 'password-manager'}"
                                 (click)="goToPasswordManager()"
+                                *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
                             >
                                 <a
                                     href="javascript:;"

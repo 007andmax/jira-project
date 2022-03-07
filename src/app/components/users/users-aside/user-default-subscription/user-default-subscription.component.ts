@@ -12,6 +12,7 @@ export class UserDefaultSubscriptionComponent implements OnInit {
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() defaultSubscriptions: UserDefaultSubscription;
   @Input() mode: string;
+  @Input() isDisabled: boolean = false;
   @Output() onChange = new EventEmitter();
   constructor() { }
 

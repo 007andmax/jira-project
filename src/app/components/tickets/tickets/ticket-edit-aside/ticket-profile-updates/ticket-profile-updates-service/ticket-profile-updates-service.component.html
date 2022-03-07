@@ -13,12 +13,17 @@
                 ></span>
                 <span class="ticket-updates__add-note">&nbsp;added a service</span>
             </div>
+            <app-dynamic-tooltip
+                [content]="'Delete Update'"
+                [position]="'top'"
+                #deleteTooltip
+            ></app-dynamic-tooltip>
             <div
                 class="ticket-updates__delete icon__remove"
                 *ngIf="!isBlockChange"
                 (click)="remove()"
-                placement="top"
-                ngbTooltip="Delete Update"
+                (mouseenter)="deleteTooltip.show($event.target)"
+                (mouseleave)="deleteTooltip.hide()"
             ></div>
         </div>
         <ng-template

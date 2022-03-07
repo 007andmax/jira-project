@@ -38,8 +38,15 @@
                         [money]="true"
                         [ngModel]="product.item.cost"
                         appToFixed
+                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                         (blur)="onValidateSaleCostProduct(i)"
                         (ngModelChange)="onChangeCostProduct($event, i)"
+                    >
+                    <input
+                        class="product-item__input cost"
+                        type="text"
+                        *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
+                        disabled
                     >
                 </label>
                 <label class="product-item__qty-input">
@@ -111,6 +118,13 @@
                     (blur)="onValidateSaleCost()"
                     appToFixed
                     (ngModelChange)="onChangeCost($event)"
+                    *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                >
+                <input
+                    class="product-item__input cost"
+                    *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
+                    type="text"
+                    disabled
                 >
             </label>
             <label class="product-item__qty-input">

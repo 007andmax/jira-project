@@ -33,6 +33,7 @@
                             [type]="'COMPANY_SETTINGS'"
                             [selectedMode]="'SINGLE'"
                             [editUsers]="selectedActiveTechUsers(company, i)"
+                            [isDisabled]="!getPermissions('EDIT_COMPANIES')"
                             (usersChange)="setTechLead($event,company)"
                         ></app-teh-users>
                     </td>

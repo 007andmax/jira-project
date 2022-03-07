@@ -505,8 +505,14 @@ import { UsersAsideDetailMessagesFullBodyComponent } from './components/users/us
 import { MarketingComponent } from './components/marketing/marketing.component';
 import { UsersTableMarketingComponent } from './components/marketing/users-table-marketing/users-table-marketing.component';
 import { LeftPanelMarketingComponent } from './components/left-panel/left-panel-marketing/left-panel-marketing.component';
+import { PermissionContractsService } from './components/billing/contracts/permission-contracts.service';
+import { PermissionCompanyService } from './components/companies/permission-company.service';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
+import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
+import { PermissionSupportService } from './components/support/permission-support.service';
+import { PermissionReportsService } from './components/reports/permission-reports.service';
 
 
 declare var $: any;
@@ -1038,8 +1044,14 @@ declare var $: any;
     PermissionEmailTempleteService,
     PermissionAccountingSettingsService,
     PermissionCrmSettingsService,
+    PermissionContractsService,
+    PermissionCompanyService,
     PermissionBillableService,
-    PermissionInvoicesService
+    PermissionInvoicesService,
+    PermissionUsersService,
+    PermissionPasswordManagerService,
+    PermissionSupportService,
+    PermissionReportsService
   ],
   bootstrap: [AppComponent]
 })

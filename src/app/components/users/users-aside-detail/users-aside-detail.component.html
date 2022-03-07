@@ -11,6 +11,7 @@
                 placement="top"
                 container="body"
                 ngbTooltip="Edit"
+                *ngIf="getPermissions('EDIT_USERS')"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
@@ -59,7 +60,10 @@
             <div class="user-detail__row-info">
                 <div class="qt-input-block qt-mb-16">
                     <label class="qt-mb-4">Company</label>
-                    <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
                     <app-drop-down
                         class="user-detail-edit-company"
                         [placeholder]="'Company'"
@@ -70,6 +74,7 @@
                         [heightInput]="'32px'"
                         [editItem]="selectedCompany"
                         [isBlockClear]="true"
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         (onSelectedItem)="onSelectCompany($event)"
                     >
                     </app-drop-down>
@@ -79,12 +84,16 @@
                     [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
                 >
                     <label class="qt-mb-4">Email Address</label>
-                    <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
                     <input
                         type="text"
                         [(ngModel)]="user.primaryEmail"
                         (blur)="onCheckEmail()"
                         placeholder="Enter Email"
+                        [attr.disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error
                         class="qt-tooltip-error"
@@ -104,7 +113,10 @@
                     [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
                 >
                     <label class="qt-mb-4">Contact No.</label>
-                    <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    <div
+                        class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                        *ngIf="getPermissions('EDIT_USERS')"
+                    ></div>
                     <input
                         type="text"
                         class="qt-w100"
@@ -114,6 +126,7 @@
                         placeholder="Enter Primary Phone"
                         prefix="+1"
                         mask=" (000) 000-0000"
+                        [attr.disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error
                         class="qt-tooltip-error"
@@ -128,9 +141,13 @@
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
                         <div class="user-detail__row-info-label">Updates</div>
-                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                        <div
+                            class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                            *ngIf="getPermissions('EDIT_USERS')"
+                        ></div>
                     </div>
                     <user-default-subscription
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         [mode]="MODE_EDIT_SUBSCRIPTION"
                         [defaultSubscriptions]="user.defaultSubscriptions"
                         (onChange)="onChangeDefaultSubscriptions($event)"
@@ -139,9 +156,13 @@
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
                         <div class="user-detail__row-info-label">Marketing</div>
-                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                        <div
+                            class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                            *ngIf="getPermissions('EDIT_USERS')"
+                        ></div>
                     </div>
                     <user-custom-subscription
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         [classDropDown]="'user-aside-detail-custom-subscription'"
                         [customSubscriptions]="user.customSubscriptions"
                         (onChange)="onChangeCustomSubscriptions($event)"
@@ -177,6 +198,7 @@
                             cols="30"
                             [default]="3"
                             rows="3"
+                            [attr.disabled]="!getPermissions('EDIT_USERS')"
                         ></textarea>
                     </div>
                 </div>
@@ -184,7 +206,10 @@
                 <div class="user-detail__row-info-line">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-4">
                         <div class="user-detail__row-info-label">Tags</div>
-                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                        <div
+                            class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
+                            *ngIf="getPermissions('EDIT_USERS')"
+                        ></div>
                     </div>
                     <app-company-tags
                         #companyTags
@@ -192,6 +217,7 @@
                         [selectedTag]="user.tags"
                         [placement]="'top'"
                         [blockUserTag]="true"
+                        [isDisabled]="!getPermissions('EDIT_USERS')"
                         (tagsChange)="onChangeTags($event)"
                     ></app-company-tags>
                 </div>
@@ -210,6 +236,7 @@
                     class="pointer"
                     [ngClass]="{'active':tab === 'passwords'}"
                     (click)="setTab('passwords')"
+                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
                 >
                     Passwords
                 </span>
@@ -238,7 +265,7 @@
                 [user]="user"
             ></users-aside-detail-documents>
             <users-aside-detail-passwords
-                *ngIf="tab === 'passwords'"
+                *ngIf="tab === 'passwords' && getPermissions('VIEW_PASSWORD_SECTION')"
                 [user]="user"
             ></users-aside-detail-passwords>
             <users-aside-detail-messages

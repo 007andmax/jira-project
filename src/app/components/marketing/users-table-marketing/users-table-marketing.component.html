@@ -132,6 +132,7 @@
                 <li
                     class="pointer"
                     (click)="edit()"
+                    *ngIf="getPermissions('EDIT_USERS')"
                     ngbDropdownItem
                 >
                     <div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>

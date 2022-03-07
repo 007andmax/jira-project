@@ -129,6 +129,7 @@
                 <button
                     ngbDropdownItem
                     (click)="edit()"
+                    *ngIf="getPermissions('EDIT_COMPANIES')"
                 >
                     <i class="icn-16 edit-grey-ng2"></i>
                     Edit
@@ -136,9 +137,10 @@
                 <button
                     ngbDropdownItem
                     (click)="remove()"
+                    *ngIf="getPermissions('ARCHIVE_COMPANIES')"
                 >
                     <i class="icn-16 archive-grey-ng2"></i>
-                    Delete
+                    Archive
                 </button>
             </div>
         </div>

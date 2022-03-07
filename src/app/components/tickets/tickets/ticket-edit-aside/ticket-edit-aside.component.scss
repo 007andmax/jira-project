@@ -7,7 +7,9 @@
     height: calc(100% - 80px);
   }
 }
-
+.no-edit-note {
+  border: none !important;
+}
 .ticket-edit-aside {
   &__body {
     height: 100%;

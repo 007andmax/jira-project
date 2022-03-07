@@ -27,10 +27,6 @@
             class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
             *ngIf="!loadingInProgress"
         >
-
-
-
-
             <div class="report-header">
                 <h5>List of products sold</h5>
                 <div class="company-info">
@@ -65,10 +61,6 @@
                         </span>
                     </p>
                 </div>
-
-
-
-
                 <div *ngIf="productsCompanyReport.lines">
                     <ul>
                         <li class="top-product-list-ticket clearfix">
@@ -128,6 +120,7 @@
                             <div
                                 class="col-md-1 purchase-cost"
                                 (click)="onFilter('purchaseCost')"
+                                *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                             >
                                 Purchase cost
                             </div>
@@ -208,16 +201,8 @@
                                     </div>
                                 </li>
                             </ng-template>
-
-
-
-
                         </div>
                     </ul>
-
-
-
-
                 </div>
                 <div
                     class="product-report-total-sales clearfix"

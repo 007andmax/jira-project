@@ -8,6 +8,7 @@
                 <button
                     class="qt-btn --outline-blue"
                     (click)="onShowAddAside()"
+                    *ngIf="getPermissions('MANAGE_SERVICES')"
                 >
                     Create Service
                 </button>

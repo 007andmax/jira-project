@@ -73,8 +73,14 @@ import { PermissionEmailTempleteService } from './components/setting/email-templ
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
+import { PermissionContractsService } from './components/billing/contracts/permission-contracts.service';
+import { PermissionCompanyService } from './components/companies/permission-company.service';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
+import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
+import { PermissionSupportService } from './components/support/permission-support.service';
+import { PermissionReportsService } from './components/reports/permission-reports.service';
 
 const routes: Routes = [
 
@@ -87,27 +93,31 @@ const routes: Routes = [
   {
     path: ':company/password-manager',
     component: PasswordManagerComponent,
-
+    canActivate: [PermissionPasswordManagerService]
   },
   {
     path: ':company/company/:id/password-manager',
     component: CompanyPasswordManagerComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionCompanyService]
   },
   {
     path: ':company/company/:id/user',
     component: CompanyUserComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionCompanyService, PermissionUsersService]
   },
   {
     path: ':company/company/:id/tickets',
     component: CompanyTicketsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionCompanyService]
   },
   {
     path: ':company/company/:id/dashboard',
     component: CompanyDashboardComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionCompanyService]
   },
   {
     path: ':company/quotes',
@@ -122,10 +132,12 @@ const routes: Routes = [
   {
     path: ':company/companies',
     component: CompaniesComponent,
+    canActivate: [PermissionCompanyService]
   }, {
     path: ':company/users',
     component: UsersComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionUsersService]
   },
   {
     path: ':company/reports',
@@ -134,7 +146,8 @@ const routes: Routes = [
   },
   {
     path: ':company/report/:id',
-    component: ItemReportComponent
+    component: ItemReportComponent,
+    canActivate: [PermissionReportsService]
   },
   {
     path: ':company/setting/myprofile',
@@ -249,7 +262,8 @@ const routes: Routes = [
   {
     path: ':company/company/:id/documents',
     component: CompanyDocumentsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionCompanyService]
   },
   {
     path: ':company/documents/preview/:id',
@@ -259,7 +273,8 @@ const routes: Routes = [
   {
     path: ':company/company/:id/products',
     component: CompanyProductsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionCompanyService]
   },
 
   {
@@ -284,6 +299,7 @@ const routes: Routes = [
   {
     path: ':company/contracts',
     component: ContractsComponent,
+    canActivate: [PermissionContractsService]
   },
   {
     path: ':company/payments',
@@ -337,7 +353,9 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/contracts',
-    component: CompanyContractsComponent
+    component: CompanyContractsComponent,
+    canActivate: [PermissionContractsService]
+
   },
   {
     path: ':company/tickets-dashboard',
@@ -345,17 +363,19 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/network-scan',
-    component: CompanyNetworkScanComponent
+    component: CompanyNetworkScanComponent,
+    canActivate: [PermissionCompanyService]
   },
   {
     path: ':company/company/:id/devices',
     component: CompanyDevicesComponent,
+    canActivate: [PermissionCompanyService]
 
   },
   {
     path: ':company/quickSupport',
     component: SupportComponent,
-
+    canActivate: [PermissionSupportService]
   },
   {
     path: ':company/documents/templates',
@@ -370,7 +390,8 @@ const routes: Routes = [
   {
     path: ':company/marketing',
     component: MarketingComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionUsersService]
   },
 
 ];

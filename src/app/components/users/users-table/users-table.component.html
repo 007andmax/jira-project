@@ -147,7 +147,7 @@
             >
                 <li
                     class="pointer"
-                    *ngIf="!showArchivedUsers"
+                    *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS')"
                     (click)="edit()"
                     ngbDropdownItem
                 >

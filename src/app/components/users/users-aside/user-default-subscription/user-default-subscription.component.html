@@ -1,14 +1,15 @@
 <div
     class="grey-dropdown filter-tags-body"
     ngbDropdown
-    container="body"
+    [container]="(isDisabled) ? null : 'body'"
 >
     <i class="icn-sm report-caret-icon"></i>
     <div
         class="user-subscription"
         id="dropdownServices"
         ngbDropdownToggle
-        [ngClass]="{'placeholder-subscription': !showPlaceholder()}"
+        [ngClass]="{'placeholder-subscription': !showPlaceholder(),
+    'no-pointer':isDisabled}"
     >
         <div
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
@@ -22,6 +23,7 @@
             ></i>
             Invoice Updates
             <i
+                *ngIf="!isDisabled"
                 class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
                 (click)="selected('invoiceSubscription')"
             ></i>
@@ -38,6 +40,7 @@
             ></i>
             Ticket Updates
             <i
+                *ngIf="!isDisabled"
                 class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
                 (click)="selected('ticketSubscription')"
             ></i>
@@ -54,6 +57,7 @@
             ></i>
             Ticket Manager
             <i
+                *ngIf="!isDisabled"
                 class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
                 (click)="selected('ticketManagerSubscription')"
             ></i>
@@ -63,6 +67,7 @@
         class="select-wrapper qt-dropdown-menu company-subscription-dropdown"
         ngbDropdownMenu
         aria-labelledby="dropdownServices"
+        *ngIf="!isDisabled"
     >
         <div
             class="content"

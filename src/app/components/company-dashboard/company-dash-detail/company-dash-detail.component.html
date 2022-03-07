@@ -195,7 +195,10 @@
                             <span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span>
                             <span *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span>
                         </button>
-                        <div class="item">
+                        <div
+                            class="item"
+                            *ngIf="getPermissions('EDIT_COMPANIES')"
+                        >
                             <button
                                 class="btn btn-outline"
                                 (click)="open(contentHour)"
@@ -266,6 +269,7 @@
             <a
                 href="javascript:;"
                 (click)="open(tag)"
+                *ngIf="getPermissions('EDIT_COMPANIES')"
             >
                 +Add
             </a>
@@ -280,6 +284,7 @@
                     href="javascript:;"
                     (click)="deleteTag(i)"
                     class="close"
+                    *ngIf="getPermissions('EDIT_COMPANIES')"
                 >
                     <img
                         src="html/assets/img/company-details/tag-close-12.svg"
@@ -307,6 +312,7 @@
         <a
             (click)="edit()"
             class="btn btn-primary"
+            *ngIf="getPermissions('EDIT_COMPANIES')"
         >
             Edit Company
         </a>

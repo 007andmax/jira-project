@@ -22,24 +22,28 @@
             <li
                 ngbDropdownItem
                 (click)="onAddCompany()"
+                *ngIf="getPermissions('CREATE_COMPANIES')"
             >
                 Company
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddUser()"
+                *ngIf="getPermissions('CREATE_USERS')"
             >
                 Users
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddService()"
+                *ngIf="getPermissions('MANAGE_SERVICES')"
             >
                 Service
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddProduct()"
+                *ngIf="getPermissions('MANAGE_PRODUCTS')"
             >
                 Product
             </li>

@@ -4,6 +4,7 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { InvoiceFormTicketEditTaxesComponent } from '../invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-invoice-form-ticket-edit-product',
@@ -16,7 +17,8 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
   valdiateSaleCost: boolean = true;
   taxes: Array<Tax> = [];
   sub: Subscription = new Subscription();
-  constructor(private taxesStateService: TaxesStateService,) { }
+  constructor(private taxesStateService: TaxesStateService,
+    private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
@@ -52,6 +54,9 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
   public onChangeSale(val) {
     let value = Number(val);
     this.product.item.sale = value;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

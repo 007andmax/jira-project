@@ -163,6 +163,9 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

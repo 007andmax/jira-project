@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { USERS } from 'src/app/const/emails';
 import { MODE_EDIT_SUBSCRIPTION } from 'src/app/const/users';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -51,6 +52,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private draftEmailStateService: DraftEmailStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     private usersRealTimeService: UsersRealTimeService,
+    private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,) { }
 
 
@@ -232,6 +234,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       , customSubscriptionIds: data.map(item => item.id)
     }).subscribe(res => {
     })
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

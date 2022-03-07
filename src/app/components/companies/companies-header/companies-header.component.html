@@ -81,10 +81,12 @@
                     class="new-link desktop-hidden"
                     style="font-size: 13px;"
                     (click)="showAsideForAdd()"
+                    *ngIf="getPermissions('CREATE_COMPANIES')"
                 >
                     Add Company
                 </button>
                 <button
+                    *ngIf="getPermissions('CREATE_COMPANIES')"
                     class="btn-new btn-primary-white qt-fs-0 qt-d-md-none"
                     (click)="showAsideForAdd()"
                 >

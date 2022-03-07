@@ -28,12 +28,13 @@ export class CompanyDashAssociateInfoComponent implements OnInit {
 
   }
   getCompanyName(id) {
-    return (this.companies.length > 0) ? this.companies.find(item => item.id === id).name : '';
+    return (this.companies.length > 0 && this.companies.find(item => item.id === id)) ? this.companies.find(item => item.id === id).name : '';
 
   }
   getPhoneNumber(id) {
     if (this.companies.length === 0) return '';
     let company = this.companies.find(item => item.id === id);
+    if (!company) return '';
     let primaryPhone, primaryAddress;
     if (company.companyInfo) {
 

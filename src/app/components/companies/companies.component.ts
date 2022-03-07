@@ -16,6 +16,7 @@ import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 import { CompanyFilter } from './class/company-filter';
 import { CompanyItem } from './class/company-item';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-companies',
@@ -44,6 +45,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
     private draftEmailStateService: DraftEmailStateService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -223,6 +225,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.reqCompaniesList.forEach(item => item.selected = false);

@@ -85,16 +85,18 @@
                         </p>
                     </div>
                     <app-drop-down
+                        #categoriesDp
                         [class]="['light-dropdown', 'qt-select-input-40']"
                         [placeholder]="'Select Category'"
                         [errorMessage]="'Category is required'"
                         [editItem]="getSelectedCategory()"
                         [field]="'name'"
-                        [add]="true"
+                        [add]="getPermissions('CREATE_CATEGORY')"
                         [list]="categories"
                         [search]="true"
                         [change]="true"
                         (onSelectedItem)="onSelectCategory($event)"
+                        (onAddItem)="onAddCategory($event)"
                     >
                     </app-drop-down>
                 </div>

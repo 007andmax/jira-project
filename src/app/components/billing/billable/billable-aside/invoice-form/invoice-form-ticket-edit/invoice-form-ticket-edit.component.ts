@@ -3,6 +3,7 @@ import { InvoiceProfileTicket } from '../../../class/invoice-profile-ticket';
 import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 @Component({
   selector: 'app-invoice-form-ticket-edit',
   templateUrl: './invoice-form-ticket-edit.component.html',
@@ -14,6 +15,7 @@ export class InvoiceFormTicketEditComponent implements OnInit {
 
   currentCompany;
   constructor(private companiesStateService: CompaniesStateService,
+    private permissionsService: PermissionsService,
     private ticketsService: TicketsService,) { }
 
   ngOnInit() {
@@ -34,6 +36,9 @@ export class InvoiceFormTicketEditComponent implements OnInit {
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.id;
