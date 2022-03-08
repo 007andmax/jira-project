@@ -28,7 +28,7 @@ export class AgentService {
   public hasAccessToken() {
     return this.AccessToken == "" ? false : true;
   }
-  
+
   ensureAccessToken(callback = null) {
     this.getAgentToken(
       "QuickTech",
@@ -100,6 +100,45 @@ export class AgentService {
         `${this.apiAgent}agent/Asset/CreateNonAgentAsset`,
         this.encrypt128(this.key, JSON.stringify(data)),
         { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
+
+  public addHardwareType(hardware) {
+    return this.http
+      .put(
+        `${this.apiAgent}agent/HardwareType`,
+        this.encrypt128(this.key, JSON.stringify(hardware)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
+      )
+      .pipe(map((data: string) => data));
+  }
+
+  public addManufacturer(manufacturer) {
+    return this.http
+      .put(
+        `${this.apiAgent}agent/Manufacturer`,
+        this.encrypt128(this.key, JSON.stringify(manufacturer)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
+      )
+      .pipe(map((data: string) => data));
+  }
+
+  public addModel(model) {
+    return this.http
+      .put(
+        `${this.apiAgent}/agent/Model`,
+        this.encrypt128(this.key, JSON.stringify(model)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
       )
       .pipe(map((data: string) => data));
   }
@@ -483,6 +522,16 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
+  public deleteHardwareType(data) {
+    const httpOptions = {
+      headers: this.getHeader(),
+      body: this.encrypt128(this.key, JSON.stringify(data)),
+    };
+    return this.http
+      .delete(`${this.apiAgent}agent/HardwareType`, httpOptions)
+      .pipe(map((data: string) => data));
+  }
+
   public getSoftwareListByAssetId(asset_id) {
     return this.http
       .get(`${this.apiAgent}agent/SoftwareItem/${asset_id}`, {
@@ -623,6 +672,26 @@ export class AgentService {
 
     return this.http
       .get(`${this.apiAgent}agent/Asset/Company/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getManufactureByTechCompanyGuid(guid) {
+debugger
+    return this.http
+      .get(`${this.apiAgent}agent/Manufacturer/GetByTechCompanyGuid/${guid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getModelByManufacturerId(manufacturer) {
+
+    return this.http
+      .get(`${this.apiAgent}agent/Model/GetByManufacturerID/${manufacturer}`, {
         headers: this.getHeader(),
         responseType: "text",
       })

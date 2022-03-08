@@ -8,27 +8,199 @@
             <a
                 href="javascript:;"
                 class="btn-outline"
+                (click)="openModel(true, 0, {})"
             >
                 Add Device Type
             </a>
+
+             <!-- Modal create Device Type -->
+             <div
+             class="modal-content toggle-area"
+             [class.opened]="create"
+         >
+             <div class="modal-wrapper">
+                 <div class="toggle-header">
+                     <h2 class="h1">Add Device Type</h2>
+                 </div>
+                 <div class="modal-body">
+                     <form
+                         [formGroup]="deviceForm"
+                         (ngSubmit)="onSubmit()"
+                     >
+                         <div class="f-row">
+                             <div class="f-col col-100">
+                                 <label>Device Name</label>
+                                 <div class="form-row">
+                                     <input
+                                         type="text"
+                                         class="form-input"
+                                         formControlName="Name"
+                                         placeholder="Enter Device Type Name"
+                                         #Name
+                                         [ngClass]="{ 'is-invalid': submitted && f.Name.errors }"
+                                     >
+                                 </div>
+                                 <div
+                                                *ngIf="submitted && f.Name.errors"
+                                                class="invalid-feedback"
+                                            >
+                                                <div *ngIf="f.Name.errors.required">Name is required</div>
+                                            </div>
+                             </div>
+                             <div class="m-btn-row">
+                                 <div class="m-btn-col">
+                                     <input
+                                         type="submit"
+                                         value="Save"
+                                         class="btn btn-primary"
+                                     >
+                                     <a
+                                         href="javascript:;"
+                                         class="btn btn-secondary"
+                                         aria-label="Close"
+                                         (click)="create = !create"
+                                     >
+                                         Cancel
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
         </div>
 
         <div class="heading-serach" *ngIf="manufacturebutton">
           <a
               href="javascript:;"
               class="btn-outline"
+              (click)="openModelManufacture(true, 0, {})"
           >
               Add Manufacture
           </a>
+
+          <div
+          class="modal-content toggle-area"
+          [class.opened]="create"
+      >
+          <div class="modal-wrapper">
+              <div class="toggle-header">
+                  <h2 class="h1">Add Manufacture</h2>
+              </div>
+              <div class="modal-body">
+                  <form
+                      [formGroup]="manufactureForm"
+                      (ngSubmit)="onSubmitManufacturer()"
+                  >
+                      <div class="f-row">
+                          <div class="f-col col-100">
+                              <label>Manufacture Name</label>
+                              <div class="form-row">
+                                  <input
+                                      type="text"
+                                      class="form-input"
+                                      formControlName="Name"
+                                      placeholder="Enter Manufacture Name"
+                                      #Name
+                                      [ngClass]="{ 'is-invalid': submitted && f1.Name.errors }"
+                                  >
+                              </div>
+                              <div
+                                             *ngIf="submitted && f1.Name.errors"
+                                             class="invalid-feedback"
+                                         >
+                                             <div *ngIf="f1.Name.errors.required">Name is required</div>
+                                         </div>
+                          </div>
+                          <div class="m-btn-row">
+                              <div class="m-btn-col">
+                                  <input
+                                      type="submit"
+                                      value="Save"
+                                      class="btn btn-primary"
+                                  >
+                                  <a
+                                      href="javascript:;"
+                                      class="btn btn-secondary"
+                                      aria-label="Close"
+                                      (click)="create = !create"
+                                  >
+                                      Cancel
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
       </div>
 
       <div class="heading-serach" *ngIf="modelbutton">
         <a
             href="javascript:;"
             class="btn-outline"
+            (click)="openModelPopup(true, 0, {})"
         >
             Add Model
         </a>
+
+        <div
+        class="modal-content toggle-area"
+        [class.opened]="create"
+    >
+        <div class="modal-wrapper">
+            <div class="toggle-header">
+                <h2 class="h1">Add Model</h2>
+            </div>
+            <div class="modal-body">
+                <form
+                    [formGroup]="modelForm"
+                    (ngSubmit)="SaveModel()"
+                >
+                    <div class="f-row">
+                        <div class="f-col col-100">
+                            <label>Model Name</label>
+                            <div class="form-row">
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    formControlName="Name"
+                                    placeholder="Enter Model Name"
+                                    #Name
+                                    [ngClass]="{ 'is-invalid': submitted && f2.Name.errors }"
+                                >
+                            </div>
+                            <div
+                                           *ngIf="submitted && f2.Name.errors"
+                                           class="invalid-feedback"
+                                       >
+                                           <div *ngIf="f2.Name.errors.required">Name is required</div>
+                                       </div>
+                        </div>
+                        <div class="m-btn-row">
+                            <div class="m-btn-col">
+                                <input
+                                    type="submit"
+                                    value="Save"
+                                    class="btn btn-primary"
+                                >
+                                <a
+                                    href="javascript:;"
+                                    class="btn btn-secondary"
+                                    aria-label="Close"
+                                    (click)="create = !create"
+                                >
+                                    Cancel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     </div>
       </span>
       </div>
@@ -41,21 +213,64 @@
               <ng-template ngbTabContent >
                   <div class="cmn-area">
                       <div class="data-table-wrap">
-                          <table
-                              class="dataTable display"
-                              style="width:100%"
-                          >
-                              <thead>
-                                  <tr>
-                                      <th class="t-name">Device Type
-                                      </th>
-                                      <th class="t-name">Count</th>
-                                      <th class="action">&nbsp;</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              </tbody>
-                          </table>
+                        <table class="qt-table-modern qt-page-list__header-thead">
+                          <thead>
+                              <tr>
+                                  <th class="company-devices-table__check">
+                                      <div class="d-f">
+                                          <label class="qt-checkbox">
+                                            <input
+                                                type="checkbox"
+                                            >
+                                            <span></span>
+                                        </label>
+                                      </div>
+                                  </th>
+                                  <th class="company-devices-table__dev-name pointer" (click)="onFilter('Name')">
+                                      Device Type
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th class="company-devices-table__company-name pointer" (click)="onFilter('Count')">
+                                      Count
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="company-device-hover" *ngFor="let devicetype of hardwareTypes">
+                                <td class="company-devices-table__check">
+                                    <div class="d-f">
+                                        <label class="qt-checkbox">
+                                          <input
+                                              type="checkbox"
+                                              
+                                          >
+                                          <span></span>
+                                      </label>
+                                    </div>
+                                </td>
+                                <td class="company-devices-table__go-to">
+                                  {{devicetype.Name}}
+                                </td>
+                                <td class="company-devices-table__go-to">
+                                  {{0}}
+                                </td>
+                                <td class="action">
+                                  <a
+                                      href="javascript:;"
+                                      data-tooltip="Remove"
+                                      class="remove"
+                                      (click)="removeConfirm(devicetype)"
+                                  >
+                                      <img
+                                          src="/html/assets/img/icons/remove.svg"
+                                          alt="Remove"
+                                      >
+                                  </a>
+                              </td>
+                            </tr>
+                        </tbody>
+                      </table>
                       </div>
                   </div>
               </ng-template>
@@ -71,12 +286,39 @@
                           >
                               <thead>
                                   <tr>
+                                      <th></th>
                                       <th class="t-name">Manufacture</th>
                                       <th class="t-name">Count</th>
                                       <th class="action">&nbsp;</th>
                                   </tr>
                               </thead>
                               <tbody>
+                                <tr *ngFor="let manufacture of manufacturerList">
+                                  <td>
+                                    <div class="d-f">
+                                      <label class="qt-checkbox">
+                                        <input
+                                            type="checkbox"
+                                        >
+                                        <span></span>
+                                    </label>
+                                  </div>
+                                  </td>
+                                  <td>{{manufacture.Name}}</td>
+                                   <td>{{0}}</td>
+                                   <td class="action">
+                                    <a
+                                        href="javascript:;"
+                                        data-tooltip="Remove"
+                                        class="remove"
+                                    >
+                                        <img
+                                            src="/html/assets/img/icons/remove.svg"
+                                            alt="Remove"
+                                        >
+                                    </a>
+                                </td>
+                                </tr>
                               </tbody>
                           </table>
                       </div>
@@ -100,6 +342,32 @@
                                   </tr>
                               </thead>
                               <tbody>
+                                <tr *ngFor="let model of modelList">
+                                  <td>
+                                    <div class="d-f">
+                                      <label class="qt-checkbox">
+                                        <input
+                                            type="checkbox"
+                                        >
+                                        <span></span>
+                                    </label>
+                                  </div>
+                                  </td>
+                                  <td>{{model.Name}}</td>
+                                   <td>{{0}}</td>
+                                   <td class="action">
+                                    <a
+                                        href="javascript:;"
+                                        data-tooltip="Remove"
+                                        class="remove"
+                                    >
+                                        <img
+                                            src="/html/assets/img/icons/remove.svg"
+                                            alt="Remove"
+                                        >
+                                    </a>
+                                </td>
+                                </tr>
                               </tbody>
                           </table>
                       </div>
@@ -110,3 +378,52 @@
   </div>
 </div>
 
+
+
+<div
+    class="img-croparea deletePopup"
+    *ngIf="popup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
+                    >
+                </span>
+                <div class="message-right">
+                    <h2 class="h1">Delete DeviceType</h2>
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="popup = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="removeDeviceType()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="popup = false"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
