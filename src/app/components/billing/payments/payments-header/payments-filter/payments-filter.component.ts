@@ -55,6 +55,7 @@ export class PaymentsFilterComponent implements OnInit {
 
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
+    this.elRef.nativeElement.querySelector("#amount-filter").value = "";
   }
 
   public onSelectCompany(item) {
