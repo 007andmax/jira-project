@@ -14,12 +14,10 @@ import { CommissionService } from '../commission/commission.service';
   styleUrls: ['./device-setting.component.scss']
 })
 export class DeviceSettingComponent implements OnInit {
-  templeteInfo: any;
-  devicebutton : boolean = false;
-  manufacturebutton:boolean;
-  modelbutton : boolean;
+  devicebutton: boolean = false;
+  manufacturebutton: boolean;
+  modelbutton: boolean;
   hardwareTypes: any[] = [];
-  assetList: any[] = [];
   companyId: any;
   deviceType: any;
   popup: boolean;
@@ -28,19 +26,18 @@ export class DeviceSettingComponent implements OnInit {
   deviceForm: FormGroup;
   submitted = false;
   selectedIdx = -1;
-  Name : string;
-  manufactureForm:FormGroup;
-  manufacturerList : any[]=[];
-  modelForm : FormGroup;
-  modelList: any[]=[];
+  Name: string;
+  manufactureForm: FormGroup;
+  manufacturerList: any[] = [];
+  modelForm: FormGroup;
+  modelList: any[] = [];
   filter: DeviceFilter = new DeviceFilter();
 
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
     private commissionService: CommissionService,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService,
-    private toastr: ToastrService) { }
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.devicebutton = true;
@@ -52,9 +49,9 @@ export class DeviceSettingComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID :[""],
-      TechCompanyID : [""],
-      TechCompanyGuid :[""]
+      ID: [""],
+      TechCompanyID: [""],
+      TechCompanyGuid: [""],
 
     });
 
@@ -63,7 +60,9 @@ export class DeviceSettingComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID :[""]
+      ID: [""],
+      TechCompanyID: [""],
+      TechCompanyGuid: [""],
     })
 
     this.modelForm = this.formBuilder.group({
@@ -71,36 +70,35 @@ export class DeviceSettingComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID :[""]
+      ID: [""]
     })
     this.settingStateService.setComponentName('DeviceSettingComponent');
     this.getCurrentCompany();
-
   }
 
   onFilter(field) {
     this.filter.onFilter(field, this.hardwareTypes);
   }
 
-  toggle(evt: any){
-    if(evt.nextId == "tab1"){
+  toggle(evt: any) {
+    if (evt.nextId == "tab1") {
       this.devicebutton = true;
     }
-    else{
+    else {
       this.devicebutton = false
     }
 
-    if(evt.nextId == "tab2"){
+    if (evt.nextId == "tab2") {
       this.manufacturebutton = true;
     }
-    else{
+    else {
       this.manufacturebutton = false
     }
 
-    if(evt.nextId == "tab3"){
+    if (evt.nextId == "tab3") {
       this.modelbutton = true;
     }
-    else{
+    else {
       this.modelbutton = false
     }
   }
@@ -117,11 +115,11 @@ export class DeviceSettingComponent implements OnInit {
       });
   }
 
-  Manufacture(TechCompanyGuid: any){
+  Manufacture(TechCompanyGuid: any) {
     this.agentService.getManufactureByTechCompanyGuid(TechCompanyGuid)
-    .subscribe((resp) => {
-       this.manufacturerList = resp;
-    });
+      .subscribe((resp) => {
+        this.manufacturerList = resp;
+      });
   }
 
   HardwareTypeList(TechCompanyGuid: any) {
@@ -141,19 +139,19 @@ export class DeviceSettingComponent implements OnInit {
   }
 
 
-  openModel(isCreated: boolean, index: number, device:any) {
+  openModel(isCreated: boolean, index: number, device: any) {
     this.submitted = false;
     this.deviceForm.reset();
     this.create = isCreated;
 
 
-      this.selectedIdx = index;
-      this.deviceForm.patchValue({
-        ID: device.Id,
-        Name: device.Name,
-        TechCompanyID : device.TechCompanyID,
-        TechCompanyGuid :this.companyId
-      });
+    this.selectedIdx = index;
+    this.deviceForm.patchValue({
+      ID: device.Id,
+      Name: device.Name,
+      TechCompanyID: device.TechCompanyID,
+      TechCompanyGuid: this.companyId
+    });
   }
 
   get f() {
@@ -164,9 +162,9 @@ export class DeviceSettingComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-      // add
-      this.loading = true; $(".loading").css("display", "block");
-      this.agentService.addHardwareType(this.deviceForm.value)
+    // add
+    this.loading = true; $(".loading").css("display", "block");
+    this.agentService.addHardwareType(this.deviceForm.value)
       .pipe(
         map((res: any) => {
           this.loading = false; $(".loading").css("display", "none");
@@ -184,54 +182,49 @@ export class DeviceSettingComponent implements OnInit {
         }
       );
 
-    }
+  }
 
-  removeConfirm(devicetype: any) {
-    this.deviceType = devicetype;
+  removeConfirm(deviceType: any) {
+    this.deviceType = deviceType;
     this.popup = true;
   }
 
 
   removeDeviceType() {
     this.loading = true; $(".loading").css("display", "block");
+    this.deviceType.IsActive = false;
 
     this.agentService
-    .deleteHardwareType(this.deviceType)
-    // .pipe(
-    //   map(res => {
-    //     this.loading = false; $(".loading").css("display", "none");
-    //     this.popup = false;
-    //     this.hardwareTypes = this.hardwareTypes.filter(t => t.ID !== this.deviceType.ID);
-    //     this.toastrService.success(`${this.deviceType.Name} is Deleted Successfully.`);
-    //   })
-    // )
-    .subscribe(
-      ()=>{
+      .deleteHardwareType(this.deviceType)
+      .subscribe( (resp) => {
         this.toastrService.success(`${this.deviceType.Name} is Deleted Successfully.`);
-      }
-    );
+      }, (error) => {
+        this.toastrService.error("Something went wrong please try again.");
+      });
   }
 
 
-  openModelManufacture(isCreated: boolean, index: number, manufacture:any) {
+  openModelManufacture(isCreated: boolean, index: number, manufacture: any) {
     this.submitted = false;
     this.manufactureForm.reset();
     this.create = isCreated;
 
 
-      this.selectedIdx = index;
-      this.manufactureForm.patchValue({
-        ID: manufacture.Id,
-        Name: manufacture.Name,
-      });
+    this.selectedIdx = index;
+    this.manufactureForm.patchValue({
+      ID: manufacture.Id,
+      Name: manufacture.Name,
+      TechCompanyID: manufacture.TechCompanyID,
+      TechCompanyGuid: this.companyId
+    });
   }
 
   onSubmitManufacturer() {
     this.submitted = true;
 
-      // add
-      this.loading = true; $(".loading").css("display", "block");
-      this.agentService.addManufacturer(this.manufactureForm.value)
+    // add
+    this.loading = true; $(".loading").css("display", "block");
+    this.agentService.addManufacturer(this.manufactureForm.value)
       .pipe(
         map((res: any) => {
           this.loading = false; $(".loading").css("display", "none");
@@ -242,56 +235,56 @@ export class DeviceSettingComponent implements OnInit {
       .subscribe(
         () => {
           this.toastrService.success("Manufacturer Saved Successfully");
+          this.getCurrentCompany()
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
         }
       );
-      console.log(this.manufacturerList)
-    }
+    console.log(this.manufacturerList)
+  }
 
-    get f1() {
-      return this.manufactureForm.controls;
-    }
+  get f1() {
+    return this.manufactureForm.controls;
+  }
 
-    openModelPopup(isCreated: boolean, index: number, model:any) {
-      this.submitted = false;
-      this.modelForm.reset();
-      this.create = isCreated;
+  openModelPopup(isCreated: boolean, index: number, model: any) {
+    this.submitted = false;
+    this.modelForm.reset();
+    this.create = isCreated;
 
 
-        this.selectedIdx = index;
-        this.modelForm.patchValue({
-          ID: model.Id,
-          Name: model.Name,
-        });
-    }
+    this.selectedIdx = index;
+    this.modelForm.patchValue({
+      ID: model.Id,
+      Name: model.Name,
+    });
+  }
 
-    get f2() {
-      return this.modelForm.controls;
-    }
+  get f2() {
+    return this.modelForm.controls;
+  }
 
-    SaveModel() {
-      this.submitted = true;
+  SaveModel() {
+    this.submitted = true;
 
-        // add
-        this.loading = true; $(".loading").css("display", "block");
-        this.agentService.addModel(this.modelForm.value)
-        .pipe(
-          map((res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
-            this.modelList.push(res);
-            this.create = false;
-          })
-        )
-        .subscribe(
-          () => {
-            this.toastrService.success("Model Saved Successfully");
-          },
-          error => {
-            this.loading = false; $(".loading").css("display", "none");
-          }
-        );
-        console.log(this.modelList)
-      }
+    // add
+    this.loading = true; $(".loading").css("display", "block");
+    this.agentService.addModel(this.modelForm.value)
+      .pipe(
+        map((res: any) => {
+          this.loading = false; $(".loading").css("display", "none");
+          this.modelList.push(res);
+          this.create = false;
+        })
+      )
+      .subscribe(
+        () => {
+          this.toastrService.success("Model Saved Successfully");
+        },
+        error => {
+          this.loading = false; $(".loading").css("display", "none");
+        }
+      );
+  }
 }

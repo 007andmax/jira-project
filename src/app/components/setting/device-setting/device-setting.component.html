@@ -221,46 +221,49 @@
                                           <label class="qt-checkbox">
                                             <input
                                                 type="checkbox"
+
                                             >
                                             <span></span>
                                         </label>
                                       </div>
                                   </th>
-                                  <th class="company-devices-table__dev-name pointer" (click)="onFilter('Name')">
+                                  <th class="device-type pointer" (click)="onFilter('Name')">
                                       Device Type
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
-                                  <th class="company-devices-table__company-name pointer" (click)="onFilter('Count')">
+                                  <th class="count pointer" (click)="onFilter('Count')">
                                       Count
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
+                                  <th class="delete"></th>
                               </tr>
                           </thead>
                           <tbody>
-                            <tr class="company-device-hover" *ngFor="let devicetype of hardwareTypes">
+                            <tr class="company-device-hover" *ngFor="let deviceType of hardwareTypes">
                                 <td class="company-devices-table__check">
                                     <div class="d-f">
                                         <label class="qt-checkbox">
                                           <input
                                               type="checkbox"
-                                              
+                                              [(ngModel)]="deviceType.IsActive"
+
                                           >
                                           <span></span>
                                       </label>
                                     </div>
                                 </td>
                                 <td class="company-devices-table__go-to">
-                                  {{devicetype.Name}}
+                                  {{deviceType.Name}}
                                 </td>
-                                <td class="company-devices-table__go-to">
+                                <td class="company-devices-table__go-to count-setting">
                                   {{0}}
                                 </td>
-                                <td class="action">
+                                <td class="company-devices-table__go-to">
                                   <a
                                       href="javascript:;"
                                       data-tooltip="Remove"
                                       class="remove"
-                                      (click)="removeConfirm(devicetype)"
+                                      (click)="removeConfirm(deviceType)"
                                   >
                                       <img
                                           src="/html/assets/img/icons/remove.svg"
@@ -280,47 +283,65 @@
               <ng-template ngbTabContent>
                   <div class="cmn-area">
                       <div class="data-table-wrap">
-                          <table
-                              class="dataTable display"
-                              style="width:100%"
-                          >
-                              <thead>
-                                  <tr>
-                                      <th></th>
-                                      <th class="t-name">Manufacture</th>
-                                      <th class="t-name">Count</th>
-                                      <th class="action">&nbsp;</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let manufacture of manufacturerList">
-                                  <td>
+                        <table class="qt-table-modern qt-page-list__header-thead">
+                          <thead>
+                              <tr>
+                                  <th class="company-devices-table__check">
+                                      <div class="d-f">
+                                          <label class="qt-checkbox">
+                                            <input
+                                                type="checkbox"
+                                            >
+                                            <span></span>
+                                        </label>
+                                      </div>
+                                  </th>
+                                  <th class="device-type pointer" (click)="onFilter('Name')">
+                                      Manufacture
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th class="count pointer" (click)="onFilter('Count')">
+                                      Count
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th class="delete"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="company-device-hover" *ngFor="let manufacture of manufacturerList">
+                                <td class="company-devices-table__check">
                                     <div class="d-f">
-                                      <label class="qt-checkbox">
-                                        <input
-                                            type="checkbox"
-                                        >
-                                        <span></span>
-                                    </label>
-                                  </div>
-                                  </td>
-                                  <td>{{manufacture.Name}}</td>
-                                   <td>{{0}}</td>
-                                   <td class="action">
-                                    <a
-                                        href="javascript:;"
-                                        data-tooltip="Remove"
-                                        class="remove"
-                                    >
-                                        <img
-                                            src="/html/assets/img/icons/remove.svg"
-                                            alt="Remove"
-                                        >
-                                    </a>
+                                        <label class="qt-checkbox">
+                                          <input
+                                              type="checkbox"
+
+                                          >
+                                          <span></span>
+                                      </label>
+                                    </div>
                                 </td>
-                                </tr>
-                              </tbody>
-                          </table>
+                                <td class="company-devices-table__go-to">
+                                  {{manufacture.Name}}
+                                </td>
+                                <td class="company-devices-table__go-to count-setting">
+                                  {{0}}
+                                </td>
+                                <td class="company-devices-table__go-to">
+                                  <a
+                                      href="javascript:;"
+                                      data-tooltip="Remove"
+                                      class="remove"
+                                      (click)="removeConfirm(manufacture)"
+                                  >
+                                      <img
+                                          src="/html/assets/img/icons/remove.svg"
+                                          alt="Remove"
+                                      >
+                                  </a>
+                              </td>
+                            </tr>
+                        </tbody>
+                      </table>
                       </div>
                   </div>
               </ng-template>
@@ -330,46 +351,65 @@
               <ng-template ngbTabContent>
                   <div class="cmn-area">
                       <div class="data-table-wrap">
-                          <table
-                              class="dataTable display"
-                              style="width:100%"
-                          >
-                              <thead>
-                                  <tr>
-                                      <th class="t-name">Model</th>
-                                      <th class="t-name">Count</th>
-                                      <th class="action">&nbsp;</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let model of modelList">
-                                  <td>
+                        <table class="qt-table-modern qt-page-list__header-thead">
+                          <thead>
+                              <tr>
+                                  <th class="company-devices-table__check">
+                                      <div class="d-f">
+                                          <label class="qt-checkbox">
+                                            <input
+                                                type="checkbox"
+                                            >
+                                            <span></span>
+                                        </label>
+                                      </div>
+                                  </th>
+                                  <th class="device-type pointer" (click)="onFilter('Name')">
+                                      Model
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th class="count pointer" (click)="onFilter('Count')">
+                                      Count
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th class="delete"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="company-device-hover" *ngFor="let model of modelList">
+                                <td class="company-devices-table__check">
                                     <div class="d-f">
-                                      <label class="qt-checkbox">
-                                        <input
-                                            type="checkbox"
-                                        >
-                                        <span></span>
-                                    </label>
-                                  </div>
-                                  </td>
-                                  <td>{{model.Name}}</td>
-                                   <td>{{0}}</td>
-                                   <td class="action">
-                                    <a
-                                        href="javascript:;"
-                                        data-tooltip="Remove"
-                                        class="remove"
-                                    >
-                                        <img
-                                            src="/html/assets/img/icons/remove.svg"
-                                            alt="Remove"
-                                        >
-                                    </a>
+                                        <label class="qt-checkbox">
+                                          <input
+                                              type="checkbox"
+
+                                          >
+                                          <span></span>
+                                      </label>
+                                    </div>
                                 </td>
-                                </tr>
-                              </tbody>
-                          </table>
+                                <td class="company-devices-table__go-to">
+                                  {{model.Name}}
+                                </td>
+                                <td class="company-devices-table__go-to count-setting">
+                                  {{0}}
+                                </td>
+                                <td class="company-devices-table__go-to">
+                                  <a
+                                      href="javascript:;"
+                                      data-tooltip="Remove"
+                                      class="remove"
+                                      (click)="removeConfirm(model)"
+                                  >
+                                      <img
+                                          src="/html/assets/img/icons/remove.svg"
+                                          alt="Remove"
+                                      >
+                                  </a>
+                              </td>
+                            </tr>
+                        </tbody>
+                      </table>
                       </div>
                   </div>
               </ng-template>

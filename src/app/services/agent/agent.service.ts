@@ -522,16 +522,6 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
-  public deleteHardwareType(data) {
-    const httpOptions = {
-      headers: this.getHeader(),
-      body: this.encrypt128(this.key, JSON.stringify(data)),
-    };
-    return this.http
-      .delete(`${this.apiAgent}agent/HardwareType`, httpOptions)
-      .pipe(map((data: string) => data));
-  }
-
   public getSoftwareListByAssetId(asset_id) {
     return this.http
       .get(`${this.apiAgent}agent/SoftwareItem/${asset_id}`, {
@@ -539,6 +529,16 @@ export class AgentService {
         responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public deleteHardwareType(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/HardwareType`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
   }
 
   public overrideAsset(data) {
@@ -679,9 +679,8 @@ export class AgentService {
   }
 
   public getManufactureByTechCompanyGuid(guid) {
-debugger
     return this.http
-      .get(`${this.apiAgent}agent/Manufacturer/GetByTechCompanyGuid/${guid}`, {
+      .get(`${this.apiAgent}agent/Manufacturer/GetByTechCompanyGuid?${guid}`, {
         headers: this.getHeader(),
         responseType: "text",
       })

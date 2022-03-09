@@ -1,7 +1,43 @@
 .company-devices-table__check{
   padding: 12px 0px 12px 0 !important;
+  width: 50px
 }
 
 .remove {
   margin-top: 0px !important;
+}
+
+.device-type {
+  max-width: 200px;
+  width: max-content;
+  min-width: 350px;
+}
+
+.count {
+  max-width: 150px;
+  width: max-content;
+  min-width: 200px;
+  padding-left: 90px;
+}
+
+.delete{
+  max-width: 150px;
+  width: max-content;
+  min-width: 150px;
+}
+
+.action{
+  width: 90px !important;
+}
+
+.qt-page-list__header-thead{
+  min-width: 500px !important;
+}
+
+table.qt-table-modern tbody tr td:last-child{
+  padding-right: 120px !important;
+}
+
+.count-setting{
+  padding-left: 90px;
 }
