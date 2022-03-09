@@ -7,6 +7,7 @@ import { Company } from '../../interfaces/company/company';
 })
 export class DraftEmailStateService {
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
+  showAsideSendReport: EventEmitter<any> = new EventEmitter();
   clear: EventEmitter<any> = new EventEmitter();
   action: string = null;
   selectedUsers: Array<User> = [];
@@ -55,6 +56,9 @@ export class DraftEmailStateService {
   }
   public toggleAsideForAdd() {
     this.showAsideForAdd.emit();
+  }
+  public toogleAsideAddReport(data) {
+    this.showAsideSendReport.emit(data);
   }
   public getShowAsideForAdd() {
     return this.showAsideForAdd;

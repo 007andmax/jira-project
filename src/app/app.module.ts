@@ -1013,7 +1013,6 @@ declare var $: any;
     DownloadAgentComponent,
     ImageCropperComponent,
     AlertComponent,
-    ReportSendEmailComponent,
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
