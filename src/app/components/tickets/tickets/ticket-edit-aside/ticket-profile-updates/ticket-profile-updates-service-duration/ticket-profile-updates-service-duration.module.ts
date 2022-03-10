@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketProfileUpdatesServiceDurationComponent } from './ticket-profile-updates-service-duration.component';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -12,6 +13,7 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
         CommonModule,
         MatSelectModule,
         MatChipsModule,
+        NgbModule,
     ],
     exports: [TicketProfileUpdatesServiceDurationComponent]
 
