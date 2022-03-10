@@ -14,7 +14,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { IgxTimePickerModule } from 'igniteui-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -999,7 +998,6 @@ declare var $: any;
     ImageCropperModule,
     NvD3Module,
     BrowserAnimationsModule,
-    IgxTimePickerModule,
     DisabledBtnModule,
     NgxUploaderModule,
     AngularEditorModule,

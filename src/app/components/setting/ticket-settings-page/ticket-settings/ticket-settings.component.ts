@@ -135,18 +135,6 @@ export class TicketSettingsComponent implements OnInit {
       timepickerType: data.value,
       interval: data.value === 'DURATION_PICKER' ? 'FIVE_MINUTES' : 'ONE_MINUTE'
     });
-    if (this.ticketForm.value.timepickerType === 'TIME_PICKER') {
-      this.intervals = [new CompanySetting('1 minute', 'ONE_MINUTE'),
-      new CompanySetting('5 minutes', 'FIVE_MINUTES'),
-      new CompanySetting('10 minutes', 'TEN_MINUTES'),
-      new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
-    } else {
-      this.intervals = [
-        new CompanySetting('5 minutes', 'FIVE_MINUTES'),
-        new CompanySetting('10 minutes', 'TEN_MINUTES'),
-        new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
-    }
-    if (this.intervalsDp) this.intervalsDp.reset(this.intervals);
   }
   onChangeInterval(data) {
     this.ticketForm.patchValue({
