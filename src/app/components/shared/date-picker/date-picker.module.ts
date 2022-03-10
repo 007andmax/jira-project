@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from 'src/app/app.component';
 import { DatePickerComponent } from './date-picker.component';
+import { DynamicTooltipModule } from '../dynamic-tooltip/dynamic-tooltip.module';
 @NgModule({
     declarations: [
         DatePickerComponent
@@ -12,6 +13,7 @@ import { DatePickerComponent } from './date-picker.component';
         CommonModule,
         FormsModule,
         NgbModule,
+        DynamicTooltipModule
     ],
     exports: [DatePickerComponent],
 

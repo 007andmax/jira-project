@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TehUsersComponent } from './teh-users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicTooltipModule } from '../dynamic-tooltip/dynamic-tooltip.module';
 
 
 
@@ -10,7 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ],
     imports: [
         CommonModule,
-        NgbModule
+        NgbModule,
+        DynamicTooltipModule
     ],
     exports: [TehUsersComponent]
 
