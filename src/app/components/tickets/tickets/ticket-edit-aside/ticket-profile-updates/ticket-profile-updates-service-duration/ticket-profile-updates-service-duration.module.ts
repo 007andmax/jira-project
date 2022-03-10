@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketProfileUpdatesServiceDurationComponent } from './ticket-profile-updates-service-duration.component';
-import { IgxTimePickerModule } from 'igniteui-angular';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 
 
@@ -11,7 +10,6 @@ import { MatChipsModule, MatSelectModule } from '@angular/material';
     ],
     imports: [
         CommonModule,
-        IgxTimePickerModule,
         MatSelectModule,
         MatChipsModule,
     ],
