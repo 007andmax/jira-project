@@ -113,10 +113,10 @@ export class LeftPanelComponent implements OnInit {
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
-          if (window.location.href.includes(`/tickets`)) this.state = 'new-tickets';
+          if (window.location.href.includes(`/tickets`) && !window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets';
           if (window.location.href.includes(`/recurring-tickets`)) this.state = 'recurring-tickets';
           if (window.location.href.includes(`/quickSupport`)) this.state = 'new-quickSupport';
-          if (window.location.href.includes(`/billable-tickets`)) this.state = 'new-billable-tickets';
+          if (window.location.href.includes(`/billable-tickets`) && !window.location.href.includes(`/billable`)) this.state = 'new-billable-tickets';
           if (window.location.href.includes(`/documents`)) this.state = 'new-documents';
           if (window.location.href.includes(`/documents/add`)) this.state = 'new-add-documents';
           if (window.location.href.includes(`/documents/category`)) this.state = 'new-category-documents';
@@ -149,7 +149,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
 
           if (this.state === '' && this.companiesStateService.getCurrentCompany()) this.goToDefaultPage();
-
+          console.log("this.state", this.state);
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
