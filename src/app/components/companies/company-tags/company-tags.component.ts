@@ -36,6 +36,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
   @Input() blockUserTag: boolean = false;
+  @Input() isDisabled: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();

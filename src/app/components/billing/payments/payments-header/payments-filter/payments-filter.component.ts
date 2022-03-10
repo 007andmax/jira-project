@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { PaymentsFilter } from '../../class/payments-filter';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
@@ -23,6 +23,7 @@ export class PaymentsFilterComponent implements OnInit {
   @Output() changeCountFilter = new EventEmitter<any>();
   statusTypes = [new CompanySetting('Paid', 'PAID'), new CompanySetting('Refund', 'REFUND')];
   constructor(private companiesState: CompaniesStateService,
+    private elRef: ElementRef,
     private paymentsStateService: PaymentsStateService) { }
 
   ngOnInit() {
@@ -46,6 +47,7 @@ export class PaymentsFilterComponent implements OnInit {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.paymentsFilter.setStatus(null);
+    this.paymentsFilter.setAmount(null);
     this.paymentsFilter.setCompany(null);
     this.paymentsFilter.setStartDate(null);
     this.paymentsFilter.setEndDate(null);
@@ -53,6 +55,7 @@ export class PaymentsFilterComponent implements OnInit {
 
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
+    this.elRef.nativeElement.querySelector("#amount-filter").value = "";
   }
 
   public onSelectCompany(item) {
@@ -86,7 +89,13 @@ export class PaymentsFilterComponent implements OnInit {
     if (this.paymentsFilter.endDate && this.paymentsFilter.startDate) count++;
     if (this.paymentsFilter.invoiceNumber) count++;
     if (this.paymentsFilter.status) count++;
+    if (this.paymentsFilter.amount) count++;
     this.changeCountFilter.emit(count);
   }
-
+  public onSetAmountInvoice(event) {
+    this.paymentsFilter.setAmount((event.target.value.length > 0) ? parseFloat(event.target.value).toFixed(2) : null);
+    if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.paymentsFilter.amount;
+    this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    this.onChangeCounterFilter();
+  }
 }

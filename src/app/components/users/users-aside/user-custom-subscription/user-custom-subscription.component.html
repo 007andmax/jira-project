@@ -7,7 +7,8 @@
         class="user-subscription"
         id="dropdownServices"
         ngbDropdownToggle
-        [ngClass]="{'placeholder-subscription': !showPlaceholder()}"
+        [ngClass]="{'placeholder-subscription': !showPlaceholder(),
+    'no-pointer':isDisabled}"
     >
         <ng-template
             ngFor
@@ -25,6 +26,7 @@
                 ></i>
                 {{custom.name}}
                 <i
+                    *ngIf="!isDisabled"
                     class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
                     (click)="selected(custom)"
                 ></i>
@@ -36,6 +38,7 @@
         class="qt-dropdown-menu company-subscription-dropdown select-wrapper"
         ngbDropdownMenu
         aria-labelledby="dropdownServices"
+        *ngIf="!isDisabled"
     >
         <div
             class="content"

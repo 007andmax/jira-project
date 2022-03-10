@@ -17,7 +17,14 @@
             appToFixed
             [value]="product.item.cost"
             (blur)="onCheckSaleCost()"
+            *ngIf="getPermissions('VIEW_PRODUCT_COST')"
             (onChange)="changeCost($event)"
+        >
+        <input
+            class="qt-input-in-table"
+            placeholder="0.00"
+            disabled
+            *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
         >
     </td>
     <td class="new-quote-table__col-markup with-percent">

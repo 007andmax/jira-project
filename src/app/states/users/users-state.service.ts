@@ -81,7 +81,7 @@ export class UsersStateService {
     });
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
 
-      this.onChangeUserPermissions.emit(newChange.data.permissions);
+      if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
   }
   public setModeUserFilterSubscription(data) {

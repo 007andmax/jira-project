@@ -37,6 +37,7 @@
 <div class="app-left-panel__body">
     <app-left-panel-support
         #panelSupport
+        *ngIf="getPermissions('ALLOW_QUICK_CONNECT')"
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
@@ -49,6 +50,7 @@
         [activePage]="state"
     ></app-left-panel-tickets>
     <app-left-panel-users
+        *ngIf="getPermissions('VIEW_USERS')"
         #panelUsers
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
@@ -56,6 +58,7 @@
         class="qt-d-md-none"
     ></app-left-panel-users>
     <left-panel-marketing
+        *ngIf="getPermissions('VIEW_USERS')"
         #panelMarketing
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
@@ -63,6 +66,7 @@
         class="qt-d-md-none"
     ></left-panel-marketing>
     <app-left-panel-companies
+        *ngIf="getPermissions('VIEW_COMPANIES')"
         #panelCompanies
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
@@ -81,6 +85,7 @@
         class="qt-d-md-none"
     ></app-left-panel-inventory>
     <app-left-panel-password-manager
+        *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-password-manager>
@@ -93,6 +98,7 @@
     ></app-left-panel-documents>
     <hr class="app-left-panel__divider qt-d-md-none">
     <app-left-panel-reports
+        *ngIf="getAccessReports()"
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
         class="qt-d-md-none"

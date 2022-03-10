@@ -9,6 +9,7 @@ import { UsersService } from "src/app/services/users/users.service";
 import { ToastrService } from "ngx-toastr";
 import { FormControl } from "@angular/forms";
 import { UsersStateService } from "src/app/states/users/users-state.service";
+import { PermissionsService } from "src/app/services/permissions/permissions.service";
 
 @Component({
   selector: "app-company-commission",
@@ -41,7 +42,8 @@ export class CompanyComponent implements OnInit {
     private commissionService: CommissionService,
     private userService: UsersService,
     private toastrService: ToastrService,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
@@ -276,6 +278,9 @@ export class CompanyComponent implements OnInit {
         })
         .join("");
     }
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   dropFrstLstChar(company: any) {
     if (company === null) {

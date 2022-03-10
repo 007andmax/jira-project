@@ -18,7 +18,7 @@
                 {{company.name}}
                 <mat-icon
                     matChipRemove
-                    *ngIf="removable"
+                    *ngIf="getPermissions('EDIT_COMPANIES')"
                 >
                     cancel
                 </mat-icon>
@@ -34,6 +34,7 @@
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
+                [disabled]="!getPermissions('EDIT_COMPANIES')"
             >
             <!-- (keyup)="onKeyUp($event)" -->
         </mat-chip-list>

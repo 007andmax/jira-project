@@ -2,6 +2,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyAssociateItem } from './class/company-associate-item';
 
@@ -37,7 +38,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   public constructor(
 
     private companiesStateService: CompaniesStateService,
-
+    private permissionsService: PermissionsService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef
   ) { }
@@ -75,13 +76,15 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   */
   onCheckEditItem() {
     if (this.editItems) this.editItems.forEach(item => {
-      this.selectedCompanies.push(this.companies.find(tag => tag.id === item));
+      let find = this.companies.find(tag => tag.id === item);
+      if (find) this.selectedCompanies.push(find);
     })
   }
   public setEditItems(data) {
     this.editItems = data;
     this.editItems.forEach(item => {
-      this.selectedCompanies.push(this.companies.find(tag => tag.id === item));
+      let find = this.companies.find(tag => tag.id === item);
+      if (find) this.selectedCompanies.push(find);
     })
   }
   public clearWithOutChanges() {
@@ -164,7 +167,9 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

@@ -6,6 +6,7 @@ import { InvoiceTicketsService } from 'src/app/components/setting/accounting/acc
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -40,6 +41,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private invoiceTicketsService: InvoiceTicketsService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -177,6 +179,9 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

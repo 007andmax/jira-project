@@ -69,6 +69,7 @@
                 <button
                     class="qt-btn --outline-blue qt-ml-8"
                     (click)="addUser()"
+                    *ngIf="getPermissions('CREATE_USERS')"
                 >
                     Add user
                 </button>

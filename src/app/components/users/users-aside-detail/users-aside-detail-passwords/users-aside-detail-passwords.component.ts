@@ -59,4 +59,5 @@ export class UsersAsideDetailPasswordsComponent extends PasswordManagerComponent
       this.cd.detectChanges();
     });
   }
+
 }

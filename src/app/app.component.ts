@@ -25,6 +25,7 @@ import { DocumentsStateService } from './states/documents/documents-state.servic
 import { AppStateService } from './states/app/app-state.service';
 import { CrmStateService } from './states/crm/crm-state.service';
 import { MarketingEmailStateService } from './states/marketing-email/marketing-email-state.service';
+import { PermissionsService } from './services/permissions/permissions.service';
 
 
 /**
@@ -78,6 +79,7 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
@@ -153,8 +155,10 @@ export class AppComponent implements OnInit {
       }
     })
     this.usersStateService.onChangeUserPermissions.subscribe(data => {
-      this.usersStateService.changeUserPermissions(data);
-      this.cd.detectChanges();
+      if (this.companiesState.getCurrentCompany().id === data.company.id) {
+        this.usersStateService.changeUserPermissions(data.permissions);
+        this.cd.detectChanges();
+      }
     })
     this.appStateService.onChangeDetectorRef.subscribe(data => {
       setTimeout(() => {
@@ -185,8 +189,9 @@ export class AppComponent implements OnInit {
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
     // if ((<any>document.body.querySelector("#userback_button_container")) && (<any>document.body.querySelector("#userback_button_container")).style.display == "" && this.appService.checkMobile()) (<any>document.body.querySelector("#userback_button_container")).style.display = "none";
-
-
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   goToTickets() {
     this.leftPanelStateService.goToState('new-tickets');

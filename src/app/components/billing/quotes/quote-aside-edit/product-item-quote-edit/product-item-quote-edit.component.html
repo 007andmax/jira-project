@@ -16,7 +16,14 @@
             placeholder="0.00"
             [value]="product.cost"
             (blur)="onCheckSaleCost()"
+            *ngIf="getPermissions('VIEW_PRODUCT_COST')"
             (onChange)="changeCost($event)"
+        >
+        <input
+            class="qt-input-in-table"
+            placeholder="0.00"
+            *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
+            disabled
         >
     </td>
     <td class="new-quote-table__col-markup with-percent">

@@ -16,6 +16,7 @@ export class UserCustomSubscriptionComponent implements OnInit {
   @Input() mode: string;
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
   @Input() classDropDown: string;
+  @Input() isDisabled: boolean = false;
   @Output() onChange = new EventEmitter();
   list: Array<MarketingSubscriptionType> = [];
   sub: Subscription = new Subscription();

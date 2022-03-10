@@ -16,6 +16,7 @@ import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/im
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 declare var $;
 
@@ -66,6 +67,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private imageCropperStateService: ImageCropperStateService,
+    private permissionsService: PermissionsService,
     private modalService: NgbModal,
     private companiesService: CompaniesService,
   ) {
@@ -174,7 +176,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.userId = id;
     this.popup = true;
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   restoreUser() {
     this.loading = true; $(".loading").css("display", "block");
     this.techUsersService.restoreUser(this.userId)
@@ -287,6 +291,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
 
   emailNotificationDropDown(index: number) {
+    if (!this.getPermissions('EDIT_USERS')) return;
     if (this.selectedIdx !== index) {
       this.selectedIdx = index;
     } else {

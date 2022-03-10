@@ -30,9 +30,9 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   constructor(
     public cd: ChangeDetectorRef,
     public appService: AppService,
-    private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     public contractsStateService: ContractsStateService) { }
 
 

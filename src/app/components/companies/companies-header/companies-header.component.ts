@@ -12,6 +12,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-companies-header',
@@ -32,6 +33,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private draftEmailStateService: DraftEmailStateService,
     private modalService: NgbModal,
     public appService: AppService,
+    private permissionsService: PermissionsService,
     private leftPanelStateService: LeftPanelStateService,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
@@ -95,6 +97,9 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   }
   public showAsideForAdd() {
     this.companiesStateService.toggleAsideForAdd();
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   onFilter(data) {
     this.onChangeFilterField.emit(data);

@@ -33,7 +33,6 @@
         ></app-ticket-profile-updates-service-timepicker>
         <app-ticket-profile-updates-service-duration
             (onChange)="onChangeDuration($event)"
-            [editMode]="true"
             [hour]="hours"
             [minute]="minutes"
             *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"

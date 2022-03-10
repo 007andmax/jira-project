@@ -73,8 +73,14 @@ import { PermissionEmailTempleteService } from './components/setting/email-templ
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
+import { PermissionContractsService } from './components/billing/contracts/permission-contracts.service';
+import { PermissionCompanyService } from './components/companies/permission-company.service';
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
+import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
+import { PermissionSupportService } from './components/support/permission-support.service';
+import { PermissionReportsService } from './components/reports/permission-reports.service';
 
 const routes: Routes = [
 
@@ -86,27 +92,31 @@ const routes: Routes = [
 
   {
     path: ':company/password-manager',
-    loadChildren: './components/password-manager/password-manager.module#PasswordManagerModule'
-
+    loadChildren: './components/password-manager/password-manager.module#PasswordManagerModule',
+    canActivate: [PermissionPasswordManagerService]
   },
   {
     path: ':company/company/:id/password-manager',
-    loadChildren: './components/company-password-manager/company-password-manager.module#CompanyPasswordManagerModule'
+    loadChildren: './components/company-password-manager/company-password-manager.module#CompanyPasswordManagerModule',
+    canActivate: [PermissionCompanyService]
 
   },
   {
     path: ':company/company/:id/user',
-    loadChildren: './components/company-user/company-user.module#CompanyUserModule'
+    loadChildren: './components/company-user/company-user.module#CompanyUserModule',
+    canActivate: [PermissionCompanyService, PermissionUsersService]
 
   },
   {
     path: ':company/company/:id/tickets',
-    loadChildren: './components/company-tickets/company-tickets.module#CompanyTicketsModule'
+    loadChildren: './components/company-tickets/company-tickets.module#CompanyTicketsModule',
+    canActivate: [PermissionCompanyService]
 
   },
   {
     path: ':company/company/:id/dashboard',
-    loadChildren: './components/company-dashboard/company-dashboard.module#CompanyDashboardModule'
+    loadChildren: './components/company-dashboard/company-dashboard.module#CompanyDashboardModule',
+    canActivate: [PermissionCompanyService]
   },
   {
     path: ':company/quotes',
@@ -119,10 +129,12 @@ const routes: Routes = [
   },
   {
     path: ':company/companies',
-    loadChildren: './components/companies/companies.module#CompaniesModule'
+    loadChildren: './components/companies/companies.module#CompaniesModule',
+    canActivate: [PermissionCompanyService]
   }, {
     path: ':company/users',
-    loadChildren: './components/users/users.module#UsersModule'
+    loadChildren: './components/users/users.module#UsersModule',
+    canActivate: [PermissionUsersService]
   },
   {
     path: ':company/reports',
@@ -130,7 +142,8 @@ const routes: Routes = [
   },
   {
     path: ':company/report/:id',
-    loadChildren: './components/reports/item-report/item-report.module#ItemReportModule'
+    loadChildren: './components/reports/item-report/item-report.module#ItemReportModule',
+    canActivate: [PermissionReportsService]
   },
   {
     path: ':company/setting/myprofile',
@@ -238,7 +251,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/documents',
-    loadChildren: './components/companies/company-documents/company-documents.module#CompanyDocumentsModule'
+    loadChildren: './components/companies/company-documents/company-documents.module#CompanyDocumentsModule',
+    canActivate: [PermissionCompanyService]
 
   },
   {
@@ -248,7 +262,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/products',
-    loadChildren: './components/companies/company-products/company-products.module#CompanyProductsModule'
+    loadChildren: './components/companies/company-products/company-products.module#CompanyProductsModule',
+    canActivate: [PermissionCompanyService]
   },
 
   {
@@ -273,7 +288,8 @@ const routes: Routes = [
   },
   {
     path: ':company/contracts',
-    loadChildren: './components/billing/contracts/contracts.module#ContractsModule'
+    loadChildren: './components/billing/contracts/contracts.module#ContractsModule',
+    canActivate: [PermissionContractsService]
 
   },
   {
@@ -294,7 +310,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/contracts',
-    loadChildren: './components/companies/company-contracts/company-contracts.module#CompanyContractsModule'
+    loadChildren: './components/companies/company-contracts/company-contracts.module#CompanyContractsModule',
+    canActivate: [PermissionContractsService]
 
   },
   {
@@ -304,19 +321,20 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/network-scan',
-    loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule'
+    loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule',
+    canActivate: [PermissionCompanyService]
 
   },
   {
     path: ':company/company/:id/devices',
-    loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule'
+    loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule',
+    canActivate: [PermissionCompanyService]
 
   },
   {
     path: ':company/quickSupport',
-    loadChildren: './components/support/support.module#SupportModule'
-
-
+    loadChildren: './components/support/support.module#SupportModule',
+    canActivate: [PermissionSupportService]
   },
   {
     path: ':company/documents/templates',
@@ -330,7 +348,8 @@ const routes: Routes = [
   },
   {
     path: ':company/marketing',
-    loadChildren: './components/marketing/marketing.module#MarketingModule'
+    loadChildren: './components/marketing/marketing.module#MarketingModule',
+    canActivate: [PermissionUsersService]
 
   },
 

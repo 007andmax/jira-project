@@ -41,6 +41,7 @@
             <div
                 class="select-product__header-add-product"
                 (click)="onCreateProduct()"
+                *ngIf="getPermissions('MANAGE_PRODUCTS')"
             >
                 + Create Product
             </div>

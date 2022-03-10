@@ -37,6 +37,7 @@
         </div>
     </div>
     <div
+        *ngIf="getPermissions('CREATE_COMPANIES')"
         class="mobile-action-btn"
         (click)="onAddCompany()"
     ></div>

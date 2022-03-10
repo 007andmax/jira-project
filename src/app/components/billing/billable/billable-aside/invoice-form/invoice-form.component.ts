@@ -24,6 +24,7 @@ import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -55,6 +56,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private elRef: ElementRef,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
     private noteService: NoteService,
     private ticketsService: TicketsService,
@@ -218,6 +220,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

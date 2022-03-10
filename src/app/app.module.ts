@@ -7,6 +7,8 @@ import {
 } from '@angular/upgrade/static';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
@@ -89,6 +91,12 @@ import { AddUserToSubscribeModule } from './components/users/add-user-to-subscri
 import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
 import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
 import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
+import { PermissionContractsService } from './components/billing/contracts/permission-contracts.service';
+import { PermissionCompanyService } from './components/companies/permission-company.service';
+import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
+import { PermissionReportsService } from './components/reports/permission-reports.service';
+import { PermissionSupportService } from './components/support/permission-support.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
 
 
 declare var $: any;
@@ -196,8 +204,14 @@ declare var $: any;
     PermissionEmailTempleteService,
     PermissionAccountingSettingsService,
     PermissionCrmSettingsService,
+    PermissionContractsService,
+    PermissionCompanyService,
     PermissionBillableService,
-    PermissionInvoicesService
+    PermissionInvoicesService,
+    PermissionUsersService,
+    PermissionPasswordManagerService,
+    PermissionSupportService,
+    PermissionReportsService
   ],
   bootstrap: [AppComponent]
 })

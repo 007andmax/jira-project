@@ -1,31 +1,88 @@
-<igx-time-picker
-    id="timepicker2"
-    #picker
-    [ngClass]="{'--input-error-validate':!validate}"
-    format="HH:mm"
-    placeholder="time"
-    [itemsDelta]="{hours:1, minutes:step}"
-    (click)="show()"
-    [vertical]="true"
-    [mode]="mode"
-    [value]="date"
-    (onOpened)="onOpened($event)"
-    (onClosed)="onClosed()"
+<div
+    class="duration-container"
+    ngbDropdown
 >
-    <ng-template igxTimePickerActions>
-        <div class="container action-buttons">
-            <button
-                igxButton="flat"
-                (click)="picker.okButtonClick();onSelected()"
+    <input
+        type="text"
+        [ngClass]="{'--input-error-validate':!validate}"
+        class="duration-container-input"
+        id="dropdownDuration"
+        [value]="getParseDate()"
+        readonly
+        ngbDropdownToggle
+    >
+    <i
+        class="icn-sm icn-remove-old pointer"
+        (click)="reset()"
+    ></i>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdownDuration"
+        class="app-drop-down__dropdown"
+    >
+        <div
+            class="durationoverlay__content"
+            style="width: 200px; opacity: 1;"
+        >
+            <div
+                class="duration-picker duration-picker--dropdown durationtoggle"
+                aria-hidden="false"
+                style="width: 64.15px;"
             >
-                Set it
-            </button>
+                <div class="duration-picker__main">
+                    <div class="duration-picker__body">
+                        <div
+                            id="hours"
+                            class="duration-picker__column duration-picker__hourList ng-star-inserted"
+                            style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
+                            (wheel)="onWheelHours($event)"
+                        >
+                            <ng-template
+                                ngFor
+                                let-item
+                                [ngForOf]="hours"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span
+                                    class="duration-picker__item ng-star-inserted"
+                                    [ngClass]="{'duration-picker__item--selected':item.selected}"
+                                    (click)="setHours(i)"
+                                    [textContent]="getParseValue(item.value)"
+                                ></span>
+                            </ng-template>
+                        </div>
+                        <div
+                            class="duration-picker__column duration-picker__minuteList ng-star-inserted"
+                            style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
+                            (wheel)="onWheelMinutes($event)"
+                        >
+                            <ng-template
+                                ngFor
+                                let-item
+                                [ngForOf]="minutes"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span
+                                    class="duration-picker__item ng-star-inserted"
+                                    [ngClass]="{'duration-picker__item--selected':item.selected}"
+                                    (click)="setMinutes(i)"
+                                    [textContent]="getParseValue(item.value)"
+                                ></span>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="container action-buttons ng-star-inserted">
+                        <button
+                            ngbDropdownItem
+                            (click)="onSelected()"
+                        >
+                            Set it
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </ng-template>
-</igx-time-picker>
-<mat-error
-    class="qt-tooltip-error --max-width"
-    *ngIf="!validate"
-    [textContent]="errorMessage"
->
-</mat-error>
+    </div>
+</div>

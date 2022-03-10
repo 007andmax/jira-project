@@ -46,6 +46,7 @@
             id="dropdownForm1"
             ngbDropdownToggle
             (click)="onEditCustomer()"
+            *ngIf="getPermissions('EDIT_COMPANIES')"
         >
             Edit Customer
         </div>

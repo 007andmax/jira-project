@@ -15,6 +15,7 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-global-search',
@@ -41,6 +42,7 @@ export class GlobalSearchComponent implements OnInit {
     public leftPanelStateService: LeftPanelStateService,
     private inventoryStateService: InventoryStateService,
     public ticketsListService: TicketsListService,
+    private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -114,7 +116,7 @@ export class GlobalSearchComponent implements OnInit {
     this.list = [];
   }
   isShowType(type) {
-    if (type === 'TICKETS' || type === 'COMPANIES' || type === 'USERS' || type === 'SERVICES' || type === 'PRODUCTS' || type === 'INVOICES') return true;
+    if (type === 'TICKETS' || type === 'COMPANIES' && this.getPermissions('VIEW_COMPANIES') || type === 'USERS' && this.getPermissions('VIEW_USERS') && this.getPermissions('EDIT_USERS') || type === 'SERVICES' || type === 'PRODUCTS' || type === 'INVOICES') return true;
     return false;
   }
   getFistLine(item) {
@@ -137,6 +139,9 @@ export class GlobalSearchComponent implements OnInit {
     if (type === 'SERVICES') return 'Services';
     if (type === 'PRODUCTS') return 'Products';
     if (type === 'INVOICES') return 'Invoices';
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackByIndex(index, item) {
     return index;

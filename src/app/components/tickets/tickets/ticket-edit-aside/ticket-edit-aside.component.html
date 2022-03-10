@@ -180,8 +180,9 @@
                 >
                     <div
                         class="form-control editor"
+                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
                         (blur)="modeDescription = 'edit'"
-                        [attr.contenteditable]="!appService.checkMobile()"
+                        [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
                         id="ticket-note"
                         placeholder="Enter description here"
                     ></div>

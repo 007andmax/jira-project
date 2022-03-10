@@ -23,6 +23,7 @@ import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-u
 import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -71,6 +72,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     public ticketStateService: TicketStateService,
     public appService: AppService,
     private companiesService: CompaniesService,
+    private permissionsService: PermissionsService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
     public ticketsListService: TicketsListService) { }
 
@@ -389,6 +391,9 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
 
       });
     }
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
 

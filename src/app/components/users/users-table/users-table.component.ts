@@ -24,6 +24,7 @@ import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscr
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-users-table',
@@ -56,6 +57,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private usersTableService: UsersTableService,
     public cd: ChangeDetectorRef,
     private crmStateService: CrmStateService,
+    private permissionsService: PermissionsService,
     private elRef: ElementRef) { }
 
 
@@ -189,6 +191,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
