@@ -231,7 +231,7 @@
                                       Device Type
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
-                                  <th class="count pointer" (click)="onFilter('Count')">
+                                  <th class="count pointer" (click)="onFilter('Counter')">
                                       Count
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
@@ -239,38 +239,38 @@
                               </tr>
                           </thead>
                           <tbody>
-                            <tr class="company-device-hover" *ngFor="let deviceType of hardwareTypes">
-                                <td class="company-devices-table__check">
-                                    <div class="d-f">
-                                        <label class="qt-checkbox">
-                                          <input
-                                              type="checkbox"
-                                              [(ngModel)]="deviceType.IsActive"
+                            <tr class="company-device-hover" *ngFor="let deviceType of deviceTypeList">
+                               <td class="company-devices-table__check">
+                                     <div class="d-f">
+                                         <label class="qt-checkbox">
+                                           <input
+                                               type="checkbox"
+                                               [(ngModel)]="deviceType.IsActive"
 
-                                          >
-                                          <span></span>
-                                      </label>
-                                    </div>
-                                </td>
-                                <td class="company-devices-table__go-to">
-                                  {{deviceType.Name}}
-                                </td>
-                                <td class="company-devices-table__go-to count-setting">
-                                  {{deviceType.Counter}}
-                                </td>
-                                <td class="company-devices-table__go-to">
-                                  <a
-                                      href="javascript:;"
-                                      data-tooltip="Remove"
-                                      class="remove"
-                                      (click)="removeConfirm(deviceType)"
-                                  >
-                                      <img
-                                          src="/html/assets/img/icons/remove.svg"
-                                          alt="Remove"
-                                      >
-                                  </a>
-                              </td>
+                                           >
+                                           <span></span>
+                                       </label>
+                                     </div>
+                                 </td>
+                                 <td class="company-devices-table__go-to">
+                                   {{deviceType.Name}}
+                                 </td>
+                                 <td class="company-devices-table__go-to count-setting">
+                                   {{deviceType.Counter}}
+                                 </td>
+                                 <td class="company-devices-table__go-to delete">
+                                   <a
+                                       href="javascript:;"
+                                       data-tooltip="Remove"
+                                       class="remove"
+                                       (click)="removeConfirm(deviceType)"
+                                   >
+                                       <img
+                                           src="/html/assets/img/icons/remove.svg"
+                                           alt="Remove"
+                                       >
+                                   </a>
+                               </td>
                             </tr>
                         </tbody>
                       </table>
@@ -291,16 +291,17 @@
                                           <label class="qt-checkbox">
                                             <input
                                                 type="checkbox"
+
                                             >
                                             <span></span>
                                         </label>
                                       </div>
                                   </th>
-                                  <th class="device-type pointer" (click)="onFilter('Name')">
+                                  <th class="device-type pointer" (click)="onFilterManufacturer('Name')">
                                       Manufacture
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
-                                  <th class="count pointer" (click)="onFilter('Count')">
+                                  <th class="count pointer" (click)="onFilterManufacturer('Count')">
                                       Count
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
@@ -308,12 +309,13 @@
                               </tr>
                           </thead>
                           <tbody>
-                            <tr class="company-device-hover" *ngFor="let manufacture of manufacturerList">
+                            <tr class="company-device-hover" *ngFor="let manufacture of manufactureIsActiveList">
                                 <td class="company-devices-table__check">
                                     <div class="d-f">
                                         <label class="qt-checkbox">
                                           <input
                                               type="checkbox"
+                                              [(ngModel)]="manufacture.IsActive"
 
                                           >
                                           <span></span>
@@ -331,7 +333,7 @@
                                       href="javascript:;"
                                       data-tooltip="Remove"
                                       class="remove"
-                                      (click)="removeConfirm(manufacture)"
+                                      (click)="removeConfirmManufacturer(manufacture)"
                                   >
                                       <img
                                           src="/html/assets/img/icons/remove.svg"
@@ -351,6 +353,61 @@
               <ng-template ngbTabContent>
                   <div class="cmn-area">
                       <div class="data-table-wrap">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <th>
+                              <div class="qt-input-block qt-input-line">
+                                <label
+                                    class="manufacturer"
+                                    for="manufacturer"
+                                >
+                                    Manufacture
+                                </label>
+                                <app-drop-down
+                                id="manufacturer"
+                                #manufacturer
+                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                [placeholder]="'Select Manufacture'"
+                                [list]="manufacturerList"
+                                [field]="'Name'"
+                                [search]="true"
+                                [change]="true"
+                                [add]="true"
+                                (onSelectedItem)="onSelectManufactureName($event.ID)"
+                            ></app-drop-down>
+                            </div>
+                            </th>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="Rectangle">
+                              <span class="qt-input-search"></span>
+                            <div class="SearchRectangle">
+                              <mat-form-field class="example-chip-list" appearance="none">
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let model of selectedModel; let i=index">
+                                      {{model}} <mat-icon matChipRemove></mat-icon>
+                                    </mat-chip>
+                                    <input #dropdownServices
+                                  autofocus
+                                  [formControl]="selectedCtrl"
+                                  [(ngModel)]="tagFilterValue"
+                                  [matAutocomplete]="auto"
+                                  class="pointer"
+                                  placeholder="Please Enter Keyword"
+                                  [matChipInputFor]="chipList"
+                                  (keyup)="onSearch($event.target.value)"
+                              >
+                                </mat-chip-list>
+                                <mat-autocomplete class="extended" #auto="matAutocomplete">
+                                    <mat-option class="SubRectangle" *ngFor="let search of autosearchModel">
+                                      {{search.Result}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
                         <table class="qt-table-modern qt-page-list__header-thead">
                           <thead>
                               <tr>
@@ -374,9 +431,63 @@
                                   </th>
                                   <th class="delete"></th>
                               </tr>
+                              <tr>
+                                <th></th>
+                                <!-- <th>
+                                  <div class="qt-input-block qt-input-line">
+                                    <label
+                                        class="manufacturer"
+                                        for="manufacturer"
+                                    >
+                                        Manufacture
+                                    </label>
+                                    <app-drop-down
+                                    id="manufacturer"
+                                    #manufacturer
+                                    [class]="['light-dropdown', 'qt-select-input-40']"
+                                    [placeholder]="'Select Manufacture'"
+                                    [list]="manufacturerList"
+                                    [field]="'Name'"
+                                    [search]="true"
+                                    [change]="true"
+                                    [add]="true"
+                                    (onSelectedItem)="onSelectManufactureName($event.ID)"
+                                ></app-drop-down>
+                                </div>
+                                </th> -->
+                                <th>
+                                  <!-- <div class="Rectangle">
+                                    <span class="qt-input-search"></span>
+                                  <div class="SearchRectangle">
+                                    <mat-form-field class="example-chip-list" appearance="none">
+                                      <mat-chip-list #chipList>
+                                          <mat-chip *ngFor="let model of selectedModel; let i=index">
+                                            {{model}} <mat-icon matChipRemove></mat-icon>
+                                          </mat-chip>
+                                          <input #dropdownServices
+                                        autofocus
+                                        [formControl]="selectedCtrl"
+                                        [(ngModel)]="tagFilterValue"
+                                        [matAutocomplete]="auto"
+                                        class="pointer"
+                                        placeholder="Please Enter Keyword"
+                                        [matChipInputFor]="chipList"
+                                        (keyup)="onSearch($event.target.value)"
+                                    >
+                                      </mat-chip-list>
+                                      <mat-autocomplete class="extended" #auto="matAutocomplete">
+                                          <mat-option class="SubRectangle" *ngFor="let search of autosearchModel">
+                                            {{search.Result}}
+                                          </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                  </div>
+                                </div> -->
+                                </th>
+                              </tr>
                           </thead>
                           <tbody>
-                            <tr class="company-device-hover" *ngFor="let model of modelList">
+                            <tr class="company-device-hover" *ngFor="let model of selectManufactureList">
                                 <td class="company-devices-table__check">
                                     <div class="d-f">
                                         <label class="qt-checkbox">
@@ -453,6 +564,55 @@
                     type="button"
                     class="btn btn-primary"
                     (click)="removeDeviceType()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="popup = false"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div
+    class="img-croparea deletePopup"
+    *ngIf="popupManufacturer"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
+                    >
+                </span>
+                <div class="message-right">
+                    <h2 class="h1">Delete Manufacturer</h2>
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="popup = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="removeManufacturer()"
                 >
                     Yes, I am sure
                 </button>

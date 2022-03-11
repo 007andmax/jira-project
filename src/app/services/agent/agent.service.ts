@@ -133,7 +133,7 @@ export class AgentService {
   public addModel(model) {
     return this.http
       .put(
-        `${this.apiAgent}/agent/Model`,
+        `${this.apiAgent}agent/Model`,
         this.encrypt128(this.key, JSON.stringify(model)),
         {
           headers: this.getHeader(),
@@ -541,6 +541,16 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
+  public deleteManufacturer(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/Manufacturer`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
+
   public overrideAsset(data) {
     return this.http
       .post(
@@ -620,6 +630,16 @@ export class AgentService {
     };
     return this.http
       .delete(`${this.apiAgent}agent/Tag`, httpOptions)
+      .pipe(map((data: string) => data));
+  }
+
+  public removeManufactur(data) {
+    const httpOptions = {
+      headers: this.getHeader(),
+      body: this.encrypt128(this.key, JSON.stringify(data)),
+    };
+    return this.http
+      .delete(`${this.apiAgent}agent/Manufacturer`, httpOptions)
       .pipe(map((data: string) => data));
   }
 

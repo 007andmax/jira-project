@@ -1,6 +1,6 @@
 import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
-import { Component, OnInit, Pipe } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit, Pipe } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { param } from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -24,6 +24,7 @@ export class DeviceSettingComponent implements OnInit {
   techCompany: any;
   deviceType: any;
   popup: boolean;
+  popupManufacturer:boolean;
   loading = false;
   create = false;
   deviceForm: FormGroup;
@@ -34,6 +35,15 @@ export class DeviceSettingComponent implements OnInit {
   manufacturerList: any[] = [];
   modelForm: FormGroup;
   modelList: any[] = [];
+  selectManufactureList:any[]=[];
+  manufactureId: Number;
+  manufacturer:any;
+  autosearchModel: any[] = [];
+  deviceTypeList: any[] = [];
+  manufactureIsActiveList: any[]=[];
+  selectedCtrl = new FormControl();
+  tagFilterValue: string = "";
+  selectedModel: any[] = [];
   filter: DeviceFilter = new DeviceFilter();
 
   constructor(private settingStateService: SettingStateService,
@@ -41,7 +51,8 @@ export class DeviceSettingComponent implements OnInit {
     private commissionService: CommissionService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private companyStateService: CompaniesStateService) { }
+    private companyStateService: CompaniesStateService,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.devicebutton = true;
@@ -56,6 +67,7 @@ export class DeviceSettingComponent implements OnInit {
       ID: [""],
       TechCompanyID: [""],
       TechCompanyGuid: [""],
+      Counter:[""]
 
     });
 
@@ -67,6 +79,8 @@ export class DeviceSettingComponent implements OnInit {
       ID: [""],
       TechCompanyID: [""],
       TechCompanyGuid: [""],
+      IsActive :[""],
+      CreateDate: [""]
     })
 
     this.modelForm = this.formBuilder.group({
@@ -74,7 +88,11 @@ export class DeviceSettingComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID: [""]
+      ID: [""],
+      ManufacturerID:[""],
+      ManufactureName: [""],
+      IsActive: [""],
+      CreateDate: [""]
     })
     this.settingStateService.setComponentName('DeviceSettingComponent');
     this.getCurrentCompany();
@@ -82,6 +100,10 @@ export class DeviceSettingComponent implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.hardwareTypes);
+  }
+
+  onFilterManufacturer(field){
+    this.filter.onFilter(field, this.manufacturerList)
   }
 
   toggle(evt: any) {
@@ -109,11 +131,11 @@ export class DeviceSettingComponent implements OnInit {
 
   getCurrentCompany(): any {
     this.companyStateService.onCurrentCompany.subscribe((data: any)=> {
-      this.techCompany = data;      
+      this.techCompany = data;
       this.getDeviceTypes(this.techCompany.id);
       this.getManufacturers(this.techCompany.id);
       this.getModels(this.techCompany.id);
-    });    
+    });
   }
 
   getManufacturers(TechCompanyGuid: any) {
@@ -126,6 +148,12 @@ export class DeviceSettingComponent implements OnInit {
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
         this.manufacturerList = resp;
+
+        this.manufacturerList.forEach(element=>{
+          if(element.IsActive == true)
+          this.manufactureIsActiveList.push(element)
+        })
+
       });
   }
 
@@ -140,6 +168,12 @@ export class DeviceSettingComponent implements OnInit {
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
         this.hardwareTypes = resp;
+
+        this.hardwareTypes.forEach(element =>{
+          if(element.IsActive == true){
+             this.deviceTypeList.push(element);
+          }
+        })
       });
   }
 
@@ -154,7 +188,19 @@ export class DeviceSettingComponent implements OnInit {
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
         this.modelList = resp;
+
       });
+  }
+
+  onSelectManufactureName(ID) {
+    this.manufactureId =ID;
+   this.selectManufactureList = this.modelList.filter(x=>x.ManufacturerID == ID)
+  }
+
+  remove(index: number) {
+    debugger
+    this.selectManufactureList.splice(index, 1);
+    this.getManufacturers(this.techCompany.id)
   }
 
 
@@ -169,7 +215,8 @@ export class DeviceSettingComponent implements OnInit {
       ID: device.Id,
       Name: device.Name,
       TechCompanyID: device.TechCompanyID,
-      TechCompanyGuid: this.companyId
+      TechCompanyGuid: this.techCompany.id,
+      Counter:device.Counter
     });
   }
 
@@ -194,7 +241,7 @@ export class DeviceSettingComponent implements OnInit {
       .subscribe(
         () => {
           this.toastrService.success("Device Type Saved Successfully");
-          this.getCurrentCompany()
+          this.getDeviceTypes(this.techCompany.id)
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
@@ -217,6 +264,7 @@ export class DeviceSettingComponent implements OnInit {
       .deleteHardwareType(this.deviceType)
       .subscribe((resp) => {
         this.toastrService.success(`${this.deviceType.Name} is Deleted Successfully.`);
+        this.popup = false;
       }, (error) => {
         this.toastrService.error("Something went wrong please try again.");
       });
@@ -234,7 +282,9 @@ export class DeviceSettingComponent implements OnInit {
       ID: manufacture.Id,
       Name: manufacture.Name,
       TechCompanyID: manufacture.TechCompanyID,
-      TechCompanyGuid: this.companyId
+      TechCompanyGuid: this.techCompany.id,
+      IsActive : manufacture.IsActive,
+      CreateDate: manufacture.CreateDate
     });
   }
 
@@ -254,17 +304,36 @@ export class DeviceSettingComponent implements OnInit {
       .subscribe(
         () => {
           this.toastrService.success("Manufacturer Saved Successfully");
-          this.getCurrentCompany()
+          this.getManufacturers(this.techCompany.id)
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
         }
       );
-    console.log(this.manufacturerList)
   }
 
   get f1() {
     return this.manufactureForm.controls;
+  }
+
+
+  removeConfirmManufacturer(manufacturer: any) {
+    this.manufacturer = manufacturer;
+    this.popupManufacturer = true;
+  }
+
+  removeManufacturer() {
+    this.loading = true; $(".loading").css("display", "block");
+    this.manufacturer.IsActive = false;
+
+    this.agentService
+      .deleteManufacturer(this.manufacturer)
+      .subscribe((resp) => {
+        this.toastrService.success(`${this.manufacturer.Name} is Deleted Successfully.`);
+        this.popupManufacturer = false;
+      }, (error) => {
+        this.toastrService.error("Something went wrong please try again.");
+      });
   }
 
   openModelPopup(isCreated: boolean, index: number, model: any) {
@@ -277,6 +346,10 @@ export class DeviceSettingComponent implements OnInit {
     this.modelForm.patchValue({
       ID: model.Id,
       Name: model.Name,
+      ManufacturerID: this.manufactureId,
+      ManufactureName: model.ManufactureName,
+      IsActive: model.IsActive,
+      CreateDate:model.CreateDate
     });
   }
 
@@ -300,10 +373,24 @@ export class DeviceSettingComponent implements OnInit {
       .subscribe(
         () => {
           this.toastrService.success("Model Saved Successfully");
+          this.getModels(this.techCompany.id)
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
         }
       );
+  }
+
+  onSearch(){
+    setTimeout(() => {
+
+      this.autosearchModel = ['loading...'];
+      if (this.cd) {
+        this.cd.detectChanges();
+      }
+
+
+
+    }, 500);
   }
 }
