@@ -1,3 +1,4 @@
+import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
 import { Component, OnInit, Pipe } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { param } from 'jquery';
@@ -7,6 +8,7 @@ import { AgentService } from 'src/app/services/agent/agent.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { DeviceFilter } from '../../devices/class/devices';
 import { CommissionService } from '../commission/commission.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'device-setting',
@@ -19,6 +21,7 @@ export class DeviceSettingComponent implements OnInit {
   modelbutton: boolean;
   hardwareTypes: any[] = [];
   companyId: any;
+  techCompany: any;
   deviceType: any;
   popup: boolean;
   loading = false;
@@ -37,7 +40,8 @@ export class DeviceSettingComponent implements OnInit {
     private agentService: AgentService,
     private commissionService: CommissionService,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService,
+    private companyStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.devicebutton = true;
@@ -103,26 +107,35 @@ export class DeviceSettingComponent implements OnInit {
     }
   }
 
-
   getCurrentCompany(): any {
-    this.commissionService
-      .getCurrentCompany()
-      .pipe(map(res => res))
-      .subscribe((res: any) => {
-        this.companyId = res.id;
-        this.Manufacture(this.companyId);
-        this.HardwareTypeList(this.companyId);
-      });
+    this.companyStateService.onCurrentCompany.subscribe((data: any)=> {
+      this.techCompany = data;      
+      this.getDeviceTypes(this.techCompany.id);
+      this.getManufacturers(this.techCompany.id);
+      this.getModels(this.techCompany.id);
+    });    
   }
 
-  Manufacture(TechCompanyGuid: any) {
-    this.agentService.getManufactureByTechCompanyGuid(TechCompanyGuid)
+  getManufacturers(TechCompanyGuid: any) {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getManufacturers(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
         this.manufacturerList = resp;
       });
   }
 
-  HardwareTypeList(TechCompanyGuid: any) {
+  getDeviceTypes(TechCompanyGuid: any) {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceTypes(TechCompanyGuid);
+      }, 300);
+      return;
+    }
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
@@ -130,9 +143,15 @@ export class DeviceSettingComponent implements OnInit {
       });
   }
 
-  ModelList(ManufacturerID: any) {
+  getModels(TechCompanyGuid: any) {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getModels(TechCompanyGuid);
+      }, 300);
+      return;
+    }
     this.agentService
-      .getModelByManufacturerId(ManufacturerID)
+      .getModels(TechCompanyGuid)
       .subscribe((resp) => {
         this.modelList = resp;
       });
@@ -196,7 +215,7 @@ export class DeviceSettingComponent implements OnInit {
 
     this.agentService
       .deleteHardwareType(this.deviceType)
-      .subscribe( (resp) => {
+      .subscribe((resp) => {
         this.toastrService.success(`${this.deviceType.Name} is Deleted Successfully.`);
       }, (error) => {
         this.toastrService.error("Something went wrong please try again.");

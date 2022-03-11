@@ -678,25 +678,32 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public getManufactureByTechCompanyGuid(guid) {
+  public getManufactures(guid) {
     return this.http
-      .get(`${this.apiAgent}agent/Manufacturer/GetByTechCompanyGuid?${guid}`, {
+      .get(`${this.apiAgent}agent/Manufacturer/GetByTechCompanyGuid?TechCompanyGuid=${guid}`, {
         headers: this.getHeader(),
         responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public getModelByManufacturerId(manufacturer) {
-
+  public getModels(guid) {
     return this.http
-      .get(`${this.apiAgent}agent/Model/GetByManufacturerID/${manufacturer}`, {
+      .get(`${this.apiAgent}agent/Model/GetByTechCompanyGuid?TechCompanyGuid=${guid}`, {
         headers: this.getHeader(),
         responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getModelsByManufacturer(id: any) {
+    return this.http
+      .get(`${this.apiAgent}/agent/Model/GetByManufacturerID?ManufacturerID=${id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
   public getAgentToken(UserName, Password) {
     return this.http
       .post(
