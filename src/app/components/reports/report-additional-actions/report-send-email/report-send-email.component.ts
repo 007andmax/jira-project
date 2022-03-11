@@ -72,24 +72,30 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
   }
 
   onSend() {
-
+    this.addBtn.setDisabled(true);
     this.draftReport.setContent(this.reportsStateService.parseReportContent(this.report));
     this.draftReport.setNote(this.messageContent);
     this.draftReport.setOrientation(this.orientation);
     this.draftReport.setFileName(this.fileName);
     if (this.template === "PDF_TEMPLATE") {
       this.reportsService.sendMessage(this.draftReport).subscribe((data) => {
+        this.addBtn.setDisabled(false);
         this.close();
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
+      }, err => {
+        this.addBtn.setDisabled(false);
       })
     } else {
       this.reportsService.sendCustomerMessage(this.draftReport).subscribe((data) => {
+        this.addBtn.setDisabled(false);
         this.close();
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
+      }, err => {
+        this.addBtn.setDisabled(false);
       })
     }
 
