@@ -512,6 +512,7 @@ import { PermissionUsersService } from './components/users/permission-users.serv
 import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
+import { RightClickBlankDirective } from './directives/right-click-blank.directive';
 
 
 declare var $: any;
@@ -965,7 +966,8 @@ declare var $: any;
     UsersAsideDetailMessagesFullBodyComponent,
     MarketingComponent,
     UsersTableMarketingComponent,
-    LeftPanelMarketingComponent
+    LeftPanelMarketingComponent,
+    RightClickBlankDirective
   ],
   imports: [
     BrowserModule,
