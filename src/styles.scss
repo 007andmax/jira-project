@@ -4118,14 +4118,6 @@ app-ticket-edit-aside {
         padding: 0 16px;
       }
 
-      .d-f {
-        // TODO replace .d-f for class
-        @media (max-width: 767px) {
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
-      }
-
       .product-item__cost-input,
       .product-item__price-input {
         input {
@@ -4244,14 +4236,6 @@ app-ticket-edit-aside {
           line-height: 20px;
           letter-spacing: 0;
           font-weight: 600;
-        }
-      }
-
-      .ticket-edit-aside__users-linked,
-      .d-f + .d-f {
-        // TODO repalce .d-f for class
-        @media (max-width: 767px) {
-          display: none;
         }
       }
     }
@@ -4723,7 +4707,6 @@ app-ticket-edit-aside-devices {
 }
 
 .qt-tooltip-error {
-  //z-index: 200; // TODO check error-tooltip
   z-index: 1;
   border-radius: 3px;
   max-width: 250px;
