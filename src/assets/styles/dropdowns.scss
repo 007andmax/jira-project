@@ -81,6 +81,9 @@
   .icn-remove-old {
     top: calc(50% - 4px) !important;
     right: 12px;
+    @media (max-width: 767px) {
+      top: calc(50% - 14px) !important;
+    }
   }
   &.right {
     .dropdown-menu {
