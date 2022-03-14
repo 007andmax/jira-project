@@ -9,7 +9,7 @@ table.qt-table-modern {
     font-size: 12px;
     th {
       padding: 8px;
-      @extend %сaption-m-sb;
+      @include сaption-m__sb;
       color: $primary-2;
       text-transform: uppercase;
       &:first-child {
@@ -21,7 +21,7 @@ table.qt-table-modern {
     }
   }
   tbody {
-    @extend %body-m;
+    @include body-m;
     tr {
       td {
         background: $white;
@@ -303,7 +303,7 @@ table.qt-table-modern {
     display: flex;
     align-items: center;
     padding: 8px;
-    @extend %сaption-m-sb;
+    @include сaption-m__sb;
     text-transform: uppercase;
 
     &:first-child {

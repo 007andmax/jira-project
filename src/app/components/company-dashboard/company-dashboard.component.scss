@@ -546,7 +546,7 @@
                                 align-items: flex-start;
                                 justify-content: flex-start;
                                 .caption-l {
-                                    @extend %сaption-l;
+                                    @include сaption-l;
                                     font-weight: $fw-semi-bold;
                                     color: $primary-2;
                                 }

@@ -2,7 +2,7 @@
 @import "./src/assets/styles/fonts";
 
 .user-detail-aside__header {
-  @extend %body-m-sb;
+  @include body-m__sb;
   margin-right: 10px;
 }
 .user-detail-aside__header-avatar {
@@ -19,12 +19,12 @@
   color: $white;
 }
 .user-detail-aside__header-company {
-  @extend %body-l-sb;
+  @include body-l__sb;
   color: $primary-2;
 }
 .user-detail-aside__header-info {
   color: $gray-700;
-  @extend %body-m;
+  @include body-m;
 }
 .user-detail-aside__divider {
   border-top: 1px solid $gray-400;
@@ -34,11 +34,11 @@
 .user-detail__row-info-line {
   margin-bottom: 16px;
   .user-detail__row-info-label {
-    @extend %сaption-l;
+    @include сaption-l;
     color: $gray-600;
   }
   .user-detail__row-info-value {
-    @extend %body-m-m;
+    @include body-m__m;
     color: $primary-2;
   }
 }

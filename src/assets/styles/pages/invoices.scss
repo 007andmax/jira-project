@@ -616,7 +616,7 @@ app-invoices-item,app-payment-item {
     thead {
       th {
         padding: 8px;
-        @extend %label-l-sb;
+        @include label-l__sb;
         color: $primary-2;
         background: $gray-100;
         text-transform: uppercase;

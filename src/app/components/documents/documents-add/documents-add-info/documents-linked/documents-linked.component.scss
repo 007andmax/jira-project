@@ -145,7 +145,7 @@
     content: "Select Company and User to link";
 }
 .title-link-to {
-   @extend %body-m-sb;
+   @include body-m__sb;
    color: $primary-2;
 }
 .qt-checkbox {

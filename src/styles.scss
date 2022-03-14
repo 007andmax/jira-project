@@ -7,31 +7,31 @@
 
 .h1,
 h1 {
-  @extend %h1;
+  @include h1;
 }
 .h2,
 h2 {
-  @extend %h2;
+  @include h2;
 }
 
 h3,
 .h3 {
-  @extend %h3;
+  @include h3;
   margin: 0;
 }
 h4,
 .h4 {
-  @extend %h4;
+  @include h4;
   margin: 0;
 }
 h5,
 .h5 {
-  @extend %h5;
+  @include h5;
   margin: 0;
 }
 h6,
 .h6 {
-  @extend %h6;
+  @include h6;
   margin: 0;
 }
 
@@ -117,7 +117,7 @@ h6,
   background: $white;
   color: $primary-1;
   border: 1px solid $primary-1;
-  @extend %сaption-l-m;
+  @include сaption-l__m;
   &:hover {
     background: $primary-1;
     color: $white;
@@ -331,7 +331,7 @@ app-ticket-add-aside {
 }
 .mat-form-field {
   font-family: "Inter", sans-serif;
-  @extend %body-m;
+  @include body-m;
 }
 app-left-panel-tags {
   > .col-md-12 {
@@ -575,7 +575,7 @@ documents-filter {
       padding-top: 5px;
       padding-bottom: 5px;
       color: $primary-2;
-      @extend %сaption-l;
+      @include сaption-l;
     }
   }
 }
@@ -878,7 +878,7 @@ documents-edit-info {
     .btn-new {
       height: 40px;
       border-radius: 4px;
-      @extend %body-m-sb;
+      @include body-m__sb;
     }
     .btn-primary {
       border: none;
@@ -945,7 +945,7 @@ documents-edit-info {
   display: flex;
   min-width: 35px;
   margin: 2px;
-  @extend %сaption-l;
+  @include сaption-l;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -1316,7 +1316,7 @@ app-quotes-item {
       }
 
       &-avatar {
-        @extend %сaption-l-sb;
+        @include сaption-l__sb;
         width: 32px;
         height: 32px;
         border-radius: 50%;
@@ -1354,7 +1354,7 @@ app-quotes-item {
         color: $primary-2;
       }
       .assigne-user-email {
-        @extend %сaption-l;
+        @include сaption-l;
         color: $gray-700;
       }
     }
@@ -1655,7 +1655,7 @@ app-quotes-item {
   font-weight: 400;
   p {
     word-break: break-all;
-    @extend %body-m-m;
+    @include body-m__m;
     color: $primary-2;
   }
 }
@@ -2013,7 +2013,7 @@ app-quotes-item {
       }
 
       .mat-form-field-appearance-legacy .mat-form-field-label {
-        @extend %body-m;
+        @include body-m;
         color: $gray-600;
         padding: 9px 10px 9px 36px;
         top: 10px;
@@ -2065,7 +2065,7 @@ app-quotes-item {
         padding-top: 5px;
         padding-bottom: 5px;
         color: $primary-2;
-        @extend %сaption-l;
+        @include сaption-l;
       }
     }
   }
@@ -2087,7 +2087,7 @@ app-quotes-item {
 
   .qt-table-modern th {
     padding: 8px;
-    @extend %сaption-m-sb;
+    @include сaption-m__sb;
     color: $primary-2;
     text-transform: uppercase;
   }
@@ -2131,7 +2131,7 @@ app-quotes-item {
       }
 
       p {
-        //@extend %body-m-m;
+        //@include body-m__m;
         font-weight: 500;
         color: $primary-2;
 
@@ -2187,7 +2187,7 @@ app-quotes-item {
 
       .name {
         position: relative;
-        @extend %body-m-m;
+        @include body-m__m;
         color: $primary-2;
 
         @media screen and (max-width: 767px) {
@@ -2215,7 +2215,7 @@ app-quotes-item {
       }
 
       .phone {
-        @extend %body-m;
+        @include body-m;
         color: $gray-600;
         @media (max-width: 767px) {
           max-width: 108px;
@@ -2367,7 +2367,7 @@ app-quotes-item {
       }
       [class*="col-md-"],
       [class*="col-md-"] p {
-        @extend %сaption-m-sb;
+        @include сaption-m__sb;
         color: $primary-2;
         text-transform: uppercase;
       }
@@ -4405,7 +4405,7 @@ app-ticket-edit-aside {
 }
 
 .tooltip {
-  @extend %сaption-l-m;
+  @include сaption-l__m;
   border-radius: 4px;
   div {
     margin-top: 5px;
@@ -4658,7 +4658,7 @@ app-ticket-edit-aside-devices {
     //font-size: 13px !important;
     //margin-bottom: 8px !important;
     margin-bottom: 8px;
-    @extend %body-m-sb;
+    @include body-m__sb;
     font-weight: 700;
   }
   .create-product__col {
@@ -4851,7 +4851,7 @@ input.--input-error {
       padding-left: 6px;
 
       input {
-        @extend %сaption-m;
+        @include сaption-m;
         height: 34px;
         margin: 0;
         width: 100%;
@@ -4877,7 +4877,7 @@ input.--input-error {
     top: 8.5px;
     padding: 12px 10px 10px 12px;
     font-size: 13px;
-    @extend %body-m;
+    @include body-m;
     color: $gray-600;
   }
   .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {

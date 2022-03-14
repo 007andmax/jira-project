@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .product-list-report {
   padding: 30px 30px 30px;
@@ -65,7 +66,7 @@
 
 .product-list-ticket-tech .header-product-list-ticket__title {
   padding-top: 20px;
-  @extend %body-l-sb;
+  @include body-l__sb;
 }
 .product-list-report-btn {
   width: 940px;
@@ -454,7 +455,7 @@
 }
 
 .reports-all .report p {
- @extend %h6-sb;
+  @include h6__sb;
   position: relative;
   margin-bottom: 20px;
 }
@@ -487,7 +488,7 @@
 }
 
 .reports-all .report ul li {
-  @extend %body-r;
+  @include body-r;
   margin-bottom: 12px;
   cursor: pointer;
   position: relative;
@@ -678,7 +679,7 @@
 }
 .customer-ticket__report--summary-title  {
   padding: 0 60px;
-  @extend %body-l-sb;
+  @include body-l__sb;
 }
 
 .customer-ticket__report--summary,

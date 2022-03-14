@@ -29,7 +29,7 @@ body {
   overflow: hidden;
   display: initial;
   font-family: "Inter", sans-serif;
-  @extend %body-m;
+  @include body-m;
   color: $gray-800;
   background-color: $white;
 }
@@ -362,7 +362,7 @@ p {
 .new-users-content__modal--content app-interval > [class*="col-md-"] p,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
 .password-content__modal--content > [class*="col-md-"] p {
-  @extend %body-m-sb;
+  @include body-m__sb;
   color: $primary-2;
   margin-bottom: 8px;
 }
@@ -572,7 +572,7 @@ textarea {
 
 .new-companies-content__modal {
   .switch-link {
-    @extend %body-m-sb;
+    @include body-m__sb;
     color: $primary-2;
   }
 
@@ -689,7 +689,7 @@ textarea {
   border-radius: 6px;
 
   .text {
-    @extend %сaption-l;
+    @include сaption-l;
   }
 }
 
@@ -1059,7 +1059,7 @@ h6,
   padding: 12px 6px;
 }
 .company-report .top-product-list-ticket [class*="col-md-"] {
-  @extend %сaption-m-sb;
+  @include сaption-m__sb;
 }
 .list-of-product .report-title {
   left: 30px;

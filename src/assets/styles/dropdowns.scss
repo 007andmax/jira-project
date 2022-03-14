@@ -1,4 +1,5 @@
-@import "./src/assets/styles/variable";
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .dark-dropdown,
 .light-dropdown,
@@ -52,7 +53,7 @@
       justify-content: flex-start;
       padding: 0 20px;
       border: none;
-      @extend %body-m-m;
+      @include body-m__m;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
@@ -360,7 +361,7 @@
           }
           .total-count {
             color: $primary-2;
-            @extend %сaption-l;
+            @include сaption-l;
           }
           .col-md-12 {
             span {

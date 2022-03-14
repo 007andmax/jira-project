@@ -395,7 +395,7 @@ body {
     /*** All buttons ***/
 
     .btn {
-        @extend %body-m-sb;
+        @include body-m__sb;
         letter-spacing: normal;
         color: $white;
         cursor: pointer;
@@ -2840,7 +2840,7 @@ body {
     .angular-editor-placeholder {
         padding: 18px 16px !important;
         color: $gray-600 !important;
-        @extend %body-m;
+        @include body-m;
     }
 }
 .angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button {

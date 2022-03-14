@@ -1,3 +1,5 @@
+@import './src/assets/styles/fonts';
+
 .qt-page-list {
   padding: 24px;
   background-color: $background;
@@ -145,7 +147,7 @@
       &__title {
         margin: 0 auto;
         color: $white;
-        @extend %body-l-sb;
+        @include body-l__sb;
       }
     }
   }
