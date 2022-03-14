@@ -551,6 +551,16 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
+  public deleteModel(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/Model`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
+
   public overrideAsset(data) {
     return this.http
       .post(

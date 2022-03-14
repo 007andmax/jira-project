@@ -136,72 +136,6 @@
           </div>
       </div>
       </div>
-
-      <div class="heading-serach" *ngIf="modelbutton">
-        <a
-            href="javascript:;"
-            class="btn-outline"
-            (click)="openModelPopup(true, 0, {})"
-        >
-            Add Model
-        </a>
-
-        <div
-        class="modal-content toggle-area"
-        [class.opened]="create"
-    >
-        <div class="modal-wrapper">
-            <div class="toggle-header">
-                <h2 class="h1">Add Model</h2>
-            </div>
-            <div class="modal-body">
-                <form
-                    [formGroup]="modelForm"
-                    (ngSubmit)="SaveModel()"
-                >
-                    <div class="f-row">
-                        <div class="f-col col-100">
-                            <label>Model Name</label>
-                            <div class="form-row">
-                                <input
-                                    type="text"
-                                    class="form-input"
-                                    formControlName="Name"
-                                    placeholder="Enter Model Name"
-                                    #Name
-                                    [ngClass]="{ 'is-invalid': submitted && f2.Name.errors }"
-                                >
-                            </div>
-                            <div
-                                           *ngIf="submitted && f2.Name.errors"
-                                           class="invalid-feedback"
-                                       >
-                                           <div *ngIf="f2.Name.errors.required">Name is required</div>
-                                       </div>
-                        </div>
-                        <div class="m-btn-row">
-                            <div class="m-btn-col">
-                                <input
-                                    type="submit"
-                                    value="Save"
-                                    class="btn btn-primary"
-                                >
-                                <a
-                                    href="javascript:;"
-                                    class="btn btn-secondary"
-                                    aria-label="Close"
-                                    (click)="create = !create"
-                                >
-                                    Cancel
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
       </span>
       </div>
       <ngb-tabset  (tabChange)="toggle($event)">
@@ -354,57 +288,111 @@
                   <div class="cmn-area">
                       <div class="data-table-wrap">
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-5">
                             <th>
                               <div class="qt-input-block qt-input-line">
-                                <label
-                                    class="manufacturer"
-                                    for="manufacturer"
-                                >
-                                    Manufacture
-                                </label>
                                 <app-drop-down
-                                id="manufacturer"
                                 #manufacturer
                                 [class]="['light-dropdown', 'qt-select-input-40']"
                                 [placeholder]="'Select Manufacture'"
-                                [list]="manufacturerList"
+                                [list]="manufactureIsActiveList"
                                 [field]="'Name'"
                                 [search]="true"
                                 [change]="true"
-                                [add]="true"
-                                (onSelectedItem)="onSelectManufactureName($event.ID)"
-                            ></app-drop-down>
+                                (onSelectedItem)="onSelectManufactureName($event)"
+                                ></app-drop-down>
                             </div>
                             </th>
                           </div>
-                          <div class="col-md-6">
-                            <div class="Rectangle">
-                              <span class="qt-input-search"></span>
-                            <div class="SearchRectangle">
-                              <mat-form-field class="example-chip-list" appearance="none">
-                                <mat-chip-list #chipList>
-                                    <mat-chip *ngFor="let model of selectedModel; let i=index">
-                                      {{model}} <mat-icon matChipRemove></mat-icon>
-                                    </mat-chip>
-                                    <input #dropdownServices
-                                  autofocus
-                                  [formControl]="selectedCtrl"
-                                  [(ngModel)]="tagFilterValue"
-                                  [matAutocomplete]="auto"
-                                  class="pointer"
-                                  placeholder="Please Enter Keyword"
-                                  [matChipInputFor]="chipList"
-                                  (keyup)="onSearch($event.target.value)"
-                              >
-                                </mat-chip-list>
-                                <mat-autocomplete class="extended" #auto="matAutocomplete">
-                                    <mat-option class="SubRectangle" *ngFor="let search of autosearchModel">
-                                      {{search.Result}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                              </mat-form-field>
+                          <div class="col-md-4">
+                              <div class="search"
+                              ngbDropdown
+                              [autoClose]="'outside'"
+                              #modelSearch="ngbDropdown">
+                              <div ngbDropdownAnchor>
+                                <form class="ng7 form">
+                                    <span class="qt-input-search">
+                                        <input
+                                            id="modelsearch"
+                                            type="text"
+                                            class="search__input"
+                                            placeholder="Please search"
+                                            [(ngModel)]="searchModel"
+                                            name="searchModel"
+                                        >
+                                        <span
+                                            class="global-search__close icon__close-round"
+                                        ></span>
+                                    </span>
+                                </form>
                             </div>
+                          </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="model-popup" *ngIf="modelbutton">
+                              <a
+                                  href="javascript:;"
+                                  class="btn-outline"
+                                  (click)="openModelPopup(true, 0, {})"
+                              >
+                                  Add Model
+                              </a>
+
+                              <div
+                              class="modal-content toggle-area"
+                              [class.opened]="create"
+                          >
+                              <div class="modal-wrapper">
+                                  <div class="toggle-header">
+                                      <h2 class="h1">Add Model</h2>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form
+                                          [formGroup]="modelForm"
+                                          (ngSubmit)="SaveModel()"
+                                      >
+                                          <div class="f-row">
+                                              <div class="f-col col-100">
+                                                  <label>Model Name</label>
+                                                  <div class="form-row">
+                                                      <input
+                                                          type="text"
+                                                          class="form-input"
+                                                          formControlName="Name"
+                                                          placeholder="Enter Model Name"
+                                                          #Name
+                                                          [ngClass]="{ 'is-invalid': submitted && f2.Name.errors }"
+                                                      >
+                                                  </div>
+                                                  <div
+                                                                 *ngIf="submitted && f2.Name.errors"
+                                                                 class="invalid-feedback"
+                                                             >
+                                                                 <div *ngIf="f2.Name.errors.required">Name is required</div>
+                                                             </div>
+                                              </div>
+                                              <div class="m-btn-row">
+                                                  <div class="m-btn-col">
+                                                      <input
+                                                          type="submit"
+                                                          value="Save"
+                                                          class="btn btn-primary"
+                                                      >
+                                                      <a
+                                                          href="javascript:;"
+                                                          class="btn btn-secondary"
+                                                          aria-label="Close"
+                                                          (click)="create = !create"
+                                                      >
+                                                          Cancel
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
                           </div>
                           </div>
                         </div>
@@ -431,68 +419,15 @@
                                   </th>
                                   <th class="delete"></th>
                               </tr>
-                              <tr>
-                                <th></th>
-                                <!-- <th>
-                                  <div class="qt-input-block qt-input-line">
-                                    <label
-                                        class="manufacturer"
-                                        for="manufacturer"
-                                    >
-                                        Manufacture
-                                    </label>
-                                    <app-drop-down
-                                    id="manufacturer"
-                                    #manufacturer
-                                    [class]="['light-dropdown', 'qt-select-input-40']"
-                                    [placeholder]="'Select Manufacture'"
-                                    [list]="manufacturerList"
-                                    [field]="'Name'"
-                                    [search]="true"
-                                    [change]="true"
-                                    [add]="true"
-                                    (onSelectedItem)="onSelectManufactureName($event.ID)"
-                                ></app-drop-down>
-                                </div>
-                                </th> -->
-                                <th>
-                                  <!-- <div class="Rectangle">
-                                    <span class="qt-input-search"></span>
-                                  <div class="SearchRectangle">
-                                    <mat-form-field class="example-chip-list" appearance="none">
-                                      <mat-chip-list #chipList>
-                                          <mat-chip *ngFor="let model of selectedModel; let i=index">
-                                            {{model}} <mat-icon matChipRemove></mat-icon>
-                                          </mat-chip>
-                                          <input #dropdownServices
-                                        autofocus
-                                        [formControl]="selectedCtrl"
-                                        [(ngModel)]="tagFilterValue"
-                                        [matAutocomplete]="auto"
-                                        class="pointer"
-                                        placeholder="Please Enter Keyword"
-                                        [matChipInputFor]="chipList"
-                                        (keyup)="onSearch($event.target.value)"
-                                    >
-                                      </mat-chip-list>
-                                      <mat-autocomplete class="extended" #auto="matAutocomplete">
-                                          <mat-option class="SubRectangle" *ngFor="let search of autosearchModel">
-                                            {{search.Result}}
-                                          </mat-option>
-                                      </mat-autocomplete>
-                                    </mat-form-field>
-                                  </div>
-                                </div> -->
-                                </th>
-                              </tr>
                           </thead>
                           <tbody>
-                            <tr class="company-device-hover" *ngFor="let model of selectManufactureList">
+                            <tr class="company-device-hover" *ngFor="let model of selectManufactureList | modelFilter: searchModel">
                                 <td class="company-devices-table__check">
                                     <div class="d-f">
                                         <label class="qt-checkbox">
                                           <input
                                               type="checkbox"
+                                              [(ngModel)]="model.IsActive"
 
                                           >
                                           <span></span>
@@ -510,7 +445,7 @@
                                       href="javascript:;"
                                       data-tooltip="Remove"
                                       class="remove"
-                                      (click)="removeConfirm(model)"
+                                      (click)="removeConfirmModel(model)"
                                   >
                                       <img
                                           src="/html/assets/img/icons/remove.svg"
@@ -600,7 +535,7 @@
                 <a
                     class="close-ico"
                     href="javascript:;"
-                    (click)="popup = false"
+                    (click)="popupManufacturer = false"
                 >
                     <img
                         src="/html/assets/img/icons/close.svg"
@@ -619,7 +554,55 @@
                 <button
                     type="button"
                     class="btn btn-secondary"
-                    (click)="popup = false"
+                    (click)="popupManufacturer = false"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div
+    class="img-croparea deletePopup"
+    *ngIf="popupModel"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
+                    >
+                </span>
+                <div class="message-right">
+                    <h2 class="h1">Delete Model</h2>
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="popupModel = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="removeModel()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="popupModel = false"
                 >
                     Cancel
                 </button>

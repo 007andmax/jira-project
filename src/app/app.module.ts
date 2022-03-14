@@ -466,6 +466,7 @@ import { LeftPanelDevicesComponent } from './components/left-panel/left-panel-de
 import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
 import { WindowUpdatesComponent } from './components/device/window-updates/window-updates.component';
 import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
+import { ModelPipe } from './pipe/model.pipe';
 
 declare var $: any;
 /**
@@ -889,6 +890,7 @@ declare var $: any;
     DevicesReportComponent,
     WindowUpdatesComponent,
     DeviceSettingComponent,
+    ModelPipe
   ],
   imports: [
     BrowserModule,
@@ -927,7 +929,7 @@ declare var $: any;
     AngularEditorModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   entryComponents: [
     ModalQuoteComponent,
