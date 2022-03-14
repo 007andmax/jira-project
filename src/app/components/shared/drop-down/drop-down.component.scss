@@ -1,11 +1,11 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-  background: $gray-200;
+  background: #dfe3e8;
   color: $gray-600;
 }
 .icon__check {
-    background-size: 15px;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
