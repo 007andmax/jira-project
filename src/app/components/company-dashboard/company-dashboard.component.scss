@@ -558,9 +558,7 @@
                                 }
                                 .h5 {
                                     @media (max-width: 767px) {
-                                        font-size: 12px;
-                                        line-height: 16px;
-                                        font-weight: 600;
+                                        @include сaption-l__sb;
                                         color: $primary-2;
                                     }
                                 }
