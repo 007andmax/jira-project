@@ -13,7 +13,7 @@ export class RightClickBlankDirective {
     event.preventDefault();
   }
   ngDoCheck() {
-    console.log("link", this.link);
+    // console.log("link", this.link);
     if (this.companiesStateService.getCurrentCompany()) this.eRef.nativeElement.setAttribute("href", `#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${this.link
       }`)
 

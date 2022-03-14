@@ -171,6 +171,7 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
+      console.log("this.router.url", this.router.url);
       if (this.router.url === "/") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
     })
