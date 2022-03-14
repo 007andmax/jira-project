@@ -7,7 +7,9 @@ import { CompaniesStateService } from '../states/company/companies-state.service
 export class RightClickBlankDirective {
 
   @Input() link: string;
-  constructor(private eRef: ElementRef, public companiesStateService: CompaniesStateService,) { }
+  constructor(private eRef: ElementRef, public companiesStateService: CompaniesStateService,) {
+    this.eRef.nativeElement.style.color = 'unset';
+  }
   @HostListener('document:click', ['$event'])
   clickout(event) {
     event.preventDefault();
