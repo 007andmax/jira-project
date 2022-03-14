@@ -171,8 +171,8 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      console.log("this.router.url", this.router.url);
-      if (this.router.url === "/") this.router.navigate(
+      console.log("this.router.url", window.location.href.replace(window.location.origin, ""));
+      if (window.location.href.replace(window.location.origin, "") === "/#/") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {
