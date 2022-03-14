@@ -9,10 +9,9 @@ export class RightClickBlankDirective {
   @Input() link: string;
   constructor(private eRef: ElementRef, public companiesStateService: CompaniesStateService,) {
     this.eRef.nativeElement.style.color = 'unset';
-  }
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    event.preventDefault();
+    this.eRef.nativeElement.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
   }
   ngDoCheck() {
     // console.log("link", this.link);
