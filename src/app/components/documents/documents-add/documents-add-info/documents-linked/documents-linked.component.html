@@ -50,7 +50,7 @@
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
-                    [disabled]="isDisabled"
+                    [attr.disabled]="isDisabled"
                     (input)="onSearch($event)"
                 >
             </mat-chip-list>
@@ -113,6 +113,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
 
 
 
