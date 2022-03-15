@@ -1,5 +1,6 @@
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
-import { ChangeDetectorRef, Component, OnInit, Pipe } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit, Pipe, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { AgentService } from 'src/app/services/agent/agent.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { DeviceFilter } from '../../devices/class/devices';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'device-setting',
@@ -43,14 +45,31 @@ export class DeviceSettingComponent implements OnInit {
   model:any;
   manufacturerIsActiveList:any[]=[];
   filter: DeviceFilter = new DeviceFilter();
+  closeResult: string = '';
+  openedCounter: boolean = false;
+  @ViewChild("templatecounter") templatecounter;
+  @ViewChild("templatecounterManufactuer") templatecounterManufactuer;
+  @ViewChild("templatecounterModel") templatecounterModel;
+  deviceTypeId : number;
+  getAssetbyHardwaretypeList : any[]=[];
+  deviceName: string;
+  manufacturerId:number
+  getAssetbyManufactureList : any[]=[];
+  getAssetbyModelList : any[]=[];
+  modelId : number;
+  manufactureName :any;
+  modelName: string;
 
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private companyStateService: CompaniesStateService,) { }
+    private companyStateService: CompaniesStateService,
+    private ngZone: NgZone,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.openedCounter = true;
     this.devicebutton = true;
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
@@ -406,5 +425,97 @@ export class DeviceSettingComponent implements OnInit {
       }, (error) => {
         this.toastrService.error("Something went wrong please try again.");
       });
+  }
+
+  counterPopup(templatecounter, deviceType) {
+    this.deviceTypeId = deviceType.ID;
+    this.deviceName = deviceType.Name;
+    this.getAssetbyTechCompanyAndHardwareType(this.techCompany.id, this.deviceTypeId)
+    this.ngZone.run(() => {
+      this.modalService
+        .open(templatecounter, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
+        )
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  closed() {
+    this.modalService.dismissAll("Cross click");
+  }
+
+  counterPopupManufactuer(templatecounterManufactuer, manufacture) {
+    this.manufacturerId = manufacture.ID;
+    this.manufactureName = manufacture.Name;
+    this.getAssetbyTechCompanyAndManufacture(this.techCompany.id, this.manufacturerId)
+    this.ngZone.run(() => {
+      this.modalService
+        .open(templatecounterManufactuer, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
+        )
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  counterPopupModel(templatecounterModel, model) {
+    this.modelId = model.ID;
+    this.modelName = model.Name;
+    this.getAssetbyTechCompanyAndModel(this.techCompany.id, this.modelId)
+    this.ngZone.run(() => {
+      this.modalService
+        .open(templatecounterModel, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
+        )
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  getAssetbyTechCompanyAndHardwareType(TechCompanyGuid, DeviceTypeId){
+    this.agentService.getHardwareTypeAssetByTechCompanyGuidAndHardwareType(TechCompanyGuid, DeviceTypeId)
+      .subscribe((resp) => {
+        this.getAssetbyHardwaretypeList = resp;
+      });
+  }
+
+  getAssetbyTechCompanyAndManufacture(TechCompanyGuid, ManufactureId){
+    this.agentService.getManufacturerAssetByTechCompanyGuidAndManufacturer(TechCompanyGuid, ManufactureId)
+    .subscribe((resp)=>{
+    this.getAssetbyManufactureList= resp;
+    })
+  }
+
+  getAssetbyTechCompanyAndModel(TechCompanyGuid, modelId){
+    this.agentService.getModelAssetByTechCompanyGuidAndModel(TechCompanyGuid, modelId)
+    .subscribe((resp)=>{
+     this.getAssetbyModelList = resp;
+    })
   }
 }

@@ -23,7 +23,7 @@
 .delete{
   max-width: 150px;
   width: max-content;
-  min-width: 150px;
+  min-width: 130px;
 }
 
 .action{
@@ -112,6 +112,50 @@ span.qt-input-search:before {
 .model-popup{
   margin-top: 10px;
   margin-left: 10px;
+}
+
+.company-device-hover{
+  width: 70px !important;
+}
+
+.heading-manufacture{
+  width: 550px !important;
+  right: 0 !important;
+  position: fixed;
+  height: 100%!important;
+  background-color: white;
+  margin-top: -230px !important;
+  }
+
+  ::ng-deep .modal-content{
+    right: 0 !important;
+    position: fixed !important;
+    padding-top: 15px !important;
+  }
+
+ .device-setting{
+  &__title {
+    margin-bottom: 20px;
+  }
+  &__row {
+    //display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-left: 24px;
+  }
+  &__row-title {
+    font-size: 12px;
+    line-height: 1.33;
+    color: #364656;
+    font-family: Graphik-Medium, sans-serif;
+    margin-bottom: 2px;
+  }
+  &__name {
+    font-size: 12px;
+    font-family: Graphik-Medium, sans-serif;
+    color: #9ca5b6;
+  }
 }
 
 

@@ -82,6 +82,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   blockedNumber : number;
   categories: number;
   networkDisk: any = [];
+  manufactureList: any[]=[];
 
   constructor(
     private agentService: AgentService,
@@ -777,5 +778,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   focusMyInput() {
     setTimeout(() => this.searchInput.nativeElement.focus(), 0);
+  }
+
+  getManufacturers(TechCompanyGuid: any) {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getManufacturers(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService.getManufactures(TechCompanyGuid)
+      .subscribe((resp) => {
+        this.manufactureList = resp;
+      });
   }
 }

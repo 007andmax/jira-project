@@ -327,6 +327,33 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getHardwareTypeAssetByTechCompanyGuidAndHardwareType(techCompanyGuid,hardwareTypeId) {
+    return this.http
+      .get(`${this.apiAgent}agent/HardwareType/GetAssetsByTechCompanyGuidAndHardwareTypeID?techCompanyGuid=${techCompanyGuid}&hardwareTypeID=${hardwareTypeId}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getManufacturerAssetByTechCompanyGuidAndManufacturer(techCompanyGuid,manufacturerId) {
+    return this.http
+      .get(`${this.apiAgent}agent/Manufacturer/GetAssetsByTechCompanyGuidAndManufacturerID?techCompanyGuid=${techCompanyGuid}&manufacturerID=${manufacturerId}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getModelAssetByTechCompanyGuidAndModel(techCompanyGuid,modelId) {
+    return this.http
+      .get(`${this.apiAgent}agent/Model/GetAssetsByTechCompanyGuidAndModelID?techCompanyGuid=${techCompanyGuid}&modelId=${modelId}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getGraphicsCard(asset_id) {
     return this.http
       .get(`${this.apiAgent}agent/VideoController/${asset_id}`, {

@@ -190,7 +190,16 @@
                                    {{deviceType.Name}}
                                  </td>
                                  <td class="company-devices-table__go-to count-setting">
-                                   {{deviceType.Counter}}
+                                   <div *ngIf="deviceType.Counter != 0">
+                                     <a
+                                     href="javascript:;"
+                                     (click)="counterPopup(templatecounter, deviceType)"
+                                     > {{deviceType.Counter}}
+                                     </a>
+                                   </div>
+                                   <div *ngIf="deviceType.Counter == 0">
+                                    {{deviceType.Counter}}
+                                   </div>
                                  </td>
                                  <td class="company-devices-table__go-to delete">
                                    <a
@@ -260,7 +269,16 @@
                                   {{manufacture.Name}}
                                 </td>
                                 <td class="company-devices-table__go-to count-setting">
-                                  {{0}}
+                                  <div *ngIf="manufacture.Counter != 0">
+                                    <a
+                                    href="javascript:;"
+                                    (click)="counterPopupManufactuer(templatecounterManufactuer, manufacture)"
+                                    > {{manufacture.Counter}}
+                                    </a>
+                                  </div>
+                                  <div *ngIf="manufacture.Counter == 0">
+                                   {{manufacture.Counter}}
+                                  </div>
                                 </td>
                                 <td class="company-devices-table__go-to">
                                   <a
@@ -438,7 +456,16 @@
                                   {{model.Name}}
                                 </td>
                                 <td class="company-devices-table__go-to count-setting">
-                                  {{0}}
+                                  <div *ngIf="model.Counter != 0">
+                                    <a
+                                    href="javascript:;"
+                                    (click)="counterPopupModel(templatecounterModel, model)"
+                                    > {{model.Counter}}
+                                    </a>
+                                  </div>
+                                  <div *ngIf="model.Counter == 0">
+                                   {{model.Counter}}
+                                  </div>
                                 </td>
                                 <td class="company-devices-table__go-to">
                                   <a
@@ -610,3 +637,82 @@
         </div>
     </div>
 </div>
+
+<ng-template #templatecounter>
+  <div
+    class="qt-aside-modern device-add-aside"
+>
+    <div class="qt-aside-modern__header">
+        <div class="d-f ai-c">
+            <div class="qt-aside__title"> {{deviceName}}</div>
+        </div>
+        <div>
+          <div
+              class="qt-aside__close-modal icon__close"
+              (click)="closed()"
+          ></div>
+      </div>
+    </div>
+</div>
+</ng-template>
+
+<ng-template #templatecounterManufactuer class="modal-content">
+  <div
+    class="heading-manufacture"
+>
+    <div class="qt-aside-modern__header">
+        <div class="d-f ai-c">
+            <div class="qt-aside__title">{{manufactureName}}</div>
+        </div>
+        <div>
+          <div
+              class="qt-aside__close-modal icon__close"
+              (click)="closed()"
+          ></div>
+      </div>
+    </div>
+    <div *ngFor="let item of getAssetbyManufactureList">
+      <div class="device-setting__row">
+          <div
+              class="device-setting__row-title"
+              [textContent]="item.Name"
+          ></div>
+          <div
+              class="device-setting__name"
+              [textContent]="item.CompanyName"
+          ></div>
+      </div>
+  </div>
+</div>
+</ng-template>
+
+
+<ng-template #templatecounterModel class="modal-content">
+  <div
+    class="qt-aside-modern device-add-aside"
+>
+    <div class="qt-aside-modern__header">
+        <div class="d-f ai-c">
+            <div class="qt-aside__title"> {{modelName}}</div>
+        </div>
+        <div>
+          <div
+              class="qt-aside__close-modal icon__close"
+              (click)="closed()"
+          ></div>
+      </div>
+    </div>
+    <div *ngFor="let model of getAssetbyModelList">
+      <div class="device-setting__row">
+          <div
+              class="device-setting__row-title"
+              [textContent]="model.Name"
+          ></div>
+          <div
+              class="device-setting__name"
+              [textContent]="model.CompanyName"
+          ></div>
+      </div>
+  </div>
+</div>
+</ng-template>
