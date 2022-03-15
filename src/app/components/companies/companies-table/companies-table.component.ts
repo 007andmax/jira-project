@@ -107,6 +107,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   getPhoneNumner() {
     return (this.primaryPhone && this.primaryPhone.number) ? this.primaryPhone.number : '';
   }
+  getCompanyDashboardLink() {
+    return `company/${this.company.id}/dashboard`;
+  }
   goToDashboard() {
     this.companiesStateService.setSelectedCompanyId(this.company.id);
     this.router.navigate(
