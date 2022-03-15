@@ -88,6 +88,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
 
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
     this.setMinCustomDate();
+    console.log("contractsBlockTime", this.contractsBlockTime);
   }
   private setMinCustomDate() {
     let today = new Date(this.contractsBlockTime.startDate);
