@@ -4,16 +4,21 @@
     *ngIf="main_page === PAGE_MAIN"
 >
     <app-header
+        *ngIf="currentUser && currentUser.role !== 'SUPER_ADMIN'"
         class="nav-header"
         [ngClass]="{'--small-with':toggleLeftPanel,
     '--full-width':hideleLeftPanel}"
     ></app-header>
     <app-left-panel
+        *ngIf="currentUser && currentUser.role !== 'SUPER_ADMIN'"
         class="app-left-panel"
         [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
         [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
     ></app-left-panel>
-    <div class="main-container">
+    <div
+        class="main-container"
+        *ngIf=" currentUser && currentUser.role !== 'SUPER_ADMIN'"
+    >
         <div class="row">
             <div
                 class="content-container"

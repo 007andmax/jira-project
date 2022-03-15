@@ -26,6 +26,7 @@ import { AppStateService } from './states/app/app-state.service';
 import { CrmStateService } from './states/crm/crm-state.service';
 import { MarketingEmailStateService } from './states/marketing-email/marketing-email-state.service';
 import { PermissionsService } from './services/permissions/permissions.service';
+import { CurrentUser } from 'src/class/current-user/current-user';
 
 
 /**
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
   state: string = '';
+  currentUser: CurrentUser;
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -98,19 +100,30 @@ export class AppComponent implements OnInit {
           this.main_page = PAGE_MAIN;
         }
       });
-
-    this.devicesState.onInit();
     this.usersStateService.onInit();
-    this.companiesState.onInit();
-    this.taxesStateService.onInit();
-    this.glNumberStateService.onInit();
-    this.inventoryStateService.onInit();
-    this.ticketsStateService.onInit();
-    this.constantsStateService.onInit();
-    this.tagsStateService.onInit();
-    this.documentsStateService.onInit();
-    this.crmStateService.onInit();
-    this.marketingEmailStateService.onInit();
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+      if (this.appService.getIsInit()) return;
+      if (data.role !== "SUPER_ADMIN") {
+        this.devicesState.onInit();
+        this.companiesState.onInit();
+        this.taxesStateService.onInit();
+        this.glNumberStateService.onInit();
+        this.inventoryStateService.onInit();
+        this.ticketsStateService.onInit();
+        this.constantsStateService.onInit();
+        this.tagsStateService.onInit();
+        this.documentsStateService.onInit();
+        this.crmStateService.onInit();
+        this.marketingEmailStateService.onInit();
+      } else {
+        this.companiesState.onInitGetCurrentCompany();
+        this.appService.onInit();
+        this.showPreloader = false;
+        this.cd.detectChanges();
+      }
+    })
+
     //  this.userService.getCurrentUser();
 
     this.websocketService.initializeWebSocketConnection();
