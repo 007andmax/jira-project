@@ -247,7 +247,8 @@ export class ContractsUserDevice {
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
-            type: "SERVICE_CONTRACT"
+            type: "SERVICE_CONTRACT",
+            withCustomBillingDate: this.withCustomBillingDate
         }
     }
 

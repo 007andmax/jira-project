@@ -138,7 +138,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   setToggleCustomBillingDate(data) {
     this.contractsOther.withCustomBillingDate = data;
     if (!data) {
-      this.contractsOther.resetCustomBillingDate();
+      //  this.contractsOther.resetCustomBillingDate();
     } else {
       this.contractsOther.customBillingDate = this.contractsOther.startDate;
       this.resetCustomDate();

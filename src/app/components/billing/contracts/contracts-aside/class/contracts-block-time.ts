@@ -101,7 +101,8 @@ export class ContractsBlockTime {
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             taxIds: this.taxIds,
-            type: this.type
+            type: this.type,
+            withCustomBillingDate: this.withCustomBillingDate
         }
     }
     public setCompanyId(data) {

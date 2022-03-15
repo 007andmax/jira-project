@@ -330,6 +330,7 @@ export class ServiceAgreement {
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             customBillingDate: this.customBillingDate,
+            withCustomBillingDate: this.withCustomBillingDate,
             type: this.type
         }
     }
