@@ -35,6 +35,13 @@ h6,
   margin: 0;
 }
 
+.body-m-sb {
+  @extend %body-m-sb;
+}
+.body-m {
+  @extend %body-m;
+}
+
 //COMMON STYLES ----------------------------
 .d-f {
   display: flex;
@@ -5000,6 +5007,59 @@ add-category-product {
   .add-category-container {
     td {
       background-color: #f4fbff !important;
+    }
+  }
+}
+
+software-summary-report {
+  .report-show-footer-header {
+    .report-header,
+    .report-footer {
+      display: block;
+      text-align: center;
+      background: transparent;
+    }
+  }
+
+  .hardware-summary .top-product-list-ticket [class*=col-md-],
+  .hardware-summary .product-list-ticket [class*=col-md-] {
+    font-size: 13px; // TODO add mixin
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 600;
+    color: $primary-2;
+    padding: 12px 0;
+  }
+
+  .qt-table-modern__row {
+    border-bottom: 1px solid $gray-300;
+    margin-bottom: 0;
+  }
+
+  .qt-page-list__header-thead__row {
+    color: $primary-2;
+    border-bottom: 1px solid $gray-300;
+    border-top: 1px solid $gray-300;
+    background-color: $gray-100;
+  }
+  .software-summary-report {
+    &__device-name {
+      flex: 1 0 166px;
+    }
+    &__software-name {
+      flex: 1 0 200px;
+    }
+    &__installation-key {
+      flex: 1 0 100px;
+    }
+    &__installation-publisher {
+      flex: 1 0 130px;
+    }
+    &__installation-version {
+      flex: 0 0 130px;
+    }
+    &__install-date {
+      flex: 0 0 110px;
     }
   }
 }
