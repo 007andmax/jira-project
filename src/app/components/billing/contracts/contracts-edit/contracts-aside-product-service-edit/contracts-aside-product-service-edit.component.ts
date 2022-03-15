@@ -130,7 +130,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   }
   private setMinCustomDate() {
     let today = new Date(this.contractsOther.startDate);
-    this.minCustomDate = today.getTime();
+    // this.minCustomDate = today.getTime();
     if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
     this.cd.detectChanges();
 
