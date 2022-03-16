@@ -158,4 +158,18 @@ span.qt-input-search:before {
   }
 }
 
+.device-data{
+  width: 20px;
+  height: 40px;
+}
+
+.not-found{
+  margin-top: 40px;
+  margin-left: 250px;
+}
+
+::ng-deep .ng7 .loading {
+  left: -500px !important;
+}
+
 

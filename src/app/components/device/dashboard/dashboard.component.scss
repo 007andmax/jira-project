@@ -1014,6 +1014,17 @@ ngb-tabset{
   margin-left: 30px;
 }
 
+::ng-deep body.ng7-device .report-caret-icon {
+  top: 30px !important;
+}
+
+::ng-deep .qt-select-input-40 input{
+height: 27px !important;
+}
+
+::ng-deep .light-dropdown .icn-remove-old, .grey-dropdown .icn-remove-old {
+  top: 25px !important;
+}
 // modal-popup end
 
 

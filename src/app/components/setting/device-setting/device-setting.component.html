@@ -219,6 +219,10 @@
                       </table>
                       </div>
                   </div>
+                  <div
+    class="loading"
+    *ngIf="devicetype"
+></div>
               </ng-template>
           </ngb-tab>
           <!-- Manufacture -->
@@ -298,6 +302,10 @@
                       </table>
                       </div>
                   </div>
+                  <div
+                  class="loading"
+                  *ngIf="manufactur"
+              ></div>
               </ng-template>
           </ngb-tab>
           <!-- Model -->
@@ -485,6 +493,10 @@
                       </table>
                       </div>
                   </div>
+                  <div
+                  class="loading"
+                  *ngIf="modelload"
+              ></div>
               </ng-template>
           </ngb-tab>
       </ngb-tabset>
@@ -653,7 +665,25 @@
           ></div>
       </div>
     </div>
+    <div *ngFor="let item of AssetbyHardwaretypeList">
+      <div class="device-setting__row">
+          <div
+              class="device-setting__row-title"
+              [textContent]="item.Name"
+          ></div>
+          <div
+              class="device-setting__name"
+          ></div>
+      </div>
+  </div>
+  <div *ngIf="AssetbyHardwaretypeList.length<= 0">
+    <h4 class="not-found">No Data Found</h4>
+  </div>
 </div>
+<div
+    class="loading"
+    *ngIf="deviceTypeloading"
+></div>
 </ng-template>
 
 <ng-template #templatecounterManufactuer class="modal-content">
@@ -671,7 +701,7 @@
           ></div>
       </div>
     </div>
-    <div *ngFor="let item of getAssetbyManufactureList">
+    <div *ngFor="let item of AssetbyManufactureList">
       <div class="device-setting__row">
           <div
               class="device-setting__row-title"
@@ -683,7 +713,14 @@
           ></div>
       </div>
   </div>
+  <div *ngIf="AssetbyManufactureList.length<= 0">
+    <h4 class="not-found">No Data Found</h4>
+  </div>
 </div>
+<div
+    class="loading"
+    *ngIf="manufactureloading"
+></div>
 </ng-template>
 
 
@@ -702,7 +739,7 @@
           ></div>
       </div>
     </div>
-    <div *ngFor="let model of getAssetbyModelList">
+    <div *ngFor="let model of AssetbyModelList">
       <div class="device-setting__row">
           <div
               class="device-setting__row-title"
@@ -714,5 +751,12 @@
           ></div>
       </div>
   </div>
+  <div *ngIf="AssetbyModelList.length<= 0">
+    <h4 class="not-found">No Data Found</h4>
+  </div>
 </div>
+<div
+    class="loading"
+    *ngIf="modelloading"
+></div>
 </ng-template>

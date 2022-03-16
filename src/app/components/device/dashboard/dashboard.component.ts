@@ -15,6 +15,7 @@ import { NotesAdd } from "./class/dashboard";
 import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 
 @Component({
   selector: "app-dashboard",
@@ -83,6 +84,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   categories: number;
   networkDisk: any = [];
   manufactureList: any[]=[];
+  loading: boolean;
+  techCompany: any;
+  modelList : any[]=[];
+  manufactureId: any;
+  selectManufactureList: any[]=[];
+  modelId:any;
 
   constructor(
     private agentService: AgentService,
@@ -91,7 +98,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
     private modalService: NgbModal,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private companyStateService: CompaniesStateService
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -101,12 +109,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isNonAgentDevice = true;
+    this.loading = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
 
     this.setPreviewDataDevice();
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e) => this.onCurrentConfigError(e));
+    this.getAssetDetail()
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), this.loading = false, (e) => this.onCurrentConfigError(e));
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
+    this.companyStateService.onCurrentCompany.subscribe((data: any)=> {
+      this.techCompany = data;
+    });
   }
 
   onCurrentConfig(resp: any) {
@@ -205,6 +218,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getAssetDetail() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getAssetDetail();
+      }, 300);
+      return;
+    }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.asset = resp[0];
@@ -241,6 +260,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.getAssetTagDropDownDetail();
         this.getAssetNotesDetail();
         this.agentService.GetCurrentConfig(this.asset.ID);
+        this.getManufacturers(this.techCompany.id);
+        this.getModels(this.techCompany.id);
       }
     });
   }
@@ -538,6 +559,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.asset.LastRebootDate = this.asset.LastRebootDate || '0001-01-01';
     this.asset.DeploymentDate = this.asset.DeploymentDate || '0001-01-01';
     this.asset.WarrantyExpires = this.asset.WarrantyExpires || '0001-01-01';
+    this.asset.Manufacturer = this.manufactureId;
+    this.asset.Model = this.modelId;
 
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
@@ -791,5 +814,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((resp) => {
         this.manufactureList = resp;
       });
+  }
+
+  getModels(TechCompanyGuid: any) {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getModels(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getModels(TechCompanyGuid)
+      .subscribe((resp) => {
+        this.modelList = resp;
+
+      });
+  }
+
+  onSelectManufacture(SelectManufacturer) {
+    if (SelectManufacturer) {
+      this.manufactureId = SelectManufacturer.ID;
+      this.updateAsset();
+    }
+  }
+
+  onSelectModel(SelectModel) {
+    if (SelectModel) {
+      this.modelId = SelectModel.ID;
+      this.updateAsset();
+    }
   }
 }

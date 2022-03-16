@@ -47,8 +47,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
   TemporaryCommand: string = "";
   assetId: number;
   currentCommand: string;
-  isNonAgentDevice:boolean;
-  offline : string = "Offline";
+  isNonAgentDevice: boolean;
+  offline: string = "Offline";
 
   constructor(
     private modalService: NgbModal,
@@ -115,14 +115,20 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-        this.deviceName = resp[0].Name;
-        this.asset = resp[0];
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.setPreviewDataDevice();
+      }, 300);
+      return;
+    }
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      this.deviceName = resp[0].Name;
+      this.asset = resp[0];
 
-        if(resp[0].AgentVersion == ""){
-          this.isNonAgentDevice = false;
-        }
-      });
+      if (resp[0].AgentVersion == "") {
+        this.isNonAgentDevice = false;
+      }
+    });
   }
 
   onGetCurrentConfig(resp: any) {
@@ -157,6 +163,12 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   getDeviceDetail() {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceDetail();
+      }, 300);
+      return;
+    }
     this.hardwareService
       .getAllHardwareList(
         localStorage.getItem("company_id"),
@@ -388,13 +400,13 @@ export class DeviceComponent implements OnInit, OnDestroy {
       data.MessageType = "UpdateAgent";
       this.agentService.SendPowerShellCommand(data);
     }
-    else if(command === 'ira') {
+    else if (command === 'ira') {
       this.currentCommand = 'Install Remote Agent';
       data.AssetID = assetId;
       data.MessageType = "InstallRemoteAgent";
       this.agentService.SendPowerShellCommand(data);
     }
-    else if(command === 'ura') {
+    else if (command === 'ura') {
       this.currentCommand = 'Uninstall Remote Agent';
       data.AssetID = assetId;
       data.MessageType = "UninstallRemoteAgent";

@@ -51,14 +51,20 @@ export class DeviceSettingComponent implements OnInit {
   @ViewChild("templatecounterManufactuer") templatecounterManufactuer;
   @ViewChild("templatecounterModel") templatecounterModel;
   deviceTypeId : number;
-  getAssetbyHardwaretypeList : any[]=[];
+  AssetbyHardwaretypeList : any[]=[];
   deviceName: string;
   manufacturerId:number
-  getAssetbyManufactureList : any[]=[];
-  getAssetbyModelList : any[]=[];
+  AssetbyManufactureList : any[]=[];
+  AssetbyModelList : any[]=[];
   modelId : number;
   manufactureName :any;
   modelName: string;
+  devicetype: boolean;
+  manufactur:  boolean;
+  modelload : boolean;
+  deviceTypeloading : boolean;
+  manufactureloading : boolean;
+  modelloading : boolean
 
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
@@ -154,6 +160,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
   getManufacturers(TechCompanyGuid: any) {
+    this.manufactur = true;
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getManufacturers(TechCompanyGuid);
@@ -162,6 +169,7 @@ export class DeviceSettingComponent implements OnInit {
     }
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
+        this.manufactur = false;
         this.manufactureIsActiveList = [];
         this.manufacturerList = resp;
 
@@ -173,6 +181,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
   getDeviceTypes(TechCompanyGuid: any) {
+    this.devicetype = true;
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getDeviceTypes(TechCompanyGuid);
@@ -182,6 +191,7 @@ export class DeviceSettingComponent implements OnInit {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
+        this.devicetype = false;
         this.deviceTypeList = [];
         this.hardwareTypes = resp;
 
@@ -194,6 +204,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
   getModels(TechCompanyGuid: any) {
+    this.modelload = true;
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getModels(TechCompanyGuid);
@@ -203,6 +214,7 @@ export class DeviceSettingComponent implements OnInit {
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
+        this.modelload = false;
        this.selectManufactureList = [];
         this.modelList = resp;
 
@@ -428,6 +440,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
   counterPopup(templatecounter, deviceType) {
+    this.deviceTypeloading = true;
     this.deviceTypeId = deviceType.ID;
     this.deviceName = deviceType.Name;
     this.getAssetbyTechCompanyAndHardwareType(this.techCompany.id, this.deviceTypeId)
@@ -461,6 +474,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
   counterPopupManufactuer(templatecounterManufactuer, manufacture) {
+    this.manufactureloading = true;
     this.manufacturerId = manufacture.ID;
     this.manufactureName = manufacture.Name;
     this.getAssetbyTechCompanyAndManufacture(this.techCompany.id, this.manufacturerId)
@@ -480,6 +494,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
   counterPopupModel(templatecounterModel, model) {
+    this.modelloading= true;
     this.modelId = model.ID;
     this.modelName = model.Name;
     this.getAssetbyTechCompanyAndModel(this.techCompany.id, this.modelId)
@@ -501,21 +516,24 @@ export class DeviceSettingComponent implements OnInit {
   getAssetbyTechCompanyAndHardwareType(TechCompanyGuid, DeviceTypeId){
     this.agentService.getHardwareTypeAssetByTechCompanyGuidAndHardwareType(TechCompanyGuid, DeviceTypeId)
       .subscribe((resp) => {
-        this.getAssetbyHardwaretypeList = resp;
+        this.deviceTypeloading = false;
+        this.AssetbyHardwaretypeList = resp;
       });
   }
 
   getAssetbyTechCompanyAndManufacture(TechCompanyGuid, ManufactureId){
     this.agentService.getManufacturerAssetByTechCompanyGuidAndManufacturer(TechCompanyGuid, ManufactureId)
     .subscribe((resp)=>{
-    this.getAssetbyManufactureList= resp;
+    this.manufactureloading = false;
+    this.AssetbyManufactureList= resp;
     })
   }
 
   getAssetbyTechCompanyAndModel(TechCompanyGuid, modelId){
     this.agentService.getModelAssetByTechCompanyGuidAndModel(TechCompanyGuid, modelId)
     .subscribe((resp)=>{
-     this.getAssetbyModelList = resp;
+     this.modelloading = false;
+     this.AssetbyModelList = resp;
     })
   }
 }
