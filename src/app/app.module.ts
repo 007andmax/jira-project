@@ -514,6 +514,8 @@ import { PermissionSupportService } from './components/support/permission-suppor
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
+import { PermissionTechUserService } from './services/users/permission-tech-user.service';
+import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
 
 
 declare var $: any;
@@ -1053,7 +1055,9 @@ declare var $: any;
     PermissionUsersService,
     PermissionPasswordManagerService,
     PermissionSupportService,
-    PermissionReportsService
+    PermissionReportsService,
+    PermissionTechUserService,
+    PermissionSuperAdminService
   ],
   bootstrap: [AppComponent]
 })

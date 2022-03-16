@@ -82,322 +82,352 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
+import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
+import { PermissionTechUserService } from './services/users/permission-tech-user.service';
 
 const routes: Routes = [
 
   {
     path: ':company/tickets',
     component: TicketsComponent,
-    pathMatch: 'full'
+    canActivate: [PermissionTechUserService]
   },
   {
-    path: ':company/supportpage',
+    path: ':company/support-page',
     component: SupportPageComponent,
-    pathMatch: 'full'
+    canActivate: [PermissionSuperAdminService]
   },
 
   {
     path: ':company/password-manager',
     component: PasswordManagerComponent,
-    canActivate: [PermissionPasswordManagerService]
+    canActivate: [PermissionPasswordManagerService, PermissionTechUserService]
   },
   {
     path: ':company/company/:id/password-manager',
     component: CompanyPasswordManagerComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
     path: ':company/company/:id/user',
     component: CompanyUserComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService, PermissionUsersService]
+    canActivate: [PermissionCompanyService, PermissionUsersService, PermissionTechUserService]
   },
   {
     path: ':company/company/:id/tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
     path: ':company/company/:id/dashboard',
     component: CompanyDashboardComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
     path: ':company/quotes',
     component: QuotesComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/recurring-tickets',
     component: RecurringTicketsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/companies',
     component: CompaniesComponent,
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   }, {
     path: ':company/users',
     component: UsersComponent,
     pathMatch: 'full',
-    canActivate: [PermissionUsersService]
+    canActivate: [PermissionUsersService, PermissionTechUserService]
   },
   {
     path: ':company/reports',
     component: ReportsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/report/:id',
     component: ItemReportComponent,
-    canActivate: [PermissionReportsService]
+    canActivate: [PermissionReportsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/myprofile',
     component: MyProfileComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/tags',
     component: ManageTagsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionManageTagsService]
+    canActivate: [PermissionManageTagsService, PermissionTechUserService]
 
   },
   {
     path: ':company/setting/products-settings',
     component: ProductsSettingsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionProductsSettingsService]
+    canActivate: [PermissionProductsSettingsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/companyprofile',
     component: CompanyProfileComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/techUsers',
     component: TechUsersComponent,
     pathMatch: 'full',
-    canActivate: [PermissionsTechUsersService]
+    canActivate: [PermissionsTechUsersService, PermissionTechUserService]
   },
   {
     path: ':company/setting/emailSetting',
     component: EmailSettingComponent,
     pathMatch: 'full',
-    canActivate: [PermissionEmailSettingService]
+    canActivate: [PermissionEmailSettingService, PermissionTechUserService]
   },
   {
     path: ':company/setting/taxes',
     component: TaxesSettingsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionTaxesSettingsService]
+    canActivate: [PermissionTaxesSettingsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/ticket-settings',
     component: TicketSettingsPageComponent,
     pathMatch: 'full',
-    canActivate: [PermissionTicketSettingsService]
+    canActivate: [PermissionTicketSettingsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/permission',
     component: PermissionManageComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/emailTemplete',
     component: EmailTempleteComponent,
     pathMatch: 'full',
-    canActivate: [PermissionEmailTempleteService]
+    canActivate: [PermissionEmailTempleteService, PermissionTechUserService]
   },
   {
     path: ':company/setting/integration',
     component: IntegrationsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/marketing-email',
     component: MarketingEmailComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/accounting',
     component: AccountingSettingsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionAccountingSettingsService]
+    canActivate: [PermissionAccountingSettingsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/crm-settings',
     component: CrmSettingsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCrmSettingsService]
+    canActivate: [PermissionCrmSettingsService, PermissionTechUserService]
   },
   {
     path: ':company/setting/commission',
     component: CommissionComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/subscription',
     component: SubscriptionComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/inventory/products',
     component: InventoryComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/documents/add',
     component: DocumentsAddComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/documents/edit/:id',
     component: DocumentsEditComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/documents/category/:id',
     component: DocumentsCategoryComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/company/:id/documents',
     component: CompanyDocumentsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
     path: ':company/documents/preview/:id',
     component: DocumentPreviewComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/company/:id/products',
     component: CompanyProductsComponent,
     pathMatch: 'full',
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
 
   {
     path: ':company/billable',
     component: BillableComponent,
-    canActivate: [PermissionBillableService]
+    canActivate: [PermissionBillableService, PermissionTechUserService]
   },
   {
     path: ':company/default-services',
     component: DefaultServicesComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/invoices',
     component: InvoicesComponent,
-    canActivate: [PermissionInvoicesService]
+    canActivate: [PermissionInvoicesService, PermissionTechUserService]
   },
   {
     path: ':company/billable-tickets',
     component: BillableTicketsComponent,
-    canActivate: [PermissionBillableService]
+    canActivate: [PermissionBillableService, PermissionTechUserService]
   },
   {
     path: ':company/contracts',
     component: ContractsComponent,
-    canActivate: [PermissionContractsService]
+    canActivate: [PermissionContractsService, PermissionTechUserService]
   },
   {
     path: ':company/payments',
     component: PaymentsComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/dashboard/:type/:id',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/hardware/:type/:id',
-    component: HardwareComponent
+    component: HardwareComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/software/:type/:id',
-    component: SoftwareComponent
+    component: SoftwareComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/service',
-    component: ServicesComponent
+    component: ServicesComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/antivirus',
-    component: AntivirusComponent
+    component: AntivirusComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/terminal/:type/:id',
-    component: TerminalComponent
+    component: TerminalComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/password',
-    component: PasswordComponent
+    component: PasswordComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/window',
-    component: WindowsComponent
+    component: WindowsComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/startup',
-    component: StartupComponent
+    component: StartupComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/device/file',
-    component: FileComponent
+    component: FileComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/billing-dashboard',
     component: DashboardBillingComponent,
-    canActivate: [PermissionDasnboardBillingService]
+    canActivate: [PermissionDasnboardBillingService, PermissionTechUserService]
 
   },
   {
     path: ':company/company/:id/contracts',
     component: CompanyContractsComponent,
-    canActivate: [PermissionContractsService]
+    canActivate: [PermissionContractsService, PermissionTechUserService]
 
   },
   {
     path: ':company/tickets-dashboard',
-    component: TicketsDashboardComponent
+    component: TicketsDashboardComponent,
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/company/:id/network-scan',
     component: CompanyNetworkScanComponent,
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
     path: ':company/company/:id/devices',
     component: CompanyDevicesComponent,
-    canActivate: [PermissionCompanyService]
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
 
   },
   {
     path: ':company/quickSupport',
     component: SupportComponent,
-    canActivate: [PermissionSupportService]
+    canActivate: [PermissionSupportService, PermissionTechUserService]
   },
   {
     path: ':company/documents/templates',
     component: DocumentsTemplatesComponent,
-
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/documents',
     component: DocumentsComponent,
-
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/marketing',
     component: MarketingComponent,
     pathMatch: 'full',
-    canActivate: [PermissionUsersService]
+    canActivate: [PermissionUsersService, PermissionTechUserService]
   },
 
 ];

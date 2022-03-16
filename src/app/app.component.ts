@@ -189,7 +189,7 @@ export class AppComponent implements OnInit {
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
 
       if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN") this.router.navigate(
-        [`${data.name.replaceAll(' ', '')}/supportpage/`]);
+        [`${data.name.replaceAll(' ', '')}/support-page/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {
       if (data) document.querySelector("html").classList.add("--scrollLock");
