@@ -116,6 +116,7 @@ export class AppComponent implements OnInit {
         this.documentsStateService.onInit();
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
+        this.websocketService.initializeWebSocketConnection();
       } else {
         this.companiesState.onInitGetCurrentCompany();
         this.appService.onInit();
@@ -126,7 +127,7 @@ export class AppComponent implements OnInit {
 
     //  this.userService.getCurrentUser();
 
-    this.websocketService.initializeWebSocketConnection();
+
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);
 
@@ -184,8 +185,11 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      if (this.router.url === "/") this.router.navigate(
+      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
+
+      if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN") this.router.navigate(
+        [`${data.name.replaceAll(' ', '')}/supportpage/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {
       if (data) document.querySelector("html").classList.add("--scrollLock");

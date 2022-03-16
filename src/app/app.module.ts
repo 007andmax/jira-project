@@ -512,6 +512,8 @@ import { PermissionUsersService } from './components/users/permission-users.serv
 import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
+import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
+import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 
 
 declare var $: any;
@@ -965,7 +967,9 @@ declare var $: any;
     UsersAsideDetailMessagesFullBodyComponent,
     MarketingComponent,
     UsersTableMarketingComponent,
-    LeftPanelMarketingComponent
+    LeftPanelMarketingComponent,
+    LeftPanelSuperAdminComponent,
+    SupportPageComponent
   ],
   imports: [
     BrowserModule,

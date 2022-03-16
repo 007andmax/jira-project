@@ -81,12 +81,18 @@ import { PermissionUsersService } from './components/users/permission-users.serv
 import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
+import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 
 const routes: Routes = [
 
   {
     path: ':company/tickets',
     component: TicketsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: ':company/supportpage',
+    component: SupportPageComponent,
     pathMatch: 'full'
   },
 

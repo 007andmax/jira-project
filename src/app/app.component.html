@@ -15,6 +15,32 @@
         [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
         [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
     ></app-left-panel>
+    <left-panel-super-admin
+        *ngIf="currentUser && currentUser.role === 'SUPER_ADMIN'"
+        class="app-left-panel"
+        [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
+        [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
+    ></left-panel-super-admin>
+    <div
+        class="main-container"
+        *ngIf=" currentUser && currentUser.role === 'SUPER_ADMIN'"
+    >
+        <div class="row">
+            <div
+                class="content-container"
+                [ngClass]="{'--large': toggleLeftPanel,
+            'xx-small' : hideleLeftPanel}"
+            >
+                <div class="content-wrapper">
+                    <div
+                        class="loading"
+                        style="display: none;"
+                    ></div>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
     <div
         class="main-container"
         *ngIf=" currentUser && currentUser.role !== 'SUPER_ADMIN'"
