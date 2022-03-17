@@ -151,41 +151,41 @@
                       class="qt-report-col-2"
                       *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
                     >
-                      <strong>Device Name</strong>
+                      <div class="qt-fw-600">Device Name</div>
                       <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                       class="qt-report-col-3"
                       *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
                     >
-                      <strong>Software Name</strong>
+                      <div class="qt-fw-600">Software Name</div>
                       <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                       class="qt-report-col-2"
                       *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
                     >
-                      <strong>Installation Key</strong>
+                      <div class="qt-fw-600">Installation Key</div>
                       <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                       class="qt-report-col-2"
                       *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
                     >
-                      <strong>Publisher</strong>
+                      <div class="qt-fw-600">Publisher</div>
                       <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div
                       class="qt-report-col-1"
                       *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
                     >
-                      <strong>Version</strong>
+                      <div class="qt-fw-600">Version</div>
                     </div>
                     <div
                       class="qt-report-col-2"
                       *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
                     >
-                      <strong>Install Date</strong>
+                      <div class="qt-fw-600">Install Date</div>
                     </div>
                   </div>
                 </div>
@@ -207,37 +207,50 @@
                             class="qt-report-col-2"
                             *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
                           >
-                            {{softItem.device}}
+                            <div class="qt-table-modern__cell">
+                              {{softItem.device}}
+                            </div>
+
                           </div>
                           <div
                             class="qt-report-col-3"
                             *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
                           >
-                            {{softItem.softwareTitle}}
+                            <div class="qt-table-modern__cell">
+                              {{softItem.softwareTitle}}
+                            </div>
                           </div>
                           <div
                             class="qt-report-col-2"
                             *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
                           >
-                            {{softItem.installationKey}}
+                            <div class="qt-table-modern__cell">
+                              {{softItem.installationKey}}
+                            </div>
                           </div>
                           <div
                             class="qt-report-col-2"
                             *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
                           >
-                            {{softItem.publisher}}
+                            <div class="qt-table-modern__cell">
+                              {{softItem.publisher}}
+                            </div>
                           </div>
                           <div
                             class="qt-report-col-1"
                             *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
                           >
-                            {{softItem.version}}
+                            <div class="qt-table-modern__cell">
+                              {{softItem.version}}
+                            </div>
                           </div>
                           <div
                             class="qt-report-col-2"
                             *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
                           >
-                            {{softItem.installDate | date:'yyyy-MM-dd'}}
+                            <div class="qt-table-modern__cell">
+                              {{softItem.installDate | date:'yyyy-MM-dd'}}
+                            </div>
                           </div>
                           </div>
                       </ng-template>
