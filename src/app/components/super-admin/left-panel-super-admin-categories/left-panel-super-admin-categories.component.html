@@ -1,0 +1,19 @@
+<button
+    class="qt-button qt-mr-12"
+    (click)="add()"
+>
+    Add Category
+</button>
+<div>
+    <ng-template
+        ngFor
+        let-category
+        [ngForOf]="categories"
+        [ngForTrackBy]="trackById"
+    >
+        <div class="category-item">
+            <div class="icon__category-closed qt-mr-10"></div>
+            <span [textContent]="category.name"></span>
+        </div>
+    </ng-template>
+</div>

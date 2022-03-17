@@ -1,3 +1,21 @@
-<p>
-  left-panel-super-admin works!
-</p>
+<div class="app-left-panel__header">
+    <div class="app-left-panel__systems-info">
+        <div class="d-f ai-c">
+            <div
+                class="qt-table-modern__circle-avatar"
+                [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
+                [textContent]="getNameForAvatar()"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(usersStateService.getCurrentUser(),'#7C77CB') }"
+            ></div>
+        </div>
+    </div>
+</div>
+<div class="app-left-panel__body">
+    <div class="app-left-panel__menu ">
+        <div class="app-left-panel__menu-icon --active">
+            <div class="icon__support-page qt-sz-20"></div>
+        </div>
+        <!-- <div class="app-left-panel__menu-title">Tickets</div>
+        <div class="app-left-panel__menu-arrow"></div> -->
+    </div>
+</div>

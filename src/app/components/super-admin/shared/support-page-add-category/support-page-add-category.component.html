@@ -1,0 +1,42 @@
+<div class="confirm-modal">
+    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-20">
+        <div class="confirm-modal__title qt-d-none qt-d-md-block">Add Sub Category</div>
+        <div
+            class="close-modal"
+            (click)="closeModal()"
+            tabindex="1"
+        ></div>
+    </div>
+    <div class="modal-body">
+        <div class="qt-input-block qt-w100 qt-mb-16">
+            <label>Category Name</label>
+            <input
+                type="text"
+                [(ngModel)]="name"
+                (input)="onChangeName()"
+                placeholder="Category Name"
+                min="1"
+                max="100"
+            >
+            <mat-error *ngIf="!validate.getName()">Please enter a valid category name</mat-error>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div
+            class="btn btn-lg btn-primary"
+            data-dismiss='modal'
+            (click)="closeModal()"
+        >
+            Cancel
+        </div>
+        <div
+            class="btn btn-lg btn-primary"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="addCategory()"
+        >
+            <span *ngIf="!addBtn.isBlock()">Save</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+        </div>
+    </div>
+</div>
