@@ -24,6 +24,6 @@ export class SupportPageCategoriesService {
     return this.http.post(this.apiUrl + 'support', data);
   }
   public getCategories() {
-    return this.http.get(this.apiUrl + 'support/getAll');
+    return this.http.get(this.apiUrl + 'support/categories');
   }
 }

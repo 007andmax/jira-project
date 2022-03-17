@@ -11,4 +11,18 @@
         font-size: 14px;
         color: #212b36;
     }
+    .category-actions {
+        margin: 0px 0px 0px auto;
+    }
+}
+
+.app-drop-down__dropdown {
+    padding: 8px;
+    border-radius: 6px;
+    width: 200px;
+    .add-sub-category-item {
+        display: flex;
+        align-items: center;
+        margin: 0px 0px 4px 0px;
+    }
 }

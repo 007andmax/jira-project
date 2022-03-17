@@ -210,6 +210,31 @@
     -webkit-mask-image: url("/assets/img/icons/category-closed.svg");
     mask-image: url("/assets/img/icons/category-closed.svg");
   }
+  &__add-sub-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+    mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+  }
+  &__add-article {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
+    mask-image: url("/assets/img/icons/support-page-add-article.svg");
+  }
+  &__edit-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
+    mask-image: url("/assets/img/icons/support-page-edit-category.svg");
+  }
+  &__remove-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
+    mask-image: url("/assets/img/icons/support-page-remove-category.svg");
+  }
+  &__category-more {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/category-more.svg");
+    mask-image: url("/assets/img/icons/category-more.svg");
+  }
   &__remove-blue {
     background-color: #16a4fa;
     -webkit-mask-image: url("/assets/img/icons/remove.svg");
