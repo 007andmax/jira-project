@@ -1,7 +1,6 @@
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
-import { ChangeDetectorRef, Component, NgZone, OnInit, Pipe, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';

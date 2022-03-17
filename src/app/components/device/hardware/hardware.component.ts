@@ -79,6 +79,12 @@ export class HardwareComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.setPreviewDataDevice();
+      }, 300);
+      return;
+    }
       this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
         if (resp.length > 0) {
           this.HardwareList(resp[0].ID);

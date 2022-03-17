@@ -208,7 +208,10 @@ export class DevicesComponent implements OnInit {
         }
         asset.online = true;
       }
+      if (this.cd) {
         this.cd.detectChanges();
+      }
+
       }
     });
   }

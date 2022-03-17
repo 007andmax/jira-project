@@ -11,13 +11,13 @@
                   <div class="download-print" *ngIf="startup > 0">
                       <form method="GET">
                           <input
-                              type="search"
-                              class="form-input"
-                              [(ngModel)]="search"
-                              name="search"
-                              placeholder="Search Software…"
-                              autocomplete="off"
-                          >
+                          type="search"
+                          class="form-input"
+                          [(ngModel)]="searchname"
+                          name="Name"
+                          placeholder="Search Software…"
+                          autocomplete="off"
+                      >
                       </form>
                       <a
                           (click)="printPdf();"
@@ -68,7 +68,7 @@
                               </tr>
                           </thead>
                           <tbody class="startup-table">
-                              <tr *ngFor="let item of startupList | serv: search; let i = index;">
+                              <tr *ngFor="let item of startupList | startup: searchname; let i = index;">
 
                                   <td class="s-name">
                                       <h5>{{item.Name || 'N/A'}}</h5>
@@ -78,7 +78,7 @@
 
                               </tr>
                           </tbody>
-                      </table>
+                        </table>
                   </div>
               </div>
             </div>

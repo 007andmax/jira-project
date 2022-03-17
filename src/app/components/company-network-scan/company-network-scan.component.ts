@@ -96,12 +96,11 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       }, 300);
       return;
     }
-    
+
     this.AssetDetail();
   }
 
   AssetDetail() {
-    debugger;
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       if (resp.length > 0) {
         this.isGetDevices = true
@@ -201,7 +200,10 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.networkScanDevices.devices.forEach(item => {
       if (!item.selected) this.selectAllDevices = false;
     })
-    this.cd.detectChanges();
+
+    if(this.cd){
+      this.cd.detectChanges();
+    }
   }
   checkSelected() {
     return (!this.networkvalue) ? false : this.networkvalue.find(item => item.selected);

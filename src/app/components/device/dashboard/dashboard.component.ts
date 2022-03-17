@@ -109,7 +109,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isNonAgentDevice = true;
-    this.loading = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
 
@@ -218,6 +217,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getAssetDetail() {
+    this.loading = true;
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getAssetDetail();
@@ -226,6 +226,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
+        this.loading = false;
         this.asset = resp[0];
         localStorage.setItem(
           "deviceDetail_" + this._id,

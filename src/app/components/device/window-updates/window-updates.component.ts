@@ -112,6 +112,12 @@ export class WindowUpdatesComponent implements OnInit {
   }
 
   getAssetId() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getAssetId();
+      }, 300);
+      return;
+    }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.asset = resp[0];

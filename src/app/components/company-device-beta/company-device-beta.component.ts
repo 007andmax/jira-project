@@ -149,6 +149,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   AssetDetail() {
     this.operatingSystem = [];
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.AssetDetail();
+      }, 300);
+      return;
+    }
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.assetList = resp;
       this.asset = resp[0];
@@ -185,7 +191,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
         }
         asset.online = true;
       }
+      if(this.cd){
         this.cd.detectChanges();
+      }
       }
     });
   }
@@ -740,7 +748,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getDeviceName(ID) {
-    this.deviceTypId = ID;
+      this.deviceTypId = ID;
   }
 
   getDateWarranty(date: any) {

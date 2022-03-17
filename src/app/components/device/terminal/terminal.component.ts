@@ -127,6 +127,12 @@ export class TerminalComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.setPreviewDataDevice();
+      }, 300);
+      return;
+    }
       this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
         this.asset = resp[0];
         this.GetCurrentConfig(resp[0].ID);

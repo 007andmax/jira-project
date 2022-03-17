@@ -17,7 +17,7 @@ import * as internal from 'assert';
 })
 export class StartupComponent implements OnInit {
 
-  public search:string;
+  searchname = "";
   public startupList: any[] = [];
   public loading: boolean;
   public Id: string;
@@ -46,6 +46,12 @@ export class StartupComponent implements OnInit {
   }
 
   public GetStartupPrograms() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.GetStartupPrograms();
+      }, 300);
+      return;
+    }
       this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
         this.asset = resp[0];
         this.assetId = this.asset.ID;
@@ -59,7 +65,7 @@ export class StartupComponent implements OnInit {
     if (item) {
       this.startupList = JSON.parse(item.Value);
     }
-    this.cd.detectChanges();
+    if (!this.cd['destroyed']) this.cd.detectChanges();
     this.loading = false;
     this.getPdfData();
   }
@@ -269,5 +275,4 @@ export class StartupComponent implements OnInit {
   printPdf() {
     window.open(this.pdfUrl, "_blank");
   }
-
 }

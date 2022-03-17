@@ -43,6 +43,12 @@ export class ServicesComponent implements OnInit {
   }
 
   public getAllServicesList() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getAllServicesList();
+      }, 300);
+      return;
+    }
       this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
         this.asset = resp[0];
         this.assetId = this.asset.ID;
@@ -79,7 +85,7 @@ export class ServicesComponent implements OnInit {
     let downloadCsvList = [];
     this.serviceList.forEach((element) => {
       downloadCsvList.push([
-        (element.Name ? element.Name.replace(",", " ") : "N/A"),
+        (element.DisplayName ? element.DisplayName.replace(",", " ") : "N/A"),
         (element.Description ? element.Description.replaceAll(",", " ") :""),
         (element.Started=='True' ? "Running" : "Stopped"),
       ]);
@@ -92,7 +98,7 @@ export class ServicesComponent implements OnInit {
     let pdfList = [];
     this.serviceList.forEach((element) => {
       pdfList.push([
-        element.Name.replace(",", " ") || "N/A",
+        element.DisplayName.replace(",", " ") || "N/A",
         element.Description? element.Description.replace(",", " ") : "N/A",
         element.Started=='True' ? "Running" : "Stopped"
       ]);

@@ -68,6 +68,12 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.setPreviewDataDevice();
+      }, 300);
+      return;
+    }
       this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
         if (resp.length > 0) {
           this.asset = resp[0];

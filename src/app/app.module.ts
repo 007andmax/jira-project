@@ -467,6 +467,7 @@ import { DevicesReportComponent } from './components/devices/devices-report/devi
 import { WindowUpdatesComponent } from './components/device/window-updates/window-updates.component';
 import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 import { ModelPipe } from './pipe/model.pipe';
+import { StartUpProgramPipe } from './pipe/startup-program.pipe';
 
 declare var $: any;
 /**
@@ -890,7 +891,8 @@ declare var $: any;
     DevicesReportComponent,
     WindowUpdatesComponent,
     DeviceSettingComponent,
-    ModelPipe
+    ModelPipe,
+    StartUpProgramPipe
   ],
   imports: [
     BrowserModule,
