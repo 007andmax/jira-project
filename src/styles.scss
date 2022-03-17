@@ -5042,24 +5042,30 @@ software-summary-report {
     border-top: 1px solid $gray-300;
     background-color: $gray-100;
   }
-  .software-summary-report {
-    &__device-name {
-      flex: 1 0 166px;
-    }
-    &__software-name {
-      flex: 1 0 200px;
-    }
-    &__installation-key {
-      flex: 1 0 100px;
-    }
-    &__installation-publisher {
-      flex: 1 0 130px;
-    }
-    &__installation-version {
-      flex: 0 0 130px;
-    }
-    &__install-date {
-      flex: 0 0 110px;
-    }
+  .qt-report-col-1,
+  .qt-report-col-2,
+  .qt-report-col-3,
+  .qt-report-col-4,
+  .qt-report-col-5,
+  .qt-report-col-6 {
+    flex: 0 0 auto;
+  }
+  .qt-report-col-1 {
+    width: 8.33333333%;
+  }
+  .qt-report-col-2 {
+    width: 16.6666666%;
+  }
+  .qt-report-col-3 {
+    width: 25%;
+  }
+  .qt-report-col-4 {
+    width: 33.33333333%;
+  }
+  .qt-report-col-6 {
+    width: 50%;
+  }
+  .qt-report-col-12 {
+    width: 100%;
   }
 }
