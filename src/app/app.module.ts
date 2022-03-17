@@ -518,6 +518,7 @@ import { PermissionTechUserService } from './services/users/permission-tech-user
 import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
 import { LeftPanelSuperAdminCategoriesComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories.component';
 import { SupportPageAddCategoryComponent } from './components/super-admin/shared/support-page-add-category/support-page-add-category.component';
+import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
 
 
 declare var $: any;
@@ -975,7 +976,8 @@ declare var $: any;
     LeftPanelSuperAdminComponent,
     SupportPageComponent,
     LeftPanelSuperAdminCategoriesComponent,
-    SupportPageAddCategoryComponent
+    SupportPageAddCategoryComponent,
+    SupportPageAddSubCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -1031,7 +1033,8 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
     AddUserToSubscribeComponent,
-    SupportPageAddCategoryComponent
+    SupportPageAddCategoryComponent,
+    SupportPageAddSubCategoryComponent
     // RecurringTicketsComponent
   ],
   exports: [

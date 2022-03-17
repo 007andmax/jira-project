@@ -21,4 +21,8 @@
 }
 .supper-admin-container {
     display: block !important;
+    padding-top: 0px !important;
+    .content-container {
+        margin-left: 56px;
+    }
 }

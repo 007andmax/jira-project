@@ -6,10 +6,31 @@
     display: flex;
     align-items: center;
     margin: 0px 0px 15px 0px;
+    .status-published {
+        &::after {
+            background-color: #2ec866;
+        }
+    }
+    .status-draft {
+        &::after {
+            background-color: #c5cdd5;
+        }
+    }
     span {
         font-family: "Inter", sans-serif;
         font-size: 14px;
         color: #212b36;
+        position: relative;
+        &::after {
+            content: " ";
+            position: absolute;
+            top: 7px;
+            right: 0px;
+            width: 10px;
+            height: 10px;
+            border-radius: 40px;
+            left: -15px;
+        }
     }
     .category-actions {
         margin: 0px 0px 0px auto;

@@ -21,7 +21,7 @@ export class SupportPageCategoriesService {
   ) { }
 
   public addCategory(data) {
-    return this.http.post(this.apiUrl + 'support', data);
+    return this.http.post(this.apiUrl + 'support/categories', data);
   }
   public getCategories() {
     return this.http.get(this.apiUrl + 'support/categories');
