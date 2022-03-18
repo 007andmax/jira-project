@@ -5068,4 +5068,8 @@ software-summary-report {
   .qt-report-col-12 {
     width: 100%;
   }
+  .qt-table-modern__cell {
+    display: flex;
+    align-items: center;
+  }
 }
