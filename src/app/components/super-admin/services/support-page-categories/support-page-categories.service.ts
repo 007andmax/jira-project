@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,11 +20,33 @@ export class SupportPageCategoriesService {
    */
   public constructor(
     private http: HttpClient,
-
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   public addCategory(data) {
-    return this.http.post(this.apiUrl + 'support/categories', data);
+    return this.http.post(this.apiUrl + 'support/categories', data).pipe(
+      tap(data => {
+        this.toastrService.success("Category created successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editCategory(category_id, data) {
+    return this.http.put(this.apiUrl + 'support/categories/' + category_id, data).pipe(
+      tap(data => {
+        this.toastrService.success("Category updated successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public removeCategory(category_id) {
+    return this.http.delete(this.apiUrl + 'support/categories/' + category_id).pipe(
+      tap(data => {
+        this.toastrService.success("Category deleted successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getCategories() {
     return this.http.get(this.apiUrl + 'support/categories');

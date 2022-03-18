@@ -519,6 +519,7 @@ import { PermissionSuperAdminService } from './services/users/permission-super-a
 import { LeftPanelSuperAdminCategoriesComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories.component';
 import { SupportPageAddCategoryComponent } from './components/super-admin/shared/support-page-add-category/support-page-add-category.component';
 import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
+import { SupportPageEditCategoryComponent } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.component';
 
 
 declare var $: any;
@@ -977,7 +978,8 @@ declare var $: any;
     SupportPageComponent,
     LeftPanelSuperAdminCategoriesComponent,
     SupportPageAddCategoryComponent,
-    SupportPageAddSubCategoryComponent
+    SupportPageAddSubCategoryComponent,
+    SupportPageEditCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -1034,7 +1036,8 @@ declare var $: any;
     ModalEditCategoryProductComponent,
     AddUserToSubscribeComponent,
     SupportPageAddCategoryComponent,
-    SupportPageAddSubCategoryComponent
+    SupportPageAddSubCategoryComponent,
+    SupportPageEditCategoryComponent
     // RecurringTicketsComponent
   ],
   exports: [
