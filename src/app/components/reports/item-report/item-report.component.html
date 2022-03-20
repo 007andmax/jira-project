@@ -1,4 +1,5 @@
-<div class="product-list-report ticket-report">
+<!--<div class="product-list-report ticket-report">-->
+<div class="qt-report__page ticket-report">
     <h6
         class="report-title"
         *ngIf="report === 'hardware-summary'"
@@ -17,12 +18,12 @@
     >
         Device IP Summary Report
     </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'software-summary'"
-    >
-        Software Summary Report
-    </h6>
+<!--    <h6-->
+<!--        class="report-title"-->
+<!--        *ngIf="report === 'software-summary'"-->
+<!--    >-->
+<!--        Software Summary Report-->
+<!--    </h6>-->
     <h6
         class="report-title"
         *ngIf="report === 'accounts-receivable'"
@@ -101,10 +102,10 @@
     >
         Tech Ticket Report
     </h6>
-    <i
-        class="back-page"
-        (click)="back()"
-    ></i>
+<!--    <i-->
+<!--        class="back-page"-->
+<!--        (click)="back()"-->
+<!--    ></i>-->
     <tech-ticket-report *ngIf="report === 'tech-ticket'"></tech-ticket-report>
     <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>

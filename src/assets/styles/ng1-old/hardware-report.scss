@@ -67,11 +67,11 @@
   padding-top: 20px;
   @extend %body-l-sb;
 }
-.product-list-report-btn {
-  width: 940px;
-  margin: 0 auto;
-  padding: 40px 0;
-}
+//.product-list-report-btn { // TODO delete after create new report page
+//  width: 940px;
+//  margin: 0 auto;
+//  padding: 40px 0;
+//}
 
 .product-list-report-btn-width {
   width: 1180px;
@@ -218,6 +218,47 @@
   width: 10.1%;
 }
 
+// New Style for report
+.qt-report__page {
+  background-color: $white;
+  min-height: 92vh;
+  .qt-page-list__header {
+    background-color: $white;
+    border-bottom: 1px solid $gray-300;
+    margin-bottom: 14px;
+  }
+  .product-list-ticket {
+    padding-bottom: 0;
+  }
+  .run-report-content .content,
+  .qt-report__filter .content {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+.qt-report__control-panel {
+  display: flex;
+  &-btn {
+    width: 36px;
+    height: 36px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-color: $gray-200;
+    border-radius: 4px;
+    &-close {
+      width: 64px;
+      height: 64px;
+      border-left: 1px solid #edf0f2;
+      border-right: 1px solid #edf0f2;
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}
+// End New Style for report
+
 .product-report-btn {
   display: inline-block;
   margin: 0 5px;
@@ -312,7 +353,8 @@
   flex-direction: column;
 }
 
-.run-report-content .new-reports-reverse {
+.run-report-content .new-reports-reverse,
+.qt-report__filter .new-reports-reverse {
   display: flex;
   justify-content: center;
   flex-direction: row-reverse;
@@ -334,7 +376,8 @@
   width: 100px;
 }
 
-.run-report-content .content {
+.run-report-content .content,
+.qt-report__filter .content {
   width: 400px;
   display: inline-block;
   margin-right: 10px;
