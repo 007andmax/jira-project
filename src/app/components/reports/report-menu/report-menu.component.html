@@ -492,131 +492,138 @@
 <!--    </div>-->
     <div *ngIf="report === 'software-summary'">
       <div class="qt-page-list__header">
+        <div class="qt-df qt-ai-fs">
+          <div class="qt-page-list__header-content">
+            <div class="qt-df qt-ai-c qt-jc-sb">
+             <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+               <div class="report-left-panel__btn pointer qt-mr-6">
+                 <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
+               </div>
 
-        <div class="qt-df qt-ai-c qt-jc-sb">
-         <div class="qt-df qt-ic-c qt-jc-sb">
-           <div class="report-left-panel__btn pointer qt-mr-6">
-             <div class="report-left-panel__line"></div>
-           </div>
-
-           <!-- Filter -->
-           <div
-             class="qt-report__filter"
-             [ngClass]="className"
-           >
-             <div class="new-reports-reverse">
-               <button
-                 class="btn-new btn-primary-white qt-fs-0"
-                 (click)="getReportBySoftwareSummary()"
+               <!-- Filter -->
+               <div
+                 class="qt-report__filter qt-f-1"
+                 [ngClass]="className"
                >
-                 Get Report
-               </button>
-               <div class="form-group content">
-                 <app-drop-down
-                   [sort]="true"
-                   [placeholder]="'Search software / publisher'"
-                   [dropdownHeight]="'300px'"
-                   [field]="'name'"
-                   [search]="true"
-                   [change]="true"
-                   [isDisabled]="!softwareSummaryReport.companyId"
-                   [preloader]="softwareSummaryReport.preloaderSoft"
-                   [list]="softwareSummaryReport.soft"
-                   (onSelectedItem)="onSelectSoftware($event)"
-                 ></app-drop-down>
+                 <div class="qt-df qt-ai-c qt-jc-fs">
+                   <div class="qt-report__dropdown qt-mr-8">
+                     <app-drop-down
+                       [placeholder]="'Select Company'"
+                       [list]="companies"
+                       [validate]="validate.getCompany()"
+                       [errorMessage]="'Please select the company name'"
+                       [field]="'name'"
+                       [heightInput]="'36px'"
+                       [search]="true"
+                       [change]="true"
+                       (onSelectedItem)="selectClient($event)"
+                     ></app-drop-down>
+                   </div>
+                   <div class="qt-report__dropdown qt-mr-8">
+                     <software-summary-devices-dro-down
+                       [sort]="true"
+                       [search]="true"
+                       [change]="true"
+                       [placeholder]="'All devices'"
+                       [preloader]="softwareSummaryReport.preloaderDevices"
+                       [isDisabled]="!softwareSummaryReport.companyId"
+                       [dropdownHeight]="'300px'"
+                       [heightInput]="'36px'"
+                       [list]="devices"
+                       (onSelectedItem)="onSelectDevice($event)"
+                     ></software-summary-devices-dro-down>
+                   </div>
+                   <div class="qt-report__dropdown qt-mr-8">
+                     <app-drop-down
+                       [sort]="true"
+                       [placeholder]="'Search software / publisher'"
+                       [dropdownHeight]="'300px'"
+                       [heightInput]="'36px'"
+                       [field]="'name'"
+                       [search]="true"
+                       [change]="true"
+                       [isDisabled]="!softwareSummaryReport.companyId"
+                       [preloader]="softwareSummaryReport.preloaderSoft"
+                       [list]="softwareSummaryReport.soft"
+                       (onSelectedItem)="onSelectSoftware($event)"
+                     ></app-drop-down>
+                   </div>
+                   <button
+                     class="btn-new btn-primary-white qt-fs-0"
+                     (click)="getReportBySoftwareSummary()"
+                   >
+                     Get Report
+                   </button>
+                 </div>
                </div>
-               <div class="form-group content custom-width dropdown-height">
-                 <software-summary-devices-dro-down
-                   [sort]="true"
-                   [search]="true"
-                   [change]="true"
-                   [placeholder]="'All devices'"
-                   [preloader]="softwareSummaryReport.preloaderDevices"
-                   [isDisabled]="!softwareSummaryReport.companyId"
-                   [dropdownHeight]="'300px'"
-                   [list]="devices"
-                   (onSelectedItem)="onSelectDevice($event)"
-                 ></software-summary-devices-dro-down>
-               </div>
-               <div class="grey-dropdown form-group content select-users-list">
-                 <app-drop-down
-                   [placeholder]="'Select Company'"
-                   [list]="companies"
-                   [validate]="validate.getCompany()"
-                   [errorMessage]="'Please select the company name'"
-                   [field]="'name'"
-                   [search]="true"
-                   [change]="true"
-                   (onSelectedItem)="selectClient($event)"
-                 ></app-drop-down>
-               </div>
+               <!-- End Filter -->
              </div>
-           </div>
-           <!-- End Filter -->
-         </div>
-          <app-report-additional-actions
-            [orientation]="'LANDSCAPE'"
-            [report]="'software-summary'"
-            [fileName]="'software-summary-report'"
-          ></app-report-additional-actions>
-          <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
-        </div>
+              <app-report-additional-actions
+                [orientation]="'LANDSCAPE'"
+                [report]="'software-summary'"
+                [fileName]="'software-summary-report'"
+              ></app-report-additional-actions>
+            </div>
 
-        <div class="qt-report__include-columns-panel">
-          <p>
-            Include the following columns in the report
-          </p>
-          <label class="control checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="softwareSummaryReport.softwareSummaryWithDevice"
-              [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId"
-            >
-            <span class="control-indicator"></span>
-            Device
-          </label>
-          <label class="control checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
-            >
-            <span class="control-indicator"></span>
-            Software Title
-          </label>
-          <label class="control checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstalationKey"
-              [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId"
-            >
-            <span class="control-indicator"></span>
-            Installation Key
-          </label>
-          <label class="control checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="softwareSummaryReport.softwareSummaryWithPublisher"
-            >
-            <span class="control-indicator"></span>
-            Publisher
-          </label>
-          <label class="control checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="softwareSummaryReport.softwareSummaryWithVersion"
-            >
-            <span class="control-indicator"></span>
-            Version
-          </label>
-          <label class="control checkbox">
-            <input
-              type="checkbox"
-              [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstallDate"
-            >
-            <span class="control-indicator"></span>
-            Install Date
-          </label>
-        </div>
+            <div class="qt-report__include-columns-panel qt-mt-16">
+              <p class="qt-mb-4">
+                Include the following columns in the report
+              </p>
+              <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="softwareSummaryReport.softwareSummaryWithDevice"
+                  [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId"
+                >
+                <span></span>
+                <div class="qt-ml-8">Device</div>
+              </label>
+              <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
+                >
+                <span></span>
+                <div class="qt-ml-8">Software Title</div>
+              </label>
+              <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstalationKey"
+                  [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId"
+                >
+                <span></span>
+                <div class="qt-ml-8">Installation Key</div>
+              </label>
+              <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="softwareSummaryReport.softwareSummaryWithPublisher"
+                >
+                <span></span>
+                <div class="qt-ml-8">Publisher</div>
+              </label>
+              <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="softwareSummaryReport.softwareSummaryWithVersion"
+                >
+                <span></span>
+                <div class="qt-ml-8">Version</div>
+              </label>
+              <label class="qt-checkbox qt-dif qt-ai-c pointer">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstallDate"
+                >
+                <span></span>
+                <div class="qt-ml-8">Install Date</div>
+              </label>
+            </div>
+          </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
+
       </div>
     </div>
     <div *ngIf="report === 'common-commissions'">

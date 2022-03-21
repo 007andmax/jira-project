@@ -166,24 +166,26 @@
   *ngIf="loadingInProgress"
 ></div>
 <div
-  class="product-list___ticket hardware-summary report-show-footer-header"
+  class="qt-report__product-list__ticket"
   id="product-list-ticket-data"
 >
   <div
-    class="product-list-ticket software-report"
-    style="width: 1180px;"
+    class="qt-report__product-list"
+    style="
+    /*width: 1180px;*/
+    "
     *ngIf="!loadingInProgress"
   >
     <div
       class="customer-ticket"
       *ngIf="onInit"
     >
-      <div class="customer-ticket__report">
-        <div class="report-header">
+      <div class="qt-report__customer-ticket">
+        <div class="qt-report__customer-ticket-header">
           <div class="company-info">
             <div class="body-m-sb qt-color-dark">Airdrie Choice Dental </div>
-            <h5 class="qt-fw-600 qt-color-dark">Software Summary Report</h5>
-            <div class="body-m qt-color-dark">
+            <h6 class="qt-fw-600 qt-color-dark">Software Summary Report</h6>
+            <div class="body-m qt-color-dark-light">
               As on
               {{softwareSummaryReport.date | date:'yyyy/MM/dd'}}
             </div>

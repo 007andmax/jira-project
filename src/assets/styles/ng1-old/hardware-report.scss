@@ -222,10 +222,18 @@
 .qt-report__page {
   background-color: $white;
   min-height: 92vh;
+  min-width: 1384px;
+  overflow: auto;
   .qt-page-list__header {
     background-color: $white;
-    border-bottom: 1px solid $gray-300;
     margin-bottom: 14px;
+    &-content {
+      border-left: 1px solid $gray-300;
+      border-bottom: 1px solid $gray-300;
+      border-right: 1px solid $gray-300;
+      padding: 14px 14px 14px 24px;
+      flex: 1;
+    }
   }
   .product-list-ticket {
     padding-bottom: 0;
@@ -234,6 +242,40 @@
   .qt-report__filter .content {
     margin-bottom: 0;
     padding-bottom: 0;
+  }
+  .qt-report__dropdown {
+    flex: 0 1 260px;
+  }
+  software-summary-devices-dro-down {
+    input {
+      border-radius: 4px;
+      border: solid 1px $gray-500;
+      background-color: $white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 25px 0 15px;
+      font-size: 13px;
+      color: $primary-2;
+      cursor: pointer;
+      &::placeholder {
+        color: $primary-2;
+      }
+    }
+  }
+  .btn-new.btn-primary-white {
+    height: 36px;
+  }
+  .qt-page-list__header {
+    max-width: 100%;
+    width: 100%;
+  }
+  .qt-page-list__body {
+    max-width: 100%;
+  }
+  @media (min-width: 1920px) {
+    .qt-page-list__header, .qt-page-list__body {
+      width: 100%; // TODO fix cascading
+    }
   }
 }
 .qt-report__control-panel {
@@ -249,13 +291,23 @@
     &-close {
       width: 64px;
       height: 64px;
-      border-left: 1px solid #edf0f2;
+      border-bottom: 1px solid #edf0f2;
       border-right: 1px solid #edf0f2;
       background-size: 20px;
       background-repeat: no-repeat;
       background-position: center;
     }
   }
+}
+.qt-report__product-list__ticket {
+  width: 1384px;
+  max-width: 1384px;
+  min-width: 1384px;
+  margin: 0 auto;
+}
+.qt-report__customer-ticket-header {
+  text-align: center;
+  margin: 14px 0;
 }
 // End New Style for report
 
