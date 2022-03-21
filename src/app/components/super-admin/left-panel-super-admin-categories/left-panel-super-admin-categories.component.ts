@@ -10,8 +10,7 @@ import { SupportPageAddSubCategoryComponent } from '../shared/support-page-add-s
 import { SupportPageEditCategoryComponent } from '../shared/support-page-edit-category/support-page-edit-category.component';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategory } from './class/support-page-category';
-var $ = require("jquery");
-import 'jquery-ui/ui/widgets/sortable.js';
+
 @Component({
   selector: 'left-panel-super-admin-categories',
   templateUrl: './left-panel-super-admin-categories.component.html',
