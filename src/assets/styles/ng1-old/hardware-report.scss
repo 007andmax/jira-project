@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .product-list-report {
   padding: 30px 30px 30px;
@@ -219,13 +220,45 @@
 }
 
 // New Style for report
+
+// Report Grid
+.qt-report-col-1,
+.qt-report-col-2,
+.qt-report-col-3,
+.qt-report-col-4,
+.qt-report-col-5,
+.qt-report-col-6 {
+  flex: 0 0 auto;
+}
+.qt-report-col-1 {
+  width: 8.33333333%;
+}
+.qt-report-col-2 {
+  width: 16.6666666%;
+}
+.qt-report-col-3 {
+  width: 25%;
+}
+.qt-report-col-4 {
+  width: 33.33333333%;
+}
+.qt-report-col-6 {
+  width: 50%;
+}
+.qt-report-col-12 {
+  width: 100%;
+}
+.qt-table-modern__cell {
+  display: flex;
+  align-items: center;
+}
+// End Report Grid
 .qt-report__page {
   background-color: $white;
   min-height: 92vh;
   min-width: 1384px;
   overflow: auto;
-  .qt-page-list__header {
-    background-color: $white;
+  .qt-report__header {
     margin-bottom: 14px;
     &-content {
       border-left: 1px solid $gray-300;
@@ -265,16 +298,59 @@
   .btn-new.btn-primary-white {
     height: 36px;
   }
-  .qt-page-list__header {
-    max-width: 100%;
-    width: 100%;
+  .qt-report__body {
+    width: 1384px;
+    max-width: 1384px;
+    min-width: 1384px;
+    margin: 0 auto;
+    &-row {
+      border-bottom: 1px solid #edf0f2;
+      padding: 0 16px;
+      display: flex;
+      position: relative;
+      min-height: 45px;
+      > div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      > div:first-child,
+      > div:last-child {
+        padding: 0 8px 0 8px;
+      }
+    }
   }
-  .qt-page-list__body {
-    max-width: 100%;
+  .qt-report__body-table-header,
+  .qt-report__body-table-body {
+    border-left: 1px solid $gray-300;
+    border-right: 1px solid $gray-300;
   }
-  @media (min-width: 1920px) {
-    .qt-page-list__header, .qt-page-list__body {
-      width: 100%; // TODO fix cascading
+  .qt-report__body-header {
+    text-align: center;
+    margin: 14px 0;
+  }
+  .qt-report__body-table-header-row {
+    display: flex;
+    color: $primary-2;
+    border-bottom: 1px solid $gray-300;
+    border-top: 1px solid $gray-300;
+    background-color: $gray-100;
+    padding: 0 16px;
+    > div {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      text-transform: uppercase;
+      @extend %сaption-m-sb;
+    }
+    > div:first-child,
+    > div:last-child {
+      padding: 0 8px 0 8px;
+    }
+  }
+  .qt-report__body-table-body {
+    .qt-table-modern__cell {
+      line-height: 20px;
     }
   }
 }
@@ -299,15 +375,17 @@
     }
   }
 }
-.qt-report__product-list__ticket {
-  width: 1384px;
-  max-width: 1384px;
-  min-width: 1384px;
-  margin: 0 auto;
-}
-.qt-report__customer-ticket-header {
-  text-align: center;
-  margin: 14px 0;
+.report-left-panel {
+  &__btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #c4cbd5;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
 }
 // End New Style for report
 
