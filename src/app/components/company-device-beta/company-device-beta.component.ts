@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild, } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -163,7 +164,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetDeviceListConfig(element.ID);
+          if(element.AgentVersion !=null){
+            this.GetDeviceListConfig(element.ID);
+          }
         this.getAssetTagDropDownDetail();
       });
     });
@@ -630,7 +633,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
       this.onFilter('CompanyName');
       this.showPreloader = false;
-
       this.operatingSystem = [];
       this.assetList = resp;
       this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
@@ -640,7 +642,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetDeviceListConfig(element.ID)
+          if(element.AgentVersion !=null){
+            this.GetDeviceListConfig(element.ID)
+          }
       });
 
       if (this.cd) {

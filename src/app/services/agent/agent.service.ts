@@ -755,7 +755,7 @@ export class AgentService {
 
   public getModelsByManufacturer(id: any) {
     return this.http
-      .get(`${this.apiAgent}/agent/Model/GetByManufacturerID?ManufacturerID=${id}`, {
+      .get(`${this.apiAgent}agent/Model/GetByManufacturerID?ManufacturerID=${id}`, {
         headers: this.getHeader(),
         responseType: "text",
       })

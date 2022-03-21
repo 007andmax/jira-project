@@ -28,6 +28,16 @@ export class DeviceFilter {
           devices.reverse();
         }
       }
+      else if(field == "ManufactureName"){
+        this.clearFilter();
+        if (sort === "" || sort === "DESC") {
+          this.filterTop[index].filter = "ASC";
+          this.onFilterManufactureName(devices);
+        } else {
+          this.filterTop[index].filter = "DESC";
+          devices.reverse();
+        }
+      }
     }
   }
   public onFilterName(devices) {
@@ -57,6 +67,21 @@ export class DeviceFilter {
         : 0
     );
   }
+
+  public onFilterManufactureName(devices) {
+    devices.sort((a, b) =>
+      this.getManufactureName(a).toLowerCase() > this.getManufactureName(b).toLowerCase()
+        ? 1
+        : this.getManufactureName(b).toLowerCase() >
+          this.getManufactureName(a).toLowerCase()
+        ? -1
+        : 0
+    );
+  }
+  private getManufactureName(manufacture) {
+    return manufacture.ManufactureName;
+  }
+
   private getCompanyNameDevice(devicebeta) {
     return devicebeta.CompanyName;
   }

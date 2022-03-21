@@ -116,15 +116,21 @@ export class DeviceSettingComponent implements OnInit {
     })
     this.settingStateService.setComponentName('DeviceSettingComponent');
     this.getCurrentCompany();
+    this.getDeviceTypes(this.techCompany.id);
   }
 
   onFilter(field) {
-    this.filter.onFilter(field, this.hardwareTypes);
+    this.filter.onFilter(field, this.deviceTypeList);
   }
 
   onFilterManufacturer(field){
-    this.filter.onFilter(field, this.manufacturerList)
+    this.filter.onFilter(field, this.manufactureIsActiveList)
   }
+
+  onFilterModel(field){
+    this.filter.onFilter(field, this.selectManufactureList)
+  }
+
 
   toggle(evt: any) {
     if (evt.nextId == "tab1") {
@@ -214,7 +220,8 @@ export class DeviceSettingComponent implements OnInit {
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
         this.modelload = false;
-       this.selectManufactureList = [];
+        this.selectManufactureList = resp;
+        this.selectManufactureList[0].manufacture = this.manufacturerList;
         this.modelList = resp;
 
         this.modelList.forEach(element =>{
@@ -229,7 +236,9 @@ export class DeviceSettingComponent implements OnInit {
   onSelectManufactureName(SelectManufacturer) {
     if (SelectManufacturer) {
       this.manufactureId = SelectManufacturer.ID;
-      this.selectManufactureList = this.modelList.filter(x => x.ManufacturerID == SelectManufacturer.ID && x.IsActive == true)
+      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
+        this.selectManufactureList = resp;
+      })
     }
     else{
       this.getModels(this.techCompany.id);
