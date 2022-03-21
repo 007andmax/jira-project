@@ -521,6 +521,7 @@ import { SupportPageAddCategoryComponent } from './components/super-admin/shared
 import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
 import { SupportPageEditCategoryComponent } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.component';
 import { DragMenuDirective } from './directives/drag-menu.directive';
+import { LeftPanelSuperAdminCategoriesActionsComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
 
 
 declare var $: any;
@@ -981,7 +982,8 @@ declare var $: any;
     SupportPageAddCategoryComponent,
     SupportPageAddSubCategoryComponent,
     SupportPageEditCategoryComponent,
-    DragMenuDirective
+    DragMenuDirective,
+    LeftPanelSuperAdminCategoriesActionsComponent
   ],
   imports: [
     BrowserModule,

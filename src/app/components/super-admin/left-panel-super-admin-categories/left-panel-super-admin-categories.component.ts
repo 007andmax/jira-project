@@ -65,7 +65,12 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     this.supportPageCategoriesStateService.setCategoryForRemove(category);
   }
 
+  onDropEnd(data) {
+    console.log("data", data);
+    this.supportPageCategoriesService.moveCategory(data.id, data.index).subscribe(data => {
 
+    })
+  }
 
 
   ngOnDestroy(): void {

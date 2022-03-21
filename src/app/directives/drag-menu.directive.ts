@@ -1,16 +1,16 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 
 @Directive({
   selector: '[appDragMenu]'
 })
 export class DragMenuDirective {
-
+  @Output() dropEnd = new EventEmitter<any>();
   constructor(private element: ElementRef) { }
   ngAfterViewInit() {
-
+    let that = this;
     console.log("this.element.nativeElement", this.element.nativeElement);
     let parent = this.element.nativeElement;
-    let items = this.element.nativeElement.querySelectorAll('.category-item-category');
+    let items = this.element.nativeElement.querySelectorAll('.category-item-category-body');
     console.log("items", items);
     items.forEach(item => {
       $(item).prop('draggable', true)
@@ -30,17 +30,15 @@ export class DragMenuDirective {
       console.log($(e.target).attr("index"));
       // get new and old index
       let oldIndex = Number(e.dataTransfer.getData('text/plain'));
-      let target = (e.target.classList.contains("category-item-category")) ? $(e.target) : $(e.target).parent(".category-item-category")
+      let target = (e.target.classList.contains("category-item-category-body")) ? $(e.target) : $(e.target).parents(".category-item-category-body")
       let newIndex = Number(target.index());
       console.log("target", target);
-      if ($(e.target).parents(".category-item").attr("index") != $(parent).parents(".category-item").attr("index")) console.log(1);
-      if ($(e.target).parents(".category-item").attr("index") != $(this).parents(".category-item").attr("index")) console.log(2);
       // remove dropped items at old place
       //  console.log($(this).parents(".category-item-sub-category").children());
       if (newIndex == oldIndex) return;
       let dropped = $(this).parents(".category-item-sub-category").children().eq(oldIndex).remove();
-      console.log("dropped", dropped);
-
+      //  console.log("dropped", dropped);
+      console.log("dropped", $(dropped).attr("id"));
       console.log("newIndex", newIndex);
       console.log("oldIndex", oldIndex);
       // insert the dropped items at new place
@@ -50,6 +48,10 @@ export class DragMenuDirective {
       } else {
         target.after(dropped)
       }
+      console.log("dropped", $(dropped).index());
+      that.dropEnd.emit({
+        id: $(dropped).attr("id"), index: $(dropped).index()
+      });
     }
 
     function cancelDefault(e) {

@@ -54,7 +54,9 @@
 .container-page > main {
     overflow: auto;
 }
-
+aside {
+    background-color: #f4f6f8;
+}
 .resize-handle--x {
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;

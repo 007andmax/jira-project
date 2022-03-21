@@ -13,7 +13,11 @@
         .icon__drag {
             opacity: 1;
         }
+        /deep/.icon__category-more {
+            opacity: 1;
+        }
     }
+
     .toggle-category {
         transform: rotate(90deg);
     }
@@ -43,20 +47,14 @@
             left: -15px;
         }
     }
-    .category-actions {
-        margin: 0px 0px 0px auto;
+}
+.category-item-category-body {
+    /deep/.icon__category-more {
+        opacity: 0;
     }
 }
-
-.app-drop-down__dropdown {
-    padding: 8px;
-    border-radius: 6px;
-    width: 200px;
-    .add-sub-category-item {
-        display: flex;
-        align-items: center;
-        margin: 0px 0px 4px 0px;
-    }
+left-panel-super-admin-categories-actions {
+    margin: 0px 0px 0px auto;
 }
 [draggable="true"] {
     user-select: none;
