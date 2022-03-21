@@ -2,10 +2,21 @@
     height: 11.67px;
     width: 8.37px;
 }
-.category-item {
+.category-item-category {
     display: flex;
     align-items: center;
     margin: 0px 0px 15px 0px;
+    .icon__drag {
+        opacity: 0;
+    }
+    &:hover {
+        .icon__drag {
+            opacity: 1;
+        }
+    }
+    .toggle-category {
+        transform: rotate(90deg);
+    }
     .status-published {
         &::after {
             background-color: #2ec866;
@@ -46,4 +57,10 @@
         align-items: center;
         margin: 0px 0px 4px 0px;
     }
+}
+[draggable="true"] {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }

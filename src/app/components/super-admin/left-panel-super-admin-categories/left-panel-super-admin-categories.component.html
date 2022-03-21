@@ -8,60 +8,130 @@
     <ng-template
         ngFor
         let-category
+        let-i="index"
         [ngForOf]="categories"
         [ngForTrackBy]="trackById"
     >
-        <div class="category-item">
-            <div class="icon__category-closed qt-mr-25"></div>
-            <span
-                [ngClass]="{'status-published':category.type === 'PUBLISHED',
-            'status-draft':category.type === 'DRAFT'}"
-                [textContent]="category.name"
-            ></span>
-            <div
-                class="category-actions"
-                ngbDropdown
-            >
+        <div
+            class="category-item"
+            [attr.index]="i"
+        >
+            <div class="category-item-category">
                 <div
-                    class="icon__category-more qt-sz-20 pointer"
-                    ngbDropdownToggle
+                    class="icon__category-closed qt-mr-25"
+                    [ngClass]="{'toggle-category':category.toggleSubCategory}"
+                    (click)="category.toggleSubCategory = !category.toggleSubCategory"
                 ></div>
+                <span
+                    [ngClass]="{'status-published':category.type === 'PUBLISHED',
+            'status-draft':category.type === 'DRAFT'}"
+                    [textContent]="category.name"
+                ></span>
                 <div
-                    ngbDropdownMenu
-                    class="app-drop-down__dropdown"
+                    class="category-actions"
+                    ngbDropdown
                 >
                     <div
-                        class="add-sub-category-item"
-                        (click)="addSubCategory(category.id)"
+                        class="icon__category-more qt-sz-20 pointer"
                         ngbDropdownToggle
-                    >
-                        <div class="icon__add-sub-category qt-sz-20 pointer qt-mr-10"></div>
-                        <span>Add Sub Category</span>
-                    </div>
+                    ></div>
                     <div
-                        class="add-sub-category-item"
-                        ngbDropdownToggle
+                        ngbDropdownMenu
+                        class="app-drop-down__dropdown"
                     >
-                        <div class="icon__add-article qt-sz-20 pointer qt-mr-10"></div>
-                        <span>Add Article</span>
-                    </div>
-                    <div
-                        class="add-sub-category-item"
-                        ngbDropdownToggle
-                        (click)="editCategory(category)"
-                    >
-                        <div class="icon__edit-category qt-sz-20 pointer qt-mr-10"></div>
-                        <span>Edit</span>
-                    </div>
-                    <div
-                        class="add-sub-category-item"
-                        ngbDropdownToggle
-                        (click)="delete(category)"
-                    >
-                        <div class="icon__remove-category qt-sz-20 pointer qt-mr-10"></div>
-                        <span>Delete</span>
+                        <div
+                            class="add-sub-category-item"
+                            (click)="addSubCategory(category.id)"
+                            ngbDropdownToggle
+                        >
+                            <div class="icon__add-sub-category qt-sz-20 pointer qt-mr-10"></div>
+                            <span>Add Sub Category</span>
+                        </div>
+                        <div
+                            class="add-sub-category-item"
+                            ngbDropdownToggle
+                        >
+                            <div class="icon__add-article qt-sz-20 pointer qt-mr-10"></div>
+                            <span>Add Article</span>
+                        </div>
+                        <div
+                            class="add-sub-category-item"
+                            ngbDropdownToggle
+                            (click)="editCategory(category)"
+                        >
+                            <div class="icon__edit-category qt-sz-20 pointer qt-mr-10"></div>
+                            <span>Edit</span>
+                        </div>
+                        <div
+                            class="add-sub-category-item"
+                            ngbDropdownToggle
+                            (click)="delete(category)"
+                        >
+                            <div class="icon__remove-category qt-sz-20 pointer qt-mr-10"></div>
+                            <span>Delete</span>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div
+                class="category-item-sub-category qt-ml-10"
+                *ngIf="category.toggleSubCategory"
+                appDragMenu
+            >
+                <ng-template
+                    ngFor
+                    let-subcategory
+                    [ngForOf]="category.subcategories"
+                >
+
+                    <div
+                        class="category-item-category"
+                        [attr.index]="i"
+                    >
+                        <div class="icon__drag qt-sz-20 qt-mr-25"></div>
+                        <div
+                            class="icon__category-closed qt-mr-25"
+                            [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                            (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                        ></div>
+                        <span [textContent]="subcategory.name"></span>
+                    </div>
+                    <div
+                        class="category-item-sub-category qt-ml-10"
+                        *ngIf="subcategory.toggleSubCategory"
+                    >
+                        <ng-template
+                            ngFor
+                            let-subsubcategory
+                            [ngForOf]="subcategory.subcategories"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <div class="category-item-category">
+                                <div
+                                    class="icon__category-closed qt-mr-25"
+                                    [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                    (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                ></div>
+                                <span [textContent]="subsubcategory.name"></span>
+                            </div>
+                            <div
+                                class="category-item-sub-category qt-ml-10"
+                                *ngIf="subsubcategory.toggleSubCategory"
+                            >
+                                <ng-template
+                                    ngFor
+                                    let-subsubsubcategory
+                                    [ngForOf]="subsubcategory.subcategories"
+                                    [ngForTrackBy]="trackById"
+                                >
+                                    <div class="category-item-category">
+                                        <span [textContent]="subsubsubcategory.name"></span>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </ng-template>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </ng-template>

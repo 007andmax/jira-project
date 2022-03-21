@@ -1,12 +1,29 @@
 <div class="app-left-panel__header">
     <div class="app-left-panel__systems-info">
-        <div class="d-f ai-c">
+        <div
+            class="d-f ai-c"
+            ngbDropdown
+        >
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
                 [textContent]="getNameForAvatar()"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(usersStateService.getCurrentUser(),'#7C77CB') }"
+                id="dropdownSupperUser"
+                ngbDropdownToggle
             ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownSupperUser"
+            >
+                <li
+                    ngbDropdownItem
+                    (click)="logOut()"
+                >
+                    Logout
+                </li>
+            </ul>
         </div>
     </div>
 </div>

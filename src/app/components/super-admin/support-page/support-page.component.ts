@@ -67,7 +67,7 @@ export class SupportPageComponent implements OnInit {
         const cursorScreenXDelta = event.screenX - resizeData.startCursorScreenX;
         const newWidth = Math.min(resizeData.startWidth + cursorScreenXDelta, resizeData.maxWidth);
 
-        $(resizeData.resizeTarget).outerWidth(newWidth);
+        if (newWidth >= 234) $(resizeData.resizeTarget).outerWidth(newWidth);
       }
     });
 

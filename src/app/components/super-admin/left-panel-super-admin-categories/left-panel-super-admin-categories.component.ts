@@ -10,7 +10,8 @@ import { SupportPageAddSubCategoryComponent } from '../shared/support-page-add-s
 import { SupportPageEditCategoryComponent } from '../shared/support-page-edit-category/support-page-edit-category.component';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategory } from './class/support-page-category';
-
+var $ = require("jquery");
+import 'jquery-ui/ui/widgets/sortable.js';
 @Component({
   selector: 'left-panel-super-admin-categories',
   templateUrl: './left-panel-super-admin-categories.component.html',
@@ -29,6 +30,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     this.supportPageCategoriesService.getCategories().subscribe((data: any) => {
       console.log("data", data);
       this.categories = data.map(item => new SupportPageCategory(item));
+      console.log("this.categories", this.categories);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -63,6 +65,10 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     modalRef.componentInstance.message = `Do you want to delete the category?`;
     this.supportPageCategoriesStateService.setCategoryForRemove(category);
   }
+
+
+
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

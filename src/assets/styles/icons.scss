@@ -225,6 +225,11 @@
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
   }
+  &__drag {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
+    mask-image: url("/assets/img/icons/support-page-drag.svg");
+  }
   &__remove-category {
     background-color: #637382;
     -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
