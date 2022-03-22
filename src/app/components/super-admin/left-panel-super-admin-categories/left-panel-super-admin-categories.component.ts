@@ -45,7 +45,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       if (data.action === "CREATE_SUPPORT_CATEGORY") this.categories.push(new SupportPageCategory(data.data));
       if (data.action === "EDIT_SUPPORT_CATEGORY") {
         let findIndex = this.categories.findIndex(item => item.id === data.data.id);
-        if (findIndex > -1) this.categories[findIndex] = new SupportPageCategory(data.data);
+        if (findIndex > -1) this.categories[findIndex].onUpdate(data.data);
       }
       if (data.action === "DELETE_SUPPORT_CATEGORY") {
         let findIndex = this.categories.findIndex(item => item.id === data.data);

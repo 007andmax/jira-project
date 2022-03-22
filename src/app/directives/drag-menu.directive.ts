@@ -1,15 +1,17 @@
-import { Directive, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
   selector: '[appDragMenu]'
 })
 export class DragMenuDirective {
   @Output() dropEnd = new EventEmitter<any>();
+  @Input() classDropped: string;
   constructor(private element: ElementRef) { }
   ngAfterViewInit() {
     let that = this;
     let parent = this.element.nativeElement;
     let items = this.element.nativeElement.querySelectorAll('.category-item-category-body');
+    console.log("items", items);
     items.forEach(item => {
       $(item).prop('draggable', true)
       item.addEventListener('dragstart', dragStart)
@@ -25,10 +27,15 @@ export class DragMenuDirective {
       cancelDefault(e)
       // get new and old index
       let oldIndex = Number(e.dataTransfer.getData('text/plain'));
-      let target = (e.target.classList.contains("category-item-category-body")) ? $(e.target) : $(e.target).parents(".category-item-category-body")
+      let target = (e.target.classList.contains("category-item-category-body")) ? $(e.target) : $(e.target).parents(".category-item-category-body").eq(0)
       let newIndex = Number(target.index());
+      console.log("target", target);
+      console.log("newIndex", newIndex);
+      console.log("oldIndex", oldIndex);
       if (newIndex == oldIndex) return;
-      let dropped = $(this).parents(".category-item-sub-category").children().eq(oldIndex).remove();
+      console.log($(this).parents(`.${that.classDropped}`));
+      let dropped = $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).remove();
+
       if (newIndex < oldIndex) {
         target.before(dropped)
       } else {

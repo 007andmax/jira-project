@@ -4,14 +4,25 @@
 >
     Add Category
 </button>
-<div>
+<div
+    class="container-categories qt-ml-10"
+    appDragMenu
+    (dropEnd)="onDropEnd($event)"
+    [classDropped]="'container-categories'"
+    *ngIf="categories.length > 0"
+>
     <ng-template
         ngFor
         let-category
         [ngForOf]="categories"
-        [ngForTrackBy]="trackById"
     >
-        <div class="category-item">
+        <div
+            class="category-item category-item-category-body"
+            [attr.id]="category.id"
+        >
+
+
+
             <div class="category-item-category">
                 <div
                     class="icon__category-closed qt-mr-25"
@@ -30,6 +41,7 @@
                 *ngIf="category.toggleSubCategory"
                 appDragMenu
                 (dropEnd)="onDropEnd($event)"
+                [classDropped]="'category-item-sub-category'"
             >
                 <ng-template
                     ngFor
@@ -53,6 +65,9 @@
                         <div
                             class="category-item-sub-sub-category"
                             *ngIf="subcategory.toggleSubCategory"
+                            appDragMenu
+                            (dropEnd)="onDropEnd($event)"
+                            [classDropped]="'category-item-sub-sub-category'"
                         >
                             <ng-template
                                 ngFor
@@ -60,30 +75,43 @@
                                 [ngForOf]="subcategory.subcategories"
                                 [ngForTrackBy]="trackById"
                             >
-                                <div class="category-item-category">
-                                    <div
-                                        class="icon__category-closed qt-mr-25"
-                                        [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
-                                        (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
-                                    ></div>
-                                    <span [textContent]="subsubcategory.name"></span>
-                                    <left-panel-super-admin-categories-actions [category]="subsubcategory"></left-panel-super-admin-categories-actions>
-                                </div>
                                 <div
-                                    class="category-item-sub-sub-sub-category"
-                                    *ngIf="subsubcategory.toggleSubCategory"
+                                    class="category-item-category-body"
+                                    [attr.id]="subcategory.id"
                                 >
-                                    <ng-template
-                                        ngFor
-                                        let-subsubsubcategory
-                                        [ngForOf]="subsubcategory.subcategories"
-                                        [ngForTrackBy]="trackById"
+                                    <div class="category-item-category">
+                                        <div
+                                            class="icon__category-closed qt-mr-25"
+                                            [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                            (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                        ></div>
+                                        <span [textContent]="subsubcategory.name"></span>
+                                        <left-panel-super-admin-categories-actions [category]="subsubcategory"></left-panel-super-admin-categories-actions>
+                                    </div>
+                                    <div
+                                        class="category-item-sub-sub-sub-category"
+                                        *ngIf="subsubcategory.toggleSubCategory"
+                                        appDragMenu
+                                        (dropEnd)="onDropEnd($event)"
+                                        [classDropped]="'category-item-sub-sub-sub-category'"
                                     >
-                                        <div class="category-item-category">
-                                            <span [textContent]="subsubsubcategory.name"></span>
-                                            <left-panel-super-admin-categories-actions [category]="subsubsubcategory"></left-panel-super-admin-categories-actions>
-                                        </div>
-                                    </ng-template>
+                                        <ng-template
+                                            ngFor
+                                            let-subsubsubcategory
+                                            [ngForOf]="subsubcategory.subcategories"
+                                            [ngForTrackBy]="trackById"
+                                        >
+                                            <div
+                                                class="category-item-category-body"
+                                                [attr.id]="subsubsubcategory.id"
+                                            >
+                                                <div class="category-item-category">
+                                                    <span [textContent]="subsubsubcategory.name"></span>
+                                                    <left-panel-super-admin-categories-actions [category]="subsubsubcategory"></left-panel-super-admin-categories-actions>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </div>
                                 </div>
                             </ng-template>
                         </div>
@@ -91,5 +119,26 @@
                 </ng-template>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
+
+
+
+
 </div>

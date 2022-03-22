@@ -16,4 +16,12 @@ export class SupportPageCategory {
         this.subcategories = data.subcategories.map(item => new SupportPageCategory(item));
         this.type = data.type;
     }
+    public onUpdate(data) {
+        this.id = data.id;
+        this.name = data.name;
+        this.order = data.order;
+        this.parentSupportCategoryId = data.parentSupportCategoryId;
+        this.subcategories = data.subcategories.map(item => new SupportPageCategory(item));
+        this.type = data.type;
+    }
 }
