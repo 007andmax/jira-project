@@ -51,12 +51,7 @@ export class SupportPageCategoriesService {
   public moveCategory(category_id, index) {
     return this.http.put(this.apiUrl + 'support/categories/' + category_id, {
       order: index
-    }).pipe(
-      tap(data => {
-        this.toastrService.success("Category deleted successfully");
-        this.appStateService.changeDetectorRef();
-        return data;
-      }));
+    })
   }
   public getCategories() {
     return this.http.get(this.apiUrl + 'support/categories');

@@ -42,7 +42,34 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     })
     this.sub.add(getConfirm);
     let changeCategoryArray = this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
-      if (data.action === "CREATE_SUPPORT_CATEGORY") this.categories.push(new SupportPageCategory(data.data));
+      if (data.action === "CREATE_SUPPORT_CATEGORY" && !data.data.parentSupportCategoryId) this.categories.push(new SupportPageCategory(data.data));
+      if (data.action === "CREATE_SUPPORT_CATEGORY" && data.data.parentSupportCategoryId) {
+        let add = false;
+        this.categories.forEach(category => {
+          if (category.id === data.data.parentSupportCategoryId && !add) {
+            category.subcategories.push(new SupportPageCategory(data.data));
+            console.log("category.subcategories", category.subcategories);
+            add = true;
+          }
+          category.subcategories.forEach(subcategory => {
+            if (subcategory.id === data.data.parentSupportCategoryId && !add) {
+              subcategory.subcategories.push(new SupportPageCategory(data.data));
+              console.log("subcategory.subcategories", subcategory.subcategories);
+              add = true;
+            }
+            subcategory.subcategories.forEach(subsubcategory => {
+              if (subsubcategory.id === data.data.parentSupportCategoryId && !add) {
+                subsubcategory.subcategories.push(new SupportPageCategory(data.data));
+                console.log("subsubcategory.subcategories", subsubcategory.subcategories);
+                add = true;
+              }
+
+            })
+          })
+        })
+        this.cd.detectChanges();
+      }
+
       if (data.action === "EDIT_SUPPORT_CATEGORY") {
         let findIndex = this.categories.findIndex(item => item.id === data.data.id);
         if (findIndex > -1) this.categories[findIndex].onUpdate(data.data);
@@ -80,6 +107,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
 
   onDropEnd(data) {
+    console.log("data", data);
     this.supportPageCategoriesService.moveCategory(data.id, data.index).subscribe(data => {
     })
   }
