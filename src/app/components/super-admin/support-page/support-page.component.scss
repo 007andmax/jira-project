@@ -111,7 +111,7 @@ aside {
 .app-left-panel-super-admin-categories {
     display: block;
     min-height: 100vh;
-    width: 234px;
+    min-width: 234px;
     background-color: #f4f6f8;
     color: #ffffff;
     transition: width 300ms;

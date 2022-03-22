@@ -27,6 +27,7 @@ import { CrmStateService } from './states/crm/crm-state.service';
 import { MarketingEmailStateService } from './states/marketing-email/marketing-email-state.service';
 import { PermissionsService } from './services/permissions/permissions.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
+import { SupportPageCategoriesStateService } from './components/super-admin/state/support-page-categories/support-page-categories-state.service';
 
 
 /**
@@ -85,6 +86,7 @@ export class AppComponent implements OnInit {
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
+    private supportPageCategoriesStateService: SupportPageCategoriesStateService
 
   ) { }
 
@@ -118,6 +120,8 @@ export class AppComponent implements OnInit {
         this.marketingEmailStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {
+        // this.supportPageCategoriesStateService.onInit();
+        this.websocketService.initializeWebSocketConnection();
         this.companiesState.onInitGetCurrentCompany();
         this.appService.onInit();
         this.showPreloader = false;

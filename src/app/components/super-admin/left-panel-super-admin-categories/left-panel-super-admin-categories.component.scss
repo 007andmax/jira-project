@@ -54,11 +54,17 @@
     }
 }
 left-panel-super-admin-categories-actions {
-    margin: 0px 0px 0px auto;
+    margin: 0px 0px 0px 50px;
 }
 [draggable="true"] {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+.category-item-sub-sub-category {
+    margin: 0px 0px 0px 70px;
+}
+.category-item-sub-sub-sub-category {
+    margin: 0px 0px 0px 50px;
 }

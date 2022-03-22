@@ -51,15 +51,12 @@ export class SupportPageComponent implements OnInit {
         console.error(new Error("Resize target element not found."));
         return;
       }
-
       resizeData.startWidth = $(targetElement).outerWidth();
       resizeData.startCursorScreenX = event.screenX;
       resizeData.resizeTarget = targetElement;
       resizeData.parentElement = handleElement.parentElement;
       resizeData.maxWidth = $(handleElement.parentElement).innerWidth() - resizeData.handleWidth;
       resizeData.tracking = true;
-
-      console.log('tracking started');
     });
 
     $(window).on('mousemove', null, null, (event) => {
@@ -70,15 +67,8 @@ export class SupportPageComponent implements OnInit {
         if (newWidth >= 234) $(resizeData.resizeTarget).outerWidth(newWidth);
       }
     });
-
     $(window).on('mouseup', null, null, (event) => {
-      if (resizeData.tracking) {
-        resizeData.tracking = false;
-
-        console.log('tracking stopped');
-      }
+      if (resizeData.tracking) resizeData.tracking = false;
     });
-
   }
-
 }

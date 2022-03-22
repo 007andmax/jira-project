@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
@@ -8,6 +8,7 @@ import { SupportPageCategoriesService } from '../services/support-page-categorie
 import { SupportPageAddCategoryComponent } from '../shared/support-page-add-category/support-page-add-category.component';
 import { SupportPageAddSubCategoryComponent } from '../shared/support-page-add-sub-category/support-page-add-sub-category.component';
 import { SupportPageEditCategoryComponent } from '../shared/support-page-edit-category/support-page-edit-category.component';
+import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategory } from './class/support-page-category';
 
@@ -22,14 +23,14 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   constructor(private modalService: NgbModal,
     private supportPageCategoriesService: SupportPageCategoriesService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
-    private confirmStateService: ConfirmStateService,) { }
+    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
+    private confirmStateService: ConfirmStateService,
+    public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
     this.supportPageCategoriesService.getCategories().subscribe((data: any) => {
-      console.log("data", data);
       this.categories = data.map(item => new SupportPageCategory(item));
-      console.log("this.categories", this.categories);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -40,6 +41,19 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       }
     })
     this.sub.add(getConfirm);
+    let changeCategoryArray = this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
+      if (data.action === "CREATE_SUPPORT_CATEGORY") this.categories.push(new SupportPageCategory(data.data));
+      if (data.action === "EDIT_SUPPORT_CATEGORY") {
+        let findIndex = this.categories.findIndex(item => item.id === data.data.id);
+        if (findIndex > -1) this.categories[findIndex] = new SupportPageCategory(data.data);
+      }
+      if (data.action === "DELETE_SUPPORT_CATEGORY") {
+        let findIndex = this.categories.findIndex(item => item.id === data.data);
+        if (findIndex > -1) this.categories.splice(findIndex, 1);
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeCategoryArray);
   }
   add() {
     const modalRef = this.modalService.open(SupportPageAddCategoryComponent, { windowClass: 'xs-modal user-modal' });
@@ -66,9 +80,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
 
   onDropEnd(data) {
-    console.log("data", data);
     this.supportPageCategoriesService.moveCategory(data.id, data.index).subscribe(data => {
-
     })
   }
 

@@ -8,10 +8,8 @@ export class DragMenuDirective {
   constructor(private element: ElementRef) { }
   ngAfterViewInit() {
     let that = this;
-    console.log("this.element.nativeElement", this.element.nativeElement);
     let parent = this.element.nativeElement;
     let items = this.element.nativeElement.querySelectorAll('.category-item-category-body');
-    console.log("items", items);
     items.forEach(item => {
       $(item).prop('draggable', true)
       item.addEventListener('dragstart', dragStart)
@@ -25,35 +23,21 @@ export class DragMenuDirective {
     }
     function dropped(e) {
       cancelDefault(e)
-      console.log($(parent).parents(".category-item").attr("index"));
-      console.log($(this).attr("index"));
-      console.log($(e.target).attr("index"));
       // get new and old index
       let oldIndex = Number(e.dataTransfer.getData('text/plain'));
       let target = (e.target.classList.contains("category-item-category-body")) ? $(e.target) : $(e.target).parents(".category-item-category-body")
       let newIndex = Number(target.index());
-      console.log("target", target);
-      // remove dropped items at old place
-      //  console.log($(this).parents(".category-item-sub-category").children());
       if (newIndex == oldIndex) return;
       let dropped = $(this).parents(".category-item-sub-category").children().eq(oldIndex).remove();
-      //  console.log("dropped", dropped);
-      console.log("dropped", $(dropped).attr("id"));
-      console.log("newIndex", newIndex);
-      console.log("oldIndex", oldIndex);
-      // insert the dropped items at new place
-
       if (newIndex < oldIndex) {
         target.before(dropped)
       } else {
         target.after(dropped)
       }
-      console.log("dropped", $(dropped).index());
       that.dropEnd.emit({
         id: $(dropped).attr("id"), index: $(dropped).index()
       });
     }
-
     function cancelDefault(e) {
       e.preventDefault()
       e.stopPropagation()
