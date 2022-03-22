@@ -138,7 +138,7 @@
       </div>
       </span>
       </div>
-      <ngb-tabset  (tabChange)="toggle($event)">
+              <ngb-tabset  (tabChange)="toggle($event)">
           <!-- Device Type -->
           <ngb-tab
               title="Device Type"
@@ -218,11 +218,11 @@
                         </tbody>
                       </table>
                       </div>
-                  </div>
-                  <div
-    class="loading"
-    *ngIf="devicetype"
-></div>
+                    </div>
+                    <div
+      class="loading"
+      *ngIf="devicetype"
+  ></div>
               </ng-template>
           </ngb-tab>
           <!-- Manufacture -->
@@ -375,7 +375,7 @@
                                   <div class="modal-body">
                                       <form
                                           [formGroup]="modelForm"
-                                          (ngSubmit)="SaveModel()"
+                                          (ngSubmit)="onSubmitModel()"
                                       >
                                           <div class="f-row">
                                               <div class="f-col col-100">

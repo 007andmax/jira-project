@@ -8,6 +8,7 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { DeviceFilter } from '../../devices/class/devices';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'device-setting',
@@ -63,19 +64,21 @@ export class DeviceSettingComponent implements OnInit {
   modelload : boolean;
   deviceTypeloading : boolean;
   manufactureloading : boolean;
-  modelloading : boolean
+  modelloading : boolean;
 
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private companyStateService: CompaniesStateService,
     private ngZone: NgZone,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private companiesService: CompaniesService) { }
 
   ngOnInit() {
-    this.openedCounter = true;
+    this.devicetype = true;
     this.devicebutton = true;
+    this.openedCounter = true;
+
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
 
@@ -114,9 +117,9 @@ export class DeviceSettingComponent implements OnInit {
       IsActive: [""],
       CreateDate: [""]
     })
+
+    this.onInitGetCurrentCompany();
     this.settingStateService.setComponentName('DeviceSettingComponent');
-    this.getCurrentCompany();
-    this.getDeviceTypes(this.techCompany.id);
   }
 
   onFilter(field) {
@@ -130,7 +133,6 @@ export class DeviceSettingComponent implements OnInit {
   onFilterModel(field){
     this.filter.onFilter(field, this.selectManufactureList)
   }
-
 
   toggle(evt: any) {
     if (evt.nextId == "tab1") {
@@ -151,17 +153,18 @@ export class DeviceSettingComponent implements OnInit {
     if (evt.nextId == "tab3") {
       this.modelbutton = true;
       this.getModels(this.techCompany.id);
+      this.getManufacturers(this.techCompany.id);
     }
     else {
       this.modelbutton = false
     }
   }
 
-  getCurrentCompany(): any {
-    this.companyStateService.onCurrentCompany.subscribe((data: any)=> {
+  public onInitGetCurrentCompany() {
+    this.companiesService.getTechCompany().subscribe(data => {
       this.techCompany = data;
       this.getDeviceTypes(this.techCompany.id);
-    });
+    })
   }
 
   getManufacturers(TechCompanyGuid: any) {
@@ -403,7 +406,7 @@ export class DeviceSettingComponent implements OnInit {
     return this.modelForm.controls;
   }
 
-  SaveModel() {
+  onSubmitModel() {
     this.submitted = true;
 
     // add

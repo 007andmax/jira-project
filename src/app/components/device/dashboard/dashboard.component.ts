@@ -118,6 +118,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
     this.companyStateService.onCurrentCompany.subscribe((data: any)=> {
       this.techCompany = data;
+      this.getManufacturers(this.techCompany.id);
+      this.getModels(this.techCompany.id);
     });
   }
 
@@ -261,8 +263,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.getAssetTagDropDownDetail();
         this.getAssetNotesDetail();
         this.agentService.GetCurrentConfig(this.asset.ID);
-        this.getManufacturers(this.techCompany.id);
-        this.getModels(this.techCompany.id);
       }
     });
   }

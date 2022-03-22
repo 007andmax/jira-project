@@ -74,6 +74,12 @@
         Email Templetes
     </li>
     <li
+    [ngClass]="{'--active':activePage === 'device-setting-component'}"
+    (click)="goToState('device-setting-component')"
+>
+    Device Setting
+</li>
+    <li
         [ngClass]="{'--active':activePage === 'integrations-component'}"
         (click)="goToState('integrations-component')"
     >
@@ -97,10 +103,10 @@
     >
         Subscription
     </li>
-    <li
+    <!-- <li
     [ngClass]="{'--active':activePage === 'device-setting-component'}"
     (click)="goToState('device-setting-component')"
 >
     Device Setting
-</li>
+</li> -->
 </ul>

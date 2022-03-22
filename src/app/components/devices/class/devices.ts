@@ -1,7 +1,7 @@
 import { FilterListTop } from "src/class/list/filter-list-top";
 
 export class DeviceFilter {
-  filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC"),new FilterListTop("CompanyName", "ASC")];
+  filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC"),new FilterListTop("CompanyName", "ASC"), new FilterListTop("ManufactureName", "ASC")];
   constructor() {}
 
   public onFilter(field, devices) {

@@ -8,13 +8,13 @@
                   <div class="page-header-opt">
 
                   </div>
-                  <div class="download-print" *ngIf="startup > 0">
+                  <div class="download-print" [hidden]="!searchstartup">
                       <form method="GET">
                           <input
                           type="search"
                           class="form-input"
                           [(ngModel)]="searchname"
-                          name="Name"
+                          name="search"
                           placeholder="Search Software…"
                           autocomplete="off"
                       >
@@ -68,7 +68,7 @@
                               </tr>
                           </thead>
                           <tbody class="startup-table">
-                              <tr *ngFor="let item of startupList | startup: searchname; let i = index;">
+                              <tr *ngFor="let item of startupList | startupSearch: searchname; let i = index;">
 
                                   <td class="s-name">
                                       <h5>{{item.Name || 'N/A'}}</h5>

@@ -137,7 +137,9 @@ export class DevicesComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        this.GetDeviceListConfig(element.ID);
+          if(element.AgentVersion !=null){
+            this.GetDeviceListConfig(element.ID);
+          }
       });
 
       if (this.cd) {
@@ -513,8 +515,8 @@ export class DevicesComponent implements OnInit {
     this.assetList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer !== null ? element.Manufacturer.replace(","," ") : element.Manufacturer  || "N/A",
+        element.Model !== null ? element.Model.replace(","," ") : element.Model  || "N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -699,8 +701,8 @@ export class DevicesComponent implements OnInit {
     this.assetList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer !== null ? element.Manufacturer.replace(","," ") : element.Manufacturer  || "N/A",
+        element.Model !== null ? element.Model.replace(","," ") : element.Model  || "N/A",
         element.SerialNumber || "N/A",
       ]);
     });

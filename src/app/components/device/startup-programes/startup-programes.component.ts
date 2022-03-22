@@ -26,6 +26,7 @@ export class StartupComponent implements OnInit {
   public pdfUrl: string;
   public filter: StartupFilter = new StartupFilter();
   startup : number = 0;
+  searchstartup = false;
 
   constructor(
     private agentService: AgentService,
@@ -61,6 +62,9 @@ export class StartupComponent implements OnInit {
 
   public onGetStartupPrograms(resp: any) {
     this.startup = resp.length
+    if(resp.length>0){
+      this.searchstartup= true;
+    }
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.startupList = JSON.parse(item.Value);
