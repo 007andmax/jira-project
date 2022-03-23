@@ -256,10 +256,11 @@
 .qt-report__page {
   background-color: $white;
   min-height: 92vh;
-  min-width: 1384px;
-  overflow: auto;
+  //min-width: 1384px;
+  //overflow: auto;
   .qt-report__header {
     margin-bottom: 14px;
+    min-width: 1384px;
     &-content {
       border-left: 1px solid $gray-300;
       border-bottom: 1px solid $gray-300;
@@ -303,11 +304,11 @@
     //max-width: 1384px;
     //min-width: 1384px;
     //margin: 0 auto;
-    height: calc(100vh - 219px);
+    //height: calc(100vh - 219px);
+    //overflow: auto;
     @media (min-width: 1448px) {
       height: calc(100vh - 211px);
     }
-    overflow: auto;
     &-row {
       border-bottom: 1px solid #edf0f2;
       padding: 0 16px;
@@ -397,16 +398,20 @@
 .qt-report__body-table-body {
   min-width: 1384px;
   margin: 0 auto;
+  background-color: $white;
   thead {
     background-color: #f9fafb;
     border-bottom: 1px solid $gray-300;
     border-top: 1px solid $gray-300;
   }
   th {
-    padding: 6px 0;
+    text-transform: uppercase;
+    padding: 7px 0;
+    @extend %сaption-m-sb;
   }
   td {
-    padding: 12px 0;
+    padding: 11px 0;
+    line-height: 20px;
   }
   th,
   td {

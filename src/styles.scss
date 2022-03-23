@@ -125,10 +125,6 @@ h6,
   color: $primary-1;
   border: 1px solid $primary-1;
   @extend %сaption-l-sb;
-  &:hover {
-    background: $primary-1;
-    color: $white;
-  }
 }
 .radio-container {
   display: flex;

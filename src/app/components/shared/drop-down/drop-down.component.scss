@@ -3,6 +3,9 @@
 .disabled {
   background: $gray-200;
   color: $gray-600;
+  &::placeholder {
+    color: $gray-600;
+  }
 }
 .icon__check {
   background-size: 15px;
