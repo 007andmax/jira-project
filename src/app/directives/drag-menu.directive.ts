@@ -1,4 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { SupportPageCategory } from '../components/super-admin/left-panel-super-admin-categories/class/support-page-category';
 
 @Directive({
   selector: '[appDragMenu]'
@@ -7,21 +8,26 @@ export class DragMenuDirective {
   @Output() dropEnd = new EventEmitter<any>();
   @Input() classDropped: string;
   @Input() classContainer: string;
+
   lengthItems: number = 0;
   isInit = false;
   dragStart;
   dropped;
   cancelDefault;
+
   constructor(private element: ElementRef) { }
   ngAfterViewInit() {
     let that = this;
     let parent = this.element.nativeElement;
     let items = this.element.nativeElement.querySelectorAll(`.${this.classContainer}`);
     this.lengthItems = items.length;
+    let currentGrag;
 
     this.dragStart = function dragStart(e) {
-      var index = $(e.target).index()
+      var index = $(e.target).index();
+      currentGrag = $(e.target);
       e.dataTransfer.setData('text/plain', index)
+      console.log("currentGrag", currentGrag);
     }
     this.dropped = function dropped(e) {
       that.cancelDefault(e)
@@ -29,13 +35,19 @@ export class DragMenuDirective {
       let oldIndex = Number(e.dataTransfer.getData('text/plain'));
       let target = (e.target.classList.contains(`${that.classContainer}`)) ? $(e.target) : $(e.target).parents(`.${that.classContainer}`).eq(0)
       let newIndex = Number(target.index());
-      console.log("target", target);
-      console.log("newIndex", newIndex);
-      console.log("oldIndex", oldIndex);
-      if (newIndex == oldIndex) return;
-      console.log($(this).parents(`.${that.classDropped}`));
+
+      if (newIndex == oldIndex || !currentGrag) return;
+
       let dropped = $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).remove();
+
       console.log("dropped", dropped);
+      console.log("target", target)
+
+
+      console.log("currentGrag", currentGrag)
+
+
+
       if (newIndex < oldIndex) {
         target.before(dropped)
       } else {
