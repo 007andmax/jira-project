@@ -190,116 +190,233 @@
         </div>
         <div class="body-m-sb qt-color-dark">Tech company: {{company.name}}</div>
       </div>
-      <div class="qt-report__body-table-header">
-        <div class="qt-report__body-table-header-row">
-          <div
-            class="qt-report-col-2"
-            *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
-          >
-            <div class="qt-table-modern__cell">
-              <div class="qt-fw-600">Device Name</div>
-            </div>
-          </div>
-          <div
-            class="qt-report-col-3"
-            *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
-          >
-            <div class="qt-table-modern__cell">
-              <div class="qt-fw-600">Software Name</div>
-            </div>
-          </div>
-          <div
-            class="qt-report-col-2"
-            *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
-          >
-            <div class="qt-table-modern__cell">
-              <div class="qt-fw-600">Installation Key</div>
-            </div>
-          </div>
-          <div
-            class="qt-report-col-2"
-            *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
-          >
-            <div class="qt-table-modern__cell">
-              <div class="qt-fw-600">Publisher</div>
-            </div>
-          </div>
-          <div
-            class="qt-report-col-1"
-            *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
-          >
-            <div class="qt-table-modern__cell qt-fw-600">Version</div>
-          </div>
-          <div
-            class="qt-report-col-2"
-            *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
-          >
-            <div class="qt-table-modern__cell qt-fw-600">Install Date</div>
-          </div>
-        </div>
-      </div>
 
-      <div class="qt-report__body-table-body">
-        <ng-template
-          ngFor
-          let-softItem
-          [ngForOf]="softwareSummaryReport.list"
-          let-i="index"
-          [ngForTrackBy]="trackByIndex"
-        >
-          <div class="qt-report__body-row">
-            <div
+
+<!--      <div class="qt-report__body-table-header">-->
+<!--        <div class="qt-report__body-table-header-row">-->
+<!--          <div-->
+<!--            class="qt-report-col-2"-->
+<!--            *ngIf="softwareSummaryReport.softwareSummaryWithDevice"-->
+<!--          >-->
+<!--            <div class="qt-table-modern__cell">-->
+<!--              <div class="qt-fw-600">Device Name</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="qt-report-col-3"-->
+<!--            *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"-->
+<!--          >-->
+<!--            <div class="qt-table-modern__cell">-->
+<!--              <div class="qt-fw-600">Software Name</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="qt-report-col-2"-->
+<!--            *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"-->
+<!--          >-->
+<!--            <div class="qt-table-modern__cell">-->
+<!--              <div class="qt-fw-600">Installation Key</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="qt-report-col-2"-->
+<!--            *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"-->
+<!--          >-->
+<!--            <div class="qt-table-modern__cell">-->
+<!--              <div class="qt-fw-600">Publisher</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="qt-report-col-1"-->
+<!--            *ngIf="softwareSummaryReport.softwareSummaryWithVersion"-->
+<!--          >-->
+<!--            <div class="qt-table-modern__cell qt-fw-600">Version</div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="qt-report-col-2"-->
+<!--            *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"-->
+<!--          >-->
+<!--            <div class="qt-table-modern__cell qt-fw-600">Install Date</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="qt-report__body-table-body">-->
+<!--        <ng-template-->
+<!--          ngFor-->
+<!--          let-softItem-->
+<!--          [ngForOf]="softwareSummaryReport.list"-->
+<!--          let-i="index"-->
+<!--          [ngForTrackBy]="trackByIndex"-->
+<!--        >-->
+<!--          <div class="qt-report__body-row">-->
+<!--            <div-->
+<!--              class="qt-report-col-2"-->
+<!--              *ngIf="softwareSummaryReport.softwareSummaryWithDevice"-->
+<!--            >-->
+<!--              <div class="qt-table-modern__cell qt-fw-600">-->
+<!--                {{softItem.device}}-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--            <div-->
+<!--              class="qt-report-col-3"-->
+<!--              *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"-->
+<!--            >-->
+<!--              <div class="qt-table-modern__cell">-->
+<!--                {{softItem.softwareTitle}}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="qt-report-col-2"-->
+<!--              *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"-->
+<!--            >-->
+<!--              <div class="qt-table-modern__cell">-->
+<!--                {{softItem.installationKey}}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="qt-report-col-2"-->
+<!--              *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"-->
+<!--            >-->
+<!--              <div class="qt-table-modern__cell">-->
+<!--                {{softItem.publisher}}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="qt-report-col-1"-->
+<!--              *ngIf="softwareSummaryReport.softwareSummaryWithVersion"-->
+<!--            >-->
+<!--              <div class="qt-table-modern__cell">-->
+<!--                {{softItem.version}}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="qt-report-col-2"-->
+<!--              *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"-->
+<!--            >-->
+<!--              <div class="qt-table-modern__cell">-->
+<!--                {{softItem.installDate | date:'yyyy-MM-dd'}}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ng-template>-->
+<!--      </div>-->
+
+    <!-- New Table -->
+      <table class="qt-report__body-table-body">
+        <thead>
+          <tr>
+            <th
               class="qt-report-col-2"
               *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
             >
-              <div class="qt-table-modern__cell qt-fw-600">
-                {{softItem.device}}
+              <div class="qt-table-modern__cell">
+                <div class="qt-fw-600">Device Name</div>
               </div>
-
-            </div>
-            <div
+            </th>
+            <th
               class="qt-report-col-3"
               *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
             >
               <div class="qt-table-modern__cell">
-                {{softItem.softwareTitle}}
+                <div class="qt-fw-600">Software Name</div>
               </div>
-            </div>
-            <div
+            </th>
+            <th
               class="qt-report-col-2"
               *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
             >
               <div class="qt-table-modern__cell">
-                {{softItem.installationKey}}
+                <div class="qt-fw-600">Installation Key</div>
               </div>
-            </div>
-            <div
+            </th>
+            <th
               class="qt-report-col-2"
               *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
             >
               <div class="qt-table-modern__cell">
-                {{softItem.publisher}}
+                <div class="qt-fw-600">Publisher</div>
               </div>
-            </div>
-            <div
+            </th>
+            <th
               class="qt-report-col-1"
               *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
             >
-              <div class="qt-table-modern__cell">
-                {{softItem.version}}
-              </div>
-            </div>
-            <div
+              <div class="qt-table-modern__cell qt-fw-600">Version</div>
+            </th>
+            <th
               class="qt-report-col-2"
               *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
             >
-              <div class="qt-table-modern__cell">
-                {{softItem.installDate | date:'yyyy-MM-dd'}}
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </div>
+              <div class="qt-table-modern__cell qt-fw-600">Install Date</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="qt-report__body-table-body">
+          <ng-template
+            ngFor
+            let-softItem
+            [ngForOf]="softwareSummaryReport.list"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+          >
+            <tr class="qt-report__body-row">
+              <td
+                class="qt-report-col-2"
+                *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
+              >
+                <div class="qt-table-modern__cell qt-fw-600">
+                  {{softItem.device}}
+                </div>
+
+              </td>
+              <td
+                class="qt-report-col-3"
+                *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
+              >
+                <div class="qt-table-modern__cell">
+                  {{softItem.softwareTitle}}
+                </div>
+              </td>
+              <td
+                class="qt-report-col-2"
+                *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
+              >
+                <div class="qt-table-modern__cell">
+                  {{softItem.installationKey}}
+                </div>
+              </td>
+              <td
+                class="qt-report-col-2"
+                *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
+              >
+                <div class="qt-table-modern__cell">
+                  {{softItem.publisher}}
+                </div>
+              </td>
+              <td
+                class="qt-report-col-1"
+                *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
+              >
+                <div class="qt-table-modern__cell">
+                  {{softItem.version}}
+                </div>
+              </td>
+              <td
+                class="qt-report-col-2"
+                *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
+              >
+                <div class="qt-table-modern__cell">
+                  {{softItem.installDate | date:'yyyy-MM-dd'}}
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    <!-- End New Table -->
+
     </div>
     <app-report-footer
       [orientation]="'LANDSCAPE'"

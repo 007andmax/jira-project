@@ -222,36 +222,36 @@
 // New Style for report
 
 // Report Grid
-.qt-report-col-1,
-.qt-report-col-2,
-.qt-report-col-3,
-.qt-report-col-4,
-.qt-report-col-5,
-.qt-report-col-6 {
-  flex: 0 0 auto;
-}
-.qt-report-col-1 {
-  width: 8.33333333%;
-}
-.qt-report-col-2 {
-  width: 16.6666666%;
-}
-.qt-report-col-3 {
-  width: 25%;
-}
-.qt-report-col-4 {
-  width: 33.33333333%;
-}
-.qt-report-col-6 {
-  width: 50%;
-}
-.qt-report-col-12 {
-  width: 100%;
-}
-.qt-table-modern__cell {
-  display: flex;
-  align-items: center;
-}
+//.qt-report-col-1,
+//.qt-report-col-2,
+//.qt-report-col-3,
+//.qt-report-col-4,
+//.qt-report-col-5,
+//.qt-report-col-6 {
+//  flex: 0 0 auto;
+//}
+//.qt-report-col-1 {
+//  width: 8.33333333%;
+//}
+//.qt-report-col-2 {
+//  width: 16.6666666%;
+//}
+//.qt-report-col-3 {
+//  width: 25%;
+//}
+//.qt-report-col-4 {
+//  width: 33.33333333%;
+//}
+//.qt-report-col-6 {
+//  width: 50%;
+//}
+//.qt-report-col-12 {
+//  width: 100%;
+//}
+//.qt-table-modern__cell {
+//  display: flex;
+//  align-items: center;
+//}
 // End Report Grid
 .qt-report__page {
   background-color: $white;
@@ -299,14 +299,19 @@
     height: 36px;
   }
   .qt-report__body {
-    width: 1384px;
-    max-width: 1384px;
-    min-width: 1384px;
-    margin: 0 auto;
+    //width: 1384px;
+    //max-width: 1384px;
+    //min-width: 1384px;
+    //margin: 0 auto;
+    height: calc(100vh - 219px);
+    @media (min-width: 1448px) {
+      height: calc(100vh - 211px);
+    }
+    overflow: auto;
     &-row {
       border-bottom: 1px solid #edf0f2;
       padding: 0 16px;
-      display: flex;
+      //display: flex;
       position: relative;
       min-height: 45px;
       > div {
@@ -387,6 +392,36 @@
     flex-shrink: 0;
   }
 }
+
+
+.qt-report__body-table-body {
+  width: 100%;
+  thead {
+    background-color: #f9fafb;
+    border-bottom: 1px solid $gray-300;
+    border-top: 1px solid $gray-300;
+  }
+  th {
+    padding: 6px 0;
+  }
+  td {
+    padding: 12px 0;
+  }
+  th,
+  td {
+    min-width: 225px;
+    padding-left: 8px;
+    padding-right: 8px;
+    white-space: nowrap;
+    &:first-child {
+      padding-left: 24px;
+    }
+    &:last-child {
+      padding-right: 24px;
+    }
+  }
+}
+
 // End New Style for report
 
 .product-report-btn {
