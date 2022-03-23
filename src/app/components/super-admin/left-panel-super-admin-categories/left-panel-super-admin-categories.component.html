@@ -9,12 +9,14 @@
     appDragMenu
     (dropEnd)="onDropEnd($event)"
     [classDropped]="'container-categories'"
+    [classContainer]="'category-item-category-body'"
     *ngIf="categories.length > 0"
 >
     <ng-template
         ngFor
         let-category
         [ngForOf]="categories"
+        [ngForTrackBy]="trackById"
     >
         <div
             class="category-item category-item-category-body"
@@ -39,14 +41,16 @@
                 appDragMenu
                 (dropEnd)="onDropEnd($event)"
                 [classDropped]="'category-item-sub-category'"
+                [classContainer]="'category-item-sub-category-body'"
             >
                 <ng-template
                     ngFor
                     let-subcategory
                     [ngForOf]="category.subcategories"
+                    [ngForTrackBy]="trackById"
                 >
                     <div
-                        class="category-item-category-body"
+                        class="category-item-sub-category-body"
                         [attr.id]="subcategory.id"
                     >
                         <div class="category-item-category">
@@ -65,6 +69,7 @@
                             appDragMenu
                             (dropEnd)="onDropEnd($event)"
                             [classDropped]="'category-item-sub-sub-category'"
+                            [classContainer]="'category-item-sub-sub-category-body'"
                         >
                             <ng-template
                                 ngFor
@@ -73,7 +78,7 @@
                                 [ngForTrackBy]="trackById"
                             >
                                 <div
-                                    class="category-item-category-body"
+                                    class="category-item-sub-sub-category-body"
                                     [attr.id]="subcategory.id"
                                 >
                                     <div class="category-item-category">
@@ -91,6 +96,7 @@
                                         appDragMenu
                                         (dropEnd)="onDropEnd($event)"
                                         [classDropped]="'category-item-sub-sub-sub-category'"
+                                        [classContainer]="'category-item-sub-sub-sub-category-body'"
                                     >
                                         <ng-template
                                             ngFor
@@ -99,7 +105,7 @@
                                             [ngForTrackBy]="trackById"
                                         >
                                             <div
-                                                class="category-item-category-body"
+                                                class="category-item-sub-sub-sub-category-body"
                                                 [attr.id]="subsubsubcategory.id"
                                             >
                                                 <div class="category-item-category">
@@ -128,7 +134,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
+
+
+
+
 
 
 
