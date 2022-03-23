@@ -24,7 +24,7 @@
         >
             <div class="category-item-category">
                 <div
-                    class="icon__category-closed qt-mr-25"
+                    class="icon__category-closed qt-mr-25 pointer"
                     [ngClass]="{'toggle-category':category.toggleSubCategory}"
                     (click)="category.toggleSubCategory = !category.toggleSubCategory"
                 ></div>
@@ -56,7 +56,7 @@
                         <div class="category-item-category">
                             <div class="icon__drag qt-sz-20 qt-mr-25"></div>
                             <div
-                                class="icon__category-closed qt-mr-25"
+                                class="icon__category-closed qt-mr-25 pointer"
                                 [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
                                 (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                             ></div>
@@ -82,8 +82,9 @@
                                     [attr.id]="subsubcategory.id"
                                 >
                                     <div class="category-item-category">
+                                        <div class="icon__drag qt-sz-20 qt-mr-25"></div>
                                         <div
-                                            class="icon__category-closed qt-mr-25"
+                                            class="icon__category-closed qt-mr-25 pointer"
                                             [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
                                             (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
                                         ></div>
@@ -109,6 +110,7 @@
                                                 [attr.id]="subsubsubcategory.id"
                                             >
                                                 <div class="category-item-category">
+                                                    <div class="icon__drag qt-sz-20 qt-mr-25"></div>
                                                     <span [textContent]="subsubsubcategory.name"></span>
                                                     <left-panel-super-admin-categories-actions [category]="subsubsubcategory"></left-panel-super-admin-categories-actions>
                                                 </div>
@@ -165,7 +167,17 @@
 
 
 
+
+
+
+
+
     </ng-template>
+
+
+
+
+
 
 
 
