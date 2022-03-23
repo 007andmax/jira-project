@@ -36,15 +36,16 @@ export class DragMenuDirective {
       let target = (e.target.classList.contains(`${that.classContainer}`)) ? $(e.target) : $(e.target).parents(`.${that.classContainer}`).eq(0)
       let newIndex = Number(target.index());
 
-      if (newIndex == oldIndex || !currentGrag || $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).length == 0) return;
+      if (newIndex == oldIndex || !currentGrag || $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).length == 0 ||
+        $(target).attr("category-id") != $(currentGrag).attr("category-id")) return;
       console.log("$(this).parents(`.${that.classDropped}`).children().eq(oldIndex)", $(this).parents(`.${that.classDropped}`).children().eq(oldIndex));
       let dropped = $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).remove();
 
-      console.log("dropped", dropped);
-      console.log("target", target)
+      console.log("dropped", $(dropped).attr("category-id"));
+      console.log("target", $(target).attr("category-id"))
 
 
-      console.log("currentGrag", currentGrag)
+      console.log("currentGrag", $(currentGrag).attr("category-id"))
 
 
 

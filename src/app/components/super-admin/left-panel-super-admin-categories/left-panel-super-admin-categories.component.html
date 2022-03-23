@@ -52,6 +52,7 @@
                     <div
                         class="category-item-sub-category-body"
                         [attr.id]="subcategory.id"
+                        [attr.category-id]="category.id"
                     >
                         <div class="category-item-category">
                             <div class="icon__drag qt-sz-20 qt-mr-25"></div>
@@ -80,6 +81,7 @@
                                 <div
                                     class="category-item-sub-sub-category-body"
                                     [attr.id]="subsubcategory.id"
+                                    [attr.category-id]="subcategory.id"
                                 >
                                     <div class="category-item-category">
                                         <div class="icon__drag qt-sz-20 qt-mr-25"></div>
@@ -108,6 +110,7 @@
                                             <div
                                                 class="category-item-sub-sub-sub-category-body"
                                                 [attr.id]="subsubsubcategory.id"
+                                                [attr.category-id]="subsubcategory.id"
                                             >
                                                 <div class="category-item-category">
                                                     <div class="icon__drag qt-sz-20 qt-mr-25"></div>
@@ -172,7 +175,19 @@
 
 
 
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
 
 
 
