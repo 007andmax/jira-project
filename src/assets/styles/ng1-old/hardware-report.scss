@@ -395,7 +395,8 @@
 
 
 .qt-report__body-table-body {
-  width: 100%;
+  min-width: 1384px;
+  margin: 0 auto;
   thead {
     background-color: #f9fafb;
     border-bottom: 1px solid $gray-300;
