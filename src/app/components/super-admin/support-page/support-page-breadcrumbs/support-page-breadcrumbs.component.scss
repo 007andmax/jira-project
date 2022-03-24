@@ -1,0 +1,39 @@
+@import "./src/assets/styles/variable";
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    @media (max-width: 767px) {
+        display: none;
+    }
+    div {
+        display: flex;
+        align-items: stretch;
+
+        span {
+            color: #919eab;
+            line-height: 15px;
+        }
+
+        &.breadcrumbs-path {
+            span {
+                color: $gray-600;
+            }
+        }
+
+        .breadcrumb-separator {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 15px;
+            transform: rotate(90deg);
+            background-image: url(/assets/img/icons-left-sidebar/dropdown-arrow-down.svg);
+        }
+    }
+}
+
+.breadcrumbs-company-password-manager {
+    background-color: $background;
+}
+.breadcrumbs-company-products {
+    background-color: $background;
+}

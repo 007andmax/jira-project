@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
+import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
+import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
+import { SupportPageCategoryContent } from './class/support-page-category-content';
 var $ = require("jquery");
 @Component({
   selector: 'support-page',
@@ -6,10 +10,25 @@ var $ = require("jquery");
   styleUrls: ['./support-page.component.scss']
 })
 export class SupportPageComponent implements OnInit {
-
-  constructor() { }
+  supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
+  selectedCategory: SupportPageCategory;
+  constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
+    private supportPageCategoriesService: SupportPageCategoriesService,) { }
 
   ngOnInit() {
+    this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
+      this.selectedCategory = data;
+      if (this.selectedCategory.document) {
+        this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe(content => {
+          this.supportPageCategoryContent.setEditMode(true);
+          console.log("content", content);
+        })
+      } else {
+        this.supportPageCategoryContent.setEditMode(false);
+        this.supportPageCategoryContent.setContent(null);
+      }
+
+    })
     const selectTarget = (fromElement, selector) => {
       if (!(fromElement instanceof HTMLElement)) {
         return null;

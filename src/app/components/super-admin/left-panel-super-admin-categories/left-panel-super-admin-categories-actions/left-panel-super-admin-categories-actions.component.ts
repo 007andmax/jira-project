@@ -31,6 +31,9 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
     modalRef.componentInstance.category_id = category.id;
     modalRef.componentInstance.name = category.name;
   }
+  addArticle(category) {
+    this.supportPageCategoriesStateService.addArticle(category);
+  }
   delete(category) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });

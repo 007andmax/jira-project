@@ -120,7 +120,7 @@ export class AppComponent implements OnInit {
         this.marketingEmailStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {
-        // this.supportPageCategoriesStateService.onInit();
+        this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
         this.companiesState.onInitGetCurrentCompany();
         this.appService.onInit();

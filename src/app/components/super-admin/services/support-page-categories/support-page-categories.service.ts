@@ -32,6 +32,9 @@ export class SupportPageCategoriesService {
         return data;
       }));
   }
+  public saveContent(category_id, data) {
+    return this.http.put(this.apiUrl + 'support/categories/content/' + category_id, data)
+  }
   public editCategory(category_id, data) {
     return this.http.put(this.apiUrl + 'support/categories/' + category_id, data).pipe(
       tap(data => {
@@ -55,5 +58,8 @@ export class SupportPageCategoriesService {
   }
   public getCategories() {
     return this.http.get(this.apiUrl + 'support/categories');
+  }
+  public getContentCategory(category_id) {
+    return this.http.get(this.apiUrl + 'support/documents/' + category_id);
   }
 }

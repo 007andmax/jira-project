@@ -1,0 +1,38 @@
+<div
+    class="header-content"
+    [ngClass]="{'clear-border': !selectedCategory}"
+>
+    <support-page-breadcrumbs></support-page-breadcrumbs>
+    <div
+        *ngIf="selectedCategory"
+        class="icon__edit-category qt-sz-20 pointer qt-ml-8"
+        (click)="editCategoryName()"
+    ></div>
+    <div
+        class="right-content"
+        *ngIf="selectedCategory"
+    >
+        <div
+            class="remove-category pointer"
+            (click)="removeCategory()"
+        >
+            <div class="icon__remove-category qt-sz-20  "></div>
+        </div>
+        <div class="preview qt-ml-12 pointer">Preview</div>
+
+        <div
+            class="save-draft qt-ml-12 pointer"
+            (click)="saveContent('DRAFT')"
+        >
+            <div class="icon__draft-content qt-sz-20   qt-mr-10"></div>
+            Save Draft
+        </div>
+
+        <button
+            class="qt-button qt-ml-12 pointer"
+            (click)="saveContent('PUBLISHED')"
+        >
+            <span>Publish</span>
+        </button>
+    </div>
+</div>

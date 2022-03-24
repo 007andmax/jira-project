@@ -1,0 +1,34 @@
+<div
+    class="breadcrumbs"
+    *ngIf="category"
+>
+    <div
+        class="breadcrumbs-location pointer"
+        (click)="back()"
+    >
+        <span [textContent]="category"></span>
+        <div class="breadcrumb-separator"></div>
+
+    </div>
+    <div
+        class="breadcrumbs-attribute"
+        *ngIf="subCategory"
+    >
+        <span [textContent]="subCategory"></span>
+        <div class="breadcrumb-separator"></div>
+
+    </div>
+    <div
+        class="breadcrumbs-path"
+        *ngIf="subsubCategory"
+    >
+        <span [textContent]="subsubCategory"></span>
+        <div class="breadcrumb-separator"></div>
+    </div>
+    <div
+        class="breadcrumbs-path"
+        *ngIf="subsubSubCategory"
+    >
+        <span [textContent]="subsubSubCategory"></span>
+    </div>
+</div>

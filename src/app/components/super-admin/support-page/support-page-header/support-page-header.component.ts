@@ -1,0 +1,46 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
+import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
+import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
+import { SupportPageEditCategoryComponent } from '../../shared/support-page-edit-category/support-page-edit-category.component';
+import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
+import { SupportPageCategoryContent } from '../class/support-page-category-content';
+
+@Component({
+  selector: 'support-page-header',
+  templateUrl: './support-page-header.component.html',
+  styleUrls: ['./support-page-header.component.scss']
+})
+export class SupportPageHeaderComponent implements OnInit {
+  @Input() selectedCategory: SupportPageCategory;
+  @Input() supportPageCategoryContent: SupportPageCategoryContent;
+  constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
+    private modalService: NgbModal,
+    private supportPageCategoriesService: SupportPageCategoriesService,
+    private confirmStateService: ConfirmStateService,) { }
+
+  ngOnInit() {
+
+  }
+  editCategoryName() {
+    const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.category_id = this.selectedCategory.id;
+    modalRef.componentInstance.name = this.selectedCategory.name;
+  }
+
+  saveContent(type) {
+    this.supportPageCategoryContent.setType(type);
+    this.supportPageCategoriesService.saveContent(this.selectedCategory.id, this.supportPageCategoryContent.getData()).subscribe(data => {
+
+    })
+  }
+  removeCategory() {
+    this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to delete the category?`;
+    this.supportPageCategoriesStateService.setCategoryForRemove(this.selectedCategory);
+  }
+}

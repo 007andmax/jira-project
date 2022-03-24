@@ -7,6 +7,7 @@ export class SupportPageCategory {
     parentSupportCategoryId: string;
     subcategories: Array<SupportPageCategory> = [];
     type: string;
+    document: any;
     toggleSubCategory: boolean = false;
     constructor(data) {
         this.onUpdate(data);
@@ -18,5 +19,6 @@ export class SupportPageCategory {
         this.parentSupportCategoryId = data.parentSupportCategoryId;
         this.subcategories = (data.subcategories) ? data.subcategories.map(item => new SupportPageCategory(item)) : [];
         this.type = data.type;
+        this.document = data.document;
     }
 }

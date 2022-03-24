@@ -220,6 +220,11 @@
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
   }
+  &__draft-content {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/draft.svg");
+    mask-image: url("/assets/img/icons/draft.svg");
+  }
   &__edit-category {
     background-color: #637382;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
