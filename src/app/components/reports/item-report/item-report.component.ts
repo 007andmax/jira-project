@@ -19,6 +19,7 @@ export class ItemReportComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
+    $('body').addClass('qt-bg-white');
   }
   back() {
     this.leftPanelStateService.goToState('new-reports');
@@ -35,5 +36,6 @@ export class ItemReportComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.report = null;
+    $('body').removeClass('qt-bg-white');
   }
 }
