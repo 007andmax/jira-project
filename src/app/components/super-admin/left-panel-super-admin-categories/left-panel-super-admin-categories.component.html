@@ -2,10 +2,11 @@
     class="qt-button qt-mr-12"
     (click)="add()"
 >
+    <span class="icon__add qt-sz-20 qt-bg-contain qt-mr-8"></span>
     Add Category
 </button>
 <div
-    class="container-categories qt-ml-10"
+    class="container-categories"
     appDragMenu
     (dropEnd)="onDropEnd($event)"
     [classDropped]="'container-categories'"
@@ -23,20 +24,23 @@
             [attr.id]="category.id"
         >
             <div class="category-item-category">
-                <div
-                    class="icon__category-closed qt-mr-25 pointer"
+                <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                <div class="category-item-category__name">
+                  <div
+                    class="icon__category-closed qt-mr-8 pointer"
                     [ngClass]="{'toggle-category':category.toggleSubCategory}"
                     (click)="category.toggleSubCategory = !category.toggleSubCategory"
-                ></div>
-                <span
-                    [ngClass]="{'status-published':category.type === 'PUBLISHED',
-            'status-draft':category.type === 'DRAFT'}"
-                    [textContent]="category.name"
-                ></span>
+                  ></div>
+                  <span
+                      [ngClass]="{'status-published':category.type === 'PUBLISHED',
+              'status-draft':category.type === 'DRAFT'}"
+                      [textContent]="category.name"
+                  ></span>
+                </div>
                 <left-panel-super-admin-categories-actions [category]="category"></left-panel-super-admin-categories-actions>
             </div>
             <div
-                class="category-item-sub-category qt-ml-10"
+                class="category-item-sub-category qt-ml-20"
                 *ngIf="category.toggleSubCategory"
                 appDragMenu
                 (dropEnd)="onDropEnd($event)"
@@ -55,13 +59,15 @@
                         [attr.category-id]="category.id"
                     >
                         <div class="category-item-category">
-                            <div class="icon__drag qt-sz-20 qt-mr-25"></div>
-                            <div
-                                class="icon__category-closed qt-mr-25 pointer"
-                                [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
-                                (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
-                            ></div>
-                            <span [textContent]="subcategory.name"></span>
+                            <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                            <div class="category-item-category__name">
+                              <div
+                                  class="icon__category-closed qt-mr-8 pointer"
+                                  [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                  (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                              ></div>
+                              <span [textContent]="subcategory.name"></span>
+                            </div>
                             <left-panel-super-admin-categories-actions [category]="subcategory"></left-panel-super-admin-categories-actions>
                         </div>
                         <div
@@ -84,13 +90,15 @@
                                     [attr.category-id]="subcategory.id"
                                 >
                                     <div class="category-item-category">
-                                        <div class="icon__drag qt-sz-20 qt-mr-25"></div>
-                                        <div
-                                            class="icon__category-closed qt-mr-25 pointer"
-                                            [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
-                                            (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
-                                        ></div>
-                                        <span [textContent]="subsubcategory.name"></span>
+                                        <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                                        <div class="category-item-category__name">
+                                          <div
+                                              class="icon__category-closed qt-mr-8 pointer"
+                                              [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                              (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                          ></div>
+                                          <span [textContent]="subsubcategory.name"></span>
+                                        </div>
                                         <left-panel-super-admin-categories-actions [category]="subsubcategory"></left-panel-super-admin-categories-actions>
                                     </div>
                                     <div
@@ -113,8 +121,10 @@
                                                 [attr.category-id]="subsubcategory.id"
                                             >
                                                 <div class="category-item-category">
-                                                    <div class="icon__drag qt-sz-20 qt-mr-25"></div>
-                                                    <span [textContent]="subsubsubcategory.name"></span>
+                                                    <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                                                    <div class="category-item-category__name">
+                                                      <span [textContent]="subsubsubcategory.name"></span>
+                                                    </div>
                                                     <left-panel-super-admin-categories-actions [category]="subsubsubcategory"></left-panel-super-admin-categories-actions>
                                                 </div>
                                             </div>

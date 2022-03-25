@@ -7,6 +7,7 @@
 .qt-button {
     width: 82px;
     height: 36px;
+    border-radius: 10px;
 }
 .save-draft {
     display: flex;
@@ -44,8 +45,9 @@
 .header-content {
     display: flex;
     align-items: center;
-    padding: 10px 30px;
+    padding: 9px 30px;
     border: 1px solid #edf0f2;
+    min-width: 1150px;
 }
 .clear-border {
     border: none;

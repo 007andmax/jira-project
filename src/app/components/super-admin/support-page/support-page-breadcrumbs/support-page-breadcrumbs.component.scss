@@ -6,6 +6,11 @@
     @media (max-width: 767px) {
         display: none;
     }
+    > div:last-child {
+      span {
+        color: $gray-700;
+      }
+    }
     div {
         display: flex;
         align-items: stretch;
@@ -22,11 +27,11 @@
         }
 
         .breadcrumb-separator {
-            margin-left: 10px;
-            margin-right: 10px;
-            width: 15px;
-            transform: rotate(90deg);
-            background-image: url(/assets/img/icons-left-sidebar/dropdown-arrow-down.svg);
+          margin-left: 3px;
+          margin-right: 3px;
+          font-size: 17px;
+          line-height: 1;
+          color: $gray-600;
         }
     }
 }

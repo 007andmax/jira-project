@@ -1,7 +1,9 @@
+@import "./src/assets/styles/variable";
+
 .container-page {
     height: 100%;
     overflow: hidden;
-    background-color: white;
+    background-color: $white;
 }
 
 // Flexbox setup.
@@ -35,6 +37,7 @@
         -webkit-align-self: auto;
         -ms-flex-item-align: auto;
         align-self: auto;
+        height: 100vh;
     }
 
     & > main {
@@ -55,7 +58,7 @@
     overflow: auto;
 }
 aside {
-    background-color: #f4f6f8;
+    background-color: $gray-200;
 }
 .resize-handle--x {
     -webkit-flex: 0 0 auto;
@@ -109,10 +112,9 @@ aside {
     }
 }
 .app-left-panel-super-admin-categories {
-    display: block;
-    min-height: 100vh;
-    min-width: 234px;
-    background-color: #f4f6f8;
-    color: #ffffff;
-    transition: width 300ms;
+  display: block;
+  min-width: 234px;
+  background-color: $gray-200;
+  color: $white;
+  transition: width 300ms;
 }
