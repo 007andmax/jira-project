@@ -30,6 +30,7 @@ export class SupportPageAddCategoryComponent implements OnInit {
   }
   onChangeName() {
     this.validate.checkValidName(this.name);
+    this.validate.setNameExist(false);
   }
 
 
@@ -47,9 +48,14 @@ export class SupportPageAddCategoryComponent implements OnInit {
     this.supportPageCategoriesService.addCategory({
       "name": this.name,
       "parentSupportCategoryId": null
-    }).subscribe(data => {
+    }).subscribe((data) => {
       this.addBtn.setDisabled(false);
       this.closeModal();
+    }, err => {
+      this.validate.setNameExist(true);
+      this.validate.setTextErrorNameExist(err.error.message);
+      console.log("err", err);
+      this.addBtn.setDisabled(false);
     })
   };
 

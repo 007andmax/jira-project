@@ -33,6 +33,7 @@
                         class="icon__category-closed qt-mr-8 pointer"
                         [ngClass]="{'toggle-category':category.toggleSubCategory}"
                         (click)="category.toggleSubCategory = !category.toggleSubCategory"
+                        *ngIf="category.subcategories.length > 0"
                     ></div>
                     <span
                         [ngClass]="{'status-published':category.type === 'PUBLISHED',
@@ -74,6 +75,7 @@
                                     class="icon__category-closed qt-mr-8 pointer"
                                     [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
                                     (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                    *ngIf="subcategory.subcategories.length > 0"
                                 ></div>
                                 <span [textContent]="subcategory.name"></span>
                             </div>
@@ -111,6 +113,7 @@
                                                 class="icon__category-closed qt-mr-8 pointer"
                                                 [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
                                                 (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                *ngIf="subsubcategory.subcategories.length > 0"
                                             ></div>
                                             <span [textContent]="subsubcategory.name"></span>
                                         </div>
@@ -226,7 +229,15 @@
 
 
 
+
+
+
+
     </ng-template>
+
+
+
+
 
 
 

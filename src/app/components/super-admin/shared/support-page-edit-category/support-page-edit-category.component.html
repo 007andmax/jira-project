@@ -21,6 +21,11 @@
             <mat-error *ngIf="!validate.getName()">
                 Category name must be between 1 and 100 characters
             </mat-error>
+            <mat-error
+                *ngIf="validate.getNameIsExist()"
+                [textContent]="validate.getTextErrorNameExist()"
+            >
+            </mat-error>
         </div>
     </div>
     <div class="modal-footer">

@@ -31,6 +31,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   ngOnInit() {
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = data;
+      this.cd.detectChanges();
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
