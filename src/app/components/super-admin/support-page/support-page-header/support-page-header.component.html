@@ -2,7 +2,7 @@
     class="header-content"
     [ngClass]="{'clear-border': !selectedCategory}"
 >
-    <support-page-breadcrumbs></support-page-breadcrumbs>
+    <support-page-breadcrumbs [selectedCategory]="selectedCategory"></support-page-breadcrumbs>
     <div
         *ngIf="selectedCategory"
         class="icon__edit-category qt-sz-20 pointer qt-ml-8"

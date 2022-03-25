@@ -28,6 +28,7 @@
                 <div
                     class="category-item-category__name"
                     [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
+                    (click)="editArticle(category)"
                 >
                     <div
                         class="icon__category-closed qt-mr-8 pointer"
@@ -70,6 +71,7 @@
                             <div
                                 class="category-item-category__name"
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
+                                (click)="editArticle(subcategory)"
                             >
                                 <div
                                     class="icon__category-closed qt-mr-8 pointer"
@@ -108,6 +110,7 @@
                                         <div
                                             class="category-item-category__name"
                                             [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
+                                            (click)="editArticle(subsubcategory)"
                                         >
                                             <div
                                                 class="icon__category-closed qt-mr-8 pointer"
@@ -146,6 +149,7 @@
                                                     <div
                                                         class="category-item-category__name"
                                                         [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"
+                                                        (click)="editArticle(subsubsubcategory)"
                                                     >
                                                         <span [textContent]="subsubsubcategory.name"></span>
                                                     </div>
@@ -233,7 +237,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
+
+
+
 
 
 

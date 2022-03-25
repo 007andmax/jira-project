@@ -524,6 +524,8 @@ import { DragMenuDirective } from './directives/drag-menu.directive';
 import { LeftPanelSuperAdminCategoriesActionsComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
 import { SupportPageBreadcrumbsComponent } from './components/super-admin/support-page/support-page-breadcrumbs/support-page-breadcrumbs.component';
 import { SupportPageHeaderComponent } from './components/super-admin/support-page/support-page-header/support-page-header.component';
+import { SupportPageBodyComponent } from './components/super-admin/support-page/support-page-body/support-page-body.component';
+import { SupportPageInfoComponent } from './components/super-admin/support-page/support-page-info/support-page-info.component';
 
 
 declare var $: any;
@@ -987,7 +989,9 @@ declare var $: any;
     DragMenuDirective,
     LeftPanelSuperAdminCategoriesActionsComponent,
     SupportPageBreadcrumbsComponent,
-    SupportPageHeaderComponent
+    SupportPageHeaderComponent,
+    SupportPageBodyComponent,
+    SupportPageInfoComponent
   ],
   imports: [
     BrowserModule,

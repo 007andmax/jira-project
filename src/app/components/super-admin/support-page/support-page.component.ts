@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
+import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategoryContent } from './class/support-page-category-content';
 var $ = require("jquery");
@@ -13,9 +14,14 @@ export class SupportPageComponent implements OnInit {
   supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
   selectedCategory: SupportPageCategory;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
+    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
 
   ngOnInit() {
+    this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
+      if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
+      if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
+    });
     this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
       this.selectedCategory = data;
       if (this.selectedCategory.document) {

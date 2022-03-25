@@ -4,6 +4,8 @@ export class SupportPageCategoryContent {
         id: string;
         content: string;
     };
+    createdAt: string = "";
+    createdBy: string = "";
     tagIds: Array<string> = [];
     newContent: string;
     isEditMode: boolean = false;
@@ -16,6 +18,8 @@ export class SupportPageCategoryContent {
                 id: data.id,
                 content: data.content
             }
+            this.createdAt = data.createdAt;
+            this.createdBy = data.createdBy;
         } else {
             this.document = {
                 id: "",

@@ -12,5 +12,14 @@
             [selectedCategory]="selectedCategory"
             [supportPageCategoryContent]="supportPageCategoryContent"
         ></support-page-header>
+        <div
+            class="support-page-body"
+            *ngIf="selectedCategory"
+        >
+            <support-page-info
+                [selectedCategory]="selectedCategory"
+                [supportPageCategoryContent]="supportPageCategoryContent"
+            ></support-page-info>
+        </div>
     </main>
 </div>

@@ -1,6 +1,6 @@
 <div
     class="breadcrumbs"
-    *ngIf="category"
+    *ngIf="selectedCategory"
 >
     <div
         class="breadcrumbs-location qt-fs-0 pointer"
@@ -8,7 +8,6 @@
     >
         <span [textContent]="category"></span>
         <div class="breadcrumb-separator">/</div>
-
     </div>
     <div
         class="breadcrumbs-attribute qt-fs-0"
@@ -16,7 +15,6 @@
     >
         <span [textContent]="subCategory"></span>
         <div class="breadcrumb-separator">/</div>
-
     </div>
     <div
         class="breadcrumbs-path qt-fs-0"
