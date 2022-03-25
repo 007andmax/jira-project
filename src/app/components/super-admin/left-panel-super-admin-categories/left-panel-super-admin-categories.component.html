@@ -27,7 +27,7 @@
                 <div class="icon__drag qt-sz-20 qt-mr-2"></div>
                 <div
                     class="category-item-category__name"
-                    [ngClass]="{'--active':category.toggleSubCategory}"
+                    [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
                 >
                     <div
                         class="icon__category-closed qt-mr-8 pointer"
@@ -40,7 +40,10 @@
                         [textContent]="category.name"
                     ></span>
                 </div>
-                <left-panel-super-admin-categories-actions [category]="category"></left-panel-super-admin-categories-actions>
+                <left-panel-super-admin-categories-actions
+                    [category]="category"
+                    (onSelectCategory)="selectedCategory = category"
+                ></left-panel-super-admin-categories-actions>
             </div>
             <div
                 class="category-item-sub-category qt-ml-20"
@@ -65,7 +68,7 @@
                             <div class="icon__drag qt-sz-20 qt-mr-2"></div>
                             <div
                                 class="category-item-category__name"
-                                [ngClass]="{'--active':subcategory.toggleSubCategory}"
+                                [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
                             >
                                 <div
                                     class="icon__category-closed qt-mr-8 pointer"
@@ -74,7 +77,10 @@
                                 ></div>
                                 <span [textContent]="subcategory.name"></span>
                             </div>
-                            <left-panel-super-admin-categories-actions [category]="subcategory"></left-panel-super-admin-categories-actions>
+                            <left-panel-super-admin-categories-actions
+                                [category]="subcategory"
+                                (onSelectCategory)="selectedCategory = subcategory"
+                            ></left-panel-super-admin-categories-actions>
                         </div>
                         <div
                             class="category-item-sub-sub-category"
@@ -99,7 +105,7 @@
                                         <div class="icon__drag qt-sz-20 qt-mr-2"></div>
                                         <div
                                             class="category-item-category__name"
-                                            [ngClass]="{'--active':subsubcategory.toggleSubCategory}"
+                                            [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
                                         >
                                             <div
                                                 class="icon__category-closed qt-mr-8 pointer"
@@ -108,7 +114,10 @@
                                             ></div>
                                             <span [textContent]="subsubcategory.name"></span>
                                         </div>
-                                        <left-panel-super-admin-categories-actions [category]="subsubcategory"></left-panel-super-admin-categories-actions>
+                                        <left-panel-super-admin-categories-actions
+                                            [category]="subsubcategory"
+                                            (onSelectCategory)="selectedCategory = subsubcategory"
+                                        ></left-panel-super-admin-categories-actions>
                                     </div>
                                     <div
                                         class="category-item-sub-sub-sub-category"
@@ -133,11 +142,14 @@
                                                     <div class="icon__drag qt-sz-20 qt-mr-2"></div>
                                                     <div
                                                         class="category-item-category__name"
-                                                        [ngClass]="{'--active':subsubsubcategory.toggleSubCategory}"
+                                                        [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"
                                                     >
                                                         <span [textContent]="subsubsubcategory.name"></span>
                                                     </div>
-                                                    <left-panel-super-admin-categories-actions [category]="subsubsubcategory"></left-panel-super-admin-categories-actions>
+                                                    <left-panel-super-admin-categories-actions
+                                                        [category]="subsubsubcategory"
+                                                        (onSelectCategory)="selectedCategory = subsubsubcategory"
+                                                    ></left-panel-super-admin-categories-actions>
                                                 </div>
                                             </div>
                                         </ng-template>
@@ -207,7 +219,21 @@
 
 
 
+
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -16,6 +16,7 @@ import { SupportPageCategory } from '../class/support-page-category';
 })
 export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   @Input() category: SupportPageCategory;
+  @Output() onSelectCategory = new EventEmitter();
   constructor(private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private confirmStateService: ConfirmStateService,) { }
@@ -33,6 +34,7 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   }
   addArticle(category) {
     this.supportPageCategoriesStateService.addArticle(category);
+    this.onSelectCategory.emit(this.category);
   }
   delete(category) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
