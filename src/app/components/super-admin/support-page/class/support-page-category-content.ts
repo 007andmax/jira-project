@@ -5,13 +5,17 @@ export class SupportPageCategoryContent {
         content: string;
     };
     tagIds: Array<string> = [];
+    newContent: string;
     isEditMode: boolean = false;
     constructor() {
 
     }
     public setContent(data) {
         if (data) {
-
+            this.document = {
+                id: data.id,
+                content: data.content
+            }
         } else {
             this.document = {
                 id: "",
@@ -24,13 +28,14 @@ export class SupportPageCategoryContent {
     }
     public getData() {
         if (this.isEditMode) {
-
+            let document;
+            if (this.newContent) document = {
+                id: this.document.id,
+                content: this.newContent,
+            }
             return {
                 type: this.type,
-                document: {
-                    content
-                        : this.document.content
-                },
+                document: document,
                 tagIds: this.tagIds
             }
         }

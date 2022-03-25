@@ -25,17 +25,20 @@
         >
             <div class="category-item-category">
                 <div class="icon__drag qt-sz-20 qt-mr-2"></div>
-                <div class="category-item-category__name">
-                  <div
-                    class="icon__category-closed qt-mr-8 pointer"
-                    [ngClass]="{'toggle-category':category.toggleSubCategory}"
-                    (click)="category.toggleSubCategory = !category.toggleSubCategory"
-                  ></div>
-                  <span
-                      [ngClass]="{'status-published':category.type === 'PUBLISHED',
+                <div
+                    class="category-item-category__name"
+                    [ngClass]="{'--active':category.toggleSubCategory}"
+                >
+                    <div
+                        class="icon__category-closed qt-mr-8 pointer"
+                        [ngClass]="{'toggle-category':category.toggleSubCategory}"
+                        (click)="category.toggleSubCategory = !category.toggleSubCategory"
+                    ></div>
+                    <span
+                        [ngClass]="{'status-published':category.type === 'PUBLISHED',
               'status-draft':category.type === 'DRAFT'}"
-                      [textContent]="category.name"
-                  ></span>
+                        [textContent]="category.name"
+                    ></span>
                 </div>
                 <left-panel-super-admin-categories-actions [category]="category"></left-panel-super-admin-categories-actions>
             </div>
@@ -60,13 +63,16 @@
                     >
                         <div class="category-item-category">
                             <div class="icon__drag qt-sz-20 qt-mr-2"></div>
-                            <div class="category-item-category__name">
-                              <div
-                                  class="icon__category-closed qt-mr-8 pointer"
-                                  [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
-                                  (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
-                              ></div>
-                              <span [textContent]="subcategory.name"></span>
+                            <div
+                                class="category-item-category__name"
+                                [ngClass]="{'--active':subcategory.toggleSubCategory}"
+                            >
+                                <div
+                                    class="icon__category-closed qt-mr-8 pointer"
+                                    [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                    (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                ></div>
+                                <span [textContent]="subcategory.name"></span>
                             </div>
                             <left-panel-super-admin-categories-actions [category]="subcategory"></left-panel-super-admin-categories-actions>
                         </div>
@@ -91,13 +97,16 @@
                                 >
                                     <div class="category-item-category">
                                         <div class="icon__drag qt-sz-20 qt-mr-2"></div>
-                                        <div class="category-item-category__name">
-                                          <div
-                                              class="icon__category-closed qt-mr-8 pointer"
-                                              [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
-                                              (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
-                                          ></div>
-                                          <span [textContent]="subsubcategory.name"></span>
+                                        <div
+                                            class="category-item-category__name"
+                                            [ngClass]="{'--active':subsubcategory.toggleSubCategory}"
+                                        >
+                                            <div
+                                                class="icon__category-closed qt-mr-8 pointer"
+                                                [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                            ></div>
+                                            <span [textContent]="subsubcategory.name"></span>
                                         </div>
                                         <left-panel-super-admin-categories-actions [category]="subsubcategory"></left-panel-super-admin-categories-actions>
                                     </div>
@@ -122,8 +131,11 @@
                                             >
                                                 <div class="category-item-category">
                                                     <div class="icon__drag qt-sz-20 qt-mr-2"></div>
-                                                    <div class="category-item-category__name">
-                                                      <span [textContent]="subsubsubcategory.name"></span>
+                                                    <div
+                                                        class="category-item-category__name"
+                                                        [ngClass]="{'--active':subsubsubcategory.toggleSubCategory}"
+                                                    >
+                                                        <span [textContent]="subsubsubcategory.name"></span>
                                                     </div>
                                                     <left-panel-super-admin-categories-actions [category]="subsubsubcategory"></left-panel-super-admin-categories-actions>
                                                 </div>
@@ -191,7 +203,15 @@
 
 
 
+
+
+
+
     </ng-template>
+
+
+
+
 
 
 

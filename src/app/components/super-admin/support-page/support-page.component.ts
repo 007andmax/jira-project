@@ -19,8 +19,9 @@ export class SupportPageComponent implements OnInit {
     this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
       this.selectedCategory = data;
       if (this.selectedCategory.document) {
-        this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe(content => {
+        this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
           this.supportPageCategoryContent.setEditMode(true);
+          this.supportPageCategoryContent.setContent(content);
           console.log("content", content);
         })
       } else {
