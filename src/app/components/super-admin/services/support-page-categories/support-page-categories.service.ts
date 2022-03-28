@@ -60,6 +60,15 @@ export class SupportPageCategoriesService {
   public getCategories() {
     return this.http.get(this.apiUrl + 'support/categories');
   }
+  public getTags() {
+    return this.http.get(this.apiUrl + 'support/tags');
+  }
+  public addTag(data) {
+    return this.http.post(this.apiUrl + 'commonTags', data);
+  }
+  public removeTag(id) {
+    return this.http.delete(this.apiUrl + 'commonTags/removeTag?tagId=' + id);
+  }
   public getContentCategory(category_id) {
     return this.http.get(this.apiUrl + 'support/documents/' + category_id);
   }

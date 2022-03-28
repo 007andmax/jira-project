@@ -526,6 +526,7 @@ import { SupportPageBreadcrumbsComponent } from './components/super-admin/suppor
 import { SupportPageHeaderComponent } from './components/super-admin/support-page/support-page-header/support-page-header.component';
 import { SupportPageBodyComponent } from './components/super-admin/support-page/support-page-body/support-page-body.component';
 import { SupportPageInfoComponent } from './components/super-admin/support-page/support-page-info/support-page-info.component';
+import { SupportPageInfoTagsComponent } from './components/super-admin/support-page/support-page-info/support-page-info-tags/support-page-info-tags.component';
 
 
 declare var $: any;
@@ -991,7 +992,8 @@ declare var $: any;
     SupportPageBreadcrumbsComponent,
     SupportPageHeaderComponent,
     SupportPageBodyComponent,
-    SupportPageInfoComponent
+    SupportPageInfoComponent,
+    SupportPageInfoTagsComponent
   ],
   imports: [
     BrowserModule,

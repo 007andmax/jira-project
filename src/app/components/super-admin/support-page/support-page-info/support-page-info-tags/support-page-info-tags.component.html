@@ -1,0 +1,92 @@
+<div
+    class="profile-cmp-board tags-area d-flex"
+    ngbDropdown
+>
+    <input
+        type="text"
+        autocomplete="off"
+        id="dropdown1"
+        [(ngModel)]="newTag"
+        placeholder="Add/filter tags"
+        (input)="onSearch($event)"
+        ngbDropdownToggle
+    >
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <div
+            class="no-exist"
+            *ngIf="tags.length == 0"
+        >
+            <h3>No matching tags</h3>
+            <span>
+                Try a different keyword or press Cmd+Enter to create a new tag.
+            </span>
+        </div>
+        <div class="list-tags-body">
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="tags"
+                let-i="index"
+            >
+                <div
+                    (click)="toggleItem(item)"
+                    class="company-tag-item"
+                    [ngClass]="{'is-hover':item.isHover}"
+                    [id]="'tag-' + item.id"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div class="name">{{item.word}}</div>
+                        </div>
+                        <i
+                            class="icon__edit-category qt-sz-16 qt-mr-10"
+                            *ngIf="isSeleted(item)"
+                        ></i>
+                        <i
+                            class="icon__remove-category qt-sz-16"
+                            *ngIf="isSeleted(item)"
+                            (click)="removeTag(item)"
+                        ></i>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
+        <div
+            class="crate-tag"
+            (click)="addTag()"
+        >
+            <span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
+        </div>
+    </div>
+    <div
+        class="tags-tab d-flex"
+        *ngIf="false"
+    >
+        <span
+            class="tag"
+            *ngFor="let tag of tags; let i = index;"
+        >
+            {{tag.word}}
+            <a
+                href="javascript:;"
+                (click)="deleteTag(i)"
+                class="close"
+            >
+                <img
+                    src="html/assets/img/company-details/tag-close-12.svg"
+                    alt="tags"
+                >
+            </a>
+        </span>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
+import { SupportPageInfoTag } from '../../support-page/support-page-info/support-page-info-tags/class/support-page-info-tag';
 import { SupportPageCategoriesRealTimeService } from './support-page-categories-real-time.service';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { SupportPageCategoriesRealTimeService } from './support-page-categories-
 export class SupportPageCategoriesStateService {
   categories: Array<SupportPageCategory> = [];
   categoryForRemove: SupportPageCategory = null;
+  tagForRemove: SupportPageInfoTag = null;
   onAddArticle: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   constructor(private supportPageCategoriesService: SupportPageCategoriesService,
@@ -78,6 +80,12 @@ export class SupportPageCategoriesStateService {
       console.log("this.categories", this.categories);
       this.onGetCategories.emit(this.categories)
     });
+  }
+  public setTagForRemove(data) {
+    this.tagForRemove = data;
+  }
+  public getTagForRemove() {
+    return this.tagForRemove;
   }
   public getCategories() {
     return this.categories;
