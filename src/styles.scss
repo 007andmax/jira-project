@@ -5003,3 +5003,56 @@ add-category-product {
     }
   }
 }
+.support-page-modal {
+  padding: 24px;
+  .close-modal {
+    background-image: url(/html/assets/img/icons/close.svg);
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    z-index: 1;
+    margin-left: 6px;
+  }
+  .confirm-modal__title {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: $primary-2;
+  }
+  .modal-body {
+    padding: 0;
+  }
+  .modal-footer {
+    border: unset;
+  }
+  label {
+    color: $gray-600;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+  .btn-primary {
+    min-width: auto;
+  }
+  .btn-new {
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    height: 36px;
+    .disabled {
+      color: $gray-700;
+    }
+    .btn-primary {
+      font-weight: 600;
+    }
+  }
+  input {
+    border-radius: 8px;
+    border-color: $gray-400;
+    color: $primary-2;
+  }
+}

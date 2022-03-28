@@ -105,3 +105,27 @@ aside {
     color: $white;
     transition: width 300ms;
 }
+
+.support-page-body {
+  display: flex;
+  align-items: flex-start;
+  height: calc(100vh - 60px);
+  min-width: 1150px;
+  .support-page-body__editor {
+    flex: 1;
+    min-width: 680px;
+    width: 100%;
+    padding: 20px 40px;
+    margin: 0 auto;
+    height: 100%;
+    overflow: auto;
+    background-color: $white;
+  }
+  support-page-info {
+    width: 290px;
+    padding: 20px;
+    background-color: $gray-200;
+    height: 100%;
+    overflow: auto;
+  }
+}

@@ -2,7 +2,8 @@
     class="profile-cmp-board tags-area d-flex"
     ngbDropdown
 >
-    <input
+    <div class="qt-page-list__search">
+      <input
         type="text"
         autocomplete="off"
         id="dropdown1"
@@ -10,7 +11,8 @@
         placeholder="Add/filter tags"
         (input)="onSearch($event)"
         ngbDropdownToggle
-    >
+      >
+    </div>
     <div
         ngbDropdownMenu
         aria-labelledby="dropdown1"
@@ -20,7 +22,7 @@
             class="no-exist"
             *ngIf="tags.length == 0"
         >
-            <h3>No matching tags</h3>
+            <div class="no-matching">No matching tags</div>
             <span>
                 Try a different keyword or press Cmd+Enter to create a new tag.
             </span>
@@ -45,11 +47,11 @@
                             readonly
                         >
                         <span></span>
-                        <div class="text-content">
+                        <div class="text-content qt-mr-4">
                             <div class="name">{{item.word}}</div>
                         </div>
                         <i
-                            class="icon__edit-category qt-sz-16 qt-mr-10"
+                            class="icon__edit-category qt-sz-16 qt-mr-8"
                             *ngIf="isSeleted(item)"
                         ></i>
                         <i
@@ -62,10 +64,10 @@
             </ng-template>
         </div>
         <div
-            class="crate-tag"
+            class="crate-tag pointer"
             (click)="addTag()"
         >
-            <span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
+          <span class="icon__add-grey qt-sz-12 qt-bg-contain qt-dib qt-mr-6"></span><span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
         </div>
     </div>
     <div

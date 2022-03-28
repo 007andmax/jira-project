@@ -1,19 +1,21 @@
 <div class="qt-input-block">
-    <label class="qt-mb-4">Created By</label>
-    <input
-        type="text"
-        class="qt-w100"
-        [value]="supportPageCategoryContent.createdBy"
-        readonly
-    >
+  <label class="qt-mb-4 qt-mt-10">Created By</label>
+  <input
+    type="text"
+    class="qt-w100"
+    [value]="supportPageCategoryContent.createdBy"
+    placeholder="Scott Willson"
+    readonly
+  >
 </div>
 <div class="qt-input-block">
-    <label class="qt-mb-4">Last Updated</label>
-    <input
-        type="text"
-        class="qt-w100"
-        [value]="supportPageCategoryContent.createdAt"
-        readonly
-    >
+  <label class="qt-mb-4">Last Updated</label>
+  <input
+    type="text"
+    class="qt-w100"
+    [value]="supportPageCategoryContent.createdAt"
+    placeholder="10 Mar, 10:30 am"
+    readonly
+  >
 </div>
 <support-page-info-tags></support-page-info-tags>

@@ -1,14 +1,14 @@
-<div class="confirm-modal">
+<div class="confirm-modal support-page-modal">
     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-20">
-        <div class="confirm-modal__title qt-d-none qt-d-md-block">Edit Category</div>
+        <div class="confirm-modal__title">Edit Category</div>
         <div
-            class="close-modal"
+            class="close-modal pointer"
             (click)="closeModal()"
             tabindex="1"
         ></div>
     </div>
     <div class="modal-body">
-        <div class="qt-input-block qt-w100 qt-mb-16">
+        <div class="qt-input-block qt-w100">
             <label>Category Name</label>
             <input
                 type="text"
@@ -28,22 +28,22 @@
             </mat-error>
         </div>
     </div>
-    <div class="modal-footer">
-        <div
-            class="btn btn-lg btn-primary"
-            data-dismiss='modal'
-            (click)="closeModal()"
-        >
-            Cancel
-        </div>
-        <div
-            class="btn btn-lg btn-primary"
-            appDisabledBtn
-            #addBtn="disabled"
-            (onClick)="editCategory()"
-        >
-            <span *ngIf="!addBtn.isBlock()">Save</span>
-            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-        </div>
+  <div class="d-f qt-jc-fe qt-mt-24">
+    <div
+      class="btn-new disabled qt-mr-12"
+      data-dismiss='modal'
+      (click)="closeModal()"
+    >
+      Cancel
     </div>
+    <div
+      class="btn-new btn-primary"
+      appDisabledBtn
+      #addBtn="disabled"
+      (onClick)="editCategory()"
+    >
+      <span *ngIf="!addBtn.isBlock()">Save</span>
+      <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+    </div>
+  </div>
 </div>
