@@ -141,7 +141,7 @@ export class WebsocketService {
     let that = this;
     this.stompClient.onConnect = (data) => {
       that.subsribeToSupportCategory();
-
+      that.subsribeToTags();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {

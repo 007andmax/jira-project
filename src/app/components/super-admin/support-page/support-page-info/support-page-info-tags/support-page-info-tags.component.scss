@@ -123,7 +123,16 @@
       margin-left: 0;
     }
   }
-
+  .icon__edit-category,
+  .icon__remove-category {
+    display: none;
+  }
+  &:hover {
+    .icon__edit-category,
+    .icon__remove-category {
+      display: block;
+    }
+  }
   label {
     width: auto;
     height: 16px;
@@ -142,27 +151,32 @@
   input:checked ~ span {
     background-size: 18px;
   }
-  .name {
-    margin-left: 10px;
-    font-size: 14px;
-    line-height: 17;
-    font-weight: 400;
-    color: $primary-2;
-    white-space: nowrap;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-  }
-  .text-content {
-    white-space: nowrap;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    input[type="text"] {
-      left: 0px;
-      position: unset;
-      opacity: 1;
-    }
+}
+.name {
+  margin-left: 10px;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 400;
+  color: $primary-2;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.text-content {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  input[type="text"] {
+    left: 0px;
+    position: unset;
+    opacity: 1;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    padding: 2px 2px 2px 8px;
+    width: 170px;
   }
 }
 .qt-page-list__search {

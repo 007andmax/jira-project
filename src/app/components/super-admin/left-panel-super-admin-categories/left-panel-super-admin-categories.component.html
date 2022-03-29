@@ -38,7 +38,7 @@
                     ></div>
                     <span
                         [ngClass]="{'status-published':category.type === 'PUBLISHED',
-              'status-draft':category.type === 'DRAFT'}"
+              'status-draft':category.type === 'DRAFT','pointer':category.document}"
                         [textContent]="category.name"
                     ></span>
                 </div>
@@ -79,7 +79,10 @@
                                     (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                                     *ngIf="subcategory.subcategories.length > 0"
                                 ></div>
-                                <span [textContent]="subcategory.name"></span>
+                                <span
+                                    [ngClass]="{'pointer':subcategory.document}"
+                                    [textContent]="subcategory.name"
+                                ></span>
                             </div>
                             <left-panel-super-admin-categories-actions
                                 [category]="subcategory"
@@ -118,7 +121,10 @@
                                                 (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
                                                 *ngIf="subsubcategory.subcategories.length > 0"
                                             ></div>
-                                            <span [textContent]="subsubcategory.name"></span>
+                                            <span
+                                                [ngClass]="{'pointer':subsubcategory.document}"
+                                                [textContent]="subsubcategory.name"
+                                            ></span>
                                         </div>
                                         <left-panel-super-admin-categories-actions
                                             [category]="subsubcategory"
@@ -151,7 +157,10 @@
                                                         [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"
                                                         (click)="editArticle(subsubsubcategory)"
                                                     >
-                                                        <span [textContent]="subsubsubcategory.name"></span>
+                                                        <span
+                                                            [ngClass]="{'pointer':subsubsubcategory.document}"
+                                                            [textContent]="subsubsubcategory.name"
+                                                        ></span>
                                                     </div>
                                                     <left-panel-super-admin-categories-actions
                                                         [category]="subsubsubcategory"
@@ -246,7 +255,19 @@
 
 
 
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
 
 
 

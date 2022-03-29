@@ -123,6 +123,7 @@ export class AppComponent implements OnInit {
         this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
         this.companiesState.onInitGetCurrentCompany();
+        this.tagsStateService.onInit();
         this.appService.onInit();
         this.showPreloader = false;
         this.cd.detectChanges();

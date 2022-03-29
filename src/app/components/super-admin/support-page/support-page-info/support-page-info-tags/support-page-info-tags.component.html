@@ -55,24 +55,29 @@
                         <input
                             type="text"
                             [value]="item.word"
-                            [readonly]="!item.isEditMode()"
+                            *ngIf="item.isEditMode()"
                         >
-                        <!-- <div class="name">{{item.word}}</div> -->
+                        <div
+                            class="name"
+                            *ngIf="!item.isEditMode()"
+                        >
+                            {{item.word}}
+                        </div>
                     </div>
                     <i
                         class="icon__save-support-tag qt-sz-16"
-                        *ngIf="isSeleted(item) && item.isEditMode()"
-                        (click)="item.setEditMode(false);editTag(item.id,$event)"
+                        *ngIf="item.isEditMode()"
+                        (click)="editTag(item.id,$event);item.setEditMode(false)"
                     ></i>
                     <i
                         class="icon__edit-category qt-sz-16 qt-mr-8"
-                        *ngIf="isSeleted(item) && !item.isEditMode()"
                         (click)="item.setEditMode(true)"
+                        *ngIf="!item.isEditMode()"
                     ></i>
                     <i
                         class="icon__remove-category qt-sz-16"
-                        *ngIf="isSeleted(item) && !item.isEditMode()"
                         (click)="removeTag(item)"
+                        *ngIf="!item.isEditMode()"
                     ></i>
                 </div>
             </ng-template>
