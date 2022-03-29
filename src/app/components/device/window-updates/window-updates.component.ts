@@ -21,6 +21,10 @@ export class WindowUpdatesComponent implements OnInit {
   categoriesName: string = "";
   _id = "";
   categories: number
+  check: any[] = [];
+  selected: number = 0;
+  reloadWindowUpdatePendingList: any[] = [];
+  isOverlay = false;
 
   constructor(
     private kafkaStateService: KafkaStateService,
@@ -101,7 +105,10 @@ export class WindowUpdatesComponent implements OnInit {
             this.windowUpdatePendingList.push(data);
           }
         }
-        this.cd.detectChanges();
+
+        if(!this.cd['destroyed']){
+          this.cd.detectChanges();
+        }
       }
     }
   }
@@ -139,6 +146,57 @@ export class WindowUpdatesComponent implements OnInit {
       for (let i = 0; i < finalname.length; i++) {
         return finalname[i].split(",");
       }
+    }
+  }
+
+  postWindowUpdatePending(i) {
+    const index: any = { "ID": i };
+    let find = this.check.find(x => x.ID == i);
+    let indexs = this.check.findIndex(x => x.ID == i);
+    if (!find) {
+      this.check.push(index);
+      this.selected = this.selected + 1;
+      this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
+    }
+    else {
+      this.check.splice(indexs, 1);
+      this.selected = this.selected - 1;
+      this.reloadWindowUpdatePendingList.splice(indexs, 1);
+    }
+  }
+
+  InstallUpdate() {
+    var clonedItems = [];
+    for (let i = 0; i < this.reloadWindowUpdatePendingList.length; i++) {
+      var itemToUpdate: any = {};
+      itemToUpdate.UpdateID = this.reloadWindowUpdatePendingList[i].UpdateID;
+      itemToUpdate.Title = this.reloadWindowUpdatePendingList[i].Title;
+      itemToUpdate.RebootIsRequired = this.reloadWindowUpdatePendingList[i].RebootIsRequired;
+
+      if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+        itemToUpdate.RebootIsRequired = "0";
+      }
+      else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+        itemToUpdate.RebootIsRequired = "1";
+      }
+      else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+        itemToUpdate.RebootIsRequired = "2";
+      }
+      clonedItems.push(itemToUpdate);
+
+      var item = this.windowUpdatePendingList.find(x => x.UpdateID == this.reloadWindowUpdatePendingList[i].UpdateID);
+      if (item) {
+        item.loading = true;
+      }
+    }
+
+    this.agentService.GetWindowUpdateList(this.asset.ID, clonedItems);
+
+    if (this.check.length) {
+      this.isOverlay = true;
+      setTimeout(() => {
+        this.isOverlay = false;
+      }, 3000)
     }
   }
 }

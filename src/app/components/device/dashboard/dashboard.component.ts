@@ -191,7 +191,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         }
         this.getNetworkDriveDetail(this.kafkaMessage.NetworkDrives);
-        this.cd.detectChanges();
+
+        if (!this.cd['destroyed']){
+          this.cd.detectChanges();
+        }
       }
     }
   }

@@ -925,7 +925,7 @@ background-color: #FF0000;
 .modal-table
 {
   overflow-y: hidden;
-  height: calc(100vh - 15rem);
+  height: calc(150vh - 15rem);
 }
 .modal-table-body
 {
@@ -1025,6 +1025,11 @@ height: 27px !important;
 ::ng-deep .light-dropdown .icn-remove-old, .grey-dropdown .icn-remove-old {
   top: 25px !important;
 }
+
+.modal-content{
+  height: 450px;
+}
+
 // modal-popup end
 
 

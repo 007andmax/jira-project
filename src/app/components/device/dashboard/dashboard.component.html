@@ -804,15 +804,15 @@
                 </tr>
             </tbody>
           </table>
-      </div>
-      <div class="viewer-footer" *ngIf="windowUpdatePendingList.length<=0 ? false: true">
-          <a  class="btn btn-dowanload footer" [ngClass]="selected<=0? 'disabled': '' " (click)="InstallUpdate()">
-            Install
-        </a>
-      </div>
+        </div>
+        <div class="viewer-footer" *ngIf="windowUpdatePendingList.length<=0 ? false: true">
+            <a  class="btn btn-dowanload footer" [ngClass]="selected<=0? 'disabled': '' " (click)="InstallUpdate()">
+              Install
+          </a>
+        </div>
     </div>
   </div>
-  </div>
+</div>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Install">

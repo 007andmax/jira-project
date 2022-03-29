@@ -19,6 +19,7 @@
                           <table class="fixed">
                             <thead>
                               <tr *ngIf="windowUpdatePendingList.length<=0 ? false: true">
+                                <th class="tableth"></th>
                                 <th class="title">Description</th>
                                 <th class="product">Product</th>
                                 <th class="product">Class</th>
@@ -27,6 +28,14 @@
                             </thead>
                             <tbody>
                               <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
+                                <td class="tabletd">
+                                  <input
+                                          type="checkbox"
+                                          (change)="postWindowUpdatePending(i)"
+                                          *ngIf="!data.loading"
+                                  />
+                                  <div class="loader" *ngIf="data.loading"></div>
+                              </td>
                                 <td class="tablespace">{{data.Title}}</td>
                                 <td class="tablespace">{{data.Product}}</td>
                                 <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
@@ -37,8 +46,16 @@
                             </tr>
                             </tbody>
                           </table>
+                          <div class="viewer-footer" *ngIf="windowUpdatePendingList.length>0">
+                            <!--
+                              {{selected}}
+                            -->
+                            <a  class="btn btn-dowanload footer"  (click)="InstallUpdate()">
+                              Install
+                          </a>
+                        </div>
+                        </div>
                       </div>
-                    </div>
                   </div>
                   </div>
                         </ng-template>
