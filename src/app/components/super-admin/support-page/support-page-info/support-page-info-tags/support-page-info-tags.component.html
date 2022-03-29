@@ -70,12 +70,12 @@
                         (click)="editTag(item.id,$event);item.setEditMode(false)"
                     ></i>
                     <i
-                        class="icon__edit-category qt-sz-16 qt-mr-8"
+                        class="edit-grey qt-sz-16 qt-mr-8"
                         (click)="item.setEditMode(true)"
                         *ngIf="!item.isEditMode()"
                     ></i>
                     <i
-                        class="icon__remove-category qt-sz-16"
+                        class="icon__remove qt-sz-16"
                         (click)="removeTag(item)"
                         *ngIf="!item.isEditMode()"
                     ></i>
@@ -99,10 +99,10 @@
             <a
                 href="javascript:;"
                 (click)="toggleItem(getSelectedTag(tag))"
-                class="close"
+                class="close-btn"
             >
                 <img
-                    src="html/assets/img/company-details/tag-close-12.svg"
+                    src="/html/assets/img/icons/close-10.png"
                     alt="tags"
                 >
             </a>
