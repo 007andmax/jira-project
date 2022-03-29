@@ -225,6 +225,11 @@
     -webkit-mask-image: url("/assets/img/icons/draft.svg");
     mask-image: url("/assets/img/icons/draft.svg");
   }
+  &__save-support-tag {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/save-support-tag.svg");
+    mask-image: url("/assets/img/icons/save-support-tag.svg");
+  }
   &__edit-category {
     background-color: #637382;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");

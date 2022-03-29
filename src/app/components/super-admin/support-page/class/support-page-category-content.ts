@@ -13,13 +13,13 @@ export class SupportPageCategoryContent {
 
     }
     public setContent(data) {
-        if (data) {
+        if (data.document) {
             this.document = {
-                id: data.id,
-                content: data.content
+                id: data.document.id,
+                content: data.document.content
             }
-            this.createdAt = data.createdAt;
-            this.createdBy = data.createdBy;
+            this.createdAt = data.document.createdAt;
+            this.createdBy = data.document.createdBy;
         } else {
             this.document = {
                 id: "",
@@ -54,6 +54,9 @@ export class SupportPageCategoryContent {
     }
     public setEditMode(data) {
         this.isEditMode = data;
+    }
+    public setTags(data) {
+        this.tagIds = data;
     }
 
 }

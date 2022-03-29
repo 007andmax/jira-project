@@ -3,15 +3,15 @@
     ngbDropdown
 >
     <div class="qt-page-list__search">
-      <input
-        type="text"
-        autocomplete="off"
-        id="dropdown1"
-        [(ngModel)]="newTag"
-        placeholder="Add/filter tags"
-        (input)="onSearch($event)"
-        ngbDropdownToggle
-      >
+        <input
+            type="text"
+            autocomplete="off"
+            id="dropdown1"
+            [(ngModel)]="newTag"
+            placeholder="Add/filter tags"
+            (input)="onSearch($event)"
+            ngbDropdownToggle
+        >
     </div>
     <div
         ngbDropdownMenu
@@ -27,7 +27,10 @@
                 Try a different keyword or press Cmd+Enter to create a new tag.
             </span>
         </div>
-        <div class="list-tags-body">
+        <div
+            class="list-tags-body"
+            [ngClass]="{'--closed':tags.length == 0}"
+        >
             <ng-template
                 ngFor
                 let-item
@@ -35,7 +38,6 @@
                 let-i="index"
             >
                 <div
-                    (click)="toggleItem(item)"
                     class="company-tag-item"
                     [ngClass]="{'is-hover':item.isHover}"
                     [id]="'tag-' + item.id"
@@ -44,22 +46,34 @@
                         <input
                             type="checkbox"
                             [checked]="isSeleted(item)"
+                            (change)="toggleItem(item)"
                             readonly
                         >
                         <span></span>
-                        <div class="text-content qt-mr-4">
-                            <div class="name">{{item.word}}</div>
-                        </div>
-                        <i
-                            class="icon__edit-category qt-sz-16 qt-mr-8"
-                            *ngIf="isSeleted(item)"
-                        ></i>
-                        <i
-                            class="icon__remove-category qt-sz-16"
-                            *ngIf="isSeleted(item)"
-                            (click)="removeTag(item)"
-                        ></i>
                     </label>
+                    <div class="text-content qt-mr-4">
+                        <input
+                            type="text"
+                            [value]="item.word"
+                            [readonly]="!item.isEditMode()"
+                        >
+                        <!-- <div class="name">{{item.word}}</div> -->
+                    </div>
+                    <i
+                        class="icon__save-support-tag qt-sz-16"
+                        *ngIf="isSeleted(item) && item.isEditMode()"
+                        (click)="item.setEditMode(false);editTag(item.id,$event)"
+                    ></i>
+                    <i
+                        class="icon__edit-category qt-sz-16 qt-mr-8"
+                        *ngIf="isSeleted(item) && !item.isEditMode()"
+                        (click)="item.setEditMode(true)"
+                    ></i>
+                    <i
+                        class="icon__remove-category qt-sz-16"
+                        *ngIf="isSeleted(item) && !item.isEditMode()"
+                        (click)="removeTag(item)"
+                    ></i>
                 </div>
             </ng-template>
         </div>
@@ -67,21 +81,19 @@
             class="crate-tag pointer"
             (click)="addTag()"
         >
-          <span class="icon__add-grey qt-sz-12 qt-bg-contain qt-dib qt-mr-6"></span><span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
+            <span class="icon__add-grey qt-sz-12 qt-bg-contain qt-dib qt-mr-6"></span>
+            <span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
         </div>
     </div>
-    <div
-        class="tags-tab d-flex"
-        *ngIf="false"
-    >
+    <div class="tags-tab d-flex">
         <span
             class="tag"
-            *ngFor="let tag of tags; let i = index;"
+            *ngFor="let tag of selectedTag; let i = index;"
         >
-            {{tag.word}}
+            {{getSelectedTag(tag).word}}
             <a
                 href="javascript:;"
-                (click)="deleteTag(i)"
+                (click)="toggleItem(getSelectedTag(tag))"
                 class="close"
             >
                 <img

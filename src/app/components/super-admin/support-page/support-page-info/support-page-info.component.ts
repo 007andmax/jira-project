@@ -14,5 +14,8 @@ export class SupportPageInfoComponent implements OnInit {
 
   ngOnInit() {
   }
+  onChangeTags(data) {
+    this.supportPageCategoryContent.setTags(data);
+  }
 
 }

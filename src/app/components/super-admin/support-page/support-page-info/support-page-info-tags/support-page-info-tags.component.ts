@@ -7,6 +7,7 @@ import { REMOVED_SUPPORT_TAG } from 'src/app/const/confirm';
 import { SupportPageCategoriesService } from '../../../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesStateService } from '../../../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageInfoTag } from './class/support-page-info-tag';
+var $ = require("jquery");
 
 @Component({
   selector: 'support-page-info-tags',
@@ -14,7 +15,7 @@ import { SupportPageInfoTag } from './class/support-page-info-tag';
   styleUrls: ['./support-page-info-tags.component.scss']
 })
 export class SupportPageInfoTagsComponent implements OnInit {
-  @Input() selectedTag: Array<SupportPageInfoTag> = [];
+  @Input() selectedTag: Array<string> = [];
   @Output() tagsChange = new EventEmitter();
   tags: Array<SupportPageInfoTag> = [];
   reqTags: Array<SupportPageInfoTag> = [];
@@ -45,14 +46,14 @@ export class SupportPageInfoTagsComponent implements OnInit {
 
   }
   isSeleted(item) {
-    return this.selectedTag.find(element => element.id === item.id);
+    return this.selectedTag.find(element => element === item.id);
   }
   public toggleItem(newItem) {
-    let findIndex = this.selectedTag.findIndex(item => item.id === newItem.id);
+    let findIndex = this.selectedTag.findIndex(item => item === newItem.id);
     if (findIndex > -1) {
       this.selectedTag.splice(findIndex, 1);
     } else {
-      this.selectedTag.push(newItem);
+      this.selectedTag.push(newItem.id);
       this.tags = this.reqTags;
     }
     this.tagsChange.emit(this.selectedTag);
@@ -64,12 +65,25 @@ export class SupportPageInfoTagsComponent implements OnInit {
 
     })
   }
+  editTag(id, event) {
+    console.log("event.target.value", $(event.target).parents(".qt-checkbox").find(".text-content input").val())
+    let val = $(event.target).parents(".qt-checkbox").find(".text-content input").val();
+    if (val.length < 0) {
+      this.supportPageCategoriesService.editTag(id, val).subscribe(data => {
+
+      })
+    }
+
+  }
   removeTag(tag) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.supportPageCategoriesStateService.setTagForRemove(tag);
 
+  }
+  getSelectedTag(id) {
+    return (this.reqTags.length > 0) ? this.reqTags.find(item => item.id === id) : '';
   }
   addTag() {
     if (this.newTag.length > 0) {

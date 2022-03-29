@@ -66,10 +66,13 @@ export class SupportPageCategoriesService {
   public addTag(data) {
     return this.http.post(this.apiUrl + 'commonTags', data);
   }
+  public editTag(id, name) {
+    return this.http.put(this.apiUrl + `commonTags/setWordForTag?tagId=${id}&word=${name}`, {});
+  }
   public removeTag(id) {
     return this.http.delete(this.apiUrl + 'commonTags/removeTag?tagId=' + id);
   }
   public getContentCategory(category_id) {
-    return this.http.get(this.apiUrl + 'support/documents/' + category_id);
+    return this.http.get(this.apiUrl + 'support/categories/' + category_id);
   }
 }
