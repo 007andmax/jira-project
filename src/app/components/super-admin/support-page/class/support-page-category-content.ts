@@ -13,18 +13,20 @@ export class SupportPageCategoryContent {
 
     }
     public setContent(data) {
-        if (data.document) {
+        if (data && data.document) {
             this.document = {
                 id: data.document.id,
                 content: data.document.content
             }
             this.createdAt = data.document.createdAt;
             this.createdBy = data.document.createdBy;
+            this.newContent = JSON.parse(JSON.stringify(data.document.content));
         } else {
             this.document = {
                 id: "",
                 content: "",
             }
+            this.newContent = "";
         }
     }
     public setType(data) {
@@ -32,8 +34,11 @@ export class SupportPageCategoryContent {
     }
     public getData() {
         if (this.isEditMode) {
-            let document;
-            if (this.newContent) document = {
+            let document = null;
+            console.log("this.document.content", this.document.content);
+            console.log("this.newContent", this.newContent);
+            if (this.newContent == this.document.content) console.log("1");
+            if (this.newContent != this.document.content) document = {
                 id: this.document.id,
                 content: this.newContent,
             }
@@ -47,7 +52,7 @@ export class SupportPageCategoryContent {
             type: this.type,
             document: {
                 content
-                    : this.document.content
+                    : this.newContent
             },
             tagIds: this.tagIds
         }
@@ -57,6 +62,9 @@ export class SupportPageCategoryContent {
     }
     public setTags(data) {
         this.tagIds = data;
+    }
+    public setNewContent(data) {
+        this.newContent = data;
     }
 
 }

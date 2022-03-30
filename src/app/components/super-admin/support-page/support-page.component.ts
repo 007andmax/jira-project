@@ -13,6 +13,7 @@ var $ = require("jquery");
 export class SupportPageComponent implements OnInit {
   supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
   selectedCategory: SupportPageCategory;
+  content: string = "";
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
@@ -30,10 +31,12 @@ export class SupportPageComponent implements OnInit {
           this.supportPageCategoryContent.setContent(content);
           this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
           console.log("content", content);
+          this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
         })
       } else {
         this.supportPageCategoryContent.setEditMode(false);
         this.supportPageCategoryContent.setContent(null);
+        this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
       }
 
     })
@@ -97,5 +100,8 @@ export class SupportPageComponent implements OnInit {
     $(window).on('mouseup', null, null, (event) => {
       if (resizeData.tracking) resizeData.tracking = false;
     });
+  }
+  onChangeContent(data) {
+    this.supportPageCategoryContent.setNewContent(data);
   }
 }

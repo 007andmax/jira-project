@@ -1,3 +1,9 @@
-<p>
-  support-page-body works!
-</p>
+<div
+    id="froala-editor"
+    class="CodeMirror-scroll cm-s-default"
+    [froalaEditor]="options"
+    [(froalaModel)]="editorContent"
+    (froalaInit)="initialize($event)"
+>
+    Hello, Froala!
+</div>

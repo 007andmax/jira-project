@@ -16,7 +16,13 @@
             class="support-page-body"
             *ngIf="selectedCategory"
         >
-            <div class="support-page-body__editor"></div>
+            <div class="support-page-body__editor">
+                <support-page-body
+                    *ngIf="supportPageCategoryContent.document"
+                    [editorContent]="content"
+                    (onChangeContent)="onChangeContent($event)"
+                ></support-page-body>
+            </div>
             <support-page-info
                 [selectedCategory]="selectedCategory"
                 [supportPageCategoryContent]="supportPageCategoryContent"
