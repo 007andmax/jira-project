@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -26,6 +26,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
     private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private tagsRealTimeService: TagsRealTimeService,
+    public cd: ChangeDetectorRef,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
@@ -43,16 +44,33 @@ export class SupportPageInfoTagsComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
-      if (data.action === "TAG_SAVED" && Array.isArray(data.data)) this.reqTags = [...this.reqTags, ...data.data.map(item => new SupportPageInfoTag(item))];
+      if (data.action === "TAG_SAVED" && Array.isArray(data.data)) {
+        data.data.forEach(item => {
+          let index = this.reqTags.findIndex(tag => tag.id == item.id);
+          if (index > -1) this.reqTags[index].setData(item);
+          if (index == -1) this.reqTags.push(new SupportPageInfoTag(item));
+        })
+      }
       if (data.action === "TAG_SAVED" && !Array.isArray(data.data)) {
         let index = this.reqTags.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.reqTags[index] = new SupportPageInfoTag(data.data);
+        if (index > -1) this.reqTags[index].setData(data.data);
+        if (index == -1) this.reqTags.push(new SupportPageInfoTag(data.data));
       }
       if (data.action === "TAG_REMOVED") {
-        let index = this.reqTags.findIndex(item => item.id === data.data.id);
+        let index = this.reqTags.findIndex(item => item.id === data.data);
         if (index > -1) this.reqTags.splice(index, 1);
+        let indexTag = this.tags.findIndex(item => item.id === data.data);
+        if (indexTag > -1) this.tags.splice(indexTag, 1);
       }
+      console.log("data", data);
+
       if (this.newTag.length == 0) this.tags = JSON.parse(JSON.stringify(this.reqTags)).map(item => new SupportPageInfoTag(item));
+      if (this.newTag.length > 0) this.tags.forEach(item => {
+        let index = this.reqTags.findIndex(tag => tag.id === item.id);
+        if (index > -1) item.setData(JSON.parse(JSON.stringify(this.reqTags[index])));
+        if (index == -1) this.tags.push(new SupportPageInfoTag(JSON.parse(JSON.stringify(item))));
+      })
+      this.cd.detectChanges();
     })
   }
   onSearch(event) {
@@ -80,10 +98,11 @@ export class SupportPageInfoTagsComponent implements OnInit {
     })
   }
   editTag(id, event) {
+    console.log("event.target", event.target);
     console.log("event.target.value", $(event.target).parents(".company-tag-item"))
     let val = $(event.target).parents(".company-tag-item").find(".text-content input").val();
     console.log("val", val);
-    if (val.length < 0) {
+    if (val.length > 0) {
       this.supportPageCategoriesService.editTag(id, val).subscribe(data => {
 
       })
@@ -109,6 +128,11 @@ export class SupportPageInfoTagsComponent implements OnInit {
         this.newTag = "";
         this.tags = JSON.parse(JSON.stringify(this.reqTags)).map(item => new SupportPageInfoTag(item));
       })
+    }
+  }
+  onCloseTags(data) {
+    if (data) {
+      this.tags.forEach(item => item.setEditMode(false));
     }
   }
 }

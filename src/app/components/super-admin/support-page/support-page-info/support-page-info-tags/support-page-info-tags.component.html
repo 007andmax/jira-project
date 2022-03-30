@@ -1,6 +1,7 @@
 <div
     class="profile-cmp-board tags-area d-flex"
     ngbDropdown
+    (openChange)="onCloseTags($event)"
 >
     <div class="qt-page-list__search">
         <input
@@ -39,7 +40,7 @@
             >
                 <div
                     class="company-tag-item"
-                    [ngClass]="{'is-hover':item.isHover}"
+                    [ngClass]="{'--active':isSeleted(item),'--editing':item.isEditMode()}"
                     [id]="'tag-' + item.id"
                 >
                     <label class="qt-checkbox pointer">
@@ -56,6 +57,8 @@
                             type="text"
                             [value]="item.word"
                             *ngIf="item.isEditMode()"
+                            appKeyUpEnter
+                            (onChange)="editTag(item.id,$event)"
                         >
                         <div
                             class="name"
@@ -68,16 +71,37 @@
                         class="icon__save-support-tag qt-sz-16"
                         *ngIf="item.isEditMode()"
                         (click)="editTag(item.id,$event);item.setEditMode(false)"
+                        (mouseenter)="saveEditTooltip.show($event.target)"
+                        (mouseleave)="saveEditTooltip.hide()"
                     ></i>
+                    <app-dynamic-tooltip
+                        [content]="'Save'"
+                        [position]="'top'"
+                        #saveEditTooltip
+                    ></app-dynamic-tooltip>
+                    <app-dynamic-tooltip
+                        [content]="'Edit'"
+                        [position]="'top'"
+                        #editTooltip
+                    ></app-dynamic-tooltip>
+                    <app-dynamic-tooltip
+                        [content]="'Delete'"
+                        [position]="'top'"
+                        #deleteTooltip
+                    ></app-dynamic-tooltip>
                     <i
                         class="edit-grey qt-sz-16 qt-mr-8"
-                        (click)="item.setEditMode(true)"
+                        (click)="editTooltip.hide();item.setEditMode(true)"
                         *ngIf="!item.isEditMode()"
+                        (mouseenter)="editTooltip.show($event.target)"
+                        (mouseleave)="editTooltip.hide()"
                     ></i>
                     <i
                         class="icon__remove qt-sz-16"
                         (click)="removeTag(item)"
                         *ngIf="!item.isEditMode()"
+                        (mouseenter)="deleteTooltip.show($event.target)"
+                        (mouseleave)="deleteTooltip.hide()"
                     ></i>
                 </div>
             </ng-template>

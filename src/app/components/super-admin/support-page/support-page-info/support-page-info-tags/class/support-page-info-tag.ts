@@ -6,6 +6,10 @@ export class SupportPageInfoTag {
         this.id = data.id;
         this.word = data.word;
     }
+    public setData(data) {
+        this.id = data.id;
+        this.word = data.word;
+    }
     public isEditMode() {
         return this.editMode;
     }
