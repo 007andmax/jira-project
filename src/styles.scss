@@ -5005,17 +5005,6 @@ add-category-product {
 }
 .support-page-modal {
   padding: 24px;
-  .close-modal {
-    background-image: url(/html/assets/img/icons/close.svg);
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    width: 24px;
-    height: 24px;
-    background-size: cover;
-    z-index: 1;
-    margin-left: 6px;
-  }
   .confirm-modal__title {
     font-size: 16px;
     line-height: 19px;
