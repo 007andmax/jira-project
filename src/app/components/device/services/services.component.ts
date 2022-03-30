@@ -67,7 +67,7 @@ export class ServicesComponent implements OnInit {
       }
     }
     this.loading = false;
-    if (this.cd) {
+    if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
     this.getPdfData();

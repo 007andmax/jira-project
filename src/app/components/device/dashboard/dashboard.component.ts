@@ -261,7 +261,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
         this.getOprationSystemDetail();
-        this.getVirusProtection(resp[0].VirusProtectionProducts);
+        if(resp[0].VirusProtectionProducts != null){
+          this.getVirusProtection(resp[0].VirusProtectionProducts);
+        }
         this.getDiskDriveDetail();
         this.getAssetTagDropDownDetail();
         this.getAssetNotesDetail();

@@ -9,7 +9,7 @@
               </div>
               <div class="windowupdate">
                   <div class="tabletitle">
-                    <ngb-tabset [destroyOnHide]="false">
+                    <ngb-tabset>
                       <ngb-tab title="Available updates">
                         <ng-template ngbTabContent>
                          <div class="modal-body">
@@ -44,17 +44,14 @@
                             <tr *ngIf="windowUpdatePendingList.length<=0">
                                 <td class="missing">No available Updates</td>
                             </tr>
-                            </tbody>
-                          </table>
-                          <div class="viewer-footer" *ngIf="windowUpdatePendingList.length>0">
-                            <!--
-                              {{selected}}
-                            -->
-                            <a  class="btn btn-dowanload footer"  (click)="InstallUpdate()">
-                              Install
-                          </a>
-                        </div>
-                        </div>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="viewer-footer" *ngIf="windowUpdatePendingList.length<=0 ? false: true">
+                        <a  class="btn btn-dowanload footer"  (click)="InstallUpdate()">
+                          Install
+                      </a>
+                      </div>
                       </div>
                   </div>
                   </div>

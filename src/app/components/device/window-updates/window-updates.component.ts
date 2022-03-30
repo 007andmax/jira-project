@@ -22,7 +22,7 @@ export class WindowUpdatesComponent implements OnInit {
   _id = "";
   categories: number
   check: any[] = [];
-  selected: number = 0;
+  selectednum = false ;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
 
@@ -155,12 +155,16 @@ export class WindowUpdatesComponent implements OnInit {
     let indexs = this.check.findIndex(x => x.ID == i);
     if (!find) {
       this.check.push(index);
-      this.selected = this.selected + 1;
+      if(this.check.length>0){
+        this.selectednum = true;
+      }
       this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
     }
     else {
       this.check.splice(indexs, 1);
-      this.selected = this.selected - 1;
+      if(this.check.length==0){
+        this.selectednum = false
+      }
       this.reloadWindowUpdatePendingList.splice(indexs, 1);
     }
   }
