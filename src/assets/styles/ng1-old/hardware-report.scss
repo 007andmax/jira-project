@@ -279,6 +279,14 @@
   }
   .qt-report__dropdown {
     flex: 0 1 260px;
+    &-xl {
+      flex: 0 1 400px;
+    }
+  }
+  .qt-input-block {
+    input {
+      height: 36px;
+    }
   }
   software-summary-devices-dro-down {
     input {
@@ -359,6 +367,11 @@
       line-height: 20px;
     }
   }
+  .select-product {
+    .select-product__input {
+      height: 36px;
+    }
+  }
 }
 .qt-report__control-panel {
   display: flex;
@@ -371,8 +384,8 @@
     background-color: $gray-200;
     border-radius: 4px;
     &-close {
-      width: 64px;
-      height: 64px;
+      width: 65px;
+      height: 65px;
       border-bottom: 1px solid #edf0f2;
       border-right: 1px solid #edf0f2;
       background-size: 20px;
