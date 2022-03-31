@@ -31,20 +31,20 @@
                     (click)="editArticle(category)"
                 >
                     <div
-                        class="icon__category-closed qt-mr-8 pointer"
+                        class="icon__category-closed qt-mr-10 pointer"
                         [ngClass]="{'toggle-category':category.toggleSubCategory}"
                         (click)="category.toggleSubCategory = !category.toggleSubCategory"
                         *ngIf="category.subcategories.length > 0"
                     ></div>
                     <app-dynamic-tooltip
-                        [content]="'Published'"
+                        [content]="(category.type === 'PUBLISHED') ? 'Published' : 'Draft'"
                         [position]="'bottom'"
                         #statusTooltip
                     ></app-dynamic-tooltip>
                     <i
                         class="category-status"
                         [ngClass]="{'status-published':category.type === 'PUBLISHED',
-              'status-draft':category.type === 'DRAFT','pointer':category.document}"
+              'status-draft':category.type === 'DRAFT'}"
                         (mouseenter)="statusTooltip.show($event.target)"
                         (mouseleave)="statusTooltip.hide()"
                     ></i>
@@ -85,11 +85,18 @@
                                 (click)="editArticle(subcategory)"
                             >
                                 <div
-                                    class="icon__category-closed qt-mr-8 pointer"
+                                    class="icon__category-closed qt-mr-10 pointer"
                                     [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
                                     (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                                     *ngIf="subcategory.subcategories.length > 0"
                                 ></div>
+                                <i
+                                    class="category-status"
+                                    [ngClass]="{'status-published':subcategory.type === 'PUBLISHED',
+              'status-draft':subcategory.type === 'DRAFT'}"
+                                    (mouseenter)="statusTooltip.show($event.target)"
+                                    (mouseleave)="statusTooltip.hide()"
+                                ></i>
                                 <span
                                     [ngClass]="{'pointer':subcategory.document}"
                                     [textContent]="subcategory.name"
@@ -127,11 +134,18 @@
                                             (click)="editArticle(subsubcategory)"
                                         >
                                             <div
-                                                class="icon__category-closed qt-mr-8 pointer"
+                                                class="icon__category-closed qt-mr-10 pointer"
                                                 [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
                                                 (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
                                                 *ngIf="subsubcategory.subcategories.length > 0"
                                             ></div>
+                                            <i
+                                                class="category-status"
+                                                [ngClass]="{'status-published':subsubcategory.type === 'PUBLISHED',
+              'status-draft':subsubcategory.type === 'DRAFT' }"
+                                                (mouseenter)="statusTooltip.show($event.target)"
+                                                (mouseleave)="statusTooltip.hide()"
+                                            ></i>
                                             <span
                                                 [ngClass]="{'pointer':subsubcategory.document}"
                                                 [textContent]="subsubcategory.name"
@@ -168,6 +182,13 @@
                                                         [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"
                                                         (click)="editArticle(subsubsubcategory)"
                                                     >
+                                                        <i
+                                                            class="category-status"
+                                                            [ngClass]="{'status-published':subsubsubcategory.type === 'PUBLISHED',
+              'status-draft':subsubsubcategory.type === 'DRAFT'}"
+                                                            (mouseenter)="statusTooltip.show($event.target)"
+                                                            (mouseleave)="statusTooltip.hide()"
+                                                        ></i>
                                                         <span
                                                             [ngClass]="{'pointer':subsubsubcategory.document}"
                                                             [textContent]="subsubsubcategory.name"
@@ -188,188 +209,5 @@
                 </ng-template>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </ng-template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

@@ -33,8 +33,13 @@ export class SupportPageCategoriesService {
         return data;
       }, err => of(err)));
   }
-  public saveContent(category_id, data) {
-    return this.http.put(this.apiUrl + 'support/categories/content/' + category_id, data)
+  public saveContent(category_id, data, textAlert) {
+    return this.http.put(this.apiUrl + 'support/categories/content/' + category_id, data).pipe(
+      tap(data => {
+        this.toastrService.success(textAlert);
+        this.appStateService.changeDetectorRef();
+        return data;
+      }, err => of(err)));
   }
   public editCategory(category_id, data) {
     return this.http.put(this.apiUrl + 'support/categories/' + category_id, data).pipe(
