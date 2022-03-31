@@ -449,19 +449,6 @@ export class TicketsFilter {
     private getUserPayLoad() {
         return {
             excludeTrashSpam: true,
-            groupFieldFilters: [
-                {
-                    fieldFilterDtos: [
-                        {
-                            path: "ticketSource",
-                            operator: "NOT_EQ",
-                            values: [
-                                "FROM_RECURRING_TICKET"
-                            ]
-                        }
-                    ]
-                }
-            ],
             myTicketsPage: true
         }
     }
