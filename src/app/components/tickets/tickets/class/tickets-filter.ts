@@ -130,7 +130,6 @@ export class TicketsFilter {
                 values: [this.selectedCompany.id]
             });
             payload.groupFieldFilters[0].predicateRule = "AND";
-
         }
         if (this.selectedTechUser) {
             payload.groupFieldFilters.push({
@@ -449,6 +448,12 @@ export class TicketsFilter {
     private getUserPayLoad() {
         return {
             excludeTrashSpam: true,
+            groupFieldFilters: [
+                {
+                    fieldFilterDtos: [
+                    ]
+                }
+            ],
             myTicketsPage: true
         }
     }
