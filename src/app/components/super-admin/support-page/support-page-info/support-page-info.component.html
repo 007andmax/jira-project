@@ -19,6 +19,7 @@
     >
 </div>
 <support-page-info-tags
+    [disabled]="isPreview"
     (tagsChange)="onChangeTags($event)"
     [selectedTag]="supportPageCategoryContent.tagIds"
 ></support-page-info-tags>

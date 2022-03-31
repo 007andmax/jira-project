@@ -4,6 +4,11 @@
             class="d-f ai-c"
             ngbDropdown
         >
+            <app-dynamic-tooltip
+                [content]="getFullUserName()"
+                [position]="'right'"
+                #userTooltip
+            ></app-dynamic-tooltip>
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
@@ -11,6 +16,8 @@
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(usersStateService.getCurrentUser(),'#7C77CB') }"
                 id="dropdownSupperUser"
                 ngbDropdownToggle
+                (mouseenter)="userTooltip.show($event.target)"
+                (mouseleave)="userTooltip.hide()"
             ></div>
             <ul
                 class="qt-dropdown-menu"

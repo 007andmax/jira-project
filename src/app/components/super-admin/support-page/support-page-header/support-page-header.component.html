@@ -2,37 +2,72 @@
     class="header-content"
     [ngClass]="{'clear-border': !selectedCategory}"
 >
-    <support-page-breadcrumbs [selectedCategory]="selectedCategory"></support-page-breadcrumbs>
     <div
-        *ngIf="selectedCategory"
-        class="edit-grey qt-sz-16 pointer qt-ml-6 qt-bg-contain"
-        (click)="editCategoryName()"
-    ></div>
-    <div
-        class="right-content"
-        *ngIf="selectedCategory"
+        class="edit-mode"
+        *ngIf="!isPreview"
     >
+        <support-page-breadcrumbs [selectedCategory]="selectedCategory"></support-page-breadcrumbs>
+        <app-dynamic-tooltip
+            [content]="'Edit Subcategory'"
+            [position]="'bottom'"
+            #editTooltip
+        ></app-dynamic-tooltip>
         <div
-            class="remove-category pointer"
-            (click)="removeCategory()"
-        >
-            <div class="icon__remove qt-sz-18 qt-bg-contain"></div>
-        </div>
-        <div class="preview qt-ml-12 pointer">Preview</div>
-
+            *ngIf="selectedCategory"
+            class="edit-grey qt-sz-16 pointer qt-ml-6 qt-bg-contain"
+            (click)="editCategoryName()"
+            (mouseenter)="editTooltip.show($event.target)"
+            (mouseleave)="editTooltip.hide()"
+        ></div>
         <div
-            class="save-draft qt-ml-12 pointer"
-            (click)="saveContent('DRAFT')"
+            class="right-content"
+            *ngIf="selectedCategory"
         >
-            <div class="icon__draft-content qt-sz-20   qt-mr-10"></div>
-            Save Draft
+            <app-dynamic-tooltip
+                [content]="'Delete'"
+                [position]="'bottom'"
+                #deleteTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="remove-category pointer"
+                (click)="removeCategory()"
+                (mouseenter)="deleteTooltip.show($event.target)"
+                (mouseleave)="deleteTooltip.hide()"
+            >
+                <div class="icon__remove qt-sz-18 qt-bg-contain"></div>
+            </div>
+            <div
+                class="preview qt-ml-12 pointer"
+                (click)="toglePreview()"
+            >
+                Preview
+            </div>
+            <div
+                class="save-draft qt-ml-12 pointer"
+                (click)="saveContent('DRAFT')"
+            >
+                <div class="icon__draft-content qt-sz-20   qt-mr-10"></div>
+                Save Draft
+            </div>
+            <button
+                class="qt-button qt-ml-12 pointer"
+                (click)="saveContent('PUBLISHED')"
+            >
+                <span>Publish</span>
+            </button>
         </div>
-
-        <button
-            class="qt-button qt-ml-12 pointer"
-            (click)="saveContent('PUBLISHED')"
+    </div>
+    <div
+        class="preview-mode"
+        *ngIf="isPreview"
+    >
+        <div class="preview-info">Preview mode</div>
+        <div
+            class="preview qt-ml-12 pointer"
+            (click)="toglePreview()"
         >
-            <span>Publish</span>
-        </button>
+            <i class="icon__preview-edit qt-sz-16 pointer qt-mr-10 qt-bg-contain"></i>
+            Edit Mode
+        </div>
     </div>
 </div>

@@ -20,6 +20,12 @@ export class LeftPanelSuperAdminComponent implements OnInit {
     if (!this.usersStateService.getCurrentUser().avatar) return `${(this.usersStateService.getCurrentUser().firstName) ? this.usersStateService.getCurrentUser().firstName[0].toUpperCase() : ''}`;
     return '';
   }
+  getFullUserName() {
+    if (!this.usersStateService.getCurrentUser()) return '';
+    return `${this.usersStateService.getCurrentUser().firstName} ${this.usersStateService.getCurrentUser().lastName
+      }`;
+
+  }
   public logOut() {
     window.location.href = '/logout';
     window.location.hash = '';

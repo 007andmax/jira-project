@@ -11,19 +11,29 @@
         <support-page-header
             [selectedCategory]="selectedCategory"
             [supportPageCategoryContent]="supportPageCategoryContent"
+            (onPreview)="onPreview($event)"
         ></support-page-header>
         <div
             class="support-page-body"
             *ngIf="selectedCategory"
         >
-            <div class="support-page-body__editor">
+            <div
+                class="support-page-body__editor"
+                *ngIf="!isPreview"
+            >
                 <support-page-body
-                    *ngIf="supportPageCategoryContent.document"
                     [editorContent]="content"
                     (onChangeContent)="onChangeContent($event)"
                 ></support-page-body>
             </div>
+            <div
+                class="support-page-body__preview"
+                *ngIf="supportPageCategoryContent.document && isPreview"
+                [innerHTML]="content"
+            >
+            </div>
             <support-page-info
+                [isPreview]="isPreview"
                 [selectedCategory]="selectedCategory"
                 [supportPageCategoryContent]="supportPageCategoryContent"
             ></support-page-info>

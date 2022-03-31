@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -17,6 +17,8 @@ import { SupportPageCategoryContent } from '../class/support-page-category-conte
 export class SupportPageHeaderComponent implements OnInit {
   @Input() selectedCategory: SupportPageCategory;
   @Input() supportPageCategoryContent: SupportPageCategoryContent;
+  @Output() onPreview = new EventEmitter();
+  isPreview: boolean = false;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private modalService: NgbModal,
     private supportPageCategoriesService: SupportPageCategoriesService,
@@ -24,6 +26,10 @@ export class SupportPageHeaderComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  public toglePreview() {
+    this.isPreview = !this.isPreview;
+    this.onPreview.emit(this.isPreview);
   }
   editCategoryName() {
     const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal' });

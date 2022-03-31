@@ -16,6 +16,7 @@ var $ = require("jquery");
   styleUrls: ['./support-page-info-tags.component.scss']
 })
 export class SupportPageInfoTagsComponent implements OnInit {
+  @Input() disabled: boolean;
   @Input() selectedTag: Array<string> = [];
   @Output() tagsChange = new EventEmitter();
   tags: Array<SupportPageInfoTag> = [];

@@ -14,6 +14,7 @@ export class SupportPageComponent implements OnInit {
   supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
   selectedCategory: SupportPageCategory;
   content: string = "";
+  isPreview: boolean = false;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
@@ -100,6 +101,9 @@ export class SupportPageComponent implements OnInit {
     $(window).on('mouseup', null, null, (event) => {
       if (resizeData.tracking) resizeData.tracking = false;
     });
+  }
+  onPreview(data) {
+    this.isPreview = data;
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);

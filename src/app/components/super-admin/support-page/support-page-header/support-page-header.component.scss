@@ -52,3 +52,28 @@
 .clear-border {
     border: none;
 }
+.edit-mode,
+.preview-mode {
+    display: flex;
+    align-items: center;
+    min-width: 1150px;
+}
+.preview-mode {
+    justify-content: space-between;
+    .preview {
+        width: 124px;
+    }
+}
+.preview-info {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #637382;
+    width: 91px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f6f8;
+    border-radius: 6px;
+}

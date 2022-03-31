@@ -3,9 +3,16 @@
     ngbDropdown
     container="body"
 >
+    <app-dynamic-tooltip
+        [content]="'More'"
+        [position]="'top'"
+        #moreTooltip
+    ></app-dynamic-tooltip>
     <div
         class="icon__category-more qt-sz-20 pointer"
         ngbDropdownToggle
+        (mouseenter)="moreTooltip.show($event.target)"
+        (mouseleave)="moreTooltip.hide()"
     ></div>
     <div
         ngbDropdownMenu

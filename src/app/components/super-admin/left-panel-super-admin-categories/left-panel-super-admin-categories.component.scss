@@ -30,15 +30,17 @@
     .toggle-category {
         transform: rotate(90deg) translate(0px, -2px);
     }
+    .category-status {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $gray-500;
+    }
     .status-published {
-        &::after {
-            background-color: $success;
-        }
+        background-color: $success;
     }
     .status-draft {
-        &::after {
-            background-color: $gray-500;
-        }
+        background-color: $gray-500;
     }
     span {
         padding-left: 17px;
@@ -51,17 +53,6 @@
         overflow: hidden;
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
-        &::after {
-            content: " ";
-            position: absolute;
-            top: 7px;
-            right: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            left: 0;
-            background-color: $gray-500;
-        }
     }
 }
 .category-item-category-body {

@@ -12,6 +12,7 @@
             placeholder="Add/filter tags"
             (input)="onSearch($event)"
             ngbDropdownToggle
+            [disabled]="disabled"
         >
     </div>
     <div
@@ -68,7 +69,7 @@
                         </div>
                     </div>
                     <i
-                        class="icon__save-support-tag qt-sz-16"
+                        class="icon__save-support-tag qt-sz-16 pointer"
                         *ngIf="item.isEditMode()"
                         (click)="editTag(item.id,$event);item.setEditMode(false)"
                         (mouseenter)="saveEditTooltip.show($event.target)"
@@ -90,14 +91,14 @@
                         #deleteTooltip
                     ></app-dynamic-tooltip>
                     <i
-                        class="edit-grey qt-sz-16 qt-mr-8"
+                        class="edit-grey qt-sz-16 qt-mr-8 pointer"
                         (click)="editTooltip.hide();item.setEditMode(true)"
                         *ngIf="!item.isEditMode()"
                         (mouseenter)="editTooltip.show($event.target)"
                         (mouseleave)="editTooltip.hide()"
                     ></i>
                     <i
-                        class="icon__remove qt-sz-16"
+                        class="icon__remove qt-sz-16 pointer"
                         (click)="removeTag(item)"
                         *ngIf="!item.isEditMode()"
                         (mouseenter)="deleteTooltip.show($event.target)"
@@ -124,6 +125,7 @@
                 href="javascript:;"
                 (click)="toggleItem(getSelectedTag(tag))"
                 class="close-btn"
+                *ngIf="!disabled"
             >
                 <img
                     src="/html/assets/img/icons/close-10.png"

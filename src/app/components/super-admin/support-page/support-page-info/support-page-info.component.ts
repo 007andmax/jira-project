@@ -10,6 +10,7 @@ import { SupportPageCategoryContent } from '../class/support-page-category-conte
 export class SupportPageInfoComponent implements OnInit {
   @Input() selectedCategory: SupportPageCategory;
   @Input() supportPageCategoryContent: SupportPageCategoryContent;
+  @Input() isPreview: boolean;
   constructor() { }
 
   ngOnInit() {

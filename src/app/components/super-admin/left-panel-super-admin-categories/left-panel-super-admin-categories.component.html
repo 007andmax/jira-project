@@ -36,9 +36,20 @@
                         (click)="category.toggleSubCategory = !category.toggleSubCategory"
                         *ngIf="category.subcategories.length > 0"
                     ></div>
-                    <span
+                    <app-dynamic-tooltip
+                        [content]="'Published'"
+                        [position]="'bottom'"
+                        #statusTooltip
+                    ></app-dynamic-tooltip>
+                    <i
+                        class="category-status"
                         [ngClass]="{'status-published':category.type === 'PUBLISHED',
               'status-draft':category.type === 'DRAFT','pointer':category.document}"
+                        (mouseenter)="statusTooltip.show($event.target)"
+                        (mouseleave)="statusTooltip.hide()"
+                    ></i>
+                    <span
+                        [ngClass]="{'pointer':category.document}"
                         [textContent]="category.name"
                     ></span>
                 </div>
@@ -261,7 +272,23 @@
 
 
 
+
+
+
+
+
+
+
+
     </ng-template>
+
+
+
+
+
+
+
+
 
 
 
