@@ -12,10 +12,11 @@
             [selectedCategory]="selectedCategory"
             [supportPageCategoryContent]="supportPageCategoryContent"
             (onPreview)="onPreview($event)"
+            [hidden]="isShowHelpCenter"
         ></support-page-header>
         <div
             class="support-page-body"
-            *ngIf="selectedCategory"
+            *ngIf="selectedCategory && !isShowHelpCenter"
         >
             <div
                 class="support-page-body__editor"
@@ -37,6 +38,13 @@
                 [selectedCategory]="selectedCategory"
                 [supportPageCategoryContent]="supportPageCategoryContent"
             ></support-page-info>
+        </div>
+        <div
+            class="support-page-body"
+            *ngIf="isShowHelpCenter"
+        >
+
+
         </div>
     </main>
 </div>

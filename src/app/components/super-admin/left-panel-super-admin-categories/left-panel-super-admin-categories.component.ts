@@ -53,32 +53,19 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   add() {
     const modalRef = this.modalService.open(SupportPageAddCategoryComponent, { windowClass: 'xs-modal user-modal' });
   }
-  editCategory(category) {
-    const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.category_id = category.id;
-    modalRef.componentInstance.name = category.name;
-  }
-  addSubCategory(id) {
-    const modalRef = this.modalService.open(SupportPageAddSubCategoryComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.parentSupportCategoryId = id;
-  }
   onRemoveCategory(id) {
     this.supportPageCategoriesService.removeCategory(id).subscribe(data => {
 
     })
-  }
-  delete(category) {
-    this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Do you want to delete the category?`;
-    this.supportPageCategoriesStateService.setCategoryForRemove(category);
   }
 
   onDropEnd(data) {
     this.supportPageCategoriesService.moveCategory(data.id, data.index).subscribe(data => {
     })
   }
+  gotoHelpCenter() {
 
+  }
   public trackById(index, item) {
     return item.id;
   }

@@ -3,6 +3,8 @@ import { SupportPageCategory } from '../left-panel-super-admin-categories/class/
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
+import { HelpCenterCategory } from './class/help-center-category';
+import { HelpCenterSubCategory } from './class/help-center-sub-category';
 import { SupportPageCategoryContent } from './class/support-page-category-content';
 var $ = require("jquery");
 @Component({
@@ -15,6 +17,8 @@ export class SupportPageComponent implements OnInit {
   selectedCategory: SupportPageCategory;
   content: string = "";
   isPreview: boolean = false;
+  isShowHelpCenter: boolean = false;
+  helpCenterCategories: Array<HelpCenterCategory> = [];
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
@@ -39,6 +43,24 @@ export class SupportPageComponent implements OnInit {
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
       }
 
+    })
+    this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
+      data.forEach(category => {
+        let subcategories: Array<HelpCenterSubCategory> = [];
+
+        category.subcategories.forEach(subcategory => {
+
+          subcategories.push(new HelpCenterSubCategory(subcategory.id, subcategory.name));
+          subcategory.subcategories.forEach(subsubcategory => {
+            subcategories.push(new HelpCenterSubCategory(subsubcategory.id, subsubcategory.name));
+            subsubcategory.subcategories.forEach(subsubsubcategory => {
+              subcategories.push(new HelpCenterSubCategory(subsubsubcategory.id, subsubsubcategory.name));
+            })
+          })
+        })
+        this.helpCenterCategories.push(new HelpCenterCategory(category.id, category.name, subcategories));
+      });
+      // this.cd.detectChanges();
     })
     const selectTarget = (fromElement, selector) => {
       if (!(fromElement instanceof HTMLElement)) {
