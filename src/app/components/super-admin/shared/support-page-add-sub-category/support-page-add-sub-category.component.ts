@@ -46,7 +46,6 @@ export class SupportPageAddSubCategoryComponent implements OnInit {
     }, err => {
       this.validate.setNameExist(true);
       this.validate.setTextErrorNameExist(err.error.message);
-      console.log("err", err);
       this.addBtn.setDisabled(false);
     })
   };

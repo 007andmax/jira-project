@@ -75,7 +75,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
 
   onDropEnd(data) {
-    console.log("data", data);
     this.supportPageCategoriesService.moveCategory(data.id, data.index).subscribe(data => {
     })
   }

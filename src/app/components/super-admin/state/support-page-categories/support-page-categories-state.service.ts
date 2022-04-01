@@ -32,12 +32,9 @@ export class SupportPageCategoriesStateService {
         this.categories.forEach(category => {
           if (data.action === "CREATE_SUPPORT_CATEGORY" && category.id === data.data.parentSupportCategoryId && !add) {
             category.subcategories.push(new SupportPageCategory(data.data));
-            console.log("category.subcategories", category.subcategories);
             add = true;
           }
-          if (data.action === "EDIT_SUPPORT_CATEGORY" && category.id === data.data.id) {
-            category.onUpdate(data.data);
-          }
+          if (data.action === "EDIT_SUPPORT_CATEGORY" && category.id === data.data.id) category.onUpdate(data.data);
           if (data.action === "DELETE_SUPPORT_CATEGORY") {
             let findIndex = category.subcategories.findIndex(item => item.id === data.data);
             if (findIndex > -1) category.subcategories.splice(findIndex, 1);
@@ -45,12 +42,9 @@ export class SupportPageCategoriesStateService {
           category.subcategories.forEach(subcategory => {
             if (data.action === "CREATE_SUPPORT_CATEGORY" && subcategory.id === data.data.parentSupportCategoryId && !add) {
               subcategory.subcategories.push(new SupportPageCategory(data.data));
-              console.log("subcategory.subcategories", subcategory.subcategories);
               add = true;
             }
-            if (data.action === "EDIT_SUPPORT_CATEGORY" && subcategory.id === data.data.id) {
-              subcategory.onUpdate(data.data);
-            }
+            if (data.action === "EDIT_SUPPORT_CATEGORY" && subcategory.id === data.data.id) subcategory.onUpdate(data.data);
             if (data.action === "DELETE_SUPPORT_CATEGORY") {
               let findIndex = subcategory.subcategories.findIndex(item => item.id === data.data);
               if (findIndex > -1) subcategory.subcategories.splice(findIndex, 1);
@@ -58,12 +52,9 @@ export class SupportPageCategoriesStateService {
             subcategory.subcategories.forEach(subsubcategory => {
               if (data.action === "CREATE_SUPPORT_CATEGORY" && subsubcategory.id === data.data.parentSupportCategoryId && !add) {
                 subsubcategory.subcategories.push(new SupportPageCategory(data.data));
-                console.log("subsubcategory.subcategories", subsubcategory.subcategories);
                 add = true;
               }
-              if (data.action === "EDIT_SUPPORT_CATEGORY" && subsubcategory.id === data.data.id) {
-                subsubcategory.onUpdate(data.data);
-              }
+              if (data.action === "EDIT_SUPPORT_CATEGORY" && subsubcategory.id === data.data.id) subsubcategory.onUpdate(data.data);
               if (data.action === "DELETE_SUPPORT_CATEGORY") {
                 let findIndex = subsubcategory.subcategories.findIndex(item => item.id === data.data);
                 if (findIndex > -1) subsubcategory.subcategories.splice(findIndex, 1);
@@ -77,7 +68,6 @@ export class SupportPageCategoriesStateService {
           })
         })
       }
-      console.log("this.categories", this.categories);
       this.onGetCategories.emit(this.categories)
     });
   }

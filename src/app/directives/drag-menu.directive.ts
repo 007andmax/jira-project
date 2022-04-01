@@ -1,5 +1,4 @@
 import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { SupportPageCategory } from '../components/super-admin/left-panel-super-admin-categories/class/support-page-category';
 
 @Directive({
   selector: '[appDragMenu]'
@@ -8,7 +7,6 @@ export class DragMenuDirective {
   @Output() dropEnd = new EventEmitter<any>();
   @Input() classDropped: string;
   @Input() classContainer: string;
-
   lengthItems: number = 0;
   isInit = false;
   dragStart;
@@ -27,7 +25,6 @@ export class DragMenuDirective {
       var index = $(e.target).index();
       currentGrag = $(e.target);
       e.dataTransfer.setData('text/plain', index)
-      console.log("currentGrag", currentGrag);
     }
     this.dropped = function dropped(e) {
       that.cancelDefault(e)
@@ -38,24 +35,12 @@ export class DragMenuDirective {
 
       if (newIndex == oldIndex || !currentGrag || $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).length == 0 ||
         $(target).attr("category-id") != $(currentGrag).attr("category-id")) return;
-      console.log("$(this).parents(`.${that.classDropped}`).children().eq(oldIndex)", $(this).parents(`.${that.classDropped}`).children().eq(oldIndex));
       let dropped = $(this).parents(`.${that.classDropped}`).children().eq(oldIndex).remove();
-
-      console.log("dropped", $(dropped).attr("category-id"));
-      console.log("target", $(target).attr("category-id"))
-
-
-      console.log("currentGrag", $(currentGrag).attr("category-id"))
-
-
-
       if (newIndex < oldIndex) {
         target.before(dropped)
       } else {
         target.after(dropped)
       }
-      console.log("$(dropped).index()", $(dropped).index());
-
       that.dropEnd.emit({
         id: $(dropped).attr("id"), index: $(dropped).index() + 1
       });
@@ -65,7 +50,6 @@ export class DragMenuDirective {
       e.stopPropagation()
       return false
     }
-    console.log("items", items);
     items.forEach(item => {
       $(item).prop('draggable', true)
       item.addEventListener('dragstart', this.dragStart)
@@ -78,7 +62,6 @@ export class DragMenuDirective {
   ngDoCheck() {
     let items = this.element.nativeElement.querySelectorAll(`.${this.classContainer}`);
     if (this.isInit && this.lengthItems !== items.length) {
-      console.log("ngDoCheck ---------------");
       items.forEach(item => {
         $(item).prop('draggable', false)
         item.removeEventListener('dragstart', this.dragStart)

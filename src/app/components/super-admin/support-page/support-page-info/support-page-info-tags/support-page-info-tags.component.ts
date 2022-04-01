@@ -40,7 +40,6 @@ export class SupportPageInfoTagsComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === REMOVED_SUPPORT_TAG) {
           this.onRemoveTag(this.supportPageCategoriesStateService.getTagForRemove().id);
         }
-
       }
     })
     this.sub.add(getConfirm);
@@ -63,8 +62,6 @@ export class SupportPageInfoTagsComponent implements OnInit {
         let indexTag = this.tags.findIndex(item => item.id === data.data);
         if (indexTag > -1) this.tags.splice(indexTag, 1);
       }
-      console.log("data", data);
-
       if (this.newTag.length == 0) this.tags = JSON.parse(JSON.stringify(this.reqTags)).map(item => new SupportPageInfoTag(item));
       if (this.newTag.length > 0) this.tags.forEach(item => {
         let index = this.reqTags.findIndex(tag => tag.id === item.id);
@@ -76,7 +73,6 @@ export class SupportPageInfoTagsComponent implements OnInit {
   }
   onSearch(event) {
     this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value.toLowerCase()));
-
   }
   isSeleted(item) {
     return this.selectedTag.find(element => element === item.id);
@@ -95,27 +91,21 @@ export class SupportPageInfoTagsComponent implements OnInit {
 
   onRemoveTag(id) {
     this.supportPageCategoriesService.removeTag(id).subscribe(data => {
-
     })
   }
   editTag(id, event) {
-    console.log("event.target", event.target);
-    console.log("event.target.value", $(event.target).parents(".company-tag-item"))
     let val = $(event.target).parents(".company-tag-item").find(".text-content input").val();
-    console.log("val", val);
     if (val.length > 0) {
       this.supportPageCategoriesService.editTag(id, val).subscribe(data => {
-
       })
     }
-
   }
   removeTag(tag) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.supportPageCategoriesStateService.setTagForRemove(tag);
-
+    this.cd.detectChanges();
   }
   getSelectedTag(id) {
     return (this.reqTags.length > 0) ? this.reqTags.find(item => item.id === id) : '';
@@ -135,5 +125,8 @@ export class SupportPageInfoTagsComponent implements OnInit {
     if (data) {
       this.tags.forEach(item => item.setEditMode(false));
     }
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

@@ -18,15 +18,11 @@ export class SupportPageEditCategoryComponent implements OnInit {
   validate: CategoryValdiate = new CategoryValdiate();
   constructor(public activeModal: NgbActiveModal, public cd: ChangeDetectorRef,
     private supportPageCategoriesService: SupportPageCategoriesService, config: NgbModalConfig,) {
-
-
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit() {
-
-
   }
   onChangeName() {
     this.validate.checkValidName(this.name);
@@ -36,13 +32,11 @@ export class SupportPageEditCategoryComponent implements OnInit {
 
   closeModal() {
     this.activeModal.close();
-
   }
 
 
 
   editCategory() {
-
     if (!this.validate.isValidate(this.name)) return;
     this.addBtn.setDisabled(true);
     this.supportPageCategoriesService.editCategory(this.category_id, {
@@ -53,7 +47,6 @@ export class SupportPageEditCategoryComponent implements OnInit {
     }, err => {
       this.validate.setNameExist(true);
       this.validate.setTextErrorNameExist(err.error.message);
-      console.log("err", err);
       this.addBtn.setDisabled(false);
     })
   };

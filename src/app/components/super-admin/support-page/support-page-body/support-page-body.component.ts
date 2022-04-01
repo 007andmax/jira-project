@@ -28,15 +28,11 @@ export class SupportPageBodyComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
-    console.log("editorContent", this.editorContent);
-    //  var editor = CodeMirror(document.getElementById("froala-editor"));
   }
   ngAfterViewInit() {
-
     this.cd.detectChanges();
   }
   ngDoCheck() {
-
     this.onChangeContent.emit(this.editorContent);
   }
   onInitFloara() {
@@ -51,27 +47,6 @@ export class SupportPageBodyComponent implements OnInit {
         'fontFamily', '|',
         'fontSize', 'insertFiles', 'insertFile', '|',
         'insertLink', 'insertImage', 'quote', 'insertTable'],
-      //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
-      /*  toolbarButtons: {
-          // Key represents the more button from the toolbar.
-          moreText: {
-            // List of buttons used in the  group.
-            buttons: ['bold', 'italic'],
-  
-            // Alignment of the group in the toolbar.
-            align: 'left',
-  
-  
-          },
-          moreParagraph: {
-            buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify'],
-            align: 'left',
-            buttonsVisible: 1
-          },
-  
-  
-        },*/
-
       attribution: false,
       heightMin: 1123,
       toolbarSticky: false,

@@ -35,9 +35,6 @@ export class SupportPageCategoryContent {
     public getData() {
         if (this.isEditMode) {
             let document = null;
-            console.log("this.document.content", this.document.content);
-            console.log("this.newContent", this.newContent);
-            if (this.newContent == this.document.content) console.log("1");
             if (this.newContent != this.document.content) document = {
                 id: this.document.id,
                 content: this.newContent,
