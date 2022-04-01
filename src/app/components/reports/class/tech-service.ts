@@ -6,6 +6,7 @@ export class TechService {
     techUserId: string;
     lines: Array<TechServiceItem> = [];
     totalQuantity: number = 0;
+    serviceName: string = "";
     constructor(data = null) {
         if (data) {
             this.startDate = data.startDate;
@@ -15,7 +16,7 @@ export class TechService {
             this.totalQuantity = data.totalQuantity;
         }
     }
-    public setData (data) {
+    public setData(data) {
         this.startDate = data.startDate;
         this.endDate = data.endDate;
         this.techUserId = data.techUserId;
@@ -24,7 +25,7 @@ export class TechService {
         });
         this.totalQuantity = data.totalQuantity;
     }
-    public setTechUserId (data) {
+    public setTechUserId(data) {
         this.techUserId = data;
     }
     public setList(data) {
@@ -40,6 +41,7 @@ export class TechService {
             startDate: this.startDate,
             endDate: this.endDate,
             techUserId: this.techUserId,
+            serviceName: this.serviceName
         };
     }
     public resetDates() {

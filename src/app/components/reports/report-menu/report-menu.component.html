@@ -649,6 +649,19 @@
           Report
                 </button>
                 <div class="form-group content">
+                    <div>
+                        <input
+                            type="text"
+                            name="serialNumber"
+                            [(ngModel)]="techService.serviceName"
+                            autocomplete="off"
+                            class="form-control"
+                            placeholder="Service Number"
+                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                        >
+                    </div>
+                </div>
+                <div class="form-group content">
                     <app-multi-datepicker
                         #dp
                         [validate]="validate.getDates()"
@@ -664,6 +677,9 @@
                         (onSelectedItem)="onSelectTechUser($event)"
                     ></app-tech-users-list-report>
                 </div>
+
+
+
             </div>
         </div>
     </div>
