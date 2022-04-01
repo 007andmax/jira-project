@@ -64,7 +64,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     })
   }
   gotoHelpCenter() {
-
+    this.supportPageCategoriesStateService.showHelpCenter();
   }
   public trackById(index, item) {
     return item.id;

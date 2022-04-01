@@ -17,7 +17,7 @@ export class SupportPageComponent implements OnInit {
   selectedCategory: SupportPageCategory;
   content: string = "";
   isPreview: boolean = false;
-  isShowHelpCenter: boolean = false;
+  isShowHelpCenter: boolean = true;
   helpCenterCategories: Array<HelpCenterCategory> = [];
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
@@ -28,7 +28,11 @@ export class SupportPageComponent implements OnInit {
       if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
       if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
     });
+    this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
+      this.isShowHelpCenter = true;
+    })
     this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
+      this.isShowHelpCenter = false;
       this.selectedCategory = data;
       if (this.selectedCategory.document) {
         this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
@@ -42,7 +46,6 @@ export class SupportPageComponent implements OnInit {
         this.supportPageCategoryContent.setContent(null);
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
       }
-
     })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       data.forEach(category => {

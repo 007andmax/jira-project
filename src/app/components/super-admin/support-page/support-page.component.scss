@@ -133,3 +133,38 @@ aside {
         overflow: auto;
     }
 }
+.help-center {
+    display: flex;
+    max-width: 700px;
+    flex-wrap: wrap;
+    margin: 0px auto;
+}
+.support-page-body-category {
+    position: relative;
+    margin: 0px 24px 40px 0px;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 44px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        border-bottom: solid 1px #dfe3e8
+    }
+    span {
+        font-size: 22px;
+        line-height: 1.45;
+        color: #212b36;
+         
+    }
+    ul {
+        padding: 32px 48px 0px 10px;
+        li {
+            margin: 0px 0px 16px 0px;
+            font-size: 14px;
+            line-height: 1.43;
+            color: #212b36;
+            width: max-content;
+        }
+    }
+}

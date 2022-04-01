@@ -12,6 +12,7 @@ export class SupportPageCategoriesStateService {
   categoryForRemove: SupportPageCategory = null;
   tagForRemove: SupportPageInfoTag = null;
   onAddArticle: EventEmitter<any> = new EventEmitter();
+  onShowHelpCenter: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   constructor(private supportPageCategoriesService: SupportPageCategoriesService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,) { }
@@ -70,6 +71,9 @@ export class SupportPageCategoriesStateService {
       }
       this.onGetCategories.emit(this.categories)
     });
+  }
+  public showHelpCenter() {
+    this.onShowHelpCenter.emit(null);
   }
   public setTagForRemove(data) {
     this.tagForRemove = data;

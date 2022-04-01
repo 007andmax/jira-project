@@ -43,8 +43,29 @@
             class="support-page-body"
             *ngIf="isShowHelpCenter"
         >
-
-
+            <div class="help-center">
+                <ng-template
+                    ngFor
+                    let-category
+                    [ngForOf]="helpCenterCategories"
+                    [ngForTrackBy]="trackById"
+                >
+                    <div class="support-page-body-category">
+                        <span [textContent]="category.name"></span>
+                        <ul>
+                            <ng-template
+                                ngFor
+                                let-subcategory
+                                [ngForOf]="category.subcategories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <li [textContent]="subcategory.name"></li>
+                            </ng-template>
+                        </ul>
+                    </div>
+                </ng-template>
+            </div>
         </div>
     </main>
 </div>
+<super-admin-public *ngIf="false"></super-admin-public>
