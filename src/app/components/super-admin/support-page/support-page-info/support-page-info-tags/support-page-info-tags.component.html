@@ -60,7 +60,7 @@
                             [value]="item.word"
                             *ngIf="item.isEditMode()"
                             appKeyUpEnter
-                            (onChange)="editTag(item.id,$event)"
+                            (onChange)="saveEditTooltip.hide();editTag(item.id,$event)"
                         >
                         <div
                             class="name"
@@ -72,7 +72,7 @@
                     <i
                         class="icon__save-support-tag qt-sz-16 pointer"
                         *ngIf="item.isEditMode()"
-                        (click)="editTag(item.id,$event);item.setEditMode(false)"
+                        (click)="saveEditTooltip.hide();editTag(item.id,$event);item.setEditMode(false)"
                         (mouseenter)="saveEditTooltip.show($event.target)"
                         (mouseleave)="saveEditTooltip.hide()"
                     ></i>
