@@ -37,12 +37,14 @@ export class TechService {
         this.totalQuantity = data;
     }
     public getForRequest() {
-        return {
+        let data: any = {
             startDate: this.startDate,
             endDate: this.endDate,
             techUserId: this.techUserId,
-            serviceName: this.serviceName
+
         };
+        if (this.serviceName.length > 0) data.serviceName = this.serviceName;
+        return data;
     }
     public resetDates() {
         this.startDate = '';
