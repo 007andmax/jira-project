@@ -1,0 +1,118 @@
+.run-report-content {
+  border-bottom: none !important;
+  margin-top: 0px !important;
+  padding-left: 24px !important;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  height: 60px;
+  padding-top: 11px;
+  border-left: 1px solid #edf0f2;
+}
+
+.run-report-content{
+  &.left{
+  width:96%
+  }
+}
+
+.run-report-content {
+  &.right{
+    width:4%
+  }
+}
+
+.qt-btn {
+  &.--outline-blue {
+    height: 40px !important;
+    background-color: #ffffff !important;
+    margin-right: 260px !important;
+  }
+  &.--outline-white {
+    background-color: #edf2f6 !important;
+  }
+}
+
+.summaryemail {
+  right: 3px !important;
+  top: 9px !important;
+}
+
+.summaryprint {
+  right: 0px !important;
+  top: 9px !important;
+}
+
+.summarydownload {
+  right: 8px !important;
+  top: 9px !important;
+}
+
+.header-close {
+  height: 24px;
+  width: 24px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: 7px 0px 0px 0px;
+}
+
+.device-header {
+  text-align: center;
+  padding: 75px 0px 10px 0px;
+  h6 {
+    font-size: 12px !important;
+  }
+}
+
+.table-wrap {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    .device {
+      width: 15% !important;
+      padding: 0 18px 0 18px;
+      background-color: white;
+      height: 40px;
+    }
+    .network {
+      width: 10% !important;
+      padding: 0px;
+    }
+    .linkspeed {
+      width: 10% !important;
+      padding: 0px;
+    }
+    .dhcp {
+      width: 8% !important;
+      padding: 0px;
+    }
+    .ipaddress {
+      width: 8% !important;
+      padding: 0px;
+    }
+    .subnet {
+      width: 10% !important;
+      padding: 0px;
+    }
+    .gateway {
+      width: 12% !important;
+      padding: 0px;
+    }
+    .dns {
+      width: 10% !important;
+      padding: 0px;
+    }
+    .wanip {
+      width: 15% !important;
+      padding: 0px;
+    }
+    thead {
+      th {
+        background-color: #f4f6f8 !important;
+      }
+    }
+  }
+}

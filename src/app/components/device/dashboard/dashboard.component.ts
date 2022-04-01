@@ -90,6 +90,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   manufactureId: any;
   selectManufactureList: any[]=[];
   modelId:any;
+  modelByManufactureList : any[]=[];
+  manufactureName : string;
 
   constructor(
     private agentService: AgentService,
@@ -307,6 +309,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   addAssetNote() {
     this.noteAdd.AssetID = this.asset.ID;
+    this.noteAdd.IsActive = true;
     this.agentService.addAssetNotes(this.noteAdd).subscribe(
       (res) => {
         this.closeNotes();
@@ -592,7 +595,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.minDate(this.asset.LastRebootDate)) {
       this.asset.LastRebootDate = "";
     }
-
   }
 
   updateSerialNo() {
@@ -832,15 +834,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
-        this.modelList = resp;
-
+        this.selectManufactureList = resp;
       });
   }
 
-  onSelectManufacture(SelectManufacturer) {
+  onSelectManufactureName(SelectManufacturer) {
     if (SelectManufacturer) {
       this.manufactureId = SelectManufacturer.ID;
-      this.updateAsset();
+      this.manufactureName = SelectManufacturer.Name
+      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
+        this.selectManufactureList = resp;
+        this.updateAsset();
+      })
+    }
+    else{
+      this.getModels(this.techCompany.id);
     }
   }
 

@@ -107,8 +107,8 @@
                                             [list]="manufactureList"
                                             [field]="'Name'"
                                             [search]="true"
-                                            [change]="true"
-                                            (onSelectedItem)="onSelectManufacture($event)"
+                                            [change]="false"
+                                            (onSelectedItem)="onSelectManufactureName($event)"
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -144,7 +144,7 @@
                                             #model
                                             [class]="['light-dropdown', 'qt-select-input-40']"
                                             [placeholder]="'Select Model'"
-                                            [list]="modelList"
+                                            [list]="selectManufactureList"
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="true"
@@ -433,7 +433,13 @@
                             <div class="dashboard-col col-50 tags" id="elementID">
                                 <div class="col-title">
                                     <h2>Tags</h2>
-                                    <span> <button mat-raised-button (click)="focusMyInput()">Tag Focus</button></span>
+                                    <span>  <a
+                                      href="javascript:;"
+                                      class="static-link"
+                                      (click)="focusMyInput()"
+                                  >
+                                      Add Tag
+                                  </a></span>
                                 </div>
                                 <div
                                     class="grey-dropdown"
