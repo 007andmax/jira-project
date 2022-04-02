@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .container-page {
     height: 100%;
@@ -134,37 +135,100 @@ aside {
     }
 }
 .help-center {
-    display: flex;
-    max-width: 700px;
-    flex-wrap: wrap;
-    margin: 0px auto;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 860px;
+    &__header {
+      position: relative;
+      padding: 96px 0;
+      background-color: #052e6b;
+      color: $white;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 64px;
+      .icon__quicktech_partical {
+        &_bottom,
+        &_top {
+          position: absolute;
+          width: 326px;
+          height: 110px;
+        }
+        &_bottom {
+          top: 0;
+          right: 48px;
+        }
+        &_top {
+          bottom: 0;
+          left: 48px
+        }
+      }
+      &-title {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 56px;
+        letter-spacing: -0.5px;
+        margin-bottom: 16px;
+      }
+      &-text {
+        @extend %h5;
+        max-width: 456px;
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+    &__body {
+      max-width: 840px;
+      padding: 0 12px;
+      margin: 0 auto;
+      &-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -24px;
+        margin-right: -24px;
+        margin-top: -20px;
+      }
+    }
 }
 .support-page-body-category {
+    flex: 0 0 calc(33.33% - 24px);
     position: relative;
-    margin: 0px 24px 40px 0px;
-    &::after {
-        content: "";
-        position: absolute;
-        top: 44px;
-        left: 0;
-        right: 0;
-        height: 1px;
-        border-bottom: solid 1px #dfe3e8
-    }
-    span {
-        font-size: 22px;
-        line-height: 1.45;
-        color: #212b36;
-         
-    }
+    margin: 20px 12px;
     ul {
-        padding: 32px 48px 0px 10px;
+      padding: 16px 0 0 16px;
+      list-style: none;
         li {
-            margin: 0px 0px 16px 0px;
-            font-size: 14px;
-            line-height: 1.43;
-            color: #212b36;
-            width: max-content;
+            position: relative;
+            @extend %body-r;
+            color: $primary-2;
+            &:not(:last-child) {
+              margin: 0 0 16px 0;
+            }
+            &::before {
+              content: "";
+              position: absolute;
+              width: 3px;
+              height: 3px;
+              border-radius: 100%;
+              background-color: $primary-1;
+              left: -14px;
+              top: 8px;
+            }
         }
     }
+}
+
+.support-page-body-category__header {
+  position: relative;
+  @extend %h4;
+  color: $primary-2;
+  padding-bottom: 16px;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: dashed 1px $gray-400;
+  }
 }
