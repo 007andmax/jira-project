@@ -39,7 +39,14 @@ export class ExcelService {
       [(typeArr = ["Services Name", "Description", "Status"])];
     } else if (type === "startupprogrammes"){
       [(typeArr = ["Name", "Command", "User"])];
-    } else
+    }
+    else if(type == "DeviceipSummary"){
+      [(typeArr = ["Device", "Network Name", "Link Speed", "Dhcp", "Ip Address", "Subnet", "Gateway", "Dns1", "Dns2", "Wan Ip"])]
+    }
+    else if(type == "HardwareSummary"){
+      [(typeArr = ["Device", "Operating System", "Cpu", "Ram", "Disk", "Warranty", "Serial Number"])]
+    }
+    else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
     let blob = new Blob(["\ufeff" + csvData], {
@@ -80,7 +87,9 @@ export class ExcelService {
       type === "devicediskspacereport" ||
       type === "devicedeploymentwarrantyreport" ||
       type === "services" ||
-      type === "startupprogrammes"
+      type === "startupprogrammes" ||
+      type === "DeviceipSummary" ||
+      type === "HardwareSummary"
     ) {
       row = "S.No,";
 
@@ -103,7 +112,9 @@ export class ExcelService {
       type === "devicediskspacereport" ||
       type === "devicedeploymentwarrantyreport" ||
       type === "services" ||
-      type === "startupprogrammes"
+      type === "startupprogrammes" ||
+      type === "DeviceipSummary" ||
+      type === "HardwareSummary"
     ) {
       str += row + "\r\n";
     }
@@ -123,7 +134,9 @@ export class ExcelService {
         type === "devicediskspacereport" ||
         type === "devicedeploymentwarrantyreport" ||
         type === "services" ||
-        type === "startupprogrammes"
+        type === "startupprogrammes" ||
+        type === "DeviceipSummary" ||
+        type === "HardwareSummary"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -144,7 +157,9 @@ export class ExcelService {
           type === "devicediskspacereport" ||
           type === "devicedeploymentwarrantyreport" ||
           type === "services" ||
-          type === "startupprogrammes"
+          type === "startupprogrammes" ||
+          type === "DeviceipSummary" ||
+          type === "HardwareSummary"
         ) {
           line += "," + array[i][index];
         } else {
