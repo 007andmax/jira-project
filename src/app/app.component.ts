@@ -200,8 +200,13 @@ export class AppComponent implements OnInit {
       if (data) document.querySelector("html").classList.add("--scrollLock");
       if (!data) document.querySelector("html").classList.remove("--scrollLock");
     })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      this.state = data;
+      console.log("this.state", this.state);
+    })
     this.leftPanelStateService.onChangeState.subscribe(data => {
       this.state = data;
+      console.log("this.state", this.state);
     })
   }
   ngDoCheck() {

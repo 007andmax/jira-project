@@ -1,0 +1,49 @@
+<div
+    [hidden]="!opened"
+    class="qt-aside-modern help-center-aside"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-info d-f ai-c">
+            <div class="qt-aside__title">Help & Support</div>
+        </div>
+        <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div
+            class="help-support-list-item pointer"
+            (click)="gotiHelpCenter()"
+        >
+            <div class="help-support-list-item-icon">
+                <div class="icon__help-center qt-bg-contain qt-sz-24"></div>
+            </div>
+            <div class="help-support-list-item-text qt-ml-10">
+                <h3>Quicktech Knowledge Base</h3>
+                <span>Learn how to set up your Quicktech</span>
+            </div>
+        </div>
+        <div class="help-support-list-item">
+            <div class="help-support-list-item-icon">
+                <div class="icon__annoucements-active qt-bg-contain qt-sz-24"></div>
+            </div>
+            <div class="help-support-list-item-text qt-ml-10">
+                <h3>What’s New?</h3>
+                <span>Release and new features</span>
+            </div>
+        </div>
+        <div class="help-support-list-item">
+            <div class="help-support-list-item-icon">
+                <div class="icon__road-map qt-bg-contain qt-sz-24"></div>
+            </div>
+            <div class="help-support-list-item-text qt-ml-10">
+                <h3>Public Roadmap</h3>
+                <span>Upcoming features and releases</span>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer"></div>
+</div>

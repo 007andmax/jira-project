@@ -84,6 +84,7 @@ import { PermissionReportsService } from './components/reports/permission-report
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
+import { SuperAdminPublicComponent } from './components/super-admin-public/super-admin-public.component';
 
 const routes: Routes = [
 
@@ -429,6 +430,13 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [PermissionUsersService, PermissionTechUserService]
   },
+  {
+    path: ':company/help-center',
+    component: SuperAdminPublicComponent,
+    pathMatch: 'full',
+    // canActivate: [PermissionTechUserService]
+  },
+
 
 ];
 

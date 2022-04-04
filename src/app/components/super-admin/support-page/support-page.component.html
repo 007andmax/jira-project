@@ -45,37 +45,41 @@
         >
             <div class="help-center">
                 <div class="help-center__header">
-                  <div class="icon__quicktech_partical_bottom qt-bg-contain"></div>
-                  <div class="help-center__header-title">Welcome to Quicktech</div>
-                  <div class="help-center__header-text">Demystify Quicktech with our help resources. Learn how to use its features and modules.</div>
-                  <div class="icon__quicktech_partical_top qt-bg-contain"></div>
+                    <div class="icon__quicktech_partical_bottom qt-bg-contain"></div>
+                    <div class="help-center__header-title">Welcome to Quicktech</div>
+                    <div class="help-center__header-text">
+                        Demystify Quicktech with our help resources. Learn how to use its features and modules.
+                    </div>
+                    <div class="icon__quicktech_partical_top qt-bg-contain"></div>
                 </div>
                 <div class="help-center__body">
-                 <div class="help-center__body-row">
-                   <ng-template
-                     ngFor
-                     let-category
-                     [ngForOf]="helpCenterCategories"
-                     [ngForTrackBy]="trackById"
-                   >
-                     <div class="support-page-body-category">
-                       <div class="support-page-body-category__header" [textContent]="category.name"></div>
-                       <ul class="support-page-body-category__body">
-                         <ng-template
-                           ngFor
-                           let-subcategory
-                           [ngForOf]="category.subcategories"
-                           [ngForTrackBy]="trackById"
-                         >
-                           <li [textContent]="subcategory.name"></li>
-                         </ng-template>
-                       </ul>
-                     </div>
-                   </ng-template>
-                 </div>
+                    <div class="help-center__body-row">
+                        <ng-template
+                            ngFor
+                            let-category
+                            [ngForOf]="helpCenterCategories"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <div class="support-page-body-category">
+                                <div
+                                    class="support-page-body-category__header"
+                                    [textContent]="category.name"
+                                ></div>
+                                <ul class="support-page-body-category__body">
+                                    <ng-template
+                                        ngFor
+                                        let-subcategory
+                                        [ngForOf]="category.subcategories"
+                                        [ngForTrackBy]="trackById"
+                                    >
+                                        <li [textContent]="subcategory.name"></li>
+                                    </ng-template>
+                                </ul>
+                            </div>
+                        </ng-template>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
-<super-admin-public *ngIf="true"></super-admin-public>

@@ -4,19 +4,19 @@
     *ngIf="main_page === PAGE_MAIN"
 >
     <app-header
-        *ngIf="currentUser && currentUser.role !== 'SUPER_ADMIN'"
+        [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
         class="nav-header"
         [ngClass]="{'--small-with':toggleLeftPanel,
     '--full-width':hideleLeftPanel}"
     ></app-header>
     <app-left-panel
-        *ngIf="currentUser && currentUser.role !== 'SUPER_ADMIN'"
+        [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
         class="app-left-panel"
         [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
         [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
     ></app-left-panel>
     <left-panel-super-admin
-        *ngIf="currentUser && currentUser.role === 'SUPER_ADMIN'"
+        [hidden]="!(currentUser && currentUser.role === 'SUPER_ADMIN')"
         class="app-left-panel-super-admin"
         [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
         [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
@@ -43,12 +43,14 @@
     </div>
     <div
         class="main-container"
+        [ngClass]="{'clear-padding-top': state === 'help-center'}"
         *ngIf=" currentUser && currentUser.role !== 'SUPER_ADMIN'"
     >
         <div class="row">
             <div
                 class="content-container"
                 [ngClass]="{'--large': toggleLeftPanel,
+                'clear-margin-left':state === 'help-center',
             'xx-small' : hideleLeftPanel}"
             >
                 <div class="content-wrapper">
@@ -75,6 +77,7 @@
                     <app-invoices-aside></app-invoices-aside>
                     <app-inventory-add-aside></app-inventory-add-aside>
                     <app-preview-attachment></app-preview-attachment>
+                    <help-center-info-aside></help-center-info-aside>
                     <!-- Mobile Style -->
                     <div class="footer-nav">
                         <ul class="footer-nav__menu">

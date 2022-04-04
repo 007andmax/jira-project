@@ -34,6 +34,10 @@ export class SupportPageInfoTagsComponent implements OnInit {
     this.supportPageCategoriesService.getTags().subscribe((data: any) => {
       this.tags = JSON.parse(JSON.stringify(data)).map(item => new SupportPageInfoTag(item));
       this.reqTags = JSON.parse(JSON.stringify(data)).map(item => new SupportPageInfoTag(item));
+      this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+      this.reqTags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -68,6 +72,10 @@ export class SupportPageInfoTagsComponent implements OnInit {
         if (index > -1) item.setData(JSON.parse(JSON.stringify(this.reqTags[index])));
         if (index == -1) this.tags.push(new SupportPageInfoTag(JSON.parse(JSON.stringify(item))));
       })
+      this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+      this.reqTags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
       this.cd.detectChanges();
     })
   }
