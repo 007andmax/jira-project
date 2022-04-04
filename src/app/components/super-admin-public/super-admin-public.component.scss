@@ -15,7 +15,7 @@
 
     .icon__quicktech-logo {
       display: inline-block;
-      width: 135px;
+      width: 136px;
       height: 18px;
       background-repeat: no-repeat;
       background-position: center;
@@ -120,5 +120,103 @@
   input {
     height: 40px;
     border: 1px solid $gray-400;
+    min-width: 360px;
+    border-radius: 6px;
   }
+}
+
+.topic-detail-page {
+  .qt-logo {
+    display: block;
+    width: 264px;
+    &__quicktech {
+      display: block;
+      width: 136px;
+      height: 18px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    &__beta {
+      font-size: 8px;
+      line-height: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: $white;
+      padding: 2px 4px;
+      background-color: $error;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 11px 16px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  }
+  &__body {
+    height: calc(100vh - 64px);
+    display: flex;
+    align-items: flex-start;
+    &-left-panel {
+      height: 100vh;
+      overflow: auto;
+      padding: 8px 0;
+      background-color: $gray-100;
+      border-right: 1px solid $gray-300;
+    }
+  }
+}
+
+.category-item-category {
+  display: flex;
+  align-items: center;
+  margin: 0 0 8px 0;
+
+  &__name {
+    color: #212b36;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    //padding: 8px 10px 8px 24px;
+    padding: 8px 24px 8px 26px;
+    border-right: 2px solid transparent;
+    cursor: pointer;
+    &.--active {
+      color: $primary-1;
+      border-color: $primary-1;
+    }
+    .icon__down-arrow {
+      position: absolute;
+      left: 0;
+      transform: rotate(-90deg) translate(0px, 2px);
+      &.toggle-category {
+        transform: none;
+      }
+    }
+    span {
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      position: relative;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+    }
+  }
+  &-body {
+    padding: 0 16px;
+  }
+}
+.category-item-sub-sub-category {
+  margin: 0 0 0 20px;
+}
+.category-item-sub-category-body {
+  padding-left: 16px;
 }
