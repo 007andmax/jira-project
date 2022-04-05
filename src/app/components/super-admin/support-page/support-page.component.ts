@@ -136,7 +136,7 @@ export class SupportPageComponent implements OnInit {
         this.supportPageCategoryContent.setContent(content);
         this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
-        this.header.toglePreview();
+        this.header.setPreview(true);
         this.isShowHelpCenter = false;
       })
     }

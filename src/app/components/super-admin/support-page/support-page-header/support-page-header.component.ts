@@ -27,6 +27,10 @@ export class SupportPageHeaderComponent implements OnInit {
   ngOnInit() {
 
   }
+  public setPreview(data) {
+    this.isPreview = data;
+    this.onPreview.emit(data);
+  }
   public toglePreview() {
     this.isPreview = !this.isPreview;
     this.onPreview.emit(this.isPreview);
