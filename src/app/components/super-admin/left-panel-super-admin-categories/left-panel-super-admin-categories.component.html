@@ -17,6 +17,7 @@
         <div class="category-item-category">
             <div
                 class="category-item-category__name"
+                [ngClass]="{'--active':isShowHelpCenter}"
                 (click)="gotoHelpCenter()"
             >
                 <span class="category-item-category__help-center pointer">Help center</span>

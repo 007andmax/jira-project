@@ -118,8 +118,15 @@ export class SupportPageComponent implements OnInit {
   }
   onPreview(data) {
     this.isPreview = data;
+    if (!this.isPreview) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+    // if (!this.isPreview && this.supportPageCategoryContent.isEditMode) this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);
+  }
+  getContentPreview() {
+    if (this.supportPageCategoryContent.newContent.length > 0) return this.supportPageCategoryContent.newContent;
+    return this.content
   }
 }

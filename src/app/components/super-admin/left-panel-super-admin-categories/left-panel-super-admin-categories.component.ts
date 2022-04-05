@@ -20,6 +20,7 @@ import { SupportPageCategory } from './class/support-page-category';
 export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy {
   categories: Array<SupportPageCategory> = [];
   selectedCategory: SupportPageCategory;
+  isShowHelpCenter: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private modalService: NgbModal,
     private supportPageCategoriesService: SupportPageCategoriesService,
@@ -42,7 +43,10 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       }
     })
     this.sub.add(getConfirm);
+    this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
+      this.isShowHelpCenter = false;
 
+    });
   }
   editArticle(category) {
     if (category.document) {
