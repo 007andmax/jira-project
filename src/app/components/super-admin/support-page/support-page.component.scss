@@ -190,7 +190,8 @@ aside {
     }
 }
 .support-page-body-category {
-    flex: 0 0 calc(33.33% - 24px);
+    max-width: calc(33.33% - 24px);
+    width: 100%;
     position: relative;
     margin: 20px 12px;
     ul {
@@ -224,6 +225,7 @@ aside {
   }
 }
 .category-item-category__name-text {
+  display: inline-block;
   position: relative;
   padding-left: 14px;
   &::before {

@@ -168,10 +168,6 @@
     display: flex;
     align-items: center;
     flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
     padding: 0 24px 0 26px;
     border-right: 2px solid transparent;
     cursor: pointer;
@@ -192,10 +188,6 @@
       font-size: 14px;
       position: relative;
       flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      -ms-text-overflow: ellipsis;
-      text-overflow: ellipsis;
     }
   }
   &-body {
@@ -212,6 +204,7 @@
 .category-item-category__name-text {
   position: relative;
   padding-left: 14px;
+  display: inline-block;
   &::before {
     content: "";
     position: absolute;
