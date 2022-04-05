@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
@@ -18,9 +18,11 @@ export class SupportPageComponent implements OnInit {
   content: string = "";
   isPreview: boolean = false;
   isShowHelpCenter: boolean = true;
+  categories: Array<SupportPageCategory> = [];
   helpCenterCategories: Array<HelpCenterCategory> = [];
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
+    public cd: ChangeDetectorRef,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class SupportPageComponent implements OnInit {
       }
     })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
+      this.helpCenterCategories = [];
       data.forEach(category => {
         let subcategories: Array<HelpCenterSubCategory> = [];
 
@@ -63,7 +66,8 @@ export class SupportPageComponent implements OnInit {
         })
         this.helpCenterCategories.push(new HelpCenterCategory(category.id, category.name, subcategories));
       });
-      // this.cd.detectChanges();
+      this.categories = JSON.parse(JSON.stringify(data)).map(item => new SupportPageCategory(item));
+      this.cd.detectChanges();
     })
     const selectTarget = (fromElement, selector) => {
       if (!(fromElement instanceof HTMLElement)) {
@@ -128,5 +132,8 @@ export class SupportPageComponent implements OnInit {
   getContentPreview() {
     if (this.supportPageCategoryContent.newContent.length > 0) return this.supportPageCategoryContent.newContent;
     return this.content
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

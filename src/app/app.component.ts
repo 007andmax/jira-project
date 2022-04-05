@@ -118,6 +118,7 @@ export class AppComponent implements OnInit {
         this.documentsStateService.onInit();
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
+        this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {
         this.supportPageCategoriesStateService.onInit();

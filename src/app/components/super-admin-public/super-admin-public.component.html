@@ -1,171 +1,204 @@
 <div class="super-admin-public">
-<!--  super-admin-public works!-->
-
-  <!-- Help Center -->
-  <div class="support-page">
-    <div class="support-page__header">
-      <a href="#" class="icon__quicktech-logo qt-bg-cover pointer" alt="Quicktech logo"></a>
-      <div class="qt-page-list__search">
-        <input
-          type="text"
-          placeholder="Search Help Topics"
-        >
-      </div>
+    <!-- super-admin-public works! -->
+    <!-- Help Center -->
+    <div class="support-page">
+        <div class="support-page__header">
+            <a
+                href="#"
+                class="icon__quicktech-logo qt-bg-cover pointer"
+                alt="Quicktech logo"
+            ></a>
+            <div class="qt-page-list__search">
+                <input
+                    type="text"
+                    placeholder="Search Help Topics"
+                >
+            </div>
+        </div>
+        <div class="support-page__hero">
+            <div class="icon__quicktech_partical_bottom qt-bg-contain"></div>
+            <div class="support-page__hero-title">Welcome to Quicktech</div>
+            <div class="support-page__hero-text">
+                Demystify Quicktech with our help resources. Learn how to use its features and modules.
+            </div>
+            <div class="icon__quicktech_partical_top qt-bg-contain"></div>
+        </div>
+        <div class="support-page__body">
+            <div class="support-page__body-row">
+                <ng-template
+                    ngFor
+                    let-category
+                    [ngForOf]="categories"
+                    [ngForTrackBy]="trackById"
+                >
+                    <div class="support-page__body-category">
+                        <div
+                            class="support-page__body-category-header"
+                            [textContent]="category.name"
+                        ></div>
+                        <ul class="support-page-body-category__body">
+                            <ng-template
+                                ngFor
+                                let-subcategory
+                                [ngForOf]="category.subcategories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <li>
+                                    <div
+                                        class="icon__category-closed qt-mr-10 pointer"
+                                        [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                        (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                        *ngIf="subcategory.subcategories.length > 0"
+                                    ></div>
+                                    <span [textContent]="subcategory.name"></span>
+                                    <ul
+                                        class="category-item-sub-category qt-ml-20"
+                                        *ngIf="subcategory.toggleSubCategory"
+                                    >
+                                        <ng-template
+                                            ngFor
+                                            let-subsubcategory
+                                            [ngForOf]="subcategory.subcategories"
+                                            [ngForTrackBy]="trackById"
+                                        >
+                                            <li
+                                                class="category-item-sub-sub-category-body"
+                                                [attr.id]="subsubcategory.id"
+                                                [attr.category-id]="subcategory.id"
+                                            >
+                                                <div class="category-item-category">
+                                                    <div class="category-item-category__name">
+                                                        <div
+                                                            class="icon__category-closed qt-mr-10 pointer"
+                                                            [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                            (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                            *ngIf="subsubcategory.subcategories.length > 0"
+                                                        ></div>
+                                                        <span
+                                                            [ngClass]="{'pointer':subsubcategory.document}"
+                                                            [textContent]="subsubcategory.name"
+                                                        ></span>
+                                                    </div>
+                                                </div>
+                                                <ul
+                                                    class="category-item-sub-sub-sub-category"
+                                                    *ngIf="subsubcategory.toggleSubCategory"
+                                                >
+                                                    <ng-template
+                                                        ngFor
+                                                        let-subsubsubcategory
+                                                        [ngForOf]="subsubcategory.subcategories"
+                                                        [ngForTrackBy]="trackById"
+                                                    >
+                                                        <li
+                                                            class="category-item-sub-sub-sub-category-body"
+                                                            [attr.id]="subsubsubcategory.id"
+                                                            [attr.category-id]="subsubcategory.id"
+                                                        >
+                                                            <div class="category-item-category">
+                                                                <div class="category-item-category__name">
+                                                                    <span
+                                                                        [ngClass]="{'pointer':subsubsubcategory.document}"
+                                                                        [textContent]="subsubsubcategory.name"
+                                                                    ></span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ng-template>
+                                                </ul>
+                                            </li>
+                                        </ng-template>
+                                    </ul>
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
     </div>
-    <div class="support-page__hero">
-      <div class="icon__quicktech_partical_bottom qt-bg-contain"></div>
-      <div class="support-page__hero-title">Welcome to Quicktech</div>
-      <div class="support-page__hero-text">Demystify Quicktech with our help resources. Learn how to use its features and modules.</div>
-      <div class="icon__quicktech_partical_top qt-bg-contain"></div>
-    </div>
-    <div class="support-page__body">
-      <div class="support-page__body-row">
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">new category</div>
-          <ul >
-            <li>the first level of category</li>
-            <li>The third level of category</li>
-            <li>the last level 55</li>
-            <li>11</li>
-            <li>3555</li>
-          </ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">Accounting</div>
-          <ul ></ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">Onboarding</div>
-          <ul >
-            <li>3f 2f3 fwef</li>
-            <li>4444 4 fewf wef2 2 2</li>
-            <li>Category with an existing article</li>
-            <li>5445 45</li>
-            <li>category 3f</li>
-            <li>9898</li>
-            <li>erg ergreg</li>
-          </ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">Finance</div>
-          <ul ></ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">test 2</div>
-          <ul ></ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">eeee 2</div>
-          <ul >
-            <li>we wef w wef</li>
-            <li>g dg dfg</li>
-            <li>fer e 3434g34g</li>
-          </ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">NEW CATEGORY 2dfg dg</div>
-          <ul >
-            <li>A SUBCATEGORY</li>
-            <li>ANOTHER SUB</li>
-          </ul>
-        </div>
-        <div class="support-page__body-category">
-          <div class="support-page__body-category-header">Knowledge Base</div>
-          <ul ></ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Help Center -->
-
-  <!-- Topic Detail -->
+    <!-- End Help Center -->
+    <!-- Topic Detail -->
     <div class="topic-detail-page">
-      <div class="topic-detail-page__header">
-        <a href="#" class="qt-logo pointer" alt="Quicktech logo">
-          <span class="qt-logo__quicktech icon__quicktech-logo"></span>
-          <span class="qt-logo__beta">Beta</span>
-        </a>
-        <div class="qt-df qt-jc-sb qt-ai-c qt-f-1">
-          <div class="qt-page-list__search">
-            <input
-              type="text"
-              placeholder="Search Help Topics"
+        <div class="topic-detail-page__header">
+            <a
+                href="#"
+                class="qt-logo pointer"
+                alt="Quicktech logo"
             >
-          </div>
-          <div class="icon__help-center qt-bg-contain qt-sz-24 pointer qt-ml-16 qt-mr-16"></div>
-        </div>
-      </div>
-      <div class="topic-detail-page__body">
-        <div class="topic-detail-page__body-left-panel">
-          <div class="container-categories">
-
-            <div class="category-item category-item-category-body">
-              <div class="category-item-category__name">
-                <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
-                <span>
-                  Finance
-                </span>
-              </div>
+                <span class="qt-logo__quicktech icon__quicktech-logo"></span>
+                <span class="qt-logo__beta">Beta</span>
+            </a>
+            <div class="qt-df qt-jc-sb qt-ai-c qt-f-1">
+                <div class="qt-page-list__search">
+                    <input
+                        type="text"
+                        placeholder="Search Help Topics"
+                    >
+                </div>
+                <div class="icon__help-center qt-bg-contain qt-sz-24 pointer qt-ml-16 qt-mr-16"></div>
             </div>
-            <div class="category-item-sub-category qt-ml-20">
-              <div class="category-item-sub-category-body">
-                <div class="category-item-category">
-                  <div class="category-item-category__name --active">
-                    <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
-                    <span>Invoices</span>
-                  </div>
-                </div>
-
-                <div class="category-item-sub-sub-category">
-                  <div class="category-item-sub-sub-category-body">
-                    <div class="category-item-category">
-                      <div class="category-item-category__name">
-                        <span>Organization Setttings</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="category-item-sub-sub-category">
-                  <div class="category-item-sub-sub-category-body">
-                    <div class="category-item-category">
-                      <div class="category-item-category__name">
-                        <span>Setting Custom Invoice</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="category-item-sub-sub-category">
-                  <div class="category-item-sub-sub-category-body">
-                    <div class="category-item-category">
-                      <div class="category-item-category__name">
-                        <span>Creating an Invoice</span>
-                        <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
-                      </div>
-                    </div>
-                    <div class="category-item-sub-sub-category">
-                      <div class="category-item-sub-sub-category-body">
-                        <div class="category-item-category">
-                          <div class="category-item-category__name">
-                            <span>More...</span>
-                          </div>
+        </div>
+        <div class="topic-detail-page__body">
+            <div class="topic-detail-page__body-left-panel">
+                <div class="container-categories">
+                    <div class="category-item category-item-category-body">
+                        <div class="category-item-category__name">
+                            <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
+                            <span>Finance</span>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                    <div class="category-item-sub-category qt-ml-20">
+                        <div class="category-item-sub-category-body">
+                            <div class="category-item-category">
+                                <div class="category-item-category__name --active">
+                                    <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
+                                    <span>Invoices</span>
+                                </div>
+                            </div>
+                            <div class="category-item-sub-sub-category">
+                                <div class="category-item-sub-sub-category-body">
+                                    <div class="category-item-category">
+                                        <div class="category-item-category__name">
+                                            <span>Organization Setttings</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-item-sub-sub-category">
+                                <div class="category-item-sub-sub-category-body">
+                                    <div class="category-item-category">
+                                        <div class="category-item-category__name">
+                                            <span>Setting Custom Invoice</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-item-sub-sub-category">
+                                <div class="category-item-sub-sub-category-body">
+                                    <div class="category-item-category">
+                                        <div class="category-item-category__name">
+                                            <span>Creating an Invoice</span>
+                                            <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
+                                        </div>
+                                    </div>
+                                    <div class="category-item-sub-sub-category">
+                                        <div class="category-item-sub-sub-category-body">
+                                            <div class="category-item-category">
+                                                <div class="category-item-category__name">
+                                                    <span>More...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-              </div>
             </div>
-
-          </div>
+            <div class="topic-detail-page__body-content"></div>
         </div>
-        <div class="topic-detail-page__body-content">
-
-        </div>
-      </div>
     </div>
-  <!-- End Topic Detail -->
-
+    <!-- End Topic Detail -->
 </div>

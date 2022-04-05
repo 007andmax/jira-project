@@ -57,7 +57,7 @@
                         <ng-template
                             ngFor
                             let-category
-                            [ngForOf]="helpCenterCategories"
+                            [ngForOf]="categories"
                             [ngForTrackBy]="trackById"
                         >
                             <div class="support-page-body-category">
@@ -72,7 +72,73 @@
                                         [ngForOf]="category.subcategories"
                                         [ngForTrackBy]="trackById"
                                     >
-                                        <li [textContent]="subcategory.name"></li>
+                                        <li>
+                                            <div
+                                                class="icon__category-closed qt-mr-10 pointer"
+                                                [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                                (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                                *ngIf="subcategory.subcategories.length > 0"
+                                            ></div>
+                                            <span [textContent]="subcategory.name"></span>
+                                            <ul
+                                                class="category-item-sub-category qt-ml-20"
+                                                *ngIf="subcategory.toggleSubCategory"
+                                            >
+                                                <ng-template
+                                                    ngFor
+                                                    let-subsubcategory
+                                                    [ngForOf]="subcategory.subcategories"
+                                                    [ngForTrackBy]="trackById"
+                                                >
+                                                    <li
+                                                        class="category-item-sub-sub-category-body"
+                                                        [attr.id]="subsubcategory.id"
+                                                        [attr.category-id]="subcategory.id"
+                                                    >
+                                                        <div class="category-item-category">
+                                                            <div class="category-item-category__name">
+                                                                <div
+                                                                    class="icon__category-closed qt-mr-10 pointer"
+                                                                    [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                                    (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                                    *ngIf="subsubcategory.subcategories.length > 0"
+                                                                ></div>
+                                                                <span
+                                                                    [ngClass]="{'pointer':subsubcategory.document}"
+                                                                    [textContent]="subsubcategory.name"
+                                                                ></span>
+                                                            </div>
+                                                        </div>
+                                                        <ul
+                                                            class="category-item-sub-sub-sub-category"
+                                                            *ngIf="subsubcategory.toggleSubCategory"
+                                                        >
+                                                            <ng-template
+                                                                ngFor
+                                                                let-subsubsubcategory
+                                                                [ngForOf]="subsubcategory.subcategories"
+                                                                [ngForTrackBy]="trackById"
+                                                            >
+                                                                <li
+                                                                    class="category-item-sub-sub-sub-category-body"
+                                                                    [attr.id]="subsubsubcategory.id"
+                                                                    [attr.category-id]="subsubcategory.id"
+                                                                >
+                                                                    <div class="category-item-category">
+                                                                        <div class="category-item-category__name">
+                                                                            <span
+                                                                                [ngClass]="{'pointer':subsubsubcategory.document}"
+                                                                                [textContent]="subsubsubcategory.name"
+                                                                            ></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ng-template>
+                                                        </ul>
+                                                    </li>
+                                                </ng-template>
+                                            </ul>
+                                        </li>
                                     </ng-template>
                                 </ul>
                             </div>
