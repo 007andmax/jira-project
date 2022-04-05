@@ -164,8 +164,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
     this.deviceSummaryList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " "),
         element.SerialNumber || "N/A",
       ]);
     });
@@ -350,8 +350,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
     this.deviceSummaryList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " "),
         element.SerialNumber || "N/A",
       ]);
     });

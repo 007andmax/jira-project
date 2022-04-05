@@ -625,6 +625,19 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
+  public screenConnect(sconnect) {
+    return this.http
+    .post(
+      `${this.apiAgent}agent/ScreenConnect`,
+      this.encrypt128(this.key, JSON.stringify(sconnect)),
+      {
+        headers: this.getHeader(),
+        responseType: "text",
+      }
+    )
+    .pipe(map((data: string) => data));
+  }
+
   public addAssetNotes(notes) {
     return this.http
       .put(

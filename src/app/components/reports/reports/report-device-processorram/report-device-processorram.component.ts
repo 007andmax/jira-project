@@ -136,8 +136,8 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     this.deviceProcessorRamList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " "),
         element.ProcessorType || "N/A",
         element.MemorySize || "N/A",
       ]);
@@ -333,8 +333,8 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     this.deviceProcessorRamList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " "),
         element.ProcessorType || "N/A",
         element.MemorySize || "N/A",
       ]);

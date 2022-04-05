@@ -26,6 +26,7 @@ import { DeviceFilter } from './class/devices';
 export class DevicesComponent implements OnInit {
   @ViewChild("templatePowersell") template;
   @ViewChild("templateConnection") templateconnection;
+  @ViewChild("screenConnect") screenConnect;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -63,6 +64,10 @@ export class DevicesComponent implements OnInit {
   modalReference: any;
   favouriteName: string;
   searchSubscription: any;
+  screenConnects : []=[];
+  userName : any;
+  password: any;
+  OneTimeCode :any;
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -722,6 +727,24 @@ export class DevicesComponent implements OnInit {
     }
   }
 
+  showScreenConnect(screenConnect) {
+    this.ngZone.run(() => {
+      this.modalService
+        .open(screenConnect, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', })
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    });
+  }
+
+  closed() {
+    this.modalService.dismissAll("Cross click");
+  }
   saveFavourite() {
     let req: any = {};
     req.Criteria = this.selectedTag;
@@ -734,6 +757,21 @@ export class DevicesComponent implements OnInit {
     },
       (err) => {
         this.toastr.error('Error saving your search! Please try again');
+      })
+  }
+
+  screenCreate() {
+    let data: any = {};
+    data.UserName = this.userName;
+    data.Password = this.password;
+    data.OneTimeCode = this.OneTimeCode;
+    data.URL = "http://inventory.activeinfosystems.com:8040"
+    this.agentService.screenConnect(data).subscribe((resp) => {
+      console.log(resp);
+      this.toastr.success('Successfully')
+    },
+      (err) => {
+        this.toastr.error('Error ! Please try again')
       })
   }
 }

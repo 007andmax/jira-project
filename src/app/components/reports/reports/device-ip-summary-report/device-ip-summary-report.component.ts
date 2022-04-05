@@ -92,6 +92,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
       } else {
         return currentItem;
       }
+
     } else {
       return ''
     }
@@ -110,6 +111,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.getSoftByCompany(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
+      this.getReportByDeviceIpSummary();
     }
     this.onSelectedClient.emit(this.selectedClient);
   }
@@ -151,6 +153,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       if (resp) {
         this.deviceIpSummary.setDevices(resp[companyId]);
+        this.getReportByDeviceIpSummary();
       }
       this.deviceIpSummary.setPreloaderDevices(false);
     }, err => {
@@ -168,6 +171,26 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     modalRef.componentInstance.accountType = this.accountType;
   }
 
+  getsubnet(device, params) {
+    var currentItem = '';
+    if (device.report) {
+      device.report.networkAdapters.map((item) => {
+        if (item.ip_enabled) { currentItem = item[params]; }
+      });
+
+      if (params === 'dns' || 'subnet') {
+        var regex = /;/gi;
+        currentItem = currentItem.replace(regex, "  ");
+        return currentItem;
+      } else {
+        return currentItem;
+      }
+
+    } else {
+      return ''
+    }
+  };
+
   downloadCsv() {
     let downloadCsvList = [];
     this.deviceIpSummary.list.forEach((element) => {
@@ -177,10 +200,10 @@ export class DeviceIpSummaryReportComponent implements OnInit {
         (parseInt(this.getDeviceReport(element, 'speed')) || 0)/1000000 || "N/A",
         (this.getDeviceReport(element, 'dhcp_server')? 'yes' : 'no')  || "N/A",
         (this.getDeviceReport(element, 'ip_address')) || "N/A",
-        element.report.networkAdapters[0].dns.replace(",", " ") || "N/A",
-        element.report.networkAdapters[0].gateway.replace(",", " ") || "N/A",
-        element.report.networkAdapters[0].dns.replace(",", " ") || "N/A",
-        element.report.networkAdapters[0].dns.replace(",", " ") || "N/A",
+        (this.getsubnet(element, 'subnet'))|| "N/A",
+        (this.getDeviceReport(element, 'gateway')) || "N/A",
+        (this.getsubnet(element, 'dns')) || "N/A",
+        (this.getsubnet(element, 'dns')) || "N/A",
         element.report.externalIp.replace(",", " ") || "N/A"
       ]);
     });
@@ -205,7 +228,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
         (parseInt(this.getDeviceReport(element, 'speed')) || 0)/1000000 || "N/A",
         (this.getDeviceReport(element, 'dhcp_server')? 'yes' : 'no')  || "N/A",
         (this.getDeviceReport(element, 'ip_address')) || "N/A",
-        element.report.networkAdapters[0].dns.replace(",", " ") || "N/A",
+        (this.getDeviceReport(element, 'subnet')) || "N/A",
        (this.getDeviceReport(element, 'gateway')) || "N/A",
        (this.getDeviceReport(element, 'dns')) || "N/A",
        (this.getDeviceReport(element, 'dns')) || "N/A",

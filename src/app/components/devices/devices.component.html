@@ -41,6 +41,11 @@
         summarydownload
       "></i>
       </button>
+      <button class="qt-btn --outline-white qt-ml-8">
+        <a href="javascript:;" (click)="showScreenConnect(screenConnect)">
+          <span class="screen-Connect"></span>
+        </a>
+    </button>
         </div>
 
         <div class="qt-page-list__header-thead-container">
@@ -351,4 +356,88 @@
             </button>
         </div>
     </div>
+</ng-template>
+
+<ng-template #screenConnect>
+  <div
+    class="qt-aside-modern device-add-aside"
+>
+    <div class="qt-aside-modern__header">
+        <div class="d-f ai-c">
+            <div class="qt-aside__title">Screen Connect</div>
+        </div>
+        <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-input-block qt-input-line">
+            <label
+                for="add-device-name"
+                class="Device-Name"
+            >
+                User Name
+            </label>
+            <input
+                id="add-device-name"
+                class="qt-input-block__input"
+                type="text"
+                placeholder="Enter User Name"
+                [(ngModel)]="userName"
+                name="username"
+            >
+        </div>
+        <div class="qt-input-block qt-input-line">
+          <label
+              for="add-password"
+              class="Device-Name"
+          >
+              Password
+          </label>
+          <input
+              id="add-password"
+              class="qt-input-block__input"
+              type="text"
+              placeholder="Enter Password"
+              [(ngModel)]="password"
+          >
+      </div>
+      <div class="qt-input-block qt-input-line">
+        <label
+            for="one-time-code"
+            class="Device-Name"
+        >
+            One Time
+        </label>
+        <input
+            id="one-time-code"
+            class="qt-input-block__input"
+            type="text"
+            placeholder="Enter oneTime Code"
+            [(ngModel)]="OneTimeCode"
+        >
+    </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+      <div class="qt-df">
+          <button
+              class="qt-button qt-mr-12"
+              appDisabledBtn
+              #addBtn="disabled"
+              (onClick)="screenCreate()"
+          >
+              <span>Login</span>
+          </button>
+          <button
+              class="qt-button --gray"
+              (click)="closed()"
+          >
+              Cancel
+          </button>
+      </div>
+  </div>
+</div>
 </ng-template>

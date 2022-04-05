@@ -345,8 +345,8 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
     this.deviceDeploymentWarrantyList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(","," ") || "N/A",
-        element.Model || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(","," "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " "),
         this.pipe.transform(element.InstallDate, "dd/MM/yyyy") || "N/A",
         this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
         this.pipe.transform(element.RenewDate, "dd/MM/yyyy") || "N/A"

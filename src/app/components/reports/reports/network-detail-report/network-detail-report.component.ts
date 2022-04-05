@@ -374,11 +374,13 @@ export class NetworkDetailReportComponent implements OnInit {
 
   addNewlines(str) {
     var result = "";
-    while (str.length > 0) {
-      result += str.substring(0, 7) + "\n";
-      str = str.substring(7);
+    if(str != null){
+      while (str.length > 0) {
+        result += str.substring(0, 7) + "\n";
+        str = str.substring(7);
+      }
+      return result;
     }
-    return result;
   }
 
   downloadCsv() {

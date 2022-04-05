@@ -48,7 +48,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    public elRef: ElementRef
+    public elRef: ElementRef,
   ) {}
 
   ngOnInit() {
@@ -139,11 +139,11 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     this.deviceWarrantyList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.HardwareType.replace(",", "") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
+        element.HardwareType == null ? "N/A" :  element.HardwareType.replace(",", " "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " ") || "N/A",
         this.addNewlines(element.SerialNumber) || "N/A",
-        this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
+        element.WarrantyExpires == null || "-infinity"  ? "N/A" : this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy"),
       ]);
     });
     let html =
@@ -336,11 +336,13 @@ export class ReportDeviceWarrantyComponent implements OnInit {
 
   addNewlines(str) {
     var result = "";
-    while (str.length > 0) {
-      result += str.substring(0, 14) + "\n";
-      str = str.substring(14);
+    if(str !=null){
+      while (str.length > 0) {
+        result += str.substring(0, 14) + "\n";
+        str = str.substring(14);
+      }
+      return result;
     }
-    return result;
   }
 
   printPdf() {
@@ -352,11 +354,11 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     this.deviceWarrantyList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.HardwareType.replace(",", "") || "N/A",
-        element.Model.replace(",", " ") || "N/A",
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
+        element.HardwareType == null ? "N/A" :  element.HardwareType.replace(",", " "),
+        element.Model == null ? "N/A" : element.Model.replace(",", " ") || "N/A",
         element.SerialNumber || "N/A",
-        this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
+        element.WarrantyExpires == null || "-infinity"  ? "N/A" : this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy"),
       ]);
     });
     let fileName = "Device Warranty Report List";
