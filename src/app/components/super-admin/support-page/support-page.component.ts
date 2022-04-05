@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
@@ -6,6 +6,7 @@ import { SupportPageCategoriesStateService } from '../state/support-page-categor
 import { HelpCenterCategory } from './class/help-center-category';
 import { HelpCenterSubCategory } from './class/help-center-sub-category';
 import { SupportPageCategoryContent } from './class/support-page-category-content';
+import { SupportPageHeaderComponent } from './support-page-header/support-page-header.component';
 var $ = require("jquery");
 @Component({
   selector: 'support-page',
@@ -20,6 +21,7 @@ export class SupportPageComponent implements OnInit {
   isShowHelpCenter: boolean = true;
   categories: Array<SupportPageCategory> = [];
   helpCenterCategories: Array<HelpCenterCategory> = [];
+  @ViewChild('header') header: SupportPageHeaderComponent;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     public cd: ChangeDetectorRef,
@@ -124,7 +126,20 @@ export class SupportPageComponent implements OnInit {
     this.isPreview = data;
     if (!this.isPreview) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
     // if (!this.isPreview && this.supportPageCategoryContent.isEditMode) this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-
+  }
+  public showPreview(data) {
+    if (data.document) {
+      this.selectedCategory = data;
+      this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
+      this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
+        this.supportPageCategoryContent.setEditMode(true);
+        this.supportPageCategoryContent.setContent(content);
+        this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
+        this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
+        this.header.toglePreview();
+        this.isShowHelpCenter = false;
+      })
+    }
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);

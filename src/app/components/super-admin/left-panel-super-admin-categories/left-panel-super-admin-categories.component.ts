@@ -30,6 +30,37 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
 
 
   ngOnInit() {
+    this.supportPageCategoriesStateService.onPreviewContent.subscribe(data => {
+      this.selectedCategory = data;
+      this.isShowHelpCenter = false;
+      this.categories.forEach(category => {
+        if (category.id === this.selectedCategory.id) {
+          category.toggleSubCategory = true;
+        }
+        category.subcategories.forEach(subcategory => {
+          if (subcategory.id === this.selectedCategory.id) {
+            category.toggleSubCategory = true;
+            subcategory.toggleSubCategory = true;
+          }
+          subcategory.subcategories.forEach(subsubcategory => {
+            if (subsubcategory.id === this.selectedCategory.id) {
+              category.toggleSubCategory = true;
+              subcategory.toggleSubCategory = true;
+              subsubcategory.toggleSubCategory = true;
+            }
+            subsubcategory.subcategories.forEach(subsubsubcategory => {
+              if (subsubsubcategory.id === this.selectedCategory.id) {
+                category.toggleSubCategory = true;
+                subcategory.toggleSubCategory = true;
+                subsubcategory.toggleSubCategory = true;
+                subsubsubcategory.toggleSubCategory = true;
+              }
+
+            })
+          })
+        })
+      })
+    })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = data;
       this.cd.detectChanges();
@@ -44,6 +75,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     })
     this.sub.add(getConfirm);
     this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
+      this.selectedCategory = data;
       this.isShowHelpCenter = false;
     });
     this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {

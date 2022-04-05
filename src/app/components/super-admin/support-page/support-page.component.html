@@ -9,6 +9,7 @@
     ></div>
     <main>
         <support-page-header
+            #header
             [selectedCategory]="selectedCategory"
             [supportPageCategoryContent]="supportPageCategoryContent"
             (onPreview)="onPreview($event)"
@@ -63,7 +64,9 @@
                             <div class="support-page-body-category">
                                 <div
                                     class="support-page-body-category__header"
+                                    [ngClass]="{'pointer':category.document}"
                                     [textContent]="category.name"
+                                    (click)="showPreview(category)"
                                 ></div>
                                 <ul class="support-page-body-category__body">
                                     <ng-template
@@ -79,7 +82,11 @@
                                                 (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
                                                 *ngIf="subcategory.subcategories.length > 0"
                                             ></div>
-                                            <span [textContent]="subcategory.name"></span>
+                                            <span
+                                                [ngClass]="{'pointer':subcategory.document}"
+                                                [textContent]="subcategory.name"
+                                                (click)="showPreview(subcategory)"
+                                            ></span>
                                             <ul
                                                 class="category-item-sub-category qt-ml-20"
                                                 *ngIf="subcategory.toggleSubCategory"
@@ -106,6 +113,7 @@
                                                                 <span
                                                                     [ngClass]="{'pointer':subsubcategory.document}"
                                                                     [textContent]="subsubcategory.name"
+                                                                    (click)="showPreview(subsubcategory)"
                                                                 ></span>
                                                             </div>
                                                         </div>
@@ -129,6 +137,7 @@
                                                                             <span
                                                                                 [ngClass]="{'pointer':subsubsubcategory.document}"
                                                                                 [textContent]="subsubsubcategory.name"
+                                                                                (click)="showPreview(subsubsubcategory)"
                                                                             ></span>
                                                                         </div>
                                                                     </div>
