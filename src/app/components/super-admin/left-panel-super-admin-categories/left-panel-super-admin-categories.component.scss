@@ -91,7 +91,7 @@ left-panel-super-admin-categories-actions {
     margin: 0px 0px 0px 30px;
 }
 .category-item-sub-sub-sub-category {
-    margin: 0px 0px 0px 44px;
+    margin: 0px 0px 0px 28px;
 }
 .qt-button {
     margin: 16px;
@@ -101,4 +101,16 @@ left-panel-super-admin-categories-actions {
     line-height: 17px;
     font-weight: 600;
     border-radius: 8px;
+    justify-content: center;
+    width: calc(100% - 32px);
 }
+
+.category-item-sub-category {
+  .icon__category-closed + .category-status {
+    margin-left: 0;
+  }
+  .category-status {
+    margin-left: 18px;
+  }
+}
+

@@ -5045,3 +5045,14 @@ add-category-product {
     color: $primary-2;
   }
 }
+.support-page-body__editor {
+  .fr-box {
+    width: 794px;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .fr-wrapper {
+    height: calc(100% - 140px);
+    overflow: auto;
+  }
+}

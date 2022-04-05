@@ -251,7 +251,16 @@
 }
 
 .icon__category-closed {
-    height: 11.67px;
-    width: 8.37px;
-    flex-shrink: 0;
+  height: 11.67px;
+  width: 7.4px;
+  flex-shrink: 0;
+  &.toggle-category {
+    transform: rotate(90deg) translate(0px, -2px);
+  }
+  + .category-item-category__name-text {
+    padding-left: 0;
+    &::before {
+      display: none;
+    }
+  }
 }
