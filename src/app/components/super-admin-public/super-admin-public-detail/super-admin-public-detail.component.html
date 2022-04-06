@@ -21,6 +21,16 @@
     <div class="topic-detail-page__body">
         <div class="topic-detail-page__body-left-panel">
             <div class="container-categories">
+                <div class="category-item category-item-category-body">
+                    <div class="category-item-category">
+                        <div
+                            class="category-item-category__name"
+                            (click)="gotoHelpCenter()"
+                        >
+                            <span class="category-item-category__help-center pointer">Help center</span>
+                        </div>
+                    </div>
+                </div>
                 <ng-template
                     ngFor
                     let-category

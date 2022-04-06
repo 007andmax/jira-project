@@ -7,7 +7,7 @@
     >
         <div class="support-page__header">
             <a
-                href="#"
+                href="javascript:;"
                 class="icon__quicktech-logo qt-bg-cover pointer"
                 alt="Quicktech logo"
             ></a>
@@ -140,6 +140,7 @@
     <super-admin-public-detail
         [selectedCategory]="selectedCategory"
         [hidden]="isShowHelpCenter"
+        (onGoHelpCenter)="isShowHelpCenter = true"
     ></super-admin-public-detail>
     <!-- End Topic Detail -->
 </div>

@@ -22,7 +22,7 @@ export class SupportPageCategoriesService {
   public constructor(
     private http: HttpClient,
     private toastrService: ToastrService,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
   ) { }
 
   public addCategory(data) {
@@ -62,8 +62,10 @@ export class SupportPageCategoriesService {
       order: index
     })
   }
-  public getCategories() {
-    return this.http.get(this.apiUrl + 'support/categories');
+  public getCategories(role) {
+    if (role === "SUPER_ADMIN") return this.http.get(this.apiUrl + 'support/categories');
+    return this.http.get(this.apiUrl + 'support/categories?type=PUBLISHED');
+
   }
   public getTags() {
     return this.http.get(this.apiUrl + 'support/tags');

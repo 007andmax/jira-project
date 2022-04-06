@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../super-admin/services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesStateService } from '../../super-admin/state/support-page-categories/support-page-categories-state.service';
@@ -13,6 +13,7 @@ export class SuperAdminPublicDetailComponent implements OnInit {
   categories: Array<SupportPageCategory> = [];
   @Input() selectedCategory: SupportPageCategory;
   supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
+  @Output() onGoHelpCenter = new EventEmitter();
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesService: SupportPageCategoriesService,
     public cd: ChangeDetectorRef) { }
@@ -55,6 +56,9 @@ export class SuperAdminPublicDetailComponent implements OnInit {
       this.categories = data;
       this.cd.detectChanges();
     })
+  }
+  gotoHelpCenter() {
+    this.onGoHelpCenter.emit(null);
   }
   showPreview(data) {
     if (data.document) {

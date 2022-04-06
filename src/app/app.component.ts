@@ -118,7 +118,7 @@ export class AppComponent implements OnInit {
         this.documentsStateService.onInit();
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
-        this.supportPageCategoriesStateService.onInit();
+        if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {
         this.supportPageCategoriesStateService.onInit();
@@ -203,6 +203,7 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.state = data;
+
       console.log("this.state", this.state);
     })
     this.leftPanelStateService.onChangeState.subscribe(data => {

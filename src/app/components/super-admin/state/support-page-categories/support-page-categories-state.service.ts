@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
 import { SupportPageInfoTag } from '../../support-page/support-page-info/support-page-info-tags/class/support-page-info-tag';
@@ -16,10 +17,11 @@ export class SupportPageCategoriesStateService {
   onShowHelpCenter: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   constructor(private supportPageCategoriesService: SupportPageCategoriesService,
+    private usersStateService: UsersStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,) { }
 
   public onInit() {
-    this.supportPageCategoriesService.getCategories().subscribe((data: any) => {
+    this.supportPageCategoriesService.getCategories(this.usersStateService.getCurrentUser().role).subscribe((data: any) => {
       this.categories = data.map(item => new SupportPageCategory(item));
       this.onGetCategories.emit(this.categories)
     })
