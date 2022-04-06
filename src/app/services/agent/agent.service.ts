@@ -635,7 +635,7 @@ export class AgentService {
         responseType: "text",
       }
     )
-    .pipe(map((data: string) => data));
+    .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public addAssetNotes(notes) {

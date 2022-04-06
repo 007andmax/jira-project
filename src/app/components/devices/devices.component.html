@@ -242,6 +242,9 @@
                                                 <li (click)="remoteAccess('RDP', asset.Guid)" ngbDropdownItem>
                                                     Remote Desktop
                                                 </li>
+                                                <li (click)="screenConnectAccess(asset.MacAddress)" ngbDropdownItem>
+                                                 Screen Connect
+                                              </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -339,6 +342,44 @@
     </div>
 </ng-template>
 
+<ng-template #screenConnectAcces let-modal>
+  <div class="modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+      <div class="remote-area">
+          <ul class="list-unstyled">
+              <li>
+                  <span class="remote-ico">
+                    <img
+                        src="/html/assets/img/device/quicktech-connect.svg"
+                        alt="quicktech-connect"
+                    >
+                </span>
+                  <div class="remote-info">
+                      <h3>Screen Connect</h3>
+                      <p>
+                          Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
+                      </p>
+                      <a [href]="launchSchemeUrl" target="_blank" class="btn btn-primary">
+                        Launch Screen Connect
+                    </a>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div class="viewer-footer">
+          <p>
+              You may need to download and install the viewer
+          </p>
+          <a (click)="getViewer();" class="btn btn-dowanload">
+            Download Viewer
+        </a>
+      </div>
+  </div>
+</ng-template>
+
 
 <ng-template #tag let-modal class="modal-dialog">
     <div>
@@ -427,7 +468,7 @@
               class="qt-button qt-mr-12"
               appDisabledBtn
               #addBtn="disabled"
-              (onClick)="screenCreate()"
+              (onClick)="screenConnectLogin()"
           >
               <span>Login</span>
           </button>

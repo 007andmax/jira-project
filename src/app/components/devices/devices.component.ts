@@ -27,6 +27,7 @@ export class DevicesComponent implements OnInit {
   @ViewChild("templatePowersell") template;
   @ViewChild("templateConnection") templateconnection;
   @ViewChild("screenConnect") screenConnect;
+  @ViewChild("screenConnectAcces") screenConnectAcces;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -64,10 +65,13 @@ export class DevicesComponent implements OnInit {
   modalReference: any;
   favouriteName: string;
   searchSubscription: any;
-  screenConnects : []=[];
+  screenConnectList : any[] = [];
   userName : any;
   password: any;
   OneTimeCode :any;
+  MacAddress : any;
+  launchSchemeUrl : string ='';
+  screenConnectFilterList : any;
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -443,6 +447,17 @@ export class DevicesComponent implements OnInit {
     });
   }
 
+  screenConnectAccess(macAddress) {
+    let screenConnect = this.screenConnectList.find((x) => x.MACAddress == macAddress);
+    if (screenConnect) {
+      this.launchSchemeUrl = screenConnect.launchSchemeURL;
+    }
+    this.modalService.open(this.screenConnectAcces, {
+      windowClass: "modal-md",
+      centered: true,
+    });
+  }
+
   close() {
     this.modalService.dismissAll("Cross click");
   }
@@ -760,14 +775,16 @@ export class DevicesComponent implements OnInit {
       })
   }
 
-  screenCreate() {
+  screenConnectLogin() {
     let data: any = {};
     data.UserName = this.userName;
     data.Password = this.password;
     data.OneTimeCode = this.OneTimeCode;
     data.URL = "http://inventory.activeinfosystems.com:8040"
     this.agentService.screenConnect(data).subscribe((resp) => {
-      console.log(resp);
+      this.screenConnectList = resp.HostSessions;
+      this.modalService.dismissAll();
+      console.log(this.screenConnectList);
       this.toastr.success('Successfully')
     },
       (err) => {
