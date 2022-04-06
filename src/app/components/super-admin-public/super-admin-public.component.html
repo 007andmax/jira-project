@@ -1,7 +1,10 @@
 <div class="super-admin-public">
     <!-- super-admin-public works! -->
     <!-- Help Center -->
-    <div class="support-page">
+    <div
+        class="support-page"
+        [hidden]="!isShowHelpCenter"
+    >
         <div class="support-page__header">
             <a
                 href="#"
@@ -35,6 +38,8 @@
                         <div
                             class="support-page__body-category-header"
                             [textContent]="category.name"
+                            [ngClass]="{'pointer':category.document}"
+                            (click)="selectCategory(category)"
                         ></div>
                         <ul class="support-page-body-category__body">
                             <ng-template
@@ -45,13 +50,18 @@
                             >
                                 <li>
                                     <div class="qt-df qt-ai-c">
-                                      <div
-                                        class="icon__category-closed qt-mr-10 pointer"
-                                        [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
-                                        (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
-                                        *ngIf="subcategory.subcategories.length > 0"
-                                      ></div>
-                                      <span class="category-item-category__name-text" [textContent]="subcategory.name"></span>
+                                        <div
+                                            class="icon__category-closed qt-mr-10 pointer"
+                                            [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                            (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                            *ngIf="subcategory.subcategories.length > 0"
+                                        ></div>
+                                        <span
+                                            class="category-item-category__name-text"
+                                            [ngClass]="{'pointer':subcategory.document}"
+                                            [textContent]="subcategory.name"
+                                            (click)="selectCategory(subcategory)"
+                                        ></span>
                                     </div>
                                     <ul
                                         class="category-item-sub-category"
@@ -71,17 +81,18 @@
                                                 <div class="category-item-category">
                                                     <div class="category-item-category__name">
                                                         <div class="qt-df qt-ai-c">
-                                                          <div
-                                                            class="icon__category-closed qt-mr-10 pointer"
-                                                            [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
-                                                            (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
-                                                            *ngIf="subsubcategory.subcategories.length > 0"
-                                                          ></div>
-                                                          <span
-                                                            class="category-item-category__name-text"
-                                                            [ngClass]="{'pointer':subsubcategory.document}"
-                                                            [textContent]="subsubcategory.name"
-                                                          ></span>
+                                                            <div
+                                                                class="icon__category-closed qt-mr-10 pointer"
+                                                                [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                                (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                                *ngIf="subsubcategory.subcategories.length > 0"
+                                                            ></div>
+                                                            <span
+                                                                class="category-item-category__name-text"
+                                                                [ngClass]="{'pointer':subsubcategory.document}"
+                                                                [textContent]="subsubcategory.name"
+                                                                (click)="selectCategory(subsubcategory)"
+                                                            ></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -106,6 +117,7 @@
                                                                         class="category-item-category__name-text"
                                                                         [ngClass]="{'pointer':subsubsubcategory.document}"
                                                                         [textContent]="subsubsubcategory.name"
+                                                                        (click)="selectCategory(subsubsubcategory)"
                                                                     ></span>
                                                                 </div>
                                                             </div>
@@ -125,6 +137,9 @@
     </div>
     <!-- End Help Center -->
     <!-- Topic Detail -->
-    <super-admin-public-detail></super-admin-public-detail>
+    <super-admin-public-detail
+        [selectedCategory]="selectedCategory"
+        [hidden]="isShowHelpCenter"
+    ></super-admin-public-detail>
     <!-- End Topic Detail -->
 </div>

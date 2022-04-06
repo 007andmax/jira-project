@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { SupportPageCategory } from '../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../super-admin/state/support-page-categories/support-page-categories-state.service';
+import { SuperAdminPublicDetailComponent } from './super-admin-public-detail/super-admin-public-detail.component';
 
 @Component({
   selector: 'super-admin-public',
@@ -9,6 +10,8 @@ import { SupportPageCategoriesStateService } from '../super-admin/state/support-
 })
 export class SuperAdminPublicComponent implements OnInit {
   categories: Array<SupportPageCategory> = [];
+  isShowHelpCenter: boolean = true;
+  selectedCategory: SupportPageCategory;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     public cd: ChangeDetectorRef) { }
 
@@ -17,6 +20,12 @@ export class SuperAdminPublicComponent implements OnInit {
       this.categories = data;
       this.cd.detectChanges();
     })
+  }
+  selectCategory(data) {
+    console.log("data", data);
+    if (data.document) this.selectedCategory = data;
+    this.isShowHelpCenter = false;
+    this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
   }
   public trackById(index, item) {
     return item.id;
