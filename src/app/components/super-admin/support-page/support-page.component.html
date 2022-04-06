@@ -30,8 +30,7 @@
             </div>
             <div
                 class="support-page-body__preview"
-                *ngIf="supportPageCategoryContent.document && isPreview"
-                [innerHTML]="supportPageCategoryContent.newContent"
+                [hidden]="!(supportPageCategoryContent.document && isPreview)"
             >
             </div>
             <support-page-info
@@ -77,18 +76,18 @@
                                     >
                                         <li>
                                             <div class="qt-df qt-ai-c">
-                                              <div
-                                                class="icon__category-closed qt-mr-10 pointer"
-                                                [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
-                                                (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
-                                                *ngIf="subcategory.subcategories.length > 0"
-                                              ></div>
-                                              <span
-                                                class="category-item-category__name-text"
-                                                [ngClass]="{'pointer':subcategory.document}"
-                                                [textContent]="subcategory.name"
-                                                (click)="showPreview(subcategory)"
-                                              ></span>
+                                                <div
+                                                    class="icon__category-closed qt-mr-10 pointer"
+                                                    [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                                    (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                                    *ngIf="subcategory.subcategories.length > 0"
+                                                ></div>
+                                                <span
+                                                    class="category-item-category__name-text"
+                                                    [ngClass]="{'pointer':subcategory.document}"
+                                                    [textContent]="subcategory.name"
+                                                    (click)="showPreview(subcategory)"
+                                                ></span>
                                             </div>
                                             <ul
                                                 class="category-item-sub-category qt-ml-20"
@@ -107,20 +106,20 @@
                                                     >
                                                         <div class="category-item-category">
                                                             <div class="category-item-category__name">
-                                                               <div class="qt-df qt-ai-c">
-                                                                 <div
-                                                                   class="icon__category-closed qt-mr-10 pointer"
-                                                                   [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
-                                                                   (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
-                                                                   *ngIf="subsubcategory.subcategories.length > 0"
-                                                                 ></div>
-                                                                 <span
-                                                                   class="category-item-category__name-text"
-                                                                   [ngClass]="{'pointer':subsubcategory.document}"
-                                                                   [textContent]="subsubcategory.name"
-                                                                   (click)="showPreview(subsubcategory)"
-                                                                 ></span>
-                                                               </div>
+                                                                <div class="qt-df qt-ai-c">
+                                                                    <div
+                                                                        class="icon__category-closed qt-mr-10 pointer"
+                                                                        [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                                        (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                                        *ngIf="subsubcategory.subcategories.length > 0"
+                                                                    ></div>
+                                                                    <span
+                                                                        class="category-item-category__name-text"
+                                                                        [ngClass]="{'pointer':subsubcategory.document}"
+                                                                        [textContent]="subsubcategory.name"
+                                                                        (click)="showPreview(subsubcategory)"
+                                                                    ></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <ul

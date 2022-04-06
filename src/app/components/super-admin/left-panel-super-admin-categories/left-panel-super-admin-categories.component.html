@@ -5,6 +5,17 @@
     <span class="icon__add-product qt-sz-18 qt-bg-contain qt-mr-8"></span>
     Add Category
 </button>
+<div class="category-item category-item-category-body">
+    <div class="category-item-category">
+        <div
+            class="category-item-category__name"
+            [ngClass]="{'--active':isShowHelpCenter}"
+            (click)="gotoHelpCenter()"
+        >
+            <span class="category-item-category__help-center pointer">Help center</span>
+        </div>
+    </div>
+</div>
 <div
     class="container-categories"
     appDragMenu
@@ -13,17 +24,6 @@
     [classContainer]="'category-item-category-body'"
     *ngIf="categories.length > 0"
 >
-    <div class="category-item category-item-category-body">
-        <div class="category-item-category">
-            <div
-                class="category-item-category__name"
-                [ngClass]="{'--active':isShowHelpCenter}"
-                (click)="gotoHelpCenter()"
-            >
-                <span class="category-item-category__help-center pointer">Help center</span>
-            </div>
-        </div>
-    </div>
     <ng-template
         ngFor
         let-category

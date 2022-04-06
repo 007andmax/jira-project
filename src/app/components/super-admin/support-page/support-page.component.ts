@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
@@ -25,6 +25,7 @@ export class SupportPageComponent implements OnInit {
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     public cd: ChangeDetectorRef,
+    private elRef: ElementRef,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
 
   ngOnInit() {
@@ -125,6 +126,10 @@ export class SupportPageComponent implements OnInit {
   onPreview(data) {
     this.isPreview = data;
     if (!this.isPreview) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+    if (this.isPreview) {
+      this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);
+
+    }
     // if (!this.isPreview && this.supportPageCategoryContent.isEditMode) this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
   }
   public showPreview(data) {
