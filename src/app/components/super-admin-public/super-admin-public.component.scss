@@ -204,7 +204,7 @@
 
 .category-item-category__name-text {
   position: relative;
-  padding-left: 14px;
+  padding-left: 18px;
   display: inline-block;
   &::before {
     content: "";
@@ -222,6 +222,7 @@
   height: 11.67px;
   width: 7.4px;
   flex-shrink: 0;
+  margin-top: 4px;
   &.toggle-category {
     transform: rotate(90deg) translate(0px, -2px);
   }
