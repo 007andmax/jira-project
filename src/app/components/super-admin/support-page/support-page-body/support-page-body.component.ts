@@ -54,18 +54,18 @@ export class SupportPageBodyComponent implements OnInit {
       saveMethod: 'POST',
       saveParams: { id: 'my_editor' },
       imageUploadParam: 'file',
-      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
+      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=SUPPORT_DOCUMENT',
       imageUploadParams: { id: 'my_editor' },
       imageUploadMethod: 'POST',
       imageMaxSize: 4 * 1024 * 1024,
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
+      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=SUPPORT_DOCUMENT',
       filesManagerUploadParams: {
         id: 'my_editor'
       },
       filesManagerMaxSize: 1024 * 1024 * 4,
       fileUpload: true,
-      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
+      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=SUPPORT_DOCUMENT',
       fileUploadParams: {
         id: 'my_editor'
       },
