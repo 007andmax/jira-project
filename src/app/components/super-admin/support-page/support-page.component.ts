@@ -127,6 +127,7 @@ export class SupportPageComponent implements OnInit {
     this.isPreview = data;
     if (!this.isPreview) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
     if (this.isPreview) {
+      this.elRef.nativeElement.querySelector(".support-page-body__preview").innerHTML = "";
       this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);
 
     }
