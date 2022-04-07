@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { NgbDropdown, NgbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../super-admin/services/support-page-categories/support-page-categories.service';
 import { SuperAdminPublicSearchListService } from './services/super-admin-public-search-list.service';
@@ -18,6 +19,7 @@ export class SuperAdminPublicSearchComponent implements OnInit {
   categories: Array<SupportPageCategory> = [];
   reqCategories: Array<SupportPageCategory> = [];
   @Output() onSelectCategory = new EventEmitter();
+  @ViewChild('dp') dp: NgbDropdown;
   constructor(private elRef: ElementRef,
     private superAdminPublicSearchListService: SuperAdminPublicSearchListService,
     private supportPageCategoriesService: SupportPageCategoriesService,
@@ -35,13 +37,16 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     this.searchName = "";
     this.categories = [];
     this.reqCategories = [];
+    this.elRef.nativeElement.querySelector("#dropdownServices").value = "";
   }
   onSearch(event) {
     this.searchName = event.target.value;
     this.setDefaultScoll();
     this.onScroll(JSON.parse(JSON.stringify(this.searchName)));
   }
-
+  onShowDropDown() {
+    if (this.searchName.length > 0) this.dp.open();
+  }
 
   openChange(open) {
     if (open) {
@@ -70,6 +75,7 @@ export class SuperAdminPublicSearchComponent implements OnInit {
       this.reqCategories = [...this.reqCategories, ...JSON.parse(JSON.stringify(data))];
       this.page++;
       this.infiniteScrollDisabled = false;
+      this.onShowDropDown();
       if (data.length < 10) {
         this.superAdminPublicSearchListService.setBlockList(true);
       } else {

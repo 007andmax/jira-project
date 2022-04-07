@@ -1,15 +1,15 @@
 <div
     class="qt-page-list__search"
+    #dp="ngbDropdown"
     ngbDropdown
-    (openChange)="openChange($event)"
 >
     <input
         type="text"
         placeholder="Search Help Topics"
         (input)="onSearch($event)"
+        (click)="onShowDropDown()"
         autocomplete="off"
         id="dropdownServices"
-        ngbDropdownToggle
     >
     <span
         class="global-search__close icon__close-round"
