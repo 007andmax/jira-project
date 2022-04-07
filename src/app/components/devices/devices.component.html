@@ -359,10 +359,16 @@
                 </span>
                   <div class="remote-info">
                       <h3>Screen Connect</h3>
-                      <p>
+                      <p *ngIf="guestConnected == true && hostConnected == false">
                           Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
                       </p>
-                      <a [href]="launchSchemeUrl" target="_blank" class="btn btn-primary">
+                      <div *ngIf="guestConnected == false">
+                        <p>Screen Connect is Not Connected</p>
+                     </div>
+                     <div  *ngIf="guestConnected == true && hostConnected == true">
+                       <p>{{hostUserName}} is connected to host</p>
+                    </div>
+                      <a (click)="createScreenConnect()" *ngIf="guestConnected == true && hostConnected == false" class="btn btn-primary">
                         Launch Screen Connect
                     </a>
                   </div>
@@ -399,7 +405,7 @@
     </div>
 </ng-template>
 
-<ng-template #screenConnect>
+<ng-template #screenConnect let-modal>
   <div
     class="qt-aside-modern device-add-aside"
 >
@@ -429,6 +435,7 @@
                 placeholder="Enter User Name"
                 [(ngModel)]="userName"
                 name="username"
+                required
             >
         </div>
         <div class="qt-input-block qt-input-line">
@@ -444,6 +451,7 @@
               type="text"
               placeholder="Enter Password"
               [(ngModel)]="password"
+              required
           >
       </div>
       <div class="qt-input-block qt-input-line">
@@ -459,6 +467,7 @@
             type="text"
             placeholder="Enter oneTime Code"
             [(ngModel)]="OneTimeCode"
+            required
         >
     </div>
     </div>
@@ -468,7 +477,7 @@
               class="qt-button qt-mr-12"
               appDisabledBtn
               #addBtn="disabled"
-              (onClick)="screenConnectLogin()"
+              (onClick)="screenConnectLogin();modal.dismiss()"
           >
               <span>Login</span>
           </button>

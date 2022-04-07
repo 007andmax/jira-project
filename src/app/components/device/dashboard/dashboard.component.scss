@@ -940,8 +940,13 @@ background-color: #FF0000;
 }
 
 .tabletitle{
-  padding-top: 10px;
+  //padding-top: 10px;
   padding-left: 10px;
+}
+
+
+::ng-deep body.ng7-device ngb-tabset .tab-content .tab-pane{
+  overflow: scroll !important;
 }
 
 .tablespace{

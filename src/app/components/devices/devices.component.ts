@@ -69,9 +69,12 @@ export class DevicesComponent implements OnInit {
   userName : any;
   password: any;
   OneTimeCode :any;
-  MacAddress : any;
+  getMacAddress : any;
   launchSchemeUrl : string ='';
-  screenConnectFilterList : any;
+  guestConnected : any;
+  hostConnected : any;
+  hostUserName : string;
+
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -450,8 +453,12 @@ export class DevicesComponent implements OnInit {
   screenConnectAccess(macAddress) {
     let screenConnect = this.screenConnectList.find((x) => x.MACAddress == macAddress);
     if (screenConnect) {
-      this.launchSchemeUrl = screenConnect.launchSchemeURL;
+      this.getMacAddress = screenConnect.MACAddress;
+      this.guestConnected = screenConnect.GuestConnected;
+      this.hostConnected = screenConnect.HostConnected;
+      this.hostUserName = screenConnect.HostUserName;
     }
+
     this.modalService.open(this.screenConnectAcces, {
       windowClass: "modal-md",
       centered: true,
@@ -514,6 +521,11 @@ export class DevicesComponent implements OnInit {
           this.toastr.error("Something went wrong please try again.");
         }
       );
+  }
+
+  createScreenConnect() {
+    let connect = this.screenConnectList.find((x) => x.MACAddress == this.getMacAddress);
+    window.open(connect.launchSchemeURL);
   }
 
   sendEmail() {
@@ -783,8 +795,6 @@ export class DevicesComponent implements OnInit {
     data.URL = "http://inventory.activeinfosystems.com:8040"
     this.agentService.screenConnect(data).subscribe((resp) => {
       this.screenConnectList = resp.HostSessions;
-      this.modalService.dismissAll();
-      console.log(this.screenConnectList);
       this.toastr.success('Successfully')
     },
       (err) => {
