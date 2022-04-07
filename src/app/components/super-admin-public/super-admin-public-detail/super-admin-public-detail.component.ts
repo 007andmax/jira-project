@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../super-admin/services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesStateService } from '../../super-admin/state/support-page-categories/support-page-categories-state.service';
@@ -16,6 +16,7 @@ export class SuperAdminPublicDetailComponent implements OnInit {
   @Output() onGoHelpCenter = new EventEmitter();
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesService: SupportPageCategoriesService,
+    private elRef: ElementRef,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -68,7 +69,7 @@ export class SuperAdminPublicDetailComponent implements OnInit {
           this.supportPageCategoryContent.setEditMode(true);
           this.supportPageCategoryContent.setContent(content);
           this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
-
+          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);
         })
       }
     }
