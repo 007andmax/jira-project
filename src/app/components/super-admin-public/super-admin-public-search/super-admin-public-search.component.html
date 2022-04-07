@@ -1,0 +1,57 @@
+<div
+    class="qt-page-list__search"
+    ngbDropdown
+    (openChange)="openChange($event)"
+>
+    <input
+        type="text"
+        placeholder="Search Help Topics"
+        (input)="onSearch($event)"
+        autocomplete="off"
+        id="dropdownServices"
+        ngbDropdownToggle
+    >
+    <span
+        class="global-search__close icon__close-round"
+        *ngIf="searchName.length > 0"
+        (click)="clearWord()"
+    ></span>
+    <div
+        class="select-wrapper"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <div
+            class="content"
+            #content
+            (click)="$event.preventDefault()"
+            infiniteScroll
+            [infiniteScrollContainer]="content"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [fromRoot]="true"
+            (scrolled)="onScroll()"
+        >
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="categories"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    (click)="select(item)"
+                    class="search-item"
+                    ngbDropdownItem
+                >
+                    <div class="name">{{item.name}}</div>
+                </div>
+            </ng-template>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

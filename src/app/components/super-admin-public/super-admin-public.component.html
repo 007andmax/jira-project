@@ -11,12 +11,13 @@
                 class="icon__quicktech-logo qt-bg-cover"
                 alt="Quicktech logo"
             ></a>
-            <div class="qt-page-list__search">
+            <super-admin-public-search (onSelectCategory)="selectCategory($event)"></super-admin-public-search>
+            <!-- <div class="qt-page-list__search">
                 <input
                     type="text"
                     placeholder="Search Help Topics"
                 >
-            </div>
+            </div> -->
         </div>
         <div class="support-page__hero">
             <div class="icon__quicktech_partical_bottom qt-bg-contain"></div>

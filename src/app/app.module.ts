@@ -530,6 +530,7 @@ import { SupportPageInfoTagsComponent } from './components/super-admin/support-p
 import { SuperAdminPublicComponent } from './components/super-admin-public/super-admin-public.component';
 import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
 import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
+import { SuperAdminPublicSearchComponent } from './components/super-admin-public/super-admin-public-search/super-admin-public-search.component';
 
 
 declare var $: any;
@@ -999,7 +1000,8 @@ declare var $: any;
     SupportPageInfoTagsComponent,
     SuperAdminPublicComponent,
     HelpCenterInfoAsideComponent,
-    SuperAdminPublicDetailComponent
+    SuperAdminPublicDetailComponent,
+    SuperAdminPublicSearchComponent
   ],
   imports: [
     BrowserModule,

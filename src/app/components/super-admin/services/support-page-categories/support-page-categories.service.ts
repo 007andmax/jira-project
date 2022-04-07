@@ -25,6 +25,9 @@ export class SupportPageCategoriesService {
     private appStateService: AppStateService,
   ) { }
 
+  public searchCategory(someText, offset) {
+    return this.http.get(this.apiUrl + `support/categories/filtered?searchText=${someText}&size=10&offset=${offset}`);
+  }
   public addCategory(data) {
     return this.http.post(this.apiUrl + 'support/categories', data).pipe(
       tap(data => {
