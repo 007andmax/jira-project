@@ -193,6 +193,9 @@
             position: fixed;
             left: 0;
             top: 64px;
+            &::-webkit-scrollbar {
+              width: 5px;
+            }
             &::after {
               content: "";
               position: absolute;
@@ -222,10 +225,8 @@
         display: flex;
         align-items: flex-start;
         flex: 1;
-        padding: 8px 24px 8px 26px;
+        padding: 10px 24px 10px 26px;
         border-right: 2px solid transparent;
-       // cursor: pointer;
-
         &.--active {
             color: $primary-1;
             border-color: $primary-1;
@@ -244,13 +245,9 @@
 
         span {
             font-family: "Inter", sans-serif;
-            font-size: 14px;
+            @extend %body-r-m;
             position: relative;
             flex: 1;
-            white-space: normal;
-           // overflow: hidden;
-            -ms-text-overflow: ellipsis;
-            text-overflow: ellipsis;
         }
     }
 
