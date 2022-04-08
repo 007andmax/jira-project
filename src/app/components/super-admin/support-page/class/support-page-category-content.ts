@@ -9,6 +9,7 @@ export class SupportPageCategoryContent {
     tagIds: Array<string> = [];
     newContent: string;
     isEditMode: boolean = false;
+    tags: Array<any> = [];
     constructor() {
 
     }
@@ -60,8 +61,11 @@ export class SupportPageCategoryContent {
     public setEditMode(data) {
         this.isEditMode = data;
     }
-    public setTags(data) {
+    public setIdTags(data) {
         this.tagIds = data;
+    }
+    public setTags(data) {
+        this.tags = data;
     }
     public setNewContent(data) {
         this.newContent = data;

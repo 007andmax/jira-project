@@ -48,7 +48,7 @@ export class SupportPageComponent implements OnInit {
         this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
           this.supportPageCategoryContent.setEditMode(true);
           this.supportPageCategoryContent.setContent(content);
-          this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
+          this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
           this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
         })
       } else {
@@ -146,7 +146,7 @@ export class SupportPageComponent implements OnInit {
       this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
         this.supportPageCategoryContent.setEditMode(true);
         this.supportPageCategoryContent.setContent(content);
-        this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
+        this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
         this.header.setPreview(true);
         this.isShowHelpCenter = false;

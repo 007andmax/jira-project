@@ -86,7 +86,11 @@
                 margin: 0 0 0 auto;
                 position: static;
             }
-
+            .name {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
             &:not(:last-child) {}
 
             label {

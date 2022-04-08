@@ -226,6 +226,19 @@
         <div
             class="topic-detail-page__body-content"
             [hidden]="!supportPageCategoryContent.document"
-        ></div>
+        >
+            <div id="content"></div>
+            <div class="profile-cmp-board tags-area d-flex">
+
+                <div class="tags-tab d-flex">
+                    <span
+                        class="tag"
+                        *ngFor="let tag of supportPageCategoryContent.tags; let i = index;"
+                    >
+                        {{tag.word}}
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

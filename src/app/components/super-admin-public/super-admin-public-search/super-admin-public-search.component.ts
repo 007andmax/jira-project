@@ -46,22 +46,22 @@ export class SuperAdminPublicSearchComponent implements OnInit {
   }
   onShowDropDown() {
     console.log("this.dp.isOpen()", JSON.parse(JSON.stringify(this.dp.isOpen())));
-    if (this.searchName.length > 0 && !this.dp.isOpen()) this.dp.open();
+    if (this.searchName.length > 0) this.dp.open();
   }
 
   openChange(open) {
     if (open) {
       this.showPreloader = true;
       this.setDefaultScoll();
-      this.onScroll();
+      this.onScroll(JSON.parse(JSON.stringify(this.searchName)));
     }
   }
-  public onScroll(searchName = null) {
+  public onScroll(searchName) {
 
     this.infiniteScrollDisabled = true;
-    this.getTags(searchName);
+    if (searchName.length > 0) this.getTags(searchName);
   }
-  getTags(searchName = null) {
+  getTags(searchName) {
     if (this.superAdminPublicSearchListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

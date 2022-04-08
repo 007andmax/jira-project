@@ -68,9 +68,10 @@ export class SuperAdminPublicDetailComponent implements OnInit {
         this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
           this.supportPageCategoryContent.setEditMode(true);
           this.supportPageCategoryContent.setContent(content);
-          this.supportPageCategoryContent.setTags(content.tags.map(item => item.id));
-          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content").innerHTML = "";
-          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);
+          this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
+          this.supportPageCategoryContent.setTags(content.tags);
+          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").innerHTML = "";
+          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);
         })
       }
     }
