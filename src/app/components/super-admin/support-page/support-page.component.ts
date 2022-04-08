@@ -43,6 +43,7 @@ export class SupportPageComponent implements OnInit {
     this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
       this.isShowHelpCenter = false;
       this.selectedCategory = data;
+      this.attachments = [];
       if (this.selectedCategory.document) {
         this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
           this.supportPageCategoryContent.setEditMode(true);
@@ -180,7 +181,7 @@ export class SupportPageComponent implements OnInit {
   checkEditAttachments() {
     let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
     let newContent = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-    let oldAttachments = this.attachments;
+    let oldAttachments = JSON.parse(JSON.stringify(this.attachments));
     let newAttachments = [];
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
@@ -205,6 +206,7 @@ export class SupportPageComponent implements OnInit {
     )
       .subscribe(res => {
       });
+    this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);
