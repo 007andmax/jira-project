@@ -18,6 +18,8 @@ export class SupportPageHeaderComponent implements OnInit {
   @Input() selectedCategory: SupportPageCategory;
   @Input() supportPageCategoryContent: SupportPageCategoryContent;
   @Output() onPreview = new EventEmitter();
+  @Output() onCheckAddAttachments = new EventEmitter();
+  @Output() onCheckEditAttachments = new EventEmitter();
   isPreview: boolean = false;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private modalService: NgbModal,
@@ -44,7 +46,8 @@ export class SupportPageHeaderComponent implements OnInit {
   saveContent(type) {
     this.supportPageCategoryContent.setType(type);
     this.supportPageCategoriesService.saveContent(this.selectedCategory.id, this.supportPageCategoryContent.getData(), (type === "DRAFT") ? "Draft Saved Successfully" : "Document published successfully").subscribe(data => {
-
+      if (!this.supportPageCategoryContent.isEditMode) this.onCheckAddAttachments.emit(null);
+      if (this.supportPageCategoryContent.isEditMode) this.onCheckEditAttachments.emit(null);
     })
   }
   removeCategory() {

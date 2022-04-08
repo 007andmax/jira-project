@@ -39,7 +39,6 @@
                 <div
                     class="category-item-category__name"
                     [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
-                    (click)="editArticle(category)"
                 >
                     <div
                         class="icon__category-closed qt-mr-10 pointer"
@@ -62,6 +61,7 @@
                     <span
                         [ngClass]="{'pointer':category.document}"
                         [textContent]="category.name"
+                        (click)="editArticle(category)"
                     ></span>
                 </div>
                 <left-panel-super-admin-categories-actions
@@ -93,7 +93,6 @@
                             <div
                                 class="category-item-category__name"
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
-                                (click)="editArticle(subcategory)"
                             >
                                 <div
                                     class="icon__category-closed qt-mr-10 pointer"
@@ -111,6 +110,7 @@
                                 <span
                                     [ngClass]="{'pointer':subcategory.document}"
                                     [textContent]="subcategory.name"
+                                    (click)="editArticle(subcategory)"
                                 ></span>
                             </div>
                             <left-panel-super-admin-categories-actions
@@ -142,7 +142,6 @@
                                         <div
                                             class="category-item-category__name"
                                             [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
-                                            (click)="editArticle(subsubcategory)"
                                         >
                                             <div
                                                 class="icon__category-closed qt-mr-10 pointer"
@@ -160,6 +159,7 @@
                                             <span
                                                 [ngClass]="{'pointer':subsubcategory.document}"
                                                 [textContent]="subsubcategory.name"
+                                                (click)="editArticle(subsubcategory)"
                                             ></span>
                                         </div>
                                         <left-panel-super-admin-categories-actions
@@ -191,7 +191,6 @@
                                                     <div
                                                         class="category-item-category__name"
                                                         [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"
-                                                        (click)="editArticle(subsubsubcategory)"
                                                     >
                                                         <i
                                                             class="category-status"
@@ -203,6 +202,7 @@
                                                         <span
                                                             [ngClass]="{'pointer':subsubsubcategory.document}"
                                                             [textContent]="subsubsubcategory.name"
+                                                            (click)="editArticle(subsubsubcategory)"
                                                         ></span>
                                                     </div>
                                                     <left-panel-super-admin-categories-actions

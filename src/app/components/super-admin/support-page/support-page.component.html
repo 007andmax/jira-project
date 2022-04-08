@@ -14,6 +14,8 @@
             [supportPageCategoryContent]="supportPageCategoryContent"
             (onPreview)="onPreview($event)"
             [hidden]="isShowHelpCenter"
+            (onCheckAddAttachments)="checkAddAttachments()"
+            (onCheckEditAttachments)="checkEditAttachments()"
         ></support-page-header>
         <div
             class="support-page-body"
@@ -26,6 +28,7 @@
                 <support-page-body
                     [editorContent]="content"
                     (onChangeContent)="onChangeContent($event)"
+                    (onChangeAttachments)="onChangeAttachments($event)"
                 ></support-page-body>
             </div>
             <div

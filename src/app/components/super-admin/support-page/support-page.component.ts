@@ -1,4 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
@@ -21,11 +23,13 @@ export class SupportPageComponent implements OnInit {
   isShowHelpCenter: boolean = true;
   categories: Array<SupportPageCategory> = [];
   helpCenterCategories: Array<HelpCenterCategory> = [];
+  attachments = [];
   @ViewChild('header') header: SupportPageHeaderComponent;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     public cd: ChangeDetectorRef,
     private elRef: ElementRef,
+    public documentsService: DocumentsService,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
 
   ngOnInit() {
@@ -146,6 +150,61 @@ export class SupportPageComponent implements OnInit {
         this.isShowHelpCenter = false;
       })
     }
+  }
+  onChangeAttachments(data) {
+    this.attachments = data;
+  }
+  checkAddAttachments() {
+    let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+    let contentAttachments = [];
+    let removedAttachments = [];
+    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+    if (content) content.replace(urlRegex, function (url) {
+      contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      return url;
+    });
+
+    console.log("contentAttachments", contentAttachments);
+    console.log("removedAttachments", removedAttachments);
+    console.log("attachments", this.attachments);
+    this.attachments.forEach(item => {
+      if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+    })
+    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    forkJoin(
+      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+    )
+      .subscribe(res => {
+      });
+  }
+  checkEditAttachments() {
+    let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
+    let newContent = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+    let oldAttachments = this.attachments;
+    let newAttachments = [];
+    let removedAttachments = [];
+    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+    if (content) content.replace(urlRegex, function (url) {
+      oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      return url;
+    });
+    if (newContent) newContent.replace(urlRegex, function (url) {
+      newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
+      return url;
+    });
+    oldAttachments.forEach(item => {
+      if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+    })
+    console.log("oldAttachments", oldAttachments);
+    console.log("newAttachments", newAttachments);
+    console.log("removedAttachments", removedAttachments);
+    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+
+    forkJoin(
+      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+    )
+      .subscribe(res => {
+      });
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);
