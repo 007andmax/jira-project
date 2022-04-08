@@ -5044,6 +5044,15 @@ add-category-product {
     border-color: $gray-400;
     color: $primary-2;
   }
+  .qt-input-block {
+    mat-error {
+      position: static;
+      order: -1;
+      margin-bottom: 8px;
+      font-size: 13px;
+      line-height: 16px;
+    }
+  }
 }
 .support-page-body__editor {
   .fr-box {
