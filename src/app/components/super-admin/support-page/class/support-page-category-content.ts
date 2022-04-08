@@ -12,6 +12,9 @@ export class SupportPageCategoryContent {
     constructor() {
 
     }
+    public setIdDocument(data) {
+        this.document.id = data;
+    }
     public setContent(data) {
         if (data && data.document) {
             this.document = {

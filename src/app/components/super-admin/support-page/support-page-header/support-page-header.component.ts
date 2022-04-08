@@ -45,9 +45,11 @@ export class SupportPageHeaderComponent implements OnInit {
 
   saveContent(type) {
     this.supportPageCategoryContent.setType(type);
-    this.supportPageCategoriesService.saveContent(this.selectedCategory.id, this.supportPageCategoryContent.getData(), (type === "DRAFT") ? "Draft Saved Successfully" : "Document published successfully").subscribe(data => {
+    this.supportPageCategoriesService.saveContent(this.selectedCategory.id, this.supportPageCategoryContent.getData(), (type === "DRAFT") ? "Draft Saved Successfully" : "Document published successfully").subscribe((data: any) => {
       if (!this.supportPageCategoryContent.isEditMode) this.onCheckAddAttachments.emit(null);
       if (this.supportPageCategoryContent.isEditMode) this.onCheckEditAttachments.emit(null);
+      this.supportPageCategoryContent.setIdDocument(data.document.id);
+
     })
   }
   removeCategory() {

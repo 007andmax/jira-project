@@ -45,7 +45,8 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     this.onScroll(JSON.parse(JSON.stringify(this.searchName)));
   }
   onShowDropDown() {
-    if (this.searchName.length > 0) this.dp.open();
+    console.log("this.dp.isOpen()", JSON.parse(JSON.stringify(this.dp.isOpen())));
+    if (this.searchName.length > 0 && !this.dp.isOpen()) this.dp.open();
   }
 
   openChange(open) {

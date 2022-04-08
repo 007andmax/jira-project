@@ -2,20 +2,22 @@
     class="qt-page-list__search"
     #dp="ngbDropdown"
     ngbDropdown
+    [autoClose]="'outside'"
 >
-    <input
-        type="text"
-        placeholder="Search Help Topics"
-        (input)="onSearch($event)"
-        (click)="onShowDropDown()"
-        autocomplete="off"
-        id="dropdownServices"
-    >
-    <span
-        class="global-search__close icon__close-round"
-        *ngIf="searchName.length > 0"
-        (click)="clearWord()"
-    ></span>
+    <div ngbDropdownAnchor>
+        <input
+            type="text"
+            placeholder="Search Help Topics"
+            (input)="onSearch($event)"
+            (click)="onShowDropDown()"
+            autocomplete="off"
+        >
+        <span
+            class="global-search__close icon__close-round"
+            *ngIf="searchName.length > 0"
+            (click)="clearWord()"
+        ></span>
+    </div>
     <div
         class="select-wrapper"
         ngbDropdownMenu

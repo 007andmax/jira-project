@@ -56,6 +56,7 @@ export class SupportPageComponent implements OnInit {
         this.supportPageCategoryContent.setContent(null);
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
       }
+      console.log("this.attachments", this.attachments);
     })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.helpCenterCategories = [];
@@ -154,6 +155,7 @@ export class SupportPageComponent implements OnInit {
   }
   onChangeAttachments(data) {
     this.attachments = data;
+    console.log("onChangeAttachments", data);
   }
   checkAddAttachments() {
     let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
@@ -177,6 +179,10 @@ export class SupportPageComponent implements OnInit {
     )
       .subscribe(res => {
       });
+    this.attachments = [];
+    this.supportPageCategoryContent.setEditMode(true);
+    this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+
   }
   checkEditAttachments() {
     let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
@@ -207,6 +213,8 @@ export class SupportPageComponent implements OnInit {
       .subscribe(res => {
       });
     this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+    this.attachments = [];
+    console.log("this.attachments", this.attachments);
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);
