@@ -63,6 +63,7 @@ export class SuperAdminPublicSearchComponent implements OnInit {
 
     this.infiniteScrollDisabled = true;
     if (searchName.length > 0) this.getTags(searchName);
+    if (searchName.length === 0) this.onHideDropDown();
   }
   getTags(searchName) {
     if (this.superAdminPublicSearchListService.getBlockList()) {

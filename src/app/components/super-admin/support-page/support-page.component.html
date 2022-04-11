@@ -26,6 +26,7 @@
                 *ngIf="!isPreview"
             >
                 <support-page-body
+                    #body
                     [editorContent]="content"
                     (onChangeContent)="onChangeContent($event)"
                     (onChangeAttachments)="onChangeAttachments($event)"

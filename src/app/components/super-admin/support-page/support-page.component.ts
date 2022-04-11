@@ -8,6 +8,7 @@ import { SupportPageCategoriesStateService } from '../state/support-page-categor
 import { HelpCenterCategory } from './class/help-center-category';
 import { HelpCenterSubCategory } from './class/help-center-sub-category';
 import { SupportPageCategoryContent } from './class/support-page-category-content';
+import { SupportPageBodyComponent } from './support-page-body/support-page-body.component';
 import { SupportPageHeaderComponent } from './support-page-header/support-page-header.component';
 var $ = require("jquery");
 @Component({
@@ -25,6 +26,7 @@ export class SupportPageComponent implements OnInit {
   helpCenterCategories: Array<HelpCenterCategory> = [];
   attachments = [];
   @ViewChild('header') header: SupportPageHeaderComponent;
+  @ViewChild('body') body: SupportPageBodyComponent;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     public cd: ChangeDetectorRef,
@@ -56,8 +58,10 @@ export class SupportPageComponent implements OnInit {
       } else {
         this.supportPageCategoryContent.setEditMode(false);
         this.supportPageCategoryContent.setContent(null);
+        if (this.body) this.body.reset();
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
       }
+      console.log("this.content", this.content);
       console.log("this.attachments", this.attachments);
     })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
@@ -133,7 +137,7 @@ export class SupportPageComponent implements OnInit {
   }
   onPreview(data) {
     this.isPreview = data;
-    if (!this.isPreview) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
+    if (!this.isPreview && this.supportPageCategoryContent.newContent) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
     if (this.isPreview) {
       this.elRef.nativeElement.querySelector(".support-page-body__preview").innerHTML = "";
       this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);

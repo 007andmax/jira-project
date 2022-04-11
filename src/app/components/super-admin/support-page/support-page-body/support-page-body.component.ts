@@ -29,6 +29,10 @@ export class SupportPageBodyComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
   }
+  public reset() {
+    this.editorContent = "";
+    this.cd.detectChanges();
+  }
   ngAfterViewInit() {
     this.cd.detectChanges();
   }
