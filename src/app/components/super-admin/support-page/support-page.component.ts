@@ -44,6 +44,8 @@ export class SupportPageComponent implements OnInit {
       this.isShowHelpCenter = false;
       this.selectedCategory = data;
       this.attachments = [];
+      this.isPreview = false;
+      this.header.setPreview(false);
       if (this.selectedCategory.document) {
         this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
           this.supportPageCategoryContent.setEditMode(true);

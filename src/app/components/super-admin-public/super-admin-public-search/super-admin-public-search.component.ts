@@ -48,7 +48,10 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     console.log("this.dp.isOpen()", JSON.parse(JSON.stringify(this.dp.isOpen())));
     if (this.searchName.length > 0) this.dp.open();
   }
+  onHideDropDown() {
 
+    this.dp.close();
+  }
   openChange(open) {
     if (open) {
       this.showPreloader = true;
@@ -76,7 +79,8 @@ export class SuperAdminPublicSearchComponent implements OnInit {
       this.reqCategories = [...this.reqCategories, ...JSON.parse(JSON.stringify(data))];
       this.page++;
       this.infiniteScrollDisabled = false;
-      this.onShowDropDown();
+      if (this.categories.length > 0) this.onShowDropDown();
+      if (this.categories.length == 0) this.onHideDropDown();
       if (data.length < 10) {
         this.superAdminPublicSearchListService.setBlockList(true);
       } else {
