@@ -31,6 +31,8 @@ export class SupportPageCategoryContent {
                 content: "",
             }
             this.newContent = "";
+            this.tagIds = [];
+            this.tags = [];
         }
     }
     public setType(data) {

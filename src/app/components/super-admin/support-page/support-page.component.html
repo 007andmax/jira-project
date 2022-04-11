@@ -19,7 +19,7 @@
         ></support-page-header>
         <div
             class="support-page-body"
-            *ngIf="selectedCategory && !isShowHelpCenter"
+            [hidden]="!(selectedCategory && !isShowHelpCenter)"
         >
             <div
                 class="support-page-body__editor"
@@ -38,6 +38,7 @@
             >
             </div>
             <support-page-info
+                *ngIf="selectedCategory && !isShowHelpCenter"
                 [isPreview]="isPreview"
                 [selectedCategory]="selectedCategory"
                 [supportPageCategoryContent]="supportPageCategoryContent"
