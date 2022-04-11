@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVED_SUPPORT_TAG } from 'src/app/const/confirm';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { SupportPageCategoriesService } from '../../../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesStateService } from '../../../state/support-page-categories/support-page-categories-state.service';
@@ -28,6 +29,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef,
+    public appStateService: AppStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
@@ -65,6 +67,8 @@ export class SupportPageInfoTagsComponent implements OnInit {
         if (index > -1) this.reqTags.splice(index, 1);
         let indexTag = this.tags.findIndex(item => item.id === data.data);
         if (indexTag > -1) this.tags.splice(indexTag, 1);
+        let indexSelected = this.selectedTag.findIndex(item => item === data.data);
+        if (indexSelected > -1) this.selectedTag.splice(indexSelected, 1);
       }
       if (this.newTag.length == 0) this.tags = JSON.parse(JSON.stringify(this.reqTags)).map(item => new SupportPageInfoTag(item));
       if (this.newTag.length > 0) this.tags.forEach(item => {
@@ -113,7 +117,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.supportPageCategoriesStateService.setTagForRemove(tag);
-    this.cd.detectChanges();
+    this.appStateService.changeDetectorRef();
   }
   getSelectedTag(id) {
     return (this.reqTags.length > 0) ? this.reqTags.find(item => item.id === id) : '';

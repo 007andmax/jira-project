@@ -43,7 +43,7 @@ export class SupportPageBodyComponent implements OnInit {
     const self = this;
     this.options = {
       key: "lSA3D-17E4B3A1C2D1H2rXYb1VPUGRHYZNRJd1JVOOb1HAc1zG2B1A2A2D6B1A1C4G1I4==",
-      toolbarButtons: ['fullscreen', 'undo', 'redo', 'getPDF', 'print', '|',
+      toolbarButtons: ['undo', 'redo', 'print', '|',
         'bold', 'italic', 'underline', 'textColor', 'backgroundColor', 'clearFormatting', '|',
         'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', '|',
         'formatOL', 'formatUL', 'indent', 'outdent', '|',

@@ -10,7 +10,7 @@
                 #userTooltip
             ></app-dynamic-tooltip>
             <div
-                class="qt-table-modern__circle-avatar"
+                class="qt-table-modern__circle-avatar pointer"
                 [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
                 [textContent]="getNameForAvatar()"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(usersStateService.getCurrentUser(),'#7C77CB') }"
