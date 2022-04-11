@@ -32,6 +32,7 @@ import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { WebsocketStateService } from 'src/app/states/websocket/websocket-state.service';
 import { SupportPageCategoriesRealTimeService } from 'src/app/components/super-admin/state/support-page-categories/support-page-categories-real-time.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 /**
@@ -80,7 +81,8 @@ export class WebsocketService {
     private crmRealTimeService: CrmRealTimeService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
     private websocketStateService: WebsocketStateService,
-    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService
+    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
+    private leftPanelStateService: LeftPanelStateService,
 
   ) {
   }
@@ -122,6 +124,7 @@ export class WebsocketService {
       that.subsribeToDocumentsCategory();
       that.subsribeToCrm();
       that.subsribeToCustomSubscription();
+      if (this.leftPanelStateService.activePage === "help-center") that.subsribeToSupportCategory();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {
