@@ -41,8 +41,13 @@ h6,
 .body-m {
   @extend %body-m;
 }
-
-//COMMON STYLES ----------------------------
+.body-l {
+  @extend %body-l;
+}
+.body-l-sb {
+  @extend %body-l-sb;
+}
+  //COMMON STYLES ----------------------------
 .d-f {
   display: flex;
 }

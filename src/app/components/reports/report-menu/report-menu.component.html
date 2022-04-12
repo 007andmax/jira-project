@@ -83,65 +83,141 @@
         </div>
     </div>
     <div *ngIf="report === 'remote-access'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByRemoteConnectionReport()"
-                    [disabled]="remoteConnectionReport.preloaderDevices"
-                >
-                    Get
-          Report
-                </button>
-                <div class="device-report dropdown-remote-report-tech form-group custom-width">
-                    <app-tech-users-list-report
-                        [sort]="true"
-                        [search]="true"
-                        [change]="true"
-                        [validate]="validate.getTechUser()"
-                        [errorMessage]="'Select any user'"
-                        (onSelectedItem)="onSelectTechUser($event)"
-                    ></app-tech-users-list-report>
-                </div>
-                <div class="form-group content custom-width">
-                    <software-summary-devices-dro-down
-                        [sort]="true"
-                        [search]="true"
-                        [change]="true"
-                        [placeholder]="'All devices'"
-                        [dropdownHeight]="'300px'"
-                        [list]="devices"
-                        [isDisabled]="!remoteConnectionReport.companyId"
-                        [preloader]="remoteConnectionReport.preloaderDevices"
-                        (onSelectedItem)="onSelectDevice($event)"
-                    ></software-summary-devices-dro-down>
-                </div>
-                <div class="form-group content">
-                    <app-multi-datepicker
-                        #dp
-                        [validate]="validate.getDates()"
-                        [errorMessage]="'Please select the dates'"
-                        (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-                </div>
-                <div class="form-group content custom-width">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [dropdownHeight]="'175px'"
-                        [validate]="validate.getCompany()"
-                        [errorMessage]="'Please select the company name'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
+<!--        <div-->
+<!--            class="run-report-content clearfix"-->
+<!--            [ngClass]="className"-->
+<!--        >-->
+<!--            <div class="new-reports-reverse">-->
+<!--                <button-->
+<!--                    class="btn-new btn-primary-white qt-fs-0"-->
+<!--                    (click)="getReportByRemoteConnectionReport()"-->
+<!--                    [disabled]="remoteConnectionReport.preloaderDevices"-->
+<!--                >-->
+<!--                    Get-->
+<!--          Report-->
+<!--                </button>-->
+<!--                <div class="device-report dropdown-remote-report-tech form-group custom-width">-->
+<!--                    <app-tech-users-list-report-->
+<!--                        [sort]="true"-->
+<!--                        [search]="true"-->
+<!--                        [change]="true"-->
+<!--                        [validate]="validate.getTechUser()"-->
+<!--                        [errorMessage]="'Select any user'"-->
+<!--                        (onSelectedItem)="onSelectTechUser($event)"-->
+<!--                    ></app-tech-users-list-report>-->
+<!--                </div>-->
+<!--                <div class="form-group content custom-width">-->
+<!--                    <software-summary-devices-dro-down-->
+<!--                        [sort]="true"-->
+<!--                        [search]="true"-->
+<!--                        [change]="true"-->
+<!--                        [placeholder]="'All devices'"-->
+<!--                        [dropdownHeight]="'300px'"-->
+<!--                        [list]="devices"-->
+<!--                        [isDisabled]="!remoteConnectionReport.companyId"-->
+<!--                        [preloader]="remoteConnectionReport.preloaderDevices"-->
+<!--                        (onSelectedItem)="onSelectDevice($event)"-->
+<!--                    ></software-summary-devices-dro-down>-->
+<!--                </div>-->
+<!--                <div class="form-group content">-->
+<!--                    <app-multi-datepicker-->
+<!--                        #dp-->
+<!--                        [validate]="validate.getDates()"-->
+<!--                        [errorMessage]="'Please select the dates'"-->
+<!--                        (selectedDate)="filterByDate($event)"-->
+<!--                    ></app-multi-datepicker>-->
+<!--                </div>-->
+<!--                <div class="form-group content custom-width">-->
+<!--                    <app-drop-down-->
+<!--                        [placeholder]="'Select Company'"-->
+<!--                        [list]="companies"-->
+<!--                        [dropdownHeight]="'175px'"-->
+<!--                        [validate]="validate.getCompany()"-->
+<!--                        [errorMessage]="'Please select the company name'"-->
+<!--                        [field]="'name'"-->
+<!--                        [search]="true"-->
+<!--                        [change]="true"-->
+<!--                        (onSelectedItem)="selectClient($event)"-->
+<!--                    ></app-drop-down>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+          <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+            <div class="report-left-panel__btn pointer qt-mr-6">
+              <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
+            <div
+              class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+              [ngClass]="className"
+            >
+              <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
+                <app-drop-down
+                  [placeholder]="'Select Company'"
+                  [list]="companies"
+                  [dropdownHeight]="'175px'"
+                  [heightInput]="'36px'"
+                  [validate]="validate.getCompany()"
+                  [errorMessage]="'Please select the company name'"
+                  [field]="'name'"
+                  [search]="true"
+                  [change]="true"
+                  (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+              </div>
+              <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                <app-multi-datepicker
+                  #dp
+                  [validate]="validate.getDates()"
+                  [errorMessage]="'Please select the dates'"
+                  (selectedDate)="filterByDate($event)"
+                ></app-multi-datepicker>
+              </div>
+              <div class="qt-report__dropdown qt-mr-8">
+                <software-summary-devices-dro-down
+                  [sort]="true"
+                  [search]="true"
+                  [change]="true"
+                  [placeholder]="'All devices'"
+                  [dropdownHeight]="'300px'"
+                  [heightInput]="'36px'"
+                  [list]="devices"
+                  [isDisabled]="!remoteConnectionReport.companyId"
+                  [preloader]="remoteConnectionReport.preloaderDevices"
+                  (onSelectedItem)="onSelectDevice($event)"
+                ></software-summary-devices-dro-down>
+              </div>
+              <div class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown-button dropdown">
+                <app-tech-users-list-report
+                  [sort]="true"
+                  [search]="true"
+                  [change]="true"
+                  [heightInput]="'36px'"
+                  [validate]="validate.getTechUser()"
+                  [errorMessage]="'Select any user'"
+                  (onSelectedItem)="onSelectTechUser($event)"
+                ></app-tech-users-list-report>
+              </div>
+              <button
+                class="btn-new btn-primary-white qt-fs-0"
+                (click)="getReportByRemoteConnectionReport()"
+                [disabled]="remoteConnectionReport.preloaderDevices"
+              >
+                Get
+                Report
+              </button>
+            </div>
+          </div>
+          <app-report-additional-actions
+            [orientation]="'LANDSCAPE'"
+            [report]="'remote-access'"
+            [fileName]="'remote-access-report'"
+          ></app-report-additional-actions>
         </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
+
     </div>
     <div *ngIf="report === 'device-ip-summary'">
         <div
