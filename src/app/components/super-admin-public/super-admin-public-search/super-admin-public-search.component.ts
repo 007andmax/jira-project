@@ -38,6 +38,7 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     this.categories = [];
     this.reqCategories = [];
     this.elRef.nativeElement.querySelector("#dropdownServices").value = "";
+    this.onHideDropDown();
   }
   onSearch(event) {
     this.searchName = event.target.value;
@@ -49,7 +50,6 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     if (this.searchName.length > 0) this.dp.open();
   }
   onHideDropDown() {
-
     this.dp.close();
   }
   openChange(open) {

@@ -124,7 +124,6 @@ export class WebsocketService {
       that.subsribeToDocumentsCategory();
       that.subsribeToCrm();
       that.subsribeToCustomSubscription();
-      if (this.leftPanelStateService.activePage === "help-center") that.subsribeToSupportCategory();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {
