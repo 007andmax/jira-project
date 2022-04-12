@@ -8,19 +8,34 @@
   &__header {
     display: flex;
     align-items: center;
-    padding: 12px 15px;
+    padding: 11px 15px;
     background-color: $white;
     width: 1164px;
     margin: 0 auto;
 
-    .icon__quicktech-logo {
-      display: inline-block;
-      width: 136px;
-      height: 18px;
-      background-repeat: no-repeat;
-      background-position: center;
+    .qt-logo {
+      display: block;
       margin-right: 55px;
-      cursor: auto;
+
+      &__quicktech {
+        display: block;
+        width: 136px;
+        height: 18px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      &__beta {
+        font-size: 8px;
+        line-height: 10px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        color: $white;
+        padding: 2px 4px;
+        background-color: $error;
+        border-radius: 2px;
+        text-transform: uppercase;
+      }
     }
   }
   &__hero {
