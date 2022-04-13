@@ -85,6 +85,9 @@ import { SupportPageComponent } from './components/super-admin/support-page/supp
 import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
 import { SuperAdminPublicComponent } from './components/super-admin-public/super-admin-public.component';
+import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
+import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
+import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
 
 const routes: Routes = [
 
@@ -96,9 +99,13 @@ const routes: Routes = [
   {
     path: ':company/support-page',
     component: SupportPageComponent,
+    children: [{
+      path: ':id',
+      component: SupportPageCategoryComponent,
+      canActivate: [PermissionSuperAdminService]
+    },],
     canActivate: [PermissionSuperAdminService]
   },
-
   {
     path: ':company/password-manager',
     component: PasswordManagerComponent,
@@ -433,7 +440,10 @@ const routes: Routes = [
   {
     path: ':company/help-center',
     component: SuperAdminPublicComponent,
-    pathMatch: 'full',
+  },
+  {
+    path: ':company/help-center/:id',
+    component: SuperAdminPublicCategoryComponent,
     // canActivate: [PermissionTechUserService]
   },
 

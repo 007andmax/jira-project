@@ -531,6 +531,9 @@ import { SuperAdminPublicComponent } from './components/super-admin-public/super
 import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
 import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
 import { SuperAdminPublicSearchComponent } from './components/super-admin-public/super-admin-public-search/super-admin-public-search.component';
+import { SupportPageHelpCenterComponent } from './components/super-admin/support-page/support-page-help-center/support-page-help-center.component';
+import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
+import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
 
 
 declare var $: any;
@@ -1001,7 +1004,10 @@ declare var $: any;
     SuperAdminPublicComponent,
     HelpCenterInfoAsideComponent,
     SuperAdminPublicDetailComponent,
-    SuperAdminPublicSearchComponent
+    SuperAdminPublicSearchComponent,
+    SupportPageHelpCenterComponent,
+    SupportPageCategoryComponent,
+    SuperAdminPublicCategoryComponent
   ],
   imports: [
     BrowserModule,

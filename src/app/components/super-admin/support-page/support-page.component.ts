@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin, Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
@@ -25,6 +27,8 @@ export class SupportPageComponent implements OnInit {
   categories: Array<SupportPageCategory> = [];
   helpCenterCategories: Array<HelpCenterCategory> = [];
   attachments = [];
+  _id: string = '';
+  sub: Subscription = new Subscription();
   @ViewChild('header') header: SupportPageHeaderComponent;
   @ViewChild('body') body: SupportPageBodyComponent;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
@@ -32,9 +36,23 @@ export class SupportPageComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private elRef: ElementRef,
     public documentsService: DocumentsService,
+    public activateRoute: ActivatedRoute,
+    public companiesStateService: CompaniesStateService,
+    private router: Router,
     private supportPageCategoriesService: SupportPageCategoriesService,) { }
 
   ngOnInit() {
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this._id = params['id'];
+      console.log("SupportPageComponent 1", params);
+    });
+    console.log("SupportPageComponent 2", this.activateRoute.snapshot.params);
+    this.sub.add(subscription);
+    this.isShowHelpCenter = this.supportPageCategoriesStateService.getShowHelpCenter();
+    this.supportPageCategoriesStateService.onToggleShowHelpCenter.subscribe(data => {
+      this.isShowHelpCenter = data;
+    })
     this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
       if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
       if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);

@@ -31,10 +31,14 @@ export class SupportPageHeaderComponent implements OnInit {
   }
   public setPreview(data) {
     this.isPreview = data;
+    if (data) this.supportPageCategoriesStateService.setMode("PREVIEW");
+    if (!data) this.supportPageCategoriesStateService.setMode("EDIT");
     this.onPreview.emit(data);
   }
   public toglePreview() {
     this.isPreview = !this.isPreview;
+    if (this.isPreview) this.supportPageCategoriesStateService.setMode("PREVIEW");
+    if (!this.isPreview) this.supportPageCategoriesStateService.setMode("EDIT");
     this.onPreview.emit(this.isPreview);
   }
   editCategoryName() {
@@ -45,6 +49,7 @@ export class SupportPageHeaderComponent implements OnInit {
 
   saveContent(type) {
     this.supportPageCategoryContent.setType(type);
+
     this.supportPageCategoriesService.saveContent(this.selectedCategory.id, this.supportPageCategoryContent.getData(), (type === "DRAFT") ? "Draft Saved Successfully" : "Document published successfully").subscribe((data: any) => {
       if (!this.supportPageCategoryContent.isEditMode) this.onCheckAddAttachments.emit(null);
       if (this.supportPageCategoryContent.isEditMode) this.onCheckEditAttachments.emit(null);

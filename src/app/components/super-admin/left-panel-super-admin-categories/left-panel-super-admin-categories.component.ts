@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
@@ -26,6 +28,8 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     private supportPageCategoriesService: SupportPageCategoriesService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private confirmStateService: ConfirmStateService,
+    public companiesStateService: CompaniesStateService,
+    private router: Router,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -84,8 +88,11 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
   editArticle(category) {
     if (category.document) {
-      this.supportPageCategoriesStateService.addArticle(category);
+      //this.supportPageCategoriesStateService.addArticle(category);
       this.selectedCategory = category;
+      this.supportPageCategoriesStateService.setMode("EDIT");
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.selectedCategory.id]);
+
     }
   }
   add() {
@@ -101,8 +108,13 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     this.supportPageCategoriesService.moveCategory(data.id, data.index).subscribe(data => {
     })
   }
+  /* public goToCategory(id) {
+     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, id]);
+   }*/
   gotoHelpCenter() {
-    this.supportPageCategoriesStateService.showHelpCenter();
+    // this.supportPageCategoriesStateService.showHelpCenter();
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`]);
+    this.supportPageCategoriesStateService.toggleShowHelpCenter(true);
   }
   public trackById(index, item) {
     return item.id;

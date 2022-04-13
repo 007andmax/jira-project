@@ -11,8 +11,8 @@
                 class="qt-logo pointer"
                 alt="Quicktech logo"
             >
-              <span class="qt-logo__quicktech icon__quicktech-logo"></span>
-              <span class="qt-logo__beta">Beta</span>
+                <span class="qt-logo__quicktech icon__quicktech-logo"></span>
+                <span class="qt-logo__beta">Beta</span>
             </a>
             <super-admin-public-search (onSelectCategory)="selectCategory($event)"></super-admin-public-search>
             <!-- <div class="qt-page-list__search">
@@ -141,10 +141,5 @@
     </div>
     <!-- End Help Center -->
     <!-- Topic Detail -->
-    <super-admin-public-detail
-        [selectedCategory]="selectedCategory"
-        [hidden]="isShowHelpCenter"
-        (onGoHelpCenter)="isShowHelpCenter = true"
-    ></super-admin-public-detail>
     <!-- End Topic Detail -->
 </div>

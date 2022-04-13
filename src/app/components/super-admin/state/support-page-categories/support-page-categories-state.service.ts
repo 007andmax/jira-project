@@ -9,6 +9,8 @@ import { SupportPageCategoriesRealTimeService } from './support-page-categories-
   providedIn: 'root',
 })
 export class SupportPageCategoriesStateService {
+  mode: string = 'EDIT';
+  isShowHelpCenter: boolean = true;
   categories: Array<SupportPageCategory> = [];
   categoryForRemove: SupportPageCategory = null;
   tagForRemove: SupportPageInfoTag = null;
@@ -16,6 +18,7 @@ export class SupportPageCategoriesStateService {
   onPreviewContent: EventEmitter<any> = new EventEmitter();
   onShowHelpCenter: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
+  onToggleShowHelpCenter: EventEmitter<any> = new EventEmitter();
   constructor(private supportPageCategoriesService: SupportPageCategoriesService,
     private usersStateService: UsersStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,) { }
@@ -74,6 +77,19 @@ export class SupportPageCategoriesStateService {
       }
       this.onGetCategories.emit(this.categories)
     });
+  }
+  public setMode(data) {
+    this.mode = data;
+  }
+  public getMode() {
+    return this.mode;
+  }
+  public getShowHelpCenter() {
+    return this.isShowHelpCenter;
+  }
+  public toggleShowHelpCenter(data) {
+    this.isShowHelpCenter = data;
+    this.onToggleShowHelpCenter.emit(data);
   }
   public showPreview(data) {
     this.onPreviewContent.emit(data);
