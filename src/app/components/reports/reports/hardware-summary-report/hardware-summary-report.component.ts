@@ -101,6 +101,8 @@ export class HardwareSummaryReportComponent implements OnInit {
 
   public onSelectDevice(data) {
     this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
+    this.getReports(this.hardwareSummaryReport);
+      this.getReportByHardwareSummary();
   }
 
   public goToReportList() {
@@ -128,11 +130,14 @@ export class HardwareSummaryReportComponent implements OnInit {
       this.selectedClient == null;
       this.hardwareSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
+      this.hardwareSummaryReport.list = [];
     } else {
       this.selectedClient = selectClient
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
       this.getSoftByCompany(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
+      this.getReports(this.hardwareSummaryReport);
+      this.getReportByHardwareSummary();
     }
     this.onSelectedClient.emit(this.selectedClient);
   }

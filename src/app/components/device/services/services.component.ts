@@ -88,6 +88,8 @@ export class ServicesComponent implements OnInit {
         (element.DisplayName ? element.DisplayName.replace(",", " ") : "N/A"),
         (element.Description ? element.Description.replaceAll(",", " ") :""),
         (element.Started=='True' ? "Running" : "Stopped"),
+        (element.StartMode ? element.StartMode.replace(",", " ") : "N/A"),
+        (element.startName ? element.startName.replace(",", " ") : "N/A")
       ]);
     });
     let fileName = "Services";
@@ -100,7 +102,9 @@ export class ServicesComponent implements OnInit {
       pdfList.push([
         element.DisplayName.replace(",", " ") || "N/A",
         element.Description? element.Description.replace(",", " ") : "N/A",
-        element.Started=='True' ? "Running" : "Stopped"
+        element.Started=='True' ? "Running" : "Stopped",
+        element.StartMode ? element.StartMode.replace(",", " ") : "N/A",
+        element.startName ? element.startName.replace(",", " ") : "N/A"
       ]);
     });
     let html =
@@ -197,6 +201,8 @@ export class ServicesComponent implements OnInit {
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 45%;">Description</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Status</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Type</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Account Name</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -216,7 +222,18 @@ export class ServicesComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
         element[2] +
-        `</td></tr>`;
+        `</td>`
+        html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
+        element[3] +
+        `</td>`
+        html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
+        element[4] +
+        `</td>
+        </tr>`;
     });
     html =
       html +

@@ -36,7 +36,7 @@ export class ExcelService {
     } else if (type === "devicedeploymentwarrantyreport"){
       [(typeArr = ["Device Name", "Domain", "Manufacturer","Subnet", "Gateway", "ExternalIP"])];
     } else if (type === "services"){
-      [(typeArr = ["Services Name", "Description", "Status"])];
+      [(typeArr = ["Services Name", "Description", "Status", "Type", "Account Name"])];
     } else if (type === "startupprogrammes"){
       [(typeArr = ["Name", "Command", "User"])];
     }

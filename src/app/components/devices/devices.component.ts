@@ -222,7 +222,7 @@ export class DevicesComponent implements OnInit {
         }
         asset.online = true;
       }
-      if (this.cd) {
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
 
