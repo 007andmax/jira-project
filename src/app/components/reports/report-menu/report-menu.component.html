@@ -877,51 +877,108 @@
         </div>
     </div>
     <div *ngIf="report === 'income-accounts'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByGlNumber()"
-                >
-                    Get
-          Report
-                </button>
-                <div class="form-group content custom-width dropdown-height">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
-                <div class="form-group content">
-                    <app-multi-datepicker
-                        #dp
-                        [validate]="validate.getDates() && validate.geMonthlyDetailed()"
-                        [errorMessage]="'Please select the dates'"
-                        (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-                    <!-- <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error> -->
-                </div>
-                <div class="form-group content">
-                    <div class="input-field">
-                        <app-drop-down
-                            [validate]="validate.geMonthlyDetailed()"
-                            [errorMessage]="'Please select any dates or intervals'"
-                            [placeholder]="'Select filter'"
-                            [list]="listDetailed"
-                            (onSelectedItem)="onSelectDetailed($event)"
-                        ></app-drop-down>
-                    </div>
-                    <!-- <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error> -->
-                </div>
+<!--        <div-->
+<!--            class="run-report-content clearfix"-->
+<!--            [ngClass]="className"-->
+<!--        >-->
+<!--            <div class="new-reports-reverse">-->
+<!--                <button-->
+<!--                    class="btn-new btn-primary-white qt-fs-0"-->
+<!--                    (click)="getReportByGlNumber()"-->
+<!--                >-->
+<!--                    Get-->
+<!--          Report-->
+<!--                </button>-->
+<!--                <div class="form-group content custom-width dropdown-height">-->
+<!--                    <app-drop-down-->
+<!--                        [placeholder]="'Select Company'"-->
+<!--                        [list]="companies"-->
+<!--                        [field]="'name'"-->
+<!--                        [search]="true"-->
+<!--                        [change]="true"-->
+<!--                        (onSelectedItem)="selectClient($event)"-->
+<!--                    ></app-drop-down>-->
+<!--                </div>-->
+<!--                <div class="form-group content">-->
+<!--                    <app-multi-datepicker-->
+<!--                        #dp-->
+<!--                        [validate]="validate.getDates() && validate.geMonthlyDetailed()"-->
+<!--                        [errorMessage]="'Please select the dates'"-->
+<!--                        (selectedDate)="filterByDate($event)"-->
+<!--                    ></app-multi-datepicker>-->
+<!--                    &lt;!&ndash; <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error> &ndash;&gt;-->
+<!--                </div>-->
+<!--                <div class="form-group content">-->
+<!--                    <div class="input-field">-->
+<!--                        <app-drop-down-->
+<!--                            [validate]="validate.geMonthlyDetailed()"-->
+<!--                            [errorMessage]="'Please select any dates or intervals'"-->
+<!--                            [placeholder]="'Select filter'"-->
+<!--                            [list]="listDetailed"-->
+<!--                            (onSelectedItem)="onSelectDetailed($event)"-->
+<!--                        ></app-drop-down>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error> &ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+          <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+            <div class="report-left-panel__btn pointer qt-mr-6">
+              <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
+            <div
+              class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+              [ngClass]="className"
+            >
+              <div class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown">
+                <div class="input-field">
+                  <app-drop-down
+                    [validate]="validate.geMonthlyDetailed()"
+                    [errorMessage]="'Please select any dates or intervals'"
+                    [placeholder]="'Select filter'"
+                    [heightInput]="'36px'"
+                    [list]="listDetailed"
+                    (onSelectedItem)="onSelectDetailed($event)"
+                  ></app-drop-down>
+                </div>
+                <!-- <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error> -->
+              </div>
+              <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                <app-multi-datepicker
+                  #dp
+                  [validate]="validate.getDates() && validate.geMonthlyDetailed()"
+                  [errorMessage]="'Please select the dates'"
+                  (selectedDate)="filterByDate($event)"
+                ></app-multi-datepicker>
+                <!-- <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error> -->
+              </div>
+              <div class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown dropdown-height">
+                <app-drop-down
+                  [placeholder]="'Select Company'"
+                  [list]="companies"
+                  [field]="'name'"
+                  [heightInput]="'36px'"
+                  [search]="true"
+                  [change]="true"
+                  (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+              </div>
+              <button
+                class="btn-new btn-primary-white qt-fs-0"
+                (click)="getReportByGlNumber()"
+              >
+                Get
+                Report
+              </button>
+            </div>
+            <app-report-additional-actions [orientation]="(glNumber.getMonthlyDetailed()) ? 'LANDSCAPE' : 'PORTRAIT'"    [fileName]="'income_accounts'" [selectedClient]="selectedClient"></app-report-additional-actions>
+          </div>
         </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
+
     </div>
     <div *ngIf="report === 'byTaxes'">
         <div
