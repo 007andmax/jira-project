@@ -1,15 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
-import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
-import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { HelpCenterCategory } from './class/help-center-category';
 import { HelpCenterSubCategory } from './class/help-center-sub-category';
-import { SupportPageCategoryContent } from './class/support-page-category-content';
 import { SupportPageBodyComponent } from './support-page-body/support-page-body.component';
 import { SupportPageHeaderComponent } from './support-page-header/support-page-header.component';
 var $ = require("jquery");
@@ -19,86 +16,24 @@ var $ = require("jquery");
   styleUrls: ['./support-page.component.scss']
 })
 export class SupportPageComponent implements OnInit {
-  supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
-  selectedCategory: SupportPageCategory;
-  content: string = "";
-  isPreview: boolean = false;
   isShowHelpCenter: boolean = true;
   categories: Array<SupportPageCategory> = [];
-  helpCenterCategories: Array<HelpCenterCategory> = [];
-  attachments = [];
-  _id: string = '';
   sub: Subscription = new Subscription();
-  @ViewChild('header') header: SupportPageHeaderComponent;
-  @ViewChild('body') body: SupportPageBodyComponent;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
-    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     public cd: ChangeDetectorRef,
-    private elRef: ElementRef,
     public documentsService: DocumentsService,
     public activateRoute: ActivatedRoute,
-    public companiesStateService: CompaniesStateService,
-    private router: Router,
-    private supportPageCategoriesService: SupportPageCategoriesService,) { }
+    public companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
-    this._id = this.activateRoute.snapshot.params['id'];
-    let subscription = this.activateRoute.params.subscribe(params => {
-      this._id = params['id'];
-      console.log("SupportPageComponent 1", params);
-    });
-    console.log("SupportPageComponent 2", this.activateRoute.snapshot.params);
-    this.sub.add(subscription);
     this.isShowHelpCenter = this.supportPageCategoriesStateService.getShowHelpCenter();
     this.supportPageCategoriesStateService.onToggleShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = data;
     })
-    this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
-      if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
-      if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
-    });
     this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = true;
     })
-    this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
-      this.isShowHelpCenter = false;
-      this.selectedCategory = data;
-      this.attachments = [];
-      this.isPreview = false;
-      this.header.setPreview(false);
-      if (this.selectedCategory.document) {
-        this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
-          this.supportPageCategoryContent.setEditMode(true);
-          this.supportPageCategoryContent.setContent(content);
-          this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
-          this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
-        })
-      } else {
-        this.supportPageCategoryContent.setEditMode(false);
-        this.supportPageCategoryContent.setContent(null);
-        if (this.body) this.body.reset();
-        this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
-      }
-      console.log("this.content", this.content);
-      console.log("this.attachments", this.attachments);
-    })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
-      this.helpCenterCategories = [];
-      data.forEach(category => {
-        let subcategories: Array<HelpCenterSubCategory> = [];
-
-        category.subcategories.forEach(subcategory => {
-
-          subcategories.push(new HelpCenterSubCategory(subcategory.id, subcategory.name));
-          subcategory.subcategories.forEach(subsubcategory => {
-            subcategories.push(new HelpCenterSubCategory(subsubcategory.id, subsubcategory.name));
-            subsubcategory.subcategories.forEach(subsubsubcategory => {
-              subcategories.push(new HelpCenterSubCategory(subsubsubcategory.id, subsubsubcategory.name));
-            })
-          })
-        })
-        this.helpCenterCategories.push(new HelpCenterCategory(category.id, category.name, subcategories));
-      });
       this.categories = JSON.parse(JSON.stringify(data)).map(item => new SupportPageCategory(item));
       this.cd.detectChanges();
     })
@@ -152,101 +87,6 @@ export class SupportPageComponent implements OnInit {
     $(window).on('mouseup', null, null, (event) => {
       if (resizeData.tracking) resizeData.tracking = false;
     });
-  }
-  onPreview(data) {
-    this.isPreview = data;
-    console.log("this.supportPageCategoryContent", this.supportPageCategoryContent);
-    if (!this.isPreview && this.supportPageCategoryContent.newContent) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-    if (this.isPreview) {
-      this.elRef.nativeElement.querySelector(".support-page-body__preview").innerHTML = "";
-      this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.newContent);
-
-    }
-    // if (!this.isPreview && this.supportPageCategoryContent.isEditMode) this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-  }
-  public showPreview(data) {
-    if (data.document) {
-      this.selectedCategory = data;
-      this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
-      this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
-        this.supportPageCategoryContent.setEditMode(true);
-        this.supportPageCategoryContent.setContent(content);
-        this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
-        this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
-        this.header.setPreview(true);
-        this.isShowHelpCenter = false;
-      })
-    }
-  }
-  onChangeAttachments(data) {
-    this.attachments = data;
-    console.log("onChangeAttachments", data);
-  }
-  checkAddAttachments() {
-    let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-    let contentAttachments = [];
-    let removedAttachments = [];
-    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    if (content) content.replace(urlRegex, function (url) {
-      contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
-      return url;
-    });
-
-    console.log("contentAttachments", contentAttachments);
-    console.log("removedAttachments", removedAttachments);
-    console.log("attachments", this.attachments);
-    this.attachments.forEach(item => {
-      if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-    })
-    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-    forkJoin(
-      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
-    )
-      .subscribe(res => {
-      });
-    this.attachments = [];
-    this.supportPageCategoryContent.setEditMode(true);
-    this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-
-  }
-  checkEditAttachments() {
-    let content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
-    let newContent = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-    let oldAttachments = JSON.parse(JSON.stringify(this.attachments));
-    let newAttachments = [];
-    let removedAttachments = [];
-    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    if (content) content.replace(urlRegex, function (url) {
-      oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
-      return url;
-    });
-    if (newContent) newContent.replace(urlRegex, function (url) {
-      newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
-      return url;
-    });
-    oldAttachments.forEach(item => {
-      if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-    })
-    console.log("oldAttachments", oldAttachments);
-    console.log("newAttachments", newAttachments);
-    console.log("removedAttachments", removedAttachments);
-    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-
-    forkJoin(
-      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
-    )
-      .subscribe(res => {
-      });
-    this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
-    this.attachments = [];
-    console.log("this.attachments", this.attachments);
-  }
-  onChangeContent(data) {
-    this.supportPageCategoryContent.setNewContent(data);
-  }
-  getContentPreview() {
-    if (this.supportPageCategoryContent.newContent.length > 0) return this.supportPageCategoryContent.newContent;
-    return this.content
   }
   public trackById(index, item) {
     return item.id;

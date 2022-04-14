@@ -6,6 +6,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { environment } from 'src/environments/environment';
 import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
+import { SupportPageCategoriesRealTimeService } from '../../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategoryContent } from '../class/support-page-category-content';
 import { SupportPageBodyComponent } from '../support-page-body/support-page-body.component';
@@ -32,6 +33,7 @@ export class SupportPageCategoryComponent implements OnInit {
     private elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public documentsService: DocumentsService,
+    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService) { }
 
   ngOnInit() {
@@ -39,15 +41,19 @@ export class SupportPageCategoryComponent implements OnInit {
     let subscription = this.activateRoute.params.subscribe(params => {
       this._id = params['id'];
       if (this._id) this.getCategories(this.supportPageCategoriesStateService.getCategories());
-      console.log("SupportPageCategoryComponent 1", params);
     });
+    this.sub.add(subscription);
     if (this._id && this.isFirstOpen) this.getCategories(this.supportPageCategoriesStateService.getCategories());
     this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
       if (this.isFirstOpen) this.getCategories(data);
     });
+    this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
+    this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
+      if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
+      if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
+    });
   }
   getCategories(data) {
-    console.log("data", data.length);
     if (data.length > 0) this.isFirstOpen = false;
     data.forEach(category => {
       if (this._id && this._id == category.id) {
@@ -93,10 +99,6 @@ export class SupportPageCategoryComponent implements OnInit {
       contentAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
-
-    console.log("contentAttachments", contentAttachments);
-    console.log("removedAttachments", removedAttachments);
-    console.log("attachments", this.attachments);
     this.attachments.forEach(item => {
       if (!contentAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
@@ -129,11 +131,7 @@ export class SupportPageCategoryComponent implements OnInit {
     oldAttachments.forEach(item => {
       if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
-    console.log("oldAttachments", oldAttachments);
-    console.log("newAttachments", newAttachments);
-    console.log("removedAttachments", removedAttachments);
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
@@ -141,15 +139,24 @@ export class SupportPageCategoryComponent implements OnInit {
       });
     this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
     this.attachments = [];
-    console.log("this.attachments", this.attachments);
   }
   public initEditMode() {
-    this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
-      this.supportPageCategoryContent.setEditMode(true);
-      this.supportPageCategoryContent.setContent(content);
-      this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
+    if (this.selectedCategory.document) {
+      this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
+      this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
+        this.supportPageCategoryContent.setEditMode(true);
+        this.supportPageCategoryContent.setContent(content);
+        this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
+        this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
+        this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
+      })
+    } else {
+      this.supportPageCategoryContent.setEditMode(false);
+      this.supportPageCategoryContent.setContent(null);
+      if (this.body) this.body.reset();
       this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
-    })
+    }
+
   }
   public initPreviewMode() {
     this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
@@ -164,20 +171,16 @@ export class SupportPageCategoryComponent implements OnInit {
   }
   onPreview(data) {
     this.isPreview = data;
-    console.log("this.supportPageCategoryContent", this.supportPageCategoryContent);
     if (!this.isPreview && this.supportPageCategoryContent.newContent) this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
     if (this.isPreview) {
       this.elRef.nativeElement.querySelector(".support-page-body__preview").innerHTML = "";
       this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`));
-
     }
-    // if (!this.isPreview && this.supportPageCategoryContent.isEditMode) this.supportPageCategoryContent.document.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.newContent));
   }
   onChangeContent(data) {
     this.supportPageCategoryContent.setNewContent(data);
   }
   onChangeAttachments(data) {
     this.attachments = data;
-    console.log("onChangeAttachments", data);
   }
 }

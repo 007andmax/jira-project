@@ -26,11 +26,8 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-
-
   }
   select(item) {
-    console.log("item", item);
     this.onSelectCategory.emit({ ...item, document: { id: "" } });
   }
   clearWord() {
@@ -46,7 +43,6 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     this.onScroll(JSON.parse(JSON.stringify(this.searchName)));
   }
   onShowDropDown() {
-    console.log("this.dp.isOpen()", JSON.parse(JSON.stringify(this.dp.isOpen())));
     if (this.searchName.length > 0) this.dp.open();
   }
   onHideDropDown() {
@@ -60,7 +56,6 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     }
   }
   public onScroll(searchName) {
-
     this.infiniteScrollDisabled = true;
     if (searchName.length > 0) this.getTags(searchName);
     if (searchName.length === 0) this.onHideDropDown();

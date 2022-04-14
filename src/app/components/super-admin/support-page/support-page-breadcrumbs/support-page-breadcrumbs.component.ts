@@ -14,50 +14,10 @@ export class SupportPageBreadcrumbsComponent implements OnInit {
   subCategory: string;
   subsubCategory: string;
   subsubSubCategory: string;
-  constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
-    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,) { }
+  constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService) { }
 
   ngOnInit() {
-    /* this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
-       if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
-       if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
-     });
-     this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
-       this.supportPageCategoriesStateService.getCategories().forEach(category => {
-         if (category.id === data.id) {
-           this.category = category.name;
-           this.subCategory = null;
-           this.subsubCategory = null;
-           this.subsubSubCategory = null;
-         }
-         category.subcategories.forEach(subcategory => {
-           if (subcategory.id === data.id) {
-             this.category = category.name;
-             this.subCategory = subcategory.name;
-             this.subsubCategory = null;
-             this.subsubSubCategory = null;
- 
-           }
-           subcategory.subcategories.forEach(subsubcategory => {
-             if (subsubcategory.id === data.id) {
-               this.category = category.name;
-               this.subCategory = subcategory.name;
-               this.subsubCategory = subsubcategory.name;
-               this.subsubSubCategory = null;
-             }
-             subsubcategory.subcategories.forEach(subsubsubcategory => {
-               if (subsubsubcategory.id === data.id) {
-                 this.category = category.name;
-                 this.subCategory = subcategory.name;
-                 this.subsubCategory = subsubcategory.name;
-                 this.subsubSubCategory = subsubsubcategory.name;
-               }
- 
-             })
-           })
-         })
-       })
-     })*/
+
   }
   ngDoCheck() {
     if (!this.selectedCategory) return;

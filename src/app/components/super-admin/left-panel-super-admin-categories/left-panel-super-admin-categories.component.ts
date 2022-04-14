@@ -78,10 +78,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       }
     })
     this.sub.add(getConfirm);
-    this.supportPageCategoriesStateService.onAddArticle.subscribe(data => {
-      this.selectedCategory = data;
-      this.isShowHelpCenter = false;
-    });
     this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = true;
     })
@@ -113,6 +109,8 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
    }*/
   gotoHelpCenter() {
     // this.supportPageCategoriesStateService.showHelpCenter();
+    this.isShowHelpCenter = true;
+    this.selectedCategory = null;
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`]);
     this.supportPageCategoriesStateService.toggleShowHelpCenter(true);
   }

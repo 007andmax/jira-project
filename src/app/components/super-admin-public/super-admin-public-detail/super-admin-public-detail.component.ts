@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { environment } from 'src/environments/environment';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
@@ -18,12 +19,13 @@ export class SuperAdminPublicDetailComponent implements OnInit {
   categories: Array<SupportPageCategory> = [];
   @Input() selectedCategory: SupportPageCategory;
   supportPageCategoryContent: SupportPageCategoryContent = new SupportPageCategoryContent();
-  @Output() onGoHelpCenter = new EventEmitter();
+  sub: Subscription = new Subscription();
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private supportPageCategoriesService: SupportPageCategoriesService,
     private elRef: ElementRef,
     public activateRoute: ActivatedRoute,
     public companiesStateService: CompaniesStateService,
+    private router: Router,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -31,53 +33,18 @@ export class SuperAdminPublicDetailComponent implements OnInit {
     let subscription = this.activateRoute.params.subscribe(params => {
       this._id = params['id'];
       if (this._id) this.getCategories(this.supportPageCategoriesStateService.getCategories());
-      console.log("SupportPageCategoryComponent 1", params);
     });
-    if (this._id) this.getCategories(this.supportPageCategoriesStateService.getCategories());
+    this.sub.add(subscription);
+    if (this._id && this.isFirstOpen) this.getCategories(this.supportPageCategoriesStateService.getCategories());
     this.supportPageCategoriesStateService.onGetCategories.subscribe((data) => {
       if (this.isFirstOpen) this.getCategories(data);
     });
-
-    this.supportPageCategoriesStateService.onPreviewContent.subscribe(data => {
-      this.selectedCategory = data;
-
-      this.categories.forEach(category => {
-        if (category.id === this.selectedCategory.id) {
-          category.toggleSubCategory = true;
-        }
-        category.subcategories.forEach(subcategory => {
-          if (subcategory.id === this.selectedCategory.id) {
-            category.toggleSubCategory = true;
-            subcategory.toggleSubCategory = true;
-          }
-          subcategory.subcategories.forEach(subsubcategory => {
-            if (subsubcategory.id === this.selectedCategory.id) {
-              category.toggleSubCategory = true;
-              subcategory.toggleSubCategory = true;
-              subsubcategory.toggleSubCategory = true;
-            }
-            subsubcategory.subcategories.forEach(subsubsubcategory => {
-              if (subsubsubcategory.id === this.selectedCategory.id) {
-                category.toggleSubCategory = true;
-                subcategory.toggleSubCategory = true;
-                subsubcategory.toggleSubCategory = true;
-                subsubsubcategory.toggleSubCategory = true;
-              }
-
-            })
-          })
-        })
-      })
-      this.showPreview(this.selectedCategory);
-      window.scrollTo(0, 0);
-    })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = data;
       this.cd.detectChanges();
     })
   }
   getCategories(data) {
-    console.log("data", data.length);
     if (data.length > 0) this.isFirstOpen = false;
     this.categories = data;
     this.categories.forEach(category => {
@@ -87,7 +54,6 @@ export class SuperAdminPublicDetailComponent implements OnInit {
         this.initPreviewMode();
         this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
       }
-
       category.subcategories.forEach(subcategory => {
         if (this._id && this._id == subcategory.id) {
           this.selectedCategory = subcategory;
@@ -96,7 +62,6 @@ export class SuperAdminPublicDetailComponent implements OnInit {
           this.initPreviewMode();
           this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
         }
-
         subcategory.subcategories.forEach(subsubcategory => {
           if (this._id && this._id == subsubcategory.id) {
             this.selectedCategory = subsubcategory;
@@ -122,7 +87,7 @@ export class SuperAdminPublicDetailComponent implements OnInit {
     });
   }
   gotoHelpCenter() {
-    this.onGoHelpCenter.emit(null);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`]);
   }
   public initPreviewMode() {
     this.supportPageCategoriesStateService.showPreview(this.selectedCategory);
@@ -131,21 +96,16 @@ export class SuperAdminPublicDetailComponent implements OnInit {
       this.supportPageCategoryContent.setContent(content);
       this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
       this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
+      this.supportPageCategoryContent.setTags(content.tags);
+      this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").innerHTML = "";
+      this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`));
+      window.scrollTo(0, 0);
     })
   }
   showPreview(data) {
     if (data.document) {
       this.selectedCategory = data;
-      if (this.selectedCategory.document) {
-        this.supportPageCategoriesService.getContentCategory(this.selectedCategory.id).subscribe((content: any) => {
-          this.supportPageCategoryContent.setEditMode(true);
-          this.supportPageCategoryContent.setContent(content);
-          this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
-          this.supportPageCategoryContent.setTags(content.tags);
-          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").innerHTML = "";
-          this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`));
-        })
-      }
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`, data.id]);
     }
   }
 }

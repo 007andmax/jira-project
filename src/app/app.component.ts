@@ -203,12 +203,9 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.state = data;
-
-      console.log("this.state", this.state);
     })
     this.leftPanelStateService.onChangeState.subscribe(data => {
       this.state = data;
-      console.log("this.state", this.state);
     })
   }
   ngDoCheck() {

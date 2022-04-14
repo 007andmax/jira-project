@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
 import { SupportPageAddSubCategoryComponent } from '../../shared/support-page-add-sub-category/support-page-add-sub-category.component';
 import { SupportPageEditCategoryComponent } from '../../shared/support-page-edit-category/support-page-edit-category.component';
@@ -19,6 +21,8 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   @Output() onSelectCategory = new EventEmitter();
   constructor(private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
+    private router: Router,
+    public companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
@@ -33,7 +37,10 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
     modalRef.componentInstance.name = category.name;
   }
   addArticle(category) {
-    this.supportPageCategoriesStateService.addArticle(category);
+    // this.supportPageCategoriesStateService.addArticle(category);
+    this.supportPageCategoriesStateService.setMode("EDIT");
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.category.id]);
+
     this.onSelectCategory.emit(this.category);
   }
   delete(category) {
