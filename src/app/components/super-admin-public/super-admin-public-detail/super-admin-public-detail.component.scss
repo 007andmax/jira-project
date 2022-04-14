@@ -5,25 +5,6 @@
     margin: 0 auto;
     width: 100%;
     min-width: 860px;
-
-    &__header {
-        display: flex;
-        align-items: center;
-        padding: 12px 15px;
-        background-color: $white;
-        width: 1164px;
-        margin: 0 auto;
-
-        .icon__quicktech-logo {
-            display: inline-block;
-            width: 136px;
-            height: 18px;
-            background-repeat: no-repeat;
-            background-position: center;
-            margin-right: 55px;
-        }
-    }
-
     &__hero {
         position: relative;
         padding: 96px 0;
@@ -34,7 +15,6 @@
         margin-bottom: 64px;
 
         .icon__quicktech_partical {
-
             &_bottom,
             &_top {
                 position: absolute;
@@ -133,57 +113,10 @@
     }
 }
 
-.qt-page-list__search {
-    input {
-        height: 40px;
-        border: 1px solid $gray-400;
-        min-width: 360px;
-        border-radius: 6px;
-    }
-}
-
 .topic-detail-page {
-    .qt-logo {
-        display: block;
-        margin-right: 134px;
-
-        &__quicktech {
-            display: block;
-            width: 136px;
-            height: 18px;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        &__beta {
-            font-size: 8px;
-            line-height: 10px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            color: $white;
-            padding: 2px 4px;
-            background-color: $error;
-            border-radius: 2px;
-            text-transform: uppercase;
-        }
-    }
-
-    &__header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding: 11px 16px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        background-color: $white;
-    }
-
     &__body {
         display: flex;
         align-items: flex-start;
-
         &-left-panel {
             height: 100%;
             overflow: auto;
