@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
 import { SupportPageAddSubCategoryComponent } from '../../shared/support-page-add-sub-category/support-page-add-sub-category.component';
@@ -22,6 +23,7 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   constructor(private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private router: Router,
+    private appStateService: AppStateService,
     public companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,) { }
 
@@ -43,10 +45,17 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
 
     this.onSelectCategory.emit(this.category);
   }
+  toggleDropDown() {
+    this.appStateService.changeDetectorRef();
+  }
   delete(category) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to delete the category?`;
     this.supportPageCategoriesStateService.setCategoryForRemove(category);
+  }
+  onToggleDropDown(data) {
+    console.log("onToggleDropDown", data);
+    this.appStateService.changeDetectorRef();
   }
 }

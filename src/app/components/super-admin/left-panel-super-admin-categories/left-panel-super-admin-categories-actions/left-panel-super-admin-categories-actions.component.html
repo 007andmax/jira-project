@@ -1,6 +1,7 @@
 <div
     class="category-actions"
     ngbDropdown
+    (openChange)="onToggleDropDown($event)"
     container="body"
 >
     <app-dynamic-tooltip

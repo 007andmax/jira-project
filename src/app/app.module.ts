@@ -534,6 +534,7 @@ import { SuperAdminPublicSearchComponent } from './components/super-admin-public
 import { SupportPageHelpCenterComponent } from './components/super-admin/support-page/support-page-help-center/support-page-help-center.component';
 import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
 import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
+import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
 
 
 declare var $: any;
@@ -1007,7 +1008,8 @@ declare var $: any;
     SuperAdminPublicSearchComponent,
     SupportPageHelpCenterComponent,
     SupportPageCategoryComponent,
-    SuperAdminPublicCategoryComponent
+    SuperAdminPublicCategoryComponent,
+    SuperAdminPublicHeaderComponent
   ],
   imports: [
     BrowserModule,

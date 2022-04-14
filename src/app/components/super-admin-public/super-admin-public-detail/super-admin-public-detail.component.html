@@ -1,5 +1,9 @@
 <div class="topic-detail-page">
-    <div class="topic-detail-page__header">
+    <super-admin-public-header
+        [isShowHelpCenter]="false"
+        (onSelectCategory)="selectCategory($event)"
+    ></super-admin-public-header>
+    <!-- <div class="topic-detail-page__header">
         <a
             href="javascript:;"
             class="qt-logo pointer"
@@ -18,7 +22,7 @@
             </div>
             <div class="icon__help-center qt-bg-contain qt-sz-24 pointer qt-ml-16 qt-mr-16"></div>
         </div>
-    </div>
+    </div> -->
     <div class="topic-detail-page__body">
         <div class="topic-detail-page__body-left-panel">
             <div class="container-categories">
@@ -41,6 +45,11 @@
                     <div [attr.id]="category.id">
                         <div class="category-item category-item-category-body">
 
+
+
+
+
+
                             <div
                                 class="category-item-category__name"
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
@@ -57,6 +66,11 @@
                                     (click)="showPreview(category)"
                                 ></span>
                             </div>
+
+
+
+
+
 
                         </div>
                         <div
@@ -91,6 +105,11 @@
                                                 (click)="showPreview(subcategory)"
                                             ></span>
                                         </div>
+
+
+
+
+
 
                                     </div>
                                     <div
@@ -127,6 +146,11 @@
                                                     </div>
                                                 </div>
 
+
+
+
+
+
                                                 <div
                                                     class="category-item-sub-sub-sub-category"
                                                     *ngIf="subsubcategory.toggleSubCategory"
@@ -155,6 +179,11 @@
                                                                         ></span>
                                                                     </div>
                                                                 </div>
+
+
+
+
+
 
                                                             </div>
                                                         </div>
@@ -229,6 +258,11 @@
         >
             <div id="content"></div>
             <div class="profile-cmp-board tags-area d-flex">
+
+
+
+
+
 
                 <div class="tags-tab d-flex">
                     <span

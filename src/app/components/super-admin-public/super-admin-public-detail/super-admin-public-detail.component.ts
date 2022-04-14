@@ -86,6 +86,12 @@ export class SuperAdminPublicDetailComponent implements OnInit {
       })
     });
   }
+  selectCategory(data) {
+    if (data.document) {
+      this.selectedCategory = data;
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`, data.id]);
+    }
+  }
   gotoHelpCenter() {
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`]);
   }

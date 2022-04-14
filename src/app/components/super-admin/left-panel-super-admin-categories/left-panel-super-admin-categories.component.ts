@@ -86,7 +86,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     if (category.document) {
       //this.supportPageCategoriesStateService.addArticle(category);
       this.selectedCategory = category;
-      this.supportPageCategoriesStateService.setMode("EDIT");
+      if (this.isShowHelpCenter) this.supportPageCategoriesStateService.setMode("EDIT");
       this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.selectedCategory.id]);
 
     }
