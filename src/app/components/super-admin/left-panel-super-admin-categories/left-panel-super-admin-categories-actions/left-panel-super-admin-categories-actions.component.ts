@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
@@ -15,20 +15,24 @@ import { SupportPageCategory } from '../class/support-page-category';
 @Component({
   selector: 'left-panel-super-admin-categories-actions',
   templateUrl: './left-panel-super-admin-categories-actions.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./left-panel-super-admin-categories-actions.component.scss']
 })
 export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   @Input() category: SupportPageCategory;
   @Output() onSelectCategory = new EventEmitter();
+  @ViewChild('editCustomer') editCustomer: NgbDropdown;
   constructor(private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private router: Router,
+    public cd: ChangeDetectorRef,
     private appStateService: AppStateService,
     public companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
   }
+
   addSubCategory(id) {
     const modalRef = this.modalService.open(SupportPageAddSubCategoryComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.parentSupportCategoryId = id;
@@ -42,11 +46,13 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
     // this.supportPageCategoriesStateService.addArticle(category);
     this.supportPageCategoriesStateService.setMode("EDIT");
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.category.id]);
-
+    this.cd.detectChanges();
     this.onSelectCategory.emit(this.category);
   }
   toggleDropDown() {
-    this.appStateService.changeDetectorRef();
+    //  this.editCustomer.open();
+    // console.log("editCustomer", this.editCustomer.);
+    //  this.cd.detectChanges();
   }
   delete(category) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
@@ -56,6 +62,6 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   }
   onToggleDropDown(data) {
     console.log("onToggleDropDown", data);
-    this.appStateService.changeDetectorRef();
+    //  this.appStateService.changeDetectorRef();
   }
 }

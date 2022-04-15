@@ -1,6 +1,7 @@
 <div
     class="category-actions"
     ngbDropdown
+    #editCustomer="ngbDropdown"
     (openChange)="onToggleDropDown($event)"
     container="body"
 >
@@ -12,12 +13,13 @@
     <div
         class="icon__category-more qt-sz-20 pointer"
         ngbDropdownToggle
-        (mouseenter)="moreTooltip.show($event.target)"
-        (mouseleave)="moreTooltip.hide()"
+        id="dropdown1"
+        (click)="toggleDropDown()"
     ></div>
     <div
         ngbDropdownMenu
         class="app-drop-down__dropdown"
+        aria-labelledby="dropdown1"
     >
         <div
             class="add-sub-category-item"

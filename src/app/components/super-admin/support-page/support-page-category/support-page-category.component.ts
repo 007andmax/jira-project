@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -33,6 +33,7 @@ export class SupportPageCategoryComponent implements OnInit {
     private elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public documentsService: DocumentsService,
+    public cd: ChangeDetectorRef,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService) { }
 
@@ -51,10 +52,15 @@ export class SupportPageCategoryComponent implements OnInit {
     this.supportPageCategoriesRealTimeService.changeCategoryArray.subscribe(data => {
       if (data.action === "DELETE_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory = null;
       if (data.action === "EDIT_SUPPORT_CATEGORY" && (this.selectedCategory && this.selectedCategory.id === data.data)) this.selectedCategory.onUpdate(data.data);
+      this.cd.markForCheck();
     });
   }
   getCategories(data) {
     if (data.length > 0) this.isFirstOpen = false;
+    if (this.supportPageCategoriesStateService.getMode() === "PREVIEW") {
+      this.isPreview = true;
+      this.header.setPreview(true);
+    }
     data.forEach(category => {
       if (this._id && this._id == category.id) {
         this.selectedCategory = category;
@@ -88,6 +94,7 @@ export class SupportPageCategoryComponent implements OnInit {
           })
         })
       })
+      this.cd.markForCheck();
     });
   }
   checkAddAttachments() {
@@ -149,12 +156,14 @@ export class SupportPageCategoryComponent implements OnInit {
         this.supportPageCategoryContent.setIdTags(content.tags.map(item => item.id));
         this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
         this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
+        this.cd.detectChanges();
       })
     } else {
       this.supportPageCategoryContent.setEditMode(false);
       this.supportPageCategoryContent.setContent(null);
       if (this.body) this.body.reset();
       this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
+      this.cd.detectChanges();
     }
 
   }
@@ -167,6 +176,7 @@ export class SupportPageCategoryComponent implements OnInit {
       this.content = JSON.parse(JSON.stringify(this.supportPageCategoryContent.document.content));
       this.header.setPreview(true);
       this.supportPageCategoriesStateService.toggleShowHelpCenter(false);
+      this.cd.detectChanges();
     })
   }
   onPreview(data) {
@@ -175,6 +185,7 @@ export class SupportPageCategoryComponent implements OnInit {
     if (this.isPreview) {
       this.elRef.nativeElement.querySelector(".support-page-body__preview").innerHTML = "";
       this.elRef.nativeElement.querySelector(".support-page-body__preview").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`));
+      this.cd.detectChanges();
     }
   }
   onChangeContent(data) {

@@ -1,15 +1,18 @@
-<div class="support-page__header">
+<div
+    class="support-page__header"
+    [ngClass]="{'support-page__header-detail-page' :!isShowHelpCenter}"
+>
     <div class="support-page__header-container">
-      <a
-        href="javascript:;"
-        class="qt-logo pointer"
-        [ngClass]="{'qt-logo-topic-detail-page' :!isShowHelpCenter}"
-        alt="Quicktech logo"
-        (click)="gotoHelpCenter()"
-      >
-        <span class="qt-logo__quicktech icon__quicktech-logo"></span>
-        <span class="qt-logo__beta">Beta</span>
-      </a>
-      <super-admin-public-search (onSelectCategory)="selectCategory($event)"></super-admin-public-search>
+        <a
+            href="javascript:;"
+            class="qt-logo pointer"
+            [ngClass]="{'qt-logo-topic-detail-page' :!isShowHelpCenter}"
+            alt="Quicktech logo"
+            (click)="gotoHelpCenter()"
+        >
+            <span class="qt-logo__quicktech icon__quicktech-logo"></span>
+            <span class="qt-logo__beta">Beta</span>
+        </a>
+        <super-admin-public-search (onSelectCategory)="selectCategory($event)"></super-admin-public-search>
     </div>
 </div>

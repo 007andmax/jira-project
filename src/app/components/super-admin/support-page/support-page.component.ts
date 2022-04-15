@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -13,6 +13,7 @@ var $ = require("jquery");
 @Component({
   selector: 'support-page',
   templateUrl: './support-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./support-page.component.scss']
 })
 export class SupportPageComponent implements OnInit {
@@ -29,13 +30,15 @@ export class SupportPageComponent implements OnInit {
     this.isShowHelpCenter = this.supportPageCategoriesStateService.getShowHelpCenter();
     this.supportPageCategoriesStateService.onToggleShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = data;
+      this.cd.markForCheck();
     })
     this.supportPageCategoriesStateService.onShowHelpCenter.subscribe(data => {
       this.isShowHelpCenter = true;
+      this.cd.markForCheck();
     })
     this.supportPageCategoriesStateService.onGetCategories.subscribe(data => {
       this.categories = JSON.parse(JSON.stringify(data)).map(item => new SupportPageCategory(item));
-      this.cd.detectChanges();
+      this.cd.markForCheck();
     })
     const selectTarget = (fromElement, selector) => {
       if (!(fromElement instanceof HTMLElement)) {
