@@ -809,40 +809,55 @@
         </div>
     </div>
     <div *ngIf="report === 'accounting-report'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByAccounting()"
-                >
-                    Get
-          Report
-                </button>
-                <div class="form-group content">
-                    <app-multi-datepicker
-                        #dp
-                        [validate]="validate.getDates()"
-                        [errorMessage]="'Please select the dates'"
-                        (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-                </div>
-                <div class="form-group content custom-width dropdown-height">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [validate]="validate.getCompany()"
-                        [errorMessage]="'Please select the company name'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+          <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+            <div class="report-left-panel__btn pointer qt-mr-6">
+              <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
+            <div
+              class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+              [ngClass]="className"
+            >
+              <div class="qt-report__dropdown qt-mr-8">
+                <app-drop-down
+                  [placeholder]="'Select Company'"
+                  [list]="companies"
+                  [validate]="validate.getCompany()"
+                  [errorMessage]="'Please select the company name'"
+                  [field]="'name'"
+                  [heightInput]="'36px'"
+                  [search]="true"
+                  [change]="true"
+                  (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+              </div>
+              <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                <app-multi-datepicker
+                  #dp
+                  [validate]="validate.getDates()"
+                  [errorMessage]="'Please select the dates'"
+                  (selectedDate)="filterByDate($event)"
+                ></app-multi-datepicker>
+              </div>
+              <button
+                class="btn-new btn-primary-white qt-fs-0"
+                (click)="getReportByAccounting()"
+              >
+                Get
+                Report
+              </button>
+            </div>
+          </div>
+          <app-report-additional-actions
+            [report]="'accounting-report'"
+            [accountType]="'TECH'"
+            [template]="'CUSTOMER_REPORT'"
+            [fileName]="'accounting-report-report'"
+          ></app-report-additional-actions>
         </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
     </div>
     <div *ngIf="report === 'tech-service'">
         <div
@@ -1039,30 +1054,64 @@
         </div>
     </div>
     <div *ngIf="report === 'accounts-receivable'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByAccountsReceivable()"
-                >
-                    Get
-          Report
-                </button>
-                <div class="form-group content custom-width dropdown-height">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
+<!--        <div-->
+<!--            class="run-report-content clearfix"-->
+<!--            [ngClass]="className"-->
+<!--        >-->
+<!--            <div class="new-reports-reverse">-->
+<!--                <button-->
+<!--                    class="btn-new btn-primary-white qt-fs-0"-->
+<!--                    (click)="getReportByAccountsReceivable()"-->
+<!--                >-->
+<!--                    Get-->
+<!--          Report-->
+<!--                </button>-->
+<!--                <div class="form-group content custom-width dropdown-height">-->
+<!--                    <app-drop-down-->
+<!--                        [placeholder]="'Select Company'"-->
+<!--                        [list]="companies"-->
+<!--                        [field]="'name'"-->
+<!--                        [search]="true"-->
+<!--                        [change]="true"-->
+<!--                        (onSelectedItem)="selectClient($event)"-->
+<!--                    ></app-drop-down>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+          <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+            <div class="report-left-panel__btn pointer qt-mr-6">
+              <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
+            <div
+              class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+              [ngClass]="className"
+            >
+              <div class="qt-report__dropdown qt-mr-8">
+                <app-drop-down
+                  [placeholder]="'Select Company'"
+                  [list]="companies"
+                  [field]="'name'"
+                  [heightInput]="'36px'"
+                  [search]="true"
+                  [change]="true"
+                  (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+              </div>
+              <button
+                class="btn-new btn-primary-white qt-fs-0"
+                (click)="getReportByAccountsReceivable()"
+              >
+                Get
+                Report
+              </button>
+            </div>
+          </div>
+          <app-report-additional-actions  [fileName]="'accounts_receivable'" [selectedClient]="selectedClient"></app-report-additional-actions>
         </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
     </div>
     <div *ngIf="report === 'byProducts'">
 <!--        <div-->
