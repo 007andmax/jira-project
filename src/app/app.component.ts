@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ApplicationRef } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -82,6 +82,7 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
+    private appRef: ApplicationRef,
     private permissionsService: PermissionsService,
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
@@ -186,7 +187,7 @@ export class AppComponent implements OnInit {
     })
     this.appStateService.onChangeDetectorRef.subscribe(data => {
       setTimeout(() => {
-        this.cd.detectChanges();
+        this.appRef.tick();
         document.body.click();
       }, 500);
     })

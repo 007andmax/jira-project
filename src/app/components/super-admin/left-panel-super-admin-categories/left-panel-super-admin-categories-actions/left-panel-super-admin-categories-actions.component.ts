@@ -21,12 +21,10 @@ import { SupportPageCategory } from '../class/support-page-category';
 export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   @Input() category: SupportPageCategory;
   @Output() onSelectCategory = new EventEmitter();
-  @ViewChild('editCustomer') editCustomer: NgbDropdown;
   constructor(private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private router: Router,
     public cd: ChangeDetectorRef,
-    private appStateService: AppStateService,
     public companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,) { }
 
@@ -36,32 +34,26 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   addSubCategory(id) {
     const modalRef = this.modalService.open(SupportPageAddSubCategoryComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.parentSupportCategoryId = id;
+    this.cd.detectChanges();
   }
   editCategory(category) {
     const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.category_id = category.id;
     modalRef.componentInstance.name = category.name;
+    this.cd.detectChanges();
   }
-  addArticle(category) {
+  addArticle() {
     // this.supportPageCategoriesStateService.addArticle(category);
     this.supportPageCategoriesStateService.setMode("EDIT");
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.category.id]);
     this.cd.detectChanges();
     this.onSelectCategory.emit(this.category);
   }
-  toggleDropDown() {
-    //  this.editCustomer.open();
-    // console.log("editCustomer", this.editCustomer.);
-    //  this.cd.detectChanges();
-  }
   delete(category) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to delete the category?`;
     this.supportPageCategoriesStateService.setCategoryForRemove(category);
-  }
-  onToggleDropDown(data) {
-    console.log("onToggleDropDown", data);
-    //  this.appStateService.changeDetectorRef();
+    this.cd.detectChanges();
   }
 }

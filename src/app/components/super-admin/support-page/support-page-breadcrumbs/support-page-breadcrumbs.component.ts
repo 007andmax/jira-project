@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesRealTimeService } from '../../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
@@ -14,7 +14,8 @@ export class SupportPageBreadcrumbsComponent implements OnInit {
   subCategory: string;
   subsubCategory: string;
   subsubSubCategory: string;
-  constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService) { }
+  constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -54,6 +55,7 @@ export class SupportPageBreadcrumbsComponent implements OnInit {
           })
         })
       })
+      this.cd.markForCheck();
     })
   }
 }

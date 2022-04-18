@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -23,6 +23,7 @@ export class SupportPageHeaderComponent implements OnInit {
   isPreview: boolean = false;
   constructor(private supportPageCategoriesStateService: SupportPageCategoriesStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private supportPageCategoriesService: SupportPageCategoriesService,
     private confirmStateService: ConfirmStateService,) { }
 
@@ -45,16 +46,15 @@ export class SupportPageHeaderComponent implements OnInit {
     const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.category_id = this.selectedCategory.id;
     modalRef.componentInstance.name = this.selectedCategory.name;
+    this.cd.detectChanges();
   }
 
   saveContent(type) {
     this.supportPageCategoryContent.setType(type);
-
     this.supportPageCategoriesService.saveContent(this.selectedCategory.id, this.supportPageCategoryContent.getData(), (type === "DRAFT") ? "Draft Saved Successfully" : "Document published successfully").subscribe((data: any) => {
       if (!this.supportPageCategoryContent.isEditMode) this.onCheckAddAttachments.emit(null);
       if (this.supportPageCategoryContent.isEditMode) this.onCheckEditAttachments.emit(null);
       this.supportPageCategoryContent.setIdDocument(data.document.id);
-
     })
   }
   removeCategory() {
@@ -62,5 +62,6 @@ export class SupportPageHeaderComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to delete the category?`;
     this.supportPageCategoriesStateService.setCategoryForRemove(this.selectedCategory);
+    this.cd.detectChanges();
   }
 }

@@ -1,8 +1,6 @@
 <div
     class="category-actions"
     ngbDropdown
-    #editCustomer="ngbDropdown"
-    (openChange)="onToggleDropDown($event)"
     container="body"
 >
     <app-dynamic-tooltip
@@ -32,7 +30,7 @@
         <div
             class="add-sub-category-item"
             ngbDropdownToggle
-            (click)="addArticle(category)"
+            (click)="addArticle()"
             *ngIf="!category.document"
         >
             <div class="icon__add-article qt-sz-20 pointer qt-mr-10"></div>

@@ -12,7 +12,6 @@ import { SupportPageCategoriesStateService } from '../../state/support-page-cate
 })
 export class SupportPageHelpCenterComponent implements OnInit {
   @Input() categories: Array<SupportPageCategory> = [];
-
   constructor(public activateRoute: ActivatedRoute,
     public companiesStateService: CompaniesStateService,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,
@@ -25,7 +24,6 @@ export class SupportPageHelpCenterComponent implements OnInit {
     if (data.document) {
       this.supportPageCategoriesStateService.setMode("PREVIEW");
       this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, data.id]);
-
     }
   }
   public trackById(index, item) {

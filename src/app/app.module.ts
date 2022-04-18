@@ -1037,7 +1037,8 @@ declare var $: any;
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
-      timeOut: 5000
+      timeOut: 5000,
+      onActivateTick: true
     }),
     ImageCropperModule,
     NvD3Module,

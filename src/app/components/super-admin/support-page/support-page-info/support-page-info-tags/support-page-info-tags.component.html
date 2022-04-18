@@ -1,9 +1,13 @@
 <div
     class="profile-cmp-board tags-area d-flex"
     ngbDropdown
+    #dp="ngbDropdown"
     (openChange)="onCloseTags($event)"
 >
-    <div class="qt-page-list__search">
+    <div
+        class="qt-page-list__search"
+        ngbDropdownAnchor
+    >
         <input
             type="text"
             autocomplete="off"
@@ -11,7 +15,7 @@
             [(ngModel)]="newTag"
             placeholder="Add/filter tags"
             (input)="onSearch($event)"
-            ngbDropdownToggle
+            (click)="opeDropDown()"
             [disabled]="disabled"
         >
     </div>

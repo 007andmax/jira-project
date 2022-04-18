@@ -1,18 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
-import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { SupportPageCategoriesService } from '../services/support-page-categories/support-page-categories.service';
 import { SupportPageAddCategoryComponent } from '../shared/support-page-add-category/support-page-add-category.component';
-import { SupportPageAddSubCategoryComponent } from '../shared/support-page-add-sub-category/support-page-add-sub-category.component';
-import { SupportPageEditCategoryComponent } from '../shared/support-page-edit-category/support-page-edit-category.component';
-import { SupportPageCategoriesRealTimeService } from '../state/support-page-categories/support-page-categories-real-time.service';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategory } from './class/support-page-category';
 
@@ -33,8 +27,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     private confirmStateService: ConfirmStateService,
     public companiesStateService: CompaniesStateService,
     private router: Router,
-    private toastrService: ToastrService,
-    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -100,10 +92,10 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
   add() {
     const modalRef = this.modalService.open(SupportPageAddCategoryComponent, { windowClass: 'xs-modal user-modal' });
+    this.cd.detectChanges();
   }
   onRemoveCategory(id) {
     this.supportPageCategoriesService.removeCategory(id).subscribe(data => {
-
 
     })
   }
@@ -113,9 +105,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       this.cd.markForCheck();
     })
   }
-  /* public goToCategory(id) {
-     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, id]);
-   }*/
+
   gotoHelpCenter() {
     // this.supportPageCategoriesStateService.showHelpCenter();
     this.isShowHelpCenter = true;
