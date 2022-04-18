@@ -2,10 +2,7 @@
     class="breadcrumbs"
     *ngIf="selectedCategory"
 >
-    <div
-        class="breadcrumbs-location qt-fs-0 pointer"
-        (click)="back()"
-    >
+    <div class="breadcrumbs-location qt-fs-0 pointer">
         <span [textContent]="category"></span>
         <div class="breadcrumb-separator">/</div>
     </div>

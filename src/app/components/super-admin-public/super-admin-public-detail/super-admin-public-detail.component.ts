@@ -114,4 +114,7 @@ export class SuperAdminPublicDetailComponent implements OnInit {
       this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`, data.id]);
     }
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

@@ -29,7 +29,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     private router: Router,
     public cd: ChangeDetectorRef,) { }
 
-
   ngOnInit() {
     this.supportPageCategoriesStateService.onPreviewContent.subscribe(data => {
       this.selectedCategory = data;
@@ -72,7 +71,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
         if (this.confirmStateService.getConfirmAction() === REMOVED_SUPPORT_CATEGORY) {
           this.onRemoveCategory(this.supportPageCategoriesStateService.getCategoryForRemove().id);
         }
-
       }
     })
     this.sub.add(getConfirm);
@@ -83,7 +81,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
   editArticle(category) {
     if (category.document) {
-      //this.supportPageCategoriesStateService.addArticle(category);
       this.selectedCategory = category;
       if (this.isShowHelpCenter) this.supportPageCategoriesStateService.setMode("EDIT");
       this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.selectedCategory.id]);
@@ -107,7 +104,6 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
 
   gotoHelpCenter() {
-    // this.supportPageCategoriesStateService.showHelpCenter();
     this.isShowHelpCenter = true;
     this.selectedCategory = null;
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`]);

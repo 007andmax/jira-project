@@ -126,7 +126,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
     this.cd.detectChanges();
   }
   getSelectedTag(id) {
-    return (this.reqTags.length > 0) ? this.reqTags.find(item => item.id === id) : '';
+    return (this.reqTags.length > 0) ? this.reqTags.find(item => item.id === id).word : '';
   }
   addTag() {
     if (this.newTag.length > 0) {

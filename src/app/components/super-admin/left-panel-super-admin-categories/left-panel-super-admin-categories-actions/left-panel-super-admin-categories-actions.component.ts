@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVED_SUPPORT_CATEGORY } from 'src/app/const/confirm';
-import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
 import { SupportPageAddSubCategoryComponent } from '../../shared/support-page-add-sub-category/support-page-add-sub-category.component';
 import { SupportPageEditCategoryComponent } from '../../shared/support-page-edit-category/support-page-edit-category.component';
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
@@ -44,7 +42,6 @@ export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
     this.cd.detectChanges();
   }
   addArticle() {
-    // this.supportPageCategoriesStateService.addArticle(category);
     this.supportPageCategoriesStateService.setMode("EDIT");
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/support-page`, this.category.id]);
     this.cd.detectChanges();

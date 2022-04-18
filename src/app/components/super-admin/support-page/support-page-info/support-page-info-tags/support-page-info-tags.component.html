@@ -125,7 +125,7 @@
             class="tag"
             *ngFor="let tag of selectedTag | sortTags : reqTags"
         >
-            {{getSelectedTag(tag).word}}
+            {{getSelectedTag(tag)}}
             <a
                 href="javascript:;"
                 (click)="toggleItem(getSelectedTag(tag))"

@@ -3,26 +3,6 @@
         [isShowHelpCenter]="false"
         (onSelectCategory)="selectCategory($event)"
     ></super-admin-public-header>
-    <!-- <div class="topic-detail-page__header">
-        <a
-            href="javascript:;"
-            class="qt-logo pointer"
-            alt="Quicktech logo"
-            (click)="gotoHelpCenter()"
-        >
-            <span class="qt-logo__quicktech icon__quicktech-logo"></span>
-            <span class="qt-logo__beta">Beta</span>
-        </a>
-        <div class="qt-df qt-jc-sb qt-ai-c qt-f-1">
-            <div class="qt-page-list__search">
-                <input
-                    type="text"
-                    placeholder="Search Help Topics"
-                >
-            </div>
-            <div class="icon__help-center qt-bg-contain qt-sz-24 pointer qt-ml-16 qt-mr-16"></div>
-        </div>
-    </div> -->
     <div class="topic-detail-page__body">
         <div class="topic-detail-page__body-left-panel">
             <div class="container-categories">
@@ -44,12 +24,6 @@
                 >
                     <div [attr.id]="category.id">
                         <div class="category-item category-item-category-body">
-
-
-
-
-
-
                             <div
                                 class="category-item-category__name"
                                 [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
@@ -66,12 +40,6 @@
                                     (click)="showPreview(category)"
                                 ></span>
                             </div>
-
-
-
-
-
-
                         </div>
                         <div
                             class="category-item-sub-category qt-ml-20"
@@ -105,12 +73,6 @@
                                                 (click)="showPreview(subcategory)"
                                             ></span>
                                         </div>
-
-
-
-
-
-
                                     </div>
                                     <div
                                         class="category-item-sub-sub-category"
@@ -145,12 +107,6 @@
                                                         ></span>
                                                     </div>
                                                 </div>
-
-
-
-
-
-
                                                 <div
                                                     class="category-item-sub-sub-sub-category"
                                                     *ngIf="subsubcategory.toggleSubCategory"
@@ -179,12 +135,6 @@
                                                                         ></span>
                                                                     </div>
                                                                 </div>
-
-
-
-
-
-
                                                             </div>
                                                         </div>
                                                     </ng-template>
@@ -197,59 +147,6 @@
                         </div>
                     </div>
                 </ng-template>
-                <!-- <div class="category-item category-item-category-body">
-                    <div class="category-item-category__name">
-                        <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
-                        <span>Finance</span>
-                    </div>
-                </div>
-                <div class="category-item-sub-category qt-ml-20">
-                    <div class="category-item-sub-category-body">
-                        <div class="category-item-category">
-                            <div class="category-item-category__name --active">
-                                <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
-                                <span>Invoices</span>
-                            </div>
-                        </div>
-                        <div class="category-item-sub-sub-category">
-                            <div class="category-item-sub-sub-category-body">
-                                <div class="category-item-category">
-                                    <div class="category-item-category__name">
-                                        <span>Organization Setttings</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="category-item-sub-sub-category">
-                            <div class="category-item-sub-sub-category-body">
-                                <div class="category-item-category">
-                                    <div class="category-item-category__name">
-                                        <span>Setting Custom Invoice</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="category-item-sub-sub-category">
-                            <div class="category-item-sub-sub-category-body">
-                                <div class="category-item-category">
-                                    <div class="category-item-category__name">
-                                        <span>Creating an Invoice</span>
-                                        <div class="icon__down-arrow qt-mr-8 qt-sz-16 qt-bg-contain pointer toggle-category"></div>
-                                    </div>
-                                </div>
-                                <div class="category-item-sub-sub-category">
-                                    <div class="category-item-sub-sub-category-body">
-                                        <div class="category-item-category">
-                                            <div class="category-item-category__name">
-                                                <span>More...</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div
@@ -258,12 +155,6 @@
         >
             <div id="content"></div>
             <div class="profile-cmp-board tags-area d-flex">
-
-
-
-
-
-
                 <div class="tags-tab d-flex">
                     <span
                         class="tag"

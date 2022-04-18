@@ -5,10 +5,6 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
-import { HelpCenterCategory } from './class/help-center-category';
-import { HelpCenterSubCategory } from './class/help-center-sub-category';
-import { SupportPageBodyComponent } from './support-page-body/support-page-body.component';
-import { SupportPageHeaderComponent } from './support-page-header/support-page-header.component';
 var $ = require("jquery");
 @Component({
   selector: 'support-page',

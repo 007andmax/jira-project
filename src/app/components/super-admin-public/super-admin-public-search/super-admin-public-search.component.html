@@ -34,7 +34,7 @@
             [infiniteScrollThrottle]="50"
             [infiniteScrollDisabled]="infiniteScrollDisabled"
             [fromRoot]="true"
-            (scrolled)="onScroll()"
+            (scrolled)="onScroll(getParseSearchName())"
         >
             <ng-template
                 ngFor

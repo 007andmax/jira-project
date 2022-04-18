@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbDropdown, NgbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../super-admin/services/support-page-categories/support-page-categories.service';
 import { SuperAdminPublicSearchListService } from './services/super-admin-public-search-list.service';
@@ -36,6 +36,9 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     this.reqCategories = [];
     this.elRef.nativeElement.querySelector("#dropdownServices").value = "";
     this.onHideDropDown();
+  }
+  getParseSearchName() {
+    return JSON.parse(JSON.stringify(this.searchName));
   }
   onSearch(event) {
     this.searchName = event.target.value;
@@ -91,5 +94,8 @@ export class SuperAdminPublicSearchComponent implements OnInit {
     this.superAdminPublicSearchListService.setBlockList(false);
     this.categories = [];
     this.reqCategories = [];
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

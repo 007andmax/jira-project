@@ -34,8 +34,6 @@ export class SupportPageEditCategoryComponent implements OnInit {
     this.activeModal.close();
   }
 
-
-
   editCategory() {
     if (!this.validate.isValidate(this.name)) return;
     this.addBtn.setDisabled(true);
@@ -50,6 +48,4 @@ export class SupportPageEditCategoryComponent implements OnInit {
       this.addBtn.setDisabled(false);
     })
   };
-
-
 }

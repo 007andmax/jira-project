@@ -24,7 +24,6 @@ export class LeftPanelSuperAdminComponent implements OnInit {
     if (!this.usersStateService.getCurrentUser()) return '';
     return `${this.usersStateService.getCurrentUser().firstName} ${this.usersStateService.getCurrentUser().lastName
       }`;
-
   }
   public logOut() {
     window.location.href = '/logout';

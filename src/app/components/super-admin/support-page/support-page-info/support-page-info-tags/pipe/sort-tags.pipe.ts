@@ -10,12 +10,12 @@ export class SortTagsPipe implements PipeTransform {
     if (!value) return value;
     let new_args = value;
     let out_args = new_args.sort((a, b) => {
-      if (this.getSelectedTag(a, reqTags).word && this.getSelectedTag(b, reqTags).word) {
-        return ((this.getSelectedTag(a, reqTags).word.toLowerCase() > this.getSelectedTag(b, reqTags).word.toLowerCase()) ?
-          1 : ((this.getSelectedTag(b, reqTags).word.toLowerCase() > this.getSelectedTag(a, reqTags).word.toLowerCase()) ? -1 : 0));
-      } else if (this.getSelectedTag(a, reqTags).word) {
+      if (this.getSelectedTag(a, reqTags) && this.getSelectedTag(b, reqTags)) {
+        return ((this.getSelectedTag(a, reqTags).toLowerCase() > this.getSelectedTag(b, reqTags).toLowerCase()) ?
+          1 : ((this.getSelectedTag(b, reqTags).toLowerCase() > this.getSelectedTag(a, reqTags).toLowerCase()) ? -1 : 0));
+      } else if (this.getSelectedTag(a, reqTags)) {
         return 1
-      } else if (this.getSelectedTag(b, reqTags).word) {
+      } else if (this.getSelectedTag(b, reqTags)) {
         return -1
       }
       return 0;
@@ -23,6 +23,6 @@ export class SortTagsPipe implements PipeTransform {
     return out_args;
   }
   getSelectedTag(id, reqTags) {
-    return (reqTags.length > 0) ? reqTags.find(item => item.id === id) : '';
+    return (reqTags.length > 0) ? reqTags.find(item => item.id === id).word : '';
   }
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SuperAdminPublicSearchListService {
-
   blockList: boolean = false;
   constructor() { }
   public setBlockList(data) {
