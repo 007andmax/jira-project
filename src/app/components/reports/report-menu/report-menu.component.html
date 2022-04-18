@@ -860,36 +860,80 @@
       </div>
     </div>
     <div *ngIf="report === 'tech-service'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByTechService()"
-                >
-                    Get
-          Report
-                </button>
-                <div class="form-group content">
-                    <app-multi-datepicker
-                        #dp
-                        [validate]="validate.getDates()"
-                        [errorMessage]="'Please select the dates'"
-                        (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-                </div>
-                <div class="grey-dropdown form-group content select-users-list">
-                    <app-tech-users-list-report
-                        [sort]="true"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="onSelectTechUser($event)"
-                    ></app-tech-users-list-report>
-                </div>
+<!--        <div-->
+<!--            class="run-report-content clearfix"-->
+<!--            [ngClass]="className"-->
+<!--        >-->
+<!--            <div class="new-reports-reverse">-->
+<!--                <button-->
+<!--                    class="btn-new btn-primary-white qt-fs-0"-->
+<!--                    (click)="getReportByTechService()"-->
+<!--                >-->
+<!--                    Get-->
+<!--          Report-->
+<!--                </button>-->
+<!--                <div class="form-group content">-->
+<!--                    <app-multi-datepicker-->
+<!--                        #dp-->
+<!--                        [validate]="validate.getDates()"-->
+<!--                        [errorMessage]="'Please select the dates'"-->
+<!--                        (selectedDate)="filterByDate($event)"-->
+<!--                    ></app-multi-datepicker>-->
+<!--                </div>-->
+<!--                <div class="grey-dropdown form-group content select-users-list">-->
+<!--                    <app-tech-users-list-report-->
+<!--                        [sort]="true"-->
+<!--                        [search]="true"-->
+<!--                        [change]="true"-->
+<!--                        (onSelectedItem)="onSelectTechUser($event)"-->
+<!--                    ></app-tech-users-list-report>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+          <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+            <div class="report-left-panel__btn pointer qt-mr-6">
+              <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
+            <div
+              class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+              [ngClass]="className"
+            >
+              <div class="qt-report__dropdown qt-mr-8 grey-dropdown form-group content select-users-list">
+                <app-tech-users-list-report
+                  [sort]="true"
+                  [search]="true"
+                  [change]="true"
+                  (onSelectedItem)="onSelectTechUser($event)"
+                ></app-tech-users-list-report>
+              </div>
+              <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                <app-multi-datepicker
+                  #dp
+                  [validate]="validate.getDates()"
+                  [errorMessage]="'Please select the dates'"
+                  (selectedDate)="filterByDate($event)"
+                ></app-multi-datepicker>
+              </div>
+              <button
+                class="btn-new btn-primary-white qt-fs-0"
+                (click)="getReportByTechService()"
+              >
+                Get
+                Report
+              </button>
+            </div>
+          </div>
+          <app-report-additional-actions
+            [report]="'tech-service'"
+            [accountType]="'TECH'"
+            [template]="'CUSTOMER_REPORT'"
+            [fileName]="'tech-service-report'"
+          ></app-report-additional-actions>
         </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
     </div>
     <div *ngIf="report === 'income-accounts'">
 <!--        <div-->
@@ -996,62 +1040,125 @@
 
     </div>
     <div *ngIf="report === 'byTaxes'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByTaxes()"
-                >
-                    Get
-          Report
-                </button>
-                <div
-                    class="grey-dropdown form-group content dropdown-button"
-                    ngbDropdown
-                >
-                    <button
-                        class="types-btn"
-                        id="dropdownBasic"
-                        ngbDropdownToggle
-                        [textContent]="taxes.type"
-                    >
-                    </button>
-                    <i class="icn-sm report-caret-icon"></i>
-                    <div
-                        ngbDropdownMenu
-                        aria-labelledby="dropdownBasic"
-                    >
-                        <ng-template
-                            ngFor
-                            let-item
-                            [ngForOf]="listTypes"
-                        >
-                            <button
-                                ngbDropdownItem
-                                [textContent]="item"
-                                (click)="onSelectTypeTaxes(item)"
-                            ></button>
-                        </ng-template>
-                    </div>
-                </div>
-                <!-- <div class="form-group content">
-          <div class="input-field">
-            <app-select [placeholder]="'Select filter'" [list]="listTypes" (onChange)="onSelectTypeTaxes($event)"></app-select>
-          </div>
-        </div> -->
-                <div class="form-group content">
-                    <app-multi-datepicker
-                        #dp
-                        [validate]="validate.getDates()"
-                        [errorMessage]="'Please select the dates'"
-                        (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-                </div>
+<!--        <div-->
+<!--            class="run-report-content clearfix"-->
+<!--            [ngClass]="className"-->
+<!--        >-->
+<!--            <div class="new-reports-reverse">-->
+<!--                <button-->
+<!--                    class="btn-new btn-primary-white qt-fs-0"-->
+<!--                    (click)="getReportByTaxes()"-->
+<!--                >-->
+<!--                    Get-->
+<!--          Report-->
+<!--                </button>-->
+<!--                <div-->
+<!--                    class="grey-dropdown form-group content dropdown-button"-->
+<!--                    ngbDropdown-->
+<!--                >-->
+<!--                    <button-->
+<!--                        class="types-btn"-->
+<!--                        id="dropdownBasic"-->
+<!--                        ngbDropdownToggle-->
+<!--                        [textContent]="taxes.type"-->
+<!--                    >-->
+<!--                    </button>-->
+<!--                    <i class="icn-sm report-caret-icon"></i>-->
+<!--                    <div-->
+<!--                        ngbDropdownMenu-->
+<!--                        aria-labelledby="dropdownBasic"-->
+<!--                    >-->
+<!--                        <ng-template-->
+<!--                            ngFor-->
+<!--                            let-item-->
+<!--                            [ngForOf]="listTypes"-->
+<!--                        >-->
+<!--                            <button-->
+<!--                                ngbDropdownItem-->
+<!--                                [textContent]="item"-->
+<!--                                (click)="onSelectTypeTaxes(item)"-->
+<!--                            ></button>-->
+<!--                        </ng-template>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; <div class="form-group content">-->
+<!--          <div class="input-field">-->
+<!--            <app-select [placeholder]="'Select filter'" [list]="listTypes" (onChange)="onSelectTypeTaxes($event)"></app-select>-->
+<!--          </div>-->
+<!--        </div> &ndash;&gt;-->
+<!--                <div class="form-group content">-->
+<!--                    <app-multi-datepicker-->
+<!--                        #dp-->
+<!--                        [validate]="validate.getDates()"-->
+<!--                        [errorMessage]="'Please select the dates'"-->
+<!--                        (selectedDate)="filterByDate($event)"-->
+<!--                    ></app-multi-datepicker>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
+          <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+            <div class="report-left-panel__btn pointer qt-mr-6">
+              <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
+            <div
+              class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+              [ngClass]="className"
+            >
+              <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                <app-multi-datepicker
+                  #dp
+                  [validate]="validate.getDates()"
+                  [errorMessage]="'Please select the dates'"
+                  (selectedDate)="filterByDate($event)"
+                ></app-multi-datepicker>
+              </div>
+              <div
+                class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown-button dropdown"
+                ngbDropdown
+              >
+                <button
+                  class="types-btn"
+                  id="dropdownBasic"
+                  ngbDropdownToggle
+                  [textContent]="taxes.type"
+                >
+                </button>
+                <i class="icn-sm report-caret-icon"></i>
+                <div
+                  ngbDropdownMenu
+                  aria-labelledby="dropdownBasic"
+                >
+                  <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="listTypes"
+                  >
+                    <button
+                      ngbDropdownItem
+                      [textContent]="item"
+                      (click)="onSelectTypeTaxes(item)"
+                    ></button>
+                  </ng-template>
+                </div>
+              </div>
+              <button
+                class="btn-new btn-primary-white qt-fs-0"
+                (click)="getReportByTaxes()"
+              >
+                Get
+                Report
+              </button>
+            </div>
+          </div>
+          <app-report-additional-actions
+            [fileName]="'taxes_report'"
+            [selectedClient]="selectedClient"
+          ></app-report-additional-actions>
         </div>
+        <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+      </div>
     </div>
     <div *ngIf="report === 'accounts-receivable'">
 <!--        <div-->
