@@ -104,7 +104,6 @@ import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorit
 import { LeftPanelTicketsComponent } from './components/left-panel/left-panel-tickets/left-panel-tickets.component';
 import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
 import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
-import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
 import { TaxesReportComponent } from './components/reports/reports/taxes-report/taxes-report.component';
 import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
 import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
@@ -642,7 +641,6 @@ declare var $: any;
     LeftPanelTicketsComponent,
     GlNumberComponent,
     AccountsReceivableComponent,
-    ReportFooterComponent,
     TaxesReportComponent,
     ProductSalesReportComponent,
     CustomerSalesReportComponent,

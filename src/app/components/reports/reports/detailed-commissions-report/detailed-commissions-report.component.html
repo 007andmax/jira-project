@@ -43,7 +43,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div
                     class="customer-ticket__report--details commission-customer"
                     *ngIf="!detailedCommissionsReport.detailsByProducts"
@@ -71,7 +70,6 @@
                                 let-i="index"
                                 [ngForTrackBy]="trackByIndex"
                             >
-
                                 <div class="row">
                                     <div
                                         class="col-md-4"
@@ -114,114 +112,120 @@
                                         {{ company.commissionSum | toFixed : 2  }}
                                     </b>
                                 </div>
-
                             </div>
                         </div>
                     </ng-template>
                 </div>
-
                 <div
                     class="customer-ticket__report--details commission-product"
                     *ngIf="detailedCommissionsReport.detailsByProducts"
                 >
-                  <table class="details-header">
-                    <tr style="vertical-align: baseline;">
-                      <th style="width: 18.1%;">
-                        <div >Product</div>
-                      </th>
-                      <th style='width: 16.66666667%;'>
-                        <div >Product Groups</div>
-                      </th>
-                      <th style='width: 14.66666667%;'>
-                        <div>Client</div>
-                      </th>
-                      <th style='width: 10.4%;'>
-                        <div>Product<div></div>Price</div>
-                      </th>
-                      <th style='width: 9.4%;'>
-                        <div>Total<div></div>Sales</div>
-                      </th>
-                      <th style='width: 12.4%;'>
-                        <div>Commission<div></div>Rate</div>
-                      </th>
-                      <th style='width: 11.4%;'>
-                        <div>Commission</div>
-                      </th>
-                    </tr>
-
-                  </table>
-
-
-
-                  <table class="table__details-content">
-                    <ng-template
-                      ngFor
-                      let-line
-                      [ngForOf]="detailedCommissionsReport.lines"
-                      let-i="index"
-                      [ngForTrackBy]="trackByIndex"
-                    >
-
-                      <tr>
-                        <td style="width: 18.1%;">
-                          <div>{{ line.expenseName }}</div>
-                        </td>
-                        <td style='width: 16.66666667%;'>
-                          <div>{{ line.itemGroup }}</div>
-                        </td>
-                        <td style='width: 14.66666667%;'>
-                          <div>{{ line.companyName }}</div>
-                        </td>
-                        <td style='width: 10.4%;'>
-                          <div>
-                            <span ng-if="line.productPrice !== null">{{ (line.productPrice || 0) | toFixed : 2 }}</span>
-                          </div>
-                        </td>
-                        <td style='width: 9.4%;'>
-                          <div>{{ line.totalSum | toFixed : 2 }}</div>
-                        </td>
-                        <td style='width: 12.4%;'>
-                          <div>{{ line.commissionRate || 0 }}%</div>
-                        </td>
-                        <td style='width: 11.4%;'>
-                          <div>{{ line.commissionSum | toFixed : 2 }}</div>
-                        </td>
-                      </tr>
-                    </ng-template>
-
-                  </table>
-
-
-
-
-
-                  <table class="details-content">
-                    <tr style="vertical-align: baseline;font-weight: bold">
-                      <th style="width: 18.1%;">
-                        <div >Total</div>
-                      </th>
-                      <th style='width: 16.66666667%;'>
-                      </th>
-                      <th style='width: 14.66666667%;'>
-                      </th>
-                      <th style='width: 10.4%;'>
-                        <div>{{ detailedCommissionsReport.priceSum | toFixed : 2  }}</div>
-                      </th>
-                      <th style='width: 9.4%;'>
-                        {{ detailedCommissionsReport.totalSum | toFixed : 2  }}
-                      </th>
-                      <th style='width: 12.4%;'>
-                        <div>Commission <div></div> Rate</div>
-                      </th>
-                      <th style='width: 11.4%;'>
-                        {{ (detailedCommissionsReport.totalCommissionSum ) | toFixed : 2  }}
-                      </th>
-                    </tr>
-
-                  </table>
-
+                    <table class="details-header">
+                        <tbody>
+                            <tr style="vertical-align: baseline;">
+                                <th style="width: 18.1%;">
+                                    <div>Product</div>
+                                </th>
+                                <th style='width: 16.66666667%;'>
+                                    <div>Product Groups</div>
+                                </th>
+                                <th style='width: 14.66666667%;'>
+                                    <div>Client</div>
+                                </th>
+                                <th style='width: 10.4%;'>
+                                    <div>
+                                        Product
+                                        <div></div>
+                                        Price
+                                    </div>
+                                </th>
+                                <th style='width: 9.4%;'>
+                                    <div>
+                                        Total
+                                        <div></div>
+                                        Sales
+                                    </div>
+                                </th>
+                                <th style='width: 12.4%;'>
+                                    <div>
+                                        Commission
+                                        <div></div>
+                                        Rate
+                                    </div>
+                                </th>
+                                <th style='width: 11.4%;'>
+                                    <div>Commission</div>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table__details-content">
+                        <ng-template
+                            ngFor
+                            let-line
+                            [ngForOf]="detailedCommissionsReport.lines"
+                            let-i="index"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr>
+                                <td style="width: 18.1%;">
+                                    <div>{{ line.expenseName }}</div>
+                                </td>
+                                <td style='width: 16.66666667%;'>
+                                    <div>{{ line.itemGroup }}</div>
+                                </td>
+                                <td style='width: 14.66666667%;'>
+                                    <div>{{ line.companyName }}</div>
+                                </td>
+                                <td style='width: 10.4%;'>
+                                    <div>
+                                        <span ng-if="line.productPrice !== null">
+                                            {{ (line.productPrice || 0) | toFixed : 2 }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td style='width: 9.4%;'>
+                                    <div>{{ line.totalSum | toFixed : 2 }}</div>
+                                </td>
+                                <td style='width: 12.4%;'>
+                                    <div>{{ line.commissionRate || 0 }}%</div>
+                                </td>
+                                <td style='width: 11.4%;'>
+                                    <div>{{ line.commissionSum | toFixed : 2 }}</div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </table>
+                    <table class="details-content">
+                        <tbody>
+                            <tr style="vertical-align: baseline;font-weight: bold">
+                                <th style="width: 18.1%;">
+                                    <div>Total</div>
+                                </th>
+                                <th style='width: 16.66666667%;'></th>
+                                <th style='width: 14.66666667%;'></th>
+                                <th style='width: 10.4%;'>
+                                    <div>
+                                        {{ detailedCommissionsReport.priceSum | toFixed : 2  }}
+                                    </div>
+                                </th>
+                                <th style='width: 9.4%;'>
+                                    {{ detailedCommissionsReport.totalSum | toFixed : 2  }}
+                                </th>
+                                <th style='width: 12.4%;'>
+                                    <div>
+                                        Commission
+                                        <div></div>
+                                        Rate
+                                    </div>
+                                </th>
+                                <th style='width: 11.4%;'>
+                                    {{ (detailedCommissionsReport.totalCommissionSum ) | toFixed : 2  }}
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <app-report-footer *ngIf="onInit"></app-report-footer>
             </div>
         </div>
     </div>

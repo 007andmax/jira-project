@@ -33,8 +33,6 @@
                 <div class="report-header">
                     <h5 class="qt-fw-600 qt-color-white">Tech Service report</h5>
                     <div class="company-info">
-
-
                         <p>
                             <span>
                                 {{getDateForHeader(techService.startDate)}}
@@ -54,7 +52,8 @@
                     style="padding: 0px 0px 100px 0px !important;"
                 >
                     <div class="header-body">
-                        <div class="customer-ticket__report--summary-title qt-mb-12"
+                        <div
+                            class="customer-ticket__report--summary-title qt-mb-12"
                             *ngIf="techUser"
                         >
                             {{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}
@@ -98,8 +97,6 @@
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >
-
-
                         <div
                             class="details-content clearfix"
                             style="margin: 0 20px;padding: 10px 0px !important;"
@@ -131,8 +128,6 @@
                                 {{getDuration(item.quantity)}}
                             </div>
                         </div>
-
-
                     </ng-template>
                     <div class="details-content clearfix total-hours">
                         <div
@@ -145,9 +140,5 @@
                 </div>
             </div>
         </div>
-
-
-
-        <app-report-footer *ngIf="onInit"></app-report-footer>
     </div>
 </div>

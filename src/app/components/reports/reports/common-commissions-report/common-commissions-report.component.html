@@ -11,7 +11,6 @@
     [template]="'CUSTOMER_REPORT'"
     [fileName]="'common-commissions-report'"
 ></app-report-additional-actions>
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
@@ -46,7 +45,12 @@
                 <div class="customer-ticket__report--summary">
                     <div class="commissions__header clearfix">
                         <div class="commissions__header--item canvas-chart">
-                            <div class="customer-ticket__report--summary-title" style="padding: 0;">Sales by customer</div>
+                            <div
+                                class="customer-ticket__report--summary-title"
+                                style="padding: 0;"
+                            >
+                                Sales by customer
+                            </div>
                             <nvd3
                                 [options]="chartOptions"
                                 [data]="byCustomerChartData"
@@ -67,7 +71,12 @@
                             </ng-template>
                         </div>
                         <div class="commissions__header--item canvas-chart no-value">
-                            <div class="customer-ticket__report--summary-title" style="padding: 0;">Top Sales Category</div>
+                            <div
+                                class="customer-ticket__report--summary-title"
+                                style="padding: 0;"
+                            >
+                                Top Sales Category
+                            </div>
                             <nvd3
                                 [options]="chartOptionsToggler"
                                 [data]="byCategoriesChartData"
@@ -135,7 +144,6 @@
                         </div>
                     </div>
                 </div>
-                <app-report-footer *ngIf="onInit"></app-report-footer>
             </div>
         </div>
     </div>

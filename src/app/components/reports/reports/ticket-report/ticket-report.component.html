@@ -54,8 +54,6 @@
                                 [options]="chartOptions"
                                 [data]="chartData"
                             ></nvd3>
-
-
                         </div>
                         <div class="customer-ticket__header--item">
                             <ng-template
@@ -75,9 +73,6 @@
                                     </span>
                                 </p>
                             </ng-template>
-
-
-
                         </div>
                         <div class="customer-ticket__header--item">
                             <p *ngIf="!ticketsReport.showTotalTicketAmount">
@@ -102,8 +97,6 @@
                             </p>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="customer-ticket__report--details">
                     <div class="customer-ticket__report--summary-titlqt-mb-12">Ticket Details</div>
@@ -134,8 +127,6 @@
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >
-
-
                         <div class="details-content clearfix">
                             <div
                                 class="col-md-8 ellipsis"
@@ -170,8 +161,6 @@
                             >
                                 <p class="network-scan-status status-in-progress">In Progress</p>
                             </div>
-
-
                             <div
                                 *ngIf="ticket.updates && showServices"
                                 class="services"
@@ -196,7 +185,9 @@
                                                 <div class="col-md-3 ellipsis">{{ expence.name }}</div>
 
 
+
                                                 <div class="col-md-7">{{ expence.description }}</div>
+
 
 
                                                 <div class="col-md-2">
@@ -207,8 +198,6 @@
                                     </div>
                                 </ng-template>
                             </div>
-
-
                             <div
                                 *ngIf="ticket.updates && showProducts"
                                 class="products"
@@ -271,8 +260,6 @@
                                     </div>
                                 </ng-template>
                             </div>
-
-
                             <div
                                 class="col-md-3 pdf-w"
                                 style="margin-top: 20px;"
@@ -303,9 +290,5 @@
                 </div>
             </div>
         </div>
-
-
-
-        <app-report-footer *ngIf="onInit"></app-report-footer>
     </div>
 </div>

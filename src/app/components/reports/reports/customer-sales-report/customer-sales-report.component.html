@@ -1,78 +1,108 @@
-<!--<div>-->
-<!--  <app-report-menu [report]="'byCustomers'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>-->
-<!-- </div>-->
-<!-- <app-report-additional-actions [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'"  [fileName]="'sales_report'" [selectedClient]="selectedClient"></app-report-additional-actions>-->
-<!-- <div class="loading" *ngIf="loadingInProgress"></div>-->
-<!-- <div class="product-list___ticket" id="product-list-ticket-data" >-->
-
-<!--  <div  class="product-list-ticket acc-col" [ngStyle]="{'width': customerSalesReport.type === 'DETAILED' ? '1180px' :  null}"   style="height: 100%;" *ngIf="!loadingInProgress">-->
-<!--    <div class="report-header" [ngStyle]="{'width': (customerSalesReport.type === 'DETAILED') ? '1055px' : '' }">-->
-<!--      <h1>Customer Sales Report</h1>-->
-<!--      <div class="company-info">-->
-<!--        <h3>{{customerSalesReport.clientCompanyName || 'All companies'}}</h3>-->
-<!--        <p><span>{{customerSalesReport.startDate}}</span> - <span>{{customerSalesReport.endDate}}</span></p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="header-product-list-ticket" *ngIf="customerSalesReport.lines.length > 0">-->
-<!--      &lt;!&ndash;HEADER&ndash;&gt;-->
-<!--      <h5 class="qt-fw-600 qt-mb-6 qt-mt-20">{{ customerSalesReport.techCompanyName }}</h5>-->
-<!--        <p *ngIf="customerSalesReport && customerSalesReport.type === 'DETAILED'">-->
-<!--          Detailed sales for <span>{{ customerSalesReport.clientCompanyName }}</span>-->
-<!--        </p>-->
-<!--        <p><span>{{ parseDate(customerSalesReport.startDate)   }}</span> to <span>{{ parseDate(customerSalesReport.endDate)   }}</span>-->
-<!--        </p>-->
-<!--    </div>-->
-
-<!--     <div>-->
-<!--       <app-overview-report class="customer-sales-report__table" [headers]="headers" [list]="list"></app-overview-report>-->
-<!--       <div class="product-report-detail-customer clearfix" *ngIf="customerSalesReport.type === 'DETAILED'">-->
-<!--        <div class="col-md-3 pull-right">-->
-<!--          <strong>Total Sales: <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span></strong>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--     </div>-->
-<!--    <app-report-footer  [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'" ></app-report-footer>-->
-<!--   </div>-->
-<!-- </div>-->
-
+<!-- <div> -->
+<!-- <app-report-menu [report]="'byCustomers'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu> -->
+<!-- </div> -->
+<!-- <app-report-additional-actions [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'"  [fileName]="'sales_report'" [selectedClient]="selectedClient"></app-report-additional-actions> -->
+<!-- <div class="loading" *ngIf="loadingInProgress"></div> -->
+<!-- <div class="product-list___ticket" id="product-list-ticket-data" > -->
+<!-- <div  class="product-list-ticket acc-col" [ngStyle]="{'width': customerSalesReport.type === 'DETAILED' ? '1180px' :  null}"   style="height: 100%;" *ngIf="!loadingInProgress"> -->
+<!-- <div class="report-header" [ngStyle]="{'width': (customerSalesReport.type === 'DETAILED') ? '1055px' : '' }"> -->
+<!-- <h1>Customer Sales Report</h1> -->
+<!-- <div class="company-info"> -->
+<!-- <h3>{{customerSalesReport.clientCompanyName || 'All companies'}}</h3> -->
+<!-- <p><span>{{customerSalesReport.startDate}}</span> - <span>{{customerSalesReport.endDate}}</span></p> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <div class="header-product-list-ticket" *ngIf="customerSalesReport.lines.length > 0"> -->
+<!-- &lt;!&ndash;HEADER&ndash;&gt; -->
+<!-- <h5 class="qt-fw-600 qt-mb-6 qt-mt-20">{{ customerSalesReport.techCompanyName }}</h5> -->
+<!-- <p *ngIf="customerSalesReport && customerSalesReport.type === 'DETAILED'"> -->
+<!-- Detailed sales for <span>{{ customerSalesReport.clientCompanyName }}</span> -->
+<!-- </p> -->
+<!-- <p><span>{{ parseDate(customerSalesReport.startDate)   }}</span> to <span>{{ parseDate(customerSalesReport.endDate)   }}</span> -->
+<!-- </p> -->
+<!-- </div> -->
+<!-- <div> -->
+<!-- <app-overview-report class="customer-sales-report__table" [headers]="headers" [list]="list"></app-overview-report> -->
+<!-- <div class="product-report-detail-customer clearfix" *ngIf="customerSalesReport.type === 'DETAILED'"> -->
+<!-- <div class="col-md-3 pull-right"> -->
+<!-- <strong>Total Sales: <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span></strong> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 <div>
-  <app-report-menu [report]="'byCustomers'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+    <app-report-menu
+        [report]="'byCustomers'"
+        (onSelectedClient)="onSelectedClient($event)"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
 </div>
-<!--<app-report-additional-actions [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'"  [fileName]="'sales_report'" [selectedClient]="selectedClient"></app-report-additional-actions>-->
-<div class="loading" *ngIf="loadingInProgress"></div>
-<div class="product-list___ticket" id="product-list-ticket-data" >
-
-<!--  <div class="" [ngStyle]="{'width': customerSalesReport.type === 'DETAILED' ? '1180px' :  null}"   style="height: 100%;" *ngIf="!loadingInProgress">-->
-  <div *ngIf="!loadingInProgress">
-<!--    <div class="qt-report__body-header" [ngStyle]="{'width': (customerSalesReport.type === 'DETAILED') ? '1055px' : '' }">-->
-    <div class="qt-report__body-header">
-      <div class="body-m-sb qt-color-dark">{{customerSalesReport.clientCompanyName || 'All companies'}}</div>
-      <h6 class="qt-fw-600 qt-color-dark">Customer Sales Report</h6>
-      <div class="body-m qt-color-dark-light"><span>{{customerSalesReport.startDate}}</span> - <span>{{customerSalesReport.endDate}}</span></div>
-
-      <div *ngIf="customerSalesReport.lines.length > 0">
-        <!--HEADER-->
-        <div class="body-m-sb qt-color-dark">{{ customerSalesReport.techCompanyName }}</div>
-        <div class="body-m qt-color-dark-light" *ngIf="customerSalesReport && customerSalesReport.type === 'DETAILED'">
-          Detailed sales for <span>{{ customerSalesReport.clientCompanyName }}</span>
+<!-- <app-report-additional-actions [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'"  [fileName]="'sales_report'" [selectedClient]="selectedClient"></app-report-additional-actions> -->
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="product-list___ticket"
+    id="product-list-ticket-data"
+>
+    <!-- <div class="" [ngStyle]="{'width': customerSalesReport.type === 'DETAILED' ? '1180px' :  null}"   style="height: 100%;" *ngIf="!loadingInProgress"> -->
+    <div *ngIf="!loadingInProgress">
+        <!-- <div class="qt-report__body-header" [ngStyle]="{'width': (customerSalesReport.type === 'DETAILED') ? '1055px' : '' }"> -->
+        <div class="qt-report__body-header">
+            <div class="body-m-sb qt-color-dark">
+                {{customerSalesReport.clientCompanyName || 'All companies'}}
+            </div>
+            <h6 class="qt-fw-600 qt-color-dark">Customer Sales Report</h6>
+            <div class="body-m qt-color-dark-light">
+                <span>{{customerSalesReport.startDate}}</span>
+                -
+                <span>{{customerSalesReport.endDate}}</span>
+            </div>
+            <div *ngIf="customerSalesReport.lines.length > 0">
+                <!-- HEADER -->
+                <div class="body-m-sb qt-color-dark">
+                    {{ customerSalesReport.techCompanyName }}
+                </div>
+                <div
+                    class="body-m qt-color-dark-light"
+                    *ngIf="customerSalesReport && customerSalesReport.type === 'DETAILED'"
+                >
+                    Detailed sales for
+                    <span>
+                        {{ customerSalesReport.clientCompanyName }}
+                    </span>
+                </div>
+                <div class="body-m qt-color-dark-light">
+                    <span>
+                        {{ parseDate(customerSalesReport.startDate)   }}
+                    </span>
+                    to
+                    <span>
+                        {{ parseDate(customerSalesReport.endDate)   }}
+                    </span>
+                </div>
+            </div>
         </div>
-        <div class="body-m qt-color-dark-light">
-          <span>{{ parseDate(customerSalesReport.startDate)   }}</span> to <span>{{ parseDate(customerSalesReport.endDate)   }}</span>
+        <div>
+            <app-overview-report
+                class="customer-sales-report__table"
+                [headers]="headers"
+                [list]="list"
+            ></app-overview-report>
+            <div
+                class="product-report-detail-customer clearfix"
+                *ngIf="customerSalesReport.type === 'DETAILED'"
+            >
+                <div class="col-md-3 pull-right">
+                    <strong>
+                        Total Sales:
+                        <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span>
+                    </strong>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-    <div>
-      <app-overview-report class="customer-sales-report__table" [headers]="headers" [list]="list"></app-overview-report>
-      <div class="product-report-detail-customer clearfix" *ngIf="customerSalesReport.type === 'DETAILED'">
-        <div class="col-md-3 pull-right">
-          <strong>Total Sales: <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span></strong>
-        </div>
-      </div>
-    </div>
-    <app-report-footer  [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'" ></app-report-footer>
-  </div>
 </div>
-
-
-
