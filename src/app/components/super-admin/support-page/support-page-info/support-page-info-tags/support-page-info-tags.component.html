@@ -123,7 +123,7 @@
     <div class="tags-tab d-flex">
         <span
             class="tag"
-            *ngFor="let tag of selectedTag; let i = index;"
+            *ngFor="let tag of selectedTag | sortTags : reqTags"
         >
             {{getSelectedTag(tag).word}}
             <a

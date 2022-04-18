@@ -20,6 +20,7 @@ import { SupportPageCategory } from '../class/support-page-category';
 })
 export class LeftPanelSuperAdminCategoriesActionsComponent implements OnInit {
   @Input() category: SupportPageCategory;
+  @Input() disabledAddSub: boolean = false;
   @Output() onSelectCategory = new EventEmitter();
   constructor(private modalService: NgbModal,
     private supportPageCategoriesStateService: SupportPageCategoriesStateService,

@@ -535,6 +535,7 @@ import { SupportPageHelpCenterComponent } from './components/super-admin/support
 import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
 import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
 import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
+import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 
 
 declare var $: any;
@@ -1009,7 +1010,8 @@ declare var $: any;
     SupportPageHelpCenterComponent,
     SupportPageCategoryComponent,
     SuperAdminPublicCategoryComponent,
-    SuperAdminPublicHeaderComponent
+    SuperAdminPublicHeaderComponent,
+    SortTagsPipe
   ],
   imports: [
     BrowserModule,
