@@ -50,6 +50,7 @@
         ></app-dashboard-sales-analytics>
         <div class="qt-df qt-jc-sb qt-mb-16">
             <app-invoice-revenue
+                *ngIf="getPermissions('VIEW_ACCOUNTING')"
                 #invoiceRevenue
                 [accountingStartDate]="accountingStartDate"
             ></app-invoice-revenue>
