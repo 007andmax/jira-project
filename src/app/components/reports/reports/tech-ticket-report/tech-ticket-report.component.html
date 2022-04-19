@@ -1,75 +1,153 @@
+<!--<div>-->
+<!--    <app-report-menu-->
+<!--        [report]="'tech-ticket'"-->
+<!--        (onRequest)="onRequest($event)"-->
+<!--        (getReport)="getReport($event)"-->
+<!--    ></app-report-menu>-->
+<!--</div>-->
+<!--<app-report-additional-actions-->
+<!--    [report]="'tech-ticket'"-->
+<!--    [orientation]="'LANDSCAPE'"-->
+<!--    [fileName]="'tech-ticket-report'"-->
+<!--&gt;</app-report-additional-actions>-->
+<!--&lt;!&ndash;  &ndash;&gt;-->
+<!--<div-->
+<!--    class="loading"-->
+<!--    *ngIf="loadingInProgress"-->
+<!--&gt;</div>-->
+<!--<div-->
+<!--    class="product-list___ticket report-show-footer-header"-->
+<!--    id="product-list-ticket-data"-->
+<!--&gt;-->
+<!--    <div-->
+<!--        class="product-list-ticket product-list-ticket-tech"-->
+<!--        style="padding: 0px;"-->
+<!--        *ngIf="!loadingInProgress"-->
+<!--    >-->
+<!--        <div-->
+<!--            class="customer-ticket"-->
+<!--            *ngIf="onInit"-->
+<!--        >-->
+<!--            <div class="customer-ticket__report">-->
+<!--                <div class="report-header">-->
+<!--                    <h5 class="qt-fw-600 qt-color-white">Tech Ticket Report</h5>-->
+<!--                    <div-->
+<!--                        class="company-info"-->
+<!--                        *ngIf="techTicketReport.startDate !== '' && techTicketReport.endDate !== ''"-->
+<!--                    >-->
+<!--                        <p>-->
+<!--                            <span>-->
+<!--                                {{getDateForHeader(techTicketReport.startDate)}}-->
+<!--                            </span>-->
+<!--                            - -->
+<!--                            <span>-->
+<!--                                {{getDateForHeader(techTicketReport.endDate)}}-->
+<!--                            </span>-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div *ngIf="onInit">-->
+<!--                    <div class="header-product-list-ticket">-->
+<!--                        <div class="header-product-list-ticket__title">Created Tickets vs Closed</div>-->
+<!--                    </div>-->
+<!--                    <nvd3-->
+<!--                        [options]="chartOptionsToggler"-->
+<!--                        [data]="chartData"-->
+<!--                    ></nvd3>-->
+<!--                    <div class="header-product-list-ticket clearfix">-->
+<!--                        <div class="ticket-total">-->
+<!--                            Total New Tickets:-->
+<!--                            <span>-->
+<!--                                {{techTicketReport.totalCreated}} tickets-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                        <div class="ticket-total">-->
+<!--                            Completed Tickets:-->
+<!--                            <span>-->
+<!--                                {{techTicketReport.totalClosed}} tickets-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 <div>
-    <app-report-menu
-        [report]="'tech-ticket'"
-        (onRequest)="onRequest($event)"
-        (getReport)="getReport($event)"
-    ></app-report-menu>
-</div>
-<app-report-additional-actions
+  <app-report-menu
     [report]="'tech-ticket'"
-    [orientation]="'LANDSCAPE'"
-    [fileName]="'tech-ticket-report'"
-></app-report-additional-actions>
+    (onRequest)="onRequest($event)"
+    (getReport)="getReport($event)"
+  ></app-report-menu>
+</div>
+<!--<app-report-additional-actions-->
+<!--  [report]="'tech-ticket'"-->
+<!--  [orientation]="'LANDSCAPE'"-->
+<!--  [fileName]="'tech-ticket-report'"-->
+<!--&gt;</app-report-additional-actions>-->
 <!--  -->
 <div
-    class="loading"
-    *ngIf="loadingInProgress"
+  class="loading"
+  *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket report-show-footer-header"
-    id="product-list-ticket-data"
+  class="qt-report__body"
+  id="product-list-ticket-data"
 >
+  <div
+    class="qt-report__product-list"
+    *ngIf="!loadingInProgress"
+  >
     <div
-        class="product-list-ticket product-list-ticket-tech"
-        style="padding: 0px;"
-        *ngIf="!loadingInProgress"
+      class=""
+      *ngIf="onInit"
     >
+      <div class="qt-report__body-header">
+        <h6 class="qt-fw-600 qt-color-dark">Tech Ticket Report</h6>
         <div
-            class="customer-ticket"
-            *ngIf="onInit"
-        >
-            <div class="customer-ticket__report">
-                <div class="report-header">
-                    <h5 class="qt-fw-600 qt-color-white">Tech Ticket Report</h5>
-                    <div
-                        class="company-info"
-                        *ngIf="techTicketReport.startDate !== '' && techTicketReport.endDate !== ''"
-                    >
-                        <p>
-                            <span>
-                                {{getDateForHeader(techTicketReport.startDate)}}
-                            </span>
-                            -
-                            <span>
-                                {{getDateForHeader(techTicketReport.endDate)}}
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <div *ngIf="onInit">
-                    <div class="header-product-list-ticket">
-                        <div class="header-product-list-ticket__title">Created Tickets vs Closed</div>
-                    </div>
-                    <nvd3
-                        [options]="chartOptionsToggler"
-                        [data]="chartData"
-                    ></nvd3>
-                    <div class="header-product-list-ticket clearfix">
-                        <div class="ticket-total">
-                            Total New Tickets:
-                            <span>
-                                {{techTicketReport.totalCreated}} tickets
-                            </span>
-                        </div>
-                        <div class="ticket-total">
-                            Completed Tickets:
-                            <span>
-                                {{techTicketReport.totalClosed}} tickets
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          class="body-m qt-color-dark-light"
+            *ngIf="techTicketReport.startDate !== '' && techTicketReport.endDate !== ''"
+          >
+            <span>
+              {{getDateForHeader(techTicketReport.startDate)}}
+            </span>
+              -
+            <span>
+              {{getDateForHeader(techTicketReport.endDate)}}
+            </span>
         </div>
+      </div>
+      <table class="qt-report__body-table-body" *ngIf="onInit">
+<!--        <nvd3-->
+<!--          [options]="chartOptionsToggler"-->
+<!--          [data]="chartData"-->
+<!--        ></nvd3>-->
+        <thead>
+          <tr>
+            <th class="qt-fw-600 qt-color-dark">Tech User</th>
+            <th style="width: 135px;" class="qt-fw-600 qt-color-dark">Created Tickets</th>
+            <th style="width: 135px;" class="qt-fw-600 qt-color-dark">Closed Tickets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="qt-report__body-row">
+            <td>Theresa Garcia</td>
+            <td style="width: 135px;">63</td>
+            <td style="width: 135px;">56</td>
+          </tr>
+          <tr class="qt-report__body-row">
+            <td>Jeanette Elliott</td>
+            <td style="width: 135px;">33</td>
+            <td style="width: 135px;">22</td>
+          </tr>
+          <tr class="qt-report__body-row qt-fw-600">
+            <td>Total</td>
+            <td style="width: 135px;">{{techTicketReport.totalCreated}}</td>
+            <td style="width: 135px;">{{techTicketReport.totalClosed}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
