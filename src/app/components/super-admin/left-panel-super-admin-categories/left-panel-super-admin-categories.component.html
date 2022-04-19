@@ -47,7 +47,7 @@
                         *ngIf="category.subcategories.length > 0"
                     ></div>
                     <app-dynamic-tooltip
-                        [content]="(category.type === 'PUBLISHED') ? 'Published' : 'Draft'"
+                        [content]="'Draft'"
                         [position]="'bottom'"
                         #statusTooltip
                     ></app-dynamic-tooltip>
@@ -55,7 +55,7 @@
                         class="category-status"
                         [ngClass]="{'status-published':category.type === 'PUBLISHED',
               'status-draft':category.type === 'DRAFT'}"
-                        (mouseenter)="statusTooltip.show($event.target)"
+                        (mouseenter)="setTooltipContent(statusTooltip,category.type);statusTooltip.show($event.target)"
                         (mouseleave)="statusTooltip.hide()"
                     ></i>
                     <span
@@ -104,7 +104,7 @@
                                     class="category-status"
                                     [ngClass]="{'status-published':subcategory.type === 'PUBLISHED',
               'status-draft':subcategory.type === 'DRAFT'}"
-                                    (mouseenter)="statusTooltip.show($event.target)"
+                                    (mouseenter)="setTooltipContent(statusTooltip,subcategory.type);statusTooltip.show($event.target)"
                                     (mouseleave)="statusTooltip.hide()"
                                 ></i>
                                 <span
@@ -153,7 +153,7 @@
                                                 class="category-status"
                                                 [ngClass]="{'status-published':subsubcategory.type === 'PUBLISHED',
               'status-draft':subsubcategory.type === 'DRAFT' }"
-                                                (mouseenter)="statusTooltip.show($event.target)"
+                                                (mouseenter)="setTooltipContent(statusTooltip,subsubcategory.type);statusTooltip.show($event.target)"
                                                 (mouseleave)="statusTooltip.hide()"
                                             ></i>
                                             <span
@@ -196,7 +196,7 @@
                                                             class="category-status"
                                                             [ngClass]="{'status-published':subsubsubcategory.type === 'PUBLISHED',
               'status-draft':subsubsubcategory.type === 'DRAFT'}"
-                                                            (mouseenter)="statusTooltip.show($event.target)"
+                                                            (mouseenter)="setTooltipContent(statusTooltip,subsubsubcategory.type);statusTooltip.show($event.target)"
                                                             (mouseleave)="statusTooltip.hide()"
                                                         ></i>
                                                         <span

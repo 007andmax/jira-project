@@ -102,7 +102,10 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
       this.cd.markForCheck();
     })
   }
-
+  setTooltipContent(tooltip, type) {
+    tooltip.content = (type === 'PUBLISHED') ? 'Published' : 'Draft';
+    this.cd.detectChanges();
+  }
   gotoHelpCenter() {
     this.isShowHelpCenter = true;
     this.selectedCategory = null;
