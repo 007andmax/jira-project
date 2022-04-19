@@ -15,6 +15,8 @@ import { PermissionsService } from '../../services/permissions/permissions.servi
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { DELETE_COMPANY, DELETE_PRODUCT } from '../../const/confirm';
 import { InventoryChange } from './class/inventory-change';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -32,6 +34,8 @@ export class InventoryComponent implements OnInit {
   glNumbers: Array<GlNumber> = [];
   sub: Subscription = new Subscription();
   taxes: Array<Tax> = [];
+  showEdit = false;
+  serviceAgreement: ServiceAgreement;
   constructor(private productService: ProductService,
     private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
@@ -40,6 +44,7 @@ export class InventoryComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
+    public contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -114,6 +119,14 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getChangeProducts);
     this.getListProducts();
+
+    let getOnEdit = this.contractsStateService.getOnEdit().subscribe(data => {
+      this.serviceAgreement = data;
+      this.showEdit = true;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
   }
   onRemoveProduct(id) {
     this.productService.removeProduct(id).subscribe(data => {

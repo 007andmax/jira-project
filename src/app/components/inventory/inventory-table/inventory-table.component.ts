@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -7,6 +7,8 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_PRODUCT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-inventory-table',
@@ -23,6 +25,9 @@ export class InventoryTableComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private contractsService: ContractsService,
+    private elRef: ElementRef,
+    private contractsStateService: ContractsStateService,
     private productService: ProductService) { }
 
   ngOnInit() {
@@ -32,9 +37,13 @@ export class InventoryTableComponent implements OnInit {
   }
   delete() {
     this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory" });
     modalRef.componentInstance.message = `Do you want to delete product?`;
     this.inventoryStateService.setProductForDelete(this.inventory);
+
+    this.contractsService.getServiceAgreement("11e96241-b1c4-4886-bb00-6bfaa1ed0258").subscribe(data => {
+      this.contractsStateService.setEdit(data);
+    })
   }
   public getGlNumberName() {
     let glNumber = this.inventory.glNumber;
