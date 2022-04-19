@@ -669,6 +669,18 @@
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
                 </div>
+                <div class="form-group content">
+                    <app-drop-down
+                        [placeholder]="'Select Company'"
+                        [list]="companies"
+                        [validate]="validate.getCompany()"
+                        [errorMessage]="'Please select the company name'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="selectClient($event)"
+                    ></app-drop-down>
+                </div>
                 <div class="grey-dropdown form-group content select-users-list">
                     <app-tech-users-list-report
                         [sort]="true"
@@ -677,10 +689,6 @@
                         (onSelectedItem)="onSelectTechUser($event)"
                     ></app-tech-users-list-report>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>

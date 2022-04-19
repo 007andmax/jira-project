@@ -7,6 +7,7 @@ export class TechService {
     lines: Array<TechServiceItem> = [];
     totalQuantity: number = 0;
     serviceName: string = "";
+    companyId: string;
     constructor(data = null) {
         if (data) {
             this.startDate = data.startDate;
@@ -14,6 +15,7 @@ export class TechService {
             this.techUserId = data.techUserId;
             this.lines = data.lines;
             this.totalQuantity = data.totalQuantity;
+            this.companyId = data.companyId;
         }
     }
     public setData(data) {
@@ -24,6 +26,9 @@ export class TechService {
             return new TechServiceItem(item);
         });
         this.totalQuantity = data.totalQuantity;
+    }
+    public setCompanyId(data) {
+        this.companyId = data;
     }
     public setTechUserId(data) {
         this.techUserId = data;
@@ -43,6 +48,7 @@ export class TechService {
             techUserId: this.techUserId,
 
         };
+        if (this.companyId) data.companyId = this.companyId;
         if (this.serviceName.length > 0) data.serviceName = this.serviceName;
         return data;
     }
