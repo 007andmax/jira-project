@@ -1,0 +1,49 @@
+<div class="confirm-modal support-page-modal">
+    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-20">
+        <div class="confirm-modal__title">Add Sub Category</div>
+        <div
+            class="icon__close qt-sz-24 qt-ic-c qt-bg-contain qt-ml-6 pointer"
+            (click)="closeModal()"
+            tabindex="1"
+        ></div>
+    </div>
+    <div class="modal-body">
+        <div class="qt-input-block qt-w100 qt-mb-16">
+            <label *ngIf="validate.getName() && !validate.getNameIsExist()">Category Name</label>
+            <input
+                type="text"
+                [(ngModel)]="name"
+                (input)="onChangeName()"
+                placeholder="Category Name"
+                min="1"
+                max="100"
+            >
+            <mat-error *ngIf="!validate.getName()">
+                Category name must be between 1 and 100 characters
+            </mat-error>
+            <mat-error
+                *ngIf="validate.getNameIsExist()"
+                [textContent]="validate.getTextErrorNameExist()"
+            >
+            </mat-error>
+        </div>
+    </div>
+    <div class="d-f qt-jc-fe qt-mt-24">
+        <div
+            class="btn-new disabled qt-mr-12"
+            data-dismiss='modal'
+            (click)="closeModal()"
+        >
+            Cancel
+        </div>
+        <div
+            class="btn-new btn-primary"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="addCategory()"
+        >
+            <span *ngIf="!addBtn.isBlock()">Save</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+        </div>
+    </div>
+</div>

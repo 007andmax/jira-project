@@ -52,6 +52,9 @@
   &-m {
     @include font-style(14px, 20px, 500, 0);
   }
+  &-sb {
+    @include font-style(14px, 20px, 600, 0);
+  }
 }
 %body-m {
   @include font-style(13px, 20px, 400, 0);

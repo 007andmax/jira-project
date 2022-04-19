@@ -1,0 +1,225 @@
+<button
+    class="qt-button qt-mr-12"
+    (click)="add()"
+>
+    <span class="icon__add-product qt-sz-18 qt-bg-contain qt-mr-8"></span>
+    Add Category
+</button>
+<div class="category-item category-item-category-body">
+    <div class="category-item-category">
+        <div
+            class="category-item-category__name"
+            [ngClass]="{'--active':isShowHelpCenter}"
+            (click)="gotoHelpCenter()"
+        >
+            <span class="category-item-category__help-center pointer">Help center</span>
+        </div>
+    </div>
+</div>
+<div
+    class="container-categories"
+    appDragMenu
+    (dropEnd)="onDropEnd($event)"
+    [classDropped]="'container-categories'"
+    [classContainer]="'category-item-category-body'"
+    *ngIf="categories.length > 0"
+>
+    <ng-template
+        ngFor
+        let-category
+        [ngForOf]="categories"
+        [ngForTrackBy]="trackById"
+    >
+        <div
+            class="category-item category-item-category-body"
+            [attr.id]="category.id"
+        >
+            <div class="category-item-category">
+                <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                <div
+                    class="category-item-category__name"
+                    [ngClass]="{'--active':selectedCategory && selectedCategory.id === category.id}"
+                >
+                    <div
+                        class="icon__category-closed qt-mr-10 pointer"
+                        [ngClass]="{'toggle-category':category.toggleSubCategory}"
+                        (click)="category.toggleSubCategory = !category.toggleSubCategory"
+                        *ngIf="category.subcategories.length > 0"
+                    ></div>
+                    <app-dynamic-tooltip
+                        [content]="(category.type === 'PUBLISHED') ? 'Published' : 'Draft'"
+                        [position]="'bottom'"
+                        #statusTooltip
+                    ></app-dynamic-tooltip>
+                    <i
+                        class="category-status"
+                        [ngClass]="{'status-published':category.type === 'PUBLISHED',
+              'status-draft':category.type === 'DRAFT'}"
+                        (mouseenter)="statusTooltip.show($event.target)"
+                        (mouseleave)="statusTooltip.hide()"
+                    ></i>
+                    <span
+                        [ngClass]="{'pointer':category.document}"
+                        [textContent]="category.name"
+                        (click)="editArticle(category)"
+                    ></span>
+                </div>
+                <left-panel-super-admin-categories-actions
+                    [category]="category"
+                    (onSelectCategory)="selectedCategory = category"
+                ></left-panel-super-admin-categories-actions>
+            </div>
+            <div
+                class="category-item-sub-category qt-ml-20"
+                *ngIf="category.toggleSubCategory"
+                appDragMenu
+                (dropEnd)="onDropEnd($event)"
+                [classDropped]="'category-item-sub-category'"
+                [classContainer]="'category-item-sub-category-body'"
+            >
+                <ng-template
+                    ngFor
+                    let-subcategory
+                    [ngForOf]="category.subcategories"
+                    [ngForTrackBy]="trackById"
+                >
+                    <div
+                        class="category-item-sub-category-body"
+                        [attr.id]="subcategory.id"
+                        [attr.category-id]="category.id"
+                    >
+                        <div class="category-item-category">
+                            <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                            <div
+                                class="category-item-category__name"
+                                [ngClass]="{'--active':selectedCategory && selectedCategory.id === subcategory.id}"
+                            >
+                                <div
+                                    class="icon__category-closed qt-mr-10 pointer"
+                                    [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                    (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                    *ngIf="subcategory.subcategories.length > 0"
+                                ></div>
+                                <i
+                                    class="category-status"
+                                    [ngClass]="{'status-published':subcategory.type === 'PUBLISHED',
+              'status-draft':subcategory.type === 'DRAFT'}"
+                                    (mouseenter)="statusTooltip.show($event.target)"
+                                    (mouseleave)="statusTooltip.hide()"
+                                ></i>
+                                <span
+                                    [ngClass]="{'pointer':subcategory.document}"
+                                    [textContent]="subcategory.name"
+                                    (click)="editArticle(subcategory)"
+                                ></span>
+                            </div>
+                            <left-panel-super-admin-categories-actions
+                                [category]="subcategory"
+                                (onSelectCategory)="selectedCategory = subcategory"
+                            ></left-panel-super-admin-categories-actions>
+                        </div>
+                        <div
+                            class="category-item-sub-sub-category"
+                            *ngIf="subcategory.toggleSubCategory"
+                            appDragMenu
+                            (dropEnd)="onDropEnd($event)"
+                            [classDropped]="'category-item-sub-sub-category'"
+                            [classContainer]="'category-item-sub-sub-category-body'"
+                        >
+                            <ng-template
+                                ngFor
+                                let-subsubcategory
+                                [ngForOf]="subcategory.subcategories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <div
+                                    class="category-item-sub-sub-category-body"
+                                    [attr.id]="subsubcategory.id"
+                                    [attr.category-id]="subcategory.id"
+                                >
+                                    <div class="category-item-category">
+                                        <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                                        <div
+                                            class="category-item-category__name"
+                                            [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubcategory.id}"
+                                        >
+                                            <div
+                                                class="icon__category-closed qt-mr-10 pointer"
+                                                [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                *ngIf="subsubcategory.subcategories.length > 0"
+                                            ></div>
+                                            <i
+                                                class="category-status"
+                                                [ngClass]="{'status-published':subsubcategory.type === 'PUBLISHED',
+              'status-draft':subsubcategory.type === 'DRAFT' }"
+                                                (mouseenter)="statusTooltip.show($event.target)"
+                                                (mouseleave)="statusTooltip.hide()"
+                                            ></i>
+                                            <span
+                                                [ngClass]="{'pointer':subsubcategory.document}"
+                                                [textContent]="subsubcategory.name"
+                                                (click)="editArticle(subsubcategory)"
+                                            ></span>
+                                        </div>
+                                        <left-panel-super-admin-categories-actions
+                                            [category]="subsubcategory"
+                                            (onSelectCategory)="selectedCategory = subsubcategory"
+                                        ></left-panel-super-admin-categories-actions>
+                                    </div>
+                                    <div
+                                        class="category-item-sub-sub-sub-category"
+                                        *ngIf="subsubcategory.toggleSubCategory"
+                                        appDragMenu
+                                        (dropEnd)="onDropEnd($event)"
+                                        [classDropped]="'category-item-sub-sub-sub-category'"
+                                        [classContainer]="'category-item-sub-sub-sub-category-body'"
+                                    >
+                                        <ng-template
+                                            ngFor
+                                            let-subsubsubcategory
+                                            [ngForOf]="subsubcategory.subcategories"
+                                            [ngForTrackBy]="trackById"
+                                        >
+                                            <div
+                                                class="category-item-sub-sub-sub-category-body"
+                                                [attr.id]="subsubsubcategory.id"
+                                                [attr.category-id]="subsubcategory.id"
+                                            >
+                                                <div class="category-item-category">
+                                                    <div class="icon__drag qt-sz-20 qt-mr-2"></div>
+                                                    <div
+                                                        class="category-item-category__name"
+                                                        [ngClass]="{'--active':selectedCategory && selectedCategory.id === subsubsubcategory.id}"
+                                                    >
+                                                        <i
+                                                            class="category-status"
+                                                            [ngClass]="{'status-published':subsubsubcategory.type === 'PUBLISHED',
+              'status-draft':subsubsubcategory.type === 'DRAFT'}"
+                                                            (mouseenter)="statusTooltip.show($event.target)"
+                                                            (mouseleave)="statusTooltip.hide()"
+                                                        ></i>
+                                                        <span
+                                                            [ngClass]="{'pointer':subsubsubcategory.document}"
+                                                            [textContent]="subsubsubcategory.name"
+                                                            (click)="editArticle(subsubsubcategory)"
+                                                        ></span>
+                                                    </div>
+                                                    <left-panel-super-admin-categories-actions
+                                                        [disabledAddSub]="true"
+                                                        [category]="subsubsubcategory"
+                                                        (onSelectCategory)="selectedCategory = subsubsubcategory"
+                                                    ></left-panel-super-admin-categories-actions>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </ng-template>
+</div>
