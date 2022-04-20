@@ -127,6 +127,14 @@ export class InventoryComponent implements OnInit {
         this.cd.detectChanges();
       }
     })
+    let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
+
+      this.showEdit = data;
+      if (!this.showEdit) this.inventoryStateService.refreshProductsAgreements();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
   }
   onRemoveProduct(id) {
     this.productService.removeProduct(id).subscribe(data => {

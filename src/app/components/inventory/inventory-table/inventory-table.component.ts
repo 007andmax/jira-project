@@ -9,6 +9,8 @@ import { DELETE_PRODUCT } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { InventoryAgreement } from '../inventory-check-use/class/inventory-agreement';
+import { InventoryCheckUseComponent } from '../inventory-check-use/inventory-check-use.component';
 
 @Component({
   selector: 'app-inventory-table',
@@ -36,6 +38,21 @@ export class InventoryTableComponent implements OnInit {
     this.inventoryStateService.setEditInventory(this.inventory);
   }
   delete() {
+    this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
+      console.log("data", data);
+      if (data.valid) {
+        this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
+        const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+        modalRef.componentInstance.message = `Do you want to delete product?`;
+        this.inventoryStateService.setProductForDelete(this.inventory);
+      } else {
+        let agreements = data.agreements.map(item => new InventoryAgreement(item));
+        const modalRef = this.modalService.open(InventoryCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory" });
+        modalRef.componentInstance.inventory = this.inventory;
+        modalRef.componentInstance.agreements = agreements;
+      }
+    })
+    return;
     this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory" });
     modalRef.componentInstance.message = `Do you want to delete product?`;
