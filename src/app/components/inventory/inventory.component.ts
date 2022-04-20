@@ -127,6 +127,7 @@ export class InventoryComponent implements OnInit {
         this.cd.detectChanges();
       }
     })
+    this.sub.add(getOnEdit);
     let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
 
       this.showEdit = data;
@@ -135,6 +136,7 @@ export class InventoryComponent implements OnInit {
         this.cd.detectChanges();
       }
     })
+    this.sub.add(getOnToggleEdit);
   }
   onRemoveProduct(id) {
     this.productService.removeProduct(id).subscribe(data => {

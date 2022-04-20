@@ -11,6 +11,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { InventoryAgreement } from '../inventory-check-use/class/inventory-agreement';
 import { InventoryCheckUseComponent } from '../inventory-check-use/inventory-check-use.component';
+import { InventoryModalRemoveComponent } from '../inventory-modal-remove/inventory-modal-remove.component';
 
 @Component({
   selector: 'app-inventory-table',
@@ -42,8 +43,8 @@ export class InventoryTableComponent implements OnInit {
       console.log("data", data);
       if (data.valid) {
         this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
-        const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-        modalRef.componentInstance.message = `Do you want to delete product?`;
+        const modalRef = this.modalService.open(InventoryModalRemoveComponent, { windowClass: 'xs-modal user-modal' });
+        modalRef.componentInstance.inventory = this.inventory;
         this.inventoryStateService.setProductForDelete(this.inventory);
       } else {
         let agreements = data.agreements.map(item => new InventoryAgreement(item));
