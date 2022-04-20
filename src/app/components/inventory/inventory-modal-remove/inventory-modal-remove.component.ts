@@ -12,7 +12,8 @@ export class InventoryModalRemoveComponent implements OnInit {
   @Input() inventory: InventoryItem;
 
   constructor(private confirmStateService: ConfirmStateService,
-    public activeModal: NgbActiveModal, private eRef: ElementRef,) {
+    public activeModal: NgbActiveModal,
+    private eRef: ElementRef,) {
 
   }
 
