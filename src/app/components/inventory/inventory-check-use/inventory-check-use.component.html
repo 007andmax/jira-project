@@ -5,39 +5,81 @@
     ></button>
     <div class="archive-modal__body">
         <h3>Delete Product</h3>
-        <p>
-            You can’t delete a product that associate with contracts, Please remove the product from following contracts before you delete it.
-        </p>
-        <div class="contract-container qt-mt-16">
-            <h3 [textContent]="inventory.description"></h3>
-            <p [textContent]="'Associate with ' + agreements.length + ' following contracts'"></p>
-            <div class="contract-container-agreements qt-mt-12">
-                <ng-template
-                    ngFor
-                    let-agreement
-                    let-i="index"
-                    [ngForOf]="agreements"
-                    [ngForTrackBy]="trackById"
-                >
-                    <div class="contract-item">
-                        <div
-                            class="qt-table-modern__circle-avatar qt-mr-8"
-                            [textContent]="getNameForAvatar(getCompanyName(agreement.companyId))"
-                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(null,listColorNoAvatar[getIndexNoAvatar(i)]) }"
-                        ></div>
-                        <div class="contract-item-info">
-                            <h3 [textContent]="getCompanyName(agreement.companyId)"></h3>
-                            <span [textContent]="agreement.description"></span>
-                        </div>
-                        <span
-                            class="view-contract pointer"
-                            (click)="showContract(agreement)"
-                        >
-                            View Contract
-                        </span>
-                    </div>
-                </ng-template>
+        <div
+            class="no-exist-agreements"
+            *ngIf="!showPreloader && valid"
+        >
+            <span>
+                Are you sure you want to delete this product?
+            </span>
+            <div class="info-product">
+                <h3 [textContent]="inventory.description"></h3>
+                <span>Associate with no contracts</span>
             </div>
+        </div>
+        <div
+            class="exist-agreements"
+            *ngIf="!showPreloader && !valid"
+        >
+            <p>
+                You can’t delete a product that associate with contracts, Please remove the product from following contracts before you delete it.
+            </p>
+            <div class="contract-container qt-mt-16">
+                <h3 [textContent]="inventory.description"></h3>
+                <p [textContent]="'Associate with ' + agreements.length + ' following contracts'"></p>
+                <div class="contract-container-agreements qt-mt-12">
+                    <ng-template
+                        ngFor
+                        let-agreement
+                        let-i="index"
+                        [ngForOf]="agreements"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <div class="contract-item">
+                            <div
+                                class="qt-table-modern__circle-avatar qt-mr-8"
+                                [textContent]="getNameForAvatar(getCompanyName(agreement.companyId))"
+                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(null,listColorNoAvatar[agreement.indexColor]) }"
+                            ></div>
+                            <div class="contract-item-info">
+                                <h3 [textContent]="getCompanyName(agreement.companyId)"></h3>
+                                <span [textContent]="agreement.description"></span>
+                            </div>
+                            <span
+                                class="view-contract pointer"
+                                (click)="showContract(agreement)"
+                            >
+                                View Contract
+                            </span>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div
+            class="preloader-container"
+            *ngIf="showPreloader"
+        >
+            <div class="loading"></div>
+        </div>
+    </div>
+    <div
+        class="archive-modal__footer"
+        *ngIf="!showPreloader && valid"
+    >
+        <div class="d-f qt-jc-fe">
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
         </div>
     </div>
 </div>

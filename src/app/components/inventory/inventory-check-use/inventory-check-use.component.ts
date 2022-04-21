@@ -20,6 +20,8 @@ import { InventoryAgreement } from './class/inventory-agreement';
 export class InventoryCheckUseComponent implements OnInit, OnDestroy {
   @Input() inventory: InventoryItem;
   @Input() agreements: Array<InventoryAgreement> = [];
+  showPreloader: boolean = true;
+  valid: boolean = false;
   listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
@@ -31,20 +33,22 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
     public activeModal: NgbActiveModal,
     private productService: ProductService) { }
 
-
   ngOnInit() {
+    this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
+      this.valid = data.valid;
+      if (!data.valid) this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 3))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
+        1 : ((this.getCompanyName(b.companyId).toLowerCase() > this.getCompanyName(a.companyId).toLowerCase()) ? -1 : 0));;
+      this.showPreloader = false;
+    })
     let onRefreshProductsAgreements = this.inventoryStateService.onRefreshProductsAgreements.subscribe(data => {
       this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
         if (data.valid) {
         } else {
-          this.agreements = data.agreements.map(item => new InventoryAgreement(item));
+          this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 3)));
         }
       });
     })
     this.sub.add(onRefreshProductsAgreements);
-  }
-  getIndexNoAvatar(i) {
-    return (i > 3) ? this.ticketsListService.randomInteger(0, 3) : i;
   }
   getNameForAvatar(name) {
     return name[0].toUpperCase();
@@ -60,15 +64,11 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
   cancelConfirm() {
     this.activeModal.close();
     this.confirmStateService.setConfirm(false);
-
-
   };
 
   approveConfirm() {
     this.activeModal.close();
     this.confirmStateService.setConfirm(true);
-
-
   };
 
   ngOnDestroy(): void {
