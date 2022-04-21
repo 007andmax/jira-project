@@ -35,20 +35,21 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
-      this.valid = data.valid;
-      if (!data.valid) this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 3))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
-        1 : ((this.getCompanyName(b.companyId).toLowerCase() > this.getCompanyName(a.companyId).toLowerCase()) ? -1 : 0));;
-      this.showPreloader = false;
+      this.getAgreements(data);
     })
     let onRefreshProductsAgreements = this.inventoryStateService.onRefreshProductsAgreements.subscribe(data => {
+      this.showPreloader = true;
       this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
-        if (data.valid) {
-        } else {
-          this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 3)));
-        }
+        this.getAgreements(data);
       });
     })
     this.sub.add(onRefreshProductsAgreements);
+  }
+  getAgreements(data) {
+    this.valid = data.valid;
+    if (!data.valid) this.agreements = data.agreements.map(item => new InventoryAgreement(item, this.ticketsListService.randomInteger(0, 3))).sort((a, b) => (this.getCompanyName(a.companyId).toLowerCase() > this.getCompanyName(b.companyId).toLowerCase()) ?
+      1 : ((this.getCompanyName(b.companyId).toLowerCase() > this.getCompanyName(a.companyId).toLowerCase()) ? -1 : 0));;
+    this.showPreloader = false;
   }
   getNameForAvatar(name) {
     return name[0].toUpperCase();

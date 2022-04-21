@@ -19,6 +19,9 @@
     .contract-container-agreements {
         overflow: auto;
         max-height: 330px;
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
         .contract-item {
             display: flex;
             align-items: center;
