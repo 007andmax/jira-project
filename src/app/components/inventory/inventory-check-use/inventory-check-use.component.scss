@@ -1,0 +1,101 @@
+.modal-body {
+    padding: 0px;
+    p {
+        font-size: 14px;
+    }
+}
+.contract-container {
+    border-radius: 8px;
+    padding: 16px 16px 0px 16px;
+    background-color: #f4f6f8;
+    h3 {
+        font-size: 14px;
+        color: #212b36;
+    }
+    span {
+        font-size: 12px;
+        color: #919eab;
+    }
+    .contract-container-agreements {
+        overflow: auto;
+        max-height: 330px;
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+        .contract-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            border: solid 1px #dfe3e8;
+            margin-bottom: 8px;
+            &:last-child {
+                margin-bottom: 0px;
+            }
+            .contract-item-info {
+                line-height: 1;
+            }
+            h3 {
+                font-size: 13px;
+                color: #212b36;
+                line-height: 1.54;
+            }
+            span {
+                font-size: 12px;
+                line-height: 1.33;
+                color: #919eab;
+            }
+            .qt-table-modern__circle-avatar {
+                    width: 40px;
+                    height: 40px;
+                    min-width: 40px;
+                    min-height: 40px;
+                    border-radius: 50%;
+                    background-position: center !important;
+                    background-size: cover !important;
+                    margin-right: 8px;
+                    color: white;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    font-size: 13px;
+                    font-weight: 700;
+            }
+            .view-contract {
+                font-size: 12px;
+                color: #16a4fa;
+                margin: 0px 0px 0px auto;
+                font-weight: 600;
+            }
+        }
+    }
+}
+.preloader-container {
+    padding: 32px;
+    position: relative;
+}
+.archive-modal__body {
+    margin-bottom: 0px !important;
+}
+.info-product {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f4f6f8;
+    margin: 16px 0px 0px 0px;
+
+    h3 {
+        font-size: 14px;
+        color: #212b36;
+    }
+
+    span {
+        font-size: 12px;
+        color: #919eab;
+    }
+}
+.archive-modal__footer {
+    margin: 24px 0px 0px 0px;
+}

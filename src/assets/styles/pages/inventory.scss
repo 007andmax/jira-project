@@ -98,7 +98,20 @@
   }
 
 }
-
+app-inventory {
+  .modal {
+    z-index: 998 !important;
+  }
+  
+  app-contracts-edit {
+    position: relative;
+    z-index: 999;
+  }
+  
+  .modal-backdrop {
+    z-index: 998 !important;
+  }
+}
 app-inventory-table {
   display: contents;
 }

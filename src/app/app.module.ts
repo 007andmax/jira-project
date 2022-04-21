@@ -537,6 +537,7 @@ import { SupportPageCategoryComponent } from './components/super-admin/support-p
 import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
 import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
 import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
+import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
 
 
 declare var $: any;
@@ -1013,7 +1014,8 @@ declare var $: any;
     SupportPageCategoryComponent,
     SuperAdminPublicCategoryComponent,
     SuperAdminPublicHeaderComponent,
-    SortTagsPipe
+    SortTagsPipe,
+    InventoryCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -1072,7 +1074,8 @@ declare var $: any;
     AddUserToSubscribeComponent,
     SupportPageAddCategoryComponent,
     SupportPageAddSubCategoryComponent,
-    SupportPageEditCategoryComponent
+    SupportPageEditCategoryComponent,
+    InventoryCheckUseComponent,
     // RecurringTicketsComponent
   ],
   exports: [
