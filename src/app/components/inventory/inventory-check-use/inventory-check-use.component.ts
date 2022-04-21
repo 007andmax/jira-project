@@ -28,7 +28,7 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
     private inventoryStateService: InventoryStateService,
     private contractsStateService: ContractsStateService,
     private companiesStateService: CompaniesStateService,
-    private ticketsListService: TicketsListService,
+    public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     public activeModal: NgbActiveModal,
     private productService: ProductService) { }
@@ -71,7 +71,9 @@ export class InventoryCheckUseComponent implements OnInit, OnDestroy {
     this.activeModal.close();
     this.confirmStateService.setConfirm(true);
   };
-
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
