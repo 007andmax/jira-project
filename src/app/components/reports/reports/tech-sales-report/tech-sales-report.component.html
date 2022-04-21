@@ -1,152 +1,105 @@
-<!--<div>-->
-<!--    <app-report-menu-->
-<!--        [report]="'tech-sales'"-->
-<!--        (onRequest)="onRequest($event)"-->
-<!--        (getReport)="getReport($event)"-->
-<!--    ></app-report-menu>-->
-<!--</div>-->
-<!--<app-report-additional-actions-->
-<!--    [report]="'tech-sales'"-->
-<!--    [orientation]="'LANDSCAPE'"-->
-<!--    [fileName]="'tech-sales-report'"-->
-<!--&gt;</app-report-additional-actions>-->
-<!--&lt;!&ndash;  &ndash;&gt;-->
-<!--<div-->
-<!--    class="loading"-->
-<!--    *ngIf="loadingInProgress"-->
-<!--&gt;</div>-->
-<!--<div-->
-<!--    class="product-list___ticket report-show-footer-header"-->
-<!--    id="product-list-ticket-data"-->
-<!--&gt;-->
-<!--    <div-->
-<!--        class="product-list-ticket product-list-ticket-tech"-->
-<!--        style="padding: 0px;"-->
-<!--        *ngIf="!loadingInProgress"-->
-<!--    >-->
-<!--        <div-->
-<!--            class="customer-ticket"-->
-<!--            *ngIf="onInit"-->
-<!--        >-->
-<!--            <div class="customer-ticket__report">-->
-<!--                <div class="report-header">-->
-<!--                    <h5 class="qt-fw-600 qt-color-white">Tech Sales Report</h5>-->
-<!--                    <div-->
-<!--                        class="company-info"-->
-<!--                        *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"-->
-<!--                    >-->
-<!--                        <p>-->
-<!--                            <span>-->
-<!--                                {{getDateForHeader(techSalesReport.startDate)}}-->
-<!--                            </span>-->
-<!--                            - -->
-<!--                            <span>-->
-<!--                                {{getDateForHeader(techSalesReport.endDate)}}-->
-<!--                            </span>-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div *ngIf="onInit">-->
-<!--                    <div class="header-product-list-ticket">-->
-<!--                        <h4 *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'">Billed Time</h4>-->
-<!--                        <p *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'">Products Sold</p>-->
-<!--                    </div>-->
-<!--                    <nvd3-->
-<!--                        [options]="chartOptionsToggler"-->
-<!--                        [data]="chartData"-->
-<!--                    ></nvd3>-->
-<!--                    <div class="clearfix">-->
-<!--                        <div *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'">-->
-<!--                            Total Hours:-->
-<!--                            <span>{{techSalesReport.total}} hours</span>-->
-<!--                        </div>-->
-<!--                        <div *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'">-->
-<!--                            Potential revenue:-->
-<!--                            <span>${{techSalesReport.total}}</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 <div>
-  <app-report-menu
-    [report]="'tech-sales'"
-    (onRequest)="onRequest($event)"
-    (getReport)="getReport($event)"
-  ></app-report-menu>
+    <app-report-menu
+        [report]="'tech-sales'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
 </div>
-<!--<app-report-additional-actions-->
-<!--  [report]="'tech-sales'"-->
-<!--  [orientation]="'LANDSCAPE'"-->
-<!--  [fileName]="'tech-sales-report'"-->
-<!--&gt;</app-report-additional-actions>-->
-<!--  -->
 <div
-  class="loading"
-  *ngIf="loadingInProgress"
+    class="loading"
+    *ngIf="loadingInProgress"
 ></div>
 <div
-  class="qt-report__body"
-  id="product-list-ticket-data"
+    class="qt-report__body"
+    id="product-list-ticket-data"
 >
-  <div
-    class="qt-report__product-list"
-    *ngIf="!loadingInProgress"
-  >
     <div
-      class=""
-      *ngIf="onInit"
+        class="qt-report__product-list"
+        *ngIf="!loadingInProgress"
     >
-      <div class="qt-report__body-header">
-        <h6 class="qt-fw-600 qt-color-dark">Tech Sales Report</h6>
         <div
-          class="body-m qt-color-dark-light"
-          *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"
+            class
+            *ngIf="onInit"
         >
-          <span>
-            {{getDateForHeader(techSalesReport.startDate)}}
-          </span>
-          -
-          <span>
-            {{getDateForHeader(techSalesReport.endDate)}}
-          </span>
+            <div class="qt-report__body-header">
+                <h6 class="qt-fw-600 qt-color-dark">Tech Sales Report</h6>
+                <div
+                    class="body-m qt-color-dark-light"
+                    *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"
+                >
+                    <span>
+                        {{getDateForHeader(techSalesReport.startDate)}}
+                    </span>
+                    -
+                    <span>
+                        {{getDateForHeader(techSalesReport.endDate)}}
+                    </span>
+                </div>
+            </div>
+            <table
+                class="qt-report__body-table-body"
+                *ngIf="onInit"
+            >
+                <thead>
+                    <tr>
+                        <th class="qt-fw-600 qt-color-dark ng-star-inserted">Tech User</th>
+                        <th
+                            style="width: 130px;"
+                            class="qt-fw-600 qt-color-dark ng-star-inserted"
+                            *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'"
+                        >
+                            Billed Time
+                        </th>
+                        <th
+                            style="width: 130px;"
+                            class="qt-fw-600 qt-color-dark ng-star-inserted"
+                            *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'"
+                        >
+                            Products Sold
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="techSalesReport.lines"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <tr class="qt-report__body-row">
+                            <td>{{item.fullName}}</td>
+                            <td
+                                style="width: 130px;"
+                                *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'"
+                            >
+                                {{item.billedTime}}
+                            </td>
+                            <td
+                                style="width: 130px;"
+                                *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'"
+                            >
+                                {{item.totalSum}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <tr class="qt-report__body-row qt-fw-600">
+                        <td>Total</td>
+                        <td
+                            style="width: 130px;"
+                            *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'"
+                        >
+                            {{techSalesReport.total}} hour
+                        </td>
+                        <td
+                            style="width: 130px;"
+                            *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'"
+                        >
+                            ${{techSalesReport.total}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-      </div>
-      <table class="qt-report__body-table-body" *ngIf="onInit">
-<!--          <nvd3-->
-<!--            [options]="chartOptionsToggler"-->
-<!--            [data]="chartData"-->
-<!--          ></nvd3>-->
-        <thead>
-          <tr>
-            <th class="qt-fw-600 qt-color-dark ng-star-inserted">Tech User</th>
-            <th style="width: 130px;" class="qt-fw-600 qt-color-dark ng-star-inserted" *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'">Billed Time</th>
-            <th style="width: 130px;" class="qt-fw-600 qt-color-dark ng-star-inserted" *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'">Products Sold</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="qt-report__body-row">
-            <td>Theresa Garcia</td>
-            <td style="width: 130px;">2.30</td>
-          </tr>
-          <tr class="qt-report__body-row">
-            <td>Jeanette Elliott</td>
-            <td style="width: 130px;">1.56</td>
-          </tr>
-          <tr class="qt-report__body-row qt-fw-600">
-            <td>Total</td>
-            <td style="width: 130px;" *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'">
-              {{techSalesReport.total}} hour
-            </td>
-            <td style="width: 130px;" *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'">
-              ${{techSalesReport.total}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </div>
 </div>
