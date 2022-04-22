@@ -165,6 +165,7 @@
 
 
 
+
 <!-- </div> -->
 <!-- <div -->
 <!-- class="product-report-total-sales clearfix" -->
@@ -208,10 +209,7 @@
         style
         *ngIf="!loadingInProgress"
     >
-        <div
-            class="qt-report__body-header"
-            *ngIf="onInit"
-        >
+        <div class="qt-report__body-header">
             <div class="body-m-sb qt-color-dark">
                 {{remoteConnectionReport.clientCompanyName || 'All companies'}}
             </div>

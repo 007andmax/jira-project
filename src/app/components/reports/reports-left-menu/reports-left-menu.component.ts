@@ -38,6 +38,9 @@ export class ReportsLeftMenuComponent implements OnInit {
       this.opened = true;
     })
   }
+  isActive(route) {
+    return localStorage.report == route;
+  }
   public goToState(state) {
     localStorage.setItem('report', state);
     this.leftPanelStateService.goToState(state);

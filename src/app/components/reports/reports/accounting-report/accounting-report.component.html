@@ -56,6 +56,8 @@
 
 
 
+
+
 <!-- <div -->
 <!-- class="details-header clearfix" -->
 <!-- style="padding: 15px 20px;" -->
@@ -88,6 +90,8 @@
 <!-- let-i="index" -->
 <!-- [ngForTrackBy]="trackByIndex" -->
 <!-- > -->
+
+
 
 
 
@@ -130,12 +134,18 @@
 
 
 
+
+
 <!-- </div> -->
 
 
 
 
+
+
 <!-- </ng-template> -->
+
+
 
 
 
@@ -173,6 +183,8 @@
 
 
 
+
+
 <div>
     <app-report-menu
         [report]="'accounting-report'"
@@ -193,11 +205,19 @@
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div *ngIf="onInit">
+        <div>
             <div class="qt-report__body-header">
                 <h6 class="qt-fw-600 qt-color-dark">Accounting report</h6>
-                <div class="body-m-sb qt-color-dark">{{ company.name }}</div>
-                <div class="body-m qt-color-dark-light">
+                <div
+                    class="body-m-sb qt-color-dark"
+                    *ngIf="onInit"
+                >
+                    {{ company.name }}
+                </div>
+                <div
+                    class="body-m qt-color-dark-light"
+                    *ngIf="onInit"
+                >
                     <span>
                         {{getDateForHeader(accountingReport.startDate)}}
                     </span>
@@ -207,7 +227,10 @@
                     </span>
                 </div>
             </div>
-            <table class="qt-report__body-table-body">
+            <table
+                class="qt-report__body-table-body"
+                *ngIf="onInit"
+            >
                 <thead>
                     <tr>
                         <th class="qt-fw-600 qt-color-dark">Date</th>

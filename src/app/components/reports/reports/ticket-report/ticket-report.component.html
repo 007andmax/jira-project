@@ -187,7 +187,11 @@
 
 
 
+
+
 <!-- <div class="col-md-7">{{ expence.description }}</div> -->
+
+
 
 
 
@@ -296,6 +300,8 @@
 <!-- </div> -->
 
 
+
+
 <div>
     <app-report-menu
         [report]="'ticket-report'"
@@ -324,26 +330,31 @@
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div
-            class="customer-ticket"
-            *ngIf="onInit"
-        >
+        <div class="customer-ticket">
             <div class="customer-ticket__report">
 
 
+
+
                 <div class="qt-report__body-header">
-                    <div class="body-m-sb qt-color-dark">
+                    <div
+                        class="body-m-sb qt-color-dark"
+                        *ngIf="onInit"
+                    >
                         {{ ticketsReport.companyName || 'All companies' }}
                     </div>
                     <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
-                    <div class="body-m qt-color-dark-light">
+                    <div
+                        class="body-m qt-color-dark-light"
+                        *ngIf="onInit"
+                    >
                         <span>{{ticketsReport.startDate}}</span>
                         -
                         <span>{{ ticketsReport.endDate }}</span>
                     </div>
                 </div>
                 <div
-                    *ngIf="showHeader"
+                    *ngIf="showHeader && onInit"
                     class="customer-ticket__report--summary"
                 >
                     <div class="customer-ticket__header">
@@ -406,10 +417,15 @@
                             </div>
 
 
+
+
                         </div>
                     </div>
                 </div>
-                <div class="customer-ticket__report--details">
+                <div
+                    class="customer-ticket__report--details"
+                    *ngIf="onInit"
+                >
                     <div class="customer-ticket__report--summary-titlqt-mb-12">Ticket Details</div>
                     <div class="details-header clearfix">
                         <div
@@ -498,7 +514,11 @@
 
 
 
+
+
                                                 <div class="col-md-7">{{ expence.description }}</div>
+
+
 
 
 

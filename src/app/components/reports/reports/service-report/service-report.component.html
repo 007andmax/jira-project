@@ -158,6 +158,7 @@
 
 
 
+
 <!-- <div class="col-md-2"> -->
 <!-- Time: {{ getDurationFilter(ticket.serviceTime) }} -->
 <!-- </div> -->
@@ -198,6 +199,7 @@
 <!-- </div> -->
 
 
+
 <div>
     <app-report-menu
         [report]="'service-report'"
@@ -223,24 +225,27 @@
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div
-            class="customer-ticket"
-            *ngIf="onInit"
-        >
+        <div class="customer-ticket">
             <div class="customer-ticket__report">
                 <div class="qt-report__body-header">
-                    <div class="body-m-sb qt-color-dark">
+                    <div
+                        class="body-m-sb qt-color-dark"
+                        *ngIf="onInit"
+                    >
                         {{ serviceReport.companyName || 'All companies' }}
                     </div>
                     <h6 class="qt-fw-600 qt-color-dark">Service Report</h6>
-                    <div class="body-m qt-color-dark-light">
+                    <div
+                        class="body-m qt-color-dark-light"
+                        *ngIf="onInit"
+                    >
                         <span>{{serviceReport.startDate}}</span>
                         -
                         <span>{{ serviceReport.endDate }}</span>
                     </div>
                 </div>
                 <div
-                    *ngIf="showHeader"
+                    *ngIf="showHeader && onInit"
                     class="customer-ticket__report--summary"
                 >
                     <div class="customer-ticket__header">
@@ -284,7 +289,10 @@
                         </div>
                     </div>
                 </div>
-                <table class="qt-report__body-table-body">
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="onInit"
+                >
                     <thead>
                         <tr>
                             <th class="qt-fw-600 qt-color-dark">Ticket Number</th>

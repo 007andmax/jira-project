@@ -2,13 +2,11 @@
     class="qt-aside-modern"
     [hidden]="!opened"
 >
-    <div class="qt-aside-modern__header">
-        <div
-            class="qt-aside-modern__header-close icon__close"
-            (click)="close()"
-        ></div>
-    </div>
-    <div class="qt-aside-modern__content qt-pt-0-important --less-padding advanced">
+    <div
+        class="qt-aside-modern__header-close icon__close"
+        (click)="close()"
+    ></div>
+    <div class="qt-aside-modern__content advanced">
         <ng-template
             ngFor
             let-report
@@ -18,9 +16,11 @@
             <div class="report-menu-item">
                 <div class="report-menu-item-header">
                     <i [ngClass]="report.icon"></i>
-                    <h3 [textContent]="report.category"></h3>
+                    <h3
+                        class="qt-ml-8"
+                        [textContent]="report.category"
+                    ></h3>
                 </div>
-
                 <ng-template
                     ngFor
                     let-subcategory
@@ -28,13 +28,27 @@
                     [ngForTrackBy]="trackById"
                 >
                     <span
+                        class="pointer"
+                        [ngClass]="{'active':isActive(subcategory.route)}"
                         [textContent]="subcategory.name"
                         (click)="goToState(subcategory.route)"
                     ></span>
                 </ng-template>
             </div>
 
+
+
+
+
+
+
         </ng-template>
+
+
+
+
+
+
 
     </div>
 </div>
