@@ -32,6 +32,7 @@ import { TechSalesReport } from '../class/tech-sales-report';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { TechTicketReport } from '../class/tech-ticket-report';
 import { Subscription } from 'rxjs';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 @Component({
@@ -85,6 +86,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private companiesStateService: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
 
@@ -567,6 +569,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.productSalesReport.setProductId((item) ? item.versionedId.id : null);
     this.productsCompanyReport.setProductId((item) ? item.versionedId.id : null);
 
+  }
+  back() {
+    this.leftPanelStateService.goToState('new-reports');
   }
   toggleLeftMenu() {
     this.reportsStateService.toggleLeftMenu();

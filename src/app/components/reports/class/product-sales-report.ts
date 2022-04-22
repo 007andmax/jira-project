@@ -15,6 +15,7 @@ export class ProductSalesReport {
     purchaseCostSum: number;
     salePriceSum: number;
     discountSum: number;
+    init: boolean = false;
 
     public setData(data) {
         this.techCompanyName = data.techCompanyName;
@@ -29,7 +30,7 @@ export class ProductSalesReport {
         this.purchaseCostSum = data.purchaseCostSum;
         this.salePriceSum = data.salePriceSum;
         this.discountSum = data.discountSum;
-
+        this.init = true;
     }
 
 

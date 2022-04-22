@@ -40,6 +40,10 @@
 
 
 
+
+
+
+
 <!-- </div> -->
 <!-- <div -->
 <!-- class="product-report-btn" -->
@@ -71,6 +75,10 @@
 
 
 
+
+
+
+
 <!-- <div -->
 <!-- *ngIf="report === 'company-roducts-report'" -->
 <!-- style="max-width: 300px; float: right; height: 32px; display: flex; align-items: center; margin-right: 10px;" -->
@@ -92,6 +100,10 @@
 
 
 
+
+
+
+
 <div class="qt-report__control-panel qt-ml-16">
     <div
         class="qt-report__control-panel-btn icon__email-dark qt-mr-6 pointer"
@@ -110,14 +122,21 @@
 
 
 
+
+
+
+
     <div
         class="qt-report__control-panel-btn icon__export-dark pointer"
         ngbDropdown
         keyboard-nav="true"
         uib-tooltip="export"
         tooltip-placement="top"
-        ngbDropdownToggle
     >
+        <div
+            class="mask-dp pointer"
+            ngbDropdownToggle
+        ></div>
         <ul
             ngbDropdownMenu
             aria-labelledby="dropdown1"

@@ -43,7 +43,10 @@
             [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"
         ></div>
         <h6 class="qt-fw-600 qt-color-dark">Income accounts</h6>
-        <div class="body-m qt-color-dark-light">
+        <div
+            class="body-m qt-color-dark-light"
+            *ngIf="list.length > 0"
+        >
             <span [textContent]="perseStartDate()"></span>
             -
             <span [textContent]="perseEndDate()"></span>

@@ -109,14 +109,17 @@
                 [textContent]="(productSalesReport.clientCompanyName) ? productSalesReport.clientCompanyName : 'All companies'"
             ></div>
             <h6 class="qt-fw-600 qt-color-dark">Product Sales Report</h6>
-            <div class="body-m qt-color-dark-light">
+            <div
+                class="body-m qt-color-dark-light"
+                *ngIf="productSalesReport.init"
+            >
                 <span [textContent]="perseStartDate()"></span>
                 -
                 <span [textContent]="perseEndDate()"></span>
             </div>
             <div
                 class="tech-company-name"
-                *ngIf="productSalesReport.lines.length > 0"
+                *ngIf="productSalesReport.init"
             >
                 <div class="body-m-sb qt-color-dark">
                     {{ productSalesReport.techCompanyName }}

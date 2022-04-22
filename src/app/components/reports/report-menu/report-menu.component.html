@@ -84,7 +84,10 @@
                     [fileName]="'tech-ticket-report'"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
     </div>
     <div *ngIf="report === 'tech-sales'">
@@ -192,7 +195,10 @@
                     [fileName]="'tech-sales-report'"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
     </div>
     <div *ngIf="report === 'remote-access'">
@@ -331,8 +337,14 @@
                     [fileName]="'remote-access-report'"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
+
+
+
 
 
 
@@ -822,8 +834,14 @@
                         </label>
                     </div>
                 </div>
-                <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+                <div
+                    class="qt-report__control-panel-btn-close pointer icon__close"
+                    (click)="back()"
+                ></div>
             </div>
+
+
+
 
 
 
@@ -994,7 +1012,10 @@
                     [fileName]="'accounting-report-report'"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
     </div>
     <div *ngIf="report === 'tech-service'">
@@ -1073,7 +1094,10 @@
                     [fileName]="'tech-service-report'"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
     </div>
     <div *ngIf="report === 'income-accounts'">
@@ -1183,8 +1207,14 @@
                     ></app-report-additional-actions>
                 </div>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
+
+
+
 
 
 
@@ -1316,7 +1346,10 @@
                     [selectedClient]="selectedClient"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
     </div>
     <div *ngIf="report === 'accounts-receivable'">
@@ -1382,7 +1415,10 @@
                     [selectedClient]="selectedClient"
                 ></app-report-additional-actions>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
     </div>
     <div *ngIf="report === 'byProducts'">
@@ -1456,6 +1492,9 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+
+
+
 
 
 
@@ -1554,9 +1593,15 @@
                         ></app-report-additional-actions>
                     </div>
                 </div>
-                <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+                <div
+                    class="qt-report__control-panel-btn-close pointer icon__close"
+                    (click)="back()"
+                ></div>
             </div>
         </div>
+
+
+
 
 
 
@@ -1641,12 +1686,18 @@
 
 
 
+
+
+
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                            <div class="report-left-panel__btn pointer qt-mr-6">
+                            <div
+                                class="report-left-panel__btn pointer qt-mr-6"
+                                (click)="toggleLeftMenu()"
+                            >
                                 <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                             </div>
                             <div class="qt-report__filter qt-f-1">
@@ -1725,9 +1776,15 @@
                         </app-report-additional-actions>
                     </div>
                 </div>
-                <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+                <div
+                    class="qt-report__control-panel-btn-close pointer icon__close"
+                    (click)="back()"
+                ></div>
             </div>
         </div>
+
+
+
 
 
 
@@ -1927,8 +1984,14 @@
                     </label>
                 </div>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
+
+
+
 
 
 
@@ -1987,6 +2050,9 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+
+
+
 
 
 
@@ -2054,8 +2120,14 @@
                     </label>
                 </div>
             </div>
-            <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
         </div>
+
+
+
 
 
 
