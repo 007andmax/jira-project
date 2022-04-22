@@ -1,0 +1,45 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.help-support-list-item-icon {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    width: 40px;
+    height: 40px;
+}
+.help-support-list-item-text {
+   h3 {
+        @extend %body-r-m;
+        color: $primary-1;
+   }
+   span {
+        @extend %сaption-l;
+        color: $gray-700;
+   }
+}
+.help-support-list-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0px;
+    border-bottom: 1px solid #edf0f2;
+}
+.help-center-aside {
+    width: 384px;
+    .qt-aside-modern {
+      &__header {
+        background-color: transparent;
+        border: unset;
+        padding-left: 24px;
+        padding-right: 16px;
+      }
+      &__content {
+        padding: 0 24px 24px;
+        height: calc(100% - 64px);
+      }
+    }
+
+    .qt-aside__title {
+      @extend %body-l-sb;
+    }
+}

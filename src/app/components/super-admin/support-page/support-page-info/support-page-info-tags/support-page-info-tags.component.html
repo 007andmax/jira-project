@@ -1,0 +1,142 @@
+<div
+    class="profile-cmp-board tags-area d-flex"
+    ngbDropdown
+    #dp="ngbDropdown"
+    (openChange)="onCloseTags($event)"
+>
+    <div
+        class="qt-page-list__search"
+        ngbDropdownAnchor
+    >
+        <input
+            type="text"
+            autocomplete="off"
+            id="dropdown1"
+            [(ngModel)]="newTag"
+            placeholder="Add/filter tags"
+            (input)="onSearch($event)"
+            (click)="opeDropDown()"
+            [disabled]="disabled"
+        >
+    </div>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <div
+            class="no-exist"
+            *ngIf="tags.length == 0"
+        >
+            <div class="no-matching">No matching tags</div>
+            <span>
+                Try a different keyword or press Cmd+Enter to create a new tag.
+            </span>
+        </div>
+        <div
+            class="list-tags-body"
+            [ngClass]="{'--closed':tags.length == 0}"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="tags"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="company-tag-item"
+                    [ngClass]="{'--active':isSeleted(item),'--editing':item.isEditMode()}"
+                    [id]="'tag-' + item.id"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            (change)="toggleItem(item)"
+                            readonly
+                        >
+                        <span></span>
+                    </label>
+                    <div class="text-content qt-mr-4">
+                        <input
+                            type="text"
+                            [value]="item.word"
+                            *ngIf="item.isEditMode()"
+                            appKeyUpEnter
+                            (onChange)="saveEditTooltip.hide();editTag(item.id,$event)"
+                        >
+                        <div
+                            class="name"
+                            *ngIf="!item.isEditMode()"
+                        >
+                            {{item.word}}
+                        </div>
+                    </div>
+                    <i
+                        class="icon__save-support-tag qt-sz-16 pointer"
+                        *ngIf="item.isEditMode()"
+                        (click)="saveEditTooltip.hide();editTag(item.id,$event);item.setEditMode(false)"
+                        (mouseenter)="saveEditTooltip.show($event.target)"
+                        (mouseleave)="saveEditTooltip.hide()"
+                    ></i>
+                    <app-dynamic-tooltip
+                        [content]="'Save'"
+                        [position]="'top'"
+                        #saveEditTooltip
+                    ></app-dynamic-tooltip>
+                    <app-dynamic-tooltip
+                        [content]="'Edit'"
+                        [position]="'top'"
+                        #editTooltip
+                    ></app-dynamic-tooltip>
+                    <app-dynamic-tooltip
+                        [content]="'Delete'"
+                        [position]="'top'"
+                        #deleteTooltip
+                    ></app-dynamic-tooltip>
+                    <i
+                        class="edit-grey qt-sz-16 qt-mr-8 pointer"
+                        (click)="editTooltip.hide();item.setEditMode(true)"
+                        *ngIf="!item.isEditMode()"
+                        (mouseenter)="editTooltip.show($event.target)"
+                        (mouseleave)="editTooltip.hide()"
+                    ></i>
+                    <i
+                        class="icon__remove qt-sz-16 pointer"
+                        (click)="removeTag(item)"
+                        *ngIf="!item.isEditMode()"
+                        (mouseenter)="deleteTooltip.show($event.target)"
+                        (mouseleave)="deleteTooltip.hide()"
+                    ></i>
+                </div>
+            </ng-template>
+        </div>
+        <div
+            class="crate-tag pointer"
+            (click)="addTag()"
+        >
+            <span class="icon__add-grey qt-sz-12 qt-bg-contain qt-dib qt-mr-6"></span>
+            <span [textContent]="(newTag.length > 0) ? ('Create a tag ' + '“' + newTag + '”') : 'Create a tag'"></span>
+        </div>
+    </div>
+    <div class="tags-tab d-flex">
+        <span
+            class="tag"
+            *ngFor="let tag of selectedTag | sortTags : reqTags"
+        >
+            {{getSelectedTag(tag)}}
+            <a
+                href="javascript:;"
+                (click)="toggleItem(getSelectedTag(tag))"
+                class="close-btn"
+                *ngIf="!disabled"
+            >
+                <img
+                    src="/html/assets/img/icons/close-10.png"
+                    alt="tags"
+                >
+            </a>
+        </span>
+    </div>
+</div>

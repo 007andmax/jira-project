@@ -354,6 +354,11 @@
 
 
 
+
+
+
+
+
     </div>
     <div *ngIf="report === 'device-ip-summary'">
         <div
@@ -851,6 +856,11 @@
 
 
 
+
+
+
+
+
         </div>
     </div>
     <div *ngIf="report === 'common-commissions'">
@@ -1062,13 +1072,18 @@
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
                         [ngClass]="className"
                     >
-                        <div class="qt-report__dropdown qt-mr-8 grey-dropdown form-group content select-users-list">
-                            <app-tech-users-list-report
-                                [sort]="true"
-                                [search]="true"
-                                [change]="true"
-                                (onSelectedItem)="onSelectTechUser($event)"
-                            ></app-tech-users-list-report>
+                        <div class="form-group content service-name">
+                            <div>
+                                <input
+                                    type="text"
+                                    name="serialNumber"
+                                    [(ngModel)]="techService.serviceName"
+                                    autocomplete="off"
+                                    class="form-control"
+                                    placeholder="Service Name"
+                                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                                >
+                            </div>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <app-multi-datepicker
@@ -1077,6 +1092,26 @@
                                 [errorMessage]="'Please select the dates'"
                                 (selectedDate)="filterByDate($event)"
                             ></app-multi-datepicker>
+                        </div>
+                        <div class="form-group content">
+                            <app-drop-down
+                                [placeholder]="'Select Company'"
+                                [list]="companies"
+                                [validate]="validate.getCompany()"
+                                [errorMessage]="'Please select the company name'"
+                                [field]="'name'"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="selectClient($event)"
+                            ></app-drop-down>
+                        </div>
+                        <div class="qt-report__dropdown qt-mr-8 grey-dropdown form-group content select-users-list">
+                            <app-tech-users-list-report
+                                [sort]="true"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="onSelectTechUser($event)"
+                            ></app-tech-users-list-report>
                         </div>
                         <button
                             class="btn-new btn-primary-white qt-fs-0"
@@ -1212,6 +1247,11 @@
                 (click)="back()"
             ></div>
         </div>
+
+
+
+
+
 
 
 
@@ -1504,6 +1544,11 @@
 
 
 
+
+
+
+
+
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1611,6 +1656,11 @@
 
 
 
+
+
+
+
+
     </div>
     <div *ngIf="report === 'byCustomers'">
         <!-- <div -->
@@ -1677,6 +1727,11 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+
+
+
+
+
 
 
 
@@ -1782,6 +1837,11 @@
                 ></div>
             </div>
         </div>
+
+
+
+
+
 
 
 
@@ -2001,6 +2061,11 @@
 
 
 
+
+
+
+
+
     </div>
     <div *ngIf="report === 'service-report'">
         <!-- <div -->
@@ -2050,6 +2115,11 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+
+
+
+
+
 
 
 
@@ -2125,6 +2195,11 @@
                 (click)="back()"
             ></div>
         </div>
+
+
+
+
+
 
 
 

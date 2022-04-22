@@ -37,6 +37,7 @@ export class UsersStateService {
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
+  isGetAllUsers: boolean = false;
   constructor(private userService: UsersService,
     private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
@@ -44,10 +45,7 @@ export class UsersStateService {
   }
   public onInit() {
 
-    this.userService.getAllusers().subscribe((data) => {
-      this.setAllUsers(data);
-      this.onInitGetUsers(data);
-    })
+
     this.onInitGetCurrentUser();
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
@@ -84,6 +82,13 @@ export class UsersStateService {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
   }
+  public initGetAllUsers() {
+    this.isGetAllUsers = true;
+    this.userService.getAllusers().subscribe((data) => {
+      this.setAllUsers(data);
+      this.onInitGetUsers(data);
+    })
+  }
   public setModeUserFilterSubscription(data) {
     this.modeUserFilterSubscription = data;
   }
@@ -94,6 +99,7 @@ export class UsersStateService {
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
+      if (this.currentUser.role !== "SUPER_ADMIN" && !this.isGetAllUsers) this.initGetAllUsers();
     })
   }
   showMessageAside(data) {

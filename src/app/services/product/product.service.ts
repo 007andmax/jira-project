@@ -43,6 +43,10 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}products/isMfgUnique?manufacture=${manufacture}&id=${id}`);
   }
 
+  public validateproductForRemove(id) {
+    return this.http.get(`${this.apiUrl}products/validate/${id}`);
+  }
+
   /**
    * validate product name
    */

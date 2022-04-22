@@ -5,6 +5,7 @@ import { InvoiceRevenue } from '../class/invoice-revenue';
 import * as moment from "moment";
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { MultiDatepickerDashboardComponent } from '../multi-datepicker-dashboard/multi-datepicker-dashboard.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-invoice-revenue',
@@ -23,6 +24,7 @@ export class InvoiceRevenueComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private dashboardBillingService: DashboardBillingService) { }
 
   ngOnInit() {
@@ -68,7 +70,7 @@ export class InvoiceRevenueComponent implements OnInit {
     this.updateStartDate();
     this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
     this.datesDp.setEndDate(new Date());
-    this.getInvoiceRevenue();
+    if (this.getPermissions('VIEW_ACCOUNTING')) this.getInvoiceRevenue();
 
   }
   public updateStartDate() {
@@ -101,5 +103,7 @@ export class InvoiceRevenueComponent implements OnInit {
     this.getInvoiceRevenue();
 
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
 }
