@@ -6,6 +6,50 @@
   height: 100%;
   background-color: $background;
   min-height: 92vh;
+
+  .qt-input-block input,
+  .qt-report__dropdown input,
+  .select-product .select-product__input {
+    height: 36px;
+    border-radius: 4px;
+  }
+  .qt-report__header {
+    margin-top: 50px;
+    &-content {
+      border-bottom: 1px solid $gray-400;
+      padding-bottom: 14px;
+    }
+  }
+  .top-product-list-ticket {
+    min-height: 44px;
+    height: auto;
+  }
+  .qt-report__body-header {
+    text-align: center;
+    margin: 14px 0;
+  }
+  .qt-report__dropdown {
+    flex: 0 1 260px;
+  }
+  .company-report {
+    background: transparent;
+  }
+  .report-menu .dropdown-menu {
+    min-width: 80px;
+    li {
+      display: flex;
+      height: 38px;
+      align-items: center;
+      padding: 0 20px;
+      transition: all 0.3s;
+      color: $primary-2;
+      @extend %body-m-m;
+      &:hover {
+        color: #ffffff;
+        background: #16a4fa;
+      }
+    }
+  }
 }
 
 .product-list-report .report-title {

@@ -2209,44 +2209,114 @@
 
     </div>
     <div *ngIf="report === 'company-roducts-report'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
+<!--        <div-->
+<!--            class="run-report-content clearfix"-->
+<!--            [ngClass]="className"-->
+<!--        >-->
+<!--            <div class="new-reports-reverse">-->
+<!--                <button-->
+<!--                    class="btn-new btn-primary-white qt-fs-0"-->
+<!--                    (click)="getReportCompanyProducts()"-->
+<!--                >-->
+<!--                    Get-->
+<!--          Report-->
+<!--                </button>-->
+<!--                <div class="form-group content">-->
+<!--                    <app-multi-datepicker-->
+<!--                        #dp-->
+<!--                        (selectedDate)="filterByDate($event)"-->
+<!--                    ></app-multi-datepicker>-->
+<!--                </div>-->
+<!--                <div class="form-group content">-->
+<!--                    <div>-->
+<!--                        <input-->
+<!--                            type="text"-->
+<!--                            name="serialNumber"-->
+<!--                            [(ngModel)]="productsCompanyReport.serialNumber"-->
+<!--                            autocomplete="off"-->
+<!--                            class="form-control"-->
+<!--                            placeholder="Serial Number"-->
+<!--                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
+<!--                        >-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group content custom-width">-->
+<!--                    <app-product-list-->
+<!--                        [type]="'REPORT'"-->
+<!--                        (selectedProductItem)="selectProduct($event)"-->
+<!--                    ></app-product-list>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+      <div class="qt-report__header qt-df qt-ai-fs">
+        <div class="qt-report__header-content qt-w100">
+          <div class="qt-df qt-ai-c qt-jc-sb">
+            <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+              <div
+                class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                [ngClass]="className"
+              >
+                <div class="qt-report__dropdown product-dropdown-new-ng light-dropdown select-product qt-mr-8">
+                  <app-product-list
+                    [type]="'REPORT'"
+                    (selectedProductItem)="selectProduct($event)"
+                  ></app-product-list>
+                </div>
+                <div class="qt-report__dropdown qt-mr-8">
+                  <div>
+                    <input
+                      type="text"
+                      name="serialNumber"
+                      [(ngModel)]="productsCompanyReport.serialNumber"
+                      autocomplete="off"
+                      class="form-control"
+                      placeholder="Serial Number"
+                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                    >
+                  </div>
+                </div>
+                <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                  <app-multi-datepicker
+                    #dp
+                    (selectedDate)="filterByDate($event)"
+                  ></app-multi-datepicker>
+                </div>
                 <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportCompanyProducts()"
+                  class="btn-new btn-primary-white qt-fs-0"
+                  (click)="getReportCompanyProducts()"
                 >
-                    Get
-          Report
+                  Get
+                  Report
                 </button>
-                <div class="form-group content">
-                    <app-multi-datepicker
-                        #dp
-                        (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-                </div>
-                <div class="form-group content">
-                    <div>
-                        <input
-                            type="text"
-                            name="serialNumber"
-                            [(ngModel)]="productsCompanyReport.serialNumber"
-                            autocomplete="off"
-                            class="form-control"
-                            placeholder="Serial Number"
-                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                        >
-                    </div>
-                </div>
-                <div class="form-group content custom-width">
-                    <app-product-list
-                        [type]="'REPORT'"
-                        (selectedProductItem)="selectProduct($event)"
-                    ></app-product-list>
-                </div>
+              </div>
             </div>
+            <app-report-additional-actions
+              [orientation]="'LANDSCAPE'"
+              [report]="'company-roducts-report'"
+              [fileName]="'products_report'"
+              [selectedClient]="selectedClient"
+              (changePurchaseCost)="togglePurchaseCost($event)"
+            ></app-report-additional-actions>
+          </div>
+          <div
+            *ngIf="report === 'company-roducts-report'"
+            class="qt-report__include-columns-panel qt-mt-16"
+          >
+            <label
+              class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer"
+            >
+              <input
+                type="checkbox"
+                (change)="togglePurchaseCost($event)"
+                checked
+              >
+              <span class=""></span>
+              <div class="qt-ml-8">Include product cost in report</div>
+            </label>
+          </div>
         </div>
+
+      </div>
+
     </div>
 </div>

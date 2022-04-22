@@ -8,13 +8,13 @@
             (getReport)="getReport($event)"
         ></app-report-menu>
     </div>
-    <app-report-additional-actions
-        [orientation]="'LANDSCAPE'"
-        [report]="'company-roducts-report'"
-        [fileName]="'products_report'"
-        [selectedClient]="selectedClient"
-        (changePurchaseCost)="togglePurchaseCost($event)"
-    ></app-report-additional-actions>
+<!--    <app-report-additional-actions-->
+<!--        [orientation]="'LANDSCAPE'"-->
+<!--        [report]="'company-roducts-report'"-->
+<!--        [fileName]="'products_report'"-->
+<!--        [selectedClient]="selectedClient"-->
+<!--        (changePurchaseCost)="togglePurchaseCost($event)"-->
+<!--    ></app-report-additional-actions>-->
     <div
         class="loading"
         *ngIf="loadingInProgress"
@@ -27,40 +27,58 @@
             class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
             *ngIf="!loadingInProgress"
         >
-            <div class="report-header">
-                <h5>List of products sold</h5>
-                <div class="company-info">
-                    <h5 class="qt-fw-600">
-                        {{productsCompanyReport.clientCompanyName}}
-                    </h5>
-                    <p>
-                        <span>{{productsCompanyReport.startDate}}</span>
-                        -
-                        <span>{{productsCompanyReport.endDate}}</span>
-                    </p>
+            <div class="qt-report__body-header">
+                <h6 class="qt-fw-600 qt-color-dark">List of products sold</h6>
+                <div class="body-m-sb qt-color-dark">
+                  {{productsCompanyReport.clientCompanyName}}
+                </div>
+                <div class="body-m qt-color-dark-light">
+                  <span>{{productsCompanyReport.startDate}}</span>
+                  -
+                  <span>{{productsCompanyReport.endDate}}</span>
+                </div>
+                <div *ngIf="productsCompanyReport.lines.length > 0">
+                  <div class="body-m-sb qt-color-dark">
+                    {{ productsCompanyReport.techCompanyName }}
+                  </div>
+                  <div class="body-m-sb qt-color-dark" *ngIf="productsCompanyReport.type ==='DETAILED' ">
+                    Detailed sales for
+                    <span>
+                    {{ productsCompanyReport.clientCompanyName }}
+                    </span>
+                  </div>
+                  <div class="body-m qt-color-dark-light">
+                    <span>
+                      {{ parseDate(productsCompanyReport.startDate)   }}
+                    </span>
+                      to
+                    <span>
+                      {{ parseDate(productsCompanyReport.endDate)   }}
+                    </span>
+                  </div>
                 </div>
             </div>
             <div *ngIf="productsCompanyReport.lines.length > 0">
-                <div class="header-product-list-ticket">
-                    <h5 class="qt-fw-600">
-                        {{ productsCompanyReport.techCompanyName }}
-                    </h5>
-                    <p *ngIf="productsCompanyReport.type ==='DETAILED' ">
-                        Detailed sales for
-                        <span>
-                            {{ productsCompanyReport.clientCompanyName }}
-                        </span>
-                    </p>
-                    <p>
-                        <span>
-                            {{ parseDate(productsCompanyReport.startDate)   }}
-                        </span>
-                        to
-                        <span>
-                            {{ parseDate(productsCompanyReport.endDate)   }}
-                        </span>
-                    </p>
-                </div>
+<!--                <div class="header-product-list-ticket">-->
+<!--                    <h5 class="qt-fw-600">-->
+<!--                        {{ productsCompanyReport.techCompanyName }}-->
+<!--                    </h5>-->
+<!--                    <p *ngIf="productsCompanyReport.type ==='DETAILED' ">-->
+<!--                        Detailed sales for-->
+<!--                        <span>-->
+<!--                            {{ productsCompanyReport.clientCompanyName }}-->
+<!--                        </span>-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        <span>-->
+<!--                            {{ parseDate(productsCompanyReport.startDate)   }}-->
+<!--                        </span>-->
+<!--                        to-->
+<!--                        <span>-->
+<!--                            {{ parseDate(productsCompanyReport.endDate)   }}-->
+<!--                        </span>-->
+<!--                    </p>-->
+<!--                </div>-->
                 <div *ngIf="productsCompanyReport.lines">
                     <ul>
                         <li class="top-product-list-ticket clearfix">
