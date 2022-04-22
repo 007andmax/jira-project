@@ -105,6 +105,7 @@
                                             [class]="['light-dropdown', 'qt-select-input-40']"
                                             [placeholder]="'Select Manufacture'"
                                             [list]="manufactureList"
+                                            [editItem]="selectManufactureNames"
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="false"
@@ -144,7 +145,8 @@
                                             #model
                                             [class]="['light-dropdown', 'qt-select-input-40']"
                                             [placeholder]="'Select Model'"
-                                            [list]="selectManufactureList"
+                                            [list]="selectModelList"
+                                            [editItem]="selectModelName"
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="true"

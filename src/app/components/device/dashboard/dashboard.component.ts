@@ -88,10 +88,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   techCompany: any;
   modelList : any[]=[];
   manufactureId: any;
-  selectManufactureList: any[]=[];
+  selectModelList: any[]=[];
   modelId:any;
-  modelByManufactureList : any[]=[];
-  manufactureName : string;
+  model : any;
+  manufacturename : string;
+  modelName : string;
+  selectManufactureNames : any;
+  selectModelName : any;
 
   constructor(
     private agentService: AgentService,
@@ -261,6 +264,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.isNonAgentDevice = false;
         }
 
+        this.model = this.asset.ModelID;
+        this.selectManufacture(this.asset.ManufacturerId)
+        this.selectModel(this.asset.ModelID);
+        this.getModelName(this.asset.ModelID)
         this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
         this.getOprationSystemDetail();
         if(resp[0].VirusProtectionProducts != null){
@@ -384,8 +391,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onRemoveTag(index: number): void {
     const removetag: any = {
-      ID: this.asset.ID,
-      ID2: this.selectedTag[index].ID,
+      ID: this.selectedTag[index].AssetTagID,
       Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
     };
 
@@ -568,8 +574,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.asset.LastRebootDate = this.asset.LastRebootDate || '0001-01-01';
     this.asset.DeploymentDate = this.asset.DeploymentDate || '0001-01-01';
     this.asset.WarrantyExpires = this.asset.WarrantyExpires || '0001-01-01';
-    this.asset.Manufacturer = this.manufactureId;
-    this.asset.Model = this.modelId;
+    this.asset.ModelID = this.modelId;
 
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
@@ -821,8 +826,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
         this.manufactureList = resp;
+        if(this.asset){
+          this.selectManufacture(this.asset.ManufacturerId);
+        }
       });
-  }
+    }
+
+    selectManufacture(manufactureId){
+        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == manufactureId);
+    }
 
   getModels(TechCompanyGuid: any) {
     if(this.agentService.AccessToken == '') {
@@ -834,27 +846,43 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
-        this.selectManufactureList = resp;
+        this.selectModelList = resp;
+        if(this.asset){
+          this.selectModel(this.asset.ModelID);
+        }
       });
   }
 
+  selectModel(modelId){
+    this.selectModelName = this.selectModelList.find(x=>x.ID == modelId);
+ }
+
+  getModelName(modelId){
+     this.modelName =  this.selectModelList.find(x=>x.modelId)
+  }
   onSelectManufactureName(SelectManufacturer) {
     if (SelectManufacturer) {
       this.manufactureId = SelectManufacturer.ID;
-      this.manufactureName = SelectManufacturer.Name
+      this.selectManufactureNames = this.manufactureList.find(x=>x.ID == this.manufactureId);
       this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-        this.selectManufactureList = resp;
+        this.selectModelList = resp;
         this.updateAsset();
       })
     }
     else{
       this.getModels(this.techCompany.id);
+      this.selectManufactureNames = "";
     }
   }
 
   onSelectModel(SelectModel) {
     if (SelectModel) {
       this.modelId = SelectModel.ID;
+      this.selectModelName = this.selectModelList.find(x=>x.ID == this.modelId);
+      this.updateAsset();
+    }
+    else{
+      this.selectModelName = "";
       this.updateAsset();
     }
   }
