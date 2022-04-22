@@ -5,12 +5,12 @@
         (onRequest)="onRequest($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
+<!-- <app-report-additional-actions
     [report]="'service-report'"
     [fileName]="'customer-report-' + getSelectedClientName()"
     [template]="'CUSTOMER_REPORT'"
     [selectedClient]="selectedClient"
-></app-report-additional-actions>
+></app-report-additional-actions> -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
@@ -154,6 +154,7 @@
                                             class="col-md-7"
                                             [innerHTML]="ticket.description"
                                         ></div>
+
 
 
 

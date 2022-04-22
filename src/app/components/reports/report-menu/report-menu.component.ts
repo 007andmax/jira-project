@@ -124,7 +124,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
 
   }
-
+  getSelectedClientName() {
+    return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
+  }
   public getSoftByCompany(companyId) {
     this.softwareSummaryReport.setPreloaderSoft(true);
     this.remoteConnectionReport.setPreloaderDevices(true);
@@ -566,7 +568,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.productsCompanyReport.setProductId((item) ? item.versionedId.id : null);
 
   }
-
+  toggleLeftMenu() {
+    this.reportsStateService.toggleLeftMenu();
+  }
   public onChangeTehUsers(tehusers) {
 
   }

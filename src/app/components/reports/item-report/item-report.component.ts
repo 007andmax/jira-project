@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
@@ -14,12 +15,19 @@ export class ItemReportComponent implements OnInit, OnDestroy {
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
   ) { }
 
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
     $('body').addClass('qt-bg-white');
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      id = params['id'];
+      if (id && localStorage.report) this.report = localStorage.report;
+      console.log("this.report", this.report);
+    });
   }
   back() {
     this.leftPanelStateService.goToState('new-reports');

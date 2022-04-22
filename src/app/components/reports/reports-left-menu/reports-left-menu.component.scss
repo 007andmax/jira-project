@@ -1,0 +1,59 @@
+#inventory-description {
+    padding: 8px 14px;
+}
+
+.qt-checkbox {
+    width: auto;
+    min-height: auto;
+}
+
+.taxes-container {
+    margin-top: 0px !important;
+}
+.qt-aside-modern {
+    width: 264px;
+    left: 56px;
+    right: none;
+}
+.report-menu-item {
+    .report-menu-item-header {
+        .icon {
+            &__sales {
+                background-image: url("/assets/img/icons/report-left-menu/sales.svg");
+            }
+            &__taxes {
+                background-image: url("/assets/img/icons/report-left-menu/taxes.svg");
+            }
+            &__commision {
+                background-image: url("/assets/img/icons/report-left-menu/commision.svg");
+            }
+            &__financial {
+                background-image: url("/assets/img/icons/report-left-menu/financial.svg");
+            }
+            &__remote-access {
+                background-image: url("/assets/img/icons/report-left-menu/remote-access.svg");
+            }
+            &__devices {
+                background-image: url("/assets/img/icons/report-left-menu/devices.svg");
+            }
+            &__performance {
+                background-image: url("/assets/img/icons/report-left-menu/performance.svg");
+            }
+            &__tickets {
+                background-image: url("/assets/img/icons/report-left-menu/tickets.svg");
+            }
+            &__income {
+                background-image: url("/assets/img/icons/report-left-menu/income.svg");
+            }
+        }
+        i {
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            display: block;
+        }
+    }
+    span {
+        display: block;
+    }
+}
