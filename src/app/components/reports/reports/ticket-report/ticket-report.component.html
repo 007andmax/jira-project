@@ -187,9 +187,7 @@
 
 
 
-
 <!-- <div class="col-md-7">{{ expence.description }}</div> -->
-
 
 
 
@@ -298,7 +296,6 @@
 <!-- </div> -->
 
 
-
 <div>
     <app-report-menu
         [report]="'ticket-report'"
@@ -327,106 +324,11 @@
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-      <div class="customer-ticket__report">
-
-      <div class="qt-report__body-header">
-        <div class="body-m-sb qt-color-dark">{{ ticketsReport.companyName || 'All companies' }}</div>
-        <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
-        <div class="body-m qt-color-dark-light">
-          <span>{{ticketsReport.startDate}}</span>
-          -
-          <span>{{ ticketsReport.endDate }}</span>
-        </div>
-      </div>
-      <div
-        *ngIf="showHeader"
-        class="customer-ticket__report--summary"
-      >
-        <div class="customer-ticket__header">
-          <div class="customer-ticket__header--item canvas-chart no-value">
-            <div class="customer-ticket__report--summary-title">Resolved Tickets</div>
-            <nvd3
-              [options]="chartOptions"
-              [data]="chartData"
-            ></nvd3>
-          </div>
-          <div class="customer-ticket__header--item">
-            <ng-template
-              ngFor
-              let-time
-              [ngForOf]="overallServiceTime"
-              let-i="index"
-              [ngForTrackBy]="trackByIndex"
-            >
-              <p
-                *ngIf="ticketsReport.timeSpent"
-                [ngClass]="'service-color-' + i"
-              >
-                {{ time.name }}
-                <span>
-                                      {{ formatServiceTime(time.hours,time.minutes) }}
-                                  </span>
-              </p>
-            </ng-template>
-          </div>
-          <div class="customer-ticket__header--item">
-            <div class="average-time-spent" *ngIf="!ticketsReport.showTotalTicketAmount">
-              <div class="average-time-spent__wrap">
-                <div class="average-time-spent__icon">
-                  <div class="icon__tickets-on-time qt-sz-24 qt-bg-contain pointer"></div>
-                </div>
-                <div class="average-time-spent__text-content">
-                  <div class="average-time-spent__time">{{formatServiceTime(ticketsReport.timeSpent.hours,ticketsReport.timeSpent.minutes)}} hrs</div>
-                  <div class="average-time-spent__text">Average Time Spent</div>
-                </div>
-              </div>
-            </div>
-            <div class="average-response-time" *ngIf="ticketsReport.averageResponseTime">
-              <div class="average-response-time__wrap">
-                <div class="average-response-time__icon">
-                  <div class="icon__avg-response qt-sz-24 qt-bg-contain pointer"></div>
-                </div>
-                <div class="average-response-time__text-content">
-                  <div class="average-response-time__time">{{ getFloorAverageResponseTime() }} min</div>
-                  <div class="average-response-time__text"> Response time</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="customer-ticket__report--details">
-        <div class="customer-ticket__report--summary-titlqt-mb-12">Ticket Details</div>
-        <div class="details-header clearfix">
-          <div
-            class="col-md-8"
-            style="width: 70%;"
-          >
-            TICKET NUMBER
-          </div>
-          <div
-            class="col-md-2"
-            style="width: 20%;"
-          >
-            DATE / TIME
-          </div>
-          <div
-            class="col-md-2"
-            style="width: 10%;"
-          >
-            STATUS
-          </div>
-        </div>
-        <ng-template
-          ngFor
-          let-ticket
-          [ngForOf]="ticketsReport.tickets"
-          let-i="index"
-          [ngForTrackBy]="trackByIndex"
+        <div
+            class="customer-ticket"
+            *ngIf="onInit"
         >
             <div class="customer-ticket__report">
-
 
 
                 <div class="qt-report__body-header">
@@ -497,12 +399,11 @@
                                         <div class="icon__avg-response qt-sz-24 qt-bg-contain pointer"></div>
                                     </div>
                                     <div class="average-response-time__text-content">
-                                        <div class="average-response-time__time">{{ getFloorAverageResponseTime() }} Min</div>
+                                        <div class="average-response-time__time">{{ getFloorAverageResponseTime() }} min</div>
                                         <div class="average-response-time__text">Response time</div>
                                     </div>
                                 </div>
                             </div>
-
 
 
                         </div>
@@ -597,9 +498,7 @@
 
 
 
-
                                                 <div class="col-md-7">{{ expence.description }}</div>
-
 
 
 

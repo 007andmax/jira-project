@@ -340,6 +340,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'device-ip-summary'">
         <div
@@ -829,6 +830,7 @@
 
 
 
+
         </div>
     </div>
     <div *ngIf="report === 'common-commissions'">
@@ -1188,6 +1190,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'byTaxes'">
         <!-- <div -->
@@ -1457,6 +1460,7 @@
 
 
 
+
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1556,6 +1560,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'byCustomers'">
         <!-- <div -->
@@ -1622,6 +1627,7 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+
 
 
 
@@ -1720,6 +1726,7 @@
                 <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
             </div>
         </div>
+
 
 
 
@@ -1926,6 +1933,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'service-report'">
         <!-- <div -->
@@ -1977,12 +1985,16 @@
         <!-- </div> -->
 
 
+
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                         <div class="report-left-panel__btn pointer qt-mr-6">
-                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                            <div
+                                class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"
+                                (click)="toggleLeftMenu()"
+                            ></div>
                         </div>
                         <div
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
@@ -2039,6 +2051,7 @@
             </div>
             <div class="qt-report__control-panel-btn-close pointer icon__close"></div>
         </div>
+
 
 
     </div>
