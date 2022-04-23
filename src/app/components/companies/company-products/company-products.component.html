@@ -41,21 +41,6 @@
                   <div class="body-m-sb qt-color-dark">
                     {{ productsCompanyReport.techCompanyName }}
                   </div>
-                  <div class="body-m-sb qt-color-dark" *ngIf="productsCompanyReport.type ==='DETAILED' ">
-                    Detailed sales for
-                    <span>
-                    {{ productsCompanyReport.clientCompanyName }}
-                    </span>
-                  </div>
-                  <div class="body-m qt-color-dark-light">
-                    <span>
-                      {{ parseDate(productsCompanyReport.startDate)   }}
-                    </span>
-                      to
-                    <span>
-                      {{ parseDate(productsCompanyReport.endDate)   }}
-                    </span>
-                  </div>
                 </div>
             </div>
             <div *ngIf="productsCompanyReport.lines.length > 0">

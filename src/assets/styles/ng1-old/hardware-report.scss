@@ -50,6 +50,9 @@
       }
     }
   }
+  .qt-report__control-panel-btn {
+    background-color: $white;
+  }
 }
 
 .product-list-report .report-title {
@@ -452,7 +455,26 @@
     }
   }
 }
-
+.product-report-detail-customer {
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 1384px;
+  width: auto;
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+  .col-md-3  {
+    bottom: 5px;
+    width: 100%;
+    margin-left: auto;
+    text-align: right;
+  }
+}
+.product-list__ticket-customer-sales-report {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 50px;
+}
 // End New Style for report
 
 .product-report-btn {
