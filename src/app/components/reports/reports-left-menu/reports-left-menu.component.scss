@@ -1,3 +1,6 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 #inventory-description {
     padding: 8px 14px;
 }
@@ -8,23 +11,32 @@
 }
 
 .taxes-container {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 .qt-aside-modern {
-    width: 264px;
-    left: 56px;
-    right: none;
+  width: 264px;
+  left: 56px;
+  right: unset;
+  box-shadow: 8px 0 16px rgba(0,0,0,.05);
+  .qt-aside-modern__header-close {
+    margin: 10px 10px 0 auto;
+  }
+
 }
 .qt-aside-modern__content {
-    padding: 0px;
+    padding: 0;
+    height: calc(100% - 32px);
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
 }
 .report-menu-item {
-    margin: 0px 0px 16px 0px;
+    margin: 0 0px 16px 0;
     .report-menu-item-header {
         display: flex;
         align-items: center;
-        padding: 0px 0px 0px 16px;
-        margin: 0px 0px 8px 0px;
+        padding: 0 0 0px 16px;
+        margin: 0 0 8px 0;
         .icon {
             &__sales {
                 background-image: url("/assets/img/icons/report-left-menu/sales.svg");
@@ -59,15 +71,17 @@
             height: 24px;
             background-size: contain;
             display: block;
+            margin-top: -2px;
         }
         h3 {
             font-size: 16px;
-            color:#212b36;
+            color: $primary-2;
+            font-weight: 500;
         }
     }
     .active {
         background-color: #e8f6ff;
-        color:#16a4fa;
+        color: $primary-1;
         position: relative;
         &::after {
             position: absolute;
@@ -76,14 +90,15 @@
             bottom: 0;
             right: 0;
             width: 3px;
-            background-color: #16a4fa;
+            background-color: $primary-1;
             display: block;
         }
     }
     span {
         display: block;
         font-size: 14px;
-        color: #212b36;
-        padding: 8px 0px 8px 16px;
+        line-height: 1.43;
+        color: $primary-2;
+        padding: 8px 0 8px 16px;
     }
 }
