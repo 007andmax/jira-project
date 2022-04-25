@@ -105,9 +105,9 @@
                     <tr *ngFor="let deviceDiskSpace of deviceDiskSpaceList">
                         <td class="device">{{ deviceDiskSpace.Name }}</td>
                         <td class="driveLetter">{{deviceDiskSpace.DriveLetter}}</td>
-                        <td class="totalSpace">{{ deviceDiskSpace.size }}</td>
-                        <td class="used">{{deviceDiskSpace.UsedSpace}}</td>
-                        <td class="free">{{ deviceDiskSpace.FreeSpace }}</td>
+                        <td class="totalSpace">{{ deviceDiskSpace.size }} GB</td>
+                        <td class="used">{{deviceDiskSpace.UsedSpace}} GB</td>
+                        <td class="free">{{ deviceDiskSpace.FreeSpace }} GB</td>
                     </tr>
                 </tbody>
             </table>

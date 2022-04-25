@@ -304,7 +304,10 @@ export class ReportDeviceAntivirusComponent implements OnInit {
   downloadCsv() {
     let downloadCsvList = [];
     this.deviceAntivirusList.forEach((element) => {
-      downloadCsvList.push([element.Name.replace(",", " ") || "N/A"]);
+      downloadCsvList.push([
+        element.Name.replace(",", " ") || "N/A",
+        (element.VirusProtectionProducts ?  element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
+      ]);
     });
     let fileName = "Device Antivirus Report List";
     this.excelService.generateExcel(

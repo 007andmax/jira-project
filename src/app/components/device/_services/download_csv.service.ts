@@ -20,7 +20,7 @@ export class ExcelService {
     } else if (type === "devicewarrantyreport") {
       [(typeArr = ["Device Name", "Manufacturer", "Device Type", "Model", "SerialNumber", "Warranty Date"])];
     } else if (type === "deviceantivirusreport"){
-      [(typeArr = ["Device Name"])];
+      [(typeArr = ["Device Name","Antivirus"])];
     } else if (type === "networkIPreport") {
       [(typeArr = ["Device Name", "Domain", "IPAddress", "Subnet", "Gateway", "ExternalIP"])];
     } else if (type === "deviceprocessorramreport") {
