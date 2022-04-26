@@ -7,7 +7,7 @@
 .d-device {
   display: inline-block;
   max-width: 100%;
-  background-image: url(/assets/img/icons/devices.svg);
+  background-image: url(/assets/img/icons/devicesIcon.svg);
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
@@ -132,4 +132,21 @@
   width: 24px;
   height: 24px;
   background-position: center;
+}
+
+::ng-deep .reports-all .report ul li{
+  color: var(--gray-900);
+    width: 200px;
+    height: 20px;
+    margin: 15.5px 119px 16px 8px;
+    font-family:'Roboto';
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+}
+
+::ng-deep .reports-all .report p{
+font-style: normal;
+font-family:'Roboto';
 }
