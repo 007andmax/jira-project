@@ -223,6 +223,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.isDisabledCompany = (data === 'Summary') ? true : false;
     if (data === 'Summary') this.validate.resetCompany();
   }
+  togglePurchaseCost(data) {
+    this.reportsStateService.includePurchaseCost = data;
+  }
   public onSelectTypeProduct(data) {
     this.productSalesReport.setType(data);
     this.isDisabledCompany = (data === 'Summary') ? true : false;
