@@ -56,10 +56,21 @@
                     (optionSelected)="selected($event)"
                 >
                     <mat-option
-                        *ngFor="let user of users"
+                        class="modal-quote-user-item"
+                        *ngFor="let user of usersClients"
                         [value]="user"
                     >
-                        {{user.primaryEmail}}
+                        <span class="user-name">{{getFirstLastName(user)}}</span>
+                        <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
+                    </mat-option>
+                    <hr>
+                    <mat-option
+                        class="modal-quote-user-item"
+                        *ngFor="let user of usersTechnical"
+                        [value]="user"
+                    >
+                        <span class="user-name">{{getFirstLastName(user)}}</span>
+                        <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>

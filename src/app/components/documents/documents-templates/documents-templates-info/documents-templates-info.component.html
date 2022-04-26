@@ -6,8 +6,31 @@
         class="qt-aside-modern__header"
         *ngIf="!showPreloader"
     >
+        <div class="qt-df qt-ai-c qt-ml-auto">
+            <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"
+                (click)="exportPdf()"
+                placement="top"
+                container="body"
+                ngbTooltip="Download"
+            ></div>
+            <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
+                (click)="editDocument()"
+                placement="top"
+                container="body"
+                ngbTooltip="Edit"
+            ></div>
+            <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"
+                (click)="printPdf()"
+                placement="top"
+                ngbTooltip="Print"
+                container="body"
+            ></div>
+        </div>
         <div
-            class="qt-aside-modern__header-close icon__close qt-ml-auto"
+            class="qt-aside-modern__header-close icon__close"
             (click)="openAside = false"
         >
         </div>
