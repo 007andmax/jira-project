@@ -124,3 +124,36 @@
     width: 4%;
   }
 }
+
+::ng-deep .modal-dialog{
+  top: 27% !important;
+  left: 74% !important;
+  position: fixed !important;
+}
+
+::ng-deep .modal-content{
+  border: none !important;
+  position: fixed !important;
+}
+
+::ng-deep .ng7 .loading {
+  left: -500px !important;
+  top: 130px !important;
+}
+
+.application-count{
+  &__row {
+    //display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-left: 24px;
+  }
+  &__row-title {
+    font-size: 12px;
+    line-height: 1.33;
+    color: #364656;
+    font-family: Graphik-Medium, sans-serif;
+    margin-bottom: 2px;
+  }
+}

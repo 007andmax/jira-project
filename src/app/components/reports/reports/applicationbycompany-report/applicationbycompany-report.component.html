@@ -105,7 +105,18 @@
                         <td class="version">
                             {{ applicationByCompany.DisplayVersion }}
                         </td>
-                        <td class="deviceCount">{{applicationByCompany.AssetCount}}</td>
+                        <td class="deviceCount">
+                          <div *ngIf="applicationByCompany.AssetCount != 0">
+                            <a
+                            href="javascript:;"
+                            (click)="counterPopupApplication(templatecounterApplication,applicationByCompany)"
+                            > {{applicationByCompany.AssetCount}}
+                            </a>
+                          </div>
+                          <div *ngIf="applicationByCompany.AssetCount == 0">
+                           {{applicationByCompany.AssetCount}}
+                          </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -116,3 +127,37 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
+
+<ng-template #templatecounterApplication class="modal-content">
+  <div
+    class="qt-aside-modern device-add-aside"
+>
+    <div class="qt-aside-modern__header">
+        <div class="d-f ai-c">
+            <div class="qt-aside__title">{{displayName}}</div>
+        </div>
+        <div>
+          <div
+              class="qt-aside__close-modal icon__close"
+              (click)="closed()"
+          ></div>
+      </div>
+    </div>
+    <div *ngFor="let applicationAsset of applicationAssetNameList">
+      <div class="application-count__row">
+          <div
+              class="application-count__row-title"
+              [textContent]="applicationAsset"
+          ></div>
+      </div>
+  </div>
+  <div *ngIf="applicationAssetNameList.length <= 0">
+    <h4 class="not-found">No Data Found</h4>
+  </div>
+</div>
+<div
+    class="loading"
+    *ngIf="applicationLoading"
+></div>
+</ng-template>

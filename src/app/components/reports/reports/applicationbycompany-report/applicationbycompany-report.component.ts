@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from "@angular/core";
+import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -21,6 +21,8 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
 })
 export class ApplicationbycompanyReportComponent implements OnInit {
   @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild("templatecounterApplication") templatecounterApplication;
+
   clientName: string;
   companies = [];
   application = [];
@@ -40,6 +42,10 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "applicationbyCompany-report";
   accountType = "CLIENT";
+  applicationLoading : boolean;
+  closeResult: string = '';
+  applicationAssetNameList : any[];
+  displayName: string;
   constructor(
     private agentService: AgentService,
     private companiesState: CompaniesStateService,
@@ -49,7 +55,8 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    public elRef: ElementRef
+    public elRef: ElementRef,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit() {
@@ -349,5 +356,46 @@ export class ApplicationbycompanyReportComponent implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.applicationByCompanyList);
+  }
+
+  counterPopupApplication(templatecounterApplication, applicationByCompany) {
+    this.applicationLoading= true;
+    this.displayName = applicationByCompany.DisplayName;
+
+    for(var i=0; i<applicationByCompany.AssetNames.length; i++){
+      this.applicationAssetNameList = applicationByCompany.AssetNames;
+    }
+
+    this.ngZone.run(() => {
+      this.modalService
+      .open(templatecounterApplication, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
+      )
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+          );
+        });
+
+        if(applicationByCompany){
+          this.applicationLoading= false;
+        }
+  }
+
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  closed() {
+    this.modalService.dismissAll("Cross click");
   }
 }
