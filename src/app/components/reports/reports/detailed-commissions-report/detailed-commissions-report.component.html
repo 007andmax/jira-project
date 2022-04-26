@@ -1,232 +1,381 @@
+<!--<div>-->
+<!--    <app-report-menu-->
+<!--        [report]="'detailed-commissions'"-->
+<!--        (onRequest)="onRequest($event)"-->
+<!--        (getReport)="getReport($event)"-->
+<!--    ></app-report-menu>-->
+<!--</div>-->
+<!--<app-report-additional-actions-->
+<!--    [report]="'detailed-commissions'"-->
+<!--    [accountType]="'TECH'"-->
+<!--    [template]="'CUSTOMER_REPORT'"-->
+<!--    [fileName]="'detailed-commissions-report'"-->
+<!--&gt;</app-report-additional-actions>-->
+<!--&lt;!&ndash;  &ndash;&gt;-->
+<!--<div-->
+<!--    class="loading"-->
+<!--    *ngIf="loadingInProgress"-->
+<!--&gt;</div>-->
+<!--<div-->
+<!--    class="product-list___ticket report-show-footer-header"-->
+<!--    id="product-list-ticket-data"-->
+<!--&gt;-->
+<!--    <div-->
+<!--        class="product-list-ticket"-->
+<!--        style="padding: 0px;"-->
+<!--        *ngIf="!loadingInProgress"-->
+<!--    >-->
+<!--        <div-->
+<!--            class="customer-ticket"-->
+<!--            *ngIf="onInit"-->
+<!--        >-->
+<!--            <div class="customer-ticket__report commission-report">-->
+<!--                <div class="report-header">-->
+<!--                    <h5 class="qt-fw-600 qt-color-white">Commissions Report</h5>-->
+<!--                    <div class="company-info">-->
+<!--                        <div class="body-m qt-color-white qt-text-right">-->
+<!--                            {{ detailedCommissionsReport.techCompanyName || 'All companies' }}-->
+<!--                        </div>-->
+<!--                        <p>-->
+<!--                            <span>{{detailedCommissionsReport.startDate}}</span>-->
+<!--                            - -->
+<!--                            <span>{{ detailedCommissionsReport.endDate }}</span>-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div-->
+<!--                    class="customer-ticket__report&#45;&#45;details commission-customer"-->
+<!--                    *ngIf="!detailedCommissionsReport.detailsByProducts"-->
+<!--                >-->
+<!--                    <div class="details-header row">-->
+<!--                        <div class="col-md-4">Client</div>-->
+<!--                        <div class="col-md-2">Product Price</div>-->
+<!--                        <div class="col-md-2">Total Sales</div>-->
+<!--                        <div class="col-md-2">Commission Rate</div>-->
+<!--                        <div class="col-md-2">Commission</div>-->
+<!--                    </div>-->
+<!--                    <ng-template-->
+<!--                        ngFor-->
+<!--                        let-company-->
+<!--                        [ngForOf]="detailedCommissionsReport.reducedCompanies"-->
+<!--                        let-i="index"-->
+<!--                        [ngForTrackBy]="trackByIndex"-->
+<!--                    >-->
+<!--                        <div class="details-content">-->
+<!--                            <h3>{{ company.companyName }}</h3>-->
+<!--                            <ng-template-->
+<!--                                ngFor-->
+<!--                                let-line-->
+<!--                                [ngForOf]="company.list"-->
+<!--                                let-i="index"-->
+<!--                                [ngForTrackBy]="trackByIndex"-->
+<!--                            >-->
+<!--                                <div class="row">-->
+<!--                                    <div-->
+<!--                                        class="col-md-4"-->
+<!--                                        style="padding-left: 0;"-->
+<!--                                    >-->
+<!--                                        {{ line.firstLine }}-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-2">-->
+<!--                                        {{ (line.productPrice || 0) | toFixed : 2  }}-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-2">{{ line.totalSum | toFixed : 2 }}</div>-->
+<!--                                    <div class="col-md-2">{{ line.commissionRate || 0 }}%</div>-->
+<!--                                    <div-->
+<!--                                        class="col-md-2"-->
+<!--                                        style="padding-right: 0;"-->
+<!--                                    >-->
+<!--                                        {{ line.commissionSum | toFixed : 2  }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </ng-template>-->
+<!--                            <div class="row">-->
+<!--                                <div-->
+<!--                                    class="col-md-4"-->
+<!--                                    style="padding-left: 0;"-->
+<!--                                ></div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <b>{{ company.priceSum | toFixed : 2  }}</b>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <b>{{ company.totalSum | toFixed : 2  }}</b>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <b></b>-->
+<!--                                </div>-->
+<!--                                <div-->
+<!--                                    class="col-md-2"-->
+<!--                                    style="padding-right: 0;"-->
+<!--                                >-->
+<!--                                    <b>-->
+<!--                                        {{ company.commissionSum | toFixed : 2  }}-->
+<!--                                    </b>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </ng-template>-->
+<!--                </div>-->
+<!--                <div-->
+<!--                    class="customer-ticket__report&#45;&#45;details commission-product"-->
+<!--                    *ngIf="detailedCommissionsReport.detailsByProducts"-->
+<!--                >-->
+<!--                    <table class="details-header">-->
+<!--                        <tbody>-->
+<!--                            <tr style="vertical-align: baseline;">-->
+<!--                                <th style="width: 18.1%;">-->
+<!--                                    <div>Product</div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 16.66666667%;'>-->
+<!--                                    <div>Product Groups</div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 14.66666667%;'>-->
+<!--                                    <div>Client</div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 10.4%;'>-->
+<!--                                    <div>-->
+<!--                                        Product-->
+<!--                                        <div></div>-->
+<!--                                        Price-->
+<!--                                    </div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 9.4%;'>-->
+<!--                                    <div>-->
+<!--                                        Total-->
+<!--                                        <div></div>-->
+<!--                                        Sales-->
+<!--                                    </div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 12.4%;'>-->
+<!--                                    <div>-->
+<!--                                        Commission-->
+<!--                                        <div></div>-->
+<!--                                        Rate-->
+<!--                                    </div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 11.4%;'>-->
+<!--                                    <div>Commission</div>-->
+<!--                                </th>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                    <table class="table__details-content">-->
+<!--                        <ng-template-->
+<!--                            ngFor-->
+<!--                            let-line-->
+<!--                            [ngForOf]="detailedCommissionsReport.lines"-->
+<!--                            let-i="index"-->
+<!--                            [ngForTrackBy]="trackByIndex"-->
+<!--                        >-->
+<!--                            <tr>-->
+<!--                                <td style="width: 18.1%;">-->
+<!--                                    <div>{{ line.expenseName }}</div>-->
+<!--                                </td>-->
+<!--                                <td style='width: 16.66666667%;'>-->
+<!--                                    <div>{{ line.itemGroup }}</div>-->
+<!--                                </td>-->
+<!--                                <td style='width: 14.66666667%;'>-->
+<!--                                    <div>{{ line.companyName }}</div>-->
+<!--                                </td>-->
+<!--                                <td style='width: 10.4%;'>-->
+<!--                                    <div>-->
+<!--                                        <span ng-if="line.productPrice !== null">-->
+<!--                                            {{ (line.productPrice || 0) | toFixed : 2 }}-->
+<!--                                        </span>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td style='width: 9.4%;'>-->
+<!--                                    <div>{{ line.totalSum | toFixed : 2 }}</div>-->
+<!--                                </td>-->
+<!--                                <td style='width: 12.4%;'>-->
+<!--                                    <div>{{ line.commissionRate || 0 }}%</div>-->
+<!--                                </td>-->
+<!--                                <td style='width: 11.4%;'>-->
+<!--                                    <div>{{ line.commissionSum | toFixed : 2 }}</div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </ng-template>-->
+<!--                    </table>-->
+<!--                    <table class="details-content">-->
+<!--                        <tbody>-->
+<!--                            <tr style="vertical-align: baseline;font-weight: bold">-->
+<!--                                <th style="width: 18.1%;">-->
+<!--                                    <div>Total</div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 16.66666667%;'></th>-->
+<!--                                <th style='width: 14.66666667%;'></th>-->
+<!--                                <th style='width: 10.4%;'>-->
+<!--                                    <div>-->
+<!--                                        {{ detailedCommissionsReport.priceSum | toFixed : 2  }}-->
+<!--                                    </div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 9.4%;'>-->
+<!--                                    {{ detailedCommissionsReport.totalSum | toFixed : 2  }}-->
+<!--                                </th>-->
+<!--                                <th style='width: 12.4%;'>-->
+<!--                                    <div>-->
+<!--                                        Commission-->
+<!--                                        <div></div>-->
+<!--                                        Rate-->
+<!--                                    </div>-->
+<!--                                </th>-->
+<!--                                <th style='width: 11.4%;'>-->
+<!--                                    {{ (detailedCommissionsReport.totalCommissionSum ) | toFixed : 2  }}-->
+<!--                                </th>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 <div>
-    <app-report-menu
-        [report]="'detailed-commissions'"
-        (onRequest)="onRequest($event)"
-        (getReport)="getReport($event)"
-    ></app-report-menu>
-</div>
-<app-report-additional-actions
+  <app-report-menu
     [report]="'detailed-commissions'"
-    [accountType]="'TECH'"
-    [template]="'CUSTOMER_REPORT'"
-    [fileName]="'detailed-commissions-report'"
-></app-report-additional-actions>
+    (onRequest)="onRequest($event)"
+    (getReport)="getReport($event)"
+  ></app-report-menu>
+</div>
+<!--<app-report-additional-actions-->
+<!--  [report]="'detailed-commissions'"-->
+<!--  [accountType]="'TECH'"-->
+<!--  [template]="'CUSTOMER_REPORT'"-->
+<!--  [fileName]="'detailed-commissions-report'"-->
+<!--&gt;</app-report-additional-actions>-->
 <!--  -->
 <div
-    class="loading"
-    *ngIf="loadingInProgress"
+  class="loading"
+  *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket report-show-footer-header"
-    id="product-list-ticket-data"
+  class="qt-report__body"
+  id="product-list-ticket-data"
 >
+  <div
+    class="qt-report__product-list"
+    *ngIf="!loadingInProgress"
+  >
     <div
-        class="product-list-ticket"
-        style="padding: 0px;"
-        *ngIf="!loadingInProgress"
+      class=""
+      *ngIf="onInit"
     >
-        <div
-            class="customer-ticket"
-            *ngIf="onInit"
-        >
-            <div class="customer-ticket__report commission-report">
-                <div class="report-header">
-                    <h5 class="qt-fw-600 qt-color-white">Commissions Report</h5>
-                    <div class="company-info">
-                        <div class="body-m qt-color-white qt-text-right">
-                            {{ detailedCommissionsReport.techCompanyName || 'All companies' }}
-                        </div>
-                        <p>
-                            <span>{{detailedCommissionsReport.startDate}}</span>
-                            -
-                            <span>{{ detailedCommissionsReport.endDate }}</span>
-                        </p>
-                    </div>
-                </div>
-                <div
-                    class="customer-ticket__report--details commission-customer"
-                    *ngIf="!detailedCommissionsReport.detailsByProducts"
-                >
-                    <div class="details-header row">
-                        <div class="col-md-4">Client</div>
-                        <div class="col-md-2">Product Price</div>
-                        <div class="col-md-2">Total Sales</div>
-                        <div class="col-md-2">Commission Rate</div>
-                        <div class="col-md-2">Commission</div>
-                    </div>
-                    <ng-template
-                        ngFor
-                        let-company
-                        [ngForOf]="detailedCommissionsReport.reducedCompanies"
-                        let-i="index"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <div class="details-content">
-                            <h3>{{ company.companyName }}</h3>
-                            <ng-template
-                                ngFor
-                                let-line
-                                [ngForOf]="company.list"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <div class="row">
-                                    <div
-                                        class="col-md-4"
-                                        style="padding-left: 0;"
-                                    >
-                                        {{ line.firstLine }}
-                                    </div>
-                                    <div class="col-md-2">
-                                        {{ (line.productPrice || 0) | toFixed : 2  }}
-                                    </div>
-                                    <div class="col-md-2">{{ line.totalSum | toFixed : 2 }}</div>
-                                    <div class="col-md-2">{{ line.commissionRate || 0 }}%</div>
-                                    <div
-                                        class="col-md-2"
-                                        style="padding-right: 0;"
-                                    >
-                                        {{ line.commissionSum | toFixed : 2  }}
-                                    </div>
-                                </div>
-                            </ng-template>
-                            <div class="row">
-                                <div
-                                    class="col-md-4"
-                                    style="padding-left: 0;"
-                                ></div>
-                                <div class="col-md-2">
-                                    <b>{{ company.priceSum | toFixed : 2  }}</b>
-                                </div>
-                                <div class="col-md-2">
-                                    <b>{{ company.totalSum | toFixed : 2  }}</b>
-                                </div>
-                                <div class="col-md-2">
-                                    <b></b>
-                                </div>
-                                <div
-                                    class="col-md-2"
-                                    style="padding-right: 0;"
-                                >
-                                    <b>
-                                        {{ company.commissionSum | toFixed : 2  }}
-                                    </b>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
-                <div
-                    class="customer-ticket__report--details commission-product"
-                    *ngIf="detailedCommissionsReport.detailsByProducts"
-                >
-                    <table class="details-header">
-                        <tbody>
-                            <tr style="vertical-align: baseline;">
-                                <th style="width: 18.1%;">
-                                    <div>Product</div>
-                                </th>
-                                <th style='width: 16.66666667%;'>
-                                    <div>Product Groups</div>
-                                </th>
-                                <th style='width: 14.66666667%;'>
-                                    <div>Client</div>
-                                </th>
-                                <th style='width: 10.4%;'>
-                                    <div>
-                                        Product
-                                        <div></div>
-                                        Price
-                                    </div>
-                                </th>
-                                <th style='width: 9.4%;'>
-                                    <div>
-                                        Total
-                                        <div></div>
-                                        Sales
-                                    </div>
-                                </th>
-                                <th style='width: 12.4%;'>
-                                    <div>
-                                        Commission
-                                        <div></div>
-                                        Rate
-                                    </div>
-                                </th>
-                                <th style='width: 11.4%;'>
-                                    <div>Commission</div>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table__details-content">
-                        <ng-template
-                            ngFor
-                            let-line
-                            [ngForOf]="detailedCommissionsReport.lines"
-                            let-i="index"
-                            [ngForTrackBy]="trackByIndex"
-                        >
-                            <tr>
-                                <td style="width: 18.1%;">
-                                    <div>{{ line.expenseName }}</div>
-                                </td>
-                                <td style='width: 16.66666667%;'>
-                                    <div>{{ line.itemGroup }}</div>
-                                </td>
-                                <td style='width: 14.66666667%;'>
-                                    <div>{{ line.companyName }}</div>
-                                </td>
-                                <td style='width: 10.4%;'>
-                                    <div>
-                                        <span ng-if="line.productPrice !== null">
-                                            {{ (line.productPrice || 0) | toFixed : 2 }}
-                                        </span>
-                                    </div>
-                                </td>
-                                <td style='width: 9.4%;'>
-                                    <div>{{ line.totalSum | toFixed : 2 }}</div>
-                                </td>
-                                <td style='width: 12.4%;'>
-                                    <div>{{ line.commissionRate || 0 }}%</div>
-                                </td>
-                                <td style='width: 11.4%;'>
-                                    <div>{{ line.commissionSum | toFixed : 2 }}</div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </table>
-                    <table class="details-content">
-                        <tbody>
-                            <tr style="vertical-align: baseline;font-weight: bold">
-                                <th style="width: 18.1%;">
-                                    <div>Total</div>
-                                </th>
-                                <th style='width: 16.66666667%;'></th>
-                                <th style='width: 14.66666667%;'></th>
-                                <th style='width: 10.4%;'>
-                                    <div>
-                                        {{ detailedCommissionsReport.priceSum | toFixed : 2  }}
-                                    </div>
-                                </th>
-                                <th style='width: 9.4%;'>
-                                    {{ detailedCommissionsReport.totalSum | toFixed : 2  }}
-                                </th>
-                                <th style='width: 12.4%;'>
-                                    <div>
-                                        Commission
-                                        <div></div>
-                                        Rate
-                                    </div>
-                                </th>
-                                <th style='width: 11.4%;'>
-                                    {{ (detailedCommissionsReport.totalCommissionSum ) | toFixed : 2  }}
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+      <div class="qt-report__body-header">
+        <div class="body-m-sb qt-color-dark">
+          {{ detailedCommissionsReport.techCompanyName || 'All companies' }}
         </div>
+        <h6 class="qt-fw-600 qt-color-dark">Commissions Report</h6>
+        <div class="body-m qt-color-dark-light">
+          <span>{{detailedCommissionsReport.startDate}}</span>
+          -
+          <span>{{ detailedCommissionsReport.endDate }}</span>
+        </div>
+      </div>
+      <table
+        class="qt-report__body-table-body"
+        *ngIf="!detailedCommissionsReport.detailsByProducts"
+      >
+        <thead>
+          <tr>
+            <th class="qt-fw-600 qt-color-dark">Client</th>
+            <th class="qt-fw-600 qt-color-dark">Product Price</th>
+            <th class="qt-fw-600 qt-color-dark">Total Sales</th>
+            <th class="qt-fw-600 qt-color-dark">Commission Rate</th>
+            <th class="qt-fw-600 qt-color-dark2">Commission</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template
+            ngFor
+            let-company
+            [ngForOf]="detailedCommissionsReport.reducedCompanies"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+          >
+            <tr class="qt-report__body-row">
+              <td class="body-l qt-color-dark">{{ company.companyName }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <ng-template
+              ngFor
+              let-line
+              [ngForOf]="company.list"
+              let-i="index"
+              [ngForTrackBy]="trackByIndex"
+            >
+              <tr class="qt-report__body-row">
+                <td>{{ line.firstLine }}</td>
+                <td>{{ (line.productPrice || 0) | toFixed : 2  }}</td>
+                <td>{{ line.totalSum | toFixed : 2 }}</td>
+                <td>{{ line.commissionRate || 0 }}%</td>
+                <td>{{ line.commissionSum | toFixed : 2  }}</td>
+              </tr>
+            </ng-template>
+            <tr>
+              <td></td>
+              <td class="qt-fw-600">{{ company.priceSum | toFixed : 2  }}</td>
+              <td class="qt-fw-600">{{ company.totalSum | toFixed : 2  }}</td>
+              <td class="qt-fw-600"></td>
+              <td class="qt-fw-600">{{ company.commissionSum | toFixed : 2  }}</td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+      <div
+        class=""
+        *ngIf="detailedCommissionsReport.detailsByProducts"
+      >
+        <table class="qt-report__body-table-body">
+          <thead>
+            <tr>
+              <th class="qt-fw-600 qt-color-dark">Product</th>
+              <th class="qt-fw-600 qt-color-dark">Product Groups</th>
+              <th class="qt-fw-600 qt-color-dark">Client</th>
+              <th class="qt-fw-600 qt-color-dark">Product Price</th>
+              <th class="qt-fw-600 qt-color-dark">Total Sales</th>
+              <th class="qt-fw-600 qt-color-dark">Commission Rate</th>
+              <th class="qt-fw-600 qt-color-dark">Commission</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-template
+              ngFor
+              let-line
+              [ngForOf]="detailedCommissionsReport.lines"
+              let-i="index"
+              [ngForTrackBy]="trackByIndex"
+            >
+              <tr class="qt-report__body-row">
+                <td>{{ line.expenseName }}</td>
+                <td>{{ line.itemGroup }}</td>
+                <td>{{ line.companyName }}</td>
+                <td>
+                  <span ng-if="line.productPrice !== null">
+                      {{ (line.productPrice || 0) | toFixed : 2 }}
+                  </span>
+                </td>
+                <td>{{ line.totalSum | toFixed : 2 }}</td>
+                <td>{{ line.commissionRate || 0 }}%</td>
+                <td>{{ line.commissionSum | toFixed : 2 }}</td>
+              </tr>
+            </ng-template>
+            <tr class="qt-report__body-row">
+              <td class="qt-fw-600">Total</td>
+              <td></td>
+              <td></td>
+              <td class="qt-fw-600">{{ detailedCommissionsReport.priceSum | toFixed : 2  }}</td>
+              <td class="qt-fw-600">{{ detailedCommissionsReport.totalSum | toFixed : 2  }}</td>
+              <td class="qt-fw-600">Commission Rate</td>
+              <td class="qt-fw-600">{{ (detailedCommissionsReport.totalCommissionSum ) | toFixed : 2  }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
+
