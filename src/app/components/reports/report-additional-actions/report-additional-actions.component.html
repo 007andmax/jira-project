@@ -44,6 +44,7 @@
 
 
 
+
 <!-- </div> -->
 <!-- <div -->
 <!-- class="product-report-btn" -->
@@ -79,6 +80,7 @@
 
 
 
+
 <!-- <div -->
 <!-- *ngIf="report === 'company-roducts-report'" -->
 <!-- style="max-width: 300px; float: right; height: 32px; display: flex; align-items: center; margin-right: 10px;" -->
@@ -97,6 +99,7 @@
 <!-- Include product cost in report -->
 <!-- </div> -->
 <!-- </div> -->
+
 
 
 
@@ -126,6 +129,7 @@
 
 
 
+
     <div
         class="qt-report__control-panel-btn icon__export-dark pointer"
         ngbDropdown
@@ -140,6 +144,7 @@
         <ul
             ngbDropdownMenu
             aria-labelledby="dropdown1"
+            class="additional-dropdown"
         >
             <ng-template
                 ngFor
@@ -156,22 +161,22 @@
             </ng-template>
         </ul>
     </div>
-<!--    <div-->
-<!--        *ngIf="report === 'company-roducts-report'"-->
-<!--        style="max-width: 300px; float: right; height: 32px; display: flex; align-items: center; margin-right: 10px;"-->
-<!--    >-->
-<!--        <label-->
-<!--            class="control checkbox hide-in-report"-->
-<!--            style="margin-left: 10px;margin-top: -3px;"-->
-<!--        >-->
-<!--            <input-->
-<!--                type="checkbox"-->
-<!--                (change)="togglePurchaseCost($event)"-->
-<!--                checked-->
-<!--            >-->
-<!--            <span class="control-indicator"></span>-->
-<!--        </label>-->
-<!--        Include product cost in report-->
-<!--    </div>-->
+    <!-- <div -->
+    <!-- *ngIf="report === 'company-roducts-report'" -->
+    <!-- style="max-width: 300px; float: right; height: 32px; display: flex; align-items: center; margin-right: 10px;" -->
+    <!-- > -->
+    <!-- <label -->
+    <!-- class="control checkbox hide-in-report" -->
+    <!-- style="margin-left: 10px;margin-top: -3px;" -->
+    <!-- > -->
+    <!-- <input -->
+    <!-- type="checkbox" -->
+    <!-- (change)="togglePurchaseCost($event)" -->
+    <!-- checked -->
+    <!-- > -->
+    <!-- <span class="control-indicator"></span> -->
+    <!-- </label> -->
+    <!-- Include product cost in report -->
+    <!-- </div> -->
 </div>
 <app-report-send-email></app-report-send-email>
