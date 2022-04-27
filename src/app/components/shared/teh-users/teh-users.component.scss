@@ -1,7 +1,9 @@
+@import "./src/assets/styles/variable";
+
 .select-wrapper {
   position: absolute;
   display: block;
-  background: white;
+  background: $white;
   height: 240px;
   bottom: 55px;
   margin-top: 5px;
@@ -25,13 +27,16 @@
     }
     .user-item {
       &.active {
-        background: #16a4fa;
-        p {
-          color: #fff;
-        }
+        background: $primary-1;
       }
       &:hover {
-        background-color: #e7ecf2;
+        background-color: $gray-300;
+        p {
+          color: #454f5b !important;
+          &:last-child {
+            color: #919eab !important;
+          }
+        }
       }
     }
   }
@@ -39,18 +44,26 @@
 .teh-user-body {
   overflow: visible;
 }
- .tech__user-icon{
+.tech__user-icon {
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
- }
- .ticket-updates__photo-people {
+}
+.ticket-updates__photo-people {
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-    border: none;
- }
+  border: none;
+}
+.company-settings-user {
+  display: flex;
+  align-items: center;
+  width: auto;
+  .ticket-updates__photo-people {
+    margin-right: 10px;
+  }
+}

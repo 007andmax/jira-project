@@ -2,10 +2,12 @@
     <app-drop-down
         #titlesDp
         class="qt-w100 qt-mr-8"
-        [placeholder]="'Select Title'"
-        [list]="allTitles"
+        [placeholder]="'Select Job Title'"
+        [list]="jobTitleList"
+        [field]="'name'"
         [search]="true"
         [change]="true"
+        [heightInput]="'36px'"
         (onSelectedItem)="onSelectTitle($event)"
     ></app-drop-down>
     <app-drop-down
@@ -16,16 +18,30 @@
         [list]="companies"
         [search]="true"
         [change]="true"
+        [heightInput]="'36px'"
         (onSelectedItem)="onSelectCompany($event)"
     ></app-drop-down>
+    <users-filter-subscriptions
+        #subscriptionDp
+        class="qt-w100 qt-mr-8"
+        (onChangeDefault)="onChangeDefaultSubscription($event)"
+        (onChangeCustom)="onChangeCustomSubscription($event)"
+    ></users-filter-subscriptions>
     <app-drop-down
         #industriesDp
-        class="qt-w100"
+        class="qt-w100 qt-mr-8"
         [placeholder]="'Search By Industry'"
         [list]="industries"
         [field]="'name'"
         [search]="true"
         [change]="true"
+        [heightInput]="'36px'"
         (onSelectedItem)="onSelectClientIndustry($event)"
     ></app-drop-down>
+    <app-company-tags
+        #tagsDp
+        [blockUserTag]="true"
+        class="filter-category tags dropdown companies-filter-tags qt-w100"
+        (tagsChange)="onChangeTags($event)"
+    ></app-company-tags>
 </div>

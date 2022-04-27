@@ -11,7 +11,18 @@ import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
-import { TYPE_LIST_ALL_USERS } from '../../const/users';
+import { MODE_MARKETING_USERS_LIST, MODE_USERS_LIST, TYPE_LIST_ALL_USERS } from '../../const/users';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { Subscription } from 'rxjs';
+import { UserCustomSubscription } from './class/user-custom-subscription';
+import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { UserDefaultSubscription } from './class/user-default-subscription';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
+import { CrmCompanyIndustry } from '../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 
 @Component({
   selector: 'app-users',
@@ -20,6 +31,7 @@ import { TYPE_LIST_ALL_USERS } from '../../const/users';
   providers: [UserListService]
 })
 export class UsersComponent implements OnInit {
+  idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];
   reqUsers: Array<User> = [];
@@ -30,7 +42,11 @@ export class UsersComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  sub: Subscription = new Subscription();
+  industries: Array<CrmCompanyIndustry> = [];
+  listCustomSubscription: Array<MarketingSubscriptionType> = [];
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -38,10 +54,15 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
+    private crmStateService: CrmStateService,
+    private marketingEmailService: MarketingEmailService,
+    private usersRealTimeService: UsersRealTimeService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
     this.filter = this.usersStateService.getFilter();
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
@@ -56,7 +77,7 @@ export class UsersComponent implements OnInit {
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
@@ -92,18 +113,17 @@ export class UsersComponent implements OnInit {
 
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
 
-      if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
+      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
+        if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(data.data);
         if (reqIndex === -1) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
           // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex] = new User(data.data);
-
+        if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users.splice(userIndex, 1);
@@ -111,11 +131,11 @@ export class UsersComponent implements OnInit {
       }
 
 
-      if (data.action === 'USERS_DEARCHIVED') {
+      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
 
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = new User(user);
+          if (reqIndex > -1) this.reqUsers[reqIndex].onUpdate(user);
           if (this.showArchivedUsers) {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
 
@@ -124,7 +144,7 @@ export class UsersComponent implements OnInit {
         })
 
       }
-      if (data.action === 'USER_SUBMITTED_TICKET') {
+      if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         const Index = this.users.findIndex((item) => item.id === data.data.id);
         var prevValue = this.reqUsers[reqIndex].userStatistic.ticketsSubmitted || 0;
@@ -132,10 +152,30 @@ export class UsersComponent implements OnInit {
         this.reqUsers[reqIndex].userStatistic.ticketsSubmitted = prevValue;
         if (Index > -1) this.users[Index].userStatistic.ticketsSubmitted = prevValue;
       }
+      this.cd.detectChanges();
     })
     this.userListService.addSubscription(getChangeCompanies);
+    this.usersStateService.closeDetailAside.subscribe(data => {
+      this.setIdDetailUser('');
+    })
     this.onInitSubscribe();
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+    this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscription = data;
+    })
+    this.sub.add(onGetListCustomSubscription);
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
+    })
+    this.sub.add(onGetIndustry);
   }
+
   private onArchiveUsers(ids) {
 
     let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
@@ -147,20 +187,27 @@ export class UsersComponent implements OnInit {
     })
     this.userListService.addSubscription(archiveUser);
   }
+  setIdDetailUser(data) {
+    this.idDetailUser = data;
+  }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');
   }
   private onInitSubscribe() {
     setTimeout(() => {
 
-      let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
-        var newChange = JSON.parse(message.body);
-
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
-          const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
-          if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
+          if (reqIndex > -1) {
+            this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          }
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
+          if (userIndex > -1) {
+            this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          }
           this.cd.detectChanges();
         }
       });
@@ -238,7 +285,7 @@ export class UsersComponent implements OnInit {
 
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies)
+    this.filter.onFilter(field, this.reqUsers, this.companies, this.industries)
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];
@@ -277,5 +324,14 @@ export class UsersComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.userListService.onUnsubscribe();
+    this.selectAll = false;
+    this.users.forEach(item => {
+      item.selected = false;
+    })
+    this.reqUsers.forEach(item => {
+      item.selected = false;
+    })
+    this.draftEmailStateService.resetSelectedUsers();
+    this.usersStateService.clearFilter();
   }
 }

@@ -31,7 +31,7 @@
         >
             <div class="customer-ticket__report">
                 <div class="report-header">
-                    <h1>Tech Service report</h1>
+                    <h5 class="qt-fw-600 qt-color-white">Tech Service report</h5>
                     <div class="company-info">
 
 
@@ -47,19 +47,18 @@
                     </div>
                 </div>
                 <div class="customer-ticket__report--summary">
-                    <h3>Tech Service report</h3>
+                    <div class="customer-ticket__report--summary-title">Tech Service report</div>
                 </div>
                 <div
                     class="customer-ticket__report--details"
                     style="padding: 0px 0px 100px 0px !important;"
                 >
                     <div class="header-body">
-                        <h3
+                        <div class="customer-ticket__report--summary-title qt-mb-12"
                             *ngIf="techUser"
-                            style="padding: 0px 20px;"
                         >
                             {{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}
-                        </h3>
+                        </div>
                     </div>
                     <div
                         class="details-header clearfix"

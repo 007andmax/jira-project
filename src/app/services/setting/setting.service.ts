@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
+import { tap } from "rxjs/operators";
+import { ToastrService } from "ngx-toastr";
+import { AppStateService } from "src/app/states/app/app-state.service";
 
 var md5 = require('md5');
 
@@ -12,7 +15,9 @@ export class SettingService {
   private apiUrl = environment.apiUrl;
   public currentUser: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
 
   /**
@@ -27,6 +32,15 @@ export class SettingService {
 
   public getUserProfile() {
     return this.http.get(`${this.apiUrl}settings/userProfile/`);
+  }
+  public checkTestServer(data) {
+    return this.http.post(`${this.apiUrl}settings/companyProfile/verifySMTPSettings`, data).pipe(
+      tap((res: any) => {
+        if (res.valid) this.toastrService.success("Email server settings successfully updated");
+        if (!res.valid) this.toastrService.error(res.errorMessage);
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   public updateAvatar(id: string, image: any) {

@@ -17,7 +17,7 @@
         (focus)="focus$.next('')"
         (click)="click$.next('')"
         #instance="ngbTypeahead"
-        autocomplete="new-password"
+        autocomplete="off"
         [attr.maxlength]="maxlength"
         (blur)="onChange($event)"
         (isPopupOpen)="isDropDownOpen()"

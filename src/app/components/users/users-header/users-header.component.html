@@ -1,10 +1,10 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
-            <h3
+            <h6
                 class="qt-page-list__header-title"
                 [textContent]="'All Users (' + count + ')'"
-            ></h3>
+            ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
@@ -21,20 +21,36 @@
                 >
                     <div [textContent]="getSelectedCount() + ' Users Selected'"></div>
                     <div
-                        class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
-                        *ngIf="!isExistArchiveUser()"
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAsideForDraftEmail()"
                     >
-                        <div class="email-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
-                        <div>Send email</div>
+                        <div class="icon__email-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-lh-1">Send email</div>
                     </div>
                     <div
-                        class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
+                        (click)="showAddToSubscription()"
+                    >
+                        <div class="icon__list qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-lh-1">Save to Subscriptions</div>
+                    </div>
+                    <div
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
+                        *ngIf="!isExistArchiveUser() && isUserOneCustomSubscription()"
+                        (click)="removeUsersFromSubscription()"
+                    >
+                        <div class="icon__remove-user qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div class="qt-lh-1">Remove From Marketing Subscription</div>
+                    </div>
+                    <div
+                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
                         *ngIf="!isExistArchiveUser() && !isExistPrimaryContact() && currentUser && currentUser.checkPermission('ARCHIVE_USERS')"
                         (click)="delete()"
                     >
                         <div class="archive-blue-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
-                        <div>Archive User</div>
+                        <div class="qt-lh-1">Archive User</div>
                     </div>
                 </div>
                 <button
@@ -43,7 +59,7 @@
                     (click)="toggleFilter  = !toggleFilter"
                 >
                     <span
-                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>
@@ -53,6 +69,7 @@
                 <button
                     class="qt-btn --outline-blue qt-ml-8"
                     (click)="addUser()"
+                    *ngIf="getPermissions('CREATE_USERS')"
                 >
                     Add user
                 </button>
@@ -94,7 +111,7 @@
                     <th
                         class="users-table__company pointer"
                         (click)="onFilter('company')"
-                        *ngIf="type === TYPE_LIST_ALL_USERS"
+                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
                     >
                         Company
                         <span class="qt-table-modern__sorting"></span>
@@ -108,16 +125,35 @@
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
+                        class="users-table__company pointer"
+                        (click)="onFilter('industry')"
+                    >
+                        Industry
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
                         class="users-table__contract-no pointer"
                         (click)="onFilter('contact')"
                     >
-                        Contract no
+                        Contact No
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="users-table__subscription">Subscription</th>
+                    <th
+                        class="users-table__subscription"
+                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+                    >
+                        Subscription
+                    </th>
+                    <th
+                        class="users-table__subscription"
+                        *ngIf="type === TYPE_LIST_MARKETING_USERS"
+                    >
+                        Marketing Subscription
+                    </th>
                     <th
                         class="users-table__tickets pointer"
                         (click)="onFilter('tickets')"
+                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
                     >
                         Tickets
                         <span class="qt-table-modern__sorting"></span>

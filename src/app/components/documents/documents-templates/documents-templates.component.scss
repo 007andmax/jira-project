@@ -1,9 +1,12 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .documents-templates {
   &-page {
     &.qt-page-list__header {
       max-width: 100%;
       padding: 0 24px;
-      background: #fff;
+      background: $white;
     }
 
     .category-item-line {
@@ -23,7 +26,7 @@
       justify-content: center;
       align-self: center;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-      background-color: #ffffff;
+      background-color: $white;
       flex-shrink: 0;
     }
 
@@ -66,7 +69,7 @@
 
       border-radius: 4px;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-      background-color: #ffffff;
+      background-color: $white;
       flex-shrink: 0;
 
       &__input {
@@ -86,18 +89,18 @@
 
     .category-item {
       font-size: 12px;
-      color: #454f5b;
+      color: $gray-800;
       padding: 6px 10px;
       margin: 4px 6px;
       border-radius: 12px;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-      background-color: #fff;
+      background-color: $white;
       line-height: 1.2;
       cursor: pointer;
 
       &:hover,
       &.--active {
-        color: #16a4fa;
+        color: $primary-1;
       }
     }
 
@@ -114,7 +117,7 @@
       padding: 16px;
       border-radius: 8px;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-      background-color: #fff;
+      background-color: $white;
       max-width: 252px;
       width: 100%;
       margin: 12px;
@@ -127,31 +130,28 @@
       &__icon {
         padding: 8px;
         border-radius: 8px;
-        background-color: #e6f5ff;
+        background-color: $gray-200;
         display: inline-block;
       }
 
       &__title {
         flex: 1;
-        font-size: 18px;
-        color: #212b36;
+        @extend %h6-m;
+        color: $primary-2;
         margin-top: 12px;
         margin-bottom: 16px;
-        font-family: Graphik-Semibold, sans-serif;
-        max-height: 44px;
-        min-height: 44px;
-        height: 44px;
+        max-height: 50px;
+        min-height: 50px;
+        height: 50px;
         overflow: hidden;
-        line-height: 22px;
       }
 
       &__description {
-        font-size: 13px;
-        color: #637382;
+        @extend %body-m;
+        color: $gray-700;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        line-height: 1.3;
       }
 
       .qt-button {
@@ -174,14 +174,14 @@
     display: flex;
 
     &-item {
-      font-family: Graphik-Medium, sans-serif;
+      @extend %body-m-sb;
       border-bottom: 2px solid transparent;
       padding: 14px 16px;
 
       &.--active,
       &:hover {
-        color: #16a4fa;
-        border-color: #16a4fa;
+        color: $primary-1;
+        border-color: $primary-1;
       }
     }
   }

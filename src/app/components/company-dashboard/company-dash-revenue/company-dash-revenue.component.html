@@ -1,19 +1,19 @@
 <div>
   <div class="cmp-board-title-wrap d-flex">
-   <h2>Invoice Revenue</h2> 
+   <h6>Invoice Revenue</h6>
    <div ngbDropdown class="d-flex">
      <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last {{month}} months</button>
      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
        <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('12')">Last 12 months</button>
        <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('6')">Last 6 months</button>
        <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('3')">Last 3 months</button>
-     </div> 
+     </div>
    </div>
   </div>
    <div class="donalt-chart-wrapper">
      <nvd3 [options]="chartOptions" [data]="data"></nvd3>
        <div class="chart-content">
-           <div class="h1">${{totalRevenue}}</div>
+           <h4 class="">${{totalRevenue}}</h4>
            <span>Total Revenue</span>
        </div>
    </div>

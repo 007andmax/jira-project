@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/super-admin-public-state.service';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { DefaultServicesStateService } from '../../states/default-services/default-services-state.service';
@@ -24,7 +26,9 @@ export class HeaderComponent implements OnInit {
     private defaultServicesStateService: DefaultServicesStateService,
     private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
+    private superAdminPublicStateService: SuperAdminPublicStateService,
     private companiesService: CompaniesService,
+    private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -80,5 +84,11 @@ export class HeaderComponent implements OnInit {
   public getCurrentUserName() {
     let user = this.usersStateService.getCurrentUser();
     return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  showHelpCanterAside() {
+    this.superAdminPublicStateService.showAside();
   }
 }

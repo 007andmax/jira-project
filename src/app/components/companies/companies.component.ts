@@ -16,6 +16,7 @@ import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 import { CompanyFilter } from './class/company-filter';
 import { CompanyItem } from './class/company-item';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-companies',
@@ -44,6 +45,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
     private draftEmailStateService: DraftEmailStateService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -129,8 +131,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [];
     this.onScroll();
   }
-  onSelectAllCompanies(event) {
-    if (event.target.checked) {
+  onSelectAllCompanies(data) {
+    if (data) {
       let listFilter = this.reqCompaniesList;
       this.draftEmailStateService.resetSelectedCompanies();
       listFilter.forEach(item => {
@@ -171,8 +173,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.onScroll();
       this.showPreloader = false;
     })
-    //this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-
   }
   private getCompanies() {
     if (this.companiesList.getBlockList()) {
@@ -193,13 +193,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
     this.showPreloader = false;
   }
-
-
-
-
-
-
-
+  public isSelectedConpanies() {
+    return this.CompaniesList.find(item => item.selected);
+  }
 
   public setDefaultScoll() {
     this.page_number = 0;
@@ -224,13 +220,19 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.infiniteScrollDisabled = true;
     this.getCompanies();
   }
-
+  onAddCompany() {
+    this.companiesStateService.toggleAsideForAdd();
+  }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.reqCompaniesList.forEach(item => item.selected = false);
     this.draftEmailStateService.resetSelectedCompanies();
+    this.leftPanelStateService.clearFilter();
     this.sub.unsubscribe();
   }
 }

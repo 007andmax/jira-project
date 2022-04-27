@@ -2,12 +2,12 @@
    <div class="cmp-board-contract cmn-box d-flex">
          <div class="progress-contract d-flex">
                <div class="progress-count d-flex">
-                 <span class="h1">{{statisticsCount}} hr</span>
+                 <h4 class="">{{statisticsCount}} hr</h4>
                  <span class="st-hrs">Hours Spent</span>
                </div>
                <div class="cmp-board-progresbbar d-flex">
                    <span *ngFor="let stat of statistics; let i = index;" [style.backgroundColor]="stat.color" [style.width]="stat.width">{{i}}</span>
-                  
+
                </div>
                <ul class="list-unstyled d-flex">
                    <li class="d-flex color{{i}}" *ngFor="let stat of statistics; let i = index;">
@@ -16,13 +16,13 @@
                    </li>
                </ul>
                <div class="contract-info d-flex">
-                     <h6>Hourly Contract</h6>
+                     <div class="caption-l">Hourly Contract</div>
                      <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
                </div>
-               <h2 *ngIf="contractsList.length > 0">Contracts</h2>
+               <h6 *ngIf="contractsList.length > 0">Contracts</h6>
            <div class="cmp-dash-table-wrap" *ngIf="contractsList.length > 0">
              <table>
-                <thead> 
+                <thead>
                    <tr>
                       <th>Contract</th>
                       <th>Start Date</th>

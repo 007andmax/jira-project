@@ -75,7 +75,7 @@
                 [ngClass]="{'--closed': !toggleStatus}"
             >
                 <div class="invoice-status-timeline__header qt-df qt-jc-sb">
-                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-ff-gm">Quote Status</div>
+                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-fw-600">Quote Status</div>
                     <div
                         class="qt-ic-c qt-sz-16 toggle-invoice-timeline"
                         (click)="toggleStatus = !toggleStatus"
@@ -109,7 +109,7 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-check"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Created</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote Created</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 *ngIf="quote.createdAt"
@@ -120,7 +120,7 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote sent</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote sent</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 *ngIf="quote.sentAt"
@@ -131,7 +131,7 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__read-on"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Read</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote Read</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 *ngIf="quote.readAt"
@@ -142,7 +142,7 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__get-paid"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Approved</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote Approved</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 *ngIf="quote.approvedAt"
@@ -158,7 +158,7 @@
                 [ngClass]="{'--closed': !toggleQuoteMessage}"
             >
                 <div class="quote-message-block__header qt-df qt-jc-sb">
-                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-ff-gm qt-df qt-ai-c">
+                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-fw-600 qt-df qt-ai-c">
                         <div class="qt-sz-16 qt-ic-c qt-mr-12 icon__message-forward"></div>
                         Quote Message
                     </div>
@@ -171,7 +171,7 @@
                     <div [textContent]="quote.message"></div>
                 </div>
                 <div class="quote-message-list">
-                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-8 qt-ff-gm qt-df qt-ai-c">
+                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-8 qt-fw-600 qt-df qt-ai-c">
                         <div class="qt-sz-16 qt-ic-c qt-mr-12 icon__message-response"></div>
                         Response Message
                     </div>

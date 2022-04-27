@@ -1,0 +1,78 @@
+<div
+    class="grey-dropdown filter-tags-body"
+    ngbDropdown
+>
+    <i class="icn-sm report-caret-icon"></i>
+    <div
+        class="user-subscription"
+        id="dropdownServices"
+        ngbDropdownToggle
+        [ngClass]="{'placeholder-subscription': !showPlaceholder(),
+    'no-pointer':isDisabled}"
+    >
+        <ng-template
+            ngFor
+            let-custom
+            [ngForOf]="customSubscriptions"
+            let-i="index"
+            [ngForTrackBy]="trackById"
+        >
+            <div [ngClass]="{'active':custom.activated && custom.isExist,
+            'no-active':!custom.activated && custom.isExist}">
+                <i
+                    class="qt-sz-16 qt-bg-contain qt-dib"
+                    *ngIf="custom.isExist"
+                    [ngClass]="{'icon__unsubscribe-user':!custom.activated,'icon__subscribe-user':custom.activated}"
+                ></i>
+                {{custom.name}}
+                <i
+                    *ngIf="!isDisabled"
+                    class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
+                    (click)="selected(custom)"
+                ></i>
+            </div>
+        </ng-template>
+    </div>
+    <ul
+        [ngClass]="classDropDown"
+        class="qt-dropdown-menu company-subscription-dropdown select-wrapper"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+        *ngIf="!isDisabled"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <ng-template
+                ngFor
+                let-custom
+                [ngForOf]="list"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    (click)="selected(custom)"
+                    class="company-tag-item"
+                    [ngClass]="{'is-hover':isSeleted(custom)}"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(custom)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div
+                                class="name"
+                                [textContent]="custom.name"
+                            >
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
+    </ul>
+</div>

@@ -45,10 +45,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, section]);
   }
-  isShowDoucments() {
-    let ids = ["72381bff-127c-4a63-9d2e-6e952350dcbd", "73221c72-f87c-4519-8235-c4b57ad1cc19"];
-    return (this.companiesStateService.getCurrentCompany()) ? ids.find(id => id === this.companiesStateService.getCurrentCompany().id) : false;
-  }
+
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)
   }
@@ -58,16 +55,6 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id) return `/file/${this.selectedCompany.logo.origin.id}`;
     return '/company/default/logo.jpg';
   }
-  /* goToDashboard() {
-     let body = document.querySelector('.main-container');
-     var link = document.createElement('a');
-     body.appendChild(link);
-     // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
-     link.href = `#/company/dashboard/${this.companyId}`
-     var e = document.createEvent('MouseEvents');
-     e.initEvent('click', true, true);
-     link.dispatchEvent(e);
-   }*/
 
   public goToState(state) {
     this.onChangeState.emit(state);

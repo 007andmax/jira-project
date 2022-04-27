@@ -22,7 +22,6 @@
     </div>
 </div>
 <ul class="app-left-panel__menu-expand">
-    <!-- (click)="goToState('company-dashboard')" -->
     <li
         [ngClass]="{'--active':activePage === 'company-dashboard'}"
         (click)="goToCompanySection('dashboard')"
@@ -36,6 +35,7 @@
         Tickets
     </li>
     <li
+        *ngIf="getPermissions('VIEW_USERS')"
         [ngClass]="{'--active':activePage === 'company-user'}"
         (click)="goToCompanySection('user')"
     >
@@ -79,12 +79,11 @@
         [ngClass]="{'--active':activePage === 'company-contracts'}"
         (click)="goToCompanySection('contracts')"
     >
-        Service Agreements
+        Contracts
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-documents'}"
         (click)="goToCompanySection('documents')"
-        *ngIf="isShowDoucments()"
     >
         Documents
     </li>

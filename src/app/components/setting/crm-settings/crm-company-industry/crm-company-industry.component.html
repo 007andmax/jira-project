@@ -1,0 +1,94 @@
+<div class="cmn-area">
+    <div class="data-table-wrap">
+        <table
+            class="display dataTable"
+            style="width:100%"
+            [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+        >
+            <thead>
+                <tr>
+                    <th class="checkbox-header"></th>
+                    <th
+                        class="tax-name pointer"
+                        (click)="onFilter('name')"
+                    >
+                        Industry Type
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th
+                        class="rate pointer"
+                        (click)="onFilter('count')"
+                    >
+                        Count
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!showPreloader">
+                <add-crm-company-industry
+                    *ngIf="showAdd"
+                    [industryList]="industryList"
+                    (onClose)="showAdd = false"
+                ></add-crm-company-industry>
+                <tr
+                    *ngFor="let item of industryList; let i = index"
+                    appClickOtside
+                    [init]="item.isInitEdit"
+                    [ngClass]="'edit-crm-container-' + i"
+                    [class]="'.edit-crm-container-' + i"
+                    (onOutSide)="onEditIndustry(item,$event)"
+                >
+                    <td class="checkbox">
+                        <label class="qt-checkbox">
+                            <input
+                                type="checkbox"
+                                (change)="onSelect($event,item)"
+                            >
+                            <span></span>
+                        </label>
+                    </td>
+                    <td
+                        class="tax-name edit-category-name"
+                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                    >
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Name Category"
+                            [(ngModel)]="item.name"
+                            appKeyUpEnter
+                            (onChange)="onEditIndustry(item,$event)"
+                            maxlength="30"
+                            (input)="item.onInitEdit(true);item.checkDublicate(industryList)"
+                        >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="item.disableUpdate"
+                        >
+                            This Industry is already occupied
+                        </mat-error>
+                    </td>
+                    <td
+                        class="rate"
+                        [textContent]="item.usageCounter"
+                    ></td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="removeIndustry(item)"
+                        >
+                            <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </table>
+    </div>
+</div>

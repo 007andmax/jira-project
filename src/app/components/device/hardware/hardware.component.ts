@@ -63,7 +63,7 @@ export class HardwareComponent implements OnInit {
     private excelService: ExcelService,
     private agentService: AgentService,
     public activateRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._id = this.activateRoute.snapshot.params["id"];
@@ -79,17 +79,17 @@ export class HardwareComponent implements OnInit {
   }
 
   setPreviewDataDevice() {
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.setPreviewDataDevice();
       }, 300);
       return;
     }
-      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-        if (resp.length > 0) {
-          this.HardwareList(resp[0].ID);
-        }
-      });
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.HardwareList(resp[0].ID);
+      }
+    });
   }
 
   HardwareList(Asset_ID) {
@@ -226,11 +226,11 @@ export class HardwareComponent implements OnInit {
           if (element.DeviceLocator != "") {
             this.differentMemory.push(
               element.DeviceLocator +
-                ":" +
-                " " +
-                +element.Capacity / 1024 / 1024 +
-                " " +
-                "MB RAM"
+              ":" +
+              " " +
+              +element.Capacity / 1024 / 1024 +
+              " " +
+              "MB RAM"
             );
           }
         });
@@ -315,14 +315,14 @@ export class HardwareComponent implements OnInit {
       [
         "BIOS Model",
         "BIOS Date " +
-          this.pipe.transform(
-            this.bio["ReleaseDate"],
-            this.DateTimeFormat || "N/A"
-          ) +
-          "Ver:" +
-          (this.bio["SMBIOSBIOSVersion"] || "N/A") +
-          " Version: " +
-          (this.bio["Version"] || "N/A"),
+        this.pipe.transform(
+          this.bio["ReleaseDate"],
+          this.DateTimeFormat || "N/A"
+        ) +
+        "Ver:" +
+        (this.bio["SMBIOSBIOSVersion"] || "N/A") +
+        " Version: " +
+        (this.bio["Version"] || "N/A"),
       ],
     ];
 
@@ -388,32 +388,32 @@ export class HardwareComponent implements OnInit {
         "Size",
         this.diskDrive["Size"] != undefined
           ? (this.diskDrive["Size"] / 1024 / 1024 / 1024).toFixed(2) +
-            " GB" +
-            " " +
-            "(" +
-            (this.diskDrive["Size"] / 1024 / 1024 / 1024).toFixed(2) +
-            " GB" +
-            " " +
-            "(" +
-            this.diskDrive["Caption"] +
-            ")" +
-            ")"
+          " GB" +
+          " " +
+          "(" +
+          (this.diskDrive["Size"] / 1024 / 1024 / 1024).toFixed(2) +
+          " GB" +
+          " " +
+          "(" +
+          this.diskDrive["Caption"] +
+          ")" +
+          ")"
           : "N/A",
       ],
       [
         "Free Space",
         this.diskDrive["FreeSpace"] != undefined
           ? (this.diskDrive["FreeSpace"] / 1024 / 1024 / 1024).toFixed(2) +
-            " GB" +
-            " " +
-            "(" +
-            (this.diskDrive["FreeSpace"] / 1024 / 1024 / 1024).toFixed(2) +
-            " GB" +
-            " " +
-            "(" +
-            this.diskDrive["Caption"] +
-            ")" +
-            ")"
+          " GB" +
+          " " +
+          "(" +
+          (this.diskDrive["FreeSpace"] / 1024 / 1024 / 1024).toFixed(2) +
+          " GB" +
+          " " +
+          "(" +
+          this.diskDrive["Caption"] +
+          ")" +
+          ")"
           : "N/A",
       ],
     ];
@@ -522,8 +522,8 @@ export class HardwareComponent implements OnInit {
       font-style: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #4f5f79;
-      background-color: #f3f7f9;
+      color: #454f5b;
+      background-color: #edf2f6;
     }
     h1,
     h2,
@@ -564,8 +564,8 @@ export class HardwareComponent implements OnInit {
           <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
             <th style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
                <div class="reports-head" style="width:585px;text-align:center;color: #364656;margin-left:-105px;">
@@ -590,7 +590,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Computer</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Computer</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -614,7 +614,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Motherboard</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Motherboard</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -638,7 +638,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Processor</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Processor</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -710,7 +710,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Network Card</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Network Card</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -734,7 +734,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Graphics Card</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Graphics Card</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -758,7 +758,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Display</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Display</th>
                   </tr>
               </thead>
               <tbody>`;
@@ -782,7 +782,7 @@ export class HardwareComponent implements OnInit {
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Hard Disk</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Hard Disk</th>
                   </tr>
               </thead>
               <tbody>`;

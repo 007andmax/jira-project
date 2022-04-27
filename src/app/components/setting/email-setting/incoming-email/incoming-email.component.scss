@@ -1,6 +1,6 @@
 /*** All css files include ***/
 
-@import "../../../../../assets/scss/variable";
+@import "./src/assets/styles/variable";
 @import "../../../../../assets/scss/mixin";
 @import "../../../../../assets/scss/custom";
 
@@ -14,26 +14,26 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
   }
   .f-row {
     margin-bottom: 0;
-    @media only screen and (max-width: 768px){
-      margin:0;
-  }
-  .f-col{ 
-      @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 768px) {
+      margin: 0;
+    }
+    .f-col {
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+        .btn {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
           width: 100%;
-          .btn{
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-            width: 100%;
-          }
+        }
       }
-  }
+    }
     .cmn-checkbox {
       margin-bottom: 23px;
       max-width: 376px;
@@ -51,7 +51,7 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
   }
   .f-col {
     &.col-25 {
@@ -87,45 +87,42 @@
   }
 }
 
-
-
 /*** Work Place ***/
 
 .cmn-area.workspace {
   margin-top: 10px;
   p {
-      font-size: 13px;
-      line-height: 1.54;
-      letter-spacing: normal;
-      color: #4f5f79;
-      margin-bottom: 78px;
-      font-family: $font-body;
+    font-size: 13px;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: $gray-800;
+    margin-bottom: 78px;
+    font-weight: 400;
   }
   form {
-      width: 478px;
-      max-width: 100%;
-      .custm-url {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          input {
-              width: 376px;
-              text-align: right;
-              max-width: 100%;
-          }
+    width: 520px;
+    max-width: 100%;
+    .custm-url {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      input {
+        width: 376px;
+        text-align: right;
+        max-width: 100%;
       }
-      .form-row {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 7px;
-      }
+    }
+    .form-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
   }
 }
-
 
 .cmn-area.incming-email.workspace > p {
   margin-bottom: 24px !important;
@@ -133,4 +130,6 @@
 .cmn-area.incming-email.workspace form .f-row .f-col p {
   margin-bottom: 23px;
 }
-.cmn-area.incming-email.workspace .slug{margin-left: 10px;}
+.cmn-area.incming-email.workspace .slug {
+  margin-left: 10px;
+}

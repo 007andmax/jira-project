@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteAddProduct } from '../../class/quote-add-product';
 
@@ -10,7 +11,8 @@ import { QuoteAddProduct } from '../../class/quote-add-product';
 export class ProductItemQuoteComponent implements OnInit {
   @Input() product: QuoteAddProduct;
   @Output() onRemoveProduct = new EventEmitter<any>();
-  constructor(private quoteStateService: QuoteStateService,) { }
+  constructor(private quoteStateService: QuoteStateService,
+    private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
     this.product.markup = this.getMarkups();
@@ -60,5 +62,8 @@ export class ProductItemQuoteComponent implements OnInit {
   }
   private isInteger(num): boolean {
     return (num ^ 0) === num;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

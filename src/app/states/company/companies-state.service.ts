@@ -8,17 +8,17 @@ import { CompanyUpdate } from '../../components/companies/class/company-update';
 import { User } from '../../components/users/class/user';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { UsersStateService } from '../users/users-state.service';
+import { WebsocketStateService } from '../websocket/websocket-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompaniesStateService {
   allCompanies = [];
-  industries: Array<CompanyIndustry> = [];
   selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
-  onGetIndustries: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onEditCompany: EventEmitter<CompanyProfile> = new EventEmitter();
@@ -30,9 +30,12 @@ export class CompaniesStateService {
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
-  isInitCurrentCompany: boolean = false;
+  isInitSubscriptions: boolean = false;
+  companyRoutingId: string;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
+    private usersStateService: UsersStateService,
+    private websocketStateService: WebsocketStateService,
     private websocketService: WebsocketService) {
   }
   public onInit() {
@@ -42,6 +45,7 @@ export class CompaniesStateService {
       this.onInitGetCompanies(data);
     })
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
+      if (newChange.data.id === this.currentCompany.id) return;
       if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
@@ -53,23 +57,34 @@ export class CompaniesStateService {
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
     })
-    this.companiesService.getIndustries().subscribe((data: Array<CompanyIndustry>) => {
-      this.industries = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.onGetIndustries.emit(this.industries);
+    this.websocketStateService.onConnected.subscribe(data => {
+      if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
+        this.initSubscriptions();
+      }
     })
   }
   public onInitGetCurrentCompany() {
     this.companiesService.getTechCompany().subscribe(data => {
       this.currentCompany = data;
       this.onCurrentCompany.emit(data);
-      if (!this.isInitCurrentCompany) {
-        this.websocketService.subsribeToGlNumber(this.currentCompany.id);
-        this.websocketService.subsribeToQuote(this.currentCompany.id);
-        this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+      if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
+        this.initSubscriptions();
       }
-      this.isInitCurrentCompany = true;
+
     })
+  }
+  public getCompanyRoutingId() {
+    return this.companyRoutingId;
+  }
+  public setCompanyRoutingId(data) {
+    this.companyRoutingId = data;
+  }
+  private initSubscriptions() {
+    this.websocketService.subsribeToGlNumber(this.currentCompany.id);
+    this.websocketService.subsribeToQuote(this.currentCompany.id);
+    this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+    this.websocketService.subsribeToUserSubscriptions(this.currentCompany.id);
+    this.isInitSubscriptions = true;
   }
   public onInitFilter(data) {
     this.filter.emit(data);
@@ -92,9 +107,6 @@ export class CompaniesStateService {
   }
   public getCurrentCompany() {
     return this.currentCompany;
-  }
-  public getIndustries() {
-    return this.industries;
   }
   public getChangeCompanies() {
     return this.onChangeCompanies;

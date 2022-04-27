@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .icn-64 {
   display: block;
   width: 64px;
@@ -51,7 +53,10 @@
 }
 
 .icn-remove {
-  background: url("/assets/img/icons/close-16.png");
+  background-image: url("/assets/img/icons/close-16.png");
+}
+.icn-report-caret {
+  background-image: url("/assets/img/icons/report-caret.png");
 }
 
 .email-ng2 {
@@ -87,6 +92,9 @@
 
 .edit-grey-ng2 {
   background: url("/assets/img/icons/edit-grey-ng2.png");
+}
+.edit-grey {
+  background-image: url("/assets/img/icons/edit-grey-ng2.png");
 }
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
@@ -147,7 +155,12 @@
   &__assign-user {
     background-image: url("/assets/img/icons/assign-user.svg");
   }
-
+  &__remove-user {
+    background-image: url("/assets/img/icons/remove-user.svg");
+  }
+  &__list {
+    background-image: url("/assets/img/icons/list.svg");
+  }
   &__task-pending {
     background-image: url("/assets/img/icons/task-pending.svg");
     &.--done {
@@ -160,8 +173,102 @@
   &__close {
     background-image: url("/assets/img/icons/close.svg");
   }
+  &__close-mobile {
+    background-image: url("/assets/img/icons/close-mobile.svg");
+  }
+  &__menu-white {
+    background-image: url("/assets/img/icons/menu-white.svg");
+  }
+  &__tickets-gray {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
+    mask-image: url("/assets/img/icons/tickets-gray.svg");
+  }
+  &__password-manager-gray {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+    // background-image: url("/assets/img/icons/password-manager-gray.svg");
+  }
+  &__company-gray {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
+    mask-image: url("/assets/img/icons/company-gray.svg");
+  }
   &__remove {
     background-image: url("/assets/img/icons/remove.svg");
+  }
+  &__remove-disabled {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
+  }
+  &__support-page {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/support-page.svg");
+    mask-image: url("/assets/img/icons/support-page.svg");
+  }
+  &__category-closed {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/category-closed.svg");
+    mask-image: url("/assets/img/icons/category-closed.svg");
+  }
+  &__add-sub-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+    mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+  }
+  &__add-article {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
+    mask-image: url("/assets/img/icons/support-page-add-article.svg");
+  }
+  &__preview-edit {
+    background-image: url("/assets/img/icons/preview-edit.svg");
+  }
+  &__help-center {
+    background-image: url("/assets/img/icons/help-center.svg");
+  }
+  &__annoucements-active {
+    background-image: url("/assets/img/icons/annoucements-active.svg");
+  }
+  &__road-map {
+    background-image: url("/assets/img/icons/road-map.svg");
+  }
+  &__draft-content {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/draft.svg");
+    mask-image: url("/assets/img/icons/draft.svg");
+  }
+  &__save-support-tag {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/save-support-tag.svg");
+    mask-image: url("/assets/img/icons/save-support-tag.svg");
+  }
+  &__edit-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
+    mask-image: url("/assets/img/icons/support-page-edit-category.svg");
+  }
+  &__drag {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
+    mask-image: url("/assets/img/icons/support-page-drag.svg");
+  }
+  &__remove-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
+    mask-image: url("/assets/img/icons/support-page-remove-category.svg");
+  }
+  &__category-more {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/category-more.svg");
+    mask-image: url("/assets/img/icons/category-more.svg");
+  }
+  &__remove-blue {
+    background-color: #16a4fa;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
   }
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");
@@ -181,17 +288,32 @@
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
+  &__products-new {
+    background-image: url("/assets/img/icons/products-new.svg");
+  }
   &__service {
     background-image: url("/assets/img/icons/service.svg");
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
   }
+  &__service-new {
+    background-image: url("/assets/img/icons/service-new.svg");
+  }
   &__quick-support {
     background-image: url("/assets/img/icons/quick-support-gray.svg");
     &.active {
       background-image: url("/assets/img/icons/quick-support.svg");
     }
+  }
+  &__quicktech-logo {
+    background-image: url("/assets/img/icons/quicktech-logo.svg");
+  }
+  &__quicktech_partical_top {
+    background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
+  }
+  &__quicktech_partical_bottom {
+    background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
   &__attach-blue {
     background-image: url("/assets/img/attachment-blue.svg");
@@ -232,6 +354,9 @@
   &__user-account {
     background-image: url("/assets/img/icons/local-user-account.svg");
   }
+  &__users-gray {
+    background-image: url("/assets/img/icons/users-gray.svg");
+  }
   &__get-direction {
     background-image: url("/assets/img/icons/get-direction.svg");
   }
@@ -259,11 +384,20 @@
   &__close {
     background-image: url("/assets/img/icons/tag-close.svg");
   }
+  &__close-white {
+    background-image: url("/assets/img/icons/close-white.svg");
+  }
+  &__snapshot {
+    background-image: url("/assets/img/icons/snapshot.svg");
+  }
   &__more {
     background-image: url("/assets/img/icons/more-vertical-ng2.png");
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
+  }
+  &__claim-edit-ticket {
+    background-image: url("/assets/img/icons/claim-edit-ticket.svg");
   }
   &__ticket-status {
     background: url("/assets/img/icons/ticket-status.svg");
@@ -277,11 +411,20 @@
   &__archive {
     background-image: url("/assets/img/icons/archive.svg");
   }
+  &__archive-blue {
+    background-image: url("/assets/img/icons/archive-blue.svg");
+  }
   &__email-dark {
     background-image: url("/assets/img/icons/email-dark.svg");
   }
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
+  }
+  &__manage {
+    background-image: url("/assets/img/icons/manage.svg");
+  }
+  &__create-list {
+    background-image: url("/assets/img/icons/create-list.svg");
   }
   &__upload-company-logo {
     background-image: url("/assets/img/icons/upload-company-logo.svg");
@@ -367,6 +510,15 @@
   &__clock-timer {
     background-image: url("/assets/img/icons/timer-counter.svg");
   }
+  &__add {
+    background-image: url("/assets/img/device/add.svg");
+  }
+  &__add-product {
+    background-image: url("/assets/img/icons/add-product.svg");
+  }
+  &__add-grey {
+    background-image: url("/assets/img/icons/add-grey.svg");
+  }
   &__add-task {
     background-image: url("/assets/img/icons/add-task.svg");
   }
@@ -443,6 +595,9 @@
   &__edit {
     background-image: url("/assets/img/icons/edit.svg");
   }
+  &__edit-gray {
+    background-image: url("/assets/img/icons/edit-gray.svg");
+  }
   &__email-dark {
     background-image: url("/assets/img/icons/email-dark.svg");
   }
@@ -454,6 +609,9 @@
   }
   &__add-document {
     background-image: url("/assets/img/icons/add-document.svg");
+  }
+  &__active_subscription {
+    background-image: url("/assets/img/icons/active-company.svg");
   }
   &__rename {
     background-image: url("/assets/img/icons/rename.svg");
@@ -473,6 +631,12 @@
 
   &__block-time-billing {
     background-image: url("/assets/img/icons/block-time-billing.svg");
+  }
+  &__billing-gray {
+    background-image: url("/assets/img/icons/billing-gray.svg");
+  }
+  &__inventory-gray {
+    background-image: url("/assets/img/icons/inventory-gray.svg");
   }
   &__contract-claim-ticket {
     background-image: url("/assets/img/icons/contract-claim-ticket.svg");
@@ -525,6 +689,9 @@
   }
   &__search {
     background-image: url("/assets/img/icons/search.svg");
+  }
+  &__search-white {
+    background-image: url("/assets/img/icons/search-white.svg");
   }
   &__search-gray {
     background-image: url("/assets/img/icons/search-gray.svg");
@@ -597,6 +764,9 @@
   }
   &__go-to {
     background-image: url("/assets/img/icons/go-to.svg");
+  }
+  &__go-to-blue {
+    background-image: url("/assets/img/icons/go-to-blue.svg");
   }
   &__network {
     background-image: url("/assets/img/icons/network.svg");
@@ -676,6 +846,12 @@
   &__close-round {
     background-image: url("/assets/img/icons/close-round.svg");
   }
+  &__unsubscribe-user {
+    background-image: url("/assets/img/icons/unsubscribe-user.svg");
+  }
+  &__subscribe-user {
+    background-image: url("/assets/img/icons/subscribe-user.svg");
+  }
   &__create-folder {
     background-image: url("/assets/img/icons/create-folder.svg");
   }
@@ -694,6 +870,12 @@
   }
   &__link-gray {
     background-image: url("/assets/img/icons/link-gray.svg");
+  }
+  &__unlink {
+    background-image: url("/assets/img/icons/unlink.svg");
+  }
+  &__disable {
+    background-image: url("/assets/img/icons/disable.svg");
   }
   &__clone-document {
     background-image: url("/assets/img/icons/clone-document.svg");
@@ -760,14 +942,14 @@
       position: absolute;
       top: -2px;
       right: -2px;
-      border: solid 2px #ffffff;
-      background-color: #2ec866;
+      border: solid 2px $white;
+      background-color: $success;
       border-radius: 50%;
     }
   }
   &.--offline {
     &::before {
-      background-color: #ff5263;
+      background-color: $error;
     }
   }
 }
@@ -785,13 +967,34 @@
   background-size: contain;
   display: inline-block;
 
+  @media (max-width: 767px) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
+  }
+
   &.--high {
     background-image: url("/assets/img/icons/priority-high.png");
+
+    @media (max-width: 767px) {
+      background: $error;
+    }
   }
   &.--medium {
     background-image: url("/assets/img/icons/priority-medium.png");
+
+    @media (max-width: 767px) {
+      background: $warning;
+    }
   }
   &.--low {
     background-image: url("/assets/img/icons/priority-low.png");
+
+    @media (max-width: 767px) {
+      background: $success;
+    }
   }
 }

@@ -5,25 +5,39 @@ export class InvoicesFilter {
     companyName: string;
     endDate: number;
     invoiceNumber: string;
-    limit: number = 20;
+    limit: number = 40;
     offset: number = 0;
+    amount: string = "";
     sortBy: string;
     startDate: number;
     status: string;
+
+    leftOffset: number = 0;
+    initLeftOffset: boolean = false;
     constructor() { }
 
     public resetSortBy() {
         this.sortBy = null;
+    }
+    public onInitLeftOffset(data) {
+        this.initLeftOffset = data;
+    }
+    public updateLeftOffset() {
+        this.leftOffset += 1;
+    }
+    public resetLeftOffset() {
+        this.leftOffset = 0;
     }
     public getFIlter() {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);
         return {
             companyName: this.companyName,
+            amount: (this.amount) ? this.amount : null,
             endDate: (this.endDate) ? moment(endDate).format('YYYY-MM-DD') : null,
             invoiceNumber: this.invoiceNumber,
             limit: this.limit,
-            offset: this.offset,
+            offset: (this.initLeftOffset) ? (this.offset - this.leftOffset) : this.offset,
             sortBy: this.sortBy,
             startDate: (this.startDate) ? moment(this.startDate).format('YYYY-MM-DD') : null,
             status: this.status,
@@ -60,5 +74,8 @@ export class InvoicesFilter {
     }
     public setInvoiceNumber(data) {
         this.invoiceNumber = data;
+    }
+    public setAmount(data) {
+        this.amount = data;
     }
 }

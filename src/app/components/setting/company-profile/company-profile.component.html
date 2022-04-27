@@ -2,7 +2,7 @@
 <div class="page-container">
     <div class="page-insider company-profile">
         <div class="heading">
-            <h1>Company Profile</h1>
+            <h5 class="qt-fw-600">Company Profile</h5>
         </div>
         <ngb-tabset>
             <!-- Profile -->
@@ -27,7 +27,7 @@
                                 *ngIf="imageSrc === ''"
                             >
                                 <img
-                                    src="/html/assets/img/company-logo.svg"
+                                    src="/html/assets/img/default_company_logo_settings.png"
                                     alt="Company"
                                 >
                             </span>
@@ -49,57 +49,20 @@
                   imageSrc ? "Change Logo" : "Upload Photo"
                 }}
                                     </label>
+                                    <label
+                                        for="profile-dp"
+                                        *ngIf="imageSrc"
+                                        (click)="deleteAvatar()"
+                                    >
+                                        <a
+                                            href="javascript:void(0)"
+                                            restore-default-button
+                                        >
+                                            Remove Photo
+                                        </a>
+                                    </label>
                                 </div>
                                 <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-                            </div>
-                            <div
-                                class="img-croparea"
-                                *ngIf="isCroppedImg"
-                            >
-                                <div class="crop-inner">
-                                    <div class="heading-area">
-                                        <h2>Crop Photo</h2>
-                                        <a
-                                            href="javascript:;"
-                                            class="close-btn"
-                                        >
-                                            remove
-                                        </a>
-                                    </div>
-                                    <div class="cropping">
-                                        <div class="img-crop">
-                                            <image-cropper
-                                                [imageBase64]="imageBase64"
-                                                [imageChangedEvent]="imageChangedEvent"
-                                                [maintainAspectRatio]="false"
-                                                [aspectRatio]="4 / 3"
-                                                [resizeToWidth]="128"
-                                                format="png"
-                                                (imageCropped)="imageCropped($event)"
-                                            ></image-cropper>
-                                        </div>
-                                        <div class="preview">
-                                            <h6>Profile Preview</h6>
-                                            <img [src]="croppedImage?.base64">
-                                        </div>
-                                        <div class="btn-crops">
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                (click)="cropIt()"
-                                            >
-                                                Crop Photo
-                                            </button>
-                                            <button
-                                                type="button"
-                                                class="btn btn-secondary"
-                                                (click)="closeModel()"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <form [formGroup]="cProfileForm">
@@ -201,6 +164,12 @@
                                         [selectedItem]="cProfile.address[0].timeZone"
                                         (selectedOffsetItem)="onChangeTimeZone($event)"
                                     ></app-company-time-zone>
+                                    <div
+                                        *ngIf="submitted && f.locale.errors"
+                                        class="invalid-feedback"
+                                    >
+                                        <div *ngIf="f.locale.errors.required">Time zone value is required</div>
+                                    </div>
                                 </div>
                                 <div
                                     class="f-col col-50"
@@ -340,7 +309,7 @@
                                                     [id]=" 'from-'+workingDay.dayOfWeek"
                                                     (change)="startTimeChange(workingDay, startTime.value)"
                                                     name="{{workingDay.dayOfWeek}}"
-                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [disabled]="!workingDay.isSelected"
                                                     [ngModel]="fromTime_convert(workingDay.startTime)"
                                                 >
                                                     <option value="06:00">6:00 AM</option>
@@ -365,7 +334,7 @@
                                                     (change)="endTimeChange(workingDay,endTime.value)"
                                                     [id]="'to-'+workingDay.dayOfWeek"
                                                     name="{{workingDay.dayOfWeek+i}}"
-                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [disabled]="!workingDay.isSelected"
                                                     [ngModel]="toTime_convert(workingDay.endTime)"
                                                 >
                                                     <option value="17:00">17:00 PM</option>
@@ -388,54 +357,6 @@
                             >
                         </form>
                     </div>
-                </ng-template>
-            </ngb-tab>
-            <ngb-tab title="Accounting Year">
-                <ng-template ngbTabContent>
-                    <form (ngSubmit)="saveAccountingDate()">
-                        <div class="f-row">
-                            <div class="f-col col-50  date-area">
-                                <label>Start Date</label>
-                                <div class="form-row">
-                                    <input
-                                        name="start_date"
-                                        type="text"
-                                        class="form-control sub-label-field"
-                                        [(ngModel)]="accountingStartDate"
-                                        ngbDatepicker
-                                        #d="ngbDatepicker"
-                                        (click)="d.toggle()"
-                                    >
-                                    <a
-                                        href="javascript:;"
-                                        (click)="resetAccountingDate()"
-                                    >
-                                        Reset
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="f-col col-50 date-area">
-                                <label>End Date</label>
-                                <div class="form-row">
-                                    <input
-                                        name="end_date"
-                                        type="text"
-                                        class="form-control sub-label-field"
-                                        [(ngModel)]="accountingEndDate"
-                                        ngbDatepicker
-                                        #dd="ngbDatepicker"
-                                        (click)="dd.toggle()"
-                                        disabled
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <input
-                            type="submit"
-                            class="btn btn-primary"
-                            value="Save Changes"
-                        >
-                    </form>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

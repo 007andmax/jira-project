@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketAdd } from '../class/ticket-add';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -13,6 +13,15 @@ import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.com
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { AppService } from 'src/app/states/app/app.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
+import { forkJoin, Subscription } from 'rxjs';
+import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
+import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
+import { TehUsersComponent } from 'src/app/components/shared/teh-users/teh-users.component';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 
 
@@ -21,13 +30,14 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
   templateUrl: './ticket-add-aside.component.html',
   styleUrls: ['./ticket-add-aside.component.scss']
 })
-export class TicketAddAsideComponent implements OnInit {
+export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP') userDP: DropDownComponent;
   @ViewChild('techUserDP') techUserDP: SelectSearchComponent;
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
   @ViewChild('companyDP') companyDP: DropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('techUsersDp') techUsersDp: TehUsersComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
@@ -39,17 +49,25 @@ export class TicketAddAsideComponent implements OnInit {
   techUsersList = [];
   shareUsersList = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
+  selectedTicketPriorities: TitleListType = new TitleListType('Medium Priority', 'MEDIUM');
   ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
   new TitleListType('Medium Priority', 'MEDIUM'),
   new TitleListType('High Priority', 'HIGH')];
   ticketValidate: TicketValidate = new TicketValidate();
+  sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private devicesStateService: DevicesStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    public appService: AppService,
+    private modalService: NgbModal,
+    private ticketStateService: TicketStateService,
+    private companiesService: CompaniesService,
+    private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesState: CompaniesStateService,) { }
+
 
   ngOnInit() {
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
@@ -61,13 +79,23 @@ export class TicketAddAsideComponent implements OnInit {
     })
     this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
-
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
+      if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-
       this.getClientsList(data);
     })
+    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
+      if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
+    })
+    this.sub.add(onChangeAssignedUser);
+  }
+  onAddAssignedUser() {
+    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+    modalRef.componentInstance.userList = this.listTechUsersForAssign;
+    modalRef.componentInstance.selectedUsers = this.shareUsersList;
+    this.addUsersNotifyStateService.setAction(USERS_TO_ADD_TICKET);
   }
   add() {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
@@ -75,6 +103,7 @@ export class TicketAddAsideComponent implements OnInit {
       this.addBtn.setDisabled(true);
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
         this.addBtn.setDisabled(false);
+        this.ticketAdd.setAttachFileIds(null);
         this.closed();
       }, error => {
         this.addBtn.setDisabled(false);
@@ -83,6 +112,13 @@ export class TicketAddAsideComponent implements OnInit {
 
   }
   closed() {
+    if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > 0) {
+      forkJoin(
+        this.ticketAdd.attachFileIds.map(item => this.companiesService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
     this.ticketAdd = new TicketAdd();
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
@@ -93,6 +129,7 @@ export class TicketAddAsideComponent implements OnInit {
     this.techUserDP.clearClient();
     this.companyDP.clearClient();
     this.uplaodFile.onClearState();
+    this.appService.toggleMobileAside(false);
     this.cd.detectChanges();
 
   }
@@ -116,56 +153,60 @@ export class TicketAddAsideComponent implements OnInit {
       return user;
     }), ...this.users.map(item => {
       return new TechUserItem(item)
-    })];
+    })].map(item => {
+      let find = this.shareUsersList.find(user => user.id === item.id);
+      if (find) item.selected = true;
+      return item;
+    });
   }
   onSelectCompany(item) {
     if (item) {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
       this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
-      let list = this.users.filter(item => item.subscription && item.subscription.ticketManager);
+      let list = this.users.filter(item => item.defaultSubscriptions && item.defaultSubscriptions.ticketManagerSubscription.enabled);
       list = list.map(item => {
         let user = new TechUserItem(item);
         return user;
       });
       this.shareUsersList = list;
+      this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
-
-
     } else {
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
       this.users = [];
       this.devices = [];
       this.shareUsersList = [];
+      this.techUsersDp.resetEditMode();
     }
     let selectedUser = this.techUsersList.find(user => user.id === this.ticketAdd.assignedUser);
     if (selectedUser) {
       let user = new TechUserItem(selectedUser);
       user.selected = true;
       this.shareUsersList.push(user);
+      this.techUsersDp.resetEditMode();
     }
     this.deviceDP.clearClient();
     this.userDP.clearClient();
     this.cd.detectChanges();
-
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
-
   }
   onSelectUser(item) {
-
+    let shareUser = this.shareUsersList.find(item => item.id === this.ticketAdd.createdUser.id);
     if (item) {
-      if (this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (!(shareUser && shareUser.defaultSubscriptions && shareUser.defaultSubscriptions.ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
       if (!findSharedUser) this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
       this.ticketValidate.resetClientUser();
-
+      this.techUsersDp.resetEditMode();
     } else {
-      //  this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (!(shareUser && shareUser.defaultSubscriptions && shareUser.defaultSubscriptions.ticketManagerSubscription.enabled)) this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
     }
+    this.listTechUsersForAssign = this.getListTechUsersForAssign();
   }
   onSelectTechUser(item) {
     if (item) {
@@ -176,12 +217,14 @@ export class TicketAddAsideComponent implements OnInit {
         let user = new TechUserItem(this.techUsersList[indexTechUser]);
         user.selected = true;
         this.shareUsersList.push(user);
+        this.techUsersDp.resetEditMode();
       }
 
     } else {
       this.removeShareUser(this.ticketAdd.assignedUser);
       this.ticketAdd.clearAssignedUser();
     }
+    this.listTechUsersForAssign = this.getListTechUsersForAssign();
   }
   onSelectDevice(item) {
     if (item) {
@@ -190,10 +233,15 @@ export class TicketAddAsideComponent implements OnInit {
       this.ticketAdd.clearDeviceId();
     }
   }
+  setPriorityLevel(item) {
+    this.ticketAdd.priorityLevel = item.type;
+    this.selectedTicketPriorities = item;
+  }
   removeShareUser(id) {
     let index = this.shareUsersList.findIndex(shareUser => shareUser.id === id);
     if (index > -1) {
       this.shareUsersList.splice(index, 1);
+      this.techUsersDp.resetEditMode();
     }
   }
   getTechUserList() {
@@ -225,11 +273,30 @@ export class TicketAddAsideComponent implements OnInit {
     this.ticketValidate.resetSubject();
   }
   onChangeFiles(ids) {
-    this.ticketAdd.setAttachFileIds(ids);
+    if (this.ticketAdd.attachFileIds && this.ticketAdd.attachFileIds.length > ids.length) {
+      this.ticketAdd.attachFileIds.forEach(item => {
+        let find = ids.find(id => id === item);
+        if (!find) {
+          this.companiesService.removeAttachment(item).subscribe(data => {
+
+          })
+        }
+      })
+    }
+    this.ticketAdd.setAttachFileIds(JSON.parse(JSON.stringify(ids)));
   }
   onChangeShareUsers(data) {
+    let shareUsersList = JSON.parse(JSON.stringify(this.shareUsersList));
+    this.shareUsersList = [];
+    data.forEach(item => {
+      let shareUser = shareUsersList.find(share => share.id === item.id);
+      let user = new TechUserItem(JSON.parse(JSON.stringify(item)));
+      if (shareUser) {
+        user.selected = shareUser.selected;
+      } else if (user.accountType === "TECH") user.selected = true;
+      this.shareUsersList.push(user);
+    });
 
-    this.shareUsersList = JSON.parse(JSON.stringify(data));
   }
   public onPastNote(value) {
     this.ticketAdd.note = value;
@@ -245,5 +312,8 @@ export class TicketAddAsideComponent implements OnInit {
 
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

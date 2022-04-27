@@ -1,6 +1,8 @@
+@import './src/assets/styles/variable';
+
 .ticket-updates {
   padding: 24px 32px;
-  background-color: #f9fafb;
+  background-color: $gray-100;
   font-size: 13px;
 
   &__count {
@@ -27,7 +29,7 @@
       font-weight: 600;
   }
   &__add-note {
-      color: #9ca5b6;
+      color: $gray-600;
       cursor: pointer;
   }
   &__edit, &__delete{
@@ -44,7 +46,7 @@
     font-size: 12px;
   }
   &__people-added {
-    color: #9ca5b6;
+    color: $gray-600;
     margin-right: 8px;
   }
 
@@ -66,8 +68,8 @@
   }
   &__ticket-body {
     padding: 8px;
-    background-color: white;
-    border: solid 1px #dfe3e8;
+    background-color: $white;
+    border: solid 1px $gray-400;
   }
   &__done-status {
     width: 24px;
@@ -187,10 +189,10 @@
   &__service-tag-completed {
     height: 20px;
     line-height: 12px;
-    color: #2ec866;
+    color: $success;
     font-size: 10px;
-    border-color: #2ec866;
-    background: white;
+    border-color: $success;
+    background: $white;
     margin-right: 32px;
   }
   .right-side-icons {
@@ -213,13 +215,13 @@
 
 .ticket-updates__message-line {
   .editable-description {
-      background: white;
+      background: $white;
 
       textarea {
         width: 100%;
         display: block;
         visibility: visible;
       }
-      
+
   }
 }

@@ -90,6 +90,7 @@ export class TicketProfileFormUpdate {
     public setServices(data) {
         this.services = data;
     }
+
     public toggleShares(user) {
         let findIndex = this.shares.findIndex(item => item.user.id === user.id);
         if (findIndex > -1) this.shares.splice(findIndex, 1);

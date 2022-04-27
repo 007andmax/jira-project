@@ -1,37 +1,62 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .qt-fileupload {
-  input[type=file] {
-    user-select:none;
+  input[type="file"] {
+    user-select: none;
     display: none;
   }
   &__label {
     width: 100%;
-    border: 2px dotted #16a4fa;
+    border: 1px dotted $gray-500;
     border-radius: 4px;
     display: block;
     cursor: pointer;
-    background-color: rgba(22, 164, 250, 0.05);
     padding: 24px;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
   }
   &__title {
-    color: #4f5f79;
+    color: $gray-800;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
   &__link {
     text-decoration: underline;
-    color: #16a4fa;
+    color: $primary-1;
   }
 
   &__attach-icon {
     margin-right: 8px;
     width: 24px;
     height: 24px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__mobile-text {
+    color: $primary-2;
+    @extend %сaption-l-sb;
+    display: none;
+
+    @media (max-width: 767px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 }
-
-
 
 .container {
   width: 450px;
@@ -53,7 +78,7 @@
   }
 
   label {
-    color: white;
+    color: $white;
     width: 183px;
     height: 44px;
     border-radius: 21.5px;
@@ -74,7 +99,7 @@
 }
 
 .files-list {
-  margin-top: 1.5rem;
+  margin-top: 16px;
 
   .single-file {
     display: flex;
@@ -83,14 +108,16 @@
     align-items: center;
     border: dashed 1px #979797;
     margin-bottom: 1rem;
-
+    position: relative;
     img.delete {
       margin-left: 0.5rem;
       cursor: pointer;
       align-self: flex-end;
     }
-
-
+    .icn-remove-old {
+      right: 0.5rem !important;
+      top: 0.5rem !important;
+    }
     display: flex;
     flex-grow: 1;
 
@@ -108,12 +135,12 @@
       margin: 0;
       margin-bottom: 0.25rem;
       .file-error {
-        color: red;
+        color: $error;
       }
     }
 
     .info {
-      width: 100%
+      width: 100%;
     }
   }
 }

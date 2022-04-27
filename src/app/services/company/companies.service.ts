@@ -47,6 +47,10 @@ export class CompaniesService {
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/filter', data);
   }
+
+  public setAssociatedCompanies(id, data) {
+    return this.http.post(this.apiUrl + `company/${id}/associate`, data);
+  }
   public getCompany(id) {
     return this.http.get(this.apiUrl + `company/${id}/data`);
   }
@@ -115,11 +119,6 @@ export class CompaniesService {
     return this.http.get(this.apiUrl + '/company/current');
   }
 
-
-  public getIndustries() {
-    return this.http.get(this.apiUrl + '/company/getIndustries');
-  }
-
   public uploadAvatar(file) {
     return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1', { file: file });
   }
@@ -153,6 +152,16 @@ export class CompaniesService {
       endDate: data.endDate,
       companyId: data.id
     });
+  }
+
+  public removeAttachment(id) {
+    return this.http.delete(this.apiUrl + `file/${id}`);
+  }
+  removeAvatar(comapnyId: string) {
+    return this.http.delete(
+      `${this.apiUrl}company/${comapnyId}`,
+      {}
+    );
   }
 
   public getTicketGraph(id, frequency) {

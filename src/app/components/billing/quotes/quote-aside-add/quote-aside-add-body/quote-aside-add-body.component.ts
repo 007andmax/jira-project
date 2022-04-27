@@ -2,12 +2,13 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/invoice-tickets/invoice-tickets.service';
+import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { Service } from 'src/app/interfaces/service/service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -46,6 +47,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     private elRef: ElementRef,
     private invoiceTicketsService: InvoiceTicketsService,
     private billableService: BillableService,
+    private permissionsService: PermissionsService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -203,6 +205,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     }
     // this.quote.resetServices();
     this.validate.resetValidate();
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.item.versionedId.id;

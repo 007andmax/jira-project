@@ -1,10 +1,10 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
-            <h3
+            <h6
                 class="qt-page-list__header-title"
                 [textContent]="'Quotes'"
-            ></h3>
+            ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="d-f ai-c">
@@ -21,7 +21,7 @@
                     (click)="toggleFilter  = !toggleFilter"
                 >
                     <span
-                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>

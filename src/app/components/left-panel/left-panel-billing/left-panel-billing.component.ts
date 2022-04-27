@@ -78,7 +78,6 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   public goToState(state) {
     this.onChangeState.emit(state);
   }
-
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

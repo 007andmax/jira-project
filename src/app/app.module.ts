@@ -13,7 +13,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { IgxTimePickerModule } from 'igniteui-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -114,7 +113,6 @@ import { InventoryTableComponent } from './components/inventory/inventory-table/
 import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
-import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
@@ -134,7 +132,6 @@ import { TaxesSettingsComponent } from './components/setting/taxes/taxes.compone
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
-import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { DataTablesModule } from 'angular-datatables';
@@ -149,10 +146,10 @@ import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
-import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
-import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
-import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
-import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
+import { TicketSettingsComponent } from './components/setting/ticket-settings-page/ticket-settings/ticket-settings.component';
+import { InvoiceSettingsComponent } from './components/setting/accounting/invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './components/setting/accounting/quotes-settings/quotes-settings.component';
+import { GlNumberSettingsComponent } from './components/setting/accounting/gl-number/gl-number.component';
 import { Onlynumber } from './helpers/Onlynumber';
 import { CompanyComponent } from './components/setting/commission/company/company.component';
 import { ProductComponent } from './components/setting/commission/product/product.component';
@@ -167,7 +164,6 @@ import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
 import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
-import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
 import { UploadAreaProgressComponent } from './components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { DndDirective } from './directives/dnd.directive';
 import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
@@ -468,8 +464,104 @@ import { WindowUpdatesComponent } from './components/device/window-updates/windo
 import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 import { ModelPipe } from './pipe/model.pipe';
 import { StartUpProgramPipe } from './pipe/startup-program.pipe';
+import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
+import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
+import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
+import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
+import { UsersAsideDetailComponent } from './components/users/users-aside-detail/users-aside-detail.component';
+import { UsersAsideDetailTicketsComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets.component';
+import { UsersAsideDetailTicketsItemComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets-item/users-aside-detail-tickets-item.component';
+import { UsersAsideDetailDocumentsComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents.component';
+import { UsersAsideDetailDocumentsItemComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
+import { UsersAsideDetailPasswordsComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords.component';
+import { UsersAsideDetailPasswordsItemComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords-item/users-aside-detail-passwords-item.component';
+import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
+import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
+import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { TicketProfileEditFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
+import { TicketProfileEditFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
+import { TicketProfileEditFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
+import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
+import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
+import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
+import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
+import { AddCategoryProductComponent } from './components/setting/products-settings/add-category-product/add-category-product.component';
+import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
+import { CrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/crm-company-industry.component';
+import { AddCrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/add-crm-company-industry/add-crm-company-industry.component';
+import { CrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/crm-company-job-title.component';
+import { AddCrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
+import { CrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/crm-company-service-type.component';
+import { AddCrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
+import { CrmCompanyJobTypeComponent } from './components/setting/crm-settings/crm-company-job-type/crm-company-job-type.component';
+import { AddCrmCompanyJobTypeComponent } from './components/setting/crm-settings/crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
+import { AccountingYearComponent } from './components/setting/accounting/accounting-year/accounting-year.component';
+import { AddGlNumberComponent } from './components/setting/accounting/gl-number/add-gl-number/add-gl-number.component';
+import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
+import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
+import { MarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component';
+import { AddMarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.component';
+import { MarketingEmailUsersComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users.component';
+import { UsersAsideDetailMessagesComponent } from './components/users/users-aside-detail/users-aside-detail-messages/users-aside-detail-messages.component';
+import { MarketingEmailUsersItemComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
+import { MarketingEmailUsersAddComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
+import { UserDefaultSubscriptionComponent } from './components/users/users-aside/user-default-subscription/user-default-subscription.component';
+import { UserCustomSubscriptionComponent } from './components/users/users-aside/user-custom-subscription/user-custom-subscription.component';
+import { UserTableDefaultSubscriptionComponent } from './components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
+import { UserTableCustomSubscriptionComponent } from './components/users/users-table/user-table-custom-subscription/user-table-custom-subscription.component';
+import { UsersFilterSubscriptionsComponent } from './components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
+import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
+import { UsersAsideDetailMessagesFullBodyComponent } from './components/users/users-aside-detail/users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
+import { MarketingComponent } from './components/marketing/marketing.component';
+import { UsersTableMarketingComponent } from './components/marketing/users-table-marketing/users-table-marketing.component';
+import { LeftPanelMarketingComponent } from './components/left-panel/left-panel-marketing/left-panel-marketing.component';
+import { PermissionContractsService } from './components/billing/contracts/permission-contracts.service';
+import { PermissionCompanyService } from './components/companies/permission-company.service';
+import { PermissionInvoicesService } from './components/billing/invoices/permission-invoices.service';
+import { PermissionBillableService } from './components/billing/billable/permission-billable.service';
+import { PermissionUsersService } from './components/users/permission-users.service';
+import { PermissionPasswordManagerService } from './components/password-manager/permission-password-manager.service';
+import { PermissionSupportService } from './components/support/permission-support.service';
+import { PermissionReportsService } from './components/reports/permission-reports.service';
+import { RightClickBlankDirective } from './directives/right-click-blank.directive';
+import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
+import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
+import { PermissionTechUserService } from './services/users/permission-tech-user.service';
+import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
+import { LeftPanelSuperAdminCategoriesComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories.component';
+import { SupportPageAddCategoryComponent } from './components/super-admin/shared/support-page-add-category/support-page-add-category.component';
+import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
+import { SupportPageEditCategoryComponent } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.component';
+import { DragMenuDirective } from './directives/drag-menu.directive';
+import { LeftPanelSuperAdminCategoriesActionsComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
+import { SupportPageBreadcrumbsComponent } from './components/super-admin/support-page/support-page-breadcrumbs/support-page-breadcrumbs.component';
+import { SupportPageHeaderComponent } from './components/super-admin/support-page/support-page-header/support-page-header.component';
+import { SupportPageBodyComponent } from './components/super-admin/support-page/support-page-body/support-page-body.component';
+import { SupportPageInfoComponent } from './components/super-admin/support-page/support-page-info/support-page-info.component';
+import { SupportPageInfoTagsComponent } from './components/super-admin/support-page/support-page-info/support-page-info-tags/support-page-info-tags.component';
+import { SuperAdminPublicComponent } from './components/super-admin-public/super-admin-public.component';
+import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
+import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
+import { SuperAdminPublicSearchComponent } from './components/super-admin-public/super-admin-public-search/super-admin-public-search.component';
+import { SupportPageHelpCenterComponent } from './components/super-admin/support-page/support-page-help-center/support-page-help-center.component';
+import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
+import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
+import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
+import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
+import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
+
 
 declare var $: any;
+
 /**
  * This module represents the main application module
  */
@@ -556,7 +648,7 @@ declare var $: any;
     PermissionManageComponent,
     EmailTempleteComponent,
     IntegrationsComponent,
-    InvoiceTicketsComponent,
+    AccountingSettingsComponent,
     CommissionComponent,
     SubscriptionComponent,
     AccountComponent,
@@ -617,7 +709,6 @@ declare var $: any;
     TicketEditAsideCompanyInfoComponent,
     TicketEditAsideDevicesComponent,
     TicketEditAsideUsersComponent,
-    TicketsStatusComponent,
     UploadAreaProgressComponent,
     DndDirective,
     AddAssignedUserComponent,
@@ -892,7 +983,80 @@ declare var $: any;
     WindowUpdatesComponent,
     DeviceSettingComponent,
     ModelPipe,
-    StartUpProgramPipe
+    StartUpProgramPipe,
+    CompanyDashAssociateComponent,
+    CompanyAssociateComponent,
+    CompanyDashAssociateInfoComponent,
+    PreparePhonePipe,
+    UsersAsideDetailComponent,
+    UsersAsideDetailTicketsComponent,
+    UsersAsideDetailTicketsItemComponent,
+    UsersAsideDetailDocumentsComponent,
+    UsersAsideDetailDocumentsItemComponent,
+    UsersAsideDetailPasswordsComponent,
+    UsersAsideDetailPasswordsItemComponent,
+    ModalAddUpdateTicketComponent,
+    ModalAgentLinkComponent,
+    ModalAddUsersNotifyComponent,
+    TicketProfileEditFormUpdateComponent,
+    TicketProfileEditFormUpdateProductsComponent,
+    TicketProfileEditFormUpdateServicesComponent,
+    ModalEditCategoryProductComponent,
+    TicketSettingsPageComponent,
+    TicketsStatusComponent,
+    ProductsSettingsComponent,
+    AccountingYearComponent,
+    AddGlNumberComponent,
+    CrmSettingsComponent,
+    CrmCompanyIndustryComponent,
+    AddCrmCompanyIndustryComponent,
+    CrmCompanyJobTitleComponent,
+    AddCrmCompanyJobTitleComponent,
+    CrmCompanyServiceTypeComponent,
+    AddCrmCompanyServiceTypeComponent,
+    CrmCompanyJobTypeComponent,
+    AddCrmCompanyJobTypeComponent,
+    MarketingEmailComponent,
+    MarketingSubscriptionTypeComponent,
+    AddMarketingSubscriptionTypeComponent,
+    MarketingEmailUsersComponent,
+    UsersAsideDetailMessagesComponent,
+    MarketingEmailUsersItemComponent,
+    MarketingEmailUsersAddComponent,
+    UserDefaultSubscriptionComponent,
+    UserCustomSubscriptionComponent,
+    UserTableDefaultSubscriptionComponent,
+    UserTableCustomSubscriptionComponent,
+    UsersFilterSubscriptionsComponent,
+    AddUserToSubscribeComponent,
+    UsersAsideDetailMessagesFullBodyComponent,
+    MarketingComponent,
+    UsersTableMarketingComponent,
+    LeftPanelMarketingComponent,
+    RightClickBlankDirective,
+    LeftPanelSuperAdminComponent,
+    SupportPageComponent,
+    LeftPanelSuperAdminCategoriesComponent,
+    SupportPageAddCategoryComponent,
+    SupportPageAddSubCategoryComponent,
+    SupportPageEditCategoryComponent,
+    DragMenuDirective,
+    LeftPanelSuperAdminCategoriesActionsComponent,
+    SupportPageBreadcrumbsComponent,
+    SupportPageHeaderComponent,
+    SupportPageBodyComponent,
+    SupportPageInfoComponent,
+    SupportPageInfoTagsComponent,
+    SuperAdminPublicComponent,
+    HelpCenterInfoAsideComponent,
+    SuperAdminPublicDetailComponent,
+    SuperAdminPublicSearchComponent,
+    SupportPageHelpCenterComponent,
+    SupportPageCategoryComponent,
+    SuperAdminPublicCategoryComponent,
+    SuperAdminPublicHeaderComponent,
+    SortTagsPipe,
+    InventoryCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -920,12 +1084,12 @@ declare var $: any;
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
-      timeOut: 5000
+      timeOut: 5000,
+      onActivateTick: true
     }),
     ImageCropperModule,
     NvD3Module,
     BrowserAnimationsModule,
-    IgxTimePickerModule,
     DisabledBtnModule,
     NgxUploaderModule,
     AngularEditorModule,
@@ -943,11 +1107,19 @@ declare var $: any;
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
-    ModalSessionScreenComponent
+    ModalSessionScreenComponent,
+    ModalAddUpdateTicketComponent,
+    ModalAgentLinkComponent,
+    ModalAddUsersNotifyComponent,
+    ModalEditCategoryProductComponent,
+    AddUserToSubscribeComponent,
+    SupportPageAddCategoryComponent,
+    SupportPageAddSubCategoryComponent,
+    SupportPageEditCategoryComponent,
+    InventoryCheckUseComponent,
     // RecurringTicketsComponent
   ],
   exports: [
-    PhonePipe,
     OrderByPipe,
   ],
   providers: [
@@ -956,7 +1128,26 @@ declare var $: any;
       useClass: HttpInterceptorService,
       multi: true,
     },
-    PermissionDasnboardBillingService
+    PermissionDasnboardBillingService,
+    PermissionManageTagsService,
+    PermissionProductsSettingsService,
+    PermissionsTechUsersService,
+    PermissionEmailSettingService,
+    PermissionTaxesSettingsService,
+    PermissionTicketSettingsService,
+    PermissionEmailTempleteService,
+    PermissionAccountingSettingsService,
+    PermissionCrmSettingsService,
+    PermissionContractsService,
+    PermissionCompanyService,
+    PermissionBillableService,
+    PermissionInvoicesService,
+    PermissionUsersService,
+    PermissionPasswordManagerService,
+    PermissionSupportService,
+    PermissionReportsService,
+    PermissionTechUserService,
+    PermissionSuperAdminService
   ],
   bootstrap: [AppComponent]
 })

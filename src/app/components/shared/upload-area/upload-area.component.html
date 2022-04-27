@@ -16,6 +16,10 @@
             multiple
             (change)="fileBrowseHandler($event.target.files)"
         >
+        <div class="qt-fileupload__mobile-text">
+            Click here to attachfiles or take a screen shot
+            <div class="icon__snapshot qt-sz-16 qt-bg-contain qt-ml-6"></div>
+        </div>
     </label>
 </div>
 <div class="files-list">
@@ -23,8 +27,6 @@
         class="single-file"
         *ngFor="let file of files; let i = index"
     >
-
-
         <div class="info">
             <h4 class="name">{{ file?.name }}</h4>
             <p class="size">

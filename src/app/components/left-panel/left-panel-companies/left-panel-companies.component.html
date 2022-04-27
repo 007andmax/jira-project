@@ -11,40 +11,88 @@
     class="app-left-panel__menu-expand top-menu"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <li
-        [ngClass]="{'--active':activePage === 'new-companies' && !showArchivedCompanies}"
-        (click)="onShowAll();goToState('new-companies');"
+    <a
+        href
+        [link]="'companies'"
+        target="_blank"
+        appRightClickBlank
     >
-        All Companies
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
-        (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
-        [textContent]="(activePage === 'new-companies') ? 'Clients ('+getCount('CLIENT') +')' : 'Clients'"
+        <li
+            [ngClass]="{'--active':activePage === 'new-companies' && !showArchivedCompanies}"
+            (click)="onShowAll();goToState('new-companies');"
+        >
+            All Companies
+        </li>
+    </a>
+    <a
+        href
+        [link]="'companies'"
+        target="_blank"
+        appRightClickBlank
     >
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
-        (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
-        [textContent]="(activePage === 'new-companies') ? 'Leads ('+getCount('LEAD') +')' : 'Leads'"
+        <li
+            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
+            (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
+            [textContent]="(activePage === 'new-companies') ? 'Clients ('+getCount('CLIENT') +')' : 'Clients'"
+        >
+        </li>
+    </a>
+    <a
+        href
+        [link]="'companies'"
+        target="_blank"
+        appRightClickBlank
     >
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
-        (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
-        [textContent]="(activePage === 'new-companies') ? 'Vendor ('+getCount('VENDOR') +')' : 'Vendor'"
+        <li
+            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
+            (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
+            [textContent]="(activePage === 'new-companies') ? 'Leads ('+getCount('LEAD') +')' : 'Leads'"
+        >
+        </li>
+    </a>
+    <a
+        href
+        [link]="'companies'"
+        target="_blank"
+        appRightClickBlank
     >
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"
-        (click)="onShowArchived();goToState('new-companies');"
+        <li
+            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
+            (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
+            [textContent]="(activePage === 'new-companies') ? 'Vendors ('+getCount('VENDOR') +')' : 'Vendors'"
+        >
+        </li>
+    </a>
+    <a
+        href
+        [link]="'companies'"
+        target="_blank"
+        appRightClickBlank
     >
-        Archive
-    </li>
+        <li
+            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
+            (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
+            [textContent]="(activePage === 'new-companies') ? 'Suppliers ('+getCount('SUPPLIER') +')' : 'Suppliers'"
+        >
+        </li>
+    </a>
+    <a
+        href
+        [link]="'companies'"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"
+            (click)="onShowArchived();goToState('new-companies');"
+        >
+            Archive
+        </li>
+    </a>
 </ul>
 <app-left-panel-company
     [selectedCompany]="selectedCompany"
     (onChangeState)="goToState($event)"
     [activePage]="activePage"
-    *ngIf="open && selectedCompany"
+    *ngIf="open && selectedCompany && !appService.checkMobile()"
 ></app-left-panel-company>

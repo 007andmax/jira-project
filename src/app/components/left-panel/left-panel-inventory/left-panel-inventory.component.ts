@@ -6,7 +6,6 @@ import { DELETE_COMPANY } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
-import { AddCategoryProductComponent } from './add-category-product/add-category-product.component';
 
 @Component({
   selector: 'app-left-panel-inventory',
@@ -18,7 +17,6 @@ export class LeftPanelInventoryComponent implements OnInit {
   countOfCategories: number = 10;
   sortCategoty: CategoryProduct = null;
   @Input() activePage: string = "";
-  @ViewChild('addCategory') addCategory: AddCategoryProductComponent;
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
 
@@ -39,7 +37,9 @@ export class LeftPanelInventoryComponent implements OnInit {
       }
     })
   }
-
+  public goToState() {
+    this.onChangeState.emit('inventory');
+  }
   selectCategory(category) {
     this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);
@@ -51,9 +51,7 @@ export class LeftPanelInventoryComponent implements OnInit {
     });
     return count;
   };
-  resetAddCategory() {
-    this.addCategory.clearCategory();
-  }
+
   changeShowAllCategories() {
     if (this.countOfCategories === 10) {
       this.countOfCategories = this.inventoryCategoryList.length;
@@ -61,9 +59,7 @@ export class LeftPanelInventoryComponent implements OnInit {
       this.countOfCategories = 10;
     }
   }
-  public goToState() {
-    this.onChangeState.emit('inventory');
-  }
+
   deleteCategory(category) {
     this.confirmStateService.setConfirmAction(DELETE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });

@@ -18,9 +18,11 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     window.scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-password-manager');
     this.companyId = this.activateRoute.snapshot.params['id'];
+    if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.companyId = params['id'];
+      if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
       this.companiesStateService.setSelectedCompanyId(this.companyId);
       this.getRecords();
     });
@@ -45,9 +47,9 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
         if (this.passwordManagerListService.getBlockList()) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index] = new PasswordRecord(newChange.data);
+        if (index > -1) this.recordsData[index].onUpdate(newChange.data);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-        if (indexList > -1) this.list_records[indexList] = new PasswordRecord(newChange.data);
+        if (indexList > -1) this.list_records[indexList].onUpdate(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
@@ -70,5 +72,9 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.onScroll();
       this.cd.detectChanges();
     });
+  }
+  public ngOnDestroy() {
+    this.sub.unsubscribe();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

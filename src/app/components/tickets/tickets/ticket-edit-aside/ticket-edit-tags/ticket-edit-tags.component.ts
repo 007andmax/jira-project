@@ -31,7 +31,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
   isChangeInput: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
-
+  @ViewChild('tagsDp') tagsDp: any;
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -55,20 +55,8 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getTags);
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
-      if (data.action === "TAG_SAVED") {
-        let index = this.tags.findIndex(item => item.id === data.data.id);
-        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data.id);
-        if (index > -1) {
-          this.tags[index] = data.data;
-        } else {
-          this.tags.push(data.data);
-        }
-        if (indexreqTags > -1) {
-          this.reqTags[index] = data.data;
-        } else {
-          this.reqTags.push(data.data);
-        }
-      }
+      if (data.action === "TAG_SAVED" && Array.isArray(data.data)) data.data.forEach(element => this.updateTagByRealTimes(element));
+      if (data.action === "TAG_SAVED" && !Array.isArray(data.data)) this.updateTagByRealTimes(data.data);
       if (data.action === "TAG_REMOVED") {
         let index = this.tags.findIndex(item => item.id === data.data);
         let indexreqTags = this.reqTags.findIndex(item => item.id === data.data);
@@ -81,6 +69,20 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     this.sub.add(changeTagsArray);
     this.onInitClearState();
     this.onCheckEditItem();
+  }
+  updateTagByRealTimes(data) {
+    let index = this.tags.findIndex(item => item.id === data.id);
+    let indexreqTags = this.reqTags.findIndex(item => item.id === data.id);
+    if (index > -1) {
+      this.tags[index] = data;
+    } else {
+      this.tags.push(data);
+    }
+    if (indexreqTags > -1) {
+      this.reqTags[index] = data;
+    } else {
+      this.reqTags.push(data);
+    }
   }
   sortTags() {
     this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
@@ -106,6 +108,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
         let tag: any = {
           colorCode: 0, usedCounter: 0, word: this.userInput.nativeElement.value.trim(), id: ''
         }
+        this.tagsDp.close();
         let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
           tag.id = res.id;
           this.tags.push(tag);
@@ -115,9 +118,14 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
           this.isChangeInput = false;
           this.init = false;
           this.tagsChange.emit(this.selectedTag);
+
+        }, err => {
+          this.isChangeInput = false;
+
         });
         this.sub.add(setTags);
       } else {
+        this.isChangeInput = false;
         this.init = false;
         this.tagsChange.emit(this.selectedTag);
       }
@@ -143,9 +151,10 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
         let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-
+        this.tagsDp.close();
         let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
-          this.init = true;
+          this.isChangeInput = false;
+          //  this.init = true;
           tag.id = res.id;
           this.tags.push(tag);
           this.selectedTag.push(tag);
@@ -153,6 +162,9 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
             input.value = '';
           }
           this.tagCtrl.setValue(null);
+          this.tagsChange.emit(this.selectedTag);
+        }, err => {
+          this.isChangeInput = false;
         });
         this.sub.add(setTags);
       }
@@ -168,8 +180,9 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
   public remove(index): void {
     if (index >= 0) {
       this.selectedTag.splice(index, 1);
+      this.tagsChange.emit(this.selectedTag);
     }
-    this.init = true;
+    //   this.init = true;
   }
 
   /**
@@ -177,13 +190,14 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    * @param tag - selected tag
    */
   public selected(tag): void {
-    this.init = true;
+    // this.init = true;
     let find = this.selectedTag.find(item => item.id === tag.id);
     if (!find) {
       this.selectedTag.push(tag);
     }
     this.isChangeInput = false;
     this.tagCtrl.setValue(null);
+    this.tagsChange.emit(this.selectedTag);
   }
 
   onSearch(event) {

@@ -1,28 +1,27 @@
+import { UserDefaultSubscriptionAdd } from "../../users/class/user-default-subscription-add";
+
 export class CompanyProfileContact {
-    firstName:string;
-    phoneNumbers:any;
-    lastName:string;
-    primaryEmail:string;
-    subscription:any;
-    designation:string;
-    avatar:string;
-    id:string;
-    constructor () {
+    firstName: string;
+    phoneNumbers: any;
+    lastName: string;
+    primaryEmail: string;
+
+    jobTitleId: string;
+    avatar: string;
+    defaultSubscriptions: UserDefaultSubscriptionAdd;
+    id: string;
+    constructor() {
         this.firstName = null;
         this.phoneNumbers = [{
             number: '',
             typeNumber: 'OFFICE'
         }];
-        this.lastName = null,
-        this.primaryEmail = null,
-        this.subscription = {
-            invoice: true,
-            ticket: true,
-            ticketManager:  false
-        }
+        this.lastName = null;
+        this.primaryEmail = null;
+        this.defaultSubscriptions = new UserDefaultSubscriptionAdd(true, false, true);
     }
     public fullVersion() {
-        this.designation = null;
+        this.jobTitleId = null;
     }
-   
+
 }

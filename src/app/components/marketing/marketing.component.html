@@ -1,0 +1,46 @@
+<!-- for show filters add class "show" for app-left-panel -->
+<div class="qt-page-list users-page">
+    <app-users-header
+        [count]="count"
+        [reqUsers]="reqUsers"
+        [selectAll]="selectAll"
+        (onChangeFilterField)="onFilter($event)"
+        [users]="users"
+        [type]="TYPE_LIST_MARKETING_USERS"
+        (onSelectAllUser)="onSelectAllUser($event)"
+    ></app-users-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern users-table">
+                <tbody
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                >
+                    <ng-template
+                        ngFor
+                        let-user
+                        [ngForOf]="users"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-users-table
+                            [selected]="idDetailUser === user.id"
+                            (click)="setIdDetailUser(user.id)"
+                            (onSelectUser)="onSelectUser($event)"
+                            [user]="user"
+                            [type]="TYPE_LIST_MARKETING_USERS"
+                            [listCustomSubscription]="listCustomSubscription"
+                            [jobTitleList]="jobTitleList"
+                        ></app-users-table>
+                    </ng-template>
+                </tbody>
+            </table>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

@@ -12,14 +12,14 @@ export class TicketAdd {
     shares: Array<TicketShareUser> = [];
     subject: string = '';
     ticketAssignTo: User;
-    constructor() {}
-    public clearAssignedUser () {
+    constructor() { }
+    public clearAssignedUser() {
         this.assignedUser = null;
     }
     public clearDeviceId() {
         this.linkedAgentId = null;
     }
-    public setAttachFileIds (data){
+    public setAttachFileIds(data) {
         this.attachFileIds = data;
     }
     public onAddSharedUsers(users) {

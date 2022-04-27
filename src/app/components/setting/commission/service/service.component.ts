@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommissionService } from '../commission.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss']
 })
-export class ServiceComponent implements OnInit {
+export class ServiceComponent implements OnInit, OnDestroy {
   loading = false;
   selectedIdx = -1;
   selectedSpecIdx = -1;
@@ -22,9 +27,12 @@ export class ServiceComponent implements OnInit {
   specialService: any[] = [];
   rate: any;
   id: string;
+  sub: Subscription = new Subscription();
   constructor(
     private commissionService: CommissionService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal
   ) {
     this.getCurrentCompany();
   }
@@ -32,6 +40,15 @@ export class ServiceComponent implements OnInit {
   ngOnInit() {
     this.getServices();
     this.getSpecialService();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_SERVICE) {
+          this.deleteServicePopup = false;
+          this.removeServiceRate()
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   /**
@@ -50,10 +67,10 @@ export class ServiceComponent implements OnInit {
    * get services
    */
   getServices() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getDefaultServices().subscribe(
       res => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.services = res;
         res.forEach(ele => {
           if (ele) {
@@ -64,7 +81,7 @@ export class ServiceComponent implements OnInit {
         });
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -73,10 +90,10 @@ export class ServiceComponent implements OnInit {
    * special services
    */
   getSpecialService() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getSpecialServices().subscribe(
       (res: any[]) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res && res.length > 0) {
           res.map(el => {
             el.services.filter(service => {
@@ -91,7 +108,7 @@ export class ServiceComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -123,12 +140,12 @@ export class ServiceComponent implements OnInit {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.success('Rate Changed Successfully.');
             this.service.commissionRate =
               res && res.commissionRate
@@ -140,7 +157,7 @@ export class ServiceComponent implements OnInit {
           },
           error => {
             this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
@@ -154,45 +171,53 @@ export class ServiceComponent implements OnInit {
    * @param service 
    * @param isSpecialService 
    */
-  removeServiceRate() {	
-        if (this.service && this.service.commissionRate) {	
-          this.loading = true;$(".loading").css("display", "block");	
-          const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;	
-          this.commissionService.setServiceRate(id, '0', false).subscribe(	
-            res => {	
-              this.loading = false;$(".loading").css("display", "none");	
-              this.toastrService.success('Rate Changed Successfully.');	
-              this.service.commissionRate = null;
+  removeServiceRate() {
+    if (this.service && this.service.commissionRate) {
+      this.loading = true; $(".loading").css("display", "block");
+      const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;
+      this.commissionService.setServiceRate(id, '0', false).subscribe(
+        res => {
+          this.loading = false; $(".loading").css("display", "none");
+          this.toastrService.success('Rate Changed Successfully.');
+          this.service.commissionRate = null;
 
-            this.isSpecialService
-              ? (this.selectedSpecIdx = -1)
-              : (this.selectedIdx = -1);
-          },
-          error => {
-            this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false;$(".loading").css("display", "none");
-          }
-        );
-      }
+          this.isSpecialService
+            ? (this.selectedSpecIdx = -1)
+            : (this.selectedIdx = -1);
+        },
+        error => {
+          this.toastrService.error(`Error Occurred, ${error}`);
+          this.loading = false; $(".loading").css("display", "none");
+        }
+      );
     }
-    confirmServiceDelete(i, service: any, isSpecialService: boolean){	
-      this.service = service;	
-      this.isSpecialService = isSpecialService;	
-      if (this.service && this.service.commissionRate) {	
-        this.deleteServicePopup = true;	
-      }	
-    }	
-  	
-    confirmServiceEdit(rate, id: string, service: any, isSpecialService: boolean){	
-      this.rate = rate;	
-      this.id = id;	
-      this.service = service;	
-      this.isSpecialService = isSpecialService;	
-      if (this.service.commissionRate === null) {	
-        this.confirmServicePopup = true;	
-      } else {	
-        this.confirmServicePopup = false;	
-        this.setServiceRate();	
-      }	
+  }
+  confirmServiceDelete(i, service: any, isSpecialService: boolean) {
+    this.service = service;
+    this.isSpecialService = isSpecialService;
+    if (this.service && this.service.commissionRate) {
+      this.deleteServicePopup = true;
+      this.confirmStateService.setConfirmAction(DELETE_COMMISSION_SERVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      modalRef.componentInstance.message = `Are you sure you want ${this.service.name} commission rate to zero?`;
+
     }
+  }
+
+  confirmServiceEdit(rate, id: string, service: any, isSpecialService: boolean) {
+    this.rate = rate;
+    this.id = id;
+    this.service = service;
+    this.isSpecialService = isSpecialService;
+    if (this.service.commissionRate === null) {
+      this.confirmServicePopup = true;
+    } else {
+      this.confirmServicePopup = false;
+      this.setServiceRate();
+    }
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

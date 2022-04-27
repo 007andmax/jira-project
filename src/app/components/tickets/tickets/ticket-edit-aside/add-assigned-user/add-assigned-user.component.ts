@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketStateService } from '../services/ticket-state.service';
 
 
 @Component({
@@ -40,7 +42,8 @@ export class AddAssignedUserComponent implements OnInit {
    * @param {QuoteStateService} quoteStateService to work quote state
    */
   public constructor(
-    private usersStateService: UsersStateService
+    public usersStateService: UsersStateService,
+    public ticketStateService: TicketStateService
   ) {
 
 

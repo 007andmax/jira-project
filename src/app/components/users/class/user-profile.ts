@@ -6,11 +6,15 @@ import { User } from './user';
 import { UserUpdate } from './user-update';
 import { UserAdd } from './user-add';
 import { Tag } from 'src/app/interfaces/tag/tag';
+import { UserCustomSubscription } from './user-custom-subscription';
+import { UserDefaultSubscription } from './user-default-subscription';
 
 export class UserProfile {
+    id: string;
     role: string = 'USER';
     phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
-    subscription: Subscriptions;
+    customSubscriptions: Array<UserCustomSubscription> = [];
+    defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();
     welcomeEmail: boolean = true;
     avatar: UserAvatar;
     firstName: string;
@@ -19,28 +23,36 @@ export class UserProfile {
     designation: string;
     companyId: string;
     tags: Array<Tag> = [];
+    jobDescription: string;
+    jobTitleId: string;
+    jobTypeId: string;
+    userIndustryId: string;
     constructor() {
-        this.subscription = {
-            invoice: false, ticket: true, ticketManager: false
-        }
+
+    }
+    public changeDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
+    }
+    public changeCustomSubscriptions(data) {
+        this.customSubscriptions = data;
     }
     public setTags(data) {
         this.tags = data;
     }
     public onEdit(user: User) {
+        this.id = user.id;
         this.role = user.role;
         if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers) {
             this.phoneNumbers = [new PhoneNumber('OFFICE')];
         } else {
             this.phoneNumbers = user.phoneNumbers.map((item) => {
-                return new PhoneNumber(item.typeNumber, item.number);
+                let number = item.number;
+                if (number[0] === "1") number = `+${number}`;
+                return new PhoneNumber(item.typeNumber, number);
             })
         }
-
-
-        this.subscription = {
-            invoice: user.subscription.invoice, ticket: user.subscription.ticket, ticketManager: user.subscription.ticketManager
-        }
+        this.defaultSubscriptions = new UserDefaultSubscription(user.defaultSubscriptions);
+        this.customSubscriptions = user.customSubscriptions.map(item => new UserCustomSubscription(item));
         this.welcomeEmail = user.isEmailVerified;
         this.avatar = user.avatar;
         this.firstName = user.firstName;
@@ -49,7 +61,10 @@ export class UserProfile {
         this.designation = user.designation;
         this.companyId = user.company.id;
         this.tags = user.tags;
-
+        this.jobDescription = user.jobDescription;
+        this.jobTitleId = user.jobTitleId;
+        this.jobTypeId = user.jobTypeId;
+        this.userIndustryId = user.userIndustryId;
     }
     public editLogo(data) {
         this.avatar = data;
@@ -69,8 +84,17 @@ export class UserProfile {
     public addPhoneNumber() {
         this.phoneNumbers.push(new PhoneNumber('OFFICE'));
     }
+    public setUserIndustryId(data) {
+        this.userIndustryId = data;
+    }
     public setRole(data) {
         this.role = data;
+    }
+    public setJobTitleId(data) {
+        this.jobTitleId = data;
+    }
+    public setJobTypeId(data) {
+        this.jobTypeId = data;
     }
     public getRole() {
         return this.role;
@@ -81,8 +105,11 @@ export class UserProfile {
     public setDesignation(data) {
         this.designation = data;
     }
-    public setSubscriptions(data) {
-        this.subscription = data;
+    public setCustomSubscriptions(data) {
+        this.customSubscriptions = data;
+    }
+    public setDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
     }
     public getUserForUpdate(user: User) {
 

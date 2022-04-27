@@ -1,0 +1,48 @@
+@import "./src/assets/styles/variable";
+
+.product-item {
+    margin-bottom: 16px;
+
+    &__first-line {
+        margin-bottom: 8px;
+    }
+    &__prodect-list {
+        flex-basis: 100%;
+    }
+    &__btn-add,
+    &__btn-del {
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        margin-left: 8px;
+        display: flex;
+        background-color: $gray-700;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+    &__btn-del {
+        background-color: $gray-400;
+    }
+    &__input {
+        height: 40px;
+        border-radius: 3px;
+        border: solid 1px $gray-500;
+        font-size: 13px;
+        padding: 10px 12px;
+        flex-grow: 1;
+        outline: none;
+        &::placeholder {
+            color: $gray-600;
+        }
+    }
+}

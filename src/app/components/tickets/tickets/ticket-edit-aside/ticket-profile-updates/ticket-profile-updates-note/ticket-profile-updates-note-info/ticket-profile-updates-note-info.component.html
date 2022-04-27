@@ -7,8 +7,15 @@
     </div>
     <div
         class="ticket-updates__edit edit-grey-ng2"
-        *ngIf="update.type === 'NOTE' && !isBlockChange"
+        *ngIf="update.type === 'NOTE' && !isBlockChange && !isIOSDevice()"
         (click)="edit()"
+        placement="top"
+        ngbTooltip="Edit Update"
+    ></div>
+    <div
+        class="ticket-updates__edit edit-grey-ng2"
+        *ngIf="update.type === 'NOTE' && !isBlockChange && isIOSDevice()"
+        (touchstart)="edit()"
         placement="top"
         ngbTooltip="Edit Update"
     ></div>

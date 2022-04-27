@@ -3,9 +3,9 @@ import { UserSubscription } from './user-subscription';
 import { UserAvatar } from './user-avatar';
 import { User } from './user';
 import { UserProfile } from './user-profile';
+import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
 
 export class UserUpdate {
-  role: string;
   phoneNumbers: Array<UserPhoneNumber>;
   subscription: UserSubscription;
   welcomeEmail: boolean = true;
@@ -22,27 +22,25 @@ export class UserUpdate {
   priority: number;
   userEnabled: boolean;
   tags: Array<any> = [];
+  jobDescription: string;
+  jobTitleId: string;
+  jobTypeId: string;
+  customSubscriptionIds: Array<string> = [];
+  defaultSubscriptions: UserDefaultSubscriptionAdd;
+  userIndustryId: string;
   constructor(data: UserProfile, user: User) {
-    this.role = data.role;
+    this.phoneNumbers = data.phoneNumbers.map((item, index) => {
+      if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
+        return new UserPhoneNumber(null, item.number, item.typeNumber, null);
+      } else {
+        if (user.phoneNumbers.length <= index) return new UserPhoneNumber(null, item.number, item.typeNumber, null);
+        return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
+      }
+    });
+    if (this.phoneNumbers.length === 1 && this.phoneNumbers[0].number === "") this.phoneNumbers = [];
+    this.defaultSubscriptions = new UserDefaultSubscriptionAdd(data.defaultSubscriptions.ticketSubscription.enabled, data.defaultSubscriptions.ticketManagerSubscription.enabled, data.defaultSubscriptions.invoiceSubscription.enabled);
+    this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
 
-    if (!user.phoneNumbers || data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0) {
-      this.phoneNumbers = [];
-    } else {
-      this.phoneNumbers = data.phoneNumbers.map((item, index) => {
-        if (user.phoneNumbers.length === 0) {
-          return new UserPhoneNumber(null, item.number, item.typeNumber, null);
-
-        } else {
-
-          return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
-
-        }
-      });
-    }
-
-
-
-    this.subscription = new UserSubscription(user.subscription.id, data.subscription.invoice, data.subscription.ticket, data.subscription.ticketManager);
     this.welcomeEmail = data.welcomeEmail;
     this.avatar = data.avatar;
     this.firstName = data.firstName;
@@ -60,5 +58,9 @@ export class UserUpdate {
     this.tags = data.tags.map(item => {
       return { id: item.id }
     })
+    this.jobDescription = data.jobDescription;
+    this.jobTitleId = data.jobTitleId;
+    this.jobTypeId = data.jobTypeId;
+    this.userIndustryId = data.userIndustryId;
   }
 }

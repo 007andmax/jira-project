@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Company } from 'src/app/interfaces/company/company';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-left-panel-companies',
@@ -18,6 +19,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
   constructor(private companiesState: CompaniesStateService,
+    public appService: AppService,
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {

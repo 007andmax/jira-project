@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
@@ -13,57 +13,82 @@ import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
 import { } from 'google-maps';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'company-add-aside-full',
   templateUrl: './company-add-aside-full.component.html',
   styleUrls: ['./company-add-aside-full.component.scss']
 })
-export class CompanyAddAsideFullComponent implements OnInit {
+export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
-  serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
+  serviceTypes: Array<CrmCompanyServiceType> = [];
   @ViewChild('addresstext') addresstext: any;
-  industries: Array<CompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
+  idUploadFile: string;
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
+  @Input() serviceTypeDp: DropDownComponent;
   sub: Subscription = new Subscription();
-  constructor(private companiesStateService: CompaniesStateService,
+  constructor(
     private usersStateService: UsersStateService,
     private imageCropperStateService: ImageCropperStateService,
     public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
+    private crmStateService: CrmStateService,
     private modalImageCropperStateService: ModalImageCropperStateService) { }
 
   ngOnInit() {
-    this.industries = this.companiesStateService.getIndustries();
-    this.companiesStateService.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+    if (this.crmStateService.getServiceTypeList().length === 0) {
+      this.crmStateService.onInitGetServiceTypeList();
+    } else {
+      this.serviceTypes = this.crmStateService.getServiceTypeList();
+    }
+    let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
+      this.serviceTypes = data;
+      if (this.serviceTypeDp) this.serviceTypeDp.reset(this.serviceTypes);
+    })
+    this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
-      this.getUsersTitle(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTehusers(data);
-      this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-
+      if (data && this.company.logo) this.companiesService.removeAttachment(this.company.logo.origin.id).subscribe(res => {
+      });
       if (data) this.company.setLogo(data);
+      if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+      });
     })
     this.sub.add(getConfirm);
   }
@@ -76,48 +101,15 @@ export class CompanyAddAsideFullComponent implements OnInit {
       }
     })
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
+  removeLogo() {
+    this.companiesService.removeAttachment(this.company.logo.origin.id).subscribe(data => {
+      this.company.editLogo(null);
+    })
   }
   public uploadFileOnBrower(event) {
-    if (event.target.value) {
-      const file = event.target.files[0];
-      this.uploadFile(file).then((data: any) => {
-        let res = JSON.parse(data.response);
-        this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64, res.id));
-        event.target.value = null;
-        this.cd.detectChanges();
-      });
-    }
-  }
-  uploadFile(file) {
-    return new Promise((resolve, reject) => {
-      var fd = new FormData();
-      fd.append("file", file);
-      var xhr = new XMLHttpRequest();
-      xhr.addEventListener("load", (event) => {
-        resolve(xhr);
-      }, false);
-      xhr.addEventListener("error", (error) => {
-        reject(error);
-      }, false);
-      xhr.open("POST", "/file?isAvatar=true&ratio=1");
-      xhr.send(fd);
-    });
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
@@ -135,7 +127,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     }
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }
@@ -190,14 +182,19 @@ export class CompanyAddAsideFullComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  public onChangedAssociatedCompanies(data) {
+    this.company.associatedCompanies = data.map(item => {
+      return { id: item };
+    })
+  }
   public onChangePhoneNumber() {
     this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
   }
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
-  onSelectDesignation(data) {
-    this.company.contacts[0].designation = data;
+  onSelectJobTitle(data) {
+    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
   }
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
@@ -206,7 +203,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.company.paymentTerms = item.value;
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
+    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';
@@ -215,18 +212,18 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.company.defaultPaymentMethod = item.value;
   }
   public onSelectServiceTypes(item) {
-
-    this.company.serviceType = item.value;
+    this.company.serviceType = (item) ? item.name : null;
   }
   public onSelectTechLead(event) {
-
     this.company.techLeadId = (event) ? event.id : null;
-
   }
   public onChangeTags(tags) {
     this.company.setTags(tags);
   }
   public onChangeDescription(event) {
     this.company.description = event.target.value;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

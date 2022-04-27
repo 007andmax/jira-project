@@ -10,12 +10,23 @@
                 *ngIf="!company.logo"
             ></i>
             <div>
-                <div class="new-link">Upload Company logo</div>
+                <div class="new-link">
+                    <span (click)="uploadFile.click()">Upload Company logo</span>
+                    <span
+                        *ngIf="company.logo"
+                        class="remove-link pointer"
+                        (click)="removeLogo()"
+                    >
+                        Remove logo
+                    </span>
+                </div>
                 <p>Maximum size of 2MB. JPG, GIF, PNG</p>
             </div>
             <input
+                #uploadFile
                 id="upload-file"
                 type="file"
+                accept="image/gif, image/jpeg, image/png, image/jpg"
                 (input)="uploadFileOnBrower($event)"
             >
         </div>
@@ -60,12 +71,12 @@
     <div class="col-md-6">
         <app-drop-down
             [class]="['light-dropdown', 'qt-select-input-40']"
-            [placeholder]="'Select Client Type'"
+            [placeholder]="'Select Industry'"
             [list]="industries"
             [field]="'name'"
             [search]="true"
             [change]="true"
-            [title]="'Client Type'"
+            [title]="'Industry'"
             (onSelectedItem)="onSelectClientIndustry($event)"
         >
         </app-drop-down>
@@ -127,6 +138,8 @@
             *ngIf="company.addresses[0].phoneNumbers.length > 0"
             [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
             placeholder="Enter Phone Number"
+            prefix="+1"
+            mask=" (000) 000-0000"
         >
     </div>
     <div class="col-md-12 details-background">
@@ -161,14 +174,15 @@
             <app-drop-down
                 #role
                 [class]="['light-dropdown', 'qt-select-input-40']"
-                [placeholder]="'Select Designation'"
-                [list]="allTitles"
+                [placeholder]="'Select Job title'"
+                [list]="jobTitleList"
+                [field]="'name'"
                 [search]="true"
                 [change]="true"
-                [title]="'Designation'"
+                [title]="'Job title'"
                 [maxlength]="30"
                 [add]="true"
-                (onSelectedItem)="onSelectDesignation($event)"
+                (onSelectedItem)="onSelectJobTitle($event)"
             >
             </app-drop-down>
         </div>
@@ -180,6 +194,8 @@
                     *ngIf="company.contacts[0].phoneNumbers.length > 0"
                     [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                     placeholder="Enter Primary Number"
+                    prefix="+1"
+                    mask=" (000) 000-0000"
                 >
                 <div
                     class="grey-dropdown"
@@ -232,7 +248,7 @@
         <div class="col-md-12">
             <p>Get Subscribe</p>
             <app-company-subscription
-                [editItem]="company.contacts[0].subscription"
+                [editItem]="company.contacts[0].defaultSubscriptions"
                 (subscribeChange)="onChangeSubscribe($event)"
             ></app-company-subscription>
         </div>
@@ -271,9 +287,10 @@
     </div>
     <div class="col-md-6">
         <app-drop-down
+            #serviceTypeDp
             [class]="['light-dropdown', 'qt-select-input-40']"
             [placeholder]="'Select Service Type'"
-            [field]="'title'"
+            [field]="'name'"
             [list]="serviceTypes"
             [search]="true"
             [change]="true"
@@ -297,6 +314,9 @@
     </div>
     <div class="col-md-12">
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+    </div>
+    <div class="col-md-12">
+        <company-associate (companiesChange)="onChangedAssociatedCompanies($event)"></company-associate>
     </div>
     <div class="col-md-12 editable-field">
         <p>Note for Company</p>

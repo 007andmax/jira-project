@@ -7,6 +7,8 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { InventoryChange } from 'src/app/components/inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update-products',
@@ -14,13 +16,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./ticket-profile-form-update-products.component.scss']
 })
 export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
+  isUpdate: boolean = false;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('productDP') productDP: ProductListComponent;
+  @Output() onUpdateMobile = new EventEmitter();
+  @Output() onAddMoreMobile = new EventEmitter();
   addedProductList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
   constructor(private productService: ProductService,
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private ticketsStateService: TicketsStateService) { }
 
 
@@ -31,7 +39,22 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
       this.productDP.clear();
     })
   }
-
+  initUpdateMobile() {
+    this.isUpdate = true;
+    this.updateMobileBtn.setDisabled(true);
+    this.addMoreMobileBtn.setDisabled(true);
+  }
+  updateMobile() {
+    this.onUpdateMobile.emit(null);
+  }
+  addMoreMobile() {
+    this.onAddMoreMobile.emit(null);
+  }
+  public complateUpdateMobile() {
+    this.isUpdate = false;
+    this.addMoreMobileBtn.setDisabled(false);
+    this.updateMobileBtn.setDisabled(false);
+  }
   public onChangeSaleProduct(val, index) {
     let value = Number(val);
     this.addedProductList[index].item.sale = value;
@@ -58,10 +81,9 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     this.currentProduct.valdiateSaleCost = true;
   }
   public addProduct() {
-    this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.currentProduct = new TicketProfileFormProduct();
     this.productDP.clear();
-
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
@@ -98,7 +120,10 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     return ((find) ? false : true) && this.currentProduct.valdiateSaleCost;
   }
   public getSelectedProducts() {
-    return (this.currentProduct.item.versionedId) ? [...this.addedProductList, this.currentProduct] : this.addedProductList;
+    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

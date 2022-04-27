@@ -27,6 +27,7 @@ export class DevicesStateService {
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
+  preloaderDevices: boolean = true;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -34,18 +35,9 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-
+    this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
-      this.devicesService.getCompanyDevices(data.company.id).subscribe((data) => {
-        Object.keys(data).forEach(key => {
-          if (data[key]) data[key] = data[key].map(item => new Device(item));
-        })
-        this.setAllDevices(data);
-        this.onInitGetDevices(data);
-      }, err => {
-        this.setAllDevices(null);
-        this.onInitGetDevices(null);
-      })
+      this.getCompanyDevices(data.company.id);
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (!this.allDevices) return;
@@ -100,6 +92,24 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  getCompanyDevices(id) {
+    this.devicesService.getCompanyDevices(id).subscribe((data) => {
+      Object.keys(data).forEach(key => {
+        if (data[key]) data[key] = data[key].map(item => new Device(item));
+      })
+      this.preloaderDevices = false;
+      this.setAllDevices(data);
+      this.onInitGetDevices(data);
+
+    }, err => {
+      this.preloaderDevices = false;
+      this.setAllDevices(null);
+      this.onInitGetDevices(null);
+    })
+  }
+  public getPreloaderDevices() {
+    return this.preloaderDevices;
   }
   public setLabel(companyId, id, label) {
     this.allDevices[companyId].forEach(element => {

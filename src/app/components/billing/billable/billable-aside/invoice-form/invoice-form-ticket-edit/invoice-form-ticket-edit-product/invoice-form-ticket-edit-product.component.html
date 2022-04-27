@@ -19,6 +19,7 @@
             appToFixed
             (blur)="onValidateSaleCost()"
             (ngModelChange)="onChangeSale($event)"
+            [disabled]="!getPermissions('MANAGE_PRODUCTS')"
         >
         <mat-error
             class="qt-tooltip-error"

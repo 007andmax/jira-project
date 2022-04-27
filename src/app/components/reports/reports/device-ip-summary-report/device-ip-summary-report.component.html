@@ -1,144 +1,136 @@
 <div>
-  <div class="report-menu">
-      <div class="run-report-content col-md-11 left">
-          <div class="grey-dropdown form-group content select-users-list">
-              <app-drop-down
-                  [placeholder]="'All Companies'"
-                  [list]="companies"
-                  [errorMessage]="'Please select the company name'"
-                  [field]="'name'"
-                  [search]="true"
-                  [change]="true"
-                  (onSelectedItem)="selectClient($event)"
-              ></app-drop-down>
-          </div>
-          <div class="form-group content custom-width dropdown-height">
-            <software-summary-devices-dro-down
-            [sort]="true"
-            [search]="true"
-            [change]="true"
-            [placeholder]="'All devices'"
-            [dropdownHeight]="'300px'"
-            [list]="devices"
-            [isDisabled]="!deviceIpSummary.companyId"
-            (onSelectedItem)="onSelectDevice($event)"
-        ></software-summary-devices-dro-down>
-          </div>
-          <button
-              class="qt-btn --outline-blue qt-ml-8"
-              (click)="getReportByDeviceIpSummary()"
-          >
-              Get Report
-          </button>
-          <button class="qt-btn --outline-white qt-ml-8">
-              <i class="
+    <div class="report-menu">
+        <div class="run-report-content col-md-11 left">
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'All Companies'"
+                    [list]="companies"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content custom-width dropdown-height">
+                <software-summary-devices-dro-down
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [placeholder]="'All devices'"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    [isDisabled]="!deviceIpSummary.companyId"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></software-summary-devices-dro-down>
+            </div>
+            <button
+                class="qt-btn --outline-blue qt-ml-8"
+                (click)="getReportByDeviceIpSummary()"
+            >
+                Get Report
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
             icon__email-dark
             qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
-            summaryemail" (click)="sendEmail()"></i>
-          </button>
-          <button
-              class="qt-btn --outline-white qt-ml-8"
-              (click)="printPdf()"
-          >
-              <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
-          </button>
-          <button
-              class="qt-btn --outline-white qt-ml-8"
-          >
-              <i class="
+            summaryemail"
+                    (click)="sendEmail()"
+                ></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
             icon__download
             qt-za-16 qt-sz-16 qt-dib qt-bg-contain
             summarydownload
-          " (click)="downloadCsv()"></i>
-          </button>
-      </div>
-      <div class="run-report-content col-md-0 right">
-        <div
-              class="header-close icon__close"
-              (click)="goToReportList()"
-          ></div>
-      </div>
-  </div>
-</div>
-<div id="product-list-ticket-data">
-  <div class="device-header">
-      <div>
-        <span>{{ clientName }}</span>
-      </div>
-      <div>
-          <span>
-              <b>{{ "Device IP Summary Report" }}</b>
-          </span>
-      </div>
-      <div>
-          <span>
-            {{ "As on" + " " + (date | date: DateFormat) }}
-          </span>
-      </div>
-  </div>
-  <div class="contant-area">
-    <div class="table-wrap">
-        <table class="dataTable cmn-tab-head">
-            <thead>
-                <tr>
-                    <th
-                        class="device"
-                    >
-                        DEVICE
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="network"
-                    >
-                       NETWORK NAME
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="linkspeed"
-                    >
-                        LINK SPEED
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="dhcp">DHCP</th>
-                    <th class="ipaddress">IP ADDRESS</th>
-                    <th class="subnet">SUBNET</th>
-                    <th class="gateway">GATEWAY</th>
-                    <th class="dns">DNS 1</th>
-                    <th class="dns">DNS 2</th>
-                    <th class="wanip">WAN IP</th>
-                </tr>
-            </thead>
-            <tbody class="device-summary-report-table">
-              <tr *ngFor="let device of deviceIpSummary.list">
-                <td  class="device">{{device.label}}</td>
-                <td class="network">{{device.hostName}}</td>
-                <td class="linkspeed">
-                  {{parseFloatValue(getDeviceReport(device, 'speed'))/1000000}}
-                </td>
-                <td class="dhcp">
-                  {{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}
-                </td>
-                <td class="ipaddress">
-                  {{getDeviceReport(device, 'ip_address')}}
-                </td>
-                <td class="subnet">
-                  {{ getDeviceReport(device, 'subnet')}}
-                </td>
-                <td class="gateway">
-                  {{getDeviceReport(device, 'gateway')}}
-                </td>
-                <td class="dns">
-                  <p>{{getDeviceReport(device, 'dns')}}</p>
-                </td>
-                <td class="dns">
-                  <p>{{getDeviceReport(device, 'dns')}}</p>
-                </td>
-                <td class="wanip">
-                  {{device.report.externalIp}}
-                </td>
-              </tr>
-            </tbody>
-        </table>
+          "
+                    (click)="downloadCsv()"
+                ></i>
+            </button>
+        </div>
+        <div class="run-report-content col-md-0 right">
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
+        </div>
     </div>
 </div>
-  </div>
+<div id="product-list-ticket-data">
+    <div class="device-header">
+        <div>
+            <span>{{ clientName }}</span>
+        </div>
+        <div>
+            <span>
+                <b>{{ "Device IP Summary Report" }}</b>
+            </span>
+        </div>
+        <div>
+            <span>
+                {{ "As on" + " " + (date | date: DateFormat) }}
+            </span>
+        </div>
+    </div>
+    <div class="contant-area">
+        <div class="table-wrap">
+            <table class="dataTable cmn-tab-head">
+                <thead>
+                    <tr>
+                        <th class="device">
+                            DEVICE
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="network">
+                            NETWORK NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="linkspeed">
+                            LINK SPEED
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="dhcp">DHCP</th>
+                        <th class="ipaddress">IP ADDRESS</th>
+                        <th class="subnet">SUBNET</th>
+                        <th class="gateway">GATEWAY</th>
+                        <th class="dns">DNS 1</th>
+                        <th class="dns">DNS 2</th>
+                        <th class="wanip">WAN IP</th>
+                    </tr>
+                </thead>
+                <tbody class="device-summary-report-table">
+                    <tr *ngFor="let device of deviceIpSummary.list">
+                        <td class="device">{{device.label}}</td>
+                        <td class="network">{{device.hostName}}</td>
+                        <td class="linkspeed">
+                            {{parseFloatValue(getDeviceReport(device, 'speed'))/1000000}}
+                        </td>
+                        <td class="dhcp">
+                            {{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}
+                        </td>
+                        <td class="ipaddress">
+                            {{getDeviceReport(device, 'ip_address')}}
+                        </td>
+                        <td class="subnet">{{ getDeviceReport(device, 'subnet')}}</td>
+                        <td class="gateway">{{getDeviceReport(device, 'gateway')}}</td>
+                        <td class="dns">
+                            <p>{{getDeviceReport(device, 'dns')}}</p>
+                        </td>
+                        <td class="dns">
+                            <p>{{getDeviceReport(device, 'dns')}}</p>
+                        </td>
+                        <td class="wanip">{{device.report.externalIp}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -9,11 +9,14 @@ import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';
 import { UserFilter } from '../../components/users/class/user-filter';
 import { AppService } from '../app/app.service';
+import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
+import { MODE_USERS_LIST } from 'src/app/const/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersStateService {
+  modeUserFilterSubscription: string = MODE_USERS_LIST;
   allUsers: Array<User> = [];
   currentUser: CurrentUser;
   userForEdit: User = null;
@@ -21,8 +24,12 @@ export class UsersStateService {
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
+  onLeftPanelMarketingFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
+  openMessageAside: EventEmitter<any> = new EventEmitter();
+  openDetailAside: EventEmitter<any> = new EventEmitter();
+  closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
@@ -30,6 +37,7 @@ export class UsersStateService {
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
+  isGetAllUsers: boolean = false;
   constructor(private userService: UsersService,
     private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
@@ -37,22 +45,19 @@ export class UsersStateService {
   }
   public onInit() {
 
-    this.userService.getAllusers().subscribe((data) => {
-      this.setAllUsers(data);
-      this.onInitGetUsers(data);
-    })
+
     this.onInitGetCurrentUser();
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allUsers[Index] = new User(newChange.data);
+        if (Index > -1) this.allUsers[Index].onUpdate(newChange.data);
         if (Index === -1) this.allUsers.unshift(new User(newChange.data));
         if (newChange.data.id === this.currentUser.id) this.onInitGetCurrentUser();
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
-          if (Index > -1) this.allUsers[Index] = new User(data);
+          if (Index > -1) this.allUsers[Index].onUpdate(data);
         });
       }
       if (newChange.action === 'USER_ONLINE') {
@@ -74,20 +79,43 @@ export class UsersStateService {
     });
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
 
-      this.onChangeUserPermissions.emit(newChange.data.permissions);
+      if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
+  }
+  public initGetAllUsers() {
+    this.isGetAllUsers = true;
+    this.userService.getAllusers().subscribe((data) => {
+      this.setAllUsers(data);
+      this.onInitGetUsers(data);
+    })
+  }
+  public setModeUserFilterSubscription(data) {
+    this.modeUserFilterSubscription = data;
+  }
+  public getModeUserFilterSubscription() {
+    return this.modeUserFilterSubscription;
   }
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
+      if (this.currentUser.role !== "SUPER_ADMIN" && !this.isGetAllUsers) this.initGetAllUsers();
     })
+  }
+  showMessageAside(data) {
+    this.openMessageAside.emit(data);
   }
   public setShowArchivedCompanies(data) {
     this.showArchivedCompanies = data;
   }
   public getShowArchivedCompanies() {
     return this.showArchivedCompanies;
+  }
+  public hideDetailUser() {
+    this.closeDetailAside.emit(null);
+  }
+  public showDetailUser(data) {
+    this.openDetailAside.emit(data);
   }
   public getFilter() {
     return this.filter;
@@ -132,7 +160,12 @@ export class UsersStateService {
   public getUserForDeArchive() {
     return this.userForDeArchive;
   }
-
+  public clearFilter() {
+    this.filter = new UserFilter();
+  }
+  public onInitLeftPanelMarketingFilter(data) {
+    this.onLeftPanelMarketingFilter.emit(data);
+  }
   public onInitFilter(data) {
     this.filter = data;
     this.onFilter.emit(data);

@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef, Input } from '@angular/core';
-import { TehUsersService } from 'src/app/services/teh-users/teh-users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
@@ -13,7 +12,7 @@ export class TechUsersListReportComponent extends DropDownComponent {
   sub: Subscription = new Subscription();
   @Input() placeholder: string = 'Tech users';
 
-  constructor(private tehService: TehUsersService,
+  constructor(
     public elRef: ElementRef,
     private usersStateService: UsersStateService) {
     super(elRef);

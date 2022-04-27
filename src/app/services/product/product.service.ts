@@ -43,6 +43,10 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}products/isMfgUnique?manufacture=${manufacture}&id=${id}`);
   }
 
+  public validateproductForRemove(id) {
+    return this.http.get(`${this.apiUrl}products/validate/${id}`);
+  }
+
   /**
    * validate product name
    */
@@ -66,7 +70,12 @@ export class ProductService {
   * remove category 
   */
   public removeCategory(id) {
-    return this.http.delete(`${this.apiUrl}products/categories/${id}`);
+    return this.http.delete(`${this.apiUrl}products/categories/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("Category removed successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
 
@@ -111,6 +120,16 @@ export class ProductService {
         return data;
       }));
   }
+
+  public editCategory(id, name) {
+    return this.http.put(`${this.apiUrl}products/categories`, { id: id, name: name }).pipe(
+      tap(data => {
+        this.toastrService.success("The  category has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+
 
   /**
 * add product

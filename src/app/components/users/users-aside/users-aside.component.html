@@ -23,13 +23,24 @@
                 ></div>
             </div>
             <div>
-                <div class="upload-photo__title">Upload your photo</div>
+                <div class="upload-photo__title">
+                    <span (click)="uploadFile.click()">Upload your photo</span>
+                    <span
+                        *ngIf="user.avatar"
+                        class="remove-link pointer"
+                        (click)="removeLogo()"
+                    >
+                        Remove logo
+                    </span>
+                </div>
                 <div class="upload-photo__subtitle">Maximum size of 2MB. JPG, GIF, PNG</div>
             </div>
             <input
+                #uploadFile
                 id="upload-file"
                 class="upload-photo__input pointer"
                 type="file"
+                accept="image/gif, image/jpeg, image/png, image/jpg"
                 (input)="uploadFileOnBrower($event)"
             >
         </div>
@@ -95,14 +106,45 @@
             </div>
             <div class="qt-w50">
                 <app-drop-down
-                    [title]="'Designation'"
-                    [placeholder]="'Select Designation'"
-                    [list]="allTitles"
+                    #jobTitleDp
+                    [title]="'Job Title'"
+                    [placeholder]="'Select Job Title'"
+                    [list]="jobTitleList"
+                    [field]="'name'"
                     [search]="true"
                     [change]="true"
-                    [add]="true"
-                    (onSelectedItem)="onSelectDesignation($event)"
+                    (onSelectedItem)="onSelectJobTitle($event)"
                 ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-w50">
+                <app-drop-down
+                    [class]="['light-dropdown', 'qt-select-input-40']"
+                    [placeholder]="'Select Industry'"
+                    [list]="industries"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    [title]="'Industry'"
+                    (onSelectedItem)="onSelectClientIndustry($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-input-block job-description">
+                <label>Job Description</label>
+                <textarea
+                    id="description-global-note"
+                    (input)="onChangeJobDescription($event)"
+                    class="terms-n-conditions__textarea qt-textarea"
+                    placeholder="Enter job description"
+                    appTextArea
+                    maxlength="500"
+                    cols="30"
+                    [default]="3"
+                    rows="3"
+                ></textarea>
             </div>
         </div>
         <div class="qt-w100 qt-mb-24">
@@ -115,6 +157,7 @@
                 [list]="companies"
                 [search]="true"
                 [change]="true"
+                [editItem]="selectedCompany"
                 (onSelectedItem)="onSelectCompany($event)"
             >
             </app-drop-down>
@@ -125,10 +168,10 @@
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
                 >
-                    <div class="qt-df qt-jc-sb">
+                    <div class="qt-df qt-jc-sb qt-ai-c">
                         <label>Primary Phone</label>
                         <span
-                            class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
                             (click)="addPhoneNumber()"
                             *ngIf="user.phoneNumbers.length < 3"
                         >
@@ -142,6 +185,8 @@
                             [(ngModel)]="user.phoneNumbers[0].number"
                             (input)="onCheckPhoneNumber(0)"
                             placeholder="Enter Primary Phone"
+                            prefix="+1"
+                            mask=" (000) 000-0000"
                         >
                         <div
                             class="grey-dropdown primary-phone-selector"
@@ -198,10 +243,10 @@
                             class="qt-input-block"
                             [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
                         >
-                            <div class="qt-df qt-jc-sb">
+                            <div class="qt-df qt-jc-sb qt-ai-c">
                                 <label>Additional phone</label>
                                 <span
-                                    class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                                    class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
                                     (click)="removePhoneNumber(i)"
                                 >
                                     Remove Phone
@@ -214,6 +259,8 @@
                                     [(ngModel)]="phone.number"
                                     (input)="onCheckPhoneNumber(i)"
                                     placeholder="Enter Primary Phone"
+                                    prefix="+1"
+                                    mask="(000) 000-0000"
                                 >
                                 <div
                                     class="grey-dropdown primary-phone-selector"
@@ -256,11 +303,11 @@
             </div>
             <div class="qt-w50">
                 <app-drop-down
+                    #jobTypeDp
                     [title]="'User Type'"
-                    [field]="'title'"
+                    [field]="'name'"
                     [placeholder]="'Select User Type'"
                     [list]="userTypes"
-                    [editItem]="selectedUserType"
                     [isBlockClear]="true"
                     (onSelectedItem)="onSelectRole($event)"
                 ></app-drop-down>
@@ -268,14 +315,23 @@
         </div>
         <div class="qt-w100 qt-input-block qt-mb-24">
             <label>Subscription</label>
-            <app-company-subscription
-                [editItem]="user.subscription"
-                (subscribeChange)="onChangeSubscriptions($event)"
-            ></app-company-subscription>
+            <user-default-subscription
+                [mode]="MODE_HIDE_ACTIVE"
+                [defaultSubscriptions]="user.defaultSubscriptions"
+                (onChange)="onChangeDefaultSubscriptions($event)"
+            ></user-default-subscription>
+        </div>
+        <div class="qt-w100 qt-input-block qt-mb-24">
+            <label>Marketing Subscription</label>
+            <user-custom-subscription
+                [mode]="MODE_HIDE_ACTIVE"
+                (onChange)="onChangeCustomSubscriptions($event)"
+            ></user-custom-subscription>
         </div>
         <app-company-tags
             class="users-filter-tags"
             [placement]="'top'"
+            [blockUserTag]="true"
             (tagsChange)="onChangeTags($event)"
         ></app-company-tags>
     </div>

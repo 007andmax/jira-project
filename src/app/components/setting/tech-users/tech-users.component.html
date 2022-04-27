@@ -2,7 +2,7 @@
 <div class="page-container manage-tech">
     <div class="page-insider">
         <div class="heading">
-            <h1>Manage Tech Users</h1>
+            <h5 class="qt-fw-600">Manage Tech Users</h5>
             <div class="heading-serach">
                 <a
                     class="stati-link"
@@ -15,6 +15,7 @@
                     href="javascript:;"
                     (click)="creatTechUsr()"
                     class="btn-outline"
+                    *ngIf="getPermissions('CREATE_USERS')"
                 >
                     Create Tech User
                 </a>
@@ -70,9 +71,9 @@
                                         >
                                     </span>
                                     <div class="t-info">
-                                        <h5>
+                                        <div class="t-info__title">
                                             {{ techUser.firstName }} {{ techUser.lastName }}
-                                        </h5>
+                                        </div>
                                         <span>10:30 AM, 14 Jun</span>
                                     </div>
                                 </div>
@@ -101,7 +102,7 @@
                                         class="email-note-wrape"
                                         *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
                                     >
-                                        <h5>Set Email Notification for Tech User</h5>
+                                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                                         <ul class="list-unstyled">
                                             <li class="cmn-checkbox">
                                                 <input
@@ -190,6 +191,7 @@
                                     href="javascript:;"
                                     data-tooltip="Edit"
                                     class="edit"
+                                    *ngIf="getPermissions('EDIT_USERS')"
                                     (click)="editTechUser(techUser)"
                                 >
                                     <img
@@ -201,6 +203,7 @@
                                     href="javascript:;"
                                     data-tooltip="remove"
                                     class="remove"
+                                    *ngIf="getPermissions('ARCHIVE_USERS')"
                                     (click)="removeUserConfirm(techUser)"
                                 >
                                     <img
@@ -250,9 +253,9 @@
                                         </span>
                                     </span>
                                     <div class="t-info">
-                                        <h5>
+                                        <div class="t-info__title">
                                             {{ techUser.firstName }} {{ techUser.lastName }}
-                                        </h5>
+                                        </div>
                                         <span>10:30 AM, 14 Jun</span>
                                     </div>
                                 </div>
@@ -281,7 +284,7 @@
                                         class="email-note-wrape"
                                         *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
                                     >
-                                        <h5>Set Email Notification for Tech User</h5>
+                                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                                         <ul class="list-unstyled">
                                             <li class="cmn-checkbox">
                                                 <input
@@ -359,27 +362,6 @@
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 <!-- sidebar popup -->
 <div
@@ -400,12 +382,12 @@
                 <img
                     src="/html/assets/img/upload-photo.svg"
                     alt="user"
-                    *ngIf="!fileAvatar"
+                    *ngIf="!croppedImage"
                 >
                 <img
                     [src]="croppedImage?.base64"
                     alt="user"
-                    *ngIf="fileAvatar"
+                    *ngIf="croppedImage"
                 >
             </span>
             <div class="dp-info">
@@ -430,8 +412,8 @@
                     </label>
                     <label
                         for="profile-dp"
-                        (click)="deleteAvatar()"
-                        *ngIf="selectedTechUser?.avatar?.updatedAt"
+                        (click)="deleteAttachment()"
+                        *ngIf="croppedImage"
                     >
                         <a
                             href="javascript:void(0)"
@@ -544,7 +526,7 @@
                 </div>
                 <div class="qt-pl-10 qt-pr-10">
                     <div class="email-note-wrape">
-                        <h5>Set Email Notification for Tech User</h5>
+                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                         <ul class="list-unstyled">
                             <li class="cmn-checkbox">
                                 <input
@@ -592,9 +574,12 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onCreateSubmit()"
+                (onClick)="onCreateSubmit()"
+                appDisabledBtn
+                #addBtn="disabled"
             >
-                Save
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"
@@ -674,7 +659,11 @@
                 <input
                     type="file"
                     id="profile-dp"
+                    (change)="onSelectFile($event)"
+                    (click)="onInputClick($event)"
+                    accept="image/gif, image/jpeg, image/png, image/jpg"
                     style="display: none;"
+                    multiple
                 >
                 <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
                 <div class="static-link">
@@ -690,7 +679,7 @@
                     </label>
                     <label
                         for="profile-dp"
-                        *ngIf="selectedTechUser?.avatar?.updatedAt"
+                        *ngIf="selectedTechUser?.avatar"
                     >
                         <a
                             href="javascript:void(0)"
@@ -710,64 +699,6 @@
           </label> -->
                 </div>
                 <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-            </div>
-            <div
-                class="img-croparea"
-                *ngIf="isCroppedImg"
-            >
-                <div class="crop-inner">
-                    <div class="heading-area">
-                        <h2>Crop Photo</h2>
-                        <a
-                            href="javascript:;"
-                            class="close-btn"
-                            (click)="isCroppedImg = false"
-                        >
-                            remove
-                        </a>
-                    </div>
-                    <div class="cropping">
-                        <div class="img-crop">
-                            <!-- <image-cropper
-                [imageBase64]="imageBase64"
-                [imageChangedEvent]="imageChangedEvent"
-                [maintainAspectRatio]="false"
-                [aspectRatio]="4 / 3"
-                [resizeToWidth]="128"
-                format="png"
-                (imageCropped)="imageCropped($event)"
-              ></image-cropper> -->
-                            <image-cropper
-                                [imageChangedEvent]="imageChangedEvent"
-                                [maintainAspectRatio]="false"
-                                [aspectRatio]="4 / 3"
-                                [resizeToWidth]="128"
-                                format="png"
-                                (imageCropped)="imageCropped($event)"
-                            ></image-cropper>
-                        </div>
-                        <div class="preview">
-                            <h6>Profile Preview</h6>
-                            <img [src]="croppedImage?.base64">
-                        </div>
-                        <div class="btn-crops">
-                            <button
-                                type="button"
-                                class="btn btn-primary"
-                                (click)="cropIt()"
-                            >
-                                Crop Photo
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                (click)="closeModel()"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <form
@@ -857,7 +788,7 @@
                 </div>
                 <div class="eml-ntl-list">
                     <div class="email-note-wrape">
-                        <h5>Set Email Notification for Tech User</h5>
+                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                         <ul class="list-unstyled">
                             <li class="cmn-checkbox">
                                 <input
@@ -905,9 +836,12 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onSubmit()"
+                appDisabledBtn
+                #editBtn="disabled"
+                (onClick)="onSubmit()"
             >
-                Save
+                <span *ngIf="!editBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="editBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"
@@ -958,53 +892,6 @@
                     type="button"
                     class="btn btn-secondary"
                     (click)="popup = false"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div
-    class="img-croparea deletePopup"
-    *ngIf="deletepopup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h1>Delete User</h1>
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="deletepopup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="removeTechUser()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="deletepopup = false"
                 >
                     Cancel
                 </button>

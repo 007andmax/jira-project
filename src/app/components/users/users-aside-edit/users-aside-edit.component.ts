@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
@@ -19,26 +19,45 @@ import { Company } from 'src/app/interfaces/company/company';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { Subscription } from 'rxjs';
+import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
   styleUrls: ['./users-aside-edit.component.scss'],
-  providers: [UsersAsideService]
+  providers: [UsersAsideService, TicketsListService]
 })
-export class UsersAsideEditComponent implements OnInit {
+export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public opened = false;
   user: UserProfile = new UserProfile();
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   selectedCompany: Company;
   companies = [];
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  selectedUserType = new TitleListType('Standar User', 'USER');
-  userTypes: Array<TitleListType> = [new TitleListType('Standar User', 'USER'),
-  new TitleListType('Manager', 'ADMIN')];
+  selectedUserType: CrmCompanyJobType;
+  selectedUserTitle: CrmCompanyJobTitle;
+  selectedUserIndustry: CrmCompanyIndustry;
+  userTypes: Array<CrmCompanyJobType> = [];
+  sub: Subscription = new Subscription();
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
+  industries: Array<CrmCompanyIndustry> = [];
+  idUploadFile: string;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
-  constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
+  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
+  @ViewChild('jobIndustryDp') jobIndustryDp: DropDownComponent;
+
+  constructor(private imageCropperStateService: ImageCropperStateService,
+    public ticketsListService: TicketsListService,
+    private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
@@ -46,31 +65,62 @@ export class UsersAsideEditComponent implements OnInit {
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
+    private crmStateService: CrmStateService,
+    private companiesService: CompaniesService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getUsersTitle(data);
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industries = data;
     })
-    this.usersAsideService.addSubscription(getOnUsers);
+    this.sub.add(onGetIndustry);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
       this.opened = true;
+      this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
-      this.selectedUserType = this.userTypes.find(item => item.type === this.user.role);
+      this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
+      this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
+      this.selectedUserIndustry = this.industries.find(item => item.id == this.user.userIndustryId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
-      this.companySubscriptionState.onEditMode(this.user.subscription);
     })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
   }
+  onSelectClientIndustry(item) {
+    this.selectedUserIndustry = item;
+    this.user.setUserIndustryId((item) ? item.id : null);
+  }
   public onChangeTags(tags) {
     this.user.setTags(tags);
+  }
+  getJobTypeList() {
+    if (this.crmStateService.getJobTypeList().length === 0) {
+      this.crmStateService.onInitGetJobTypeList();
+    } else {
+      this.userTypes = this.crmStateService.getJobTypeList();
+    }
+    let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
+      this.userTypes = data;
+      if (!this.selectedUserType && this.opened) this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
+      if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
+    })
+    this.sub.add(onGetJobType);
+  }
+  removeLogo() {
+    this.usersService.removeAvatar(this.user.id).subscribe(data => {
+      this.user.editLogo(null);
+    })
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -78,33 +128,36 @@ export class UsersAsideEditComponent implements OnInit {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
-      this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
-        this.usersStateService.getuserForEdit().id, (data.edit) ? this.user.avatar.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
-          this.user.editLogo(res);
-        })
+      if (this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
+      if (this.opened && !data) {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+
+        });
+      }
+      if (!this.opened || !data) return;
+      if (this.user.avatar) this.usersService.removeAvatar(this.user.id).subscribe(res => {
+        this.editUserAvatar(data);
+      })
+      if (!this.user.avatar) this.editUserAvatar(data);
+
+
     })
     this.usersAsideService.addSubscription(getConfirm);
   }
-
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
+  editUserAvatar(data) {
+    this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
+      this.usersStateService.getuserForEdit().id, (data.edit) ? this.user.avatar.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
+        this.user.editLogo(res);
       })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
+  }
+  onChangeDefaultSubscriptions(data) {
+    this.user.setDefaultSubscriptions(data);
+  }
+  onChangeCustomSubscriptions(data) {
+    this.user.setCustomSubscriptions(data);
+  }
+  onChangeJobDescription(event) {
+    this.user.jobDescription = event.target.value;
   }
   getLogoUrl() {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
@@ -121,11 +174,6 @@ export class UsersAsideEditComponent implements OnInit {
     this.user.addPhoneNumber();
     this.validate.addPhoneNumber();
   }
-  onChangeSubscriptions(data) {
-
-    data.forEach(item => this.user.subscription[item.field] = item.selected);
-    // this.user.setSubscriptions(data);
-  }
   onCheckEmail() {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
@@ -141,19 +189,22 @@ export class UsersAsideEditComponent implements OnInit {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
 
   }
-  onSelectDesignation(data) {
-    this.user.setDesignation(data);
+  onSelectJobTitle(data) {
+    this.selectedUserTitle = data;
+    this.user.setJobTitleId(data.id);
   }
   onSelectRole(data) {
     this.selectedUserType = data;
-    this.user.setRole(data.type);
+    this.user.setJobTypeId(data.id);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);
   }
   uploadFileOnBrower(event) {
     this.imageCropperStateService.setAction(CROPP_AVATAR_USER);
-    this.imageCropperStateService.uploadFileOnBrower(event);
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   public onSelectCompany(selectClient) {
     this.selectedCompany = selectClient;
@@ -165,8 +216,6 @@ export class UsersAsideEditComponent implements OnInit {
 
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
-
-
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.close();
     })
@@ -225,6 +274,12 @@ export class UsersAsideEditComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    this.selectedUserTitle = null;
+    this.selectedUserType = null;
+    this.selectedUserIndustry = null;
+    this.jobTitleDp.clearWithOutChanges();
+    this.jobTypeDp.clearWithOutChanges();
+    this.jobIndustryDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
@@ -235,4 +290,8 @@ export class UsersAsideEditComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

@@ -16,7 +16,11 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   @Input() item: Document;
   @Output() onRemoveDocument = new EventEmitter<any>();
   categories: Array<CategoryDocument> = [];
-  companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
+  companyTypes = [new TitleListType('All companies', 'ALL'),
+  new TitleListType('Client', 'CLIENT'),
+  new TitleListType('Lead', 'LEAD'),
+  new TitleListType('Supplier', 'SUPPLIER'),
+  new TitleListType('Vendor', 'VENDOR')];
 
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,

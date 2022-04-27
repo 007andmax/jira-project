@@ -11,7 +11,7 @@ export class UploadAreaComponent implements OnInit {
   idfiles: Array<String> = [];
   @Output() changeFiles = new EventEmitter<any>();
   error: string = "- The uploaded file cannot be more than 4 MB.";
-  constructor(public cd: ChangeDetectorRef, ) { }
+  constructor(public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
 
@@ -49,27 +49,30 @@ export class UploadAreaComponent implements OnInit {
    * Simulate the upload process
    */
   uploadFilesSimulator(index: number) {
-      if (index === this.files.length) {
-        return;
-      } else {
-        if (this.files[index].size > 4000000) {
-          this.files[index].showError = true;
-          this.uploadFilesSimulator(index + 1);
-          return;
-         } 
-        this.uploadFile(this.files[index]).then((data: any) => {
-          let res = JSON.parse(data.response);
-            this.idfiles.push(res.id);
-          this.changeFiles.emit(this.idfiles);
-          this.uploadFilesSimulator(index + 1);
-          this.cd.detectChanges();
-        }).catch(() => {
-          this.files[index].showError = true;
-          this.uploadFilesSimulator(index + 1);
-        });
+    if (index === this.files.length) {
+      (<any>document.getElementById('fileDropRef')).value = null;
 
+      return;
+    } else {
+      if (this.files[index].size > 4194304) {
+        this.files[index].showError = true;
+        this.files[index].error = "The size is too big. You can upload a file up to 4MB in size."
+        this.uploadFilesSimulator(index + 1);
+        return;
       }
-   
+      this.uploadFile(this.files[index]).then((data: any) => {
+        let res = JSON.parse(data.response);
+        this.idfiles.push(res.id);
+        this.changeFiles.emit(this.idfiles);
+        this.uploadFilesSimulator(index + 1);
+        this.cd.detectChanges();
+      }).catch(() => {
+        this.files[index].showError = true;
+        this.uploadFilesSimulator(index + 1);
+      });
+
+    }
+
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
@@ -80,8 +83,8 @@ export class UploadAreaComponent implements OnInit {
         resolve(xhr);
       }, false);
 
-      xhr.upload.onprogress = (event)=> {
-        file.progress = Math.round((event.loaded /  event.total) * 100);
+      xhr.upload.onprogress = (event) => {
+        file.progress = Math.round((event.loaded / event.total) * 100);
       }
       xhr.addEventListener("error", (error) => {
         reject(error);
@@ -99,7 +102,7 @@ export class UploadAreaComponent implements OnInit {
       item.progress = 0;
       this.files.push(item);
     }
-    this.uploadFilesSimulator(0);
+    this.uploadFilesSimulator((this.idfiles.length == 0) ? 0 : this.idfiles.length);
   }
 
   /**

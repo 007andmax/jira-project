@@ -1,9 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
+import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanyFilter } from '../../class/company-filter';
@@ -19,8 +22,9 @@ export class CompaniesFilterComponent implements OnInit {
   companyTypes = [new CompanySetting('Client', 'CLIENT'),
   new CompanySetting('Lead', 'LEAD'),
   new CompanySetting('Vendor', 'VENDOR'),
+  new CompanySetting('Supplier', 'SUPPLIER'),
   new CompanySetting('Archive', 'ARCHIVE')];
-  industries: Array<CompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   listPersons: Array<ItemFilterPerson> = [];
   companyFilter: CompanyFilter = new CompanyFilter();
   @ViewChild('typesDp') typesDp: DropDownComponent;
@@ -28,16 +32,20 @@ export class CompaniesFilterComponent implements OnInit {
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
+  @Output() onClose = new EventEmitter();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
+    public appService: AppService,
+    private crmStateService: CrmStateService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
-    this.industries = this.companiesStateService.getIndustries();
-    this.companiesStateService.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
 
@@ -49,6 +57,7 @@ export class CompaniesFilterComponent implements OnInit {
     this.sub.add(getOnUsers);
     let onChangeFilter = this.leftPanelStateService.onChangeFilter.subscribe(data => {
       this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
+      if (this.appService.checkMobile()) this.applyFilters();
     })
     this.sub.add(onChangeFilter);
   }
@@ -61,6 +70,7 @@ export class CompaniesFilterComponent implements OnInit {
       }
     })
   }
+
   public onClearAll() {
     this.typesDp.clearWithOutChanges();
     this.personsDp.clearWithOutChanges();
@@ -73,27 +83,44 @@ export class CompaniesFilterComponent implements OnInit {
     this.companyFilter.setTags([]);
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
+    if (this.appService.checkMobile()) this.close();
+  }
+  close() {
+    this.onClose.emit(null);
+  }
+  applyFilters() {
+
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
+    this.close();
   }
   public onSelectTechLead(data) {
     this.companyFilter.setTehUser((data) ? data.id : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onSelectType(data) {
     this.companyFilter.setClientType((data) ? data.value : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onSelectClientIndustry(data) {
     this.companyFilter.setClientIndustry((data) ? data : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onChangeTags(data) {
-
-    this.companyFilter.setTags(data.map(item => item.id));
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    this.companyFilter.setTags(data);
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onChangeCounterFilter() {
     let count = 0;

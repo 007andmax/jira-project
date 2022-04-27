@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { InvoicesFilter } from '../../class/invoices-filter';
@@ -22,6 +22,7 @@ export class InvoicesFilterComponent implements OnInit {
   @Output() changeCountFilter = new EventEmitter<any>();
   statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE')];
   constructor(private companiesState: CompaniesStateService,
+    private elRef: ElementRef,
     private invoiceStateService: InvoiceStateService) { }
 
   ngOnInit() {
@@ -49,7 +50,8 @@ export class InvoicesFilterComponent implements OnInit {
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);
     this.invoicesFilter.setInvoiceNumber(null);
-
+    this.invoicesFilter.setAmount(null);
+    this.elRef.nativeElement.querySelector("#amount-filter").value = "";
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
   }
@@ -60,6 +62,12 @@ export class InvoicesFilterComponent implements OnInit {
     } else {
       this.invoicesFilter.setCompany(item.name);
     }
+    this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    this.onChangeCounterFilter();
+  }
+  public onSetAmountInvoice(event) {
+    this.invoicesFilter.setAmount((event.target.value.length > 0) ? parseFloat(event.target.value).toFixed(2) : null);
+    if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.invoicesFilter.amount;
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
   }
@@ -85,6 +93,7 @@ export class InvoicesFilterComponent implements OnInit {
     if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) count++;
     if (this.invoicesFilter.invoiceNumber) count++;
     if (this.invoicesFilter.status) count++;
+    if (this.invoicesFilter.amount) count++;
     this.changeCountFilter.emit(count);
   }
 }

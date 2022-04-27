@@ -1,0 +1,35 @@
+@import "./src/assets/styles/variable";
+
+.app-drop-down__dropdown {
+    padding: 8px;
+    border-radius: 6px;
+    width: 200px;
+    .add-sub-category-item {
+        display: flex;
+        align-items: center;
+        margin: 0px 0px 4px 0px;
+        padding: 3px 7px;
+        border-radius: 8px;
+        transition: background-color .3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          background-color: $gray-200;
+        }
+    }
+}
+span {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #212b36;
+    position: relative;
+    &::after {
+        content: " ";
+        position: absolute;
+        top: 7px;
+        right: 0px;
+        width: 10px;
+        height: 10px;
+        border-radius: 40px;
+        left: -15px;
+    }
+}

@@ -1,9 +1,8 @@
 <div
-    class
     ngbDropdown
     [autoClose]="'outside'"
 >
-    <div
+    <!-- <div
         class="device-user pointer"
         *ngIf="type === 'RECURRING_TICEKTS'"
         id="dropdownTehuser"
@@ -11,13 +10,48 @@
         ngbDropdownToggle
     >
         Assigned Users
+    </div> -->
+    <div
+        class="device-user pointer"
+        *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
+        id="dropdownTehuser"
+        style="margin-bottom: 10px;width: 109px;"
+        ngbDropdownToggle
+    >
+        Assigned Users
     </div>
     <div
-        class="tech__user-icon icon__assign-user"
-        *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
+        class="device-user pointer company-settings-user"
+        *ngIf="type === 'COMPANY_SETTINGS' && selectedUsers.length === 1"
         id="dropdownTehuser"
         ngbDropdownToggle
+    >
+        <div
+            class="ticket-updates__photo-people"
+            [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
+        >
+        </div>
+        <span [textContent]="ticketsListService.getUserName(selectedUsers[0])"></span>
+    </div>
+    <app-dynamic-tooltip
+        [content]="'Select User'"
+        [position]="'top'"
+        #selectUserTooltip
+    ></app-dynamic-tooltip>
+    <div
+        class="tech__user-icon icon__assign-user pointer"
+        *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
+        id="dropdownTehuser"
+        (mouseenter)="selectUserTooltip.show($event.target)"
+        (mouseleave)="selectUserTooltip.hide()"
+        ngbDropdownToggle
     ></div>
+    <app-dynamic-tooltip
+        [content]="ticketsListService.getUserName(selectedUsers[0])"
+        [position]="'top'"
+        #techUserTooltip
+    ></app-dynamic-tooltip>
     <button
         class="ticket-updates__photo-people"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 1"
@@ -26,13 +60,14 @@
         id="dropdownTehuser"
         ngbDropdownToggle
         [disabled]="isDisabled"
-        placement="top"
-        [ngbTooltip]="ticketsListService.getUserName(selectedUsers[0])"
+        (mouseenter)="techUserTooltip.show($event.target)"
+        (mouseleave)="techUserTooltip.hide()"
     ></button>
     <div
         class="teh-user-body"
         ngbDropdownMenu
         aria-labelledby="dropdownTehuser"
+        *ngIf="!isDisabled"
     >
         <div class="select-wrapper dropdown-assign-ticket fixed-assign">
             <div class="content">

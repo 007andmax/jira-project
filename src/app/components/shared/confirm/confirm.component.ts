@@ -10,11 +10,11 @@ import { ConfrmData } from './class/confirm-data';
 })
 export class ConfirmComponent implements OnInit {
   @Input() public message = '';
-  action:string = null;
+  action: string = null;
   btnCancel: string = 'no';
   buttonConfirm: string = 'yes';
   constructor(private confirmStateService: ConfirmStateService,
-    public activeModal: NgbActiveModal, private eRef: ElementRef, ) {
+    public activeModal: NgbActiveModal, private eRef: ElementRef,) {
 
   }
 
@@ -44,5 +44,30 @@ export class ConfirmComponent implements OnInit {
     /*    approveFn()
         $uibModalInstance.close(result);*/
   };
+  public isDefault() {
+    return this.action !== 'ARCHIVE_USER'
+      && this.action !== 'ARCHIVE_COMPANY'
+      && this.action !== 'DEARCHIVE_COMPANY'
+      && !this.isSettingsPage()
+  }
+  public isSettingsPage() {
+    return this.action === 'DELETE_GL_NUMBER' ||
+      this.action === 'DELETE_LIST_GL_NUMBERS' ||
+      this.action === 'DELETE_CRM_INDUSTRY' ||
+      this.action === 'DELETE_CRM_INDUSTRIES' ||
+      this.action === 'DELETE_CRM_SERVICE_TYPE' ||
+      this.action === 'DELETE_CRM_SERVICE_TYPIES' ||
+      this.action === 'DELETE_CRM_JOB_TITLE' ||
+      this.action === 'DELETE_CRM_JOB_TITLIES' ||
+      this.action === 'DELETE_CRM_JOB_TYPE' ||
+      this.action === 'DELETE_CRM_JOB_TYPIES' ||
+      this.action === 'DELETE_TICKET_STATUS' ||
+      this.action === 'DELETE_LIST_TICKET_STATUS' ||
+      this.action === 'DELETE_CATEGORIES_PRODUCT' ||
+      this.action === 'DELETE_CATEGORY_PRODUCT' ||
+      this.action === 'DELETE_SUBSCRIPTION_TYPE' ||
+      this.action === 'DELETE_SUBSCRIPTION_TYPIES' ||
+      this.action === 'DELETE_SUBSCRIPTION_USER'
+  }
 
 }

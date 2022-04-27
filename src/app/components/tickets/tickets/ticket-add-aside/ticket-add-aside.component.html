@@ -3,7 +3,7 @@
     class="qt-aside-modern ticket-add-aside"
 >
     <div class="qt-aside-modern__header">
-        <div class="d-f ai-c">
+        <div class="qt-aside-modern__header-info d-f ai-c">
             <div class="qt-aside__title">Create New Ticket</div>
             <div
                 class="qt-aside__ticket-name"
@@ -32,7 +32,7 @@
                     >
                         <li
                             ngbDropdownItem
-                            (click)="ticketAdd.priorityLevel = item.type"
+                            (click)="setPriorityLevel(item)"
                         >
                             <a
                                 tabindex="-1"
@@ -58,6 +58,18 @@
         </div>
     </div>
     <div class="qt-aside-modern__content">
+        <div class="qt-input-block qt-input-line ticket-add-aside__priority-level-input">
+            <span class="qt-input-block__label">Priority Level</span>
+            <app-select-search
+                [class]="['qt-dropdown']"
+                [field]="'title'"
+                [isBlockClear]="true"
+                [editItem]="selectedTicketPriorities"
+                [list]="ticketPriorities"
+                (onSelectedItem)="setPriorityLevel($event)"
+                [placeholder]="'Low'"
+            ></app-select-search>
+        </div>
         <div class="qt-input-block qt-input-line --required">
             <mat-error
                 class="qt-tooltip-error"
@@ -160,8 +172,19 @@
         <div class="users-to-notify">
             <div class="users-to-notify__title">Add users to notify them ticket update</div>
             <div class="save-template">
+                <div
+                    class="device-user pointer"
+                    id="dropdownTehuser"
+                    *ngIf="appService.checkMobile()"
+                    (click)="onAddAssignedUser()"
+                >
+                </div>
                 <app-teh-users
+                    #techUsersDp
+                    *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
+                    [editMode]="true"
+                    [editUsers]="shareUsersList"
                     (usersChange)="onChangeShareUsers($event)"
                 ></app-teh-users>
                 <div class="assigned-users-list">
@@ -250,6 +273,7 @@
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="add()"
+                *ngIf="!appService.checkMobile()"
             >
                 <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
@@ -259,6 +283,16 @@
                 (click)="closed()"
             >
                 Cancel
+            </button>
+            <button
+                class="qt-button qt-ml-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+                *ngIf="appService.checkMobile()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

@@ -1,0 +1,129 @@
+<div
+    class="grey-dropdown filter-tags-body"
+    ngbDropdown
+    [container]="(isDisabled) ? null : 'body'"
+>
+    <i class="icn-sm report-caret-icon"></i>
+    <div
+        class="user-subscription"
+        id="dropdownServices"
+        ngbDropdownToggle
+        [ngClass]="{'placeholder-subscription': !showPlaceholder(),
+    'no-pointer':isDisabled}"
+    >
+        <div
+            *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist,
+            'no-active':!defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist}"
+        >
+            <i
+                class="qt-sz-16 qt-bg-contain qt-dib"
+                *ngIf="defaultSubscriptions.invoiceSubscription.isExist"
+                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.invoiceSubscription.activated,'icon__subscribe-user':defaultSubscriptions.invoiceSubscription.activated}"
+            ></i>
+            Invoice Updates
+            <i
+                *ngIf="!isDisabled"
+                class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
+                (click)="selected('invoiceSubscription')"
+            ></i>
+        </div>
+        <div
+            *ngIf="defaultSubscriptions.ticketSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist,
+            'no-active':!defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist}"
+        >
+            <i
+                class="qt-sz-16 qt-bg-contain qt-dib"
+                *ngIf="defaultSubscriptions.ticketSubscription.isExist"
+                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketSubscription.activated,'icon__subscribe-user':defaultSubscriptions.ticketSubscription.activated}"
+            ></i>
+            Ticket Updates
+            <i
+                *ngIf="!isDisabled"
+                class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
+                (click)="selected('ticketSubscription')"
+            ></i>
+        </div>
+        <div
+            *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist,
+            'no-active':!defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist}"
+        >
+            <i
+                class="qt-sz-16 qt-bg-contain qt-dib"
+                *ngIf="defaultSubscriptions.ticketManagerSubscription.isExist"
+                [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketManagerSubscription.activated,'icon__subscribe-user':defaultSubscriptions.ticketManagerSubscription.activated}"
+            ></i>
+            Ticket Manager
+            <i
+                *ngIf="!isDisabled"
+                class="icn-remove qt-sz-16 qt-bg-contain qt-dib "
+                (click)="selected('ticketManagerSubscription')"
+            ></i>
+        </div>
+    </div>
+    <div
+        class="select-wrapper qt-dropdown-menu company-subscription-dropdown"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+        *ngIf="!isDisabled"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <div
+                (click)="selected('invoiceSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('invoiceSubscription')}"
+            >
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('invoiceSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Invoice Updates</div>
+                    </div>
+                </label>
+            </div>
+            <div
+                (click)="selected('ticketSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('ticketSubscription')}"
+            >
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('ticketSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Ticket Updates</div>
+                    </div>
+                </label>
+            </div>
+            <div
+                (click)="selected('ticketManagerSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('ticketManagerSubscription')}"
+            >
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('ticketManagerSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Ticket Manager</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

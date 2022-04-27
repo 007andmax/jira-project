@@ -27,6 +27,7 @@
             dropdownWidth="192px"
             [reducerItem]="glDropDownItemName"
             (onAddItem)="onAddGlNumber($event)"
+            [isDisabled]="!getPermissions('MANAGE_SERVICES')"
             (onSelectedItem)="onSelectGlNumbers($event)"
         >
         </app-drop-down>
@@ -67,6 +68,7 @@
     </td>
     <td class="default-service-table__menu">
         <div
+            *ngIf="getPermissions('MANAGE_SERVICES')"
             ngbDropdown
             ngbDropdown
             container="body"

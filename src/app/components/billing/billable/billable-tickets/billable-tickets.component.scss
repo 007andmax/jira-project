@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .no-edit-ticket {
-    color: #404b5f !important;
+    color: $gray-800 !important;
 }

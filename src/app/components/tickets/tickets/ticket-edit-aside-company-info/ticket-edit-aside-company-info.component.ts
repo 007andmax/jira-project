@@ -38,6 +38,7 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
+
     private mapModalStateService: MapModalStateService) { }
 
   ngOnInit() {
@@ -50,9 +51,8 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
         primaryPhone;
       if (this.company.companyInfo) {
         if (this.company.companyInfo.contacts) {
-          for (let contact of this.company.companyInfo.contacts) {
-            if (!primaryContact || contact.priority > primaryContact.priority) primaryContact = contact;
-          }
+          this.company.companyInfo.contacts.sort((a, b) => a.priority - b.priority);
+          primaryContact = this.usersStateService.getAllUsers().find(item => item.id === this.company.companyInfo.contacts[this.company.companyInfo.contacts.length - 1].id);
         }
         if (this.company.companyInfo.addresses) {
           for (let address of this.company.companyInfo.addresses) {
@@ -87,6 +87,10 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
         this.companyHistory.onInitGetTickets();
       }
     }
+
+  }
+  getPrimaryPhone() {
+    return (this.primaryPhone && this.primaryPhone.number) ? this.primaryPhone.number : ''
   }
   getPhoneNumbers(userId) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === userId);

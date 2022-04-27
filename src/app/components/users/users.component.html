@@ -26,10 +26,14 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-users-table
+                            [selected]="idDetailUser === user.id"
+                            (click)="setIdDetailUser(user.id)"
                             [type]="TYPE_LIST_ALL_USERS"
                             [showArchivedUsers]="showArchivedUsers"
                             (onSelectUser)="onSelectUser($event)"
                             [user]="user"
+                            [listCustomSubscription]="listCustomSubscription"
+                            [jobTitleList]="jobTitleList"
                         ></app-users-table>
                     </ng-template>
                 </tbody>

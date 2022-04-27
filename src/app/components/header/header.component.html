@@ -3,11 +3,17 @@
 </div>
 <div class="nav-header__rigth-side">
     <div ngbDropdown>
-        <div
-            id="dropdownCreate"
-            ngbDropdownToggle
-            class="nav-header__add-btn icon__add-white"
-        ></div>
+        <div class="actions-body">
+            <div
+                id="dropdownCreate"
+                ngbDropdownToggle
+                class="nav-header__add-btn icon__add-white"
+            ></div>
+            <div
+                class="icon__help-center qt-bg-contain qt-sz-24 pointer qt-mr-16"
+                (click)="showHelpCanterAside()"
+            ></div>
+        </div>
         <ul
             class="qt-dropdown-menu"
             ngbDropdownMenu
@@ -22,24 +28,28 @@
             <li
                 ngbDropdownItem
                 (click)="onAddCompany()"
+                *ngIf="getPermissions('CREATE_COMPANIES')"
             >
                 Company
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddUser()"
+                *ngIf="getPermissions('CREATE_USERS')"
             >
                 Users
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddService()"
+                *ngIf="getPermissions('MANAGE_SERVICES')"
             >
                 Service
             </li>
             <li
                 ngbDropdownItem
                 (click)="onAddProduct()"
+                *ngIf="getPermissions('MANAGE_PRODUCTS')"
             >
                 Product
             </li>

@@ -1,15 +1,62 @@
+@import './src/assets/styles/variable';
+
 .ticket-notify {
     padding: 0 32px;
     margin-top: 20px;
 
+    @media (max-width: 767px) {
+      padding: 0 16px;
+    }
+
     &__item {
       border-radius: 10px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: dashed 1px #c5cdd5;
-      background-color: #ffffff;
+      border: dashed 1px $gray-500;
+      background-color: $white;
       padding: 16px;
       display: flex;
       margin-bottom: 16px;
+
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+      }
+
+      &-info {
+        display: block;
+        position: relative;
+        @media (max-width: 767px) {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        .ticket-notify__item-icon {
+          position: absolute;
+          top: 50%;
+          left: 16px;
+          transform: translateY(-50%);
+
+          @media (max-width: 767px) {
+            position: static;
+            transform: none;
+          }
+        }
+
+        .ticket-notify__item-title,
+        .ticket-notify__item-desc {
+          padding-left: 50px;
+
+          @media (max-width: 767px) {
+            padding-left: 0;
+          }
+        }
+
+        .ticket-notify__item-desc {
+          @media (max-width: 767px) {
+            margin-top: 12px;
+          }
+        }
+      }
     }
 
     &__item-icon {
@@ -23,6 +70,11 @@
     &__item-title {
       font-size: 13px;
       line-height: 1.54;
+      color: #212b36;
+
+      @media (max-width: 767px) {
+        max-width: calc(100% - 50px);
+      }
     }
 
 
@@ -30,10 +82,10 @@
       padding: 14px 20px;
       white-space: nowrap;
       font-size: 13px;
-      color: #ffffff;
+      color: $white;
       font-weight: 600;
       border-radius: 4px;
-      background-color: #16a4fa;
+      background-color: $primary-1;
       height: 40px;
       line-height: normal;
       border: none;
@@ -42,6 +94,11 @@
        position: relative;
       display: flex;
       align-items: center;
+      @media (max-width: 767px) {
+        margin-left: 50px;
+        margin-top: 16px;
+      }
+
       app-preloader-ticket {
         position: absolute;
       }
@@ -51,13 +108,13 @@
       width: 16px;
       height: 16px;
       min-width: 16px;
-      margin-right: 5px;
+      margin-right: 8px;
     }
 
     &__item-desc-text {
       font-size: 12px;
-      line-height: 1.33;
-      color: #4f5f79;
+      line-height: 16px;
+      color: $primary-2;
       margin-top: 2px;
     }
   }

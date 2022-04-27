@@ -1,13 +1,30 @@
 <div class="cmp-dashboard-body">
-    <div class="cmp-dboard-container d-flex">
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        class="cmp-dboard-container d-flex"
+        [hidden]="showPreloader"
+    >
         <div class="cmp-dboard-row d-flex">
             <app-company-dash-detail
                 class="cmp-dboard-col left-profilebar cmn-box d-flex"
                 (companyNameChanged)="companyNameChangedHandler($event)"
                 (totalTicketsChanged)="totalTicketsChangedHandler($event)"
                 (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"
+                (companyChanged)="onCompanyChanged($event)"
             ></app-company-dash-detail>
-            <div class="cmp-dboard-col right-stasticsbar d-flex">
+            <div
+                class="cmp-dboard-col right-stasticsbar d-flex"
+                *ngIf="company && company.clientType === 'VENDOR' && !appService.checkMobile()"
+            >
+                <company-dash-associate [company]="company"></company-dash-associate>
+            </div>
+            <div
+                class="cmp-dboard-col right-stasticsbar d-flex"
+                *ngIf="company && company.clientType !== 'VENDOR' && !appService.checkMobile()"
+            >
                 <app-company-dash-stats
                     [totalTickets]="totalTickets"
                     [averageResponseTime]="averageResponseTime"
@@ -16,21 +33,28 @@
                 <div class="cmp-board-information d-flex">
                     <div class="cmp-board-info-row d-flex">
                         <div class="cmp-board-info-col d-flex">
-                            <app-company-dash-revenue class="cmp-board-revenue cmn-box d-flex"></app-company-dash-revenue>
-                            <app-company-dash-invoice [companyName]="companyName"></app-company-dash-invoice>
+                            <app-company-dash-revenue
+                                *ngIf="getPermissions('VIEW_ACCOUNTING')"
+                                class="cmp-board-revenue cmn-box d-flex"
+                            ></app-company-dash-revenue>
+                            <app-company-dash-invoice
+                                *ngIf="getPermissions('VIEW_ACCOUNTING')"
+                                [companyName]="companyName"
+                            ></app-company-dash-invoice>
                         </div>
-                        <app-company-dash-contract class="cmp-board-info-col d-flex"></app-company-dash-contract>
+                        <div class="cmp-board-info-col d-flex">
+                            <app-company-dash-contract *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"></app-company-dash-contract>
+                            <company-dash-associate-info
+                                class="d-flex"
+                                [company]="company"
+                            ></company-dash-associate-info>
+                        </div>
                     </div>
                 </div>
-
-
-
-
-
                 <!-- Sidebar Recent Activity -->
                 <!-- <aside class="cmp-board-sidebar d-flex" [class.opened]="expand">
       <a href="javascript:;" class="sidebar-toogle" (click)="expand=!expand">
-        Sidebar Toogle 
+        Sidebar Toogle
       </a>
       <div class="sidebar-header d-flex">
         <h3>Recent Activity</h3>
@@ -107,27 +131,12 @@
                   <span>5:00 PM, Yesterday</span>
             </div>
           </li>
-          
+
       </ul>
       <a href="javascript:;" class="btn btn-load">Load More…</a>
   </aside> -->
-
-
-
-
-
                 <!-- Modal -->
-
-
-
-
-
-
-
-
             </div>
-
-
         </div>
     </div>
 </div>

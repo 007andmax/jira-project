@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 table.qt-table-modern {
   width: 100%;
   border-collapse: separate;
@@ -7,6 +9,9 @@ table.qt-table-modern {
     font-size: 12px;
     th {
       padding: 8px;
+      @extend %сaption-m-sb;
+      color: $primary-2;
+      text-transform: uppercase;
       &:first-child {
         padding-left: 16px;
       }
@@ -16,10 +21,10 @@ table.qt-table-modern {
     }
   }
   tbody {
-    font-size: 13px;
+    @extend %body-m;
     tr {
       td {
-        background: #ffffff;
+        background: $white;
         padding: 0 8px 0 8px;
         height: 48px;
         border-top: 1px solid transparent;
@@ -42,59 +47,304 @@ table.qt-table-modern {
       &.--selected {
         td {
           background: #f4fbff;
-          border-color: #16a4fa;
+          border-color: $primary-1;
         }
       }
     }
   }
   .qt-table-modern__circle-avatar {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
-      min-height: 24px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      margin-right: 8px;
-      font-weight: 600;
-      color: white;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      font-size: 10px;
-      font-weight: 700;
-      &.transparent-text:before {
-        content: '.';
-        color: transparent;
-        position: relative;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 50%;
+    background-position: center !important;
+    background-size: cover !important;
+    margin-right: 8px;
+    color: $white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    &.transparent-text:before {
+      content: ".";
+      color: transparent;
+      position: relative;
+    }
+  }
+  .--strong {
+    font-weight: 500;
+    color: $primary-2;
+  }
+}
+
+.qt-table-modern {
+  &__row {
+    display: flex;
+    margin-bottom: 2px;
+    position: relative;
+    border-radius: 5px;
+    height: 48px;
+    border: 1px solid $white;
+
+    &.--selected {
+      border-color: $primary-1;
+      background: #f4fbff;
+
+      > div {
+        background: #f4fbff;
       }
     }
-    .--strong {
-      font-weight: 600;
+
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: $white;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
+      height: auto;
     }
+
+    & > div {
+      display: flex;
+      align-items: center;
+      background: $white;
+      padding: 0 8px 0 8px;
+      //height: 48px;
+      vertical-align: middle;
+      cursor: pointer;
+
+      @media screen and (max-width: 767px) {
+        padding: 0;
+        height: auto;
+      }
+
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+
+        @media screen and (max-width: 767px) {
+          padding: 0;
+        }
+      }
+
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+
+        @media screen and (max-width: 767px) {
+          padding: 0;
+        }
+      }
+    }
+
+    &--lg {
+      height: 66px;
+      @media screen and (max-width: 767px) {
+        height: auto;
+        padding: 15px 16px;
+      }
+
+      > div {
+        //height: 66px;
+
+        @media screen and (max-width: 767px) {
+          padding: 0;
+          height: auto;
+        }
+      }
+    }
+
+    @media screen and (min-width: 767px) {
+      .qt-table-modern__row tr:hover > div {
+        background: #f4fbff;
+        border-color: $primary-1;
+
+        &:first-child,
+        &:last-child {
+          border-color: $primary-1;
+        }
+      }
+      .qt-table-modern__row {
+        &:hover {
+          border-color: $primary-1;
+          background: #f4fbff;
+
+          > div {
+            background: #f4fbff;
+          }
+        }
+      }
+    }
+  }
+  .ticket-table {
+    .qt-table-modern__row > div {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__requested-by {
+      flex: 1 0 166px;
+
+      .ellipsis {
+        width: calc(166px - 40px);
+      }
+
+      @media (max-width: 767px) {
+        flex: 1 0 60%;
+        order: 1;
+      }
+    }
+
+    &__subject {
+      flex: 2 0 345px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      @media (max-width: 767px) {
+        flex: 100%;
+        font-size: 16px; // TODO replace this font style for @extend
+        font-weight: 600;
+        letter-spacing: 0;
+        overflow: hidden;
+        align-items: stretch;
+        max-height: 40px;
+        height: auto;
+        width: 100%;
+        white-space: unset;
+        line-height: 20px;
+        margin: 5px 0;
+      }
+
+      .ellipsis {
+        @media (max-width: 767px) {
+          white-space: unset;
+        }
+      }
+    }
+
+    &__company {
+      flex: 1 0 148px;
+      min-width: 0;
+
+      @media (max-width: 767px) {
+        flex: 1 1 142px;
+        order: -1;
+        color: $gray-700;
+      }
+    }
+
+    &__assignee {
+      //flex: 1 0 148px;
+      max-width: 168px;
+      width: 100%;
+      overflow: auto;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    &__status {
+      flex: 0 0 136px;
+
+      @media (max-width: 767px) {
+        flex: 1;
+        order: -1;
+        justify-content: flex-end;
+      }
+    }
+    &__created-date {
+      flex: 0 0 120px;
+
+      @media (max-width: 767px) {
+        flex: 1 0 88px;
+        order: 1;
+        justify-content: flex-end;
+        font-size: 12px; // TODO add @extend style
+        line-height: 16px;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: $gray-600;
+      }
+    }
+  }
+
+  .qt-table-modern__circle-avatar {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 50%;
+    background-position: center !important;
+    background-size: cover !important;
+    margin-right: 8px;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+  }
 }
+
+.qt-page-list__header-thead__row {
+  display: flex;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    @extend %сaption-m-sb;
+    text-transform: uppercase;
+
+    &:first-child {
+      padding-left: 16px;
+    }
+
+    &:last-child {
+      padding-right: 16px;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .page-list-ticket {
+    .qt-page-list__header-thead-container {
+      display: none;
+    }
+  }
+}
+// End Mobile style
 
 .qt-table-modern__sorting {
   position: relative;
   width: 8px;
   height: 12px;
+  margin-left: 2px;
   display: inline-flex;
   line-height: 8px;
-  top: 2px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 8px;
     height: 6px;
-    background-image: url('/assets/img/icons/sorting-up.svg');
+    background-image: url("/assets/img/icons/sorting-up.svg");
   }
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 8px;
     height: 6px;
     top: 6px;
-    background-image: url('/assets/img/icons/sorting-down.svg');
+    background-image: url("/assets/img/icons/sorting-down.svg");
   }
 }

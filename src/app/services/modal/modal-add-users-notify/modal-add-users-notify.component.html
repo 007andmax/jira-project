@@ -1,0 +1,71 @@
+<div class="qt-modal quote-email-modal users-to-notify">
+    <div class="qt-modal__header">
+        <div class="qt-modal__header-title qt-fw-600">Add Users to notify</div>
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-modal__body">
+        <div class="qt-input-block qt-modal__body-content qt-mb-24 qt-w100">
+            <input
+                type="text"
+                #userInput
+                placeholder="Search Users"
+                (input)="onSearchUser($event)"
+            >
+        </div>
+        <div class="qt-input-block qt-w100 email-selects qt-mb-24">
+            <div
+                class="ai-c"
+                *ngFor="let user of users"
+                (click)="toggleUser(user)"
+            >
+                <div class="assigne-user-item">
+                    <div
+                        class="assigne-user-avatar"
+                        [textContent]="getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
+                    ></div>
+                    <div class="text-content">
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(user)"
+                        ></div>
+                        <div
+                            class="assigne-user-email"
+                            [textContent]="user.primaryEmail"
+                        ></div>
+                    </div>
+                    <!-- <input -->
+                    <!-- type="checkbox" -->
+                    <!-- [checked]="isSelected(user)" -->
+                    <!-- (change)="selectUser($event)" -->
+                    <!-- > -->
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            class="ng-valid ng-dirty ng-touched"
+                            [checked]="isSelected(user)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="qt-modal__footer">
+            <button
+                class="qt-button --gray qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button"
+                (click)="applyUsers()"
+            >
+                Add User
+            </button>
+        </div>
+    </div>
+</div>

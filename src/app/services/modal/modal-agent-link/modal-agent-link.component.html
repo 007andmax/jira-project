@@ -1,0 +1,26 @@
+<div class="qt-modal quote-email-modal">
+    <div class="qt-modal__header">
+        <div class="qt-modal__header-title qt-fw-600">Link with Agent</div>
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-modal__body">
+        <ul>
+            <ng-template
+                ngFor
+                let-agent
+                [ngForOf]="devices"
+            >
+                <li
+                    (click)="changeLinkedAgent(agent.id)"
+                    *ngIf="!ticketProfile.agent || agent.id !== ticketProfile.agent.deviceId"
+                >
+                    {{ agent.hostName || agent.ip }}
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+
+</div>

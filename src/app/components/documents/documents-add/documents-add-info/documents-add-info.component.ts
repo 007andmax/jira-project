@@ -26,7 +26,11 @@ export class DocumentsAddInfoComponent implements OnInit {
   toggleEditCategories: boolean = false;
   tab: string = 'DOCUMENT_INFO';
   categories: Array<CategoryDocument> = [];
-  companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
+  companyTypes = [new TitleListType('All companies', 'ALL'),
+  new TitleListType('Client', 'CLIENT'),
+  new TitleListType('Lead', 'LEAD'),
+  new TitleListType('Supplier', 'SUPPLIER'),
+  new TitleListType('Vendor', 'VENDOR')];
   requiredCompanyType: boolean;
   @Output() onChangeRequiredCompanyType = new EventEmitter<any>();
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
@@ -34,6 +38,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   @Input() templateId: string;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
+  @ViewChild('categoriesDp') categoriesDp: DropDownComponent;
   @ViewChild('linked') linked: DocumentsLinkedComponent;
   @ViewChild('reviewDp') reviewDp: DatePickerComponent;
   @Output() onToggleAside = new EventEmitter<any>();
@@ -56,6 +61,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
+      this.categoriesDp.reset(this.categories);
     })
     let currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() + 1);
@@ -85,7 +91,11 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.openAside = !this.openAside;
     this.onToggleAside.emit(this.openAside);
   }
+  onAddCategory(data) {
+    this.documentsService.addCategories(data).subscribe(data => {
 
+    })
+  }
   onChangeLinked(data: Array<DocumentCompanyUser>) {
     this.documentAdd.setLinked(data.filter(item => item.type === "USER").map(item => item.id),
       data.filter(item => item.type === "COMPANY").map(item => item.id));

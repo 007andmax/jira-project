@@ -19,6 +19,8 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
 
 
 @Component({
@@ -32,19 +34,16 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   categories: Array<PasswordRecordCategories> = [];
   passwordRecordAdd: PasswordRecordAdd = new PasswordRecordAdd();
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
-
-
+  selectedCompany: Company;
   showAddCategory: boolean = false;
-
   public opened: boolean = false;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   formatDate: string = FORMAT_DATE_2;
-
-
   sub: Subscription = new Subscription();
   @ViewChild('linked') linked: PasswordManagerLinkedComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('addRecord') addRecord: DisabledBtnDirective;
+  @ViewChild('datePicker') datePicker: DatePickerComponent;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
     * @param {FormBuilder} fb Service to work with form
@@ -65,6 +64,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
     private toastrService: ToastrService,
+    public appService: AppService,
     private appStateService: AppStateService
   ) { }
 
@@ -84,6 +84,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       current.setFullYear(current.getFullYear() + 1);
       this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
       this.opened = true;
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
+      if (this.opened && this.companiesState.getCompanyRoutingId()) this.selectCompany(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
+      this.datePicker.reset();
     });
     this.sub.add(onAddForm);
     this.categories = this.passwordManagerStateService.getCategories();
@@ -104,6 +107,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   selectCompany(data) {
+    this.selectedCompany = data;
     this.passwordRecordAdd.setCompany(data);
     this.linked.onSelectCompany(data);
   }
@@ -137,6 +141,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.selectedUserAndDevices = [];
     this.linked.onClosed();
     this.showAddCategory = false;
+    this.appService.toggleMobileAside(false);
+    this.selectedCompany = null;
+    this.datePicker.reset();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

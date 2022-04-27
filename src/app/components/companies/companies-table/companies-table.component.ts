@@ -19,6 +19,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Router } from '@angular/router';
 import { CompanyItem } from '../class/company-item';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -46,7 +47,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private router: Router,
     private draftEmailStateService: DraftEmailStateService,
-    private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
     private elRef: ElementRef) { }
 
   ngOnInit() {
@@ -84,7 +85,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
             if (address.isPrimary) primaryAddress = address;
           }
         }
-        if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
+        if (primaryAddress && primaryAddress.phoneNumbers.length) {
+          primaryPhone = primaryAddress.phoneNumbers[0];
+          if (primaryPhone.number[0] === "1") primaryPhone.number = `+${primaryPhone.number}`;
+        }
       }
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
@@ -100,17 +104,16 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
   }
 
+  getPhoneNumner() {
+    return (this.primaryPhone && this.primaryPhone.number) ? this.primaryPhone.number : '';
+  }
+  getCompanyDashboardLink() {
+    return `company/${this.company.id}/dashboard`;
+  }
   goToDashboard() {
-
-    // this.leftPanelStateService.goToState('company-dashboard');
     this.companiesStateService.setSelectedCompanyId(this.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
-  }
-  showInfo() {
-    if (this.IS_MOBILE) {
-      this.elRef.nativeElement.querySelector('.new-companies-content__list--item').classList.toggle('show-details');
-    }
   }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
@@ -164,7 +167,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

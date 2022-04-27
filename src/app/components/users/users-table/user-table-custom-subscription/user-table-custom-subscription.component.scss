@@ -1,0 +1,121 @@
+.active {
+    color: #2ec866;
+    background-color: rgba(46, 200, 102, 0.08);
+}
+.no-active {
+    color: #ff5263;
+    background-color: rgba(255, 82, 99, 0.08) !important;
+}
+.list-custom-subscriptions {
+    display: block;
+    width: auto;
+    min-height: 20px;
+}
+.selected-item {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    line-height: 1.2;
+    padding: 4px 6px;
+    height: 20px;
+    border-radius: 6px;
+
+    font-size: 10px;
+    margin: 0 4px 4px 0;
+    background-color: rgba(46, 200, 102, 0.08);
+    .icn-remove {
+        margin: 2px 0 2px 4px;
+    }
+}
+.container-caret {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    margin: 0 0 4px 4px;
+    padding: 6px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f8;
+}
+.select-wrapper {
+    max-height: 400px;
+    padding: 8px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow: hidden;
+    .tab-wrapper {
+        display: flex;
+        padding: 0 20px;
+        justify-content: space-between;
+        border-bottom: 1px solid #dce0e6;
+        .tab {
+            cursor: pointer;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 2px solid transparent;
+            color: #4f5f79;
+            font-size: 13px;
+            transition: all 0.3s;
+            font-weight: bold;
+            &.active,
+            &:hover {
+                color: #16a4fa;
+                border-bottom: 2px solid #16a4fa;
+            }
+        }
+    }
+    .content {
+        max-height: 340px;
+        overflow: scroll;
+        padding: 0px;
+
+        .company-tag-item {
+            padding: 6px 64px 6px 16px;
+            font-size: 13px !important;
+            height: 32px;
+            cursor: pointer;
+            width: 100%;
+            &:hover {
+                background-color: #edf2f67a;
+            }
+            i {
+                margin: 0 0 0 auto;
+                position: static;
+            }
+            .text-content {
+                margin: 0px 0px 0px 8px;
+                flex: 1;
+                width: max-content;
+            }
+            &:not(:last-child) {
+            }
+            label {
+                width: auto;
+                height: 16px;
+                font-size: 13px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #c4cbd5;
+        }
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+    }
+}
+.is-update {
+    cursor: wait !important;
+    label {
+        cursor: wait !important;
+    }
+}

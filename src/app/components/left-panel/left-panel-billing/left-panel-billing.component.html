@@ -27,10 +27,12 @@
     <li
         [ngClass]="{'--active':activePage === 'new-billable' || activePage === 'new-billable-tickets'}"
         (click)="goToState('new-billable')"
+        *ngIf="getPermissions('VIEW_ACCOUNTING')"
     >
         Billable Items
     </li>
     <li
+        *ngIf="getPermissions('VIEW_ACCOUNTING')"
         [ngClass]="{'--active':activePage === 'new-billable-invoices'}"
         (click)="goToState('new-billable-invoices')"
     >
@@ -51,19 +53,8 @@
     <li
         [ngClass]="{'--active':activePage === 'new-contracts'}"
         (click)="goToState('new-contracts')"
+        *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
     >
         Contracts
-        <!-- <div class="expire-contract-notification">
-           *ngIf="showNotificationReview" 
-            <div>
-                Some contracts are about to expire, please review
-            </div>
-            <button
-                class="expire-contract-notification__button"
-                (click)="showNotificationReview = false"
-            >
-                Okay, Got it
-            </button>
-        </div> -->
     </li>
 </ul>

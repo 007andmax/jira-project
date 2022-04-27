@@ -23,14 +23,14 @@
     </div>
     <div class="header-product-list-ticket" *ngIf="accountsReceivable.lines.length > 0">
       <!--HEADER-->
-      <h3 [textContent]="accountsReceivable.techCompanyName"></h3>
+      <h5 class="qt-fw-600 qt-mb-6 qt-mt-20" [textContent]="accountsReceivable.techCompanyName"></h5>
       <p *ngIf="accountsReceivable.type ==='DETAILED' ">Account Recivable for <span [textContent]="accountsReceivable.clientCompanyName"></span>
       </p>
     </div>
-    
+
      <div>
-       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
-     
+       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>
+
      </div>
   <app-report-footer></app-report-footer>
    </div>

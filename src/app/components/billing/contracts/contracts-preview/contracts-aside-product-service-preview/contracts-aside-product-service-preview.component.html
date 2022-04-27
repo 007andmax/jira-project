@@ -75,7 +75,7 @@
         </div>
     </div>
     <div class="qt-pt-15 qt-pl-32 qt-pr-32 qt-pb-24 contracts-page__gray-block">
-        <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-20">
+        <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-dark qt-mb-20">
             Select how you bill your customer. Managed Services will be added to Service time
         </div>
         <ul class="product-bill-customer-select-nav qt-mb-16">
@@ -182,6 +182,28 @@
         </div>
     </div>
     <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.withCustomBillingDate}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
+            </div>
+            <div
+                class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"
+                *ngIf="contractsOther.withCustomBillingDate"
+            >
+                <input
+                    [value]="parsedateForTotal(contractsOther.customBillingDate)"
+                    type="text"
+                    readonly
+                >
+            </div>
+        </div>
+        <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
         <div class="qt-df qt-jc-fe">
             <div class="contract-total qt-color-dark">
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">

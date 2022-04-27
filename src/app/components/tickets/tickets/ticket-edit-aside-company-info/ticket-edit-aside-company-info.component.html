@@ -1,93 +1,156 @@
-<div class="company-info-aside"  >
-  <div *ngIf="company" [hidden]="showPreloader">
-  <div class="company-info-aside__main-info">
+<div class="company-info-aside">
     <div
-      class="company-info-aside__main-avatar"
-      [ngStyle]="{'background': 'url('+getCompanyLogoUrl()+') center / cover no-repeat'}"
+        *ngIf="company"
+        [hidden]="showPreloader"
     >
-    <!-- <img [src]="getCompanyLogoUrl()" class="qwe" alt="" *ngIf="checkLogo()" /> -->
-    <span *ngIf="!checkLogo()" [textContent]="company.name[0].toUpperCase()"></span>
+        <div class="company-info-aside__main-info">
+            <div
+                class="company-info-aside__main-avatar"
+                [ngStyle]="{'background': 'url('+getCompanyLogoUrl()+') center / cover no-repeat'}"
+            >
+                <!-- <img [src]="getCompanyLogoUrl()" class="qwe" alt="" *ngIf="checkLogo()" /> -->
+                <span
+                    *ngIf="!checkLogo()"
+                    [textContent]="company.name[0].toUpperCase()"
+                ></span>
+            </div>
+            <div
+                class="company-info-aside__name"
+                [textContent]="company.name"
+            ></div>
+            <!-- <div class="company-info-aside__email">info@dimensiondentistry.com</div> -->
+            <div class="company-info-aside__rating">
+                <ng-template
+                    class="assigned-ticket-user"
+                    ngFor
+                    let-reputation
+                    [ngForOf]="reputations"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <span
+                        class="company-info-aside__star"
+                        [ngClass]="{'icon__rating-filled' : reputation <= company.companyInfo.reputation, 'icon__rating' : reputation > company.companyInfo.reputation}"
+                    ></span>
+                </ng-template>
+            </div>
+        </div>
+        <hr class="company-info-aside__divider">
+        <div class="company-info-aside__row-info">
+            <div class="company-info-aside__row-info-line">
+                <div class="company-info-aside__row-info-label">Telephone</div>
+                <div
+                    class="company-info-aside__row-info-value"
+                    [textContent]="getPrimaryPhone() | preparePhone | mask: '(000) 000-0000' | phone"
+                ></div>
+            </div>
+            <div class="company-info-aside__row-info-line">
+                <div class="company-info-aside__row-info-label">Address</div>
+                <div class="company-info-aside__row-info-value">{{location}}</div>
+                <div
+                    class="company-info-aside__get-direction"
+                    (click)="onShowMap()"
+                >
+                    <span class="icon__get-direction"></span>
+                    Get Direction
+                </div>
+            </div>
+            <div class="company-info-aside__row-info-line">
+                <div class="company-info-aside__row-info-label">Website</div>
+                <div
+                    class="company-info-aside__row-info-value"
+                    [textContent]="company.domain"
+                ></div>
+            </div>
+            <div class="company-info-aside__row-info-line">
+                <div class="company-info-aside__row-info-label">Working Hours</div>
+                <div
+                    class="company-info-aside__row-info-value"
+                    [textContent]="'Opens  ' + workingTime"
+                ></div>
+            </div>
+            <div class="company-info-aside__row-info-line">
+                <div class="company-info-aside__row-info-label">Industry</div>
+                <div
+                    class="company-info-aside__row-info-value"
+                    [textContent]="(company.clientIndustry) ? company.clientIndustry.name : ''"
+                ></div>
+            </div>
+        </div>
+        <hr class="company-info-aside__divider">
+        <div class="company-info-aside__primary-contacts">
+            <div class="company-info-aside__primary-contacts-title">PRIMARY CONTACT(S)</div>
+            <div class="company-info-aside__primary-contact d-f">
+                <div
+                    class="company-info-aside__primary-contact-avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(primaryContact)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact)}"
+                ></div>
+                <div>
+                    <div
+                        class="company-info-aside__primary-contact-name"
+                        [textContent]="ticketsListService.getUserName(primaryContact)"
+                    ></div>
+                    <ng-template
+                        class="assigned-ticket-user"
+                        ngFor
+                        let-phoneNumber
+                        [ngForOf]="getPhoneNumbers(primaryContact.id)"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <div
+                            class="company-info-aside__ticket-created-name"
+                            [textContent]="phoneNumber.number | preparePhone | mask: '(000) 000-0000' | phone"
+                        ></div>
+                    </ng-template>
+                    <div
+                        class="company-info-aside__primary-contact-email"
+                        [textContent]="primaryContact.primaryEmail"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <hr class="company-info-aside__divider">
+        <div class="company-info-aside__ticket-created">
+            <div class="company-info-aside__ticket-created-title">Ticket Created by</div>
+            <div class="d-f">
+                <div
+                    class="company-info-aside__ticket-created-avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(createdUser)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(createdUser)}"
+                ></div>
+                <div>
+                    <div
+                        class="company-info-aside__ticket-created-name"
+                        [textContent]="ticketsListService.getUserName(createdUser)"
+                    ></div>
+                    <ng-template
+                        class="assigned-ticket-user"
+                        ngFor
+                        let-phoneNumber
+                        [ngForOf]="getPhoneNumbers(createdUser)"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <div
+                            class="company-info-aside__ticket-created-name"
+                            [textContent]="phoneNumber.number | preparePhone | mask: '(000) 000-0000' | phone"
+                        ></div>
+                    </ng-template>
+                    <div
+                        class="company-info-aside__ticket-created-email"
+                        [textContent]="createdUser.primaryEmail"
+                    ></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="company-info-aside__name" [textContent]="company.name"></div>
- <!--   <div class="company-info-aside__email">info@dimensiondentistry.com</div>-->
-    <div class="company-info-aside__rating">
-      <ng-template class="assigned-ticket-user" ngFor let-reputation [ngForOf]="reputations" let-i="index" [ngForTrackBy]="trackByIndex">
-      <span class="company-info-aside__star"   [ngClass]="{'icon__rating-filled' : reputation <= company.companyInfo.reputation, 'icon__rating' : reputation > company.companyInfo.reputation}"  ></span>
-
-      </ng-template>
-    </div>
-  </div>
-
-  <hr class="company-info-aside__divider">
-
-  <div class="company-info-aside__row-info">
-    <div class="company-info-aside__row-info-line">
-      <div class="company-info-aside__row-info-label">Telephone</div>
-      <div class="company-info-aside__row-info-value" [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"></div>
-    </div>
-
-    <div class="company-info-aside__row-info-line">
-      <div class="company-info-aside__row-info-label">Address</div>
-      <div class="company-info-aside__row-info-value">{{location}}</div>
-      <div class="company-info-aside__get-direction" (click)="onShowMap()"> <span class="icon__get-direction"></span>Get Direction</div>
-    </div>
-
-    <div class="company-info-aside__row-info-line">
-      <div class="company-info-aside__row-info-label">Website</div>
-      <div class="company-info-aside__row-info-value" [textContent]="company.domain"></div>
-    </div>
-
-    <div class="company-info-aside__row-info-line">
-      <div class="company-info-aside__row-info-label">Working Hours</div>
-      <div class="company-info-aside__row-info-value" [textContent]="'Opens  ' + workingTime"></div>
-    </div>
-
-    <div class="company-info-aside__row-info-line">
-      <div class="company-info-aside__row-info-label">Industry</div>
-      <div class="company-info-aside__row-info-value" [textContent]="(company.clientIndustry) ? company.clientIndustry.name : ''"></div>
-    </div>
-  </div>
-
-  <hr class="company-info-aside__divider">
-
-  <div class="company-info-aside__primary-contacts">
-    <div class="company-info-aside__primary-contacts-title">PRIMARY CONTACT(S)</div>
-
-    <div class="company-info-aside__primary-contact d-f">
-      <div class="company-info-aside__primary-contact-avatar"
-      [textContent]="ticketsListService.getAssignedUserNameForAvatar(primaryContact)"
-  [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact)}"
-      ></div>
-      <div>
-        <div class="company-info-aside__primary-contact-name" [textContent]="ticketsListService.getUserName(primaryContact)"></div>
-        <ng-template class="assigned-ticket-user" ngFor let-phoneNumber [ngForOf]="getPhoneNumbers(primaryContact.id)"  [ngForTrackBy]="trackByIndex">
-          <div class="company-info-aside__ticket-created-name"  [textContent]="phoneNumber.number"></div>
-          </ng-template>
-        <div class="company-info-aside__primary-contact-email" [textContent]="primaryContact.primaryEmail"></div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="company-info-aside__divider">
-
-  <div class="company-info-aside__ticket-created">
-    <div class="company-info-aside__ticket-created-title">Ticket Created by</div>
-
-    <div class="d-f">
-      <div class="company-info-aside__ticket-created-avatar"
-      [textContent]="ticketsListService.getAssignedUserNameForAvatar(createdUser)"
-      [ngStyle]="{'background': ticketsListService.getStyleAvatar(createdUser)}"></div>
-      <div>
-        <div class="company-info-aside__ticket-created-name"  [textContent]="ticketsListService.getUserName(createdUser)"></div>
-        <ng-template class="assigned-ticket-user" ngFor let-phoneNumber [ngForOf]="getPhoneNumbers(createdUser)"  [ngForTrackBy]="trackByIndex">
-          <div class="company-info-aside__ticket-created-name"  [textContent]="phoneNumber.number"></div>
-          </ng-template>
-        <div class="company-info-aside__ticket-created-email" [textContent]="createdUser.primaryEmail"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="loading" *ngIf="showPreloader"></div>
-  <app-company-info-history #companyHistory [user]="createdUser" [company]="company"></app-company-info-history>
-
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <app-company-info-history
+        #companyHistory
+        [user]="createdUser"
+        [company]="company"
+    ></app-company-info-history>
 </div>

@@ -78,7 +78,7 @@
             >
                 <!-- Add class '--closed' to close timeline -->
                 <div class="invoice-status-timeline__header qt-df qt-jc-sb">
-                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-ff-gm">Invoice Status</div>
+                    <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-fw-600">Invoice Status</div>
                     <div
                         class="qt-ic-c qt-sz-16 toggle-invoice-timeline"
                         (click)="toggleStatus = !toggleStatus"
@@ -107,7 +107,7 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-check"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Create Invoice</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Create Invoice</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 [textContent]="getStatusDate(invoiceProfile.date)"
@@ -117,14 +117,14 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Send Invoice</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Send Invoice</div>
                             <!-- <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div> -->
                         </div>
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__read-on"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Read on</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Read on</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 *ngIf="invoiceProfile.readedAt"
@@ -135,7 +135,7 @@
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__get-paid"></div>
                         <div>
-                            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Get paid</div>
+                            <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Get paid</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
                                 *ngIf="invoiceProfile.paidOn"
@@ -149,7 +149,7 @@
     <div class="invoice-aside-info-block qt-df qt-ai-c qt-jc-sb qt-pb-12 qt-pt-12 qt-pl-16 qt-pr-16">
       <div class="qt-df qt-ai-c">
         <div class="qt-circle qt-sz-40 qt-mr-10 icon__faster-payment"></div>
-        <div class="qt-ff-sb qt-color-dark">Get paid faster with online payment gateways</div>
+        <div class="qt-fw-600 qt-color-dark">Get paid faster with online payment gateways</div>
       </div>
 
       <div class="qt-df">
@@ -171,7 +171,7 @@
                             alt
                         >
                         <div
-                            class="qt-fs-13 qt-color-dark qt-ff-gm"
+                            class="qt-fs-13 qt-color-dark qt-fw-600"
                             [textContent]="invoiceProfile.techCompanyName"
                         ></div>
                         <div
@@ -184,16 +184,16 @@
                         ></div>
                     </div>
                     <div
-                        class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm"
+                        class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
                         [textContent]="'Invoice#' + invoiceProfile.number"
                     >
                     </div>
                 </div>
                 <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
                     <div class="qt-lh-154">
-                        <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
+                        <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
                         <div
-                            class="qt-fs-13 qt-color-dark qt-ff-gm"
+                            class="qt-fs-13 qt-color-dark qt-fw-600"
                             [textContent]="invoiceProfile.companyName"
                         ></div>
                         <div
@@ -219,7 +219,7 @@
                     <div class="qt-fs-13 qt-text-right qt-lh-154">
                         <div class="qt-df qt-jc-sb qt-mb-8">
                             <div
-                                class="qt-ff-gm qt-text-right invoice-info-title"
+                                class="qt-fw-600 qt-text-right invoice-info-title"
                                 [textContent]="invoiceProfile.taxIdDescription + ':'"
                             ></div>
                             <div
@@ -228,21 +228,21 @@
                             ></div>
                         </div>
                         <div class="qt-df qt-jc-sb qt-mb-8">
-                            <div class="qt-ff-gm qt-text-right invoice-info-title">Invoice Date:</div>
+                            <div class="qt-fw-600 qt-text-right invoice-info-title">Invoice Date:</div>
                             <div
                                 class="invoice-info-value"
                                 [textContent]="getDate(invoiceProfile.date)"
                             ></div>
                         </div>
                         <div class="qt-df qt-jc-sb qt-mb-8">
-                            <div class="qt-ff-gm qt-text-right invoice-info-title">Due Date:</div>
+                            <div class="qt-fw-600 qt-text-right invoice-info-title">Due Date:</div>
                             <div
                                 class="invoice-info-value"
                                 [textContent]="getDate(invoiceProfile.dueDate)"
                             ></div>
                         </div>
                         <div class="qt-df qt-jc-sb qt-mb-8">
-                            <div class="qt-ff-gm qt-text-right invoice-info-title">Balance Due:</div>
+                            <div class="qt-fw-600 qt-text-right invoice-info-title">Balance Due:</div>
                             <div
                                 class="invoice-info-value"
                                 [textContent]="invoiceProfile.totalSum | currency"
@@ -260,13 +260,13 @@
                     >
                         <div class="qt-mb-16">
                             <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
-                                <div class="invoice-preview__item-header-number qt-fs-10 qt-ff-gm qt-mr-16 qt-lh-12">#Ticket {{ticket.number}}</div>
+                                <div class="invoice-preview__item-header-number qt-fs-10 qt-fw-600 qt-mr-16 qt-lh-12">#Ticket {{ticket.number}}</div>
                                 <div class="invoice-preview__item-header-date qt-fs-12 qt-mr-12 qt-lh-133">
-                                    <span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">Date</span>
+                                    <span class="qt-fs-11 qt-mr-4 qt-fw-600 qt-lh-127">Date</span>
                                     {{getDateTicket(ticket.closedAt)}}
                                 </div>
                                 <div class="qt-fs-12 qt-lh-133">
-                                    <span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">Subject:</span>
+                                    <span class="qt-fs-11 qt-mr-4 qt-fw-600 qt-lh-127">Subject:</span>
                                     {{ticket.subject}}
                                 </div>
                             </div>
@@ -360,11 +360,11 @@
                         </div>
                     </ng-template>
                 </div>
-                <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+                <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
                     <div class="qt-mb-20 invoice-preview-notes">
-                        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
+                        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Customer Note</div>
                         <div
-                            class="qt-fs-13 qt-lh-154 note qt-ff-gr"
+                            class="qt-fs-13 qt-lh-154 note qt-fw-400"
                             *ngIf="invoiceProfile.regularNote"
                             [textContent]="invoiceProfile.regularNote.line1 +
         (invoiceProfile.regularNote.line2 || '')"
@@ -408,7 +408,7 @@
                 </div>
                 <div>
                     <div>
-                        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
+                        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Terms & Conditions</div>
                         <div
                             class="qt-fs-13 qt-lh-154 note"
                             *ngIf="invoiceProfile.termsAndConditions"

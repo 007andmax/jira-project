@@ -28,11 +28,11 @@
             class="report-header"
             *ngIf="onInit"
         >
-            <h1>Remote Connection Report</h1>
+            <h5 class="qt-fw-600 qt-color-white">Remote Connection Report</h5>
             <div class="company-info">
-                <h3>
+                <div class="body-m qt-color-white qt-text-right">
                     {{remoteConnectionReport.clientCompanyName || 'All companies'}}
-                </h3>
+                </div>
                 <p>
                     <span>{{remoteConnectionReport.startDate}}</span>
                     -
@@ -44,9 +44,9 @@
             class="header-product-list-ticket"
             *ngIf="onInit && remoteConnectionReport.lines"
         >
-            <h3>
+            <h5 class="qt-fw-600 qt-mb-6 qt-mt-20">
                 {{remoteConnectionReport.techCompanyName}}
-            </h3>
+            </h5>
             <p *ngIf="remoteConnectionReport.type === 'DETAILED'">
                 <span>Detailed</span>
                 quicktech connect support for

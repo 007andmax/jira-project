@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+
 import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
@@ -26,6 +25,16 @@ import { PasswordManagerStateService } from '../../states/password-manager/passw
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
 import { KafkaRealTimeService } from 'src/app/states/kafka/kafka-real-time.service';
+import { Stomp } from '@stomp/stompjs';
+import { environment } from 'src/environments/environment';
+import * as SockJS from 'sockjs-client';
+import { ConstantsService } from '../constants/constants.service';
+import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
+import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
+import { WebsocketStateService } from 'src/app/states/websocket/websocket-state.service';
+import { SupportPageCategoriesRealTimeService } from 'src/app/components/super-admin/state/support-page-categories/support-page-categories-real-time.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+
 
 /**
  * Websocket service to work with api
@@ -35,11 +44,13 @@ import { KafkaRealTimeService } from 'src/app/states/kafka/kafka-real-time.servi
 })
 export class WebsocketService {
 
-  private serverUrl = '/realtime';
+  private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
   public IsKafkaConnected: boolean = false;
 
+  isResetWebSocket: boolean = false;
+  ws;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -70,15 +81,27 @@ export class WebsocketService {
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
     private kafkaRealTimeService: KafkaRealTimeService,
+    private constantsService: ConstantsService,
+    private crmRealTimeService: CrmRealTimeService,
+    private marketingEmailRealTimeService: MarketingEmailRealTimeService,
+    private websocketStateService: WebsocketStateService,
+    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
+    private leftPanelStateService: LeftPanelStateService,
 
   ) {
   }
 
   public initializeWebSocketConnection() {
-    let ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
+    if (this.usersState.getCurrentUser().role !== "SUPER_ADMIN") this.onInitConnect();
+    if (this.usersState.getCurrentUser().role === "SUPER_ADMIN") this.onInitSuperAdminConnect();
+  }
+  onInitConnect() {
+    this.ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(this.ws);
+    this.stompClient.logRawCommunication = true;
+    this.onConnect();
     let that = this;
-    this.stompClient.connect({}, function () {
+    this.stompClient.onConnect = (data) => {
       that.subsribeToKafka();
       that.subsribeToPermissions();
       that.subsribeToUsers();
@@ -104,9 +127,56 @@ export class WebsocketService {
       that.subsribeToTags();
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
-    });
+      that.subsribeToCrm();
+      that.subsribeToCustomSubscription();
+      if (data.command === "CONNECTED") this.websocketStateService.initConnection();
+    }
+    this.stompClient.debug = (data) => {
+      console.log("debug", data);
+    }
+    this.stompClient.onWebSocketClose = (data) => {
+      setTimeout(() => {
+        this.onInitConnect();
+      }, 20000);
+    }
   }
+  onInitSuperAdminConnect() {
+    this.ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(this.ws);
+    this.stompClient.logRawCommunication = true;
+    this.onConnect();
+    let that = this;
+    this.stompClient.onConnect = (data) => {
+      that.subsribeToSupportCategory();
+      that.subsribeToTags();
+      if (data.command === "CONNECTED") this.websocketStateService.initConnection();
+    }
+    this.stompClient.debug = (data) => {
+      console.log("debug", data);
+    }
+    this.stompClient.onWebSocketClose = (data) => {
+      setTimeout(() => {
+        this.onInitSuperAdminConnect();
+      }, 20000);
+    }
+  }
+  connect() {
+    this.stompClient.connect({}, () => {
 
+    });
+    this.stompClient.activate();
+  }
+  onConnect() {
+    this.connect();
+    let checkOnline = setInterval(() => {
+      if (!window.navigator.onLine) this.isResetWebSocket = true;
+      if (this.isResetWebSocket && window.navigator.onLine) {
+        this.isResetWebSocket = false;
+        //  clearInterval(checkOnline);
+        this.connect();
+      }
+    }, 1000);
+  }
   private subsribeToDevices() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
@@ -137,6 +207,16 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimePermissions(newChange);//permissions
+        if (message.body) { }
+      });
+    }, 3000);
+  }
+
+  public subsribeToSupportCategory() {
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/supportCategory", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.supportPageCategoriesRealTimeService.handleRealTimeChanges(newChange);//permissions
         if (message.body) { }
       });
     }, 3000);
@@ -187,6 +267,20 @@ export class WebsocketService {
       });
     }, 3000);
   }
+
+  public subsribeToUserSubscriptions(id) {
+
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/subscription/${id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeSubscriptions(newChange);
+        if (message.body) {
+
+        }
+      });
+    }, 3000);
+  }
+
 
   /**
   * subscribe to recurring tickets realtime
@@ -286,6 +380,19 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/number/TICKET`, (message) => {
         var newChange = JSON.parse(message.body);
         this.ticketsRealTimeService.handleRealTimeChangesActualNumber(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToCrm() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/crm`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.crmRealTimeService.handleRealTimeChanges(newChange);
 
       });
 
@@ -454,12 +561,11 @@ export class WebsocketService {
 
     }, 3000);
   }
-
   public subsribeToKafka() {
     if (this.stompClient.connected) {
       this.stompClient.subscribe(`/user/watch/kafka`, (message) => {
         var newChange = JSON.parse(message.body);
-        this.kafkaRealTimeService.handleRealTimeChanges(newChange);       
+        this.kafkaRealTimeService.handleRealTimeChanges(newChange);
       });
       this.IsKafkaConnected = true;
     }
@@ -468,6 +574,18 @@ export class WebsocketService {
     }
   }
 
+  public subsribeToCustomSubscription() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/customSubscription`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.marketingEmailRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
+    }, 3000);
+  }
 
   getCookie(name) {
     var matches = document.cookie.match(new RegExp(

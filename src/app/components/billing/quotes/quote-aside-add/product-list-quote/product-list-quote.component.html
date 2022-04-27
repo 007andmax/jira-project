@@ -89,8 +89,9 @@
             </ngb-panel>
         </ngb-accordion>
         <div
-            class="select-product__footer-add-product qt-ff-gm"
+            class="select-product__footer-add-product qt-fw-600"
             (click)="onCreateProduct()"
+            *ngIf="getPermissions('MANAGE_PRODUCTS')"
         >
             + Add New Item
         </div>

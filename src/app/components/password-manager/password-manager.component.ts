@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
@@ -22,7 +22,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
   providers: [PasswordManagerListService]
 })
 
-export class PasswordManagerComponent implements OnInit {
+export class PasswordManagerComponent implements OnInit, OnDestroy {
   public recordsData: Array<PasswordRecord> = [];
   public list_records: Array<PasswordRecord> = [];
   showPreloader: boolean = true;
@@ -67,9 +67,9 @@ export class PasswordManagerComponent implements OnInit {
         this.recordsData.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index] = new PasswordRecord(newChange.data);
+        if (index > -1) this.recordsData[index].onUpdate(newChange.data);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-        if (indexList > -1) this.list_records[indexList] = new PasswordRecord(newChange.data);
+        if (indexList > -1) this.list_records[indexList].onUpdate(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
@@ -157,8 +157,14 @@ export class PasswordManagerComponent implements OnInit {
       this.cd.detectChanges();
     });
   }
+  public addRecord() {
+    this.passwordManagerService.showAddForm();
+  }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

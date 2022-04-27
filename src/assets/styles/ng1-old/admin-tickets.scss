@@ -1,14 +1,19 @@
 .main-container {
   padding-top: 64px;
-  background-color: #fff;
+  background-color: $white;
   min-height: 100vh;
-}
 
-@-moz-document url-prefix() {
-  .main-container > .row {
-    min-width: 1000px;
+  @media (max-width: 767px) {
+    padding-top: 0;
+    background-color: $background;
   }
 }
+
+//@-moz-document url-prefix() {
+//  .main-container > .row {
+//    min-width: 1000px;
+//  }
+//}
 
 .left-panel-closed .content-container {
   margin-left: 76px;

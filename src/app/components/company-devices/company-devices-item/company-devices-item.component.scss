@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .icon-list i {
     display: block;
 }
@@ -6,7 +8,7 @@
 }
 .company-device-hover:hover {
   td {
-    background-color: #f9fafb;
+    background-color: $gray-100;
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
       opacity: 0;
@@ -24,7 +26,7 @@
       display: flex;
     }
     input.name-text-input {
-      background-color: #F9FAFB;
+      background-color: $gray-100;
     }
   }
 }

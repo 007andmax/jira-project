@@ -31,9 +31,9 @@
         >
             <div class="customer-ticket__report">
                 <div class="report-header">
-                    <h1>Accounting report</h1>
+                    <h5 class="qt-fw-600 qt-color-white">Accounting report</h5>
                     <div class="company-info">
-                        <h3>{{ company.name }}</h3>
+                        <div class="body-m qt-color-white qt-text-right">{{ company.name }}</div>
                         <p>
                             <span>
                                 {{getDateForHeader(accountingReport.startDate)}}
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="customer-ticket__report--summary">
-                    <h3>Accounting report</h3>
+                    <div class="customer-ticket__report--summary-title">Accounting report</div>
                 </div>
                 <div
                     class="customer-ticket__report--details"

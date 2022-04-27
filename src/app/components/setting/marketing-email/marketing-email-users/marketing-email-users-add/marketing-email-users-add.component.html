@@ -1,0 +1,61 @@
+<div class="assign-ticket-content">
+    <div class="assign-ticket-header">
+        <div class="clearfix">
+            <span class="qt-input-search">
+                <input
+                    class="form-control"
+                    placeholder="Search Users"
+                    autocomplete="off"
+                    [(ngModel)]="search"
+                    (input)="onSearch()"
+                >
+            </span>
+        </div>
+    </div>
+    <div
+        class="scroll-pane"
+        #content
+        (click)="$event.preventDefault()"
+        infiniteScroll
+        [infiniteScrollContainer]="content"
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [infiniteScrollDisabled]="infiniteScrollDisabled"
+        [fromRoot]="true"
+        (scrolled)="onScroll()"
+    >
+        <div class="users-list custom-scroll">
+            <ng-template
+                ngFor
+                let-user
+                [ngForOf]="users"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <marketing-email-users-item
+                    (onSelect)="onSelect($event)"
+                    [user]="user"
+                ></marketing-email-users-item>
+            </ng-template>
+        </div>
+    </div>
+    <div class="qt-df qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16 qt-bg-white">
+        <button
+            class="qt-button qt-mr-12"
+            ngbDropdownItem
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="onAdd()"
+        >
+            <span *ngIf="!addBtn.isBlock()">Save</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+        </button>
+        <button
+            class="qt-button --gray"
+            ngbDropdownItem
+            (click)="close()"
+        >
+            Cancel
+        </button>
+    </div>
+</div>

@@ -16,7 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
-import { InvoiceTicketsService } from 'src/app/components/setting/invoice-tickets/invoice-tickets.service';
+import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { InvoiceNote } from '../../class/invoice-note';
 import { NoteService } from 'src/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
@@ -24,6 +24,7 @@ import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -55,6 +56,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private elRef: ElementRef,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
     private noteService: NoteService,
     private ticketsService: TicketsService,
@@ -218,6 +220,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

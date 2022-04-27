@@ -49,6 +49,9 @@ export class ContractsTableItemComponent implements OnInit {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+
+  }
+  ngDoCheck() {
     this.showNotificationReview = this.contractsListService.isShowUpdateNotificationReview(this.contract.reviewDate);
     this.cd.detectChanges();
   }

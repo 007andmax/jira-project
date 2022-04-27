@@ -7,7 +7,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByTechTicketReport()"
                 >
                     Get
@@ -43,7 +43,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByTechSaleReport()"
                 >
                     Get
@@ -89,7 +89,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByRemoteConnectionReport()"
                     [disabled]="remoteConnectionReport.preloaderDevices"
                 >
@@ -150,7 +150,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByDeviceIpSummary()"
                     [disabled]="deviceIpSummary.preloaderDevices"
                 >
@@ -280,7 +280,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByHardwareSummary()"
                     [disabled]="hardwareSummaryReport.preloaderDevices"
                 >
@@ -386,7 +386,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportBySoftwareSummary()"
                 >
                     Get
@@ -412,6 +412,7 @@
                         [search]="true"
                         [change]="true"
                         [placeholder]="'All devices'"
+                        [preloader]="softwareSummaryReport.preloaderDevices"
                         [isDisabled]="!softwareSummaryReport.companyId"
                         [dropdownHeight]="'300px'"
                         [list]="devices"
@@ -497,7 +498,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportCommonCommissions()"
                 >
                     Get
@@ -539,7 +540,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportDetailedCommissions()"
                 >
                     Get
@@ -605,7 +606,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByAccounting()"
                 >
                     Get
@@ -641,12 +642,25 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByTechService()"
                 >
                     Get
           Report
                 </button>
+                <div class="form-group content service-name">
+                    <div>
+                        <input
+                            type="text"
+                            name="serialNumber"
+                            [(ngModel)]="techService.serviceName"
+                            autocomplete="off"
+                            class="form-control"
+                            placeholder="Service Number"
+                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                        >
+                    </div>
+                </div>
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -654,6 +668,18 @@
                         [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
+                </div>
+                <div class="form-group content">
+                    <app-drop-down
+                        [placeholder]="'Select Company'"
+                        [list]="companies"
+                        [validate]="validate.getCompany()"
+                        [errorMessage]="'Please select the company name'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="selectClient($event)"
+                    ></app-drop-down>
                 </div>
                 <div class="grey-dropdown form-group content select-users-list">
                     <app-tech-users-list-report
@@ -673,7 +699,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByGlNumber()"
                 >
                     Get
@@ -720,7 +746,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByTaxes()"
                 >
                     Get
@@ -778,7 +804,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByAccountsReceivable()"
                 >
                     Get
@@ -804,7 +830,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByProducts()"
                 >
                     Get
@@ -876,7 +902,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByCustomers()"
                 >
                     Get
@@ -942,7 +968,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByTickets()"
                 >
                     Get
@@ -1026,7 +1052,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportByService()"
                 >
                     Get
@@ -1075,7 +1101,7 @@
         >
             <div class="new-reports-reverse">
                 <button
-                    class="form-group btn btn-success"
+                    class="btn-new btn-primary-white qt-fs-0"
                     (click)="getReportCompanyProducts()"
                 >
                     Get

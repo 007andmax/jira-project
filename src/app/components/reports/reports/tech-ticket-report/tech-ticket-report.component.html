@@ -30,7 +30,7 @@
         >
             <div class="customer-ticket__report">
                 <div class="report-header">
-                    <h1>Tech Ticket Report</h1>
+                    <h5 class="qt-fw-600 qt-color-white">Tech Ticket Report</h5>
                     <div
                         class="company-info"
                         *ngIf="techTicketReport.startDate !== '' && techTicketReport.endDate !== ''"
@@ -48,7 +48,7 @@
                 </div>
                 <div *ngIf="onInit">
                     <div class="header-product-list-ticket">
-                        <h4>Created Tickets vs Closed</h4>
+                        <div class="header-product-list-ticket__title">Created Tickets vs Closed</div>
                     </div>
                     <nvd3
                         [options]="chartOptionsToggler"

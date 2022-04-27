@@ -1,15 +1,22 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
-
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DELETE_TECH_USER } from 'src/app/const/confirm';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 declare var $;
 
@@ -43,9 +50,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   cropAvatar: any;
   fileAvatar: any = null; // return result when first time image upload
   popup: boolean;
-  deletepopup: boolean;
   userId: any;
   IdList: any;
+  idUploadFile: string;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('editBtn') editBtn: DisabledBtnDirective;
+  sub: Subscription = new Subscription();
   constructor(
     private techUsersService: TechUsersService,
     private formBuilder: FormBuilder,
@@ -54,6 +64,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
+    private imageCropperStateService: ImageCropperStateService,
+    private permissionsService: PermissionsService,
+    private modalService: NgbModal,
+    private companiesService: CompaniesService,
   ) {
 
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
@@ -98,8 +114,41 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.getUsers();
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersComponent');
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
+          this.removeTechUser();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
+    this.onCroppImage();
   }
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (data) this.croppedImage = data.croppedImage;
+      if (this.create) {
+        if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+        });
+        if (this.cropAvatar && data) this.companiesService.removeAttachment(this.cropAvatar.origin.id).subscribe(res => {
+          this.cropIt();
+        });
+        if (!this.cropAvatar && data) this.cropIt();
+      }
+      if (this.edit) {
+        if (!data) this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+        });
+        if (data && this.selectedTechUser.avatar) this.settingService.deleteAvatar(this.selectedTechUser.id).subscribe(res => {
+          this.selectedTechUser.avatar = null;
+          this.cropIt();
+        });
+        if (data && !this.selectedTechUser.avatar) this.cropIt();
+      }
 
+
+    })
+    this.sub.add(getConfirm);
+  }
   ngAfterViewInit(): void { }
 
   // convenience getter for easy access to form fields
@@ -127,7 +176,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.userId = id;
     this.popup = true;
   }
-
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   restoreUser() {
     this.loading = true; $(".loading").css("display", "block");
     this.techUsersService.restoreUser(this.userId)
@@ -168,7 +219,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         (techUsers: any) => {
           this.loading = false; $(".loading").css("display", "none");
-          // this.archivedemailNotification(this.userlist);
           let users = this.userlist.filter(user => user.accountType.toLowerCase() === 'tech');
           this.IdList = users.map(({ id }) => id);
           if (techUsers) {
@@ -176,11 +226,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.techUserIdList = techUsers.map(({ id }) => id);
             var IdList1 = [];
             if (this.techUserIdList) {
-              // this.emailNotification(this.techUserIdList);
               IdList1 = this.IdList.concat(this.techUserIdList);
             }
+            this.emailNotification(this.techUserIdList);
           }
-          this.allEmailNotification(IdList1);
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
@@ -229,9 +278,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.IdList.forEach(element => {
               this.archivedtechUseremailNotificationList.push(eNotifications[element]);
             });
-            this.techUserIdList.forEach(element => {
-              this.techUseremailNotificationList.push(eNotifications[element]);
-            });
+            this.techUseremailNotificationList = eNotifications;
           }
         })
       )
@@ -244,6 +291,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
 
   emailNotificationDropDown(index: number) {
+    if (!this.getPermissions('EDIT_USERS')) return;
     if (this.selectedIdx !== index) {
       this.selectedIdx = index;
     } else {
@@ -307,7 +355,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
     this.edit = true;
-
     this.selectedTechUser = techUser;
     if (techUser) {
       const notification = this.techUseremailNotificationList[techUser.id];
@@ -327,7 +374,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
-    this.deletepopup = true;
+    this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.cd.detectChanges();
   }
 
@@ -344,7 +393,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         .pipe(
           map(archiveUser => {
             this.loading = false; $(".loading").css("display", "none");
-            this.deletepopup = false;
             // deleted techuser.
             // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
             //   this.techUsers.splice(
@@ -386,16 +434,20 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.loading = true; $(".loading").css("display", "block");
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           this.loading = false; $(".loading").css("display", "none");
           if (result) {
-            this.isCroppedImg = true;
+            //    this.isCroppedImg = true;
             this.fileAvatar = result;
+            this.idUploadFile = result.id;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
+            event.target.value = null;
           }
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
           this.isCroppedImg = false;
+          event.target.value = null;
         }
       );
     }
@@ -403,13 +455,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   onInputClick(event: any) {
     event.target.value = '';
-  }
-
-  /**
-   * image croped event
-   */
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event;
   }
 
   cropIt() {
@@ -520,8 +565,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     if (this.isEmailIdUnique) {
-      const objTechUser = {
-        avatar: this.cropAvatar || {},
+      let objTechUser: any = {
         techRole: this.techUserForm.value.techRole
           ? this.techUserForm.value.techRole
           : this.techRoles[0],
@@ -531,9 +575,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         companyId: this.currentCompanyId,
         subscription: {}
       };
+      if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
       this.loading = true; $(".loading").css("display", "block");
+      this.addBtn.setDisabled(true);
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
+          this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
           this.loading = false; $(".loading").css("display", "none");
           this.create = false;
@@ -541,18 +588,25 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (savedTechUsre && savedTechUsre.id) {
             this.saveUsersEmailNotifications(savedTechUsre.id);
           }
+
         },
         error => {
+          this.addBtn.setDisabled(false);
           this.create = false;
           this.loading = false; $(".loading").css("display", "none");
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
+
         }
       );
     } else {
     }
   }
-
+  deleteAttachment() {
+    this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+      this.croppedImage = null;
+    });
+  }
   /**
    * delete avatar
    */
@@ -704,11 +758,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       : null;
 
     this.loading = true; $(".loading").css("display", "block");
+    this.editBtn.setDisabled(true);
     this.techUsersService
       .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
       .subscribe(
         res => {
           // this.getUsers();
+          this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
           this.techUserForm.reset();
           if (this.techUserIdList) {
@@ -718,12 +774,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           this.selectedTechUser = null;
           this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
+
         },
         error => {
+          this.editBtn.setDisabled(false);
           this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
+
         }
       );
 
@@ -755,6 +814,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     $('body').removeClass('ng7');
+    this.sub.unsubscribe();
     // Do not forget to unsubscribe the event
   }
 

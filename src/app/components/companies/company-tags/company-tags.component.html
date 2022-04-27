@@ -4,7 +4,10 @@
     (openChange)="openChange($event)"
     #dp="ngbDropdown"
 >
-    <mat-form-field ngbDropdownAnchor>
+    <mat-form-field
+        ngbDropdownAnchor
+        [ngClass]="{'hidde-label' :!showLabel}"
+    >
         <mat-chip-list
             #chipList
             aria-label="Fruit selection"
@@ -12,13 +15,13 @@
             <mat-chip
                 *ngFor="let tag of selectedTag; let i = index"
                 [selectable]="selectable"
-                [removable]="removable"
+                [removable]="!isDisabled"
                 (removed)="remove(i)"
             >
                 {{tag.word}}
                 <mat-icon
                     matChipRemove
-                    *ngIf="removable"
+                    *ngIf="!isDisabled"
                 >
                     cancel
                 </mat-icon>
@@ -35,6 +38,9 @@
                 [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
+                autocomplete="off"
+                [ngClass]="{'disabled': isDisabled}"
+                [disabled]="isDisabled"
             >
         </mat-chip-list>
     </mat-form-field>
@@ -67,6 +73,7 @@
                     class="company-tag-item"
                     [ngClass]="{'is-hover':item.isHover}"
                     [id]="'tag-' + item.id"
+                    *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG' && !blockUserTag || item.defaultTag && item.defaultTag !== 'USER_TAG'"
                 >
                     <label class="qt-checkbox pointer">
                         <input

@@ -80,8 +80,10 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     });
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
     let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
+      if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       this.devicesStateService.subsribeToNetScan(this.companyId);
@@ -254,5 +256,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
     this.websocketService.unSubsribeNetScan();
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

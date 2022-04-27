@@ -3,7 +3,8 @@ import {
   OnInit,
   ElementRef,
   ViewChild,
-  NgZone
+  NgZone,
+  OnDestroy
 } from '@angular/core';
 import {
   FormGroup,
@@ -14,11 +15,17 @@ import {
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { MapsAPILoader } from '@agm/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CrmCompanyJobTitle } from '../../crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
+import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 // import { ToastrService } from 'ngx-toastr';
 
@@ -28,7 +35,7 @@ declare var google: any;
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   loading = false;
   submitted = false;
   uniqueEmail = true;
@@ -45,16 +52,17 @@ export class ProfileComponent implements OnInit {
   public suffix = '';
   public currentUser: any;
   public profileForm: FormGroup;
-
+  idUploadFile: string;
   // addres google map
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
-
+  selectedJobTitle: CrmCompanyJobTitle;
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   @ViewChild('search')
   public searchElementRef: ElementRef;
-
+  sub: Subscription = new Subscription();
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,
@@ -62,11 +70,16 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private crmStateService: CrmStateService,
+    private imageCropperStateService: ImageCropperStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
+    private companiesService: CompaniesService,
   ) {
     // this.getCurrentUser();
     // this.getUserProfile();
   }
+
 
   ngOnInit() {
     this.imageSrc = '';
@@ -102,9 +115,8 @@ export class ProfileComponent implements OnInit {
         [Validators.required, Validators.pattern(emailPattern)]
       ],
       secondaryEmail: [this.currentUser.secondaryEmail],
-      designation: [
-        this.currentUser.designation,
-        [Validators.minLength(3), Validators.maxLength(15)]
+      jobTitleId: [
+        (this.currentUser.jobTitle) ? this.currentUser.jobTitle.id : null
       ],
       primaryPhone: [''],
       primaryPhoneType: ['MOBILE'],
@@ -118,8 +130,31 @@ export class ProfileComponent implements OnInit {
       aboutMe: [''],
       image: ['']
     });
-
+    if (this.currentUser.jobTitle) this.selectedJobTitle = new CrmCompanyJobTitle(JSON.parse(JSON.stringify(this.currentUser.jobTitle)));
     this.getAddressAutocomplete();
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+    this.onCroppImage();
+  }
+  public onCroppImage() {
+    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (data) {
+        this.croppedImage = data.croppedImage;
+        if (this.imageSrc != '') this.userService
+          .removeAvatar(this.currentUser.id)
+          .subscribe(res => {
+            this.cropIt();
+          })
+        if (this.imageSrc == '') this.cropIt();
+      } else {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+        });
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   /**
@@ -127,6 +162,12 @@ export class ProfileComponent implements OnInit {
    */
   get f() {
     return this.profileForm.controls;
+  }
+  onSelectRole(data) {
+    this.profileForm.patchValue({
+      jobTitleId: (data) ? data.id : null
+    });
+    this.selectedJobTitle = data;
   }
 
   /**
@@ -300,20 +341,23 @@ export class ProfileComponent implements OnInit {
    */
   onSelectFile(event) {
     this.imageChangedEvent = event;
-    this.isCroppedImg = true;
+    // this.isCroppedImg = true;
 
     if (event.target.files && event.target.files[0]) {
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
 
       this.settingService.fileAvatar(fromData).subscribe(
-        result => {
+        (result: any) => {
           if (result) {
             this.imageOrigin = result;
+            this.idUploadFile = result.id;
+            this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
+            event.target.value = null;
           }
         },
         error => {
-
+          event.target.value = null;
         }
       );
     }
@@ -372,7 +416,7 @@ export class ProfileComponent implements OnInit {
                 avatar: updateAvatar,
                 firstName: this.profileForm.value.userName,
                 lastName: this.profileForm.value.lastName,
-                designation: this.profileForm.value.designation,
+                jobTitleId: this.profileForm.value.jobTitleId,
                 primaryEmail: this.profileForm.value.primaryEmail,
                 secondaryEmail: null,
                 signature: this.userProfile.signature
@@ -456,7 +500,7 @@ export class ProfileComponent implements OnInit {
               avatar: null,
               firstName: this.profileForm.value.userName,
               lastName: this.profileForm.value.lastName,
-              designation: this.profileForm.value.designation,
+              jobTitleId: this.profileForm.value.jobTitleId,
               primaryEmail: this.profileForm.value.primaryEmail,
               secondaryEmail: null,
               signature: this.userProfile.signature
@@ -582,7 +626,7 @@ export class ProfileComponent implements OnInit {
         avatar: this.currentUser.avatar,
         firstName: this.profileForm.value.firstName,
         lastName: this.profileForm.value.lastName,
-        designation: this.profileForm.value.designation,
+        jobTitleId: this.profileForm.value.jobTitleId,
         primaryEmail: this.profileForm.value.primaryEmail,
         signature: this.userProfile.signature,
         secondaryEmail: this.profileForm.value.secondaryEmail
@@ -612,5 +656,8 @@ export class ProfileComponent implements OnInit {
           this.loading = false; $(".loading").css("display", "none");
         }
       );
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -1,12 +1,75 @@
-/deep/ .igx-overlay__content {
+@import "./src/assets/styles/variable";
+
+.durationoverlay__content {
+  pointer-events: all;
+  box-sizing: content-box;
+}
+.duration-picker {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 340px;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.duration-picker--dropdown {
+  min-width: 200px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
+}
+.duration-picker__main {
+  background: #fff;
+  flex: 1 1 auto;
+}
+.duration-picker__body {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+}
+.duration-picker__hourList {
+  text-align: right;
+}
+.duration-picker__column {
+  max-width: 64px;
+  height: 325px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+}
+.duration-picker__minuteList {
+  text-align: center;
+}
+.duration-picker__item {
+  width: 54px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/deep/ .durationoverlay__content {
   height: 297px !important;
   width: 180px !important;
   min-width: 180px;
-  border: solid 1px #dfe3e8;
+  border: solid 1px $gray-400;
   border-radius: 4px;
   opacity: 0;
+  position: relative;
 
-  .igx-time-picker--dropdown {
+  @media (max-width: 767px) {
+    width: 100% !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    border: none;
+    background: $white;
+  }
+
+  .duration-picker--dropdown {
     height: 297px !important;
     width: 180px !important;
     min-width: 180px;
@@ -14,48 +77,70 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
+    @media (max-width: 767px) {
+      width: 100% !important;
+      max-width: calc(100% - 32px) !important;
+      margin: 0 auto;
+    }
+
     position: relative;
-    &:before {
-      content: '\00a0Hour\00a0\00a0\00a0\00a0\00a0\0a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0 Minute';
+
+    &::before,
+    &::after {
+      content: "\00a0Hour\00a0\00a0\00a0\00a0\00a0\0a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0 Minute";
       font-size: 12px;
       position: absolute;
       top: 0;
       height: 32px;
       width: 100%;
-      box-shadow: 0 0px 11px 0px rgba(0, 0, 0, 0.05);
-      background: white;
+      box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.05);
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: solid 1px #dfe3e8;
+      border-bottom: solid 1px $gray-400;
+
+      @media (max-width: 767px) {
+        color: $primary-2;
+        content: "Hour";
+        background: transparent;
+        transform: translateX(-25%);
+      }
+    }
+
+    &:after {
+      content: "";
+      @media (max-width: 767px) {
+        content: "Minute";
+        transform: translateX(25%);
+      }
     }
   }
 
-  .igx-time-picker__item {
+  .duration-picker__item {
     font-size: 12px;
     padding: 0;
     width: 34px;
     height: 32px;
     border-radius: 6px;
-    color: #364656;
+    color: $primary-2;
     &:hover {
-      color: #16a4fa;
+      color: $primary-1;
     }
   }
 
-  .igx-time-picker__body {
+  .duration-picker__body {
     height: 226px;
     padding: 0;
   }
 
-  .igx-time-picker__item--selected {
-    border: 1px solid #16a4fa;
-    color: #16a4fa;
+  .duration-picker__item--selected {
+    border: 1px solid $primary-1;
+    color: $primary-1;
     font-weight: 600;
   }
 
-  .igx-time-picker__column {
+  .duration-picker__column {
     width: 100%;
     height: 226px;
     padding: 23px 0;
@@ -63,79 +148,74 @@
     max-width: 300px;
     align-items: center;
     &:before {
-      content: '';
-      background-image: url('/assets/img/icons/scroll-up.svg');
+      content: "";
+      background-image: url("/assets/img/icons/scroll-up.svg");
       background-size: cover;
       top: 6px;
       position: absolute;
       width: 16px;
       height: 16px;
-      border-radius: 16px;
       box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
       border-radius: 50%;
     }
     &:after {
-      content: '';
-      background-image: url('/assets/img/icons/scroll-down.svg');
+      content: "";
+      background-image: url("/assets/img/icons/scroll-down.svg");
       background-size: cover;
       bottom: 6px;
       position: absolute;
       width: 16px;
       height: 16px;
-      border-radius: 16px;
       box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
       border-radius: 50%;
     }
     &:first-child {
-      border-right: solid 1px #dfe3e8;
+      border-right: solid 1px $gray-400;
     }
   }
 }
-
 
 /deep/ app-ticket-profile-updates-service-duration {
   margin-right: 8px;
   width: 105px;
 }
 
-/deep/ igx-time-picker {
+/deep/ duration-picker {
   width: 100%;
-  background: white;
+  background: $white;
   height: 40px;
   border-radius: 3px;
-  border: solid 1px #c4cbd5;
+  border: solid 1px $gray-500;
   padding: 0px 12px;
   display: flex;
   align-items: center;
 
   input {
     font-size: 13px !important;
-    color: #404b5f !important;
+    color: $gray-800 !important;
     height: 40px !important;
   }
 }
 
-/deep/ .igx-input-group {
-  .igx-input-group__bundle {
+/deep/ .durationinput-group {
+  .durationinput-group__bundle {
     padding: 0;
   }
 
-  .igx-input-group__label {
+  .durationinput-group__label {
     display: none;
   }
 
-  igx-prefix {
+  durationprefix {
     display: none !important;
   }
-  .igx-input-group__border {
+  .durationinput-group__border {
     display: none;
   }
 
-  .igx-input-group__bundle {
+  .durationinput-group__bundle {
     box-shadow: none;
   }
-
-
 }
 
 .action-buttons {
@@ -146,12 +226,28 @@
     height: 40px;
     border: none;
     font-weight: 600;
-    background: #16a4fa;
-    color: white;
+    background: $primary-1;
+    color: $white;
     width: 100%;
+    text-align: center;
   }
 }
-
 .--input-error-validate {
-      border: solid 1px #ff5263 !important;
+  border: solid 1px $warning !important;
+}
+.app-drop-down__dropdown {
+  width: max-content;
+  max-height: 300px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.26), 0 8px 10px 1px rgba(0, 0, 0, 0.12), 0 3px 14px 2px rgba(0, 0, 0, 0.08);
+}
+.duration-container-input {
+  height: 40px;
+  width: 105px;
+  border: solid 1px #c5cdd5;
+  border-radius: 4px;
+  padding: 10px 12px;
+  background: #ffffff;
+}
+.icn-remove-old {
+  top: 14px;
 }

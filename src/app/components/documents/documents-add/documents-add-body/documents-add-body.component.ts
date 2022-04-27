@@ -115,7 +115,6 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
           };
           //self.codox.init(config);
         },
-
         'image.uploaded': function ($img) {
           // Do something here.
           // this is the editor instance.

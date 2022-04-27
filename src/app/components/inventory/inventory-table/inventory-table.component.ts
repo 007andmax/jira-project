@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -6,7 +6,9 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_PRODUCT } from 'src/app/const/confirm';
-import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ContractsService } from 'src/app/services/contracts/contracts.service';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { InventoryCheckUseComponent } from '../inventory-check-use/inventory-check-use.component';
 
 @Component({
   selector: 'app-inventory-table',
@@ -23,7 +25,7 @@ export class InventoryTableComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private productService: ProductService) { }
+  ) { }
 
   ngOnInit() {
   }
@@ -32,8 +34,8 @@ export class InventoryTableComponent implements OnInit {
   }
   delete() {
     this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Do you want to delete product?`;
+    const modalRef = this.modalService.open(InventoryCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory" });
+    modalRef.componentInstance.inventory = this.inventory;
     this.inventoryStateService.setProductForDelete(this.inventory);
   }
   public getGlNumberName() {

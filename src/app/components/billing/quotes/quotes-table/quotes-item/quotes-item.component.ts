@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-quotes-item',
@@ -29,6 +30,7 @@ export class QuotesItemComponent implements OnInit {
   @Output() onTicket = new EventEmitter<any>();
   @Output() onInvoice = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
+    private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
@@ -91,6 +93,9 @@ export class QuotesItemComponent implements OnInit {
   public checkStatus(quote, statusForShowingArray) {
     const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
     return elems.length > 0;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public getStatusText(status) {
     return status.toLowerCase()

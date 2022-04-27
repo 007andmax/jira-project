@@ -13,7 +13,7 @@ import { CompanyTimeZoneStateService } from '../company-time-zone/services/compa
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
-import { CROPP_AVATAR_COMPANY } from 'src/app/const/image-cropp';
+import { CROPP_AVATAR_COMPANY, EDIT_AVATAR_COMPANY } from 'src/app/const/image-cropp';
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../class/company-edit-logo';
@@ -22,6 +22,12 @@ import { User } from '../../users/class/user';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { CompanyAssociateComponent } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.component';
+import { AppService } from 'src/app/states/app/app.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -31,12 +37,12 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
-  industries: Array<CompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   selectedTechLead: ItemFilterPerson;
-  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
-  serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
+  serviceTypes: Array<CrmCompanyServiceType> = [];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
@@ -50,16 +56,22 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   validate: CompanyValdiate = new CompanyValdiate();
   sub: Subscription = new Subscription();
   locationIsinit: boolean = false;
+  selectedJobTitle: CrmCompanyJobTitle;
+  idUploadFile: string;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
-  @ViewChild('designation') designation: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
-  allTitles: Array<string> = [];
-  constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
-    private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
+  @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
+  constructor(private companiesStateService: CompaniesStateService,
+    private companiesService: CompaniesService,
+    private usersStateService: UsersStateService,
+    private modalService: NgbModal,
+    private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
     private usersService: UsersService,
     private companySubscriptionState: CompanySubscriptionStateService,
@@ -67,50 +79,56 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     private companyTagsStateService: CompanyTagsStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
+    public appService: AppService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.company.fullVersion();
-    this.industries = this.companiesStateService.getIndustries();
-    this.companiesStateService.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+    if (this.crmStateService.getServiceTypeList().length === 0) {
+      this.crmStateService.onInitGetServiceTypeList();
+    } else {
+      this.serviceTypes = this.crmStateService.getServiceTypeList();
+    }
+    let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
+      this.serviceTypes = data;
+      if (this.serviceType) this.serviceType.reset(this.serviceTypes);
+    })
+    this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
-      this.getUsersTitle(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTehusers(data);
-      this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
     this.onEditCompany();
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-  }
 
+  removeLogo() {
+    this.companiesService.removeAvatar(this.company.id).subscribe(data => {
+      this.company.editLogo(null);
+    })
+  }
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);
     if (index > -1) return this.paymentMethods[index];
     return null;
   }
-  onSelectDesignation(data) {
-    this.company.contacts[0].designation = data;
+  onSelectJobTitle(data) {
+    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
+    this.selectedJobTitle = data;
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
@@ -151,32 +169,31 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company = new CompanyProfile();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
-    this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
     this.selectedTechLead = null;
     this.validate = new CompanyValdiate();
     this.clientType.clearWithOutChanges();
-    this.designation.clearWithOutChanges();
+    this.jobTitleDp.clearWithOutChanges();
     this.paymentTerm.clearWithOutChanges();
     this.paymentMethod.clearWithOutChanges();
     this.serviceType.clearWithOutChanges();
-
 
   }
   onEditCompany() {
     let getCompanyFromEdit = this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
-      if (this.company.contacts[0].subscription) this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
+      if (this.company.contacts[0].defaultSubscriptions) this.companySubscriptionState.onEditMode(this.company.contacts[0].defaultSubscriptions);
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
-      let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+      let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
       if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
+      this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].jobTitleId);
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
@@ -185,14 +202,18 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getCompanyFromEdit);
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }
   public onChangeType() {
     this.validate.checkValidType(this.company.clientType);
   }
-
+  public onChangedAssociatedCompanies(data) {
+    this.company.associatedCompanies = data.map(item => {
+      return { id: item };
+    })
+  }
 
   public onSelectTechLead(event) {
     if (event) {
@@ -210,7 +231,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onSelectServiceTypes(item) {
-    this.company.serviceType = item.value;
+    this.company.serviceType = (item) ? item.name : null;
   }
   onCheckEmail() {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
@@ -225,7 +246,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
   public onChangeSubscribe(data) {
-    data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
+    data.forEach(item => this.company.contacts[0].defaultSubscriptions[item.field] = item.selected);
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);
@@ -269,6 +290,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   onSelectClientIndustry(item) {
     this.company.clientIndustry.name = (item) ? item.name : null;
   }
+  getAssociatedCompaniesIds() {
+    return this.company.associatedCompanies.map(item => item.id);
+  }
   public onChangeTags(tags) {
     this.company.setTags(tags);
   }
@@ -285,16 +309,33 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_COMPANY) return;
-      this.companiesService.editCompanyAvatar(this.company.id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
-        this.company.id, (data.edit) ? this.company.logo.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
-          this.company.editLogo(res);
-        })
+      if (this.imageCropperStateService.getAction() === EDIT_AVATAR_COMPANY) {
+        if (this.opened && data) this.editCompanyAvatar(data);
+        return;
+      }
+      if (this.opened && !data) {
+        this.companiesService.removeAttachment(this.idUploadFile).subscribe(res => {
+
+        });
+      }
+      if (!this.opened || !data) return;
+      if (this.company.logo) this.companiesService.removeAvatar(this.company.id).subscribe(res => {
+        this.editCompanyAvatar(data);
+      })
+      if (!this.company.logo) this.editCompanyAvatar(data);
+
     })
     this.sub.add(getConfirm);
   }
+  editCompanyAvatar(data) {
+    this.companiesService.editCompanyAvatar(this.company.id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
+      this.company.id, (data.edit) ? this.company.logo.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
+        this.company.editLogo(res);
+      })
+  }
   public onChangeAvatar() {
     this.downloadCompanyLogo().then(data => {
+      this.imageCropperStateService.setAction(EDIT_AVATAR_COMPANY);
       this.modalImageCropperStateService.onInitOpen(new ImageCroper(data, this.company.logo.origin.id, true));
       this.cd.detectChanges();
     })
@@ -319,7 +360,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     return null;
   }
   getSelectedServiceType() {
-    let index = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+    let index = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
     if (index > -1) return this.serviceTypes[index];
     return "";
   }
@@ -361,7 +402,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   };
   public uploadFileOnBrower(event) {
     this.imageCropperStateService.setAction(CROPP_AVATAR_COMPANY);
-    this.imageCropperStateService.uploadFileOnBrower(event);
+    this.imageCropperStateService.uploadFileOnBrower(event).then((data: any) => {
+      this.idUploadFile = data.id;
+    })
   }
   changeFile(file) {
     return new Promise((resolve, reject) => {

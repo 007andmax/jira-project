@@ -102,7 +102,7 @@ export class InvoicesAsideComponent implements OnInit {
     this.amountReceived = 0;
   }
   public onChangePayment(val, invoice) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     invoice.paymentAmount = parseFloat((((value) * 100) / 100).toFixed(2));
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);

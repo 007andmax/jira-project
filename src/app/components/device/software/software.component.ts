@@ -68,18 +68,18 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.setPreviewDataDevice();
       }, 300);
       return;
     }
-      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-        if (resp.length > 0) {
-          this.asset = resp[0];
-          this.getSoftwareDetail(this.asset.ID);
-        }
-      });
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.asset = resp[0];
+        this.getSoftwareDetail(this.asset.ID);
+      }
+    });
   }
 
   onFilter(field) {
@@ -232,7 +232,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       font-style: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #4f5f79;
+      color: $gray-800;
       background-color: #f3f7f9;
     }
     h1,
@@ -283,7 +283,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       localStorage.getItem("currentCompanyName") +
       ` - Software Summary Report</p>
                   <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
-      (this.deviceDetail.Title || this.deviceDetail.Name)  +
+      (this.deviceDetail.Title || this.deviceDetail.Name) +
       ` softwares installed (` +
       pdfList.length +
       ` items)</p>

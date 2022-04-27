@@ -186,6 +186,11 @@ export class PasswordManagerService {
     return this.http.get(this.apiUrl + 'passwordRecords');
   }
 
+  public getRecordsForUserDetail(user) {
+
+    return this.http.get(this.apiUrl + `passwordRecords/user/${user}`);
+  }
+
   /**
    * Get data info
    * @param recordInfo - record information

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { UserDefaultSubscriptionAdd } from '../../users/class/user-default-subscription-add';
 import { CompanySubscription } from '../class/company-subscription';
 import { CompanySubscriptionStateService } from './class/company-subscription-state.service';
 
@@ -10,11 +11,11 @@ import { CompanySubscriptionStateService } from './class/company-subscription-st
 })
 export class CompanySubscriptionComponent implements OnInit, OnDestroy {
   sub = new Subscription();
-  @Input() editItem: any;
+  @Input() editItem: UserDefaultSubscriptionAdd;
   @Output() subscribeChange = new EventEmitter();
-  subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticket'),
-  new CompanySubscription('Ticket Manager', 'ticketManager'),
-  new CompanySubscription('Invoice Updates', 'invoice')];
+  subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticketSubscription'),
+  new CompanySubscription('Ticket Manager', 'ticketManagerSubscription'),
+  new CompanySubscription('Invoice Updates', 'invoiceSubscription')];
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags

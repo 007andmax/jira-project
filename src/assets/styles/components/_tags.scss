@@ -1,30 +1,29 @@
+@import './src/assets/styles/variable';
+
 .tag__modern {
-  font-size: 10px;
+  @extend %label-m-sb;
   border: 1px solid;
   border-radius: 3px;
-  padding: 4px 8px;
+  padding: 5px 6px;
   white-space: nowrap;
+  text-transform: uppercase;
 
   &.--success {
-    color: #2ec866;
-    border-color: #2ec866;
-    background-color: #ebfff2;
+    color: $success;
+    border-color: $success;
   }
 
   &.--info {
-    color: #16a4fa;
-    border-color: #16a4fa;
-    background-color: #edf8ff;
+    color: $primary-1;
+    border-color: $primary-1;
   }
 
   &.--warning {
-    color: #ffb937;
-    border-color: #ffb937;
-    background-color: rgba(255, 185, 55, 0.1);
+    color: $warning;
+    border-color: $warning;
   }
   &.--error {
-    color: #ff5263;
-    border-color: #ff5263;
-    background-color: rgba(255, 82, 99, 0.1);
-    }
+    color: $error;
+    border-color: $error;
+  }
 }

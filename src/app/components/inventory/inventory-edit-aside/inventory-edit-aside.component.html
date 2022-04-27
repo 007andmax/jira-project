@@ -58,37 +58,54 @@
                 ></textarea>
             </div>
         </div>
-        <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
         <div
             class="col-md-6"
             *ngIf="!validate.getCostSale()"
         >
             <mat-error *ngIf="!validate.getCostSale()">Cost cannot be higher than Price</mat-error>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <p>Cost</p>
             <input
                 type="text"
-                number
-                [money]="true"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
-                [(ngModel)]="cost"
-                (input)="onChangeCost($event)"
+                [value]="inventory.cost"
+                (onChange)="onChangeCost($event)"
                 placeholder="Enter Cost"
             >
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
+            <p>Markup %</p>
+            <input
+                type="text"
+                decimalNumber
+                (onChange)="changeMarkup($event)"
+                [value]="inventory.markup"
+                placeholder="Enter Cost"
+            >
+        </div>
+        <div class="col-md-4">
             <mat-error *ngIf="!validate.getSale()">Price is required</mat-error>
             <p>Price</p>
             <input
                 type="text"
-                number
-                [money]="true"
-                [(ngModel)]="sale"
-                (input)="onChangeSale($event);validate.resetSale()"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                [value]="inventory.sale"
+                (input)="validate.resetSale()"
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
+                (onChange)="onChangeSale($event)"
                 placeholder="Enter Price"
             >
+        </div>
+        <div class="qt-inputs-row col-md-12 taxes-container">
+            <div class="create-product-taxes-select qt-flex-md-100">
+                <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+            </div>
         </div>
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getCategory()">Category is required</mat-error>
@@ -111,15 +128,15 @@
             </app-drop-down>
         </div>
         <div class="col-md-12">
-            <p>Vendors</p>
+            <p>Suppliers</p>
             <app-select-search
                 [class]="['light-dropdown']"
-                [list]="vendors"
-                #vendorsSelect
+                [list]="suppliers"
+                #suppliersSelect
                 [field]="'name'"
-                [placeholder]="'Select Vendor'"
-                [editItem]="editVendor"
-                (onSelectedItem)="onSelectVendor($event)"
+                [placeholder]="'Select Supplier'"
+                [editItem]="editSupplier"
+                (onSelectedItem)="onSelectSupplier($event)"
             ></app-select-search>
         </div>
         <div class="col-md-12 qt-df qt-ai-c">

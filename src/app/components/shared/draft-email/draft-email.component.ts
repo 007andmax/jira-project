@@ -8,6 +8,10 @@ import { DraftEmailService } from 'src/app/services/draft-email/draft-email.serv
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DraftEmailValidate } from './class/draft-email-validate';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { forkJoin } from 'rxjs';
+import { UploadAreaComponent } from '../upload-area/upload-area.component';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -20,9 +24,8 @@ export class DraftEmailComponent implements OnInit {
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
-    height: '10rem',
+    height: '100%',
     minHeight: '5rem',
-    maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
     translate: 'no',
@@ -60,19 +63,32 @@ export class DraftEmailComponent implements OnInit {
   action: string = null;
   tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
+  validate: DraftEmailValidate = new DraftEmailValidate();
   uploadFiles: Array<File> = [];
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.onShowAside();
-
   }
-
+  onChangeFiles(ids) {
+    if (this.draftEmail.attachments.length > ids.length) {
+      this.draftEmail.attachments.forEach(item => {
+        let find = ids.find(id => id === item);
+        if (!find) {
+          this.draftEmailService.removeAttachment(item).subscribe(data => {
+          })
+        }
+      })
+    }
+    this.draftEmail.setAttachments(JSON.parse(JSON.stringify(ids)));
+  }
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
       this.usersSelected = this.draftEmailStateService.getSelectedUsers();
@@ -84,6 +100,13 @@ export class DraftEmailComponent implements OnInit {
   }
 
   close() {
+    if (this.draftEmail.attachments.length > 0) {
+      forkJoin(
+        this.draftEmail.attachments.map(item => this.draftEmailService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
     this.opened = false;
     this.draftEmail = new DraftEmail();
     this.tab = 'plain';
@@ -99,9 +122,18 @@ export class DraftEmailComponent implements OnInit {
   onChangeCompanyEmails(data) {
     this.draftEmail.setRecipients(data);
   }
-
+  public onFileDropped(files: Array<any>) {
+    this.uplaodFile.onFileDropped(files);
+    /*  this.elRef.nativeElement.querySelector("#upload-file-email").files = files;
+      var event = new Event('input', {
+        bubbles: true,
+        cancelable: true,
+      });
+  
+  
+      this.elRef.nativeElement.querySelector("#upload-file-email").dispatchEvent(event);*/
+  }
   public uploadFileOnBrower(event) {
-
     if (event.target.value) {
       const file = event.target.files[0];
 
@@ -154,7 +186,12 @@ export class DraftEmailComponent implements OnInit {
     this.filesInfo.files.forEach(item => {
       if (!item.error) this.draftEmail.setAttachment(item.id)
     });
+
+    if (!this.validate.isValidate(this.draftEmail)) return;
+    this.addBtn.setDisabled(true);
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
+      this.addBtn.setDisabled(false);
+      this.draftEmail.setAttachments([]);
       this.close();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

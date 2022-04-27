@@ -11,3 +11,47 @@ companies-filter {
     }
   }
 }
+company-associate {
+  > .col-md-12,
+  .col-md-6 {
+    margin-top: 40px;
+    .mat-form-field {
+      width: 100%;
+    }
+    .mat-form-field-infix {
+      border: none;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline,
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      display: none;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      padding: 0;
+      position: relative;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      padding: 12px 10px 10px 36px;
+      font-size: 13px;
+      font-family: "Graphik-Regular", sans-serif;
+      color: #9ca5b6;
+    }
+    .mat-form-field-infix {
+      /* border: 1px solid #c4cbd5;*/
+      border-radius: 4px;
+      /* padding-left: 36px;*/
+      position: relative;
+      min-height: 48px;
+      input {
+        height: 42px !important;
+        margin: 0;
+      }
+    }
+  }
+}
+company-dash-associate {
+  company-associate {
+    .mat-form-field-label {
+      padding: 12px 10px 10px 0px !important;
+    }
+  }
+}

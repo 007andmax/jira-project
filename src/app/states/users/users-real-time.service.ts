@@ -8,6 +8,8 @@ export class UsersRealTimeService {
   public changeUsersArray: EventEmitter<any> = new EventEmitter();
   public changeSubmittedTicket: EventEmitter<any> = new EventEmitter();
   public changePermissionsUsers: EventEmitter<any> = new EventEmitter();
+  public changeSubscriptionsUsers: EventEmitter<any> = new EventEmitter();
+
 
   /**
    * Quote real time service constructor
@@ -29,5 +31,8 @@ export class UsersRealTimeService {
 
   public handleRealTimePermissions(newChange) {
     this.changePermissionsUsers.emit(newChange);
+  }
+  public handleRealTimeSubscriptions(newChange) {
+    this.changeSubscriptionsUsers.emit(newChange);
   }
 }

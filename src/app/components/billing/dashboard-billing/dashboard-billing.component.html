@@ -8,7 +8,7 @@
         *ngIf="!showPreloader"
     >
         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
-            <h3 class="list-title qt-mt-0 qt-mb-0 qt-fs-16 qt-ff-sb">Dashboard</h3>
+            <h6 class="qt-fw-600 qt-color-dark">Dashboard</h6>
             <div class="header-dashboard">
                 <span [textContent]="'Accounting date: ' + getTextAccountingStartDate()"></span>
                 <app-date-picker
@@ -50,6 +50,7 @@
         ></app-dashboard-sales-analytics>
         <div class="qt-df qt-jc-sb qt-mb-16">
             <app-invoice-revenue
+                *ngIf="getPermissions('VIEW_ACCOUNTING')"
                 #invoiceRevenue
                 [accountingStartDate]="accountingStartDate"
             ></app-invoice-revenue>
@@ -59,7 +60,10 @@
                 [contractsDashboard]="contractsDashboard"
             ></app-contracts-dashboard>
         </div>
-        <div class="qt-df qt-jc-sb">
+        <div
+            class="qt-df qt-jc-sb"
+            *ngIf="getPermissions('VIEW_ACCOUNTING')"
+        >
             <div class="contract-info-list qt-mr-16">
                 <app-top-dashboard
                     [title]="'Top Customer Sale'"

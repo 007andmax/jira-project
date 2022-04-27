@@ -1,4 +1,4 @@
-<tr>
+<tr [ngClass]="{'--selected': selected || user.selected}">
     <td class="users-table__check">
         <div class="d-f">
             <label
@@ -15,7 +15,10 @@
             </label>
         </div>
     </td>
-    <td class="users-table__name">
+    <td
+        class="users-table__name"
+        (click)="showDetailUser()"
+    >
         <div class="qt-df qt-ai-c">
             <div
                 class="users-table__name--avatar"
@@ -29,24 +32,35 @@
                 ></div>
                 <div
                     class="users-table__name--profession"
-                    [textContent]="user.designation"
+                    [textContent]="getJobTitle()"
                 ></div>
             </div>
         </div>
     </td>
     <td
         class="users-table__company"
-        *ngIf="type === TYPE_LIST_ALL_USERS"
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
+        (click)="showDetailUser()"
     >
         <span>{{ getUserCompanyName() }}</span>
     </td>
     <td
         class="users-table__company"
         *ngIf="type === TYPE_LIST_COMPANY_USERS"
+        (click)="showDetailUser()"
     >
         <span>{{ user.primaryEmail }}</span>
     </td>
-    <td class="users-table__contract-no">
+    <td
+        class="users-table__company"
+        (click)="showDetailUser()"
+    >
+        <span>{{ getUserIndustry() }}</span>
+    </td>
+    <td
+        class="users-table__contract-no"
+        (click)="showDetailUser()"
+    >
         <ng-template
             ngFor
             let-phone
@@ -64,21 +78,42 @@
                         class="qt-sz-16 qt-mr-6 icon__phone-gray"
                     ></div>
                 </div>
-                <div class="users-table__contract-no--number">{{phone.number}}</div>
+                <div
+                    class="users-table__contract-no--number"
+                    [textContent]="phone.number | preparePhone | mask: '(000) 000-0000' | phone"
+                ></div>
             </div>
         </ng-template>
     </td>
-    <td class="users-table__subscription">
-        <app-user-table-subscription
+    <td
+        class="users-table__subscription"
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+    >
+        <user-table-default-subscription
             class="users-table__subscription--dropdown"
-            (onChange)="onChangeSubscriptions($event)"
-            [subscription]="user.subscription"
+            (onChangeDefault)="onChangeDefaultSubscriptions($event)"
+            [defaultSubscriptions]="user.defaultSubscriptions"
         >
-        </app-user-table-subscription>
+        </user-table-default-subscription>
     </td>
     <td
+        class="users-table__subscription"
+        *ngIf="type === TYPE_LIST_MARKETING_USERS"
+    >
+        <user-table-custom-subscription
+            #customSubscription
+            class="users-table__subscription--dropdown"
+            (onChangeCustom)="onChangeCustomSubscriptions($event)"
+            [listCustomSubscription]="listCustomSubscription"
+            [customSubscriptions]="user.customSubscriptions"
+        >
+        </user-table-custom-subscription>
+    </td>
+    <td
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
         class="users-table__tickets"
         [textContent]="user.userStatistic.ticketsSubmitted || 0"
+        (click)="showDetailUser()"
     ></td>
     <td class="users-table__email">
         <app-dynamic-tooltip
@@ -112,7 +147,7 @@
             >
                 <li
                     class="pointer"
-                    *ngIf="!showArchivedUsers"
+                    *ngIf="!showArchivedUsers && getPermissions('EDIT_USERS')"
                     (click)="edit()"
                     ngbDropdownItem
                 >

@@ -1,0 +1,125 @@
+<div
+    class="qt-aside-modern users-page__aside"
+    [hidden]="!opened"
+>
+    <div
+        class="collapse-arrow icon__close"
+        (click)="close()"
+    ></div>
+    <div class="qt-aside-modern__content">
+        <div class="message-full-header">
+            <div
+                class="message-full-from"
+                *ngIf="message"
+            >
+                <div class="message-full-user">
+                    <span
+                        class="message-full-user-name"
+                        [textContent]="message.senderName"
+                    ></span>
+                    <span
+                        class="message-full-user-email"
+                        [textContent]="' <' + message.emailFrom + '>'"
+                    ></span>
+                </div>
+                <div class="message-full__account-data">
+                    <div
+                        class="message-full__account-header qt-mr-8"
+                        [textContent]="message.type"
+                    ></div>
+                    <time
+                        datetime="2021-03-20"
+                        class="message-full__account-date"
+                        [textContent]="getDate(message.createdAt) + ', ' + getTime(message.createdAt)"
+                    >
+                    </time>
+                </div>
+            </div>
+            <div class="message-full-to">
+                <div class="message-full-to-text">
+                    <span>To:</span>
+                </div>
+                <div
+                    class="message-full-to-list"
+                    *ngIf="message"
+                    [ngClass]="{'hide-all-user':!toggleAllUsers}"
+                >
+                    <ng-template
+                        ngFor
+                        let-user
+                        [ngForOf]="message.recipientsFromSystem"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <div class="message-full-to-list-item">
+                            <div class="qt-df qt-ai-c">
+                                <div
+                                    class="users-table__name--avatar"
+                                    [ngStyle]="{'background':  getUserAvatarUrl(user)}"
+                                    [textContent]="getNameForAvatar(user)"
+                                ></div>
+                                <div class="message-full-to-list-item-info">
+                                    <span
+                                        class="users-table__name--user-name"
+                                        [textContent]="getUserName(user)"
+                                    ></span>
+                                    <span
+                                        class="users-table__name--email"
+                                        [textContent]="user.email"
+                                    ></span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template
+                        ngFor
+                        let-user
+                        [ngForOf]="message.otherRecipients"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <div class="message-full-to-list-item">
+                            <div class="qt-df qt-ai-c">
+                                <div class="message-full-to-list-item-info">
+                                    <span
+                                        class="users-table__name--user-name"
+                                        [textContent]="user"
+                                    ></span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <p
+                class="toggle-all-users"
+                [textContent]="'Show all ' + getCountUsers() + ' emails'"
+                *ngIf="!toggleAllUsers"
+                (click)="toggleAllUsers = true"
+            ></p>
+            <p
+                class="toggle-all-users"
+                *ngIf="toggleAllUsers"
+                (click)="toggleAllUsers = false"
+            >
+                Hide
+            </p>
+        </div>
+        <div class="message-full-body">
+            <h3
+                *ngIf="message"
+                [textContent]="message.subject"
+            ></h3>
+            <div
+                id="message-body"
+                class="messages-table__account-text"
+            >
+                <span></span>
+            </div>
+        </div>
+        <div
+            class="message-full-body attachments-message"
+            *ngIf="message && message.attachments.length > 0"
+        >
+            <app-ticket-profile-attachments [attachments]="message.attachments"></app-ticket-profile-attachments>
+        </div>
+    </div>
+</div>

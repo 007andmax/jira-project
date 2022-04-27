@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PasswordRecordCategories } from 'src/app/components/password-manager/class/password-record-categories';
 import { REMOVE_CREDENTIAL } from 'src/app/const/confirm';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { NetworkScanStateService } from 'src/app/states/network-scan/network-scan-state.service';
@@ -16,6 +17,7 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   @Input() item: NetworkScanCredential;
   @Input() companyId: string;
   @Output() onSelect = new EventEmitter<any>();
+  @Input() categoryAgent: PasswordRecordCategories;
   constructor(private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private passwordManagerService: PasswordManagerService,
@@ -28,14 +30,14 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   }
   onCheckChangeName(event) {
     if (this.item.username !== event.target.value) {
-      this.passwordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, event.target.value, null)).subscribe(data => {
+      this.passwordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, event.target.value, null, this.categoryAgent)).subscribe(data => {
         this.item.setUserName(event.target.value);
       })
     }
   }
   onCheckChangePassword(event) {
     if (this.item.password !== event.target.value) {
-      this.passwordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, this.item.username, event.target.value)).subscribe(data => {
+      this.passwordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, this.item.username, event.target.value, this.categoryAgent)).subscribe(data => {
         this.item.setPassword(event.target.value);
       })
     }

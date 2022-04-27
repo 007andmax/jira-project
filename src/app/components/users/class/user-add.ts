@@ -4,9 +4,9 @@ import { Subscriptions } from 'src/app/interfaces/user/subscriptions';
 
 import { UserAvatar } from './user-avatar';
 import { UserProfile } from './user-profile';
+import { UserDefaultSubscriptionAdd } from './user-default-subscription-add';
 
 export class UserAdd {
-  role: string = 'USER';
   phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
   subscription: Subscriptions;
   welcomeEmail: boolean = true;
@@ -16,17 +16,22 @@ export class UserAdd {
   primaryEmail: string;
   designation: string;
   companyId: string;
+  jobDescription: string;
   tags: Array<any> = [];
+  jobTitleId: string;
+  jobTypeId: string;
+  customSubscriptionIds: Array<string> = [];
+  defaultSubscriptions: UserDefaultSubscriptionAdd;
+  userIndustryId: string;
   constructor(data: UserProfile) {
-    this.role = data.role;
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
       this.phoneNumbers = [];
 
     } else {
       this.phoneNumbers = data.phoneNumbers;
     }
-
-    this.subscription = data.subscription;
+    this.defaultSubscriptions = new UserDefaultSubscriptionAdd(data.defaultSubscriptions.ticketSubscription.enabled, data.defaultSubscriptions.ticketManagerSubscription.enabled, data.defaultSubscriptions.invoiceSubscription.enabled);
+    this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
     this.welcomeEmail = data.welcomeEmail;
     this.avatar = data.avatar;
     this.firstName = data.firstName;
@@ -37,6 +42,9 @@ export class UserAdd {
     this.tags = data.tags.map(item => {
       return { id: item.id };
     })
-
+    this.jobDescription = data.jobDescription;
+    this.jobTypeId = data.jobTypeId;
+    this.jobTitleId = data.jobTitleId;
+    this.userIndustryId = data.userIndustryId;
   }
 }

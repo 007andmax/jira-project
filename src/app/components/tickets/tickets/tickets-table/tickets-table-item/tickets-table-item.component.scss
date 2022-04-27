@@ -1,9 +1,19 @@
+@import "./src/assets/styles/variable";
+
 tr {
   cursor: pointer;
   &:hover {
     td {
+      background: $gray-200;
+      border-color: $primary-1;
+    }
+  }
+}
+.--selected {
+  > div {
+    @media (min-width: 767px) {
       background: #f4fbff;
-      border-color: #16a4fa;
+      border-color: $primary-1;
     }
   }
 }

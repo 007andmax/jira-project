@@ -12,6 +12,9 @@
     "importHelpers": true,
     "downlevelIteration": true,
     "target": "es5",
+    "types": [
+      "node"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -27,6 +30,5 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/ng2-stomp-service/dist/stomp.service.ts"
   ]
 }

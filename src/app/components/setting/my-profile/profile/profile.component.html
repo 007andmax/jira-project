@@ -9,8 +9,6 @@
                 alt="user"
             >
         </span>
-
-
         <span
             class="dp"
             *ngIf="!imageSrc"
@@ -20,8 +18,6 @@
                 alt="user"
             >
         </span>
-
-
         <div class="dp-info">
             <input
                 type="file"
@@ -54,67 +50,9 @@
             </span>
         </div>
     </div>
-    <div
-        class="img-croparea"
-        *ngIf="isCroppedImg"
-    >
-        <div class="crop-inner">
-            <div class="heading-area">
-                <h2>Crop Photo</h2>
-                <a
-                    href="javascript:void(0)"
-                    class="close-btn"
-                    (click)="isCroppedImg = false"
-                >
-                    remove
-                </a>
-            </div>
-            <div class="cropping">
-                <div class="img-crop">
-                    <image-cropper
-                        [imageChangedEvent]="imageChangedEvent"
-                        [maintainAspectRatio]="false"
-                        [aspectRatio]="4 / 3"
-                        [resizeToWidth]="128"
-                        format="png"
-                        (imageCropped)="imageCropped($event)"
-                    ></image-cropper>
-                </div>
-
-
-                <div class="preview">
-                    <h6>Profile Preview</h6>
-                    <img [src]="croppedImage?.base64">
-                </div>
-                <div class="btn-crops">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="cropIt()"
-                    >
-                        Crop Photo
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        (click)="isCroppedImg = false"
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <form
-        [formGroup]="profileForm"
-        (ngSubmit)="onSubmit()"
-    >
+    <form [formGroup]="profileForm">
         <div class="f-row">
             <div class="f-col col-50">
-
-
                 <label>First Name</label>
                 <div class="form-row">
                     <input
@@ -135,8 +73,6 @@
             </div>
             <div class="f-col col-50">
                 <!-- <label>Your Full name</label> -->
-
-
                 <label>Last Name</label>
                 <div class="form-row">
                     <input
@@ -183,19 +119,17 @@
             <div class="f-col col-50">
                 <label>Role</label>
                 <div class="form-row">
-                    <input
-                        type="text"
-                        class="form-input"
-                        placeholder="Enter Your Role"
-                        formControlName="designation"
-                    >
-                    <div
-                        *ngIf="submitted && f.designation.errors"
-                        class="invalid-feedback"
-                    >
-                        <div *ngIf="f.designation.errors.minlength">Role is too short.</div>
-                        <div *ngIf="f.designation.errors.maxlength">Role is too large.</div>
-                    </div>
+                    <app-drop-down
+                        #jobTitleDp
+                        [class]="['light-dropdown', 'qt-select-input-40']"
+                        [placeholder]="'Select Your Role'"
+                        [editItem]="selectedJobTitle"
+                        [list]="jobTitleList"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectRole($event)"
+                    ></app-drop-down>
                 </div>
             </div>
             <div class="f-col col-50">
@@ -230,8 +164,6 @@
                     </select>
                 </div>
             </div>
-
-
             <div
                 class="f-col col-50"
                 *ngIf="isAddPhone"
@@ -246,8 +178,6 @@
                         Remove
                     </a>
                 </label>
-
-
                 <div class="form-row primary-phone">
                     <input
                         type="text"
@@ -266,8 +196,6 @@
                     </select>
                 </div>
             </div>
-
-
             <div class="mail-row">
                 <div class="f-col col-20">
                     <label>Suite Number</label>
@@ -322,6 +250,7 @@
             type="submit"
             class="btn btn-primary"
             value="Save Changes"
+            (click)="onSubmit()"
         >
     </form>
 </div>

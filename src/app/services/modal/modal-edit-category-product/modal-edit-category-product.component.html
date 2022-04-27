@@ -1,0 +1,33 @@
+<div class="qt-modal quote-email-modal">
+    <div class="qt-modal__header">
+        <div class="qt-modal__header-title qt-fw-600">Edit Category Product</div>
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-modal__body">
+        <div class="qt-input-block qt-mb-24 qt-w100">
+            <label>Name</label>
+            <input
+                type="text"
+                placeholder="Write Subject"
+                [(ngModel)]="categoryProduct.name"
+            >
+        </div>
+    </div>
+    <div class="qt-modal__footer">
+        <button
+            class="qt-button --gray qt-mr-12"
+            (click)="close()"
+        >
+            Cancel
+        </button>
+        <button
+            class="qt-button qt-mr-12"
+            (click)="save()"
+        >
+            Save
+        </button>
+    </div>
+</div>

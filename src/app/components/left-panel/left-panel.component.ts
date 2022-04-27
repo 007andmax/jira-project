@@ -1,6 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
+import { Company } from 'src/app/interfaces/company/company';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
@@ -21,7 +25,7 @@ import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.com
   styleUrls: ['./left-panel.component.scss']
 })
 export class LeftPanelComponent implements OnInit {
-
+  currentCompany: Company;
   toggleLeftPanel: boolean = false;
   state: string = '';
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
@@ -43,6 +47,9 @@ export class LeftPanelComponent implements OnInit {
     private router: Router,
     private leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
+    private usersStateService: UsersStateService,
+    private appService: AppService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -50,6 +57,11 @@ export class LeftPanelComponent implements OnInit {
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.currentCompany = this.companiesStateService.getCurrentCompany();
+    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+      this.currentCompany = this.companiesStateService.getCurrentCompany();
+    })
+
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
     })
@@ -83,6 +95,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/password-manager`)) this.state = 'password-manager';
           if (window.location.href.includes(`/setting/myprofile`)) this.state = 'myprofile-component';
           if (window.location.href.includes(`/setting/tags`)) this.state = 'manage-tags-component';
+          if (window.location.href.includes(`/setting/products-settings`)) this.state = 'products-settings';
           if (window.location.href.includes(`/setting/glnumber`)) this.state = 'glnumber-component';
           if (window.location.href.includes(`/setting/companyprofile`)) this.state = 'company-profile-component';
           if (window.location.href.includes(`/setting/techUsers`)) this.state = 'tech-component';
@@ -91,11 +104,16 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/permission`)) this.state = 'permission-manage-component';
           if (window.location.href.includes(`/setting/emailTemplete`)) this.state = 'email-templete-component';
           if (window.location.href.includes(`/setting/integration`)) this.state = 'integrations-component';
-          if (window.location.href.includes(`/setting/invoiceTickets`)) this.state = 'invoice-ticket-component';
+          if (window.location.href.includes(`/setting/accounting`)) this.state = 'invoice-ticket-component';
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
           if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
           if (window.location.href.includes(`/setting/deviceSetting`)) this.state = 'device-setting-component';
+          if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
+          if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
+          if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
+
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
+          if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
           if (window.location.href.includes(`/tickets`)) this.state = 'new-tickets';
@@ -108,8 +126,6 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/documents/edit`)) this.state = 'new-edit-documents';
           if (window.location.href.includes(`/documents/templates`)) this.state = 'new-template-documents';
           if (window.location.href.includes(`/documents/preview`)) this.state = 'new-preview-documents';
-
-
 
 
 
@@ -143,13 +159,12 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
           if (window.location.href.includes(`/devices`)) this.state = 'new-devices';
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
-
+          if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
 
 
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
-          if(!this.cd['destroyed'])
-          {
+          if (!this.cd['destroyed']) {
             this.cd.detectChanges();
           }
         }
@@ -173,8 +188,7 @@ export class LeftPanelComponent implements OnInit {
     })
     this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
-      if(!this.cd['destroyed'])
-      {
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
@@ -185,12 +199,19 @@ export class LeftPanelComponent implements OnInit {
   onToggleLeftPanel() {
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
-    if(!this.cd['destroyed'])
-    {
+    if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
   }
-
+  onToggleMobileLeftPanel() {
+    this.leftPanelStateService.toggleMobileLeftPanel(false);
+    this.appService.toggleMobileAside(false);
+    this.cd.detectChanges();
+  }
+  public logOut() {
+    window.location.href = '/logout';
+    window.location.hash = '';
+  }
   public goToLink(url) {
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
@@ -217,6 +238,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'password-manager') this.goToLink(`password-manager`);
       if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');
       if (this.state === 'manage-tags-component') this.goToLink('setting/tags');
+      if (this.state === 'products-settings') this.goToLink('setting/products-settings');
       if (this.state === 'glnumber-component') this.goToLink('setting/glnumber');
       if (this.state === 'company-profile-component') this.goToLink('setting/companyprofile');
       if (this.state === 'tech-component') this.goToLink('setting/techUsers');
@@ -225,11 +247,16 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'permission-manage-component') this.goToLink('setting/permission');
       if (this.state === 'email-templete-component') this.goToLink('setting/emailTemplete');
       if (this.state === 'integrations-component') this.goToLink('setting/integration');
-      if (this.state === 'invoice-ticket-component') this.goToLink('setting/invoiceTickets');
+      if (this.state === 'invoice-ticket-component') this.goToLink('setting/accounting');
+      if (this.state === 'crm-settings') this.goToLink('setting/crm-settings');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
       if (this.state === 'subscription-component') this.goToLink('setting/subscription');
       if (this.state === 'device-setting-component') this.goToLink('setting/deviceSetting');
+      if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
+      if (this.state === 'marketing-email') this.goToLink('setting/marketing-email');
+
       if (this.state === 'new-users') this.goToLink('users');
+      if (this.state === 'marketing') this.goToLink('marketing');
       if (this.state === 'new-reports') this.goToLink('reports');
       if (this.state === 'new-tickets-dashboard') this.goToLink('tickets-dashboard');
       if (this.state === 'new-tickets') this.goToLink('tickets');
@@ -256,10 +283,10 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'software-summary1' ||
         this.state === 'hardware-summary' ||
         this.state === 'device-ip-summary' ||
-        this.state === 'report-device-summary'||
-        this.state === 'report-device-warranty'||
-        this.state === 'report-device-antivirus'||
-        this.state === 'network-ip-report'||
+        this.state === 'report-device-summary' ||
+        this.state === 'report-device-warranty' ||
+        this.state === 'report-device-antivirus' ||
+        this.state === 'network-ip-report' ||
         this.state === 'network-detail-report' ||
         this.state === 'network-adapter-report' ||
         this.state === 'report-device-deploymentwarranty' ||
@@ -270,17 +297,43 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'tech-service' ||
         this.state === 'ticket-report' ||
         this.state === 'service-report' ||
-        this.state === 'report-device-diskspace'||
+        this.state === 'report-device-diskspace' ||
         this.state === 'income-accounts') this.goToLink('report/' + this.state);
 
 
       this.leftPanelStateService.changeState(this.state);
-      if(!this.cd['destroyed'])
-      {
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     }
   }
-
-
+  public getCurrentUserName() {
+    let user = this.usersStateService.getCurrentUser();
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  getShortCompanyName() {
+    if (!this.currentCompany) return '';
+    return `${this.currentCompany.name[0].toUpperCase()}`
+  }
+  checkLogo() {
+    return (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id || this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
+  public getAccessReports() {
+    return this.getPermissions("VIEW_SALES_REPORT") ||
+      this.getPermissions("VIEW_FINANCIAL_REPORT") ||
+      this.getPermissions("VIEW_PERFORMANCE_REPORT") ||
+      this.getPermissions("VIEW_REMOTE_ACCESS_REPORT") ||
+      this.getPermissions("VIEW_TAXES_REPORT") ||
+      this.getPermissions("VIEW_DEVICES_REPORTS") ||
+      this.getPermissions("VIEW_DEVICES_REPORTS")
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
 }

@@ -1,4 +1,4 @@
-import { Company } from "src/app/interfaces/quote/company";
+import { Company } from "src/app/interfaces/company/company";
 import { FilterListTop } from "src/class/list/filter-list-top";
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
 import { PasswordRecord } from "./password-record";

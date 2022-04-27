@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ApplicationRef } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -24,6 +24,11 @@ import { TagsStateService } from './states/tags/tags-state.service';
 import { DocumentsStateService } from './states/documents/documents-state.service';
 import { AppStateService } from './states/app/app-state.service';
 import { KafkaStateService } from './states/kafka/kafka-state.service';
+import { CrmStateService } from './states/crm/crm-state.service';
+import { MarketingEmailStateService } from './states/marketing-email/marketing-email-state.service';
+import { PermissionsService } from './services/permissions/permissions.service';
+import { CurrentUser } from 'src/class/current-user/current-user';
+import { SupportPageCategoriesStateService } from './components/super-admin/state/support-page-categories/support-page-categories-state.service';
 
 
 /**
@@ -42,12 +47,15 @@ export class AppComponent implements OnInit {
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
+  toggMobileleLeftPanel: boolean = false;
   hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
+  state: string = '';
+  currentUser: CurrentUser;
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -75,8 +83,13 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
+    private kafkaStateService: KafkaStateService,
+    private appRef: ApplicationRef,
+    private permissionsService: PermissionsService,
     private appStateService: AppStateService,
-    private kafkaStateService: KafkaStateService
+    private crmStateService: CrmStateService,
+    private marketingEmailStateService: MarketingEmailStateService,
+    private supportPageCategoriesStateService: SupportPageCategoriesStateService
 
   ) { }
 
@@ -86,27 +99,45 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events
       .subscribe((event) => {
-        if (this.router.url.includes('/device') && !this.router.url.includes('/devices') && !this.router.url.includes('report') && !this.router.url.includes('/setting')) {
+        if (this.router.url.includes('/device') && !this.router.url.includes('/devices') && !this.router.url.includes('report') && !this.router.url.includes('/setting') && !this.router.url.includes('/device-ip-summary')) {
           this.main_page = PAGE_DEVICE;
         } else {
           this.main_page = PAGE_MAIN;
         }
       });
-
-    this.devicesState.onInit();
     this.usersStateService.onInit();
-    this.companiesState.onInit();
-    this.taxesStateService.onInit();
-    this.glNumberStateService.onInit();
-    this.inventoryStateService.onInit();
-    this.ticketsStateService.onInit();
-    this.constantsStateService.onInit();
-    this.tagsStateService.onInit();
-    this.documentsStateService.onInit();
-    this.kafkaStateService.onInit();
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+      if (this.appService.getIsInit()) return;
+      if (data.role !== "SUPER_ADMIN") {
+        this.devicesState.onInit();
+        this.companiesState.onInit();
+        this.taxesStateService.onInit();
+        this.glNumberStateService.onInit();
+        this.inventoryStateService.onInit();
+        this.ticketsStateService.onInit();
+        this.constantsStateService.onInit();
+        this.tagsStateService.onInit();
+        this.documentsStateService.onInit();
+        this.crmStateService.onInit();
+        this.marketingEmailStateService.onInit();
+        this.kafkaStateService.onInit();
+        if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
+        this.websocketService.initializeWebSocketConnection();
+      } else {
+        this.supportPageCategoriesStateService.onInit();
+        this.websocketService.initializeWebSocketConnection();
+        this.companiesState.onInitGetCurrentCompany();
+        this.tagsStateService.onInit();
+        this.appService.onInit();
+        this.showPreloader = false;
+        this.cd.detectChanges();
+      }
+    })
+
     //  this.userService.getCurrentUser();
 
-    this.websocketService.initializeWebSocketConnection();
+
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);
 
@@ -125,6 +156,10 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
+      this.cd.detectChanges();
+    })
+    this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
+      this.toggMobileleLeftPanel = data;
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
@@ -148,18 +183,33 @@ export class AppComponent implements OnInit {
       }
     })
     this.usersStateService.onChangeUserPermissions.subscribe(data => {
-      this.usersStateService.changeUserPermissions(data);
-      this.cd.detectChanges();
+      if (this.companiesState.getCurrentCompany().id === data.company.id) {
+        this.usersStateService.changeUserPermissions(data.permissions);
+        this.cd.detectChanges();
+      }
     })
     this.appStateService.onChangeDetectorRef.subscribe(data => {
       setTimeout(() => {
-        this.cd.detectChanges();
+        this.appRef.tick();
         document.body.click();
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      if (this.router.url === "/") this.router.navigate(
+      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
+
+      if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN") this.router.navigate(
+        [`${data.name.replaceAll(' ', '')}/support-page/`]);
+    })
+    this.appService.onToggleMobileAside.subscribe(data => {
+      if (data) document.querySelector("html").classList.add("--scrollLock");
+      if (!data) document.querySelector("html").classList.remove("--scrollLock");
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      this.state = data;
+    })
+    this.leftPanelStateService.onChangeState.subscribe(data => {
+      this.state = data;
     })
   }
   ngDoCheck() {
@@ -172,6 +222,19 @@ export class AppComponent implements OnInit {
       this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
+    // if ((<any>document.body.querySelector("#userback_button_container")) && (<any>document.body.querySelector("#userback_button_container")).style.display == "" && this.appService.checkMobile()) (<any>document.body.querySelector("#userback_button_container")).style.display = "none";
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  goToTickets() {
+    this.leftPanelStateService.goToState('new-tickets');
+  }
+  goToPasswordManager() {
+    this.leftPanelStateService.goToState('password-manager');
+  }
+  goToCompanies() {
+    this.leftPanelStateService.goToState('new-companies');
   }
   public setShowLockScreen(data) {
     this.showLockScreen = data;

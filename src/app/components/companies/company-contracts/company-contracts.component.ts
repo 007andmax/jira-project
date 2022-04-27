@@ -13,8 +13,10 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate("company-contracts");
     let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
+      if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companiesStateService.setSelectedCompanyId(id);
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
     });
@@ -64,5 +66,8 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
     })
     this.sub.add(getOnToggleEdit);
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    this.companiesStateService.setCompanyRoutingId(null);
+  }
 }
