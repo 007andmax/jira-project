@@ -16,25 +16,25 @@ export class ExcelService {
     } else if (type === "softwaresummaryreport") {
       [(typeArr = ["Device Name", "Software Name", "Publisher", "Version"])];
     } else if (type === "devicesummaryreport") {
-      [(typeArr = ["Device Name", "Manufacturer", "Model", "SerialNumber"])];
+      [(typeArr = ["Company Name","Device Name", "Manufacturer", "Model", "SerialNumber"])];
     } else if (type === "devicewarrantyreport") {
-      [(typeArr = ["Device Name", "Manufacturer", "Device Type", "Model", "SerialNumber", "Warranty Date"])];
+      [(typeArr = ["Company Name", "Device Name", "Manufacturer", "Device Type", "Model", "SerialNumber", "Warranty Date"])];
     } else if (type === "deviceantivirusreport"){
-      [(typeArr = ["Device Name","Antivirus"])];
+      [(typeArr = ["Company Name", "Device Name","Antivirus"])];
     } else if (type === "networkIPreport") {
-      [(typeArr = ["Device Name", "Domain", "IPAddress", "Subnet", "Gateway", "ExternalIP"])];
+      [(typeArr = ["Company Name", "Device Name", "Domain", "IPAddress", "Subnet", "Gateway", "ExternalIP"])];
     } else if (type === "deviceprocessorramreport") {
-      [(typeArr = ["Device Name", "Manufacturer", "Model", "ProcessorType", "MemoryGB"])];
+      [(typeArr = ["Company Name", "Device Name", "Manufacturer", "Model", "ProcessorType", "MemoryGB"])];
     } else if (type === "devicenetworkadapterreport"){
-      [(typeArr = ["Device Name", "Adapter", "Link Speed", "Driver Version"])];
+      [(typeArr = ["Company Name", "Device Name", "Adapter", "Link Speed", "Driver Version"])];
     } else if (type === "devicenetworkdetailreport"){
-      [(typeArr = ["Device Name", "Domain", "Manf(nic)", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2","ExtIP"])];
+      [(typeArr = ["Company Name", "Device Name", "Domain", "Manf(nic)", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2","ExtIP"])];
     } else if (type === "applicationbycompanyreport"){
       [(typeArr = ["Application", "Version", "Device Count"])];
     } else if (type === "devicediskspacereport"){
-      [(typeArr = ["Device Name", "Drive Letter", "Total Space","Used", "Free"])];
+      [(typeArr = ["Company Name", "Device Name", "Drive Letter", "Total Space","Used", "Free (%)"])];
     } else if (type === "devicedeploymentwarrantyreport"){
-      [(typeArr = ["Device Name", "Domain", "Manufacturer","Subnet", "Gateway", "ExternalIP"])];
+      [(typeArr = ["Company Name", "Device Name", "Domain", "Manufacturer","Subnet", "Gateway", "ExternalIP"])];
     } else if (type === "services"){
       [(typeArr = ["Services Name", "Description", "Status", "Type", "Account Name"])];
     } else if (type === "startupprogrammes"){

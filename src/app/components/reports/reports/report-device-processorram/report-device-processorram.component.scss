@@ -2,6 +2,10 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    .company{
+      width: 12% !important;
+      padding: 0 18px 0 18px;
+    }
     .device {
       width: 25% !important;
       padding: 0 18px 0 18px;
@@ -17,7 +21,7 @@
       padding: 0px;
     }
     .processorType {
-      width: 30% !important;
+      width: 22% !important;
       padding: 0px;
     }
     .memoryGB {

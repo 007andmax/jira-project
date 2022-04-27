@@ -2,6 +2,10 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    .company{
+      width: 14% !important;
+      padding: 0 18px 0 18px;
+    }
     .device {
       width: 30% !important;
       padding: 0 18px 0 18px;

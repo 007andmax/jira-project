@@ -88,6 +88,13 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                      <th
+                      class="company"
+                      (click)="onFilter('name')"
+                  >
+                      COMPANY NAME
+                      <span class="qt-table-modern__sorting"></span>
+                  </th>
                         <th
                             class="device"
                             (click)="onFilter('name')"
@@ -104,6 +111,7 @@
                 </thead>
                 <tbody class="network-ip-report-table">
                     <tr *ngFor="let networkIP of networkipList">
+                        <td class="company">{{networkIP.CompanyName}}</td>
                         <td class="device">{{ networkIP.Name }}</td>
                         <td class="domain">{{networkIP.Domain}}</td>
                         <td class="ipAddress">{{ networkIP.InternalIPAddress }}</td>

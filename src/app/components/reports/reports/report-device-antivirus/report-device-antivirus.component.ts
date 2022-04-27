@@ -141,7 +141,11 @@ export class ReportDeviceAntivirusComponent implements OnInit {
   getPdfData() {
     let pdfList = [];
     this.deviceAntivirusList.forEach((element) => {
-      pdfList.push([element.Name.replace(",", " ") || "N/A"]);
+      pdfList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
+        element.Name.replace(",", " ") || "N/A",
+        (element.VirusProtectionProducts ?  element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
+      ]);
     });
     let html =
       `
@@ -234,17 +238,30 @@ export class ReportDeviceAntivirusComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;">Device Name</th>
-                        </tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;">Antivirus</th>
+                            </tr>
                     </thead>
                     <tbody>`;
     pdfList.forEach((element) => {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
-        `</td></tr>`;
+        `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        element[1] +
+        `</td>`
+        html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+      element[2] +
+      `</td>
+        </tr>`;
     });
     html =
       html +
@@ -305,6 +322,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     let downloadCsvList = [];
     this.deviceAntivirusList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         (element.VirusProtectionProducts ?  element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
       ]);

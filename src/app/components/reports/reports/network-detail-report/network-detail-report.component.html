@@ -89,6 +89,13 @@
                 <table class="dataTable cmn-tab-head">
                     <thead>
                         <tr>
+                          <th
+                                class="device"
+                                (click)="onFilter('name')"
+                            >
+                                COMPANY NAME
+                                <span class="qt-table-modern__sorting"></span>
+                            </th>
                             <th
                                 class="device"
                                 (click)="onFilter('name')"
@@ -115,6 +122,7 @@
                     <table class="qt-page-list__body-tbody">
                         <tbody class="network-ip-report-table">
                             <tr *ngFor="let networkDetail of networkDetailList">
+                                <td class="device">{{networkDetail.CompanyName}}</td>
                                 <td class="device">{{ networkDetail.Name }}</td>
                                 <td class="domain">{{ networkDetail.Domain }}</td>
                                 <td class="manufacturer">{{ networkDetail.NicName }}</td>

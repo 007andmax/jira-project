@@ -283,6 +283,33 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getDeviceSummary() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceSummary`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceProcessorRam() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceProcessorRam`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceDiskDrive() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceDiskDrive`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getCompanyApplicationByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/CompanyApplication/${companyGuid}`, {

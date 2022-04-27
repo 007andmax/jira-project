@@ -88,6 +88,13 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                      <th
+                      class="company"
+                      (click)="onFilter('name')"
+                  >
+                      COMPANY NAME
+                      <span class="qt-table-modern__sorting"></span>
+                  </th>
                         <th
                             class="device"
                             (click)="onFilter('name')"
@@ -104,6 +111,7 @@
                 </thead>
                 <tbody class="device-diskspace-report-table">
                     <tr *ngFor="let deviceDiskSpace of deviceDiskSpaceList">
+                        <td class="company">{{deviceDiskSpace.CompanyName}}</td>
                         <td class="device">{{ deviceDiskSpace.Name }}</td>
                         <td class="driveLetter">{{deviceDiskSpace.DriveLetter}}</td>
                         <td class="totalSpace">{{ deviceDiskSpace.size }} GB</td>

@@ -142,6 +142,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     let pdfList = [];
     this.networkAdapterList.forEach((element) => {
       pdfList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.NicName || "N/A",
         element.Speed,
@@ -239,6 +240,7 @@ export class NetworkAdapterReportComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                           <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 30%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 30%;">Adapter</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Link Speed</th>
@@ -250,23 +252,26 @@ export class NetworkAdapterReportComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[3] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        element[4] +
         `</td></tr>`;
     });
     html =
@@ -328,6 +333,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     let downloadCsvList = [];
     this.networkAdapterList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.NicName || "N/A",
         element.Speed,

@@ -88,6 +88,13 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                      <th
+                            class="company"
+                            (click)="onFilter('name')"
+                        >
+                            COMPANY NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
                         <th
                             class="device"
                             (click)="onFilter('name')"
@@ -116,6 +123,7 @@
                 </thead>
                 <tbody class="device-warranty-report-table">
                     <tr *ngFor="let deviceWarranty of deviceWarrantyList">
+                        <td class="company">{{deviceWarranty.CompanyName}}</td>
                         <td class="device">{{ deviceWarranty.Name }}</td>
                         <td class="manufacturer">{{ deviceWarranty.Manufacturer }}</td>
                         <td>{{deviceWarranty.HardwareType}}</td>

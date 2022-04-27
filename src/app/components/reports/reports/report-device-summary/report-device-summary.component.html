@@ -85,6 +85,13 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                      <th
+                            class="company"
+                            (click)="onFilter('name')"
+                        >
+                            Company NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
                         <th
                             class="device"
                             (click)="onFilter('name')"
@@ -111,6 +118,7 @@
                 </thead>
                 <tbody class="device-summary-report-table">
                     <tr *ngFor="let deviceSummary of deviceSummaryList">
+                        <td class="company">{{deviceSummary.CompanyName}}</td>
                         <td class="device">{{ deviceSummary.Name }}</td>
                         <td class="manufacturer">{{ deviceSummary.Manufacturer }}</td>
                         <td class="model">{{ deviceSummary.Model }}</td>

@@ -138,6 +138,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     let pdfList = [];
     this.deviceWarrantyList.forEach((element) => {
       pdfList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
         element.HardwareType == null ? "N/A" :  element.HardwareType.replace(",", " "),
@@ -237,6 +238,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                           <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Manufacturer</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Device Type</th>
@@ -250,17 +252,17 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        html =
+         html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
@@ -277,6 +279,11 @@ export class ReportDeviceWarrantyComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[5] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        element[6] +
         `</td></tr>`;
     });
     html =
@@ -353,6 +360,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     let downloadCsvList = [];
     this.deviceWarrantyList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
         element.HardwareType == null ? "N/A" :  element.HardwareType.replace(",", " "),

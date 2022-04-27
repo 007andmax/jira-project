@@ -52,12 +52,25 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceDiskDriveList();
   }
 
   setPreviewDataDevice() {
       this.companiesStateService.getOnCompanies().subscribe((data) => {
         this.companies = this.getClientsList(data);
       });
+  }
+
+  getDeviceDiskDriveList(){
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceDiskDriveList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceDiskDrive().subscribe((resp) =>{
+      this.deviceDiskSpaceList = resp;
+    })
   }
 
   getAllCompanyList(id) {
@@ -96,7 +109,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceDiskSpaceList = [];
+      this.getDeviceDiskDriveList();
     }
   }
 
@@ -139,6 +152,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
     let pdfList = [];
     this.deviceDiskSpaceList.forEach((element) => {
       pdfList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.DriveLetter || "N/A",
         element.size,
@@ -237,11 +251,12 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Driver Letter</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Total Space</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Used</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Free</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Free (%)</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -249,17 +264,17 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        html =
+         html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
@@ -271,6 +286,11 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[4] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        element[5] +
         `</td></tr>`;
     });
     html =
@@ -332,6 +352,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
     let downloadCsvList = [];
     this.deviceDiskSpaceList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.DriveLetter || "N/A",
         element.size,

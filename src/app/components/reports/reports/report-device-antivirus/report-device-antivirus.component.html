@@ -88,8 +88,15 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                      <th
+                      class="device"
+                      (click)="onFilter('name')"
+                  >
+                      COMPANY NAME
+                      <span class="qt-table-modern__sorting"></span>
+                  </th>
                         <th
-                            class="device"
+                            class="company"
                             (click)="onFilter('name')"
                         >
                             DEVICE NAME
@@ -106,6 +113,7 @@
                 </thead>
                 <tbody class="device-antivirus-report-table">
                     <tr *ngFor="let deviceAntivirus of deviceAntivirusList">
+                        <td class="company">{{deviceAntivirus.CompanyName}}</td>
                         <td class="device">{{ deviceAntivirus.Name }}</td>
                         <td class="device">{{ deviceAntivirus.VirusProtectionProducts?  deviceAntivirus.VirusProtectionProducts.split('|')[0] : '' }}</td>
                     </tr>

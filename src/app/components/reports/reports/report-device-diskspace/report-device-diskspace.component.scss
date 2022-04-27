@@ -2,6 +2,10 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    .company{
+      width: 14% !important;
+      padding: 0 18px 0 18px;
+    }
     .device {
       width: 25% !important;
       padding: 0 18px 0 18px;
@@ -17,11 +21,11 @@
       padding: 0px;
     }
     .used {
-      width: 15% !important;
+      width: 10% !important;
       padding: 0px;
     }
     .free {
-      width: 15% !important;
+      width: 12% !important;
       padding: 0px;
     }
     .free-per {

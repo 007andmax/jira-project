@@ -52,6 +52,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceProcessorRamList();
   }
 
   setPreviewDataDevice() {
@@ -60,6 +61,17 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       });
   }
 
+  getDeviceProcessorRamList(){
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceProcessorRamList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceProcessorRam().subscribe((data) =>{
+      this.deviceProcessorRamList =data;
+    })
+  }
   getAllCompanyList(id) {
     this.deviceProcessorRamList = [];
     this.agentService.getDeviceProcessorRamByGuid(id).subscribe((resp) => {
@@ -96,7 +108,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceProcessorRamList = [];
+      this.getDeviceProcessorRamList();
     }
   }
 
@@ -135,6 +147,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     let pdfList = [];
     this.deviceProcessorRamList.forEach((element) => {
       pdfList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
         element.Model == null ? "N/A" : element.Model.replace(",", " "),
@@ -233,11 +246,12 @@ export class ReportDeviceProcessorramComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 18%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Manufacturer</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Model</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">ProcessorType</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 10%;">MemoryGB</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 12%;">MemoryGB</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -245,28 +259,33 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 18%;vertical-align: top;">` +
         element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        `</td>`
+        html =
+         html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[3] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 10%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[4] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
+        element[5] +
         `</td></tr>`;
     });
     html =
@@ -332,6 +351,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     let downloadCsvList = [];
     this.deviceProcessorRamList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
         element.Model == null ? "N/A" : element.Model.replace(",", " "),
