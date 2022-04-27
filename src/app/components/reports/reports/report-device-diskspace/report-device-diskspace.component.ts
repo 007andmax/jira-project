@@ -354,4 +354,14 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
   onFilter(field) {
     this.filter.onFilter(field, this.deviceDiskSpaceList);
   }
+
+  public getFreePercentage(item: any) {
+    var freeSpace = parseInt(item.FreeSpace)||0;
+    var size = parseInt(item.size)||0;
+    if(size == 0|| freeSpace ==0) {
+      return '-';
+    }
+
+    return (freeSpace * 100/size).toFixed(0) +'%';
+  }
 }

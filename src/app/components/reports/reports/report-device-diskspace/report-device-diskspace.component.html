@@ -99,6 +99,7 @@
                         <th class="totalSpace">TOTAL SPACE</th>
                         <th class="used">USED</th>
                         <th class="free">FREE</th>
+                        <th class="free-per">FREE (%)</th>
                     </tr>
                 </thead>
                 <tbody class="device-diskspace-report-table">
@@ -108,6 +109,7 @@
                         <td class="totalSpace">{{ deviceDiskSpace.size }} GB</td>
                         <td class="used">{{deviceDiskSpace.UsedSpace}} GB</td>
                         <td class="free">{{ deviceDiskSpace.FreeSpace }} GB</td>
+                        <td class="free-per" > {{ getFreePercentage(deviceDiskSpace) }}</td>
                     </tr>
                 </tbody>
             </table>
