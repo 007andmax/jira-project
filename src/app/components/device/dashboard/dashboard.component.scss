@@ -3,7 +3,7 @@
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
 @import '../../../../assets/scss/device/_nav';
-@import '../../../../src/assets/styles/variable';
+@import './src/assets/styles/variable';
 
 .cmn-wrapper.dashboard {
     width: 100%;
@@ -145,7 +145,6 @@
                               font-size: 13px;
                               font-weight: 500;
                               font-style: normal;
-                              font-family: $graphicMedBold;
                               line-height: 1.54;
                               letter-spacing: normal;
                               color: #4f5f79;
@@ -880,7 +879,6 @@
   background-color: $white-color;
   padding: 9.5px 16px;
   font-size: 12px;
-  font-family: $graphicSemibold;
   line-height: 1.33;
   letter-spacing: normal;
   color: $primary-color;

@@ -1,7 +1,7 @@
-@import "../../../assets/scss/device/variable";
-@import "../../../assets/scss/device/mixin";
-@import "../../../assets/scss/device/custom";
-@import "../../../assets/scss/device/_modals.scss";
+@import "./src/assets/scss/device/variable";
+@import "./src/assets/scss/device/mixin";
+@import "./src/assets/scss/device/custom";
+@import "./src/assets/scss/device/_modals.scss";
 .form-input-search {
   padding: 7px 14px 7px 34px;
   background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
@@ -407,7 +407,6 @@ input.mat-chip-input {
   background-color: $white-color;
   padding: 9.5px 16px;
   font-size: 12px;
-  font-family: $graphicSemibold;
   line-height: 1.33;
   letter-spacing: normal;
   color: $primary-color;

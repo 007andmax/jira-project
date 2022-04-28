@@ -2,6 +2,7 @@
 //
 // Kickstart any navigation component with a set of style resets. Works with
 // `<nav>`s, `<ul>`s or `<ol>`s.
+@import './src/assets/scss/device/variable';
 
 .nav {
   display: flex;
