@@ -2,8 +2,12 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    .company{
+      width: 14% !important;
+      padding: 0 18px 0 18px;
+    }
     .application{
-      width: 60% !important;
+      width: 40% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;

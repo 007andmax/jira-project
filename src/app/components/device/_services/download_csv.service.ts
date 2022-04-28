@@ -14,7 +14,7 @@ export class ExcelService {
     if (type === "hardware") {
       typeArr = ["label", "value"];
     } else if (type === "softwaresummaryreport") {
-      [(typeArr = ["Device Name", "Software Name", "Publisher", "Version"])];
+      [(typeArr = ["Company Name", "Device Name", "Software Name", "Publisher", "Version"])];
     } else if (type === "devicesummaryreport") {
       [(typeArr = ["Company Name","Device Name", "Manufacturer", "Model", "SerialNumber"])];
     } else if (type === "devicewarrantyreport") {
@@ -30,7 +30,7 @@ export class ExcelService {
     } else if (type === "devicenetworkdetailreport"){
       [(typeArr = ["Company Name", "Device Name", "Domain", "Manf(nic)", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2","ExtIP"])];
     } else if (type === "applicationbycompanyreport"){
-      [(typeArr = ["Application", "Version", "Device Count"])];
+      [(typeArr = ["Company Name", "Application", "Version", "Device Count"])];
     } else if (type === "devicediskspacereport"){
       [(typeArr = ["Company Name", "Device Name", "Drive Letter", "Total Space","Used", "Free (%)"])];
     } else if (type === "devicedeploymentwarrantyreport"){

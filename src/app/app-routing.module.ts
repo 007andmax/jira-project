@@ -1,3 +1,4 @@
+import { ProcessesComponent } from './components/device/processes/processes.component';
 import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -306,6 +307,10 @@ const routes: Routes = [
       {
         path: 'windows/:type/:id',
         component: WindowUpdatesComponent
+      },
+      {
+        path: 'processes/:type/:id',
+        component: ProcessesComponent
       },
     ]
   },

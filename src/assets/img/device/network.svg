@@ -1,0 +1,17 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="94.643%" id="21db9r4mga">
+            <stop stop-color="#6FC9FF" stop-opacity=".4" offset="0%"/>
+            <stop stop-color="#EEE" stop-opacity=".115" offset="100%"/>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="94.643%" id="zo2dpe11kb">
+            <stop stop-color="#6FC9FF" stop-opacity=".4" offset="0%"/>
+            <stop stop-color="#EEE" stop-opacity=".115" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <g stroke="#4F5F79" fill="none" fill-rule="evenodd">
+        <path d="M19.31 9.99H4.68C3.2 9.99 2 8.78 2 7.31V4.68C2 3.2 3.21 2 4.68 2h14.63c1.48 0 2.68 1.21 2.68 2.68v2.63c0 1.47-1.21 2.68-2.68 2.68z" fill="url(#21db9r4mga)"/>
+        <path d="M19.31 21.99H4.68C3.2 21.99 2 20.78 2 19.31v-2.63C2 15.2 3.21 14 4.68 14h14.63c1.48 0 2.68 1.21 2.68 2.68v2.63c0 1.47-1.21 2.68-2.68 2.68z" fill="url(#zo2dpe11kb)"/>
+        <path fill="#FFF" stroke-linecap="round" stroke-linejoin="round" d="M5.99 4.99v2M9.99 4.99v2M5.99 16.99v2M9.99 16.99v2M13.99 5.99h4M13.99 17.99h4"/>
+    </g>
+</svg>

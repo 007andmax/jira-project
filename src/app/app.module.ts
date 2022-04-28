@@ -468,6 +468,7 @@ import { WindowUpdatesComponent } from './components/device/window-updates/windo
 import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 import { ModelPipe } from './pipe/model.pipe';
 import { StartUpProgramPipe } from './pipe/startup-program.pipe';
+import { ProcessesComponent } from './components/device/processes/processes.component';
 
 declare var $: any;
 /**
@@ -892,7 +893,8 @@ declare var $: any;
     WindowUpdatesComponent,
     DeviceSettingComponent,
     ModelPipe,
-    StartUpProgramPipe
+    StartUpProgramPipe,
+    ProcessesComponent
   ],
   imports: [
     BrowserModule,

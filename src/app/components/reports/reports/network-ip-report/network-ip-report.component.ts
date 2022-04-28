@@ -55,6 +55,7 @@ export class NetworkIpReportComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceNetworkIpList();
   }
 
   setPreviewDataDevice() {
@@ -63,6 +64,17 @@ export class NetworkIpReportComponent implements OnInit {
       });
   }
 
+  getDeviceNetworkIpList(){
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceNetworkIpList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceNetworkIP().subscribe((resp) =>{
+      this.networkipList = resp;
+    })
+  }
   getAllCompanyList(id) {
     this.networkipList = [];
     this.agentService.getDeviceNetworkIPByGuid(id).subscribe((resp) => {
@@ -99,7 +111,7 @@ export class NetworkIpReportComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.networkipList = [];
+      this.getDeviceNetworkIpList();
     }
   }
 

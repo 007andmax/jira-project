@@ -2,6 +2,10 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    .company{
+      width: 14% !important;
+      padding: 0 18px 0 18px;
+    }
     .device {
       width: 15% !important;
       padding: 0 18px 0 18px;
@@ -9,7 +13,7 @@
       height: 40px;
     }
     .s-name {
-      width: 35% !important;
+      width: 30% !important;
       padding: 0px;
     }
     .pulisher {
