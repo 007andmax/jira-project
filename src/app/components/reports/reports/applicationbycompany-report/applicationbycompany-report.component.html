@@ -88,6 +88,13 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                      <th
+                            class="company"
+                            (click)="onFilter('Name')"
+                        >
+                            COMPANY NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
                         <th
                             class="application"
                             (click)="onFilter('DisplayName')"
@@ -101,6 +108,7 @@
                 </thead>
                 <tbody class="applicationbycompany-report-table">
                     <tr *ngFor="let applicationByCompany of applicationByCompanyList">
+                        <td class="company">{{applicationByCompany.Assets[0].CompanyName}}</td>
                         <td class="application">{{applicationByCompany.DisplayName}}</td>
                         <td class="version">
                             {{ applicationByCompany.DisplayVersion }}
@@ -148,7 +156,7 @@
       <div class="application-count__row">
           <div
               class="application-count__row-title"
-              [textContent]="applicationAsset"
+              [textContent]="applicationAsset.AssetName"
           ></div>
       </div>
   </div>

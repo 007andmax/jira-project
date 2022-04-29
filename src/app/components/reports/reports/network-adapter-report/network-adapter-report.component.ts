@@ -53,12 +53,19 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceNetworkAdapterList()
   }
 
   setPreviewDataDevice() {
       this.companiesStateService.getOnCompanies().subscribe((data) => {
         this.companies = this.getClientsList(data);
       });
+  }
+
+  getDeviceNetworkAdapterList(){
+    this.agentService.getDeviceNetworkAdapter().subscribe((resp) =>{
+      this.networkAdapterList = resp;
+    });
   }
 
   getAllCompanyList(id) {
@@ -97,7 +104,7 @@ export class NetworkAdapterReportComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.networkAdapterList = [];
+      this.getDeviceNetworkAdapterList();
     }
   }
 

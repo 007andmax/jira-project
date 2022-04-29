@@ -55,6 +55,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceDeplyomentList();
   }
 
   setPreviewDataDevice() {
@@ -63,6 +64,17 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
       });
   }
 
+getDeviceDeplyomentList(){
+  if(this.agentService.AccessToken == ''){
+    setTimeout(() => {
+      this.getDeviceDeplyomentList();
+    }, 300);
+    return;
+  }
+  this.agentService.getDeviceDeploymentWarranty().subscribe((resp) =>{
+    this.deviceDeploymentWarrantyList = resp;
+  })
+}
   getAllCompanyList(id) {
     this.deviceDeploymentWarrantyList = [];
     this.agentService.getDeviceDeploymentWarrantyByGuid(id).subscribe((resp) => {
@@ -99,7 +111,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceDeploymentWarrantyList = [];
+      this.getDeviceDeplyomentList();
     }
   }
 

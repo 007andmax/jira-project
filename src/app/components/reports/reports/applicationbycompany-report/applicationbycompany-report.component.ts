@@ -46,6 +46,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   closeResult: string = '';
   applicationAssetNameList : any[];
   displayName: string;
+  assetNameList : any [];
   constructor(
     private agentService: AgentService,
     private companiesState: CompaniesStateService,
@@ -63,6 +64,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getCompanyApplicationList();
   }
 
   setPreviewDataDevice() {
@@ -81,6 +83,18 @@ export class ApplicationbycompanyReportComponent implements OnInit {
           ? -1
           : 0
       );
+  }
+
+  getCompanyApplicationList(){
+    if(this.agentService.AccessToken == ''){
+      setTimeout(() =>{
+        this.getCompanyApplicationList();
+      }, 300);
+      return;
+    }
+    this.agentService.getCompanyApplication().subscribe((resp) => {
+      this.applicationByCompanyList = resp;
+    })
   }
 
   getReportByCompanyApplication() {
@@ -115,7 +129,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       this.application = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.applicationByCompanyList = [];
+      this.getCompanyApplicationList();
     }
   }
 
@@ -154,6 +168,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     let pdfList = [];
     this.applicationByCompanyList.forEach((element) => {
       pdfList.push([
+        element.Assets[0].CompanyName.replace(",", " ") || "N/A",
         element.DisplayName.replace(","," ") || "N/A",
         element.DisplayVersion || "N/A",
         element.AssetCount || "N/A",
@@ -250,9 +265,10 @@ export class ApplicationbycompanyReportComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                           <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 40%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 60%;">Application</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 30%;">Version</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 10%;">Device Count</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Device Count</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -260,18 +276,23 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 60%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
+        html =
+         html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 60%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 10%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[2] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        element[3] +
         `</td></tr>`;
     });
     html =
@@ -337,6 +358,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     let downloadCsvList = [];
     this.applicationByCompanyList.forEach((element) => {
       downloadCsvList.push([
+        element.Assets[0].CompanyName.replace(",", " ") || "N/A",
         element.DisplayName.replace(","," ") || "N/A",
         element.DisplayVersion || "N/A",
         element.AssetCount || "N/A",
@@ -362,9 +384,9 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.applicationLoading= true;
     this.displayName = applicationByCompany.DisplayName;
 
-    for(var i=0; i<applicationByCompany.AssetNames.length; i++){
-      this.applicationAssetNameList = applicationByCompany.AssetNames;
-    }
+    for(var i=0; i<applicationByCompany.Assets.length; i++){
+       this.applicationAssetNameList = applicationByCompany.Assets;
+      }
 
     this.ngZone.run(() => {
       this.modalService

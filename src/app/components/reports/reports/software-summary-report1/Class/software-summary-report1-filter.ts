@@ -5,6 +5,7 @@ export class SoftwareSummaryReportFilter {
     new FilterListTop("name", "ASC"),
     new FilterListTop("pulisher", ""),
     new FilterListTop("device", ""),
+    new FilterListTop("companyName", ""),
   ];
   constructor() {}
 
@@ -37,6 +38,16 @@ export class SoftwareSummaryReportFilter {
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
           this.onFilterdevice(software);
+        } else {
+          this.filterTop[index].filter = "DESC";
+          software.reverse();
+        }
+      }
+      if (field === "companyName") {
+        this.clearFilter();
+        if (sort === "" || sort === "DESC") {
+          this.filterTop[index].filter = "ASC";
+          this.onFilterCompanyName(software);
         } else {
           this.filterTop[index].filter = "DESC";
           software.reverse();
@@ -93,5 +104,21 @@ export class SoftwareSummaryReportFilter {
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
+  }
+
+  public onFilterCompanyName(software) {
+    software.sort((a, b) =>
+      this.getNameCompanyName(a).toLowerCase() >
+      this.getNameSoftware(b).toLowerCase()
+        ? 1
+        : this.getNameSoftware(b).toLowerCase() >
+          this.getNameSoftware(a).toLowerCase()
+        ? -1
+        : 0
+    );
+  }
+
+  private getNameCompanyName(software) {
+    return software.CompanyName;
   }
 }

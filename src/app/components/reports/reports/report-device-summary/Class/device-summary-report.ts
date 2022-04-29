@@ -5,6 +5,7 @@ export class DeviceSummaryReportFilter {
     new FilterListTop("name", "ASC"),
     new FilterListTop("manufacturer", ""),
     new FilterListTop("model", ""),
+    new FilterListTop("companyName", ""),
   ];
   constructor() {}
 
@@ -37,6 +38,16 @@ export class DeviceSummaryReportFilter {
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
           this.onFilterModel(Device);
+        } else {
+          this.filterTop[index].filter = "DESC";
+          Device.reverse();
+        }
+      }
+      if (field === "companyName") {
+        this.clearFilter();
+        if (sort === "" || sort === "DESC") {
+          this.filterTop[index].filter = "ASC";
+          this.onFilterCompanyName(Device);
         } else {
           this.filterTop[index].filter = "DESC";
           Device.reverse();
@@ -93,5 +104,21 @@ export class DeviceSummaryReportFilter {
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
+  }
+
+  public onFilterCompanyName(Device) {
+    Device.sort((a, b) =>
+      this.getCompanyName(a).toLowerCase() >
+      this.getCompanyName(b).toLowerCase()
+        ? 1
+        : this.getCompanyName(b).toLowerCase() >
+          this.getCompanyName(a).toLowerCase()
+        ? -1
+        : 0
+    );
+  }
+
+  private getCompanyName(Device) {
+    return Device.CompanyName;
   }
 }

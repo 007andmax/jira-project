@@ -96,6 +96,11 @@ export class NavComponent implements OnInit {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/windows/${this.type}/${this._id}`]);
   }
+
+  goToProcesses() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/processes/${this.type}/${this._id}`]);
+  }
   getCurrentCompany() {
 
     this.commonHttpServices.getCurrentCompany()

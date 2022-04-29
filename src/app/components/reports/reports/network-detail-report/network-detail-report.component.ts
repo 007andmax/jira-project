@@ -54,6 +54,7 @@ export class NetworkDetailReportComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceNetworkList();
   }
 
   setPreviewDataDevice() {
@@ -62,6 +63,17 @@ export class NetworkDetailReportComponent implements OnInit {
       });
   }
 
+  getDeviceNetworkList(){
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceNetworkList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceNetworkDetail().subscribe((resp) =>{
+      this.networkDetailList = resp;
+    })
+  }
   getAllCompanyList(id) {
     this.networkDetailList = [];
     this.agentService.getDeviceNetworkDetailByGuid(id).subscribe((resp) => {
@@ -98,7 +110,7 @@ export class NetworkDetailReportComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.networkDetailList = [];
+      this.getDeviceNetworkList();
     }
   }
 

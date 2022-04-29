@@ -63,6 +63,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
   ngOnInit() {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getCompanyApplication();
   }
 
   setPreviewDataDevice() {
@@ -80,6 +81,66 @@ export class SoftwareSummaryReport1Component implements OnInit {
           ? -1
           : 0
       );
+  }
+
+  getCompanyApplication(){
+    if(this.agentService.AccessToken == ''){
+      setTimeout(() =>{
+         this.getCompanyApplication();
+      }, 3000)
+      return;
+    }
+    this.agentService.getCompanyApplications().subscribe((resp) => {
+      if (resp.length > 0) {
+        for (let i = 0; i < resp.length; i++) {
+          if (resp[i].DisplayName != "") {
+            let data = {
+              DisplayName: resp[i].DisplayName,
+            };
+            this.tempSoftware.push(data);
+          }
+          if (resp[i].Publisher != "") {
+            let data = {
+              DisplayName: resp[i].Publisher,
+            };
+            this.tempSoftware.push(data);
+          }
+          this.software = this.tempSoftware
+            .map((item) => item.DisplayName)
+            .filter((value, index, self) => self.indexOf(value) === index);
+
+          if (resp[i].AssetCount > 1) {
+            let Name = resp[i].Assets;
+            for (let j = 0; j < Name.length; j++) {
+              let data = {
+                DisplayName: resp[i].DisplayName,
+                DisplayVersion: resp[i].DisplayVersion,
+                Publisher: resp[i].Publisher,
+                AssetCount: resp[i].AssetCount,
+                AssetNames: Name[j].AssetName,
+                CompanyName : Name[j].CompanyName,
+              };
+              this.tempReport.push(data);
+            }
+          } else {
+            let data = {
+              DisplayName: resp[i].DisplayName,
+              DisplayVersion: resp[i].DisplayVersion,
+              Publisher: resp[i].Publisher,
+              AssetCount: resp[i].AssetCount,
+              AssetNames: resp[i].Assets[0].AssetName,
+              CompanyName : resp[i].Assets[0].CompanyName,
+            };
+            this.tempReport.push(data);
+          }
+        }
+        this.devices = this.tempReport
+        .map((item) => item.AssetNames)
+        .filter((value, index, self) => self.indexOf(value) === index);
+
+        this.softwareReportList = this.tempReport.sort((a,b)=>a.AssetNames.toLowerCase()>b.AssetNames.toLowerCase()?1:b.AssetNames.toLowerCase()>a.AssetNames.toLowerCase()?-1:0);
+      }
+    })
   }
 
   getReportBySoftwareSummary() {
@@ -114,14 +175,15 @@ export class SoftwareSummaryReport1Component implements OnInit {
               .filter((value, index, self) => self.indexOf(value) === index);
 
             if (resp[i].AssetCount > 1) {
-              let Name = resp[i].AssetNames;
+              let Name = resp[i].Assets;
               for (let j = 0; j < Name.length; j++) {
                 let data = {
                   DisplayName: resp[i].DisplayName,
                   DisplayVersion: resp[i].DisplayVersion,
                   Publisher: resp[i].Publisher,
                   AssetCount: resp[i].AssetCount,
-                  AssetNames: Name[j],
+                  AssetNames: Name[j].AssetName,
+                  CompanyName : Name[j].CompanyName,
                 };
                 this.tempReport.push(data);
               }
@@ -131,7 +193,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
                 DisplayVersion: resp[i].DisplayVersion,
                 Publisher: resp[i].Publisher,
                 AssetCount: resp[i].AssetCount,
-                AssetNames: resp[i].AssetNames[0],
+                AssetNames: resp[i].Assets[0].AssetName,
+                CompanyName : resp[i].Assets[0].CompanyName,
               };
               this.tempReport.push(data);
             }
@@ -304,7 +367,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
       this.softwareSummaryReport.setCompanyId(null);
       this.softwareSummaryReport.setDeviceName(null);
       this.softwareSummaryReport.setSoftwareSoft(null);
-      this.softwareReportList = [];
+      this.getCompanyApplication();
       this.dropdownDevice.clearWithOutChanges();
       this.dropdownSoftware.clearWithOutChanges();
     }
@@ -328,6 +391,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     let pdfList = [];
     this.softwareReportList.forEach((element) => {
       pdfList.push([
+        element.CompanyName.replace(",", " ") || "N/A",
         element.AssetNames.replace(",", " ") || "N/A",
         element.DisplayName.replace(",", " ") || "N/A",
         element.Publisher.replace(",", " ") || "N/A",
@@ -425,6 +489,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 40%;">Software Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Publisher</th>
@@ -436,23 +501,28 @@ export class SoftwareSummaryReport1Component implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[3] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        element[4] +
         `</td></tr>`;
     });
     html =
@@ -518,6 +588,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     let downloadCsvList = [];
     this.softwareReportList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName.replace(",", " ") || "N/A",
         element.AssetNames.replace(",", " ") || "N/A",
         element.DisplayName.replace(",", " ") || "N/A",
         element.Publisher.replace(",", " ") || "N/A",

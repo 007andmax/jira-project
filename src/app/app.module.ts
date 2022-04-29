@@ -464,7 +464,7 @@ import { WindowUpdatesComponent } from './components/device/window-updates/windo
 import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 import { ModelPipe } from './pipe/model.pipe';
 import { StartUpProgramPipe } from './pipe/startup-program.pipe';
-import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
+import { ProcessesComponent } from './components/device/processes/processes.component';
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
 import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
@@ -984,7 +984,7 @@ declare var $: any;
     DeviceSettingComponent,
     ModelPipe,
     StartUpProgramPipe,
-    CompanyDashAssociateComponent,
+    ProcessesComponent
     CompanyAssociateComponent,
     CompanyDashAssociateInfoComponent,
     PreparePhonePipe,

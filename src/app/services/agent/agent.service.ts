@@ -229,9 +229,27 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getDeviceDeploymentWarranty() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceDeploymentWarranty`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getDeviceNetworkAdapterByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceNetworkAdapter/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceNetworkAdapter() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceNetworkAdapter`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -247,9 +265,27 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getDeviceNetworkDetail() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceNetworkDetailed`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getDeviceNetworkIPByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceNetworkIP/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceNetworkIP() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceNetworkIP`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -265,9 +301,27 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getDeviceAntivirus() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceAntivirus`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getDeviceWarrantyByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceWarranty/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceWarranty() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceWarranty`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -313,6 +367,24 @@ export class AgentService {
   public getCompanyApplicationByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/CompanyApplication/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getCompanyApplications() {
+    return this.http
+      .get(`${this.apiAgent}report/CompanyApplication`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getCompanyApplication() {
+    return this.http
+      .get(`${this.apiAgent}report/CompanyApplication`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -829,6 +901,21 @@ export class AgentService {
         .subscribe(() => { });
     } else {
       setTimeout(() => this.GetService(asset_ID), 3000);
+    }
+  }
+
+  public GetProcesses(asset_ID) {
+    const data = {
+      AssetID: asset_ID,
+      MessageType: "GetProcesses",
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => { });
+    } else {
+      setTimeout(() => this.GetProcesses(asset_ID), 3000);
     }
   }
 

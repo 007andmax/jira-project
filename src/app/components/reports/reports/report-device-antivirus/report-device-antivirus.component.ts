@@ -55,6 +55,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceAntivirusList();
   }
 
   setPreviewDataDevice() {
@@ -63,6 +64,17 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       });
   }
 
+  getDeviceAntivirusList(){
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceAntivirusList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceAntivirus().subscribe((resp) =>{
+      this.deviceAntivirusList = resp;
+    });
+  }
   getAllCompanyList(id) {
     this.deviceAntivirusList = [];
     this.agentService.getDeviceAntivirusByGuid(id).subscribe((resp) => {
@@ -99,7 +111,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceAntivirusList = [];
+      this.getDeviceAntivirusList();
     }
   }
 

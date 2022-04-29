@@ -55,12 +55,25 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    this.getDeviceWarrantyList();
   }
 
   setPreviewDataDevice() {
       this.companiesStateService.getOnCompanies().subscribe((data) => {
         this.companies = this.getClientsList(data);
       });
+  }
+
+  getDeviceWarrantyList(){
+    if(this.agentService.AccessToken == ''){
+      setTimeout(() => {
+        this.getDeviceWarrantyList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceWarranty().subscribe((resp) => {
+      this.deviceWarrantyList = resp;
+    })
   }
 
   getAllCompanyList(id) {
@@ -99,7 +112,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceWarrantyList = [];
+      this.getDeviceWarrantyList();
     }
   }
 
