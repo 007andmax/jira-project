@@ -12,7 +12,7 @@ import { DocumentsFilterComponent } from './documents-filter/documents-filter.co
   styleUrls: ['./documents-header.component.css']
 })
 export class DocumentsHeaderComponent implements OnInit {
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   countFilter: number = 0;
   activePage: string = "";
   @ViewChild('filter') filter: DocumentsFilterComponent;

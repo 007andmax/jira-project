@@ -11,7 +11,7 @@ export class InvoicesHeaderComponent implements OnInit {
   @ViewChild('filter') filter: InvoicesFilterComponent;
   countFilter: number = 0;
 
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   @Output() onCreateInvoice = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
   constructor() { }

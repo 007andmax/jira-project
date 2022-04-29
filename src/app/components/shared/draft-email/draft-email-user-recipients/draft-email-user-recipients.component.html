@@ -51,15 +51,32 @@
         <ng-template
             ngFor
             let-user
-            [ngForOf]="userList"
+            [ngForOf]="usersClients"
             [ngForTrackBy]="trackByIndex"
         >
             <button
                 ngbDropdownItem
                 class="dropdown-item"
                 (click)="selected(user)"
-                [textContent]="user.primaryEmail"
             >
+                <span class="user-name">{{getFirstLastName(user)}}</span>
+                <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
+            </button>
+        </ng-template>
+        <hr>
+        <ng-template
+            ngFor
+            let-user
+            [ngForOf]="usersTechnical"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <button
+                ngbDropdownItem
+                class="dropdown-item"
+                (click)="selected(user)"
+            >
+                <span class="user-name">{{getFirstLastName(user)}}</span>
+                <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
             </button>
         </ng-template>
     </div>

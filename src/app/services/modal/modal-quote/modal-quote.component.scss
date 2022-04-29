@@ -1,1 +1,14 @@
 
+.user-name {
+min-width: 50px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.user-email {
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ 

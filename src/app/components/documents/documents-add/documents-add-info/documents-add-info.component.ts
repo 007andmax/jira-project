@@ -46,10 +46,10 @@ export class DocumentsAddInfoComponent implements OnInit {
     public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
-    private router: Router,
+    public router: Router,
     public tagsState: CompanyTagsStateService,
     private permissionsService: PermissionsService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     public activateRoute: ActivatedRoute,) {
   }
 

@@ -46,6 +46,8 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
 
   }
-
+  getSubTotal(item) {
+    return item.quantity * item.salePrice;
+  }
 
 }

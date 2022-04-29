@@ -1,8 +1,15 @@
-<div
-    class="app-left-panel__menu"
-    (click)="goToState()"
-    [ngClass]="{'--active': activePage === 'inventory'}"
+<a
+    href
+    [link]="'inventory/products'"
+    target="_blank"
+    appRightClickBlank
 >
-    <div class="app-left-panel__menu-icon --products"></div>
-    <div class="app-left-panel__menu-title">Products</div>
-</div>
+    <div
+        class="app-left-panel__menu"
+        (click)="goToState()"
+        [ngClass]="{'--active': activePage === 'inventory'}"
+    >
+        <div class="app-left-panel__menu-icon --products"></div>
+        <div class="app-left-panel__menu-title">Products</div>
+    </div>
+</a>

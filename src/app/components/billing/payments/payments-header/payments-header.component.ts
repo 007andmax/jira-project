@@ -11,7 +11,7 @@ export class PaymentsHeaderComponent implements OnInit {
 
   @ViewChild('filter') filter: PaymentsFilterComponent;
   countFilter: number = 0;
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
   constructor(private permissionsService: PermissionsService,) { }

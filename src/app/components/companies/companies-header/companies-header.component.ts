@@ -21,7 +21,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
 
-  toggleFilter: boolean = false;
+  toggleFilter: boolean = true;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   @ViewChild('filter') filter: CompaniesFilterComponent;

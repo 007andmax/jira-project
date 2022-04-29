@@ -150,6 +150,7 @@
                         <th class="contract-product-products-table__name">Product Name</th>
                         <th class="contract-product-products-table__quantity">Quantity</th>
                         <th class="contract-product-products-table__price">Price</th>
+                        <th class="contract-product-products-table__price">Subtotal</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -173,6 +174,10 @@
                             <td
                                 class="contract-product-products-table__price"
                                 [textContent]="item.salePrice | currency"
+                            ></td>
+                            <td
+                                class="contract-product-products-table__price"
+                                [textContent]="getSubTotal(item) | currency"
                             ></td>
                             <td></td>
                         </tr>
