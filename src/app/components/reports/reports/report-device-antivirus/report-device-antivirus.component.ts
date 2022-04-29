@@ -56,6 +56,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceAntivirusList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -73,6 +74,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     }
     this.agentService.getDeviceAntivirus().subscribe((resp) =>{
       this.deviceAntivirusList = resp;
+      this.loading = false;
     });
   }
   getAllCompanyList(id) {

@@ -56,6 +56,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceWarrantyList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -73,6 +74,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     }
     this.agentService.getDeviceWarranty().subscribe((resp) => {
       this.deviceWarrantyList = resp;
+      this.loading = true;
     })
   }
 

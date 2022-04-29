@@ -41,10 +41,10 @@ export class ExcelService {
       [(typeArr = ["Name", "Command", "User"])];
     }
     else if(type == "DeviceipSummary"){
-      [(typeArr = ["Device", "Network Name", "Link Speed", "Dhcp", "Ip Address", "Subnet", "Gateway", "Dns1", "Dns2", "Wan Ip"])]
+      [(typeArr = ["Company Name", "Device", "Link Speed", "Dhcp", "IP Address", "Subnet", "Gateway", "Dns1", "Dns2", "Wan Ip"])]
     }
     else if(type == "HardwareSummary"){
-      [(typeArr = ["Device", "Operating System", "Cpu", "Ram", "Disk", "Warranty", "Serial Number"])]
+      [(typeArr = ["Company Name", "Device", "Operating System", "Cpu", "Ram", "Disk", "Warranty", "Serial Number"])]
     }
     else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];

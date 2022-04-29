@@ -55,6 +55,7 @@ export class NetworkDetailReportComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceNetworkList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -72,6 +73,7 @@ export class NetworkDetailReportComponent implements OnInit {
     }
     this.agentService.getDeviceNetworkDetail().subscribe((resp) =>{
       this.networkDetailList = resp;
+      this.loading = false;
     })
   }
   getAllCompanyList(id) {

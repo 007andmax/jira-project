@@ -247,9 +247,26 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getHardwareSummaryByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceHardwareSummary/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
   public getDeviceNetworkAdapter() {
     return this.http
       .get(`${this.apiAgent}report/DeviceNetworkAdapter`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getHardwareSummary() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceHardwareSummary`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -340,6 +357,24 @@ export class AgentService {
   public getDeviceSummary() {
     return this.http
       .get(`${this.apiAgent}report/DeviceSummary`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceIpSummaryByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceIPSummary/${companyGuid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceIpSummary() {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceIPSummary`, {
         headers: this.getHeader(),
         responseType: "text",
       })

@@ -56,6 +56,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceDeplyomentList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -73,6 +74,7 @@ getDeviceDeplyomentList(){
   }
   this.agentService.getDeviceDeploymentWarranty().subscribe((resp) =>{
     this.deviceDeploymentWarrantyList = resp;
+    this.loading = false;
   })
 }
   getAllCompanyList(id) {

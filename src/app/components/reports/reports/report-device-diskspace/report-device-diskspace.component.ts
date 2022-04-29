@@ -53,6 +53,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceDiskDriveList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -70,6 +71,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
     }
     this.agentService.getDeviceDiskDrive().subscribe((resp) =>{
       this.deviceDiskSpaceList = resp;
+      this.loading = false;
     })
   }
 

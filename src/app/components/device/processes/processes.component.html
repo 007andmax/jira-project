@@ -1,3 +1,92 @@
-<p>
-  processes works!
-</p>
+<main>
+  <div class="cmn-wrapper">
+      <div class="device-container">
+          <div class="page-container software-list">
+              <!-- Page Title -->
+              <div class="page-header">
+                  <h3>Processes</h3>
+                  <div class="page-header-opt">
+                  </div>
+                  <div class="download-print">
+                      <form method="GET">
+                          <input
+                              type="search"
+                              class="form-input"
+                              [(ngModel)]="search"
+                              name="search"
+                              placeholder="Search Processes…"
+                              autocomplete="off"
+                          >
+                      </form>
+                      <a
+                          (click)="printPdf();"
+                          data-tooltip="Print"
+                      >
+                          <img src="/html/assets/img/device/print.svg">
+                      </a>
+                      <a
+                          (click)="downloadCsv();"
+                          data-tooltip="Download CSV"
+                      >
+                          <img src="/html/assets/img/device/download_csv.svg">
+                      </a>
+                  </div>
+              </div>
+              <!-- Page Content -->
+              <div class="contant-area">
+                  <div class="table-wrap">
+                      <table
+                          #dataTable
+                          datatable
+                          class="dataTable cmn-tab-head"
+                      >
+                          <thead>
+                              <tr>
+                                  <th
+                                      class="pid"
+                                  >
+                                      PID
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                      class="name"
+                                  >
+                                      Name
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                      class="cpu"
+                                  >
+                                      CPU
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                     class="ram"
+                                  >
+                                    Ram
+                                    <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody class="service-table">
+                              <tr *ngFor="let process of processesList | serv: search; let i = index;">
+                                  <td class="pid">
+                                      <h5>{{process.id || 'N/A'}}</h5>
+                                  </td>
+                                  <td class="name">{{process.Name || 'N/A'}}</td>
+                                  <td class="cpu">{{process.CPU}}</td>
+                                  <td class="ram">{{process.Memory}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
+<div
+  class="loading"
+  *ngIf="loading"
+></div>
+

@@ -65,6 +65,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getCompanyApplicationList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {

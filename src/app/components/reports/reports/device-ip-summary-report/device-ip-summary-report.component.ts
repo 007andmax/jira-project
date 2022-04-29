@@ -14,6 +14,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DeviceIpSummary } from '../../class/device-ip-summary';
 import { ReportValidate } from '../../class/report-validate';
 import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
+import { AgentService } from 'src/app/services/agent/agent.service';
 
 @Component({
   selector: 'device-ip-summary-report',
@@ -42,6 +43,9 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   fileName: string = "device-summary-report";
   accountType = "CLIENT";
   loading = false;
+  deviceIpSummaryList : any[]=[];
+  tempararyDeviceList: any = [];
+  tempararyDevice: any = [];
 
   constructor(public cd: ChangeDetectorRef,
     private domSanitizer: DomSanitizer,
@@ -52,113 +56,91 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     private excelService: ExcelService,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private devicesService: DevicesService) { }
+    private agentService: AgentService,
+    ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.loading = true;
+    this.getDeviceIpSummaryList();
+   if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
   }
-  public getReport(data) {
-    this.loadingInProgress = true;
-    this.deviceIpSummary = new DeviceIpSummary(JSON.parse(JSON.stringify(data)));
-    this.company = this.companiesStateService.getCompanies().find(item => item.id == this.deviceIpSummary.companyId);
-    setTimeout(() => {
-      this.onInit = true;
-      this.loadingInProgress = false;
-      if(this.cd) {
-      this.cd.detectChanges();
-      }
-    }, 1000);
-  }
-  public parseHTML(data) {
-    var parser = new DOMParser();
 
-    return parser.parseFromString(data, 'text/html');
-  }
-  getDeviceReport(device, params) {
-    var currentItem = '';
-    if (device.report) {
-      device.report.networkAdapters.map((item) => {
-        if (item.ip_enabled) { currentItem = item[params]; }
-      });
-      if (params === 'dns' || 'subnet') {
-        var regex = /;/gi;
-        currentItem = currentItem.replace(regex, "\n");
-        return currentItem;
-      } else {
-        return currentItem;
-      }
-
-    } else {
-      return ''
-    }
-  };
-  parseFloatValue(value) {
-    return parseFloat(value);
-  }
-
-  public selectClient(selectClient) {
-    if (selectClient == null) {
-      this.selectedClient == null;
-      this.deviceIpSummary.setCompanyId(null);
-      this.getDevicesByCompany(null);
-    } else {
-      this.selectedClient = selectClient
-      this.deviceIpSummary.setCompanyId(selectClient.id);
-      this.getSoftByCompany(selectClient.id);
-      this.getDevicesByCompany(selectClient.id);
-      this.getReportByDeviceIpSummary();
-    }
-    this.onSelectedClient.emit(this.selectedClient);
-  }
-
-  public getDevicesByCompany(companyId) {
-    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
-
-  }
-
-  private setDatareport(data) {
-
-    this.getReports.emit(data);
-    this.loadingInProgress = false;
-    this.onRequest.emit(false);
-  }
-
-  public onSelectDevice(data) {
-    this.deviceIpSummary.setDeviceId((data) ? data.id : null);
-  }
-
-  getReportByDeviceIpSummary() {
-    if (!this.validate.isValidateHardwareSummary(this.deviceIpSummary.companyId)) return;
-    this.getReport(this.deviceIpSummary)
-    this.onRequest.emit(true);
-    this.setDatareport(this.deviceIpSummary)
-  }
-
-  public goToReportList() {
-    this.leftPanelStateService.goToState("new-device-summary");
-  }
 
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
 
-  public getSoftByCompany(companyId) {
-    this.deviceIpSummary.setPreloaderDevices(true);
-    this.devicesService.getSoft(companyId).subscribe((resp: any) => {
-      if (resp) {
-        this.deviceIpSummary.setDevices(resp[companyId]);
-        this.getReportByDeviceIpSummary();
-      }
-      this.deviceIpSummary.setPreloaderDevices(false);
-    }, err => {
-      this.deviceIpSummary.setPreloaderDevices(false);
+  getDeviceIpSummaryList(){
+    this.agentService.getDeviceIpSummary().subscribe((resp) =>{
+      this.deviceIpSummaryList = resp;
+      this.loading = false;
     })
+  }
+
+  getReportByDeviceIpSummary() {
+    this.agentService
+      .getDeviceSummaryByGuid(this.deviceIpSummary.companyId)
+      .subscribe((resp) => {
+        if (resp.length > 0) {
+          this.tempararyDeviceList = [];
+          this.tempararyDeviceList = resp;
+            this.deviceIpSummary.companyId
+            this.tempararyDeviceList = resp;
+            this.tempararyDeviceList = resp;
+            this.devices = this.tempararyDeviceList
+            .map((item) => item.Name)
+            .filter((value, index, self) => self.indexOf(value) === index);
+        }
+      });
+  }
+
+  getDeviceIpSummaryByGuid(clientId){
+    this.agentService.getDeviceIpSummaryByGuid(clientId).subscribe((resp) =>{
+      this.deviceIpSummaryList = resp;
+    })
+  }
+
+  public selectClient(selectClient) {
+    if (selectClient == null) {
+      this.selectedClient == null;
+      this.deviceIpSummary.setCompanyId(null);
+      this.getDeviceIpSummaryList();
+    } else {
+      this.selectedClient = selectClient
+      this.deviceIpSummary.setCompanyId(selectClient.id);
+      this.getDeviceIpSummaryByGuid(selectClient.id);
+      this.getReportByDeviceIpSummary();
+    }
+    this.onSelectedClient.emit(this.selectedClient);
+  }
+
+
+  onSelectDevice(data) {
+    this.deviceIpSummary.setDevices(data ? data : null);
+    if (data) {
+      if (
+        this.deviceIpSummary.companyId
+      ) {
+        this.deviceIpSummaryList = this.tempararyDeviceList.filter(
+          (x) => x.Name == data
+        );
+      }
+    } else {
+      this.deviceIpSummaryList = this.tempararyDeviceList;
+      this.devices = this.tempararyDeviceList
+        .map((item) => item.Name)
+        .filter((value, index, self) => self.indexOf(value) === index);
+    }
+  }
+
+
+  public goToReportList() {
+    this.leftPanelStateService.goToState("new-device-summary");
   }
 
   sendEmail() {
@@ -171,40 +153,22 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     modalRef.componentInstance.accountType = this.accountType;
   }
 
-  getsubnet(device, params) {
-    var currentItem = '';
-    if (device.report) {
-      device.report.networkAdapters.map((item) => {
-        if (item.ip_enabled) { currentItem = item[params]; }
-      });
 
-      if (params === 'dns' || 'subnet') {
-        var regex = /;/gi;
-        currentItem = currentItem.replace(regex, "  ");
-        return currentItem;
-      } else {
-        return currentItem;
-      }
-
-    } else {
-      return ''
-    }
-  };
 
   downloadCsv() {
     let downloadCsvList = [];
-    this.deviceIpSummary.list.forEach((element) => {
+    this.deviceIpSummaryList.forEach((element) => {
       downloadCsvList.push([
-        element.label.replace(",", " ") || "N/A",
-        element.hostName.replace(",", " ") || "N/A",
-        (parseInt(this.getDeviceReport(element, 'speed')) || 0)/1000000 || "N/A",
-        (this.getDeviceReport(element, 'dhcp_server')? 'yes' : 'no')  || "N/A",
-        (this.getDeviceReport(element, 'ip_address')) || "N/A",
-        (this.getsubnet(element, 'subnet'))|| "N/A",
-        (this.getDeviceReport(element, 'gateway')) || "N/A",
-        (this.getsubnet(element, 'dns')) || "N/A",
-        (this.getsubnet(element, 'dns')) || "N/A",
-        element.report.externalIp.replace(",", " ") || "N/A"
+        element.CompanyName.replace(",", " ") || "N/A",
+        element.Name.replace(",", " ") || "N/A",
+        element.Speed == null ?  "N/A" : element.Speed,
+        element.DHCP.replace(",", " ") || "N/A",
+        element.InternalIPAddress.replace(",", " ") || "N/A",
+        element.SubnetMask.replace(",", " ") || "N/A",
+        element.DefaultGateway.replace(",", " ") || "N/A",
+        element.DNS1.replace(",", " ") || "N/A",
+        element.DNS2 == null ?  "N/A" : element.DNS2,
+        element.ExternalIPAddress.replace(",", " ") || "N/A"
       ]);
     });
     let fileName = "Device Ip Summary Report List";
@@ -221,18 +185,18 @@ export class DeviceIpSummaryReportComponent implements OnInit {
 
   getPdfData() {
     let pdfList = [];
-    this.deviceIpSummary.list.forEach((element) => {
+    this.deviceIpSummaryList.forEach((element) => {
       pdfList.push([
-        element.label.replace(",", " ") || "N/A",
-        element.hostName.replace(",", " ") || "N/A",
-        (parseInt(this.getDeviceReport(element, 'speed')) || 0)/1000000 || "N/A",
-        (this.getDeviceReport(element, 'dhcp_server')? 'yes' : 'no')  || "N/A",
-        (this.getDeviceReport(element, 'ip_address')) || "N/A",
-        (this.getDeviceReport(element, 'subnet')) || "N/A",
-       (this.getDeviceReport(element, 'gateway')) || "N/A",
-       (this.getDeviceReport(element, 'dns')) || "N/A",
-       (this.getDeviceReport(element, 'dns')) || "N/A",
-        element.report.externalIp.replace(",", " ") || "N/A"
+        element.CompanyName.replace(",", " ") || "N/A",
+        element.Name.replace(",", " ") || "N/A",
+        element.Speed == null ?  "N/A" : element.Speed,
+        element.DHCP.replace(",", " ") || "N/A",
+        element.InternalIPAddress.replace(",", " ") || "N/A",
+        element.SubnetMask.replace(",", " ") || "N/A",
+        element.DefaultGateway.replace(",", " ") || "N/A",
+        element.DNS1.replace(",", " ") || "N/A",
+        element.DNS2 == null ?  "N/A" : element.DNS2,
+        element.ExternalIPAddress.replace(",", " ") || "N/A"
       ]);
     });
     let html =
@@ -326,8 +290,8 @@ export class DeviceIpSummaryReportComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Device</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Network Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Link Speed</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Dhcp</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Ip Address</th>
@@ -335,7 +299,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Gateway</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Dns1</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Dns2</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Wan Ip</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 40%;">Wan Ip</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -388,7 +352,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
         `</td>`;
         html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[9] +
         `</td>
         </tr>`;

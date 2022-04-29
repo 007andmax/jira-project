@@ -1,3 +1,7 @@
+@import "./src/assets/styles/variable";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./src/assets/styles/fonts";
+
  .run-report-content {
   border-bottom: none !important;
   margin-top: 0px !important;
@@ -71,8 +75,12 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    .company{
+      width: 13% !important;
+      padding: 0 18px 0 18px;
+    }
     .device {
-      width: 18% !important;
+      width: 13% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;
@@ -94,7 +102,7 @@
       padding: 0px;
     }
     .warranty {
-      width: 15% !important;
+      width: 11% !important;
       padding: 0px;
     }
     .serialnumber {
@@ -107,4 +115,12 @@
       }
     }
   }
+}
+
+.loading {
+  top: 280px;
+  right: 700px;
+  left: auto;
+  width: 40px;
+  height: 40px;
 }

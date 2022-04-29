@@ -56,6 +56,7 @@ export class NetworkIpReportComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceNetworkIpList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -73,6 +74,7 @@ export class NetworkIpReportComponent implements OnInit {
     }
     this.agentService.getDeviceNetworkIP().subscribe((resp) =>{
       this.networkipList = resp;
+      this.loading = false;
     })
   }
   getAllCompanyList(id) {

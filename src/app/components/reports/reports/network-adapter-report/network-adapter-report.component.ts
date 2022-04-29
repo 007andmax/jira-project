@@ -54,6 +54,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceNetworkAdapterList()
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -65,6 +66,7 @@ export class NetworkAdapterReportComponent implements OnInit {
   getDeviceNetworkAdapterList(){
     this.agentService.getDeviceNetworkAdapter().subscribe((resp) =>{
       this.networkAdapterList = resp;
+      this.loading = false;
     });
   }
 

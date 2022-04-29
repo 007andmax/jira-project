@@ -59,6 +59,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getSummaryList();
+    this.loading = true;
+
   }
 
   setPreviewDataDevice() {
@@ -76,6 +78,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
     }
     this.agentService.getDeviceSummary().subscribe((resp) =>{
       this.deviceSummaryList = resp;
+      this.loading = false;
     })
   }
 

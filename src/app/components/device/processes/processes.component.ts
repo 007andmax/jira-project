@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
+import { ExcelService } from '../_services/download_csv.service';
 
 @Component({
   selector: 'processes',
@@ -14,12 +15,15 @@ export class ProcessesComponent implements OnInit {
   public Id: string;
   public assetId: number;
   public asset: any;
+  pdfUrl = "";
+  public search: string;
 
   constructor(
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
     private activateRoute: ActivatedRoute,
     private agentService: AgentService,
+    private excelService: ExcelService,
   ) { }
 
   ngOnInit() {
@@ -47,8 +51,9 @@ export class ProcessesComponent implements OnInit {
   }
 
   public onGetProcess(resp: any) {
-    if (resp) {
-      this.processesList = JSON.parse(resp.Value);
+    let item = resp.find((x) => x.key == this.assetId);
+    if (item) {
+      this.processesList = JSON.parse(item.Value);
       for(let i=0;i<this.processesList.length;i++)
       {
         this.processesList[i] = Object.assign(this.processesList[i],{Loaded:'False',RestartLoaded:'False',StopLoaded:'False'});
@@ -59,4 +64,23 @@ export class ProcessesComponent implements OnInit {
       this.cd.detectChanges();
     }
   }
+
+  public downloadCsv(){
+    let downloadCsvList = [];
+    this.processesList.forEach((element) => {
+      downloadCsvList.push([
+        element.id == null ? "N/A" : element.id,
+        element.Name == null ? "N/A" : element.Name.replace(",", " "),
+        element.CPU == null ? "N/A" : element.CPU.replace(",", " "),
+        element.Memory == null ? "N/A" : element.Memory,
+      ]);
+    });
+    let fileName = "Processes";
+    this.excelService.generateExcel(downloadCsvList, fileName, "processes");
+  }
+
+  printPdf() {
+    window.open(this.pdfUrl, "_blank");
+  }
+
 }

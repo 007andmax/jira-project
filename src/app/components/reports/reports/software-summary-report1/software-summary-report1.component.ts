@@ -64,6 +64,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getCompanyApplication();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -92,6 +93,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     }
     this.agentService.getCompanyApplications().subscribe((resp) => {
       if (resp.length > 0) {
+      this.loading = false;
         for (let i = 0; i < resp.length; i++) {
           if (resp[i].DisplayName != "") {
             let data = {

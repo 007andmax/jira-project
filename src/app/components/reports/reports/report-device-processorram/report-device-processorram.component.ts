@@ -53,6 +53,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     this.companiesState.onInit();
     this.setPreviewDataDevice();
     this.getDeviceProcessorRamList();
+    this.loading = true;
   }
 
   setPreviewDataDevice() {
@@ -70,6 +71,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     }
     this.agentService.getDeviceProcessorRam().subscribe((data) =>{
       this.deviceProcessorRamList =data;
+      this.loading = false;
     })
   }
   getAllCompanyList(id) {

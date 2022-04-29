@@ -13,6 +13,8 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 import { ReportValidate } from '../../class/report-validate';
 import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
+import { AgentService } from 'src/app/services/agent/agent.service';
+import { HardwareSummaryReportFilter } from './Class/hardware-summary-report';
 
 @Component({
   selector: 'hardware-summary-report',
@@ -24,7 +26,7 @@ export class HardwareSummaryReportComponent implements OnInit {
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   company: any;
-  hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
+  hardwareSummaryReport: any[];
   companies : any[]=[];
   devices : any[]=[];
   clientName: string;
@@ -41,6 +43,12 @@ export class HardwareSummaryReportComponent implements OnInit {
   fileName: string = "device-summary-report";
   accountType = "CLIENT";
   loading = false;
+  filter: HardwareSummaryReportFilter =
+  new HardwareSummaryReportFilter();
+  deviceSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
+  tempararyDeviceList: any = [];
+  tempararyDevice: any = [];
+
 
 
   constructor(public cd: ChangeDetectorRef,
@@ -51,28 +59,56 @@ export class HardwareSummaryReportComponent implements OnInit {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private commonHttpServices: CommonHttpServices,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private agentService: AgentService,
+    private companiesState: CompaniesStateService,
+
+    ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-
+    this.companiesState.onInit();
+    this.loading = true;
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
+      this.getHardwareSummaryList();
     })
   }
-  public getReports(data) {
-    this.loadingInProgress = true;
-    this.hardwareSummaryReport = new HardwareSummaryReport(JSON.parse(JSON.stringify(data)));
-    this.company = this.companiesStateService.getCompanies().find(item => item.id == this.hardwareSummaryReport.companyId);
-    //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
-    setTimeout(() => {
-      this.onInit = true;
-      this.loadingInProgress = false;
-      this.cd.detectChanges();
 
-    }, 1000);
+  getHardwareSummaryList(){
+    this.agentService.getHardwareSummary().subscribe((resp) =>{
+      this.hardwareSummaryReport = resp;
+      this.loading = false;
+    })
   }
+
+  getReportByDeviceSummary() {
+    this.agentService
+      .getDeviceSummaryByGuid(this.deviceSummaryReport.companyId)
+      .subscribe((resp) => {
+        if (resp.length > 0) {
+          this.tempararyDeviceList = [];
+          this.tempararyDeviceList = resp;
+            this.deviceSummaryReport.companyId
+            this.tempararyDeviceList = resp;
+            this.hardwareSummaryReport = resp;
+            this.devices = this.tempararyDeviceList
+            .map((item) => item.Name)
+            .filter((value, index, self) => self.indexOf(value) === index);
+        }
+      });
+  }
+
+  getHardwareSummarybyGuidList(id){
+    this.agentService.getHardwareSummaryByGuid(id).subscribe((resp) =>{
+      this.hardwareSummaryReport = resp;
+    });
+  }
+  onFilter(field) {
+    this.filter.onFilter(field, this.hardwareSummaryReport);
+  }
+
   getRamSize(slots) {
     let ramSize = 0;
     slots.forEach((item) => {
@@ -81,44 +117,23 @@ export class HardwareSummaryReportComponent implements OnInit {
     return (ramSize > 0 && ramSize / 1073741824 > 0) ? (ramSize / 1073741824) + 'GB' : 0 + 'GB';
     //return (ramSize > 0 && ramSize/1073741824 > 0)? Math.ceil(ramSize/1073741824) + 'GB' : 0 + 'GB';
   };
+
   getDiskSize(diskSize) {
     var size = 0;
-    if (diskSize && diskSize.length > 0) {
-      diskSize.map((item) => {
-        item.size = item.size ? item.size : 0;
-        return size += Number.parseInt(item.size);
-      })
-    }
-    if (Math.floor(size / 1073741824) > 1024) {
-      return Math.floor((size / 1073741824) / 1024) + 'TB'
-    } else {
-      return Math.floor(size / 1073741824) + 'GB'
+    if (diskSize > 0) {
+      if (Math.floor(diskSize / 1073741824) > 1024) {
+        return Math.floor((diskSize / 1073741824) / 1024) + 'TB'
+      } else {
+        return Math.floor(diskSize / 1073741824) + 'GB'
+      }
     }
   };
-  public trackByIndex(index, item) {
-    return index;
-  }
 
-  public onSelectDevice(data) {
-    this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
-    this.getReports(this.hardwareSummaryReport);
-      this.getReportByHardwareSummary();
-  }
 
   public goToReportList() {
     this.leftPanelStateService.goToState("new-device-summary");
   }
 
-  public getDevicesByCompany(companyId) {
-    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
-
-  }
-  getReportByHardwareSummary() {
-    if (!this.validate.isValidateHardwareSummary(this.hardwareSummaryReport.companyId)) return;
-    this.getReports(this.hardwareSummaryReport)
-    this.onRequest.emit(true);
-    this.setDatareport(this.hardwareSummaryReport)
-  }
 
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -128,25 +143,32 @@ export class HardwareSummaryReportComponent implements OnInit {
   public selectClient(selectClient) {
     if (selectClient == null) {
       this.selectedClient == null;
-      this.hardwareSummaryReport.setCompanyId(null);
-      this.getDevicesByCompany(null);
-      this.hardwareSummaryReport.list = [];
+      this.getHardwareSummaryList();
     } else {
       this.selectedClient = selectClient
-      this.hardwareSummaryReport.setCompanyId(selectClient.id);
-      this.getSoftByCompany(selectClient.id);
-      this.getDevicesByCompany(selectClient.id);
-      this.getReports(this.hardwareSummaryReport);
-      this.getReportByHardwareSummary();
+      this.deviceSummaryReport.setCompanyId(selectClient.id);
+      this.getHardwareSummarybyGuidList(selectClient.id);
+      this.getReportByDeviceSummary();
     }
     this.onSelectedClient.emit(this.selectedClient);
   }
 
-  private setDatareport(data) {
-
-    this.getReport.emit(data);
-    this.loadingInProgress = false;
-    this.onRequest.emit(false);
+  onSelectDevice(data) {
+    this.deviceSummaryReport.setDevices(data ? data : null);
+    if (data) {
+      if (
+        this.deviceSummaryReport.companyId
+      ) {
+        this.hardwareSummaryReport = this.tempararyDeviceList.filter(
+          (x) => x.Name == data
+        );
+      }
+    } else {
+      this.hardwareSummaryReport = this.tempararyDeviceList;
+      this.devices = this.tempararyDeviceList
+        .map((item) => item.Name)
+        .filter((value, index, self) => self.indexOf(value) === index);
+    }
   }
 
   sendEmail() {
@@ -161,15 +183,16 @@ export class HardwareSummaryReportComponent implements OnInit {
 
   downloadCsv() {
     let downloadCsvList = [];
-    this.hardwareSummaryReport.list.forEach((element) => {
+    this.hardwareSummaryReport.forEach((element) => {
       downloadCsvList.push([
-        element.label || element.hostName.replace(",", " ") || "N/A",
-        element.report.system.caption + ' ' + element.report.system.release_id.replace(",", " ") || "N/A",
-        element.report.processors[0].name.replace(",", " ") || "N/A",
-        element.report && element.report.ram && this.getRamSize(element.report.ram.slots).replace(",", " ") || "N/A",
-        element.report && this.getDiskSize(element.report.logicalDisks).replace(",", " ") || "N/A",
-        element.report.variant.warrantyDate.replace(",", " ") || "N/A",
-        element.report.system.serial_number || "N/A",
+        element.CompanyName.replace(",", " ") || "N/A",
+        element.Name.replace(",", " ") || "N/A",
+        element.OperatingSystem.replace(",", " ") || "N/A",
+        element.CPU == null ? "N/A" : element.CPU.replace(",", " "),
+        element.Ram == null ? "N/A" : element.Ram,
+        this.getDiskSize(element.TotalDiskSpace) || "N/A",
+        element.Warranty == null ? "N/A" : element.Warranty.replace(",", " "),
+        element.SerialNumber || "N/A",
       ]);
     });
     let fileName = "Hardware Summary Report List";
@@ -186,15 +209,16 @@ export class HardwareSummaryReportComponent implements OnInit {
 
   getPdfData() {
     let pdfList = [];
-    this.hardwareSummaryReport.list.forEach((element) => {
+    this.hardwareSummaryReport.forEach((element) => {
       pdfList.push([
-        element.label || element.hostName.replace(",", " ") || "N/A",
-        element.report.system.caption + ' ' + element.report.system.release_id.replace(",", " ") || "N/A",
-        element.report.processors[0].name.replace(",", " ") || "N/A",
-        element.report && element.report.ram && this.getRamSize(element.report.ram.slots).replace(",", " ") || "N/A",
-        element.report && this.getDiskSize(element.report.logicalDisks).replace(",", " ") || "N/A",
-        element.report.variant.warrantyDate.replace(",", " ") || "N/A",
-        element.report.system.serial_number || "N/A",
+        element.CompanyName.replace(",", " ") || "N/A",
+        element.Name.replace(",", " ") || "N/A",
+        element.OperatingSystem.replace(",", " ") || "N/A",
+        element.CPU == null ? "N/A" : element.CPU.replace(",", " "),
+        element.Ram == null ? "N/A" : element.Ram,
+        this.getDiskSize(element.TotalDiskSpace) || "N/A",
+        element.Warranty == null ? "N/A" : element.Warranty.replace(",", " "),
+        element.SerialNumber || "N/A",
       ]);
     });
     let html =
@@ -288,6 +312,7 @@ export class HardwareSummaryReportComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 30%;">Company Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Operating System</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Cpu</th>
@@ -302,20 +327,20 @@ export class HardwareSummaryReportComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
+        <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        html =
+         html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[2] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[3] +
@@ -330,10 +355,15 @@ export class HardwareSummaryReportComponent implements OnInit {
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[5] +
         `</td>`;
+        html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+        element[6] +
+        `</td>`;
       html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 18%;vertical-align: top;">` +
-        element[6] +
+        element[7] +
         `</td></tr>`;
     });
     html =
@@ -391,15 +421,4 @@ export class HardwareSummaryReportComponent implements OnInit {
       );
   }
 
-  public getSoftByCompany(companyId) {
-    this.hardwareSummaryReport.setPreloaderDevices(true);
-    this.devicesService.getSoft(companyId).subscribe((resp: any) => {
-      if (resp) {
-        this.hardwareSummaryReport.setDevices(resp[companyId]);
-      }
-      this.hardwareSummaryReport.setPreloaderDevices(false);
-    }, err => {
-      this.hardwareSummaryReport.setPreloaderDevices(false);
-    })
-  }
 }
