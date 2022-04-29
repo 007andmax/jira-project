@@ -11,7 +11,7 @@ export class InventoryHeaderComponent implements OnInit {
   productSearchName: string = '';
   @Output() onSearch: EventEmitter<any> = new EventEmitter();
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,) { }
 

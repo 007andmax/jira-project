@@ -538,6 +538,7 @@ import { SuperAdminPublicCategoryComponent } from './components/super-admin-publ
 import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
 import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
+import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
 
 
 declare var $: any;
@@ -1015,7 +1016,8 @@ declare var $: any;
     SuperAdminPublicCategoryComponent,
     SuperAdminPublicHeaderComponent,
     SortTagsPipe,
-    InventoryCheckUseComponent
+    InventoryCheckUseComponent,
+    ContractsReviewComponent
   ],
   imports: [
     BrowserModule,
