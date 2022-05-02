@@ -17,7 +17,7 @@ export class ProcessesFilter {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
-          this.onFilterPaid(service);
+          this.onFilterPid(service);
         } else {
           this.filterTop[index].filter = "DESC";
           service.reverse();
@@ -27,17 +27,7 @@ export class ProcessesFilter {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
-          this.onFilterDescription(service);
-        } else {
-          this.filterTop[index].filter = "DESC";
-          service.reverse();
-        }
-      }
-      if (field === "cpu") {
-        this.clearFilter();
-        if (sort === "" || sort === "DESC") {
-          this.filterTop[index].filter = "ASC";
-          this.onFilterStatus(service);
+          this.onFilterName(service);
         } else {
           this.filterTop[index].filter = "DESC";
           service.reverse();
@@ -46,51 +36,34 @@ export class ProcessesFilter {
     }
   }
 
-
-
-  private onFilterStatus(software) {
-    software.sort((a, b) =>
-      this.getStatus(a).toLowerCase() >
-      this.getStatus(b).toLowerCase()
-        ? 1
-        : this.getStatus(b).toLowerCase() >
-          this.getStatus(a).toLowerCase()
-        ? -1
-        : 0
-    );
-  }
-  private getStatus(service) {
-    return service.CPU;
-  }
-
-  private onFilterDescription(service) {
+  private onFilterName(service) {
     service.sort((a, b) =>
-      this.getDescription(a).toLowerCase() >
-      this.getDescription(b).toLowerCase()
+      this.getName(a).toLowerCase() >
+      this.getName(b).toLowerCase()
         ? 1
-        : this.getDescription(b).toLowerCase() >
-          this.getDescription(a).toLowerCase()
+        : this.getName(b).toLowerCase() >
+          this.getName(a).toLowerCase()
         ? -1
         : 0
     );
   }
 
-  private getDescription(service) {
+  private getName(service) {
     return service.Name||'';
   }
 
-  public onFilterPaid(service) {
+  public onFilterPid(service) {
     service.sort((a, b) =>
-      this.getPaid(a).toLowerCase() >
-      this.getPaid(b).toLowerCase()
+      this.getPid(a).toLowerCase() >
+      this.getPid(b).toLowerCase()
         ? 1
-        : this.getPaid(b).toLowerCase() >
-          this.getPaid(a).toLowerCase()
+        : this.getPid(b).toLowerCase() >
+          this.getPid(a).toLowerCase()
         ? -1
         : 0
     );
   }
-  private getPaid(service) {
+  private getPid(service) {
     return service.id || '';
   }
   public clearFilter() {

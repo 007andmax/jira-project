@@ -3,13 +3,13 @@
     width: 100%;
     border-collapse: collapse;
     .pid {
-      width: 35% !important;
+      width: 15% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;
     }
     .name {
-      width: 35% !important;
+      width: 33% !important;
       padding: 0px;
       white-space: pre-line;
     }
@@ -18,12 +18,33 @@
       padding: 0px;
     }
     .ram{
-      width: 7% !important;
+      width: 8% !important;
+      padding: 0px;
+    }
+    .memory{
+      width: 10% !important;
+      padding: 0px;
+    }
+    .disk{
+      width: 10% !important;
+      padding: 0px;
+    }
+    .network{
+      width: 10% !important;
+      padding: 0px;
+    }
+    .action{
+      width: 9% !important;
       padding: 0px;
     }
     thead {
       th {
         background-color: #f4f6f8 !important;
+      }
+    }
+    tbody{
+      td{
+      background-color: white !important;
       }
     }
   }
@@ -104,4 +125,14 @@
           width: 200px;
       }
   }
+}
+
+.stop {
+  width: 16px;
+  height: 16px;
+  margin: 2px 8px 2px 56px;
+  padding: 1px;
+  object-fit: contain;
+  background: url(/assets/img/icons/stop.svg) no-repeat 12px center;
+
 }

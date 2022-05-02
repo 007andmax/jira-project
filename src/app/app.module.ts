@@ -559,6 +559,7 @@ import { SuperAdminPublicHeaderComponent } from './components/super-admin-public
 import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
 import {CompanyDashAssociateComponent} from './components/company-dashboard/company-dash-associate/company-dash-associate.component'
+import { ProcessesPipe } from './pipe/processes.pipe';
 
 declare var $: any;
 
@@ -1057,7 +1058,8 @@ declare var $: any;
     SuperAdminPublicHeaderComponent,
     SortTagsPipe,
     InventoryCheckUseComponent,
-    CompanyDashAssociateComponent
+    CompanyDashAssociateComponent,
+    ProcessesPipe
   ],
   imports: [
     BrowserModule,

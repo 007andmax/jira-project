@@ -954,6 +954,22 @@ export class AgentService {
     }
   }
 
+  public KillProcesses(asset_ID, Process_ID) {
+    const data = {
+      AssetID: asset_ID,
+      MessageType: "KillProcess",
+      Value: Process_ID
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => { });
+    } else {
+      setTimeout(() => this.KillProcesses(asset_ID, Process_ID), 3000);
+    }
+  }
+
   public GetStartupPrograms(asset_ID) {
     const data = {
       AssetID: asset_ID,

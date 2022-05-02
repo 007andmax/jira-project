@@ -95,6 +95,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     }
     this.agentService.getCompanyApplication().subscribe((resp) => {
       this.applicationByCompanyList = resp;
+      this.loading = false;
     })
   }
 

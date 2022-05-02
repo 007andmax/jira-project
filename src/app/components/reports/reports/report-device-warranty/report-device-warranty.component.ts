@@ -74,7 +74,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     }
     this.agentService.getDeviceWarranty().subscribe((resp) => {
       this.deviceWarrantyList = resp;
-      this.loading = true;
+      this.loading = false;
     })
   }
 

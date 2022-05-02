@@ -44,12 +44,14 @@
                               <tr>
                                   <th
                                       class="pid"
+                                      (click)="onFilter('pid')"
                                   >
                                       PID
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                       class="name"
+                                      (click)="onFilter('name')"
                                   >
                                       Name
                                       <span class="qt-table-modern__sorting"></span>
@@ -58,24 +60,47 @@
                                       class="cpu"
                                   >
                                       CPU
-                                      <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                      class="ram"
                                   >
                                     Ram
-                                    <span class="qt-table-modern__sorting"></span>
                                   </th>
+                                  <th
+                                  class="memory"
+                               >
+                                 Memory
+                               </th>
+                               <th
+                               class="disk"
+                            >
+                              Disk
+                            </th>
+                            <th
+                            class="network"
+                         >
+                           Network
+                         </th>
+                         <th
+                         class="action"
+                      >
+                        Action
+                      </th>
                               </tr>
                           </thead>
                           <tbody class="service-table">
-                              <tr *ngFor="let process of processesList | serv: search; let i = index;">
+                              <tr *ngFor="let process of processesList | process: search; let i = index; trackBy:trackByMethod">
                                   <td class="pid">
-                                      <h5>{{process.id || 'N/A'}}</h5>
+                                      <h5>{{process.PID || 'N/A'}}</h5>
                                   </td>
                                   <td class="name">{{process.Name || 'N/A'}}</td>
                                   <td class="cpu">{{process.CPU}}</td>
-                                  <td class="ram">{{process.Memory}}</td>
+                                  <td class="ram">{{process.MemoryMB}}</td>
+                                  <td class="memory">{{process.MemoryPercent}}</td>
+                                  <td class="disk">{{process.DiskMB}}</td>
+                                  <td class="network">{{process.Network}}</td>
+                                  <td class="action stop" (click)="stopProcesses(process)">
+                                  </td>
                               </tr>
                           </tbody>
                       </table>

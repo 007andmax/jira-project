@@ -46,6 +46,9 @@ export class ExcelService {
     else if(type == "HardwareSummary"){
       [(typeArr = ["Company Name", "Device", "Operating System", "Cpu", "Ram", "Disk", "Warranty", "Serial Number"])]
     }
+    else if(type == "processes"){
+      [(typeArr = ["PID", "Name", "CPU", "Ram", "Memory", "Disk", "Network"])]
+    }
     else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -89,7 +92,8 @@ export class ExcelService {
       type === "services" ||
       type === "startupprogrammes" ||
       type === "DeviceipSummary" ||
-      type === "HardwareSummary"
+      type === "HardwareSummary" ||
+      type === "processes"
     ) {
       row = "S.No,";
 
@@ -114,7 +118,8 @@ export class ExcelService {
       type === "services" ||
       type === "startupprogrammes" ||
       type === "DeviceipSummary" ||
-      type === "HardwareSummary"
+      type === "HardwareSummary" ||
+      type === "processes"
     ) {
       str += row + "\r\n";
     }
@@ -136,7 +141,8 @@ export class ExcelService {
         type === "services" ||
         type === "startupprogrammes" ||
         type === "DeviceipSummary" ||
-        type === "HardwareSummary"
+        type === "HardwareSummary" ||
+        type === "processes"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -159,7 +165,8 @@ export class ExcelService {
           type === "services" ||
           type === "startupprogrammes" ||
           type === "DeviceipSummary" ||
-          type === "HardwareSummary"
+          type === "HardwareSummary" ||
+          type === "processes"
         ) {
           line += "," + array[i][index];
         } else {
