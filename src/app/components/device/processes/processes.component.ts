@@ -81,7 +81,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   stopProcesses(process){
-   this.agentService.KillProcesses(this.assetId, process.PID);
+     this.agentService.KillProcesses(this.assetId, process.PID);
   }
 
   public downloadCsv(){

@@ -81,6 +81,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
   note: string;
   devicename: string;
   selectTag: string;
+  company : any;
+  searches : any[];
+
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -105,13 +108,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
-    this.companiesService.getTechCompany().subscribe(data => {
+
+    if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(data =>{
+      this.getCurrentCompany(data);
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.companyGuid = this.currentCompany.id;
       this.setPreviewDataDevice();
       this.onPowerShellCommand();
-    });
+    })
 
     this.setPreviewDataDevice();
     this.onPowerShellCommand();
@@ -123,6 +129,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
   setPreviewDataDevice() {
     this.AssetDetail();
     this.CurrentUser();
+  }
+
+  getCurrentCompany(data) {
+    this.company = data;
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
+      this.searches = res;
+    });
   }
 
   toogleDevices() {

@@ -99,7 +99,8 @@
                                   <td class="memory">{{process.MemoryPercent}}</td>
                                   <td class="disk">{{process.DiskMB}}</td>
                                   <td class="network">{{process.Network}}</td>
-                                  <td class="action stop" (click)="stopProcesses(process)">
+                                  <td class="action">
+                                    <img src="assets/img/icons/stop.svg" (click)="stopProcesses(process)">
                                   </td>
                               </tr>
                           </tbody>

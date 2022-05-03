@@ -74,6 +74,8 @@ export class DevicesComponent implements OnInit {
   guestConnected : any;
   hostConnected : any;
   hostUserName : string;
+  company : any;
+  searches: any[];
 
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
@@ -99,7 +101,10 @@ export class DevicesComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate(
       "new-devices"
     );
-    this.companiesService.getTechCompany().subscribe(data => {
+
+    if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(data =>{
+      this.getCurrentCompany(data);
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.setPreviewDataDevice();
@@ -114,6 +119,13 @@ export class DevicesComponent implements OnInit {
         this.add(undefined);
       });
     }
+  }
+
+  getCurrentCompany(data) {
+    this.company = data;
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
+      this.searches = res;
+    });
   }
 
   ngOnDestroy() {

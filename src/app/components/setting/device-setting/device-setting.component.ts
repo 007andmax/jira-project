@@ -65,6 +65,9 @@ export class DeviceSettingComponent implements OnInit {
   deviceTypeloading : boolean;
   manufactureloading : boolean;
   modelloading : boolean;
+  company : any;
+  searches : any[];
+
 
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
@@ -72,7 +75,8 @@ export class DeviceSettingComponent implements OnInit {
     private toastrService: ToastrService,
     private ngZone: NgZone,
     private modalService: NgbModal,
-    private companiesService: CompaniesService) { }
+    private companiesService: CompaniesService,
+    private companiesStateService : CompaniesStateService) { }
 
   ngOnInit() {
     this.devicetype = true;
@@ -118,8 +122,14 @@ export class DeviceSettingComponent implements OnInit {
       CreateDate: [""]
     })
 
-    this.onInitGetCurrentCompany();
     this.settingStateService.setComponentName('DeviceSettingComponent');
+
+    if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe((data) =>{
+      this.getCurrentCompany(data);
+      this.techCompany = data;
+      this.getDeviceTypes(this.techCompany.id);
+    })
   }
 
   onFilter(field) {
@@ -160,11 +170,11 @@ export class DeviceSettingComponent implements OnInit {
     }
   }
 
-  public onInitGetCurrentCompany() {
-    this.companiesService.getTechCompany().subscribe(data => {
-      this.techCompany = data;
-      this.getDeviceTypes(this.techCompany.id);
-    })
+  getCurrentCompany(data) {
+    this.company = data;
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
+      this.searches = res;
+    });
   }
 
   getManufacturers(TechCompanyGuid: any) {

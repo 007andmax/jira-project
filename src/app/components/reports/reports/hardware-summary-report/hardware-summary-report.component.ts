@@ -73,7 +73,7 @@ export class HardwareSummaryReportComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
       this.getHardwareSummaryList();
-    })
+    });
   }
 
   getHardwareSummaryList(){

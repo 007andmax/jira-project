@@ -95,6 +95,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   modelName : string;
   selectManufactureNames : any;
   selectModelName : any;
+  company : any;
+  searches : any[];
 
   constructor(
     private agentService: AgentService,
@@ -121,11 +123,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getAssetDetail()
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), this.loading = false, (e) => this.onCurrentConfigError(e));
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
-    this.companyStateService.onCurrentCompany.subscribe((data: any)=> {
+    if(this.companyStateService.getCurrentCompany())this.getCurrentCompany(this.companyStateService.getCurrentCompany());
+    this.companyStateService.onCurrentCompany.subscribe((data) =>{
+      this.getCurrentCompany(data);
       this.techCompany = data;
       this.getManufacturers(this.techCompany.id);
       this.getModels(this.techCompany.id);
-    });
+    })
   }
 
   onCurrentConfig(resp: any) {
@@ -207,6 +211,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onCurrentConfigError(err: any) {
     console.log('on current config error');
     this.toastr.error("Something went wrong getting real time data");
+  }
+
+  getCurrentCompany(data) {
+    this.company = data;
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
+      this.searches = res;
+    });
   }
 
   onInstallWindowsUpdates(resp: any) {
