@@ -33,6 +33,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   }
   backFromEdit() {
     console.log("backFromEdit", this.companiesStateService.getCompanyRoutingId());
+    console.log("this.categoryId", this.categoryId);
     if (!this.categoryId || this.companiesStateService.getCompanyRoutingId()) this.goToDocumentsList();
     if (this.categoryId && !this.companiesStateService.getCompanyRoutingId()) this.goToDocumentCategory();
   }

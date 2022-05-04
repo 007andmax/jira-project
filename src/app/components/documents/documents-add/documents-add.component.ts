@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -16,7 +16,7 @@ import { DocumentValidate } from './class/document-validate';
   templateUrl: './documents-add.component.html',
   styleUrls: ['./documents-add.component.scss']
 })
-export class DocumentsAddComponent implements OnInit {
+export class DocumentsAddComponent implements OnInit, OnDestroy {
   companyId: string;
   templateId: string;
   openAside: boolean = true;
