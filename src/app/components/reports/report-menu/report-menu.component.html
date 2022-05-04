@@ -2099,20 +2099,6 @@
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
                             [ngClass]="className"
                         >
-                            <div class="qt-report__dropdown qt-mr-8">
-                                <app-drop-down
-                                    [isDisabled]="isDisabledCompany"
-                                    [placeholder]="'Select Company'"
-                                    [list]="companies"
-                                    [heightInput]="'36px'"
-                                    [validate]="validate.getCompany()"
-                                    [errorMessage]="'Please select the company name'"
-                                    [field]="'name'"
-                                    [search]="true"
-                                    [change]="true"
-                                    (onSelectedItem)="selectClient($event)"
-                                ></app-drop-down>
-                            </div>
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                 <app-multi-datepicker
                                     #dp
@@ -2143,52 +2129,6 @@
                         [id]="ticketsReport.id"
                         [selectedClient]="selectedClient"
                     ></app-report-additional-actions>
-                    <!-- <app-report-additional-actions
-                        [report]="'ticket-report'"
-                        [fileName]="'customer-report-ticket-report'"
-                        [template]="'CUSTOMER_REPORT'"
-                        [id]="ticketsReport.id"
-                        [selectedClient]="selectedClient"
-                    ></app-report-additional-actions> -->
-                </div>
-                <div class="qt-report__include-columns-panel qt-mt-16">
-                    <p class="qt-mb-4">What to include</p>
-                    <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
-                        <input
-                            type="checkbox"
-                            (change)="toggleShowDashboard($event)"
-                            checked
-                        >
-                        <span></span>
-                        <div class="qt-ml-8">Show dashboard</div>
-                    </label>
-                    <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
-                        <input
-                            type="checkbox"
-                            (change)="toggleShowResponseTime($event)"
-                            checked
-                        >
-                        <span></span>
-                        <div class="qt-ml-8">Average response time</div>
-                    </label>
-                    <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
-                        <input
-                            type="checkbox"
-                            (change)="toggleShowServices($event)"
-                            checked
-                        >
-                        <span></span>
-                        <div class="qt-ml-8">Show services</div>
-                    </label>
-                    <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
-                        <input
-                            type="checkbox"
-                            (change)="toggleShowProducts($event)"
-                            checked
-                        >
-                        <span></span>
-                        <div class="qt-ml-8">Show products</div>
-                    </label>
                 </div>
             </div>
             <div
@@ -2196,25 +2136,6 @@
                 (click)="back()"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'service-report'">
         <!-- <div -->

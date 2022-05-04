@@ -324,304 +324,36 @@
 <div
     class="qt-report__body"
     id="product-list-ticket-data"
-    style="max-width: 1384px; width: 100%; margin: 0 auto;"
 >
     <div
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div class="customer-ticket">
-            <div class="customer-ticket__report">
-
-
-
-
-                <div class="qt-report__body-header">
-                    <div
-                        class="body-m-sb qt-color-dark"
-                        *ngIf="onInit"
-                    >
-                        {{ ticketsReport.companyName || 'All companies' }}
-                    </div>
-                    <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
-                    <div
-                        class="body-m qt-color-dark-light"
-                        *ngIf="onInit"
-                    >
-                        <span>{{ticketsReport.startDate}}</span>
-                        -
-                        <span>{{ ticketsReport.endDate }}</span>
-                    </div>
-                </div>
-                <div
-                    *ngIf="showHeader && onInit"
-                    class="customer-ticket__report--summary"
-                >
-                    <div class="customer-ticket__header">
-                        <div class="customer-ticket__header--item canvas-chart no-value">
-                            <div class="customer-ticket__report--summary-title">Resolved Tickets</div>
-                            <nvd3
-                                [options]="chartOptions"
-                                [data]="chartData"
-                            ></nvd3>
-                        </div>
-                        <div class="customer-ticket__header--item">
-                            <ng-template
-                                ngFor
-                                let-time
-                                [ngForOf]="overallServiceTime"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <p
-                                    *ngIf="ticketsReport.timeSpent"
-                                    [ngClass]="'service-color-' + i"
-                                >
-                                    {{ time.name }}
-                                    <span>
-                                        {{ formatServiceTime(time.hours,time.minutes) }}
-                                    </span>
-                                </p>
-                            </ng-template>
-                        </div>
-                        <div class="customer-ticket__header--item">
-                            <div
-                                class="average-time-spent"
-                                *ngIf="!ticketsReport.showTotalTicketAmount"
-                            >
-                                <div class="average-time-spent__wrap">
-                                    <div class="average-time-spent__icon">
-                                        <div class="icon__tickets-on-time qt-sz-24 qt-bg-contain pointer"></div>
-                                    </div>
-                                    <div class="average-time-spent__text-content">
-                                        <div class="average-time-spent__time">
-                                            {{formatServiceTime(ticketsReport.timeSpent.hours,ticketsReport.timeSpent.minutes)}} hrs
-                                        </div>
-                                        <div class="average-time-spent__text">Average Time Spent</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="average-response-time"
-                                *ngIf="ticketsReport.averageResponseTime"
-                            >
-                                <div class="average-response-time__wrap">
-                                    <div class="average-response-time__icon">
-                                        <div class="icon__avg-response qt-sz-24 qt-bg-contain pointer"></div>
-                                    </div>
-                                    <div class="average-response-time__text-content">
-                                        <div class="average-response-time__time">{{ getFloorAverageResponseTime() }} min</div>
-                                        <div class="average-response-time__text">Response time</div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="customer-ticket__report--details"
-                    *ngIf="onInit"
-                >
-                    <div class="customer-ticket__report--summary-titlqt-mb-12">Ticket Details</div>
-                    <div class="details-header clearfix">
-                        <div
-                            class="col-md-8"
-                            style="width: 70%;"
-                        >
-                            TICKET NUMBER
-                        </div>
-                        <div
-                            class="col-md-2"
-                            style="width: 20%;"
-                        >
-                            DATE / TIME
-                        </div>
-                        <div
-                            class="col-md-2"
-                            style="width: 10%;"
-                        >
-                            STATUS
-                        </div>
-                    </div>
-                    <ng-template
-                        ngFor
-                        let-ticket
-                        [ngForOf]="ticketsReport.tickets"
-                        let-i="index"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <div class="details-content clearfix">
-                            <div
-                                class="col-md-8 ellipsis"
-                                style="width: 70%;margin-bottom: 20px;"
-                            >
-                                {{ticket.ticketNumber}} - {{ticket.description}}
-                            </div>
-                            <div
-                                class="col-md-2"
-                                style="width: 20%;margin-bottom: 20px;"
-                            >
-                                {{ parseDateTciket(ticket.ticketCreatedAt) }}
-                            </div>
-                            <div
-                                class="col-md-2"
-                                style="width: 10%;margin-bottom: 20px;"
-                                *ngIf="ticket.status === 'ON_HOLD'"
-                            >
-                                <p class="network-scan-status status-warning">On Hold</p>
-                            </div>
-                            <div
-                                class="col-md-2"
-                                style="width: 10%;margin-bottom: 20px;"
-                                *ngIf="ticket.status === 'COMPLETED'"
-                            >
-                                <p class="network-scan-status status-success">Completed</p>
-                            </div>
-                            <div
-                                class="col-md-2"
-                                style="width: 10%;margin-bottom: 20px;"
-                                *ngIf="ticket.status === 'IN_PROGRESS'"
-                            >
-                                <p class="network-scan-status status-in-progress">In Progress</p>
-                            </div>
-                            <div
-                                *ngIf="ticket.updates && showServices"
-                                class="services"
-                            >
-                                <ng-template
-                                    ngFor
-                                    let-service
-                                    [ngForOf]="ticket.updates"
-                                    [ngForTrackBy]="trackByIndex"
-                                >
-                                    <div>
-                                        <ng-template
-                                            ngFor
-                                            let-expence
-                                            [ngForOf]="service.expenses"
-                                            [ngForTrackBy]="trackByIndex"
-                                        >
-                                            <div
-                                                *ngIf="service.type === 'SERVICE'"
-                                                class="clearfix"
-                                            >
-                                                <div class="col-md-3 ellipsis">{{ expence.name }}</div>
-
-
-
-
-
-
-                                                <div class="col-md-7">{{ expence.description }}</div>
-
-
-
-
-
-
-                                                <div class="col-md-2">
-                                                    Time: {{ getDurationFilter(expence.totalQuantity) }}
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </ng-template>
-                            </div>
-                            <div
-                                *ngIf="ticket.updates && showProducts"
-                                class="products"
-                            >
-                                <ng-template
-                                    ngFor
-                                    let-product
-                                    [ngForOf]="ticket.updates"
-                                    [ngForTrackBy]="trackByIndex"
-                                >
-                                    <div *ngIf="product.type === 'PRODUCT'">
-                                        <ng-template
-                                            ngFor
-                                            let-expence
-                                            [ngForOf]="product.expenses"
-                                            [ngForTrackBy]="trackByIndex"
-                                        >
-                                            <div
-                                                class="clearfix"
-                                                *ngIf="expence.manufacture"
-                                            >
-                                                <div class="col-md-12 ellipsis">{{ expence.name }}</div>
-                                                <div class="col-md-2">
-                                                    Price: ${{ (+expence.price).toFixed(2) }}
-                                                </div>
-                                                <div class="col-md-2">QTY: {{ expence.quantity }}</div>
-                                                <div class="col-md-2">
-                                                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
-                        expence.quantity)).toFixed(2) }}
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                        <ng-template
-                                            ngFor
-                                            let-expence
-                                            [ngForOf]="product.expenses"
-                                            [ngForTrackBy]="trackByIndex"
-                                        >
-                                            <div
-                                                class="col-md-12"
-                                                *ngIf="!expence.manufacture"
-                                            >
-                                                <div class="col-md-12 ellipsis">{{ expence.name }}</div>
-                                                <div class="col-md-2">
-                                                    Price: ${{ (+expence.price).toFixed(2) }}
-                                                </div>
-                                                <div class="col-md-2">QTY: {{ expence.quantity }}</div>
-                                                <div class="col-md-2">
-                                                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
-                                                </div>
-                                                <div class="col-md-2">
-                                                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
-                        expence.quantity)).toFixed(2)}}
-                                                </div>
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </ng-template>
-                            </div>
-                            <div
-                                class="col-md-3 pdf-w"
-                                style="margin-top: 20px;"
-                            >
-                                User: {{ getUserName(ticket.clientUserId) }}
-                            </div>
-                            <div
-                                class="col-md-3 pdf-w"
-                                style="margin-top: 20px;"
-                            >
-                                Device: {{ ticket.deviceName }}
-                            </div>
-                            <div
-                                class="col-md-3 pdf-w"
-                                style="margin-top: 20px;"
-                            >
-                                Tech: {{ getUserName(ticket.techUserId) }}
-                            </div>
-                            <div
-                                ng-if="ticket.responseTime !== null"
-                                class="col-md-3 pdf-w"
-                                style="margin-top: 20px;"
-                            >
-                                Response time: {{ formatResponseTime(ticket.responseTime) }}
-                            </div>
-                        </div>
-                    </ng-template>
-                </div>
-            </div>
-        </div>
+      <div class="qt-report__body-header">
+        <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
+        <div class="body-m qt-color-dark-light"><span>16 Mar 2022</span> - <span>23 Jun 2022</span></div>
+      </div>
+      <table class="qt-report__body-table-body">
+        <thead>
+          <tr>
+            <th class="qt-fw-600 qt-color-dark">Company Name</th>
+            <th class="qt-fw-600 qt-color-dark">New tickets by web</th>
+            <th class="qt-fw-600 qt-color-dark">Total created agent</th>
+            <th class="qt-fw-600 qt-color-dark">Total created email</th>
+            <th class="qt-fw-600 qt-color-dark">Tickets Closed</th>
+            <th class="qt-fw-600 qt-color-dark">Total Tickets created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="qt-report__body-row">
+            <td>Mr Mack</td>
+            <td>New tickets by web</td>
+            <td>1000 000</td>
+            <td>23332</td>
+            <td>Yes</td>
+            <td>143213</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 </div>
