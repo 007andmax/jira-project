@@ -213,7 +213,7 @@ export class HardwareSummaryReportComponent implements OnInit {
       pdfList.push([
         element.CompanyName.replace(",", " ") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.OperatingSystem.replace(",", " ") || "N/A",
+        element.OperatingSystem == null ?  "N/A" : element.OperatingSystem.replace(",", " "),
         element.CPU == null ? "N/A" : element.CPU.replace(",", " "),
         element.Ram == null ? "N/A" : element.Ram,
         this.getDiskSize(element.TotalDiskSpace) || "N/A",

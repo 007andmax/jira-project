@@ -103,6 +103,7 @@ export class ProcessesComponent implements OnInit {
 
   printPdf() {
     window.open(this.pdfUrl, "_blank");
+    this.getPdfData();
   }
 
   public getPdfData() {

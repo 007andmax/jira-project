@@ -32,7 +32,7 @@ export class ExcelService {
     } else if (type === "applicationbycompanyreport"){
       [(typeArr = ["Company Name", "Application", "Version", "Device Count"])];
     } else if (type === "devicediskspacereport"){
-      [(typeArr = ["Company Name", "Device Name", "Drive Letter", "Total Space","Used", "Free (%)"])];
+      [(typeArr = ["Company Name", "Device Name", "Drive Letter", "Total Space","Used", "Free", "Free (%)"])];
     } else if (type === "devicedeploymentwarrantyreport"){
       [(typeArr = ["Company Name", "Device Name", "Domain", "Manufacturer","Subnet", "Gateway", "ExternalIP"])];
     } else if (type === "services"){

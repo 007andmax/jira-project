@@ -203,7 +203,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       if (!item.selected) this.selectAllDevices = false;
     })
 
-    if(this.cd){
+    if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
   }

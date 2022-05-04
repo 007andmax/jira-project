@@ -264,6 +264,8 @@ export class NetworkAdapterReportComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[0] +
         `</td>`;
+        html =
+         html +
           `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[1] +
         `</td>`;

@@ -160,6 +160,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
         element.size,
         element.UsedSpace,
         element.FreeSpace,
+        this.getFreePercentage(element)
       ]);
     });
     let html =
@@ -258,8 +259,10 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Driver Letter</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Total Space</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Used</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Free</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Free (%)</th>
-                        </tr>
+
+                            </tr>
                     </thead>
                     <tbody>`;
     pdfList.forEach((element) => {
@@ -293,7 +296,13 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[5] +
-        `</td></tr>`;
+        `</td>`
+        html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        element[6] +
+        `</td>
+        </tr>`;
     });
     html =
       html +
@@ -360,6 +369,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
         element.size,
         element.UsedSpace,
         element.FreeSpace,
+        this.getFreePercentage(element)
       ]);
     });
     let fileName = "Device Disk Space List";
