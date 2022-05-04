@@ -128,8 +128,8 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       }
       this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
 
-      if (!this.categoryId) this.goToDocumentsList();
-      if (this.categoryId) this.goToDocumentCategory();
+      if (!this.categoryId || this.companiesStateService.getCompanyRoutingId()) this.goToDocumentsList();
+      if (this.categoryId && !this.companiesStateService.getCompanyRoutingId()) this.goToDocumentCategory();
     })
   }
   goToDocumentCategory() {
