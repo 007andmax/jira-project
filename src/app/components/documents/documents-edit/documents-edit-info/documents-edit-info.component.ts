@@ -31,6 +31,11 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     })
     if (this.documentEdit.clientType) this.requiredCompanyType = true;
   }
+  backFromEdit() {
+    console.log("backFromEdit", this.companiesStateService.getCompanyRoutingId());
+    if (!this.categoryId || this.companiesStateService.getCompanyRoutingId()) this.goToDocumentsList();
+    if (this.categoryId && !this.companiesStateService.getCompanyRoutingId()) this.goToDocumentCategory();
+  }
   onChangeTitle() {
     this.documentsService.checkTitle(this.documentEdit.title, this.documentEdit.id).subscribe(data => {
       this.documentValidate.setUniqueTittle(data);

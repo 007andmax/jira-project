@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -32,6 +33,7 @@ export class DocumentsAddComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public tagsService: TagsService,
     private tagsStateService: TagsStateService,
+    public companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService) {
   }
 
@@ -74,5 +76,8 @@ export class DocumentsAddComponent implements OnInit {
   }
   onChangeContent(data) {
     this.documentAdd.setContent(data);
+  }
+  ngOnDestroy(): void {
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }
