@@ -86,6 +86,6 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    this.companiesStateService.setCompanyRoutingId(null);
+    // this.companiesStateService.setCompanyRoutingId(null);
   }
 }
