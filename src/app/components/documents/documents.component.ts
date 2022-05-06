@@ -46,6 +46,14 @@ export class DocumentsComponent implements OnInit, OnDestroy {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) this.list[findIndex].categoryName = element.name;
       });
+      if (data.length < this.list.filter(item => item.isCategory).length) {
+        this.list.forEach((item, index) => {
+          if (item.isCategory) {
+            let findIndex = data.findIndex(element => element.id === item.categoryId);
+            if (findIndex == -1) this.list.splice(index, 1);
+          }
+        });
+      }
       this.cd.detectChanges();
     })
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {

@@ -210,9 +210,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidType(this.company.clientType);
   }
   public onChangedAssociatedCompanies(data) {
+    console.log("data", data);
     this.company.associatedCompanies = data.map(item => {
       return { id: item };
     })
+    console.log("this.company.associatedCompanies", this.company.associatedCompanies);
   }
 
   public onSelectTechLead(event) {
