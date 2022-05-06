@@ -239,7 +239,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.productSalesReport.setCompanyId(null);
       this.customerSalesReport.setCompanyId(null);
       this.serviceReport.setCompanyId(null);
-      this.ticketsReport.setCompanyId(null);
       this.accountingReport.setCompanyId(null);
       this.detailedCommissionsReport.setCompanyId(null);
       this.commonCommissionsReport.setCompanyId(null);
@@ -257,7 +256,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.accountsReceivable.setClientCompanyId(selectClient.id);
       this.productSalesReport.setCompanyId(selectClient.id);
       this.customerSalesReport.setCompanyId(selectClient.id);
-      this.ticketsReport.setCompanyId(selectClient.id);
       this.serviceReport.setCompanyId(selectClient.id);
       this.techService.setCompanyId(selectClient.id);
       this.detailedCommissionsReport.setCompanyId(selectClient.id);
@@ -268,7 +266,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.remoteConnectionReport.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
       if (this.report === 'software-summary' || this.report === 'hardware-summary' || this.report === 'device-ip-summary') this.getSoftByCompany(selectClient.id);
-      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
@@ -563,7 +560,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.detailedCommissionsReport.resetDates();
       this.commonCommissionsReport.resetDates();
       if (this.selectedClient) {
-        this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
       }
     }

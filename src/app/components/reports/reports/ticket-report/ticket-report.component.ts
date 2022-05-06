@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { AccountsReceivable } from '../../class/accounts-receivable';
 import { TicketsReport } from '../../class/tickets-reports';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import * as moment from "moment";
 import { Company } from 'src/app/interfaces/company/company';
-import { TicketReportStateService } from './services/ticket-report-state.service';
+import { User } from 'src/app/components/users/class/user';
 @Component({
   selector: 'app-ticket-report',
   templateUrl: './ticket-report.component.html',
@@ -17,10 +16,10 @@ export class TicketReportComponent implements OnInit, OnDestroy {
   loadingInProgress: boolean = false;
   onInit = false;
   currentCompany: Company;
+  techUser: User;
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
-    private usersStateService: UsersStateService,
-    private ticketReportStateService: TicketReportStateService) { }
+    private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -33,6 +32,7 @@ export class TicketReportComponent implements OnInit, OnDestroy {
     this.ticketsReport.setData(data);
     this.ticketsReport.startDate = moment(new Date(this.ticketsReport.startDate)).format('ll');
     this.ticketsReport.endDate = moment(new Date(this.ticketsReport.endDate)).format('ll');
+    this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticketsReport.userId);
     this.onInit = true;
   }
   public getDateForHeader(data) {
