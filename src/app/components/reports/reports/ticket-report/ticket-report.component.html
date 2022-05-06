@@ -38,7 +38,10 @@
                 {{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}
             </div>
         </div>
-        <table class="qt-report__body-table-body">
+        <table
+            class="qt-report__body-table-body"
+            *ngIf="onInit"
+        >
             <thead>
                 <tr>
                     <th class="qt-fw-600 qt-color-dark">Company Name</th>
