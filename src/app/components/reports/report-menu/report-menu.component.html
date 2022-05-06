@@ -45,7 +45,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="grey-dropdown qt-report__dropdown qt-mr-8">
@@ -145,7 +145,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="grey-dropdown qt-report__dropdown qt-mr-8">
@@ -271,7 +271,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
@@ -727,7 +727,7 @@
                                 class="qt-report__filter qt-f-1"
                                 [ngClass]="className"
                             >
-                                <div class="qt-df qt-ai-c qt-jc-fs">
+                                <div class="qt-df qt-ai-c qt-jc-c">
                                     <div class="qt-report__dropdown qt-mr-8">
                                         <app-drop-down
                                             [placeholder]="'Select Company'"
@@ -901,7 +901,7 @@
                             <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                         </div>
                         <div
-                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
                             <div class="grey-dropdown qt-report__dropdown qt-mr-8">
@@ -1031,7 +1031,7 @@
                             <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                         </div>
                         <div
-                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
                             <div class="grey-dropdown qt-report__dropdown qt-mr-8">
@@ -1121,7 +1121,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
@@ -1208,10 +1208,39 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
-                        <div class="form-group content service-name">
+                        <div class="qt-report__dropdown qt-mr-8">
+                          <app-drop-down
+                            [placeholder]="'Select Company'"
+                            [list]="companies"
+                            [validate]="validate.getCompany()"
+                            [errorMessage]="'Please select the company name'"
+                            [field]="'name'"
+                            [heightInput]="'36px'"
+                            [search]="true"
+                            [change]="true"
+                            (onSelectedItem)="selectClient($event)"
+                          ></app-drop-down>
+                        </div>
+                        <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                          <app-multi-datepicker
+                            #dp
+                            [validate]="validate.getDates()"
+                            [errorMessage]="'Please select the dates'"
+                            (selectedDate)="filterByDate($event)"
+                          ></app-multi-datepicker>
+                        </div>
+                        <div class="qt-report__dropdown qt-mr-8 grey-dropdown form-group content select-users-list">
+                          <app-tech-users-list-report
+                            [sort]="true"
+                            [search]="true"
+                            [change]="true"
+                            (onSelectedItem)="onSelectTechUser($event)"
+                          ></app-tech-users-list-report>
+                        </div>
+                        <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <div>
                                 <input
                                     type="text"
@@ -1223,34 +1252,6 @@
                                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
                                 >
                             </div>
-                        </div>
-                        <div class="qt-report__dropdown qt-input-block qt-mr-8">
-                            <app-multi-datepicker
-                                #dp
-                                [validate]="validate.getDates()"
-                                [errorMessage]="'Please select the dates'"
-                                (selectedDate)="filterByDate($event)"
-                            ></app-multi-datepicker>
-                        </div>
-                        <div class="form-group content">
-                            <app-drop-down
-                                [placeholder]="'Select Company'"
-                                [list]="companies"
-                                [validate]="validate.getCompany()"
-                                [errorMessage]="'Please select the company name'"
-                                [field]="'name'"
-                                [search]="true"
-                                [change]="true"
-                                (onSelectedItem)="selectClient($event)"
-                            ></app-drop-down>
-                        </div>
-                        <div class="qt-report__dropdown qt-mr-8 grey-dropdown form-group content select-users-list">
-                            <app-tech-users-list-report
-                                [sort]="true"
-                                [search]="true"
-                                [change]="true"
-                                (onSelectedItem)="onSelectTechUser($event)"
-                            ></app-tech-users-list-report>
                         </div>
                         <button
                             class="btn-new btn-primary-white qt-fs-0"
@@ -1330,7 +1331,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown">
@@ -1474,7 +1475,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
@@ -1569,7 +1570,7 @@
                         <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                        class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
@@ -1708,7 +1709,7 @@
                             >
                                 <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                             </div>
-                            <div class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs">
+                            <div class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c">
                                 <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
                                     <app-product-list
                                         [type]="'REPORT'"
@@ -1908,7 +1909,7 @@
                             </div>
                             <div class="qt-report__filter qt-f-1">
                                 <div
-                                    class="qt-df qt-ai-c qt-jc-fs"
+                                    class="qt-df qt-ai-c qt-jc-c"
                                     [ngClass]="className"
                                 >
                                     <!--  -->
@@ -2103,7 +2104,7 @@
                             <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                         </div>
                         <div
-                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
@@ -2220,7 +2221,7 @@
                             <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
                         </div>
                         <div
-                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
                             <div class="qt-report__dropdown qt-mr-8">
@@ -2261,7 +2262,7 @@
                 </div>
                 <div class="qt-report__include-columns-panel qt-mt-16">
                     <p class="qt-mb-4">What to include</p>
-                    <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                    <label class="qt-checkbox qt-dif qt-ai-c pointer">
                         <input
                             type="checkbox"
                             (change)="toggleShowDashboard($event)"
@@ -2338,7 +2339,7 @@
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                         <div
-                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-fs"
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
                             <div class="qt-report__dropdown product-dropdown-new-ng light-dropdown select-product qt-mr-8">
