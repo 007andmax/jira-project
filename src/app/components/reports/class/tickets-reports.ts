@@ -22,38 +22,33 @@ export class TicketsReport {
 
     companyName: string;
     public setData(data) {
-        this.id = data.id;
-        this.timeSpent = data.timeSpent;
-        this.averageResponseTime = data.averageResponseTime;
-        this.ticketsPerDate = data.ticketsPerDate.map(element => {
-            return new TicketsPerDate(element);
-        });
-        this.tickets = data.tickets.map(element => {
-            return new TicketsReportItem(element);
-        });
+        console.log("data", data);
 
-        this.companyId = data.companyId;
-        this.showTotalTicketAmount = data.showTotalTicketAmount;
-        this.extendedReport = data.extendedReport;
-        this.withResponseTime = data.withResponseTime;
-        this.withTimeSpent = data.withTimeSpent;
+
+        this.tickets = data.tickets;
         this.startDate = data.startDate;
         this.endDate = data.endDate;
         this.userId = data.userId;
 
     }
+    public getDate() {
+        return {
+            startDate: this.startDate,
+            endDate: this.endDate,
+            userId: this.userId,
+            tickets: this.tickets
+        }
+    }
+    public setTickets(data) {
+        this.tickets = data.map(item => new TicketsReportItem(item));
+    }
     public getForRequest() {
         let data: reqTicketsReport = {
-            companyId: this.companyId,
-            extendedReport: this.extendedReport,
-            withResponseTime: this.withResponseTime,
-            withTimeSpent: this.withTimeSpent,
             startDate: this.startDate,
             endDate: this.endDate,
             userId: this.userId
         }
         return data;
-
     }
     public setDatesByCompany(selectedClient) {
         this.setStartDate(moment(selectedClient.createdAt).format('YYYY/MM/DD'));

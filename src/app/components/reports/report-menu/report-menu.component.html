@@ -361,6 +361,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'device-ip-summary'">
         <div
@@ -1107,6 +1108,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'accounting-report'">
         <div class="qt-report__header qt-df qt-ai-fs">
@@ -1384,6 +1386,7 @@
                 (click)="back()"
             ></div>
         </div>
+
 
 
 
@@ -1690,6 +1693,7 @@
 
 
 
+
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1804,6 +1808,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'byCustomers'">
         <!-- <div -->
@@ -1870,6 +1875,7 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
+
 
 
 
@@ -2001,6 +2007,7 @@
 
 
 
+
     </div>
     <div *ngIf="report === 'ticket-report'">
         <!-- <div -->
@@ -2102,6 +2109,8 @@
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                 <app-multi-datepicker
                                     #dp
+                                    [validate]="validate.getDates()"
+                                    [errorMessage]="'Please select the dates'"
                                     (selectedDate)="filterByDate($event)"
                                 ></app-multi-datepicker>
                             </div>
@@ -2199,6 +2208,7 @@
 
 
 
+
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
@@ -2267,6 +2277,7 @@
                 (click)="back()"
             ></div>
         </div>
+
 
 
 
@@ -2390,7 +2401,9 @@
 
 
 
+
         </div>
+
 
 
 

@@ -189,7 +189,19 @@
 
 
 
+
+
+
+
+
+
 <!-- <div class="col-md-7">{{ expence.description }}</div> -->
+
+
+
+
+
+
 
 
 
@@ -302,10 +314,15 @@
 
 
 
+
+
+
+
+
+
 <div>
     <app-report-menu
         [report]="'ticket-report'"
-        (onSelectedClient)="onSelectedClient($event)"
         (onRequest)="onRequest($event)"
         (getReport)="getReport($event)"
     ></app-report-menu>
@@ -329,31 +346,47 @@
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-      <div class="qt-report__body-header">
-        <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
-        <div class="body-m qt-color-dark-light"><span>16 Mar 2022</span> - <span>23 Jun 2022</span></div>
-      </div>
-      <table class="qt-report__body-table-body">
-        <thead>
-          <tr>
-            <th class="qt-fw-600 qt-color-dark">Company Name</th>
-            <th class="qt-fw-600 qt-color-dark">New tickets by web</th>
-            <th class="qt-fw-600 qt-color-dark">Total created agent</th>
-            <th class="qt-fw-600 qt-color-dark">Total created email</th>
-            <th class="qt-fw-600 qt-color-dark">Tickets Closed</th>
-            <th class="qt-fw-600 qt-color-dark">Total Tickets created</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="qt-report__body-row">
-            <td>Mr Mack</td>
-            <td>New tickets by web</td>
-            <td>1000 000</td>
-            <td>23332</td>
-            <td>Yes</td>
-            <td>143213</td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="qt-report__body-header">
+            <h6 class="qt-fw-600 qt-color-dark">Tickets Report</h6>
+            <div class="body-m qt-color-dark-light">
+                <span>
+                    {{getDateForHeader(ticketsReport.startDate)}}
+                </span>
+                -
+                <span>
+                    {{getDateForHeader(ticketsReport.endDate)}}
+                </span>
+            </div>
+        </div>
+        <table class="qt-report__body-table-body">
+            <thead>
+                <tr>
+                    <th class="qt-fw-600 qt-color-dark">Company Name</th>
+                    <th class="qt-fw-600 qt-color-dark">New tickets by web</th>
+                    <th class="qt-fw-600 qt-color-dark">Total created agent</th>
+                    <th class="qt-fw-600 qt-color-dark">Total created email</th>
+                    <th class="qt-fw-600 qt-color-dark">Tickets Closed</th>
+                    <th class="qt-fw-600 qt-color-dark">Total Tickets created</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="ticketsReport.tickets"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr class="qt-report__body-row">
+                        <td [textContent]="item.companyName"></td>
+                        <td [textContent]="item.quantityFromWeb"></td>
+                        <td [textContent]="item.quantityFromAgent"></td>
+                        <td [textContent]="item.quantityFromEmail"></td>
+                        <td [textContent]="item.quantityClosed"></td>
+                        <td [textContent]="item.quantityCreated"></td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -370,9 +370,12 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
   }
   getReportByTickets() {
-    if (!this.validate.isValidateTickets(this.selectedClient)) return;
+    if (!this.validate.isValidateTickets(this.ticketsReport.startDate, this.ticketsReport.endDate)) return;
     this.onRequest.emit(true);
-    this.reportsService.getReportByTickets(this.ticketsReport.getForRequest()).subscribe(data => this.setDatareport(data));
+    this.reportsService.getReportByTickets(this.ticketsReport.getForRequest()).subscribe(data => {
+      this.ticketsReport.setTickets(data)
+      this.setDatareport(this.ticketsReport.getDate());
+    });
 
   }
   getReportByCustomers() {
@@ -546,7 +549,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.techSalesReport.resetDates();
       this.techSalesReport.setDefaultDuration();
       this.techSalesReport.setDisabledDuration(false);
-
+      this.ticketsReport.resetDates();
       this.techTicketReport.resetDates();
       this.techTicketReport.setDefaultDuration();
       this.techTicketReport.setDisabledDuration(false);
