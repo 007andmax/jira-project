@@ -65,16 +65,16 @@ export class DevicesComponent implements OnInit {
   modalReference: any;
   favouriteName: string;
   searchSubscription: any;
-  screenConnectList : any[] = [];
-  userName : any;
+  screenConnectList: any[] = [];
+  userName: any;
   password: any;
-  OneTimeCode :any;
-  getMacAddress : any;
-  launchSchemeUrl : string ='';
-  guestConnected : any;
-  hostConnected : any;
-  hostUserName : string;
-  company : any;
+  OneTimeCode: any;
+  getMacAddress: any;
+  launchSchemeUrl: string = '';
+  guestConnected: any;
+  hostConnected: any;
+  hostUserName: string;
+  company: any;
   searches: any[];
 
 
@@ -87,7 +87,6 @@ export class DevicesComponent implements OnInit {
     private toastr: ToastrService,
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
-    private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService,
     private ngZone: NgZone,
     private modalService: NgbModal,
@@ -97,23 +96,26 @@ export class DevicesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.showPreloader = true;
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
       "new-devices"
     );
 
-    if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(data =>{
-      this.getCurrentCompany(data);
-      this.currentCompany = data;
-      this.techCompnayGuid = this.currentCompany.id;
-      this.setPreviewDataDevice();
-      this.onPowerShellCommand();
+    this.onPowerShellCommand();
+
+    this.company = this.companiesStateService.getCurrentCompany();
+    //load if company data available
+    if (this.company) {
+      this.load(this.company);
+    }
+    this.companiesStateService.onCurrentCompany.subscribe(data => {
+      this.load(data);
     });
-    this.showPreloader = false;
+
     if (!this.searchSubscription) {
       this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
-        this.selectedTag = data.Criteria;
+        this.selectedTag = data.Criteria || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
         this.add(undefined);
@@ -121,8 +123,23 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  getCurrentCompany(data) {
-    this.company = data;
+  load(company: any) {
+    this.company = company;
+    this.currentCompany = company;
+    this.techCompnayGuid = this.currentCompany.id;
+    if (!localStorage.getItem("currentSearch")) {
+      let req: any = {};
+      req.TechCompanyGuid = this.techCompnayGuid;
+      req.Criteria = [];
+      this.searchDeviceTag(req);
+      this.getAssets();
+    }
+    else {
+      this.setPreviewDataDevice();
+    }
+  }
+
+  getAssets() {
     this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
       this.searches = res;
     });
@@ -136,7 +153,7 @@ export class DevicesComponent implements OnInit {
     let searchData: any = localStorage.getItem("currentSearch");
     if (searchData) {
       let searchObj = JSON.parse(searchData);
-      this.selectedTag = searchObj.Criteria;
+      this.selectedTag = searchObj.Criteria || [];
       this.searchTag = this.selectedTag;
       localStorage.removeItem("currentSearch");
     }
@@ -145,9 +162,10 @@ export class DevicesComponent implements OnInit {
   }
 
   searchDeviceTag(data: any) {
-    this.showPreloader = true;
-    if (this.selectedTag.length == 0) {
+    this.showPreloader = true;    
+    if (!this.selectedTag) {
       this.autosearchDevice = [];
+      data.Criteria = [];
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
       this.onFilter('CompanyName');
@@ -161,11 +179,11 @@ export class DevicesComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-          if(element.AgentVersion !=null){
-            this.GetDeviceListConfig(element.ID);
-          }
+        if (element.AgentVersion != null) {
+          this.GetDeviceListConfig(element.ID);
+        }
       });
-
+      this.loading = false;
       if (this.cd) {
         this.cd.detectChanges();
       }
@@ -221,22 +239,22 @@ export class DevicesComponent implements OnInit {
   CurrentUser() {
     this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
-        if(resp[0].Value != "Unknown message type received : GetDeviceListConfig:"){
-        let asset = this.assetList.find((x) => x.ID === resp[0].key);
-        if (asset) {
-          this.kafkaMessage = JSON.parse(resp[0].Value);
-          asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-          if (this.kafkaMessage.IdleTime != null) {
-            let Time = this.kafkaMessage.IdleTime.split("Idle for");
-            asset.IdelTime = Time[1] != "" ? Time[1] : "";
-          }
+        if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
+          let asset = this.assetList.find((x) => x.ID === resp[0].key);
+          if (asset) {
+            this.kafkaMessage = JSON.parse(resp[0].Value);
+            asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+            if (this.kafkaMessage.IdleTime != null) {
+              let Time = this.kafkaMessage.IdleTime.split("Idle for");
+              asset.IdelTime = Time[1] != "" ? Time[1] : "";
+            }
             asset.UpTime = this.kafkaMessage.UpTime;
+          }
+          asset.online = true;
         }
-        asset.online = true;
-      }
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
 
       }
     });
@@ -428,7 +446,7 @@ export class DevicesComponent implements OnInit {
     this.searchTag.splice(index, 1);
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = this.selectedTag;
+    req.Criteria = this.selectedTag || [];
     this.searchDeviceTag(req);
   }
 
@@ -438,7 +456,11 @@ export class DevicesComponent implements OnInit {
 
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
-    var findTag = this.selectedTag.find(x => x == Tag);
+    let findTag: any[] = [];
+
+    if (this.selectedTag) {
+      findTag = this.selectedTag.find(x => x == Tag);
+    }
 
     if (Tag && !findTag) {
       this.selectedTag.push(Tag);
@@ -559,8 +581,8 @@ export class DevicesComponent implements OnInit {
     this.assetList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer !== null ? element.Manufacturer.replace(","," ") : element.Manufacturer  || "N/A",
-        element.Model !== null ? element.Model.replace(","," ") : element.Model  || "N/A",
+        element.Manufacturer !== null ? element.Manufacturer.replace(",", " ") : element.Manufacturer || "N/A",
+        element.Model !== null ? element.Model.replace(",", " ") : element.Model || "N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -745,8 +767,8 @@ export class DevicesComponent implements OnInit {
     this.assetList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer !== null ? element.Manufacturer.replace(","," ") : element.Manufacturer  || "N/A",
-        element.Model !== null ? element.Model.replace(","," ") : element.Model  || "N/A",
+        element.Manufacturer !== null ? element.Manufacturer.replace(",", " ") : element.Manufacturer || "N/A",
+        element.Model !== null ? element.Model.replace(",", " ") : element.Model || "N/A",
         element.SerialNumber || "N/A",
       ]);
     });

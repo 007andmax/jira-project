@@ -262,12 +262,12 @@ input.mat-chip-input {
 }
 
 ::ng-deep .opt-icon {
-  margin: 4px;
-  margin-top: 16px;
-  height: 32px;
-  width: 32px;
-  float:right;
-  color: #212b36;
+  margin: 4px !important;
+  margin-top: 16px !important;
+  height: 32px !important;
+  width: 32px !important;
+  float:right !important;
+  color: #212b36 !important;
 
 }
 
