@@ -79,6 +79,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   note: string;
   devicename: string;
   selectTag: string;
+  selectedTagdevicelist : any[]=[];
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -107,13 +108,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
-      this.setPreviewDataDevice();      
+      this.setPreviewDataDevice();
     }
     this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.companyGuid = this.currentCompany.id;
-      this.setPreviewDataDevice();      
+      this.setPreviewDataDevice();
     });
 
     this.setPreviewDataDevice();
@@ -163,10 +164,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
       if(!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList=[];
-        this.asset = {};     
+        this.asset = {};
         if (this.cd) {
           this.cd.detectChanges();
-        }   
+        }
         return;
       }
       this.assetList = resp;
@@ -646,10 +647,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
       if(!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList=[];
-        this.asset = {};   
+        this.asset = {};
         if (this.cd) {
           this.cd.detectChanges();
-        }     
+        }
         return;
       }
       this.onFilter('CompanyName');
@@ -674,19 +675,19 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  remove(index: number) {    
+  remove(index: number) {
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
-    if(this.selectedTag.length == 0 ) 
+    if(this.selectedTag.length == 0 )
     {
       this.AssetDetail();
     }
     else {
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
-      req.Criteria = this.selectedTag;    
+      req.Criteria = this.selectedTag;
       this.searchDeviceTag(req);
-    }   
+    }
   }
 
   getAddDevice(templatedevice) {
@@ -751,28 +752,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   onRemoveTag(index: number): void {
-    const removetag: any = {
-      ID: this.asset.ID,
-      ID2: this.selectedTagDevice[index].ID,
-      Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
-    };
-
-    this.agentService.removeAssetTag(removetag).subscribe(
-      (resp) => {
-        this.selectedTagDevice.splice(index, 1);
-        this.filteredTag = _.differenceBy(
-          this.assetTag,
-          this.selectedTagDevice,
-          "ID"
-        );
-      }
-    );
+    this.selectedTagdevicelist.splice(index, 1);
   }
 
 
   selectedSearchTag(event: MatAutocompleteSelectedEvent): void {
     console.log('selected fired');
-    this.selectedTagDevice.push(event.option.viewValue);
+    this.selectedTagdevicelist.push(event.option.viewValue);
     this.tagSearch.push(event.option.viewValue);
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
@@ -816,4 +802,20 @@ export class CompanyDeviceBetaComponent implements OnInit {
         this.toastr.error('Error saving your non agent asset! Please try again');
       })
   }
+
+  onSelectTag(tag: any): void {
+    const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
+    this.agentService.addAssetTag(addTag).subscribe(
+      (resp) => {
+        this.selectedTagdevicelist.push(addTag);
+        this.filteredTag = _.differenceBy(
+          this.assetTag,
+          this.selectedTag,
+          "ID"
+        );
+      },
+    );
+  }
 }
+
+

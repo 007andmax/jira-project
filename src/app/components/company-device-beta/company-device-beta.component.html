@@ -843,7 +843,7 @@
 
 <ng-template #templatedevice>
   <div
-    class="qt-aside-modern device-add-aside"
+    class="qt-aside-modern"
     [hidden]="!opened"
 >
     <div class="qt-aside-modern__header">
@@ -926,6 +926,7 @@
       >
             </div>
         </div>
+
         <div class="qt-input-line">
             <div class="qt-input-block">
                 <span class="Install-Date">Install Date</span>
@@ -963,7 +964,7 @@
               placeholder="Enter Manufacture"
           >
       </div>
-      <mat-form-field class="example-chip-list" appearance="fill">
+      <!-- <mat-form-field class="example-chip-list" appearance="fill">
         <mat-label>Tags</mat-label>
         <mat-chip-list #chipList>
           <mat-chip
@@ -983,8 +984,63 @@
             {{search.Name}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
           </mat-option>
         </mat-autocomplete>
-      </mat-form-field>
+      </mat-form-field> -->
 
+
+      <div
+      class="grey-dropdown"
+      ngbDropdown
+      #products="ngbDropdown"
+  >
+  <label
+  for="add-manufacture"
+  class="Manufacturer"
+>
+  Tag
+</label>
+<div class="add-Device_tag">
+      <mat-form-field appearance="none">
+          <mat-chip-list #chipList>
+              <mat-chip
+                  *ngFor="let tag of selectedTagdevicelist; let i = index"
+                  (removed)="onRemoveTag(i)"
+              >
+                  {{ tag.Name }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+          </mat-chip-list>
+          <input autofocus
+              id="dropdownServices"
+              #searchInput
+              [(ngModel)]="tagFilterValue"
+              ngbDropdownToggle
+              class="pointer"
+              [matChipInputFor]="chipList"
+              (blur)="addTag($event.target.value)"
+              (keyup.enter)="addTag($event.target.value)"
+              (keyup)="onSearchTag($event.target.value)"
+          >
+      </mat-form-field>
+    </div>
+      <div
+          class="dropdown-menu"
+          ngbDropdownMenu
+          aria-labelledby="dropdownServices"
+      >
+          <ng-template
+              ngFor
+              let-tag
+              [ngForOf]="filteredTag"
+          >
+              <button
+                  ngbDropdownItem
+                  class="dropdown-item"
+                  (click)="onSelectTag(tag)"
+                  [textContent]="tag.Name"
+              ></button>
+          </ng-template>
+      </div>
+</div>
     <div class="qt-input-block qt-input-line">
       <label
           for="add-note"
