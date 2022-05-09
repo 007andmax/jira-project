@@ -1,4 +1,3 @@
-import { filter } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild, } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
@@ -12,7 +11,6 @@ import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-stat
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
-import { CompaniesService } from "src/app/services/company/companies.service";
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -81,9 +79,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   note: string;
   devicename: string;
   selectTag: string;
-  company : any;
-  searches : any[];
-
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -98,8 +93,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private ngZone: NgZone,
-    private remoteControlService: RemoteControlService,
-    private companiesService: CompaniesService,
+    private remoteControlService: RemoteControlService
   ) { }
 
   ngOnInit() {
@@ -108,16 +102,19 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
-
-    if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe(data =>{
-      this.getCurrentCompany(data);
+    let company = this.companiesStateService.getCurrentCompany();
+    if(company) {
+      this.currentCompany = company;
+      this.techCompnayGuid = company.id;
+      this.companyGuid = company.id;
+      this.setPreviewDataDevice();      
+    }
+    this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.companyGuid = this.currentCompany.id;
-      this.setPreviewDataDevice();
-      this.onPowerShellCommand();
-    })
+      this.setPreviewDataDevice();      
+    });
 
     this.setPreviewDataDevice();
     this.onPowerShellCommand();
@@ -129,13 +126,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   setPreviewDataDevice() {
     this.AssetDetail();
     this.CurrentUser();
-  }
-
-  getCurrentCompany(data) {
-    this.company = data;
-    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
-      this.searches = res;
-    });
   }
 
   toogleDevices() {
@@ -170,6 +160,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
       return;
     }
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+      if(!resp || resp.length === 0) {
+        this.showPreloader = false;
+        this.assetList=[];
+        this.asset = {};     
+        if (this.cd) {
+          this.cd.detectChanges();
+        }   
+        return;
+      }
       this.assetList = resp;
       this.asset = resp[0];
       this.HardwareTypeList(resp[0].TechCompanyGuid);
@@ -644,6 +643,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.autosearchDevice = [];
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+      if(!resp || resp.length === 0) {
+        this.showPreloader = false;
+        this.assetList=[];
+        this.asset = {};   
+        if (this.cd) {
+          this.cd.detectChanges();
+        }     
+        return;
+      }
       this.onFilter('CompanyName');
       this.showPreloader = false;
       this.operatingSystem = [];
@@ -666,19 +674,25 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  remove(index: number) {
+  remove(index: number) {    
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
-    let req: any = {};
-    req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = this.selectedTag;
-    this.searchDeviceTag(req);
+    if(this.selectedTag.length == 0 ) 
+    {
+      this.AssetDetail();
+    }
+    else {
+      let req: any = {};
+      req.TechCompanyGuid = this.techCompnayGuid;
+      req.Criteria = this.selectedTag;    
+      this.searchDeviceTag(req);
+    }   
   }
 
   getAddDevice(templatedevice) {
     this.ngZone.run(() => {
       this.modalService
-        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', })
+        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: false, size: 'lg', windowClass:'right' })
         .result.then(
           (result) => {
             this.closeResult = `Closed with: ${result}`;
@@ -688,6 +702,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
           }
         );
     });
+
   }
 
   private getDismiss(reason: any): string {

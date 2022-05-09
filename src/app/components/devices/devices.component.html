@@ -213,8 +213,8 @@
                                     <span>
                                 <span>{{ asset.VersionInstallDate | date: 'dd/MM/yyyy' }}</span>
                                     </span>
-                                    <span *ngIf="asset.IsAgentCurrent" class="agent-tag qt-ff-gm">{{asset.CurrentVersion}}</span>
-                                    <span *ngIf="!asset.IsAgentCurrent" class="agent-tag qt-ff-gm --offline">{{asset.CurrentVersion}}</span>
+                                    <span *ngIf="asset.IsAgentCurrent" class="agent-tag qt-ff-gm">{{asset.AgentVersion}}</span>
+                                    <span *ngIf="!asset.IsAgentCurrent" class="agent-tag qt-ff-gm --offline">{{asset.AgentVersion}}</span>
 
                                 </div>
                             </td>
