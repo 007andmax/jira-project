@@ -390,7 +390,6 @@ span.qt-input-search:before {
   line-height: 1.54;
   letter-spacing: normal;
   color: var(--gray-900);
-  margin-left: -44px;
 }
 
 .Note {
@@ -450,12 +449,21 @@ span.qt-input-search:before {
   padding-top: 20px !important;
 }
 
-.add-Device_tag {
-  height: 40px;
+.Rectangle_device-popup {
+  height: 36px;
+  padding: 4px 4px 4px 11px;
   border-radius: 4px;
-  border: solid 1px #c5cdd5;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
   background-color: #ffffff;
-  padding: 10px 14px;
-  color: #454f5b;
+  border: solid 1px #c5cdd5;
+}
+
+.grey-dropdown .dropdown-menu {
+  background: #ffffff;
   width: 100%;
+  top: auto;
+  max-height: 190px;
+  position: absolute;
+  top: 23px !important;
+  margin-left: -10px;
 }

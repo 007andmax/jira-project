@@ -964,41 +964,18 @@
               placeholder="Enter Manufacture"
           >
       </div>
-      <!-- <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Tags</mat-label>
-        <mat-chip-list #chipList>
-          <mat-chip
-          *ngFor="let tag of selectedTagDevice; let i=index" (removed)="onRemoveTag(i)">
-          {{tag}} <mat-icon matChipRemove></mat-icon>
-          </mat-chip>
-          <input
-            placeholder="eg. Window update, Monthly maintanace"
-            #fruitInput
-            [formControl]="selectedCtrl"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            (keyup.enter)="addTag($event.target.value)">
-        </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSearchTag($event)">
-          <mat-option *ngFor="let search of filteredTag">
-            {{search.Name}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field> -->
-
-
       <div
       class="grey-dropdown"
       ngbDropdown
       #products="ngbDropdown"
   >
   <label
-  for="add-manufacture"
-  class="Manufacturer"
+  for="dropdownServices"
+  class="Tags"
 >
   Tag
 </label>
-<div class="add-Device_tag">
+<div class="Rectangle_device-popup">
       <mat-form-field appearance="none">
           <mat-chip-list #chipList>
               <mat-chip
@@ -1008,18 +985,19 @@
                   {{ tag.Name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
+              <input autofocus
+                  id="dropdownServices"
+                  #searchInput
+                  [(ngModel)]="tagFilterValue"
+                  ngbDropdownToggle
+                  class="pointer"
+                  placeholder="Enter tag"
+                  [matChipInputFor]="chipList"
+                  (blur)="addTag($event.target.value)"
+                  (keyup.enter)="addTag($event.target.value)"
+                  (keyup)="onSearchTag($event.target.value)"
+              >
           </mat-chip-list>
-          <input autofocus
-              id="dropdownServices"
-              #searchInput
-              [(ngModel)]="tagFilterValue"
-              ngbDropdownToggle
-              class="pointer"
-              [matChipInputFor]="chipList"
-              (blur)="addTag($event.target.value)"
-              (keyup.enter)="addTag($event.target.value)"
-              (keyup)="onSearchTag($event.target.value)"
-          >
       </mat-form-field>
     </div>
       <div

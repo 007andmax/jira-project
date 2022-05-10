@@ -80,7 +80,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   devicename: string;
   selectTag: string;
   selectedTagdevicelist : any[]=[];
-
+  selectId : any[]=[];
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -727,9 +727,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
         if (this.selectedTagDevice.length !== 0) {
           this.assetTag = resp;
-          this.filteredTag = _.differenceBy(resp, this.selectedTagDevice, "ID");
-        } else {
-          this.assetTag = resp;
           this.filteredTag = resp;
         }
       });
@@ -785,7 +782,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     data.Name = this.deviceName;
     data.Title = this.deviceName;
     data.HardwareTypeID = this.deviceTypId;
-    data.Tag = this.selectTag && this.selectTag.length > 0 ? this.selectTag : null;
+    data.Tag = "";
     data.Model = this.modelNo;
     data.Manufacture = this.manufacture;
     data.NoteDescription = this.note;
@@ -805,16 +802,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   onSelectTag(tag: any): void {
     const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
-    this.agentService.addAssetTag(addTag).subscribe(
-      (resp) => {
-        this.selectedTagdevicelist.push(addTag);
-        this.filteredTag = _.differenceBy(
-          this.assetTag,
-          this.selectedTag,
-          "ID"
-        );
-      },
-    );
+    this.selectedTagdevicelist.push(addTag);
+    this.selectId.push(addTag.ID);
   }
 }
 
