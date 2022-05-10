@@ -276,6 +276,13 @@
                         </tr>
                     </tbody>
                 </table>
+                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="!assetList || assetList.length == 0">
+                    <tbody>
+                        <tr>
+                            <td colspan="10" class="text-center">No devices to show</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="loading" *ngIf="showPreloader"></div>
         </div>

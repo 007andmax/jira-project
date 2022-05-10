@@ -693,7 +693,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   getAddDevice(templatedevice) {
     this.ngZone.run(() => {
       this.modalService
-        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: false, size: 'lg', windowClass:'right' })
+        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: false, size: 'lg', windowClass:'add-new-device' })
         .result.then(
           (result) => {
             this.closeResult = `Closed with: ${result}`;

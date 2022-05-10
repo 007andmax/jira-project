@@ -84,7 +84,7 @@
     <div class="qt-df qt-fd-c qt-jc-sb">
         <div class="qt-page-list__body">
             <div class="qt-page-list__body-table-container">
-                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
+                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length >0">
                     <tbody>
                         <tr class="company-device-hover" *ngFor="let asset of assetList | beta: search; let i = index">
                             <td class="company-devices-table__check">
@@ -402,6 +402,13 @@
                                     </ul>
                                 </div>
                             </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="!assetList || assetList.length == 0">
+                    <tbody>
+                        <tr>
+                            <td colspan="10" class="text-center">No devices to show</td>
                         </tr>
                     </tbody>
                 </table>

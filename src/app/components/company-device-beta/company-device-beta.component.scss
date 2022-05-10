@@ -60,16 +60,16 @@ img.Online-Search {
 
 .example-chip-list {
   width: 94%;
- }
+}
 
- .SubRectangle{
+.SubRectangle {
   width: 744px;
   height: 32px;
   margin: 0 1px 0 0;
   padding: 6px 15px 4px;
   background-color: #fff;
   font-size: 12px;
- }
+}
 
 ::ng-deep .mat-autocomplete-panel.extended {
   width: 744px;
@@ -82,7 +82,7 @@ img.Online-Search {
   margin-top: 16px;
   height: 32px;
   width: 32px;
-  float:right;
+  float: right;
   color: #212b36;
 
 }
@@ -98,22 +98,27 @@ img.Online-Search {
 .company-device-hover:hover {
   td {
     background-color: #f9fafb;
+
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
       opacity: 0;
     }
+
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
       position: absolute;
       top: 7px;
       display: flex;
     }
+
     .company-devices-table__ip-address-buttons {
       left: -15px;
     }
+
     .device-name-edit-marker {
       display: flex;
     }
+
     input.name-text-input {
       background-color: #f9fafb;
     }
@@ -160,15 +165,18 @@ img.Online-Search {
   &__title {
     margin-bottom: 2px;
   }
+
   &__button {
     min-width: 153px;
   }
+
   .remote-desctop-icon {
     background-image: url(/assets/img/remote-desktop.svg);
     width: 66px;
     min-width: 66px;
     height: 66px;
   }
+
   .connect-icon {
     background-image: url(/assets/img/quicktech-connect.svg);
     width: 66px;
@@ -176,11 +184,13 @@ img.Online-Search {
     height: 66px;
   }
 }
+
 .qt-list-loading {
   display: flex;
   align-items: center;
   justify-content: center;
   float: none;
+
   .loader {
     margin: 0px 0px 0px 20px;
   }
@@ -192,8 +202,10 @@ img.Online-Search {
   border-radius: 4px;
   outline: none;
   border-color: transparent;
-  &:hover, &:focus {
-    border-color:#dfe3e8;
+
+  &:hover,
+  &:focus {
+    border-color: #dfe3e8;
     outline: none;
   }
 }
@@ -212,27 +224,32 @@ input.mat-chip-input {
 ::ng-deep .cdk-overlay-pane {
   width: 766px !important;
   min-width: 766px;
-  left:-24px !important;
+  left: -24px !important;
 }
 
 .opt-icon.Company.Name {
   background-image: url(/assets/img/auto/office-account.svg);
   background-repeat: no-repeat;
 }
+
 .opt-icon.Software {
   background-image: url(/assets/img/auto/software.svg);
   background-repeat: no-repeat;
 }
-.opt-icon.Asset.Tag, .opt-icon.Tag {
+
+.opt-icon.Asset.Tag,
+.opt-icon.Tag {
   background-image: url(/assets/img/auto/tag.svg);
   background-repeat: no-repeat;
 }
+
 .opt-icon.Manufacturer {
   background-image: url(/assets/img/auto/manufacturer.svg);
   background-repeat: no-repeat;
 }
 
-.opt-icon.Asset.Name, .opt-icon.Asset.Title {
+.opt-icon.Asset.Name,
+.opt-icon.Asset.Title {
   background-image: url(/assets/img/auto/devices.svg);
   background-repeat: no-repeat;
 }
@@ -246,6 +263,7 @@ input.mat-chip-input {
   background-image: url(/assets/img/auto/os-version.svg);
   background-repeat: no-repeat;
 }
+
 .opt-icon.Model {
   background-image: url(/assets/img/auto/model.svg);
   background-repeat: no-repeat;
@@ -265,7 +283,7 @@ span.qt-input-search:before {
 
 }
 
-.qt-btn.--outline-blue{
+.qt-btn.--outline-blue {
   margin-left: 50px !important;
 }
 
@@ -289,10 +307,6 @@ span.qt-input-search:before {
 
 // }
 
-::ng-deep .qt-aside-modern {
-  right: -330px !important;
-  top : -173px !important;
-}
 .Device-Name {
   width: 83px;
   height: 20px;
@@ -420,32 +434,32 @@ span.qt-input-search:before {
   color: var(--gray-600);
 }
 
-.mat-chip-list-wrapper{
+.mat-chip-list-wrapper {
   display: contents !important;
 }
 
 ::ng-deep .mat-form-field-flex {
   width: 520px !important;
-  position:relative !important;
+  position: relative !important;
 }
 
-::ng-deep .modal-content{
+::ng-deep .modal-content {
   border: none !important;
 }
 
-.company-devices-page .company-devices-table__up-time{
+.company-devices-page .company-devices-table__up-time {
   min-width: 200px !important;
 }
 
-.company-devices-page table.company-devices-table tbody .company-devices-table__up-time{
+.company-devices-page table.company-devices-table tbody .company-devices-table__up-time {
   min-width: 200px !important;
 }
 
-.company-devices-page table.company-devices-table tbody .company-devices-table__device-type{
+.company-devices-page table.company-devices-table tbody .company-devices-table__device-type {
   padding-top: 16px !important;
 }
 
-.company-devices-page table.company-devices-table tbody .company-devices-table__check{
+.company-devices-page table.company-devices-table tbody .company-devices-table__check {
   padding-top: 20px !important;
 }
 
@@ -466,4 +480,10 @@ span.qt-input-search:before {
   position: absolute;
   top: 23px !important;
   margin-left: -10px;
+}
+
+::ng-deep .qt-aside-modern {
+  right: -607px !important;
+  top: -330px !important;
+  position: fixed !important;
 }

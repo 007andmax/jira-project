@@ -168,12 +168,13 @@ export class DevicesComponent implements OnInit {
       data.Criteria = [];
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
       this.operatingSystem = [];
       this.assetList = resp;
-      this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
+      this.HardwareTypeList(this.techCompnayGuid);
 
       this.assetList.forEach((element, index) => {
         element.online = false;
