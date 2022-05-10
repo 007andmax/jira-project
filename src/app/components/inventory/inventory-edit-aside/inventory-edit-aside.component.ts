@@ -161,7 +161,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.markup = this.roundingMarkup(value);
   }
   formatterGLNumber = (result: string) => {
-    return `${result["glNumber"]} - ${(result["description"].length > 0) ? result["description"]
+    return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}`;
   };
   private roundingMarkup(markup) {

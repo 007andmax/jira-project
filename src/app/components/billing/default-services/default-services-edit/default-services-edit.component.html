@@ -1,8 +1,17 @@
-<div class="qt-aside-modern default-services-page__aside" *ngIf="open">
+<div
+    class="qt-aside-modern default-services-page__aside"
+    *ngIf="open"
+>
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Service</div>
-        <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
     </div>
+
+
+
 
     <div class="qt-aside-modern__content">
         <div class="qt-w100 qt-mb-16">
@@ -25,6 +34,9 @@
                 </mat-error>
             </div>
         </div>
+
+
+
 
         <div class="qt-df">
             <div class="qt-w50 qt-mb-16 qt-mr-16">
@@ -50,6 +62,9 @@
                 </div>
             </div>
 
+
+
+
             <div class="qt-w50 qt-mb-16">
                 <div class="create-product-taxes-select">
                     <app-taxes
@@ -61,8 +76,11 @@
             </div>
         </div>
 
+
+
+
         <div class="qt-df">
-            <div class="qt-w50 qt-mb-16 qt-mr-16">
+            <div class="qt-w100 qt-mb-16 qt-mr-16">
                 <div class="qt-input-block">
                     <label>GL Number</label>
                     <app-select-search
@@ -74,14 +92,21 @@
                         [editItem]="service.glNumber"
                         [add]="true"
                         [field]="'glNumber'"
+                        [formatter]="glDropDownItemName"
                         (onAddItem)="onAddGlNumber($event)"
                         (onSelectedItem)="onSelectGlNumbers($event)"
                     ></app-select-search>
                 </div>
             </div>
 
+
+
+
             <div class="qt-w50"></div>
         </div>
+
+
+
 
         <div class="qt-df qt-ai-c">
             <label
@@ -96,9 +121,15 @@
                 <span></span>
             </label>
 
+
+
+
             <div class="qt-fs-12 qt-ml-5">Make this service billable</div>
         </div>
     </div>
+
+
+
 
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
