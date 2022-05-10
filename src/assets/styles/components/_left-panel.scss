@@ -101,8 +101,24 @@
   }
 
   &__body {
-    overflow: auto;
+    border-top: 1px solid rgba(255,255,255,.08);
+    display: flex;
+    align-items: flex-start;
     height: calc(100% - 80px);
+    &-icon,
+    &-menu {
+      overflow: auto;
+      height: 100%;
+    }
+    &-icon {
+      border-right: 1px solid rgba(255,255,255,.08);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    &-menu {
+      width: 100%;
+      margin: 7px 8px 0;
+    }
     &::-webkit-scrollbar-thumb {
       background: transparent;
     }
@@ -167,30 +183,41 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 0 24px;
-    margin-bottom: 4px;
   }
 
-  &__menu-arrow {
-    width: 16px;
-    height: 16px;
-    background-image: url("/assets/img/icons-left-sidebar/dropdown-arrow-down.svg");
-    margin-left: auto;
-  }
+  //&__menu-arrow {
+  //  width: 16px;
+  //  height: 16px;
+  //  background-image: url("/assets/img/icons-left-sidebar/dropdown-arrow-down.svg");
+  //  margin-left: auto;
+  //}
 
   &__menu-title {
-    @extend %body-r-m;
+    @extend %body-l-m;
     font-stretch: normal;
-    color: $gray-600;
+    color: $white;
     white-space: nowrap;
-    font-weight: $fw-medium;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
   }
 
   &__menu-icon {
+    &-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 7px;
+      &.--active {
+        background-color: #171e26
+      }
+    }
     width: 24px;
     min-width: 24px;
     height: 24px;
-    margin-right: 12px;
     background-position: center;
     opacity: 0.5;
 
@@ -284,11 +311,11 @@
   }
 
   &__menu-expand li {
-    height: 40px;
     display: flex;
     justify-content: space-between;
-    padding: 0 24px 0 60px;
+    padding: 6px 8px;
     cursor: pointer;
+    border-radius: 6px;
     @extend %body-m;
     color: $white;
     align-items: center;
@@ -395,22 +422,28 @@
   }
 }
 
-.app-left-panel__menu.--active {
-  .app-left-panel {
-    &__menu-icon {
+//.app-left-panel__menu.--active {
+//  .app-left-panel {
+//    &__menu-icon {
+//      opacity: 1;
+//    }
+//    &__menu-title {
+//      color: $white;
+//      @extend %body-r-m;
+//    }
+//    &__menu-arrow {
+//      transform: rotate(180deg);
+//      filter: brightness(3);
+//    }
+//  }
+//}
+.app-left-panel__menu-icon-wrap {
+  &.--active {
+    .app-left-panel__menu-icon {
       opacity: 1;
-    }
-    &__menu-title {
-      color: $white;
-      @extend %body-r-m;
-    }
-    &__menu-arrow {
-      transform: rotate(180deg);
-      filter: brightness(3);
     }
   }
 }
-
 @keyframes showExpandPanel {
   0% {
     max-height: 0%;
