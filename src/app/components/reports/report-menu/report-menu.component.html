@@ -342,26 +342,6 @@
                 (click)="back()"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'device-ip-summary'">
         <div
@@ -1109,6 +1089,14 @@
 
 
 
+
+
+
+
+
+
+
+
     </div>
     <div *ngIf="report === 'accounting-report'">
         <div class="qt-report__header qt-df qt-ai-fs">
@@ -1212,33 +1200,33 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
-                          <app-drop-down
-                            [placeholder]="'Select Company'"
-                            [list]="companies"
-                            [validate]="validate.getCompany()"
-                            [errorMessage]="'Please select the company name'"
-                            [field]="'name'"
-                            [heightInput]="'36px'"
-                            [search]="true"
-                            [change]="true"
-                            (onSelectedItem)="selectClient($event)"
-                          ></app-drop-down>
+                            <app-drop-down
+                                [placeholder]="'Select Company'"
+                                [list]="companies"
+                                [validate]="validate.getCompany()"
+                                [errorMessage]="'Please select the company name'"
+                                [field]="'name'"
+                                [heightInput]="'36px'"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="selectClient($event)"
+                            ></app-drop-down>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
-                          <app-multi-datepicker
-                            #dp
-                            [validate]="validate.getDates()"
-                            [errorMessage]="'Please select the dates'"
-                            (selectedDate)="filterByDate($event)"
-                          ></app-multi-datepicker>
+                            <app-multi-datepicker
+                                #dp
+                                [validate]="validate.getDates()"
+                                [errorMessage]="'Please select the dates'"
+                                (selectedDate)="filterByDate($event)"
+                            ></app-multi-datepicker>
                         </div>
                         <div class="qt-report__dropdown qt-mr-8 grey-dropdown form-group content select-users-list">
-                          <app-tech-users-list-report
-                            [sort]="true"
-                            [search]="true"
-                            [change]="true"
-                            (onSelectedItem)="onSelectTechUser($event)"
-                          ></app-tech-users-list-report>
+                            <app-tech-users-list-report
+                                [sort]="true"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="onSelectTechUser($event)"
+                            ></app-tech-users-list-report>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <div>
@@ -1387,26 +1375,6 @@
                 (click)="back()"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'byTaxes'">
         <!-- <div -->
@@ -1675,26 +1643,6 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1790,26 +1738,6 @@
                 ></div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'byCustomers'">
         <!-- <div -->
@@ -1876,26 +1804,6 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1989,26 +1897,6 @@
                 ></div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'ticket-report'">
         <!-- <div -->
@@ -2123,6 +2011,20 @@
                                     (onSelectedItem)="onSelectTechUser($event)"
                                 ></app-tech-users-list-report>
                             </div>
+                            <div class="grey-dropdown qt-report__dropdown qt-mr-8">
+                                <app-drop-down
+                                    #durationsTechSaleDP
+                                    [placeholder]="'No interval'"
+                                    [list]="ticketsReport.companySelectionType"
+                                    [sort]="false"
+                                    [editItem]="ticketsReport.selectedCompanySelectionType"
+                                    [dropdownHeight]="'175px'"
+                                    [heightInput]="'36px'"
+                                    [field]="'title'"
+                                    [isBlockClear]="true"
+                                    (onSelectedItem)="onSelectCompanySelectionType($event)"
+                                ></app-drop-down>
+                            </div>
                             <button
                                 class="btn-new btn-primary-white qt-fs-0"
                                 (click)="getReportByTickets()"
@@ -2195,21 +2097,6 @@
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
@@ -2278,21 +2165,6 @@
                 (click)="back()"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'company-roducts-report'">
         <!-- <div -->
@@ -2399,14 +2271,6 @@
                     </label>
                 </div>
             </div>
-
-
-
-
         </div>
-
-
-
-
     </div>
 </div>

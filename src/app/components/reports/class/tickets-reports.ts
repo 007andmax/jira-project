@@ -1,4 +1,5 @@
 import { reqTicketsReport } from 'src/app/interfaces/reports/req-tickets-reports';
+import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { TicketsReportItem } from './tickets-report-item';
 
 export class TicketsReport {
@@ -6,6 +7,10 @@ export class TicketsReport {
     startDate: string = '';
     endDate: string = '';
     userId: string;
+    companySelectionType: Array<TitleListType> = [new TitleListType("ALL", "ALL"),
+    new TitleListType("WITHOUT_DATA", "WITHOUT_DATA"),
+    new TitleListType("WITH_DATA", "WITH_DATA")];
+    selectedCompanySelectionType = new TitleListType("ALL", "ALL");
 
     public setData(data) {
         this.tickets = data.tickets;
@@ -29,9 +34,13 @@ export class TicketsReport {
         let data: reqTicketsReport = {
             startDate: this.startDate,
             endDate: this.endDate,
-            userId: this.userId
+            userId: this.userId,
+            companySelectionType: this.selectedCompanySelectionType.type,
         }
         return data;
+    }
+    public setCompanySelectionType(data) {
+        this.selectedCompanySelectionType = data;
     }
     public setTechUser(userId) {
         this.userId = userId;

@@ -185,6 +185,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.techTicketReport.resetDates();
 
   }
+  onSelectCompanySelectionType(data) {
+    this.ticketsReport.setCompanySelectionType(data);
+  }
   public onSelectDetailed(data) {
     this.yearToDate = false;
     if (data === 'Monthly') {
