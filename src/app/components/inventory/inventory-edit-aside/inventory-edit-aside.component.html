@@ -10,7 +10,7 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content qt-pt-0-important --less-padding new-companies-content__modal--content advanced">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <mat-error *ngIf="!validate.getManufactureIsExist()">This number is already occupied</mat-error>
             <p>Item Number</p>
             <input
@@ -20,7 +20,7 @@
                 placeholder="Enter Item Number"
             >
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <mat-error *ngIf="!validate.getILCIsExist()">This number is already occupied</mat-error>
             <p>ILC Number</p>
             <input
@@ -30,7 +30,7 @@
                 placeholder="Enter ILC Number"
             >
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
             <p>GL Number</p>
             <app-select-search
                 [class]="['light-dropdown']"
@@ -38,6 +38,7 @@
                 #glNumberSelect
                 [add]="true"
                 [field]="'glNumber'"
+                [formatter]="formatterGLNumber"
                 [placeholder]="'Select GL'"
                 [editItem]="inventory.glNumber"
                 (onAddItem)="onAddGlNumber($event)"
