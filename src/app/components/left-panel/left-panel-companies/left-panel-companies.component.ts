@@ -3,6 +3,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'app-left-panel-companies',
@@ -20,6 +21,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   @Output() onOpenPanel = new EventEmitter();
   constructor(private companiesState: CompaniesStateService,
     public appService: AppService,
+    private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
@@ -27,10 +29,10 @@ export class LeftPanelCompaniesComponent implements OnInit {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isCompanyPage(state)) this.open = false
+      if (!this.leftPanelService.isCompanyPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isCompanyPage(data)) this.open = true;
+      if (this.leftPanelService.isCompanyPage(data)) this.open = true;
     })
     this.companiesState.filter.subscribe(data => {
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");
@@ -52,10 +54,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   ngDoCheck() {
     if (this.companiesState.getSelectedCompanyId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getSelectedCompanyId());
   }
-  public isCompanyPage(state) {
-    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts'
-      || state == 'company-documents')
-  }
+
 
   closeMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.remove('show');
