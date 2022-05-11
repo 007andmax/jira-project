@@ -279,8 +279,8 @@
   }
 
   &__divider {
-    margin: 16px 24px;
-    opacity: 0.08;
+    margin: 8px;
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   &__menu-expand {
@@ -312,7 +312,6 @@
 
   &__menu-expand li {
     display: flex;
-    justify-content: space-between;
     padding: 6px 8px;
     cursor: pointer;
     border-radius: 6px;
@@ -337,16 +336,21 @@
     }
     &.--active {
       color: $primary-1;
-      font-weight: 600;
       background-color: darken($primary-2, 5%);
       a {
         color: $primary-1;
+      }
+      .app-left-panel__menu-expand-count {
+        color: lighten($primary-1, 10%);
       }
     }
     &:hover {
       color: $primary-1;
       a {
         color: $primary-1;
+      }
+      .app-left-panel__menu-expand-count {
+        color: lighten($primary-1, 10%);
       }
     }
 
@@ -395,6 +399,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    &__menu-expand {
+      display: none;
     }
 
     &__menu.--active {
