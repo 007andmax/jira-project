@@ -37,7 +37,7 @@
 <div class="app-left-panel__body">
     <div class="app-left-panel__body-icon">
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('SUPPORT');onOpenPanel()"
             [ngClass]="{'--active':page === 'SUPPORT' }"
         >
@@ -51,14 +51,14 @@
             <div class="app-left-panel__menu-icon --tickets"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('USERS');onOpenPanel()"
             [ngClass]="{'--active':page === 'USERS' }"
         >
             <div class="app-left-panel__menu-icon --users"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('MARKETING');onOpenPanel()"
             [ngClass]="{'--active':page === 'MARKETING' }"
         >
@@ -72,14 +72,14 @@
             <div class="app-left-panel__menu-icon --companies"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('BILLING');onOpenPanel()"
             [ngClass]="{'--active':page === 'BILLING' }"
         >
             <div class="app-left-panel__menu-icon --billing"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('INVENTORY');onOpenPanel()"
             [ngClass]="{'--active':page === 'INVENTORY' }"
         >
@@ -93,7 +93,7 @@
             <div class="app-left-panel__menu-icon --password-manager"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('DOCUMENTS');onOpenPanel()"
             [ngClass]="{'--active':page === 'DOCUMENTS' }"
         >
@@ -101,18 +101,24 @@
         </div>
         <hr class="app-left-panel__divider qt-d-md-none">
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('REPORTS');onChangeState('new-reports')"
             [ngClass]="{'--active':page === 'REPORTS' }"
         >
             <div class="app-left-panel__menu-icon --reports"></div>
         </div>
         <div
-            class="app-left-panel__menu-icon-wrap pointer"
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('SETTINGS');onOpenPanel()"
             [ngClass]="{'--active':page === 'SETTINGS' }"
         >
             <div class="app-left-panel__menu-icon --settings"></div>
+        </div>
+        <div
+          class="app-left-panel__menu-icon-wrap qt-d-none qt-d-md-flex pointer"
+          (click)="logOut()"
+        >
+          <div class="app-left-panel__menu-icon --logout"></div>
         </div>
     </div>
     <div class="app-left-panel__body-menu">
@@ -201,12 +207,5 @@
             class="qt-d-md-none"
             [hidden]="page !== 'SETTINGS'"
         ></app-left-panel-settings>
-        <div
-            class="app-left-panel__menu qt-d-md-flex qt-d-none"
-            (click)="logOut()"
-        >
-            <div class="app-left-panel__menu-icon &#45;&#45;logout"></div>
-            <div class="app-left-panel__menu-title">Logout</div>
-        </div>
     </div>
 </div>
