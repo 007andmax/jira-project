@@ -111,7 +111,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return `company/${this.company.id}/dashboard`;
   }
   goToDashboard() {
-    this.companiesStateService.setSelectedCompanyId(this.company.id);
     const url = this.router.serializeUrl(
       this.router.createUrlTree(
         [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])

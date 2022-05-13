@@ -1,14 +1,13 @@
 <div
     class="app-left-panel__menu"
     [ngClass]="{'--active': open}"
-    (click)="open = !open;openPanel()"
+    (click)="open = !open;openPanel();onToggleTypeCompanies()"
 >
     <div class="app-left-panel__menu-title">Companies</div>
     <i
         class="icn-sm report-caret-icon"
         *ngIf="selectedCompany"
         [ngClass]="{'report-caret-icon-rotate':toggleTypeCompanies}"
-        (click)="toggleTypeCompanies = !toggleTypeCompanies"
     ></i>
 </div>
 <ul

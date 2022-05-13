@@ -20,7 +20,6 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
-      this.companiesStateService.setSelectedCompanyId(this.companyId);
       this.filter.setCompanyId(this.companyId);
       this.filter.setCompanyScope(true);
       this.getFilterList();

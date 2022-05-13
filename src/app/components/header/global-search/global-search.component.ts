@@ -70,7 +70,7 @@ export class GlobalSearchComponent implements OnInit {
   showInfo(item: GlobalSearchResultItem) {
     if (item.type === 'COMPANIES') {
 
-      this.companiesStateService.setSelectedCompanyId(item.id);
+      this.companiesStateService.setCompanyRoutingId(item.id);
       // this.leftPanelStateService.goToState('company-dashboard');
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, item.id, 'dashboard']);

@@ -16,7 +16,6 @@ import { WebsocketStateService } from '../websocket/websocket-state.service';
 })
 export class CompaniesStateService {
   allCompanies = [];
-  selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -77,6 +76,7 @@ export class CompaniesStateService {
     return this.companyRoutingId;
   }
   public setCompanyRoutingId(data) {
+    this.onChangeSelectedCompanyId.emit(data);
     this.companyRoutingId = data;
   }
   private initSubscriptions() {
@@ -88,13 +88,6 @@ export class CompaniesStateService {
   }
   public onInitFilter(data) {
     this.filter.emit(data);
-  }
-  public getSelectedCompanyId() {
-    return this.selectedCompanyId;
-  }
-  public setSelectedCompanyId(data) {
-    this.onChangeSelectedCompanyId.emit(data);
-    this.selectedCompanyId = data;
   }
   public setShowArchivedCompanies(data) {
     this.showArchivedCompanies = data;

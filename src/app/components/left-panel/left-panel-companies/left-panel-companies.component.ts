@@ -26,7 +26,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
-    if (this.companiesState.getSelectedCompanyId()) this.toggleTypeCompanies = false;
+    if (this.companiesState.getCompanyRoutingId()) this.toggleTypeCompanies = false;
     if (this.selectedCompany) this.toggleTypeCompanies = false;
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
@@ -41,10 +41,9 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");
       this.clientType = (data.clientType !== "ARCHIVE") ? data.clientType : null;
     })
-    this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
-      console.log("data", data);
-      if (data) this.toggleTypeCompanies = false;
-    })
+  }
+  onToggleTypeCompanies() {
+    if (this.selectedCompany) this.toggleTypeCompanies = !this.toggleTypeCompanies;
   }
   getCount(clientType) {
     return this.companiesState.getCompanies().filter(item => item.accountType === "CLIENT" && item.clientType === clientType && !item.deletedAt).length;
@@ -59,7 +58,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.onOpenPanel.emit(null);
   }
   ngDoCheck() {
-    if (this.companiesState.getSelectedCompanyId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getSelectedCompanyId());
+    if (this.companiesState.getCompanyRoutingId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId());
+    if (!this.companiesState.getCompanyRoutingId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = null;
   }
 
 

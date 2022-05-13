@@ -377,7 +377,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   getReportCompanyProducts() {
     // if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
 
-    this.productsCompanyReport.setCompanyId(this.companiesStateService.getSelectedCompanyId());
+    this.productsCompanyReport.setCompanyId(this.companiesStateService.getCompanyRoutingId());
 
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.productsCompanyReport.companyId);
     if (this.productsCompanyReport.startDate === '' && this.productsCompanyReport.endDate === '') this.productsCompanyReport.setDatesByCompany(this.selectedClient);

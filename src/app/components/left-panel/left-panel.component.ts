@@ -222,7 +222,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'quotes-component') this.goToLink('quotes');
       if (this.state === 'new-payments-ng2') this.goToLink('payments');
       if (this.state === 'new-contracts') this.goToLink('contracts');
-      if (this.state === 'company-dashboard') this.goToLink(`company/dashboard/${this.companiesStateService.getSelectedCompanyId()}`);
+      if (this.state === 'company-dashboard') this.goToLink(`company/dashboard/${this.companiesStateService.getCompanyRoutingId()}`);
       if (this.state === 'company-tickets') this.goToLink('company/tickets');
       if (this.state === 'company-user') this.goToLink('company/user');
       if (this.state === 'company-devices') this.goToLink('company/devices');
@@ -260,7 +260,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-documents') this.goToLink('documents');
       if (this.state === 'new-add-documents') this.goToLink('documents/add');
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
-      if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
+      if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
 
 
       if (this.state === 'byProducts' ||
