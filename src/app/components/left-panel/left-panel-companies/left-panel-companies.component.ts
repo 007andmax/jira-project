@@ -15,6 +15,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   showArchivedCompanies: boolean = false;
   selectedCompany: Company;
   clientType: string;
+  toggleTypeCompanies: boolean = true;
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
@@ -25,6 +26,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
+    if (this.companiesState.getSelectedCompanyId()) this.toggleTypeCompanies = false;
+    if (this.selectedCompany) this.toggleTypeCompanies = false;
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
@@ -37,6 +40,10 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.companiesState.filter.subscribe(data => {
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");
       this.clientType = (data.clientType !== "ARCHIVE") ? data.clientType : null;
+    })
+    this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
+      console.log("data", data);
+      if (data) this.toggleTypeCompanies = false;
     })
   }
   getCount(clientType) {

@@ -22,6 +22,7 @@ import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserFilter } from '../class/user-filter';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 
 
@@ -58,12 +59,14 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private usersService: UsersService,
+    public appService: AppService,
     private marketingEmailService: MarketingEmailService,
     private permissionsService: PermissionsService,
     private usersHeaderService: UsersHeaderService) {
   }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = true;
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.userFilter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
     })

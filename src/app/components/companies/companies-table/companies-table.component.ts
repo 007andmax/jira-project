@@ -112,8 +112,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
   goToDashboard() {
     this.companiesStateService.setSelectedCompanyId(this.company.id);
-    this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(
+        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
+
+    );
+    window.open(`#${url}`, '_blank');
   }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;

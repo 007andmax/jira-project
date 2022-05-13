@@ -4,9 +4,16 @@
     (click)="open = !open;openPanel()"
 >
     <div class="app-left-panel__menu-title">Companies</div>
+    <i
+        class="icn-sm report-caret-icon"
+        *ngIf="selectedCompany"
+        [ngClass]="{'report-caret-icon-rotate':toggleTypeCompanies}"
+        (click)="toggleTypeCompanies = !toggleTypeCompanies"
+    ></i>
 </div>
 <ul
     class="app-left-panel__menu-expand"
+    *ngIf="toggleTypeCompanies"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <a
