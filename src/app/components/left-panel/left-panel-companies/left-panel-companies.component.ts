@@ -41,6 +41,10 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");
       this.clientType = (data.clientType !== "ARCHIVE") ? data.clientType : null;
     })
+    this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
+      console.log("data", data);
+      if (data) this.toggleTypeCompanies = false;
+    })
   }
   onToggleTypeCompanies() {
     if (this.selectedCompany) this.toggleTypeCompanies = !this.toggleTypeCompanies;
