@@ -7,10 +7,10 @@ export class TicketsReport {
     startDate: string = '';
     endDate: string = '';
     userId: string;
-    companySelectionType: Array<TitleListType> = [new TitleListType("ALL", "ALL"),
-    new TitleListType("WITHOUT_DATA", "WITHOUT_DATA"),
-    new TitleListType("WITH_DATA", "WITH_DATA")];
-    selectedCompanySelectionType = new TitleListType("ALL", "ALL");
+    companySelectionType: Array<TitleListType> = [new TitleListType("All companies", "ALL"),
+    new TitleListType("Companies without data", "WITHOUT_DATA"),
+    new TitleListType("Companies with data", "WITH_DATA")];
+    selectedCompanySelectionType = new TitleListType("All companies", "ALL");
 
     public setData(data) {
         this.tickets = data.tickets;
