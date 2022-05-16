@@ -133,6 +133,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/detailed-commissions`)) this.state = 'detailed-commissions';
           if (window.location.href.includes(`/report/accounts-receivable`)) this.state = 'accounts-receivable';
           if (window.location.href.includes(`/report/accounting-report`)) this.state = 'accounting-report';
+          if (window.location.href.includes(`/report/payments-report`)) this.state = 'payments-report';
           if (window.location.href.includes(`/report/remote-access`)) this.state = 'remote-access';
           if (window.location.href.includes(`/report/software-summary`)) this.state = 'software-summary';
           if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
@@ -249,6 +250,7 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'detailed-commissions' ||
         this.state === 'accounts-receivable' ||
         this.state === 'accounting-report' ||
+        this.state === 'payments-report' ||
         this.state === 'remote-access' ||
         this.state === 'software-summary' ||
         this.state === 'hardware-summary' ||

@@ -33,6 +33,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { TechTicketReport } from '../class/tech-ticket-report';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { PaymentsReport } from '../reports/payments-report/class/payments-report';
 
 
 @Component({
@@ -62,6 +63,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   remoteConnectionReport: RemoteConnectionReport = new RemoteConnectionReport();
   techSalesReport: TechSalesReport = new TechSalesReport();
   techTicketReport: TechTicketReport = new TechTicketReport();
+  paymentsReport: PaymentsReport = new PaymentsReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -378,6 +380,14 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     });
 
   }
+  getReportPayments() {
+    if (!this.validate.isValidateTickets(this.paymentsReport.startDate, this.paymentsReport.endDate)) return;
+    this.onRequest.emit(true);
+    this.reportsService.getReportByPayments(this.paymentsReport.getForRequest()).subscribe(data => {
+      this.setDatareport(this.ticketsReport.getDate());
+    });
+
+  }
   getReportByCustomers() {
     if (!this.validate.isValidateCustomers(this.customerSalesReport.startDate, this.customerSalesReport.endDate, (this.selectedClient) ? this.selectedClient.id : null, this.customerSalesReport.type)) return;
     this.onRequest.emit(true);
@@ -502,6 +512,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+
+      this.paymentsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.paymentsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
       this.techService.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.techService.setEndDate(moment(value.end).format('YYYY-MM-DD'));

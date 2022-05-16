@@ -935,6 +935,50 @@
             ></div>
         </div>
     </div>
+    <div *ngIf="report === 'payments-report'">
+        <div class="qt-report__header qt-df qt-ai-fs">
+            <div class="qt-report__header-content">
+                <div class="qt-df qt-ai-c qt-jc-sb">
+                    <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+                        <div
+                            class="report-left-panel__btn pointer qt-mr-6"
+                            (click)="toggleLeftMenu()"
+                        >
+                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div
+                            class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
+                            [ngClass]="className"
+                        >
+                            <div class="qt-report__dropdown qt-input-block qt-mr-8">
+                                <app-multi-datepicker
+                                    #dp
+                                    (selectedDate)="filterByDate($event)"
+                                ></app-multi-datepicker>
+                            </div>
+                            <button
+                                class="btn-new btn-primary-white qt-fs-0"
+                                (click)="getReportPayments()"
+                            >
+                                Get
+                  Report
+                            </button>
+                        </div>
+                    </div>
+                    <app-report-additional-actions
+                        [report]="'common-commissions'"
+                        [accountType]="'TECH'"
+                        [template]="'CUSTOMER_REPORT'"
+                        [fileName]="'common-commissions-report'"
+                    ></app-report-additional-actions>
+                </div>
+            </div>
+            <div
+                class="qt-report__control-panel-btn-close pointer icon__close"
+                (click)="back()"
+            ></div>
+        </div>
+    </div>
     <div *ngIf="report === 'detailed-commissions'">
         <!-- <div -->
         <!-- class="run-report-content clearfix" -->
@@ -1085,6 +1129,9 @@
                 (click)="back()"
             ></div>
         </div>
+
+
+
 
 
 
