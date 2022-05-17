@@ -76,7 +76,8 @@ export class DevicesComponent implements OnInit {
   hostUserName: string;
   company: any;
   searches: any[];
-
+  isOfflineDeviceSelected: boolean = false;
+  selectedAssetList: any[]=[];  
 
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
@@ -123,6 +124,10 @@ export class DevicesComponent implements OnInit {
     }
   }
 
+  getCountSelected() {
+    return this.assetList.filter(item => item.selected).length;
+  }
+
   load(company: any) {
     this.company = company;
     this.currentCompany = company;
@@ -161,7 +166,7 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {
+  searchDeviceTag(data: any) {   
     this.showPreloader = true;    
     if (!this.selectedTag) {
       this.autosearchDevice = [];
@@ -192,15 +197,34 @@ export class DevicesComponent implements OnInit {
   }
 
 
-  toogleDevices() {
+  toogleDevices(isChecked: boolean) {
     this.assetList.forEach((item) => {
       item.selected = this.selectAllDevices ? true : false;
     });
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;    
+    if(isChecked)
+    {
+      this.assetList.forEach((element,index)=>{
+        this.selectedAssetList.push(this.assetList[index]);
+      })            
+    }
+    else
+    {
+      this.selectedAssetList=[];
+    }
   }
 
-  onSelectDevice() {
+  onSelectDevice(index: number, isChecked: boolean) {
     let find = this.assetList.find((item) => !item.selected);
     this.selectAllDevices = find ? false : true;
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;   
+    if (isChecked) {
+      this.selectedAssetList.push(this.assetList[index]);      
+    } else {            
+      let AssetId = this.assetList[index].ID;
+      let AssetIndex = this.selectedAssetList.findIndex(item=>item.ID == AssetId);
+      this.selectedAssetList.splice(AssetIndex,1);      
+    }                                        
   }
 
   HardwareTypeList(TechCompanyGuid: any) {
@@ -807,7 +831,7 @@ export class DevicesComponent implements OnInit {
   closed() {
     this.modalService.dismissAll("Cross click");
   }
-  saveFavourite() {
+  saveFavourite() {    
     let req: any = {};
     req.Criteria = this.selectedTag;
     req.Name = this.favouriteName
@@ -835,5 +859,34 @@ export class DevicesComponent implements OnInit {
       (err) => {
         this.toastr.error('Error ! Please try again')
       })
+  }
+
+  sendCommandHeader(command)
+  {        
+    let headerData:any={};
+    if(command === "r")
+    {      
+      this.assetList.forEach((element)=>{
+        headerData.AssetID = element.ID;
+        headerData.MessageType = "RunPowerShellCommand";
+        headerData.Value = "Restart-Computer";
+        this.agentService.SendPowerShellCommand(headerData);
+      })
+    }
+    if(command === "s")
+    {
+      this.assetList.forEach((element)=>{
+        headerData.AssetID = element.ID;
+        headerData.MessageType = "RunPowerShellCommand";
+        headerData.Value = "Stop-Computer";
+        this.agentService.SendPowerShellCommand(headerData);
+      })
+    }
+    if(command === "ar")
+    {
+      this.assetList.forEach((element)=>{
+        this.agentService.UninstallAgent(element.ID);
+      })
+    }
   }
 }

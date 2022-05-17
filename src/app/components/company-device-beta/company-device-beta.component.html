@@ -1,5 +1,6 @@
 <div class="qt-page-list company-devices-page">
     <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
             <h3
                 class="qt-page-list__header-title"
@@ -39,9 +40,55 @@
         >
             Add Device
         </button></span>
+        
         </div>
 
-
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
+              <div class="company-device-textheader" [textContent]="getCountSelected() + ' Devices Selected'"></div>              
+            <div
+            class="qt-df qt-ai-c"
+        >
+            <div ngbDropdown container="body" class="qt-overflow-v">
+              <div
+                  class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                  ngbDropdownToggle
+              ></div>
+              <ul
+                  class="qt-dropdown-menu --open-bot qt-overflow-v"
+                  ngbDropdownMenu
+              >                  
+                  <li
+                      class="pointer"
+                      ngbDropdownItem
+                      *ngIf="!isOfflineDeviceSelected" 
+                      (click)="sendCommandHeader('r')"  
+                  >
+                      <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                      Restart
+                  </li>
+                  <li
+                      class="pointer"
+                      ngbDropdownItem
+                      *ngIf="!isOfflineDeviceSelected"   
+                      (click)="sendCommandHeader('s')" 
+                  >
+                      <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                      Shutdown
+                  </li>                  
+                  <li
+                      class="pointer"
+                      (click)="sendCommandHeader('ar')" 
+                  >
+                      <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                      Remove Agent
+                  </li>
+              </ul>
+            </div>            
+        </div>                      
+          </div>
+    </div>
+</div>
         <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
@@ -52,7 +99,7 @@
                                     <input
                                         type="checkbox"
                                         [(ngModel)]="selectAllDevices"
-                                        (change)="toogleDevices()"
+                                        (change)="toogleDevices($event.target.checked)"
                                     >
                                     <span></span>
                                 </label>
@@ -80,7 +127,7 @@
                 </thead>
             </table>
         </div>
-    </div>
+    
     <div class="qt-df qt-fd-c qt-jc-sb">
         <div class="qt-page-list__body">
             <div class="qt-page-list__body-table-container">
@@ -93,7 +140,7 @@
                                         <input
                                             type="checkbox"
                                             [(ngModel)]="asset.selected"
-                                            (change)="onSelectDevice()"
+                                            (change)="onSelectDevice(i,$event.target.checked)"
                                         >
                                         <span></span>
                                     </label>
@@ -255,18 +302,19 @@
                               </div>
                           </td>
                           <td class="company-devices-table__device-agent">
-                            <div class="qt-df qt-fd-c">
-                              <span>
-                                <span>{{ asset.VersionInstallDate | date: 'dd/MM/yyyy' }}</span>
-                            </span>
-                            <span
-                                *ngIf="asset.IsAgentCurrent"
-                                class="agent-tag qt-ff-gm"
-                            >{{asset.AgentVersion}}</span>
-                            <span
-                                *ngIf="!asset.IsAgentCurrent"
-                                class="agent-tag qt-ff-gm --offline"
-                            >{{asset.AgentVersion}}</span>
+                            <div class="qt-df qt-fd-c">                              
+                                <span *ngIf="
+                                asset.AgentVersion != '' &&
+                                asset.AgentVersion != undefined &&
+                                asset.AgentVersion != null &&
+                                !asset.IsAgentCurrent
+                              " class="agent-tag qt-ff-gm --offline">{{asset.AgentVersion}}</span>
+                              <span *ngIf="
+                                asset.AgentVersion == '' &&
+                                asset.AgentVersion == undefined &&
+                                asset.AgentVersion == null &&
+                                asset.IsAgentCurrent
+                              " class="agent-tag qt-ff-gm">{{asset.AgentVersion}}</span>          
 
                           </div>
                           </td>

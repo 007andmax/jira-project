@@ -313,9 +313,9 @@ input.mat-chip-input {
 }
 
 .company-devices-table__dev-name {
-  max-width: 200px;
+  max-width: 180px;
   width: max-content;
-  min-width: 200px;
+  min-width: 180px;
 }
 
 .company-devices-table__company-name {
@@ -539,11 +539,11 @@ span.qt-input-search:before {
 }
 
 .company-devices-page .company-devices-table__up-time{
-  min-width: 200px !important;
+  min-width: 100px !important;
 }
 
 .company-devices-page table.company-devices-table tbody .company-devices-table__up-time{
-  min-width: 200px !important;
+  min-width: 100px !important;
 }
 
 .company-devices-page table.company-devices-table tbody .company-devices-table__device-type{
@@ -626,4 +626,13 @@ span.qt-input-search:before {
     line-height: 1.54;
     letter-spacing: normal;
     color: var(--gray-900);
+  }
+
+  .company-device-devicesheader{
+    padding-top: 4px;    
+    margin-left: 5px
+  }
+
+  .company-devices-page__list-header-buttons{
+    padding: 5px 3px !important;
   }

@@ -13,6 +13,7 @@ import { CompanyDeviceBetaFilter } from "./class/device-beta";
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
+import { data } from "jquery";
 
 @Component({
   selector: "app-company-device-beta",
@@ -81,6 +82,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   selectTag: string;
   selectedTagdevicelist : any[]=[];
   selectId : any[]=[];
+  isOfflineDeviceSelected: boolean = false;
+  selectedAssetList: any[]=[];  
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -124,23 +127,46 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.onUninstallRemoteAgentCommand();
   }
 
+  getCountSelected() {
+    return this.assetList.filter(item => item.selected).length;
+  }
+
   setPreviewDataDevice() {
     this.AssetDetail();
     this.CurrentUser();
   }
 
-  toogleDevices() {
+  toogleDevices(isChecked: boolean) {
     this.assetList.forEach((item) => {
       item.selected = this.selectAllDevices ? true : false;
-    });
+    });      
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;    
+    if(isChecked)
+    {
+      this.assetList.forEach((element,index)=>{
+        this.selectedAssetList.push(this.assetList[index]);
+      })            
+    }
+    else
+    {
+      this.selectedAssetList=[];
+    }
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.assetList);
   }
 
-  onSelectDevice() {
+  onSelectDevice(index: number, isChecked: boolean) {          
     let find = this.assetList.find((item) => !item.selected);
-    this.selectAllDevices = find ? false : true;
+    this.selectAllDevices = find ? false : true;        
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;   
+    if (isChecked) {
+      this.selectedAssetList.push(this.assetList[index]);      
+    } else {            
+      let AssetId = this.assetList[index].ID;
+      let AssetIndex = this.selectedAssetList.findIndex(item=>item.ID == AssetId);
+      this.selectedAssetList.splice(AssetIndex,1);      
+    }                                        
   }
 
   gotoDetailDevice(Guid: string) {
@@ -283,7 +309,37 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  sendCommand(command, assetId) {
+
+  sendCommandHeader(command)
+  {    
+    let headerData:any={};
+    if(command === "r")
+    {      
+      this.assetList.forEach((element)=>{
+        headerData.AssetID = element.ID;
+        headerData.MessageType = "RunPowerShellCommand";
+        headerData.Value = "Restart-Computer";
+        this.agentService.SendPowerShellCommand(headerData);
+      })
+    }
+    if(command === "s")
+    {
+      this.assetList.forEach((element)=>{
+        headerData.AssetID = element.ID;
+        headerData.MessageType = "RunPowerShellCommand";
+        headerData.Value = "Stop-Computer";
+        this.agentService.SendPowerShellCommand(headerData);
+      })
+    }
+    if(command === "ar")
+    {
+      this.assetList.forEach((element)=>{
+        this.agentService.UninstallAgent(element.ID);
+      })
+    }
+  }
+
+  sendCommand(command, assetId) {            
     let data: any = {};
     this.assetId = assetId;
     if (command === "r") {

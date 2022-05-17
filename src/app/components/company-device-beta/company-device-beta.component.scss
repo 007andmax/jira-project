@@ -448,11 +448,11 @@ span.qt-input-search:before {
 }
 
 .company-devices-page .company-devices-table__up-time {
-  min-width: 200px !important;
+  min-width: 100px !important;
 }
 
 .company-devices-page table.company-devices-table tbody .company-devices-table__up-time {
-  min-width: 200px !important;
+  min-width: 100px !important;
 }
 
 .company-devices-page table.company-devices-table tbody .company-devices-table__device-type {
@@ -486,4 +486,9 @@ span.qt-input-search:before {
   right: -607px !important;
   top: -330px !important;
   position: fixed !important;
+}
+
+.company-device-textheader{
+  padding-top: 4px;
+  padding-right:25px;
 }
