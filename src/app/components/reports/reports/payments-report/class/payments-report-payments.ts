@@ -6,11 +6,13 @@ export class PaymentsReportPayments {
     CREDIT_CARD: Array<PaymentsReportPayment> = [];
     DEBIT_CARD: Array<PaymentsReportPayment> = [];
     WIRE_TRANSFER: Array<PaymentsReportPayment> = [];
+    REFUND_PAYMENT: Array<PaymentsReportPayment> = [];
     constructor(data) {
         this.CASH = data.CASH.map(item => new PaymentsReportPayment(item));
         this.CHEQUE = data.CHEQUE.map(item => new PaymentsReportPayment(item));
         this.CREDIT_CARD = data.CREDIT_CARD.map(item => new PaymentsReportPayment(item));
         this.DEBIT_CARD = data.DEBIT_CARD.map(item => new PaymentsReportPayment(item));
         this.WIRE_TRANSFER = data.WIRE_TRANSFER.map(item => new PaymentsReportPayment(item));
+        this.REFUND_PAYMENT = data.REFUND_PAYMENT.map(item => new PaymentsReportPayment(item));
     }
 }

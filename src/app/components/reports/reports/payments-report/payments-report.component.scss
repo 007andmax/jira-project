@@ -1,4 +1,4 @@
-.payments-total-container {
+.payments-total-container,.table-name {
     width: 1384px;
     margin: 0 auto;
     background-color: #ffffff;
@@ -12,4 +12,10 @@
         justify-content: space-between;
         width: 100%;
     }
+}
+.table-name {
+    margin: 0px auto 20px auto;
+}
+.qt-report__body-table-body {
+    margin: 0px auto 20px auto;
 }

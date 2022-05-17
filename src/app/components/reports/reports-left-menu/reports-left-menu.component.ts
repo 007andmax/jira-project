@@ -22,7 +22,8 @@ export class ReportsLeftMenuComponent implements OnInit {
     this.list.push(new ReportsLeftMenuItem("icon__commision", "COMMISSIONS", [new ReportsLeftMenuItemReport('Common report', 'common-commissions'),
     new ReportsLeftMenuItemReport('Detailed report', 'detailed-commissions')]));
     this.list.push(new ReportsLeftMenuItem("icon__financial", "FINANCIAL", [new ReportsLeftMenuItemReport('Accounts receivable report', 'accounts-receivable'),
-    new ReportsLeftMenuItemReport('Accounting report', 'accounting-report')]));
+    new ReportsLeftMenuItemReport('Accounting report', 'accounting-report'),
+    new ReportsLeftMenuItemReport('Payments report', 'payments-report')]));
     this.list.push(new ReportsLeftMenuItem("icon__remote-access", "REMOTE_ACCESS", [new ReportsLeftMenuItemReport('Remote connection report', 'remote-access')]));
     this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
     new ReportsLeftMenuItemReport('Hardware Summary reports', 'hardware-summary'),

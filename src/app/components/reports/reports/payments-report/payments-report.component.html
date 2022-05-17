@@ -23,10 +23,10 @@
                 class="body-m qt-color-dark-light"
                 *ngIf="paymentsReport.startDate !== '' && paymentsReport.endDate !== ''"
             >
-                <span>Deposit -</span>
                 <span>
                     {{getDateForHeader(paymentsReport.startDate)}}
                 </span>
+                -
                 <span>
                     {{getDateForHeader(paymentsReport.endDate)}}
                 </span>
@@ -68,196 +68,69 @@
                 </div>
             </div>
         </div>
-        <table
-            class="qt-report__body-table-body"
-            *ngIf="onInit"
-        >
-            <thead>
-                <tr>
-                    <th class="qt-fw-600 qt-color-dark ticket-report__col-company-name">DATE</th>
-                    <th class="qt-fw-600 qt-color-dark">INVOICE#</th>
-                    <th class="qt-fw-600 qt-color-dark">COMPANY</th>
-                    <th class="qt-fw-600 qt-color-dark">reference</th>
-                    <th class="qt-fw-600 qt-color-dark">AMOUNT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="qt-report__body-row">
-                    <td colspan="5">CASH</td>
-                </tr>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="paymentsReport.payments.CASH"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
+        <div *ngIf="onInit">
+            <ng-template
+                ngFor
+                let-table
+                [ngForOf]="listTables"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <div
+                    class="table-name"
+                    *ngIf="paymentsReport.payments[table.type].length > 0"
                 >
-                    <tr class="qt-report__body-row">
-                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
-                        <td>
-                            <ng-template
-                                ngFor
-                                let-invoice
-                                [ngForOf]="item.partialPaidInvoices"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <span [textContent]="invoice"></span>
-                            </ng-template>
-                        </td>
-                        <td [textContent]="item.clientCompanyName"></td>
-                        <td [textContent]="item.reference"></td>
-                        <td [textContent]="item.partialPaidAmount"></td>
-                    </tr>
-                </ng-template>
-                <tr class="qt-report__body-row">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.CASH)"></td>
-                </tr>
-                <tr class="qt-report__body-row">
-                    <td colspan="5">Cheque</td>
-                </tr>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="paymentsReport.payments.CHEQUE"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
+                    <span [textContent]="table.title"></span>
+                </div>
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="paymentsReport.payments[table.type].length > 0"
                 >
-                    <tr class="qt-report__body-row">
-                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
-                        <td>
-                            <ng-template
-                                ngFor
-                                let-invoice
-                                [ngForOf]="item.partialPaidInvoices"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <span [textContent]="invoice"></span>
-                            </ng-template>
-                        </td>
-                        <td [textContent]="item.clientCompanyName"></td>
-                        <td [textContent]="item.reference"></td>
-                        <td [textContent]="item.partialPaidAmount"></td>
-                    </tr>
-                </ng-template>
-                <tr class="qt-report__body-row">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.CHEQUE)"></td>
-                </tr>
-                <tr class="qt-report__body-row">
-                    <td colspan="5">Credit Card</td>
-                </tr>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="paymentsReport.payments.CREDIT_CARD"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
-                >
-                    <tr class="qt-report__body-row">
-                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
-                        <td>
-                            <ng-template
-                                ngFor
-                                let-invoice
-                                [ngForOf]="item.partialPaidInvoices"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <span [textContent]="invoice"></span>
-                            </ng-template>
-                        </td>
-                        <td [textContent]="item.clientCompanyName"></td>
-                        <td [textContent]="item.reference"></td>
-                        <td [textContent]="item.partialPaidAmount"></td>
-                    </tr>
-                </ng-template>
-                <tr class="qt-report__body-row">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.CREDIT_CARD)"></td>
-                </tr>
-                <tr class="qt-report__body-row">
-                    <td colspan="5">Debit</td>
-                </tr>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="paymentsReport.payments.DEBIT_CARD"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
-                >
-                    <tr class="qt-report__body-row">
-                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
-                        <td>
-                            <ng-template
-                                ngFor
-                                let-invoice
-                                [ngForOf]="item.partialPaidInvoices"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <span [textContent]="invoice"></span>
-                            </ng-template>
-                        </td>
-                        <td [textContent]="item.clientCompanyName"></td>
-                        <td [textContent]="item.reference"></td>
-                        <td [textContent]="item.partialPaidAmount"></td>
-                    </tr>
-                </ng-template>
-                <tr class="qt-report__body-row">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.DEBIT_CARD)"></td>
-                </tr>
-                <tr class="qt-report__body-row">
-                    <td colspan="5">WIRE TRANSFER</td>
-                </tr>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="paymentsReport.payments.WIRE_TRANSFER"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
-                >
-                    <tr class="qt-report__body-row">
-                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
-                        <td>
-                            <ng-template
-                                ngFor
-                                let-invoice
-                                [ngForOf]="item.partialPaidInvoices"
-                                let-i="index"
-                                [ngForTrackBy]="trackByIndex"
-                            >
-                                <span [textContent]="invoice"></span>
-                            </ng-template>
-                        </td>
-                        <td [textContent]="item.clientCompanyName"></td>
-                        <td [textContent]="item.reference"></td>
-                        <td [textContent]="item.partialPaidAmount"></td>
-                    </tr>
-                </ng-template>
-                <tr class="qt-report__body-row">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.WIRE_TRANSFER)"></td>
-                </tr>
-            </tbody>
-        </table>
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-dark ticket-report__col-company-name">DATE</th>
+                            <th class="qt-fw-600 qt-color-dark">INVOICE#</th>
+                            <th class="qt-fw-600 qt-color-dark">COMPANY</th>
+                            <th class="qt-fw-600 qt-color-dark">reference</th>
+                            <th class="qt-fw-600 qt-color-dark">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template
+                            ngFor
+                            let-item
+                            [ngForOf]="paymentsReport.payments[table.type]"
+                            let-i="index"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td [textContent]="getDateForCashe(item.createdAt)"></td>
+                                <td>
+                                    <ng-template
+                                        ngFor
+                                        let-invoice
+                                        [ngForOf]="item.partialPaidInvoices"
+                                        let-i="index"
+                                        [ngForTrackBy]="trackByIndex"
+                                    >
+                                        <span [textContent]="invoice"></span>
+                                    </ng-template>
+                                </td>
+                                <td [textContent]="item.clientCompanyName"></td>
+                                <td [textContent]="item.reference"></td>
+                                <td [textContent]="item.partialPaidAmount"></td>
+                            </tr>
+                        </ng-template>
+                        <tr class="qt-report__body-row">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td [textContent]="'Total: ' + getTotal(paymentsReport.payments[table.type])"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </div>
     </div>
 </div>

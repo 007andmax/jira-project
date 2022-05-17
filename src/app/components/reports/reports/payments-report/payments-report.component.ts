@@ -5,6 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PaymentsReport } from './class/payments-report';
 import * as moment from 'moment';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
   selector: 'payments-report',
@@ -18,6 +19,12 @@ export class PaymentsReportComponent implements OnInit {
   onInit = false;
   currentCompany: Company;
   techUser: User;
+  listTables: Array<TitleListType> = [new TitleListType('CASH', 'CASH'),
+  new TitleListType('Cheque', 'CHEQUE'),
+  new TitleListType('Credit Card', 'CREDIT_CARD'),
+  new TitleListType('Debit', 'DEBIT_CARD'),
+  new TitleListType('Wire Transfer', 'WIRE_TRANSFER'),
+  new TitleListType('Refunds', 'REFUND_PAYMENT')];
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,) { }
@@ -36,7 +43,7 @@ export class PaymentsReportComponent implements OnInit {
     this.onInit = true;
   }
   public getDateForHeader(data) {
-    return moment(new Date(data)).format('MMM DD, YYYY');
+    return moment(new Date(data)).format('DD MMM YYYY');
   }
   public getDateForCashe(data) {
     return moment(new Date(data)).format('YYYY/MM/DD');
