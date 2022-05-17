@@ -384,7 +384,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     if (!this.validate.isValidateTickets(this.paymentsReport.startDate, this.paymentsReport.endDate)) return;
     this.onRequest.emit(true);
     this.reportsService.getReportByPayments(this.paymentsReport.getForRequest()).subscribe(data => {
-      this.setDatareport(this.ticketsReport.getDate());
+      this.paymentsReport.setDataFromRequest(data);
+      this.setDatareport(this.paymentsReport);
     });
 
   }
@@ -513,8 +514,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
-      this.paymentsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
-      this.paymentsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+      this.paymentsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
+      this.paymentsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
 
       this.techService.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.techService.setEndDate(moment(value.end).format('YYYY-MM-DD'));

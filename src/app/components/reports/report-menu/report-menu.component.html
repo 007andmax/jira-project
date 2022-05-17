@@ -953,6 +953,8 @@
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                 <app-multi-datepicker
                                     #dp
+                                    [validate]="validate.getDates()"
+                                    [errorMessage]="'Please select the dates'"
                                     (selectedDate)="filterByDate($event)"
                                 ></app-multi-datepicker>
                             </div>
@@ -1129,6 +1131,7 @@
                 (click)="back()"
             ></div>
         </div>
+
 
 
 

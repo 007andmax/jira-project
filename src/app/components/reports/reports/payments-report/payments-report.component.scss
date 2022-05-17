@@ -1,0 +1,15 @@
+.payments-total-container {
+    width: 1384px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+.payments-total {
+    width: 500px;
+    margin: 0px 0px 20px 0px;
+    .payments-total-item,.deposit-total {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}

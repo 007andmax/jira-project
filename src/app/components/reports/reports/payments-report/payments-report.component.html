@@ -21,21 +21,51 @@
             <h6 class="qt-fw-600 qt-color-dark">Payments Report</h6>
             <div
                 class="body-m qt-color-dark-light"
-                *ngIf="ticketsReport.startDate !== '' && ticketsReport.endDate !== ''"
+                *ngIf="paymentsReport.startDate !== '' && paymentsReport.endDate !== ''"
             >
+                <span>Deposit -</span>
                 <span>
-                    {{getDateForHeader(ticketsReport.startDate)}}
+                    {{getDateForHeader(paymentsReport.startDate)}}
                 </span>
-                -
                 <span>
-                    {{getDateForHeader(ticketsReport.endDate)}}
+                    {{getDateForHeader(paymentsReport.endDate)}}
                 </span>
             </div>
-            <div
-                class="body-m qt-color-dark-light"
-                *ngIf="techUser && onInit"
-            >
-                {{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}
+        </div>
+        <div
+            class="payments-total-container"
+            *ngIf="onInit"
+        >
+            <div class="payments-total">
+                <div class="payments-total-item">
+                    <span>Cash</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CASH"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Cheque</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CHEQUE"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Credit Card</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CREDIT_CARD"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Debit</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Wire Transfer</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.WIRE_TRANSFER"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Refunds</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT"></span>
+                </div>
+                <hr>
+                <div class="deposit-total">
+                    <span>DEPOSIT Total</span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.TOTAL"></span>
+                </div>
             </div>
         </div>
         <table
@@ -44,31 +74,189 @@
         >
             <thead>
                 <tr>
-                    <th class="qt-fw-600 qt-color-dark ticket-report__col-company-name">Company Name</th>
-                    <th class="qt-fw-600 qt-color-dark">By web</th>
-                    <th class="qt-fw-600 qt-color-dark">By agent</th>
-                    <th class="qt-fw-600 qt-color-dark">By email</th>
-                    <th class="qt-fw-600 qt-color-dark">Closed</th>
-                    <th class="qt-fw-600 qt-color-dark">Total created</th>
+                    <th class="qt-fw-600 qt-color-dark ticket-report__col-company-name">DATE</th>
+                    <th class="qt-fw-600 qt-color-dark">INVOICE#</th>
+                    <th class="qt-fw-600 qt-color-dark">COMPANY</th>
+                    <th class="qt-fw-600 qt-color-dark">reference</th>
+                    <th class="qt-fw-600 qt-color-dark">AMOUNT</th>
                 </tr>
             </thead>
             <tbody>
+                <tr class="qt-report__body-row">
+                    <td colspan="5">CASH</td>
+                </tr>
                 <ng-template
                     ngFor
                     let-item
-                    [ngForOf]="ticketsReport.tickets"
+                    [ngForOf]="paymentsReport.payments.CASH"
                     let-i="index"
                     [ngForTrackBy]="trackByIndex"
                 >
                     <tr class="qt-report__body-row">
-                        <td [textContent]="item.companyName"></td>
-                        <td [textContent]="item.quantityFromWeb"></td>
-                        <td [textContent]="item.quantityFromAgent"></td>
-                        <td [textContent]="item.quantityFromEmail"></td>
-                        <td [textContent]="item.quantityClosed"></td>
-                        <td [textContent]="item.quantityCreated"></td>
+                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
+                        <td>
+                            <ng-template
+                                ngFor
+                                let-invoice
+                                [ngForOf]="item.partialPaidInvoices"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span [textContent]="invoice"></span>
+                            </ng-template>
+                        </td>
+                        <td [textContent]="item.clientCompanyName"></td>
+                        <td [textContent]="item.reference"></td>
+                        <td [textContent]="item.partialPaidAmount"></td>
                     </tr>
                 </ng-template>
+                <tr class="qt-report__body-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.CASH)"></td>
+                </tr>
+                <tr class="qt-report__body-row">
+                    <td colspan="5">Cheque</td>
+                </tr>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="paymentsReport.payments.CHEQUE"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr class="qt-report__body-row">
+                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
+                        <td>
+                            <ng-template
+                                ngFor
+                                let-invoice
+                                [ngForOf]="item.partialPaidInvoices"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span [textContent]="invoice"></span>
+                            </ng-template>
+                        </td>
+                        <td [textContent]="item.clientCompanyName"></td>
+                        <td [textContent]="item.reference"></td>
+                        <td [textContent]="item.partialPaidAmount"></td>
+                    </tr>
+                </ng-template>
+                <tr class="qt-report__body-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.CHEQUE)"></td>
+                </tr>
+                <tr class="qt-report__body-row">
+                    <td colspan="5">Credit Card</td>
+                </tr>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="paymentsReport.payments.CREDIT_CARD"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr class="qt-report__body-row">
+                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
+                        <td>
+                            <ng-template
+                                ngFor
+                                let-invoice
+                                [ngForOf]="item.partialPaidInvoices"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span [textContent]="invoice"></span>
+                            </ng-template>
+                        </td>
+                        <td [textContent]="item.clientCompanyName"></td>
+                        <td [textContent]="item.reference"></td>
+                        <td [textContent]="item.partialPaidAmount"></td>
+                    </tr>
+                </ng-template>
+                <tr class="qt-report__body-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.CREDIT_CARD)"></td>
+                </tr>
+                <tr class="qt-report__body-row">
+                    <td colspan="5">Debit</td>
+                </tr>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="paymentsReport.payments.DEBIT_CARD"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr class="qt-report__body-row">
+                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
+                        <td>
+                            <ng-template
+                                ngFor
+                                let-invoice
+                                [ngForOf]="item.partialPaidInvoices"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span [textContent]="invoice"></span>
+                            </ng-template>
+                        </td>
+                        <td [textContent]="item.clientCompanyName"></td>
+                        <td [textContent]="item.reference"></td>
+                        <td [textContent]="item.partialPaidAmount"></td>
+                    </tr>
+                </ng-template>
+                <tr class="qt-report__body-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.DEBIT_CARD)"></td>
+                </tr>
+                <tr class="qt-report__body-row">
+                    <td colspan="5">WIRE TRANSFER</td>
+                </tr>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="paymentsReport.payments.WIRE_TRANSFER"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr class="qt-report__body-row">
+                        <td [textContent]="getDateForCashe(item.createdAt)"></td>
+                        <td>
+                            <ng-template
+                                ngFor
+                                let-invoice
+                                [ngForOf]="item.partialPaidInvoices"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <span [textContent]="invoice"></span>
+                            </ng-template>
+                        </td>
+                        <td [textContent]="item.clientCompanyName"></td>
+                        <td [textContent]="item.reference"></td>
+                        <td [textContent]="item.partialPaidAmount"></td>
+                    </tr>
+                </ng-template>
+                <tr class="qt-report__body-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td [textContent]="'Total: ' + getTotal(paymentsReport.payments.WIRE_TRANSFER)"></td>
+                </tr>
             </tbody>
         </table>
     </div>

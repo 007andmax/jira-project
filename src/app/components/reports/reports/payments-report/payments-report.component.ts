@@ -4,6 +4,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PaymentsReport } from './class/payments-report';
+import * as moment from 'moment';
 
 @Component({
   selector: 'payments-report',
@@ -29,15 +30,22 @@ export class PaymentsReportComponent implements OnInit {
     this.cd.detectChanges();
   }
   public getReport(data) {
-  /*  this.ticketsReport.setData(data);
-    this.ticketsReport.startDate = moment(new Date(this.ticketsReport.startDate)).format('ll');
-    this.ticketsReport.endDate = moment(new Date(this.ticketsReport.endDate)).format('ll');
-    this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticketsReport.userId);
-  */  this.onInit = true;
+    console.log("data", data);
+    this.paymentsReport.setData(data);
+    console.log("this.paymentsReport", this.paymentsReport);
+    this.onInit = true;
   }
-
+  public getDateForHeader(data) {
+    return moment(new Date(data)).format('MMM DD, YYYY');
+  }
+  public getDateForCashe(data) {
+    return moment(new Date(data)).format('YYYY/MM/DD');
+  }
   public trackByIndex(index, item) {
     return index;
+  }
+  public getTotal(data) {
+    return data.reduce((partialSum, a) => partialSum + a.partialPaidAmount, 0);
   }
   ngOnDestroy(): void {
 
