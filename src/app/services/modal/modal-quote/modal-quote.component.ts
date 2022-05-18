@@ -142,7 +142,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
-    this.selectedUsers.push(event.option.viewValue);
+    this.selectedUsers.push(event.option.value.primaryEmail);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
     // this.userInput.nativeElement.blur();
