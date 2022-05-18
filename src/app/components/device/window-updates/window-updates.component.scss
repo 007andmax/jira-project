@@ -9,8 +9,7 @@
   background-color: #fff;
 }
 
-.windowupdate {
-  width: 850px;
+.windowupdate {  
   height: 100%;
   margin: 10px 32px 20px 0px;
   padding: 20px 24px 24px;
@@ -47,8 +46,7 @@
 }
 
 .tableth{
-  width:30px;
-  padding-top: 70px !important;
+  width:30px;  
 }
 
 .viewer-footer {
@@ -107,3 +105,63 @@
   animation: spin 1s infinite linear;
   margin-right: 8px
 }
+
+ .tab-contentss{
+  padding: 0 !important;
+  background-color: white !important;
+}
+
+
+.window-update-table {
+  th {
+   white-space: nowrap;
+  }
+ td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: white;
+  }
+  tr {
+    td {
+      background: #ffffff;
+      padding: 0 8px 0 8px;
+      height: 48px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      vertical-align: middle;
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.update-button{
+  padding-left: 422px !important;
+  padding-top: 5px !important;
+}
+
+::ng-deep .tab-content {
+  padding: 0px !important;  
+}
+
+.description-install-block{
+  padding-left: 17px !important;
+  width: 200px !important;
+}
+
+.abutton{
+  float: right;
+}
+
+

@@ -1,4 +1,4 @@
-<main>
+<main class="mainSidebar">
     <div class="cmn-wrapper">
         <div class="device-container">
             <div class="page-container software-list">
@@ -61,7 +61,7 @@
                             <thead>
                                 <tr>
                                     <th class="check-area">
-                                        <div class="cmn-checkbox">
+                                        <div class="cmn-checkbox main-checkbox">
                                             <input
                                                 type="checkbox"
                                                 name="check_all"
@@ -77,7 +77,7 @@
                                         </div>
                                     </th>
                                     <th
-                                        class="s-name"
+                                        class="s-name main-softwarename"
                                         (click)="onFilter('name')"
                                     >
                                         Software Name
@@ -151,7 +151,7 @@
                 </div>
             </div>
         </div>
-        <app-ticket-task></app-ticket-task>
+        <!-- <app-ticket-task></app-ticket-task> -->
     </div>
 </main>
 <ng-template #templateDelete>

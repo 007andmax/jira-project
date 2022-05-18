@@ -25,6 +25,7 @@ export class WindowUpdatesComponent implements OnInit {
   selectednum = false ;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
+  selected: number = 0;
 
   constructor(
     private kafkaStateService: KafkaStateService,
@@ -155,6 +156,7 @@ export class WindowUpdatesComponent implements OnInit {
     let indexs = this.check.findIndex(x => x.ID == i);
     if (!find) {
       this.check.push(index);
+      this.selected = this.selected + 1;
       if(this.check.length>0){
         this.selectednum = true;
       }
@@ -162,11 +164,15 @@ export class WindowUpdatesComponent implements OnInit {
     }
     else {
       this.check.splice(indexs, 1);
+      this.selected = this.selected - 1;
       if(this.check.length==0){
         this.selectednum = false
       }
       this.reloadWindowUpdatePendingList.splice(indexs, 1);
-    }
+    }  
+    if (!this.cd['destroyed']){
+      this.cd.detectChanges();
+    }  
   }
 
   InstallUpdate() {
@@ -202,5 +208,5 @@ export class WindowUpdatesComponent implements OnInit {
         this.isOverlay = false;
       }, 3000)
     }
-  }
+  }  
 }
