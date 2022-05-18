@@ -39,32 +39,32 @@
             <div class="payments-total">
                 <div class="payments-total-item">
                     <span>Cash</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CASH | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.CASH | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Cheque</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CHEQUE | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.CHEQUE | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Credit Card</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CREDIT_CARD | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.CREDIT_CARD | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Debit</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Wire Transfer</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.WIRE_TRANSFER | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.WIRE_TRANSFER | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Refunds</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT | currency"></span>
                 </div>
                 <div class="line"></div>
                 <div class="deposit-total">
                     <span>DEPOSIT Total</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.TOTAL | currency"></span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.TOTAL | currency"></span>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
                 [ngForTrackBy]="trackByIndex"
             >
                 <div
-                    class="table-name"
+                    class="table-name qt-color-dark body-l-sb"
                     *ngIf="paymentsReport.payments[table.type].length > 0"
                 >
                     <span [textContent]="table.title"></span>
@@ -95,7 +95,7 @@
                             <th class="qt-fw-600 qt-color-dark">AMOUNT</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="qt-report__body-table-body">
                         <ng-template
                             ngFor
                             let-item
@@ -138,7 +138,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></td>
+                            <td class="body-l qt-color-dark" [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></td>
                         </tr>
                     </tbody>
                 </table>
