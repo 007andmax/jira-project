@@ -79,7 +79,6 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
       let find = this.companies.find(tag => tag.id === item);
       if (find) this.selectedCompanies.push(find);
     })
-    console.log("this.selectedCompanies", this.selectedCompanies);
   }
   public setEditItems(data) {
     this.editItems = data;
@@ -141,16 +140,9 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
       this.selectedCompanies.push(newItem);
       this.companies = this.reqCompanies;
     }
-    console.log("this.selectedCompanies", this.selectedCompanies);
     this.companiesChange.emit(this.selectedCompanies.map(item => item.id));
     this.tagCtrl.setValue(null);
-
-    if (this.searchName.length > 0) {
-      this.searchName = "";
-      //  this.setDefaultScoll();
-
-    }
-
+    if (this.searchName.length > 0) this.searchName = "";
   }
 
   public setSelectedTag(data) {
