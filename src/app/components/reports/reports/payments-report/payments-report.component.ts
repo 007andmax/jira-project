@@ -52,7 +52,7 @@ export class PaymentsReportComponent implements OnInit {
     return index;
   }
   public getTotal(data) {
-    return data.reduce((partialSum, a) => partialSum + a.partialPaidAmount, 0);
+    return data.reduce((partialSum, a) => partialSum + a.partialPaidAmount, 0).toFixed(2);
   }
   ngOnDestroy(): void {
 
