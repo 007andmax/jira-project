@@ -40,6 +40,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('SUPPORT');onOpenPanel()"
             [ngClass]="{'--active':page === 'SUPPORT' }"
+            placement="right"
+            ngbTooltip="Support"
         >
             <div class="app-left-panel__menu-icon --quick-support"></div>
         </div>
@@ -47,6 +49,8 @@
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('TICKETS');onOpenPanel()"
             [ngClass]="{'--active':page === 'TICKETS' }"
+            placement="right"
+            ngbTooltip="Tickets"
         >
             <div class="app-left-panel__menu-icon --tickets"></div>
         </div>
@@ -54,6 +58,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('USERS');onOpenPanel()"
             [ngClass]="{'--active':page === 'USERS' }"
+            placement="right"
+            ngbTooltip="Users"
         >
             <div class="app-left-panel__menu-icon --users"></div>
         </div>
@@ -61,6 +67,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('MARKETING');onOpenPanel()"
             [ngClass]="{'--active':page === 'MARKETING' }"
+            placement="right"
+            ngbTooltip="Marketing"
         >
             <div class="app-left-panel__menu-icon --marketing"></div>
         </div>
@@ -68,6 +76,8 @@
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('COMPANIES');onOpenPanel()"
             [ngClass]="{'--active':page === 'COMPANIES' }"
+            placement="right"
+            ngbTooltip="Companies"
         >
             <div class="app-left-panel__menu-icon --companies"></div>
         </div>
@@ -75,6 +85,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('BILLING');onOpenPanel()"
             [ngClass]="{'--active':page === 'BILLING' }"
+            placement="right"
+            ngbTooltip="Billing"
         >
             <div class="app-left-panel__menu-icon --billing"></div>
         </div>
@@ -82,6 +94,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('INVENTORY');onOpenPanel()"
             [ngClass]="{'--active':page === 'INVENTORY' }"
+            placement="right"
+            ngbTooltip="Inventory"
         >
             <div class="app-left-panel__menu-icon --products"></div>
         </div>
@@ -89,6 +103,8 @@
             class="app-left-panel__menu-icon-wrap pointer"
             (click)="changePage('PASSWORD_MANAGER');onOpenPanel()"
             [ngClass]="{'--active':page === 'PASSWORD_MANAGER' }"
+            placement="right"
+            ngbTooltip="Password Manager"
         >
             <div class="app-left-panel__menu-icon --password-manager"></div>
         </div>
@@ -96,6 +112,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('DOCUMENTS');onOpenPanel()"
             [ngClass]="{'--active':page === 'DOCUMENTS' }"
+            placement="right"
+            ngbTooltip="Documents"
         >
             <div class="app-left-panel__menu-icon --documents"></div>
         </div>
@@ -104,6 +122,8 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('REPORTS');onChangeState('new-reports')"
             [ngClass]="{'--active':page === 'REPORTS' }"
+            placement="right"
+            ngbTooltip="Reports"
         >
             <div class="app-left-panel__menu-icon --reports"></div>
         </div>
@@ -111,14 +131,16 @@
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('SETTINGS');onOpenPanel()"
             [ngClass]="{'--active':page === 'SETTINGS' }"
+            placement="right"
+            ngbTooltip="Settings"
         >
             <div class="app-left-panel__menu-icon --settings"></div>
         </div>
         <div
-          class="app-left-panel__menu-icon-wrap qt-d-none qt-d-md-flex pointer"
-          (click)="logOut()"
+            class="app-left-panel__menu-icon-wrap qt-d-none qt-d-md-flex pointer"
+            (click)="logOut()"
         >
-          <div class="app-left-panel__menu-icon --logout"></div>
+            <div class="app-left-panel__menu-icon --logout"></div>
         </div>
     </div>
     <div class="app-left-panel__body-menu">
