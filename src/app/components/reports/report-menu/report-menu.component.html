@@ -1,40 +1,5 @@
-<!-- MENU FOR NON-TECH REPORTS -->
 <div class="report-menu">
     <div *ngIf="report === 'tech-ticket'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByTechTicketReport()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-drop-down -->
-        <!-- #durationsTechSaleDP -->
-        <!-- [placeholder]="'No interval'" -->
-        <!-- [list]="techTicketReport.durations" -->
-        <!-- [sort]="false" -->
-        <!-- [isDisabled]="techTicketReport.isDisabledDuration" -->
-        <!-- [editItem]="techTicketReport.selectedDuration" -->
-        <!-- [dropdownHeight]="'175px'" -->
-        <!-- [field]="'title'" -->
-        <!-- [isBlockClear]="true" -->
-        <!-- (onSelectedItem)="onSelectDurationTechSale($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -91,50 +56,6 @@
         </div>
     </div>
     <div *ngIf="report === 'tech-sales'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByTechSaleReport()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-drop-down -->
-        <!-- #durationsTechSaleDP -->
-        <!-- [placeholder]="'No interval'" -->
-        <!-- [list]="techSalesReport.durations" -->
-        <!-- [isDisabled]="techTicketReport.isDisabledDuration" -->
-        <!-- [editItem]="techSalesReport.selectedDuration" -->
-        <!-- [dropdownHeight]="'175px'" -->
-        <!-- [field]="'title'" -->
-        <!-- [sort]="false" -->
-        <!-- [isBlockClear]="true" -->
-        <!-- (onSelectedItem)="onSelectDurationTechSale($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <app-drop-down -->
-        <!-- [list]="techSalesReport.types" -->
-        <!-- [editItem]="techSalesReport.selectedType" -->
-        <!-- [dropdownHeight]="'175px'" -->
-        <!-- [field]="'title'" -->
-        <!-- [isBlockClear]="true" -->
-        <!-- (onSelectedItem)="onSelectTypeTechSale($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -202,65 +123,6 @@
         </div>
     </div>
     <div *ngIf="report === 'remote-access'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByRemoteConnectionReport()" -->
-        <!-- [disabled]="remoteConnectionReport.preloaderDevices" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="device-report dropdown-remote-report-tech form-group custom-width"> -->
-        <!-- <app-tech-users-list-report -->
-        <!-- [sort]="true" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- [validate]="validate.getTechUser()" -->
-        <!-- [errorMessage]="'Select any user'" -->
-        <!-- (onSelectedItem)="onSelectTechUser($event)" -->
-        <!-- ></app-tech-users-list-report> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <software-summary-devices-dro-down -->
-        <!-- [sort]="true" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- [placeholder]="'All devices'" -->
-        <!-- [dropdownHeight]="'300px'" -->
-        <!-- [list]="devices" -->
-        <!-- [isDisabled]="!remoteConnectionReport.companyId" -->
-        <!-- [preloader]="remoteConnectionReport.preloaderDevices" -->
-        <!-- (onSelectedItem)="onSelectDevice($event)" -->
-        <!-- ></software-summary-devices-dro-down> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- [validate]="validate.getDates()" -->
-        <!-- [errorMessage]="'Please select the dates'" -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <app-drop-down -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [dropdownHeight]="'175px'" -->
-        <!-- [validate]="validate.getCompany()" -->
-        <!-- [errorMessage]="'Please select the company name'" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -579,117 +441,6 @@
             </div>
         </div>
     </div>
-    <!-- <div *ngIf="report === 'software-summary'"> -->
-    <!-- <div -->
-    <!-- class="run-report-content clearfix" -->
-    <!-- [ngClass]="className" -->
-    <!-- > -->
-    <!-- <div class="new-reports-reverse"> -->
-    <!-- <button -->
-    <!-- class="btn-new btn-primary-white qt-fs-0" -->
-    <!-- (click)="getReportBySoftwareSummary()" -->
-    <!-- > -->
-    <!-- Get Report -->
-    <!-- </button> -->
-    <!-- <div class="form-group content"> -->
-    <!-- <app-drop-down -->
-    <!-- [sort]="true" -->
-    <!-- [placeholder]="'Search software / publisher'" -->
-    <!-- [dropdownHeight]="'300px'" -->
-    <!-- [field]="'name'" -->
-    <!-- [search]="true" -->
-    <!-- [change]="true" -->
-    <!-- [isDisabled]="!softwareSummaryReport.companyId" -->
-    <!-- [preloader]="softwareSummaryReport.preloaderSoft" -->
-    <!-- [list]="softwareSummaryReport.soft" -->
-    <!-- (onSelectedItem)="onSelectSoftware($event)" -->
-    <!-- ></app-drop-down> -->
-    <!-- </div> -->
-    <!-- <div class="form-group content custom-width dropdown-height"> -->
-    <!-- <software-summary-devices-dro-down -->
-    <!-- [sort]="true" -->
-    <!-- [search]="true" -->
-    <!-- [change]="true" -->
-    <!-- [placeholder]="'All devices'" -->
-    <!-- [preloader]="softwareSummaryReport.preloaderDevices" -->
-    <!-- [isDisabled]="!softwareSummaryReport.companyId" -->
-    <!-- [dropdownHeight]="'300px'" -->
-    <!-- [list]="devices" -->
-    <!-- (onSelectedItem)="onSelectDevice($event)" -->
-    <!-- ></software-summary-devices-dro-down> -->
-    <!-- </div> -->
-    <!-- <div class="grey-dropdown form-group content select-users-list"> -->
-    <!-- <app-drop-down -->
-    <!-- [placeholder]="'Select Company'" -->
-    <!-- [list]="companies" -->
-    <!-- [validate]="validate.getCompany()" -->
-    <!-- [errorMessage]="'Please select the company name'" -->
-    <!-- [field]="'name'" -->
-    <!-- [search]="true" -->
-    <!-- [change]="true" -->
-    <!-- (onSelectedItem)="selectClient($event)" -->
-    <!-- ></app-drop-down> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- <div class="col-md-11 w-100"> -->
-    <!-- <div class="include-ticket-report"> -->
-    <!-- <p> -->
-    <!-- Include the following columns in the report -->
-    <!-- </p> -->
-    <!-- <label class="control checkbox"> -->
-    <!-- <input -->
-    <!-- type="checkbox" -->
-    <!-- [(ngModel)]="softwareSummaryReport.softwareSummaryWithDevice" -->
-    <!-- [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId" -->
-    <!-- > -->
-    <!-- <span class="control-indicator"></span> -->
-    <!-- Device -->
-    <!-- </label> -->
-    <!-- <label class="control checkbox"> -->
-    <!-- <input -->
-    <!-- type="checkbox" -->
-    <!-- [(ngModel)]="softwareSummaryReport.softwareSummaryWithSoftwareTitle" -->
-    <!-- > -->
-    <!-- <span class="control-indicator"></span> -->
-    <!-- Software Title -->
-    <!-- </label> -->
-    <!-- <label class="control checkbox"> -->
-    <!-- <input -->
-    <!-- type="checkbox" -->
-    <!-- [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstalationKey" -->
-    <!-- [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId" -->
-    <!-- > -->
-    <!-- <span class="control-indicator"></span> -->
-    <!-- Installation Key -->
-    <!-- </label> -->
-    <!-- <label class="control checkbox"> -->
-    <!-- <input -->
-    <!-- type="checkbox" -->
-    <!-- [(ngModel)]="softwareSummaryReport.softwareSummaryWithPublisher" -->
-    <!-- > -->
-    <!-- <span class="control-indicator"></span> -->
-    <!-- Publisher -->
-    <!-- </label> -->
-    <!-- <label class="control checkbox"> -->
-    <!-- <input -->
-    <!-- type="checkbox" -->
-    <!-- [(ngModel)]="softwareSummaryReport.softwareSummaryWithVersion" -->
-    <!-- > -->
-    <!-- <span class="control-indicator"></span> -->
-    <!-- Version -->
-    <!-- </label> -->
-    <!-- <label class="control checkbox"> -->
-    <!-- <input -->
-    <!-- type="checkbox" -->
-    <!-- [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstallDate" -->
-    <!-- > -->
-    <!-- <span class="control-indicator"></span> -->
-    <!-- Install Date -->
-    <!-- </label> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
     <div *ngIf="report === 'software-summary'">
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
@@ -830,46 +581,6 @@
         </div>
     </div>
     <div *ngIf="report === 'common-commissions'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportCommonCommissions()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- <div class="grey-dropdown form-group content select-users-list"> -->
-        <!-- <app-tech-users-list-report -->
-        <!-- [sort]="true" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- [validate]="validate.getTechUser()" -->
-        <!-- [errorMessage]="'Select any user'" -->
-        <!-- (onSelectedItem)="onSelectTechUser($event)" -->
-        <!-- ></app-tech-users-list-report> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
@@ -982,70 +693,6 @@
         </div>
     </div>
     <div *ngIf="report === 'detailed-commissions'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportDetailedCommissions()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- <div class="grey-dropdown form-group content select-users-list"> -->
-        <!-- <app-tech-users-list-report -->
-        <!-- [sort]="true" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- [validate]="validate.getTechUser()" -->
-        <!-- [errorMessage]="'Select any user'" -->
-        <!-- (onSelectedItem)="onSelectTechUser($event)" -->
-        <!-- ></app-tech-users-list-report> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div class="col-md-11"> -->
-        <!-- <div class="include-ticket-report"> -->
-        <!-- <p>What to include</p> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- [checked]="!detailedCommissionsReport.detailsByProducts" -->
-        <!-- (change)="toggleDetailsByProducts(false)" -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Details by customer -->
-        <!-- </label> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- [checked]="detailedCommissionsReport.detailsByProducts" -->
-        <!-- (change)="toggleDetailsByProducts(true)" -->
-        <!-- checked -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Details by product -->
-        <!-- </label> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
@@ -1131,22 +778,6 @@
                 (click)="back()"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
     <div *ngIf="report === 'accounting-report'">
         <div class="qt-report__header qt-df qt-ai-fs">
@@ -1206,36 +837,6 @@
         </div>
     </div>
     <div *ngIf="report === 'tech-service'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByTechService()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- [validate]="validate.getDates()" -->
-        <!-- [errorMessage]="'Please select the dates'" -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="grey-dropdown form-group content select-users-list"> -->
-        <!-- <app-tech-users-list-report -->
-        <!-- [sort]="true" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="onSelectTechUser($event)" -->
-        <!-- ></app-tech-users-list-report> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -1314,51 +915,6 @@
         </div>
     </div>
     <div *ngIf="report === 'income-accounts'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByGlNumber()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- [validate]="validate.getDates() && validate.geMonthlyDetailed()" -->
-        <!-- [errorMessage]="'Please select the dates'" -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- &lt;!&ndash; <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error> &ndash;&gt; -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <div class="input-field"> -->
-        <!-- <app-drop-down -->
-        <!-- [validate]="validate.geMonthlyDetailed()" -->
-        <!-- [errorMessage]="'Please select any dates or intervals'" -->
-        <!-- [placeholder]="'Select filter'" -->
-        <!-- [list]="listDetailed" -->
-        <!-- (onSelectedItem)="onSelectDetailed($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- &lt;!&ndash; <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error> &ndash;&gt; -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -1383,7 +939,6 @@
                                     (onSelectedItem)="onSelectDetailed($event)"
                                 ></app-drop-down>
                             </div>
-                            <!-- <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error> -->
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <app-multi-datepicker
@@ -1392,7 +947,6 @@
                                 [errorMessage]="'Please select the dates'"
                                 (selectedDate)="filterByDate($event)"
                             ></app-multi-datepicker>
-                            <!-- <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error> -->
                         </div>
                         <div class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown dropdown-height">
                             <app-drop-down
@@ -1427,62 +981,6 @@
         </div>
     </div>
     <div *ngIf="report === 'byTaxes'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByTaxes()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div -->
-        <!-- class="grey-dropdown form-group content dropdown-button" -->
-        <!-- ngbDropdown -->
-        <!-- > -->
-        <!-- <button -->
-        <!-- class="types-btn" -->
-        <!-- id="dropdownBasic" -->
-        <!-- ngbDropdownToggle -->
-        <!-- [textContent]="taxes.type" -->
-        <!-- > -->
-        <!-- </button> -->
-        <!-- <i class="icn-sm report-caret-icon"></i> -->
-        <!-- <div -->
-        <!-- ngbDropdownMenu -->
-        <!-- aria-labelledby="dropdownBasic" -->
-        <!-- > -->
-        <!-- <ng-template -->
-        <!-- ngFor -->
-        <!-- let-item -->
-        <!-- [ngForOf]="listTypes" -->
-        <!-- > -->
-        <!-- <button -->
-        <!-- ngbDropdownItem -->
-        <!-- [textContent]="item" -->
-        <!-- (click)="onSelectTypeTaxes(item)" -->
-        <!-- ></button> -->
-        <!-- </ng-template> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- &lt;!&ndash; <div class="form-group content"> -->
-        <!-- <div class="input-field"> -->
-        <!-- <app-select [placeholder]="'Select filter'" [list]="listTypes" (onChange)="onSelectTypeTaxes($event)"></app-select> -->
-        <!-- </div> -->
-        <!-- </div> &ndash;&gt; -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- [validate]="validate.getDates()" -->
-        <!-- [errorMessage]="'Please select the dates'" -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -1554,30 +1052,6 @@
         </div>
     </div>
     <div *ngIf="report === 'accounts-receivable'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByAccountsReceivable()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
@@ -1623,76 +1097,6 @@
         </div>
     </div>
     <div *ngIf="report === 'byProducts'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByProducts()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div -->
-        <!-- class="grey-dropdown form-group content dropdown-button" -->
-        <!-- ngbDropdown -->
-        <!-- > -->
-        <!-- <button -->
-        <!-- class="types-btn" -->
-        <!-- id="dropdownBasic" -->
-        <!-- ngbDropdownToggle -->
-        <!-- [textContent]="productSalesReport.type" -->
-        <!-- > -->
-        <!-- </button> -->
-        <!-- <i class="icn-sm report-caret-icon"></i> -->
-        <!-- <div -->
-        <!-- ngbDropdownMenu -->
-        <!-- aria-labelledby="dropdownBasic" -->
-        <!-- > -->
-        <!-- <ng-template -->
-        <!-- ngFor -->
-        <!-- let-item -->
-        <!-- [ngForOf]="listTypes" -->
-        <!-- > -->
-        <!-- <button -->
-        <!-- ngbDropdownItem -->
-        <!-- [textContent]="item" -->
-        <!-- (click)="onSelectTypeProduct(item)" -->
-        <!-- ></button> -->
-        <!-- </ng-template> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- [validate]="validate.getDates()" -->
-        <!-- [errorMessage]="'Please select the dates'" -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [isDisabled]="isDisabledCompany" -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [validate]="validate.getCompany()" -->
-        <!-- [errorMessage]="'Please select the company name'" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <app-product-list -->
-        <!-- [type]="'REPORT'" -->
-        <!-- (selectedProductItem)="selectProduct($event)" -->
-        <!-- ></app-product-list> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1790,70 +1194,6 @@
         </div>
     </div>
     <div *ngIf="report === 'byCustomers'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByCustomers()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div -->
-        <!-- class="grey-dropdown form-group content dropdown-button" -->
-        <!-- ngbDropdown -->
-        <!-- > -->
-        <!-- <button -->
-        <!-- class="types-btn" -->
-        <!-- id="dropdownBasic" -->
-        <!-- ngbDropdownToggle -->
-        <!-- [textContent]="customerSalesReport.type" -->
-        <!-- > -->
-        <!-- </button> -->
-        <!-- <i class="icn-sm report-caret-icon"></i> -->
-        <!-- <div -->
-        <!-- ngbDropdownMenu -->
-        <!-- aria-labelledby="dropdownBasic" -->
-        <!-- > -->
-        <!-- <ng-template -->
-        <!-- ngFor -->
-        <!-- let-item -->
-        <!-- [ngForOf]="listTypes" -->
-        <!-- > -->
-        <!-- <button -->
-        <!-- ngbDropdownItem -->
-        <!-- [textContent]="item" -->
-        <!-- (click)="onSelectTypeCustomers(item)" -->
-        <!-- ></button> -->
-        <!-- </ng-template> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- [validate]="validate.getDates()" -->
-        <!-- [errorMessage]="'Please select the dates'" -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [isDisabled]="isDisabledCompany" -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [validate]="validate.getCompany()" -->
-        <!-- [errorMessage]="'Please select the company name'" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -1870,7 +1210,6 @@
                                     class="qt-df qt-ai-c qt-jc-c"
                                     [ngClass]="className"
                                 >
-                                    <!--  -->
                                     <div class="qt-report__dropdown qt-mr-8">
                                         <app-drop-down
                                             [isDisabled]="isDisabledCompany"
@@ -1929,7 +1268,6 @@
                                         Get
                       Report
                                     </button>
-                                    <!--  -->
                                 </div>
                             </div>
                         </div>
@@ -1949,88 +1287,6 @@
         </div>
     </div>
     <div *ngIf="report === 'ticket-report'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByTickets()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="grey-dropdown form-group content select-users-list"> -->
-        <!-- <app-tech-users-list-report -->
-        <!-- [sort]="true" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="onSelectTechUser($event)" -->
-        <!-- ></app-tech-users-list-report> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [isDisabled]="isDisabledCompany" -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [validate]="validate.getCompany()" -->
-        <!-- [errorMessage]="'Please select the company name'" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div class="col-md-11"> -->
-        <!-- <div class="include-ticket-report"> -->
-        <!-- <p>What to include</p> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- (change)="toggleShowDashboard($event)" -->
-        <!-- checked -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Show dashboard -->
-        <!-- </label> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- (change)="toggleShowResponseTime($event)" -->
-        <!-- checked -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Average response time -->
-        <!-- </label> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- (change)="toggleShowServices($event)" -->
-        <!-- checked -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Show services -->
-        <!-- </label> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- (change)="toggleShowProducts($event)" -->
-        <!-- checked -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Show products -->
-        <!-- </label> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
@@ -2100,53 +1356,6 @@
         </div>
     </div>
     <div *ngIf="report === 'service-report'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportByService()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width dropdown-height"> -->
-        <!-- <app-drop-down -->
-        <!-- [isDisabled]="isDisabledCompany" -->
-        <!-- [placeholder]="'Select Company'" -->
-        <!-- [list]="companies" -->
-        <!-- [validate]="validate.getCompany()" -->
-        <!-- [errorMessage]="'Please select the company name'" -->
-        <!-- [field]="'name'" -->
-        <!-- [search]="true" -->
-        <!-- [change]="true" -->
-        <!-- (onSelectedItem)="selectClient($event)" -->
-        <!-- ></app-drop-down> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div class="col-md-11"> -->
-        <!-- <div class="include-ticket-report"> -->
-        <!-- <p>What to include</p> -->
-        <!-- <label class="control checkbox"> -->
-        <!-- <input -->
-        <!-- type="checkbox" -->
-        <!-- (change)="toggleShowDashboard($event)" -->
-        <!-- checked -->
-        <!-- > -->
-        <!-- <span class="control-indicator"></span> -->
-        <!-- Show dashboard -->
-        <!-- </label> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
@@ -2217,45 +1426,6 @@
         </div>
     </div>
     <div *ngIf="report === 'company-roducts-report'">
-        <!-- <div -->
-        <!-- class="run-report-content clearfix" -->
-        <!-- [ngClass]="className" -->
-        <!-- > -->
-        <!-- <div class="new-reports-reverse"> -->
-        <!-- <button -->
-        <!-- class="btn-new btn-primary-white qt-fs-0" -->
-        <!-- (click)="getReportCompanyProducts()" -->
-        <!-- > -->
-        <!-- Get -->
-        <!-- Report -->
-        <!-- </button> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <app-multi-datepicker -->
-        <!-- #dp -->
-        <!-- (selectedDate)="filterByDate($event)" -->
-        <!-- ></app-multi-datepicker> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content"> -->
-        <!-- <div> -->
-        <!-- <input -->
-        <!-- type="text" -->
-        <!-- name="serialNumber" -->
-        <!-- [(ngModel)]="productsCompanyReport.serialNumber" -->
-        <!-- autocomplete="off" -->
-        <!-- class="form-control" -->
-        <!-- placeholder="Serial Number" -->
-        <!-- custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" -->
-        <!-- > -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div class="form-group content custom-width"> -->
-        <!-- <app-product-list -->
-        <!-- [type]="'REPORT'" -->
-        <!-- (selectedProductItem)="selectProduct($event)" -->
-        <!-- ></app-product-list> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-w100">
                 <div class="qt-df qt-ai-c qt-jc-sb">

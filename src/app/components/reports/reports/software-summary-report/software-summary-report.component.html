@@ -1,161 +1,9 @@
-<!-- <div> -->
-<!-- <app-report-menu -->
-<!-- [report]="'software-summary'" -->
-<!-- (getReport)="getReport($event)" -->
-<!-- ></app-report-menu> -->
-<!-- </div> -->
-<!-- <app-report-additional-actions -->
-<!-- [orientation]="'LANDSCAPE'" -->
-<!-- [report]="'software-summary'" -->
-<!-- [fileName]="'software-summary-report'" -->
-<!-- &gt;</app-report-additional-actions> -->
-<!-- &lt;!&ndash;  &ndash;&gt; -->
-<!-- <div -->
-<!-- class="loading" -->
-<!-- *ngIf="loadingInProgress" -->
-<!-- &gt;</div> -->
-<!-- <div -->
-<!-- class="product-list___ticket hardware-summary report-show-footer-header" -->
-<!-- id="product-list-ticket-data" -->
-<!-- &gt; -->
-<!-- <div -->
-<!-- class="product-list-ticket software-report" -->
-<!-- style="width: 1180px;" -->
-<!-- *ngIf="!loadingInProgress" -->
-<!-- > -->
-<!-- <div -->
-<!-- class="customer-ticket" -->
-<!-- *ngIf="onInit" -->
-<!-- > -->
-<!-- <div class="customer-ticket__report"> -->
-<!-- <div class="report-header"> -->
-<!-- <div class="company-info"> -->
-<!-- <div class="body-m-sb qt-color-dark">Airdrie Choice Dental </div> -->
-<!-- <h5 class="qt-fw-600 qt-color-dark">Software Summary Report</h5> -->
-<!-- <div class="body-m qt-color-dark"> -->
-<!-- As on -->
-<!-- {{softwareSummaryReport.date | date:'yyyy/MM/dd'}} -->
-<!-- </div> -->
-<!-- <div class="body-m-sb qt-color-dark">Tech company: {{company.name}}</div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- &lt;!&ndash;                <div class="customer-ticket__report&#45;&#45;summary">&ndash;&gt; -->
-<!-- &lt;!&ndash;                    <div class="customer-ticket__report&#45;&#45;summary-title">Software Summary Report</div>&ndash;&gt; -->
-<!-- &lt;!&ndash;                </div>&ndash;&gt; -->
-<!-- <div> -->
-<!-- <div> -->
-<!-- <ul class="con-col"> -->
-<!-- <li class="top-product-list-ticket clearfix"> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithDevice" -->
-<!-- > -->
-<!-- <strong>Software Name</strong> -->
-<!-- <span class="qt-table-modern__sorting"></span> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle" -->
-<!-- > -->
-<!-- <strong>Software Namee</strong> -->
-<!-- <span class="qt-table-modern__sorting"></span> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey" -->
-<!-- > -->
-<!-- <strong>Installation Key</strong> -->
-<!-- <span class="qt-table-modern__sorting"></span> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithPublisher" -->
-<!-- > -->
-<!-- <strong>Publisher</strong> -->
-<!-- <span class="qt-table-modern__sorting"></span> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithVersion" -->
-<!-- > -->
-<!-- <strong>Version</strong> -->
-<!-- <span class="qt-table-modern__sorting"></span> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate" -->
-<!-- > -->
-<!-- <strong>Install Date</strong> -->
-<!-- <span class="qt-table-modern__sorting"></span> -->
-<!-- </div> -->
-<!-- </li> -->
-<!-- <div> -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-softItem -->
-<!-- [ngForOf]="softwareSummaryReport.list" -->
-<!-- let-i="index" -->
-<!-- [ngForTrackBy]="trackByIndex" -->
-<!-- > -->
-<!-- <li class="content-product-list-ticket clearfix"> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithDevice" -->
-<!-- > -->
-<!-- {{softItem.device}} -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle" -->
-<!-- > -->
-<!-- {{softItem.softwareTitle}} -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey" -->
-<!-- > -->
-<!-- {{softItem.installationKey}} -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithPublisher" -->
-<!-- > -->
-<!-- {{softItem.publisher}} -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithVersion" -->
-<!-- > -->
-<!-- {{softItem.version}} -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-2" -->
-<!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate" -->
-<!-- > -->
-<!-- {{softItem.installDate | date:'yyyy-MM-dd'}} -->
-<!-- </div> -->
-<!-- </li> -->
-<!-- </ng-template> -->
-<!-- </div> -->
-<!-- </ul> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
 <div>
     <app-report-menu
         [report]="'software-summary'"
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<!-- <app-report-additional-actions -->
-<!-- [orientation]="'LANDSCAPE'" -->
-<!-- [report]="'software-summary'" -->
-<!-- [fileName]="'software-summary-report'" -->
-<!-- &gt;</app-report-additional-actions> -->
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
@@ -166,9 +14,6 @@
 >
     <div
         class="qt-report__product-list"
-        style="
-    /*width: 1180px;*/
-    "
         *ngIf="!loadingInProgress"
     >
         <div
@@ -184,115 +29,6 @@
                 </div>
                 <div class="body-m-sb qt-color-dark">Tech company: {{company.name}}</div>
             </div>
-            <!-- <div class="qt-report__body-table-header"> -->
-            <!-- <div class="qt-report__body-table-header-row"> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithDevice" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- <div class="qt-fw-600">Device Name</div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-3" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- <div class="qt-fw-600">Software Name</div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- <div class="qt-fw-600">Installation Key</div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithPublisher" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- <div class="qt-fw-600">Publisher</div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-1" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithVersion" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell qt-fw-600">Version</div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell qt-fw-600">Install Date</div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div class="qt-report__body-table-body"> -->
-            <!-- <ng-template -->
-            <!-- ngFor -->
-            <!-- let-softItem -->
-            <!-- [ngForOf]="softwareSummaryReport.list" -->
-            <!-- let-i="index" -->
-            <!-- [ngForTrackBy]="trackByIndex" -->
-            <!-- > -->
-            <!-- <div class="qt-report__body-row"> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithDevice" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell qt-fw-600"> -->
-            <!-- {{softItem.device}} -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-3" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- {{softItem.softwareTitle}} -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- {{softItem.installationKey}} -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithPublisher" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- {{softItem.publisher}} -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-1" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithVersion" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- {{softItem.version}} -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div -->
-            <!-- class="qt-report-col-2" -->
-            <!-- *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate" -->
-            <!-- > -->
-            <!-- <div class="qt-table-modern__cell"> -->
-            <!-- {{softItem.installDate | date:'yyyy-MM-dd'}} -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </ng-template> -->
-            <!-- </div> -->
-            <!-- New Table -->
             <table class="qt-report__body-table-body">
                 <thead>
                     <tr>
@@ -360,7 +96,6 @@
                     </ng-template>
                 </tbody>
             </table>
-            <!-- End New Table -->
         </div>
     </div>
 </div>
