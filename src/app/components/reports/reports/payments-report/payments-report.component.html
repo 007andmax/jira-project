@@ -90,8 +90,8 @@
                         <tr>
                             <th class="qt-fw-600 qt-color-dark">DATE</th>
                             <th class="qt-fw-600 qt-color-dark">INVOICE#</th>
-                            <th class="qt-fw-600 qt-color-dark">COMPANY</th>
-                            <th class="qt-fw-600 qt-color-dark">reference</th>
+                            <th class="qt-fw-600 qt-color-dark payments-report__col-company-name">COMPANY</th>
+                            <th class="qt-fw-600 qt-color-dark payments-report__col-reference">reference</th>
                             <th class="qt-fw-600 qt-color-dark">AMOUNT</th>
                         </tr>
                     </thead>
@@ -120,11 +120,9 @@
                                     </ng-template>
                                 </td>
                                 <td
-                                    class="payments-report__col-company-name"
                                     [textContent]="item.clientCompanyName"
                                 ></td>
                                 <td
-                                    class="payments-report__col-reference"
                                     [textContent]="item.reference"
                                 ></td>
                                 <td
