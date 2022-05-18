@@ -25,3 +25,15 @@
     height: 1px;
     background-color: #edf0f2;
 }
+.payments-report__col-company-name {
+    min-width: 570px;
+}
+.payments-report__col-reference {
+    min-width: 260px;
+}
+.payments-report__col-date {
+    width: 120px;
+}
+.payments-report__col-invoice,.payments-report__col-amount {
+    width: 150px;
+}

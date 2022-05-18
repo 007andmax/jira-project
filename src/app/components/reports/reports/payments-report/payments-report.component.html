@@ -39,32 +39,32 @@
             <div class="payments-total">
                 <div class="payments-total-item">
                     <span>Cash</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CASH"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CASH | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Cheque</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CHEQUE"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CHEQUE | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Credit Card</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CREDIT_CARD"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.CREDIT_CARD | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Debit</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Wire Transfer</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.WIRE_TRANSFER"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.WIRE_TRANSFER | currency"></span>
                 </div>
                 <div class="payments-total-item">
                     <span>Refunds</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT | currency"></span>
                 </div>
                 <div class="line"></div>
                 <div class="deposit-total">
                     <span>DEPOSIT Total</span>
-                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.TOTAL"></span>
+                    <span [textContent]="paymentsReport.totalSumsPerPaymentMethod.TOTAL | currency"></span>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                 >
                     <thead>
                         <tr>
-                            <th class="qt-fw-600 qt-color-dark ticket-report__col-company-name">DATE</th>
+                            <th class="qt-fw-600 qt-color-dark">DATE</th>
                             <th class="qt-fw-600 qt-color-dark">INVOICE#</th>
                             <th class="qt-fw-600 qt-color-dark">COMPANY</th>
                             <th class="qt-fw-600 qt-color-dark">reference</th>
@@ -104,8 +104,11 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td [textContent]="getDateForCashe(item.createdAt)"></td>
-                                <td>
+                                <td
+                                    class="payments-report__col-date"
+                                    [textContent]="getDateForCashe(item.createdAt)"
+                                ></td>
+                                <td class="payments-report__col-invoice">
                                     <ng-template
                                         ngFor
                                         let-invoice
@@ -116,9 +119,18 @@
                                         <span [textContent]="invoice"></span>
                                     </ng-template>
                                 </td>
-                                <td [textContent]="item.clientCompanyName"></td>
-                                <td [textContent]="item.reference"></td>
-                                <td [textContent]="item.partialPaidAmount"></td>
+                                <td
+                                    class="payments-report__col-company-name"
+                                    [textContent]="item.clientCompanyName"
+                                ></td>
+                                <td
+                                    class="payments-report__col-reference"
+                                    [textContent]="item.reference"
+                                ></td>
+                                <td
+                                    class="payments-report__col-amount"
+                                    [textContent]="item.partialPaidAmount | currency"
+                                ></td>
                             </tr>
                         </ng-template>
                         <tr class="qt-report__body-row">
@@ -126,7 +138,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td [textContent]="'Total: ' + getTotal(paymentsReport.payments[table.type])"></td>
+                            <td [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></td>
                         </tr>
                     </tbody>
                 </table>
