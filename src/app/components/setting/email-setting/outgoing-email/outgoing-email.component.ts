@@ -197,7 +197,7 @@ export class OutgoingEmailComponent implements OnInit {
     }
     console.log("this.usedEmailVia", this.usedEmailVia);
     this.smtpForm.patchValue({
-      usedEmailVia: (this.usedEmailVia.label) ? this.usedEmailVia.label : "",
+      usedEmailVia: (this.usedEmailVia) ? this.usedEmailVia.label : "",
       port: this.smtp.port,
       domain: this.smtp.domain,
       encryptionType: this.smtp.encryptionType,
