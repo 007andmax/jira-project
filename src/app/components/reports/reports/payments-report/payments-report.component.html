@@ -126,11 +126,9 @@
                             </tr>
                         </ng-template>
                         <tr class="qt-report__body-row">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="body-l qt-color-dark" [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></td>
+                            <td colspan="5">
+                              <div class="body-l qt-text-right qt-color-dark" [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
