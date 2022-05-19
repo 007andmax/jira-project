@@ -1,11 +1,15 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .payments-total-container,.table-name {
     width: 1384px;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: $white;
+    padding: 0 24px;
 }
 .payments-total {
     width: 500px;
-    margin: 0px 0px 20px 0px;
+    margin: 0 0 20px 0;
     .payments-total-item,.deposit-total {
         display: flex;
         align-items: center;
@@ -14,10 +18,11 @@
     }
 }
 .table-name {
-    margin: 0px auto 20px auto;
+    margin: 0 auto 14px;
+    padding: 0 24px;
 }
 .qt-report__body-table-body {
-    margin: 0px auto 20px auto;
+    margin: 0 auto 20px auto;
 }
 .line {
     display: block;
