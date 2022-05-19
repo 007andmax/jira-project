@@ -98,7 +98,7 @@ aside {
         height: 100vh;
         width: 2px;
         margin-top: -18px / 2;
-        border-left-color: #edf0f2;
+        border-left-color: $gray-300;
         border-left-width: 1px;
         border-left-style: solid;
     }
@@ -174,7 +174,7 @@ aside {
         margin-bottom: 16px;
       }
       &-text {
-        @extend %h5;
+        @include h5;
         max-width: 456px;
         width: 100%;
         margin: 0 auto;
@@ -204,7 +204,7 @@ aside {
       list-style: none;
         li {
             position: relative;
-            @extend %body-r;
+            @include body-r;
             color: $primary-2;
             &:not(:last-child) {
               margin: 0 0 16px 0;
@@ -215,7 +215,7 @@ aside {
 
 .support-page-body-category__header {
   position: relative;
-  @extend %h4;
+  @include h4;
   color: $primary-2;
   padding-bottom: 16px;
   &::after {

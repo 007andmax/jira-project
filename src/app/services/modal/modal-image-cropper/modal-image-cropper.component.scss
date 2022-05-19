@@ -1,9 +1,11 @@
+@import "./src/assets/styles/variable";
+
 .image-confirm-modal {
   position: fixed;
   left: 50%;
   display: none;
   z-index: 999;
-  background: white;
+  background: $white;
   width: 600px;
   border: 1px solid transparent;
   border-radius: 10px;
@@ -29,7 +31,7 @@
   width: 90px;
 }
 .image-confirm-modal__footer .btn-primary {
-  background-color: #16a4fa;
+  background-color: $primary-1;
 }
 @media (max-width: 767px) {
   .image-confirm-modal {
@@ -39,7 +41,7 @@
   .confirm-modal__title {
     font-size: 16px;
     line-height: 24px;
-    color: #212b36;
+    color: $primary-2;
     font-weight: 600;
   }
   .image-confirm-modal__footer .btn-new {

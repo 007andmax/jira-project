@@ -299,7 +299,7 @@
           text-align: left;
           position: relative;
           @media (max-width: 767px) {
-            border-bottom: 1px solid #dfe3e8;
+            border-bottom: 1px solid $gray-400;
             font-weight: 400;
             padding: 8px 16px !important;
           }

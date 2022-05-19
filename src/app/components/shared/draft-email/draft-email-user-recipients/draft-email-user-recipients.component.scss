@@ -1,6 +1,8 @@
+@import "./src/assets/styles/variable";
+
 .toggle-all-users {
     text-align: right;
-    color: #16a4fa;
+    color: $primary-1;
     cursor: pointer;
     font-size: 12px;
 }

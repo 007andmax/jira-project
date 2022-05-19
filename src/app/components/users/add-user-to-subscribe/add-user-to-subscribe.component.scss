@@ -126,9 +126,9 @@ add-marketing-subscription-type {
     }
 
     &.manage-subscription-selected {
-      background-color: #f9fafb;
+      background-color: $gray-100;
       td {
-        background-color: #f9fafb;
+        background-color: $gray-100;
       }
       &.selected {
         td::after {
@@ -192,18 +192,18 @@ tbody {
   min-height: 90px;
   tr {
     .rate {
-      color: #16a4fa;
+      color: $primary-1;
     }
   }
 }
 tr:hover {
   td {
-    background-color: #f9fafb;
+    background-color: $gray-100;
   }
 }
 td {
   &:hover {
-    background-color: #f9fafb;
+    background-color: $gray-100;
   }
 }
 tr.selected {

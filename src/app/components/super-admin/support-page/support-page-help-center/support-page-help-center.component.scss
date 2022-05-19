@@ -75,7 +75,7 @@
         }
 
         &-text {
-            @extend %h5;
+            @include h5;
             max-width: 456px;
             width: 100%;
             margin: 0 auto;
@@ -109,7 +109,7 @@
 
         li {
             position: relative;
-            @extend %body-r;
+            @include body-r;
             color: $primary-2;
 
             &:not(:last-child) {
@@ -121,7 +121,7 @@
 
 .support-page-body-category__header {
     position: relative;
-    @extend %h4;
+    @include h4;
     color: $primary-2;
     padding-bottom: 16px;
 

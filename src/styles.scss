@@ -1322,7 +1322,7 @@ app-quotes-item {
         border-radius: 50%;
         background-position: center;
         background-size: cover;
-        color: white;
+        color: $white;
         align-items: center;
         justify-content: center;
         display: flex;
@@ -1818,7 +1818,7 @@ app-quotes-item {
       > div::before {
         @media (max-width: 767px) {
           content: "Tags";
-          color: #212b36;
+          color: $primary-2;
           font-weight: 600;
           line-height: 20px;
         }
@@ -1830,7 +1830,7 @@ app-quotes-item {
     > div::before {
       @media (max-width: 767px) {
         content: "Category";
-        color: #212b36;
+        color: $primary-2;
         font-weight: 600;
         line-height: 20px;
       }
@@ -1861,17 +1861,6 @@ app-quotes-item {
     }
   }
 
-  //.companies-filter-tags {
-  //  > div::before {
-  //    @media (max-width: 767px) {
-  //      content: "Category";
-  //      color: #212b36;
-  //      font-weight: 600;
-  //      line-height: 20px;
-  //    }
-  //  }
-  //}
-
   .qt-page-list__header {
     @media (max-width: 767px) {
       margin: 0;
@@ -1897,7 +1886,7 @@ app-quotes-item {
         left: 0;
         width: 100%;
         top: 0;
-        background: #212b36;
+        background: $primary-2;
         padding: 10px 16px;
         margin-left: 0;
       }
@@ -1911,7 +1900,7 @@ app-quotes-item {
 
     .qt-page-list__header-title {
       @media (max-width: 767px) {
-        color: #ffffff;
+        color: $white;
         font-size: 16px;
         line-height: 24px;
         letter-spacing: 0;
@@ -3759,7 +3748,7 @@ app-ticket-profile-updates-service-timepicker {
         content: "Time In";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3781,7 +3770,7 @@ app-ticket-profile-updates-service-timepicker {
       &::before {
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3818,7 +3807,7 @@ ticket-profile-edit-form-update {
           content: "Service Date";
           left: 0;
           top: -28px;
-          color: #212b36;
+          color: $primary-2;
           font-size: 13px;
           line-height: 20px;
           letter-spacing: 0;
@@ -3846,7 +3835,7 @@ ticket-profile-edit-form-update {
         content: "Description";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3877,7 +3866,7 @@ app-ticket-profile-form-update {
         content: "Duration picker";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -4199,7 +4188,7 @@ app-ticket-edit-aside {
             content: "Product";
             left: 0;
             top: -28px;
-            color: #212b36;
+            color: $primary-2;
             font-size: 13px;
             line-height: 20px;
             letter-spacing: 0;
@@ -4231,7 +4220,7 @@ app-ticket-edit-aside {
           position: absolute;
           left: 16px;
           top: -28px;
-          color: #212b36;
+          color: $primary-2;
           font-size: 13px;
           line-height: 20px;
           letter-spacing: 0;
@@ -4252,7 +4241,7 @@ app-ticket-edit-aside {
         bottom: 0;
         left: 0;
         width: 100%;
-        background: #fff;
+        background: $white;
         z-index: 1;
       }
     }

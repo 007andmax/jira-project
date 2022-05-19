@@ -4,12 +4,12 @@
 .modal-body {
     padding: 0;
     p {
-      @extend %body-r;
+      @include body-r;
     }
 }
 .no-exist-agreements {
   &__info {
-    @extend %body-r;
+    @include body-r;
     color: $gray-700;
   }
 }
@@ -23,11 +23,11 @@
       width: 5px;
     }
   h3 {
-        @extend %body-r-m;
+        @include body-r__m;
         color: $primary-2;
     }
     span {
-        @extend %сaption-l;
+        @include сaption-l;
         color: $gray-600;
     }
     .contract-container-agreements {
@@ -53,11 +53,11 @@
                 line-height: 1;
             }
             h3 {
-                @extend %body-m-m;
+                @include body-m__m;
                 color: $primary-2;
             }
             span {
-                @extend %сaption-l;
+                @include сaption-l;
                 color: $gray-600;
                 flex-shrink: 0;
             }
@@ -70,7 +70,7 @@
                     background-position: center !important;
                     background-size: cover !important;
                     margin-right: 8px;
-                    color: white;
+                    color: $white;
                     align-items: center;
                     justify-content: center;
                     display: flex;
@@ -79,7 +79,7 @@
             }
             .view-contract {
                 font-size: 12px;
-                color: #16a4fa;
+                color: $primary-1;
                 margin: 0 0 0 auto;
                 font-weight: 600;
             }
@@ -96,16 +96,16 @@
 .info-product {
     padding: 16px;
     border-radius: 8px;
-    background-color: #f4f6f8;
+    background-color: $gray-200;
     margin: 16px 0 0 0;
 
     h3 {
-        @extend %body-r-m;
+        @include body-r__m;
         color: $primary-2;
     }
 
     span {
-        @extend %сaption-l;
+        @include сaption-l;
         color: $gray-600;
     }
 }
