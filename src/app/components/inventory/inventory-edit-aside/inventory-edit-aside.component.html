@@ -112,7 +112,7 @@
             <mat-error *ngIf="!validate.getCategory()">Category is required</mat-error>
             <app-drop-down
                 #categoriesSelect
-                [class]="['light-dropdown', 'qt-select-input-40']"
+                [class]="['qt-select-input-40']"
                 [placeholder]="'Select Category'"
                 [validate]="validate.getCategory()"
                 [errorMessage]="'Category is required'"
