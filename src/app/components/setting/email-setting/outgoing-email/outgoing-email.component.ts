@@ -195,7 +195,7 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("encryptionType").enable();
       this.smtpForm.get("password").enable();
     }
-
+    console.log("this.usedEmailVia", this.usedEmailVia);
     this.smtpForm.patchValue({
       usedEmailVia: this.usedEmailVia.label,
       port: this.smtp.port,
@@ -250,7 +250,7 @@ export class OutgoingEmailComponent implements OnInit {
             this.smtpForm.get("encryptionType").enable();
             this.smtpForm.get("password").enable();
           }
-
+          console.log("this.usedEmailVia", this.usedEmailVia);
           this.smtpForm.patchValue({
             usedEmailVia: this.usedEmailVia.label,
             port: this.smtp.port,
