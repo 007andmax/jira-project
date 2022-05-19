@@ -6,6 +6,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PaymentsReport } from './class/payments-report';
 import * as moment from 'moment';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 
 @Component({
   selector: 'payments-report',
@@ -19,7 +20,7 @@ export class PaymentsReportComponent implements OnInit {
   onInit = false;
   currentCompany: Company;
   techUser: User;
-  listTables: Array<TitleListType> = [new TitleListType('CASH', 'CASH'),
+  listTables: Array<TitleListType> = [new TitleListType('Cash', 'CASH'),
   new TitleListType('Cheque', 'CHEQUE'),
   new TitleListType('Credit Card', 'CREDIT_CARD'),
   new TitleListType('Debit', 'DEBIT_CARD'),
@@ -53,6 +54,9 @@ export class PaymentsReportComponent implements OnInit {
   }
   public getTotal(data) {
     return data.reduce((partialSum, a) => partialSum + a.partialPaidAmount, 0).toFixed(2);
+  }
+  perseInvoices(items) {
+    return items.join(', ');
   }
   ngOnDestroy(): void {
 

@@ -108,16 +108,10 @@
                                     class="payments-report__col-date"
                                     [textContent]="getDateForCashe(item.createdAt)"
                                 ></td>
-                                <td class="payments-report__col-invoice">
-                                    <ng-template
-                                        ngFor
-                                        let-invoice
-                                        [ngForOf]="item.partialPaidInvoices"
-                                        let-i="index"
-                                        [ngForTrackBy]="trackByIndex"
-                                    >
-                                        <span [textContent]="invoice"></span>
-                                    </ng-template>
+                                <td
+                                    class="payments-report__col-invoice"
+                                    [textContent]="perseInvoices(item.partialPaidInvoices)"
+                                >
                                 </td>
                                 <td
                                     class="payments-report__col-company-name"
