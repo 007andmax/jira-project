@@ -309,7 +309,7 @@
                                                     [id]=" 'from-'+workingDay.dayOfWeek"
                                                     (change)="startTimeChange(workingDay, startTime.value)"
                                                     name="{{workingDay.dayOfWeek}}"
-                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [disabled]="!workingDay.isSelected"
                                                     [ngModel]="fromTime_convert(workingDay.startTime)"
                                                 >
                                                     <option value="06:00">6:00 AM</option>
@@ -334,7 +334,7 @@
                                                     (change)="endTimeChange(workingDay,endTime.value)"
                                                     [id]="'to-'+workingDay.dayOfWeek"
                                                     name="{{workingDay.dayOfWeek+i}}"
-                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [disabled]="!workingDay.isSelected"
                                                     [ngModel]="toTime_convert(workingDay.endTime)"
                                                 >
                                                     <option value="17:00">17:00 PM</option>

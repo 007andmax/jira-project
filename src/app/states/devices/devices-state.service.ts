@@ -35,21 +35,9 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-
+    this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
-      this.devicesService.getCompanyDevices(data.company.id).subscribe((data) => {
-        Object.keys(data).forEach(key => {
-          if (data[key]) data[key] = data[key].map(item => new Device(item));
-        })
-        this.preloaderDevices = false;
-        this.setAllDevices(data);
-        this.onInitGetDevices(data);
-
-      }, err => {
-        this.preloaderDevices = false;
-        this.setAllDevices(null);
-        this.onInitGetDevices(null);
-      })
+      this.getCompanyDevices(data.company.id);
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (!this.allDevices) return;
@@ -103,6 +91,21 @@ export class DevicesStateService {
         this.onSendDeviceStatus.emit(new DeviceStatus(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]));
       }
       this.onInitGetDevices(this.allDevices);
+    })
+  }
+  getCompanyDevices(id) {
+    this.devicesService.getCompanyDevices(id).subscribe((data) => {
+      Object.keys(data).forEach(key => {
+        if (data[key]) data[key] = data[key].map(item => new Device(item));
+      })
+      this.preloaderDevices = false;
+      this.setAllDevices(data);
+      this.onInitGetDevices(data);
+
+    }, err => {
+      this.preloaderDevices = false;
+      this.setAllDevices(null);
+      this.onInitGetDevices(null);
     })
   }
   public getPreloaderDevices() {

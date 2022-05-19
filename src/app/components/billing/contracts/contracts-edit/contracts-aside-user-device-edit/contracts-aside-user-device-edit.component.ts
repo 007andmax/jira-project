@@ -79,7 +79,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   private setMinCustomDate() {
     let today = new Date(this.contractsUserDevice.startDate);
-    this.minCustomDate = today.getTime();
+    //  this.minCustomDate = today.getTime();
     if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
     this.cd.detectChanges();
   }
@@ -265,7 +265,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   setToggleCustomBillingDate(data) {
     this.contractsUserDevice.withCustomBillingDate = data;
     if (!data) {
-      this.contractsUserDevice.resetCustomBillingDate();
+      //  this.contractsUserDevice.resetCustomBillingDate();
     } else {
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
       this.resetCustomDate();

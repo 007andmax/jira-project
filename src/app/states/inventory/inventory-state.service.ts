@@ -17,6 +17,7 @@ export class InventoryStateService {
   onSortActive: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
+  onRefreshProductsAgreements: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
   listCategoriesForRemove = [];
   categories = [];
@@ -60,6 +61,9 @@ export class InventoryStateService {
       this.setproducts(res);
       this.onInitGetProducts(this.productList);
     });
+  }
+  public refreshProductsAgreements() {
+    this.onRefreshProductsAgreements.emit(null);
   }
   public setListCategoriesForRemove(data) {
     this.listCategoriesForRemove = data;

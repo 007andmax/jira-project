@@ -40,6 +40,9 @@ export class ContractsAsideOtherProductComponent implements OnInit {
     let value = Number(val);
     this.product.salePrice = value;
   }
+  getSubTotal() {
+    return this.product.quantity * this.product.salePrice;
+  }
   remove() {
     this.onRemove.emit(null);
   }

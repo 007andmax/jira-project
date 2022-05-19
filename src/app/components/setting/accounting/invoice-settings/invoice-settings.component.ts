@@ -54,8 +54,8 @@ export class InvoiceSettingsComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.maxLength(15),
-          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+          Validators.maxLength(30),
+          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/)
         ]
       ],
       taxIdDescription: [

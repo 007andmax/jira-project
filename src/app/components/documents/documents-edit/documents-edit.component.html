@@ -18,6 +18,7 @@
         [companyId]="companyId"
         [documentValidate]="documentValidate"
         [documentEdit]="documentEdit"
+        [categoryId]="categoryId"
     ></app-documents-add-footer>
     <documents-edit-info
         *ngIf="!showPreloader"
@@ -25,6 +26,7 @@
         [documentValidate]="documentValidate"
         [documentEdit]="documentEdit"
         (onToggleAside)="openAside  =$event"
+        [categoryId]="categoryId"
     ></documents-edit-info>
     <div
         class="loading"

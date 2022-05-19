@@ -160,6 +160,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
     this.inventory.markup = this.roundingMarkup(value);
   }
+  formatterGLNumber = (result: string) => {
+    return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
+      : "No description"}`;
+  };
   private roundingMarkup(markup) {
     return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
   }

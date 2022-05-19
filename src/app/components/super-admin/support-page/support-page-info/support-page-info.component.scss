@@ -1,0 +1,30 @@
+@import "./src/assets/styles/variable";
+
+.qt-input-block {
+  + .qt-input-block {
+    margin-top: 12px;
+  }
+  label {
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-600;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+  input {
+    height: 36px;
+    background: transparent;
+    border: unset;
+    border-bottom: 1px solid $gray-400;
+    border-radius: 0;
+    color: $primary-2;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 6px 0 12px;
+    outline:none;
+    &::placeholder {
+      color: inherit;
+    }
+  }
+}

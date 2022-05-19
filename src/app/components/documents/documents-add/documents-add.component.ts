@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -15,7 +16,7 @@ import { DocumentValidate } from './class/document-validate';
   templateUrl: './documents-add.component.html',
   styleUrls: ['./documents-add.component.scss']
 })
-export class DocumentsAddComponent implements OnInit {
+export class DocumentsAddComponent implements OnInit, OnDestroy {
   companyId: string;
   templateId: string;
   openAside: boolean = true;
@@ -32,6 +33,7 @@ export class DocumentsAddComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public tagsService: TagsService,
     private tagsStateService: TagsStateService,
+    public companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService) {
   }
 
@@ -74,5 +76,8 @@ export class DocumentsAddComponent implements OnInit {
   }
   onChangeContent(data) {
     this.documentAdd.setContent(data);
+  }
+  ngOnDestroy(): void {
+    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

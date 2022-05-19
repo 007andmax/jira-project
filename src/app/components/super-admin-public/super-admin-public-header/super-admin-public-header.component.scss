@@ -1,0 +1,63 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.support-page {
+    &__header {
+        background-color: $white;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
+        &-detail-page {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          .support-page__header-container {
+            width: 100%;
+            margin: 0;
+          }
+        }
+        &-container {
+          display: flex;
+          align-items: center;
+          padding: 11px 15px;
+          width: 1164px;
+          margin: 0 auto;
+        }
+
+        .qt-logo {
+            display: block;
+            margin-right: 55px;
+            &-topic-detail-page {
+              margin-right: 136px;
+            }
+
+            &__quicktech {
+                display: block;
+                width: 136px;
+                height: 18px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            &__beta {
+                font-size: 8px;
+                line-height: 10px;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                color: $white;
+                padding: 2px 4px;
+                background-color: $error;
+                border-radius: 2px;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.qt-page-list__search {
+  input {
+    height: 40px;
+    border: 1px solid $gray-400;
+    min-width: 360px;
+    border-radius: 6px;
+  }
+}

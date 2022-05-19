@@ -10,3 +10,19 @@
 /deep/.dropdown-recipients-body .mat-chip {
     cursor: default;
 }
+.user-name {
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dropdown-item {
+    display: flex !important;
+    width: 100% !important;
+}
+.user-email {
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -126,8 +126,6 @@ export class LeftPanelComponent implements OnInit {
 
 
 
-
-
           if (window.location.href.includes(`/report/byProducts`)) this.state = 'byProducts';
           if (window.location.href.includes(`/report/byCustomers`)) this.state = 'byCustomers';
           if (window.location.href.includes(`/report/byTaxes`)) this.state = 'byTaxes';
@@ -145,6 +143,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/ticket-report`)) this.state = 'ticket-report';
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
+          if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();

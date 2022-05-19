@@ -16,75 +16,130 @@
         class="companies-table__name pointer"
         (click)="goToDashboard()"
     >
-        <div class="qt-df qt-ai-c">
-            <div
-                class="circle-avatar qt-mr-10"
-                [ngClass]="{'with-logo': checkLogo()}"
-            >
-                <img
-                    [src]="getCompanyLogoUrl()"
-                    class="qwe"
-                    alt
-                    *ngIf="checkLogo()"
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+        >
+            <div class="qt-df qt-ai-c">
+                <div
+                    class="circle-avatar qt-mr-10"
+                    [ngClass]="{'with-logo': checkLogo()}"
                 >
-                <span
-                    *ngIf="!checkLogo()"
-                    [textContent]="company.name[0].toUpperCase()"
-                ></span>
+                    <img
+                        [src]="getCompanyLogoUrl()"
+                        class="qwe"
+                        alt
+                        *ngIf="checkLogo()"
+                    >
+                    <span
+                        *ngIf="!checkLogo()"
+                        [textContent]="company.name[0].toUpperCase()"
+                    ></span>
+                </div>
+                <div class="mob-styles">
+                    <p
+                        class="ff-g-m fw-500"
+                        [textContent]="company.name"
+                    ></p>
+                    <p class="desktop-hidden company-phone">979-431-8937</p>
+                </div>
             </div>
-            <div class="mob-styles">
-                <p
-                    class="ff-g-m fw-500"
-                    [textContent]="company.name"
-                ></p>
-                <p class="desktop-hidden company-phone">979-431-8937</p>
-            </div>
-        </div>
+        </a>
     </div>
     <div
         class="companies-table__address pointer"
         (click)="goToDashboard()"
     >
-        {{location}}
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+        >
+            {{location}}
+        </a>
     </div>
     <div
         class="companies-table__primary-contact pointer"
         (click)="goToDashboard()"
     >
-        <div>
-            <p
-                class="name"
-                [textContent]="getUserName()"
-            ></p>
-            <p
-                class="phone"
-                [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
-            ></p>
-        </div>
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+        >
+            <div>
+                <p
+                    class="name"
+                    [textContent]="getUserName()"
+                ></p>
+                <p
+                    class="phone"
+                    [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
+                ></p>
+            </div>
+        </a>
     </div>
     <div
         (click)="goToDashboard()"
         class="companies-table__email-address pointer"
-        [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
     >
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+            [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
+        >
+        </a>
     </div>
     <div
         (click)="goToDashboard()"
         class="companies-table__tickets pointer"
-        [textContent]="company.companyStatistic.ticketsSubmitted || '0'"
     >
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+            [textContent]="company.companyStatistic.ticketsSubmitted || '0'"
+        >
+        </a>
     </div>
     <div
         (click)="goToDashboard()"
         class="companies-table__devices pointer"
-        [textContent]="countDevices"
     >
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+            [textContent]="countDevices"
+        >
+        </a>
     </div>
     <div
         (click)="goToDashboard()"
         class="companies-table__users pointer"
-        [textContent]="countUsers"
     >
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+            [textContent]="countUsers"
+        ></a>
     </div>
     <div class="companies-table__download-btn  pointer">
         <button

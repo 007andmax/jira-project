@@ -240,6 +240,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setCompanyId(null);
       this.deviceIpSummary.setCompanyId(null);
       this.remoteConnectionReport.setCompanyId(null);
+      this.techService.setCompanyId(null);
       this.getDevicesByCompany(null);
       this.softwareSummaryReport.resetSoft();
     } else {
@@ -251,6 +252,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.customerSalesReport.setCompanyId(selectClient.id);
       this.ticketsReport.setCompanyId(selectClient.id);
       this.serviceReport.setCompanyId(selectClient.id);
+      this.techService.setCompanyId(selectClient.id);
       this.detailedCommissionsReport.setCompanyId(selectClient.id);
       this.commonCommissionsReport.setCompanyId(selectClient.id);
       this.softwareSummaryReport.setCompanyId(selectClient.id);

@@ -150,6 +150,7 @@
                         <th class="contract-product-products-table__name">Product Name</th>
                         <th class="contract-product-products-table__quantity">Quantity</th>
                         <th class="contract-product-products-table__price">Price</th>
+                        <th class="contract-product-products-table__price">Subtotal</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -174,6 +175,10 @@
                                 class="contract-product-products-table__price"
                                 [textContent]="item.salePrice | currency"
                             ></td>
+                            <td
+                                class="contract-product-products-table__price"
+                                [textContent]="getSubTotal(item) | currency"
+                            ></td>
                             <td></td>
                         </tr>
                     </ng-template>
@@ -182,6 +187,28 @@
         </div>
     </div>
     <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.withCustomBillingDate}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
+            </div>
+            <div
+                class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"
+                *ngIf="contractsOther.withCustomBillingDate"
+            >
+                <input
+                    [value]="parsedateForTotal(contractsOther.customBillingDate)"
+                    type="text"
+                    readonly
+                >
+            </div>
+        </div>
+        <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
         <div class="qt-df qt-jc-fe">
             <div class="contract-total qt-color-dark">
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">

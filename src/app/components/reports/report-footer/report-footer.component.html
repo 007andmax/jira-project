@@ -6,7 +6,10 @@
         Prepare by :
         <span [textContent]="currentUser.firstName + ' ' + currentUser.lastName"></span>
     </p>
-    <p [textContent]="currentCompany.name"></p>
+    <p
+        *ngIf="currentCompany"
+        [textContent]="currentCompany.name"
+    ></p>
     <p>
         Quicktech
         <span>2021</span>

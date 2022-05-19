@@ -11,7 +11,7 @@ var $ = require("jquery");
 })
 export class SelectSearchComponent implements OnInit, OnDestroy {
 
-  
+
   @Input() isSearch: boolean = true;
   @Input() container: string = null;
   @Input() field: string = null;
@@ -32,9 +32,13 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   @Input() isDisabled: boolean = false;
+  @Input() formatter = (result: string) => {
+    return (this.field) ? result[this.field] : result;
+  };
+
   public selectedItem;
   public isAdd: boolean = false;
-  private isOpen:boolean = false;
+  private isOpen: boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -45,7 +49,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param {SelectClientCompanyStateService} companiesState to work with companiies state
    */
   constructor(
-   
+
   ) { }
 
   /**
@@ -58,12 +62,12 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
     if (this.instance.isPopupOpen() && !this.isOpen) {
       this.isOpen = true;
-       this.onOpenDropDown.emit(null);
+      this.onOpenDropDown.emit(null);
     }
     if (!this.instance.isPopupOpen() && this.isOpen) {
-      this.isOpen = false; 
+      this.isOpen = false;
       this.onClosedDropDown.emit(null);
-    }   
+    }
   }
   onCheckAdd(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
@@ -99,35 +103,27 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param companyId - id of company
    */
   public selectItem(item) {
-    
+
     this.isAdd = false;
     this.onSelectedItem.emit(item.item);
 
   }
 
   public isDropDownOpen() {
-  
-  }
 
-  /**
-   * formatter for bootstrap result
-   * @param result
-   */
-  formatter = (result: string) => {
-    return (this.field) ? result[this.field] : result;
-  };
+  }
 
   /**
    * clear client input
    */
   public clearClient() {
-    
+
     this.isAdd = false;
     this.onSelectedItem.emit(null);
     this.selectedItem = null;
   }
   public clearWithOutChanges() {
-    
+
     this.isAdd = false;
     this.selectedItem = null;
   }

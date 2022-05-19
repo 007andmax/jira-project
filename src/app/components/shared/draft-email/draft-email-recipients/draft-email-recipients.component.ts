@@ -77,10 +77,10 @@ export class DraftEmailRecipientsComponent implements OnInit {
 
   }
   private setCompanyList(data) {
-    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts && item.companyInfo.contacts.length > 0 && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
-      1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
-    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts && item.companyInfo.contacts.length > 0 && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
-      1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
+    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts && item.companyInfo.contacts.length > 0 && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (this.getFirstLastName(a.companyInfo.contacts[0]).toLowerCase() > this.getFirstLastName(b.companyInfo.contacts[0]).toLowerCase()) ?
+      1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a.companyInfo.contacts[0]).toLowerCase()) ? -1 : 0));
+    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts && item.companyInfo.contacts.length > 0 && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (this.getFirstLastName(a.companyInfo.contacts[0]).toLowerCase() > this.getFirstLastName(b.companyInfo.contacts[0]).toLowerCase()) ?
+      1 : ((this.getFirstLastName(b.companyInfo.contacts[0]).toLowerCase() > this.getFirstLastName(a.companyInfo.contacts[0]).toLowerCase()) ? -1 : 0));
     this.companiesSelected.forEach(item => {
       let primaryContact;
       if (item.companyInfo) {
@@ -128,9 +128,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   }
 
   onSearch(event) {
-
-
-    this.companyList = this.reqCompanyList.filter(item => item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
+    this.companyList = this.reqCompanyList.filter(item => this.getFirstLastName(item.companyInfo.contacts[0]).toLocaleLowerCase().includes(event.target.value));
   }
   public onAdd(event) {
     const input = event.target.input;
@@ -162,6 +160,9 @@ export class DraftEmailRecipientsComponent implements OnInit {
       }
       this.companyCtrl.setValue(null);
     }
+  }
+  getFirstLastName(user) {
+    return `${user.firstName} ${user.lastName}`;
   }
   public trackByIndex(index, item) {
     return index;

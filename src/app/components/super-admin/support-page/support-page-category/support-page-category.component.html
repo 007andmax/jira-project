@@ -1,0 +1,35 @@
+<support-page-header
+    #header
+    [selectedCategory]="selectedCategory"
+    [supportPageCategoryContent]="supportPageCategoryContent"
+    (onPreview)="onPreview($event)"
+    (onCheckAddAttachments)="checkAddAttachments()"
+    (onCheckEditAttachments)="checkEditAttachments()"
+></support-page-header>
+<div
+    class="support-page-body"
+    [hidden]="!selectedCategory"
+>
+    <div
+        class="support-page-body__editor"
+        *ngIf="!isPreview"
+    >
+        <support-page-body
+            #body
+            [editorContent]="content"
+            (onChangeContent)="onChangeContent($event)"
+            (onChangeAttachments)="onChangeAttachments($event)"
+        ></support-page-body>
+    </div>
+    <div
+        class="support-page-body__preview"
+        [hidden]="!isPreview"
+    >
+    </div>
+    <support-page-info
+        *ngIf="selectedCategory"
+        [isPreview]="isPreview"
+        [selectedCategory]="selectedCategory"
+        [supportPageCategoryContent]="supportPageCategoryContent"
+    ></support-page-info>
+</div>

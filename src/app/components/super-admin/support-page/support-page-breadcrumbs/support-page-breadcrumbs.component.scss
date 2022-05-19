@@ -1,0 +1,44 @@
+@import "./src/assets/styles/variable";
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    @media (max-width: 767px) {
+        display: none;
+    }
+    > div:last-child {
+      span {
+        color: $gray-700;
+      }
+    }
+    div {
+        display: flex;
+        align-items: stretch;
+
+        span {
+            color: #919eab;
+            line-height: 15px;
+        }
+
+        &.breadcrumbs-path {
+            span {
+                color: $gray-600;
+            }
+        }
+
+        .breadcrumb-separator {
+          margin-left: 3px;
+          margin-right: 3px;
+          font-size: 17px;
+          line-height: 1;
+          color: $gray-600;
+        }
+    }
+}
+
+.breadcrumbs-company-password-manager {
+    background-color: $background;
+}
+.breadcrumbs-company-products {
+    background-color: $background;
+}

@@ -2,16 +2,13 @@
     class="default-services-page__aside qt-aside-modern"
     *ngIf="showAdd"
 >
-
-  <div class="qt-aside-modern__header">
-      <div class="qt-aside-modern__header-title">Create Service</div>
-      <div
-          class="qt-aside-modern__header-close icon__close"
-          (click)="close()"
-      ></div>
-  </div>
-
-
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Create Service</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
     <div class="qt-aside-modern__content">
         <div class="qt-w100 qt-mb-16">
             <div
@@ -34,8 +31,6 @@
                 </mat-error>
             </div>
         </div>
-
-
         <div class="qt-df">
             <div class="qt-w50 qt-mb-16 qt-mr-16">
                 <div
@@ -60,9 +55,6 @@
                     </mat-error>
                 </div>
             </div>
-
-
-
             <div class="qt-w50 qt-mb-16">
                 <div class="create-product-taxes-select">
                     <app-taxes
@@ -72,12 +64,8 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="qt-df">
-
-
-            <div class="qt-w50 qt-mb-16 qt-mr-16">
+        <div class="qt-df ">
+            <div class="qt-w100 qt-mb-16">
                 <app-drop-down
                     [title]="'GL Number'"
                     [placeholder]="'Select GL'"
@@ -86,18 +74,13 @@
                     [search]="true"
                     [add]="true"
                     [change]="true"
+                    [reducerItem]="glDropDownItemName"
                     (onAddItem)="onAddGlNumber($event)"
                     (onSelectedItem)="onSelectGlNumbers($event)"
                 >
                 </app-drop-down>
             </div>
-
-
-            <div class="qt-w50"></div>
         </div>
-
-
-
         <div class="qt-df qt-ai-c">
             <label
                 class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
@@ -110,17 +93,9 @@
                 >
                 <span></span>
             </label>
-
-
             <div class="qt-fs-12 qt-ml-5">Make this service billable</div>
         </div>
-
-
     </div>
-
-
-
-
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
@@ -139,9 +114,5 @@
                 Cancel
             </button>
         </div>
-
-
     </div>
-
-
 </div>

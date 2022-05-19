@@ -31,6 +31,8 @@ import { ConstantsService } from '../constants/constants.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { WebsocketStateService } from 'src/app/states/websocket/websocket-state.service';
+import { SupportPageCategoriesRealTimeService } from 'src/app/components/super-admin/state/support-page-categories/support-page-categories-real-time.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 /**
@@ -79,12 +81,15 @@ export class WebsocketService {
     private crmRealTimeService: CrmRealTimeService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
     private websocketStateService: WebsocketStateService,
+    private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
+    private leftPanelStateService: LeftPanelStateService,
 
   ) {
   }
 
   public initializeWebSocketConnection() {
-    this.onInitConnect();
+    if (this.usersState.getCurrentUser().role !== "SUPER_ADMIN") this.onInitConnect();
+    if (this.usersState.getCurrentUser().role === "SUPER_ADMIN") this.onInitSuperAdminConnect();
   }
   onInitConnect() {
     this.ws = new SockJS(this.serverUrl);
@@ -127,6 +132,26 @@ export class WebsocketService {
     this.stompClient.onWebSocketClose = (data) => {
       setTimeout(() => {
         this.onInitConnect();
+      }, 20000);
+    }
+  }
+  onInitSuperAdminConnect() {
+    this.ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(this.ws);
+    this.stompClient.logRawCommunication = true;
+    this.onConnect();
+    let that = this;
+    this.stompClient.onConnect = (data) => {
+      that.subsribeToSupportCategory();
+      that.subsribeToTags();
+      if (data.command === "CONNECTED") this.websocketStateService.initConnection();
+    }
+    this.stompClient.debug = (data) => {
+      console.log("debug", data);
+    }
+    this.stompClient.onWebSocketClose = (data) => {
+      setTimeout(() => {
+        this.onInitSuperAdminConnect();
       }, 20000);
     }
   }
@@ -178,6 +203,16 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimePermissions(newChange);//permissions
+        if (message.body) { }
+      });
+    }, 3000);
+  }
+
+  public subsribeToSupportCategory() {
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/supportCategory", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.supportPageCategoriesRealTimeService.handleRealTimeChanges(newChange);//permissions
         if (message.body) { }
       });
     }, 3000);

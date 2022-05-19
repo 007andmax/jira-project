@@ -52,6 +52,19 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  exportPdf() {
+    const url = `/documents/export?id=${this.document.id}`;
+    window.open(url, '_blank');
+  }
+  editDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.document.id]);
+  }
+  printPdf() {
+    const url = `/documents/show/${this.document.id}/pdf`;
+    let open = window.open(url, '_blank');
+    open.print();
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
