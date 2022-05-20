@@ -23,7 +23,6 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
       this.list = data.map(item => new TimeZone(item));
       if (this.selectedItem) {
         let find = this.list.find(item => item.second === this.selectedItem.second);
-        console.log("ngOnInit find", find);
         this.selectedItem = find;
       }
     })
@@ -33,15 +32,11 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
 
   private onEditMode() {
     let getEditMode = this.companyTimeZoneState.getOnEditMode().subscribe((data) => {
-      console.log("getOnEditMode");
       if (data) {
         let find = this.list.find(item => item.second === data.name);
-        console.log("find", find);
         this.selectedItem = find;
-        //   this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = find.first;
       } else {
         this.selectedItem = null;
-        //this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = '';
       }
     })
     this.sub.add(getEditMode);

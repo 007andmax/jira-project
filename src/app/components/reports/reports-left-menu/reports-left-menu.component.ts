@@ -46,6 +46,9 @@ export class ReportsLeftMenuComponent implements OnInit {
     localStorage.setItem('report', state);
     this.leftPanelStateService.goToState(state);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   close() {
     this.opened = false;
   }

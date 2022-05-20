@@ -297,11 +297,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         (res: any) => {
           this.loading = false; $(".loading").css("display", "none");
           if (res) {
-            console.log("res", res);
             this.cProfile.address = res.addresses;
             if (this.cProfile.address.length > 0) {
               if (res.addresses.length > 0 && res.addresses[0].timeZone) {
-                console.log("this.timezones", this.timezones);
                 let find = this.timezones.find(item => item.second === res.addresses[0].timeZone.name);
                 this.cProfile.address[0].timeZone = new TimeZone(find);
               }
@@ -379,7 +377,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 });
               }
             }
-            console.log("cProfile.address[0].timeZone", this.cProfile.address[0].timeZone);
           }
         },
         error => {
