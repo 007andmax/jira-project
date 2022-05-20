@@ -1,5 +1,9 @@
 #inventory-description {
     padding: 8px 14px;
+    min-height: 92px;
+    max-height: 400px;
+    overflow: auto;
+    height: auto;
 }
 .qt-checkbox {
     width: auto;
