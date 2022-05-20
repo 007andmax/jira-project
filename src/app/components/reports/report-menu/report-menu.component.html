@@ -206,238 +206,286 @@
         </div>
     </div>
     <div *ngIf="report === 'device-ip-summary'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByDeviceIpSummary()"
-                    [disabled]="deviceIpSummary.preloaderDevices"
-                >
-                    Get
-          Report
-                </button>
-                <div class="form-group content custom-width dropdown-height">
-                    <software-summary-devices-dro-down
-                        [sort]="true"
-                        [search]="true"
-                        [change]="true"
-                        [placeholder]="'All devices'"
-                        [dropdownHeight]="'300px'"
-                        [list]="devices"
-                        [isDisabled]="!deviceIpSummary.companyId"
-                        [preloader]="deviceIpSummary.preloaderDevices"
-                        (onSelectedItem)="onSelectDevice($event)"
-                    ></software-summary-devices-dro-down>
+        <div class="qt-report__header">
+            <div class="qt-df qt-ai-fs">
+                <div class="qt-report__header-content">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+                            <div
+                                class="report-left-panel__btn pointer qt-mr-6"
+                                (click)="toggleLeftMenu()"
+                            >
+                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                            </div>
+                            <!-- Filter -->
+                            <div
+                                class="qt-report__filter qt-f-1"
+                                [ngClass]="className"
+                            >
+                                <div class="qt-df qt-ai-c qt-jc-c">
+                                    <div class="grey-dropdown form-group content select-users-list">
+                                        <app-drop-down
+                                            [placeholder]="'Select Company'"
+                                            [list]="companies"
+                                            [dropdownHeight]="'175px'"
+                                            [validate]="validate.getCompany()"
+                                            [errorMessage]="'Please select the company name'"
+                                            [field]="'name'"
+                                            [search]="true"
+                                            [change]="true"
+                                            (onSelectedItem)="selectClient($event)"
+                                        ></app-drop-down>
+                                    </div>
+                                    <div class="form-group content custom-width dropdown-height">
+                                        <software-summary-devices-dro-down
+                                            [sort]="true"
+                                            [search]="true"
+                                            [change]="true"
+                                            [placeholder]="'All devices'"
+                                            [dropdownHeight]="'300px'"
+                                            [list]="devices"
+                                            [isDisabled]="!deviceIpSummary.companyId"
+                                            [preloader]="deviceIpSummary.preloaderDevices"
+                                            (onSelectedItem)="onSelectDevice($event)"
+                                        ></software-summary-devices-dro-down>
+                                    </div>
+                                    <button
+                                        class="btn-new btn-primary-white qt-fs-0"
+                                        (click)="getReportByDeviceIpSummary()"
+                                        [disabled]="deviceIpSummary.preloaderDevices"
+                                    >
+                                        Get Report
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- End Filter -->
+                        </div>
+                        <app-report-additional-actions
+                            [orientation]="'LANDSCAPE'"
+                            [report]="'device-ip-summary'"
+                            [fileName]="'device-ip-summary-report'"
+                        ></app-report-additional-actions>
+                    </div>
+                    <div class="qt-report__include-columns-panel qt-mt-16">
+                        <p class="qt-mb-4">
+                            Include the following columns in the report
+                        </p>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDevice"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Device</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithNetworkName"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Network Name</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Link Speed</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDhcp"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">DHCP</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithIpAddress"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">IP Address</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithSubnet"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Subnet</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithGateway"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Gateway</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDns1"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">DNS 1</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDns2"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">DNS 2</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="deviceIpSummary.deviceIpSummaryWithWanIp"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">WAN IP</div>
+                        </label>
+                    </div>
                 </div>
-                <div class="grey-dropdown form-group content select-users-list">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [dropdownHeight]="'175px'"
-                        [validate]="validate.getCompany()"
-                        [errorMessage]="'Please select the company name'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
-            </div>
-            <div class="col-md-11 w-100">
-                <div class="include-ticket-report">
-                    <p>
-                        Include the following columns in the report
-                    </p>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDevice"
-                        >
-                        <span class="control-indicator"></span>
-                        Device
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithNetworkName"
-                        >
-                        <span class="control-indicator"></span>
-                        Network Name
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
-                        >
-                        <span class="control-indicator"></span>
-                        Link Speed
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDhcp"
-                        >
-                        <span class="control-indicator"></span>
-                        DHCP
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithIpAddress"
-                        >
-                        <span class="control-indicator"></span>
-                        IP Address
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithSubnet"
-                        >
-                        <span class="control-indicator"></span>
-                        Subnet
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithGateway"
-                        >
-                        <span class="control-indicator"></span>
-                        Gateway
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDns1"
-                        >
-                        <span class="control-indicator"></span>
-                        DNS 1
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDns2"
-                        >
-                        <span class="control-indicator"></span>
-                        DNS 2
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithWanIp"
-                        >
-                        <span class="control-indicator"></span>
-                        WAN IP
-                    </label>
-                </div>
+                <div
+                    class="qt-report__control-panel-btn-close pointer icon__close"
+                    (click)="back()"
+                ></div>
             </div>
         </div>
     </div>
     <div *ngIf="report === 'hardware-summary'">
-        <div
-            class="run-report-content clearfix"
-            [ngClass]="className"
-        >
-            <div class="new-reports-reverse">
-                <button
-                    class="btn-new btn-primary-white qt-fs-0"
-                    (click)="getReportByHardwareSummary()"
-                    [disabled]="hardwareSummaryReport.preloaderDevices"
-                >
-                    Get
-          Report
-                </button>
-                <div class="form-group content custom-width dropdown-height">
-                    <software-summary-devices-dro-down
-                        [sort]="true"
-                        [search]="true"
-                        [change]="true"
-                        [placeholder]="'All devices'"
-                        [dropdownHeight]="'300px'"
-                        [list]="devices"
-                        [isDisabled]="!hardwareSummaryReport.companyId"
-                        [preloader]="hardwareSummaryReport.preloaderDevices"
-                        (onSelectedItem)="onSelectDevice($event)"
-                    ></software-summary-devices-dro-down>
+        <div class="qt-report__header">
+            <div class="qt-df qt-ai-fs">
+                <div class="qt-report__header-content">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
+                            <div
+                                class="report-left-panel__btn pointer qt-mr-6"
+                                (click)="toggleLeftMenu()"
+                            >
+                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                            </div>
+                            <!-- Filter -->
+                            <div
+                                class="qt-report__filter qt-f-1"
+                                [ngClass]="className"
+                            >
+                                <div class="qt-df qt-ai-c qt-jc-c">
+                                    <div class="grey-dropdown form-group content select-users-list">
+                                        <app-drop-down
+                                            [placeholder]="'Select Company'"
+                                            [list]="companies"
+                                            [dropdownHeight]="'175px'"
+                                            [validate]="validate.getCompany()"
+                                            [errorMessage]="'Please select the company name'"
+                                            [field]="'name'"
+                                            [search]="true"
+                                            [change]="true"
+                                            (onSelectedItem)="selectClient($event)"
+                                        ></app-drop-down>
+                                    </div>
+                                    <div class="form-group content custom-width dropdown-height">
+                                        <software-summary-devices-dro-down
+                                            [sort]="true"
+                                            [search]="true"
+                                            [change]="true"
+                                            [placeholder]="'All devices'"
+                                            [dropdownHeight]="'300px'"
+                                            [list]="devices"
+                                            [isDisabled]="!hardwareSummaryReport.companyId"
+                                            [preloader]="hardwareSummaryReport.preloaderDevices"
+                                            (onSelectedItem)="onSelectDevice($event)"
+                                        ></software-summary-devices-dro-down>
+                                    </div>
+                                    <button
+                                        class="btn-new btn-primary-white qt-fs-0"
+                                        (click)="getReportByHardwareSummary()"
+                                        [disabled]="hardwareSummaryReport.preloaderDevices"
+                                    >
+                                        Get Report
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- End Filter -->
+                        </div>
+                        <app-report-additional-actions
+                            [orientation]="'LANDSCAPE'"
+                            [report]="'hardware-summary'"
+                            [fileName]="'hardware-summary-report'"
+                        ></app-report-additional-actions>
+                    </div>
+                    <div class="qt-report__include-columns-panel qt-mt-16">
+                        <p class="qt-mb-4">
+                            Include the following columns in the report
+                        </p>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithDevice"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Device</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Operating System</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithCpu"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">CPU</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithRam"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Ram</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithDisk"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Disk</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c qt-mr-20 pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Warranty</div>
+                        </label>
+                        <label class="qt-checkbox qt-dif qt-ai-c pointer">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">Serial Number</div>
+                        </label>
+                    </div>
                 </div>
-                <div class="grey-dropdown form-group content select-users-list">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [dropdownHeight]="'175px'"
-                        [validate]="validate.getCompany()"
-                        [errorMessage]="'Please select the company name'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
-            </div>
-            <div class="col-md-11 w-100">
-                <div class="include-ticket-report">
-                    <p>
-                        Include the following columns in the report
-                    </p>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithDevice"
-                        >
-                        <span class="control-indicator"></span>
-                        Device
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
-                        >
-                        <span class="control-indicator"></span>
-                        Operating System
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithCpu"
-                        >
-                        <span class="control-indicator"></span>
-                        CPU
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithRam"
-                        >
-                        <span class="control-indicator"></span>
-                        Ram
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithDisk"
-                        >
-                        <span class="control-indicator"></span>
-                        Disk
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithWarrenty"
-                        >
-                        <span class="control-indicator"></span>
-                        Warranty
-                    </label>
-                    <label class="control checkbox">
-                        <input
-                            type="checkbox"
-                            [(ngModel)]="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
-                        >
-                        <span class="control-indicator"></span>
-                        Serial Number
-                    </label>
-                </div>
+                <div
+                    class="qt-report__control-panel-btn-close pointer icon__close"
+                    (click)="back()"
+                ></div>
             </div>
         </div>
     </div>
