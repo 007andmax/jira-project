@@ -56,6 +56,9 @@
 .qt-df {
   display: flex;
 }
+.qt-dif {
+  display: inline-flex;
+}
 .qt-dib {
   display: inline-block;
 }
@@ -723,7 +726,7 @@
     border: solid 1px $gray-500;
     background-color: $white;
     padding: 10px 14px;
-    color: $gray-800;
+    color: $primary-2;
     @extend %body-m;
     width: 100%;
     &::placeholder {

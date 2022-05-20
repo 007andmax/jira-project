@@ -17,6 +17,7 @@ export class CommonCommissionsReportComponent implements OnInit {
   onInit: boolean = false;
   showCategoriesData = true;
   currentCompany;
+  selectedCompany;
   chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313'];
   commonCommissionsReport: CommonCommissionsReport = new CommonCommissionsReport();
   constructor(public cd: ChangeDetectorRef,
@@ -64,6 +65,7 @@ export class CommonCommissionsReportComponent implements OnInit {
   public getReport(data) {
     this.showCategoriesData = true;
     this.commonCommissionsReport = new CommonCommissionsReport(JSON.parse(JSON.stringify(data)));
+    this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.commonCommissionsReport.companyId);
     let categories = this.commonCommissionsReport.categorySalesValue;
     if (!categories || !Object.keys(categories).length) {
       categories = { 'No data available': '1' };

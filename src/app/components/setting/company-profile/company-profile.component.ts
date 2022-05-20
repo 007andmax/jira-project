@@ -127,9 +127,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
-    this.getCompanyProfile();
+
     this.getConstants();
-    this.getGroupedLocales();
+    this.getGroupedLocales().then(data => {
+      this.getCompanyProfile();
+    });
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
@@ -295,12 +297,14 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         (res: any) => {
           this.loading = false; $(".loading").css("display", "none");
           if (res) {
+            console.log("res", res);
             this.cProfile.address = res.addresses;
             if (this.cProfile.address.length > 0) {
-              this.cProfile.address[0].timeZone = new TimeZone({
-                first: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.displayName : "",
-                second: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.name : "",
-              })
+              if (res.addresses.length > 0 && res.addresses[0].timeZone) {
+                console.log("this.timezones", this.timezones);
+                let find = this.timezones.find(item => item.second === res.addresses[0].timeZone.name);
+                this.cProfile.address[0].timeZone = new TimeZone(find);
+              }
               this.cProfileForm.patchValue({
                 locale: res.addresses[0].timeZone.second
               });
@@ -375,6 +379,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 });
               }
             }
+            console.log("cProfile.address[0].timeZone", this.cProfile.address[0].timeZone);
           }
         },
         error => {
@@ -428,14 +433,19 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * get groupp locals
    */
   getGroupedLocales() {
-    this.companyProfileService.getGroupedLocales().subscribe(
-      (res: any) => {
-        if (res) {
-          this.timezones = res.map(item => new TimeZone(item));;
+    return new Promise((resolve, reject) => {
+      this.companyProfileService.getGroupedLocales().subscribe(
+        (res: any) => {
+          if (res) {
+            this.timezones = res.map(item => new TimeZone(item));;
+            resolve(true);
+          }
+        },
+        error => {
+          resolve(true);
         }
-      },
-      error => { }
-    );
+      );
+    });
   }
 
   /**
