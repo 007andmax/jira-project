@@ -4,11 +4,6 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [orientation]="'LANDSCAPE'"
-    [report]="'hardware-summary'"
-    [fileName]="'hardware-summary-report'"
-></app-report-additional-actions>
 <div
     class="loading"
     *ngIf="loadingInProgress"
