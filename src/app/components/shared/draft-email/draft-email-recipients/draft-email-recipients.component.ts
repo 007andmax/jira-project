@@ -128,7 +128,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   }
 
   onSearch(event) {
-    this.companyList = this.reqCompanyList.filter(item => this.getFirstLastName(item.companyInfo.contacts[0]).toLocaleLowerCase().includes(event.target.value));
+    this.companyList = this.reqCompanyList.filter(item => this.getFirstLastName(item.companyInfo.contacts[0]).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
   }
   public onAdd(event) {
     const input = event.target.input;
