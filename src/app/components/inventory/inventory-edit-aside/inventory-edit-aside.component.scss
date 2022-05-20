@@ -1,5 +1,24 @@
+@import "./src/assets/styles/variable";
+
 #inventory-description {
     padding: 8px 14px;
+    min-height: 40px;
+    max-height: 140px;
+    overflow: auto;
+    height: auto;
+    border-radius: 5px;
+    border: solid 1px #c5cdd5;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #454f5b;
+    &:focus-visible {
+        outline:none;
+    }
+}
+#inventory-description[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: $gray-600;
 }
 .qt-checkbox {
     width: auto;

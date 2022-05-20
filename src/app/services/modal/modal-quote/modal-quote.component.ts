@@ -213,8 +213,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event) {
-    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value));
-    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value));
+    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
+    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
   }
 
   /**
