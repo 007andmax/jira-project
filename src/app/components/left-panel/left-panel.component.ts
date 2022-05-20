@@ -189,6 +189,7 @@ export class LeftPanelComponent implements OnInit {
     window.location.hash = '';
   }
   public goToLink(url) {
+    console.log("url", url);
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
   onChangeState(data) {
@@ -242,7 +243,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
 
-
+      console.log("this.state", this.state);
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
         this.state === 'byTaxes' ||

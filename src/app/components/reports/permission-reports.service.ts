@@ -21,7 +21,7 @@ export class PermissionReportsService implements CanActivate {
             if ((route.params.id === "tech-sales" || route.params.id === "tech-ticket" || route.params.id === "tech-service" || route.params.id === "ticket-report" || route.params.id === "service-report" || route.params.id === "income-accounts") && this.getPermissions('VIEW_PERFORMANCE_REPORT')) return true;
             if ((route.params.id === "remote-access") && this.getPermissions('VIEW_REMOTE_ACCESS_REPORT')) return true;
             if ((route.params.id === "byTaxes") && this.getPermissions('VIEW_TAXES_REPORT')) return true;
-            if ((route.params.id === "software-summary" || route.params.id === "hardware-summary") && this.getPermissions('VIEW_TAXES_REPORT')) return true;
+            if ((route.params.id === "software-summary" || route.params.id === "hardware-summary" || route.params.id === "device-ip-summary") && this.getPermissions('VIEW_TAXES_REPORT')) return true;
 
             return false;
         }
@@ -39,7 +39,7 @@ export class PermissionReportsService implements CanActivate {
                 if ((route.params.id === "tech-sales" || route.params.id === "tech-ticket" || route.params.id === "tech-service" || route.params.id === "ticket-report" || route.params.id === "service-report" || route.params.id === "income-accounts") && this.getPermissions('VIEW_PERFORMANCE_REPORT')) resolve(true);
                 if ((route.params.id === "remote-access") && this.getPermissions('VIEW_REMOTE_ACCESS_REPORT')) resolve(true);
                 if ((route.params.id === "byTaxes") && this.getPermissions('VIEW_TAXES_REPORT')) resolve(true);
-                if ((route.params.id === "software-summary" || route.params.id === "hardware-summary") && this.getPermissions('VIEW_TAXES_REPORT')) resolve(true);
+                if ((route.params.id === "software-summary" || route.params.id === "hardware-summary" || route.params.id === "device-ip-summary") && this.getPermissions('VIEW_TAXES_REPORT')) resolve(true);
                 resolve(false);
             })
         });
