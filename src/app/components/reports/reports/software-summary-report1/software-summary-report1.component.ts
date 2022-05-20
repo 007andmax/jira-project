@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { xhr } from "d3";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -20,8 +21,8 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
   styleUrls: ["./software-summary-report1.component.scss"],
 })
 export class SoftwareSummaryReport1Component implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
-  @ViewChild('dropdownSoftware') dropdownSoftware : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownSoftware') dropdownSoftware: DropDownComponent;
   tempararyDeviceList: any = [];
   tempararySoftwareList: any = [];
   softwareReportList: any = [];
@@ -58,19 +59,19 @@ export class SoftwareSummaryReport1Component implements OnInit {
     public leftPanelStateService: LeftPanelStateService,
     private modalService: NgbModal,
     public elRef: ElementRef
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getCompanyApplication();
     this.loading = true;
+    this.companiesState.onInit();
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.loading = false;
+      this.companies = this.getClientsList(data);      
+    });
   }
   getClientsList(data) {
     return data
@@ -79,21 +80,20 @@ export class SoftwareSummaryReport1Component implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
-  getCompanyApplication(){
-    if(this.agentService.AccessToken == ''){
-      setTimeout(() =>{
-         this.getCompanyApplication();
+  getCompanyApplication() {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getCompanyApplication();
       }, 3000)
       return;
     }
     this.agentService.getCompanyApplications().subscribe((resp) => {
       if (resp.length > 0) {
-      this.loading = false;
         for (let i = 0; i < resp.length; i++) {
           if (resp[i].DisplayName != "") {
             let data = {
@@ -120,7 +120,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
                 Publisher: resp[i].Publisher,
                 AssetCount: resp[i].AssetCount,
                 AssetNames: Name[j].AssetName,
-                CompanyName : Name[j].CompanyName,
+                CompanyName: Name[j].CompanyName,
               };
               this.tempReport.push(data);
             }
@@ -131,16 +131,16 @@ export class SoftwareSummaryReport1Component implements OnInit {
               Publisher: resp[i].Publisher,
               AssetCount: resp[i].AssetCount,
               AssetNames: resp[i].Assets[0].AssetName,
-              CompanyName : resp[i].Assets[0].CompanyName,
+              CompanyName: resp[i].Assets[0].CompanyName,
             };
             this.tempReport.push(data);
           }
         }
         this.devices = this.tempReport
-        .map((item) => item.AssetNames)
-        .filter((value, index, self) => self.indexOf(value) === index);
+          .map((item) => item.AssetNames)
+          .filter((value, index, self) => self.indexOf(value) === index);
 
-        this.softwareReportList = this.tempReport.sort((a,b)=>a.AssetNames.toLowerCase()>b.AssetNames.toLowerCase()?1:b.AssetNames.toLowerCase()>a.AssetNames.toLowerCase()?-1:0);
+        this.softwareReportList = this.tempReport.sort((a, b) => a.AssetNames.toLowerCase() > b.AssetNames.toLowerCase() ? 1 : b.AssetNames.toLowerCase() > a.AssetNames.toLowerCase() ? -1 : 0);
       }
     })
   }
@@ -155,9 +155,11 @@ export class SoftwareSummaryReport1Component implements OnInit {
     this.agentService
       .getCompanyApplicationByGuid(this.softwareSummaryReport.companyId)
       .subscribe((resp) => {
+        this.loading = false;
         this.tempReport = [];
         this.software = [];
         this.tempDevice = [];
+        this.tempSoftware = [];
         if (resp.length > 0) {
           for (let i = 0; i < resp.length; i++) {
             if (resp[i].DisplayName != "") {
@@ -185,7 +187,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
                   Publisher: resp[i].Publisher,
                   AssetCount: resp[i].AssetCount,
                   AssetNames: Name[j].AssetName,
-                  CompanyName : Name[j].CompanyName,
+                  CompanyName: Name[j].CompanyName,
                 };
                 this.tempReport.push(data);
               }
@@ -196,55 +198,45 @@ export class SoftwareSummaryReport1Component implements OnInit {
                 Publisher: resp[i].Publisher,
                 AssetCount: resp[i].AssetCount,
                 AssetNames: resp[i].Assets[0].AssetName,
-                CompanyName : resp[i].Assets[0].CompanyName,
+                CompanyName: resp[i].Assets[0].CompanyName,
               };
               this.tempReport.push(data);
             }
           }
           this.devices = this.tempReport
-          .map((item) => item.AssetNames)
-          .filter((value, index, self) => self.indexOf(value) === index);
+            .map((item) => item.AssetNames)
+            .filter((value, index, self) => self.indexOf(value) === index);
 
-          this.softwareReportList = this.tempReport.sort((a,b)=>a.AssetNames.toLowerCase()>b.AssetNames.toLowerCase()?1:b.AssetNames.toLowerCase()>a.AssetNames.toLowerCase()?-1:0);
+          this.softwareReportList = this.tempReport.sort((a, b) => a.AssetNames.toLowerCase() > b.AssetNames.toLowerCase() ? 1 : b.AssetNames.toLowerCase() > a.AssetNames.toLowerCase() ? -1 : 0);
         }
-        else
-        {
+        else {
           this.softwareReportList = [];
         }
       });
   }
 
-  onSelectSoftware(data) {
+  onSelectSoftware(data) {  
+    this.loading = true;  
     this.softwareSummaryReport.setSoftwareSoft(data ? data : null);
     if (data) {
       if (
         this.softwareSummaryReport.deviceName &&
         this.softwareSummaryReport.softwareSummarySoft
       ) {
-        let filter = this.tempararySoftwareList.filter(
-          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-            ((x) =>
-              x.DisplayName ==
-              this.softwareSummaryReport.softwareSummarySoft)
-        );
-        if (filter.length > 0) {
+
+        let softwareFilter = this.tempReport.filter(((x) => x.AssetNames == this.softwareSummaryReport.deviceName) && ((x) => x.DisplayName == this.softwareSummaryReport.softwareSummarySoft))
+        if (softwareFilter.length > 0) {
           this.softwareReportList = [];
-          this.softwareReportList = this.tempararySoftwareList.filter(
-            ((x) =>
-              x.AssetNames == this.softwareSummaryReport.deviceName) &&
-              ((x) =>
-                x.DisplayName ==
-                this.softwareSummaryReport.softwareSummarySoft)
-          );
-        } else {
+          this.tempDevice = [];
+          this.softwareReportList = softwareFilter.filter((x) => x.AssetNames == this.softwareSummaryReport.deviceName);
+          this.tempDevice = this.softwareReportList;
+        }
+        else {
           this.softwareReportList = [];
-          this.softwareReportList = this.tempararySoftwareList.filter(
-            ((x) =>
-              x.AssetNames == this.softwareSummaryReport.deviceName) &&
-              ((x) =>
-                x.Publisher ==
-                this.softwareSummaryReport.softwareSummarySoft)
-          );
+          this.tempDevice = [];
+          let softwareFilterData = this.tempReport.filter(((x) => x.AssetNames == this.softwareSummaryReport.deviceName) && ((x) => x.Publisher == this.softwareSummaryReport.softwareSummarySoft))
+          if (softwareFilterData)
+            this.softwareReportList = softwareFilterData.filter((x) => x.AssetNames == this.softwareSummaryReport.deviceName);
         }
       }
       if (
@@ -253,9 +245,9 @@ export class SoftwareSummaryReport1Component implements OnInit {
       ) {
         let filter = this.tempReport.filter(
           ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-            ((x) =>
-              x.DisplayName ==
-              this.softwareSummaryReport.softwareSummarySoft)
+          ((x) =>
+            x.DisplayName ==
+            this.softwareSummaryReport.softwareSummarySoft)
         );
         if (filter.length > 0) {
           this.softwareReportList = [];
@@ -263,9 +255,9 @@ export class SoftwareSummaryReport1Component implements OnInit {
           this.softwareReportList = this.tempReport.filter(
             ((x) =>
               x.AssetNames == this.softwareSummaryReport.deviceName) &&
-              ((x) =>
-                x.DisplayName ==
-                this.softwareSummaryReport.softwareSummarySoft)
+            ((x) =>
+              x.DisplayName ==
+              this.softwareSummaryReport.softwareSummarySoft)
           );
           this.tempDevice = this.softwareReportList;
         } else {
@@ -274,40 +266,52 @@ export class SoftwareSummaryReport1Component implements OnInit {
           this.softwareReportList = this.tempReport.filter(
             ((x) =>
               x.AssetNames == this.softwareSummaryReport.deviceName) &&
-              ((x) =>
-                x.Publisher ==
-                this.softwareSummaryReport.softwareSummarySoft)
+            ((x) =>
+              x.Publisher ==
+              this.softwareSummaryReport.softwareSummarySoft)
           );
           this.tempDevice = this.softwareReportList;
         }
       }
-    }  else {
-      if(!this.softwareSummaryReport.deviceName)
-      {
+    } else {
+      if (!this.softwareSummaryReport.deviceName) {
         this.temp = this.tempReport;
         this.softwareReportList = this.temp;
       }
-      if(this.softwareSummaryReport.deviceName)
-      {
-         this.temp = this.tempReport;
-         this.softwareReportList = this.temp.filter((x)=>x.AssetNames == this.softwareSummaryReport.deviceName);
+      if (this.softwareSummaryReport.deviceName) {
+        this.temp = this.tempReport;
+        this.softwareReportList = this.temp.filter((x) => x.AssetNames == this.softwareSummaryReport.deviceName);
       }
-      else
-      {
+      else {
         this.softwareReportList = this.tempReport;
       }
       this.software = this.tempSoftware
-              .map((item) => item.DisplayName)
-              .filter((value, index, self) => self.indexOf(value) === index);
+        .map((item) => item.DisplayName)
+        .filter((value, index, self) => self.indexOf(value) === index);
     }
+    this.loading = false;
   }
 
-  onSelectDevice(data) {
-    this.softwareSummaryReport.setDeviceName(data ? data: null);
+  onSelectDevice(data) {    
+    this.loading = true;
+    this.softwareSummaryReport.setDeviceName(data ? data : null);
     if (data) {
-      if(this.softwareSummaryReport.deviceName && this.softwareSummaryReport.softwareSummarySoft)
-      {
-        this.softwareReportList = this.tempDevice.filter((x)=>x.AssetNames == this.softwareSummaryReport.deviceName);
+      if (this.softwareSummaryReport.deviceName && this.softwareSummaryReport.softwareSummarySoft) {
+        let finddata = this.tempReport.filter(
+          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
+          ((x) =>
+            x.DisplayName ==
+            this.softwareSummaryReport.softwareSummarySoft)
+        );
+        if (finddata.length > 0) {
+          this.softwareReportList = finddata.filter(x => x.AssetNames == this.softwareSummaryReport.deviceName);
+        }
+        else {
+          let filterDatas = this.tempReport.filter(((x) => x.AssetNames == this.softwareSummaryReport.deviceName) && ((x) => x.Publisher == this.softwareSummaryReport.softwareSummarySoft))
+          if (filterDatas) {
+            this.softwareReportList = filterDatas.filter(x => x.AssetNames == this.softwareSummaryReport.deviceName);
+          }
+        }
       }
       if (
         this.softwareSummaryReport.deviceName &&
@@ -315,51 +319,72 @@ export class SoftwareSummaryReport1Component implements OnInit {
       ) {
         this.softwareReportList = this.tempReport.filter(
           (x) => x.AssetNames == this.softwareSummaryReport.deviceName
-        );
+        );        
         this.tempararySoftwareList = this.softwareReportList;
+        this.tempSoftware = [];
+        for (let i = 0; i < this.tempararySoftwareList.length; i++) {
+          if (this.tempararySoftwareList[i].DisplayName != "") {
+            let data = {
+              DisplayName: this.tempararySoftwareList[i].DisplayName,
+            };
+            this.tempSoftware.push(data);
+          }
+          if (this.tempararySoftwareList[i].Publisher != "") {
+            let data = {
+              DisplayName: this.tempararySoftwareList[i].Publisher,
+            };
+            this.tempSoftware.push(data);
+          }
+          this.software = this.tempSoftware
+            .map((item) => item.DisplayName)
+            .filter((value, index, self) => self.indexOf(value) === index);
+        }
       }
+
+
     } else {
       if (
         !this.softwareSummaryReport.deviceName &&
         this.softwareSummaryReport.softwareSummarySoft
       ) {
         let filter = this.tempReport.filter(
-            ((x) =>
-              x.DisplayName ==
-              this.softwareSummaryReport.softwareSummarySoft)
+          ((x) =>
+            x.DisplayName ==
+            this.softwareSummaryReport.softwareSummarySoft)
         );
         if (filter.length > 0) {
           this.softwareReportList = [];
           this.tempDevice = [];
           this.softwareReportList = this.tempReport.filter(
-              ((x) =>
-                x.DisplayName ==
-                this.softwareSummaryReport.softwareSummarySoft)
+            ((x) =>
+              x.DisplayName ==
+              this.softwareSummaryReport.softwareSummarySoft)
           );
           this.tempDevice = this.softwareReportList;
         } else {
           this.softwareReportList = [];
           this.tempDevice = [];
           this.softwareReportList = this.tempReport.filter(
-              ((x) =>
-                x.Publisher ==
-                this.softwareSummaryReport.softwareSummarySoft)
+            ((x) =>
+              x.Publisher ==
+              this.softwareSummaryReport.softwareSummarySoft)
           );
           this.tempDevice = this.softwareReportList;
         }
       }
-      else
-      {
+      else {
         this.softwareReportList = this.tempReport;
       }
       this.devices = this.tempReport
-      .map((item) => item.AssetNames)
-      .filter((value, index, self) => self.indexOf(value) === index);
+        .map((item) => item.AssetNames)
+        .filter((value, index, self) => self.indexOf(value) === index);
 
     }
+    this.loading = false;
   }
 
   selectClient(selectClient) {
+    this.loading = true;
     if (selectClient) {
       this.clientName = selectClient.name;
       this.softwareSummaryReport.setCompanyId(selectClient.id);
@@ -369,9 +394,10 @@ export class SoftwareSummaryReport1Component implements OnInit {
       this.softwareSummaryReport.setCompanyId(null);
       this.softwareSummaryReport.setDeviceName(null);
       this.softwareSummaryReport.setSoftwareSoft(null);
-      this.getCompanyApplication();
+      this.softwareReportList = [];
       this.dropdownDevice.clearWithOutChanges();
       this.dropdownSoftware.clearWithOutChanges();
+      this.loading = false;
     }
   }
 
@@ -379,7 +405,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     this.filter.onFilter(field, this.softwareReportList);
   }
 
-  sendEmail(){
+  sendEmail() {
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation = this.orientation;
@@ -463,8 +489,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -506,9 +532,9 @@ export class SoftwareSummaryReport1Component implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-          html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =

@@ -13,7 +13,6 @@ import { CompanyDeviceBetaFilter } from "./class/device-beta";
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
-import { data } from "jquery";
 
 @Component({
   selector: "app-company-device-beta",
@@ -22,8 +21,7 @@ import { data } from "jquery";
 })
 export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild("templatePowersell") template;
-  @ViewChild("templateConnection") templateconnection;
-  @ViewChild("templatedevice") templatedevice;
+  @ViewChild("templateConnection") templateconnection;  
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -101,7 +99,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.opened = true;
     this.companyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
@@ -746,34 +743,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
   }
 
-  getAddDevice(templatedevice) {
-    this.ngZone.run(() => {
-      this.modalService
-        .open(templatedevice, { ariaLabelledBy: "modal-basic-title", centered: false, size: 'lg', windowClass:'add-new-device' })
-        .result.then(
-          (result) => {
-            this.closeResult = `Closed with: ${result}`;
-          },
-          (reason) => {
-            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
-          }
-        );
-    });
-
+  getAddDevice() {    
+    this.opened = true;
   }
 
-  private getDismiss(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  closed() {
-    this.modalService.dismissAll("Cross click");
+  closed() {    
+    this.opened = false;
   }
 
   getAssetTagDropDownDetail() {

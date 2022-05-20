@@ -831,13 +831,13 @@ export class DevicesComponent implements OnInit {
   closed() {
     this.modalService.dismissAll("Cross click");
   }
-  saveFavourite() {    
+  saveFavourite() {      
     let req: any = {};
-    req.Criteria = this.selectedTag;
+    req.Json = this.selectedTag;
     req.Name = this.favouriteName
     req.TechCompanyGuid = this.techCompnayGuid;
     req.IsActive = true;
-    this.agentService.createAssetSearch(req).subscribe((data: any) => {
+    this.agentService.createAssetSearch(req).subscribe((data: any) => {      
       this.modalService.dismissAll();
       this.toastr.success('Your search is saved');
     },
@@ -889,4 +889,5 @@ export class DevicesComponent implements OnInit {
       })
     }
   }
+
 }
