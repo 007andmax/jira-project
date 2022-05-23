@@ -128,8 +128,6 @@ export class LeftPanelComponent implements OnInit {
 
 
 
-
-
           if (window.location.href.includes(`/report/byProducts`)) this.state = 'byProducts';
           if (window.location.href.includes(`/report/byCustomers`)) this.state = 'byCustomers';
           if (window.location.href.includes(`/report/byTaxes`)) this.state = 'byTaxes';
@@ -137,6 +135,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/detailed-commissions`)) this.state = 'detailed-commissions';
           if (window.location.href.includes(`/report/accounts-receivable`)) this.state = 'accounts-receivable';
           if (window.location.href.includes(`/report/accounting-report`)) this.state = 'accounting-report';
+          if (window.location.href.includes(`/report/payments-report`)) this.state = 'payments-report';
           if (window.location.href.includes(`/report/remote-access`)) this.state = 'remote-access';
           if (window.location.href.includes(`/report/software-summary`)) this.state = 'software-summary';
           if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
@@ -147,7 +146,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/ticket-report`)) this.state = 'ticket-report';
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
-
+          if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
 
           if (this.state === '' && this.companiesStateService.getCurrentCompany()) this.goToDefaultPage();
@@ -210,6 +209,7 @@ export class LeftPanelComponent implements OnInit {
     window.location.hash = '';
   }
   public goToLink(url) {
+    console.log("url", url);
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
   onChangeState(data) {
@@ -263,7 +263,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
 
-
+      console.log("this.state", this.state);
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
         this.state === 'byTaxes' ||
@@ -271,6 +271,7 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'detailed-commissions' ||
         this.state === 'accounts-receivable' ||
         this.state === 'accounting-report' ||
+        this.state === 'payments-report' ||
         this.state === 'remote-access' ||
         this.state === 'software-summary' ||
         this.state === 'hardware-summary' ||

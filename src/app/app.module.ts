@@ -97,6 +97,36 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionUsersService } from './components/users/permission-users.service';
+import { RightClickBlankDirective } from './directives/right-click-blank.directive';
+import { ReportsLeftMenuComponent } from './components/reports/reports-left-menu/reports-left-menu.component';
+import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
+import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
+import { PermissionTechUserService } from './services/users/permission-tech-user.service';
+import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
+import { LeftPanelSuperAdminCategoriesComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories.component';
+import { SupportPageAddCategoryComponent } from './components/super-admin/shared/support-page-add-category/support-page-add-category.component';
+import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
+import { SupportPageEditCategoryComponent } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.component';
+import { DragMenuDirective } from './directives/drag-menu.directive';
+import { LeftPanelSuperAdminCategoriesActionsComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
+import { SupportPageBreadcrumbsComponent } from './components/super-admin/support-page/support-page-breadcrumbs/support-page-breadcrumbs.component';
+import { SupportPageHeaderComponent } from './components/super-admin/support-page/support-page-header/support-page-header.component';
+import { SupportPageBodyComponent } from './components/super-admin/support-page/support-page-body/support-page-body.component';
+import { SupportPageInfoComponent } from './components/super-admin/support-page/support-page-info/support-page-info.component';
+import { SupportPageInfoTagsComponent } from './components/super-admin/support-page/support-page-info/support-page-info-tags/support-page-info-tags.component';
+import { SuperAdminPublicComponent } from './components/super-admin-public/super-admin-public.component';
+import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
+import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
+import { SuperAdminPublicSearchComponent } from './components/super-admin-public/super-admin-public-search/super-admin-public-search.component';
+import { SupportPageHelpCenterComponent } from './components/super-admin/support-page/support-page-help-center/support-page-help-center.component';
+import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
+import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
+import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
+import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
+import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
+import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
+import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
+import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 
 
 declare var $: any;
@@ -123,7 +153,6 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -142,7 +171,8 @@ declare var $: any;
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
-      timeOut: 5000
+      timeOut: 5000,
+      onActivateTick: true
     }),
     BrowserAnimationsModule,
     AngularEditorModule,
@@ -177,7 +207,6 @@ declare var $: any;
     DownloadAgentComponent,
     ImageCropperComponent,
     AlertComponent,
-    ReportSendEmailComponent,
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
@@ -186,6 +215,11 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
+    AddUserToSubscribeComponent,
+    SupportPageAddCategoryComponent,
+    SupportPageAddSubCategoryComponent,
+    SupportPageEditCategoryComponent,
+    InventoryCheckUseComponent,
     // RecurringTicketsComponent
   ],
   providers: [
@@ -211,7 +245,9 @@ declare var $: any;
     PermissionUsersService,
     PermissionPasswordManagerService,
     PermissionSupportService,
-    PermissionReportsService
+    PermissionReportsService,
+    PermissionTechUserService,
+    PermissionSuperAdminService
   ],
   bootstrap: [AppComponent]
 })

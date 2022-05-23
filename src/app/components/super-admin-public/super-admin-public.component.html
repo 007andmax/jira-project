@@ -1,0 +1,124 @@
+<div class="super-admin-public">
+    <div class="support-page">
+        <super-admin-public-header
+            [isShowHelpCenter]="true"
+            (onSelectCategory)="selectCategory($event)"
+        ></super-admin-public-header>
+        <div class="support-page__hero">
+            <div class="icon__quicktech_partical_bottom qt-bg-contain"></div>
+            <div class="support-page__hero-title">Welcome to Quicktech</div>
+            <div class="support-page__hero-text">
+                Demystify Quicktech with our help resources. Learn how to use its features and modules.
+            </div>
+            <div class="icon__quicktech_partical_top qt-bg-contain"></div>
+        </div>
+        <div class="support-page__body">
+            <div class="support-page__body-row">
+                <ng-template
+                    ngFor
+                    let-category
+                    [ngForOf]="categories"
+                    [ngForTrackBy]="trackById"
+                >
+                    <div class="support-page__body-category">
+                        <div
+                            class="support-page__body-category-header"
+                            [textContent]="category.name"
+                            [ngClass]="{'pointer':category.document}"
+                            (click)="selectCategory(category)"
+                        ></div>
+                        <ul class="support-page-body-category__body">
+                            <ng-template
+                                ngFor
+                                let-subcategory
+                                [ngForOf]="category.subcategories"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <li>
+                                    <div class="qt-df qt-ai-fs">
+                                        <div
+                                            class="icon__category-closed qt-mr-10 pointer"
+                                            [ngClass]="{'toggle-category':subcategory.toggleSubCategory}"
+                                            (click)="subcategory.toggleSubCategory = !subcategory.toggleSubCategory"
+                                            *ngIf="subcategory.subcategories.length > 0"
+                                        ></div>
+                                        <span
+                                            class="category-item-category__name-text"
+                                            [ngClass]="{'pointer':subcategory.document}"
+                                            [textContent]="subcategory.name"
+                                            (click)="selectCategory(subcategory)"
+                                        ></span>
+                                    </div>
+                                    <ul
+                                        class="category-item-sub-category"
+                                        *ngIf="subcategory.toggleSubCategory"
+                                    >
+                                        <ng-template
+                                            ngFor
+                                            let-subsubcategory
+                                            [ngForOf]="subcategory.subcategories"
+                                            [ngForTrackBy]="trackById"
+                                        >
+                                            <li
+                                                class="category-item-sub-sub-category-body"
+                                                [attr.id]="subsubcategory.id"
+                                                [attr.category-id]="subcategory.id"
+                                            >
+                                                <div class="category-item-category">
+                                                    <div class="category-item-category__name">
+                                                        <div class="qt-df qt-ai-fs">
+                                                            <div
+                                                                class="icon__category-closed qt-mr-10 pointer"
+                                                                [ngClass]="{'toggle-category':subsubcategory.toggleSubCategory}"
+                                                                (click)="subsubcategory.toggleSubCategory = !subsubcategory.toggleSubCategory"
+                                                                *ngIf="subsubcategory.subcategories.length > 0"
+                                                            ></div>
+                                                            <span
+                                                                class="category-item-category__name-text"
+                                                                [ngClass]="{'pointer':subsubcategory.document}"
+                                                                [textContent]="subsubcategory.name"
+                                                                (click)="selectCategory(subsubcategory)"
+                                                            ></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul
+                                                    class="category-item-sub-sub-sub-category qt-ml-20"
+                                                    *ngIf="subsubcategory.toggleSubCategory"
+                                                >
+                                                    <ng-template
+                                                        ngFor
+                                                        let-subsubsubcategory
+                                                        [ngForOf]="subsubcategory.subcategories"
+                                                        [ngForTrackBy]="trackById"
+                                                    >
+                                                        <li
+                                                            class="category-item-sub-sub-sub-category-body"
+                                                            [attr.id]="subsubsubcategory.id"
+                                                            [attr.category-id]="subsubcategory.id"
+                                                        >
+                                                            <div class="category-item-category">
+                                                                <div class="category-item-category__name">
+                                                                    <span
+                                                                        class="category-item-category__name-text"
+                                                                        [ngClass]="{'pointer':subsubsubcategory.document}"
+                                                                        [textContent]="subsubsubcategory.name"
+                                                                        (click)="selectCategory(subsubsubcategory)"
+                                                                    ></span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ng-template>
+                                                </ul>
+                                            </li>
+                                        </ng-template>
+                                    </ul>
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

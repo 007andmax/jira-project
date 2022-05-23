@@ -5,10 +5,11 @@ declare var canvg: any;
   providedIn: 'root'
 })
 export class ReportsStateService {
-  includePurchaseCost:boolean = true;
+  includePurchaseCost: boolean = true;
   glNumber: EventEmitter<any> = new EventEmitter();
   serviceReport: EventEmitter<any> = new EventEmitter();
   accountsReceivable: EventEmitter<any> = new EventEmitter();
+  onToggleLeftMenu: EventEmitter<any> = new EventEmitter();
   exportCSV: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
@@ -24,7 +25,9 @@ export class ReportsStateService {
   public onChangeAccountsReceivable(data) {
     this.accountsReceivable.emit(data);
   }
-
+  public toggleLeftMenu() {
+    this.onToggleLeftMenu.emit(null);
+  }
   public parseReportContent(report) {
     //  disableOpenPdfBtn();
     var selectedHtml;

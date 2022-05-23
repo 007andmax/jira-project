@@ -32,6 +32,8 @@ import { TechSalesReport } from '../class/tech-sales-report';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { TechTicketReport } from '../class/tech-ticket-report';
 import { Subscription } from 'rxjs';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { PaymentsReport } from '../reports/payments-report/class/payments-report';
 
 
 @Component({
@@ -61,6 +63,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   remoteConnectionReport: RemoteConnectionReport = new RemoteConnectionReport();
   techSalesReport: TechSalesReport = new TechSalesReport();
   techTicketReport: TechTicketReport = new TechTicketReport();
+  paymentsReport: PaymentsReport = new PaymentsReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -85,6 +88,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private companiesStateService: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
 
@@ -124,7 +128,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
 
   }
-
+  getSelectedClientName() {
+    return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
+  }
   public getSoftByCompany(companyId) {
     this.softwareSummaryReport.setPreloaderSoft(true);
     this.remoteConnectionReport.setPreloaderDevices(true);
@@ -181,6 +187,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.techTicketReport.resetDates();
 
   }
+  onSelectCompanySelectionType(data) {
+    this.ticketsReport.setCompanySelectionType(data);
+  }
   public onSelectDetailed(data) {
     this.yearToDate = false;
     if (data === 'Monthly') {
@@ -219,6 +228,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.isDisabledCompany = (data === 'Summary') ? true : false;
     if (data === 'Summary') this.validate.resetCompany();
   }
+  togglePurchaseCost(data) {
+    this.reportsStateService.includePurchaseCost = data;
+  }
   public onSelectTypeProduct(data) {
     this.productSalesReport.setType(data);
     this.isDisabledCompany = (data === 'Summary') ? true : false;
@@ -232,7 +244,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.productSalesReport.setCompanyId(null);
       this.customerSalesReport.setCompanyId(null);
       this.serviceReport.setCompanyId(null);
-      this.ticketsReport.setCompanyId(null);
       this.accountingReport.setCompanyId(null);
       this.detailedCommissionsReport.setCompanyId(null);
       this.commonCommissionsReport.setCompanyId(null);
@@ -240,6 +251,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.hardwareSummaryReport.setCompanyId(null);
       this.deviceIpSummary.setCompanyId(null);
       this.remoteConnectionReport.setCompanyId(null);
+      this.techService.setCompanyId(null);
       this.getDevicesByCompany(null);
       this.softwareSummaryReport.resetSoft();
     } else {
@@ -249,8 +261,8 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.accountsReceivable.setClientCompanyId(selectClient.id);
       this.productSalesReport.setCompanyId(selectClient.id);
       this.customerSalesReport.setCompanyId(selectClient.id);
-      this.ticketsReport.setCompanyId(selectClient.id);
       this.serviceReport.setCompanyId(selectClient.id);
+      this.techService.setCompanyId(selectClient.id);
       this.detailedCommissionsReport.setCompanyId(selectClient.id);
       this.commonCommissionsReport.setCompanyId(selectClient.id);
       this.softwareSummaryReport.setCompanyId(selectClient.id);
@@ -259,7 +271,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.remoteConnectionReport.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
       if (this.report === 'software-summary' || this.report === 'hardware-summary' || this.report === 'device-ip-summary') this.getSoftByCompany(selectClient.id);
-      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
@@ -361,9 +372,21 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
   }
   getReportByTickets() {
-    if (!this.validate.isValidateTickets(this.selectedClient)) return;
+    if (!this.validate.isValidateTickets(this.ticketsReport.startDate, this.ticketsReport.endDate)) return;
     this.onRequest.emit(true);
-    this.reportsService.getReportByTickets(this.ticketsReport.getForRequest()).subscribe(data => this.setDatareport(data));
+    this.reportsService.getReportByTickets(this.ticketsReport.getForRequest()).subscribe(data => {
+      this.ticketsReport.setTickets(data)
+      this.setDatareport(this.ticketsReport.getDate());
+    });
+
+  }
+  getReportPayments() {
+    if (!this.validate.isValidateTickets(this.paymentsReport.startDate, this.paymentsReport.endDate)) return;
+    this.onRequest.emit(true);
+    this.reportsService.getReportByPayments(this.paymentsReport.getForRequest()).subscribe(data => {
+      this.paymentsReport.setDataFromRequest(data);
+      this.setDatareport(this.paymentsReport);
+    });
 
   }
   getReportByCustomers() {
@@ -491,6 +514,9 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
+      this.paymentsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
+      this.paymentsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
+
       this.techService.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.techService.setEndDate(moment(value.end).format('YYYY-MM-DD'));
 
@@ -537,7 +563,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.techSalesReport.resetDates();
       this.techSalesReport.setDefaultDuration();
       this.techSalesReport.setDisabledDuration(false);
-
+      this.ticketsReport.resetDates();
       this.techTicketReport.resetDates();
       this.techTicketReport.setDefaultDuration();
       this.techTicketReport.setDisabledDuration(false);
@@ -551,7 +577,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.detailedCommissionsReport.resetDates();
       this.commonCommissionsReport.resetDates();
       if (this.selectedClient) {
-        this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
       }
     }
@@ -566,7 +591,12 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.productsCompanyReport.setProductId((item) ? item.versionedId.id : null);
 
   }
-
+  back() {
+    this.leftPanelStateService.goToState('new-reports');
+  }
+  toggleLeftMenu() {
+    this.reportsStateService.toggleLeftMenu();
+  }
   public onChangeTehUsers(tehusers) {
 
   }

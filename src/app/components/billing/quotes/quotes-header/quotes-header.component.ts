@@ -9,7 +9,7 @@ import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
 export class QuotesHeaderComponent implements OnInit {
   @ViewChild('filter') filter: QuotesFilterComponent;
   countFilter: number = 0;
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
   constructor(private quoteStateService: QuoteStateService) { }

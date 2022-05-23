@@ -1,0 +1,43 @@
+<div class="app-left-panel__header">
+    <div class="app-left-panel__systems-info">
+        <div
+            class="d-f ai-c"
+            ngbDropdown
+        >
+            <app-dynamic-tooltip
+                [content]="getFullUserName()"
+                [position]="'right'"
+                #userTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="qt-table-modern__circle-avatar pointer"
+                [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
+                [textContent]="getNameForAvatar()"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(usersStateService.getCurrentUser(),'#7C77CB') }"
+                id="dropdownSupperUser"
+                ngbDropdownToggle
+                (mouseenter)="userTooltip.show($event.target)"
+                (mouseleave)="userTooltip.hide()"
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownSupperUser"
+            >
+                <li
+                    ngbDropdownItem
+                    (click)="logOut()"
+                >
+                    Logout
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="app-left-panel__body">
+    <div class="app-left-panel__menu ">
+        <div class="app-left-panel__menu-icon --active">
+            <div class="icon__support-page qt-sz-20"></div>
+        </div>
+    </div>
+</div>

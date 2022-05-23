@@ -1,0 +1,13 @@
+<div
+    class="expire-contract-notification"
+    *ngIf="showNotificationReview"
+>
+    <i class="icon-alert qt-mr-6">!</i>
+    <div class="qt-mr-6">
+        Some contracts are about to expire, please review
+    </div>
+    <div
+        class="qt-aside-modern__header-close icon__close"
+        (click)="showNotificationReview = false"
+    ></div>
+</div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportFooterComponent } from './report-footer.component';
+import { SuperAdminPublicComponent } from './super-admin-public.component';
 
-describe('ReportFooterComponent', () => {
-  let component: ReportFooterComponent;
-  let fixture: ComponentFixture<ReportFooterComponent>;
+describe('SuperAdminPublicComponent', () => {
+  let component: SuperAdminPublicComponent;
+  let fixture: ComponentFixture<SuperAdminPublicComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportFooterComponent ]
+      declarations: [ SuperAdminPublicComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportFooterComponent);
+    fixture = TestBed.createComponent(SuperAdminPublicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

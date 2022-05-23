@@ -28,7 +28,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   title: string = 'My Tickets';
   sub: Subscription = new Subscription();
   count = 0;
-  toggleFilter: boolean = false;
+  toggleFilter: boolean = true;
   countFilter: number = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,

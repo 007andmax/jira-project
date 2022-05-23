@@ -130,7 +130,6 @@ export class TicketsFilter {
                 values: [this.selectedCompany.id]
             });
             payload.groupFieldFilters[0].predicateRule = "AND";
-
         }
         if (this.selectedTechUser) {
             payload.groupFieldFilters.push({
@@ -452,13 +451,6 @@ export class TicketsFilter {
             groupFieldFilters: [
                 {
                     fieldFilterDtos: [
-                        {
-                            path: "ticketSource",
-                            operator: "NOT_EQ",
-                            values: [
-                                "FROM_RECURRING_TICKET"
-                            ]
-                        }
                     ]
                 }
             ],

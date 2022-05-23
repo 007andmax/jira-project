@@ -18,7 +18,7 @@
     border: 1px solid $gray-400;
     background-color: $white;
     text-align: left;
-    color: $gray-800;
+    color: $primary-2;
   }
   .report-caret-icon {
     top: 18px !important;
@@ -30,4 +30,10 @@
     border-radius: 0;
   }
 
+}
+.service-name {
+  input {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
 }

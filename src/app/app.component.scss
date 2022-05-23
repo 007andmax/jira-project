@@ -7,3 +7,28 @@
 .--small-with {
     width: calc(100% - 56px);
 }
+.app-left-panel-super-admin {
+    display: block;
+    height: 100%;
+    width: 56px;
+    z-index: 1050;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #212b36;
+    color: #ffffff;
+    transition: width 300ms;
+}
+.supper-admin-container {
+    display: block !important;
+    padding-top: 0px !important;
+    .content-container {
+        margin-left: 56px;
+    }
+}
+.clear-padding-top {
+    padding-top: 0px !important;
+}
+.clear-margin-left {
+    margin-left: 0px !important;
+}

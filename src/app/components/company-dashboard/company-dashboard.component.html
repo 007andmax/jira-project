@@ -17,13 +17,13 @@
             ></app-company-dash-detail>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
-                *ngIf="company && company.clientType === 'VENDOR' && !appService.checkMobile()"
+                *ngIf="company && (company.clientType === 'VENDOR' || company.clientType === 'SUPPLIER') && !appService.checkMobile()"
             >
                 <company-dash-associate [company]="company"></company-dash-associate>
             </div>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
-                *ngIf="company && company.clientType !== 'VENDOR' && !appService.checkMobile()"
+                *ngIf="company && company.clientType !== 'VENDOR' && company.clientType !== 'SUPPLIER' && !appService.checkMobile()"
             >
                 <app-company-dash-stats
                     [totalTickets]="totalTickets"
@@ -33,7 +33,10 @@
                 <div class="cmp-board-information d-flex">
                     <div class="cmp-board-info-row d-flex">
                         <div class="cmp-board-info-col d-flex">
-                            <app-company-dash-revenue class="cmp-board-revenue cmn-box d-flex"></app-company-dash-revenue>
+                            <app-company-dash-revenue
+                                *ngIf="getPermissions('VIEW_ACCOUNTING')"
+                                class="cmp-board-revenue cmn-box d-flex"
+                            ></app-company-dash-revenue>
                             <app-company-dash-invoice
                                 *ngIf="getPermissions('VIEW_ACCOUNTING')"
                                 [companyName]="companyName"
@@ -137,3 +140,4 @@
         </div>
     </div>
 </div>
+<app-company-edit-aside></app-company-edit-aside>

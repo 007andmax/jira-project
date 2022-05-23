@@ -93,6 +93,9 @@
 .edit-grey-ng2 {
   background: url("/assets/img/icons/edit-grey-ng2.png");
 }
+.edit-grey {
+  background-image: url("/assets/img/icons/edit-grey-ng2.png");
+}
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
 }
@@ -173,6 +176,9 @@
   &__close-mobile {
     background-image: url("/assets/img/icons/close-mobile.svg");
   }
+  &__menu {
+    background-image: url("/assets/img/icons/menu.svg");
+  }
   &__menu-white {
     background-image: url("/assets/img/icons/menu-white.svg");
   }
@@ -199,6 +205,68 @@
     background-color: #919eab;
     -webkit-mask-image: url("/assets/img/icons/remove.svg");
     mask-image: url("/assets/img/icons/remove.svg");
+  }
+  &__support-page {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/support-page.svg");
+    mask-image: url("/assets/img/icons/support-page.svg");
+  }
+  &__category-closed {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/category-closed.svg");
+    mask-image: url("/assets/img/icons/category-closed.svg");
+  }
+  &__add-sub-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+    mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
+  }
+  &__add-article {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
+    mask-image: url("/assets/img/icons/support-page-add-article.svg");
+  }
+  &__preview-edit {
+    background-image: url("/assets/img/icons/preview-edit.svg");
+  }
+  &__help-center {
+    background-image: url("/assets/img/icons/help-center.svg");
+  }
+  &__annoucements-active {
+    background-image: url("/assets/img/icons/annoucements-active.svg");
+  }
+  &__road-map {
+    background-image: url("/assets/img/icons/road-map.svg");
+  }
+  &__draft-content {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/draft.svg");
+    mask-image: url("/assets/img/icons/draft.svg");
+  }
+  &__save-support-tag {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/save-support-tag.svg");
+    mask-image: url("/assets/img/icons/save-support-tag.svg");
+  }
+  &__edit-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
+    mask-image: url("/assets/img/icons/support-page-edit-category.svg");
+  }
+  &__drag {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
+    mask-image: url("/assets/img/icons/support-page-drag.svg");
+  }
+  &__remove-category {
+    background-color: #637382;
+    -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
+    mask-image: url("/assets/img/icons/support-page-remove-category.svg");
+  }
+  &__category-more {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/category-more.svg");
+    mask-image: url("/assets/img/icons/category-more.svg");
   }
   &__remove-blue {
     background-color: #16a4fa;
@@ -240,6 +308,15 @@
     &.active {
       background-image: url("/assets/img/icons/quick-support.svg");
     }
+  }
+  &__quicktech-logo {
+    background-image: url("/assets/img/icons/quicktech-logo.svg");
+  }
+  &__quicktech_partical_top {
+    background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
+  }
+  &__quicktech_partical_bottom {
+    background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
   &__attach-blue {
     background-image: url("/assets/img/attachment-blue.svg");
@@ -429,6 +506,15 @@
   }
   &__clock-timer {
     background-image: url("/assets/img/icons/timer-counter.svg");
+  }
+  &__add {
+    background-image: url("/assets/img/device/add.svg");
+  }
+  &__add-product {
+    background-image: url("/assets/img/icons/add-product.svg");
+  }
+  &__add-grey {
+    background-image: url("/assets/img/icons/add-grey.svg");
   }
   &__add-task {
     background-image: url("/assets/img/icons/add-task.svg");

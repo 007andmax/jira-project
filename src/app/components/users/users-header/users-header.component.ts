@@ -47,7 +47,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   userFilter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
   countFilter: number = 0;
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   currentUser: CurrentUser = new CurrentUser();
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;

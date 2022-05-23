@@ -6,62 +6,52 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [orientation]="'LANDSCAPE'"
-    [report]="'byProducts'"
-    [fileName]="'products_report'"
-    [selectedClient]="selectedClient"
-></app-report-additional-actions>
 <div
     class="loading"
     *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket"
+    class="qt-report__body"
     id="product-list-ticket-data"
 >
-
-
     <div
-        class="product-list-ticket product-list-ticket-pdf"
-        style="height: 100%;  width: 1135px;"
+        class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div class="report-header">
-            <h1>Product Sales Report</h1>
-            <div class="company-info">
-                <h3 [textContent]="(productSalesReport.clientCompanyName) ? productSalesReport.clientCompanyName : 'All companies'"></h3>
-                <p>
-                    <span [textContent]="perseStartDate()"></span>
-                    -
-                    <span [textContent]="perseEndDate()"></span>
-                </p>
+        <div class="qt-report__body-header">
+            <div
+                class="client-company-name"
+                *ngIf="productSalesReport.lines.length > 0"
+            >
+                <div
+                    class="body-m-sb qt-color-dark"
+                    *ngIf="productSalesReport.type ==='DETAILED' "
+                >
+                    {{ productSalesReport.clientCompanyName }}
+                </div>
+            </div>
+            <div
+                class="body-m-sb qt-color-dark"
+                [textContent]="(productSalesReport.clientCompanyName) ? productSalesReport.clientCompanyName : 'All companies'"
+            ></div>
+            <h6 class="qt-fw-600 qt-color-dark">Product Sales Report</h6>
+            <div
+                class="body-m qt-color-dark-light"
+                *ngIf="productSalesReport.init"
+            >
+                <span [textContent]="perseStartDate()"></span>
+                -
+                <span [textContent]="perseEndDate()"></span>
+            </div>
+            <div
+                class="tech-company-name"
+                *ngIf="productSalesReport.init"
+            >
+                <div class="body-m-sb qt-color-dark">
+                    {{ productSalesReport.techCompanyName }}
+                </div>
             </div>
         </div>
-        <div
-            class="header-product-list-ticket"
-            *ngIf="productSalesReport.lines.length > 0"
-        >
-            <!-- HEADER -->
-
-
-            <h5 class="qt-fw-600 qt-mb-6 qt-mt-20">
-                {{ productSalesReport.techCompanyName }}
-            </h5>
-            <p *ngIf="productSalesReport.type ==='DETAILED' ">
-                Detailed sales for
-                <span>
-                    {{ productSalesReport.clientCompanyName }}
-                </span>
-            </p>
-            <p>
-                <span [textContent]="perseStartDate()"></span>
-                to
-                <span [textContent]="perseEndDate()"></span>
-            </p>
-        </div>
-
-
         <div>
             <app-overview-report
                 [classes]="classes"
@@ -69,9 +59,6 @@
                 [headers]="headers"
                 [list]="list"
             ></app-overview-report>
-
-
         </div>
-        <app-report-footer [orientation]="'LANDSCAPE'"></app-report-footer>
     </div>
 </div>

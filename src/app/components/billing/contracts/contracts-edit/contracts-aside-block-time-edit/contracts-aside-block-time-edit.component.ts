@@ -91,7 +91,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   }
   private setMinCustomDate() {
     let today = new Date(this.contractsBlockTime.startDate);
-    this.minCustomDate = today.getTime();
+    // this.minCustomDate = today.getTime();
     if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
     this.cd.detectChanges();
 
@@ -125,7 +125,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   setToggleCustomBillingDate(data) {
     this.contractsBlockTime.withCustomBillingDate = data;
     if (!data) {
-      this.contractsBlockTime.resetCustomBillingDate();
+      //   this.contractsBlockTime.resetCustomBillingDate();
     } else {
       this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
       this.resetCustomDate();

@@ -1,0 +1,302 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.support-page {
+    margin: 0 auto;
+    width: 100%;
+    min-width: 860px;
+    &__hero {
+        position: relative;
+        padding: 96px 0;
+        background-color: #052e6b;
+        color: $white;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 64px;
+
+        .icon__quicktech_partical {
+            &_bottom,
+            &_top {
+                position: absolute;
+                width: 430px;
+                height: 198px;
+            }
+
+            &_bottom {
+                top: 0;
+                right: 48px;
+            }
+
+            &_top {
+                bottom: 0;
+                left: 48px
+            }
+        }
+
+        &-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 56px;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        &-text {
+            @extend %h5;
+            max-width: 456px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    &__body {
+        max-width: 840px;
+        padding: 0 12px;
+        margin: 0 auto;
+
+        &-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -24px;
+            margin-right: -24px;
+            margin-top: -20px;
+        }
+
+        &-category {
+            flex: 0 0 calc(33.33% - 24px);
+            position: relative;
+            margin: 20px 12px;
+
+            ul {
+                padding: 16px 0 0 16px;
+                list-style: none;
+
+                li {
+                    position: relative;
+                    @extend %body-r;
+                    color: $primary-2;
+
+                    &:not(:last-child) {
+                        margin: 0 0 16px 0;
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        width: 3px;
+                        height: 3px;
+                        border-radius: 100%;
+                        background-color: $primary-1;
+                        left: -14px;
+                        top: 8px;
+                    }
+                }
+            }
+
+            &-header {
+                position: relative;
+                @extend %h4;
+                color: $primary-2;
+                padding-bottom: 16px;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    border-bottom: dashed 1px $gray-400;
+                }
+            }
+        }
+    }
+}
+
+.topic-detail-page {
+    &__body {
+        display: flex;
+        align-items: flex-start;
+        &-left-panel {
+            height: 100%;
+            overflow: auto;
+            padding: 8px 0;
+            background-color: $gray-100;
+            width: 264px;
+            position: fixed;
+            left: 0;
+            top: 64px;
+            &::-webkit-scrollbar {
+              width: 5px;
+            }
+            &::after {
+              content: "";
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 1px;
+              height: 100%;
+              background-color: $gray-300;
+            }
+            .container-categories {
+              position: relative;
+              z-index: 1;
+            }
+        }
+    }
+}
+
+.category-item-category {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 0 8px 0;
+
+    &__name {
+        color: #212b36;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        flex: 1;
+        padding: 10px 24px 10px 26px;
+        border-right: 2px solid transparent;
+        &.--active {
+            color: $primary-1;
+            border-color: $primary-1;
+        }
+
+        .icon__down-arrow {
+            margin-top: 4px;
+            position: absolute;
+            left: 0;
+            transform: rotate(-90deg) translate(0px, 2px);
+
+            &.toggle-category {
+                transform: none;
+            }
+        }
+
+        span {
+            font-family: "Inter", sans-serif;
+            @extend %body-r-m;
+            position: relative;
+            flex: 1;
+        }
+    }
+
+    &-body {
+      padding-left: 16px;
+      position: relative;
+    }
+}
+
+.category-item-sub-sub-category {
+    margin: 0 0 0 20px;
+}
+
+.category-item-sub-category-body {
+    padding-left: 16px;
+}
+
+.icon__category-closed {
+  height: 11.67px;
+  width: 7.4px;
+  flex-shrink: 0;
+  &.toggle-category {
+    transform: rotate(90deg) translate(0px, -2px);
+  }
+  + .category-item-category__name-text {
+    padding-left: 0;
+    &::before {
+      display: none;
+    }
+  }
+}
+.topic-detail-page__body-content {
+  margin-top: 64px;
+  margin-left: 264px;
+  max-width: 792px;
+  padding: 24px;
+}
+.profile-cmp-board {
+    .qwe {
+        border-radius: 50%;
+        margin: 0;
+        border: none;
+        float: unset;
+        object-fit: cover;
+        height: 56px;
+        width: 56px;
+    }
+}
+#content {
+    margin: 0px 0px 20px 0px;
+}
+.profile-cmp-board {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px dotted $gray-400;
+    padding-bottom: 24px;
+}
+
+.tags-area {
+    padding: 16px 0;
+    align-items: flex-start;
+    border-bottom: none;
+
+    @media (max-width: 767px) {
+        padding: 16px;
+    }
+
+    .small-title {
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 11px;
+        text-transform: uppercase;
+
+        a {
+            text-transform: capitalize;
+        }
+    }
+
+    .tags-tab {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 16px -4px 0 - 4px;
+
+        .tag {
+            margin: 0 4px 8px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: solid 1px $background;
+            background-color: #f8f9fa;
+            @extend %сaption-l-m;
+            font-stretch: normal;
+            font-style: normal;
+            color: #212b36;
+
+            .close {
+                position: absolute;
+                right: 5px;
+                width: 12px;
+            }
+
+            .close-btn {
+                margin-left: 5px;
+
+                img {
+                    width: 8px;
+                    height: 8px;
+                    vertical-align: baseline;
+                }
+            }
+        }
+    }
+}

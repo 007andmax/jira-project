@@ -18,7 +18,7 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
-  toggleFilter: boolean = false;
+  toggleFilter: boolean = true;
   toggleSearch: boolean = false;
   countFilter: number = 0;
   @ViewChild('filters') filters: PasswoordManagerFiltersComponent;

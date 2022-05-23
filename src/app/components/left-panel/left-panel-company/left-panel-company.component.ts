@@ -45,6 +45,9 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, section]);
   }
+  getLinkSection(section) {
+    return `company/${this.companyId}/${section}`;
+  }
 
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)

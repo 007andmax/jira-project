@@ -29,7 +29,7 @@ export class ReportsComponent implements OnInit {
     if (type === 'SALES') return ['Product sales report', 'Customer sales report'];
     if (type === 'TAXES') return ['Tax report'];
     if (type === 'COMMISSIONS') return ['Common report', 'Detailed report'];
-    if (type === 'FINANCIAL') return ['Accounts receivable report', 'Accounting report'];
+    if (type === 'FINANCIAL') return ['Accounts receivable report', 'Accounting report', 'Payments report'];
     if (type === 'REMOTE_ACCESS') return ['Remote connection report'];
     if (type === 'DEVICES') return ['Software Summary report', 'Hardware Summary reports', 'Device IP Summary report'];
     if (type === 'PERFORMANCE') return ['Tech sales report', 'Tech ticket report', 'Tech service report'];
@@ -40,7 +40,7 @@ export class ReportsComponent implements OnInit {
     if (type === 'SALES') return ['byProducts', 'byCustomers'];
     if (type === 'TAXES') return ['byTaxes'];
     if (type === 'COMMISSIONS') return ['common-commissions', 'detailed-commissions'];
-    if (type === 'FINANCIAL') return ['accounts-receivable', 'accounting-report'];
+    if (type === 'FINANCIAL') return ['accounts-receivable', 'accounting-report', 'payments-report'];
     if (type === 'REMOTE_ACCESS') return ['remote-access'];
     if (type === 'DEVICES') return ['software-summary', 'hardware-summary', 'device-ip-summary'];
     if (type === 'PERFORMANCE') return ['tech-sales', 'tech-ticket', 'tech-service'];

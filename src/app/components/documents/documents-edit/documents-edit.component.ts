@@ -11,6 +11,7 @@ import { DocumentsAddComponent } from '../documents-add/documents-add.component'
 export class DocumentsEditComponent extends DocumentsAddComponent {
   showPreloader: boolean = true;
   content: string;
+  categoryId: string;
   @Input() documentEdit: Document;
   attachments = [];
   sub: Subscription = new Subscription();
@@ -42,6 +43,7 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
       this.documentEdit = new Document(data, false);
       this.content = JSON.parse(JSON.stringify(data.content));
       this.showPreloader = false;
+      this.categoryId = JSON.parse(JSON.stringify(data.categoryId));
 
     })
   }

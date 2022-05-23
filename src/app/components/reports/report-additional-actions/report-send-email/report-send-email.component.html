@@ -1,54 +1,73 @@
-<div class="new-companies-content__modal send-modal-center">
-    <div class="new-companies-content__modal--header">
-        <h3>Write Draft for Companies</h3>
-        <button
-            class="close-modal"
-            (click)="close()"
-        ></button>
-    </div>
-    <div class="new-companies-content__modal--content">
-        <draft-email-user-recipients
-            [selectedClient]="selectedClient"
-            [accountType]="accountType"
-            [usersSelected]="usersSelected"
-            (onCompanyEmails)="onChangeCompanyEmails($event)"
-        ></draft-email-user-recipients>
-        <div class="col-md-12 tab-btns">
-            <div
-                [ngClass]="{active: tab == 'plain'}"
-                (click)="tab = 'plain'"
-            >
-                Plain Text
-            </div>
-        </div>
+<div
+    *ngIf="opened"
+    class="qt-aside-modern draft-email-aside send-email-report"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Write Email</div>
         <div
-            class="col-md-12 editor-container"
-            style="margin-top: 0;"
-        >
-            <!-- EDITOR -->
-            <div style="position:relative;">
-                <angular-editor
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content new-companies-content__modal--content">
+        <div class="draft-email-sidebar__select-users-container">
+            <draft-email-user-recipients
+                [usersSelected]="usersSelected"
+                [selectedClient]="selectedClient"
+                [accountType]="accountType"
+                (onCompanyEmails)="onChangeCompanyEmails($event)"
+            ></draft-email-user-recipients>
+        </div>
+        <div class="draft-email-container">
+            <div class="qt-pt-24 qt-w100 draft-email-sidebar__editor-tab">
+                <div
+                    class="draft-email-sidebar__editor-tab-item"
+                    [ngClass]="{active: tab == 'plain'}"
+                    (click)="tab = 'plain'"
+                >
+                    Plain Text
+                </div>
+            </div>
+            <div class="qt-w100 editor-container qt-mt-0">
+                <div
+                    id="test-drag"
+                    style="position:relative;"
+                    [ngStyle]="{'height':((tab == 'plain') ? '100%' : 'auto')}"
+                    appDnd
+                    (fileDropped)="onFileDropped($event)"
                     *ngIf="tab == 'plain'"
-                    [(ngModel)]="messageContent"
-                    [config]="editorConfig"
-                ></angular-editor>
+                >
+                    <div class="file-background">
+                        <div class="file-background-mask"></div>
+                        <div class="file-background-footer">
+                            <p>Drop to Attach file</p>
+                        </div>
+                    </div>
+                    <angular-editor
+                        [(ngModel)]="messageContent"
+                        [config]="editorConfig"
+                    ></angular-editor>
+                </div>
             </div>
         </div>
-        <div class="col-md-12 new-companies-content__modal--content-footer">
-            <div class="d-f">
-                <button
-                    class="btn-new btn-primary"
-                    (click)="onSend()"
-                >
-                    Send Email
-                </button>
-                <button
-                    class="btn-new disabled"
-                    (click)="close()"
-                >
-                    Cancel
-                </button>
-            </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onSend()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Send Email</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
         </div>
     </div>
 </div>

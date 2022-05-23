@@ -25,6 +25,7 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
   @Input() attachments = [];
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
+  @Input() categoryId: string;
   constructor(private documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
@@ -127,8 +128,14 @@ export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
       }
       this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
 
-      this.goToDocumentsList();
+      if (!this.categoryId || this.companiesStateService.getCompanyRoutingId()) this.goToDocumentsList();
+      if (this.categoryId && !this.companiesStateService.getCompanyRoutingId()) this.goToDocumentCategory();
     })
+  }
+  goToDocumentCategory() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/category/`, this.categoryId]);
+
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

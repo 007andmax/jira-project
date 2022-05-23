@@ -371,7 +371,7 @@
                             >
                                 <button
                                     class="selected-item"
-                                    [attr.disabled]="!work.checked ? 'disabled' : null"
+                                    [disabled]="!work.checked"
                                     [id]=" 'from-'+work.dayOfWeek"
                                     ngbDropdownToggle
                                 >
@@ -405,7 +405,7 @@
                             >
                                 <button
                                     class="selected-item"
-                                    [attr.disabled]="!work.checked ? 'disabled' : null"
+                                    [disabled]="!work.checked"
                                     [id]="'to-'+work.dayOfWeek"
                                     ngbDropdownToggle
                                 >
@@ -515,4 +515,3 @@
         </div>
     </div>
 </ng-template>
-<app-company-edit-aside></app-company-edit-aside>

@@ -22,63 +22,126 @@
     </div>
 </div>
 <ul class="app-left-panel__menu-expand">
-    <li
-        [ngClass]="{'--active':activePage === 'company-dashboard'}"
-        (click)="goToCompanySection('dashboard')"
+    <a
+        href
+        [link]="getLinkSection('dashboard')"
+        target="_blank"
+        appRightClickBlank
     >
-        Dashboard
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'company-tickets'}"
-        (click)="goToCompanySection('tickets')"
+        <li
+            [ngClass]="{'--active':activePage === 'company-dashboard'}"
+            (click)="goToCompanySection('dashboard')"
+        >
+            Dashboard
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('tickets')"
+        target="_blank"
+        appRightClickBlank
     >
-        Tickets
-    </li>
-    <li
-        *ngIf="getPermissions('VIEW_USERS')"
-        [ngClass]="{'--active':activePage === 'company-user'}"
-        (click)="goToCompanySection('user')"
+        <li
+            [ngClass]="{'--active':activePage === 'company-tickets'}"
+            (click)="goToCompanySection('tickets')"
+        >
+            Tickets
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('user')"
+        target="_blank"
+        appRightClickBlank
     >
-        Users
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'company-devices'}"
-        (click)="goToCompanySection('devices')"
+        <li
+            *ngIf="getPermissions('VIEW_USERS')"
+            [ngClass]="{'--active':activePage === 'company-user'}"
+            (click)="goToCompanySection('user')"
+        >
+            Users
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('devices')"
+        target="_blank"
+        appRightClickBlank
     >
-        <div>Devices</div>
-        <!-- <div class="qt-sz-16 icon__create-folder"></div> -->
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'company-network-scan'}"
-        (click)="goToCompanySection('network-scan')"
+        <li
+            [ngClass]="{'--active':activePage === 'company-devices'}"
+            (click)="goToCompanySection('devices')"
+        >
+            <div>Devices</div>
+            <!-- <div class="qt-sz-16 icon__create-folder"></div> -->
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('network-scan')"
+        target="_blank"
+        appRightClickBlank
     >
-        Network Scan
-    </li>
-    <li
-        *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
-        [ngClass]="{'--active':activePage === 'company-password-manager'}"
-        (click)="goToCompanySection('password-manager')"
+        <li
+            [ngClass]="{'--active':activePage === 'company-network-scan'}"
+            (click)="goToCompanySection('network-scan')"
+        >
+            Network Scan
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('password-manager')"
+        target="_blank"
+        appRightClickBlank
     >
-        Password Manager
-    </li>
-    <li
-        *ngIf="getPermissions('VIEW_SALES_REPORT')"
-        [ngClass]="{'--active':activePage === 'company-products'}"
-        (click)="goToCompanySection('products')"
+        <li
+            *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
+            [ngClass]="{'--active':activePage === 'company-password-manager'}"
+            (click)="goToCompanySection('password-manager')"
+        >
+            Password Manager
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('products')"
+        target="_blank"
+        appRightClickBlank
     >
-        Products
-    </li>
-    <li
-        *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
-        [ngClass]="{'--active':activePage === 'company-contracts'}"
-        (click)="goToCompanySection('contracts')"
+        <li
+            *ngIf="getPermissions('VIEW_SALES_REPORT')"
+            [ngClass]="{'--active':activePage === 'company-products'}"
+            (click)="goToCompanySection('products')"
+        >
+            Products
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('contracts')"
+        target="_blank"
+        appRightClickBlank
     >
-        Contracts
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'company-documents'}"
-        (click)="goToCompanySection('documents')"
+        <li
+            *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
+            [ngClass]="{'--active':activePage === 'company-contracts'}"
+            (click)="goToCompanySection('contracts')"
+        >
+            Contracts
+        </li>
+    </a>
+    <a
+        href
+        [link]="getLinkSection('documents')"
+        target="_blank"
+        appRightClickBlank
     >
-        Documents
-    </li>
+        <li
+            [ngClass]="{'--active':activePage === 'company-documents'}"
+            (click)="goToCompanySection('documents')"
+        >
+            Documents
+        </li>
+    </a>
 </ul>

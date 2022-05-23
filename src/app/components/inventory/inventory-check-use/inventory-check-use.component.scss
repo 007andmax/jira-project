@@ -1,0 +1,114 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/fonts";
+
+.modal-body {
+    padding: 0;
+    p {
+      @extend %body-r;
+    }
+}
+.no-exist-agreements {
+  &__info {
+    @extend %body-r;
+    color: $gray-700;
+  }
+}
+.contract-container {
+    border-radius: 8px;
+    padding: 16px;
+    background-color: $gray-200;
+    max-height: 384px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+  h3 {
+        @extend %body-r-m;
+        color: $primary-2;
+    }
+    span {
+        @extend %сaption-l;
+        color: $gray-600;
+    }
+    .contract-container-agreements {
+        overflow: auto;
+        max-height: 330px;
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+        .contract-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 11px 12px;
+            background-color: $white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            border: solid 1px $gray-400;
+            margin-bottom: 8px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            .contract-item-info {
+                line-height: 1;
+            }
+            h3 {
+                @extend %body-m-m;
+                color: $primary-2;
+            }
+            span {
+                @extend %сaption-l;
+                color: $gray-600;
+                flex-shrink: 0;
+            }
+            .qt-table-modern__circle-avatar {
+                    width: 40px;
+                    height: 40px;
+                    min-width: 40px;
+                    min-height: 40px;
+                    border-radius: 50%;
+                    background-position: center !important;
+                    background-size: cover !important;
+                    margin-right: 8px;
+                    color: white;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    font-size: 13px;
+                    font-weight: 700;
+            }
+            .view-contract {
+                font-size: 12px;
+                color: #16a4fa;
+                margin: 0 0 0 auto;
+                font-weight: 600;
+            }
+        }
+    }
+}
+.preloader-container {
+    padding: 32px;
+    position: relative;
+}
+.archive-modal__body {
+    margin-bottom: 0 !important;
+}
+.info-product {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f4f6f8;
+    margin: 16px 0 0 0;
+
+    h3 {
+        @extend %body-r-m;
+        color: $primary-2;
+    }
+
+    span {
+        @extend %сaption-l;
+        color: $gray-600;
+    }
+}
+.archive-modal__footer {
+    margin: 24px 0 0 0;
+}

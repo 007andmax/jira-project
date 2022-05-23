@@ -52,7 +52,8 @@ export class ContractsOther extends ContractsUserDevice {
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             customBillingDate: this.customBillingDate,
-            type: "SERVICE_CONTRACT"
+            type: "SERVICE_CONTRACT",
+            withCustomBillingDate: this.withCustomBillingDate
         }
     }
 }
