@@ -16,6 +16,7 @@ import { ExcelService } from '../device/_services/download_csv.service';
 import { RemoteControlService } from '../device/_services/remoteControl.service';
 import { ReportSendEmailComponent } from '../reports/report-additional-actions/report-send-email/report-send-email.component';
 import { DeviceFilter } from './class/devices';
+import { DropDownComponent } from '../shared/drop-down/drop-down.component';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class DevicesComponent implements OnInit {
   @ViewChild("templateConnection") templateconnection;
   @ViewChild("screenConnect") screenConnect;
   @ViewChild("screenConnectAcces") screenConnectAcces;
+  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;  
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -78,7 +80,17 @@ export class DevicesComponent implements OnInit {
   searches: any[];
   isOfflineDeviceSelected: boolean = false;
   selectedAssetList: any[]=[];  
-
+  opened: boolean = false;
+  manufactureId: any;
+  selectManufactureNames : any;
+  manufactureList: any[]=[];
+  selectModelList: any[]=[];
+  selectModelName : any;
+  modelId:any;
+  isDisabled:boolean=true;  
+  asset: any = undefined;
+  installDate: Date = new Date();
+  warrantyDate: Date = new Date();
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -112,6 +124,8 @@ export class DevicesComponent implements OnInit {
     }
     this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.load(data);
+      this.getManufacturers(data.id);
+      this.getModels(data.id);
     });
 
     if (!this.searchSubscription) {
@@ -887,6 +901,82 @@ export class DevicesComponent implements OnInit {
       this.assetList.forEach((element)=>{
         this.agentService.UninstallAgent(element.ID);
       })
+    }
+  }
+
+  getAddDevice() {    
+    this.opened = true;
+  }
+
+  deviceclosed() {    
+    this.opened = false;
+  }
+
+  getManufacturers(TechCompanyGuid: any) {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getManufacturers(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService.getManufactures(TechCompanyGuid)
+      .subscribe((resp) => {
+        this.manufactureList = resp;
+        if(this.asset){
+          this.selectManufacture(this.asset.ManufacturerId);
+        }
+      });
+    }
+
+    selectManufacture(manufactureId){
+        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == manufactureId);
+    }
+
+    onSelectManufactureName(SelectManufacturer) {    
+      if (SelectManufacturer) {
+        this.manufactureId = SelectManufacturer.ID;
+        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == this.manufactureId);
+        this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
+          this.selectModelList = resp;  
+          this.isDisabled = false;        
+        })      
+      }
+      else{
+        this.getModels(this.techCompnayGuid);
+        this.selectManufactureNames = "";
+        this.isDisabled = true;
+        this.dropdownModel.clearWithOutChanges();
+      }
+    }
+
+    getModels(TechCompanyGuid: any) {
+      if(this.agentService.AccessToken == '') {
+        setTimeout(() => {
+          this.getModels(TechCompanyGuid);
+        }, 300);
+        return;
+      }
+      this.agentService
+        .getModels(TechCompanyGuid)
+        .subscribe((resp) => {
+          this.selectModelList = resp;        
+          if(this.asset){
+            this.selectModel(this.asset.ModelID);
+          }
+        });
+    }
+  
+    selectModel(modelId){
+      this.selectModelName = this.selectModelList.find(x=>x.ID == modelId);
+   }
+  
+   onSelectModel(SelectModel) {
+    if (SelectModel) {
+      this.modelId = SelectModel.ID;
+      this.selectModelName = this.selectModelList.find(x=>x.ID == this.modelId);    
+    }
+    else{
+      this.selectModelName = "";    
     }
   }
 

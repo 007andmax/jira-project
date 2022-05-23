@@ -46,7 +46,13 @@
         <a href="javascript:;" (click)="showScreenConnect(screenConnect)">
           <span class="screen-Connect"></span>
         </a>
-    </button>    
+    </button>  
+    <span><button
+        class="qt-btn --outline-blue"
+        (click)="getAddDevice()"
+    >
+        Add Device
+    </button></span>  
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
@@ -338,7 +344,221 @@
             </div>
             <div class="loading" *ngIf="showPreloader"></div>
         </div>
-    </div>    
+    </div>  
+    
+    <div [hidden]="!opened" class="qt-aside-modern">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-info d-f ai-c">
+                <div class="qt-aside__title">Create New Device</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal icon__close"  
+                    (click)="deviceclosed()"              
+                ></div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content">
+            <div class="qt-input-block qt-input-line">
+                <label
+                    for="add-device-name"                
+                >
+                    Device Name
+                </label>
+                <input
+                    id="add-device-name"
+                    class="qt-input-block__input"
+                    type="text"
+                    [(ngModel)]="deviceName"
+                    placeholder="Write Device Name"
+                >
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label                
+                    for="devicetype"
+                >
+                    Device Type
+                </label>
+                <app-select-search       
+        id="devicetype"
+        #deviceTp
+        [placeholder]="'Select device type'"                
+        [class]="['qt-dropdown']"
+        [field]="'Name'"        
+        [list]="hardwareTypes"
+        (onSelectedItem)="getDeviceName($event.ID)"
+    ></app-select-search>                
+            </div>
+            <div class="qt-input-line">
+                <div class="qt-input-block">
+                  <label
+                  for="add-asset-tag"              
+              >
+                  Asset Tag
+              </label>
+              <input
+              id="add-asset-tag"
+              class="qt-input-block__input"
+              type="text"
+              placeholder="Enter asset tag"
+              [(ngModel)]="assetTagName"
+          >
+                </div>               
+            </div>
+    
+            <div class="qt-input-line">
+                <div class="qt-input-block">
+                    <label
+                  for="add-Install-Date"              
+              >Install Date</label>                
+                    <app-date-picker
+                    #installed
+                    [editDate]="installDate"
+                    [placement]="'top'"
+                    [editMode]="true"
+                    [useMinDate]="false"
+                    (onChange)="getDateInstalled($event)"
+                ></app-date-picker>
+                </div>
+                <div class="qt-input-block">
+                    <label
+                    for="add-Install-Date"              
+                >Warranty Date</label>                        
+                    <app-date-picker
+                    #warrenty
+                    [editDate]="warrantyDate"
+                    [placement]="'top'"
+                    [editMode]="true"
+                    [useMinDate]="false"                
+                    (onChange)="getDateWarranty($event)"
+                ></app-date-picker>
+                </div>
+            </div>            
+          <div class="qt-input-line">
+            <div class="qt-input-block">
+                <label
+              for="add-manufacture"              
+          >Manufacture</label>     
+          <app-select-search       
+          id="manufacture"
+          #dropdownManufacturer
+          [placeholder]="'Select manufacture'"                
+          [class]="['qt-dropdown']"
+          [field]="'Name'"        
+          [list]="manufactureList"
+          (onSelectedItem)="onSelectManufactureName($event)"
+      ></app-select-search>                           
+            </div>
+            <div class="qt-input-block">
+                <label
+                for="add-model-no"              
+            >Model No.</label>                        
+            <app-select-search       
+            id="model"
+            #dropdownModel
+            [placeholder]="'Select model'"                
+            [class]="['qt-dropdown']"
+            [field]="'Name'"                    
+            [list]="selectModelList"   
+            [isDisabled]="isDisabled"         
+            (onSelectedItem)="onSelectModel($event)"
+        ></app-select-search>                           
+            </div>
+        </div>  
+          <div
+          class="grey-dropdown"
+          ngbDropdown
+          #products="ngbDropdown"
+      >
+      <label
+      for="dropdownServices" 
+      class="tagfontweight" 
+    >
+      Tag
+    </label>
+    <div class="Rectangle_device-popup">
+          <mat-form-field appearance="none">
+              <mat-chip-list #chipList>
+                  <mat-chip
+                      *ngFor="let tag of selectedTagdevicelist; let i = index"
+                      (removed)="onRemoveTag(i)"
+                  >
+                      {{ tag.Name }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input autofocus
+                      id="dropdownServices"
+                      #searchInput
+                      [(ngModel)]="tagFilterValue"
+                      ngbDropdownToggle
+                      class="pointer"
+                      placeholder="Enter tag"
+                      [matChipInputFor]="chipList"
+                      (blur)="addTag($event.target.value)"
+                      (keyup.enter)="addTag($event.target.value)"
+                      (keyup)="onSearchTag($event.target.value)"
+                  >
+              </mat-chip-list>
+          </mat-form-field>
+        </div>
+          <div
+              class="dropdown-menu"
+              ngbDropdownMenu
+              aria-labelledby="dropdownServices"
+          >
+              <ng-template
+                  ngFor
+                  let-tag
+                  [ngForOf]="filteredTag"
+              >
+                  <button
+                      ngbDropdownItem
+                      class="dropdown-item"
+                      (click)="onSelectTag(tag)"
+                      [textContent]="tag.Name"
+                  ></button>
+              </ng-template>
+          </div>
+    </div>
+        <div class="qt-input-block qt-input-line">
+          <label
+              for="add-note"          
+          >
+              Note
+          </label>
+         <textarea
+          id="add-note"
+         class="terms-n-conditions__textarea qt-textarea"
+         placeholder="Write note for device"
+         maxlength="300"
+         [(ngModel)]="note"
+         cols="40"
+         rows="2">
+         </textarea>
+         <span class="Max-300-Words-limit Caption-L">
+          Max 300 Words limit
+        </span>
+      </div>
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df">
+                <button
+                    class="qt-button qt-mr-12"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="saveDevice()"
+                >
+                    <span *ngIf="!addBtn.isBlock()">Save Device</span>
+                </button>
+                <button
+                    class="qt-button --gray"
+                    (click)="deviceclosed()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <ng-template #templatePowersell>
@@ -466,7 +686,7 @@
 
 <ng-template #screenConnect let-modal>
   <div
-    class="qt-aside-modern device-add-aside"
+    class="qt-aside-modern device-add-aside screenConnectresolution"
 >
     <div class="qt-aside-modern__header">
         <div class="d-f ai-c">

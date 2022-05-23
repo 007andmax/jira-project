@@ -838,20 +838,16 @@
                 for="devicetype"
             >
                 Device Type
-            </label>
-            <app-drop-down
-            id="devicetype"
-            #deviceTp
-            [class]="['light-dropdown', 'qt-select-input-40']"
-            [placeholder]="'Select device type'"
-            [list]="hardwareTypes"
-            [field]="'Name'"
-            [search]="true"
-            [change]="true"
-            [add]="true"
-            [isBlockClear]="true"
-            (onSelectedItem)="getDeviceName($event.ID)"
-        ></app-drop-down>
+            </label>            
+        <app-select-search       
+        id="devicetype"
+        #deviceTp
+        [placeholder]="'Select device type'"                
+        [class]="['qt-dropdown']"
+        [field]="'Name'"              
+        [list]="hardwareTypes"
+        (onSelectedItem)="getDeviceName($event.ID)"
+    ></app-select-search>
         </div>
         <div class="qt-input-line">
             <div class="qt-input-block">
@@ -867,33 +863,20 @@
           placeholder="Enter asset tag"
           [(ngModel)]="assetTagName"
       >
-            </div>
-            <div class="qt-input-block">
-              <label
-              for="add-model-no"              
-          >
-              Model No.
-          </label>
-          <input
-          id="add-model-no"
-          class="qt-input-block__input"
-          type="text"
-          placeholder="Enter model no."
-          [(ngModel)]="modelNo"
-      >
-            </div>
+            </div>            
         </div>
 
         <div class="qt-input-line">
             <div class="qt-input-block">
                 <label
               for="add-Install-Date"              
-          >Install Date</label>                
+          >Install Date</label>                     
                 <app-date-picker
-                #installed
+                #installed    
+                [editDate]="installDate"            
                 [placement]="'top'"
                 [editMode]="true"
-                [useMinDate]="false"
+                [useMinDate]="false"                
                 (onChange)="getDateInstalled($event)"
             ></app-date-picker>
             </div>
@@ -903,6 +886,7 @@
             >Warranty Date</label>                        
                 <app-date-picker
                 #warrenty
+                [editDate]="warrantyDate"
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"                
@@ -910,36 +894,53 @@
             ></app-date-picker>
             </div>
         </div>
-        <div class="qt-input-block qt-input-line">
-          <label
+        <div class="qt-input-line">
+            <div class="qt-input-block">
+                <label
               for="add-manufacture"              
-          >
-              Manufacture
-          </label>
-          <input
-              id="add-manufacture"
-              class="qt-input-block__input"
-              type="text"
-              [(ngModel)]="manufacture"
-              placeholder="Enter Manufacture"
-          >
-      </div>
+          >Manufacture</label>     
+          <app-select-search       
+          id="manufacture"
+          #dropdownManufacturer          
+          [placeholder]="'Select manufacture'"                
+          [class]="['qt-dropdown']"
+          [field]="'Name'"        
+          [list]="manufactureList"
+          (onSelectedItem)="onSelectManufactureName($event)"
+      ></app-select-search>                           
+            </div>
+            <div class="qt-input-block">
+                <label
+                for="add-model-no"              
+            >Model No.</label>                        
+            <app-select-search       
+            id="model"
+            #dropdownModel
+            [placeholder]="'Select model'"                
+            [class]="['qt-dropdown']"
+            [field]="'Name'"                    
+            [list]="selectModelList"   
+            [isDisabled]="isDisabled"         
+            (onSelectedItem)="onSelectModel($event)"
+        ></app-select-search>                           
+            </div>
+        </div>        
       <div
       class="grey-dropdown"
       ngbDropdown
       #products="ngbDropdown"
   >
   <label
-  for="dropdownServices"  
+  for="dropdownServices" 
+  class="tagfontweight" 
 >
   Tag
 </label>
 <div class="Rectangle_device-popup">
       <mat-form-field appearance="none">
-          <mat-chip-list #chipList>
+          <mat-chip-list #chipTag>
               <mat-chip
-                  *ngFor="let tag of selectedTagdevicelist; let i = index"
-                  (removed)="onRemoveTag(i)"
+                  *ngFor="let tag of selectedSidebarTag; let i = index"  (removed)="onTagRemove(i)"                  
               >
                   {{ tag.Name }}
                   <mat-icon matChipRemove>cancel</mat-icon>
@@ -947,14 +948,14 @@
               <input autofocus
                   id="dropdownServices"
                   #searchInput
-                  [(ngModel)]="tagFilterValue"
+                  [(ngModel)]="sidetagFilterValue"
                   ngbDropdownToggle
                   class="pointer"
                   placeholder="Enter tag"
-                  [matChipInputFor]="chipList"
-                  (blur)="addTag($event.target.value)"
-                  (keyup.enter)="addTag($event.target.value)"
-                  (keyup)="onSearchTag($event.target.value)"
+                  [matChipInputFor]="chipTag"
+                  (blur)="addTags($event.target.value)"
+                  (keyup.enter)="addTags($event.target.value)"
+                  (keyup)="onSidebarSearchTag($event.target.value)"
               >
           </mat-chip-list>
       </mat-form-field>
@@ -967,12 +968,12 @@
           <ng-template
               ngFor
               let-tag
-              [ngForOf]="filteredTag"
+              [ngForOf]="filteredSidebarTag"
           >
               <button
                   ngbDropdownItem
                   class="dropdown-item"
-                  (click)="onSelectTag(tag)"
+                  (click)="onSidebarSelectTag(tag)"
                   [textContent]="tag.Name"
               ></button>
           </ng-template>

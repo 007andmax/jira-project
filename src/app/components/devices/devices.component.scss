@@ -554,11 +554,11 @@ span.qt-input-search:before {
   padding-top: 20px !important;
 }
 
-.qt-aside-modern{
+.screenConnectresolution{
   right: -330px !important;
   top: -170px !important;
   height: 450px !important;
-  }
+}
 
   .device-add-aside {
     .ticket-priority {
@@ -635,4 +635,31 @@ span.qt-input-search:before {
 
   .company-devices-page__list-header-buttons{
     padding: 5px 3px !important;
+  }
+
+  .Max-300-Words-limit {
+    width: 117px;
+    height: 16px;
+    margin: 8px 0 0 380px;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: var(--gray-600);
+  }
+
+  .Rectangle_device-popup {
+    height: 36px;
+    padding: 4px 4px 4px 11px;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    border: solid 1px #c5cdd5;
+  }
+
+  .tagfontweight{
+    font-weight: 600 !important;
   }
