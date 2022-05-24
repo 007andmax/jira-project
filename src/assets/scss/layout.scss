@@ -1113,7 +1113,7 @@ body {
         }
         .page-insider {
             table.dataTable tbody tr:last-child td {
-                border-bottom: 1px solid #edf2f6;
+                border-bottom: 1px solid $background;
             }
         }
         > .invoice-ticket {
@@ -1192,7 +1192,7 @@ body {
             padding-bottom: 24px;
 
             table.dataTable tbody tr:last-child td {
-                border-bottom: 1px solid #edf2f6;
+                border-bottom: 1px solid $background;
             }
         }
         .tab-content {
@@ -1219,7 +1219,7 @@ body {
             padding-bottom: 24px;
 
             table.dataTable tbody tr:last-child td {
-                border-bottom: 1px solid #edf2f6;
+                border-bottom: 1px solid $background;
             }
         }
         .heading {

@@ -35,17 +35,17 @@ h6,
   margin: 0;
 }
 
-.body-m-sb {
-  @extend %body-m-sb;
+.body-m__sb {
+  @include body-m__sb;
 }
 .body-m {
-  @extend %body-m;
+  @include body-m;
 }
 .body-l {
-  @extend %body-l;
+  @include body-l;
 }
-.body-l-sb {
-  @extend %body-l-sb;
+.body-l__sb {
+  @include body-l__sb;
 }
   //COMMON STYLES ----------------------------
 .d-f {

@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .qt-report__control-panel-btn {
     position: relative;
     .mask-dp {
@@ -12,7 +14,7 @@
     align-items: center;
     padding: 0 20px;
     transition: all 0.3s;
-    color: #212b36;
+    color: $primary-2;
     font-size: 13px;
     font-weight: 500;
 }

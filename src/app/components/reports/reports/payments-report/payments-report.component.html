@@ -77,7 +77,7 @@
                 [ngForTrackBy]="trackByIndex"
             >
                 <div
-                    class="table-name qt-color-dark body-l-sb"
+                    class="table-name qt-color-dark body-l__sb"
                     *ngIf="paymentsReport.payments[table.type].length > 0"
                 >
                     <span [textContent]="table.title"></span>
@@ -127,7 +127,7 @@
                         </ng-template>
                         <tr class="qt-report__body-row">
                             <td colspan="5">
-                              <div class="body-l-sb qt-text-right qt-color-dark" [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></div>
+                              <div class="body-l__sb qt-text-right qt-color-dark" [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></div>
                             </td>
                         </tr>
                     </tbody>

@@ -19,7 +19,7 @@
         *ngIf="!loadingInProgress"
     >
         <div class="qt-report__body-header">
-            <div class="body-m-sb qt-color-dark">
+            <div class="body-m__sb qt-color-dark">
                 {{remoteConnectionReport.clientCompanyName || 'All companies'}}
             </div>
             <h6 class="qt-fw-600 qt-color-dark">Remote Connection Report</h6>
@@ -35,7 +35,7 @@
                 class
                 *ngIf="onInit && remoteConnectionReport.lines"
             >
-                <div class="body-m-sb qt-color-dark">
+                <div class="body-m__sb qt-color-dark">
                     {{remoteConnectionReport.techCompanyName}}
                 </div>
             </div>
