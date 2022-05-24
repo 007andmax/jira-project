@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-  background: $gray-400;
+  background: $gray-200;
   color: $gray-600;
   &::placeholder {
     color: $gray-600;

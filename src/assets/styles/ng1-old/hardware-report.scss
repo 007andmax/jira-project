@@ -954,8 +954,10 @@
 //  margin-bottom: 40px;
 //}
 .customer-ticket__report--summary-title  {
-  padding: 0 60px;
+  width: 100%;
+  margin: 20px 0 0 60px;
   @include body-l__sb;
+  color: $primary-2;
 }
 
 .average-time-spent,
