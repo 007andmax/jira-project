@@ -6,7 +6,8 @@
   top: 0;
   right: 0;
   height: $header-height;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  //box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05); // TODO check
+  border-bottom: 1px solid #edf0f2;
   background-color: $white;
   width: calc(100% - #{$left-panel-width});
   transition: width 300ms;

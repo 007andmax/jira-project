@@ -4,12 +4,6 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [orientation]="'LANDSCAPE'"
-    [report]="'hardware-summary'"
-    [fileName]="'hardware-summary-report'"
-></app-report-additional-actions>
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
@@ -30,7 +24,6 @@
             <h5 class="qt-fw-600 qt-color-white">Hardware Summary Report</h5>
             <div class="company-info">
                 <div class="body-m qt-color-white qt-text-right">{{company.name || 'All companies'}}</div>
-                <!-- <p>{{date | date:'yyyy-MM-dd'}}</p> -->
             </div>
         </div>
         <div *ngIf="onInit">
@@ -138,6 +131,5 @@
                 </ul>
             </div>
         </div>
-        <app-report-footer *ngIf="onInit"></app-report-footer>
     </div>
 </div>

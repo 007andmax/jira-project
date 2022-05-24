@@ -5,80 +5,54 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [report]="'accounting-report'"
-    [accountType]="'TECH'"
-    [template]="'CUSTOMER_REPORT'"
-    [fileName]="'accounting-report-report'"
-></app-report-additional-actions>
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket report-show-footer-header"
+    class="qt-report__body"
     id="product-list-ticket-data"
 >
     <div
-        class="product-list-ticket"
-        style="padding: 0px;"
+        class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div
-            class="customer-ticket"
-            *ngIf="onInit"
-        >
-            <div class="customer-ticket__report">
-                <div class="report-header">
-                    <h5 class="qt-fw-600 qt-color-white">Accounting report</h5>
-                    <div class="company-info">
-                        <div class="body-m qt-color-white qt-text-right">{{ company.name }}</div>
-                        <p>
-                            <span>
-                                {{getDateForHeader(accountingReport.startDate)}}
-                            </span>
-                            -
-                            <span>
-                                {{getDateForHeader(accountingReport.endDate)}}
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="customer-ticket__report--summary">
-                    <div class="customer-ticket__report--summary-title">Accounting report</div>
+        <div>
+            <div class="qt-report__body-header">
+                <h6 class="qt-fw-600 qt-color-dark">Accounting report</h6>
+                <div
+                    class="body-m-sb qt-color-dark"
+                    *ngIf="onInit"
+                >
+                    {{ company.name }}
                 </div>
                 <div
-                    class="customer-ticket__report--details"
-                    style="padding: 0px 0px 100px 0px !important;"
+                    class="body-m qt-color-dark-light"
+                    *ngIf="onInit"
                 >
-
-
-                    <div
-                        class="details-header clearfix"
-                        style="padding: 15px 20px;"
-                    >
-                        <div style="width: 15%;display: inline-block;">Date</div>
-                        <div style="width: 15%;display: inline-block;">Transaction Type</div>
-                        <div
-                            class="details-header-company"
-                            style="width: 15%;display: inline-block;"
-                        >
-                            Source
-                        </div>
-                        <div
-                            class="details-header-service"
-                            style="width: 32%;display: inline-block;"
-                        >
-                            Reference
-                        </div>
-                        <div
-                            class="time-header"
-                            style="width: 15%;display: inline-block;text-align: left;padding: 0px 6px 0px 9px !important;"
-                        >
-                            Amount
-                        </div>
-                    </div>
+                    <span>
+                        {{getDateForHeader(accountingReport.startDate)}}
+                    </span>
+                    -
+                    <span>
+                        {{getDateForHeader(accountingReport.endDate)}}
+                    </span>
+                </div>
+            </div>
+            <table
+                class="qt-report__body-table-body"
+                *ngIf="onInit"
+            >
+                <thead>
+                    <tr>
+                        <th class="qt-fw-600 qt-color-dark">Date</th>
+                        <th class="qt-fw-600 qt-color-dark">Transaction Type</th>
+                        <th class="qt-fw-600 qt-color-dark">Source</th>
+                        <th class="qt-fw-600 qt-color-dark">Reference</th>
+                        <th class="qt-fw-600 qt-color-dark">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <ng-template
                         ngFor
                         let-item
@@ -86,81 +60,33 @@
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >
-
-
-                        <div
-                            class="details-content clearfix"
-                            style="margin: 0 20px;padding: 10px 0px !important;"
-                        >
-                            <div style="width: 15%;display: inline-block;">{{getDate(item.date)}}</div>
-                            <div style="width: 15%;display: inline-block;">
+                        <tr class="qt-report__body-row">
+                            <td>{{getDate(item.date)}}</td>
+                            <td>
                                 {{(item.type === 'INVOICE') ? 'Invoice' : 'Payment'}}
-                            </div>
-                            <div
-                                class="details-content-company"
-                                style="width: 15%;display: inline-block;"
-                            >
-                                {{item.source}}
-                            </div>
-                            <div
-                                class="details-content-service"
-                                style="width: 32%;display: inline-block;"
-                            >
-                                {{item.reference}}
-                            </div>
-                            <div
-                                class="time-content"
-                                style="width: 15%;display: inline-block;padding: 0px 6px 0px 9px !important;"
-                                *ngIf="item.type === 'INVOICE'"
-                            >
-                                {{item.amount | currency}}
-                            </div>
-                            <div
-                                class="time-content"
-                                style="width: 15%;display: inline-block;"
-                                *ngIf="item.type === 'PAYMENT'"
-                            >
-                                {{(-item.amount | currency)}}
-                            </div>
-
-
-                        </div>
-
-
+                            </td>
+                            <td>{{item.source}}</td>
+                            <td>{{item.reference}}</td>
+                            <td *ngIf="item.type === 'INVOICE'">{{item.amount | currency}}</td>
+                            <td *ngIf="item.type === 'PAYMENT'">{{(-item.amount | currency)}}</td>
+                        </tr>
                     </ng-template>
-
-
-
-                    <div
-                        class="details-content clearfix totals"
-                        style="position: relative;height: 20px;"
-                    >
-                        <div
-                            class="col-md-4 total-payments-content"
-                            style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;top: 20px;"
-                            [ngStyle]="{'right':checkExistPayments() ? '-61px' : '-58px'}"
-                        >
-                            {{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}
-                        </div>
-                    </div>
-                    <div
-                        class="details-content clearfix totals"
-                        style="position: relative;height: 20px;"
-                    >
-                        <div
-                            class="col-md-4 total-invoices-content"
-                            style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;top: 20px;"
-                            [ngStyle]="{'right':checkExistPayments() ? '-69px' : '-66px'}"
-                        >
-                            {{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <tr class="qt-report__body-row">
+                        <td colspan="5">
+                            <div class="body-l qt-color-dark qt-text-right">
+                                {{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="qt-report__body-row">
+                        <td colspan="5">
+                            <div class="body-l qt-color-dark qt-text-right">
+                                {{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-
-
-        <app-report-footer *ngIf="onInit"></app-report-footer>
     </div>
 </div>

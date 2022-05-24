@@ -12,6 +12,8 @@ import { DraftEmailValidate } from './class/draft-email-validate';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { forkJoin } from 'rxjs';
 import { UploadAreaComponent } from '../upload-area/upload-area.component';
+import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
+import { ReportsService } from 'src/app/services/reports/reports.service';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -70,8 +72,10 @@ export class DraftEmailComponent implements OnInit {
   companiesSelected: Array<Company> = [];
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
-  constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
-    private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
+  constructor(public draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
+    private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
+    public reportsStateService: ReportsStateService,
+    public reportsService: ReportsService,
   ) { }
 
   ngOnInit() {

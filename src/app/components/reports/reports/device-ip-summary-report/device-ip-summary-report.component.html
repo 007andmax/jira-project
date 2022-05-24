@@ -4,12 +4,6 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [orientation]="'LANDSCAPE'"
-    [report]="'device-ip-summary'"
-    [fileName]="'device-ip-summary-report'"
-></app-report-additional-actions>
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
@@ -176,6 +170,5 @@
                 </ul>
             </div>
         </div>
-        <app-report-footer *ngIf="onInit"></app-report-footer>
     </div>
 </div>

@@ -104,7 +104,6 @@ import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorit
 import { LeftPanelTicketsComponent } from './components/left-panel/left-panel-tickets/left-panel-tickets.component';
 import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
 import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
-import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
 import { TaxesReportComponent } from './components/reports/reports/taxes-report/taxes-report.component';
 import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
 import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
@@ -513,6 +512,7 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { RightClickBlankDirective } from './directives/right-click-blank.directive';
+import { ReportsLeftMenuComponent } from './components/reports/reports-left-menu/reports-left-menu.component';
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
@@ -539,6 +539,7 @@ import { SuperAdminPublicHeaderComponent } from './components/super-admin-public
 import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
 import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
+import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
 
 
 declare var $: any;
@@ -668,7 +669,6 @@ declare var $: any;
     LeftPanelTicketsComponent,
     GlNumberComponent,
     AccountsReceivableComponent,
-    ReportFooterComponent,
     TaxesReportComponent,
     ProductSalesReportComponent,
     CustomerSalesReportComponent,
@@ -994,6 +994,7 @@ declare var $: any;
     UsersTableMarketingComponent,
     LeftPanelMarketingComponent,
     RightClickBlankDirective,
+    ReportsLeftMenuComponent,
     LeftPanelSuperAdminComponent,
     SupportPageComponent,
     LeftPanelSuperAdminCategoriesComponent,
@@ -1017,7 +1018,8 @@ declare var $: any;
     SuperAdminPublicHeaderComponent,
     SortTagsPipe,
     InventoryCheckUseComponent,
-    ContractsReviewComponent
+    ContractsReviewComponent,
+    PaymentsReportComponent
   ],
   imports: [
     BrowserModule,
@@ -1064,7 +1066,6 @@ declare var $: any;
     DownloadAgentComponent,
     ImageCropperComponent,
     AlertComponent,
-    ReportSendEmailComponent,
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
