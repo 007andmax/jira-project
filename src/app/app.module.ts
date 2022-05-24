@@ -209,7 +209,6 @@ declare var $: any;
     AddUserToSubscribeModule,
     PreviewAttachmentModule,
     SupportPageAddCategoryModule,
-    SupportPageAddCategoryModule,
     LeftPanelSuperAdminModule,
     SupportPageAddSubCategoryModule
   ],

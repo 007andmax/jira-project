@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
         MatFormFieldModule,
         FormsModule,
     ],
+    entryComponents: [SupportPageAddCategoryComponent],
     exports: [SupportPageAddCategoryComponent]
 })
 export class SupportPageAddCategoryModule { }
