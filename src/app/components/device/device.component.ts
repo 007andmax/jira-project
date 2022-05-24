@@ -74,9 +74,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     // );
   }
 
-  ngOnInit(): void {
-    this.isNonAgentDevice = true;
-    this.setPreviewDataDevice();
+  ngOnInit(): void {    
+    this.isNonAgentDevice = true;    
     this.type =
       window.location.href.split("/")[
       window.location.href.split("/").length - 2
@@ -85,6 +84,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       window.location.href.split("/")[
       window.location.href.split("/").length - 1
       ];
+    this.setPreviewDataDevice();  
     this.usersStateService.onInit();
     this.shellStateService.onInit();
     localStorage.setItem("uuid_" + this._id, uuidv4());
@@ -121,17 +121,21 @@ export class DeviceComponent implements OnInit, OnDestroy {
       }, 300);
       return;
     }
-    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-      this.deviceName = resp[0].Name;
-      this.asset = resp[0];
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {                       
+      if(resp.length>0)
+      {
+        this.deviceName = resp[0].Name;
+        this.asset = resp[0];
 
       if (resp[0].AgentVersion == "") {
         this.isNonAgentDevice = false;
       }
+      }
+      
     });
   }
 
-  onGetCurrentConfig(resp: any) {
+  onGetCurrentConfig(resp: any) {          
     let item = resp.find((x) => x.key == this.asset.ID);
     if (!item) {
       return;

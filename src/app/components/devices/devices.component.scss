@@ -40,8 +40,10 @@
       top: 7px;
       display: flex;
     }
+    .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
       left: -15px;
+      padding-top: 14px
     }
     .device-name-edit-marker {
       display: flex;
@@ -538,22 +540,6 @@ span.qt-input-search:before {
   background-position: center;
 }
 
-.company-devices-page .company-devices-table__up-time{
-  min-width: 100px !important;
-}
-
-.company-devices-page table.company-devices-table tbody .company-devices-table__up-time{
-  min-width: 100px !important;
-}
-
-.company-devices-page table.company-devices-table tbody .company-devices-table__device-type{
-  padding-top: 16px !important;
-}
-
-.company-devices-page table.company-devices-table tbody .company-devices-table__check{
-  padding-top: 20px !important;
-}
-
 .screenConnectresolution{
   right: -330px !important;
   top: -170px !important;
@@ -662,4 +648,8 @@ span.qt-input-search:before {
 
   .tagfontweight{
     font-weight: 600 !important;
+  }
+
+  table.qt-table-modern tbody tr td {
+    vertical-align: middle !important;
   }

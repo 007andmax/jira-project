@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ExcelService } from '../_services/download_csv.service';
 import { CommonHttpServices } from '../_services/common_http.service';
 import * as moment from 'moment';
-import * as internal from 'assert';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class StartupComponent implements OnInit {
   public pdfUrl: string;
   public filter: StartupFilter = new StartupFilter();
   startup : number = 0;
-  searchstartup = false;
+  searchstartup = false; 
 
   constructor(
     private agentService: AgentService,
@@ -39,8 +38,8 @@ export class StartupComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.Id = this.activateRoute.snapshot.params["id"];
+  ngOnInit() {    
+    this.Id = this.activateRoute.snapshot.params["id"];    
     this.kafkaStateService.onGetStartupPrograms.subscribe((resp) => this.onGetStartupPrograms(resp), (e) => this.onGetStartupProgramsError(e));
     this.loading = true;
     this.GetStartupPrograms();
@@ -60,21 +59,21 @@ export class StartupComponent implements OnInit {
       });
   }
 
-  public onGetStartupPrograms(resp: any) {
-    this.startup = resp.length
+  public onGetStartupPrograms(resp: any) {        
+    this.startup = resp.length;
     if(resp.length>0){
+      this.loading = false;
       this.searchstartup= true;
     }
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.startupList = JSON.parse(item.Value);
-    }
-    if (!this.cd['destroyed']) this.cd.detectChanges();
-    this.loading = false;
+    }    
+    if (!this.cd['destroyed']) this.cd.detectChanges();    
     this.getPdfData();
   }
 
-  public onGetStartupProgramsError(error: any) {
+  public onGetStartupProgramsError(error: any) {       
     console.log(error);
   }
 
