@@ -91,6 +91,15 @@ export class DevicesComponent implements OnInit {
   asset: any = undefined;
   installDate: Date = new Date();
   warrantyDate: Date = new Date();
+  open: boolean = false;
+  tab: string = "SYSTEM";
+  assetData: any = undefined;
+  softwareList: any = undefined;
+  Preloader: boolean = true;
+  networkData: any = undefined;
+  toggleWindowSpecifications: boolean = false;
+  toggleDeviceSpecifications: boolean = false;
+  toggleIpSettings: boolean = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -315,6 +324,23 @@ export class DevicesComponent implements OnInit {
   sendCommand(command, assetId) {
     let data: any = {};
     this.assetId = assetId;
+    if (command === "r") {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Restart-Computer";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if (command === "s") {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Stop-Computer";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if (command === "ar") {
+      this.agentService.UninstallAgent(assetId);
+    }
     if (command === 'ura') {
       this.temporaryCommand = command;
       data.AssetID = assetId;
@@ -978,6 +1004,137 @@ export class DevicesComponent implements OnInit {
     else{
       this.selectModelName = "";    
     }
+  }
+
+  openAside(type, asset) {
+    this.open = true;
+    this.tab = type;
+    this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
+    this.getSoftwareDetail(asset);
+    this.getNetworkDetail(asset);
+    this.Preloader = false;
+  }
+
+  getSoftwareDetail(asset) {
+    this.softwareList = [];
+    this.agentService.getSoftwareListByAssetId(asset.ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.softwareList = resp;
+      }
+    });
+  }
+
+  getNetworkDetail(asset) {
+    this.networkData = [];
+    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.networkData = resp[0];
+      }
+    });
+  }
+
+  gotiDetailDevice(Guid: string) {
+    localStorage.setItem("company_id", this.companyId);
+    const type = "workstation";
+    var url = `/#/${this.companiesStateService
+      .getCurrentCompany()
+      .name.replaceAll(" ", "")}/device/dashboard/${type}/${Guid}`;
+    window.open(url, "_blank");
+  }
+
+  menuclose() {
+    this.open = false;
+    this.tab = "SYSTEM";
+  }
+
+  updateAsset() {
+    this.agentService.overrideAsset(this.assetData).subscribe(
+      (resp) => {
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+    if (this.minDate(this.assetData.WarrantyExpires)) {
+      this.assetData.WarrantyExpires = "";
+    }
+
+    if (this.minDate(this.assetData.InstallDate)) {
+      this.assetData.InstallDate = "";
+    }
+  }
+
+  minDate(dateVal: any) {
+    var minDate = moment.utc("0001-01-01");
+    var receiveDate = moment(dateVal);
+    if (moment.utc(receiveDate).isAfter(minDate)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  getToDayDate() {
+    return Date.now();
+  }
+
+  onOperatingSystem(data, type) {
+    if (type === "Warranty") {
+      this.assetData.WarrantyExpires = data || '0001-01-01';
+    }
+    if (type === "Install") {
+      this.assetData.InstallDate = data || '0001-01-01';
+    }
+    this.agentService.overrideAsset(this.assetData).subscribe(
+      (resp) => {
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+    if (this.minDate(this.assetData.WarrantyExpires)) {
+      this.assetData.WarrantyExpires = "";
+    }
+
+    if (this.minDate(this.assetData.InstallDate)) {
+      this.assetData.InstallDate = "";
+    }
+  }
+
+  updateOperationgSystem(id, asset) {
+    let data = this.operatingSystem.find((x) => x.AssetID === id);
+    data.OSArchitecture = asset.OSArchitecture;
+    this.agentService.overrideOperationSystem(data).subscribe(
+      (resp) => {
+        this.setPreviewDataDevice();
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+
+  }
+
+  public chackDefaultValue(value) {
+    return (!value || value === "") ? "N/A" : value.replace("Microsoft", "");
+  }
+
+  getLinkSpeed(value) {
+    return ((value != 0 && value != undefined)) ? (Number(value / 1000000)) : 0;
+  }
+  formatMacAddress(mac: any) {
+    if (mac) {
+      return mac.match(/.{1,2}/g).join(' ');
+    } else {
+      return 'N/A';
+    }
+  };
+
+  public getDate(date) {
+    return (date !== "" && date !== null) ? moment(date).format('YYYY-MM-DD') : "No installed date";
+  }
+  public getVersion(softVersion) {
+    return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
 
 }
