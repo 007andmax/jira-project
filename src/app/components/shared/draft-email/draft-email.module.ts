@@ -29,7 +29,7 @@ import { UploadAreaModule } from '../upload-area/upload-area.module';
         MatFormFieldModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        UploadAreaModule
+        UploadAreaModule,
     ],
     exports: [DraftEmailComponent]
 

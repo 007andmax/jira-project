@@ -7,11 +7,14 @@ import { ContractsPreviewModule } from './contracts-preview/contracts-preview.mo
 import { ContractsAsideModule } from './contracts-aside/contracts-aside.module';
 import { ContractsEditModule } from './contracts-edit/contracts-edit.module';
 import { ContractsRoutingModule } from './contracts-routing.module';
+import { ContractsReviewComponent } from './contracts-review/contracts-review.component';
+import { ContractsReviewModule } from './contracts-review/contracts-review.module';
 
 
 
 @NgModule({
-    declarations: [ContractsComponent
+    declarations: [ContractsComponent,
+        //  ContractsReviewComponent
 
     ],
     imports: [
@@ -21,7 +24,8 @@ import { ContractsRoutingModule } from './contracts-routing.module';
         ContractsPreviewModule,
         ContractsAsideModule,
         ContractsEditModule,
-        ContractsRoutingModule
+        ContractsRoutingModule,
+        ContractsReviewModule
 
     ],
 

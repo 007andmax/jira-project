@@ -98,13 +98,7 @@ const routes: Routes = [
   },
   {
     path: ':company/support-page',
-    component: SupportPageComponent,
-    children: [{
-      path: ':id',
-      component: SupportPageCategoryComponent,
-      canActivate: [PermissionSuperAdminService]
-    },],
-    canActivate: [PermissionSuperAdminService]
+    loadChildren: './components/super-admin/support-page/support-page.module#SupportPageModule'
   },
   {
     path: ':company/password-manager',
@@ -396,12 +390,11 @@ const routes: Routes = [
   },
   {
     path: ':company/help-center',
-    component: SuperAdminPublicComponent,
+    loadChildren: './components/super-admin-public/super-admin-public.module#SupperAdminPublicModule'
   },
   {
     path: ':company/help-center/:id',
-    component: SuperAdminPublicCategoryComponent,
-    // canActivate: [PermissionTechUserService]
+    loadChildren: './components/super-admin-public/super-admin-public-category/super-admin-public-category.module#SuperAdminPublicCategoryModule'
   },
 
 

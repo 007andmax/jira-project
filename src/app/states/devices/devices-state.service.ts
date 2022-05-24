@@ -35,7 +35,7 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-    this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
+    if (this.userStateService.getCurrentUser()) this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCompanyDevices(data.company.id);
     })

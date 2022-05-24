@@ -22,6 +22,7 @@ import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.
 import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { CompanyTagsModule } from './company-tags/company-tags.module';
 import { MatIconModule } from '@angular/material';
+import { RightClickBlankModule } from 'src/app/directives/right-click-blank/right-click-blank.module';
 
 @NgModule({
     declarations: [CompaniesComponent,
@@ -45,7 +46,8 @@ import { MatIconModule } from '@angular/material';
         DynamicTooltipModule,
         DropDownModule,
         CompanyTagsModule,
-        MatIconModule
+        MatIconModule,
+        RightClickBlankModule
     ],
 
 

@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { CompaniesStateService } from '../states/company/companies-state.service';
+import { CompaniesStateService } from '../../states/company/companies-state.service';
 
 @Directive({
   selector: '[appRightClickBlank]'

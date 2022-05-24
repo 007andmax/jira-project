@@ -11,6 +11,7 @@ import { DropDownModule } from '../shared/drop-down/drop-down.module';
 import { InventoryAddCategoryComponent } from './inventory-add-category/inventory-add-category.component';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { InventoryRoutingModule } from './inventory-routing.module';
+import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
 
 
 
@@ -30,7 +31,8 @@ import { InventoryRoutingModule } from './inventory-routing.module';
         DropDownModule,
         MatSelectModule,
         MatChipsModule,
-        InventoryRoutingModule
+        InventoryRoutingModule,
+        ContractsEditModule
 
     ],
 

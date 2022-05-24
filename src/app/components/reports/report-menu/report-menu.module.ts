@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductListModule } from '../../shared/product-list/product-list.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
+import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
 
 
 
@@ -27,6 +28,7 @@ import { MatSelectModule, MatChipsModule } from '@angular/material';
         NgbModule,
         MatSelectModule,
         MatChipsModule,
+        ReportAdditionalActionsModule
     ],
     exports: [ReportMenuComponent]
 

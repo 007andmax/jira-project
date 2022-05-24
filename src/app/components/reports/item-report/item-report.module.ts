@@ -21,11 +21,12 @@ import { AccountingReportComponent } from '../reports/accounting-report/accounti
 import { ReportMenuModule } from '../report-menu/report-menu.module';
 import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
 import { NvD3Module } from 'ng2-nvd3';
-import { ReportFooterModule } from '../report-footer/report-footer.module';
 import { OverviewReportComponent } from '../overview-report/overview-report.component';
 import { ItemReportRoutingModule } from './item-report-routing.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ToFixedPipeModule } from 'src/app/pipe/to-fixed/to-fixed.module';
+import { ReportsLeftMenuComponent } from '../reports-left-menu/reports-left-menu.component';
+import { PaymentsReportComponent } from '../reports/payments-report/payments-report.component';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -46,21 +47,18 @@ import { ToFixedPipeModule } from 'src/app/pipe/to-fixed/to-fixed.module';
         ServiceReportComponent,
         TechServiceReportComponent,
         AccountingReportComponent,
-        OverviewReportComponent
+        OverviewReportComponent,
+        ReportsLeftMenuComponent,
+        PaymentsReportComponent
     ],
     imports: [
         CommonModule,
         ReportMenuModule,
-        ReportAdditionalActionsModule,
+        //ReportAdditionalActionsModule,
         NvD3Module,
-        ReportFooterModule,
         ToFixedModule,
         ItemReportRoutingModule,
-        ToFixedPipeModule
-
+        ToFixedPipeModule,
     ],
-
-
-
 })
 export class ItemReportModule { }

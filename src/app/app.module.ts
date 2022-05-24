@@ -97,7 +97,7 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionUsersService } from './components/users/permission-users.service';
-import { RightClickBlankDirective } from './directives/right-click-blank.directive';
+import { RightClickBlankDirective } from './directives/right-click-blank/right-click-blank.directive';
 import { ReportsLeftMenuComponent } from './components/reports/reports-left-menu/reports-left-menu.component';
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
@@ -107,7 +107,6 @@ import { LeftPanelSuperAdminCategoriesComponent } from './components/super-admin
 import { SupportPageAddCategoryComponent } from './components/super-admin/shared/support-page-add-category/support-page-add-category.component';
 import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
 import { SupportPageEditCategoryComponent } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.component';
-import { DragMenuDirective } from './directives/drag-menu.directive';
 import { LeftPanelSuperAdminCategoriesActionsComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
 import { SupportPageBreadcrumbsComponent } from './components/super-admin/support-page/support-page-breadcrumbs/support-page-breadcrumbs.component';
 import { SupportPageHeaderComponent } from './components/super-admin/support-page/support-page-header/support-page-header.component';
@@ -127,6 +126,9 @@ import { InventoryCheckUseComponent } from './components/inventory/inventory-che
 import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
 import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
 import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
+import { SupportPageAddCategoryModule } from './components/super-admin/shared/support-page-add-category/support-page-add-category.module';
+import { LeftPanelSuperAdminModule } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.module';
+import { SupportPageAddSubCategoryModule } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.module';
 
 
 declare var $: any;
@@ -144,7 +146,7 @@ declare var $: any;
     ConfirmComponent,
     DownloadAgentComponent,
     ImageCropperComponent,
-    ReportSendEmailComponent,
+    //  ReportSendEmailComponent,
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
@@ -153,6 +155,13 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
+    // SupportPageEditCategoryComponent,
+    // LeftPanelSuperAdminComponent,
+    // SupportPageAddCategoryComponent,
+    // LeftPanelSuperAdminCategoriesActionsComponent,
+    // SupportPageAddSubCategoryComponent,
+    HelpCenterInfoAsideComponent,
+    InventoryCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -198,8 +207,11 @@ declare var $: any;
     TextAreaModule,
     AddMarketingSubscriptionTypeModule,
     AddUserToSubscribeModule,
-    PreviewAttachmentModule
-
+    PreviewAttachmentModule,
+    SupportPageAddCategoryModule,
+    SupportPageAddCategoryModule,
+    LeftPanelSuperAdminModule,
+    SupportPageAddSubCategoryModule
   ],
   entryComponents: [
     ModalQuoteComponent,
@@ -216,9 +228,9 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
     AddUserToSubscribeComponent,
-    SupportPageAddCategoryComponent,
-    SupportPageAddSubCategoryComponent,
-    SupportPageEditCategoryComponent,
+    // SupportPageAddCategoryComponent,
+    //  SupportPageAddSubCategoryComponent,
+    // SupportPageEditCategoryComponent,
     InventoryCheckUseComponent,
     // RecurringTicketsComponent
   ],

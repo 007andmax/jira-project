@@ -7,6 +7,7 @@ import { ContractsPreviewModule } from '../../billing/contracts/contracts-previe
 import { ContractsAsideModule } from '../../billing/contracts/contracts-aside/contracts-aside.module';
 import { ContractsEditModule } from '../../billing/contracts/contracts-edit/contracts-edit.module';
 import { CompanyContractsRoutingModule } from './company-contracts-routing.module';
+import { ContractsReviewModule } from '../../billing/contracts/contracts-review/contracts-review.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CompanyContractsRoutingModule } from './company-contracts-routing.modul
         ContractsPreviewModule,
         ContractsAsideModule,
         ContractsEditModule,
-        CompanyContractsRoutingModule
+        CompanyContractsRoutingModule,
+        ContractsReviewModule
     ],
 
 
