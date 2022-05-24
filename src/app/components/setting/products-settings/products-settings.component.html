@@ -74,11 +74,11 @@
                                         [class]="'.edit-category-container-' + i"
                                         (onOutSide)="onEditCategory(item)"
                                     >
-                                        <td
-                                            class="checkbox"
-                                            *ngIf="item.productsAmount === 0"
-                                        >
-                                            <label class="qt-checkbox">
+                                        <td class="checkbox">
+                                            <label
+                                                class="qt-checkbox"
+                                                *ngIf="item.productsAmount === 0"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     [(ngModel)]="item.selected"

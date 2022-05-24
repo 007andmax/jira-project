@@ -111,6 +111,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
 
+          if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
@@ -149,8 +150,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
 
-          if (this.state === '' && this.companiesStateService.getCurrentCompany()) this.goToDefaultPage();
-          console.log("this.state", this.state);
+          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
@@ -178,14 +178,14 @@ export class LeftPanelComponent implements OnInit {
       this.state = data;
       this.cd.detectChanges();
     })
-    this.companiesStateService.onCurrentCompany.subscribe(data => {
-      if (this.state === '') {
-        this.leftPanelStateService.firstOpen(this.state);
-        this.leftPanelStateService.changeState(this.state);
-        this.cd.detectChanges();
-        this.goToDefaultPage();
-      }
-    })
+    /* this.companiesStateService.onCurrentCompany.subscribe(data => {
+       if (this.state === '') {
+         this.leftPanelStateService.firstOpen(this.state);
+         this.leftPanelStateService.changeState(this.state);
+         this.cd.detectChanges();
+         this.goToDefaultPage();
+       }
+     })*/
   }
   goToDefaultPage() {
     this.state = 'new-tickets';
@@ -209,7 +209,6 @@ export class LeftPanelComponent implements OnInit {
     window.location.hash = '';
   }
   public goToLink(url) {
-    console.log("url", url);
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
   onChangeState(data) {
@@ -261,9 +260,9 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-documents') this.goToLink('documents');
       if (this.state === 'new-add-documents') this.goToLink('documents/add');
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
+      if (this.state === 'support-page') this.goToLink('support-page');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
 
-      console.log("this.state", this.state);
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
         this.state === 'byTaxes' ||

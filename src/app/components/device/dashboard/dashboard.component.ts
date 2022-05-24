@@ -110,7 +110,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   myDateValue: Date;
   ngOnInit() {
-    console.log("DashboardComponent");
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.myDateValue = new Date();
