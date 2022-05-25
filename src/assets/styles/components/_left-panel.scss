@@ -425,6 +425,7 @@
   100% {
     opacity: 1;
     max-height: 100%;
+    max-block-size: fit-content;
   }
 }
 @keyframes hideExpandPanel {

@@ -516,8 +516,7 @@ span.qt-input-search:before {
 
 }
 
-.d-email{
-  margin-bottom: 5px;
+.d-email{  
   background-image: url(/assets/img/icons/email-dark.svg);
   background-repeat: no-repeat;
   display: inline-block;
@@ -528,8 +527,7 @@ span.qt-input-search:before {
   background-position: center;
 }
 
-.d-print{
-  margin-bottom: 5px;
+.d-print{  
   background-image: url(/assets/img/icons/print.svg);
   background-repeat: no-repeat;
   display: inline-block;
@@ -652,4 +650,15 @@ span.qt-input-search:before {
 
   table.qt-table-modern tbody tr td {
     vertical-align: middle !important;
+  }
+
+  .d-adddevice{    
+    background-image: url(/assets/img/icons/add-grey.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    max-width: 100%;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    background-position: center;
   }

@@ -20,6 +20,7 @@ export class LeftPanelStateService {
   onChangeStateWithoutNavigate: EventEmitter<any> = new EventEmitter();
   onFirstOpen: EventEmitter<any> = new EventEmitter();
   onSearchChange: EventEmitter<any> = new EventEmitter();
+  onSearchItemAdded: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -82,6 +83,10 @@ export class LeftPanelStateService {
 
   public onSearchChanged(data) {
     this.onSearchChange.emit(data);
+  }
+
+  public searchItemAdded(data) {    
+    this.onSearchItemAdded.emit(data);
   }
 
 }

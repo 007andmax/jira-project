@@ -40,7 +40,7 @@ export class DevicesComponent implements OnInit {
   hardwareTypes: any[] = [];
   operatingSystem: any = undefined;
   kafkaMessage: any;
-  showPreloader: boolean = true;
+  showPreloader: boolean = false;
   currentCompany: any = null;
   filter: DeviceFilter = new DeviceFilter();
   temporaryCommand: string = "";
@@ -117,8 +117,7 @@ export class DevicesComponent implements OnInit {
     private excelService: ExcelService,
   ) { }
 
-  ngOnInit() {
-    this.showPreloader = true;
+  ngOnInit() {    
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
       "new-devices"
@@ -139,7 +138,7 @@ export class DevicesComponent implements OnInit {
 
     if (!this.searchSubscription) {
       this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
-        this.selectedTag = data.Criteria || [];
+        this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
         this.add(undefined);
@@ -158,8 +157,7 @@ export class DevicesComponent implements OnInit {
     if (!localStorage.getItem("currentSearch")) {
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
-      req.Criteria = [];
-      this.searchDeviceTag(req);
+      req.Criteria = [];      
       this.getAssets();
     }
     else {
@@ -189,7 +187,7 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {   
+  searchDeviceTag(data: any) {       
     this.showPreloader = true;    
     if (!this.selectedTag) {
       this.autosearchDevice = [];
@@ -506,13 +504,22 @@ export class DevicesComponent implements OnInit {
     this.add(event.option.viewValue);
   }
 
-  remove(index: number) {
+  remove(index: number) { 
+    this.showPreloader = true;   
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = this.selectedTag || [];
-    this.searchDeviceTag(req);
+    req.Criteria = this.selectedTag || [];      
+    if(this.selectedTag.length>0)
+    {
+      this.searchDeviceTag(req);
+    }   
+    else
+    {
+      this.assetList = [];
+      this.showPreloader = false;
+    }   
   }
 
   add(Tag): void {
@@ -845,10 +852,10 @@ export class DevicesComponent implements OnInit {
     );
   }
 
-  showDlg(savefavourite) {
+  showDlg(savefavourite) {    
     if (this.selectedTag && this.selectedTag.length > 0) {
       this.modalReference = this.modalService.open(savefavourite, { ariaLabelledBy: "modal-basic-title", centered: true, size: "sm" }).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
+        this.closeResult = `Closed with: ${result}`;           
       });
     }
   }
@@ -871,15 +878,16 @@ export class DevicesComponent implements OnInit {
   closed() {
     this.modalService.dismissAll("Cross click");
   }
-  saveFavourite() {      
+  saveFavourite() {         
     let req: any = {};
-    req.Json = this.selectedTag;
+    req.Json = JSON.stringify(this.selectedTag);
     req.Name = this.favouriteName
     req.TechCompanyGuid = this.techCompnayGuid;
     req.IsActive = true;
     this.agentService.createAssetSearch(req).subscribe((data: any) => {      
       this.modalService.dismissAll();
-      this.toastr.success('Your search is saved');
+      this.leftPanelStateService.onSearchItemAdded.emit(null);
+      this.toastr.success('Your search is saved');      
     },
       (err) => {
         this.toastr.error('Error saving your search! Please try again');

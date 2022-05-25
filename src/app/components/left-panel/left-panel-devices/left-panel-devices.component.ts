@@ -46,8 +46,11 @@ export class LeftPanelDevicesComponent implements OnInit {
         this.open = true;
       }
     })
+    this.leftPanelStateService.onSearchItemAdded.subscribe(data => {      
+      this.getCurrentCompany(this.company);
+    });
   }
-  getCurrentCompany(data) {
+  getCurrentCompany(data) {    
     this.company = data;
     this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
       this.searches = res;

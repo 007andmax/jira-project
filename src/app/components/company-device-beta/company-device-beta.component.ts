@@ -73,6 +73,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   tagFilter: string = "";
   deviceName: string;
   deviceTypId: Number;
+  comapanyId: string;
   assetTagName: string;
   modelNo: string;
   installDate: Date = new Date();
@@ -96,6 +97,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   selectedSidebarTag: any[] = [];
   filteredSidebarTag = [];
   assetSidebarTag: any = [];  
+  companies = [];
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   
@@ -109,14 +111,20 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private ngZone: NgZone,
-    private remoteControlService: RemoteControlService    
+    private remoteControlService: RemoteControlService,
+    private companiesState: CompaniesStateService    
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {  
+    this.companiesState.onInit();  
     this.companyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
+
+    this.companiesStateService.getOnCompanies().subscribe((data) => {            
+      this.companies = this.getClientsList(data);      
+    });    
     let company = this.companiesStateService.getCurrentCompany();
     if(company) {      
       this.currentCompany = company;
@@ -807,17 +815,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.installDate = dateInstalled;
   }
 
-  saveDevice() {
+  saveDevice() {    
     let data: any = {};
     data.Guid = uuidv4();
     data.Name = this.deviceName;
-    data.Title = this.deviceName;
+    data.Title = this.deviceName;     
     data.HardwareTypeID = this.deviceTypId;    
     data.Model = this.modelId;
     data.Manufacture = this.manufactureId;    
     data.InstallDate = moment(this.installDate);
     data.Warrantry = moment(this.warrantyDate);
-    data.CompanyGuid = this.asset.CompanyGuid;    
+    data.CompanyGuid = this.comapanyId;
     this.agentService.nonAgentAsset(data).subscribe(
       (result) => {
       this.modalService.dismissAll();
@@ -947,6 +955,23 @@ onSidebarSelectTag(tag: any): void {
 onTagRemove(index: number): void {
   this.selectedSidebarTag.splice(index, 1);
 }
+
+getClientsList(data) {
+  return data
+    .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
+    .sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase()
+        ? 1
+        : b.name.toLowerCase() > a.name.toLowerCase()
+          ? -1
+          : 0
+    );
+}
+
+onSelectCompanyName(company){  
+  this.comapanyId = company.id;
+}
+
 
 }
 

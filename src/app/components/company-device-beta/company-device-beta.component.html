@@ -128,8 +128,7 @@
             </table>
         </div>
     
-    <div class="qt-df qt-fd-c qt-jc-sb">
-        <div class="qt-page-list__body">
+     <div class="qt-df qt-fd-c qt-jc-sb">        
             <div class="qt-page-list__body-table-container">
                 <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length >0">
                     <tbody>
@@ -464,9 +463,9 @@
             <div
                 class="loading"
                 *ngIf="showPreloader"
-            ></div>
-        </div>
+            ></div>        
     </div>
+
     <div
     class="company-devices-page__aside company-device-aside"
     *ngIf="open"
@@ -818,7 +817,11 @@
             ></div>
         </div>
     </div>
-    <div class="qt-aside-modern__content">
+    <div class="qt-aside-modern__content">  
+        <div class="qt-input-block qt-input-line">
+            <label for="add-device-company">Company</label>
+            <app-select-search id="deviceCompany" #deviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
+        </div>      
         <div class="qt-input-block qt-input-line">
             <label
                 for="add-device-name"                

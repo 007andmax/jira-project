@@ -29,7 +29,7 @@
                     </a>
                 </div>
             </div>
-            <button class="qt-btn --outline-white qt-ml-32" (click)="sendEmail()">
+            <button class="qt-btn --outline-white qt-ml-8" (click)="sendEmail()">
               <span class="d-email"></span>
             </button>
             <button class="qt-btn --outline-white qt-ml-8" (click)="printPdf()">
@@ -46,13 +46,10 @@
         <a href="javascript:;" (click)="showScreenConnect(screenConnect)">
           <span class="screen-Connect"></span>
         </a>
-    </button>  
-    <span><button
-        class="qt-btn --outline-blue"
-        (click)="getAddDevice()"
-    >
-        Add Device
-    </button></span>  
+    </button>      
+    <button class="qt-btn --outline-white qt-ml-8" (click)="getAddDevice()">
+        <span class="d-adddevice"></span>
+    </button>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
