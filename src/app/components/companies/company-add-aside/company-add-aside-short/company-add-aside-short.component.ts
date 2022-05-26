@@ -25,7 +25,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //  $('#phone-number-1').inputmask('999[-AAA]');
-    JSON.parse(JSON.stringify(document.getElementById("phone-number-1")))
+    //  JSON.parse(JSON.stringify(document.getElementById("phone-number-1")))
     Inputmask({
       mask: "+1 (999) 999-9999 [ext 9999]",
       greedy: false,
