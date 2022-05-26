@@ -12,7 +12,7 @@ export class CustomerSalesReport {
     servicesSum: number;
     totalSum: number;
     lines: Array<CustomerSalesReportLine> = [];
-
+    init: boolean = false;
     public setData(data) {
         this.techCompanyName = data.techCompanyName;
         this.clientCompanyName = data.clientCompanyName;
@@ -25,7 +25,7 @@ export class CustomerSalesReport {
         this.productsSum = data.productsSum;
         this.servicesSum = data.servicesSum;
         this.totalSum = data.totalSum;
-
+        this.init = true;
     }
 
     public getForRequest() {

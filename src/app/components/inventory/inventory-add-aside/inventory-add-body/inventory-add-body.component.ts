@@ -205,6 +205,10 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       this.close();
     })
   }
+  formatterGLNumber = (result: string) => {
+    return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
+      : "No description"}`;
+  };
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

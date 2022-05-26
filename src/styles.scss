@@ -35,7 +35,19 @@ h6,
   margin: 0;
 }
 
-//COMMON STYLES ----------------------------
+.body-m-sb {
+  @extend %body-m-sb;
+}
+.body-m {
+  @extend %body-m;
+}
+.body-l {
+  @extend %body-l;
+}
+.body-l-sb {
+  @extend %body-l-sb;
+}
+  //COMMON STYLES ----------------------------
 .d-f {
   display: flex;
 }
@@ -117,11 +129,7 @@ h6,
   background: $white;
   color: $primary-1;
   border: 1px solid $primary-1;
-  @extend %сaption-l-m;
-  &:hover {
-    background: $primary-1;
-    color: $white;
-  }
+  @extend %сaption-l-sb;
 }
 .radio-container {
   display: flex;
@@ -4832,7 +4840,7 @@ input.--input-error {
 
 .product-list___ticket {
   .product-report-total-sales {
-    padding: 0 100px 0 50px;
+    padding: 0 15px;
   }
 }
 

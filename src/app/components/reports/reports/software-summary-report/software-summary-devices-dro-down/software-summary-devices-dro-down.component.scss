@@ -3,4 +3,7 @@
 .disabled {
   background: $gray-200;
   color: $gray-600;
+  &::placeholder {
+    color: $gray-600;
+  }
 }

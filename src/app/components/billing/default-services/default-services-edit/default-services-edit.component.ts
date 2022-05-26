@@ -62,6 +62,10 @@ export class DefaultServicesEditComponent implements OnInit {
       this.service.glNumber = res;
     })
   }
+  glDropDownItemName(item) {
+    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
+      : "No description"}`;
+  }
   save() {
     if (!this.validate.isValidate(this.service)) return;
     this.defaultServicesService.changeService(this.service.getDataForUpdate()).subscribe(data => {

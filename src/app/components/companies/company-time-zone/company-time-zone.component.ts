@@ -35,10 +35,8 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
       if (data) {
         let find = this.list.find(item => item.second === data.name);
         this.selectedItem = find;
-        //   this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = find.first;
       } else {
         this.selectedItem = null;
-        //this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = '';
       }
     })
     this.sub.add(getEditMode);

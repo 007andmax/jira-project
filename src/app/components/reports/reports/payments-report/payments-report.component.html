@@ -1,0 +1,138 @@
+<div>
+    <app-report-menu
+        [report]="'payments-report'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
+</div>
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="qt-report__body"
+    id="product-list-ticket-data"
+>
+    <div
+        class="qt-report__product-list"
+        *ngIf="!loadingInProgress"
+    >
+        <div class="qt-report__body-header">
+            <h6 class="qt-fw-600 qt-color-dark">Payments Report</h6>
+            <div
+                class="body-m qt-color-dark-light"
+                *ngIf="paymentsReport.startDate !== '' && paymentsReport.endDate !== ''"
+            >
+                <span>
+                    {{getDateForHeader(paymentsReport.startDate)}}
+                </span>
+                -
+                <span>
+                    {{getDateForHeader(paymentsReport.endDate)}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="payments-total-container"
+            *ngIf="onInit"
+        >
+            <div class="payments-total">
+                <div class="payments-total-item">
+                    <span>Cash</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.CASH | currency"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Cheque</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.CHEQUE | currency"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Credit Card</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.CREDIT_CARD | currency"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Debit</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD | currency"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Wire Transfer</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.WIRE_TRANSFER | currency"></span>
+                </div>
+                <div class="payments-total-item">
+                    <span>Refunds</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT | currency"></span>
+                </div>
+                <div class="line"></div>
+                <div class="deposit-total">
+                    <span>DEPOSIT Total</span>
+                    <span class="qt-fw-600 payments-total-item__price" [textContent]="paymentsReport.totalSumsPerPaymentMethod.TOTAL | currency"></span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="onInit">
+            <ng-template
+                ngFor
+                let-table
+                [ngForOf]="listTables"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <div
+                    class="table-name qt-color-dark body-l-sb"
+                    *ngIf="paymentsReport.payments[table.type].length > 0"
+                >
+                    <span [textContent]="table.title"></span>
+                </div>
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="paymentsReport.payments[table.type].length > 0"
+                >
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-dark">DATE</th>
+                            <th class="qt-fw-600 qt-color-dark">INVOICE#</th>
+                            <th class="qt-fw-600 qt-color-dark payments-report__col-company-name">COMPANY</th>
+                            <th class="qt-fw-600 qt-color-dark payments-report__col-reference">reference</th>
+                            <th class="qt-fw-600 qt-color-dark">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="qt-report__body-table-body">
+                        <ng-template
+                            ngFor
+                            let-item
+                            [ngForOf]="paymentsReport.payments[table.type]"
+                            let-i="index"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td
+                                    class="payments-report__col-date"
+                                    [textContent]="getDateForCashe(item.createdAt)"
+                                ></td>
+                                <td
+                                    class="payments-report__col-invoice"
+                                    [textContent]="perseInvoices(item.partialPaidInvoices)"
+                                >
+                                </td>
+                                <td
+                                    [textContent]="item.clientCompanyName"
+                                ></td>
+                                <td
+                                    [textContent]="item.reference"
+                                ></td>
+                                <td
+                                    class="payments-report__col-amount"
+                                    [textContent]="item.partialPaidAmount | currency"
+                                ></td>
+                            </tr>
+                        </ng-template>
+                        <tr class="qt-report__body-row">
+                            <td colspan="5">
+                              <div class="body-l-sb qt-text-right qt-color-dark" [textContent]="'Total: ' + (getTotal(paymentsReport.payments[table.type]) | currency)"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </div>
+    </div>
+</div>

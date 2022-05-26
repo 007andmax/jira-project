@@ -142,7 +142,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
-    this.selectedUsers.push(event.option.viewValue);
+    this.selectedUsers.push(event.option.value.primaryEmail);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
     // this.userInput.nativeElement.blur();
@@ -213,8 +213,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event) {
-    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value));
-    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value));
+    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
+    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
   }
 
   /**

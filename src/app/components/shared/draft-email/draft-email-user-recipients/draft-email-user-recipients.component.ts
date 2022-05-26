@@ -143,10 +143,10 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   }
 
   onSearch(event) {
-    this.userList = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
+    // this.userList = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
 
-    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value));
-    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value));
+    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
+    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
 
   }
   onKeyUp(event) {

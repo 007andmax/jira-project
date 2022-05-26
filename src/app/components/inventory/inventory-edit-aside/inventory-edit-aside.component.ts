@@ -92,7 +92,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       })
       this.taxesStateService.setTaxesFromtEdit(taxes);
       this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
-      this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
+      this.elRef.nativeElement.querySelector("#inventory-description").innerHTML = this.inventory.description;
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
       this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
@@ -160,6 +160,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
     this.inventory.markup = this.roundingMarkup(value);
   }
+  formatterGLNumber = (result: string) => {
+    return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
+      : "No description"}`;
+  };
   private roundingMarkup(markup) {
     return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
   }
@@ -197,12 +201,13 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
     this.taxesStateService.onInitClear();
-    this.elRef.nativeElement.querySelector('#inventory-description').value = '';
+    this.elRef.nativeElement.querySelector('#inventory-description').innerHTML = '';
     this.validate = new InventoryValidate();
     this.cd.detectChanges();
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
+    this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
       this.toastrService.success("The product has been successfully updated");
       this.appStateService.changeDetectorRef();

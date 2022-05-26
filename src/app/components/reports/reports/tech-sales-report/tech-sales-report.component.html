@@ -5,71 +5,98 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [report]="'tech-sales'"
-    [orientation]="'LANDSCAPE'"
-    [fileName]="'tech-sales-report'"
-></app-report-additional-actions>
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket report-show-footer-header"
+    class="qt-report__body"
     id="product-list-ticket-data"
 >
     <div
-        class="product-list-ticket product-list-ticket-tech"
-        style="padding: 0px;"
+        class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
-        <div
-            class="customer-ticket"
-            *ngIf="onInit"
-        >
-            <div class="customer-ticket__report">
-                <div class="report-header">
-                    <h5 class="qt-fw-600 qt-color-white">Tech Sales Report</h5>
-                    <div
-                        class="company-info"
-                        *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"
-                    >
-                        <p>
-                            <span>
-                                {{getDateForHeader(techSalesReport.startDate)}}
-                            </span>
-                            -
-                            <span>
-                                {{getDateForHeader(techSalesReport.endDate)}}
-                            </span>
-                        </p>
-                    </div>
+        <div class>
+            <div class="qt-report__body-header">
+                <h6 class="qt-fw-600 qt-color-dark">Tech Sales Report</h6>
+                <div
+                    class="body-m qt-color-dark-light"
+                    *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"
+                >
+                    <span>
+                        {{getDateForHeader(techSalesReport.startDate)}}
+                    </span>
+                    -
+                    <span>
+                        {{getDateForHeader(techSalesReport.endDate)}}
+                    </span>
                 </div>
-                <div *ngIf="onInit">
-                    <div class="header-product-list-ticket">
-                        <h4 *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'">Billed Time</h4>
-                        <p *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'">Products Sold</p>
-                    </div>
-                    <nvd3
-                        [options]="chartOptionsToggler"
-                        [data]="chartData"
-                    ></nvd3>
-                    <div class="clearfix">
-                        <div *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'">
-                            Total Hours:
-                            <span>{{techSalesReport.total}} hours</span>
-                        </div>
-                        <div *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'">
-                            Potential revenue:
-                            <span>${{techSalesReport.total}}</span>
-                        </div>
-                    </div>
-
-
-                </div>
-                <app-report-footer *ngIf="onInit"></app-report-footer>
             </div>
+            <table
+                class="qt-report__body-table-body"
+                *ngIf="onInit"
+            >
+                <thead>
+                    <tr>
+                        <th class="qt-fw-600 qt-color-dark ng-star-inserted">Tech User</th>
+                        <th
+                            style="width: 130px;"
+                            class="qt-fw-600 qt-color-dark ng-star-inserted"
+                            *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'"
+                        >
+                            Billed Time
+                        </th>
+                        <th
+                            style="width: 130px;"
+                            class="qt-fw-600 qt-color-dark ng-star-inserted"
+                            *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'"
+                        >
+                            Products Sold
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="techSalesReport.lines"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <tr class="qt-report__body-row">
+                            <td>{{item.fullName}}</td>
+                            <td
+                                style="width: 130px;"
+                                *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'"
+                            >
+                                {{item.billedTime}}
+                            </td>
+                            <td
+                                style="width: 130px;"
+                                *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'"
+                            >
+                                {{item.totalSum}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <tr class="qt-report__body-row qt-fw-600">
+                        <td>Total</td>
+                        <td
+                            style="width: 130px;"
+                            *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'"
+                        >
+                            {{techSalesReport.total}} hour
+                        </td>
+                        <td
+                            style="width: 130px;"
+                            *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'"
+                        >
+                            ${{techSalesReport.total}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
