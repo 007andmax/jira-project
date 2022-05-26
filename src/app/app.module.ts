@@ -512,7 +512,6 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { RightClickBlankDirective } from './directives/right-click-blank.directive';
-import { ReportsLeftMenuComponent } from './components/reports/reports-left-menu/reports-left-menu.component';
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
@@ -994,7 +993,6 @@ declare var $: any;
     UsersTableMarketingComponent,
     LeftPanelMarketingComponent,
     RightClickBlankDirective,
-    ReportsLeftMenuComponent,
     LeftPanelSuperAdminComponent,
     SupportPageComponent,
     LeftPanelSuperAdminCategoriesComponent,

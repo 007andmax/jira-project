@@ -594,9 +594,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   back() {
     this.leftPanelStateService.goToState('new-reports');
   }
-  toggleLeftMenu() {
-    this.reportsStateService.toggleLeftMenu();
-  }
   public onChangeTehUsers(tehusers) {
 
   }

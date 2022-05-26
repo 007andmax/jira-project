@@ -16,9 +16,39 @@
     >
         <li
             [ngClass]="{'--active':  activePage === 'new-reports'}"
-            (click)="goToState();"
+            (click)="goToState('new-reports')"
         >
             All Reports
         </li>
     </a>
 </ul>
+<div class="qt-aside-modern__content advanced">
+    <ng-template
+        ngFor
+        let-report
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById"
+    >
+        <div class="report-menu-item">
+            <div class="report-menu-item-header">
+                <h3
+                    class="qt-ml-8"
+                    [textContent]="report.category"
+                ></h3>
+            </div>
+            <ng-template
+                ngFor
+                let-subcategory
+                [ngForOf]="report.subcategories"
+                [ngForTrackBy]="trackById"
+            >
+                <span
+                    class="pointer"
+                    [ngClass]="{'active':isActive(subcategory.route)}"
+                    [textContent]="subcategory.name"
+                    (click)="goToState(subcategory.route)"
+                ></span>
+            </ng-template>
+        </div>
+    </ng-template>
+</div>

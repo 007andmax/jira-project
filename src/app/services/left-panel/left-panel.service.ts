@@ -73,7 +73,25 @@ export class LeftPanelService {
       state === 'new-template-documents')
   }
   isReportsState(state) {
-    return (state === 'new-reports')
+    return (state === 'new-reports' ||
+      state === 'byProducts' ||
+      state === 'byCustomers' ||
+      state === 'byTaxes' ||
+      state === 'common-commissions' ||
+      state === 'detailed-commissions' ||
+      state === 'accounts-receivable' ||
+      state === 'accounting-report' ||
+      state === 'payments-report' ||
+      state === 'remote-access' ||
+      state === 'software-summary' ||
+      state === 'hardware-summary' ||
+      state === 'device-ip-summary' ||
+      state === 'tech-sales' ||
+      state === 'tech-ticket' ||
+      state === 'tech-service' ||
+      state === 'ticket-report' ||
+      state === 'service-report' ||
+      state === 'income-accounts')
   }
   public isSettingsPage(state) {
     return (state === 'myprofile-component'
