@@ -23,6 +23,8 @@ export class ServicesComponent implements OnInit {
   public asset: any;
   public filter: ServiceFilter = new ServiceFilter();
   pdfUrl = "";
+  public kafkaresponse:boolean = false;
+  public servicesview:boolean = false;
 
 
   constructor(
@@ -37,9 +39,30 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit() {
     this.Id = this.activateRoute.snapshot.params["id"];
-    this.loading = true;
-    this.kafkaStateService.onGetService.subscribe((resp) => this.onGetService(resp), (e) => this.onGetServiceError(e));
+    this.loading = true;    
+    this.kafkaStateService.onGetService.subscribe((resp)=>{
+      if(resp.length>0)
+      {
+        this.kafkaresponse = true;
+        this.onGetService(resp)        
+      }      
+    })    
     this.getAllServicesList();
+    this.time();
+  }
+
+  public time(){
+    setTimeout(()=>{
+      if(this.kafkaresponse == false)
+      {
+        this.loading = false;
+        this.servicesview = true;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      }      
+    },60000);
+    
   }
 
   public getAllServicesList() {

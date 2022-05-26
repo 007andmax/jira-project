@@ -23,6 +23,8 @@ export class ProcessesComponent implements OnInit {
   public search: string;
   public processId : number;
   public filter: ProcessesFilter = new ProcessesFilter();
+  public kafkaresponse:boolean = false;
+  public processview:boolean = false;
 
   constructor(
     private kafkaStateService: KafkaStateService,
@@ -36,9 +38,30 @@ export class ProcessesComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.Id = this.activateRoute.snapshot.params["id"];
-    this.kafkaStateService.GetProcesses.subscribe((resp) => this.onGetProcess(resp),  (e) => this.onGetProcessError(e));
+    this.Id = this.activateRoute.snapshot.params["id"];    
+    this.kafkaStateService.GetProcesses.subscribe((resp)=>{
+      if(resp.length>0)
+      {
+        this.kafkaresponse = true;
+        this.onGetProcess(resp)        
+      }      
+    })    
     this.getAllServicesList();
+    this.time();
+  }
+
+  public time(){
+    setTimeout(()=>{
+      if(this.kafkaresponse == false)
+      {
+        this.loading = false;
+        this.processview = true;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      }      
+    },60000);
+    
   }
 
   public onGetProcessError(error: any) {

@@ -820,7 +820,7 @@
     <div class="qt-aside-modern__content">  
         <div class="qt-input-block qt-input-line">
             <label for="add-device-company">Company</label>
-            <app-select-search id="deviceCompany" #deviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
+            <app-select-search id="deviceCompany" #dropdowndeviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
         </div>      
         <div class="qt-input-block qt-input-line">
             <label
@@ -844,7 +844,7 @@
             </label>            
         <app-select-search       
         id="devicetype"
-        #deviceTp
+        #dropdowndeviceTp
         [placeholder]="'Select device type'"                
         [class]="['qt-dropdown']"
         [field]="'Name'"              
@@ -875,7 +875,7 @@
               for="add-Install-Date"              
           >Install Date</label>                     
                 <app-date-picker
-                #installed    
+                #dropdowninstalled    
                 [editDate]="installDate"            
                 [placement]="'top'"
                 [editMode]="true"
@@ -888,7 +888,7 @@
                 for="add-Install-Date"              
             >Warranty Date</label>                        
                 <app-date-picker
-                #warrenty
+                #dropdownwarrenty
                 [editDate]="warrantyDate"
                 [placement]="'top'"
                 [editMode]="true"
@@ -990,6 +990,7 @@
       </label>
      <textarea
       id="add-note"
+      #searchnote
      class="terms-n-conditions__textarea qt-textarea"
      placeholder="Write note for device"
      maxlength="300"

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild, } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { AgentService } from "src/app/services/agent/agent.service";
@@ -10,11 +10,10 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
-import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
-import { FORMAT_DATE_2 } from "src/app/const/date-picker";
 
 @Component({
   selector: "app-company-device-beta",
@@ -25,6 +24,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild("templatePowersell") template;
   @ViewChild("templateConnection") templateconnection;
   @ViewChild('dropdownModel') dropdownModel: DropDownComponent;  
+  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany:DropDownComponent;
+  @ViewChild('dropdowndeviceTp') dropdowndeviceTp:DropDownComponent;
+  @ViewChild('dropdowninstalled')dropdowninstalled:DropDownComponent;
+  @ViewChild('dropdownwarrenty')dropdownwarrenty:DropDownComponent;
+  @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent;      
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -773,6 +777,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   closed() {    
     this.opened = false;
+    this.getclear();
   }
 
   getAssetTagDropDownDetail() {
@@ -805,12 +810,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.deviceTypId = ID;
   }
 
-  getDateWarranty(date: any) {    
+  getDateWarranty(date: any) {        
     let dateWarrantry = new Date(date.year, date.month, date.day);
     this.warrantyDate = dateWarrantry;
   }
 
-  getDateInstalled(date: any) {    
+  getDateInstalled(date: any) {       
     let dateInstalled = new Date(date.year, date.month, date.day);
     this.installDate = dateInstalled;
   }
@@ -821,15 +826,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
     data.Name = this.deviceName;
     data.Title = this.deviceName;     
     data.HardwareTypeID = this.deviceTypId;    
-    data.Model = this.modelId;
-    data.Manufacture = this.manufactureId;    
-    data.InstallDate = moment(this.installDate);
-    data.Warrantry = moment(this.warrantyDate);
+    data.ModelID = this.modelId;        
+    data.ManufactureID = this.manufactureId;        
+    data.InstallDate = moment(this.installDate).format("YYYY-MM-DD");
+    data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");    
     data.CompanyGuid = this.comapanyId;
     this.agentService.nonAgentAsset(data).subscribe(
-      (result) => {
-      this.modalService.dismissAll();
+      (result) => {      
+      this.getclear();
+      this.opened = false;
       this.toastr.success('Save non agent asset successfully');
+
     },
       (error) => {
         this.toastr.error('Error saving your non agent asset! Please try again');
@@ -972,6 +979,16 @@ onSelectCompanyName(company){
   this.comapanyId = company.id;
 }
 
+getclear(){
+  this.deviceName="";
+  this.assetTagName="";
+  this.dropdownModel.clearWithOutChanges();
+  this.dropdownManufacturer.clearWithOutChanges();
+  this.dropdowndeviceCompany.clearWithOutChanges();
+  this.dropdowndeviceTp.clearWithOutChanges();
+  this.dropdowninstalled.clearWithOutChanges();
+  this.dropdownwarrenty.clearWithOutChanges();        
+}
 
 }
 

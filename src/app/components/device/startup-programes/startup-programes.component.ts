@@ -26,6 +26,8 @@ export class StartupComponent implements OnInit {
   public filter: StartupFilter = new StartupFilter();
   startup : number = 0;
   searchstartup = false; 
+  public startupview:boolean = false;
+  public kafkaresponse:boolean = false;
 
   constructor(
     private agentService: AgentService,
@@ -39,10 +41,17 @@ export class StartupComponent implements OnInit {
   }
 
   ngOnInit() {    
-    this.Id = this.activateRoute.snapshot.params["id"];    
-    this.kafkaStateService.onGetStartupPrograms.subscribe((resp) => this.onGetStartupPrograms(resp), (e) => this.onGetStartupProgramsError(e));
-    this.loading = true;
+    this.Id = this.activateRoute.snapshot.params["id"];  
+    this.loading = true;      
+    this.kafkaStateService.onGetStartupPrograms.subscribe((resp)=>{
+      if(resp.length>0)
+      {
+        this.kafkaresponse = true;
+        this.onGetStartupPrograms(resp)        
+      }      
+    })    
     this.GetStartupPrograms();
+    this.time();
   }
 
   public GetStartupPrograms() {
@@ -58,6 +67,21 @@ export class StartupComponent implements OnInit {
         this.agentService.GetStartupPrograms(this.assetId);
       });
   }
+
+  public time(){
+    setTimeout(()=>{
+      if(this.kafkaresponse == false)
+      {
+        this.loading = false;
+        this.startupview = true;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      }      
+    },60000);
+    
+  }
+
 
   public onGetStartupPrograms(resp: any) {        
     this.startup = resp.length;
