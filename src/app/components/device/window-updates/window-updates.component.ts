@@ -26,6 +26,9 @@ export class WindowUpdatesComponent implements OnInit {
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selected: number = 0;
+  public kafkaresponse:boolean = false;
+  public windowupdateview:boolean = false;
+  public loading: boolean;
 
   constructor(
     private kafkaStateService: KafkaStateService,
@@ -37,81 +40,109 @@ export class WindowUpdatesComponent implements OnInit {
 
   ngOnInit() {
     this._id = this.activateRoute.snapshot.params["id"];
+    this.loading = true;
     this.getAssetId();
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e) => this.onCurrentConfigError(e));
+    this.kafkaStateService.onCurrentConfig.subscribe((resp)=>{
+      if(resp.length>0)
+      {
+        this.kafkaresponse = true;
+        this.onCurrentConfig(resp)        
+      }      
+    }) 
+    this.time();       
   }
-  onCurrentConfig(resp: any) {
-    if (this.asset.ID && this.asset.ID != 0) {
-      let item = resp.find((x) => x.key == this.asset.ID);
-      if (item) {
-        this.kafkaMessage = JSON.parse(item.Value);
 
-        this.installUpdate = this.kafkaMessage.InstalledWindowsUpdates.length;
-        if(this.installUpdate > 0){
-          this.installedWindowsUpdateList = [];
-          for(let i=0; i< this.installUpdate ; i++){
-            let install : any = {};
-            install.UpdateID = this.kafkaMessage.InstalledWindowsUpdates[i].UpdateID;
-            install.Title = this.kafkaMessage.InstalledWindowsUpdates[i].Title;
-            install.Size = this.kafkaMessage.InstalledWindowsUpdates[i].Size;
-            this.categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories.length;
-            if(this.categories >0)
-            {
-              for(let j=0; j<this.categories; j++){
-                install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[j].Name
-              }
-            }
-            this.installedWindowsUpdateList.push(install);
-          }
-        }
-
-        this.blockedNumber = this.kafkaMessage.BlockedWindowsUpdates.length;
-        if(this.blockedNumber > 0){
-          this.blockedWindowsUpdateList = [];
-          for(let i=0; i< this.blockedNumber ; i++){
-            let blocked : any = {};
-            blocked.UpdateID = this.kafkaMessage.BlockedWindowsUpdates[i].UpdateID;
-            blocked.Title = this.kafkaMessage.BlockedWindowsUpdates[i].Title;
-            blocked.Size = this.kafkaMessage.BlockedWindowsUpdates[i].Size;
-
-            this.blockedWindowsUpdateList.push(blocked);
-          }
-        }
-        this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-
-        if (this.securityUpdate > 0) {
-          this.windowUpdatePendingList = [];
-          for (let i = 0; i < this.securityUpdate; i++) {
-            let data: any = {};
-            data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
-            data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
-            data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
-            this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
-            if(this.categories >0)
-            {
-              for(let j=0; j<this.categories; j++){
-                data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
-              }
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
-              data.RebootIsRequired = "Never Reboots"
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
-              data.RebootIsRequired = "Always Requires Reboot";
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
-              data.RebootIsRequired = "Can Request Reboot";
-            }
-            data.loading = false;
-            this.windowUpdatePendingList.push(data);
-          }
-        }
-
-        if(!this.cd['destroyed']){
+  public time(){
+    setTimeout(()=>{
+      if(this.kafkaresponse == false)
+      {     
+        this.loading = false;   
+        this.windowupdateview = true;
+        if (!this.cd['destroyed']) {
           this.cd.detectChanges();
+        }
+      }      
+    },60000);
+    
+  }
+
+  onCurrentConfig(resp: any) {
+    if(resp.length>0)
+    {
+      this.loading=false;
+      if (this.asset.ID && this.asset.ID != 0) {
+        let item = resp.find((x) => x.key == this.asset.ID);
+        if (item) {
+          this.kafkaMessage = JSON.parse(item.Value);
+  
+          this.installUpdate = this.kafkaMessage.InstalledWindowsUpdates.length;
+          if(this.installUpdate > 0){
+            this.installedWindowsUpdateList = [];
+            for(let i=0; i< this.installUpdate ; i++){
+              let install : any = {};
+              install.UpdateID = this.kafkaMessage.InstalledWindowsUpdates[i].UpdateID;
+              install.Title = this.kafkaMessage.InstalledWindowsUpdates[i].Title;
+              install.Size = this.kafkaMessage.InstalledWindowsUpdates[i].Size;
+              this.categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories.length;
+              if(this.categories >0)
+              {
+                for(let j=0; j<this.categories; j++){
+                  install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[j].Name
+                }
+              }
+              this.installedWindowsUpdateList.push(install);
+            }
+          }
+  
+          this.blockedNumber = this.kafkaMessage.BlockedWindowsUpdates.length;
+          if(this.blockedNumber > 0){
+            this.blockedWindowsUpdateList = [];
+            for(let i=0; i< this.blockedNumber ; i++){
+              let blocked : any = {};
+              blocked.UpdateID = this.kafkaMessage.BlockedWindowsUpdates[i].UpdateID;
+              blocked.Title = this.kafkaMessage.BlockedWindowsUpdates[i].Title;
+              blocked.Size = this.kafkaMessage.BlockedWindowsUpdates[i].Size;
+  
+              this.blockedWindowsUpdateList.push(blocked);
+            }
+          }
+          this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+  
+          if (this.securityUpdate > 0) {
+            this.windowUpdatePendingList = [];
+            for (let i = 0; i < this.securityUpdate; i++) {
+              let data: any = {};
+              data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
+              data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
+              data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
+              this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
+              if(this.categories >0)
+              {
+                for(let j=0; j<this.categories; j++){
+                  data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+                }
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
+                data.RebootIsRequired = "Never Reboots"
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
+                data.RebootIsRequired = "Always Requires Reboot";
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
+                data.RebootIsRequired = "Can Request Reboot";
+              }
+              data.loading = false;
+              this.windowUpdatePendingList.push(data);
+            }
+          }
+  
+          if(!this.cd['destroyed']){
+            this.cd.detectChanges();
+          }
         }
       }
     }
+    
   }
 
   onCurrentConfigError(err: any) {

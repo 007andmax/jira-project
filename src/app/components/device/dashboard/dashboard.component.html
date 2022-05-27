@@ -109,7 +109,7 @@
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="false"
-                                            (onSelectedItem)="onSelectManufactureName($event)"
+                                            (onSelectedItem)="onSelectManufactureName($event)"                                            
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -150,7 +150,7 @@
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="true"
-                                            (onSelectedItem)="onSelectModel($event)"
+                                            (onSelectedItem)="onSelectModel($event)"                                            
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -178,10 +178,8 @@
                                         </span>
                                     </li>
                                     <li>
-                                      <span>Date</span>
-                                      <span>
-                                        {{asset.VersionInstallDate | date: 'dd/MM/yyyy'}}
-                                      </span>
+                                        <span>Date</span>
+                                        <div>{{asset.VersionInstallDate | date: 'dd/MM/yyyy'}}</div>                                      
                                     </li>
                                 </ul>
 

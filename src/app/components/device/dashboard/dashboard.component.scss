@@ -136,7 +136,7 @@
                                 height: auto;
                                 line-height: 1;
                                 font-size: 13px;
-                                font-weight: 500;
+                                font-weight: 600;
                                 color: $gray-800;
                                 font-style: normal;
                             }
@@ -145,11 +145,11 @@
                             //   padding: 8px 10px;
                               padding: 4px 12px;
                               font-size: 13px;
-                              font-weight: 500;
+                              font-weight: 600;
                               font-style: normal;
                               line-height: 1.54;
                               letter-spacing: normal;
-                              color: #4f5f79;
+                              color: $gray-800;
                           }
                         }
                         span.edit-field[data-tooltip]{
@@ -1020,6 +1020,7 @@ ngb-tabset{
 
 ::ng-deep .qt-select-input-40 input{
 height: 27px !important;
+font-weight: 600;
 }
 
 ::ng-deep .light-dropdown .icn-remove-old, .grey-dropdown .icn-remove-old {
