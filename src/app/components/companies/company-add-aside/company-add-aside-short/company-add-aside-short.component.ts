@@ -6,7 +6,6 @@ import { CompanyProfile } from '../../class/company-profile';
 import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
 var $ = require("jquery");
-import Inputmask from "inputmask";
 
 @Component({
   selector: 'company-add-aside-short',
@@ -24,17 +23,6 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    //  $('#phone-number-1').inputmask('999[-AAA]');
-    //  JSON.parse(JSON.stringify(document.getElementById("phone-number-1")))
-    Inputmask({
-      mask: "+1 (999) 999-9999 [ext 9999]",
-      greedy: false,
-      clearMaskOnLostFocus: false,
-      placeholder: '',
-      autoUnmask: false,
-      /* allowPlus: false,
-       allowMinus: false*/
-    }).mask(document.getElementById("phone-number-1"));
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
