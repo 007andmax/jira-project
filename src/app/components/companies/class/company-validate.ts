@@ -87,7 +87,7 @@ export class CompanyValdiate {
     }
     public checkValidPhoneNumber(number) {
         console.log("number", number);
-        if (!number || number.length < 10) {
+        if (!number || number.length < 14) {
             this.phoneNumber = false;
         } else {
             this.phoneNumber = true;
@@ -122,7 +122,7 @@ export class CompanyValdiate {
         if (!company.name || company.name.length === 0) this.name = false;
         if (company.clientType === "") this.type = false;
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
-        if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 10) this.phoneNumber = false;
+        if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
         return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist;
     }

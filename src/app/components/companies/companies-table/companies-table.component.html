@@ -79,10 +79,17 @@
                     class="name"
                     [textContent]="getUserName()"
                 ></p>
-                <p
+                <input
+                    *ngIf="primaryPhone && primaryPhone.number"
                     class="phone"
-                    [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000 Ext: 999999||000-000-0000' | phone"
-                ></p>
+                    type="text"
+                    [(ngModel)]="primaryPhone.number"
+                    prefix="+1"
+                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                    [dropSpecialCharacters]="false"
+                    disabled
+                >
             </div>
         </a>
     </div>

@@ -11,8 +11,8 @@ export class UserValidate {
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
     constructor() { }
-    public addPhoneNumbers (phoneNumbers) {
-        phoneNumbers.forEach((element,index) => {
+    public addPhoneNumbers(phoneNumbers) {
+        phoneNumbers.forEach((element, index) => {
             if (index > 0) this.addPhoneNumber();
         });
     }
@@ -48,24 +48,22 @@ export class UserValidate {
     }
     public checkValidPhoneNumber(i, number) {
         if (this.phoneNumber.length === 1) {
-            if (number.length > 0 && !number.match(this.rePhoneNumber)) { this.phoneNumber[i] = false; } else {
+            if (number.length > 0 && number.length < 14) { this.phoneNumber[i] = false; } else {
                 this.phoneNumber[i] = true;
             }
         } else {
-            if (!number.match(this.rePhoneNumber)) {
+            if (number.length < 14) {
                 this.phoneNumber[i] = false;
             } else {
                 this.phoneNumber[i] = true;
             }
         }
-
-
     }
 
-    public getExistPrimaryContactEmail () {
+    public getExistPrimaryContactEmail() {
         return this.existPrimaryContactEmail;
     }
-    public setExistPrimaryContactEmail (data) {
+    public setExistPrimaryContactEmail(data) {
         this.existPrimaryContactEmail = data;
     }
 
