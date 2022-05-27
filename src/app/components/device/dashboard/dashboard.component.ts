@@ -326,6 +326,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   addAssetNote() {
+    debugger;
     this.noteAdd.AssetID = this.asset.ID;
     this.noteAdd.IsActive = true;
     this.agentService.addAssetNotes(this.noteAdd).subscribe(

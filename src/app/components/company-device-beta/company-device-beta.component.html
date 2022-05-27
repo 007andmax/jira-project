@@ -875,8 +875,8 @@
               for="add-Install-Date"              
           >Install Date</label>                     
                 <app-date-picker
-                #dropdowninstalled    
-                [editDate]="installDate"            
+                [type]="'INPUT'"    
+                [editDate]="installDate || getToDayDate()"            
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"                
@@ -888,8 +888,8 @@
                 for="add-Install-Date"              
             >Warranty Date</label>                        
                 <app-date-picker
-                #dropdownwarrenty
-                [editDate]="warrantyDate"
+                [type]="'INPUT'"
+                [editDate]="warrantyDate || getToDayDate()"
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"                

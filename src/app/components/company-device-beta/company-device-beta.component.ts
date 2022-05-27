@@ -26,8 +26,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild('dropdownModel') dropdownModel: DropDownComponent;  
   @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany:DropDownComponent;
   @ViewChild('dropdowndeviceTp') dropdowndeviceTp:DropDownComponent;
-  @ViewChild('dropdowninstalled')dropdowninstalled:DropDownComponent;
-  @ViewChild('dropdownwarrenty')dropdownwarrenty:DropDownComponent;
   @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent;      
   selectAllDevices: boolean = false;
   assetList: any[] = [];
@@ -80,8 +78,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   comapanyId: string;
   assetTagName: string;
   modelNo: string;
-  installDate: Date = new Date();
-  warrantyDate: Date = new Date();
+  installDate:Date;
+  warrantyDate:Date;
   manufacture: string;
   note: string;
   devicename: string;
@@ -776,8 +774,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   closed() {    
-    this.opened = false;
-    this.getclear();
+    this.opened = false;   
+    this.getclear(); 
   }
 
   getAssetTagDropDownDetail() {
@@ -820,7 +818,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.installDate = dateInstalled;
   }
 
-  saveDevice() {    
+  saveDevice() {          
     let data: any = {};
     data.Guid = uuidv4();
     data.Name = this.deviceName;
@@ -830,17 +828,46 @@ export class CompanyDeviceBetaComponent implements OnInit {
     data.ManufactureID = this.manufactureId;        
     data.InstallDate = moment(this.installDate).format("YYYY-MM-DD");
     data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");    
-    data.CompanyGuid = this.comapanyId;
+    data.Tag = this.assetTagName;
+    data.CompanyGuid = this.comapanyId;       
     this.agentService.nonAgentAsset(data).subscribe(
-      (result) => {      
-      this.getclear();
-      this.opened = false;
-      this.toastr.success('Save non agent asset successfully');
-
+      (result) => {    
+      if(result.length>0) 
+      {
+        if(this.note !='' && this.note !=undefined && this.note !=null)
+        {
+          this.createNotes(result)          
+        } 
+        if(this.selectedSidebarTag.length>0)
+        {
+          this.createTag(result,this.selectedSidebarTag)
+        }               
+        this.opened = false;
+        this.setPreviewDataDevice();
+        this.toastr.success('Save non agent asset successfully');
+        this.getclear();
+      }        
     },
       (error) => {
         this.toastr.error('Error saving your non agent asset! Please try again');
       })
+  }
+
+  createNotes(id){
+    const newnote: any = { AssetID: id, IsActive: true, Description:this.note, Title:this.deviceName };    
+    this.agentService.addAssetNotes(newnote).subscribe((resp)=>{      
+    })
+  }    
+
+  createTag(id,Tages){           
+    for(let i=0;i<Tages.length;i++)
+    {
+      const newTag: any = { AssetID: id, Name:Tages[i].Name};      
+      this.agentService.addNewTag(newTag).subscribe(
+        (res) => {          
+        }
+      );
+    }
   }
 
   onSelectTag(tag: any): void {
@@ -979,17 +1006,16 @@ onSelectCompanyName(company){
   this.comapanyId = company.id;
 }
 
-getclear(){
+getclear(){    
   this.deviceName="";
   this.assetTagName="";
   this.dropdownModel.clearWithOutChanges();
   this.dropdownManufacturer.clearWithOutChanges();
   this.dropdowndeviceCompany.clearWithOutChanges();
-  this.dropdowndeviceTp.clearWithOutChanges();
-  this.dropdowninstalled.clearWithOutChanges();
-  this.dropdownwarrenty.clearWithOutChanges();        
+  this.dropdowndeviceTp.clearWithOutChanges(); 
+  this.note="";           
+  this.selectedSidebarTag=[];    
 }
-
 }
 
 
