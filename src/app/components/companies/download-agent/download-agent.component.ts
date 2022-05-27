@@ -4,6 +4,7 @@ import { DownloadAgentStateService } from 'src/app/states/download-agent/downloa
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompanyDownlaodAgent } from '../class/company-download-agent';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-download-agent',
@@ -27,7 +28,7 @@ export class DownloadAgentComponent implements OnInit {
   getDonwloadLink() {
     let textArea: any = document.createElement("textarea");
     textArea.style.opacity = 0;
-    textArea.value = this.downloadLink;
+    textArea.value = `${environment.apiUrl}data/downloadNewInstaller?companyId=${this.downloadAgentStateService.getCompany().id}`;
     document.body.appendChild(textArea);
     textArea.select();
     try {
@@ -38,15 +39,6 @@ export class DownloadAgentComponent implements OnInit {
     document.body.removeChild(textArea);
   }
   downloadAgent() {
-    this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
-      var link = document.createElement('a');
-      link.target = "_blank";
-      link.href = data.link;
-      link.download = data.link.substring(data.link.lastIndexOf('/') + 1, data.link.length);;
-      link.click();
-    })
-  }
-  downloadLinuxAgent() {
     var link = document.createElement('a');
     link.target = "_blank";
     link.href = `data/downloadNewInstaller?companyId=${this.downloadAgentStateService.getCompany().id}&doForce=false`;
