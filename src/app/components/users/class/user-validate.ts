@@ -85,7 +85,7 @@ export class UserValidate {
 
         if (user.primaryEmail && user.primaryEmail.length > 0 && !user.primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
         if (user.phoneNumbers.length === 1) {
-            if (user.phoneNumbers[0].number.length > 0 && this.phoneNumber.includes(false)) phoneNumbers = false;
+            if (user.phoneNumbers[0].number.length > 0 && user.phoneNumbers[0].number.length < 14) phoneNumbers = false;
         } else {
             user.phoneNumbers.forEach((item, index) => {
                 if (!item.number.match(this.rePhoneNumber)) {
