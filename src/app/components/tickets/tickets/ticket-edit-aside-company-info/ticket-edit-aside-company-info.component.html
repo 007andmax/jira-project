@@ -39,10 +39,15 @@
         <div class="company-info-aside__row-info">
             <div class="company-info-aside__row-info-line">
                 <div class="company-info-aside__row-info-label">Telephone</div>
-                <div
+                <!-- <div
                     class="company-info-aside__row-info-value"
                     [textContent]="getPrimaryPhone() | preparePhone | mask: '(000) 000-0000' | phone"
-                ></div>
+                ></div> -->
+                <preview-phone-mask
+                    [class]="'company-info-aside__row-info-value'"
+                    *ngIf="getPrimaryPhone()"
+                    [number]="getPrimaryPhone()"
+                ></preview-phone-mask>
             </div>
             <div class="company-info-aside__row-info-line">
                 <div class="company-info-aside__row-info-label">Address</div>
@@ -98,10 +103,15 @@
                         [ngForOf]="getPhoneNumbers(primaryContact.id)"
                         [ngForTrackBy]="trackByIndex"
                     >
-                        <div
+                        <!-- <div
                             class="company-info-aside__ticket-created-name"
                             [textContent]="phoneNumber.number | preparePhone | mask: '(000) 000-0000' | phone"
-                        ></div>
+                        ></div> -->
+                        <preview-phone-mask
+                            [class]="'company-info-aside__ticket-created-name'"
+                            *ngIf="phoneNumber.number"
+                            [number]="phoneNumber.number"
+                        ></preview-phone-mask>
                     </ng-template>
                     <div
                         class="company-info-aside__primary-contact-email"
@@ -131,10 +141,15 @@
                         [ngForOf]="getPhoneNumbers(createdUser)"
                         [ngForTrackBy]="trackByIndex"
                     >
-                        <div
+                        <!-- <div
                             class="company-info-aside__ticket-created-name"
                             [textContent]="phoneNumber.number | preparePhone | mask: '(000) 000-0000' | phone"
-                        ></div>
+                        ></div> -->
+                        <preview-phone-mask
+                            [class]="'company-info-aside__ticket-created-name'"
+                            *ngIf="phoneNumber.number"
+                            [number]="phoneNumber.number"
+                        ></preview-phone-mask>
                     </ng-template>
                     <div
                         class="company-info-aside__ticket-created-email"

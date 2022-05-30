@@ -1,0 +1,11 @@
+<input
+    [ngClass]="class"
+    class="phone"
+    type="text"
+    [(ngModel)]="number"
+    prefix="+1"
+    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+    [dropSpecialCharacters]="false"
+    disabled
+>

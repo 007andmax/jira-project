@@ -78,21 +78,11 @@
                         class="qt-sz-16 qt-mr-6 icon__phone-gray"
                     ></div>
                 </div>
-                <!-- <div
-                    class="users-table__contract-no--number"
-                    [textContent]="phone.number | preparePhone | mask: '(000) 000-0000 Ext: 999999||000-000-0000' | phone"
-                ></div> -->
-                <input
+                <preview-phone-mask
+                    [class]="'users-table__contract-no--number'"
                     *ngIf="phone.number"
-                    class="users-table__contract-no--number"
-                    type="text"
-                    [(ngModel)]="phone.number"
-                    prefix="+1"
-                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                    [dropSpecialCharacters]="false"
-                    disabled
-                >
+                    [number]="phone.number"
+                ></preview-phone-mask>
             </div>
         </ng-template>
     </td>
