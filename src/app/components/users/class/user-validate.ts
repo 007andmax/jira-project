@@ -88,7 +88,7 @@ export class UserValidate {
             if (user.phoneNumbers[0].number.length > 0 && user.phoneNumbers[0].number.length < 14) phoneNumbers = false;
         } else {
             user.phoneNumbers.forEach((item, index) => {
-                if (!item.number.match(this.rePhoneNumber)) {
+                if (item.number.length < 14) {
                     this.phoneNumber[index] = false;
                     phoneNumbers = false;
                 }
