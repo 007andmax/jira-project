@@ -3,7 +3,7 @@
     *ngIf="opened"
 >
     <div class="qt-aside-modern__header">
-        <div class="qt-aside-modern__header-title">Edit Folder</div>
+        <div class="qt-aside-modern__header-title">Edit Category</div>
         <div
             class="qt-aside-modern__header-close icon__close"
             (click)="close()"
@@ -13,28 +13,28 @@
 
         <div class="qt-w100 qt-mb-24">
             <div class="qt-input-block">
-                <label>Folder Name</label>
+                <label>Category Name</label>
                 <input
                     type="text"
                     [(ngModel)]="documentEditCategory.name"
-                    placeholder="Enter Folder Name"
+                    placeholder="Enter Category Name"
                 >
             </div>
         </div>
         <div class="qt-w100 qt-mb-24">
             <div class="qt-input-block">
-                <label>Assign Folder to Companies</label>
+                <label>Assign Category to Companies</label>
                 <input
                     type="text"
-                    placeholder="Enter Last Name"
+                    placeholder="Search Companies..."
                     (input)="onSearch($event)"
                 >
             </div>
         </div>
-        <div class="qt-w100 qt-mb-24">
-            <div class="qt-df qt-w100 qt-mb-24">
+        <div class="qt-w100 qt-mb-24 list-companies-container">
+            <div class="qt-df qt-w100 qt-mb-16">
                 <div class="qt-w50">
-                    <div class="qt-df qt-w100">
+                    <div class="qt-df qt-ai-c qt-w100 qt-mb-16 item-type-company">
                         <label class="checkbox-container">
                             <input
                                 type="checkbox"
@@ -43,9 +43,9 @@
                             >
                             <span class="checkbox-mark"></span>
                         </label>
-                        <span>All Client Companies</span>
+                        <span class="qt-ml-12">All Client Companies</span>
                     </div>
-                    <div class="qt-df qt-w100">
+                    <div class="qt-df qt-ai-c qt-w100 qt-mb-16 item-type-company">
                         <label class="checkbox-container">
                             <input
                                 type="checkbox"
@@ -54,11 +54,9 @@
                             >
                             <span class="checkbox-mark"></span>
                         </label>
-                        <span>All Vendor Companies</span>
+                        <span class="qt-ml-12">All Vendor Companies</span>
                     </div>
-                </div>
-                <div class="qt-w50">
-                    <div class="qt-df qt-w100">
+                    <div class="qt-df qt-ai-c qt-w100 qt-mb-16 item-type-company">
                         <label class="checkbox-container">
                             <input
                                 type="checkbox"
@@ -67,9 +65,9 @@
                             >
                             <span class="checkbox-mark"></span>
                         </label>
-                        <span>All Lead Companies</span>
+                        <span class="qt-ml-12">All Lead Companies</span>
                     </div>
-                    <div class="qt-df qt-w100">
+                    <div class="qt-df qt-ai-c qt-w100 item-type-company">
                         <label class="checkbox-container">
                             <input
                                 type="checkbox"
@@ -78,7 +76,7 @@
                             >
                             <span class="checkbox-mark"></span>
                         </label>
-                        <span>All Supplier Companies</span>
+                        <span class="qt-ml-12">All Supplier Companies</span>
                     </div>
                 </div>
             </div>
@@ -89,7 +87,7 @@
                     [ngForOf]="companies"
                     [ngForTrackBy]="trackById"
                 >
-                    <div class="list-companies-item">
+                    <div class="list-companies-item qt-mb-16">
                         <label class="checkbox-container">
                             <input
                                 type="checkbox"
@@ -99,7 +97,7 @@
                             <span class="checkbox-mark"></span>
                         </label>
                         <div
-                            class="circle-avatar qt-mr-10"
+                            class="circle-avatar qt-ml-12 qt-mr-8"
                             [ngClass]="{'with-logo': checkLogo(company)}"
                         >
                             <img
@@ -113,10 +111,7 @@
                                 [textContent]="company.name[0].toUpperCase()"
                             ></span>
                         </div>
-                        <p
-                            class="ff-g-m fw-500"
-                            [textContent]="company.name"
-                        ></p>
+                        <p [textContent]="company.name"></p>
                     </div>
                 </ng-template>
             </div>

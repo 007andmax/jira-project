@@ -40,6 +40,11 @@ export class Document {
         this.isDefault = data.isDefault;
         this.assignedToCompany = data.assignedToCompany;
     }
+    public onUpdateByRealTime(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
+    }
     public getDataForEdit() {
         return {
             title: this.title,

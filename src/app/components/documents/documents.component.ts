@@ -44,7 +44,10 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
-        if (findIndex > -1) this.list[findIndex].categoryName = element.name;
+        if (findIndex > -1) {
+          this.list[findIndex].categoryName = element.name;
+          this.list[findIndex].onUpdateByRealTime(element);
+        }
       });
       if (data.length < this.list.filter(item => item.isCategory).length) {
         this.list.forEach((item, index) => {
@@ -98,7 +101,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.list = [];
     this.documentsService.getList().subscribe((data: any) => {
       this.list = [];
-      data.categories.map(item => this.list.push(new Document({ categoryId: item.id, categoryName: item.name }, true)));
+      data.categories.map(item => this.list.push(new Document({ categoryId: item.id, categoryName: item.name, assignedToCompany: item.assignedToCompany }, true)));
       data.documents.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));

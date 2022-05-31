@@ -1,5 +1,24 @@
 .list-companies-item {
     display: flex;
     align-items: center;
-    padding: 6px 0px;
+    p {
+        margin: 0px;
+        font-size: 13px;
+        color: #212b36;
+    }
+}
+.checkbox-container {
+    margin-bottom: 4px !important;
+    min-width: 16px;
+    padding-left: 16px;
+}
+.list-companies-container {
+    overflow: auto;
+    max-height: calc(100% - 200px);
+}
+.item-type-company {
+    span {
+        color: #212b36;
+        font-size: 13px;
+    }
 }
