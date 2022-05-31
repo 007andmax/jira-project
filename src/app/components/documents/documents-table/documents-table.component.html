@@ -45,6 +45,17 @@
         [ngClass]="{'pointer':item.isCategory}"
     ></td>
     <td
+        class="documents-table__review-date ellipsis"
+        (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
+    >
+        <i
+            class="icon__company-gray qt-sz-24 qt-bg-contain qt-dib"
+            *ngIf="item.assignedToCompany"
+        ></i>
+        <span *ngIf="item.assignedToCompany">Yes</span>
+    </td>
+    <td
         class="documents-table__shared"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
@@ -78,6 +89,14 @@
                 >
                     <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Add New Document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="assigToCompanies()"
+                >
+                    <div class="icon__mark-as-master qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+                    Assign to Companies
                 </li>
                 <!-- <li
                     class="pointer"

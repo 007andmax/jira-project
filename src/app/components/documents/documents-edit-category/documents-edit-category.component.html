@@ -1,0 +1,143 @@
+<div
+    class="qt-aside-modern users-page__aside"
+    *ngIf="opened"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Edit Folder</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+
+        <div class="qt-w100 qt-mb-24">
+            <div class="qt-input-block">
+                <label>Folder Name</label>
+                <input
+                    type="text"
+                    [(ngModel)]="documentEditCategory.name"
+                    placeholder="Enter Folder Name"
+                >
+            </div>
+        </div>
+        <div class="qt-w100 qt-mb-24">
+            <div class="qt-input-block">
+                <label>Assign Folder to Companies</label>
+                <input
+                    type="text"
+                    placeholder="Enter Last Name"
+                    (input)="onSearch($event)"
+                >
+            </div>
+        </div>
+        <div class="qt-w100 qt-mb-24">
+            <div class="qt-df qt-w100 qt-mb-24">
+                <div class="qt-w50">
+                    <div class="qt-df qt-w100">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('CLIENT')"
+                                (change)="onChangedType($event,'CLIENT')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span>All Client Companies</span>
+                    </div>
+                    <div class="qt-df qt-w100">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('VENDOR')"
+                                (change)="onChangedType($event,'VENDOR')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span>All Vendor Companies</span>
+                    </div>
+                </div>
+                <div class="qt-w50">
+                    <div class="qt-df qt-w100">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('LEAD')"
+                                (change)="onChangedType($event,'LEAD')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span>All Lead Companies</span>
+                    </div>
+                    <div class="qt-df qt-w100">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('SUPPLIER')"
+                                (change)="onChangedType($event,'SUPPLIER')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span>All Supplier Companies</span>
+                    </div>
+                </div>
+            </div>
+            <div class="list-companies">
+                <ng-template
+                    ngFor
+                    let-company
+                    [ngForOf]="companies"
+                    [ngForTrackBy]="trackById"
+                >
+                    <div class="list-companies-item">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelected(company.id)"
+                                (change)="onSelectCompany($event,company)"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <div
+                            class="circle-avatar qt-mr-10"
+                            [ngClass]="{'with-logo': checkLogo(company)}"
+                        >
+                            <img
+                                [src]="getCompanyLogoUrl(company)"
+                                class="qwe"
+                                alt
+                                *ngIf="checkLogo(company)"
+                            >
+                            <span
+                                *ngIf="!checkLogo(company)"
+                                [textContent]="company.name[0].toUpperCase()"
+                            ></span>
+                        </div>
+                        <p
+                            class="ff-g-m fw-500"
+                            [textContent]="company.name"
+                        ></p>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onSave()"
+            >
+                Save
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

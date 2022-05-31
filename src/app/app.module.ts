@@ -539,6 +539,7 @@ import { SortTagsPipe } from './components/super-admin/support-page/support-page
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
 import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
 import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
+import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
 
 
 declare var $: any;
@@ -1017,7 +1018,8 @@ declare var $: any;
     SortTagsPipe,
     InventoryCheckUseComponent,
     ContractsReviewComponent,
-    PaymentsReportComponent
+    PaymentsReportComponent,
+    DocumentsEditCategoryComponent
   ],
   imports: [
     BrowserModule,

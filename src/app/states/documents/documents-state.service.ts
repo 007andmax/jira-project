@@ -14,6 +14,7 @@ export class DocumentsStateService {
   categoryForRemove: Document;
   documentForRemove: Document;
   categoriesForRemove: Array<CategoryDocument>;
+  onEditFolder: EventEmitter<any> = new EventEmitter();
   onGetTemplate: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<CategoryDocument> = [];
@@ -43,6 +44,9 @@ export class DocumentsStateService {
     this.documentsRealTimeService.changeDocumentsArray.subscribe(data => {
       this.onChangeDocument.emit(data);
     })
+  }
+  public editFolder(data) {
+    this.onEditFolder.emit(data);
   }
   public getCategoriesForRemove() {
     return this.categoriesForRemove;
