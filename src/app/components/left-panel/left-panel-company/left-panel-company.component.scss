@@ -13,8 +13,19 @@
 .category-name  {
     color: $white;
 }
-
-
+.categories {
+  padding: 0px;
+  li {
+    color: #919eab;
+  }
+}
+.--active-category-document {
+  background-color: #171e26;
+  color: #ffffff;
+}
+.show-categories-documents {
+  transform: rotate(180deg);
+}
 _menu-info {
   display: flex;
   margin-left: 24px;

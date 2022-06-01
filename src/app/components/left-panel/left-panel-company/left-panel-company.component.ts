@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { CompanyProfile } from '../../companies/class/company-profile';
 
 @Component({
   selector: 'app-left-panel-company',
@@ -14,9 +15,12 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 })
 export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   open: boolean = false;
+  toogleCategoriesDocuments: boolean = true;
+  selectedCategoryDocument: string;
   @Input() activePage: string = "";
   @Input() selectedCompany: Company;
   companyId: string;
+  public companyDetail: CompanyProfile = new CompanyProfile();
   sub: Subscription = new Subscription();
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
@@ -25,9 +29,11 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     public router: Router,
     private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,
+    public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
+    this.companyDetail = this.companiesStateService.getCompanyDetail();
     this.companyId = this.companiesStateService.getCompanyRoutingId();
     this.companiesStateService.onChangeSelectedCompanyId.subscribe(data => {
       this.companyId = data;
@@ -37,6 +43,15 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
       this.activePage = data;
     })
     this.sub.add(getOnBillingPage);
+    this.companiesStateService.onSetCompanyDetail.subscribe(data => {
+      this.companyDetail = data;
+    })
+    let queryParams = this.activateRoute.queryParams.subscribe(
+      (queryParam: any) => {
+        this.selectedCategoryDocument = queryParam.categoryId;
+      }
+    );
+    this.sub.add(queryParams);
   }
   public close() {
     this.open = false;
@@ -44,6 +59,15 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   goToCompanySection(section) {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, section]);
+  }
+  goToCompanyDocumentsCategory(id) {
+
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents'], {
+      queryParams: {
+        categoryId: id,
+      }
+    });
   }
   getLinkSection(section) {
     return `company/${this.companyId}/${section}`;

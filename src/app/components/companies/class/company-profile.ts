@@ -8,6 +8,7 @@ import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { CompanyConditions } from './company-conditions';
 import { CompanyAssociated } from './company-associated';
+import { CompanyAssigned } from './company-assigned';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -35,6 +36,7 @@ export class CompanyProfile {
     id: string;
     tags: Array<Tag>;
     associatedCompanies: Array<CompanyAssociated> = [];
+    assignedDocumentCategories: Array<CompanyAssigned> = [];
     reputation?: number = 0;
     constructor() {
         this.logo = null;
@@ -107,6 +109,7 @@ export class CompanyProfile {
         this.reputation = company.reputation;
         if (company.companyTicketStatistic) this.companyTicketStatistic = company.companyTicketStatistic;
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
+        this.assignedDocumentCategories = company.assignedDocumentCategories.map(item => new CompanyAssigned(item));
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));

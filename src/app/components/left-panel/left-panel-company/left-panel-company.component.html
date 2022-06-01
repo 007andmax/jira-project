@@ -142,6 +142,30 @@
             (click)="goToCompanySection('documents')"
         >
             Documents
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
+            ></i>
         </li>
     </a>
+    <ul class="categories">
+        <ng-template
+            ngFor
+            let-assignedDocumentCategory
+            [ngForOf]="companyDetail.assignedDocumentCategories"
+            [ngForTrackBy]="trackById"
+        >
+            <li
+                [ngClass]="{'--active':selectedCategoryDocument === assignedDocumentCategory.id}"
+                (click)="goToCompanyDocumentsCategory(assignedDocumentCategory.id)"
+            >
+                <i
+                    class="qt-sz-16 qt-bg-contain qt-mr-8"
+                    [ngClass]="{'icon__folder-active':selectedCategoryDocument === assignedDocumentCategory.id,
+                'icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
+                ></i>
+                {{assignedDocumentCategory.name}}
+            </li>
+        </ng-template>
+    </ul>
 </ul>
