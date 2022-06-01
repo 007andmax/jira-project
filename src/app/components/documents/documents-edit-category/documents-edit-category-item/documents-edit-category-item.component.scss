@@ -1,15 +1,20 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 .list-companies-item {
     display: flex;
     align-items: center;
+    min-height: 32px;
 
     p {
-        margin: 0px;
+        margin: 0;
         font-size: 13px;
-        color: #212b36;
+        line-height: 20px;
+        color: $primary-2;
     }
 }
 .checkbox-container {
-    margin-bottom: 4px !important;
+    margin-bottom: 4px;
     min-width: 16px;
     padding-left: 16px;
 }
@@ -22,7 +27,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
     span {
-        color: #fff;
+        color: $white;
     }
 }
