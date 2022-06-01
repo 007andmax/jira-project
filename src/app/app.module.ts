@@ -540,6 +540,7 @@ import { InventoryCheckUseComponent } from './components/inventory/inventory-che
 import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
 import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
 import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
+import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
 
 
 declare var $: any;
@@ -1019,7 +1020,8 @@ declare var $: any;
     InventoryCheckUseComponent,
     ContractsReviewComponent,
     PaymentsReportComponent,
-    DocumentsEditCategoryComponent
+    DocumentsEditCategoryComponent,
+    DocumentsEditCategoryItemComponent
   ],
   imports: [
     BrowserModule,

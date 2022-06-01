@@ -1,17 +1,4 @@
-.list-companies-item {
-    display: flex;
-    align-items: center;
-    p {
-        margin: 0px;
-        font-size: 13px;
-        color: #212b36;
-    }
-}
-.checkbox-container {
-    margin-bottom: 4px !important;
-    min-width: 16px;
-    padding-left: 16px;
-}
+
 .list-companies-container {
     overflow: auto;
     max-height: calc(100% - 200px);
@@ -20,5 +7,22 @@
     span {
         color: #212b36;
         font-size: 13px;
+    }
+}
+.search-companies {
+    position: relative;
+    &::before {
+        content: " ";
+        width: 16px;
+        height: 16px;
+        background-image: url("/assets/img/icons/search-16.svg");
+        left: 8px;
+        top: calc(50% - 8px);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+    }
+    input {
+        padding: 10px 20px 10px 28px;
     }
 }

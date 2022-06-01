@@ -1,0 +1,17 @@
+<div class="list-companies-item qt-mb-16">
+    <label class="checkbox-container">
+        <input
+            type="checkbox"
+            [checked]="checkSelected(company.id)"
+            (change)="onSelectCompany($event,company)"
+        >
+        <span class="checkbox-mark"></span>
+    </label>
+    <div
+        class="square-avatar qt-ml-12 qt-mr-8"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(null,listColorNoAvatar[indexNoAvatar]) }"
+    >
+        <span [textContent]="company.name[0].toUpperCase()"></span>
+    </div>
+    <p [textContent]="company.name"></p>
+</div>

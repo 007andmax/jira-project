@@ -1,0 +1,28 @@
+.list-companies-item {
+    display: flex;
+    align-items: center;
+
+    p {
+        margin: 0px;
+        font-size: 13px;
+        color: #212b36;
+    }
+}
+.checkbox-container {
+    margin-bottom: 4px !important;
+    min-width: 16px;
+    padding-left: 16px;
+}
+.square-avatar {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        color: #fff;
+    }
+}

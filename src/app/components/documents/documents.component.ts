@@ -46,7 +46,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) {
           this.list[findIndex].categoryName = element.name;
-          this.list[findIndex].onUpdateByRealTime(element);
+          if (element.assignedToCompany !== undefined) this.list[findIndex].assignedToCompany = element.assignedToCompany;
+          console.log("this.list[findIndex]", this.list[findIndex]);
+          // if (this.list[findIndex].isCategory) this.list[findIndex].onUpdateByRealTime(element);
         }
       });
       if (data.length < this.list.filter(item => item.isCategory).length) {

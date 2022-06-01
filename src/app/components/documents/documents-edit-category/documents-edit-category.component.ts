@@ -4,12 +4,14 @@ import { Company } from 'src/app/interfaces/company/company';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { DocumentEditCategory } from './class/document-edit-category';
 
 @Component({
   selector: 'documents-edit-category',
   templateUrl: './documents-edit-category.component.html',
-  styleUrls: ['./documents-edit-category.component.scss']
+  styleUrls: ['./documents-edit-category.component.scss'],
+
 })
 export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   opened: boolean = false;
@@ -20,6 +22,7 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private documentsService: DocumentsService,
+
     private documentsStateService: DocumentsStateService) { }
 
 
@@ -47,27 +50,11 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
     this.reqCompanies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
-  onSelectCompany(event, company) {
-    console.log("event.target.checked", event.target.checked);
-    if (event.target.checked) {
-      this.selectedCompanies.push(company);
-      this.documentEditCategory.addAssignedCompaniesIds(company.id);
-    } else {
-      let index = this.selectedCompanies.findIndex(item => item.id === company.id);
-      if (index > -1) this.selectedCompanies.splice(index, 1);
-      let indexId = this.documentEditCategory.assignedCompaniesIds.findIndex(item => item === company.id);
-      if (indexId > -1) this.documentEditCategory.removedAssignedCompaniesIds(indexId);
-      console.log("indexId", indexId);
-    }
-    console.log("this.documentEditCategory", this.documentEditCategory);
-    // this.documentEditCategory.setAssignedCompaniesIds(this.selectedCompanies.map(item => item.id));
-  }
+
   checkLogo(company) {
     return (company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id)
   }
-  checkSelected(id) {
-    return this.documentEditCategory.assignedCompaniesIds.find(item => item == id);
-  }
+
   checkSelectedType(type) {
     return this.documentEditCategory.assignedCompanyTypes.find(item => item == type);
   }

@@ -22,13 +22,15 @@
             </div>
         </div>
         <div class="qt-w100 qt-mb-24">
-            <div class="qt-input-block">
+            <div class="qt-input-block ">
                 <label>Assign Category to Companies</label>
-                <input
-                    type="text"
-                    placeholder="Search Companies..."
-                    (input)="onSearch($event)"
-                >
+                <div class="search-companies">
+                    <input
+                        type="text"
+                        placeholder="Search Companies..."
+                        (input)="onSearch($event)"
+                    >
+                </div>
             </div>
         </div>
         <div class="qt-w100 qt-mb-24 list-companies-container">
@@ -87,32 +89,10 @@
                     [ngForOf]="companies"
                     [ngForTrackBy]="trackById"
                 >
-                    <div class="list-companies-item qt-mb-16">
-                        <label class="checkbox-container">
-                            <input
-                                type="checkbox"
-                                [checked]="checkSelected(company.id)"
-                                (change)="onSelectCompany($event,company)"
-                            >
-                            <span class="checkbox-mark"></span>
-                        </label>
-                        <div
-                            class="circle-avatar qt-ml-12 qt-mr-8"
-                            [ngClass]="{'with-logo': checkLogo(company)}"
-                        >
-                            <img
-                                [src]="getCompanyLogoUrl(company)"
-                                class="qwe"
-                                alt
-                                *ngIf="checkLogo(company)"
-                            >
-                            <span
-                                *ngIf="!checkLogo(company)"
-                                [textContent]="company.name[0].toUpperCase()"
-                            ></span>
-                        </div>
-                        <p [textContent]="company.name"></p>
-                    </div>
+                    <documents-edit-category-item
+                        [company]="company"
+                        [documentEditCategory]="documentEditCategory"
+                    ></documents-edit-category-item>
                 </ng-template>
             </div>
         </div>
