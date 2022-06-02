@@ -300,9 +300,9 @@
             !asset.IsAgentCurrent
           " class="agent-tag qt-ff-gm --offline">{{asset.AgentVersion}}</span>
           <span *ngIf="
-            asset.AgentVersion == '' &&
-            asset.AgentVersion == undefined &&
-            asset.AgentVersion == null &&
+            asset.AgentVersion != '' &&
+            asset.AgentVersion != undefined &&
+            asset.AgentVersion != null &&
             asset.IsAgentCurrent
           " class="agent-tag qt-ff-gm">{{asset.AgentVersion}}</span>                                                                      
                                 </div>
@@ -730,6 +730,10 @@
         </div>
         <div class="qt-aside-modern__content">
             <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Company</label>
+                <app-select-search id="deviceCompany" #dropdowndeviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
+            </div>   
+            <div class="qt-input-block qt-input-line">
                 <label
                     for="add-device-name"                
                 >
@@ -751,7 +755,7 @@
                 </label>
                 <app-select-search       
         id="devicetype"
-        #deviceTp
+        #dropdowndeviceTp
         [placeholder]="'Select device type'"                
         [class]="['qt-dropdown']"
         [field]="'Name'"        
@@ -781,9 +785,9 @@
                     <label
                   for="add-Install-Date"              
               >Install Date</label>                
-                    <app-date-picker
-                    #installed
-                    [editDate]="installDate"
+                    <app-date-picker                                           
+                    [type]="'INPUT'" 
+                    [editDate]="installDate || getToDayDate()"
                     [placement]="'top'"
                     [editMode]="true"
                     [useMinDate]="false"
@@ -795,8 +799,8 @@
                     for="add-Install-Date"              
                 >Warranty Date</label>                        
                     <app-date-picker
-                    #warrenty
-                    [editDate]="warrantyDate"
+                    [type]="'INPUT'"
+                    [editDate]="warrantyDate || getToDayDate()"
                     [placement]="'top'"
                     [editMode]="true"
                     [useMinDate]="false"                
@@ -847,49 +851,48 @@
       Tag
     </label>
     <div class="Rectangle_device-popup">
-          <mat-form-field appearance="none">
-              <mat-chip-list #chipList>
-                  <mat-chip
-                      *ngFor="let tag of selectedTagdevicelist; let i = index"
-                      (removed)="onRemoveTag(i)"
-                  >
-                      {{ tag.Name }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                  <input autofocus
-                      id="dropdownServices"
-                      #searchInput
-                      [(ngModel)]="tagFilterValue"
-                      ngbDropdownToggle
-                      class="pointer"
-                      placeholder="Enter tag"
-                      [matChipInputFor]="chipList"
-                      (blur)="addTag($event.target.value)"
-                      (keyup.enter)="addTag($event.target.value)"
-                      (keyup)="onSearchTag($event.target.value)"
-                  >
-              </mat-chip-list>
-          </mat-form-field>
+        <mat-form-field appearance="none">
+            <mat-chip-list #chipTag>
+                <mat-chip
+                    *ngFor="let tag of selectedSidebarTag; let i = index"  (removed)="onTagRemove(i)"                  
+                >
+                    {{ tag.Name }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input autofocus
+                    id="dropdownServices"
+                    #searchInput
+                    [(ngModel)]="sidetagFilterValue"
+                    ngbDropdownToggle
+                    class="pointer"
+                    placeholder="Enter tag"
+                    [matChipInputFor]="chipTag"
+                    (blur)="addTags($event.target.value)"
+                    (keyup.enter)="addTags($event.target.value)"
+                    (keyup)="onSidebarSearchTag($event.target.value)"
+                >
+            </mat-chip-list>
+        </mat-form-field>
+      </div>
+        <div
+            class="dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownServices"
+        >
+            <ng-template
+                ngFor
+                let-tag
+                [ngForOf]="filteredSidebarTag"
+            >
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="onSidebarSelectTag(tag)"
+                    [textContent]="tag.Name"
+                ></button>
+            </ng-template>
         </div>
-          <div
-              class="dropdown-menu"
-              ngbDropdownMenu
-              aria-labelledby="dropdownServices"
-          >
-              <ng-template
-                  ngFor
-                  let-tag
-                  [ngForOf]="filteredTag"
-              >
-                  <button
-                      ngbDropdownItem
-                      class="dropdown-item"
-                      (click)="onSelectTag(tag)"
-                      [textContent]="tag.Name"
-                  ></button>
-              </ng-template>
-          </div>
-    </div>
+  </div>
         <div class="qt-input-block qt-input-line">
           <label
               for="add-note"          

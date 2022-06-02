@@ -201,7 +201,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  AssetDetail() {
+  AssetDetail() {    
     this.operatingSystem = [];
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -209,7 +209,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
       if(!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList=[];

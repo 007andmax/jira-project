@@ -17,6 +17,7 @@ import { RemoteControlService } from '../device/_services/remoteControl.service'
 import { ReportSendEmailComponent } from '../reports/report-additional-actions/report-send-email/report-send-email.component';
 import { DeviceFilter } from './class/devices';
 import { DropDownComponent } from '../shared/drop-down/drop-down.component';
+import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -30,6 +31,9 @@ export class DevicesComponent implements OnInit {
   @ViewChild("screenConnect") screenConnect;
   @ViewChild("screenConnectAcces") screenConnectAcces;
   @ViewChild('dropdownModel') dropdownModel: DropDownComponent;  
+  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany:DropDownComponent;
+  @ViewChild('dropdowndeviceTp') dropdowndeviceTp:DropDownComponent;
+  @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent;    
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -100,6 +104,19 @@ export class DevicesComponent implements OnInit {
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
   toggleIpSettings: boolean = false;
+  comapanyId: string;
+  deviceName: string;
+  deviceTypId: Number;
+  assetTagName: string;
+  note: string;
+  selectedSidebarTag: any[] = [];
+  companies = [];  
+  sidetagFilterValue: string = "";
+  assetSidebarTag: any = []; 
+  filteredSidebarTag = [];
+  selectedTagDevice: any[] = [];
+  assetTag: any = [];
+  filteredTag = [];
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -115,13 +132,19 @@ export class DevicesComponent implements OnInit {
     private remoteControlService: RemoteControlService,
     private commonHttpServices: CommonHttpServices,
     private excelService: ExcelService,
+    private companiesState: CompaniesStateService   
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {      
+    this.companiesState.onInit();  
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
       "new-devices"
     );
+
+    this.companiesStateService.getOnCompanies().subscribe((data) => {            
+      this.companies = this.getClientsList(data);      
+    });  
 
     this.onPowerShellCommand();
 
@@ -150,7 +173,7 @@ export class DevicesComponent implements OnInit {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {
+  load(company: any) {   
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
@@ -158,7 +181,9 @@ export class DevicesComponent implements OnInit {
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
       req.Criteria = [];      
-      this.getAssets();
+      this.getAssets();      
+      this.HardwareTypeList(this.techCompnayGuid);
+      this.getAssetTagDropDownDetail();
     }
     else {
       this.setPreviewDataDevice();
@@ -944,6 +969,7 @@ export class DevicesComponent implements OnInit {
 
   deviceclosed() {    
     this.opened = false;
+    this.getclear();
   }
 
   getManufacturers(TechCompanyGuid: any) {
@@ -1144,5 +1170,156 @@ export class DevicesComponent implements OnInit {
   public getVersion(softVersion) {
     return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
+
+  onSelectCompanyName(company){          
+      this.comapanyId = company.id;    
+  }
+
+  saveDevice() {          
+    let data: any = {};
+    data.Guid = uuidv4();
+    data.Name = this.deviceName;
+    data.Title = this.deviceName;     
+    data.HardwareTypeID = this.deviceTypId;    
+    data.ModelID = this.modelId;        
+    data.ManufactureID = this.manufactureId;        
+    data.InstallDate = moment(this.installDate).format("YYYY-MM-DD");
+    data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");    
+    data.Tag = this.assetTagName;
+    data.CompanyGuid = this.comapanyId;       
+    this.agentService.nonAgentAsset(data).subscribe(
+      (result) => {    
+      if(result.length>0) 
+      {
+        if(this.note !='' && this.note !=undefined && this.note !=null)
+        {
+          this.createNotes(result)          
+        } 
+        if(this.selectedSidebarTag.length>0)
+        {
+          this.createTag(result,this.selectedSidebarTag)
+        }               
+        this.opened = false;        
+        this.toastr.success('Save non agent asset successfully');
+        this.getclear();
+      }        
+    },
+      (error) => {
+        this.toastr.error('Error saving your non agent asset! Please try again');
+      })
+  }
+
+  createNotes(id){
+    const newnote: any = { AssetID: id, IsActive: true, Description:this.note, Title:this.deviceName };    
+    this.agentService.addAssetNotes(newnote).subscribe((resp)=>{      
+    })
+  }   
+  
+  createTag(id,Tages){           
+    for(let i=0;i<Tages.length;i++)
+    {
+      const newTag: any = { AssetID: id, Name:Tages[i].Name};      
+      this.agentService.addNewTag(newTag).subscribe(
+        (res) => {          
+        }
+      );
+    }
+  }
+
+  getClientsList(data) {
+    return data
+      .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
+      .sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase()
+          ? 1
+          : b.name.toLowerCase() > a.name.toLowerCase()
+            ? -1
+            : 0
+      );
+  }
+
+  getclear(){    
+    this.deviceName="";
+    this.assetTagName="";
+    this.dropdownModel.clearWithOutChanges();
+    this.dropdownManufacturer.clearWithOutChanges();
+    this.dropdowndeviceCompany.clearWithOutChanges();
+    this.dropdowndeviceTp.clearWithOutChanges(); 
+    this.note="";           
+    this.selectedSidebarTag=[];    
+  }
+
+  getDeviceName(ID) {
+    this.deviceTypId = ID;
+  }
+
+getDateWarranty(date: any) {        
+  let dateWarrantry = new Date(date.year, date.month, date.day);
+  this.warrantyDate = dateWarrantry;
+}
+
+getDateInstalled(date: any) {       
+  let dateInstalled = new Date(date.year, date.month, date.day);
+  this.installDate = dateInstalled;
+}
+
+addTags(Tag) {  
+  if (!Tag) {
+    return;
+  }
+  const newTag: any = {Name: Tag };  
+  this.selectedSidebarTag.push(newTag);  
+  this.sidetagFilterValue="";
+  this.getSidebarAssetTagDropDownDetail();    
+}
+
+getSidebarAssetTagDropDownDetail() {
+  this.agentService.getAssetTag().subscribe((resp) => {
+    this.assetSidebarTag = resp;
+  });
+}
+
+onTagRemove(index: number): void {
+  this.selectedSidebarTag.splice(index, 1);
+}
+
+onSidebarSelectTag(tag: any): void {  
+  const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
+  this.selectedSidebarTag.push(addTag);  
+  this.sidetagFilterValue="";
+}
+
+onSidebarSearchTag(value: string) {
+  let filter = value.toLowerCase();
+
+  if (filter != "" && this.filteredSidebarTag.length > 0) {
+    this.filteredSidebarTag = _.differenceBy(
+      this.filteredSidebarTag.filter((x) => x.Name.toLowerCase().includes(filter)),
+      this.selectedSidebarTag,
+      "ID"
+    );
+  } else if (this.filteredSidebarTag.length > 0) {
+    this.filteredSidebarTag = _.differenceBy(
+      this.filteredSidebarTag,
+      this.selectedSidebarTag,
+      "ID"
+    );
+  } else {
+    this.filteredSidebarTag = this.assetTag;
+  }
+}
+
+getAssetTagDropDownDetail() {
+  this.agentService.getAssetTag().subscribe((resp) => {
+    this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+      this.selectedTagDevice = res;
+
+      if (this.selectedTagDevice.length !== 0) {
+        this.assetTag = resp;
+        this.filteredTag = resp;
+      }
+    });
+  });
+}
 
 }

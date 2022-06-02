@@ -309,12 +309,11 @@
                                 !asset.IsAgentCurrent
                               " class="agent-tag qt-ff-gm --offline">{{asset.AgentVersion}}</span>
                               <span *ngIf="
-                                asset.AgentVersion == '' &&
-                                asset.AgentVersion == undefined &&
-                                asset.AgentVersion == null &&
+                                asset.AgentVersion != '' &&
+                                asset.AgentVersion != undefined &&
+                                asset.AgentVersion != null &&
                                 asset.IsAgentCurrent
                               " class="agent-tag qt-ff-gm">{{asset.AgentVersion}}</span>          
-
                           </div>
                           </td>
                             <td class="company-devices-table__go-to">
