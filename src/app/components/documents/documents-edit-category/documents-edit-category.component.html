@@ -10,7 +10,6 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content">
-
         <div class="qt-w100 qt-mb-24">
             <div class="qt-input-block">
                 <label>Category Name</label>
@@ -46,6 +45,11 @@
                             <span class="checkbox-mark"></span>
                         </label>
                         <span class="qt-ml-12">All Client Companies</span>
+                        <span
+                            class="icon__info-question qt-sz-12 qt-ic-c"
+                            placement="left"
+                            ngbTooltip="all new and existing companies with the appropriate type will get the quick access to the category on the company details page"
+                        ></span>
                     </div>
                     <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
                         <label class="checkbox-container">
@@ -105,7 +109,8 @@
                 #addBtn="disabled"
                 (onClick)="onSave()"
             >
-                Save
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"

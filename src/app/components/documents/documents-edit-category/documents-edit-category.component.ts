@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { Company } from 'src/app/interfaces/company/company';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -14,6 +15,7 @@ import { DocumentEditCategory } from './class/document-edit-category';
 
 })
 export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   opened: boolean = false;
   documentEditCategory: DocumentEditCategory;
   companies: Array<Company> = [];
@@ -82,7 +84,9 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
     return '/company/default/logo.jpg';
   }
   onSave() {
+    this.addBtn.setDisabled(true);
     this.documentsService.editCategory(this.documentEditCategory.id, this.documentEditCategory.getDataForUpdate()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
     })
   }

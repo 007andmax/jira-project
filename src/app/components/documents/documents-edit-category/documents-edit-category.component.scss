@@ -4,7 +4,6 @@
 .list-companies-container {
     overflow: auto;
     max-height: calc(100% - 170px);
-
     &::-webkit-scrollbar-thumb {
       background: #929eac;
     }
@@ -46,7 +45,9 @@
         }
     }
 }
-
 .checkbox-container {
   margin-bottom: 5px;
+}
+.icon__info-question {
+  margin: 0px 0px 0px auto;
 }

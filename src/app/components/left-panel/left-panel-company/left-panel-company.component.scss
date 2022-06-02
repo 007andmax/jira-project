@@ -16,12 +16,12 @@
 .categories {
   padding: 0px;
   li {
-    color: #919eab;
+    color: $gray-600;
   }
 }
 .--active-category-document {
   background-color: #171e26;
-  color: #ffffff;
+  color: $white !important;
 }
 .show-categories-documents {
   transform: rotate(180deg);
@@ -64,7 +64,12 @@ _menu-info {
   }
 
 }
-
+.clear-link-style {
+  position: relative;
+  display: block;
+  padding: 0px !important;
+  margin: 0px 20px 0px 0px;
+}
 
 
 
