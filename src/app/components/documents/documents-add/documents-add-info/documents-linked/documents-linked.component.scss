@@ -10,7 +10,7 @@
     margin-top: 0px !important;
 }
 .disabled {
-    background-color: #dfe3e8;
+    background-color: $gray-400;
     cursor: default !important;
 }
 .device-user {
@@ -145,8 +145,8 @@
     content: "Select Company and User to link";
 }
 .title-link-to {
-    @extend %body-m-sb;
-    color: $primary-2;
+   @include body-m__sb;
+   color: $primary-2;
 }
 .qt-checkbox {
     span {

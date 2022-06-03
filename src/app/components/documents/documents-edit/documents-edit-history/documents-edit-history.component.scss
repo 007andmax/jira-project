@@ -170,10 +170,10 @@
         color: $white;
     }
     &__document-history-name {
-        @extend %body-m-m;
+        @include body-m__m;
     }
     &__document-history-text {
-        @extend %сaption-l;
+        @include сaption-l;
         color: $gray-700;
         white-space: nowrap;
         text-overflow: ellipsis;

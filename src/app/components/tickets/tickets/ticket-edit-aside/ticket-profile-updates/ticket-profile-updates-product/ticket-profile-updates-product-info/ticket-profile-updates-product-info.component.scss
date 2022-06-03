@@ -53,7 +53,7 @@
   }
 
   &__update-info {
-    @extend %сaption-l;
+    @include сaption-l;
     margin-left: -48px;
   }
   &__people-added {
@@ -74,7 +74,7 @@
   }
   &__ticket-info {
     flex-grow: 1;
-    @extend %сaption-l;
+    @include сaption-l;
     margin-right: 8px;
 
     @media (max-width: 767px) {
@@ -110,7 +110,7 @@
       width: auto;
     }
     pre {
-      @extend %сaption-l-sb;
+      @include сaption-l__sb;
       color: $primary-2;
       margin: 0;
       text-overflow: ellipsis;
@@ -133,7 +133,7 @@
     position: relative;
 
     &::after {
-      @extend %label-l-sb;
+      @include label-l__sb;
 
       @media (max-width: 767px) {
         content: "";

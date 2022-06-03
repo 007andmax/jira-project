@@ -20,9 +20,8 @@
   }
 }
 
-/deep/.ngb-dp-arrow-btn {
-  //background-color: $primary-1 !important;
-  background-color: $white !important; //TODO fix important
+/deep/.ngb-dp-arrow .ngb-dp-arrow-btn {
+  background-color: $white;
 }
 
 /deep/.date-picker i {

@@ -1,9 +1,11 @@
+@import "./src/assets/styles/variable";
+
 .active {
-    color: #2ec866;
+    color: $success;
     background-color: rgba(46, 200, 102, 0.08);
 }
 .no-active {
-    color: #ff5263;
+    color: $error;
     background-color: rgba(255, 82, 99, 0.08);
 }
 .filter-tags-body {
@@ -20,12 +22,12 @@
         }
 
         .name {
-            color: #454f5b;
+            color: $gray-800;
         }
 
         .description {
             margin-top: 6px;
-            color: #637382;
+            color: $gray-700;
             font-size: 12px;
         }
 
@@ -62,7 +64,7 @@
     padding: 8px 0;
     border-radius: 4px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: $white;
     overflow: hidden;
     .tab-wrapper {
         display: flex;
@@ -82,8 +84,8 @@
             font-weight: bold;
             &.active,
             &:hover {
-                color: #16a4fa;
-                border-bottom: 2px solid #16a4fa;
+                color: $primary-1;
+                border-bottom: 2px solid $primary-1;
             }
         }
     }
@@ -150,8 +152,8 @@
 }
 .container-caret {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     width: 20px;
     height: 20px;
     margin: 0 0 4px 4px;
@@ -160,5 +162,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f4f6f8;
+    background-color: $gray-200;
 }

@@ -1,4 +1,5 @@
-@import "./src/assets/styles/variable";
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .dark-dropdown,
 .light-dropdown,
@@ -52,7 +53,7 @@
       justify-content: flex-start;
       padding: 0 20px;
       border: none;
-      @extend %body-m-m;
+      @include body-m__m;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
@@ -81,6 +82,9 @@
   .icn-remove-old {
     top: calc(50% - 4px) !important;
     right: 12px;
+    @media (max-width: 767px) {
+      top: calc(50% - 14px) !important;
+    }
   }
   &.right {
     .dropdown-menu {
@@ -295,7 +299,7 @@
           text-align: left;
           position: relative;
           @media (max-width: 767px) {
-            border-bottom: 1px solid #dfe3e8;
+            border-bottom: 1px solid $gray-400;
             font-weight: 400;
             padding: 8px 16px !important;
           }
@@ -357,7 +361,7 @@
           }
           .total-count {
             color: $primary-2;
-            @extend %сaption-l;
+            @include сaption-l;
           }
           .col-md-12 {
             span {

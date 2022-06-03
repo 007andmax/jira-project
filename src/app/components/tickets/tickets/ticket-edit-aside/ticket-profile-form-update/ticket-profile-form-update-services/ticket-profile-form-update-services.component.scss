@@ -1,6 +1,9 @@
 @import './src/assets/styles/variable';
 
 .service-item {
+  + .service-item {
+    margin-top: 16px;
+  }
   &__first-line {
     margin-bottom: 8px;
   }
@@ -53,7 +56,7 @@
         content: "Service";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;

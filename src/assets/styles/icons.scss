@@ -183,18 +183,18 @@
     background-image: url("/assets/img/icons/menu-white.svg");
   }
   &__tickets-gray {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
     mask-image: url("/assets/img/icons/tickets-gray.svg");
   }
   &__password-manager-gray {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     // background-image: url("/assets/img/icons/password-manager-gray.svg");
   }
   &__company-gray {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
   }
@@ -202,27 +202,27 @@
     background-image: url("/assets/img/icons/remove.svg");
   }
   &__remove-disabled {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/remove.svg");
     mask-image: url("/assets/img/icons/remove.svg");
   }
   &__support-page {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/support-page.svg");
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   &__category-closed {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/category-closed.svg");
     mask-image: url("/assets/img/icons/category-closed.svg");
   }
   &__add-sub-category {
-    background-color: #637382;
+    background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
     mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
   }
   &__add-article {
-    background-color: #637382;
+    background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
   }
@@ -239,37 +239,37 @@
     background-image: url("/assets/img/icons/road-map.svg");
   }
   &__draft-content {
-    background-color: #637382;
+    background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/draft.svg");
     mask-image: url("/assets/img/icons/draft.svg");
   }
   &__save-support-tag {
-    background-color: #637382;
+    background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/save-support-tag.svg");
     mask-image: url("/assets/img/icons/save-support-tag.svg");
   }
   &__edit-category {
-    background-color: #637382;
+    background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
   }
   &__drag {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
     mask-image: url("/assets/img/icons/support-page-drag.svg");
   }
   &__remove-category {
-    background-color: #637382;
+    background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
     mask-image: url("/assets/img/icons/support-page-remove-category.svg");
   }
   &__category-more {
-    background-color: #919eab;
+    background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/category-more.svg");
     mask-image: url("/assets/img/icons/category-more.svg");
   }
   &__remove-blue {
-    background-color: #16a4fa;
+    background-color: $primary-1;
     -webkit-mask-image: url("/assets/img/icons/remove.svg");
     mask-image: url("/assets/img/icons/remove.svg");
   }

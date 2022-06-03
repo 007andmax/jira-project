@@ -43,10 +43,10 @@
       padding: 0 20px;
       transition: all 0.3s;
       color: $primary-2;
-      @extend %body-m-m;
+      @include body-m__m;
       &:hover {
-        color: #ffffff;
-        background: #16a4fa;
+        color: $white;
+        background: $primary-1;
       }
     }
   }
@@ -113,7 +113,7 @@
 
 .product-list-ticket-tech .header-product-list-ticket__title {
   padding-top: 20px;
-  @extend %body-l-sb;
+  @include body-l__sb;
 }
 
 .product-list-report-btn-width {
@@ -286,7 +286,7 @@
   }
   .grey-dropdown {
     .light-dropdown {
-      border: solid 1px #c5cdd5;
+      border: solid 1px $gray-500;
       color: $primary-2;
       border-radius: 4px;
       height: 36px;
@@ -334,7 +334,7 @@
       height: calc(100vh - 211px);
     }
     &-row {
-      border-bottom: 1px solid #edf0f2;
+      border-bottom: 1px solid $gray-300;
       padding: 0 16px;
       //display: flex;
       position: relative;
@@ -371,7 +371,7 @@
       align-items: center;
       padding: 8px;
       text-transform: uppercase;
-      @extend %сaption-m-sb;
+      @include сaption-m__sb;
     }
     > div:first-child,
     > div:last-child {
@@ -405,8 +405,8 @@
     &-close {
       width: 65px;
       height: 65px;
-      border-bottom: 1px solid #edf0f2;
-      border-right: 1px solid #edf0f2;
+      border-bottom: 1px solid $gray-300;
+      border-right: 1px solid $gray-300;
       background-size: 20px;
       background-repeat: no-repeat;
       background-position: center;
@@ -432,14 +432,14 @@
   margin: 0 auto;
   background-color: $white;
   thead {
-    background-color: #f9fafb;
+    background-color: $gray-100;
     border-bottom: 1px solid $gray-300;
     border-top: 1px solid $gray-300;
   }
   th {
     text-transform: uppercase;
     padding: 7px 0;
-    @extend %сaption-m-sb;
+    @include сaption-m__sb;
   }
   td {
     padding: 11px 0;
@@ -719,7 +719,7 @@
 }
 
 .reports-all .report p {
- @extend %h6-sb;
+  @include h6__sb;
   position: relative;
   margin-bottom: 20px;
 }
@@ -752,7 +752,7 @@
 }
 
 .reports-all .report ul li {
-  @extend %body-r;
+  @include body-r;
   margin-bottom: 12px;
   cursor: pointer;
   position: relative;
@@ -845,7 +845,7 @@
 }
 
 .commissions__header--item:nth-child(even) p {
-  @extend %сaption-l;
+  @include сaption-l;
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -897,7 +897,7 @@
 }
 
 .customer-ticket__header--item:nth-child(2) p {
-  @extend %сaption-l;
+  @include сaption-l;
   color: $gray-700;
   display: flex;
   justify-content: space-between;
@@ -956,7 +956,7 @@
 .customer-ticket__report--summary-title  {
   width: 100%;
   margin: 20px 0 0 60px;
-  @extend %body-l-sb;
+  @include body-l__sb;
   color: $primary-2;
 }
 
@@ -980,7 +980,7 @@
     font-weight: 300;
   }
   &__text {
-    @extend %body-r;
+    @include body-r;
     color: $gray-700;
   }
   &__icon {

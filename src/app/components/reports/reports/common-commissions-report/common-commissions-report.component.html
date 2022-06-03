@@ -21,7 +21,7 @@
             <div class="customer-ticket__report">
                 <div class="qt-report__body-header">
                     <div
-                        class="body-m-sb qt-color-dark"
+                        class="body-m__sb qt-color-dark"
                         *ngIf="onInit"
                     >
                         {{ selectedCompany && selectedCompany.name || 'All companies' }}
@@ -36,7 +36,7 @@
                         <span>{{ commonCommissionsReport.endDate }}</span>
                     </div>
                     <div
-                        class="body-m-sb qt-color-dark"
+                        class="body-m__sb qt-color-dark"
                         *ngIf="onInit"
                     >
                         {{ currentCompany.name }}
@@ -124,14 +124,14 @@
                             </tr>
                         </ng-template>
                         <tr class="qt-report__body-row">
-                            <td class="body-l-sb qt-color-dark">Total</td>
-                            <td class="body-l-sb qt-color-dark">
+                            <td class="body-l__sb qt-color-dark">Total</td>
+                            <td class="body-l__sb qt-color-dark">
                                 {{ commonCommissionsReport.servicesSum | toFixed : 2 }}
                             </td>
-                            <td class="body-l-sb qt-color-dark">
+                            <td class="body-l__sb qt-color-dark">
                                 {{ commonCommissionsReport.totalSum | toFixed : 2 }}
                             </td>
-                            <td class="body-l-sb qt-color-dark2">
+                            <td class="body-l__sb qt-color-dark2">
                                 {{ commonCommissionsReport.totalCommissionSum | toFixed : 2 }}
                             </td>
                         </tr>

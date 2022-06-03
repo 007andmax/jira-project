@@ -96,7 +96,7 @@
             label {
                 width: auto;
                 height: 16px;
-                @extend %body-m;
+                @include body-m;
                 display: flex;
                 align-items: center;
             }
@@ -111,7 +111,7 @@
         }
     }
 }
- 
+
 .pengind-loading {
     width: 25px !important;
     height: 25px !important;

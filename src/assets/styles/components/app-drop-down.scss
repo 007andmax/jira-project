@@ -29,13 +29,12 @@ app-drop-down {
 .app-drop-down {
   &__right-icon {
     position: absolute;
-    //right: 10px; // TODO check arrow
     right: 0;
     transform: translateY(50%);
   }
 
   &__title {
-    @extend %body-m-sb;
+    @include body-m__sb;
     color: $primary-2;
     margin-bottom: 8px;
   }
@@ -62,7 +61,7 @@ app-drop-down {
       width: 100%;
       text-align: left;
       background: $white;
-      @extend %body-m-m;
+      @include body-m__m;
       color: $primary-2;
       text-overflow: ellipsis;
       overflow: hidden;

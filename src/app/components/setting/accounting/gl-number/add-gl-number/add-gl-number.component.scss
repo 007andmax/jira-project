@@ -27,7 +27,7 @@ td {
     }
     span {
         margin-top: 12px !important;
-        margin-right: 0px !important;
+        margin-right: 0 !important;
     }
 }
 .tax-name {
@@ -36,7 +36,6 @@ td {
         width: 105px;
     }
     input {
-        padding-left: 0;
         font-weight: 500;
         color: $gray-800;
         border: 1px solid transparent;
@@ -55,9 +54,8 @@ td {
         width: 55px;
     }
     input {
-        padding-left: 0;
         font-weight: 500;
-        color: #212b36;
+        color: $primary-2;
         border: 1px solid transparent;
         border-radius: 4px;
         outline: none;

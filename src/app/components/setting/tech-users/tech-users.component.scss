@@ -160,7 +160,7 @@
     vertical-align: middle;
     text-transform: capitalize;
     &__title {
-        @extend %body-m;
+        @include body-m;
         margin-bottom: 0;
         line-height: initial;
         color: $primary-2;

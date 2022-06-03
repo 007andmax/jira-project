@@ -19,10 +19,6 @@
                     [itemList]="servicesList"
                     (selectedServicesItem)="selectService($event)"
                 ></app-services-list>
-
-
-
-
                 <app-ticket-profile-updates-service-timepicker
                     (onSetEnd)="onSetDurationEnd($event)"
                     (onChangeStart)="onChangeStartTimePicker($event)"
@@ -44,9 +40,6 @@
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
                     [textContent]="getDuration(quantity)"
                 ></div>
-
-
-
                 <div class="ticket-updates__date-icon icon__assign-date"></div>
                 <div
                     class="ticket-updates__photo-people"
@@ -67,10 +60,6 @@
                 ></textarea>
             </div>
         </div>
-
-
-
-
         <span
             class="tag__modern ticket-updates__service-tag-completed"
             *ngIf="service.completed"
@@ -81,13 +70,7 @@
             *ngIf="!service.completed && service.date"
             [textContent]="'Due date - ' + getDate(service.date)"
         ></span>
-
-
-
     </div>
-
-
-
     <div class="right-side-icons">
         <i
             (click)="saveService()"

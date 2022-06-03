@@ -1,8 +1,8 @@
-@import "./src/assets/styles/variable";
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .app-left-panel {
   display: block;
-  //height: 100vh;
   height: 100%;
   width: $left-panel-width;
   z-index: 1050;
@@ -36,7 +36,7 @@
     }
 
     &-avatar {
-      @extend %сaption-l-sb;
+      @include сaption-l__sb;
       @media (max-width: 767px) {
         width: 40px;
         height: 40px;
@@ -46,7 +46,7 @@
         background-position: center;
         background-size: cover;
         margin-right: 10px;
-        color: white;
+        color: $white;
         align-items: center;
         justify-content: center;
         display: flex;
@@ -62,7 +62,7 @@
     &-name {
       display: flex;
       align-items: center;
-      @extend %сaption-l;
+      @include сaption-l;
       color: $gray-600;
 
     }
@@ -179,11 +179,10 @@
   }
 
   &__menu-title {
-    @extend %body-r-m;
+    @include body-r__m;
     font-stretch: normal;
     color: $gray-600;
     white-space: nowrap;
-    font-weight: $fw-medium;
   }
 
   &__menu-icon {
@@ -289,7 +288,7 @@
     justify-content: space-between;
     padding: 0 24px 0 60px;
     cursor: pointer;
-    @extend %body-m;
+    @include body-m;
     color: $white;
     align-items: center;
     position: relative;
@@ -402,7 +401,7 @@
     }
     &__menu-title {
       color: $white;
-      @extend %body-r-m;
+      @include body-r__m;
     }
     &__menu-arrow {
       transform: rotate(180deg);

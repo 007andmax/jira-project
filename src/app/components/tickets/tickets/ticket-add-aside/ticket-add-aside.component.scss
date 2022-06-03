@@ -63,7 +63,7 @@
   }
 
   &__ticket-name {
-    @extend %сaption-l-sb;
+    @include сaption-l__sb;
     color: $gray-800;
     margin-right: 16px;
 
@@ -81,7 +81,7 @@
 .users-to-notify {
   margin-top: 35px;
   &__title {
-    @extend %сaption-l-sb;
+    @include сaption-l__sb;
     color: $primary-2;
     margin-bottom: 14px;
   }

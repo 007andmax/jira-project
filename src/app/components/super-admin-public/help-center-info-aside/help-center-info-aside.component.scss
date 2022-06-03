@@ -4,25 +4,25 @@
 .help-support-list-item-icon {
     padding: 8px;
     border-radius: 8px;
-    background-color: #f9fafb;
+    background-color: $gray-100;
     width: 40px;
     height: 40px;
 }
 .help-support-list-item-text {
    h3 {
-        @extend %body-r-m;
+        @include body-r__m;
         color: $primary-1;
    }
    span {
-        @extend %сaption-l;
+        @include сaption-l;
         color: $gray-700;
    }
 }
 .help-support-list-item {
     display: flex;
     align-items: center;
-    padding: 12px 0px;
-    border-bottom: 1px solid #edf0f2;
+    padding: 12px 0;
+    border-bottom: 1px solid $gray-300;
 }
 .help-center-aside {
     width: 384px;
@@ -40,6 +40,6 @@
     }
 
     .qt-aside__title {
-      @extend %body-l-sb;
+      @include body-l__sb;
     }
 }

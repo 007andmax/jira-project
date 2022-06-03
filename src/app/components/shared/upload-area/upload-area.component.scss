@@ -46,7 +46,7 @@
 
   &__mobile-text {
     color: $primary-2;
-    @extend %сaption-l-sb;
+    @include сaption-l__sb;
     display: none;
 
     @media (max-width: 767px) {
