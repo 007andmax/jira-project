@@ -18,9 +18,8 @@
     .report-menu-item-header {
         display: flex;
         align-items: center;
-        padding: 0 0 0px 16px;
+        padding: 0;
         margin: 0 0 8px 0;
-
         .icon {
             &__sales {
                 background-image: url("/assets/img/icons/report-left-menu/sales.svg");
@@ -84,6 +83,6 @@
         font-size: 13px;
         line-height: 1.43;
         color: $white;
-        padding: 8px 0 8px 16px;
+        padding: 8px 0 8px 8px;
     }
 }
