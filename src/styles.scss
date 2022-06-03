@@ -2218,7 +2218,7 @@ app-quotes-item {
         @extend %body-m;
         color: $gray-600;
         @media (max-width: 767px) {
-          max-width: 108px;
+          max-width: 190px;
           overflow: hidden;
           text-overflow: inherit;
           white-space: nowrap;
