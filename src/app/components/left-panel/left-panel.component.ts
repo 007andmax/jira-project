@@ -122,8 +122,10 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/billable-tickets`)) this.state = 'new-billable-tickets';
           if (window.location.href.includes(`/documents`)) this.state = 'new-documents';
           if (window.location.href.includes(`/documents/add`)) this.state = 'new-add-documents';
+          if (window.location.href.includes(`/documents/add`) && this.companiesStateService.getCompanyRoutingId()) this.state = 'new-add-documents-company';
           if (window.location.href.includes(`/documents/category`)) this.state = 'new-category-documents';
           if (window.location.href.includes(`/documents/edit`)) this.state = 'new-edit-documents';
+          if (window.location.href.includes(`/documents/edit`) && this.companiesStateService.getCompanyRoutingId()) this.state = 'new-edit-documents-company';
           if (window.location.href.includes(`/documents/templates`)) this.state = 'new-template-documents';
           if (window.location.href.includes(`/documents/preview`)) this.state = 'new-preview-documents';
 
@@ -148,6 +150,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
+          console.log("this.state", this.state);
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();

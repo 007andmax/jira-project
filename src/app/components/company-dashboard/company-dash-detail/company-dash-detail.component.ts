@@ -363,7 +363,6 @@ export class CompanyDashDetailComponent implements OnInit {
   getCompanyDetails() {
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
       this.companyDetail.onEditMode(data);
-      this.companiesStateService.setCompanyDetail(this.companyDetail);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
       this.setCompanyData(data);
     })

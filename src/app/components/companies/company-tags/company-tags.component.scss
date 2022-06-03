@@ -13,6 +13,9 @@
 .filter-tags-body {
   padding: 0;
   margin-top: 0px !important;
+  /deep/.mat-form-field-label {
+    top: 7px;
+  }
   .qt-checkbox {
     .text-content {
       @extend %body-m;
@@ -181,4 +184,10 @@
 }
 .is-hover {
   background-color: #edf2f67a;
+}
+.company-tag-input {
+  &::placeholder {
+      opacity: 0 !important;
+      color: $gray-600;
+    }
 }

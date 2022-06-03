@@ -36,7 +36,6 @@ export class CompanyProfile {
     id: string;
     tags: Array<Tag>;
     associatedCompanies: Array<CompanyAssociated> = [];
-    assignedDocumentCategories: Array<CompanyAssigned> = [];
     reputation?: number = 0;
     constructor() {
         this.logo = null;
@@ -109,7 +108,6 @@ export class CompanyProfile {
         this.reputation = company.reputation;
         if (company.companyTicketStatistic) this.companyTicketStatistic = company.companyTicketStatistic;
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
-        this.assignedDocumentCategories = company.assignedDocumentCategories.map(item => new CompanyAssigned(item));
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));

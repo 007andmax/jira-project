@@ -22,7 +22,7 @@ export class DocumentsHeaderComponent implements OnInit {
   @Output() onSearch = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
   @Input() companyId: string;
-
+  @Input() showAssignedCompanies: boolean = false;
 
   sub: Subscription = new Subscription();
   searchText: string = "";

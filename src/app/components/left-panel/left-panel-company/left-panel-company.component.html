@@ -141,11 +141,16 @@
         >
             <span (click)="goToCompanySection('documents')">Documents</span>
         </a>
-        <i
-            class="icn-sm report-caret-icon"
+        <div
+            class="qt-ml-auto qt-sz-20"
             (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
-            [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
-        ></i>
+            *ngIf="assignedDocumentCategories.length > 0"
+        >
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
+            ></i>
+        </div>
     </li>
     <ul
         class="categories"
@@ -154,7 +159,7 @@
         <ng-template
             ngFor
             let-assignedDocumentCategory
-            [ngForOf]="companyDetail.assignedDocumentCategories"
+            [ngForOf]="assignedDocumentCategories"
             [ngForTrackBy]="trackById"
         >
             <li

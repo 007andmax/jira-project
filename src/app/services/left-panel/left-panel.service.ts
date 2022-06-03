@@ -47,7 +47,9 @@ export class LeftPanelService {
       || state == 'company-password-manager'
       || state == 'company-products'
       || state == 'company-contracts'
-      || state == 'company-documents')
+      || state == 'company-documents'
+      || state == 'new-edit-documents-company'
+      || state == 'new-add-documents-company')
   }
   isBillingState(state) {
     return (state === 'billing-dashboard'

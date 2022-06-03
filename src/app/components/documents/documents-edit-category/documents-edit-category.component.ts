@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { Company } from 'src/app/interfaces/company/company';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
@@ -24,7 +26,8 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private documentsService: DocumentsService,
-
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private documentsStateService: DocumentsStateService) { }
 
 
@@ -87,6 +90,8 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
     this.addBtn.setDisabled(true);
     this.documentsService.editCategory(this.documentEditCategory.id, this.documentEditCategory.getDataForUpdate()).subscribe(data => {
       this.addBtn.setDisabled(false);
+      this.toastrService.success("The category has been successfully updated");
+      this.appStateService.changeDetectorRef();
       this.close();
     })
   }

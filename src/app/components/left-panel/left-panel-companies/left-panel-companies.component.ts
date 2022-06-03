@@ -44,6 +44,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
       console.log("data", data);
       if (data) this.toggleTypeCompanies = false;
+      if (!data) this.toggleTypeCompanies = true;
     })
   }
   onToggleTypeCompanies() {
