@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppService } from 'src/app/states/app/app.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 
 @Component({
@@ -13,9 +14,11 @@ export class InventoryHeaderComponent implements OnInit {
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
   toggleFilter: boolean = false;
   constructor(private permissionsService: PermissionsService,
-    private inventoryStateService: InventoryStateService,) { }
+    private inventoryStateService: InventoryStateService,
+    public appService: AppService) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   search() {
     this.onSearch.emit(this.productSearchName);

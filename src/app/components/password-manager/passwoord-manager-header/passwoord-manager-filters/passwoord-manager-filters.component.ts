@@ -77,7 +77,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     if (this.disabledCompany) {
-      this.selectedCompany = this.companies.find(item => item.id === this.companiesState.getSelectedCompanyId());
+      this.selectedCompany = this.companies.find(item => item.id === this.companiesState.getCompanyRoutingId());
       this.filter.setCompany(this.selectedCompany);
       this.onChangeCounterFilter();
 

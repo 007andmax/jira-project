@@ -10,13 +10,13 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { UsersStateService } from '../users/users-state.service';
 import { WebsocketStateService } from '../websocket/websocket-state.service';
+import { CompanyAssigned } from 'src/app/components/companies/class/company-assigned';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompaniesStateService {
   allCompanies = [];
-  selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -32,6 +32,9 @@ export class CompaniesStateService {
   showArchivedCompanies: boolean = false;
   isInitSubscriptions: boolean = false;
   companyRoutingId: string;
+  companyIdForassignedDocumentCategory: string;
+  assignedDocumentCategories: Array<CompanyAssigned> = [];
+  onGetAssignedDocumentCategories: EventEmitter<any> = new EventEmitter();
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private usersStateService: UsersStateService,
@@ -63,6 +66,16 @@ export class CompaniesStateService {
       }
     })
   }
+  public getCompanyIdForassignedDocumentCategory() {
+    return this.companyIdForassignedDocumentCategory;
+  }
+  public getCategoriesDocuments(id) {
+    this.companyIdForassignedDocumentCategory = id;
+    this.companiesService.getCategoriesDocuments(id).subscribe((data: any) => {
+      this.assignedDocumentCategories = data;
+      this.onGetAssignedDocumentCategories.emit(this.assignedDocumentCategories);
+    })
+  }
   public onInitGetCurrentCompany() {
     this.companiesService.getTechCompany().subscribe(data => {
       this.currentCompany = data;
@@ -77,6 +90,7 @@ export class CompaniesStateService {
     return this.companyRoutingId;
   }
   public setCompanyRoutingId(data) {
+    this.onChangeSelectedCompanyId.emit(data);
     this.companyRoutingId = data;
   }
   private initSubscriptions() {
@@ -88,13 +102,6 @@ export class CompaniesStateService {
   }
   public onInitFilter(data) {
     this.filter.emit(data);
-  }
-  public getSelectedCompanyId() {
-    return this.selectedCompanyId;
-  }
-  public setSelectedCompanyId(data) {
-    this.onChangeSelectedCompanyId.emit(data);
-    this.selectedCompanyId = data;
   }
   public setShowArchivedCompanies(data) {
     this.showArchivedCompanies = data;

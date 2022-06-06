@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -26,6 +27,7 @@ export class LeftPanelMarketingComponent implements OnInit {
   constructor(private usersStateService: UsersStateService,
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
+    private leftPanelService: LeftPanelService,
     private marketingEmailStateService: MarketingEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
   ) { }
@@ -35,10 +37,10 @@ export class LeftPanelMarketingComponent implements OnInit {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isMarketingPage(state)) this.open = false
+      if (!this.leftPanelService.isMarketingPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isMarketingPage(data)) this.open = true;
+      if (this.leftPanelService.isMarketingPage(data)) this.open = true;
     })
     this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
@@ -60,9 +62,7 @@ export class LeftPanelMarketingComponent implements OnInit {
   public close() {
     this.open = false;
   }
-  isMarketingPage(state) {
-    return (state === 'marketing')
-  }
+
   openPanel() {
     this.onOpenPanel.emit(null);
   }

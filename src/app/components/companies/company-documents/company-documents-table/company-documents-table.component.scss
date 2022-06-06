@@ -3,3 +3,8 @@
 tr:hover td {
     background-color: $gray-100;
 }
+.documents-table__assigned-companies {
+    width: 180px;
+    max-width: 180px;
+    min-width: 180px;
+}

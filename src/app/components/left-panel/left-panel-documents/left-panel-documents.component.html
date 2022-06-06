@@ -3,12 +3,10 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel()"
 >
-    <div class="app-left-panel__menu-icon --documents"></div>
     <div class="app-left-panel__menu-title">Documents</div>
-    <div class="app-left-panel__menu-arrow"></div>
 </div>
 <ul
-    class="app-left-panel__menu-expand icon-list top-menu"
+    class="app-left-panel__menu-expand icon-list"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <a
@@ -19,6 +17,7 @@
     >
         <li
             class="app-left-panel__menu-expand-item-icon"
+            [ngClass]="{'--active':  activePage === 'new-documents'}"
             (click)="goToState('new-documents')"
         >
             All documents
@@ -32,6 +31,7 @@
     >
         <li
             class="app-left-panel__menu-expand-item-icon"
+            [ngClass]="{'--active':  activePage === 'new-template-documents'}"
             (click)="goToState('new-template-documents')"
         >
             Templates

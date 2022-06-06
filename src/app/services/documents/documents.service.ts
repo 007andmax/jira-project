@@ -48,6 +48,12 @@ export class DocumentsService {
   public editNameCategory(id, name) {
     return this.http.put(this.apiUrl + `documents/categories/${id}`, { name: name });
   }
+  public editCategory(id, data) {
+    return this.http.put(this.apiUrl + `documents/categories/${id}`, data);
+  }
+  public getCategory(id) {
+    return this.http.get(this.apiUrl + `documents/categories/${id}`);
+  }
   public getCategories() {
     return this.http.get(this.apiUrl + `documents/categories`);
   }

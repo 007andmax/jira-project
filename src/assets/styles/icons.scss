@@ -387,6 +387,9 @@
   &__close {
     background-image: url("/assets/img/icons/tag-close.svg");
   }
+  &__document-category-subscribe {
+    background-image: url("/assets/img/icons/subscribe-document-category.svg");
+  }
   &__close-white {
     background-image: url("/assets/img/icons/close-white.svg");
   }
@@ -443,6 +446,11 @@
   }
   &__folder {
     background-image: url("/assets/img/icons/folder.svg");
+  }
+  &__folder-active {
+    background-color: #ffffff;
+    -webkit-mask-image: url("/assets/img/icons/folder.svg");
+    mask-image: url("/assets/img/icons/folder.svg");
   }
   &__calendar {
     background-image: url("/assets/img/icons/calander.svg");

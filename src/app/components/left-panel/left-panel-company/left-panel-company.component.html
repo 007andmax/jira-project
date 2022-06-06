@@ -131,17 +131,53 @@
             Contracts
         </li>
     </a>
-    <a
-        href
-        [link]="getLinkSection('documents')"
-        target="_blank"
-        appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-documents'}"
-            (click)="goToCompanySection('documents')"
+    <li [ngClass]="{'--active':activePage === 'company-documents'}">
+        <a
+            class="clear-link-style"
+            href
+            [link]="getLinkSection('documents')"
+            target="_blank"
+            appRightClickBlank
         >
-            Documents
-        </li>
-    </a>
+            <span
+                class="documents-name-link"
+                (click)="goToCompanySection('documents')"
+            >
+                Documents
+            </span>
+        </a>
+        <div
+            class="qt-ml-auto qt-sz-20"
+            (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
+            *ngIf="assignedDocumentCategories.length > 0"
+        >
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
+            ></i>
+        </div>
+    </li>
+    <ul
+        class="categories"
+        *ngIf="toogleCategoriesDocuments"
+    >
+        <ng-template
+            ngFor
+            let-assignedDocumentCategory
+            [ngForOf]="assignedDocumentCategories"
+            [ngForTrackBy]="trackById"
+        >
+            <li
+                [ngClass]="{'--active-category-document':selectedCategoryDocument === assignedDocumentCategory.id}"
+                (click)="goToCompanyDocumentsCategory(assignedDocumentCategory.id)"
+            >
+                <i
+                    class="qt-sz-16 qt-bg-contain qt-mr-8"
+                    [ngClass]="{'icon__folder-active':selectedCategoryDocument === assignedDocumentCategory.id,
+                'icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
+                ></i>
+                {{assignedDocumentCategory.name}}
+            </li>
+        </ng-template>
+    </ul>
 </ul>

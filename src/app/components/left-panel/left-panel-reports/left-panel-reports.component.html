@@ -1,8 +1,54 @@
 <div
     class="app-left-panel__menu"
-    (click)="goToState()"
     [ngClass]="{'--active': activePage === 'new-reports'}"
 >
-    <div class="app-left-panel__menu-icon --reports"></div>
     <div class="app-left-panel__menu-title">Reports</div>
+</div>
+<ul
+    class="app-left-panel__menu-expand"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <a
+        href
+        [link]="'reports'"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li
+            [ngClass]="{'--active':  activePage === 'new-reports'}"
+            (click)="goToState('new-reports')"
+        >
+            All Reports
+        </li>
+    </a>
+</ul>
+<div class="qt-aside-modern__content advanced">
+    <ng-template
+        ngFor
+        let-report
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById"
+    >
+        <div class="report-menu-item">
+            <div class="report-menu-item-header">
+                <h3
+                    class="qt-ml-8"
+                    [textContent]="report.category"
+                ></h3>
+            </div>
+            <ng-template
+                ngFor
+                let-subcategory
+                [ngForOf]="report.subcategories"
+                [ngForTrackBy]="trackById"
+            >
+                <span
+                    class="pointer"
+                    [ngClass]="{'active':isActive(subcategory.route)}"
+                    [textContent]="subcategory.name"
+                    (click)="goToState(subcategory.route)"
+                ></span>
+            </ng-template>
+        </div>
+    </ng-template>
 </div>

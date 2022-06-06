@@ -512,7 +512,6 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { RightClickBlankDirective } from './directives/right-click-blank.directive';
-import { ReportsLeftMenuComponent } from './components/reports/reports-left-menu/reports-left-menu.component';
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
@@ -541,6 +540,9 @@ import { InventoryCheckUseComponent } from './components/inventory/inventory-che
 import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
 import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
 import { PreviewPhoneMaskComponent } from './components/shared/preview-phone-mask/preview-phone-mask.component';
+import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
+import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
+
 
 declare var $: any;
 
@@ -994,7 +996,6 @@ declare var $: any;
     UsersTableMarketingComponent,
     LeftPanelMarketingComponent,
     RightClickBlankDirective,
-    ReportsLeftMenuComponent,
     LeftPanelSuperAdminComponent,
     SupportPageComponent,
     LeftPanelSuperAdminCategoriesComponent,
@@ -1020,7 +1021,9 @@ declare var $: any;
     InventoryCheckUseComponent,
     ContractsReviewComponent,
     PaymentsReportComponent,
-    PreviewPhoneMaskComponent
+    PreviewPhoneMaskComponent,
+    DocumentsEditCategoryComponent,
+    DocumentsEditCategoryItemComponent
   ],
   imports: [
     BrowserModule,

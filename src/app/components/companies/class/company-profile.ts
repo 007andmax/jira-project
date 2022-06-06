@@ -8,6 +8,7 @@ import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { CompanyConditions } from './company-conditions';
 import { CompanyAssociated } from './company-associated';
+import { CompanyAssigned } from './company-assigned';
 
 export class CompanyProfile {
     accountNumber: any;

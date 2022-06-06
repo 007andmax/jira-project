@@ -48,6 +48,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = false;
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
       this.filter.setFilter(data);
     })

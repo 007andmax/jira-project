@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -27,6 +28,7 @@ export class LeftPanelComponent implements OnInit {
   currentCompany: Company;
   toggleLeftPanel: boolean = false;
   state: string = '';
+  page: string = '';
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
 
@@ -48,6 +50,7 @@ export class LeftPanelComponent implements OnInit {
     private usersStateService: UsersStateService,
     private appService: AppService,
     private permissionsService: PermissionsService,
+    private leftPanelService: LeftPanelService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -119,8 +122,10 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/billable-tickets`)) this.state = 'new-billable-tickets';
           if (window.location.href.includes(`/documents`)) this.state = 'new-documents';
           if (window.location.href.includes(`/documents/add`)) this.state = 'new-add-documents';
+          if (window.location.href.includes(`/documents/add`) && this.companiesStateService.getCompanyRoutingId()) this.state = 'new-add-documents-company';
           if (window.location.href.includes(`/documents/category`)) this.state = 'new-category-documents';
           if (window.location.href.includes(`/documents/edit`)) this.state = 'new-edit-documents';
+          if (window.location.href.includes(`/documents/edit`) && this.companiesStateService.getCompanyRoutingId()) this.state = 'new-edit-documents-company';
           if (window.location.href.includes(`/documents/templates`)) this.state = 'new-template-documents';
           if (window.location.href.includes(`/documents/preview`)) this.state = 'new-preview-documents';
 
@@ -145,9 +150,11 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
+          console.log("this.state", this.state);
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();
+          this.updatePage(this.state);
         }
 
       });
@@ -168,8 +175,25 @@ export class LeftPanelComponent implements OnInit {
     })
     this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
+      this.updatePage(this.state);
       this.cd.detectChanges();
     })
+  }
+  updatePage(data) {
+    if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
+    if (this.leftPanelService.isTicketsPage(data)) this.page = "TICKETS";
+    if (this.leftPanelService.isUsersPage(data)) this.page = "USERS";
+    if (this.leftPanelService.isMarketingPage(data)) this.page = "MARKETING";
+    if (this.leftPanelService.isCompanyPage(data)) this.page = "COMPANIES";
+    if (this.leftPanelService.isBillingState(data)) this.page = "BILLING";
+    if (this.leftPanelService.isInventoryState(data)) this.page = "INVENTORY";
+    if (this.leftPanelService.isPasswordManagerState(data)) this.page = "PASSWORD_MANAGER";
+    if (this.leftPanelService.isDocumentsState(data)) this.page = "DOCUMENTS";
+    if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
+    if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
+  }
+  changePage(page) {
+    this.page = page;
   }
   onOpenPanel() {
     this.leftPanelStateService.toggleLeftPanel(false);
@@ -203,7 +227,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'quotes-component') this.goToLink('quotes');
       if (this.state === 'new-payments-ng2') this.goToLink('payments');
       if (this.state === 'new-contracts') this.goToLink('contracts');
-      if (this.state === 'company-dashboard') this.goToLink(`company/dashboard/${this.companiesStateService.getSelectedCompanyId()}`);
+      if (this.state === 'company-dashboard') this.goToLink(`company/dashboard/${this.companiesStateService.getCompanyRoutingId()}`);
       if (this.state === 'company-tickets') this.goToLink('company/tickets');
       if (this.state === 'company-user') this.goToLink('company/user');
       if (this.state === 'company-devices') this.goToLink('company/devices');
@@ -241,7 +265,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-documents') this.goToLink('documents');
       if (this.state === 'new-add-documents') this.goToLink('documents/add');
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
-      if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
+      if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
 
       console.log("this.state", this.state);
       if (this.state === 'byProducts' ||
@@ -263,7 +287,7 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'service-report' ||
         this.state === 'income-accounts') this.goToLink('report/' + this.state);
 
-
+      this.updatePage(this.state);
       this.leftPanelStateService.changeState(this.state);
       this.cd.detectChanges();
     }
