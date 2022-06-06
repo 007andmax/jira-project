@@ -2196,7 +2196,7 @@ app-quotes-item {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: calc(100% - 112px);
+          max-width: min-content
         }
 
         &::after {
