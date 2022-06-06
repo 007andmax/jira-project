@@ -23,18 +23,11 @@ export class DocumentsEditCategoryItemComponent implements OnInit {
     return this.documentEditCategory.assignedCompaniesIds.find(item => item == id);
   }
   onSelectCompany(event, company) {
-    console.log("event.target.checked", event.target.checked);
     if (event.target.checked) {
-      // this.selectedCompanies.push(company);
       this.documentEditCategory.addAssignedCompaniesIds(company.id);
     } else {
-      // let index = this.selectedCompanies.findIndex(item => item.id === company.id);
-      //  if (index > -1) this.selectedCompanies.splice(index, 1);
       let indexId = this.documentEditCategory.assignedCompaniesIds.findIndex(item => item === company.id);
       if (indexId > -1) this.documentEditCategory.removedAssignedCompaniesIds(indexId);
-      console.log("indexId", indexId);
     }
-    console.log("this.documentEditCategory", this.documentEditCategory);
-    // this.documentEditCategory.setAssignedCompaniesIds(this.selectedCompanies.map(item => item.id));
   }
 }

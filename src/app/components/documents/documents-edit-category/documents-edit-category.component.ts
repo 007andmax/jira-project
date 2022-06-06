@@ -33,7 +33,6 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let onEditFolder = this.documentsStateService.onEditFolder.subscribe(data => {
-      console.log("data", data);
       this.documentsService.getCategory(data.categoryId).subscribe(res => {
         this.documentEditCategory = new DocumentEditCategory(res);
         this.opened = true;
@@ -97,6 +96,9 @@ export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   }
   close() {
     this.opened = false;
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

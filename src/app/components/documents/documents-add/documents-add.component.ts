@@ -44,8 +44,6 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
           this.companyId = queryParam['companyId'];
           this.companiesStateService.setCompanyRoutingId(this.companyId);
           this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents-company');
-          console.log("this.companyId", this.companyId);
-          console.log("this.leftPanelStateService.active", this.leftPanelStateService.activePage);
         }
         if (queryParam['template']) this.templateId = queryParam['template'];
         if (queryParam['id_category']) this.documentAdd.setCategoryId(queryParam['id_category']);
@@ -73,7 +71,6 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
     this.sub.add(queryParams);
     if (!this.companyId) this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents');
     if (this.companyId) this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents-company');
-    console.log("this.leftPanelStateService.active", this.leftPanelStateService.activePage);
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;

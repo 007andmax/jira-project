@@ -15,13 +15,10 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
 
   ngOnInit() {
     this.companyId = this.activateRoute.snapshot.params['id'];
-    console.log("this.activateRoute.snapshot", this.activateRoute.snapshot);
     if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.companyId = params['id'];
-      console.log("params", params);
-      console.log("this.activateRoute.snapshot", this.activateRoute.snapshot.queryParams.categoryId);
       if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
       if (this.activateRoute.snapshot.queryParams.categoryId) this.filter.setCategoryId(this.activateRoute.snapshot.queryParams.categoryId);
       this.filter.setCompanyId(this.companyId);
@@ -34,11 +31,9 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.header.filter.onChangeCounterFilter();
     });
     this.sub.add(subscription);
-    console.log("this.activateRoute.params,", this.activateRoute.params)
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
         if (!this.showPreloader) {
-          console.log("queryParam", queryParam);
           this.showPreloader = true;
           this.filter.setCategoryId(queryParam.categoryId);
           this.getFilterList();
@@ -109,6 +104,5 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    // this.companiesStateService.setCompanyRoutingId(null);
   }
 }

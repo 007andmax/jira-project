@@ -86,13 +86,11 @@ export class CompanyValdiate {
 
     }
     public checkValidPhoneNumber(number) {
-        console.log("number", number);
         if (!number || number.length < 14) {
             this.phoneNumber = false;
         } else {
             this.phoneNumber = true;
         }
-
     }
     public checkValidDomain(domain) {
         if (domain && !domain.match(this.reDomain)) {

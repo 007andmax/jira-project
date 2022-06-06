@@ -22,7 +22,6 @@ export class ToFixedDirective {
   ngDoCheck() {
     if (this.blockCheck) return;
     let value = this.element.nativeElement.value;
-    console.log("value", value);
     if (parseFloat(value) != NaN) this.element.nativeElement.value = parseFloat(value).toFixed(this.count);
   }
 }

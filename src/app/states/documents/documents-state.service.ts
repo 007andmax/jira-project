@@ -36,7 +36,6 @@ export class DocumentsStateService {
       if (data.action === "DOCUMENT_CATEGORY_EDITED") {
         let findIndex = this.categories.findIndex(item => item.id === data.data.id);
         if (findIndex > -1) this.categories[findIndex] = new CategoryDocument(data.data);
-        console.log("this.categories[findIndex]", this.categories[findIndex]);
       }
       if (data.action === "DOCUMENT_CATEGORY_REMOVED") {
         let findIndex = this.categories.findIndex(item => item.id === data.data);
