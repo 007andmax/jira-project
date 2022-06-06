@@ -21,8 +21,8 @@ export class ProductSalesReport {
         this.techCompanyName = data.techCompanyName;
         this.clientCompanyName = data.clientCompanyName;
         this.productName = data.productName;
-        this.startDate = data.startDate;
-        this.endDate = data.endDate;
+        this.startDate = moment(new Date(data.startDate)).format('ll');;
+        this.endDate = moment(new Date(data.endDate)).format('ll');;
         this.type = data.type;
         this.lines = data.lines.map((item) => {
             return new ProductSalesReportLine(item);

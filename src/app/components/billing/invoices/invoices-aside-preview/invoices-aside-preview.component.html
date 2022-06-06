@@ -178,10 +178,12 @@
                             class="qt-fs-13"
                             [textContent]="invoiceProfile.senderAddress"
                         ></div>
-                        <div
-                            class="qt-fs-13"
-                            [textContent]="(invoiceProfile.phoneNumbers && invoiceProfile.phoneNumbers.length > 0) ? invoiceProfile.phoneNumbers[0].number : ''"
-                        ></div>
+                        <div class="qt-fs-13">
+                            <preview-phone-mask
+                                *ngIf="(invoiceProfile.phoneNumbers && invoiceProfile.phoneNumbers.length > 0)"
+                                [number]="invoiceProfile.phoneNumbers[0].number"
+                            ></preview-phone-mask>
+                        </div>
                     </div>
                     <div
                         class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
@@ -213,8 +215,12 @@
                         <div
                             class="qt-fs-13"
                             *ngIf="invoiceProfile.invoiceContact"
-                            [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"
-                        ></div>
+                        >
+                            <preview-phone-mask
+                                *ngIf="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0)"
+                                [number]="invoiceProfile.invoiceContact.phoneNumbers[0].number"
+                            ></preview-phone-mask>
+                        </div>
                     </div>
                     <div class="qt-fs-13 qt-text-right qt-lh-154">
                         <div class="qt-df qt-jc-sb qt-mb-8">

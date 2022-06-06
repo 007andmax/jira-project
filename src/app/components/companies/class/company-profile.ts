@@ -80,7 +80,7 @@ export class CompanyProfile {
         } else {
             this.addresses[0].phoneNumbers.map((item) => {
                 let number = item.number;
-                if (number[0] === "1") number = `+${number}`;
+                if (number[0] === "1") number = `+1${number}`;
                 item.number = number;
                 return item;
             })
@@ -93,7 +93,7 @@ export class CompanyProfile {
         } else {
             this.contacts[0].phoneNumbers.map((item) => {
                 let number = item.number;
-                if (number[0] === "1") number = `+${number}`;
+                if (number[0] === "1") number = `+1${number}`;
                 item.number = number;
                 return item;
             })

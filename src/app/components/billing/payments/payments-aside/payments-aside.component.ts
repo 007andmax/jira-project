@@ -28,6 +28,7 @@ export class PaymentsAsideComponent implements OnInit {
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.payment.clientCompanyId);
+    console.log("this.company", this.company);
   }
   showRefund() {
     this.close();

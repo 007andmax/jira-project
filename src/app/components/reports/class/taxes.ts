@@ -1,5 +1,6 @@
 import { TaxesReportLine } from './taxes-line';
 import { reqTaxesReport } from 'src/app/interfaces/reports/req-taxes-report';
+import * as moment from "moment";
 
 export class TaxesReport {
   techCompanyName: string;
@@ -17,8 +18,8 @@ export class TaxesReport {
   public setData(data) {
     this.techCompanyName = data.techCompanyName;
     this.clientCompanyName = data.clientCompanyName;
-    this.startDate = data.startDate;
-    this.endDate = data.endDate;
+    this.startDate = moment(new Date(data.startDate)).format('ll');
+    this.endDate = moment(new Date(data.endDate)).format('ll');
     this.type = data.type;
     this.lines = data.lines.map((item) => {
       return new TaxesReportLine(item);

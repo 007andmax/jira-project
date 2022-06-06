@@ -37,10 +37,13 @@
             class="qt-fs-13 qt-lh-154"
             [textContent]="company.contacts[0].primaryEmail"
         ></div>
-        <div
-            class="qt-fs-13 qt-mb-4"
-            [textContent]="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0) ? company.contacts[0].phoneNumbers[0].number : ''"
-        ></div>
+        <div class="qt-fs-13 qt-mb-4">
+            <preview-phone-mask
+                [class]="'company-info-aside__row-info-value'"
+                *ngIf="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0)"
+                [number]="company.contacts[0].phoneNumbers[0].number"
+            ></preview-phone-mask>
+        </div>
         <div
             class="qt-fs-13 qt-color-info  qt-pointer"
             id="dropdownForm1"

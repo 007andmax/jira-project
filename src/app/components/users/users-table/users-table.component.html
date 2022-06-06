@@ -78,10 +78,11 @@
                         class="qt-sz-16 qt-mr-6 icon__phone-gray"
                     ></div>
                 </div>
-                <div
-                    class="users-table__contract-no--number"
-                    [textContent]="phone.number | preparePhone | mask: '(000) 000-0000' | phone"
-                ></div>
+                <preview-phone-mask
+                    [class]="'users-table__contract-no--number'"
+                    *ngIf="phone.number"
+                    [number]="phone.number"
+                ></preview-phone-mask>
             </div>
         </ng-template>
     </td>
