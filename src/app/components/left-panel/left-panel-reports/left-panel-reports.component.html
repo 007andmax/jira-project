@@ -26,7 +26,10 @@
         [ngForOf]="list"
         [ngForTrackBy]="trackById"
     >
-        <div class="report-menu-item">
+        <div
+            class="report-menu-item"
+            *ngIf="report.permissions"
+        >
             <div class="report-menu-item-header">
                 <h3
                     class="qt-ml-8"

@@ -13,7 +13,7 @@
     >
         <li
             [ngClass]="{'--active':  activePage === 'inventory'}"
-            (click)="goToState();"
+            (click)="goToState();selectCategory(null)"
         >
             All products
         </li>

@@ -18,19 +18,12 @@ export class CustomerSalesReportComponent implements OnInit {
 
   ngOnInit() {
   }
-  perseStartDate() {
-    return moment(this.customerSalesReport.startDate).format('DD MMM YYYY')
-  }
-  perseEndDate() {
-    return moment(this.customerSalesReport.endDate).format('DD MMM YYYY')
-  }
   public onRequest(data) {
     this.loadingInProgress = data;
     this.cd.detectChanges();
   }
   onSelectedClient(client) {
     this.selectedClient = client;
-
   }
   public getReport(data) {
     this.customerSalesReport.setData(data);
@@ -79,8 +72,8 @@ export class CustomerSalesReportComponent implements OnInit {
     this.headers.push('Total');
 
   }
-  parseDate(date) {
-    return moment(date).format('DD.MM.YYYY');
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2);

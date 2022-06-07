@@ -516,7 +516,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
       this.paymentsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.paymentsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
-
+      console.log("this.paymentsReport", this.paymentsReport);
       this.techService.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.techService.setEndDate(moment(value.end).format('YYYY-MM-DD'));
 

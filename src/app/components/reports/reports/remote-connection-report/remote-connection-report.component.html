@@ -27,9 +27,13 @@
                 class="body-m qt-color-dark-light"
                 *ngIf="onInit && remoteConnectionReport.lines"
             >
-                <span>{{remoteConnectionReport.startDate}}</span>
+                <span>
+                    {{getDateForHeader(remoteConnectionReport.startDate)}}
+                </span>
                 -
-                <span>{{remoteConnectionReport.endDate}}</span>
+                <span>
+                    {{getDateForHeader(remoteConnectionReport.endDate)}}
+                </span>
             </div>
             <div
                 class

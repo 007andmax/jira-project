@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CommonCommissionsReport } from '../../class/common-commissions-report';
+import * as moment from "moment";
 
 @Component({
   selector: 'common-commissions-report',
@@ -109,6 +110,9 @@ export class CommonCommissionsReportComponent implements OnInit {
   public onRequest(data) {
     this.loadingInProgress = data;
     this.cd.detectChanges();
+  }
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
   }
   public trackByIndex(index, item) {
     return index;

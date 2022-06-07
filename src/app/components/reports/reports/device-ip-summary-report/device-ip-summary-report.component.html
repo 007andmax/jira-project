@@ -13,150 +13,122 @@
     id="product-list-ticket-data"
 >
     <div
-        class=""
+        class
         *ngIf="!loadingInProgress"
     >
         <div
             class="qt-report__body-header"
             *ngIf="onInit"
         >
-          <div class="body-m-sb qt-color-dark">{{company.name || 'All companies'}}</div>
-          <h6 class="qt-fw-600 qt-color-dark">Software Summary Report</h6>
-          <div class="body-m qt-color-dark-light">{{deviceIpSummary.date | date:'yyyy-MM-dd'}}</div>
+            <div class="body-m-sb qt-color-dark">{{company.name || 'All companies'}}</div>
+            <h6 class="qt-fw-600 qt-color-dark">Software Summary Report</h6>
+            <div class="body-m qt-color-dark-light">
+                {{getDateForHeader(deviceIpSummary.date)}}
+            </div>
         </div>
         <table
-          class="qt-report__body-table-body"
-          *ngIf="onInit"
+            class="qt-report__body-table-body"
+            *ngIf="onInit"
         >
-          <thead>
-            <tr>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDevice"
-              >
-                Device
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName"
-              >
-                Network Name
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
-              >
-                Link Speed
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp"
-              >
-                DHCP
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress"
-              >
-                IP Address
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
-              >
-                Subnet
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithGateway"
-              >
-                Gateway
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
-              >
-                DNS 1
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
-              >
-                DNS 2
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp"
-              >
-                WAN IP
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-          <ng-template
-            ngFor
-            let-device
-            [ngForOf]="deviceIpSummary.list"
-            let-i="index"
-            [ngForTrackBy]="trackByIndex"
-          >
-            <tr
-              class="qt-report__body-row ng-star-inserted"
-              *ngIf="device.report"
-            >
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDevice"
-              >
-                {{device.label}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName"
-              >
-                {{device.hostName}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
-              >
-                {{parseFloatValue(getDeviceReport(device, 'speed'))/1000000}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp"
-              >
-                {{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress"
-              >
-                {{getDeviceReport(device, 'ip_address')}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
-              >
-                <p>{{ getDeviceReport(device, 'dns')}}</p>
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithGateway"
-              >
-                {{getDeviceReport(device, 'gateway')}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
-              >
-                <p>{{getDeviceReport(device, 'dns')}}</p>
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
-              >
-                {{getDeviceReport(device, 'dns')}}
-              </td>
-              <td
-                *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp"
-              >
-                {{device.report.externalIp}}
-              </td>
-            </tr>
-          </ng-template>
-          </tbody>
+            <thead>
+                <tr>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithDevice"
+                    >
+                        Device
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName"
+                    >
+                        Network Name
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
+                    >
+                        Link Speed
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp"
+                    >
+                        DHCP
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress"
+                    >
+                        IP Address
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
+                    >
+                        Subnet
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithGateway"
+                    >
+                        Gateway
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
+                    >
+                        DNS 1
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
+                    >
+                        DNS 2
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp"
+                    >
+                        WAN IP
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template
+                    ngFor
+                    let-device
+                    [ngForOf]="deviceIpSummary.list"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr
+                        class="qt-report__body-row ng-star-inserted"
+                        *ngIf="device.report"
+                    >
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithDevice">{{device.label}}</td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName">{{device.hostName}}</td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed">
+                            {{parseFloatValue(getDeviceReport(device, 'speed'))/1000000}}
+                        </td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp">
+                            {{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}
+                        </td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress">
+                            {{getDeviceReport(device, 'ip_address')}}
+                        </td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet">
+                            <p>{{ getDeviceReport(device, 'dns')}}</p>
+                        </td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithGateway">{{getDeviceReport(device, 'gateway')}}</td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithDns1">
+                            <p>{{getDeviceReport(device, 'dns')}}</p>
+                        </td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithDns2">{{getDeviceReport(device, 'dns')}}</td>
+                        <td *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp">{{device.report.externalIp}}</td>
+                    </tr>
+                </ng-template>
+            </tbody>
         </table>
     </div>
 </div>

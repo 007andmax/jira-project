@@ -11,8 +11,8 @@ export class TechService {
     companyId: string;
     constructor(data = null) {
         if (data) {
-            this.startDate = moment(new Date(data.startDate)).format('ll');
-            this.endDate = moment(new Date(data.endDate)).format('ll');
+            this.startDate = data.startDate;
+            this.endDate = data.endDate;
             this.techUserId = data.techUserId;
             this.lines = data.lines;
             this.totalQuantity = data.totalQuantity;

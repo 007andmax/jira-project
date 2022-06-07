@@ -30,13 +30,11 @@ export class TicketReportComponent implements OnInit, OnDestroy {
   }
   public getReport(data) {
     this.ticketsReport.setData(data);
-    this.ticketsReport.startDate = moment(new Date(this.ticketsReport.startDate)).format('ll');
-    this.ticketsReport.endDate = moment(new Date(this.ticketsReport.endDate)).format('ll');
     this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticketsReport.userId);
     this.onInit = true;
   }
   public getDateForHeader(data) {
-    return moment(new Date(data)).format('MMM DD, YYYY');
+    return moment(data).format('DD MMM YYYY');
   }
   public trackByIndex(index, item) {
     return index;

@@ -31,9 +31,13 @@
                         class="body-m qt-color-dark-light"
                         *ngIf="onInit"
                     >
-                        <span>{{commonCommissionsReport.startDate}}</span>
+                        <span>
+                            {{getDateForHeader(commonCommissionsReport.startDate)}}
+                        </span>
                         -
-                        <span>{{ commonCommissionsReport.endDate }}</span>
+                        <span>
+                            {{getDateForHeader(commonCommissionsReport.endDate)}}
+                        </span>
                     </div>
                     <div
                         class="body-m__sb qt-color-dark"

@@ -38,11 +38,13 @@ export class PaymentsReportComponent implements OnInit {
     this.cd.detectChanges();
   }
   public getReport(data) {
+    console.log("data", data);
     this.paymentsReport.setData(data);
+    console.log("this.paymentsReport", this.paymentsReport);
     this.onInit = true;
   }
   public getDateForHeader(data) {
-    return moment(new Date(data)).format('DD MMM YYYY');
+    return moment(data).format('DD MMM YYYY');
   }
   public getDateForCashe(data) {
     return moment(new Date(data)).format('YYYY/MM/DD');
