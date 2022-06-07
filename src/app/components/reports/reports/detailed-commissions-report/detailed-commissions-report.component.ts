@@ -11,6 +11,7 @@ export class DetailedCommissionsReportComponent implements OnInit {
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   currentCompany;
+  selectedCompany;
   detailedCommissionsReport: DetailedCommissionsReport = new DetailedCommissionsReport();
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
@@ -20,6 +21,7 @@ export class DetailedCommissionsReportComponent implements OnInit {
   }
   public getReport(data) {
     this.detailedCommissionsReport = new DetailedCommissionsReport(JSON.parse(JSON.stringify(data)));
+    this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.detailedCommissionsReport.companyId);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }

@@ -84,7 +84,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       this.devicesStateService.subsribeToNetScan(this.companyId);
       this.getDevices();

@@ -69,8 +69,24 @@ export class InvoicesItemComponent implements OnInit {
   parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');
   };
-
   getDueDate() {
+    var dueDate = new Date(this.invoice.dueDate).getTime();
+    var today = Date.now();
+    let overDue = (dueDate - today) / 86400000;
+    let outstanding = (new Date(this.invoice.date).getTime() - today) / 86400000;
+    let isOverDue = (overDue < 0);
+    let isOutstanding = (overDue > 0);
+    if (isOverDue) {
+      //   this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) + 1000000000;
+      // this.invoice.dueDatePositionForSorting = 0;
+      return Math.abs(Math.floor(overDue));
+    } else if (isOutstanding) {
+      //    this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(outstanding))) + 2000000000;
+      //  this.invoice.dueDatePositionForSorting = 1;
+      return Math.abs(Math.floor(overDue));
+    }
+  }
+  getOverDueDate() {
     var dueDate = new Date(this.invoice.dueDate).getTime();
     var today = Date.now();
     let overDue = (dueDate - today) / 86400000;

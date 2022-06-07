@@ -1,100 +1,171 @@
 <div>
-  <app-report-menu [report]="'service-report'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" ></app-report-menu>
- </div>
- <app-report-additional-actions [report]="'service-report'" [fileName]="'customer-report-' + getSelectedClientName()" [template]="'CUSTOMER_REPORT'"  [selectedClient]="selectedClient"></app-report-additional-actions>
- <div class="loading" *ngIf="loadingInProgress"></div>
- <div class="product-list___ticket report-show-footer-header"  id="product-list-ticket-data" >
-  <div  class="product-list-ticket"   *ngIf="!loadingInProgress">
-    <div class="customer-ticket" *ngIf="onInit" >
-      <div class="customer-ticket__report">
-        <div class="report-header">
-          <h5 class="qt-fw-600 qt-color-white">Service Report</h5>
-          <div class="company-info">
-            <div class="body-m qt-color-white qt-text-right">{{ serviceReport.companyName || 'All companies' }}</div>
-            <p><span>{{serviceReport.startDate}}</span> - <span>{{ serviceReport.endDate }}</span></p>
-          </div>
-        </div>
-        <div *ngIf="showHeader" class="customer-ticket__report--summary"  >
-          <div class="customer-ticket__report--summary-title">Resolved Services</div>
-          <div class="customer-ticket__header">
-            <div class="customer-ticket__header--item canvas-chart no-value">
-              <nvd3 [options]="chartOptions" [data]="chartData"></nvd3>
-
-            </div>
-            <div class="customer-ticket__header--item">
-              <ng-template ngFor let-time [ngForOf]="overallServiceTime" let-i="index" [ngForTrackBy]="trackByIndex" >
-                <p
-                [ngClass]="'service-color-' + i">
-               {{ time.name }} <span>{{ formatServiceTime(time.hours,time.minutes)}}</span>
-             </p>
-                </ng-template>
-
-
-            </div>
-            <div class="customer-ticket__header--item">
-
-              <div>
-                <p><span style="font-weight: 400;">{{formatServiceTime(timeSpent.hours,timeSpent.minutes)}}</span> hr</p>
-                <p style="color:#fff;">Time Spent</p>
-              </div>
-           <p class="ticket-report-time" >Total time of all services</p>
-            </div>
-          </div>
-
-        </div>
-        <div class="customer-ticket__report--details" >
-          <div class="customer-ticket__report--summary-title qt-mb-12">Service Details</div>
-          <div class="details-header clearfix">
-            <div class="col-md-8" style="width: 70%;">TICKET NUMBER</div>
-            <div class="col-md-2" style="width: 20%;">DATE / TIME</div>
-            <div class="col-md-2" style="width: 10%;">STATUS</div>
-          </div>
-          <ng-template ngFor let-ticket [ngForOf]="serviceReport.services" let-i="index" [ngForTrackBy]="trackByIndex" >
-
-          <div class="details-content clearfix"  >
-            <div class="col-md-8 ellipsis" style="width: 70%;margin-bottom: 20px;">{{ticket.ticketNumber}} - {{ticket.ticketSubject}}</div>
-            <div class="col-md-2" style="width: 20%;margin-bottom: 20px;">{{ parseDateTicket(ticket.ticketDate) }}</div>
-            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" *ngIf="ticket.status === 'ON_HOLD'">
-              <p class="network-scan-status status-warning">On Hold</p>
-            </div>
-            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" *ngIf="ticket.status === 'COMPLETED'">
-              <p class="network-scan-status status-success">Completed</p>
-            </div>
-            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" *ngIf="ticket.status === 'IN_PROGRESS'">
-              <p class="network-scan-status status-in-progress">In Progress</p>
-            </div>
-
-            <div
-                 class="services">
-
-              <div  >
-
-                <div   class="clearfix" >
-                  <div class="col-md-3 ellipsis">
-                    {{ ticket.expenseName }}
-                  </div>
-
-                  <div class="col-md-7" [innerHTML]="ticket.description"></div>
-
-                  <div class="col-md-2">
-                    Time: {{ getDurationFilter(ticket.serviceTime) }}
-                  </div>
+    <app-report-menu
+        [report]="'service-report'"
+        (onSelectedClient)="onSelectedClient($event)"
+        (onRequest)="onRequest($event)"
+    ></app-report-menu>
+</div>
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="qt-report__body"
+    id="product-list-ticket-data"
+>
+    <div
+        class="qt-report__product-list"
+        *ngIf="!loadingInProgress"
+    >
+        <div class="customer-ticket">
+            <div class="customer-ticket__report">
+                <div class="qt-report__body-header">
+                    <div
+                        class="body-m__sb qt-color-dark"
+                        *ngIf="onInit"
+                    >
+                        {{ serviceReport.companyName || 'All companies' }}
+                    </div>
+                    <h6 class="qt-fw-600 qt-color-dark">Service Report</h6>
+                    <div
+                        class="body-m qt-color-dark-light"
+                        *ngIf="onInit"
+                    >
+                        <span>{{serviceReport.startDate}}</span>
+                        -
+                        <span>{{ serviceReport.endDate }}</span>
+                    </div>
                 </div>
-
-              </div>
-
+                <div
+                    *ngIf="showHeader && onInit"
+                    class="customer-ticket__report--summary"
+                >
+                    <div class="customer-ticket__header">
+                        <div class="customer-ticket__header--item canvas-chart no-value">
+                            <div class="customer-ticket__report--summary-title">Resolved Services</div>
+                            <nvd3
+                                [options]="chartOptions"
+                                [data]="chartData"
+                            ></nvd3>
+                        </div>
+                        <div class="customer-ticket__header--item">
+                            <ng-template
+                                ngFor
+                                let-time
+                                [ngForOf]="overallServiceTime"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <p [ngClass]="'service-color-' + i">
+                                    {{ time.name }}
+                                    <span>
+                                        {{ formatServiceTime(time.hours,time.minutes)}}
+                                    </span>
+                                </p>
+                            </ng-template>
+                        </div>
+                        <div class="customer-ticket__header--item">
+                            <div class="average-time-spent">
+                                <div class="average-time-spent__wrap">
+                                    <div class="average-time-spent__icon">
+                                        <!-- <div class="icon__tickets-on-time qt-sz-24 qt-bg-contain pointer"></div> -->
+                                        <!-- todo check -->
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                        >
+                                            <g
+                                                fill="none"
+                                                fill-rule="evenodd"
+                                            >
+                                                <path
+                                                    d="m3.126 12.805 13.789-11.57 6.428 7.66-13.789 11.57zm9.959-8.356 6.428 7.66"
+                                                    fill="#FFF"
+                                                    stroke="#4F5F79"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                ></path>
+                                                <path
+                                                    fill="#FFF"
+                                                    stroke="#4F5F79"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M21 11v3h0a2 2 0 1 0 0 4v3H3v-3h0a2 2 0 1 0 0-4v-3h18z"
+                                                ></path>
+                                                <path
+                                                    fill="#4F5F79"
+                                                    d="m10.104 17.364-1.47.772.281-1.636-1.189-1.159 1.643-.238.735-1.489.734 1.489 1.643.238-1.189 1.159.281 1.636z"
+                                                ></path>
+                                                <path
+                                                    fill="#FFF"
+                                                    stroke="#4F5F79"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M16 11v10"
+                                                ></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="average-time-spent__text-content">
+                                        <div class="average-time-spent__time">
+                                            {{formatServiceTime(timeSpent.hours,timeSpent.minutes)}}  hrs
+                                        </div>
+                                        <div class="average-time-spent__text">Average Time Spent</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table
+                    class="qt-report__body-table-body"
+                    *ngIf="onInit"
+                >
+                    <thead>
+                        <tr>
+                            <th class="qt-fw-600 qt-color-dark">Ticket Number</th>
+                            <th class="qt-fw-600 qt-color-dark">Date / Time</th>
+                            <th class="qt-fw-600 qt-color-dark">User</th>
+                            <th class="qt-fw-600 qt-color-dark">Tech User</th>
+                            <th class="qt-fw-600 qt-color-dark">DESCRIPTION</th>
+                            <th class="qt-fw-600 qt-color-dark">Service Time</th>
+                            <th class="qt-fw-600 qt-color-dark">Service Type</th>
+                            <th class="qt-fw-600 qt-color-dark">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template
+                            ngFor
+                            let-ticket
+                            [ngForOf]="serviceReport.services"
+                            let-i="index"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <tr class="qt-report__body-row">
+                                <td>{{ticket.ticketNumber}}</td>
+                                <td>
+                                    {{ parseDateTicket(ticket.ticketDate) }}
+                                </td>
+                                <td>{{ getUserName(ticket.serviceUser) }}</td>
+                                <td>
+                                    {{ getUserName(ticket.ticketCreatedBy) }}
+                                </td>
+                                <td>{{ticket.ticketSubject}}</td>
+                                <td>
+                                    {{ getDurationFilter(ticket.serviceTime) }}
+                                </td>
+                                <td>{{ ticket.expenseName }}</td>
+                                <td>
+                                    <div *ngIf="ticket.status === 'ON_HOLD'">On Hold</div>
+                                    <div *ngIf="ticket.status === 'COMPLETED'">Completed</div>
+                                    <div *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
             </div>
-            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Service user: {{ getUserName(ticket.serviceUser) }}</div>
-            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Device: {{ getDeviceName(ticket.ticketDevice) }}</div>
-            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Tech: {{ getUserName(ticket.ticketCreatedBy) }}</div>
-            <div ng-if="ticket.responseTime !== null" class="col-md-3 pdf-w" style="margin-top: 20px;">Service date: {{ parseDateService(ticket.expenseDate) }}</div>
-          </div>
-</ng-template>
         </div>
-      </div>
     </div>
-
-
-  <app-report-footer *ngIf="onInit"></app-report-footer>
-   </div>
- </div>
+</div>

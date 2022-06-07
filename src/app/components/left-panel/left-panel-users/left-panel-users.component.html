@@ -3,20 +3,25 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel()"
 >
-    <div class="app-left-panel__menu-icon --users"></div>
     <div class="app-left-panel__menu-title">Users</div>
-    <div class="app-left-panel__menu-arrow"></div>
 </div>
 <ul
-    class="app-left-panel__menu-expand top-menu"
+    class="app-left-panel__menu-expand"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <li
-        [ngClass]="{'--active': !showArchivedCompanies  && activePage === 'new-users'}"
-        (click)="goToState();onShowAll()"
+    <a
+        href
+        [link]="'users'"
+        target="_blank"
+        appRightClickBlank
     >
-        All Users
-    </li>
+        <li
+            [ngClass]="{'--active': !showArchivedCompanies  && activePage === 'new-users'}"
+            (click)="goToState();onShowAll()"
+        >
+            All Users
+        </li>
+    </a>
     <li
         [ngClass]="{'--active': filter.getClientType() === 'CLIENT' && activePage === 'new-users'}"
         (click)="goToState();onSetFilterClientType('CLIENT')"

@@ -24,7 +24,6 @@ export class ReportsStateService {
   public onChangeAccountsReceivable(data) {
     this.accountsReceivable.emit(data);
   }
-
   public parseReportContent(report) {
     if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report" || report == "device-diskspace-report" || report == "device-deploymentwarranty-report") {
       var source = $("#product-list-ticket-data");

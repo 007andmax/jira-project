@@ -1,4 +1,5 @@
 import { RemoteConnectionReportItem } from "./remote-connection-report-item";
+import * as moment from "moment";
 
 export class RemoteConnectionReport {
     type: string = "SUMMARY";
@@ -19,8 +20,8 @@ export class RemoteConnectionReport {
             this.companyId = data.companyId;
             this.deviceId = data.deviceId;
             this.userId = data.userId;
-            this.startDate = data.startDate;
-            this.endDate = data.endDate;
+            this.startDate = moment(new Date(data.startDate)).format('ll');
+            this.endDate = moment(new Date(data.endDate)).format('ll');
             this.preloaderDevices = data.preloaderDevices;
             this.clientCompanyName = data.clientCompanyName;
             this.lines = data.lines;

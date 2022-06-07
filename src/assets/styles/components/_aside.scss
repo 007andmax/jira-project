@@ -204,21 +204,14 @@
   }
 
   &__header-title {
-    //@extend %h5-sb; // TODO check Cascading for @extand
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+    @include h5__sb;
     color: $primary-2;
 
     @media (max-width: 767px) {
       color: $white;
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 600;
+      @include body-l__sb;
       flex: 1;
       text-align: center;
-      letter-spacing: 0;
     }
   }
 
@@ -325,19 +318,12 @@
   }
 
   &__title {
-    //font-weight: 500;
     color: $primary-2;
-    //@extend %h5-sb; // TODO fix priority extend
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+    @include h5__sb;
 
     @media (max-width: 767px) {
       color: $white;
-      font-size: 16px; // TODO add extend in media
-      line-height: 24;
-      letter-spacing: 0;
+      @include body-l__sb;
     }
   }
 

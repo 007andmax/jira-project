@@ -45,7 +45,7 @@
       margin-bottom: 16px;
     }
     &-text {
-      @extend %h5;
+      @include h5;
       max-width: 456px;
       width: 100%;
       margin: 0 auto;
@@ -72,7 +72,7 @@
         list-style: none;
         li {
           position: relative;
-          @extend %body-r;
+          @include body-r;
           color: $primary-2;
           &:not(:last-child) {
             margin: 0 0 16px 0;
@@ -81,7 +81,7 @@
       }
       &-header {
         position: relative;
-        @extend %h4;
+        @include h4;
         color: $primary-2;
         padding-bottom: 16px;
         &::after {
@@ -132,7 +132,7 @@
   display: flex;
   align-items: center;
   &__name {
-    color: #212b36;
+    color: $primary-2;
     position: relative;
     display: flex;
     align-items: center;

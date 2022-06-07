@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
@@ -12,7 +13,7 @@ import { DocumentsFilterComponent } from './documents-filter/documents-filter.co
   styleUrls: ['./documents-header.component.css']
 })
 export class DocumentsHeaderComponent implements OnInit {
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   countFilter: number = 0;
   activePage: string = "";
   @ViewChild('filter') filter: DocumentsFilterComponent;
@@ -21,7 +22,7 @@ export class DocumentsHeaderComponent implements OnInit {
   @Output() onSearch = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
   @Input() companyId: string;
-
+  @Input() showAssignedCompanies: boolean = false;
 
   sub: Subscription = new Subscription();
   searchText: string = "";
@@ -34,6 +35,7 @@ export class DocumentsHeaderComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
     private router: Router,
+    public appService: AppService,
     private companiesStateService: CompaniesStateService,
   ) { }
 
@@ -41,6 +43,7 @@ export class DocumentsHeaderComponent implements OnInit {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = true;
     this.activePage = this.leftPanelStateService.activePage;
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.activePage = data;

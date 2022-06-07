@@ -21,7 +21,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
 
-  toggleFilter: boolean = false;
+  toggleFilter: boolean = true;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   @ViewChild('filter') filter: CompaniesFilterComponent;
@@ -40,6 +40,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = false;
     this.calculateCount = this.companiesState.getCalculateCount();
     let getOnCalculateCount = this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;

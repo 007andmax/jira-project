@@ -1,5 +1,6 @@
 import { DetailedCommissionsItem } from "./detailed-commissions-item";
 import { DetailedCommissionsReducedCompanies } from "./detailed-commissions-reduced-company";
+import * as moment from "moment";
 
 export class DetailedCommissionsReport {
     companyId: string;
@@ -27,8 +28,8 @@ export class DetailedCommissionsReport {
             this.companyId = data.companyId;
             this.userId = data.userId;
             this.type = data.type;
-            this.startDate = data.startDate;
-            this.endDate = data.endDate;
+            this.startDate = moment(new Date(data.startDate)).format('ll');
+            this.endDate = moment(new Date(data.endDate)).format('ll');
             this.categorySalesValue = data.categorySalesValue;
             this.clientCompanyName = data.clientCompanyName;
             this.productsSum = data.productsSum;

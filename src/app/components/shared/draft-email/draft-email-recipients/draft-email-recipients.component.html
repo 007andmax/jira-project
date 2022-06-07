@@ -58,8 +58,13 @@
                 ngbDropdownItem
                 class="dropdown-item"
                 (click)="selected(company)"
-                [textContent]="company.companyInfo.contacts[0].primaryEmail"
             >
+                <span class="user-name">
+                    {{getFirstLastName(company.companyInfo.contacts[0])}}
+                </span>
+                <span class="user-email qt-ml-8">
+                    {{company.companyInfo.contacts[0].primaryEmail}}
+                </span>
             </button>
         </ng-template>
     </div>

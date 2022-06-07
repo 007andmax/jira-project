@@ -42,7 +42,7 @@
       color: $primary-2;
     }
     &__title {
-      @extend %body-m-sb;
+      @include body-m__sb;
       color: $primary-2;
       display: flex;
       align-items: center;

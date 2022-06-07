@@ -32,7 +32,7 @@
 
     &__title {
         flex: 1;
-        @extend  %h6-m;
+        @include h6__m;
         color: $primary-2;
         margin-top: 12px;
         margin-bottom: 16px;
@@ -51,7 +51,7 @@
     }
 
     &__description {
-        @extend %body-m;
+        @include body-m;
         color: $gray-700;
         white-space: nowrap;
         overflow: hidden;

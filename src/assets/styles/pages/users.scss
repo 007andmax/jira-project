@@ -37,12 +37,12 @@
       }
 
       &--user-name {
-        @extend %body-m-m;
+        @include body-m__m;
         color: $primary-2;
       }
 
       &--profession {
-        @extend %body-m;
+        @include body-m;
         color: $gray-800;
       }
     }
@@ -183,12 +183,12 @@
       border-radius: 50%;
     }
     &__title {
-      @extend %сaption-l-m;
+      @include сaption-l__m;
       color: $primary-1;
       margin-bottom: 4px;
     }
     &__subtitle {
-      @extend %сaption-l;
+      @include сaption-l;
       color: $gray-700;
     }
     &__input {
@@ -263,7 +263,7 @@
         &:before {
           position: absolute;
           content: "Tags";
-          @extend %body-m-sb;
+          @include body-m__sb;
           color: $primary-2;
           left: 0;
           top: -28px;
@@ -416,7 +416,7 @@ app-users-table {
       padding-bottom: 6px;
       padding-right: 7px;
       padding-left: 8px;
-      @extend %сaption-l;
+      @include сaption-l;
       margin-right: 0px;
       color: $gray-800;
       background-color: $gray-100;
@@ -455,7 +455,7 @@ app-users-table {
   &__editor-tab {
     display: flex;
     color: $primary-2;
-    @extend %сaption-l-sb;
+    @include сaption-l__sb;
   }
 
   &__editor-tab-item {

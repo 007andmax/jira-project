@@ -27,7 +27,7 @@
     }
 
     .label-name {
-        @extend %body-m-sb;
+        @include body-m__sb;
         color: $primary-2;
         margin-bottom: 8px !important;
     }
@@ -65,7 +65,7 @@
         &__subheader {
             border-bottom: 1px solid $gray-500;
             display: flex;
-            @extend %сaption-l-sb;
+            @include сaption-l__sb;
 
             &-item {
                 flex: 1 0 auto;

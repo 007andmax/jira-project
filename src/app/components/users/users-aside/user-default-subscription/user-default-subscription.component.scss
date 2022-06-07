@@ -47,12 +47,12 @@
     }
 
     .name {
-      color: #454f5b;
+      color: $gray-800;
     }
 
     .description {
       margin-top: 6px;
-      color: #637382;
+      color: $gray-700;
       font-size: 12px;
     }
 
@@ -89,7 +89,7 @@
 }
 .select-wrapper {
   position: absolute;
-  background: white;
+  background: $white;
   height: 100px;
   margin-top: 5px;
   border-radius: 3px;
@@ -113,8 +113,8 @@
       font-weight: bold;
       &.active,
       &:hover {
-        color: #16a4fa;
-        border-bottom: 2px solid #16a4fa;
+        color: $primary-1;
+        border-bottom: 2px solid $primary-1;
       }
     }
   }

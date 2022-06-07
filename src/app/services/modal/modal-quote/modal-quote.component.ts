@@ -41,8 +41,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   selectedUsers = [];
   showError = false;
   usersEmails = [];
-  users = [];
-  reqUsersList = [];
+  usersClients = [];
+  usersTechnical = [];
+  reqUsersListClients = [];
+  reqUsersListTechnical = [];
   initialized: boolean = false;
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
@@ -140,7 +142,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
-    this.selectedUsers.push(event.option.viewValue);
+    this.selectedUsers.push(event.option.value.primaryEmail);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
     // this.userInput.nativeElement.blur();
@@ -154,12 +156,15 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   private getAllUsers(companyId) {
     let userList = this.usersStateService.getAllUsers();
     this.initialized = true;
-    const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "");
-    let clientUser = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt && item.primaryEmail !== "");
-    this.users = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-    this.reqUsersList = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    this.reqUsersListTechnical = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
+      1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
+    this.reqUsersListClients = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
+      1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
+
+    this.usersClients = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
+      1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
+    this.usersTechnical = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "").sort((a, b) => (this.getFirstLastName(a).toLowerCase() > this.getFirstLastName(b).toLowerCase()) ?
+      1 : ((this.getFirstLastName(b).toLowerCase() > this.getFirstLastName(a).toLowerCase()) ? -1 : 0));
   }
 
   /**
@@ -208,7 +213,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event) {
-    this.users = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
+    this.usersClients = this.reqUsersListClients.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
+    this.usersTechnical = this.reqUsersListTechnical.filter(item => this.getFirstLastName(item).toLocaleLowerCase().includes(event.target.value) || item.primaryEmail.includes(event.target.value));
   }
 
   /**
@@ -233,23 +239,12 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public close() {
     this.selectedUsers = [];
     this.usersEmails = [];
-    this.users = [];
+    this.usersClients = [];
+    this.usersTechnical = [];
     this.activeModal.dismiss('Cross click');
   }
-
-  public onAdd(e) {
-    e.stopPropagation();
-    if (e.target.value.length === 0) return;
-    const input = e.target;
-    const value = e.target.value;
-    if (value.length > 0) {
-      this.selectedUsers.push(value);
-      this.usersEmails.push(value);
-      this.quoteStateService.setUsersEmail(this.usersEmails);
-      input.value = '';
-      this.userCtrl.setValue(null);
-    }
-    this.users = JSON.parse(JSON.stringify(this.reqUsersList));
+  getFirstLastName(user) {
+    return `${user.firstName} ${user.lastName}`;
   }
   public keyup(e) {
     if (e.keyCode === 13) {
@@ -262,7 +257,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
         input.value = '';
         this.userCtrl.setValue(null);
       }
-      this.users = JSON.parse(JSON.stringify(this.reqUsersList));
+      this.usersClients = JSON.parse(JSON.stringify(this.reqUsersListClients));
+      this.usersTechnical = JSON.parse(JSON.stringify(this.reqUsersListTechnical));
     }
   }
   ngOnDestroy(): void {

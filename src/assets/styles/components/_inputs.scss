@@ -57,7 +57,7 @@ span.qt-input-search input.qt-input-search {
   position: relative;
 
   &__label {
-    @extend %body-m-sb;
+    @include body-m__sb;
     color: $primary-2;
     margin-bottom: 11px;
     line-height: unset;

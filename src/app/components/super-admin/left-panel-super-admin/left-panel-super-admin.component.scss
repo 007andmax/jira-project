@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .qt-d-none {
     @media (min-width: 767px) {
         display: none !important;
@@ -11,7 +13,7 @@
     border-radius: 50%;
     background-position: center !important;
     background-size: cover !important;
-    color: white;
+    color: $white;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -33,7 +35,7 @@
     background-color: #171e26;
     border-radius: 8px;
     .icon__support-page {
-        background-color: #fff;
+        background-color: $white;
     }
 }
 .app-left-panel__menu-icon {

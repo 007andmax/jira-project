@@ -33,10 +33,11 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.categories = this.documentsStateService.getCategories();
-    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+    let onGetCategories = this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       this.cd.detectChanges();
     })
+    this.sub.add(onGetCategories);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_DOCUMENT) this.removeCategory(this.documentsStateService.getCategoryForRemove());

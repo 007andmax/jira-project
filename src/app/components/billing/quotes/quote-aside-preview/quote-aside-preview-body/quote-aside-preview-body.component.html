@@ -26,10 +26,9 @@
                     let-item
                     [ngForOf]="currentCompany.addresses[0].phoneNumbers"
                 >
-                    <div
-                        class="qt-fs-13"
-                        [textContent]="item.number"
-                    ></div>
+                    <div class="qt-fs-13">
+                        <preview-phone-mask [number]="item.number"></preview-phone-mask>
+                    </div>
                 </ng-template>
             </ng-container>
         </div>

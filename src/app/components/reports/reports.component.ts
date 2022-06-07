@@ -37,6 +37,11 @@ export class ReportsComponent implements OnInit {
       address: "accounting-report",
     },
     {
+      type: "FINANCIAL",
+      name: "Payments report",
+      address: "payments-report",
+    },
+    {
       type: "REMOTE_ACCESS",
       name: "Remote connection report",
       address: "remote-access",
@@ -62,9 +67,9 @@ export class ReportsComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action);
   }
@@ -76,218 +81,218 @@ export class ReportsComponent implements OnInit {
     if (type === "SALES") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "SALES" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "SALES" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList.filter((x) => x.type === "SALES").map((x) => x.name);
     }
 
     if (type === "TAXES") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "TAXES" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "TAXES" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList.filter((x) => x.type === "TAXES").map((x) => x.name);
     }
     if (type === "COMMISSIONS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "COMMISSIONS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "COMMISSIONS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList
-            .filter((x) => x.type === "COMMISSIONS")
-            .map((x) => x.name);
+          .filter((x) => x.type === "COMMISSIONS")
+          .map((x) => x.name);
     }
     if (type === "FINANCIAL") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "FINANCIAL" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "FINANCIAL" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList
-            .filter((x) => x.type === "FINANCIAL")
-            .map((x) => x.name);
+          .filter((x) => x.type === "FINANCIAL")
+          .map((x) => x.name);
     }
 
     if (type === "REMOTE_ACCESS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "REMOTE_ACCESS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "REMOTE_ACCESS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList
-            .filter((x) => x.type === "REMOTE_ACCESS")
-            .map((x) => x.name);
+          .filter((x) => x.type === "REMOTE_ACCESS")
+          .map((x) => x.name);
     }
 
     if (type === "PERFORMANCE") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "PERFORMANCE" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "PERFORMANCE" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList
-            .filter((x) => x.type === "PERFORMANCE")
-            .map((x) => x.name);
+          .filter((x) => x.type === "PERFORMANCE")
+          .map((x) => x.name);
     }
 
     if (type === "TICKETS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "TICKETS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "TICKETS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList
-            .filter((x) => x.type === "TICKETS")
-            .map((x) => x.name);
+          .filter((x) => x.type === "TICKETS")
+          .map((x) => x.name);
     }
 
     if (type === "INCOME_ACCOUNTS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "INCOME_ACCOUNTS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.name)
+          .filter(
+            (x) =>
+              x.type === "INCOME_ACCOUNTS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
         : this.reportList
-            .filter((x) => x.type === "INCOME_ACCOUNTS")
-            .map((x) => x.name);
+          .filter((x) => x.type === "INCOME_ACCOUNTS")
+          .map((x) => x.name);
     }
   }
   public getListStates(type, searchs) {
     if (type === "SALES") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "SALES" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "SALES" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "SALES")
-            .map((x) => x.address);
+          .filter((x) => x.type === "SALES")
+          .map((x) => x.address);
     }
 
     if (type === "TAXES") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "TAXES" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "TAXES" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "TAXES")
-            .map((x) => x.address);
+          .filter((x) => x.type === "TAXES")
+          .map((x) => x.address);
     }
     if (type === "COMMISSIONS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "COMMISSIONS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "COMMISSIONS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "COMMISSIONS")
-            .map((x) => x.address);
+          .filter((x) => x.type === "COMMISSIONS")
+          .map((x) => x.address);
     }
     if (type === "FINANCIAL") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "FINANCIAL" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "FINANCIAL" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "FINANCIAL")
-            .map((x) => x.address);
+          .filter((x) => x.type === "FINANCIAL")
+          .map((x) => x.address);
     }
 
     if (type === "REMOTE_ACCESS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "REMOTE_ACCESS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "REMOTE_ACCESS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "REMOTE_ACCESS")
-            .map((x) => x.address);
+          .filter((x) => x.type === "REMOTE_ACCESS")
+          .map((x) => x.address);
     }
 
     if (type === "PERFORMANCE") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "PERFORMANCE" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "PERFORMANCE" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "PERFORMANCE")
-            .map((x) => x.address);
+          .filter((x) => x.type === "PERFORMANCE")
+          .map((x) => x.address);
     }
 
     if (type === "TICKETS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "TICKETS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "TICKETS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "TICKETS")
-            .map((x) => x.address);
+          .filter((x) => x.type === "TICKETS")
+          .map((x) => x.address);
     }
 
     if (type === "INCOME_ACCOUNTS") {
       return searchs !== ""
         ? this.reportList
-            .filter(
-              (x) =>
-                x.type === "INCOME_ACCOUNTS" &&
-                x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
-            )
-            .map((x) => x.address)
+          .filter(
+            (x) =>
+              x.type === "INCOME_ACCOUNTS" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
         : this.reportList
-            .filter((x) => x.type === "INCOME_ACCOUNTS")
-            .map((x) => x.address);
+          .filter((x) => x.type === "INCOME_ACCOUNTS")
+          .map((x) => x.address);
     }
   }
 

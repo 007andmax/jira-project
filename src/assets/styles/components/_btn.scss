@@ -5,7 +5,7 @@
     height: 36px;
     padding-left: 16px;
     padding-right: 16px;
-    @extend %сaption-l-sb;
+    @include сaption-l__sb;
     background-color: $primary-1;
     position: relative;
     display: flex;

@@ -1,14 +1,18 @@
 <div
     class="app-left-panel__menu"
     [ngClass]="{'--active': open}"
-    (click)="open = !open;openPanel()"
+    (click)="open = !open;openPanel();onToggleTypeCompanies()"
 >
-    <div class="app-left-panel__menu-icon --companies"></div>
     <div class="app-left-panel__menu-title">Companies</div>
-    <div class="app-left-panel__menu-arrow"></div>
+    <i
+        class="icn-sm report-caret-icon"
+        *ngIf="selectedCompany"
+        [ngClass]="{'report-caret-icon-rotate':toggleTypeCompanies}"
+    ></i>
 </div>
 <ul
-    class="app-left-panel__menu-expand top-menu"
+    class="app-left-panel__menu-expand"
+    *ngIf="toggleTypeCompanies"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <a
@@ -94,5 +98,5 @@
     [selectedCompany]="selectedCompany"
     (onChangeState)="goToState($event)"
     [activePage]="activePage"
-    *ngIf="open && selectedCompany && !appService.checkMobile()"
+    *ngIf="selectedCompany && !appService.checkMobile()"
 ></app-left-panel-company>

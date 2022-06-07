@@ -71,7 +71,6 @@ export class CompanyUserComponent implements OnInit {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      this.companiesStateService.setSelectedCompanyId(id);
       this.onInitFilters(id);
     });
 

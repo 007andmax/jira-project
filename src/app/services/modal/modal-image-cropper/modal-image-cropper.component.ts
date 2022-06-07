@@ -9,7 +9,7 @@ import { ImageCroper } from './class/image-croper';
 @Component({
   selector: 'modal-image-cropper',
   templateUrl: './modal-image-cropper.component.html',
-  styleUrls: ['./modal-image-cropper.component.css']
+  styleUrls: ['./modal-image-cropper.component.scss']
 })
 export class ModalImageCropperComponent implements OnInit, OnDestroy {
 

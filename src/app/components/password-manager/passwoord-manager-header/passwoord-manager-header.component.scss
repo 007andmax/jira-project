@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .search-clear {
     width: 12px;
     height: 12px;
@@ -52,10 +54,10 @@
         content: " ";
         position: absolute;
         top: 1px;
-        right: 0px;
+        right: 0;
         width: 8px;
         height: 8px;
-        background-color: #ff5263;
+        background-color: $error;
         border-radius: 10px;
     }
 }

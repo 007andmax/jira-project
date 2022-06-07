@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .scroll-pane {
   overflow: scroll;
   padding: 0;
@@ -17,5 +19,5 @@
   top: 110px;
   right: 103px;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-  background: #ffffff;
+  background: $white;
 }

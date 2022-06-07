@@ -125,7 +125,9 @@
                         (blur)="onUpdatePhoneNumber()"
                         placeholder="Enter Primary Phone"
                         prefix="+1"
-                        mask=" (000) 000-0000"
+                        mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                        [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                        [dropSpecialCharacters]="false"
                         [disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error

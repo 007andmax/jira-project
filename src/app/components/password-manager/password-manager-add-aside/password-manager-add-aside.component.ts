@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
@@ -42,6 +42,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   sub: Subscription = new Subscription();
   @ViewChild('linked') linked: PasswordManagerLinkedComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @ViewChild('companiesDb') companiesDb: DropDownComponent;
   @ViewChild('addRecord') addRecord: DisabledBtnDirective;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
   /**
@@ -65,7 +66,8 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private usersStateService: UsersStateService,
     private toastrService: ToastrService,
     public appService: AppService,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
+    private elRef: ElementRef,
   ) { }
 
   /**
@@ -143,7 +145,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.showAddCategory = false;
     this.appService.toggleMobileAside(false);
     this.selectedCompany = null;
+    this.companiesDb.clearWithOutChanges();
     this.datePicker.reset();
+    this.elRef.nativeElement.querySelector("#description-create-password").value = "";
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

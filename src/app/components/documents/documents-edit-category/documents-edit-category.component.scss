@@ -1,0 +1,50 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
+.list-companies-container {
+    overflow: auto;
+    max-height: calc(100% - 170px);
+    &::-webkit-scrollbar-thumb {
+      background: #929eac;
+    }
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+}
+.item-type-company {
+    min-height: 32px;
+
+    span {
+        color: $primary-2;
+        font-size: 13px;
+        line-height: 20px;
+    }
+}
+.search-companies {
+    position: relative;
+    &::before {
+        content: " ";
+        width: 16px;
+        height: 16px;
+        background-image: url("/assets/img/icons/search.svg");
+        left: 8px;
+        top: calc(50% - 7px);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+    }
+    input {
+        padding: 6px 20px 6px 28px;
+        height: 32px;
+        font-size: 13px;
+        letter-spacing: 0;
+        line-height: 20px;
+
+        &::placeholder {
+          color: $gray-600;
+        }
+    }
+}
+.checkbox-container {
+  margin-bottom: 5px;
+}

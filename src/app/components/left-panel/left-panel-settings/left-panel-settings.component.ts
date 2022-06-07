@@ -5,6 +5,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'app-left-panel-settings',
@@ -23,6 +24,7 @@ export class LeftPanelSettingsComponent implements OnInit {
   constructor(private permissionsService: PermissionsService,
     private settingStateService: SettingStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private leftPanelService: LeftPanelService,
     private usersStateService: UsersStateService) {
   }
 
@@ -33,10 +35,10 @@ export class LeftPanelSettingsComponent implements OnInit {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isSettingsPage(state)) this.open = false
+      if (!this.leftPanelService.isSettingsPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isSettingsPage(data)) this.open = true;
+      if (this.leftPanelService.isSettingsPage(data)) this.open = true;
     })
   }
   public close() {

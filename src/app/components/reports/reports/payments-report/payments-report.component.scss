@@ -1,0 +1,44 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.payments-total-container,.table-name {
+    width: 1384px;
+    margin: 0 auto;
+    background-color: $white;
+    padding: 0 24px;
+}
+.payments-total {
+    width: 500px;
+    margin: 0 0 20px 0;
+    .payments-total-item,.deposit-total {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+.table-name {
+    margin: 0 auto 14px;
+    padding: 0 24px;
+}
+.qt-report__body-table-body {
+    margin: 0 auto 20px auto;
+}
+.line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: $gray-300;
+}
+.payments-report__col-company-name {
+    min-width: 570px;
+}
+.payments-report__col-reference {
+    min-width: 260px;
+}
+.payments-report__col-date {
+    width: 120px;
+}
+.payments-report__col-invoice,.payments-report__col-amount {
+    width: 150px;
+}

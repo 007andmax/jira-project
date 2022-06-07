@@ -3,12 +3,10 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel()"
 >
-    <div class="app-left-panel__menu-icon --settings"></div>
     <div class="app-left-panel__menu-title">Settings</div>
-    <div class="app-left-panel__menu-arrow"></div>
 </div>
 <ul
-    class="app-left-panel__menu-expand top-menu"
+    class="app-left-panel__menu-expand"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <li

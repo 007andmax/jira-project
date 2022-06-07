@@ -8,20 +8,20 @@ export class ToFixedDirective {
   blockCheck = false;
   constructor(private element: ElementRef) { }
   ngOnInit() {
-  
+
     this.element.nativeElement.addEventListener("focus", (event) => {
-    this.blockCheck = true;
+      this.blockCheck = true;
     });
-  
-      this.element.nativeElement.addEventListener("blur", (event) => {
+
+    this.element.nativeElement.addEventListener("blur", (event) => {
       this.blockCheck = false;
-      });
- 
+    });
+
 
   }
   ngDoCheck() {
     if (this.blockCheck) return;
     let value = this.element.nativeElement.value;
-    this.element.nativeElement.value = parseFloat(value).toFixed(this.count);
+    if (parseFloat(value) != NaN) this.element.nativeElement.value = parseFloat(value).toFixed(this.count);
   }
 }

@@ -257,3 +257,10 @@
 .qt-text-right {
     text-align: right;
 }
+.header-circle-icon {
+    background-size: 16px !important;
+    border: 1px solid $gray-400;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}

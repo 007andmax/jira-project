@@ -100,7 +100,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.showPreloader = true;
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      this.companiesStateService.setSelectedCompanyId(id);
       let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
       this.header.filter.setTypeFilterWithoutChange("ALL");

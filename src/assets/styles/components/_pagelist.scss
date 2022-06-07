@@ -1,3 +1,5 @@
+@import './src/assets/styles/fonts';
+
 .qt-page-list {
   padding: 24px;
   background-color: $background;
@@ -86,19 +88,12 @@
   }
 
   &__header-title {
-    //@extend %h6-sb; // TODO fix problem with Cascading mobile styles
-    font-size: 18px;
-    line-height: 26px;
-    letter-spacing: -0.5px;
-    font-weight: 600;
+    @include h6__sb;
     color: $primary-2;
 
     @media (max-width: 767px) {
       color: $white;
-      font-size: 16px; // TODO Replace style with extensions
-      line-height: 24px;
-      letter-spacing: 0;
-      font-weight: 600;
+      @include body-l__sb;
     }
   }
 
@@ -145,7 +140,7 @@
       &__title {
         margin: 0 auto;
         color: $white;
-        @extend %body-l-sb;
+        @include body-l__sb;
       }
     }
   }
@@ -249,7 +244,6 @@
   position: sticky;
   top: 144px;
   background-color: $background;
-  // overflow: auto;
   max-width: 1320px;
   margin: 0 auto;
   z-index: 1;

@@ -18,7 +18,7 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
-  toggleFilter: boolean = false;
+  toggleFilter: boolean = true;
   toggleSearch: boolean = false;
   countFilter: number = 0;
   @ViewChild('filters') filters: PasswoordManagerFiltersComponent;
@@ -48,6 +48,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = false;
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
       this.filter.setFilter(data);
     })

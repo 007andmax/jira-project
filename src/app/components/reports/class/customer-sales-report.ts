@@ -1,5 +1,6 @@
 import { CustomerSalesReportLine } from './customer-sales-report-line';
 import { reqSalesByCustomer } from 'src/app/interfaces/reports/req-sales-by-customer';
+import * as moment from "moment";
 
 export class CustomerSalesReport {
     companyId: string;
@@ -12,12 +13,12 @@ export class CustomerSalesReport {
     servicesSum: number;
     totalSum: number;
     lines: Array<CustomerSalesReportLine> = [];
-
+    init: boolean = false;
     public setData(data) {
         this.techCompanyName = data.techCompanyName;
         this.clientCompanyName = data.clientCompanyName;
-        this.startDate = data.startDate;
-        this.endDate = data.endDate;
+        this.startDate = moment(new Date(data.startDate)).format('ll');
+        this.endDate = moment(new Date(data.endDate)).format('ll');
         this.type = data.type;
         this.lines = (data.lines) ? data.lines.map((item) => {
             return new CustomerSalesReportLine(item);
@@ -25,7 +26,7 @@ export class CustomerSalesReport {
         this.productsSum = data.productsSum;
         this.servicesSum = data.servicesSum;
         this.totalSum = data.totalSum;
-
+        this.init = true;
     }
 
     public getForRequest() {

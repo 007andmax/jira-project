@@ -17,6 +17,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
 
   @Input() documentEdit: Document;
   @Input() linked: DocumentsLinkedComponent;
+  @Input() categoryId: string;
   @ViewChild('categoriesDp') categoriesDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   sub: Subscription = new Subscription();
@@ -30,11 +31,19 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     })
     if (this.documentEdit.clientType) this.requiredCompanyType = true;
   }
+  backFromEdit() {
+    if (!this.categoryId || this.companiesStateService.getCompanyRoutingId()) this.goToDocumentsList();
+    if (this.categoryId && !this.companiesStateService.getCompanyRoutingId()) this.goToDocumentCategory();
+  }
   onChangeTitle() {
     this.documentsService.checkTitle(this.documentEdit.title, this.documentEdit.id).subscribe(data => {
       this.documentValidate.setUniqueTittle(data);
       this.documentValidate.resetTitle();
     })
+  }
+  goToDocumentCategory() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/category/`, this.categoryId]);
   }
   onChangeLinked(data: Array<DocumentCompanyUser>) {
     this.documentEdit.setLinked(data.filter(item => item.type === "USER").map(item => item.id),
