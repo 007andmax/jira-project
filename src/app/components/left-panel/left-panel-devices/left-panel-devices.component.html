@@ -1,22 +1,45 @@
-<div class="app-left-panel__menu" [ngClass]="{'--active': open}" (click)="open = !open;openPanel()">
-    <div class="app-left-panel__menu-icon --devices"></div>
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
     <div class="app-left-panel__menu-title">Devices</div>
-    <div class="app-left-panel__menu-arrow"></div>
 </div>
-<ul class="app-left-panel__menu-expand top-menu" [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}">
-    <li [ngClass]="{'--active':type === 'Dashboard'  && activePage === 'new-devices'}" (click)="onFilter('Dashboard')">
+<ul
+    class="app-left-panel__menu-expand"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        [ngClass]="{'--active':type === 'Dashboard'  && activePage === 'new-devices'}"
+        (click)="onFilter('Dashboard')"
+    >
         Dashboard
     </li>
-    <li class="app-left-panel__menu-expand-item-icon" [ngClass]="{'--active':type === 'Reports'  && activePage === 'new-device-summary'}" (click)="goToState('new-device-summary')">
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        [ngClass]="{'--active':type === 'Reports'  && activePage === 'new-device-summary'}"
+        (click)="goToState('new-device-summary')"
+    >
         Reports
     </li>
     <li class="app-left-panel__menu-expand-item-icon child-menu">
-        <div><span class="favr"></span> Favourite List
-            <div [ngClass]="{'expand-search': !open1, 'collapse-search': open1}" (click)="toggleSearch()" ></div>
+        <div>
+            <span class="favr"></span>
+            Favourite List
+            <div
+                [ngClass]="{'expand-search': !open1, 'collapse-search': open1}"
+                (click)="toggleSearch()"
+            ></div>
         </div>
-
-        <ul class="menu-inner menu-expand-show" *ngIf="open1">
-            <li *ngFor="let item of searches" class="menu-item-inner" (click)="onFilter1('Dashboard', item)">
+        <ul
+            class="menu-inner menu-expand-show"
+            *ngIf="open1"
+        >
+            <li
+                *ngFor="let item of searches"
+                class="menu-item-inner"
+                (click)="onFilter1('Dashboard', item)"
+            >
                 {{item.Name}}
             </li>
         </ul>

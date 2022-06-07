@@ -68,9 +68,13 @@
         target="_blank"
         appRightClickBlank
     >
-        <div>Devices</div>
-        <!-- <div class="qt-sz-16 icon__create-folder"></div> -->
-    </li>
+        <li
+            [ngClass]="{'--active':activePage === 'company-devices'}"
+            (click)="goToCompanySection('devices')"
+        >
+            <div>Devices</div>
+            <!-- <div class="qt-sz-16 icon__create-folder"></div> -->
+        </li>
     </a>
     <li
         [ngClass]="{'--active':activePage === 'company-devices-beta'}"
@@ -78,7 +82,7 @@
     >
         <div>Devices Beta</div>
     </li>
-   <a
+    <a
         href
         [link]="getLinkSection('network-scan')"
         target="_blank"

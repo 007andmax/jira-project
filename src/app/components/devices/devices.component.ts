@@ -30,10 +30,10 @@ export class DevicesComponent implements OnInit {
   @ViewChild("templateConnection") templateconnection;
   @ViewChild("screenConnect") screenConnect;
   @ViewChild("screenConnectAcces") screenConnectAcces;
-  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;  
-  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany:DropDownComponent;
-  @ViewChild('dropdowndeviceTp') dropdowndeviceTp:DropDownComponent;
-  @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent;    
+  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
+  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
+  @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
+  @ViewChild('dropdownManufacturer') dropdownManufacturer: DropDownComponent;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -83,15 +83,15 @@ export class DevicesComponent implements OnInit {
   company: any;
   searches: any[];
   isOfflineDeviceSelected: boolean = false;
-  selectedAssetList: any[]=[];  
+  selectedAssetList: any[] = [];
   opened: boolean = false;
   manufactureId: any;
-  selectManufactureNames : any;
-  manufactureList: any[]=[];
-  selectModelList: any[]=[];
-  selectModelName : any;
-  modelId:any;
-  isDisabled:boolean=true;  
+  selectManufactureNames: any;
+  manufactureList: any[] = [];
+  selectModelList: any[] = [];
+  selectModelName: any;
+  modelId: any;
+  isDisabled: boolean = true;
   asset: any = undefined;
   installDate: Date = new Date();
   warrantyDate: Date = new Date();
@@ -110,9 +110,9 @@ export class DevicesComponent implements OnInit {
   assetTagName: string;
   note: string;
   selectedSidebarTag: any[] = [];
-  companies = [];  
+  companies = [];
   sidetagFilterValue: string = "";
-  assetSidebarTag: any = []; 
+  assetSidebarTag: any = [];
   filteredSidebarTag = [];
   selectedTagDevice: any[] = [];
   assetTag: any = [];
@@ -132,19 +132,19 @@ export class DevicesComponent implements OnInit {
     private remoteControlService: RemoteControlService,
     private commonHttpServices: CommonHttpServices,
     private excelService: ExcelService,
-    private companiesState: CompaniesStateService   
+    private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {      
-    this.companiesState.onInit();  
+  ngOnInit() {
+    this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
       "new-devices"
     );
 
-    this.companiesStateService.getOnCompanies().subscribe((data) => {            
-      this.companies = this.getClientsList(data);      
-    });  
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
 
     this.onPowerShellCommand();
 
@@ -173,15 +173,15 @@ export class DevicesComponent implements OnInit {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {   
+  load(company: any) {
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
     if (!localStorage.getItem("currentSearch")) {
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
-      req.Criteria = [];      
-      this.getAssets();      
+      req.Criteria = [];
+      this.getAssets();
       this.HardwareTypeList(this.techCompnayGuid);
       this.getAssetTagDropDownDetail();
     }
@@ -212,8 +212,8 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {       
-    this.showPreloader = true;    
+  searchDeviceTag(data: any) {
+    this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
@@ -247,30 +247,28 @@ export class DevicesComponent implements OnInit {
     this.assetList.forEach((item) => {
       item.selected = this.selectAllDevices ? true : false;
     });
-    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;    
-    if(isChecked)
-    {
-      this.assetList.forEach((element,index)=>{
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;
+    if (isChecked) {
+      this.assetList.forEach((element, index) => {
         this.selectedAssetList.push(this.assetList[index]);
-      })            
+      })
     }
-    else
-    {
-      this.selectedAssetList=[];
+    else {
+      this.selectedAssetList = [];
     }
   }
 
   onSelectDevice(index: number, isChecked: boolean) {
     let find = this.assetList.find((item) => !item.selected);
     this.selectAllDevices = find ? false : true;
-    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;   
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;
     if (isChecked) {
-      this.selectedAssetList.push(this.assetList[index]);      
-    } else {            
+      this.selectedAssetList.push(this.assetList[index]);
+    } else {
       let AssetId = this.assetList[index].ID;
-      let AssetIndex = this.selectedAssetList.findIndex(item=>item.ID == AssetId);
-      this.selectedAssetList.splice(AssetIndex,1);      
-    }                                        
+      let AssetIndex = this.selectedAssetList.findIndex(item => item.ID == AssetId);
+      this.selectedAssetList.splice(AssetIndex, 1);
+    }
   }
 
   HardwareTypeList(TechCompanyGuid: any) {
@@ -529,22 +527,20 @@ export class DevicesComponent implements OnInit {
     this.add(event.option.viewValue);
   }
 
-  remove(index: number) { 
-    this.showPreloader = true;   
+  remove(index: number) {
+    this.showPreloader = true;
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
-    req.Criteria = this.selectedTag || [];      
-    if(this.selectedTag.length>0)
-    {
+    req.Criteria = this.selectedTag || [];
+    if (this.selectedTag.length > 0) {
       this.searchDeviceTag(req);
-    }   
-    else
-    {
+    }
+    else {
       this.assetList = [];
       this.showPreloader = false;
-    }   
+    }
   }
 
   add(Tag): void {
@@ -877,10 +873,10 @@ export class DevicesComponent implements OnInit {
     );
   }
 
-  showDlg(savefavourite) {    
+  showDlg(savefavourite) {
     if (this.selectedTag && this.selectedTag.length > 0) {
       this.modalReference = this.modalService.open(savefavourite, { ariaLabelledBy: "modal-basic-title", centered: true, size: "sm" }).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;           
+        this.closeResult = `Closed with: ${result}`;
       });
     }
   }
@@ -903,16 +899,16 @@ export class DevicesComponent implements OnInit {
   closed() {
     this.modalService.dismissAll("Cross click");
   }
-  saveFavourite() {         
+  saveFavourite() {
     let req: any = {};
     req.Json = JSON.stringify(this.selectedTag);
     req.Name = this.favouriteName
     req.TechCompanyGuid = this.techCompnayGuid;
     req.IsActive = true;
-    this.agentService.createAssetSearch(req).subscribe((data: any) => {      
+    this.agentService.createAssetSearch(req).subscribe((data: any) => {
       this.modalService.dismissAll();
       this.leftPanelStateService.onSearchItemAdded.emit(null);
-      this.toastr.success('Your search is saved');      
+      this.toastr.success('Your search is saved');
     },
       (err) => {
         this.toastr.error('Error saving your search! Please try again');
@@ -934,46 +930,42 @@ export class DevicesComponent implements OnInit {
       })
   }
 
-  sendCommandHeader(command)
-  {        
-    let headerData:any={};
-    if(command === "r")
-    {      
-      this.assetList.forEach((element)=>{
+  sendCommandHeader(command) {
+    let headerData: any = {};
+    if (command === "r") {
+      this.assetList.forEach((element) => {
         headerData.AssetID = element.ID;
         headerData.MessageType = "RunPowerShellCommand";
         headerData.Value = "Restart-Computer";
         this.agentService.SendPowerShellCommand(headerData);
       })
     }
-    if(command === "s")
-    {
-      this.assetList.forEach((element)=>{
+    if (command === "s") {
+      this.assetList.forEach((element) => {
         headerData.AssetID = element.ID;
         headerData.MessageType = "RunPowerShellCommand";
         headerData.Value = "Stop-Computer";
         this.agentService.SendPowerShellCommand(headerData);
       })
     }
-    if(command === "ar")
-    {
-      this.assetList.forEach((element)=>{
+    if (command === "ar") {
+      this.assetList.forEach((element) => {
         this.agentService.UninstallAgent(element.ID);
       })
     }
   }
 
-  getAddDevice() {    
+  getAddDevice() {
     this.opened = true;
   }
 
-  deviceclosed() {    
+  deviceclosed() {
     this.opened = false;
     this.getclear();
   }
 
   getManufacturers(TechCompanyGuid: any) {
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getManufacturers(TechCompanyGuid);
       }, 300);
@@ -982,61 +974,61 @@ export class DevicesComponent implements OnInit {
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
         this.manufactureList = resp;
-        if(this.asset){
+        if (this.asset) {
           this.selectManufacture(this.asset.ManufacturerId);
         }
       });
-    }
+  }
 
-    selectManufacture(manufactureId){
-        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == manufactureId);
-    }
+  selectManufacture(manufactureId) {
+    this.selectManufactureNames = this.manufactureList.find(x => x.ID == manufactureId);
+  }
 
-    onSelectManufactureName(SelectManufacturer) {    
-      if (SelectManufacturer) {
-        this.manufactureId = SelectManufacturer.ID;
-        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == this.manufactureId);
-        this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-          this.selectModelList = resp;  
-          this.isDisabled = false;        
-        })      
-      }
-      else{
-        this.getModels(this.techCompnayGuid);
-        this.selectManufactureNames = "";
-        this.isDisabled = true;
-        this.dropdownModel.clearWithOutChanges();
-      }
+  onSelectManufactureName(SelectManufacturer) {
+    if (SelectManufacturer) {
+      this.manufactureId = SelectManufacturer.ID;
+      this.selectManufactureNames = this.manufactureList.find(x => x.ID == this.manufactureId);
+      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp) => {
+        this.selectModelList = resp;
+        this.isDisabled = false;
+      })
     }
+    else {
+      this.getModels(this.techCompnayGuid);
+      this.selectManufactureNames = "";
+      this.isDisabled = true;
+      this.dropdownModel.clearWithOutChanges();
+    }
+  }
 
-    getModels(TechCompanyGuid: any) {
-      if(this.agentService.AccessToken == '') {
-        setTimeout(() => {
-          this.getModels(TechCompanyGuid);
-        }, 300);
-        return;
-      }
-      this.agentService
-        .getModels(TechCompanyGuid)
-        .subscribe((resp) => {
-          this.selectModelList = resp;        
-          if(this.asset){
-            this.selectModel(this.asset.ModelID);
-          }
-        });
+  getModels(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getModels(TechCompanyGuid);
+      }, 300);
+      return;
     }
-  
-    selectModel(modelId){
-      this.selectModelName = this.selectModelList.find(x=>x.ID == modelId);
-   }
-  
-   onSelectModel(SelectModel) {
+    this.agentService
+      .getModels(TechCompanyGuid)
+      .subscribe((resp) => {
+        this.selectModelList = resp;
+        if (this.asset) {
+          this.selectModel(this.asset.ModelID);
+        }
+      });
+  }
+
+  selectModel(modelId) {
+    this.selectModelName = this.selectModelList.find(x => x.ID == modelId);
+  }
+
+  onSelectModel(SelectModel) {
     if (SelectModel) {
       this.modelId = SelectModel.ID;
-      this.selectModelName = this.selectModelList.find(x=>x.ID == this.modelId);    
+      this.selectModelName = this.selectModelList.find(x => x.ID == this.modelId);
     }
-    else{
-      this.selectModelName = "";    
+    else {
+      this.selectModelName = "";
     }
   }
 
@@ -1171,56 +1163,52 @@ export class DevicesComponent implements OnInit {
     return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
 
-  onSelectCompanyName(company){          
-      this.comapanyId = company.id;    
+  onSelectCompanyName(company) {
+    this.comapanyId = company.id;
   }
 
-  saveDevice() {          
+  saveDevice() {
     let data: any = {};
     data.Guid = uuidv4();
     data.Name = this.deviceName;
-    data.Title = this.deviceName;     
-    data.HardwareTypeID = this.deviceTypId;    
-    data.ModelID = this.modelId;        
-    data.ManufactureID = this.manufactureId;        
+    data.Title = this.deviceName;
+    data.HardwareTypeID = this.deviceTypId;
+    data.ModelID = this.modelId;
+    data.ManufactureID = this.manufactureId;
     data.InstallDate = moment(this.installDate).format("YYYY-MM-DD");
-    data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");    
+    data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");
     data.Tag = this.assetTagName;
-    data.CompanyGuid = this.comapanyId;       
+    data.CompanyGuid = this.comapanyId;
     this.agentService.nonAgentAsset(data).subscribe(
-      (result) => {    
-      if(result.length>0) 
-      {
-        if(this.note !='' && this.note !=undefined && this.note !=null)
-        {
-          this.createNotes(result)          
-        } 
-        if(this.selectedSidebarTag.length>0)
-        {
-          this.createTag(result,this.selectedSidebarTag)
-        }               
-        this.opened = false;        
-        this.toastr.success('Save non agent asset successfully');
-        this.getclear();
-      }        
-    },
+      (result) => {
+        if (result.length > 0) {
+          if (this.note != '' && this.note != undefined && this.note != null) {
+            this.createNotes(result)
+          }
+          if (this.selectedSidebarTag.length > 0) {
+            this.createTag(result, this.selectedSidebarTag)
+          }
+          this.opened = false;
+          this.toastr.success('Save non agent asset successfully');
+          this.getclear();
+        }
+      },
       (error) => {
         this.toastr.error('Error saving your non agent asset! Please try again');
       })
   }
 
-  createNotes(id){
-    const newnote: any = { AssetID: id, IsActive: true, Description:this.note, Title:this.deviceName };    
-    this.agentService.addAssetNotes(newnote).subscribe((resp)=>{      
+  createNotes(id) {
+    const newnote: any = { AssetID: id, IsActive: true, Description: this.note, Title: this.deviceName };
+    this.agentService.addAssetNotes(newnote).subscribe((resp) => {
     })
-  }   
-  
-  createTag(id,Tages){           
-    for(let i=0;i<Tages.length;i++)
-    {
-      const newTag: any = { AssetID: id, Name:Tages[i].Name};      
+  }
+
+  createTag(id, Tages) {
+    for (let i = 0; i < Tages.length; i++) {
+      const newTag: any = { AssetID: id, Name: Tages[i].Name };
       this.agentService.addNewTag(newTag).subscribe(
-        (res) => {          
+        (res) => {
         }
       );
     }
@@ -1238,88 +1226,88 @@ export class DevicesComponent implements OnInit {
       );
   }
 
-  getclear(){    
-    this.deviceName="";
-    this.assetTagName="";
+  getclear() {
+    this.deviceName = "";
+    this.assetTagName = "";
     this.dropdownModel.clearWithOutChanges();
     this.dropdownManufacturer.clearWithOutChanges();
     this.dropdowndeviceCompany.clearWithOutChanges();
-    this.dropdowndeviceTp.clearWithOutChanges(); 
-    this.note="";           
-    this.selectedSidebarTag=[];    
+    this.dropdowndeviceTp.clearWithOutChanges();
+    this.note = "";
+    this.selectedSidebarTag = [];
   }
 
   getDeviceName(ID) {
     this.deviceTypId = ID;
   }
 
-getDateWarranty(date: any) {        
-  let dateWarrantry = new Date(date.year, date.month, date.day);
-  this.warrantyDate = dateWarrantry;
-}
-
-getDateInstalled(date: any) {       
-  let dateInstalled = new Date(date.year, date.month, date.day);
-  this.installDate = dateInstalled;
-}
-
-addTags(Tag) {  
-  if (!Tag) {
-    return;
+  getDateWarranty(date: any) {
+    let dateWarrantry = new Date(date.year, date.month, date.day);
+    this.warrantyDate = dateWarrantry;
   }
-  const newTag: any = {Name: Tag };  
-  this.selectedSidebarTag.push(newTag);  
-  this.sidetagFilterValue="";
-  this.getSidebarAssetTagDropDownDetail();    
-}
 
-getSidebarAssetTagDropDownDetail() {
-  this.agentService.getAssetTag().subscribe((resp) => {
-    this.assetSidebarTag = resp;
-  });
-}
-
-onTagRemove(index: number): void {
-  this.selectedSidebarTag.splice(index, 1);
-}
-
-onSidebarSelectTag(tag: any): void {  
-  const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
-  this.selectedSidebarTag.push(addTag);  
-  this.sidetagFilterValue="";
-}
-
-onSidebarSearchTag(value: string) {
-  let filter = value.toLowerCase();
-
-  if (filter != "" && this.filteredSidebarTag.length > 0) {
-    this.filteredSidebarTag = _.differenceBy(
-      this.filteredSidebarTag.filter((x) => x.Name.toLowerCase().includes(filter)),
-      this.selectedSidebarTag,
-      "ID"
-    );
-  } else if (this.filteredSidebarTag.length > 0) {
-    this.filteredSidebarTag = _.differenceBy(
-      this.filteredSidebarTag,
-      this.selectedSidebarTag,
-      "ID"
-    );
-  } else {
-    this.filteredSidebarTag = this.assetTag;
+  getDateInstalled(date: any) {
+    let dateInstalled = new Date(date.year, date.month, date.day);
+    this.installDate = dateInstalled;
   }
-}
 
-getAssetTagDropDownDetail() {
-  this.agentService.getAssetTag().subscribe((resp) => {
-    this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
-      this.selectedTagDevice = res;
+  addTags(Tag) {
+    if (!Tag) {
+      return;
+    }
+    const newTag: any = { Name: Tag };
+    this.selectedSidebarTag.push(newTag);
+    this.sidetagFilterValue = "";
+    this.getSidebarAssetTagDropDownDetail();
+  }
 
-      if (this.selectedTagDevice.length !== 0) {
-        this.assetTag = resp;
-        this.filteredTag = resp;
-      }
+  getSidebarAssetTagDropDownDetail() {
+    this.agentService.getAssetTag().subscribe((resp) => {
+      this.assetSidebarTag = resp;
     });
-  });
-}
+  }
+
+  onTagRemove(index: number): void {
+    this.selectedSidebarTag.splice(index, 1);
+  }
+
+  onSidebarSelectTag(tag: any): void {
+    const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
+    this.selectedSidebarTag.push(addTag);
+    this.sidetagFilterValue = "";
+  }
+
+  onSidebarSearchTag(value: string) {
+    let filter = value.toLowerCase();
+
+    if (filter != "" && this.filteredSidebarTag.length > 0) {
+      this.filteredSidebarTag = _.differenceBy(
+        this.filteredSidebarTag.filter((x) => x.Name.toLowerCase().includes(filter)),
+        this.selectedSidebarTag,
+        "ID"
+      );
+    } else if (this.filteredSidebarTag.length > 0) {
+      this.filteredSidebarTag = _.differenceBy(
+        this.filteredSidebarTag,
+        this.selectedSidebarTag,
+        "ID"
+      );
+    } else {
+      this.filteredSidebarTag = this.assetTag;
+    }
+  }
+
+  getAssetTagDropDownDetail() {
+    this.agentService.getAssetTag().subscribe((resp) => {
+      this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+        this.selectedTagDevice = res;
+
+        if (this.selectedTagDevice.length !== 0) {
+          this.assetTag = resp;
+          this.filteredTag = resp;
+        }
+      });
+    });
+  }
 
 }
