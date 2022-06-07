@@ -14,6 +14,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 import * as _ from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
+import { element } from "@angular/core/src/render3";
+import { DatePickerComponent } from "../shared/date-picker/date-picker.component";
 
 @Component({
   selector: "app-company-device-beta",
@@ -27,6 +29,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany:DropDownComponent;
   @ViewChild('dropdowndeviceTp') dropdowndeviceTp:DropDownComponent;
   @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent;      
+  @ViewChild('installdatePicker') installdatePicker: DatePickerComponent;
+  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -78,8 +82,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   comapanyId: string;
   assetTagName: string;
   modelNo: string;
-  installDate:Date;
-  warrantyDate:Date;
+  installDate:Date = new Date();
+  warrantyDate:Date = new Date();
   manufacture: string;
   note: string;
   devicename: string;
@@ -100,7 +104,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
   filteredSidebarTag = [];
   assetSidebarTag: any = [];  
   companies = [];
-  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
+  autosearchCompanyDevice: any[] = [];
+  linkDevicesFilterValue: string = "";  
+  linkDevicesTag=[];
+  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;  
 
   
   constructor(
@@ -256,9 +263,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
         }
         asset.online = true;
       }
-      if(this.cd){
+      if (!this.cd['destroyed']){
         this.cd.detectChanges();
-      }
+      }       
       }
     });
   }
@@ -841,7 +848,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
         if(this.selectedSidebarTag.length>0)
         {
           this.createTag(result,this.selectedSidebarTag)
-        }               
+        } 
+        if(this.linkDevicesTag.length>0)
+        {
+          this.linkDevicesTags(result)
+        }              
         this.opened = false;
         this.setPreviewDataDevice();
         this.toastr.success('Save non agent asset successfully');
@@ -851,6 +862,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
       (error) => {
         this.toastr.error('Error saving your non agent asset! Please try again');
       })
+  }
+
+  linkDevicesTags(id){
+    this.linkDevicesTag.forEach((element)=>{
+      const newlinkDevice: any ={ID:id, Name:element.Name}
+      this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp)=>{
+
+      })
+    })    
   }
 
   createNotes(id){
@@ -1006,7 +1026,42 @@ onSelectCompanyName(company){
   this.comapanyId = company.id;
 }
 
-getclear(){    
+addLinkDevices(Tag){  
+  if (!Tag) {
+    return;
+  }
+  console.log('addLinkedDevices fired');  
+  this.linkDevicesTag.push(Tag);    
+  this.linkDevicesFilterValue = "";
+}
+
+Deviceremove(index: number){
+  this.linkDevicesTag.splice(index,1);
+}
+
+onSearchLinkDevices(Tag){  
+  console.log('onSearchLinkDevices fired');
+    if ((Tag || '').length <= 2) {
+      return;
+    }
+    setTimeout(() => {
+      let req: any = {};           
+      req.CompanyGuid = this.companyGuid
+      req.Criteria = Tag;
+      this.autosearchCompanyDevice = ['loading...'];
+      if (this.cd) {
+        this.cd.detectChanges();
+      }
+      this.agentService.autoCompleteDevices(req).subscribe((result) => {        
+        this.autosearchCompanyDevice = result;
+        if (this.cd) {
+          this.cd.detectChanges();
+        }
+      });
+    }, 500);
+}
+
+getclear(){     
   this.deviceName="";
   this.assetTagName="";
   this.dropdownModel.clearWithOutChanges();
@@ -1014,7 +1069,10 @@ getclear(){
   this.dropdowndeviceCompany.clearWithOutChanges();
   this.dropdowndeviceTp.clearWithOutChanges(); 
   this.note="";           
-  this.selectedSidebarTag=[];    
+  this.selectedSidebarTag=[];   
+  this.linkDevicesTag=[];   
+  this.installdatePicker.reset();
+  this.warrantydatePicker.reset();
 }
 }
 

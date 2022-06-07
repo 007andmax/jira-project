@@ -1002,5 +1002,26 @@ export class AgentService {
         responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }    
+
+  public autoCompleteDevices(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/AssociatedAsset/Search`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
+
+  public createAssociatedAsset(data){
+    return this.http
+      .put(
+        `${this.apiAgent}agent/AssociatedAsset`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
+  
 }

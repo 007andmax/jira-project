@@ -873,9 +873,10 @@
                 <label
               for="add-Install-Date"              
           >Install Date</label>                     
-                <app-date-picker
+                <app-date-picker  
+                #installdatePicker              
                 [type]="'INPUT'"    
-                [editDate]="installDate || getToDayDate()"            
+                [editDate]="installDate"            
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"                
@@ -886,9 +887,10 @@
                 <label
                 for="add-Install-Date"              
             >Warranty Date</label>                        
-                <app-date-picker
+                <app-date-picker   
+                #warrantydatePicker             
                 [type]="'INPUT'"
-                [editDate]="warrantyDate || getToDayDate()"
+                [editDate]="warrantyDate"
                 [placement]="'top'"
                 [editMode]="true"
                 [useMinDate]="false"                
@@ -926,12 +928,36 @@
             (onSelectedItem)="onSelectModel($event)"
         ></app-select-search>                           
             </div>
+        </div>   
+        <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
+            <label for="dropdownLinkedService" class="tagfontweight">Linked Devices</label>
+            <div class="Rectangle_device-popup">
+                <mat-form-field appearance="none">                                       
+                    <mat-chip-list #chipdeviceTag>
+                        <mat-chip *ngFor="let tag of linkDevicesTag; let i=index" (removed)="Deviceremove(i)">
+                            {{tag}} <mat-icon matChipRemove></mat-icon>
+                          </mat-chip>                        
+                        <input autofocus 
+                        id="dropdownServices"  
+                        #searchInput  
+                        [(ngModel)]="linkDevicesFilterValue"                                             
+                        ngbDropdownToggle                         
+                        class="pointer"
+                        placeholder="Enter Devices" 
+                        [matChipInputFor]="chipdeviceTag"
+                        (blur)="addLinkDevices($event.target.value)"
+                        (keyup.enter)="addLinkDevices($event.target.value)"
+                        (keyup)="onSearchLinkDevices($event.target.value)">
+                    </mat-chip-list>                    
+                </mat-form-field>
+            </div>            
         </div>        
+             
       <div
-      class="grey-dropdown"
+      class="grey-dropdown sidebarchiptag"
       ngbDropdown
       #products="ngbDropdown"
-  >
+  >  
   <label
   for="dropdownServices" 
   class="tagfontweight" 
@@ -990,7 +1016,7 @@
      <textarea
       id="add-note"
       #searchnote
-     class="terms-n-conditions__textarea qt-textarea"
+     class="terms-n-conditions__textarea qt-textarea "
      placeholder="Write note for device"
      maxlength="300"
      [(ngModel)]="note"
