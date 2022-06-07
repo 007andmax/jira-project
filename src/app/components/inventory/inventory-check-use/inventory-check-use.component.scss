@@ -1,20 +1,34 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/fonts";
+
 .modal-body {
-    padding: 0px;
+    padding: 0;
     p {
-        font-size: 14px;
+      @include body-r;
     }
+}
+.no-exist-agreements {
+  &__info {
+    @include body-r;
+    color: $gray-700;
+  }
 }
 .contract-container {
     border-radius: 8px;
-    padding: 16px 16px 0px 16px;
-    background-color: #f4f6f8;
-    h3 {
-        font-size: 14px;
-        color: #212b36;
+    padding: 16px;
+    background-color: $gray-200;
+    max-height: 384px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+  h3 {
+        @include body-r__m;
+        color: $primary-2;
     }
     span {
-        font-size: 12px;
-        color: #919eab;
+        @include сaption-l;
+        color: $gray-600;
     }
     .contract-container-agreements {
         overflow: auto;
@@ -26,27 +40,26 @@
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 12px;
-            background-color: #ffffff;
+            padding: 11px 12px;
+            background-color: $white;
             border-radius: 8px;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            border: solid 1px #dfe3e8;
+            border: solid 1px $gray-400;
             margin-bottom: 8px;
             &:last-child {
-                margin-bottom: 0px;
+                margin-bottom: 0;
             }
             .contract-item-info {
                 line-height: 1;
             }
             h3 {
-                font-size: 13px;
-                color: #212b36;
-                line-height: 1.54;
+                @include body-m__m;
+                color: $primary-2;
             }
             span {
-                font-size: 12px;
-                line-height: 1.33;
-                color: #919eab;
+                @include сaption-l;
+                color: $gray-600;
+                flex-shrink: 0;
             }
             .qt-table-modern__circle-avatar {
                     width: 40px;
@@ -57,7 +70,7 @@
                     background-position: center !important;
                     background-size: cover !important;
                     margin-right: 8px;
-                    color: white;
+                    color: $white;
                     align-items: center;
                     justify-content: center;
                     display: flex;
@@ -66,8 +79,8 @@
             }
             .view-contract {
                 font-size: 12px;
-                color: #16a4fa;
-                margin: 0px 0px 0px auto;
+                color: $primary-1;
+                margin: 0 0 0 auto;
                 font-weight: 600;
             }
         }
@@ -78,24 +91,24 @@
     position: relative;
 }
 .archive-modal__body {
-    margin-bottom: 0px !important;
+    margin-bottom: 0 !important;
 }
 .info-product {
     padding: 16px;
     border-radius: 8px;
-    background-color: #f4f6f8;
-    margin: 16px 0px 0px 0px;
+    background-color: $gray-200;
+    margin: 16px 0 0 0;
 
     h3 {
-        font-size: 14px;
-        color: #212b36;
+        @include body-r__m;
+        color: $primary-2;
     }
 
     span {
-        font-size: 12px;
-        color: #919eab;
+        @include сaption-l;
+        color: $gray-600;
     }
 }
 .archive-modal__footer {
-    margin: 24px 0px 0px 0px;
+    margin: 24px 0 0 0;
 }

@@ -3,58 +3,105 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel()"
 >
-    <div class="app-left-panel__menu-icon --billing"></div>
     <div class="app-left-panel__menu-title">Billing</div>
-    <div class="app-left-panel__menu-arrow"></div>
 </div>
 <ul
-    class="app-left-panel__menu-expand top-menu"
+    class="app-left-panel__menu-expand"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <li
-        *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
-        [ngClass]="{'--active':activePage === 'billing-dashboard'}"
-        (click)="goToState('billing-dashboard')"
+    <a
+        href
+        [link]="'billing-dashboard'"
+        target="_blank"
+        appRightClickBlank
     >
-        Dashboard
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-services'}"
-        (click)="goToState('new-services')"
+        <li
+            *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
+            [ngClass]="{'--active':activePage === 'billing-dashboard'}"
+            (click)="goToState('billing-dashboard')"
+        >
+            Dashboard
+        </li>
+    </a>
+    <a
+        href
+        [link]="'default-services'"
+        target="_blank"
+        appRightClickBlank
     >
-        Default Services
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-billable' || activePage === 'new-billable-tickets'}"
-        (click)="goToState('new-billable')"
-        *ngIf="getPermissions('VIEW_ACCOUNTING')"
+        <li
+            [ngClass]="{'--active':activePage === 'new-services'}"
+            (click)="goToState('new-services')"
+        >
+            Default Services
+        </li>
+    </a>
+    <a
+        href
+        [link]="'billable'"
+        target="_blank"
+        appRightClickBlank
     >
-        Billable Items
-    </li>
-    <li
-        *ngIf="getPermissions('VIEW_ACCOUNTING')"
-        [ngClass]="{'--active':activePage === 'new-billable-invoices'}"
-        (click)="goToState('new-billable-invoices')"
+        <li
+            [ngClass]="{'--active':activePage === 'new-billable' || activePage === 'new-billable-tickets'}"
+            (click)="goToState('new-billable')"
+            *ngIf="getPermissions('VIEW_ACCOUNTING')"
+        >
+            Billable Items
+        </li>
+    </a>
+    <a
+        href
+        [link]="'invoices'"
+        target="_blank"
+        appRightClickBlank
     >
-        Invoices
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'quotes-component'}"
-        (click)="goToState('quotes-component')"
+        <li
+            *ngIf="getPermissions('VIEW_ACCOUNTING')"
+            [ngClass]="{'--active':activePage === 'new-billable-invoices'}"
+            (click)="goToState('new-billable-invoices')"
+        >
+            Invoices
+        </li>
+    </a>
+    <a
+        href
+        [link]="'quotes'"
+        target="_blank"
+        appRightClickBlank
     >
-        Quotes
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-payments-ng2'}"
-        (click)="goToState('new-payments-ng2')"
+        <li
+            [ngClass]="{'--active':activePage === 'quotes-component'}"
+            (click)="goToState('quotes-component')"
+        >
+            Quotes
+        </li>
+    </a>
+    <a
+        href
+        [link]="'payments'"
+        target="_blank"
+        appRightClickBlank
     >
-        Payments
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'new-contracts'}"
-        (click)="goToState('new-contracts')"
-        *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
+        <li
+            [ngClass]="{'--active':activePage === 'new-payments-ng2'}"
+            (click)="goToState('new-payments-ng2')"
+        >
+            Payments
+        </li>
+    </a>
+    <a
+        href
+        [link]="'contracts'"
+        target="_blank"
+        appRightClickBlank
     >
-        Contracts
-    </li>
+        <li
+            [ngClass]="{'--active':activePage === 'new-contracts'}"
+            (click)="goToState('new-contracts')"
+            *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
+        >
+            Contracts
+        </li>
+    </a>
 </ul>

@@ -3,26 +3,40 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel()"
 >
-    <div class="app-left-panel__menu-icon --documents"></div>
     <div class="app-left-panel__menu-title">Documents</div>
-    <div class="app-left-panel__menu-arrow"></div>
 </div>
 <ul
-    class="app-left-panel__menu-expand icon-list top-menu"
+    class="app-left-panel__menu-expand icon-list"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <li
-        class="app-left-panel__menu-expand-item-icon"
-        (click)="goToState('new-documents')"
+    <a
+        href
+        [link]="'documents'"
+        target="_blank"
+        appRightClickBlank
     >
-        All documents
-    </li>
-    <li
-        class="app-left-panel__menu-expand-item-icon"
-        (click)="goToState('new-template-documents')"
+        <li
+            class="app-left-panel__menu-expand-item-icon"
+            [ngClass]="{'--active':  activePage === 'new-documents'}"
+            (click)="goToState('new-documents')"
+        >
+            All documents
+        </li>
+    </a>
+    <a
+        href
+        [link]="'documents/templates'"
+        target="_blank"
+        appRightClickBlank
     >
-        Templates
-    </li>
+        <li
+            class="app-left-panel__menu-expand-item-icon"
+            [ngClass]="{'--active':  activePage === 'new-template-documents'}"
+            (click)="goToState('new-template-documents')"
+        >
+            Templates
+        </li>
+    </a>
     <!-- <ng-template
         ngFor
         let-category

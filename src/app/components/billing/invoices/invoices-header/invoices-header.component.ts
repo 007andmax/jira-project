@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { AppService } from 'src/app/states/app/app.service';
 import { InvoicesFilter } from '../class/invoices-filter';
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
 
@@ -11,12 +12,13 @@ export class InvoicesHeaderComponent implements OnInit {
   @ViewChild('filter') filter: InvoicesFilterComponent;
   countFilter: number = 0;
 
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   @Output() onCreateInvoice = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  constructor() { }
+  constructor(public appService: AppService,) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   sortBy(data) {
     this.onSortBy.emit(data);

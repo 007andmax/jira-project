@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
 
@@ -17,6 +18,7 @@ export class LeftPanelSupportComponent implements OnInit {
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
   constructor(private supportStateService: SupportStateService,
+    private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -24,18 +26,16 @@ export class LeftPanelSupportComponent implements OnInit {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isSupportPage(state)) this.open = false
+      if (!this.leftPanelService.isSupportPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isSupportPage(data)) this.open = true;
+      if (this.leftPanelService.isSupportPage(data)) this.open = true;
     })
   }
   public close() {
     this.open = false;
   }
-  isSupportPage(state) {
-    return (state === 'new-quickSupport');
-  }
+
   openPanel() {
     this.onOpenPanel.emit(null);
   }

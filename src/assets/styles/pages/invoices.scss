@@ -616,7 +616,7 @@ app-invoices-item,app-payment-item {
     thead {
       th {
         padding: 8px;
-        @extend %label-l-sb;
+        @include label-l__sb;
         color: $primary-2;
         background: $gray-100;
         text-transform: uppercase;
@@ -654,7 +654,7 @@ app-invoices-item,app-payment-item {
         right: 0;
         height: 1px;
         width: 100%;
-        background: #edf0f2;
+        background: $gray-300;
       }
 
       &:first-child {
@@ -683,7 +683,7 @@ app-invoices-item,app-payment-item {
       td {
         font-size: 13px;
         line-height: 20px;
-        color: #212b36;
+        color: $primary-2;
         font-weight: 500;
       }
       &:last-child {
@@ -738,7 +738,7 @@ app-invoices-item,app-payment-item {
           right: 0;
           height: 1px;
           width: 100%;
-          background: #edf0f2;
+          background: $gray-300;
         }
         &:first-child {
           &::after {

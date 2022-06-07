@@ -16,10 +16,12 @@ export class DecimalNumberDirective {
       this.onChange.emit(event.target.value);
     });
     this.element.nativeElement.addEventListener("blur", (event) => {
-      if (event.target.value) {
-        event.target.value = (this.useFixed) ? parseFloat(event.target.value).toFixed(2) : event.target.value;
+      if (event.target.value && event.target.value !== "NaN") {
+        if (this.useFixed) {
+          if (parseFloat(event.target.value) !== NaN) event.target.value = parseFloat(event.target.value).toFixed(2);
+        }
       } else {
-        event.target.value = "";
+        event.target.value = (this.useFixed) ? "0.00" : "0";
       }
       this.onChange.emit(event.target.value);
     });

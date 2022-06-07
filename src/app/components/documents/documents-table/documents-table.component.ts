@@ -62,7 +62,9 @@ export class DocumentsTableComponent implements OnInit {
   removeDocument() {
     this.onRemoveDocument.emit(this.item);
   }
-
+  assigToCompanies() {
+    this.documentsStateService.editFolder(this.item);
+  }
   previewDocument() {
     const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.item.id}`;
     window.open(url, '_blank');

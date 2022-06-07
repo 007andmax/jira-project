@@ -86,6 +86,10 @@ export class DefaultServicesAddComponent implements OnInit {
       this.addBtn.setDisabled(false);
     })
   }
+  glDropDownItemName(item) {
+    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
+      : "No description"}`;
+  }
   onSelectGlNumbers(data) {
 
     this.service.glNumber = data;

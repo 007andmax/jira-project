@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { CompanyAssigned } from 'src/app/components/companies/class/company-assigned';
 import { Document } from 'src/app/components/documents/class/document';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -14,6 +15,7 @@ export class DocumentsStateService {
   categoryForRemove: Document;
   documentForRemove: Document;
   categoriesForRemove: Array<CategoryDocument>;
+  onEditFolder: EventEmitter<any> = new EventEmitter();
   onGetTemplate: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<CategoryDocument> = [];
@@ -28,6 +30,7 @@ export class DocumentsStateService {
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetCategories.emit(this.categories);
     })
+
     this.documentsRealTimeService.changeCategoriesArray.subscribe(data => {
       if (data.action === "DOCUMENT_CATEGORY_SAVED") this.categories.push(new CategoryDocument(data.data));
       if (data.action === "DOCUMENT_CATEGORY_EDITED") {
@@ -43,6 +46,10 @@ export class DocumentsStateService {
     this.documentsRealTimeService.changeDocumentsArray.subscribe(data => {
       this.onChangeDocument.emit(data);
     })
+  }
+
+  public editFolder(data) {
+    this.onEditFolder.emit(data);
   }
   public getCategoriesForRemove() {
     return this.categoriesForRemove;

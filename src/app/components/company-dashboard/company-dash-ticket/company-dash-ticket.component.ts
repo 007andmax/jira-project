@@ -85,26 +85,14 @@ export class CompanyDashTicketComponent implements OnInit {
   getTicketGraph(frequency: string) {
     let getTicket = this.companiesService.getTicketGraph(this._id, frequency.toUpperCase()).subscribe((data: any) => {
       this.ticketFrequency = frequency;
-      let countOfInProgressTickets = [];
-      let countOfOnHoldTickets = [];
       let countOfCompletedTickets = [];
       let countOfNewTickets = [];
       let filter_list = (data.length > 30) ? data.splice(data.length - 30, data.length) : data;
       filter_list.forEach(element => {
-        countOfInProgressTickets.push([new Date(element.date), element.countOfInProgressTickets === undefined ? 0 : element.countOfInProgressTickets]);
-        countOfOnHoldTickets.push([new Date(element.date), element.countOfOnHoldTickets === undefined ? 0 : element.countOfOnHoldTickets]);
         countOfCompletedTickets.push([new Date(element.date), element.countOfCompletedTickets === undefined ? 0 : element.countOfCompletedTickets]);
         countOfNewTickets.push([new Date(element.date), element.countOfNewTickets === undefined ? 0 : element.countOfNewTickets]);
       });
       this.lineData = [
-        {
-          key: "In Progress",
-          values: countOfInProgressTickets
-        },
-        {
-          key: "On Hold",
-          values: countOfOnHoldTickets
-        },
         {
           key: "Completed",
           values: countOfCompletedTickets

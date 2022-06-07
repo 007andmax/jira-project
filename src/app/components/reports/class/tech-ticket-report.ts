@@ -1,6 +1,7 @@
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
 import { TechSalesItem } from "./tech-sales-item";
 import { TechTicketItem } from "./tech-ticket-item";
+import * as moment from 'moment';
 
 export class TechTicketReport {
 
@@ -21,8 +22,8 @@ export class TechTicketReport {
             this.selectedDuration = data.selectedDuration;
             this.totalClosed = data.totalClosed;
             this.totalCreated = data.totalCreated;
-            this.startDate = data.startDate;
-            this.endDate = data.endDate;
+            this.startDate = moment(new Date(data.startDate)).format('ll');
+            this.endDate = moment(new Date(data.endDate)).format('ll');
         }
     }
     public setDisabledDuration(data) {

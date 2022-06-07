@@ -8,6 +8,7 @@ import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { CompanyConditions } from './company-conditions';
 import { CompanyAssociated } from './company-associated';
+import { CompanyAssigned } from './company-assigned';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -80,7 +81,7 @@ export class CompanyProfile {
         } else {
             this.addresses[0].phoneNumbers.map((item) => {
                 let number = item.number;
-                if (number[0] === "1") number = `+${number}`;
+                if (number[0] === "1") number = `+1${number}`;
                 item.number = number;
                 return item;
             })
@@ -93,7 +94,7 @@ export class CompanyProfile {
         } else {
             this.contacts[0].phoneNumbers.map((item) => {
                 let number = item.number;
-                if (number[0] === "1") number = `+${number}`;
+                if (number[0] === "1") number = `+1${number}`;
                 item.number = number;
                 return item;
             })

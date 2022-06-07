@@ -7,8 +7,8 @@ export class CompanyValdiate {
     firstName: boolean = true;
     primaryContactEmail: boolean = true;
     phoneNumber: boolean = true;
-    reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+    reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     reDomain = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     nameIsExist: boolean = false;
     domainIsExist: boolean = false;
@@ -86,12 +86,11 @@ export class CompanyValdiate {
 
     }
     public checkValidPhoneNumber(number) {
-        if (!number || !number.match(this.rePhoneNumber)) {
+        if (!number || number.length < 14) {
             this.phoneNumber = false;
         } else {
             this.phoneNumber = true;
         }
-
     }
     public checkValidDomain(domain) {
         if (domain && !domain.match(this.reDomain)) {
@@ -121,7 +120,7 @@ export class CompanyValdiate {
         if (!company.name || company.name.length === 0) this.name = false;
         if (company.clientType === "") this.type = false;
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
-        if (!company.addresses[0].phoneNumbers[0].number || !company.addresses[0].phoneNumbers[0].number.match(this.rePhoneNumber)) this.phoneNumber = false;
+        if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
         return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist;
     }

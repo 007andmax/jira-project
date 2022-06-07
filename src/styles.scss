@@ -7,35 +7,47 @@
 
 .h1,
 h1 {
-  @extend %h1;
+  @include h1;
 }
 .h2,
 h2 {
-  @extend %h2;
+  @include h2;
 }
 
 h3,
 .h3 {
-  @extend %h3;
+  @include h3;
   margin: 0;
 }
 h4,
 .h4 {
-  @extend %h4;
+  @include h4;
   margin: 0;
 }
 h5,
 .h5 {
-  @extend %h5;
+  @include h5;
   margin: 0;
 }
 h6,
 .h6 {
-  @extend %h6;
+  @include h6;
   margin: 0;
 }
 
-//COMMON STYLES ----------------------------
+.body-m__sb {
+  @include body-m__sb;
+}
+.body-m {
+  @include body-m;
+}
+.body-l {
+  @include body-l;
+}
+.body-l__sb {
+  @include body-l__sb;
+}
+  //COMMON STYLES ----------------------------
 .d-f {
   display: flex;
 }
@@ -117,7 +129,7 @@ h6,
   background: $white;
   color: $primary-1;
   border: 1px solid $primary-1;
-  @extend %сaption-l-m;
+  @include сaption-l__m;
   &:hover {
     background: $primary-1;
     color: $white;
@@ -331,7 +343,7 @@ app-ticket-add-aside {
 }
 .mat-form-field {
   font-family: "Inter", sans-serif;
-  @extend %body-m;
+  @include body-m;
 }
 app-left-panel-tags {
   > .col-md-12 {
@@ -575,7 +587,7 @@ documents-filter {
       padding-top: 5px;
       padding-bottom: 5px;
       color: $primary-2;
-      @extend %сaption-l;
+      @include сaption-l;
     }
   }
 }
@@ -878,7 +890,7 @@ documents-edit-info {
     .btn-new {
       height: 40px;
       border-radius: 4px;
-      @extend %body-m-sb;
+      @include body-m__sb;
     }
     .btn-primary {
       border: none;
@@ -945,7 +957,7 @@ documents-edit-info {
   display: flex;
   min-width: 35px;
   margin: 2px;
-  @extend %сaption-l;
+  @include сaption-l;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -1316,13 +1328,13 @@ app-quotes-item {
       }
 
       &-avatar {
-        @extend %сaption-l-sb;
+        @include сaption-l__sb;
         width: 32px;
         height: 32px;
         border-radius: 50%;
         background-position: center;
         background-size: cover;
-        color: white;
+        color: $white;
         align-items: center;
         justify-content: center;
         display: flex;
@@ -1354,7 +1366,7 @@ app-quotes-item {
         color: $primary-2;
       }
       .assigne-user-email {
-        @extend %сaption-l;
+        @include сaption-l;
         color: $gray-700;
       }
     }
@@ -1655,7 +1667,7 @@ app-quotes-item {
   font-weight: 400;
   p {
     word-break: break-all;
-    @extend %body-m-m;
+    @include body-m__m;
     color: $primary-2;
   }
 }
@@ -1818,7 +1830,7 @@ app-quotes-item {
       > div::before {
         @media (max-width: 767px) {
           content: "Tags";
-          color: #212b36;
+          color: $primary-2;
           font-weight: 600;
           line-height: 20px;
         }
@@ -1830,7 +1842,7 @@ app-quotes-item {
     > div::before {
       @media (max-width: 767px) {
         content: "Category";
-        color: #212b36;
+        color: $primary-2;
         font-weight: 600;
         line-height: 20px;
       }
@@ -1861,17 +1873,6 @@ app-quotes-item {
     }
   }
 
-  //.companies-filter-tags {
-  //  > div::before {
-  //    @media (max-width: 767px) {
-  //      content: "Category";
-  //      color: #212b36;
-  //      font-weight: 600;
-  //      line-height: 20px;
-  //    }
-  //  }
-  //}
-
   .qt-page-list__header {
     @media (max-width: 767px) {
       margin: 0;
@@ -1897,7 +1898,7 @@ app-quotes-item {
         left: 0;
         width: 100%;
         top: 0;
-        background: #212b36;
+        background: $primary-2;
         padding: 10px 16px;
         margin-left: 0;
       }
@@ -1911,7 +1912,7 @@ app-quotes-item {
 
     .qt-page-list__header-title {
       @media (max-width: 767px) {
-        color: #ffffff;
+        color: $white;
         font-size: 16px;
         line-height: 24px;
         letter-spacing: 0;
@@ -2013,7 +2014,7 @@ app-quotes-item {
       }
 
       .mat-form-field-appearance-legacy .mat-form-field-label {
-        @extend %body-m;
+        @include body-m;
         color: $gray-600;
         padding: 9px 10px 9px 36px;
         top: 10px;
@@ -2065,7 +2066,7 @@ app-quotes-item {
         padding-top: 5px;
         padding-bottom: 5px;
         color: $primary-2;
-        @extend %сaption-l;
+        @include сaption-l;
       }
     }
   }
@@ -2087,7 +2088,7 @@ app-quotes-item {
 
   .qt-table-modern th {
     padding: 8px;
-    @extend %сaption-m-sb;
+    @include сaption-m__sb;
     color: $primary-2;
     text-transform: uppercase;
   }
@@ -2131,7 +2132,7 @@ app-quotes-item {
       }
 
       p {
-        //@extend %body-m-m;
+        //@include body-m__m;
         font-weight: 500;
         color: $primary-2;
 
@@ -2187,7 +2188,7 @@ app-quotes-item {
 
       .name {
         position: relative;
-        @extend %body-m-m;
+        @include body-m__m;
         color: $primary-2;
 
         @media screen and (max-width: 767px) {
@@ -2196,7 +2197,7 @@ app-quotes-item {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: calc(100% - 112px);
+          max-width: min-content
         }
 
         &::after {
@@ -2215,10 +2216,10 @@ app-quotes-item {
       }
 
       .phone {
-        @extend %body-m;
+        @include body-m;
         color: $gray-600;
         @media (max-width: 767px) {
-          max-width: 108px;
+          max-width: 190px;
           overflow: hidden;
           text-overflow: inherit;
           white-space: nowrap;
@@ -2367,7 +2368,7 @@ app-quotes-item {
       }
       [class*="col-md-"],
       [class*="col-md-"] p {
-        @extend %сaption-m-sb;
+        @include сaption-m__sb;
         color: $primary-2;
         text-transform: uppercase;
       }
@@ -3759,7 +3760,7 @@ app-ticket-profile-updates-service-timepicker {
         content: "Time In";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3781,7 +3782,7 @@ app-ticket-profile-updates-service-timepicker {
       &::before {
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3818,7 +3819,7 @@ ticket-profile-edit-form-update {
           content: "Service Date";
           left: 0;
           top: -28px;
-          color: #212b36;
+          color: $primary-2;
           font-size: 13px;
           line-height: 20px;
           letter-spacing: 0;
@@ -3846,7 +3847,7 @@ ticket-profile-edit-form-update {
         content: "Description";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -3877,7 +3878,7 @@ app-ticket-profile-form-update {
         content: "Duration picker";
         left: 0;
         top: -28px;
-        color: #212b36;
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
         letter-spacing: 0;
@@ -4118,14 +4119,6 @@ app-ticket-edit-aside {
         padding: 0 16px;
       }
 
-      .d-f {
-        // TODO replace .d-f for class
-        @media (max-width: 767px) {
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
-      }
-
       .product-item__cost-input,
       .product-item__price-input {
         input {
@@ -4207,7 +4200,7 @@ app-ticket-edit-aside {
             content: "Product";
             left: 0;
             top: -28px;
-            color: #212b36;
+            color: $primary-2;
             font-size: 13px;
             line-height: 20px;
             letter-spacing: 0;
@@ -4239,19 +4232,11 @@ app-ticket-edit-aside {
           position: absolute;
           left: 16px;
           top: -28px;
-          color: #212b36;
+          color: $primary-2;
           font-size: 13px;
           line-height: 20px;
           letter-spacing: 0;
           font-weight: 600;
-        }
-      }
-
-      .ticket-edit-aside__users-linked,
-      .d-f + .d-f {
-        // TODO repalce .d-f for class
-        @media (max-width: 767px) {
-          display: none;
         }
       }
     }
@@ -4268,7 +4253,7 @@ app-ticket-edit-aside {
         bottom: 0;
         left: 0;
         width: 100%;
-        background: #fff;
+        background: $white;
         z-index: 1;
       }
     }
@@ -4421,7 +4406,7 @@ app-ticket-edit-aside {
 }
 
 .tooltip {
-  @extend %сaption-l-m;
+  @include сaption-l__m;
   border-radius: 4px;
   div {
     margin-top: 5px;
@@ -4674,7 +4659,7 @@ app-ticket-edit-aside-devices {
     //font-size: 13px !important;
     //margin-bottom: 8px !important;
     margin-bottom: 8px;
-    @extend %body-m-sb;
+    @include body-m__sb;
     font-weight: 700;
   }
   .create-product__col {
@@ -4723,7 +4708,6 @@ app-ticket-edit-aside-devices {
 }
 
 .qt-tooltip-error {
-  //z-index: 200; // TODO check error-tooltip
   z-index: 1;
   border-radius: 3px;
   max-width: 250px;
@@ -4832,7 +4816,7 @@ input.--input-error {
 
 .product-list___ticket {
   .product-report-total-sales {
-    padding: 0 100px 0 50px;
+    padding: 0 15px;
   }
 }
 
@@ -4868,7 +4852,7 @@ input.--input-error {
       padding-left: 6px;
 
       input {
-        @extend %сaption-m;
+        @include сaption-m;
         height: 34px;
         margin: 0;
         width: 100%;
@@ -4894,7 +4878,7 @@ input.--input-error {
     top: 8.5px;
     padding: 12px 10px 10px 12px;
     font-size: 13px;
-    @extend %body-m;
+    @include body-m;
     color: $gray-600;
   }
   .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {

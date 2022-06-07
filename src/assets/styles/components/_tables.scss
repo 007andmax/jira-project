@@ -9,7 +9,7 @@ table.qt-table-modern {
     font-size: 12px;
     th {
       padding: 8px;
-      @extend %сaption-m-sb;
+      @include сaption-m__sb;
       color: $primary-2;
       text-transform: uppercase;
       &:first-child {
@@ -21,7 +21,7 @@ table.qt-table-modern {
     }
   }
   tbody {
-    @extend %body-m;
+    @include body-m;
     tr {
       td {
         background: $white;
@@ -112,7 +112,6 @@ table.qt-table-modern {
       align-items: center;
       background: $white;
       padding: 0 8px 0 8px;
-      //height: 48px;
       vertical-align: middle;
       cursor: pointer;
 
@@ -152,8 +151,6 @@ table.qt-table-modern {
       }
 
       > div {
-        //height: 66px;
-
         @media screen and (max-width: 767px) {
           padding: 0;
           height: auto;
@@ -211,17 +208,14 @@ table.qt-table-modern {
 
       @media (max-width: 767px) {
         flex: 100%;
-        font-size: 16px; // TODO replace this font style for @extend
-        font-weight: 600;
-        letter-spacing: 0;
+        @include body-l__sb;
         overflow: hidden;
         align-items: stretch;
         max-height: 40px;
         height: auto;
         width: 100%;
         white-space: unset;
-        line-height: 20px;
-        margin: 5px 0;
+        margin: 3px 0;
       }
 
       .ellipsis {
@@ -243,7 +237,6 @@ table.qt-table-modern {
     }
 
     &__assignee {
-      //flex: 1 0 148px;
       max-width: 168px;
       width: 100%;
       overflow: auto;
@@ -269,10 +262,7 @@ table.qt-table-modern {
         flex: 1 0 88px;
         order: 1;
         justify-content: flex-end;
-        font-size: 12px; // TODO add @extend style
-        line-height: 16px;
-        letter-spacing: 0;
-        font-weight: 400;
+        @include сaption-l;
         color: $gray-600;
       }
     }
@@ -287,7 +277,7 @@ table.qt-table-modern {
     background-position: center !important;
     background-size: cover !important;
     margin-right: 8px;
-    color: white;
+    color: $white;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -303,7 +293,7 @@ table.qt-table-modern {
     display: flex;
     align-items: center;
     padding: 8px;
-    @extend %сaption-m-sb;
+    @include сaption-m__sb;
     text-transform: uppercase;
 
     &:first-child {
@@ -322,7 +312,6 @@ table.qt-table-modern {
     }
   }
 }
-// End Mobile style
 
 .qt-table-modern__sorting {
   position: relative;

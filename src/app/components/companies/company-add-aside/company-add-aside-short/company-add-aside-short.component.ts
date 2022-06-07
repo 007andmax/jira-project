@@ -5,6 +5,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompanyProfile } from '../../class/company-profile';
 import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
+var $ = require("jquery");
 
 @Component({
   selector: 'company-add-aside-short',

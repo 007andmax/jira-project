@@ -616,18 +616,23 @@ app-contracts-aside-block-time-billing-default-service {
 }
 
 .expire-contract-notification {
-  background-color: $gray-800;
-  width: 152px;
-  height: 100px;
-  border-radius: 4px;
+  background-color: $white;
+  width: 320px;
+  height: 72px;
+  border-radius: 6px;
   position: fixed;
   z-index: 1000;
-  top: 279px;
-  left: 307px;
-  padding: 8px;
-  font-size: 12px;
-  line-height: 1.33;
-  color: $white;
+    top: 81px;
+    right: 16px;
+  padding: 14px 16px 18px 16px;
+  font-size: 13px;
+line-height: 1.54;
+  color: #42526e;
+  display: flex;
+  align-items: self-start;
+    font-family: "Inter",sans-serif;
+      box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+      border: solid 1px $gray-400;
   &__button {
     font-weight: 600;
     border: 1px solid $white;
@@ -636,28 +641,36 @@ app-contracts-aside-block-time-billing-default-service {
     margin-top: 8px;
     padding: 6px 8px;
   }
-  &::before {
-    content: "";
-    position: absolute;
-    left: -12px;
-    border: 6px solid transparent;
-    border-right: 6px solid $gray-800;
-  }
   &::after {
+    content: " ";
     position: absolute;
-    width: 14px;
-    height: 14px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $warning;
+    z-index: 9999;
+    height: 3px;
+  }
+  .icon-alert {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     border-radius: 50%;
     background: orange;
-    z-index: 100000;
-    left: -23px;
-    top: 7px;
     font-size: 11px;
     font-weight: 900;
-    content: "!";
     display: flex;
     align-items: center;
     justify-content: center;
+    color: $white;
+    font-style: unset;
+  }
+  .qt-aside-modern__header-close {
+    width: 16px;
+    height: 16px;
+      min-width: 16px;
+      min-height: 16px;
   }
 }
 .contracts-table-row-item::before {

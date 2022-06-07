@@ -1,6 +1,8 @@
+@import "./src/assets/styles/variable";
+
 .toggle-all-users {
     text-align: right;
-    color: #16a4fa;
+    color: $primary-1;
     cursor: pointer;
     font-size: 12px;
 }
@@ -9,4 +11,22 @@
 }
 /deep/.dropdown-recipients-body .mat-chip {
     cursor: default;
+}
+.user-name {
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-item {
+    display: flex !important;
+    width: 100% !important;
+}
+
+.user-email {
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

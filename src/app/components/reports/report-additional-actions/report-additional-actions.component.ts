@@ -9,6 +9,7 @@ import { ReportsStateService } from 'src/app/states/reports/reports-state.servic
 import { GlNumber } from '../class/gl-number';
 import { ExportCSV } from './class/export-csv';
 import { Subscription } from 'rxjs';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-report-additional-actions',
@@ -34,6 +35,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     private reportsStateService: ReportsStateService,
     private appService: AppService,
     config: NgbModalConfig,
+    public draftEmailStateService: DraftEmailStateService,
     private modalService: NgbModal,) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -50,13 +52,16 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     this.changePurchaseCost.emit(event.target.checked);
   }
   sendEmail() {
-    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
-    modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation = this.orientation;
-    modalRef.componentInstance.report = this.report;
-    modalRef.componentInstance.template = this.template;
-    modalRef.componentInstance.fileName = this.fileName;
-    modalRef.componentInstance.accountType = this.accountType;
+
+    this.draftEmailStateService.toogleAsideAddReport({
+      selectedClient: this.selectedClient,
+      orientation: this.orientation,
+      report: this.report,
+      template: this.template,
+      fileName: this.fileName,
+      accountType: this.accountType
+    });
+
 
   }
   getPdfIdFromRest(action) {

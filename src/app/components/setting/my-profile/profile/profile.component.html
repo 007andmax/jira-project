@@ -121,7 +121,7 @@
                 <div class="form-row">
                     <app-drop-down
                         #jobTitleDp
-                        [class]="['light-dropdown', 'qt-select-input-40']"
+                        [class]="['qt-select-input-40']"
                         [placeholder]="'Select Your Role'"
                         [editItem]="selectedJobTitle"
                         [list]="jobTitleList"
@@ -151,7 +151,9 @@
                         formControlName="primaryPhone"
                         [validation]="true"
                         [suffix]="suffix"
-                        mask="(000) 000-0000"
+                        mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                        [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                        [dropSpecialCharacters]="false"
                         (keyup)="phonehandle($event)"
                     >
                     <select

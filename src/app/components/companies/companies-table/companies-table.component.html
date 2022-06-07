@@ -74,15 +74,15 @@
             target="_blank"
             appRightClickBlank
         >
-            <div>
+            <div class="mobile__primary-contact">
                 <p
                     class="name"
                     [textContent]="getUserName()"
                 ></p>
-                <p
-                    class="phone"
-                    [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
-                ></p>
+                <preview-phone-mask
+                    *ngIf="primaryPhone && primaryPhone.number"
+                    [number]="primaryPhone.number"
+                ></preview-phone-mask>
             </div>
         </a>
     </div>

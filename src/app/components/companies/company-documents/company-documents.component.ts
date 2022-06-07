@@ -20,7 +20,7 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
-      this.companiesStateService.setSelectedCompanyId(this.companyId);
+      if (this.activateRoute.snapshot.queryParams.categoryId) this.filter.setCategoryId(this.activateRoute.snapshot.queryParams.categoryId);
       this.filter.setCompanyId(this.companyId);
       this.filter.setCompanyScope(true);
       this.getFilterList();
@@ -31,12 +31,30 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.header.filter.onChangeCounterFilter();
     });
     this.sub.add(subscription);
+    let queryParams = this.activateRoute.queryParams.subscribe(
+      (queryParam: any) => {
+        if (!this.showPreloader) {
+          this.showPreloader = true;
+          this.filter.setCategoryId(queryParam.categoryId);
+          this.getFilterList();
+        }
+      }
+    );
+    this.sub.add(queryParams);
     this.leftPanelStateService.changeStateWithoutNavigate('company-documents');
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) this.list[findIndex].categoryName = element.name;
       });
+      if (data.length < this.list.filter(item => item.isCategory).length) {
+        this.list.forEach((item, index) => {
+          if (item.isCategory) {
+            let findIndex = data.findIndex(element => element.id === item.categoryId);
+            if (findIndex == -1) this.list.splice(index, 1);
+          }
+        });
+      }
       this.cd.detectChanges();
     })
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
@@ -86,6 +104,5 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    this.companiesStateService.setCompanyRoutingId(null);
   }
 }

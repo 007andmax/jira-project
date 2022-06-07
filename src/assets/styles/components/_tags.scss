@@ -1,7 +1,7 @@
 @import './src/assets/styles/variable';
 
 .tag__modern {
-  @extend %label-m-sb;
+  @include label-m__sb;
   border: 1px solid;
   border-radius: 3px;
   padding: 5px 6px;

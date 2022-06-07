@@ -47,7 +47,7 @@ export class CompanyDashContractComponent implements OnInit {
       this.statisticsCount = 0;
       this.contractsList = [];
       this.statistics = [];
-      this.companiesStateService.setSelectedCompanyId(this._id);
+      this.companiesStateService.setCompanyRoutingId(this._id);
       this.getContractsList();
     });
     this.sub.add(subscription);

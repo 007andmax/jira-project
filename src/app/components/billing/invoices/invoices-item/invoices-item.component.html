@@ -34,7 +34,7 @@
         <span
             class="tag__modern --warning"
             *ngIf="invoice.isOverDue && !invoice.paidOn"
-            [textContent]="'Overdue by ' + getDueDate() + ' days'"
+            [textContent]="'Overdue by ' + getOverDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --info"

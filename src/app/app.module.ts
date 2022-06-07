@@ -103,7 +103,6 @@ import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorit
 import { LeftPanelTicketsComponent } from './components/left-panel/left-panel-tickets/left-panel-tickets.component';
 import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
 import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
-import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
 import { TaxesReportComponent } from './components/reports/reports/taxes-report/taxes-report.component';
 import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
 import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
@@ -558,8 +557,14 @@ import { SuperAdminPublicCategoryComponent } from './components/super-admin-publ
 import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
 import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
-import {CompanyDashAssociateComponent} from './components/company-dashboard/company-dash-associate/company-dash-associate.component'
+import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component'
 import { ProcessesPipe } from './pipe/processes.pipe';
+import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
+import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
+import { PreviewPhoneMaskComponent } from './components/shared/preview-phone-mask/preview-phone-mask.component';
+import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
+import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
+
 
 declare var $: any;
 
@@ -688,7 +693,6 @@ declare var $: any;
     LeftPanelTicketsComponent,
     GlNumberComponent,
     AccountsReceivableComponent,
-    ReportFooterComponent,
     TaxesReportComponent,
     ProductSalesReportComponent,
     CustomerSalesReportComponent,
@@ -1059,7 +1063,12 @@ declare var $: any;
     SortTagsPipe,
     InventoryCheckUseComponent,
     CompanyDashAssociateComponent,
-    ProcessesPipe
+    ProcessesPipe,
+    ContractsReviewComponent,
+    PaymentsReportComponent,
+    PreviewPhoneMaskComponent,
+    DocumentsEditCategoryComponent,
+    DocumentsEditCategoryItemComponent
   ],
   imports: [
     BrowserModule,
@@ -1106,7 +1115,6 @@ declare var $: any;
     DownloadAgentComponent,
     ImageCropperComponent,
     AlertComponent,
-    ReportSendEmailComponent,
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,

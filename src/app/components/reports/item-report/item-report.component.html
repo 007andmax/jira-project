@@ -1,111 +1,99 @@
-<div [ngClass]="(report === 'byProducts' || report === 'byCustomers'  || report === 'accounts-receivable' || report === 'accounting-report' || report === 'tech-sales' || report === 'tech-ticket' || report === 'tech-service' || report === 'byTaxes' || report === 'remote-access' || report === 'ticket-report' || report === 'service-report' || report === 'common-commissions' || report === 'detailed-commissions' || report === 'income-accounts')? 'product-list-report ticket-report' : 'products-list-report ticket-report'">
-    <!-- <p
-        class="report-title"
-        *ngIf="report === 'hardware-summary'"
-    >
-        Hardware Summary Report
-    </p> -->
-    <h6
-        class="report-title"
-        *ngIf="report === 'remote-access'"
-    >
-        Remote Connection Report
-    </h6>
-    <!-- <p
-        class="report-title"
-        *ngIf="report === 'device-ip-summary'"
-    >
-        Device IP Summary Report
-    </p> -->
-    <h6
-        class="report-title"
-        *ngIf="report === 'accounts-receivable'"
-    >
-        Accounts Receivable
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'income-accounts'"
-    >
-        Income accounts Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'byTaxes'"
-    >
-        Tax Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'byProducts'"
-    >
-        Product Sales Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'detailed-commissions'"
-    >
-        Detailed Commissions Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'common-commissions'"
-    >
-        Commissions Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'byCustomers'"
-    >
-        Customer Sales Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'ticket-report'"
-    >
-        Tickets Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'service-report'"
-    >
-        Service report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'tech-service'"
-    >
-        Tech Service report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'accounting-report'"
-    >
-        Accounting report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'tech-sales'"
-    >
-        Tech Sales Report
-    </h6>
-    <h6
-        class="report-title"
-        *ngIf="report === 'tech-ticket'"
-    >
-        Tech Ticket Report
-    </h6>
-    <i
-        class="back-page"
-        *ngIf="report === 'byProducts' || report === 'byCustomers' || report === 'accounts-receivable' || report === 'accounting-report' || report === 'tech-sales' || report === 'tech-ticket' || report === 'byTaxes' || report === 'tech-service' || report === 'remote-access' || report === 'ticket-report' || report === 'service-report' || report === 'common-commissions' || report === 'detailed-commissions' || report === 'income-accounts'"
-        (click)="back()"
-    ></i>
-    <!-- <i
-    class="back-page"
-    *ngIf="report === 'device-ip-summary'"
-    (click)="backreport()">
-
-    </i> -->
+<!-- <div class="product-list-report ticket-report"> -->
+<div class="qt-report__page ticket-report">
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'remote-access'" -->
+    <!-- > -->
+    <!-- Remote Connection Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'software-summary'" -->
+    <!-- > -->
+    <!-- Software Summary Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'accounts-receivable'" -->
+    <!-- > -->
+    <!-- Accounts Receivable -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'income-accounts'" -->
+    <!-- > -->
+    <!-- Income accounts Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'byTaxes'" -->
+    <!-- > -->
+    <!-- Tax Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'byProducts'" -->
+    <!-- > -->
+    <!-- Product Sales Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'detailed-commissions'" -->
+    <!-- > -->
+    <!-- Detailed Commissions Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'common-commissions'" -->
+    <!-- > -->
+    <!-- Commissions Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'byCustomers'" -->
+    <!-- > -->
+    <!-- Customer Sales Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'ticket-report'" -->
+    <!-- > -->
+    <!-- Tickets Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'service-report'" -->
+    <!-- > -->
+    <!-- Service report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'tech-service'" -->
+    <!-- > -->
+    <!-- Tech Service report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'accounting-report'" -->
+    <!-- > -->
+    <!-- Accounting report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'tech-sales'" -->
+    <!-- > -->
+    <!-- Tech Sales Report -->
+    <!-- </h6> -->
+    <!-- <h6 -->
+    <!-- class="report-title" -->
+    <!-- *ngIf="report === 'tech-ticket'" -->
+    <!-- > -->
+    <!-- Tech Ticket Report -->
+    <!-- </h6> -->
+    <!-- <i -->
+    <!-- class="back-page" -->
+    <!-- (click)="back()" -->
+    <!-- ></i> -->
     <tech-ticket-report *ngIf="report === 'tech-ticket'"></tech-ticket-report>
     <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
@@ -133,4 +121,5 @@
     <report-device-processorram *ngIf="report === 'report-device-processorram'"></report-device-processorram>
     <report-device-diskspace *ngIf="report === 'report-device-diskspace'"></report-device-diskspace>
     <applicationbycompany-report *ngIf="report === 'applicationbycompany-report'"></applicationbycompany-report>
+    <payments-report *ngIf="report === 'payments-report'"></payments-report>
 </div>

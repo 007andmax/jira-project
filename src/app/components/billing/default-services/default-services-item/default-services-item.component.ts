@@ -86,6 +86,7 @@ export class DefaultServicesItemComponent implements OnInit {
   }
 
   glDropDownItemName(item) {
-    return `${item.glNumber} ${item.description ? `(${item.description})` : ''} `;
+    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
+      : "No description"}`;
   }
 }

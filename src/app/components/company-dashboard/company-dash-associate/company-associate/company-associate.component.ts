@@ -142,13 +142,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
     }
     this.companiesChange.emit(this.selectedCompanies.map(item => item.id));
     this.tagCtrl.setValue(null);
-
-    if (this.searchName.length > 0) {
-      this.searchName = "";
-      this.setDefaultScoll();
-
-    }
-
+    if (this.searchName.length > 0) this.searchName = "";
   }
 
   public setSelectedTag(data) {

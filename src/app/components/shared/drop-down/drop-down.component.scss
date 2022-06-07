@@ -1,8 +1,11 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-  background: #dfe3e8;
+  background: $gray-200;
   color: $gray-600;
+  &::placeholder {
+    color: $gray-600;
+  }
 }
 .icon__check {
   background-size: 15px;

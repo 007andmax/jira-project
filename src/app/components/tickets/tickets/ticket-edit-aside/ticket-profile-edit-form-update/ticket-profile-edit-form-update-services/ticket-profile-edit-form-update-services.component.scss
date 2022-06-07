@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .service-item {
     &__first-line {
@@ -54,11 +55,8 @@
                 content: "Service";
                 left: 0;
                 top: -28px;
-                color: #212b36;
-                font-size: 13px;
-                line-height: 20px;
-                letter-spacing: 0;
-                font-weight: 600;
+                color: $primary-2;
+                @include body-m__sb;
             }
         }
 

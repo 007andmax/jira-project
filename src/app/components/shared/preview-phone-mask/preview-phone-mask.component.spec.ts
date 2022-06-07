@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportFooterComponent } from './report-footer.component';
+import { PreviewPhoneMaskComponent } from './preview-phone-mask.component';
 
-describe('ReportFooterComponent', () => {
-  let component: ReportFooterComponent;
-  let fixture: ComponentFixture<ReportFooterComponent>;
+describe('PreviewPhoneMaskComponent', () => {
+  let component: PreviewPhoneMaskComponent;
+  let fixture: ComponentFixture<PreviewPhoneMaskComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportFooterComponent ]
+      declarations: [ PreviewPhoneMaskComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportFooterComponent);
+    fixture = TestBed.createComponent(PreviewPhoneMaskComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

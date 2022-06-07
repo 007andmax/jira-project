@@ -46,7 +46,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       if (this.devicesStateService.getAllDevices()) {
         this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];

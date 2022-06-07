@@ -16,8 +16,8 @@ export class GlNumber {
         this.response = data;
     }
     public setDataFromObject(data) {
-        this.startDate = data.startDate;
-        this.endDate = data.endDate;
+        this.startDate = moment(new Date(data.startDate)).format('ll');
+        this.endDate = moment(new Date(data.endDate)).format('ll');
         this.clientCompanyId = data.clientCompanyId;
         this.monthlyDetailed = data.monthlyDetailed;
         this.dates = data.dates;

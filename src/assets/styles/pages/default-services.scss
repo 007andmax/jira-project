@@ -2,6 +2,8 @@
 
 .default-services-page {
   min-height: calc(100vh - #{$header-height});
+  z-index: 1050;
+  position: relative;
 
   &__table-container {
     overflow-x: auto;

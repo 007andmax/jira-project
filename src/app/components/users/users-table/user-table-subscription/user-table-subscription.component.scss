@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .active {
-    background-color: #2ec866;
+    background-color: $success;
 }

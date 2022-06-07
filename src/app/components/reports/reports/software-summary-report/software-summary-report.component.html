@@ -4,139 +4,98 @@
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
-<app-report-additional-actions
-    [orientation]="'LANDSCAPE'"
-    [report]="'software-summary'"
-    [fileName]="'software-summary-report'"
-></app-report-additional-actions>
-<!--  -->
 <div
     class="loading"
     *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket hardware-summary report-show-footer-header"
+    class="qt-report__body"
     id="product-list-ticket-data"
 >
     <div
-        class="product-list-ticket software-report"
-        style="width: 1180px;"
+        class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
         <div
             class="customer-ticket"
             *ngIf="onInit"
         >
-            <div class="customer-ticket__report">
-                <div class="report-header">
-                    <h5 class="qt-fw-600 qt-color-white">Device IP Summary Report</h5>
-                    <div class="company-info">
-                        <div class="body-m qt-color-white qt-text-right">{{company.name}}</div>
-                        <p>
-                            {{softwareSummaryReport.date | date:'yyyy-MM-dd'}}
-                        </p>
-                    </div>
+            <div class="qt-report__body-header">
+                <div class="body-m__sb qt-color-dark">Airdrie Choice Dental</div>
+                <h6 class="qt-fw-600 qt-color-dark">Software Summary Report</h6>
+                <div class="body-m qt-color-dark-light">
+                    As on
+          {{softwareSummaryReport.date | date:'yyyy/MM/dd'}}
                 </div>
-                <div class="customer-ticket__report--summary">
-                    <div class="customer-ticket__report--summary-title">Software Summary Report</div>
-                </div>
-                <div>
-                    <div>
-                        <ul class="con-col">
-                            <li class="top-product-list-ticket clearfix">
-                                <div
-                                    class="col-md-2"
-                                    *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
-                                >
-                                    <strong>Device</strong>
-                                </div>
-                                <div
-                                    class="col-md-2"
-                                    *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
-                                >
-                                    <strong>Software Title</strong>
-                                </div>
-                                <div
-                                    class="col-md-2"
-                                    *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
-                                >
-                                    <strong>Installation Key</strong>
-                                </div>
-                                <div
-                                    class="col-md-2"
-                                    *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
-                                >
-                                    <strong>Publisher</strong>
-                                </div>
-                                <div
-                                    class="col-md-2"
-                                    *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
-                                >
-                                    <strong>Version</strong>
-                                </div>
-                                <div
-                                    class="col-md-2"
-                                    *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
-                                >
-                                    <strong>Install Date</strong>
-                                </div>
-                            </li>
-                            <div>
-                                <ng-template
-                                    ngFor
-                                    let-softItem
-                                    [ngForOf]="softwareSummaryReport.list"
-                                    let-i="index"
-                                    [ngForTrackBy]="trackByIndex"
-                                >
-                                    <li class="content-product-list-ticket clearfix">
-                                        <div
-                                            class="col-md-2"
-                                            *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
-                                        >
-                                            {{softItem.device}}
-                                        </div>
-                                        <div
-                                            class="col-md-2"
-                                            *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
-                                        >
-                                            {{softItem.softwareTitle}}
-                                        </div>
-                                        <div
-                                            class="col-md-2"
-                                            *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
-                                        >
-                                            {{softItem.installationKey}}
-                                        </div>
-                                        <div
-                                            class="col-md-2"
-                                            *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
-                                        >
-                                            {{softItem.publisher}}
-                                        </div>
-                                        <div
-                                            class="col-md-2"
-                                            *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
-                                        >
-                                            {{softItem.version}}
-                                        </div>
-                                        <div
-                                            class="col-md-2"
-                                            *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
-                                        >
-                                            {{softItem.installDate | date:'yyyy-MM-dd'}}
-                                        </div>
-                                    </li>
-                                </ng-template>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
+                <div class="body-m__sb qt-color-dark">Tech company: {{company.name}}</div>
             </div>
+            <table class="qt-report__body-table-body">
+                <thead>
+                    <tr>
+                        <th
+                            class="qt-fw-600 qt-color-dark"
+                            *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
+                        >
+                            Device Name
+                        </th>
+                        <th
+                            class="qt-fw-600 qt-color-dark"
+                            *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
+                        >
+                            Software Name
+                        </th>
+                        <th
+                            class="qt-fw-600 qt-color-dark"
+                            *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey"
+                        >
+                            Installation Key
+                        </th>
+                        <th
+                            class="qt-fw-600 qt-color-dark"
+                            *ngIf="softwareSummaryReport.softwareSummaryWithPublisher"
+                        >
+                            Publisher
+                        </th>
+                        <th
+                            class="qt-fw-600 qt-color-dark"
+                            *ngIf="softwareSummaryReport.softwareSummaryWithVersion"
+                        >
+                            Version
+                        </th>
+                        <th
+                            class="qt-fw-600 qt-color-dark"
+                            *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate"
+                        >
+                            Install Date
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="qt-report__body-table-body">
+                    <ng-template
+                        ngFor
+                        let-softItem
+                        [ngForOf]="softwareSummaryReport.list"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <tr class="qt-report__body-row">
+                            <td
+                                class="qt-fw-600 qt-color-dark"
+                                *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
+                            >
+                                {{softItem.device}}
+                            </td>
+                            <td *ngIf="softwareSummaryReport.softwareSummaryWithSoftwareTitle">{{softItem.softwareTitle}}</td>
+                            <td *ngIf="softwareSummaryReport.softwareSummaryWithInstalationKey">{{softItem.installationKey}}</td>
+                            <td *ngIf="softwareSummaryReport.softwareSummaryWithPublisher">{{softItem.publisher}}</td>
+                            <td *ngIf="softwareSummaryReport.softwareSummaryWithVersion">{{softItem.version}}</td>
+                            <td *ngIf="softwareSummaryReport.softwareSummaryWithInstallDate">
+                                {{softItem.installDate | date:'yyyy-MM-dd'}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
         </div>
-        <app-report-footer
-            [orientation]="'LANDSCAPE'"
-            *ngIf="onInit"
-        ></app-report-footer>
     </div>
 </div>
