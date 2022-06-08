@@ -135,13 +135,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.companies = this.getClientsList(data);      
     });    
     let company = this.companiesStateService.getCurrentCompany();
-    if(company) {      
+    if(company) {            
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
       this.setPreviewDataDevice();      
     }
-    this.companiesStateService.onCurrentCompany.subscribe(data => {      
+    this.companiesStateService.onCurrentCompany.subscribe(data => {                
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.companyGuid = this.currentCompany.id;
@@ -825,7 +825,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.installDate = dateInstalled;
   }
 
-  saveDevice() {          
+  saveDevice() {              
     let data: any = {};
     data.Guid = uuidv4();
     data.Name = this.deviceName;
@@ -865,8 +865,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   linkDevicesTags(id){
-    this.linkDevicesTag.forEach((element)=>{
-      const newlinkDevice: any ={ID:id, Name:element.Name}
+    this.linkDevicesTag.forEach((element)=>{      
+      const newlinkDevice: any ={ID:id, Name:element.Name}      
       this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp)=>{
 
       })
@@ -1026,39 +1026,29 @@ onSelectCompanyName(company){
   this.comapanyId = company.id;
 }
 
-addLinkDevices(Tag){  
-  if (!Tag) {
-    return;
-  }
-  console.log('addLinkedDevices fired');  
-  this.linkDevicesTag.push(Tag);    
-  this.linkDevicesFilterValue = "";
-}
-
 Deviceremove(index: number){
   this.linkDevicesTag.splice(index,1);
 }
 
-onSearchLinkDevices(Tag){  
+onSearchLinkDevices(Tag){    
   console.log('onSearchLinkDevices fired');
     if ((Tag || '').length <= 2) {
       return;
     }
-    setTimeout(() => {
-      let req: any = {};           
-      req.CompanyGuid = this.companyGuid
+      let req: any = {}; 
+      req.companyGuid = this.activateRoute.snapshot.params["id"];                 
       req.Criteria = Tag;
-      this.autosearchCompanyDevice = ['loading...'];
-      if (this.cd) {
-        this.cd.detectChanges();
-      }
-      this.agentService.autoCompleteDevices(req).subscribe((result) => {        
-        this.autosearchCompanyDevice = result;
-        if (this.cd) {
-          this.cd.detectChanges();
-        }
-      });
-    }, 500);
+      this.agentService.autoCompleteDevices(req).subscribe((result) => {                  
+          this.autosearchCompanyDevice = result;    
+          if (this.cd) {
+            this.cd.detectChanges();
+          }                                           
+      });    
+}
+
+onLinkDeviceSelectTag(Tag){    
+    this.linkDevicesTag.push(Tag);
+    this.linkDevicesFilterValue = "";
 }
 
 getclear(){     

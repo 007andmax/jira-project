@@ -325,8 +325,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  addAssetNote() {
-    debugger;
+  addAssetNote() {    
     this.noteAdd.AssetID = this.asset.ID;
     this.noteAdd.IsActive = true;
     this.agentService.addAssetNotes(this.noteAdd).subscribe(
@@ -362,7 +361,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.editNote = !this.editNote;
   }
 
-  onSearchTag(value: string) {
+  onSearchTag(value: string) {        
     let filter = value.toLowerCase();
 
     if (filter != "" && this.filteredTag.length > 0) {
