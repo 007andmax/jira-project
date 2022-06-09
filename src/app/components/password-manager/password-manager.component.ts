@@ -30,6 +30,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public page_number: number = 0;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   selectAll: boolean = false;
+
   sub: Subscription = new Subscription();
   constructor(
     public passwordManagerService: PasswordManagerService,

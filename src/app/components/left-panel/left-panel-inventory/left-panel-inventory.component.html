@@ -13,12 +13,12 @@
     >
         <li
             [ngClass]="{'--active':  activePage === 'inventory'}"
-            (click)="goToState();selectCategory(null)"
+            (click)="goToAll()"
         >
             All products
         </li>
     </a>
-    <div class="list-marketing-container">
+    <div class="list-container">
         <ng-template
             ngFor
             let-inventory

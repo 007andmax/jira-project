@@ -42,6 +42,8 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     private devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
+    console.log("this.passwordManagerStateService.getSelectedCategory()", this.passwordManagerStateService.getSelectedCategory());
+    if (this.passwordManagerStateService.getSelectedCategory()) this.categoriesSelect.onSelect(this.passwordManagerStateService.getSelectedCategory());
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
@@ -50,6 +52,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
+    })
+    this.passwordManagerStateService.onFilterByCategory.subscribe((data) => {
+      this.categoriesSelect.onSelect(data);
     })
   }
   public onClearAll() {

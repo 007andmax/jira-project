@@ -5,12 +5,16 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
 import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-documents.component';
+import { LeftPanelInventoryComponent } from './left-panel-inventory/left-panel-inventory.component';
+import { LeftPanelMarketingComponent } from './left-panel-marketing/left-panel-marketing.component';
+import { LeftPanelPasswordManagerComponent } from './left-panel-password-manager/left-panel-password-manager.component';
 import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-settings.component';
 import { LeftPanelSupportComponent } from './left-panel-support/left-panel-support.component';
 import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
@@ -31,12 +35,14 @@ export class LeftPanelComponent implements OnInit {
   page: string = '';
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
-
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
   @ViewChild('panelDocuments') panelDocuments: LeftPanelDocumentsComponent;
   @ViewChild('panelSupport') panelSupport: LeftPanelSupportComponent;
   @ViewChild('panelTickets') panelTickets: LeftPanelTicketsComponent;
   @ViewChild('panelUsers') panelUsers: LeftPanelUsersComponent;
+  @ViewChild('panelInventory') panelInventory: LeftPanelInventoryComponent;
+  @ViewChild('panelMarketing') panelMarketing: LeftPanelMarketingComponent;
+  @ViewChild('panelPasswordManager') panelPasswordManager: LeftPanelPasswordManagerComponent;
 
 
   /**
@@ -52,6 +58,7 @@ export class LeftPanelComponent implements OnInit {
     private permissionsService: PermissionsService,
     private leftPanelService: LeftPanelService,
     public cd: ChangeDetectorRef,
+    private passwordManagerStateService: PasswordManagerStateService,
   ) { }
 
   /**
@@ -68,11 +75,6 @@ export class LeftPanelComponent implements OnInit {
     })
     this.router.events
       .subscribe((event) => {
-        if (window.location.href.includes('report')) {
-          this.leftPanelStateService.toggleLeftPanel(true);
-        } else {
-          this.leftPanelStateService.toggleLeftPanel(false);
-        }
         if (this.state === '') {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
@@ -193,6 +195,7 @@ export class LeftPanelComponent implements OnInit {
   }
   changePage(page) {
     this.page = page;
+    if (this.page === "PASSWORD_MANAGER" && this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
   }
   onOpenPanel() {
     this.leftPanelStateService.toggleLeftPanel(false);

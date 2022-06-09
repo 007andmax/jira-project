@@ -74,10 +74,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
     event.target.parentNode.classList.toggle('show-filter');
   }
 
-  onShowAll() {
+  public onShowAll() {
     this.clientType = null;
     this.showArchivedCompanies = false;
     this.leftPanelStateService.onInitFilter(null);
+    this.goToState('new-companies');
   }
   onShowArchived() {
     this.clientType = null;

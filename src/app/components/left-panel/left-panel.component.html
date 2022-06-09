@@ -38,7 +38,7 @@
     <div class="app-left-panel__body-icon">
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('SUPPORT');onOpenPanel()"
+            (click)="changePage('SUPPORT');onOpenPanel();panelSupport.onFilter('ALL')"
             [ngClass]="{'--active':page === 'SUPPORT' }"
             placement="right"
             ngbTooltip="Support"
@@ -47,7 +47,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('TICKETS');onOpenPanel()"
+            (click)="changePage('TICKETS');onOpenPanel();panelTickets.setTypeFilter('USERS')"
             [ngClass]="{'--active':page === 'TICKETS' }"
             placement="right"
             ngbTooltip="Tickets"
@@ -56,7 +56,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('USERS');onOpenPanel()"
+            (click)="changePage('USERS');onOpenPanel();panelUsers.goToAll()"
             [ngClass]="{'--active':page === 'USERS' }"
             placement="right"
             ngbTooltip="Users"
@@ -65,7 +65,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('MARKETING');onOpenPanel()"
+            (click)="changePage('MARKETING');onOpenPanel();panelMarketing.goToAll()"
             [ngClass]="{'--active':page === 'MARKETING' }"
             placement="right"
             ngbTooltip="Marketing"
@@ -74,7 +74,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('COMPANIES');onOpenPanel()"
+            (click)="changePage('COMPANIES');onOpenPanel();panelCompanies.onShowAll()"
             [ngClass]="{'--active':page === 'COMPANIES' }"
             placement="right"
             ngbTooltip="Companies"
@@ -83,7 +83,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('BILLING');onOpenPanel()"
+            (click)="changePage('BILLING');onOpenPanel();onChangeState('billing-dashboard')"
             [ngClass]="{'--active':page === 'BILLING' }"
             placement="right"
             ngbTooltip="Billing"
@@ -92,7 +92,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('INVENTORY');onOpenPanel()"
+            (click)="changePage('INVENTORY');onOpenPanel();panelInventory.goToAll()"
             [ngClass]="{'--active':page === 'INVENTORY' }"
             placement="right"
             ngbTooltip="Inventory"
@@ -101,7 +101,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('PASSWORD_MANAGER');onOpenPanel()"
+            (click)="changePage('PASSWORD_MANAGER');onOpenPanel();panelPasswordManager.goToAll()"
             [ngClass]="{'--active':page === 'PASSWORD_MANAGER' }"
             placement="right"
             ngbTooltip="Password Manager"
@@ -110,7 +110,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('DOCUMENTS');onOpenPanel()"
+            (click)="changePage('DOCUMENTS');onOpenPanel();onChangeState('new-documents')"
             [ngClass]="{'--active':page === 'DOCUMENTS' }"
             placement="right"
             ngbTooltip="Documents"
@@ -129,7 +129,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('SETTINGS');onOpenPanel()"
+            (click)="changePage('SETTINGS');onOpenPanel();onChangeState('invoice-ticket-component')"
             [ngClass]="{'--active':page === 'SETTINGS' }"
             placement="right"
             ngbTooltip="Settings"
@@ -195,12 +195,14 @@
             [hidden]="page !== 'BILLING'"
         ></app-left-panel-billing>
         <app-left-panel-inventory
+            #panelInventory
             [activePage]="state"
             (onChangeState)="onChangeState($event)"
             class="qt-d-md-none"
             [hidden]="page !== 'INVENTORY'"
         ></app-left-panel-inventory>
         <app-left-panel-password-manager
+            #panelPasswordManager
             *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
             [activePage]="state"
             (onChangeState)="onChangeState($event)"
