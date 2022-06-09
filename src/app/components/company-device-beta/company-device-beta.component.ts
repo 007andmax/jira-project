@@ -825,7 +825,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.installDate = dateInstalled;
   }
 
-  saveDevice() {              
+  saveDevice() {                  
     let data: any = {};
     data.Guid = uuidv4();
     data.Name = this.deviceName;
@@ -864,9 +864,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
       })
   }
 
-  linkDevicesTags(id){
+  linkDevicesTags(id){    
     this.linkDevicesTag.forEach((element)=>{      
-      const newlinkDevice: any ={ID:id, Name:element.Name}      
+      const newlinkDevice: any ={AssetId:id, AssociatedAssetID:element.ID}      
       this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp)=>{
 
       })
