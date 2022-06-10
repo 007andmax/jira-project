@@ -10,7 +10,7 @@
             <div class="qt-page-list__header-title-line--rigth">
                 <button
                     class="qt-btn --outline-blue qt-mr-8"
-                    *ngIf="isExistSelected()"
+                    [disabled]="!isExistSelected()"
                     (click)="onInvoiceAll()"
                 >
                     Invoice All
@@ -70,7 +70,7 @@
                             Billable Amount
                             <span class="qt-table-modern__sorting"></span>
                         </th>
-                        <th class="billable-table__billable"></th>
+                        <th class="billable-table__menu"></th>
                     </tr>
                 </thead>
             </table>
