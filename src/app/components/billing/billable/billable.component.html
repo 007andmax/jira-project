@@ -9,11 +9,14 @@
             </div>
             <div class="qt-page-list__header-title-line--rigth">
                 <button
-                    class="qt-btn --outline-blue qt-mr-8"
+                    class="qt-btn --outline-blue qt-mr-8 btn-invoice-all"
                     [disabled]="!isExistSelected()"
-                    (click)="onInvoiceAll()"
+                    appDisabledBtn
+                    #saveAndDownloadBtn="disabled"
+                    (onClick)="onInvoiceAll()"
                 >
-                    Invoice All
+                    <span *ngIf="!saveAndDownloadBtn.isBlock()">Invoice All</span>
+                    <app-preloader-ticket *ngIf="saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
                 </button>
                 <span class="qt-input-search">
                     <input

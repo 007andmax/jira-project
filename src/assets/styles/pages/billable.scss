@@ -30,19 +30,19 @@
     }
 
     &__company-name {
-      width: 45%;
+      width: calc(45% - 25px);
     }
 
     &__tickets {
-      width: 26%;
+      width: calc(31% - 25px);
     }
 
     &__sales {
-      width: 9%;
+    width: calc(12% - 25px);
     }
 
     &__billable {
-      width: 10%;
+      width: calc(12% - 25px);
       min-width: 144px;
     }
 
