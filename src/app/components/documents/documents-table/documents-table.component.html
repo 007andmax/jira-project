@@ -48,6 +48,7 @@
         class="documents-table__assigned-companies ellipsis"
         (click)="navigateToCategory()"
         [ngClass]="{'pointer':item.isCategory}"
+        *ngIf="showAssignedCompanies"
     >
         <div class="qt-df qt-ai-c qt-lh-1">
             <i
