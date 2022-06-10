@@ -29,6 +29,9 @@ export class BillableService {
   public deleteDiscount(lockId) {
     return this.http.delete(this.apiUrl + `invoice/removeDiscount/${lockId}`);
   }
+  public createInvoiceByCompanyId(data) {
+    return this.http.post(this.apiUrl + `invoice/create?isSendNotification=true`, data);
+  }
   public addDiscount(lockId, data) {
     return this.http.post(this.apiUrl + `invoice/addDiscount/${lockId}`, data);
   }

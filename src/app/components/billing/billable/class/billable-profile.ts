@@ -7,7 +7,9 @@ export class BillableProfile {
     countTickets: number = 0;
     salesPerson: string = '';
     total: number = 0;
+    companyId: string;
     isDefault: boolean = false;
+    selected: boolean = false;
     constructor(id, tickets, name, salesPerson, isDefault = false) {
         this.id = id;
         this.tickets = tickets.map(item => {

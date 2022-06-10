@@ -93,6 +93,30 @@ export class BillableComponent implements OnInit, OnDestroy {
     this.sub.add(changeBillable);
 
   }
+  isExistSelected() {
+    return this.reqList.find(item => item.selected);
+  }
+  onSelectItem(value, billable) {
+    let index = this.reqList.findIndex(item => item.id === billable.id);
+    this.reqList[index].selected = value;
+  }
+  onToggleAll(event) {
+    this.reqList.forEach(item => {
+      item.selected = event.target.checked;
+    })
+    this.list.forEach(item => {
+      item.selected = event.target.checked;
+    })
+  }
+  onInvoiceAll() {
+    let ids = [];
+    this.reqList.forEach(item => {
+      if (item.selected) ids.push(item.id);
+    })
+    if (ids.length > 0) this.billableService.createInvoiceByCompanyId(ids).subscribe(data => {
+
+    })
+  }
   private addTicket(data, list) {
     let clientCompanyId = data.data.companyId;
     let findIndex = list.findIndex(item => item.id === clientCompanyId);
@@ -148,7 +172,6 @@ export class BillableComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-
     })
   }
   onFilter(field) {

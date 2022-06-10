@@ -7,9 +7,14 @@
                     [textContent]="'Billable Items (' + count + ')'"
                 ></h6>
             </div>
-
-
             <div class="qt-page-list__header-title-line--rigth">
+                <button
+                    class="qt-btn --outline-blue qt-mr-8"
+                    *ngIf="isExistSelected()"
+                    (click)="onInvoiceAll()"
+                >
+                    Invoice All
+                </button>
                 <span class="qt-input-search">
                     <input
                         class="qt-input-search billable-list-search"
@@ -22,12 +27,21 @@
                 </span>
             </div>
         </div>
-
-
         <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
+                        <th class="billable-item-table__check">
+                            <div class="d-f">
+                                <label class="qt-checkbox">
+                                    <input
+                                        type="checkbox"
+                                        (change)="onToggleAll($event)"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
                         <th
                             class="billable-table__company-name"
                             (click)="onFilter('name')"
@@ -56,13 +70,12 @@
                             Billable Amount
                             <span class="qt-table-modern__sorting"></span>
                         </th>
+                        <th class="billable-table__billable"></th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-
-
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <table
@@ -79,6 +92,7 @@
                         <app-billable-item
                             [item]="item"
                             *ngIf="!item.isDefault"
+                            (onSelect)="onSelectItem($event,item)"
                         ></app-billable-item>
                     </ng-template>
                 </tbody>

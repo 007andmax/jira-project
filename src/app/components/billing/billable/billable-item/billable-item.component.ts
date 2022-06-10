@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BillableProfile } from '../class/billable-profile';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,6 +7,7 @@ import { User } from '../../../users/class/user';
 import { TicketsListService } from '../../../tickets/tickets/services/tickets-list.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { BillableService } from 'src/app/services/billable/billable.service';
 
 @Component({
   selector: 'app-billable-item',
@@ -16,6 +17,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 })
 export class BillableItemComponent implements OnInit {
   @Input() item: BillableProfile;
+  @Output() onSelect = new EventEmitter<any>();
   company: Company;
   salesPerson: User;
   totalSum: number = 0;
@@ -25,6 +27,7 @@ export class BillableItemComponent implements OnInit {
     public ticketsListService: TicketsListService,
     private billableStateService: BillableStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private billableService: BillableService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -52,6 +55,13 @@ export class BillableItemComponent implements OnInit {
       return this.listColorNoAvatar[this.indexNoAvatar];
     }
   };
+  onChangeSelected(event) {
+    this.onSelect.emit(event.target.checked);
+  }
+  onInvoiceAll() {
+    this.billableService.createInvoiceByCompanyId([this.item.id]).subscribe(data => {
+    });
+  }
   moToBillableTickets() {
     this.billableStateService.setBillableProfile(this.item);
     this.leftPanelStateService.goToState('new-billable-tickets');
