@@ -26,6 +26,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
+  public companiesList: any;
 
   constructor(//private quoteStateService: QuoteStateService,
     public router: Router,
@@ -33,9 +34,11 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     public activateRoute: ActivatedRoute,
     private companiesService: CompaniesService,
-    private leftPanelStateService: LeftPanelStateService) { }
+    private leftPanelStateService: LeftPanelStateService,
+    private companiesState: CompaniesStateService,) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.companiesState.onInit();  
     this.companyId = this.companiesStateService.getCompanyRoutingId();
     if (this.companyId != this.companiesStateService.getCompanyIdForassignedDocumentCategory()) this.companiesStateService.getCategoriesDocuments(this.companyId);
     this.companiesStateService.onGetAssignedDocumentCategories.subscribe(data => {
@@ -55,6 +58,10 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
       }
     );
     this.sub.add(queryParams);
+
+    this.companiesState.getOnCompanies().subscribe((data) => {           
+      this.companiesList = this.getCompaniesNames(data);
+    })
   }
   public close() {
     this.open = false;
@@ -97,5 +104,21 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  /**
+   * Get companies list
+   * @param list
+   */
+   private getCompaniesNames(list) {
+
+    const filteredArray = [];
+    list.map((item) => {
+      filteredArray.push({
+        companyId: item.id,
+        name: item.name
+      })
+    });
+    return filteredArray;
   }
 }
