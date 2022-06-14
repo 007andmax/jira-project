@@ -30,10 +30,6 @@
   background: url("/assets/img/device-icn.png");
 }
 
-.icn-search-light {
-  background: url("/assets/img/search-light.png");
-}
-
 .icn-calendar-light {
   background: url("/assets/img/calendar-light.png");
 }
@@ -114,10 +110,6 @@
   background: url("/assets/img/icons/mobile-phone.png");
 }
 
-.office-phone-icn {
-  background: url("/assets/img/icons/office-phone.png");
-}
-
 .add-user {
   background: url("/assets/img/icons/add-users.svg");
 }
@@ -171,9 +163,6 @@
     background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
-  }
-  &__remove {
-    background-image: url("/assets/img/icons/remove.svg");
   }
   &__remove-disabled {
     background-color: $gray-600;
@@ -352,9 +341,6 @@
   &__close {
     background-image: url("/assets/img/icons/tag-close.svg");
   }
-  &__document-category-subscribe {
-    background-image: url("/assets/img/icons/subscribe-document-category.svg");
-  }
   &__close-white {
     background-image: url("/assets/img/icons/close-white.svg");
   }
@@ -459,8 +445,8 @@
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
   }
-  &__remove-12 {
-    background-image: url("/assets/img/icons/remove-12.svg");
+  &__remove {
+    background-image: url("/assets/img/icons/remove.svg");
   }
   &__restart {
     background-image: url("/assets/img/icons/restart.svg");
@@ -634,9 +620,6 @@
   &__message-response {
     background-image: url("/assets/img/icons/message-response.svg");
   }
-  &__copy-gray {
-    background-image: url("/assets/img/icons/copy-gray.svg");
-  }
   &__terminate {
     background-image: url("/assets/img/icons/terminate.svg");
   }
@@ -745,9 +728,6 @@
   &__shutdown-blue {
     background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
-  &__connected-device {
-    background-image: url("/assets/img/icons/connected-device.svg");
-  }
   &__more-vertical {
     background-image: url("/assets/img/icons/more-vertical.svg");
   }
@@ -799,10 +779,6 @@
   &__subscribe-user {
     background-image: url("/assets/img/icons/subscribe-user.svg");
   }
-  &__create-folder {
-    background-image: url("/assets/img/icons/create-folder.svg");
-  }
-
   &__key {
     background-image: url("/assets/img/icons/key.svg");
   }

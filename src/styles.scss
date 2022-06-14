@@ -2375,8 +2375,7 @@ app-quotes-item {
     }
   }
   &__list--item {
-    .mobile-phone-icn,
-    .office-phone-icn {
+    .mobile-phone-icn {
       margin-right: 5px;
     }
     [class*="col-md-"] {
@@ -2484,7 +2483,7 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          background: url("./assets/img/icons/products-tab-ng2.png");
+          background: url("./assets/img/icons/products.svg");
           background-size: contain;
           margin-right: 8px;
         }
@@ -2496,7 +2495,7 @@ app-quotes-item {
           color: $primary-1;
           border-bottom: 2px solid $primary-1;
           .tab-product {
-            background: url("./assets/img/icons/products-tab-active-ng2.png");
+            background: url("./assets/img/icons/products-blue.svg");
             background-size: contain;
           }
           .tab-service {
@@ -3526,30 +3525,6 @@ ngb-typeahead-window {
   border: 0.1rem solid $gray-800;
   border-top-color: $gray-600;
 }
-
-// .toast-container .toast-success {
-//   top: 105px;
-//   width: auto;
-//   border-radius: 6px;
-//   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
-//   background: url('/ng2/assets/img/success-tick.png') #2ec866 no-repeat left
-//     16px center;
-//   background-color: $success;
-//   padding: 8px 15px 8px 44px;
-//   font-size: 12px;
-//   font-weight: normal;
-//   font-style: normal;
-//   font-stretch: normal;
-//   line-height: 1.33;
-//   letter-spacing: normal;
-//   color: $white;
-//   margin: 0 auto;
-//   left: 265px;
-//   right: 0;
-//   max-width: 236px;
-//   position: fixed;
-//   z-index: 99999999999;
-// }
 
 .invalid-feedback {
   margin-top: 0.25rem;
