@@ -70,4 +70,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public goToState() {
     this.onChangeState.emit('password-manager');
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
