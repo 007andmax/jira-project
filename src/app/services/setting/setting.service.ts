@@ -33,6 +33,12 @@ export class SettingService {
   public getUserProfile() {
     return this.http.get(`${this.apiUrl}settings/userProfile/`);
   }
+
+  public setAuthCode(user_id, code_value_from_authenticator) {
+    return this.http.get(`${this.apiUrl}google/code/confirm?userId=${user_id}&code=${code_value_from_authenticator}`);
+  }
+
+
   public checkTestServer(data) {
     return this.http.post(`${this.apiUrl}settings/companyProfile/verifySMTPSettings`, data).pipe(
       tap((res: any) => {
@@ -45,6 +51,9 @@ export class SettingService {
 
   public updateAvatar(id: string, image: any) {
     return this.http.post(`${this.apiUrl}users/${id}/avatar`, image);
+  }
+  public getQRCode(user_id) {
+    return this.http.get(`${this.apiUrl}google/code/generate?userId=${user_id}`);
   }
 
   public updateProfile(profile: any) {

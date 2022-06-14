@@ -11,3 +11,9 @@
   input.ng-invalid.is-invalid {
     border: 1px solid $error;
   }
+.authentication-type {
+  display: flex;
+  .ac-row {
+    width: 50% !important;
+  }
+}

@@ -5,6 +5,9 @@ import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GoogleAuthenticatorComponent } from 'src/app/components/shared/google-authenticator/google-authenticator.component';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-account',
@@ -14,13 +17,16 @@ import { map } from 'rxjs/operators';
 export class AccountComponent implements OnInit {
   submitted = false;
   authenticationTypesType = 'BASIC';
+  twoFactorTypesType = 'SECURE';
   oldPwdCorrect = true;
   public passwordForm: FormGroup;
   show = false;
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private usersStateService: UsersStateService,
   ) { }
 
   ngOnInit() {
@@ -39,6 +45,10 @@ export class AccountComponent implements OnInit {
     );
 
     this.get2FA();
+    if (this.usersStateService.getCurrentUser()) this.twoFactorTypesType = this.usersStateService.getCurrentUser().twoFactorAuthType;
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.twoFactorTypesType = data.twoFactorAuthType;
+    })
   }
 
   // convenience getter for easy access to form fields
@@ -58,7 +68,14 @@ export class AccountComponent implements OnInit {
       )
       .subscribe();
   }
+  onTwoFactorTypeChange(value) {
+    if (value === 'SECURE') {
+      this.onAuthTypeChange('SECURE');
+    } else {
+      const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal' });
 
+    }
+  }
   // selected auth type
   onAuthTypeChange(type: string) {
     this.settingService
