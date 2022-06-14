@@ -72,7 +72,6 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
-      console.log("data", data);
       window.scrollTo(0, 0);
       this.filter.setSortCategoty(data);
       this.page_number = 0;

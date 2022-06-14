@@ -26,7 +26,6 @@ export class AccountingReportComponent implements OnInit {
   }
   public getReport(data) {
     this.accountingReport.setData(JSON.parse(JSON.stringify(data)));
-    console.log("this.accountingReport", this.accountingReport);
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.accountingReport.companyId);
     this.onInit = true;
   }

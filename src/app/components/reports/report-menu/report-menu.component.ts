@@ -510,20 +510,14 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   */
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.paymentsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.paymentsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
-      console.log("this.paymentsReport", this.paymentsReport);
       this.techService.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.techService.setEndDate(moment(value.end).format('YYYY-MM-DD'));
-
-
       this.productsCompanyReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.productsCompanyReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.productSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.productSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.customerSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
@@ -534,31 +528,25 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.ticketsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.serviceReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.serviceReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.accountingReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.accountingReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
-
       this.detailedCommissionsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.detailedCommissionsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.commonCommissionsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.commonCommissionsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.techSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.techSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.techSalesReport.resetDuration();
       this.techSalesReport.setDisabledDuration(true);
-
       this.techTicketReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.techTicketReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.techTicketReport.resetDuration();
       this.techTicketReport.setDisabledDuration(true);
-
       if (this.durationsTechSaleDP) this.durationsTechSaleDP.clearWithOutChanges();
       this.remoteConnectionReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.remoteConnectionReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
-
     } else {
       this.techSalesReport.resetDates();
       this.techSalesReport.setDefaultDuration();
@@ -567,7 +555,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       this.techTicketReport.resetDates();
       this.techTicketReport.setDefaultDuration();
       this.techTicketReport.setDisabledDuration(false);
-
       this.accountingReport.resetDates();
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
