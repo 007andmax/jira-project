@@ -2375,8 +2375,6 @@ app-quotes-item {
     }
   }
   &__list--item {
-    .home-phone-icn,
-    .fax-icn,
     .mobile-phone-icn,
     .office-phone-icn {
       margin-right: 5px;
@@ -2839,10 +2837,6 @@ app-quotes-item {
       padding: 0 !important;
     }
   }
-  .upload-logo {
-    position: static;
-    margin-right: 20px;
-  }
   .logo-upload {
     img {
       border-radius: 50%;
@@ -3185,11 +3179,6 @@ app-quotes-item {
   .new-link {
     margin: 0 !important;
     padding: 0 !important;
-  }
-
-  .upload-logo {
-    position: static;
-    margin-right: 20px;
   }
 }
 .recurring-tickets-content__modal,
@@ -4443,21 +4432,6 @@ app-ticket-edit-aside {
   transform: translate(-14px, 30px);
   cursor: pointer;
   z-index: 1;
-}
-
-app-add-assigned-user {
-  .mat-chip-remove {
-    opacity: 1 !important;
-  }
-
-  .mat-chip-remove:before {
-    background: url("./assets/img/icons/tag-user-close.svg") no-repeat !important;
-    filter: brightness(1) !important;
-    width: 16px !important;
-    top: 1px !important;
-    height: 16px !important;
-    right: 0px !important;
-  }
 }
 
 .ticket-edit-aside {

@@ -1047,21 +1047,6 @@
   color: $gray-800;
 }
 
-.customer-ticket__header--item:nth-child(3) .ticket-report-time {
-  padding-left: 20px;
-}
-
-.customer-ticket__header--item:nth-child(3) .ticket-report-time:before {
-  position: absolute;
-  content: '';
-  background-image: url("/assets/img/icons/ticket-report-time.png");
-  width: 16px;
-  height: 16px;
-  left: 0;
-  top: 3px;
-}
-
-
 .service-color-0:before {
   background-color: $primary-1;
 }
