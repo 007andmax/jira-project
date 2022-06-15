@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersService } from 'src/app/services/users/users.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
@@ -18,6 +20,8 @@ export class GoogleAuthenticatorComponent implements OnInit {
     private usersStateService: UsersStateService,
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     config: NgbModalConfig,) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -33,7 +37,8 @@ export class GoogleAuthenticatorComponent implements OnInit {
   submit() {
     if (this.authCode.length > 0) this.settingService.setAuthCode(this.usersStateService.getCurrentUser().id, this.authCode).subscribe((data: any) => {
       if (data.confirmed) {
-
+        this.toastrService.success("Authentication type has been successfully changed");
+        this.appStateService.changeDetectorRef();
       }
     })
   }

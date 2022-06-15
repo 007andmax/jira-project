@@ -35,7 +35,7 @@ export class SettingService {
   }
 
   public setAuthCode(user_id, code_value_from_authenticator) {
-    return this.http.get(`${this.apiUrl}google/code/confirm?userId=${user_id}&code=${code_value_from_authenticator}`);
+    return this.http.get(`${this.apiUrl}google/code/confirm?userId=${user_id}&code=${code_value_from_authenticator}`)
   }
 
 

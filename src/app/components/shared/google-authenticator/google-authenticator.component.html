@@ -6,16 +6,35 @@
             (click)="closeModal()"
         ></div>
     </div>
-    <div class="qt-modal__body">
-        <img [src]="qrCode">
+    <div class="qt-modal__body google-authenticator">
         <ol>
-            <li>{{secretCode}}</li>
+            <li>
+                Install Google authenticator on your phone
+            </li>
+            <li>Open the Google authenticator app</li>
+            <li>
+                Tap menu, then tap "Set up account", then app "Scan a barcode".
+            </li>
+            <li>
+                <div class="qt-mb-10">
+                    Your phone will now be in a "scanning" mode. When you are in this mode, scan the barcode below :
+                </div>
+                <div class="qr-code qt-mb-10">
+                    <img [src]="qrCode">
+                </div>
+            </li>
+            <li>
+                If you cannot scan the QR code enter this key manually into the app {{secretCode}}
+            </li>
         </ol>
+        <p class="qt-mb-10">
+            Once you have scanned the qr-code, enter the 6-dight code bellow:
+        </p>
         <div class="qt-input-block qt-mb-24 qt-w100">
             <label>Verefication code</label>
             <input
                 type="text"
-                placeholder="Write Subject"
+                placeholder="Write code"
                 [(ngModel)]="authCode"
             >
         </div>

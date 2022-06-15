@@ -147,8 +147,8 @@
                     </div>
                 </div>
             </div>
-            <div class="li authentication-type">
-                <div class="ac-row qt-mr-16">
+            <div class="li">
+                <div class="ac-row">
                     <form method="get">
                         <div class="ac-info">
                             <label>Authentication Type</label>
@@ -161,28 +161,12 @@
                                 >
                                     <option value="DISABLED">No authentication</option>
                                     <option value="BASIC">Basic two-factor authentication</option>
-                                    <option value="SECURE">Secure two-factor authentication</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div
-                    class="qt-w50"
-                    *ngIf="authenticationTypesType === 'SECURE'"
-                >
-                    <form method="get">
-                        <div class="ac-info">
-                            <label>Two-factor Type</label>
-                            <div class="ac-txt">
-                                <select
-                                    class="cmn-select form-input"
-                                    (change)="onTwoFactorTypeChange($event.target.value)"
-                                    [(ngModel)]="twoFactorTypesType"
-                                    [ngModelOptions]="{ standalone: true }"
-                                >
-                                    <option value="SECURE">Authentication by email</option>
-                                    <option value="GOOGLE_SECURE">Google Authenticator</option>
+                                    <option value="SECURE">
+                                        Secure two-factor authentication - by email
+                                    </option>
+                                    <option value="GOOGLE_SECURE">
+                                        Secure two-factor authentication - Google authenticator
+                                    </option>
                                 </select>
                             </div>
                         </div>
