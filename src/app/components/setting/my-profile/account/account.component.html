@@ -147,7 +147,7 @@
                     </div>
                 </div>
             </div>
-            <div class="li">
+            <div class="li authentication-type">
                 <div class="ac-row">
                     <form method="get">
                         <div class="ac-info">
@@ -156,8 +156,7 @@
                                 <select
                                     class="cmn-select form-input"
                                     (change)="onAuthTypeChange($event.target.value)"
-                                    [(ngModel)]="authenticationTypesType"
-                                    [ngModelOptions]="{ standalone: true }"
+                                    [value]="authenticationTypesType"
                                 >
                                     <option value="DISABLED">No authentication</option>
                                     <option value="BASIC">Basic two-factor authentication</option>

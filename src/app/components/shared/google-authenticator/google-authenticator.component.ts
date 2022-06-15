@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/app/services/setting/setting.service';
@@ -13,6 +13,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   providers: [NgbModalConfig, NgbModal]
 })
 export class GoogleAuthenticatorComponent implements OnInit {
+  @Output() onReset = new EventEmitter();
   qrCode: string;
   secretCode: string;
   authCode: string = '';
@@ -41,6 +42,10 @@ export class GoogleAuthenticatorComponent implements OnInit {
         this.appStateService.changeDetectorRef();
       }
     })
+  }
+  cancel() {
+    this.onReset.emit(null);
+    this.closeModal();
   }
   closeModal() {
     this.activeModal.close();

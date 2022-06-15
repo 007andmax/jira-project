@@ -3,7 +3,7 @@
         <div class="qt-modal__header-title qt-fw-600">Enable Google authenticator</div>
         <div
             class="qt-modal__close icon__close qt-pointer"
-            (click)="closeModal()"
+            (click)="cancel()"
         ></div>
     </div>
     <div class="qt-modal__body google-authenticator">
@@ -20,7 +20,10 @@
                     Your phone will now be in a "scanning" mode. When you are in this mode, scan the barcode below :
                 </div>
                 <div class="qr-code qt-mb-10">
-                    <img [src]="qrCode">
+                    <img
+                        *ngIf="qrCode"
+                        [src]="qrCode"
+                    >
                 </div>
             </li>
             <li>
@@ -42,7 +45,7 @@
     <div class="qt-modal__footer">
         <button
             class="qt-button --gray qt-mr-12"
-            (click)="closeModal()"
+            (click)="cancel()"
         >
             Cancel
         </button>
