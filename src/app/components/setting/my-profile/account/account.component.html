@@ -170,6 +170,14 @@
                             </div>
                         </div>
                     </form>
+                    <a
+                        href="javascript:;"
+                        class="static-link"
+                        *ngIf="authenticationTypesType === 'GOOGLE_SECURE'"
+                        (click)="showScratchCodes()"
+                    >
+                        Show scratch codes
+                    </a>
                 </div>
             </div>
         </div>

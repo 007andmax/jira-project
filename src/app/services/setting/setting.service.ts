@@ -30,6 +30,13 @@ export class SettingService {
     );
   }
 
+  public getScratches() {
+    return this.http.get(`${this.apiUrl}google/code/scratches`);
+  }
+  public getNewScratches() {
+    return this.http.post(`${this.apiUrl}google/code/scratches`, {});
+  }
+
   public getUserProfile() {
     return this.http.get(`${this.apiUrl}settings/userProfile/`);
   }
@@ -84,7 +91,12 @@ export class SettingService {
   }
 
   public twoFactorAuth(type: string) {
-    return this.http.post(`${this.apiUrl}users/twoFactorAuth?type=${type}`, {});
+    return this.http.post(`${this.apiUrl}users/twoFactorAuth?type=${type}`, {}).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Authentication type has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   public getActivityHistory() {

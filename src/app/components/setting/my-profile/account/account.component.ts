@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GoogleAuthenticatorComponent } from 'src/app/components/shared/google-authenticator/google-authenticator.component';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
 
 @Component({
   selector: 'app-account',
@@ -67,6 +68,10 @@ export class AccountComponent implements OnInit, OnDestroy {
       )
       .subscribe();
   }
+  showScratchCodes() {
+    const modalRef = this.modalService.open(GoogleAuthenticatorScratchesComponent, { windowClass: 'quote-send-modal' });
+
+  }
   // selected auth type
   onAuthTypeChange(type: string) {
     if (type === "GOOGLE_SECURE") {
@@ -75,14 +80,18 @@ export class AccountComponent implements OnInit, OnDestroy {
         console.log("onReset", this.authenticationTypesType);
         this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
       })
-      this.sub.add(onReset);
+      let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
+        console.log("onReset", this.authenticationTypesType);
+        this.authenticationTypesType = type;
+        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+      })
+      this.sub.add(onSetQrCode);
       return;
     }
     this.settingService
       .twoFactorAuth(type)
       .pipe(
         map(res => {
-          this.toastr.success('Auth Type Changed Successfully');
           this.authenticationTypesType = type;
           this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
         })

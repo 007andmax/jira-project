@@ -14,6 +14,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class GoogleAuthenticatorComponent implements OnInit {
   @Output() onReset = new EventEmitter();
+  @Output() onSetQrCode = new EventEmitter();
+  isSetQrCode: boolean = false;
   qrCode: string;
   secretCode: string;
   authCode: string = '';
@@ -39,7 +41,10 @@ export class GoogleAuthenticatorComponent implements OnInit {
     if (this.authCode.length > 0) this.settingService.setAuthCode(this.usersStateService.getCurrentUser().id, this.authCode).subscribe((data: any) => {
       if (data.confirmed) {
         this.toastrService.success("Authentication type has been successfully changed");
+        this.isSetQrCode = true;
         this.appStateService.changeDetectorRef();
+        this.onSetQrCode.emit(null);
+
       }
     })
   }

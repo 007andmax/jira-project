@@ -27,13 +27,23 @@
                 </div>
             </li>
             <li>
-                If you cannot scan the QR code enter this key manually into the app {{secretCode}}
+                If you cannot scan the QR code enter this key manually into the app
+                <p
+                    class="secret-code"
+                    [textContent]="secretCode"
+                ></p>
             </li>
         </ol>
-        <p class="qt-mb-10">
+        <p
+            class="qt-mb-10"
+            *ngIf="!isSetQrCode"
+        >
             Once you have scanned the qr-code, enter the 6-dight code bellow:
         </p>
-        <div class="qt-input-block qt-mb-24 qt-w100">
+        <div
+            class="qt-input-block qt-mb-24 qt-w100"
+            *ngIf="!isSetQrCode"
+        >
             <label>Verefication code</label>
             <input
                 type="text"
@@ -50,6 +60,7 @@
             Cancel
         </button>
         <button
+            *ngIf="!isSetQrCode"
             class="qt-button qt-mr-12"
             (click)="submit()"
         >
