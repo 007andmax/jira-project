@@ -16,6 +16,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;
   @Input() companyId: string;
+  @Input() showAssignedCompanies: boolean = true;
   @Output() onRemoveCategory = new EventEmitter<any>();
   @Output() onRemoveDocument = new EventEmitter<any>();
   @Output() onEditDocument = new EventEmitter<any>();
