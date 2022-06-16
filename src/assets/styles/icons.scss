@@ -59,10 +59,6 @@
   background: url("/assets/img/icons/email-ng2.png");
 }
 
-.archive-blue-ng2 {
-  background: url("/assets/img/icons/archive-blue-ng2.png");
-}
-
 .export-ng2 {
   background: url("/assets/img/icons/export-ng2.png");
 }
@@ -77,9 +73,6 @@
 .restore-company {
   background: url("/assets/img/icons/restore-company.svg");
 }
-.more-vertical-ng2 {
-  background: url("/assets/img/icons/more-vertical-ng2.png") no-repeat;
-}
 
 .edit-grey-ng2 {
   background: url("/assets/img/icons/edit-grey-ng2.png");
@@ -89,9 +82,6 @@
 }
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
-}
-.archive-grey-ng2 {
-  background: url("/assets/img/icons/archive-grey-ng2.png");
 }
 
 .history-ng2 {
@@ -346,9 +336,6 @@
   }
   &__snapshot {
     background-image: url("/assets/img/icons/snapshot.svg");
-  }
-  &__more {
-    background-image: url("/assets/img/icons/more-vertical-ng2.png");
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
@@ -728,8 +715,8 @@
   &__shutdown-blue {
     background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
-  &__more-vertical {
-    background-image: url("/assets/img/icons/more-vertical.svg");
+  &__more {
+    background-image: url("/assets/img/icons/more.svg");
   }
   &__arrow-right {
     background-image: url("/assets/img/icons/arrow-right.svg");
