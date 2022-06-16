@@ -627,26 +627,48 @@
                         <div class="sidebar-system__info-title">Asset Tag</div>
                         <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Tag" (blur)="updateAsset()" >
                     </div>
-                </div>
+                </div>                
                 <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Manufacturer</div>
-                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Manufacturer" (blur)="updateAsset()">
+                        <div class="device-table__input-name">
+                            <app-select-search       
+                        id="manufacture"
+                        #dropdownManufacturersidebar          
+                        [placeholder]="'Select manufacture'"                
+                        [class]="['qt-dropdown']"
+                        [editItem]="selectManufactureNamessidebar"
+                        [field]="'Name'"        
+                        [list]="manufactureList"  
+                        (onSelectedItem)="onSelectManufactureNamesidebar($event)"                      
+                    ></app-select-search>                           
+                        </div>                        
                     </div>
-                </div>                                
+                </div>
                 <div class="sidebar-system__info">
                     <div class="sidebar-system__info-title">IP address</div>
                     <div
                         class="sidebar-system__info-text"
                         [textContent]="assetData.InternalIPAddress"
                     ></div>
-                </div>
+                </div>                
                 <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Computer Model</div>
-                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Model" (blur)="updateAsset()">
+                        <div class="device-table__input-name">
+                            <app-select-search       
+            id="model"
+            #dropdownModelSidebar
+            [placeholder]="'Select model'"                
+            [class]="['qt-dropdown']"
+            [editItem]="selectModelNameSidebar"
+            [field]="'Name'"                    
+            [list]="selectModelList"                       
+            (onSelectedItem)="onSelectModelsidebar($event)"
+        ></app-select-search>                        
+                        </div>                        
                     </div>
-                </div>                
+                </div>
             </div>
             <div class="qt-divider qt-mt-24 qt-mb-24"></div>
             <div

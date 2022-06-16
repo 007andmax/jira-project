@@ -36,7 +36,9 @@ export class DevicesComponent implements OnInit {
   @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
   @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent; 
   @ViewChild('installdatePicker') installdatePicker: DatePickerComponent;
-  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;   
+  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;  
+  @ViewChild('dropdownManufacturersidebar') dropdownManufacturersidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar')dropdownModelSidebar: DropDownComponent; 
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -123,6 +125,8 @@ export class DevicesComponent implements OnInit {
   autosearchCompanyDevice: any[] = [];
   linkDevicesFilterValue: string = "";  
   linkDevicesTag=[];
+  selectManufactureNamessidebar : any;
+  selectModelNameSidebar : any;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -1041,9 +1045,14 @@ export class DevicesComponent implements OnInit {
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
+    this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == asset.ManufacturerId);
+    this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == asset.ModelID);    
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
     this.Preloader = false;
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
 
   getSoftwareDetail(asset) {
@@ -1333,5 +1342,34 @@ onSearchLinkDevices(Tag){
       });
     }, 500);
   }
+
+  onSelectManufactureNamesidebar(SelectManufacturerSidebar)
+{
+  if (SelectManufacturerSidebar) {
+    this.manufactureId = SelectManufacturerSidebar.ID;
+    this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == this.manufactureId);
+    this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
+      this.selectModelList = resp; 
+      this.updateAsset();               
+    })      
+  }
+  else{
+    this.getModels(this.techCompnayGuid);
+    this.selectManufactureNamessidebar = "";    
+    this.dropdownModelSidebar.clearWithOutChanges();
+  }
+}
+
+onSelectModelsidebar(SelectModelSidebar) {
+  if (SelectModelSidebar) {
+    this.modelId = SelectModelSidebar.ID;
+    this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == this.modelId);
+    this.updateAsset();
+  }
+  else{
+    this.selectModelName = "";
+    this.updateAsset();
+  }
+}
 
 }
