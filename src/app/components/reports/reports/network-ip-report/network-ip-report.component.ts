@@ -54,9 +54,7 @@ export class NetworkIpReportComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getDeviceNetworkIpList();
-    this.loading = true;
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -81,6 +79,7 @@ export class NetworkIpReportComponent implements OnInit {
     this.networkipList = [];
     this.agentService.getDeviceNetworkIPByGuid(id).subscribe((resp) => {
       if (resp.length > 0) {
+        this.loading = false;
         this.networkipList = resp;
         this.tempararyDeviceList = resp;
         this.devices = this.tempararyDeviceList
@@ -104,6 +103,7 @@ export class NetworkIpReportComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true;
       this.clientName = selectClient.name;
       this.deviceNetworkIpReport.setCompanyId(selectClient.id);
       this.getAllCompanyList(selectClient.id);
@@ -112,8 +112,8 @@ export class NetworkIpReportComponent implements OnInit {
       this.deviceNetworkIpReport.setDeviceName(null);
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
-      this.clientName = "All Companies";
-      this.getDeviceNetworkIpList();
+      this.clientName = "All Companies";      
+      this.networkipList = [];
     }
   }
 

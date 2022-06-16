@@ -54,9 +54,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getDeviceAntivirusList();
-    this.loading = true;
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -81,6 +79,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     this.deviceAntivirusList = [];
     this.agentService.getDeviceAntivirusByGuid(id).subscribe((resp) => {
       if (resp.length > 0) {
+        this.loading = false;
         this.deviceAntivirusList = resp;
         this.tempararyDeviceList = resp;
         this.devices = this.tempararyDeviceList
@@ -104,6 +103,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true;
       this.clientName = selectClient.name;
       this.deviceAntivirusReport.setCompanyId(selectClient.id);
       this.getAllCompanyList(selectClient.id);
@@ -113,7 +113,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.getDeviceAntivirusList();
+      this.deviceAntivirusList = [];      
     }
   }
 

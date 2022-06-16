@@ -54,9 +54,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getDeviceWarrantyList();
-    this.loading = true;
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -82,6 +80,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     this.deviceWarrantyList = [];
     this.agentService.getDeviceWarrantyByGuid(id).subscribe((resp) => {
       if (resp.length > 0) {
+        this.loading = false;
         this.deviceWarrantyList = resp;
         this.tempararyDeviceList = resp;
         this.devices = this.tempararyDeviceList
@@ -105,6 +104,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true;
       this.clientName = selectClient.name;
       this.deviceWarrantyReport.setCompanyId(selectClient.id);
       this.getAllCompanyList(selectClient.id);
@@ -114,7 +114,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.getDeviceWarrantyList();
+      this.deviceWarrantyList = [];      
     }
   }
 

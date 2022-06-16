@@ -124,7 +124,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private companiesState: CompaniesStateService    
   ) { }
 
-  ngOnInit() {  
+  ngOnInit() {      
     this.companiesState.onInit();  
     this.companyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -141,7 +141,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.companyGuid = company.id;
       this.setPreviewDataDevice();      
     }
-    this.companiesStateService.onCurrentCompany.subscribe(data => {                
+    this.companiesStateService.onCurrentCompany.subscribe(data => {                      
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.companyGuid = this.currentCompany.id;

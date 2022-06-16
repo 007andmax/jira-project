@@ -51,9 +51,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getDeviceDiskDriveList();
-    this.loading = true;
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -79,6 +77,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
     this.deviceDiskSpaceList = [];
     this.agentService.getDeviceDiskDriveByGuid(id).subscribe((resp) => {
       if (resp.length > 0) {
+        this.loading = false;
         this.deviceDiskSpaceList = resp;
         this.tempararyDeviceList = resp;
         this.devices = this.tempararyDeviceList
@@ -102,6 +101,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true
       this.clientName = selectClient.name;
       this.deviceDiskSpaceReport.setCompanyId(selectClient.id);
       this.getAllCompanyList(selectClient.id);
@@ -111,7 +111,7 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.getDeviceDiskDriveList();
+      this.deviceDiskSpaceList = [];      
     }
   }
 

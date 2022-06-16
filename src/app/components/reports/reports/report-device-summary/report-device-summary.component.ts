@@ -57,10 +57,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getSummaryList();
-    this.loading = true;
-
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -111,6 +108,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
     this.agentService
       .getDeviceSummaryByGuid(this.deviceSummaryReport.companyId)
       .subscribe((resp) => {
+        this.loading = false;
         if (resp.length > 0) {
           this.tempararyDeviceList = [];
           this.tempararyDeviceList = resp;
@@ -158,6 +156,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true;
       this.clientName = selectClient.name;
       this.deviceSummaryReport.setCompanyId(selectClient.id);
       this.getReportByDeviceSummary();
@@ -166,9 +165,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
       this.deviceSummaryReport.setDeviceName(null);
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
-      this.clientName = "All Companies";
-      //this.getAllCompanyList();
-      this.getSummaryList()
+      this.clientName = "All Companies";      
+      this.deviceSummaryList = [];      
     }
   }
 

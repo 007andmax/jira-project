@@ -52,9 +52,7 @@ export class NetworkAdapterReportComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getDeviceNetworkAdapterList()
-    this.loading = true;
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -74,6 +72,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.networkAdapterList = [];
     this.agentService.getDeviceNetworkAdapterByGuid(id).subscribe((resp) => {
       if (resp.length > 0) {
+        this.loading = false;
         this.networkAdapterList = resp;
         this.tempararyDeviceList = resp;
         this.devices = this.tempararyDeviceList
@@ -97,6 +96,7 @@ export class NetworkAdapterReportComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true;
       this.clientName = selectClient.name;
       this.deviceNetworkAdapterReport.setCompanyId(selectClient.id);
       this.getAllCompanyList(selectClient.id);
@@ -106,7 +106,7 @@ export class NetworkAdapterReportComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.getDeviceNetworkAdapterList();
+      this.networkAdapterList = [];      
     }
   }
 

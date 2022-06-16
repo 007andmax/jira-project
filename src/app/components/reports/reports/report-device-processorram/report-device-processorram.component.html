@@ -117,8 +117,15 @@
                       <td class="processorType">{{deviceProcessorRam.ProcessorType}}</td>
                       <td class="memoryGB">{{ deviceProcessorRam.MemorySize }}</td>
                   </tr>
-              </tbody>
+              </tbody>              
           </table>
+          <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="deviceProcessorRamList.length == 0">
+            <tbody>
+                <tr>
+                    <td colspan="10" class="text-center repor-device-processorram-table">Data Not Available</td>
+                </tr>
+            </tbody>
+        </table>    
       </div>
   </div>
 </div>

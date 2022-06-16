@@ -67,12 +67,10 @@ export class HardwareSummaryReportComponent implements OnInit {
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.loading = true;
+    this.companiesState.onInit();    
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-      this.getHardwareSummaryList();
+      this.getClientsList(data);      
     });
   }
 
@@ -140,15 +138,17 @@ export class HardwareSummaryReportComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
 
-  public selectClient(selectClient) {
-    if (selectClient == null) {
-      this.selectedClient == null;
-      this.getHardwareSummaryList();
+  public selectClient(selectClient) {      
+    if (selectClient == null) {      
+      this.selectedClient == null;      
+      this.hardwareSummaryReport=[];
     } else {
+      this.loading=true;
       this.selectedClient = selectClient
       this.deviceSummaryReport.setCompanyId(selectClient.id);
-      this.getHardwareSummarybyGuidList(selectClient.id);
-      this.getReportByDeviceSummary();
+      this.getHardwareSummarybyGuidList(selectClient.id);      
+      this.getReportByDeviceSummary();  
+      this.loading=false;          
     }
     this.onSelectedClient.emit(this.selectedClient);
   }

@@ -63,9 +63,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   ngOnInit() {
     this.clientName = "All Companies";
     this.companiesState.onInit();
-    this.setPreviewDataDevice();
-    this.getCompanyApplicationList();
-    this.loading = true;
+    this.setPreviewDataDevice();    
   }
 
   setPreviewDataDevice() {
@@ -110,6 +108,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       .getCompanyApplicationByGuid(this.applicationByCompanyReport.companyId)
       .subscribe((resp) => {
         if (resp.length > 0) {
+          this.loading = false;
           this.applicationByCompanyList = resp;
           this.temparyApplicationList = resp;
           this.application = this.temparyApplicationList.map((item)=>item.DisplayName).filter((value,index,self)=>self.indexOf(value)=== index);
@@ -121,6 +120,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.loading = true;
       this.clientName = selectClient.name;
       this.applicationByCompanyReport.setCompanyId(selectClient.id);
       this.validate.resetCompany();
@@ -131,7 +131,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       this.application = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.getCompanyApplicationList();
+      this.applicationByCompanyList = [];      
     }
   }
 
