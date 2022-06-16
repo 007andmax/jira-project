@@ -29,13 +29,21 @@ export class BillableService {
   public deleteDiscount(lockId) {
     return this.http.delete(this.apiUrl + `invoice/removeDiscount/${lockId}`);
   }
+  public createInvoiceByCompanyId(data) {
+    return this.http.post(this.apiUrl + `invoice/create?isSendNotification=true`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The invoice has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public addDiscount(lockId, data) {
     return this.http.post(this.apiUrl + `invoice/addDiscount/${lockId}`, data);
   }
   public create(lockId, isSend, contactId, addressId) {
     return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`).pipe(
       tap(data => {
-        this.toastrService.success("The billable item has been successfully created");
+        this.toastrService.success("The invoice has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
       }));

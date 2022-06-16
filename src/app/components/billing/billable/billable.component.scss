@@ -1,3 +1,18 @@
 app-billable-item {
     display: contents;
 }
+.billable-item-table__check {
+    padding-left: 24px !important;
+    width: 45px;
+}
+.--outline-blue[disabled] {
+    border: solid 1px #96d4fa;
+    color: #96d4fa;
+}
+.billable-table__menu {
+    padding-right: 16px;
+    width: 55px;
+}
+.btn-invoice-all {
+    width: 94px;
+}
