@@ -31,7 +31,6 @@ export class LeftPanelInventoryComponent implements OnInit {
     if (this.inventoryStateService.getCategories().length > 0) this.inventoryCategoryList = this.inventoryStateService.getCategories();
     this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.inventoryCategoryList = data;
-      console.log("inventoryCategoryList", data);
       this.cd.detectChanges();
     })
   }
@@ -43,7 +42,6 @@ export class LeftPanelInventoryComponent implements OnInit {
     this.onChangeState.emit('inventory');
   }
   selectCategory(category) {
-    console.log("category", category);
     this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);
   }

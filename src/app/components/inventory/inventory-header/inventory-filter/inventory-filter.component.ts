@@ -26,7 +26,6 @@ export class InventoryFilterComponent implements OnInit {
     })
     this.sub.add(getOnCategries);
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
-      console.log("data", data);
       this.categoriesSelect.selectItemWithOutChanges(data);
     })
     this.sub.add(getOnSortCategory);

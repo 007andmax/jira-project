@@ -38,9 +38,7 @@ export class PaymentsReportComponent implements OnInit {
     this.cd.detectChanges();
   }
   public getReport(data) {
-    console.log("data", data);
     this.paymentsReport.setData(data);
-    console.log("this.paymentsReport", this.paymentsReport);
     this.onInit = true;
   }
   public getDateForHeader(data) {

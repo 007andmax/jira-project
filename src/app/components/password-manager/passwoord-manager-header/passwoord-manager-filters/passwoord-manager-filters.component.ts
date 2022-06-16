@@ -42,7 +42,6 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     private devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
-    console.log("this.passwordManagerStateService.getSelectedCategory()", this.passwordManagerStateService.getSelectedCategory());
     if (this.passwordManagerStateService.getSelectedCategory()) this.categoriesSelect.onSelect(this.passwordManagerStateService.getSelectedCategory());
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
