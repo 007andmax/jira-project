@@ -50,6 +50,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
+      console.log("this.categories", this.categories);
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.passwordManagerStateService.onFilterByCategory.subscribe((data) => {

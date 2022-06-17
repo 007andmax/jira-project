@@ -59,6 +59,9 @@
 @mixin body-r__m {
   @include font-style(14px, 20px, 500, 0);
 }
+@mixin body-l__t {
+  @include font-style(16px, 20px, 500, 0);
+}
 @mixin body-m {
   @include font-style(13px, 20px, 400, 0);
 }
