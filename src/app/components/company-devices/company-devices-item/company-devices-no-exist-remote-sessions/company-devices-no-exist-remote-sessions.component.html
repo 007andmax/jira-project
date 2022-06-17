@@ -1,8 +1,4 @@
-<div
-    ngbDropdown
-    container="body"
-    placement="bottom-right"
->
+<div>
     <ng-template
         #tipRemoteAccess
         class="tooltip"
@@ -23,23 +19,7 @@
         placement="top"
         container="body"
         [ngbTooltip]="tipRemoteAccess"
-        ngbDropdownToggle
+        (click)="remoteAccess('CSS')"
     >
-        <div ngbDropdownMenu>
-            <ul class="qt-dropdown-menu">
-                <li
-                    (click)="remoteAccess('CSS')"
-                    ngbDropdownItem
-                >
-                    QuickTech Connect
-                </li>
-                <li
-                    (click)="remoteAccess('RDP')"
-                    ngbDropdownItem
-                >
-                    Remote Desktop
-                </li>
-            </ul>
-        </div>
     </div>
 </div>
