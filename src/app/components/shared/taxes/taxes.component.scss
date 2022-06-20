@@ -14,8 +14,7 @@
   right: 18px;
   color: $primary-1;
   cursor: pointer;
-  //font-size: 14px;
-  @extend %сaption-l-sb;
+  @include сaption-l__sb;
 }
 .new-tax {
   overflow: hidden;

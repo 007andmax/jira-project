@@ -1,5 +1,6 @@
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
 import { TechSalesItem } from "./tech-sales-item";
+import * as moment from 'moment';
 
 export class TechSalesReport {
     types: Array<TitleListType> = [new TitleListType("Billed time", "BILLED_TIME"),

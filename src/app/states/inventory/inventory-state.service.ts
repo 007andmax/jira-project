@@ -9,6 +9,7 @@ import { CategoryProductitem } from 'src/class/category-product-item';
   providedIn: 'root'
 })
 export class InventoryStateService {
+  sortCategoty: CategoryProduct = null;
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onEditInventory: EventEmitter<InventoryItem> = new EventEmitter();
   categoryForDelete: CategoryProduct = null;
@@ -61,6 +62,9 @@ export class InventoryStateService {
       this.setproducts(res);
       this.onInitGetProducts(this.productList);
     });
+  }
+  public getSortCategoty() {
+    return this.sortCategoty;
   }
   public refreshProductsAgreements() {
     this.onRefreshProductsAgreements.emit(null);
@@ -124,6 +128,7 @@ export class InventoryStateService {
     return this.categoryForDelete;
   }
   public setSortCategory(data) {
+    this.sortCategoty = data;
     this.onSortCategory.emit(data);
   }
   public setSortActive(data) {

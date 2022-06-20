@@ -75,7 +75,7 @@
     }
     &__ticket-info {
       flex-grow: 1;
-      @extend %сaption-l;
+      @include сaption-l;
       margin-right: 8px;
 
       @media (max-width: 767px) {
@@ -219,13 +219,13 @@
       position: relative;
 
       &::after {
-        @extend %label-l-sb;
+        @include label-l__sb;
 
         @media (max-width: 767px) {
           content: "";
           left: 0;
           top: -14px;
-          color: #919eab;
+          color: $gray-600;
           position: absolute;
           text-transform: uppercase;
         }
@@ -267,7 +267,7 @@
 
     &__service-subinfo {
       position: relative;
-      @extend %сaption-l-sb;
+      @include сaption-l__sb;
       color: $primary-2;
       margin-top: 3px;
       margin-left: 28px;
@@ -276,13 +276,13 @@
       }
 
       &::after {
-        @extend %label-l-sb;
+        @include label-l__sb;
 
         @media (max-width: 767px) {
           content: "Description";
           left: 0;
           top: -14px;
-          color: #919eab;
+          color: $gray-600;
           position: absolute;
           text-transform: uppercase;
         }

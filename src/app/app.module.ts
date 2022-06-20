@@ -97,8 +97,7 @@ import { PermissionPasswordManagerService } from './components/password-manager/
 import { PermissionReportsService } from './components/reports/permission-reports.service';
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionUsersService } from './components/users/permission-users.service';
-import { RightClickBlankDirective } from './directives/right-click-blank/right-click-blank.directive';
-import { ReportsLeftMenuComponent } from './components/reports/reports-left-menu/reports-left-menu.component';
+
 import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
 import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
@@ -129,6 +128,9 @@ import { AddUserToSubscribeComponent } from './components/users/add-user-to-subs
 import { SupportPageAddCategoryModule } from './components/super-admin/shared/support-page-add-category/support-page-add-category.module';
 import { LeftPanelSuperAdminModule } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.module';
 import { SupportPageAddSubCategoryModule } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.module';
+import { PreviewPhoneMaskComponent } from './components/shared/preview-phone-mask/preview-phone-mask.component';
+import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
+import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
 
 
 declare var $: any;

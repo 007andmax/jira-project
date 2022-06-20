@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .job-description {
     width: 100%;
 }
@@ -12,7 +14,7 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    color: #ffffff;
+    color: $white;
 }
 .upload-photo__title {
     display: flex;
@@ -20,7 +22,7 @@
     cursor: pointer;
     .remove-link {
         width: auto;
-        margin: 0px 0px 0px 20px !important;
+        margin: 0 0 0 20px !important;
     }
 }
 .upload-photo__input {

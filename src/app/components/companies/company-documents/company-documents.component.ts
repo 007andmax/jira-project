@@ -20,7 +20,7 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
-      this.companiesStateService.setSelectedCompanyId(this.companyId);
+      if (this.activateRoute.snapshot.queryParams.categoryId) this.filter.setCategoryId(this.activateRoute.snapshot.queryParams.categoryId);
       this.filter.setCompanyId(this.companyId);
       this.filter.setCompanyScope(true);
       this.getFilterList();
@@ -31,6 +31,16 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.header.filter.onChangeCounterFilter();
     });
     this.sub.add(subscription);
+    let queryParams = this.activateRoute.queryParams.subscribe(
+      (queryParam: any) => {
+        if (!this.showPreloader) {
+          this.showPreloader = true;
+          this.filter.setCategoryId(queryParam.categoryId);
+          this.getFilterList();
+        }
+      }
+    );
+    this.sub.add(queryParams);
     this.leftPanelStateService.changeStateWithoutNavigate('company-documents');
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
@@ -94,6 +104,5 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    // this.companiesStateService.setCompanyRoutingId(null);
   }
 }

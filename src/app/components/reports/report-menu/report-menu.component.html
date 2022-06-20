@@ -4,12 +4,6 @@
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                     <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
-                    <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
@@ -59,12 +53,6 @@
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                    <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
                     <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
@@ -126,12 +114,6 @@
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                    <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
                     <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
@@ -212,37 +194,32 @@
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                             <div
-                                class="report-left-panel__btn pointer qt-mr-6"
-                                (click)="toggleLeftMenu()"
-                            >
-                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                            </div>
-                            <!-- Filter -->
-                            <div
                                 class="qt-report__filter qt-f-1"
                                 [ngClass]="className"
                             >
                                 <div class="qt-df qt-ai-c qt-jc-c">
-                                    <div class="grey-dropdown form-group content select-users-list">
+                                    <div class="qt-report__dropdown qt-mr-8 select-users-list">
                                         <app-drop-down
                                             [placeholder]="'Select Company'"
                                             [list]="companies"
                                             [dropdownHeight]="'175px'"
                                             [validate]="validate.getCompany()"
                                             [errorMessage]="'Please select the company name'"
+                                            [heightInput]="'36px'"
                                             [field]="'name'"
                                             [search]="true"
                                             [change]="true"
                                             (onSelectedItem)="selectClient($event)"
                                         ></app-drop-down>
                                     </div>
-                                    <div class="form-group content custom-width dropdown-height">
+                                    <div class="qt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
                                             [sort]="true"
                                             [search]="true"
                                             [change]="true"
                                             [placeholder]="'All devices'"
                                             [dropdownHeight]="'300px'"
+                                            [heightInput]="'36px'"
                                             [list]="devices"
                                             [isDisabled]="!deviceIpSummary.companyId"
                                             [preloader]="deviceIpSummary.preloaderDevices"
@@ -366,18 +343,11 @@
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                             <div
-                                class="report-left-panel__btn pointer qt-mr-6"
-                                (click)="toggleLeftMenu()"
-                            >
-                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                            </div>
-                            <!-- Filter -->
-                            <div
                                 class="qt-report__filter qt-f-1"
                                 [ngClass]="className"
                             >
                                 <div class="qt-df qt-ai-c qt-jc-c">
-                                    <div class="grey-dropdown form-group content select-users-list">
+                                    <div class="qt-report__dropdown qt-mr-8 select-users-list">
                                         <app-drop-down
                                             [placeholder]="'Select Company'"
                                             [list]="companies"
@@ -385,18 +355,20 @@
                                             [validate]="validate.getCompany()"
                                             [errorMessage]="'Please select the company name'"
                                             [field]="'name'"
+                                            [heightInput]="'36px'"
                                             [search]="true"
                                             [change]="true"
                                             (onSelectedItem)="selectClient($event)"
                                         ></app-drop-down>
                                     </div>
-                                    <div class="form-group content custom-width dropdown-height">
+                                    <div class="fqt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
                                             [sort]="true"
                                             [search]="true"
                                             [change]="true"
                                             [placeholder]="'All devices'"
                                             [dropdownHeight]="'300px'"
+                                            [heightInput]="'36px'"
                                             [list]="devices"
                                             [isDisabled]="!hardwareSummaryReport.companyId"
                                             [preloader]="hardwareSummaryReport.preloaderDevices"
@@ -495,13 +467,6 @@
                 <div class="qt-report__header-content">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                            <div
-                                class="report-left-panel__btn pointer qt-mr-6"
-                                (click)="toggleLeftMenu()"
-                            >
-                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                            </div>
-                            <!-- Filter -->
                             <div
                                 class="qt-report__filter qt-f-1"
                                 [ngClass]="className"
@@ -634,12 +599,6 @@
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                         <div
-                            class="report-left-panel__btn pointer qt-mr-6"
-                            (click)="toggleLeftMenu()"
-                        >
-                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                        </div>
-                        <div
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
@@ -700,12 +659,6 @@
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                         <div
-                            class="report-left-panel__btn pointer qt-mr-6"
-                            (click)="toggleLeftMenu()"
-                        >
-                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                        </div>
-                        <div
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
@@ -745,12 +698,6 @@
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                        <div
-                            class="report-left-panel__btn pointer qt-mr-6"
-                            (click)="toggleLeftMenu()"
-                        >
-                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                        </div>
                         <div
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
@@ -832,12 +779,6 @@
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                     <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
-                    <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
@@ -888,12 +829,6 @@
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                    <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
                     <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
@@ -967,12 +902,6 @@
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                     <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
-                    <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
@@ -1032,12 +961,6 @@
         <div class="qt-report__header qt-df qt-ai-fs">
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                    <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
                     <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
@@ -1104,12 +1027,6 @@
             <div class="qt-report__header-content qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                     <div
-                        class="report-left-panel__btn pointer qt-mr-6"
-                        (click)="toggleLeftMenu()"
-                    >
-                        <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
-                    <div
                         class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                         [ngClass]="className"
                     >
@@ -1153,12 +1070,6 @@
                             class="qt-df qt-ai-c qt-jc-sb qt-f-1"
                             [ngClass]="className"
                         >
-                            <div
-                                class="report-left-panel__btn pointer qt-mr-6"
-                                (click)="toggleLeftMenu()"
-                            >
-                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                            </div>
                             <div class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c">
                                 <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
                                     <app-product-list
@@ -1247,12 +1158,6 @@
                 <div class="qt-report__header-content">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                            <div
-                                class="report-left-panel__btn pointer qt-mr-6"
-                                (click)="toggleLeftMenu()"
-                            >
-                                <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                            </div>
                             <div class="qt-report__filter qt-f-1">
                                 <div
                                     class="qt-df qt-ai-c qt-jc-c"
@@ -1340,12 +1245,6 @@
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
                         <div
-                            class="report-left-panel__btn pointer qt-mr-6"
-                            (click)="toggleLeftMenu()"
-                        >
-                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                        </div>
-                        <div
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"
                         >
@@ -1407,12 +1306,6 @@
             <div class="qt-report__header-content">
                 <div class="qt-df qt-ai-c qt-jc-sb">
                     <div class="qt-df qt-ai-c qt-jc-sb qt-f-1">
-                        <div
-                            class="report-left-panel__btn pointer qt-mr-6"
-                            (click)="toggleLeftMenu()"
-                        >
-                            <div class="icon__menu qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                        </div>
                         <div
                             class="qt-report__filter qt-f-1 qt-df qt-ai-c qt-jc-c"
                             [ngClass]="className"

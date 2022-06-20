@@ -3,6 +3,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from './services/left-panel-users.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -21,6 +22,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   constructor(private usersStateService: UsersStateService,
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
+    private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService,
   ) { }
 
@@ -29,18 +31,16 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isUsersPage(state)) this.open = false
+      if (!this.leftPanelService.isUsersPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isUsersPage(data)) this.open = true;
+      if (this.leftPanelService.isUsersPage(data)) this.open = true;
     })
   }
   public close() {
     this.open = false;
   }
-  isUsersPage(state) {
-    return (state === 'new-users')
-  }
+
   openPanel() {
     this.onOpenPanel.emit(null);
   }
@@ -54,7 +54,10 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }
-
+  public goToAll() {
+    this.goToState();
+    this.onShowAll();
+  }
   onSetFilterClientType(data) {
     this.filter.setClientType(data);
     this.usersStateService.onInitFilter(this.filter);

@@ -1,5 +1,6 @@
 import { CustomerSalesReportLine } from './customer-sales-report-line';
 import { reqSalesByCustomer } from 'src/app/interfaces/reports/req-sales-by-customer';
+import * as moment from "moment";
 
 export class CustomerSalesReport {
     companyId: string;

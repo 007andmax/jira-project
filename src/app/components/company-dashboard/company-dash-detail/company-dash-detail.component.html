@@ -121,7 +121,10 @@
                                         </div>
                                         <div class="users-table__contract-no--number">
                                             <a [attr.href]="'tel:' + phone.number">
-                                                {{phone.number | preparePhone | mask: '(000) 000-0000' | phone}}
+                                                <preview-phone-mask
+                                                    *ngIf="phone.number"
+                                                    [number]="phone.number"
+                                                ></preview-phone-mask>
                                             </a>
                                         </div>
                                     </div>
@@ -148,10 +151,11 @@
             *ngIf="companyDetailing.phoneNumber !== ''"
         >
             <div class="small-title">Telephone</div>
-            <a
-                href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}"
-                [textContent]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number | preparePhone | mask: '(000) 000-0000' | phone"
-            >
+            <a href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}">
+                <preview-phone-mask
+                    *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
+                    [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
+                ></preview-phone-mask>
             </a>
         </div>
         <div class="other-info-col d-flex">
@@ -254,8 +258,11 @@
                 <a
                     *ngIf="companyDetailing?.primaryContact.phoneNumber !== ''"
                     href="tel:{{companyDetailing?.primaryContact.phoneNumber}}"
-                    [textContent]="companyDetailing?.primaryContact.phoneNumber | mask: '(000) 000-0000'"
                 >
+                    <preview-phone-mask
+                        *ngIf="companyDetailing?.primaryContact.phoneNumber"
+                        [number]="companyDetailing?.primaryContact.phoneNumber"
+                    ></preview-phone-mask>
                 </a>
             </div>
         </div>

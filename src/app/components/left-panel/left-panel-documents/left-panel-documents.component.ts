@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
@@ -27,6 +28,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
+    private leftPanelService: LeftPanelService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
@@ -40,10 +42,10 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isDocumentsState(state)) this.open = false;
+      if (!this.leftPanelService.isDocumentsState(state)) this.open = false;
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isDocumentsState(data)) this.open = true;
+      if (this.leftPanelService.isDocumentsState(data)) this.open = true;
     })
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
@@ -75,13 +77,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     this.toggleAddCategory = !this.toggleAddCategory;
     this.addCategory = new DocumentCategoryAdd();
   }
-  isDocumentsState(state) {
-    return (state === 'new-documents' ||
-      state === 'new-category-documents' ||
-      state === 'new-add-documents' ||
-      state === 'new-edit-documents' ||
-      state === 'new-template-documents')
-  }
+
   public close() {
     this.open = false;
   }

@@ -42,7 +42,7 @@
           .t-tile__title {
             position: relative;
             margin-top: 11px;
-            @extend %body-m;
+            @include body-m;
             font-weight: $fw-semi-bold;
             &::before {
               position: absolute;

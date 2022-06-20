@@ -16,7 +16,7 @@
 >
     <div *ngIf="!loadingInProgress">
         <div class="qt-report__body-header">
-            <div class="body-m-sb qt-color-dark">
+            <div class="body-m__sb qt-color-dark">
                 {{customerSalesReport.clientCompanyName || 'All companies'}}
             </div>
             <h6 class="qt-fw-600 qt-color-dark">Customer Sales Report</h6>
@@ -24,13 +24,17 @@
                 class="body-m qt-color-dark-light"
                 *ngIf="customerSalesReport.init"
             >
-                <span>{{customerSalesReport.startDate}}</span>
+                <span>
+                    {{getDateForHeader(customerSalesReport.startDate)}}
+                </span>
                 -
-                <span>{{customerSalesReport.endDate}}</span>
+                <span>
+                    {{getDateForHeader(customerSalesReport.endDate)}}
+                </span>
             </div>
             <div *ngIf="customerSalesReport.init">
                 <!-- HEADER -->
-                <div class="body-m-sb qt-color-dark">
+                <div class="body-m__sb qt-color-dark">
                     {{ customerSalesReport.techCompanyName }}
                 </div>
             </div>

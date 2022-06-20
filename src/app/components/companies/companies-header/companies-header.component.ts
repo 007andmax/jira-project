@@ -40,6 +40,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = false;
     this.calculateCount = this.companiesState.getCalculateCount();
     let getOnCalculateCount = this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;

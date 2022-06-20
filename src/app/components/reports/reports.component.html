@@ -53,7 +53,6 @@
         *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
     >
         <app-report-list-item
-            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
             [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
             [title]="'Performance'"
             [listTitles]="getListTitles('PERFORMANCE')"

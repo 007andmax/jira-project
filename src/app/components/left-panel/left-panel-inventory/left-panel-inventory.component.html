@@ -1,15 +1,36 @@
-<a
-    href
-    [link]="'inventory/products'"
-    target="_blank"
-    appRightClickBlank
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': activePage === 'inventory'}"
 >
-    <div
-        class="app-left-panel__menu"
-        (click)="goToState()"
-        [ngClass]="{'--active': activePage === 'inventory'}"
+    <div class="app-left-panel__menu-title">Products</div>
+</div>
+<ul class="app-left-panel__menu-expand menu-expand-hide">
+    <a
+        href
+        [link]="'inventory/products'"
+        target="_blank"
+        appRightClickBlank
     >
-        <div class="app-left-panel__menu-icon --products"></div>
-        <div class="app-left-panel__menu-title">Products</div>
+        <li
+            [ngClass]="{'--active':  activePage === 'inventory'}"
+            (click)="goToAll()"
+        >
+            All products
+        </li>
+    </a>
+    <div class="list-container">
+        <ng-template
+            ngFor
+            let-inventory
+            [ngForOf]="inventoryCategoryList"
+            [ngForTrackBy]="trackById"
+        >
+            <li
+                [ngClass]="{'--active': sortCategoty && sortCategoty.id === inventory.id && activePage === 'inventory'}"
+                (click)="goToState();selectCategory(inventory)"
+                [textContent]="inventory.name"
+            >
+            </li>
+        </ng-template>
     </div>
-</a>
+</ul>

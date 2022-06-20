@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportsLeftMenuComponent } from './reports-left-menu.component';
+import { PreviewPhoneMaskComponent } from './preview-phone-mask.component';
 
-describe('ReportsLeftMenuComponent', () => {
-  let component: ReportsLeftMenuComponent;
-  let fixture: ComponentFixture<ReportsLeftMenuComponent>;
+describe('PreviewPhoneMaskComponent', () => {
+  let component: PreviewPhoneMaskComponent;
+  let fixture: ComponentFixture<PreviewPhoneMaskComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportsLeftMenuComponent ]
+      declarations: [ PreviewPhoneMaskComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportsLeftMenuComponent);
+    fixture = TestBed.createComponent(PreviewPhoneMaskComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

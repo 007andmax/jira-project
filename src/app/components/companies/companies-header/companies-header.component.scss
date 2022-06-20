@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 companies-filter {
   display: contents;
 
@@ -15,10 +17,10 @@ companies-filter {
     content: " ";
     position: absolute;
     top: 1px;
-    right: 0px;
+    right: 0;
     width: 8px;
     height: 8px;
-    background-color: #ff5263;
+    background-color: $error;
     border-radius: 10px;
   }
 }
@@ -31,11 +33,11 @@ companies-filter {
   /deep/.mat-form-field-infix {
     overflow: auto;
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
   }
   /deep/ .mat-form-field {
     width: 100%;
-    background: #ffffff;
+    background: $white;
   }
   /deep/ .mat-form-field-flex {
     padding-left: 8px;
@@ -45,14 +47,14 @@ companies-filter {
     display: none;
   }
   /deep/ .mat-form-field-wrapper {
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
   /deep/.mat-chip-list-wrapper {
     width: fit-content;
-    margin: 0px;
+    margin: 0;
     flex-wrap: unset;
     .mat-standard-chip {
-      margin: 0px 8px 0px 0px;
+      margin: 0 8px 0 0;
       padding: 4px 6px 3px 8px;
     }
   }

@@ -546,7 +546,7 @@
                                 align-items: flex-start;
                                 justify-content: flex-start;
                                 .caption-l {
-                                    @extend %сaption-l;
+                                    @include сaption-l;
                                     font-weight: $fw-semi-bold;
                                     color: $primary-2;
                                 }
@@ -558,9 +558,7 @@
                                 }
                                 .h5 {
                                     @media (max-width: 767px) {
-                                        font-size: 12px;
-                                        line-height: 16px;
-                                        font-weight: 600;
+                                        @include сaption-l__sb;
                                         color: $primary-2;
                                     }
                                 }

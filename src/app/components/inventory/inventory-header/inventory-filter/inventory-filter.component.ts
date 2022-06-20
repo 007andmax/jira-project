@@ -18,12 +18,17 @@ export class InventoryFilterComponent implements OnInit {
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   constructor(private inventoryStateService: InventoryStateService,) { }
   ngOnInit() {
+    if (this.inventoryStateService.getSortCategoty()) this.categoriesSelect.selectItemWithOutChanges(this.inventoryStateService.getSortCategoty());
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(getOnCategries);
+    let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
+      this.categoriesSelect.selectItemWithOutChanges(data);
+    })
+    this.sub.add(getOnSortCategory);
   }
   selectActive(data) {
     this.selectedActive = data;

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -29,6 +30,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
     public contractsStateService: ContractsStateService,
+    private leftPanelService: LeftPanelService,
   ) { }
 
 
@@ -45,26 +47,17 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isBillingState(state)) this.open = false;
+      if (!this.leftPanelService.isBillingState(state)) this.open = false;
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isBillingState(data)) this.open = true;
+      if (this.leftPanelService.isBillingState(data)) this.open = true;
     })
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;
     })
     this.sub.add(getOnShowNotificationReview);
   }
-  isBillingState(state) {
-    return (state === 'billing-dashboard'
-      || state === 'new-services'
-      || state === 'new-billable'
-      || state === 'new-billable-tickets'
-      || state === 'new-billable-invoices'
-      || state === 'quotes-component'
-      || state === 'new-payments-ng2'
-      || state === 'new-contracts')
-  }
+
   public close() {
     this.open = false;
   }

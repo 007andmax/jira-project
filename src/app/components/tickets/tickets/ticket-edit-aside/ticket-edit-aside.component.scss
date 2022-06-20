@@ -90,7 +90,7 @@
     &-subject {
       display: none;
       margin: 44px 0 10px;
-      @extend %h6-sb;
+      @include h6__sb;
 
       @media (max-width: 767px) {
         display: block;
@@ -274,7 +274,7 @@
   }
 
   &__ticket-subject {
-    @extend %h4-sb;
+    @include h4__sb;
     margin-bottom: 10px;
 
     @media (max-width: 767px) {

@@ -1,6 +1,7 @@
 import { AccountingReportInvoice } from './accounting-report-invoice';
 import { AccountingReportPayment } from './accounting-report-payment';
 import { AccountingReportItem } from './accounting-report-item';
+import * as moment from "moment";
 
 export class AccountingReport {
     startDate: string = '';
@@ -8,7 +9,7 @@ export class AccountingReport {
     companyId: string;
     invoicesTotalSum: number;
     paymentsAmount: number;
-    list:Array<AccountingReportItem> = [];
+    list: Array<AccountingReportItem> = [];
     constructor() {
 
     }
@@ -22,18 +23,18 @@ export class AccountingReport {
     }
     public setDataFromRequest(data) {
         let invoices = data.invoices.map(item => {
-            return new AccountingReportItem(item.amount, item.companyId, item.date, "", item.source,"INVOICE");
+            return new AccountingReportItem(item.amount, item.companyId, item.date, "", item.source, "INVOICE");
         });
         this.invoicesTotalSum = data.invoicesTotalSum;
         this.paymentsAmount = data.paymentsAmount;
         let payments = data.payments.map(item => {
             return new AccountingReportItem(item.amount, item.companyId, item.date, item.reference, item.source, "PAYMENT");
         });
-        this.list = [...invoices,...payments];
+        this.list = [...invoices, ...payments];
         this.list.sort((a, b) => (a.date > b.date) ?
-        1 : ((b.date > a.date) ? -1 : 0));
+            1 : ((b.date > a.date) ? -1 : 0));
     }
-    public setList (data) {
+    public setList(data) {
         this.list = data;
     }
     public setInvoicesTotalSum(data) {

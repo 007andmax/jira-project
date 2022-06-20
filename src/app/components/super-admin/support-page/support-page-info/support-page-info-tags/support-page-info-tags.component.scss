@@ -42,7 +42,7 @@
       box-shadow: 0 1px 3px rgba(33, 43, 54, 0.1);
       border-radius: 6px;
       border: unset;
-      @extend %сaption-l-m;
+      @include сaption-l__m;
       font-stretch: normal;
       font-style: normal;
       color: $gray-700;
@@ -93,7 +93,7 @@
   line-height: 18px;
   .no-matching {
     color: $primary-2;
-    @extend %body-r-sb;
+    @include body-r__sb;
     margin-bottom: 8px;
   }
 }
@@ -160,7 +160,7 @@
   label {
     width: auto;
     height: 16px;
-    @extend %body-m;
+    @include body-m;
     display: flex;
     align-items: center;
   }
@@ -177,7 +177,7 @@
 }
 .name {
   margin-left: 10px;
-  @extend %body-r;
+  @include body-r;
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
@@ -212,7 +212,7 @@
   input {
     border: 1px solid $gray-400;
     border-radius: 8px;
-    @extend %body-r;
+    @include body-r;
     color: $gray-700;
     padding: 7px 8px 7px 36px;
     &::placeholder {

@@ -19,6 +19,7 @@ export class Document {
     newContent: string;
     isCategory: boolean = false;
     isDefault: boolean;
+    assignedToCompany: boolean;
     constructor(data, isCategory = false) {
         this.categoryId = data.categoryId;
         this.categoryName = data.categoryName;
@@ -37,6 +38,12 @@ export class Document {
         if (data.content) this.newContent = JSON.parse(JSON.stringify(data.content));
         this.isCategory = isCategory;
         this.isDefault = data.isDefault;
+        this.assignedToCompany = data.assignedToCompany;
+    }
+    public onUpdateByRealTime(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
     }
     public getDataForEdit() {
         return {

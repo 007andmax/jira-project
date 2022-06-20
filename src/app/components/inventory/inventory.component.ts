@@ -48,6 +48,7 @@ export class InventoryComponent implements OnInit {
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
     window.scrollTo(0, 0);
+    if (this.inventoryStateService.getSortCategoty()) this.filter.setSortCategoty(this.inventoryStateService.getSortCategoty());
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;

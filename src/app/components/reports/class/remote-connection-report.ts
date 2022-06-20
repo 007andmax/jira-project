@@ -1,4 +1,5 @@
 import { RemoteConnectionReportItem } from "./remote-connection-report-item";
+import * as moment from "moment";
 
 export class RemoteConnectionReport {
     type: string = "SUMMARY";

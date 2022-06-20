@@ -16,6 +16,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;
   @Input() companyId: string;
+  @Input() showAssignedCompanies: boolean = true;
   @Output() onRemoveCategory = new EventEmitter<any>();
   @Output() onRemoveDocument = new EventEmitter<any>();
   @Output() onEditDocument = new EventEmitter<any>();
@@ -62,7 +63,9 @@ export class DocumentsTableComponent implements OnInit {
   removeDocument() {
     this.onRemoveDocument.emit(this.item);
   }
-
+  assigToCompanies() {
+    this.documentsStateService.editFolder(this.item);
+  }
   previewDocument() {
     const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.item.id}`;
     window.open(url, '_blank');

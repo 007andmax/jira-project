@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
+import { AppService } from 'src/app/states/app/app.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.component';
 
@@ -14,9 +15,11 @@ export class ContractsHeaderComponent implements OnInit {
   count = 0;
   toggleFilter: boolean = false;
   countFilter: number = 0;
-  constructor(private contractsStateService: ContractsStateService) { }
+  constructor(private contractsStateService: ContractsStateService,
+    public appService: AppService) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.toggleFilter = true;
   }
   public showCreate() {
     this.contractsStateService.toggleCreate(true);

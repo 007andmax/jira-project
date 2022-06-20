@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .phones-numbers {
   display: flex;
   flex-direction: column;
@@ -19,15 +21,20 @@ tr {
   &:hover {
     td {
       background: #f4fbff;
-      border-color: #16a4fa;
+      border-color: $primary-1;
     }
   }
 }
 .users-table__name--profession {
-  color: #919eab;
+  color: $gray-600;
 }
 .users-table__company {
-  width: 232px;
-  max-width: 232px;
-  min-width: 232px;
+  width: 178px;
+  max-width: 178px;
+  min-width: 178px;
+}
+.users-table__contract-no--number {
+  background-color: transparent;
+  border: none;
+  width: 190px;
 }

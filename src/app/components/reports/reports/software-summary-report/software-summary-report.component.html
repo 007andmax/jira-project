@@ -21,13 +21,13 @@
             *ngIf="onInit"
         >
             <div class="qt-report__body-header">
-                <div class="body-m-sb qt-color-dark">Airdrie Choice Dental</div>
+                <div class="body-m__sb qt-color-dark">Airdrie Choice Dental</div>
                 <h6 class="qt-fw-600 qt-color-dark">Software Summary Report</h6>
                 <div class="body-m qt-color-dark-light">
                     As on
-          {{softwareSummaryReport.date | date:'yyyy/MM/dd'}}
+          {{getDateForHeader(softwareSummaryReport.date)}}
                 </div>
-                <div class="body-m-sb qt-color-dark">Tech company: {{company.name}}</div>
+                <div class="body-m__sb qt-color-dark">Tech company: {{company.name}}</div>
             </div>
             <table class="qt-report__body-table-body">
                 <thead>

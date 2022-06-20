@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableProfile } from './class/billable-profile';
 import { CompanyFilterTop } from '../../companies/class/company-filter-top';
@@ -10,6 +10,7 @@ import { BillableRealTimeService } from 'src/app/states/billable/billable-real-t
 import { Subscription } from 'rxjs';
 import { BillableProfileTicket } from './class/billable-profile-ticket';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'billable',
@@ -18,6 +19,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
   providers: [TicketsListService]
 })
 export class BillableComponent implements OnInit, OnDestroy {
+  @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   list: Array<BillableProfile> = [];
   reqList: Array<BillableProfile> = [];
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),
@@ -93,6 +95,35 @@ export class BillableComponent implements OnInit, OnDestroy {
     this.sub.add(changeBillable);
 
   }
+  isExistSelected() {
+    return this.reqList.find(item => item.selected);
+  }
+  onSelectItem(value, billable) {
+    let index = this.reqList.findIndex(item => item.id === billable.id);
+    this.reqList[index].selected = value;
+  }
+  onToggleAll(event) {
+    this.reqList.forEach(item => {
+      item.selected = event.target.checked;
+    })
+    this.list.forEach(item => {
+      item.selected = event.target.checked;
+    })
+  }
+  onInvoiceAll() {
+    this.saveAndDownloadBtn.setDisabled(true);
+    let ids = [];
+    this.reqList.forEach(item => {
+      if (item.selected) ids.push(item.id);
+    })
+    if (ids.length > 0) {
+      this.billableService.createInvoiceByCompanyId(ids).subscribe(data => {
+        this.saveAndDownloadBtn.setDisabled(false);
+      })
+    } else {
+      this.saveAndDownloadBtn.setDisabled(true);
+    }
+  }
   private addTicket(data, list) {
     let clientCompanyId = data.data.companyId;
     let findIndex = list.findIndex(item => item.id === clientCompanyId);
@@ -148,7 +179,6 @@ export class BillableComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-
     })
   }
   onFilter(field) {

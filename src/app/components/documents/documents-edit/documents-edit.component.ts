@@ -25,12 +25,16 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
     this.sub.add(subscription);
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
-        if (queryParam['companyId']) this.companyId = queryParam['companyId'];
+        if (queryParam['companyId']) {
+          this.companyId = queryParam['companyId'];
+          this.companiesStateService.setCompanyRoutingId(this.companyId);
+          this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents-company');
+        }
         this.cd.detectChanges();
       }
     );
     this.sub.add(queryParams);
-    this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents');
+    if (!this.companiesStateService.getCompanyRoutingId()) this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents');
   }
   onChangeContent(data) {
     this.documentEdit.setNewContent(data);

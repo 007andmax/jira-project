@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DeviceIpSummary } from '../../class/device-ip-summary';
+import * as moment from "moment";
 
 @Component({
   selector: 'device-ip-summary-report',
@@ -34,7 +35,6 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   }
   public parseHTML(data) {
     var parser = new DOMParser();
-
     return parser.parseFromString(data, 'text/html');
   }
   getDeviceReport(device, params) {
@@ -54,6 +54,9 @@ export class DeviceIpSummaryReportComponent implements OnInit {
       return ''
     }
   };
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
+  }
   parseFloatValue(value) {
     return parseFloat(value);
   }

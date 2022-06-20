@@ -32,9 +32,9 @@
       &:hover {
         background-color: $gray-300;
         p {
-          color: #454f5b !important;
+          color: $gray-800 !important;
           &:last-child {
-            color: #919eab !important;
+            color: $gray-600 !important;
           }
         }
       }

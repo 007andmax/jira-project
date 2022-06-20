@@ -78,6 +78,10 @@ export class DropDownComponent implements OnInit {
   getSelectedItemText() {
     return (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
   }
+  public selectItemWithOutChanges(data) {
+    this.isAdd = false;
+    this.selectedItem = data;
+  }
   onSelect(data) {
     this.isAdd = false;
     this.selectedItem = data;

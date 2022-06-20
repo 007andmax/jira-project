@@ -1,4 +1,5 @@
 import { TechServiceItem } from './tech-service-item';
+import * as moment from 'moment';
 
 export class TechService {
     startDate: string = '';

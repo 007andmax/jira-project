@@ -22,10 +22,12 @@
                     class="qt-fs-13"
                     [textContent]="currentCompany.addresses[0].addressWithSuitNumberAndPostalCode"
                 ></div>
-                <div
-                    class="qt-fs-13"
-                    [textContent]="getCurrentCompanyPhone()"
-                ></div>
+                <div class="qt-fs-13">
+                    <preview-phone-mask
+                        *ngIf="getCurrentCompanyPhone()"
+                        [number]="getCurrentCompanyPhone()"
+                    ></preview-phone-mask>
+                </div>
             </div>
             <div
                 class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
@@ -53,10 +55,12 @@
                     class="qt-fs-13"
                     [textContent]="company.contacts[0].primaryEmail"
                 ></div>
-                <div
-                    class="qt-fs-13"
-                    [textContent]="getContactsPhone()"
-                ></div>
+                <div class="qt-fs-13">
+                    <preview-phone-mask
+                        *ngIf="getContactsPhone()"
+                        [number]="getContactsPhone()"
+                    ></preview-phone-mask>
+                </div>
             </div>
             <div class="qt-fs-13 qt-text-right qt-lh-154">
                 <div

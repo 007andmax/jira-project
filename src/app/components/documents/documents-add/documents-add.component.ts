@@ -40,7 +40,11 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
-        if (queryParam['companyId']) this.companyId = queryParam['companyId'];
+        if (queryParam['companyId']) {
+          this.companyId = queryParam['companyId'];
+          this.companiesStateService.setCompanyRoutingId(this.companyId);
+          this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents-company');
+        }
         if (queryParam['template']) this.templateId = queryParam['template'];
         if (queryParam['id_category']) this.documentAdd.setCategoryId(queryParam['id_category']);
         if (queryParam['clone_document']) {
@@ -65,7 +69,8 @@ export class DocumentsAddComponent implements OnInit, OnDestroy {
       }
     );
     this.sub.add(queryParams);
-    this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents');
+    if (!this.companyId) this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents');
+    if (this.companyId) this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents-company');
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;

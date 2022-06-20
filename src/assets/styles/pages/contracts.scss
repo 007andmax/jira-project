@@ -616,7 +616,7 @@ app-contracts-aside-block-time-billing-default-service {
 }
 
 .expire-contract-notification {
-  background-color: #ffffff;
+  background-color: $white;
   width: 320px;
   height: 72px;
   border-radius: 6px;
@@ -632,7 +632,7 @@ line-height: 1.54;
   align-items: self-start;
     font-family: "Inter",sans-serif;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px #dfe3e8;
+      border: solid 1px $gray-400;
   &__button {
     font-weight: 600;
     border: 1px solid $white;
@@ -644,10 +644,10 @@ line-height: 1.54;
   &::after {
     content: " ";
     position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    background-color: #ffb937;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $warning;
     z-index: 9999;
     height: 3px;
   }
@@ -663,7 +663,7 @@ line-height: 1.54;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: $white;
     font-style: unset;
   }
   .qt-aside-modern__header-close {

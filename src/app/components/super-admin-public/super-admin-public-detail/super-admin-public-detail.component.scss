@@ -42,7 +42,7 @@
         }
 
         &-text {
-            @extend %h5;
+            @include h5;
             max-width: 456px;
             width: 100%;
             margin: 0 auto;
@@ -73,7 +73,7 @@
 
                 li {
                     position: relative;
-                    @extend %body-r;
+                    @include body-r;
                     color: $primary-2;
 
                     &:not(:last-child) {
@@ -95,7 +95,7 @@
 
             &-header {
                 position: relative;
-                @extend %h4;
+                @include h4;
                 color: $primary-2;
                 padding-bottom: 16px;
 
@@ -153,7 +153,7 @@
     margin: 0 0 8px 0;
 
     &__name {
-        color: #212b36;
+        color: $primary-2;
         position: relative;
         display: flex;
         align-items: flex-start;
@@ -178,7 +178,7 @@
 
         span {
             font-family: "Inter", sans-serif;
-            @extend %body-r-m;
+            @include body-r__m;
             position: relative;
             flex: 1;
         }
@@ -230,7 +230,7 @@
     }
 }
 #content {
-    margin: 0px 0px 20px 0px;
+    margin: 0 0 20px 0;
 }
 .profile-cmp-board {
     width: 100%;
@@ -277,10 +277,10 @@
             border-radius: 4px;
             border: solid 1px $background;
             background-color: #f8f9fa;
-            @extend %сaption-l-m;
+            @include сaption-l__m;
             font-stretch: normal;
             font-style: normal;
-            color: #212b36;
+            color: $primary-2;
 
             .close {
                 position: absolute;

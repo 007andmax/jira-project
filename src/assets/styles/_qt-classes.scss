@@ -1,4 +1,5 @@
-@import "./src/assets/styles/variable";
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .qt-checkbox {
   margin: 0;
@@ -694,7 +695,7 @@
   display: flex;
   flex-direction: column;
   label {
-    @extend %body-m-sb;
+    @include body-m__sb;
     margin-bottom: 8px;
     color: $primary-2;
   }
@@ -727,7 +728,7 @@
     background-color: $white;
     padding: 10px 14px;
     color: $primary-2;
-    @extend %body-m;
+    @include body-m;
     width: 100%;
     &::placeholder {
       color: $gray-600;
@@ -763,7 +764,7 @@
   height: 40px;
   border-radius: 4px;
   background-color: $primary-1;
-  @extend %body-m-sb;
+  @include body-m__sb;
   color: $white;
   padding: 10px 20px;
   display: flex;
@@ -980,7 +981,7 @@
     display: flex;
     align-items: center;
     color: $gray-800;
-    @extend %body-m;
+    @include body-m;
     cursor: pointer;
     position: relative;
     white-space: nowrap;
@@ -1367,5 +1368,11 @@
   }
   .qt-d-md-flex {
     display: flex !important;
+  }
+  .qt-fw-wrap-md {
+    flex-wrap: wrap;
+  }
+  .qt-jc-sb-md {
+    justify-content: space-between;
   }
 }

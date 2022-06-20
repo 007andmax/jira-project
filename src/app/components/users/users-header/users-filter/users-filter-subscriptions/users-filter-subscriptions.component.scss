@@ -11,7 +11,7 @@
     margin-top: 0px !important;
     .qt-checkbox {
         .text-content {
-            @extend %body-m;
+            @include body-m;
             margin-top: -2px;
             flex: 1;
         }
@@ -31,7 +31,7 @@
 
         .description {
             color: $gray-700;
-            @extend %сaption-l;
+            @include сaption-l;
         }
 
         span {
@@ -126,7 +126,7 @@
             label {
                 width: auto;
                 height: 16px;
-                @extend %body-m;
+                @include body-m;
                 display: flex;
                 align-items: center;
             }

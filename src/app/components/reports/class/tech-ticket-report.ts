@@ -1,6 +1,7 @@
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
 import { TechSalesItem } from "./tech-sales-item";
 import { TechTicketItem } from "./tech-ticket-item";
+import * as moment from 'moment';
 
 export class TechTicketReport {
 

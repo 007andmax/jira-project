@@ -20,7 +20,7 @@
         <div class>
             <div class="qt-report__body-header">
                 <div
-                    class="body-m-sb qt-color-dark"
+                    class="body-m__sb qt-color-dark"
                     *ngIf="onInit"
                 >
                     {{ selectedCompany && selectedCompany.name || 'All companies' }}
@@ -30,12 +30,16 @@
                     class="body-m qt-color-dark-light"
                     *ngIf="onInit"
                 >
-                    <span>{{detailedCommissionsReport.startDate}}</span>
+                    <span>
+                        {{getDateForHeader(detailedCommissionsReport.startDate)}}
+                    </span>
                     -
-                    <span>{{ detailedCommissionsReport.endDate }}</span>
+                    <span>
+                        {{getDateForHeader(detailedCommissionsReport.endDate)}}
+                    </span>
                 </div>
                 <div
-                    class="body-m-sb qt-color-dark"
+                    class="body-m__sb qt-color-dark"
                     *ngIf="onInit"
                 >
                     {{ currentCompany.name }}

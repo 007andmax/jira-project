@@ -48,7 +48,7 @@
         &-title {
             margin: 0 0 0 10px;
             width: calc(100% - 55px);
-            @extend %body-m;
+            @include body-m;
             font-weight: $fw-semi-bold;
         }
     }

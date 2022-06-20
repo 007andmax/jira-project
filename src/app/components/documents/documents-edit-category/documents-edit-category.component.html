@@ -1,0 +1,125 @@
+<div
+    class="qt-aside-modern users-page__aside"
+    *ngIf="opened"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Edit Category</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-w100 qt-mb-24">
+            <div class="qt-input-block">
+                <label>Category Name</label>
+                <input
+                    type="text"
+                    [(ngModel)]="documentEditCategory.name"
+                    placeholder="Enter Category Name"
+                >
+            </div>
+        </div>
+        <div class="qt-w100 qt-mb-12">
+            <div class="qt-input-block ">
+                <label class="qt-df qt-ai-c">
+                    Assign Category to Companies
+                    <span
+                        class="icon__info-question qt-sz-12 qt-ic-c qt-ml-4"
+                        placement="bottom"
+                        ngbTooltip="All new and existing companies with the appropriate type will get the quick access to the category on the company details page"
+                    ></span>
+                </label>
+                <div class="search-companies">
+                    <input
+                        type="text"
+                        placeholder="Search Companies..."
+                        (input)="onSearch($event)"
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="qt-w100 list-companies-container">
+            <div class="qt-df qt-w100 qt-mb-4">
+                <div class="qt-w100">
+                    <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('CLIENT')"
+                                (change)="onChangedType($event,'CLIENT')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span class="qt-ml-12">All Client Companies</span>
+                    </div>
+                    <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('VENDOR')"
+                                (change)="onChangedType($event,'VENDOR')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span class="qt-ml-12">All Vendor Companies</span>
+                    </div>
+                    <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('LEAD')"
+                                (change)="onChangedType($event,'LEAD')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span class="qt-ml-12">All Lead Companies</span>
+                    </div>
+                    <div class="qt-df qt-ai-c qt-w100 item-type-company">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                [checked]="checkSelectedType('SUPPLIER')"
+                                (change)="onChangedType($event,'SUPPLIER')"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <span class="qt-ml-12">All Supplier Companies</span>
+                    </div>
+                </div>
+            </div>
+            <div class="list-companies">
+                <ng-template
+                    ngFor
+                    let-company
+                    [ngForOf]="companies"
+                    [ngForTrackBy]="trackById"
+                >
+                    <documents-edit-category-item
+                        [company]="company"
+                        [documentEditCategory]="documentEditCategory"
+                    ></documents-edit-category-item>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onSave()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

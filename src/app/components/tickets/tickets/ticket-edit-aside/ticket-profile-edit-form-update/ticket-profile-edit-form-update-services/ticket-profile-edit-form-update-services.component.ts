@@ -71,7 +71,7 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
   public onChangeDuration(quantity) {
     this.quantity = quantity;
     this.cd.detectChanges();
-    this.editTimePicker.changeStart();
+    if (this.editTimePicker) this.editTimePicker.changeStart();
     this.editService.setQuantity(this.quantity);
   }
   public onChangeDatePicker(data) {

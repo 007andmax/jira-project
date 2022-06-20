@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { RemoteConnectionReport } from '../../class/remote-connection-report';
+import * as moment from "moment";
 
 @Component({
   selector: 'remote-connection-report',
@@ -23,6 +24,9 @@ export class RemoteConnectionReportComponent implements OnInit {
     this.remoteConnectionReport = new RemoteConnectionReport(JSON.parse(JSON.stringify(data)));
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.remoteConnectionReport.companyId);
     this.onInit = true;
+  }
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
   }
   public parseDate(data) {
     return new Date(data);

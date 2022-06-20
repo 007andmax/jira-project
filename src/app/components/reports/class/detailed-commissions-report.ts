@@ -1,5 +1,6 @@
 import { DetailedCommissionsItem } from "./detailed-commissions-item";
 import { DetailedCommissionsReducedCompanies } from "./detailed-commissions-reduced-company";
+import * as moment from "moment";
 
 export class DetailedCommissionsReport {
     companyId: string;

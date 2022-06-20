@@ -6,7 +6,7 @@
   position: absolute;
   z-index: 1070;
   margin: 0;
-  @extend %сaption-l-m;
+  @include сaption-l__m;
   text-align: left;
   text-align: start;
   text-decoration: none;

@@ -29,7 +29,7 @@ body {
   overflow: hidden;
   display: initial;
   font-family: "Inter", sans-serif;
-  @extend %body-m;
+  @include body-m;
   color: $gray-800;
   background-color: $white;
 }
@@ -347,7 +347,6 @@ html::-webkit-scrollbar {
   -webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   background-clip: padding-box;
-  /*max-height: 190px;*/
 }
 
 p {
@@ -363,7 +362,7 @@ p {
 .new-users-content__modal--content app-interval > [class*="col-md-"] p,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
 .password-content__modal--content > [class*="col-md-"] p {
-  @extend %body-m-sb;
+  @include body-m__sb;
   color: $primary-2;
   margin-bottom: 8px;
 }
@@ -469,7 +468,6 @@ label {
   user-select: none;
 }
 .checkbox .control-indicator {
-  //border-radius: 3px;
   border-radius: 2px;
 }
 .control-indicator {
@@ -483,18 +481,12 @@ label {
   font-size: 65%;
   color: $white;
   text-align: center;
-  //border: 1px solid #d2dae4;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   background-color: $white;
 }
-//.control input:checked ~ .control-indicator {
-//  background-position: -858px -120px;
-//  background-color: $success;
-//  border-color: $success;
-//}
 .checkbox .control-indicator {
   position: absolute;
   left: 0;
@@ -565,8 +557,6 @@ strong {
 
 /* Textarea */
 .password-content__modal--content textarea {
-  /* background: $gray-400; */
-  /* border: 1px solid #ffe3af; */
   border: 1px solid $gray-500;
   border-radius: 4px;
   min-height: 80px;
@@ -582,13 +572,11 @@ textarea {
 
 .new-companies-content__modal {
   .switch-link {
-    @extend %body-m-sb;
+    @include body-m__sb;
     color: $primary-2;
   }
 
   .light-dropdown .icn-remove-old {
-    //top: calc(50% - 7px) !important; // TODO check
-    //right: 4px;
 
     @media (max-width: 767px) {
       top: calc(50% - 15px) !important;
@@ -597,7 +585,6 @@ textarea {
   }
 
   .app-drop-down__right-icon {
-    //right: 15px; // TODO check arrow
     right: 0;
 
     @media (max-width: 767px) {
@@ -702,7 +689,7 @@ textarea {
   border-radius: 6px;
 
   .text {
-    @extend %сaption-l;
+    @include сaption-l;
   }
 }
 
@@ -814,7 +801,6 @@ input[disabled] {
 .password-content__modal--content i {
   position: absolute;
   right: 12px;
-  //bottom: 11px;
 }
 
 h3,
@@ -948,7 +934,6 @@ h6,
 }
 
 .avatar-26.remove:hover {
-  /*background-image: url('/assets/images/avatars/avatar-small.png');*/
   background-color: #d2dae4;
 }
 
@@ -1074,7 +1059,7 @@ h6,
   padding: 12px 6px;
 }
 .company-report .top-product-list-ticket [class*="col-md-"] {
-  @extend %сaption-m-sb;
+  @include сaption-m__sb;
 }
 .list-of-product .report-title {
   left: 30px;
@@ -1157,10 +1142,8 @@ h6,
   .image-confirm-modal .close-modal {
     background-image: url("/assets/img/icons/close.svg");
     position: absolute;
-    //right: 45px;
     right: 24px;
     top: 24px;
-    //top: 28px;
     background-size: cover;
     z-index: 1;
 

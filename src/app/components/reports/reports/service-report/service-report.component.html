@@ -21,7 +21,7 @@
             <div class="customer-ticket__report">
                 <div class="qt-report__body-header">
                     <div
-                        class="body-m-sb qt-color-dark"
+                        class="body-m__sb qt-color-dark"
                         *ngIf="onInit"
                     >
                         {{ serviceReport.companyName || 'All companies' }}
@@ -31,9 +31,13 @@
                         class="body-m qt-color-dark-light"
                         *ngIf="onInit"
                     >
-                        <span>{{serviceReport.startDate}}</span>
+                        <span>
+                            {{getDateForHeader(serviceReport.startDate)}}
+                        </span>
                         -
-                        <span>{{ serviceReport.endDate }}</span>
+                        <span>
+                            {{getDateForHeader(serviceReport.endDate)}}
+                        </span>
                     </div>
                 </div>
                 <div

@@ -79,8 +79,6 @@ export class ServiceReportComponent implements OnInit {
         this.serviceReport.companyName = (company) ? company.name : null;
         this.calculateServicesTime(data.services);
       }
-      this.serviceReport.startDate = moment(new Date(this.serviceReport.startDate)).format('ll');
-      this.serviceReport.endDate = moment(new Date(this.serviceReport.endDate)).format('ll');
       this.onInit = true;
     })
 
@@ -92,8 +90,8 @@ export class ServiceReportComponent implements OnInit {
   getSelectedClientName() {
     return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
   }
-  parseDateService(ticketCreatedAt) {
-    return moment(new Date(ticketCreatedAt)).format('DD MMM YYYY');;
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
   }
   parseDateTicket(ticketCreatedAt) {
     return moment(new Date(ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');;

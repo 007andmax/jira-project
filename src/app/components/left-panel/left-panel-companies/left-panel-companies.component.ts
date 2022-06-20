@@ -3,6 +3,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'app-left-panel-companies',
@@ -14,28 +15,39 @@ export class LeftPanelCompaniesComponent implements OnInit {
   showArchivedCompanies: boolean = false;
   selectedCompany: Company;
   clientType: string;
+  toggleTypeCompanies: boolean = true;
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
   constructor(private companiesState: CompaniesStateService,
     public appService: AppService,
+    private leftPanelService: LeftPanelService,
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
+    if (this.companiesState.getCompanyRoutingId()) this.toggleTypeCompanies = false;
+    if (this.selectedCompany) this.toggleTypeCompanies = false;
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      if (!this.isCompanyPage(state)) this.open = false
+      if (!this.leftPanelService.isCompanyPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.isCompanyPage(data)) this.open = true;
+      if (this.leftPanelService.isCompanyPage(data)) this.open = true;
     })
     this.companiesState.filter.subscribe(data => {
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");
       this.clientType = (data.clientType !== "ARCHIVE") ? data.clientType : null;
     })
+    this.companiesState.onChangeSelectedCompanyId.subscribe(data => {
+      if (data) this.toggleTypeCompanies = false;
+      if (!data) this.toggleTypeCompanies = true;
+    })
+  }
+  onToggleTypeCompanies() {
+    if (this.selectedCompany) this.toggleTypeCompanies = !this.toggleTypeCompanies;
   }
   getCount(clientType) {
     return this.companiesState.getCompanies().filter(item => item.accountType === "CLIENT" && item.clientType === clientType && !item.deletedAt).length;
@@ -50,12 +62,10 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.onOpenPanel.emit(null);
   }
   ngDoCheck() {
-    if (this.companiesState.getSelectedCompanyId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getSelectedCompanyId());
+    if (this.companiesState.getCompanyRoutingId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId());
+    if (!this.companiesState.getCompanyRoutingId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = null;
   }
-  public isCompanyPage(state) {
-    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts'
-      || state == 'company-documents')
-  }
+
 
   closeMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.remove('show');
@@ -64,10 +74,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
     event.target.parentNode.classList.toggle('show-filter');
   }
 
-  onShowAll() {
+  public onShowAll() {
     this.clientType = null;
     this.showArchivedCompanies = false;
     this.leftPanelStateService.onInitFilter(null);
+    this.goToState('new-companies');
   }
   onShowArchived() {
     this.clientType = null;

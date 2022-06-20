@@ -1,17 +1,16 @@
 @import "./src/assets/styles/variable";
 
 #inventory-description {
-    padding: 8px 14px;
     min-height: 40px;
     max-height: 140px;
     overflow: auto;
     height: auto;
     border-radius: 5px;
-    border: solid 1px #c5cdd5;
+    border: solid 1px $gray-500;
     width: 100%;
     padding: 8px 12px;
     font-size: 13px;
-    color: #454f5b;
+    color: $gray-800;
     &:focus-visible {
         outline:none;
     }
@@ -25,5 +24,5 @@
     min-height: auto;
 }
 .taxes-container {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
