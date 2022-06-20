@@ -145,7 +145,7 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {       
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -167,10 +167,10 @@ export class DevicesComponent implements OnInit {
       this.load(data);
       this.getManufacturers(data.id);
       this.getModels(data.id);
-    });
+    });        
 
-    if (!this.searchSubscription) {
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
+    if (!this.searchSubscription) {          
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {          
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
@@ -209,11 +209,11 @@ export class DevicesComponent implements OnInit {
     this.searchSubscription.unsubscribe();
   }
 
-  setPreviewDataDevice() {
+  setPreviewDataDevice() {       
     let searchData: any = localStorage.getItem("currentSearch");
-    if (searchData) {
-      let searchObj = JSON.parse(searchData);
-      this.selectedTag = searchObj.Criteria || [];
+    if (searchData) {      
+      let searchObj = JSON.parse(searchData);              
+      this.selectedTag = JSON.parse(searchObj.Json) || [];            
       this.searchTag = this.selectedTag;
       localStorage.removeItem("currentSearch");
     }
@@ -221,14 +221,13 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {
+  searchDeviceTag(data: any) {    
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
-
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -315,7 +314,7 @@ export class DevicesComponent implements OnInit {
   }
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -552,7 +551,7 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  add(Tag): void {
+  add(Tag): void {    
     console.log('add event fired');
     this.tagFilterValue = "";
 

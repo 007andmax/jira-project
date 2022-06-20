@@ -220,7 +220,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {         
       if(!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList=[];
@@ -306,16 +306,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
   HardwareTypeList(TechCompanyGuid: any) {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {
-        this.hardwareTypes = resp;
+      .subscribe((resp) => {        
+        this.hardwareTypes = resp;        
         this.assetList.forEach((element, index) => {
           var ht = this.hardwareTypes.find(
             (x) => x.ID == element.HardwareTypeID
           );
           if (ht) {
             element.iconName = ht.Name;
-          }
-        });
+          }          
+        });        
       });
   }
 
