@@ -21,6 +21,7 @@ import { ContractsEditModule } from '../billing/contracts/contracts-edit/contrac
 import { PhoneModule } from 'src/app/pipe/phone/phone.module';
 import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
 import { CompanyDashboardRoutingModule } from './company-dashboard-routing.module';
+import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 
 
 
@@ -49,7 +50,8 @@ import { CompanyDashboardRoutingModule } from './company-dashboard-routing.modul
         ContractsPreviewModule,
         ContractsEditModule,
         PhoneModule,
-        PreparePhoneModule
+        PreparePhoneModule,
+        PreviewPhoneMaskModule
 
     ],
 

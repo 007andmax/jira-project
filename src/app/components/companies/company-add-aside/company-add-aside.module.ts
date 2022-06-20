@@ -12,6 +12,7 @@ import { CompanyTagsModule } from '../company-tags/company-tags.module';
 import { CompanyAssociateModule } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -31,7 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         CompanyTagsModule,
         CompanyAssociateModule,
         TextAreaModule,
-        NgbModule
+        NgbModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [CompanyAddAsideComponent]
 

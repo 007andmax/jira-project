@@ -6,9 +6,16 @@ import { DocumentsTableComponent } from './documents-table/documents-table.compo
 import { DocumentsTableModule } from './documents-table/documents-table.module';
 import { DocumentsTemplatesInfoModule } from './documents-templates/documents-templates-info/documents-templates-info.module';
 import { DocumentsRoutingModule } from './documents-routing.module';
+import { DocumentsEditCategoryComponent } from './documents-edit-category/documents-edit-category.component';
+import { DocumentsEditCategoryItemComponent } from './documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
+import { FormsModule } from '@angular/forms';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
 
 @NgModule({
     declarations: [DocumentsComponent,
+        DocumentsEditCategoryComponent,
+        DocumentsEditCategoryItemComponent
 
     ],
     imports: [
@@ -16,7 +23,10 @@ import { DocumentsRoutingModule } from './documents-routing.module';
         DocumentsHeaderModule,
         DocumentsTableModule,
         DocumentsTemplatesInfoModule,
-        DocumentsRoutingModule
+        DocumentsRoutingModule,
+        FormsModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
 
 

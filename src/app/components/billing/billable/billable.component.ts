@@ -10,7 +10,8 @@ import { BillableRealTimeService } from 'src/app/states/billable/billable-real-t
 import { Subscription } from 'rxjs';
 import { BillableProfileTicket } from './class/billable-profile-ticket';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+
 
 @Component({
   selector: 'billable',

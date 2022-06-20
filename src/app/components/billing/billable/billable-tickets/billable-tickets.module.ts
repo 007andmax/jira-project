@@ -23,6 +23,7 @@ import { TicketProfileUpdatesServiceTimepickerModule } from 'src/app/components/
 import { TicketProfileUpdatesServiceDurationModule } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
 import { InvoiceFormTicketEditTaxesModule } from '../billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 import { BillableTicketsRoutingModule } from './billable-tickets-routing.module';
+import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { BillableTicketsRoutingModule } from './billable-tickets-routing.module'
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
         InvoiceFormTicketEditTaxesModule,
-        BillableTicketsRoutingModule
+        BillableTicketsRoutingModule,
+        PreviewPhoneMaskModule
 
     ],
 

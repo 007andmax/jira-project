@@ -10,6 +10,7 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserTableDefaultSubscriptionComponent } from './user-table-default-subscription/user-table-default-subscription.component';
 import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
+import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 
 
 
@@ -29,6 +30,7 @@ import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscr
         PreparePhoneModule,
         DynamicTooltipModule,
         NgbModule,
+        PreviewPhoneMaskModule
     ],
     exports: [UsersTableComponent]
 

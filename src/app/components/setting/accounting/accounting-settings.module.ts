@@ -11,6 +11,7 @@ import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.compo
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -30,7 +31,8 @@ import { MatFormFieldModule } from '@angular/material';
         ClickOtsideModule,
         FormsModule,
         MatFormFieldModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxMaskModule.forRoot(),
     ],
 })
 export class AccoutingSettingsModule { }

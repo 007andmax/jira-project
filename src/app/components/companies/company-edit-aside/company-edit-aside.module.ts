@@ -15,6 +15,7 @@ import { CompanyTagsModule } from '../company-tags/company-tags.module';
 import { CompanyAssociateModule } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompaniesFilterComponent } from '../companies-header/companies-filter/companies-filter.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [CompanyEditAsideComponent,
@@ -32,7 +33,8 @@ import { CompaniesFilterComponent } from '../companies-header/companies-filter/c
         CompanyTimeZoneModule,
         CompanyTagsModule,
         CompanyAssociateModule,
-        TextAreaModule
+        TextAreaModule,
+        NgxMaskModule.forRoot(),
 
     ],
     exports: [CompanyEditAsideComponent]

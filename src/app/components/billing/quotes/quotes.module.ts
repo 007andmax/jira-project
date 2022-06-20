@@ -31,6 +31,7 @@ import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datep
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { FilterModule } from 'src/app/pipe/filter/filter.module';
 import { QuotesRoutingModule } from './quotes-routing.module';
+import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 
 
 
@@ -71,7 +72,8 @@ import { QuotesRoutingModule } from './quotes-routing.module';
         MultiDatepickerModule,
         DecimalNumberModule,
         FilterModule,
-        QuotesRoutingModule
+        QuotesRoutingModule,
+        PreviewPhoneMaskModule
     ],
 
 

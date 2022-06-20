@@ -13,6 +13,7 @@ import { UserCustomSubscriptionComponent } from './user-custom-subscription/user
 import { UserDefaultSubscriptionModule } from './user-default-subscription/user-default-subscription.module';
 import { UserCustomSubscriptionModule } from './user-custom-subscription/user-custom-subscription.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [UsersAsideComponent,
@@ -31,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         UserDefaultSubscriptionModule,
         UserCustomSubscriptionModule,
         NgbModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [UsersAsideComponent]
 

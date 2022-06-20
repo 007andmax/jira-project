@@ -10,6 +10,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { UserDefaultSubscriptionModule } from '../users-aside/user-default-subscription/user-default-subscription.module';
 import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscription/user-custom-subscription.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [UsersAsideEditComponent
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         TextAreaModule,
         UserDefaultSubscriptionModule,
         UserCustomSubscriptionModule,
-        NgbModule
+        NgbModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [UsersAsideEditComponent]
 

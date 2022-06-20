@@ -18,6 +18,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { PaymentsRoutingModule } from './payments-routing.module';
+import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 
 
 
@@ -47,7 +48,8 @@ import { PaymentsRoutingModule } from './payments-routing.module';
         MatSelectModule,
         MatChipsModule,
         MultiDatepickerModule,
-        PaymentsRoutingModule
+        PaymentsRoutingModule,
+        PreviewPhoneMaskModule
     ],
 
 

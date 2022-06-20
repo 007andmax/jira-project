@@ -25,7 +25,6 @@ import { OverviewReportComponent } from '../overview-report/overview-report.comp
 import { ItemReportRoutingModule } from './item-report-routing.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ToFixedPipeModule } from 'src/app/pipe/to-fixed/to-fixed.module';
-import { ReportsLeftMenuComponent } from '../reports-left-menu/reports-left-menu.component';
 import { PaymentsReportComponent } from '../reports/payments-report/payments-report.component';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { PaymentsReportComponent } from '../reports/payments-report/payments-rep
         TechServiceReportComponent,
         AccountingReportComponent,
         OverviewReportComponent,
-        ReportsLeftMenuComponent,
         PaymentsReportComponent
     ],
     imports: [

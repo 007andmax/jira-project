@@ -21,6 +21,7 @@ import { UserCustomSubscriptionModule } from '../users-aside/user-custom-subscri
 import { UsersAsideDetailMessagesComponent } from './users-aside-detail-messages/users-aside-detail-messages.component';
 import { UsersAsideDetailMessagesFullBodyComponent } from './users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
 import { TicketProfileAttachmentsModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -46,7 +47,8 @@ import { TicketProfileAttachmentsModule } from '../../tickets/tickets/ticket-edi
         DocumentsTemplatesInfoModule,
         UserDefaultSubscriptionModule,
         UserCustomSubscriptionModule,
-        TicketProfileAttachmentsModule
+        TicketProfileAttachmentsModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [UsersAsideDetailComponent]
 
