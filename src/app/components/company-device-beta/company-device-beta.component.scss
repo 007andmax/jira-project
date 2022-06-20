@@ -351,3 +351,9 @@ table.qt-table-modern tbody tr td {
 .sidebarchiptag{
   margin-bottom: 16px !important;
 }
+
+/deep/.qt-dropdown{    
+  input#sidebarmanufacture,#sidebarmodel{
+        height: 27px !important;      
+     }       
+}

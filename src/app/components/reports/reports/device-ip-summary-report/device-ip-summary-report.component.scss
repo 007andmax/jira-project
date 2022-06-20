@@ -60,8 +60,7 @@
 }
 
 .device-header {
-  text-align: center;
-  padding: 75px 0px 10px 0px;
+  text-align: center;  
   h6 {
     font-size: 12px !important;
   }
@@ -119,4 +118,8 @@
       }
     }
   }
+}
+
+.report-device-ip-summary-table{
+  background-color: #f4f6f8 !important;
 }

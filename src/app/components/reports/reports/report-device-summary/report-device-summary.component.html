@@ -125,7 +125,14 @@
                         <td class="serial">{{ deviceSummary.SerialNumber }}</td>
                     </tr>
                 </tbody>               
-            </table>            
+            </table>   
+            <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="deviceSummaryList.length == 0">
+                <tbody>
+                    <tr>
+                        <td colspan="10" class="text-center report-device-summary-table">Data Not Available</td>
+                    </tr>
+                </tbody>
+            </table>              
         </div>
     </div>
 </div>

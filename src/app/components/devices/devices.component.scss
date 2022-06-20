@@ -676,3 +676,10 @@ span.qt-input-search:before {
     margin-bottom: 16px !important;
   }
 
+  /deep/.qt-dropdown{    
+    input#sidebarmanufacture,#sidebarmodel{
+          height: 27px !important;      
+       }       
+  }
+  
+

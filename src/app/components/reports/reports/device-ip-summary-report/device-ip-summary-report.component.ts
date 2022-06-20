@@ -1,5 +1,5 @@
 import { NetworkAdapterReport } from './../../class/network-adapter-report';
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -15,6 +15,7 @@ import { DeviceIpSummary } from '../../class/device-ip-summary';
 import { ReportValidate } from '../../class/report-validate';
 import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 import { AgentService } from 'src/app/services/agent/agent.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'device-ip-summary-report',
@@ -22,7 +23,7 @@ import { AgentService } from 'src/app/services/agent/agent.service';
   styleUrls: ['./device-ip-summary-report.component.scss']
 })
 export class DeviceIpSummaryReportComponent implements OnInit {
-
+  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   company: any;
@@ -57,26 +58,35 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private agentService: AgentService,
+    private companiesState: CompaniesStateService,
     ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.clientName = "All Companies";
-    this.loading = true;
-    this.getDeviceIpSummaryList();
-   if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
+    this.companiesState.onInit();    
+    this.setPreviewDataDevice();    
   }
 
+  setPreviewDataDevice() {
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
+}
 
-  getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
+getClientsList(data) {
+  return data
+    .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
+    .sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase()
+        ? 1
+        : b.name.toLowerCase() > a.name.toLowerCase()
+        ? -1
+        : 0
+    );
+}
 
-  getDeviceIpSummaryList(){
-    this.agentService.getDeviceIpSummary().subscribe((resp) =>{
+  getDeviceIpSummaryList(){    
+    this.agentService.getDeviceIpSummary().subscribe((resp) =>{      
       this.deviceIpSummaryList = resp;
       this.loading = false;
     })
@@ -105,16 +115,19 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     })
   }
 
-  public selectClient(selectClient) {
+  public selectClient(selectClient) {    
     if (selectClient == null) {
       this.selectedClient == null;
-      this.deviceIpSummary.setCompanyId(null);
-      this.getDeviceIpSummaryList();
+      this.deviceIpSummary.setCompanyId(null);  
+      this.dropdownDevice.clearWithOutChanges();    
+      this.deviceIpSummaryList = [];
     } else {
+      this.loading = true;
       this.selectedClient = selectClient
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.getDeviceIpSummaryByGuid(selectClient.id);
-      this.getReportByDeviceIpSummary();
+      this.getReportByDeviceIpSummary();       
+      this.loading = false;
     }
     this.onSelectedClient.emit(this.selectedClient);
   }
