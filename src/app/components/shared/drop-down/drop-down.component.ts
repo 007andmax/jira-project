@@ -55,7 +55,6 @@ export class DropDownComponent implements OnInit {
     this.list = data;
     if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
     this.reqList = JSON.parse(JSON.stringify(this.list));
-    console.log("this.reqList", this.reqList);
   }
 
   onCheckAdd(event) {
