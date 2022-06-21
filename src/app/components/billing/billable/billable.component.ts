@@ -46,12 +46,6 @@ export class BillableComponent implements OnInit, OnDestroy {
     this.appService.getOnInit().subscribe(data => {
       this.getList();
     })
-    /* let changeBillableCount = this.billableRealTimeService.changeBillableCount.subscribe(data => {
-       if (data.action == 'LEFT_PANEL_COUNTS') {
-         this.count = data.data.BILLABLE;
-       }
-     })
-     this.sub.add(changeBillableCount);*/
     let changeBillable = this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
         let key = Object.keys(data.data)[0];

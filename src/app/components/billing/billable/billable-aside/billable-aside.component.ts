@@ -6,7 +6,6 @@ import { InvoiceTaxNumber } from '../class/invoice-tax-number';
 import { BillableProfile } from '../class/billable-profile';
 import { InvoiceLock } from '../class/invoice-lock';
 import { CompaniesService } from 'src/app/services/company/companies.service';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompanyProfile } from '../../../companies/class/company-profile';
 import { Subscription } from 'rxjs';
 import { BillableTaimer } from './class/billable-taimer';
@@ -145,8 +144,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   saveAndPrint() {
     this.disabledSaveBtns();
-
-    //  window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isEditable=${true}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}`, "_blank");
     this.billableService.create(this.invoice.getDatForCreate(false)).subscribe((data: any) => {
       var wnd = window.open('/invoice/show/' + data.id + '/pdf');
       wnd.print();
@@ -160,7 +157,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   saveAndDownload() {
     this.disabledSaveBtns();
-    //  window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isDownload=${true}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}.pdf`, "_blank");
     this.billableService.create(this.invoice.getDatForCreate(false)).subscribe((invoice: any) => {
       this.appService.download(`/invoice/show/${invoice.id}/pdf`, `${this.invoice.invoiceDataDto.companyName}-${this.invoiceNumber}.pdf`);
       this.unlock();
