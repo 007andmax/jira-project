@@ -19,12 +19,12 @@ export class InvoiceLock {
     public setInvoiceDataDto(data) {
         this.invoiceDataDto = data;
     }
-    public getDatForCreate() {
+    public getDatForCreate(sendNotification) {
         return {
             lockId: this.lockId,
             billTo: this.invoiceDataDto.billTo[0].id,
             shipTo: this.invoiceDataDto.shipTo[0].id,
-            sendNotification: true,
+            sendNotification: sendNotification,
             includeAccountReceivableReportAsAttachment: this.includeAccountReceivableReportAsAttachment,
             includeInvoiceAsAttachment: this.includeInvoiceAsAttachmentSetting
         }
