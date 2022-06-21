@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { BillableProfileTicket } from './class/billable-profile-ticket';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'billable',
@@ -34,6 +35,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
     private appService: AppService,
+    private permissionsService: PermissionsService,
     private billableRealTimeService: BillableRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService) { }
@@ -103,6 +105,9 @@ export class BillableComponent implements OnInit, OnDestroy {
     this.list.forEach(item => {
       item.selected = event.target.checked;
     })
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   onInvoiceAll() {
     this.saveAndDownloadBtn.setDisabled(true);

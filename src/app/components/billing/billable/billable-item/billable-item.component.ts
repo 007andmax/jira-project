@@ -8,6 +8,7 @@ import { TicketsListService } from '../../../tickets/tickets/services/tickets-li
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-billable-item',
@@ -28,6 +29,7 @@ export class BillableItemComponent implements OnInit {
     private billableStateService: BillableStateService,
     private leftPanelStateService: LeftPanelStateService,
     private billableService: BillableService,
+    private permissionsService: PermissionsService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -40,6 +42,9 @@ export class BillableItemComponent implements OnInit {
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   getStyleAvatar(user) {
     if (!user) return '';

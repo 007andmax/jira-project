@@ -1,5 +1,8 @@
 <tr>
-    <td class="billable-item-table__check">
+    <td
+        class="billable-item-table__check"
+        *ngIf="getPermissions('CREATE_INVOICE')"
+    >
         <div class="d-f">
             <label
                 class="qt-checkbox pointer"
@@ -25,7 +28,7 @@
         (click)="moToBillableTickets()"
     >
         <div
-            class="d-f"
+            class="d-f billable-table__user"
             *ngIf="salesPerson"
         >
             <div
@@ -51,6 +54,7 @@
         class="invoce-table__menu"
         ngbDropdown
         [container]="'body'"
+        *ngIf="getPermissions('CREATE_INVOICE')"
     >
         <div
             class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
