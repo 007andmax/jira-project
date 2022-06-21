@@ -1,4 +1,4 @@
-<!-- <div class="app-left-panel__menu-info">
+<div class="app-left-panel__menu-info">
      <div
         class="select-company"
         [ngClass]="{'with-logo': checkLogo()}"
@@ -20,13 +20,6 @@
             [textContent]="selectedCompany.name"
         ></p>
     </div>        
-</div> -->
-<div>
-    <ul *ngFor="let company of companiesList" class="app-left-panel__menu-expand">
-        <a href="#">
-            <li [textContent]="company.name"></li>
-        </a>                
-    </ul>
 </div>
 <ul class="app-left-panel__menu-expand">
     <a

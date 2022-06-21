@@ -1,4 +1,3 @@
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -12,21 +11,27 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class LeftPanelDevicesComponent implements OnInit {
   type: string = 'Dashboard';
-  open: boolean = false;
-  open1: boolean = false;
+  open: boolean = false;  
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
 
   searches: any[];
   company: any;
+  toggleTypeCompanies: boolean = false;
+  toggleTypePinnedSearch: boolean = false;
+  toggleTypeReport:boolean = false;
+  companyReportList: any;
+  companyList:any;
 
   constructor(private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
-    private companiesStateService: CompaniesStateService) { }
+    private companiesStateService: CompaniesStateService,
+    private companiesState: CompaniesStateService,
+    ) { }
 
-  ngOnInit() {
-    this.open1 = true;
+  ngOnInit() {      
+    this.companiesState.onInit();
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.getCurrentCompany(data);
@@ -49,8 +54,13 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.leftPanelStateService.onSearchItemAdded.subscribe(data => {      
       this.getCurrentCompany(this.company);
     });
+
+    this.companiesState.getOnCompanies().subscribe(data => {
+      this.companyReportList= this.getCompaniesNames(data);
+      this.companyList = this.companyReportList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
+    })
   }
-  getCurrentCompany(data) {    
+  getCurrentCompany(data) {        
     this.company = data;
     this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
       this.searches = res;
@@ -82,14 +92,35 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.open = false;
   }
 
-  onFilter1(active, data) {
+  onFilter1(active, data) {    
     localStorage.setItem("currentSearch", JSON.stringify(data));
     this.type = active;
     this.goToState('new-devices');
     this.leftPanelStateService.onSearchChanged(data);
   }
 
-  toggleSearch() {
-    this.open1 = !this.open1;
+  onFilterCompany(active, data)
+  {        
+    localStorage.setItem("currentSearchCompany", JSON.stringify(data));
+    this.type = active;
+    this.goToState('new-devices');
+    this.leftPanelStateService.onSearchCompany(data);
+  }
+
+  onSearchReport(state){ 
+    localStorage.setItem('report', state); 
+    this.leftPanelStateService.goToState(state);              
+  }
+  
+  private getCompaniesNames(list) {
+
+    const filteredArray = [];
+    list.map((item) => {
+      filteredArray.push({
+        companyId: item.id,
+        name: item.name
+      })
+    });
+    return filteredArray;
   }
 }

@@ -15,33 +15,79 @@
     >
         Dashboard
     </li>
-    <li
-        class="app-left-panel__menu-expand-item-icon"
-        [ngClass]="{'--active':type === 'Reports'  && activePage === 'new-device-summary'}"
-        (click)="goToState('new-device-summary')"
-    >
-        Reports
+
+    
+    <li class="app-left-panel__menu-expand-item-icon">
+        <span>Pinned Searches</span>
+        <div
+        (click)="toggleTypePinnedSearch = ! toggleTypePinnedSearch">
+             <i
+                    class="icn-sm report-caret-icon"
+                    [ngClass]="{'device-caret-icon-rotate':toggleTypePinnedSearch}"
+              ></i>
+        </div>        
     </li>
-    <li class="app-left-panel__menu-expand-item-icon child-menu">
-        <div>
-            <span class="favr"></span>
-            Favourite List
-            <div
-                [ngClass]="{'expand-search': !open1, 'collapse-search': open1}"
-                (click)="toggleSearch()"
-            ></div>
-        </div>
-        <ul
-            class="menu-inner menu-expand-show"
-            *ngIf="open1"
-        >
-            <li
-                *ngFor="let item of searches"
-                class="menu-item-inner"
-                (click)="onFilter1('Dashboard', item)"
-            >
-                {{item.Name}}
-            </li>
-        </ul>
+    <ul
+    class="devices-categories"
+    *ngIf="toggleTypePinnedSearch"
+>
+    <li
+        *ngFor="let item of searches"
+        class="menu-item-inner"
+        (click)="onFilter1('Dashboard', item)"
+    >
+        {{item.Name}}
     </li>
 </ul>
+
+    <li [ngClass]="{'--active':activePage === 'new-companies'}">       
+            <span                
+            >
+                Companies
+            </span>        
+        <div
+            class="qt-ml-auto qt-sz-20"
+            (click)="toggleTypeCompanies = !toggleTypeCompanies"            
+        >
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'device-caret-icon-rotate':toggleTypeCompanies}"
+            ></i>
+        </div>
+    </li>
+    <ul
+        class="devices-categories"  
+        *ngIf="toggleTypeCompanies"             
+    >
+    <li *ngFor="let items of companyList" (click)="onFilterCompany('Dashboard',items)" >{{items.name}}</li>        
+    </ul>
+
+    <li class="app-left-panel__menu-expand-item-icon">
+        <span>Reports</span>
+        <div
+        (click)="toggleTypeReport = ! toggleTypeReport">
+             <i
+                    class="icn-sm report-caret-icon"
+                    [ngClass]="{'device-caret-icon-rotate':toggleTypeReport}"
+              ></i>
+        </div>        
+    </li>
+
+    <ul class="devices-categories" *ngIf="toggleTypeReport">        
+        <li class="menu-item-inner" (click)="onSearchReport('report-device-summary')">Device Summary Report</li>        
+        <li class="menu-item-inner" (click)="onSearchReport('hardware-summary')">Hardware Summary Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('report-device-processorram')">Device Processor Ram Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('report-device-diskspace')">Device Disk Space Report</li>        
+        <li class="menu-item-inner" (click)="onSearchReport('device-ip-summary')">Device IP Summary Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('device-ip-summary')">Network IP Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('network-detail-report')">Network Detail Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('network-adapter-report')">Network Adapter Report</li>        
+        <li class="menu-item-inner" (click)="onSearchReport('software-summary1')">Software Summary Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('report-device-antivirus')">Device Antivirus Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('applicationbycompany-report')">Application By Company Report</li>        
+        <li class="menu-item-inner" (click)="onSearchReport('report-device-warranty')">Device Warranty Report</li>
+        <li class="menu-item-inner" (click)="onSearchReport('report-device-deploymentwarranty')">Device Deployment Warranty Report</li>
+    </ul>
+   
+</ul>
+

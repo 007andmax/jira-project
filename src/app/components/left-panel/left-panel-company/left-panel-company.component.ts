@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -25,20 +24,17 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   assignedDocumentCategories: Array<CompanyAssigned> = [];
   sub: Subscription = new Subscription();
   @Output() onGoToLink = new EventEmitter();
-  @Output() onChangeState = new EventEmitter();
-  public companiesList: any;
+  @Output() onChangeState = new EventEmitter();  
 
   constructor(//private quoteStateService: QuoteStateService,
     public router: Router,
     private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,
-    public activateRoute: ActivatedRoute,
-    private companiesService: CompaniesService,
+    public activateRoute: ActivatedRoute,    
     private leftPanelStateService: LeftPanelStateService,
-    private companiesState: CompaniesStateService,) { }
+   ) { }
 
-  ngOnInit() {    
-    this.companiesState.onInit();  
+  ngOnInit() {        
     this.companyId = this.companiesStateService.getCompanyRoutingId();
     if (this.companyId != this.companiesStateService.getCompanyIdForassignedDocumentCategory()) this.companiesStateService.getCategoriesDocuments(this.companyId);
     this.companiesStateService.onGetAssignedDocumentCategories.subscribe(data => {
@@ -57,11 +53,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
         this.selectedCategoryDocument = queryParam.categoryId;
       }
     );
-    this.sub.add(queryParams);
-
-    this.companiesState.getOnCompanies().subscribe((data) => {           
-      this.companiesList = this.getCompaniesNames(data);
-    })
+    this.sub.add(queryParams);    
   }
   public close() {
     this.open = false;

@@ -14,6 +14,10 @@
     }
 }
 
+.devices-categories {
+    padding-left: 10px !important;    
+  }
+
 li.child-menu {
     display: block;
     width: 100%;
@@ -67,3 +71,19 @@ li.child-menu {
   width: 25px;
   background-position: center;
 }
+
+.device-caret-icon-rotate {
+    transform: rotate(90deg);
+}
+
+.compinesicon{
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    background-position: center;
+    opacity: 0.5;
+    background-image: url(/assets/img/icons-left-sidebar/menu-company.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+

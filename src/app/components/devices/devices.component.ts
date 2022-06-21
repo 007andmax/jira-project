@@ -76,6 +76,7 @@ export class DevicesComponent implements OnInit {
   modalReference: any;
   favouriteName: string;
   searchSubscription: any;
+  searchSubscriptionCompany: any;
   screenConnectList: any[] = [];
   userName: any;
   password: any;
@@ -145,7 +146,7 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {       
+  ngOnInit() {          
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -170,12 +171,26 @@ export class DevicesComponent implements OnInit {
     });        
 
     if (!this.searchSubscription) {          
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {          
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {                 
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
         this.add(undefined);
       });
+    }
+
+    if(!this.searchSubscriptionCompany)
+    {      
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{ 
+        this.selectedTag = [];               
+        if(data.name !='undefined' && data.name !=null && data.name !="")
+        {
+          this.selectedTag.push(data.name);
+        }        
+        this.searchTag = this.selectedTag;
+        localStorage.removeItem("currentSearchCompany");
+        this.add(undefined);
+      })
     }
   }
 
@@ -183,17 +198,17 @@ export class DevicesComponent implements OnInit {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {
+  load(company: any) {    
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
-    if (!localStorage.getItem("currentSearch")) {
+    if ((!localStorage.getItem("currentSearch")) && (!localStorage.getItem("currentSearchCompany"))) {
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
       req.Criteria = [];
       this.getAssets();
       this.HardwareTypeList(this.techCompnayGuid);            
-    }
+    }    
     else {
       this.setPreviewDataDevice();
     }
@@ -209,13 +224,21 @@ export class DevicesComponent implements OnInit {
     this.searchSubscription.unsubscribe();
   }
 
-  setPreviewDataDevice() {       
+  setPreviewDataDevice() {           
     let searchData: any = localStorage.getItem("currentSearch");
     if (searchData) {      
       let searchObj = JSON.parse(searchData);              
       this.selectedTag = JSON.parse(searchObj.Json) || [];            
       this.searchTag = this.selectedTag;
       localStorage.removeItem("currentSearch");
+    }
+    let searchCompanyData: any = localStorage.getItem("currentSearchCompany");
+    if(searchCompanyData){
+      this.selectedTag = [];
+      let searchCompanyObj = JSON.parse(searchCompanyData);
+      this.selectedTag.push(searchCompanyObj.name);
+      this.searchTag = this.selectedTag;
+      localStorage.removeItem("currentSearchCompany");
     }
     this.add(undefined);
     this.CurrentUser();
@@ -244,7 +267,7 @@ export class DevicesComponent implements OnInit {
         }
       });
       this.loading = false;
-      if (this.cd) {
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     });
@@ -551,7 +574,7 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  add(Tag): void {    
+  add(Tag): void {        
     console.log('add event fired');
     this.tagFilterValue = "";
 
