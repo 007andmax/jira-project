@@ -16,6 +16,7 @@ export class InvoiceSettingsComponent implements OnInit {
   isAddPhone = false;
   loading = false;
   isDisable: boolean;
+  includeInvoiceAsAttachmentSetting: boolean = false;
   @Input() taxIdDescInput: any;
   @Input() taxIdInput: any;
   @Input() termInput: any;
@@ -160,6 +161,7 @@ export class InvoiceSettingsComponent implements OnInit {
     // this.getTaxNumber();
     // this.getConditions();
     if (res) {
+      this.includeInvoiceAsAttachmentSetting = res.includeInvoiceAsAttachmentSetting;
       this.isDisable = res.invoiceContact.enabled;
       const state = !this.isDisable ? 'disable' : 'enable';
       if (!this.isDisable) {
@@ -291,6 +293,7 @@ export class InvoiceSettingsComponent implements OnInit {
         termsAndConditions: this.invoiceForm.value.conditions,
         type: 'INVOICE',
         enableOwnerSending: this.invoiceForm.value.enableOwnerSending,
+        includeInvoiceAsAttachmentSetting: this.includeInvoiceAsAttachmentSetting
       },
       invoiceContactDto: {
         enabled: this.invoiceForm.value.enableInvoiceContact,

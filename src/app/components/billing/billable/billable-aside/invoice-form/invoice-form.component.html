@@ -245,3 +245,36 @@
         rows="1"
     ></textarea>
 </div>
+<div class="qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
+    <div class="qt-df qt-ai-c">
+        <label
+            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+            for="includeInvoiceAsAttachmentSetting"
+        >
+            <input
+                id="includeInvoiceAsAttachmentSetting"
+                type="checkbox"
+                [(ngModel)]="invoice.includeInvoiceAsAttachmentSetting"
+            >
+            <span></span>
+        </label>
+        <div class="qt-fs-12 qt-ml-5">Invoice as pdf</div>
+    </div>
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="invoice.enableAccountReceivableReportAsAttachment"
+    >
+        <label
+            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+            for="includeAccountReceivableReportAsAttachment"
+        >
+            <input
+                id="includeAccountReceivableReportAsAttachment"
+                type="checkbox"
+                [(ngModel)]="invoice.includeAccountReceivableReportAsAttachment"
+            >
+            <span></span>
+        </label>
+        <div class="qt-fs-12 qt-ml-5">Include AR report</div>
+    </div>
+</div>
