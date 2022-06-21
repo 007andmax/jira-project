@@ -222,6 +222,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   getCompany(id) {
     return this.companiesStateService.getCompanies().find(item => item.id === id);
   }
+  private getClientsList() {
+    return this.companiesStateService.getCompanies().filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
+
+  }
   changeTicketCompany(id) {
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, id).subscribe(data => {
     })

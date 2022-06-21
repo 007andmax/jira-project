@@ -61,14 +61,13 @@
                                             <ng-template
                                                 ngFor
                                                 let-item
-                                                [ngForOf]="ticketProfile.userCompanies"
+                                                [ngForOf]="getClientsList()"
                                                 let-i="index"
                                             >
                                                 <li
-                                                    *ngIf="getCompany(item)"
                                                     ngbDropdownItem
-                                                    [textContent]="getCompany(item).name"
-                                                    (click)="changeTicketCompany(item)"
+                                                    [textContent]="item.name"
+                                                    (click)="changeTicketCompany(item.id)"
                                                 ></li>
                                             </ng-template>
                                         </ul>
