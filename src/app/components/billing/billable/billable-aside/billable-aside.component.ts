@@ -161,7 +161,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   saveAndDownload() {
     this.disabledSaveBtns();
     //  window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isDownload=${true}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}.pdf`, "_blank");
-    this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe((invoice: any) => {
+    this.billableService.create(this.invoice.getDatForCreate()).subscribe((invoice: any) => {
       this.appService.download(`/invoice/show/${invoice.id}/pdf`, `${this.invoice.invoiceDataDto.companyName}-${this.invoiceNumber}.pdf`);
       this.unlock();
       this.activeSaveBtns();
