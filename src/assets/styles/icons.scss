@@ -73,13 +73,6 @@
 .restore-company {
   background: url("/assets/img/icons/restore-company.svg");
 }
-
-.edit-grey-ng2 {
-  background: url("/assets/img/icons/edit-grey-ng2.png");
-}
-.edit-grey {
-  background-image: url("/assets/img/icons/edit-grey-ng2.png");
-}
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
 }
@@ -377,7 +370,7 @@
     background-image: url("/assets/img/icons/view.svg");
   }
   &__hide {
-    background-image: url("/assets/img/icons/hide.svg");
+    background-image: url("/assets/img/password-show.svg");
   }
   &__documents {
     background-image: url("/assets/img/icons/documents.svg");
@@ -526,7 +519,7 @@
     background-image: url("/assets/img/icons/get-paid.svg");
   }
   &__edit {
-    background-image: url("/assets/img/icons/edit.svg");
+    background-image: url("/assets/img/edit-12.svg");
   }
   &__edit-gray {
     background-image: url("/assets/img/icons/edit-gray.svg");
@@ -553,7 +546,7 @@
     background-image: url("/assets/img/icons/payment_history.svg");
   }
   &__mark-as-read {
-    background-image: url("/assets/img/icons/mark_as_read.svg");
+    background-image: url("/assets/img/password-show-old.svg");
   }
   &__refund-payment {
     background-image: url("/assets/img/icons/refund-payment.svg");

@@ -26,7 +26,7 @@
       content: '';
       width: 20px;
       height: 20px;
-      background-image: url("/assets/img/icons/search.png");
+      background-image: url("/assets/img/icons/search.svg");
       left: 10px;
       top: calc(50% - 10px);
       z-index: 1;
@@ -102,12 +102,12 @@ app-inventory {
   .modal {
     z-index: 998 !important;
   }
-  
+
   app-contracts-edit {
     position: relative;
     z-index: 999;
   }
-  
+
   .modal-backdrop {
     z-index: 998 !important;
   }
