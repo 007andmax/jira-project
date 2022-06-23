@@ -1234,7 +1234,7 @@ app-quotes-item {
   &--search {
     display: flex;
     align-items: center;
-    .email-ng2 {
+    .icon__email-blue {
       margin-right: 40px;
       cursor: pointer;
     }
@@ -2515,16 +2515,15 @@ app-quotes-item {
       .save-template {
         position: relative;
         font-weight: 600;
-        font-weight: 600;
         font-size: 12px;
         color: $gray-800;
         cursor: pointer;
         &:before {
           content: "";
           position: absolute;
-          background: url("./assets/img/icons/adduser.png");
+          background: url("./assets/img/upload-photo.svg") no-repeat center / cover;
           left: -40px;
-          // top: -5px;
+          top: 0;
           width: 32px;
           height: 32px;
         }

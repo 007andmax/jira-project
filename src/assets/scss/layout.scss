@@ -111,7 +111,7 @@ body {
                             border: solid 1px $gray-500;
                             margin: 0 -1px;
                             outline: none !important;
-                            background: url("/assets/img/icons/selct-arrow.svg") no-repeat right 10px center;
+                            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 10px center;
                             width: 90px;
                             &:first-child {
                                 @include border-radius(4px 0 0 4px);
@@ -355,7 +355,7 @@ body {
     }
     select.cmn-select {
         @include app-none();
-        background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
+        background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px center;
         padding-right: 30px;
         option {
             padding: 10px;
@@ -536,7 +536,7 @@ body {
         }
         select.cmn-select {
             @include app-none();
-            background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
+            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px center;
             padding-right: 30px;
             option {
                 padding: 10px;
@@ -2133,7 +2133,7 @@ body {
 
     .ngx-dropdown-container button .nsdicon-angle-down {
         font-size: 0 !important;
-        background: url(/assets/img/selct-arrow.svg) no-repeat center !important;
+        background: url(/assets/img/icons/down-arrow.svg) no-repeat center !important;
         height: 8px;
         width: 10px;
         display: inline-block;
