@@ -83,7 +83,18 @@
                     </div>
                 </div>
                 <div class="f-col col-100">
-                    <div class="qt-df qt-mb-16 enables-invoice-settings">
+                    <label>Memo Of Invoice</label>
+                    <div class="form-row">
+                        <textarea
+                            class="form-input"
+                            formControlName="conditions"
+                            placeholder="Enter memo of invoice"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="f-col col-100">
+                    <label>Attach to invoice email</label>
+                    <div class="qt-df qt-mb-25 enables-invoice-settings">
                         <div class="qt-df">
                             <div
                                 class="qt-toggle qt-mr-8"
@@ -96,16 +107,22 @@
                                 <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Include invoice as attachment</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="f-col col-100">
-                    <label>Memo Of Invoice</label>
-                    <div class="form-row">
-                        <textarea
-                            class="form-input"
-                            formControlName="conditions"
-                            placeholder="Enter memo of invoice"
-                        ></textarea>
+                        <div class="qt-df invoice-email">
+                            <div
+                                class="qt-toggle qt-mr-8"
+                                [ngClass]="{'--on':includeAccountReceivableReportAsAttachmentSetting}"
+                                (click)="includeAccountReceivableReportAsAttachmentSetting = !includeAccountReceivableReportAsAttachmentSetting"
+                            >
+                                <div class="qt-toggle__circle"></div>
+                            </div>
+                            <div>
+                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
+                                    Include Accounts receivable report as
+                                    <br>
+                                    attachment
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="f-col col-100">
@@ -122,7 +139,7 @@
                                 <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Set custom Invoice contact</div>
                             </div>
                         </div>
-                        <div class="qt-df">
+                        <div class="qt-df invoice-email">
                             <div
                                 class="qt-toggle qt-mr-8"
                                 [ngClass]="{'--on':invoiceForm.value.enableOwnerSending}"
