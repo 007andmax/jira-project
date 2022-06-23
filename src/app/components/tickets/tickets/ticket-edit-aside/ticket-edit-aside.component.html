@@ -52,7 +52,7 @@
                                     (click)="showDetailUser()"
                                 ></span>
                                 <div
-                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id).name === 'Unassigned'"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id).is_default"
                                     ngbDropdownMenu
                                     aria-labelledby="dropdownCompany"
                                 >
