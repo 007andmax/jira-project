@@ -15,6 +15,7 @@ export class InvoiceLock {
         this.lockedTickets = data.lockedTickets;
         this.enableAccountReceivableReportAsAttachment = data.includeAccountReceivableReportAsAttachment;
         this.includeInvoiceAsAttachmentSetting = data.includeInvoiceAsAttachmentSetting;
+        this.includeAccountReceivableReportAsAttachment = JSON.parse(JSON.stringify(data.includeAccountReceivableReportAsAttachment));
     }
     public setInvoiceDataDto(data) {
         this.invoiceDataDto = data;
