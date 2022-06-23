@@ -262,16 +262,16 @@
     </div>
     <div
         class="qt-df qt-ai-c"
-        *ngIf="invoice.enableAccountReceivableReportAsAttachment"
+        *ngIf="invoice.allowToGenerateAccountReceivableReport"
     >
         <label
             class="qt-checkbox qt-dif qt-ai-c receive-full-amount-check qt-mb-0 pointer"
-            for="includeAccountReceivableReportAsAttachment"
+            for="includeAccountReceivableReportAsAttachmentSetting"
         >
             <input
-                id="includeAccountReceivableReportAsAttachment"
+                id="includeAccountReceivableReportAsAttachmentSetting"
                 type="checkbox"
-                [(ngModel)]="invoice.includeAccountReceivableReportAsAttachment"
+                [(ngModel)]="invoice.includeAccountReceivableReportAsAttachmentSetting"
             >
             <span></span>
             <div class="qt-fs-13 qt-lh-154 qt-ml-8">
