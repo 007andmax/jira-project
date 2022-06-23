@@ -8,21 +8,21 @@
 <ul
     class="app-left-panel__menu-expand"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
->
+>   
     <li
-        [ngClass]="{'--active':type === 'Dashboard'  && activePage === 'new-devices'}"
-        (click)="onFilter('Dashboard')"
+        [ngClass]="{'--active':type === 'Dashboard'  && currentActivePage === 'new-devices'}"
+        (click)="onFilter('Dashboard'); pagesActive('new-devices')"
     >
         Dashboard
     </li>
 
     
-    <li class="app-left-panel__menu-expand-item-icon">
+    <li [ngClass]="{'--active':currentActivePage === 'pinnedSearches'}" class="app-left-panel__menu-expand-item-icon" (click)="toggleTypePinnedSearch = ! toggleTypePinnedSearch;pagesActive('pinnedSearches')">
         <span>Pinned Searches</span>
         <div
-        (click)="toggleTypePinnedSearch = ! toggleTypePinnedSearch">
+        >
              <i
-                    class="icn-sm report-caret-icon"
+                    class="icn-sm report-caret-icon"                    
                     [ngClass]="{'device-caret-icon-rotate':toggleTypePinnedSearch}"
               ></i>
         </div>        
@@ -33,21 +33,21 @@
 >
     <li
         *ngFor="let item of searches"
-        class="menu-item-inner"
+        [ngClass]="{'--active':currentActivePinnedPageChild === item.ID}"
+         class="menu-item-inner"         
         (click)="onFilter1('Dashboard', item)"
     >
         {{item.Name}}
     </li>
 </ul>
-
-    <li [ngClass]="{'--active':activePage === 'new-companies'}">       
+    
+    <li [ngClass]="{'--active':currentActivePage === 'devicesCompanies'}" (click)="toggleTypeCompanies = !toggleTypeCompanies;pagesActive('devicesCompanies')">    
             <span                
             >
                 Companies
             </span>        
         <div
-            class="qt-ml-auto qt-sz-20"
-            (click)="toggleTypeCompanies = !toggleTypeCompanies"            
+            class="qt-ml-auto qt-sz-20"            
         >
             <i
                 class="icn-sm report-caret-icon"
@@ -59,13 +59,12 @@
         class="devices-categories"  
         *ngIf="toggleTypeCompanies"             
     >
-    <li *ngFor="let items of companyList" (click)="onFilterCompany('Dashboard',items)" >{{items.name}}</li>        
+    <li *ngFor="let items of companyList"[ngClass]="{'--active':currentActiveCompanyPageChild === items.name}" (click)="onFilterCompany('Dashboard',items)" >{{items.name}}</li>        
     </ul>
 
-    <li class="app-left-panel__menu-expand-item-icon">
+    <li [ngClass]="{'--active':currentActivePage === 'devicesReports'}" class="app-left-panel__menu-expand-item-icon" (click)="toggleTypeReport = ! toggleTypeReport;pagesActive('devicesReports')">
         <span>Reports</span>
-        <div
-        (click)="toggleTypeReport = ! toggleTypeReport">
+        <div>
              <i
                     class="icn-sm report-caret-icon"
                     [ngClass]="{'device-caret-icon-rotate':toggleTypeReport}"
@@ -74,19 +73,19 @@
     </li>
 
     <ul class="devices-categories" *ngIf="toggleTypeReport">        
-        <li class="menu-item-inner" (click)="onSearchReport('report-device-summary')">Device Summary Report</li>        
-        <li class="menu-item-inner" (click)="onSearchReport('hardware-summary')">Hardware Summary Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('report-device-processorram')">Device Processor Ram Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('report-device-diskspace')">Device Disk Space Report</li>        
-        <li class="menu-item-inner" (click)="onSearchReport('device-ip-summary')">Device IP Summary Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('device-ip-summary')">Network IP Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('network-detail-report')">Network Detail Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('network-adapter-report')">Network Adapter Report</li>        
-        <li class="menu-item-inner" (click)="onSearchReport('software-summary1')">Software Summary Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('report-device-antivirus')">Device Antivirus Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('applicationbycompany-report')">Application By Company Report</li>        
-        <li class="menu-item-inner" (click)="onSearchReport('report-device-warranty')">Device Warranty Report</li>
-        <li class="menu-item-inner" (click)="onSearchReport('report-device-deploymentwarranty')">Device Deployment Warranty Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceSummary'}" class="menu-item-inner" (click)="onSearchReport('report-device-summary','reportDeviceSummary')">Device Summary Report</li>        
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportHardwareSummary'}" class="menu-item-inner" (click)="onSearchReport('hardware-summary','reportHardwareSummary')">Hardware Summary Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceProcessRam'}" class="menu-item-inner" (click)="onSearchReport('report-device-processorram','reportDeviceProcessRam')">Device Processor Ram Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceDisk'}" class="menu-item-inner" (click)="onSearchReport('report-device-diskspace','reportDeviceDisk')">Device Disk Space Report</li>        
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceIPSummary'}" class="menu-item-inner" (click)="onSearchReport('device-ip-summary','reportDeviceIPSummary')">Device IP Summary Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportNetworkIPSummary'}" class="menu-item-inner" (click)="onSearchReport('network-ip-report','reportNetworkIPSummary')">Network IP Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportNetwrokDetail'}" class="menu-item-inner" (click)="onSearchReport('network-detail-report','reportNetwrokDetail')">Network Detail Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportNetworkAdapter'}" class="menu-item-inner" (click)="onSearchReport('network-adapter-report','reportNetworkAdapter')">Network Adapter Report</li>        
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportSoftwareSummary'}" class="menu-item-inner" (click)="onSearchReport('software-summary','reportSoftwareSummary')">Software Summary Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceAntivirus'}" class="menu-item-inner" (click)="onSearchReport('report-device-antivirus','reportDeviceAntivirus')">Device Antivirus Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportApplicationByCompany'}" class="menu-item-inner" (click)="onSearchReport('applicationbycompany-report','reportApplicationByCompany')">Application By Company Report</li>        
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceWarranty'}" class="menu-item-inner" (click)="onSearchReport('report-device-warranty','reportDeviceWarranty')">Device Warranty Report</li>
+        <li [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceDeploymentWarranty'}" class="menu-item-inner" (click)="onSearchReport('report-device-deploymentwarranty','reportDeviceDeploymentWarranty')">Device Deployment Warranty Report</li>
     </ul>
    
 </ul>

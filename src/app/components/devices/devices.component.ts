@@ -146,7 +146,7 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {          
+  ngOnInit() {             
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -171,7 +171,7 @@ export class DevicesComponent implements OnInit {
     });        
 
     if (!this.searchSubscription) {          
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {                 
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {                               
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
@@ -180,15 +180,14 @@ export class DevicesComponent implements OnInit {
     }
 
     if(!this.searchSubscriptionCompany)
-    {      
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{ 
-        this.selectedTag = [];               
+    {            
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{         
+        this.selectedTag = [];                       
         if(data.name !='undefined' && data.name !=null && data.name !="")
         {
           this.selectedTag.push(data.name);
         }        
-        this.searchTag = this.selectedTag;
-        localStorage.removeItem("currentSearchCompany");
+        this.searchTag = this.selectedTag;        
         this.add(undefined);
       })
     }
@@ -198,11 +197,11 @@ export class DevicesComponent implements OnInit {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {    
+  load(company: any) {        
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
-    if ((!localStorage.getItem("currentSearch")) && (!localStorage.getItem("currentSearchCompany"))) {
+    if ((!localStorage.getItem("currentSearch")) && (!localStorage.getItem("currentSearchCompany"))) {    
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
       req.Criteria = [];
@@ -224,7 +223,7 @@ export class DevicesComponent implements OnInit {
     this.searchSubscription.unsubscribe();
   }
 
-  setPreviewDataDevice() {           
+  setPreviewDataDevice() {             
     let searchData: any = localStorage.getItem("currentSearch");
     if (searchData) {      
       let searchObj = JSON.parse(searchData);              
@@ -244,13 +243,13 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {    
+  searchDeviceTag(data: any) {        
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {        
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -574,7 +573,7 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  add(Tag): void {        
+  add(Tag): void {           
     console.log('add event fired');
     this.tagFilterValue = "";
 
