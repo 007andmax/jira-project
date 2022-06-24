@@ -115,13 +115,13 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
     } else {
-      const url = this.router.serializeUrl(
-        this.router.createUrlTree(
-          [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
-
-      );
-      console.log('url', url);
-      window.open(`#${url}`, '_blank');
+      /* const url = this.router.serializeUrl(
+         this.router.createUrlTree(
+           [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
+ 
+       );*/
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/${this.company.id}/dashboard`;
+      window.open(url, '_blank');
     }
 
   }
