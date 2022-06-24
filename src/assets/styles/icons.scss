@@ -22,10 +22,6 @@
   background: url("/assets/img/user-icn.png");
 }
 
-.icn-help {
-  background: url("/assets/img/icons/help-12.svg");
-}
-
 .icn-device {
   background: url("/assets/img/device-icn.png");
 }
@@ -33,21 +29,9 @@
 .icn-calendar-light {
   background: url("/assets/img/calendar-light.png");
 }
-
 .icn-attach {
   background: url("/assets/img/attachment-blue.svg");
 }
-
-.icn-tags {
-  background: url("/assets/img/icons/tag-ng2.png");
-}
-.icn-delete {
-  background-image: url(/assets/img/icons/icn-remove.png) !important;
-  width: 16px;
-  height: 17px;
-  display: block;
-}
-
 .icn-remove {
   background-image: url("/assets/img/icons/close-16.png");
 }
@@ -187,16 +171,6 @@
     background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
-  }
-  &__drag {
-    background-color: $gray-600;
-    -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
-    mask-image: url("/assets/img/icons/support-page-drag.svg");
-  }
-  &__remove-category {
-    background-color: $gray-700;
-    -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
-    mask-image: url("/assets/img/icons/support-page-remove-category.svg");
   }
   &__category-more {
     background-color: $gray-600;
@@ -553,11 +527,8 @@
   &__product-contract {
     background-image: url("/assets/img/icons/product-contract.svg");
   }
-  &__question-help {
-    background-image: url("/assets/img/icons/question-help.svg");
-  }
-  &__info-question {
-    background-image: url("/assets/img/icons/info-question.svg");
+  &__help {
+    background: url("/assets/img/icons/help-12.svg");
   }
   &__quotes {
     background-image: url("/assets/img/icons/quotes.svg");
@@ -627,9 +598,6 @@
   }
   &__tag-light-gray {
     background-image: url("/assets/img/icons/tag-light-gray.svg");
-  }
-  &__user-light-gray {
-    background-image: url("/assets/img/icons/user-light-gray.svg");
   }
   &__down-arrow {
     background-image: url("/assets/img/icons/down-arrow.svg");

@@ -673,7 +673,7 @@ documents-edit-info {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("./assets/img/icons/tag-ng2.png");
+          background: url("./assets/img/icons/tag.svg");
         }
         input {
           height: 42px;
@@ -767,7 +767,7 @@ documents-edit-info {
   }
   .service-tab-content,
   .product-tab-content {
-    .icn-delete {
+    .icon__remove {
       top: 43px;
       right: -18px;
       cursor: pointer;
@@ -1994,7 +1994,7 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("/assets/img/icons/tag-ng2.png");
+          background: url("/assets/img/icons/tag.svg");
 
           @media (max-width: 767px) {
             top: 11px;
@@ -2449,7 +2449,7 @@ app-quotes-item {
           margin-right: 8px;
         }
         .tab-service {
-          background: url("./assets/img/icons/service-tab-ng2.png");
+          background: url("./assets/img/icons/service.svg");
           background-size: contain;
         }
         &.active-tab {
@@ -2460,7 +2460,7 @@ app-quotes-item {
             background-size: contain;
           }
           .tab-service {
-            background: url("./assets/img/icons/service-tab-active-ng2.png");
+            background: url("./assets/img/icons/service-blue.svg");
             background-size: contain;
           }
         }
@@ -2483,7 +2483,7 @@ app-quotes-item {
         height: 16px;
         left: 28px;
         top: 43px;
-        background: url("./assets/img/icons/tag-ng2.png");
+        background: url("./assets/img/icons/tag.svg");
       }
     }
     .checkbox-wrapper {

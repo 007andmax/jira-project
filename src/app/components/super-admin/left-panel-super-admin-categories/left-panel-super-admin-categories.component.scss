@@ -17,13 +17,13 @@
       margin-left: 14px;
     }
 
-    .icon__drag {
+    .icon__move-light {
         opacity: 0;
         cursor: grab;
     }
     &:hover {
         background-color: $white;
-        .icon__drag {
+        .icon__move-light {
             opacity: 1;
         }
         /deep/.icon__category-more {
