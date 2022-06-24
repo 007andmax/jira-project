@@ -9,18 +9,12 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 export class PermissionCompanyService implements CanActivate {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-        console.log("PermissionCompanyService", 0);
-        if (this.usersStateService.getCurrentUser()) {
-            console.log("PermissionCompanyService", this.getPermissions('VIEW_COMPANIES'));
-            return this.getPermissions('VIEW_COMPANIES');
-        }
+        if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_COMPANIES');
         return new Promise((resolve, reject) => {
             this.usersStateService.getOnGetCurrentuser().subscribe(data => {
                 if (this.getPermissions('VIEW_COMPANIES')) {
-                    console.log("PermissionCompanyService", 1);
                     resolve(true);
                 } else {
-                    console.log("PermissionCompanyService", 2);
                     resolve(false);
                 }
             })
