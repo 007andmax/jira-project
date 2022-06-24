@@ -11,7 +11,7 @@ export class PermissionTechUserService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     console.log("PermissionTechUserService", 0);
     if (this.usersStateService.getCurrentUser()) {
-      console.log("PermissionTechUserService", this.usersStateService.getCurrentUser());
+      console.log("PermissionTechUserService", this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN");
       return this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN";
     }
     return new Promise((resolve, reject) => {
