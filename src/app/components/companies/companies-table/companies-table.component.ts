@@ -120,6 +120,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
           [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
 
       );
+      console.log('url', url);
       window.open(`#${url}`, '_blank');
     }
 
