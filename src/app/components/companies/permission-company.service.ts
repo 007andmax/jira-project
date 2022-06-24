@@ -10,7 +10,10 @@ export class PermissionCompanyService implements CanActivate {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         console.log("PermissionCompanyService", 0);
-        if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_COMPANIES');
+        if (this.usersStateService.getCurrentUser()) {
+            console.log("PermissionCompanyService", -1);
+            return this.getPermissions('VIEW_COMPANIES');
+        }
         return new Promise((resolve, reject) => {
             this.usersStateService.getOnGetCurrentuser().subscribe(data => {
                 if (this.getPermissions('VIEW_COMPANIES')) {
