@@ -126,7 +126,7 @@ const routes: Routes = [
   {
     path: ':company/company/:id/dashboard',
     loadChildren: './components/company-dashboard/company-dashboard.module#CompanyDashboardModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/quotes',
