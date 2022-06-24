@@ -29,14 +29,14 @@
                 placeholder="Search By Associated Companies"
                 #userInput
                 class="pointer"
+                [formControl]="tagCtrl"
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 [disabled]="!getPermissions('EDIT_COMPANIES')"
             >
-            <!-- [formControl]="tagCtrl"
-                 (keyup)="onKeyUp($event)" -->
+            <!-- (keyup)="onKeyUp($event)" -->
         </mat-chip-list>
     </mat-form-field>
     <div

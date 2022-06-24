@@ -190,12 +190,13 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN") {
+      console.log("state", this.state);
+      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '') {
         console.log("onCurrentCompany", 1);
-        /* this.router.navigate(
-           [`${data.name.replaceAll(' ', '')}/tickets/`]);*/
+        this.router.navigate(
+          [`${data.name.replaceAll(' ', '')}/tickets/`]);
       }
-      if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN") this.router.navigate(
+      if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN" && this.state == '') this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/support-page/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {
