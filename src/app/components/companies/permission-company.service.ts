@@ -11,7 +11,7 @@ export class PermissionCompanyService implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         console.log("PermissionCompanyService", 0);
         if (this.usersStateService.getCurrentUser()) {
-            console.log("PermissionCompanyService", -1);
+            console.log("PermissionCompanyService", this.getPermissions('VIEW_COMPANIES'));
             return this.getPermissions('VIEW_COMPANIES');
         }
         return new Promise((resolve, reject) => {
