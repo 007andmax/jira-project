@@ -32,7 +32,6 @@ export class GoogleAuthenticatorComponent implements OnInit {
 
   ngOnInit() {
     this.settingService.getQRCode(this.usersStateService.getCurrentUser().id).subscribe((data: any) => {
-      console.log("data", data);
       this.qrCode = `data:image/png;base64,${data.qrBase64}`;
       this.secretCode = data.secretKey;
     })

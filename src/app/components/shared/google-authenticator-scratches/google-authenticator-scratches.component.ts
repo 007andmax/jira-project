@@ -19,13 +19,11 @@ export class GoogleAuthenticatorScratchesComponent implements OnInit {
 
   ngOnInit() {
     this.settingService.getScratches().subscribe((data: any) => {
-      console.log("data", data);
       this.scratchCodes = data.scratchCodes;
     })
   }
   getNewCodes() {
     this.settingService.getNewScratches().subscribe((data: any) => {
-      console.log("data", data);
       this.scratchCodes = data.scratchCodes;
     })
   }
