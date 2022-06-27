@@ -5,16 +5,17 @@ export class InvoiceLock {
     invoiceDataDto: InvoiceDto;
     lockId: string;
     lockedTickets: Array<string> = [];
-    includeAccountReceivableReportAsAttachment: boolean = false;
-    enableAccountReceivableReportAsAttachment: boolean;
+    includeAccountReceivableReportAsAttachmentSetting: boolean = false;
+    allowToGenerateAccountReceivableReport: boolean;
     includeInvoiceAsAttachmentSetting: boolean;
     constructor(data) {
         this.alreadyLockedTickets = data.alreadyLockedTickets;
         this.invoiceDataDto = data.invoiceDataDto;
         this.lockId = data.lockId;
         this.lockedTickets = data.lockedTickets;
-        this.enableAccountReceivableReportAsAttachment = data.includeAccountReceivableReportAsAttachment;
+        this.allowToGenerateAccountReceivableReport = data.allowToGenerateAccountReceivableReport;
         this.includeInvoiceAsAttachmentSetting = data.includeInvoiceAsAttachmentSetting;
+        this.includeAccountReceivableReportAsAttachmentSetting = data.includeAccountReceivableReportAsAttachmentSetting;
     }
     public setInvoiceDataDto(data) {
         this.invoiceDataDto = data;
@@ -25,7 +26,7 @@ export class InvoiceLock {
             billTo: this.invoiceDataDto.billTo[0].id,
             shipTo: this.invoiceDataDto.shipTo[0].id,
             sendNotification: sendNotification,
-            includeAccountReceivableReportAsAttachment: this.includeAccountReceivableReportAsAttachment,
+            includeAccountReceivableReportAsAttachmentSetting: this.includeAccountReceivableReportAsAttachmentSetting,
             includeInvoiceAsAttachment: this.includeInvoiceAsAttachmentSetting
         }
     }
