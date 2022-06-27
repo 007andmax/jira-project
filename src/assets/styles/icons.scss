@@ -17,15 +17,6 @@
   height: 16px;
   display: block;
 }
-
-.icn-user {
-  background: url("/assets/img/user-icn.png");
-}
-
-.icn-device {
-  background: url("/assets/img/device-icn.png");
-}
-
 .icn-calendar-light {
   background: url("/assets/img/calendar-light.png");
 }
@@ -34,9 +25,6 @@
 }
 .icn-remove {
   background-image: url("/assets/img/icons/close-16.png");
-}
-.icn-report-caret {
-  background-image: url("/assets/img/icons/report-caret.png");
 }
 .export-ng2 {
   background: url("/assets/img/icons/export-ng2.png");
@@ -287,9 +275,6 @@
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
   }
-  &__close {
-    background-image: url("/assets/img/icons/tag-close.svg");
-  }
   &__close-white {
     background-image: url("/assets/img/icons/close-white.svg");
   }
@@ -412,9 +397,6 @@
   &__add-grey {
     background-image: url("/assets/img/icons/add-grey.svg");
   }
-  &__add-task {
-    background-image: url("/assets/img/icons/add-task.svg");
-  }
   &__calander {
     background-image: url("/assets/img/icons/calander.svg");
   }
@@ -462,9 +444,6 @@
   }
   &__email {
     background-image: url("/assets/img/icons/email.svg");
-  }
-  &__check {
-    background-image: url("/assets/img/icons/check.png");
   }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
@@ -684,16 +663,13 @@
     background-image: url("/assets/img/icons/phone-gray.svg");
   }
   &__upload-avtar {
-    background-image: url("/assets/img/icons/upload-avtar.svg");
+    background-image: url("/assets/img/upload-photo.svg");
   }
   &__dropdown-down {
     background-image: url("/assets/img/icons/dropdown-down.svg");
   }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");
-  }
-  &__add-white {
-    background-image: url("/assets/img/icons/add-white.svg");
   }
   &__close-round {
     background-image: url("/assets/img/icons/close-round.svg");

@@ -315,7 +315,7 @@
             color: $primary-2;
             .report-caret-icon {
               transform: rotate(0);
-              background: url("/assets/img/report-caret.png");
+              background: url("/assets/img/icons/down-arrow.svg") no-repeat center / cover;
             }
           }
           &:hover {
