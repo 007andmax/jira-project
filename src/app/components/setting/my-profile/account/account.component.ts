@@ -1,27 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GoogleAuthenticatorComponent } from 'src/app/components/shared/google-authenticator/google-authenticator.component';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { Subscription } from 'rxjs';
+import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
   authenticationTypesType = 'BASIC';
   oldPwdCorrect = true;
   public passwordForm: FormGroup;
   show = false;
+  sub: Subscription = new Subscription();
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private elRef: ElementRef,
+    private usersStateService: UsersStateService,
   ) { }
+
 
   ngOnInit() {
     /**
@@ -58,14 +68,32 @@ export class AccountComponent implements OnInit {
       )
       .subscribe();
   }
+  showScratchCodes() {
+    const modalRef = this.modalService.open(GoogleAuthenticatorScratchesComponent, { windowClass: 'quote-send-modal' });
 
+  }
   // selected auth type
   onAuthTypeChange(type: string) {
+    if (type === "GOOGLE_SECURE") {
+      const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal' });
+      let onReset = modalRef.componentInstance.onReset.subscribe(data => {
+        console.log("onReset", this.authenticationTypesType);
+        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+      })
+      let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
+        console.log("onReset", this.authenticationTypesType);
+        this.authenticationTypesType = type;
+        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+      })
+      this.sub.add(onSetQrCode);
+      return;
+    }
     this.settingService
       .twoFactorAuth(type)
       .pipe(
         map(res => {
-          this.toastr.success('Auth Type Changed Successfully');
+          this.authenticationTypesType = type;
+          this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
         })
       )
       .subscribe();
@@ -145,5 +173,8 @@ export class AccountComponent implements OnInit {
           }
         }
       );
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -542,6 +542,8 @@ import { PaymentsReportComponent } from './components/reports/reports/payments-r
 import { PreviewPhoneMaskComponent } from './components/shared/preview-phone-mask/preview-phone-mask.component';
 import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
 import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
+import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
+import { GoogleAuthenticatorScratchesComponent } from './components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
 
 
 declare var $: any;
@@ -1023,7 +1025,9 @@ declare var $: any;
     PaymentsReportComponent,
     PreviewPhoneMaskComponent,
     DocumentsEditCategoryComponent,
-    DocumentsEditCategoryItemComponent
+    DocumentsEditCategoryItemComponent,
+    GoogleAuthenticatorComponent,
+    GoogleAuthenticatorScratchesComponent
   ],
   imports: [
     BrowserModule,
@@ -1083,6 +1087,8 @@ declare var $: any;
     SupportPageAddSubCategoryComponent,
     SupportPageEditCategoryComponent,
     InventoryCheckUseComponent,
+    GoogleAuthenticatorComponent,
+    GoogleAuthenticatorScratchesComponent
     // RecurringTicketsComponent
   ],
   exports: [
