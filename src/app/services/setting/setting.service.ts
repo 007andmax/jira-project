@@ -30,9 +30,22 @@ export class SettingService {
     );
   }
 
+  public getScratches() {
+    return this.http.get(`${this.apiUrl}google/code/scratches`);
+  }
+  public getNewScratches() {
+    return this.http.post(`${this.apiUrl}google/code/scratches`, {});
+  }
+
   public getUserProfile() {
     return this.http.get(`${this.apiUrl}settings/userProfile/`);
   }
+
+  public setAuthCode(user_id, code_value_from_authenticator) {
+    return this.http.get(`${this.apiUrl}google/code/confirm?userId=${user_id}&code=${code_value_from_authenticator}`)
+  }
+
+
   public checkTestServer(data) {
     return this.http.post(`${this.apiUrl}settings/companyProfile/verifySMTPSettings`, data).pipe(
       tap((res: any) => {
@@ -45,6 +58,9 @@ export class SettingService {
 
   public updateAvatar(id: string, image: any) {
     return this.http.post(`${this.apiUrl}users/${id}/avatar`, image);
+  }
+  public getQRCode(user_id) {
+    return this.http.get(`${this.apiUrl}google/code/generate?userId=${user_id}`);
   }
 
   public updateProfile(profile: any) {
@@ -75,7 +91,12 @@ export class SettingService {
   }
 
   public twoFactorAuth(type: string) {
-    return this.http.post(`${this.apiUrl}users/twoFactorAuth?type=${type}`, {});
+    return this.http.post(`${this.apiUrl}users/twoFactorAuth?type=${type}`, {}).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Authentication type has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   public getActivityHistory() {

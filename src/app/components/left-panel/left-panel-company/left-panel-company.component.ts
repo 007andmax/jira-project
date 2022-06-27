@@ -38,9 +38,11 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.companyId = this.companiesStateService.getCompanyRoutingId();
     if (this.companyId != this.companiesStateService.getCompanyIdForassignedDocumentCategory()) this.companiesStateService.getCategoriesDocuments(this.companyId);
-    this.companiesStateService.onGetAssignedDocumentCategories.subscribe(data => {
+    if (this.companyId === this.companiesStateService.getCompanyIdForassignedDocumentCategory()) this.assignedDocumentCategories = this.companiesStateService.getAssignedDocumentCategories();
+    let onGetAssignedDocumentCategories = this.companiesStateService.onGetAssignedDocumentCategories.subscribe(data => {
       this.assignedDocumentCategories = data;
     })
+    this.sub.add(onGetAssignedDocumentCategories);
     this.companiesStateService.onChangeSelectedCompanyId.subscribe(data => {
       this.companyId = data;
     })

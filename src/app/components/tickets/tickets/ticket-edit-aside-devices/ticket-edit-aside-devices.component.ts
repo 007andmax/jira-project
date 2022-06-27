@@ -19,7 +19,6 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   devices = [];
   reqDevices = [];
   companyId: string = '';
-  showRemoteAccess: boolean = false;
   realSessionId: string;
   lastCompanyId: string;
   isOpenDropDown: boolean = false;

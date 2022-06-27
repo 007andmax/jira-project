@@ -9,6 +9,7 @@
             </div>
             <div class="qt-page-list__header-title-line--rigth">
                 <button
+                    *ngIf="getPermissions('CREATE_INVOICE')"
                     class="qt-btn --outline-blue qt-mr-8 btn-invoice-all"
                     [disabled]="!isExistSelected()"
                     appDisabledBtn
@@ -34,7 +35,10 @@
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
-                        <th class="billable-item-table__check">
+                        <th
+                            class="billable-item-table__check"
+                            *ngIf="getPermissions('CREATE_INVOICE')"
+                        >
                             <div class="d-f">
                                 <label class="qt-checkbox">
                                     <input
@@ -73,7 +77,10 @@
                             Billable Amount
                             <span class="qt-table-modern__sorting"></span>
                         </th>
-                        <th class="billable-table__menu"></th>
+                        <th
+                            class="billable-table__menu"
+                            *ngIf="getPermissions('CREATE_INVOICE')"
+                        ></th>
                     </tr>
                 </thead>
             </table>
