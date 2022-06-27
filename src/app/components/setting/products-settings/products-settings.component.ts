@@ -63,6 +63,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   public getCategories(data) {
     this.categoriesProducts = JSON.parse(JSON.stringify(data)).map(item => new CategoryProductSettings(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    console.log("this.categoriesProducts", this.categoriesProducts);
   }
   getSelectedCount() {
     return this.inventoryStateService.getListCategoriesForRemove().length;

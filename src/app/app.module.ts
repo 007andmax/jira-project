@@ -165,7 +165,9 @@ declare var $: any;
     // LeftPanelSuperAdminCategoriesActionsComponent,
     // SupportPageAddSubCategoryComponent,
     HelpCenterInfoAsideComponent,
-    InventoryCheckUseComponent
+    InventoryCheckUseComponent,
+    GoogleAuthenticatorComponent,
+    GoogleAuthenticatorScratchesComponent
   ],
   imports: [
     BrowserModule,
