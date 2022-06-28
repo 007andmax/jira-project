@@ -95,6 +95,7 @@ export class TerminalComponent implements OnInit {
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   asset: any = undefined;
   kafkaMessage: any;
+  htmldata: string = '';
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
@@ -171,6 +172,7 @@ export class TerminalComponent implements OnInit {
           let arr = item.Value.split(/\r*\n/)
           let arr1 = this.splitCommand.concat(arr);
           this.splitCommand = arr1;
+          this.htmldata = `<hr style="border:1px dotted white;"/>`;            
           this.cd.detectChanges();
         }
       }
@@ -187,6 +189,7 @@ export class TerminalComponent implements OnInit {
             let arr = item.Value.split(/\r*\n/)
             let arr1 = this.splitCommand.concat(arr);
             this.splitCommand = arr1;
+            this.htmldata = `<hr style="border:1px dotted white;"/>`;            
             this.cd.detectChanges();
           }
         }
