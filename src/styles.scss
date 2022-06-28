@@ -248,11 +248,6 @@ html {
         height: 36px;
         background: $white;
       }
-      .report-caret-icon-white {
-        position: absolute;
-        top: calc(50% - 8.5px);
-        left: calc(50% - 7px);
-      }
     }
   }
 }
@@ -2336,9 +2331,6 @@ app-quotes-item {
     }
   }
   &__list--item {
-    .mobile-phone-icn {
-      margin-right: 5px;
-    }
     [class*="col-md-"] {
       min-height: 40px;
       display: flex;
@@ -2743,7 +2735,7 @@ app-quotes-item {
     &:after {
       position: absolute;
       content: "";
-      background: url("./assets/img/icons/help.png");
+      background: url("./assets/img/icons/help-12.svg");
       height: 16px;
       width: 16px;
       right: -20px;

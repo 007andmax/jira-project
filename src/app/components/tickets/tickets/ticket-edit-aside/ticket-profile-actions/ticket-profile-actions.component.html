@@ -85,7 +85,7 @@
                     *ngIf="currentUser && currentUser.isOwner"
                     (click)="moveIntoSpam()"
                 >
-                    <i class="icn-16 icon__disable"></i>
+                    <i class="icn-16 icon__terminate"></i>
                     Mark as Spam
                 </a>
                 <a
@@ -95,7 +95,7 @@
                     *ngIf="currentUser && !currentUser.isOwner"
                     (click)="moveIntoSpam()"
                 >
-                    <i class="icn-16 icon__disable"></i>
+                    <i class="icn-16 icon__terminate"></i>
                     Report as Spam
                 </a>
             </li>

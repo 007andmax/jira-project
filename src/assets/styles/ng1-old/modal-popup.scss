@@ -223,17 +223,6 @@
   border: none;
   background-color: transparent;
 }
-.new-companies-content__modal .google-plus:before  {
-  position: absolute;
-  content: '';
-  background-image: url("/assets/img/icons/google-plus.png");
-  width: 20px;
-  height: 13px;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
 .tab-btns {
   font-size: 0;
 }
@@ -324,10 +313,6 @@
 }
 .location {
   position: relative;
-}
-.new-companies-content__modal .google-plus:before {
-  right: 25px;
-  top: 45px;
 }
 .company-content .avatar-create {
   margin: 0;

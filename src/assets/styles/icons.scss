@@ -27,36 +27,20 @@
   background-image: url("/assets/img/icons/close-16.png");
 }
 .export-ng2 {
-  background: url("/assets/img/icons/export-ng2.png");
+  background: url("/assets/img/icons/export-blue.svg");
 }
-
-.import-ng2 {
-  background: url("/assets/img/icons/import-ng2.png");
-}
-
 .restore-ng2 {
   background: url("/assets/img/icons/restore-company.png");
 }
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
 }
-
-.history-ng2 {
-  background: url("/assets/img/icons/history.svg") no-repeat;
-  background-size: cover;
-}
-
 .no-valid-label {
   background: url("/assets/img/icons/update-label.png") no-repeat;
   display: block;
   width: 44px;
   height: 20px;
 }
-
-.mobile-phone-icn {
-  background: url("/assets/img/icons/mobile-phone.png");
-}
-
 .add-user {
   background: url("/assets/img/icons/add-users.svg");
 }
@@ -308,8 +292,8 @@
   &__manage {
     background-image: url("/assets/img/icons/manage.svg");
   }
-  &__create-list {
-    background-image: url("/assets/img/icons/create-list.svg");
+  &__create-document {
+    background-image: url("/assets/img/icons/create-document.svg");
   }
   &__upload-company-logo {
     background-image: url("/assets/img/icons/upload-company-logo.svg");
@@ -339,9 +323,6 @@
   }
   &__windows {
     background-image: url("/assets/img/icons/windows.png");
-  }
-  &__linux {
-    background-image: url("/assets/img/icons/linux.png");
   }
   &__move {
     background-image: url("/assets/img/icons/move.svg");
@@ -665,9 +646,6 @@
   &__upload-avtar {
     background-image: url("/assets/img/upload-photo.svg");
   }
-  &__dropdown-down {
-    background-image: url("/assets/img/icons/dropdown-down.svg");
-  }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");
   }
@@ -694,9 +672,6 @@
   }
   &__unlink {
     background-image: url("/assets/img/icons/unlink.svg");
-  }
-  &__disable {
-    background-image: url("/assets/img/icons/disable.svg");
   }
   &__clone-document {
     background-image: url("/assets/img/icons/clone-document.svg");
