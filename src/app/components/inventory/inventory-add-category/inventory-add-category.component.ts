@@ -39,7 +39,7 @@ export class InventoryAddCategoryComponent implements OnInit {
   };
   public save() {
     if (this.name.length === 0) return;
-    this.productService.addCategory(this.name).subscribe(data => {
+    this.productService.addCategory(this.name, null).subscribe(data => {
       this.close();
     })
 

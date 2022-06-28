@@ -58,6 +58,13 @@
                                             Count
                                             <div class="qt-table-modern__sorting"></div>
                                         </th>
+                                        <th
+                                            class="gl-number pointer"
+                                            (click)="onFilter('gl-number')"
+                                        >
+                                            GL Number
+                                            <div class="qt-table-modern__sorting"></div>
+                                        </th>
                                         <th class="action">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -116,6 +123,25 @@
                                             class="rate"
                                             [textContent]="item.productsAmount"
                                         ></td>
+                                        <td class="gl-number">
+                                            <app-drop-down
+                                                [class]="['--small-padding','gl-number-product-settings']"
+                                                [list]="glNumbers"
+                                                [placeholder]="'Select GL'"
+                                                [container]="'body'"
+                                                [change]="false"
+                                                [editItem]="item.glNumber"
+                                                [add]="true"
+                                                [field]="'glNumber'"
+                                                uiType="dark"
+                                                heightInput="32px"
+                                                dropdownWidth="392px"
+                                                [reducerItem]="glDropDownItemName"
+                                                (onAddItem)="onAddGlNumber($event)"
+                                                (onSelectedItem)="onSelectGlNumbers(item,$event)"
+                                            >
+                                            </app-drop-down>
+                                        </td>
                                         <td class="action">
                                             <a
                                                 href="javascript:;"

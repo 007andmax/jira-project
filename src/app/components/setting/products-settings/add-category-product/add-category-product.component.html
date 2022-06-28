@@ -28,5 +28,23 @@
         >
     </td>
     <td class="rate"></td>
+    <td class="gl-number">
+        <app-drop-down
+            [class]="['--small-padding','gl-number-product-settings']"
+            [list]="glNumbers"
+            [placeholder]="'Select GL'"
+            [container]="'body'"
+            [change]="false"
+            [add]="true"
+            [field]="'glNumber'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            [reducerItem]="glDropDownItemName"
+            (onAddItem)="onAddGlNumber($event)"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
+    </td>
     <td class="action"></td>
 </tr>

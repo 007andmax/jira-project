@@ -10,6 +10,7 @@ import { GlNumberChange } from 'src/class/gl-number/gl-number-change';
 export class GlNumberStateService {
   glNumbers: Array<GlNumber> = [];
   onChangeGlNumbers: EventEmitter<GlNumberChange> = new EventEmitter();
+  onRefreshGlNumbersCheck: EventEmitter<any> = new EventEmitter();
   onGetGLNumbers: EventEmitter<any> = new EventEmitter();
   listGlNumbersForRemove: Array<GlNumber> = [];
   constructor(private glNumberService: GlNumberService,
@@ -46,6 +47,9 @@ export class GlNumberStateService {
         this.onInitGetGLNumbers(this.glNumbers);
       }
     })
+  }
+  public refreshGlNumbersCheck() {
+    this.onRefreshGlNumbersCheck.emit(null);
   }
   public setListGlNumbersForRemove(data) {
     this.listGlNumbersForRemove = data;

@@ -33,3 +33,15 @@ tr {
         padding: 7px 15px 7px 0;
     }
 }
+.gl-number {
+    width: 150px;
+    padding: 0px !important;
+    vertical-align: middle;
+}
+
+/deep/ .gl-number-product-settings {
+    input {
+        border: solid 1px #c5cdd5 !important;
+        background-color: #ffffff !important;
+    }
+}

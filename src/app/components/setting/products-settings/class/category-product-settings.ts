@@ -1,5 +1,6 @@
 import { CategoryProduct } from "src/app/interfaces/product/category-product";
 import { Product } from "src/app/interfaces/product/product";
+import { GlNumber } from "src/class/gl-number/gl-number";
 
 export class CategoryProductSettings implements CategoryProduct {
     commissionRate: any;
@@ -7,6 +8,7 @@ export class CategoryProductSettings implements CategoryProduct {
     id: string;
     isDefault: boolean;
     name: string;
+    glNumber: GlNumber;
     products: Product[];
     productsAmount: number;
     isInitEdit: boolean = false;

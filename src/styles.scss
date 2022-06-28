@@ -5049,3 +5049,7 @@ add-category-product {
     overflow: auto;
   }
 }
+app-default-services-edit,app-inventory-edit-aside {
+  position: relative;
+  z-index: 999;
+}
