@@ -212,7 +212,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  AssetDetail() {    
+  AssetDetail() {       
     this.operatingSystem = [];
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -220,7 +220,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {         
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {              
       if(!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList=[];
@@ -537,10 +537,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  openAside(type, asset) {    
+  openAside(type, asset) {      
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
+    this.assetData.Caption = this.assetData.OperatingSystem;
     this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == asset.ManufacturerId);
     this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == asset.ModelID);    
     this.getSoftwareDetail(asset);
@@ -556,7 +557,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.tab = "SYSTEM";
   }
 
-  updateAsset() {
+  updateAsset() {    
     this.agentService.overrideAsset(this.assetData).subscribe(
       (resp) => {
       },
@@ -613,7 +614,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
 
-  getNetworkDetail(asset) {
+  getNetworkDetail(asset) {        
     this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
       if (resp.length > 0) {
@@ -713,7 +714,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.add(event.option.viewValue);
   }
 
-  add(Tag): void {
+  add(Tag): void {    
     console.log('add event fired');
     this.tagFilterValue = "";
     this.selectedInput.nativeElement.value = '';
@@ -733,12 +734,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   }
 
-  searchDeviceTag(data: any) {
+  searchDeviceTag(data: any) {    
     this.showPreloader = true;
     if (this.selectedTag.length == 0) {
       this.autosearchDevice = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
       if(!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList=[];

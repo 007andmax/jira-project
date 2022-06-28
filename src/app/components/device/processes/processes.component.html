@@ -58,28 +58,38 @@
                                   </th>
                                   <th
                                       class="cpu"
+                                      (click)="onFilter('cpu')"
                                   >
                                       CPU
+                                      <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                      class="ram"
+                                     (click)="onFilter('ram')"
                                   >
                                     Ram
+                                    <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                   class="memory"
+                                  (click)="onFilter('memory')"
                                >
                                  Memory
+                                 <span class="qt-table-modern__sorting"></span>
                                </th>
                                <th
                                class="disk"
+                               (click)="onFilter('disk')"
                             >
                               Disk
+                              <span class="qt-table-modern__sorting"></span>
                             </th>
                             <th
                             class="network"
+                            (click)="onFilter('network')"
                          >
                            Network
+                           <span class="qt-table-modern__sorting"></span>
                          </th>
                          <th
                          class="action"
@@ -100,7 +110,7 @@
                                   <td class="disk">{{process.DiskMB}}</td>
                                   <td class="network">{{process.Network}}</td>
                                   <td class="action">
-                                    <img src="assets/img/icons/stop.svg" (click)="stopProcesses(process)">
+                                    <img src="assets/img/icons/stop.svg" (click)="stopProcesses(process)">                                    
                                   </td>
                               </tr>
                           </tbody>

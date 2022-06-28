@@ -485,7 +485,7 @@
             #asideMenuItem
             class="tooltip"
         >
-            {{assetData.Title}}
+            {{assetData.Title || assetData.Name}}
         </ng-template>
         <div
             placement="left"
@@ -517,7 +517,7 @@
       ></div>
       <div
       class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title"
-      [textContent]="assetData.Title"
+      [textContent]="assetData.Title || assetData.Name"
     >
     </div>
         </div>
@@ -621,7 +621,7 @@
                         <input
                         type="text"
                         class="device-table__input-name"
-                        [(ngModel)]="assetData.Title"
+                        [(ngModel)]="assetData.Title || assetData.Name"
                         (blur)="updateAsset()"
                         >
                     </div>

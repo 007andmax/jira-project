@@ -127,7 +127,7 @@ export class DevicesComponent implements OnInit {
   linkDevicesFilterValue: string = "";  
   linkDevicesTag=[];
   selectManufactureNamessidebar : any;
-  selectModelNameSidebar : any;
+  selectModelNameSidebar : any;  
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -243,7 +243,7 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {        
+  searchDeviceTag(data: any) {           
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
@@ -548,13 +548,18 @@ export class DevicesComponent implements OnInit {
     }, 500);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    console.log('selected fired');
-    this.selectedTag.push(event.option.viewValue);
-    this.searchTag.push(event.option.viewValue);
+  selected(event: MatAutocompleteSelectedEvent): void {       
+    let data = this.selectedTag.find(x => x == event.option.viewValue);    
+    if(!data)
+    {
+      console.log('selected fired');
+      this.selectedTag.push(event.option.viewValue);
+      this.searchTag.push(event.option.viewValue);
+      this.selectedInput.nativeElement.value = '';
+      this.selectedCtrl.setValue(null);
+      this.add(event.option.viewValue);    
+    }    
     this.selectedInput.nativeElement.value = '';
-    this.selectedCtrl.setValue(null);
-    this.add(event.option.viewValue);
   }
 
   remove(index: number) {
@@ -573,7 +578,7 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  add(Tag): void {           
+  add(Tag): void {                  
     console.log('add event fired');
     this.tagFilterValue = "";
 
@@ -1062,10 +1067,11 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  openAside(type, asset) {
+  openAside(type, asset) {    
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
+    this.assetData.Caption = this.assetData.OperatingSystem;
     this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == asset.ManufacturerId);
     this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == asset.ModelID);    
     this.getSoftwareDetail(asset);
@@ -1085,7 +1091,7 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  getNetworkDetail(asset) {
+  getNetworkDetail(asset) {    
     this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
       if (resp.length > 0) {
