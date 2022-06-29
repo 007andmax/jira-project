@@ -7,7 +7,7 @@ import { ForCreateService } from '../class/for-create-service';
 import { ServiceRecurringTicket } from '../interfaces/service-recurring-ticket';
 import { TagsStateService } from 'src/app/components/shared/tags/services/tags-state.service';
 import { IntervalStateService } from 'src/app/components/shared/interval/services/interval-state.service';
-import { TehUsersSateService } from 'src/app/components/shared/teh-users/services/teh-users-sate.service';
+import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceErrors } from '../class/service-errors';
@@ -21,7 +21,7 @@ export class RecurringTicketsService {
   clone: boolean = false;
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
-    private tehState: TehUsersSateService,
+    private tehState: TechUsersStateService,
     private devicesState: DevicesRecurringTicketsStateService,
     private stateDatePicker: DatePickerStateService
   ) { }

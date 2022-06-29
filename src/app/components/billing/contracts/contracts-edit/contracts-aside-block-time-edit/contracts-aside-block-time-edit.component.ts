@@ -12,7 +12,7 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsBlockTimeValidate } from '../../contracts-aside/class/contracts-block-time-validate';
 import * as moment from "moment";
-import { TehUsersSateService } from 'src/app/components/shared/teh-users/services/teh-users-sate.service';
+import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { СontractsBlockTimeShare } from '../../contracts-aside/class/contracts-block-time-share';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
@@ -53,7 +53,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     private contractsService: ContractsService,
     private taxesStateService: TaxesStateService,
     private usersStateService: UsersStateService,
-    private tehState: TehUsersSateService,
+    private tehState: TechUsersStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     private contractsStateService: ContractsStateService,

@@ -38,7 +38,7 @@
                 [type]="'ICON'"
                 (onChange)="onChangeDatePicker($event)"
             ></app-date-picker>
-            <app-teh-users
+            <app-tech-users
                 [isDisabled]="isBlockChange"
                 [type]="'TICEKTS'"
                 [editMode]="true"
@@ -46,7 +46,7 @@
                 [editUsers]="userService"
                 [users]="listTehUsers"
                 (usersChange)="onChangeUser($event)"
-            ></app-teh-users>
+            ></app-tech-users>
         </div>
         <span
             class="tag__modern ticket-updates__service-tag-completed"

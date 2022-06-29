@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
-import { TehUsersSateService } from './services/teh-users-sate.service';
+import { TechUsersStateService } from './services/tech-users-state.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
 import { TechUserItem } from './class/tech-user-item';
@@ -7,12 +7,12 @@ import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/app/const
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
-  selector: 'app-teh-users',
-  templateUrl: './teh-users.component.html',
-  styleUrls: ['./teh-users.component.scss'],
+  selector: 'app-tech-users',
+  templateUrl: './tech-users.component.html',
+  styleUrls: ['./tech-users.component.scss'],
   providers: [TicketsListService]
 })
-export class TehUsersComponent implements OnInit, OnDestroy {
+export class TechUsersComponent implements OnInit, OnDestroy {
   @Input('users')
   set setUsers(value) {
     this.users = JSON.parse(JSON.stringify(value));
@@ -33,10 +33,10 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   /**
   * Creates an instance of the TehUsersComponent with the injected services
   * @param {tehService} TehUsersService Service to work with teh users
-  * @param {TehUsersSateService} tehState to work with teh users state
+  * @param {TechUsersStateService} tehState to work with teh users state
   */
   constructor(
-    private tehState: TehUsersSateService,
+    private tehState: TechUsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService
   ) { }

@@ -21,11 +21,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 declare var $;
 
 @Component({
-  selector: 'app-tech-users',
+  selector: 'app-tech-users-settings',
   templateUrl: './tech-users.component.html',
   styleUrls: ['./tech-users.component.scss']
 })
-export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
+export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;
   submitted = false;
   loading = false;
@@ -113,7 +113,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.getUsers();
     this.getRoleNames();
-    this.settingStateService.setComponentName('TechUsersComponent');
+    this.settingStateService.setComponentName('TechUsersSettingsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {

@@ -14,7 +14,7 @@ import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 
 @Component({

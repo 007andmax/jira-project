@@ -8,7 +8,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { TehUsersSateService } from 'src/app/components/shared/teh-users/services/teh-users-sate.service';
+import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
@@ -60,7 +60,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
     private defaultServicesService: DefaultServicesService,
-    private tehState: TehUsersSateService,
+    private tehState: TechUsersStateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
     private contractsListService: ContractsListService,

@@ -52,7 +52,7 @@ import { DevicesRecurringTicketsComponent } from './components/tickets/recurring
 import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
 import { DurationComponent } from './components/shared/duration/duration.component';
-import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
+import { TechUsersComponent } from './components/shared/tech-users/tech-users.component';
 import { numberDirective } from './directives/number.directive';
 import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
@@ -126,7 +126,7 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
+import { TechUsersSettingsComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
@@ -585,7 +585,7 @@ declare var $: any;
     TagsComponent,
     IntervalComponent,
     DurationComponent,
-    TehUsersComponent,
+    TechUsersComponent,
     numberDirective,
     TextAreaDirective,
     DatePickerComponent,
@@ -629,7 +629,7 @@ declare var $: any;
     SettingComponent,
     CompanyProfileComponent,
     ManageTagsComponent,
-    TechUsersComponent,
+    TechUsersSettingsComponent,
     EmailSettingComponent,
     TaxesSettingsComponent,
     PermissionManageComponent,

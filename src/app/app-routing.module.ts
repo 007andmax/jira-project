@@ -7,7 +7,7 @@ import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
-import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
+import { TechUsersSettingsComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
@@ -195,7 +195,7 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/techUsers',
-    component: TechUsersComponent,
+    component: TechUsersSettingsComponent,
     pathMatch: 'full',
     canActivate: [PermissionsTechUsersService, PermissionTechUserService]
   },
