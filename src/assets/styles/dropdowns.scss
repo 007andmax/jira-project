@@ -422,32 +422,9 @@
     }
     .duration-container-content {
       display: flex;
-      .arrow-top,
-      .arrow-bottom {
-        display: none;
-      }
       .duration-container-values {
         position: relative;
         width: 50%;
-        &.has-arrows {
-          .arrow-top,
-          .arrow-bottom {
-            display: block;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 16px;
-            width: 16px;
-          }
-          .arrow-top {
-            top: 7px;
-            background: url("/assets/img/icons/scroll-up.png");
-          }
-          .arrow-bottom {
-            bottom: 11px;
-            background: url("/assets/img/icons/scroll-down.png");
-          }
-        }
       }
       .duration-container-values-hours,
       .duration-container-values-minutes {

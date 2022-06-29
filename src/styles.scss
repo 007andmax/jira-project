@@ -901,20 +901,6 @@ documents-edit-info {
       }
     }
   }
-  &.de-archive {
-    h3 {
-      &:after {
-        background: url("assets/img/icons/restore-company.png") no-repeat;
-        left: -53px;
-        top: 14px;
-        width: 16px;
-        height: 19px;
-      }
-      &:before {
-        background: $background;
-      }
-    }
-  }
 }
 .archive-modal {
   @media (max-width: 767px) {

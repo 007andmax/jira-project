@@ -29,9 +29,6 @@
 .export-ng2 {
   background: url("/assets/img/icons/export-blue.svg");
 }
-.restore-ng2 {
-  background: url("/assets/img/icons/restore-company.png");
-}
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
 }
@@ -120,9 +117,6 @@
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
   }
-  &__preview-edit {
-    background-image: url("/assets/img/icons/preview-edit.svg");
-  }
   &__help-center {
     background-image: url("/assets/img/icons/help-center.svg");
   }
@@ -172,17 +166,11 @@
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
-  &__products-new {
-    background-image: url("/assets/img/icons/products-new.svg");
-  }
   &__service {
     background-image: url("/assets/img/icons/service.svg");
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
-  }
-  &__service-new {
-    background-image: url("/assets/img/icons/service-new.svg");
   }
   &__quick-support {
     background-image: url("/assets/img/icons/quick-support-gray.svg");
@@ -428,9 +416,6 @@
   }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
-  }
-  &__read-on {
-    background-image: url("/assets/img/icons/read-on.svg");
   }
   &__get-paid {
     background-image: url("/assets/img/icons/get-paid.svg");
@@ -761,21 +746,21 @@
   }
 
   &.--high {
-    background-image: url("/assets/img/icons/priority-high.png");
+    background-image: url("/assets/img/icons/high-priority.svg");
 
     @media (max-width: 767px) {
       background: $error;
     }
   }
   &.--medium {
-    background-image: url("/assets/img/icons/priority-medium.png");
+    background-image: url("/assets/img/icons/medium-priority.svg");
 
     @media (max-width: 767px) {
       background: $warning;
     }
   }
   &.--low {
-    background-image: url("/assets/img/icons/priority-low.png");
+    background-image: url("/assets/img/icons/low-priority.svg");
 
     @media (max-width: 767px) {
       background: $success;
