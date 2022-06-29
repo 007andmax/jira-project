@@ -46,6 +46,12 @@ export class GlNumberStateService {
         }
         this.onInitGetGLNumbers(this.glNumbers);
       }
+      if (newChange.action === "GL_NUMBER_DELETED") {
+        let index = this.glNumbers.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.glNumbers.splice(index, 1);
+        this.onInitGetGLNumbers(this.glNumbers);
+      }
+
     })
   }
   public refreshGlNumbersCheck() {

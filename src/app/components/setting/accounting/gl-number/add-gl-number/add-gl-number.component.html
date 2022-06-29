@@ -39,6 +39,7 @@
             class="form-input"
             placeholder="Enter Description"
             [(ngModel)]="addGl.description"
+            (keyup)="onKeyUp($event)"
             maxlength="50"
         >
     </td>

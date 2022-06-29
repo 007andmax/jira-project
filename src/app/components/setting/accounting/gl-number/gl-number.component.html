@@ -66,6 +66,8 @@
                                     placeholder="Enter Description"
                                     [(ngModel)]="gl.description"
                                     (input)="gl.onInitEdit(true)"
+                                    appKeyUpEnter
+                                    (onChange)="onEditGl(gl)"
                                     maxlength="50"
                                 >
                             </td>
