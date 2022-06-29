@@ -4,13 +4,13 @@
         (click)=cancelConfirm()
     ></button>
     <div class="archive-modal__body">
-        <h3>Delete Gl number</h3>
+        <h3>Delete GL number</h3>
         <div
             class="no-exist-agreements"
             *ngIf="!showPreloader && valid"
         >
             <span class="no-exist-agreements__info">
-                Are you sure you want to delete this Gl number?
+                Are you sure you want to delete this GL number?
             </span>
             <div class="info-product">
                 <h3 [textContent]="glNumber.glNumber"></h3>
@@ -23,82 +23,85 @@
             class="exist-agreements"
             *ngIf="!showPreloader && !valid"
         >
-            <p>
-                You can’t delete a Gl number that associate with a product, service or category. Please remove the Gl number from following product, service or category before you delete it.
+            <p class="qt-mb-16">
+                You can’t delete a GL number that associate with a product, service or category. Please remove the GL number from following product, service or category before you delete it.
             </p>
-            <div
-                class="contract-container qt-mt-16"
-                *ngIf="glNumberUse.products.length > 0"
-            >
-                <h3 [textContent]="glNumber.glNumber"></h3>
-                <div class="contract-container-agreements qt-mt-8">
-                    <ng-template
-                        ngFor
-                        let-product
-                        let-i="index"
-                        [ngForOf]="glNumberUse.products"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <div class="contract-item">
-                            <div class="contract-item-info">
-                                <h3 [textContent]="product.description"></h3>
+            <h3 [textContent]="'GL number - ' + glNumber.glNumber"></h3>
+            <div class="list-elements">
+                <div
+                    class="contract-container qt-mt-16"
+                    *ngIf="glNumberUse.products.length > 0"
+                >
+                    <h3>Products</h3>
+                    <div class="contract-container-agreements qt-mt-8">
+                        <ng-template
+                            ngFor
+                            let-product
+                            let-i="index"
+                            [ngForOf]="glNumberUse.products"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <div class="contract-item">
+                                <div class="contract-item-info">
+                                    <h3 [textContent]="product.description"></h3>
+                                </div>
+                                <span
+                                    class="view-contract pointer"
+                                    (click)="showProduct(product)"
+                                >
+                                    View Product
+                                </span>
                             </div>
-                            <span
-                                class="view-contract pointer"
-                                (click)="showProduct(product)"
-                            >
-                                View Product
-                            </span>
-                        </div>
-                    </ng-template>
+                        </ng-template>
+                    </div>
                 </div>
-            </div>
-            <div
-                class="contract-container qt-mt-16"
-                *ngIf="glNumberUse.services.length > 0"
-            >
-                <h3 [textContent]="glNumber.glNumber"></h3>
-                <div class="contract-container-agreements qt-mt-8">
-                    <ng-template
-                        ngFor
-                        let-service
-                        let-i="index"
-                        [ngForOf]="glNumberUse.services"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <div class="contract-item">
-                            <div class="contract-item-info">
-                                <h3 [textContent]="service.name"></h3>
+                <div
+                    class="contract-container qt-mt-16"
+                    *ngIf="glNumberUse.services.length > 0"
+                >
+                    <h3>Services</h3>
+                    <div class="contract-container-agreements qt-mt-8">
+                        <ng-template
+                            ngFor
+                            let-service
+                            let-i="index"
+                            [ngForOf]="glNumberUse.services"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <div class="contract-item">
+                                <div class="contract-item-info">
+                                    <h3 [textContent]="service.name"></h3>
+                                </div>
+                                <span
+                                    class="view-contract pointer"
+                                    (click)="showService(service)"
+                                >
+                                    View Service
+                                </span>
                             </div>
-                            <span
-                                class="view-contract pointer"
-                                (click)="showService(service)"
-                            >
-                                View Service
-                            </span>
-                        </div>
-                    </ng-template>
+                        </ng-template>
+                    </div>
                 </div>
-            </div>
-            <div
-                class="contract-container qt-mt-16"
-                *ngIf="glNumberUse.categories.length > 0"
-            >
-                <h3 [textContent]="glNumber.glNumber"></h3>
-                <div class="contract-container-agreements qt-mt-8">
-                    <ng-template
-                        ngFor
-                        let-category
-                        let-i="index"
-                        [ngForOf]="glNumberUse.categories"
-                        [ngForTrackBy]="trackById"
-                    >
-                        <div class="contract-item">
-                            <div class="contract-item-info">
-                                <h3 [textContent]="category.name"></h3>
+                <div
+                    class="contract-container qt-mt-16"
+                    *ngIf="glNumberUse.categories.length > 0"
+                >
+                    <h3>Categories</h3>
+                    <div class="contract-container-agreements qt-mt-8">
+                        <ng-template
+                            ngFor
+                            let-category
+                            let-i="index"
+                            [ngForOf]="glNumberUse.categories"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <div class="contract-item">
+                                <div class="contract-item-info">
+                                    <h3 [textContent]="category.name"></h3>
+                                </div>
                             </div>
-                        </div>
-                    </ng-template>
+                        </ng-template>
+                    </div>
                 </div>
             </div>
         </div>

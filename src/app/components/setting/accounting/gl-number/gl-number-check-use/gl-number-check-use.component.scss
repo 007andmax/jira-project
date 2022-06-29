@@ -15,12 +15,15 @@
         color: $gray-700;
     }
 }
+.exist-agreements {
+    max-height: calc(100vh - 250px);
+    overflow: auto;
+}
 
 .contract-container {
     border-radius: 8px;
     padding: 16px;
     background-color: $gray-200;
-    max-height: 384px;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -38,8 +41,7 @@
     }
 
     .contract-container-agreements {
-        overflow: auto;
-        max-height: 330px;
+       
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -130,4 +132,9 @@
 
 .archive-modal__footer {
     margin: 24px 0 0 0;
+}
+.loading {
+    top: calc(50% - 25px) !important;
+    left: calc(50% - 25px) !important;
+    right: unset;
 }
