@@ -94,9 +94,11 @@ export class UserFilter {
     }
     public isUserDefaultSubscription(item) {
         if (!this.defaultSubscriptions) return true;
-        return (this.defaultSubscriptions.invoiceSubscription.enabled === item.invoiceSubscription.enabled &&
-            this.defaultSubscriptions.ticketManagerSubscription.enabled === item.ticketManagerSubscription.enabled &&
-            this.defaultSubscriptions.ticketSubscription.enabled === item.ticketSubscription.enabled)
+        let isExist = true;
+        if (this.defaultSubscriptions.invoiceSubscription.enabled && this.defaultSubscriptions.invoiceSubscription.enabled !== item.invoiceSubscription.enabled) isExist = false;
+        if (this.defaultSubscriptions.ticketManagerSubscription.enabled && this.defaultSubscriptions.ticketManagerSubscription.enabled !== item.ticketManagerSubscription.enabled) isExist = false;
+        if (this.defaultSubscriptions.ticketSubscription.enabled && this.defaultSubscriptions.ticketSubscription.enabled !== item.ticketSubscription.enabled) isExist = false
+        return isExist;
     }
     public setClientIndustry(data) {
         this.clientIndustry = data;

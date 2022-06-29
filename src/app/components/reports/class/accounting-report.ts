@@ -14,8 +14,8 @@ export class AccountingReport {
 
     }
     public setData(data) {
-        this.startDate = moment(new Date(data.startDate)).format('ll');;
-        this.endDate = moment(new Date(data.endDate)).format('ll');
+        this.startDate = data.startDate;
+        this.endDate = data.endDate;
         this.companyId = data.companyId;
         this.invoicesTotalSum = data.invoicesTotalSum;
         this.paymentsAmount = data.paymentsAmount;

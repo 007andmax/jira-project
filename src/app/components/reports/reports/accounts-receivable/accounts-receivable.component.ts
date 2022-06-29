@@ -11,6 +11,7 @@ export class AccountsReceivableComponent implements OnInit {
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   headers = [];
   list = [];
+  classes = [];
   selectedClient = null;
   loadingInProgress: boolean = false;
   constructor(private reportsStateService: ReportsStateService, public cd: ChangeDetectorRef,) { }
@@ -33,6 +34,7 @@ export class AccountsReceivableComponent implements OnInit {
     this.headers.push("<3 month");
     this.headers.push("Older");
     this.headers.push("Total");
+    this.classes = ["accounts-receivable__col-company-name", "", "", "", "", "", ""];
     this.list = [];
     this.accountsReceivable.lines.forEach((item, index) => {
       let list = [];

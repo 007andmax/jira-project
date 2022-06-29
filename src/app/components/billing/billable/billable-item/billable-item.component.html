@@ -1,11 +1,34 @@
-<tr (click)="moToBillableTickets()">
+<tr>
+    <td
+        class="billable-item-table__check"
+        *ngIf="getPermissions('CREATE_INVOICE')"
+    >
+        <div class="d-f">
+            <label
+                class="qt-checkbox pointer"
+                [attr.for]="'billable-' + item.id"
+            >
+                <input
+                    [attr.id]="'billable-' + item.id"
+                    [(ngModel)]="item.selected"
+                    (change)="onChangeSelected($event)"
+                    type="checkbox"
+                >
+                <span></span>
+            </label>
+        </div>
+    </td>
     <td
         class="billable-table__company-name --strong"
         [textContent]="item.name"
+        (click)="moToBillableTickets()"
     ></td>
-    <td class="billable-table__tickets">
+    <td
+        class="billable-table__tickets"
+        (click)="moToBillableTickets()"
+    >
         <div
-            class="d-f"
+            class="d-f billable-table__user"
             *ngIf="salesPerson"
         >
             <div
@@ -20,9 +43,38 @@
     <td
         class="billable-table__sales"
         [textContent]="item.countTickets"
+        (click)="moToBillableTickets()"
     ></td>
     <td
         class="billable-table__billable"
         [textContent]="(item.total | currency)"
+        (click)="moToBillableTickets()"
     ></td>
+    <td
+        class="invoce-table__menu"
+        ngbDropdown
+        [container]="'body'"
+        *ngIf="getPermissions('CREATE_INVOICE')"
+    >
+        <div
+            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+        >
+            <ul
+                class="qt-dropdown-menu invoice-items-dropdown"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="onInvoiceAll()"
+                >
+                    <div class="icon__convert-invoice qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Invoice All
+                </li>
+            </ul>
+        </div>
+    </td>
 </tr>

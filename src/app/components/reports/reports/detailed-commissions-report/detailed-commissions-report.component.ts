@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DetailedCommissionsReport } from '../../class/detailed-commissions-report';
+import * as moment from "moment";
 
 @Component({
   selector: 'detailed-commissions-report',
@@ -30,6 +31,9 @@ export class DetailedCommissionsReportComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
   }
   public onRequest(data) {
     this.loadingInProgress = data;

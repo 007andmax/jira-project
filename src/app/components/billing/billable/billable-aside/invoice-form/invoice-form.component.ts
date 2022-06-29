@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { InvoiceLock } from '../../class/invoice-lock';
-import { Company } from 'src/app/interfaces/company/company';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -10,7 +9,6 @@ import { InvoiceFormEditCustomerComponent } from './invoice-form-edit-customer/i
 import { PartialUpdate } from './class/partial-update';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
-import { BillableTaimer } from '../class/billable-taimer';
 import * as moment from "moment";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';

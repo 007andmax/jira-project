@@ -42,7 +42,7 @@ export class PaymentsReportComponent implements OnInit {
     this.onInit = true;
   }
   public getDateForHeader(data) {
-    return moment(new Date(data)).format('DD MMM YYYY');
+    return moment(data).format('DD MMM YYYY');
   }
   public getDateForCashe(data) {
     return moment(new Date(data)).format('YYYY/MM/DD');

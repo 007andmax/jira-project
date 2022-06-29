@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SoftwareSummaryReport } from '../../class/software-summary-report';
+import * as moment from "moment";
 
 @Component({
   selector: 'software-summary-report',
@@ -56,6 +57,9 @@ export class SoftwareSummaryReportComponent implements OnInit {
       this.cd.detectChanges();
 
     }, 1000);
+  }
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
   }
   public trackByIndex(index, item) {
     return index;

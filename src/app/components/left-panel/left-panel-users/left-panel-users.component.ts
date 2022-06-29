@@ -54,7 +54,10 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }
-
+  public goToAll() {
+    this.goToState();
+    this.onShowAll();
+  }
   onSetFilterClientType(data) {
     this.filter.setClientType(data);
     this.usersStateService.onInitFilter(this.filter);

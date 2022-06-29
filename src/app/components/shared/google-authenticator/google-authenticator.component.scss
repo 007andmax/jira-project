@@ -1,0 +1,24 @@
+.google-authenticator {
+    li {
+        margin: 0px !important;
+    }
+}
+.qr-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    img {
+        position: absolute;
+        left: calc(50% - 100px);
+    }
+}
+.secret-code {
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: calc(50% - 75px);
+}
+.secret-code-container {
+    height: 45px;
+}

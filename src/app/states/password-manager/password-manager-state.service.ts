@@ -9,6 +9,8 @@ import { PasswordManagerService } from '../../services/password-manager/password
 })
 export class PasswordManagerStateService {
   recordForRemove: PasswordRecord = null;
+  selectedCategory: PasswordRecordCategories;
+  onFilterByCategory: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<PasswordRecordCategories> = [];
@@ -27,6 +29,13 @@ export class PasswordManagerStateService {
       if (newChange.action === 'PASSWORD_CATEGORY_UPDATED') console.log("newChange", newChange);
       this.onGetCategories.emit(this.categories);
     })
+  }
+  public getSelectedCategory() {
+    return this.selectedCategory;
+  }
+  public setFilterByCategory(data) {
+    this.selectedCategory = data;
+    this.onFilterByCategory.emit(data);
   }
   public handleRealTimeChanges(data) {
     this.onChangeRealTime.emit(data)

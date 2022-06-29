@@ -1,0 +1,33 @@
+<div class="qt-modal quote-email-modal">
+    <div class="qt-modal__header">
+        <div class="qt-modal__header-title qt-fw-600">Google authenticator codes</div>
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="closeModal()"
+        ></div>
+    </div>
+    <div class="qt-modal__body google-authenticator">
+        <p class="qt-mb-10">
+            If you lose your phone or can't receive a code via an authentication app, you can use these codes to get back into your account. Save them in a safe place:
+        </p>
+        <ul>
+            <ng-template
+                ngFor
+                let-code
+                [ngForOf]="scratchCodes"
+            >
+                <li [textContent]="code"></li>
+            </ng-template>
+        </ul>
+        <p>Each code can only be used once.</p>
+        <p>
+            You can also get new codes if you'are worried that this set has been stolen, or if you've already used most of then.
+        </p>
+        <p
+            class="get-codes"
+            (click)="getNewCodes()"
+        >
+            Get new codes
+        </p>
+    </div>
+</div>

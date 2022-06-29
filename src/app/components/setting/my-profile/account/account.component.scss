@@ -11,3 +11,17 @@
   input.ng-invalid.is-invalid {
     border: 1px solid $error;
   }
+  .authentication-type {
+    .ac-row {
+      display: flex;
+      justify-content: space-between;
+      justify-items: flex-end;
+    }
+    form {
+      width: max-content !important;
+    }
+    .static-link {
+      display: flex;
+      align-items: end;
+    }
+  }

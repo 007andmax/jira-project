@@ -47,6 +47,7 @@ export class ItemReportComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.report = null;
+    localStorage.removeItem('report');
     $('body').removeClass('qt-bg-white');
   }
 }

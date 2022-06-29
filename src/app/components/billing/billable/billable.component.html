@@ -7,9 +7,18 @@
                     [textContent]="'Billable Items (' + count + ')'"
                 ></h6>
             </div>
-
-
             <div class="qt-page-list__header-title-line--rigth">
+                <button
+                    *ngIf="getPermissions('CREATE_INVOICE')"
+                    class="qt-btn --outline-blue qt-mr-8 btn-invoice-all"
+                    [disabled]="!isExistSelected()"
+                    appDisabledBtn
+                    #saveAndDownloadBtn="disabled"
+                    (onClick)="onInvoiceAll()"
+                >
+                    <span *ngIf="!saveAndDownloadBtn.isBlock()">Invoice All</span>
+                    <app-preloader-ticket *ngIf="saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
+                </button>
                 <span class="qt-input-search">
                     <input
                         class="qt-input-search billable-list-search"
@@ -22,12 +31,24 @@
                 </span>
             </div>
         </div>
-
-
         <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
+                        <th
+                            class="billable-item-table__check"
+                            *ngIf="getPermissions('CREATE_INVOICE')"
+                        >
+                            <div class="d-f">
+                                <label class="qt-checkbox">
+                                    <input
+                                        type="checkbox"
+                                        (change)="onToggleAll($event)"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
                         <th
                             class="billable-table__company-name"
                             (click)="onFilter('name')"
@@ -56,13 +77,15 @@
                             Billable Amount
                             <span class="qt-table-modern__sorting"></span>
                         </th>
+                        <th
+                            class="billable-table__menu"
+                            *ngIf="getPermissions('CREATE_INVOICE')"
+                        ></th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-
-
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <table
@@ -79,6 +102,7 @@
                         <app-billable-item
                             [item]="item"
                             *ngIf="!item.isDefault"
+                            (onSelect)="onSelectItem($event,item)"
                         ></app-billable-item>
                     </ng-template>
                 </tbody>

@@ -39,7 +39,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
 
   ngOnInit() {
     this.listCustomSubscriptions = this.marketingEmailStateService.getListCustomSubscription();
-    if (this.listCustomSubscriptions.length > 0) this.setSubscriptions();
+    this.setSubscriptions();
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscriptions = data;
       this.setSubscriptions();

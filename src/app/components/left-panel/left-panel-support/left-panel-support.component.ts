@@ -46,7 +46,7 @@ export class LeftPanelSupportComponent implements OnInit {
   public goToState(state) {
     this.onChangeState.emit(state);
   }
-  onFilter(active) {
+  public onFilter(active) {
     this.supportStateService.onHandleFilter(active);
     this.type = active;
     this.goToState('new-quickSupport');

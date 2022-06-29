@@ -1,5 +1,6 @@
 import { PaymentsReportPayments } from "./payments-report-payments";
 import { PaymentsReportTotal } from "./payments-report-total";
+import * as moment from "moment";
 
 export class PaymentsReport {
     startDate: string = '';
