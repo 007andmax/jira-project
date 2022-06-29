@@ -722,6 +722,11 @@
                   </div>
               </div>
           </ng-template>
+          <div  *ngIf="!softwareList || softwareList.length == 0 || softwareList==undefined">
+            <div class="software-text-center">                    
+                    <span>No software to show</span>                    
+            </div>
+        </div>
           </div>
           <div *ngIf="tab==='UPDATES'" class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="qt-df qt-jc-sb">

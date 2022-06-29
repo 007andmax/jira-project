@@ -146,7 +146,7 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {             
+  ngOnInit() {               
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -171,7 +171,7 @@ export class DevicesComponent implements OnInit {
     });        
 
     if (!this.searchSubscription) {          
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {                               
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {                                    
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
@@ -181,7 +181,7 @@ export class DevicesComponent implements OnInit {
 
     if(!this.searchSubscriptionCompany)
     {            
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{         
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{                 
         this.selectedTag = [];                       
         if(data.name !='undefined' && data.name !=null && data.name !="")
         {
@@ -197,7 +197,7 @@ export class DevicesComponent implements OnInit {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {        
+  load(company: any) {            
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
@@ -223,7 +223,7 @@ export class DevicesComponent implements OnInit {
     this.searchSubscription.unsubscribe();
   }
 
-  setPreviewDataDevice() {             
+  setPreviewDataDevice() {                
     let searchData: any = localStorage.getItem("currentSearch");
     if (searchData) {      
       let searchObj = JSON.parse(searchData);              
@@ -548,13 +548,14 @@ export class DevicesComponent implements OnInit {
     }, 500);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {       
+  selected(event: MatAutocompleteSelectedEvent): void {          
     let data = this.selectedTag.find(x => x == event.option.viewValue);    
     if(!data)
     {
       console.log('selected fired');
       this.selectedTag.push(event.option.viewValue);
-      this.searchTag.push(event.option.viewValue);
+      this.searchTag = [];
+      this.searchTag = this.selectedTag;      
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
       this.add(event.option.viewValue);    
@@ -578,7 +579,7 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  add(Tag): void {                  
+  add(Tag): void {                   
     console.log('add event fired');
     this.tagFilterValue = "";
 
@@ -592,7 +593,8 @@ export class DevicesComponent implements OnInit {
 
     if (Tag && !findTag) {
       this.selectedTag.push(Tag);
-      this.searchTag.push(Tag);
+      this.searchTag = [];
+      this.searchTag = this.selectedTag;      
     }
 
     let req: any = {};
