@@ -88,7 +88,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   }
   remove(user) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove user from the subscription`;
     this.marketingEmailStateService.setSubscriptionUserForRemove(user);
 

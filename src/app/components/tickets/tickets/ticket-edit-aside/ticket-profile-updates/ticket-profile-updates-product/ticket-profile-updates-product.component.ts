@@ -34,7 +34,7 @@ export class TicketProfileUpdatesProductComponent implements OnInit {
   remove() {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
   public trackByIndex(index, item) {

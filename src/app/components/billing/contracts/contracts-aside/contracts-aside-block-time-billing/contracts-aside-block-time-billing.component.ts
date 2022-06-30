@@ -309,7 +309,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsBlockTime.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);

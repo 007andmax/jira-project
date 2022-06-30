@@ -25,9 +25,8 @@ export class GoogleAuthenticatorComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
-    config: NgbModalConfig,) {
-    config.backdrop = 'static';
-    config.keyboard = false;
+    private config: NgbModalConfig,) {
+
   }
 
   ngOnInit() {

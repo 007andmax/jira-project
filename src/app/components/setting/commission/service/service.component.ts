@@ -198,7 +198,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     if (this.service && this.service.commissionRate) {
       this.deleteServicePopup = true;
       this.confirmStateService.setConfirmAction(DELETE_COMMISSION_SERVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want ${this.service.name} commission rate to zero?`;
 
     }

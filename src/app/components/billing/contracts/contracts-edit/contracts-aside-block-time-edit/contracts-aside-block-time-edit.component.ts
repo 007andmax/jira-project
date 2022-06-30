@@ -270,7 +270,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
   }
   ngOnDestroy(): void {

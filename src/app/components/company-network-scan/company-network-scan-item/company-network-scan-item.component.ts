@@ -50,7 +50,7 @@ export class CompanyNetworkScanItemComponent implements OnInit {
 
   remove() {
     this.confirmStateService.setConfirmAction(NETWORK_REMOVE_DEVICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove device?`;
     this.networkScanStateService.setDeviceForRemove(this.device);
   }

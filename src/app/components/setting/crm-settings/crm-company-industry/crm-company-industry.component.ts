@@ -98,7 +98,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   }
   removeIndustry(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Industry`;
     this.crmStateService.setIndustryForRemove(item);
   }

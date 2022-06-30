@@ -84,7 +84,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   removeConfirm(gl: any) {
     this.gl = gl;
     this.confirmStateService.setConfirmAction(DELETE_GL_NUMBER);
-    const modalRef = this.modalService.open(GlNumberCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-accounting-settings" });
+    const modalRef = this.modalService.open(GlNumberCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-accounting-settings", backdrop: 'static', keyboard: false });
     modalRef.componentInstance.glNumber = gl;
   }
 

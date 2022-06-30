@@ -375,7 +375,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
     this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.cd.detectChanges();
   }

@@ -92,7 +92,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeAssignedUser);
   }
   onAddAssignedUser() {
-    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.userList = this.listTechUsersForAssign;
     modalRef.componentInstance.selectedUsers = this.shareUsersList;
     this.addUsersNotifyStateService.setAction(USERS_TO_ADD_TICKET);

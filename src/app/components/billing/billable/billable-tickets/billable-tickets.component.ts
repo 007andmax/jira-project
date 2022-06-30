@@ -133,7 +133,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   }
   deleteTicket(ticket) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_BILLABLE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the billable item?`;
     this.ticketForRemove = ticket;
   }
