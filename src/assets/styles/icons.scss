@@ -17,14 +17,8 @@
   height: 16px;
   display: block;
 }
-.icn-calendar-light {
-  background: url("/assets/img/calendar-light.png");
-}
 .icn-attach {
   background: url("/assets/img/attachment-blue.svg");
-}
-.icn-remove {
-  background-image: url("/assets/img/icons/close-16.png");
 }
 .export-ng2 {
   background: url("/assets/img/icons/export-blue.svg");
@@ -365,9 +359,6 @@
   }
   &__add-grey {
     background-image: url("/assets/img/icons/add-grey.svg");
-  }
-  &__calander {
-    background-image: url("/assets/img/icons/calander.svg");
   }
   &__company-address {
     background-image: url("/assets/img/icons/company-address.svg");

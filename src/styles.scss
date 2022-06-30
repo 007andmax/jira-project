@@ -824,7 +824,7 @@ documents-edit-info {
       margin-top: -1px;
       margin-right: 4px;
     }
-    .icn-remove {
+    .icon__close {
       transform: translateX(2px);
     }
   }
@@ -958,7 +958,7 @@ documents-edit-info {
       right: -6px;
       width: 20px;
       height: 20px;
-      background: url("assets/img/icons/close-16.png") no-repeat;
+      background: url("/assets/img/icons/close.svg") no-repeat;
       background-size: contain;
     }
   }

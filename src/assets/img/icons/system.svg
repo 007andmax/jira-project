@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g stroke="#16A4FA">
-            <g>
-                <g>
-                    <g>
-                        <path d="M3 2h10c.552 0 1 .448 1 1v8c0 .552-.448 1-1 1H3c-.552 0-1-.448-1-1V3c0-.552.448-1 1-1z" transform="translate(-950 -266) translate(288 148) translate(0 94) translate(662 24)"/>
-                        <path d="M2 9h12v2c0 .552-.448 1-1 1H3c-.552 0-1-.448-1-1V9h0zM6 14L10.001 14" transform="translate(-950 -266) translate(288 148) translate(0 94) translate(662 24)"/>
-                    </g>
-                </g>
-            </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>FB4752BD-A77D-4EC8-BC41-3E21E24A54E0</title>
+  <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+    <g id="09-Icons-Library" transform="translate(-555.000000, -1019.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#16A4FA" stroke-width="1.5">
+      <g id="Devices-Type-/-Devices" transform="translate(555.000000, 1019.000000)">
+        <g id="Group" transform="translate(3.000000, 4.000000)">
+          <path d="M1,0 L15,0 C15.5522847,-1.01453063e-16 16,0.44771525 16,1 L16,10 C16,10.5522847 15.5522847,11 15,11 L1,11 C0.44771525,11 6.76353751e-17,10.5522847 0,10 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z" id="Rectangle"></path>
+          <line x1="10" y1="14" x2="6" y2="14" id="Path"></line>
         </g>
+      </g>
     </g>
+  </g>
 </svg>
