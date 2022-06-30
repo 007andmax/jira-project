@@ -33,8 +33,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public services: Array<ForCreateService> = [];
   public type: string = "services";
   public selectedClient: any;
-  public tehUsers = [];
-  public listTehUsers: Array<TechUserItem> = [];
+  public techUsers = [];
+  public listTechUsers: Array<TechUserItem> = [];
   public validate: Validate = new Validate();
   copy: boolean = false;
   formatDate: string = FORMAT_DATE_2;
@@ -92,7 +92,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.createService.onInitClone();
     this.createService.setDescription(data.description);
     this.recurringState.getCreateTicket().setDescription(data.description);
-    this.tehUsers = data.assignedUsers;
+    this.techUsers = data.assignedUsers;
 
 
     this.devicesRecurringTicketsStateService.onInitHangle(data.company.id);
@@ -118,7 +118,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.createService.setCreateTaskAdd(data.createTask);
     this.createService.setRequireUpdateAdd(data.requireUpdate);
     this.createService.setQuickCloseAdd(data.quickClose);
-    this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
+    this.createService.getTechState().setUsersFromtEdit(data.assignedUsers);
     data.assignedUsers.forEach(item => this.recurringState.getCreateTicket().addAssignedUsers(item.id));
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression)
@@ -134,7 +134,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   */
   public onChangeDatePicker(data: ChangeDatePicker) {
 
-    this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+    this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTechCompany().addresses[0].timeZone.timeOffset);
   }
 
   /**
@@ -177,7 +177,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   private onInitCreateMod() {
     this.products = [new ForCreateProduct()];
     this.services = [new ForCreateService()];
-    this.recurringState.getCreateTicket().clearTehUsers();
+    this.recurringState.getCreateTicket().clearTechUsers();
     this.recurringState.getCreateTicket().clearTags();
     this.recurringState.getCreateTicket().clearAgents();
     this.recurringState.getCreateTicket().setDefaultCron();
@@ -187,20 +187,20 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Subscribe to change teh user
-  * @param tehusers - teh users
+  * Subscribe to change teсh user
+  * @param techusers - teсh users
   */
-  public onChangeTehUsers(tehusers) {
-    this.tehUsers = tehusers;
-    this.recurringState.getCreateTicket().clearTehUsers();
-    this.tehUsers.forEach((item) => {
+  public onChangeTechUsers(techusers) {
+    this.techUsers = techusers;
+    this.recurringState.getCreateTicket().clearTechUsers();
+    this.techUsers.forEach((item) => {
       this.recurringState.getCreateTicket().addAssignedUsers(item.id);
     })
 
   }
 
   private onGetTechUsers(data) {
-    this.listTehUsers = data.filter(item => {
+    this.listTechUsers = data.filter(item => {
 
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return new TechUserItem(item);
@@ -486,11 +486,11 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.type = "services";
     this.selectedClient = null;
-    this.tehUsers = [];
+    this.techUsers = [];
     this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
     this.createService.getTagsState().onInitClear();
-    this.createService.getTehState().onInitClear();
+    this.createService.getTechState().onInitClear();
     this.createService.clearData();
     this.createService.getStateDatePicker().onInitClear();
     this.createService.setDefaultDate();

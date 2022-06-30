@@ -581,9 +581,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   back() {
     this.leftPanelStateService.goToState('new-reports');
   }
-  public onChangeTehUsers(tehusers) {
-
-  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

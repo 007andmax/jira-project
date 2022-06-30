@@ -25,7 +25,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
-  listTehUsers = [];
+  listTechUsers = [];
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
@@ -37,7 +37,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
 
   ngOnInit() {
     if (this.service.user) this.userService = [this.service.user];
-    this.listTehUsers = this.getUsersForAssign();
+    this.listTechUsers = this.getUsersForAssign();
     if (this.service.date) this.setDateWithTimeOffset();
   }
   edit() {

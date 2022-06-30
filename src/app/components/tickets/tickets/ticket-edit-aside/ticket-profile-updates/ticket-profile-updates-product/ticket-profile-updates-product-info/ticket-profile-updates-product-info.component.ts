@@ -25,7 +25,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
-  listTehUsers = [];
+  listTechUsers = [];
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
@@ -38,7 +38,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   ngOnInit() {
     if (!this.product.date) this.product.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
-    this.listTehUsers = this.getUsersForAssign();
+    this.listTechUsers = this.getUsersForAssign();
     if (this.product.date) this.setDateWithTimeOffset();
   }
   public getTotal(price, quantity) {

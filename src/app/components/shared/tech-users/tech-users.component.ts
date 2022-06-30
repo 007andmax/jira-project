@@ -31,12 +31,12 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   @Output() usersChange = new EventEmitter();
 
   /**
-  * Creates an instance of the TehUsersComponent with the injected services
-  * @param {tehService} TehUsersService Service to work with teh users
-  * @param {TechUsersStateService} tehState to work with teh users state
+  * Creates an instance of the TechUsersComponent with the injected services
+  * @param {techService} TechUsersService Service to work with tech users
+  * @param {TechUsersStateService} techState to work with tech users state
   */
   constructor(
-    private tehState: TechUsersStateService,
+    private techState: TechUsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService
   ) { }
@@ -73,7 +73,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   private checUsersForEdit() {
-    let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data: Array<RecurringTicketUser>) => {
+    let getUsersFromEdit = this.techState.getUsersFromEdit().subscribe((data: Array<RecurringTicketUser>) => {
 
       data.forEach((item) => {
         let index = this.usersList.findIndex(user => user.id === item.id);
@@ -90,7 +90,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   * Subscribe for clear data
   */
   private onInitClearState() {
-    let getClearState = this.tehState.getClearState().subscribe(() => this.clear());
+    let getClearState = this.techState.getClearState().subscribe(() => this.clear());
     this.sub.add(getClearState);
   }
 

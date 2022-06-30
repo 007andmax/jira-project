@@ -53,7 +53,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     private contractsService: ContractsService,
     private taxesStateService: TaxesStateService,
     private usersStateService: UsersStateService,
-    private tehState: TechUsersStateService,
+    private techState: TechUsersStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     private contractsStateService: ContractsStateService,
@@ -140,11 +140,11 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
 
   }
   selectAllUsers() {
-    this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
+    this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
     this.selectedUsers = JSON.parse(JSON.stringify(this.userList));
   }
   clearAllSelectedUsers() {
-    this.tehState.onInitClear();
+    this.techState.onInitClear();
     this.selectedUsers = [];
   }
   getMinStartDate(interval, startDate) {

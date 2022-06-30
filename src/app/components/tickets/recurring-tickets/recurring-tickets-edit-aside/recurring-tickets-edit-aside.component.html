@@ -325,14 +325,14 @@
             </div>
             <div class="save-template">
                 <app-tech-users
-                    [users]="listTehUsers"
-                    (usersChange)="onChangeTehUsers($event)"
+                    [users]="listTechUsers"
+                    (usersChange)="onChangeTechUsers($event)"
                 ></app-tech-users>
                 <div class="assigned-users-list">
                     <ng-template
                         ngFor
                         let-user
-                        [ngForOf]="tehUsers"
+                        [ngForOf]="techUsers"
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >

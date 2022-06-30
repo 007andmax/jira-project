@@ -21,7 +21,7 @@ export class RecurringTicketsService {
   clone: boolean = false;
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
-    private tehState: TechUsersStateService,
+    private techState: TechUsersStateService,
     private devicesState: DevicesRecurringTicketsStateService,
     private stateDatePicker: DatePickerStateService
   ) { }
@@ -98,10 +98,10 @@ export class RecurringTicketsService {
   }
 
   /**
-* Get teh users state
+* Get tech users state
 */
-  public getTehState() {
-    return this.tehState;
+  public getTechState() {
+    return this.techState;
   }
 
   /**

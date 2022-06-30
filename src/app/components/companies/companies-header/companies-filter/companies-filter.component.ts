@@ -47,11 +47,11 @@ export class CompaniesFilterComponent implements OnInit {
     })
     this.sub.add(onGetIndustry);
     if (this.usersStateService.getAllUsers().length > 0) {
-      this.getTehusers(this.usersStateService.getAllUsers());
+      this.getTechusers(this.usersStateService.getAllUsers());
 
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getTehusers(data);
+      this.getTechusers(data);
 
     })
     this.sub.add(getOnUsers);
@@ -61,7 +61,7 @@ export class CompaniesFilterComponent implements OnInit {
     })
     this.sub.add(onChangeFilter);
   }
-  private getTehusers(list) {
+  private getTechusers(list) {
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
         this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
@@ -79,7 +79,7 @@ export class CompaniesFilterComponent implements OnInit {
 
     this.companyFilter.setClientType(null);
     this.companyFilter.setClientIndustry(null);
-    this.companyFilter.setTehUser(null);
+    this.companyFilter.setTechUser(null);
     this.companyFilter.setTags([]);
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
@@ -95,7 +95,7 @@ export class CompaniesFilterComponent implements OnInit {
     this.close();
   }
   public onSelectTechLead(data) {
-    this.companyFilter.setTehUser((data) ? data.id : null);
+    this.companyFilter.setTechUser((data) ? data.id : null);
     if (!this.appService.checkMobile()) {
       this.companiesStateService.onInitFilter(this.companyFilter);
       this.onChangeCounterFilter();
@@ -127,7 +127,7 @@ export class CompaniesFilterComponent implements OnInit {
     if (this.companyFilter.clientType) count++;
     if (this.companyFilter.clientIndustry) count++;
     if (this.companyFilter.tags.length > 0) count++;
-    if (this.companyFilter.tehUser) count++;
+    if (this.companyFilter.techUser) count++;
 
     this.changeCountFilter.emit(count);
   }

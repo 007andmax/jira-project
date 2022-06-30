@@ -60,7 +60,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
     private defaultServicesService: DefaultServicesService,
-    private tehState: TechUsersStateService,
+    private techState: TechUsersStateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
     private contractsListService: ContractsListService,
@@ -132,12 +132,12 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
 
   }
   selectAllUsers() {
-    this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
+    this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
     this.selectedUsers = JSON.parse(JSON.stringify(this.userList));
     this.contractsBlockTime.setShares(this.selectedUsers.map(item => new СontractsBlockTimeShare(item.id)));
   }
   clearAllSelectedUsers() {
-    this.tehState.onInitClear();
+    this.techState.onInitClear();
     this.selectedUsers = [];
     this.contractsBlockTime.setShares([]);
   }

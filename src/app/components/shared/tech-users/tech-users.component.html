@@ -5,7 +5,7 @@
     <!-- <div
         class="device-user pointer"
         *ngIf="type === 'RECURRING_TICEKTS'"
-        id="dropdownTehuser"
+        id="dropdownTechuser"
         style="margin-bottom: 10px;width: 109px;"
         ngbDropdownToggle
     >
@@ -14,7 +14,7 @@
     <div
         class="device-user pointer"
         *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
-        id="dropdownTehuser"
+        id="dropdownTechuser"
         style="margin-bottom: 10px;width: 109px;"
         ngbDropdownToggle
     >
@@ -23,7 +23,7 @@
     <div
         class="device-user pointer company-settings-user"
         *ngIf="type === 'COMPANY_SETTINGS' && selectedUsers.length === 1"
-        id="dropdownTehuser"
+        id="dropdownTechuser"
         ngbDropdownToggle
     >
         <div
@@ -42,7 +42,7 @@
     <div
         class="tech__user-icon icon__assign-user pointer"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
-        id="dropdownTehuser"
+        id="dropdownTechuser"
         (mouseenter)="selectUserTooltip.show($event.target)"
         (mouseleave)="selectUserTooltip.hide()"
         ngbDropdownToggle
@@ -57,7 +57,7 @@
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 1"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
-        id="dropdownTehuser"
+        id="dropdownTechuser"
         ngbDropdownToggle
         [disabled]="isDisabled"
         (mouseenter)="techUserTooltip.show($event.target)"
@@ -66,7 +66,7 @@
     <div
         class="tech-user-body"
         ngbDropdownMenu
-        aria-labelledby="dropdownTehuser"
+        aria-labelledby="dropdownTechuser"
         *ngIf="!isDisabled"
     >
         <div class="select-wrapper dropdown-assign-ticket fixed-assign">

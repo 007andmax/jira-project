@@ -74,7 +74,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     return this.filter.companyFilter.clientType ||
       this.filter.companyFilter.clientIndustry ||
       this.filter.companyFilter.tags.length > 0 ||
-      this.filter.companyFilter.tehUser
+      this.filter.companyFilter.techUser
   }
   onToggleFilter(data) {
     if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
