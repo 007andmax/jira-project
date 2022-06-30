@@ -146,7 +146,8 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {               
+  ngOnInit() {     
+    localStorage.removeItem("currentSearchCompany");          
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -180,7 +181,7 @@ export class DevicesComponent implements OnInit {
     }
 
     if(!this.searchSubscriptionCompany)
-    {            
+    {         
       this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{                 
         this.selectedTag = [];                       
         if(data.name !='undefined' && data.name !=null && data.name !="")
@@ -269,7 +270,7 @@ export class DevicesComponent implements OnInit {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-    });
+    });    
   }
 
 
@@ -548,8 +549,8 @@ export class DevicesComponent implements OnInit {
     }, 500);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {          
-    let data = this.selectedTag.find(x => x == event.option.viewValue);    
+  selected(event: MatAutocompleteSelectedEvent): void {                 
+    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());    
     if(!data)
     {
       console.log('selected fired');
@@ -563,23 +564,27 @@ export class DevicesComponent implements OnInit {
     this.selectedInput.nativeElement.value = '';
   }
 
-  remove(index: number) {
+  remove(index: number) {    
     this.showPreloader = true;
     this.selectedTag.splice(index, 1);
-    this.searchTag.splice(index, 1);
+    this.searchTag = [];
+    this.searchTag = this.selectedTag;    
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.selectedTag || [];
     if (this.selectedTag.length > 0) {
-      this.searchDeviceTag(req);
+      this.searchDeviceTag(req);     
     }
     else {
       this.assetList = [];
       this.showPreloader = false;
     }
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
 
-  add(Tag): void {                   
+  add(Tag): void {                          
     console.log('add event fired');
     this.tagFilterValue = "";
 
@@ -588,7 +593,10 @@ export class DevicesComponent implements OnInit {
     let findTag: any[] = [];
 
     if (this.selectedTag) {
-      findTag = this.selectedTag.find(x => x == Tag);
+      if(Tag != 'undefined' && Tag != null && Tag !="")
+      {
+        findTag = this.selectedTag.find(x => x.toLowerCase() == Tag.toLowerCase());
+      }      
     }
 
     if (Tag && !findTag) {

@@ -705,21 +705,26 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }, 500);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {
-    console.log('selected fired');
-    this.selectedTag.push(event.option.viewValue);
-    this.searchTag.push(event.option.viewValue);
+  selectedSearch(event: MatAutocompleteSelectedEvent): void {    
+    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());    
+    if(!data)
+    {       
+      console.log('selected fired');
+      this.selectedTag.push(event.option.viewValue);
+      this.searchTag.push(event.option.viewValue);
+      this.selectedInput.nativeElement.value = '';
+      this.selectedCtrl.setValue(null);
+      this.add(event.option.viewValue);
+    }    
     this.selectedInput.nativeElement.value = '';
-    this.selectedCtrl.setValue(null);
-    this.add(event.option.viewValue);
   }
 
-  add(Tag): void {    
+  add(Tag): void {       
     console.log('add event fired');
     this.tagFilterValue = "";
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
-    var findTag = this.selectedTag.find(x => x == Tag);
+    var findTag = this.selectedTag.find(x => x.toLowerCase() == Tag.toLowerCase());
 
     if (Tag && !findTag) {
       this.selectedTag.push(Tag);
@@ -784,6 +789,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
       req.Criteria = this.selectedTag;
       this.searchDeviceTag(req);
     }
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    } 
   }
 
   getAddDevice() {    

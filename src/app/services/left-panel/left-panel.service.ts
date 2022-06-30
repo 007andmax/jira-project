@@ -84,10 +84,7 @@ export class LeftPanelService {
       state === 'accounts-receivable' ||
       state === 'accounting-report' ||
       state === 'payments-report' ||
-      state === 'remote-access' ||
-      state === 'software-summary' ||
-      state === 'hardware-summary' ||
-      state === 'device-ip-summary' ||
+      state === 'remote-access' ||      
       state === 'tech-sales' ||
       state === 'tech-ticket' ||
       state === 'tech-service' ||
