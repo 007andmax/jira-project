@@ -25,7 +25,7 @@ export class TechTicketReportComponent implements OnInit {
   }
 
   public getDateForHeader(data) {
-    return moment(new Date(data)).format('MMM DD, YYYY');
+    return moment(data).format('DD MMM YYYY');
   }
   toFixedPrice(value) {
     return value.toFixed(2);

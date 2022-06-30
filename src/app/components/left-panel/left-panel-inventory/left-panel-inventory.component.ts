@@ -37,6 +37,10 @@ export class LeftPanelInventoryComponent implements OnInit {
       }
     })
   }
+  public goToAll() {
+    this.goToState();
+    this.selectCategory(null)
+  }
   public goToState() {
     this.onChangeState.emit('inventory');
   }

@@ -1,4 +1,4 @@
-<div>    
+<div>
     <div class="report-menu">
         <div class="run-report-content col-md-11 left">
             <div class="grey-dropdown form-group content select-users-list">
@@ -121,13 +121,21 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="deviceIpSummaryList.length == 0">
+            <table
+                class="qt-page-list__body-tbody qt-table-modern"
+                *ngIf="deviceIpSummaryList.length == 0"
+            >
                 <tbody>
                     <tr>
-                        <td colspan="10" class="text-center report-device-ip-summary-table">Data Not Available</td>
+                        <td
+                            colspan="10"
+                            class="text-center report-device-ip-summary-table"
+                        >
+                            Data Not Available
+                        </td>
                     </tr>
                 </tbody>
-            </table>     
+            </table>
         </div>
     </div>
 </div>
@@ -135,11 +143,3 @@
     class="loading"
     *ngIf="loading"
 ></div>
-
-
-
-
-
-
-
-

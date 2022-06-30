@@ -13,9 +13,24 @@
     >
         <li
             [ngClass]="{'--active':  activePage === 'inventory'}"
-            (click)="goToState();"
+            (click)="goToAll()"
         >
             All products
         </li>
     </a>
+    <div class="list-container">
+        <ng-template
+            ngFor
+            let-inventory
+            [ngForOf]="inventoryCategoryList"
+            [ngForTrackBy]="trackById"
+        >
+            <li
+                [ngClass]="{'--active': sortCategoty && sortCategoty.id === inventory.id && activePage === 'inventory'}"
+                (click)="goToState();selectCategory(inventory)"
+                [textContent]="inventory.name"
+            >
+            </li>
+        </ng-template>
+    </div>
 </ul>

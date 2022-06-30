@@ -30,15 +30,15 @@
     }
 
     &__company-name {
-      width: 45%;
+      width: calc(45% - 110px);
     }
 
     &__tickets {
-      width: 31%;
+      width: 30%;
     }
 
     &__sales {
-      width: 12%;
+    width: 12%;
     }
 
     &__billable {

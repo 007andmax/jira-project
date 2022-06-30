@@ -60,26 +60,9 @@
                         (onOutSide)="hiddenDropDown(bodyDropDown)"
                     >
                         <ul>
-                            <li (click)="showRemoteAccess = !showRemoteAccess ">
+                            <li (click)="remoteAccess('CSS', device)">
                                 <span class="dropdown-menu-qt__item-icon icon__remote-access"></span>
                                 Remote Access
-                                <ul
-                                    class="dropdown-menu-qt__submenu dropdown-menu"
-                                    *ngIf="showRemoteAccess"
-                                >
-                                    <li
-                                        ngbDropdownItem
-                                        (click)="remoteAccess('CSS', device)"
-                                    >
-                                        Custom Share Screen
-                                    </li>
-                                    <li
-                                        ngbDropdownItem
-                                        (click)="remoteAccess('RDP', device)"
-                                    >
-                                        Remote desktop protocol
-                                    </li>
-                                </ul>
                             </li>
                             <li
                                 ngbDropdownItem

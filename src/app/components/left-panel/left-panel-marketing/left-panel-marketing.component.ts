@@ -62,7 +62,10 @@ export class LeftPanelMarketingComponent implements OnInit {
   public close() {
     this.open = false;
   }
-
+  public goToAll() {
+    this.goToState();
+    this.clearSubscription();
+  }
   openPanel() {
     this.onOpenPanel.emit(null);
   }

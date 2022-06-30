@@ -28,6 +28,8 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     this.devicesStateService.getOnLaunchRemoteApp().subscribe(data => {
       if (data === this.sessionId) this.close();
     })
+    this.launchRemoteApp();
+
   }
   downloadViewer() {
     window.location.href = '/data/connection-viewer';

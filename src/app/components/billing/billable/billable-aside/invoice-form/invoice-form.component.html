@@ -245,3 +245,38 @@
         rows="1"
     ></textarea>
 </div>
+<div class="qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
+    <div class="qt-df qt-ai-c  qt-mb-10">
+        <label
+            class="qt-checkbox qt-dif qt-ai-c receive-full-amount-check qt-mb-0 pointer"
+            for="includeInvoiceAsAttachmentSetting"
+        >
+            <input
+                id="includeInvoiceAsAttachmentSetting"
+                type="checkbox"
+                [(ngModel)]="invoice.includeInvoiceAsAttachmentSetting"
+            >
+            <span></span>
+            <div class="qt-fs-13 qt-lh-154 qt-ml-8">Attach a PDF copy of the invoice</div>
+        </label>
+    </div>
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="invoice.allowToGenerateAccountReceivableReport"
+    >
+        <label
+            class="qt-checkbox qt-dif qt-ai-c receive-full-amount-check qt-mb-0 pointer"
+            for="includeAccountReceivableReportAsAttachmentSetting"
+        >
+            <input
+                id="includeAccountReceivableReportAsAttachmentSetting"
+                type="checkbox"
+                [(ngModel)]="invoice.includeAccountReceivableReportAsAttachmentSetting"
+            >
+            <span></span>
+            <div class="qt-fs-13 qt-lh-154 qt-ml-8">
+                Client has past due invoice, Include a PDF, Account receivable report
+            </div>
+        </label>
+    </div>
+</div>

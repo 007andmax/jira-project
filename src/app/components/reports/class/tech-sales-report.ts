@@ -21,8 +21,8 @@ export class TechSalesReport {
             this.selectedType = data.selectedType;
             this.selectedDuration = data.selectedDuration;
             this.total = data.total;
-            this.startDate = moment(new Date(data.startDate)).format('ll');
-            this.endDate = moment(new Date(data.endDate)).format('ll');
+            this.startDate = data.startDate;
+            this.endDate = data.endDate;
         }
     }
     public setDisabledDuration(data) {

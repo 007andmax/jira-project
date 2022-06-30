@@ -28,8 +28,8 @@ export class DetailedCommissionsReport {
             this.companyId = data.companyId;
             this.userId = data.userId;
             this.type = data.type;
-            this.startDate = moment(new Date(data.startDate)).format('ll');
-            this.endDate = moment(new Date(data.endDate)).format('ll');
+            this.startDate = data.startDate;
+            this.endDate = data.endDate;
             this.categorySalesValue = data.categorySalesValue;
             this.clientCompanyName = data.clientCompanyName;
             this.productsSum = data.productsSum;

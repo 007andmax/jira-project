@@ -1,5 +1,8 @@
 <div class="qt-page-list documents-page ">
-    <documents-header (onChangeFilterField)="onFilter($event)"></documents-header>
+    <documents-header
+        [showAssignedCompanies]="false"
+        (onChangeFilterField)="onFilter($event)"
+    ></documents-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <table class="qt-page-list__body-tbody qt-table-modern documents-table">
@@ -12,6 +15,7 @@
                     >
                         <documents-table
                             [item]="item"
+                            [showAssignedCompanies]="false"
                             (onRemoveDocument)="onRemoveDocument($event)"
                         >
                         </documents-table>

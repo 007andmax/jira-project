@@ -24,9 +24,13 @@
                 class="body-m qt-color-dark-light"
                 *ngIf="customerSalesReport.init"
             >
-                <span>{{customerSalesReport.startDate}}</span>
+                <span>
+                    {{getDateForHeader(customerSalesReport.startDate)}}
+                </span>
                 -
-                <span>{{customerSalesReport.endDate}}</span>
+                <span>
+                    {{getDateForHeader(customerSalesReport.endDate)}}
+                </span>
             </div>
             <div *ngIf="customerSalesReport.init">
                 <!-- HEADER -->

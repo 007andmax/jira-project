@@ -17,20 +17,21 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
+
 @Component({
   selector: 'device-ip-summary-report',
   templateUrl: './device-ip-summary-report.component.html',
   styleUrls: ['./device-ip-summary-report.component.scss']
 })
 export class DeviceIpSummaryReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   company: any;
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
-  companies : any[]=[];
+  companies: any[] = [];
   selectedClient = null;
-  devices : any[]=[];
+  devices: any[] = [];
   clientName: string;
   date = new Date();
   DateFormat = CONFIGCONSTANTS.DateFormat1;
@@ -44,7 +45,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   fileName: string = "device-summary-report";
   accountType = "CLIENT";
   loading = false;
-  deviceIpSummaryList : any[]=[];
+  deviceIpSummaryList: any[] = [];
   tempararyDeviceList: any = [];
   tempararyDevice: any = [];
 
@@ -59,34 +60,37 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     private toastr: ToastrService,
     private agentService: AgentService,
     private companiesState: CompaniesStateService,
-    ) { }
+  ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();    
-    this.setPreviewDataDevice();    
+    this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
-
+  public parseHTML(data) {
+    var parser = new DOMParser();
+    return parser.parseFromString(data, 'text/html');
+  }
   setPreviewDataDevice() {
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
-}
+  }
 
-getClientsList(data) {
-  return data
-    .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
-    .sort((a, b) =>
-      a.name.toLowerCase() > b.name.toLowerCase()
-        ? 1
-        : b.name.toLowerCase() > a.name.toLowerCase()
-        ? -1
-        : 0
-    );
-}
+  getClientsList(data) {
+    return data
+      .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
+      .sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase()
+          ? 1
+          : b.name.toLowerCase() > a.name.toLowerCase()
+            ? -1
+            : 0
+      );
+  }
 
-  getDeviceIpSummaryList(){    
-    this.agentService.getDeviceIpSummary().subscribe((resp) =>{      
+  getDeviceIpSummaryList() {
+    this.agentService.getDeviceIpSummary().subscribe((resp) => {
       this.deviceIpSummaryList = resp;
       this.loading = false;
     })
@@ -99,34 +103,34 @@ getClientsList(data) {
         if (resp.length > 0) {
           this.tempararyDeviceList = [];
           this.tempararyDeviceList = resp;
-            this.deviceIpSummary.companyId
-            this.tempararyDeviceList = resp;
-            this.tempararyDeviceList = resp;
-            this.devices = this.tempararyDeviceList
+          this.deviceIpSummary.companyId
+          this.tempararyDeviceList = resp;
+          this.tempararyDeviceList = resp;
+          this.devices = this.tempararyDeviceList
             .map((item) => item.Name)
             .filter((value, index, self) => self.indexOf(value) === index);
         }
       });
   }
 
-  getDeviceIpSummaryByGuid(clientId){
-    this.agentService.getDeviceIpSummaryByGuid(clientId).subscribe((resp) =>{
+  getDeviceIpSummaryByGuid(clientId) {
+    this.agentService.getDeviceIpSummaryByGuid(clientId).subscribe((resp) => {
       this.deviceIpSummaryList = resp;
     })
   }
 
-  public selectClient(selectClient) {    
+  public selectClient(selectClient) {
     if (selectClient == null) {
       this.selectedClient == null;
-      this.deviceIpSummary.setCompanyId(null);  
-      this.dropdownDevice.clearWithOutChanges();    
+      this.deviceIpSummary.setCompanyId(null);
+      this.dropdownDevice.clearWithOutChanges();
       this.deviceIpSummaryList = [];
     } else {
       this.loading = true;
       this.selectedClient = selectClient
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.getDeviceIpSummaryByGuid(selectClient.id);
-      this.getReportByDeviceIpSummary();       
+      this.getReportByDeviceIpSummary();
       this.loading = false;
     }
     this.onSelectedClient.emit(this.selectedClient);
@@ -150,7 +154,12 @@ getClientsList(data) {
         .filter((value, index, self) => self.indexOf(value) === index);
     }
   }
-
+  public getDateForHeader(data) {
+    return moment(data).format('DD MMM YYYY');
+  }
+  parseFloatValue(value) {
+    return parseFloat(value);
+  }
 
   public goToReportList() {
     this.leftPanelStateService.goToState("new-device-summary");
@@ -174,13 +183,13 @@ getClientsList(data) {
       downloadCsvList.push([
         element.CompanyName.replace(",", " ") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.Speed == null ?  "N/A" : element.Speed,
+        element.Speed == null ? "N/A" : element.Speed,
         element.DHCP.replace(",", " ") || "N/A",
         element.InternalIPAddress.replace(",", " ") || "N/A",
         element.SubnetMask.replace(",", " ") || "N/A",
         element.DefaultGateway.replace(",", " ") || "N/A",
         element.DNS1.replace(",", " ") || "N/A",
-        element.DNS2 == null ?  "N/A" : element.DNS2,
+        element.DNS2 == null ? "N/A" : element.DNS2,
         element.ExternalIPAddress.replace(",", " ") || "N/A"
       ]);
     });
@@ -202,13 +211,13 @@ getClientsList(data) {
       pdfList.push([
         element.CompanyName.replace(",", " ") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.Speed == null ?  "N/A" : element.Speed,
+        element.Speed == null ? "N/A" : element.Speed,
         element.DHCP.replace(",", " ") || "N/A",
         element.InternalIPAddress.replace(",", " ") || "N/A",
         element.SubnetMask.replace(",", " ") || "N/A",
         element.DefaultGateway.replace(",", " ") || "N/A",
         element.DNS1.replace(",", " ") || "N/A",
-        element.DNS2 == null ?  "N/A" : element.DNS2,
+        element.DNS2 == null ? "N/A" : element.DNS2,
         element.ExternalIPAddress.replace(",", " ") || "N/A"
       ]);
     });
@@ -275,8 +284,8 @@ getClientsList(data) {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -338,32 +347,32 @@ getClientsList(data) {
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
         element[3] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
         element[4] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
         element[5] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
         element[6] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
         element[7] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 35%;vertical-align: top;">` +
         element[8] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[9] +

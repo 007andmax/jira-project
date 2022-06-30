@@ -20,8 +20,8 @@ export class RemoteConnectionReport {
             this.companyId = data.companyId;
             this.deviceId = data.deviceId;
             this.userId = data.userId;
-            this.startDate = moment(new Date(data.startDate)).format('ll');
-            this.endDate = moment(new Date(data.endDate)).format('ll');
+            this.startDate = data.startDate;
+            this.endDate = data.endDate;
             this.preloaderDevices = data.preloaderDevices;
             this.clientCompanyName = data.clientCompanyName;
             this.lines = data.lines;
