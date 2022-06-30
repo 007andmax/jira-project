@@ -23,7 +23,7 @@ export class LeftPanelDevicesComponent implements OnInit {
   toggleTypeReport:boolean = false;
   companyReportList: any;
   companyList:any;
-  currentActivePage: string = "";
+  currentActivePage: string = "new-devices";
   currentActiveReportPageChild: string = "";
   currentActivePinnedPageChild: string = "";
   currentActiveCompanyPageChild: string = "";
@@ -133,7 +133,7 @@ export class LeftPanelDevicesComponent implements OnInit {
   }
 
   pagesActive(page)
-  {
+  {    
     this.currentActivePage = page;
     if(page == 'new-devices')
     { 
@@ -164,6 +164,6 @@ export class LeftPanelDevicesComponent implements OnInit {
       this.currentActiveReportPageChild = '';
       this.toggleTypeCompanies = false;
       this.toggleTypeReport = false;
-    }
+    }    
   }
 }
