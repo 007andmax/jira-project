@@ -131,6 +131,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   ngOnInit() {      
     this.companiesState.onInit();  
     this.companyId = this.activateRoute.snapshot.params["id"];
+    let id = this.activateRoute.snapshot.params['id'];
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
@@ -1111,6 +1113,10 @@ onSelectModelsidebar(SelectModelSidebar) {
     this.selectModelName = "";
     this.updateAsset();
   }
+}
+
+ngOnDestroy(): void {  
+  this.companiesStateService.setCompanyRoutingId(null);
 }
 }
 
