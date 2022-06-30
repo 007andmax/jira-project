@@ -29,7 +29,7 @@ export class LeftPanelDevicesComponent implements OnInit {
   currentActiveCompanyPageChild: string = "";
 
 
-  constructor(private leftPanelStateService: LeftPanelStateService,
+  constructor(private leftPanelStateService: LeftPanelStateService,    
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
     private companiesState: CompaniesStateService,
@@ -131,9 +131,20 @@ export class LeftPanelDevicesComponent implements OnInit {
     });
     return filteredArray;
   }
+  goToAll(){
+    this.goToState('new-devices');
+    this.type = 'Dashboard'
+    this.currentActivePage = 'new-devices';
+    this.currentActiveCompanyPageChild = '';
+    this.currentActivePinnedPageChild = '';
+    this.currentActiveReportPageChild = '';
+    this.toggleTypePinnedSearch = false;
+    this.toggleTypeCompanies = false;
+    this.toggleTypeReport = false;      
+  }  
 
   pagesActive(page)
-  {    
+  {        
     this.currentActivePage = page;
     if(page == 'new-devices')
     { 
@@ -142,7 +153,7 @@ export class LeftPanelDevicesComponent implements OnInit {
       this.currentActiveReportPageChild = '';      
       this.toggleTypePinnedSearch = false;
       this.toggleTypeCompanies = false;
-      this.toggleTypeReport = false;
+      this.toggleTypeReport = false;      
     }
     if(page == 'devicesReports')
     {    
@@ -156,14 +167,14 @@ export class LeftPanelDevicesComponent implements OnInit {
       this.currentActivePinnedPageChild = '';
       this.currentActiveReportPageChild = '';
       this.toggleTypePinnedSearch = false;
-      this.toggleTypeReport = false;
+      this.toggleTypeReport = false;      
     }
     if(page == 'pinnedSearches')
     {
       this.currentActiveCompanyPageChild = '';
       this.currentActiveReportPageChild = '';
       this.toggleTypeCompanies = false;
-      this.toggleTypeReport = false;
+      this.toggleTypeReport = false;       
     }    
   }
 }
