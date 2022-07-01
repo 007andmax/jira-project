@@ -4,10 +4,9 @@
         [textContent]="product.item.manufacture"
     >
     </td>
-    <td
-        class="new-quote-table__col-desc td-padding-side"
-        [textContent]="product.item.description"
-    ></td>
+    <td class="new-quote-table__col-desc td-padding-side">
+        <pre [textContent]="product.item.description"></pre>
+    </td>
     <td class="new-quote-table__col-unit-price with-dollar">
         <input
             class="qt-input-in-table"

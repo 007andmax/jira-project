@@ -25,7 +25,9 @@
                 You can’t delete a product that associate with contracts, Please remove the product from following contracts before you delete it.
             </p>
             <div class="contract-container qt-mt-16">
-                <h3 [textContent]="inventory.description"></h3>
+                <h3>
+                    <pre [textContent]="inventory.description"></pre>
+                </h3>
                 <p [textContent]="'Associate with ' + agreements.length + ' following contracts'"></p>
                 <div class="contract-container-agreements qt-mt-8">
                     <ng-template

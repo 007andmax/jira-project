@@ -162,10 +162,8 @@
                         let-i="index"
                     >
                         <tr>
-                            <td
-                                class="contract-product-products-table__name"
-                                [textContent]="item.description"
-                            >
+                            <td class="contract-product-products-table__name">
+                                <pre [textContent]="item.description"></pre>
                             </td>
                             <td
                                 class="contract-product-products-table__quantity"
