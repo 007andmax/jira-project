@@ -954,11 +954,11 @@ documents-edit-info {
     &:before {
       content: "";
       position: absolute;
-      top: -1px;
-      right: -6px;
-      width: 20px;
-      height: 20px;
-      background: url("/assets/img/icons/close.svg") no-repeat;
+      top: 2px;
+      right: -3px;
+      width: 14px;
+      height: 14px;
+      background: url("/assets/img/icons/close-light-gray.svg") no-repeat;
       background-size: contain;
     }
   }
@@ -1649,10 +1649,10 @@ app-quotes-item {
       background-color: $white;
     }
     .report-caret-icon {
-      width: 8px;
-      height: 5px;
+      width: 16px;
+      height: 16px;
       background-size: cover;
-      right: 8px;
+      right: 7px;
 
       @media (max-width: 767px) {
         right: 15px;
@@ -2721,10 +2721,10 @@ app-quotes-item {
     &:after {
       position: absolute;
       content: "";
-      background: url("./assets/img/icons/help-12.svg");
+      background: url("./assets/img/icons/help-12.svg") no-repeat center / contain;
       height: 16px;
       width: 16px;
-      right: -20px;
+      right: -22px;
       top: 50%;
       transform: translateY(-50%);
     }
