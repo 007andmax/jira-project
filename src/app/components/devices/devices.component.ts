@@ -146,8 +146,7 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {     
-    localStorage.removeItem("currentSearchCompany");          
+  ngOnInit() {             
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate(
@@ -188,7 +187,8 @@ export class DevicesComponent implements OnInit {
         {
           this.selectedTag.push(data.name);
         }        
-        this.searchTag = this.selectedTag;        
+        this.searchTag = this.selectedTag;     
+        localStorage.removeItem("currentSearchCompany");   
         this.add(undefined);
       })
     }
@@ -222,6 +222,7 @@ export class DevicesComponent implements OnInit {
 
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();
+    this.searchSubscriptionCompany.unsubscribe();
   }
 
   setPreviewDataDevice() {                
