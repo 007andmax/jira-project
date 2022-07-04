@@ -77,10 +77,23 @@
     &__sale-price,
     &__mfg,
     &__ilc,
-    &__cost,{
+    &__cost{
       width: 120px;
       max-width: 120px;
       min-width: 120px;
+      color: $gray-800;
+    }
+    &__cost
+    {
+    width: 60px;
+    max-width: 60px;
+    min-width: 60px;
+    color: $gray-800;
+    }
+    &__sale-price {
+      width: 90px;
+      max-width: 90px;
+      min-width: 90px;
       color: $gray-800;
     }
   }

@@ -92,7 +92,8 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       })
       this.taxesStateService.setTaxesFromtEdit(taxes);
       this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
-      this.elRef.nativeElement.querySelector("#inventory-description").innerHTML = this.inventory.description;
+      console.log("this.inventory", this.inventory);
+      this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
       this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
@@ -148,7 +149,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   public onChangeDescription(event) {
     this.validate.resetDescription();
     this.inventory.description = event.target.value;
-
+    console.log("this.inventory.description", this.inventory.description);
   }
   onChangeCost(val) {
     let value = Number(val);
@@ -201,13 +202,13 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
     this.taxesStateService.onInitClear();
-    this.elRef.nativeElement.querySelector('#inventory-description').innerHTML = '';
+    this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
     this.cd.detectChanges();
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
-    this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
+    // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
       this.toastrService.success("The product has been successfully updated");
       this.appStateService.changeDetectorRef();
