@@ -64,6 +64,10 @@ export class LeftPanelDevicesComponent implements OnInit {
       this.companyReportList= this.getCompaniesNames(data);
       this.companyList = this.companyReportList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
     })
+
+    this.leftPanelStateService.onPageActive.subscribe(data=>{
+      this.currentActiveReportPageChild = data;
+    })
   }
   getCurrentCompany(data) {        
     this.company = data;

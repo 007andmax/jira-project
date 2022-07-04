@@ -20,6 +20,7 @@ export class ReportListItemComponent implements OnInit {
   public goToState(state) {
     localStorage.setItem('report', state);
     this.leftPanelStateService.goToState(state);
+    this.leftPanelStateService.onActivePageReport(state);
   }
   public trackByIndex(index, item) {
     return index;
