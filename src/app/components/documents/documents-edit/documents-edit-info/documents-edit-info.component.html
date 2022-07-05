@@ -151,24 +151,24 @@
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label
-                            class="checkbox-container"
-                            [ngClass]="{'disabled':documentEdit.documentType === 'DOCUMENT'}"
+                          class="qt-checkbox"
+                          [ngClass]="{'disabled':documentEdit.documentType === 'DOCUMENT'}"
                         >
-                            <input
-                                id
-                                type="checkbox"
-                                [disabled]="documentEdit.documentType === 'DOCUMENT'"
-                                [(ngModel)]="requiredCompanyType"
-                                (change)="onResetCompanyType()"
-                            >
-                            <span></span>
-                        </label>
-                        <p>Required by Company Type</p>
-                        <i
+                          <input
+                            id
+                            type="checkbox"
+                            [disabled]="documentEdit.documentType === 'DOCUMENT'"
+                            [(ngModel)]="requiredCompanyType"
+                            (change)="onResetCompanyType()"
+                          >
+                          <span></span>
+                          <div>Required by Company Type</div>
+                          <i
                             class="icn-sm icon__help"
                             placement="top"
                             ngbTooltip="The required type value can be used only for templates"
-                        ></i>
+                          ></i>
+                        </label>
                     </div>
                 </div>
                 <div class="documents-create__col">

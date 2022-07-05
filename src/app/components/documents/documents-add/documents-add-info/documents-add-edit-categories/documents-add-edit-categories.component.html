@@ -27,16 +27,16 @@
                 >
                     <div class="with-checkbox">
                         <label
-                            class="checkbox-container "
-                            [ngClass]="{'disable':item.count > 0}"
-                            *ngIf="getPermissions('DELETE_CATEGORY')"
+                          class="qt-checkbox"
+                          [ngClass]="{'disable':item.count > 0}"
+                          *ngIf="getPermissions('DELETE_CATEGORY')"
                         >
-                            <input
-                                type="checkbox"
-                                [disabled]="item.count > 0"
-                                (change)="onSelectCategory($event,item)"
-                            >
-                            <span class="checkbox-mark"></span>
+                          <input
+                            type="checkbox"
+                            [disabled]="item.count > 0"
+                            (change)="onSelectCategory($event,item)"
+                          >
+                          <span></span>
                         </label>
                         <div class="qt-w100 qt-df qt-jc-sb --required">
                             <mat-error

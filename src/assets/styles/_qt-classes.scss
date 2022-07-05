@@ -2,6 +2,8 @@
 @import './src/assets/styles/fonts';
 
 .qt-checkbox {
+  display: flex;
+  align-items: center;
   margin: 0;
   cursor: pointer;
 

@@ -1,9 +1,5 @@
 <div class="recurring-tickets-content__list--item clearfix" [ngClass]="(ticket.noValid) ? 'no-valid' : ''">
   <div class="col-md-3">
-    <label class="checkbox-container">
-      <input type="checkbox">
-      <span class="checkbox-mark"></span>
-    </label>
     <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
     <p [textContent]="ticket.company.name"></p>
   </div>
