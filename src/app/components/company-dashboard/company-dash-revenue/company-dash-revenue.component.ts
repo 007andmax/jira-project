@@ -79,15 +79,15 @@ export class CompanyDashRevenueComponent implements OnInit {
       this.data = [
         {
           "label": "Invoiced Sum",
-          "value": data.invoicedSum
+          "value": data.invoicedSum.toFixed(2)
         },
         {
           "label": "Collected Sum",
-          "value": data.collectedSum
+          "value": data.collectedSum.toFixed(2)
         },
         {
           "label": "Outstanding Sum",
-          "value": data.outstandingSum
+          "value": data.outstandingSum.toFixed(2)
         }
       ]
       if (!this.cd['destroyed']) {
