@@ -69,7 +69,7 @@ export class CompanyDashRevenueComponent implements OnInit {
       id: this._id
     };
     let getRevenue = this.companiesService.getInvoiceRevenue(obj).subscribe((data: any) => {
-      let totalRevenue = data.collectedSum + data.invoicedSum + data.outstandingSum;
+      let totalRevenue = data.invoicedSum;
       this.totalRevenue = totalRevenue.toFixed(2);
       if (totalRevenue > 1000) this.totalRevenue = (totalRevenue / 1000).toFixed(2) + 'k';
       this.invoicedSum = data.invoicedSum;
