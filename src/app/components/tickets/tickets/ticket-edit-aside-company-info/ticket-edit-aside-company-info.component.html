@@ -121,7 +121,10 @@
             </div>
         </div>
         <hr class="company-info-aside__divider">
-        <div class="company-info-aside__ticket-created">
+        <div
+            class="company-info-aside__ticket-created"
+            *ngIf="createdUser"
+        >
             <div class="company-info-aside__ticket-created-title">Ticket Created by</div>
             <div class="d-f">
                 <div
@@ -167,5 +170,6 @@
         #companyHistory
         [user]="createdUser"
         [company]="company"
+        [hidden]="!createdUser"
     ></app-company-info-history>
 </div>
