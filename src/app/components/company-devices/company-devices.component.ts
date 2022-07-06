@@ -125,7 +125,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    console.log("CompanyDevicesComponent");
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
+      console.log("getOnUpdateAgentActivityStatus");
       var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
       console.log("isCurrentCompany");
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
