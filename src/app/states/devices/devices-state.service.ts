@@ -42,6 +42,7 @@ export class DevicesStateService {
     console.log("DevicesStateService");
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       console.log("1");
+      if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (!this.allDevices) return;
       console.log("2");
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
@@ -80,7 +81,6 @@ export class DevicesStateService {
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') {
         this.closedRemoveConnecion(newChange.data.id);
       }
-      if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (newChange.action === 'DEVICE_INSTALLED') {
         let parsedData = JSON.parse(newChange.data.value);
         parsedData.device.userName = newChange.data.userName;
