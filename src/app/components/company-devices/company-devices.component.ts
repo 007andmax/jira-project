@@ -62,6 +62,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       //  if (this.devices.length === 0 && data[this.companyId]) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
       if (!data[this.companyId] && this.devices.length === 0) return;
+
       if (data[this.companyId].length > this.devices.length) {
         data[this.companyId].forEach(item => {
           let find = this.devices.find(device => device.id === item.id);
@@ -125,7 +126,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
-      var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === this.companyId;
+      var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
+      console.log("isCurrentCompany");
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
@@ -173,6 +175,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnSendDeviceStatus);
   }
+
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
       if (data) {

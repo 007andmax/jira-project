@@ -174,6 +174,7 @@ export class WebsocketService {
   }
 
   private subsribeToDevices() {
+    console.log("subsribeToDevices");
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
         var newChange = JSON.parse(message.body);

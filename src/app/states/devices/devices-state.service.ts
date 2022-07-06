@@ -39,6 +39,7 @@ export class DevicesStateService {
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCompanyDevices(data.company.id);
     })
+    console.log("DevicesStateService");
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (!this.allDevices) return;
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
