@@ -13,11 +13,6 @@
         color: $primary-2;
     }
 }
-.checkbox-container {
-    margin-bottom: 4px;
-    min-width: 16px;
-    padding-left: 16px;
-}
 .square-avatar {
     width: 20px;
     height: 20px;
@@ -28,7 +23,7 @@
     align-items: center;
     justify-content: center;
     line-height: 1;
-    span {
+    &__text {
         color: $white;
     }
 }
