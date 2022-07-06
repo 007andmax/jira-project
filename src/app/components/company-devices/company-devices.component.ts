@@ -147,6 +147,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
             if (this.devices[i].agentId === newChange.data.agentId) {
+              console.log("find");
               this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
               this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
               this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
