@@ -129,7 +129,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
       console.log("getOnUpdateAgentActivityStatus");
       var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
-      console.log("isCurrentCompany");
+      console.log("isCurrentCompany", this.devices.length);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
@@ -146,8 +146,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
+            console.log("find", this.devices[i].agentId === newChange.data.agentId);
             if (this.devices[i].agentId === newChange.data.agentId) {
-              console.log("find");
+
               this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
               this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
               this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
