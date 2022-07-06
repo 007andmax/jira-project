@@ -42,12 +42,20 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
     let id = this.activateRoute.snapshot.params['id'];
-    if (id) this.companiesStateService.setCompanyRoutingId(id);
-    let subscription = this.activateRoute.params.subscribe(params => {
-      id = params['id'];
-      if (id) this.companiesStateService.setCompanyRoutingId(id);
+    if (id) {
       this.companyId = id;
       this.getDevice(id);
+      this.companiesStateService.setCompanyRoutingId(id);
+    }
+    let subscription = this.activateRoute.params.subscribe(params => {
+
+      if (params['id'] && id != params['id']) {
+        id = params['id'];
+        this.companiesStateService.setCompanyRoutingId(id);
+        this.companyId = id;
+        this.getDevice(id);
+      }
+
     });
     this.sub.add(subscription);
 
@@ -172,6 +180,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.filter.onFilterName(this.devices);
         this.showPreloader = false;
       }
+      console.log("this.devices.length", this.devices.length);
       if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
 
     });
