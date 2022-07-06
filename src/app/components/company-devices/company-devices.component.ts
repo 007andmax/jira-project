@@ -194,6 +194,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.filter.onFilter(field, this.devices)
   }
   sendDeviceStatusRequest(companyId, ids) {
+    console.log("sendDeviceStatusRequest", ids.length);
     this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {
     })
   }
