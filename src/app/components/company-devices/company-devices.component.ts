@@ -47,12 +47,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companyId = id;
-      if (this.devicesStateService.getAllDevices()) {
-        this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];
-        this.filter.onFilterName(this.devices);
-        this.showPreloader = false;
-      }
-      if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      this.getDevice(id);
     });
     this.sub.add(subscription);
 
@@ -169,6 +164,17 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
+  }
+  getDevice(id) {
+    this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
+      if (data) {
+        this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
+        this.filter.onFilterName(this.devices);
+        this.showPreloader = false;
+      }
+      if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+
+    });
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
