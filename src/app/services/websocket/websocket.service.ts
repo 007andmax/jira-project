@@ -33,6 +33,7 @@ import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/ma
 import { WebsocketStateService } from 'src/app/states/websocket/websocket-state.service';
 import { SupportPageCategoriesRealTimeService } from 'src/app/components/super-admin/state/support-page-categories/support-page-categories-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 
 /**
@@ -83,6 +84,7 @@ export class WebsocketService {
     private websocketStateService: WebsocketStateService,
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
+    private devicesStateService: DevicesStateService
 
   ) {
   }
@@ -174,6 +176,7 @@ export class WebsocketService {
   }
 
   private subsribeToDevices() {
+    console.log("subsribeToDevices");
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
         var newChange = JSON.parse(message.body);
@@ -182,6 +185,7 @@ export class WebsocketService {
 
         }
       });
+      this.devicesStateService.initWebSocket();
     }, 3000);
   }
   private subsribeToUsers() {
