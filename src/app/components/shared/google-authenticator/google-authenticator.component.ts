@@ -28,6 +28,7 @@ export class GoogleAuthenticatorComponent implements OnInit {
     config: NgbModalConfig,) {
     config.backdrop = 'static';
     config.keyboard = false;
+
   }
 
   ngOnInit() {
@@ -43,7 +44,8 @@ export class GoogleAuthenticatorComponent implements OnInit {
         this.isSetQrCode = true;
         this.appStateService.changeDetectorRef();
         this.onSetQrCode.emit(null);
-
+      } else {
+        this.toastrService.error("The verification code is not valid");
       }
     })
   }

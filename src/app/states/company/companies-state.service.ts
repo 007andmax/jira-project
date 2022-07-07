@@ -70,7 +70,6 @@ export class CompaniesStateService {
     return this.companyIdForassignedDocumentCategory;
   }
   public getCategoriesDocuments(id) {
-    console.log("getCategoriesDocuments", id);
     this.companyIdForassignedDocumentCategory = id;
     this.companiesService.getCategoriesDocuments(id).subscribe((data: any) => {
       this.assignedDocumentCategories = data;

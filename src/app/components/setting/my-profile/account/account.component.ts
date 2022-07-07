@@ -75,7 +75,9 @@ export class AccountComponent implements OnInit, OnDestroy {
   // selected auth type
   onAuthTypeChange(type: string) {
     if (type === "GOOGLE_SECURE") {
-      const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal' });
+      const modalRef = this.modalService.open(GoogleAuthenticatorComponent, {
+        windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false
+      });
       let onReset = modalRef.componentInstance.onReset.subscribe(data => {
         this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
       })

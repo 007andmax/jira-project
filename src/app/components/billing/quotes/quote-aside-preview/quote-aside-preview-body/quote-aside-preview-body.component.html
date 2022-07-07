@@ -145,10 +145,9 @@
                                 [textContent]="product.manufacture"
                             >
                             </td>
-                            <td
-                                class="invoice-preview__col-desc"
-                                [textContent]="product.description"
-                            ></td>
+                            <td class="invoice-preview__col-desc">
+                                <pre [textContent]="product.description"></pre>
+                            </td>
                             <td
                                 class="invoice-preview__col-price"
                                 [textContent]="product.sale | currency"

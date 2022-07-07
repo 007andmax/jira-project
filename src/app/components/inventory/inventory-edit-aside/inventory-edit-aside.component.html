@@ -48,13 +48,20 @@
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getDescription()">Description is required</mat-error>
             <p>Description</p>
-            <div
+            <textarea
+                appTextArea
+                [limit]="160"
+                id="inventory-description"
                 placeholder="Write Product Description"
-                aria-placeholder="Write Product Description"
+                (input)="onChangeDescription($event)"
+                (onPast)="onPastDescription($event)"
+            ></textarea>
+            <!-- <div
+                placeholder="Write Product Description"
                 contenteditable="true"
                 id="inventory-description"
                 placeholder="Enter description here"
-            ></div>
+            ></div> -->
         </div>
         <div
             class="col-md-6"
