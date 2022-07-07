@@ -58,7 +58,10 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     });
     this.sub.add(subscription);
-
+    let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
+      if (this.companyId) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+    })
+    this.sub.add(onInitWebSocket);
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       //  if (this.devices.length === 0 && data[this.companyId]) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
       if (!data[this.companyId] && this.devices.length === 0) return;
@@ -146,9 +149,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
-            console.log("find", this.devices[i].agentId === newChange.data.agentId);
             if (this.devices[i].agentId === newChange.data.agentId) {
-
               this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
               this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
               this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
@@ -174,7 +175,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnResetDeviceTiming);
     let getOnSendDeviceStatus = this.devicesStateService.getOnSendDeviceStatus().subscribe((data: DeviceStatus) => {
-      if (this.companyId === data.companyId) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
+      if (this.companyId === data.companyId && this.devicesStateService.getIsInitWebSocket()) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
@@ -188,7 +189,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.showPreloader = false;
       }
       console.log("this.devices.length", this.devices.length);
-      if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
 
     });
   }

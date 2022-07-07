@@ -27,6 +27,8 @@ export class DevicesStateService {
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
+  onInitWebSocket: EventEmitter<any> = new EventEmitter();
+  isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
@@ -95,6 +97,14 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  public initWebSocket() {
+    this.isInitWebSocket = true;
+    this.onInitWebSocket.emit(null);
+  }
+
+  public getIsInitWebSocket() {
+    return this.isInitWebSocket;
   }
   getCompanyDevices(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data) => {
