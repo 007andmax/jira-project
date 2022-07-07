@@ -128,11 +128,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    console.log("CompanyDevicesComponent");
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
-      console.log("getOnUpdateAgentActivityStatus");
       var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
-      console.log("isCurrentCompany", this.devices.length);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
@@ -188,16 +185,13 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         this.filter.onFilterName(this.devices);
         this.showPreloader = false;
       }
-      console.log("this.devices.length", this.devices.length);
       if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
-
     });
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
   }
   sendDeviceStatusRequest(companyId, ids) {
-    console.log("sendDeviceStatusRequest", ids.length);
     this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {
     })
   }

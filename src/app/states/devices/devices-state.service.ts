@@ -41,12 +41,9 @@ export class DevicesStateService {
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCompanyDevices(data.company.id);
     })
-    console.log("DevicesStateService");
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
-      console.log("1");
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (!this.allDevices) return;
-      console.log("2");
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
         if (this.allDevices[newChange.data.clientCompanyId]) this.allDevices[newChange.data.clientCompanyId].forEach(item => {
           if (item.agentId === newChange.data.masterAgentId) item.master = true;
