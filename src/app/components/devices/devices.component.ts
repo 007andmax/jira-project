@@ -347,9 +347,34 @@ export class DevicesComponent implements OnInit {
             asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
             if (this.kafkaMessage.IdleTime != null) {
               let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              asset.IdelTime = Time[1] != "" ? Time[1] : "";
+              asset.IdelTime = Time[1] !=""? Time[1] : "";                            
             }
-            asset.UpTime = this.kafkaMessage.UpTime;
+            if(this.kafkaMessage.UpTime !="")
+            {
+                let result = this.kafkaMessage.UpTime.split(" ");
+  
+                if(result[0]=="0" && result[2]=="0" && result[4]=="0")
+                {
+                  let Sec = result[6]+' '+result[7];
+                  asset.UpTime = Sec;
+                }
+                else if(result[0]=="0" && result[2]=="0" && result[4]!="0")
+                {
+                  let Minutes = result[4]+' '+result[5]+' '+result[6]+' '+result[7];  
+                  asset.UpTime = Minutes;
+                }
+                else if(result[0]=="0" && result[2]!="0" && result[4]!="0")
+                {
+                  let Hours = result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
+                  asset.UpTime = Hours; 
+                }
+                else
+                {
+                  let Days = result[0]+' '+result[1]+' '+result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
+                  asset.UpTime = Days;
+                }
+            }            
+                        
           }
           asset.online = true;
         }
