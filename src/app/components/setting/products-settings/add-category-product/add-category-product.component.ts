@@ -67,7 +67,6 @@ export class AddCategoryProductComponent implements OnInit {
       : "No description"}`;
   }
   onSelectGlNumbers(item) {
-    console.log("glNumber", item);
     this.glNumber = item;
   }
   public close() {

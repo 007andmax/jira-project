@@ -115,7 +115,6 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       )
   }
   onSelectGlNumbers(item, glNumber) {
-    console.log("glNumber", glNumber);
     this.productService.setGlNumberCategory(item.id, (glNumber) ? { id: glNumber.id } : null)
       .subscribe(
         () => {
