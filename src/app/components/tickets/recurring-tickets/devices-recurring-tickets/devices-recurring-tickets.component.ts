@@ -25,6 +25,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   public selectedDevice;
   public subGetDevicesList: ISubscription;
   public devicesList: any;
+  preloader: boolean = true;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -47,7 +48,10 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
-
+    if (this.devicesStateService.getAllDevices()) this.preloader = false;
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.preloader = false;
+    })
   }
 
   /**
@@ -74,8 +78,6 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
       } else {
         this.devicesList = [];
       }
-
-
       this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
       if (!this.devicesList) this.clearDevices();
       if (this.editItem && this.devicesList) {

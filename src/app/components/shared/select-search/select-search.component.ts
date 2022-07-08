@@ -32,6 +32,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   @Input() isDisabled: boolean = false;
+  @Input() preloader: boolean = false;
   @Input() formatter = (result: string) => {
     return (this.field) ? result[this.field] : result;
   };

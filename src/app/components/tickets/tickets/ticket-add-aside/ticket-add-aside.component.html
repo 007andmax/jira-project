@@ -159,6 +159,8 @@
                     [class]="['qt-dropdown']"
                     [field]="'hostName'"
                     [list]="devices"
+                    [preloader]="devicesStateService.getPreloaderDevices()"
+                    [isDisabled]="devicesStateService.getPreloaderDevices()"
                     [placeholder]="'Select device'"
                     (onSelectedItem)="onSelectDevice($event)"
                 ></app-select-search>

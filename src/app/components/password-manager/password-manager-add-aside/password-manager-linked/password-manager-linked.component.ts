@@ -28,6 +28,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
   public gadgets = [];
   public newGadgets: any;
   companies: Array<Company> = [];
+  preloader: boolean = true;
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
@@ -37,6 +38,10 @@ export class PasswordManagerLinkedComponent implements OnInit {
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
+    if (this.devicesStateService.getAllDevices()) this.preloader = false;
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.preloader = false;
+    })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);

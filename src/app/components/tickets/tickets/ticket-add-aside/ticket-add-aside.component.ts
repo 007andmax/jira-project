@@ -58,7 +58,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
-    private devicesStateService: DevicesStateService,
+    public devicesStateService: DevicesStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     public appService: AppService,

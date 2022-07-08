@@ -33,7 +33,6 @@ export class DevicesStateService {
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
-    private websocketService: WebsocketService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
@@ -126,9 +125,6 @@ export class DevicesStateService {
       if (element.id === id) element.label = label;
     });
     this.onInitGetDevices(this.allDevices);
-  }
-  public subsribeToNetScan(id) {
-    this.websocketService.subsribeToNetScan(id);
   }
   public getOnSendDeviceStatus() {
     return this.onSendDeviceStatus;
