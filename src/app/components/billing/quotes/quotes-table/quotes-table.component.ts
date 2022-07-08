@@ -140,7 +140,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       if (typeof recipients === "string") item.recipients = recipients.split(',');
       this.quoteServices.getQuote(item.id).subscribe((data) => {
         let quote: QuoteEdit = new QuoteEdit(data);
-        const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+        const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
         modalRef.componentInstance.data = quote;
         modalRef.componentInstance.action = QUOTE_MODAL_ACTION_LIST;
       })
@@ -166,7 +166,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   archiveQuote(item) {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
     this.quoteStateService.setQuoteForArchive(item);
   }

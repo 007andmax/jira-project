@@ -204,7 +204,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   deleteRecord() {
     this.confirmStateService.setConfirmAction(REMOVE_RECORD);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }

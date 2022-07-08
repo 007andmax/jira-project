@@ -124,17 +124,17 @@ export class UsersTableMarketingComponent implements OnInit {
   }
   delete() {
     if (this.user.isContact) {
-      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `You cannot archive primary contact user`;
       return;
     }
     if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.company.id, false) === 1) {
-      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
       return;
     }
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);

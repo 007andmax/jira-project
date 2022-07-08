@@ -106,10 +106,10 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
-      this.getTehusers(this.usersStateService.getAllUsers());
+      this.getTechusers(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getTehusers(data);
+      this.getTechusers(data);
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
@@ -340,7 +340,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
-  private getTehusers(list) {
+  private getTechusers(list) {
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
         this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));

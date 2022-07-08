@@ -94,7 +94,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
 
   archiveQuote() {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
     this.quoteStateService.setQuoteForArchive(this.quote);
   }
@@ -102,7 +102,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     if (this.quote.status === 'TICKETED' || this.quote.status === 'INVOICED') {
       this.quoteServices.repeatSend(this.quote.id).subscribe();
     } else {
-      const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+      const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.data = this.quote;
       modalRef.componentInstance.action = QUOTE_MODAL_ACTION_PREVIEW;
     }

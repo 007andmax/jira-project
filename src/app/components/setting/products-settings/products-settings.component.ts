@@ -6,7 +6,9 @@ import { DELETE_CATEGORIES_PRODUCT, DELETE_CATEGORY_PRODUCT } from 'src/app/cons
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ModalEditCategoryProductComponent } from 'src/app/services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { ProductService } from 'src/app/services/product/product.service';
+import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { GlNumber } from '../../reports/class/gl-number';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CategoryProductSettings } from './class/category-product-settings';
@@ -23,10 +25,12 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   filter: ProductsCategoryFilter = new ProductsCategoryFilter();
   categoriesProducts: Array<CategoryProductSettings> = [];
   sub: Subscription = new Subscription();
+  glNumbers: Array<GlNumber> = [];
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private productService: ProductService,
     public cd: ChangeDetectorRef,
+    private glNumberStateService: GlNumberStateService,
     private modalService: NgbModal,) { }
 
 
@@ -48,6 +52,18 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
+    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
+      this.glNumbers = this.sortGlNumbers(data);
+    })
+  }
+  private sortGlNumbers(data) {
+    return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+  }
+  glDropDownItemName(item) {
+    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
+      : "No description"}`;
   }
   onSelect(event, item) {
     if (event.target.checked) {
@@ -98,6 +114,14 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
         }
       )
   }
+  onSelectGlNumbers(item, glNumber) {
+    console.log("glNumber", glNumber);
+    this.productService.setGlNumberCategory(item.id, (glNumber) ? { id: glNumber.id } : null)
+      .subscribe(
+        () => {
+
+        })
+  }
   onEditCategory(item) {
     if (item.isInitEdit) {
       if (item.length === 0 || item.disableUpdate) return;
@@ -111,13 +135,13 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   }
   removeCategoriesStatus() {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORIES_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Product Category`;
 
   }
   removeCategoryProduct(data) {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Product Category`;
     this.inventoryStateService.setCategoryForDelete(data);
   }

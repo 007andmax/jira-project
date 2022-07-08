@@ -561,19 +561,19 @@ export class CompanyDashDetailComponent implements OnInit {
   downloadAgent() {
 
     this.downloadAgentStateService.setCompnay(this.companyDetail);
-    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
+    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal', backdrop: 'static', keyboard: false });
 
   }
 
   open(content: any) {
     this.tagsState.setTagsFromtEdit(this.tags);
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours' });
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours', backdrop: 'static', keyboard: false });
   }
   openTag(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal', backdrop: 'static', keyboard: false });
   }
   openMap(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
   }
 
   deleteTag(index: number) {

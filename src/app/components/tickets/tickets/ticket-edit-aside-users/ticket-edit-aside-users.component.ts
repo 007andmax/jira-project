@@ -172,7 +172,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   };
   archiveUser(user) {
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
     modalRef.componentInstance.message = `Do you want to archive ${user.firstName + ' ' + user.lastName}`;
     this.usersStateService.setUserForArchive(user);

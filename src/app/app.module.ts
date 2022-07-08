@@ -52,7 +52,7 @@ import { DevicesRecurringTicketsComponent } from './components/tickets/recurring
 import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
 import { DurationComponent } from './components/shared/duration/duration.component';
-import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
+import { TechUsersComponent } from './components/shared/tech-users/tech-users.component';
 import { numberDirective } from './directives/number.directive';
 import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
@@ -126,7 +126,7 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
+import { TechUsersSettingsComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
@@ -544,6 +544,7 @@ import { DocumentsEditCategoryComponent } from './components/documents/documents
 import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
 import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
 import { GoogleAuthenticatorScratchesComponent } from './components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
+import { GlNumberCheckUseComponent } from './components/setting/accounting/gl-number/gl-number-check-use/gl-number-check-use.component';
 
 
 declare var $: any;
@@ -584,7 +585,7 @@ declare var $: any;
     TagsComponent,
     IntervalComponent,
     DurationComponent,
-    TehUsersComponent,
+    TechUsersComponent,
     numberDirective,
     TextAreaDirective,
     DatePickerComponent,
@@ -628,7 +629,7 @@ declare var $: any;
     SettingComponent,
     CompanyProfileComponent,
     ManageTagsComponent,
-    TechUsersComponent,
+    TechUsersSettingsComponent,
     EmailSettingComponent,
     TaxesSettingsComponent,
     PermissionManageComponent,
@@ -1027,7 +1028,8 @@ declare var $: any;
     DocumentsEditCategoryComponent,
     DocumentsEditCategoryItemComponent,
     GoogleAuthenticatorComponent,
-    GoogleAuthenticatorScratchesComponent
+    GoogleAuthenticatorScratchesComponent,
+    GlNumberCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -1088,7 +1090,8 @@ declare var $: any;
     SupportPageEditCategoryComponent,
     InventoryCheckUseComponent,
     GoogleAuthenticatorComponent,
-    GoogleAuthenticatorScratchesComponent
+    GoogleAuthenticatorScratchesComponent,
+    GlNumberCheckUseComponent
     // RecurringTicketsComponent
   ],
   exports: [

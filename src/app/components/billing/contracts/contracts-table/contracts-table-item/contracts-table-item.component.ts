@@ -60,7 +60,7 @@ export class ContractsTableItemComponent implements OnInit {
   }
   deleteContract() {
     this.confirmStateService.setConfirmAction(REMOVE_CONTRACT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete agreement?`;
     this.contractsStateService.setContractForDelete(this.contract);
   }

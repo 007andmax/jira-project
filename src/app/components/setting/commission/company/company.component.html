@@ -27,7 +27,7 @@
             {{ getClinetUrl(company) }}
                     </td>
                     <td class="sp">
-                        <app-teh-users
+                        <app-tech-users
                             [users]="activeTechUsers"
                             [editMode]="true"
                             [type]="'COMPANY_SETTINGS'"
@@ -35,7 +35,7 @@
                             [editUsers]="selectedActiveTechUsers(company, i)"
                             [isDisabled]="!getPermissions('EDIT_COMPANIES')"
                             (usersChange)="setTechLead($event,company)"
-                        ></app-teh-users>
+                        ></app-tech-users>
                     </td>
                 </tr>
             </tbody>

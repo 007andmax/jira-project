@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TehUsersComponent } from './teh-users.component';
+import { GlNumberCheckUseComponent } from './gl-number-check-use.component';
 
-describe('TehUsersComponent', () => {
-  let component: TehUsersComponent;
-  let fixture: ComponentFixture<TehUsersComponent>;
+describe('GlNumberCheckUseComponent', () => {
+  let component: GlNumberCheckUseComponent;
+  let fixture: ComponentFixture<GlNumberCheckUseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TehUsersComponent ]
+      declarations: [ GlNumberCheckUseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TehUsersComponent);
+    fixture = TestBed.createComponent(GlNumberCheckUseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

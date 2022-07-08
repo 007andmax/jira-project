@@ -3,7 +3,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class TehUsersSateService {
+export class TechUsersStateService {
 
   clearState = new EventEmitter<any>();
   usersFromEdit: EventEmitter<any> = new EventEmitter();
@@ -19,7 +19,7 @@ export class TehUsersSateService {
   /**
   * Get subscribe for clear data
   */
-  public getClearState () {
+  public getClearState() {
     return this.clearState
   }
 
@@ -34,7 +34,7 @@ export class TehUsersSateService {
   /**
   * Get  subscribe for edit mode
   */
-  public getUsersFromEdit () {
+  public getUsersFromEdit() {
     return this.usersFromEdit;
   }
 }

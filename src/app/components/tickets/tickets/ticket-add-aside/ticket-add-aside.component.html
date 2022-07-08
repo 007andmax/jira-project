@@ -174,19 +174,19 @@
             <div class="save-template">
                 <div
                     class="device-user pointer"
-                    id="dropdownTehuser"
+                    id="dropdownTechuser"
                     *ngIf="appService.checkMobile()"
                     (click)="onAddAssignedUser()"
                 >
                 </div>
-                <app-teh-users
+                <app-tech-users
                     #techUsersDp
                     *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
                     [editMode]="true"
                     [editUsers]="shareUsersList"
                     (usersChange)="onChangeShareUsers($event)"
-                ></app-teh-users>
+                ></app-tech-users>
                 <div class="assigned-users-list">
                     <div class="assigned-users-type assigned-users-type-clients">
                         <ng-template

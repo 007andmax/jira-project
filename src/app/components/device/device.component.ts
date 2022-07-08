@@ -49,7 +49,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   openModal(template) {
     if (this.deviceDetail.online === true) {
-      this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true }).result.then((result) => {
+      this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismiss(reason)}`;

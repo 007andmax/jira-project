@@ -118,7 +118,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     if (this.isChange) {
       this.showConfirm = true;
       this.confirmStateService.setConfirmAction(SAVE_AND_SEND);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }

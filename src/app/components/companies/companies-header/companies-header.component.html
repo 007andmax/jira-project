@@ -194,10 +194,10 @@
                 <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
             <mat-chip
-                *ngIf="filter.companyFilter.tehUser"
+                *ngIf="filter.companyFilter.techUser"
                 (removed)="filter.personsDp.clearClient();refreshFilters()"
             >
-                {{getUserName(filter.companyFilter.tehUser)}}
+                {{getUserName(filter.companyFilter.techUser)}}
                 <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
             <mat-chip

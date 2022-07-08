@@ -40,14 +40,14 @@
                     [type]="'ICON'"
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>
-                <app-teh-users
+                <app-tech-users
                     [type]="'TICEKTS'"
                     [editMode]="true"
                     [selectedMode]="'SINGLE'"
                     [editUsers]="userService"
-                    [users]="listTehUsers"
+                    [users]="listTechUsers"
                     (usersChange)="onChangeUser($event)"
-                ></app-teh-users>
+                ></app-tech-users>
             </div>
             <div class="ticket-updates__service-subinfo">
                 <pre [textContent]="service.description">

@@ -148,7 +148,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   confirmDelete(data: any) {
     this.category = data;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want ${this.category.name} commission rate to zero?`;
   }
 

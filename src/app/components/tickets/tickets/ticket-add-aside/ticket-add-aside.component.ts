@@ -5,7 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketCreatedUser } from '../class/ticket-created-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
-import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { TitleListType } from '../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
@@ -20,7 +20,7 @@ import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.s
 import { forkJoin, Subscription } from 'rxjs';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
-import { TehUsersComponent } from 'src/app/components/shared/teh-users/teh-users.component';
+import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 
 
@@ -37,7 +37,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('companyDP') companyDP: DropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('techUsersDp') techUsersDp: TehUsersComponent;
+  @ViewChild('techUsersDp') techUsersDp: TechUsersComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
@@ -92,7 +92,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeAssignedUser);
   }
   onAddAssignedUser() {
-    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.userList = this.listTechUsersForAssign;
     modalRef.componentInstance.selectedUsers = this.shareUsersList;
     this.addUsersNotifyStateService.setAction(USERS_TO_ADD_TICKET);

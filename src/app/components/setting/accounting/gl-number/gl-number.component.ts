@@ -11,6 +11,7 @@ import { ConfirmStateService } from "src/app/components/shared/confirm/services/
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_GL_NUMBER } from "src/app/const/confirm";
 import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
+import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check-use.component";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -82,11 +83,9 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
   removeConfirm(gl: any) {
     this.gl = gl;
-    this.popup = true;
     this.confirmStateService.setConfirmAction(DELETE_GL_NUMBER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Remove Income Account Number`;
-
+    const modalRef = this.modalService.open(GlNumberCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-accounting-settings", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.glNumber = gl;
   }
 
   /**

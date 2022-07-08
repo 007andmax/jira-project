@@ -43,7 +43,7 @@ export class SupportPageHeaderComponent implements OnInit {
     this.onPreview.emit(this.isPreview);
   }
   editCategoryName() {
-    const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(SupportPageEditCategoryComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.category_id = this.selectedCategory.id;
     modalRef.componentInstance.name = this.selectedCategory.name;
     this.cd.detectChanges();
@@ -59,7 +59,7 @@ export class SupportPageHeaderComponent implements OnInit {
   }
   removeCategory() {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete the category?`;
     this.supportPageCategoriesStateService.setCategoryForRemove(this.selectedCategory);
     this.cd.detectChanges();

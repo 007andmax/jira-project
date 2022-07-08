@@ -119,7 +119,7 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.ticketStateService.setServiceForRemove(this.update.services[i]);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_SERVICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
 
   }

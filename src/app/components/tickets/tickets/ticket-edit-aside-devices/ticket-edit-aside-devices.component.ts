@@ -103,7 +103,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value.toLowerCase()));
   }
   remoteAccess(connectionType, device) {
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = device;
     modalRef.componentInstance.companyId = this.companyId;

@@ -4477,7 +4477,7 @@ app-add-assigned-user {
     top: 0;
   }
 
-  app-teh-users {
+  app-tech-users {
     height: 24px;
   }
 }
@@ -5048,4 +5048,8 @@ add-category-product {
     height: calc(100% - 140px);
     overflow: auto;
   }
+}
+app-default-services-edit,app-inventory-edit-aside {
+  position: relative;
+  z-index: 999;
 }

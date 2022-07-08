@@ -9,9 +9,6 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
     <div class="qt-aside-modern__content recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
             <p>Service Description</p>
@@ -27,9 +24,6 @@
                 ></textarea>
             </div>
         </div>
-
-
-
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getCompany()">Company name is required</mat-error>
             <p>Assign to Company</p>
@@ -41,9 +35,6 @@
                 (selectedItem)="selectClient($event)"
             ></app-select-client-company>
         </div>
-
-
-
         <div class="col-md-4">
             <p>Device Name</p>
             <app-devices-recurring-tickets
@@ -68,9 +59,6 @@
             ></app-interval>
         </div>
         <div class="col-md-12 ticket-tabs">
-
-
-
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
                 class="ticket-tabs-service d-f ai-c"
@@ -80,13 +68,7 @@
                 <i class="icn-20 tab-service"></i>
                 Service
             </div>
-
-
-
             <!-- ---------------------------------------------------------------- -->
-
-
-
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
                 class="ticket-tabs-product d-f ai-c"
@@ -97,13 +79,7 @@
                 Products
             </div>
             <!-- ---------------------------------------------------------------- -->
-
-
-
         </div>
-
-
-
         <!-- IF TAB IS 'PRODUCT'----------------------------------------------- -->
         <div
             class="col-md-12 product-tab-content p-0"
@@ -209,9 +185,6 @@
             +Add Product
         </div>
         <!-- ------------------------------------------------------------------ -->
-
-
-
         <!-- IF TAB IS 'SERVICE'----------------------------------------------- -->
         <div
             class="col-md-12 service-tab-content p-0"
@@ -284,9 +257,6 @@
                         <!-- <input type="text" [(ngModel)]="service.description" placeholder="Write Description"> -->
                     </div>
                 </div>
-
-
-
             </ng-template>
         </div>
         <div
@@ -297,13 +267,7 @@
             +Add Service
         </div>
         <!-- ------------------------------------------------------------------ -->
-
-
-
         <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
-
-
-
         <div class="col-md-12 checkbox-wrapper">
             <div class="with-checkbox">
                 <label class="checkbox-container">
@@ -337,9 +301,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="qt-aside-modern__footer">
         <div class="col-md-12 recurring-tickets-content__modal--content-footer">
             <div class="d-f">
@@ -363,15 +324,15 @@
                 </button>
             </div>
             <div class="save-template">
-                <app-teh-users
-                    [users]="listTehUsers"
-                    (usersChange)="onChangeTehUsers($event)"
-                ></app-teh-users>
+                <app-tech-users
+                    [users]="listTechUsers"
+                    (usersChange)="onChangeTechUsers($event)"
+                ></app-tech-users>
                 <div class="assigned-users-list">
                     <ng-template
                         ngFor
                         let-user
-                        [ngForOf]="tehUsers"
+                        [ngForOf]="techUsers"
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >

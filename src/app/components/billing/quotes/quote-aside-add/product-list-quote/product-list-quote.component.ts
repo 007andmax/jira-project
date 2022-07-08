@@ -8,4 +8,12 @@ import { ProductListComponent } from 'src/app/components/shared/product-list/pro
 })
 export class ProductListQuoteComponent extends ProductListComponent {
 
+
+  setProduct(productItem) {
+
+    this.elRef.nativeElement.querySelector('#input-dropdown').value = '';
+    this.products_dropDown.close();
+    this.selectedProductItem.next(productItem);
+    this.selectedItem = false;
+  }
 }

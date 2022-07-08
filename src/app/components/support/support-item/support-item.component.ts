@@ -73,7 +73,7 @@ export class SupportItemComponent implements OnInit {
     document.body.removeChild(textArea);
   }
   sendEmail() {
-    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.data = {
       message: `Follow that link(${this.constantsStateService.getConstant('server.url') + 'remote?key=' + this.item.key}) to download agent`,
       subject: `${this.companiesStateService.getCurrentCompany().name} remote support agent`,

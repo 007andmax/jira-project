@@ -310,7 +310,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);

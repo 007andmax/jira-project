@@ -17,19 +17,19 @@ export class RecurringTicketsStateService {
   public onCopyCreate: EventEmitter<any> = new EventEmitter();
   public showTicketAddRecurringAside: EventEmitter<any> = new EventEmitter();
   editProducts: Array<EditProduct> = [];
-  tehCompany: any = null;
+  techCompany: any = null;
   constructor(private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService,) {
-    this.onInitTehCompany();
+    this.onInitTechCompany();
   }
 
   /**
-* Subscribe to change teh company
+* Subscribe to change tech company
 */
-  public onInitTehCompany() {
-    if (this.companiesStateService.getCurrentCompany()) this.tehCompany = this.companiesStateService.getCurrentCompany();
+  public onInitTechCompany() {
+    if (this.companiesStateService.getCurrentCompany()) this.techCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.onCurrentCompany.subscribe(res => {
-      this.tehCompany = res;
+      this.techCompany = res;
     })
   }
 
@@ -42,10 +42,10 @@ export class RecurringTicketsStateService {
   }
 
   /**
-* Get teh company
+* Get tech company
 */
-  public getTehCompany() {
-    return this.tehCompany;
+  public getTechCompany() {
+    return this.techCompany;
   }
 
 
