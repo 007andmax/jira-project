@@ -30,15 +30,15 @@
                     >
                         <span
                             class="left-side-overflow"
-                            [ngClass]="{'qt-loading': isScaning || devicesStateService.getPreloaderDevices()}"
+                            [ngClass]="{'qt-loading': isScaning}"
                             (click)="runScanDevices()"
-                            [textContent]="(masterAgent && !isScaning && !devicesStateService.getPreloaderDevices()) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
+                            [textContent]="(masterAgent && !isScaning) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
                         >
                         </span>
                         <div
                             class="button-menu"
                             ngbDropdownToggle
-                            [hidden]="isScaning || devicesStateService.getPreloaderDevices()"
+                            [hidden]="isScaning"
                         >
                             <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
                         </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -39,6 +39,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     private passwordManagerStateService: PasswordManagerStateService,
     private usersStateService: UsersStateService,
     public appService: AppService,
+    public cd: ChangeDetectorRef,
     public devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
@@ -54,6 +55,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     })
     this.passwordManagerStateService.onFilterByCategory.subscribe((data) => {
       this.categoriesSelect.onSelect(data);
+    })
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.cd.detectChanges();
     })
   }
   public onClearAll() {
