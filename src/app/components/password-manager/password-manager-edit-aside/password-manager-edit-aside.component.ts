@@ -72,6 +72,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
+      this.selectedClient = data.find(item => item.id === this.editItem.companyId);
     })
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
