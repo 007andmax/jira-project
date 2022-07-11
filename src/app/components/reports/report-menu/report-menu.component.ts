@@ -85,7 +85,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
-    private devicesStateService: DevicesStateService,
+    public devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,

@@ -39,7 +39,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     private passwordManagerStateService: PasswordManagerStateService,
     private usersStateService: UsersStateService,
     public appService: AppService,
-    private devicesStateService: DevicesStateService) { }
+    public devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
     if (this.passwordManagerStateService.getSelectedCategory()) this.categoriesSelect.onSelect(this.passwordManagerStateService.getSelectedCategory());

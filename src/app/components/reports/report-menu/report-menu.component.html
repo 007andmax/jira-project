@@ -149,8 +149,8 @@
                                 [dropdownHeight]="'300px'"
                                 [heightInput]="'36px'"
                                 [list]="devices"
-                                [isDisabled]="!remoteConnectionReport.companyId"
-                                [preloader]="remoteConnectionReport.preloaderDevices"
+                                [isDisabled]="!remoteConnectionReport.companyId || devicesStateService.getPreloaderDevices()"
+                                [preloader]="remoteConnectionReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
                                 (onSelectedItem)="onSelectDevice($event)"
                             ></software-summary-devices-dro-down>
                         </div>
@@ -221,8 +221,8 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!deviceIpSummary.companyId"
-                                            [preloader]="deviceIpSummary.preloaderDevices"
+                                            [isDisabled]="!deviceIpSummary.companyId || devicesStateService.getPreloaderDevices()"
+                                            [preloader]="deviceIpSummary.preloaderDevices || devicesStateService.getPreloaderDevices()"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
@@ -370,8 +370,8 @@
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
-                                            [isDisabled]="!hardwareSummaryReport.companyId"
-                                            [preloader]="hardwareSummaryReport.preloaderDevices"
+                                            [isDisabled]="!hardwareSummaryReport.companyId || devicesStateService.getPreloaderDevices()"
+                                            [preloader]="hardwareSummaryReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
                                             (onSelectedItem)="onSelectDevice($event)"
                                         ></software-summary-devices-dro-down>
                                     </div>
@@ -491,8 +491,8 @@
                                             [search]="true"
                                             [change]="true"
                                             [placeholder]="'All devices'"
-                                            [preloader]="softwareSummaryReport.preloaderDevices"
-                                            [isDisabled]="!softwareSummaryReport.companyId"
+                                            [preloader]="softwareSummaryReport.preloaderDevices || devicesStateService.getPreloaderDevices()"
+                                            [isDisabled]="!softwareSummaryReport.companyId || devicesStateService.getPreloaderDevices()"
                                             [dropdownHeight]="'300px'"
                                             [heightInput]="'36px'"
                                             [list]="devices"
