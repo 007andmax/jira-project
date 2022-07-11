@@ -48,6 +48,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   users = [];
   techUsersList = [];
   shareUsersList = [];
+  selectedCompanyId: string;
   listTechUsersForAssign: Array<TechUserItem> = [];
   selectedTicketPriorities: TitleListType = new TitleListType('Medium Priority', 'MEDIUM');
   ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
@@ -70,6 +71,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
+      if (this.selectedCompanyId) this.onGetDevices(this.devicesStateService.getAllDevices()[this.selectedCompanyId]);
+    })
+    this.sub.add(getOnDevices);
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
       this.actualNumber = data;
     })
@@ -161,6 +166,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(item) {
     if (item) {
+      this.selectedCompanyId = item.id;
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
       this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
@@ -173,6 +179,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
     } else {
+      this.selectedCompanyId = null;
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
       this.users = [];
