@@ -85,6 +85,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   }
   onGetDevices() {
     if (this.companyId && this.lastCompanyId !== this.companyId) {
+      this.showPreloader = true;
       this.lastCompanyId = this.companyId;
     } else {
       return;
