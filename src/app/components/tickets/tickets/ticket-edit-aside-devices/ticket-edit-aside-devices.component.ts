@@ -22,6 +22,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   realSessionId: string;
   lastCompanyId: string;
   isOpenDropDown: boolean = false;
+  showPreloader: boolean = true;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.onGetDevices();
@@ -95,6 +96,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
           1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
         this.devices = (devices) ? devices : [];
         this.reqDevices = (devices) ? devices : [];
+        this.showPreloader = false;
       }
     });
   }
