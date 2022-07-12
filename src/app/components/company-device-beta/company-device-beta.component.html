@@ -829,7 +829,67 @@
                     <div class="sidebar-updates__title">Virus Protection</div>
                     <div class="sidebar-updates__subtitle">Up-to-date</div>
                 </div>
-            </div>
+                <div class="sidebar-updates__security-update-item">
+                    <div
+                        class="sidebar-updates__icon icon__security-update icon "
+                        [ngClass]="{'--updated': assetData.WindowsUpdatesPending == true, '--alert': assetData.WindowsUpdatesPending == false}"
+                    ></div>
+                    <div class="sidebar-updates__title">Security Updates</div>
+                    <div class="sidebar-updates__subtitle">Install {{securityUpdate}} Updates</div>
+                </div>
+                <div class="sidebar-updates__item">
+                    <div
+                        class="sidebar-updates__icon icon__drivers-missing icon "
+                        [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
+                    ></div>
+                    <div class="sidebar-updates__title">Drivers Missing</div>
+                    <div class="sidebar-updates__subtitle">Up-to-date</div>
+                </div>
+            </div>  
+            <div class="qt-page-list__header-thead-container">
+                <table class="qt-table-modern qt-page-list__header-thead">
+                    <tr>
+                        <th class="security-Update-check">
+                        </th>                        
+                        <th
+                            class="security-Update-description"                            
+                        >                                                       
+                        </th>
+                        <th class="security-Update-action">                           
+                        </th>
+                    </tr>    
+                </table>
+
+                <div class="qt-df qt-fd-c qt-jc-sb">        
+                    <div class="qt-page-list__body-table-container">
+                        <table class="qt-table-modern company-devices-table security-Update-table">
+                            <tbody>
+                                <tr class="company-device-hover" *ngFor="let windowUpdate of windowUpdatePendingList; let i = index">
+                                    <td class="security-Update-check">
+                                        <div class="d-f">
+                                            <label class="qt-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    (change)="postWindowUpdatePending(i)"                                                       
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </td>                                    
+                                    <td class="security-Update-description">
+                                        <span [textContent]="windowUpdate.Title"></span>
+                                    </td>
+                                    <td class="security-Update-action">                                        
+                                        <a href="javascript:;" (click)="InstallUpdate()" class="sub-head-counter" title="Install">
+                                            <span class="install-Update"></span>
+                                          </a>
+                                    </td>   
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                                    
+            </div>                                                 
         </div>
         </div>
     </div>

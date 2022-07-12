@@ -419,3 +419,80 @@ table.qt-table-modern tbody tr td {
   }
 }
 
+.security-Update-table {
+  th {
+   white-space: nowrap;
+  }
+ td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: white;
+  }
+  tr {
+    td {
+      background: #ffffff;
+      padding: 0 8px 0 8px;
+      height: 48px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      vertical-align: middle;
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.disabled-link {
+  pointer-events: none;
+}
+
+.install-Update{
+  display: flex;
+  background-image: url(/assets/img/icons/install.svg);
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  background-position: center;
+}
+
+.security-Update-check{
+  width: 16px;
+}
+
+.security-Update-description{
+  width:280px;
+}
+
+.security-Update-action{
+  width:20px;
+}
+
+.sidebar-updates{
+  &__security-update-item {
+    padding: 16px;
+    width: 140px !important;
+    height: 120px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: $gray-100;
+  }
+}
+
+.security-Update-table{
+  padding-top: 20px !important;
+}
+
+

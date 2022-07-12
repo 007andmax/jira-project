@@ -267,6 +267,9 @@
     background: $white;
     position: fixed;
     width: 480px;
+    @media (max-width: 1920px) {      
+      width: 591px;
+     }
     top: $header-height;
     right: 0;
     border-left: 1px solid $gray-400;
