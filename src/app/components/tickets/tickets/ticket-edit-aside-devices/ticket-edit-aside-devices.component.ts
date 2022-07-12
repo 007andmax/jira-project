@@ -88,12 +88,15 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     } else {
       return;
     }
-    let devices = (this.devicesStateService.getAllDevices()) ? this.devicesStateService.getAllDevices()[this.companyId] : [];
-
-    if (devices) devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
-      1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
-    this.devices = (devices) ? devices : [];
-    this.reqDevices = (devices) ? devices : [];
+    this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
+      if (data) {
+        let devices = (data) ? data[this.companyId] : [];
+        if (devices) devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+          1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
+        this.devices = (devices) ? devices : [];
+        this.reqDevices = (devices) ? devices : [];
+      }
+    });
   }
   onSearch(event) {
     if (event.target.value === "") {
