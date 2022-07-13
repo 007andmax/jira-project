@@ -819,6 +819,15 @@
           <div *ngIf="tab==='UPDATES'" class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="qt-df qt-jc-sb">
                 <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
+                <div *ngIf="getSecurityCountSelected() > 0">
+                    <button
+                    class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"   
+                    (click)="InstallUpdate()"                                     
+                >
+                    <i class="install-security-Update qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></i>
+                    Install Updates
+                </button>
+                </div>
             </div>
             <div class="sidebar-updates__items">
                 <div class="sidebar-updates__item">
@@ -840,57 +849,72 @@
                 <div class="sidebar-updates__item">
                     <div
                         class="sidebar-updates__icon icon__drivers-missing icon "
-                        [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
+                        [ngClass]="{'--updated': true == true, '--alert': true == false}"
                     ></div>
                     <div class="sidebar-updates__title">Drivers Missing</div>
                     <div class="sidebar-updates__subtitle">Up-to-date</div>
                 </div>
-            </div>  
-            <div class="qt-page-list__header-thead-container">
-                <table class="qt-table-modern qt-page-list__header-thead">
-                    <tr>
-                        <th class="security-Update-check">
-                        </th>                        
-                        <th
-                            class="security-Update-description"                            
-                        >                                                       
-                        </th>
-                        <th class="security-Update-action">                           
-                        </th>
-                    </tr>    
-                </table>
+            </div>              
 
+            <div class="qt-page-list__header-thead-container">
+                <table class="qt-table-modern qt-page-list__header-thead security-Update-list-header-thead">
+                   <thead>
+                        <tr>
+                            <th class="company-devices-table__check">
+                                <div class="d-f">
+                                    <label class="qt-checkbox">
+                                        <input
+                                            type="checkbox" 
+                                            [(ngModel)]="selectAllSecurityDevices"
+                                            (change)="toogleSecurityDevices()"                                            
+                                        >
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </th>                            
+                            <th
+                                class="company-devices-table__device-name pointer"                                
+                            >
+                                Description                               
+                            </th>
+                            <th class="company-devices-table__go-to"></th>
+                        </tr>    
+                   </thead>                     
+                </table> 
+                
                 <div class="qt-df qt-fd-c qt-jc-sb">        
                     <div class="qt-page-list__body-table-container">
-                        <table class="qt-table-modern company-devices-table security-Update-table">
+                        <table class="qt-page-list__body-tbody qt-table-modern company-devices-table security-Update-list-header-thead">
                             <tbody>
                                 <tr class="company-device-hover" *ngFor="let windowUpdate of windowUpdatePendingList; let i = index">
-                                    <td class="security-Update-check">
+                                    <td class="company-devices-table__check">
                                         <div class="d-f">
                                             <label class="qt-checkbox">
                                                 <input
-                                                    type="checkbox"
-                                                    (change)="postWindowUpdatePending(i)"                                                       
+                                                    type="checkbox"  
+                                                    [(ngModel)]="windowUpdate.selected"   
+                                                    (change)="onSelectSecurityDevice()"                                             
                                                 >
                                                 <span></span>
                                             </label>
                                         </div>
-                                    </td>                                    
-                                    <td class="security-Update-description">
-                                        <span [textContent]="windowUpdate.Title"></span>
                                     </td>
-                                    <td class="security-Update-action">                                        
-                                        <a href="javascript:;" (click)="InstallUpdate()" class="sub-head-counter" title="Install">
+
+                                    <td class="company-devices-table__device-name">
+                                        <div>
+                                            <span [textContent]="windowUpdate.Title"></span>
+                                        </div>
+                                    </td>
+                                    <td class="company-devices-table__go-to">
+                                        <a href="javascript:;" (click)="InstallUpdate()" title="Install">
                                             <span class="install-Update"></span>
                                           </a>
-                                    </td>   
+                                    </td>
                                 </tr>
                             </tbody>
-                        </table>
-                    </div>
-                </div>                                    
-            </div>                                                 
-        </div>
+                        </table>                                                              
+                </div>                                                 
+            </div>
         </div>
     </div>
 </div>

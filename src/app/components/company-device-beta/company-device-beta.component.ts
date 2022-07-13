@@ -119,6 +119,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   selectednum = false ;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
+  selectAllSecurityDevices: boolean = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;  
 
   
@@ -1237,7 +1238,7 @@ postWindowUpdatePending(i) {
   }  
 }
 
-InstallUpdate() {
+InstallUpdate() {  
   var clonedItems = [];
   for (let i = 0; i < this.reloadWindowUpdatePendingList.length; i++) {
     var itemToUpdate: any = {};
@@ -1271,6 +1272,21 @@ InstallUpdate() {
     }, 3000)
   }
 } 
+
+toogleSecurityDevices() {
+  this.windowUpdatePendingList.forEach((item) => {
+    item.selected = this.selectAllSecurityDevices ? true : false;
+  });        
+}
+
+onSelectSecurityDevice(){
+  let find = this.windowUpdatePendingList.find((item) => !item.selected);
+    this.selectAllSecurityDevices = find ? false : true;        
+}
+
+getSecurityCountSelected(){
+  return this.windowUpdatePendingList.filter(item => item.selected).length;
+}
 
 
 ngOnDestroy(): void {  

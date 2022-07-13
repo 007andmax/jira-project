@@ -453,10 +453,6 @@ table.qt-table-modern tbody tr td {
   }
 }
 
-.disabled-link {
-  pointer-events: none;
-}
-
 .install-Update{
   display: flex;
   background-image: url(/assets/img/icons/install.svg);
@@ -468,16 +464,13 @@ table.qt-table-modern tbody tr td {
   background-position: center;
 }
 
-.security-Update-check{
-  width: 16px;
-}
-
-.security-Update-description{
-  width:280px;
-}
-
-.security-Update-action{
-  width:20px;
+.install-security-Update{
+  display: flex;
+  background-image: url(/assets/img/icons/install.svg);
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;  
+  background-position: center;
 }
 
 .sidebar-updates{
@@ -491,8 +484,8 @@ table.qt-table-modern tbody tr td {
   }
 }
 
-.security-Update-table{
-  padding-top: 20px !important;
+.security-Update-list-header-thead{
+  min-width: 0px !important;
 }
 
 

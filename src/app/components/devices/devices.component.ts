@@ -128,6 +128,15 @@ export class DevicesComponent implements OnInit {
   linkDevicesTag=[];
   selectManufactureNamessidebar : any;
   selectModelNameSidebar : any;  
+  securityUpdate: number;
+  windowUpdatePendingList: any[] = [];
+  categories: number;
+  check: any[] = [];
+  InstallUpdateselected: number = 0;
+  selectednum = false ;
+  reloadWindowUpdatePendingList: any[] = [];
+  isOverlay = false;
+  selectAllSecurityDevices: boolean = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
 
@@ -1112,6 +1121,7 @@ export class DevicesComponent implements OnInit {
     this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == asset.ModelID);    
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
+    this.getSecurityUpdate(asset.Guid);  
     this.Preloader = false;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
@@ -1433,6 +1443,137 @@ onSelectModelsidebar(SelectModelSidebar) {
     this.selectModelName = "";
     this.updateAsset();
   }
+}
+
+getSecurityUpdate(id) {    
+  this.agentService.getAssetByGuid(id).subscribe((resp) => {
+    if (resp.length > 0) {
+      this.asset = resp[0];
+      this.agentService.GetCurrentConfig(this.asset.ID);
+    }
+  });
+}
+
+onCurrentConfig(resp: any) {
+  if(resp.length>0)
+  {        
+    if (this.asset.ID && this.asset.ID != 0) {
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        this.kafkaMessage = JSON.parse(item.Value);        
+        
+        this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+
+        if (this.securityUpdate > 0) {
+          this.windowUpdatePendingList = [];
+          for (let i = 0; i < this.securityUpdate; i++) {
+            let data: any = {};
+            data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
+            data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
+            data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
+            this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
+            if(this.categories >0)
+            {
+              for(let j=0; j<this.categories; j++){
+                data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+              }
+            }
+            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
+              data.RebootIsRequired = "Never Reboots"
+            }
+            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
+              data.RebootIsRequired = "Always Requires Reboot";
+            }
+            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
+              data.RebootIsRequired = "Can Request Reboot";
+            }
+            data.loading = false;
+            this.windowUpdatePendingList.push(data);
+          }
+        }
+
+        if(!this.cd['destroyed']){
+          this.cd.detectChanges();
+        }
+      }
+    }
+  }
+  
+}
+
+postWindowUpdatePending(i) {
+  const index: any = { "ID": i };
+  let find = this.check.find(x => x.ID == i);
+  let indexs = this.check.findIndex(x => x.ID == i);
+  if (!find) {
+    this.check.push(index);
+    this.InstallUpdateselected = this.InstallUpdateselected + 1;
+    if(this.check.length>0){
+      this.selectednum = true;
+    }
+    this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
+  }
+  else {
+    this.check.splice(indexs, 1);
+    this.InstallUpdateselected = this.InstallUpdateselected - 1;
+    if(this.check.length==0){
+      this.selectednum = false
+    }
+    this.reloadWindowUpdatePendingList.splice(indexs, 1);
+  }  
+  if (!this.cd['destroyed']){
+    this.cd.detectChanges();
+  }  
+}
+
+InstallUpdate() {
+  var clonedItems = [];
+  for (let i = 0; i < this.reloadWindowUpdatePendingList.length; i++) {
+    var itemToUpdate: any = {};
+    itemToUpdate.UpdateID = this.reloadWindowUpdatePendingList[i].UpdateID;
+    itemToUpdate.Title = this.reloadWindowUpdatePendingList[i].Title;
+    itemToUpdate.RebootIsRequired = this.reloadWindowUpdatePendingList[i].RebootIsRequired;
+
+    if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+      itemToUpdate.RebootIsRequired = "0";
+    }
+    else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+      itemToUpdate.RebootIsRequired = "1";
+    }
+    else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+      itemToUpdate.RebootIsRequired = "2";
+    }
+    clonedItems.push(itemToUpdate);
+
+    var item = this.windowUpdatePendingList.find(x => x.UpdateID == this.reloadWindowUpdatePendingList[i].UpdateID);
+    if (item) {
+      item.loading = true;
+    }
+  }
+
+  this.agentService.GetWindowUpdateList(this.asset.ID, clonedItems);
+
+  if (this.check.length) {
+    this.isOverlay = true;
+    setTimeout(() => {
+      this.isOverlay = false;
+    }, 3000)
+  }
+}
+
+toogleSecurityDevices() {
+  this.windowUpdatePendingList.forEach((item) => {
+    item.selected = this.selectAllSecurityDevices ? true : false;
+  });        
+}
+
+onSelectSecurityDevice(){
+  let find = this.windowUpdatePendingList.find((item) => !item.selected);
+    this.selectAllSecurityDevices = find ? false : true;        
+}
+
+getSecurityCountSelected(){
+  return this.windowUpdatePendingList.filter(item => item.selected).length;
 }
 
 }
