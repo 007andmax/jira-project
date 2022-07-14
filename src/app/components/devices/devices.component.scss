@@ -755,3 +755,9 @@ span.qt-input-search:before {
     min-width: 0px !important;
   }
 
+  .security-button-disabled {
+    opacity: 0.6;  
+    pointer-events: none;
+  }
+  
+

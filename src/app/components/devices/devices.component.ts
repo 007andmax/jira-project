@@ -1501,66 +1501,6 @@ onCurrentConfig(resp: any) {
   
 }
 
-postWindowUpdatePending(i) {
-  const index: any = { "ID": i };
-  let find = this.check.find(x => x.ID == i);
-  let indexs = this.check.findIndex(x => x.ID == i);
-  if (!find) {
-    this.check.push(index);
-    this.InstallUpdateselected = this.InstallUpdateselected + 1;
-    if(this.check.length>0){
-      this.selectednum = true;
-    }
-    this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
-  }
-  else {
-    this.check.splice(indexs, 1);
-    this.InstallUpdateselected = this.InstallUpdateselected - 1;
-    if(this.check.length==0){
-      this.selectednum = false
-    }
-    this.reloadWindowUpdatePendingList.splice(indexs, 1);
-  }  
-  if (!this.cd['destroyed']){
-    this.cd.detectChanges();
-  }  
-}
-
-InstallUpdate() {
-  var clonedItems = [];
-  for (let i = 0; i < this.reloadWindowUpdatePendingList.length; i++) {
-    var itemToUpdate: any = {};
-    itemToUpdate.UpdateID = this.reloadWindowUpdatePendingList[i].UpdateID;
-    itemToUpdate.Title = this.reloadWindowUpdatePendingList[i].Title;
-    itemToUpdate.RebootIsRequired = this.reloadWindowUpdatePendingList[i].RebootIsRequired;
-
-    if (itemToUpdate.RebootIsRequired == "Never Reboots") {
-      itemToUpdate.RebootIsRequired = "0";
-    }
-    else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
-      itemToUpdate.RebootIsRequired = "1";
-    }
-    else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
-      itemToUpdate.RebootIsRequired = "2";
-    }
-    clonedItems.push(itemToUpdate);
-
-    var item = this.windowUpdatePendingList.find(x => x.UpdateID == this.reloadWindowUpdatePendingList[i].UpdateID);
-    if (item) {
-      item.loading = true;
-    }
-  }
-
-  this.agentService.GetWindowUpdateList(this.asset.ID, clonedItems);
-
-  if (this.check.length) {
-    this.isOverlay = true;
-    setTimeout(() => {
-      this.isOverlay = false;
-    }, 3000)
-  }
-}
-
 toogleSecurityDevices() {
   this.windowUpdatePendingList.forEach((item) => {
     item.selected = this.selectAllSecurityDevices ? true : false;
@@ -1574,6 +1514,32 @@ onSelectSecurityDevice(){
 
 getSecurityCountSelected(){
   return this.windowUpdatePendingList.filter(item => item.selected).length;
+}
+
+SecurityUpdate(i,id)
+{  
+  if(id)
+  {
+    let index = this.windowUpdatePendingList.findIndex(item=>item.UpdateID == id);
+    if(index == i)
+    {
+      let securityInstall = this.windowUpdatePendingList.find(item=>item.UpdateID == id);
+      this.agentService.GetWindowUpdateList(this.asset.ID, securityInstall);
+    }    
+  }
+}
+
+InstallUpdate(){
+  let count =  this.windowUpdatePendingList.filter(item=>item.selected == true)
+  if(count.length >0)
+  {
+     count.forEach((item)=>{
+      if(item.selected == true)
+      {
+        this.agentService.GetWindowUpdateList(this.asset.ID, item);
+      }
+     })
+  }
 }
 
 }

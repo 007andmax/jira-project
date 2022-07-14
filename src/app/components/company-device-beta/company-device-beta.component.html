@@ -906,7 +906,7 @@
                                         </div>
                                     </td>
                                     <td class="company-devices-table__go-to">
-                                        <a href="javascript:;" (click)="InstallUpdate()" title="Install">
+                                        <a href="javascript:;" (click)="SecurityUpdate(i,windowUpdate.UpdateID)"  [ngClass]="{'security-button-disabled': !windowUpdate.selected}" title="Install">
                                             <span class="install-Update"></span>
                                           </a>
                                     </td>
