@@ -2,7 +2,9 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@ang
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
 import { DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -25,6 +27,8 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
+    private noteStateService: NoteStateService,
     private ticketsStateService: TicketsStateService,
     private settingStateService: SettingStateService) { }
 
@@ -42,8 +46,14 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   create() {
     this.ticketsStatus.toggleAddStatus(true);
+  }
+  createResponse() {
+    this.noteStateService.openAddAside();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

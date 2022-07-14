@@ -25,7 +25,7 @@ export class NoteService {
    * @param data - new note data
    */
   public createNote(data) {
-    return this.http.post(`${this.apiUrl}invoice/createInvoiceNote?createRegular=${data[0].noteType === "REGULAR"}` ,data);
+    return this.http.post(`${this.apiUrl}invoice/createInvoiceNote?createRegular=${data[0].noteType === "REGULAR"}`, data);
   }
 
   /**
@@ -34,7 +34,22 @@ export class NoteService {
    * @param data - note data for updated note
    */
   public updateNote(data, id) {
-    return this.http.post(`${this.apiUrl}invoice/updateInvoiceNote/${id}` ,data);
+    return this.http.post(`${this.apiUrl}invoice/updateInvoiceNote/${id}`, data);
+  }
+  public removeNoteTemplate(id) {
+    return this.http.delete(`${this.apiUrl}noteTemplates/${id}`);
+  }
+  public addNoteTemplate(data) {
+    return this.http.post(`${this.apiUrl}noteTemplates`, data);
+  }
+  public editNoteTemplate(id, data) {
+    return this.http.put(`${this.apiUrl}noteTemplates/${id}`, data);
+  }
+  public getNoteTemplate(id) {
+    return this.http.get(`${this.apiUrl}noteTemplates/${id}`);
   }
 
+  public getNotesTemplates() {
+    return this.http.get(`${this.apiUrl}noteTemplates?titleSortDirection=asc`);
+  }
 }

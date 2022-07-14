@@ -1,0 +1,55 @@
+<div class="cmn-area">
+    <div class="data-table-wrap">
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <thead>
+                <tr>
+                    <th
+                        class="tax-name pointer"
+                        (click)="sortByTicketName()"
+                    >
+                        Responses Name
+                    </th>
+                    <th class="rate">Active</th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of noteTemplate; let i = index">
+                    <td
+                        class="tax-name add-status-name"
+                        [textContent]="item.title"
+                    >
+                    </td>
+                    <td class="rate">
+                        <i
+                            class="icon__document-category-subscribe qt-sz-16 qt-bg-contain qt-dib"
+                            *ngIf="item.active"
+                        ></i>
+                    </td>
+                    <td class="action">
+                        <div class="qt-df qt-ai-c">
+                            <div
+                                *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                                class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-16 pointer"
+                                (click)="copyNote(item)"
+                            ></div>
+                            <div
+                                *ngIf="getPermissions('EDIT_TICKET_NOTE_TEMPLATE')"
+                                class="icon__edit qt-sz-16 qt-bg-contain qt-mr-16 pointer"
+                                (click)="editNote(item)"
+                            ></div>
+                            <div
+                                *ngIf="getPermissions('DELETE_TICKET_NOTE_TEMPLATE')"
+                                class="icon__remove qt-sz-16 qt-bg-contain pointer"
+                                (click)="removeNote(item)"
+                            ></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

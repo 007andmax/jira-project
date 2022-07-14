@@ -1,0 +1,96 @@
+<div
+    *ngIf="opened"
+    class="qt-aside-modern ticket-add-aside"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-info d-f ai-c">
+            <div
+                class="qt-aside__title"
+                [textContent]="noteTemplate.getEditMode() ? 'Edit Response' : 'Add Response'"
+            ></div>
+        </div>
+        <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-input-block qt-input-line">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!noteTemplateValidate.getTitle()"
+            >
+                Title is required field
+            </mat-error>
+            <label
+                for="add-ticket-subject"
+                class="qt-input-block__label"
+            >
+                Response Title
+            </label>
+            <input
+                id="add-ticket-subject"
+                class="qt-input-block__input"
+                [(ngModel)]="noteTemplate.title"
+                (input)="noteTemplateValidate.resetTitle()"
+                type="text"
+                maxlength="250"
+                placeholder="Write Ticket subject"
+            >
+        </div>
+        <div class="qt-input-block qt-w100 editor-container qt-mt-0">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!noteTemplateValidate.getNote()"
+            >
+                Description is required field
+            </mat-error>
+            <label
+                for="add-ticket-subject"
+                class="qt-input-block__label"
+            >
+                Description
+            </label>
+            <angular-editor
+                [(ngModel)]="noteTemplate.note"
+                [config]="editorConfig"
+                (input)="noteTemplateValidate.resetNote()"
+            ></angular-editor>
+        </div>
+        <div class="qt-df qt-ai-c qt-mt-16">
+            <label
+                class="qt-checkbox active-note pointer"
+                for="email-payment"
+            >
+                <input
+                    id="email-payment"
+                    type="checkbox"
+                    [(ngModel)]="noteTemplate.active"
+                >
+                <span></span>
+            </label>
+            <div class="qt-fs-13 qt-ml-5 mark-as-active">Mark as Active</div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="noteTemplate.getEditMode() ? save() : add()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

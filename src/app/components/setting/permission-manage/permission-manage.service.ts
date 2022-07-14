@@ -39,7 +39,10 @@ export class PermissionManageService {
       'EDIT_TICKETS',
       'DELETE_TICKETS',
       'REOPEN_CLOSED_TICKETS',
-      'EDIT_ANOTHER_USERS_TICKET'
+      'EDIT_ANOTHER_USERS_TICKET',
+      'CREATE_TICKET_NOTE_TEMPLATE',
+      'EDIT_TICKET_NOTE_TEMPLATE',
+      'DELETE_TICKET_NOTE_TEMPLATE'
     ],
     'Company Area': [
       'VIEW_COMPANIES',
