@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
@@ -56,6 +56,7 @@ export class CannedResponsesAsideComponent implements OnInit {
   };
   opened: boolean = false;
   constructor(private noteStateService: NoteStateService,
+    public cd: ChangeDetectorRef,
     private noteService: NoteService) { }
 
   ngOnInit() {
@@ -66,12 +67,22 @@ export class CannedResponsesAsideComponent implements OnInit {
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplate.setEditMode(true);
       this.opened = true;
+      this.cd.detectChanges();
 
     })
     this.noteStateService.onCopyNote.subscribe(data => {
       this.noteTemplate = new NoteTemplate(data);
+      this.noteTemplateValidate.setTitleIsExist(true);
       this.opened = true;
     })
+  }
+  checkTitle() {
+    this.noteTemplateValidate.resetTitle();
+    if (this.noteStateService.getListNoteTemplate().find(item => item.title == this.noteTemplate.title)) {
+      this.noteTemplateValidate.setTitleIsExist(true);
+    } else {
+      this.noteTemplateValidate.setTitleIsExist(false);
+    }
   }
   closed() {
     this.opened = false;

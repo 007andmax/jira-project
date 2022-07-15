@@ -24,6 +24,12 @@
             >
                 Title is required field
             </mat-error>
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="noteTemplateValidate.getTitleIsExist()"
+            >
+                Title value must be unique
+            </mat-error>
             <label
                 for="add-ticket-subject"
                 class="qt-input-block__label"
@@ -34,7 +40,7 @@
                 id="add-ticket-subject"
                 class="qt-input-block__input"
                 [(ngModel)]="noteTemplate.title"
-                (input)="noteTemplateValidate.resetTitle()"
+                (input)="checkTitle()"
                 type="text"
                 maxlength="250"
                 placeholder="Write Ticket subject"

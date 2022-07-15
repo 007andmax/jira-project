@@ -16,7 +16,7 @@ import { NoteTemplate } from './class/note-template';
   styleUrls: ['./canned-responses.component.scss']
 })
 export class CannedResponsesComponent implements OnInit {
-
+  showPreloader: boolean = true;
   sort = "ASC";
   noteTemplate: Array<NoteTemplate> = [];
   sub: Subscription = new Subscription();
@@ -32,6 +32,8 @@ export class CannedResponsesComponent implements OnInit {
   ngOnInit() {
     this.noteService.getNotesTemplates().subscribe((data: any) => {
       this.noteTemplate = data.map(item => new NoteTemplate(item));
+      this.noteStateService.setNoteTemplate(this.noteTemplate);
+      this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -54,6 +56,7 @@ export class CannedResponsesComponent implements OnInit {
         let index = this.noteTemplate.findIndex(item => item.id === data.data);
         if (index > -1) this.noteTemplate.splice(index, 1);
       }
+      this.noteStateService.setNoteTemplate(this.noteTemplate);
       this.cd.detectChanges();
     })
     this.sub.add(changeNoteArray);

@@ -6,12 +6,19 @@ import { NoteRealTimeService } from './note-real-time.service';
   providedIn: 'root',
 })
 export class NoteStateService {
+  noteTemplate: Array<NoteTemplate> = [];
   noteTemplateForRemove: NoteTemplate = null;
   onOpenAddAside: EventEmitter<any> = new EventEmitter();
   onEditNote: EventEmitter<any> = new EventEmitter();
   onCopyNote: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public getListNoteTemplate() {
+    return this.noteTemplate;
+  }
+  public setNoteTemplate(data) {
+    this.noteTemplate = data;
+  }
   public setNoteTemplateForRemove(data) {
     this.noteTemplateForRemove = data;
   }
