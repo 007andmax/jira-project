@@ -24,6 +24,7 @@ import { TicketProfileUpdatesServiceDurationModule } from 'src/app/components/ti
 import { InvoiceFormTicketEditTaxesModule } from '../billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 import { BillableTicketsRoutingModule } from './billable-tickets-routing.module';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
+import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-
         TicketProfileUpdatesServiceDurationModule,
         InvoiceFormTicketEditTaxesModule,
         BillableTicketsRoutingModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        DynamicTooltipModule
 
     ],
 

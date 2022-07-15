@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { SelectSearchModule } from 'src/app/components/shared/select-search/select-search.module';
 import { UploadAreaComponent } from 'src/app/components/shared/upload-area/upload-area.component';
-import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
@@ -14,14 +13,13 @@ import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/
 import { DndDirective } from 'src/app/directives/dnd.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-area.module';
+import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 
 
 
 @NgModule({
     declarations: [TicketAddAsideComponent,
-
         DndDirective
-
     ],
     imports: [
         CommonModule,
@@ -29,12 +27,12 @@ import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-a
         FormsModule,
         DropDownModule,
         SelectSearchModule,
-        TehUsersModule,
+        TechUsersModule,
         DisabledBtnModule,
         PreloaderTicketModule,
         UploadAreaProgressModule,
         NgbModule,
-        UploadAreaModule
+        UploadAreaModule,
     ],
     exports: [TicketAddAsideComponent]
 })

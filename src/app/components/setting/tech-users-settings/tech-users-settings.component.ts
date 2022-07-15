@@ -22,8 +22,8 @@ declare var $;
 
 @Component({
   selector: 'app-tech-users-settings',
-  templateUrl: './tech-users.component.html',
-  styleUrls: ['./tech-users.component.scss']
+  templateUrl: './tech-users-settings.component.html',
+  styleUrls: ['./tech-users-settings.component.scss']
 })
 export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;

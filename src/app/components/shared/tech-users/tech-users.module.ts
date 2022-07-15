@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TehUsersComponent } from './teh-users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from '../dynamic-tooltip/dynamic-tooltip.module';
+import { TechUsersComponent } from './tech-users.component';
 
 
 
 @NgModule({
-    declarations: [TehUsersComponent
+    declarations: [TechUsersComponent
     ],
     imports: [
         CommonModule,
         NgbModule,
         DynamicTooltipModule
     ],
-    exports: [TehUsersComponent]
+    exports: [TechUsersComponent]
 
 
 
 })
-export class TehUsersModule { }
+export class TechUsersModule { }

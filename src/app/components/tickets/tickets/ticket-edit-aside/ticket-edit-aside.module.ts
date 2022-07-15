@@ -48,7 +48,6 @@ import { TicketProfileUpdatesProductEditComponent } from './ticket-profile-updat
 import { TicketProfileUpdatesServiceInfoComponent } from './ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-info/ticket-profile-updates-service-info.component';
 import { TicketProfileUpdatesServiceEditComponent } from './ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-edit/ticket-profile-updates-service-edit.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.module';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileEditFormUpdateProductsComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
@@ -56,7 +55,7 @@ import { TicketProfileEditFormUpdateServicesComponent } from './ticket-profile-e
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { TicketProfileAttachmentsModule } from './ticket-profile-attachments/ticket-profile-attachments.module';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
-
+import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 
 @NgModule({
     declarations: [TicketEditAsideComponent,
@@ -116,12 +115,11 @@ import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-
         PreparePhoneModule,
         PhoneModule,
         InfiniteScrollModule,
-        TehUsersModule,
+        TechUsersModule,
         UploadAreaProgressModule,
         ClickOtsideModule,
         TicketProfileAttachmentsModule,
-        PreviewPhoneMaskModule
-
+        PreviewPhoneMaskModule,
     ],
     exports: [TicketEditAsideComponent,]
 })

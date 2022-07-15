@@ -6,8 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductComponent } from './product/product.component';
 import { ContractComponent } from './contract/contract.component';
 import { ServiceComponent } from './service/service.component';
-import { TehUsersModule } from '../../shared/teh-users/teh-users.module';
 import { CommissionRoutingModule } from './commission-routing.module';
+import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { CommissionRoutingModule } from './commission-routing.module';
     imports: [
         CommonModule,
         NgbModule,
-        TehUsersModule,
+        TechUsersModule,
         CommissionRoutingModule
     ],
 

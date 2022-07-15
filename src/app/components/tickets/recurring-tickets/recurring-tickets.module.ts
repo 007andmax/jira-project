@@ -18,11 +18,9 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { ServicesListModule } from '../../shared/services-list/services-list.module';
 import { DurationComponent } from '../../shared/duration/duration.component';
 import { TagsComponent } from '../../shared/tags/tags.component';
-import { TehUsersModule } from '../../shared/teh-users/teh-users.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsRoutingModule } from './recurring-tickets-routing.module';
-
-
+import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 
 
 
@@ -50,7 +48,7 @@ import { RecurringTicketsRoutingModule } from './recurring-tickets-routing.modul
         FormsModule,
         NumberModule,
         ServicesListModule,
-        TehUsersModule,
+        TechUsersModule,
         NgbModule,
         MatIconModule,
         ReactiveFormsModule,

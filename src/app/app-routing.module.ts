@@ -6,7 +6,7 @@ import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
-import { TechUsersSettingsComponent } from './components/setting/tech-users/tech-users.component';
+import { TechUsersSettingsComponent } from './components/setting/tech-users-settings/tech-users-settings.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
@@ -66,7 +66,7 @@ import { CrmSettingsComponent } from './components/setting/crm-settings/crm-sett
 import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
 import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
 import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
-import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users-settings/permissions-tech-users.service';
 import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
 import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
 import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
@@ -188,7 +188,7 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/techUsers',
-    loadChildren: './components/setting/tech-users/tech-users.module#TechUsersModule',
+    loadChildren: './components/setting/tech-users-settings/tech-users-settings.module#TechUsersSettingsModule',
     canActivate: [PermissionsTechUsersService, PermissionTechUserService]
 
 

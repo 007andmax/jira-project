@@ -78,7 +78,7 @@ import { PermissionEmailTempleteService } from './components/setting/email-templ
 import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
 import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
 import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
-import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users-settings/permissions-tech-users.service';
 import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
 import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
 import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';

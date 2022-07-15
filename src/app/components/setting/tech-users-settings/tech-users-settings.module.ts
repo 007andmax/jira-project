@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TechUsersComponent } from './tech-users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { TechUsersRoutingModule } from './tech-users-routing.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { TechUsersSettingsComponent } from './tech-users-settings.component';
+import { TechUsersSettingsRoutingModule } from './tech-users-routing.module';
 
 
 
 
 @NgModule({
-    declarations: [TechUsersComponent
+    declarations: [TechUsersSettingsComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         ImageCropperModule,
-        TechUsersRoutingModule,
+        TechUsersSettingsRoutingModule,
         DisabledBtnModule,
         PreloaderTicketModule
     ],
@@ -26,4 +26,4 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 
 
 })
-export class TechUsersModule { }
+export class TechUsersSettingsModule { }
