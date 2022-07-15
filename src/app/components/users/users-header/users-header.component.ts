@@ -95,7 +95,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   delete() {
 
     this.confirmStateService.setConfirmAction(ARCHIVE_USERS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
 
     if (this._users.filter(item => item.selected).length === 1) {
       let user = this._users.filter(item => item.selected)[0];
@@ -113,7 +113,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     return this._users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
-    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription' });
+    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.users = this.reqUsers.filter(item => item.selected);
   }
   toggleAllUser(data) {
@@ -137,7 +137,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   removeUsersFromSubscription() {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove subscription`;
   }
   onRemoveUsersFromSubscription() {

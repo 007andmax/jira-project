@@ -25,6 +25,7 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   public selectedDevice;
   public subGetDevicesList: ISubscription;
   public devicesList: any;
+  preloader: boolean = true;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -47,7 +48,11 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
-
+    if (this.devicesStateService.getAllDevices()) this.preloader = false;
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.preloader = false;
+      if (this.companyId) this.getDevices();
+    })
   }
 
   /**
@@ -66,26 +71,28 @@ export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
    */
   private getCLientsList() {
     this.subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
-      if (this.devicesStateService.getAllDevices()[res]) {
-        this.devicesList = this.devicesStateService.getAllDevices()[res].map((item) => {
-          item.name = item.hostName;
-          return item;
-        });
-      } else {
-        this.devicesList = [];
-      }
-
-
-      this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
-      if (!this.devicesList) this.clearDevices();
-      if (this.editItem && this.devicesList) {
-        let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
-        if (index > (-1)) {
-          this.selectedDevice = this.devicesList[index];
-        }
-      }
-      this.getAllItems.emit(this.devicesList);
+      this.getDevices();
     })
+  }
+
+  getDevices() {
+    if (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[this.companyId]) {
+      this.devicesList = this.devicesStateService.getAllDevices()[this.companyId].map((item) => {
+        item.name = item.hostName;
+        return item;
+      });
+    } else {
+      this.devicesList = [];
+    }
+    this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
+    if (!this.devicesList) this.clearDevices();
+    if (this.editItem && this.devicesList) {
+      let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
+      if (index > (-1)) {
+        this.selectedDevice = this.devicesList[index];
+      }
+    }
+    this.getAllItems.emit(this.devicesList);
   }
 
   /**

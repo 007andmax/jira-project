@@ -25,7 +25,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
-  listTehUsers = [];
+  listTechUsers = [];
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
@@ -37,7 +37,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
 
   ngOnInit() {
     if (this.service.user) this.userService = [this.service.user];
-    this.listTehUsers = this.getUsersForAssign();
+    this.listTechUsers = this.getUsersForAssign();
     if (this.service.date) this.setDateWithTimeOffset();
   }
   edit() {
@@ -105,14 +105,14 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   remove() {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
   removeService() {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.ticketStateService.setServiceForRemove(this.service);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_SERVICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
 
   }

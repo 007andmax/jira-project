@@ -119,7 +119,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'supplier');
   }
   onAddCategory(data) {
-    this.productService.addCategory(data).subscribe((data: any) => {
+    this.productService.addCategory(data, null).subscribe((data: any) => {
       this.inventory.category = data;
       this.validate.resetCategory();
     })
@@ -210,6 +210,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
       this.toastrService.success("The product has been successfully updated");
       this.appStateService.changeDetectorRef();
+      this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
     })
   }

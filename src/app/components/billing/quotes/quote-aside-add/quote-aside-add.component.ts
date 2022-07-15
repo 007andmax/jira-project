@@ -65,7 +65,7 @@ export class QuoteAsideAddComponent implements OnInit, OnDestroy {
     this.quoteAdd.onCheckValidateServicesByCompany();
     let quote: QuoteAdd = this.quoteAdd.getQuote();
     if (!this.quoteAdd.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
     let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.action = QUOTE_MODAL_ACTION_ADD;

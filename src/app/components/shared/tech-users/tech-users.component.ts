@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
-import { TehUsersSateService } from './services/teh-users-sate.service';
+import { TechUsersStateService } from './services/tech-users-state.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
 import { TechUserItem } from './class/tech-user-item';
@@ -7,12 +7,12 @@ import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/app/const
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
-  selector: 'app-teh-users',
-  templateUrl: './teh-users.component.html',
-  styleUrls: ['./teh-users.component.scss'],
+  selector: 'app-tech-users',
+  templateUrl: './tech-users.component.html',
+  styleUrls: ['./tech-users.component.scss'],
   providers: [TicketsListService]
 })
-export class TehUsersComponent implements OnInit, OnDestroy {
+export class TechUsersComponent implements OnInit, OnDestroy {
   @Input('users')
   set setUsers(value) {
     this.users = JSON.parse(JSON.stringify(value));
@@ -31,12 +31,12 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   @Output() usersChange = new EventEmitter();
 
   /**
-  * Creates an instance of the TehUsersComponent with the injected services
-  * @param {tehService} TehUsersService Service to work with teh users
-  * @param {TehUsersSateService} tehState to work with teh users state
+  * Creates an instance of the TechUsersComponent with the injected services
+  * @param {techService} TechUsersService Service to work with tech users
+  * @param {TechUsersStateService} techState to work with tech users state
   */
   constructor(
-    private tehState: TehUsersSateService,
+    private techState: TechUsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService
   ) { }
@@ -73,7 +73,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   private checUsersForEdit() {
-    let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data: Array<RecurringTicketUser>) => {
+    let getUsersFromEdit = this.techState.getUsersFromEdit().subscribe((data: Array<RecurringTicketUser>) => {
 
       data.forEach((item) => {
         let index = this.usersList.findIndex(user => user.id === item.id);
@@ -90,7 +90,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   * Subscribe for clear data
   */
   private onInitClearState() {
-    let getClearState = this.tehState.getClearState().subscribe(() => this.clear());
+    let getClearState = this.techState.getClearState().subscribe(() => this.clear());
     this.sub.add(getClearState);
   }
 

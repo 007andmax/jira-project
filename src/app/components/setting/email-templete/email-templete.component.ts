@@ -289,7 +289,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
           this.emailPreviewHtml = resp;
           this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Inter, sans-serif;/gi, '')
           this.gettingEmailTemplatePreview = false;
-          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered: true }).result.then((result) => {
+          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
 
           }, (reason) => {
 

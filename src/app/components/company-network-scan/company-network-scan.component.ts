@@ -44,7 +44,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   isScaning: boolean = false;
   networkScanFilter: NetworkScanFilter = new NetworkScanFilter(new CompanyNetworkScanService);
   sub: Subscription = new Subscription();
-  constructor(private devicesStateService: DevicesStateService,
+  constructor(public devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
     private networkScanStateService: NetworkScanStateService,

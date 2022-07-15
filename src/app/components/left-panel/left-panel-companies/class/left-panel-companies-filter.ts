@@ -3,7 +3,7 @@ import { Company } from 'src/app/interfaces/company/company';
 
 export class LeftPanelCompaniesFilter {
     clientType: string;
-    tehUser: string;
+    techUser: string;
     clientIndustry: string;
     constructor() {
 
@@ -16,9 +16,9 @@ export class LeftPanelCompaniesFilter {
     }
     public getFilterList(reqCompaniesList: Array<Company>) {
         let list = reqCompaniesList.filter(item => {
-            if (this.clientType && this.clientType === item.clientType || this.tehUser && this.tehUser === item.techLeadId || this.clientIndustry && this.clientIndustry === ((item.clientIndustry) ? item.clientIndustry.name : '')) {
+            if (this.clientType && this.clientType === item.clientType || this.techUser && this.techUser === item.techLeadId || this.clientIndustry && this.clientIndustry === ((item.clientIndustry) ? item.clientIndustry.name : '')) {
                 return true;
-            } else if (this.clientType && this.clientType !== item.clientType || this.tehUser && this.tehUser !== item.techLeadId || this.clientIndustry && this.clientIndustry !== ((item.clientIndustry) ? item.clientIndustry.name : '')) {
+            } else if (this.clientType && this.clientType !== item.clientType || this.techUser && this.techUser !== item.techLeadId || this.clientIndustry && this.clientIndustry !== ((item.clientIndustry) ? item.clientIndustry.name : '')) {
                 return false;
             }
             return true;
@@ -26,8 +26,8 @@ export class LeftPanelCompaniesFilter {
         return list;
 
     }
-    public setTehUser(data) {
-        this.tehUser = data;
+    public setTechUser(data) {
+        this.techUser = data;
     }
     public setClientIndustry(data) {
         this.clientIndustry = data;

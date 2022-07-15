@@ -30,7 +30,7 @@
             (click)="clearClient()"
         ></i>
         <i
-            *ngIf="!selectedItem || isBlockClear"
+            *ngIf="(!selectedItem || isBlockClear) && !preloader"
             class="icn-sm report-caret-icon"
         ></i>
         <i
@@ -39,6 +39,10 @@
             class="icn-sm icn-product-save icon__check"
         ></i>
     </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
     <i
         class="loading xs"
         *ngIf="!list"

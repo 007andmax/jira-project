@@ -15,7 +15,10 @@
             >
         </span>
     </div>
-    <div class="devices-aside__device-list">
+    <div
+        class="devices-aside__device-list"
+        [hidden]="showPreloader"
+    >
         <ng-template
             ngFor
             let-device
@@ -98,4 +101,8 @@
             </div>
         </ng-template>
     </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
 </div>

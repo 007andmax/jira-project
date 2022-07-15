@@ -133,6 +133,7 @@ import { DocumentsEditCategoryComponent } from './components/documents/documents
 import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
 import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
 import { GoogleAuthenticatorScratchesComponent } from './components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
+import { GlNumberCheckUseComponent } from './components/setting/accounting/gl-number/gl-number-check-use/gl-number-check-use.component';
 
 
 declare var $: any;
@@ -167,7 +168,8 @@ declare var $: any;
     HelpCenterInfoAsideComponent,
     InventoryCheckUseComponent,
     GoogleAuthenticatorComponent,
-    GoogleAuthenticatorScratchesComponent
+    GoogleAuthenticatorScratchesComponent,
+    GlNumberCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -238,7 +240,8 @@ declare var $: any;
     // SupportPageEditCategoryComponent,
     InventoryCheckUseComponent,
     GoogleAuthenticatorComponent,
-    GoogleAuthenticatorScratchesComponent
+    GoogleAuthenticatorScratchesComponent,
+    GlNumberCheckUseComponent
     // RecurringTicketsComponent
   ],
   providers: [

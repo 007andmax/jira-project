@@ -65,28 +65,28 @@
                 </div>
             </div>
             <div class="network-step">
-              <div class="qt-df qt-fd-c qt-ai-c">
-                <div class="circle-number qt-mb-8">
-                  <div class="circle-number__inner">2</div>
+                <div class="qt-df qt-fd-c qt-ai-c">
+                    <div class="circle-number qt-mb-8">
+                        <div class="circle-number__inner">2</div>
+                    </div>
+                    <div class="network-step__title">Select Device</div>
+                    <div class="network-step__text-cred qt-mb-15">
+                        <span>You have using below credentials:</span>
+                        <br>
+                        <span
+                            class="qt-fw-600"
+                            [textContent]="networkScanInstallAgent.getCredentialText()"
+                        ></span>
+                    </div>
                 </div>
-                <div class="network-step__title">Select Device</div>
-                <div class="network-step__text-cred qt-mb-15">
-                    <span>You have using below credentials:</span>
-                    <br>
-                    <span
-                        class="qt-fw-600"
-                        [textContent]="networkScanInstallAgent.getCredentialText()"
-                    ></span>
-                </div>
-              </div>
-              <button
-                  class="qt-button "
-                  [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
-                  (click)="openAside()"
-                  [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
-                  [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
-              >
-              </button>
+                <button
+                    class="qt-button "
+                    [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
+                    (click)="openAside()"
+                    [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
+                    [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
+                >
+                </button>
             </div>
             <div class="network-step">
                 <div class="circle-number qt-mb-8">

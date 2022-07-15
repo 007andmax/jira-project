@@ -85,7 +85,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
-    private devicesStateService: DevicesStateService,
+    public devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
@@ -101,6 +101,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     if (this.devicesStateService.getAllDevices()) this.allDevices = this.devicesStateService.getAllDevices();
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
       this.allDevices = data;
+      if (this.selectedClient) this.getDevicesByCompany(this.selectedClient.id);
       if (this.softwareSummaryReport.companyId) this.getDevicesByCompany(this.softwareSummaryReport.companyId);
       if (this.hardwareSummaryReport.companyId) this.getDevicesByCompany(this.hardwareSummaryReport.companyId);
       if (this.deviceIpSummary.companyId) this.getDevicesByCompany(this.deviceIpSummary.companyId);
@@ -580,9 +581,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   }
   back() {
     this.leftPanelStateService.goToState('new-reports');
-  }
-  public onChangeTehUsers(tehusers) {
-
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

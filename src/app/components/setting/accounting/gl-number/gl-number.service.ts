@@ -18,6 +18,10 @@ export class GlNumberService {
     return this.http.post(`${this.apiUrl}glNumber`, glDetail);
   }
 
+  validateForRemove(id) {
+    return this.http.get(`${this.apiUrl}glNumber/validate/${id}`);
+  }
+
   /**
    * edit gl number
    * @param glDetail 

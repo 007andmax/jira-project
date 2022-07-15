@@ -125,6 +125,15 @@ app-inventory {
     z-index: 998 !important;
   }
 }
+app-accounting-settings {
+  .modal {
+    z-index: 998 !important;
+  }
+
+  .modal-backdrop {
+    z-index: 998 !important;
+  }
+}
 app-inventory-table {
   display: contents;
 }

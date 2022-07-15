@@ -34,7 +34,7 @@ export class InventoryTableComponent implements OnInit {
   }
   delete() {
     this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
-    const modalRef = this.modalService.open(InventoryCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory" });
+    const modalRef = this.modalService.open(InventoryCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-inventory", backdrop: 'static', keyboard: false });
     modalRef.componentInstance.inventory = this.inventory;
     this.inventoryStateService.setProductForDelete(this.inventory);
   }

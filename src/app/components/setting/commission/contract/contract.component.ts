@@ -239,7 +239,7 @@ export class ContractComponent implements OnInit, OnDestroy {
     this.rate = rate;
     // this.deletePopup = true;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_CONTRACT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
 
   }

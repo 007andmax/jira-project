@@ -182,7 +182,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
       return;
     }
     if (this.contractsListService.compareDateNowWithDate(this.contractsOther.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);

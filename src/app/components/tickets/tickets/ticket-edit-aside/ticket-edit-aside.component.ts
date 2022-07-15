@@ -201,7 +201,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   }
   showModalAddUpdate() {
-    const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update' });
+    const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update', backdrop: 'static', keyboard: false });
   }
   goToCompanyDashboard() {
     if (!this.getPermissions('VIEW_COMPANIES') || this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts()) return;
@@ -346,7 +346,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
   onToggleAddAssignedUser() {
     if (this.appService.checkMobile()) {
-      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.listAssignedUser;
       this.addUsersNotifyStateService.setAction(USERS_TO_EDIT_TICKET);

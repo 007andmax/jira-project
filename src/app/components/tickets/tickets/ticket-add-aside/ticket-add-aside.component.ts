@@ -5,7 +5,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketCreatedUser } from '../class/ticket-created-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
-import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { TitleListType } from '../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
@@ -20,8 +20,8 @@ import { forkJoin, Subscription } from 'rxjs';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
-import { TehUsersComponent } from 'src/app/components/shared/teh-users/teh-users.component';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 
 
 
@@ -37,7 +37,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('companyDP') companyDP: DropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('techUsersDp') techUsersDp: TehUsersComponent;
+  @ViewChild('techUsersDp') techUsersDp: TechUsersComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
@@ -48,6 +48,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   users = [];
   techUsersList = [];
   shareUsersList = [];
+  selectedCompanyId: string;
   listTechUsersForAssign: Array<TechUserItem> = [];
   selectedTicketPriorities: TitleListType = new TitleListType('Medium Priority', 'MEDIUM');
   ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
@@ -58,7 +59,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
-    private devicesStateService: DevicesStateService,
+    public devicesStateService: DevicesStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     public appService: AppService,
@@ -70,6 +71,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
+      if (this.selectedCompanyId) this.onGetDevices(this.devicesStateService.getAllDevices()[this.selectedCompanyId]);
+    })
+    this.sub.add(getOnDevices);
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
       this.actualNumber = data;
     })
@@ -92,7 +97,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeAssignedUser);
   }
   onAddAssignedUser() {
-    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.userList = this.listTechUsersForAssign;
     modalRef.componentInstance.selectedUsers = this.shareUsersList;
     this.addUsersNotifyStateService.setAction(USERS_TO_ADD_TICKET);
@@ -161,6 +166,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(item) {
     if (item) {
+      this.selectedCompanyId = item.id;
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
       this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
@@ -173,6 +179,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.techUsersDp.resetEditMode();
       this.ticketValidate.resetCompany();
     } else {
+      this.selectedCompanyId = null;
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
       this.users = [];

@@ -144,3 +144,13 @@ add-category-product {
     margin: 0;
     padding: 0;
 }
+.gl-number {
+    width: 150px;
+    padding: 0px !important;
+}
+/deep/ .gl-number-product-settings {
+    input {
+            border: solid 1px #c5cdd5 !important;
+            background-color: #ffffff !important;
+    }
+}

@@ -69,6 +69,7 @@ export class DefaultServicesEditComponent implements OnInit {
   save() {
     if (!this.validate.isValidate(this.service)) return;
     this.defaultServicesService.changeService(this.service.getDataForUpdate()).subscribe(data => {
+      this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
     })
   }

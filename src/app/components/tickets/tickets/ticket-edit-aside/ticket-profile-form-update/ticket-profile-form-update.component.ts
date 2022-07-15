@@ -127,7 +127,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.remoteSessionId = this.realSessionId;
     modalRef.componentInstance.companyId = this.companyIdForSupport;
     modalRef.componentInstance.connectionType = connectionType;
@@ -295,7 +295,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   onToggleAddUpdateUser() {
     if (this.appService.checkMobile()) {
-      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.usersStateService.getAllUsers().filter(item => this.ticketProfileFormUpdate.shares.find(share => share.user.id === item.id))
       this.addUsersNotifyStateService.setAction(USERS_TO_ADD_UPDATE);

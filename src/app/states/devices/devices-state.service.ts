@@ -33,7 +33,6 @@ export class DevicesStateService {
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
-
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
@@ -127,7 +126,6 @@ export class DevicesStateService {
     });
     this.onInitGetDevices(this.allDevices);
   }
-
   public getOnSendDeviceStatus() {
     return this.onSendDeviceStatus;
   }

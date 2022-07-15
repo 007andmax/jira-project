@@ -4477,7 +4477,7 @@ app-add-assigned-user {
     top: 0;
   }
 
-  app-teh-users {
+  app-tech-users {
     height: 24px;
   }
 }
@@ -4510,6 +4510,9 @@ app-ticket-edit-aside-devices {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+app-ticket-edit-aside-devices {
+  position: relative;
 }
 
 .draft-email-aside {
@@ -5048,4 +5051,8 @@ add-category-product {
     height: calc(100% - 140px);
     overflow: auto;
   }
+}
+app-default-services-edit,app-inventory-edit-aside {
+  position: relative;
+  z-index: 999;
 }

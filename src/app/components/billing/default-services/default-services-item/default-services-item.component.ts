@@ -76,7 +76,7 @@ export class DefaultServicesItemComponent implements OnInit {
 
   delete() {
     this.confirmStateService.setConfirmAction(REMOVE_DEFAULT_SERVICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete ${this.service.name}?`;
     this.defaultServicesStateService.setServiceForRemove(this.service);
   }

@@ -120,7 +120,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
   }
   removeTag(tag) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_TAG);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.supportPageCategoriesStateService.setTagForRemove(tag);
     this.cd.detectChanges();

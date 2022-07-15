@@ -114,7 +114,7 @@ export class InvoicesItemComponent implements OnInit {
   };
   deleteInvoice() {
     this.confirmStateService.setConfirmAction(DELETE_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
     this.invoiceStateService.setInvoiceForemove(this.invoice);
   }
@@ -133,7 +133,7 @@ export class InvoicesItemComponent implements OnInit {
   }
   rollbackInvoice() {
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
     ${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
         this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}`;
@@ -141,7 +141,7 @@ export class InvoicesItemComponent implements OnInit {
   }
   refundPayments() {
     this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
     this.invoiceStateService.setInvoiceForRefund(this.invoice);
   }

@@ -111,7 +111,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   selectCompany(data) {
     this.selectedCompany = data;
     this.passwordRecordAdd.setCompany(data);
-    this.linked.onSelectCompany(data);
+    this.linked.onSelectCompany((data) ? data.id : null);
   }
   selectType(data) {
     this.passwordRecordAdd.setType(data);

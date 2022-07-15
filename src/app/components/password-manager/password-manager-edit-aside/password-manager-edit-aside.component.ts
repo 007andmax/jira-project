@@ -72,6 +72,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
+      if (this.editItem) this.selectedClient = data.find(item => item.id === this.editItem.companyId);
     })
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
@@ -204,7 +205,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   deleteRecord() {
     this.confirmStateService.setConfirmAction(REMOVE_RECORD);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }
