@@ -52,4 +52,7 @@ export class NoteService {
   public getNotesTemplates() {
     return this.http.get(`${this.apiUrl}noteTemplates?titleSortDirection=asc`);
   }
+  public getActiveNotesTemplates() {
+    return this.http.get(`${this.apiUrl}noteTemplates?titleSortDirection=asc&active=true`);
+  }
 }

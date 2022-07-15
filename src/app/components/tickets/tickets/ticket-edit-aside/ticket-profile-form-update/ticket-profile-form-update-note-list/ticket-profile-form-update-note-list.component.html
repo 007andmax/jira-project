@@ -1,0 +1,33 @@
+<div
+    class="note-list-container"
+    ngbDropdown
+    [placement]="'top-right'"
+    [container]="'body'"
+>
+    <div
+        class="icon__note-list-container pointer"
+        ngbDropdownToggle
+    >
+        <i class="icon__note-list qt-sz-20 qt-bg-contain qt-dib "></i>
+    </div>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+        style="width: 584px;max-height: 304px;min-height: 120px;"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="noteTemplate"
+            let-i="index"
+        >
+            <button
+                ngbDropdownItem
+                [textContent]="item.title"
+                (click)="onSelect(item)"
+            ></button>
+        </ng-template>
+    </div>
+
+</div>
