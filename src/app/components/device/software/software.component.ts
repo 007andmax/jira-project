@@ -183,12 +183,12 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
-  downloadCsv() {
+  downloadCsv() {    
     let downloadCsvList = [];
     this.softwareList.forEach((element) => {
       downloadCsvList.push([
         element.DisplayName.replace(",", " ") || "N/A",
-        element.Publisher.replace(",", " ") || "N/A",
+        element.Publisher!="" && element.Publisher != null ? element.Publisher.replace(","," "):"N/A",  
         element.DisplayVersion || "N/A",
         element.InstallDate !== "" && element.InstallDate !== null
           ? this.pipe.transform(new Date(element.InstallDate), this.DateFormat)
@@ -199,12 +199,12 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     this.excelService.generateExcel(downloadCsvList, fileName, "software");
   }
 
-  getPdfData() {
+  getPdfData() {    
     let pdfList = [];
     this.softwareList.forEach((element) => {
       pdfList.push([
         element.DisplayName.replace(",", " ") || "N/A",
-        element.Publisher.replace(",", " ") || "N/A",
+        element.Publisher!="" && element.Publisher != null ? element.Publisher.replace(","," "):"N/A",        
         element.DisplayVersion || "N/A",
         element.InstallDate !== "" && element.InstallDate !== null
           ? this.pipe.transform(new Date(element.InstallDate), this.DateFormat)

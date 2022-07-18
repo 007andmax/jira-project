@@ -258,13 +258,14 @@ export class DeviceSettingComponent implements OnInit {
     }
   }
 
-  openModel(isCreated: boolean, index: number, device: any) {
+  openModel(isCreated: boolean, index: number) {
     this.submitted = false;
     this.deviceForm.reset();
     this.create = isCreated;
 
 
     this.selectedIdx = index;
+    let device:any ={};
     this.deviceForm.patchValue({
       ID: device.Id,
       Name: device.Name,
@@ -328,13 +329,14 @@ export class DeviceSettingComponent implements OnInit {
   }
 
 
-  openModelManufacture(isCreated: boolean, index: number, manufacture: any) {
+  openModelManufacture(isCreated: boolean, index: number) {
     this.submitted = false;
     this.manufactureForm.reset();
     this.create = isCreated;
 
 
     this.selectedIdx = index;
+    let manufacture : any = {};
     this.manufactureForm.patchValue({
       ID: manufacture.Id,
       Name: manufacture.Name,
@@ -395,13 +397,14 @@ export class DeviceSettingComponent implements OnInit {
       });
   }
 
-  openModelPopup(isCreated: boolean, index: number, model: any) {
+  openModelPopup(isCreated: boolean, index: number) {
     this.submitted = false;
     this.modelForm.reset();
     this.create = isCreated;
 
 
     this.selectedIdx = index;
+    let model:any ={};
     this.modelForm.patchValue({
       ID: model.Id,
       Name: model.Name,
