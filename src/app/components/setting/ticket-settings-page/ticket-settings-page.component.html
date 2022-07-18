@@ -44,7 +44,7 @@
         </div>
         <ngb-tabset
             (tabChange)="setTab($event)"
-            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus'}"
+            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus' || activeTab === 'cannedResponses'}"
         >
             <!-- Ticket Settings -->
             <ngb-tab

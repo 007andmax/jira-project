@@ -55,7 +55,16 @@
                         <p>Drop to Attach file</p>
                     </div>
                 </div>
-                <textarea
+                <div
+                    contenteditable="true"
+                    id="chat"
+                    name="cps-chat"
+                    class="cps-block__content-textarea"
+                    placeholder="Write ticket conversation here…"
+                    (input)="onChangeChat($event)"
+                    (onPast)="onPastChat($event)"
+                ></div>
+                <!-- <textarea
                     id="chat"
                     name="cps-chat"
                     class="cps-block__content-textarea"
@@ -67,8 +76,11 @@
                     placeholder="Write ticket conversation here…"
                     (input)="onChangeChat($event)"
                     (onPast)="onPastChat($event)"
-                ></textarea>
-                <ticket-profile-form-update-note-list (onSelected)="onSelectedNote($event)"></ticket-profile-form-update-note-list>
+                ></textarea> -->
+                <ticket-profile-form-update-note-list
+                    #noteList
+                    (onSelected)="onSelectedNote($event)"
+                ></ticket-profile-form-update-note-list>
             </div>
             <div class="files-list">
                 <div

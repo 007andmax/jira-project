@@ -30,7 +30,7 @@ export class CannedResponsesComponent implements OnInit {
     private noteStateService: NoteStateService,) { }
 
   ngOnInit() {
-    this.noteService.getNotesTemplates().subscribe((data: any) => {
+    this.noteService.getNotesTemplates(this.sort.toLocaleLowerCase()).subscribe((data: any) => {
       this.noteTemplate = data.map(item => new NoteTemplate(item));
       this.noteStateService.setNoteTemplate(this.noteTemplate);
       this.showPreloader = false;
@@ -60,6 +60,23 @@ export class CannedResponsesComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(changeNoteArray);
+  }
+  getNoteList() {
+    this.showPreloader = true;
+    this.noteService.getNotesTemplates(this.sort.toLocaleLowerCase()).subscribe((data: any) => {
+      this.noteTemplate = data.map(item => new NoteTemplate(item));
+      this.noteStateService.setNoteTemplate(this.noteTemplate);
+      this.showPreloader = false;
+    })
+  }
+  sortByName() {
+    if (this.sort === 'DESC') {
+      this.sort = 'ASC';
+      this.getNoteList();
+    } else {
+      this.sort = 'DESC';
+      this.getNoteList();
+    }
   }
   onRemoveIndustry(id) {
     this.noteService.removeNoteTemplate(id).subscribe(data => {

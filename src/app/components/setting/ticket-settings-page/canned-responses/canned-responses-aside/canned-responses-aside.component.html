@@ -39,6 +39,7 @@
             <input
                 id="add-ticket-subject"
                 class="qt-input-block__input"
+                [ngClass]="{'--input-error' : !noteTemplateValidate.getTitle() || noteTemplateValidate.getTitleIsExist()}"
                 [(ngModel)]="noteTemplate.title"
                 (input)="checkTitle()"
                 type="text"
@@ -61,6 +62,7 @@
             </label>
             <angular-editor
                 [(ngModel)]="noteTemplate.note"
+                [ngClass]="{'--note-error' : !noteTemplateValidate.getNote()}"
                 [config]="editorConfig"
                 (input)="noteTemplateValidate.resetNote()"
             ></angular-editor>

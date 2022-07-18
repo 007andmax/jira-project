@@ -49,8 +49,8 @@ export class NoteService {
     return this.http.get(`${this.apiUrl}noteTemplates/${id}`);
   }
 
-  public getNotesTemplates() {
-    return this.http.get(`${this.apiUrl}noteTemplates?titleSortDirection=asc`);
+  public getNotesTemplates(sort) {
+    return this.http.get(`${this.apiUrl}noteTemplates?titleSortDirection=${sort}`);
   }
   public getActiveNotesTemplates() {
     return this.http.get(`${this.apiUrl}noteTemplates?titleSortDirection=asc&active=true`);

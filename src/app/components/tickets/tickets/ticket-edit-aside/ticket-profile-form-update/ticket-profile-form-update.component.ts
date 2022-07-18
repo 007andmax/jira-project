@@ -27,6 +27,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
+import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -44,6 +45,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
+  @ViewChild('noteList') noteList: TicketProfileFormUpdateNoteListComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
     this.ticketProfile = value;
@@ -119,7 +121,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeAssignedUser);
   }
   onSelectedNote(data) {
-    this.elRef.nativeElement.querySelector("#chat").value = data;
+    this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
+    this.ticketProfileFormUpdate.setChatMessage(data.replace(/\n/g, '<br/>'));
   }
   onConnectRemoteAccess(data) {
     this.companyIdForSupport = data.companyId;
@@ -154,13 +157,14 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     }
   }
   public onChangeChat(event) {
-    this.ticketProfileFormUpdate.setChatMessage(event.target.value.replace(/\n/g, '<br/>'));
+    console.log("event.target.value", event.target.innerHTML);
+    this.ticketProfileFormUpdate.setChatMessage(event.target.innerHTML.replace(/\n/g, '<br/>'));
   }
   public onPastChat(value) {
     this.ticketProfileFormUpdate.setChatMessage(value.replace(/\n/g, '<br/>'));
   }
   public reset() {
-    if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").value = "";
+    if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").innerHTML = "";
     if (!this.appService.checkMobile()) this.tab = "NOTE";
     this.files = [];
     this.showAddUpdateUser = false;
@@ -208,7 +212,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.isUpdate = false;
       if (this.tab === "NOTE") {
         this.ticketProfileFormUpdate.setChatMessage("");
-        this.elRef.nativeElement.querySelector("#chat").value = "";
+        this.elRef.nativeElement.querySelector("#chat").innerHTML = "";
       } else {
         this.ticketsStateService.onClearFormUpdate();
       }
@@ -262,7 +266,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.isUpdateAndClose = false;
       if (this.tab === "NOTE") {
         this.ticketProfileFormUpdate.setChatMessage("");
-        this.elRef.nativeElement.querySelector("#chat").value = "";
+        this.elRef.nativeElement.querySelector("#chat").innerHTML = "";
       } else {
         this.ticketsStateService.onClearFormUpdate();
       }

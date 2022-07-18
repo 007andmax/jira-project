@@ -7,6 +7,9 @@
     <div
         class="icon__note-list-container pointer"
         ngbDropdownToggle
+        placement="top"
+        [container]="'body'"
+        [ngbTooltip]="'Canned Responses'"
     >
         <i class="icon__note-list qt-sz-20 qt-bg-contain qt-dib "></i>
     </div>
@@ -14,7 +17,7 @@
         ngbDropdownMenu
         aria-labelledby="dropdown1"
         class="app-drop-down__dropdown"
-        style="width: 584px;max-height: 304px;min-height: 120px;"
+        style="width: 584px;height: 304px;"
     >
         <ng-template
             ngFor

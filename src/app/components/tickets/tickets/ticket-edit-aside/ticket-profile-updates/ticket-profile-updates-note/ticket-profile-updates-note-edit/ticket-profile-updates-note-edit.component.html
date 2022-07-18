@@ -1,6 +1,12 @@
 <div class="ticket-updates__message-line d-f jc-sb ai-fs">
     <div class="editable-description">
-        <textarea
+        <div
+            class="editable-description-note"
+            contenteditable="true"
+            id="note-description"
+            placeholder="Write ticket conversation here…"
+        ></div>
+        <!-- <textarea
             maxlength="500"
             cols="5"
             rows="5"
@@ -8,10 +14,8 @@
             placeholder="Write ticket conversation here…"
             (input)="onChangeDescription($event)"
             (onPast)="onPastDescription($event)"
-        ></textarea>
+        ></textarea> -->
     </div>
-
-
     <div class="right-side-icons">
         <i
             (click)="saveService()"

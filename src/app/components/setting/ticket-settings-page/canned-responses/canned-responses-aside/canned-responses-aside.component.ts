@@ -88,6 +88,7 @@ export class CannedResponsesAsideComponent implements OnInit {
     this.opened = false;
     this.noteTemplate = new NoteTemplate();
     this.noteTemplateValidate = new NoteTemplateValidate();
+    this.cd.detectChanges();
   }
   save() {
     if (!this.noteTemplateValidate.isValidate(this.noteTemplate)) return;
