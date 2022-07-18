@@ -295,7 +295,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
                 let Minutes = result[4]+' '+result[5]+' '+result[6]+' '+result[7];  
                 asset.UpTime = Minutes;
               }
-              else if(result[0]=="0" && result[2]!="0" && result[4]!="0")
+              else if(result[0]=="0" && result[2]!="0")
               {
                 let Hours = result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
                 asset.UpTime = Hours; 

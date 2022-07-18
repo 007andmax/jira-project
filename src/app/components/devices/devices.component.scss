@@ -41,8 +41,7 @@
       display: flex;
     }
     .company-devices-table__system-network-buttons,
-    .company-devices-table__ip-address-buttons {
-      left: -15px;
+    .company-devices-table__ip-address-buttons {      
       padding-top: 14px
     }
     .device-name-edit-marker {
@@ -748,6 +747,9 @@ span.qt-input-search:before {
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100;
+      @media (max-width: 1920px) {      
+        width: 175px !important;
+      }      
     }
   }
 

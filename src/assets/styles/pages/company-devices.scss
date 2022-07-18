@@ -531,6 +531,9 @@
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100;
+      @media (max-width: 1920px) {      
+        width: 175px;
+      }      
     }
     &__icon {
       width: 40px;
