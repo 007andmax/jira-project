@@ -157,7 +157,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     }
   }
   public onChangeChat(event) {
-    console.log("event.target.value", event.target.innerHTML);
     this.ticketProfileFormUpdate.setChatMessage(event.target.innerHTML.replace(/\n/g, '<br/>'));
   }
   public onPastChat(value) {
@@ -297,6 +296,13 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
+  }
+  onKeyPress(event) {
+    if (event.target.innerHTML.length > 500) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
   }
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
