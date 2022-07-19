@@ -62,6 +62,7 @@ export class CannedResponsesAsideComponent implements OnInit {
   ngOnInit() {
     this.noteStateService.onOpenAddAside.subscribe(data => {
       this.opened = true;
+      this.cd.detectChanges();
     })
     this.noteStateService.onEditNote.subscribe(data => {
       this.noteTemplate = new NoteTemplate(data);
@@ -74,6 +75,7 @@ export class CannedResponsesAsideComponent implements OnInit {
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplateValidate.setTitleIsExist(true);
       this.opened = true;
+      this.cd.detectChanges();
     })
   }
   checkTitle() {

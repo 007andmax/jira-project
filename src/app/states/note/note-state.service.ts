@@ -10,11 +10,28 @@ export class NoteStateService {
   noteTemplate: Array<NoteTemplate> = [];
   activeNoteTemplate: Array<NoteTemplate> = [];
   noteTemplateForRemove: NoteTemplate = null;
+  onUpdateActiveNotes: EventEmitter<any> = new EventEmitter();
   onOpenAddAside: EventEmitter<any> = new EventEmitter();
   onEditNote: EventEmitter<any> = new EventEmitter();
   onCopyNote: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private noteRealTimeService: NoteRealTimeService,) { }
 
+  public onInit() {
+    let changeNoteArray = this.noteRealTimeService.changeNoteArray.subscribe(data => {
+      if (data.action === "CREATE_TICKET_NOTE_TEMPLATE" && data.data.active) {
+        this.activeNoteTemplate.push(new NoteTemplate(data.data));
+      }
+      if (data.action === "EDIT_TICKET_NOTE_TEMPLATE" && data.data.active) {
+        let index = this.activeNoteTemplate.findIndex(item => item.id === data.data.id);
+        if (index > -1) this.activeNoteTemplate[index] = new NoteTemplate(data.data);
+      }
+      if (data.action === "DELETE_TICKET_NOTE_TEMPLATE") {
+        let index = this.activeNoteTemplate.findIndex(item => item.id === data.data);
+        if (index > -1) this.activeNoteTemplate.splice(index, 1);
+      }
+      this.onUpdateActiveNotes.emit(this.activeNoteTemplate);
+    })
+  }
   public getActiveNoteTemplate() {
     return this.activeNoteTemplate;
   }

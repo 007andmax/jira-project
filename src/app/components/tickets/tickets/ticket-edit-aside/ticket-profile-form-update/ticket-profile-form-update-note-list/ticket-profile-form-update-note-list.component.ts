@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { NoteService } from 'src/app/services/note/note.service';
+import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 
 @Component({
@@ -11,11 +13,16 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
 export class TicketProfileFormUpdateNoteListComponent implements OnInit {
   noteTemplate: Array<NoteTemplate> = [];
   @Output() onSelected = new EventEmitter();
+  sub: Subscription = new Subscription();
   constructor(private noteStateService: NoteStateService,
+    public cd: ChangeDetectorRef,
     private noteService: NoteService,) { }
 
   ngOnInit() {
-
+    let onUpdateActiveNotes = this.noteStateService.onUpdateActiveNotes.subscribe(data => {
+      this.noteTemplate = this.noteStateService.getActiveNoteTemplate();
+    })
+    this.sub.add(onUpdateActiveNotes);
   }
   onGetNoteList() {
     if (!this.noteStateService.isGetActiveNoteTemplates) {

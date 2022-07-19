@@ -296,6 +296,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.tab = data;
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
+    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
   }
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
