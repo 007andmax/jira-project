@@ -156,9 +156,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
   }
-  public onKeyUp(event) {
-    console.log("event.keyCode", event.keyCode);
-  }
   onKeyPress(event) {
     if (event.target.innerHTML.length >= 50000) {
       event.preventDefault();
