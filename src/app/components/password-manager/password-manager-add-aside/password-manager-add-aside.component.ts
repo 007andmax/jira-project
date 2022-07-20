@@ -95,6 +95,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
+      this.cd.detectChanges();
     })
     this.sub.add(onGetCategories);
   }

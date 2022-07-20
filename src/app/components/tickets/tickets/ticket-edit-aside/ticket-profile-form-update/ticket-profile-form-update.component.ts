@@ -156,10 +156,28 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
   }
-  public onChangeChat(event) {
-    this.ticketProfileFormUpdate.setChatMessage(event.target.innerHTML.replace(/\n/g, '<br/>'));
+  public onKeyUp(event) {
+    console.log("event.keyCode", event.keyCode);
   }
-  public onPastChat(value) {
+  onKeyPress(event) {
+    if (event.target.innerHTML.length >= 50000) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
+  public onChangeChat(event) {
+    let value = "";
+    if (event.target.innerHTML.length >= 50000) {
+      event.preventDefault();
+      event.target.innerHTML = event.target.innerHTML.substring(0, 50000);
+      value = event.target.innerHTML;
+      var range = window.getSelection(); // 创建range
+      range.selectAllChildren(event.target); // Range 选择obj下所有子内容
+      range.collapseToEnd();
+    } else {
+      value = event.target.innerHTML;
+    }
     this.ticketProfileFormUpdate.setChatMessage(value.replace(/\n/g, '<br/>'));
   }
   public reset() {
@@ -297,13 +315,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate.clearShares();
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
   }
-  onKeyPress(event) {
-    if (event.target.innerHTML.length > 500) {
-      event.preventDefault();
-      return false;
-    }
-    return true;
-  }
+
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
   }

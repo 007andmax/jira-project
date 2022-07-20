@@ -31,6 +31,8 @@ export class NoteStateService {
         let index = this.activeNoteTemplate.findIndex(item => item.id === data.data);
         if (index > -1) this.activeNoteTemplate.splice(index, 1);
       }
+      this.activeNoteTemplate.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.onUpdateActiveNotes.emit(this.activeNoteTemplate);
     })
   }
