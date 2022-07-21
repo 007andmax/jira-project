@@ -36,7 +36,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   showPassword: boolean = false;
-  progressTimer: number;
+  progressTimer: number = 0;
+  intervalContainer: any;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
@@ -118,14 +119,33 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   toggleSecretKey() {
     this.showSecretKey = !this.showSecretKey;
-    if (this.showSecretKey && this.editItem.otpEnable) this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
+    if (this.showSecretKey && this.editItem.otpEnable) this.getCodeRecords();
+  }
+  getCodeRecords() {
+    this.progressTimer = 0;
+    this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
       this.editItem.setOtp(data.otp);
       this.editItem.setExpirationDate(data.expirationDate);
-      this.editItem.onInitTimerExpirationDate().then((res: number) => {
-        console.log("res", res);
-        this.progressTimer = res;
-        this.cd.detectChanges();
-      })
+
+      let timeout = (this.editItem.expirationDate - new Date().getTime()) / 1000;
+      console.log("timeout", timeout);
+      console.log("this.editItem.expirationDate ", this.editItem.expirationDate);
+      console.log("new Date().getTime()", new Date().getTime());
+      if (timeout > 0) {
+        let timeCount = Math.floor(timeout);
+        let countInterval = Math.floor(timeout);
+        this.intervalContainer = setInterval(() => {
+          console.log("time", timeCount)
+          timeCount = (timeCount - 1);
+          if (timeCount <= 0) {
+            clearInterval(this.intervalContainer);
+            this.getCodeRecords();
+          }
+          this.progressTimer = (timeCount / countInterval) * 100;
+          this.cd.detectChanges();
+        }, 1000);
+      }
     })
   }
   onInitDescription() {

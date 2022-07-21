@@ -29,30 +29,11 @@ export class PasswordRecord {
     description: string;
     password: string;
     selected: boolean = false;
-    intervalContainer: any;
-    countInterval: number = 0;
     constructor(data) {
         this.onUpdate(data);
     }
     public setOtp(data) {
         this.otp = data;
-    }
-    public onInitTimerExpirationDate() {
-        return new Promise((resolve, reject) => {
-            let timeout = (this.expirationDate - new Date().getTime()) / 1000;
-            console.log("timeout", timeout);
-            this.timeCount = Math.floor(timeout);
-            this.countInterval = Math.floor(timeout);
-            this.intervalContainer = setInterval(() => {
-                console.log("time", this.timeCount)
-                this.timeCount = (this.timeCount - 1);
-                if (this.timeCount <= 0) clearInterval(this.intervalContainer);
-                resolve(this.getProgressTimer());
-            }, 1000);
-        });
-    }
-    public getProgressTimer() {
-        return (this.timeCount / this.countInterval) * 100;
     }
     public setExpirationDate(data) {
         this.expirationDate = data;
