@@ -30,11 +30,13 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
+  showSecretKey: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   showPassword: boolean = false;
+  progressTimer: number;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
@@ -113,6 +115,18 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
+  }
+  toggleSecretKey() {
+    this.showSecretKey = !this.showSecretKey;
+    if (this.showSecretKey && this.editItem.otpEnable) this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
+      this.editItem.setOtp(data.otp);
+      this.editItem.setExpirationDate(data.expirationDate);
+      this.editItem.onInitTimerExpirationDate().then((res: number) => {
+        console.log("res", res);
+        this.progressTimer = res;
+        this.cd.detectChanges();
+      })
+    })
   }
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;

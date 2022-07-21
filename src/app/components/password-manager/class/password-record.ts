@@ -13,11 +13,15 @@ export class PasswordRecord {
     template: PasswordRecordCategories;
     username: string;
     ssid: string;
-    key: string;
+    installationKey: string;
     url: string;
     code: string;
+    otp: string;
+    expirationDate: number;
     ipAdres: string;
     port: string;
+    otpEnable: boolean;
+    timeCount: number = 0;
     https: boolean = false;
     ssh: boolean = false;
     telnet: boolean = false;
@@ -25,8 +29,33 @@ export class PasswordRecord {
     description: string;
     password: string;
     selected: boolean = false;
+    intervalContainer: any;
+    countInterval: number = 0;
     constructor(data) {
         this.onUpdate(data);
+    }
+    public setOtp(data) {
+        this.otp = data;
+    }
+    public onInitTimerExpirationDate() {
+        return new Promise((resolve, reject) => {
+            let timeout = (this.expirationDate - new Date().getTime()) / 1000;
+            console.log("timeout", timeout);
+            this.timeCount = Math.floor(timeout);
+            this.countInterval = Math.floor(timeout);
+            this.intervalContainer = setInterval(() => {
+                console.log("time", this.timeCount)
+                this.timeCount = (this.timeCount - 1);
+                if (this.timeCount <= 0) clearInterval(this.intervalContainer);
+                resolve(this.getProgressTimer());
+            }, 1000);
+        });
+    }
+    public getProgressTimer() {
+        return (this.timeCount / this.countInterval) * 100;
+    }
+    public setExpirationDate(data) {
+        this.expirationDate = data;
     }
     public isDefaultType() {
         return this.template.default;
@@ -61,7 +90,7 @@ export class PasswordRecord {
             template: this.template
         };
         if (this.template.name === "OFFICE_365_ACCOUNT" || !this.isDefaultType()) {
-            data.key = this.key;
+            data.installationKey = this.installationKey;
             data.url = this.url;
             data.ssid = this.ssid;
             data.username = this.username;
@@ -119,7 +148,7 @@ export class PasswordRecord {
         this.username = data.username;
         this.description = data.description;
         this.ssid = data.ssid;
-        this.key = data.key;
+        this.installationKey = data.installationKey;
         this.url = data.url;
         this.code = data.code;
         this.ipAdres = data.ipAdres;
@@ -128,5 +157,6 @@ export class PasswordRecord {
         this.ssh = data.ssh;
         this.telnet = data.telnet;
         this.note = data.note;
+        this.otpEnable = data.otpEnable;
     }
 }
