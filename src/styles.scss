@@ -4480,6 +4480,11 @@ app-add-assigned-user {
   app-tech-users {
     height: 24px;
   }
+
+  .editable-description {
+    overflow-y: unset;
+    overflow-x: unset;
+  }
 }
 
 .ticket-edit-aside {
