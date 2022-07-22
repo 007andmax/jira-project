@@ -18,6 +18,7 @@ export class PasswordRecord {
     code: string;
     otp: string;
     expirationDate: number;
+    authenticationKey: string = "";
     ipAdres: string;
     port: string;
     otpEnable: boolean;
@@ -56,6 +57,9 @@ export class PasswordRecord {
     public getExpiryDateByTime() {
         return new Date(this.expiredDate).getTime();
     }
+    public setAuthenticationKey(data) {
+        this.authenticationKey = data;
+    }
     public getDataForEdit(selectedUserAndDevices: Array<PasswordDeviceUser>) {
         let data: any = {
             id: this.id,
@@ -70,6 +74,7 @@ export class PasswordRecord {
             password: (this.password && this.password.length > 0) ? this.password : undefined,
             template: this.template
         };
+        if (this.authenticationKey && this.authenticationKey.length > 0 || this.authenticationKey == null) data.authenticationKey = this.authenticationKey;
         if (this.template.name === "OFFICE_365_ACCOUNT" || !this.isDefaultType()) {
             data.installationKey = this.installationKey;
             data.url = this.url;

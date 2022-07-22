@@ -30,13 +30,14 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
-  showSecretKey: boolean = false;
+  showSecretCode: boolean = false;
+
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   showPassword: boolean = false;
-  progressTimer: number = 0;
+  timeCount: number = 0;
   intervalContainer: any;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
@@ -117,13 +118,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
     this.sub.add(onGetCategories);
   }
-  toggleSecretKey() {
-    this.showSecretKey = !this.showSecretKey;
+  toggleSecretCode() {
+    this.showSecretCode = !this.showSecretCode;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
-    if (this.showSecretKey && this.editItem.otpEnable) this.getCodeRecords();
+    if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
+  }
+  clearSecretKey() {
+    this.editItem.setAuthenticationKey(null);
   }
   getCodeRecords() {
-    this.progressTimer = 0;
+    this.timeCount = 0;
     this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
       this.editItem.setOtp(data.otp);
       this.editItem.setExpirationDate(data.expirationDate);
@@ -133,20 +137,21 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       console.log("this.editItem.expirationDate ", this.editItem.expirationDate);
       console.log("new Date().getTime()", new Date().getTime());
       if (timeout > 0) {
-        let timeCount = Math.floor(timeout);
-        let countInterval = Math.floor(timeout);
+        this.timeCount = Math.floor(timeout);
         this.intervalContainer = setInterval(() => {
-          console.log("time", timeCount)
-          timeCount = (timeCount - 1);
-          if (timeCount <= 0) {
+          console.log("time", this.timeCount)
+          this.timeCount = (this.timeCount - 1);
+          if (this.timeCount <= 0) {
             clearInterval(this.intervalContainer);
             this.getCodeRecords();
           }
-          this.progressTimer = (timeCount / countInterval) * 100;
           this.cd.detectChanges();
         }, 1000);
       }
     })
+  }
+  getTimeProgress() {
+    return `${(this.timeCount > 10) ? this.timeCount : '0' + this.timeCount}`
   }
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
@@ -233,6 +238,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.devicesList = [];
     this.usersList = [];
     this.gadgetsList = [];
+    this.showSecretCode = false;
+
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

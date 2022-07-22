@@ -70,6 +70,7 @@ export class PasswordRecordValidate {
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
         if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
         if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
-        return this.company && this.userName && this.ssid && this.linkTo && this.ipAdress;
+        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKey = false;
+        return this.company && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKey;
     }
 }
