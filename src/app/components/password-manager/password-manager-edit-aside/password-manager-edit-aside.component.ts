@@ -151,7 +151,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
   getTimeProgress() {
-    return `${(this.timeCount > 10) ? this.timeCount : '0' + this.timeCount}`
+    return `${(this.timeCount >= 10) ? this.timeCount : '0' + this.timeCount}`
   }
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
