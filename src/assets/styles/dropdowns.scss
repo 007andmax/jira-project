@@ -303,13 +303,6 @@
             font-weight: 400;
             padding: 8px 16px !important;
           }
-          .report-caret-icon {
-            position: absolute;
-            right: 16px;
-            top: calc(50% - 3px) !important;
-            transform: rotate(180deg);
-            background: url("/assets/img/report-caret-right.png");
-          }
           &.collapsed {
             background-color: $white;
             color: $primary-2;
@@ -325,10 +318,6 @@
             @media (max-width: 767px) {
               background-color: $white;
               color: $primary-2;
-            }
-
-            .report-caret-icon {
-              background: url("/assets/img/report-caret-right.png");
             }
           }
         }
