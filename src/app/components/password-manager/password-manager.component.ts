@@ -66,6 +66,9 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.recordsData.push(new PasswordRecord(newChange.data));
+        this.filter.onSortList(this.recordsData);
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index < this.list_records.length) this.list_records.splice(index, 0, this.recordsData[index]);
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index].onUpdate(newChange.data);
@@ -102,6 +105,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.filterList();
   }
   private filterList() {
+    console.log("filterList");
     if (this.passwordManagerListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
