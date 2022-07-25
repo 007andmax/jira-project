@@ -143,7 +143,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         this.intervalContainer = setInterval(() => {
           console.log("time", this.timeCount)
           this.timeCount = (this.timeCount - 1);
-          if (this.timeCount < 0.5) {
+          if (this.timeCount < 1) {
             clearInterval(this.intervalContainer);
             this.getCodeRecords();
           }
