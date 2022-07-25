@@ -31,7 +31,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
   showSecretCode: boolean = false;
-
+  isGetSecretCode: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
   companies: Array<Company> = [];
@@ -121,6 +121,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
+    if (!this.showSecretCode) this.isGetSecretCode = false;
     if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
   }
   clearSecretKey() {
@@ -131,7 +132,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
       this.editItem.setOtp(data.otp);
       this.editItem.setExpirationDate(data.expirationDate);
-
+      this.isGetSecretCode = true;
       let timeout = (this.editItem.expirationDate - new Date().getTime()) / 1000;
       console.log("timeout", timeout);
       console.log("this.editItem.expirationDate ", this.editItem.expirationDate);
@@ -142,7 +143,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         this.intervalContainer = setInterval(() => {
           console.log("time", this.timeCount)
           this.timeCount = (this.timeCount - 1);
-          if (this.timeCount < 0) {
+          if (this.timeCount < -1) {
             clearInterval(this.intervalContainer);
             this.getCodeRecords();
           }
