@@ -128,7 +128,6 @@ export class FilterPasswordManager {
     public onSortList(reqList) {
         let filter = this.filterTop.find(item => item.filter !== '');
         let sort = filter.filter;
-        console.log("filter", filter);
         if (filter.field === 'account_type') {
 
             if (sort === 'ASC') {

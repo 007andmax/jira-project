@@ -105,7 +105,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.filterList();
   }
   private filterList() {
-    console.log("filterList");
     if (this.passwordManagerListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

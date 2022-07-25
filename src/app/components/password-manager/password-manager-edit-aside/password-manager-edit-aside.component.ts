@@ -134,14 +134,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.editItem.setExpirationDate(data.expirationDate);
       this.isGetSecretCode = true;
       let timeout = (this.editItem.expirationDate - new Date().getTime()) / 1000;
-      console.log("timeout", timeout);
-      console.log("this.editItem.expirationDate ", this.editItem.expirationDate);
-      console.log("new Date().getTime()", new Date().getTime());
       if (timeout > 0) {
         this.timeCount = Math.ceil(timeout);
-        console.log("this.timeCount", this.timeCount);
         this.intervalContainer = setInterval(() => {
-          console.log("time", this.timeCount)
           this.timeCount = (this.timeCount - 1);
           if (this.timeCount < 0) {
             clearInterval(this.intervalContainer);
