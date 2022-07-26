@@ -101,6 +101,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       })
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       this.opened = true;
+      console.log("this.editItem", this.editItem);
     });
     this.sub.add(onEditForm);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -124,8 +125,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (!this.showSecretCode) this.isGetSecretCode = false;
     if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
   }
+  onChangeAuthenticationKey() {
+    this.validate.resetAuthenticationKey();
+    this.editItem.setResetAuthenticationKey(false)
+  }
   clearSecretKey() {
-    this.editItem.setAuthenticationKey(null);
+    this.editItem.setAuthenticationKey("");
+    this.editItem.setResetAuthenticationKey(true);
   }
   getCodeRecords() {
     this.timeCount = 0;
@@ -193,6 +199,19 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     let textArea: any = document.createElement("textarea");
     textArea.style.opacity = 0;
     textArea.value = this.editItem.password;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+  }
+  copySecretCode() {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = this.editItem.otp;
     document.body.appendChild(textArea);
     textArea.select();
     try {
