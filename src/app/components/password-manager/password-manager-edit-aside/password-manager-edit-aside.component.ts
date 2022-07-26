@@ -117,6 +117,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
+    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_RECORD_UPDATED' && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
+      console.log("this.editItem", this.editItem);
+      if (!this.cd['destroyed']) this.cd.detectChanges();
+    })
+    this.sub.add(onChangeRealTime);
   }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;

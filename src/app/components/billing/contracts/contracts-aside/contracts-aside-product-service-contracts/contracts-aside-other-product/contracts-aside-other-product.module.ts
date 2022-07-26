@@ -4,6 +4,7 @@ import { ContractsAsideOtherProductComponent } from './contracts-aside-other-pro
 import { ProductListModule } from 'src/app/components/shared/product-list/product-list.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { FormsModule } from '@angular/forms';
+import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         ProductListModule,
         NumberModule,
-        FormsModule
+        FormsModule,
+        DecimalNumberModule
 
     ],
     exports: [ContractsAsideOtherProductComponent]

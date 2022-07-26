@@ -128,6 +128,9 @@ export class PasswordRecord {
         }
         return data;
     }
+    public updateHistories(data) {
+        this.histories = data;
+    }
     public onUpdate(data) {
         this.companyId = data.companyId;
         this.companyName = data.companyName;

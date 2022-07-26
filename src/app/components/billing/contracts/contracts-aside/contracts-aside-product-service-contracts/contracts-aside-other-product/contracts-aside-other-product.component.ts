@@ -33,6 +33,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
 
   }
   public onChangeQuantity(val) {
+    console.log("onChangeQuantity", val);
     let value = Number(val);
     this.product.quantity = value;
   }
@@ -41,6 +42,9 @@ export class ContractsAsideOtherProductComponent implements OnInit {
     this.product.salePrice = value;
   }
   getSubTotal() {
+    console.log("this.product.quantity", this.product.quantity);
+    console.log("this.product.salePrice", this.product.salePrice);
+    console.log("this.product.quantity * this.product.salePrice", this.product.quantity * this.product.salePrice);
     return this.product.quantity * this.product.salePrice;
   }
   remove() {
