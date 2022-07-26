@@ -101,7 +101,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       })
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       this.opened = true;
-      console.log("this.editItem", this.editItem);
     });
     this.sub.add(onEditForm);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
