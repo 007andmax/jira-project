@@ -12,14 +12,11 @@ export class DecimalNumberDirective {
   @Input("useFixed") useFixed: boolean = false;
   constructor(private element: ElementRef, private commonService: CommonService) { }
   ngOnInit() {
-    console.log("this.element.nativeElement", this.element.nativeElement);
     this.element.nativeElement.addEventListener("input", (event) => {
       event.target.value = this.commonService.validateNumber(event.target.value);
-      console.log("event.target.value", event.target.value);
       this.onChange.emit(event.target.value);
     });
     this.element.nativeElement.addEventListener("blur", (event) => {
-      console.log("event.target.value", event.target.value);
       if (event.target.value && event.target.value !== "NaN") {
         if (this.useFixed) {
           if (parseFloat(event.target.value) !== NaN) event.target.value = parseFloat(event.target.value).toFixed(2);

@@ -193,9 +193,7 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      console.log("state", this.state);
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
-        console.log("onCurrentCompany", 1);
         this.router.navigate(
           [`${data.name.replaceAll(' ', '')}/tickets/`]);
       }

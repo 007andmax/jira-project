@@ -155,7 +155,6 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
-          console.log("this.state", this.state);
           if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
@@ -194,7 +193,6 @@ export class LeftPanelComponent implements OnInit {
      })*/
   }
   goToDefaultPage() {
-    console.log("goToDefaultPage");
     this.state = 'new-tickets';
     this.goToLink('tickets');
   }
