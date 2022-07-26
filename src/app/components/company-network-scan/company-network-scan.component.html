@@ -7,7 +7,7 @@
         ></app-company-network-scan-no-exist-devices>
         <div
             class="network-steps qt-mb-30"
-            *ngIf="!showPreloader && devices.length > 0"
+            *ngIf="!showPreloader && assetList.length > 0"
         >
             <div class="network-step">
                 <div class="circle-number qt-mb-8">
@@ -70,16 +70,6 @@
                         <div class="circle-number__inner">2</div>
                     </div>
                     <div class="network-step__title">Select Device</div>
-                    <div class="network-step__text-cred qt-mb-15">
-                        <span>You have using below credentials:</span>
-                        <br>
-                        <span
-                            class="qt-ff-gm"
-                            [textContent]="networkScanInstallAgent.getCredentialText()"
-                        ></span>
-                    </div>
-                </div>
-                <div class="network-step__title">Select Device</div>
                 <div class="network-step__text-cred qt-mb-15">
                     <span>You have using below credentials:</span>
                     <br>
@@ -88,8 +78,8 @@
                         [textContent]="networkScanInstallAgent.getCredentialText()"
                     ></span>
                 </div>
-            </div>
-            <button
+                </div>
+                <button
                 class="qt-button "
                 [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
                 (click)="openAside()"
@@ -97,24 +87,26 @@
                 [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
             >
             </button>
-        </div>
-        <div class="network-step">
-            <div class="circle-number qt-mb-8">
-                <div class="circle-number__inner">3</div>
+                
             </div>
-            <div class="network-step__title">Install Agent</div>
-            <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
-            <button
-                class="qt-button"
-                [ngClass]="{'--disabled': !checkCanInstallAgent() || !masterAgent.online,'qt-loading --hide-text': btnInstallAgent.isBlock()}"
-                [disabled]="!checkCanInstallAgent() || !masterAgent.online"
-                appDisabledBtn
-                #btnInstallAgent="disabled"
-                (onClick)="installAgent()"
-            >
-                Install Agent
-            </button>
-        </div>
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">3</div>
+                </div>
+                <div class="network-step__title">Install Agent</div>
+                <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
+                <button
+                    class="qt-button"
+                    [ngClass]="{'--disabled': !checkCanInstallAgent() || !masterAgent.online,'qt-loading --hide-text': btnInstallAgent.isBlock()}"
+                    [disabled]="!checkCanInstallAgent() || !masterAgent.online"
+                    appDisabledBtn
+                    #btnInstallAgent="disabled"
+                    (onClick)="installAgent()"
+                >
+                    Install Agent
+                </button>
+            </div>
+        </div>        
     </div>
     <div class="network-scan-page__table-container">
         <div
@@ -276,3 +268,20 @@
     >
     </app-network-scan-credentials-aside>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
