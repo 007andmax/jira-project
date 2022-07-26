@@ -18,6 +18,16 @@
         class="app-drop-down__dropdown"
         style="width: 584px;min-height: 120px;max-height: 304px;"
     >
+        <div class="header-note-list">
+            <div class="header-note-list-title">Canned Responses</div>
+            <div
+                class="header-note-list-add"
+                (click)="createResponse()"
+                *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+            >
+                + Create
+            </div>
+        </div>
         <ng-template
             ngFor
             let-item
@@ -31,6 +41,12 @@
             ></button>
         </ng-template>
     </div>
+
+
+
+
+
+
 
 
 </div>

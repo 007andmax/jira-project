@@ -51,7 +51,7 @@ export class CannedResponsesAsideComponent implements OnInit {
       },
     ],
     uploadUrl: 'v1/image',
-    sanitize: true,
+    sanitize: false,
 
   };
   opened: boolean = false;
