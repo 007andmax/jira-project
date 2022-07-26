@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { NoteService } from 'src/app/services/note/note.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 
 @Component({

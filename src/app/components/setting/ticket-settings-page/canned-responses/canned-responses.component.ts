@@ -102,19 +102,7 @@ export class CannedResponsesComponent implements OnInit {
     modalRef.componentInstance.message = `Remove Canned Response`;
     this.noteStateService.setNoteTemplateForRemove(item);
   }
-  /* sortByTicketName() {
-     if (this.sort === 'DESC') {
-       this.sort = 'ASC';
-       this.ticketsStatus = this.ticketsStateService.getTicketsStatus().sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-     } else {
-       this.sort = 'DESC';
-       this.ticketsStatus.reverse();
-     }
-   }*/
-
   ngOnDestroy(): void {
-
     this.sub.unsubscribe();
   }
 }
