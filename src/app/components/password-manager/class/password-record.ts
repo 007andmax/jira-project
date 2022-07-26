@@ -30,6 +30,7 @@ export class PasswordRecord {
     description: string;
     password: string;
     selected: boolean = false;
+    resetAuthenticationKey: boolean = false;
     constructor(data) {
         this.onUpdate(data);
     }
@@ -57,6 +58,9 @@ export class PasswordRecord {
     public getExpiryDateByTime() {
         return new Date(this.expiredDate).getTime();
     }
+    public setResetAuthenticationKey(data) {
+        this.resetAuthenticationKey = data;
+    }
     public setAuthenticationKey(data) {
         this.authenticationKey = data;
     }
@@ -74,7 +78,8 @@ export class PasswordRecord {
             password: (this.password && this.password.length > 0) ? this.password : undefined,
             template: this.template
         };
-        if (this.authenticationKey && this.authenticationKey.length > 0 || this.authenticationKey == null) data.authenticationKey = this.authenticationKey;
+        if (this.authenticationKey && this.authenticationKey.length > 0) data.authenticationKey = this.authenticationKey;
+        if (this.resetAuthenticationKey) data.authenticationKey = "";
         if (this.template.name === "OFFICE_365_ACCOUNT" || !this.isDefaultType()) {
             data.installationKey = this.installationKey;
             data.url = this.url;
