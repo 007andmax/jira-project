@@ -86,12 +86,9 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="noteTemplate.getEditMode() ? save() : add()"
+                (click)="noteTemplate.getEditMode() ? save() : add()"
             >
-                <span *ngIf="!addBtn.isBlock()">Save</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                Save
             </button>
             <button
                 class="qt-button --gray"

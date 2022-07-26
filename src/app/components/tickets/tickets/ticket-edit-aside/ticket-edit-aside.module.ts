@@ -56,6 +56,7 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
 import { TicketProfileAttachmentsModule } from './ticket-profile-attachments/ticket-profile-attachments.module';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
+import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 
 @NgModule({
     declarations: [TicketEditAsideComponent,
@@ -90,7 +91,8 @@ import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users
         TicketProfileUpdatesServiceEditComponent,
         TicketProfileEditFormUpdateComponent,
         TicketProfileEditFormUpdateProductsComponent,
-        TicketProfileEditFormUpdateServicesComponent
+        TicketProfileEditFormUpdateServicesComponent,
+        TicketProfileFormUpdateNoteListComponent
 
     ],
     imports: [

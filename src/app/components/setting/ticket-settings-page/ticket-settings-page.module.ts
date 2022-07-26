@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { Onlynumber } from 'src/app/helpers/Onlynumber';
+import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 
@@ -18,7 +20,8 @@ import { Onlynumber } from 'src/app/helpers/Onlynumber';
         TicketSettingsPageComponent,
         TicketSettingsComponent,
         TicketsStatusComponent,
-        Onlynumber
+        Onlynumber,
+        CannedResponsesComponent
     ],
     imports: [
         CommonModule,
@@ -28,7 +31,8 @@ import { Onlynumber } from 'src/app/helpers/Onlynumber';
         MatFormFieldModule,
         DropDownModule,
         ClickOtsideModule,
-        TicketSettingsPageRoutingModule
+        TicketSettingsPageRoutingModule,
+        DynamicTooltipModule
     ],
 
 

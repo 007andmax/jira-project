@@ -172,9 +172,7 @@ declare var $: any;
     GoogleAuthenticatorComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    CannedResponsesComponent,
     CannedResponsesAsideComponent,
-    TicketProfileFormUpdateNoteListComponent
   ],
   imports: [
     BrowserModule,
