@@ -30,11 +30,15 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
+  showSecretCode: boolean = false;
+  isGetSecretCode: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   showPassword: boolean = false;
+  timeCount: number = 0;
+  intervalContainer: any;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
@@ -113,6 +117,38 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
+  }
+  toggleSecretCode() {
+    this.showSecretCode = !this.showSecretCode;
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
+    if (!this.showSecretCode) this.isGetSecretCode = false;
+    if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
+  }
+  clearSecretKey() {
+    this.editItem.setAuthenticationKey(null);
+  }
+  getCodeRecords() {
+    this.timeCount = 0;
+    this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
+      this.editItem.setOtp(data.otp);
+      this.editItem.setExpirationDate(data.expirationDate);
+      this.isGetSecretCode = true;
+      let timeout = (this.editItem.expirationDate - new Date().getTime()) / 1000;
+      if (timeout > 0) {
+        this.timeCount = Math.ceil(timeout);
+        this.intervalContainer = setInterval(() => {
+          this.timeCount = (this.timeCount - 1);
+          if (this.timeCount < 0) {
+            clearInterval(this.intervalContainer);
+            this.getCodeRecords();
+          }
+          this.cd.detectChanges();
+        }, 1000);
+      }
+    })
+  }
+  getTimeProgress() {
+    return `${(this.timeCount >= 10) ? this.timeCount : '0' + this.timeCount}`
   }
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
@@ -199,6 +235,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.devicesList = [];
     this.usersList = [];
     this.gadgetsList = [];
+    this.showSecretCode = false;
+
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
