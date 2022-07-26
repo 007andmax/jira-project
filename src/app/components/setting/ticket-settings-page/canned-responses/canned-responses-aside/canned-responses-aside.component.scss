@@ -1,0 +1,13 @@
+.active-note {
+    margin-bottom: 0px !important;
+}
+
+.mark-as-active {
+    color: #454f5b;
+    font-weight: 500;
+}
+/deep/ .--note-error {
+    .angular-editor-textarea,.angular-editor-toolbar {
+        border: 1px solid #ff5263 !important;
+    }
+}

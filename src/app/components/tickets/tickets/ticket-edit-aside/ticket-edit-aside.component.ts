@@ -89,6 +89,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     let getOnEditTicket = this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
+      if (this.updateForm) this.updateForm.noteList.onGetNoteList()
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = (this.ticketProfile.note) ? this.ticketProfile.note : "";
       this.updateListAssignedUser();

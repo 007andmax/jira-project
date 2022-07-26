@@ -1,0 +1,89 @@
+<div class="cmn-area">
+    <div
+        class="data-table-wrap"
+        [ngClass]="{'preloader-container' : showPreloader}"
+    >
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+        <table
+            class="display dataTable"
+            style="width:100%"
+            *ngIf="!showPreloader"
+        >
+            <thead>
+                <tr>
+                    <th
+                        class="tax-name pointer"
+                        (click)="sortByName()"
+                    >
+                        Responses Name
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th class="rate">
+                        <div class="qt-df qt-jc-c">Active</div>
+                    </th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of noteTemplate; let i = index">
+                    <td
+                        class="tax-name add-status-name"
+                        [textContent]="item.title"
+                    >
+                    </td>
+                    <td class="rate">
+                        <div class="qt-df qt-jc-c">
+                            <i
+                                class="icon__document-category-subscribe qt-sz-16 qt-bg-contain qt-dib"
+                                *ngIf="item.active"
+                            ></i>
+                        </div>
+                    </td>
+                    <td class="action">
+                        <div class="qt-df qt-ai-c">
+                            <app-dynamic-tooltip
+                                [content]="'Copy'"
+                                [position]="'top'"
+                                #copyTooltip
+                            ></app-dynamic-tooltip>
+                            <app-dynamic-tooltip
+                                [content]="'Edit'"
+                                [position]="'top'"
+                                #editTooltip
+                            ></app-dynamic-tooltip>
+                            <app-dynamic-tooltip
+                                [content]="'Delete'"
+                                [position]="'top'"
+                                #deleteTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                                class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-16 pointer"
+                                (click)="copyNote(item)"
+                                (mouseenter)="copyTooltip.show($event.target)"
+                                (mouseleave)="copyTooltip.hide()"
+                            ></div>
+                            <div
+                                *ngIf="getPermissions('EDIT_TICKET_NOTE_TEMPLATE')"
+                                class="icon__edit qt-sz-16 qt-bg-contain qt-mr-16 pointer"
+                                (click)="editNote(item)"
+                                (mouseenter)="editTooltip.show($event.target)"
+                                (mouseleave)="editTooltip.hide()"
+                            ></div>
+                            <div
+                                *ngIf="getPermissions('DELETE_TICKET_NOTE_TEMPLATE')"
+                                class="icon__remove qt-sz-16 qt-bg-contain pointer"
+                                (click)="removeNote(item)"
+                                (mouseenter)="deleteTooltip.show($event.target)"
+                                (mouseleave)="deleteTooltip.hide()"
+                            ></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

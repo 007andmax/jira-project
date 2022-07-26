@@ -3,7 +3,8 @@
     <div class="page-insider invoice-ticket">
         <div
             class="heading"
-            [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus'}"
+            [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus',
+        'heading-canned-responses':activeTab === 'cannedResponses'}"
         >
             <h6 class="qt-fw-600 qt-color-dark">Ticket Settings</h6>
             <div
@@ -24,17 +25,26 @@
                     </div>
                 </div>
                 <a
+                    *ngIf="activeTab === 'ticketStatus'"
                     href="javascript:;"
-                    class="btn-outline"
+                    class="btn-outline add-status-btn"
                     (click)="create()"
                 >
-                   Add Status
+                    Add Status
+                </a>
+                <a
+                    *ngIf="activeTab === 'cannedResponses' && getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                    href="javascript:;"
+                    class="btn-outline add-response-btn"
+                    (click)="createResponse()"
+                >
+                    Create Response
                 </a>
             </div>
         </div>
         <ngb-tabset
             (tabChange)="setTab($event)"
-            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus'}"
+            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus' || activeTab === 'cannedResponses'}"
         >
             <!-- Ticket Settings -->
             <ngb-tab
@@ -51,6 +61,14 @@
             >
                 <ng-template ngbTabContent>
                     <tickets-status #ticketsStatus></tickets-status>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Canned Responses"
+                id="cannedResponses"
+            >
+                <ng-template ngbTabContent>
+                    <canned-responses #cannedResponses></canned-responses>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

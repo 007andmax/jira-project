@@ -134,7 +134,9 @@ import { DocumentsEditCategoryItemComponent } from './components/documents/docum
 import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
 import { GoogleAuthenticatorScratchesComponent } from './components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
 import { GlNumberCheckUseComponent } from './components/setting/accounting/gl-number/gl-number-check-use/gl-number-check-use.component';
-
+import { CannedResponsesComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses.component';
+import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
+import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 
 declare var $: any;
 
@@ -169,7 +171,10 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorComponent,
     GoogleAuthenticatorScratchesComponent,
-    GlNumberCheckUseComponent
+    GlNumberCheckUseComponent,
+    CannedResponsesComponent,
+    CannedResponsesAsideComponent,
+    TicketProfileFormUpdateNoteListComponent
   ],
   imports: [
     BrowserModule,

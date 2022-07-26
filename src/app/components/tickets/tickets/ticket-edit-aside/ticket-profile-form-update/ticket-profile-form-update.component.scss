@@ -89,13 +89,19 @@
 
   &__content-textarea {
     min-height: 104px;
+    max-height: 300px;
     width: 100%;
     border-radius: 4px;
     border: none;
     overflow: auto;
+    outline: none;
     padding: 16px;
     &:last-child {
       display: none;
+    }
+    &::placeholder {
+      opacity: 1;
+      color: $gray-600;
     }
   }
   .support-timeline-status__line {
@@ -350,4 +356,10 @@
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
+}
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  /* For Firefox */
 }

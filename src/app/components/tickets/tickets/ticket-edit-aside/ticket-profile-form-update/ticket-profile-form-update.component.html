@@ -44,7 +44,7 @@
     <div class="cps-block__content">
         <div
             class="cps-block__chat-block"
-            *ngIf="tab === 'NOTE'"
+            [hidden]="tab !== 'NOTE'"
             appDnd
             (fileDropped)="fileBrowseHandler($event)"
         >
@@ -55,19 +55,20 @@
                         <p>Drop to Attach file</p>
                     </div>
                 </div>
-                <textarea
+                <div
+                    contenteditable="true"
+                    *ngIf="tab === 'NOTE'"
                     id="chat"
                     name="cps-chat"
                     class="cps-block__content-textarea"
-                    appTextArea
-                    [maxLines]="11"
-                    maxlength="500"
-                    cols="5"
-                    rows="1"
                     placeholder="Write ticket conversation here…"
                     (input)="onChangeChat($event)"
-                    (onPast)="onPastChat($event)"
-                ></textarea>
+                    (keypress)="onKeyPress($event)"
+                ></div>
+                <ticket-profile-form-update-note-list
+                    #noteList
+                    (onSelected)="onSelectedNote($event)"
+                ></ticket-profile-form-update-note-list>
             </div>
             <div class="files-list">
                 <div
