@@ -19,6 +19,7 @@ import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -49,7 +50,8 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
         MatChipsModule,
         MultiDatepickerModule,
         PaymentsRoutingModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        KeyUpEnterModule
     ],
 
 

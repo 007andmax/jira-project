@@ -103,6 +103,7 @@
                 class="qt-input-40 inventory-add-body__input"
                 type="text"
                 decimalNumber
+                (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
                 (onChange)="changeMarkup($event)"
                 [value]="inventory.markup"
                 placeholder="Enter Markup"

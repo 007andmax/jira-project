@@ -32,6 +32,7 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
 import { FilterModule } from 'src/app/pipe/filter/filter.module';
 import { QuotesRoutingModule } from './quotes-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -73,7 +74,8 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
         DecimalNumberModule,
         FilterModule,
         QuotesRoutingModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        KeyUpEnterModule
     ],
 
 

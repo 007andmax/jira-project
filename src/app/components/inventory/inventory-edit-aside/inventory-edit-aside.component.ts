@@ -137,8 +137,15 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   onSelectSupplier(data) {
-    if (data) this.inventory.companyId = data.id;
-    if (!data) this.inventory.companyId = null;
+    if (data) {
+      this.inventory.companyId = data.id;
+      this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
+    }
+    if (!data) {
+      this.inventory.companyId = null;
+      this.editSupplier = null;
+    }
+
   }
   onSelectGlNumbers(data) {
     if (data) this.inventory.glNumber = data;

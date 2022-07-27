@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SelectSearchModule } from '../../shared/select-search/select-search.module';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { InvoicesRoutingModule } from './invoices-routing.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -27,7 +28,8 @@ import { InvoicesRoutingModule } from './invoices-routing.module';
         NgbModule,
         SelectSearchModule,
         MultiDatepickerModule,
-        InvoicesRoutingModule
+        InvoicesRoutingModule,
+        KeyUpEnterModule
     ],
 
 

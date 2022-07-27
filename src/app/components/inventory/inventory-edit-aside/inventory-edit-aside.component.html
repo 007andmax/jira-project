@@ -87,6 +87,7 @@
             <input
                 type="text"
                 decimalNumber
+                (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
                 (onChange)="changeMarkup($event)"
                 [value]="inventory.markup"
                 placeholder="Enter Cost"
