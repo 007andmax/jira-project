@@ -63,19 +63,20 @@
                 placeholder="Enter description here"
             ></div> -->
         </div>
-        <div
-            class="col-md-6"
-            *ngIf="!validate.getCostSale()"
-        >
-            <mat-error *ngIf="!validate.getCostSale()">Cost cannot be higher than Price</mat-error>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-4 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getCostSale()"
+            >
+                Cost cannot be higher than Price
+            </mat-error>
             <p>Cost</p>
             <input
                 type="text"
                 decimalNumber
                 [useFixed]="true"
                 appToFixed
+                [ngClass]="{'--input-error' : !validate.getCostSale()}"
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
                 [value]="inventory.cost"
                 (onChange)="onChangeCost($event)"

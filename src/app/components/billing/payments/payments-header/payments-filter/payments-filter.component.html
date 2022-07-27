@@ -23,7 +23,6 @@
         type="text"
         appKeyUpEnter
         (onChange)="onSetNumberInvoice($event)"
-        (blur)="onSetNumberInvoice($event)"
         placeholder="Enter invoice #"
         class="qt-mr-8 qt-input h36 filter-invoice invoices-number-filter"
         [(ngModel)]="paymentsFilter.invoiceNumber"
@@ -37,7 +36,6 @@
         number
         appKeyUpEnter
         (onChange)="onSetAmountInvoice($event)"
-        (blur)="onSetAmountInvoice($event)"
         placeholder="Enter amount"
         class="qt-input h36 filter-invoice invoices-number-filter"
         id="amount-filter"

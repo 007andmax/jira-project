@@ -26,3 +26,8 @@
 .taxes-container {
     margin-top: 0 !important;
 }
+.mat-error {
+    font-size: 12px;
+    position: absolute;
+    top: calc(100% + 5px);       
+}
