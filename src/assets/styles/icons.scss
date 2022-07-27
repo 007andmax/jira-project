@@ -18,7 +18,7 @@
   display: block;
 }
 .icn-attach {
-  background: url("/assets/img/attachment-blue.svg");
+  background: url("/assets/img/icons/attachment-blue.svg");
 }
 .export-ng2 {
   background: url("/assets/img/icons/export-blue.svg");
@@ -63,9 +63,6 @@
     &--light-gray {
       background-image: url("/assets/img/icons/close-light-gray.svg");
     }
-  }
-  &__close-mobile {
-    background-image: url("/assets/img/icons/close-mobile.svg");
   }
   &__menu {
     background-image: url("/assets/img/icons/menu.svg");
@@ -185,7 +182,7 @@
     background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
   &__attach-blue {
-    background-image: url("/assets/img/attachment-blue.svg");
+    background-image: url("/assets/img/icons/attachment-blue.svg");
   }
   &__collapse-arrow {
     background-image: url("/assets/img/icons/collapse-arrow.svg");
@@ -287,7 +284,7 @@
     background-image: url("/assets/img/icons/view.svg");
   }
   &__hide {
-    background-image: url("/assets/img/password-show.svg");
+    background-image: url("/assets/img/icons/password-show.svg");
   }
   &__documents {
     background-image: url("/assets/img/icons/documents.svg");
@@ -415,7 +412,7 @@
     background-image: url("/assets/img/icons/get-paid.svg");
   }
   &__edit {
-    background-image: url("/assets/img/edit-12.svg");
+    background-image: url("/assets/img/icons/edit-12.svg");
   }
   &__edit-gray {
     background-image: url("/assets/img/icons/edit-gray.svg");
@@ -439,7 +436,7 @@
     background-image: url("/assets/img/icons/payment_history.svg");
   }
   &__mark-as-read {
-    background-image: url("/assets/img/password-show-old.svg");
+    background-image: url("/assets/img/icons/password-show-old.svg");
   }
   &__refund-payment {
     background-image: url("/assets/img/icons/refund-payment.svg");
@@ -521,7 +518,7 @@
     background-image: url("/assets/img/icons/solved-tickets.svg");
   }
   &__no-devices-installed {
-    background-image: url("/assets/img/no-devices-installed.svg");
+    background-image: url("/assets/img/icons/no-devices-installed.svg");
   }
   &__link {
     background-image: url("/assets/img/icons/link.svg");
@@ -541,7 +538,7 @@
   &__down-arrow {
     background-image: url("/assets/img/icons/down-arrow.svg");
     &--sm {
-      background-image: url("/assets/img/filter-dropdown.svg");
+      background-image: url("/assets/img/icons/filter-dropdown.svg");
     }
   }
   &__printer {
@@ -626,7 +623,7 @@
     background-image: url("/assets/img/icons/phone-gray.svg");
   }
   &__upload-avtar {
-    background-image: url("/assets/img/upload-photo.svg");
+    background-image: url("/assets/img/icons/upload-photo.svg");
   }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");

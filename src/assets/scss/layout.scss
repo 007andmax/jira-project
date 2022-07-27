@@ -587,7 +587,7 @@ body {
                             vertical-align: middle;
                             height: 16px;
                             width: 16px;
-                            background: url("/assets/img/sorting.svg") no-repeat center;
+                            background: url("/assets/img/icons/sorting.svg") no-repeat center;
                             background-size: 16px auto;
                             margin-left: 5px;
                             margin-top: -2px;
@@ -1706,7 +1706,7 @@ body {
             }
             &:disabled + label {
                 &::before {
-                    background: url("/assets/img/check-disable.svg") no-repeat center;
+                    background: url("/assets/img/icons/check-disable.svg") no-repeat center;
                     cursor: not-allowed;
                 }
             }
@@ -1729,7 +1729,7 @@ body {
                 height: 16px;
                 width: 16px;
                 content: "";
-                background: url("/assets/img/checkbox.svg") no-repeat center;
+                background: url("/assets/img/icons/checkbox.svg") no-repeat center;
             }
             br {
                 display: none;
@@ -2247,7 +2247,7 @@ body {
 }
 .ng7 .ng-select .ng-arrow-wrapper .ng-arrow {
     border: none;
-    background: url("/assets/img/filter-dropdown.svg") no-repeat center;
+    background: url("/assets/img/icons/filter-dropdown.svg") no-repeat center;
     width: 11px;
     height: 11px;
     background-size: 11px auto;

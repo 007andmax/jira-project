@@ -495,19 +495,19 @@ app-invoices-item,app-payment-item {
     top: -22px;
     left: -20px;
     &.--paid {
-      background: url(/assets/img/update-label.svg);
+      background: url('/assets/img/icons/update-label.svg');
     }
     &.--overdue {
-      background: url(/assets/img/overdue.svg);
+      background: url('/assets/img/icons/overdue.svg');
     }
     &.--invoiced {
-      background: url(/assets/img/invoiced-label.svg);
+      background: url('/assets/img/icons/invoiced-label.svg');
     }
     &.--ticket {
-      background: url(/assets/img/ticket-label.svg);
+      background: url('/assets/img/icons/ticket-label.svg');
     }
     &.--approved {
-      background: url(/assets/img/approved-label.svg);
+      background: url('/assets/img/icons/approved-label.svg');
     }
   }
 
