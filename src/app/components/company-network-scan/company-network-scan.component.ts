@@ -106,8 +106,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       if (resp.length > 0) {
         this.isGetDevices = true
         this.assetList = resp;
-        this.filteredAssetList = resp.filter(x => x.AgentVersion);
-        this.masterAgent = this.nonAgentVersionList.find(x => x.IsMasterAgent == true);
+        this.filteredAssetList = resp.filter(x => x.AgentVersion);        
+        this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
         if (this.masterAgent) {
           this.masterAgent.online = true;
         }
@@ -119,8 +119,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
 
-  selectMasterNetwork(Id) {
-    this.asset = this.nonAgentVersionList.find((x) => x.ID == Id);
+  selectMasterNetwork(Id) {    
+    this.asset = this.assetList.find((x) => x.ID == Id);
     this.assetName = this.asset.Name;
     let data: any = {};
     data.AssetID = Id;

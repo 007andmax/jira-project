@@ -2,7 +2,7 @@
     <div class="network-scan-page__content">
         <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Network Scan</h6>
         <app-company-network-scan-no-exist-devices
-            *ngIf="!showPreloader && devices.length === 0"
+            *ngIf="!showPreloader && assetList.length === 0"
             [companyId]="companyId"
         ></app-company-network-scan-no-exist-devices>
         <div
@@ -197,14 +197,8 @@
                             </label>
                         </div>
                     </td>
-                    <td class="network-scan-table__device-name">
-                        <input
-                            type="text"
-                            class="form-control sub-label-field"
-                            [(ngModel)]="network.Title"
-                            *ngIf="network.IsAgentInstalled ==false && network.OperatingSystem!='Windows'"
-                        >
-                        <span *ngIf="network.IsAgentInstalled ==true || network.OperatingSystem =='Windows'">{{network.Name || network.Title}}</span>
+                    <td class="network-scan-table__device-name"
+                       [textContent]="network.HostName">
                     </td>
                     <td
                         class="network-scan-table__os"
