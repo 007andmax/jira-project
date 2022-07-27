@@ -13,7 +13,7 @@
                     [type]="'TICKET'"
                     [editItem]="product.item"
                     class="product-item__prodect-list"
-                    (selectedProductItem)="onChangeProduct($event,i)"
+                    (selectedProductItem)="onChangeProduct($event,i,taxesDropDown)"
                 ></app-product-list>
                 <button
                     class="product-item__btn-del "
@@ -56,6 +56,12 @@
                         type="text"
                     >
                 </label>
+                <app-invoice-form-ticket-edit-taxes
+                    class="qt-taxes-multiselect"
+                    #taxesDropDown
+                    [selectedTax]="product.item.taxes"
+                    (taxesChange)="onTaxesChangeProduct($event,i)"
+                ></app-invoice-form-ticket-edit-taxes>
                 <label class="product-item__price-input">
                     <input
                         class="product-item__input price"
@@ -92,7 +98,7 @@
                 [type]="'TICKET'"
                 #productDP
                 class="product-item__prodect-list"
-                (selectedProductItem)="selectProduct($event)"
+                (selectedProductItem)="selectProduct($event,taxesDropDown)"
             ></app-product-list>
             <button
                 class="product-item__btn-add"
@@ -133,6 +139,11 @@
                     [(ngModel)]="currentProduct.quantity"
                 >
             </label>
+            <app-invoice-form-ticket-edit-taxes
+                class="qt-taxes-multiselect"
+                #taxesDropDown
+                (taxesChange)="onTaxesChange($event)"
+            ></app-invoice-form-ticket-edit-taxes>
             <label class="product-item__price-input">
                 <input
                     class="product-item__input price"

@@ -57,6 +57,7 @@ import { TicketProfileAttachmentsModule } from './ticket-profile-attachments/tic
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 
 @NgModule({
     declarations: [TicketEditAsideComponent,
@@ -122,6 +123,7 @@ import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-
         ClickOtsideModule,
         TicketProfileAttachmentsModule,
         PreviewPhoneMaskModule,
+        InvoiceFormTicketEditTaxesModule
     ],
     exports: [TicketEditAsideComponent,]
 })

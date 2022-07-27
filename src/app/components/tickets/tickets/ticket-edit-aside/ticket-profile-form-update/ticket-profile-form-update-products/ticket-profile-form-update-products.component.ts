@@ -71,14 +71,31 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     let value = Number(val);
     this.currentProduct.item.sale = value;
   }
-  public onChangeProduct(item, i) {
+  public onChangeProduct(item, i, taxesDropDown) {
     this.addedProductList[i].setData(item, this.getItemOrger());
     this.addedProductList[i].valdiateSaleCost = true;
+    taxesDropDown.selectedTax = item.taxes;
   }
-  public selectProduct(item) {
-    if (item) this.currentProduct.setData(item, this.getItemOrger());
-    if (!item) this.currentProduct = new TicketProfileFormProduct();
+  public onTaxesChangeProduct(data, i) {
+    console.log("data", data);
+    this.addedProductList[i].setTexes(data);
+  }
+  public selectProduct(item, taxesDropDown) {
+    console.log("taxesDropDown", taxesDropDown);
+    console.log("item", item);
+    if (item) {
+      this.currentProduct.setData(item, this.getItemOrger());
+      taxesDropDown.selectedTax = item.taxes;
+    }
+    if (!item) {
+      this.currentProduct = new TicketProfileFormProduct();
+      taxesDropDown.selectedTax = [];
+    }
     this.currentProduct.valdiateSaleCost = true;
+  }
+  public onTaxesChange(item) {
+    console.log("item", item);
+    this.currentProduct.setTexes(item);
   }
   public addProduct() {
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
@@ -120,7 +137,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     return ((find) ? false : true) && this.currentProduct.valdiateSaleCost;
   }
   public getSelectedProducts() {
-    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId);
+    return ((this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId)).map(item => item.getDataForAdd());
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
