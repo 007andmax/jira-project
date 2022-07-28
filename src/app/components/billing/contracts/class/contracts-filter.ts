@@ -130,6 +130,59 @@ export class ContractsFilter {
       }
     }
   }
+  public onSortList(reqList) {
+    let filter = this.filter.find(item => item.filter !== '');
+    let sort = filter.filter;
+    if (filter.field === 'company') {
+      if (sort === 'ASC') {
+        this.onFilterCompanyName(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+    if (filter.field === 'description') {
+      if (sort === 'ASC') {
+        this.onFilterDescription(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+    if (filter.field === 'type') {
+      if (sort === 'ASC') {
+        this.onFilterType(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+    if (filter.field === 'status') {
+      if (sort === 'ASC') {
+        this.onFilterStatus(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+    if (filter.field === 'start_date') {
+      if (sort === 'ASC') {
+        this.onFilterStartDate(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+    if (filter.field === 'review_date') {
+      if (sort === 'ASC') {
+        this.onFilterReviewDate(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+    if (filter.field === 'amount') {
+      if (sort === 'ASC') {
+        this.onFilterAmount(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
+  }
   private onFilterAmount(list) {
     list.sort((a, b) => (a.amount > b.amount) ?
       1 : ((b.amount > a.amount) ? -1 : 0));

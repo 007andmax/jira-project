@@ -24,7 +24,11 @@ export class TicketProfileFormProduct {
     }
     public getDataForAdd() {
         let item = JSON.parse(JSON.stringify(this.item));
-        item.taxes = item.taxes.map(item => ({ id: item.id }));
+        item.taxes = item.taxes.map(item => ({
+            id: item.id,
+            name: item.name,
+            rate: item.rate,
+        }));
         return {
             item: item,
             itemOrder: this.itemOrder,
