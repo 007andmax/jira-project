@@ -1024,6 +1024,10 @@ font-weight: 600;
   height: 450px;
 }
 
+/deep/ ngb-tabset .tab-content {
+    padding: 0px !important;
+}
+
 // modal-popup end
 
 
