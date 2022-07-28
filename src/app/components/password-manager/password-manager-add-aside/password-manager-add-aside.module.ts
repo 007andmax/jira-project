@@ -12,6 +12,7 @@ import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         MatChipsModule,
         DatePickerModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        DynamicTooltipModule
 
     ],
     exports: [PasswordManagerAddAsideComponent],

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PasswordManagerTableComponent } from './password-manager-table.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         CommonModule,
         FormsModule,
         NgbModule,
+        DynamicTooltipModule
     ],
     exports: [PasswordManagerTableComponent]
 

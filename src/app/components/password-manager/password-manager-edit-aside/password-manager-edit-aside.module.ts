@@ -11,6 +11,7 @@ import { PasswordManagerEditLinkedComponent } from './password-manager-edit-link
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { AfterViewInitDirective } from 'src/app/directives/after-view-init.directive';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AfterViewInitDirective } from 'src/app/directives/after-view-init.direc
         TextAreaModule,
         DatePickerModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        DynamicTooltipModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 
