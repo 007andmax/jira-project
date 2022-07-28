@@ -17,6 +17,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   editItem: any;
   newTax: Tax = null;
   taxForm: FormGroup;
+  @Input() placeholder: string;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDropDown') taxesDropDown;

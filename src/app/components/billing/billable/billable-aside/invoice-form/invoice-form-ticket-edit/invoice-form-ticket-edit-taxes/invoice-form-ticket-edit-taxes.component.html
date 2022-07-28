@@ -2,7 +2,6 @@
     class="light-dropdown new-taxes-area-edit taxes-dropdown"
     ngbDropdown
     #taxesDropDown="ngbDropdown"
-    [container]="'body'"
 >
     <i class="icn-sm report-caret-icon"></i>
     <input
@@ -10,7 +9,7 @@
         [value]="getSelectedTaxes()"
         autocomplete="new-password"
         readonly
-        placeholder="Taxes"
+        [attr.placeholder]="(placeholder) ? placeholder : 'Taxes'"
         id="dropdownTypeTaxes"
         ngbDropdownToggle
     >

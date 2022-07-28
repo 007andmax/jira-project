@@ -57,8 +57,9 @@
                     >
                 </label>
                 <app-invoice-form-ticket-edit-taxes
-                    class="qt-taxes-multiselect"
+                    class="qt-taxes-multiselect qt-mr-8"
                     #taxesDropDown
+                    [placeholder]="(product.item.taxes.length === 0) ? 'No taxes' : null"
                     [selectedTax]="product.item.taxes"
                     (taxesChange)="onTaxesChangeProduct($event,i)"
                 ></app-invoice-form-ticket-edit-taxes>
@@ -82,7 +83,9 @@
                         Product price can not be lower than cost
                     </mat-error>
                 </label>
-                <label class="product-item__discount-input">
+            </div>
+            <div class="d-f qt-mt-8">
+                <label class="product-item__discount-input qt-ml-auto">
                     <input
                         class="product-item__input"
                         [(ngModel)]="product.discountAmount"
@@ -140,8 +143,9 @@
                 >
             </label>
             <app-invoice-form-ticket-edit-taxes
-                class="qt-taxes-multiselect"
+                class="qt-taxes-multiselect qt-mr-8"
                 #taxesDropDown
+                [placeholder]="(currentProduct.item.taxes && currentProduct.item.taxes.length === 0) ? 'No taxes' : null"
                 (taxesChange)="onTaxesChange($event)"
             ></app-invoice-form-ticket-edit-taxes>
             <label class="product-item__price-input">
@@ -162,7 +166,9 @@
                     Product price can not be lower than cost
                 </mat-error>
             </label>
-            <label class="product-item__discount-input">
+        </div>
+        <div class="qt-df qt-fw-wrap-md qt-mt-8">
+            <label class="product-item__discount-input qt-ml-auto">
                 <input
                     class="product-item__input discount"
                     [(ngModel)]="currentProduct.discountAmount"
