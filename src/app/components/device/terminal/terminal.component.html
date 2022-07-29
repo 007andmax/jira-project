@@ -52,7 +52,7 @@
                                 id="button-cmd"
                                 type="button"
                                 class="btn btn-primary"
-                                (click)="copyToTerminalFunc(editCmd, '', false);"
+                                (click)="copyToTerminalFunc(editCmd);"
                             >
                                 Run Command
                             </button>
@@ -291,7 +291,7 @@
                                                     href="javascript:;"
                                                     class="copy"
                                                     data-tooltip="Run script"
-                                                    (click)="copyToTerminalFunc(cmd.command, cmd.type, true);"
+                                                    (click)="copyToTerminalFunc(cmd.command);"
                                                 >
                                                     Run script
                                                 </a>
@@ -517,7 +517,7 @@
                                                 href="javascript:;"
                                                 class="play-btn"
                                                 data-tooltip="Run Script"
-                                                (click)="copyToTerminalFunc(script.command, script.type, true)"
+                                                (click)="copyToTerminalFunc(script.command)"
                                             >
                                                 <img
                                                     src="/html/assets/img/device/play-script.svg"

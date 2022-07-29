@@ -135,31 +135,9 @@ export class TerminalComponent implements OnInit {
       return;
     }
       this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-        this.asset = resp[0];
-        this.GetCurrentConfig(resp[0].ID);
-        this.CurrentUser();
+        this.asset = resp[0];        
       });
-  }
-
-  GetCurrentConfig(assetID: any) {
-    this.agentService.GetCurrentConfig(assetID);
-  }
-
-  CurrentUser() {
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
-      if (resp.length > 0) {
-        if (this.asset.ID === resp[0].key) {
-          this.kafkaMessage = JSON.parse(resp[0].Value);
-          this.asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-          if (this.kafkaMessage.IdleTime != null) {
-            let Time = this.kafkaMessage.IdleTime.split("Idle for");
-            this.asset.IdelTime = Time[1] != "" ? Time[1] : "";
-          }
-        }
-        this.asset.online = true;
-      }
-    });
-  }
+  }  
 
   onTerminalPowershall()
   {
@@ -180,7 +158,7 @@ export class TerminalComponent implements OnInit {
   }
 
   onTerminalCommand() {
-      this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
+    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
         console.log("OnTerminalCommand");
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item) {
@@ -725,7 +703,7 @@ export class TerminalComponent implements OnInit {
     this.openEditCommand(cmd, type);
   }
 
-  copyToTerminalFunc(editCmd, type, file) {
+  copyToTerminalFunc(editCmd) {
     let data: any = {};
     if(this.scriptTyped=="cmd")
     {
@@ -789,5 +767,5 @@ export class TerminalComponent implements OnInit {
     this.scriptDetail = !this.scriptDetail;
     this.submitted = false;
     this.openEditCommand(data, type);
-  }
+  }    
 }
