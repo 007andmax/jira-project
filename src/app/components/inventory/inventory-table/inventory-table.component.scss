@@ -8,3 +8,11 @@ pre {
     border-radius: unset;
     font-family: unset;
 }
+.inventory-description-textarea {
+    width: 100%;
+    height: 144px;
+    border: none;
+    visibility: visible;
+    outline: none;
+    overflow: auto;
+}

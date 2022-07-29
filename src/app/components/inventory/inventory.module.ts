@@ -12,6 +12,9 @@ import { InventoryAddCategoryComponent } from './inventory-add-category/inventor
 import { MatSelectModule, MatChipsModule } from '@angular/material';
 import { InventoryRoutingModule } from './inventory-routing.module';
 import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
+import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+import { InvoiceFormTicketEditTaxesModule } from '../billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 
 
 
@@ -32,7 +35,10 @@ import { ContractsEditModule } from '../billing/contracts/contracts-edit/contrac
         MatSelectModule,
         MatChipsModule,
         InventoryRoutingModule,
-        ContractsEditModule
+        ContractsEditModule,
+        DecimalNumberModule,
+        ToFixedModule,
+        InvoiceFormTicketEditTaxesModule
 
     ],
 

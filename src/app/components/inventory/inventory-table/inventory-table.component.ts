@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -9,6 +9,12 @@ import { DELETE_PRODUCT } from 'src/app/const/confirm';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { InventoryCheckUseComponent } from '../inventory-check-use/inventory-check-use.component';
+import { InventoryValidate } from '../class/inventory-validate';
+import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
+import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
+import { Subscription } from 'rxjs';
+import { CategoryProduct } from 'src/app/interfaces/product/category-product';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-inventory-table',
@@ -20,14 +26,40 @@ export class InventoryTableComponent implements OnInit {
   @Input() companies;
   @Input() glNumbers;
   @Input() taxes;
-
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  categories: Array<CategoryProduct> = [];
+  validate: InventoryValidate = new InventoryValidate();
+  sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
+    private glNumberStateService: GlNumberStateService,
+    private productService: ProductService,
     private modalService: NgbModal,
+    private elRef: ElementRef,
+    private glNumberService: GlNumberService
   ) { }
 
   ngOnInit() {
+    this.elRef.nativeElement.querySelector(".inventory-description-textarea").innerHTML = this.inventory.description;
+    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
+    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
+      this.glNumbers = this.sortGlNumbers(data);
+    })
+    this.sub.add(getOnGlNumbers);
+    if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
+    let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
+      this.categories = data;
+      if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
+    })
+    this.sub.add(getOnCategries);
+  }
+  private sortGlNumbers(data) {
+    return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+  }
+  onChangeDescription(event) {
+    this.inventory.description = event.target.innerHTML.replace(/\n/g, '<br/>');
   }
   edit() {
     this.inventoryStateService.setEditInventory(this.inventory);
@@ -47,15 +79,130 @@ export class InventoryTableComponent implements OnInit {
     let conpany = this.companies.find(item => item.id === this.inventory.companyId);
     return (conpany) ? conpany.name : "";
   }
-  getSelectedTaxNames() {
+  getSelectedTaxes() {
     let taxes = [];
     this.taxes.forEach(item => {
       let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
-      if (index > -1) taxes.push(`${item.name} ${item.rate}%`);
+      if (index > -1) taxes.push(item);
     })
-    return (taxes.length > 0) ? taxes.join(', ') : 'No taxes';
+    return taxes;
   };
+  onTaxesChange(data) {
+    this.inventory.taxIds = data.map(item => {
+      return item.id;
+    });
+    this.save();
+  }
+  onChangeCost(val) {
+    let value = Number(val);
+    this.inventory.cost = value;
+    this.inventory.markup = this.getMarkups();
+    this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+  }
+  onCheckILC() {
+    this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {
+      this.validate.resetILCIsExist();
+      if (!data.value) {
+        this.validate.setILCIsExist();
+      } else {
+        this.save();
+      }
+    })
+  }
+  onBlurCost() {
+    this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+    this.save();
+  }
+  onBlurSale() {
+    this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+    this.save();
+  }
+  changeSales(val) {
+    let value = Number(val);
+    this.inventory.sale = value;
+    this.inventory.markup = this.getMarkups();
+  }
+  save() {
+    if (!this.validate.isValidate(this.inventory)) return;
+    // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
+    this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
 
+    })
+  }
+  glDropDownItemName = (result: string) => {
+    return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
+      : "No description"}`;
+  };
+  onAddGlNumber(data) {
+    this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
+      this.inventory.glNumber = res;
+      this.save();
+    })
+  }
+  onSelectGlNumbers(data) {
+    if (data) this.inventory.glNumber = data;
+    if (!data) this.inventory.glNumber = null;
+    this.save();
+  }
+  onAddCategory(data) {
+    this.productService.addCategory(data, null).subscribe((data: any) => {
+      this.inventory.category = data;
+      this.validate.resetCategory();
+      this.save();
+    })
+  }
+  onSelectCategory(data) {
+    this.inventory.category = data;
+    this.validate.resetCategory();
+    this.save();
+  }
+  onCheckManufacture() {
+    this.productService.validateProductManufacture(this.inventory.manufacture, this.inventory.versionedId.id).subscribe((data: any) => {
+      this.validate.resetManufactureIsExist();
+      if (!data.value) {
+        this.validate.setManufactureIsExist();
+      } else {
+        this.save();
+      }
+    })
+  }
+  public getMarkups() {
+    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
+    return 0;
+  }
+  onEnterManufacture(event) {
+    if (event.keyCode === 13) {
+      this.onCheckManufacture();
+    }
+  }
+  onBlurDescription(event) {
+    //console.log("event", event);
+    this.onChangeDescription(event);
+    this.save();
+  }
+  onEnterDescription(event) {
+    if (event.keyCode === 13) {
+      this.onChangeDescription(event);
+      this.save();
+    }
+  }
+  onEnterCost(event) {
+    if (event.keyCode === 13) {
+      this.onChangeCost(event.target.value);
+      this.save();
+    }
+  }
+  onEnterILC(event) {
+    if (event.keyCode === 13) {
+      this.onCheckILC();
+    }
+  }
+  onEnterSale(event) {
+    if (event.keyCode === 13) {
+      this.changeSales(event.target.value);
+      this.save();
+    }
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
