@@ -8,10 +8,7 @@ import { HardwareService } from "./_services/hardware.service";
 import { DeviceDetailService } from "./_services/device_detail.service";
 import { first } from "rxjs/operators";
 import { v4 as uuidv4 } from "uuid";
-import { ShellStateService } from "src/app/states/shell/shell-state.service";
-import { UsersStateService } from "src/app/states/users/users-state.service";
 import { AgentService } from "src/app/services/agent/agent.service";
-import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 
 declare var $: any;
@@ -57,11 +54,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService,
-    private remoteControlService: RemoteControlService,
-    private usersStateService: UsersStateService,
-    private shellStateService: ShellStateService,
-    private agentService: AgentService,
-    public kakfaService: KafkaRealTimeService,
+    private remoteControlService: RemoteControlService,   
+    private agentService: AgentService,    
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
     private ngZone: NgZone
@@ -84,9 +78,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       window.location.href.split("/")[
       window.location.href.split("/").length - 1
       ];
-    this.setPreviewDataDevice();  
-    this.usersStateService.onInit();
-    this.shellStateService.onInit();
+    this.setPreviewDataDevice();      
     localStorage.setItem("uuid_" + this._id, uuidv4());
     this.deviceType = this.type;
     if (this.deviceType === "printer") {
