@@ -88,8 +88,8 @@
         <input
             type="text"
             [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
-            [(ngModel)]="inventory.manufacture"
-            (blur)="onCheckManufacture()"
+            [value]="inventory.manufacture"
+            (blur)="onCheckManufacture($event)"
             (keyup)="onEnterManufacture($event)"
             placeholder="Enter Item Number"
         >
@@ -111,8 +111,8 @@
         </mat-error>
         <input
             type="text"
-            [(ngModel)]="inventory.ilc"
-            (blur)="onCheckILC()"
+            [value]="inventory.ilc"
+            (blur)="onCheckILC($event)"
             (keyup)="onEnterILC($event)"
             placeholder="Enter ILC Number"
         >

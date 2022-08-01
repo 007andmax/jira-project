@@ -60,6 +60,7 @@ export class InventoryTableComponent implements OnInit {
   }
   onChangeDescription(event) {
     this.inventory.description = event.target.innerHTML.replace(/\n/g, '<br/>');
+    this.inventory.setIsEdit(true);
   }
   edit() {
     this.inventoryStateService.setEditInventory(this.inventory);
@@ -98,36 +99,49 @@ export class InventoryTableComponent implements OnInit {
     this.inventory.cost = value;
     this.inventory.markup = this.getMarkups();
     this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+    this.inventory.setIsEdit(true);
   }
-  onCheckILC() {
-    this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {
-      this.validate.resetILCIsExist();
-      if (!data.value) {
-        this.validate.setILCIsExist();
-      } else {
-        this.save();
-      }
-    })
+  onCheckILC(event) {
+    if (event.target.value != this.inventory.ilc) {
+      this.inventory.ilc = event.target.value;
+      this.inventory.setIsEdit(true);
+      this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {
+        this.validate.resetILCIsExist();
+        if (!data.value) {
+          this.validate.setILCIsExist();
+        } else {
+          this.save();
+        }
+      })
+    }
+
   }
   onBlurCost() {
-    this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
-    this.save();
+    if (this.inventory.isEdit) {
+      this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+      this.save();
+    }
+
   }
   onBlurSale() {
-    this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
-    this.save();
+    if (this.inventory.isEdit) {
+      this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+      this.save();
+    }
+
   }
   changeSales(val) {
     let value = Number(val);
     this.inventory.sale = value;
     this.inventory.markup = this.getMarkups();
+    this.inventory.setIsEdit(true);
   }
   save() {
     console.log("save");
-    if (!this.validate.isValidate(this.inventory)) return;
+    if (!this.validate.isValidate(this.inventory) || !this.inventory.isEdit) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
-
+      this.inventory.setIsEdit(false);
     })
   }
   glDropDownItemName = (result: string) => {
@@ -157,15 +171,20 @@ export class InventoryTableComponent implements OnInit {
     this.validate.resetCategory();
     this.save();
   }
-  onCheckManufacture() {
-    this.productService.validateProductManufacture(this.inventory.manufacture, this.inventory.versionedId.id).subscribe((data: any) => {
-      this.validate.resetManufactureIsExist();
-      if (!data.value) {
-        this.validate.setManufactureIsExist();
-      } else {
-        this.save();
-      }
-    })
+  onCheckManufacture(event) {
+    if (event.target.value != this.inventory.manufacture) {
+      this.inventory.manufacture = event.target.value;
+      this.inventory.setIsEdit(true);
+      this.productService.validateProductManufacture(this.inventory.manufacture, this.inventory.versionedId.id).subscribe((data: any) => {
+        this.validate.resetManufactureIsExist();
+        if (!data.value) {
+          this.validate.setManufactureIsExist();
+        } else {
+          this.save();
+        }
+      })
+    }
+
   }
   public getMarkups() {
     if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
@@ -173,33 +192,35 @@ export class InventoryTableComponent implements OnInit {
   }
   onEnterManufacture(event) {
     if (event.keyCode === 13) {
-      this.onCheckManufacture();
+      this.onCheckManufacture(event);
     }
   }
   onBlurDescription(event) {
     //console.log("event", event);
-    this.onChangeDescription(event);
-    this.save();
+    if (this.inventory.isEdit) {
+      this.onChangeDescription(event);
+      this.save();
+    }
   }
   onEnterDescription(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && this.inventory.isEdit) {
       this.onChangeDescription(event);
       this.save();
     }
   }
   onEnterCost(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && this.inventory.isEdit) {
       this.onChangeCost(event.target.value);
       this.save();
     }
   }
   onEnterILC(event) {
     if (event.keyCode === 13) {
-      this.onCheckILC();
+      this.onCheckILC(event);
     }
   }
   onEnterSale(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && this.inventory.isEdit) {
       this.changeSales(event.target.value);
       this.save();
     }
