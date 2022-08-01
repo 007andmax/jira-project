@@ -109,7 +109,10 @@
         </div>
         <div class="qt-inputs-row col-md-12 taxes-container">
             <div class="create-product-taxes-select qt-flex-md-100">
-                <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+                <app-taxes
+                    #taxesDp
+                    (taxesChange)="onTaxesChange($event)"
+                ></app-taxes>
             </div>
         </div>
         <div class="col-md-12">

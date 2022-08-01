@@ -123,6 +123,7 @@ export class InventoryTableComponent implements OnInit {
     this.inventory.markup = this.getMarkups();
   }
   save() {
+    console.log("save");
     if (!this.validate.isValidate(this.inventory)) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {

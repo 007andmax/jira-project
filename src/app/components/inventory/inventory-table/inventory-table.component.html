@@ -59,7 +59,6 @@
     <td class="products-table__sale-price">
         <!-- <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div> -->
         <input
-            class="qt-input-40 inventory-add-body__input"
             type="text"
             [ngClass]="{'--input-error' : !validate.getSale()}"
             decimalNumber
@@ -89,7 +88,6 @@
         <input
             type="text"
             [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
-            class="qt-input-40 inventory-add-body__input"
             [(ngModel)]="inventory.manufacture"
             (blur)="onCheckManufacture()"
             (keyup)="onEnterManufacture($event)"

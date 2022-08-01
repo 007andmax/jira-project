@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TaxesComponent } from '../../shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -40,6 +41,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   cost: string;
   sale: string;
   @ViewChild('addTax') containerAddTax;
+  @ViewChild('taxesDp') taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
@@ -199,7 +201,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
-    this.taxesStateService.onInitClear();
+    this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
     this.cd.detectChanges();
