@@ -36,63 +36,69 @@
             [textContent]="'$' + parseTotal(inventory.cost || 0)"
         >
         </div>
-        <input
-            *ngIf="getPermissions('VIEW_PRODUCT_COST')"
-            [ngClass]="{'--input-error' : !validate.getCostSale()}"
-            type="text"
-            decimalNumber
-            [useFixed]="true"
-            appToFixed
-            (blur)="onBlurCost()"
-            [value]="inventory.cost"
-            (onChange)="onChangeCost($event)"
-            (keyup)="onEnterCost($event)"
-            placeholder="Enter Cost"
-        >
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getCostSale()"
-        >
-            Cost cannot be higher than Price
-        </mat-error>
+        <div class="products-table__cost-container">
+            <input
+                *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                [ngClass]="{'--input-error' : !validate.getCostSale()}"
+                type="text"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                (blur)="onBlurCost()"
+                [value]="inventory.cost"
+                (onChange)="onChangeCost($event)"
+                (keyup)="onEnterCost($event)"
+                placeholder="Enter Cost"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getCostSale()"
+            >
+                Cost cannot be higher than Price
+            </mat-error>
+        </div>
     </td>
     <td class="products-table__sale-price">
         <!-- <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div> -->
-        <input
-            type="text"
-            [ngClass]="{'--input-error' : !validate.getSale()}"
-            decimalNumber
-            [useFixed]="true"
-            appToFixed
-            [value]="inventory.sale"
-            (blur)="onBlurSale()"
-            (input)="validate.resetSale()"
-            (onChange)="changeSales($event)"
-            (keyup)="onEnterSale($event)"
-            placeholder="Enter Price"
-        >
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getSale()"
-        >
-            Price is required
-        </mat-error>
+        <div class="products-table__sale-price-container">
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getSale()}"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                [value]="inventory.sale"
+                (blur)="onBlurSale()"
+                (input)="validate.resetSale()"
+                (onChange)="changeSales($event)"
+                (keyup)="onEnterSale($event)"
+                placeholder="Enter Price"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getSale()"
+            >
+                Price is required
+            </mat-error>
+        </div>
     </td>
     <td class="products-table__mfg">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getManufactureIsExist()"
-        >
-            This number is already occupied
-        </mat-error>
-        <input
-            type="text"
-            [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
-            [value]="inventory.manufacture"
-            (blur)="onCheckManufacture($event)"
-            (keyup)="onEnterManufacture($event)"
-            placeholder="Enter Item Number"
-        >
+        <div class="products-table__mfg-container">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getManufactureIsExist()"
+            >
+                This number is already occupied
+            </mat-error>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
+                [value]="inventory.manufacture"
+                (blur)="onCheckManufacture($event)"
+                (keyup)="onEnterManufacture($event)"
+                placeholder="Enter Item Number"
+            >
+        </div>
         <!-- <div [textContent]="inventory.manufacture"></div> -->
     </td>
     <td class="products-table__tac">
@@ -103,19 +109,22 @@
         ></app-invoice-form-ticket-edit-taxes>
     </td>
     <td class="products-table__ilc">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getILCIsExist()"
-        >
-            This number is already occupied
-        </mat-error>
-        <input
-            type="text"
-            [value]="inventory.ilc"
-            (blur)="onCheckILC($event)"
-            (keyup)="onEnterILC($event)"
-            placeholder="Enter ILC Number"
-        >
+        <div class="products-table__ilc-container">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getILCIsExist()"
+            >
+                This number is already occupied
+            </mat-error>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getILCIsExist()}"
+                [value]="inventory.ilc"
+                (blur)="onCheckILC($event)"
+                (keyup)="onEnterILC($event)"
+                placeholder="Enter ILC Number"
+            >
+        </div>
     </td>
     <td class="products-table__gl">
         <!-- <div [textContent]="getGlNumberName()"></div> -->

@@ -92,6 +92,7 @@ export class InventoryTableComponent implements OnInit {
     this.inventory.taxIds = data.map(item => {
       return item.id;
     });
+    this.inventory.setIsEdit(true);
     this.save();
   }
   onChangeCost(val) {
@@ -140,8 +141,9 @@ export class InventoryTableComponent implements OnInit {
     console.log("save");
     if (!this.validate.isValidate(this.inventory) || !this.inventory.isEdit) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
+    this.inventory.setIsEdit(false);
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
-      this.inventory.setIsEdit(false);
+
     })
   }
   glDropDownItemName = (result: string) => {
@@ -151,24 +153,28 @@ export class InventoryTableComponent implements OnInit {
   onAddGlNumber(data) {
     this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
       this.inventory.glNumber = res;
+      this.inventory.setIsEdit(true);
       this.save();
     })
   }
   onSelectGlNumbers(data) {
     if (data) this.inventory.glNumber = data;
     if (!data) this.inventory.glNumber = null;
+    this.inventory.setIsEdit(true);
     this.save();
   }
   onAddCategory(data) {
     this.productService.addCategory(data, null).subscribe((data: any) => {
       this.inventory.category = data;
       this.validate.resetCategory();
+      this.inventory.setIsEdit(true);
       this.save();
     })
   }
   onSelectCategory(data) {
     this.inventory.category = data;
     this.validate.resetCategory();
+    this.inventory.setIsEdit(true);
     this.save();
   }
   onCheckManufacture(event) {
@@ -193,6 +199,7 @@ export class InventoryTableComponent implements OnInit {
   onEnterManufacture(event) {
     if (event.keyCode === 13) {
       this.onCheckManufacture(event);
+      event.target.blur();
     }
   }
   onBlurDescription(event) {
@@ -212,17 +219,20 @@ export class InventoryTableComponent implements OnInit {
     if (event.keyCode === 13 && this.inventory.isEdit) {
       this.onChangeCost(event.target.value);
       this.save();
+      event.target.blur();
     }
   }
   onEnterILC(event) {
     if (event.keyCode === 13) {
       this.onCheckILC(event);
+      event.target.blur();
     }
   }
   onEnterSale(event) {
     if (event.keyCode === 13 && this.inventory.isEdit) {
       this.changeSales(event.target.value);
       this.save();
+      event.target.blur();
     }
   }
   public getPermissions(action) {
