@@ -50,3 +50,10 @@ border: unset !important;
         }
     }
 }
+/deep/ .products-table__gl {
+    input {
+            &::-webkit-input-placeholder {
+                color: #919eab !important;
+            }
+        }
+}
