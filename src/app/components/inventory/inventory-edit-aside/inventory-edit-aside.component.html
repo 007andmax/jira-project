@@ -48,7 +48,15 @@
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getDescription()">Description is required</mat-error>
             <p>Description</p>
-            <textarea
+            <div
+                placeholder="Write Product Description"
+                contenteditable="true"
+                id="inventory-description"
+                placeholder="Enter description here"
+                (input)="onChangeDescription($event)"
+                (onPast)="onPastDescription($event)"
+            ></div>
+            <!-- <textarea
                 appTextArea
                 [limit]="160"
                 id="inventory-description"
@@ -56,7 +64,7 @@
                 (input)="onChangeDescription($event)"
                 (onPast)="onPastDescription($event)"
             ></textarea>
-            <!-- <div
+           <div
                 placeholder="Write Product Description"
                 contenteditable="true"
                 id="inventory-description"

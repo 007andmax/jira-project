@@ -22,7 +22,11 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
   styleUrls: ['./inventory-table.component.scss']
 })
 export class InventoryTableComponent implements OnInit {
-  @Input() inventory: InventoryItem;
+  inventory: InventoryItem;
+  @Input() set item(value) {
+    this.inventory = value;
+    this.elRef.nativeElement.querySelector(".inventory-description-textarea").innerHTML = this.inventory.description;
+  };
   @Input() companies;
   @Input() glNumbers;
   @Input() taxes;
@@ -41,7 +45,6 @@ export class InventoryTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.elRef.nativeElement.querySelector(".inventory-description-textarea").innerHTML = this.inventory.description;
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -210,7 +213,7 @@ export class InventoryTableComponent implements OnInit {
     }
   }
   onEnterDescription(event) {
-    if (event.keyCode === 13 && this.inventory.isEdit) {
+    if (!event.shiftKey && event.keyCode === 13 && this.inventory.isEdit) {
       this.onChangeDescription(event);
       this.save();
     }

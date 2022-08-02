@@ -65,14 +65,22 @@
             class="editable-description"
             [ngClass]="{'--input-error' : !validate.getDescription()}"
         >
-            <textarea
+            <div
+                placeholder="Write Product Description"
+                contenteditable="true"
+                id="inventory-description"
+                placeholder="Enter description here"
+                (input)="onChangeDescription($event)"
+                (onPast)="onPastDescription($event)"
+            ></div>
+            <!-- <textarea
                 appTextArea
                 [limit]="160"
                 id="inventory-description"
                 placeholder="Write Product Description"
                 (input)="onChangeDescription($event)"
                 (onPast)="onPastDescription($event)"
-            ></textarea>
+            ></textarea> -->
         </div>
     </div>
     <div class="qt-inputs-row">

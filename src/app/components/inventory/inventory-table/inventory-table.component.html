@@ -6,7 +6,7 @@
             class="inventory-description-textarea"
             placeholder="Write ticket conversation here…"
             (input)="onChangeDescription($event)"
-            (keyup)="onEnterDescription($event)"
+            (keydown)="onEnterDescription($event)"
             (blur)="onBlurDescription($event)"
         ></div>
     </td>
