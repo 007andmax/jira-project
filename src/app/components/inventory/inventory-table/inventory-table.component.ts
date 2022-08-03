@@ -62,6 +62,7 @@ export class InventoryTableComponent implements OnInit {
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }
   onChangeDescription(event) {
+    console.log("event.target.value", event.target.value);
     this.inventory.description = event.target.value;
     this.inventory.setIsEdit(true);
   }
@@ -206,7 +207,7 @@ export class InventoryTableComponent implements OnInit {
     }
   }
   onBlurDescription(event) {
-    //console.log("event", event);
+    // console.log("event", event);
     if (this.inventory.isEdit) {
       this.onChangeDescription(event);
       this.save();
@@ -215,8 +216,10 @@ export class InventoryTableComponent implements OnInit {
   onEnterDescription(event) {
     console.log("event", event.target.value);
     if (!event.shiftKey && event.keyCode === 13 && this.inventory.isEdit) {
+      event.preventDefault();
       this.onChangeDescription(event);
       this.save();
+      event.target.blur();
     }
   }
   onEnterCost(event) {
