@@ -20,17 +20,6 @@
     >
         <div class="qt-report__body-header">
             <div
-                class="client-company-name"
-                *ngIf="productSalesReport.lines.length > 0"
-            >
-                <div
-                    class="body-m__sb qt-color-dark"
-                    *ngIf="productSalesReport.type ==='DETAILED' "
-                >
-                    {{ productSalesReport.clientCompanyName }}
-                </div>
-            </div>
-            <div
                 class="body-m__sb qt-color-dark"
                 [textContent]="(productSalesReport.clientCompanyName) ? productSalesReport.clientCompanyName : 'All companies'"
             ></div>
