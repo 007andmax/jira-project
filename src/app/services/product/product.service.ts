@@ -143,9 +143,17 @@ export class ProductService {
   /**
 * add product
 */
+
   public addProduct(data) {
     return this.http.post(`${this.apiUrl}products`, data);
   }
-
+  public editProduct(data) {
+    return this.http.post(`${this.apiUrl}products`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The product has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 
 }

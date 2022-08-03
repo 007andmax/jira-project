@@ -211,9 +211,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
-    this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
-      this.toastrService.success("The product has been successfully updated");
-      this.appStateService.changeDetectorRef();
+    this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
       this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
     })

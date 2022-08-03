@@ -145,7 +145,7 @@ export class InventoryTableComponent implements OnInit {
     if (!this.validate.isValidate(this.inventory) || !this.inventory.isEdit) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
     this.inventory.setIsEdit(false);
-    this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
+    this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
 
     })
   }
@@ -213,6 +213,7 @@ export class InventoryTableComponent implements OnInit {
     }
   }
   onEnterDescription(event) {
+    console.log("event", event.target.value);
     if (!event.shiftKey && event.keyCode === 13 && this.inventory.isEdit) {
       this.onChangeDescription(event);
       this.save();
