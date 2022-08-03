@@ -1,14 +1,23 @@
 <tr>
     <td class="products-table__product-name pre-line">
         <!-- <pre [textContent]="inventory.description"></pre> -->
-        <div
+        <textarea
+            appTextArea
+            [limit]="160"
+            class="inventory-description-textarea"
+            placeholder="Write Product Description"
+            (input)="onChangeDescription($event)"
+            (keydown)="onEnterDescription($event)"
+            (blur)="onBlurDescription($event)"
+        ></textarea>
+        <!-- <div
             contenteditable="true"
             class="inventory-description-textarea"
             placeholder="Write ticket conversation here…"
             (input)="onChangeDescription($event)"
             (keydown)="onEnterDescription($event)"
             (blur)="onBlurDescription($event)"
-        ></div>
+        ></div> -->
     </td>
     <td class="products-table__category">
         <!-- <div [textContent]="inventory.category.name"></div> -->

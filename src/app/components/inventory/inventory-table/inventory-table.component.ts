@@ -25,7 +25,7 @@ export class InventoryTableComponent implements OnInit {
   inventory: InventoryItem;
   @Input() set item(value) {
     this.inventory = value;
-    this.elRef.nativeElement.querySelector(".inventory-description-textarea").innerHTML = this.inventory.description;
+    this.elRef.nativeElement.querySelector(".inventory-description-textarea").value = this.inventory.description;
   };
   @Input() companies;
   @Input() glNumbers;
@@ -62,7 +62,7 @@ export class InventoryTableComponent implements OnInit {
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }
   onChangeDescription(event) {
-    this.inventory.description = event.target.innerHTML.replace(/\n/g, '<br/>');
+    this.inventory.description = event.target.value;
     this.inventory.setIsEdit(true);
   }
   edit() {

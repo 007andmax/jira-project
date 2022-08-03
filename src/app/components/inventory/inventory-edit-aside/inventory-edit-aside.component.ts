@@ -94,7 +94,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       })
       this.taxesStateService.setTaxesFromtEdit(taxes);
       this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
-      this.elRef.nativeElement.querySelector("#inventory-description").innerHTML = this.inventory.description;
+      this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
       this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
@@ -150,7 +150,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   public onChangeDescription(event) {
     this.validate.resetDescription();
     console.log("event", event);
-    this.inventory.description = event.target.innerHTML.replace(/\n/g, '<br/>');
+    this.inventory.description = event.target.value;
   }
   onChangeCost(val) {
     let value = Number(val);
@@ -184,7 +184,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   public onPastDescription(value) {
     this.validate.resetDescription();
     console.log("value", value);
-    this.inventory.description = value.replace(/\n/g, '<br/>');
+    this.inventory.description = value;
   }
   onTaxesChange(data) {
     this.inventory.taxIds = data.map(item => {

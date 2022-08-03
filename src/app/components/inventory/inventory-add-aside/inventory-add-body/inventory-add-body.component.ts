@@ -17,6 +17,7 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -25,6 +26,7 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 })
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax') containerAddTax;
+  @ViewChild('taxesDp') taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
@@ -153,12 +155,12 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   }
   public onChangeDescription(event) {
     this.validate.resetDescription();
-    this.inventory.description = event.target.innerHTML.replace(/\n/g, '<br/>');
+    this.inventory.description = event.target.value;
 
   }
   public onPastDescription(value) {
     this.validate.resetDescription();
-    this.inventory.description = value.replace(/\n/g, '<br/>');
+    this.inventory.description = value;
   }
   onTaxesChange(data) {
     this.inventory.taxIds = data.map(item => {
@@ -191,7 +193,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
-    this.taxesStateService.onInitClear();
+    this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
     this.onClose.emit(null);

@@ -65,22 +65,14 @@
             class="editable-description"
             [ngClass]="{'--input-error' : !validate.getDescription()}"
         >
-            <div
-                placeholder="Write Product Description"
-                contenteditable="true"
-                id="inventory-description"
-                placeholder="Enter description here"
-                (input)="onChangeDescription($event)"
-                (onPast)="onPastDescription($event)"
-            ></div>
-            <!-- <textarea
+            <textarea
                 appTextArea
                 [limit]="160"
                 id="inventory-description"
                 placeholder="Write Product Description"
                 (input)="onChangeDescription($event)"
                 (onPast)="onPastDescription($event)"
-            ></textarea> -->
+            ></textarea>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -142,6 +134,7 @@
     <div class="qt-inputs-row">
         <div class="create-product-taxes-select qt-flex-md-100">
             <app-taxes
+                #taxesDp
                 [selectedTax]="defaultSelectedTax"
                 (taxesChange)="onTaxesChange($event)"
             ></app-taxes>
