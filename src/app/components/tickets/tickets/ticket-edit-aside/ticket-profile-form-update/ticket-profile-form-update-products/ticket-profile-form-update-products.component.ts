@@ -77,12 +77,9 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     taxesDropDown.selectedTax = item.taxes;
   }
   public onTaxesChangeProduct(data, i) {
-    console.log("data", data);
     this.addedProductList[i].setTexes(data);
   }
   public selectProduct(item, taxesDropDown) {
-    console.log("taxesDropDown", taxesDropDown);
-    console.log("item", item);
     if (item) {
       this.currentProduct.setData(item, this.getItemOrger());
       taxesDropDown.selectedTax = item.taxes;
@@ -94,7 +91,6 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     this.currentProduct.valdiateSaleCost = true;
   }
   public onTaxesChange(item) {
-    console.log("item", item);
     this.currentProduct.setTexes(item);
   }
   public addProduct() {
