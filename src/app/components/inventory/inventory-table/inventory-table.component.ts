@@ -213,6 +213,7 @@ export class InventoryTableComponent implements OnInit {
     if (event.keyCode === 13) {
       this.onChangeMarkup(event.target.value);
       this.save();
+      event.target.blur();
     }
   }
   onEnterManufacture(event) {
