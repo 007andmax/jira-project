@@ -67,6 +67,19 @@
             </mat-error>
         </div>
     </td>
+    <td class="products-table__cost">
+        <div class="products-table__cost-container">
+            <input
+                type="text"
+                decimalNumber
+                (blur)="onBlurMarkup()"
+                (onChange)="onChangeMarkup($event)"
+                [value]="inventory.markup"
+                (keyup)="onEnterMarkup($event)"
+                placeholder="Enter Markup"
+            >
+        </div>
+    </td>
     <td class="products-table__sale-price">
         <!-- <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div> -->
         <div class="products-table__sale-price-container">

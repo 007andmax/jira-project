@@ -15,6 +15,7 @@ import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.s
 import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-inventory-table',
@@ -26,6 +27,7 @@ export class InventoryTableComponent implements OnInit {
   @Input() set item(value) {
     this.inventory = value;
     this.elRef.nativeElement.querySelector(".inventory-description-textarea").value = this.inventory.description;
+    this.inventory.markup = this.getMarkups();
   };
   @Input() companies;
   @Input() glNumbers;
@@ -41,6 +43,7 @@ export class InventoryTableComponent implements OnInit {
     private productService: ProductService,
     private modalService: NgbModal,
     private elRef: ElementRef,
+    private quoteStateService: QuoteStateService,
     private glNumberService: GlNumberService
   ) { }
 
@@ -121,6 +124,12 @@ export class InventoryTableComponent implements OnInit {
     }
 
   }
+  onBlurMarkup() {
+    if (this.inventory.isEdit) {
+      this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+      this.save();
+    }
+  }
   onBlurCost() {
     if (this.inventory.isEdit) {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
@@ -200,6 +209,12 @@ export class InventoryTableComponent implements OnInit {
     if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
     return 0;
   }
+  onEnterMarkup(event) {
+    if (event.keyCode === 13) {
+      this.onChangeMarkup(event.target.value);
+      this.save();
+    }
+  }
   onEnterManufacture(event) {
     if (event.keyCode === 13) {
       this.onCheckManufacture(event);
@@ -221,6 +236,18 @@ export class InventoryTableComponent implements OnInit {
       this.save();
       event.target.blur();
     }
+  }
+  onChangeMarkup(val) {
+    let value = Number(val);
+    this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
+    this.inventory.markup = this.roundingMarkup(value);
+    this.inventory.setIsEdit(true);
+  }
+  private roundingMarkup(markup) {
+    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
+  }
+  private isInteger(num): boolean {
+    return (num ^ 0) === num;
   }
   onEnterCost(event) {
     if (event.keyCode === 13 && this.inventory.isEdit) {
