@@ -273,7 +273,7 @@
     height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    @media (max-width: 1920px) {      
+    @media screen and (min-width: 1920px) {      
       width: 591px;
     }
   }
