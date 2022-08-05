@@ -25,14 +25,14 @@ import { DatePickerComponent } from "../shared/date-picker/date-picker.component
 export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild("templatePowersell") template;
   @ViewChild("templateConnection") templateconnection;
-  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;  
-  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany:DropDownComponent;
-  @ViewChild('dropdowndeviceTp') dropdowndeviceTp:DropDownComponent;
-  @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent;      
+  @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
+  @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
+  @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
+  @ViewChild('dropdownManufacturer') dropdownManufacturer: DropDownComponent;
   @ViewChild('installdatePicker') installdatePicker: DatePickerComponent;
   @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;
   @ViewChild('dropdownManufacturersidebar') dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar')dropdownModelSidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar') dropdownModelSidebar: DropDownComponent;
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -84,45 +84,47 @@ export class CompanyDeviceBetaComponent implements OnInit {
   comapanyId: string;
   assetTagName: string;
   modelNo: string;
-  installDate:Date = new Date();
-  warrantyDate:Date = new Date();
+  installDate: Date = new Date();
+  warrantyDate: Date = new Date();
   manufacture: string;
   note: string;
   devicename: string;
   selectTag: string;
-  selectedTagdevicelist : any[]=[];
-  selectId : any[]=[];
+  selectedTagdevicelist: any[] = [];
+  selectId: any[] = [];
   isOfflineDeviceSelected: boolean = false;
-  selectedAssetList: any[]=[];  
+  selectedAssetList: any[] = [];
   manufactureId: any;
-  selectManufactureNames : any;
-  manufactureList: any[]=[];
-  selectModelList: any[]=[];
-  selectModelName : any;
-  modelId:any;
-  isDisabled:boolean=true;  
+  selectManufactureNames: any;
+  manufactureList: any[] = [];
+  selectModelList: any[] = [];
+  selectModelName: any;
+  modelId: any;
+  isDisabled: boolean = true;
   sidetagFilterValue: string = "";
   selectedSidebarTag: any[] = [];
   filteredSidebarTag = [];
-  assetSidebarTag: any = [];  
+  assetSidebarTag: any = [];
   companies = [];
   autosearchCompanyDevice: any[] = [];
-  linkDevicesFilterValue: string = "";  
-  linkDevicesTag=[];
-  selectManufactureNamessidebar : any;
-  selectModelNameSidebar : any;  
+  linkDevicesFilterValue: string = "";
+  linkDevicesTag = [];
+  selectManufactureNamessidebar: any;
+  selectModelNameSidebar: any;
   securityUpdate: number;
   windowUpdatePendingList: any[] = [];
   categories: number;
   check: any[] = [];
   InstallUpdateselected: number = 0;
-  selectednum = false ;
+  selectednum = false;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selectAllSecurityDevices: boolean = false;
-  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;  
+  @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
-  
+  IsUpdateInstalling: boolean = false;
+  IsCurrentConfigLoading: boolean = false;
+
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
@@ -134,11 +136,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private modalService: NgbModal,
     private ngZone: NgZone,
     private remoteControlService: RemoteControlService,
-    private companiesState: CompaniesStateService    
+    private companiesState: CompaniesStateService
   ) { }
 
   ngOnInit() {
-    this.companiesState.onInit();  
+    this.companiesState.onInit();
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
@@ -146,17 +148,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
       "company-devices-beta"
     );
 
-    this.companiesStateService.getOnCompanies().subscribe((data) => {            
-      this.companies = this.getClientsList(data);      
-    });    
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
     let company = this.companiesStateService.getCurrentCompany();
-    if(company) {            
+    if (company) {
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
-      this.setPreviewDataDevice();      
+      this.setPreviewDataDevice();
     }
-    this.companiesStateService.onCurrentCompany.subscribe(data => {                      
+    this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.currentCompany = data;
       this.techCompnayGuid = this.currentCompany.id;
       this.companyGuid = this.currentCompany.id;
@@ -171,19 +173,22 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.onInstallRemoteAgentCommand();
     this.onUninstallRemoteAgentCommand();
 
-    this.kafkaStateService.onCurrentConfig.subscribe((resp)=>{
-      if(resp.length>0)
-      {        
-        this.onCurrentConfig(resp)        
-      }      
-    }) 
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (resp.length > 0) {
+        this.onCurrentConfig(resp)
+      }
+    });
+
+    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
+      debugger;
+    });
   }
 
   getCountSelected() {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  setPreviewDataDevice() {    
+  setPreviewDataDevice() {
     this.AssetDetail();
     this.CurrentUser();
   }
@@ -191,34 +196,32 @@ export class CompanyDeviceBetaComponent implements OnInit {
   toogleDevices(isChecked: boolean) {
     this.assetList.forEach((item) => {
       item.selected = this.selectAllDevices ? true : false;
-    });      
-    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;    
-    if(isChecked)
-    {
-      this.assetList.forEach((element,index)=>{
+    });
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;
+    if (isChecked) {
+      this.assetList.forEach((element, index) => {
         this.selectedAssetList.push(this.assetList[index]);
-      })            
+      })
     }
-    else
-    {
-      this.selectedAssetList=[];
+    else {
+      this.selectedAssetList = [];
     }
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.assetList);
   }
 
-  onSelectDevice(index: number, isChecked: boolean) {          
+  onSelectDevice(index: number, isChecked: boolean) {
     let find = this.assetList.find((item) => !item.selected);
-    this.selectAllDevices = find ? false : true;        
-    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;   
+    this.selectAllDevices = find ? false : true;
+    this.isOfflineDeviceSelected = (this.assetList.find(item => item.selected && !item.online)) ? true : false;
     if (isChecked) {
-      this.selectedAssetList.push(this.assetList[index]);      
-    } else {            
+      this.selectedAssetList.push(this.assetList[index]);
+    } else {
       let AssetId = this.assetList[index].ID;
-      let AssetIndex = this.selectedAssetList.findIndex(item=>item.ID == AssetId);
-      this.selectedAssetList.splice(AssetIndex,1);      
-    }                                        
+      let AssetIndex = this.selectedAssetList.findIndex(item => item.ID == AssetId);
+      this.selectedAssetList.splice(AssetIndex, 1);
+    }
   }
 
   gotoDetailDevice(Guid: string) {
@@ -230,18 +233,18 @@ export class CompanyDeviceBetaComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  AssetDetail() {       
+  AssetDetail() {
     this.operatingSystem = [];
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.AssetDetail();
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {                  
-      if(!resp || resp.length === 0) {
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+      if (!resp || resp.length === 0) {
         this.showPreloader = false;
-        this.assetList=[];
+        this.assetList = [];
         this.asset = {};
         if (this.cd) {
           this.cd.detectChanges();
@@ -255,9 +258,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-          if(element.AgentVersion !=null){
-            this.GetDeviceListConfig(element.ID);            
-          }
+        if (element.AgentVersion != null) {
+          this.GetDeviceListConfig(element.ID);
+        }
         this.getAssetTagDropDownDetail();
       });
     });
@@ -270,48 +273,43 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
-        if(resp[0].Value != "Unknown message type received : GetDeviceListConfig:"){
-        let asset = this.assetList.find((x) => x.ID === resp[0].key);
-        if (asset) {          
-          this.kafkaMessage = JSON.parse(resp[0].Value);
-          asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-          if (this.kafkaMessage.IdleTime != null) {
-            let Time = this.kafkaMessage.IdleTime.split("Idle for");  
-            asset.IdelTime = Time[1] !=""? Time[1] : "";                                             
-          }
-            if(this.kafkaMessage.UpTime !="")
-            {
-              let result = this.kafkaMessage.UpTime.split(" ");              
+        if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
+          let asset = this.assetList.find((x) => x.ID === resp[0].key);
+          if (asset) {
+            this.kafkaMessage = JSON.parse(resp[0].Value);
+            asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+            if (this.kafkaMessage.IdleTime != null) {
+              let Time = this.kafkaMessage.IdleTime.split("Idle for");
+              asset.IdelTime = Time[1] != "" ? Time[1] : "";
+            }
+            if (this.kafkaMessage.UpTime != "") {
+              let result = this.kafkaMessage.UpTime.split(" ");
 
-              if(result[0]=="0" && result[2]=="0" && result[4]=="0")
-              {
-                let Sec = result[6]+' '+result[7];
+              if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
+                let Sec = result[6] + ' ' + result[7];
                 asset.UpTime = Sec;
               }
-              else if(result[0]=="0" && result[2]=="0" && result[4]!="0")
-              {
-                let Minutes = result[4]+' '+result[5]+' '+result[6]+' '+result[7];  
+              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
+                let Minutes = result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
                 asset.UpTime = Minutes;
               }
-              else if(result[0]=="0" && result[2]!="0")
-              {
-                let Hours = result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
-                asset.UpTime = Hours; 
+              else if (result[0] == "0" && result[2] != "0") {
+                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+                asset.UpTime = Hours;
               }
-              else
-              {
-                let Days = result[0]+' '+result[1]+' '+result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
+              else {
+                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
                 asset.UpTime = Days;
               }
-            }            
+            }
+          }
+          asset.online = true;
         }
-        asset.online = true;
-      }
-      if (!this.cd['destroyed']){
-        this.cd.detectChanges();
-      }       
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
       }
     });
   }
@@ -348,16 +346,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
   HardwareTypeList(TechCompanyGuid: any) {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {        
-        this.hardwareTypes = resp;        
+      .subscribe((resp) => {
+        this.hardwareTypes = resp;
         this.assetList.forEach((element, index) => {
           var ht = this.hardwareTypes.find(
             (x) => x.ID == element.HardwareTypeID
           );
           if (ht) {
             element.iconName = ht.Name;
-          }          
-        });        
+          }
+        });
       });
   }
 
@@ -386,36 +384,32 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
 
-  sendCommandHeader(command)
-  {    
-    let headerData:any={};
-    if(command === "r")
-    {      
-      this.assetList.forEach((element)=>{
+  sendCommandHeader(command) {
+    let headerData: any = {};
+    if (command === "r") {
+      this.assetList.forEach((element) => {
         headerData.AssetID = element.ID;
         headerData.MessageType = "RunPowerShellCommand";
         headerData.Value = "Restart-Computer";
         this.agentService.SendPowerShellCommand(headerData);
       })
     }
-    if(command === "s")
-    {
-      this.assetList.forEach((element)=>{
+    if (command === "s") {
+      this.assetList.forEach((element) => {
         headerData.AssetID = element.ID;
         headerData.MessageType = "RunPowerShellCommand";
         headerData.Value = "Stop-Computer";
         this.agentService.SendPowerShellCommand(headerData);
       })
     }
-    if(command === "ar")
-    {
-      this.assetList.forEach((element)=>{
+    if (command === "ar") {
+      this.assetList.forEach((element) => {
         this.agentService.UninstallAgent(element.ID);
       })
     }
   }
 
-  sendCommand(command, assetId) {            
+  sendCommand(command, assetId) {
     let data: any = {};
     this.assetId = assetId;
     if (command === "r") {
@@ -579,16 +573,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  openAside(type, asset) {        
+  openAside(type, asset) {
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
     this.assetData.Caption = this.assetData.OperatingSystem;
-    this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == asset.ManufacturerId);
-    this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == asset.ModelID);    
+    this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == asset.ManufacturerId);
+    this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == asset.ModelID);
     this.getSoftwareDetail(asset);
-    this.getNetworkDetail(asset); 
-    this.getSecurityUpdate(asset.Guid);  
+    this.getNetworkDetail(asset);
+    this.getSecurityUpdate(asset.Guid);
     this.Preloader = false;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
@@ -600,7 +594,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.tab = "SYSTEM";
   }
 
-  updateAsset() {    
+  updateAsset() {
     this.agentService.overrideAsset(this.assetData).subscribe(
       (resp) => {
       },
@@ -657,7 +651,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
 
-  getNetworkDetail(asset) {        
+  getNetworkDetail(asset) {
     this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
       if (resp.length > 0) {
@@ -748,21 +742,20 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }, 500);
   }
 
-  selectedSearch(event: MatAutocompleteSelectedEvent): void {    
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());    
-    if(!data)
-    {       
+  selectedSearch(event: MatAutocompleteSelectedEvent): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+    if (!data) {
       console.log('selected fired');
       this.selectedTag.push(event.option.viewValue);
       this.searchTag.push(event.option.viewValue);
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
       this.add(event.option.viewValue);
-    }    
+    }
     this.selectedInput.nativeElement.value = '';
   }
 
-  add(Tag): void {       
+  add(Tag): void {
     console.log('add event fired');
     this.tagFilterValue = "";
     this.selectedInput.nativeElement.value = '';
@@ -782,15 +775,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   }
 
-  searchDeviceTag(data: any) {    
+  searchDeviceTag(data: any) {
     this.showPreloader = true;
     if (this.selectedTag.length == 0) {
       this.autosearchDevice = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
-      if(!resp || resp.length === 0) {
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+      if (!resp || resp.length === 0) {
         this.showPreloader = false;
-        this.assetList=[];
+        this.assetList = [];
         this.asset = {};
         if (this.cd) {
           this.cd.detectChanges();
@@ -808,9 +801,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-          if(element.AgentVersion !=null){
-            this.GetDeviceListConfig(element.ID)
-          }
+        if (element.AgentVersion != null) {
+          this.GetDeviceListConfig(element.ID)
+        }
       });
 
       if (this.cd) {
@@ -822,8 +815,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   remove(index: number) {
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
-    if(this.selectedTag.length == 0 )
-    {
+    if (this.selectedTag.length == 0) {
       this.AssetDetail();
     }
     else {
@@ -834,16 +826,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
-    } 
+    }
   }
 
-  getAddDevice() {    
+  getAddDevice() {
     this.opened = true;
   }
 
-  closed() {    
-    this.opened = false;   
-    this.getclear(); 
+  closed() {
+    this.opened = false;
+    this.getclear();
   }
 
   getAssetTagDropDownDetail() {
@@ -869,83 +861,78 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.selectedTagdevicelist.push(event.option.viewValue);
     this.tagSearch.push(event.option.viewValue);
     this.selectedInput.nativeElement.value = '';
-    this.selectedCtrl.setValue(null);    
+    this.selectedCtrl.setValue(null);
   }
 
   getDeviceName(ID) {
-      this.deviceTypId = ID;
+    this.deviceTypId = ID;
   }
 
-  getDateWarranty(date: any) {        
+  getDateWarranty(date: any) {
     let dateWarrantry = new Date(date.year, date.month, date.day);
     this.warrantyDate = dateWarrantry;
   }
 
-  getDateInstalled(date: any) {       
+  getDateInstalled(date: any) {
     let dateInstalled = new Date(date.year, date.month, date.day);
     this.installDate = dateInstalled;
   }
 
-  saveDevice() {                  
+  saveDevice() {
     let data: any = {};
     data.Guid = uuidv4();
     data.Name = this.deviceName;
-    data.Title = this.deviceName;     
-    data.HardwareTypeID = this.deviceTypId;    
-    data.ModelID = this.modelId;        
-    data.ManufactureID = this.manufactureId;        
+    data.Title = this.deviceName;
+    data.HardwareTypeID = this.deviceTypId;
+    data.ModelID = this.modelId;
+    data.ManufactureID = this.manufactureId;
     data.InstallDate = moment(this.installDate).format("YYYY-MM-DD");
-    data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");    
+    data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");
     data.Tag = this.assetTagName;
-    data.CompanyGuid = this.comapanyId;       
+    data.CompanyGuid = this.comapanyId;
     this.agentService.nonAgentAsset(data).subscribe(
-      (result) => {    
-      if(result.length>0) 
-      {
-        if(this.note !='' && this.note !=undefined && this.note !=null)
-        {
-          this.createNotes(result)          
-        } 
-        if(this.selectedSidebarTag.length>0)
-        {
-          this.createTag(result,this.selectedSidebarTag)
-        } 
-        if(this.linkDevicesTag.length>0)
-        {
-          this.linkDevicesTags(result)
-        }              
-        this.opened = false;
-        this.setPreviewDataDevice();
-        this.toastr.success('Save non agent asset successfully');
-        this.getclear();
-      }        
-    },
+      (result) => {
+        if (result.length > 0) {
+          if (this.note != '' && this.note != undefined && this.note != null) {
+            this.createNotes(result)
+          }
+          if (this.selectedSidebarTag.length > 0) {
+            this.createTag(result, this.selectedSidebarTag)
+          }
+          if (this.linkDevicesTag.length > 0) {
+            this.linkDevicesTags(result)
+          }
+          this.opened = false;
+          this.setPreviewDataDevice();
+          this.toastr.success('Save non agent asset successfully');
+          this.getclear();
+        }
+      },
       (error) => {
         this.toastr.error('Error saving your non agent asset! Please try again');
       })
   }
 
-  linkDevicesTags(id){    
-    this.linkDevicesTag.forEach((element)=>{      
-      const newlinkDevice: any ={AssetId:id, AssociatedAssetID:element.ID}      
-      this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp)=>{
+  linkDevicesTags(id) {
+    this.linkDevicesTag.forEach((element) => {
+      const newlinkDevice: any = { AssetId: id, AssociatedAssetID: element.ID }
+      this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp) => {
 
       })
-    })    
+    })
   }
 
-  createNotes(id){
-    const newnote: any = { AssetID: id, IsActive: true, Description:this.note, Title:this.deviceName };    
-    this.agentService.addAssetNotes(newnote).subscribe((resp)=>{      
+  createNotes(id) {
+    const newnote: any = { AssetID: id, IsActive: true, Description: this.note, Title: this.deviceName };
+    this.agentService.addAssetNotes(newnote).subscribe((resp) => {
     })
-  }    
+  }
 
-  createTag(id,Tages){           
-    for(let i=0;i<Tages.length;i++)
-    {
-      const newTag: any = { AssetID: id, Name:Tages[i].Name};      
+  createTag(id, Tages) {
+    for (let i = 0; i < Tages.length; i++) {
+      const newTag: any = { AssetID: id, Name: Tages[i].Name };
       this.agentService.addNewTag(newTag).subscribe(
-        (res) => {          
+        (res) => {
         }
       );
     }
@@ -958,7 +945,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getManufacturers(TechCompanyGuid: any) {
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getManufacturers(TechCompanyGuid);
       }, 300);
@@ -967,27 +954,27 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
         this.manufactureList = resp;
-        if(this.asset){
-          this.selectManufacture(this.asset.ManufacturerId);          
+        if (this.asset) {
+          this.selectManufacture(this.asset.ManufacturerId);
         }
       });
-    }
+  }
 
-    selectManufacture(manufactureId){
-        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == manufactureId);
-    }    
+  selectManufacture(manufactureId) {
+    this.selectManufactureNames = this.manufactureList.find(x => x.ID == manufactureId);
+  }
 
 
-  onSelectManufactureName(SelectManufacturer) {    
+  onSelectManufactureName(SelectManufacturer) {
     if (SelectManufacturer) {
       this.manufactureId = SelectManufacturer.ID;
-      this.selectManufactureNames = this.manufactureList.find(x=>x.ID == this.manufactureId);
-      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-        this.selectModelList = resp;  
-        this.isDisabled = false;        
-      })      
+      this.selectManufactureNames = this.manufactureList.find(x => x.ID == this.manufactureId);
+      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp) => {
+        this.selectModelList = resp;
+        this.isDisabled = false;
+      })
     }
-    else{
+    else {
       this.getModels(this.techCompnayGuid);
       this.selectManufactureNames = "";
       this.isDisabled = true;
@@ -996,7 +983,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getModels(TechCompanyGuid: any) {
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getModels(TechCompanyGuid);
       }, 300);
@@ -1005,258 +992,289 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
-        this.selectModelList = resp;        
-        if(this.asset){
+        this.selectModelList = resp;
+        if (this.asset) {
           this.selectModel(this.asset.ModelID);
         }
       });
   }
 
-  selectModel(modelId){
-    this.selectModelName = this.selectModelList.find(x=>x.ID == modelId);
- }
-
- onSelectModel(SelectModel) {
-  if (SelectModel) {
-    this.modelId = SelectModel.ID;
-    this.selectModelName = this.selectModelList.find(x=>x.ID == this.modelId);    
+  selectModel(modelId) {
+    this.selectModelName = this.selectModelList.find(x => x.ID == modelId);
   }
-  else{
-    this.selectModelName = "";    
+
+  onSelectModel(SelectModel) {
+    if (SelectModel) {
+      this.modelId = SelectModel.ID;
+      this.selectModelName = this.selectModelList.find(x => x.ID == this.modelId);
+    }
+    else {
+      this.selectModelName = "";
+    }
   }
-}
 
-addTags(Tag) {
-  if (!Tag) {
-    return;
+  addTags(Tag) {
+    if (!Tag) {
+      return;
+    }
+    const newTag: any = { ID: Tag.ID, AssetID: this.asset.ID, Name: Tag };
+    this.selectedSidebarTag.push(newTag);
+    this.sidetagFilterValue = "";
+    this.getSidebarAssetTagDropDownDetail();
   }
-  const newTag: any = {ID:Tag.ID, AssetID : this.asset.ID, Name: Tag };  
-  this.selectedSidebarTag.push(newTag);  
-  this.sidetagFilterValue="";
-  this.getSidebarAssetTagDropDownDetail();    
-}
 
-getSidebarAssetTagDropDownDetail() {
-  this.agentService.getAssetTag().subscribe((resp) => {
-    this.assetSidebarTag = resp;
-  });
-}
-
-onSidebarSearchTag(value: string) {
-  let filter = value.toLowerCase();
-
-  if (filter != "" && this.filteredSidebarTag.length > 0) {
-    this.filteredSidebarTag = _.differenceBy(
-      this.filteredSidebarTag.filter((x) => x.Name.toLowerCase().includes(filter)),
-      this.selectedSidebarTag,
-      "ID"
-    );
-  } else if (this.filteredSidebarTag.length > 0) {
-    this.filteredSidebarTag = _.differenceBy(
-      this.filteredSidebarTag,
-      this.selectedSidebarTag,
-      "ID"
-    );
-  } else {
-    this.filteredSidebarTag = this.assetTag;
+  getSidebarAssetTagDropDownDetail() {
+    this.agentService.getAssetTag().subscribe((resp) => {
+      this.assetSidebarTag = resp;
+    });
   }
-}
 
-onSidebarSelectTag(tag: any): void {  
-  const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
-  this.selectedSidebarTag.push(addTag);  
-  this.sidetagFilterValue="";
-}
+  onSidebarSearchTag(value: string) {
+    let filter = value.toLowerCase();
 
-onTagRemove(index: number): void {
-  this.selectedSidebarTag.splice(index, 1);
-}
+    if (filter != "" && this.filteredSidebarTag.length > 0) {
+      this.filteredSidebarTag = _.differenceBy(
+        this.filteredSidebarTag.filter((x) => x.Name.toLowerCase().includes(filter)),
+        this.selectedSidebarTag,
+        "ID"
+      );
+    } else if (this.filteredSidebarTag.length > 0) {
+      this.filteredSidebarTag = _.differenceBy(
+        this.filteredSidebarTag,
+        this.selectedSidebarTag,
+        "ID"
+      );
+    } else {
+      this.filteredSidebarTag = this.assetTag;
+    }
+  }
 
-getClientsList(data) {
-  return data
-    .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
-    .sort((a, b) =>
-      a.name.toLowerCase() > b.name.toLowerCase()
-        ? 1
-        : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
-    );
-}
+  onSidebarSelectTag(tag: any): void {
+    const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
+    this.selectedSidebarTag.push(addTag);
+    this.sidetagFilterValue = "";
+  }
 
-onSelectCompanyName(company){  
-  this.comapanyId = company.id;
-}
+  onTagRemove(index: number): void {
+    this.selectedSidebarTag.splice(index, 1);
+  }
 
-Deviceremove(index: number){
-  this.linkDevicesTag.splice(index,1);
-}
+  getClientsList(data) {
+    return data
+      .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
+      .sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase()
+          ? 1
+          : b.name.toLowerCase() > a.name.toLowerCase()
+            ? -1
+            : 0
+      );
+  }
 
-onSearchLinkDevices(Tag){    
-  console.log('onSearchLinkDevices fired');
+  onSelectCompanyName(company) {
+    this.comapanyId = company.id;
+  }
+
+  Deviceremove(index: number) {
+    this.linkDevicesTag.splice(index, 1);
+  }
+
+  onSearchLinkDevices(Tag) {
+    console.log('onSearchLinkDevices fired');
     if ((Tag || '').length <= 2) {
       return;
     }
-      let req: any = {}; 
-      req.companyGuid = this.activateRoute.snapshot.params["id"];                 
-      req.Criteria = Tag;
-      this.agentService.autoCompleteDevices(req).subscribe((result) => {                  
-          this.autosearchCompanyDevice = result;    
-          if (this.cd) {
-            this.cd.detectChanges();
-          }                                           
-      });    
-}
+    let req: any = {};
+    req.companyGuid = this.activateRoute.snapshot.params["id"];
+    req.Criteria = Tag;
+    this.agentService.autoCompleteDevices(req).subscribe((result) => {
+      this.autosearchCompanyDevice = result;
+      if (this.cd) {
+        this.cd.detectChanges();
+      }
+    });
+  }
 
-onLinkDeviceSelectTag(Tag){    
+  onLinkDeviceSelectTag(Tag) {
     this.linkDevicesTag.push(Tag);
     this.linkDevicesFilterValue = "";
-}
-
-getclear(){     
-  this.deviceName="";
-  this.assetTagName="";
-  this.dropdownModel.clearWithOutChanges();
-  this.dropdownManufacturer.clearWithOutChanges();
-  this.dropdowndeviceCompany.clearWithOutChanges();
-  this.dropdowndeviceTp.clearWithOutChanges(); 
-  this.note="";           
-  this.selectedSidebarTag=[];   
-  this.linkDevicesTag=[];   
-  this.installdatePicker.reset();
-  this.warrantydatePicker.reset();
-}
-
-onSelectManufactureNamesidebar(SelectManufacturerSidebar)
-{
-  if (SelectManufacturerSidebar) {
-    this.manufactureId = SelectManufacturerSidebar.ID;
-    this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == this.manufactureId);
-    this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-      this.selectModelList = resp; 
-      this.updateAsset();               
-    })      
   }
-  else{
-    this.getModels(this.techCompnayGuid);
-    this.selectManufactureNamessidebar = "";    
-    this.dropdownModelSidebar.clearWithOutChanges();
-  }
-}
 
-onSelectModelsidebar(SelectModelSidebar) {
-  if (SelectModelSidebar) {
-    this.modelId = SelectModelSidebar.ID;
-    this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == this.modelId);
-    this.updateAsset();
+  getclear() {
+    this.deviceName = "";
+    this.assetTagName = "";
+    this.dropdownModel.clearWithOutChanges();
+    this.dropdownManufacturer.clearWithOutChanges();
+    this.dropdowndeviceCompany.clearWithOutChanges();
+    this.dropdowndeviceTp.clearWithOutChanges();
+    this.note = "";
+    this.selectedSidebarTag = [];
+    this.linkDevicesTag = [];
+    this.installdatePicker.reset();
+    this.warrantydatePicker.reset();
   }
-  else{
-    this.selectModelName = "";
-    this.updateAsset();
-  }
-}
 
-
-getSecurityUpdate(id) {    
-  this.agentService.getAssetByGuid(id).subscribe((resp) => {
-    if (resp.length > 0) {
-      this.asset = resp[0];
-      this.agentService.GetCurrentConfig(this.asset.ID);
+  onSelectManufactureNamesidebar(SelectManufacturerSidebar) {
+    if (SelectManufacturerSidebar) {
+      this.manufactureId = SelectManufacturerSidebar.ID;
+      this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == this.manufactureId);
+      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp) => {
+        this.selectModelList = resp;
+        this.updateAsset();
+      })
     }
-  });
-}
+    else {
+      this.getModels(this.techCompnayGuid);
+      this.selectManufactureNamessidebar = "";
+      this.dropdownModelSidebar.clearWithOutChanges();
+    }
+  }
 
-onCurrentConfig(resp: any) {
-  if(resp.length>0)
-  {        
-    if (this.asset.ID && this.asset.ID != 0) {
-      let item = resp.find((x) => x.key == this.asset.ID);
-      if (item) {
-        this.kafkaMessage = JSON.parse(item.Value);        
-        
-        this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+  onSelectModelsidebar(SelectModelSidebar) {
+    if (SelectModelSidebar) {
+      this.modelId = SelectModelSidebar.ID;
+      this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == this.modelId);
+      this.updateAsset();
+    }
+    else {
+      this.selectModelName = "";
+      this.updateAsset();
+    }
+  }
 
-        if (this.securityUpdate > 0) {
-          this.windowUpdatePendingList = [];
-          for (let i = 0; i < this.securityUpdate; i++) {
-            let data: any = {};
-            data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
-            data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
-            data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
-            this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
-            if(this.categories >0)
-            {
-              for(let j=0; j<this.categories; j++){
-                data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+
+  getSecurityUpdate(id) {
+    this.agentService.getAssetByGuid(id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.asset = resp[0];
+        this.agentService.GetCurrentConfig(this.asset.ID);
+        this.IsCurrentConfigLoading = true;
+      }
+    });
+  }
+
+  onCurrentConfig(resp: any) {
+    if (resp.length > 0) {
+      if (this.asset.ID && this.asset.ID != 0) {
+        let item = resp.find((x) => x.key == this.asset.ID);
+        if (item) {
+          this.kafkaMessage = JSON.parse(item.Value);
+          this.IsCurrentConfigLoading = false;;
+          this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+
+          if (this.securityUpdate > 0) {
+            this.windowUpdatePendingList = [];
+            for (let i = 0; i < this.securityUpdate; i++) {
+              let data: any = {};
+              data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
+              data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
+              data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
+              this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
+              if (this.categories > 0) {
+                for (let j = 0; j < this.categories; j++) {
+                  data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+                }
               }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
+                data.RebootIsRequired = "Never Reboots"
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
+                data.RebootIsRequired = "Always Requires Reboot";
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
+                data.RebootIsRequired = "Can Request Reboot";
+              }
+              data.loading = false;
+              data.IsUpdateInstalling = false;
+              this.windowUpdatePendingList.push(data);
             }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
-              data.RebootIsRequired = "Never Reboots"
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
-              data.RebootIsRequired = "Always Requires Reboot";
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
-              data.RebootIsRequired = "Can Request Reboot";
-            }
-            data.loading = false;
-            this.windowUpdatePendingList.push(data);
+          }
+
+          if (!this.cd['destroyed']) {
+            this.cd.detectChanges();
           }
         }
+      }
+    }
 
-        if(!this.cd['destroyed']){
-          this.cd.detectChanges();
+  }
+
+  InstallUpdate() {
+    let count = this.windowUpdatePendingList.filter(item => item.selected == true)
+    if (count.length > 0) {
+      var clonedItems = [];
+      count.forEach((item) => {
+        if (item.selected) {
+          var itemToUpdate: any = {};
+          itemToUpdate.UpdateID = item.UpdateID;
+          itemToUpdate.Title = item.Title;
+          itemToUpdate.RebootIsRequired = item.RebootIsRequired;
+
+          if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+            itemToUpdate.RebootIsRequired = "0";
+          }
+          else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+            itemToUpdate.RebootIsRequired = "1";
+          }
+          else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+            itemToUpdate.RebootIsRequired = "2";
+          }
+          clonedItems.push(itemToUpdate);
+          item.IsUpdateInstalling = true;
         }
+      });
+      this.IsUpdateInstalling = true;
+      this.agentService.GetWindowUpdateList(this.asset.ID, clonedItems);
+      this.cd.detectChanges();
+    }
+  }
+
+  toogleSecurityDevices() {
+    this.windowUpdatePendingList.forEach((item) => {
+      item.selected = this.selectAllSecurityDevices ? true : false;
+    });
+  }
+
+  onSelectSecurityDevice() {
+    let find = this.windowUpdatePendingList.find((item) => !item.selected);
+    this.selectAllSecurityDevices = find ? false : true;
+  }
+
+  getSecurityCountSelected() {
+    return this.windowUpdatePendingList.filter(item => item.selected).length;
+  }
+
+  SecurityUpdate(i, id) {
+    if (id) {
+      let index = this.windowUpdatePendingList.findIndex(item => item.UpdateID == id);
+      if (index == i) {
+        let item = this.windowUpdatePendingList.find(item => item.UpdateID == id);
+        var itemToUpdate: any = {};
+        itemToUpdate.UpdateID = item.UpdateID;
+        itemToUpdate.Title = item.Title;
+        itemToUpdate.RebootIsRequired = item.RebootIsRequired;
+
+        if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+          itemToUpdate.RebootIsRequired = "0";
+        }
+        else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+          itemToUpdate.RebootIsRequired = "1";
+        }
+        else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+          itemToUpdate.RebootIsRequired = "2";
+        }
+        item.IsUpdateInstalling = true;
+        this.IsUpdateInstalling = true;
+        this.agentService.GetWindowUpdateList(this.asset.ID, itemToUpdate);
+        this.cd.detectChanges();
       }
     }
   }
-  
-}
 
-InstallUpdate(){
-  let count =  this.windowUpdatePendingList.filter(item=>item.selected == true)
-  if(count.length >0)
-  {
-     count.forEach((item)=>{
-      if(item.selected == true)
-      {
-        this.agentService.GetWindowUpdateList(this.asset.ID, item);
-      }
-     })
+  ngOnDestroy(): void {
+    this.companiesStateService.setCompanyRoutingId(null);
+    this.kafkaStateService.onInstallWindowsUpdates.unsubscribe();
   }
-}
-
-toogleSecurityDevices() {
-  this.windowUpdatePendingList.forEach((item) => {
-    item.selected = this.selectAllSecurityDevices ? true : false;
-  });        
-}
-
-onSelectSecurityDevice(){
-  let find = this.windowUpdatePendingList.find((item) => !item.selected);
-    this.selectAllSecurityDevices = find ? false : true;        
-}
-
-getSecurityCountSelected(){
-  return this.windowUpdatePendingList.filter(item => item.selected).length;
-}
-
-SecurityUpdate(i,id)
-{  
-  if(id)
-  {
-    let index = this.windowUpdatePendingList.findIndex(item=>item.UpdateID == id);
-    if(index == i)
-    {
-      let securityInstall = this.windowUpdatePendingList.find(item=>item.UpdateID == id);
-      this.agentService.GetWindowUpdateList(this.asset.ID, securityInstall);
-    }    
-  }
-}
-
-ngOnDestroy(): void {  
-  this.companiesStateService.setCompanyRoutingId(null);
-}
 }
 
 
