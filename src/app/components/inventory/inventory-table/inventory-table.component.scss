@@ -35,6 +35,11 @@ pre {
     
     }
 }
+/deep/ .products-table__tac {
+    .new-taxes-area {
+        margin-top: 0px !important;
+    }
+}
 .products-table__cost,.products-table__sale-price,.products-table__mfg,.products-table__ilc {
     input {
         width: 100%;

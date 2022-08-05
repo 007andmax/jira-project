@@ -85,16 +85,10 @@
 }
 
 .new-taxes-area {
-  margin-top: 17px !important;
-
   //.report-caret-icon {
   //    top: 40px !important;
   //    right: 25px;
   //}
-
-  .dropdown-menu {
-    width: calc(100% - 30px);
-  }
 
   .dropdown-item {
     align-items: center;
@@ -148,4 +142,8 @@
       }
     }
   }
+}
+.taxes-dropdown__check-icon {
+  background-image: url("/assets/img/icons/check-blue.svg");
+  margin-top: 0px !important;
 }

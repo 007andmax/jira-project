@@ -124,11 +124,13 @@
         <!-- <div [textContent]="inventory.manufacture"></div> -->
     </td>
     <td class="products-table__tac">
-        <app-invoice-form-ticket-edit-taxes
-            #taxes
+        <app-taxes
+            [isLabel]="false"
+            [isAdd]="false"
+            [placeholder]="'Taxes'"
             [selectedTax]="getSelectedTaxes()"
             (taxesChange)="onTaxesChange($event)"
-        ></app-invoice-form-ticket-edit-taxes>
+        ></app-taxes>
     </td>
     <td class="products-table__ilc">
         <div class="products-table__ilc-container">

@@ -35,10 +35,12 @@
         >
     </td>
     <td class="invoice-item__col-tax  --product">
-        <app-invoice-form-ticket-edit-taxes
+        <app-taxes
             #taxes
+            [isLabel]="false"
+            [isAdd]="false"
             (taxesChange)="onTaxesChange($event)"
-        ></app-invoice-form-ticket-edit-taxes>
+        ></app-taxes>
     </td>
     <td
         class="invoice-item__col-amount  --product"

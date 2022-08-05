@@ -25,6 +25,7 @@ import { ContractsAsideOtherServiceModule } from './contracts-aside-product-serv
 import { ContractsAsideOtherProductModule } from './contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
+import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users
         NgbModule,
         ContractsAsideEditHourlyAddDefaultServiceModule,
         DecimalNumberModule,
-        InvoiceFormTicketEditTaxesModule,
+        TaxesModule,
         ContractsAsideBlockTimeBillingCustomerServiceModule,
         ContractsAsideBlockTimeBillingDefaultServiceModule,
         ContractsAsideBlockTimeBillingAddDefaultServiceModule,

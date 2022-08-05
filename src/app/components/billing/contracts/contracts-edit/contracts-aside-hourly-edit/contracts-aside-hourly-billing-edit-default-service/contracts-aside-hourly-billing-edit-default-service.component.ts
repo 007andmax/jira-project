@@ -3,6 +3,7 @@ import { ContractsHourlyService } from '../../../contracts-aside/class/contracts
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-hourly-billing-edit-default-service',
@@ -12,7 +13,7 @@ import { Tax } from 'src/class/taxes/tax';
 export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements OnInit {
   taxes: Array<Tax> = [];
   @Input() service: ContractsHourlyService;
-  @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
   constructor(private taxesStateService: TaxesStateService,) { }
 

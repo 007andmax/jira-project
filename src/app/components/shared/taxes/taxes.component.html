@@ -1,10 +1,18 @@
 <div
-    class="col-md-6 light-dropdown new-taxes-area"
+    class="light-dropdown new-taxes-area"
     ngbDropdown
     #taxesDropDown="ngbDropdown"
 >
-    <p class="label-name">Taxes</p>
-    <div class="add-tax add-tax-inventory">
+    <p
+        class="label-name"
+        *ngIf="isLabel"
+    >
+        Taxes
+    </p>
+    <div
+        class="add-tax add-tax-inventory"
+        *ngIf="isAdd"
+    >
         <span (click)="onInitAddTax()">+ Add Tax</span>
         <div
             class="d-inline-block "
@@ -133,16 +141,18 @@
             </div>
         </div>
     </div>
-    <div class="light-dropdown new-product-gl-select qt-select-input-40">
+    <div
+        class="light-dropdown new-product-gl-select qt-select-input-40"
+        ngbDropdownToggle
+    >
         <i class="icn-sm report-caret-icon"></i>
         <input
             type="text"
             [value]="getSelectedTaxes()"
             autocomplete="new-password"
             readonly
-            placeholder="Select Taxes"
+            [attr.placeholder]="placeholder"
             id="dropdownTypeTaxes"
-            ngbDropdownToggle
         >
     </div>
     <ul
@@ -163,7 +173,7 @@
             >
                 <span [textContent]="tax.name + ' ' + tax.rate + '%'"></span>
                 <i
-                    class="icn-sm icn-label-save"
+                    class="icn-sm icn-label-save taxes-dropdown__check-icon"
                     *ngIf="checkTaxIsSelected(tax)"
                     style="right: 13px"
                 ></i>

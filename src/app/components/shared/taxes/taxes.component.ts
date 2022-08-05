@@ -19,6 +19,9 @@ export class TaxesComponent implements OnInit, OnDestroy {
   editItem: any;
   newTax: Tax = null;
   taxForm: FormGroup;
+  @Input() isLabel: boolean = true;
+  @Input() isAdd: boolean = true;
+  @Input() placeholder: string = "Select Taxes";
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDropDown') taxesDropDown;
@@ -52,11 +55,16 @@ export class TaxesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
-
+  public addTax(data) {
+    this.taxes.push(data);
+  }
   public setEditItem(data) {
     this.selectedTax = data;
   }
-
+  public setEditItems(data) {
+    this.selectedTax = data;
+    this.cd.detectChanges();
+  }
 
   /**
   * Subscribe for edit mode

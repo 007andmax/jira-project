@@ -6,6 +6,7 @@ import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-invoice-form-ticket-edit-service',
@@ -13,9 +14,8 @@ import { TaxesService } from 'src/app/services/taxes/taxes.service';
   styleUrls: ['./invoice-form-ticket-edit-service.component.scss']
 })
 export class InvoiceFormTicketEditServiceComponent implements OnInit {
-  @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDropDown: TaxesComponent;
   @Input() service: BillableProfileTicketServiceExpense;
-
   minutes: number = 0;
   hours: number = 0;
   durationStart: number = 0;

@@ -231,7 +231,6 @@
         padding: 0;
 
         .dropdown-menu .dropdown-item {
-          padding: 0 !important;
           button {
             border: none;
             background: $white;
@@ -246,7 +245,7 @@
           }
         }
         .dropdown-menu.show {
-          width: 100%;
+          width: 230px;
           min-width: 0;
           left: 0 !important;
         }

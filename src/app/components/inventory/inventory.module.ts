@@ -16,6 +16,7 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { InvoiceFormTicketEditTaxesModule } from '../billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { TaxesModule } from '../shared/taxes/taxes.module';
 
 
 
@@ -39,7 +40,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         ContractsEditModule,
         DecimalNumberModule,
         ToFixedModule,
-        InvoiceFormTicketEditTaxesModule,
+        TaxesModule,
         TextAreaModule
 
     ],

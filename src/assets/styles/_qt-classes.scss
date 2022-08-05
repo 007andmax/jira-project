@@ -1276,7 +1276,6 @@
 
 .qt-taxes-multiselect {
   .dropdown-menu .dropdown-item {
-    padding: 0 !important;
     position: relative;
     button {
       border: none;
@@ -1300,7 +1299,7 @@
     position: absolute;
     right: 5px !important;
     margin-right: 0;
-    top: calc(50% + 5px);
+    top: 50%;
     transform: translateY(-50%);
   }
 }
