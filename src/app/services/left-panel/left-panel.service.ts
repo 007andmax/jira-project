@@ -49,7 +49,8 @@ export class LeftPanelService {
       || state == 'company-contracts'
       || state == 'company-documents'
       || state == 'new-edit-documents-company'
-      || state == 'new-add-documents-company')
+      || state == 'new-add-documents-company'
+      || state == 'company-devices-beta')
   }
   isBillingState(state) {
     return (state === 'billing-dashboard'
@@ -110,5 +111,24 @@ export class LeftPanelService {
       || state === 'crm-settings'
       || state === 'marketing-email'
       || state === 'subscription-component')
+  }
+
+  public isDevicesPage(state) {
+    return (state === 'new-devices' 
+      || state === 'report-device-summary'
+      || state === 'report-device-warranty'
+      || state === 'report-device-antivirus'
+      || state === 'hardware-summary'
+      || state === 'report-device-processorram'
+      || state === 'report-device-diskspace' 
+      || state === 'device-ip-summary'
+      || state === 'network-ip-report'
+      || state === 'network-detail-report'
+      || state === 'network-adapter-report'
+      || state === 'software-summary'
+      || state === 'report-device-antivirus'
+      || state === 'applicationbycompany-report'
+      || state === 'report-device-warranty'
+      || state === 'report-device-deploymentwarranty');
   }
 }

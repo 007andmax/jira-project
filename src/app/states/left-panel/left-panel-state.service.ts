@@ -22,7 +22,7 @@ export class LeftPanelStateService {
   onSearchChange: EventEmitter<any> = new EventEmitter();
   onSearchItemAdded: EventEmitter<any> = new EventEmitter();
   onSearchCompanyChange: EventEmitter<any> = new EventEmitter();
-  onPageActive:EventEmitter<any> = new EventEmitter();
+  onPageActive:EventEmitter<any> = new EventEmitter();  
 
   constructor() { }
 
@@ -46,6 +46,7 @@ export class LeftPanelStateService {
   public openCompanPage() {
     this.onOpenCompanyPage.emit(null);
   }
+  
   public changeState(data) {
     this.activePage = data;
     this.onChangeState.emit(data);

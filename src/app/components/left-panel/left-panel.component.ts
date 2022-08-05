@@ -70,11 +70,12 @@ export class LeftPanelComponent implements OnInit {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
-    })
+    });
 
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
-    })
+    });
+
     this.router.events
       .subscribe((event) => {
         if (this.state === '') {
@@ -90,6 +91,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices`)) this.state = 'company-devices';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices-beta`)) this.state = 'company-devices-beta';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`network-scan`)) this.state = 'company-network-scan';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`password-manager`)) this.state = 'company-password-manager';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
@@ -169,7 +171,6 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
 
-
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
@@ -179,6 +180,7 @@ export class LeftPanelComponent implements OnInit {
         }
 
       });
+
     this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
     })
@@ -215,6 +217,7 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isDocumentsState(data)) this.page = "DOCUMENTS";
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
+    if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
   }
   changePage(page) {
     this.page = page;

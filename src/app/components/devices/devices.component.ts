@@ -34,11 +34,11 @@ export class DevicesComponent implements OnInit {
   @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
   @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
   @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
-  @ViewChild('dropdownManufacturer')dropdownManufacturer:DropDownComponent; 
+  @ViewChild('dropdownManufacturer') dropdownManufacturer: DropDownComponent;
   @ViewChild('installdatePicker') installdatePicker: DatePickerComponent;
-  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;  
+  @ViewChild('warrantydatePicker') warrantydatePicker: DatePickerComponent;
   @ViewChild('dropdownManufacturersidebar') dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar')dropdownModelSidebar: DropDownComponent; 
+  @ViewChild('dropdownModelSidebar') dropdownModelSidebar: DropDownComponent;
   companyId: any;
   tagFilterValue: string = "";
   searchTag: any[] = [];
@@ -124,21 +124,23 @@ export class DevicesComponent implements OnInit {
   assetTag: any = [];
   filteredTag = [];
   autosearchCompanyDevice: any[] = [];
-  linkDevicesFilterValue: string = "";  
-  linkDevicesTag=[];
-  selectManufactureNamessidebar : any;
-  selectModelNameSidebar : any;  
+  linkDevicesFilterValue: string = "";
+  linkDevicesTag = [];
+  selectManufactureNamessidebar: any;
+  selectModelNameSidebar: any;
   securityUpdate: number;
   windowUpdatePendingList: any[] = [];
   categories: number;
   check: any[] = [];
   InstallUpdateselected: number = 0;
-  selectednum = false ;
+  selectednum = false;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selectAllSecurityDevices: boolean = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
+  IsUpdateInstalling: boolean = false;
+  IsCurrentConfigLoading: boolean = false;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -155,12 +157,10 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {             
+  ngOnInit() {
     this.companiesState.onInit();
     this.clientName = "All Companies";
-    this.leftPanelStateService.changeStateWithoutNavigate(
-      "new-devices"
-    );
+    this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
@@ -177,10 +177,10 @@ export class DevicesComponent implements OnInit {
       this.load(data);
       this.getManufacturers(data.id);
       this.getModels(data.id);
-    });        
+    });
 
-    if (!this.searchSubscription) {          
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {                                    
+    if (!this.searchSubscription) {
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
@@ -188,43 +188,46 @@ export class DevicesComponent implements OnInit {
       });
     }
 
-    if(!this.searchSubscriptionCompany)
-    {         
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data=>{                 
-        this.selectedTag = [];                       
-        if(data.name !='undefined' && data.name !=null && data.name !="")
-        {
+    if (!this.searchSubscriptionCompany) {
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {
+        this.selectedTag = [];
+        if (data.name != 'undefined' && data.name != null && data.name != "") {
           this.selectedTag.push(data.name);
-        }        
-        this.searchTag = this.selectedTag;     
-        localStorage.removeItem("currentSearchCompany");   
+        }
+        this.searchTag = this.selectedTag;
+        localStorage.removeItem("currentSearchCompany");
         this.add(undefined);
       })
     }
+    
+    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {      
+      this.IsCurrentConfigLoading = true;
+      this.agentService.GetCurrentConfig(this.asset.ID);      
+    });    
   }
 
   getCountSelected() {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {            
+  load(company: any) {
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
-    if ((!localStorage.getItem("currentSearch")) && (!localStorage.getItem("currentSearchCompany"))) {    
+    if ((!localStorage.getItem("currentSearch")) && (!localStorage.getItem("currentSearchCompany"))) {
       let req: any = {};
       req.TechCompanyGuid = this.techCompnayGuid;
       req.Criteria = [];
       this.getAssets();
-      this.HardwareTypeList(this.techCompnayGuid);            
-    }    
+      this.HardwareTypeList(this.techCompnayGuid);
+    }
     else {
       this.setPreviewDataDevice();
     }
-  } 
+  }
 
   getAssets() {
-    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {      
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
       this.searches = res;
     });
   }
@@ -234,16 +237,16 @@ export class DevicesComponent implements OnInit {
     this.searchSubscriptionCompany.unsubscribe();
   }
 
-  setPreviewDataDevice() {                
+  setPreviewDataDevice() {
     let searchData: any = localStorage.getItem("currentSearch");
-    if (searchData) {      
-      let searchObj = JSON.parse(searchData);              
-      this.selectedTag = JSON.parse(searchObj.Json) || [];            
+    if (searchData) {
+      let searchObj = JSON.parse(searchData);
+      this.selectedTag = JSON.parse(searchObj.Json) || [];
       this.searchTag = this.selectedTag;
       localStorage.removeItem("currentSearch");
     }
     let searchCompanyData: any = localStorage.getItem("currentSearchCompany");
-    if(searchCompanyData){
+    if (searchCompanyData) {
       this.selectedTag = [];
       let searchCompanyObj = JSON.parse(searchCompanyData);
       this.selectedTag.push(searchCompanyObj.name);
@@ -254,13 +257,13 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {           
+  searchDeviceTag(data: any) {
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {        
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -280,7 +283,7 @@ export class DevicesComponent implements OnInit {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-    });    
+    });
   }
 
 
@@ -347,7 +350,7 @@ export class DevicesComponent implements OnInit {
   }
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -356,34 +359,29 @@ export class DevicesComponent implements OnInit {
             asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
             if (this.kafkaMessage.IdleTime != null) {
               let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              asset.IdelTime = Time[1] !=""? Time[1] : "";                            
+              asset.IdelTime = Time[1] != "" ? Time[1] : "";
             }
-            if(this.kafkaMessage.UpTime !="")
-            {
-                let result = this.kafkaMessage.UpTime.split(" ");
-  
-                if(result[0]=="0" && result[2]=="0" && result[4]=="0")
-                {
-                  let Sec = result[6]+' '+result[7];
-                  asset.UpTime = Sec;
-                }
-                else if(result[0]=="0" && result[2]=="0" && result[4]!="0")
-                {
-                  let Minutes = result[4]+' '+result[5]+' '+result[6]+' '+result[7];  
-                  asset.UpTime = Minutes;
-                }
-                else if(result[0]=="0" && result[2]!="0")
-                {
-                  let Hours = result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
-                  asset.UpTime = Hours; 
-                }
-                else
-                {
-                  let Days = result[0]+' '+result[1]+' '+result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
-                  asset.UpTime = Days;
-                }
-            }            
-                        
+            if (this.kafkaMessage.UpTime != "") {
+              let result = this.kafkaMessage.UpTime.split(" ");
+
+              if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
+                let Sec = result[6] + ' ' + result[7];
+                asset.UpTime = Sec;
+              }
+              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
+                let Minutes = result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+                asset.UpTime = Minutes;
+              }
+              else if (result[0] == "0" && result[2] != "0") {
+                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+                asset.UpTime = Hours;
+              }
+              else {
+                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+                asset.UpTime = Days;
+              }
+            }
+
           }
           asset.online = true;
         }
@@ -584,31 +582,30 @@ export class DevicesComponent implements OnInit {
     }, 500);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {                 
-    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());    
-    if(!data)
-    {
+  selected(event: MatAutocompleteSelectedEvent): void {
+    let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
+    if (!data) {
       console.log('selected fired');
       this.selectedTag.push(event.option.viewValue);
       this.searchTag = [];
-      this.searchTag = this.selectedTag;      
+      this.searchTag = this.selectedTag;
       this.selectedInput.nativeElement.value = '';
       this.selectedCtrl.setValue(null);
-      this.add(event.option.viewValue);    
-    }    
+      this.add(event.option.viewValue);
+    }
     this.selectedInput.nativeElement.value = '';
   }
 
-  remove(index: number) {    
+  remove(index: number) {
     this.showPreloader = true;
     this.selectedTag.splice(index, 1);
     this.searchTag = [];
-    this.searchTag = this.selectedTag;    
+    this.searchTag = this.selectedTag;
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.selectedTag || [];
     if (this.selectedTag.length > 0) {
-      this.searchDeviceTag(req);     
+      this.searchDeviceTag(req);
     }
     else {
       this.assetList = [];
@@ -619,7 +616,7 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  add(Tag): void {                          
+  add(Tag): void {
     console.log('add event fired');
     this.tagFilterValue = "";
 
@@ -628,16 +625,15 @@ export class DevicesComponent implements OnInit {
     let findTag: any[] = [];
 
     if (this.selectedTag) {
-      if(Tag != 'undefined' && Tag != null && Tag !="")
-      {
+      if (Tag != 'undefined' && Tag != null && Tag != "") {
         findTag = this.selectedTag.find(x => x.toLowerCase() == Tag.toLowerCase());
-      }      
+      }
     }
 
     if (Tag && !findTag) {
       this.selectedTag.push(Tag);
       this.searchTag = [];
-      this.searchTag = this.selectedTag;      
+      this.searchTag = this.selectedTag;
     }
 
     let req: any = {};
@@ -1112,16 +1108,16 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  openAside(type, asset) {    
+  openAside(type, asset) {
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
     this.assetData.Caption = this.assetData.OperatingSystem;
-    this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == asset.ManufacturerId);
-    this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == asset.ModelID);    
+    this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == asset.ManufacturerId);
+    this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == asset.ModelID);
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
-    this.getSecurityUpdate(asset.Guid);  
+    this.getSecurityUpdate(asset.Guid);
     this.Preloader = false;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
@@ -1137,7 +1133,7 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  getNetworkDetail(asset) {    
+  getNetworkDetail(asset) {
     this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
       if (resp.length > 0) {
@@ -1275,10 +1271,9 @@ export class DevicesComponent implements OnInit {
           if (this.selectedSidebarTag.length > 0) {
             this.createTag(result, this.selectedSidebarTag)
           }
-        if(this.linkDevicesTag.length>0)
-        {
-          this.linkDevicesTags(result)
-        }                  
+          if (this.linkDevicesTag.length > 0) {
+            this.linkDevicesTags(result)
+          }
           this.opened = false;
           this.toastr.success('Save non agent asset successfully');
           this.getclear();
@@ -1289,13 +1284,13 @@ export class DevicesComponent implements OnInit {
       })
   }
 
-  linkDevicesTags(id){
-    this.linkDevicesTag.forEach((element)=>{
-      const newlinkDevice: any ={ID:id, Name:element.Name}
-      this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp)=>{
+  linkDevicesTags(id) {
+    this.linkDevicesTag.forEach((element) => {
+      const newlinkDevice: any = { ID: id, Name: element.Name }
+      this.agentService.createAssociatedAsset(newlinkDevice).subscribe((resp) => {
 
       })
-    })    
+    })
   }
 
   createNotes(id) {
@@ -1335,7 +1330,7 @@ export class DevicesComponent implements OnInit {
     this.dropdowndeviceTp.clearWithOutChanges();
     this.note = "";
     this.selectedSidebarTag = [];
-    this.linkDevicesTag=[];
+    this.linkDevicesTag = [];
     this.installdatePicker.reset();
     this.warrantydatePicker.reset();
   }
@@ -1380,34 +1375,34 @@ export class DevicesComponent implements OnInit {
     this.sidetagFilterValue = "";
   }
 
-addLinkDevices(Tag){  
-  if (!Tag) {
-    return;
+  addLinkDevices(Tag) {
+    if (!Tag) {
+      return;
 
     }
-  console.log('addLinkedDevices fired');  
-  this.linkDevicesTag.push(Tag);   
-  this.linkDevicesFilterValue = "";
+    console.log('addLinkedDevices fired');
+    this.linkDevicesTag.push(Tag);
+    this.linkDevicesFilterValue = "";
   }
 
-Deviceremove(index: number){
-  this.linkDevicesTag.splice(index,1);
-}
+  Deviceremove(index: number) {
+    this.linkDevicesTag.splice(index, 1);
+  }
 
-onSearchLinkDevices(Tag){  
-  console.log('onSearchLinkDevices fired');
+  onSearchLinkDevices(Tag) {
+    console.log('onSearchLinkDevices fired');
     if ((Tag || '').length <= 2) {
       return;
     }
     setTimeout(() => {
-      let req: any = {};           
+      let req: any = {};
       req.CompanyGuid = this.companyGuid
       req.Criteria = Tag;
       this.autosearchCompanyDevice = ['loading...'];
       if (this.cd) {
         this.cd.detectChanges();
       }
-      this.agentService.autoCompleteDevices(req).subscribe((result) => {        
+      this.agentService.autoCompleteDevices(req).subscribe((result) => {
         this.autosearchCompanyDevice = result;
         if (this.cd) {
           this.cd.detectChanges();
@@ -1416,130 +1411,158 @@ onSearchLinkDevices(Tag){
     }, 500);
   }
 
-  onSelectManufactureNamesidebar(SelectManufacturerSidebar)
-{
-  if (SelectManufacturerSidebar) {
-    this.manufactureId = SelectManufacturerSidebar.ID;
-    this.selectManufactureNamessidebar = this.manufactureList.find(x=>x.ID == this.manufactureId);
-    this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-      this.selectModelList = resp; 
-      this.updateAsset();               
-    })      
-  }
-  else{
-    this.getModels(this.techCompnayGuid);
-    this.selectManufactureNamessidebar = "";    
-    this.dropdownModelSidebar.clearWithOutChanges();
-  }
-}
-
-onSelectModelsidebar(SelectModelSidebar) {
-  if (SelectModelSidebar) {
-    this.modelId = SelectModelSidebar.ID;
-    this.selectModelNameSidebar = this.selectModelList.find(x=>x.ID == this.modelId);
-    this.updateAsset();
-  }
-  else{
-    this.selectModelName = "";
-    this.updateAsset();
-  }
-}
-
-getSecurityUpdate(id) {    
-  this.agentService.getAssetByGuid(id).subscribe((resp) => {
-    if (resp.length > 0) {
-      this.asset = resp[0];
-      this.agentService.GetCurrentConfig(this.asset.ID);
+  onSelectManufactureNamesidebar(SelectManufacturerSidebar) {
+    if (SelectManufacturerSidebar) {
+      this.manufactureId = SelectManufacturerSidebar.ID;
+      this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == this.manufactureId);
+      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp) => {
+        this.selectModelList = resp;
+        this.updateAsset();
+      })
     }
-  });
-}
+    else {
+      this.getModels(this.techCompnayGuid);
+      this.selectManufactureNamessidebar = "";
+      this.dropdownModelSidebar.clearWithOutChanges();
+    }
+  }
 
-onCurrentConfig(resp: any) {
-  if(resp.length>0)
-  {        
-    if (this.asset.ID && this.asset.ID != 0) {
-      let item = resp.find((x) => x.key == this.asset.ID);
-      if (item) {
-        this.kafkaMessage = JSON.parse(item.Value);        
-        
-        this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+  onSelectModelsidebar(SelectModelSidebar) {
+    if (SelectModelSidebar) {
+      this.modelId = SelectModelSidebar.ID;
+      this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == this.modelId);
+      this.updateAsset();
+    }
+    else {
+      this.selectModelName = "";
+      this.updateAsset();
+    }
+  }
 
-        if (this.securityUpdate > 0) {
-          this.windowUpdatePendingList = [];
-          for (let i = 0; i < this.securityUpdate; i++) {
-            let data: any = {};
-            data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
-            data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
-            data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
-            this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
-            if(this.categories >0)
-            {
-              for(let j=0; j<this.categories; j++){
-                data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+  getSecurityUpdate(id) {
+    this.agentService.getAssetByGuid(id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.asset = resp[0];
+        this.agentService.GetCurrentConfig(this.asset.ID);
+        this.IsCurrentConfigLoading = true;
+      }
+    });
+  }
+
+  onCurrentConfig(resp: any) {
+    if (resp.length > 0) {
+      if (this.asset.ID && this.asset.ID != 0) {
+        let item = resp.find((x) => x.key == this.asset.ID);
+        if (item) {
+          this.kafkaMessage = JSON.parse(item.Value);
+          this.IsCurrentConfigLoading = false;
+          this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+
+          if (this.securityUpdate > 0) {
+            this.windowUpdatePendingList = [];
+            for (let i = 0; i < this.securityUpdate; i++) {
+              let data: any = {};
+              data.UpdateID = this.kafkaMessage.PendingWindowsUpdates[i].UpdateID;
+              data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
+              data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
+              this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
+              if (this.categories > 0) {
+                for (let j = 0; j < this.categories; j++) {
+                  data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
+                }
               }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
+                data.RebootIsRequired = "Never Reboots"
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
+                data.RebootIsRequired = "Always Requires Reboot";
+              }
+              if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
+                data.RebootIsRequired = "Can Request Reboot";
+              }
+              data.loading = false;
+              this.windowUpdatePendingList.push(data);
             }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "0") {
-              data.RebootIsRequired = "Never Reboots"
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "1") {
-              data.RebootIsRequired = "Always Requires Reboot";
-            }
-            if (this.kafkaMessage.PendingWindowsUpdates[i].RebootIsRequired == "2") {
-              data.RebootIsRequired = "Can Request Reboot";
-            }
-            data.loading = false;
-            this.windowUpdatePendingList.push(data);
+          }
+
+          if (!this.cd['destroyed']) {
+            this.cd.detectChanges();
           }
         }
+      }
+    }
 
-        if(!this.cd['destroyed']){
-          this.cd.detectChanges();
+  }
+
+  toogleSecurityDevices() {
+    this.windowUpdatePendingList.forEach((item) => {
+      item.selected = this.selectAllSecurityDevices ? true : false;
+    });
+  }
+
+  onSelectSecurityDevice() {
+    let find = this.windowUpdatePendingList.find((item) => !item.selected);
+    this.selectAllSecurityDevices = find ? false : true;
+  }
+
+  getSecurityCountSelected() {
+    return this.windowUpdatePendingList.filter(item => item.selected).length;
+  }
+
+  SecurityUpdate(i, id) {
+    if (id) {
+      let index = this.windowUpdatePendingList.findIndex(item => item.UpdateID == id);
+      if (index == i) {
+        let item = this.windowUpdatePendingList.find(item => item.UpdateID == id);
+        var itemToUpdate: any = {};
+        itemToUpdate.UpdateID = item.UpdateID;
+        itemToUpdate.Title = item.Title;
+        itemToUpdate.RebootIsRequired = item.RebootIsRequired;
+
+        if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+          itemToUpdate.RebootIsRequired = "0";
         }
+        else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+          itemToUpdate.RebootIsRequired = "1";
+        }
+        else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+          itemToUpdate.RebootIsRequired = "2";
+        }        
+        this.IsUpdateInstalling = true;
+        this.agentService.GetWindowUpdateList(this.asset.ID, itemToUpdate);
+        this.cd.detectChanges();
       }
     }
   }
-  
-}
 
-toogleSecurityDevices() {
-  this.windowUpdatePendingList.forEach((item) => {
-    item.selected = this.selectAllSecurityDevices ? true : false;
-  });        
-}
+  InstallUpdate() {
+    let count = this.windowUpdatePendingList.filter(item => item.selected == true)
+    if (count.length > 0) {
+      var clonedItems = [];
+      count.forEach((item) => {
+        if (item.selected) {
+          var itemToUpdate: any = {};
+          itemToUpdate.UpdateID = item.UpdateID;
+          itemToUpdate.Title = item.Title;
+          itemToUpdate.RebootIsRequired = item.RebootIsRequired;
 
-onSelectSecurityDevice(){
-  let find = this.windowUpdatePendingList.find((item) => !item.selected);
-    this.selectAllSecurityDevices = find ? false : true;        
-}
-
-getSecurityCountSelected(){
-  return this.windowUpdatePendingList.filter(item => item.selected).length;
-}
-
-SecurityUpdate(i,id)
-{  
-  if(id)
-  {
-    let index = this.windowUpdatePendingList.findIndex(item=>item.UpdateID == id);
-    if(index == i)
-    {
-      let securityInstall = this.windowUpdatePendingList.find(item=>item.UpdateID == id);
-      this.agentService.GetWindowUpdateList(this.asset.ID, securityInstall);
-    }    
+          if (itemToUpdate.RebootIsRequired == "Never Reboots") {
+            itemToUpdate.RebootIsRequired = "0";
+          }
+          else if (itemToUpdate.RebootIsRequired == "Always Requires Reboot") {
+            itemToUpdate.RebootIsRequired = "1";
+          }
+          else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
+            itemToUpdate.RebootIsRequired = "2";
+          }
+          clonedItems.push(itemToUpdate);
+          item.IsUpdateInstalling = true;
+        }
+      });
+      this.IsUpdateInstalling = true;
+      this.agentService.GetWindowUpdateList(this.asset.ID, clonedItems);
+      this.cd.detectChanges();
+    }
   }
-}
-
-InstallUpdate(){
-  let count =  this.windowUpdatePendingList.filter(item=>item.selected == true)
-  if(count.length >0)
-  {
-     count.forEach((item)=>{
-      if(item.selected == true)
-      {
-        this.agentService.GetWindowUpdateList(this.asset.ID, item);
-      }
-     })
-  }
-}
 
 }

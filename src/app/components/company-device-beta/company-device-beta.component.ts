@@ -139,14 +139,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');    
     this.companiesState.onInit();
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
-    this.leftPanelStateService.changeStateWithoutNavigate(
-      "company-devices-beta"
-    );
+    
 
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
@@ -179,8 +178,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }
     });
 
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
-      debugger;
+    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {      
+      this.IsCurrentConfigLoading = true;
+      this.agentService.GetCurrentConfig(this.asset.ID);      
     });
   }
 
@@ -1159,7 +1159,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item) {
           this.kafkaMessage = JSON.parse(item.Value);
-          this.IsCurrentConfigLoading = false;;
+          this.IsCurrentConfigLoading = false;
           this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
 
           if (this.securityUpdate > 0) {
@@ -1263,8 +1263,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
           itemToUpdate.RebootIsRequired = "2";
         }
-        item.IsUpdateInstalling = true;
-        this.IsUpdateInstalling = true;
+        item.IsUpdateInstalling = true;        
         this.agentService.GetWindowUpdateList(this.asset.ID, itemToUpdate);
         this.cd.detectChanges();
       }

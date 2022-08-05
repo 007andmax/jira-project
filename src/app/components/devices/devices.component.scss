@@ -763,3 +763,14 @@ span.qt-input-search:before {
   }
   
 
+
+  .loader {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 0.35rem solid rgba(0, 0, 0, 0.2);
+    border-top-color: black;
+    animation: spin 1s infinite linear;
+    margin-right: 8px
+  }
+  
