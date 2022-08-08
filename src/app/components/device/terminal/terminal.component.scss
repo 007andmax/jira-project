@@ -1093,3 +1093,12 @@ body {
     }
 }
 
+.terminal-loader {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    border: 0.35rem solid rgba(0, 0, 0, 0.2);
+    border-top-color: black;
+    animation: spin 1s infinite linear;    
+  }

@@ -52,7 +52,7 @@
                                 id="button-cmd"
                                 type="button"
                                 class="btn btn-primary"
-                                (click)="copyToTerminalFunc(editCmd);"
+                                (click)="copyToTerminalFunc(editCmd,-1);"
                             >
                                 Run Command
                             </button>
@@ -276,7 +276,7 @@
                         <ng-template ngbTabContent>
                             <div class="cmn-tbs-content command">
                                 <ul class="list-unstyled">
-                                    <li *ngFor="let cmd of commandList">
+                                    <li *ngFor="let cmd of commandList;let i = index">
                                         <div class="terminal-cmd-opt">
                                             <div class="cmd-list-left">
                                                 <img
@@ -286,14 +286,14 @@
                                                 >
                                                 <h5>{{cmd.title}}</h5>
                                             </div>
+                                            <!-- class="copy" -->
                                             <div class="cmd-list-right">
-                                                <a
-                                                    href="javascript:;"
-                                                    class="copy"
+                                                <a                                                    
+                                                    href="javascript:;"                                                                                                                                                                                                                  
+                                                    [ngClass]="count==i ? 'terminal-loader' : 'copy'"                                                          
                                                     data-tooltip="Run script"
-                                                    (click)="copyToTerminalFunc(cmd.command);"
-                                                >
-                                                    Run script
+                                                    (click)="copyToTerminalFunc(cmd.command,i);"
+                                                >                                                 
                                                 </a>
                                                 <div
                                                     class="btn-group"
@@ -517,7 +517,7 @@
                                                 href="javascript:;"
                                                 class="play-btn"
                                                 data-tooltip="Run Script"
-                                                (click)="copyToTerminalFunc(script.command)"
+                                                (click)="copyToTerminalFunc(script.command,-1)"
                                             >
                                                 <img
                                                     src="/html/assets/img/device/play-script.svg"

@@ -83,6 +83,8 @@ export class TerminalComponent implements OnInit {
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
+  commandShoot:boolean = false;  
+  count = -1;
   @ViewChild('editor') editorElement: ElementRef;
   code = '';
   config = {
@@ -108,7 +110,7 @@ export class TerminalComponent implements OnInit {
     private kafkaStateService: KafkaStateService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // this.socketService.initializeWebSocketConnection();
@@ -151,7 +153,8 @@ export class TerminalComponent implements OnInit {
           let arr1 = this.splitCommand.concat(arr);
           this.splitCommand = arr1;
           this.htmldata = `<hr style="border:1px dotted white;"/>`;            
-          this.cd.detectChanges();
+          this.count = -1;
+          this.cd.detectChanges();          
         }
       }
     });
@@ -168,13 +171,14 @@ export class TerminalComponent implements OnInit {
             let arr1 = this.splitCommand.concat(arr);
             this.splitCommand = arr1;
             this.htmldata = `<hr style="border:1px dotted white;"/>`;            
+            this.count = -1;
             this.cd.detectChanges();
           }
         }
       });
   }
 
-  getCommandList() {
+  getCommandList() {    
     this.terminalService.getCommand()
       .pipe(first())
       .subscribe(data => {
@@ -204,10 +208,10 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  getHistory() {
+  getHistory() {    
     this.terminalService.getHistory(this._id)
       .pipe(first())
-      .subscribe(data => {
+      .subscribe(data => {        
         if (Object.keys(data).length > 0) {
           let obj = data[this._id]
           this.his = obj;
@@ -703,7 +707,16 @@ export class TerminalComponent implements OnInit {
     this.openEditCommand(cmd, type);
   }
 
-  copyToTerminalFunc(editCmd) {
+  copyToTerminalFunc(editCmd,i) {    
+    this.count = i;
+    if(i != -1)
+    {
+      if(this.commandShoot == true)
+      {
+        return;
+      }    
+      this.commandShoot = true;       
+    }    
     let data: any = {};
     if(this.scriptTyped=="cmd")
     {
