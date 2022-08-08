@@ -773,4 +773,10 @@ span.qt-input-search:before {
     animation: spin 1s infinite linear;
     margin-right: 8px
   }
+
+  .Resize{
+    @media (max-width: 767px) {      
+      width:62% !important;
+    }        
+  }
   

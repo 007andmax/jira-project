@@ -137,6 +137,7 @@ export class DevicesComponent implements OnInit {
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selectAllSecurityDevices: boolean = false;
+  devices_resize: boolean = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -1109,6 +1110,7 @@ export class DevicesComponent implements OnInit {
   }
 
   openAside(type, asset) {
+    this.devices_resize = true;
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
@@ -1153,6 +1155,7 @@ export class DevicesComponent implements OnInit {
 
   menuclose() {
     this.open = false;
+    this.devices_resize = false;
     this.tab = "SYSTEM";
   }
 

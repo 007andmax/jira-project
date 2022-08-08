@@ -120,6 +120,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selectAllSecurityDevices: boolean = false;
+  device_beta_resize: boolean = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -574,6 +575,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   openAside(type, asset) {
+    this.device_beta_resize = true;
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
@@ -591,6 +593,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   menuclose() {
     this.open = false;
+    this.device_beta_resize = false;
     this.tab = "SYSTEM";
   }
 

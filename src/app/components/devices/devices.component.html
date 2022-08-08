@@ -97,7 +97,7 @@
           </div>
     </div>
     </div>
-        <div class="qt-page-list__header-thead-container">
+        <div class="qt-page-list__header-thead-container" [ngClass]="{'Resize': devices_resize}">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
@@ -140,7 +140,7 @@
     </div>
     <div class="qt-df qt-fd-c qt-jc-sb">
         <div class="qt-page-list__body">
-            <div class="qt-page-list__body-table-container">
+            <div class="qt-page-list__body-table-container" [ngClass]="{'Resize': devices_resize}">
                 <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length > 0">
                     <tbody *ngIf="!showPreloader">
                         <tr class="company-device-hover" *ngFor="let asset of assetList; let i = index">
