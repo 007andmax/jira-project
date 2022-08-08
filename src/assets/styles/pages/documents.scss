@@ -17,7 +17,7 @@
 
       &:first-child::before {
         position: absolute;
-        content: "update";
+        content: "";
         background: url("/assets/img/icons/update.svg") no-repeat;
         width: 44px;
         height: 20px;

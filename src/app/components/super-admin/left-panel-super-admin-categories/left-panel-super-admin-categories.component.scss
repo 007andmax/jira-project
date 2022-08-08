@@ -1,8 +1,8 @@
 @import "./src/assets/styles/variable";
 
 .icon__category-closed {
-    height: 11.67px;
-    width: 8.37px;
+    height: 8px;
+    width: 8px;
     flex-shrink: 0;
 }
 .category-item-category .toggle-category {
@@ -11,7 +11,7 @@
 .category-item-category {
     display: flex;
     align-items: center;
-    margin: 0px 0px 8px 0px;
+    margin: 0 0 8px 0;
 
     &__help-center {
       margin-left: 14px;
