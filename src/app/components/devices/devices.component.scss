@@ -775,7 +775,7 @@ span.qt-input-search:before {
   }
 
   .Resize{    
-    @media only screen and (max-width: 1920px) {
+    @media only screen and (min-width: 1920px) {
       width:62% !important;
     }       
   }
