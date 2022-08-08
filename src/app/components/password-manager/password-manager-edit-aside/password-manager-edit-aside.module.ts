@@ -12,6 +12,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { AfterViewInitDirective } from 'src/app/directives/after-view-init.directive';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-progress/upload-area-progress.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         DatePickerModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        UploadAreaProgressModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 

@@ -31,6 +31,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
   showSecretCode: boolean = false;
+  isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
@@ -85,6 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.usersList = [];
       this.devicesList = [];
       this.gadgetsList = [];
+      if (!this.editItem.otpEnable) this.isEditSecretKey = true;
       this.editItem.links.forEach(item => {
         if (item.userId) {
           this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
@@ -156,6 +158,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         }, 1000);
       }
     })
+  }
+  getCodeProgress() {
+    return (this.timeCount / 30) * 100;
+  }
+  editSecretCode() {
+    this.isEditSecretKey = !this.isEditSecretKey;
+    this.clearSecretKey();
   }
   getTimeProgress() {
     return `${(this.timeCount >= 10) ? this.timeCount : '0' + this.timeCount}`
