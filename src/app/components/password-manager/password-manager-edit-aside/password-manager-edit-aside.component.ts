@@ -268,7 +268,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.usersList = [];
     this.gadgetsList = [];
     this.showSecretCode = false;
-
+    this.isEditSecretKey = false;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
   }
   public getPermissions(action) {
