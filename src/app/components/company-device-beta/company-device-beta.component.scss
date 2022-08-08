@@ -504,7 +504,7 @@ table.qt-table-modern tbody tr td {
 }
 
 .Resize{
-  @media (max-width: 767px) {      
+  @media only screen and (max-width: 1920px) {
     width:62% !important;
-  }        
+  }     
 }
