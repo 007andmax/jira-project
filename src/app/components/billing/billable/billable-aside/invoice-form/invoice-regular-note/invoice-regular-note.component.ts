@@ -13,6 +13,7 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 export class InvoiceRegularNoteComponent implements OnInit {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Output() onUpdateInvoiceData = new EventEmitter();
+  validNote: boolean = true;
   selectedNote: InvoiceNote = null;
   toogleCustomerNote: boolean = false;
   regularNotes: Array<InvoiceNote> = [];
@@ -36,6 +37,7 @@ export class InvoiceRegularNoteComponent implements OnInit {
   }
   onCheckUpdateTitleNote(data) {
     if (this.selectedNote) {
+      this.validNote = true;
       this.changeRegularNote = true;
       this.selectedNote.title = data;
     }
@@ -48,6 +50,10 @@ export class InvoiceRegularNoteComponent implements OnInit {
     if (this.selectedNote) this.changeRegularNote = true;
   }
   onUpdateRegularNote() {
+    if (this.selectedNote.title.length == 0) {
+      this.validNote = false;
+      return;
+    };
     this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.selectedNote.id).subscribe(data => {
       this.changeRegularNote = false;
       this.billableStateService.setRegulatNote({
@@ -87,13 +93,14 @@ export class InvoiceRegularNoteComponent implements OnInit {
   }
   onSelectNotes(data) {
     this.selectedNote = data;
+    this.changeRegularNote = false;
     if (this.selectedNote) {
+      this.validNote = true;
       let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null, null);
       this.onUpdateInvoiceData.emit(request);
       this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.line1;
       this.billableStateService.setRegulatNote(this.selectedNote);
     } else {
-      this.changeRegularNote = false;
       this.elRef.nativeElement.querySelector("#description-regular-note").value = "";
       this.billableStateService.setRegulatNote(null);
     }

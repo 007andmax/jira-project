@@ -35,11 +35,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   showSecretCode: boolean = false;
   isEditSecretKey: boolean = false;
   isGetSecretCode: boolean = false;
+  showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
-  showPassword: boolean = false;
   timeCount: number = 0;
   intervalContainer: any;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
@@ -107,6 +107,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       })
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       this.opened = true;
+      this.showSecretCode = false;
+      this.isEditSecretKey = false;
+      this.isGetSecretCode = false;
+      this.showPassword = false;
+      if (this.intervalContainer) clearInterval(this.intervalContainer);
     });
     this.sub.add(onEditForm);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
