@@ -186,27 +186,6 @@ html {
     overflow: hidden;
   }
 }
-.checkbox-container {
-  position: relative;
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  cursor: pointer;
-  .checkbox-mark {
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 16px;
-    height: 16px;
-    background: url("./assets/img/icons/checkbox-ng2.png");
-  }
-  input {
-    opacity: 0;
-  }
-  input:checked ~ .checkbox-mark {
-    background-position: 16px 0;
-  }
-}
 .ng-sidebar {
   z-index: 99 !important;
 }
@@ -248,11 +227,6 @@ html {
         width: 1px;
         height: 36px;
         background: $white;
-      }
-      .report-caret-icon-white {
-        position: absolute;
-        top: calc(50% - 8.5px);
-        left: calc(50% - 7px);
       }
     }
   }
@@ -674,7 +648,7 @@ documents-edit-info {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("./assets/img/icons/tag-ng2.png");
+          background: url("./assets/img/icons/tag.svg");
         }
         input {
           height: 42px;
@@ -768,7 +742,7 @@ documents-edit-info {
   }
   .service-tab-content,
   .product-tab-content {
-    .icn-delete {
+    .icon__remove {
       top: 43px;
       right: -18px;
       cursor: pointer;
@@ -830,7 +804,7 @@ documents-edit-info {
       margin-top: -1px;
       margin-right: 4px;
     }
-    .icn-remove {
+    .icon__close {
       transform: translateX(2px);
     }
   }
@@ -907,20 +881,6 @@ documents-edit-info {
       }
     }
   }
-  &.de-archive {
-    h3 {
-      &:after {
-        background: url("assets/img/icons/restore-company.png") no-repeat;
-        left: -53px;
-        top: 14px;
-        width: 16px;
-        height: 19px;
-      }
-      &:before {
-        background: $background;
-      }
-    }
-  }
 }
 .archive-modal {
   @media (max-width: 767px) {
@@ -974,11 +934,11 @@ documents-edit-info {
     &:before {
       content: "";
       position: absolute;
-      top: -1px;
-      right: -6px;
-      width: 20px;
-      height: 20px;
-      background: url("assets/img/icons/close-16.png") no-repeat;
+      top: 2px;
+      right: -3px;
+      width: 14px;
+      height: 14px;
+      background: url("/assets/img/icons/close-light-gray.svg") no-repeat;
       background-size: contain;
     }
   }
@@ -1235,7 +1195,7 @@ app-quotes-item {
   &--search {
     display: flex;
     align-items: center;
-    .email-ng2 {
+    .icon__email-blue {
       margin-right: 40px;
       cursor: pointer;
     }
@@ -1399,7 +1359,7 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("/html/assets/img/icons/search.png");
+          background: url("/html/assets/img/icons/search.svg");
           left: 26px;
           top: calc(50% - 8px);
           background-size: contain;
@@ -1468,45 +1428,6 @@ app-quotes-item {
   font-size: 20px;
   margin: 0;
 }
-//.products-content__header--search,
-//.new-users-content__header--search,
-//.password-content__header--search {
-//  display: flex;
-//  position: relative;
-//}
-//.products-content__header--search:before,
-//.new-users-content__header--search:before,
-//.password-content__header--search:before {
-//  position: absolute;
-//  content: '';
-//  width: 20px;
-//  height: 20px;
-//  background: url(assets/img/icons/search.png);
-//  left: 10px;
-//  top: calc(50% - 10px);
-//}
-//.products-content__header--search input,
-//.new-users-content__header--search input,
-//.password-content__header--search input {
-//  width: 300px;
-//  margin-right: 16px;
-//  border: none;
-//  padding: 8px 8px 8px 40px;
-//  border-radius: 4px;
-//  background: $white;
-//  font-size: 13px;
-//  outline: none;
-//}
-//.password-content__header--search input {
-//  margin-right: 0;
-//  padding: 6px 8px 6px 40px;
-//}
-//.products-content__header--search input::placeholder,
-//.password-content__header--search::placeholder,
-//.new-users-content__header--search input::placeholder {
-//  color: $gray-600;
-//  opacity: 1;
-//}
 .plus-btn {
   display: flex;
   align-items: center;
@@ -1708,10 +1629,10 @@ app-quotes-item {
       background-color: $white;
     }
     .report-caret-icon {
-      width: 8px;
-      height: 5px;
+      width: 16px;
+      height: 16px;
       background-size: cover;
-      right: 8px;
+      right: 7px;
 
       @media (max-width: 767px) {
         right: 15px;
@@ -2034,7 +1955,7 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url("/assets/img/icons/tag-ng2.png");
+          background: url("/assets/img/icons/tag.svg");
 
           @media (max-width: 767px) {
             top: 11px;
@@ -2106,11 +2027,6 @@ app-quotes-item {
 
       @media only screen and (max-width: 768px) {
         flex: 0 0 30px;
-      }
-
-      .checkbox-container {
-        margin-bottom: 0;
-        margin-top: 0;
       }
     }
     &__name {
@@ -2363,9 +2279,6 @@ app-quotes-item {
       .with-checkbox {
         display: flex;
         align-items: center;
-        .checkbox-container {
-          margin-right: 15px;
-        }
       }
       [class*="col-md-"],
       [class*="col-md-"] p {
@@ -2376,12 +2289,6 @@ app-quotes-item {
     }
   }
   &__list--item {
-    .home-phone-icn,
-    .fax-icn,
-    .mobile-phone-icn,
-    .office-phone-icn {
-      margin-right: 5px;
-    }
     [class*="col-md-"] {
       min-height: 40px;
       display: flex;
@@ -2487,23 +2394,23 @@ app-quotes-item {
         .tab-product,
         .tab-service {
           position: static;
-          background: url("./assets/img/icons/products-tab-ng2.png");
+          background: url("./assets/img/icons/products.svg");
           background-size: contain;
           margin-right: 8px;
         }
         .tab-service {
-          background: url("./assets/img/icons/service-tab-ng2.png");
+          background: url("./assets/img/icons/service.svg");
           background-size: contain;
         }
         &.active-tab {
           color: $primary-1;
           border-bottom: 2px solid $primary-1;
           .tab-product {
-            background: url("./assets/img/icons/products-tab-active-ng2.png");
+            background: url("./assets/img/icons/products-blue.svg");
             background-size: contain;
           }
           .tab-service {
-            background: url("./assets/img/icons/service-tab-active-ng2.png");
+            background: url("./assets/img/icons/service-blue.svg");
             background-size: contain;
           }
         }
@@ -2526,7 +2433,7 @@ app-quotes-item {
         height: 16px;
         left: 28px;
         top: 43px;
-        background: url("./assets/img/icons/tag-ng2.png");
+        background: url("./assets/img/icons/tag.svg");
       }
     }
     .checkbox-wrapper {
@@ -2558,16 +2465,15 @@ app-quotes-item {
       .save-template {
         position: relative;
         font-weight: 600;
-        font-weight: 600;
         font-size: 12px;
         color: $gray-800;
         cursor: pointer;
         &:before {
           content: "";
           position: absolute;
-          background: url("./assets/img/icons/adduser.png");
+          background: url("./assets/img/icons/upload-photo.svg") no-repeat center / cover;
           left: -40px;
-          // top: -5px;
+          top: 0;
           width: 32px;
           height: 32px;
         }
@@ -2588,19 +2494,6 @@ app-quotes-item {
       &__content {
         display: flex;
         padding: 25px;
-        .checkbox-container {
-          color: $gray-800;
-          font-size: 13px;
-          padding-left: 22px;
-          display: flex;
-          align-items: center;
-          &:not(:last-child) {
-            margin-bottom: 16px;
-          }
-          input {
-            height: 0 !important;
-          }
-        }
       }
       ngb-datepicker {
         border: none;
@@ -2787,10 +2680,10 @@ app-quotes-item {
     &:after {
       position: absolute;
       content: "";
-      background: url("./assets/img/icons/help.png");
+      background: url("./assets/img/icons/help.svg") no-repeat center / contain;
       height: 16px;
       width: 16px;
-      right: -20px;
+      right: -22px;
       top: 50%;
       transform: translateY(-50%);
     }
@@ -2839,10 +2732,6 @@ app-quotes-item {
       margin: 0 !important;
       padding: 0 !important;
     }
-  }
-  .upload-logo {
-    position: static;
-    margin-right: 20px;
   }
   .logo-upload {
     img {
@@ -3186,11 +3075,6 @@ app-quotes-item {
   .new-link {
     margin: 0 !important;
     padding: 0 !important;
-  }
-
-  .upload-logo {
-    position: static;
-    margin-right: 20px;
   }
 }
 .recurring-tickets-content__modal,
@@ -3538,30 +3422,6 @@ ngb-typeahead-window {
   border: 0.1rem solid $gray-800;
   border-top-color: $gray-600;
 }
-
-// .toast-container .toast-success {
-//   top: 105px;
-//   width: auto;
-//   border-radius: 6px;
-//   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
-//   background: url('/ng2/assets/img/success-tick.png') #2ec866 no-repeat left
-//     16px center;
-//   background-color: $success;
-//   padding: 8px 15px 8px 44px;
-//   font-size: 12px;
-//   font-weight: normal;
-//   font-style: normal;
-//   font-stretch: normal;
-//   line-height: 1.33;
-//   letter-spacing: normal;
-//   color: $white;
-//   margin: 0 auto;
-//   left: 265px;
-//   right: 0;
-//   max-width: 236px;
-//   position: fixed;
-//   z-index: 99999999999;
-// }
 
 .invalid-feedback {
   margin-top: 0.25rem;
@@ -4444,21 +4304,6 @@ app-ticket-edit-aside {
   transform: translate(-14px, 30px);
   cursor: pointer;
   z-index: 1;
-}
-
-app-add-assigned-user {
-  .mat-chip-remove {
-    opacity: 1 !important;
-  }
-
-  .mat-chip-remove:before {
-    background: url("./assets/img/icons/tag-user-close.svg") no-repeat !important;
-    filter: brightness(1) !important;
-    width: 16px !important;
-    top: 1px !important;
-    height: 16px !important;
-    right: 0px !important;
-  }
 }
 
 .ticket-edit-aside {

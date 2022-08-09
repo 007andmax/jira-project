@@ -72,13 +72,13 @@
                                 class="col-md-1"
                             >
                                 <strong>
-                                    <label class="control checkbox hide-in-report">
-                                        <input
-                                            type="checkbox"
-                                            [(ngModel)]="generalCheckbox"
-                                            (change)="changeGeneralCheckbox()"
-                                        >
-                                        <span class="control-indicator"></span>
+                                    <label class="qt-checkbox">
+                                      <input
+                                        type="checkbox"
+                                        [(ngModel)]="generalCheckbox"
+                                        (change)="changeGeneralCheckbox()"
+                                      >
+                                      <span></span>
                                     </label>
                                 </strong>
                             </div>
@@ -159,13 +159,13 @@
                                         style="width: 2%;padding: 0 5px;"
                                         class="col-md-1"
                                     >
-                                        <label class="control checkbox ">
-                                            <input
-                                                type="checkbox"
-                                                [(ngModel)]="product.isChecked"
-                                                (change)="selectLine()"
-                                            >
-                                            <span class="control-indicator"></span>
+                                        <label class="qt-checkbox">
+                                          <input
+                                            type="checkbox"
+                                            [(ngModel)]="product.isChecked"
+                                            (change)="selectLine()"
+                                          >
+                                          <span></span>
                                         </label>
                                     </div>
                                     <div class="col-md-1">{{product.date}}</div>

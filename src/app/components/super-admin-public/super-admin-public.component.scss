@@ -179,7 +179,7 @@
     position: absolute;
     width: 3px;
     height: 3px;
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: $primary-1;
     left: 2px;
     top: 9px;
@@ -187,10 +187,10 @@
 }
 
 .icon__category-closed {
-  height: 11.67px;
-  width: 7.4px;
+  height: 8px;
+  width: 8px;
   flex-shrink: 0;
-  margin-top: 4px;
+  margin-top: 7px;
   &.toggle-category {
     transform: rotate(90deg) translate(0px, -2px);
   }

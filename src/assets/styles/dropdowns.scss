@@ -76,8 +76,8 @@
     cursor: pointer;
   }
   .report-caret-icon {
-    top: calc(50% - 3px) !important;
-    right: 12px;
+    top: calc(50% - 8px) !important;
+    right: 10px;
   }
   .icn-remove-old {
     top: calc(50% - 4px) !important;
@@ -157,7 +157,7 @@
     top: 11px;
     cursor: pointer;
   }
-  .icn-calendar-light {
+  .icon__calendar {
     pointer-events: none;
   }
   .dropdown-menu {
@@ -303,19 +303,12 @@
             font-weight: 400;
             padding: 8px 16px !important;
           }
-          .report-caret-icon {
-            position: absolute;
-            right: 16px;
-            top: calc(50% - 3px) !important;
-            transform: rotate(180deg);
-            background: url("/assets/img/report-caret-right.png");
-          }
           &.collapsed {
             background-color: $white;
             color: $primary-2;
             .report-caret-icon {
               transform: rotate(0);
-              background: url("/assets/img/report-caret.png");
+              background: url("/assets/img/icons/down-arrow.svg") no-repeat center / cover;
             }
           }
           &:hover {
@@ -325,10 +318,6 @@
             @media (max-width: 767px) {
               background-color: $white;
               color: $primary-2;
-            }
-
-            .report-caret-icon {
-              background: url("/assets/img/report-caret-right.png");
             }
           }
         }
@@ -422,32 +411,9 @@
     }
     .duration-container-content {
       display: flex;
-      .arrow-top,
-      .arrow-bottom {
-        display: none;
-      }
       .duration-container-values {
         position: relative;
         width: 50%;
-        &.has-arrows {
-          .arrow-top,
-          .arrow-bottom {
-            display: block;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 16px;
-            width: 16px;
-          }
-          .arrow-top {
-            top: 7px;
-            background: url("/assets/img/icons/scroll-up.png");
-          }
-          .arrow-bottom {
-            bottom: 11px;
-            background: url("/assets/img/icons/scroll-down.png");
-          }
-        }
       }
       .duration-container-values-hours,
       .duration-container-values-minutes {

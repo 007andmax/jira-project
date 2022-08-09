@@ -93,27 +93,6 @@
         flex-flow: row wrap;
     }
 
-    .checkbox-container {
-        margin-bottom: 6px;
-        span {
-            position: absolute;
-            left: 0;
-            top: 2px;
-            width: 16px;
-            height: 16px;
-            border: 1px solid $gray-500;
-            background: $white;
-            min-width: 16px;
-            border-radius: 2px;
-            margin: 0;
-            display: block;
-        }
-        input:checked ~ span {
-            background-image: url(/assets/img/icons/checkbox-on.svg);
-            border: none;
-        }
-    }
-
     .checkbox-wrapper .with-checkbox label {
         margin-right: 8px;
     }
@@ -229,7 +208,7 @@
     background-size: 24px;
     width: 47px;
 }
-.icn-help {
+.icon__help {
     margin: 0px 0px 0px 4px;
     cursor: pointer;
 }

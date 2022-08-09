@@ -66,7 +66,7 @@
                                         *ngIf="techUser.avatar === null"
                                     >
                                         <img
-                                            src="html/assets/img/avtar-56@2x.png"
+                                            src="html/assets/img/icons/upload-photo.svg"
                                             alt="user"
                                         >
                                     </span>
@@ -168,7 +168,7 @@
                                     (click)="changePasswordRequest(techUser.id)"
                                 >
                                     <img
-                                        src="/html/assets/img/reset-password.svg"
+                                        src="/html/assets/img/icons/reset-password.svg"
                                         alt="Edit"
                                     >
                                 </a>
@@ -180,13 +180,10 @@
                                     (click)="resendWelcomeEmail(techUser.primaryEmail)"
                                 >
                                     <img
-                                        src="/html/assets/img/email-resend.svg"
+                                        src="/html/assets/img/icons/email-resend.svg"
                                         alt="Edit"
                                     >
                                 </a>
-                                <!-- <p (click)="resendWelcomeEmail(techUser.primaryEmail)">
-                    <img src="/assets/img/reset-password.svg" alt="Edit" />
-                  </p> -->
                                 <a
                                     href="javascript:;"
                                     data-tooltip="Edit"
@@ -195,7 +192,7 @@
                                     (click)="editTechUser(techUser)"
                                 >
                                     <img
-                                        src="/html/assets/img/icons/edit.svg"
+                                        src="/html/assets/img/icons/edit-12.svg"
                                         alt="Edit"
                                     >
                                 </a>
@@ -380,7 +377,7 @@
         <div class="dp-area">
             <span class="dp">
                 <img
-                    src="/html/assets/img/upload-photo.svg"
+                    src="/html/assets/img/icons/upload-photo.svg"
                     alt="user"
                     *ngIf="!croppedImage"
                 >
@@ -608,7 +605,7 @@
         *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified"
     >
         <img
-            src="/html/assets/img/warning.svg"
+            src="/html/assets/img/icons/warning.svg"
             alt="warning"
         >
         <p>
@@ -650,7 +647,7 @@
                     *ngIf="selectedTechUser.avatar === null"
                 >
                     <img
-                        src="html/assets/img/avtar-56@2x.png"
+                        src="html/assets/img/icons/upload-photo.svg"
                         alt="user"
                     >
                 </span>

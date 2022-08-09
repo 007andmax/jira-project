@@ -239,7 +239,7 @@
                 border-color: $background;
             }
             &.link {
-                background-image: url("/assets/img/link.svg");
+                background-image: url("/assets/img/icons/link-gray.svg");
                 background-repeat: no-repeat;
                 background-position: right 13px center;
                 padding-right: 25px;
@@ -266,7 +266,7 @@
         }
         select.cmn-select {
             @include app-none();
-            background: url("/assets/img/selct-arrow.svg") no-repeat right 7px center;
+            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 7px center;
             padding-right: 25px;
             option {
                 padding: 10px;
@@ -815,7 +815,7 @@
                             .dropdown {
                                 width: 90px;
                                 padding-left: 22px;
-                                background: url("../../../assets/img/cmp-calander.svg") no-repeat left top;
+                                background: url("../../../assets/img/icons/calendar.svg") no-repeat left top;
                                 min-height: 16px;
                                 .dropdown-toggle {
                                     margin-top: 2px;
@@ -1846,7 +1846,7 @@
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
                                                     height: auto;
-                                                    background: url("/assets/img/selct-arrow.svg") no-repeat right 15px
+                                                    background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px
                                                         center;
                                                     padding-right: 30px;
                                                     -webkit-appearance: none;
@@ -2128,7 +2128,7 @@ app-company-dash-tags {
             content: "";
             width: 16px;
             height: 16px;
-            background: url("./../../../assets/img/icons/tag-ng2.png");
+            background: url("./../../../assets/img/icons/tag.svg");
         }
         input {
             margin: 0;

@@ -69,84 +69,84 @@
             *ngIf="activeTab === 'daily'"
         >
             <div class="col-md-6 p-0">
-                <label class="checkbox-container">
-                    Monday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.MON"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.MON"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Monday</div>
                 </label>
-                <label class="checkbox-container">
-                    Tuesday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.TUE"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.TUE"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Tuesday</div>
                 </label>
-                <label class="checkbox-container">
-                    Wednesday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.WED"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.WED"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Wednesday</div>
                 </label>
-                <label class="checkbox-container">
-                    Thursday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.THU"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.THU"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Thursday</div>
                 </label>
             </div>
             <div class="col-md-6 p-0">
-                <label class="checkbox-container">
-                    Friday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.FRI"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.FRI"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Friday</div>
                 </label>
-                <label class="checkbox-container">
-                    Saturday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.SAT"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.SAT"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Saturday</div>
                 </label>
-                <label class="checkbox-container">
-                    Sunday
-                    <input
-                        type="checkbox"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="regenerateCron()"
-                        [(ngModel)]="state.daily.SUN"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox">
+                  <input
+                    type="checkbox"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="regenerateCron()"
+                    [(ngModel)]="state.daily.SUN"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Sunday</div>
                 </label>
             </div>
         </div>
@@ -161,84 +161,84 @@
             *ngIf="activeTab === 'weekly'"
         >
             <div class="col-md-6 p-0">
-                <label class="checkbox-container">
-                    Monday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('MON')"
-                        [checked]="state.weekly.MON"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('MON')"
+                    [checked]="state.weekly.MON"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Monday</div>
                 </label>
-                <label class="checkbox-container">
-                    Tuesday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('TUE')"
-                        [checked]="state.weekly.TUE"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('TUE')"
+                    [checked]="state.weekly.TUE"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Tuesday</div>
                 </label>
-                <label class="checkbox-container">
-                    Wednesday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('WED')"
-                        [checked]="state.weekly.WED"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('WED')"
+                    [checked]="state.weekly.WED"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Wednesday</div>
                 </label>
-                <label class="checkbox-container">
-                    Thursday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('THU')"
-                        [checked]="state.weekly.THU"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('THU')"
+                    [checked]="state.weekly.THU"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Thursday</div>
                 </label>
             </div>
             <div class="col-md-6 p-0">
-                <label class="checkbox-container">
-                    Friday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('FRI')"
-                        [checked]="state.weekly.FRI"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('FRI')"
+                    [checked]="state.weekly.FRI"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Friday</div>
                 </label>
-                <label class="checkbox-container">
-                    Saturday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('SAT')"
-                        [checked]="state.weekly.SAT"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox qt-mb-16">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('SAT')"
+                    [checked]="state.weekly.SAT"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Saturday</div>
                 </label>
-                <label class="checkbox-container">
-                    Sunday
-                    <input
-                        type="radio"
-                        [disabled]="isActiveTabMonthly()"
-                        (change)="setWeekly('SUN')"
-                        [checked]="state.weekly.SUN"
-                        [ngClass]="options.formCheckboxClass"
-                    >
-                    <span class="checkbox-mark"></span>
+                <label class="qt-checkbox">
+                  <input
+                    type="radio"
+                    [disabled]="isActiveTabMonthly()"
+                    (change)="setWeekly('SUN')"
+                    [checked]="state.weekly.SUN"
+                    [ngClass]="options.formCheckboxClass"
+                  >
+                  <span></span>
+                  <div class="qt-ml-8">Sunday</div>
                 </label>
             </div>
         </div>

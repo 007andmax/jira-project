@@ -290,7 +290,7 @@
           content: "";
           width: 16px;
           height: 16px;
-          background: url("./assets/img/icons/tag-ng2.png");
+          background: url("./assets/img/icons/tag.svg");
         }
         input {
           height: 38px !important;
@@ -372,7 +372,7 @@
       .qt-input-search {
         display: block;
         &::before {
-          background-image: url(/assets/img/icons/search.png);
+          background-image: url(/assets/img/icons/search.svg);
         }
       }
     }

@@ -51,7 +51,7 @@ body .left-panel-full {
   border-color: $success;
 }
 .icn-remove-old {
-  background-image: url("/assets/img/icons/close-10.png");
+  background-image: url("/assets/img/icons/close.svg");
   background-position: center;
   right: 12px;
   position: absolute;
@@ -216,14 +216,6 @@ fieldset[disabled] .form-control {
   font-weight: 400;
   margin: 0;
 }
-
-.checkbox-container {
-  position: relative;
-  min-width: 22px;
-  height: 22px;
-  margin: 0;
-  cursor: pointer;
-}
 a:hover,
 a:focus {
   color: inherit;
@@ -236,8 +228,7 @@ a:focus {
 .icn-xs,
 .icn-sm,
 .icn-md,
-.icn-lg,
-.control-indicator {
+.icn-lg {
   background-repeat: no-repeat;
   display: inline-block;
   margin: auto;
@@ -467,38 +458,6 @@ label {
   -ms-user-select: none;
   user-select: none;
 }
-.checkbox .control-indicator {
-  border-radius: 2px;
-}
-.control-indicator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  font-size: 65%;
-  color: $white;
-  text-align: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: $white;
-}
-.checkbox .control-indicator {
-  position: absolute;
-  left: 0;
-  //top: 2px;
-  top: 0;
-  width: 16px;
-  height: 16px;
-  background: url("/assets/img/icons/checkbox-ng2.png");
-}
-.control input:checked ~ .control-indicator {
-  background-position: 16px 0;
-}
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
@@ -521,9 +480,6 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
-}
-.checkbox .control-indicator {
-  border-radius: 3px;
 }
 /* END Custom Checkbox */
 
@@ -614,13 +570,10 @@ textarea {
     min-height: 30px;
     max-height: 50px;
     height: auto;
-    align-items: flex-start;
+    align-items: center;
     font-size: 13px;
     display: flex;
-
-    span {
-      margin-right: 8px;
-    }
+    padding: 0;
   }
 
   i {
@@ -1054,6 +1007,9 @@ h6,
 }
 .company-report .content-product-list-ticket .control.checkbox {
   margin-top: 20px;
+}
+.company-report .content-product-list-ticket .qt-checkbox {
+  margin-top: 18px;
 }
 .company-report [class*="col-md-"] {
   padding: 12px 6px;

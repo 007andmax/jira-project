@@ -111,7 +111,7 @@ body {
                             border: solid 1px $gray-500;
                             margin: 0 -1px;
                             outline: none !important;
-                            background: url("/assets/img/icons/selct-arrow.svg") no-repeat right 10px center;
+                            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 10px center;
                             width: 90px;
                             &:first-child {
                                 @include border-radius(4px 0 0 4px);
@@ -318,7 +318,7 @@ body {
             border-color: $background;
         }
         &.link {
-            background-image: url("/assets/img/link.svg");
+            background-image: url("/assets/img/icons/link-gray.svg");
             background-repeat: no-repeat;
             background-position: right 13px center;
             padding-right: 25px;
@@ -355,7 +355,7 @@ body {
     }
     select.cmn-select {
         @include app-none();
-        background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
+        background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px center;
         padding-right: 30px;
         option {
             padding: 10px;
@@ -509,7 +509,7 @@ body {
                 border-color: $background;
             }
             &.link {
-                background-image: url("/assets/img/link.svg");
+                background-image: url("/assets/img/icons/link-gray.svg");
                 background-repeat: no-repeat;
                 background-position: right 13px center;
                 padding-right: 25px;
@@ -536,7 +536,7 @@ body {
         }
         select.cmn-select {
             @include app-none();
-            background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
+            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px center;
             padding-right: 30px;
             option {
                 padding: 10px;
@@ -587,7 +587,7 @@ body {
                             vertical-align: middle;
                             height: 16px;
                             width: 16px;
-                            background: url("/assets/img/sorting.svg") no-repeat center;
+                            background: url("/assets/img/icons/sorting.svg") no-repeat center;
                             background-size: 16px auto;
                             margin-left: 5px;
                             margin-top: -2px;
@@ -1055,7 +1055,7 @@ body {
                     width: 240px;
                     .form-input {
                         padding: 7px 14px 7px 34px;
-                        background: url("/assets/img/search-ico.svg") no-repeat 12px center;
+                        background: url("/assets/img/icons/search.svg") no-repeat 12px center;
                         font-size: 12px;
                         line-height: 1.67;
                     }
@@ -1701,12 +1701,12 @@ body {
             pointer-events: none;
             &:checked + label {
                 &::before {
-                    background: url("/assets/img/checkbox-on.svg") no-repeat center;
+                    background: url("/assets/img/icons/checkbox-on.svg") no-repeat center;
                 }
             }
             &:disabled + label {
                 &::before {
-                    background: url("/assets/img/check-disable.svg") no-repeat center;
+                    background: url("/assets/img/icons/check-disable.svg") no-repeat center;
                     cursor: not-allowed;
                 }
             }
@@ -1729,7 +1729,7 @@ body {
                 height: 16px;
                 width: 16px;
                 content: "";
-                background: url("/assets/img/checkbox.svg") no-repeat center;
+                background: url("/assets/img/icons/checkbox.svg") no-repeat center;
             }
             br {
                 display: none;
@@ -2133,7 +2133,7 @@ body {
 
     .ngx-dropdown-container button .nsdicon-angle-down {
         font-size: 0 !important;
-        background: url(/assets/img/selct-arrow.svg) no-repeat center !important;
+        background: url(/assets/img/icons/down-arrow.svg) no-repeat center !important;
         height: 8px;
         width: 10px;
         display: inline-block;
@@ -2247,7 +2247,7 @@ body {
 }
 .ng7 .ng-select .ng-arrow-wrapper .ng-arrow {
     border: none;
-    background: url("/assets/img/filter-dropdown-down.svg") no-repeat center;
+    background: url("/assets/img/icons/filter-dropdown.svg") no-repeat center;
     width: 11px;
     height: 11px;
     background-size: 11px auto;
@@ -2481,15 +2481,6 @@ body {
     }
 }
 @media only screen and (max-width: 768px) {
-    .ng7 .page-insider .heading .back-menu {
-        height: 25px;
-        width: 25px;
-        background: url("/assets/img/back.svg") no-repeat center;
-        display: inline-block !important;
-        vertical-align: middle;
-        font-size: 0;
-        margin-right: 15px;
-    }
     .ng7 .mobile-top-bar {
         display: none;
     }

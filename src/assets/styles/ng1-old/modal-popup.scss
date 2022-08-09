@@ -126,9 +126,6 @@
   font-size: 13px;
   padding-left: 25px;
 }
-.add-tax-dropdown label .control-indicator {
-  top: -1px;
-}
 .add-category-lp-dropdown-btns .btn-default  {
   background-color: $background !important;
   border: 1px solid $gray-500;
@@ -223,17 +220,6 @@
   border: none;
   background-color: transparent;
 }
-.new-companies-content__modal .google-plus:before  {
-  position: absolute;
-  content: '';
-  background-image: url("/assets/img/icons/google-plus.png");
-  width: 20px;
-  height: 13px;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
 .tab-btns {
   font-size: 0;
 }
@@ -324,10 +310,6 @@
 }
 .location {
   position: relative;
-}
-.new-companies-content__modal .google-plus:before {
-  right: 25px;
-  top: 45px;
 }
 .company-content .avatar-create {
   margin: 0;

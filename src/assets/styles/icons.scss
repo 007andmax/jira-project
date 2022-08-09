@@ -17,133 +17,21 @@
   height: 16px;
   display: block;
 }
-
-.icn-user {
-  background: url("/assets/img/user-icn.png");
-}
-
-.icn-help {
-  background: url("/assets/img/icons/help-12.svg");
-}
-
-.icn-device {
-  background: url("/assets/img/device-icn.png");
-}
-
-.icn-search-light {
-  background: url("/assets/img/search-light.png");
-}
-
-.icn-calendar-light {
-  background: url("/assets/img/calendar-light.png");
-}
-
 .icn-attach {
-  background: url("/assets/img/attachment-blue.svg");
+  background: url("/assets/img/icons/attachment-blue.svg");
 }
-
-.icn-tags {
-  background: url("/assets/img/icons/tag-ng2.png");
-}
-.icn-delete {
-  background-image: url(/assets/img/icons/icn-remove.png) !important;
-  width: 16px;
-  height: 17px;
-  display: block;
-}
-
-.icn-remove {
-  background-image: url("/assets/img/icons/close-16.png");
-}
-.icn-report-caret {
-  background-image: url("/assets/img/icons/report-caret.png");
-}
-
-.email-ng2 {
-  background: url("/assets/img/icons/email-ng2.png");
-}
-
-.archive-blue-ng2 {
-  background: url("/assets/img/icons/archive-blue-ng2.png");
-}
-
 .export-ng2 {
-  background: url("/assets/img/icons/export-ng2.png");
-}
-
-.import-ng2 {
-  background: url("/assets/img/icons/import-ng2.png");
-}
-
-.restore-ng2 {
-  background: url("/assets/img/icons/restore-company.png");
-}
-.restore-company {
-  background: url("/assets/img/icons/restore-company.svg");
-}
-
-.upload-logo {
-  background: url("/assets/img/icons/upload-logo.png");
-}
-
-.more-vertical-ng2 {
-  background: url("/assets/img/icons/more-vertical-ng2.png") no-repeat;
-}
-
-.edit-grey-ng2 {
-  background: url("/assets/img/icons/edit-grey-ng2.png");
-}
-.edit-grey {
-  background-image: url("/assets/img/icons/edit-grey-ng2.png");
+  background: url("/assets/img/icons/export-blue.svg");
 }
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
 }
-
-.send-grey-ng2 {
-  background: url("/assets/img/icons/send-grey-ng2.png");
-}
-
-.email-grey-ng2 {
-  background: url("/assets/img/icons/email-grey-ng2.png");
-}
-
-.archive-grey-ng2 {
-  background: url("/assets/img/icons/archive-grey-ng2.png");
-}
-
-.history-ng2 {
-  background: url("/assets/img/icons/history.svg") no-repeat;
-  background-size: cover;
-}
-
-.archive-red-ng2 {
-  background: url("/assets/img/icons/archive-red-ng2.png") no-repeat;
-  background-size: cover;
-}
-
 .no-valid-label {
-  background: url("/assets/img/icons/update-label.png") no-repeat;
+  background: url("/assets/img/icons/update.svg") no-repeat;
   display: block;
   width: 44px;
   height: 20px;
 }
-.home-phone-icn {
-  background: url("/assets/img/icons/home-phone.png");
-}
-
-.fax-icn {
-  background: url("/assets/img/icons/fax.png");
-}
-
-.mobile-phone-icn {
-  background: url("/assets/img/icons/mobile-phone.png");
-}
-
-.office-phone-icn {
-  background: url("/assets/img/icons/office-phone.png");
-}
-
 .add-user {
   background: url("/assets/img/icons/add-users.svg");
 }
@@ -172,9 +60,9 @@
   }
   &__close {
     background-image: url("/assets/img/icons/close.svg");
-  }
-  &__close-mobile {
-    background-image: url("/assets/img/icons/close-mobile.svg");
+    &--light-gray {
+      background-image: url("/assets/img/icons/close-light-gray.svg");
+    }
   }
   &__menu {
     background-image: url("/assets/img/icons/menu.svg");
@@ -197,9 +85,6 @@
     background-color: $gray-600;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
-  }
-  &__remove {
-    background-image: url("/assets/img/icons/remove.svg");
   }
   &__remove-disabled {
     background-color: $gray-600;
@@ -226,14 +111,8 @@
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
   }
-  &__preview-edit {
-    background-image: url("/assets/img/icons/preview-edit.svg");
-  }
   &__help-center {
     background-image: url("/assets/img/icons/help-center.svg");
-  }
-  &__annoucements-active {
-    background-image: url("/assets/img/icons/annoucements-active.svg");
   }
   &__road-map {
     background-image: url("/assets/img/icons/road-map.svg");
@@ -252,16 +131,6 @@
     background-color: $gray-700;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
-  }
-  &__drag {
-    background-color: $gray-600;
-    -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
-    mask-image: url("/assets/img/icons/support-page-drag.svg");
-  }
-  &__remove-category {
-    background-color: $gray-700;
-    -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
-    mask-image: url("/assets/img/icons/support-page-remove-category.svg");
   }
   &__category-more {
     background-color: $gray-600;
@@ -291,17 +160,11 @@
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
-  &__products-new {
-    background-image: url("/assets/img/icons/products-new.svg");
-  }
   &__service {
     background-image: url("/assets/img/icons/service.svg");
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
-  }
-  &__service-new {
-    background-image: url("/assets/img/icons/service-new.svg");
   }
   &__quick-support {
     background-image: url("/assets/img/icons/quick-support-gray.svg");
@@ -319,10 +182,7 @@
     background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
   &__attach-blue {
-    background-image: url("/assets/img/attachment-blue.svg");
-  }
-  &__filters {
-    background-image: url("/assets/img/icons/filters.svg");
+    background-image: url("/assets/img/icons/attachment-blue.svg");
   }
   &__collapse-arrow {
     background-image: url("/assets/img/icons/collapse-arrow.svg");
@@ -381,26 +241,14 @@
   &__export-dark {
     background-image: url("/assets/img/icons/export-dark.svg");
   }
-  &__export-blue {
-    background-image: url("/assets/img/icons/export-blue.svg");
-  }
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
-  }
-  &__close {
-    background-image: url("/assets/img/icons/tag-close.svg");
-  }
-  &__document-category-subscribe {
-    background-image: url("/assets/img/icons/subscribe-document-category.svg");
   }
   &__close-white {
     background-image: url("/assets/img/icons/close-white.svg");
   }
   &__snapshot {
     background-image: url("/assets/img/icons/snapshot.svg");
-  }
-  &__more {
-    background-image: url("/assets/img/icons/more-vertical-ng2.png");
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
@@ -414,9 +262,6 @@
   &__tips {
     background-image: url("/assets/img/icons/tips.svg");
   }
-  &__invoice-check {
-    background-image: url("/assets/img/icons/invoice-check.svg");
-  }
   &__archive {
     background-image: url("/assets/img/icons/archive.svg");
   }
@@ -429,11 +274,11 @@
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
   }
-  &__manage {
-    background-image: url("/assets/img/icons/manage.svg");
+  &__edit-blue {
+    background-image: url("/assets/img/icons/edit-blue.svg");
   }
-  &__create-list {
-    background-image: url("/assets/img/icons/create-list.svg");
+  &__create-document {
+    background-image: url("/assets/img/icons/create-document.svg");
   }
   &__upload-company-logo {
     background-image: url("/assets/img/icons/upload-company-logo.svg");
@@ -442,7 +287,7 @@
     background-image: url("/assets/img/icons/view.svg");
   }
   &__hide {
-    background-image: url("/assets/img/icons/hide.svg");
+    background-image: url("/assets/img/icons/password-show.svg");
   }
   &__documents {
     background-image: url("/assets/img/icons/documents.svg");
@@ -456,25 +301,16 @@
     mask-image: url("/assets/img/icons/folder.svg");
   }
   &__calendar {
-    background-image: url("/assets/img/icons/calander.svg");
+    background-image: url("/assets/img/icons/calendar.svg");
   }
   &__user-grey {
     background-image: url("/assets/img/icons/user-grey.svg");
   }
   &__windows {
-    background-image: url("/assets/img/icons/windows.png");
-  }
-  &__linux {
-    background-image: url("/assets/img/icons/linux.png");
+    background-image: url("/assets/img/icons/window.svg");
   }
   &__move {
     background-image: url("/assets/img/icons/move.svg");
-  }
-  &__share-folder {
-    background-image: url("/assets/img/icons/share-folder.svg");
-  }
-  &__shared {
-    background-image: url("/assets/img/icons/shared.svg");
   }
   &__payment-received {
     background-image: url("/assets/img/icons/payment-received.svg");
@@ -503,8 +339,8 @@
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
   }
-  &__remove-12 {
-    background-image: url("/assets/img/icons/remove-12.svg");
+  &__remove {
+    background-image: url("/assets/img/icons/remove.svg");
   }
   &__restart {
     background-image: url("/assets/img/icons/restart.svg");
@@ -526,12 +362,6 @@
   }
   &__add-grey {
     background-image: url("/assets/img/icons/add-grey.svg");
-  }
-  &__add-task {
-    background-image: url("/assets/img/icons/add-task.svg");
-  }
-  &__calander {
-    background-image: url("/assets/img/icons/calander.svg");
   }
   &__company-address {
     background-image: url("/assets/img/icons/company-address.svg");
@@ -563,9 +393,6 @@
   &__print-blue {
     background-image: url("/assets/img/icons/print-blue.svg");
   }
-  &__email-dark {
-    background-image: url("/assets/img/icons/email-dark.svg");
-  }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
   }
@@ -578,36 +405,20 @@
   &__filter-active {
     background-image: url("/assets/img/icons/filter-active.svg");
   }
-
-  &__faster-payment {
-    background-image: url("/assets/img/icons/faster-payment.svg");
-  }
   &__email {
     background-image: url("/assets/img/icons/email.svg");
   }
-  &__check {
-    background-image: url("/assets/img/icons/check.png");
-  }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
-  }
-  &__read-on {
-    background-image: url("/assets/img/icons/read-on.svg");
-  }
-  &__invoice-email {
-    background-image: url("/assets/img/icons/invoice-email.svg");
   }
   &__get-paid {
     background-image: url("/assets/img/icons/get-paid.svg");
   }
   &__edit {
-    background-image: url("/assets/img/icons/edit.svg");
+    background-image: url("/assets/img/icons/edit-12.svg");
   }
   &__edit-gray {
     background-image: url("/assets/img/icons/edit-gray.svg");
-  }
-  &__email-dark {
-    background-image: url("/assets/img/icons/email-dark.svg");
   }
   &__expand-redactor {
     background-image: url("/assets/img/icons/expand-redactor.svg");
@@ -628,7 +439,7 @@
     background-image: url("/assets/img/icons/payment_history.svg");
   }
   &__mark-as-read {
-    background-image: url("/assets/img/icons/mark_as_read.svg");
+    background-image: url("/assets/img/icons/password-show-old.svg");
   }
   &__refund-payment {
     background-image: url("/assets/img/icons/refund-payment.svg");
@@ -655,18 +466,8 @@
   &__product-contract {
     background-image: url("/assets/img/icons/product-contract.svg");
   }
-
-  &__question-help {
-    background-image: url("/assets/img/icons/question-help.svg");
-  }
-  &__info-question {
-    background-image: url("/assets/img/icons/info-question.svg");
-  }
-  &__growth {
-    background-image: url("/assets/img/icons/growth.svg");
-  }
-  &__loss {
-    background-image: url("/assets/img/icons/loss.svg");
+  &__help {
+    background: url("/assets/img/icons/help.svg");
   }
   &__quotes {
     background-image: url("/assets/img/icons/quotes.svg");
@@ -680,17 +481,11 @@
   &__unpaid-invoice {
     background-image: url("/assets/img/icons/unpaid-invoice.svg");
   }
-  &__profile-dropdown {
-    background-image: url("/assets/img/icons/profile-dropdown.svg");
-  }
   &__message-forward {
     background-image: url("/assets/img/icons/message-forward.svg");
   }
   &__message-response {
     background-image: url("/assets/img/icons/message-response.svg");
-  }
-  &__copy-gray {
-    background-image: url("/assets/img/icons/copy-gray.svg");
   }
   &__terminate {
     background-image: url("/assets/img/icons/terminate.svg");
@@ -700,9 +495,6 @@
   }
   &__search-white {
     background-image: url("/assets/img/icons/search-white.svg");
-  }
-  &__search-gray {
-    background-image: url("/assets/img/icons/search-gray.svg");
   }
   &__templete-thumb {
     background-image: url("/assets/img/icons/templete-thumb.svg");
@@ -729,7 +521,7 @@
     background-image: url("/assets/img/icons/solved-tickets.svg");
   }
   &__no-devices-installed {
-    background-image: url("/assets/img/no-devices-installed.svg");
+    background-image: url("/assets/img/icons/no-devices-installed.svg");
   }
   &__link {
     background-image: url("/assets/img/icons/link.svg");
@@ -746,11 +538,11 @@
   &__tag-light-gray {
     background-image: url("/assets/img/icons/tag-light-gray.svg");
   }
-  &__user-light-gray {
-    background-image: url("/assets/img/icons/user-light-gray.svg");
-  }
   &__down-arrow {
     background-image: url("/assets/img/icons/down-arrow.svg");
+    &--sm {
+      background-image: url("/assets/img/icons/filter-dropdown.svg");
+    }
   }
   &__printer {
     background-image: url("/assets/img/icons/printer.svg");
@@ -772,9 +564,6 @@
   }
   &__go-to {
     background-image: url("/assets/img/icons/go-to.svg");
-  }
-  &__go-to-blue {
-    background-image: url("/assets/img/icons/go-to-blue.svg");
   }
   &__network {
     background-image: url("/assets/img/icons/network.svg");
@@ -806,11 +595,8 @@
   &__shutdown-blue {
     background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
-  &__connected-device {
-    background-image: url("/assets/img/icons/connected-device.svg");
-  }
-  &__more-vertical {
-    background-image: url("/assets/img/icons/more-vertical.svg");
+  &__more {
+    background-image: url("/assets/img/icons/more.svg");
   }
   &__arrow-right {
     background-image: url("/assets/img/icons/arrow-right.svg");
@@ -840,16 +626,10 @@
     background-image: url("/assets/img/icons/phone-gray.svg");
   }
   &__upload-avtar {
-    background-image: url("/assets/img/icons/upload-avtar.svg");
-  }
-  &__dropdown-down {
-    background-image: url("/assets/img/icons/dropdown-down.svg");
+    background-image: url("/assets/img/icons/upload-photo.svg");
   }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");
-  }
-  &__add-white {
-    background-image: url("/assets/img/icons/add-white.svg");
   }
   &__close-round {
     background-image: url("/assets/img/icons/close-round.svg");
@@ -860,10 +640,6 @@
   &__subscribe-user {
     background-image: url("/assets/img/icons/subscribe-user.svg");
   }
-  &__create-folder {
-    background-image: url("/assets/img/icons/create-folder.svg");
-  }
-
   &__key {
     background-image: url("/assets/img/icons/key.svg");
   }
@@ -873,17 +649,11 @@
   &__copy-blue {
     background-image: url("/assets/img/icons/copy-blue.svg");
   }
-  &__templete-blue {
-    background-image: url("/assets/img/icons/templete-blue.svg");
-  }
   &__link-gray {
     background-image: url("/assets/img/icons/link-gray.svg");
   }
   &__unlink {
     background-image: url("/assets/img/icons/unlink.svg");
-  }
-  &__disable {
-    background-image: url("/assets/img/icons/disable.svg");
   }
   &__clone-document {
     background-image: url("/assets/img/icons/clone-document.svg");
@@ -973,21 +743,21 @@
   }
 
   &.--high {
-    background-image: url("/assets/img/icons/priority-high.png");
+    background-image: url("/assets/img/icons/high-priority.svg");
 
     @media (max-width: 767px) {
       background: $error;
     }
   }
   &.--medium {
-    background-image: url("/assets/img/icons/priority-medium.png");
+    background-image: url("/assets/img/icons/medium-priority.svg");
 
     @media (max-width: 767px) {
       background: $warning;
     }
   }
   &.--low {
-    background-image: url("/assets/img/icons/priority-low.png");
+    background-image: url("/assets/img/icons/low-priority.svg");
 
     @media (max-width: 767px) {
       background: $success;

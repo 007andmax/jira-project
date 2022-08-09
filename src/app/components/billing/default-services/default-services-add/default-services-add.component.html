@@ -82,18 +82,18 @@
             </div>
         </div>
         <div class="qt-df qt-ai-c">
-            <label
-                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                for="email-payment"
+          <label
+            class="qt-checkbox"
+            for="email-payment"
+          >
+            <input
+              id="email-payment"
+              type="checkbox"
+              [(ngModel)]="service.billable"
             >
-                <input
-                    id="email-payment"
-                    type="checkbox"
-                    [(ngModel)]="service.billable"
-                >
-                <span></span>
-            </label>
-            <div class="qt-fs-12 qt-ml-5">Make this service billable</div>
+            <span></span>
+            <div class="qt-ml-8 qt-fw-400 qt-lh-1">Make this service billable</div>
+          </label>
         </div>
     </div>
     <div class="qt-aside-modern__footer">

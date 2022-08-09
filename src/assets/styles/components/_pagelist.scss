@@ -207,7 +207,7 @@
       content: '';
       width: 20px;
       height: 20px;
-      background-image: url('/assets/img/icons/search.png');
+      background: url('/assets/img/icons/search.svg') no-repeat center / contain;
       left: 10px;
       top: calc(50% - 10px);
       z-index: 1;
@@ -216,7 +216,7 @@
     input {
       width: 300px;
       border: none;
-      padding: 6px 8px 6px 40px;
+      padding: 6px 8px 6px 34px;
       border-radius: 4px;
       background: $white;
       font-size: 13px;
