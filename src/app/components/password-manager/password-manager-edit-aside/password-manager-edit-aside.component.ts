@@ -137,7 +137,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   onChangeAuthenticationKey() {
     console.log("onChangeAuthenticationKey");
-    this.validate.resetAuthenticationKey();
+    this.validate.resetAuthenticationKeyLen();
+    this.validate.resetAuthenticationKeyBase32();
     this.editItem.setResetAuthenticationKey(false)
   }
   clearSecretKey() {

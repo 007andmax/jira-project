@@ -9,14 +9,25 @@ export class PasswordRecordValidate {
     ssid: boolean = true;
     reIpAdress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     ipAdress: boolean = true;
-    authenticationKey: boolean = true;
+    authenticationKeyLen: boolean = true;
+    authenticationKeyBase32: boolean = true;
     constructor() { }
 
-    public getAuthenticationKey() {
-        return this.authenticationKey;
+    public checkAuthenticationKeyBase32(authenticationKey) {
+        const isBase32 = (value: string): boolean => value.length % 8 === 0 && /^[A-Z2-7]+=*$/.test(value);
+        return isBase32(authenticationKey);
     }
-    public resetAuthenticationKey() {
-        this.authenticationKey = true;
+    public getAuthenticationKeyLen() {
+        return this.authenticationKeyLen;
+    }
+    public resetAuthenticationKeyLen() {
+        this.authenticationKeyLen = true;
+    }
+    public getAuthenticationKeyBase32() {
+        return this.authenticationKeyBase32;
+    }
+    public resetAuthenticationKeyBase32() {
+        this.authenticationKeyBase32 = true;
     }
     public getIpAdress() {
         return this.ipAdress;
@@ -61,8 +72,9 @@ export class PasswordRecordValidate {
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
         if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
         if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
-        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKey = false;
-        return this.company && this.password && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKey;
+        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKeyLen = false;
+        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length >= 16 && !this.checkAuthenticationKeyBase32(record.authenticationKey)) this.authenticationKeyBase32 = false;
+        return this.company && this.password && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKeyLen && this.authenticationKeyBase32;
     }
     public isValidateEdit(record: PasswordRecord, selectedUserAndDevices) {
         if (!record.companyId) this.company = false;
@@ -70,7 +82,8 @@ export class PasswordRecordValidate {
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
         if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
         if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
-        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKey = false;
-        return this.company && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKey;
+        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length < 16) this.authenticationKeyLen = false;
+        if (record.authenticationKey && record.authenticationKey.length > 0 && record.authenticationKey.length >= 16 && !this.checkAuthenticationKeyBase32(record.authenticationKey)) this.authenticationKeyBase32 = false;
+        return this.company && this.userName && this.ssid && this.linkTo && this.ipAdress && this.authenticationKeyLen && this.authenticationKeyBase32;
     }
 }
