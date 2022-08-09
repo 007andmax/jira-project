@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { REMOVE_RECORD } from 'src/app/const/confirm';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
@@ -28,7 +30,9 @@ export class PasswordManagerTableComponent implements OnInit {
     private modalService: NgbModal,
     private passwordManagerStateService: PasswordManagerStateService,
     private passwordManagerService: PasswordManagerService,
-    public cd: ChangeDetectorRef,) { }
+    public cd: ChangeDetectorRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   ngOnInit() {
     this.categories = this.passwordManagerStateService.getCategories();
@@ -58,6 +62,8 @@ export class PasswordManagerTableComponent implements OnInit {
       //  UserNotificationService.show('Copy failed', true);
     }
     document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

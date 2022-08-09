@@ -17,6 +17,8 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Password manager edit aside component
@@ -68,6 +70,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private usersStateService: UsersStateService,
     private elRef: ElementRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -132,12 +136,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
   }
   onChangeAuthenticationKey() {
+    console.log("onChangeAuthenticationKey");
     this.validate.resetAuthenticationKey();
     this.editItem.setResetAuthenticationKey(false)
   }
   clearSecretKey() {
     this.editItem.setAuthenticationKey("");
     this.editItem.setResetAuthenticationKey(true);
+    this.isEditSecretKey = false;
   }
   getCodeRecords() {
     this.timeCount = 0;
@@ -164,7 +170,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   editSecretCode() {
     this.isEditSecretKey = !this.isEditSecretKey;
-    this.clearSecretKey();
+    this.editItem.setAuthenticationKey("");
   }
   getTimeProgress() {
     return `${(this.timeCount >= 10) ? this.timeCount : '0' + this.timeCount}`
@@ -220,6 +226,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       //  UserNotificationService.show('Copy failed', true);
     }
     document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   copySecretCode() {
     let textArea: any = document.createElement("textarea");
@@ -233,6 +241,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       //  UserNotificationService.show('Copy failed', true);
     }
     document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   public save() {
     this.selectedUserAndDevices = [...this.usersList, ...this.devicesList, ...this.gadgetsList];
