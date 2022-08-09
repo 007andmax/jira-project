@@ -365,6 +365,24 @@ app-invoices-item,app-payment-item {
     width: 940px;
   }
 
+  .new-taxes-area {
+    .dropdown-menu {
+      max-height: 250px;
+      overflow: auto;
+      max-width: 120px !important;
+    }
+
+    .dropdown-item {
+      cursor: pointer;
+      padding: 0 8px;
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
   .header-circle-icon {
     background-size: 16px !important;
     border: 1px solid $gray-400;

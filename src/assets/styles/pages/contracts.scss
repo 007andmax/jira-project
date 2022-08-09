@@ -578,6 +578,20 @@ app-contracts-filter {
   app-ticket-profile-updates-service-duration {
     display: contents;
   }
+
+  .qt-taxes-multiselect {
+    .light-dropdown {
+      .dropdown-item {
+        cursor: pointer;
+        padding: 0 8px;
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }
 
 .contracts-aside-block-time-tabble-td.--editable {
