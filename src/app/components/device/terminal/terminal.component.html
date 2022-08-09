@@ -33,9 +33,10 @@
                             [ngStyle]="{'background-color':scriptTyped == 'powershell' ? '#012456' : '#151b21' }"
                         >
                             <p *ngFor="let split of splitCommand">
-                                <span>{{split}}</span>
+                                <span *ngIf="split != 'line'">{{split}}</span>
+                                <span *ngIf="split == 'line'" [innerHtml]="htmldata"></span>
                             </p>
-                            <span [innerHtml]="htmldata"></span>
+                            
                             <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
                         </div>
                         <div class="terminal-btn-row">

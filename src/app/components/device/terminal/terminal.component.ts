@@ -13,6 +13,7 @@ import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-terminal',
@@ -97,7 +98,8 @@ export class TerminalComponent implements OnInit {
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   asset: any = undefined;
   kafkaMessage: any;
-  htmldata: string = '';
+  htmldata: string = ''; 
+  tempcommand: string = ''; 
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
@@ -110,7 +112,7 @@ export class TerminalComponent implements OnInit {
     private kafkaStateService: KafkaStateService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {       
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // this.socketService.initializeWebSocketConnection();
@@ -121,7 +123,7 @@ export class TerminalComponent implements OnInit {
     this.getHistory();
     this.onTerminalPowershall();
     // this.socketService.subsribeToCmdShellOutput();
-    $('#cmd textarea').scroll(function () {
+    $('#cmd textarea').scroll(function () {      
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
@@ -129,56 +131,62 @@ export class TerminalComponent implements OnInit {
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
-  setPreviewDataDevice() {
+  setPreviewDataDevice() {    
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.setPreviewDataDevice();
       }, 300);
       return;
     }
-      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {        
         this.asset = resp[0];        
       });
   }  
 
   onTerminalPowershall()
-  {
+  {    
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       console.log("OnTerminalCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         if(!item.Value.startsWith("Executing"))
         {
+          this.splitCommand.push(this.tempcommand);
           let arr = item.Value.split(/\r*\n/)
           let arr1 = this.splitCommand.concat(arr);
           this.splitCommand = arr1;
+          this.splitCommand.push("line");  
           this.htmldata = `<hr style="border:1px dotted white;"/>`;            
           this.count = -1;
+          this.commandShoot = false;
           this.cd.detectChanges();          
         }
       }
     });
   }
 
-  onTerminalCommand() {
-    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
+  onTerminalCommand() {    
+    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {      
         console.log("OnTerminalCommand");
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item) {
           if(!item.Value.startsWith("Executing"))
-          {
-            let arr = item.Value.split(/\r*\n/)
-            let arr1 = this.splitCommand.concat(arr);
-            this.splitCommand = arr1;
-            this.htmldata = `<hr style="border:1px dotted white;"/>`;            
+          {             
+            this.splitCommand.push(this.tempcommand);          
+            let arr = item.Value.split(/\r*\n/);                                    
+            let arr1 = this.splitCommand.concat(arr);            
+            this.splitCommand = arr1; 
+            this.splitCommand.push("line");                                                                   
+            this.htmldata = `<hr style="border:1px dotted white;"/>`; 
             this.count = -1;
+            this.commandShoot = false;
             this.cd.detectChanges();
           }
         }
       });
   }
 
-  getCommandList() {    
+  getCommandList() {      
     this.terminalService.getCommand()
       .pipe(first())
       .subscribe(data => {
@@ -208,10 +216,10 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  getHistory() {    
+  getHistory() {       
     this.terminalService.getHistory(this._id)
       .pipe(first())
-      .subscribe(data => {        
+      .subscribe(data => {              
         if (Object.keys(data).length > 0) {
           let obj = data[this._id]
           this.his = obj;
@@ -284,8 +292,7 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  getCmdCategoryRead() {
-
+  getCmdCategoryRead() {    
     this.terminalService.getCmdCategory()
       .pipe(first())
       .subscribe(data => {
@@ -609,7 +616,7 @@ export class TerminalComponent implements OnInit {
             if (this.sessionId === data.data.sessionId) {
               let arr = data.data.output.split(/\r*\n/)
               let arr1 = this.splitCommand.concat(arr);
-              this.splitCommand = arr1;
+              this.splitCommand = arr1;              
               this.cd.detectChanges();
               setTimeout(() => {
                 $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
@@ -716,7 +723,8 @@ export class TerminalComponent implements OnInit {
         return;
       }    
       this.commandShoot = true;       
-    }    
+    }        
+    this.tempcommand = editCmd;
     let data: any = {};
     if(this.scriptTyped=="cmd")
     {
