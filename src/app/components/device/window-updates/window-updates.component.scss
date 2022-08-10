@@ -106,12 +106,6 @@
   margin-right: 8px
 }
 
- .tab-contentss{
-  padding: 0 !important;
-  background-color: white !important;
-}
-
-
 .window-update-table {
   th {
    white-space: nowrap;
@@ -151,10 +145,6 @@
   padding-top: 5px !important;
 }
 
-::ng-deep .tab-content {
-  padding: 0px !important;  
-}
-
 .description-install-block{
   padding-left: 17px !important;
   width: 200px !important;
@@ -186,6 +176,10 @@
   font-family: Inter;
   font-size: 20px;
   font-weight: 600;
+}
+
+::ng-deep ngb-tabset .tab-content {
+  padding: 0px !important;
 }
 
 

@@ -923,8 +923,7 @@ background-color: #FF0000;
   height: calc(150vh - 15rem);
 }
 .modal-table-body
-{
-  overflow-y: auto;
+{  
   height: 100%;
 }
 
@@ -1024,8 +1023,8 @@ font-weight: 600;
   height: 450px;
 }
 
-/deep/ ngb-tabset .tab-content {
-    padding: 0px !important;
+::ng-deep ngb-tabset .tab-content {
+    padding: 0px !important;   
 }
 
 // modal-popup end

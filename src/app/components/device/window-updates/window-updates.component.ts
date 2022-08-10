@@ -51,8 +51,11 @@ export class WindowUpdatesComponent implements OnInit {
     });
     this.time();       
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
-      this.loading = true;
-      this.agentService.GetCurrentConfig(this.asset.ID);      
+      if(resp.length>0)
+      {
+        this.loading = true;
+        this.agentService.GetCurrentConfig(this.asset.ID);      
+      }      
     });
   }
 
@@ -70,7 +73,7 @@ export class WindowUpdatesComponent implements OnInit {
     
   }
 
-  onCurrentConfig(resp: any) {
+  onCurrentConfig(resp: any) {    
     if(resp.length>0)
     {
       this.loading=false;
