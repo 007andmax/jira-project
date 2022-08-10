@@ -16,6 +16,7 @@ import * as moment from "moment";
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -23,7 +24,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
   styleUrls: ['./contracts-aside-user-device-edit.component.scss']
 })
 export class ContractsAsideUserDeviceEditComponent implements OnInit {
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];

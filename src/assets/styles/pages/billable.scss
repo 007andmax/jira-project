@@ -468,8 +468,35 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   border: solid 1px $gray-500;
   background-color: $white;
 }
+.contracts-page__aside {
+  .service-table tr {
+    td.service-table__tax {
+      .dropdown-menu {
+        &.show {
+          max-height: 190px;
+          overflow: auto;
+          width: 100%;
+        }
+      }
 
+      input {
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
+      .dropdown-item {
+        cursor: pointer;
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
 .invoice-ticket-edit-service-product {
   td.invoice-item__col-desc {
     padding: 0;
@@ -484,7 +511,24 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
     }
   }
 
+  .new-taxes-area,
+  .invoice-item__col-tax {
+    .dropdown-menu {
+      max-height: 250px;
+      overflow: auto;
+      max-width: 120px !important;
+    }
 
+    .dropdown-item {
+      padding: 0 8px;
+      cursor: pointer;
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
 
   .invoice-item__col-price {
     max-width: 100px;

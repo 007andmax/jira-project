@@ -22,6 +22,7 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -35,7 +36,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';

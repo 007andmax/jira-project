@@ -1,31 +1,175 @@
 <tr>
     <td class="products-table__product-name pre-line">
-        <pre [textContent]="inventory.description"></pre>
+        <!-- <pre [textContent]="inventory.description"></pre> -->
+        <textarea
+            appTextArea
+            [limit]="160"
+            class="inventory-description-textarea"
+            placeholder="Write Product Description"
+            (input)="onChangeDescription($event)"
+            (keydown)="onEnterDescription($event)"
+            (blur)="onBlurDescription($event)"
+        ></textarea>
+        <!-- <div
+            contenteditable="true"
+            class="inventory-description-textarea"
+            placeholder="Write ticket conversation here…"
+            (input)="onChangeDescription($event)"
+            (keydown)="onEnterDescription($event)"
+            (blur)="onBlurDescription($event)"
+        ></div> -->
     </td>
     <td class="products-table__category">
-        <div [textContent]="inventory.category.name"></div>
+        <!-- <div [textContent]="inventory.category.name"></div> -->
+        <app-drop-down
+            #categoriesSelect
+            [class]="['qt-select-input-40']"
+            [placeholder]="'Select Category'"
+            [validate]="validate.getCategory()"
+            [errorMessage]="'Category is required'"
+            [field]="'name'"
+            [add]="true"
+            [list]="categories"
+            [search]="true"
+            [change]="true"
+            [isBlockClear]="true"
+            [editItem]="inventory.category"
+            (onAddItem)="onAddCategory($event)"
+            (onSelectedItem)="onSelectCategory($event)"
+        >
+        </app-drop-down>
     </td>
     <td class="products-table__cost">
         <div
-            *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+            *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
             [textContent]="'$' + parseTotal(inventory.cost || 0)"
         >
         </div>
+        <div class="products-table__cost-container">
+            <input
+                *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                [ngClass]="{'--input-error' : !validate.getCostSale()}"
+                type="text"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                (blur)="onBlurCost()"
+                [value]="inventory.cost"
+                (onChange)="onChangeCost($event)"
+                (keyup)="onEnterCost($event)"
+                placeholder="Enter Cost"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getCostSale()"
+            >
+                Cost cannot be higher than Price
+            </mat-error>
+        </div>
+    </td>
+    <td class="products-table__cost">
+        <div class="products-table__cost-container">
+            <input
+                type="text"
+                decimalNumber
+                (blur)="onBlurMarkup()"
+                (onChange)="onChangeMarkup($event)"
+                [value]="inventory.markup"
+                (keyup)="onEnterMarkup($event)"
+                placeholder="Enter Markup"
+            >
+        </div>
     </td>
     <td class="products-table__sale-price">
-        <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div>
+        <!-- <div [textContent]="'$' + parseTotal(inventory.sale || 0)"></div> -->
+        <div class="products-table__sale-price-container">
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getSale()}"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                [value]="inventory.sale"
+                (blur)="onBlurSale()"
+                (input)="validate.resetSale()"
+                (onChange)="changeSales($event)"
+                (keyup)="onEnterSale($event)"
+                placeholder="Enter Price"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getSale()"
+            >
+                Price is required
+            </mat-error>
+        </div>
     </td>
     <td class="products-table__mfg">
-        <div [textContent]="inventory.manufacture"></div>
+        <div class="products-table__mfg-container">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getManufactureIsExist()"
+            >
+                This number is already occupied
+            </mat-error>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
+                [value]="inventory.manufacture"
+                (blur)="onCheckManufacture($event)"
+                (keyup)="onEnterManufacture($event)"
+                placeholder="Enter Item Number"
+            >
+        </div>
+        <!-- <div [textContent]="inventory.manufacture"></div> -->
     </td>
     <td class="products-table__tac">
-        <div [textContent]="getSelectedTaxNames()"></div>
+        <app-taxes
+            [isLabel]="false"
+            [isAdd]="false"
+            [placeholder]="'Taxes'"
+            [selectedTax]="getSelectedTaxes()"
+            (taxesChange)="onTaxesChange($event)"
+        ></app-taxes>
     </td>
     <td class="products-table__ilc">
-        <div [textContent]="inventory.ilc"></div>
+        <div class="products-table__ilc-container">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getILCIsExist()"
+            >
+                This number is already occupied
+            </mat-error>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getILCIsExist()}"
+                [value]="inventory.ilc"
+                (blur)="onCheckILC($event)"
+                (keyup)="onEnterILC($event)"
+                placeholder="Enter ILC Number"
+            >
+        </div>
     </td>
     <td class="products-table__gl">
-        <div [textContent]="getGlNumberName()"></div>
+        <!-- <div [textContent]="getGlNumberName()"></div> -->
+        <app-drop-down
+            #glNumberSelect
+            [class]="['--small-padding']"
+            [list]="glNumbers"
+            [placeholder]="'Select GL'"
+            [container]="'body'"
+            [change]="false"
+            [editItem]="inventory.glNumber"
+            [add]="true"
+            [field]="'glNumber'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            [reducerItem]="glDropDownItemName"
+            (onAddItem)="onAddGlNumber($event)"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
     </td>
     <td class="products-table__menu">
         <div

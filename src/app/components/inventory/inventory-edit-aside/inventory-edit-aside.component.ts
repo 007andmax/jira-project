@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TaxesComponent } from '../../shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -40,6 +41,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   cost: string;
   sale: string;
   @ViewChild('addTax') containerAddTax;
+  @ViewChild('taxesDp') taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
@@ -154,6 +156,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   }
   public onChangeDescription(event) {
     this.validate.resetDescription();
+    console.log("event", event);
     this.inventory.description = event.target.value;
   }
   onChangeCost(val) {
@@ -187,6 +190,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   }
   public onPastDescription(value) {
     this.validate.resetDescription();
+    console.log("value", value);
     this.inventory.description = value;
   }
   onTaxesChange(data) {
@@ -206,7 +210,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
-    this.taxesStateService.onInitClear();
+    this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
     this.cd.detectChanges();
@@ -214,9 +218,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
     // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
-    this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
-      this.toastrService.success("The product has been successfully updated");
-      this.appStateService.changeDetectorRef();
+    this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
       this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
     })

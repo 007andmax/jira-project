@@ -39,12 +39,13 @@
     </div>
     <div class="contract-aside-hourly-add-service__tax ">
         <div class="create-product-taxes-select">
-            <app-invoice-form-ticket-edit-taxes
+            <app-taxes
+                [isLabel]="false"
+                [isAdd]="false"
                 class="qt-taxes-multiselect"
-                #taxes
                 [selectedTax]="defaultSelectedTax"
                 (taxesChange)="onTaxesChange($event)"
-            ></app-invoice-form-ticket-edit-taxes>
+            ></app-taxes>
         </div>
     </div>
     <div

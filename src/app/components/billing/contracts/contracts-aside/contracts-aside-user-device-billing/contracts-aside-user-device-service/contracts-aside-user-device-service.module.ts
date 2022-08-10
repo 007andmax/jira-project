@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
+import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 
 
 
@@ -19,7 +20,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         MatIconModule,
         FormsModule,
         NgbModule,
-        InvoiceFormTicketEditTaxesModule,
+        TaxesModule,
         NumberModule
     ],
     exports: [ContractsAsideUserDeviceServiceComponent]

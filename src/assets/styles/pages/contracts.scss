@@ -231,7 +231,6 @@
         padding: 0;
 
         .dropdown-menu .dropdown-item {
-          padding: 0 !important;
           button {
             border: none;
             background: $white;
@@ -246,7 +245,7 @@
           }
         }
         .dropdown-menu.show {
-          width: 100%;
+          width: 230px;
           min-width: 0;
           left: 0 !important;
         }
@@ -578,6 +577,20 @@ app-contracts-filter {
   app-contracts-aside-other-service,
   app-ticket-profile-updates-service-duration {
     display: contents;
+  }
+
+  .qt-taxes-multiselect {
+    .light-dropdown {
+      .dropdown-item {
+        cursor: pointer;
+        padding: 0 8px;
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
   }
 }
 

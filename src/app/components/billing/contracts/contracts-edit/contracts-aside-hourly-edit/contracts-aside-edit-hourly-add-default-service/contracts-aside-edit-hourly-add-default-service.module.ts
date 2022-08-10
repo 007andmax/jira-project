@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
         MatSelectModule,
         MatChipsModule,
         FormsModule,
-        InvoiceFormTicketEditTaxesModule,
+        TaxesModule,
         NumberModule,
         DisabledBtnModule
     ],

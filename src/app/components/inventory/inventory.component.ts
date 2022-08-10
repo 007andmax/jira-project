@@ -74,6 +74,7 @@ export class InventoryComponent implements OnInit {
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
       window.scrollTo(0, 0);
       this.filter.setSortCategoty(data);
+      console.log("this.filter", this.filter);
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
       this.inventoryList = [];
@@ -165,6 +166,7 @@ export class InventoryComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqInventoryList);
+    console.log("listFilter", listFilter.length);
     // listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? (item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.isFindGlNumber(this.productSearchName) || item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())) : true);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
@@ -197,7 +199,7 @@ export class InventoryComponent implements OnInit {
     this.getProducts();
   }
   public trackById(index, item) {
-    return item.id;
+    return item.versionedId.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

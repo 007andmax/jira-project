@@ -16,6 +16,7 @@ export class InventoryItem {
     taxIds: Array<String>
     markup: number = 0;
     active: boolean = true;
+    isEdit: boolean = false;
     constructor(data = null) {
         if (data != null) {
             this.versionedId = data.versionedId;
@@ -31,6 +32,9 @@ export class InventoryItem {
             this.taxIds = data.taxIds;
             this.active = data.active;
         }
+    }
+    public setIsEdit(data) {
+        this.isEdit = data;
     }
     public getForAdd() {
         let item: reqInventoryAdd = {

@@ -19,6 +19,7 @@ import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-con
 import { Subscription } from 'rxjs';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 
 @Component({
@@ -27,7 +28,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit {
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];

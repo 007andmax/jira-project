@@ -134,11 +134,13 @@
             </div>
             <div class="qt-input-block qt-w25 qt-mr-16">
                 <label>Select taxes</label>
-                <app-invoice-form-ticket-edit-taxes
+                <app-taxes
                     class="qt-taxes-multiselect"
                     #taxes
+                    [isLabel]="false"
+                    [isAdd]="false"
                     (taxesChange)="onTaxesChange($event)"
-                ></app-invoice-form-ticket-edit-taxes>
+                ></app-taxes>
             </div>
         </div>
         <div class="qt-fs-15 qt-fw-600 qt-lh-147 qt-color-dark qt-mb-16">

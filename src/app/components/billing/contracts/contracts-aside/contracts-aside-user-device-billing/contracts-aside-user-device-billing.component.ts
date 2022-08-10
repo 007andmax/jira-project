@@ -19,6 +19,7 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
 import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
 import { Subscription } from 'rxjs';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
@@ -27,7 +28,7 @@ import { ContractsListService } from '../../services/contracts-list.service';
   providers: [ContractsListService]
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;

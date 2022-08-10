@@ -8,3 +8,63 @@ pre {
     border-radius: unset;
     font-family: unset;
 }
+.inventory-description-textarea {
+    width: 100%;
+    height: 144px;
+    border: none;
+    visibility: visible;
+    outline: none;
+    overflow: auto;
+    &::-webkit-scrollbar-thumb {
+        background: rgba(54, 70, 86, 0.8);
+        border-radius: 4px;
+    }
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+}
+/deep/ .products-table__category, /deep/ .products-table__tac, /deep/ .products-table__gl {
+    
+        input {
+        padding: 4px 24px 4px 8px !important;
+        border: unset !important;
+        &:hover {
+            background: #f4f6f8;
+        }
+    
+    }
+}
+/deep/ .products-table__tac {
+    .new-taxes-area {
+        margin-top: 0px !important;
+    }
+}
+.products-table__cost,.products-table__sale-price,.products-table__mfg,.products-table__ilc {
+    input {
+        width: 100%;
+        padding: 4px 24px 4px 8px !important;
+        &:hover {
+            background: #f4f6f8;
+        }
+        &:not(.--input-error) {
+            border: unset !important;
+        }
+    }
+}
+.products-table__cost-container,.products-table__sale-price-container,.products-table__mfg-container,.products-table__ilc-container {
+    position: relative;
+    width: 100%;
+    input {
+        &::-webkit-input-placeholder {
+                color: #919eab
+        }
+    }
+}
+/deep/ .products-table__gl {
+    input {
+            &::-webkit-input-placeholder {
+                color: #919eab !important;
+            }
+        }
+}
