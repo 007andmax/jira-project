@@ -21,7 +21,8 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
         FormsModule,
         NgbModule,
         TaxesModule,
-        NumberModule
+        NumberModule,
+        InvoiceFormTicketEditTaxesModule
     ],
     exports: [ContractsAsideUserDeviceServiceComponent]
 
