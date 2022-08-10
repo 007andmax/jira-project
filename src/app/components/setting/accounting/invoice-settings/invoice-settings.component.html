@@ -267,6 +267,7 @@
                             formControlName="primaryPhone"
                             placeholder="Primary Phone Number"
                             prefix="+1"
+                            [validation]="false"
                             mask="(000) 000-0000 Ext: 999999||000-000-0000"
                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                             [dropSpecialCharacters]="false"
@@ -285,7 +286,7 @@
                         class="invalid-feedback"
                     >
                         <div *ngIf="f.primaryPhone.errors.required">primaryPhone is required</div>
-                        <div *ngIf="f.primaryPhone.errors.pattern">primaryPhone must be a valid number</div>
+                        <div *ngIf="f.primaryPhone.errors.pattern || f.primaryPhone.errors.minlength">primaryPhone must be a valid number</div>
                     </div>
                 </div>
                 <div
@@ -311,6 +312,7 @@
                             placeholder="Secondary Phone Number"
                             prefix="+1"
                             mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                            [validation]="false"
                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                             [dropSpecialCharacters]="false"
                         >

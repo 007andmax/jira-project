@@ -80,7 +80,8 @@ export class InvoiceSettingsComponent implements OnInit {
       primaryPhone: [
         '',
         Validators.compose([
-          Validators.required
+          Validators.required,
+          Validators.minLength(14)
         ])
       ],
       primaryPhoneType: [''],
@@ -280,7 +281,7 @@ export class InvoiceSettingsComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-
+    console.log("this.invoiceForm", this.invoiceForm);
     // stop here if form is invalid
     if (this.invoiceForm.invalid) {
       return;
