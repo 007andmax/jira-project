@@ -281,7 +281,6 @@ export class InvoiceSettingsComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-    console.log("this.invoiceForm", this.invoiceForm);
     // stop here if form is invalid
     if (this.invoiceForm.invalid) {
       return;
