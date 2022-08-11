@@ -103,10 +103,13 @@ export class InventoryTableComponent implements OnInit {
   }
   onChangeCost(val) {
     let value = Number(val);
-    this.inventory.cost = value;
-    this.inventory.markup = this.getMarkups();
-    this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
-    this.inventory.setIsEdit(true);
+    if (this.inventory.cost !== value) {
+      this.inventory.cost = value;
+      this.inventory.markup = this.getMarkups();
+      this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
+      this.inventory.setIsEdit(true);
+    }
+
   }
   onCheckILC(event) {
     if (event.target.value != this.inventory.ilc) {
@@ -134,20 +137,20 @@ export class InventoryTableComponent implements OnInit {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
       this.save();
     }
-
   }
   onBlurSale() {
     if (this.inventory.isEdit) {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
       this.save();
     }
-
   }
   changeSales(val) {
     let value = Number(val);
-    this.inventory.sale = value;
-    this.inventory.markup = this.getMarkups();
-    this.inventory.setIsEdit(true);
+    if (this.inventory.sale != value) {
+      this.inventory.sale = value;
+      this.inventory.markup = this.getMarkups();
+      this.inventory.setIsEdit(true);
+    }
   }
   save() {
     if (!this.validate.isValidate(this.inventory) || !this.inventory.isEdit) return;
@@ -236,9 +239,11 @@ export class InventoryTableComponent implements OnInit {
   }
   onChangeMarkup(val) {
     let value = Number(val);
-    this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
-    this.inventory.markup = this.roundingMarkup(value);
-    this.inventory.setIsEdit(true);
+    if (this.inventory.markup != this.roundingMarkup(value)) {
+      this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
+      this.inventory.markup = this.roundingMarkup(value);
+      this.inventory.setIsEdit(true);
+    }
   }
   private roundingMarkup(markup) {
     return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
