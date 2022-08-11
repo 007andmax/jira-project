@@ -156,7 +156,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   }
   public onChangeDescription(event) {
     this.validate.resetDescription();
-    console.log("event", event);
     this.inventory.description = event.target.value;
   }
   onChangeCost(val) {
@@ -190,7 +189,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   }
   public onPastDescription(value) {
     this.validate.resetDescription();
-    console.log("value", value);
     this.inventory.description = value;
   }
   onTaxesChange(data) {

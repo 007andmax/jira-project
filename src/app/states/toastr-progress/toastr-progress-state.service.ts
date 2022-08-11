@@ -10,7 +10,6 @@ export class ToastrProgressStateService {
   constructor(private toaster: ToastrService,
     private appStateService: AppStateService,) { }
   public onInit(quoteId) {
-    console.log("onInit");
     let toaster = this.toaster.info('The request is being processed', null, {
       timeOut: 0,
       progressBar: true,
@@ -20,7 +19,6 @@ export class ToastrProgressStateService {
       quoteId: quoteId,
       toastId: toaster.toastId
     })
-    console.log("toaster", toaster);
     this.appStateService.changeDetectorRef();
   }
   public check(quoteId) {
