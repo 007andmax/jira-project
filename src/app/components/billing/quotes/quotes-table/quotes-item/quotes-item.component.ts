@@ -60,18 +60,23 @@ export class QuotesItemComponent implements OnInit {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   downloadPdf() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onDownloadPdf.emit(this.quote);
   }
   goToQuoteEdit() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onGoToQuoteEdit.emit(this.quote);
   }
   archiveQuote() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onArchiveQuote.emit(this.quote);
   }
   cancelQuote() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onCancelQuote.emit(this.quote);
   }
   markAsRead() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onMarkAsRead.emit(this.quote);
   }
   convertToBillable() {
@@ -80,6 +85,7 @@ export class QuotesItemComponent implements OnInit {
     this.onConvertToBillable.emit(this.quote);
   }
   approveQuote() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onApproveQuote.emit(this.quote);
   }
   convertToTicket() {
@@ -93,9 +99,11 @@ export class QuotesItemComponent implements OnInit {
     this.onConvertToInvoice.emit(this.quote);
   }
   copy() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onCopy.emit(this.quote);
   }
   resend() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onResend.emit(this.quote);
   }
   public checkStatus(quote, statusForShowingArray) {
