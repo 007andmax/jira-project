@@ -37,32 +37,39 @@
     }
   }
   .dropdown-menu {
-    background: $white;
+    //background: $white; // TODO check this style dropdown
+    //width: 100%;
+    //top: auto;
+    //max-height: 190px;
+    //left: 0 !important;
+    //position: absolute;
+
+    min-width: auto;
     width: 100%;
-    top: auto;
-    max-height: 190px;
-    left: 0 !important;
-    position: absolute;
     .dropdown-item {
       outline: none;
       background: $white;
       width: 100%;
-      height: 38px;
+      height: 32px;
       display: block;
       align-items: center;
       justify-content: flex-start;
-      padding: 0 20px;
+      padding: 0 12px;
       border: none;
-      @include body-m__m;
+      @include body-r;
+      color: #101828;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       transition: all 0.3s;
-      color: $primary-2;
+      border-radius: 6px;
       &:hover {
-        color: $white;
-        background: $primary-1;
+        background: $gray-100;
+      }
+      &.--selected {
+        background-color: $gray-100;
+        color: $primary-1;
       }
     }
   }
@@ -120,16 +127,16 @@
   }
 }
 
-.grey-dropdown {
-  .dropdown-menu {
-    .dropdown-item {
-      &:hover {
-        background: $background;
-        color: $primary-2;
-      }
-    }
-  }
-}
+//.grey-dropdown { // TODO check this property
+//  .dropdown-menu {
+//    .dropdown-item {
+//      &:hover {
+//        background: $background;
+//        color: $primary-2;
+//      }
+//    }
+//  }
+//}
 .dropdown-menu {
   .ngb-dp-day,
   .ngb-dp-week-number,

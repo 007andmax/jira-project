@@ -10,10 +10,13 @@
   span {
     border: 1px solid $gray-500;
     background: $white;
-    min-width: 16px;
-    width: 16px;
-    height: 16px;
-    border-radius: 2px;
+    //min-width: 16px;
+    //width: 16px;
+    //height: 16px;
+    min-width: 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
     margin: 0;
     display: block;
   }
@@ -25,7 +28,8 @@
     left: -200vw;
     &:checked {
       & ~ span {
-        background-image: url(/assets/img/icons/checkbox-on.svg);
+        background-image: url('/assets/img/icons/checkbox-on.svg');
+        background-size: contain;
         border: none;
       }
     }
