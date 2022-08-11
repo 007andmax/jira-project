@@ -137,7 +137,6 @@ import { GlNumberCheckUseComponent } from './components/setting/accounting/gl-nu
 import { CannedResponsesComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses.component';
 import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
 import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
-
 declare var $: any;
 
 /**
@@ -172,7 +171,7 @@ declare var $: any;
     GoogleAuthenticatorComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    CannedResponsesAsideComponent,
+    CannedResponsesAsideComponent
   ],
   imports: [
     BrowserModule,
@@ -190,7 +189,6 @@ declare var $: any;
     AppRoutingModule,
     ToastrModule.forRoot({
       closeButton: true,
-      preventDuplicates: true,
       timeOut: 5000,
       onActivateTick: true
     }),

@@ -8,6 +8,7 @@ import { QuoteService } from 'src/app/services/quote/quote.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { Quote } from '../class/quote';
@@ -41,6 +42,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService,
     private quoteStateService: QuoteStateService,
     private confirmStateService: ConfirmStateService,
+    private toastrProgressStateService: ToastrProgressStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -157,6 +159,9 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   onConvertToBillable(quote) {
     this.quoteServices.convertToBillable(quote.company, quote.id).subscribe((res) => {
+      this.toastrProgressStateService.clear(quote.id);
+    }, err => {
+      this.toastrProgressStateService.clear(quote.id);
     });
   }
   onArchiveQuote() {
@@ -184,10 +189,16 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   convertToTicket(item) {
     this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
+      this.toastrProgressStateService.clear(item.id);
+    }, err => {
+      this.toastrProgressStateService.clear(item.id);
     });
   }
   convertToInvoice(item) {
     this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
+      this.toastrProgressStateService.clear(item.id);
+    }, err => {
+      this.toastrProgressStateService.clear(item.id);
     });
   }
   public trackById(index, item) {
