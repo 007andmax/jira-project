@@ -508,6 +508,7 @@ table.qt-table-modern tbody tr td {
 .Resize{
   @media only screen and (min-width: 1920px) {
     width:78% !important;
+    margin-left:-85px;
   }     
 }
 .company-device-hover:hover {

@@ -38,7 +38,7 @@
     .company-devices-table__system-network-buttons{
       margin-left:40px;
     }
-    
+
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
       position: absolute;
@@ -782,6 +782,7 @@ span.qt-input-search:before {
   .Resize{    
     @media only screen and (min-width: 1920px) {
       width:78% !important;
+      margin-left:-85px;
     }       
   }
   
