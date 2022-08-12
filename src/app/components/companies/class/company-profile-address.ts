@@ -1,6 +1,8 @@
 import { CompanyProfileContact } from './company-profile-contact';
 
 export class CompanyProfileAddress {
+    sameAsBilling: boolean = false;
+    locationName: string;
     isPrimary: boolean;
     address: string;
     addressWithSuitNumberAndPostalCode: string;
@@ -13,13 +15,21 @@ export class CompanyProfileAddress {
     phoneNumbers: any;
     locale: string;
     timeZone: any;
-    constructor() {
-        this.phoneNumbers = [{
-            number: '',
-            typeNumber: 'OFFICE'
-        }];
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+        } else {
+            this.phoneNumbers = [{
+                number: '',
+                typeNumber: 'OFFICE'
+            }];
+        }
+
     }
     public fullVersion() {
+        this.locationName = '';
         this.address = '';
         this.fromGoogle = false;
         this.isPrimary = true;

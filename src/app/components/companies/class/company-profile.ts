@@ -187,6 +187,10 @@ export class CompanyProfile {
     public fullVersion() {
         this.contacts[0].fullVersion();
         this.addresses[0].fullVersion();
+        let address: CompanyProfileAddress = new CompanyProfileAddress();
+        address.fullVersion();
+        address.isPrimary = false;
+        this.addresses.push(address);
         this.agentLinkToEmail = null;
         this.clientIndustry = {
             name: null

@@ -7,6 +7,7 @@ export class CompanyValdiate {
     firstName: boolean = true;
     primaryContactEmail: boolean = true;
     phoneNumber: boolean = true;
+    shippingPhoneNumber: boolean = true;
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     reDomain = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -70,6 +71,9 @@ export class CompanyValdiate {
     public getPhoneNumber() {
         return this.phoneNumber;
     }
+    public getShippingPhoneNumber() {
+        return this.shippingPhoneNumber;
+    }
     public checkValidName(name) {
         if (!name || name.length === 0) {
             this.name = false;
@@ -90,6 +94,17 @@ export class CompanyValdiate {
             this.phoneNumber = false;
         } else {
             this.phoneNumber = true;
+        }
+    }
+    public checkValidShippingPhoneNumber(number) {
+        if (number.length > 0) {
+            if (number.length < 14) {
+                this.shippingPhoneNumber = false;
+            } else {
+                this.shippingPhoneNumber = true;
+            }
+        } else {
+            this.shippingPhoneNumber = true;
         }
     }
     public checkValidDomain(domain) {
@@ -121,8 +136,9 @@ export class CompanyValdiate {
         if (company.clientType === "") this.type = false;
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
+        if (company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
-        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist;
+        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist && this.shippingPhoneNumber;
     }
 
 
