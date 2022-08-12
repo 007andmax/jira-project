@@ -783,7 +783,20 @@ span.qt-input-search:before {
     @media only screen and (min-width: 1920px) {
       width:78% !important;
       margin-left:-85px;
-    }       
+
+
+    }
+    
+    .company-device-hover:hover {
+      td {
+        .company-devices-table__system-network-buttons {
+          @media  only screen and (min-width:1920px) {
+            margin-left:40px;    
+          }
+        }        
+      }
+    }
+    
   }
   
   

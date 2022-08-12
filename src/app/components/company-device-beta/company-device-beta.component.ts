@@ -576,6 +576,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   openAside(type, asset) {
     this.device_beta_resize = true;
+    debugger;
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
@@ -657,7 +658,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   getNetworkDetail(asset) {
     this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
-      if (resp.length > 0) {
+      if (resp.length > 0) {        
         this.networkData = resp[0];
       }
     });

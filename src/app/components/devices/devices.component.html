@@ -676,6 +676,13 @@
                     ></div>
                 </div>
                 <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">DNS 2:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.DNS2)"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
                     <div class="sidebar-network__info-title">Link Speed:</div>
                     <div
                         class="sidebar-network__info-text"
@@ -697,6 +704,18 @@
                         [textContent]="chackDefaultValue(networkData.DHCPEnabled)"
                     ></div>
                 </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">Gateway:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.Gateway)"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">WAN IP:</div>
+                    <div
+                        class="sidebar-network__info-text" [textContent]="'-'"
+                    ></div>
             </div>
             <div class="qt-divider qt-mt-24 qt-mb-24"></div>
         </div>
