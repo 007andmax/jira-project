@@ -731,14 +731,14 @@ documents-edit-info {
         }
       }
     }
-    .col-md-4 {
-      .light-dropdown {
-        .dropdown-menu {
-          width: 40px;
-          min-width: 68px;
-        }
-      }
-    }
+    //.col-md-4 { // TODO check this property
+    //  .light-dropdown {
+    //    .dropdown-menu {
+    //      width: 40px;
+    //      min-width: 68px;
+    //    }
+    //  }
+    //}
   }
   .service-tab-content,
   .product-tab-content {
@@ -2935,14 +2935,6 @@ app-quotes-item {
       width: 87%;
     }
   }
-}
-.light-dropdown .dropdown-menu.unique-down {
-  width: calc(100% - 30px);
-  left: 15px !important;
-  bottom: -195px;
-  top: auto !important;
-  transform: none !important;
-  min-height: 190px;
 }
 .modal.fade {
   opacity: 1;

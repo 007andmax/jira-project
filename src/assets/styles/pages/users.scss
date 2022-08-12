@@ -436,12 +436,8 @@ app-users-table {
     }
 
     button.dropdown-item.ng-star-inserted {
-      font-size: 13px !important;
-      color: $primary-2;
-      height: 32px !important;
-      padding-left: 15px !important;
       &:hover {
-        background-color: $background !important;
+        background-color: $background;
       }
     }
   }
@@ -515,8 +511,17 @@ app-users-table {
   }
 
   .dropdown-menu.unique-down {
-    .dropdown-item:nth-child(even) {
-      background-color: $background;
+    .dropdown-item{
+      &:nth-child(even) {
+        background-color: $background;
+      }
+      &:hover {
+        background-color: $background;
+      }
+      &.--selected {
+        background-color: $background;
+        color: $primary-1;
+      }
     }
   }
 

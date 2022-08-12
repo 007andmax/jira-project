@@ -110,11 +110,11 @@ span.qt-input-search input.qt-input-search {
 }
 
 ngb-typeahead-window.dropdown-menu {
-  // width: 192px;
-  max-height: 176px !important;
+  max-height: 176px;
+  width: 40px;
+  min-width: 68px;
 
   button.dropdown-item {
-    display: block;
     border: none;
     height: 32px;
     background: $white;
