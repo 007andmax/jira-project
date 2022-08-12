@@ -32,8 +32,13 @@
     background-color: #f9fafb;
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
-      opacity: 0;
+      opacity: 0;    
     }
+
+    .company-devices-table__system-network-buttons{
+      margin-left:40px;
+    }
+    
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
       position: absolute;
@@ -780,3 +785,16 @@ span.qt-input-search:before {
     }       
   }
   
+  
+.company-device-hover:hover {
+  td {
+    .company-devices-table__system-network-buttons {
+      @media  only screen and (min-width:1920px) {
+        margin-left:120px;    
+      }
+    }
+    .company-devices-table__ip-address-buttons {
+      margin-left:-5px;
+    }
+  }
+}
