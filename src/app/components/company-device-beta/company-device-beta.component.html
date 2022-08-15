@@ -793,6 +793,13 @@
                     ></div>
                 </div>
                 <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">DHCP Server:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="'-'"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
                     <div class="sidebar-network__info-title">Gateway:</div>
                     <div
                         class="sidebar-network__info-text"
@@ -802,7 +809,7 @@
                 <div class="sidebar-network__info">
                     <div class="sidebar-network__info-title">WAN IP:</div>
                     <div
-                        class="sidebar-network__info-text" [textContent]="'-'"
+                        class="sidebar-network__info-text" [textContent]="asset.ExternalIPAddress"
                     ></div>
                 </div>
             </div>
