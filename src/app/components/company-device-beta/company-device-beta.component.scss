@@ -100,10 +100,7 @@ img.Online-Search {
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
       opacity: 0;
-    }
-    .company-devices-table__system-network-buttons {
-      margin-left:40px;
-    }
+    }   
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
       position: absolute;
@@ -507,8 +504,8 @@ table.qt-table-modern tbody tr td {
 
 .Resize{
   @media only screen and (min-width: 1920px) {
-    width:78% !important;
-    margin-left:-85px;
+    width:85% !important;
+    margin-left:-150px;
   }     
 
   .company-device-hover:hover {
@@ -526,6 +523,10 @@ table.qt-table-modern tbody tr td {
     .company-devices-table__system-network-buttons {
       @media  only screen and (min-width:1920px) {
         margin-left:120px;    
+      }
+
+      @media only screen and (max-width: 1920) {
+        margin-left: 40px;
       }
     }
     .company-devices-table__ip-address-buttons {
