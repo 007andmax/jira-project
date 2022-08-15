@@ -1139,7 +1139,7 @@ export class DevicesComponent implements OnInit {
     this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
       if (resp.length > 0) {
-        this.networkData = resp[0];
+        this.networkData = resp;
       }
     });
   }

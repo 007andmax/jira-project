@@ -647,77 +647,86 @@
                         (click)="toggleIpSettings = !toggleIpSettings"
                     ></div>
                 </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">Model(s):</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.Name)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">IP:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.IPAddress)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">Subnet Mask:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.Subnet)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">DNS 1:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.DNS1)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">DNS 2:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.DNS2)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">Link Speed:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">MAC:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(formatMacAddress(networkData.MACAddress))"
-                    >
+                <ng-template ngFor let-net [ngForOf]="networkData">               
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">Model(s):</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.Name"
+                        ></div>
                     </div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">DHCP:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.DHCPEnabled)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">Gateway:</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.Gateway)"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">WAN IP:</div>
-                    <div
-                        class="sidebar-network__info-text" [textContent]="'-'"
-                    ></div>
-            </div>
-            <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">IP:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.IPAddress"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">Subnet Mask:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.Subnet"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">DNS 1:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.DNS1"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">DNS 2:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.DNS2"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">Link Speed:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="getLinkSpeed(net.Speed) + ' (MegaBit)'"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">MAC:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="formatMacAddress(net.MACAddress)"
+                        >
+                        </div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">DHCP:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.DHCPEnabled"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">DHCP Server:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="'-'"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">Gateway:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="net.Gateway"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">WAN IP:</div>
+                        <div
+                            class="sidebar-network__info-text" [textContent]="assetData.ExternalIPAddress"
+                        ></div>
+                    </div>
+                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+                 </ng-template>
         </div>
           <div *ngIf="tab==='SOFTWARE'" class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
           <div class="qt-df qt-jc-sb">
