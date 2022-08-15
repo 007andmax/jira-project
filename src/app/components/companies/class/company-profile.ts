@@ -46,6 +46,12 @@ export class CompanyProfile {
         this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
     }
+    public initShippingAdress() {
+        let address: CompanyProfileAddress = new CompanyProfileAddress();
+        address.fullVersion();
+        address.isPrimary = false;
+        this.addresses.push(address);
+    }
     public setTags(data) {
         this.tags = data;
     }
@@ -53,7 +59,11 @@ export class CompanyProfile {
         this.id = company.id;
         this.accountNumber = company.accountNumber;
         this.addresses = company.addresses;
-        if (this.addresses.length == 0) this.addresses = [new CompanyProfileAddress()];
+        if (this.addresses.length == 0) {
+            let address: CompanyProfileAddress = new CompanyProfileAddress();
+            address.fullVersion();
+            this.addresses.push(address);
+        }
         this.agentLinkToEmail = company.agentLinkToEmail;
         this.clientIndustry = company.clientIndustry;
         this.clientType = company.clientType;
@@ -187,10 +197,7 @@ export class CompanyProfile {
     public fullVersion() {
         this.contacts[0].fullVersion();
         this.addresses[0].fullVersion();
-        let address: CompanyProfileAddress = new CompanyProfileAddress();
-        address.fullVersion();
-        address.isPrimary = false;
-        this.addresses.push(address);
+        this.initShippingAdress();
         this.agentLinkToEmail = null;
         this.clientIndustry = {
             name: null
@@ -216,7 +223,10 @@ export class CompanyProfile {
         let data = {
             name: this.name == undefined ? '' : this.name,
             addresses: this.addresses,
+            billingLocationName: this.addresses[0].locationName,
+            shippingLocationName: this.addresses.length > 1 ? this.addresses[1].locationName : '',
             addresses_name: this.addresses.length > 0 ? this.addresses[0].address : '',
+            shipping_addresses_name: this.addresses.length > 1 ? this.addresses[1].address : '',
             phoneNumber: this.addresses.length > 0 && this.addresses[0].phoneNumbers.length !== 0 ? this.addresses[0].phoneNumbers[0].number : '',
             totalTickets: this['companyTicketStatistic'].totalTickets,
             averageResponseTime: this['companyTicketStatistic'].averageResponseTime,

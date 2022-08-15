@@ -136,7 +136,7 @@ export class CompanyValdiate {
         if (company.clientType === "") this.type = false;
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
-        if (company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
+        if (company.addresses.length === 2 && company.addresses[1].phoneNumbers[0].number.length > 0 && company.addresses[1].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
         return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist && this.shippingPhoneNumber;
     }

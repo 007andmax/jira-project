@@ -53,6 +53,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.version = 'full';
   }
   public onAddFull() {
+    console.log("this.validate", this.validate);
     if (!this.validate.isValidate(this.company)) return;
     let createCompany = this.companiesService.createCompany(this.company.getDataForAdd()).subscribe(data => {
       this.close();

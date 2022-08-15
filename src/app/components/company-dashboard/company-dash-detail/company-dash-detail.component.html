@@ -159,10 +159,35 @@
             </a>
         </div>
         <div class="other-info-col d-flex">
-            <div class="small-title">Address</div>
+            <div class="small-title">Billing Address</div>
+            <h3 class="qt-fs-13 qt-fw-600">
+                {{companyDetailing.billingLocationName}}
+            </h3>
             <address>{{companyDetailing.addresses_name}}</address>
             <a
-                (click)="openMap(content)"
+                (click)="openMap(content,companyDetailing.addresses[0])"
+                class="btn btn-outline"
+            >
+                <img
+                    src="html/assets/img/company-details/location.svg"
+                    alt="location"
+                >
+                Get Direction
+            </a>
+        </div>
+        <div
+            class="other-info-col d-flex"
+            *ngIf="companyDetailing.addresses.length == 2"
+        >
+            <div class="small-title">Shipping Address</div>
+            <h3 class="qt-fs-13 qt-fw-600">
+                {{companyDetailing.shippingLocationName}}
+            </h3>
+            <address>
+                {{companyDetailing.shipping_addresses_name}}
+            </address>
+            <a
+                (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
                 class="btn btn-outline"
             >
                 <img
