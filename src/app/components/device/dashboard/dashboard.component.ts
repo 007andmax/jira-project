@@ -4,7 +4,7 @@ import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-upl
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
-import { ModalDismissReasons, NgbActiveModal, NgbDatepicker, NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbActiveModal, NgbDatepicker, NgbDropdown, NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
@@ -29,6 +29,7 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) expire: NgbDatepicker;
   @ViewChild('searchInput') private searchInput: ElementRef;
+  @ViewChild('Tagproducts') Tagproducts : NgbDropdown;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   DateFormats = CONFIGCONSTANTS.DateFormat;
@@ -825,6 +826,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   focusMyInput() {
     setTimeout(() => this.searchInput.nativeElement.focus(), 0);
+    this.Tagproducts.open();
   }
 
   getManufacturers(TechCompanyGuid: any) {
