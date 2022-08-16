@@ -61,7 +61,6 @@
   &__header {
     background-color: $background;
     margin: 0 auto;
-    max-width: 1320px;
     width: 100%;
     z-index: 1;
 
@@ -194,7 +193,6 @@
 
   &__body {
     margin: 0 auto;
-    max-width: 1320px;
     width: 100%;
   }
 
@@ -254,11 +252,6 @@
 }
 
 @media (min-width: 1920px) {
-  .qt-page-list__header,
-  .qt-page-list__body {
-    width: 85%;
-    max-width: unset;
-  }
   .user-aside-detail-page__aside {
     .qt-page-list__body {
       width: 100%;
