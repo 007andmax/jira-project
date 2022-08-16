@@ -187,6 +187,22 @@
                                         <span>DHCP:</span>
                                         {{ networkAdapter.DHCPEnabled }}
                                     </li>
+                                    <li>
+                                        <span>Subnet:</span>
+                                        {{networkAdapter.Subnet || "N/A"}}
+                                    </li>
+                                    <li>
+                                        <span>DNS1:</span>
+                                        {{networkAdapter.DNS1 || "N/A"}}
+                                    </li>
+                                    <li>
+                                        <span>DNS2:</span>
+                                        {{networkAdapter.DNS2 || "N/A"}}
+                                    </li>                                    
+                                    <li>
+                                        <span>Gateway:</span>
+                                        {{networkAdapter.Gateway || "N/A"}}
+                                    </li>
                                 </ul>
                             </div>
                         </div>

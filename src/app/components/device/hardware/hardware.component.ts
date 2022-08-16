@@ -217,10 +217,10 @@ export class HardwareComponent implements OnInit {
   }
 
   memoryList(Asset_ID) {
-    this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {
+    this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {      
       if (resp.length > 0) {
         this.physicalmemory = resp[0];
-        this.Memory = resp;
+        this.Memory = resp.filter((x)=>x.IsActive);
         this.Memory.forEach((element) => {
           this.memory += element.Capacity;
           if (element.DeviceLocator != "") {
@@ -245,9 +245,9 @@ export class HardwareComponent implements OnInit {
   }
 
   networkList(Asset_ID) {
-    this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {
+    this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {      
       if (resp.length > 0) {
-        this.networkAdapter = resp[0];
+        this.networkAdapter = resp.find((x)=>x.Gateway !== null);
         this.printcsv();
       }
     });
@@ -356,6 +356,10 @@ export class HardwareComponent implements OnInit {
       ["IP", this.networkAdapter["IPAddress"] || "N/A"],
       ["MAC", this.networkAdapter["MACAddress"] || "N/A"],
       ["DHCP", this.networkAdapter["DHCPEnabled"]],
+      ["Subnet", this.networkAdapter["Subnet"] || "N/A"],
+      ["DNS1", this.networkAdapter["DNS1"] || "N/A"],
+      ["DNS2", this.networkAdapter["DNS2"] || "N/A"],
+      ["Gateway", this.networkAdapter["Gateway"] || "N/A"]
     ];
 
     this.printGraphic = [
