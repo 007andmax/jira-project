@@ -58,7 +58,12 @@ export class CompanyProfile {
     public onEditMode(company: CompanyProfile) {
         this.id = company.id;
         this.accountNumber = company.accountNumber;
-        this.addresses = company.addresses;
+        if (company.addresses.length == 1) {
+            this.addresses = company.addresses;
+        }
+        if (company.addresses.length == 2) {
+            this.addresses = [company.addresses.find(item => item.isPrimary), company.addresses.find(item => !item.isPrimary)];
+        }
         if (this.addresses.length == 0) {
             let address: CompanyProfileAddress = new CompanyProfileAddress();
             address.fullVersion();

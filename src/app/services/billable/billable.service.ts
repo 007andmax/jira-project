@@ -73,6 +73,9 @@ export class BillableService {
     return this.http.post(this.apiUrl + `invoice/lock`, ids).pipe(map((data: any) => new InvoiceLock(data)));
 
   }
+  public setAddressInvoice(currentAddress, WithNewAddress) {
+    return this.http.put(this.apiUrl + `addresses/replace?currentAddress=${currentAddress}&withNewAddress=${WithNewAddress}`, {});
+  }
   public getInvoiceLockTime(id) {
     return this.http.get(this.apiUrl + `invoice/lock/timeToUnlock/${id}`);
   }

@@ -1,28 +1,17 @@
 <div class="qt-df qt-pos-rel address-block">
     <hr class="address-block__horisontal-divider">
-    <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-16">
-        <div class="qt-input-block">
-            <label>Customer Name</label>
-            <input
-                [value]="company.name"
-                type="text"
-                disabled
-            >
-        </div>
-    </div>
     <div
-        class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30"
+        class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30 billing-address"
         ngbDropdown
         [autoClose]="'inside'"
         #editCustomer="ngbDropdown"
     >
         <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-154">
-            <div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div>
-            BILLING ADDRESS
+            <span class="address-h">BILLING ADDRESS</span>
         </div>
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-            [textContent]="company.name"
+            [textContent]="company.addresses[0].locationName"
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
@@ -62,6 +51,113 @@
                 (onUpdateCompany)="onUpdateCompany()"
                 [dropDown]="editCustomer"
             ></app-invoice-form-edit-customer>
+        </div>
+    </div>
+    <div
+        class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30"
+        ngbDropdown
+    >
+        <div *ngIf="company.addresses.length == 2">
+            <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-154">
+                <span class="address-h">SHIPPING ADDRESS</span>
+                <i
+                    class="icn-16 icon__edit-gray qt-ml-8 pointer"
+                    ngbDropdownToggle
+                    (mouseenter)="shippingTooltip.show($event.target)"
+                    (mouseleave)="shippingTooltip.hide()"
+                ></i>
+                <app-dynamic-tooltip
+                    [content]="'Change Address'"
+                    [position]="'top'"
+                    #shippingTooltip
+                ></app-dynamic-tooltip>
+            </div>
+            <div
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                [textContent]="company.addresses[1].locationName"
+            ></div>
+            <div
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="company.contacts[0].firstName + ' ' +
+      company.contacts[0].lastName"
+            ></div>
+            <div
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
+            ></div>
+            <div
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="company.contacts[0].primaryEmail"
+            ></div>
+            <div class="qt-fs-13 qt-mb-4">
+                <preview-phone-mask
+                    [class]="'company-info-aside__row-info-value'"
+                    *ngIf="(company.addresses[1].phoneNumbers && company.addresses[1].phoneNumbers.length > 0)"
+                    [number]="company.addresses[1].phoneNumbers[0].number"
+                ></preview-phone-mask>
+            </div>
+            <div ngbDropdownMenu>
+                <div
+                    class="item-selected-address pointer"
+                    ngbDropdownItem
+                    (click)="selectAddress(company.addresses[1].id,company.addresses[0].id)"
+                >
+                    <div
+                        class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                        [textContent]="company.addresses[0].locationName"
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-lh-154"
+                        [textContent]="company.contacts[0].firstName + ' ' +
+      company.contacts[0].lastName"
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-lh-154"
+                        [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-lh-154"
+                        [textContent]="company.contacts[0].primaryEmail"
+                    ></div>
+                    <div class="qt-fs-13 qt-mb-4">
+                        <preview-phone-mask
+                            [class]="'company-info-aside__row-info-value'"
+                            *ngIf="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0)"
+                            [number]="company.contacts[0].phoneNumbers[0].number"
+                        ></preview-phone-mask>
+                    </div>
+                </div>
+                <div
+                    class="item-selected-address pointer"
+                    ngbDropdownItem
+                    (click)="selectAddress(company.addresses[1].id,company.addresses[1].id)"
+                >
+                    <div
+                        class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                        [textContent]="company.addresses[1].locationName"
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-lh-154"
+                        [textContent]="company.contacts[0].firstName + ' ' +
+      company.contacts[0].lastName"
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-lh-154"
+                        [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-lh-154"
+                        [textContent]="company.contacts[0].primaryEmail"
+                    ></div>
+                    <div class="qt-fs-13 qt-mb-4">
+                        <preview-phone-mask
+                            [class]="'company-info-aside__row-info-value'"
+                            *ngIf="(company.addresses[1].phoneNumbers && company.addresses[1].phoneNumbers.length > 0)"
+                            [number]="company.addresses[1].phoneNumbers[0].number"
+                        ></preview-phone-mask>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

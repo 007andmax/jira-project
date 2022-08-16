@@ -5,3 +5,19 @@
         border-top: solid 1px $gray-400;
     }
 }
+.billing-address {
+    border-right: 1px solid #dfe3e8;
+    
+}
+.address-block {
+border-bottom: 1px solid #dfe3e8;
+}
+.item-selected-address {
+    padding: 16px 23px;
+    &:hover {
+        background-color: rgba(22, 164, 250, 0.05);
+    }
+}
+.address-h {
+    color: $gray-600;
+}

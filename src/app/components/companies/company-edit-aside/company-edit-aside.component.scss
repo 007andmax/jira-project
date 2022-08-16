@@ -71,6 +71,11 @@
     }
 
     .qt-checkbox {
-        width: 30px;
+        width: 16px;
+        height: 16px;
+        min-height: 16px;
+    }
+    .same-as-billing-txt {
+        line-height: 20px;
     }
 }
