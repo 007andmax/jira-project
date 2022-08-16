@@ -1,7 +1,7 @@
 import { CompanyProfileContact } from './company-profile-contact';
 
 export class CompanyProfileAddress {
-    sameAsBilling: boolean = false;
+    sameAsBilling: boolean;
     locationName: string;
     isPrimary: boolean;
     address: string;
