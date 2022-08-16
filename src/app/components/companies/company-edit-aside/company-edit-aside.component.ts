@@ -211,9 +211,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   onSameAsBilling(event) {
     if (event.target.checked) {
+      let id = JSON.parse(JSON.stringify(this.company.addresses[1])).id;
       this.company.addresses[1] = new CompanyProfileAddress(JSON.parse(JSON.stringify(this.company.addresses[0])));
       this.company.addresses[1].sameAsBilling = true;
       this.company.addresses[1].isPrimary = false;
+      this.company.addresses[1].id = id;
     }
   }
   public onSelectCompanyTypes(type) {
