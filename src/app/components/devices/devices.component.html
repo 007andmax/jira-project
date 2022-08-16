@@ -543,6 +543,18 @@
                         <div class="sidebar-system__info-title">Asset Tag</div>
                         <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Tag" (blur)="updateAsset()" >
                     </div>
+                </div> 
+                <div>
+                    <div class="sidebar-system__info edit-field">
+                        <div class="sidebar-system__info-title">Serial Number</div>
+                        <input type="text" class="device-table__input-name" [(ngModel)]="serialnumber" (blur)="updateSerialNo()">
+                    </div>
+                </div> 
+                <div>
+                    <div class="sidebar-system__info edit-field">
+                        <div class="sidebar-system__info-title">Sequence Number</div>
+                        <input type="text" class="device-table__input-name">
+                    </div>
                 </div>                
                 <div>
                     <div class="sidebar-system__info">
@@ -646,55 +658,54 @@
                         class="company-device-aside__expand-collapse qt-sz-16"
                         (click)="toggleIpSettings = !toggleIpSettings"
                     ></div>
-                </div>
-                <ng-template ngFor let-net [ngForOf]="networkData">               
+                </div>                            
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">Model(s):</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.Name"
+                            [textContent]="chackDefaultValue(networkData.Name)"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">IP:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.IPAddress"
+                            [textContent]="chackDefaultValue(networkData.IPAddress)"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">Subnet Mask:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.Subnet"
+                            [textContent]="chackDefaultValue(networkData.Subnet)"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">DNS 1:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.DNS1"
+                            [textContent]="chackDefaultValue(networkData.DNS1)"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">DNS 2:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.DNS2"
+                            [textContent]="chackDefaultValue(networkData.DNS2)"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">Link Speed:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="getLinkSpeed(net.Speed) + ' (MegaBit)'"
+                            [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">MAC:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="formatMacAddress(net.MACAddress)"
+                            [textContent]="formatMacAddress(networkData.MACAddress)"
                         >
                         </div>
                     </div>
@@ -702,7 +713,7 @@
                         <div class="sidebar-network__info-title">DHCP:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.DHCPEnabled"
+                            [textContent]="networkData.DHCPEnabled"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
@@ -716,7 +727,7 @@
                         <div class="sidebar-network__info-title">Gateway:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="net.Gateway"
+                            [textContent]="networkData.Gateway"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
@@ -725,8 +736,7 @@
                             class="sidebar-network__info-text" [textContent]="assetData.ExternalIPAddress"
                         ></div>
                     </div>
-                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-                 </ng-template>
+                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>                 
         </div>
           <div *ngIf="tab==='SOFTWARE'" class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
           <div class="qt-df qt-jc-sb">

@@ -121,6 +121,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   isOverlay = false;
   selectAllSecurityDevices: boolean = false;
   device_beta_resize: boolean = false;
+  System: any = undefined;
+  serialnumber: string = "";
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -254,6 +256,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }
       this.assetList = resp;
       this.asset = resp[0];
+      this.operatingSystemWindow(resp[0].ID)
       this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.assetList.forEach((element, index) => {
         element.online = false;
@@ -575,8 +578,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   openAside(type, asset) {
-    this.device_beta_resize = true;
-    debugger;
+    this.device_beta_resize = true;    
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
@@ -655,11 +657,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
     return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
 
-  getNetworkDetail(asset) {
+  getNetworkDetail(asset) {    
     this.networkData = [];
-    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
-      if (resp.length > 0) {        
-        this.networkData = resp;
+    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {      
+      if (resp.length > 0) {                
+       this.networkData = resp.find((x) => x.Gateway !== null );
       }
     });
   }
@@ -1125,6 +1127,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp) => {
         this.selectModelList = resp;
         this.updateAsset();
+        this.updateSerialNo();
       })
     }
     else {
@@ -1139,10 +1142,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.modelId = SelectModelSidebar.ID;
       this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == this.modelId);
       this.updateAsset();
+      this.updateSerialNo();
     }
     else {
       this.selectModelName = "";
       this.updateAsset();
+      this.updateSerialNo();
     }
   }
 
@@ -1272,6 +1277,29 @@ export class CompanyDeviceBetaComponent implements OnInit {
         this.cd.detectChanges();
       }
     }
+  }
+
+  operatingSystemWindow(ID){
+    this.agentService
+      .getOperatingSystemByAssetId(ID)
+      .subscribe((resp) => {
+        this.System = resp.filter((x) => x.IsActive);
+        if (this.System.length > 0) {          
+          this.serialnumber = this.System[0].SerialNumber;          
+        }
+      });
+  }
+
+  updateSerialNo() {
+    this.operatingSystem.SerialNumber = this.serialnumber;
+    this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
+      (resp) => {
+        this.toastr.success("Asset info save successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
   }
 
   ngOnDestroy(): void {
