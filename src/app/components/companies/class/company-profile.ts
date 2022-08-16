@@ -61,6 +61,7 @@ export class CompanyProfile {
         this.accountNumber = company.accountNumber;
         if (company.addresses.length == 1) {
             this.addresses = company.addresses;
+            this.addresses[0].isPrimary = true;
         }
         if (company.addresses.length == 2) {
             this.addresses = [company.addresses.find(item => item.isPrimary), company.addresses.find(item => !item.isPrimary)];
