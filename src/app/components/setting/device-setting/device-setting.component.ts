@@ -76,7 +76,8 @@ export class DeviceSettingComponent implements OnInit {
     private ngZone: NgZone,
     private modalService: NgbModal,
     private companiesService: CompaniesService,
-    private companiesStateService : CompaniesStateService) { }
+    private companiesStateService : CompaniesStateService,
+    private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
     this.devicetype = true;
@@ -122,13 +123,15 @@ export class DeviceSettingComponent implements OnInit {
       CreateDate: [""]
     })
 
-    this.settingStateService.setComponentName('DeviceSettingComponent');
-
+    this.settingStateService.setComponentName('DeviceSettingComponent');    
     if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     this.companiesStateService.onCurrentCompany.subscribe((data) =>{
-      this.getCurrentCompany(data);
-      this.techCompany = data;
-      this.getDeviceTypes(this.techCompany.id);
+      if(data.lenght>0)
+      {
+        this.getCurrentCompany(data);
+        this.techCompany = data;
+        this.getDeviceTypes(this.techCompany.id);
+      }      
     })
   }
 
@@ -144,7 +147,7 @@ export class DeviceSettingComponent implements OnInit {
     this.filter.onFilter(field, this.selectManufactureList)
   }
 
-  toggle(evt: any) {
+  toggle(evt: any) {    
     if (evt.nextId == "tab1") {
       this.devicebutton = true;
     }
@@ -152,18 +155,24 @@ export class DeviceSettingComponent implements OnInit {
       this.devicebutton = false
     }
 
-    if (evt.nextId == "tab2") {
-      this.manufacturebutton = true;
-      this.getManufacturers(this.techCompany.id);
+    if (evt.nextId == "tab2") {      
+      this.manufacturebutton = true;   
+      if(this.techCompany !== undefined)
+      {
+        this.getManufacturers(this.techCompany.id);            
+      }  
     }
     else {
       this.manufacturebutton = false
     }
 
     if (evt.nextId == "tab3") {
-      this.modelbutton = true;
-      this.getModels(this.techCompany.id);
-      this.getManufacturers(this.techCompany.id);
+      this.modelbutton = true; 
+      if(this.techCompany !== undefined)
+      {
+        this.getModels(this.techCompany.id);
+        this.getManufacturers(this.techCompany.id);
+      }           
     }
     else {
       this.modelbutton = false
@@ -198,7 +207,7 @@ export class DeviceSettingComponent implements OnInit {
       });
   }
 
-  getDeviceTypes(TechCompanyGuid: any) {
+  getDeviceTypes(TechCompanyGuid: any) {    
     this.devicetype = true;
     if(this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -208,7 +217,7 @@ export class DeviceSettingComponent implements OnInit {
     }
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {
+      .subscribe((resp) => {        
         this.devicetype = false;
         this.deviceTypeList = [];
         this.hardwareTypes = resp;
