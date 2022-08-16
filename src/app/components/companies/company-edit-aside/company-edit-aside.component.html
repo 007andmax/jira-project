@@ -135,7 +135,7 @@
                 <p>Location</p>
                 <input
                     type="text"
-                    #addresstext
+                    location-is-init="false"
                     [(ngModel)]="company.addresses[0].address"
                     (focus)="onCheckGoogleAutoComplete($event,0)"
                     placeholder="Enter Location"
