@@ -30,7 +30,7 @@
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  max-height: 176px;
+  max-height: 192px;
   overflow-y: auto;
   left: 0;
   z-index: $zindex-dropdown;
@@ -38,7 +38,7 @@
   //float: left; // TODO check this style dropdown
   min-width: 160px;
   height: fit-content;
-  padding: 8px;
+  padding: 4px 8px;
   margin: 2px 0 0; // override default ul
   list-style: none;
   font-size: $font-size-base;

@@ -68,6 +68,7 @@ app-drop-down {
       overflow: hidden;
       white-space: nowrap;
       border-radius: 6px;
+      margin: 4px 0;
 
       &:hover {
         background-color: $gray-100;

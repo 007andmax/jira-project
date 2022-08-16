@@ -63,6 +63,7 @@
       text-overflow: ellipsis;
       transition: all 0.3s;
       border-radius: 6px;
+      margin: 4px 0;
       &:hover {
         background: $gray-100;
       }
@@ -127,7 +128,7 @@
     top: auto !important;
     transform: none !important;
     min-height: 208px;
-    max-height: 208px;
+    max-height: 228px;
   }
 
   &::-webkit-scrollbar-thumb {
