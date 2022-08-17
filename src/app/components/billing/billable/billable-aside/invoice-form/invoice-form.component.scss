@@ -12,12 +12,6 @@
 .address-block {
 border-bottom: 1px solid #dfe3e8;
 }
-.item-selected-address {
-    padding: 16px 23px;
-    &:hover {
-        background-color: rgba(22, 164, 250, 0.05);
-    }
-}
 .address-h {
     color: $gray-600;
 }

@@ -60,11 +60,11 @@ export class CompanyProfile {
         this.id = company.id;
         this.accountNumber = company.accountNumber;
         if (company.addresses.length == 1) {
-            this.addresses = company.addresses;
+            this.addresses = company.addresses.map(item => new CompanyProfileAddress(item));
             this.addresses[0].isPrimary = true;
         }
         if (company.addresses.length == 2) {
-            this.addresses = [company.addresses.find(item => item.isPrimary), company.addresses.find(item => !item.isPrimary)];
+            this.addresses = [company.addresses.find(item => item.isPrimary), company.addresses.find(item => !item.isPrimary)].map(item => new CompanyProfileAddress(item));
         }
         if (this.addresses.length == 0) {
             let address: CompanyProfileAddress = new CompanyProfileAddress();

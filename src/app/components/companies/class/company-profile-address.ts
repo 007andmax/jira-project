@@ -29,6 +29,34 @@ export class CompanyProfileAddress {
         }
 
     }
+    public initSameAsBilling(data) {
+        let phoneNumbers = JSON.parse(JSON.stringify(this.phoneNumbers));
+        console.log("phoneNumbers", phoneNumbers);
+        this.sameAsBilling = true;
+        this.locationName = data.locationName;
+        this.isPrimary = false;
+        this.address = data.address;
+        this.addressWithSuitNumberAndPostalCode = data.addressWithSuitNumberAndPostalCode;
+        this.countryCode = data.countryCode;
+        this.locationLat = data.locationLat;
+        this.locationLng = data.locationLng;
+        this.fromGoogle = data.fromGoogle;
+        this.postalCode = data.postalCode;
+        this.suiteNumber = data.suiteNumber;
+        this.phoneNumbers = data.phoneNumbers.map((item, index) => {
+            let id;
+            if (index != phoneNumbers.length) id = phoneNumbers[index].id;
+            console.log("id", id);
+            return {
+                id: id,
+                number: item.number,
+                priority: item.priority,
+                typeNumber: item.typeNumber,
+            }
+        });
+        this.locale = data.locale;
+        this.timeZone = data.timeZone;
+    }
     public fullVersion() {
         this.locationName = '';
         this.address = '';

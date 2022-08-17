@@ -6,8 +6,30 @@
         [autoClose]="'inside'"
         #editCustomer="ngbDropdown"
     >
-        <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-154">
-            <span class="address-h">BILLING ADDRESS</span>
+        <div
+            class="qt-fs-10  qt-mb-4 qt-lh-154"
+            ngbDropdown
+        >
+            <div class="qt-df qt-ai-c">
+                <span class="address-h qt-fw-600">BILLING ADDRESS</span>
+                <i
+                    class="icn-16 icon__edit-gray qt-ml-8 pointer"
+                    ngbDropdownToggle
+                    id="dropdownForm2"
+                    (mouseenter)="shippingTooltip.show($event.target)"
+                    (mouseleave)="shippingTooltip.hide()"
+                ></i>
+                <app-dynamic-tooltip
+                    [content]="'Change Address'"
+                    [position]="'top'"
+                    #shippingTooltip
+                ></app-dynamic-tooltip>
+            </div>
+            <invoice-change-address
+                [company]="company"
+                aria-labelledby="dropdownForm2"
+                ngbDropdownMenu
+            ></invoice-change-address>
         </div>
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
@@ -96,68 +118,10 @@
                     [number]="company.addresses[1].phoneNumbers[0].number"
                 ></preview-phone-mask>
             </div>
-            <div ngbDropdownMenu>
-                <div
-                    class="item-selected-address pointer"
-                    ngbDropdownItem
-                    (click)="selectAddress(company.addresses[1].id,company.addresses[0].id)"
-                >
-                    <div
-                        class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                        [textContent]="company.addresses[0].locationName"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-lh-154"
-                        [textContent]="company.contacts[0].firstName + ' ' +
-      company.contacts[0].lastName"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-lh-154"
-                        [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-lh-154"
-                        [textContent]="company.contacts[0].primaryEmail"
-                    ></div>
-                    <div class="qt-fs-13 qt-mb-4">
-                        <preview-phone-mask
-                            [class]="'company-info-aside__row-info-value'"
-                            *ngIf="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0)"
-                            [number]="company.contacts[0].phoneNumbers[0].number"
-                        ></preview-phone-mask>
-                    </div>
-                </div>
-                <div
-                    class="item-selected-address pointer"
-                    ngbDropdownItem
-                    (click)="selectAddress(company.addresses[1].id,company.addresses[1].id)"
-                >
-                    <div
-                        class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                        [textContent]="company.addresses[1].locationName"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-lh-154"
-                        [textContent]="company.contacts[0].firstName + ' ' +
-      company.contacts[0].lastName"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-lh-154"
-                        [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
-                    ></div>
-                    <div
-                        class="qt-fs-13 qt-lh-154"
-                        [textContent]="company.contacts[0].primaryEmail"
-                    ></div>
-                    <div class="qt-fs-13 qt-mb-4">
-                        <preview-phone-mask
-                            [class]="'company-info-aside__row-info-value'"
-                            *ngIf="(company.addresses[1].phoneNumbers && company.addresses[1].phoneNumbers.length > 0)"
-                            [number]="company.addresses[1].phoneNumbers[0].number"
-                        ></preview-phone-mask>
-                    </div>
-                </div>
-            </div>
+            <invoice-change-address
+                ngbDropdownMenu
+                [company]="company"
+            ></invoice-change-address>
         </div>
     </div>
 </div>
