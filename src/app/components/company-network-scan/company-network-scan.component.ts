@@ -114,12 +114,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
           this.masterAgent.online = true;
         }   
         this.selectedMasterAgent = this.assetList.find(x=>x.IsMasterAgent == true);                       
-        this.selectMasterNetwork(this.selectedMasterAgent.ID); 
-        this.ngZone.run(() => {
-          this.networkvalue
-     
-        this.showMinPreloader = false;
-        });
+        this.selectMasterNetwork(this.selectedMasterAgent.ID);         
       }
       else {
         this.isGetDevices = false;
