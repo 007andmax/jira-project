@@ -16,19 +16,16 @@
                     class="icn-16 icon__edit-gray qt-ml-8 pointer"
                     ngbDropdownToggle
                     id="dropdownForm2"
-                    (mouseenter)="shippingTooltip.show($event.target)"
-                    (mouseleave)="shippingTooltip.hide()"
+                    placement="top"
+                    ngbTooltip="Change Address"
+                    container="body"
                 ></i>
-                <app-dynamic-tooltip
-                    [content]="'Change Address'"
-                    [position]="'top'"
-                    #shippingTooltip
-                ></app-dynamic-tooltip>
             </div>
             <invoice-change-address
                 [company]="company"
                 aria-labelledby="dropdownForm2"
                 ngbDropdownMenu
+                (onSelectAddress)="selectAddress($event)"
             ></invoice-change-address>
         </div>
         <div
@@ -85,14 +82,10 @@
                 <i
                     class="icn-16 icon__edit-gray qt-ml-8 pointer"
                     ngbDropdownToggle
-                    (mouseenter)="shippingTooltip.show($event.target)"
-                    (mouseleave)="shippingTooltip.hide()"
+                    placement="top"
+                    ngbTooltip="Change Address"
+                    container="body"
                 ></i>
-                <app-dynamic-tooltip
-                    [content]="'Change Address'"
-                    [position]="'top'"
-                    #shippingTooltip
-                ></app-dynamic-tooltip>
             </div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
@@ -121,6 +114,7 @@
             <invoice-change-address
                 ngbDropdownMenu
                 [company]="company"
+                (onSelectAddress)="selectAddress($event)"
             ></invoice-change-address>
         </div>
     </div>

@@ -13,7 +13,7 @@ export class InvoiceChangeAddressComponent implements OnInit {
 
   ngOnInit() {
   }
-  selectAddress() {
-
+  selectAddress(currentAddress, WithNewAddress) {
+    this.onSelectAddress.emit({ currentAddress: currentAddress, WithNewAddress: WithNewAddress })
   }
 }

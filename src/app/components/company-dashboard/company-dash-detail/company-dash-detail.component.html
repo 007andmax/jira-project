@@ -146,23 +146,17 @@
         class="profile-cmp-board other-info d-flex"
         *ngIf="tab === 'dashboard'"
     >
-        <div
-            class="other-info-col d-flex"
-            *ngIf="companyDetailing.phoneNumber !== ''"
-        >
-            <div class="small-title">Telephone</div>
+        <div class="other-info-col d-flex">
+            <div class="small-title">Billing Address</div>
+            <span class="qt-fs-13 qt-fw-600">
+                {{companyDetailing.billingLocationName}}
+            </span>
             <a href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}">
                 <preview-phone-mask
                     *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
                     [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
                 ></preview-phone-mask>
             </a>
-        </div>
-        <div class="other-info-col d-flex">
-            <div class="small-title">Billing Address</div>
-            <h3 class="qt-fs-13 qt-fw-600">
-                {{companyDetailing.billingLocationName}}
-            </h3>
             <address>{{companyDetailing.addresses_name}}</address>
             <a
                 (click)="openMap(content,companyDetailing.addresses[0])"
@@ -180,9 +174,15 @@
             *ngIf="companyDetailing.addresses.length == 2"
         >
             <div class="small-title">Shipping Address</div>
-            <h3 class="qt-fs-13 qt-fw-600">
+            <span class="qt-fs-13 qt-fw-600">
                 {{companyDetailing.shippingLocationName}}
-            </h3>
+            </span>
+            <a href="tel:{{companyDetailing?.addresses[1]?.phoneNumbers[0]?.number}}">
+                <preview-phone-mask
+                    *ngIf="companyDetailing?.addresses[1]?.phoneNumbers[0]?.number"
+                    [number]="companyDetailing?.addresses[1]?.phoneNumbers[0]?.number"
+                ></preview-phone-mask>
+            </a>
             <address>
                 {{companyDetailing.shipping_addresses_name}}
             </address>
