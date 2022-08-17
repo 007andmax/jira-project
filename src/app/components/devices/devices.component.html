@@ -113,6 +113,8 @@
                               </label>
                             </div>
                         </th>
+                        <th class="company-devices-table__device-type">                            
+                        </th>
                         <th class="company-devices-table__device-type">
                         </th>
                         <th class="company-devices-table__dev-name pointer" (click)="onFilter('Name')">
@@ -155,6 +157,9 @@
                                       <span></span>
                                   </label>
                                 </div>
+                            </td>
+                            <td class="company-devices-table__device-type">
+                                <div *ngIf="asset.IsMasterAgent" class="icon__master-agent qt-bg-contain qt-sz-24 qt-mr-8"></div>
                             </td>
                             <td class="company-devices-table__device-type">
                                 <div ngbDropdown placement="bottom-left" container="body" class="qt-ic-c qt-pointer device-type-icon qt-sz-24" [ngClass]="{
@@ -201,9 +206,9 @@
                   company-devices-table-device-name
                   qt-ff-gm qt-df qt-ai-c
                 ">
-                                            <span [textContent]="asset.Title || asset.Name"></span>
+                                            <span [textContent]="asset.Name"></span>
                                         </div>
-                                        <span class="company-device-desc" [textContent]></span>
+                                        <span class="company-device-desc" [textContent]="asset.Title"></span>
                                     </div>
                                 </div>
                             </td>
@@ -528,34 +533,26 @@
                     ></div>
                 </div>
                 <div>
-                    <div class="sidebar-system__info edit-field">
-                        <div class="sidebar-system__info-title">Name</div>
-                        <input
-                        type="text"
-                        class="device-table__input-name"
-                        [(ngModel)]="assetData.Title || assetData.Name"
-                        (blur)="updateAsset()"
-                        >
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Host Name</div>
+                        <div
+                        class="sidebar-system__info-text"
+                        [textContent]="assetData.Name"
+                    ></div>                   
                     </div>
                   </div>
-              <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Asset Tag</div>
-                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Tag" (blur)="updateAsset()" >
-                    </div>
-                </div> 
+               <div>
+                 <div class="sidebar-system__info">
+                    <div class="sidebar-system__info edit-field">Title</div>
+                    <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Title" (blur)="updateAsset()">
+                 </div>
+               </div>                 
                 <div>
                     <div class="sidebar-system__info edit-field">
                         <div class="sidebar-system__info-title">Serial Number</div>
                         <input type="text" class="device-table__input-name" [(ngModel)]="serialnumber" (blur)="updateSerialNo()">
                     </div>
-                </div> 
-                <div>
-                    <div class="sidebar-system__info edit-field">
-                        <div class="sidebar-system__info-title">Sequence Number</div>
-                        <input type="text" class="device-table__input-name">
-                    </div>
-                </div>                
+                </div>                                
                 <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Manufacturer</div>
