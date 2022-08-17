@@ -118,11 +118,12 @@
   .content {
     height: 170px;
     overflow: scroll;
-    padding: 0px;
+    padding: 0;
 
     .company-tag-item {
-      font-size: 13px !important;
-      height: 30px;
+      @include body-r__sb;
+      color: #101828;
+      height: 32px;
       cursor: pointer;
       i {
         margin: 0 0 0 auto;

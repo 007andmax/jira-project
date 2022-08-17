@@ -41,10 +41,9 @@
 }
 
 .dropdown-link .default-user-avatar {
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
 }
 
 
@@ -64,13 +63,6 @@
 .dropdown-link {
   display: flex !important;
   align-items: center;
-}
-
-.dropdown-link .default-user-avatar {
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-
 }
 
 .user-item:nth-child(even) .default-user-avatar, li:nth-child(even) .default-user-avatar {
