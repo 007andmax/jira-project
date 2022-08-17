@@ -57,7 +57,7 @@
                                 class="pointer"
                                 ngbDropdownItem
                                 (click)="selectMasterNetwork(agent.ID)"
-                                [ngClass]="{'offline-device': !agent.IsMasterAgent}"
+                                [ngClass]="{'offline-device': !agent.IsMasterAgent, 'online-device': agent.IsMasterAgent}"
                                 [textContent]="agent.Title || agent.Name"
                             ></li>
                         </ng-template>
@@ -217,9 +217,14 @@
                         [textContent]="network.MacAddress"
                     ></td>
                     <td
-                        class="network-scan-table__status"
-                        [textContent]="network.IsAgentInstalled"
+                        class="network-scan-table__status"                        
                     >
+                    <div class="qt-df qt-fd-c">                              
+                        <span *ngIf="network.IsAgentInstalled" class="network-status qt-ff-gm"
+                        [textContent]="'MANAGED'"
+                        ></span>                        
+                      <span></span>          
+                  </div>                   
                     </td>
                     <td class="network-scan-table__delete">
                         <button

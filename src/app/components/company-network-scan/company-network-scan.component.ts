@@ -54,8 +54,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   networkvalue: any[] = [];
   nets: [] = [];
   asset: any;
-  assetName: any;
-  nonAgentVersionList: any[] = [];
+  assetName: any;  
+  selectedMasterAgent:any;
+  nonAgentVersionList: any[] = [];  
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
@@ -88,6 +89,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.devicesStateService.subsribeToNetScan(this.companyId);
       this.getDevices();
     });
+     
   }
 
   getDevices() {
@@ -101,16 +103,23 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.AssetDetail();
   }
 
-  AssetDetail() {
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+  AssetDetail() {    
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
       if (resp.length > 0) {
         this.isGetDevices = true
         this.assetList = resp;
-        this.filteredAssetList = resp.filter(x => x.AgentVersion);        
+        this.filteredAssetList = resp.filter(x => x.AgentVersion);                
         this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
         if (this.masterAgent) {
           this.masterAgent.online = true;
-        }
+        }   
+        this.selectedMasterAgent = this.assetList.find(x=>x.IsMasterAgent == true);                       
+        this.selectMasterNetwork(this.selectedMasterAgent.ID); 
+        this.ngZone.run(() => {
+          this.networkvalue
+     
+        this.showMinPreloader = false;
+        });
       }
       else {
         this.isGetDevices = false;
@@ -119,7 +128,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
 
-  selectMasterNetwork(Id) {    
+  selectMasterNetwork(Id) {      
     this.asset = this.assetList.find((x) => x.ID == Id);
     this.assetName = this.asset.Name;
     let data: any = {};

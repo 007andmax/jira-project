@@ -22,7 +22,11 @@ app-company-network-scan-item {
 }
 
 .offline-device {
-    color: $gray-500;
+    color: $gray-700;
+}
+
+.online-device{
+    color: #000000;
 }
 
 .sub-label-field {
@@ -48,3 +52,16 @@ app-company-network-scan-item {
     min-height: 24px;
     padding:0 !important;
 }
+
+.network-status {
+    border: solid 1px $success;
+    line-height: 1;
+    width: fit-content;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: $success;
+    background-color: $white;
+    letter-spacing: 0.3px;
+    font-size: 8px;
+    text-transform: uppercase;    
+  }
