@@ -113,7 +113,7 @@
                               </label>
                             </div>
                         </th>
-                        <th class="company-devices-table__device-type">                            
+                        <th class="company-devices-table__device-master-agent">                            
                         </th>
                         <th class="company-devices-table__device-type">
                         </th>
@@ -158,8 +158,8 @@
                                   </label>
                                 </div>
                             </td>
-                            <td class="company-devices-table__device-type">
-                                <div *ngIf="asset.IsMasterAgent" class="icon__master-agent qt-bg-contain qt-sz-24 qt-mr-8"></div>
+                            <td class="company-devices-table__device-master-agent">
+                                <div *ngIf="asset.IsMasterAgent" class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
                             </td>
                             <td class="company-devices-table__device-type">
                                 <div ngbDropdown placement="bottom-left" container="body" class="qt-ic-c qt-pointer device-type-icon qt-sz-24" [ngClass]="{
@@ -208,7 +208,7 @@
                 ">
                                             <span [textContent]="asset.Name"></span>
                                         </div>
-                                        <span class="company-device-desc" [textContent]="asset.Title"></span>
+                                        <span class="company-device-desc devicetitledesc" [textContent]="asset.Title"></span>
                                     </div>
                                 </div>
                             </td>
@@ -237,21 +237,21 @@
                             <td class="company-devices-table__up-time">
                                 <div class="qt-df qt-fd-c">
                                     <span>
-                                  <span>{{ asset.UpTime }}</span>
+                                  <span *ngIf="asset.IsActive">{{ asset.UpTime }}</span>
                                     <ng-template #tipOfflineDevice class="tooltip">
-                                        <span>{{ asset.UpTime }}</span>
+                                        <span *ngIf="asset.IsActive">{{ asset.UpTime }}</span>
                                     </ng-template>
                                     </span>
                                     <span *ngIf="
                 asset.UpTime != '' &&
                 asset.UpTime != undefined &&
                 asset.UpTime != null
-              " class="uptime-tag qt-ff-gm" [textContent]="'Online'"></span>
+              " class="uptime-tag qt-ff-gm" [textContent]="(asset.IsActive) ? 'Online' : 'uninstalled'" ></span>
                                     <span *ngIf="
                 asset.UpTime == '' ||
                 asset.UpTime == undefined ||
                 asset.UpTime == null
-              " placement="top" container="body" [ngbTooltip]="tipOfflineDevice" class="uptime-tag qt-ff-gm --offline" [textContent]="'Offline'"></span>
+              " placement="top" container="body" [ngbTooltip]="tipOfflineDevice" class="uptime-tag qt-ff-gm --offline" [textContent]="(asset.IsActive) ? 'Offline' : 'uninstalled'"></span>
                                 </div>
                             </td>
                             <td class="company-devices-table__windows">                                
@@ -542,8 +542,8 @@
                     </div>
                   </div>
                <div>
-                 <div class="sidebar-system__info">
-                    <div class="sidebar-system__info edit-field">Title</div>
+                 <div class="sidebar-system__info edit-field">
+                    <div class="sidebar-system__info-title">Display Name</div>
                     <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Title" (blur)="updateAsset()">
                  </div>
                </div>                 
@@ -717,7 +717,7 @@
                         <div class="sidebar-network__info-title">DHCP Server:</div>
                         <div
                             class="sidebar-network__info-text"
-                            [textContent]="'-'"
+                            [textContent]="networkData.DHCPServer"
                         ></div>
                     </div>
                     <div class="sidebar-network__info">

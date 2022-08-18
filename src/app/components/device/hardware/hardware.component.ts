@@ -54,6 +54,7 @@ export class HardwareComponent implements OnInit {
   differentMemory: any[] = [];
   graphicscardDriver: any[] = [];
   TemporaryGraphicsDriver: any[] = [];
+  wanIp:string="";
 
   constructor(
     private toastr: ToastrService,
@@ -86,7 +87,8 @@ export class HardwareComponent implements OnInit {
       return;
     }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-      if (resp.length > 0) {
+      if (resp.length > 0) {    
+        this.wanIp = resp[0].ExternalIPAddress;   
         this.HardwareList(resp[0].ID);
       }
     });
@@ -356,10 +358,13 @@ export class HardwareComponent implements OnInit {
       ["IP", this.networkAdapter["IPAddress"] || "N/A"],
       ["MAC", this.networkAdapter["MACAddress"] || "N/A"],
       ["DHCP", this.networkAdapter["DHCPEnabled"]],
+      ["DHCP Server", this.networkAdapter["DHCPServer"] || "N/A"],
       ["Subnet", this.networkAdapter["Subnet"] || "N/A"],
       ["DNS1", this.networkAdapter["DNS1"] || "N/A"],
       ["DNS2", this.networkAdapter["DNS2"] || "N/A"],
-      ["Gateway", this.networkAdapter["Gateway"] || "N/A"]
+      ["Gateway", this.networkAdapter["Gateway"] || "N/A"],
+      ["Link Speed", this.getLinkSpeed(this.networkAdapter["Speed"]) + "(MegaBit)"],
+      ["WAN IP", this.wanIp || "N/A"]
     ];
 
     this.printGraphic = [
@@ -932,5 +937,9 @@ export class HardwareComponent implements OnInit {
 
   printPdf() {
     window.open(this.pdfUrl, "_blank");
+  }
+
+  getLinkSpeed(value) {
+    return ((value != 0 && value != undefined)) ? (Number(value / 1000000)) : 0;
   }
 }

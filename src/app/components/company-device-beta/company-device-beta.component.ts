@@ -244,7 +244,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
       if (!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList = [];

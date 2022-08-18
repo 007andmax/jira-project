@@ -188,6 +188,10 @@
                                         {{ networkAdapter.DHCPEnabled }}
                                     </li>
                                     <li>
+                                        <span>DHCP Server</span>
+                                        {{ networkAdapter.DHCPServer || "N/A"}}
+                                    </li>
+                                    <li>
                                         <span>Subnet:</span>
                                         {{networkAdapter.Subnet || "N/A"}}
                                     </li>
@@ -202,6 +206,14 @@
                                     <li>
                                         <span>Gateway:</span>
                                         {{networkAdapter.Gateway || "N/A"}}
+                                    </li>
+                                    <li>
+                                        <span>Link Speed:</span>
+                                        <span id="networkSpeed" [textContent]="getLinkSpeed(networkAdapter.Speed) + ' (MegaBit)'"></span>
+                                    </li>
+                                    <li>
+                                        <span>WAN IP:</span>
+                                        {{wanIp || "N/A"}}
                                     </li>
                                 </ul>
                             </div>

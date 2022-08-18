@@ -326,6 +326,12 @@ input.mat-chip-input {
   min-width: 150px;
 }
 
+.company-devices-table__device-master-agent{
+  max-width: 30px;
+  width: 30px;
+  min-width: 30px;
+}
+
 .remote-area {
   padding: 20px;
   display: -ms-flexbox;
@@ -810,4 +816,13 @@ span.qt-input-search:before {
       margin-left:-5px;
     }
   }
+}
+.devicetitledesc{
+  color: #919eab;
+    line-height: 1.33;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
 }

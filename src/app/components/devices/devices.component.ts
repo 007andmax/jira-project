@@ -206,7 +206,9 @@ export class DevicesComponent implements OnInit {
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {      
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);      
-    });    
+    }); 
+    
+    this.CurrentUser();
   }
 
   getCountSelected() {
@@ -266,7 +268,7 @@ export class DevicesComponent implements OnInit {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -274,11 +276,11 @@ export class DevicesComponent implements OnInit {
       this.assetList = resp;
       this.HardwareTypeList(this.techCompnayGuid);
 
-      this.assetList.forEach((element, index) => {
+      this.assetList.forEach((element, index) => {        
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        if (element.AgentVersion != null) {
+        if (element.AgentVersion != null) {          
           this.GetDeviceListConfig(element.ID);
         }
       });
@@ -348,12 +350,12 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  GetDeviceListConfig(assetID: any) {
+  GetDeviceListConfig(assetID: any) {    
     this.agentService.GetDeviceListConfig(assetID);
   }
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -387,12 +389,11 @@ export class DevicesComponent implements OnInit {
 
           }
           asset.online = true;
-        }
+        }   
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
-        }
-
-      }
+        }     
+      }      
     });
   }
 
@@ -1140,7 +1141,7 @@ export class DevicesComponent implements OnInit {
 
   getNetworkDetail(asset) {
     this.networkData = [];
-    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
+    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {      
       if (resp.length > 0) {        
         this.networkData = resp.find((x) => x.Gateway !== null );
       }
