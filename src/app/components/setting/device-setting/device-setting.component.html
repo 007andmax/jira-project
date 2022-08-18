@@ -218,11 +218,7 @@
                         </tbody>
                       </table>
                       </div>
-                    </div>
-                    <div
-      class="loading"
-      *ngIf="devicetype"
-  ></div>
+                    </div>            
               </ng-template>
           </ngb-tab>
           <!-- Manufacture -->
@@ -301,11 +297,7 @@
                         </tbody>
                       </table>
                       </div>
-                  </div>
-                  <div
-                  class="loading"
-                  *ngIf="manufactur"
-              ></div>
+                  </div>                  
               </ng-template>
           </ngb-tab>
           <!-- Model -->
@@ -499,11 +491,7 @@
                         </tbody>
                       </table>
                       </div>
-                  </div>
-                  <div
-                  class="loading"
-                  *ngIf="modelload"
-              ></div>
+                  </div>                  
               </ng-template>
           </ngb-tab>
       </ngb-tabset>
@@ -688,10 +676,6 @@
     <h4 class="not-found">No Data Found</h4>
   </div>
 </div>
-<div
-    class="loading"
-    *ngIf="deviceTypeloading"
-></div>
 </ng-template>
 
 <ng-template #templatecounterManufactuer class="modal-content">
@@ -725,10 +709,6 @@
     <h4 class="not-found">No Data Found</h4>
   </div>
 </div>
-<div
-    class="loading"
-    *ngIf="manufactureloading"
-></div>
 </ng-template>
 
 
@@ -763,8 +743,4 @@
     <h4 class="not-found">No Data Found</h4>
   </div>
 </div>
-<div
-    class="loading"
-    *ngIf="modelloading"
-></div>
 </ng-template>
