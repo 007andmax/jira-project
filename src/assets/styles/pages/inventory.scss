@@ -83,18 +83,17 @@
       min-width: 120px;
       color: $gray-800;
     }
-    &__cost
-    {
-    width: 60px;
-    max-width: 60px;
-    min-width: 60px;
-    color: $gray-800;
-    position: relative;
+    &__cost {
+      width: 78px;
+      max-width: 78px;
+      min-width: 78px;
+      color: $gray-800;
+      position: relative;
     }
     &__sale-price {
-      width: 90px;
-      max-width: 90px;
-      min-width: 90px;
+      width: 92px;
+      max-width: 92px;
+      min-width: 92px;
       color: $gray-800;
     }
   }
@@ -111,6 +110,10 @@
     }
   }
 
+  .qt-page-list__header-thead-container,
+  .qt-page-list__body-table-container {
+    overflow: unset;
+  }
 }
 app-inventory {
   .modal {

@@ -25,14 +25,14 @@ pre {
     }
 }
 /deep/ .products-table__category, /deep/ .products-table__tac, /deep/ .products-table__gl {
-    
+
         input {
         padding: 4px 24px 4px 8px !important;
         border: unset !important;
         &:hover {
             background: #f4f6f8;
         }
-    
+
     }
 }
 /deep/ .products-table__tac {
@@ -43,7 +43,7 @@ pre {
 .products-table__cost,.products-table__sale-price,.products-table__mfg,.products-table__ilc {
     input {
         width: 100%;
-        padding: 4px 24px 4px 8px !important;
+        padding: 4px 8px;
         &:hover {
             background: #f4f6f8;
         }
