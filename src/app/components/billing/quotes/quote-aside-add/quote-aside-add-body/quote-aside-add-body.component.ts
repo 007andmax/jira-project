@@ -206,6 +206,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     // this.quote.resetServices();
     this.validate.resetValidate();
   }
+  selectAddress(data) {
+    this.billableService.setAddressInvoice(data.currentAddress, data.WithNewAddress).subscribe(data => {
+
+    })
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

@@ -39,28 +39,60 @@
         </div>
     </div>
     <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
-        <div class="qt-lh-154">
+        <div class="qt-lh-154 qt-pr-12">
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
                 class="qt-fs-13 qt-color-dark qt-fw-600"
-                *ngIf="quoteCompany"
-                [textContent]="quoteCompany.name"
+                [textContent]="quote.company.addresses[0].locationName"
             ></div>
             <div
                 class="qt-fs-13"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"
+                [textContent]="quote.primaryContact.firstName + ' ' +
+      quote.primaryContact.lastName"
             ></div>
             <div
                 class="qt-fs-13"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"
+                [textContent]="quote.company.addresses[0].addressWithSuitNumberAndPostalCode"
             ></div>
             <div
                 class="qt-fs-13"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"
+                [textContent]="quote.primaryContact.primaryEmail"
             ></div>
+            <div class="qt-fs-13">
+                <preview-phone-mask
+                    *ngIf="(quote.primaryContact.phoneNumbers && quote.primaryContact.phoneNumbers.length > 0)"
+                    [number]="quote.primaryContact.phoneNumbers[0].number"
+                ></preview-phone-mask>
+            </div>
+        </div>
+        <div
+            class="qt-lh-154 qt-pr-12"
+            *ngIf="quote.company.addresses.length  == 2"
+        >
+            <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
+            <div
+                class="qt-fs-13 qt-color-dark qt-fw-600"
+                [textContent]="quote.company.addresses[1].locationName"
+            ></div>
+            <div
+                class="qt-fs-13"
+                [textContent]="quote.primaryContact.firstName + ' ' +
+      quote.primaryContact.lastName"
+            ></div>
+            <div
+                class="qt-fs-13"
+                [textContent]="quote.company.addresses[1].addressWithSuitNumberAndPostalCode"
+            ></div>
+            <div
+                class="qt-fs-13"
+                [textContent]="quote.primaryContact.primaryEmail"
+            ></div>
+            <div class="qt-fs-13">
+                <preview-phone-mask
+                    *ngIf="(quote.company.addresses[1].phoneNumbers && quote.company.addresses[1].phoneNumbers.length > 0)"
+                    [number]="quote.company.addresses[1].phoneNumbers[0].number"
+                ></preview-phone-mask>
+            </div>
         </div>
         <div class="qt-fs-13 qt-text-right qt-lh-154">
             <div class="qt-df qt-jc-sb qt-mb-8">

@@ -92,6 +92,11 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.notes = data;
     })
   }
+  selectAddress(data) {
+    this.billableService.setAddressInvoice(data.currentAddress, data.WithNewAddress).subscribe(data => {
+
+    })
+  }
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {
       this.changeGlobalNote = false;

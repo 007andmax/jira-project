@@ -1,0 +1,16 @@
+@import './src/assets/styles/variable';
+
+.billing-address {
+    border-right: 1px solid #dfe3e8;
+}
+.address-block {
+    border-bottom: 1px solid #dfe3e8;
+    margin-left: -30px;
+    margin-right: -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.address-h {
+    color: $gray-600;
+}

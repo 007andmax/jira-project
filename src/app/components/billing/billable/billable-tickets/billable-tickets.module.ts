@@ -27,6 +27,7 @@ import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { InvoiceChangeAddressComponent } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.component';
+import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { InvoiceChangeAddressComponent } from '../billable-aside/invoice-form/in
         InvoiceDiscountComponent,
         InvoiceFormTicketEditServiceComponent,
         InvoiceFormTicketEditProductComponent,
-        InvoiceChangeAddressComponent
+
     ],
     imports: [
         CommonModule,
@@ -60,6 +61,7 @@ import { InvoiceChangeAddressComponent } from '../billable-aside/invoice-form/in
         BillableTicketsRoutingModule,
         PreviewPhoneMaskModule,
         DynamicTooltipModule,
+        InvoiceChangeAddressModule
     ],
 
 

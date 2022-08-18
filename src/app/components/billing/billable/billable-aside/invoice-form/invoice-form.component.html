@@ -7,7 +7,7 @@
         #editCustomer="ngbDropdown"
     >
         <div
-            class="qt-fs-10  qt-mb-4 qt-lh-154"
+            class="qt-fs-10 qt-mb-12 qt-lh-154"
             ngbDropdown
         >
             <div class="qt-df qt-ai-c">
@@ -48,8 +48,8 @@
         <div class="qt-fs-13 qt-mb-4">
             <preview-phone-mask
                 [class]="'company-info-aside__row-info-value'"
-                *ngIf="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0)"
-                [number]="company.contacts[0].phoneNumbers[0].number"
+                *ngIf="(invoice.invoiceDataDto.invoiceContact.phoneNumbers && invoice.invoiceDataDto.invoiceContact.phoneNumbers.length > 0)"
+                [number]="invoice.invoiceDataDto.invoiceContact.phoneNumbers[0].number"
             ></preview-phone-mask>
         </div>
         <div
@@ -77,7 +77,7 @@
         ngbDropdown
     >
         <div *ngIf="company.addresses.length == 2">
-            <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-154">
+            <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-12 qt-lh-154">
                 <span class="address-h">SHIPPING ADDRESS</span>
                 <i
                     class="icn-16 icon__edit-gray qt-ml-8 pointer"
@@ -104,13 +104,6 @@
                 class="qt-fs-13 qt-lh-154"
                 [textContent]="company.contacts[0].primaryEmail"
             ></div>
-            <div class="qt-fs-13 qt-mb-4">
-                <preview-phone-mask
-                    [class]="'company-info-aside__row-info-value'"
-                    *ngIf="(company.addresses[1].phoneNumbers && company.addresses[1].phoneNumbers.length > 0)"
-                    [number]="company.addresses[1].phoneNumbers[0].number"
-                ></preview-phone-mask>
-            </div>
             <invoice-change-address
                 ngbDropdownMenu
                 [company]="company"
