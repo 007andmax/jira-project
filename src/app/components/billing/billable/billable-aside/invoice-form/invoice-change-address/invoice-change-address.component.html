@@ -32,6 +32,7 @@
     <div
         class="item-selected-address pointer"
         ngbDropdownItem
+        *ngIf="company.addresses.length == 2"
         (click)="selectAddress(company.addresses[1].id,company.addresses[1].id)"
     >
         <div

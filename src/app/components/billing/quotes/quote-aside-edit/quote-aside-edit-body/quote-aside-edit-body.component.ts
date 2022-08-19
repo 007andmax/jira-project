@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
@@ -26,7 +27,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @Input() validate: QuoteValdiateEdit = new QuoteValdiateEdit();
   @Output() onStopPreloader = new EventEmitter();
-  quoteCompany: any;
+  quoteCompany: CompanyItem;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
   showPreloader: boolean = true;
@@ -72,7 +73,8 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
         if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
-        this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.company.id);
+        this.quoteCompany = new CompanyItem(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id));
+        console.log("this.quoteCompany", this.quoteCompany);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
         this.onStopPreloader.emit(null);

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
@@ -30,7 +31,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @ViewChild('expiryDate') expiryDate: DatePickerComponent;
   @Input() validate: QuoteValdiate = new QuoteValdiate();
-  quoteCompany: any;
+  quoteCompany: CompanyItem;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
   quote: QuoteAdd = new QuoteAdd();
@@ -66,11 +67,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
         //  this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
         this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
         if (data.data.companyInfo.addresses.length == 1) {
-          this.quoteCompany.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
+          this.quoteCompany.companyInfo.addresses[0] = data.data.companyInfo.addresses[0];
         }
         if (data.data.companyInfo.addresses.length == 2) {
-          this.quoteCompany.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.isPrimary));
-          this.quoteCompany.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => !item.isPrimary));
+          this.quoteCompany.companyInfo.addresses[0] = data.data.companyInfo.addresses.find(item => item.isPrimary);
+          this.quoteCompany.companyInfo.addresses[1] = data.data.companyInfo.addresses.find(item => !item.isPrimary);
         }
       }
     });
@@ -81,7 +82,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   onInitCopy() {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
-    this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.companyId);
+    this.quoteCompany = new CompanyItem(this.companiesState.getCompanies().find(item => item.id === this.quote.companyId));
     this.cd.detectChanges();
     //  this.servicesList.getServicesList();
     this.getServicesList();

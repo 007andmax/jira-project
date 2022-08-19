@@ -61,14 +61,14 @@
             <div class="qt-fs-13 qt-mb-4">
                 <preview-phone-mask
                     [class]="'company-info-aside__row-info-value'"
-                    *ngIf="(quoteCompany.companyInfo.contacts[0].phoneNumbers && quoteCompany.companyInfo.contacts[0].phoneNumbers.length > 0)"
-                    [number]="quoteCompany.companyInfo.contacts[0].phoneNumbers[0].number"
+                    *ngIf="(quoteCompany.companyInfo.addresses[0].phoneNumbers && quoteCompany.companyInfo.addresses[0].phoneNumbers.length > 0)"
+                    [number]="quoteCompany.companyInfo.addresses[0].phoneNumbers[0].number"
                 ></preview-phone-mask>
             </div>
         </div>
         <div
             class="qt-lh-154 qt-pr-12"
-            *ngIf="quote.company.addresses.length  == 2"
+            *ngIf="quoteCompany.companyInfo.addresses.length  == 2"
         >
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
             <div
@@ -88,13 +88,6 @@
                 class="qt-fs-13 qt-lh-154"
                 [textContent]="quoteCompany.companyInfo.contacts[0].primaryEmail"
             ></div>
-            <div class="qt-fs-13 qt-mb-4">
-                <preview-phone-mask
-                    [class]="'company-info-aside__row-info-value'"
-                    *ngIf="(quoteCompany.companyInfo.addresses[1].phoneNumbers && quoteCompany.companyInfo.addresses[1].phoneNumbers.length > 0)"
-                    [number]="quoteCompany.companyInfo.addresses[1].phoneNumbers[0].number"
-                ></preview-phone-mask>
-            </div>
         </div>
         <div class="qt-fs-13 qt-text-right qt-lh-154">
             <div class="qt-df qt-jc-sb qt-mb-8">

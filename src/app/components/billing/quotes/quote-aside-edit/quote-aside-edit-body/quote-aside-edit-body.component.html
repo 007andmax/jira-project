@@ -135,13 +135,6 @@
                     class="qt-fs-13 qt-lh-154"
                     [textContent]="quote.primaryContact.primaryEmail"
                 ></div>
-                <div class="qt-fs-13 qt-mb-4">
-                    <preview-phone-mask
-                        [class]="'company-info-aside__row-info-value'"
-                        *ngIf="(quote.company.addresses[1].phoneNumbers && quote.company.addresses[1].phoneNumbers.length > 0)"
-                        [number]="quote.company.addresses[1].phoneNumbers[0].number"
-                    ></preview-phone-mask>
-                </div>
                 <quote-aside-add-change-address
                     ngbDropdownMenu
                     [company]="quoteCompany"

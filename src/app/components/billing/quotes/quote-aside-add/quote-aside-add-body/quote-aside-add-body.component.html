@@ -76,8 +76,8 @@
             <div class="qt-fs-13 qt-mb-4">
                 <preview-phone-mask
                     [class]="'company-info-aside__row-info-value'"
-                    *ngIf="(quoteCompany.companyInfo.contacts[0].phoneNumbers && quoteCompany.companyInfo.contacts[0].phoneNumbers.length > 0)"
-                    [number]="quoteCompany.companyInfo.contacts[0].phoneNumbers[0].number"
+                    *ngIf="(quoteCompany.companyInfo.addresses[0].phoneNumbers && quoteCompany.companyInfo.addresses[0].phoneNumbers.length > 0)"
+                    [number]="quoteCompany.companyInfo.addresses[0].phoneNumbers[0].number"
                 ></preview-phone-mask>
             </div>
             <div
@@ -102,6 +102,7 @@
         <div
             class="qt-w50 qt-pt-15 qt-pl-32 qt-pb-23"
             ngbDropdown
+            placement="bottom-end"
         >
             <div *ngIf="quoteCompany.companyInfo.addresses.length == 2">
                 <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-12 qt-lh-154">
@@ -131,13 +132,6 @@
                     class="qt-fs-13 qt-lh-154"
                     [textContent]="quoteCompany.companyInfo.contacts[0].primaryEmail"
                 ></div>
-                <div class="qt-fs-13 qt-mb-4">
-                    <preview-phone-mask
-                        [class]="'company-info-aside__row-info-value'"
-                        *ngIf="(quoteCompany.companyInfo.addresses[1].phoneNumbers && quoteCompany.companyInfo.addresses[1].phoneNumbers.length > 0)"
-                        [number]="quoteCompany.companyInfo.addresses[1].phoneNumbers[0].number"
-                    ></preview-phone-mask>
-                </div>
                 <quote-aside-add-change-address
                     ngbDropdownMenu
                     [company]="quoteCompany"
