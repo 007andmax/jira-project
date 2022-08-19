@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
@@ -28,7 +29,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @ViewChild('expiryDate') expiryDate: DatePickerComponent;
-
   @Input() validate: QuoteValdiate = new QuoteValdiate();
   quoteCompany: any;
   notes: Array<InvoiceNote>;
@@ -59,12 +59,19 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       this.quote.number = data.number;
     });
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-      if (data.action === 'COMPANY_SAVED' && this.quoteCompany.id === data.data.id) {
+      if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
         this.quoteCompany.name = data.data.name;
         this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
         this.quoteCompany.companyInfo.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
+        //  this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
         this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+        if (data.data.companyInfo.addresses.length == 1) {
+          this.quoteCompany.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
+        }
+        if (data.data.companyInfo.addresses.length == 2) {
+          this.quoteCompany.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.isPrimary));
+          this.quoteCompany.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => !item.isPrimary));
+        }
       }
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
@@ -194,6 +201,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   onSelectCompany(data) {
     this.quoteCompany = data;
+    console.log("this.quoteCompany", this.quoteCompany);
     this.quote.setCompanyId((data) ? data.id : null);
     this.cd.detectChanges();
     if (data) {

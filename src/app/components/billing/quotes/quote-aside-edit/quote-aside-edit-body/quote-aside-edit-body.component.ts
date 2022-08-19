@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -50,12 +51,19 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.getCLientsList(data);
     })
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-      if (data.action === 'COMPANY_SAVED' && this.quoteCompany.id === data.data.id) {
-        this.quoteCompany.name = data.data.name;
-        this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
-        this.quoteCompany.companyInfo.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
-        this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+      if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
+        this.quote.company.name = data.data.name;
+        this.quote.company.primaryContact.firstName = data.data.companyInfo.contacts[0].firstName;
+        this.quote.company.primaryContact.lastName = data.data.companyInfo.contacts[0].lastName;
+        // this.quote.company.addresses[0].address = data.data.companyInfo.addresses[0].address;
+        this.quote.company.primaryContact.primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+        if (data.data.companyInfo.addresses.length == 1) {
+          this.quote.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
+        }
+        if (data.data.companyInfo.addresses.length == 2) {
+          this.quote.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.isPrimary));
+          this.quote.company.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => !item.isPrimary));
+        }
       }
     });
     this.getInvoiceNote();

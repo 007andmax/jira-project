@@ -57,8 +57,8 @@
                 ></div>
                 <div class="qt-fs-13">
                     <preview-phone-mask
-                        *ngIf="getContactsPhone()"
-                        [number]="getContactsPhone()"
+                        *ngIf="(invoice.invoiceDataDto.invoiceContact.phoneNumbers && invoice.invoiceDataDto.invoiceContact.phoneNumbers.length > 0)"
+                        [number]="invoice.invoiceDataDto.invoiceContact.phoneNumbers[0].number"
                     ></preview-phone-mask>
                 </div>
             </div>
@@ -81,12 +81,6 @@
                     class="qt-fs-13"
                     [textContent]="company.contacts[0].primaryEmail"
                 ></div>
-                <div class="qt-fs-13">
-                    <preview-phone-mask
-                        *ngIf="(company.addresses[1].phoneNumbers && company.addresses[1].phoneNumbers.length > 0)"
-                        [number]="company.addresses[1].phoneNumbers[0].number"
-                    ></preview-phone-mask>
-                </div>
             </div>
             <div class="qt-fs-13 qt-text-right qt-lh-154">
                 <div

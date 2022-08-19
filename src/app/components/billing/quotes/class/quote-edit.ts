@@ -35,7 +35,7 @@ export class QuoteEdit extends QuotePreview {
         totalAmount += this.services.reduce((a, b) => a + b.sum, 0);
         totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
         return {
-            company: company,
+            company: this.company,
             date: this.date,
             description: this.description,
             number: this.number,

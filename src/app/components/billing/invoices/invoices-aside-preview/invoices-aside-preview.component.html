@@ -183,7 +183,7 @@
                         <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
                         <div
                             class="qt-fs-13 qt-color-dark qt-fw-600"
-                            [textContent]="invoiceProfile.companyName"
+                            [textContent]="invoiceProfile.billingLocationName"
                         ></div>
                         <div
                             class="qt-fs-13"
@@ -208,6 +208,27 @@
                                 [number]="invoiceProfile.invoiceContact.phoneNumbers[0].number"
                             ></preview-phone-mask>
                         </div>
+                    </div>
+                    <div class="qt-lh-154 qt-pr-12 qt-pl-32">
+                        <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
+                        <div
+                            class="qt-fs-13 qt-color-dark qt-fw-600"
+                            [textContent]="invoiceProfile.shippingLocationName"
+                        ></div>
+                        <div
+                            class="qt-fs-13"
+                            *ngIf="invoiceProfile.invoiceContact"
+                            [textContent]="(invoiceProfile.invoiceContact.firstName && invoiceProfile.invoiceContact.lastName) ? invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName : ''"
+                        ></div>
+                        <div
+                            class="qt-fs-13"
+                            [textContent]="invoiceProfile.shippingAddress"
+                        ></div>
+                        <div
+                            class="qt-fs-13"
+                            *ngIf="invoiceProfile.invoiceContact"
+                            [textContent]="(invoiceProfile.invoiceContact.primaryEmail) ? invoiceProfile.invoiceContact.primaryEmail : ''"
+                        ></div>
                     </div>
                     <div class="qt-fs-13 qt-text-right qt-lh-154">
                         <div class="qt-df qt-jc-sb qt-mb-8">

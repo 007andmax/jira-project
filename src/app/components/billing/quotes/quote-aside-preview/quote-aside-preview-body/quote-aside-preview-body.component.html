@@ -42,26 +42,27 @@
         <div class="qt-lh-154 qt-pr-12">
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
-                class="qt-fs-13 qt-color-dark qt-fw-600"
-                [textContent]="quote.company.addresses[0].locationName"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                [textContent]="quoteCompany.companyInfo.addresses[0].locationName"
             ></div>
             <div
-                class="qt-fs-13"
-                [textContent]="quote.primaryContact.firstName + ' ' +
-      quote.primaryContact.lastName"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quoteCompany.companyInfo.contacts[0].firstName + ' ' +
+      quoteCompany.companyInfo.contacts[0].lastName"
             ></div>
             <div
-                class="qt-fs-13"
-                [textContent]="quote.company.addresses[0].addressWithSuitNumberAndPostalCode"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quoteCompany.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
             ></div>
             <div
-                class="qt-fs-13"
-                [textContent]="quote.primaryContact.primaryEmail"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quoteCompany.companyInfo.contacts[0].primaryEmail"
             ></div>
-            <div class="qt-fs-13">
+            <div class="qt-fs-13 qt-mb-4">
                 <preview-phone-mask
-                    *ngIf="(quote.primaryContact.phoneNumbers && quote.primaryContact.phoneNumbers.length > 0)"
-                    [number]="quote.primaryContact.phoneNumbers[0].number"
+                    [class]="'company-info-aside__row-info-value'"
+                    *ngIf="(quoteCompany.companyInfo.contacts[0].phoneNumbers && quoteCompany.companyInfo.contacts[0].phoneNumbers.length > 0)"
+                    [number]="quoteCompany.companyInfo.contacts[0].phoneNumbers[0].number"
                 ></preview-phone-mask>
             </div>
         </div>
@@ -71,26 +72,27 @@
         >
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
             <div
-                class="qt-fs-13 qt-color-dark qt-fw-600"
-                [textContent]="quote.company.addresses[1].locationName"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                [textContent]="quoteCompany.companyInfo.addresses[1].locationName"
             ></div>
             <div
-                class="qt-fs-13"
-                [textContent]="quote.primaryContact.firstName + ' ' +
-      quote.primaryContact.lastName"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quoteCompany.companyInfo.contacts[0].firstName + ' ' +
+      quoteCompany.companyInfo.contacts[0].lastName"
             ></div>
             <div
-                class="qt-fs-13"
-                [textContent]="quote.company.addresses[1].addressWithSuitNumberAndPostalCode"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quoteCompany.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode"
             ></div>
             <div
-                class="qt-fs-13"
-                [textContent]="quote.primaryContact.primaryEmail"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quoteCompany.companyInfo.contacts[0].primaryEmail"
             ></div>
-            <div class="qt-fs-13">
+            <div class="qt-fs-13 qt-mb-4">
                 <preview-phone-mask
-                    *ngIf="(quote.company.addresses[1].phoneNumbers && quote.company.addresses[1].phoneNumbers.length > 0)"
-                    [number]="quote.company.addresses[1].phoneNumbers[0].number"
+                    [class]="'company-info-aside__row-info-value'"
+                    *ngIf="(quoteCompany.companyInfo.addresses[1].phoneNumbers && quoteCompany.companyInfo.addresses[1].phoneNumbers.length > 0)"
+                    [number]="quoteCompany.companyInfo.addresses[1].phoneNumbers[0].number"
                 ></preview-phone-mask>
             </div>
         </div>

@@ -9,6 +9,7 @@ import { Tag } from 'src/app/interfaces/tag/tag';
 import { CompanyConditions } from './company-conditions';
 import { CompanyAssociated } from './company-associated';
 import { CompanyAssigned } from './company-assigned';
+import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -37,6 +38,7 @@ export class CompanyProfile {
     tags: Array<Tag>;
     associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
+    primaryContact: CompanyAndressContact;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
