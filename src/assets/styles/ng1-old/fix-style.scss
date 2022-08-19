@@ -793,14 +793,10 @@ h6,
 }
 
 .dropdown-assign-ticket .assign-ticket-header {
-  padding: 20px;
-  min-height: 60px;
-  position: absolute;
-  top: 0;
   z-index: 11111111;
   width: 100%;
   background: $white;
-  border-radius: 3px 3px 0 0;
+  border-radius: 6px;
 }
 
 .dropdown-assign-ticket .users-list {
@@ -809,7 +805,7 @@ h6,
   list-style: none;
   border-radius: 0 0 3px 3px;
   height: auto !important;
-  max-height: 204px;
+  max-height: 180px;
   overflow-y: auto;
   overflow-x: hidden;
 }

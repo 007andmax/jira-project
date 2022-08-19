@@ -1,4 +1,7 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
+// TODO Clear comment
 
 .btn.btn-new,
 .btn-new {
@@ -74,23 +77,22 @@
   background: $gray-500;
 }
 
-.dropdown-assign-ticket.fixed-assign {
-  width: 290px;
-}
+//.dropdown-assign-ticket.fixed-assign {
+//  width: 290px;
+//}
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item {
-  margin: 0 !important;
-  transition: all 0.3s;
+  @include dropdown-avatar-item;
 }
 
-.dropdown-assign-ticket.fixed-assign .scroll-pane {
-  background-color: $white;
-  margin-top: 77px;
-}
+//.dropdown-assign-ticket.fixed-assign .scroll-pane {
+//  background-color: $white;
+//  margin-top: 77px;
+//}
 
-.dropdown-assign-ticket.fixed-assign .users-list {
-  max-height: 165px;
-}
+//.dropdown-assign-ticket.fixed-assign .users-list {
+//  max-height: 165px;
+//}
 
 .dropdown-assign-ticket.fixed-assign .assign-ticket-header {
   padding: 16px;
@@ -113,31 +115,31 @@
   color: $white;
 }
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item a {
-  padding: 6px 20px;
-  transition: all 0.3s;
-  color: $gray-800;
-  font-weight: 600;
-}
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item a {
+//  padding: 6px 20px;
+//  transition: all 0.3s;
+//  color: $gray-800;
+//  font-weight: 600;
+//}
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item p {
-  color: $gray-800;
-  font-size: 13px;
-  font-weight: 700;
-  margin: 0;
-}
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item p {
+//  color: $gray-800;
+//  font-size: 13px;
+//  font-weight: 700;
+//  margin: 0;
+//}
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item p:last-child {
-  margin: -5px 0 0;
-  font-size: 12px;
-  color: $gray-600;
-  font-weight: 500;
-}
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item p:last-child {
+//  margin: -5px 0 0;
+//  font-size: 12px;
+//  color: $gray-600;
+//  font-weight: 500;
+//}
 
-.dropdown-assign-ticket.fixed-assign .avatar-26 {
-  width: 32px;
-  height: 32px;
-}
+//.dropdown-assign-ticket.fixed-assign .avatar-26 {
+//  width: 32px;
+//  height: 32px;
+//}
 
 .dropdown-assign-ticket.fixed-assign .assign-ticket-header .form-group {
   position: relative;

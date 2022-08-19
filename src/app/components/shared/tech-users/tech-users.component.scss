@@ -1,26 +1,34 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/dropdown";
 
 .select-wrapper {
-  position: absolute;
+  //position: absolute;
+  //display: block;
+  //background: $white;
+  //margin-top: 5px;
+  //border-radius: 3px;
+  //box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  //z-index: 9999;
+  @include dropdown-menu;
+  height: 252px;
+  max-height: 252px;
+  overflow: hidden;
   display: block;
-  background: $white;
-  height: 240px;
+  left: unset;
+  top: unset;
   bottom: 55px;
-  margin-top: 5px;
-  border-radius: 3px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-  z-index: 9999;
   right: 59px;
   width: 290px;
   .content {
     .assign-ticket-header {
-      padding: 16px;
+      padding: 0 8px;
+      margin-bottom: 14px;
+      margin-top: 10px;
       .form-group {
         margin: 0;
       }
     }
     .scroll-pane {
-      margin-top: 70px;
       .user-list.custom-scroll {
         padding: 0;
       }

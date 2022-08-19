@@ -94,7 +94,7 @@
                                 <div
                                     class="users-list custom-scroll"
                                     tabindex="-1"
-                                    style="position: absolute; z-index: 9999;padding: 0; max-height: 171px;"
+                                    style="position: absolute; z-index: 9999; padding: 0;"
                                 >
                                     <ng-template
                                         ngFor
@@ -134,10 +134,13 @@
                                                     >
                                                 </div>
                                                 <span>
-                                                    <p [textContent]="user.firstName + ' ' + user.lastName"></p>
                                                     <p
+                                                      class="dropdown-avatar__name"
+                                                      [textContent]="user.firstName + ' ' + user.lastName"
+                                                    ></p>
+                                                    <p
+                                                        class="dropdown-avatar__email"
                                                         [textContent]="user.primaryEmail"
-                                                        style="margin: 0;"
                                                     ></p>
                                                 </span>
                                             </a>
