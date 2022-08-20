@@ -1,5 +1,6 @@
 @import './src/assets/styles/variable';
 @import './src/assets/styles/fonts';
+@import "./src/assets/styles/mixin/dropdown";
 
 .qt-checkbox {
   display: flex;
@@ -957,22 +958,22 @@
 }
 
 .qt-dropdown-menu {
-  list-style-type: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  background: $white;
-  border-radius: 4px;
-  box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  background-color: $white;
-  padding: 8px 0;
-  margin: 0;
-  overflow: visible;
+  //list-style-type: none;
+  //position: absolute;
+  //top: calc(100% + 4px);
+  //background: $white;
+  //border-radius: 4px;
+  //box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+  //background-color: $white;
+  //padding: 8px 0;
+  //margin: 0;
+  //overflow: visible;
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
   }
   &.--open-bot {
-    top: calc(100% - 4px) !important;
+    top: calc(100% + 2px) !important;
     transform: none !important;
   }
   &.--open-left {
@@ -990,19 +991,7 @@
     border: 1px solid $gray-400;
   }
   li {
-    height: 32px;
-    background-color: $white;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    color: $gray-800;
-    @include body-m;
-    cursor: pointer;
-    position: relative;
-    white-space: nowrap;
-    &:hover {
-      background-color: $background;
-    }
+    @include dropdown-item;
   }
   &.--dropdown-icons {
     padding: 8px;

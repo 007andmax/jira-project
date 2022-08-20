@@ -110,25 +110,29 @@ span.qt-input-search input.qt-input-search {
 }
 
 ngb-typeahead-window.dropdown-menu {
-  max-height: 176px;
-  width: 40px;
-  min-width: 68px;
-
-  button.dropdown-item {
-    border: none;
-    height: 32px;
-    background: $white;
-    width: 100%;
-    text-align: left;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    font-size: 11px;
-    color: $primary-2;
-
-    &:hover {
-      background-color: #edf2f687;
-    }
+  width: 100%;
+  //max-height: 176px; // TODO check this style dropdown
+  //width: 40px;
+  //min-width: 68px;
+  //
+  //button.dropdown-item {
+  //  border: none;
+  //  height: 32px;
+  //  background: $white;
+  //  width: 100%;
+  //  text-align: left;
+  //  padding: 0 15px;
+  //  display: flex;
+  //  align-items: center;
+  //  white-space: nowrap;
+  //  font-size: 11px;
+  //  color: $primary-2;
+  //
+  //  &:hover {
+  //    background-color: #edf2f687;
+  //  }
+  //}
+  .ngb-highlight {
+    font-weight: 400;
   }
 }
