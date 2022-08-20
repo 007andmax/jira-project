@@ -2,11 +2,12 @@
 @import "./src/assets/styles/fonts";
 
 .dropdown-menu {
-  transform: translate(0, 0) !important;
-  top: auto !important;
+  //transform: translate(0, 0) !important; // TODO check this property
+  //top: auto !important;
   //left: 17px !important;
-  left: 0 !important;
-  width: 230px;
+  //left: 0 !important;
+  //width: 230px;
+  width: 100%;
 }
 .add-tax {
   position: absolute;
@@ -91,9 +92,9 @@
   //}
 
   .dropdown-item {
-    align-items: center;
-    display: flex;
-    position: relative;
+    //align-items: center; // TODO check this property
+    //display: flex;
+    //position: relative;
     button {
       color: $gray-800;
     }

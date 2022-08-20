@@ -56,7 +56,9 @@
 
 @mixin dropdown-item {
   height: 32px;
-  display: block;
+  //display: block;
+  display: flex;
+  align-items: center;
   padding: 6px 12px;
   border: none;
   width: 100%;
@@ -69,6 +71,7 @@
   white-space: nowrap;
   border-radius: 6px;
   margin: 4px 0;
+  cursor: pointer;
 
   @include dropdown-item-hover;
 }

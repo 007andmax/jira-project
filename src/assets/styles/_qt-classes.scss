@@ -1294,11 +1294,11 @@
       }
     }
   }
-  .dropdown-menu.show {
-    width: 100%;
-    min-width: 0;
-    left: 0 !important;
-  }
+  //.dropdown-menu.show { // TODO check this property
+  //  width: 100%;
+  //  min-width: 0;
+  //  left: 0 !important;
+  //}
   .icn-label-save {
     position: absolute;
     right: 5px !important;

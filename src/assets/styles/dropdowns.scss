@@ -1,5 +1,6 @@
 @import './src/assets/styles/variable';
 @import './src/assets/styles/fonts';
+@import "./src/assets/styles/mixin/dropdown";
 
 .dark-dropdown,
 .light-dropdown,
@@ -46,31 +47,32 @@
     //min-width: auto;
     //width: 100%;
     .dropdown-item {
-      outline: none;
-      background: $white;
-      width: 100%;
-      height: 32px;
-      display: block;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 12px;
-      border: none;
-      @include body-r;
-      color: #101828;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.3s;
-      border-radius: 6px;
-      margin: 4px 0;
-      &:hover {
-        background: $gray-100;
-      }
-      &.--selected {
-        background-color: $gray-100;
-        color: $primary-1;
-      }
+      @include dropdown-item;
+      //outline: none;
+      //background: $white;
+      //width: 100%;
+      //height: 32px;
+      //display: block;
+      //align-items: center;
+      //justify-content: flex-start;
+      //padding: 0 12px;
+      //border: none;
+      //@include body-r;
+      //color: #101828;
+      //text-align: left;
+      //white-space: nowrap;
+      //overflow: hidden;
+      //text-overflow: ellipsis;
+      //transition: all 0.3s;
+      //border-radius: 6px;
+      //margin: 4px 0;
+      //&:hover {
+      //  background: $gray-100;
+      //}
+      //&.--selected {
+      //  background-color: $gray-100;
+      //  color: $primary-1;
+      //}
     }
   }
   input {
@@ -124,7 +126,7 @@
   &.unique-down {
     width: calc(100% - 30px);
     left: 15px !important;
-    bottom: -190px;
+    bottom: -230px;
     top: auto !important;
     transform: none !important;
     min-height: 208px;
