@@ -1,7 +1,10 @@
 <div class="contracts-page__aside qt-aside-modern --x-large">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Contract</div>
-        <div class="qt-aside-modern__header-close icon__close" (click)="closed()"></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="closed()"
+        ></div>
     </div>
     <app-contracts-aside-hourly-edit
         *ngIf="serviceAgreement.type === 'HOURLY'"
@@ -35,7 +38,7 @@
                 #editContract="disabled"
                 (onClick)="edit()"
             >
-                <span *ngIf="!editContract.isBlock()">Edit</span>
+                <span *ngIf="!editContract.isBlock()">Save</span>
                 <app-preloader-ticket *ngIf="editContract.isBlock()"></app-preloader-ticket>
             </button>
             <button

@@ -330,7 +330,11 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("password").enable();
     }
     this.setDomain(selectedEmailVia[0].label.toUpperCase());
-    this.saveSMTP(this.smtpForm, undefined);
+    this.smtpForm.patchValue({
+      login: "",
+      password: "",
+    });
+    // this.saveSMTP(this.smtpForm, undefined);
   }
 
   /**
@@ -361,6 +365,8 @@ export class OutgoingEmailComponent implements OnInit {
     if (!this.disableFields) {
       var domain = this.preinitializedDomains[value],
         port = this.portToTypes[this.smtp.encryptionType];
+      console.log("domain", domain);
+      console.log("value", value);
 
       if (domain) {
         for (var prop in domain) {
@@ -391,6 +397,12 @@ export class OutgoingEmailComponent implements OnInit {
           });
         }
       }
+      if (value == "QUICKTECH MAIL SERVER") {
+        console.log("1");
+        this.smtpForm.patchValue({
+          domain: ""
+        });
+      }
     }
   }
 
@@ -416,6 +428,7 @@ export class OutgoingEmailComponent implements OnInit {
     this.submitted = true;
 
     if (this.isSMTPLoginUnique) {
+      console.log("this.smtpForm.value", this.smtpForm.value);
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
@@ -449,12 +462,14 @@ export class OutgoingEmailComponent implements OnInit {
           }
         );
       } else if (!this.smtp.useSMTP) {
-
+        console.log("this.smtp", this.smtp);
         this.smtp.login = "";
         this.smtp.password = "";
+        if (this.smtpForm.value.usedEmailVia == "Quicktech mail server") this.smtp.domain = "";
         this.smtpForm.patchValue({
           login: "",
-          password: ""
+          password: "",
+          domain: this.smtp.domain
         });
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
