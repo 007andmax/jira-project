@@ -1,5 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
 
 .device-user-wrap {
     * {
@@ -9,39 +10,6 @@
 .filter-tags-body {
     padding: 0;
     margin-top: 0px !important;
-    .qt-checkbox {
-        .text-content {
-            margin-top: -1px;
-            flex: 1;
-        }
-        span {
-            margin-right: 12px;
-        }
-    }
-    .select-wrapper {
-        .content {
-            height: 100%;
-            &::-webkit-scrollbar-thumb {
-              background-color: $gray-200;
-            }
-            &::-webkit-scrollbar {
-              width: 8px;
-              height: 8px;
-              border-radius: 40px;
-            }
-            &::-webkit-scrollbar-track {
-              background: $white;
-            }
-
-            .qt-checkbox {
-                width: 100%;
-                min-height: auto;
-                max-height: 50px;
-                height: auto;
-                align-items: flex-start;
-            }
-        }
-    }
 }
 .device-user {
     outline: none;
@@ -84,31 +52,20 @@
         }
     }
     .content {
-        height: 170px;
+        //height: 170px;
+        height: 100%;
         overflow: scroll;
         padding: 0;
-
-        .company-tag-item {
-            i {
-                margin: 0 0 0 auto;
-                position: static;
-            }
-            &:not(:last-child) {
-            }
-            label {
-                width: auto;
-                height: 16px;
-                @include body-m;
-                display: flex;
-                align-items: center;
-            }
-        }
-
         &::-webkit-scrollbar-thumb {
-            background-color: $gray-400;
+          background-color: $gray-200;
         }
         &::-webkit-scrollbar {
-            width: 4px;
+          width: 8px;
+          height: 8px;
+          border-radius: 40px;
+        }
+        &::-webkit-scrollbar-track {
+          background: $white;
         }
     }
 }
@@ -140,47 +97,5 @@
     left: calc(50% - 12px) !important;
 }
 .company-tag-item {
-    display: flex;
-    align-items: center;
-    min-height: 32px;
-    max-height: 60px;
-    height: auto;
-    padding: 0 12px;
-    margin: 4px 0;
-    color: #101828;
-    border-radius: 6px;
-    cursor: pointer;
-
-    .name,
-    .description {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: calc(298px - 23px);
-      width: 100%;
-      font-size: 14px;
-      color: #667085;
-    }
-
-    .name {
-      font-weight: $fw-medium;
-      color: #101828;
-    }
-
-    .description {
-      color: $gray-700;
-      @include сaption-l;
-    }
-
-    &.--selected,
-    &.is-hover {
-      background-color: $gray-100;
-      color: $primary-1;
-      .name {
-        color: $primary-1;
-      }
-    }
-    &:hover {
-      background: $gray-100;
-    }
+  @include dropdown-checkbox-item;
 }

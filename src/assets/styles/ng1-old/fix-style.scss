@@ -558,44 +558,44 @@ textarea {
     }
   }
 
-  .qt-checkbox {
-    width: 100%;
-    min-height: 30px;
-    max-height: 50px;
-    height: auto;
-    align-items: center;
-    font-size: 13px;
-    display: flex;
-    padding: 0;
-  }
+  //.qt-checkbox {
+  //  width: 100%;
+  //  min-height: 30px;
+  //  max-height: 50px;
+  //  height: auto;
+  //  align-items: center;
+  //  font-size: 13px;
+  //  display: flex;
+  //  padding: 0;
+  //}
 
-  i {
-    display: block;
-    flex-shrink: 0;
-  }
+  //i {
+  //  display: block;
+  //  flex-shrink: 0;
+  //}
 
-  .text-content {
-    flex: 1;
-  }
+  //.text-content { // TODO check this style dropdown
+  //  flex: 1;
+  //}
 
-  .name,
-  .description {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calc(298px - 23px);
-    width: 100%;
-  }
-
-  .name {
-    font-weight: $fw-medium;
-    color: $gray-800;
-  }
-
-  .description {
-    color: $gray-700;
-    font-size: 12px;
-  }
+  //.name,
+  //.description {
+  //  white-space: nowrap;
+  //  overflow: hidden;
+  //  text-overflow: ellipsis;
+  //  max-width: calc(298px - 23px);
+  //  width: 100%;
+  //}
+  //
+  //.name {
+  //  font-weight: $fw-medium;
+  //  color: $gray-800;
+  //}
+  //
+  //.description {
+  //  color: $gray-700;
+  //  font-size: 12px;
+  //}
 
   .mat-chip-list-wrapper .mat-standard-chip,
   .mat-chip-list-wrapper input.mat-input-element {

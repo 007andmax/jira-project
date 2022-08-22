@@ -47,10 +47,6 @@
   //    margin-right: 8px;
   //  }
   //}
-  .select-wrapper {
-    .content {
-      @include dropdown-checkbox-content;}
-    }
   //  .content {
   //    height: 100%;
   //
@@ -84,7 +80,7 @@
 }
 .select-wrapper {
   width: 366px;
-  overflow: hidden;
+  //overflow: hidden; // TODO check this property
   //height: 260px;
   //position: absolute;
   //background: $white;
@@ -119,38 +115,8 @@
       }
     }
   }
-  .content {
-    height: 170px;
-    overflow: scroll;
-    padding: 0;
-
-    .company-tag-item {
-      @include dropdown-checkbox-item;
-      //@include body-r__sb;
-      //color: #101828;
-      //height: 32px;
-      //cursor: pointer;
-      //i {
-      //  margin: 0 0 0 auto;
-      //  position: static;
-      //}
-      //&:not(:last-child) {
-      //}
-      //label {
-      //  width: auto;
-      //  height: 16px;
-      //  @include body-m;
-      //  display: flex;
-      //  align-items: center;
-      //}
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $gray-400;
-    }
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
+  .company-tag-item {
+    @include dropdown-checkbox-item;
   }
 }
 .selected-user {

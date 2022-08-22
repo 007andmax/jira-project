@@ -4669,10 +4669,10 @@ input.--input-error {
 .page-list-ticket {
   .light-dropdown {
     padding: 0;
-    .dropdown-menu {
-      left: 0 !important;
-      width: 180px;
-    }
+    //.dropdown-menu {  // TODO check this property
+    //  left: 0 !important;
+    //  width: 180px;
+    //}
   }
   .mat-form-field {
     background: $white;
