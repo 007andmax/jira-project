@@ -365,9 +365,6 @@ export class OutgoingEmailComponent implements OnInit {
     if (!this.disableFields) {
       var domain = this.preinitializedDomains[value],
         port = this.portToTypes[this.smtp.encryptionType];
-      console.log("domain", domain);
-      console.log("value", value);
-
       if (domain) {
         for (var prop in domain) {
           this.smtp[prop] = domain[prop];
@@ -398,7 +395,6 @@ export class OutgoingEmailComponent implements OnInit {
         }
       }
       if (value == "QUICKTECH MAIL SERVER") {
-        console.log("1");
         this.smtpForm.patchValue({
           domain: ""
         });
@@ -426,9 +422,7 @@ export class OutgoingEmailComponent implements OnInit {
    */
   saveSMTP(form, isTest) {
     this.submitted = true;
-
     if (this.isSMTPLoginUnique) {
-      console.log("this.smtpForm.value", this.smtpForm.value);
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
@@ -462,7 +456,6 @@ export class OutgoingEmailComponent implements OnInit {
           }
         );
       } else if (!this.smtp.useSMTP) {
-        console.log("this.smtp", this.smtp);
         this.smtp.login = "";
         this.smtp.password = "";
         if (this.smtpForm.value.usedEmailVia == "Quicktech mail server") this.smtp.domain = "";
