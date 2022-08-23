@@ -82,6 +82,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
+    console.log("this.company", this.company);
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -126,6 +127,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
+          this.validate.resetBillindAddress();
         } else {
           this.validate.setNameIsExist();
         }

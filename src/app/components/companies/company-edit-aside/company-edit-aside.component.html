@@ -123,10 +123,17 @@
             <div class="col-md-12 billing-divider">
                 <p>Billing Address</p>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 --required">
                 <p>Billing Location Name</p>
+                <mat-error
+                    class="qt-tooltip-error"
+                    *ngIf="!validate.getBillindAddress()"
+                >
+                    Billing Location Name is required
+                </mat-error>
                 <input
                     type="text"
+                    [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
                     [(ngModel)]="company.addresses[0].locationName"
                     placeholder="Enter Location Name"
                 >

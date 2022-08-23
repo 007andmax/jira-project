@@ -280,6 +280,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
+          this.validate.resetBillindAddress();
         } else {
           this.validate.setNameIsExist();
         }
