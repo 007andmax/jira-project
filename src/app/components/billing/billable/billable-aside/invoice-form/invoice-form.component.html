@@ -34,24 +34,8 @@
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
-            [textContent]="company.contacts[0].firstName + ' ' +
-      company.contacts[0].lastName"
-        ></div>
-        <div
-            class="qt-fs-13 qt-lh-154"
             [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
         ></div>
-        <div
-            class="qt-fs-13 qt-lh-154"
-            [textContent]="company.contacts[0].primaryEmail"
-        ></div>
-        <div class="qt-fs-13 qt-mb-4">
-            <preview-phone-mask
-                [class]="'company-info-aside__row-info-value'"
-                *ngIf="(invoice.invoiceDataDto.invoiceContact.phoneNumbers && invoice.invoiceDataDto.invoiceContact.phoneNumbers.length > 0)"
-                [number]="invoice.invoiceDataDto.invoiceContact.phoneNumbers[0].number"
-            ></preview-phone-mask>
-        </div>
         <div
             class="qt-fs-13 qt-color-info  qt-pointer"
             id="dropdownForm1"
@@ -93,16 +77,7 @@
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="company.contacts[0].firstName + ' ' +
-      company.contacts[0].lastName"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
                 [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
-                [textContent]="company.contacts[0].primaryEmail"
             ></div>
             <invoice-change-address
                 ngbDropdownMenu

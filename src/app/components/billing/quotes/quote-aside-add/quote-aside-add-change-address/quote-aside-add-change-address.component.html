@@ -10,24 +10,8 @@
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
-            [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
-      company.companyInfo.contacts[0].lastName"
-        ></div>
-        <div
-            class="qt-fs-13 qt-lh-154"
             [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
         ></div>
-        <div
-            class="qt-fs-13 qt-lh-154"
-            [textContent]="company.companyInfo.contacts[0].primaryEmail"
-        ></div>
-        <div class="qt-fs-13 qt-mb-4">
-            <preview-phone-mask
-                [class]="'company-info-aside__row-info-value'"
-                *ngIf="(company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0)"
-                [number]="company.companyInfo.contacts[0].phoneNumbers[0].number"
-            ></preview-phone-mask>
-        </div>
     </div>
     <div
         class="item-selected-address pointer"
@@ -41,23 +25,7 @@
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
-            [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
-      company.companyInfo.contacts[0].lastName"
-        ></div>
-        <div
-            class="qt-fs-13 qt-lh-154"
             [textContent]="company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode"
         ></div>
-        <div
-            class="qt-fs-13 qt-lh-154"
-            [textContent]="company.companyInfo.contacts[0].primaryEmail"
-        ></div>
-        <div class="qt-fs-13 qt-mb-4">
-            <preview-phone-mask
-                [class]="'company-info-aside__row-info-value'"
-                *ngIf="(company.companyInfo.addresses[1].phoneNumbers && company.companyInfo.addresses[1].phoneNumbers.length > 0)"
-                [number]="company.companyInfo.addresses[1].phoneNumbers[0].number"
-            ></preview-phone-mask>
-        </div>
     </div>
 </div>

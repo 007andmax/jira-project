@@ -187,27 +187,8 @@
                         ></div>
                         <div
                             class="qt-fs-13"
-                            *ngIf="invoiceProfile.invoiceContact"
-                            [textContent]="(invoiceProfile.invoiceContact.firstName && invoiceProfile.invoiceContact.lastName) ? invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName : ''"
-                        ></div>
-                        <div
-                            class="qt-fs-13"
                             [textContent]="invoiceProfile.billingAddress"
                         ></div>
-                        <div
-                            class="qt-fs-13"
-                            *ngIf="invoiceProfile.invoiceContact"
-                            [textContent]="(invoiceProfile.invoiceContact.primaryEmail) ? invoiceProfile.invoiceContact.primaryEmail : ''"
-                        ></div>
-                        <div
-                            class="qt-fs-13"
-                            *ngIf="invoiceProfile.invoiceContact"
-                        >
-                            <preview-phone-mask
-                                *ngIf="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0)"
-                                [number]="invoiceProfile.invoiceContact.phoneNumbers[0].number"
-                            ></preview-phone-mask>
-                        </div>
                     </div>
                     <div class="qt-lh-154 qt-pr-12 qt-pl-32">
                         <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
@@ -217,17 +198,7 @@
                         ></div>
                         <div
                             class="qt-fs-13"
-                            *ngIf="invoiceProfile.invoiceContact"
-                            [textContent]="(invoiceProfile.invoiceContact.firstName && invoiceProfile.invoiceContact.lastName) ? invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName : ''"
-                        ></div>
-                        <div
-                            class="qt-fs-13"
                             [textContent]="invoiceProfile.shippingAddress"
-                        ></div>
-                        <div
-                            class="qt-fs-13"
-                            *ngIf="invoiceProfile.invoiceContact"
-                            [textContent]="(invoiceProfile.invoiceContact.primaryEmail) ? invoiceProfile.invoiceContact.primaryEmail : ''"
                         ></div>
                     </div>
                     <div class="qt-fs-13 qt-text-right qt-lh-154">

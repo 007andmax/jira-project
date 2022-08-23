@@ -66,24 +66,8 @@
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="quote.primaryContact.firstName + ' ' +
-      quote.primaryContact.lastName"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
                 [textContent]="quote.company.addresses[0].addressWithSuitNumberAndPostalCode"
             ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
-                [textContent]="quote.primaryContact.primaryEmail"
-            ></div>
-            <div class="qt-fs-13 qt-mb-4">
-                <preview-phone-mask
-                    [class]="'company-info-aside__row-info-value'"
-                    *ngIf="(quote.primaryContact.phoneNumbers && quote.primaryContact.phoneNumbers.length > 0)"
-                    [number]="quote.primaryContact.phoneNumbers[0].number"
-                ></preview-phone-mask>
-            </div>
             <div
                 class="qt-fs-13 qt-color-info  qt-pointer"
                 id="dropdownForm1"
@@ -124,16 +108,7 @@
                 ></div>
                 <div
                     class="qt-fs-13 qt-lh-154"
-                    [textContent]="quote.primaryContact.firstName + ' ' +
-      quote.primaryContact.lastName"
-                ></div>
-                <div
-                    class="qt-fs-13 qt-lh-154"
                     [textContent]="quote.company.addresses[1].addressWithSuitNumberAndPostalCode"
-                ></div>
-                <div
-                    class="qt-fs-13 qt-lh-154"
-                    [textContent]="quote.primaryContact.primaryEmail"
                 ></div>
                 <quote-aside-add-change-address
                     ngbDropdownMenu

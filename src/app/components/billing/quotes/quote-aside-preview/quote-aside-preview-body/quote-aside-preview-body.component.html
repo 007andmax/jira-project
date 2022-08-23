@@ -47,24 +47,8 @@
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="quoteCompany.companyInfo.contacts[0].firstName + ' ' +
-      quoteCompany.companyInfo.contacts[0].lastName"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
                 [textContent]="quoteCompany.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
             ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
-                [textContent]="quoteCompany.companyInfo.contacts[0].primaryEmail"
-            ></div>
-            <div class="qt-fs-13 qt-mb-4">
-                <preview-phone-mask
-                    [class]="'company-info-aside__row-info-value'"
-                    *ngIf="(quoteCompany.companyInfo.addresses[0].phoneNumbers && quoteCompany.companyInfo.addresses[0].phoneNumbers.length > 0)"
-                    [number]="quoteCompany.companyInfo.addresses[0].phoneNumbers[0].number"
-                ></preview-phone-mask>
-            </div>
         </div>
         <div
             class="qt-lh-154 qt-pr-12"
@@ -77,16 +61,7 @@
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="quoteCompany.companyInfo.contacts[0].firstName + ' ' +
-      quoteCompany.companyInfo.contacts[0].lastName"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
                 [textContent]="quoteCompany.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
-                [textContent]="quoteCompany.companyInfo.contacts[0].primaryEmail"
             ></div>
         </div>
         <div class="qt-fs-13 qt-text-right qt-lh-154">

@@ -44,23 +44,8 @@
                 ></div>
                 <div
                     class="qt-fs-13"
-                    [textContent]="company.contacts[0].firstName + ' ' +
-        company.contacts[0].lastName"
-                ></div>
-                <div
-                    class="qt-fs-13"
                     [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
                 ></div>
-                <div
-                    class="qt-fs-13"
-                    [textContent]="company.contacts[0].primaryEmail"
-                ></div>
-                <div class="qt-fs-13">
-                    <preview-phone-mask
-                        *ngIf="(invoice.invoiceDataDto.invoiceContact.phoneNumbers && invoice.invoiceDataDto.invoiceContact.phoneNumbers.length > 0)"
-                        [number]="invoice.invoiceDataDto.invoiceContact.phoneNumbers[0].number"
-                    ></preview-phone-mask>
-                </div>
             </div>
             <div class="qt-lh-154 qt-pr-12">
                 <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
@@ -70,16 +55,7 @@
                 ></div>
                 <div
                     class="qt-fs-13"
-                    [textContent]="company.contacts[0].firstName + ' ' +
-        company.contacts[0].lastName"
-                ></div>
-                <div
-                    class="qt-fs-13"
                     [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
-                ></div>
-                <div
-                    class="qt-fs-13"
-                    [textContent]="company.contacts[0].primaryEmail"
                 ></div>
             </div>
             <div class="qt-fs-13 qt-text-right qt-lh-154">
