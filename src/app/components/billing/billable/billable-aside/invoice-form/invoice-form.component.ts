@@ -80,8 +80,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
           this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
         }
         if (data.data.companyInfo.addresses.length == 2) {
-          this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.isPrimary));
-          this.company.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => !item.isPrimary));
+          this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.id == this.company.addresses[0].id));
+          this.company.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.id == this.company.addresses[1].id));
         }
         console.log("this.company.addresses", this.company.addresses);
         this.cd.detectChanges();
@@ -89,10 +89,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getChangeCompanies);
   }
-  selectAddress(data) {
-    this.billableService.setAddressInvoice(data.currentAddress, data.WithNewAddress).subscribe(data => {
-
-    })
+  selectAddress(currentAddress, newAddress) {
+    let index = this.company.addresses.findIndex(item => item.id == currentAddress.id);
+    this.company.addresses[index] = new CompanyProfileAddress(newAddress);
+    /*  this.billableService.setAddressInvoice(data.currentAddress, data.withNewAddress).subscribe(data => {
+  
+      })*/
   }
   onDeleteDiscount(data) {
     this.toggleDiscount = false;

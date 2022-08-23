@@ -29,6 +29,10 @@ export class CompanyProfileAddress {
         }
 
     }
+    public checkForAdd() {
+        if (this.address.length > 0) return true;
+        return false;
+    }
     public initSameAsBilling(data) {
         let phoneNumbers = JSON.parse(JSON.stringify(this.phoneNumbers));
         console.log("phoneNumbers", phoneNumbers);

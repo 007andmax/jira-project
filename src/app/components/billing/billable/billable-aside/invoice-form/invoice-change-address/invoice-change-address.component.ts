@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'invoice-change-address',
@@ -7,13 +8,15 @@ import { CompanyProfile } from 'src/app/components/companies/class/company-profi
   styleUrls: ['./invoice-change-address.component.scss']
 })
 export class InvoiceChangeAddressComponent implements OnInit {
-  @Input() company: CompanyProfile = new CompanyProfile();
+  @Input() quoteCompany: CompanyProfile = new CompanyProfile();
+  company: CompanyProfile = new CompanyProfile();
   @Output() onSelectAddress = new EventEmitter();
-  constructor() { }
+  constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+    this.company = this.companiesStateService.getCompanies().find(item => item.id == this.quoteCompany.id);
   }
-  selectAddress(currentAddress, WithNewAddress) {
-    this.onSelectAddress.emit({ currentAddress: currentAddress, WithNewAddress: WithNewAddress })
+  selectAddress(data) {
+    this.onSelectAddress.emit(data)
   }
 }
