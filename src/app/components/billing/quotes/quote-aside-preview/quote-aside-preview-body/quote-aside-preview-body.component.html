@@ -38,8 +38,8 @@
         >
         </div>
     </div>
-    <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
-        <div class="qt-lh-154 qt-pr-12">
+    <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb invoice-preview__row">
+        <div class="qt-lh-154 qt-pr-12 invoice-preview__billing-address">
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
@@ -51,8 +51,8 @@
             ></div>
         </div>
         <div
-            class="qt-lh-154 qt-pr-12"
-            *ngIf="quote.shippingLocationName || quote.shippingAddress"
+            class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
+            *ngIf="quoteCompany.companyInfo.addresses.length  == 2"
         >
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
             <div
@@ -64,7 +64,7 @@
                 [textContent]="quote.shippingAddress"
             ></div>
         </div>
-        <div class="qt-fs-13 qt-text-right qt-lh-154">
+        <div class="qt-fs-13 qt-text-right qt-lh-154 invoice-preview__data">
             <div class="qt-df qt-jc-sb qt-mb-8">
                 <div class="qt-fw-600 qt-text-right invoice-info-title">Estimate Date:</div>
                 <div
