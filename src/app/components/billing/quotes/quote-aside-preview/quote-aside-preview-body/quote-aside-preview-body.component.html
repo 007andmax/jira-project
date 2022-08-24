@@ -52,7 +52,7 @@
         </div>
         <div
             class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
-            *ngIf="quoteCompany.companyInfo.addresses.length  == 2"
+            *ngIf="quote.shippingLocationName || quote.shippingAddress"
         >
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
             <div
