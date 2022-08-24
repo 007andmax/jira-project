@@ -9,6 +9,7 @@ import {
   FormControl
 } from "@angular/forms";
 import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
+import { AppStateService } from "src/app/states/app/app-state.service";
 
 
 @Component({
@@ -89,7 +90,8 @@ export class OutgoingEmailComponent implements OnInit {
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -446,7 +448,7 @@ export class OutgoingEmailComponent implements OnInit {
             } else {
               this.toastr.success("Saved Successfully");
             }
-
+            this.appStateService.changeDetectorRef();
             this.disableFields = false;
             this.submitted = false;
           },
@@ -468,10 +470,12 @@ export class OutgoingEmailComponent implements OnInit {
           (res: any) => {
             this.loading = false; $(".loading").css("display", "none");
             this.toastr.success("Saved Successfully");
+            this.appStateService.changeDetectorRef();
           },
           (error: any) => {
             this.loading = false; $(".loading").css("display", "none");
             this.toastr.error(`Error Occured, ${error}`);
+            this.appStateService.changeDetectorRef();
           }
         );
       }
