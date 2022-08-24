@@ -348,12 +348,6 @@ table.qt-table-modern tbody tr td {
   margin-bottom: 16px !important;
 }
 
-/deep/.qt-dropdown{    
-  input#sidebarmanufacture,#sidebarmodel{
-        height: 27px !important;      
-     }       
-}
-
 .software-text-center{
   text-align: center !important;
 }
@@ -537,5 +531,51 @@ table.qt-table-modern tbody tr td {
     .company-devices-table__ip-address-buttons {
       margin-left:-5px;
     }
+  }
+}
+
+/deep/.date-picker {
+  .icn-calendar-light {
+    display: none;
+  }
+}
+
+/deep/.date-picker:hover {
+  .icn-calendar-light {
+    display: inline-block;
+  }
+}
+
+
+/deep/.qt-dropdown{    
+  input#sidebarmanufacture,#sidebarmodel{
+    height: 27px !important;      
+  }
+
+  input {
+    border-width: 0 !important;
+    padding: 10px 0!important;  
+  }
+
+  input:hover {
+    border-width: 1px !important;
+  }
+
+  .report-caret-icon {
+    display: none;
+  }  
+  .icn-remove-old {
+    display: none;
+  }
+  
+}
+
+/deep/.qt-dropdown:hover {    
+  .report-caret-icon {
+    display: inline-block;
+  }
+
+  .icn-remove-old {
+    display: inline-block;
   }
 }
