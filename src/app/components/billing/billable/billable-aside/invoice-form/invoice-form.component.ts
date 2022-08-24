@@ -89,12 +89,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getChangeCompanies);
   }
-  selectAddress(currentAddress, newAddress) {
-    let index = this.company.addresses.findIndex(item => item.id == currentAddress.id);
+  selectAddress(index, newAddress) {
     this.company.addresses[index] = new CompanyProfileAddress(newAddress);
-    /*  this.billableService.setAddressInvoice(data.currentAddress, data.withNewAddress).subscribe(data => {
-  
-      })*/
+
   }
   onDeleteDiscount(data) {
     this.toggleDiscount = false;

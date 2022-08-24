@@ -104,14 +104,18 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.notes = data;
     })
   }
-  selectAddress(currentAddress, newAddress) {
-    let index = this.quoteCompany.companyInfo.addresses.findIndex(item => item.id == currentAddress.id);
+  selectAddress(index, newAddress) {
     this.quoteCompany.companyInfo.addresses[index] = newAddress;
     this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
     if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
-    /*  this.billableService.setAddressInvoice(data.currentAddress, data.withNewAddress).subscribe(data => {
-  
-      })*/
+    if (index == 0) {
+      this.quote.setBillingAddress(newAddress.addressWithSuitNumberAndPostalCode);
+      this.quote.setBillingLocationName(newAddress.locationName);
+    }
+    if (index == 1) {
+      this.quote.setBillingAddress(newAddress.addressWithSuitNumberAndPostalCode);
+      this.quote.setBillingLocationName(newAddress.locationName);
+    }
   }
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {

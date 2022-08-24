@@ -35,6 +35,18 @@ export class QuotePreview extends Quote {
             }
         }
     }
+    public setBillingAddress(data) {
+        this.billingAddress = data;
+    }
+    public setShippingAddress(data) {
+        this.shippingAddress = data;
+    }
+    public setShippingLocationName(data) {
+        this.shippingLocationName = data;
+    }
+    public setBillingLocationName(data) {
+        this.billingLocationName = data;
+    }
     public getDataForUpdate(notification) {
         return {
             companyId: this.company.id,

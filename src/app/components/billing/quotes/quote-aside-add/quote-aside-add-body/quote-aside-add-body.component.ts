@@ -221,14 +221,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     // this.quote.resetServices();
     this.validate.resetValidate();
   }
-  selectAddress(currentAddress, newAddress) {
-    let index = this.quoteCompany.companyInfo.addresses.findIndex(item => item.id == currentAddress.id);
+  selectAddress(index, newAddress) {
     this.quoteCompany.companyInfo.addresses[index] = newAddress;
     this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
     if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
-    /*  this.billableService.setAddressInvoice(data.currentAddress, data.withNewAddress).subscribe(data => {
-  
-      })*/
+
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
