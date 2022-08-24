@@ -82,7 +82,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   onInitCopy() {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
-    this.quoteCompany = new CompanyItem(this.companiesState.getCompanies().find(item => item.id === this.quote.companyId));
+    this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.companyId))));
+    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     this.cd.detectChanges();
     //  this.servicesList.getServicesList();
     this.getServicesList();
@@ -176,8 +178,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   removeProduct(i) {
     this.quote.products.splice(i, 1);
   }
-
-
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
       let customerCompany: CompanyProfile = new CompanyProfile();
@@ -201,7 +201,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.validate.resetValidate();
   }
   onSelectCompany(data) {
-    this.quoteCompany = data;
+    if (data) this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(data)));
+    if (!data) this.quoteCompany = null;
+
     console.log("this.quoteCompany", this.quoteCompany);
     this.quote.setCompanyId((data) ? data.id : null);
     this.cd.detectChanges();
@@ -209,16 +211,24 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       this.validate.resetCompany();
       //  this.servicesList.getServicesList();
       this.getServicesList();
+      this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+      if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     } else {
+      this.quote.setBillTo(null);
+      this.quote.setShipTo(null);
       // this.servicesList.resetServicesList();
     }
     // this.quote.resetServices();
     this.validate.resetValidate();
   }
-  selectAddress(data) {
-    this.billableService.setAddressInvoice(data.currentAddress, data.WithNewAddress).subscribe(data => {
-
-    })
+  selectAddress(currentAddress, newAddress) {
+    let index = this.quoteCompany.companyInfo.addresses.findIndex(item => item.id == currentAddress.id);
+    this.quoteCompany.companyInfo.addresses[index] = newAddress;
+    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+    /*  this.billableService.setAddressInvoice(data.currentAddress, data.withNewAddress).subscribe(data => {
+  
+      })*/
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

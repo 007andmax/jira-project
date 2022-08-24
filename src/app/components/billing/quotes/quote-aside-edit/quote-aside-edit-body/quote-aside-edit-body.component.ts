@@ -73,7 +73,9 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
         if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
-        this.quoteCompany = new CompanyItem(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id));
+        this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id))));
+        this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+        if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
         console.log("this.quoteCompany", this.quoteCompany);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
@@ -102,10 +104,14 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.notes = data;
     })
   }
-  selectAddress(data) {
-    this.billableService.setAddressInvoice(data.currentAddress, data.WithNewAddress).subscribe(data => {
-
-    })
+  selectAddress(currentAddress, newAddress) {
+    let index = this.quoteCompany.companyInfo.addresses.findIndex(item => item.id == currentAddress.id);
+    this.quoteCompany.companyInfo.addresses[index] = newAddress;
+    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+    /*  this.billableService.setAddressInvoice(data.currentAddress, data.withNewAddress).subscribe(data => {
+  
+      })*/
   }
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {

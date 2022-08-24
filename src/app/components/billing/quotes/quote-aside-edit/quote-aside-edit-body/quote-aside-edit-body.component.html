@@ -54,7 +54,7 @@
                 </div>
                 <quote-aside-add-change-address
                     *ngIf="quote.company.addresses.length == 2"
-                    [company]="quoteCompany"
+                    [quoteCompany]="quoteCompany"
                     aria-labelledby="dropdownForm2"
                     ngbDropdownMenu
                     (onSelectAddress)="selectAddress($event)"
@@ -112,7 +112,7 @@
                 ></div>
                 <quote-aside-add-change-address
                     ngbDropdownMenu
-                    [company]="quoteCompany"
+                    [quoteCompany]="quoteCompany"
                     (onSelectAddress)="selectAddress($event)"
                 ></quote-aside-add-change-address>
             </div>

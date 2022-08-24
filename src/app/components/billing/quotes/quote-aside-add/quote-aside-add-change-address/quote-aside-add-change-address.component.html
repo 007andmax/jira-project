@@ -2,7 +2,7 @@
     <div
         class="item-selected-address pointer"
         ngbDropdownItem
-        (click)="selectAddress(company.companyInfo.addresses[1].id,company.companyInfo.addresses[0].id)"
+        (click)="selectAddress(company.companyInfo.addresses[0])"
     >
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
@@ -17,7 +17,7 @@
         class="item-selected-address pointer"
         ngbDropdownItem
         *ngIf="company.companyInfo.addresses.length == 2"
-        (click)="selectAddress(company.companyInfo.addresses[1].id,company.companyInfo.addresses[1].id)"
+        (click)="selectAddress(company.companyInfo.addresses[1])"
     >
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"

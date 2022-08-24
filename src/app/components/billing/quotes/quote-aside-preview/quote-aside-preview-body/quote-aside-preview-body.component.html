@@ -43,25 +43,25 @@
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                [textContent]="quoteCompany.companyInfo.addresses[0].locationName"
+                [textContent]="quote.billingLocationName"
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="quoteCompany.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
+                [textContent]="quote.billingAddress"
             ></div>
         </div>
         <div
             class="qt-lh-154 qt-pr-12"
-            *ngIf="quoteCompany.companyInfo.addresses.length  == 2"
+            *ngIf="quote.shippingLocationName || quote.shippingAddress"
         >
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                [textContent]="quoteCompany.companyInfo.addresses[1].locationName"
+                [textContent]="quote.shippingLocationName"
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="quoteCompany.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode"
+                [textContent]="quote.shippingAddress"
             ></div>
         </div>
         <div class="qt-fs-13 qt-text-right qt-lh-154">

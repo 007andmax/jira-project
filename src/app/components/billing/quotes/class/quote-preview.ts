@@ -13,6 +13,10 @@ export class QuotePreview extends Quote {
     purchaseOrder: string;
     sentAt: number;
     approvedAt: number;
+    billingAddress: string;
+    shippingAddress: string;
+    shippingLocationName: string;
+    billingLocationName: string;
     constructor(data = null) {
         super();
         if (data) {
