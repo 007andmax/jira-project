@@ -15,6 +15,8 @@ export class QuoteAsideAddChangeAddressComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+  }
+  ngDoCheck() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.quoteCompany.id);
   }
   selectAddress(data) {

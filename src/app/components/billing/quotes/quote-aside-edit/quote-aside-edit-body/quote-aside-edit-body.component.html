@@ -62,11 +62,11 @@
             </div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                [textContent]="quote.company.addresses[0].locationName"
+                [textContent]="quote.billingLocationName"
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="quote.company.addresses[0].addressWithSuitNumberAndPostalCode"
+                [textContent]="quote.billingAddress"
             ></div>
             <div
                 class="qt-fs-13 qt-color-info  qt-pointer"
@@ -104,11 +104,11 @@
                 </div>
                 <div
                     class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                    [textContent]="quote.company.addresses[1].locationName"
+                    [textContent]="quote.shippingLocationName"
                 ></div>
                 <div
                     class="qt-fs-13 qt-lh-154"
-                    [textContent]="quote.company.addresses[1].addressWithSuitNumberAndPostalCode"
+                    [textContent]="quote.shippingAddress"
                 ></div>
                 <quote-aside-add-change-address
                     ngbDropdownMenu

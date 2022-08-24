@@ -23,8 +23,8 @@ export class InvoiceLock {
     public getDatForCreate(sendNotification, company) {
         return {
             lockId: this.lockId,
-            billTo: company.addresses[0].id,
-            shipTo: company.addresses[1].id,
+            billTo: (company.addresses.length > 0) ? company.addresses[0].id : null,
+            shipTo: (company.addresses.length == 2) ? company.addresses[1].id : null,
             sendNotification: sendNotification,
             includeAccountReceivableReportAsAttachmentSetting: this.includeAccountReceivableReportAsAttachmentSetting,
             includeInvoiceAsAttachment: this.includeInvoiceAsAttachmentSetting

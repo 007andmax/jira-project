@@ -59,10 +59,10 @@ export class QuoteEdit extends QuotePreview {
             termsAndConditions: this.termsAndConditions,
             regularNote: this.regularNote,
             message: this.message,
-            billingAddress: company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode,
-            shippingAddress: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode : null,
-            shippingLocationName: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].locationName : null,
-            billingLocationName: company.companyInfo.addresses[0].locationName
+            billingAddress: this.billingAddress,
+            shippingAddress: this.shippingAddress,
+            shippingLocationName: this.shippingLocationName,
+            billingLocationName: this.billingLocationName
         }
     }
     public resetServices() {

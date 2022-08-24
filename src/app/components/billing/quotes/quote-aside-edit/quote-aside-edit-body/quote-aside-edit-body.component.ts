@@ -105,7 +105,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     })
   }
   selectAddress(index, newAddress) {
-    this.quoteCompany.companyInfo.addresses[index] = newAddress;
     this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
     if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     if (index == 0) {
@@ -113,8 +112,8 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.quote.setBillingLocationName(newAddress.locationName);
     }
     if (index == 1) {
-      this.quote.setBillingAddress(newAddress.addressWithSuitNumberAndPostalCode);
-      this.quote.setBillingLocationName(newAddress.locationName);
+      this.quote.setShippingAddress(newAddress.addressWithSuitNumberAndPostalCode);
+      this.quote.setShippingLocationName(newAddress.locationName);
     }
   }
   onUpdateGlobalNote() {
