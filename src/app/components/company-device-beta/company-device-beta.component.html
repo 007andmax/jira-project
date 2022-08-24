@@ -246,7 +246,7 @@
                        asset.UpTime != null
                     "
                                         class="uptime-tag qt-ff-gm"
-                                        [textContent]="(asset.IsActive) ? 'Online' : 'uninstalled'"
+                                        [textContent]="(asset.IsActive) ? 'Online' : 'Uninstalled'"
                                     ></span>
                                     <span
                                         *ngIf="
@@ -258,7 +258,7 @@
                                         container="body"
                                         [ngbTooltip]="tipOfflineDevice"
                                         class="uptime-tag qt-ff-gm --offline"
-                                        [textContent]="(asset.IsActive) ? 'Offline' : 'uninstalled'"
+                                        [textContent]="(asset.IsActive) ? 'Offline' : 'Uninstalled'"
                                     ></span>
                                 </div>
                             </td>
@@ -779,6 +779,13 @@
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">Gateway:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="chackDefaultValue(networkData.Gateway)"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">Link Speed:</div>
                         <div
                             class="sidebar-network__info-text"
@@ -806,14 +813,7 @@
                             class="sidebar-network__info-text"
                             [textContent]="networkData.DHCPServer"
                         ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Gateway:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Gateway)"
-                        ></div>
-                    </div>
+                    </div>                    
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">WAN IP:</div>
                         <div

@@ -692,6 +692,13 @@
                         ></div>
                     </div>
                     <div class="sidebar-network__info">
+                        <div class="sidebar-network__info-title">Gateway:</div>
+                        <div
+                            class="sidebar-network__info-text"
+                            [textContent]="networkData.Gateway"
+                        ></div>
+                    </div>
+                    <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">Link Speed:</div>
                         <div
                             class="sidebar-network__info-text"
@@ -719,14 +726,7 @@
                             class="sidebar-network__info-text"
                             [textContent]="networkData.DHCPServer"
                         ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Gateway:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="networkData.Gateway"
-                        ></div>
-                    </div>
+                    </div>                    
                     <div class="sidebar-network__info">
                         <div class="sidebar-network__info-title">WAN IP:</div>
                         <div
