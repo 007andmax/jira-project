@@ -748,14 +748,14 @@ export class DevicesComponent implements OnInit {
   printPdf() {
     this.getPdfData();
   }
-
+  
   getPdfData() {
     let pdfList = [];
     this.assetList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer !== null ? element.Manufacturer.replace(",", " ") : element.Manufacturer || "N/A",
-        element.Model !== null ? element.Model.replace(",", " ") : element.Model || "N/A",
+        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
+        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -935,13 +935,14 @@ export class DevicesComponent implements OnInit {
       );
   }
 
-  downloadCsv() {
+  downloadCsv() {    
     let downloadCsvList = [];
     this.assetList.forEach((element) => {
       downloadCsvList.push([
+        element.CompanyName.replace(",","") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer !== null ? element.Manufacturer.replace(",", " ") : element.Manufacturer || "N/A",
-        element.Model !== null ? element.Model.replace(",", " ") : element.Model || "N/A",
+        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
+        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
         element.SerialNumber || "N/A",
       ]);
     });
