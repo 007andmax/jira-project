@@ -1,0 +1,28 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
+.qt-report__control-panel-btn {
+    position: relative;
+
+    .mask-dp {
+        position: absolute;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.open-pdf-btn {
+    display: flex;
+    height: 38px;
+    align-items: center;
+    padding: 0 20px;
+    transition: all 0.3s;
+    color: $primary-2;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.additional-dropdown {
+    min-width: 80px !important;
+}

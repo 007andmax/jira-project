@@ -11,6 +11,7 @@ import { SelectSearchModule } from '../../shared/select-search/select-search.mod
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { InvoicesRoutingModule } from './invoices-routing.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { InvoiceExportComponent } from './invoices-header/invoice-export/invoice-export.component';
 
 
 
@@ -18,7 +19,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
     declarations: [InvoicesComponent,
         InvoicesHeaderComponent,
         InvoicesItemComponent,
-        InvoicesFilterComponent
+        InvoicesFilterComponent,
+        InvoiceExportComponent
 
     ],
     imports: [

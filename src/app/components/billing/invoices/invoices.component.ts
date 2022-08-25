@@ -121,6 +121,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
           this.invoicesFilter.updateLeftOffset();
         }
       }
+      this.invoiceStateService.setInvoices(this.invoices);
       this.cd.detectChanges();
     })
     this.sub.add(changeInvoice);
@@ -206,7 +207,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.invoicesFilter.setOffset(this.page_number * this.offset);
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
-      this.invoices = [...this.invoices, ...data];
+      this.invoices = [...this.invoices, ...data.map(item => new Invoice(item))];
+      console.log("this.invoices", this.invoices);
       if (this.selectedCompanyId) this.invoices.forEach(item => {
         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
         if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
@@ -216,6 +218,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.page_number += 1;
       this.showPreloader = false;
       this.showPendingPreloader = false;
+      this.invoiceStateService.setInvoices(this.invoices);
       this.cd.detectChanges();
     })
   }

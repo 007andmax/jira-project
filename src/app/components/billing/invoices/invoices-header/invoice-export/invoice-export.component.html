@@ -1,0 +1,47 @@
+<div class="qt-report__control-panel qt-ml-16">
+    <div
+        class="qt-report__control-panel-btn icon__email-dark qt-mr-6 pointer"
+        uib-tooltip="send mail"
+        tooltip-placement="top"
+        (click)="sendEmail()"
+    >
+    </div>
+    <div
+        class="qt-report__control-panel-btn icon__print qt-mr-6 pointer"
+        uib-tooltip="print"
+        tooltip-placement="top"
+        (click)="printPdf()"
+    >
+    </div>
+    <div
+        class="qt-report__control-panel-btn icon__export-dark pointer"
+        ngbDropdown
+        keyboard-nav="true"
+        uib-tooltip="export"
+        tooltip-placement="top"
+    >
+        <div
+            class="mask-dp pointer"
+            ngbDropdownToggle
+        ></div>
+        <ul
+            ngbDropdownMenu
+            aria-labelledby="dropdown1"
+            class="additional-dropdown"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="listExport"
+                let-i="index"
+            >
+                <li
+                    class="open-pdf-btn "
+                    ngbDropdownItem
+                    [textContent]="item"
+                    (click)="onSelectExport(item)"
+                ></li>
+            </ng-template>
+        </ul>
+    </div>
+</div>

@@ -1,57 +1,107 @@
 <div class="qt-page-list__header --sticky">
-  <div class="qt-page-list__header-title-line">
-    <div class="qt-page-list__header-title-line--left">
-      <h6 class="qt-page-list__header-title" [textContent]="'Invoices'"></h6>
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h6
+                class="qt-page-list__header-title"
+                [textContent]="'Invoices'"
+            ></h6>
+        </div>
+
+
+        <div class="qt-page-list__header-title-line--rigth">
+            <invoice-export></invoice-export>
+            <div class="qt-df qt-ai-c">
+                <button
+                    class="qt-btn --transparent"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear All
+                </button>
+                <button
+                    class="qt-btn filter-button qt-ml-8"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter  = !toggleFilter"
+                >
+                    <span
+                        class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        *ngIf="countFilter > 0"
+                        [textContent]="countFilter"
+                    ></span>
+                    Filters
+                </button>
+                <button
+                    class="qt-btn --outline-blue qt-ml-8"
+                    (click)="onShowCreateInvoice()"
+                >
+                    Record Payment
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="qt-page-list__header-title-line--rigth">
-      <div class="qt-df qt-ai-c">
-        <button class="qt-btn --transparent" (click)="clearAll()" *ngIf="countFilter > 0">Clear All</button>
-        <button class="qt-btn filter-button qt-ml-8" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter  = !toggleFilter"> <span class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c" *ngIf="countFilter > 0" [textContent]="countFilter"></span> Filters</button>
-        <button class="qt-btn --outline-blue qt-ml-8" (click)="onShowCreateInvoice()">Record Payment</button>
-      </div>
+
+    <div class="qt-page-list__header-filters">
+        <app-invoices-filter
+            class="qt-w100"
+            #filter
+            (changeCountFilter)="onChangeCountFilter($event)"
+            [hidden]="toggleFilter"
+        ></app-invoices-filter>
     </div>
-  </div>
 
-  <div class="qt-page-list__header-filters">
-    <app-invoices-filter class="qt-w100" #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-invoices-filter>
-  </div>
 
-  <div class="qt-page-list__header-thead-container">
-    <table class="qt-table-modern qt-page-list__header-thead">
-      <thead>
-        <tr>
-          <th class="invoice-table__check"></th>
-          <th class="invoce-table__date pointer" (click)="sortBy('INVOICE_DATE')">
-            Date
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="invoce-table__invoice pointer" (click)="sortBy('INVOICE_NUMBER')">
-            Invoice#
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="invoce-table__company pointer" (click)="sortBy('COMPANY_NAME')">
-            Company
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="invoce-table__status">
-            Status
-          </th>
-          <th class="invoce-table__read-on pointer" (click)="sortBy('READ_ON')">
-            Read On
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="invoce-table__amount pointer" (click)="sortBy('AMOUNT')">
-            Amount
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="invoce-table__balance-due pointer" (click)="sortBy('BALANCE')">
-            Balance Due
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="invoce-table__menu"></th>
-        </tr>
-      </thead>
-    </table>
-  </div>
+    <div class="qt-page-list__header-thead-container">
+        <table class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th class="invoice-table__check"></th>
+                    <th
+                        class="invoce-table__date pointer"
+                        (click)="sortBy('INVOICE_DATE')"
+                    >
+                        Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="invoce-table__invoice pointer"
+                        (click)="sortBy('INVOICE_NUMBER')"
+                    >
+                        Invoice#
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="invoce-table__company pointer"
+                        (click)="sortBy('COMPANY_NAME')"
+                    >
+                        Company
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="invoce-table__status">Status</th>
+                    <th
+                        class="invoce-table__read-on pointer"
+                        (click)="sortBy('READ_ON')"
+                    >
+                        Read On
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="invoce-table__amount pointer"
+                        (click)="sortBy('AMOUNT')"
+                    >
+                        Amount
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="invoce-table__balance-due pointer"
+                        (click)="sortBy('BALANCE')"
+                    >
+                        Balance Due
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="invoce-table__menu"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
