@@ -231,13 +231,7 @@
                             <td class="company-devices-table__up-time">
                                 <div class="qt-df qt-fd-c">
                                     <span>
-                                        <span *ngIf="asset.IsActive">{{  asset.UpTime }}</span>
-                                        <ng-template
-                                            #tipOfflineDevice
-                                            class="tooltip"
-                                        >
-                                            <span *ngIf="asset.IsActive">{{  asset.UpTime }}</span>
-                                        </ng-template>
+                                        <span *ngIf="asset.IsActive">{{  asset.UpTime }}</span>                                        
                                     </span>
                                     <span
                                         *ngIf="
@@ -253,10 +247,7 @@
                        asset.UpTime == '' ||
                        asset.UpTime == undefined ||
                        asset.UpTime == null
-                    "
-                                        placement="top"
-                                        container="body"
-                                        [ngbTooltip]="tipOfflineDevice"
+                    "                                        
                                         class="uptime-tag qt-ff-gm --offline"
                                         [textContent]="(asset.IsActive) ? 'Offline' : 'Uninstalled'"
                                     ></span>
@@ -322,18 +313,17 @@
                               " class="agent-tag qt-ff-gm">{{asset.AgentVersion}}</span>          
                           </div>
                           </td>
-                            <td class="company-devices-table__go-to">
-                                <ng-template
-                                    #tipDeviceDetail
-                                    class="tooltip"
-                                >
-                                    Device Detail
-                                </ng-template>
+                            <td class="company-devices-table__go-to">                                
+                                <app-dynamic-tooltip
+                                    [content]="'Device Detail'"
+                                    [position]="'top'"
+                                    #tipDeviceDetailTooltip
+                                ></app-dynamic-tooltip>     
                                 <div
-                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
-                                    placement="top"
+                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"                                    
                                     *ngIf="asset.ID"
-                                    [ngbTooltip]="tipDeviceDetail"
+                                    (mouseenter)="tipDeviceDetailTooltip.show($event.target)" 
+                                    (mouseleave)="tipDeviceDetailTooltip.hide()"                                    
                                     (click)="gotoDetailDevice(asset.Guid)"
                                 ></div>
                             </td>
