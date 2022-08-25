@@ -74,8 +74,8 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
         this.quote = new QuoteEdit(data);
         if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
         this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id))));
-        this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
-        if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+        // this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+        //if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
         console.log("this.quoteCompany", this.quoteCompany);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
@@ -105,15 +105,17 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     })
   }
   selectAddress(index, newAddress) {
-    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
-    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+    //  this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    //  if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     if (index == 0) {
       this.quote.setBillingAddress(newAddress.addressWithSuitNumberAndPostalCode);
       this.quote.setBillingLocationName(newAddress.locationName);
+      this.quote.setBillTo(newAddress.id);
     }
     if (index == 1) {
       this.quote.setShippingAddress(newAddress.addressWithSuitNumberAndPostalCode);
       this.quote.setShippingLocationName(newAddress.locationName);
+      this.quote.setShipTo(newAddress.id);
     }
   }
   onUpdateGlobalNote() {
