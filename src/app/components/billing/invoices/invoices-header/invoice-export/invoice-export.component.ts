@@ -47,7 +47,7 @@ export class InvoiceExportComponent implements OnInit {
     })
     if (type == "CSV") {
       let invoices = this.invoiceStateService.getInvoices().map(item => item.getDataForExportPDF());
-      this.reportsService.getCSV(`${this.apiUrl}reports/invoice/csv`, { invoiceViewDtos: invoices }).subscribe((resp: any) => {
+      this.reportsService.getCSV(`reports/invoice/csv`, { invoiceViewDtos: invoices }).subscribe((resp: any) => {
         var blob = new Blob([resp]);
         var link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);

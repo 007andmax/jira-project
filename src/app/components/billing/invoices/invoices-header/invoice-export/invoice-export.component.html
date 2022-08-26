@@ -15,35 +15,45 @@
         (click)="print('pdf')"
     >
     </div>
+    <app-dynamic-tooltip
+        [content]="'Export'"
+        [position]="'top'"
+        #exportTooltip
+    ></app-dynamic-tooltip>
     <div
-        class="qt-report__control-panel-btn icon__export-dark pointer"
-        ngbDropdown
         placement="top"
         container="body"
         ngbTooltip="Export"
     >
         <div
-            class="mask-dp pointer"
-            ngbDropdownToggle
-        ></div>
-        <ul
-            ngbDropdownMenu
-            aria-labelledby="dropdown1"
-            class="additional-dropdown"
+            class="qt-report__control-panel-btn icon__export-dark pointer"
+            ngbDropdown
+            ngbTooltip="Export"
         >
-            <ng-template
-                ngFor
-                let-item
-                [ngForOf]="listExport"
-                let-i="index"
+            <div
+                class="mask-dp pointer"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                ngbDropdownMenu
+                placement="bottom"
+                aria-labelledby="dropdown1"
+                class="additional-dropdown"
             >
-                <li
-                    class="open-pdf-btn "
-                    ngbDropdownItem
-                    [textContent]="item"
-                    (click)="onSelectExport(item)"
-                ></li>
-            </ng-template>
-        </ul>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="listExport"
+                    let-i="index"
+                >
+                    <li
+                        class="open-pdf-btn "
+                        ngbDropdownItem
+                        [textContent]="item"
+                        (click)="onSelectExport(item)"
+                    ></li>
+                </ng-template>
+            </ul>
+        </div>
     </div>
 </div>

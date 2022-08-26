@@ -21,6 +21,10 @@
     font-size: 13px;
     line-height: 20px;
     font-weight: 500;
+    &:hover {
+        color: #ffffff;
+        background: #16a4fa;
+    }
 }
 
 .additional-dropdown {

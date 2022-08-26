@@ -12,6 +12,7 @@ import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datep
 import { InvoicesRoutingModule } from './invoices-routing.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { InvoiceExportComponent } from './invoices-header/invoice-export/invoice-export.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 
@@ -31,7 +32,8 @@ import { InvoiceExportComponent } from './invoices-header/invoice-export/invoice
         SelectSearchModule,
         MultiDatepickerModule,
         InvoicesRoutingModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        DynamicTooltipModule
     ],
 
 
