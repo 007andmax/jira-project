@@ -144,6 +144,7 @@ export class DevicesComponent implements OnInit {
 
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;
+  searchTagName:any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -160,7 +161,7 @@ export class DevicesComponent implements OnInit {
     private companiesState: CompaniesStateService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
@@ -208,7 +209,7 @@ export class DevicesComponent implements OnInit {
       this.agentService.GetCurrentConfig(this.asset.ID);      
     }); 
     
-    this.CurrentUser();
+    this.CurrentUser();    
   }
 
   getCountSelected() {
@@ -639,7 +640,7 @@ export class DevicesComponent implements OnInit {
       this.searchTag = [];
       this.searchTag = this.selectedTag;
     }
-
+    this.searchTagName = this.selectedTag;
     let req: any = {};
     req.TechCompanyGuid = this.techCompnayGuid;
     req.Criteria = this.searchTag;
@@ -735,7 +736,7 @@ export class DevicesComponent implements OnInit {
     window.open(connect.launchSchemeURL);
   }
 
-  sendEmail() {
+  sendEmail() {    
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation = this.orientation;
@@ -749,10 +750,11 @@ export class DevicesComponent implements OnInit {
     this.getPdfData();
   }
   
-  getPdfData() {
+  getPdfData() {    
     let pdfList = [];
     this.assetList.forEach((element) => {
       pdfList.push([
+        element.CompanyName.replace(",","") || "N/A",
         element.Name.replace(",", " ") || "N/A",
         element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
         element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
@@ -834,8 +836,11 @@ export class DevicesComponent implements OnInit {
       this.clientName +
       ` From Devices (` +
       pdfList.length +
-      ` terms)</p>
-                  <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
+      ` terms)</p>      
+      <p style="line-height:1.5;color:#4f5f79;font-size:12px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Search devices is ` +
+      this.searchTagName +
+      `</p>
+                  <p style="margin:0;line-height:2;color:#4f5f79;font-size:11px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
       moment(new Date()).format("LL") +
       ` @ ` +
       moment(new Date()).format("LT") +
@@ -850,10 +855,11 @@ export class DevicesComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 35%;">Device Name</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Company Name</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Manufacturer</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Model</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 18%;">SerialNumber</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Model</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">SerialNumber</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -861,23 +867,28 @@ export class DevicesComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
+          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[0] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 18%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[3] +
+        `</td>`;  
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        element[4] +
         `</td></tr>`;
     });
     html =
