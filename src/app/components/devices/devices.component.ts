@@ -837,7 +837,7 @@ export class DevicesComponent implements OnInit {
       ` From Devices (` +
       pdfList.length +
       ` terms)</p>      
-      <p style="line-height:1.5;color:#4f5f79;font-size:12px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Search devices is ` +
+      <p style="line-height:1.5;color:#4f5f79;font-size:12px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Search devices by ` +
       this.searchTagName +
       `</p>
                   <p style="margin:0;line-height:2;color:#4f5f79;font-size:11px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
