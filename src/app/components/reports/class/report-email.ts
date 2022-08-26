@@ -29,11 +29,11 @@ export class ReportEmail {
             "recipients": this.emails,
             "subject": this.subject,
             "invoiceReportDto": {
-                "inv0oiceViewDtos": invoices
+                "invoiceViewDtos": invoices
             },
+            note: this.note,
             /* fileName: this.fileName,
              content: this.content,
-             note: this.note,
              orientation: "LANDSCAPE"*/
         }
     }
