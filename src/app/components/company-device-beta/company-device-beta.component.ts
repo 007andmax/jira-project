@@ -16,6 +16,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { DropDownComponent } from "../shared/drop-down/drop-down.component";
 import { element } from "@angular/core/src/render3";
 import { DatePickerComponent } from "../shared/date-picker/date-picker.component";
+import { CommonHttpServices } from "../device/_services/common_http.service";
+import { ExcelService } from "../device/_services/download_csv.service";
 
 @Component({
   selector: "app-company-device-beta",
@@ -123,6 +125,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   device_beta_resize: boolean = false;
   System: any = undefined;
   serialnumber: string = "";
+  clientName: string;
+  loading = false;
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -139,12 +143,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private modalService: NgbModal,
     private ngZone: NgZone,
     private remoteControlService: RemoteControlService,
-    private companiesState: CompaniesStateService
+    private companiesState: CompaniesStateService,
+    private commonHttpServices: CommonHttpServices,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit() {    
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');    
     this.companiesState.onInit();
+    this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
@@ -1305,6 +1312,215 @@ export class CompanyDeviceBetaComponent implements OnInit {
   ngOnDestroy(): void {
     this.companiesStateService.setCompanyRoutingId(null);
     this.kafkaStateService.onInstallWindowsUpdates.unsubscribe();
+  }
+
+  printPdf() {
+    this.getPdfData();
+  }
+
+  getPdfData() {    
+    let pdfList = [];
+    this.assetList.forEach((element) => {
+      pdfList.push([        
+        element.Name.replace(",", " ") || "N/A",
+        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
+        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
+        element.SerialNumber || "N/A",
+      ]);
+    });
+    let html =
+      `
+    <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      padding: 0;
+      margin: 0;
+      -ms-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      color: #4f5f79;
+      background-color: #f3f7f9;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    li,
+    ol {
+      padding: 0;
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+      border: none;
+    }
+    img {
+      border: none;
+      outline: none;
+    }
+
+    .container{
+      width: 100%;
+      margin: 0 auto;
+      max-width:95%;
+      padding:0 20px;
+    }
+    table{
+      border-collapse: collapse;
+      width: 100%;
+      table-layout:fixed;
+    }</style>
+    <body>
+    <div class="container" style="width: 960px;margin: 0 auto;max-width:95%;padding:0 20px;">
+      <table style="width: 100%;border-collapse: collapse;border: solid 1px #dfe3e8;table-layout:fixed;">
+      <thead style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
+      <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
+          <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
+              <img src="/file/${localStorage.getItem(
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+          </th>
+          <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
+            <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
+                  <p style="margin:0;line-height:1.2;color:#364656;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` +
+      localStorage.getItem("currentCompanyName") +
+      ` - Device Summary Report</p>
+                  <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
+      this.clientName +
+      ` From Devices (` +
+      pdfList.length +
+      ` terms)</p>            
+                  <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
+      moment(new Date()).format("LL") +
+      ` @ ` +
+      moment(new Date()).format("LT") +
+      `</p>
+            </div>
+          </th>
+      </tr>
+    </thead>
+        <tbody style="background-color: #f3f7f9;">
+          <tr style="width: 100%;">
+            <td colspan="2" style="width: 100%;padding: 24px;">
+               <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
+                    <thead>
+                        <tr>                            
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 30%;">Device Name</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Manufacturer</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Model</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">SerialNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+    pdfList.forEach((element) => {
+      html =
+        html +
+        `<tr style="width: 100%;">
+          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
+        element[0] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        element[1] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        element[2] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        element[3] +
+        `</td></tr>`;        
+    });
+    html =
+      html +
+      `</tbody>
+        </table>
+     </td>
+   </tr>
+
+ </tbody>
+ <tfoot style="width: 100%;">
+          <tr style="width: 100%;">
+            <td style="width: 100%;" colspan="2">
+              <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
+                <tr>
+                  <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` +
+      localStorage.getItem("currentUser") +
+      `</td>
+                  <td style="width: 33.33%;color: #4f5f79;font-size:11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: center;vertical-align: middle;">` +
+      localStorage.getItem("currentCompanyName") +
+      `</td>
+                  <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
+               </tr>
+              </table>
+            </td>
+          </tr>
+        </tfoot>
+ </table>
+        </div>
+        </body>`;
+    let data = {
+      content: html,
+      id: "",
+      fileName: "Device Summary Report",
+      orientation: "PORTRAIT",
+    };
+    this.loading = true;
+    this.commonHttpServices
+      .printPdf(data)
+      .pipe()
+      .subscribe(
+        (data) => {
+          this.loading = false;
+          window.open(data.url, "_blank");
+        },
+        (error) => {
+          this.loading = false;
+          const statusError = error;
+          if (statusError && statusError.meta) {
+            this.toastr.error(statusError.meta.message);
+          } else {
+            this.toastr.error("Something went wrong please try again.");
+          }
+        }
+      );
+  }
+
+  downloadCsv() {    
+    let downloadCsvList = [];
+    this.assetList.forEach((element) => {
+      downloadCsvList.push([
+        element.CompanyName.replace(",","") || "N/A",
+        element.Name.replace(",", " ") || "N/A",
+        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
+        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
+        element.SerialNumber || "N/A",
+      ]);
+    });
+    let fileName = "Device Summary Report List";
+    this.excelService.generateExcel(
+      downloadCsvList,
+      fileName,
+      "devicesummaryreport"
+    );
   }
 }
 
