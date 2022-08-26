@@ -1,24 +1,26 @@
 <div class="qt-report__control-panel qt-ml-16">
     <div
         class="qt-report__control-panel-btn icon__email-dark qt-mr-6 pointer"
-        uib-tooltip="send mail"
-        tooltip-placement="top"
+        placement="top"
+        container="body"
+        ngbTooltip="Email"
         (click)="sendEmail()"
     >
     </div>
     <div
         class="qt-report__control-panel-btn icon__print qt-mr-6 pointer"
-        uib-tooltip="print"
-        tooltip-placement="top"
+        placement="top"
+        container="body"
+        ngbTooltip="Print"
         (click)="print('pdf')"
     >
     </div>
     <div
         class="qt-report__control-panel-btn icon__export-dark pointer"
         ngbDropdown
-        keyboard-nav="true"
-        uib-tooltip="export"
-        tooltip-placement="top"
+        placement="top"
+        container="body"
+        ngbTooltip="Export"
     >
         <div
             class="mask-dp pointer"
