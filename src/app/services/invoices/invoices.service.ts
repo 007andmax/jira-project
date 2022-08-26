@@ -51,8 +51,8 @@ export class InvoicesService {
         return data;
       }));
   }
-  public exportPdf(data) {
-    return this.http.post(`${this.apiUrl}reports/invoice/pdf`, data);
+  public export(type, data) {
+    return this.http.post(`${this.apiUrl}reports/invoice/${type}`, data);
   }
   public remove(invoiceId) {
     return this.http.delete(`${this.apiUrl}invoice/delete?invoiceId=${invoiceId}`, {});

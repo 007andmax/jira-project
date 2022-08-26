@@ -13,6 +13,7 @@ import { forkJoin } from 'rxjs';
 import { UploadAreaComponent } from '../upload-area/upload-area.component';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
+import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -72,8 +73,9 @@ export class DraftEmailComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   constructor(public draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
-    private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
+    public draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public reportsStateService: ReportsStateService,
+    public invoiceStateService: InvoiceStateService,
     public reportsService: ReportsService,
   ) { }
 

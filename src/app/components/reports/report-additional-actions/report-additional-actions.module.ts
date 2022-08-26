@@ -9,11 +9,12 @@ import { ReportSendEmailComponent } from './report-send-email/report-send-email.
 import { DraftEmailUserRecipientsModule } from '../../shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule } from '@angular/forms';
+import { ReportSendEmailModule } from './report-send-email/report-send-email.module';
 
 
 @NgModule({
     declarations: [ReportAdditionalActionsComponent,
-        ReportSendEmailComponent],
+    ],
     imports: [
         CommonModule,
         DropDownModule,

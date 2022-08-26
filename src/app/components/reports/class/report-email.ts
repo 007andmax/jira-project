@@ -1,4 +1,5 @@
 export class ReportEmail {
+    subject: string = '';
     content: string = "Income accounts"
     emails: Array<string>;
     fileName: string = "income_accounts";
@@ -22,5 +23,18 @@ export class ReportEmail {
 
     public setNote(data) {
         this.note = data;
+    }
+    public getDataForInvoiceReport(invoices) {
+        return {
+            "recipients": this.emails,
+            "subject": this.subject,
+            "invoiceReportDto": {
+                "inv0oiceViewDtos": invoices
+            },
+            /* fileName: this.fileName,
+             content: this.content,
+             note: this.note,
+             orientation: "LANDSCAPE"*/
+        }
     }
 }

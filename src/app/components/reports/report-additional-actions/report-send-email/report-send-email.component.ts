@@ -13,6 +13,8 @@ import { ReportsStateService } from 'src/app/states/reports/reports-state.servic
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { forkJoin } from 'rxjs';
 import { DraftEmailComponent } from 'src/app/components/shared/draft-email/draft-email.component';
+import { ReportSendEmailValidate } from './class/report-send-email-validate';
+import { TYPE_REPORT_INVOICE, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
 
 @Component({
   selector: 'app-report-send-email',
@@ -20,29 +22,16 @@ import { DraftEmailComponent } from 'src/app/components/shared/draft-email/draft
   styleUrls: ['./report-send-email.component.scss']
 })
 export class ReportSendEmailComponent extends DraftEmailComponent {
-
-
-
-
-
-
-
   draftReport: ReportEmail = new ReportEmail();
-
-
+  validateReport: ReportSendEmailValidate = new ReportSendEmailValidate();
+  type: string;
   @Input() report: string = "";
   @Input() fileName: string = "";
   @Input() template: string = "PDF_TEMPLATE";
   @Input() orientation;
-  @Input() selectedClient;
+  @Input() selectedClient = null;
   @Input() accountType = 'CLIENT';
 
-  /* constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
-     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
-     public activeModal: NgbActiveModal,
-     private reportsService: ReportsService,
-     private reportsStateService: ReportsStateService
-   ) { }*/
 
   ngOnInit() {
     this.draftEmailStateService.showAsideSendReport.subscribe((data) => {
@@ -60,6 +49,12 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
 
       this.opened = true;
       this.draftReport = new ReportEmail();
+      this.type = TYPE_REPORT_PRODUCTS;
+    })
+    this.draftEmailStateService.showAsideSendReportInvoice.subscribe(data => {
+      this.opened = true;
+      this.draftReport = new ReportEmail();
+      this.type = TYPE_REPORT_INVOICE;
     })
   }
 
@@ -72,7 +67,28 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
   }
 
   onSend() {
+    if (!this.validateReport.isValidate(this.draftReport)) return;
+
     this.addBtn.setDisabled(true);
+    if (this.type == TYPE_REPORT_PRODUCTS) this.productsReport();
+    if (this.type == TYPE_REPORT_INVOICE) this.invoiceReport();
+
+  }
+  invoiceReport() {
+    this.draftReport.setNote(this.messageContent);
+    this.draftReport.setFileName("invoice_report");
+    let invoices = this.invoiceStateService.getInvoices().map(item => item.getDataForExportPDF());
+    this.draftEmailService.sendMessage(this.draftReport.getDataForInvoiceReport(invoices)).subscribe((data) => {
+      this.addBtn.setDisabled(false);
+      this.close();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    }, err => {
+      this.addBtn.setDisabled(false);
+    })
+  }
+  productsReport() {
     this.draftReport.setContent(this.reportsStateService.parseReportContent(this.report));
     this.draftReport.setNote(this.messageContent);
     this.draftReport.setOrientation(this.orientation);
@@ -98,7 +114,6 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
         this.addBtn.setDisabled(false);
       })
     }
-
   }
 
   trackByIndex(index, item) {
