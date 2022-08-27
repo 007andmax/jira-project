@@ -554,7 +554,14 @@
 }
 
 .device-type-dropdown {
-  transform: translateX(-10px);
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 6px 0;
+  }
+}
+.company-device-type-dropdown.dropdown-menu {
+  min-width: auto;
 }
 app-company-devices-edit-label {
   display: contents;

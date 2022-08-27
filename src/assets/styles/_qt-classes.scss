@@ -972,10 +972,10 @@
     top: unset;
     bottom: calc(100% + 4px);
   }
-  &.--open-bot {
-    top: calc(100% + 2px) !important;
-    transform: none !important;
-  }
+  //&.--open-bot { // TODO check this style dropdown
+  //  top: calc(100% + 2px) !important;
+  //  transform: none !important;
+  //}
   &.--open-left {
     right: 0 !important;
     left: auto !important;
@@ -993,13 +993,13 @@
   li {
     @include dropdown-item;
   }
-  &.--dropdown-icons {
-    padding: 8px;
-    li {
-      padding: 4px;
-      border-radius: 4px;
-    }
-  }
+  //&.--dropdown-icons { // TODO check this style dropdown
+  //  padding: 8px;
+  //  li {
+  //    padding: 4px;
+  //    border-radius: 4px;
+  //  }
+  //}
 }
 
 .qt-lh-1 {

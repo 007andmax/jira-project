@@ -1,6 +1,7 @@
 @import "../../../assets/scss/custom";
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
 
 .d-flex {
     @include flexbox;
@@ -1305,48 +1306,9 @@
             }
         }
         .dropdown {
-            .dropdown-menu {
-                width: 220px;
-                height: 284px;
-                border-radius: 4px;
-                box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                border: solid 1px $gray-400;
-                background-color: $white;
-                padding: 7px 0 9px 0;
-                //z-index: 1;
-                .item {
-                    width: 100%;
-                    padding: 7px 15px;
-                    background-color: $white;
-                    outline: none;
-                    border: none;
-                    text-align: left;
-                    font-size: 13px;
-                    font-weight: normal;
-                    font-stretch: normal;
-                    font-style: normal;
-                    line-height: 1.4;
-                    letter-spacing: normal;
-                    color: $gray-800;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    &.selected,
-                    &:hover {
-                        color: $primary-2;
-                        font-weight: 600;
-                        background-color: $background;
-                    }
-                    &:last-child {
-                        background-color: $white !important;
-                    }
-                    span {
-                        width: 80px;
-                        display: inline-block;
-                        text-align: left;
-                    }
-                }
-            }
+          .dropdown-item {
+            @include dropdown-item;
+          }
         }
         .cmp-board-title-wrap {
             align-items: center;
@@ -1359,13 +1321,6 @@
                 width: 160px;
                 .dropdown-toggle {
                     font-size: 12px;
-                }
-                .dropdown-menu {
-                    width: 160px;
-                    left: auto !important;
-                    right: 0 !important;
-                    height: auto;
-                    max-height: 300px;
                 }
             }
         }

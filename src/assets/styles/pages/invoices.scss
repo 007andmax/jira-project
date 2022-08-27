@@ -336,7 +336,8 @@
 }
 
 .invoice-items-dropdown {
-  overflow: visible !important;
+  //overflow: visible !important; // TODO check this property
+  //overflow: visible;
   .payment-info-submenu {
     display: none;
   }
@@ -347,7 +348,6 @@
       }
     }
   }
-  overflow: visible;
   .payment-info-submenu {
     position: absolute;
     right: 100%;

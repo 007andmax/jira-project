@@ -65,10 +65,10 @@
     @include nav-divider($dropdown-divider-bg);
   }
 
-  .icon__download-pdf {
-    width: 16px;
-    height: 18px;
-  }
+  //.icon__download-pdf { // TODO check this style dropdown
+  //  width: 16px;
+  //  height: 18px;
+  //}
 
   // Links within the dropdown menu
   > li > a {
@@ -211,11 +211,11 @@
     content: "";
   }
   // Different positioning for bottom up menu
-  .dropdown-menu {
-    top: auto;
-    bottom: 100%;
-    margin-bottom: 2px;
-  }
+  //.dropdown-menu { // TODO check this property
+  //  top: auto;
+  //  bottom: 100%;
+  //  margin-bottom: 2px;
+  //}
 }
 
 // Component alignment
