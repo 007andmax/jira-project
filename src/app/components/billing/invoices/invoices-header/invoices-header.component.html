@@ -6,10 +6,12 @@
                 [textContent]="'Invoices'"
             ></h6>
         </div>
-
-
         <div class="qt-page-list__header-title-line--rigth">
-            <invoice-export></invoice-export>
+            <invoice-export
+                (onPrint)="print($event)"
+                (onEmail)="sendEmail()"
+                (onExport)="onSelectExport($event)"
+            ></invoice-export>
             <div class="qt-df qt-ai-c">
                 <button
                     class="qt-btn --transparent"
@@ -41,6 +43,10 @@
     </div>
 
 
+
+
+
+
     <div class="qt-page-list__header-filters">
         <app-invoices-filter
             class="qt-w100"
@@ -49,6 +55,10 @@
             [hidden]="toggleFilter"
         ></app-invoices-filter>
     </div>
+
+
+
+
 
 
     <div class="qt-page-list__header-thead-container">

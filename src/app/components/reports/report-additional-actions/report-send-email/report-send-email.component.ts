@@ -14,7 +14,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { forkJoin } from 'rxjs';
 import { DraftEmailComponent } from 'src/app/components/shared/draft-email/draft-email.component';
 import { ReportSendEmailValidate } from './class/report-send-email-validate';
-import { TYPE_REPORT_INVOICE, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
+import { TYPE_REPORT_INVOICE, TYPE_REPORT_PAYMENT, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
 
 @Component({
   selector: 'app-report-send-email',
@@ -56,6 +56,11 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
       this.draftReport = new ReportEmail();
       this.type = TYPE_REPORT_INVOICE;
     })
+    this.draftEmailStateService.showAsideSendReportPayment.subscribe(data => {
+      this.opened = true;
+      this.draftReport = new ReportEmail();
+      this.type = TYPE_REPORT_PAYMENT;
+    })
   }
 
 
@@ -72,7 +77,22 @@ export class ReportSendEmailComponent extends DraftEmailComponent {
     this.addBtn.setDisabled(true);
     if (this.type == TYPE_REPORT_PRODUCTS) this.productsReport();
     if (this.type == TYPE_REPORT_INVOICE) this.invoiceReport();
+    if (this.type == TYPE_REPORT_PAYMENT) this.paymentReport();
 
+  }
+  paymentReport() {
+    this.draftReport.setNote(this.messageContent);
+    this.draftReport.setFileName("payment_report");
+    let payments = this.paymentsStateService.getPayments().map(item => item.getDataForExportPDF());
+    this.draftEmailService.sendMessage(this.draftReport.getDataForPaymentReport(payments)).subscribe((data) => {
+      this.addBtn.setDisabled(false);
+      this.close();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    }, err => {
+      this.addBtn.setDisabled(false);
+    })
   }
   invoiceReport() {
     this.draftReport.setNote(this.messageContent);

@@ -14,6 +14,7 @@ import { UploadAreaComponent } from '../upload-area/upload-area.component';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -76,6 +77,7 @@ export class DraftEmailComponent implements OnInit {
     public draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public reportsStateService: ReportsStateService,
     public invoiceStateService: InvoiceStateService,
+    public paymentsStateService: PaymentsStateService,
     public reportsService: ReportsService,
   ) { }
 

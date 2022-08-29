@@ -37,4 +37,17 @@ export class ReportEmail {
              orientation: "LANDSCAPE"*/
         }
     }
+    public getDataForPaymentReport(payments) {
+        return {
+            "recipients": this.emails,
+            "subject": this.subject,
+            invoicePaymentReportDto: {
+                invoicePaymentDtos: payments
+            },
+            note: this.note,
+            /* fileName: this.fileName,
+             content: this.content,
+             orientation: "LANDSCAPE"*/
+        }
+    }
 }
