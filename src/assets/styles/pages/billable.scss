@@ -398,10 +398,11 @@ app-invoice-preview {
 }
 
 app-invoice-form {
-  //.dropdown-menu { // TODO check this property
-  //  max-height: none;
-  //  overflow: visible;
-  //}
+  .dropdown-menu {
+    max-height: none;
+    height: auto;
+    overflow: visible;
+  }
 
   app-invoice-form-edit {
     &::before {

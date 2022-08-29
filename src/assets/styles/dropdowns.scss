@@ -31,12 +31,12 @@
       }
     }
   }
-  &.to-left {
-    .dropdown-menu {
-      left: auto !important;
-      right: 0;
-    }
-  }
+  //&.to-left { // TODO check this property
+  //  .dropdown-menu {
+  //    left: auto !important;
+  //    right: 0;
+  //  }
+  //}
   .dropdown-menu {
     //background: $white; // TODO check this style dropdown
     //width: 100%;
@@ -95,20 +95,20 @@
       top: calc(50% - 14px) !important;
     }
   }
-  &.right {
-    .dropdown-menu {
-      left: auto !important;
-      right: 0 !important;
-    }
-  }
-  &.with-icons {
-    .dropdown-item {
-      display: flex;
-      i {
-        margin-right: 10px;
-      }
-    }
-  }
+  //&.right { // TODO check this style dropdown
+  //  .dropdown-menu {
+  //    left: auto !important;
+  //    right: 0 !important;
+  //  }
+  //}
+  //&.with-icons { // TODO check this style dropdown
+  //  .dropdown-item {
+  //    display: flex;
+  //    i {
+  //      margin-right: 10px;
+  //    }
+  //  }
+  //}
 }
 
 .dark-dropdown {
@@ -552,9 +552,6 @@
 .company-time-zone-drop-down {
   .app-drop-down__dropdown {
     width: fit-content !important;
-    .dropdown-item {
-      color: $gray-800 !important;
-    }
   }
 }
 app-company-time-zone {

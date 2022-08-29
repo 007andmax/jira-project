@@ -1640,10 +1640,10 @@ app-quotes-item {
     }
     .dropdown-menu {
       min-width: 80px;
-      button {
-        padding: 0 15px;
-        font-size: 12px;
-      }
+      //button { // TODO check this style dropdown
+      //  padding: 0 15px;
+      //  font-size: 12px;
+      //}
     }
   }
   input {
