@@ -8,6 +8,7 @@ import { ExcelService } from "src/app/components/device/_services/download_csv.s
 import { DropDownComponent } from "src/app/components/shared/drop-down/drop-down.component";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceApplictionByCompanyReport } from "../../class/applicationbycompany-report";
 import { ApplicationByCompanyValidate } from "../../class/applicationbycompanyvalidate";
@@ -21,7 +22,7 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
 })
 export class ApplicationbycompanyReportComponent implements OnInit {
   @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
-  @ViewChild("templatecounterApplication") templatecounterApplication;
+  // @ViewChild("templatecounterApplication") templatecounterApplication;
 
   clientName: string;
   companies = [];
@@ -47,6 +48,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   applicationAssetNameList : any[];
   displayName: string;
   assetNameList : any [];
+  opened: boolean = false;
   constructor(
     private agentService: AgentService,
     private companiesState: CompaniesStateService,
@@ -57,7 +59,8 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     private toastr: ToastrService,
     private excelService: ExcelService,
     public elRef: ElementRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    public draftEmailStateService: DraftEmailStateService,
   ) {}
 
   ngOnInit() {
@@ -157,13 +160,14 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   getReportApplicationByCompany() {}
 
   sendEmail() {
-    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
-    modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation = this.orientation;
-    modalRef.componentInstance.report = this.report;
-    modalRef.componentInstance.template = this.template;
-    modalRef.componentInstance.fileName = this.fileName;
-    modalRef.componentInstance.accountType = this.accountType;
+    this.draftEmailStateService.toogleAsideAddReport({
+      selectedClient: this.selectedClient,
+      orientation: this.orientation,
+      report: this.report,
+      template: this.template,
+      fileName: this.fileName,
+      accountType: this.accountType
+    });
   }
 
   getPdfData() {
@@ -382,31 +386,13 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.filter.onFilter(field, this.applicationByCompanyList);
   }
 
-  counterPopupApplication(templatecounterApplication, applicationByCompany) {
-    this.applicationLoading= true;
+  counterPopupApplication(applicationByCompany) {    
+    this.opened = true;    
     this.displayName = applicationByCompany.DisplayName;
 
     for(var i=0; i<applicationByCompany.Assets.length; i++){
        this.applicationAssetNameList = applicationByCompany.Assets;
       }
-
-    this.ngZone.run(() => {
-      this.modalService
-      .open(templatecounterApplication, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
-      )
-        .result.then(
-          (result) => {
-            this.closeResult = `Closed with: ${result}`;
-          },
-          (reason) => {
-            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
-          }
-          );
-        });
-
-        if(applicationByCompany){
-          this.applicationLoading= false;
-        }
   }
 
   private getDismiss(reason: any): string {
@@ -421,5 +407,9 @@ export class ApplicationbycompanyReportComponent implements OnInit {
 
   closed() {
     this.modalService.dismissAll("Cross click");
+  }
+
+  applicationclosed(){
+    this.opened = false;
   }
 }

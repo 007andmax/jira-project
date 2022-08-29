@@ -15,6 +15,7 @@ import { ReportValidate } from '../../class/report-validate';
 import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { HardwareSummaryReportFilter } from './Class/hardware-summary-report';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'hardware-summary-report',
@@ -62,7 +63,7 @@ export class HardwareSummaryReportComponent implements OnInit {
     private toastr: ToastrService,
     private agentService: AgentService,
     private companiesState: CompaniesStateService,
-
+    public draftEmailStateService: DraftEmailStateService,
     ) { }
 
   ngOnInit() {
@@ -172,13 +173,14 @@ export class HardwareSummaryReportComponent implements OnInit {
   }
 
   sendEmail() {
-    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
-    modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation = this.orientation;
-    modalRef.componentInstance.report = this.report;
-    modalRef.componentInstance.template = this.template;
-    modalRef.componentInstance.fileName = this.fileName;
-    modalRef.componentInstance.accountType = this.accountType;
+    this.draftEmailStateService.toogleAsideAddReport({
+      selectedClient: this.selectedClient,
+      orientation: this.orientation,
+      report: this.report,
+      template: this.template,
+      fileName: this.fileName,
+      accountType: this.accountType
+    });
   }
 
   downloadCsv() {

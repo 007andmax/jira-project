@@ -65,6 +65,32 @@
             ></div>
         </div>
     </div>
+
+    <div [hidden]="!opened" class="qt-aside-modern">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-info d-f ai-c">
+                <div class="qt-aside__title">{{displayName}}</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal icon__close"  
+                    (click)="applicationclosed()"              
+                ></div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content">
+            <div *ngFor="let applicationAsset of applicationAssetNameList">
+                <div class="application-count__row">
+                    <div
+                        class="application-count__row-title"
+                        [textContent]="applicationAsset.AssetName"
+                    ></div>
+                </div>
+            </div>            
+        </div>       
+        <div class="qt-aside-modern__footer">        
+        </div>
+    </div>
 </div>
 <div id="product-list-ticket-data">
     <div class="device-header">
@@ -117,7 +143,7 @@
                           <div *ngIf="applicationByCompany.AssetCount != 0">
                             <a
                             href="javascript:;"
-                            (click)="counterPopupApplication(templatecounterApplication,applicationByCompany)"
+                            (click)="counterPopupApplication(applicationByCompany)"
                             > {{applicationByCompany.AssetCount}}
                             </a>
                           </div>
@@ -138,41 +164,11 @@
         </div>
     </div>
 </div>
+
 <div
     class="loading"
     *ngIf="loading"
 ></div>
 
 
-<ng-template #templatecounterApplication class="modal-content">
-  <div
-    class="qt-aside-modern device-add-aside"
->
-    <div class="qt-aside-modern__header">
-        <div class="d-f ai-c">
-            <div class="qt-aside__title">{{displayName}}</div>
-        </div>
-        <div>
-          <div
-              class="qt-aside__close-modal icon__close"
-              (click)="closed()"
-          ></div>
-      </div>
-    </div>
-    <div *ngFor="let applicationAsset of applicationAssetNameList">
-      <div class="application-count__row">
-          <div
-              class="application-count__row-title"
-              [textContent]="applicationAsset.AssetName"
-          ></div>
-      </div>
-  </div>
-  <div *ngIf="applicationAssetNameList.length <= 0">
-    <h4 class="not-found">No Data Found</h4>
-  </div>
-</div>
-<div
-    class="loading"
-    *ngIf="applicationLoading"
-></div>
-</ng-template>
+<app-report-send-email></app-report-send-email>

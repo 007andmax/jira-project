@@ -40,18 +40,14 @@
         >
             Add Device
         </button></span>
-        <button class="qt-btn --outline-white qt-ml-8 dm">
+        <button class="qt-btn --outline-white qt-ml-8 dm" (click)="sendEmail()">
             <span class="d-email"></span>
           </button>
           <button class="qt-btn --outline-white qt-ml-8 dm" (click)="printPdf()">
             <span class="d-print"></span>
         </button>
           <button class="qt-btn --outline-white qt-ml-8 dm" (click)="downloadCsv()">
-        <i class="
-      icon__download
-      qt-za-16 qt-sz-16 qt-dib qt-bg-contain
-      summarydownload
-    "></i>
+            <span class="d-exportdark"></span> 
     </button>
         </div>
 
@@ -1308,4 +1304,6 @@
 
 
 </ng-template>
+
+<app-report-send-email></app-report-send-email>
 

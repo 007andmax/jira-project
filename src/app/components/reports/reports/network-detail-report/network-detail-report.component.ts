@@ -8,6 +8,7 @@ import { ExcelService } from "src/app/components/device/_services/download_csv.s
 import { DropDownComponent } from "src/app/components/shared/drop-down/drop-down.component";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { NetworkDetailReport } from "../../class/network-detail-report";
 import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
@@ -47,7 +48,8 @@ export class NetworkDetailReportComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    public elRef: ElementRef
+    public elRef: ElementRef,
+    public draftEmailStateService: DraftEmailStateService,
   ) {}
 
   ngOnInit() {
@@ -137,14 +139,15 @@ export class NetworkDetailReportComponent implements OnInit {
 
   getReportByNetworkDetail() {}
 
-  sendEmail() {
-    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
-    modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation = this.orientation;
-    modalRef.componentInstance.report = this.report;
-    modalRef.componentInstance.template = this.template;
-    modalRef.componentInstance.fileName = this.fileName;
-    modalRef.componentInstance.accountType = this.accountType;
+  sendEmail() {        
+    this.draftEmailStateService.toogleAsideAddReport({
+      selectedClient: this.selectedClient,
+      orientation: this.orientation,
+      report: this.report,
+      template: this.template,
+      fileName: this.fileName,
+      accountType: this.accountType
+    });
   }
 
   printPdf() {

@@ -18,6 +18,7 @@ import { element } from "@angular/core/src/render3";
 import { DatePickerComponent } from "../shared/date-picker/date-picker.component";
 import { CommonHttpServices } from "../device/_services/common_http.service";
 import { ExcelService } from "../device/_services/download_csv.service";
+import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 
 @Component({
   selector: "app-company-device-beta",
@@ -127,6 +128,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
   serialnumber: string = "";
   clientName: string;
   loading = false;
+  selectedClient = null;
+  orientation: string = "PORTRAIT";
+  report: string = "report-device-summary";
+  fileName: string = "device-summary-report";
+  accountType = "CLIENT";
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -145,7 +151,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private remoteControlService: RemoteControlService,
     private companiesState: CompaniesStateService,
     private commonHttpServices: CommonHttpServices,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public draftEmailStateService: DraftEmailStateService,
   ) { }
 
   ngOnInit() {    
@@ -1521,6 +1528,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
       fileName,
       "devicesummaryreport"
     );
+  }
+
+  sendEmail() {    
+    this.draftEmailStateService.toogleAsideAddReport({
+      selectedClient: this.selectedClient,
+      orientation: this.orientation,
+      report: this.report,
+      template: this.template,
+      fileName: this.fileName,
+      accountType: this.accountType
+    });
   }
 }
 
