@@ -16,9 +16,9 @@
         width: 50%;
         top: 0;
         input{
-            border: solid 1px $gray-500;
+            border: solid 1px $gray-500--old;
             @include border-radius(4px);
-            color:$gray-800;
+            color:$gray-800--old;
         }
     }
 }
@@ -90,7 +90,7 @@
                         font-weight: 600;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         padding: 0 18px;
                         background: url(../../../../assets/img/device/bullet.svg) no-repeat 5px 5px;
                         margin: 6px 0;
@@ -101,7 +101,7 @@
                         flex-direction: row;
                         span{
                             font-weight: 400;
-                            color: $gray-600;
+                            color: $gray-600--old;
                             margin-right: 2px;
                             display: inline-block;
                             vertical-align: bottom;
@@ -113,7 +113,7 @@
                             font-weight: 600;
                             line-height: 1.54;
                             letter-spacing: normal;
-                            color: $gray-800;
+                            color: $gray-800--old;
                         }
                         span.edit-field{
                             top: -6px;
@@ -126,7 +126,7 @@
                                 line-height: 1;
                                 font-size: 13px;
                                 font-weight: 600;
-                                color: $gray-800;
+                                color: $gray-800--old;
                             }
                         }
                         span.edit-field[data-tooltip]{
@@ -137,7 +137,7 @@
                                 text-align: center;
                                 width: 216px;
                                 border-radius: 3px;
-                                background-color: $gray-800;
+                                background-color: $gray-800--old;
                                 font-size: 12px;
                                 font-weight: 500;
                                 font-style: normal;
@@ -165,7 +165,7 @@
                                 position: absolute;
                                 pointer-events: none;
                                 border-color: rgba(79, 95, 121, 0);
-                                border-top-color: $gray-800;
+                                border-top-color: $gray-800--old;
                                 border-width: 6px;
                                 margin-left: -80px;
                                 bottom: 32px;
@@ -180,7 +180,7 @@
                                     visibility: visible;
                                 }
                                 .sub-label-field {
-                                    border: solid 1px $gray-500;
+                                    border: solid 1px $gray-500--old;
                                     outline: 0;
                                 }
                             }
@@ -198,7 +198,7 @@
             }
 
             .label-field:hover, .label-field:focus {
-                border: solid 1px $gray-500;
+                border: solid 1px $gray-500--old;
                 outline: 0;
             }
 
@@ -209,7 +209,7 @@
             }
 
             .sub-label-field:hover, .sub-label-field:focus {
-                border: solid 1px $gray-500;
+                border: solid 1px $gray-500--old;
                 outline: 0;
             }
 
@@ -430,11 +430,11 @@
                             position: relative;
                             height: 28px;
                             @include border-radius(4px);
-                            background-color: $gray-100;
+                            background-color: $gray-100--old;
                             .tag {
                                 font-size: 12px;
                                 line-height: 1.33;
-                                color: $gray-800;
+                                color: $gray-800--old;
                             }
                             .tag-close {
                                 position: absolute;
@@ -498,12 +498,12 @@
                                     }
                                     .time-by{
                                         font-size: 10px;
-                                        color: $gray-600;
+                                        color: $gray-600--old;
                                     }
                                 }
                                 .device-added-by {
                                     font-size: 12px;
-                                    color: $gray-800;
+                                    color: $gray-800--old;
                                     line-height: 1.33;
                                 }
                                 &::before {
@@ -548,7 +548,7 @@
                             width: 160px;
                             @include border-radius(6px);
                             border: 1px dashed rgba(255, 185, 55, 0.4);
-                            background-color: $gray-100;
+                            background-color: $gray-100--old;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -577,7 +577,7 @@
                             p {
                                 margin: 2px 0;
                                 font-size: 13px;
-                                color: $gray-800;
+                                color: $gray-800--old;
                             }
                             .notes-by {
                                 display: -ms-flexbox;
@@ -612,7 +612,7 @@
                                     .name {
                                         font-size: 12px;
                                         font-weight: 600;
-                                        color: $gray-800;
+                                        color: $gray-800--old;
 
                                     }
                                 }
@@ -627,7 +627,7 @@
                                 a {
                                     font-size: 12px;
                                     line-height: 1;
-                                    color: $gray-800;
+                                    color: $gray-800--old;
                                     border-radius: 3px;
                                     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
                                     background-color: $white;

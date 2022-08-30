@@ -42,7 +42,7 @@
     label {
       margin: 0 !important;
       font-size: 11px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
     a {
       font-size: 12px;
@@ -94,7 +94,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $gray-400;
+    background-color: $gray-400--old;
     width: 100%;
     padding: 9px 40px;
     font-size: 12px;
@@ -104,7 +104,7 @@
     line-height: 1.33;
     letter-spacing: normal;
     text-align: center;
-    color: $gray-800;
+    color: $gray-800--old;
     @media only screen and (max-width: 1280px) {
       padding: 9px 25px;
       text-align: left;
@@ -117,14 +117,14 @@
       border-radius: 3px;
       border: solid 1px $background;
       padding: 8px;
-      background-color: $gray-100;
+      background-color: $gray-100--old;
       font-size: 12px;
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: $gray-800;
+      color: $gray-800--old;
       display: inline-block;
       margin-right: 8px;
       margin-bottom: 8px;
@@ -144,7 +144,7 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $gray-800;
+    color: $gray-800--old;
   }
 }
 
@@ -173,7 +173,7 @@
     line-height: 1.44;
     letter-spacing: normal;
     color: $white;
-    background-color: $gray-800;
+    background-color: $gray-800--old;
     padding: 11px 24px;
   }
 }
@@ -188,7 +188,7 @@
     font-style: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $gray-800;
+    color: $gray-800--old;
     margin-bottom: 12px;
   }
   p {
@@ -198,7 +198,7 @@
     font-style: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $gray-800;
+    color: $gray-800--old;
   }
 }
 
@@ -268,7 +268,7 @@
     line-height: normal;
     letter-spacing: normal;
     color: $primary-2;
-    border-bottom: solid 1px $gray-800;
+    border-bottom: solid 1px $gray-800--old;
     vertical-align: middle;
     padding: 0 10px 13px 0;
     font-weight: 600;
@@ -285,7 +285,7 @@
     line-height: 1.54;
     letter-spacing: normal;
     color: $primary-2;
-    border-bottom: solid 1px $gray-800;
+    border-bottom: solid 1px $gray-800--old;
     padding: 13px 10px 13px 0;
     vertical-align: middle;
     &:last-child {
@@ -337,7 +337,7 @@
   line-height: 1.33;
   letter-spacing: normal;
   text-align: center;
-  color: $gray-600;
+  color: $gray-600--old;
   margin-bottom: 4px;
   float: left;
   width: 100%;
@@ -345,7 +345,7 @@
     margin-bottom: 0;
   }
   a {
-    color: $gray-600;
+    color: $gray-600--old;
   }
 }
 

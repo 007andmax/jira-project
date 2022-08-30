@@ -6,7 +6,7 @@
     flex-shrink: 0;
 }
 .category-item-category .toggle-category {
-    background-color: $gray-700;
+    background-color: $gray-700--old;
 }
 .category-item-category {
     display: flex;
@@ -38,13 +38,13 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $gray-500;
+        background-color: $gray-500--old;
     }
     .status-published {
         background-color: $success;
     }
     .status-draft {
-        background-color: $gray-500;
+        background-color: $gray-500--old;
     }
     span {
         padding-left: 7px;

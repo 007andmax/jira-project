@@ -82,7 +82,7 @@
     color: $primary-2;
     &:hover,
     &:focus {
-      border-color: $gray-600;
+      border-color: $gray-600--old;
     }
     &::placeholder {
       font-weight: 400;
@@ -126,9 +126,9 @@ add-marketing-subscription-type {
     }
 
     &.manage-subscription-selected {
-      background-color: $gray-100;
+      background-color: $gray-100--old;
       td {
-        background-color: $gray-100;
+        background-color: $gray-100--old;
       }
       &.selected {
         td::after {
@@ -198,12 +198,12 @@ tbody {
 }
 tr:hover {
   td {
-    background-color: $gray-100;
+    background-color: $gray-100--old;
   }
 }
 td {
   &:hover {
-    background-color: $gray-100;
+    background-color: $gray-100--old;
   }
 }
 tr.selected {

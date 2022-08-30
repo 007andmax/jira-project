@@ -64,7 +64,7 @@
 
   &__ticket-name {
     @include сaption-l__sb;
-    color: $gray-800;
+    color: $gray-800--old;
     margin-right: 16px;
 
     @media (max-width: 767px) {
@@ -147,7 +147,7 @@
         content: "";
         width: 16px;
         height: 16px;
-        border: 1px solid $gray-500;
+        border: 1px solid $gray-500--old;
         background: $white;
         border-radius: 50%;
         bottom: -7px;

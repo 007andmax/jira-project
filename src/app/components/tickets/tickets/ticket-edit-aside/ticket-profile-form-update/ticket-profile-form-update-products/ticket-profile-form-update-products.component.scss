@@ -16,7 +16,7 @@
     border-radius: 4px;
     margin-left: 8px;
     display: flex;
-    background-color: $gray-700;
+    background-color: $gray-700--old;
     align-items: center;
     justify-content: center;
 
@@ -30,18 +30,18 @@
     }
   }
   &__btn-del {
-    background-color: $gray-400;
+    background-color: $gray-400--old;
   }
   &__input {
     height: 40px;
     border-radius: 3px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     font-size: 13px;
     padding: 10px 12px;
     flex-grow: 1;
     outline: none;
     &::placeholder {
-      color: $gray-600;
+      color: $gray-600--old;
     }
   }
 }

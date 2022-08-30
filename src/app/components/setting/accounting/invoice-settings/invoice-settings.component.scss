@@ -8,7 +8,7 @@
         float: left;
         width: 128px;
         border-radius: 4px;
-        border: solid 1px $gray-500;
+        border: solid 1px $gray-500--old;
         background-color: $white;
         padding: 9px 14px;
         font-size: 13px;
@@ -53,7 +53,7 @@
             font-stretch: normal;
             line-height: 1.54;
             letter-spacing: normal;
-            color: $gray-600;
+            color: $gray-600--old;
             margin-left: 2px;
         }
     }

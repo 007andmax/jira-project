@@ -18,21 +18,21 @@
     width: 127px;
     height: 36px;
 
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 8px;
 
     font-size: 14px;
-    color: $gray-700;
+    color: $gray-700--old;
 }
 .preview {
     display: flex;
-    color: $gray-700;
+    color: $gray-700--old;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     width: 79px;
     height: 36px;
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 8px;
 }
 .remove-category {
@@ -41,14 +41,14 @@
     height: 35px;
     align-items: center;
     justify-content: center;
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 8px;
 }
 .header-content {
     display: flex;
     align-items: center;
     padding: 9px 30px;
-    border: 1px solid $gray-300;
+    border: 1px solid $gray-300--old;
     min-width: 1150px;
 }
 .clear-border {
@@ -70,12 +70,12 @@
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    color: $gray-700;
+    color: $gray-700--old;
     width: 91px;
     height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $gray-200;
+    background: $gray-200--old;
     border-radius: 6px;
 }

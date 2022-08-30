@@ -170,7 +170,7 @@
     }
 
     .company-info {
-      border-bottom: 1px solid $gray-400;
+      border-bottom: 1px solid $gray-400--old;
       margin-left: -30px;
       margin-right: -30px;
       padding-left: 30px;
@@ -178,19 +178,19 @@
     }
 
     .company-info-left-side {
-      border-right: 1px solid $gray-400;
+      border-right: 1px solid $gray-400--old;
     }
 
     .company-info-description {
       min-height: 40px;
       border-radius: 4px;
-      border: solid 1px $gray-500;
+      border: solid 1px $gray-500--old;
       background-color: $white;
       padding: 9px 14px;
       font-size: 13px;
       line-height: 1.54;
       &::placeholder {
-        color: $gray-600;
+        color: $gray-600--old;
       }
     }
 
@@ -300,7 +300,7 @@
     }
 
     .terms-n-conditions {
-      background: $gray-100;
+      background: $gray-100--old;
       margin-left: -30px;
       margin-right: -30px;
       &__textarea {
@@ -323,7 +323,7 @@
     .mat-form-field-wrapper {
       padding: 0;
       border-radius: 4px;
-      border: solid 1px $gray-500;
+      border: solid 1px $gray-500--old;
     }
     .mat-form-field-infix {
       padding: 0;
@@ -347,7 +347,7 @@
       font-style: normal;
       line-height: 1.54;
       letter-spacing: normal;
-      color: $gray-600;
+      color: $gray-600--old;
       font-weight: 400;
       position: absolute;
       left: 14px;
@@ -363,8 +363,8 @@
     .mat-chip.mat-primary {
       height: 32px;
       margin: 2px;
-      background-color: $gray-100;
-      color: $gray-800;
+      background-color: $gray-100--old;
+      color: $gray-800--old;
     }
     .mat-chip-remove.mat-icon {
       width: 18px;
@@ -384,13 +384,13 @@
   }
   .quote-text-block {
     border-radius: 4px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     background-color: $white;
     padding: 10px 14px;
     font-size: 13px;
     min-height: 104px;
     &::placeholder {
-      color: $gray-600;
+      color: $gray-600--old;
     }
   }
 }
@@ -398,11 +398,11 @@
 .quote-email-dropdown {
   width: 460px !important;
   max-height: 174px !important;
-  &::-webkit-scrollbar-thumb {
-    background-color: #5e6b78 !important;
-    border-radius: 20px;
-    border: 3px solid #5e6b78 !important;
-  }
+  //&::-webkit-scrollbar-thumb { // too check this style
+  //  background-color: #5e6b78 !important;
+  //  border-radius: 20px;
+  //  border: 3px solid #5e6b78 !important;
+  //}
   hr {
     border-top: 4px solid $primary-1;
   }

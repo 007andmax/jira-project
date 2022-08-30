@@ -5,7 +5,7 @@ body {
         padding: 0;
         margin: 0;
         @include body-font;
-        background-color: $gray-200;
+        background-color: $gray-200--old;
         /*** Default stylesheet reset ***/
         *,
         *::before,
@@ -220,10 +220,10 @@ body {
             }
             &.btn-secondary {
                 background-color: $background !important;
-                color: $gray-800;
+                color: $gray-800--old;
                 &:hover {
                     background-color: $background !important;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
             }
         }
@@ -273,7 +273,7 @@ body {
                 float: left;
                 width: 100%;
                 @include border-radius(4px);
-                border: solid 1px $gray-500;
+                border: solid 1px $gray-500--old;
                 background-color: $white;
                 padding: 9px 15px;
                 font-size: 13px;
@@ -281,13 +281,13 @@ body {
                 font-weight: 400;
                 line-height: 1.54;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
                 outline: none !important;
                 &:hover {
-                    border-color: $gray-600;
+                    border-color: $gray-600--old;
                 }
                 &:focus {
-                    border-color: $gray-600;
+                    border-color: $gray-600--old;
                 }
             }
 
@@ -309,36 +309,36 @@ body {
         /*** Placeholder ***/
 
         .form-input::-webkit-input-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
         .form-input::-moz-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
         .form-input:-ms-input-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
         .form-input:-moz-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
 
         .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-webkit-input-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
         .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-moz-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
         .cmn-dropdown .cmn-dropdon-list form input[type="text"]:-ms-input-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
         .cmn-dropdown .cmn-dropdon-list form input[type="text"]:-moz-placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
             @include opacity(1);
         }
 
@@ -427,7 +427,7 @@ body {
                                 font-weight: 400;
                                 line-height: 1.2;
                                 letter-spacing: normal;
-                                color: $gray-600;
+                                color: $gray-600--old;
                                 width: 100%;
                             }
                             h5 {
@@ -605,7 +605,7 @@ body {
                         &:hover,
                         &.active {
                             a {
-                                background-color: $gray-800;
+                                background-color: $gray-800--old;
                                 border-color: $primary-1;
                                 font-weight: 600;
                             }
@@ -712,7 +712,7 @@ body {
                     font-style: normal;
                     line-height: 1.2;
                     letter-spacing: normal;
-                    color: $gray-600;
+                    color: $gray-600--old;
                 }
             }
 
@@ -846,7 +846,7 @@ body {
                 line-height: 1.2;
                 letter-spacing: normal;
                 text-align: right;
-                color: $gray-600;
+                color: $gray-600--old;
             }
             .task-status-row {
                 display: -ms-flexbox;
@@ -896,7 +896,7 @@ body {
                 font-style: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
                 .id {
                     font-size: 10px;
                     font-weight: 500;
@@ -904,7 +904,7 @@ body {
                     font-style: normal;
                     line-height: 1.2;
                     letter-spacing: normal;
-                    color: $gray-600;
+                    color: $gray-600--old;
                 }
                 .name {
                     &::before {
@@ -912,7 +912,7 @@ body {
                         display: inline-block;
                         width: 4px;
                         height: 4px;
-                        background-color: $gray-600;
+                        background-color: $gray-600--old;
                         border-radius: 50%;
                         vertical-align: middle;
                         margin: 0 8px;
@@ -927,7 +927,7 @@ body {
                 font-style: normal;
                 line-height: 1.2;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
                 &:hover {
                     color: $primary-1;
                 }
@@ -1044,7 +1044,7 @@ body {
                         font-size: 12px;
                         line-height: normal;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         display: block;
                         text-transform: capitalize;
                         @include transition(0.4s);
@@ -1080,7 +1080,7 @@ body {
             form {
                 .form-row {
                     &.primary-phone {
-                        border: solid 1px $gray-500;
+                        border: solid 1px $gray-500--old;
                         display: flex;
                         flex-direction: row;
                         align-items: center;
@@ -1134,7 +1134,7 @@ body {
                         font-style: normal;
                         line-height: 1.33;
                         letter-spacing: normal;
-                        color: $gray-600;
+                        color: $gray-600--old;
                     }
                 }
                 .static-link {
@@ -1181,7 +1181,7 @@ body {
                 text-align: center;
                 width: 67px;
                 border-radius: 3px;
-                background-color: $gray-800;
+                background-color: $gray-800--old;
                 font-size: 12px;
                 font-weight: 500;
                 font-style: normal;
@@ -1206,7 +1206,7 @@ body {
                 position: absolute;
                 pointer-events: none;
                 border-color: rgba(79, 95, 121, 0);
-                border-top-color: $gray-800;
+                border-top-color: $gray-800--old;
                 border-width: 6px;
                 margin-left: -6px;
                 bottom: 15px;
@@ -1473,7 +1473,7 @@ body {
                     font-style: normal;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
             }
             .delete {
@@ -1533,7 +1533,7 @@ body {
                         font-size: 12px;
                         line-height: 1.33;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         margin-right: 16px;
                         margin-bottom: 0;
                     }
@@ -1562,7 +1562,7 @@ body {
                     .dp-info {
                         span {
                             font-size: 11px;
-                            color: $gray-800;
+                            color: $gray-800--old;
                         }
                     }
                 }
@@ -1619,7 +1619,7 @@ body {
                 float: left;
                 width: 100%;
                 @include border-radius(4px);
-                border: solid 1px $gray-500;
+                border: solid 1px $gray-500--old;
                 background-color: $white;
                 padding: 9px 15px;
                 font-size: 13px;
@@ -1644,7 +1644,7 @@ body {
                 font-style: normal;
                 line-height: normal;
                 text-align: center;
-                color: $gray-800;
+                color: $gray-800--old;
             }
             .selected-opt {
                 font-size: 12px;
@@ -1654,7 +1654,7 @@ body {
                 line-height: 1.33;
                 letter-spacing: normal;
                 text-align: right;
-                color: $gray-800;
+                color: $gray-800--old;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -1692,7 +1692,7 @@ body {
                         font-stretch: normal;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         background: url("/assets/img/device/search.svg") no-repeat left 10px center
                             rgba(237, 242, 246, 0.5);
                         background-size: 20px auto;
@@ -1742,7 +1742,7 @@ body {
                     margin-left: 10px;
                     h5 {
                         margin: 0;
-                        color: $gray-800;
+                        color: $gray-800--old;
                     }
                     .email {
                         font-size: 12px;
@@ -1751,7 +1751,7 @@ body {
                         font-stretch: normal;
                         line-height: 1.33;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                     }
                 }
             }
@@ -1861,7 +1861,7 @@ body {
                         line-height: 1.33;
                         letter-spacing: normal;
                         text-align: center;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         img {
                             margin-right: 9px;
                         }
@@ -1898,7 +1898,7 @@ body {
                     height: 32px;
                     align-items: center;
                     overflow: hidden;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     padding: 8px 36px;
 
                     .f-name {
@@ -1908,7 +1908,7 @@ body {
                         font-style: normal;
                         line-height: 1.33;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                     }
                     i.ionicon.ion-close-round {
                         position: absolute;
@@ -2033,8 +2033,8 @@ body {
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: $gray-800;
-            border: 1px solid $gray-400;
+            color: $gray-800--old;
+            border: 1px solid $gray-400--old;
             .bs-datepicker-container {
                 padding: 0;
                 .bs-datepicker-head {
@@ -2051,7 +2051,7 @@ body {
                     font-style: normal;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
                 .bs-datepicker-body {
                     padding: 0;
@@ -2063,7 +2063,7 @@ body {
                     width: 100%;
                 }
                 .bs-datepicker-head button {
-                    color: $gray-800;
+                    color: $gray-800--old;
                     width: auto;
                     height: auto;
                     line-height: 17px;
@@ -2121,7 +2121,7 @@ body {
             border-radius: 0;
             max-width: inherit;
             padding: 0 1px;
-            color: $gray-800;
+            color: $gray-800--old;
             font-weight: 600;
             font-size: 12px;
             text-transform: uppercase;
@@ -2134,7 +2134,7 @@ body {
             line-height: 1;
             letter-spacing: normal;
             text-align: center;
-            color: $gray-800;
+            color: $gray-800--old;
             border-bottom: 1px solid $background;
             padding: 25px 5px 10px 5px;
             text-align: center;
@@ -2152,7 +2152,7 @@ body {
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
             padding: 5px 5px 4px 5px;
         }
         .bs-datepicker-body table.days span {
@@ -2161,7 +2161,7 @@ body {
             line-height: 25px;
             text-align: center;
             font-size: 12px;
-            color: $gray-800;
+            color: $gray-800--old;
         }
         .theme-green .bs-datepicker-body table td span.selected,
         .theme-green .bs-datepicker-body table td.selected span,
@@ -2230,8 +2230,8 @@ body {
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: $gray-800;
-            border: 1px solid $gray-400 !important;
+            color: $gray-800--old;
+            border: 1px solid $gray-400--old !important;
             z-index: 9;
 
             .ngb-dp-header {
@@ -2253,7 +2253,7 @@ body {
                     .ngb-dp-navigation-select {
                         select {
                             @include app-none();
-                            border: solid 1px $gray-500;
+                            border: solid 1px $gray-500--old;
                             margin: 0 -1px;
                             outline: none !important;
                             background: url("/assets/img/device/selct-arrow.svg") no-repeat right 10px center;
@@ -2313,7 +2313,7 @@ body {
                     line-height: 1;
                     letter-spacing: normal;
                     text-align: center;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     border-bottom: 1px solid $background;
                     padding: 25px 5px 10px 5px;
                     text-align: center;
@@ -2347,7 +2347,7 @@ body {
                         font-style: normal;
                         line-height: normal;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         text-align: center;
                         padding: 5px 5px 5px 5px;
                         border: none !important;
@@ -2369,7 +2369,7 @@ body {
                             font-style: normal;
                             line-height: normal;
                             letter-spacing: normal;
-                            color: $gray-800;
+                            color: $gray-800--old;
                             text-align: center;
                             min-width: 24px;
                             min-height: 24px;
@@ -2496,7 +2496,7 @@ body {
                     font-style: normal;
                     line-height: 1.54;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     display: -ms-flexbox;
                     display: -webkit-flex;
                     display: flex;
@@ -2508,7 +2508,7 @@ body {
                     &:active,
                     &:hover,
                     &:focus {
-                        background-color: $gray-200;
+                        background-color: $gray-200--old;
                     }
                     img {
                         width: auto;
@@ -2757,7 +2757,7 @@ body {
                             font-style: normal;
                             line-height: 1.54;
                             letter-spacing: normal;
-                            color: $gray-800;
+                            color: $gray-800--old;
                         }
                     }
                 }
@@ -2790,11 +2790,11 @@ body {
                 text-overflow: ellipsis;
                 -webkit-transition: all 0.3s;
                 transition: all 0.3s;
-                color: $gray-800;
+                color: $gray-800--old;
 
                 &:hover {
                     background: $background;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
             }
         }
@@ -2872,7 +2872,7 @@ body {
             border-bottom-right-radius: 5px;
         }
         table.dataTable tbody tr td {
-            border-bottom: 2px solid $gray-200;
+            border-bottom: 2px solid $gray-200--old;
         }
 
         table.dataTable thead tr th.sorting_desc,

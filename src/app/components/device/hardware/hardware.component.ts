@@ -289,7 +289,7 @@ export class HardwareComponent implements OnInit {
                <div class="reports-head" style="width:585px;text-align:center;color: $primary-2;margin-left:-105px;">
                     <p style="margin:0;line-height:1.2;color:$primary-2;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` + localStorage.getItem('currentCompanyName') + ` - Hardware Summary Report</p>
                     <p style="line-height:1.5;color:$primary-2;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` + this.deviceName + ` hardware installed (9 items)</p>
-                    <p style="margin:0;line-height:1;color:$gray-800;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` + moment(new Date()).format('LL') + ` @ ` + moment(new Date()).format('LT') + `</p>
+                    <p style="margin:0;line-height:1;color:$gray-800--old;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` + moment(new Date()).format('LL') + ` @ ` + moment(new Date()).format('LT') + `</p>
                </div>
             </th>
           </tr>
@@ -306,8 +306,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printSystem.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -320,8 +320,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printMotherBoard.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -334,8 +334,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printProcessor.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -348,8 +348,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printMemory.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -362,8 +362,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printNetwork.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -376,8 +376,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printGraphic.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -390,8 +390,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printDisplay.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -404,8 +404,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printDisk.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -418,8 +418,8 @@ export class HardwareComponent implements OnInit {
               <tbody>`
     this.printOS.forEach(element => {
       html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
     });
     html = html + `</tbody>
             </table>
@@ -432,9 +432,9 @@ export class HardwareComponent implements OnInit {
             <td style="width: 100%;" colspan="2">
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
-                  <td style="width: 33.33%;color: $gray-800;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` + localStorage.getItem('currentUser') + `</td>
-                  <td style="width: 33.33%;color: $gray-800;font-size:12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: center;vertical-align: middle;">` + localStorage.getItem('currentCompanyName') + `</td>
-                  <td style="width: 33.33%;color: $gray-800;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
+                  <td style="width: 33.33%;color: $gray-800--old;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` + localStorage.getItem('currentUser') + `</td>
+                  <td style="width: 33.33%;color: $gray-800--old;font-size:12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: center;vertical-align: middle;">` + localStorage.getItem('currentCompanyName') + `</td>
+                  <td style="width: 33.33%;color: $gray-800--old;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
             </td>

@@ -20,7 +20,7 @@ html.no-d3-tooltip .nvtooltip .value {
 
 .commission-customer .details-content h3 {
   padding: 10px 60px;
-  background: $gray-200;
+  background: $gray-200--old;
   margin: 15px -60px;
 }
 
@@ -78,7 +78,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .customer-ticket__report--summary .details-futures-info, .customer-ticket__report--details-plus .details-futures-info {
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400--old;
   min-height: 50px;
   padding: 5px;
 }
@@ -111,7 +111,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .details-futures-info {
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400--old;
   display: inline-block;
   width: 100%;
   position: relative;
@@ -122,7 +122,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .report-info-point {
-  border-bottom: 1px solid $gray-400;
+  border-bottom: 1px solid $gray-400--old;
 }
 
 .legend-customer {

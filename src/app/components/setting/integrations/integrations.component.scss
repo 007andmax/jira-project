@@ -37,7 +37,7 @@
             font-weight: normal;
             line-height: 1.54;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
 
         }
     }
@@ -70,8 +70,8 @@
         width: 32px;
         height: 18px;
         @include border-radius(12px);
-        border: solid 1px $gray-500;
-        background-color: $gray-100;
+        border: solid 1px $gray-500--old;
+        background-color: $gray-100--old;
         margin: 0;
         position: relative;
         @include transition(0.4s);
@@ -115,7 +115,7 @@
             font-stretch: normal;
             line-height: 1.47;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
             margin-bottom: 13px !important;
             padding-left: 28px !important;
             background: url('../../../../assets/img/icons/check-bullet.svg') no-repeat left top;
@@ -162,7 +162,7 @@
             font-weight: normal;
             line-height: 1.54;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
             @media only screen and (max-width: 768px){
                 margin-bottom: 15px;
             }

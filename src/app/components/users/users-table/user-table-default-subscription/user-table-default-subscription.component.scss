@@ -22,12 +22,12 @@
         }
 
         .name {
-            color: $gray-800;
+            color: $gray-800--old;
         }
 
         .description {
             margin-top: 6px;
-            color: $gray-700;
+            color: $gray-700--old;
             font-size: 12px;
         }
 
@@ -123,12 +123,12 @@
             }
         }
 
-        &::-webkit-scrollbar-thumb {
-            background-color: #c4cbd5;
-        }
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
+        //&::-webkit-scrollbar-thumb { // todo check this style
+        //    background-color: #c4cbd5;
+        //}
+        //&::-webkit-scrollbar {
+        //    width: 4px;
+        //}
     }
 }
 .selected-item {
@@ -162,5 +162,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
 }

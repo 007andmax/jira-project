@@ -1,10 +1,10 @@
 @import "./src/assets/styles/variable";
 
 .qt-aside-modern {
-  color: $gray-800;
+  color: $gray-800--old;
   background: $white;
   width: 592px;
-  border-left: 1px solid $gray-400;
+  border-left: 1px solid $gray-400--old;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   position: fixed;
   top: $header-height;
@@ -65,7 +65,7 @@
       textarea {
         @media (max-width: 767px) {
           width: 100%;
-          border: solid 1px $gray-500;
+          border: solid 1px $gray-500--old;
           margin-top: 8px;
         }
       }
@@ -124,14 +124,14 @@
       .icon__hide,
       .icon__copy {
         @media (max-width: 767px) {
-          border: 1px solid $gray-500;
+          border: 1px solid $gray-500--old;
           height: 40px;
           margin-left: 0;
           width: 40px;
           background-size: 18px;
           border-radius: 0 4px 4px 0;
           background-position: center;
-          background-color: $gray-100;
+          background-color: $gray-100--old;
         }
       }
 
@@ -181,8 +181,8 @@
 
   &__header {
     height: 56px;
-    background-color: $gray-100;
-    border-bottom: 1px solid $gray-400;
+    background-color: $gray-100--old;
+    border-bottom: 1px solid $gray-400--old;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -298,7 +298,7 @@
   }
 
   &__header {
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     padding: 26px 24px 26px 39px;
     display: flex;
   }

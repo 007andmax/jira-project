@@ -1,9 +1,9 @@
 @import './src/assets/styles/variable';
 
 .disabled {
-  background: $gray-200;
-  color: $gray-600;
+  background: $gray-200--old;
+  color: $gray-600--old;
   &::placeholder {
-    color: $gray-600;
+    color: $gray-600--old;
   }
 }

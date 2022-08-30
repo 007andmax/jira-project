@@ -9,13 +9,13 @@
   &.with-placeholder {
     height: 40px;
     border-radius: 3px;
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-500--old;
     .placeholder {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: $gray-600;
+      color: $gray-600--old;
       font-size: 13px;
       font-weight: 400;
     }
@@ -67,10 +67,10 @@
       //border-radius: 6px;
       //margin: 4px 0;
       //&:hover {
-      //  background: $gray-100;
+      //  background: $gray-100--old;
       //}
       //&.--selected {
-      //  background-color: $gray-100;
+      //  background-color: $gray-100--old;
       //  color: $primary-1;
       //}
     }
@@ -113,10 +113,10 @@
 
 .dark-dropdown {
   .dropdown-menu {
-    background: $gray-800;
+    background: $gray-800--old;
     .dropdown-item {
-      background: $gray-800;
-      color: $gray-600;
+      background: $gray-800--old;
+      color: $gray-600--old;
     }
   }
 }
@@ -131,18 +131,6 @@
     transform: none !important;
     min-height: 208px;
     max-height: 228px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: $gray-200;
-  }
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    border-radius: 40px;
-  }
-  &::-webkit-scrollbar-track {
-    background: $white;
   }
 }
 
@@ -172,7 +160,7 @@
     padding: 0 8px 14px;
   }
   .ngb-dp-weekday {
-    color: $gray-600;
+    color: $gray-600--old;
   }
 }
 .date-picker {
@@ -191,12 +179,12 @@
   .dropdown-menu {
     border-radius: 4px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400;
+    border: solid 1px $gray-400--old;
   }
   .ngb-dp-header,
   .ngb-dp-weekdays {
     background: $white;
-    color: $gray-600;
+    color: $gray-600--old;
     font-size: 12px;
     font-weight: 600;
     .small {
@@ -219,7 +207,7 @@
   .custom-select {
     color: $primary-2;
     background: $white;
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 3px;
     cursor: pointer;
     outline: none;
@@ -237,7 +225,7 @@
     text-align: left;
     span {
       margin-bottom: 2px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
   }
   .right {
@@ -254,7 +242,7 @@
       font-size: 12px;
       font-weight: 500;
       &:hover {
-        background: $gray-300;
+        background: $gray-300--old;
       }
     }
     .bg-primary {
@@ -327,7 +315,7 @@
           text-align: left;
           position: relative;
           @media (max-width: 767px) {
-            border-bottom: 1px solid $gray-400;
+            border-bottom: 1px solid $gray-400--old;
             font-weight: 400;
             padding: 8px 16px !important;
           }
@@ -360,7 +348,7 @@
             border-bottom: 1px solid $background;
           }
           &:hover {
-            background-color: $gray-200;
+            background-color: $gray-200--old;
           }
           .col-md-10 {
             width: 75%;
@@ -370,7 +358,7 @@
           }
           .title {
             font-size: 13px;
-            color: $gray-800;
+            color: $gray-800--old;
             display: inline-block;
             word-break: break-all;
             max-height: 50px;
@@ -383,7 +371,7 @@
           .col-md-12 {
             span {
               font-size: 11px;
-              color: $gray-600;
+              color: $gray-600--old;
               word-break: break-all;
               &:first-child {
                 margin-right: 15px;
@@ -410,7 +398,7 @@
   &-preview {
     height: 40px;
     border-radius: 3px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     padding: 7px 12px;
     display: flex;
     background: $white;
@@ -418,7 +406,7 @@
   .dropdown-menu {
     border-radius: 4px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400;
+    border: solid 1px $gray-400--old;
     cursor: default;
     overflow: hidden;
     top: calc(100% + -372px);

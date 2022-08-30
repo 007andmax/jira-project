@@ -23,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
-    border-left: 1px solid $gray-400;
+    border-left: 1px solid $gray-400--old;
 
     @media (max-width: 767px) {
       display: none;
@@ -39,7 +39,7 @@
     width: 100%;
     &.active {
       background-color: #edf2f67d;
-      border: 1px solid $gray-400;
+      border: 1px solid $gray-400--old;
       border-left: none;
       border-right: none;
     }
@@ -54,5 +54,5 @@
   app-ticket-edit-aside-devices {
     overflow: auto;
     width: 272px;
-    border-left: 1px solid $gray-400;
+    border-left: 1px solid $gray-400--old;
   }

@@ -56,9 +56,9 @@ main {
                         .editCmd {
                             width: 100%;
                             @include border-radius(4px);
-                            border: solid 1px $gray-500;
+                            border: solid 1px $gray-500--old;
                             padding: 10px 14px;
-                            color: $gray-800 !important;
+                            color: $gray-800--old !important;
                             font-weight: 500;
                             height: 120px;
                             // max-height: 150px !important;
@@ -110,7 +110,7 @@ main {
             }
             &.terminal-sidebar {
                 right: 0 !important;
-                border-left: 1px solid $gray-400;
+                border-left: 1px solid $gray-400--old;
                 -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -137,7 +137,7 @@ main {
                             .cmn-tbs-content {
                                 & > ul {
                                     & > li {
-                                        border-bottom: 1px dotted $gray-500;
+                                        border-bottom: 1px dotted $gray-500--old;
                                         padding: 8px 0;
                                         .terminal-cmd-opt {
                                             display: -ms-flexbox;
@@ -197,7 +197,7 @@ main {
                                                                 font-size: 13px;
                                                                 line-height: 1.54;
                                                                 letter-spacing: normal;
-                                                                color: $gray-800;
+                                                                color: $gray-800--old;
                                                                 padding: 7px 15px;
                                                                 border: none;
                                                                 img {
@@ -240,7 +240,7 @@ main {
                                 &.history-cmd {
                                     & > ul {
                                         & > li {
-                                            border-bottom: 1px dotted $gray-500;
+                                            border-bottom: 1px dotted $gray-500--old;
                                             padding: 8px 0;
                                             .terminal-cmd-opt {
                                                 margin-bottom: 0;
@@ -252,7 +252,7 @@ main {
                                                         line-height: 1.2;
                                                         letter-spacing: normal;
                                                         text-align: right;
-                                                        color: $gray-800;
+                                                        color: $gray-800--old;
                                                     }
                                                 }
 
@@ -265,7 +265,7 @@ main {
                                                     h5 {
                                                         margin: 0;
                                                         max-width: calc(100% - 20px);
-                                                        color: $gray-800;
+                                                        color: $gray-800--old;
                                                         font-size: 12px;
                                                         font-weight: 600;
                                                     }
@@ -282,7 +282,7 @@ main {
                                                     font-style: normal;
                                                     line-height: 1.33;
                                                     letter-spacing: normal;
-                                                    color: $gray-800;
+                                                    color: $gray-800--old;
                                                 }
                                             }
                                         }
@@ -301,7 +301,7 @@ main {
                         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: 1px solid $gray-400;
+                        border: 1px solid $gray-400--old;
                         background-color: $white;
                         @include border-radius(5px);
                         padding: 24px;
@@ -346,7 +346,7 @@ main {
                                         min-width: inherit;
                                         padding: 13px 16px;
                                         &.btn-secondary {
-                                            border: solid 1px $gray-500;
+                                            border: solid 1px $gray-500--old;
                                             background-color: $white !important;
                                         }
                                     }
@@ -356,12 +356,12 @@ main {
                             #cmd {
                                 display: flex;
                                 border-radius: 4px;
-                                border: solid 1px $gray-500;
+                                border: solid 1px $gray-500--old;
                                 height: 317px;
                                 #cmd_line {
                                     width: 40px;
-                                    border-right: solid 1px $gray-500;
-                                    background-color: $gray-200;
+                                    border-right: solid 1px $gray-500--old;
+                                    background-color: $gray-200--old;
                                     list-style-type: none;
                                     padding: 10px 0;
                                     margin: 0;
@@ -393,7 +393,7 @@ main {
                 .dropdown{
                     .dropdown-menu{
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: solid 1px $gray-400;
+                        border: solid 1px $gray-400--old;
                         background-color: $white;
                         border-radius: 4px;
                         padding-top: 8px;
@@ -411,7 +411,7 @@ main {
                                     background-color: $background;
                                 }
                                 &:last-child{
-                                    border-top:1px solid  $gray-400;
+                                    border-top:1px solid  $gray-400--old;
                                     font-size: 12px;
                                     font-style: normal;
                                     line-height: 1.33;
@@ -445,8 +445,8 @@ main {
                     align-items: center;
                     justify-content: space-between;
                     padding: 14px 32px;
-                    background-color: $gray-100;
-                    border-bottom: 1px solid $gray-400;
+                    background-color: $gray-100--old;
+                    border-bottom: 1px solid $gray-400--old;
                     h2 {
                         margin: 0;
                         font-size: 20px;
@@ -470,11 +470,11 @@ main {
                                 &.list-unstyled {
                                     &.script-list {
                                         @include border-radius(4px);
-                                        border: solid 1px $gray-400;
+                                        border: solid 1px $gray-400--old;
                                         background-color: $white;
                                         li {
                                             padding: 16px 16px 20px 16px;
-                                            border-bottom: 1px solid $gray-400;
+                                            border-bottom: 1px solid $gray-400--old;
                                             display: -webkit-flex;
                                             display: -ms-flexbox;
                                             display: flex;
@@ -500,7 +500,7 @@ main {
                                                     font-style: normal;
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
-                                                    color: $gray-800;
+                                                    color: $gray-800--old;
                                                     max-width: 100%;
                                                     display: block;
                                                     white-space: nowrap;
@@ -508,15 +508,15 @@ main {
                                                     text-overflow: ellipsis;
                                                     &.clone-cat {
                                                         border-radius: 3px;
-                                                        border: solid 1px $gray-400;
-                                                        background-color: $gray-100;
+                                                        border: solid 1px $gray-400--old;
+                                                        background-color: $gray-100--old;
                                                         font-size: 10px;
                                                         font-weight: 500;
                                                         font-stretch: normal;
                                                         font-style: normal;
                                                         line-height: 1.2;
                                                         letter-spacing: normal;
-                                                        color: $gray-800;
+                                                        color: $gray-800--old;
                                                         padding: 3px 8px;
                                                         margin-top: 3px;
                                                     }
@@ -533,7 +533,7 @@ main {
                                                     width: 32px;
                                                     height: 32px;
                                                     @include border-radius(8px);
-                                                    border: solid 1px $gray-400;
+                                                    border: solid 1px $gray-400--old;
                                                     background-color: $white;
                                                     display: -webkit-flex;
                                                     display: -ms-flexbox;
@@ -551,8 +551,8 @@ main {
                                                         top: -9px;
                                                     }
                                                     &:hover {
-                                                        background-color: $gray-200;
-                                                        border-color: $gray-200;
+                                                        background-color: $gray-200--old;
+                                                        border-color: $gray-200--old;
                                                     }
                                                     img {
                                                         max-width: 16px;
@@ -571,7 +571,7 @@ main {
                                         margin: 0;
                                         width: auto;
                                         margin: 0 auto;
-                                        border: 1px solid $gray-400;
+                                        border: 1px solid $gray-400--old;
                                         float: none;
                                         li {
                                             padding: 0;
@@ -595,10 +595,10 @@ main {
                                                 line-height: 1.33;
                                                 letter-spacing: normal;
                                                 text-align: center;
-                                                color: $gray-800;
+                                                color: $gray-800--old;
                                                 border: none;
                                                 padding: 0;
-                                                border-right: solid 1px $gray-400;
+                                                border-right: solid 1px $gray-400--old;
                                                 border-bottom: none;
                                             }
                                             &:last-child {
@@ -638,13 +638,13 @@ main {
                     }
                     .clone-cat {
                         @include border-radius(3px);
-                        border: solid 1px $gray-400;
+                        border: solid 1px $gray-400--old;
                         background-color: $white;
                         font-size: 10px;
                         font-style: normal;
                         line-height: 1.2;
                         letter-spacing: normal;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         padding: 3px 8px;
                         font-weight: 600;
                     }
@@ -678,7 +678,7 @@ main {
                                 padding: 10px 20px;
                                 font-size: 13px;
                                 &.btn-secondary {
-                                    border: solid 1px $gray-500;
+                                    border: solid 1px $gray-500--old;
                                     background-color: $white !important;
                                 }
                             }
@@ -737,12 +737,12 @@ main {
                     #cmd_detail {
                         display: flex;
                         border-radius: 4px;
-                        border: solid 1px $gray-500;
+                        border: solid 1px $gray-500--old;
                         height: 317px;
                         #cmd_detail_line {
                             width: 40px;
-                            border-right: solid 1px $gray-500;
-                            background-color: $gray-200;
+                            border-right: solid 1px $gray-500--old;
+                            background-color: $gray-200--old;
                             list-style-type: none;
                             padding: 10px 0;
                             margin: 0;
@@ -784,7 +784,7 @@ main {
                 font-style: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
                 padding-left: 25px;
                 min-height: 16px;
                 &:hover {
@@ -814,7 +814,7 @@ main {
         .cmn-tbs-content {
             &.command {
                 li {
-                    border-bottom: 1px dotted $gray-400;
+                    border-bottom: 1px dotted $gray-400--old;
                     padding: 7.5px 0;
                     position: relative;
                     padding-right: 15px;
@@ -822,7 +822,7 @@ main {
                 h5 {
                     margin-top: 0;
                     font-size: 12px;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     line-height: 1.33;
                     margin-bottom: 3px;
                 }
@@ -833,7 +833,7 @@ main {
                     font-style: normal;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
                 .copy {
                     font-size: 0;
@@ -856,7 +856,7 @@ main {
                     font-size: 12px;
                     font-weight: normal;
                     line-height: 1.33;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
             }
         }
@@ -880,7 +880,7 @@ body {
                         margin-bottom: 0;
                         .modal-header {
                             padding: 10px 16px 10px 32px;
-                            border-bottom: 1px solid $gray-400;
+                            border-bottom: 1px solid $gray-400--old;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -926,7 +926,7 @@ body {
                                     margin-left:10px;
                                     font-size:13px;
                                     &.btn-secondary{
-                                        border: solid 1px $gray-500;
+                                        border: solid 1px $gray-500--old;
                                         background-color: $white !important;
                                     }
                                     &.btn-remove{
@@ -970,11 +970,11 @@ body {
                                 align-items: center;
                                 justify-content: center;
                                 @include border-radius(4px);
-                                border: solid 1px $gray-400;
+                                border: solid 1px $gray-400--old;
                                 background-color: $white;
                                 &.edit-cat{
-                                    background-color: $gray-700;
-                                    border-color: $gray-700;
+                                    background-color: $gray-700--old;
+                                    border-color: $gray-700--old;
                                 }
                                 &::before{
                                     left: -14px;
@@ -987,8 +987,8 @@ body {
                                 }
                                 &.delete{
                                     &:hover{
-                                        background-color: $gray-200;
-                                        border-color:$gray-200;
+                                        background-color: $gray-200--old;
+                                        border-color:$gray-200--old;
                                     }
                                 }
                             }
@@ -1043,7 +1043,7 @@ body {
             //     font-style: normal;
             //     line-height: 1.54;
             //     letter-spacing: normal;
-            //     color: $gray-800;
+            //     color: $gray-800--old;
             //     text-transform: capitalize;
             //     margin-bottom: 10px;
             //     &.active {
@@ -1053,7 +1053,7 @@ body {
             .label {
                 margin-bottom: 0;
                 padding: 0 0 10px 0;
-                color: $gray-800;
+                color: $gray-800--old;
                 display: -ms-flexbox;
                 display: -webkit-flex;
                 display: flex;
@@ -1067,7 +1067,7 @@ body {
                     font-weight: 600;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     font-weight: 600;
                     font-weight: 600;
                     &.active{

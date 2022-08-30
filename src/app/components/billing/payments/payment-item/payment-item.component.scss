@@ -3,7 +3,7 @@
 
 tr:hover {
     td {
-      background-color: $gray-100;
+      background-color: $gray-100--old;
 
     }
   }
@@ -12,7 +12,7 @@ tr:hover {
   }
   tr.--selected {
     td {
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       border-color: $primary-1 !important;
     }
   }

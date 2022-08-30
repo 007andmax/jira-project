@@ -4,8 +4,8 @@
 @import "./src/assets/scss/custom";
 
 .preloader-container {
- min-height: 100px;  
- position: relative; 
+ min-height: 100px;
+ position: relative;
 }
 .loading {
     top: calc(50% - 30px);
@@ -16,7 +16,7 @@
     thead {
         th {
             padding: 10px 10px 10px 6px;
-            background-color: $gray-100;
+            background-color: $gray-100--old;
             text-transform: uppercase;
         }
 

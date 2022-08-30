@@ -91,7 +91,7 @@
           left: 0;
           right: 0;
           height: 1px;
-          border-bottom: dashed 1px $gray-400;
+          border-bottom: dashed 1px $gray-400--old;
         }
       }
     }
@@ -101,7 +101,7 @@
 .qt-page-list__search {
   input {
     height: 40px;
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     min-width: 360px;
     border-radius: 6px;
   }
@@ -122,8 +122,8 @@
       height: 100vh;
       overflow: auto;
       padding: 8px 0;
-      background-color: $gray-100;
-      border-right: 1px solid $gray-300;
+      background-color: $gray-100--old;
+      border-right: 1px solid $gray-300--old;
     }
   }
 }

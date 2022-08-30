@@ -6,7 +6,7 @@
   top: 0;
   right: 0;
   height: $header-height;
-  border-bottom: 1px solid $gray-300;
+  border-bottom: 1px solid $gray-300--old;
   background-color: $white;
   width: calc(100% - #{$left-panel-width});
   transition: width 300ms;
@@ -76,7 +76,7 @@
   &__account-info {
     width: fit-content;
     display: flex;
-    border-left: 1px solid$gray-300;
+    border-left: 1px solid$gray-300--old;
     padding: 12px 24px 12px 12px;
   }
 
@@ -84,7 +84,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-500--old;
     margin-left: 8px;
     display: inline-block;
     background-repeat: no-repeat;
@@ -93,7 +93,7 @@
   }
 
   &__account-info-company-name {
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 13px;
     line-height: 1.54;
     margin-bottom: 2px;
@@ -103,7 +103,7 @@
   }
 
   &__account-info-user-name {
-    color: $gray-600;
+    color: $gray-600--old;
     font-size: 12px;
     line-height: 1.33;
     text-align: right;

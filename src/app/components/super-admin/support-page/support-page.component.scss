@@ -63,7 +63,7 @@
     overflow: auto;
 }
 aside {
-    background-color: $gray-200;
+    background-color: $gray-200--old;
 }
 .resize-handle--x {
     -webkit-flex: 0 0 auto;
@@ -98,7 +98,7 @@ aside {
         height: 100vh;
         width: 2px;
         margin-top: -18px / 2;
-        border-left-color: $gray-300;
+        border-left-color: $gray-300--old;
         border-left-width: 1px;
         border-left-style: solid;
     }
@@ -106,7 +106,7 @@ aside {
 .app-left-panel-super-admin-categories {
     display: block;
     min-width: 234px;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     color: $white;
     transition: width 300ms;
 }
@@ -133,7 +133,7 @@ aside {
     support-page-info {
         width: 290px;
         padding: 20px;
-        background-color: $gray-200;
+        background-color: $gray-200--old;
         height: 100%;
         overflow: auto;
     }
@@ -225,7 +225,7 @@ aside {
     left: 0;
     right: 0;
     height: 1px;
-    border-bottom: dashed 1px $gray-400;
+    border-bottom: dashed 1px $gray-400--old;
   }
 }
 .category-item-category__name-text {

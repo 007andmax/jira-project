@@ -89,7 +89,7 @@
 
     .category-item {
       font-size: 12px;
-      color: $gray-800;
+      color: $gray-800--old;
       padding: 6px 10px;
       margin: 4px 6px;
       border-radius: 12px;
@@ -130,7 +130,7 @@
       &__icon {
         padding: 8px;
         border-radius: 8px;
-        background-color: $gray-200;
+        background-color: $gray-200--old;
         display: inline-block;
       }
 
@@ -148,7 +148,7 @@
 
       &__description {
         @include body-m;
-        color: $gray-700;
+        color: $gray-700--old;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

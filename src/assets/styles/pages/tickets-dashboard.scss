@@ -10,7 +10,7 @@
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     background-color: $white;
     font-size: 10px;
-    color: $gray-800;
+    color: $gray-800--old;
     display: flex;
     align-items: center;
     padding: 0 8px;
@@ -29,7 +29,7 @@
     }
     &__interval-title {
       font-size: 12px;
-      color: $gray-600;
+      color: $gray-600--old;
       padding-right: 10px;
     }
     .cols-container {
@@ -57,7 +57,7 @@
       line-height: 1;
       left: -1px;
       font-size: 12px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
     .lines-container {
       position: absolute;
@@ -87,7 +87,7 @@
     }
     .labels-container-item {
       line-height: 1;
-      color: $gray-800;
+      color: $gray-800--old;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -96,7 +96,7 @@
       ngb-tooltip-window {
         opacity: 1;
         .arrow::before {
-          border-right-color: $gray-400;
+          border-right-color: $gray-400--old;
         }
       }
       .tooltip .tooltip-inner {
@@ -104,12 +104,12 @@
         padding: 12px 16px;
         font-size: 12px;
         background-color: $white;
-        border: 1px solid $gray-400;
+        border: 1px solid $gray-400--old;
         border-radius: 8px;
         line-height: 1;
         box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.1);
         .lines-container-tooltip-header {
-          color: $gray-800;
+          color: $gray-800--old;
           padding-top: 4px;
         }
       }
@@ -127,7 +127,7 @@
     }
     &__interval-title {
       font-size: 12px;
-      color: $gray-600;
+      color: $gray-600--old;
     }
     &__content {
       height: 100%;
@@ -138,7 +138,7 @@
       width: 40px;
       border-radius: 50%;
       height: 40px;
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       margin-right: 16px;
       background-repeat: no-repeat;
       background-position: center;
@@ -154,12 +154,12 @@
     &__info {
       padding-bottom: 24px;
       flex-grow: 1;
-      border-bottom: 1px solid $gray-300;
+      border-bottom: 1px solid $gray-300--old;
     }
     &__info-title {
       font-size: 14px;
       line-height: 1.43;
-      color: $gray-800;
+      color: $gray-800--old;
     }
     &__info-value {
       font-size: 40px;
@@ -193,7 +193,7 @@
     }
     &__toggle-menu {
       border-radius: 6px;
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       height: 24px;
       align-items: center;
       justify-content: center;
@@ -211,7 +211,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: $gray-600;
+      color: $gray-600--old;
     }
     &__table {
       width: 100%;
@@ -224,8 +224,8 @@
      font-weight: 600;
       text-transform: uppercase;
       th {
-        background-color: $gray-100;
-        color: $gray-600;
+        background-color: $gray-100--old;
+        color: $gray-600--old;
         white-space: nowrap;
         padding: 0 8px;
         height: 24px;
@@ -260,9 +260,9 @@
     &__table-body {
       td {
         height: 42px;
-        border-bottom: 1px solid $gray-300;
+        border-bottom: 1px solid $gray-300--old;
         font-size: 12px;
-        color: $gray-800;
+        color: $gray-800--old;
         &:nth-child(2) {
           width: 30px;
           text-align: center;
@@ -294,14 +294,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $gray-800;
+    color: $gray-800--old;
     min-width: unset;
     @include label-l;
     box-shadow: 0 0 3px rgba(0,0,0,.05);
     &.active {
       background: $white;
       border-radius: 4px !important;
-      color: $gray-800;
+      color: $gray-800--old;
       @include label-l__sb;
     }
   }

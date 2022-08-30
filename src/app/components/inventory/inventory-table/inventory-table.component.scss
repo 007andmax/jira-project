@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 pre {
     margin: unset;
     font-size: unset;
@@ -25,14 +27,14 @@ pre {
     }
 }
 /deep/ .products-table__category, /deep/ .products-table__tac, /deep/ .products-table__gl {
-    
+
         input {
         padding: 4px 24px 4px 8px !important;
         border: unset !important;
         &:hover {
-            background: #f4f6f8;
+            background: $gray-200--old;
         }
-    
+
     }
 }
 /deep/ .products-table__tac {
@@ -45,7 +47,7 @@ pre {
         width: 100%;
         padding: 4px 24px 4px 8px !important;
         &:hover {
-            background: #f4f6f8;
+            background: $gray-200--old;
         }
         &:not(.--input-error) {
             border: unset !important;
@@ -57,14 +59,14 @@ pre {
     width: 100%;
     input {
         &::-webkit-input-placeholder {
-                color: #919eab
+                color: $gray-600--old;
         }
     }
 }
 /deep/ .products-table__gl {
     input {
             &::-webkit-input-placeholder {
-                color: #919eab !important;
+                color: $gray-600--old !important;
             }
         }
 }

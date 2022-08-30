@@ -3,7 +3,7 @@
 
 .cps-block {
     padding: 20px 40px;
-    border-top: 1px solid $gray-100;
+    border-top: 1px solid $gray-100--old;
 
     @media (max-width: 767px) {
         padding: 0;
@@ -47,7 +47,7 @@
 
     &__nav-item {
         @include body-m__sb;
-        color: $gray-800;
+        color: $gray-800--old;
         cursor: pointer;
         padding-left: 25px;
         background-repeat: no-repeat;
@@ -111,7 +111,7 @@
         display: flex;
         align-items: center;
         border-radius: 4px;
-        background-color: $gray-100;
+        background-color: $gray-100--old;
         padding: 4px 10px;
     }
     &__create-connection-btn {
@@ -167,7 +167,7 @@
             content: "";
             width: 16px;
             height: 16px;
-            border: 1px solid $gray-500;
+            border: 1px solid $gray-500--old;
             background: $white;
             border-radius: 50%;
             bottom: -7px;
@@ -183,7 +183,7 @@
         margin-left: 4px;
     }
     &__users-linked-divider {
-        background: $gray-400;
+        background: $gray-400--old;
         width: 1px;
         margin: 0 16px;
     }

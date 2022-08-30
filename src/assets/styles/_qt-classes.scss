@@ -49,7 +49,7 @@
 
   &.--disabled {
     span {
-      background: $gray-500;
+      background: $gray-500--old;
     }
   }
 }
@@ -635,19 +635,19 @@
   color: $primary-2;
 }
 .qt-color-dark-light {
-  color: $gray-800;
+  color: $gray-800--old;
 }
 .qt-color-light {
-  color: $gray-600;
+  color: $gray-600--old;
 }
 .qt-color-gray-900 {
   color: $gray-900;
 }
 .qt-color-gray-700 {
-  color: $gray-700;
+  color: $gray-700--old;
 }
 .qt-color-gray-500 {
-  color: $gray-500;
+  color: $gray-500--old;
 }
 .qt-color-info {
   color: $primary-1;
@@ -667,10 +667,10 @@
   color: $primary-2;
 }
 .qt-color-dark-light {
-  color: $gray-800;
+  color: $gray-800--old;
 }
 .qt-color-light {
-  color: $gray-600;
+  color: $gray-600--old;
 }
 .qt-color-info {
   color: $primary-1;
@@ -740,14 +740,14 @@
   input {
     height: 40px;
     border-radius: 4px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     background-color: $white;
     padding: 10px 14px;
     color: $primary-2;
     @include body-m;
     width: 100%;
     &::placeholder {
-      color: $gray-600;
+      color: $gray-600--old;
     }
   }
   &.h36 {
@@ -765,14 +765,14 @@
 
 .qt-textarea {
   border-radius: 4px;
-  border: solid 1px $gray-500;
+  border: solid 1px $gray-500--old;
   background-color: $white;
   width: 100%;
   padding: 10px 14px;
   font-size: 13px;
   font-weight: 400;
   &::placeholder {
-    color: $gray-600;
+    color: $gray-600--old;
   }
 }
 
@@ -803,7 +803,7 @@
 
   &.--gray {
     color: $primary-2;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     background-color: $white;
   }
 
@@ -881,7 +881,7 @@
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  background-color: $gray-700;
+  background-color: $gray-700--old;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -902,14 +902,14 @@
 .qt-input {
   height: 40px;
   border-radius: 4px;
-  border: solid 1px $gray-500;
+  border: solid 1px $gray-500--old;
   background-color: $white;
   padding: 10px 14px;
-  color: $gray-800;
+  color: $gray-800--old;
   font-size: 13px;
   flex-grow: 1;
   &::placeholder {
-    color: $gray-600;
+    color: $gray-600--old;
   }
 }
 
@@ -918,8 +918,8 @@
   height: 40px;
   min-width: 40px;
   border-radius: 4px;
-  border: solid 1px $gray-500;
-  background-color: $gray-200;
+  border: solid 1px $gray-500--old;
+  background-color: $gray-200--old;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;
@@ -940,8 +940,8 @@
   height: 40px;
   min-width: 40px;
   border-radius: 4px;
-  border: solid 1px $gray-500;
-  background-color: $gray-100;
+  border: solid 1px $gray-500--old;
+  background-color: $gray-100--old;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: none;
@@ -988,7 +988,7 @@
   //&.--border { // TODO check this style dropdown
   //  padding-top: 8px;
   //  padding-bottom: 8px;
-  //  border: 1px solid $gray-400;
+  //  border: 1px solid $gray-400--old;
   //}
   li {
     @include dropdown-item;
@@ -1081,7 +1081,7 @@
   position: absolute;
   left: 0;
   background: $white;
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400--old;
   border-radius: 50%;
 }
 
@@ -1109,8 +1109,8 @@
   th,
   td {
     height: 36px;
-    border-bottom: solid 1px $gray-400;
-    border-right: solid 1px $gray-400;
+    border-bottom: solid 1px $gray-400--old;
+    border-right: solid 1px $gray-400--old;
     padding: 0 14px;
     font-size: 11px;
     line-height: 1.54;
@@ -1118,15 +1118,15 @@
     text-align: left;
     vertical-align: middle;
     &:last-child {
-      border-right: solid 1px $gray-400;
+      border-right: solid 1px $gray-400--old;
     }
     &:first-child {
-      border-left: solid 1px $gray-400;
+      border-left: solid 1px $gray-400--old;
     }
   }
   th {
-    border-top: solid 1px $gray-400;
-    background-color: $gray-100;
+    border-top: solid 1px $gray-400--old;
+    background-color: $gray-100--old;
     font-weight: 600;
     &:first-child {
       border-top-left-radius: 4px;
@@ -1164,7 +1164,7 @@
         }
       }
       &:nth-last-child(2) {
-        border-right: solid 1px $gray-400;
+        border-right: solid 1px $gray-400--old;
       }
     }
     th {
@@ -1195,7 +1195,7 @@
         }
       }
       &:nth-child(2) {
-        border-left: solid 1px $gray-400;
+        border-left: solid 1px $gray-400--old;
       }
     }
     th {
@@ -1219,7 +1219,7 @@
   border-width: 1px;
   padding: 0 12px;
   height: 100%;
-  border: solid 1px $gray-600;
+  border: solid 1px $gray-600--old;
 }
 
 .qt-btn {
@@ -1244,7 +1244,7 @@
   width: 32px;
   height: 18px;
   border-radius: 12px;
-  background-color: $gray-400;
+  background-color: $gray-400--old;
   display: flex;
   align-items: center;
   padding-left: 2px;
@@ -1265,11 +1265,11 @@
 
 .qt-horisontal-line {
   border-top: 0;
-  border-bottom: 1px solid $gray-400;
+  border-bottom: 1px solid $gray-400--old;
 }
 
 .qt-divider {
-  border-top: 1px solid $gray-400;
+  border-top: 1px solid $gray-400--old;
   border-bottom: none;
 }
 

@@ -1,9 +1,11 @@
+@import "./src/assets/styles/variable";
+
 .active-note {
     margin-bottom: 0px !important;
 }
 
 .mark-as-active {
-    color: #454f5b;
+    color: $gray-800--old;
     font-weight: 500;
 }
 /deep/ .--note-error {

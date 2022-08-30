@@ -32,7 +32,7 @@
     }
     &__status-msg {
       height: 24px;
-      background-color: $gray-100;
+      background-color: $gray-100--old;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
       padding: 0 16px;
@@ -51,7 +51,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       background-position: center;
       background-size: 18px;
       background-repeat: no-repeat;
@@ -62,7 +62,7 @@
 
 .support-item-menu {
   display: flex;
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400--old;
   border-radius: 4px;
   background-color: $white;
   height: 28px;
@@ -75,16 +75,16 @@
   }
   &__number {
     width: 88px;
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 13px;
    font-weight: 600;
     margin-right: 8px;
   }
   &__button {
     width: 32px;
-    background-color: $gray-100;
+    background-color: $gray-100--old;
     height: 100%;
-    border-left: 1px solid $gray-400;
+    border-left: 1px solid $gray-400--old;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -119,7 +119,7 @@
   &__step2 {
     width: 40px;
     height: 40px;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     border-radius: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -127,7 +127,7 @@
   &__line {
     width: 192px;
     border: none;
-    border-top: 2px dotted $gray-500;
+    border-top: 2px dotted $gray-500--old;
     margin: 0 8px;
     position: relative;
     &.--success {
@@ -137,7 +137,7 @@
   &__line-title {
     text-align: center;
     font-size: 12px;
-    color: $gray-800;
+    color: $gray-800--old;
     position: absolute;
     width: 100%;
    font-weight: 600;
@@ -148,7 +148,7 @@
     flex-direction: column;
     line-height: 14px;
     &.line-title--gray, .line-title--gray {
-      color: $gray-600;
+      color: $gray-600--old;
       font-weight: 400;
     }
   }

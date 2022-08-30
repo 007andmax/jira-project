@@ -43,12 +43,12 @@
 
       &--profession {
         @include body-m;
-        color: $gray-800;
+        color: $gray-800--old;
       }
     }
 
     &__company {
-      color: $gray-800;
+      color: $gray-800--old;
       width: max-content;
       min-width: 88px;
     }
@@ -57,7 +57,7 @@
       width: 216px;
       max-width: 216px;
       min-width: 216px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
 
     &__subscription {
@@ -73,7 +73,7 @@
         align-items: center;
         padding: 8px 24px 8px 8px;
         font-size: 12px;
-        color: $gray-800;
+        color: $gray-800--old;
         .report-caret-icon {
           right: 6px;
           width: 10px;
@@ -87,7 +87,7 @@
       width: 80px;
       max-width: 80px;
       min-width: 80px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
 
     &__email {
@@ -189,7 +189,7 @@
     }
     &__subtitle {
       @include сaption-l;
-      color: $gray-700;
+      color: $gray-700--old;
     }
     &__input {
       position: absolute;
@@ -210,9 +210,9 @@
     .primary-phone-selector {
       min-width: 96px;
       width: 96px;
-      color: $gray-800;
+      color: $gray-800--old;
       font-size: 13px;
-      border: 1px solid $gray-500;
+      border: 1px solid $gray-500--old;
       border-left: none;
       border-bottom-right-radius: 4px;
       border-top-right-radius: 4px;
@@ -273,11 +273,11 @@
         padding: 12px 10px 10px 36px;
         font-size: 13px;
         font-weight: $fw-regular;
-        color: $gray-600;
+        color: $gray-600--old;
         top: 12px;
       }
       .mat-form-field-infix {
-        border: 1px solid $gray-500;
+        border: 1px solid $gray-500--old;
         border-radius: 4px;
         padding: 0;
         padding-left: 36px;
@@ -314,7 +314,7 @@
     }
     input {
       border-radius: 6px;
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       padding: 10px 20px 10px 40px;
       border: none;
       height: 36px;
@@ -322,7 +322,7 @@
       line-height: 16px;
       color: $primary-2;
       &::placeholder {
-        color: $gray-700;
+        color: $gray-700--old;
         font-size: 12px;
         line-height: 16px;
       }
@@ -360,7 +360,7 @@
       .user-item {
         padding: 10px 16px;
         &.active {
-          background-color: $gray-200;
+          background-color: $gray-200--old;
         }
       }
       .qt-checkbox {
@@ -418,8 +418,8 @@ app-users-table {
       padding-left: 8px;
       @include сaption-l;
       margin-right: 0px;
-      color: $gray-800;
-      background-color: $gray-100;
+      color: $gray-800--old;
+      background-color: $gray-100--old;
     }
 
     .mat-chip.mat-standard-chip .mat-chip-remove::before {
@@ -472,7 +472,7 @@ app-users-table {
   select#fontSelector-,
   select#fontSizeSelector- {
     background-color: $white !important;
-    border: 1px solid $gray-300 !important;
+    border: 1px solid $gray-300--old !important;
     height: 32px !important;
   }
 
@@ -484,7 +484,7 @@ app-users-table {
     min-height: 230px;
     padding: 16px 15px;
     &::placeholder {
-      color: $gray-600;
+      color: $gray-600--old;
       line-height: 1;
     }
   }
@@ -578,7 +578,7 @@ app-users-table {
   &__subtitle {
     font-size: 13px;
     line-height: 1.54;
-    color: $gray-800;
+    color: $gray-800--old;
   }
 
   &__close {

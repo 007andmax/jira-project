@@ -54,8 +54,8 @@
 .btn.btn-new.default,
 .btn-new.default {
   background: $white;
-  color: $gray-800;
-  border: 1px solid $gray-500;
+  color: $gray-800--old;
+  border: 1px solid $gray-500--old;
 }
 
 .btn.btn-new.disabled:hover,
@@ -66,7 +66,7 @@
 .btn-new.disabled:active,
 .btn.btn-new.default:active,
 .btn-new.default:active {
-  background: $gray-500;
+  background: $gray-500--old;
 }
 
 .btn.btn-new.default:hover,
@@ -74,7 +74,7 @@
 .btn.btn-new.default:hover,
 .btn-new.default:hover {
   color: $white;
-  background: $gray-500;
+  background: $gray-500--old;
 }
 
 //.dropdown-assign-ticket.fixed-assign {
@@ -98,12 +98,6 @@
   padding: 16px;
 }
 
-.dropdown-assign-ticket.fixed-assign .users-list::-webkit-scrollbar-thumb,
-.dropdown-assign-ticket.fixed-assign .dropdown-content::-webkit-scrollbar-thumb,
-.dropdown-assign-ticket.fixed-assign .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: $primary-1;
-}
-
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
   background-color: $primary-1;
 }
@@ -118,12 +112,12 @@
 //.dropdown-assign-ticket.fixed-assign .users-list .user-item a {
 //  padding: 6px 20px;
 //  transition: all 0.3s;
-//  color: $gray-800;
+//  color: $gray-800--old;
 //  font-weight: 600;
 //}
 
 //.dropdown-assign-ticket.fixed-assign .users-list .user-item p {
-//  color: $gray-800;
+//  color: $gray-800--old;
 //  font-size: 13px;
 //  font-weight: 700;
 //  margin: 0;
@@ -132,7 +126,7 @@
 //.dropdown-assign-ticket.fixed-assign .users-list .user-item p:last-child {
 //  margin: -5px 0 0;
 //  font-size: 12px;
-//  color: $gray-600;
+//  color: $gray-600--old;
 //  font-weight: 500;
 //}
 
@@ -159,7 +153,7 @@
   border: none;
   height: 40px;
   padding: 10px 10px 10px 38px;
-  background: $gray-100;
+  background: $gray-100--old;
   font-size: 13px;
 }
 

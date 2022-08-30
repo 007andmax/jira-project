@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px dotted $gray-400;
+  border-bottom: 1px dotted $gray-400--old;
   padding-bottom: 24px;
 }
 .tags-area {
@@ -45,7 +45,7 @@
       @include сaption-l__m;
       font-stretch: normal;
       font-style: normal;
-      color: $gray-700;
+      color: $gray-700--old;
       .close {
         position: absolute;
         right: 5px;
@@ -67,7 +67,7 @@
   height: 288px;
   margin-top: 5px;
   width: 100%;
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400--old;
   overflow-y: unset;
 }
 .list-tags-body,
@@ -88,7 +88,7 @@
   align-items: center;
   padding: 10px 20px;
   text-align: center;
-  color: $gray-700;
+  color: $gray-700--old;
   font-size: 13px;
   line-height: 18px;
   .no-matching {
@@ -98,7 +98,7 @@
   }
 }
 .crate-tag {
-  color: $gray-700;
+  color: $gray-700--old;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
@@ -107,7 +107,7 @@
   overflow: auto;
   margin: 6px 12px 10px;
   padding: 11px 0 5px;
-  border-top: 1px solid $gray-300;
+  border-top: 1px solid $gray-300--old;
 }
 .company-tag-item {
   display: flex;
@@ -123,9 +123,9 @@
   }
   &.--editing,
   &:hover {
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     input {
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       color: $primary-2;
     }
     .text-content {
@@ -210,13 +210,13 @@
     background-repeat: no-repeat;
   }
   input {
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 8px;
     @include body-r;
-    color: $gray-700;
+    color: $gray-700--old;
     padding: 7px 8px 7px 36px;
     &::placeholder {
-      color: $gray-700;
+      color: $gray-700--old;
     }
   }
 }

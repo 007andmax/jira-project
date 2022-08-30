@@ -4,7 +4,7 @@
 .help-support-list-item-icon {
     padding: 8px;
     border-radius: 8px;
-    background-color: $gray-100;
+    background-color: $gray-100--old;
     width: 40px;
     height: 40px;
 }
@@ -15,14 +15,14 @@
    }
    span {
         @include сaption-l;
-        color: $gray-700;
+        color: $gray-700--old;
    }
 }
 .help-support-list-item {
     display: flex;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid $gray-300;
+    border-bottom: 1px solid $gray-300--old;
 }
 .help-center-aside {
     width: 384px;

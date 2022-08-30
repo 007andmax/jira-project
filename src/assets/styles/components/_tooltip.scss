@@ -37,7 +37,7 @@ ngb-tooltip-window {
     padding: .25rem .5rem;
     color: $white;
     text-align: center;
-    background-color:  $gray-800;
+    background-color:  $gray-800--old;
     border-radius: .25rem;
 
     div {
@@ -75,7 +75,7 @@ ngb-tooltip-window {
     &::before {
       top: 0;
       border-width: .4rem .4rem 0;
-      border-top-color:  $gray-800;
+      border-top-color:  $gray-800--old;
     }
   }
   &.bs-tooltip-bottom .arrow {
@@ -83,7 +83,7 @@ ngb-tooltip-window {
     &::before {
       bottom: 0;
       border-width: 0 .4rem .4rem;
-      border-bottom-color:  $gray-800;
+      border-bottom-color:  $gray-800--old;
     }
   }
   &.bs-tooltip-left .arrow {
@@ -93,7 +93,7 @@ ngb-tooltip-window {
     &::before {
       left: 0;
       border-width: .4rem 0 .4rem .4rem;
-      border-left-color:  $gray-800;
+      border-left-color:  $gray-800--old;
     }
   }
   &.bs-tooltip-right .arrow {
@@ -103,7 +103,7 @@ ngb-tooltip-window {
     &::before {
       right: 0;
       border-width: .4rem .4rem .4rem 0;
-      border-right-color:  $gray-800;
+      border-right-color:  $gray-800--old;
     }
   }
 }

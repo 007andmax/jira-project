@@ -14,7 +14,7 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $gray-800;
+    color: $gray-800--old;
   }
   .f-row {
     margin-bottom: 0;
@@ -51,7 +51,7 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $gray-800;
+    color: $gray-800--old;
   }
   .f-col {
     &.col-25 {
@@ -95,7 +95,7 @@
     font-size: 13px;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $gray-800;
+    color: $gray-800--old;
     margin-bottom: 78px;
     font-weight: 400;
   }

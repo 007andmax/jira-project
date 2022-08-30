@@ -49,14 +49,14 @@
       width: 144px;
       max-width: 144px;
       min-width: 144px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
 
     &__menu {
       width: 62px;
       max-width: 62px;
       min-width: 62px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
 
     &__menu {
@@ -71,7 +71,7 @@
       width: 92px;
       max-width: 92px;
       min-width: 92px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
 
     &__sale-price,
@@ -81,21 +81,21 @@
       width: 120px;
       max-width: 120px;
       min-width: 120px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
     &__cost
     {
     width: 60px;
     max-width: 60px;
     min-width: 60px;
-    color: $gray-800;
+    color: $gray-800--old;
     position: relative;
     }
     &__sale-price {
       width: 90px;
       max-width: 90px;
       min-width: 90px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
   }
 

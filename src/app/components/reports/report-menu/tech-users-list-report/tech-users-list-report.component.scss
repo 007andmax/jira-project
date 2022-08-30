@@ -47,7 +47,7 @@
   flex-shrink: 0;
 }
 .report-user-avatar {
-  background-color: $gray-500;
+  background-color: $gray-500--old;
 }
 .filter-users-documents {
   input {
@@ -55,11 +55,11 @@
     outline: none;
     width: 100%;
     border-radius: 4px 3px 3px 4px;
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-500--old;
     background-color: $white;
 
     &::placeholder {
-      color: $gray-600;
+      color: $gray-600--old;
     }
   }
   .dropdown-menu {

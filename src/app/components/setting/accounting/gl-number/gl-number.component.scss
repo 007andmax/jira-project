@@ -19,7 +19,7 @@
       th {
         padding: 10px 10px 10px 6px;
         text-indent: 2px;
-        background-color: $gray-100;
+        background-color: $gray-100--old;
         text-transform: uppercase;
       }
     }
@@ -63,7 +63,7 @@
         padding: 2px 2px 2px 8px;
         &:hover,
         &:focus {
-          border-color: $gray-600;
+          border-color: $gray-600--old;
         }
       }
     }
@@ -74,14 +74,14 @@
       }
       input {
         font-weight: 400;
-        color: $gray-800;
+        color: $gray-800--old;
         border: 1px solid transparent;
         border-radius: 4px;
         outline: none;
         padding: 2px 2px 2px 8px;
         &:hover,
         &:focus {
-          border-color: $gray-600;
+          border-color: $gray-600--old;
         }
       }
     }

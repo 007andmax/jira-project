@@ -230,7 +230,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       font-style: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: $gray-800;
+      color: $gray-800--old;
       background-color: #f3f7f9;
     }
     h1,
@@ -277,7 +277,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
             <div class="reports-head" style="width:585px;text-align:center;color: $primary-2;float:left;margin-left:-105px;">
                   <p style="margin:0;line-height:1.2;color:$primary-2;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` + localStorage.getItem('currentCompanyName') + ` - Software Summary Report</p>
                   <p style="line-height:1.5;color:$primary-2;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` + this.deviceDetail.report.deviceName + ` softwares installed (` + pdfList.length + ` items)</p>
-                  <p style="margin:0;line-height:1;color:$gray-800;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` + moment(new Date()).format('LL') + ` @ ` + moment(new Date()).format('LT') + `</p>
+                  <p style="margin:0;line-height:1;color:$gray-800--old;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` + moment(new Date()).format('LL') + ` @ ` + moment(new Date()).format('LT') + `</p>
             </div>
           </th>
       </tr>
@@ -298,11 +298,11 @@ export class SoftwareComponent implements OnInit, OnDestroy {
                     <tbody>`;
     pdfList.forEach(element => {
       html = html + `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` + element[1] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` + element[2] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` + element[3] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` + element[4] + `</td></tr>`
+          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` + element[1] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` + element[2] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` + element[3] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` + element[4] + `</td></tr>`
     });
     html = html + `</tbody>
         </table>
@@ -315,9 +315,9 @@ export class SoftwareComponent implements OnInit, OnDestroy {
             <td style="width: 100%;" colspan="2">
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
-                  <td style="width: 33.33%;color: $gray-800;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` + localStorage.getItem('currentUser') + `</td>
-                  <td style="width: 33.33%;color: $gray-800;font-size:11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: center;vertical-align: middle;">` + localStorage.getItem('currentCompanyName') + `</td>
-                  <td style="width: 33.33%;color: $gray-800;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
+                  <td style="width: 33.33%;color: $gray-800--old;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` + localStorage.getItem('currentUser') + `</td>
+                  <td style="width: 33.33%;color: $gray-800--old;font-size:11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: center;vertical-align: middle;">` + localStorage.getItem('currentCompanyName') + `</td>
+                  <td style="width: 33.33%;color: $gray-800--old;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
             </td>

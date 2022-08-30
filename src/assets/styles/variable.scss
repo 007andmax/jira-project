@@ -12,15 +12,24 @@ $secondary-4: #2bc7c6;
 $success: #2ec866;
 $warning: #ffb937;
 $error: #ff5263;
+
+$blue-light-600: #16a4fa; // Old $primary-1
+
 $gray-900: #101828;
-$gray-800: #454f5b;
-$gray-700: #637382;
-$gray-600: #919eab;
-$gray-500: #c5cdd5;
-$gray-400: #dfe3e8;
-$gray-300: #edf0f2;
-$gray-200: #f4f6f8;
-$gray-100: #f9fafb;
+$gray-500: #667085;
+$gray-200: #EAECF0;
+$gray-50: #F9FAFB;
+
+// Variable for old style. They will be removed in the future
+$gray-800--old: #454f5b;
+$gray-700--old: #637382;
+$gray-600--old: #919eab;
+$gray-500--old: #c5cdd5;
+$gray-400--old: #dfe3e8;
+$gray-300--old: #edf0f2;
+$gray-200--old: #f4f6f8;
+$gray-100--old: #f9fafb;
+
 $white: #ffffff;
 $background: #edf2f6;
 

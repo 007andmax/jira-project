@@ -43,13 +43,13 @@
 }
 
 /deep/ .angular-editor-textarea {
-    border-color: $gray-500;
+    border-color: $gray-500--old;
     padding: 16px 15px !important;
     min-height: 175px !important;
 }
 
 /deep/ .angular-editor-toolbar-set .fa {
-    color: $gray-800;
+    color: $gray-800--old;
 }
 /deep/ .angular-editor-toolbar {
     padding-left: 4px !important;

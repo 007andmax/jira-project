@@ -17,7 +17,7 @@
     thead {
         th {
             padding: 10px 10px 10px 6px;
-            background-color: $gray-100;
+            background-color: $gray-100--old;
             text-transform: uppercase;
         }
         .tax-name {
@@ -50,7 +50,7 @@
             color: $primary-2;
             &::placeholder {
                 font-weight: 400;
-                color: $gray-600;
+                color: $gray-600--old;
             }
         }
     }
@@ -194,11 +194,11 @@
         outline: none;
         &:hover,
         &:focus {
-            border-color: $gray-600;
+            border-color: $gray-600--old;
         }
         &::placeholder {
             font-weight: 400;
-            color: $gray-600;
+            color: $gray-600--old;
         }
     }
 }

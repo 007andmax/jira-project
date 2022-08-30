@@ -27,7 +27,7 @@
         position: absolute;
         top: 7px;
         left: 15px;
-        color: $gray-600;
+        color: $gray-600--old;
         font-size: 13px;
     }
 }
@@ -48,12 +48,12 @@
         }
 
         .name {
-            color: $gray-800;
+            color: $gray-800--old;
         }
 
         .description {
             margin-top: 6px;
-            color: $gray-700;
+            color: $gray-700--old;
             font-size: 12px;
         }
 
@@ -140,11 +140,11 @@
             border-radius: 6px;
 
             &:hover {
-              background-color: $gray-100;
+              background-color: $gray-100--old;
             }
             &.--selected,
             &.is-hover {
-              background-color: $gray-100;
+              background-color: $gray-100--old;
               color: $primary-1;
               .name {
                 color: $primary-1;
@@ -174,11 +174,11 @@
             }
         }
 
-        &::-webkit-scrollbar-thumb {
-            background-color: #c4cbd5;
-        }
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
+        //&::-webkit-scrollbar-thumb { // todo check this style
+        //    background-color: #c4cbd5;
+        //}
+        //&::-webkit-scrollbar {
+        //    width: 4px;
+        //}
     }
 }

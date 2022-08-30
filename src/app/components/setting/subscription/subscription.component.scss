@@ -60,7 +60,7 @@
                 font-weight: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
             }
 
         }
@@ -138,7 +138,7 @@
                 font-stretch: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
             }
         }
 
@@ -161,14 +161,14 @@
         width: 100%;
     }
     @media only screen and (max-width:768px){
-        background-color: $gray-200;
+        background-color: $gray-200--old;
     }
     .price-content {
         float: left;
         width: 100%;
         margin-bottom: 100px;
         @media only screen and (max-width:768px){
-            background-color: $gray-200;
+            background-color: $gray-200--old;
             padding-bottom: 20px;
             margin: 0;
         }
@@ -225,7 +225,7 @@
             line-height: 1.54;
             letter-spacing: normal;
             text-align: center;
-            color: $gray-800;
+            color: $gray-800--old;
         }
         th.h-title {
             padding: 18px 30px 18px 15px;
@@ -264,11 +264,11 @@
         }
     }
 
-    th.h-title::before {content: "";position: absolute;top: 0;bottom: 0;right: 0;width: 19px;background-color: $gray-200;height: 1000px;}
+    th.h-title::before {content: "";position: absolute;top: 0;bottom: 0;right: 0;width: 19px;background-color: $gray-200--old;height: 1000px;}
     th.h-title::after {content: "";position: absolute;top: 0;left: 0;width: 218px;
         height: 3px;
         border-radius: 4px 4px 0 0;
-        background-color: $gray-800;}
+        background-color: $gray-800--old;}
         th.h-title.standard{
             &::after{
                 background-color: $primary-1;
@@ -310,7 +310,7 @@
             line-height: 1.5;
             letter-spacing: normal;
             text-align: center;
-            color: $gray-800;
+            color: $gray-800--old;
             margin-right: 4px;
         }
         sub {
@@ -319,7 +319,7 @@
             line-height: 1.5;
             letter-spacing: normal;
             text-align: center;
-            color: $gray-600;
+            color: $gray-600--old;
             margin-left: 4px;
         }
 
@@ -331,7 +331,7 @@
         padding-bottom: 23px !important;
         &.plan.v-title{
             vertical-align: top;
-            padding-top: 23px !important;  color: $gray-800 !important;
+            padding-top: 23px !important;  color: $gray-800--old !important;
         }
     }
 
@@ -418,7 +418,7 @@
                 left: 15px;
             }
             + span.monthly{
-                color: $gray-600;
+                color: $gray-600--old;
                 + span.Annual{
                     color: $primary-2;
                 }
@@ -479,7 +479,7 @@
         }
         &.Annual {
             right: -64px;
-            color: $gray-600;
+            color: $gray-600--old;
             @media only screen and (max-width: 768px){
                 order: 3;
             }

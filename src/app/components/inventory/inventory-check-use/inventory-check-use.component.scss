@@ -10,13 +10,13 @@
 .no-exist-agreements {
   &__info {
     @include body-r;
-    color: $gray-700;
+    color: $gray-700--old;
   }
 }
 .contract-container {
     border-radius: 8px;
     padding: 16px;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     max-height: 384px;
     overflow: auto;
     &::-webkit-scrollbar {
@@ -28,7 +28,7 @@
     }
     span {
         @include сaption-l;
-        color: $gray-600;
+        color: $gray-600--old;
     }
     .contract-container-agreements {
         overflow: auto;
@@ -44,7 +44,7 @@
             background-color: $white;
             border-radius: 8px;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            border: solid 1px $gray-400;
+            border: solid 1px $gray-400--old;
             margin-bottom: 8px;
             &:last-child {
                 margin-bottom: 0;
@@ -58,7 +58,7 @@
             }
             span {
                 @include сaption-l;
-                color: $gray-600;
+                color: $gray-600--old;
                 flex-shrink: 0;
             }
             .qt-table-modern__circle-avatar {
@@ -96,7 +96,7 @@
 .info-product {
     padding: 16px;
     border-radius: 8px;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     margin: 16px 0 0 0;
 
     h3 {
@@ -106,7 +106,7 @@
 
     span {
         @include сaption-l;
-        color: $gray-600;
+        color: $gray-600--old;
     }
 }
 .archive-modal__footer {

@@ -4,8 +4,8 @@
 // TODO Clear comment
 
 .disabled {
-  background: $gray-200;
-  color: $gray-600;
+  background: $gray-200--old;
+  color: $gray-600--old;
 }
 .device-user-wrap {
   * {
@@ -39,7 +39,7 @@
   //  }
   //
   //  .description {
-  //    color: $gray-700;
+  //    color: $gray-700--old;
   //    @include сaption-l;
   //  }
   //
@@ -71,7 +71,7 @@
   min-height: 40px;
   padding: 4px 4px 0;
   font-size: 13px;
-  border: 1px solid $gray-400;
+  border: 1px solid $gray-400--old;
   border-radius: 4px;
   width: 100%;
   display: flex;
@@ -104,7 +104,7 @@
       align-items: center;
       padding: 0 12px;
       border-bottom: 2px solid transparent;
-      color: $gray-800;
+      color: $gray-800--old;
       font-size: 13px;
       transition: all 0.3s;
       font-weight: 700;
@@ -126,7 +126,7 @@
   height: 32px;
   display: flex;
   align-items: center;
-  background: $gray-100;
+  background: $gray-100--old;
   margin: 0 4px 4px 0;
   i {
     position: static;
@@ -158,6 +158,6 @@
 .company-tag-input {
   &::placeholder {
       opacity: 0 !important;
-      color: $gray-600;
+      color: $gray-600--old;
     }
 }
