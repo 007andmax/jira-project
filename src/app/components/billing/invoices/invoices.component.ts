@@ -11,6 +11,7 @@ import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
 import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 
 @Component({
   selector: 'app-invoices',
@@ -42,6 +43,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private toastrProgressStateService: ToastrProgressStateService,
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
@@ -163,8 +165,11 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.showPreviewInvoice = true;*/
   }
   onRollbackInvoice(invoice) {
+    this.toastrProgressStateService.onInit(invoice.id);
     this.invoicesService.rollback(invoice.id).subscribe(data => {
-
+      this.toastrProgressStateService.clear(invoice.id);
+    }, err => {
+      this.toastrProgressStateService.clear(invoice.id);
     })
   }
   public sortBy(sort) {

@@ -10,6 +10,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 @Component({
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
@@ -29,6 +30,7 @@ export class InvoicesItemComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private appService: AppService,
     private permissionsService: PermissionsService,
+    private toastrProgressStateService: ToastrProgressStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
@@ -89,6 +91,7 @@ export class InvoicesItemComponent implements OnInit {
     if (this.getPermissions('VIEW_ACCOUNTING')) this.onPreviewInvoice.emit(this.invoice);
   }
   rollbackInvoice() {
+    if (this.toastrProgressStateService.check(this.invoice.id)) return;
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
@@ -97,6 +100,7 @@ export class InvoicesItemComponent implements OnInit {
     this.invoiceStateService.setInvoiceForRollback(this.invoice);
   }
   refundPayments() {
+    if (this.toastrProgressStateService.check(this.invoice.id)) return;
     this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Invoice will be marked as not paid.`;

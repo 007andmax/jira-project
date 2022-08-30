@@ -4,6 +4,7 @@ import { InvoicesAsidePreviewComponent } from './invoices-aside-preview.componen
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -13,7 +14,8 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
     imports: [
         CommonModule,
         PreviewPhoneMaskModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        NgbModule,
     ],
     exports: [InvoicesAsidePreviewComponent]
 })
