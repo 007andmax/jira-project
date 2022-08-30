@@ -141,6 +141,7 @@ export class DevicesComponent implements OnInit {
   devices_resize: boolean = false;
   System: any = undefined;
   serialnumber: string = "";
+  templatepdf: string = "PDF_TEMPLATE";
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -743,7 +744,7 @@ export class DevicesComponent implements OnInit {
       selectedClient: this.selectedClient,
       orientation: this.orientation,
       report: this.report,
-      template: this.template,
+      template: this.templatepdf,
       fileName: this.fileName,
       accountType: this.accountType
     });

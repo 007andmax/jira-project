@@ -133,6 +133,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   report: string = "report-device-summary";
   fileName: string = "device-summary-report";
   accountType = "CLIENT";
+  templatepdf: string = "PDF_TEMPLATE";
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
@@ -1530,12 +1531,12 @@ export class CompanyDeviceBetaComponent implements OnInit {
     );
   }
 
-  sendEmail() {    
+  sendEmail() {           
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
       report: this.report,
-      template: this.template,
+      template: this.templatepdf,
       fileName: this.fileName,
       accountType: this.accountType
     });
