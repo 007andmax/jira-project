@@ -57,6 +57,7 @@
                 class="dropdown-item"
                 (click)="selected(tag)"
                 [textContent]="tag.word"
+                [ngClass]="{'--selected':isSelected(tag.id)}"
             >
             </button>
         </ng-template>

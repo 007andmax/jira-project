@@ -71,7 +71,9 @@
                 <div
                     (click)="toggleItem(item)"
                     class="company-tag-item"
-                    [ngClass]="{'is-hover':item.isHover}"
+                    [ngClass]="{'is-hover':item.isHover,
+                '--selected':isSeleted(item)}"
+                    
                     [id]="'tag-' + item.id"
                     *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG' && !blockUserTag || item.defaultTag && item.defaultTag !== 'USER_TAG'"
                 >

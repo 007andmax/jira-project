@@ -141,6 +141,10 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     this.sub.add(getClearState);
   }
 
+  public isSelected(id) {
+    return this.selectedTag.find(item => item.id === id);
+  }
+
   onKeyUp(event) {
 
     if (event.keyCode === 13) {

@@ -107,6 +107,9 @@ export class DraftEmailRecipientsComponent implements OnInit {
 
     }
   }
+  public isSelected(primaryEmail) {
+    return this.selectedCompanies.find(item => item === primaryEmail);
+  }
 
   /**
    * Add user to selected

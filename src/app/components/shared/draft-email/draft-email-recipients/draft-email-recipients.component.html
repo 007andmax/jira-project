@@ -57,6 +57,7 @@
             <button
                 ngbDropdownItem
                 class="dropdown-item"
+                [ngClass]="{'--selected':isSelected(company.companyInfo.contacts[0].primaryEmail)}"
                 (click)="selected(company)"
             >
                 <span class="user-name">

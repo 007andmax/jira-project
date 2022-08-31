@@ -66,6 +66,9 @@ export class ServicesListComponent implements OnInit {
     this.searchName = null;
     this.cd.detectChanges();
   }
+  public isSelected(id) {
+    return this.editItem && this.editItem.name && this.editItem.versionedId.id == id;
+  }
 
   public clear() {
     this.elRef.nativeElement.querySelector('#dropdownServices').value = '';

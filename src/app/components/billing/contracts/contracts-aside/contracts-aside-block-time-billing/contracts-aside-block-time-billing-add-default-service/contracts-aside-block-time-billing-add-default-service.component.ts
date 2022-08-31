@@ -10,6 +10,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 })
 export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements OnInit {
   defaultServices: Array<DefaultServicesHourlyContract> = [];
+  selectedItem: DefaultServicesHourlyContract;
   @Output() onSelect = new EventEmitter<any>();
   constructor(private contractsStateService: ContractsStateService,) { }
 
@@ -21,7 +22,11 @@ export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
   }
+  public isSelected(id) {
+    return this.selectedItem && this.selectedItem.versionedId.id == id;
+  }
   select(data) {
+    this.selectedItem = data;
     this.onSelect.emit(data);
   }
 }

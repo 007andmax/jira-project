@@ -167,6 +167,7 @@
                 class="dropdown-item"
                 ngbDropdownItem
                 (click)="selected(tax)"
+                [ngClass]="{'--selected':checkTaxIsSelected(tax)}"
             >
                 <span [textContent]="tax.name + ' ' + tax.rate + '%'"></span>
                 <i

@@ -8,6 +8,7 @@
   <div class="dropdown-menu services-container" ngbDropdownMenu aria-labelledby="dropdownServices">
     <button class="dropdown-item"
             *ngFor="let item of itemList | service:searchName"
+            [ngClass]="{'--selected':isSelected(item.versionedId.id)}"
             (click)="selectServicesItem(item)"
     >
       {{item.name}}

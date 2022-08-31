@@ -26,6 +26,7 @@
                 ngbDropdownItem
                 [textContent]="item.name"
                 (click)="select(item)"
+                [ngClass]="{'--selected':isSelected(item.versionedId.id)}"
             ></li>
         </ng-template>
     </ul>

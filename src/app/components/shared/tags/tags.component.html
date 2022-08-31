@@ -28,6 +28,7 @@
     <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
       <button ngbDropdownItem class="dropdown-item"
               (click)="selected(tag)"
+               [ngClass]="{'--selected':isSelected(tag.id)}"
               [textContent]="tag.word">
       </button>
     </ng-template>

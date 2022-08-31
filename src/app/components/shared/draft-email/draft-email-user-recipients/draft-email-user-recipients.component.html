@@ -58,6 +58,7 @@
                 ngbDropdownItem
                 class="dropdown-item"
                 (click)="selected(user)"
+                 [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
             >
                 <span class="user-name">{{getFirstLastName(user)}}</span>
                 <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
@@ -73,6 +74,7 @@
                 ngbDropdownItem
                 class="dropdown-item"
                 (click)="selected(user)"
+                 [ngClass]="{'--selected' : isSelected(user.primaryEmail)}"
             >
                 <span class="user-name">{{getFirstLastName(user)}}</span>
                 <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
