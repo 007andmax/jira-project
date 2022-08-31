@@ -218,8 +218,7 @@ export class ReportsStateService {
         </tfoot>
  </table>
         </div>
-        </body>`;  
-        console.log(html);    
+        </body>`;            
       return html;      
     }
     //  disableOpenPdfBtn();    
