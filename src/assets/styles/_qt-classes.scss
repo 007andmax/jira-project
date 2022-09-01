@@ -1283,15 +1283,16 @@
     position: relative;
     button {
       border: none;
-      background: $white;
+      //background: $white; // TODO check this style
+      background: transparent;
       width: 100%;
       text-align: left;
       height: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
-      &:hover {
-        background-color: #edf2f67a;
-      }
+      //&:hover {
+      //  background-color: #edf2f67a; // TODO check this style
+      //}
     }
   }
   //.dropdown-menu.show { // TODO check this property
@@ -1301,7 +1302,7 @@
   //}
   .icn-label-save {
     position: absolute;
-    right: 5px !important;
+    right: 8px;
     margin-right: 0;
     top: 50%;
     transform: translateY(-50%);

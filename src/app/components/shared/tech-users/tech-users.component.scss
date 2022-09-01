@@ -33,20 +33,20 @@
         padding: 0;
       }
     }
-    .user-item {
-      &.active {
-        background: $primary-1;
-      }
-      &:hover {
-        background-color: $gray-300--old;
-        p {
-          color: $gray-800--old !important;
-          &:last-child {
-            color: $gray-600--old !important;
-          }
-        }
-      }
-    }
+    //.user-item {  // TODO check this style
+    //  &.active {
+    //    background: $primary-1;
+    //  }
+    //  &:hover {
+    //    background-color: $gray-300--old;
+    //    p {
+    //      color: $gray-800--old !important;
+    //      &:last-child {
+    //        color: $gray-600--old !important;
+    //      }
+    //    }
+    //  }
+    //}
   }
 }
 .tech-user-body {

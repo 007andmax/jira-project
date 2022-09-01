@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/dropdown";
 
 html {
   font-family: "Inter";
@@ -808,6 +809,8 @@ h6,
   max-height: 180px;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @include dropdown-scrollbar;
 }
 
 .default-user-avatar,

@@ -64,7 +64,9 @@
   width: 100%;
   text-align: left;
   background: $white;
-  @include body-r;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
   color: $gray-900;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -189,7 +191,9 @@
   }
   .dropdown-avatar__name,
   .dropdown-avatar__email {
-    @include body-r;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -200,5 +204,8 @@
   }
   .dropdown-avatar__email {
     color: $gray-500;
+    margin-top: 2px;
   }
+
+  @include dropdown-item-hover;
 }

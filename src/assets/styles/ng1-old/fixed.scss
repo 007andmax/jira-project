@@ -102,12 +102,12 @@
   background-color: $primary-1;
 }
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item.active p,
-.dropdown-assign-ticket.fixed-assign .users-list .user-item.active p:last-child,
-.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p,
-.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p:last-child {
-  color: $white;
-}
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item.active p, // TODO check this style dropdown
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item.active p:last-child,
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p,
+//.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p:last-child {
+//  color: $white;
+//}
 
 //.dropdown-assign-ticket.fixed-assign .users-list .user-item a {
 //  padding: 6px 20px;

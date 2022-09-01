@@ -434,12 +434,6 @@ app-users-table {
     .mat-standard-chip .mat-chip-remove.mat-icon {
       opacity: 1;
     }
-
-    button.dropdown-item.ng-star-inserted {
-      &:hover {
-        background-color: $background;
-      }
-    }
   }
 
   .qt-aside-modern__content.new-companies-content__modal--content {
@@ -514,13 +508,13 @@ app-users-table {
     .dropdown-item{
       &:nth-child(even) {
         background-color: $background;
-      }
-      &:hover {
-        background-color: $background;
-      }
-      &.--selected {
-        background-color: $background;
-        color: $primary-1;
+        &:hover {
+          background-color: $gray-50;
+        }
+        &.--selected {
+          background-color: $gray-50;
+          color: $blue-light-600;
+        }
       }
     }
   }
