@@ -1,3 +1,5 @@
+@import "./src/assets/styles/mixin/dropdown";
+
 span.qt-input-search {
   position: relative;
   &:before {
@@ -111,6 +113,10 @@ span.qt-input-search input.qt-input-search {
 
 ngb-typeahead-window.dropdown-menu {
   width: 100%;
+  max-width: 527px;
+  .dropdown-item {
+    @include dropdown-item;
+  }
   //max-height: 176px; // TODO check this style dropdown
   //width: 40px;
   //min-width: 68px;
@@ -135,4 +141,5 @@ ngb-typeahead-window.dropdown-menu {
   .ngb-highlight {
     font-weight: 400;
   }
+
 }

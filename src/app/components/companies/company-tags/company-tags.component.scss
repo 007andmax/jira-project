@@ -79,7 +79,9 @@
   background-color: $white;
 }
 .select-wrapper {
-  width: 366px;
+  //width: 366px;
+  width: 100%;
+  @include dropdown-pagination-scroll;
   //overflow: hidden; // TODO check this property
   //height: 260px;
   //position: absolute;

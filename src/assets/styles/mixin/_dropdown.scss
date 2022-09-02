@@ -55,6 +55,7 @@
 }
 
 @mixin dropdown-item {
+  position: relative;
   height: 32px;
   //display: block;
   display: flex;
@@ -134,6 +135,7 @@
 
   .description {
     color: $gray-500;
+    margin-top: 2px;
   }
 
   i {
@@ -208,4 +210,18 @@
   }
 
   @include dropdown-item-hover;
+}
+
+// fix pagination load
+// add mixin to dropdown-menu
+@mixin dropdown-pagination-scroll {
+  max-height: 280px;
+  height: 280px;
+  padding: 0;
+  .content {
+    height: 100%;
+    overflow: scroll;
+    padding: 4px 8px 0px;
+    @include dropdown-scrollbar;
+  }
 }
