@@ -85,16 +85,16 @@
                                       <h5>{{service.DisplayName || 'N/A'}}</h5>
                                   </td>
                                   <td class="description">{{service.Description || 'N/A'}}</td>
-                                  <td class="status">{{ (service.Started=='True' ? 'Running' : 'Stopped')}}</td>
+                                  <td class="status">{{ (service.started==true ? 'Running' : 'Stopped')}}</td>
                                   <td class="starttype">{{service.StartMode}}</td>
-                                  <td class="accountName">{{service.startName}}</td>
+                                  <td class="accountName">{{service.startName}}</td>                                  
                                   <td class="action">
-                                    <div *ngIf="service.Started=='False'">
-                                      <div *ngIf="service.Started=='False'" [ngClass]="service.Loaded=='False' ? 'icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
+                                    <div *ngIf="service.started==false">
+                                      <div *ngIf="service.started==false" [ngClass]="service.Loaded=='False' ? 'icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
                                     </div>
-                                    <div *ngIf="service.Started=='True'">
-                                      <div *ngIf="service.Started=='True'" [ngClass]="service.Loaded=='False' || service.RestartLoaded=='False' ? 'icon__restart qt-bg-contain qt-sz-16 qt-mr-8 service-button' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8 service-button'" (click)="serviceRestart(service.Name,i)"></div>
-                                      <div *ngIf="service.Started=='True'" [ngClass]="service.Loaded=='False' || service.StopLoaded=='False' ? 'icon__stop qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePause(service.Name,i)"></div>
+                                    <div *ngIf="service.started==true">
+                                      <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.RestartLoaded=='False' ? 'icon__restart qt-bg-contain qt-sz-16 qt-mr-8 service-button' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8 service-button'" (click)="serviceRestart(service.Name,i)"></div>
+                                      <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.StopLoaded=='False' ? 'icon__stop qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePause(service.Name,i)"></div>
                                     </div>
                                   </td>
                               </tr>

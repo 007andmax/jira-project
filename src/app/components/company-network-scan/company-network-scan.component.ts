@@ -54,8 +54,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   networkvalue: any[] = [];
   nets: [] = [];
   asset: any;
-  assetName: any;  
-  selectedMasterAgent:any;
+  assetName: any;    
   nonAgentVersionList: any[] = [];  
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
@@ -75,7 +74,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private toastr: ToastrService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.kafkaStateService.onNetworkScan.subscribe((resp) => {
       this.onNetworkScan(resp)
     });
@@ -104,7 +103,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
 
   AssetDetail() {    
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {           
       if (resp.length > 0) {
         this.isGetDevices = true
         this.assetList = resp;
@@ -112,9 +111,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
         if (this.masterAgent) {
           this.masterAgent.online = true;
-        }   
-        this.selectedMasterAgent = this.assetList.find(x=>x.IsMasterAgent == true);                       
-        this.selectMasterNetwork(this.selectedMasterAgent.ID);         
+        }                 
       }
       else {
         this.isGetDevices = false;

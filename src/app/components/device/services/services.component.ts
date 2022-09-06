@@ -80,10 +80,10 @@ export class ServicesComponent implements OnInit {
       });
   }
 
-  public onGetService(resp: any) {
+  public onGetService(resp: any) {    
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
-      this.serviceList = JSON.parse(item.Value);
+      this.serviceList = JSON.parse(item.Value);      
       for(let i=0;i<this.serviceList.length;i++)
       {
         this.serviceList[i] = Object.assign(this.serviceList[i],{Loaded:'False',RestartLoaded:'False',StopLoaded:'False'});
@@ -110,7 +110,7 @@ export class ServicesComponent implements OnInit {
       downloadCsvList.push([
         (element.DisplayName ? element.DisplayName.replace(",", " ") : "N/A"),
         (element.Description ? element.Description.replaceAll(",", " ") :""),
-        (element.Started=='True' ? "Running" : "Stopped"),
+        (element.started==true ? "Running" : "Stopped"),
         (element.StartMode ? element.StartMode.replace(",", " ") : "N/A"),
         (element.startName ? element.startName.replace(",", " ") : "N/A")
       ]);
@@ -125,7 +125,7 @@ export class ServicesComponent implements OnInit {
       pdfList.push([
         element.DisplayName.replace(",", " ") || "N/A",
         element.Description? element.Description.replace(",", " ") : "N/A",
-        element.Started=='True' ? "Running" : "Stopped",
+        element.started==true ? "Running" : "Stopped",
         element.StartMode ? element.StartMode.replace(",", " ") : "N/A",
         element.startName ? element.startName.replace(",", " ") : "N/A"
       ]);
