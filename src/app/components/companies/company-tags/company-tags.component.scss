@@ -121,6 +121,15 @@
     @include dropdown-checkbox-item;
   }
 }
+.user-aside-tags-dropdown {
+  .text-content {
+    width: calc(100% - 48px);
+    .name,
+    .description {
+      max-width: 100%;
+    }
+  }
+}
 .selected-user {
   border: 1px solid $background;
   border-radius: 3px;

@@ -113,8 +113,8 @@
       //margin: 6px 0 6px 8px; // TODO check this property
 
       li {
-        height: 48px;
-        padding: 14px 12px 14px 20px;
+        //height: 48px;
+        //padding: 14px 12px 14px 20px;
         font-weight: $fw-semi-bold;
       }
     }
@@ -134,13 +134,19 @@
     }
   }
 }
-
+.qt-page-list__header-title-line--rigth {
+  .qt-dropdown-menu {
+    max-height: unset;
+    left: 8px !important; // Fix right position
+  }
+}
 .qt-dropdown-menu li.remove-item {
   border-top: 1px solid $gray-400--old;
   padding-top: 8px;
   padding-bottom: 8px;
   margin-top: 8px;
   height: 40px;
+  border-radius: 0;
 }
 
 .document-header {

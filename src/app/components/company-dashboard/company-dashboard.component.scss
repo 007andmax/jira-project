@@ -1242,24 +1242,19 @@
                 }
             }
             .dropdown-menu {
-                width: 220px;
+                width: 238px;
                 height: auto;
-                max-height: 284px;
-                .item {
-                    &:last-child {
-                        justify-content: center;
-                    }
-                    &.selected,
-                    &:hover {
-                        color: $primary-2;
-                        font-weight: 600;
-                    }
-                    span {
-                        width: 80px;
-                        display: inline-block;
-                        text-align: left;
-                    }
-                }
+                max-height: 296px;
+              .dropdown-item {
+                height: auto;
+                justify-content: space-between;
+              }
+              .info-time-work,
+              .info-time-work-status {
+                width: 80px;
+                display: inline-block;
+                white-space: pre-line;
+              }
             }
             .closing-tag {
                 margin-left: 8px;

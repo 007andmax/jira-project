@@ -72,14 +72,14 @@
                 ngbDropdownItem
             >
                 <i
-                    class="icon__user-grey qt-sz-20 qt-bg-contain qt-mr-12"
+                    class="icon__user-grey qt-sz-20 qt-bg-contain qt-fs-0 qt-mr-12"
                     *ngIf="item.type === 'USER'"
                 ></i>
                 <i
-                    class="icon__devices-grey qt-sz-20 qt-bg-contain qt-mr-12"
+                    class="icon__devices-grey qt-sz-20 qt-bg-contain qt-fs-0 qt-mr-12"
                     *ngIf="item.type === 'DEVICE'"
                 ></i>
-                <span [textContent]="item.name"></span>
+                <span  [textContent]="item.name"></span>
             </div>
             <div
                 (touchstart)="onSelect(item)"

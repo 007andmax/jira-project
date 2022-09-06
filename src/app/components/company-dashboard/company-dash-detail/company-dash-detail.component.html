@@ -196,11 +196,11 @@
                             *ngFor="let hours of workingDays"
                         >
                             {{hours.dayOfWeek}}
-                            <span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span>
-                            <span *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span>
+                            <span class="info-time-work" *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span>
+                            <span class="info-time-work-status" *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span>
                         </button>
                         <div
-                            class="item"
+                            class="item qt-df qt-jc-c qt-mt-12 qt-mb-12"
                             *ngIf="getPermissions('EDIT_COMPANIES')"
                         >
                             <button

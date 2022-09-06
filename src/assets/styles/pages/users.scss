@@ -203,6 +203,10 @@
 
   .qt-with-number-types {
     display: flex;
+    .dropdown-menu {
+      min-width: auto;
+      width: 100%;
+    }
     input {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;

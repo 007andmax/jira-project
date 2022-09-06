@@ -24,6 +24,7 @@
     background-color: $white;
 }
 .select-wrapper {
+    @include dropdown-pagination-scroll;
     z-index: 9999;
     @media (max-width: 767px) {
         width: 100%;
@@ -53,9 +54,9 @@
     }
     .content {
         //height: 170px;
-        height: 100%;
-        overflow: scroll;
-        padding: 0;
+        //height: 100%;
+        //overflow: scroll;
+        //padding: 0;
         //&::-webkit-scrollbar-thumb { // todo check this style
         //  background-color: $gray-200--old;
         //}
