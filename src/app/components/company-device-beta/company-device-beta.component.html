@@ -642,16 +642,15 @@
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Manufacturer</div>
                         <div class="device-table__input-name">
-                            <app-select-search       
-                        id="sidebarmanufacture"
-                        #dropdownManufacturersidebar          
-                        [placeholder]="'Select manufacture'"                
-                        [class]="['qt-dropdown']"
-                        [editItem]="selectManufactureNamessidebar"
-                        [field]="'Name'"        
-                        [list]="manufactureList"  
-                        (onSelectedItem)="onSelectManufactureNamesidebar($event)"                      
-                    ></app-select-search>                           
+                            <app-select-search                               
+                            #dropdownManufacturersidebar          
+                            [placeholder]="'Select manufacture'"                
+                            [class]="['qt-dropdown']"
+                            [editItem]="selectManufactureNamessidebar"
+                            [field]="'Name'"        
+                            [list]="manufactureList"  
+                            (onSelectedItem)="onSelectManufactureNamesidebar($event)"                      
+                            ></app-select-search>                           
                         </div>                        
                     </div>
                 </div>
@@ -666,16 +665,15 @@
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Computer Model</div>
                         <div class="device-table__input-name">
-                            <app-select-search       
-            id="sidebarmodel"
-            #dropdownModelSidebar
-            [placeholder]="'Select model'"                
-            [class]="['qt-dropdown']"
-            [editItem]="selectModelNameSidebar"
-            [field]="'Name'"                    
-            [list]="selectModelList"                       
-            (onSelectedItem)="onSelectModelsidebar($event)"
-        ></app-select-search>                        
+                            <app-select-search                   
+                            #dropdownModelSidebar
+                            [placeholder]="'Select model'"                
+                            [class]="['qt-dropdown']"
+                            [editItem]="selectModelNameSidebar"
+                            [field]="'Name'"                    
+                            [list]="selectModelList"                       
+                            (onSelectedItem)="onSelectModelsidebar($event)"
+                            ></app-select-search>                        
                         </div>                        
                     </div>
                 </div>

@@ -534,52 +534,6 @@ table.qt-table-modern tbody tr td {
   }
 }
 
-/deep/.date-picker {
-  .icn-calendar-light {
-    display: none;
-  }
-}
-
-/deep/.date-picker:hover {
-  .icn-calendar-light {
-    display: inline-block;
-  }
-}
-
-
-/deep/.qt-dropdown{    
-  input#sidebarmanufacture,#sidebarmodel{
-    height: 27px !important;      
-  }
-
-  input {
-    border-width: 0 !important;
-    padding: 10px 0!important;  
-  }
-
-  input:hover {
-    border-width: 1px !important;
-  }
-
-  .report-caret-icon {
-    display: none;
-  }  
-  .icn-remove-old {
-    display: none;
-  }
-  
-}
-
-/deep/.qt-dropdown:hover {    
-  .report-caret-icon {
-    display: inline-block;
-  }
-
-  .icn-remove-old {
-    display: inline-block;
-  }
-}
-
 .dm {
   width: 36px;
   height: 36px;
