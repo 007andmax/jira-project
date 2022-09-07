@@ -79,16 +79,6 @@
   @include dropdown-item-hover;
 }
 
-// Dropdown checkbox
-@mixin dropdown-checkbox-content { // TODO add to dropdown for fix pagination
-    //height: 170px;
-    //height: 100%;
-    height: 192px;
-    overflow-y: scroll;
-    padding: 0;
-    @include dropdown-scrollbar;
-}
-
 @mixin dropdown-checkbox-item {
   display: flex;
   align-items: center;
@@ -214,7 +204,7 @@
 
 // fix pagination load
 // add mixin to dropdown-menu
-@mixin dropdown-pagination-scroll {
+@mixin dropdown-content {
   max-height: 280px;
   height: 280px;
   padding: 0;

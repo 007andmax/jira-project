@@ -111,9 +111,9 @@ span.qt-input-search input.qt-input-search {
   }
 }
 
-ngb-typeahead-window.dropdown-menu {
+.new-companies-content__modal ngb-typeahead-window.dropdown-menu {
   width: 100%;
-  max-width: 527px;
+  //max-width: 527px; // TODO check this style dropdown
   .dropdown-item {
     @include dropdown-item;
   }

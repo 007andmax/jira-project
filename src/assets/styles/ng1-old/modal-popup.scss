@@ -72,16 +72,16 @@
 .user-item:nth-child(odd) .default-user-avatar, li:nth-child(odd) .default-user-avatar {
   background-color: #aae8e8;
 }
-.add-tax-dropdown,
-.add-category-lp-dropdown > div {
-  border-radius: 3px;
-  width: 240px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  position: relative;
-  background: $white;
-  margin: 0;
-}
+//.add-tax-dropdown, // TODO check this property
+//.add-category-lp-dropdown > div {
+//  border-radius: 3px;
+//  width: 240px;
+//  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+//  padding: 15px;
+//  position: relative;
+//  background: $white;
+//  margin: 0;
+//}
 
 .add-tax-dropdown:after,
 .add-category-lp-dropdown > div:after {

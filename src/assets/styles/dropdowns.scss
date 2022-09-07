@@ -177,9 +177,13 @@
     pointer-events: none;
   }
   .dropdown-menu {
-    border-radius: 4px;
-    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400--old;
+    //border-radius: 4px; // TODO check this style
+    //box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+    //border: solid 1px $gray-400--old;
+    max-height: initial;
+    ngb-datepicker {
+      border: unset;
+    }
   }
   .ngb-dp-header,
   .ngb-dp-weekdays {

@@ -81,7 +81,7 @@
 .select-wrapper {
   //width: 366px;
   width: 100%;
-  @include dropdown-pagination-scroll;
+  @include dropdown-content;
   //overflow: hidden; // TODO check this property
   //height: 260px;
   //position: absolute;

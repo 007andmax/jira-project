@@ -152,7 +152,7 @@
                     (click)="edit()"
                     ngbDropdownItem
                 >
-                    <div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Edit
                 </li>
                 <li
@@ -161,7 +161,7 @@
                     (click)="resetPrimaryContact()"
                     ngbDropdownItem
                 >
-                    <div class="icon__mark-as-master qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__mark-as-master qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Set as Primary contact
                 </li>
                 <li
@@ -169,7 +169,7 @@
                     *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
                     (click)="delete()"
                 >
-                    <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Archive
                 </li>
                 <li
@@ -177,7 +177,7 @@
                     *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
                     (click)="restore()"
                 >
-                    <div class="icon__archive qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__archive qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Restore
                 </li>
             </ul>

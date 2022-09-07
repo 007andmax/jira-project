@@ -92,7 +92,7 @@
 }
 .select-wrapper {
   @include dropdown-menu;
-  @include dropdown-pagination-scroll;
+  @include dropdown-content;
   .company-tag-item {
     @include dropdown-checkbox-item;
 

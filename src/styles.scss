@@ -4469,9 +4469,10 @@ app-ticket-edit-aside-devices {
   }
 
   .dropdown-menu {
-    width: 100% !important;
-    min-height: 190px !important;
-    height: fit-content !important;
+    max-width: 100%;
+    //width: 100% !important;  // TODO check this property
+    //min-height: 190px !important;
+    //height: fit-content !important;
   }
 
   .icn-product-save {
