@@ -4,8 +4,7 @@
         <div class="qt-page-list__header-title-line--left">
             <h3 class="qt-page-list__header-title" [textContent]="'Devices'"></h3>
             <div class="Rectangle">
-              <span class="qt-input-search"></span>
-                <!-- <img src="/assets/img/icons/search.svg" class="Online-Search"> -->
+              <span class="qt-input-search"></span>                
                 <div class="SearchRectangle">
                     <mat-form-field class="example-chip-list" appearance="none">
                         <mat-chip-list #chipList>
@@ -91,8 +90,8 @@
             </div>            
         </div>                      
           </div>
-    </div>
-    </div>
+        </div>
+        </div>
         <div class="qt-page-list__header-thead-container" [ngClass]="{'Resize': devices_resize}">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
@@ -419,7 +418,7 @@
             '--online':assetData.online }"
         ></div>
     </div>
-    </div>
+     </div>
     <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
         <div class="qt-df qt-ai-c">
           <div
@@ -432,12 +431,12 @@
           icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',                                        
           '--offline': !assetData.online,
           '--online':assetData.online }"
-      ></div>
-      <div
+          ></div>
+        <div
       class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title"
       [textContent]="assetData.Title || assetData.Name"
     >
-    </div>
+        </div>
         </div>
 
         <div
@@ -539,7 +538,7 @@
                         <div
                         class="sidebar-system__info-text"
                         [textContent]="assetData.Name"
-                    ></div>                   
+                        ></div>                   
                     </div>
                   </div>
                <div>
@@ -567,7 +566,7 @@
                         [field]="'Name'"        
                         [list]="manufactureList"  
                         (onSelectedItem)="onSelectManufactureNamesidebar($event)"                      
-                    ></app-select-search>                           
+                            ></app-select-search>                           
                         </div>                        
                     </div>
                 </div>
@@ -591,7 +590,7 @@
             [field]="'Name'"                    
             [list]="selectModelList"                       
             (onSelectedItem)="onSelectModelsidebar($event)"
-        ></app-select-search>                        
+                            ></app-select-search>                        
                         </div>                        
                     </div>
                 </div>
@@ -735,9 +734,9 @@
                         ></div>
                     </div>                                    
             </div>
-        <div class="qt-divider qt-mt-24 qt-mb-24"></div> 
-        </div>
-          <div *ngIf="tab==='SOFTWARE'" class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+            <div class="qt-divider qt-mt-24 qt-mb-24"></div> 
+          </div>
+            <div *ngIf="tab==='SOFTWARE'" class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
           <div class="qt-df qt-jc-sb">
               <div class="sidebar-software__title qt-ff-sb">Softwares</div>
           </div>
@@ -763,9 +762,9 @@
             <div class="software-text-center">                    
                     <span>No software to show</span>                    
             </div>
-        </div>
           </div>
-          <div *ngIf="tab==='UPDATES'" class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+            </div>
+            <div *ngIf="tab==='UPDATES'" class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="qt-df qt-jc-sb">
                 <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
                 <div *ngIf="getSecurityCountSelected() > 1">
@@ -776,7 +775,7 @@
                     <i class="install-security-Update qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6" *ngIf="!IsUpdateInstalling"></i>
                     <div class="loader"  *ngIf="IsUpdateInstalling"></div>
                     Install Updates
-                </button>
+                    </button>
                 </div>
             </div>
             <div class="sidebar-updates__items">
@@ -861,13 +860,14 @@
                             </tbody>
                         </table>     
                         <div class="loading" *ngIf="IsCurrentConfigLoading"></div>                                                            
-                </div>                                                 
-            </div>  
+                    </div>                                                 
+                </div>  
+            </div>
+            </div>
         </div>
-        </div>
+    </div>       
     </div>
-</div>
-    
+
     <div [hidden]="!opened" class="qt-aside-modern">
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-info d-f ai-c">
@@ -1111,7 +1111,9 @@
             </div>
         </div>
     </div>
+
 </div>
+    
 
 <ng-template #templatePowersell>
     <div class="modal-content restart-modal">
