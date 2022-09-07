@@ -217,6 +217,13 @@
                             </tr>
                         </tbody>
                       </table>
+                      <table class="qt-table-modern qt-page-list__header-thead" *ngIf="!deviceTypeList || deviceTypeList.length == 0">
+                        <tbody>
+                            <tr>
+                                <td colspan="10" class="text-center">No devices type to show</td>
+                            </tr>
+                        </tbody>
+                    </table>
                       </div>
                     </div>            
               </ng-template>
@@ -296,6 +303,13 @@
                             </tr>
                         </tbody>
                       </table>
+                      <table class="qt-table-modern qt-page-list__header-thead" *ngIf="!manufactureIsActiveList || manufactureIsActiveList.length == 0">
+                        <tbody>
+                            <tr>
+                                <td colspan="10" class="text-center">No manufacture to show</td>
+                            </tr>
+                        </tbody>
+                    </table>
                       </div>
                   </div>                  
               </ng-template>
@@ -490,6 +504,13 @@
                             </tr>
                         </tbody>
                       </table>
+                      <table class="qt-table-modern qt-page-list__header-thead" *ngIf="!selectManufactureList || selectManufactureList.length == 0">
+                        <tbody>
+                            <tr>
+                                <td colspan="10" class="text-center">No model to show</td>
+                            </tr>
+                        </tbody>
+                    </table>
                       </div>
                   </div>                  
               </ng-template>

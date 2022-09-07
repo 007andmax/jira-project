@@ -73,7 +73,7 @@ export class DeviceSettingComponent implements OnInit {
     private companiesStateService : CompaniesStateService,
     private companiesState: CompaniesStateService) { }
 
-  ngOnInit() {    
+  ngOnInit() {      
     this.loading = true; $(".loading").css("display", "block");
     this.devicebutton = true;
     this.openedCounter = true;
@@ -119,11 +119,13 @@ export class DeviceSettingComponent implements OnInit {
 
     this.settingStateService.setComponentName('DeviceSettingComponent');    
     if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe((data) =>{               
+    this.companiesStateService.onCurrentCompany.subscribe((data) =>{                    
         this.getCurrentCompany(data);
         this.techCompany = data;
         this.getDeviceTypes(this.techCompany.id);      
     })
+
+    this.loading = false; $(".loading").css("display", "none");
   }
 
   onFilter(field) {
