@@ -239,16 +239,12 @@ html {
   background: $white;
   height: 100vh;
   width: 650px;
-  //transition: transform .3s !important;
-  //transform: translateX(100%);
   right: -650px;
   opacity: 0;
 }
 .ng-sidebar.ng-sidebar--opened {
   opacity: 1;
   right: 0;
-  //transition: all .3s !important;
-  //transform: translateX(0);
 }
 .ng-sidebar--right {
   top: $header-height !important;
@@ -731,14 +727,6 @@ documents-edit-info {
         }
       }
     }
-    //.col-md-4 { // TODO check this property
-    //  .light-dropdown {
-    //    .dropdown-menu {
-    //      width: 40px;
-    //      min-width: 68px;
-    //    }
-    //  }
-    //}
   }
   .service-tab-content,
   .product-tab-content {
@@ -1640,10 +1628,6 @@ app-quotes-item {
     }
     .dropdown-menu {
       min-width: 80px;
-      //button { // TODO check this style dropdown
-      //  padding: 0 15px;
-      //  font-size: 12px;
-      //}
     }
   }
   input {
@@ -2828,10 +2812,6 @@ app-quotes-item {
     }
   }
 
-  //.company-time-zone-drop-down {
-  //  margin-top: 7px;
-  //}
-
   .light-dropdown .report-caret-icon {
     right: 12px;
   }
@@ -2849,10 +2829,6 @@ app-quotes-item {
       padding-bottom: 6px;
     }
   }
-
-  //.app-drop-down__right-icon {
-  //  right: 0;
-  //}
 
   .filter-tags-body {
     .mat-form-field-flex {
@@ -2961,7 +2937,6 @@ app-quotes-item {
       border-radius: 4px;
       outline: none;
       padding: 7px 16px;
-      outline: none;
       font-weight: 500;
       color: $primary-2;
 
@@ -3094,8 +3069,6 @@ app-quotes-item {
       cursor: pointer;
       &:hover,
       &.active {
-        //font-weight: 600;
-        //font-weight: 500;
         background: $gray-800--old;
         border-left: 2px solid $primary-1;
       }
@@ -3157,8 +3130,6 @@ app-quotes-item {
       cursor: pointer;
       &:hover,
       &.active {
-        //font-weight: 600;
-        //font-weight: 500;
         background: $gray-800--old;
         border-left: 2px solid $primary-1;
       }
@@ -3332,12 +3303,6 @@ app-quotes-item {
     display: flex;
     margin: 0;
   }
-
-  //.report-footer {
-  //  position: absolute;
-  //  width: 100%;
-  //  bottom: 0;
-  //}
 }
 
 @import "./assets/styles/mobile.scss";
@@ -3567,10 +3532,6 @@ app-ticket-profile-updates-note {
   height: 24px !important;
   margin-right: 8px;
 }
-
-// .ticket-updates__update-info {
-// margin-left: -48px;
-// }
 
 app-ticket-profile-updates-product-item,
 app-ticket-profile-updates-service-item,
@@ -4372,7 +4333,6 @@ app-ticket-edit-aside-devices {
     background-color: $white;
     position: absolute;
     bottom: 46px;
-    height: fit-content;
     width: 584px;
     padding: 26px 24px;
     border-radius: 5px;
@@ -4470,9 +4430,6 @@ app-ticket-edit-aside-devices {
 
   .dropdown-menu {
     max-width: 100%;
-    //width: 100% !important;  // TODO check this property
-    //min-height: 190px !important;
-    //height: fit-content !important;
   }
 
   .icn-product-save {
@@ -4503,8 +4460,6 @@ app-ticket-edit-aside-devices {
 
 .create-product {
   .label-name {
-    //font-size: 13px !important;
-    //margin-bottom: 8px !important;
     margin-bottom: 8px;
     @include body-m__sb;
     font-weight: 700;
@@ -4590,11 +4545,9 @@ input.--input-error {
 .--input-error {
   input {
     border: solid 1px $error !important;
-    // border-left: none !important;
   }
   .qt-input-prefix {
     border: solid 1px $error !important;
-    // border-right: none !important;
   }
 }
 
@@ -4670,10 +4623,6 @@ input.--input-error {
 .page-list-ticket {
   .light-dropdown {
     padding: 0;
-    //.dropdown-menu {  // TODO check this property
-    //  left: 0 !important;
-    //  width: 180px;
-    //}
   }
   .mat-form-field {
     background: $white;

@@ -312,28 +312,6 @@ html::-webkit-scrollbar {
 
 /* END BOOSTRAP FIX STYLE */
 
-.dropdown-menu, //TODO check style dropdown without this style
-.uib-dropdown-menu {
-  //position: absolute;
-  //overflow-y: auto;
-  //top: calc(100% + 10px);
-  //z-index: 1000;
-  //max-height: 354px;
-  //display: none;
-  //float: left;
-  //min-width: 150px;
-  //padding: 0;
-  //margin: 6px 0 0;
-  //list-style: none;
-  //font-size: 14px;
-  //text-align: left;
-  //background-color: $white;
-  //border-radius: 4px;
-  //-webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
-  //box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
-  //background-clip: padding-box;
-}
-
 p {
   font-size: 14px;
   margin: 0;
@@ -558,45 +536,6 @@ textarea {
       border-left: none;
     }
   }
-
-  //.qt-checkbox {
-  //  width: 100%;
-  //  min-height: 30px;
-  //  max-height: 50px;
-  //  height: auto;
-  //  align-items: center;
-  //  font-size: 13px;
-  //  display: flex;
-  //  padding: 0;
-  //}
-
-  //i {
-  //  display: block;
-  //  flex-shrink: 0;
-  //}
-
-  //.text-content { // TODO check this style dropdown
-  //  flex: 1;
-  //}
-
-  //.name,
-  //.description {
-  //  white-space: nowrap;
-  //  overflow: hidden;
-  //  text-overflow: ellipsis;
-  //  max-width: calc(298px - 23px);
-  //  width: 100%;
-  //}
-  //
-  //.name {
-  //  font-weight: $fw-medium;
-  //  color: $gray-800--old;
-  //}
-  //
-  //.description {
-  //  color: $gray-700--old;
-  //  font-size: 12px;
-  //}
 
   .mat-chip-list-wrapper .mat-standard-chip,
   .mat-chip-list-wrapper input.mat-input-element {

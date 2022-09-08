@@ -336,8 +336,6 @@
 }
 
 .invoice-items-dropdown {
-  //overflow: visible !important; // TODO check this property
-  //overflow: visible;
   .payment-info-submenu {
     display: none;
   }
@@ -424,9 +422,6 @@ app-invoices-item,app-payment-item {
       th, td {
         border-bottom: solid 1px $gray-400--old;
         border-left: solid 1px $gray-400--old;
-        // &:first-child {
-        //   border-left: solid 1px $gray-400--old;
-        // }
         &:last-child {
           border-right: solid 1px $gray-400--old;
         }

@@ -55,28 +55,6 @@ app-drop-down {
   &__dropdown {
     button {
       @include dropdown-item;
-      //height: 32px; // TODO check this style dropdown
-      //display: block;
-      //padding: 0 12px;
-      //border: none;
-      //width: 100%;
-      //text-align: left;
-      //background: $white;
-      //@include body-r;
-      //color: #101828;
-      //text-overflow: ellipsis;
-      //overflow: hidden;
-      //white-space: nowrap;
-      //border-radius: 6px;
-      //margin: 4px 0;
-
-      //&:hover {
-      //  background-color: $gray-100--old;
-      //}
-      //&.--selected {
-      //  background-color: $gray-100--old;
-      //  color: $primary-1;
-      //}
     }
 
   }

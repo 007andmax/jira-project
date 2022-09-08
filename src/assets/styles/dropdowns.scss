@@ -31,48 +31,9 @@
       }
     }
   }
-  //&.to-left { // TODO check this property
-  //  .dropdown-menu {
-  //    left: auto !important;
-  //    right: 0;
-  //  }
-  //}
   .dropdown-menu {
-    //background: $white; // TODO check this style dropdown
-    //width: 100%;
-    //top: auto;
-    //max-height: 190px;
-    //left: 0 !important;
-    //position: absolute;
-    //min-width: auto;
-    //width: 100%;
     .dropdown-item {
       @include dropdown-item;
-      //outline: none;
-      //background: $white;
-      //width: 100%;
-      //height: 32px;
-      //display: block;
-      //align-items: center;
-      //justify-content: flex-start;
-      //padding: 0 12px;
-      //border: none;
-      //@include body-r;
-      //color: #101828;
-      //text-align: left;
-      //white-space: nowrap;
-      //overflow: hidden;
-      //text-overflow: ellipsis;
-      //transition: all 0.3s;
-      //border-radius: 6px;
-      //margin: 4px 0;
-      //&:hover {
-      //  background: $gray-100--old;
-      //}
-      //&.--selected {
-      //  background-color: $gray-100--old;
-      //  color: $primary-1;
-      //}
     }
   }
   input {
@@ -95,20 +56,6 @@
       top: calc(50% - 14px) !important;
     }
   }
-  //&.right { // TODO check this style dropdown
-  //  .dropdown-menu {
-  //    left: auto !important;
-  //    right: 0 !important;
-  //  }
-  //}
-  //&.with-icons { // TODO check this style dropdown
-  //  .dropdown-item {
-  //    display: flex;
-  //    i {
-  //      margin-right: 10px;
-  //    }
-  //  }
-  //}
 }
 
 .dark-dropdown {
@@ -121,7 +68,6 @@
   }
 }
 
-//.light-dropdown { // TODO check this property
 .dropdown-menu {
   &.unique-down {
     width: calc(100% - 30px);
@@ -134,18 +80,6 @@
   }
 }
 
-//}
-
-//.grey-dropdown { // TODO check this property
-//  .dropdown-menu {
-//    .dropdown-item {
-//      &:hover {
-//        background: $background;
-//        color: $primary-2;
-//      }
-//    }
-//  }
-//}
 .dropdown-menu {
   .ngb-dp-day,
   .ngb-dp-week-number,
@@ -177,9 +111,6 @@
     pointer-events: none;
   }
   .dropdown-menu {
-    //border-radius: 4px; // TODO check this style
-    //box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    //border: solid 1px $gray-400--old;
     max-height: initial;
     ngb-datepicker {
       border: unset;

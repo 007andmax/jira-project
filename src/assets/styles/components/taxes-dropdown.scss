@@ -14,34 +14,11 @@
       overflow: auto;
       max-width: 120px !important;
     }
-
-    //.dropdown-item { // TODO check this style
-    //  display: flex;
-    //  align-items: center;
-    //  padding: 0 8px;
-    //  height: 32px;
-    //  button {
-    //    background: transparent;
-    //    border: none;
-    //    white-space: nowrap;
-    //    text-overflow: ellipsis;
-    //    width: calc(100% - 25px);
-    //    overflow: hidden;
-    //    text-align: left;
-    //  }
-    //  &:hover {
-    //    background: $gray-100--old;
-    //    button {
-    //      color: $gray-800--old;
-    //    }
-    //  }
-    //}
   }
 
   &__check-icon {
     position: absolute;
     margin: 0 !important;
-    //margin-top: 7px !important; // TODO check this style dropdown
     background-image: url(/assets/img/icons/done-blue.svg);
     right: 8px;
   }

@@ -2,13 +2,6 @@
 @import "./src/assets/styles/mixin/dropdown";
 
 .select-wrapper {
-  //position: absolute;
-  //display: block;
-  //background: $white;
-  //margin-top: 5px;
-  //border-radius: 3px;
-  //box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-  //z-index: 9999;
   @include dropdown-menu;
   height: 252px;
   max-height: 252px;
@@ -33,20 +26,6 @@
         padding: 0;
       }
     }
-    //.user-item {  // TODO check this style
-    //  &.active {
-    //    background: $primary-1;
-    //  }
-    //  &:hover {
-    //    background-color: $gray-300--old;
-    //    p {
-    //      color: $gray-800--old !important;
-    //      &:last-child {
-    //        color: $gray-600--old !important;
-    //      }
-    //    }
-    //  }
-    //}
   }
 }
 .tech-user-body {

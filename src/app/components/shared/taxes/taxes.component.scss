@@ -2,11 +2,6 @@
 @import "./src/assets/styles/fonts";
 
 .dropdown-menu {
-  //transform: translate(0, 0) !important; // TODO check this property
-  //top: auto !important;
-  //left: 17px !important;
-  //left: 0 !important;
-  //width: 230px;
   width: 100%;
 }
 .add-tax {
@@ -86,15 +81,7 @@
 }
 
 .new-taxes-area {
-  //.report-caret-icon {
-  //    top: 40px !important;
-  //    right: 25px;
-  //}
-
   .dropdown-item {
-    //align-items: center; // TODO check this property
-    //display: flex;
-    //position: relative;
     button {
       color: $gray-800--old;
     }
@@ -147,7 +134,3 @@
     }
   }
 }
-//.taxes-dropdown__check-icon { // TODO check this property
-//  background-image: url("/assets/img/icons/done-blue.svg");
-//  margin-top: 0px !important;
-//}

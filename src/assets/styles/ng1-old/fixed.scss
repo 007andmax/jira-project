@@ -77,22 +77,9 @@
   background: $gray-500--old;
 }
 
-//.dropdown-assign-ticket.fixed-assign {
-//  width: 290px;
-//}
-
 .dropdown-assign-ticket.fixed-assign .users-list .user-item {
   @include dropdown-avatar-item;
 }
-
-//.dropdown-assign-ticket.fixed-assign .scroll-pane {
-//  background-color: $white;
-//  margin-top: 77px;
-//}
-
-//.dropdown-assign-ticket.fixed-assign .users-list {
-//  max-height: 165px;
-//}
 
 .dropdown-assign-ticket.fixed-assign .assign-ticket-header {
   padding: 16px;
@@ -101,39 +88,6 @@
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
   background-color: $primary-1;
 }
-
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item.active p, // TODO check this style dropdown
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item.active p:last-child,
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p,
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p:last-child {
-//  color: $white;
-//}
-
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item a {
-//  padding: 6px 20px;
-//  transition: all 0.3s;
-//  color: $gray-800--old;
-//  font-weight: 600;
-//}
-
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item p {
-//  color: $gray-800--old;
-//  font-size: 13px;
-//  font-weight: 700;
-//  margin: 0;
-//}
-
-//.dropdown-assign-ticket.fixed-assign .users-list .user-item p:last-child {
-//  margin: -5px 0 0;
-//  font-size: 12px;
-//  color: $gray-600--old;
-//  font-weight: 500;
-//}
-
-//.dropdown-assign-ticket.fixed-assign .avatar-26 {
-//  width: 32px;
-//  height: 32px;
-//}
 
 .dropdown-assign-ticket.fixed-assign .assign-ticket-header .form-group {
   position: relative;

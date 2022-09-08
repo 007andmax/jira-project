@@ -108,18 +108,6 @@
     }
   }
 
-  .qt-page-list__header {
-    .dropdown-menu {
-      //margin: 6px 0 6px 8px; // TODO check this property
-
-      li {
-        //height: 48px;
-        //padding: 14px 12px 14px 20px;
-        //font-weight: $fw-semi-bold;
-      }
-    }
-  }
-
   .filter-users-documents {
     .icn-remove-old {
       top: calc(50% - 6px) !important;
@@ -173,7 +161,6 @@
   }
 
   app-documents-add {
-    //margin-right: 68px;
     height: 100%;
     display: block;
   }
@@ -239,7 +226,6 @@
   }
 
   margin-right: 480px;
-  //overflow: auto;
   background-color: $white;
 
   &.qt-page-list {
@@ -281,7 +267,6 @@
   }
   .app-drop-down__right-icon {
     .icn-remove-old {
-      //margin-bottom: 11px;
       top: calc(50% - 8px) !important;
     }
   }
