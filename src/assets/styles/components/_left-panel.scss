@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: $primary-2;
+  background-color: $gray-800;
   color: $white;
   transition: width 300ms;
 
@@ -104,20 +104,23 @@
     border-top: 1px solid rgba(255,255,255,.08);
     display: flex;
     align-items: flex-start;
-    height: calc(100% - 80px);
+    //height: calc(100% - 80px);
+    height: 100%;
     &-icon,
     &-menu {
       overflow: auto;
       height: 100%;
-      padding-top: 7px;
+      //padding-top: 7px;
     }
     &-icon {
-      border-right: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      flex-direction: column;
+      background-color: $gray-900;
       flex-shrink: 0;
     }
     &-menu {
       width: 100%;
-      margin: 0 8px;
+      margin: 24px 16px 0 8px;
     }
     &::-webkit-scrollbar-thumb {
       background: transparent;
@@ -133,8 +136,6 @@
 
   &__header-logo-mini {
     display: none;
-    &.--active {
-    }
   }
 
   &__header-logo {
@@ -161,11 +162,14 @@
   }
 
   &__header-resize-btn {
-    width: 24px;
-    height: 24px;
+    position: fixed;
+    top: 22px;
+    left: calc(322px - 16px);
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
-    transition: transform 300ms;
+    transition: transform 300ms, left 300ms;
   }
 
   &__header-open-btn {
@@ -191,13 +195,16 @@
   //}
 
   &__menu-title {
-    @include body-l__t;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
     font-stretch: normal;
     color: $white;
     white-space: nowrap;
-    padding: 6px 8px;
-    border-radius: 6px;
-    margin-bottom: 6px;
+    //padding: 6px 8px;
+    //border-radius: 6px;
+    margin-bottom: 16px;
+    margin-left: 8px;
   }
 
   &__menu-icon {
@@ -208,56 +215,72 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 7px;
-      &:not(:last-child) {
-        margin-bottom: 4px;
+      margin: 0 12px 8px;
+      &-settings {
+        margin-top: auto;
+        margin-bottom: 12px;
       }
       &.--active,
       &:hover {
-        background-color: #171e26
+        background-color: $gray-700;
+        .app-left-panel__menu-icon {
+          background-color: $white;
+        }
       }
     }
     width: 24px;
     min-width: 24px;
     height: 24px;
     background-position: center;
-    opacity: 0.5;
+    background-color: $gray-300;
 
     &.--quick-support {
-      background-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
     }
     &.--tickets {
-      background-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
     }
     &.--companies {
-      background-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
     }
     &.--users {
-      background-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
     }
     &.--marketing {
-      background-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
     }
     &.--billing {
-      background-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-billing.svg");
     }
     &.--products {
-      background-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
     }
     &.--password-manager {
-      background-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     }
     &.--reports {
-      background-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-reports.svg");
     }
     &.--settings {
-      background-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
     }
     &.--documents {
-      background-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
     }
     &.--logout {
-      background-image: url("/assets/img/icons-left-sidebar/logout.svg");
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
     }
   }
 
@@ -278,11 +301,6 @@
       margin-right: 6px;
       background-image: url("/assets/img/icons-left-sidebar/submenu-add-folder.svg");
     }
-  }
-
-  &__divider {
-    margin: 8px;
-    border-color: rgba(255, 255, 255, 0.08);
   }
 
   &__menu-expand {
@@ -316,11 +334,16 @@
     display: flex;
     padding: 6px 8px;
     cursor: pointer;
-    @include body-m;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
     border-radius: 6px;
-    color: $white;
+    color: $gray-300;
     align-items: center;
     position: relative;
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
     @media (max-width: 767px) {
       margin-bottom: 8px;
     }
@@ -337,19 +360,14 @@
       padding-right: 24px;
     }
     &.--active {
-      color: $primary-1;
-      background-color: darken($primary-2, 5%);
+      color: $white;
+      background-color: $gray-700;
+      margin-left: 8px;
       a {
-        color: $primary-1;
+        color: $white;
       }
-      .app-left-panel__menu-expand-count {
-        color: $primary-1;
-      }
-    }
-    &:hover {
-      color: $primary-1;
-      a {
-        color: $primary-1;
+      .icon__menu--submenu {
+        background-color: $white;
       }
       .app-left-panel__menu-expand-count {
         color: $primary-1;
@@ -375,6 +393,10 @@
 .app-left-panel.--mini {
   width: $left-panel-mini-width;
 
+  .icon__quicktech-logo-mini {
+    opacity: 0;
+  }
+
   .app-left-panel {
     &__header {
       padding: 24px 16px;
@@ -389,6 +411,7 @@
     }
 
     &__header-resize-btn {
+      left: 24px;
       transform: rotate(180deg);
     }
 

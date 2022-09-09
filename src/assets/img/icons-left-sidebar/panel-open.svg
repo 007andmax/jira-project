@@ -1,12 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g stroke="#919EAB">
-            <g>
-                <path d="M5 11L3 13 1 11" transform="translate(-216 -28) translate(216 28) rotate(90 3 12)"/>
-                <g>
-                    <path d="M0 .5L12 .5M0 4.5L12 4.5M0 8.5L12 8.5" transform="translate(-216 -28) translate(216 28) translate(8 7.5)"/>
-                </g>
-            </g>
-        </g>
-    </g>
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M16.6666 5H10.8333" stroke="#98A2B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16.6667 10H9.16675" stroke="#98A2B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16.6666 15H10.8333" stroke="#98A2B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6.66659 6.66667L3.33325 10L6.66659 13.3333" stroke="#98A2B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

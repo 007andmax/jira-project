@@ -70,6 +70,83 @@
   &__menu-white {
     background-image: url("/assets/img/icons/menu-white.svg");
   }
+  &__menu-email-settings {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
+  }
+  &__menu-email-template {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
+  }
+  &__menu-tags {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
+  }
+  &__menu-my-profile-setting {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
+  }
+  &__menu-crm-settings {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
+  }
+  &__menu-commissions {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
+  }
+  &__menu-company {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+  }
+  &__menu-products {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+  }
+  &__menu-tickets {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+  }
+  &__menu-marketing {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+  }
+  &__menu-users {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+  }
   &__tickets-gray {
     background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
@@ -356,6 +433,9 @@
   }
   &__add {
     background-image: url("/assets/img/device/add.svg");
+  }
+  &__quicktech-logo-mini {
+    background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
   }
   &__add-product {
     background-image: url("/assets/img/icons/add-product.svg");

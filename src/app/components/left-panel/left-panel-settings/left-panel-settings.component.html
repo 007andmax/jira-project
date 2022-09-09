@@ -14,12 +14,14 @@
         (click)="goToState('invoice-ticket-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Accounting
     </li>
     <li
         [ngClass]="{'--active':activePage === 'commission-component'}"
         (click)="goToState('commission-component')"
     >
+        <div class="icon__menu--submenu icon__menu-commissions qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Commissions
     </li>
     <li
@@ -27,6 +29,7 @@
         (click)="goToState('company-profile-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-company qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Company Profile
     </li>
     <li
@@ -34,6 +37,7 @@
         (click)="goToState('crm-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         CRM Settings
     </li>
     <li
@@ -41,6 +45,7 @@
         (click)="goToState('email-setting-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-email-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Email Settings
     </li>
     <li
@@ -48,12 +53,14 @@
         (click)="goToState('email-templete-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-email-template qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Email Templetes
     </li>
     <li
         [ngClass]="{'--active':activePage === 'integrations-component'}"
         (click)="goToState('integrations-component')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Integrations
     </li>
     <li
@@ -61,18 +68,21 @@
         (click)="goToState('tech-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Manage Tech Users
     </li>
     <li
         [ngClass]="{'--active':activePage === 'marketing-email'}"
         (click)="goToState('marketing-email')"
     >
+        <div class="icon__menu--submenu icon__menu-marketing qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Marketing Email
     </li>
     <li
         [ngClass]="{'--active':activePage === 'myprofile-component'}"
         (click)="goToState('myprofile-component')"
     >
+        <div class="icon__menu--submenu icon__menu-my-profile-setting qt-sz-20 qt-bg-contain qt-mr-8"></div>
         My Profile Settings
     </li>
     <li
@@ -80,6 +90,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
         (click)="goToState('permission-manage-component')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Permission Management
     </li>
     <li
@@ -87,12 +98,14 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PRODUCT_CATEGORY_SETTINGS')"
         (click)="goToState('products-settings')"
     >
+        <div class="icon__menu--submenu icon__menu-products qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Products
     </li>
     <li
         [ngClass]="{'--active':activePage === 'subscription-component'}"
         (click)="goToState('subscription-component')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Subscription
     </li>
     <li
@@ -100,6 +113,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
         (click)="goToState('manage-tags-component')"
     >
+        <div class="icon__menu--submenu icon__menu-tags qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Tags
     </li>
     <li
@@ -107,6 +121,7 @@
         (click)="goToState('taxes-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAXES_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Taxes
     </li>
     <li
@@ -114,6 +129,7 @@
         (click)="goToState('ticket-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-tickets qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Ticket Settings
     </li>
 </ul>
