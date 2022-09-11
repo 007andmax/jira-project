@@ -6,7 +6,7 @@
   top: 0;
   right: 0;
   height: $header-height;
-  border-bottom: 1px solid $gray-300--old;
+  border-bottom: 1px solid $gray-200;
   background-color: $white;
   width: calc(100% - #{$left-panel-width});
   transition: width 300ms;
@@ -25,7 +25,7 @@
   &__left-side {
     display: flex;
     align-items: center;
-    padding: 12px 24px;
+    padding: 13px 24px 13px 32px;
   }
 
   app-global-search {
@@ -39,8 +39,8 @@
 
   &__add-btn {
     margin-right: 16px;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 35px;
     background-color: $primary-1;
     border-radius: 50%;
     cursor: pointer;
@@ -76,48 +76,58 @@
   &__account-info {
     width: fit-content;
     display: flex;
-    border-left: 1px solid$gray-300--old;
-    padding: 12px 24px 12px 12px;
+    padding: 12px 36px 12px 0;
   }
 
-  &__account-info-menu {
-    width: 20px;
-    height: 20px;
+  &__account-info-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: $purple-500;
     border-radius: 50%;
-    border: 1px solid $gray-500--old;
-    margin-left: 8px;
-    display: inline-block;
-    background-repeat: no-repeat;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 10px;
+    color: $white;
+    margin-right: 4px;
+  }
+
+  &__account-info-menu-arrow {
+    width: 14px;
+    height: 14px;
     background-position: center;
-    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
-  &__account-info-company-name {
-    color: $gray-800--old;
-    font-size: 13px;
-    line-height: 1.54;
-    margin-bottom: 2px;
-    display: inline-block;
-    white-space: nowrap;
-   font-weight: 600;
-  }
+  //&__account-info-company-name {
+  //  color: $gray-800--old;
+  //  font-size: 13px;
+  //  line-height: 1.54;
+  //  margin-bottom: 2px;
+  //  display: inline-block;
+  //  white-space: nowrap;
+  // font-weight: 600;
+  //}
 
-  &__account-info-user-name {
-    color: $gray-600--old;
-    font-size: 12px;
-    line-height: 1.33;
-    text-align: right;
-    width: fit-content;
-    position: relative;
-    &::before {
-      content: '';
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: $success;
-      left: -10px;
-      top: calc(50% - 3px);
-    }
-  }
+  //&__account-info-user-name {
+  //  color: $gray-600--old;
+  //  font-size: 12px;
+  //  line-height: 1.33;
+  //  text-align: right;
+  //  width: fit-content;
+  //  position: relative;
+  //  &::before {
+  //    content: '';
+  //    position: absolute;
+  //    width: 6px;
+  //    height: 6px;
+  //    border-radius: 50%;
+  //    background-color: $success;
+  //    left: -10px;
+  //    top: calc(50% - 3px);
+  //  }
+  //}
 }

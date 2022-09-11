@@ -3,15 +3,17 @@
 .global-search {
   &__input {
     width: 100%;
-    height: 40px;
+    max-width: 320px;
+    height: 38px;
     border-radius: 6px;
-    background-color: $gray-200--old;
-    padding: 10px 20px 10px 36px;
-    border: none;
-    font-size: 13px;
+    color: $gray-900;
+    border: 1px solid $gray-200;
+    padding: 10px 20px 10px 40px;
+    font-size: 14px;
+    line-height: 17px;
     &::placeholder {
-      font-size: 13px;
-      color: $gray-600--old;
+      font-size: inherit;
+      color: $gray-400;
     }
   }
 
