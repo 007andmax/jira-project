@@ -3,6 +3,103 @@
 /*** Angular one css conflcit resolved ***/
 
 body {
+  &.page-settings {
+    .main-container {
+      padding-top: 92px;
+    }
+
+    .heading h5 {
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 600;
+      color: $gray-900;
+      margin: 0 32px 18px;
+    }
+
+    .nav-tabs {
+      padding: 0 32px;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0 0 17px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 17px;
+      color: $gray-700;
+      &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        border-bottom: 2px solid transparent;
+        border-radius: 3px;
+        transition: all 0.4s ease;
+      }
+      &:hover,
+      &.active {
+        color: $blue-light-600;
+        background-color: transparent;
+        border-color: transparent;
+        &::after {
+          border-color: $blue-light-600;
+        }
+      }
+    }
+
+    .nav-item {
+      &:not(:last-child) {
+        margin: 0 24px 0 0;
+      }
+    }
+
+    .tab-pane {
+      margin: 32px 32px 0;
+      border: 1px solid $gray-200;
+      border-radius: 8px;
+    }
+    .tab-pane__header {
+      padding: 20px 24px;
+      border-bottom: 1px solid $gray-200;
+    }
+    .tab-pane__header-title {
+      font-size: 16px;
+      line-height: 19px;
+      color: $gray-900;
+      font-weight: 600;
+    }
+
+    .tab-pane__subtitle {
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 500;
+      color: $gray-900;
+      flex: 0 0 344px;
+    }
+
+    .tab-pane__row {
+      flex: 1 0 calc(100% - 344px);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid $gray-200;
+    }
+    .tab-pane-input {
+      &__row {
+        flex: 1 0 calc(100% - 344px);
+        display: flex;
+        align-items: center;
+      }
+      &__item {
+        flex: 1 1 50%;
+      }
+    }
+
+  }
+}
+
+body {
     padding: 0;
     margin: 0;
     @include body-font;

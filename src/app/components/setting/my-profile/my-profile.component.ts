@@ -11,14 +11,16 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   constructor(private settingStateService: SettingStateService) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
+    // $('body').addClass('ng7');
     $('body').removeClass('backMenu');
     $(".loading").css({ "top": "100px", "bottom": "unset" });
     this.settingStateService.setComponentName('MyProfileComponent');
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
+    // $('body').removeClass('ng7');
     $(".loading").css({ "top": "-53px", "bottom": "0" });
   }
 
