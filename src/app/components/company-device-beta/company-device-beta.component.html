@@ -222,17 +222,26 @@
                                 </div>
                             </td>
                             <td class="company-devices-table__logged-user">
-                                <div class="qt-df qt-fd-c">
-                                    <span
+                                <!-- <div class="qt-df qt-fd-c"> -->
+                                <div class="qt-df qt-fd-c" *ngIf="asset.online">
+                                    <!-- <span
                                         class="logged-name qt-ff-gm"
                                         [textContent]="asset.CurrentUser || ''"
-                                    ></span>
-                                    <span
+                                    ></span> -->
+                                    <span class="logged-name qt-ff-gm"
+                                    [textContent]="asset.userName || ''"></span>
+                                    <!-- <span
                                         class="logged-time"
-                                        *ngIf="asset.IdelTime"
+                                        *ngIf="asset.idle"
                                     >
                                         Idle:
-                                        <span>{{ asset.IdelTime }}</span>
+                                        <span>{{ asset.idle }}</span>
+                                    </span> -->
+                                    <span
+                                        class="logged-time"                                        
+                                    >
+                                        Idle:
+                                        <span>{{ asset.idle }}</span>
                                     </span>
                                 </div>
                             </td>

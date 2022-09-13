@@ -19,6 +19,7 @@ import { DatePickerComponent } from "../shared/date-picker/date-picker.component
 import { CommonHttpServices } from "../device/_services/common_http.service";
 import { ExcelService } from "../device/_services/download_csv.service";
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
+import { DevicesStateService } from "src/app/states/devices/devices-state.service";
 
 @Component({
   selector: "app-company-device-beta",
@@ -137,7 +138,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
-  IsCurrentConfigLoading: boolean = false;
+  IsCurrentConfigLoading: boolean = false;  
+  devices:any[] = [];  
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -154,20 +156,21 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private excelService: ExcelService,
     public draftEmailStateService: DraftEmailStateService,
+    private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {            
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');    
     this.companiesState.onInit();
-    this.clientName = "All Companies";
+    this.devicesStateService.onInit();    
+    this.clientName = "All Companies";    
     this.companyId = this.activateRoute.snapshot.params["id"];
-    let id = this.activateRoute.snapshot.params['id'];
-    if (id) this.companiesStateService.setCompanyRoutingId(id);
-    
-
+    let id = this.activateRoute.snapshot.params['id']; 
+    this.getAlldevicedata(this.activateRoute.snapshot.params['id']);       
+    if (id) this.companiesStateService.setCompanyRoutingId(id);    
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
-    });
+    });    
     let company = this.companiesStateService.getCurrentCompany();
     if (company) {
       this.currentCompany = company;
@@ -199,14 +202,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {      
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);      
-    });
-  }
+    });    
+
+    
+  }  
 
   getCountSelected() {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  setPreviewDataDevice() {
+  setPreviewDataDevice() {           
     this.AssetDetail();
     this.CurrentUser();
   }
@@ -251,7 +256,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  AssetDetail() {
+  AssetDetail() {           
     this.operatingSystem = [];
     if (this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -259,7 +264,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {                       
       if (!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList = [];
@@ -268,13 +273,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
           this.cd.detectChanges();
         }
         return;
-      }
-      this.assetList = resp;
-      this.asset = resp[0];
-      this.operatingSystemWindow(resp[0].ID)
-      this.HardwareTypeList(resp[0].TechCompanyGuid);
-      this.assetList.forEach((element, index) => {
-        element.online = false;
+      }     
+      if(this.devices.length>0)
+      {
+        this.assetList = resp;
+        this.asset = resp[0];
+        this.getDevices(this.assetList);
+        this.operatingSystemWindow(resp[0].ID)
+        this.HardwareTypeList(resp[0].TechCompanyGuid);
+        this.assetList.forEach((element, index) => {
+        //element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         if (element.AgentVersion != null) {
@@ -282,6 +290,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
         }
         this.getAssetTagDropDownDetail();
       });
+      }  
+      else
+      {
+        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+      }     
     });
     this.showPreloader = false;
   }
@@ -298,11 +311,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
           if (asset) {
             this.kafkaMessage = JSON.parse(resp[0].Value);
-            asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-            if (this.kafkaMessage.IdleTime != null) {
-              let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              asset.IdelTime = Time[1] != "" ? Time[1] : "";
-            }
+            //asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+            // if (this.kafkaMessage.IdleTime != null) {
+            //   let Time = this.kafkaMessage.IdleTime.split("Idle for");
+            //   asset.IdelTime = Time[1] != "" ? Time[1] : "";
+            // }
             if (this.kafkaMessage.UpTime != "") {
               let result = this.kafkaMessage.UpTime.split(" ");
 
@@ -324,7 +337,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
               }
             }
           }
-          asset.online = true;
+          //asset.online = true;
         }
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
@@ -814,19 +827,27 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.onFilter('CompanyName');
       this.showPreloader = false;
       this.operatingSystem = [];
-      this.assetList = resp;
-      this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
-      this.HardwareTypeList(this.assetList[0].CompanyGuid)
+      if(this.devices.length>0)
+      {
+        this.assetList = resp;
+        this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
+        this.HardwareTypeList(this.assetList[0].CompanyGuid);
+        this.getDevices(this.assetList);
 
-      this.assetList.forEach((element, index) => {
-        element.online = false;
+        this.assetList.forEach((element, index) => {
+        //element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         if (element.AgentVersion != null) {
           this.GetDeviceListConfig(element.ID)
         }
-      });
-
+        });
+      }
+      else
+      {
+        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+      }
+      
       if (this.cd) {
         this.cd.detectChanges();
       }
@@ -1319,7 +1340,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.companiesStateService.setCompanyRoutingId(null);
-    this.kafkaStateService.onInstallWindowsUpdates.unsubscribe();
+    this.kafkaStateService.onInstallWindowsUpdates.unsubscribe();    
   }
 
   printPdf() {
@@ -1540,6 +1561,33 @@ export class CompanyDeviceBetaComponent implements OnInit {
       fileName: this.fileName,
       accountType: this.accountType
     });
+  }
+
+  getDevices(assetList)
+  {         
+      assetList.forEach((element,index)=>{      
+        element.online = false;
+        element.userName = "";
+        element.idle = 0;
+        let result = this.devices.find(x=>x.agentId === element.Guid);
+        if(result)
+        {   
+          assetList[index].online = result.online;
+          assetList[index].userName = result.userName;
+          assetList[index].idle = result.timing.idle;                                            
+        }
+       });                                    
+  }
+
+  getAlldevicedata(id){
+    this.devicesStateService.getOnDevices().subscribe(data => {                                         
+      if (!data[id]) return;
+      if (data[id].length) {
+        data[id].forEach(item => {                     
+          this.devices.push(item);
+        });  
+      }    
+    });    
   }
 }
 
