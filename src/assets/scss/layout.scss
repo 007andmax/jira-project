@@ -4,8 +4,12 @@
 
 body {
   &.page-settings {
+    .red-600 {
+      color: $red-600;
+    }
     .main-container {
       padding-top: 92px;
+      background-color: $white;
     }
 
     .heading h5 {
@@ -82,7 +86,8 @@ body {
       flex: 1 0 calc(100% - 344px);
       padding: 24px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
       border-bottom: 1px solid $gray-200;
     }
     .tab-pane-input {
@@ -90,12 +95,97 @@ body {
         flex: 1 0 calc(100% - 344px);
         display: flex;
         align-items: center;
-      }
-      &__item {
-        flex: 1 1 50%;
+        flex-wrap: wrap;
       }
     }
+    .qt-input-block {
+      flex: 1 1 calc(50% - 24px);
+      &-100 {
+        flex: 1 0 100%;
+      }
+      input {
+        padding: 11px 14px;
+        background-color: $white;
+        border: 1px solid $gray-200;
+        box-shadow: inset 0 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 6px;
+        color: $gray-900;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
 
+        &::placeholder {
+          color: $gray-400;
+        }
+
+        &:hover {
+          border-color: $gray-300;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $blue-light-600;
+        }
+      }
+
+      textarea {
+        padding: 11px 14px;
+        background-color: $white;
+        border: 1px solid $gray-200;
+        box-shadow: inset 0 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 6px;
+        color: $gray-900;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+
+        &::placeholder {
+          color: $gray-400;
+        }
+
+        &:hover {
+          border-color: $gray-300;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $blue-light-600;
+        }
+      }
+
+    }
+    .invalid-feedback {
+      margin-top: 8px;
+      color: $red-600;
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    .qt-input-prefix {
+      width: 110px;
+      background-color: transparent;
+      border-color: $gray-200;
+      color: $gray-900;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      border-radius: 8px 0 0 8px;
+      padding: 10px 12px;
+    }
+    .qt-button {
+      width: 100%;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 17px;
+      border-color: $gray-200;
+      border-radius: 8px;
+      &.--gray {
+        color: $gray-500;
+      }
+      &--red {
+        color: $red-600;
+      }
+    }
   }
 }
 

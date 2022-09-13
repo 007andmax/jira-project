@@ -58,53 +58,43 @@
       <div class="tab-pane__row">
         <label class="tab-pane__subtitle">First Name</label>
         <div class="tab-pane-input__row">
-          <input
-            type="text"
-            class="tab-pane-input__item qt-mr-24"
-            placeholder="Enter Your First Name"
-            formControlName="firstName"
-          >
-          <div
-            *ngIf="submitted && f.firstName.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.firstName.errors.required">Full Name is required</div>
-            <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
-            <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+          <div class="qt-input-block qt-mr-24">
+            <input
+              type="text"
+              placeholder="Enter Your First Name"
+              formControlName="firstName"
+            >
+            <div
+              *ngIf="submitted && f.firstName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.firstName.errors.required">Full Name is required</div>
+              <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
+              <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+            </div>
           </div>
-          <input
-            type="text"
-            class="tab-pane-input__item"
-            placeholder="Enter Your Last Name"
-          >
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <!-- <label>Your Full name</label> -->
-        <label>Last Name</label>
-        <div class="form-row">
-          <input
-            type="text"
-            class="form-input"
-            placeholder="Enter Your Last Name"
-            formControlName="lastName"
-          >
-          <div
-            *ngIf="submitted && f.lastName.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-            <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
-            <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+          <div class="qt-input-block">
+            <input
+              type="text"
+              placeholder="Enter Your Last Name"
+              formControlName="lastName"
+            >
+            <div
+              *ngIf="submitted && f.lastName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+              <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
+              <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="tab-pane__row">
-        <label>Email Address</label>
-        <div class="form-row">
+        <label class="tab-pane__subtitle">Email Address</label>
+        <div class="qt-input-block">
           <input
             type="email"
-            class="form-input"
             placeholder="Enter Your Email Address"
             (blur)="isEmailUnique()"
             formControlName="primaryEmail"
@@ -124,9 +114,9 @@
           </label>
         </div>
       </div>
-      <div class="f-col col-50">
-        <label>Role</label>
-        <div class="form-row">
+      <div class="tab-pane__row">
+        <label class="tab-pane__subtitle">Role</label>
+        <div class="qt-input-block">
           <app-drop-down
             #jobTitleDp
             [class]="['qt-select-input-40']"
@@ -140,76 +130,25 @@
           ></app-drop-down>
         </div>
       </div>
-      <div class="f-col col-50">
-        <label (click)="onAddPhone()">
-          Primary Phone Number
-          <a
-            *ngIf="!isAddPhone"
-            href="javascript:;"
-            class="static-link"
-          >
-            + Add Phone
-          </a>
-        </label>
-        <div class="form-row primary-phone">
+      <div class="tab-pane__row">
+        <label class="tab-pane__subtitle">Mailing Address</label>
+        <div class="qt-input-block">
           <input
-            type="text"
+            placeholder="search for location"
+            autocorrect="off"
+            autocapitalize="off"
             class="form-input"
-            placeholder="Primary Phone Number"
-            formControlName="primaryPhone"
-            [validation]="true"
-            [suffix]="suffix"
-            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-            [dropSpecialCharacters]="false"
-            (keyup)="phonehandle($event)"
+            spellcheck="off"
+            type="text"
+            #search
+            formControlName="mailingAddress"
           >
-          <select
-            class="cmn-select form-input"
-            formControlName="primaryPhoneType"
-          >
-            <option value="MOBILE">mobile</option>
-            <option value="OFFICE">office</option>
-            <option value="FAX">fax</option>
-          </select>
         </div>
       </div>
-      <div
-        class="f-col col-50"
-        *ngIf="isAddPhone"
-      >
-        <label>
-          Secondary Phone Number
-          <a
-            href="javascript:;"
-            class="static-link"
-            (click)="onAddPhone()"
-          >
-            Remove
-          </a>
-        </label>
-        <div class="form-row primary-phone">
-          <input
-            type="text"
-            class="form-input"
-            formControlName="secondaryPhone"
-            placeholder="Secondary Phone Number"
-            formControlName="secondaryPhone"
-          >
-          <select
-            class="cmn-select form-input"
-            formControlName="secondaryPhoneType"
-          >
-            <option value="MOBILE">mobile</option>
-            <option value="OFFICE">office</option>
-            <option value="FAX">fax</option>
-          </select>
-        </div>
-      </div>
-      <div class="mail-row">
-        <div class="f-col col-20">
-          <label>Suite Number</label>
-          <div class="form-row">
+      <div class="tab-pane__row">
+        <label class="tab-pane__subtitle">Suite Number & Zip Code</label>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block qt-mr-24">
             <input
               type="text"
               placeholder="123456"
@@ -217,25 +156,7 @@
               formControlName="suiteNumber"
             >
           </div>
-        </div>
-        <div class="f-col col-60">
-          <label>Mailing Address</label>
-          <div class="form-row">
-            <input
-              placeholder="search for location"
-              autocorrect="off"
-              autocapitalize="off"
-              class="form-input"
-              spellcheck="off"
-              type="text"
-              #search
-              formControlName="mailingAddress"
-            >
-          </div>
-        </div>
-        <div class="f-col col-20">
-          <label>Zip</label>
-          <div class="form-row">
+          <div class="qt-input-block">
             <input
               type="text"
               placeholder="123456"
@@ -245,14 +166,89 @@
           </div>
         </div>
       </div>
-      <div class="f-col col-100">
-        <label>About Me</label>
-        <div class="form-row">
-                <textarea
-                  placeholder="Write About Your Self"
-                  class="form-input"
-                  formControlName="aboutMe"
-                ></textarea>
+      <div class="tab-pane__row">
+        <label class="tab-pane__subtitle">Primary Phone Number</label>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block qt-input-block-100">
+            <div class="qt-df">
+              <select
+                class="cmn-select form-input qt-input-prefix"
+                formControlName="primaryPhoneType"
+              >
+                <option value="MOBILE">mobile</option>
+                <option value="OFFICE">office</option>
+                <option value="FAX">fax</option>
+              </select>
+              <input
+                type="text"
+                class="form-input qt-input-prepend"
+                placeholder="Primary Phone Number"
+                formControlName="primaryPhone"
+                [validation]="true"
+                [suffix]="suffix"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+                (keyup)="phonehandle($event)"
+              >
+            </div>
+          </div>
+          <div class="qt-input-block-100 qt-mt-16">
+            <div
+              (click)="onAddPhone()"
+              *ngIf="!isAddPhone"
+              href="javascript:;"
+              class="qt-button --gray qt-jc-c"
+            >
+              + Add Phone
+            </div>
+          </div>
+          <div
+            class="qt-input-block-100"
+            *ngIf="isAddPhone"
+          >
+            <div class="qt-input-block qt-input-block-100">
+              <div class="qt-df">
+                <select
+                  class="cmn-select form-input qt-input-prefix"
+                  formControlName="secondaryPhoneType"
+                >
+                  <option value="MOBILE">mobile</option>
+                  <option value="OFFICE">office</option>
+                  <option value="FAX">fax</option>
+                </select>
+                <input
+                  type="text"
+                  class="form-input qt-input-prepend"
+                  formControlName="secondaryPhone"
+                  placeholder="Secondary Phone Number"
+                  formControlName="secondaryPhone"
+                >
+              </div>
+            </div>
+            <div class="qt-input-block-100 qt-mt-16">
+              <div
+                href="javascript:;"
+                class="qt-button --gray qt-jc-c"
+                (click)="onAddPhone()"
+              >
+                <div class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8 pointer"></div>
+                <div class="red-600">Remove</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane__row">
+        <label class="tab-pane__subtitle">About Me</label>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <textarea
+              placeholder="Write About Your Self"
+              class="form-input"
+              formControlName="aboutMe"
+            ></textarea>
+          </div>
         </div>
       </div>
       <input
