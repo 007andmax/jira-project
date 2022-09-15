@@ -305,7 +305,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -323,16 +323,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
                 let Sec = result[6] + ' ' + result[7];
                 asset.UpTime = Sec;
               }
-              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                let Minutes = result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {                
+                let Minutes = result[4] + ' ' + result[5] + ' ';
                 asset.UpTime = Minutes;
               }
-              else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+              else if (result[0] == "0" && result[2] != "0") {                
+                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
                 asset.UpTime = Hours;
               }
-              else {
-                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+              else {                
+                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
                 asset.UpTime = Days;
               }
             }
@@ -1326,13 +1326,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
       });
   }
 
-  updateSerialNo() {
+  updateSerialNo() {    
     this.operatingSystem.SerialNumber = this.serialnumber;
     this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
-      (resp) => {
+      (resp) => {        
         this.toastr.success("Asset info save successfully.");
       },
-      (error) => {
+      (error) => {        
         this.toastr.error("Something went wrong please try again.");
       }
     );
