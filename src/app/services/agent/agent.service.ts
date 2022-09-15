@@ -683,6 +683,16 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
+  public deleteAssetSearch(data) {
+    const httpOptions = {
+      headers: this.getHeader(),
+      body: this.encrypt128(this.key, JSON.stringify(data)),
+    };
+    return this.http
+      .delete(`${this.apiAgent}agent/AssetSearch`, httpOptions)
+      .pipe(map((data: string) => data));
+  }
+
   public getSoftwareListByAssetId(asset_id) {
     return this.http
       .get(`${this.apiAgent}agent/SoftwareItem/${asset_id}`, {

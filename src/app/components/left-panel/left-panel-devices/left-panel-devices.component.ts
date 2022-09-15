@@ -71,7 +71,7 @@ export class LeftPanelDevicesComponent implements OnInit {
   }
   getCurrentCompany(data) {        
     this.company = data;
-    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {           
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {                 
       this.searches = res;
     });
   }
@@ -180,5 +180,17 @@ export class LeftPanelDevicesComponent implements OnInit {
       this.toggleTypeCompanies = false;
       this.toggleTypeReport = false;       
     }    
+  }
+
+  deletePinnedSearch(data){    
+    const pinnedSearch: any = {
+      ID: data.ID,
+      TechCompanyGuid: data.TechCompanyGuid,
+      IsActive: true,
+      Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
+    };    
+    this.agentService.deleteAssetSearch(pinnedSearch).subscribe((res) => { 
+      this.getCurrentCompany(this.company);             
+    });
   }
 }

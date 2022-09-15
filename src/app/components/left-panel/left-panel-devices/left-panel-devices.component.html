@@ -30,15 +30,19 @@
     <ul
     class="devices-categories"
     *ngIf="toggleTypePinnedSearch"
->
-    <li
-        *ngFor="let item of searches"
-        [ngClass]="{'--active':currentActivePinnedPageChild === item.ID}"
-         class="menu-item-inner"         
-        (click)="onFilter1('Dashboard', item)"
-    >
-        {{item.Name}}
-    </li>
+>    
+    <span *ngFor="let item of searches">                                       
+            <li       
+                [ngClass]="{'--active':currentActivePinnedPageChild === item.ID}"
+                 class="menu-item-inner"         
+                (click)="onFilter1('Dashboard', item)"
+            >
+            <i
+            class="qt-sz-16 .qt-ai-c devices-ping-remove" (click)="deletePinnedSearch(item)"      
+            ></i>                              
+                {{item.Name}}         
+            </li>                                                                   
+    </span>          
 </ul>
     
     <li [ngClass]="{'--active':currentActivePage === 'devicesCompanies'}" (click)="toggleTypeCompanies = !toggleTypeCompanies;pagesActive('devicesCompanies')">    
