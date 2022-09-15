@@ -481,17 +481,6 @@
   &__quicktech-logo-mini {
     background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
   }
-  &__add-plus, // TODO need replace plus icons for this icon
-  &__add-plus-white {
-      background-color: $gray-500;
-      -webkit-mask-position: center;
-      mask-position: center;
-      -webkit-mask-image: url("/assets/img/icons/add-plus.svg");
-      mask-image: url("/assets/img/icons/add-plus.svg");
-  }
-  &__add-plus-white {
-    background-color: $white;
-  }
   &__add-product {
     background-image: url("/assets/img/icons/add-product.svg");
   }

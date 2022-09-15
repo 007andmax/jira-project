@@ -5,7 +5,7 @@
   <div class="tab-pane__body">
     <form [formGroup]="profileForm">
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">First Name</label>
+        <div class="tab-pane__subtitle">First Name</div>
         <div class="tab-pane-input__row">
           <div class="qt-input-block qt-mr-24">
             <input
@@ -40,47 +40,51 @@
         </div>
       </div>
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">Email Address</label>
-        <div class="qt-input-block">
-          <input
-            type="email"
-            placeholder="Enter Your Email Address"
-            (blur)="isEmailUnique()"
-            formControlName="primaryEmail"
-          >
-          <div
-            *ngIf="submitted && f.primaryEmail.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
-            <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">Email must be a valid email address</div>
+        <div class="tab-pane__subtitle">Email Address</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <input
+              type="email"
+              placeholder="Enter Your Email Address"
+              (blur)="isEmailUnique()"
+              formControlName="primaryEmail"
+            >
+            <div
+              *ngIf="submitted && f.primaryEmail.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
+              <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">Email must be a valid email address</div>
+            </div>
+            <label
+              *ngIf="!uniqueEmail"
+              class="invalid-feedback"
+            >
+              This email already occupied.
+            </label>
           </div>
-          <label
-            *ngIf="!uniqueEmail"
-            class="invalid-feedback"
-          >
-            This email already occupied.
-          </label>
         </div>
       </div>
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">Role</label>
-        <div class="qt-input-block">
-          <app-drop-down
-            #jobTitleDp
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Your Role'"
-            [editItem]="selectedJobTitle"
-            [list]="jobTitleList"
-            [field]="'name'"
-            [search]="true"
-            [change]="true"
-            (onSelectedItem)="onSelectRole($event)"
-          ></app-drop-down>
+        <div class="tab-pane__subtitle">Role</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <app-drop-down
+              #jobTitleDp
+              [class]="['qt-select-input-40']"
+              [placeholder]="'Select Your Role'"
+              [editItem]="selectedJobTitle"
+              [list]="jobTitleList"
+              [field]="'name'"
+              [search]="true"
+              [change]="true"
+              (onSelectedItem)="onSelectRole($event)"
+            ></app-drop-down>
+          </div>
         </div>
       </div>
       <div class="dp-area tab-pane__row">
-        <label class="tab-pane__subtitle">Your photo</label>
+        <div class="tab-pane__subtitle">Your photo</div>
         <div class="tab-pane-input__row">
           <span
             class="dp"
@@ -133,22 +137,24 @@
         </div>
       </div>
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">Mailing Address</label>
-        <div class="qt-input-block">
-          <input
-            placeholder="search for location"
-            autocorrect="off"
-            autocapitalize="off"
-            class="form-input"
-            spellcheck="off"
-            type="text"
-            #search
-            formControlName="mailingAddress"
-          >
+        <div class="tab-pane__subtitle">Mailing Address</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <input
+              placeholder="search for location"
+              autocorrect="off"
+              autocapitalize="off"
+              class="form-input"
+              spellcheck="off"
+              type="text"
+              #search
+              formControlName="mailingAddress"
+            >
+          </div>
         </div>
       </div>
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">Suite Number & Zip Code</label>
+        <div class="tab-pane__subtitle">Suite Number & Zip Code</div>
         <div class="tab-pane-input__row">
           <div class="qt-input-block qt-mr-24">
             <input
@@ -169,7 +175,7 @@
         </div>
       </div>
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">Primary Phone Number</label>
+        <div class="tab-pane__subtitle">Primary Phone Number</div>
         <div class="tab-pane-input__row">
           <div class="qt-input-block qt-input-block-100">
             <div class="qt-df">
@@ -200,9 +206,9 @@
               (click)="onAddPhone()"
               *ngIf="!isAddPhone"
               href="javascript:;"
-              class="qt-button --gray qt-jc-c"
+              class="qt-button --gray qt-jc-c qt-w100"
             >
-              <span class="icon__add-plus qt-sz-20 qt-bg-contain qt-dib qt-mr-8"></span>
+              <span class="icon__add-grey qt-sz-20 qt-bg-contain qt-dib qt-mr-8"></span>
               Add Phone
             </div>
           </div>
@@ -232,7 +238,7 @@
             <div class="qt-input-block-100 qt-mt-16">
               <div
                 href="javascript:;"
-                class="qt-button --gray qt-jc-c"
+                class="qt-button --gray qt-jc-c qt-w100"
                 (click)="onAddPhone()"
               >
                 <div class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8 pointer"></div>
@@ -243,7 +249,7 @@
         </div>
       </div>
       <div class="tab-pane__row">
-        <label class="tab-pane__subtitle">About Me</label>
+        <div class="tab-pane__subtitle">About Me</div>
         <div class="tab-pane-input__row">
           <div class="qt-input-block">
             <textarea
@@ -251,7 +257,7 @@
               class="qt-textarea"
               formControlName="aboutMe"
             ></textarea>
-            <div class="textarea-info">Maximum 1024 characters</div>
+            <div class="qt-input-info-help">Maximum 1024 characters</div>
           </div>
         </div>
       </div>

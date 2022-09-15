@@ -119,20 +119,6 @@ body {
       border-radius: 8px 0 0 8px;
       padding: 10px 12px;
     }
-    .qt-button {
-      width: 100%;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 17px;
-      border-color: $gray-200;
-      border-radius: 8px;
-      &.--gray {
-        color: $gray-500;
-      }
-      &--red {
-        color: $red-600;
-      }
-    }
 
     .dp {
       width: 64px;
@@ -162,12 +148,85 @@ body {
       line-height: 15px;
       color: $gray-400;
     }
+
+
+    .authentication-aside__subheader {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid $gray-200;
+
+      &-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: $gray-700;
+        font-weight: 600;
+        line-height: 17px;
+        padding-bottom: 14px;
+        &::after {
+          position: absolute;
+          content: "";
+          bottom: -1px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: transparent;
+          border-radius: 3px;
+        }
+
+        &.--active {
+          color: $blue-light-600;
+          &::after {
+            background-color: $blue-light-600;
+          }
+
+          .authentication-aside__subheader-item-circle {
+            background-color: $blue-light-600;
+            color: $white;
+          }
+        }
+
+        &-circle {
+          width: 20px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          line-height: 15px;
+          background-color: $gray-100;
+          color: $gray-500;
+          margin-right: 8px;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .authentication-aside__body {
+      &-title {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 600;
+        color: $gray-900;
+        margin-bottom: 8px;
+      }
+
+      &-text {
+        line-height: 17px;
+        color: $gray-500;
+      }
+    }
   }
-  .textarea-info {
+  .qt-input-info-help {
     font-size: 12px;
     line-height: 15px;
     color: $gray-500;
     margin-top: 8px;
+  }
+  .qt-input-help-text {
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-700;
   }
 }
 
