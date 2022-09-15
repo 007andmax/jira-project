@@ -730,7 +730,7 @@ documents-edit-info {
   }
   .service-tab-content,
   .product-tab-content {
-    .icon__remove {
+    .icon__new-remove {
       top: 43px;
       right: -18px;
       cursor: pointer;
@@ -4500,14 +4500,14 @@ app-ticket-edit-aside-devices {
   }
 }
 
-.qt-input-40,
-.qt-select-input-40 input {
-  height: 40px !important;
-  padding: 0 12px !important;
-  font-size: 13px !important;
-  border: 1px solid $gray-500--old !important;
-  border-radius: 4px !important;
-}
+//.qt-input-40, // TODO check this style
+//.qt-select-input-40 input {
+//  height: 40px !important;
+//  padding: 0 12px !important;
+//  font-size: 13px !important;
+//  border: 1px solid $gray-500--old !important;
+//  border-radius: 4px !important;
+//}
 
 .qt-tooltip-error {
   z-index: 1;

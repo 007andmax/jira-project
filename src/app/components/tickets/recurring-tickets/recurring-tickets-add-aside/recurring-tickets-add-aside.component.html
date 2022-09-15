@@ -129,7 +129,7 @@
                             (selectedProductItem)="selectProduct($event,i)"
                         ></app-product-list>
                         <i
-                            class="icon__remove icn-16"
+                            class="icon__new-remove icn-16"
                             *ngIf="products.length > 1"
                             (click)="removeProduct(i)"
                         ></i>
@@ -242,7 +242,7 @@
                             [editItem]="service.duration"
                         ></app-duration>
                         <i
-                            class="icon__remove icn-16"
+                            class="icon__new-remove icn-16"
                             *ngIf="services.length > 1"
                             (click)="removeService(i)"
                         ></i>

@@ -13,7 +13,7 @@
                         class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
                         (click)="removeCategoriesStatus()"
                     >
-                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div class="icon__new-remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
                         <div>Delete</div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                                                 (click)="removeCategoryProduct(item)"
                                                 *ngIf="item.productsAmount === 0"
                                             >
-                                                <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                                                <div class="icon__new-remove qt-sz-16 qt-bg-contain"></div>
                                             </a>
                                             <app-dynamic-tooltip
                                                 [content]="'You cannot delete category with existing products'"
@@ -163,7 +163,7 @@
                                                 class="remove"
                                                 *ngIf="item.productsAmount > 0"
                                             >
-                                                <div class="icon__remove-disabled qt-sz-16 qt-bg-contain"></div>
+                                                <div class="icon__new-remove qt-sz-16 qt-bg-contain"></div>
                                             </a>
                                         </td>
                                     </tr>

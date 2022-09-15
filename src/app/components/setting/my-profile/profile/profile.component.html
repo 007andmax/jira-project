@@ -3,57 +3,6 @@
     <div class="tab-pane__header-title">Personal Info</div>
   </div>
   <div class="tab-pane__body">
-<!--    <div class="dp-area">-->
-<!--      <span-->
-<!--        class="dp"-->
-<!--        *ngIf="imageSrc"-->
-<!--      >-->
-<!--          <img-->
-<!--            [src]="imageSrc"-->
-<!--            alt="user"-->
-<!--          >-->
-<!--      </span>-->
-<!--      <span-->
-<!--        class="dp"-->
-<!--        *ngIf="!imageSrc"-->
-<!--      >-->
-<!--          <img-->
-<!--            src="html/assets/img/icons/upload-photo.svg"-->
-<!--            alt="user"-->
-<!--          >-->
-<!--      </span>-->
-<!--      <div class="dp-info">-->
-<!--        <input-->
-<!--          type="file"-->
-<!--          id="profile-dp"-->
-<!--          (change)="onSelectFile($event)"-->
-<!--          style="display: none;"-->
-<!--        >-->
-<!--        <div class="static-link">-->
-<!--          <label-->
-<!--            class="innert-links"-->
-<!--            for="profile-dp"-->
-<!--          >-->
-<!--            {{ imageAvatar ? "Change Photo" : "Upload your photo" }}-->
-<!--          </label>-->
-<!--          <label-->
-<!--            for="profile-dp"-->
-<!--            *ngIf="imageAvatar"-->
-<!--            (click)="deleteAvatar()"-->
-<!--          >-->
-<!--            <a-->
-<!--              href="javascript:void(0)"-->
-<!--              restore-default-button-->
-<!--            >-->
-<!--              Remove Photo-->
-<!--            </a>-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        <span>-->
-<!--              Photos help your teammates recognize you in Quicktech-->
-<!--          </span>-->
-<!--      </div>-->
-<!--    </div>-->
     <form [formGroup]="profileForm">
       <div class="tab-pane__row">
         <label class="tab-pane__subtitle">First Name</label>
@@ -130,6 +79,59 @@
           ></app-drop-down>
         </div>
       </div>
+      <div class="dp-area tab-pane__row">
+        <label class="tab-pane__subtitle">Your photo</label>
+        <div class="tab-pane-input__row">
+          <span
+            class="dp"
+            *ngIf="imageSrc"
+          >
+            <img
+              [src]="imageSrc"
+              alt="user"
+            >
+          </span>
+          <span
+            class="dp"
+            *ngIf="!imageSrc"
+          >
+          <img
+            src="html/assets/img/icons/user-avatar.svg"
+            alt="user"
+          >
+          </span>
+          <div class="dp-info">
+            <input
+              type="file"
+              id="profile-dp"
+              (change)="onSelectFile($event)"
+              style="display: none;"
+            >
+            <div class="static-link">
+              <label
+                class="qt-button --gray qt-mr-12"
+                for="profile-dp"
+              >
+                {{ imageAvatar ? "Change Photo" : "Upload Photo" }}
+              </label>
+              <label
+                for="profile-dp"
+                *ngIf="imageAvatar"
+                (click)="deleteAvatar()"
+              >
+                <a
+                  href="javascript:void(0)"
+                  restore-default-button
+                  class="qt-button --gray"
+                >
+                  <span class="qt-color-red-600">Remove</span>
+                </a>
+              </label>
+            </div>
+            <span class="dp-info-area">PNG, JPG or GIF (max. 2mb)</span>
+          </div>
+        </div>
+      </div>
       <div class="tab-pane__row">
         <label class="tab-pane__subtitle">Mailing Address</label>
         <div class="qt-input-block">
@@ -200,7 +202,8 @@
               href="javascript:;"
               class="qt-button --gray qt-jc-c"
             >
-              + Add Phone
+              <span class="icon__add-plus qt-sz-20 qt-bg-contain qt-dib qt-mr-8"></span>
+              Add Phone
             </div>
           </div>
           <div
@@ -233,7 +236,7 @@
                 (click)="onAddPhone()"
               >
                 <div class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8 pointer"></div>
-                <div class="red-600">Remove</div>
+                <div class="qt-color-red-600">Remove</div>
               </div>
             </div>
           </div>
@@ -245,9 +248,10 @@
           <div class="qt-input-block">
             <textarea
               placeholder="Write About Your Self"
-              class="form-input"
+              class="qt-textarea"
               formControlName="aboutMe"
             ></textarea>
+            <div class="textarea-info">Maximum 1024 characters</div>
           </div>
         </div>
       </div>

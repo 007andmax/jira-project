@@ -203,11 +203,6 @@
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
   }
-  &__remove-disabled {
-    background-color: $gray-600--old;
-    -webkit-mask-image: url("/assets/img/icons/remove.svg");
-    mask-image: url("/assets/img/icons/remove.svg");
-  }
   &__support-page {
     background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/support-page.svg");
@@ -254,10 +249,22 @@
     -webkit-mask-image: url("/assets/img/icons/category-more.svg");
     mask-image: url("/assets/img/icons/category-more.svg");
   }
-  &__remove-blue {
-    background-color: $primary-1;
-    -webkit-mask-image: url("/assets/img/icons/remove.svg");
-    mask-image: url("/assets/img/icons/remove.svg");
+  &__new-remove,
+  &__new-remove-red,
+  &__new-remove-blue {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/new-remove.svg");
+    mask-image: url("/assets/img/icons/new-remove.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+  &__new-remove-red {
+    background-color: $red-600;
+  }
+  &__new-remove-blue {
+    background-color: $blue-light-600;
   }
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");
@@ -456,9 +463,6 @@
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
   }
-  &__remove {
-    background-image: url("/assets/img/icons/remove.svg");
-  }
   &__restart {
     background-image: url("/assets/img/icons/restart.svg");
   }
@@ -476,6 +480,17 @@
   }
   &__quicktech-logo-mini {
     background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
+  }
+  &__add-plus, // TODO need replace plus icons for this icon
+  &__add-plus-white {
+      background-color: $gray-500;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons/add-plus.svg");
+      mask-image: url("/assets/img/icons/add-plus.svg");
+  }
+  &__add-plus-white {
+    background-color: $white;
   }
   &__add-product {
     background-image: url("/assets/img/icons/add-product.svg");
@@ -705,12 +720,6 @@
   }
   &__updates {
     background-image: url("/assets/img/icons/updates.svg");
-  }
-  &__remove-blue {
-    background-image: url("/assets/img/icons/remove-blue.svg");
-  }
-  &__new-remove-red {
-    background-image: url("/assets/img/icons/new-remove-red.svg");
   }
   &__restart-blue {
     background-image: url("/assets/img/icons/restart-blue.svg");
