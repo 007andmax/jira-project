@@ -34,7 +34,7 @@ export class PaymentsHeaderComponent implements OnInit {
   export(type) {
     return new Promise((resolve, reject) => {
       let invoices = this.paymentsStateService.getPayments().map(item => item.getDataForExportPDF());
-      this.paymentsService.export(type, { invoicePaymentDtos: invoices }).subscribe((data: any) => {
+      this.paymentsService.export(type, { paymentViewDtos: invoices }).subscribe((data: any) => {
         resolve(data.url);
       })
     });
@@ -53,7 +53,7 @@ export class PaymentsHeaderComponent implements OnInit {
     })
     if (type == "CSV") {
       let invoices = this.paymentsStateService.getPayments().map(item => item.getDataForExportPDF());
-      this.reportsService.getCSV(`reports/payment/csv`, { invoicePaymentDtos: invoices }).subscribe((resp: any) => {
+      this.reportsService.getCSV(`reports/payment/csv`, { paymentViewDtos: invoices }).subscribe((resp: any) => {
         var blob = new Blob([resp]);
         var link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
