@@ -106,8 +106,9 @@ export class DropDownComponent implements OnInit {
     return `${(parseInt(position) / 2)}px`;
   }
 
-  public isSelected(id) {
-    return this.selectedItem && this.selectedItem.id == id;
+  public isSelected(item) {
+    if (this.field) return this.selectedItem && this.selectedItem[this.field] == item[this.field];
+    return this.selectedItem && this.selectedItem == item;
   }
 
   reduceItemName(item) {
