@@ -70,138 +70,110 @@
 <!--</div>-->
 
 <div class="qt-modal quote-email-modal">
-  <div class="qt-modal__header">
-    <div class="tab-pane__header-title qt-mb-24">Tow-Factor Authentication</div>
-    <div class="authentication-aside__subheader">
-      <div
-        class="authentication-aside__subheader-item --active pointer qt-mr-24"
-        (click)="tab = 'STEP-1'"
-      >
-        <span class="authentication-aside__subheader-item-circle">1</span>
-        Download App
+  <div class="authenticaton-tab">
+    <div class="authentication__content">
+      <div class="tab-pane__header-title qt-mb-24">Tow-Factor Authentication</div>
+      <div class="authentication-tab__subheader">
+        <div
+          class="authentication-tab__subheader-item --active pointer qt-mr-24"
+          (click)="tab = 'STEP-1'"
+        >
+          <span class="authentication-tab__subheader-item-circle">1</span>
+          Download App
+        </div>
+        <div
+          class="authentication-tab__subheader-item pointer qt-mr-24"
+          (click)="tab = 'STEP-2'"
+        >
+          <span class="authentication-tab__subheader-item-circle">2</span>
+          Scan QR Code
+        </div>
+        <div
+          class="authentication-tab__subheader-item pointer"
+          (click)="tab = 'STEP-3'"
+        >
+          <span class="authentication-tab__subheader-item-circle">3</span>
+          Verify Code
+        </div>
       </div>
-      <div
-        class="authentication-aside__subheader-item pointer qt-mr-24"
-        (click)="tab = 'STEP-2'"
-      >
-        <span class="authentication-aside__subheader-item-circle">2</span>
-        Scan QR Code
+
+      <!-- Tab Body -->
+      <div class="authentication-tab__body">
+        <!-- STEP-1 Tab Content -->
+        <div
+          class="qt-pt-24"
+          *ngIf="tab === 'STEP-1'"
+        >
+          <div class="authentication-tab__body-title">Download an authenticator app</div>
+          <div class="authentication-tab__body-text">
+            Download and install any authenticatior app (E.g. Google Authenticator) on your phone. If Authy is already installed, you can use Authy as your authenticator app.
+          </div>
+        </div>
+        <!-- End STEP-1 Tab Content -->
+        <!-- STEP-2 Tab Content -->
+        <div
+          class="qt-pt-24"
+          *ngIf="tab === 'STEP-2'"
+        >
+          <div class="authentication-tab__body-title">Scan the QR Code</div>
+          <div class="authentication-tab__body-text">
+            Open the authenticator app and scan the image below using your phone’s camera. if you cannot scan the QR code enter this key manually into the app “XKVBASIIL55WHZUF”
+          </div>
+          <div class="qr-code">
+            <img
+              *ngIf="qrCode"
+              [src]="qrCode"
+            >
+          </div>
+        </div>
+        <!-- End STEP-2 Tab Content -->
+        <!-- STEP-3 Tab Content -->
+        <div
+          class="qt-pt-24"
+          *ngIf="tab === 'STEP-3'"
+        >
+          <div class="authentication-tab__body-title">Verify your code</div>
+          <div class="authentication-tab__body-text">
+            Enter the 6-digit verification code generated.
+          </div>
+          <div class="tab-pane-input__row">
+            <div class="qt-input-block qt-mt-24 qt-w100">
+              <input class="authenticator-input qt-mr-12" type="text">
+              <input class="authenticator-input qt-mr-12" type="text">
+              <input class="authenticator-input qt-mr-12" type="text">
+              <input class="authenticator-input qt-mr-12" type="text">
+              <input class="authenticator-input qt-mr-12" type="text">
+              <input class="authenticator-input" type="text">
+            </div>
+          </div>
+        </div>
+        <!-- End STEP-3 Tab Content -->
       </div>
-      <div
-        class="authentication-aside__subheader-item pointer"
-        (click)="tab = 'STEP-3'"
-      >
-        <span class="authentication-aside__subheader-item-circle">3</span>
-        Verify Code
-      </div>
+      <!-- End Tab Body -->
     </div>
-
-    <!-- Tab Body -->
-    <div class="authentication-aside__body">
-      <!-- STEP-1 Tab Content -->
-      <div
-        class="qt-pt-24 qt-pb-24"
-        *ngIf="tab === 'STEP-1'"
+    <div class="authentication__footer">
+      <button
+        class="qt-button --gray qt-w100 qt-jc-c qt-mr-12"
+        (click)="cancel()"
       >
-        <div class="authentication-aside__body-title">Download an authenticator app</div>
-        <div class="authentication-aside__body-text">
-          Download and install any authenticatior app (E.g. Google Authenticator) on your phone. If Authy is already installed, you can use Authy as your authenticator app.
-        </div>
-      </div>
-      <!-- End STEP-1 Tab Content -->
-      <!-- STEP-2 Tab Content -->
-      <div
-        class="qt-pt-24 qt-pb-24"
-        *ngIf="tab === 'STEP-2'"
+        Close
+      </button>
+      <button
+        *ngIf="!isSetQrCode"
+        class="qt-button qt-w100 qt-jc-c"
+        (click)="submit()"
       >
-        <div class="authentication-aside__body-title">Scan the QR Code</div>
-        <div class="authentication-aside__body-text">
-          Open the authenticator app and scan the image below using your phone’s camera. if you cannot scan the QR code enter this key manually into the app “XKVBASIIL55WHZUF”
-        </div>
-      </div>
-      <!-- End STEP-2 Tab Content -->
-      <!-- STEP-3 Tab Content -->
-      <div
-        class="qt-pt-24 qt-pb-24"
-        *ngIf="tab === 'STEP-3'"
-      >
-        <div class="authentication-aside__body-title">Verify your code</div>
-        <div class="authentication-aside__body-text">
-          Enter the 6-digit verification code generated.
-        </div>
-      </div>
-      <!-- End STEP-3 Tab Content -->
-    </div>
-    <!-- End Tab Body -->
-
-
-
-
-    <div class="qt-modal__header-title qt-fw-600">Enable Google authenticator</div>
-    <div
-      class="qt-modal__close icon__close qt-pointer"
-      (click)="cancel()"
-    ></div>
-  </div>
-  <div class="qt-modal__body google-authenticator">
-    <ol>
-      <li>
-        Install Google authenticator on your phone
-      </li>
-      <li>Open the Google authenticator app</li>
-      <li>
-        Tap menu, then tap "Set up account", then app "Scan a barcode".
-      </li>
-      <li>
-        <div class="qt-mb-10">
-          Your phone will now be in a "scanning" mode. When you are in this mode, scan the barcode below :
-        </div>
-        <div class="qr-code qt-mb-10">
-          <img
-            *ngIf="qrCode"
-            [src]="qrCode"
-          >
-        </div>
-      </li>
-      <li class="secret-code-container">
-        If you cannot scan the QR code enter this key manually into the app
-        <p
-          class="secret-code"
-          [textContent]="secretCode"
-        ></p>
-      </li>
-    </ol>
-    <p
-      class="qt-mb-10 qt-fs-13"
-      *ngIf="!isSetQrCode"
-    >
-      Once you have scanned the qr-code, enter the 6-dight code bellow:
-    </p>
-    <div
-      class="qt-input-block qt-mb-24 qt-w100"
-      *ngIf="!isSetQrCode"
-    >
-      <label>Verification code</label>
-      <input
-        type="text"
-        placeholder="Write code"
-        [(ngModel)]="authCode"
-      >
+        Next
+      </button>
     </div>
   </div>
-  <div class="qt-modal__footer">
-    <button
-      class="qt-button --gray qt-mr-12"
-      (click)="cancel()"
-    >
-      Close
-    </button>
-    <button
-      *ngIf="!isSetQrCode"
-      class="qt-button qt-mr-12"
-      (click)="submit()"
-    >
-      Submit
-    </button>
+
+  <div class="authentication__successfully hidden">
+    <div class="icon__done-circle-green qt-sz-48 qt-bg-contain qt-mb-24 qt-ml-auto qt-mr-auto"></div>
+    <div class="authentication-tab__body-title">Two-Factor authentication setup successfully</div>
+    <div class="authentication-tab__body-text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+    </div>
+    <div class="qt-button qt-mt-32 qt-w100 qt-jc-c">Done</div>
   </div>
 </div>
