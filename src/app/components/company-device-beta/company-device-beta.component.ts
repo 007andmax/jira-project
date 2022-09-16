@@ -1320,7 +1320,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
       .getOperatingSystemByAssetId(ID)
       .subscribe((resp) => {
         this.System = resp.filter((x) => x.IsActive);
-        if (this.System.length > 0) {          
+        if (this.System.length > 0) {   
+          this.operatingSystem = this.System[0];       
           this.serialnumber = this.System[0].SerialNumber;          
         }
       });
