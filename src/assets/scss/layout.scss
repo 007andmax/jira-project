@@ -80,12 +80,15 @@ body {
     }
 
     .tab-pane__row {
-      flex: 1 0 calc(100% - 344px);
       padding: 24px;
       display: flex;
       align-items: flex-start;
       flex-wrap: wrap;
       border-bottom: 1px solid $gray-200;
+
+      &.map-area {
+        padding: 0;
+      }
     }
     .tab-pane-input {
       &__row {
@@ -245,6 +248,31 @@ body {
     .authentication__successfully {
       padding: 32px;
       text-align: center;
+    }
+    .activity-history__table-header {
+      .tab-pane__body {
+        .activity-history__cell {
+          color: $gray-500;
+          line-height: 17px;
+          font-weight: 500;
+        }
+      }
+    }
+    .activity-history__table-body,
+    .activity-history__table-header {
+      .tab-pane__row {
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+    }
+    .activity-history__cell-access-detail {
+      flex: 1 1 502px;
+    }
+    .activity-history__cell-last-seen {
+      flex: 1 1 370px;
+    }
+    .activity-history__cell-menu {
+      flex: 0 0 52px;
     }
   }
   .qt-input-info-help {

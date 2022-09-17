@@ -49,6 +49,18 @@
   &__list {
     background-image: url("/assets/img/icons/list.svg");
   }
+  &__firefox {
+    background-image: url("/assets/img/icons/firefox.svg");
+  }
+  &__google-chrome {
+    background-image: url("/assets/img/icons/google-chrome.svg");
+  }
+  &__opera {
+    background-image: url("/assets/img/icons/opera.svg");
+  }
+  &__safari {
+    background-image: url("/assets/img/icons/safari.svg");
+  }
   &__task-pending {
     background-image: url("/assets/img/icons/task-pending.svg");
     &.--done {
