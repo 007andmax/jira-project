@@ -25,18 +25,18 @@
     </div>
     <div class="image-confirm-modal__footer">
         <div class="d-f jc-fe">
+          <div
+            class="btn-new disabled"
+            data-dismiss='modal'
+            (click)="cancelConfirm()"
+          >
+            Cancel
+          </div>
             <div
                 class="btn-new btn-primary"
                 (click)="approveConfirm()"
             >
-                Crop
-            </div>
-            <div
-                class="btn-new disabled"
-                data-dismiss='modal'
-                (click)="cancelConfirm()"
-            >
-                Cancel
+              Upload
             </div>
         </div>
     </div>

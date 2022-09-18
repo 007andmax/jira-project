@@ -113,7 +113,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
+    // $('body').addClass('ng7');
     $('body').removeClass('backMenu');
     this.cProfile = {
       address: [],
@@ -165,6 +166,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
     $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
   }
 
   getAddress(place: object) {

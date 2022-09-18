@@ -1,18 +1,31 @@
 @import "./src/assets/styles/variable";
 
+.btn-new {
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-500;
+
+  &.btn-primary {
+    color: $white;
+    margin-left: 12px;
+  }
+}
+
 .image-confirm-modal {
   position: fixed;
   left: 50%;
   display: none;
   z-index: 999;
   background: $white;
-  width: 600px;
+  max-width: 504px;
+  width: calc(100% - 30px);
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4);
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 40px 40px;
+  padding: 32px;
 }
 
 .image-confirm-modal__body {
@@ -28,7 +41,7 @@
 }
 
 .image-confirm-modal__footer .btn-new {
-  width: 90px;
+  width: 100%;
 }
 .image-confirm-modal__footer .btn-primary {
   background-color: $primary-1;

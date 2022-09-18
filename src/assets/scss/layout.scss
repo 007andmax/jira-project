@@ -274,6 +274,23 @@ body {
     .activity-history__cell-menu {
       flex: 0 0 52px;
     }
+    .profile {
+      .company-time-zone-drop-down {
+        .app-drop-down__title {
+          display: none;
+        }
+      }
+    }
+    .company-info__dp {
+      background-color: $turquoise-600;
+      border-radius: 8px;
+      font-size: 26px;
+      line-height: 31px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
   }
   .qt-input-info-help {
     font-size: 12px;
