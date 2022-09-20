@@ -39,6 +39,8 @@ export class ServiceAgreement {
     status: string;
     taxIds: Array<string> = [];
     type: string;
+    enableAutoCreate: boolean;
+    enableInvoiceAutoCreate: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -60,6 +62,14 @@ export class ServiceAgreement {
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
             this.withCustomBillingDate = this.withCustomBillingDate;
         }
+    }
+    public setEnableAutoCreate(data) {
+        this.enableAutoCreate = data;
+        if (!this.enableAutoCreate) this.enableInvoiceAutoCreate = false;
+    }
+    public setEnableInvoiceAutoCreate(data) {
+        if (!this.enableAutoCreate) return;
+        this.enableInvoiceAutoCreate = data;
     }
     public resetCustomBillingDate() {
         this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
@@ -288,7 +298,9 @@ export class ServiceAgreement {
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
-            type: this.type
+            type: this.type,
+            enableAutoCreate: this.enableAutoCreate,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
     public getDataForUpdateBlockTime() {
@@ -312,7 +324,9 @@ export class ServiceAgreement {
             reviewDate: this.reviewDate,
             withCustomBillingDate: this.withCustomBillingDate,
             customBillingDate: this.customBillingDate,
-            type: "BLOCK_TIME"
+            type: "BLOCK_TIME",
+            enableAutoCreate: this.enableAutoCreate,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
 
@@ -331,7 +345,9 @@ export class ServiceAgreement {
             startDate: this.startDate,
             customBillingDate: this.customBillingDate,
             withCustomBillingDate: this.withCustomBillingDate,
-            type: this.type
+            type: this.type,
+            enableAutoCreate: this.enableAutoCreate,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
     public calculateTotalAmount() {

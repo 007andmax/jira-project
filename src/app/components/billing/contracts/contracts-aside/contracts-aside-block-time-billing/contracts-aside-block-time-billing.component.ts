@@ -49,7 +49,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   toggleContractServices: boolean = false;
   toggleTimeRollover: boolean = false;
   toggleNotifyAgentsUser: boolean = false;
-
   selectedUsers = [];
   userList = [];
   taxes: Array<Tax> = [];

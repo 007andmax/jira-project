@@ -161,8 +161,8 @@
             At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
         </mat-error>
     </div>
-    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
-        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-16">
+        <div class="qt-df qt-jc-sb qt-ai-c">
             <div class="qt-df">
                 <div
                     class="qt-toggle  qt-mr-8"
@@ -185,6 +185,34 @@
                     [minDate]="minCustomDate"
                     (onChange)="onChangeCustomDate($event)"
                 ></app-date-picker>
+            </div>
+        </div>
+    </div>
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-16">
+        <div class="qt-df qt-jc-sb qt-ai-c ">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.enableAutoCreate}"
+                    (click)="contractsOther.setEnableAutoCreate(!contractsOther.enableAutoCreate)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Manual create billable item</div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.enableInvoiceAutoCreate}"
+                    (click)="contractsOther.setEnableInvoiceAutoCreate(!contractsOther.enableInvoiceAutoCreate)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Automatically create and send invoice</div>
             </div>
         </div>
     </div>

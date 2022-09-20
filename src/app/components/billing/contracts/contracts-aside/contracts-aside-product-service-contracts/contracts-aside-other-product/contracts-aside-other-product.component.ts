@@ -41,7 +41,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
     this.product.salePrice = value;
   }
   getSubTotal() {
-    return this.product.quantity * this.product.salePrice;
+    return (this.product.quantity * this.product.salePrice).toFixed(1);
   }
   remove() {
     this.onRemove.emit(null);

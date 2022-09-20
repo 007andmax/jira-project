@@ -33,6 +33,8 @@ export class ContractsUserDevice {
     reviewDate: string;
     taxIds: Array<string>;
     type: string = "SERVICE_CONTRACT";
+    enableAutoCreate: boolean = false;
+    enableInvoiceAutoCreate: boolean = false;
     constructor() {
 
     }
@@ -60,9 +62,18 @@ export class ContractsUserDevice {
         this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
-
+        if (data.enableAutoCreate != undefined) this.enableAutoCreate = data.enableAutoCreate;
+        if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
+    }
+    public setEnableAutoCreate(data) {
+        this.enableAutoCreate = data;
+        if (!this.enableAutoCreate) this.enableInvoiceAutoCreate = false;
+    }
+    public setEnableInvoiceAutoCreate(data) {
+        if (!this.enableAutoCreate) return;
+        this.enableInvoiceAutoCreate = data;
     }
     public resetCustomBillingDate() {
         this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
@@ -242,7 +253,8 @@ export class ContractsUserDevice {
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate(0)) : [],
             services: this.services.map(item => item.getDataForCreate()),
-
+            enableAutoCreate: this.enableAutoCreate,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate,
             customBillingDate: this.customBillingDate,
             reviewDate: this.reviewDate,
             startDate: this.startDate,
