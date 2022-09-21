@@ -326,8 +326,8 @@
             <div class="qt-df">
                 <div
                     class="qt-toggle  qt-mr-8"
-                    [ngClass]="{'--on':!contractsUserDevice.enableAutoCreate}"
-                    (click)="contractsUserDevice.setEnableAutoCreate(!contractsUserDevice.enableAutoCreate)"
+                    [ngClass]="{'--on':contractsUserDevice.manualCreateBillableItem}"
+                    (click)="contractsUserDevice.setManualCreateBillableItem(!contractsUserDevice.manualCreateBillableItem)"
                 >
                     <div class="qt-toggle__circle"></div>
                 </div>
