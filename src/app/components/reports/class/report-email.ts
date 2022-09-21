@@ -42,7 +42,7 @@ export class ReportEmail {
             "recipients": this.emails,
             "subject": this.subject,
             paymentReportDto: {
-                invoicePaymentDtos: payments
+                paymentViewDtos: payments
             },
             note: this.note,
             /* fileName: this.fileName,
