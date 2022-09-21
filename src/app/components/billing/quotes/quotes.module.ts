@@ -33,6 +33,8 @@ import { FilterModule } from 'src/app/pipe/filter/filter.module';
 import { QuotesRoutingModule } from './quotes-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { InvoiceChangeAddressModule } from '../billable/billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
+import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-aside-add-change-address/quote-aside-add-change-address.component';
 
 
 
@@ -53,7 +55,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         ProductItemQuoteComponent,
         ProductListQuoteComponent,
         ServiceListQuoteComponent,
-        ProductItemQuoteEditComponent
+        ProductItemQuoteEditComponent,
+        QuoteAsideAddChangeAddressComponent
 
     ],
     imports: [
@@ -75,7 +78,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         FilterModule,
         QuotesRoutingModule,
         PreviewPhoneMaskModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        InvoiceChangeAddressModule
     ],
 
 

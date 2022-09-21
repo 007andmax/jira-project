@@ -38,31 +38,33 @@
         >
         </div>
     </div>
-    <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
-        <div class="qt-lh-154">
+    <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb invoice-preview__row">
+        <div class="qt-lh-154 qt-pr-12 invoice-preview__billing-address">
             <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
-                class="qt-fs-13 qt-color-dark qt-fw-600"
-                *ngIf="quoteCompany"
-                [textContent]="quoteCompany.name"
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                [textContent]="quote.billingLocationName"
             ></div>
             <div
-                class="qt-fs-13"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"
-            ></div>
-            <div
-                class="qt-fs-13"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"
-            ></div>
-            <div
-                class="qt-fs-13"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quote.billingAddress"
             ></div>
         </div>
-        <div class="qt-fs-13 qt-text-right qt-lh-154">
+        <div
+            class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
+            *ngIf="quote.shippingLocationName || quote.shippingAddress"
+        >
+            <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
+            <div
+                class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                [textContent]="quote.shippingLocationName"
+            ></div>
+            <div
+                class="qt-fs-13 qt-lh-154"
+                [textContent]="quote.shippingAddress"
+            ></div>
+        </div>
+        <div class="qt-fs-13 qt-text-right qt-lh-154 invoice-preview__data">
             <div class="qt-df qt-jc-sb qt-mb-8">
                 <div class="qt-fw-600 qt-text-right invoice-info-title">Estimate Date:</div>
                 <div

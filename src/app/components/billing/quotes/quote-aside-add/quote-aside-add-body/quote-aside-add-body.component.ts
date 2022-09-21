@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
@@ -28,9 +30,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @ViewChild('expiryDate') expiryDate: DatePickerComponent;
-
   @Input() validate: QuoteValdiate = new QuoteValdiate();
-  quoteCompany: any;
+  quoteCompany: CompanyItem;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
   quote: QuoteAdd = new QuoteAdd();
@@ -59,12 +60,19 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       this.quote.number = data.number;
     });
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-      if (data.action === 'COMPANY_SAVED' && this.quoteCompany.id === data.data.id) {
+      if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
         this.quoteCompany.name = data.data.name;
         this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
         this.quoteCompany.companyInfo.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
+        //  this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
         this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+        if (data.data.companyInfo.addresses.length == 1) {
+          this.quoteCompany.companyInfo.addresses[0] = data.data.companyInfo.addresses[0];
+        }
+        if (data.data.companyInfo.addresses.length == 2) {
+          this.quoteCompany.companyInfo.addresses[0] = data.data.companyInfo.addresses.find(item => item.isPrimary);
+          this.quoteCompany.companyInfo.addresses[1] = data.data.companyInfo.addresses.find(item => !item.isPrimary);
+        }
       }
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
@@ -74,7 +82,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   onInitCopy() {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
-    this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.companyId);
+    this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.companyId))));
+    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     this.cd.detectChanges();
     //  this.servicesList.getServicesList();
     this.getServicesList();
@@ -168,8 +178,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   removeProduct(i) {
     this.quote.products.splice(i, 1);
   }
-
-
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
       let customerCompany: CompanyProfile = new CompanyProfile();
@@ -193,18 +201,31 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.validate.resetValidate();
   }
   onSelectCompany(data) {
-    this.quoteCompany = data;
+    if (data) this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(data)));
+    if (!data) this.quoteCompany = null;
+
+    console.log("this.quoteCompany", this.quoteCompany);
     this.quote.setCompanyId((data) ? data.id : null);
     this.cd.detectChanges();
     if (data) {
       this.validate.resetCompany();
       //  this.servicesList.getServicesList();
       this.getServicesList();
+      this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+      if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     } else {
+      this.quote.setBillTo(null);
+      this.quote.setShipTo(null);
       // this.servicesList.resetServicesList();
     }
     // this.quote.resetServices();
     this.validate.resetValidate();
+  }
+  selectAddress(index, newAddress) {
+    this.quoteCompany.companyInfo.addresses[index] = newAddress;
+    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

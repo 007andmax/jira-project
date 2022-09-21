@@ -97,52 +97,155 @@
             placeholder="example.com"
         >
     </div>
-    <div class="col-md-12">
-        <p>Location</p>
-        <input
-            type="text"
-            #addresstext
-            [(ngModel)]="company.addresses[0].address"
-            (focus)="onCheckGoogleAutoComplete()"
-            placeholder="Enter Location"
-        >
+    <div class="col-md-12 billing-background">
+        <div class="col-md-12 billing-divider">
+            <p>Billing Address</p>
+        </div>
+        <div class="col-md-12 --required">
+            <p>Billing Location Name</p>
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getBillindAddress()"
+            >
+                Billing Location Name is required
+            </mat-error>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
+                [(ngModel)]="company.addresses[0].locationName"
+                (input)="validate.resetBillindAddress()"
+                placeholder="Enter Location Name"
+            >
+        </div>
+        <div class="col-md-12">
+            <p>Location</p>
+            <input
+                type="text"
+                location-is-init="false"
+                [(ngModel)]="company.addresses[0].address"
+                (focus)="onCheckGoogleAutoComplete($event,0)"
+                placeholder="Enter Location"
+            >
+        </div>
+        <div class="col-md-4">
+            <p>Suite No.</p>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[0].suiteNumber"
+                placeholder="Enter Suite Number"
+            >
+        </div>
+        <div class="col-md-3">
+            <p>Zip</p>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[0].postalCode"
+                placeholder="Enter Zip"
+            >
+        </div>
+        <div class="col-md-5 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getPhoneNumber()"
+            >
+                Phone number is required
+            </mat-error>
+            <p>Phone Number</p>
+            <input
+                type="text"
+                (input)="onChangePhoneNumber()"
+                [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+                *ngIf="company.addresses[0].phoneNumbers.length > 0"
+                [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+                placeholder="Enter Phone Number"
+                prefix="+1"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+            >
+        </div>
     </div>
-    <div class="col-md-4">
-        <p>Suite No.</p>
-        <input
-            type="text"
-            [(ngModel)]="company.addresses[0].suiteNumber"
-            placeholder="Enter Suite Number"
-        >
-    </div>
-    <div class="col-md-3">
-        <p>Zip</p>
-        <input
-            type="text"
-            [(ngModel)]="company.addresses[0].postalCode"
-            placeholder="Enter Zip"
-        >
-    </div>
-    <div class="col-md-5 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getPhoneNumber()"
-        >
-            Phone number is required
-        </mat-error>
-        <p>Phone Number</p>
-        <input
-            type="text"
-            (input)="onChangePhoneNumber()"
-            [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
-            *ngIf="company.addresses[0].phoneNumbers.length > 0"
-            [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
-            placeholder="Enter Phone Number"
-            prefix="+1"
-            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-            [dropSpecialCharacters]="false"
-        >
+    <div class="col-md-12 shipping-background">
+        <div class="col-md-12 billing-divider qt-df qt-ai-c qt-jc-sb">
+            <p>Shipping Address</p>
+            <div class="same-as-billing">
+                <div class="qt-df qt-ai-c">
+                    <label
+                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                        for="email-payment"
+                    >
+                        <input
+                            id="email-payment"
+                            type="checkbox"
+                            (change)="onSameAsBilling($event)"
+                            [(ngModel)]="company.addresses[1].sameAsBilling"
+                        >
+                        <span></span>
+                    </label>
+                    <span class="qt-fs-12 qt-fw-600">Same as Billing Address</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p>Shipping Location Name</p>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[1].locationName"
+                placeholder="Enter Location Name"
+                [disabled]="company.addresses[1].sameAsBilling"
+            >
+        </div>
+        <div class="col-md-12">
+            <p>Location</p>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[1].address"
+                location-is-init="false"
+                (focus)="onCheckGoogleAutoComplete($event,1)"
+                placeholder="Enter Location"
+                [disabled]="company.addresses[1].sameAsBilling"
+            >
+        </div>
+        <div class="col-md-4">
+            <p>Suite No.</p>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[1].suiteNumber"
+                placeholder="Enter Suite Number"
+                [disabled]="company.addresses[1].sameAsBilling"
+            >
+        </div>
+        <div class="col-md-3">
+            <p>Zip</p>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[1].postalCode"
+                placeholder="Enter Zip"
+                [disabled]="company.addresses[1].sameAsBilling"
+            >
+        </div>
+        <div class="col-md-5 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getShippingPhoneNumber()"
+            >
+                Phone number is required
+            </mat-error>
+            <p>Phone Number</p>
+            <input
+                type="text"
+                (input)="onChangeShippingPhoneNumber()"
+                [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
+                *ngIf="company.addresses[1].phoneNumbers.length > 0"
+                [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
+                placeholder="Enter Phone Number"
+                [disabled]="company.addresses[1].sameAsBilling"
+                prefix="+1"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+            >
+        </div>
     </div>
     <div class="col-md-12 details-background">
         <div class="col-md-12 details-divider">

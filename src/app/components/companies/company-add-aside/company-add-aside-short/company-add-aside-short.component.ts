@@ -30,6 +30,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
         if (data.value) {
           this.validate.resetName();
           this.validate.resetNameIsExist();
+          this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
         } else {
           this.validate.setNameIsExist();
         }

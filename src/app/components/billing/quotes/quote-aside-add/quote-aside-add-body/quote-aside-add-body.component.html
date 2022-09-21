@@ -1,6 +1,6 @@
 <div class="qt-pos-rel">
     <div class="qt-df qt-jc-sb qt-pb-24 company-info">
-        <div class="qt-w50 qt-pr-24 company-info-left-side">
+        <div class="qt-w50 qt-pr-24">
             <app-drop-down
                 #companyDp
                 [title]="'Company Name'"
@@ -23,42 +23,53 @@
                 maxlength="255"
             ></textarea>
         </div>
+    </div>
+    <div
+        class="qt-df address-block"
+        *ngIf="quoteCompany"
+    >
         <div
-            class="qt-w50 qt-pl-24"
+            class="qt-w50 qt-pt-15 qt-pr-32 qt-pb-23 billing-address"
             ngbDropdown
             [autoClose]="'inside'"
             #editCustomer="ngbDropdown"
         >
-            <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-12">
-                <div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div>
-                BILLING ADDRESS
+            <div
+                class="qt-fs-10 qt-mb-12 qt-lh-154"
+                ngbDropdown
+            >
+                <div class="qt-df qt-ai-c">
+                    <span class="address-h qt-fw-600">BILLING ADDRESS</span>
+                    <i
+                        class="icn-16 icon__edit-gray qt-ml-8 pointer"
+                        ngbDropdownToggle
+                        id="dropdownForm2"
+                        placement="top"
+                        ngbTooltip="Change Address"
+                        container="body"
+                    ></i>
+                </div>
+                <quote-aside-add-change-address
+                    [quoteCompany]="quoteCompany"
+                    aria-labelledby="dropdownForm2"
+                    ngbDropdownMenu
+                    (onSelectAddress)="selectAddress(0,$event)"
+                ></quote-aside-add-change-address>
             </div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
-                *ngIf="quoteCompany"
-                [textContent]="quoteCompany.name"
+                [textContent]="quoteCompany.companyInfo.addresses[0].locationName"
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"
+                [textContent]="quoteCompany.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
             ></div>
             <div
-                class="qt-fs-13 qt-lh-154"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"
-            ></div>
-            <div
-                class="qt-fs-13 qt-lh-154"
-                *ngIf="quoteCompany"
-                [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"
-            ></div>
-            <div
-                class="qt-fw-600 qt-mt-10 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
+                class="qt-fs-13 qt-color-info  qt-pointer"
                 id="dropdownForm1"
-                *ngIf="quoteCompany && getPermissions('EDIT_COMPANIES')"
                 ngbDropdownToggle
                 (click)="onEditCustomer()"
+                *ngIf="getPermissions('EDIT_COMPANIES')"
             >
                 Edit Customer
             </div>
@@ -70,6 +81,37 @@
                     #companyEdit
                     [dropDown]="editCustomer"
                 ></app-invoice-form-edit-customer>
+            </div>
+        </div>
+        <div
+            class="qt-w50 qt-pt-15 qt-pl-32 qt-pb-23"
+            ngbDropdown
+            placement="bottom-end"
+        >
+            <div *ngIf="quoteCompany.companyInfo.addresses.length == 2">
+                <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-12 qt-lh-154">
+                    <span class="address-h">SHIPPING ADDRESS</span>
+                    <i
+                        class="icn-16 icon__edit-gray qt-ml-8 pointer"
+                        ngbDropdownToggle
+                        placement="top"
+                        ngbTooltip="Change Address"
+                        container="body"
+                    ></i>
+                </div>
+                <div
+                    class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark"
+                    [textContent]="quoteCompany.companyInfo.addresses[1].locationName"
+                ></div>
+                <div
+                    class="qt-fs-13 qt-lh-154"
+                    [textContent]="quoteCompany.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode"
+                ></div>
+                <quote-aside-add-change-address
+                    ngbDropdownMenu
+                    [quoteCompany]="quoteCompany"
+                    (onSelectAddress)="selectAddress(1,$event)"
+                ></quote-aside-add-change-address>
             </div>
         </div>
     </div>

@@ -7,11 +7,12 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InvoiceChangeAddressComponent } from './billable-aside/invoice-form/invoice-change-address/invoice-change-address.component';
 
 
 @NgModule({
     declarations: [BillableComponent,
-        BillableItemComponent
+        BillableItemComponent,
     ],
     imports: [
         CommonModule,

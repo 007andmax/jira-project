@@ -9,6 +9,7 @@ import { Tag } from 'src/app/interfaces/tag/tag';
 import { CompanyConditions } from './company-conditions';
 import { CompanyAssociated } from './company-associated';
 import { CompanyAssigned } from './company-assigned';
+import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -37,6 +38,7 @@ export class CompanyProfile {
     tags: Array<Tag>;
     associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
+    primaryContact: CompanyAndressContact;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -46,14 +48,32 @@ export class CompanyProfile {
         this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
     }
+    public initShippingAdress() {
+        let address: CompanyProfileAddress = new CompanyProfileAddress();
+        address.fullVersion();
+        address.sameAsBilling = false;
+        address.isPrimary = false;
+        this.addresses.push(address);
+    }
     public setTags(data) {
         this.tags = data;
     }
     public onEditMode(company: CompanyProfile) {
         this.id = company.id;
         this.accountNumber = company.accountNumber;
-        this.addresses = company.addresses;
-        if (this.addresses.length == 0) this.addresses = [new CompanyProfileAddress()];
+        if (company.addresses.length == 1) {
+            this.addresses = company.addresses.map(item => new CompanyProfileAddress(item));
+            this.addresses[0].isPrimary = true;
+        }
+        if (company.addresses.length == 2) {
+            this.addresses = [company.addresses.find(item => item.isPrimary), company.addresses.find(item => !item.isPrimary)].map(item => new CompanyProfileAddress(item));
+        }
+        if (this.addresses.length == 0) {
+            let address: CompanyProfileAddress = new CompanyProfileAddress();
+            address.fullVersion();
+            this.addresses.push(address);
+        }
+        this.addresses[0].sameAsBilling = undefined;
         this.agentLinkToEmail = company.agentLinkToEmail;
         this.clientIndustry = company.clientIndustry;
         this.clientType = company.clientType;
@@ -142,10 +162,12 @@ export class CompanyProfile {
     }
     public getDataForAdd() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
+        let addresses = [this.addresses[0]];
+        if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) this.addresses.push(this.addresses[1]);
         return {
             associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,
-            addresses: this.addresses,
+            addresses: addresses,
             agentLinkToEmail: this.agentLinkToEmail,
             clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : { name: this.clientIndustry.name },
             clientType: this.clientType,
@@ -187,6 +209,9 @@ export class CompanyProfile {
     public fullVersion() {
         this.contacts[0].fullVersion();
         this.addresses[0].fullVersion();
+        console.log("this.name", this.name);
+        this.addresses[0].locationName = JSON.parse(JSON.stringify(this.name));
+        this.initShippingAdress();
         this.agentLinkToEmail = null;
         this.clientIndustry = {
             name: null
@@ -212,7 +237,10 @@ export class CompanyProfile {
         let data = {
             name: this.name == undefined ? '' : this.name,
             addresses: this.addresses,
+            billingLocationName: this.addresses[0].locationName,
+            shippingLocationName: this.addresses.length > 1 ? this.addresses[1].locationName : '',
             addresses_name: this.addresses.length > 0 ? this.addresses[0].address : '',
+            shipping_addresses_name: this.addresses.length > 1 ? this.addresses[1].address : '',
             phoneNumber: this.addresses.length > 0 && this.addresses[0].phoneNumbers.length !== 0 ? this.addresses[0].phoneNumbers[0].number : '',
             totalTickets: this['companyTicketStatistic'].totalTickets,
             averageResponseTime: this['companyTicketStatistic'].averageResponseTime,
