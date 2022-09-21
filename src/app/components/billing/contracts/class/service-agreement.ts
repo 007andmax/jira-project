@@ -39,7 +39,7 @@ export class ServiceAgreement {
     status: string;
     taxIds: Array<string> = [];
     type: string;
-    enableAutoCreate: boolean;
+    manualCreateBillableItem: boolean;
     enableInvoiceAutoCreate: boolean;
     constructor(data = null) {
         if (data) {
@@ -63,12 +63,12 @@ export class ServiceAgreement {
             this.withCustomBillingDate = this.withCustomBillingDate;
         }
     }
-    public setEnableAutoCreate(data) {
-        this.enableAutoCreate = data;
-        if (!this.enableAutoCreate) this.enableInvoiceAutoCreate = false;
+    public setManualCreateBillableItem(data) {
+        this.manualCreateBillableItem = data;
+        if (this.manualCreateBillableItem) this.enableInvoiceAutoCreate = false;
     }
     public setEnableInvoiceAutoCreate(data) {
-        if (!this.enableAutoCreate) return;
+        if (this.manualCreateBillableItem) return;
         this.enableInvoiceAutoCreate = data;
     }
     public resetCustomBillingDate() {
@@ -299,7 +299,7 @@ export class ServiceAgreement {
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
             type: this.type,
-            enableAutoCreate: this.enableAutoCreate,
+            manualCreateBillableItem: this.manualCreateBillableItem,
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
@@ -325,7 +325,7 @@ export class ServiceAgreement {
             withCustomBillingDate: this.withCustomBillingDate,
             customBillingDate: this.customBillingDate,
             type: "BLOCK_TIME",
-            enableAutoCreate: this.enableAutoCreate,
+            manualCreateBillableItem: this.manualCreateBillableItem,
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
@@ -346,7 +346,7 @@ export class ServiceAgreement {
             customBillingDate: this.customBillingDate,
             withCustomBillingDate: this.withCustomBillingDate,
             type: this.type,
-            enableAutoCreate: this.enableAutoCreate,
+            manualCreateBillableItem: this.manualCreateBillableItem,
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
