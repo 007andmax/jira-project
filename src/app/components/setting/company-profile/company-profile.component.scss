@@ -218,8 +218,8 @@ input.ng-invalid.is-invalid {
         font-weight: 400;
     }
     form {
-        width: 478px;
-        max-width: 100%;
+        //width: 478px; // TODO check this style
+        //max-width: 100%;
         .custm-url {
             width: 100%;
             display: flex;
@@ -256,8 +256,8 @@ select.cmn-select {
     background-color: $white;
     &[disabled] {
         cursor: not-allowed;
-        background-color: $background;
-        border-color: $background;
+        background-color: $gray-50;
+        color: $gray-400;
     }
 }
 .--required {

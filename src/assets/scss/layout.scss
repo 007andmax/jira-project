@@ -59,6 +59,10 @@ body {
       margin: 32px 32px 0;
       border: 1px solid $gray-200;
       border-radius: 8px;
+
+      &#ngb-tab-2-panel {
+        border-color: transparent;
+      }
     }
     .tab-pane__header {
       padding: 20px 24px;
@@ -85,6 +89,16 @@ body {
       align-items: flex-start;
       flex-wrap: wrap;
       border-bottom: 1px solid $gray-200;
+
+      &.--border {
+        border: 1px solid $gray-200;
+      }
+      &.--ai-c {
+        align-items: center;
+      }
+      &.--border-radius {
+        border-radius: 8px;
+      }
 
       &.map-area {
         padding: 0;
@@ -281,6 +295,7 @@ body {
         }
       }
     }
+
     .company-info__dp {
       background-color: $turquoise-600;
       border-radius: 8px;
@@ -290,6 +305,66 @@ body {
       align-items: center;
       justify-content: center;
       color: #fff;
+    }
+
+    .qt-input-afterfix {
+      width: 160px;
+      color: $gray-900;
+      font-weight: 400;
+      flex-shrink: 0;
+      justify-content: flex-start;
+      padding: 10.5px 14px;
+    }
+
+    .operations-hours {
+      &__week {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 600;
+        margin-bottom: 0;
+        margin-left: 12px;
+        color: $gray-900;
+      }
+
+      &__status {
+        position: relative;
+        font-size: 13px;
+        line-height: 16px;
+        color: $gray-500;
+        margin-left: 10px;
+        padding-left: 12px;
+
+        &::before {
+          position: absolute;
+          content: "";
+          width: 4px;
+          height: 4px;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          background-color: $gray-300;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    select.cmn-select {
+      appearance: none;
+      background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px center;
+      padding: 0 14px;
+      height: 40px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 6px;
+
+      &:focus {
+        outline: none;
+        border-color: $blue-light-600;
+      }
     }
   }
   .qt-input-info-help {

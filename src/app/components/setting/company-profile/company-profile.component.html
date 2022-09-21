@@ -602,15 +602,18 @@
       >
         <ng-template ngbTabContent>
           <div class="cmn-area workspace">
-            <form
-              [formGroup]="cProfileForm"
-              (ngSubmit)="checkDomain()"
-            >
-              <div class="f-row">
-                <div class="f-col col-100">
-                  <label>Company URL</label>
-                  <div class="form-row">
-                    <div class="custm-url --required">
+            <div class="tab-pane__header">
+              <div class="tab-pane__header-title">Workspace</div>
+            </div>
+            <div class="tab-pane__body">
+              <form
+                [formGroup]="cProfileForm"
+                (ngSubmit)="checkDomain()"
+              >
+                <div class="tab-pane__row">
+                  <div class="tab-pane__subtitle">Company URL</div>
+                  <div class="tab-pane-input__row">
+                    <div class="qt-input-block --required">
                       <mat-error
                         class="qt-tooltip-error"
                         *ngIf="cProfileForm.get('url').getError('incorrect')"
@@ -623,35 +626,36 @@
                       >
                         Please enter a valid company domain.
                       </mat-error>
-                      <input
-                        [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect') || cProfileForm.get('url').getError('invalidate')}"
-                        type="text"
-                        class="form-input"
-                        placeholder="Enter Your Company URL"
-                        formControlName="url"
-                        (input)="checkValidateDomain()"
-                      >
-                      <span class="slug">.quicktech.com</span>
+                      <div class="qt-df">
+                        <input
+                          [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect') || cProfileForm.get('url').getError('invalidate')}"
+                          type="text"
+                          class="qt-input-afterpend"
+                          placeholder="Enter Your Company URL"
+                          formControlName="url"
+                          (input)="checkValidateDomain()"
+                        >
+                        <span class="qt-input-afterfix">.quicktech.com</span>
+                      </div>
                     </div>
+                    <div class="qt-input-help-text qt-mt-12">Your workspace URL can only contain lowercase letters, numbers and dashes
+                      (and must start with a letter or number).</div>
                   </div>
                 </div>
-              </div>
-              <p>
-                Your workspace URL can only contain lowercase letters, numbers and dashes (and must start with a letter or number).
-              </p>
-              <input
-                type="submit"
-                class="btn btn-primary"
-                value="Save Changes"
-              >
-            </form>
+                <input
+                  type="submit"
+                  class="btn btn-primary"
+                  value="Save Changes"
+                >
+              </form>
+            </div>
           </div>
         </ng-template>
       </ngb-tab>
       <!-- Ticket Response Time Setting -->
       <ngb-tab title="Operational Hours">
         <ng-template ngbTabContent>
-          <div class="cmn-area ticket-response">
+<!--          <div class="tab-pane__body">-->
             <form
               #workingHoursForm="ngForm"
               (ngSubmit)="onWorkSubmit()"
@@ -662,32 +666,41 @@
                   let i = index
                 "></div>
               </div>
-              <div class="c-hours">
-                <h5>Select days with correct hours</h5>
-                <ul class="list-unstyled">
-                  <li *ngFor="
+              <div class="tab-pane__body">
+                <div
+                  *ngFor="
                     let workingDay of this.cProfile.timeSettings.workingDays;
                     let i = index
-                  ">
-                    <div class="cmn-checkbox">
-                      <input
-                        type="checkbox"
-                        id="{{ workingDay.dayOfWeek }}"
-                        [(ngModel)]="workingDay.isSelected"
-                        name="{{ workingDay.dayOfWeek | titlecase }}"
-                        [ngModelOptions]="{ standalone: true }"
-                      >
-                      <label for="{{ workingDay.dayOfWeek }}">
+                  "
+                  class="tab-pane__row --border --border-radius --ai-c qt-mb-16"
+                >
+                  <div class="tab-pane__subtitle">
+                    <div class="qt-df qt-ai-c">
+                      <label class="qt-switch">
+                        <input
+                          type="checkbox"
+                          id="{{ workingDay.dayOfWeek }}"
+                          [(ngModel)]="workingDay.isSelected"
+                          name="{{ workingDay.dayOfWeek | titlecase }}"
+                          [ngModelOptions]="{ standalone: true }"
+                          class="qt-switch__input"
+                        >
+                        <span class="qt-switch__elem"></span>
+                      </label>
+                      <label class="operations-hours__week" for="{{ workingDay.dayOfWeek }}">
                         {{
                         workingDay.dayOfWeek | titlecase
                         }}
                       </label>
+                      <div class="operations-hours__status">Open</div>
                     </div>
-                    <div class="time-zone">
-                      <div class="tl-col">
+                  </div>
+                  <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                      <div class="qt-df">
                         <select
                           #startTime
-                          class="cmn-select form-input"
+                          class="cmn-select form-input qt-mr-24"
                           [id]=" 'from-'+workingDay.dayOfWeek"
                           (change)="startTimeChange(workingDay, startTime.value)"
                           name="{{workingDay.dayOfWeek}}"
@@ -708,8 +721,6 @@
                           <option value="11:30">11:30 AM</option>
                           <option value="12:00">12:00 PM</option>
                         </select>
-                      </div>
-                      <div class="tl-col">
                         <select
                           #endTime
                           class="cmn-select form-input"
@@ -729,8 +740,8 @@
                         </select>
                       </div>
                     </div>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
               <input
                 type="submit"
@@ -738,7 +749,7 @@
                 value="Save Changes"
               >
             </form>
-          </div>
+<!--          </div>-->
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
