@@ -26,7 +26,7 @@ export class ContractsBlockTime {
     taxIds: Array<string> = [];
     type: string = "BLOCK_TIME";
     reviewDate: string;
-    enableAutoCreate: boolean = false;
+    enableAutoCreate: boolean = true;
     enableInvoiceAutoCreate: boolean = false;
     constructor() { }
     public setDataFromCopy(data: ServiceAgreement) {

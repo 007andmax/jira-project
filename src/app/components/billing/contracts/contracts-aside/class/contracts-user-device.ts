@@ -33,7 +33,7 @@ export class ContractsUserDevice {
     reviewDate: string;
     taxIds: Array<string>;
     type: string = "SERVICE_CONTRACT";
-    enableAutoCreate: boolean = false;
+    enableAutoCreate: boolean = true;
     enableInvoiceAutoCreate: boolean = false;
     constructor() {
 
