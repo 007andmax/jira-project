@@ -18,4 +18,7 @@ export class CompanyDetaill {
     reputation?: number = 0;
     clientType: string;
     description: string;
+    shippingLocationName: string;
+    shipping_addresses_name: string;
+    billingLocationName: string;
 }

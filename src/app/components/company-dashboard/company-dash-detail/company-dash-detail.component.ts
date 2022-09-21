@@ -53,7 +53,10 @@ export class CompanyDashDetailComponent implements OnInit {
     },
     reputation: 0,
     clientType: '',
-    description: ''
+    description: '',
+    shippingLocationName: '',
+    shipping_addresses_name: '',
+    billingLocationName: ''
   };
   _id: string = '';
   mapSrc: string = '';

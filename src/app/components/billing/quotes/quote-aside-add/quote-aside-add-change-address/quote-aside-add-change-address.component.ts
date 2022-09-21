@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 export class QuoteAsideAddChangeAddressComponent implements OnInit {
 
   @Input() quoteCompany: CompanyProfile = new CompanyProfile();
-  company: CompanyProfile = new CompanyProfile();
+  company: Company;
   @Output() onSelectAddress = new EventEmitter();
   constructor(private companiesStateService: CompaniesStateService) { }
 
