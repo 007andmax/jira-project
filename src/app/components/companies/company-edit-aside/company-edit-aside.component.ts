@@ -164,8 +164,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidShippingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
   }
   public onCheckGoogleAutoComplete(event, index) {
-    console.log(event.target.getAttribute("location-is-init"));
-    console.log(Boolean(event.target.getAttribute("location-is-init")));
     if (event.target.getAttribute("location-is-init") == "false") this.getPlaceAutocomplete(event, index);
   }
   close() {

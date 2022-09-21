@@ -306,7 +306,6 @@ export class CompanyDashDetailComponent implements OnInit {
       if (data.action === "COMPANY_EDITED" && data.data.id === this.companyDetail.id) {
         this.companyDetail.onEditMode(data.data);
         this.companyDetailing = this.companyDetail.getDataForDashboard();
-        console.log("this.companyDetailing", this.companyDetailing);
         this.setCompanyData(data.data);
       }
     })
@@ -365,7 +364,6 @@ export class CompanyDashDetailComponent implements OnInit {
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
       this.companyDetail.onEditMode(data);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
-      console.log("this.companyDetailing", this.companyDetailing);
       this.setCompanyData(data);
     })
     this.sub.add(getCompany);
@@ -576,7 +574,6 @@ export class CompanyDashDetailComponent implements OnInit {
   }
   openMap(content: any, addresses) {
     if (addresses) this.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q=" + addresses.locationLat + "," + addresses.locationLng + "";
-    console.log("this.mapSrc", this.mapSrc);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
   }
 

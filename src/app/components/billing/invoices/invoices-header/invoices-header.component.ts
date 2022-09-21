@@ -36,15 +36,12 @@ export class InvoicesHeaderComponent implements OnInit {
     });
   }
   print(type) {
-    console.log("type", type);
     this.export(type).then((data: any) => {
-      console.log("data", data);
       window.open(data);
     })
   }
   onSelectExport(type) {
     if (type == "PDF") this.export(type.toLowerCase()).then((data: any) => {
-      console.log("data", data);
       this.appService.downloadByUrl(`${data}?isDownload=true`, 'report-invoice.' + type);
     })
     if (type == "CSV") {

@@ -204,7 +204,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     if (data) this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(data)));
     if (!data) this.quoteCompany = null;
 
-    console.log("this.quoteCompany", this.quoteCompany);
     this.quote.setCompanyId((data) ? data.id : null);
     this.cd.detectChanges();
     if (data) {

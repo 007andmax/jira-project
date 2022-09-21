@@ -209,7 +209,6 @@ export class CompanyProfile {
     public fullVersion() {
         this.contacts[0].fullVersion();
         this.addresses[0].fullVersion();
-        console.log("this.name", this.name);
         this.addresses[0].locationName = JSON.parse(JSON.stringify(this.name));
         this.initShippingAdress();
         this.agentLinkToEmail = null;

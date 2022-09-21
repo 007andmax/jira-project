@@ -76,7 +76,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
         this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id))));
         // this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
         //if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
-        console.log("this.quoteCompany", this.quoteCompany);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
         this.onStopPreloader.emit(null);

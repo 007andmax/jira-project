@@ -39,7 +39,6 @@ export class CompanyProfileAddress {
     }
     public initSameAsBilling(data) {
         let phoneNumbers = JSON.parse(JSON.stringify(this.phoneNumbers));
-        console.log("phoneNumbers", phoneNumbers);
         this.sameAsBilling = true;
         this.locationName = data.locationName;
         this.isPrimary = false;
@@ -54,7 +53,6 @@ export class CompanyProfileAddress {
         this.phoneNumbers = data.phoneNumbers.map((item, index) => {
             let id;
             if (index != phoneNumbers.length) id = phoneNumbers[index].id;
-            console.log("id", id);
             return {
                 id: id,
                 number: item.number,

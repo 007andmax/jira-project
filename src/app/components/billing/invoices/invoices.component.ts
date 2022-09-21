@@ -213,7 +213,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
       this.invoices = [...this.invoices, ...data.map(item => new Invoice(item))];
-      console.log("this.invoices", this.invoices);
       if (this.selectedCompanyId) this.invoices.forEach(item => {
         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
         if (item.companyId === this.selectedCompanyId) item.blockSelected = false;

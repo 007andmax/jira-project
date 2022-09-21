@@ -83,7 +83,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
           this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.id == this.company.addresses[0].id));
           this.company.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.id == this.company.addresses[1].id));
         }
-        console.log("this.company.addresses", this.company.addresses);
         this.cd.detectChanges();
       }
     })

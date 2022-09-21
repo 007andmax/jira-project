@@ -82,7 +82,6 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
-    console.log("this.company", this.company);
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -163,8 +162,6 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     }
   }
   public onCheckGoogleAutoComplete(event, index) {
-    console.log(event.target.getAttribute("location-is-init"));
-    console.log(Boolean(event.target.getAttribute("location-is-init")));
     if (event.target.getAttribute("location-is-init") == "false") this.getPlaceAutocomplete(event, index);
   }
   private getPlaceAutocomplete(event, index) {
