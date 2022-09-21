@@ -41,7 +41,7 @@ export class ReportEmail {
         return {
             "recipients": this.emails,
             "subject": this.subject,
-            invoicePaymentReportDto: {
+            paymentReportDto: {
                 invoicePaymentDtos: payments
             },
             note: this.note,
