@@ -34,7 +34,7 @@ export class PaymentItemComponent implements OnInit {
 
   }
   public getDate() {
-    return moment(this.payment.createdAt).format('YYYY/MM/DD');
+    return moment(this.payment.createdAt).format('DD MMM YYYY');
   }
   showEditPayment() {
     this.onEditPayment.emit(this.payment);

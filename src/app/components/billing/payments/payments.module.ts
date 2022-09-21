@@ -20,6 +20,7 @@ import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datep
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/invoice-export.module';
 
 
 
@@ -51,7 +52,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         MultiDatepickerModule,
         PaymentsRoutingModule,
         PreviewPhoneMaskModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        InvoiceExportModule
     ],
 
 

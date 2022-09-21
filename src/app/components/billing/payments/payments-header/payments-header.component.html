@@ -7,6 +7,11 @@
             ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
+            <invoice-export
+                (onPrint)="print($event)"
+                (onEmail)="sendEmail()"
+                (onExport)="onSelectExport($event)"
+            ></invoice-export>
             <div class="d-f ai-c">
                 <button
                     class="qt-btn --transparent"

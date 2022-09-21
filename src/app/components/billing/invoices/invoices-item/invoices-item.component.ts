@@ -10,6 +10,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 @Component({
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
@@ -29,6 +30,7 @@ export class InvoicesItemComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private appService: AppService,
     private permissionsService: PermissionsService,
+    private toastrProgressStateService: ToastrProgressStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
@@ -69,49 +71,6 @@ export class InvoicesItemComponent implements OnInit {
   parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');
   };
-  getDueDate() {
-    var dueDate = new Date(this.invoice.dueDate).getTime();
-    var today = Date.now();
-    let overDue = (dueDate - today) / 86400000;
-    let outstanding = (new Date(this.invoice.date).getTime() - today) / 86400000;
-    let isOverDue = (overDue < 0);
-    let isOutstanding = (overDue > 0);
-    if (isOverDue) {
-      //   this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) + 1000000000;
-      // this.invoice.dueDatePositionForSorting = 0;
-      return Math.abs(Math.floor(overDue));
-    } else if (isOutstanding) {
-      //    this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(outstanding))) + 2000000000;
-      //  this.invoice.dueDatePositionForSorting = 1;
-      return Math.abs(Math.floor(overDue));
-    }
-  }
-  getOverDueDate() {
-    var dueDate = new Date(this.invoice.dueDate).getTime();
-    var today = Date.now();
-    let overDue = (dueDate - today) / 86400000;
-    let outstanding = (new Date(this.invoice.date).getTime() - today) / 86400000;
-    let isOverDue = (overDue < 0);
-    let isOutstanding = (overDue > 0);
-    if (isOverDue) {
-      //   this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(overDue))) + 1000000000;
-      // this.invoice.dueDatePositionForSorting = 0;
-      return Math.abs(Math.floor(overDue));
-    } else if (isOutstanding) {
-      //    this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(outstanding))) + 2000000000;
-      //  this.invoice.dueDatePositionForSorting = 1;
-      return Math.abs(Math.floor(outstanding));
-    }
-
-  };
-  getPaidOnDate() {
-    var today = Date.now();
-    var paidOn = new Date(this.invoice.paidOn).getTime();
-    var paid = (today - paidOn) / 86400000;
-    // this.invoice.daysDueDateForSorting = (Math.abs(Math.floor(paid))) + 3000000000 ;
-    //  this.invoice.dueDatePositionForSorting = 2;
-    return Math.floor(Math.abs(paid));
-  };
   deleteInvoice() {
     this.confirmStateService.setConfirmAction(DELETE_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
@@ -132,6 +91,7 @@ export class InvoicesItemComponent implements OnInit {
     if (this.getPermissions('VIEW_ACCOUNTING')) this.onPreviewInvoice.emit(this.invoice);
   }
   rollbackInvoice() {
+    if (this.toastrProgressStateService.check(this.invoice.id)) return;
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
@@ -140,6 +100,7 @@ export class InvoicesItemComponent implements OnInit {
     this.invoiceStateService.setInvoiceForRollback(this.invoice);
   }
   refundPayments() {
+    if (this.toastrProgressStateService.check(this.invoice.id)) return;
     this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Invoice will be marked as not paid.`;

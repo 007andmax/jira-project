@@ -9,23 +9,23 @@ export class ToastrProgressStateService {
   listToast = [];
   constructor(private toaster: ToastrService,
     private appStateService: AppStateService,) { }
-  public onInit(quoteId) {
+  public onInit(id) {
     let toaster = this.toaster.info('The request is being processed', null, {
       timeOut: 0,
       progressBar: true,
       closeButton: false,
     });
     this.listToast.push({
-      quoteId: quoteId,
+      id: id,
       toastId: toaster.toastId
     })
     this.appStateService.changeDetectorRef();
   }
-  public check(quoteId) {
-    return this.listToast.find(item => item.quoteId == quoteId);
+  public check(id) {
+    return this.listToast.find(item => item.id == id);
   }
-  public clear(quoteId) {
-    let index = this.listToast.findIndex(item => item.quoteId == quoteId);
+  public clear(id) {
+    let index = this.listToast.findIndex(item => item.id == id);
     if (index > -1) {
       this.toaster.remove(this.listToast[index].toastId);
       this.listToast.splice(index, 1);

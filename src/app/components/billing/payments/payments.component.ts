@@ -97,6 +97,7 @@ export class PaymentsComponent implements OnInit {
         let index = this.payments.findIndex(item => item.id === payment.id);
         if (index > -1) this.payments[index] = payment;
       }
+      this.paymentsStateService.setPayments(this.payments);
       this.cd.detectChanges();
     })
     this.sub.add(changePaymentsArray);
@@ -151,12 +152,13 @@ export class PaymentsComponent implements OnInit {
     this.paymentsFilter.setOffset(this.page_number * this.offset);
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.paymentsService.getPayments(this.paymentsFilter.getFIlter()).subscribe((data: any) => {
-      this.payments = [...this.payments, ...data];
+      this.payments = [...this.payments, ...data.map(item => new Payment(item))];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.paymentsListService.setBlockList(true);
       this.page_number += 1;
       this.showPreloader = false;
       this.showPendingPreloader = false;
+      this.paymentsStateService.setPayments(this.payments);
       this.cd.detectChanges();
     })
   }

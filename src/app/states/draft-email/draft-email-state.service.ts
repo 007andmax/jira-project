@@ -8,6 +8,8 @@ import { Company } from '../../interfaces/company/company';
 export class DraftEmailStateService {
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   showAsideSendReport: EventEmitter<any> = new EventEmitter();
+  showAsideSendReportInvoice: EventEmitter<any> = new EventEmitter();
+  showAsideSendReportPayment: EventEmitter<any> = new EventEmitter();
   clear: EventEmitter<any> = new EventEmitter();
   action: string = null;
   selectedUsers: Array<User> = [];
@@ -56,6 +58,12 @@ export class DraftEmailStateService {
   }
   public toggleAsideForAdd() {
     this.showAsideForAdd.emit();
+  }
+  public toogleAsideAddReportInvoice() {
+    this.showAsideSendReportInvoice.emit(null);
+  }
+  public toogleAsideSendReportPayment() {
+    this.showAsideSendReportPayment.emit(null);
   }
   public toogleAsideAddReport(data) {
     this.showAsideSendReport.emit(data);
