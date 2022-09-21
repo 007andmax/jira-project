@@ -53,7 +53,10 @@ export class CompanyDashDetailComponent implements OnInit {
     },
     reputation: 0,
     clientType: '',
-    description: ''
+    description: '',
+    shippingLocationName: '',
+    shipping_addresses_name: '',
+    billingLocationName: ''
   };
   _id: string = '';
   mapSrc: string = '';
@@ -572,7 +575,8 @@ export class CompanyDashDetailComponent implements OnInit {
   openTag(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal', backdrop: 'static', keyboard: false });
   }
-  openMap(content: any) {
+  openMap(content: any, addresses) {
+    if (addresses) this.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q=" + addresses.locationLat + "," + addresses.locationLng + "";
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
   }
 
@@ -597,7 +601,7 @@ export class CompanyDashDetailComponent implements OnInit {
 
 
   mapUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.companyDetailing.mapSrc);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);
   }
 
   startTimeChange(workingday: any, startTime: any) {

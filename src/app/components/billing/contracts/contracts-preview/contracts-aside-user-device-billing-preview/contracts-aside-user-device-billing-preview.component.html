@@ -135,7 +135,7 @@
                             </td>
                             <td
                                 class="col-price"
-                                [textContent]="item.rate"
+                                [textContent]="item.rate | number: '1.2-2'"
                             >
                             </td>
                             <td></td>
@@ -326,6 +326,30 @@
                     type="text"
                     readonly
                 >
+            </div>
+        </div>
+        <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':!contractsUserDevice.enableAutoCreate}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Manual create billable item</div>
+            </div>
+        </div>
+        <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsUserDevice.enableInvoiceAutoCreate}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Automatically create and send invoice</div>
             </div>
         </div>
         <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">

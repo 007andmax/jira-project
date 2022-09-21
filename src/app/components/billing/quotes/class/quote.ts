@@ -27,6 +27,11 @@ export class Quote {
             for (const key in data) {
                 this[key] = data[key];
             }
+            let billing = (this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
+            let shipping = (this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
+            this.company.addresses = [];
+            if (billing) this.company.addresses = [billing];
+            if (shipping) this.company.addresses.push(shipping);
         }
     }
 }

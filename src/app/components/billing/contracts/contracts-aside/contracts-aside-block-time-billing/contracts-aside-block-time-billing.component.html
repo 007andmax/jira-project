@@ -329,6 +329,45 @@
             </div>
         </div>
         <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':!contractsBlockTime.enableAutoCreate}"
+                    (click)="contractsBlockTime.setEnableAutoCreate(!contractsBlockTime.enableAutoCreate)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Manual create billable item</div>
+            </div>
+        </div>
+        <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsBlockTime.enableInvoiceAutoCreate}"
+                    (click)="contractsBlockTime.setEnableInvoiceAutoCreate(!contractsBlockTime.enableInvoiceAutoCreate)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <ng-template
+                    #tipContent
+                    class="tooltip"
+                >
+                    This option can be enabled only if the Manual create billable item option is disabled
+                </ng-template>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
+                    Automatically create and send invoice
+                    <span
+                        class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                        placement="top"
+                        [ngbTooltip]="tipContent"
+                    ></span>
+                </div>
+            </div>
+        </div>
+        <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
         <div class="qt-df qt-jc-fe">
             <div class="contract-total qt-color-dark">
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">

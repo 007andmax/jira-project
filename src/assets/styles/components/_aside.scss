@@ -161,7 +161,7 @@
         position: absolute;
         left: 16px;
         background-size: 20px;
-        background-image: url("/assets/img/icons/close-white.svg");
+        background-image: url("/assets/img/icons/close-light.svg");
       }
     }
   }
@@ -235,6 +235,7 @@
   &__content {
     padding: 24px 32px;
     overflow: auto;
+    overflow-x: hidden;
     height: calc(100% - 127px);
 
     @media (max-width: 767px) {

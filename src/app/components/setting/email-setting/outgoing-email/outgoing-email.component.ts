@@ -9,6 +9,7 @@ import {
   FormControl
 } from "@angular/forms";
 import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
+import { AppStateService } from "src/app/states/app/app-state.service";
 
 
 @Component({
@@ -89,7 +90,8 @@ export class OutgoingEmailComponent implements OnInit {
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -330,7 +332,11 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("password").enable();
     }
     this.setDomain(selectedEmailVia[0].label.toUpperCase());
-    this.saveSMTP(this.smtpForm, undefined);
+    this.smtpForm.patchValue({
+      login: "",
+      password: "",
+    });
+    // this.saveSMTP(this.smtpForm, undefined);
   }
 
   /**
@@ -361,7 +367,6 @@ export class OutgoingEmailComponent implements OnInit {
     if (!this.disableFields) {
       var domain = this.preinitializedDomains[value],
         port = this.portToTypes[this.smtp.encryptionType];
-
       if (domain) {
         for (var prop in domain) {
           this.smtp[prop] = domain[prop];
@@ -391,6 +396,11 @@ export class OutgoingEmailComponent implements OnInit {
           });
         }
       }
+      if (value == "QUICKTECH MAIL SERVER") {
+        this.smtpForm.patchValue({
+          domain: ""
+        });
+      }
     }
   }
 
@@ -414,7 +424,6 @@ export class OutgoingEmailComponent implements OnInit {
    */
   saveSMTP(form, isTest) {
     this.submitted = true;
-
     if (this.isSMTPLoginUnique) {
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
@@ -439,7 +448,7 @@ export class OutgoingEmailComponent implements OnInit {
             } else {
               this.toastr.success("Saved Successfully");
             }
-
+            this.appStateService.changeDetectorRef();
             this.disableFields = false;
             this.submitted = false;
           },
@@ -449,21 +458,24 @@ export class OutgoingEmailComponent implements OnInit {
           }
         );
       } else if (!this.smtp.useSMTP) {
-
         this.smtp.login = "";
         this.smtp.password = "";
+        if (this.smtpForm.value.usedEmailVia == "Quicktech mail server") this.smtp.domain = "";
         this.smtpForm.patchValue({
           login: "",
-          password: ""
+          password: "",
+          domain: this.smtp.domain
         });
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
             this.loading = false; $(".loading").css("display", "none");
             this.toastr.success("Saved Successfully");
+            this.appStateService.changeDetectorRef();
           },
           (error: any) => {
             this.loading = false; $(".loading").css("display", "none");
             this.toastr.error(`Error Occured, ${error}`);
+            this.appStateService.changeDetectorRef();
           }
         );
       }

@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CompanyItem } from 'src/app/components/companies/class/company-item';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -25,7 +27,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @Input() validate: QuoteValdiateEdit = new QuoteValdiateEdit();
   @Output() onStopPreloader = new EventEmitter();
-  quoteCompany: any;
+  quoteCompany: CompanyItem;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
   showPreloader: boolean = true;
@@ -50,12 +52,19 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.getCLientsList(data);
     })
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-      if (data.action === 'COMPANY_SAVED' && this.quoteCompany.id === data.data.id) {
-        this.quoteCompany.name = data.data.name;
-        this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
-        this.quoteCompany.companyInfo.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
-        this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+      if (data.action === 'COMPANY_SAVED' && this.quoteCompany && this.quoteCompany.id === data.data.id) {
+        this.quote.company.name = data.data.name;
+        this.quote.company.primaryContact.firstName = data.data.companyInfo.contacts[0].firstName;
+        this.quote.company.primaryContact.lastName = data.data.companyInfo.contacts[0].lastName;
+        // this.quote.company.addresses[0].address = data.data.companyInfo.addresses[0].address;
+        this.quote.company.primaryContact.primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+        if (data.data.companyInfo.addresses.length == 1) {
+          this.quote.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
+        }
+        if (data.data.companyInfo.addresses.length == 2) {
+          this.quote.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.isPrimary));
+          this.quote.company.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => !item.isPrimary));
+        }
       }
     });
     this.getInvoiceNote();
@@ -64,7 +73,9 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
         if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
-        this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.company.id);
+        this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.company.id))));
+        // this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+        //if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
         this.onStopPreloader.emit(null);
@@ -91,6 +102,20 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.notes = data;
     })
+  }
+  selectAddress(index, newAddress) {
+    //  this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
+    //  if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+    if (index == 0) {
+      this.quote.setBillingAddress(newAddress.addressWithSuitNumberAndPostalCode);
+      this.quote.setBillingLocationName(newAddress.locationName);
+      this.quote.setBillTo(newAddress.id);
+    }
+    if (index == 1) {
+      this.quote.setShippingAddress(newAddress.addressWithSuitNumberAndPostalCode);
+      this.quote.setShippingLocationName(newAddress.locationName);
+      this.quote.setShipTo(newAddress.id);
+    }
   }
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {

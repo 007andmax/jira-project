@@ -18,6 +18,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CompanyProfileAddress } from '../../class/company-profile-address';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -101,6 +102,13 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       }
     })
   }
+  onSameAsBilling(event) {
+    if (event.target.checked) {
+      this.company.addresses[1] = new CompanyProfileAddress(JSON.parse(JSON.stringify(this.company.addresses[0])));
+      this.company.addresses[1].sameAsBilling = true;
+      this.company.addresses[1].isPrimary = false;
+    }
+  }
   removeLogo() {
     this.companiesService.removeAttachment(this.company.logo.origin.id).subscribe(data => {
       this.company.editLogo(null);
@@ -117,6 +125,8 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
         if (data.value) {
           this.validate.resetName();
           this.validate.resetNameIsExist();
+          this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
+          this.validate.resetBillindAddress();
         } else {
           this.validate.setNameIsExist();
         }
@@ -151,12 +161,12 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       })
     }
   }
-  public onCheckGoogleAutoComplete() {
-    if (!this.locationIsinit) this.getPlaceAutocomplete();
+  public onCheckGoogleAutoComplete(event, index) {
+    if (event.target.getAttribute("location-is-init") == "false") this.getPlaceAutocomplete(event, index);
   }
-  private getPlaceAutocomplete() {
-    this.locationIsinit = true;
-    const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
+  private getPlaceAutocomplete(event, index) {
+    event.target.setAttribute("location-is-init", true);
+    const autocomplete = new google.maps.places.Autocomplete(event.target,
       {
         componentRestrictions: null,
         types: ['address']  // 'establishment' / 'address' / 'geocode'
@@ -164,20 +174,20 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       const place = autocomplete.getPlace();
 
-      this.invokeEvent(place);
+      this.invokeEvent(place, event, index);
     });
   }
-  invokeEvent(place: any) {
-    this.company.addresses[0].locationLat = place.geometry.location.lat();
-    this.company.addresses[0].locationLng = place.geometry.location.lng();
-    this.company.addresses[0].address = this.addresstext.nativeElement.value;
-    this.company.addresses[0].addressWithSuitNumberAndPostalCode = place.formatted_address;
+  invokeEvent(place: any, event, index) {
+    this.company.addresses[index].locationLat = place.geometry.location.lat();
+    this.company.addresses[index].locationLng = place.geometry.location.lng();
+    this.company.addresses[index].address = event.target.value;
+    this.company.addresses[index].addressWithSuitNumberAndPostalCode = place.formatted_address;
     place.address_components.forEach(item => {
       if (item.types.indexOf('postal_code') !== -1) {
-        this.company.addresses[0].postalCode = item.short_name;
+        this.company.addresses[index].postalCode = item.short_name;
       }
       if (item.types.indexOf('country') !== -1) {
-        this.company.addresses[0].countryCode = item.short_name;
+        this.company.addresses[index].countryCode = item.short_name;
       }
       this.cd.detectChanges();
     })
@@ -189,6 +199,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   }
   public onChangePhoneNumber() {
     this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
+  }
+  public onChangeShippingPhoneNumber() {
+    this.validate.checkValidShippingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
   }
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);

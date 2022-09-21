@@ -31,6 +31,9 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
     });
     this.taxesDropDown.setEditItems(listTaxes);
   }
+  onChangeCount(event) {
+    this.service.count = event;
+  }
   remove() {
     this.onRemove.emit(null);
   }

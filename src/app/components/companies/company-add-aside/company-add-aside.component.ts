@@ -51,6 +51,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onInitFullVersion() {
     this.company.fullVersion();
     this.version = 'full';
+    this.cd.detectChanges();
   }
   public onAddFull() {
     if (!this.validate.isValidate(this.company)) return;

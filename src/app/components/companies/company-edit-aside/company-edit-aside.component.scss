@@ -39,3 +39,43 @@
 #upload-file {
     display: none !important;
 }
+.billing-background,
+.shipping-background {
+    padding: 6px 17px 0px;
+    border-top: 1px solid #dfe3e8;
+    width: calc(100% + 16px);
+    margin-left: -17px;
+    margin-top: 24px;
+
+    >[class*="col-md-"] {
+        margin-top: 20px;
+    }
+
+    .billing-divider {
+
+        p {
+            font-size: 11px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.shipping-background {
+    padding: 0px 17px 0px;
+    margin-top: 0px;
+    border-top: none;
+
+    .billing-divider {
+        margin-top: 10px !important;
+    }
+
+    .qt-checkbox {
+        width: 16px;
+        height: 16px;
+        min-height: 16px;
+    }
+    .same-as-billing-txt {
+        line-height: 20px;
+    }
+}

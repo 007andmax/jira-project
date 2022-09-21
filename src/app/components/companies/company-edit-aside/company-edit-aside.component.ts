@@ -28,6 +28,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CompanyProfileAddress } from '../class/company-profile-address';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -130,43 +131,47 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.contacts[0].jobTitleId = (data) ? data.id : null;
     this.selectedJobTitle = data;
   }
-  private getPlaceAutocomplete() {
-    this.locationIsinit = true;
-    const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
+  private getPlaceAutocomplete(event, index) {
+    event.target.setAttribute("location-is-init", true);
+    const autocomplete = new google.maps.places.Autocomplete(event.target,
       {
         componentRestrictions: null,
         types: ['address']  // 'establishment' / 'address' / 'geocode'
       });
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       const place = autocomplete.getPlace();
-      this.invokeEvent(place);
+
+      this.invokeEvent(place, event, index);
     });
   }
 
-  invokeEvent(place: any) {
-    this.company.addresses[0].locationLat = place.geometry.location.lat();
-    this.company.addresses[0].locationLng = place.geometry.location.lng();
-    this.company.addresses[0].address = this.addresstext.nativeElement.value;
-    this.company.addresses[0].addressWithSuitNumberAndPostalCode = place.formatted_address;
+  invokeEvent(place: any, event, index) {
+    this.company.addresses[index].locationLat = place.geometry.location.lat();
+    this.company.addresses[index].locationLng = place.geometry.location.lng();
+    this.company.addresses[index].address = event.target.value;
+    this.company.addresses[index].addressWithSuitNumberAndPostalCode = place.formatted_address;
     place.address_components.forEach(item => {
       if (item.types.indexOf('postal_code') !== -1) {
-        this.company.addresses[0].postalCode = item.short_name;
+        this.company.addresses[index].postalCode = item.short_name;
       }
       if (item.types.indexOf('country') !== -1) {
-        this.company.addresses[0].countryCode = item.short_name;
+        this.company.addresses[index].countryCode = item.short_name;
       }
       this.cd.detectChanges();
     })
   }
-
-  public onCheckGoogleAutoComplete() {
-    if (!this.locationIsinit) this.getPlaceAutocomplete();
+  public onChangeShippingPhoneNumber() {
+    this.validate.checkValidShippingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
+  }
+  public onCheckGoogleAutoComplete(event, index) {
+    if (event.target.getAttribute("location-is-init") == "false") this.getPlaceAutocomplete(event, index);
   }
   close() {
     this.opened = false;
     this.locationIsinit = false;
 
     this.company = new CompanyProfile();
+    this.company.initShippingAdress();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
@@ -183,6 +188,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
+      if (this.company.addresses.length == 1) this.company.initShippingAdress();
       if (this.company.contacts[0].defaultSubscriptions) this.companySubscriptionState.onEditMode(this.company.contacts[0].defaultSubscriptions);
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
@@ -200,6 +206,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
+  }
+  onSameAsBilling(event) {
+    if (event.target.checked) this.company.addresses[1].initSameAsBilling(this.company.addresses[0]);
   }
   public onSelectCompanyTypes(type) {
     if (type) this.company.clientType = type.value;
@@ -268,6 +277,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         if (data.value) {
           this.validate.resetName();
           this.validate.resetNameIsExist();
+          this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
+          this.validate.resetBillindAddress();
         } else {
           this.validate.setNameIsExist();
         }

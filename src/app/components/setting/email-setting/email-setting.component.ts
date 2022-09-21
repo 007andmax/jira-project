@@ -107,6 +107,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       }
       counter++;
     }
+    return this.emailVia[1];
   }
 
 }

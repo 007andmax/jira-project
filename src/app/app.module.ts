@@ -137,6 +137,7 @@ import { GlNumberCheckUseComponent } from './components/setting/accounting/gl-nu
 import { CannedResponsesComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses.component';
 import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
 import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { ReportSendEmailModule } from './components/reports/report-additional-actions/report-send-email/report-send-email.module';
 declare var $: any;
 
 /**
@@ -219,7 +220,8 @@ declare var $: any;
     PreviewAttachmentModule,
     SupportPageAddCategoryModule,
     LeftPanelSuperAdminModule,
-    SupportPageAddSubCategoryModule
+    SupportPageAddSubCategoryModule,
+    ReportSendEmailModule
   ],
   entryComponents: [
     ModalQuoteComponent,
@@ -242,7 +244,7 @@ declare var $: any;
     InventoryCheckUseComponent,
     GoogleAuthenticatorComponent,
     GoogleAuthenticatorScratchesComponent,
-    GlNumberCheckUseComponent
+    GlNumberCheckUseComponent,
     // RecurringTicketsComponent
   ],
   providers: [

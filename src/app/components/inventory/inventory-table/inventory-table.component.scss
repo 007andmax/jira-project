@@ -45,7 +45,7 @@ pre {
 .products-table__cost,.products-table__sale-price,.products-table__mfg,.products-table__ilc {
     input {
         width: 100%;
-        padding: 4px 24px 4px 8px !important;
+        padding: 4px 8px;
         &:hover {
             background: $gray-200--old;
         }

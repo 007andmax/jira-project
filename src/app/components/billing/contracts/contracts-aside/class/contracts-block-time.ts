@@ -26,6 +26,8 @@ export class ContractsBlockTime {
     taxIds: Array<string> = [];
     type: string = "BLOCK_TIME";
     reviewDate: string;
+    enableAutoCreate: boolean = true;
+    enableInvoiceAutoCreate: boolean = false;
     constructor() { }
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
@@ -50,9 +52,18 @@ export class ContractsBlockTime {
         this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
-
+        if (data.enableAutoCreate != undefined) this.enableAutoCreate = data.enableAutoCreate;
+        if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
+    }
+    public setEnableAutoCreate(data) {
+        this.enableAutoCreate = data;
+        if (!this.enableAutoCreate) this.enableInvoiceAutoCreate = false;
+    }
+    public setEnableInvoiceAutoCreate(data) {
+        if (!this.enableAutoCreate) return;
+        this.enableInvoiceAutoCreate = data;
     }
     public resetCustomBillingDate() {
         this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
@@ -102,7 +113,9 @@ export class ContractsBlockTime {
             reviewDate: this.reviewDate,
             taxIds: this.taxIds,
             type: this.type,
-            withCustomBillingDate: this.withCustomBillingDate
+            withCustomBillingDate: this.withCustomBillingDate,
+            enableAutoCreate: this.enableAutoCreate,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
     public setCompanyId(data) {

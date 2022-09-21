@@ -393,8 +393,21 @@ app-invoices-item,app-payment-item {
     background-color: $white;
     padding: 40px 32px;
 
+    &__row {
+      row-gap: 10px;
+      column-gap: 10px;
+    }
+    &__data {
+      flex: 1 1 210px;
+    }
+    &__shipping-address,
+    &__billing-address {
+      flex: 1 1 290px;
+      padding: 0;
+    }
+
     .company-logo {
-      max-width: 200;
+      max-width: 200px;
       max-height: 70px;
     }
     .company-info {

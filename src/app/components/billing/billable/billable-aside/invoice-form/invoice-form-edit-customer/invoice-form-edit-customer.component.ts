@@ -83,7 +83,7 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
   }
   public onUpdate() {
     if (!this.validate.isValidate(this.company)) return;
-    let updateCompany = this.companiesService.updateCompany(this.company).subscribe(data => {
+    let updateCompany = this.companiesService.updateCompany(this.company.getDataForUpdate()).subscribe(data => {
       this.onUpdateCompany.emit(null);
       this.close();
       this.cd.detectChanges();

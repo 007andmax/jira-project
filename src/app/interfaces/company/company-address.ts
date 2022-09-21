@@ -18,4 +18,5 @@ export interface CompanyAndress {
     shortCity: string;
     shortState: string;
     suiteNumber: string;
+    locationName: string;
 }

@@ -11,6 +11,9 @@ import { SelectSearchModule } from '../../shared/select-search/select-search.mod
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { InvoicesRoutingModule } from './invoices-routing.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { InvoiceExportComponent } from './invoices-header/invoice-export/invoice-export.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { InvoiceExportModule } from './invoices-header/invoice-export/invoice-export.module';
 
 
 
@@ -29,7 +32,9 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         SelectSearchModule,
         MultiDatepickerModule,
         InvoicesRoutingModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        DynamicTooltipModule,
+        InvoiceExportModule
     ],
 
 

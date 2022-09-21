@@ -33,5 +33,17 @@ export class Payment {
         this.refundMethod = data.refundMethod;
         this.totalSum = data.totalSum;
     }
+    public getDataForExportPDF() {
+        return {
+            createdAt: this.createdAt,
+            clientCompanyName: this.clientCompanyName,
+            note: this.note,
+            paymentMethod: this.paymentMethod,
+            partialPaidAmount: this.partialPaidAmount,
+            partialPaidInvoices: this.partialPaidInvoices,
+            reference: this.reference,
+            status: this.refundMethod ? 'Refund' : 'Paid'
+        }
+    }
 
 }
