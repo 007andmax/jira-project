@@ -55,7 +55,8 @@ export class ContractsOther extends ContractsUserDevice {
             customBillingDate: this.customBillingDate,
             type: "SERVICE_CONTRACT",
             withCustomBillingDate: this.withCustomBillingDate,
-            manualCreateBillableItem: this.manualCreateBillableItem
+            manualCreateBillableItem: this.manualCreateBillableItem,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
 }
