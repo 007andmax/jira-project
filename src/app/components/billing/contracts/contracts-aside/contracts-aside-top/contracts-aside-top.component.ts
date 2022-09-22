@@ -24,16 +24,16 @@ export class ContractsAsideTopComponent implements OnInit {
     private companiesState: CompaniesStateService,) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+    if (this.companiesState.getLightClientsCompanies().length > 0) this.getClientsList(this.companiesState.getLightClientsCompanies());
+    if (this.companiesState.getLightClientsCompanies().length == 0) this.companiesState.onInitGetLightCompanies();
+    let getOnCompanies = this.companiesState.onLightClientsCompanies.subscribe((data) => {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
   }
   getClientsList(data) {
-    this.companies = data.filter(item => item.clientType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    if (this.companiesState.getCompanyRoutingId()) this.companiesDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
+    this.companies = data;
+    if (this.companiesState.getCompanyRoutingId()) this.companiesDP.onSelect(this.companies.find(item => item.id === this.companiesState.getCompanyRoutingId()));
 
   }
   onSelectType(data) {

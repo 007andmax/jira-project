@@ -17,6 +17,9 @@ import { CompanyAssigned } from 'src/app/components/companies/class/company-assi
 })
 export class CompaniesStateService {
   allCompanies = [];
+  lightAllCompanies = [];
+  lightClientsCompanies = [];
+  onLightClientsCompanies: EventEmitter<any> = new EventEmitter();
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -85,6 +88,15 @@ export class CompaniesStateService {
       }
 
     })
+  }
+  public onInitGetLightCompanies() {
+    this.companiesService.getLightClientsCompanies().subscribe((data: any) => {
+      this.lightClientsCompanies = data;
+      this.onLightClientsCompanies.emit(this.lightClientsCompanies);
+    })
+  }
+  public getLightClientsCompanies() {
+    return this.lightClientsCompanies;
   }
   public getAssignedDocumentCategories() {
     return this.assignedDocumentCategories;

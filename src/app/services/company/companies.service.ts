@@ -41,8 +41,15 @@ export class CompaniesService {
    * Get all companies list
    */
   public getCompaniesList() {
-    return this.http.get(this.apiUrl + 'company/clients');
+    return this.http.post(this.apiUrl + 'company/clients', {});
   }
+  public getLightClientsCompanies() {
+    return this.http.post(this.apiUrl + 'company/clients', {
+      "needCompanyInfo": false,
+      "clientType": "CLIENT"
+    });
+  }
+
 
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/filter', data);
