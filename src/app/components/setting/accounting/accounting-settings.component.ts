@@ -31,7 +31,8 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
 
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
@@ -46,7 +47,8 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
     this.sub.unsubscribe();
   }
 

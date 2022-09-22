@@ -1,359 +1,361 @@
-<div class="page-insider invoice-ticket">
-    <div class="cmn-area invoice">
-        <form
-            [formGroup]="invoiceForm"
-            (ngSubmit)="onSubmit()"
-        >
-            <div class="f-row">
-                <div class="f-col col-50">
-                    <label>Starting Invoice number</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="invoiceCount"
-                            [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
-                            placeholder="Enter Starting ticket number"
-                        >
-                        <div
-                            *ngIf="submitted && f.invoiceCount.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.invoiceCount.errors.required">Ticket Number is required</div>
-                            <div *ngIf="f.invoiceCount.errors.pattern">Only Number is allowed</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="f-col col-50">
-                    <label>Default invoice terms</label>
-                    <div class="form-row">
-                        <div class="input-select">
-                            <select
-                                class="cmn-select form-input"
-                                formControlName="invoiceTerms"
-                            >
-                                <option value="15">15 days</option>
-                                <option value="30">30 days</option>
-                                <option value="45">45 days</option>
-                                <option value="60">60 days</option>
-                            </select>
-                        </div>
-                        <div
-                            *ngIf="submitted && f.invoiceTerms.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.invoiceTerms.errors.required">Invoice Terms is required</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="f-col col-50">
-                    <label>Tax ID description</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="taxIdDescription"
-                            placeholder="Enter Tax ID description"
-                        >
-                        <div
-                            *ngIf="submitted && f.taxIdDescription.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.taxIdDescription.errors.required">Tax ID description is required</div>
-                            <div *ngIf="f.taxIdDescription.errors.pattern">Tax ID description is not valid</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="f-col col-50">
-                    <label>Tax ID</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="taxId"
-                            placeholder="Enter Tax Id"
-                        >
-                        <div
-                            *ngIf="submitted && f.taxId.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.taxId.errors.required">TaxId is required</div>
-                            <div *ngIf="f.taxId.errors.pattern">TaxId is not valid</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="f-col col-100">
-                    <label>Memo Of Invoice</label>
-                    <div class="form-row">
-                        <textarea
-                            class="form-input"
-                            formControlName="conditions"
-                            placeholder="Enter memo of invoice"
-                        ></textarea>
-                    </div>
-                </div>
-                <div class="f-col col-100">
-                    <label>Attach to invoice email</label>
-                    <div class="qt-df qt-mb-25 enables-invoice-settings">
-                        <div class="qt-df">
-                            <div
-                                class="qt-toggle qt-mr-8"
-                                [ngClass]="{'--on':includeInvoiceAsAttachmentSetting}"
-                                (click)="includeInvoiceAsAttachmentSetting = !includeInvoiceAsAttachmentSetting"
-                            >
-                                <div class="qt-toggle__circle"></div>
-                            </div>
-                            <div>
-                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Include invoice as attachment</div>
-                            </div>
-                        </div>
-                        <div class="qt-df invoice-email">
-                            <div
-                                class="qt-toggle qt-mr-8"
-                                [ngClass]="{'--on':includeAccountReceivableReportAsAttachmentSetting}"
-                                (click)="includeAccountReceivableReportAsAttachmentSetting = !includeAccountReceivableReportAsAttachmentSetting"
-                            >
-                                <div class="qt-toggle__circle"></div>
-                            </div>
-                            <div>
-                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
-                                    Include Accounts receivable report as
-                                    <br>
-                                    attachment
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="f-col col-100">
-                    <div class="qt-df qt-mb-16 enables-invoice-settings">
-                        <div class="qt-df">
-                            <div
-                                class="qt-toggle qt-mr-8"
-                                [ngClass]="{'--on':invoiceForm.value.enableInvoiceContact}"
-                                (click)="onEnableInvoice(!invoiceForm.value.enableInvoiceContact)"
-                            >
-                                <div class="qt-toggle__circle"></div>
-                            </div>
-                            <div>
-                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Set custom Invoice contact</div>
-                            </div>
-                        </div>
-                        <div class="qt-df invoice-email">
-                            <div
-                                class="qt-toggle qt-mr-8"
-                                [ngClass]="{'--on':invoiceForm.value.enableOwnerSending}"
-                                (click)="onEnableOwnerSending(!invoiceForm.value.enableOwnerSending)"
-                            >
-                                <div class="qt-toggle__circle"></div>
-                            </div>
-                            <div>
-                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">CC invoice copies to tech company owner</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-100 accounting-contact-header"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <h3>Accounting Contact</h3>
-                </div>
-                <div
-                    class="f-col col-50"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <label>First name</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="firstName"
-                            placeholder="Enter Your First name"
-                        >
-                        <div
-                            *ngIf="submitted && f.firstName.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.firstName.errors.required">First name is required</div>
-                            <div *ngIf="f.firstName.errors.minlength">First name is too small.</div>
-                            <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-50"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <label>Last name</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="lastName"
-                            placeholder="Enter Your Last Name"
-                        >
-                        <div
-                            *ngIf="submitted && f.lastName.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.lastName.errors.required">Last name is required</div>
-                            <div *ngIf="f.lastName.errors.minlength">Last name is too small.</div>
-                            <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-50"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <label>Email Address</label>
-                    <div class="form-row">
-                        <input
-                            type="email"
-                            class="form-input"
-                            formControlName="email"
-                            placeholder="Enter Your Email Address"
-                        >
-                        <div
-                            *ngIf="submitted && f.email.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                            <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-50"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <label>Role</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="designation"
-                            placeholder="Enter Your Role"
-                        >
-                        <div
-                            *ngIf="submitted && f.designation.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.designation.errors.minlength">Role is tool small</div>
-                            <div *ngIf="f.designation.errors.maxlength">Role is tool large</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-50"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <label>
-                        Primary Phone Number
-                        <a
-                            href="javascript:;"
-                            *ngIf="!isAddPhone && isDisable"
-                            class="static-link"
-                            (click)="onAddPhone()"
-                        >
-                            + Add Phone
-                        </a>
-                    </label>
-                    <div class="form-row primary-phone">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="primaryPhone"
-                            placeholder="Primary Phone Number"
-                            prefix="+1"
-                            [validation]="false"
-                            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                            [dropSpecialCharacters]="false"
-                        >
-                        <select
-                            class="cmn-select form-input"
-                            formControlName="primaryPhoneType"
-                        >
-                            <option value="MOBILE">mobile</option>
-                            <option value="OFFICE">office</option>
-                            <option value="FAX">fax</option>
-                        </select>
-                    </div>
-                    <div
-                        *ngIf="submitted && f.primaryPhone.errors"
-                        class="invalid-feedback"
-                    >
-                        <div *ngIf="f.primaryPhone.errors.required">primaryPhone is required</div>
-                        <div *ngIf="f.primaryPhone.errors.pattern || f.primaryPhone.errors.minlength">primaryPhone must be a valid number</div>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-50"
-                    *ngIf="isAddPhone && invoiceForm.value.enableInvoiceContact"
-                >
-                    <label>
-                        Secondary Phone Number
-                        <a
-                            *ngIf="isDisable"
-                            href="javascript:;"
-                            class="static-link"
-                            (click)="onAddPhone()"
-                        >
-                            Remove
-                        </a>
-                    </label>
-                    <div class="form-row primary-phone">
-                        <input
-                            type="text"
-                            class="form-input"
-                            formControlName="secondaryPhone"
-                            placeholder="Secondary Phone Number"
-                            prefix="+1"
-                            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                            [validation]="false"
-                            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                            [dropSpecialCharacters]="false"
-                        >
-                        <select
-                            class="cmn-select form-input"
-                            formControlName="secondaryPhoneType"
-                        >
-                            <option value="MOBILE">mobile</option>
-                            <option value="OFFICE">office</option>
-                            <option value="FAX">fax</option>
-                        </select>
-                    </div>
-                </div>
-                <div
-                    class="f-col col-100 qt-mt-12"
-                    [hidden]="!invoiceForm.value.enableInvoiceContact"
-                >
-                    <div class="qt-df qt-ai-c">
-                        <label
-                            class="qt-checkbox qt-mb-0 pointer"
-                            for="accounting-active"
-                        >
-                            <input
-                                id="accounting-active"
-                                type="checkbox"
-                                (change)="changeEnableContactSending($event)"
-                            >
-                            <span></span>
-                        </label>
-                        <div class="qt-checkbox__text">
-                            Send copy of all invoices to this address
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="cmn-area invoice">
+  <div class="tab-pane__header">
+    <div class="tab-pane__header-title">Invoice Settings</div>
+  </div>
+  <div class="tab-pane__body">
+    <form
+      [formGroup]="invoiceForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="tab-pane__row">
+        <div class="tab-pane__subtitle">Starting Invoice Number</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
             <input
-                type="submit"
-                class="qt-button qt-mt-32"
-                value="Save Changes"
+              type="text"
+              class="form-input"
+              formControlName="invoiceCount"
+              [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
+              placeholder="Enter Starting ticket number"
             >
-        </form>
-    </div>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
+            <div
+              *ngIf="submitted && f.invoiceCount.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.invoiceCount.errors.required">Ticket Number is required</div>
+              <div *ngIf="f.invoiceCount.errors.pattern">Only Number is allowed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane__row">
+        <div class="tab-pane__subtitle">Default invoice terms</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <select
+              class="cmn-select form-input"
+              formControlName="invoiceTerms"
+            >
+              <option value="15">15 days</option>
+              <option value="30">30 days</option>
+              <option value="45">45 days</option>
+              <option value="60">60 days</option>
+            </select>
+            <div
+              *ngIf="submitted && f.invoiceTerms.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.invoiceTerms.errors.required">Invoice Terms is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane__row">
+        <div class="tab-pane__subtitle">Tax ID description</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="taxIdDescription"
+              placeholder="Enter Tax ID description"
+            >
+            <div
+              *ngIf="submitted && f.taxIdDescription.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.taxIdDescription.errors.required">Tax ID description is required</div>
+              <div *ngIf="f.taxIdDescription.errors.pattern">Tax ID description is not valid</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane__row">
+        <div class="tab-pane__subtitle">Tax ID</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="taxId"
+              placeholder="Enter Tax Id"
+            >
+            <div
+              *ngIf="submitted && f.taxId.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.taxId.errors.required">TaxId is required</div>
+              <div *ngIf="f.taxId.errors.pattern">TaxId is not valid</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane__row">
+        <div class="tab-pane__subtitle">Memo Of Invoice</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+             <textarea
+               class="qt-textarea"
+               formControlName="conditions"
+               placeholder="Enter memo of invoice"
+             ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane__row tab-pane-invoice-email-settings__row">
+        <div class="tab-pane__subtitle">Invoice Email Settings</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block qt-input-block-100 qt-pb-25">
+            <div class="qt-df">
+              <div
+                class="qt-toggle"
+                [ngClass]="{'--on':includeInvoiceAsAttachmentSetting}"
+                (click)="includeInvoiceAsAttachmentSetting = !includeInvoiceAsAttachmentSetting"
+              >
+                <div class="qt-toggle__circle"></div>
+              </div>
+              <div class="qt-color-gray-900 qt-ml-12">Include invoice as attachment</div>
+            </div>
+          </div>
+          <div class="qt-input-block qt-input-block-100">
+            <div class="qt-df">
+              <div
+                class="qt-toggle"
+                [ngClass]="{'--on':includeAccountReceivableReportAsAttachmentSetting}"
+                (click)="includeAccountReceivableReportAsAttachmentSetting = !includeAccountReceivableReportAsAttachmentSetting"
+              >
+                <div class="qt-toggle__circle"></div>
+              </div>
+              <div class="qt-color-gray-900 qt-ml-12">Include Accounts receivable report as attachment</div>
+            </div>
+          </div>
+          <div class="qt-input-block qt-input-block-100">
+            <div class="qt-df">
+              <div
+                class="qt-toggle"
+                [ngClass]="{'--on':invoiceForm.value.enableOwnerSending}"
+                (click)="onEnableOwnerSending(!invoiceForm.value.enableOwnerSending)"
+              >
+                <div class="qt-toggle__circle"></div>
+              </div>
+              <div class="qt-color-gray-900 qt-ml-12">CC invoice copies to tech company owner</div>
+            </div>
+          </div>
+          <div class="qt-input-block qt-input-block-100">
+            <div class="qt-df">
+              <label
+                class="qt-toggle"
+                [ngClass]="{'--on':invoiceForm.value.enableInvoiceContact}"
+                (click)="onEnableInvoice(!invoiceForm.value.enableInvoiceContact)"
+              >
+                <div class="qt-toggle__circle"></div>
+              </label>
+              <div class="qt-color-gray-900 qt-ml-12">Set custom Invoice contact</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane__row"
+        [hidden]="!invoiceForm.value.enableInvoiceContact"
+      >
+        <div class="tab-pane__subtitle">Name</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block qt-mr-24">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="firstName"
+              placeholder="Enter Your First name"
+            >
+            <div
+              *ngIf="submitted && f.firstName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.firstName.errors.required">First name is required</div>
+              <div *ngIf="f.firstName.errors.minlength">First name is too small.</div>
+              <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+            </div>
+          </div>
+          <div class="qt-input-block">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="lastName"
+              placeholder="Enter Your Last Name"
+            >
+            <div
+              *ngIf="submitted && f.lastName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.lastName.errors.required">Last name is required</div>
+              <div *ngIf="f.lastName.errors.minlength">Last name is too small.</div>
+              <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane__row"
+        [hidden]="!invoiceForm.value.enableInvoiceContact"
+      >
+        <div class="tab-pane__subtitle">Email Address</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <input
+              type="email"
+              class="form-input"
+              formControlName="email"
+              placeholder="Enter Your Email Address"
+            >
+            <div
+              *ngIf="submitted && f.email.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane__row"
+        [hidden]="!invoiceForm.value.enableInvoiceContact"
+      >
+        <div class="tab-pane__subtitle">Role</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="designation"
+              placeholder="Enter Your Role"
+            >
+            <div
+              *ngIf="submitted && f.designation.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.designation.errors.minlength">Role is tool small</div>
+              <div *ngIf="f.designation.errors.maxlength">Role is tool large</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane__row"
+        [hidden]="!invoiceForm.value.enableInvoiceContact"
+      >
+        <div class="tab-pane__subtitle">Primary Phone Number</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block qt-input-block-100">
+            <div class="qt-df">
+              <select
+                class="cmn-select form-input qt-input-prefix"
+                formControlName="primaryPhoneType"
+              >
+                <option value="MOBILE">mobile</option>
+                <option value="OFFICE">office</option>
+                <option value="FAX">fax</option>
+              </select>
+              <input
+                type="text"
+                class="form-input qt-input-prepend"
+                formControlName="primaryPhone"
+                placeholder="Primary Phone Number"
+                prefix="+1"
+                [validation]="false"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+              >
+            </div>
+          </div>
+          <div
+            class="qt-input-block qt-mt-16"
+            [hidden]="!invoiceForm.value.enableInvoiceContact"
+          >
+            <div
+              href="javascript:;"
+              *ngIf="!isAddPhone && isDisable"
+              class="qt-button --gray qt-jc-c qt-w100"
+              (click)="onAddPhone()"
+            >
+              <span class="icon__add-grey qt-sz-20 qt-bg-contain qt-dib qt-mr-8"></span>
+              Add Phone
+            </div>
+          </div>
+          <div class="qt-input-block qt-input-block-100 qt-mt-16">
+            <div
+              class="qt-df"
+              *ngIf="isAddPhone && invoiceForm.value.enableInvoiceContact"
+            >
+              <select
+                class="cmn-select form-input qt-input-prefix"
+                formControlName="secondaryPhoneType"
+              >
+                <option value="MOBILE">mobile</option>
+                <option value="OFFICE">office</option>
+                <option value="FAX">fax</option>
+              </select>
+              <input
+                type="text"
+                class="form-input qt-input-prepend"
+                formControlName="secondaryPhone"
+                placeholder="Secondary Phone Number"
+                prefix="+1"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [validation]="false"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+              >
+            </div>
+          </div>
+          <div
+            class="qt-input-block-100 qt-mt-16"
+            *ngIf="isAddPhone && invoiceForm.value.enableInvoiceContact"
+          >
+            <div
+              *ngIf="isDisable"
+              href="javascript:;"
+              class="qt-button --gray qt-jc-c qt-w100"
+              (click)="onAddPhone()"
+            >
+              <span class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8"></span>
+              Remove
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div
+        class="tab-pane__row"
+        [hidden]="!invoiceForm.value.enableInvoiceContact"
+      >
+        <div class="tab-pane__subtitle"></div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
+            <label
+              class="qt-checkbox qt-mb-0 pointer"
+              for="accounting-active"
+            >
+              <input
+                id="accounting-active"
+                type="checkbox"
+                (change)="changeEnableContactSending($event)"
+              >
+              <span></span>
+              <div class="qt-ml-8">Send copy of all invoices to this address</div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!--  Todo check this input -->
+<!--      <input-->
+<!--        type="submit"-->
+<!--        class="qt-button qt-mt-32"-->
+<!--        value="Save Changes"-->
+<!--      >-->
+    </form>
+  </div>
 </div>
+<!-- <div class="loading" *ngIf="loading"></div> -->

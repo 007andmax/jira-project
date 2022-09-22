@@ -4,17 +4,56 @@
 
 body {
   &.page-settings {
+    .qt-switch {
+      margin: 0;
+    }
+    .tab-pane-invoice-email-settings__row {
+      .qt-input-block {
+        padding: 25px 0;
+        border-bottom: 1px solid $gray-200;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+      }
+    }
+    .cmn-select {
+      appearance: none;
+      background: url("/assets/img/icons/down-arrow.svg") no-repeat right 8px center;
+      padding: 0 14px;
+      height: 40px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 6px;
+
+      &:focus {
+        outline: none;
+        border-color: $blue-light-600;
+      }
+    }
+
     .main-container {
       padding-top: 92px;
       background-color: $white;
     }
 
-    .heading h5 {
-      font-size: 18px;
-      line-height: 22px;
-      font-weight: 600;
-      color: $gray-900;
-      margin: 0 32px 18px;
+    .heading {
+      padding: 0 32px 10px;
+      h5 {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+        color: $gray-900;
+      }
     }
 
     .nav-tabs {
@@ -55,15 +94,25 @@ body {
       }
     }
 
-    .tab-pane {
-      margin: 32px 32px 0;
+    .cmn-area {
+      margin: 32px;
       border: 1px solid $gray-200;
       border-radius: 8px;
 
-      &#ngb-tab-2-panel {
+      &.--border-transparent {
         border-color: transparent;
       }
     }
+
+    //.tab-pane {
+    //  margin: 32px 32px 0;
+    //  border: 1px solid $gray-200;
+    //  border-radius: 8px;
+    //
+    //  &#ngb-tab-2-panel {
+    //    border-color: transparent;
+    //  }
+    //}
     .tab-pane__header {
       padding: 20px 24px;
       border-bottom: 1px solid $gray-200;
@@ -89,6 +138,10 @@ body {
       align-items: flex-start;
       flex-wrap: wrap;
       border-bottom: 1px solid $gray-200;
+
+      &:last-child {
+        border: none;
+      }
 
       &.--border {
         border: 1px solid $gray-200;
@@ -117,6 +170,9 @@ body {
       &-100 {
         flex: 1 0 100%;
       }
+      .qt-checkbox {
+        margin-bottom: 0;
+      }
     }
     .invalid-feedback {
       margin-top: 8px;
@@ -129,6 +185,7 @@ body {
       width: 110px;
       background-color: transparent;
       border-color: $gray-200;
+      border-right: transparent;
       color: $gray-900;
       font-size: 14px;
       font-weight: 400;
@@ -345,25 +402,6 @@ body {
           background-color: $gray-300;
           border-radius: 50%;
         }
-      }
-    }
-
-    select.cmn-select {
-      appearance: none;
-      background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px center;
-      padding: 0 14px;
-      height: 40px;
-      width: 100%;
-      font-size: 14px;
-      line-height: 17px;
-      color: $gray-900;
-      border: 1px solid $gray-200;
-      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
-      border-radius: 6px;
-
-      &:focus {
-        outline: none;
-        border-color: $blue-light-600;
       }
     }
   }

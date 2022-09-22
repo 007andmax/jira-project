@@ -1301,25 +1301,23 @@
 }
 
 .qt-toggle {
-  width: 32px;
-  height: 18px;
-  border-radius: 12px;
-  background-color: $gray-400--old;
+  width: 40px;
+  height: 20px;
+  border-radius: 18px;
+  background-color: $gray-200;
   display: flex;
   align-items: center;
-  padding-left: 2px;
-  padding-right: 2px;
+  padding: 3px;
   cursor: pointer;
   &__circle {
     width: 14px;
     height: 14px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     background-color: $white;
     border-radius: 50%;
   }
   &.--on {
     justify-content: flex-end;
-    background-color: $primary-1;
+    background-color: $blue-light-600;
   }
 }
 

@@ -367,8 +367,9 @@
 <!-- Middle Wrapper -->
 <div class="page-container">
   <div class="page-insider company-profile">
-    <div class="heading">
+    <div class="heading qt-df qt-ai-fs qt-jc-sb">
       <h5 class="qt-fw-600">Company Profile</h5>
+      <div class="qt-button qt-ml-24"> Save Changes </div>
     </div>
     <ngb-tabset>
       <!-- Profile -->
@@ -642,113 +643,117 @@
                       (and must start with a letter or number).</div>
                   </div>
                 </div>
-                <input
-                  type="submit"
-                  class="btn btn-primary"
-                  value="Save Changes"
-                >
+                <!--  Todo check this input -->
+<!--                <input-->
+<!--                  type="submit"-->
+<!--                  class="btn btn-primary"-->
+<!--                  value="Save Changes"-->
+<!--                >-->
               </form>
             </div>
           </div>
         </ng-template>
       </ngb-tab>
       <!-- Ticket Response Time Setting -->
-      <ngb-tab title="Operational Hours">
+      <ngb-tab title="Operational Hours" class="123213">
         <ng-template ngbTabContent>
 <!--          <div class="tab-pane__body">-->
-            <form
-              #workingHoursForm="ngForm"
-              (ngSubmit)="onWorkSubmit()"
-            >
-              <div>
-                <div *ngFor="
+            <div class="cmn-area --border-transparent">
+              <form
+                #workingHoursForm="ngForm"
+                (ngSubmit)="onWorkSubmit()"
+              >
+                <div>
+                  <div *ngFor="
                   let workingDay of this.cProfile.timeSettings.workingDays;
                   let i = index
                 "></div>
-              </div>
-              <div class="tab-pane__body">
-                <div
-                  *ngFor="
+                </div>
+                <div class="tab-pane__body">
+                  <div
+                    *ngFor="
                     let workingDay of this.cProfile.timeSettings.workingDays;
                     let i = index
                   "
-                  class="tab-pane__row --border --border-radius --ai-c qt-mb-16"
-                >
-                  <div class="tab-pane__subtitle">
-                    <div class="qt-df qt-ai-c">
-                      <label class="qt-switch">
-                        <input
-                          type="checkbox"
-                          id="{{ workingDay.dayOfWeek }}"
-                          [(ngModel)]="workingDay.isSelected"
-                          name="{{ workingDay.dayOfWeek | titlecase }}"
-                          [ngModelOptions]="{ standalone: true }"
-                          class="qt-switch__input"
-                        >
-                        <span class="qt-switch__elem"></span>
-                      </label>
-                      <label class="operations-hours__week" for="{{ workingDay.dayOfWeek }}">
-                        {{
-                        workingDay.dayOfWeek | titlecase
-                        }}
-                      </label>
-                      <div class="operations-hours__status">Open</div>
+                    class="tab-pane__row --border --border-radius --ai-c qt-mb-16"
+                  >
+                    <div class="tab-pane__subtitle">
+                      <div class="qt-df qt-ai-c">
+                        <label class="qt-switch">
+                          <input
+                            type="checkbox"
+                            id="{{ workingDay.dayOfWeek }}"
+                            [(ngModel)]="workingDay.isSelected"
+                            name="{{ workingDay.dayOfWeek | titlecase }}"
+                            [ngModelOptions]="{ standalone: true }"
+                            class="qt-switch__input"
+                          >
+                          <span class="qt-switch__elem"></span>
+                        </label>
+                        <label class="operations-hours__week" for="{{ workingDay.dayOfWeek }}">
+                          {{
+                          workingDay.dayOfWeek | titlecase
+                          }}
+                        </label>
+                        <div class="operations-hours__status">Open</div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="tab-pane-input__row">
-                    <div class="qt-input-block">
-                      <div class="qt-df">
-                        <select
-                          #startTime
-                          class="cmn-select form-input qt-mr-24"
-                          [id]=" 'from-'+workingDay.dayOfWeek"
-                          (change)="startTimeChange(workingDay, startTime.value)"
-                          name="{{workingDay.dayOfWeek}}"
-                          [disabled]="!workingDay.isSelected"
-                          [ngModel]="fromTime_convert(workingDay.startTime)"
-                        >
-                          <option value="06:00">6:00 AM</option>
-                          <option value="06:30">6:30 AM</option>
-                          <option value="07:00">07:00 AM</option>
-                          <option value="07:30">7:30 AM</option>
-                          <option value="08:00">08:00 AM</option>
-                          <option value="08:30">8:30 AM</option>
-                          <option value="09:00">9:00 AM</option>
-                          <option value="09:30">9:30 AM</option>
-                          <option value="10:00">10:00 AM</option>
-                          <option value="10:30">10:30 AM</option>
-                          <option value="11:00">11:00 AM</option>
-                          <option value="11:30">11:30 AM</option>
-                          <option value="12:00">12:00 PM</option>
-                        </select>
-                        <select
-                          #endTime
-                          class="cmn-select form-input"
-                          (change)="endTimeChange(workingDay,endTime.value)"
-                          [id]="'to-'+workingDay.dayOfWeek"
-                          name="{{workingDay.dayOfWeek+i}}"
-                          [disabled]="!workingDay.isSelected"
-                          [ngModel]="toTime_convert(workingDay.endTime)"
-                        >
-                          <option value="17:00">17:00 PM</option>
-                          <option value="17:30">17:30 PM</option>
-                          <option value="18:00">18:00 PM</option>
-                          <option value="18:30">18:30 PM</option>
-                          <option value="19:00">19:00 PM</option>
-                          <option value="19:30">19:30 PM</option>
-                          <option value="20:00">20:00 PM</option>
-                        </select>
+                    <div class="tab-pane-input__row">
+                      <div class="qt-input-block">
+                        <div class="qt-df">
+                          <select
+                            #startTime
+                            class="cmn-select form-input qt-mr-24"
+                            [id]=" 'from-'+workingDay.dayOfWeek"
+                            (change)="startTimeChange(workingDay, startTime.value)"
+                            name="{{workingDay.dayOfWeek}}"
+                            [disabled]="!workingDay.isSelected"
+                            [ngModel]="fromTime_convert(workingDay.startTime)"
+                          >
+                            <option value="06:00">6:00 AM</option>
+                            <option value="06:30">6:30 AM</option>
+                            <option value="07:00">07:00 AM</option>
+                            <option value="07:30">7:30 AM</option>
+                            <option value="08:00">08:00 AM</option>
+                            <option value="08:30">8:30 AM</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="09:30">9:30 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="10:30">10:30 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="11:30">11:30 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                          </select>
+                          <select
+                            #endTime
+                            class="cmn-select form-input"
+                            (change)="endTimeChange(workingDay,endTime.value)"
+                            [id]="'to-'+workingDay.dayOfWeek"
+                            name="{{workingDay.dayOfWeek+i}}"
+                            [disabled]="!workingDay.isSelected"
+                            [ngModel]="toTime_convert(workingDay.endTime)"
+                          >
+                            <option value="17:00">17:00 PM</option>
+                            <option value="17:30">17:30 PM</option>
+                            <option value="18:00">18:00 PM</option>
+                            <option value="18:30">18:30 PM</option>
+                            <option value="19:00">19:00 PM</option>
+                            <option value="19:30">19:30 PM</option>
+                            <option value="20:00">20:00 PM</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <input
-                type="submit"
-                class="btn btn-primary"
-                value="Save Changes"
-              >
-            </form>
+                <!--  Todo check this input -->
+<!--                <input-->
+<!--                  type="submit"-->
+<!--                  class="btn btn-primary"-->
+<!--                  value="Save Changes"-->
+<!--                >-->
+              </form>
+            </div>
 <!--          </div>-->
         </ng-template>
       </ngb-tab>
