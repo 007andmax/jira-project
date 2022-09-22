@@ -47,7 +47,10 @@
                     [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
                 ></div>
             </div>
-            <div class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address">
+            <div
+                class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
+                *ngIf="company.addresses.length == 2"
+            >
                 <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
                 <div
                     class="qt-fs-13 qt-color-dark qt-fw-600"
