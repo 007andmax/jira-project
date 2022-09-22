@@ -19,6 +19,7 @@ export class CompaniesStateService {
   allCompanies = [];
   lightAllCompanies = [];
   lightClientsCompanies = [];
+  onLightCompanies: EventEmitter<any> = new EventEmitter();
   onLightClientsCompanies: EventEmitter<any> = new EventEmitter();
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
@@ -90,6 +91,15 @@ export class CompaniesStateService {
     })
   }
   public onInitGetLightCompanies() {
+    this.companiesService.getLightCompanies().subscribe((data: any) => {
+      this.lightAllCompanies = data;
+      this.onLightCompanies.emit(this.lightAllCompanies);
+    })
+  }
+  public getLightCompanies() {
+    return this.lightAllCompanies;
+  }
+  public onInitGetLightClietnsCompanies() {
     this.companiesService.getLightClientsCompanies().subscribe((data: any) => {
       this.lightClientsCompanies = data;
       this.onLightClientsCompanies.emit(this.lightClientsCompanies);

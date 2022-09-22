@@ -14,6 +14,7 @@ import { DndDirective } from 'src/app/directives/dnd.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadAreaModule } from 'src/app/components/shared/upload-area/upload-area.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 
 
 
@@ -33,6 +34,7 @@ import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users
         UploadAreaProgressModule,
         NgbModule,
         UploadAreaModule,
+        CompanyDropDownModule
     ],
     exports: [TicketAddAsideComponent]
 })

@@ -22,6 +22,7 @@ import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 
 
 
@@ -34,7 +35,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP') userDP: DropDownComponent;
   @ViewChild('techUserDP') techUserDP: SelectSearchComponent;
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
-  @ViewChild('companyDP') companyDP: DropDownComponent;
+  @ViewChild('companyDP') companyDP: CompanyDropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('techUsersDp') techUsersDp: TechUsersComponent;
@@ -43,7 +44,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   isAdd = false;
   mode = 'edit';
   ticketAdd: TicketAdd = new TicketAdd();
-  companies = [];
   devices = [];
   users = [];
   techUsersList = [];
@@ -84,14 +84,11 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
-      if (this.opened && this.companiesState.getLightClientsCompanies().length == 0) this.companiesState.onInitGetLightCompanies();
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
     })
-    if (this.companiesState.getLightClientsCompanies().length > 0) this.getClientsList(this.companiesState.getLightClientsCompanies());
-    let getOnCompanies = this.companiesState.onLightClientsCompanies.subscribe((data) => {
-      this.getClientsList(data);
-      if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getLightClientsCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
+    let getOnCompanies = this.companiesState.onGetCompanies.subscribe((data) => {
+      if (this.opened && this.companiesState.getCompanyRoutingId()) this.companyDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
     })
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
@@ -309,9 +306,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   }
   public onPastNote(value) {
     this.ticketAdd.note = value;
-  }
-  private getClientsList(data) {
-    this.companies = data;
   }
 
   public onChangeNote(event) {
