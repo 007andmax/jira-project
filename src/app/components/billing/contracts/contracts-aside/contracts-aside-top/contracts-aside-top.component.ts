@@ -4,6 +4,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 @Component({
   selector: 'app-contracts-aside-top',
   templateUrl: './contracts-aside-top.component.html',
@@ -18,7 +19,7 @@ export class ContractsAsideTopComponent implements OnInit {
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() validateCompany: boolean = true;
   @Output() onSelectCompany = new EventEmitter<any>();
-  @ViewChild('companiesDP') companiesDP: DropDownComponent;
+  @ViewChild('companiesDP') companiesDP: CompanyDropDownComponent;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,) { }

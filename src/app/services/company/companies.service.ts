@@ -58,7 +58,7 @@ export class CompaniesService {
   }
 
   public getCompaniesListByFilter(data) {
-    return this.http.post(this.apiUrl + 'company/filter', data);
+    return this.http.post(this.apiUrl + 'company/client', data);
   }
   public getCategoriesDocuments(company_id) {
     return this.http.get(this.apiUrl + 'documents/categories/assigned?companyId=' + company_id);
