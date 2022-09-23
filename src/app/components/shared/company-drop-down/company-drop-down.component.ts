@@ -15,10 +15,11 @@ export class CompanyDropDownComponent extends DropDownComponent {
     if (this.companiesStateService.getLightClientsCompanies().length > 0 && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
 
     this.companiesStateService.onLightCompanies.subscribe((data) => {
-      this.getClientsList(data);
+      console.log("data", data)
+      if (this.clientType == undefined) this.getClientsList(data);
     })
     this.companiesStateService.onLightClientsCompanies.subscribe((data) => {
-      this.getClientsList(data);
+      if (this.clientType != undefined) this.getClientsList(data);
     })
 
   }

@@ -61,6 +61,13 @@ export class CompaniesStateService {
         const indexLigth = this.lightAllCompanies.findIndex((item) => item.id === newChange.data.id);
         if (indexLigth > -1) this.lightAllCompanies[Index] = newChange.data;
         if (indexLigth === -1) this.lightAllCompanies.unshift(newChange.data);
+
+        if (newChange.data.clientType == "CLIENT") {
+          const indexLigth = this.lightClientsCompanies.findIndex((item) => item.id === newChange.data.id);
+          if (indexLigth > -1) this.lightClientsCompanies[Index] = newChange.data;
+          if (indexLigth === -1) this.lightClientsCompanies.unshift(newChange.data);
+        }
+
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
@@ -71,7 +78,9 @@ export class CompaniesStateService {
 
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
+      console.log("this.lightAllCompanies", this.lightAllCompanies);
       this.onLightCompanies.emit(this.lightAllCompanies);
+      this.onLightClientsCompanies.emit(this.lightClientsCompanies);
     })
     this.websocketStateService.onConnected.subscribe(data => {
       if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
