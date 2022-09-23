@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from '../drop-down/drop-down.component';
 
 @Component({
@@ -7,12 +7,17 @@ import { DropDownComponent } from '../drop-down/drop-down.component';
   styleUrls: ['./company-drop-down.component.scss']
 })
 export class CompanyDropDownComponent extends DropDownComponent {
-
+  @Input() clientType: string;
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
-    if (this.companiesStateService.getLightCompanies().length > 0) this.getClientsList(this.companiesStateService.getLightCompanies());
-    let getOnCompanies = this.companiesStateService.onLightCompanies.subscribe((data) => {
+    if (this.companiesStateService.getLightCompanies().length > 0 && this.clientType == undefined) this.getClientsList(this.companiesStateService.getLightCompanies());
+    if (this.companiesStateService.getLightClientsCompanies().length > 0 && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
+
+    this.companiesStateService.onLightCompanies.subscribe((data) => {
+      this.getClientsList(data);
+    })
+    this.companiesStateService.onLightClientsCompanies.subscribe((data) => {
       this.getClientsList(data);
     })
 
@@ -22,6 +27,8 @@ export class CompanyDropDownComponent extends DropDownComponent {
   }
   onOpenChange(data) {
     console.log("data", data);
-    if (data && this.companiesStateService.getLightCompanies().length == 0) this.companiesStateService.onInitGetLightCompanies();
+    if (data && this.companiesStateService.getLightCompanies().length == 0 && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();
+    if (data && this.companiesStateService.getLightClientsCompanies().length == 0 && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
+
   }
 }
