@@ -26,6 +26,7 @@ import { ContractsAsideOtherProductModule } from './contracts-aside-product-serv
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
         ContractsAsideOtherServiceModule,
         ContractsAsideOtherProductModule,
         NumberModule,
+        CompanyDropDownModule
 
     ],
     exports: [ContractsAsideComponent]

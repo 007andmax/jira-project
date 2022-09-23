@@ -1760,7 +1760,7 @@ app-quotes-item {
     }
   }
 
-  app-drop-down.filter-category {
+  app-drop-down.filter-category,company-drop-down.filter-category {
     > div::before {
       @media (max-width: 767px) {
         content: "Category";

@@ -21,6 +21,7 @@ import { PaymentsRoutingModule } from './payments-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/invoice-export.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 
 
@@ -53,7 +54,8 @@ import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/
         PaymentsRoutingModule,
         PreviewPhoneMaskModule,
         KeyUpEnterModule,
-        InvoiceExportModule
+        InvoiceExportModule,
+        CompanyDropDownModule
     ],
 
 

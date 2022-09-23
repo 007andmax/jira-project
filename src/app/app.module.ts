@@ -138,6 +138,7 @@ import { CannedResponsesComponent } from './components/setting/ticket-settings-p
 import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
 import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { ReportSendEmailModule } from './components/reports/report-additional-actions/report-send-email/report-send-email.module';
+import { CompanyDropDownComponent } from './components/shared/company-drop-down/company-drop-down.component';
 declare var $: any;
 
 /**

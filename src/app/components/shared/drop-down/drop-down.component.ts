@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-drop-down',
@@ -39,7 +40,8 @@ export class DropDownComponent implements OnInit {
   reqList = [];
 
   public isAdd: boolean = false;
-  constructor(public elRef: ElementRef,) { }
+  constructor(public elRef: ElementRef,
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
