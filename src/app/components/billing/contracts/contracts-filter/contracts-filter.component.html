@@ -1,14 +1,13 @@
 <div class="qt-df qt-ai-c">
-    <app-drop-down
+    <company-drop-down
         class="contracts-company-filter search-company"
         [search]="true"
         #companyDp
         [placeholder]="'Select Company'"
         [change]="true"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-drop-down>
+    ></company-drop-down>
     <app-drop-down
         class="contracts-company-filter search-users "
         #typesDp
