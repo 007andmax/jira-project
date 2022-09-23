@@ -11,8 +11,8 @@ export class CompanyDropDownComponent extends DropDownComponent {
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
-    if (this.companiesStateService.getLightCompanies().length > 0 && this.clientType == undefined) this.getClientsList(this.companiesStateService.getLightCompanies());
-    if (this.companiesStateService.getLightClientsCompanies().length > 0 && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
+    if (this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.getClientsList(this.companiesStateService.getLightCompanies());
+    if (this.companiesStateService.isInitLightClientsCompanies && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
 
     this.companiesStateService.onLightCompanies.subscribe((data) => {
       console.log("data", data)
@@ -28,8 +28,8 @@ export class CompanyDropDownComponent extends DropDownComponent {
   }
   onOpenChange(data) {
     console.log("data", data);
-    if (data && this.companiesStateService.getLightCompanies().length == 0 && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();
-    if (data && this.companiesStateService.getLightClientsCompanies().length == 0 && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
+    if (data && !this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();
+    if (data && !this.companiesStateService.isInitLightClientsCompanies && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
 
   }
 }
