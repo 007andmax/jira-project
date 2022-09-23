@@ -19,6 +19,7 @@
     <form>
         <input
             type="text"
+            class="pointer"
             [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
             [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
             [disabled]="isDisabled"
