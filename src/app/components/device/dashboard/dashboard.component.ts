@@ -87,6 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   manufactureList: any[]=[];
   loading: boolean;
   techCompany: any;
+  allModelList: any[] = [];
   modelList : any[]=[];
   manufactureId: any;
   selectModelList: any[]=[];
@@ -98,6 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selectModelName : any;
   company : any;
   searches : any[];
+  noteId: any;
 
   constructor(
     private agentService: AgentService,
@@ -346,6 +348,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.noteEdit = this.assetNotes.find((x) => x.ID == id);
     this.notesTitle = this.noteEdit.Title;
     this.notesDescription = this.noteEdit.Description;
+    this.noteId = id;
     this.editNote = !this.editNote;
   }
 
@@ -360,6 +363,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   editCloseNotes() {
     this.editNote = !this.editNote;
+  }
+
+  deleteNote() {
+    let note:any = {};
+    note.ID = this.noteId;
+    note.AssetID = this.asset.ID;
+    this.agentService.deleteAssetNotes(note).subscribe(response => {
+      this.closeNotes();
+      this.toastr.success("Asset note deleted");
+      this.getAssetNotesDetail();
+    });
   }
 
   onSearchTag(value: string) {        
@@ -616,6 +630,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   updateSerialNo() {
     this.operatingSystem.SerialNumber = this.serialnumber;
+    this.operatingSystem.manufactureId = this.manufactureId;
+    this.operatingSystem.modelId = this.modelId;
+
     this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
       (resp) => {
         this.toastr.success("Asset info save successfully.");
@@ -860,6 +877,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
         this.selectModelList = resp;
+        this.allModelList = resp;
+        if(this.asset){
+          this.selectModel(this.asset.ModelID);
+        }
+      });
+  }
+
+  
+  getModelsByManufacturer() {
+    if(this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getModelsByManufacturer();
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getModelsByManufacturer(this.manufactureId)
+      .subscribe((resp) => {
+        this.selectModelList = resp;
+        this.allModelList = resp;
         if(this.asset){
           this.selectModel(this.asset.ModelID);
         }
@@ -877,10 +914,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (SelectManufacturer) {
       this.manufactureId = SelectManufacturer.ID;
       this.selectManufactureNames = this.manufactureList.find(x=>x.ID == this.manufactureId);
-      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-        this.selectModelList = resp;
-        this.updateAsset();
-      })
+      this.getModelsByManufacturer();
+      this.selectModelName = '';      
     }
     else{
       this.getModels(this.techCompany.id);

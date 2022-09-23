@@ -461,7 +461,7 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public getHardwareTypeAssetByTechCompanyGuidAndHardwareType(techCompanyGuid,hardwareTypeId) {
+  public getHardwareTypeAssetByTechCompanyGuidAndHardwareType(techCompanyGuid, hardwareTypeId) {
     return this.http
       .get(`${this.apiAgent}agent/HardwareType/GetAssetsByTechCompanyGuidAndHardwareTypeID?techCompanyGuid=${techCompanyGuid}&hardwareTypeID=${hardwareTypeId}`, {
         headers: this.getHeader(),
@@ -470,7 +470,7 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public getManufacturerAssetByTechCompanyGuidAndManufacturer(techCompanyGuid,manufacturerId) {
+  public getManufacturerAssetByTechCompanyGuidAndManufacturer(techCompanyGuid, manufacturerId) {
     return this.http
       .get(`${this.apiAgent}agent/Manufacturer/GetAssetsByTechCompanyGuidAndManufacturerID?techCompanyGuid=${techCompanyGuid}&manufacturerID=${manufacturerId}`, {
         headers: this.getHeader(),
@@ -479,7 +479,7 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public getModelAssetByTechCompanyGuidAndModel(techCompanyGuid,modelId) {
+  public getModelAssetByTechCompanyGuidAndModel(techCompanyGuid, modelId) {
     return this.http
       .get(`${this.apiAgent}agent/Model/GetAssetsByTechCompanyGuidAndModelID?techCompanyGuid=${techCompanyGuid}&modelId=${modelId}`, {
         headers: this.getHeader(),
@@ -771,15 +771,15 @@ export class AgentService {
 
   public screenConnect(sconnect) {
     return this.http
-    .post(
-      `${this.apiAgent}agent/ScreenConnect`,
-      this.encrypt128(this.key, JSON.stringify(sconnect)),
-      {
-        headers: this.getHeader(),
-        responseType: "text",
-      }
-    )
-    .pipe(map((data: string) => this.decrypt128(data, this.key)));
+      .post(
+        `${this.apiAgent}agent/ScreenConnect`,
+        this.encrypt128(this.key, JSON.stringify(sconnect)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
+      )
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public addAssetNotes(notes) {
@@ -791,6 +791,18 @@ export class AgentService {
           headers: this.getHeader(),
           responseType: "text",
         }
+      )
+      .pipe(map((data: string) => data));
+  }
+
+  public deleteAssetNotes(notes) {
+    const httpOptions = {
+      headers: this.getHeader(),
+      body: this.encrypt128(this.key, JSON.stringify(notes)),
+    };
+    return this.http
+      .delete(
+        `${this.apiAgent}agent/AssetNote`, httpOptions
       )
       .pipe(map((data: string) => data));
   }
@@ -881,6 +893,16 @@ export class AgentService {
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
+
+  public getPrintersByAssetId(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/Printer/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
 
   public getAssetsByCompanyId(companyGuid) {
 
@@ -1012,7 +1034,7 @@ export class AgentService {
         responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
-  }    
+  }
 
   public autoCompleteDevices(data) {
     return this.http
@@ -1024,7 +1046,7 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public createAssociatedAsset(data){
+  public createAssociatedAsset(data) {
     return this.http
       .put(
         `${this.apiAgent}agent/AssociatedAsset`,
@@ -1033,5 +1055,5 @@ export class AgentService {
       )
       .pipe(map((data: string) => data));
   }
-  
+
 }

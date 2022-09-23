@@ -393,6 +393,26 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="hardware-col">
+                                <div class="col-title">
+                                    <span class="hardware-ico">
+                                        <img
+                                            src="/html/assets/img/device/operating-system.svg"
+                                            alt="Printers"
+                                        >
+                                    </span>
+                                    <h3>Printers</h3>
+                                </div>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        
+                                    </li>
+                                    <li *ngFor="let printer of printers">
+                                        <span>Name:</span>
+                                        {{printer.Name}}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

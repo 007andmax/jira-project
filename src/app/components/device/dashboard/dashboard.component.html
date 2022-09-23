@@ -109,7 +109,7 @@
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="false"
-                                            (onSelectedItem)="onSelectManufactureName($event)"                                            
+                                            (onSelectedItem)="onSelectManufactureName($event)"                 
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -150,7 +150,7 @@
                                             [field]="'Name'"
                                             [search]="true"
                                             [change]="true"
-                                            (onSelectedItem)="onSelectModel($event)"                                            
+                                            (onSelectedItem)="onSelectModel($event)"  
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -754,6 +754,14 @@
                                 >
                                     Cancel
                                 </a>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-danger pull-right"
+                                    (click)="deleteNote()"
+                                >
+                                    Delete
+                                </button>
                             </div>
                         </form>
                     </div>

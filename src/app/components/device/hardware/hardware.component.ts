@@ -55,6 +55,7 @@ export class HardwareComponent implements OnInit {
   graphicscardDriver: any[] = [];
   TemporaryGraphicsDriver: any[] = [];
   wanIp:string="";
+  printers: any[] = [];
 
   constructor(
     private toastr: ToastrService,
@@ -109,6 +110,21 @@ export class HardwareComponent implements OnInit {
     this.keyboard(Asset_ID);
     this.soundCard(Asset_ID);
     this.operatingSystem(Asset_ID);
+    this.getPrinters(Asset_ID);
+  }
+
+  getPrinters(Asset_ID) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getPrinters(Asset_ID);
+      }, 300);
+      return;
+    }
+    this.agentService.getPrintersByAssetId(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {    
+        this.printers = resp;
+      }
+    });
   }
 
   printcsv() {

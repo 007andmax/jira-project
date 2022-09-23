@@ -89,7 +89,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
 
   getSoftwareDetail(assetId) {
     this.agentService.getSoftwareListByAssetId(assetId).subscribe((resp) => {
-      this.softwareList = resp;
+      this.softwareList = resp.filter(x=> x.IsActive == true);
       this.getPdfData();
     });
   }
