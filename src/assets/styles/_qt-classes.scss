@@ -163,7 +163,6 @@
   cursor: pointer;
   position: relative;
 
-
   &.--disabled {
     background-color: #16a4fa80;
     cursor: default;
@@ -185,6 +184,10 @@
     color: $white;
     border: solid 1px $error;
     background-color: $error;
+  }
+
+  &.--md {
+    height: 36px;
   }
 
   &.--with-menu {

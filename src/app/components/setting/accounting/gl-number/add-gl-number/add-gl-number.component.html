@@ -1,47 +1,96 @@
-<tr
-    class="add-gl-container"
-    appClickOtside
-    #addStatusBtn="click"
-    [init]="true"
-    [class]="'.add-gl-container'"
-    (onOutSide)="onAddGL()"
+<!--<tr-->
+<!--    class="add-gl-container"-->
+<!--    appClickOtside-->
+<!--    #addStatusBtn="click"-->
+<!--    [init]="true"-->
+<!--    [class]="'.add-gl-container'"-->
+<!--    (onOutSide)="onAddGL()"-->
+<!--&gt;-->
+<!--    <td class="checkbox"></td>-->
+<!--    <td-->
+<!--        class="tax-name"-->
+<!--        [ngClass]="{'&#45;&#45;input-error' : !validateShort || disableCreate  }"-->
+<!--    >-->
+<!--        <input-->
+<!--            type="text"-->
+<!--            class="form-input"-->
+<!--            placeholder="Enter GL Number"-->
+<!--            [(ngModel)]="addGl.glNumber"-->
+<!--            (input)="resetValidate();checkDublicate()"-->
+<!--            (keyup)="onKeyUp($event)"-->
+<!--            maxlength="50"-->
+<!--        >-->
+<!--        <mat-error-->
+<!--            class="qt-tooltip-error"-->
+<!--            *ngIf="!validateShort"-->
+<!--        >-->
+<!--            Income Account Number is too short.-->
+<!--        </mat-error>-->
+<!--        <mat-error-->
+<!--            class="qt-tooltip-error"-->
+<!--            *ngIf="disableCreate"-->
+<!--        >-->
+<!--            This Gl Number is already occupied-->
+<!--        </mat-error>-->
+<!--    </td>-->
+<!--    <td class="rate">-->
+<!--        <input-->
+<!--            type="text"-->
+<!--            class="form-input"-->
+<!--            placeholder="Enter Description"-->
+<!--            [(ngModel)]="addGl.description"-->
+<!--            (keyup)="onKeyUp($event)"-->
+<!--            maxlength="50"-->
+<!--        >-->
+<!--    </td>-->
+<!--    <td class="action"></td>-->
+<!--</tr>-->
+
+
+<div
+  class="gl-numbers__table-row add-gl-container"
+  appClickOtside
+  #addStatusBtn="click"
+  [init]="true"
+  [class]="'.add-gl-container'"
+  (onOutSide)="onAddGL()"
 >
-    <td class="checkbox"></td>
-    <td
-        class="tax-name"
-        [ngClass]="{'--input-error' : !validateShort || disableCreate  }"
+  <div class="gl-numbers__table-cell gl-numbers__table-checkboxes"></div>
+  <div
+    class="gl-numbers__table-cell gl-numbers__table-account-number"
+    [ngClass]="{'--input-error' : !validateShort || disableCreate  }"
+  >
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Enter GL Number"
+      [(ngModel)]="addGl.glNumber"
+      (input)="resetValidate();checkDublicate()"
+      (keyup)="onKeyUp($event)"
+      maxlength="50"
     >
-        <input
-            type="text"
-            class="form-input"
-            placeholder="Enter GL Number"
-            [(ngModel)]="addGl.glNumber"
-            (input)="resetValidate();checkDublicate()"
-            (keyup)="onKeyUp($event)"
-            maxlength="50"
-        >
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validateShort"
-        >
-            Income Account Number is too short.
-        </mat-error>
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="disableCreate"
-        >
-            This Gl Number is already occupied
-        </mat-error>
-    </td>
-    <td class="rate">
-        <input
-            type="text"
-            class="form-input"
-            placeholder="Enter Description"
-            [(ngModel)]="addGl.description"
-            (keyup)="onKeyUp($event)"
-            maxlength="50"
-        >
-    </td>
-    <td class="action"></td>
-</tr>
+    <mat-error
+      class="qt-tooltip-error"
+      *ngIf="!validateShort"
+    >
+      Income Account Number is too short.
+    </mat-error>
+    <mat-error
+      class="qt-tooltip-error"
+      *ngIf="disableCreate"
+    >
+      This Gl Number is already occupied
+    </mat-error>
+  </div>
+  <div class="gl-numbers__table-cell gl-numbers__table-description">
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Enter Description"
+      [(ngModel)]="addGl.description"
+      (keyup)="onKeyUp($event)"
+      maxlength="50"
+    >
+  </div>
+  <div class="gl-numbers__table-cell gl-numbers__table-action"></div>
+</div>

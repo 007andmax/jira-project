@@ -1,35 +1,39 @@
-<div class="page-insider invoice-ticket">
-    <div class="cmn-area invoice">
-        <form
-            [formGroup]="quotesForm"
-            (ngSubmit)="onSubmit()"
-        >
-            <div class="f-row">
-                <div class="f-col col-50">
-                    <label>Starting Quote Number</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            formControlName="count"
-                            class="form-input"
-                            [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
-                            placeholder="Enter Starting ticket number"
-                        >
-                        <div
-                            *ngIf="submitted && f.count.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.count.errors.required">Ticket Number is required</div>
-                            <div *ngIf="f.count.errors.pattern">Only Number is allowed</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="cmn-area invoice">
+  <div class="tab-pane__header">
+    <div class="tab-pane__header-title">Quote Settings</div>
+  </div>
+  <div class="tab-pane__body">
+    <form
+      [formGroup]="quotesForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="tab-pane__row">
+        <div class="tab-pane__subtitle">Starting Quote Number</div>
+        <div class="tab-pane-input__row">
+          <div class="qt-input-block">
             <input
-                type="submit"
-                class="qt-button qt-mt-16"
-                value="Save Changes"
+              type="text"
+              formControlName="count"
+              class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
+              placeholder="Enter Starting ticket number"
             >
-        </form>
-    </div>
+            <div
+              *ngIf="submitted && f.count.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.count.errors.required">Ticket Number is required</div>
+              <div *ngIf="f.count.errors.pattern">Only Number is allowed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  Todo check this input -->
+<!--      <input-->
+<!--        type="submit"-->
+<!--        class="qt-button qt-mt-16"-->
+<!--        value="Save Changes"-->
+<!--      >-->
+    </form>
+  </div>
 </div>

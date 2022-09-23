@@ -274,6 +274,8 @@
     mask-image: url("/assets/img/icons/new-remove.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__new-remove-red {
     background-color: $red-600;
