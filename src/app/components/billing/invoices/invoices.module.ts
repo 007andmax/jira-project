@@ -14,6 +14,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { InvoiceExportComponent } from './invoices-header/invoice-export/invoice-export.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { InvoiceExportModule } from './invoices-header/invoice-export/invoice-export.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 
 
@@ -34,7 +35,8 @@ import { InvoiceExportModule } from './invoices-header/invoice-export/invoice-ex
         InvoicesRoutingModule,
         KeyUpEnterModule,
         DynamicTooltipModule,
-        InvoiceExportModule
+        InvoiceExportModule,
+        CompanyDropDownModule
     ],
 
 

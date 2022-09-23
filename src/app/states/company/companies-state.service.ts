@@ -57,12 +57,21 @@ export class CompaniesStateService {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
+
+        const indexLigth = this.lightAllCompanies.findIndex((item) => item.id === newChange.data.id);
+        if (indexLigth > -1) this.lightAllCompanies[Index] = newChange.data;
+        if (indexLigth === -1) this.lightAllCompanies.unshift(newChange.data);
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
+
+        const indexLigth = this.lightAllCompanies.findIndex((item) => item.id === newChange.data.id);
+        if (indexLigth > -1) this.lightAllCompanies[indexLigth] = newChange.data;
+
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
+      this.onLightCompanies.emit(this.lightAllCompanies);
     })
     this.websocketStateService.onConnected.subscribe(data => {
       if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
