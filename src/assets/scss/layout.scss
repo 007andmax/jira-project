@@ -4,6 +4,16 @@
 
 body {
   &.page-settings {
+    .qt-input-block__datepicker {
+      position: relative;
+
+      .icon__calendar {
+        position: absolute;
+        right: 14px;
+        top: 10px;
+        bottom: 10px;
+      }
+    }
     .button-gl-number {
       &__add {
         padding-left: 16px;
@@ -470,6 +480,10 @@ body {
 
           &:hover {
             border-color: $gray-200;
+          }
+
+          &:focus {
+            border-color: transparent;
           }
         }
       }

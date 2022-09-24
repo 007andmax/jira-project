@@ -1,48 +1,66 @@
 <div class="page-insider invoice-ticket">
     <div class="cmn-area invoice">
-        <form (ngSubmit)="saveAccountingDate()">
-            <div class="f-row">
-                <div class="f-col col-50  date-area">
-                    <label>Start Date</label>
-                    <div class="form-row">
-                        <input
-                            name="start_date"
-                            type="text"
-                            class="form-control sub-label-field"
-                            [(ngModel)]="accountingStartDate"
-                            ngbDatepicker
-                            #d="ngbDatepicker"
-                            (click)="d.toggle()"
-                        >
-                        <a
-                            href="javascript:;"
-                            (click)="resetAccountingDate()"
-                        >
-                            Reset
-                        </a>
-                    </div>
+        <div class="tab-pane__header">
+          <div class="tab-pane__header-title">Accounting Year</div>
+        </div>
+        <div class="tab-pane__body">
+          <form (ngSubmit)="saveAccountingDate()">
+            <div class="tab-pane__row">
+              <div class="tab-pane__subtitle">Start Date</div>
+              <div class="tab-pane-input__row">
+                <div class="qt-input-block qt-input-block-100 qt-input-block__datepicker">
+                  <label>
+                    <input
+                      name="start_date"
+                      type="text"
+                      class="form-control sub-label-field"
+                      [(ngModel)]="accountingStartDate"
+                      ngbDatepicker
+                      #d="ngbDatepicker"
+                      (click)="d.toggle()"
+                    >
+                    <div class="icon__calendar qt-sz-20 qt-bg-contain"></div>
+                  </label>
                 </div>
-                <div class="f-col col-50 date-area">
-                    <label>End Date</label>
-                    <div class="form-row">
-                        <input
-                            name="end_date"
-                            type="text"
-                            class="form-control sub-label-field"
-                            [(ngModel)]="accountingEndDate"
-                            ngbDatepicker
-                            #dd="ngbDatepicker"
-                            (click)="dd.toggle()"
-                            disabled
-                        >
-                    </div>
+                <div class="qt-input-block-100 qt-mt-16">
+                  <div
+                    href="javascript:;"
+                    (click)="resetAccountingDate()"
+                    class="qt-button --gray qt-jc-c qt-w100"
+                  >
+                    <span class="icon__reset qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    Reset Date
+                  </div>
                 </div>
+              </div>
             </div>
-            <input
-                type="submit"
-                class="qt-button qt-mt-16"
-                value="Save Changes"
-            >
-        </form>
+            <div class="tab-pane__row">
+              <div class="tab-pane__subtitle">End Date</div>
+              <div class="tab-pane-input__row">
+                <div class="qt-input-block qt-input-block__datepicker">
+                  <label>
+                    <input
+                      name="end_date"
+                      type="text"
+                      class="form-control sub-label-field"
+                      [(ngModel)]="accountingEndDate"
+                      ngbDatepicker
+                      #dd="ngbDatepicker"
+                      (click)="dd.toggle()"
+                      disabled
+                    >
+                    <div class="icon__calendar qt-sz-20 qt-bg-contain"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!--  Todo check this input -->
+<!--            <input-->
+<!--              type="submit"-->
+<!--              class="qt-button qt-mt-16"-->
+<!--              value="Save Changes"-->
+<!--            >-->
+          </form>
+        </div>
     </div>
 </div>

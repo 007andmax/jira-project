@@ -17,8 +17,8 @@ select.cmn-select {
     background-color: $white;
     &[disabled] {
         cursor: not-allowed;
-        background-color: $gray-200--old;
-        border-color: $gray-200--old;
+        background-color: $gray-50;
+        border-color: $gray-200;
     }
 }
 .--required {
