@@ -313,7 +313,7 @@
       background-image: url("/assets/img/icons/quick-support.svg");
     }
   }
-  &__quicktech-logo {
+  &__quicktech-logo { // TODO delete this icon on super admin page
     background-image: url("/assets/img/icons/quicktech-logo.svg");
   }
   &__quicktech_partical_top {
@@ -326,7 +326,20 @@
     background-image: url("/assets/img/icons/attachment-blue.svg");
   }
   &__collapse-arrow {
-    background-image: url("/assets/img/icons/collapse-arrow.svg");
+    background-image: url("/assets/img/icons/collapse-arrow.svg"); // TODO replace collapse-arrow.svg and collapse-arrow-white.svg on mask
+  }
+  &__collapse-arrow {
+    &-white {
+      background-color: $white;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons/collapse-arrow.svg");
+      mask-image: url("/assets/img/icons/collapse-arrowt.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+    }
   }
   &__company-info {
     background-image: url("/assets/img/icons/company-info.svg");
@@ -741,6 +754,17 @@
   }
   &__arrow-right {
     background-image: url("/assets/img/icons/arrow-right.svg");
+  }
+  &__arrow-right-gray-400 {
+    background-color: $gray-400;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/arrow-right.svg");
+    mask-image: url("/assets/img/icons/arrow-right.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__collapse {
     background-image: url("/assets/img/icons/collapse.svg");

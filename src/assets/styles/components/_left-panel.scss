@@ -13,65 +13,42 @@
   color: $white;
   transition: width 300ms;
 
+  .header-mobile-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $gray-700;
+  }
   &__header {
     display: flex;
     justify-content: space-between;
     padding: 24px;
+    &-mobile {
+      @media (max-width: 767px) {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        padding: 16px;
+        background-color: $gray-900;
+        margin-bottom: 16px;
+        transition: left ease-in 300ms;
+      }
+      .icon__quicktech-logo-mini {
+        @media (max-width: 767px) {
+          margin: 0;
+        }
+      }
+    }
 
     @media (max-width: 767px) {
       align-items: center;
       flex-wrap: wrap;
       padding: 16px;
-    }
-  }
-
-  &__systems-info {
-    display: none;
-
-    @media (max-width: 767px) {
-      flex: 100%;
-      display: flex;
-      align-items: center;
-      margin-top: 28px;
-    }
-
-    &-avatar {
-      @include сaption-l__sb;
-      @media (max-width: 767px) {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        min-height: 40px;
-        border-radius: 50%;
-        background-position: center;
-        background-size: cover;
-        margin-right: 10px;
-        color: $white;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        font-size: 10px;
-        font-weight: 700;
-      }
-    }
-
-    &-header {
-      color: $white;
-      margin-bottom: 4px;
-    }
-    &-name {
-      display: flex;
-      align-items: center;
-      @include сaption-l;
-      color: $gray-600--old;
-
-    }
-    &-circle {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: $success;
-      margin-right: 4px;
     }
   }
 
@@ -115,12 +92,35 @@
     &-icon {
       display: flex;
       flex-direction: column;
-      background-color: $gray-900;
+      background-color: $gray-800;
       flex-shrink: 0;
+      @media (max-width: 767px) {
+        width: 100%;
+        padding-top: 88px;
+      }
+      @media (min-width: 768px) {
+        background-color: $gray-900;
+      }
     }
     &-menu {
       width: 100%;
-      margin: 24px 16px 0 8px;
+      margin: 0;
+      @media (min-width: 768px) {
+        margin: 24px 16px 0 8px;
+      }
+      @media (max-width: 767px) {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        background-color: $gray-800;
+        transition: .3s ease-in left;
+      }
+      &.--open {
+        @media (max-width: 767px) {
+          left: 0;
+          z-index: 1;
+        }
+      }
     }
     &::-webkit-scrollbar-thumb {
       background: transparent;
@@ -128,37 +128,10 @@
     &::-webkit-scrollbar {
       width: 0;
     }
-
-    @media (max-width: 767px) {
-      height: calc(100% - 136px);
-    }
   }
 
   &__header-logo-mini {
     display: none;
-  }
-
-  &__header-logo {
-    width: 140px;
-    height: 32px;
-    position: relative;
-    background-image: url("/assets/img/icons-left-sidebar/quicktech-logo.svg");
-  }
-
-  &__header-logo.--beta {
-    &::after {
-      position: absolute;
-      content: "Beta";
-      line-height: 1.25;
-      text-transform: uppercase;
-      font-size: 8px;
-      letter-spacing: 1px;
-      padding: 1px 3px;
-      border-radius: 2px;
-      background-color: $error;
-      top: 100%;
-      left: 0;
-    }
   }
 
   &__header-resize-btn {
@@ -181,10 +154,19 @@
   }
 
   &__menu {
-    height: 40px;
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+      padding: 24px 16px;
+      margin-bottom: 16px;
+      background-color: $gray-900;
+    }
+
+    @media (min-width: 768px) {
+      height: 40px;
+    }
   }
 
   //&__menu-arrow {
@@ -195,27 +177,45 @@
   //}
 
   &__menu-title {
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 18px;
     font-weight: 500;
+    line-height: 22px;
     font-stretch: normal;
     color: $white;
     white-space: nowrap;
-    //padding: 6px 8px;
-    //border-radius: 6px;
-    margin-bottom: 16px;
-    margin-left: 8px;
+    @media (min-width: 768px) {
+      font-size: 16px;
+      line-height: 19px;
+      margin-bottom: 16px;
+      margin-left: 8px;
+    }
   }
 
+  &__menu-text {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    color: $white;
+  }
   &__menu-icon {
     &-wrap {
-      width: 40px;
-      height: 40px;
+      width: calc(100% - 32px);
       border-radius: 8px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 12px 8px;
+      justify-content: flex-start;
+      margin: 0 16px 8px;
+      @media (max-width: 767px) {
+        padding: 12px 16px;
+        background-color: $gray-700
+      }
+      @media (min-width: 768px) {
+        margin: 0 12px 8px;
+        width: 40px;
+        height: 40px;
+        justify-content: center;
+      }
+
       &-settings {
         margin-top: auto;
         margin-bottom: 12px;
@@ -305,8 +305,15 @@
 
   &__menu-expand {
     list-style: none;
-    padding: 0;
+    padding: 0 16px;
     margin-bottom: 0;
+    @media (min-width: 768px) {
+      padding: 0;
+    }
+    @media (max-width: 767px) {
+      height: calc(100% - 88px);
+      overflow: auto;
+    }
     &.top-menu {
       opacity: 0;
       overflow: hidden;
@@ -329,23 +336,33 @@
       top: 100%;
     }
   }
-
   &__menu-expand li {
     display: flex;
-    padding: 6px 8px;
+    padding: 0;
     cursor: pointer;
     font-weight: 500;
-    font-size: 13px;
-    line-height: 16px;
-    border-radius: 6px;
+    font-size: 14px;
+    line-height: 17px;
     color: $gray-300;
     align-items: center;
     position: relative;
     &:not(:last-child) {
-      margin-bottom: 4px;
+      @media (min-width: 768px) {
+        margin-bottom: 4px;
+      }
     }
     @media (max-width: 767px) {
+      font-weight: 500;
+      height: 48px;
+      justify-content: space-between;
+      border-bottom: 1px solid $gray-700;
+    }
+    @media (min-width: 768px) {
       margin-bottom: 8px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 16px;
     }
     a {
       color: $white;
@@ -360,22 +377,41 @@
       padding-right: 24px;
     }
     &.--active {
-      color: $white;
-      background-color: $gray-700;
-      margin-left: 8px;
-      a {
+      @media (min-width: 768px) {
         color: $white;
+        background-color: $gray-700;
+        margin-left: 8px;
+      }
+      a {
+        @media (min-width: 768px) {
+          color: $white;
+        }
       }
       .icon__menu--submenu {
-        background-color: $white;
+        @media (min-width: 768px) {
+          background-color: $white;
+        }
       }
       .app-left-panel__menu-expand-count {
-        color: $primary-1;
+        @media (min-width: 768px) {
+          color: $primary-1;
+        }
       }
     }
 
     input {
       color: $primary-2;
+    }
+  }
+
+  &__menu-expand-count {
+    @media (max-width: 767px) {
+      font-size: 12px;
+      line-height: 15px;
+      color: #fff;
+      padding: 4px 8px;
+      background-color: $gray-700;
+      border-radius: 22px;
     }
   }
 
@@ -450,6 +486,9 @@
 
 .app-left-panel.--open {
   @media (max-width: 767px) {
+    left: 0;
+  }
+  .app-left-panel__header-mobile {
     left: 0;
   }
 }
