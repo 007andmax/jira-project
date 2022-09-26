@@ -147,6 +147,7 @@ export class DevicesComponent implements OnInit {
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;
   searchTagName:any;
+  todaysDate: any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -213,6 +214,8 @@ export class DevicesComponent implements OnInit {
     }); 
     
     this.CurrentUser();    
+
+    this.todaysDate = Date.now();
   }
 
   getCountSelected() {
@@ -1207,7 +1210,7 @@ export class DevicesComponent implements OnInit {
   }
 
   getToDayDate() {
-    return Date.now();
+    return this.todaysDate;
   }
 
   onOperatingSystem(data, type) {
@@ -1597,7 +1600,10 @@ export class DevicesComponent implements OnInit {
       .subscribe((resp) => {
         this.System = resp.filter((x) => x.IsActive);
         if (this.System.length > 0) {          
-          this.serialnumber = this.System[0].SerialNumber;          
+          this.serialnumber = this.System[0].SerialNumber || '';          
+        }
+        else {
+          this.serialnumber = '';          
         }
       });
   }

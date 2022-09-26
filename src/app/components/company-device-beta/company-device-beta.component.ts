@@ -140,6 +140,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;  
   devices:any[] = [];  
+  todaysDate: any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -176,7 +177,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
-      this.setPreviewDataDevice();
     }
     this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.currentCompany = data;
@@ -204,7 +204,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.agentService.GetCurrentConfig(this.asset.ID);      
     });    
 
-    
+    this.todaysDate = Date.now();
   }  
 
   getCountSelected() {
@@ -613,6 +613,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.assetData.Caption = this.assetData.OperatingSystem;
     this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == asset.ManufacturerId);
     this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == asset.ModelID);
+    this.operatingSystemWindow(asset.ID);  
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
     this.getSecurityUpdate(asset.Guid);
@@ -714,7 +715,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getToDayDate() {
-    return Date.now();
+    return this.todaysDate;
   }
 
   onOperatingSystem(data, type) {
@@ -1323,6 +1324,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
         if (this.System.length > 0) {   
           this.operatingSystem = this.System[0];       
           this.serialnumber = this.System[0].SerialNumber;          
+        }
+        else {
+          this.serialnumber = '';
+          this.operatingSystem = '';
         }
       });
   }
