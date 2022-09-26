@@ -632,3 +632,12 @@ table.qt-table-modern tbody tr td {
     display: inline-block;
   }
 }
+
+.qt-page-list__header {
+  width: 100% !important;
+}
+
+.qt-page-list__header-title-line {
+  width: 85%;
+  margin: 0 auto !important;
+}
