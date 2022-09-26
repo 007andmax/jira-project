@@ -106,7 +106,7 @@
         <div class="tab-pane__subtitle">Invoice Email Settings</div>
         <div class="tab-pane-input__row">
           <div class="qt-input-block qt-input-block-100 qt-pb-25">
-            <div class="qt-df">
+            <div class="qt-df qt-ai-c">
               <div
                 class="qt-toggle"
                 [ngClass]="{'--on':includeInvoiceAsAttachmentSetting}"
@@ -118,7 +118,7 @@
             </div>
           </div>
           <div class="qt-input-block qt-input-block-100">
-            <div class="qt-df">
+            <div class="qt-df qt-ai-c">
               <div
                 class="qt-toggle"
                 [ngClass]="{'--on':includeAccountReceivableReportAsAttachmentSetting}"
@@ -130,7 +130,7 @@
             </div>
           </div>
           <div class="qt-input-block qt-input-block-100">
-            <div class="qt-df">
+            <div class="qt-df qt-ai-c">
               <div
                 class="qt-toggle"
                 [ngClass]="{'--on':invoiceForm.value.enableOwnerSending}"
@@ -142,14 +142,14 @@
             </div>
           </div>
           <div class="qt-input-block qt-input-block-100">
-            <div class="qt-df">
-              <label
+            <div class="qt-df qt-ai-c">
+              <div
                 class="qt-toggle"
                 [ngClass]="{'--on':invoiceForm.value.enableInvoiceContact}"
                 (click)="onEnableInvoice(!invoiceForm.value.enableInvoiceContact)"
               >
                 <div class="qt-toggle__circle"></div>
-              </label>
+              </div>
               <div class="qt-color-gray-900 qt-ml-12">Set custom Invoice contact</div>
             </div>
           </div>
