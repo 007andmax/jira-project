@@ -39,7 +39,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
   suppliers: Array<Company> = [];
-  companies: Array<Company> = [];
+
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
 

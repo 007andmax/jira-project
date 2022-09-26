@@ -1,14 +1,13 @@
 <div class="qt-df qt-ai-fs">
-    <app-select-search
+    <company-drop-down
         class="search-company documents-company-filter qt-mr-8"
         #companyDp
         [placeholder]="'Select By Company'"
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-select-search>
+    ></company-drop-down>
     <app-company-tags
         #tagsDp
         class="documents-filter-tags qt-mr-8"

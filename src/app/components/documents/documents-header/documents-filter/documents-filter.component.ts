@@ -17,7 +17,6 @@ import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/
 })
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
-  companies = [];
   defaultDate: number = new Date().getTime();
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('usersDp') usersDp: TechUsersListReportComponent;
@@ -30,16 +29,7 @@ export class DocumentsFilterComponent implements OnInit {
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
-  }
 
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onClearAll() {
     if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();

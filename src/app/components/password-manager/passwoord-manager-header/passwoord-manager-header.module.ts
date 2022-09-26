@@ -10,6 +10,7 @@ import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/materia
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PasswordManagerAddCategoryModule } from '../password-manager-add-category/password-manager-add-category.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 @NgModule({
     declarations: [PasswoordManagerHeaderComponent,
@@ -24,7 +25,8 @@ import { PasswordManagerAddCategoryModule } from '../password-manager-add-catego
         MatChipsModule,
         NgbModule,
         PasswordManagerAddCategoryModule,
-        MatIconModule
+        MatIconModule,
+        CompanyDropDownModule
     ],
     exports: [PasswoordManagerHeaderComponent]
 })
