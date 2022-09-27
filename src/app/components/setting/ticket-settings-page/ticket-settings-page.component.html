@@ -2,11 +2,11 @@
 <div class="page-container ticket-settings-page-container">
     <div class="page-insider invoice-ticket">
         <div
-            class="heading"
+            class="heading qt-df qt-ai-fs qt-jc-sb"
             [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus',
         'heading-canned-responses':activeTab === 'cannedResponses'}"
         >
-            <h6 class="qt-fw-600 qt-color-dark">Ticket Settings</h6>
+            <h6 class="qt-fw-600">Ticket Settings</h6>
             <div
                 class="heading-serach add-category-container"
                 [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
@@ -41,6 +41,7 @@
                     Create Response
                 </a>
             </div>
+            <div class="qt-button qt-ml-24 --md">Save Changes</div>
         </div>
         <ngb-tabset
             (tabChange)="setTab($event)"

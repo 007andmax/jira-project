@@ -4,6 +4,62 @@
 
 body {
   &.page-settings {
+    .qt-input-block__time {
+      position: relative;
+      margin-bottom: 0;
+
+      &::after {
+        position: absolute;
+        content: "Hours";
+        left: 37px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        color: $gray-400;
+      }
+
+      input {
+        -moz-appearance:textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+
+        &:focus ~ .quantity-afterfix,
+        &:focus ~ .quantity-afterfix .quantity-arrow-up {
+          border-color: $blue-light-600;
+        }
+      }
+
+      &:hover .quantity-afterfix,
+      &:hover .quantity-arrow-up {
+        border-color: $gray-300;
+      }
+    }
+    .quantity-afterfix {
+      width: 32px;
+      height: 40px;
+      border: 1px solid $gray-200;
+      border-left: none;
+      border-radius: 6px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      background-color: $gray-50;
+
+      .quantity-arrow-up,
+      .quantity-arrow-down {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50%;
+      }
+      .quantity-arrow-up {
+        border-bottom: 1px solid $gray-200;
+      }
+    }
     .qt-input-block__datepicker {
       position: relative;
 

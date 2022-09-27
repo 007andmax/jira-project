@@ -701,6 +701,9 @@
       background-image: url("/assets/img/icons/filter-dropdown.svg");
     }
   }
+  &__down-arrow__sm {
+    background-image: url("/assets/img/icons/down-arrow-sm.svg");
+  }
   &__printer {
     background-image: url("/assets/img/icons/printer.svg");
   }
@@ -757,6 +760,17 @@
   }
   &__arrow-right {
     background-image: url("/assets/img/icons/arrow-right.svg");
+  }
+  &__up-arrow-gray-400 {
+    background-color: $gray-400;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/up-arrow.svg");
+    mask-image: url("/assets/img/icons/up-arrow.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__arrow-right-gray-400 {
     background-color: $gray-400;

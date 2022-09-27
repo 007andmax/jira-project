@@ -33,7 +33,8 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
 
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
@@ -57,7 +58,8 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
   setTab(data) {
     this.activeTab = data['nextId'];
