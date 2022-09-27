@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
@@ -18,7 +19,7 @@ import { PasswoordManagerDevicesUsersComponent } from '../../passwoord-manager-d
   templateUrl: './passwoord-manager-filters.component.html',
   styleUrls: ['./passwoord-manager-filters.component.scss']
 })
-export class PasswoordManagerFiltersComponent implements OnInit {
+export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
 
   showAddCategory: boolean = false;
   categories: Array<PasswordRecordCategories> = [];
@@ -34,6 +35,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   @Input() disabledCompany: boolean = false;
   @Output() onClose = new EventEmitter();
   public filter: FilterPasswordManager = new FilterPasswordManager();
+  sub: Subscription = new Subscription();
   constructor(
     private companiesState: CompaniesStateService,
     private passwordManagerStateService: PasswordManagerStateService,
@@ -42,6 +44,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public devicesStateService: DevicesStateService) { }
 
+
   ngOnInit() {
     if (this.passwordManagerStateService.getSelectedCategory()) this.categoriesSelect.onSelect(this.passwordManagerStateService.getSelectedCategory());
     if (this.companiesState.isInitLightAllCompanies) this.getClientsList(this.companiesState.getLightCompanies());
@@ -49,6 +52,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       this.getClientsList(data);
     })
+    this.sub.add(getOnCompanies);
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
@@ -165,5 +169,8 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     if (this.filter.selectedDate) count++;
     if (this.filter.selectedUserOrDevice) count++;
     this.onChangeCountFilter.emit(count);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
