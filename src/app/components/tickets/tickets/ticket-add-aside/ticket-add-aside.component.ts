@@ -46,6 +46,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   ticketAdd: TicketAdd = new TicketAdd();
   devices = [];
   users = [];
+  usersList = [];
   techUsersList = [];
   shareUsersList = [];
   selectedCompanyId: string;
@@ -273,6 +274,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         return item;
       }
     });
+    this.usersList = this.getUserList();
 
   }
   onChangeSubject() {

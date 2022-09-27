@@ -163,7 +163,9 @@ export class CompanyProfile {
     public getDataForAdd() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
         let addresses = [this.addresses[0]];
-        if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) this.addresses.push(this.addresses[1]);
+        console.log("this.addresses", this.addresses);
+        console.log("this.addresses[1].checkForAdd()", this.addresses[1].checkForAdd());
+        if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
         return {
             associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,

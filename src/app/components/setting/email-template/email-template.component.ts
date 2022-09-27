@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
-import { EmailTempleteService } from "./email-templete.service";
+import { EmailTempleteService } from "./email-template.service";
 import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
@@ -12,9 +12,9 @@ import { SettingStateService } from "src/app/states/setting/setting-state.servic
 declare var $: any;
 
 @Component({
-  selector: "app-email-templete",
-  templateUrl: "./email-templete.component.html",
-  styleUrls: ["./email-templete.component.scss"]
+  selector: "app-email-template",
+  templateUrl: "./email-template.component.html",
+  styleUrls: ["./email-template.component.scss"]
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {
   loading = false;

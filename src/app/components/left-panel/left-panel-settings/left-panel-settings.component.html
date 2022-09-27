@@ -44,11 +44,11 @@
         Email Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'email-templete-component'}"
-        (click)="goToState('email-templete-component')"
+        [ngClass]="{'--active':activePage === 'email-template-component'}"
+        (click)="goToState('email-template-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
     >
-        Email Templetes
+        Email Templates
     </li>
     <li
         [ngClass]="{'--active':activePage === 'integrations-component'}"

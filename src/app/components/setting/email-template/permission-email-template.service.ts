@@ -7,7 +7,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PermissionEmailTempleteService implements CanActivate {
+export class PermissionEmailTemplateService implements CanActivate {
   constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS');

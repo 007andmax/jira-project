@@ -74,7 +74,7 @@ import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.m
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
 import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
-import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionEmailTemplateService } from './components/setting/email-template/permission-email-template.service';
 import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
 import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
 import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
@@ -261,7 +261,7 @@ declare var $: any;
     PermissionEmailSettingService,
     PermissionTaxesSettingsService,
     PermissionTicketSettingsService,
-    PermissionEmailTempleteService,
+    PermissionEmailTemplateService,
     PermissionAccountingSettingsService,
     PermissionCrmSettingsService,
     PermissionContractsService,
