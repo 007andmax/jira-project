@@ -15,7 +15,6 @@ export class CompanyDropDownComponent extends DropDownComponent {
     if (this.companiesStateService.isInitLightClientsCompanies && this.clientType) this.getClientsList(this.companiesStateService.getLightClientsCompanies());
 
     this.companiesStateService.onLightCompanies.subscribe((data) => {
-      console.log("data", data)
       if (this.clientType == undefined) this.getClientsList(data);
     })
     this.companiesStateService.onLightClientsCompanies.subscribe((data) => {
@@ -27,9 +26,7 @@ export class CompanyDropDownComponent extends DropDownComponent {
     this.reset(data);
   }
   onOpenChange(data) {
-    console.log("data", data);
     if (data && !this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();
     if (data && !this.companiesStateService.isInitLightClientsCompanies && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
-
   }
 }

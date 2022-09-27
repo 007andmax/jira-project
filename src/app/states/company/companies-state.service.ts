@@ -83,7 +83,6 @@ export class CompaniesStateService {
         }
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
-      console.log("this.lightAllCompanies", this.lightAllCompanies);
       this.onLightCompanies.emit(this.lightAllCompanies);
       this.onLightClientsCompanies.emit(this.lightClientsCompanies);
     })

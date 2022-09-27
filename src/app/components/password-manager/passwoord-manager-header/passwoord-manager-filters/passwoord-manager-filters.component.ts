@@ -45,7 +45,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   ngOnInit() {
     if (this.passwordManagerStateService.getSelectedCategory()) this.categoriesSelect.onSelect(this.passwordManagerStateService.getSelectedCategory());
     if (this.companiesState.isInitLightAllCompanies) this.getClientsList(this.companiesState.getLightCompanies());
-    if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
+    if (!this.companiesState.isInitLightAllCompanies && this.companiesState.getCompanyRoutingId()) this.companiesState.onInitGetLightCompanies();
     let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       this.getClientsList(data);
     })

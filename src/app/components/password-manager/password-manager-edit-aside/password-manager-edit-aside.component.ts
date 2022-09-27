@@ -78,7 +78,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    */
   ngOnInit() {
     if (this.companiesState.isInitLightAllCompanies && this.editItem) this.selectedClient = this.companiesState.getLightCompanies().find(item => item.id === this.editItem.companyId);
-    if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
     let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       if (this.editItem) this.selectedClient = data.find(item => item.id === this.editItem.companyId);
     })
@@ -105,6 +104,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         }
       })
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
+      if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
       this.opened = true;
       this.showSecretCode = false;
       this.isEditSecretKey = false;
