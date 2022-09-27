@@ -5,7 +5,6 @@ import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cro
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersAsideService } from '../users-aside/services/users-aside.service';
 import { UsersService } from 'src/app/services/users/users.service';
-import { SelectClientCompanyStateService } from '../../shared/select-client-company/services/select-client-company-state.service';
 import { CROPP_AVATAR_USER } from 'src/app/const/image-cropp';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
@@ -39,7 +38,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   user: UserProfile = new UserProfile();
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   selectedCompany: Company;
-  companies = [];
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   selectedUserType: CrmCompanyJobType;
@@ -60,7 +58,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
-    private companiesState: SelectClientCompanyStateService,
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
@@ -92,10 +89,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
     })
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
   }
   onSelectClientIndustry(item) {
     this.selectedUserIndustry = item;
@@ -122,10 +115,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.user.editLogo(null);
     })
   }
-  getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
+
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
@@ -273,7 +263,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.user = new UserProfile();
     this.validate = new UserValidate();
-    this.companiesState.onInitClear();
     this.selectedUserTitle = null;
     this.selectedUserType = null;
     this.selectedUserIndustry = null;

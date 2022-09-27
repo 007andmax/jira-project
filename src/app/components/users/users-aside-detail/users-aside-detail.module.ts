@@ -22,6 +22,7 @@ import { UsersAsideDetailMessagesComponent } from './users-aside-detail-messages
 import { UsersAsideDetailMessagesFullBodyComponent } from './users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
 import { TicketProfileAttachmentsModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 @NgModule({
     declarations: [UsersAsideDetailComponent,
@@ -49,6 +50,7 @@ import { NgxMaskModule } from 'ngx-mask';
         UserCustomSubscriptionModule,
         TicketProfileAttachmentsModule,
         NgxMaskModule.forRoot(),
+        CompanyDropDownModule
     ],
     exports: [UsersAsideDetailComponent]
 

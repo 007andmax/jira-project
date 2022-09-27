@@ -54,7 +54,7 @@ export class RecurringTicketsStateService {
 * @param client - company
 */
   public setClient(client) {
-    this.client = client.item;
+    this.client = client;
   }
 
   /**

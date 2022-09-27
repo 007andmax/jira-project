@@ -6,16 +6,15 @@
         ></div>
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
-    <app-select-search
+    <company-drop-down
         class="search-company"
         #companyDp
         [placeholder]="'Select Company'"
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-select-search>
+    ></company-drop-down>
     <app-select-search
         class="search-users"
         #usersDp

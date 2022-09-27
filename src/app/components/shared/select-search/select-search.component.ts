@@ -47,8 +47,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   /**
    *Creates an instance of the SelectClientCompanyComponent with the injected services
    * @param {CompaniesService} companiesService to work with companiies
-   * @param {SelectClientCompanyStateService} companiesState to work with companiies state
-   */
+    */
   constructor(
 
   ) { }

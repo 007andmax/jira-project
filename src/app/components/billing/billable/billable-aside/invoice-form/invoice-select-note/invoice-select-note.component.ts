@@ -14,8 +14,8 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
 
 
   @Input() field: string = null;
-   change: boolean = true;
-  
+  change: boolean = true;
+
   @Input() class: string = null;
   @Input() editItem: any = null;
   @Input() maxlength: number = null;
@@ -30,8 +30,8 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   public selectedItem;
-  
-  private isOpen:boolean = false;
+
+  private isOpen: boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -39,10 +39,9 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
   /**
    *Creates an instance of the SelectClientCompanyComponent with the injected services
    * @param {CompaniesService} companiesService to work with companiies
-   * @param {SelectClientCompanyStateService} companiesState to work with companiies state
-   */
+     */
   constructor(
-   
+
   ) { }
 
   /**
@@ -55,14 +54,14 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
     if (this.instance.isPopupOpen() && !this.isOpen) {
       this.isOpen = true;
-       this.onOpenDropDown.emit(null);
+      this.onOpenDropDown.emit(null);
     }
     if (!this.instance.isPopupOpen() && this.isOpen) {
-      this.isOpen = false; 
+      this.isOpen = false;
       this.onClosedDropDown.emit(null);
-    }   
+    }
   }
-  
+
   onCheckChange(event) {
     this.onChangeInput.emit(event.target.value);
   }
@@ -92,14 +91,14 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
    * @param companyId - id of company
    */
   public selectItem(item) {
-    
-    
+
+
     this.onSelectedItem.emit(item.item);
 
   }
 
   public isDropDownOpen() {
-  
+
   }
 
   /**
@@ -114,13 +113,13 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
    * clear client input
    */
   public clearClient() {
-    
-    
+
+
     this.onSelectedItem.emit(null);
     this.selectedItem = null;
   }
 
-  
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
 

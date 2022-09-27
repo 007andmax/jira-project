@@ -38,7 +38,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
-  companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   timeCount: number = 0;
   intervalContainer: any;
@@ -78,9 +77,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * Initializes Password manager edit aside. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
+    if (this.companiesState.isInitLightAllCompanies && this.editItem) this.selectedClient = this.companiesState.getLightCompanies().find(item => item.id === this.editItem.companyId);
+    if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
+    let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       if (this.editItem) this.selectedClient = data.find(item => item.id === this.editItem.companyId);
     })
     this.sub.add(getOnCompanies);
@@ -189,10 +188,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   public onPastDescription(value) {
     this.editItem.description = value;
-  }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   selectCompany(data) {
     this.selectedClient = data;

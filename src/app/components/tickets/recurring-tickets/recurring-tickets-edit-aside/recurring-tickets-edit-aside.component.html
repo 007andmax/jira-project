@@ -24,16 +24,20 @@
                 ></textarea>
             </div>
         </div>
-        <div class="col-md-12">
-            <mat-error *ngIf="!validate.getCompany()">Company name is required</mat-error>
-            <p>Assign to Company</p>
-            <app-select-client-company
-                [valid]="validate.getCompany()"
-                style="width: 75%;"
-                class="light-dropdown"
-                [filter]="true"
-                (selectedItem)="selectClient($event)"
-            ></app-select-client-company>
+        <div class="qt-w100 qt-pl-15 qt-pr-15 qt-mt-20 recuring-assign-company">
+            <company-drop-down
+                [class]="['light-dropdown']"
+                [title]="'Assign to Company'"
+                [placeholder]="'Select Company'"
+                [editItem]="selectedClient"
+                [field]="'name'"
+                [search]="true"
+                [change]="true"
+                [validate]="validate.getCompany()"
+                [errorMessage]="'Company name is required'"
+                (onSelectedItem)="selectClient($event)"
+                heightInput="auto"
+            ></company-drop-down>
         </div>
         <div class="col-md-4">
             <p>Device Name</p>
@@ -270,34 +274,34 @@
         <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
         <div class="col-md-12 checkbox-wrapper">
             <div class="with-checkbox">
-              <label class="qt-checkbox">
-                <input
-                  id="requireUpdate-edit"
-                  type="checkbox"
-                >
-                <span></span>
-                <div class="qt-ml-8">Require update Notes</div>
-              </label>
+                <label class="qt-checkbox">
+                    <input
+                        id="requireUpdate-edit"
+                        type="checkbox"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Require update Notes</div>
+                </label>
             </div>
             <div class="with-checkbox">
-              <label class="qt-checkbox">
-                <input
-                  id="quickClose-edit"
-                  type="checkbox"
-                >
-                <span></span>
-                <div class="qt-ml-8">Quick Close</div>
-              </label>
+                <label class="qt-checkbox">
+                    <input
+                        id="quickClose-edit"
+                        type="checkbox"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Quick Close</div>
+                </label>
             </div>
             <div class="with-checkbox">
-              <label class="qt-checkbox">
-                <input
-                  id="createTask-edit"
-                  type="checkbox"
-                >
-                <span></span>
-                <div class="qt-ml-8">Create Task for user</div>
-              </label>
+                <label class="qt-checkbox">
+                    <input
+                        id="createTask-edit"
+                        type="checkbox"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8">Create Task for user</div>
+                </label>
             </div>
         </div>
     </div>

@@ -22,7 +22,6 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   @ViewChild('subscriptionDp') subscriptionDp: UsersFilterSubscriptionsComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
-  companies = [];
   industries: Array<CrmCompanyIndustry> = [];
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   public filter: UserFilter = new UserFilter();
@@ -39,11 +38,6 @@ export class UsersFilterComponent implements OnInit {
       if (this.titlesDp) this.titlesDp.reset(this.jobTitleList);
     })
     this.sub.add(onGetJobTitle);
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
     this.industries = this.crmStateService.getIndustryList();
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
@@ -90,15 +84,9 @@ export class UsersFilterComponent implements OnInit {
     this.subscriptionDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     if (!this.companiesDp.isDisabled) this.companiesDp.clearWithOutChanges();
-
-
     this.usersStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
 
-  }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   onSelectTitle(data) {
     this.filter.setTitle(data);

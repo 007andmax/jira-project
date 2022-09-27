@@ -8,7 +8,6 @@ import { RecurringTicketsEditAsideComponent } from './recurring-tickets-edit-asi
 import { RecurringTicketsAddAsideComponent } from './recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
-import { SelectClientCompanyComponent } from '../../shared/select-client-company/select-client-company.component';
 import { DevicesRecurringTicketsComponent } from './devices-recurring-tickets/devices-recurring-tickets.component';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { IntervalComponent } from '../../shared/interval/interval.component';
@@ -21,6 +20,7 @@ import { TagsComponent } from '../../shared/tags/tags.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsRoutingModule } from './recurring-tickets-routing.module';
 import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 
 
@@ -30,7 +30,6 @@ import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
         RecurringTicketsTableComponent,
         RecurringTicketsEditAsideComponent,
         RecurringTicketsAddAsideComponent,
-        SelectClientCompanyComponent,
         DevicesRecurringTicketsComponent,
         IntervalComponent,
         DurationComponent,
@@ -52,7 +51,8 @@ import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
         NgbModule,
         MatIconModule,
         ReactiveFormsModule,
-        RecurringTicketsRoutingModule
+        RecurringTicketsRoutingModule,
+        CompanyDropDownModule
     ],
 
 

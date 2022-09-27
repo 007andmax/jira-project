@@ -8,6 +8,7 @@ import { TicketsFilterTagsComponent } from './tickets-filter/tickets-filter-tags
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSelectModule, MatChipsModule, MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 
 
 
@@ -26,7 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatIconModule,
         FormsModule,
         ReactiveFormsModule,
-
+        CompanyDropDownModule
     ],
     exports: [TicketsHeaderComponent]
 

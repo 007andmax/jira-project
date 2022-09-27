@@ -10,17 +10,16 @@
         [heightInput]="'36px'"
         (onSelectedItem)="onSelectTitle($event)"
     ></app-drop-down>
-    <app-drop-down
+    <company-drop-down
         #companiesDp
         class="qt-w100 qt-mr-8"
         [placeholder]="'Search By Company'"
         [field]="'name'"
-        [list]="companies"
         [search]="true"
         [change]="true"
         [heightInput]="'36px'"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-drop-down>
+    ></company-drop-down>
     <users-filter-subscriptions
         #subscriptionDp
         class="qt-w100 qt-mr-8"

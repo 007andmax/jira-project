@@ -119,9 +119,8 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-report__dropdown-xl qt-mr-8">
-                            <app-drop-down
+                            <company-drop-down
                                 [placeholder]="'Select Company'"
-                                [list]="companies"
                                 [dropdownHeight]="'175px'"
                                 [heightInput]="'36px'"
                                 [validate]="validate.getCompany()"
@@ -130,7 +129,7 @@
                                 [search]="true"
                                 [change]="true"
                                 (onSelectedItem)="selectClient($event)"
-                            ></app-drop-down>
+                            ></company-drop-down>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <app-multi-datepicker
@@ -199,9 +198,8 @@
                             >
                                 <div class="qt-df qt-ai-c qt-jc-c">
                                     <div class="qt-report__dropdown qt-mr-8 select-users-list">
-                                        <app-drop-down
+                                        <company-drop-down
                                             [placeholder]="'Select Company'"
-                                            [list]="companies"
                                             [dropdownHeight]="'175px'"
                                             [validate]="validate.getCompany()"
                                             [errorMessage]="'Please select the company name'"
@@ -210,7 +208,7 @@
                                             [search]="true"
                                             [change]="true"
                                             (onSelectedItem)="selectClient($event)"
-                                        ></app-drop-down>
+                                        ></company-drop-down>
                                     </div>
                                     <div class="qt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
@@ -348,9 +346,8 @@
                             >
                                 <div class="qt-df qt-ai-c qt-jc-c">
                                     <div class="qt-report__dropdown qt-mr-8 select-users-list">
-                                        <app-drop-down
+                                        <company-drop-down
                                             [placeholder]="'Select Company'"
-                                            [list]="companies"
                                             [dropdownHeight]="'175px'"
                                             [validate]="validate.getCompany()"
                                             [errorMessage]="'Please select the company name'"
@@ -359,7 +356,7 @@
                                             [search]="true"
                                             [change]="true"
                                             (onSelectedItem)="selectClient($event)"
-                                        ></app-drop-down>
+                                        ></company-drop-down>
                                     </div>
                                     <div class="fqt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
@@ -473,9 +470,8 @@
                             >
                                 <div class="qt-df qt-ai-c qt-jc-c">
                                     <div class="qt-report__dropdown qt-mr-8">
-                                        <app-drop-down
+                                        <company-drop-down
                                             [placeholder]="'Select Company'"
-                                            [list]="companies"
                                             [validate]="validate.getCompany()"
                                             [errorMessage]="'Please select the company name'"
                                             [field]="'name'"
@@ -483,7 +479,7 @@
                                             [search]="true"
                                             [change]="true"
                                             (onSelectedItem)="selectClient($event)"
-                                        ></app-drop-down>
+                                        ></company-drop-down>
                                     </div>
                                     <div class="qt-report__dropdown qt-mr-8">
                                         <software-summary-devices-dro-down
@@ -614,15 +610,14 @@
                                 ></app-tech-users-list-report>
                             </div>
                             <div class="qt-report__dropdown qt-mr-8">
-                                <app-drop-down
+                                <company-drop-down
                                     [placeholder]="'Select Company'"
-                                    [list]="companies"
                                     [field]="'name'"
                                     [search]="true"
                                     [change]="true"
                                     [heightInput]="'36px'"
                                     (onSelectedItem)="selectClient($event)"
-                                ></app-drop-down>
+                                ></company-drop-down>
                             </div>
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                 <app-multi-datepicker
@@ -713,15 +708,14 @@
                                 ></app-tech-users-list-report>
                             </div>
                             <div class="qt-report__dropdown qt-mr-8">
-                                <app-drop-down
+                                <company-drop-down
                                     [placeholder]="'Select Company'"
-                                    [list]="companies"
                                     [field]="'name'"
                                     [heightInput]="'36px'"
                                     [search]="true"
                                     [change]="true"
                                     (onSelectedItem)="selectClient($event)"
-                                ></app-drop-down>
+                                ></company-drop-down>
                             </div>
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                 <app-multi-datepicker
@@ -783,9 +777,8 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
-                            <app-drop-down
+                            <company-drop-down
                                 [placeholder]="'Select Company'"
-                                [list]="companies"
                                 [validate]="validate.getCompany()"
                                 [errorMessage]="'Please select the company name'"
                                 [field]="'name'"
@@ -793,7 +786,7 @@
                                 [search]="true"
                                 [change]="true"
                                 (onSelectedItem)="selectClient($event)"
-                            ></app-drop-down>
+                            ></company-drop-down>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <app-multi-datepicker
@@ -834,9 +827,8 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
-                            <app-drop-down
+                            <company-drop-down
                                 [placeholder]="'Select Company'"
-                                [list]="companies"
                                 [validate]="validate.getCompany()"
                                 [errorMessage]="'Please select the company name'"
                                 [field]="'name'"
@@ -844,7 +836,7 @@
                                 [search]="true"
                                 [change]="true"
                                 (onSelectedItem)="selectClient($event)"
-                            ></app-drop-down>
+                            ></company-drop-down>
                         </div>
                         <div class="qt-report__dropdown qt-input-block qt-mr-8">
                             <app-multi-datepicker
@@ -926,15 +918,14 @@
                             ></app-multi-datepicker>
                         </div>
                         <div class="grey-dropdown qt-report__dropdown qt-mr-8 dropdown dropdown-height">
-                            <app-drop-down
+                            <company-drop-down
                                 [placeholder]="'Select Company'"
-                                [list]="companies"
                                 [field]="'name'"
                                 [heightInput]="'36px'"
                                 [search]="true"
                                 [change]="true"
                                 (onSelectedItem)="selectClient($event)"
-                            ></app-drop-down>
+                            ></company-drop-down>
                         </div>
                         <button
                             class="btn-new btn-primary-white qt-fs-0"
@@ -1031,15 +1022,14 @@
                         [ngClass]="className"
                     >
                         <div class="qt-report__dropdown qt-mr-8">
-                            <app-drop-down
+                            <company-drop-down
                                 [placeholder]="'Select Company'"
-                                [list]="companies"
                                 [field]="'name'"
                                 [heightInput]="'36px'"
                                 [search]="true"
                                 [change]="true"
                                 (onSelectedItem)="selectClient($event)"
-                            ></app-drop-down>
+                            ></company-drop-down>
                         </div>
                         <button
                             class="btn-new btn-primary-white qt-fs-0"
@@ -1078,10 +1068,9 @@
                                     ></app-product-list>
                                 </div>
                                 <div class="qt-report__dropdown qt-mr-8">
-                                    <app-drop-down
+                                    <company-drop-down
                                         [isDisabled]="isDisabledCompany"
                                         [placeholder]="'Select Company'"
-                                        [list]="companies"
                                         [validate]="validate.getCompany()"
                                         [errorMessage]="'Please select the company name'"
                                         [field]="'name'"
@@ -1089,7 +1078,7 @@
                                         [search]="true"
                                         [change]="true"
                                         (onSelectedItem)="selectClient($event)"
-                                    ></app-drop-down>
+                                    ></company-drop-down>
                                 </div>
                                 <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                     <app-multi-datepicker
@@ -1164,10 +1153,9 @@
                                     [ngClass]="className"
                                 >
                                     <div class="qt-report__dropdown qt-mr-8">
-                                        <app-drop-down
+                                        <company-drop-down
                                             [isDisabled]="isDisabledCompany"
                                             [placeholder]="'Select Company'"
-                                            [list]="companies"
                                             [validate]="validate.getCompany()"
                                             [errorMessage]="'Please select the company name'"
                                             [field]="'name'"
@@ -1175,7 +1163,7 @@
                                             [change]="true"
                                             [heightInput]="'36px'"
                                             (onSelectedItem)="selectClient($event)"
-                                        ></app-drop-down>
+                                        ></company-drop-down>
                                     </div>
                                     <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                         <app-multi-datepicker
@@ -1311,10 +1299,9 @@
                             [ngClass]="className"
                         >
                             <div class="qt-report__dropdown qt-mr-8">
-                                <app-drop-down
+                                <company-drop-down
                                     [isDisabled]="isDisabledCompany"
                                     [placeholder]="'Select Company'"
-                                    [list]="companies"
                                     [validate]="validate.getCompany()"
                                     [errorMessage]="'Please select the company name'"
                                     [field]="'name'"
@@ -1322,7 +1309,7 @@
                                     [search]="true"
                                     [change]="true"
                                     (onSelectedItem)="selectClient($event)"
-                                ></app-drop-down>
+                                ></company-drop-down>
                             </div>
                             <div class="qt-report__dropdown qt-input-block qt-mr-8">
                                 <app-multi-datepicker
