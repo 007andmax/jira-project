@@ -338,7 +338,20 @@
                 >
                     <div class="qt-toggle__circle"></div>
                 </div>
-                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Manual create billable item</div>
+                <ng-template
+                    #manualContent
+                    class="tooltip"
+                >
+                    Warning, This will disable the automatic creation of a billable item for this contract. It must be manually created.
+                </ng-template>
+                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">
+                    Manual create billable item
+                    <span
+                        class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                        placement="top"
+                        [ngbTooltip]="manualContent"
+                    ></span>
+                </div>
             </div>
         </div>
         <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
