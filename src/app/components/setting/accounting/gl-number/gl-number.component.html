@@ -96,10 +96,10 @@
 
 <div class="page-insider manage-taxes">
   <div class="cmn-area">
-    <div class="gl-numbers__table">
-      <div class="gl-numbers__table-header">
-        <div class="gl-numbers__table-row">
-          <div class="gl-numbers__table-cell gl-numbers__table-checkboxes">
+    <div class="tab-pane__table">
+      <div class="tab-pane__table-header">
+        <div class="tab-pane__table-row">
+          <div class="tab-pane__table-cell tab-pane__table-checkboxes">
             <label class="qt-checkbox">
               <input
                 type="checkbox"
@@ -107,19 +107,19 @@
               <span></span>
             </label>
           </div>
-          <div class="gl-numbers__table-cell gl-numbers__table-account-number">Income Account Number</div>
-          <div class="gl-numbers__table-cell gl-numbers__table-description">Description</div>
-          <div class="gl-numbers__table-cell gl-numbers__table-action"></div>
+          <div class="tab-pane__table-cell gl-numbers__table-account-number">Income Account Number</div>
+          <div class="tab-pane__table-cell gl-numbers__table-description">Description</div>
+          <div class="tab-pane__table-cell gl-numbers__table-action"></div>
         </div>
       </div>
-      <div class="gl-numbers__table-body">
+      <div class="tab-pane__table-body">
         <add-gl-number
           *ngIf="showAddGl"
           [numberList]="numberList"
           (onClose)="toggleShowAddGL(false)"
         ></add-gl-number>
         <div
-          class="gl-numbers__table-row"
+          class="tab-pane__table-row"
           *ngFor="let gl of numberList; let i = index"
           appClickOtside
           [init]="gl.isInitEdit"
@@ -127,7 +127,7 @@
           [class]="'.edit-gl-container-' + i"
           (onOutSide)="onEditGl(gl)"
         >
-          <div class="gl-numbers__table-cell gl-numbers__table-checkboxes">
+          <div class="tab-pane__table-cell tab-pane__table-checkboxes">
             <label class="qt-checkbox">
               <input
                 type="checkbox"
@@ -137,7 +137,7 @@
             </label>
           </div>
           <div
-            class="gl-numbers__table-cell gl-numbers__table-account-number"
+            class="tab-pane__table-cell gl-numbers__table-account-number"
             [ngClass]="{'--input-error' :  gl.disableUpdate  }"
           >
             <input
@@ -157,7 +157,7 @@
               This Gl Number is already occupied
             </mat-error>
           </div>
-          <div class="gl-numbers__table-cell gl-numbers__table-description">
+          <div class="tab-pane__table-cell gl-numbers__table-description">
             <input
               type="text"
               class="form-input"
@@ -169,7 +169,7 @@
               maxlength="50"
             >
           </div>
-          <div class="gl-numbers__table-cell gl-numbers__table-action">
+          <div class="tab-pane__table-cell gl-numbers__table-action">
             <div
               href="javascript:;"
               data-tooltip="Remove"

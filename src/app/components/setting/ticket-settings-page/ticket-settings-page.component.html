@@ -7,41 +7,42 @@
         'heading-canned-responses':activeTab === 'cannedResponses'}"
         >
             <h6 class="qt-fw-600">Ticket Settings</h6>
-            <div
-                class="heading-serach add-category-container"
+            <div class="qt-df">
+              <div class="qt-button qt-ml-24 --md">Save Changes</div>
+              <div
+                class="qt-df"
                 [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
-            >
+              >
                 <div
-                    class="tickets-status-header-buttons"
-                    *ngIf="getSelectedCount() > 0"
+                  class="qt-button --md --gray button-gl-number__delete qt-ml-12"
+                  *ngIf="getSelectedCount() > 0"
                 >
-                    <div [textContent]="getSelectedCount() + ' Status Selected'"></div>
-                    <div
-                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-                        (click)="removeTicketsStatus()"
-                    >
-                        <div class="icon__new-remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-                        <div>Delete</div>
-                    </div>
+                  <div
+                    class="icon__new-remove qt-sz-16 qt-bg-contain qt-ic-c"
+                    (click)="removeTicketsStatus()"
+                  >
+                  </div>
                 </div>
-                <a
-                    *ngIf="activeTab === 'ticketStatus'"
-                    href="javascript:;"
-                    class="btn-outline add-status-btn"
-                    (click)="create()"
+                <div
+                  class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                  *ngIf="activeTab === 'ticketStatus'"
+                  href="javascript:;"
+                  class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                  (click)="create()"
                 >
-                    Add Status
-                </a>
-                <a
-                    *ngIf="activeTab === 'cannedResponses' && getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
-                    href="javascript:;"
-                    class="btn-outline add-response-btn"
-                    (click)="createResponse()"
+                  <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                  Add Status
+                </div>
+                <div
+                  *ngIf="activeTab === 'cannedResponses' && getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                  href="javascript:;"
+                  class="btn-outline add-response-btn"
+                  (click)="createResponse()"
                 >
-                    Create Response
-                </a>
+                  Create Response
+                </div>
+              </div>
             </div>
-            <div class="qt-button qt-ml-24 --md">Save Changes</div>
         </div>
         <ngb-tabset
             (tabChange)="setTab($event)"

@@ -48,16 +48,16 @@
 
 
 <div
-  class="gl-numbers__table-row add-gl-container"
+  class="tab-pane__table-row add-gl-container"
   appClickOtside
   #addStatusBtn="click"
   [init]="true"
   [class]="'.add-gl-container'"
   (onOutSide)="onAddGL()"
 >
-  <div class="gl-numbers__table-cell gl-numbers__table-checkboxes"></div>
+  <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
   <div
-    class="gl-numbers__table-cell gl-numbers__table-account-number"
+    class="tab-pane__table-cell gl-numbers__table-account-number"
     [ngClass]="{'--input-error' : !validateShort || disableCreate  }"
   >
     <input
@@ -82,7 +82,7 @@
       This Gl Number is already occupied
     </mat-error>
   </div>
-  <div class="gl-numbers__table-cell gl-numbers__table-description">
+  <div class="tab-pane__table-cell gl-numbers__table-description">
     <input
       type="text"
       class="form-input"
@@ -92,5 +92,5 @@
       maxlength="50"
     >
   </div>
-  <div class="gl-numbers__table-cell gl-numbers__table-action"></div>
+  <div class="tab-pane__table-cell gl-numbers__table-action"></div>
 </div>

@@ -490,28 +490,26 @@ body {
       }
     }
 
-    .gl-numbers__table {
+    .tab-pane__table {
       &-header {
         color: $gray-500;
         font-weight: 500;
         background-color: $gray-50;
         border-bottom: 1px solid $gray-200;
+        border-radius: 8px 8px 0 0;
 
-        .gl-numbers__table-row {
+        .tab-pane__table-row {
           padding-top: 15px;
           padding-bottom: 15px;
         }
 
-        .gl-numbers__table-cell {
+        .tab-pane__table-cell {
           padding-left: 7px;
 
-          &.gl-numbers__table-checkboxes {
+          &.tab-pane__table-checkboxes {
             padding-left: 0;
           }
         }
-      }
-      &-body {
-        color: $gray-900;
       }
       &-row {
         display: flex;
@@ -519,7 +517,7 @@ body {
         padding: 10px 24px;
         border-bottom: 1px solid $gray-200;
 
-        &:last-child {
+        &:last-child:not(.add-gl-container) {
           border: none;
         }
 
@@ -527,10 +525,14 @@ body {
           border-color: $gray-200;
         }
 
+        &.--selected {
+          background-color: $gray-25;
+        }
+
         input {
           font-size: 14px;
           line-height: 17px;
-          font-weight: 500;
+          font-weight: 400;
           color: $gray-900;
           border: 1px solid transparent;
           border-radius: 6px;
@@ -552,6 +554,7 @@ body {
           }
         }
       }
+
       &-cell {
         font-size: 14px;
         line-height: 17px;
@@ -560,9 +563,38 @@ body {
           padding-right: 0;
         }
       }
+
       &-checkboxes {
-        flex: 0 0 30px;
+        flex: 0 0 24px;
+        padding-right: 0;
       }
+    }
+
+    .ticket-status-table {
+      .ticket-status-table__status {
+        .icon__company-info {
+          transform: translateY(3px);
+        }
+      }
+      &__status {
+        flex: 1 1 240px;
+        &.--parse-status {
+          padding: 7px 8px 8px;
+          color: $gray-900;
+        }
+      }
+      &__color {
+        flex: 1 1 190px;
+      }
+      &__preview {
+        flex: 1 1 500px;
+      }
+      &__action {
+        flex: 0 0 20px;
+      }
+    }
+
+    .gl-numbers__table {
       &-account-number {
         flex: 1 1 267px;
       }
@@ -573,6 +605,7 @@ body {
         flex: 0 0 20px;
       }
     }
+
     .company-info-block {
       align-items: flex-start;
       padding: 12px;
