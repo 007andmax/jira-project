@@ -14,6 +14,8 @@ export class ContractItem {
     startDate: number;
     status: string;
     type: string;
+    enableInvoiceAutoCreate: boolean;
+    manualCreateBillableItem: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -27,8 +29,8 @@ export class ContractItem {
     }
     public getReviewDateByMilliseconds() {
         return new Date(this.reviewDate).getTime();
-    } 
+    }
     public getEndDateByMilliseconds() {
         return new Date(this.endDate).getTime();
-    } 
+    }
 }

@@ -21,6 +21,19 @@
         class="contracts-table__status"
         (click)="preview()"
     >
+        <div
+            class="qt-sz-32 qt-circle qt-bg-white  header-circle-icon icon__email-dark"
+            *ngIf="contract.enableInvoiceAutoCreate"
+        ></div>
+        <div
+            class="qt-sz-32 qt-circle qt-bg-white header-circle-icon icon__print"
+            *ngIf="contract.manualCreateBillableItem"
+        ></div>
+    </td>
+    <td
+        class="contracts-table__status"
+        (click)="preview()"
+    >
         <span
             class="tag__modern"
             [ngClass]="{'--error' : contract.status === 'TERMINATED',
