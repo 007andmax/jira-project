@@ -19,6 +19,7 @@ import { SupportPageEditCategoryComponent } from './support-page-edit-category.c
         MatFormFieldModule,
         FormsModule,
     ],
+    entryComponents: [SupportPageEditCategoryComponent],
     exports: [SupportPageEditCategoryComponent]
 })
 export class SupportPageEditCategoryModule { }

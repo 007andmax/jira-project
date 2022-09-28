@@ -228,7 +228,7 @@
     align-items: center;
     border: dashed 1px #979797;
     margin-bottom: 1rem;
-
+    position: relative;
     img.delete {
       margin-left: 0.5rem;
       cursor: pointer;
@@ -362,4 +362,8 @@
   pointer-events: none;
   display: block;
   /* For Firefox */
+}
+.icn-remove-old {
+  top: 12px !important;
+  position: relative;
 }
