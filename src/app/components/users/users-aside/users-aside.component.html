@@ -147,19 +147,18 @@
             </div>
         </div>
         <div class="qt-w100 qt-mb-24">
-            <app-drop-down
+            <company-drop-down
                 [placeholder]="'Company'"
                 [validate]="validate.getCompany()"
                 [errorMessage]="'The company name is required'"
                 [title]="'Company'"
                 [field]="'name'"
-                [list]="companies"
                 [search]="true"
                 [change]="true"
                 [editItem]="selectedCompany"
                 (onSelectedItem)="onSelectCompany($event)"
             >
-            </app-drop-down>
+            </company-drop-down>
         </div>
         <div class="qt-df qt-mb-24">
             <div class="qt-w50 qt-mr-16 with-new-link">

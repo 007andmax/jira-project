@@ -14,6 +14,7 @@ import { UserDefaultSubscriptionModule } from './user-default-subscription/user-
 import { UserCustomSubscriptionModule } from './user-custom-subscription/user-custom-subscription.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 @NgModule({
     declarations: [UsersAsideComponent,
@@ -33,6 +34,7 @@ import { NgxMaskModule } from 'ngx-mask';
         UserCustomSubscriptionModule,
         NgbModule,
         NgxMaskModule.forRoot(),
+        CompanyDropDownModule
     ],
     exports: [UsersAsideComponent]
 

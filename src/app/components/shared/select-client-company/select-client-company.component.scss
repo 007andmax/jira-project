@@ -1,9 +1,0 @@
-@import './src/assets/styles/variable';
-
-.no-valid {
-    border: 1px solid $error !important;
-}
-.disabled {
-    background-color: $gray-400;
-    cursor: default !important;
-}

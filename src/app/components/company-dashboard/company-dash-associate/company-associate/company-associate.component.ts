@@ -47,22 +47,23 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies().map(item => new CompanyAssociateItem(item)));
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+    if (this.companiesStateService.isInitLightAllCompanies) this.getClientsList(this.companiesStateService.getLightCompanies().map(item => new CompanyAssociateItem(item)));
+    if (!this.companiesStateService.isInitLightAllCompanies) this.companiesStateService.onInitGetLightCompanies();
+    let getOnCompanies = this.companiesStateService.onLightCompanies.subscribe((data) => {
       this.getClientsList(data.map(item => new CompanyAssociateItem(item)));
     })
     this.sub.add(getOnCompanies);
 
   }
   public getClientsList(data) {
-    this.companies = data.filter(item => ((this.company) ? item.id !== this.company.id : true) && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    this.companies = data.filter(item => ((this.company) ? item.id !== this.company.id : true)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.reqCompanies = data.filter(item => ((this.company) ? item.id !== this.company.id : true) && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    this.reqCompanies = data.filter(item => ((this.company) ? item.id !== this.company.id : true)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.onCheckEditItem();
   }
   getCompanyName(tag) {
-    let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
+    let company = this.companiesStateService.getLightCompanies().find(item => item.id === tag.companyId);
     return (company) ? company.name : '';
   }
   onSearch(event) {

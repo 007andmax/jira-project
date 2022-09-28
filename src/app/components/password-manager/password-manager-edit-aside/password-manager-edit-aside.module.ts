@@ -13,6 +13,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { AfterViewInitDirective } from 'src/app/directives/after-view-init.directive';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-progress/upload-area-progress.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-p
         DisabledBtnModule,
         PreloaderTicketModule,
         DynamicTooltipModule,
-        UploadAreaProgressModule
+        UploadAreaProgressModule,
+        CompanyDropDownModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 

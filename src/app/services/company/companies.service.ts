@@ -48,12 +48,14 @@ export class CompaniesService {
   public getLightClientsCompanies() {
     return this.http.post(this.apiUrl + 'company/clients', {
       "needCompanyInfo": false,
-      "clientType": "CLIENT"
+      "clientType": "CLIENT",
+      isArchived: false
     });
   }
   public getLightCompanies() {
     return this.http.post(this.apiUrl + 'company/clients', {
       "needCompanyInfo": false,
+      isArchived: false
     });
   }
 

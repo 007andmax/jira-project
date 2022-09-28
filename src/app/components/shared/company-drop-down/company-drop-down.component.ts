@@ -28,6 +28,5 @@ export class CompanyDropDownComponent extends DropDownComponent {
   onOpenChange(data) {
     if (data && !this.companiesStateService.isInitLightAllCompanies && this.clientType == undefined) this.companiesStateService.onInitGetLightCompanies();
     if (data && !this.companiesStateService.isInitLightClientsCompanies && this.clientType != undefined) this.companiesStateService.onInitGetLightClietnsCompanies();
-
   }
 }

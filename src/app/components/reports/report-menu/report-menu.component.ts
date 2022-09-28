@@ -72,7 +72,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   isDisabledCompany: boolean = false;
   allDevices = [];
   devices = [];
-  companies = [];
   sub: Subscription = new Subscription();
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
@@ -81,7 +80,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
 
   @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
   @ViewChild('dp') datePicker: any;
-  @ViewChild('cp') companiesList: any;
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
@@ -107,10 +105,6 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
       if (this.deviceIpSummary.companyId) this.getDevicesByCompany(this.deviceIpSummary.companyId);
     })
     this.sub.add(getOnDevices);
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
     this.softwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
     this.hardwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
     this.deviceIpSummary.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
@@ -121,10 +115,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     })
     //  this.sub.add(getOnCompanies);
   }
-  getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
+
   public getDevicesByCompany(companyId) {
     this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
 

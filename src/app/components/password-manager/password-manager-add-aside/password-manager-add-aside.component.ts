@@ -21,6 +21,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
 
 
 @Component({
@@ -30,7 +31,6 @@ import { DatePickerComponent } from '../../shared/date-picker/date-picker.compon
 })
 export class PasswordManagerAddAsideComponent implements OnInit {
   showPassword: boolean = false;
-  companies: Array<Company> = [];
   categories: Array<PasswordRecordCategories> = [];
   passwordRecordAdd: PasswordRecordAdd = new PasswordRecordAdd();
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
@@ -42,7 +42,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   sub: Subscription = new Subscription();
   @ViewChild('linked') linked: PasswordManagerLinkedComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('companiesDb') companiesDb: DropDownComponent;
+  @ViewChild('companiesDb') companiesDb: CompanyDropDownComponent;
   @ViewChild('addRecord') addRecord: DisabledBtnDirective;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
   /**
@@ -74,11 +74,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
    * Initializes Password manager edit aside. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
     let onAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
       this.passwordRecordAdd = new PasswordRecordAdd();
       this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
@@ -104,10 +99,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   }
   public onPastDescription(value) {
     this.passwordRecordAdd.description = value;
-  }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   selectCompany(data) {
     this.selectedCompany = data;
