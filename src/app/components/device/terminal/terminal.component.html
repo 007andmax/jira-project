@@ -8,6 +8,12 @@
                     <div class="page-header-opt">
                         <div class="update-info">
                             <a
+                                class="clear"                                
+                                (click)="clearTerminal()"
+                            >
+                                Clear
+                            </a>
+                            <a
                                 class="Command"
                                 [ngClass]="{'active': scriptTyped == 'cmd'}"
                                 (click)="switchTerminal('cmd')"

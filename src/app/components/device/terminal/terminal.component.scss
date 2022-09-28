@@ -790,6 +790,12 @@ main {
                 &:hover {
                     color: $primary-1;
                 }
+                &.clear {
+                    margin-left: 0;
+                    background: url("../../../../assets/img/icons/hide.svg") no-repeat left 0;
+                    cursor: pointer;      
+                    margin-right: 15px;              
+                }
                 &.Command {
                     margin-left: 0;
                     background: url("../../../../assets/img/device/Commandline.svg") no-repeat left 0;

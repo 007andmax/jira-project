@@ -143,6 +143,11 @@ export class TerminalComponent implements OnInit {
       });
   }  
 
+  clearTerminal() {
+    this.splitCommand = ["C:\\>"];    
+    this.cd.detectChanges();      
+  }
+
   onTerminalPowershall()
   {    
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {

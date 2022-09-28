@@ -282,13 +282,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
         this.operatingSystemWindow(resp[0].ID)
         this.HardwareTypeList(resp[0].TechCompanyGuid);
         this.assetList.forEach((element, index) => {
-        //element.online = false;
-        this.assetList[index].Title =
-          element.Title != "" ? element.Title : element.Name;
-        if (element.AgentVersion != null) {
-          this.GetDeviceListConfig(element.ID);
-        }
-        this.getAssetTagDropDownDetail();
+          //element.online = false;
+          this.assetList[index].Title =
+            element.Title != "" ? element.Title : element.Name;
+          if (element.AgentVersion != null) {
+            this.GetDeviceListConfig(element.ID);
+          }
+          this.getAssetTagDropDownDetail();
       });
       }  
       else
@@ -1594,6 +1594,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
         });  
       }    
     });    
+  }
+
+  getLastCheckIn(asset) {
+    if(!asset) {
+      return;
+    }
+    return asset.LastCheckInDate?  moment(asset.LastCheckInDate).fromNow() : '';
   }
 }
 
