@@ -8,6 +8,7 @@ import { UsersFilterSubscriptionsComponent } from './users-filter/users-filter-s
 import { MatChipsModule, MatFormFieldModule, MatIconModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 
 
@@ -26,7 +27,8 @@ import { CompanyTagsModule } from '../../companies/company-tags/company-tags.mod
         MatIconModule,
         ReactiveFormsModule,
         MatFormFieldModule,
-        CompanyTagsModule
+        CompanyTagsModule,
+        CompanyDropDownModule
     ],
     exports: [UsersHeaderComponent]
 })

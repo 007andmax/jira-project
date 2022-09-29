@@ -26,7 +26,7 @@ export class ContractsBlockTime {
     taxIds: Array<string> = [];
     type: string = "BLOCK_TIME";
     reviewDate: string;
-    enableAutoCreate: boolean = true;
+    manualCreateBillableItem: boolean = false;
     enableInvoiceAutoCreate: boolean = false;
     constructor() { }
     public setDataFromCopy(data: ServiceAgreement) {
@@ -52,17 +52,17 @@ export class ContractsBlockTime {
         this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
-        if (data.enableAutoCreate != undefined) this.enableAutoCreate = data.enableAutoCreate;
+        if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
         if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
     }
-    public setEnableAutoCreate(data) {
-        this.enableAutoCreate = data;
-        if (!this.enableAutoCreate) this.enableInvoiceAutoCreate = false;
+    public setManualCreateBillableItem(data) {
+        this.manualCreateBillableItem = data;
+        if (this.manualCreateBillableItem) this.enableInvoiceAutoCreate = false;
     }
     public setEnableInvoiceAutoCreate(data) {
-        if (!this.enableAutoCreate) return;
+        if (this.manualCreateBillableItem) return;
         this.enableInvoiceAutoCreate = data;
     }
     public resetCustomBillingDate() {
@@ -114,7 +114,7 @@ export class ContractsBlockTime {
             taxIds: this.taxIds,
             type: this.type,
             withCustomBillingDate: this.withCustomBillingDate,
-            enableAutoCreate: this.enableAutoCreate,
+            manualCreateBillableItem: this.manualCreateBillableItem,
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }

@@ -16,7 +16,7 @@
             <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
                 <div class="qt-input-block">
                     <label class="qt-lh-154">Customer Name</label>
-                    <app-select-search
+                    <company-drop-down
                         class="search-company"
                         #companyDp
                         [placeholder]="'Select Company'"
@@ -26,7 +26,7 @@
                         [editItem]="selectedCompany"
                         [list]="companies"
                         (onSelectedItem)="onSelectCompany($event)"
-                    ></app-select-search>
+                    ></company-drop-down>
                 </div>
             </div>
         </div>

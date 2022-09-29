@@ -112,19 +112,19 @@
         </div>
         <div class="qt-input-line">
             <div class="qt-input-block">
-                <app-drop-down
+                <company-drop-down
                     #companyDP
                     [title]="'Company'"
                     [class]="['qt-dropdown']"
                     [placeholder]="'Select Company'"
-                    [list]="companies"
                     [validate]="ticketValidate.getCompany()"
                     [errorMessage]="'Company is required'"
+                    [clientType]="'CLIENT'"
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
                     (onSelectedItem)="onSelectCompany($event)"
-                ></app-drop-down>
+                ></company-drop-down>
             </div>
             <div class="qt-input-block">
                 <app-drop-down
@@ -132,7 +132,7 @@
                     [title]="'User'"
                     [class]="['qt-dropdown']"
                     [placeholder]="'Select User'"
-                    [list]="getUserList()"
+                    [list]="usersList"
                     [validate]="ticketValidate.getClientUser()"
                     [errorMessage]="'Client User is required'"
                     [search]="true"

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef, Input }
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-tech-users-list-report',
@@ -14,8 +15,9 @@ export class TechUsersListReportComponent extends DropDownComponent {
 
   constructor(
     public elRef: ElementRef,
+    public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService) {
-    super(elRef);
+    super(elRef, companiesStateService);
   }
 
   ngOnInit() {

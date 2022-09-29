@@ -22,3 +22,9 @@
     margin-top: 5px !important;
   }
 }
+.recuring-assign-company {
+  float: left;
+  /deep/.app-drop-down__right-icon {
+    top: 52px;
+  }
+}

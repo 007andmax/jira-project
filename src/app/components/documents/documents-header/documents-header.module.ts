@@ -8,6 +8,7 @@ import { SelectSearchModule } from '../../shared/select-search/select-search.mod
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { TechUsersListReportModule } from '../../reports/report-menu/tech-users-list-report/tech-users-list-report.module';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
+import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 @NgModule({
     declarations: [DocumentsHeaderComponent,
@@ -19,7 +20,8 @@ import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datep
         SelectSearchModule,
         CompanyTagsModule,
         TechUsersListReportModule,
-        MultiDatepickerModule
+        MultiDatepickerModule,
+        CompanyDropDownModule
     ],
     exports: [DocumentsHeaderComponent]
 

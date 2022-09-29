@@ -105,7 +105,7 @@ export class LeftPanelService {
       || state === 'email-setting-component'
       || state === 'taxes-component'
       || state === 'permission-manage-component'
-      || state === 'email-templete-component'
+      || state === 'email-template-component'
       || state === 'integrations-component'
       || state === 'invoice-ticket-component'
       || state === 'commission-component'

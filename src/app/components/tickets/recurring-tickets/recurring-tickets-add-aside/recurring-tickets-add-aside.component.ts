@@ -5,7 +5,6 @@ import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { ForCreateService } from '../class/for-create-service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
-import { SelectClientCompanyStateService } from '../../../shared/select-client-company/services/select-client-company-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
 import { RecurringTicketsService } from '../services/recurring-tickets.service';
@@ -45,8 +44,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
    * @param {RecurringService} recurringService Service to work with recurring tickets
    * @param {ChangeDetectorRef} cd Service to work with change detector
    * @param {DevicesService} devicesService Service to work with devices
-   * @param {SelectClientCompanyStateService} companiesState to work companies state
-   * @param {RecurringTicketsStateService} recurringState to work recurring state
+     * @param {RecurringTicketsStateService} recurringState to work recurring state
    * @param {RecurringTicketsService} createService Service to work with create recurring ticket
   
    * 
@@ -56,7 +54,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
     private devicesService: DevicesService,
-    private companiesState: SelectClientCompanyStateService,
     public recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
@@ -249,7 +246,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
  */
   public selectClient(selectClient) {
     this.validate.resetCompany();
-    if (selectClient === 'null') {
+    if (selectClient == null) {
 
       this.recurringState.getCreateTicket().setCompany(null);
 
@@ -257,8 +254,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
 
     } else {
-      this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
-      this.selectedClient = selectClient.item;
+      this.recurringState.getCreateTicket().setCompany(selectClient.id);
+      this.selectedClient = selectClient;
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
@@ -487,7 +484,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.type = "services";
     this.selectedClient = null;
     this.techUsers = [];
-    this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
     this.createService.getTagsState().onInitClear();
     this.createService.getTechState().onInitClear();
@@ -515,7 +511,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   * Reset ticket for copy
   */
   private resetDataForCopy() {
-    this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
     this.selectedClient = null;
     // this.services = [new ForCreateService()];

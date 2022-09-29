@@ -74,7 +74,7 @@ import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.m
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
 import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
-import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionEmailTemplateService } from './components/setting/email-template/permission-email-template.service';
 import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
 import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
 import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
@@ -138,6 +138,7 @@ import { CannedResponsesComponent } from './components/setting/ticket-settings-p
 import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
 import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { ReportSendEmailModule } from './components/reports/report-additional-actions/report-send-email/report-send-email.module';
+import { CompanyDropDownComponent } from './components/shared/company-drop-down/company-drop-down.component';
 declare var $: any;
 
 /**
@@ -260,7 +261,7 @@ declare var $: any;
     PermissionEmailSettingService,
     PermissionTaxesSettingsService,
     PermissionTicketSettingsService,
-    PermissionEmailTempleteService,
+    PermissionEmailTemplateService,
     PermissionAccountingSettingsService,
     PermissionCrmSettingsService,
     PermissionContractsService,

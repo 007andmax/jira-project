@@ -64,11 +64,10 @@
                         class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
-                    <app-drop-down
+                    <company-drop-down
                         class="user-detail-edit-company"
                         [placeholder]="'Company'"
                         [field]="'name'"
-                        [list]="companies"
                         [search]="true"
                         [change]="true"
                         [heightInput]="'32px'"
@@ -77,7 +76,7 @@
                         [isDisabled]="!getPermissions('EDIT_USERS')"
                         (onSelectedItem)="onSelectCompany($event)"
                     >
-                    </app-drop-down>
+                    </company-drop-down>
                 </div>
                 <div
                     class="qt-input-block qt-mb-16"

@@ -49,12 +49,12 @@
         Email Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'email-templete-component'}"
-        (click)="goToState('email-templete-component')"
+        [ngClass]="{'--active':activePage === 'email-template-component'}"
+        (click)="goToState('email-template-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
     >
         <div class="icon__menu--submenu icon__menu-email-template qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Email Templetes
+        Email Templates
     </li>
     <li
         [ngClass]="{'--active':activePage === 'integrations-component'}"

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmailTempleteComponent } from './email-templete.component';
+import { EmailTempleteComponent } from './email-template.component';
 
 
 
@@ -11,4 +11,4 @@ const routes: Routes = [{ path: '', component: EmailTempleteComponent }];
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class EmailTempleteRoutingModule { }
+export class EmailTemplateRoutingModule { }

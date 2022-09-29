@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
         FormsModule,
         MatFormFieldModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        CompanyDropDownModule
 
     ],
     exports: [InvoicesAsideComponent]

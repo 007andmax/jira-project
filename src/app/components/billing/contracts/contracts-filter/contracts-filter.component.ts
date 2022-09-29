@@ -9,6 +9,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { Company } from 'src/app/interfaces/company/company';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 
 @Component({
   selector: 'app-contracts-filter',
@@ -18,11 +19,10 @@ import { Company } from 'src/app/interfaces/company/company';
 export class ContractsFilterComponent implements OnInit, OnDestroy {
   @Input() companyContracts: Company = null;
   @ViewChild('typesDp') typesDp: DropDownComponent;
-  @ViewChild('companyDp') companyDp: DropDownComponent;
+  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
   public contractsFilter: ContractsFilter = new ContractsFilter();
-  companies = [];
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),
   new ContractsFilterType('Block Time', 'BLOCK_TIME', null),
   new ContractsFilterType('Service Contract/by device', 'SERVICE_CONTRACT', 'DEVICE'),
@@ -38,12 +38,6 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     private companiesState: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
-
     if (this.companyContracts) {
       this.companyDp.editItem = this.companyContracts;
       this.companyDp.isDisabled = true;
@@ -71,11 +65,6 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     if (this.contractsFilter.selectedStartDate && this.contractsFilter.selectedEndDate) count++;
     if (this.contractsFilter.selectedStatus) count++;
     this.changeCountFilter.emit(count);
-  }
-
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
 
   public onSelectCompany(item) {

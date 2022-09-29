@@ -10,7 +10,7 @@ import { TechUsersSettingsComponent } from './components/setting/tech-users-sett
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
-import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
+import { EmailTempleteComponent } from './components/setting/email-template/email-template.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
@@ -69,7 +69,7 @@ import { PermissionCrmSettingsService } from './components/setting/crm-settings/
 import { PermissionsTechUsersService } from './components/setting/tech-users-settings/permissions-tech-users.service';
 import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
 import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
-import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionEmailTemplateService } from './components/setting/email-template/permission-email-template.service';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
@@ -218,9 +218,9 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService]
   },
   {
-    path: ':company/setting/emailTemplete',
-    loadChildren: './components/setting/email-templete/email-templete.module#EmailTempleteModule',
-    canActivate: [PermissionEmailTempleteService, PermissionTechUserService]
+    path: ':company/setting/emailTemplate',
+    loadChildren: './components/setting/email-template/email-template.module#EmailTemplateModule',
+    canActivate: [PermissionEmailTemplateService, PermissionTechUserService]
 
 
   },

@@ -17,6 +17,12 @@ import { CompanyAssigned } from 'src/app/components/companies/class/company-assi
 })
 export class CompaniesStateService {
   allCompanies = [];
+  lightAllCompanies = [];
+  lightClientsCompanies = [];
+  isInitLightAllCompanies: boolean = false;
+  isInitLightClientsCompanies: boolean = false;
+  onLightCompanies: EventEmitter<any> = new EventEmitter();
+  onLightClientsCompanies: EventEmitter<any> = new EventEmitter();
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -53,12 +59,32 @@ export class CompaniesStateService {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
+
+        if (this.isInitLightAllCompanies) {
+          const indexLigth = this.lightAllCompanies.findIndex((item) => item.id === newChange.data.id);
+          if (indexLigth > -1) this.lightAllCompanies[indexLigth] = newChange.data;
+          if (indexLigth === -1) this.lightAllCompanies.unshift(newChange.data);
+        }
+
+        if (newChange.data.clientType == "CLIENT" && this.isInitLightClientsCompanies) {
+          const indexLigth = this.lightClientsCompanies.findIndex((item) => item.id === newChange.data.id);
+          if (indexLigth > -1) this.lightClientsCompanies[indexLigth] = newChange.data;
+          if (indexLigth === -1) this.lightClientsCompanies.unshift(newChange.data);
+        }
+
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
+
+        if (this.isInitLightAllCompanies) {
+          const indexLigth = this.lightAllCompanies.findIndex((item) => item.id === newChange.data.id);
+          if (indexLigth > -1) this.lightAllCompanies[indexLigth] = newChange.data;
+        }
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
+      this.onLightCompanies.emit(this.lightAllCompanies);
+      this.onLightClientsCompanies.emit(this.lightClientsCompanies);
     })
     this.websocketStateService.onConnected.subscribe(data => {
       if (this.currentCompany && !this.isInitSubscriptions && this.websocketStateService.getIsConnected()) {
@@ -85,6 +111,26 @@ export class CompaniesStateService {
       }
 
     })
+  }
+  public onInitGetLightCompanies() {
+    this.companiesService.getLightCompanies().subscribe((data: any) => {
+      this.lightAllCompanies = data;
+      this.onLightCompanies.emit(this.lightAllCompanies);
+      this.isInitLightAllCompanies = true;
+    })
+  }
+  public getLightCompanies() {
+    return this.lightAllCompanies;
+  }
+  public onInitGetLightClietnsCompanies() {
+    this.companiesService.getLightClientsCompanies().subscribe((data: any) => {
+      this.lightClientsCompanies = data;
+      this.onLightClientsCompanies.emit(this.lightClientsCompanies);
+      this.isInitLightClientsCompanies = true;
+    })
+  }
+  public getLightClientsCompanies() {
+    return this.lightClientsCompanies;
   }
   public getAssignedDocumentCategories() {
     return this.assignedDocumentCategories;

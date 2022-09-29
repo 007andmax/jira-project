@@ -1,14 +1,13 @@
 <div class="qt-df qt-ai-c">
-    <app-select-search
+    <company-drop-down
         class="search-company invoices-company-filter"
         #companyDp
         [placeholder]="'Select Company'"
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-select-search>
+    ></company-drop-down>
     <app-select-search
         class="search-company invoices-status-filter"
         #statusDp
