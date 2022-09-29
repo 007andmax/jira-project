@@ -1,4 +1,4 @@
-<div class="cmn-area">
+<div class="cmn-area canned-responses-table">
     <div
         class="data-table-wrap"
         [ngClass]="{'preloader-container' : showPreloader}"
@@ -7,42 +7,41 @@
             class="loading"
             *ngIf="showPreloader"
         ></div>
-        <table
-            class="display dataTable"
+        <div
+            class="tab-pane__table dataTable"
             style="width:100%"
             *ngIf="!showPreloader"
         >
-            <thead>
-                <tr>
-                    <th
-                        class="tax-name pointer"
+            <div class="tab-pane__table-header">
+                <div class="tab-pane__table-row">
+                    <div
+                        class="tab-pane__table-cell canned-responses-table__template-name pointer"
                         (click)="sortByName()"
                     >
-                        Responses Name
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th class="rate">
-                        <div class="qt-df qt-jc-c">Active</div>
-                    </th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of noteTemplate; let i = index">
-                    <td
-                        class="tax-name add-status-name"
+                        Template Name
+                        <div class="qt-table-modern__sorting--new"></div>
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__status">
+                      Status
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__action">&nbsp;</div>
+                </div>
+            </div>
+            <div class="tab-pane__table-body">
+                <div class="tab-pane__table-row" *ngFor="let item of noteTemplate; let i = index">
+                    <div
+                        class="tab-pane__table-cell canned-responses-table__template-name"
                         [textContent]="item.title"
                     >
-                    </td>
-                    <td class="rate">
-                        <div class="qt-df qt-jc-c">
-                            <i
-                                class="icon__document-category-subscribe qt-sz-16 qt-bg-contain qt-dib"
-                                *ngIf="item.active"
-                            ></i>
-                        </div>
-                    </td>
-                    <td class="action">
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__status">
+                      <i
+                        class="icon__check qt-sz-20 qt-bg-contain qt-dib"
+                        *ngIf="item.active"
+                      ></i>
+                      <!--                          <i class="icon__inactive qt-sz-20 qt-bg-contain qt-dib"></i>-->
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__action">
                         <div class="qt-df qt-ai-c">
                             <app-dynamic-tooltip
                                 [content]="'Copy'"
@@ -60,30 +59,30 @@
                                 #deleteTooltip
                             ></app-dynamic-tooltip>
                             <div
-                                *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
-                                class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-16 pointer"
-                                (click)="copyNote(item)"
-                                (mouseenter)="copyTooltip.show($event.target)"
-                                (mouseleave)="copyTooltip.hide()"
-                            ></div>
-                            <div
                                 *ngIf="getPermissions('EDIT_TICKET_NOTE_TEMPLATE')"
-                                class="icon__edit qt-sz-16 qt-bg-contain qt-mr-16 pointer"
+                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                                 (click)="editNote(item)"
                                 (mouseenter)="editTooltip.show($event.target)"
                                 (mouseleave)="editTooltip.hide()"
                             ></div>
                             <div
+                              *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                              class="icon__copy qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                              (click)="copyNote(item)"
+                              (mouseenter)="copyTooltip.show($event.target)"
+                              (mouseleave)="copyTooltip.hide()"
+                            ></div>
+                            <div
                                 *ngIf="getPermissions('DELETE_TICKET_NOTE_TEMPLATE')"
-                                class="icon__new-remove qt-sz-16 qt-bg-contain pointer"
+                                class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                                 (click)="removeNote(item)"
                                 (mouseenter)="deleteTooltip.show($event.target)"
                                 (mouseleave)="deleteTooltip.hide()"
                             ></div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

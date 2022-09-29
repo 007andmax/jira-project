@@ -4,6 +4,80 @@
 
 body {
   &.page-settings {
+    .qt-table-modern__sorting--new {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      margin-left: 6px;
+      display: inline-flex;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: url('/assets/img/icons/down-arrow-sm.svg');
+      }
+
+      &::before {
+        transform: rotate(180deg);
+        top: -4px;
+      }
+
+      &::after {
+       top: 6px;
+      }
+    }
+
+    .ticket-add-aside {
+      max-width: 480px;
+
+      .qt-aside-modern__header {
+        background: transparent;
+        height: 88px;
+      }
+
+      .qt-aside-modern__content {
+        padding: 32px;
+        height: calc(100% - 162px);
+      }
+
+      .qt-aside-modern__footer {
+        padding: 18px 32px;
+        box-shadow: 0px -2px 4px rgba(16, 24, 40, 0.05);
+      }
+
+      .qt-aside__restore-modal {
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        border: 1px solid $gray-200;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+        background-color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .qt-input-block {
+        label {
+          font-weight: 500;
+          color: $gray-500;
+          line-height: 16px;
+        }
+      }
+
+      .angular-editor-textarea {
+        min-height: 120px !important;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .angular-editor-toolbar {
+        border-radius: 0 0 8px 8px;
+      }
+    }
+
     .qt-input-block__time {
       position: relative;
       margin-bottom: 0;
@@ -511,6 +585,11 @@ body {
           }
         }
       }
+      &-body {
+        .tab-pane__table-row {
+          min-height: 56px;
+        }
+      }
       &-row {
         display: flex;
         align-items: center;
@@ -603,6 +682,20 @@ body {
       }
       &-action {
         flex: 0 0 20px;
+      }
+    }
+
+    .canned-responses-table {
+      &__template-name {
+        flex: 1 1 700px;
+        padding: 0 7px;
+      }
+      &__status {
+        flex: 1 1 150px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 92px;
       }
     }
 

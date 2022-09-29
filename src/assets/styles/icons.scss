@@ -325,6 +325,12 @@
   &__attach-blue {
     background-image: url("/assets/img/icons/attachment-blue.svg");
   }
+  &__check {
+    background-image: url("/assets/img/icons/check.svg");
+  }
+  &__inactive {
+    background-image: url("/assets/img/icons/inactive.svg");
+  }
   &__collapse-arrow {
     background-image: url("/assets/img/icons/collapse-arrow.svg"); // TODO replace collapse-arrow.svg and collapse-arrow-white.svg on mask
   }
@@ -574,9 +580,23 @@
   &__edit {
     background-image: url("/assets/img/icons/edit-12.svg");
   }
-  &__edit-gray {
-    background-image: url("/assets/img/icons/edit-gray.svg");
+  &__edit-gray,
+  &__edit-gray-dark {
+    background-color: $gray-600--old;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/edit-gray.svg");
+    mask-image: url("/assets/img/icons/edit-gray.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
+
+  &__edit-gray-dark {
+    background-color: $gray-700--old;
+  }
+
   &__expand-redactor {
     background-image: url("/assets/img/icons/expand-redactor.svg");
   }

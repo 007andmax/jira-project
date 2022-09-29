@@ -999,8 +999,11 @@
 .qt-color-gray-900 {
   color: $gray-900;
 }
-.qt-color-gray-700 {
+.qt-color-gray-700-old {
   color: $gray-700--old;
+}
+.qt-color-gray-700 {
+  color: $gray-700;
 }
 .qt-color-gray-500 {
   color: $gray-500--old;

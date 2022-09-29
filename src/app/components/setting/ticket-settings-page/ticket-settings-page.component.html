@@ -36,9 +36,10 @@
                 <div
                   *ngIf="activeTab === 'cannedResponses' && getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
                   href="javascript:;"
-                  class="btn-outline add-response-btn"
+                  class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                   (click)="createResponse()"
                 >
+                  <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                   Create Response
                 </div>
               </div>

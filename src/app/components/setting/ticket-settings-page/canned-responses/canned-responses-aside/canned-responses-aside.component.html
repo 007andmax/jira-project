@@ -10,10 +10,14 @@
             ></div>
         </div>
         <div>
-            <div
-                class="qt-aside__close-modal icon__close"
-                (click)="closed()"
-            ></div>
+          <div
+            class="qt-aside__restore-modal">
+            <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
+          </div>
+<!--            <div-->
+<!--                class="qt-aside__close-modal icon__close"-->
+<!--                (click)="closed()"-->
+<!--            ></div>-->
         </div>
     </div>
     <div class="qt-aside-modern__content">
@@ -58,7 +62,7 @@
                 for="add-ticket-subject"
                 class="qt-input-block__label"
             >
-                Description
+              Template Description
             </label>
             <angular-editor
                 [(ngModel)]="noteTemplate.note"
@@ -78,23 +82,23 @@
                     [(ngModel)]="noteTemplate.active"
                 >
                 <span></span>
+              <div class="qt-fs-13 qt-ml-8 qt-color-gray-700">Mark as Active</div>
             </label>
-            <div class="qt-fs-13 qt-ml-5 mark-as-active">Mark as Active</div>
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df">
+        <div class="qt-df qt-w100">
             <button
-                class="qt-button qt-mr-12"
-                (click)="noteTemplate.getEditMode() ? save() : add()"
-            >
-                Save
-            </button>
-            <button
-                class="qt-button --gray"
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
                 (click)="closed()"
             >
                 Cancel
+            </button>
+            <button
+              class="qt-button qt-jc-c qt-w100"
+              (click)="noteTemplate.getEditMode() ? save() : add()"
+            >
+              Save
             </button>
         </div>
     </div>
