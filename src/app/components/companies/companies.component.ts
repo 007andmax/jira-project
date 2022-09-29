@@ -63,7 +63,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.setDefaultScoll();
       this.showArchivedCompanies = (this.left_filter === "ARCHIVE");
       this.companyFilter.setShowArchivedCompanies(this.showArchivedCompanies);
-      this.companyFilter.setArchived(this.left_filter === "ARCHIVE");
+      if (this.left_filter) this.companyFilter.setArchived(this.left_filter === "ARCHIVE");
+      if (this.left_filter == null) this.companyFilter.setArchived(undefined);
       this.getClientsListByFilter();
     }
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

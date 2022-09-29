@@ -37,7 +37,7 @@ export class CompanyFilter {
             clientType: (this.clientType) ? this.clientType : undefined,
             techLeadId: (this.techUser) ? this.techUser : undefined,
             clientIndustryId: (this.clientIndustry) ? this.clientIndustry.id : undefined,
-            isArchived: (this.isArchived) ? true : undefined,
+            isArchived: this.isArchived,
             needCompanyInfo: true,
         }
     }

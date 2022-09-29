@@ -139,7 +139,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (!this.showSecretCode) this.isGetSecretCode = false;
     if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
   }
-  onChangeAuthenticationKey() {
+  onChangeAuthenticationKey(event) {
+    this.editItem.authenticationKey = event.target.value.toUpperCase();
     this.validate.resetAuthenticationKeyLen();
     this.validate.resetAuthenticationKeyBase32();
     this.editItem.setResetAuthenticationKey(false)
