@@ -139,6 +139,8 @@ import { CannedResponsesAsideComponent } from './components/setting/ticket-setti
 import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { ReportSendEmailModule } from './components/reports/report-additional-actions/report-send-email/report-send-email.module';
 import { CompanyDropDownComponent } from './components/shared/company-drop-down/company-drop-down.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { GoogleAuthenticatorModule } from './components/shared/google-authenticator/google-authenticator.module';
 declare var $: any;
 
 /**
@@ -170,7 +172,6 @@ declare var $: any;
     // SupportPageAddSubCategoryComponent,
     HelpCenterInfoAsideComponent,
     InventoryCheckUseComponent,
-    GoogleAuthenticatorComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     CannedResponsesAsideComponent
@@ -222,7 +223,8 @@ declare var $: any;
     SupportPageAddCategoryModule,
     LeftPanelSuperAdminModule,
     SupportPageAddSubCategoryModule,
-    ReportSendEmailModule
+    ReportSendEmailModule,
+    GoogleAuthenticatorModule
   ],
   entryComponents: [
     ModalQuoteComponent,
@@ -243,7 +245,6 @@ declare var $: any;
     //  SupportPageAddSubCategoryComponent,
     // SupportPageEditCategoryComponent,
     InventoryCheckUseComponent,
-    GoogleAuthenticatorComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     // RecurringTicketsComponent

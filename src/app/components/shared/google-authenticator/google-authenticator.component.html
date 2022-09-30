@@ -68,17 +68,17 @@
 <!-- </button> -->
 <!-- </div> -->
 <!-- </div> -->
-
-
-
-
 <div class="qt-modal quote-email-modal">
-    <div class="authenticaton-tab">
+    <div
+        class="authenticaton-tab"
+        *ngIf="!authenticationSuccessfully"
+    >
         <div class="authentication__content">
             <div class="tab-pane__header-title qt-mb-24">Tow-Factor Authentication</div>
             <div class="authentication-tab__subheader">
                 <div
-                    class="authentication-tab__subheader-item --active pointer qt-mr-24"
+                    class="authentication-tab__subheader-item pointer qt-mr-24"
+                    [ngClass]="{'--active': tab == 'STEP-1'}"
                     (click)="tab == 'STEP-1'"
                 >
                     <span class="authentication-tab__subheader-item-circle">1</span>
@@ -86,6 +86,7 @@
                 </div>
                 <div
                     class="authentication-tab__subheader-item pointer qt-mr-24"
+                    [ngClass]="{'--active': tab == 'STEP-2'}"
                     (click)="tab == 'STEP-2'"
                 >
                     <span class="authentication-tab__subheader-item-circle">2</span>
@@ -93,16 +94,13 @@
                 </div>
                 <div
                     class="authentication-tab__subheader-item pointer"
+                    [ngClass]="{'--active': tab == 'STEP-3'}"
                     (click)="tab == 'STEP-3'"
                 >
                     <span class="authentication-tab__subheader-item-circle">3</span>
                     Verify Code
                 </div>
             </div>
-
-
-
-
             <!-- Tab Body -->
             <div class="authentication-tab__body">
                 <!-- STEP-1 Tab Content -->
@@ -145,31 +143,64 @@
                         Enter the 6-digit verification code generated.
                     </div>
                     <div class="tab-pane-input__row">
-                        <div class="qt-input-block qt-mt-24 qt-w100">
+                        <div
+                            id="verify-code"
+                            class="qt-input-block qt-mt-24 qt-w100 --required"
+                        >
                             <input
                                 class="authenticator-input qt-mr-12"
+                                [ngClass]="{'--input-error' : !validVerifyCoded}"
                                 type="text"
+                                maxlength="1"
+                                mask="9"
+                                (input)="changeVerifyCode($event,0)"
                             >
                             <input
                                 class="authenticator-input qt-mr-12"
+                                [ngClass]="{'--input-error' : !validVerifyCoded}"
                                 type="text"
+                                maxlength="1"
+                                mask="9"
+                                (input)="changeVerifyCode($event,1)"
                             >
                             <input
                                 class="authenticator-input qt-mr-12"
+                                [ngClass]="{'--input-error' : !validVerifyCoded}"
                                 type="text"
+                                maxlength="1"
+                                mask="9"
+                                (input)="changeVerifyCode($event,2)"
                             >
                             <input
                                 class="authenticator-input qt-mr-12"
+                                [ngClass]="{'--input-error' : !validVerifyCoded}"
                                 type="text"
+                                maxlength="1"
+                                mask="9"
+                                (input)="changeVerifyCode($event,3)"
                             >
                             <input
                                 class="authenticator-input qt-mr-12"
+                                [ngClass]="{'--input-error' : !validVerifyCoded}"
                                 type="text"
+                                maxlength="1"
+                                mask="9"
+                                (input)="changeVerifyCode($event,4)"
                             >
                             <input
                                 class="authenticator-input"
+                                [ngClass]="{'--input-error' : !validVerifyCoded}"
                                 type="text"
+                                maxlength="1"
+                                mask="9"
+                                (input)="changeVerifyCode($event,5)"
                             >
+                            <mat-error
+                                class="qt-tooltip-error"
+                                *ngIf="!validVerifyCoded"
+                            >
+                                Invalid two-step authentication code
+                            </mat-error>
                         </div>
                     </div>
                 </div>
@@ -185,7 +216,6 @@
                 Close
             </button>
             <button
-                *ngIf="!isSetQrCode"
                 class="qt-button qt-w100 qt-jc-c"
                 (click)="next()"
             >
@@ -193,11 +223,10 @@
             </button>
         </div>
     </div>
-
-
-
-
-    <div class="authentication__successfully hidden">
+    <div
+        class="authentication__successfully"
+        *ngIf="authenticationSuccessfully"
+    >
         <div class="icon__done-circle-green qt-sz-48 qt-bg-contain qt-mb-24 qt-ml-auto qt-mr-auto"></div>
         <div class="authentication-tab__body-title">
             Two-Factor authentication setup successfully
@@ -205,6 +234,11 @@
         <div class="authentication-tab__body-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
         </div>
-        <div class="qt-button qt-mt-32 qt-w100 qt-jc-c">Done</div>
+        <div
+            class="qt-button qt-mt-32 qt-w100 qt-jc-c"
+            (click)="closeModal()"
+        >
+            Done
+        </div>
     </div>
 </div>
