@@ -1,273 +1,277 @@
 <div class="cmn-area profile">
-  <div class="tab-pane__header">
-    <div class="tab-pane__header-title">Personal Info</div>
-  </div>
-  <div class="tab-pane__body">
-    <form [formGroup]="profileForm">
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">First Name</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block qt-mr-24">
-            <input
-              type="text"
-              placeholder="Enter Your First Name"
-              formControlName="firstName"
-            >
-            <div
-              *ngIf="submitted && f.firstName.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.firstName.errors.required">Full Name is required</div>
-              <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
-              <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Personal Info</div>
+    </div>
+    <div class="tab-pane__body">
+        <form [formGroup]="profileForm">
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">First Name</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block qt-mr-24">
+                        <input
+                            type="text"
+                            placeholder="Enter Your First Name"
+                            formControlName="firstName"
+                        >
+                        <div
+                            *ngIf="submitted && f.firstName.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.firstName.errors.required">Full Name is required</div>
+                            <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
+                            <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+                        </div>
+                    </div>
+                    <div class="qt-input-block">
+                        <input
+                            type="text"
+                            placeholder="Enter Your Last Name"
+                            formControlName="lastName"
+                        >
+                        <div
+                            *ngIf="submitted && f.lastName.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                            <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
+                            <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="qt-input-block">
-            <input
-              type="text"
-              placeholder="Enter Your Last Name"
-              formControlName="lastName"
-            >
-            <div
-              *ngIf="submitted && f.lastName.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-              <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
-              <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Email Address</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <input
+                            type="email"
+                            placeholder="Enter Your Email Address"
+                            (blur)="isEmailUnique()"
+                            formControlName="primaryEmail"
+                        >
+                        <div
+                            *ngIf="submitted && f.primaryEmail.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
+                            <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">Email must be a valid email address</div>
+                        </div>
+                        <label
+                            *ngIf="!uniqueEmail"
+                            class="invalid-feedback"
+                        >
+                            This email already occupied.
+                        </label>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Email Address</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <input
-              type="email"
-              placeholder="Enter Your Email Address"
-              (blur)="isEmailUnique()"
-              formControlName="primaryEmail"
-            >
-            <div
-              *ngIf="submitted && f.primaryEmail.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
-              <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">Email must be a valid email address</div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Role</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <app-drop-down
+                            #jobTitleDp
+                            [class]="['qt-select-input-40']"
+                            [placeholder]="'Select Your Role'"
+                            [editItem]="selectedJobTitle"
+                            [list]="jobTitleList"
+                            [field]="'name'"
+                            [search]="true"
+                            [change]="true"
+                            (onSelectedItem)="onSelectRole($event)"
+                        ></app-drop-down>
+                    </div>
+                </div>
             </div>
-            <label
-              *ngIf="!uniqueEmail"
-              class="invalid-feedback"
-            >
-              This email already occupied.
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Role</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <app-drop-down
-              #jobTitleDp
-              [class]="['qt-select-input-40']"
-              [placeholder]="'Select Your Role'"
-              [editItem]="selectedJobTitle"
-              [list]="jobTitleList"
-              [field]="'name'"
-              [search]="true"
-              [change]="true"
-              (onSelectedItem)="onSelectRole($event)"
-            ></app-drop-down>
-          </div>
-        </div>
-      </div>
-      <div class="dp-area tab-pane__row">
-        <div class="tab-pane__subtitle">Your photo</div>
-        <div class="tab-pane-input__row">
-          <span
-            class="dp"
-            *ngIf="imageSrc"
-          >
-            <img
-              [src]="imageSrc"
-              alt="user"
-            >
-          </span>
-          <span
-            class="dp"
-            *ngIf="!imageSrc"
-          >
-          <img
-            src="html/assets/img/icons/user-avatar.svg"
-            alt="user"
-          >
-          </span>
-          <div class="dp-info">
-            <input
-              type="file"
-              id="profile-dp"
-              (change)="onSelectFile($event)"
-              style="display: none;"
-            >
-            <div class="static-link">
-              <label
-                class="qt-button --gray qt-mr-12"
-                for="profile-dp"
-              >
-                {{ imageAvatar ? "Change Photo" : "Upload Photo" }}
-              </label>
-              <label
-                for="profile-dp"
-                *ngIf="imageAvatar"
-                (click)="deleteAvatar()"
-              >
-                <a
-                  href="javascript:void(0)"
-                  restore-default-button
-                  class="qt-button --gray"
-                >
-                  <span class="qt-color-red-600">Remove</span>
-                </a>
-              </label>
+            <div class="dp-area tab-pane__row">
+                <div class="tab-pane__subtitle">Your photo</div>
+                <div class="tab-pane-input__row">
+                    <span
+                        class="dp"
+                        *ngIf="imageSrc"
+                    >
+                        <img
+                            [src]="imageSrc"
+                            alt="user"
+                        >
+                    </span>
+                    <span
+                        class="dp"
+                        *ngIf="!imageSrc"
+                    >
+                        <img
+                            src="html/assets/img/icons/user-avatar.svg"
+                            alt="user"
+                        >
+                    </span>
+                    <div class="dp-info">
+                        <input
+                            type="file"
+                            id="profile-dp"
+                            (change)="onSelectFile($event)"
+                            style="display: none;"
+                        >
+                        <div class="static-link">
+                            <label
+                                class="qt-button --gray qt-mr-12"
+                                for="profile-dp"
+                            >
+                                {{ imageAvatar ? "Change Photo" : "Upload Photo" }}
+                            </label>
+                            <label
+                                for="profile-dp"
+                                *ngIf="imageAvatar"
+                                (click)="deleteAvatar()"
+                            >
+                                <a
+                                    href="javascript:void(0)"
+                                    restore-default-button
+                                    class="qt-button --gray"
+                                >
+                                    <span class="qt-color-red-600">Remove</span>
+                                </a>
+                            </label>
+                        </div>
+                        <span class="dp-info-area">PNG, JPG or GIF (max. 2mb)</span>
+                    </div>
+                </div>
             </div>
-            <span class="dp-info-area">PNG, JPG or GIF (max. 2mb)</span>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Mailing Address</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <input
-              placeholder="search for location"
-              autocorrect="off"
-              autocapitalize="off"
-              class="form-input"
-              spellcheck="off"
-              type="text"
-              #search
-              formControlName="mailingAddress"
-            >
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Suite Number & Zip Code</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block qt-mr-24">
-            <input
-              type="text"
-              placeholder="123456"
-              class="form-input"
-              formControlName="suiteNumber"
-            >
-          </div>
-          <div class="qt-input-block">
-            <input
-              type="text"
-              placeholder="123456"
-              class="form-input"
-              formControlName="postalCode"
-            >
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Primary Phone Number</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block qt-input-block-100">
-            <div class="qt-df">
-              <select
-                class="cmn-select form-input qt-input-prefix"
-                formControlName="primaryPhoneType"
-              >
-                <option value="MOBILE">mobile</option>
-                <option value="OFFICE">office</option>
-                <option value="FAX">fax</option>
-              </select>
-              <input
-                type="text"
-                class="form-input qt-input-prepend"
-                placeholder="Primary Phone Number"
-                formControlName="primaryPhone"
-                [validation]="true"
-                [suffix]="suffix"
-                mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                [dropSpecialCharacters]="false"
-                (keyup)="phonehandle($event)"
-              >
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Mailing Address</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <input
+                            placeholder="search for location"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            class="form-input"
+                            spellcheck="off"
+                            type="text"
+                            #search
+                            formControlName="mailingAddress"
+                        >
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="qt-input-block-100 qt-mt-16">
-            <div
-              (click)="onAddPhone()"
-              *ngIf="!isAddPhone"
-              href="javascript:;"
-              class="qt-button --gray qt-jc-c qt-w100"
-            >
-              <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
-              Add Phone
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Suite Number & Zip Code</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block qt-mr-24">
+                        <input
+                            type="text"
+                            placeholder="123456"
+                            class="form-input"
+                            formControlName="suiteNumber"
+                        >
+                    </div>
+                    <div class="qt-input-block">
+                        <input
+                            type="text"
+                            placeholder="123456"
+                            class="form-input"
+                            formControlName="postalCode"
+                        >
+                    </div>
+                </div>
             </div>
-          </div>
-          <div
-            class="qt-input-block-100"
-            *ngIf="isAddPhone"
-          >
-            <div class="qt-input-block qt-input-block-100">
-              <div class="qt-df">
-                <select
-                  class="cmn-select form-input qt-input-prefix"
-                  formControlName="secondaryPhoneType"
-                >
-                  <option value="MOBILE">mobile</option>
-                  <option value="OFFICE">office</option>
-                  <option value="FAX">fax</option>
-                </select>
-                <input
-                  type="text"
-                  class="form-input qt-input-prepend"
-                  formControlName="secondaryPhone"
-                  placeholder="Secondary Phone Number"
-                  formControlName="secondaryPhone"
-                >
-              </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Primary Phone Number</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block qt-input-block-100">
+                        <div class="qt-df">
+                            <select
+                                class="cmn-select form-input qt-input-prefix"
+                                formControlName="primaryPhoneType"
+                            >
+                                <option value="MOBILE">mobile</option>
+                                <option value="OFFICE">office</option>
+                                <option value="FAX">fax</option>
+                            </select>
+                            <input
+                                type="text"
+                                class="form-input qt-input-prepend"
+                                placeholder="Primary Phone Number"
+                                formControlName="primaryPhone"
+                                [validation]="true"
+                                [suffix]="suffix"
+                                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                [dropSpecialCharacters]="false"
+                                (keyup)="phonehandle($event)"
+                            >
+                        </div>
+                    </div>
+                    <div class="qt-input-block-100 qt-mt-16">
+                        <div
+                            (click)="onAddPhone()"
+                            *ngIf="!isAddPhone"
+                            href="javascript:;"
+                            class="qt-button --gray qt-jc-c qt-w100"
+                        >
+                            <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                            Add Phone
+                        </div>
+                    </div>
+                    <div
+                        class="qt-input-block-100"
+                        *ngIf="isAddPhone"
+                    >
+                        <div class="qt-input-block qt-input-block-100">
+                            <div class="qt-df">
+                                <select
+                                    class="cmn-select form-input qt-input-prefix"
+                                    formControlName="secondaryPhoneType"
+                                >
+                                    <option value="MOBILE">mobile</option>
+                                    <option value="OFFICE">office</option>
+                                    <option value="FAX">fax</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    class="form-input qt-input-prepend"
+                                    formControlName="secondaryPhone"
+                                    placeholder="Secondary Phone Number"
+                                    formControlName="secondaryPhone"
+                                    [suffix]="suffix"
+                                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                                    [dropSpecialCharacters]="false"
+                                >
+                            </div>
+                        </div>
+                        <div class="qt-input-block-100 qt-mt-16">
+                            <div
+                                href="javascript:;"
+                                class="qt-button --gray qt-jc-c qt-w100"
+                                (click)="onAddPhone()"
+                            >
+                                <div class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8 pointer"></div>
+                                <div class="qt-color-red-600">Remove</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="qt-input-block-100 qt-mt-16">
-              <div
-                href="javascript:;"
-                class="qt-button --gray qt-jc-c qt-w100"
-                (click)="onAddPhone()"
-              >
-                <div class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8 pointer"></div>
-                <div class="qt-color-red-600">Remove</div>
-              </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">About Me</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <textarea
+                            placeholder="Write About Your Self"
+                            class="qt-textarea"
+                            formControlName="aboutMe"
+                        ></textarea>
+                        <div class="qt-input-info-help">Maximum 1024 characters</div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">About Me</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <textarea
-              placeholder="Write About Your Self"
-              class="qt-textarea"
-              formControlName="aboutMe"
-            ></textarea>
-            <div class="qt-input-info-help">Maximum 1024 characters</div>
-          </div>
-        </div>
-      </div>
-      <!--  Todo check this input -->
-<!--      <input-->
-<!--        type="submit"-->
-<!--        class="btn btn-primary"-->
-<!--        value="Save Changes"-->
-<!--        (click)="onSubmit()"-->
-<!--      >-->
-    </form>
-  </div>
+            <!-- Todo check this input -->
+            <!-- <input -->
+            <!-- type="submit" -->
+            <!-- class="btn btn-primary" -->
+            <!-- value="Save Changes" -->
+            <!-- (click)="onSubmit()" -->
+            <!-- > -->
+        </form>
+    </div>
 </div>

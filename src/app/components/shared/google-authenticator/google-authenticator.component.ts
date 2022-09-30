@@ -19,6 +19,7 @@ export class GoogleAuthenticatorComponent implements OnInit {
   qrCode: string;
   secretCode: string;
   authCode: string = '';
+  tab: string = 'STEP-1';
   constructor(private settingService: SettingService,
     private usersStateService: UsersStateService,
     private modalService: NgbModal,
@@ -32,10 +33,21 @@ export class GoogleAuthenticatorComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+  getQRCode() {
     this.settingService.getQRCode(this.usersStateService.getCurrentUser().id).subscribe((data: any) => {
       this.qrCode = `data:image/png;base64,${data.qrBase64}`;
       this.secretCode = data.secretKey;
     })
+  }
+  next() {
+    if (this.tab == 'STEP-2') this.tab = 'STEP-3';
+    if (this.tab == 'STEP-1') {
+      this.tab = 'STEP-2';
+      this.getQRCode();
+    }
+
   }
   submit() {
     if (this.authCode.length > 0) this.settingService.setAuthCode(this.usersStateService.getCurrentUser().id, this.authCode).subscribe((data: any) => {

@@ -8,6 +8,8 @@
                 id="dropdownCreate"
                 ngbDropdownToggle
                 class="nav-header__add-btn icon__add-product"
+                placement="left"
+                ngbTooltip="Quick Create"
             ></div>
             <div
                 class="icon__help-center qt-bg-contain qt-sz-18 pointer qt-mr-24"
@@ -62,23 +64,35 @@
     </div>
     <!-- <div class="nav-header__notifications-bell --notifications-exits icon__notifications"></div> -->
     <div class="nav-header__account-info">
-<!--        <div class="qt-df qt-ai-fe qt-fd-c">-->
-<!--            <div class="nav-header__account-info-company-name">-->
-<!--                {{ (currentCompany) ? currentCompany.name : ''}}-->
-<!--            </div>-->
-<!--            <div-->
-<!--                class="nav-header__account-info-user-name"-->
-<!--                [textContent]="getCurrentUserName()"-->
-<!--            ></div>-->
-<!--        </div>-->
+        <!-- <div class="qt-df qt-ai-fe qt-fd-c"> -->
+        <!-- <div class="nav-header__account-info-company-name"> -->
+        <!-- {{ (currentCompany) ? currentCompany.name : ''}} -->
+        <!-- </div> -->
+        <!-- <div -->
+        <!-- class="nav-header__account-info-user-name" -->
+        <!-- [textContent]="getCurrentUserName()" -->
+        <!-- ></div> -->
+        <!-- </div> -->
         <div ngbDropdown>
             <div
                 id="dropdownCompany"
                 ngbDropdownToggle
                 class="nav-header__account-info-menu qt-df qt-ai-c pointer"
             >
-              <div class="nav-header__account-info-avatar">J</div>
-              <div class="nav-header__account-info-menu-arrow icon__down-arrow"></div>
+                <div
+                    class="nav-header__account-info-avatar"
+                    [textContent]="getCurrentUserName()[0]"
+                    placement="bottom"
+                    [ngbTooltip]="tipContent"
+                ></div>
+                <ng-template #tipContent>
+                    {{getCurrentUserName()}}
+                    <br>
+                    <span class="header-tooltip-t">
+                        {{(currentCompany) ? currentCompany.name : ''}}
+                    </span>
+                </ng-template>
+                <div class="nav-header__account-info-menu-arrow icon__down-arrow"></div>
             </div>
             <ul
                 class="qt-dropdown-menu"

@@ -1,3 +1,4 @@
+@import './src/assets/styles/variable';
 .google-authenticator {
     li {
         margin: 0px !important;
@@ -24,4 +25,7 @@
 }
 .secret-code-container {
     height: 45px;
+}
+.authentication-tab__body-text strong {
+    color: $gray-900;
 }

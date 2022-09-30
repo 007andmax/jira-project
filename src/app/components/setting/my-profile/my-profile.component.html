@@ -1,39 +1,42 @@
 <!-- Message -->
 <div class="heading qt-df qt-ai-fs qt-jc-sb">
-  <h5 class="qt-fw-600">My Profile Settings</h5>
-  <div class="qt-button qt-ml-24 --md">
-    Save Changes
-  </div>
+    <h5 class="qt-fw-600">My Profile Settings</h5>
+    <div
+        class="qt-button qt-ml-24 --md"
+        (click)="onSubmit()"
+    >
+        Save Changes
+    </div>
 </div>
 <ngb-tabset>
-  <!-- Profile -->
-  <ngb-tab
-    title="Profile"
-    id="tab1"
-  >
-    <ng-template ngbTabContent>
-      <app-profile></app-profile>
-    </ng-template>
-  </ngb-tab>
-  <!-- Account -->
-  <ngb-tab title="Account">
-    <ng-template ngbTabContent>
-      <app-account></app-account>
-    </ng-template>
-  </ngb-tab>
-  <!-- Email -->
-  <ngb-tab title="Email Notifications">
-    <ng-template ngbTabContent>
-      <app-email-notifications></app-email-notifications>
-    </ng-template>
-  </ngb-tab>
-  <!-- Activity History -->
-  <ngb-tab
-    title="Activity History"
-    class="history"
-  >
-    <ng-template ngbTabContent>
-      <app-activity-history></app-activity-history>
-    </ng-template>
-  </ngb-tab>
+    <!-- Profile -->
+    <ngb-tab
+        title="Profile"
+        id="tab1"
+    >
+        <ng-template ngbTabContent>
+            <app-profile #profile></app-profile>
+        </ng-template>
+    </ngb-tab>
+    <!-- Account -->
+    <ngb-tab title="Account">
+        <ng-template ngbTabContent>
+            <app-account #account></app-account>
+        </ng-template>
+    </ngb-tab>
+    <!-- Email -->
+    <ngb-tab title="Email Notifications">
+        <ng-template ngbTabContent>
+            <app-email-notifications></app-email-notifications>
+        </ng-template>
+    </ngb-tab>
+    <!-- Activity History -->
+    <ngb-tab
+        title="Activity History"
+        class="history"
+    >
+        <ng-template ngbTabContent>
+            <app-activity-history></app-activity-history>
+        </ng-template>
+    </ngb-tab>
 </ngb-tabset>

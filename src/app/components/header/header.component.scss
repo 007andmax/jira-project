@@ -1,4 +1,8 @@
+@import './src/assets/styles/variable';
 .actions-body {
     display: flex;
     align-items: center;
+}
+.header-tooltip-t {
+    color: $gray-400;
 }

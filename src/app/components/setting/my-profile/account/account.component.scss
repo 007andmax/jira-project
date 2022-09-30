@@ -25,3 +25,11 @@
       align-items: end;
     }
   }
+  .show-password,.hide-password {
+    position: absolute;
+      top: 13px;
+      right: 15px;
+  }
+  .qt-input-block {
+    position: relative;
+  }

@@ -10,6 +10,9 @@ import { GoogleAuthenticatorComponent } from 'src/app/components/shared/google-a
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { LOG_OUT } from 'src/app/const/confirm';
 
 @Component({
   selector: 'app-account',
@@ -20,6 +23,8 @@ export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
   authenticationTypesType = 'BASIC';
   oldPwdCorrect = true;
+  showCurrentPassword: boolean = false;
+  showNewPassword: boolean = false;
   public passwordForm: FormGroup;
   show = false;
   sub: Subscription = new Subscription();
@@ -30,25 +35,58 @@ export class AccountComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private elRef: ElementRef,
     private usersStateService: UsersStateService,
+    private confirmStateService: ConfirmStateService,
   ) { }
 
 
   ngOnInit() {
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === LOG_OUT) this.onLogOut();
+      }
+    })
+    this.sub.add(getConfirm);
     /**
      * init form validation and declaration
      */
     this.passwordForm = this.formBuilder.group(
       {
-        oldpass: ['', [Validators.required, Validators.minLength(6)]],
-        newpass: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPass: ['', Validators.required]
+        oldpass: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
+        newpass: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
       },
-      {
-        validator: MustMatch('newpass', 'confirmPass')
-      }
     );
 
     this.get2FA();
+  }
+  onLogOut() {
+    this.settingService
+      .getActivityHistory()
+      .pipe(
+        map((res: any) => {
+          if (res) {
+            this.toastr.success('Log out other sessions successfully.');
+            const activityHistory = res;
+            const currentDevice = res.find(device => {
+              return device.current;
+            });
+
+            const idsForDelete = [];
+            for (let i = 0; i < activityHistory.length; i++) {
+              let deviceId = activityHistory[i].id;
+              if (deviceId !== currentDevice.id) {
+                idsForDelete.push(deviceId);
+              }
+            }
+
+            if (idsForDelete) {
+              this.settingService
+                .closeSessions(idsForDelete)
+                .subscribe(res => { });
+            }
+          }
+        })
+      )
+      .subscribe();
   }
 
   // convenience getter for easy access to form fields
@@ -101,36 +139,9 @@ export class AccountComponent implements OnInit, OnDestroy {
    * logout sessions
    */
   logOutSessions() {
-    if (confirm('Are you sure to log out other sessions ')) {
-      this.settingService
-        .getActivityHistory()
-        .pipe(
-          map((res: any) => {
-            if (res) {
-              this.toastr.success('Log out other sessions successfully.');
-              const activityHistory = res;
-              const currentDevice = res.find(device => {
-                return device.current;
-              });
-
-              const idsForDelete = [];
-              for (let i = 0; i < activityHistory.length; i++) {
-                let deviceId = activityHistory[i].id;
-                if (deviceId !== currentDevice.id) {
-                  idsForDelete.push(deviceId);
-                }
-              }
-
-              if (idsForDelete) {
-                this.settingService
-                  .closeSessions(idsForDelete)
-                  .subscribe(res => { });
-              }
-            }
-          })
-        )
-        .subscribe();
-    }
+    this.confirmStateService.setConfirmAction(LOG_OUT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Are you sure to log out other sessions?`;
   }
 
   /**

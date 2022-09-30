@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input, ViewChild } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
+import { AccountComponent } from "./account/account.component";
+import { ProfileComponent } from "./profile/profile.component";
 declare var $: any;
 @Component({
   selector: "app-my-profile",
@@ -8,6 +10,8 @@ declare var $: any;
   styleUrls: ["./my-profile.component.scss"]
 })
 export class MyProfileComponent implements OnInit, OnDestroy {
+  @ViewChild('profile') profile: ProfileComponent;
+  @ViewChild('account') account: AccountComponent;
   constructor(private settingStateService: SettingStateService) { }
 
   ngOnInit() {
@@ -23,7 +27,10 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     // $('body').removeClass('ng7');
     $(".loading").css({ "top": "-53px", "bottom": "0" });
   }
-
+  onSubmit() {
+    if (this.profile) this.profile.onSubmit();
+    if (this.account) this.account.onSubmit();
+  }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
