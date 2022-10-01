@@ -35,7 +35,8 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.getCategories(this.inventoryStateService.getCategories());
     this.inventoryStateService.onGetCategories.subscribe(data => {
@@ -148,7 +149,8 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
     this.inventoryStateService.setListCategoriesForRemove([]);
     this.sub.unsubscribe();
   }

@@ -640,7 +640,7 @@ body {
         }
 
         .tab-pane__table-cell {
-          padding-left: 7px;
+          padding: 0 8px;
 
           &.tab-pane__table-checkboxes {
             padding-left: 0;
@@ -750,7 +750,7 @@ body {
     .canned-responses-table {
       &__template-name {
         flex: 1 1 700px;
-        padding: 0 7px;
+        padding: 0 8px;
       }
       &__status {
         flex: 1 1 150px;
@@ -764,11 +764,31 @@ body {
     .manage-tags-table {
       &__custom-tags {
         flex: 1 1 150px;
-        padding: 0 7px;
+        padding: 0 8px;
       }
       &__count {
         flex: 1 1 350px;
-        padding: 0 7px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 56px;
+      }
+    }
+
+    .product-category-table {
+      &__checkboxes {
+        flex: 0 0 30px;
+      }
+      &__category-name {
+        flex: 1 1 334px;
+      }
+      &__count {
+        flex: 1 1 70px;
+        padding: 0 8px;
+      }
+      &__gl-number {
+        flex: 1 1 75px;
+        padding: 0 8px;
       }
       &__action {
         flex: 0 0 56px;
