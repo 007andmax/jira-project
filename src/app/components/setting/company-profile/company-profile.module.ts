@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { CompanyProfileRoutingModule } from './company-profile-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -24,7 +25,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         MatChipsModule,
         FormsModule,
         CompanyProfileRoutingModule,
-        DropDownModule
+        DropDownModule,
+        NgxMaskModule.forRoot(),
     ],
 
 

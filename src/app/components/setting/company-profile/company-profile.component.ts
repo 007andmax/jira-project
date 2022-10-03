@@ -4,7 +4,8 @@ import {
   ViewChild,
   ElementRef,
   NgZone,
-  OnDestroy
+  OnDestroy,
+  ViewContainerRef
 } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 import {
@@ -25,6 +26,7 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 declare var google: any;
 declare var $: any;
@@ -34,6 +36,7 @@ declare var $: any;
   styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit, OnDestroy {
+  tabSet: string = "tab1";
   cProfileForm: FormGroup;
   accForm: FormGroup;
   workingHoursForm: FormGroup;
@@ -142,6 +145,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.getAddressAutocomplete();
     this.settingStateService.setComponentName('CompanyProfileComponent');
     this.onCroppImage();
+  }
+  public setTab(data) {
+    console.log("event", data['nextId']);
+    this.tabSet = data['nextId'];
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -367,6 +374,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? firstPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                console.log("firstPhone.number", firstPhone.number);
               }
               if (lastPhone) {
                 this.isAddPhone = true;
@@ -405,6 +413,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   }
   checkDomain() {
+    this.checkValidateDomain();
     if (this.cProfileForm.get('url').getError('invalidate')) return;
     this.companyProfileService.checkDomain(this.cProfileForm.get(
       'url'
@@ -500,12 +509,14 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    *  file selected on upload.
    */
   onSelectFile(event) {
+    console.log("event.target.files", event.target.files);
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
       if (size > 200000) {
         this.toaster.info('Maximum size of 2MB');
         return;
       }
+      console.log("1");
       //  this.isCroppedImg = true;
       this.imageChangedEvent = event;
       const fromData = new FormData();
@@ -719,8 +730,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * saved records
    */
   onSubmit() {
+    console.log("this.tabSet", this.tabSet);
+    if (this.tabSet == "tab1") this.submitCompanyProfile();
+    if (this.tabSet == "workspace") this.checkDomain();
+    if (this.tabSet == "operationalhours") this.onWorkSubmit();
+  }
+  submitCompanyProfile() {
     this.submitted = true;
     // stop here if form is invalid
+    console.log("this.cProfileForm", this.cProfileForm);
     if (this.cProfileForm.invalid) {
       return;
     }
