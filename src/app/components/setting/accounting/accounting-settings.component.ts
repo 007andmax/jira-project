@@ -11,6 +11,9 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 import { GlNumberService } from './gl-number/gl-number.service';
 import { InvoiceTicketsService } from './accounting-settings.service';
+import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
+import { AccountingYearComponent } from './accounting-year/accounting-year.component';
 declare var $: any;
 @Component({
   selector: 'app-accounting-settings',
@@ -18,6 +21,9 @@ declare var $: any;
   styleUrls: ['./accounting-settings.component.scss']
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {
+  @ViewChild('invoiceSettings') invoiceSettings: InvoiceSettingsComponent;
+  @ViewChild('quotesSettings') quotesSettings: QuotesSettingsComponent;
+  @ViewChild('accountingYear') accountingYear: AccountingYearComponent;
   loading = false;
   activeTab: string = "invoiceSettings";
   sub: Subscription = new Subscription();
@@ -68,6 +74,12 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
         error => {
         }
       );
+  }
+  onSubmit() {
+    if (this.invoiceSettings) this.invoiceSettings.onSubmit();
+    if (this.quotesSettings) this.quotesSettings.onSubmit();
+    if (this.accountingYear) this.accountingYear.saveAccountingDate();
+
   }
   removeGls() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_GL_NUMBERS);
