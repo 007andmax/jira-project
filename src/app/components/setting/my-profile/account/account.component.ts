@@ -115,11 +115,11 @@ export class AccountComponent implements OnInit, OnDestroy {
     if (type === "GOOGLE_SECURE") {
       const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
       let onReset = modalRef.componentInstance.onReset.subscribe(data => {
-        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+        this.elRef.nativeElement.querySelector("#authentication-type select").value = this.authenticationTypesType;
       })
       let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
         this.authenticationTypesType = type;
-        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+        this.elRef.nativeElement.querySelector("#authentication-type select").value = this.authenticationTypesType;
       })
       this.sub.add(onSetQrCode);
       return;
@@ -129,7 +129,7 @@ export class AccountComponent implements OnInit, OnDestroy {
       .pipe(
         map(res => {
           this.authenticationTypesType = type;
-          this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+          this.elRef.nativeElement.querySelector("#authentication-type select").value = this.authenticationTypesType;
         })
       )
       .subscribe();

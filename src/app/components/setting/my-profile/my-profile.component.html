@@ -4,6 +4,7 @@
     <div
         class="qt-button qt-ml-24 --md"
         (click)="onSubmit()"
+        *ngIf="!activityHistory"
     >
         Save Changes
     </div>
@@ -36,7 +37,7 @@
         class="history"
     >
         <ng-template ngbTabContent>
-            <app-activity-history></app-activity-history>
+            <app-activity-history #activityHistory></app-activity-history>
         </ng-template>
     </ngb-tab>
 </ngb-tabset>
