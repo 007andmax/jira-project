@@ -118,6 +118,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.currentDevice = null;
     this.devices = [];
     this.tab = "SYSTEM";
+    this.devicesStateService.setCloseAside();
   }
   public trackById(index, item) {
     return item.id;

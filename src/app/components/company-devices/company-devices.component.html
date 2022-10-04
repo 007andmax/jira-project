@@ -8,7 +8,7 @@
         ></app-company-devices-header>
 
 
-        <div class="qt-page-list__header-thead-container">
+        <div class="qt-page-list__header-thead-container" [ngClass]="{'Resize': resize}">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
@@ -59,7 +59,7 @@
 
     <div class="qt-df qt-fd-c qt-jc-sb">
         <div class="qt-page-list__body">
-            <div class="qt-page-list__body-table-container">
+            <div class="qt-page-list__body-table-container" [ngClass]="{'Resize': resize}">
                 <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
                     <tbody>
                         <ng-template

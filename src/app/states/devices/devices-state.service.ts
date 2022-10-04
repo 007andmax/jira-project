@@ -22,6 +22,7 @@ export class DevicesStateService {
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
+  onCloseAside: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
@@ -155,6 +156,9 @@ export class DevicesStateService {
   }
   public getOnOpenAside() {
     return this.onOpenAside;
+  }
+  public setCloseAside() {
+    this.onCloseAside.emit();
   }
   public getOnResetDeviceTiming() {
     return this.onResetDeviceTiming;

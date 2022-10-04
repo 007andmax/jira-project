@@ -37,6 +37,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
     private devicesRealTimeService: DevicesRealTimeService) { }
+    public resize:boolean = false;
 
   ngOnInit() {
 
@@ -169,6 +170,14 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
+
+    this.devicesStateService.onOpenAside.subscribe((data)=>{      
+      this.resize = true;
+    });
+    this.devicesStateService.onCloseAside.subscribe((data)=>{      
+      this.resize = false;
+    });
+    
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
