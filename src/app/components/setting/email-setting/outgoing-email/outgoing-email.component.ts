@@ -422,7 +422,7 @@ export class OutgoingEmailComponent implements OnInit {
    * @param form
    * @param isTest
    */
-  saveSMTP(form, isTest) {
+  public saveSMTP(form, isTest) {
     this.submitted = true;
     if (this.isSMTPLoginUnique) {
       if (this.smtpForm.valid && this.smtp.useSMTP) {
@@ -494,6 +494,8 @@ export class OutgoingEmailComponent implements OnInit {
       "encryptionType": this.smtpForm.value.encryptionType
     }).subscribe((data: any) => {
 
+      this.testServerBtn.setDisabled(false);
+    }, err => {
       this.testServerBtn.setDisabled(false);
     })
   }

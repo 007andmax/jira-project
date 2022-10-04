@@ -83,7 +83,7 @@ export class IncomingEmailComponent implements OnInit {
   /**
    * saved inbox enabled
    */
-  saveInboxEnabled() {
+  public saveInboxEnabled() {
     this.emailSettingService
       .saveInboxEnabled(this.inboxEnabled)
       .subscribe(res => {

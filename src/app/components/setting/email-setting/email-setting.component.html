@@ -3,7 +3,12 @@
     <div class="page-insider email-insider">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Email Settings</h5>
-            <div class="qt-button qt-ml-24 --md">Save Changes</div>
+            <div
+                class="qt-button qt-ml-24 --md"
+                (click)="onSubmit()"
+            >
+                Save Changes
+            </div>
         </div>
         <ngb-tabset>
             <!-- Profile -->
@@ -13,6 +18,7 @@
             >
                 <ng-template ngbTabContent>
                     <app-incoming-email
+                        #incomingEmail
                         [smtpSettingsInput]="smtpSettings"
                         [supportMailBoxInput]="supportMailBox"
                         *ngIf="showIn == true"
@@ -23,6 +29,7 @@
             <ngb-tab title="Outgoing Email">
                 <ng-template ngbTabContent>
                     <app-outgoing-email
+                        #outgoingEmail
                         [smtpInput]="smtp"
                         [supportMailBoxInput]="supportMailBox"
                         [testEmailInput]="smtp.testEmail"
