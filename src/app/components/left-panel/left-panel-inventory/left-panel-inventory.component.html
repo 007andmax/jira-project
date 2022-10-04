@@ -29,6 +29,7 @@
                 [ngClass]="{'--active': sortCategoty && sortCategoty.id === inventory.id && activePage === 'inventory'}"
                 (click)="goToState();selectCategory(inventory)"
                 [textContent]="inventory.name"
+                class="qt-jc-sb"
             >
             </li>
         </ng-template>

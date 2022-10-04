@@ -7,7 +7,7 @@
             <div
                 id="dropdownCreate"
                 ngbDropdownToggle
-                class="nav-header__add-btn icon__add-product"
+                class="nav-header__add-btn icon__add-product tooltip-max--content"
                 placement="left"
                 ngbTooltip="Quick Create"
             ></div>
@@ -80,9 +80,9 @@
                 class="nav-header__account-info-menu qt-df qt-ai-c pointer"
             >
                 <div
-                    class="nav-header__account-info-avatar"
+                    class="nav-header__account-info-avatar tooltip-max--content"
                     [textContent]="getCurrentUserName()[0]"
-                    placement="bottom"
+                    placement="bottom-right"
                     [ngbTooltip]="tipContent"
                 ></div>
                 <ng-template #tipContent>

@@ -26,6 +26,7 @@
                 [ngClass]="{'--active': getSelecteSubscription() && getSelecteSubscription().id === subscription.id && activePage === 'marketing'}"
                 (click)="goToState();onChangeCustomSubscription(subscription)"
                 [textContent]="subscription.name"
+                class="qt-jc-sb"
             >
             </li>
         </ng-template>

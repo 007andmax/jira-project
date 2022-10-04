@@ -354,7 +354,6 @@
     @media (max-width: 767px) {
       font-weight: 500;
       height: 48px;
-      justify-content: space-between;
       border-bottom: 1px solid $gray-700;
     }
     @media (min-width: 768px) {
@@ -392,11 +391,6 @@
           background-color: $white;
         }
       }
-      .app-left-panel__menu-expand-count {
-        @media (min-width: 768px) {
-          color: $primary-1;
-        }
-      }
     }
 
     input {
@@ -405,13 +399,14 @@
   }
 
   &__menu-expand-count {
-    @media (max-width: 767px) {
-      font-size: 12px;
-      line-height: 15px;
-      color: #fff;
-      padding: 4px 8px;
-      background-color: $gray-700;
-      border-radius: 22px;
+    font-size: 12px;
+    line-height: 15px;
+    color: #fff;
+    padding: 4px 8px;
+    background-color: $gray-700;
+    border-radius: 22px;
+    @media (min-width: 768px) {
+      padding: 2px 4px;
     }
   }
 

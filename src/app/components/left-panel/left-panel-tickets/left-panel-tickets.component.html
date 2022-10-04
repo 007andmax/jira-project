@@ -20,6 +20,7 @@
     <li
         [ngClass]="{'--active': listType === 'USERS' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('USERS')"
+        class="qt-jc-sb"
     >
         <div>My Tickets</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('USER')}}</div>
@@ -27,6 +28,7 @@
     <li
         [ngClass]="{'--active': listType === 'ALL' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('ALL')"
+        class="qt-jc-sb"
     >
         <div>All Tickets</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ALL')}}</div>
@@ -34,6 +36,7 @@
     <li
         [ngClass]="{'--active': listType === 'UNASSIGNED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('UNASSIGNED')"
+        class="qt-jc-sb"
     >
         Unassigned
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('UNASSIGNED')}}</div>
@@ -41,6 +44,7 @@
     <li
         [ngClass]="{'--active': listType === 'OPEN' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('OPEN')"
+        class="qt-jc-sb"
     >
         <div>Open</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('OPEN')}}</div>
@@ -48,6 +52,7 @@
     <li
         [ngClass]="{'--active': listType === 'CLOSED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('CLOSED')"
+        class="qt-jc-sb"
     >
         <div>Closed</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('CLOSED')}}</div>
@@ -55,6 +60,7 @@
     <li
         [ngClass]="{'--active': listType === 'ON_HOLD' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('ON_HOLD')"
+        class="qt-jc-sb"
     >
         <div>On Hold</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ON_HOLD')}}</div>
@@ -62,6 +68,7 @@
     <li
         [ngClass]="{'--active': listType === 'TRASH' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('TRASH')"
+        class="qt-jc-sb"
     >
         <div>Trash</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('TRASH')}}</div>
@@ -69,6 +76,7 @@
     <li
         [ngClass]="{'--active': listType === 'SPAM' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('SPAM')"
+        class="qt-jc-sb"
     >
         <div>Spam</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('SPAM')}}</div>
@@ -83,7 +91,7 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS_OPEN' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('RECURRING_TICKETS_OPEN')"
-        class="desktop-version"
+        class="desktop-version qt-jc-sb"
     >
         <div>Recurring tickets Open</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">
@@ -93,7 +101,7 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS_CLOSED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')"
-        class="desktop-version"
+        class="desktop-version qt-jc-sb"
     >
         <div>Recurring tickets Closed</div>
         <div class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count">

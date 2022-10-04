@@ -39,6 +39,7 @@
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
             (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
             [textContent]="(activePage === 'new-companies') ? 'Clients ('+getCount('CLIENT') +')' : 'Clients'"
+            class="qt-jc-sb"
         >
         </li>
     </a>
@@ -52,6 +53,7 @@
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
             (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
             [textContent]="(activePage === 'new-companies') ? 'Leads ('+getCount('LEAD') +')' : 'Leads'"
+            class="qt-jc-sb"
         >
         </li>
     </a>
@@ -65,6 +67,7 @@
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
             (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
             [textContent]="(activePage === 'new-companies') ? 'Vendors ('+getCount('VENDOR') +')' : 'Vendors'"
+            class="qt-jc-sb"
         >
         </li>
     </a>
@@ -78,6 +81,7 @@
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
             (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
             [textContent]="(activePage === 'new-companies') ? 'Suppliers ('+getCount('SUPPLIER') +')' : 'Suppliers'"
+            class="qt-jc-sb"
         >
         </li>
     </a>
