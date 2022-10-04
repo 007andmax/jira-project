@@ -720,10 +720,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   onOperatingSystem(data, type) {
     if (type === "Warranty") {
-      this.assetData.WarrantyExpires = data || '0001-01-01';
+      this.assetData.WarrantyExpires = data || null;
     }
     if (type === "Install") {
-      this.assetData.InstallDate = data || '0001-01-01';
+      this.assetData.InstallDate = data || null;
     }
     this.agentService.overrideAsset(this.assetData).subscribe(
       (resp) => {
@@ -732,11 +732,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
         this.toastr.error("Something went wrong please try again.");
       }
     );
-    if (this.minDate(this.assetData.WarrantyExpires)) {
+    if (this.assetData.WarrantyExpires && this.minDate(this.assetData.WarrantyExpires)) {
       this.assetData.WarrantyExpires = "";
     }
 
-    if (this.minDate(this.assetData.InstallDate)) {
+    if (this.assetData.InstallDate && this.minDate(this.assetData.InstallDate)) {
       this.assetData.InstallDate = "";
     }
   }
@@ -1602,6 +1602,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
     return asset.LastCheckInDate?  moment(asset.LastCheckInDate).fromNow() : '';
   }
+
 }
 
 

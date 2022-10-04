@@ -232,18 +232,18 @@
                             <td class="company-devices-table__up-time">
                                 <div class="qt-df qt-fd-c">
                                     <span>
-                                  <span *ngIf="asset.IsActive">{{ asset.UpTime }}</span>                                    
+                                        <span *ngIf="asset.IsActive && asset.online">{{  asset.UpTime }}</span>                                        
                                     </span>
-                                    <span *ngIf="
-                asset.UpTime != '' &&
-                asset.UpTime != undefined &&
-                asset.UpTime != null
-              " class="uptime-tag qt-ff-gm" [textContent]="(asset.IsActive) ? 'Online' : 'uninstalled'" ></span>
-                                    <span *ngIf="
-                asset.UpTime == '' ||
-                asset.UpTime == undefined ||
-                asset.UpTime == null
-              " class="uptime-tag qt-ff-gm --offline" [textContent]="(asset.IsActive) ? 'Offline' : 'uninstalled'"></span>
+                                    <span
+                                        *ngIf="asset.IsActive"
+                                        class="uptime-tag qt-ff-gm"
+                                        [textContent]="asset.online ? 'Online' : 'Offline'"
+                                    ></span>
+                                    <span
+                                    *ngIf="!asset.IsActive"
+                                        class="uptime-tag qt-ff-gm --offline"
+                                        [textContent]="'Uninstalled'"
+                                    ></span>
                                 </div>
                             </td>
                             <td class="company-devices-table__windows">                                
