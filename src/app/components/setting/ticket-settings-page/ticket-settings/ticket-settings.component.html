@@ -1,122 +1,128 @@
 <div class="cmn-area in-ticks">
-  <div class="tab-pane__header">
-    <div class="tab-pane__header-title">Ticket Settings</div>
-  </div>
-  <div class="tab-pane__body">
-    <form [formGroup]="ticketForm">
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Starting Ticket Number</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <input
-              type="text"
-              numbersOnly
-              formControlName="ticketCount"
-              [ngClass]="{'--input-error' : submitted && f.ticketCount.errors}"
-              class="form-input"
-              placeholder="Enter Starting ticket number"
-              value="Starting ticket number"
-            >
-            <mat-error
-              class="qt-tooltip-error"
-              *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
-            >
-              Starting ticket number is required
-            </mat-error>
-            <mat-error
-              class="qt-tooltip-error"
-              *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
-            >
-              Only Number is allowed
-            </mat-error>
-            <label
-              class="control-label"
-              *ngIf="used"
-            >
-              Already used. Next free is
-              <span class="free-number-link">
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Ticket Settings</div>
+    </div>
+    <div class="tab-pane__body">
+        <form [formGroup]="ticketForm">
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Starting Ticket Number</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <input
+                            type="text"
+                            numbersOnly
+                            formControlName="ticketCount"
+                            [ngClass]="{'--input-error' : submitted && f.ticketCount.errors}"
+                            class="form-input"
+                            placeholder="Enter Starting ticket number"
+                            value="Starting ticket number"
+                        >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
+                        >
+                            Starting ticket number is required
+                        </mat-error>
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
+                        >
+                            Only Number is allowed
+                        </mat-error>
+                        <label
+                            class="control-label"
+                            *ngIf="used"
+                        >
+                            Already used. Next free is
+                            <span class="free-number-link">
                                 <!-- {{ ticketConfig.nextValid }} -->
                             </span>
-              .
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Outliers Time</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <label class="qt-df qt-input-block__time">
-              <input
-                type="number"
-                min="1"
-                onkeypress="return event.charCode != 45"
-                formControlName="outliersTime"
-                [ngClass]="{'--input-error' : submitted && f.outliersTime.errors}"
-                class="number qt-input-afterpend"
-              >
-              <div class="quantity-afterfix">
-                <div class="quantity-arrow-up pointer">
-                  <div class="icon__up-arrow-gray-400 qt-sz-12 qt-bg-contain qt-ic-c"></div>
+                            .
+                        </label>
+                    </div>
                 </div>
-                <div class="quantity-arrow-down pointer">
-                  <div class="icon__down-arrow__sm qt-sz-12 qt-bg-contain qt-ic-c "></div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Outliers Time</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <label class="qt-df qt-input-block__time">
+                            <input
+                                type="number"
+                                min="1"
+                                onkeypress="return event.charCode != 45"
+                                formControlName="outliersTime"
+                                [ngClass]="{'--input-error' : submitted && f.outliersTime.errors}"
+                                class="number qt-input-afterpend"
+                            >
+                            <div class="quantity-afterfix">
+                                <div
+                                    class="quantity-arrow-up pointer"
+                                    (click)="changeOutliersTime(ticketForm.value.outliersTime +1)"
+                                >
+                                    <div class="icon__up-arrow-gray-400 qt-sz-12 qt-bg-contain qt-ic-c"></div>
+                                </div>
+                                <div
+                                    class="quantity-arrow-down pointer"
+                                    (click)="changeOutliersTime(ticketForm.value.outliersTime -1)"
+                                >
+                                    <div class="icon__down-arrow__sm qt-sz-12 qt-bg-contain qt-ic-c "></div>
+                                </div>
+                            </div>
+                        </label>
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.outliersTime.errors && f.outliersTime.errors.required"
+                        >
+                            OutliersTime is required
+                        </mat-error>
+                    </div>
                 </div>
-              </div>
-            </label>
-            <mat-error
-              class="qt-tooltip-error"
-              *ngIf="submitted && f.outliersTime.errors && f.outliersTime.errors.required"
-            >
-              OutliersTime is required
-            </mat-error>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Timepicker Type</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <app-drop-down
-              [class]="['qt-select-input-40']"
-              [placeholder]="'Select Company Type'"
-              [field]="'title'"
-              [editItem]="getSelectedTimepickerType()"
-              [isBlockClear]="true"
-              [list]="timepickerTypes"
-              (onSelectedItem)="onChangeType($event)"
-            >
-            </app-drop-down>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane__row">
-        <div class="tab-pane__subtitle">Interval</div>
-        <div class="tab-pane-input__row">
-          <div class="qt-input-block">
-            <app-drop-down
-              #intervalsDp
-              [class]="['qt-select-input-40']"
-              [placeholder]="'Select Company Type'"
-              [editItem]="getSelectedInterval()"
-              [isBlockClear]="true"
-              [sort]="false"
-              [field]="'title'"
-              [list]="intervals"
-              (onSelectedItem)="onChangeInterval($event)"
-            >
-            </app-drop-down>
-          </div>
-        </div>
-      </div>
-      <!--  Todo check this input -->
-<!--      <button-->
-<!--        type="submit"-->
-<!--        class="qt-button qt-mr-12"-->
-<!--        (click)="onSubmit()"-->
-<!--      >-->
-<!--        Save Changes-->
-<!--      </button>-->
-    </form>
-  </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Timepicker Type</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <app-drop-down
+                            [class]="['qt-select-input-40']"
+                            [placeholder]="'Select Company Type'"
+                            [field]="'title'"
+                            [editItem]="getSelectedTimepickerType()"
+                            [isBlockClear]="true"
+                            [list]="timepickerTypes"
+                            (onSelectedItem)="onChangeType($event)"
+                        >
+                        </app-drop-down>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Interval</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <app-drop-down
+                            #intervalsDp
+                            [class]="['qt-select-input-40']"
+                            [placeholder]="'Select Company Type'"
+                            [editItem]="getSelectedInterval()"
+                            [isBlockClear]="true"
+                            [sort]="false"
+                            [field]="'title'"
+                            [list]="intervals"
+                            (onSelectedItem)="onChangeInterval($event)"
+                        >
+                        </app-drop-down>
+                    </div>
+                </div>
+            </div>
+            <!-- Todo check this input -->
+            <!-- <button -->
+            <!-- type="submit" -->
+            <!-- class="qt-button qt-mr-12" -->
+            <!-- (click)="onSubmit()" -->
+            <!-- > -->
+            <!-- Save Changes -->
+            <!-- </button> -->
+        </form>
+    </div>
 </div>

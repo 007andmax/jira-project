@@ -91,6 +91,10 @@ export class TicketSettingsComponent implements OnInit {
   get f() {
     return this.ticketForm.controls;
   }
+  changeOutliersTime(data) {
+    console.log("data", data);
+    this.ticketForm.patchValue({ outliersTime: data });
+  }
 
   /**
    * current comapny
@@ -150,7 +154,7 @@ export class TicketSettingsComponent implements OnInit {
   /**
    * saved
    */
-  onSubmit() {
+  public onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.ticketForm.invalid) {

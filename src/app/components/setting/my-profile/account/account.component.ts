@@ -13,6 +13,7 @@ import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { LOG_OUT } from 'src/app/const/confirm';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
   selector: 'app-account',
@@ -21,7 +22,12 @@ import { LOG_OUT } from 'src/app/const/confirm';
 })
 export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
-  authenticationTypesType = 'BASIC';
+
+  authenticationTypes = [new TitleListType("No authentication", "DISABLED"),
+  new TitleListType("Basic two-factor authentication", "BASIC"),
+  new TitleListType("Secure two-factor authentication - by email", "SECURE"),
+  new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
+  authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
   oldPwdCorrect = true;
   showCurrentPassword: boolean = false;
   showNewPassword: boolean = false;
@@ -100,7 +106,7 @@ export class AccountComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           if (res) {
-            this.authenticationTypesType = res.value;
+            this.authenticationTypesType = this.authenticationTypes.find(item => item.type == res.value);
           }
         })
       )
@@ -115,11 +121,11 @@ export class AccountComponent implements OnInit, OnDestroy {
     if (type === "GOOGLE_SECURE") {
       const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
       let onReset = modalRef.componentInstance.onReset.subscribe(data => {
-        this.elRef.nativeElement.querySelector("#authentication-type select").value = this.authenticationTypesType;
+        this.authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
       })
       let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
-        this.authenticationTypesType = type;
-        this.elRef.nativeElement.querySelector("#authentication-type select").value = this.authenticationTypesType;
+        this.authenticationTypesType = this.authenticationTypes.find(item => item.type == type);
+
       })
       this.sub.add(onSetQrCode);
       return;
@@ -128,8 +134,7 @@ export class AccountComponent implements OnInit, OnDestroy {
       .twoFactorAuth(type)
       .pipe(
         map(res => {
-          this.authenticationTypesType = type;
-          this.elRef.nativeElement.querySelector("#authentication-type select").value = this.authenticationTypesType;
+          this.authenticationTypesType = this.authenticationTypes.find(item => item.type == type);
         })
       )
       .subscribe();

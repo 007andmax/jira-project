@@ -1,4 +1,7 @@
-<div class="cmn-area profile">
+<div
+    class="cmn-area profile"
+    [hidden]="loading"
+>
     <div class="tab-pane__header">
         <div class="tab-pane__header-title">Personal Info</div>
     </div>
@@ -274,3 +277,7 @@
         </form>
     </div>
 </div>
+<div
+    class="loading"
+    *ngIf="showPreloader"
+></div>

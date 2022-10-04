@@ -10,6 +10,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { InvoiceTicketsService } from '../accounting/accounting-settings.service';
+import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 declare var $: any;
 @Component({
@@ -21,6 +22,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   loading = false;
   activeTab: string = "ticketSettings";
   sub: Subscription = new Subscription();
+  @ViewChild('ticketSettings') ticketSettings: TicketSettingsComponent;
   @ViewChild('ticketsStatus') ticketsStatus: TicketsStatusComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
@@ -49,6 +51,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  onSubmit() {
+    if (this.ticketSettings) this.ticketSettings.onSubmit();
   }
   create() {
     this.ticketsStatus.toggleAddStatus(true);

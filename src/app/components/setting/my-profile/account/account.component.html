@@ -204,6 +204,17 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 <div class="cmn-area account">
     <div class="tab-pane__header">
         <div class="tab-pane__header-title">Account Info</div>
@@ -321,7 +332,19 @@
                 id="authentication-type"
                 class="tab-pane-input__row "
             >
-                <div class="qt-input-block">
+                <div class="qt-w100">
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [list]="authenticationTypes"
+                        [editItem]="authenticationTypesType"
+                        [field]="'title'"
+                        [sort]="false"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onAuthTypeChange($event.type)"
+                    >
+                    </app-drop-down>
+                </div>
+                <!-- <div class="qt-input-block">
                     <select
                         class="cmn-select form-input"
                         (change)="onAuthTypeChange($event.target.value)"
@@ -336,7 +359,7 @@
                             Secure two-factor authentication - Google authenticator
                         </option>
                     </select>
-                </div>
+                </div> -->
                 <a
                     href="javascript:;"
                     class="static-link"
