@@ -1,4 +1,7 @@
-<div class="cmn-area contract">
+<div
+    class="cmn-area contract"
+    [hidden]="loading"
+>
     <div class="data-table-wrap">
         <table
             class="display dataTable"
@@ -400,6 +403,8 @@
 
 
 
+
+
                         <div
                             class="modal-content toggle-area"
                             [ngClass]="{ opened: isModelDisplayModel === true }"
@@ -516,4 +521,10 @@
             </div>
         </div>
     </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>

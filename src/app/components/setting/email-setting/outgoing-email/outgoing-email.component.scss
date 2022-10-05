@@ -131,3 +131,8 @@ input.ng-invalid.is-invalid {
     height: 36px;
   }
 }
+.loading-container {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+}

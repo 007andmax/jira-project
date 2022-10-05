@@ -12,7 +12,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 export class IncomingEmailComponent implements OnInit {
   smtpSettings: {};
   supportMailBox: any;
-  loading = false;
+  loading = true;
   currentComapny: any;
   constants: any;
   currentHost: '';
@@ -59,8 +59,11 @@ export class IncomingEmailComponent implements OnInit {
         if (this.constants) {
           this.currentHost = this.getConstant('mandrill.domain.suffix');
         }
+        this.loading = false;
       },
-      error => { }
+      error => {
+        this.loading = false;
+      }
     );
   }
 
@@ -95,17 +98,14 @@ export class IncomingEmailComponent implements OnInit {
    * smtp settings
    */
   SMTPSettings() {
-    this.loading = true; $(".loading").css("display", "block");
     this.emailSettingService.getSMTPSettings().subscribe(
       (smtp: any) => {
-        this.loading = false; $(".loading").css("display", "none");
         if (smtp) {
           this.smtpSettings = smtp.smtpSettings;
           this.supportMailBox = smtp.supportMailBox;
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error(`Error Occured, ${error}`);
       }
     );

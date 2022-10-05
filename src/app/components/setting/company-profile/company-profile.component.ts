@@ -53,7 +53,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   fileAvatar: any;
   imageBase64 = '';
   fromGoogle = false;
-  public loading = false;
+  public loading = true;
   public currentCompany: any;
   cProfile = {
     address: [],
@@ -300,11 +300,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * get company profile
    */
   getCompanyProfile() {
-    this.loading = true; $(".loading").css("display", "block");
     try {
       this.companyProfileService.getCompanyProfile().subscribe(
         (res: any) => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           if (res) {
             this.cProfile.address = res.addresses;
             if (this.cProfile.address.length > 0) {
@@ -390,11 +389,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         }
       );
     } catch (error) {
-      this.loading = false; $(".loading").css("display", "none");
+      this.loading = false;
     }
   }
   checkValidateDomain() {
@@ -521,10 +520,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
-      this.loading = true; $(".loading").css("display", "block");
       this.settingService.fileAvatar(fromData).subscribe(
         (result: any) => {
-          this.loading = false; $(".loading").css("display", "none");
           if (result) {
             this.fileAvatar = result;
             this.idUploadFile = result.id;
@@ -533,7 +530,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           event.target.value = null;
         }
       );
@@ -557,7 +553,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
       .removeAvatar(this.currentCompany.id)
       .subscribe(
@@ -570,7 +565,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.basic();
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -581,9 +575,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   rePositionAvatar() {
     if (this.cProfile && this.currentCompany.logo.base64 === null) {
       const imageUrl = `/file/${this.currentCompany.logo.origin.id}.jpg`;
-      this.loading = true; $(".loading").css("display", "block");
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
-        this.loading = false; $(".loading").css("display", "none");
         this.isCroppedImg = true;
         this.croppedImage = this.currentCompany.logo.cropped;
         this.croppedImage.base64 = base64data;
@@ -667,8 +659,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         base64: this.croppedImage.base64
       };
     }
-
-    this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
       .logo(this.currentCompany.id, cropImage)
       .subscribe(
@@ -683,13 +673,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 }
               },
               error => {
-                this.loading = false; $(".loading").css("display", "none");
               }
             );
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -712,14 +700,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           workingDays: selectedWorkingHours
         }
       };
-      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService.workingTime(data).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toaster.success('Records Saved Successfully');
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toaster.error('Bad Request');
         }
       );
@@ -807,7 +792,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     }
     data['phoneNumbers'] = phones;
     if (this.cProfile.name !== this.cProfileForm.get('name').value) {
-      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService
         .isCompanyNameUnique(
           this.cProfile.address[0].id,
@@ -815,7 +799,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.isCompanyNameUnique = res.value;
             // true, unique companyname
             if (res && res.value) {
@@ -830,7 +813,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                   this.companiesStateService.onInitGetCurrentCompany();
                 },
                 error => {
-                  this.loading = false; $(".loading").css("display", "none");
                   this.toaster.error('Bad Request');
                 }
               );
@@ -838,20 +820,16 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             }
           },
           error => {
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
       const address = { addresses: [data] };
-      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService.addresses(address).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           if (res) {
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
     }

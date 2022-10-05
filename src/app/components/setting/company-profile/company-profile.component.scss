@@ -263,3 +263,8 @@ select.cmn-select {
 .--required {
     position: relative;
 }
+.loading-container {
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+}

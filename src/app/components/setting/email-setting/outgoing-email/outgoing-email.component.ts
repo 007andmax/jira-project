@@ -24,7 +24,7 @@ export class OutgoingEmailComponent implements OnInit {
   smtpForm: FormGroup;
   testEmailForm: FormGroup;
   submitted = false;
-  loading = false;
+  loading = true;
   isSMTPLoginUnique = true;
   disableFields = false;
   portIsEmpty = false;
@@ -160,9 +160,10 @@ export class OutgoingEmailComponent implements OnInit {
           this.smtpForm.patchValue({
             emailAlias: this.emailAlias
           });
+          this.loading = false;
         }
       },
-      error => { }
+      error => { this.loading = false; }
     );
   }
 
@@ -206,6 +207,7 @@ export class OutgoingEmailComponent implements OnInit {
       login: this.smtp.login,
       password: this.smtp.password
     });
+
   }
   onEnableTestEmail(value) {
     this.smtp.sendTestEmail = value;
@@ -225,10 +227,8 @@ export class OutgoingEmailComponent implements OnInit {
    * smtp settings
    */
   SMTPSettings() {
-    this.loading = true; $(".loading").css("display", "block");
     this.emailSettingService.getSMTPSettings().subscribe(
       (response: any) => {
-        this.loading = false; $(".loading").css("display", "none");
         if (response) {
           this.smtp = response.smtpSettings;
           this.supportMailBox = response.supportMailBox;
@@ -263,7 +263,6 @@ export class OutgoingEmailComponent implements OnInit {
         }
       },
       (error: any) => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error(`Error Occured, ${error.errorMessage}`);
       }
     );
@@ -436,10 +435,8 @@ export class OutgoingEmailComponent implements OnInit {
 
         //  this.smtp.sendTestEmail = !!isTest;
         this.smtp.testEmail = this.smtpForm.value.testEmail;
-        this.loading = true; $(".loading").css("display", "block");
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.savedSMTPSettings = this.smtp;
             this.smtp.testEmail = this.savedSMTPSettings.login;
 
@@ -453,7 +450,6 @@ export class OutgoingEmailComponent implements OnInit {
             this.submitted = false;
           },
           error => {
-            this.loading = false; $(".loading").css("display", "none");
             // this.toastr.error(`Error Occured, ${error}`);
           }
         );
@@ -468,19 +464,16 @@ export class OutgoingEmailComponent implements OnInit {
         });
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toastr.success("Saved Successfully");
             this.appStateService.changeDetectorRef();
           },
           (error: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toastr.error(`Error Occured, ${error}`);
             this.appStateService.changeDetectorRef();
           }
         );
       }
     } else {
-      this.loading = false; $(".loading").css("display", "none");
       this.isSMTPLoginUnique = false;
     }
   }

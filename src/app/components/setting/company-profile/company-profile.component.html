@@ -363,15 +363,6 @@
 <!-- &lt;!&ndash; <div class="loading" *ngIf="loading"></div> &ndash;&gt; -->
 <!-- </div> -->
 <!-- </div> -->
-
-
-
-
-
-
-
-
-
 <!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider company-profile">
@@ -384,7 +375,16 @@
                 Save Changes
             </div>
         </div>
-        <ngb-tabset (tabChange)="setTab($event)">
+        <div
+            class="loading-container"
+            *ngIf="loading"
+        >
+            <div class="loading"></div>
+        </div>
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            [hidden]="loading"
+        >
             <!-- Profile -->
             <ngb-tab
                 title="Profile"
@@ -616,6 +616,10 @@
                     </div>
                 </ng-template>
             </ngb-tab>
+
+
+
+
 
 
 
