@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class QuotesSettingsComponent implements OnInit {
   quotesForm: FormGroup;
   submitted = false;
-  loading = false;
+  loading = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,10 +44,9 @@ export class QuotesSettingsComponent implements OnInit {
    * get quote number
    */
   getActualNumber() {
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('SALE_QUOTE').subscribe(
       (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res) {
           this.quotesForm.patchValue({
             count: res.number
@@ -55,7 +54,7 @@ export class QuotesSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -74,14 +73,11 @@ export class QuotesSettingsComponent implements OnInit {
         type: 'SALE_QUOTE'
       }
     };
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService
       .updateQuotesSettings(objQuotes)
       .subscribe(res => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.success('Saved Successfully');
       }, error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error('Bad Request');
       });
   }

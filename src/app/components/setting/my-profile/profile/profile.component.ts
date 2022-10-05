@@ -233,7 +233,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
    * get user profile details
    */
   private getUserProfile() {
-    this.loading = true;// $(".loading").css("display", "block");
+    this.loading = true;
     this.settingService
       .getUserProfile()
       .pipe(
@@ -285,10 +285,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         res => {
-          this.loading = false; //$(".loading").css("display", "none");
+          this.loading = false;
         },
         error => {
-          this.loading = false; //$(".loading").css("display", "none");
+          this.loading = false;
         }
       );
   }
@@ -403,7 +403,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         base64: this.croppedImage.base64
       };
     }
-    this.loading = true; //$(".loading").css("display", "block");
     this.settingService
       .updateAvatar(this.currentUser.id, cropImage)
       .pipe(
@@ -424,13 +423,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
             };
             this.settingService.updateProfile(profileUser).subscribe(
               (res: any) => {
-                this.loading = false; //$(".loading").css("display", "none");
                 if (res) {
                   this.imageSrc = `/users/${res.id}/image.jpg?t=${this.imageAvatar.updatedAt}`;
                 }
               },
               error => {
-                this.loading = false; //$(".loading").css("display", "none");
 
               }
             );
@@ -439,10 +436,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         res => {
-          this.loading = false; //$(".loading").css("display", "none");
+
         },
         error => {
-          this.loading = false;// $(".loading").css("display", "none");
+
         }
       );
   }
@@ -471,9 +468,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   rePositionAvatar() {
     if (this.imageAvatar && this.imageAvatar.origin.base64 === undefined) {
       const imageUrl = `/file/${this.imageAvatar.origin.id}.jpg`;
-      this.loading = true; //$(".loading").css("display", "block");
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
-        this.loading = false; //$(".loading").css("display", "none");
         this.isCroppedImg = true;
         this.croppedImage = this.imageAvatar;
         this.croppedImage.base64 = base64data;
@@ -488,12 +483,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    this.loading = true;// $(".loading").css("display", "block");
     this.settingService
       .deleteAvatar(this.currentUser.id)
       .pipe(
         map(res => {
-          this.loading = false;// $(".loading").css("display", "none");
           this.toastr.success('Avatar deleted successfully');
           const profileUser = {
             basic: {
@@ -506,17 +499,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
               signature: this.userProfile.signature
             }
           };
-          this.loading = true; //$(".loading").css("display", "block");
           this.settingService.updateProfile(profileUser).subscribe(
             res => {
-              this.loading = false; //$(".loading").css("display", "none");
               if (res) {
-
                 this.imageSrc = '';
               }
             },
             error => {
-              this.loading = false; //$(".loading").css("display", "none");
               this.toastr.error('Error ');
             }
           );
@@ -524,11 +513,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
         },
         error => {
           this.toastr.error(error);
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -636,8 +623,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         ...this.userProfile.timeZone
       }
     };
-
-    this.loading = true; $(".loading").css("display", "block");
     this.settingService
       .updateProfile(profileUser)
       .pipe(
@@ -649,11 +634,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
         },
         error => {
           this.toastr.error('Bad Request');
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }

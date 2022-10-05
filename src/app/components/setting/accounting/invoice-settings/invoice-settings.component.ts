@@ -88,7 +88,7 @@ export class InvoiceSettingsComponent implements OnInit {
       secondaryPhone: [''],
       secondaryPhoneType: ['']
     });
-    this.loading = true; $(".loading").css("display", "block");
+    this.loading = true;
     const source = [this.invoiceTicketsService.getInvoiceContact().pipe(catchError(error => of(undefined))),
     this.invoiceTicketsService.termsAndConditions().pipe(catchError(error => of(undefined))),
     this.invoiceTicketsService.actualNumber('INVOICE').pipe(catchError(error => of(undefined))),
@@ -100,7 +100,7 @@ export class InvoiceSettingsComponent implements OnInit {
           if (data[1]) this.getTermsAndConditions(data[1]);
           if (data[2]) this.getActualNumber(data[2]);
           if (data[3]) this.getTaxNumber(data[3]);
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         },
         error => {
         }
@@ -137,7 +137,6 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   getConditions() {
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
         this.invoiceForm.patchValue({
@@ -329,15 +328,11 @@ export class InvoiceSettingsComponent implements OnInit {
       phoneNumbers.push(phone);
     }
     objInvoice.invoiceContactDto.phoneNumbers = phoneNumbers;
-
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.updateInvoiceContact(objInvoice).subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toaster.success('Saved Successfully.');
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toaster.error('Bad Request');
       }
     );
