@@ -34,25 +34,26 @@
   }
   .keywords {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 18px;
     @media only screen and (max-width: 1280px) {
       margin-top: 10px;
     }
-    label {
-      margin: 0 !important;
-      font-size: 11px;
-      color: $gray-800--old;
-    }
-    a {
-      font-size: 12px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.33;
-      letter-spacing: -0.3px;
-      color: $primary-1;
-    }
+    //label {  // Todo check this input
+    //  margin: 0 !important;
+    //  font-size: 11px;
+    //  color: $gray-800--old;
+    //}
+    //a {
+    //  font-size: 12px;
+    //  font-weight: normal;
+    //  font-style: normal;
+    //  font-stretch: normal;
+    //  line-height: 1.33;
+    //  letter-spacing: -0.3px;
+    //  color: $primary-1;
+    //}
   }
   .middle-content {
     height: unset;
@@ -114,20 +115,16 @@
     float: left;
     width: 100%;
     .tags {
-      border-radius: 3px;
-      border: solid 1px $background;
-      padding: 8px;
-      background-color: $gray-100--old;
-      font-size: 12px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.33;
-      letter-spacing: normal;
-      color: $gray-800--old;
+      background: $white;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 6px;
+      color: $gray-600;
       display: inline-block;
+      padding: 3px 8px;
       margin-right: 8px;
       margin-bottom: 8px;
+      font-weight: 500;
     }
   }
 }
@@ -137,14 +134,17 @@
   width: 100%;
   span {
     display: block;
-    margin-bottom: 10px;
-    font-size: 13px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.54;
-    letter-spacing: normal;
-    color: $gray-800--old;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color: $gray-600;
+    &:last-child {
+      margin-bottom: 20px;
+    }
+  }
+  strong {
+    color: $gray-900;
   }
 }
 

@@ -92,7 +92,7 @@ body {
       }
     }
 
-    .ticket-add-aside {
+    .qt-aside-modern--page-settings {
       max-width: 480px;
 
       .qt-aside-modern__header {
@@ -795,7 +795,18 @@ body {
       }
     }
 
+    .email-templates-table {
+      &__template-name {
+        flex: 1 1 400px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 92px;
+      }
+    }
+
     .company-info-block {
+      display: flex;
       font-size: 14px;
       line-height: 17px;
       align-items: flex-start;
@@ -804,8 +815,11 @@ body {
       border: 1px solid $gray-200;
       box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
       border-radius: 8px;
-      line-height: 20px;
       color: $gray-600;
+
+      &.--light {
+        background-color: $gray-25;
+      }
 
       .company-info-block__checkbox {
         flex: 100%;

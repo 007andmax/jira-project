@@ -36,7 +36,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   templeteForm: FormGroup;
   openEmailTemplate: string;
   public show = false;
-  public buttonName: any = "Show Keyword Description + ";
+  public buttonName: any = "Show Description";
   templatesData = { subject: {}, body: {} };
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
@@ -68,7 +68,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
@@ -80,7 +81,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
 
   onBackMenu() {
@@ -399,9 +401,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.show = !this.show;
 
     if (this.show) {
-      this.buttonName = "Hide Keyword Description - ";
+      this.buttonName = "Hide Description";
     } else {
-      this.buttonName = "Show Keyword Description + ";
+      this.buttonName = "Show Description";
     }
   }
 

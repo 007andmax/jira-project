@@ -1,8 +1,9 @@
 <!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider manage-tags">
-        <div class="heading">
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Email Templates</h5>
+<!--            <div class="qt-button qt-ml-24 &#45;&#45;md">Save Changes</div>-->
         </div>
         <ngb-tabset>
             <!-- Ticket Templates -->
@@ -12,57 +13,52 @@
             >
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
-                        <div class="data-table-wrap">
-                            <table
-                                class="dataTable display"
-                                style="width:100%"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="t-name">Template Name</th>
-                                        <th class="action">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngIf="ticketTemplates">
-                                    <tr *ngFor="
-                    let template of ticketTemplates | keyvalue;
-                    let i = index;
-                    trackBy: trackByTicket
-                  ">
-                                        <td class="t-name">{{ template.value.title }}</td>
-                                        <td class="action">
-                                            <a
-                                                href="javascript:;"
-                                                data-tooltip="Edit"
-                                                class="edit"
-                                                (click)="getTemplate(template, i)"
-                                            >
-                                                <img
-                                                    src="/html/assets/img/icons/edit-12.svg"
-                                                    alt="Edit"
-                                                >
-                                            </a>
-                                            <a
-                                                *ngIf="
-                        emailPages &&
-                        emailPages.activeAndNotDefault[template.key]
-                          .isNotDefault
-                      "
-                                                href="javascript:;"
-                                                data-tooltip="Reset Default"
-                                                (click)="restoreDefault(template.key)"
-                                                class="view"
-                                            >
-                                                <img
-                                                    src="/html/assets/img/icons/payment_history.svg"
-                                                    alt="view-icon"
-                                                >
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                      <div
+                        class="tab-pane__table"
+                      >
+                        <div class="tab-pane__table-header">
+                          <div class="tab-pane__table-row">
+                            <div class="tab-pane__table-cell email-templates-table__template-name">
+                              Template Name
+                              <div class="qt-table-modern__sorting--new"></div>
+                            </div>
+                            <div class="tab-pane__table-cell email-templates-table__action">&nbsp;</div>
+                          </div>
                         </div>
+                        <div class="tab-pane__table-body" *ngIf="ticketTemplates">
+                          <div class="tab-pane__table-row" *ngFor="
+                                        let template of ticketTemplates | keyvalue;
+                                        let i = index;
+                                        trackBy: trackByTicket
+                                      ">
+                            <div class="tab-pane__table-cell email-templates-table__template-name">{{ template.value.title }}</div>
+                            <div class="tab-pane__table-cell email-templates-table__action">
+                             <div class="qt-df qt-ai-c">
+                               <div
+                                 href="javascript:;"
+                                 data-tooltip="Edit"
+                                 class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
+                                 (click)="getTemplate(template, i)"
+                               >
+                               </div>
+                               <div class="icon__copy qt-sz-20 qt-bg-contain qt-ml-16 pointer"></div>
+                               <div
+                                 *ngIf="
+                                  emailPages &&
+                                  emailPages.activeAndNotDefault[template.key]
+                                    .isNotDefault
+                                "
+                                 href="javascript:;"
+                                 data-tooltip="Reset Default"
+                                 (click)="restoreDefault(template.key)"
+                                 class="icon__reset qt-sz-20 qt-ml-16 qt-bg-contain pointer"
+                               >
+                               </div>
+                             </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                 </ng-template>
             </ngb-tab>
@@ -200,220 +196,158 @@
 </div>
 <!-- sidebar popup edit -->
 <div
-    class="qt-aside-modern sidebar-popup tmp-edit"
+    class="qt-aside-modern qt-aside-modern--page-settings sidebar-popup tmp-edit"
     [ngClass]="{ opened: edit }"
     *ngIf="templeteInfo"
 >
     <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">{{ templeteInfo.title }}</div>
-        <div
-            class="qt-aside-modern__header-close icon__close"
-            (click)="closeTemplete()"
-        ></div>
+        <div class="qt-df">
+          <div class="qt-aside__restore-modal pointer">
+            <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
+          </div>
+          <div
+            class="qt-aside__restore-modal qt-ml-8 pointer"
+            (click)="emailPreview(template)"
+            *ngIf="templeteInfo.showPreview"
+          >
+            <div class="icon__view qt-sz-16 qt-bg-contain"></div>
+          </div>
+        </div>
+<!--        <div-->
+<!--            class="qt-aside-modern__header-close icon__close"-->
+<!--            (click)="closeTemplete()"-->
+<!--        ></div>-->
     </div>
 
-
-
-
-
-
-
-
-
-
-
-    <div class="qt-aside-modern__content --no-padding">
-        <div class="reciept">
-            <span>
-                <strong>Recipient:</strong>
-                {{ templeteInfo.recipient }}
-            </span>
-            <a
-                href="javascript:;"
-                class="templates-view"
-                (click)="emailPreview(template)"
-                *ngIf="templeteInfo.showPreview"
-            >
-                Show Template Preview
-            </a>
+    <div class="qt-aside-modern__content">
+      <div class="qt-input-block qt-input-line">
+        <label class="qt-input-block__label" for="edit-reponse-recipient">Receipient</label>
+        <input class="qt-input-block__input" id="edit-reponse-recipient" placeholder="{{ templeteInfo.recipient }}" type="text" disabled>
+      </div>
+      <form
+        [formGroup]="templeteForm"
+        (ngSubmit)="saveEmailTemplate()"
+      >
+        <div class="qt-input-block qt-input-line">
+          <label class="qt-input-block__label" for="subject">Template Name</label>
+          <input
+            type="text"
+            formControlName="subject"
+            #subject
+            name="subject"
+            id="subject"
+            class="qt-input-block__input"
+            [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
+            placeholder="Thanks for Support"
+          >
+          <div
+            *ngIf="submitted && f.subject.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.subject.errors.required">Subject is required</div>
+            <div *ngIf="f.subject.errors.pattern && templeteInfo">
+              {{ templeteInfo.requiredKeywords }} is required
+            </div>
+          </div>
+        </div>
+        <div class="qt-input-block qt-input-line">
+          <label class="qt-input-block__label" for="myEditor">Template Name</label>
+          <textarea
+            id="myEditor"
+            #body
+            class="qt-textarea"
+            row="8"
+            name="body"
+            formControlName="body"
+          ></textarea>
         </div>
 
+        <div class="f-row">
 
-
-
-
-
-
-
-
-
-
-        <div class="middle-content">
-            <form
-                [formGroup]="templeteForm"
-                (ngSubmit)="saveEmailTemplate()"
+          <div class="f-col col-100">
+            <div class="keywords">
+              <label class="qt-fw-600 qt-color-gray-900">Available keywords</label>
+              <a
+                class="qt-button --sm --gray qt-jc-c "
+                href="javascript:;"
+                (click)="toggle()"
+              >
+<!--                <span class="icon__hide &#45;&#45;sm qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>-->
+                <span class="icon__view qt-sz-16 qt-ic-c qt-dib qt-mr-8"></span>
+                {{ buttonName }}
+              </a>
+            </div>
+            <div class="company-info-block --light qt-mb-16">
+              <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+              <span class="qt-f-1">By clicking on each keyword will be apply to Template Descripition above</span>
+            </div>
+            <div
+              class="form-row tgs-list"
+              *ngIf="!show"
             >
-                <div class="f-row">
-                    <div class="f-col col-100">
-                        <label>Subject</label>
-                        <div class="form-row">
-                            <input
-                                type="text"
-                                formControlName="subject"
-                                #subject
-                                name="subject"
-                                id="subject"
-                                class="form-input insert-field"
-                                [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
-                                placeholder="Enter Subject"
-                            >
-                            <div
-                                *ngIf="submitted && f.subject.errors"
-                                class="invalid-feedback"
-                            >
-                                <div *ngIf="f.subject.errors.required">Subject is required</div>
-                                <div *ngIf="f.subject.errors.pattern && templeteInfo">
-                                    {{ templeteInfo.requiredKeywords }} is required
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <label>Email</label>
-                        <div class="form-row">
-                            <textarea
-                                id="myEditor"
-                                #body
-                                class="form-input insert-field"
-                                row="8"
-                                name="body"
-                                formControlName="body"
-                            ></textarea>
-                        </div>
-                    </div>
-                    <div class="f-col col-100">
-                        <div class="keywords">
-                            <label>Available keywords</label>
-                            <a
-                                href="javascript:;"
-                                (click)="toggle()"
-                            >
-                                {{ buttonName }}
-                            </a>
-                        </div>
-                        <div
-                            class="form-row tgs-list"
-                            *ngIf="!show"
-                        >
                             <span
-                                class="tags"
-                                *ngFor="let key of keywords"
-                                (mousedown)="insertAtCaret(key.keyName)"
+                              class="tags"
+                              *ngFor="let key of keywords"
+                              (mousedown)="insertAtCaret(key.keyName)"
                             >
                                 {{ key.keyName }}
                             </span>
-                        </div>
-                        <!-- on click hide show -->
-                        <div
-                            class="key-area"
-                            *ngIf="show"
-                        >
+            </div>
+            <!-- on click hide show -->
+            <div
+              class="key-area"
+              *ngIf="show"
+            >
                             <span
-                                *ngFor="let key of keywords"
-                                (mousedown)="insertAtCaret(key.keyName)"
+                              *ngFor="let key of keywords"
+                              (mousedown)="insertAtCaret(key.keyName)"
                             >
                                 <strong>{{ key.keyName }} -</strong>
-                                {{ key.description }}
+                              {{ key.description }}
                             </span>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
-
-
-
-
-
-
-
-
-
-
 
     <div class="qt-aside-modern__footer">
-        <div class="qt-df qt-w100 qt-ai-c qt-jc-sb">
-            <div class="qt-df">
-                <button
-                    class="qt-button qt-mr-12"
-                    (click)="saveEmailTemplate()"
-                >
-                    Save
-                </button>
+        <div class="qt-df qt-w100">
+          <button
+            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+            (click)="closeTemplete()"
+          >
+            Cancel
+          </button>
+          <button
+            class="qt-button qt-jc-c qt-w100"
+            (click)="saveEmailTemplate()"
+          >
+            Save
+          </button>
 
-
-
-
-
-
-
-
-
-
-
-                <button
-                    class="qt-button --gray"
-                    (click)="closeTemplete()"
-                >
-                    Cancel
-                </button>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-            <div>
-                <button
-                    type="button"
-                    href="javascript:void(0)"
-                    *ngIf="emailPages && openEmailTemplate"
-                    class="restore qt-mr-50"
-                    [disabled]="!emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault"
-                    (click)="restoreDefault(openEmailTemplate)"
-                >
-                    Restore Default
-                </button>
-            </div>
+<!--            <div>-->
+<!--                <button-->
+<!--                    type="button"-->
+<!--                    href="javascript:void(0)"-->
+<!--                    *ngIf="emailPages && openEmailTemplate"-->
+<!--                    class="restore qt-mr-50"-->
+<!--                    [disabled]="!emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault"-->
+<!--                    (click)="restoreDefault(openEmailTemplate)"-->
+<!--                >-->
+<!--                    Restore Default-->
+<!--                </button>-->
+<!--            </div>-->
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div
-        class="msg"
-        *ngIf="templeteInfo"
-    >
-        {{ templeteInfo.description }}
-    </div>
+<!--    <div-->
+<!--        class="msg"-->
+<!--        *ngIf="templeteInfo"-->
+<!--    >-->
+<!--        {{ templeteInfo.description }}-->
+<!--    </div>-->
 </div>
 <!-- Modal create Tags -->
 <ng-template
