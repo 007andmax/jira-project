@@ -45,11 +45,6 @@ export class EmailNotificationsComponent implements OnInit {
 
     this.settingService
       .email(emailObjToSend)
-      .pipe(
-        map(res => {
-          this.toastr.success("Email Notification Changed Successfully");
-        })
-      )
       .subscribe();
   }
 }

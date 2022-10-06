@@ -116,7 +116,12 @@ export class SettingService {
    */
 
   email(email: any) {
-    return this.http.put(`${this.apiUrl}settings/userProfile/email`, email);
+    return this.http.put(`${this.apiUrl}settings/userProfile/email`, email).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Email Notification Changed Successfully");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   emailNotifications() {

@@ -49,7 +49,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userProfileAddr: any;
   imageBase64 = '';
   imageSrc = '';
-  public suffix = '';
   public currentUser: any;
   public profileForm: FormGroup;
   idUploadFile: string;
@@ -318,23 +317,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       );
   }
 
-  phonehandle(event) {
-    const valid = this.f.primaryPhone.valid;
-
-
-    if (valid === true && event.keyCode === 32) {
-      this.suffix = ',1234';
-    } else if (valid === true && event.keyCode === 8) {
-      this.suffix = '';
-      const value: string = this.f.primaryPhone.value;
-      this.profileForm.patchValue({
-        primaryPhone: value.slice(0, 9)
-      });
-    } else {
-      this.suffix = '';
-    }
-  }
-
   /**
    * select file
    * @param event
@@ -592,7 +574,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       if (this.profileForm.value.primaryPhone) {
         const phone = { number: '', typeNumber: '', priority: 0, id: '' };
-        phone.number = this.profileForm.value.primaryPhone + this.suffix;
+        phone.number = this.profileForm.value.primaryPhone;
         phone.typeNumber = this.profileForm.value.primaryPhoneType;
         phone.id = this.profileForm.value.primaryId;
         (phone.priority = 0), phoneNumbers.push(phone);
