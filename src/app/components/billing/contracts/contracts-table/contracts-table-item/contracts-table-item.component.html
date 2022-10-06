@@ -22,12 +22,16 @@
         (click)="preview()"
     >
         <div
-            class="qt-sz-32 qt-circle qt-bg-white  header-circle-icon icon__email-dark"
+            class="icon__automatically-create-invoice qt-bg-contain  qt-sz-20"
             *ngIf="contract.enableInvoiceAutoCreate"
+            placement="top"
+            ngbTooltip="Automatically create and send invoice"
         ></div>
         <div
-            class="qt-sz-32 qt-circle qt-bg-white header-circle-icon icon__print"
+            class="icon__manual-create-billable qt-bg-contain  qt-sz-20"
             *ngIf="contract.manualCreateBillableItem"
+            placement="top"
+            ngbTooltip="Manual create billable item"
         ></div>
     </td>
     <td
