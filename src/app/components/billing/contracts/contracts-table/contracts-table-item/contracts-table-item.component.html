@@ -18,14 +18,20 @@
         (click)="preview()"
     ></td>
     <td
-        class="contracts-table__status"
+        class="contracts-table__status tooltip-contract-list"
         (click)="preview()"
     >
+        <ng-template
+            #manualContent
+            class="tooltip"
+        >
+            Automatically create and send invoice
+        </ng-template>
         <div
             class="icon__automatically-create-invoice qt-bg-contain  qt-sz-20"
             *ngIf="contract.enableInvoiceAutoCreate"
             placement="top"
-            ngbTooltip="Automatically create and send invoice"
+            [ngbTooltip]="manualContent"
         ></div>
         <div
             class="icon__manual-create-billable qt-bg-contain  qt-sz-20"
