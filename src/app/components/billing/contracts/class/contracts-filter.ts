@@ -16,8 +16,20 @@ export class ContractsFilter {
   selectedStatus: ContractsFilterStatus = null;
   selectedStartDate: number = null;
   selectedEndDate: number = null;
+  enableInvoiceAutoCreate: boolean = null;
+  manualCreateBillableItem: boolean = null;
   constructor() { }
 
+  public clearOptions() {
+    this.setEnableInvoiceAutoCreate(null);
+    this.setManualCreateBillableItem(null);
+  }
+  public setEnableInvoiceAutoCreate(data) {
+    this.enableInvoiceAutoCreate = data;
+  }
+  public setManualCreateBillableItem(data) {
+    this.manualCreateBillableItem = data;
+  }
   public setCompany(data) {
     this.selectedCompany = data;
   }
@@ -43,6 +55,8 @@ export class ContractsFilter {
     this.selectedStatus = data.selectedStatus;
     this.selectedStartDate = data.selectedStartDate;
     this.selectedEndDate = data.selectedEndDate;
+    this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
+    this.manualCreateBillableItem = data.manualCreateBillableItem;
   }
   public getFilterList(list) {
     this.clearFilter();
@@ -53,6 +67,8 @@ export class ContractsFilter {
       && ((this.selectedStatus) ? item.status === this.selectedStatus.status : true)
       && ((this.selectedStartDate && this.selectedEndDate) ? item.getStartDateByMilliseconds() >= this.selectedStartDate && item.getStartDateByMilliseconds() <= this.selectedEndDate : true)
       && ((this.selectedType) ? item.type === this.selectedType.type && item.billType === this.selectedType.billType : true)
+      && ((this.enableInvoiceAutoCreate != null) ? item.enableInvoiceAutoCreate === this.enableInvoiceAutoCreate : true)
+      && ((this.manualCreateBillableItem != null) ? item.manualCreateBillableItem === this.manualCreateBillableItem : true)
   }
   onSort(field, list) {
     let index = this.filter.findIndex(item => item.field === field);

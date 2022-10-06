@@ -17,6 +17,15 @@
         [field]="'title'"
         (onSelectedItem)="onSelectType($event)"
     ></app-drop-down>
+    <app-drop-down
+        class="contracts-company-filter search-users "
+        #optionsDp
+        [placeholder]="'Select by option'"
+        [change]="false"
+        [list]="listsOptions"
+        [field]="'title'"
+        (onSelectedItem)="onSelectOption($event)"
+    ></app-drop-down>
     <app-multi-datepicker
         class="qt-input-block contracts-date-filter search-type"
         #datesDp

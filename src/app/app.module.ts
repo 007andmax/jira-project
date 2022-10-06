@@ -139,6 +139,7 @@ import { CannedResponsesAsideComponent } from './components/setting/ticket-setti
 import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { ReportSendEmailModule } from './components/reports/report-additional-actions/report-send-email/report-send-email.module';
 import { CompanyDropDownComponent } from './components/shared/company-drop-down/company-drop-down.component';
+import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 declare var $: any;
 
 /**
@@ -222,7 +223,8 @@ declare var $: any;
     SupportPageAddCategoryModule,
     LeftPanelSuperAdminModule,
     SupportPageAddSubCategoryModule,
-    ReportSendEmailModule
+    ReportSendEmailModule,
+    SupportPageEditCategoryModule
   ],
   entryComponents: [
     ModalQuoteComponent,

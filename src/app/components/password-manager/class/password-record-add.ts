@@ -10,7 +10,7 @@ export class PasswordRecordAdd {
     userName: string;
     password: string;
     authenticationKey: string;
-    key: string;
+    installationKey: string;
     link: any;
     url: string;
     code: string;
@@ -56,7 +56,7 @@ export class PasswordRecordAdd {
         };
         if (this.authenticationKey) data.authenticationKey = this.authenticationKey;
         if (this.template.name === "OFFICE_365_ACCOUNT" || !this.isDefaultType()) {
-            data.key = this.key;
+            data.installationKey = this.installationKey;
             data.url = this.url;
             data.ssid = this.ssid;
             data.username = this.userName;
