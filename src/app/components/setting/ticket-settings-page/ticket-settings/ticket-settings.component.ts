@@ -21,7 +21,7 @@ export class TicketSettingsComponent implements OnInit {
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
   @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
-  loading = false;
+  loading = true;
   submitted = false;
   used = false;
   ticketForm: FormGroup;
@@ -119,10 +119,9 @@ export class TicketSettingsComponent implements OnInit {
    * get actual number
    */
   getActualNumber() {
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('TICKET').subscribe(
       (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res) {
           this.ticketForm.patchValue({
             ticketCount: res.number
@@ -178,10 +177,8 @@ export class TicketSettingsComponent implements OnInit {
           : null
       }
     };
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.success('Saved Successfully');
         if (res && res.code === 409) {
           this.nextValid = res.message;
@@ -191,7 +188,6 @@ export class TicketSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error('Bad Request');
       }
     );

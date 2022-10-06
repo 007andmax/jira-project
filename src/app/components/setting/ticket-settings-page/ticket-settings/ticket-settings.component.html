@@ -1,4 +1,7 @@
-<div class="cmn-area in-ticks">
+<div
+    class="cmn-area in-ticks"
+    [hidden]="loading"
+>
     <div class="tab-pane__header">
         <div class="tab-pane__header-title">Ticket Settings</div>
     </div>
@@ -125,4 +128,10 @@
             <!-- </button> -->
         </form>
     </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>
