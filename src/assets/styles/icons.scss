@@ -316,6 +316,19 @@
   &__quicktech-logo { // TODO delete this icon on super admin page
     background-image: url("/assets/img/icons/quicktech-logo.svg");
   }
+  &__quicktech-logo {
+    &--gray {
+      background-color: $gray-400;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons/quicktech-logo.svg");
+      mask-image: url("/assets/img/icons/quicktech-logo.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+    }
+  }
   &__quicktech_partical_top {
     background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
   }
