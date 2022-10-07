@@ -77,7 +77,6 @@ import { PermissionEmailSettingService } from './components/setting/email-settin
 import { PermissionEmailTemplateService } from './components/setting/email-template/permission-email-template.service';
 import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
 import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
-import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
 import { PermissionsTechUsersService } from './components/setting/tech-users-settings/permissions-tech-users.service';
 import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
 import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
@@ -260,7 +259,6 @@ declare var $: any;
     PermissionProductsSettingsService,
     PermissionsTechUsersService,
     PermissionEmailSettingService,
-    PermissionTaxesSettingsService,
     PermissionTicketSettingsService,
     PermissionEmailTemplateService,
     PermissionAccountingSettingsService,

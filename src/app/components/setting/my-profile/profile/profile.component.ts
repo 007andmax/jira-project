@@ -326,6 +326,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // this.isCroppedImg = true;
 
     if (event.target.files && event.target.files[0]) {
+      const size = event.target.files[0].size;
+      if (size > 4194304) {
+        this.toastr.info('Maximum size of 4MB');
+        return;
+      }
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
 

@@ -12,6 +12,9 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { NgxMaskModule } from 'ngx-mask';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { TaxesSettingsComponent } from './taxes/taxes.component';
 
 
 
@@ -22,7 +25,8 @@ import { NgxMaskModule } from 'ngx-mask';
         AccountingYearComponent,
         AddGlNumberComponent,
         InvoiceSettingsComponent,
-        QuotesSettingsComponent
+        QuotesSettingsComponent,
+        TaxesSettingsComponent
     ],
     imports: [
         CommonModule,
@@ -33,6 +37,8 @@ import { NgxMaskModule } from 'ngx-mask';
         MatFormFieldModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),
+        DropDownModule,
+        TextAreaModule
     ],
 })
 export class AccoutingSettingsModule { }

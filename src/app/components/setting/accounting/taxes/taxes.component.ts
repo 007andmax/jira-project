@@ -4,10 +4,10 @@ import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
-import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
+import { ConfirmStateService } from "../../../shared/confirm/services/confirm-state.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_TAX } from "src/app/const/confirm";
-import { ConfirmComponent } from "../../shared/confirm/confirm.component";
+import { ConfirmComponent } from "../../../shared/confirm/confirm.component";
 import { Subscription } from "rxjs";
 declare var $: any;
 @Component({

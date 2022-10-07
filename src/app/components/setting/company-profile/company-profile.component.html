@@ -532,11 +532,12 @@
                                                     type="text"
                                                     class="form-input qt-input-prepend"
                                                     placeholder="Primary Phone Number"
-                                                    formControlName="primaryPhone"
+                                                    [value]="cProfileForm.value.primaryPhone"
                                                     prefix="+1"
                                                     mask="(000) 000-0000 Ext: 999999||000-000-0000"
                                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                                     [dropSpecialCharacters]="false"
+                                                    (blur)="onChangePrimaryPhone($event)"
                                                 >
                                             </div>
                                         </div>
@@ -568,12 +569,13 @@
                                                     <input
                                                         type="text"
                                                         class="form-input qt-input-prepend"
-                                                        formControlName="secondaryPhone"
+                                                        [value]="cProfileForm.value.secondaryPhone"
                                                         placeholder="Secondary Phone Number"
                                                         prefix="+1"
                                                         mask="(000) 000-0000 Ext: 999999||000-000-0000"
                                                         [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                                         [dropSpecialCharacters]="false"
+                                                        (blur)="onChangeSecondaryPhone($event)"
                                                     >
                                                 </div>
                                             </div>
@@ -616,6 +618,10 @@
                     </div>
                 </ng-template>
             </ngb-tab>
+
+
+
+
 
 
 

@@ -75,6 +75,10 @@
 
 
 
+
+
+
+
 <!-- Middle Wrapper -->
 <div class="page-container app-invoice-tickets-page-container">
     <div class="page-insider invoice-ticket">
@@ -148,6 +152,15 @@
             >
                 <ng-template ngbTabContent>
                     <accounting-year #accountingYear></accounting-year>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Taxes"
+                id="taxes"
+                *ngIf="getPermissions('VIEW_TAXES_SETTINGS')"
+            >
+                <ng-template ngbTabContent>
+                    <app-taxes-settings #taxesSettings></app-taxes-settings>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

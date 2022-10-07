@@ -8,7 +8,7 @@ import { ManageTagsComponent } from './components/setting/manage-tags/manage-tag
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
 import { TechUsersSettingsComponent } from './components/setting/tech-users-settings/tech-users-settings.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
-import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
+import { TaxesSettingsComponent } from './components/setting/accounting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-template/email-template.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
@@ -68,7 +68,6 @@ import { PermissionProductsSettingsService } from './components/setting/products
 import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
 import { PermissionsTechUsersService } from './components/setting/tech-users-settings/permissions-tech-users.service';
 import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
-import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
 import { PermissionEmailTemplateService } from './components/setting/email-template/permission-email-template.service';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
@@ -197,13 +196,6 @@ const routes: Routes = [
     path: ':company/setting/emailSetting',
     loadChildren: './components/setting/email-setting/email-setting.module#EmailSettingModule',
     canActivate: [PermissionEmailSettingService, PermissionTechUserService]
-
-  },
-  {
-    path: ':company/setting/taxes',
-    loadChildren: './components/setting/taxes/taxes-settings.module#TaxesSettingsModule',
-    canActivate: [PermissionTaxesSettingsService, PermissionTechUserService]
-
 
   },
   {

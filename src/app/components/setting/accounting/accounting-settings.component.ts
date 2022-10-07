@@ -14,6 +14,8 @@ import { InvoiceTicketsService } from './accounting-settings.service';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
 import { AccountingYearComponent } from './accounting-year/accounting-year.component';
+import { TaxesSettingsComponent } from './taxes/taxes.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 declare var $: any;
 @Component({
   selector: 'app-accounting-settings',
@@ -24,6 +26,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   @ViewChild('invoiceSettings') invoiceSettings: InvoiceSettingsComponent;
   @ViewChild('quotesSettings') quotesSettings: QuotesSettingsComponent;
   @ViewChild('accountingYear') accountingYear: AccountingYearComponent;
+  @ViewChild('taxesSettings') taxesSettings: TaxesSettingsComponent;
   loading = false;
   activeTab: string = "invoiceSettings";
   sub: Subscription = new Subscription();
@@ -34,6 +37,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private glNumberService: GlNumberService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
@@ -74,6 +78,9 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
         error => {
         }
       );
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   onSubmit() {
     if (this.invoiceSettings) this.invoiceSettings.onSubmit();

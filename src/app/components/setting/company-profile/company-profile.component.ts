@@ -246,6 +246,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  onChangePrimaryPhone(event) {
+    this.cProfileForm.patchValue({ primaryPhone: event.target.value });
+  }
+
+  onChangeSecondaryPhone(event) {
+    this.cProfileForm.patchValue({ secondaryPhone: event.target.value });
+  }
   /**
    * create company profile from group
    */
@@ -511,8 +518,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     console.log("event.target.files", event.target.files);
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
-      if (size > 200000) {
-        this.toaster.info('Maximum size of 2MB');
+      if (size > 4194304) {
+        this.toaster.info('Maximum size of 4MB');
         return;
       }
       console.log("1");
