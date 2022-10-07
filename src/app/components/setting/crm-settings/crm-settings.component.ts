@@ -25,7 +25,8 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
   }
   parseAddText() {
@@ -45,7 +46,8 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     this.activeTab = data['nextId'];
   }
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
   getSelectedCount() {
     if (this.activeTab === "companyIndustry") return this.crmStateService.getListIndustriesForRemove().length;
