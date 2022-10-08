@@ -4,48 +4,46 @@
     [ngClass]="{'active':user.selected}"
 >
     <div class="dropdown-link">
-        <div
-            class="default-user-avatar avatar-background-color-odd ng-scope"
-            *ngIf="!user.avatar"
+      <label
+        class="qt-checkbox"
+        [attr.for]="'user-' + user.id"
+      >
+        <input
+          [attr.id]="'user-' + user.id"
+          [checked]="user.selected"
+          type="checkbox"
         >
-            <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
-            <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
-        </div>
-        <div
-            class="default-user-avatar avatar-background-color-odd ng-scope"
-            *ngIf="user.avatar"
-        >
-            <img
-                ng-if="user.avatar"
-                class="img-circle avatar-26"
-                style="margin: 0;"
-                [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                alt="..."
-            >
-        </div>
-        <span class="qt-f-1 ellipsis">
-            <div
-                class="qt-fw-500 qt-color-dark ellipsis"
-                [textContent]="parseNameUser(user)"
-            >
-            </div>
-            <div
-                class="qt-color-gray-700-old qt-fs-12 qt-lh-133 ellipsis"
-                [textContent]="user.primaryEmail"
-            ></div>
-        </span>
-        <div class="d-f">
-            <label
-                class="qt-checkbox --circle"
-                [attr.for]="'user-' + user.id"
-            >
-                <input
-                    [attr.id]="'user-' + user.id"
-                    [checked]="user.selected"
-                    type="checkbox"
-                >
-                <span></span>
-            </label>
-        </div>
+        <span></span>
+      </label>
+      <div
+          class="default-user-avatar avatar-background-color-odd qt-ml-16 ng-scope"
+          *ngIf="!user.avatar"
+      >
+          <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
+          <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
+      </div>
+      <div
+          class="default-user-avatar avatar-background-color-odd qt-ml-16 ng-scope"
+          *ngIf="user.avatar"
+      >
+          <img
+              ng-if="user.avatar"
+              class="img-circle avatar-26"
+              style="margin: 0;"
+              [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+              alt="..."
+          >
+      </div>
+      <span class="qt-f-1 ellipsis">
+          <div
+              class="user-item__name qt-fw-600 qt-color-gray-900 ellipsis"
+              [textContent]="parseNameUser(user)"
+          >
+          </div>
+          <div
+              class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis"
+              [textContent]="user.primaryEmail"
+          ></div>
+      </span>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div
-    class="qt-aside-modern users-page__aside"
+    class="qt-aside-modern qt-aside-modern--page-settings users-page__aside"
     *ngIf="opened"
 >
     <div class="qt-aside-modern__header">
@@ -7,44 +7,39 @@
             class="qt-aside-modern__header-title"
             [textContent]="parseNameAside()"
         ></div>
-        <div
-            class="qt-aside-modern__header-close icon__close"
-            (click)="close()"
-        ></div>
     </div>
     <div class="qt-aside-modern__content">
         <div class="assign-ticket-content">
             <div class="assign-ticket-header">
-                <div class="clearfix">
-                    <div class="qt-df qt-ai-c qt-mb-16">
-                        <span class="qt-input-search qt-f-1">
-                            <input
-                                class="form-control"
-                                placeholder="Search Users"
-                                autocomplete="off"
-                                [(ngModel)]="word"
-                                (input)="onSearch($event)"
-                            >
-                            <span
-                                class="global-search__close icon__close-round"
-                                *ngIf="word.length > 0"
-                                (click)="clearWord()"
-                            ></span>
-                        </span>
-                        <button
-                            class="qt-btn --outline-blue qt-fs-0 qt-ml-8"
-                            (click)="toggleShowAddUser = !toggleShowAddUser"
-                        >
-                            Add User
-                        </button>
-                    </div>
-                    <marketing-email-users-add
-                        *ngIf="toggleShowAddUser"
-                        (onClose)="toggleShowAddUser = false"
-                        #addUserDP
-                        [marketingSubscription]="marketingSubscription"
-                    ></marketing-email-users-add>
-                </div>
+              <div class="qt-df qt-ai-c qt-mb-16">
+                <span class="qt-input-search__page-settings qt-f-1">
+                    <input
+                      class="qt-input-search__page-settings-input"
+                      placeholder="Search Users"
+                      autocomplete="off"
+                      [(ngModel)]="word"
+                      (input)="onSearch($event)"
+                    >
+                    <span
+                      class="global-search__close icon__close-round"
+                      *ngIf="word.length > 0"
+                      (click)="clearWord()"
+                    ></span>
+                </span>
+                <button
+                  class="qt-button --md --padding-md --gray qt-jc-c pointer qt-ml-12"
+                  (click)="toggleShowAddUser = !toggleShowAddUser"
+                >
+                  <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                  Add User
+                </button>
+              </div>
+              <marketing-email-users-add
+                *ngIf="toggleShowAddUser"
+                (onClose)="toggleShowAddUser = false"
+                #addUserDP
+                [marketingSubscription]="marketingSubscription"
+              ></marketing-email-users-add>
             </div>
             <div class="users-list custom-scroll">
                 <ng-template
@@ -81,27 +76,35 @@
                             </div>
                             <span class="qt-f-1 ellipsis">
                                 <div
-                                    class="qt-fw-500 qt-color-dark ellipsis"
+                                    class="user-item__name qt-fw-600 qt-color-gray-900 ellipsis"
                                     [textContent]="user.firstName + ' ' + user.lastName"
                                 >
                                 </div>
                                 <div
-                                    class="qt-color-gray-700-old qt-fs-12 qt-lh-133 ellipsis"
+                                    class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis"
                                     [textContent]="user.email"
                                 ></div>
                             </span>
-                            <a
-                                href="javascript:;"
+                            <div
                                 data-tooltip="Remove"
-                                class="remove"
+                                class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                                 (click)="remove(user)"
                             >
-                                <div class="icon__new-remove qt-sz-16 qt-bg-contain"></div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </ng-template>
             </div>
         </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+      <div class="qt-df qt-w100">
+        <button
+          (click)="close()"
+          class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+        >
+          Cancel
+        </button>
+        <button class="qt-button qt-jc-c qt-w100">Save</button></div>
     </div>
 </div>

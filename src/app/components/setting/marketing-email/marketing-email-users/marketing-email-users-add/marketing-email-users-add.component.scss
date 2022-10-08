@@ -3,7 +3,8 @@
 .scroll-pane {
   overflow: scroll;
   padding: 0;
-  height: calc(100% - 126px);
+  //height: calc(100% - 126px); // Todo check this input
+  height: calc(100% - 193px);
 }
 .custom-scroll {
   height: 100%;
@@ -12,12 +13,16 @@
   overflow: hidden;
   border-radius: 3px;
   z-index: 9999;
-  height: 481px;
   max-height: fit-content;
-  width: 288px;
+  //height: 481px; // Todo check this input
+  //width: 288px;
+  height: 504px;
+  width: 360px;
   position: absolute;
   top: 110px;
-  right: 103px;
+  //right: 103px;
+  left: 50%;
+  transform: translateX(-50%);
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   background: $white;
 }

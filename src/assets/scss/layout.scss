@@ -4,6 +4,130 @@
 
 body {
   &.page-settings {
+    .qt-input-search__page-settings {
+      position: relative;
+
+      &:before {
+        position: absolute;
+        content: '';
+        width: 20px;
+        height: 20px;
+        background: url("/assets/img/icons/search.svg") no-repeat center / contain;
+        left: 14px;
+        top: calc(50% - 10px);
+      }
+
+      &-input {
+        width: 100%;
+        max-width: 320px;
+        height: 36px;
+        border-radius: 6px;
+        color: #101828;
+        border: 1px solid #EAECF0;
+        box-shadow: inset 0px 1px 2px rgba(16, 24, 40, 0.05);
+        padding: 9.5px 10px 9.5px 42px;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+
+        &.--max-w100 {
+          max-width: 100%;
+        }
+
+        &:hover {
+          border-color: $gray-300;
+        }
+
+        &::placeholder {
+          color: $gray-400;
+          font-weight: 400;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $blue-light-600;
+        }
+      }
+    }
+
+    .tab-pane__table__circle-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      color: $white;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 13px;
+      line-height: 16px;
+      font-weight: 500;
+
+      &.--count {
+        font-size: 12px;
+        line-height: 15px;
+        color: $gray-600;
+        background: $gray-100;
+      }
+
+      &.--border {
+        border: 1.5px solid $white;
+      }
+
+      &.--ml-6 {
+        margin-left: -6px;
+      }
+    }
+
+    .assign-ticket-content--page-settings {
+      .assign-ticket-header {
+        padding: 32px 32px 16px;
+      }
+      .scroll-pane {
+        padding: 0 32px 16px;
+      }
+
+      .assign-ticket-header {
+        margin: 0;
+      }
+
+      .assign-ticket-content__header-title {
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      .qt-aside-modern__footer {
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+
+      .user-item {
+        outline: none;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 12px;
+        border: none;
+        color: #101828;
+        text-align: left;
+        transition: all 0.3s;
+        border-radius: 6px;
+        margin: 4px 0;
+        height: 55px;
+
+        &:hover {
+          background-color: $gray-50;
+        }
+
+        &.--selected,
+        &.--active {
+          background-color: $gray-50;
+        }
+      }
+    }
+
     .modal.manage-tags {
       .modal-content {
         padding: 32px;
@@ -156,6 +280,13 @@ body {
     .qt-aside-modern--page-settings {
       max-width: 480px;
 
+      .qt-aside-modern__header-title {
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 600;
+        color: $gray-900;
+      }
+
       .qt-aside-modern__header {
         background: transparent;
         height: 88px;
@@ -188,6 +319,23 @@ body {
           font-weight: 500;
           color: $gray-500;
           line-height: 16px;
+        }
+      }
+
+      .assign-ticket-content {
+        .user-item {
+          border: unset;
+          padding: 12px 0;
+
+          &__name {
+            font-size: 14px;
+            line-height: 17px;
+          }
+
+          &__email {
+            font-size: 13px;
+            line-height: 16px;
+          }
         }
       }
 
@@ -794,6 +942,24 @@ body {
       }
       &__action {
         flex: 0 0 20px;
+      }
+    }
+
+    .marketing-email-table {
+      &__subscription-type {
+        flex: 1 1 150px;
+        padding: 0 8px;
+      }
+      &__subscribed-users {
+        flex: 1 1 120px;
+        padding: 0 8px;
+      }
+      &__unsubscribed-users {
+        flex: 1 1 200px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 56px;
       }
     }
 

@@ -1,111 +1,127 @@
 <div class="cmn-area">
-    <div class="data-table-wrap">
-        <table
-            class="display dataTable"
-            style="width:100%"
-            [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+  <div
+    class="tab-pane__table"
+    [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+  >
+    <div class="tab-pane__table-header">
+      <div class="tab-pane__table-row">
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+          <label class="qt-checkbox">
+            <input
+              type="checkbox"
+            >
+            <span></span>
+          </label>
+        </div>
+        <div
+          class="tab-pane__table-cell marketing-email-table__subscription-type pointer"
+          (click)="onFilter('name')"
         >
-            <thead>
-                <tr>
-                    <th class="checkbox-header"></th>
-                    <th
-                        class="tax-name pointer"
-                        (click)="onFilter('name')"
-                    >
-                        Subscription Type
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th
-                        class="rate pointer"
-                        (click)="onFilter('subscribedCount')"
-                    >
-                        Subscribed  Users
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th
-                        class="rate pointer"
-                        (click)="onFilter('unsubscribedCount')"
-                    >
-                        unSubscribed  Users
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="!showPreloader">
-                <add-marketing-subscription-type
-                    *ngIf="showAdd"
-                    [marketingSubscriptionList]="marketingSubscriptionList"
-                    (onClose)="showAdd = false"
-                ></add-marketing-subscription-type>
-                <tr
-                    *ngFor="let item of marketingSubscriptionList; let i = index"
-                    appClickOtside
-                    [init]="item.isInitEdit"
-                    [ngClass]="'edit-crm-container-' + i"
-                    [class]="'.edit-crm-container-' + i"
-                    (onOutSide)="onEditSubscription(item,$event)"
-                >
-                    <td class="checkbox">
-                        <label class="qt-checkbox">
-                            <input
-                                type="checkbox"
-                                (change)="select($event,item)"
-                            >
-                            <span></span>
-                        </label>
-                    </td>
-                    <td
-                        class="tax-name edit-category-name"
-                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
-                    >
-                        <input
-                            type="text"
-                            class="form-input"
-                            placeholder="Enter Name Category"
-                            [(ngModel)]="item.name"
-                            appKeyUpEnter
-                            (onChange)="onEditSubscription(item,$event)"
-                            maxlength="30"
-                            (input)="item.onInitEdit(true);item.checkDublicate(marketingSubscriptionList)"
-                        >
-                        <mat-error
-                            class="qt-tooltip-error"
-                            *ngIf="item.disableUpdate"
-                        >
-                            This Industry is already occupied
-                        </mat-error>
-                    </td>
-                    <td class="rate ">
-                        <span
-                            class="pointer"
-                            (click)="openAside(item,true)"
-                            [textContent]="item.subscribedCount"
-                        ></span>
-                    </td>
-                    <td class="rate ">
-                        <span
-                            class="pointer"
-                            [textContent]="item.unsubscribedCount"
-                            (click)="openAside(item,false)"
-                        ></span>
-                    </td>
-                    <td class="action">
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Remove"
-                            class="remove"
-                            (click)="removeSubscription(item)"
-                        >
-                            <div class="icon__new-remove qt-sz-16 qt-bg-contain"></div>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-        </table>
+          Subscription Type
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div
+          class="tab-pane__table-cell marketing-email-table__subscribed-users pointer"
+          (click)="onFilter('subscribedCount')"
+        >
+          Subscribed  Users
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div
+          class="tab-pane__table-cell marketing-email-table__unsubscribed-users pointer"
+          (click)="onFilter('unsubscribedCount')"
+        >
+          Unsubscribed Users
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div class="tab-pane__table-cell marketing-email-table__action"></div>
+      </div>
     </div>
+    <div class="tab-pane__table-body" *ngIf="!showPreloader">
+      <add-marketing-subscription-type
+        *ngIf="showAdd"
+        [marketingSubscriptionList]="marketingSubscriptionList"
+        (onClose)="showAdd = false"
+      ></add-marketing-subscription-type>
+      <div
+        class="tab-pane__table-row"
+        *ngFor="let item of marketingSubscriptionList; let i = index"
+        appClickOtside
+        [init]="item.isInitEdit"
+        [ngClass]="'edit-crm-container-' + i"
+        [class]="'.edit-crm-container-' + i"
+        (onOutSide)="onEditSubscription(item,$event)"
+      >
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+          <label class="qt-checkbox">
+            <input
+              type="checkbox"
+              (change)="select($event,item)"
+            >
+            <span></span>
+          </label>
+        </div>
+        <div
+          class="tab-pane__table-cell marketing-email-table__subscription-type"
+          [ngClass]="{'--input-error' :  item.disableUpdate  }"
+        >
+          <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Category"
+            [(ngModel)]="item.name"
+            appKeyUpEnter
+            (onChange)="onEditSubscription(item,$event)"
+            maxlength="30"
+            (input)="item.onInitEdit(true);item.checkDublicate(marketingSubscriptionList)"
+          >
+          <mat-error
+            class="qt-tooltip-error"
+            *ngIf="item.disableUpdate"
+          >
+            This Industry is already occupied
+          </mat-error>
+        </div>
+        <div class="tab-pane__table-cell marketing-email-table__subscribed-users">
+          <div class="qt-df">
+            <div
+              style="background: rgb(124, 119, 203);"
+              class="tab-pane__table__circle-avatar"
+            >A</div>
+            <div
+              style="background: rgb(12, 222, 170);"
+              class="tab-pane__table__circle-avatar --border --ml-6"
+            >S</div>
+            <div
+              class="tab-pane__table__circle-avatar --count --border --ml-6 pointer"
+              (click)="openAside(item,true)"
+              [textContent]="item.subscribedCount"
+            ></div>
+          </div>
+        </div>
+        <div class="tab-pane__table-cell marketing-email-table__unsubscribed-users">
+          <span
+            class="pointer"
+            [textContent]="item.unsubscribedCount"
+            (click)="openAside(item,false)"
+          ></span>
+        </div>
+        <div class="tab-pane__table-cell marketing-email-table__action">
+          <div class="qt-df">
+            <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"></div>
+            <div
+              data-tooltip="Remove"
+              class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+              (click)="removeSubscription(item)"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="loading"
+      *ngIf="showPreloader"
+    ></div>
+  </div>
 </div>

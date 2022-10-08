@@ -24,7 +24,8 @@ export class MarketingEmailComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
   }
 
@@ -36,7 +37,8 @@ export class MarketingEmailComponent implements OnInit, OnDestroy {
     this.activeTab = data['nextId'];
   }
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
   getSelectedCount() {
     return this.marketingEmailStateService.getListSubscriptionTypeForRemove().length;
