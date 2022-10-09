@@ -836,6 +836,60 @@ body {
     }
 
     .tab-pane__table {
+      &__user-item-name {
+        font-size: 14px;
+        line-height: 17;
+      }
+      &__user-item-name {
+        font-size: 13px;
+        line-height: 16px;
+      }
+      &-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 500;
+        color: $white;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .user-dp {
+        position: relative;
+
+        &::after {
+          width: 10px;
+          height: 10px;
+          border: solid 2px $white;
+          background-color: transparent;
+          content: "";
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          border-radius: 50%;
+        }
+
+        &.online::after {
+          background-color: $green-600;
+        }
+
+        &.offline::after {
+          background-color: $gray-400;
+        }
+
+        &.away::after {
+          background-color: $yellow-600;
+        }
+      }
+
       &-header {
         color: $gray-500;
         font-weight: 500;
@@ -1044,6 +1098,33 @@ body {
       &__count {
         flex: 1 1 305px;
         padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 56px;
+      }
+    }
+
+    .active-users-table {
+      &__user-name {
+        flex: 1 0 245px;
+        padding: 0 8px;
+      }
+      &__role {
+        flex: 1 1 85px;
+        padding: 0 8px;
+      }
+      &__last-login {
+        flex: 1 1 75px;
+        padding: 0 8px;
+      }
+      &__authentication {
+        flex: 1 1 75px;
+        padding: 0 8px;
+      }
+      &__notify-for {
+        flex: 1 1 110px;
+        padding: 0 8px;
+        position: relative;
       }
       &__action {
         flex: 0 0 56px;

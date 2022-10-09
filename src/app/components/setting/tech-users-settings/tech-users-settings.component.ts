@@ -83,7 +83,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.techUsers = [];
 
@@ -813,7 +814,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
 
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
     this.sub.unsubscribe();
     // Do not forget to unsubscribe the event
   }
