@@ -629,6 +629,7 @@ body {
       height: 64px;
       border-radius: 50%;
       margin-right: 16px;
+      display: inline-block;
 
       img {
         border-radius: inherit;
@@ -1124,10 +1125,15 @@ body {
       &__notify-for {
         flex: 1 1 110px;
         padding: 0 8px;
+        min-width: 204px;
         position: relative;
       }
       &__action {
         flex: 0 0 56px;
+
+        &.--sm {
+          flex: 0 0 20px;
+        }
       }
     }
 
@@ -1170,6 +1176,13 @@ body {
     font-size: 14px;
     line-height: 17px;
     color: $gray-700;
+  }
+  .qt-input-line__email-notify-tech-users {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid $gray-200;
   }
 }
 

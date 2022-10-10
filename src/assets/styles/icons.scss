@@ -447,6 +447,20 @@
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
   }
+  &__email-send {
+    background-image: url("/assets/img/icons/email-send.svg");
+  }
+  &__menu-settings--gray-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__edit-blue {
     background-image: url("/assets/img/icons/edit-blue.svg");
   }
