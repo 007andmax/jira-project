@@ -1609,6 +1609,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.device_beta_resize=true;
   }
 
+  advanceSearchClosed(){
+    this.isAdvSearchOpen = false;
+  }
+
+  applyAdvanceSearch(){
+    
+  }
+
 }
 
 

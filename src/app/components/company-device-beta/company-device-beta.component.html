@@ -1229,19 +1229,71 @@
 
     </div> 
     <div [hidden]="!isAdvSearchOpen" class="qt-aside-modern advanced-search-modern">
-        <div class="company-device-aside__header">
-            <div class="qt-df qt-ai-c">
-                <div class="icon qt-sz-24 qt-mr-12" class="icon__search"></div>
-                <div class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title" [textContent]="'Advanced Search'">
-                </div>
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-info d-f ai-c">
+                <div class="qt-aside__title">Advance Search</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal icon__close"  
+                    (click)="advanceSearchClosed()"              
+                ></div>
             </div>
         </div>
-        <div class="company-device-aside__subheader">
-            
+        <div class="qt-aside-modern__content">
+            <div class="qt-input-block qt-input-line">                
+                <label for="add-device-company">Company</label>
+                <app-select-search id="advanceSearchDeviceCompany" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>                
+            </div> 
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Memory</label>
+                <app-select-search id="advanceSearchMemory" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>    
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Disk Space</label>
+                <app-select-search id="advanceSearchDiskSpace" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>    
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Free Space</label>
+                <app-select-search id="advanceSearchFreeSpace" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>    
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">OS Version</label>
+                <app-select-search id="advanceSearchOSVersion" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>    
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">HW Type</label>
+                <app-select-search id="advanceSearchHWType" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>  
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Manufacture</label>
+                <app-select-search id="advanceSearchManufacture" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>      
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Model</label>
+                <app-select-search id="advanceSearchModel" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>      
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-company">Software</label>
+                <app-select-search id="advanceSearchSoftware" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
+            </div>      
         </div>
-        <div class="company-device-aside__body">
-            
-        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df">
+                <button
+                    class="qt-button qt-mr-12"                                        
+                    (onClick)="applyAdvanceSearch()"
+                >
+                    <span>Apply</span>
+                </button>
+                <button
+                    class="qt-button --gray"
+                    (click)="advanceSearchClosed()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>        
     </div>
 </div>
 
