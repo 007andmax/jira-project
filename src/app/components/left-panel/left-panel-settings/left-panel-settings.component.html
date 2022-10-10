@@ -117,14 +117,6 @@
         Tags
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'taxes-component'}"
-        (click)="goToState('taxes-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAXES_SETTINGS')"
-    >
-        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Taxes
-    </li>
-    <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
         (click)="goToState('ticket-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"

@@ -8,7 +8,7 @@
     <div class="tab-pane__body">
         <form [formGroup]="profileForm">
             <div class="tab-pane__row">
-                <div class="tab-pane__subtitle">First Name</div>
+                <div class="tab-pane__subtitle">Name</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block qt-mr-24">
                         <input
@@ -135,7 +135,7 @@
                                 </a>
                             </label>
                         </div>
-                        <span class="dp-info-area">PNG, JPG or GIF (max. 2mb)</span>
+                        <span class="dp-info-area">PNG, JPG or GIF (max. 4mb)</span>
                     </div>
                 </div>
             </div>
@@ -195,11 +195,11 @@
                                 class="form-input qt-input-prepend"
                                 placeholder="Primary Phone Number"
                                 formControlName="primaryPhone"
-                                [validation]="true"
                                 prefix="+1"
                                 mask="(000) 000-0000 Ext: 999999||000-000-0000"
                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                 [dropSpecialCharacters]="false"
+                                (blur)="onChangePrimaryPhone($event)"
                             >
                         </div>
                     </div>
@@ -237,6 +237,7 @@
                                     mask="(000) 000-0000 Ext: 999999||000-000-0000"
                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                     [dropSpecialCharacters]="false"
+                                    (blur)="onChangeSecondaryPhone($event)"
                                 >
                             </div>
                         </div>

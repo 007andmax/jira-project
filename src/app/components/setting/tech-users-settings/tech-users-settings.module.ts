@@ -6,6 +6,8 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { TechUsersSettingsComponent } from './tech-users-settings.component';
 import { TechUsersSettingsRoutingModule } from './tech-users-routing.module';
+import { MatFormFieldModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -20,7 +22,9 @@ import { TechUsersSettingsRoutingModule } from './tech-users-routing.module';
         ImageCropperModule,
         TechUsersSettingsRoutingModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        MatFormFieldModule,
+        NgbModule,
     ],
 
 

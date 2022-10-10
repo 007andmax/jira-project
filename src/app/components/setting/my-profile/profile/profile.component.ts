@@ -169,6 +169,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.selectedJobTitle = data;
   }
 
+  onChangePrimaryPhone(event) {
+    this.profileForm.patchValue({ primaryPhone: event.target.value });
+  }
+
+  onChangeSecondaryPhone(event) {
+    this.profileForm.patchValue({ secondaryPhone: event.target.value });
+  }
+
   /**
    * auto complete address
    */

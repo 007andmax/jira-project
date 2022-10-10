@@ -473,7 +473,7 @@
                                                     </a>
                                                 </label>
                                             </div>
-                                            <span class="dp-info-area">Maximum size of 2MB. JPG, GIF, PNG</span>
+                                            <span class="dp-info-area">Maximum size of 4MB. JPG, GIF, PNG</span>
                                         </div>
                                     </div>
                                 </div>
@@ -532,13 +532,21 @@
                                                     type="text"
                                                     class="form-input qt-input-prepend"
                                                     placeholder="Primary Phone Number"
-                                                    [value]="cProfileForm.value.primaryPhone"
                                                     prefix="+1"
-                                                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                                                    [validation]="true"
+                                                    formControlName="primaryPhone"
+                                                    mask="(000) 000-0000||(000) 000-0000 Ext: 999999||(000) 000-0000 Ext: 000-000-0000"
                                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                                     [dropSpecialCharacters]="false"
                                                     (blur)="onChangePrimaryPhone($event)"
                                                 >
+                                                <div
+                                                    *ngIf="submitted && f.primaryPhone.errors"
+                                                    class="invalid-feedback"
+                                                >
+                                                    <div *ngIf="f.primaryPhone.errors.required">Company Name is required</div>
+                                                    <div *ngIf="f.primaryPhone.errors.minlength">Company name is too short.</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="qt-input-block qt-mt-16">
@@ -569,7 +577,7 @@
                                                     <input
                                                         type="text"
                                                         class="form-input qt-input-prepend"
-                                                        [value]="cProfileForm.value.secondaryPhone"
+                                                        formControlName="secondaryPhone"
                                                         placeholder="Secondary Phone Number"
                                                         prefix="+1"
                                                         mask="(000) 000-0000 Ext: 999999||000-000-0000"
@@ -618,6 +626,25 @@
                     </div>
                 </ng-template>
             </ngb-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

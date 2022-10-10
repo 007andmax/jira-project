@@ -33,8 +33,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   edit = false;
   currentCompanyId = null;
   isEmailIdUnique = true;
-  isArchived: boolean;
-  userlist: any[];
+
+  userlist: any = [];
   techUsers: any[] = [];
   techUserIdList: any[] = [];
   techRoles: any;
@@ -157,6 +157,9 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     return this.techUserForm.controls;
   }
 
+  setTab(data) {
+    //is.isArchived = (data['nextId'] === "activeUsers");
+  }
   /**
    * get role names
    */

@@ -62,6 +62,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     timeSettings: { workingDays: [], outliersSeconds: 0 },
     supportMailBox: ''
   };
+  primaryPhone: string = '';
+  secondaryPhone: string = '';
   weekDays = [
     'MONDAY',
     'TUESDAY',
@@ -247,10 +249,17 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   onChangePrimaryPhone(event) {
-    this.cProfileForm.patchValue({ primaryPhone: event.target.value });
+    console.log("event", event);
+    if (event.target.value.length >= 14) {
+      console.log("event.target.value.lenth", event.target.value.length);
+      // this.cProfileForm.patchValue({ primaryPhone: event.target.value });
+      this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
+    }
+    console.log("this.cProfileForm", this.cProfileForm);
   }
 
   onChangeSecondaryPhone(event) {
+    console.log("event", event);
     this.cProfileForm.patchValue({ secondaryPhone: event.target.value });
   }
   /**
@@ -263,7 +272,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
-      primaryPhone: new FormControl(''),
+      primaryPhone: new FormControl('', [Validators.required, Validators.minLength(13)]),
       primaryPhoneType: new FormControl(''),
       secondaryPhone: new FormControl(''),
       secondaryPhoneType: new FormControl(''),
@@ -380,6 +389,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? firstPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                this.primaryPhone = firstPhone.number;
                 console.log("firstPhone.number", firstPhone.number);
               }
               if (lastPhone) {
@@ -391,6 +401,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? lastPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                this.secondaryPhone = lastPhone.number;
               }
             }
           }
@@ -731,6 +742,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.submitted = true;
     // stop here if form is invalid
     console.log("this.cProfileForm", this.cProfileForm);
+    console.log("this.cProfileForm.value.primaryPhone", this.cProfileForm.value.primaryPhone);
     if (this.cProfileForm.invalid) {
       return;
     }
