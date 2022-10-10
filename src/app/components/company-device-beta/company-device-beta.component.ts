@@ -141,6 +141,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   IsCurrentConfigLoading: boolean = false;  
   devices:any[] = [];  
   todaysDate: any;
+  isAdvSearchOpen:boolean= false;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -1601,6 +1602,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
       return;
     }
     return asset.LastCheckInDate?  moment(asset.LastCheckInDate).fromNow() : '';
+  }
+
+  openAsideAdvSearch() {
+    this.isAdvSearchOpen = true;
+    this.device_beta_resize=true;
   }
 
 }

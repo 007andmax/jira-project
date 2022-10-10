@@ -34,6 +34,9 @@
               </mat-form-field>
             </div>
           </div>
+          <span>
+            <button class="qt-btn adv-search" (click)="openAsideAdvSearch()">Advanced Search</button>
+          </span>
           <span><button
             class="qt-btn --outline-blue"
             (click)="getAddDevice()"
@@ -474,7 +477,7 @@
             ></div>        
     </div>
 
-    <div
+<div
     class="company-devices-page__aside company-device-aside"
     *ngIf="open"
 >
@@ -1219,7 +1222,27 @@
             </div>
         </div>
     </div>
-    
+</div>
+
+<div class="company-device-page__aside advanced-search-aside" *ngIf="isAdvSearchOpen">
+    <div class="loading" *ngIf="Preloader2">
+
+    </div> 
+    <div [hidden]="!isAdvSearchOpen" class="qt-aside-modern advanced-search-modern">
+        <div class="company-device-aside__header">
+            <div class="qt-df qt-ai-c">
+                <div class="icon qt-sz-24 qt-mr-12" class="icon__search"></div>
+                <div class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title" [textContent]="'Advanced Search'">
+                </div>
+            </div>
+        </div>
+        <div class="company-device-aside__subheader">
+            
+        </div>
+        <div class="company-device-aside__body">
+            
+        </div>
+    </div>
 </div>
 
 <ng-template #templatePowersell>
