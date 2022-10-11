@@ -26,6 +26,7 @@ import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/im
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { ModalImageCropperStateService } from 'src/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 // import { ToastrService } from 'ngx-toastr';
 
@@ -62,6 +63,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild('search')
   public searchElementRef: ElementRef;
   sub: Subscription = new Subscription();
+  phoneTypes = [new TitleListType("Mobile", "MOBILE"),
+  new TitleListType("Office", "OFFICE"),
+  new TitleListType("Fax", "FAX")];
+  secondaryPhoneType;
+  primaryPhoneType;
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,
@@ -117,7 +123,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       jobTitleId: [
         (this.currentUser.jobTitle) ? this.currentUser.jobTitle.id : null
       ],
-      primaryPhone: [''],
+      primaryPhone: ['', [Validators.minLength(14)]],
       primaryPhoneType: ['MOBILE'],
       primaryId: [],
       secondaryPhone: [''],
@@ -170,11 +176,38 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onChangePrimaryPhone(event) {
-    this.profileForm.patchValue({ primaryPhone: event.target.value });
+    console.log("event", event);
+    if (event.target.value.length >= 16) {
+      console.log("event.target.value.lenth", event.target.value.length);
+      // this.profileForm.patchValue({ primaryPhone: event.target.value });
+      this.profileForm.controls['primaryPhone'].updateValueAndValidity()
+      this.profileForm.controls['primaryPhone'].setErrors(null);
+
+    }
+    console.log("this.profileForm", this.profileForm);
   }
 
   onChangeSecondaryPhone(event) {
-    this.profileForm.patchValue({ secondaryPhone: event.target.value });
+    console.log("event", event);
+    if (event.target.value.length == 2) {
+      this.profileForm.controls['secondaryPhone'].clearValidators();
+      this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
+      this.profileForm.controls['secondaryPhone'].setErrors(null);
+    } else if (event.target.value.length > 2 && event.target.value.length >= 16) {
+      this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
+      this.profileForm.controls['secondaryPhone'].setErrors(null);
+    } else if (event.target.value.length > 2 && event.target.value.length < 16) {
+      this.profileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
+      this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
+    }
+    console.log("event.target.value.lenth", event.target.value.length);
+    // this.profileForm.patchValue({ secondaryPhone: event.target.value });
+  }
+  onChangePrimaryPhoneType(data) {
+    this.primaryPhoneType = data;
+    this.profileForm.patchValue({
+      primaryPhoneType: data.type,
+    });
   }
 
   /**
@@ -274,6 +307,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     ? phone.typeNumber.toUpperCase()
                     : ''
                 });
+                if (phone.typeNumber) this.primaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
+
               }
 
               if (phone && phone.priority === 1) {
@@ -285,8 +320,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     ? phone.typeNumber.toUpperCase()
                     : ''
                 });
+                if (phone.typeNumber) this.secondaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
+
               }
             });
+            this.profileForm.controls['primaryPhone'].updateValueAndValidity()
+            this.profileForm.controls['primaryPhone'].setErrors(null);
+            this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
+            this.profileForm.controls['secondaryPhone'].setErrors(null);
           }
         })
       )
@@ -456,6 +497,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  onChangeSecondaryPhoneType(data) {
+    this.secondaryPhoneType = data;
+    this.profileForm.patchValue({
+      secondaryPhoneType: data.type,
+    });
+  }
+
 
   /**
    * re position avatar

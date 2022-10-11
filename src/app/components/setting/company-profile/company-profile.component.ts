@@ -27,6 +27,7 @@ import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/im
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 
 declare var google: any;
 declare var $: any;
@@ -100,6 +101,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   phone: string;
   idUploadFile: string;
+  phoneTypes = [new TitleListType("Mobile", "MOBILE"),
+  new TitleListType("Office", "OFFICE"),
+  new TitleListType("Fax", "FAX")];
+  secondaryPhoneType;
+  primaryPhoneType;
   constructor(
     private companyProfileService: CompanyProfileService,
     private toaster: ToastrService,
@@ -247,10 +253,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       });
     }
   }
-
+  onChangePrimaryPhoneType(data) {
+    this.primaryPhoneType = data;
+    this.cProfileForm.patchValue({
+      primaryPhoneType: data.type,
+    });
+  }
   onChangePrimaryPhone(event) {
     console.log("event", event);
-    if (event.target.value.length >= 17) {
+    if (event.target.value.length >= 16) {
       console.log("event.target.value.lenth", event.target.value.length);
       // this.cProfileForm.patchValue({ primaryPhone: event.target.value });
       this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
@@ -262,12 +273,19 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   onChangeSecondaryPhone(event) {
     console.log("event", event);
-
+    if (event.target.value.length == 2) {
+      this.cProfileForm.controls['secondaryPhone'].clearValidators();
+      this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+      this.cProfileForm.controls['secondaryPhone'].setErrors(null);
+    } else if (event.target.value.length > 2 && event.target.value.length >= 16) {
+      this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+      this.cProfileForm.controls['secondaryPhone'].setErrors(null);
+    } else if (event.target.value.length > 2 && event.target.value.length < 16) {
+      this.cProfileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
+      this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+    }
     console.log("event.target.value.lenth", event.target.value.length);
     // this.cProfileForm.patchValue({ secondaryPhone: event.target.value });
-    this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
-    this.cProfileForm.controls['secondaryPhone'].setErrors(null);
-
   }
   /**
    * create company profile from group
@@ -279,7 +297,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
-      primaryPhone: new FormControl('', [Validators.minLength(15)]),
+      primaryPhone: new FormControl('', [Validators.minLength(14)]),
       primaryPhoneType: new FormControl(''),
       secondaryPhone: new FormControl(''),
       secondaryPhoneType: new FormControl(''),
@@ -397,6 +415,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? firstPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                if (firstPhone.typeNumber) this.primaryPhoneType = this.phoneTypes.find(item => item.type == firstPhone.typeNumber.toUpperCase());
                 this.primaryPhone = firstPhone.number;
                 console.log("firstPhone.number", firstPhone.number);
               }
@@ -409,7 +428,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? lastPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                if (lastPhone.typeNumber) this.secondaryPhoneType = this.phoneTypes.find(item => item.type == lastPhone.typeNumber.toUpperCase());
                 this.secondaryPhone = lastPhone.number;
+                this.cProfileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
               }
             }
             this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
@@ -425,6 +446,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     } catch (error) {
       this.loading = false;
     }
+  }
+  onChangeSecondaryPhoneType(data) {
+    this.secondaryPhoneType = data;
+    this.cProfileForm.patchValue({
+      secondaryPhoneType: data.type,
+    });
   }
   checkValidateDomain() {
     var regex = /^[a-zA-Z\d\-]+$/;

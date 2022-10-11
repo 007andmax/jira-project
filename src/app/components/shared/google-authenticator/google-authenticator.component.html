@@ -213,13 +213,13 @@
                 class="qt-button --gray qt-w100 qt-jc-c qt-mr-12"
                 (click)="cancel()"
             >
-                Close
+                Cancel
             </button>
             <button
                 class="qt-button qt-w100 qt-jc-c"
                 (click)="next()"
+                [textContent]="tab === 'STEP-3' ? 'Submit' : 'Next'"
             >
-                Next
             </button>
         </div>
     </div>

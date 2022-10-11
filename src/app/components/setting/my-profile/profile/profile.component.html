@@ -182,25 +182,35 @@
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block qt-input-block-100">
                         <div class="qt-df">
-                            <select
-                                class="cmn-select form-input qt-input-prefix"
-                                formControlName="primaryPhoneType"
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="phoneTypes"
+                                [editItem]="primaryPhoneType"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                [widthInput]="'110px'"
+                                (onSelectedItem)="onChangePrimaryPhoneType($event)"
                             >
-                                <option value="MOBILE">mobile</option>
-                                <option value="OFFICE">office</option>
-                                <option value="FAX">fax</option>
-                            </select>
+                            </app-drop-down>
                             <input
                                 type="text"
                                 class="form-input qt-input-prepend"
                                 placeholder="Primary Phone Number"
-                                formControlName="primaryPhone"
                                 prefix="+1"
+                                [validation]="true"
+                                formControlName="primaryPhone"
                                 mask="(000) 000-0000 Ext: 999999||000-000-0000"
                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                 [dropSpecialCharacters]="false"
                                 (blur)="onChangePrimaryPhone($event)"
                             >
+                            <div
+                                *ngIf="submitted && f.primaryPhone.errors"
+                                class="invalid-feedback"
+                            >
+                                <div *ngIf="f.primaryPhone.errors.minlength">Enter a valid phone number.</div>
+                            </div>
                         </div>
                     </div>
                     <div class="qt-input-block-100 qt-mt-16">
@@ -220,17 +230,21 @@
                     >
                         <div class="qt-input-block qt-input-block-100">
                             <div class="qt-df">
-                                <select
-                                    class="cmn-select form-input qt-input-prefix"
-                                    formControlName="secondaryPhoneType"
+                                <app-drop-down
+                                    [class]="['qt-select-input-40']"
+                                    [list]="phoneTypes"
+                                    [editItem]="secondaryPhoneType"
+                                    [field]="'title'"
+                                    [sort]="false"
+                                    [isBlockClear]="true"
+                                    [widthInput]="'110px'"
+                                    (onSelectedItem)="onChangeSecondaryPhoneType($event)"
                                 >
-                                    <option value="MOBILE">mobile</option>
-                                    <option value="OFFICE">office</option>
-                                    <option value="FAX">fax</option>
-                                </select>
+                                </app-drop-down>
                                 <input
                                     type="text"
                                     class="form-input qt-input-prepend"
+                                    [validation]="true"
                                     formControlName="secondaryPhone"
                                     placeholder="Secondary Phone Number"
                                     prefix="+1"
@@ -239,6 +253,12 @@
                                     [dropSpecialCharacters]="false"
                                     (blur)="onChangeSecondaryPhone($event)"
                                 >
+                                <div
+                                    *ngIf="submitted && f.secondaryPhone.errors"
+                                    class="invalid-feedback"
+                                >
+                                    <div *ngIf="f.secondaryPhone.errors.minlength">Enter a valid phone number.</div>
+                                </div>
                             </div>
                         </div>
                         <div class="qt-input-block-100 qt-mt-16">
