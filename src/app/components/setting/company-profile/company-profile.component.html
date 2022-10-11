@@ -535,7 +535,7 @@
                                                     prefix="+1"
                                                     [validation]="true"
                                                     formControlName="primaryPhone"
-                                                    mask="(000) 000-0000||(000) 000-0000 Ext: 999999||(000) 000-0000 Ext: 000-000-0000"
+                                                    mask=" (000) 000-0000 Ext: 999999||000-000-0000"
                                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                                     [dropSpecialCharacters]="false"
                                                     (blur)="onChangePrimaryPhone($event)"
@@ -626,6 +626,7 @@
                     </div>
                 </ng-template>
             </ngb-tab>
+
 
 
 

@@ -254,6 +254,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       console.log("event.target.value.lenth", event.target.value.length);
       // this.cProfileForm.patchValue({ primaryPhone: event.target.value });
       this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
+      this.cProfileForm.controls['primaryPhone'].setErrors(null);
     }
     console.log("this.cProfileForm", this.cProfileForm);
   }
@@ -272,7 +273,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
-      primaryPhone: new FormControl('', [Validators.required, Validators.minLength(13)]),
+      primaryPhone: new FormControl('', [Validators.minLength(13)]),
       primaryPhoneType: new FormControl(''),
       secondaryPhone: new FormControl(''),
       secondaryPhoneType: new FormControl(''),
