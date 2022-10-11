@@ -250,18 +250,24 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   onChangePrimaryPhone(event) {
     console.log("event", event);
-    if (event.target.value.length >= 14) {
+    if (event.target.value.length >= 17) {
       console.log("event.target.value.lenth", event.target.value.length);
       // this.cProfileForm.patchValue({ primaryPhone: event.target.value });
       this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
       this.cProfileForm.controls['primaryPhone'].setErrors(null);
+
     }
     console.log("this.cProfileForm", this.cProfileForm);
   }
 
   onChangeSecondaryPhone(event) {
     console.log("event", event);
-    this.cProfileForm.patchValue({ secondaryPhone: event.target.value });
+
+    console.log("event.target.value.lenth", event.target.value.length);
+    // this.cProfileForm.patchValue({ secondaryPhone: event.target.value });
+    this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+    this.cProfileForm.controls['secondaryPhone'].setErrors(null);
+
   }
   /**
    * create company profile from group
@@ -273,7 +279,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
-      primaryPhone: new FormControl('', [Validators.minLength(13)]),
+      primaryPhone: new FormControl('', [Validators.minLength(15)]),
       primaryPhoneType: new FormControl(''),
       secondaryPhone: new FormControl(''),
       secondaryPhoneType: new FormControl(''),
@@ -281,6 +287,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       address: new FormControl(''),
       postalCode: new FormControl(''),
       locale: new FormControl('', Validators.required),
+      secondaryId: new FormControl(''),
     });
   }
 
@@ -405,6 +412,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 this.secondaryPhone = lastPhone.number;
               }
             }
+            this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
+            this.cProfileForm.controls['primaryPhone'].setErrors(null);
+            this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+            this.cProfileForm.controls['secondaryPhone'].setErrors(null);
           }
         },
         error => {

@@ -544,8 +544,7 @@
                                                     *ngIf="submitted && f.primaryPhone.errors"
                                                     class="invalid-feedback"
                                                 >
-                                                    <div *ngIf="f.primaryPhone.errors.required">Company Name is required</div>
-                                                    <div *ngIf="f.primaryPhone.errors.minlength">Company name is too short.</div>
+                                                    <div *ngIf="f.primaryPhone.errors.minlength">Enter a valid phone number.</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -577,6 +576,7 @@
                                                     <input
                                                         type="text"
                                                         class="form-input qt-input-prepend"
+                                                        [validation]="true"
                                                         formControlName="secondaryPhone"
                                                         placeholder="Secondary Phone Number"
                                                         prefix="+1"
@@ -626,6 +626,11 @@
                     </div>
                 </ng-template>
             </ngb-tab>
+
+
+
+
+
 
 
 
