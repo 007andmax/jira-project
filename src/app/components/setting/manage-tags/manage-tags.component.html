@@ -539,7 +539,7 @@
                                         [ngForOf]="companyTags"
                                         [ngForTrackBy]="trackById"
                                     >
-                                        <div class="tab-pane__row --padding-md">
+                                        <div class="tab-pane__table-row">
                                             <div class="tab-pane__table-cell manage-tags-table__custom-tags">{{ company.word | titlecase }}</div>
                                             <div class="tab-pane__table-cell manage-tags-table__count">{{ company.usedCounter }}</div>
                                             <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
@@ -658,7 +658,7 @@
                         class="tab-pane__table dataTable"
                       >
                         <div class="tab-pane__table-header">
-                          <div class="tab-pane__table-row --padding-md">
+                          <div class="tab-pane__table-row">
                             <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
                               <span>Custom Tags</span>
                               <div class="qt-table-modern__sorting--new"></div>
@@ -672,7 +672,7 @@
                         </div>
                         <div class="tab-pane__table-body">
                           <div
-                            class="tab-pane__row --padding-md"
+                            class="tab-pane__table-row"
                             *ngFor="
                             let ticket of ticketTags | tag: searchTag;
                             let i = index;

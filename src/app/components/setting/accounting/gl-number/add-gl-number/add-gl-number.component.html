@@ -55,14 +55,21 @@
   [class]="'.add-gl-container'"
   (onOutSide)="onAddGL()"
 >
-  <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
+  <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+    <label  class="qt-checkbox">
+      <input
+        type="checkbox"
+      >
+      <span></span>
+    </label>
+  </div>
   <div
     class="tab-pane__table-cell gl-numbers__table-account-number"
     [ngClass]="{'--input-error' : !validateShort || disableCreate  }"
   >
     <input
       type="text"
-      class="form-input"
+      class="form-input --editable"
       placeholder="Enter GL Number"
       [(ngModel)]="addGl.glNumber"
       (input)="resetValidate();checkDublicate()"
@@ -85,7 +92,7 @@
   <div class="tab-pane__table-cell gl-numbers__table-description">
     <input
       type="text"
-      class="form-input"
+      class="form-input --editable"
       placeholder="Enter Description"
       [(ngModel)]="addGl.description"
       (keyup)="onKeyUp($event)"

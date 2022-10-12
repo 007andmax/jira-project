@@ -142,7 +142,7 @@
           >
             <input
               type="text"
-              class="form-input"
+              class="form-input --editable"
               placeholder="Enter GL Number"
               [(ngModel)]="gl.glNumber"
               appKeyUpEnter
@@ -160,7 +160,7 @@
           <div class="tab-pane__table-cell gl-numbers__table-description">
             <input
               type="text"
-              class="form-input"
+              class="form-input --editable"
               placeholder="Enter Description"
               [(ngModel)]="gl.description"
               (input)="gl.onInitEdit(true)"
