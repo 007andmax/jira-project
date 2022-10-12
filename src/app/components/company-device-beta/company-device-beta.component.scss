@@ -641,3 +641,26 @@ table.qt-table-modern tbody tr td {
   width: 85%;
   margin: 0 auto !important;
 }
+
+.qt-btn {  
+  &.--outline-gray {
+    background-color: #f4f6f8 !important;  
+    top:28px;
+  }
+}
+
+.qt-input-advanceSearch{
+  top: 28px;
+  left: 10px;
+}
+
+.advancedSearch-addbutton{    
+  background-image: url(/assets/img/icons/add-grey.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-position: center;  
+}

@@ -1056,4 +1056,13 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
+  public getSoftwareListByTechCompanyGuid(guid) {
+    return this.http
+      .get(`${this.apiAgent}agent/SoftwareItem/techcompany/${guid}`, {        
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
 }

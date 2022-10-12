@@ -49,6 +49,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   kafkaMessage: any;
   companyId: any;
   hardwareTypes: any[] = [];
+
   powershellmsg: string = "";
   temporaryCommand: string = "";
   assetId: number;
@@ -142,6 +143,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
   devices:any[] = [];  
   todaysDate: any;
   isAdvSearchOpen:boolean= false;
+  advanceSearchHardware = [];
+  advanceSearchModel = [];
+  advanceSearchManufacturer = [];
+  advanceSearchSoftwareItem = [];
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -257,7 +262,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  AssetDetail() {           
+  AssetDetail() {              
     this.operatingSystem = [];
     if (this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -265,7 +270,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {                       
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {                           
       if (!resp || resp.length === 0) {
         this.showPreloader = false;
         this.assetList = [];
@@ -276,12 +281,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
         return;
       }     
       if(this.devices.length>0)
-      {
+      {        
         this.assetList = resp;
         this.asset = resp[0];
         this.getDevices(this.assetList);
         this.operatingSystemWindow(resp[0].ID)
-        this.HardwareTypeList(resp[0].TechCompanyGuid);
+        this.HardwareTypeList(resp[0].TechCompanyGuid);   
+        this.getManufacturers(resp[0].TechCompanyGuid);
+        this.getModels(resp[0].TechCompanyGuid);  
+        this.getSoftwarItem(resp[0].TechCompanyGuid);   
         this.assetList.forEach((element, index) => {
           //element.online = false;
           this.assetList[index].Title =
@@ -379,7 +387,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   HardwareTypeList(TechCompanyGuid: any) {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {
+      .subscribe((resp) => {         
+        this.advanceSearchHardware = resp.filter(x=>x.IsActive);    
         this.hardwareTypes = resp;
         this.assetList.forEach((element, index) => {
           var ht = this.hardwareTypes.find(
@@ -996,7 +1005,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
       return;
     }
     this.agentService.getManufactures(TechCompanyGuid)
-      .subscribe((resp) => {
+      .subscribe((resp) => {        
+        this.advanceSearchManufacturer = resp.filter(x=>x.IsActive);        
         this.manufactureList = resp;
         if (this.asset) {
           this.selectManufacture(this.asset.ManufacturerId);
@@ -1035,7 +1045,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
     this.agentService
       .getModels(TechCompanyGuid)
-      .subscribe((resp) => {
+      .subscribe((resp) => {        
+        this.advanceSearchModel = resp.filter(x=>x.IsActive);
         this.selectModelList = resp;
         if (this.asset) {
           this.selectModel(this.asset.ModelID);
@@ -1615,6 +1626,21 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   applyAdvanceSearch(){
     
+  }
+
+  
+  getSoftwarItem(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getSoftwarItem(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getSoftwareListByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {                
+        this.advanceSearchSoftwareItem = resp.filter(x=>x.IsActive);                
+      });
   }
 
 }

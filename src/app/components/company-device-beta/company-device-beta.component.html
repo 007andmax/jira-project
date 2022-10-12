@@ -1240,43 +1240,173 @@
                 ></div>
             </div>
         </div>
-        <div class="qt-aside-modern__content">
-            <div class="qt-input-block qt-input-line">                
-                <label for="add-device-company">Company</label>
-                <app-select-search id="advanceSearchDeviceCompany" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>                
-            </div> 
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">Memory</label>
-                <app-select-search id="advanceSearchMemory" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>    
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">Disk Space</label>
-                <app-select-search id="advanceSearchDiskSpace" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>    
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">Free Space</label>
-                <app-select-search id="advanceSearchFreeSpace" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>    
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">OS Version</label>
-                <app-select-search id="advanceSearchOSVersion" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>    
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">HW Type</label>
-                <app-select-search id="advanceSearchHWType" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>  
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">Manufacture</label>
-                <app-select-search id="advanceSearchManufacture" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>      
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">Model</label>
-                <app-select-search id="advanceSearchModel" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>      
-            <div class="qt-input-block qt-input-line">
-                <label for="add-device-company">Software</label>
-                <app-select-search id="advanceSearchSoftware" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"></app-select-search>
-            </div>      
+        <div class="qt-aside-modern__content">            
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w90">                    
+                   <app-drop-down                    
+                    [title]="'Company'"
+                    [placeholder]="'Select Company'"
+                    [list]="companies"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w10"> 
+                    <button class="qt-btn --outline-gray qt-ml-8">
+                        <span class="advancedSearch-addbutton"></span>
+                    </button>                   
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w30">                    
+                   <app-drop-down                    
+                    [title]="'Memory'"
+                    [placeholder]="'Select Memory'"
+                    [list]="companies"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w70">                     
+                    <div class="qt-input-block qt-input-advanceSearch">                        
+                        <input
+                            type="number"                            
+                            placeholder="0"
+                        >
+                    </div>                     
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w30">                    
+                   <app-drop-down                    
+                    [title]="'Disk Space'"
+                    [placeholder]="'Select Disk Space'"
+                    [list]="companies"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w70">                     
+                    <div class="qt-input-block qt-input-advanceSearch">                        
+                        <input
+                            type="number"                            
+                            placeholder="0"
+                        >
+                    </div>                                         
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w30">                    
+                   <app-drop-down                    
+                    [title]="'Free Space'"
+                    [placeholder]="'Select Free Space'"
+                    [list]="companies"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w70"> 
+                    <div class="qt-input-block qt-input-advanceSearch">                        
+                        <input
+                            type="number"                            
+                            placeholder="0"
+                        >
+                    </div>                       
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w30">                    
+                   <app-drop-down                    
+                    [title]="'OS Version'"
+                    [placeholder]="'Select OS Version'"
+                    [list]="companies"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w70"> 
+                    <app-drop-down                                           
+                    [placeholder]="'Select'"
+                    [list]="companies"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"                                     
+                ></app-drop-down>                 
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w90">                    
+                   <app-drop-down                    
+                    [title]="'HW Type'"
+                    [placeholder]="'Select HW Type'"
+                    [list]="advanceSearchHardware"
+                    [field]="'Name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w10"> 
+                    <button class="qt-btn --outline-gray qt-ml-8">
+                        <span class="advancedSearch-addbutton"></span>
+                    </button>                   
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w90">                    
+                   <app-drop-down                    
+                    [title]="'Manufacturer'"
+                    [placeholder]="'Select Manufacturer'"
+                    [list]="advanceSearchManufacturer"
+                    [field]="'Name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w10"> 
+                    <button class="qt-btn --outline-gray qt-ml-8">
+                        <span class="advancedSearch-addbutton"></span>
+                    </button>                   
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w90">                    
+                   <app-drop-down                    
+                    [title]="'Model'"
+                    [placeholder]="'Select Model'"
+                    [list]="advanceSearchModel"
+                    [field]="'Name'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w10"> 
+                    <button class="qt-btn --outline-gray qt-ml-8">
+                        <span class="advancedSearch-addbutton"></span>
+                    </button>                   
+                </div>
+            </div>
+            <div class="qt-df qt-mb-24">
+                <div class="qt-w90">                    
+                   <app-drop-down                    
+                    [title]="'Software'"
+                    [placeholder]="'Select Software'"
+                    [list]="advanceSearchSoftwareItem"
+                    [field]="'DisplayName'"
+                    [search]="true"
+                    [change]="true"                    
+                ></app-drop-down>
+                </div>
+                <div class="qt-w10"> 
+                    <button class="qt-btn --outline-gray qt-ml-8">
+                        <span class="advancedSearch-addbutton"></span>
+                    </button>                   
+                </div>
+            </div>
         </div>
         <div class="qt-aside-modern__footer">
             <div class="qt-df">
