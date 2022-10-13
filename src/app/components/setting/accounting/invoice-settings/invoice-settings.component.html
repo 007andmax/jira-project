@@ -1,5 +1,5 @@
 <div
-    class="cmn-area invoice"
+    class="cmn-area invoice-settings"
     [hidden]="loading"
 >
     <div class="tab-pane__header">
@@ -253,7 +253,7 @@
                     <div class="qt-input-block qt-input-block-100">
                         <div class="qt-df">
                             <app-drop-down
-                                [class]="['qt-select-input-40']"
+                                [class]="['qt-select-input-40 qt-input-prefix-drop-down']"
                                 [list]="phoneTypes"
                                 [editItem]="primaryPhoneType"
                                 [field]="'title'"
@@ -296,7 +296,7 @@
                             *ngIf="isAddPhone && invoiceForm.value.enableInvoiceContact"
                         >
                             <app-drop-down
-                                [class]="['qt-select-input-40']"
+                                [class]="['qt-select-input-40 qt-input-prefix-drop-down']"
                                 [list]="phoneTypes"
                                 [editItem]="secondaryPhoneType"
                                 [field]="'title'"
@@ -330,26 +330,9 @@
                             (click)="onAddPhone()"
                         >
                             <span class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8"></span>
-                            Remove
+                            <span class="qt-color-red-600">Remove</span>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <div
@@ -369,7 +352,7 @@
                                 (change)="changeEnableContactSending($event)"
                             >
                             <span></span>
-                            <div class="qt-ml-8">
+                            <div class="qt-ml-8 qt-color-gray-700">
                                 Send copy of all invoices to this address
                             </div>
                         </label>

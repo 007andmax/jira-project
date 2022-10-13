@@ -825,6 +825,13 @@ body {
       padding: 32px;
       text-align: center;
     }
+    .activity-history__table {
+      &-header {
+        .tab-pane__row {
+          border-bottom: 1px solid $gray-200;
+        }
+      }
+    }
     .activity-history__table-header {
       .tab-pane__body {
         .activity-history__cell {
@@ -839,13 +846,33 @@ body {
       .tab-pane__row {
         padding-top: 16px;
         padding-bottom: 16px;
+        align-items: center;
       }
     }
     .activity-history__cell-access-detail {
-      flex: 1 1 502px;
+      flex: 1 1 251px;
     }
     .activity-history__cell-last-seen {
-      flex: 1 1 370px;
+      flex: 1 1 185px;
+    }
+    .activity-history__cell-access-detail,
+    .activity-history__cell-last-seen {
+      font-size: 14px;
+      line-height: 17px;
+    }
+    .activity-history__table-header {
+      .activity-history__cell-access-detail,
+      .activity-history__cell-last-seen {
+        font-weight: 500;
+        color: $gray-500;
+      }
+    }
+    .activity-history__table-body {
+      .activity-history__cell-access-detail,
+      .activity-history__cell-last-seen {
+        color: $gray-900;
+        align-items: center;
+      }
     }
     .activity-history__cell-menu {
       flex: 0 0 52px;
@@ -1047,6 +1074,14 @@ body {
       &-checkboxes {
         flex: 0 0 24px;
         padding-right: 0;
+      }
+    }
+
+    .invoice-settings {
+      .qt-checkbox {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
       }
     }
 
@@ -1267,7 +1302,8 @@ body {
   .qt-input-help-text {
     font-size: 14px;
     line-height: 17px;
-    color: $gray-700;
+    //color: $gray-700;
+    color: $gray-600;
   }
   .qt-input-line__email-notify-tech-users {
     font-size: 14px;

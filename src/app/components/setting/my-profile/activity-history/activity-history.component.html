@@ -129,17 +129,14 @@
                         {{device.current ? 'now' : (device.lastAccessDate | date) }}
                     </div>
                     <div class="activity-history__cell activity-history__cell-menu qt-df">
-                        <a
-                            href="javascript:;"
+                        <div class="icon__terminate qt-sz-20 qt-bg-contain pointer qt-mr-16"></div>
+                        <div
+                            class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                             (click)="closeSession(device)"
                             placement="top"
                             ngbTooltip="Remove"
                         >
-                            <img
-                                src="html/assets/img/icons/new-remove.svg"
-                                alt="Remove"
-                            >
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

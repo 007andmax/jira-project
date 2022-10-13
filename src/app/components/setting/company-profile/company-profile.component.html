@@ -469,7 +469,7 @@
                                                         restore-default-button
                                                         class="qt-button --gray"
                                                     >
-                                                        Remove Photo
+                                                        <span class="qt-color-red-600">Remove Photo</span>
                                                     </a>
                                                 </label>
                                             </div>
@@ -521,7 +521,7 @@
                                         <div class="qt-input-block qt-input-block-100">
                                             <div class="qt-df">
                                                 <app-drop-down
-                                                    [class]="['qt-select-input-40']"
+                                                    [class]="['qt-select-input-40 qt-input-prefix-drop-down']"
                                                     [list]="phoneTypes"
                                                     [editItem]="primaryPhoneType"
                                                     [field]="'title'"
@@ -569,7 +569,7 @@
                                             <div class="qt-input-block qt-input-block-100 qt-mt-16">
                                                 <div class="qt-df">
                                                     <app-drop-down
-                                                        [class]="['qt-select-input-40']"
+                                                        [class]="['qt-select-input-40 qt-input-prefix-drop-down']"
                                                         [list]="phoneTypes"
                                                         [editItem]="secondaryPhoneType"
                                                         [field]="'title'"
@@ -609,7 +609,7 @@
                                                     (click)="onAddPhone()"
                                                 >
                                                     <div class="icon__new-remove-red qt-sz-20 qt-bg-contain qt-mr-8"></div>
-                                                    Remove
+                                                    <span class="qt-color-red-600">Remove</span>
                                                 </div>
                                             </div>
                                         </div>
