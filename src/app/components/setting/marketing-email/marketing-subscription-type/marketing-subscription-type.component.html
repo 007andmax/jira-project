@@ -67,7 +67,7 @@
         >
           <input
             type="text"
-            class="form-input"
+            class="form-input --editable"
             placeholder="Enter Name Category"
             [(ngModel)]="item.name"
             appKeyUpEnter
@@ -100,11 +100,21 @@
           </div>
         </div>
         <div class="tab-pane__table-cell marketing-email-table__unsubscribed-users">
-          <span
-            class="pointer"
-            [textContent]="item.unsubscribedCount"
-            (click)="openAside(item,false)"
-          ></span>
+          <div class="qt-df">
+            <div
+              style="background: rgb(124, 119, 203);"
+              class="tab-pane__table__circle-avatar"
+            >A</div>
+            <div
+              style="background: rgb(12, 222, 170);"
+              class="tab-pane__table__circle-avatar --border --ml-6"
+            >S</div>
+            <span
+              class="tab-pane__table__circle-avatar --count --border --ml-6 pointer"
+              [textContent]="item.unsubscribedCount"
+              (click)="openAside(item,false)"
+            ></span>
+          </div>
         </div>
         <div class="tab-pane__table-cell marketing-email-table__action">
           <div class="qt-df">

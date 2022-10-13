@@ -39,7 +39,8 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.taxes = [];
     this.taxForm = this.formBuilder.group({
@@ -68,7 +69,8 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
     this.sub.unsubscribe();
   }
 

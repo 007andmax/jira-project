@@ -214,44 +214,84 @@ body {
         margin: 16px 32px;
       }
 
-      .modal-content {
-        &.--tooltip {
+      //.modal-content {
+      //  &.--tooltip {
+      //    position: absolute;
+      //    right: 0;
+      //    top: 50px;
+      //    background-color: #ffffff;
+      //    z-index: 1;
+      //    box-shadow: 0 2px 20px 10px rgba(0,0,0,.05);
+      //    border: solid 1px #edf2f6;
+      //    padding: 32px;
+      //    width: 504px;
+      //    display: none;
+      //    &::before {
+      //      bottom: 100%;
+      //      left: auto;
+      //      right: 20px;
+      //      border: solid transparent;
+      //      content: " ";
+      //      height: 0;
+      //      width: 0;
+      //      position: absolute;
+      //      pointer-events: none;
+      //      border-bottom-color: $white;
+      //      border-width: 7px;
+      //      margin-left: -7px;
+      //    }
+      //    &__edit {
+      //      right: 18px;
+      //      top: 39px;
+      //    }
+      //    &.opened {
+      //      display: block;
+      //    }
+      //    label {
+      //      font-weight: 500;
+      //      color: $gray-500;
+      //      line-height: 16px;
+      //    }
+      //  }
+      //}
+    }
+    .modal-content {
+      &.--tooltip {
+        position: absolute;
+        right: 0;
+        top: 50px;
+        background-color: #ffffff;
+        z-index: 1;
+        box-shadow: 0 2px 20px 10px rgba(0,0,0,.05);
+        border: solid 1px #edf2f6;
+        padding: 32px;
+        width: 504px;
+        display: none;
+        &::before {
+          bottom: 100%;
+          left: auto;
+          right: 20px;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
           position: absolute;
-          right: 0;
-          top: 50px;
-          background-color: #ffffff;
-          z-index: 1;
-          box-shadow: 0 2px 20px 10px rgba(0,0,0,.05);
-          border: solid 1px #edf2f6;
-          padding: 32px;
-          width: 504px;
-          display: none;
-          &::before {
-            bottom: 100%;
-            left: auto;
-            right: 20px;
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-            border-bottom-color: $white;
-            border-width: 7px;
-            margin-left: -7px;
-          }
-          &__edit {
-            right: 18px;
-            top: 39px;
-          }
-          &.opened {
-            display: block;
-          }
-          label {
-            font-weight: 500;
-            color: $gray-500;
-            line-height: 16px;
-          }
+          pointer-events: none;
+          border-bottom-color: $white;
+          border-width: 7px;
+          margin-left: -7px;
+        }
+        &__edit {
+          right: 18px;
+          top: 39px;
+        }
+        &.opened {
+          display: block;
+        }
+        label {
+          font-weight: 500;
+          color: $gray-500;
+          line-height: 16px;
         }
       }
     }
@@ -594,11 +634,6 @@ body {
       flex-wrap: wrap;
       border-bottom: 1px solid $gray-200;
 
-      &.--padding-md {
-        padding-top: 17px;
-        padding-bottom: 17px;
-      }
-
       &:last-child {
         border: none;
       }
@@ -878,7 +913,7 @@ body {
     .tab-pane__table {
       &__user-item-name {
         font-size: 14px;
-        line-height: 17;
+        line-height: 17px;
       }
       &__user-item-name {
         font-size: 13px;
@@ -973,7 +1008,7 @@ body {
           background-color: $gray-25;
         }
 
-        input {
+        input.--editable {
           font-size: 14px;
           line-height: 17px;
           font-weight: 400;
@@ -1173,6 +1208,24 @@ body {
         &.--sm {
           flex: 0 0 20px;
         }
+      }
+    }
+
+    .taxes-table {
+      &__tax-name {
+        flex: 1 1 136px;
+        padding: 0 8px;
+      }
+      &__rate {
+        flex: 1 1 370px;
+        padding: 0 8px;
+      }
+      &__set-default {
+        flex: 1 1 75px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 56px;
       }
     }
 

@@ -32,21 +32,26 @@
       <div class="tab-pane__table-body">
         <div
           *ngIf="showAddStatus"
-          class="add-ticket-container tab-pane__table-cell"
+          class="add-ticket-container tab-pane__table-row"
           appClickOtside
           #addStatusBtn="click"
           [init]="true"
           [class]="'.add-ticket-container'"
           (onOutSide)="onAddTicketStatus()"
         >
-          <div class="tab-pane__table-cell"></div>
+          <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+            <label class="qt-checkbox">
+              <input type="checkbox">
+              <span></span>
+            </label>
+          </div>
           <div
-            class="tax-name add-status-name tab-pane__table-cell ticket-status-table__status"
+            class="tab-pane__table-cell ticket-status-table__status"
             [ngClass]="{'--input-error' : addStatus.disableCreate}"
           >
             <input
               type="text"
-              class="form-input"
+              class="form-input --editable"
               placeholder="Enter Name Status"
               [(ngModel)]="addStatus.name"
               (keyup)="onKeyUp($event)"
@@ -60,7 +65,7 @@
               This Ticket Status is already occupied
             </mat-error>
           </div>
-          <div class="rate tab-pane__table-cell">
+          <div class="tab-pane__table-cell ticket-status-table__color">
             <div
               class="form-row tag-color-container"
               ngbDropdown
@@ -97,7 +102,7 @@
               </div>
             </div>
           </div>
-          <div class="preview tab-pane__table-cell">
+          <div class="tab-pane__table-cell ticket-status-table__preview">
             <div
               class="preview-container"
               [ngStyle]="{'border-color':  statusColors[addStatus.color].borderColor}"
@@ -108,7 +113,13 @@
                 ></span>
             </div>
           </div>
-          <div class="tab-pane__table-cell ticket-status-table_action"></div>
+          <div class="tab-pane__table-cell ticket-status-table__action">
+            <div
+              data-tooltip="Remove"
+              class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+            >
+            </div>
+          </div>
         </div>
 
         <div
@@ -145,7 +156,7 @@
           >
             <input
               type="text"
-              class="form-input"
+              class="form-input  --editable"
               placeholder="Enter Name Status"
               [(ngModel)]="item.name"
               maxlength="20"
@@ -216,15 +227,13 @@
             </div>
           </div>
           <div class="tab-pane__table-cell ticket-status-table__action">
-            <a
-              href="javascript:;"
+            <div
               data-tooltip="Remove"
-              class="remove"
+              class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
               (click)="removeTicketStatus(item)"
               *ngIf="item.custom"
             >
-              <div class="icon__new-remove qt-sz-20 qt-bg-contain pointer"></div>
-            </a>
+            </div>
           </div>
         </div>
       </div>
