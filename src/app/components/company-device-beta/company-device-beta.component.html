@@ -1249,11 +1249,12 @@
                     [list]="companies"
                     [field]="'name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"
+                    (onSelectedItem)="AdvanceSearchCompanyName($event)"                    
                 ></app-drop-down>
                 </div>
                 <div class="qt-w10"> 
-                    <button class="qt-btn --outline-gray qt-ml-8">
+                    <button class="qt-btn --outline-gray qt-ml-8" (click)="AddCompany()">
                         <span class="advancedSearch-addbutton"></span>
                     </button>                   
                 </div>
@@ -1263,10 +1264,11 @@
                    <app-drop-down                    
                     [title]="'Memory'"
                     [placeholder]="'Select Memory'"
-                    [list]="companies"
+                    [list]="advanceSearchOperation"
                     [field]="'name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"  
+                    (onSelectedItem)="AdvanceSearchMemory($event)"                   
                 ></app-drop-down>
                 </div>
                 <div class="qt-w70">                     
@@ -1274,6 +1276,8 @@
                         <input
                             type="number"                            
                             placeholder="0"
+                            name="memory"
+                            [(ngModel)]="advanceSearchMemory"
                         >
                     </div>                     
                 </div>
@@ -1283,10 +1287,11 @@
                    <app-drop-down                    
                     [title]="'Disk Space'"
                     [placeholder]="'Select Disk Space'"
-                    [list]="companies"
+                    [list]="advanceSearchOperation"
                     [field]="'name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"  
+                    (onSelectedItem)="AdvanceSearchDiskSpace($event)"                   
                 ></app-drop-down>
                 </div>
                 <div class="qt-w70">                     
@@ -1294,6 +1299,8 @@
                         <input
                             type="number"                            
                             placeholder="0"
+                            name="diskSpace"
+                            [(ngModel)]="advanceSearchDiskSpace"
                         >
                     </div>                                         
                 </div>
@@ -1303,10 +1310,11 @@
                    <app-drop-down                    
                     [title]="'Free Space'"
                     [placeholder]="'Select Free Space'"
-                    [list]="companies"
+                    [list]="advanceSearchOperation"
                     [field]="'name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"  
+                    (onSelectedItem)="AdvanceSearchFreeSpace($event)"                   
                 ></app-drop-down>
                 </div>
                 <div class="qt-w70"> 
@@ -1314,6 +1322,8 @@
                         <input
                             type="number"                            
                             placeholder="0"
+                            name="freeSpace"
+                            [(ngModel)]="advanceSearchFreeSpace"
                         >
                     </div>                       
                 </div>
@@ -1323,35 +1333,36 @@
                    <app-drop-down                    
                     [title]="'OS Version'"
                     [placeholder]="'Select OS Version'"
-                    [list]="companies"
-                    [field]="'name'"
+                    [list]="advanceSearchOperatingVersion"                    
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"  
+                    (onSelectedItem)="AdvanceSearchOSVersionName($event)"                  
                 ></app-drop-down>
-                </div>
-                <div class="qt-w70"> 
-                    <app-drop-down                                           
+                </div>                
+                <div class="qt-w70 operatingType"> 
+                    <app-drop-down                     
                     [placeholder]="'Select'"
-                    [list]="companies"
-                    [field]="'name'"
+                    [list]="advanceSearchOperatingType"                    
                     [search]="true"
-                    [change]="true"                                     
+                    [change]="true"   
+                    (onSelectedItem)="AdvanceSearchOSType($event)"                                  
                 ></app-drop-down>                 
-                </div>
+                </div>            
             </div>
             <div class="qt-df qt-mb-24">
                 <div class="qt-w90">                    
-                   <app-drop-down                    
+                   <app-drop-down                                        
                     [title]="'HW Type'"
                     [placeholder]="'Select HW Type'"
                     [list]="advanceSearchHardware"
                     [field]="'Name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"  
+                    (onSelectedItem)="AdvanceSearchHWType($event)"                  
                 ></app-drop-down>
                 </div>
                 <div class="qt-w10"> 
-                    <button class="qt-btn --outline-gray qt-ml-8">
+                    <button class="qt-btn --outline-gray qt-ml-8" (click)="AddHardware()">
                         <span class="advancedSearch-addbutton"></span>
                     </button>                   
                 </div>
@@ -1364,11 +1375,12 @@
                     [list]="advanceSearchManufacturer"
                     [field]="'Name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"   
+                    (onSelectedItem)="AdvanceSearchManufacturer($event)"                  
                 ></app-drop-down>
                 </div>
                 <div class="qt-w10"> 
-                    <button class="qt-btn --outline-gray qt-ml-8">
+                    <button class="qt-btn --outline-gray qt-ml-8" (click)="AddManufacturer()">
                         <span class="advancedSearch-addbutton"></span>
                     </button>                   
                 </div>
@@ -1381,11 +1393,12 @@
                     [list]="advanceSearchModel"
                     [field]="'Name'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"  
+                    (onSelectedItem)="AdvanceSearchModel($event)"                    
                 ></app-drop-down>
                 </div>
                 <div class="qt-w10"> 
-                    <button class="qt-btn --outline-gray qt-ml-8">
+                    <button class="qt-btn --outline-gray qt-ml-8" (click)="AddModel()">
                         <span class="advancedSearch-addbutton"></span>
                     </button>                   
                 </div>
@@ -1398,11 +1411,12 @@
                     [list]="advanceSearchSoftwareItem"
                     [field]="'DisplayName'"
                     [search]="true"
-                    [change]="true"                    
+                    [change]="true"    
+                    (onSelectedItem)="AdvanceSearchSoftware($event)"                
                 ></app-drop-down>
                 </div>
                 <div class="qt-w10"> 
-                    <button class="qt-btn --outline-gray qt-ml-8">
+                    <button class="qt-btn --outline-gray qt-ml-8" (click)="AddSoftware()">
                         <span class="advancedSearch-addbutton"></span>
                     </button>                   
                 </div>
@@ -1412,7 +1426,7 @@
             <div class="qt-df">
                 <button
                     class="qt-button qt-mr-12"                                        
-                    (onClick)="applyAdvanceSearch()"
+                    (click)="advanchSearch()"
                 >
                     <span>Apply</span>
                 </button>

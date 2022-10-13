@@ -1065,4 +1065,31 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
+  public getOperationgSystemGetVersionByTechCompanyGuid(guid) {
+    return this.http
+      .get(`${this.apiAgent}agent/OperatingSystem/GetVersionByTechCompany?techcompanyGuid=${guid}`, {              
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getOperationgSystemGetTypeByTechCompanyGuid(guid) {
+    return this.http
+      .get(`${this.apiAgent}agent/OperatingSystem/GetTypeByTechCompany?techcompanyGuid=${guid}`, {              
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }  
+
+  public getAssetByAdvanceSearch(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/Asset/GetByAdvancedSearch`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
 }

@@ -20,6 +20,7 @@ import { CommonHttpServices } from "../device/_services/common_http.service";
 import { ExcelService } from "../device/_services/download_csv.service";
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { DevicesStateService } from "src/app/states/devices/devices-state.service";
+import { advanceSearch } from "./class/advanceSearch";
 
 @Component({
   selector: "app-company-device-beta",
@@ -49,7 +50,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   kafkaMessage: any;
   companyId: any;
   hardwareTypes: any[] = [];
-
   powershellmsg: string = "";
   temporaryCommand: string = "";
   assetId: number;
@@ -147,6 +147,33 @@ export class CompanyDeviceBetaComponent implements OnInit {
   advanceSearchModel = [];
   advanceSearchManufacturer = [];
   advanceSearchSoftwareItem = [];
+  advanceSearchOperatingVersion = [];
+  advanceSearchOperatingType = [];
+  advanceSearchCompanyList: any;
+  advanceSearchHardwareList: any;
+  advanceSearchManufacturerList: any;
+  advanceSearchModelList: any;
+  advanceSearchSoftwareList: any;
+  advanceSearchTechGuid: any;
+  advanceSearchMemory:number=0;
+  advanceSearchDiskSpace:number=0;
+  advanceSearchFreeSpace:number=0;
+  advanceSearchMemorySelect:any;
+  advanceSearchDiskSpaceSelect:any;
+  advanceSearchFreeSpaceSelect:any;
+  advanceSearchOperation:any[]= [
+    {
+      "name": "=",      
+    },
+    {
+      "name":">"
+    },
+    {
+      "name":"<"
+    }
+  ]
+  advanceSearch = new advanceSearch();
+
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -284,12 +311,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
       {        
         this.assetList = resp;
         this.asset = resp[0];
+        this.advanceSearchTechGuid = resp[0].TechCompanyGuid;
         this.getDevices(this.assetList);
         this.operatingSystemWindow(resp[0].ID)
         this.HardwareTypeList(resp[0].TechCompanyGuid);   
         this.getManufacturers(resp[0].TechCompanyGuid);
         this.getModels(resp[0].TechCompanyGuid);  
-        this.getSoftwarItem(resp[0].TechCompanyGuid);   
+        this.getSoftwarItem(resp[0].TechCompanyGuid);  
+        this.getOperatingSystemVersion(resp[0].TechCompanyGuid);
+        this.getOperatingSystemType(resp[0].TechCompanyGuid); 
         this.assetList.forEach((element, index) => {
           //element.online = false;
           this.assetList[index].Title =
@@ -1624,8 +1654,35 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.isAdvSearchOpen = false;
   }
 
-  applyAdvanceSearch(){
-    
+  advanchSearch(){   
+    this.advanceSearch.TechCompanyGuid = this.advanceSearchTechGuid;  
+    let data:any = {};    
+    if(this.advanceSearchMemory > 0 && this.advanceSearchMemorySelect !=undefined)
+    {
+       data.ColumnName = "Memory";
+       data.Comparison = this.advanceSearchMemorySelect;
+       data.Value = this.advanceSearchMemory;
+       this.advanceSearch.searchItems.push(data);
+    }    
+    if(this.advanceSearchDiskSpace > 0 && this.advanceSearchDiskSpaceSelect !=undefined)
+    {
+       data.ColumnName = "DiskSpace";
+       data.Comparison = this.advanceSearchDiskSpaceSelect;
+       data.Value = this.advanceSearchDiskSpace;
+       this.advanceSearch.searchItems.push(data);
+    } 
+    if(this.advanceSearchFreeSpace > 0 && this.advanceSearchFreeSpaceSelect !=undefined)
+    {
+       data.ColumnName = "FreeSpace";
+       data.Comparison = this.advanceSearchFreeSpaceSelect;
+       data.Value = this.advanceSearchFreeSpace;
+       this.advanceSearch.searchItems.push(data);
+    }  
+    this.agentService.getAssetByAdvanceSearch(this.advanceSearch).subscribe(
+      (result) => {        
+        if (result.length > 0) {         
+        }
+      })       
   }
 
   
@@ -1638,11 +1695,98 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
     this.agentService
       .getSoftwareListByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {                
-        this.advanceSearchSoftwareItem = resp.filter(x=>x.IsActive);                
+      .subscribe((resp) => {                              
+        this.advanceSearchSoftwareItem = resp;
       });
   }
 
+  getOperatingSystemVersion(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getOperatingSystemVersion(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getOperationgSystemGetVersionByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {            
+        this.advanceSearchOperatingVersion = resp;
+      });
+  }
+
+  getOperatingSystemType(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getOperatingSystemType(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getOperationgSystemGetTypeByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {               
+        this.advanceSearchOperatingType = resp;
+      });
+  }
+
+  AddCompany(){    
+    this.advanceSearch.CompanyList.push(this.advanceSearchCompanyList);
+  }
+
+  AddHardware(){
+    this.advanceSearch.HardwareTypesList.push(this.advanceSearchHardwareList);
+  }
+
+  AddManufacturer(){
+    this.advanceSearch.ManufacturerList.push(this.advanceSearchManufacturerList);
+  }
+
+  AddModel(){
+    this.advanceSearch.ModelList.push(this.advanceSearchModelList);
+  }
+
+  AddSoftware(){
+    this.advanceSearch.SoftwareList.push(this.advanceSearchSoftwareList);
+  }
+
+  AdvanceSearchCompanyName(company)
+  {
+    this.advanceSearchCompanyList = company.id;
+  }
+
+  AdvanceSearchOSVersionName(OSVersion)
+  {
+    this.advanceSearch.OSVersion.push(OSVersion);
+  }
+
+  AdvanceSearchOSType(OSType)
+  {
+    this.advanceSearch.OSType.push(OSType);
+  }
+
+  AdvanceSearchHWType(HWType){
+    this.advanceSearchHardwareList = HWType.Name;
+  }
+
+  AdvanceSearchManufacturer(Manufacturer)
+  {
+    this.advanceSearchManufacturerList = Manufacturer.Name;
+  }
+
+  AdvanceSearchModel(model){
+    this.advanceSearchModelList = model.Name;
+  }
+
+  AdvanceSearchMemory(memory){
+    this.advanceSearchMemorySelect = memory;
+  }
+
+  AdvanceSearchDiskSpace(diskSpace){
+    this.advanceSearchDiskSpaceSelect = diskSpace;
+  }
+
+  AdvanceSearchFreeSpace(freeSpace){
+    this.advanceSearchFreeSpaceSelect = freeSpace;
+  }
 }
 
 
