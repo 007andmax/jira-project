@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { ContractsFilterStatus } from '../class/contracts-filter-status';
 import { ContractsFilterType } from '../class/contracts-filter-type';
 import { ContractsFilter } from '../class/contracts-filter';

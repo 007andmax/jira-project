@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy,
 import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -15,7 +15,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 })
 export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   open: boolean = false;
-  @ViewChild('usersDp') usersDp: SelectSearchComponent;
+  @ViewChild('usersDp') usersDp: DropDownComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
   blockFilterUser: boolean = false;

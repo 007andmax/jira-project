@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-default-services-contracts',
@@ -10,7 +10,7 @@ import { SelectSearchComponent } from '../../../shared/select-search/select-sear
   styleUrls: ['./default-services-contracts.component.scss']
 })
 export class DefaultServicesContractsComponent implements OnInit {
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Input() type: string = '';
   glNumbers: Array<GlNumber> = [];
   selectedGlNumber: GlNumber = null;

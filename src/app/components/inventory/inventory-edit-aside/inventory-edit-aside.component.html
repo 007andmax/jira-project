@@ -32,18 +32,18 @@
         </div>
         <div class="col-md-12">
             <p>GL Number</p>
-            <app-select-search
+            <app-drop-down
                 [class]="['light-dropdown']"
                 [list]="glNumbers"
                 #glNumberSelect
                 [add]="true"
                 [field]="'glNumber'"
-                [formatter]="formatterGLNumber"
+                [reducerItem]="formatterGLNumber"
                 [placeholder]="'Select GL'"
                 [editItem]="inventory.glNumber"
                 (onAddItem)="onAddGlNumber($event)"
                 (onSelectedItem)="onSelectGlNumbers($event)"
-            ></app-select-search>
+            ></app-drop-down>
         </div>
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getDescription()">Description is required</mat-error>
@@ -141,7 +141,7 @@
         </div>
         <div class="col-md-12">
             <p>Suppliers</p>
-            <app-select-search
+            <app-drop-down
                 [class]="['light-dropdown']"
                 [list]="suppliers"
                 #suppliersSelect
@@ -149,7 +149,7 @@
                 [placeholder]="'Select Supplier'"
                 [editItem]="editSupplier"
                 (onSelectedItem)="onSelectSupplier($event)"
-            ></app-select-search>
+            ></app-drop-down>
         </div>
         <div class="col-md-12 qt-df qt-ai-c">
             <label

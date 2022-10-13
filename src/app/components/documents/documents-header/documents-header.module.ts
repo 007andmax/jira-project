@@ -4,7 +4,6 @@ import { DocumentsHeaderComponent } from './documents-header.component';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SelectSearchModule } from '../../shared/select-search/select-search.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
 import { TechUsersListReportModule } from '../../reports/report-menu/tech-users-list-report/tech-users-list-report.module';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
@@ -17,7 +16,6 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
     imports: [
         CommonModule,
         NgbModule,
-        SelectSearchModule,
         CompanyTagsModule,
         TechUsersListReportModule,
         MultiDatepickerModule,

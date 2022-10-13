@@ -7,7 +7,6 @@ import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-de
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { SelectSearchModule } from 'src/app/components/shared/select-search/select-search.module';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,7 +44,6 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
         CommonModule,
         PreloaderTicketModule,
         DisabledBtnModule,
-        SelectSearchModule,
         DatePickerModule,
         FormsModule,
         NgbModule,

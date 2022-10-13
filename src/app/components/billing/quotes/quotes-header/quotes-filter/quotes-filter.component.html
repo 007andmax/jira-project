@@ -8,7 +8,7 @@
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>
-    <app-select-search
+    <app-drop-down
         class="search-company quotes-status-filter"
         #statusDp
         [placeholder]="'Sort by Status'"
@@ -17,7 +17,7 @@
         [field]="'title'"
         [list]="statusTypes"
         (onSelectedItem)="onSelectStatus($event)"
-    ></app-select-search>
+    ></app-drop-down>
     <input
         type="text"
         appKeyUpEnter

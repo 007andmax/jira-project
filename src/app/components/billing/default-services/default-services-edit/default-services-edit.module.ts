@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
-import { SelectSearchModule } from 'src/app/components/shared/select-search/select-search.module';
+import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 
 @NgModule({
     declarations: [DefaultServicesEditComponent
@@ -17,7 +17,7 @@ import { SelectSearchModule } from 'src/app/components/shared/select-search/sele
         MatFormFieldModule,
         NumberModule,
         TaxesModule,
-        SelectSearchModule
+        DropDownModule
     ],
     exports: [DefaultServicesEditComponent]
 

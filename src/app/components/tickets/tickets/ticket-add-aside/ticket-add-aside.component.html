@@ -60,7 +60,7 @@
     <div class="qt-aside-modern__content">
         <div class="qt-input-block qt-input-line ticket-add-aside__priority-level-input">
             <span class="qt-input-block__label">Priority Level</span>
-            <app-select-search
+            <app-drop-down
                 [class]="['qt-dropdown']"
                 [field]="'title'"
                 [isBlockClear]="true"
@@ -68,7 +68,7 @@
                 [list]="ticketPriorities"
                 (onSelectedItem)="setPriorityLevel($event)"
                 [placeholder]="'Low'"
-            ></app-select-search>
+            ></app-drop-down>
         </div>
         <div class="qt-input-block qt-input-line --required">
             <mat-error
@@ -144,17 +144,17 @@
         <div class="qt-input-line">
             <div class="qt-input-block">
                 <span class="qt-input-block__label">Assign To</span>
-                <app-select-search
+                <app-drop-down
                     #techUserDP
                     [class]="['qt-dropdown']"
                     [list]="getTechUserList()"
                     (onSelectedItem)="onSelectTechUser($event)"
                     [placeholder]="'Select User to assign'"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="qt-input-block">
                 <span class="qt-input-block__label">Device</span>
-                <app-select-search
+                <app-drop-down
                     #deviceDP
                     [class]="['qt-dropdown']"
                     [field]="'hostName'"
@@ -163,7 +163,7 @@
                     [isDisabled]="devicesStateService.getPreloaderDevices()"
                     [placeholder]="'Select device'"
                     (onSelectedItem)="onSelectDevice($event)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
         </div>
         <app-upload-area

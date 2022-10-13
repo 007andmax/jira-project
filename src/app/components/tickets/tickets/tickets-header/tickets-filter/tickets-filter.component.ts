@@ -8,7 +8,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
@@ -18,6 +17,7 @@ import { StatusColor } from '../../../class/status-color';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { TicketStatusFilter } from '../class/ticket-status-filter';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -25,10 +25,10 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
   styleUrls: ['./tickets-filter.component.scss']
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
-  @ViewChild('usersDp') usersDp: SelectSearchComponent;
+  @ViewChild('usersDp') usersDp: DropDownComponent;
   @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";

@@ -15,7 +15,7 @@
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>
-    <app-select-search
+    <app-drop-down
         class="search-users"
         #usersDp
         [placeholder]="'Select User'"
@@ -23,8 +23,8 @@
         [class]="['qt-dropdown']"
         [list]="getUserList()"
         (onSelectedItem)="onSelectUser($event)"
-    ></app-select-search>
-    <app-select-search
+    ></app-drop-down>
+    <app-drop-down
         class="search-tech-users"
         #techUsersDp
         [placeholder]="'Select Tech User'"
@@ -32,8 +32,8 @@
         [class]="['qt-dropdown']"
         [list]="getTechUserList()"
         (onSelectedItem)="onSelectTechUser($event)"
-    ></app-select-search>
-    <app-select-search
+    ></app-drop-down>
+    <app-drop-down
         class="search-status"
         #statusDp
         [placeholder]="'Select by Status'"
@@ -42,7 +42,7 @@
         [list]="ticketsStatus"
         [field]="'title'"
         (onSelectedItem)="onSelectStatus($event)"
-    ></app-select-search>
+    ></app-drop-down>
     <app-tickets-filter-tags
         #tagsDp
         [placement]="appService.checkMobile() ? 'top-left' : 'bottom-left'"

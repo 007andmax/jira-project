@@ -12,8 +12,6 @@ import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.s
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
-import { CompanyProfile } from '../../companies/class/company-profile';
-import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -42,9 +40,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   sale: string;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDp') taxesDp: TaxesComponent;
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
+  @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };

@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, EventEmitter, Output, Input } from '@angular/core';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { InventoryItem } from '../../class/inventory-item';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Tax } from 'src/app/interfaces/service/tax';
@@ -27,9 +26,9 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDp') taxesDp: TaxesComponent;
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
+  @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
   //opened: boolean = false;

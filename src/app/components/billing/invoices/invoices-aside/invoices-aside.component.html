@@ -77,9 +77,8 @@
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <label class="qt-lh-154">Payment Mode</label>
-                <app-select-search
+                <app-drop-down
                     class="search-company"
-                    #statusDp
                     [placeholder]="'Select Status'"
                     [change]="false"
                     [editItem]="selectedPaymentMode"
@@ -88,7 +87,7 @@
                     [field]="'title'"
                     [list]="paymentModes"
                     (onSelectedItem)="onSelectPaymentModes($event)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="qt-input-block qt-w100">
                 <label class="qt-lh-154">Reference#</label>

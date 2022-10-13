@@ -26,7 +26,6 @@ import { ProductListQuoteComponent } from './quote-aside-add/product-list-quote/
 import { ServiceListQuoteComponent } from './quote-aside-add/service-list-quote/service-list-quote.component';
 import { InvoiceRegularNoteModule } from '../billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.module';
 import { ProductItemQuoteEditComponent } from './quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
-import { SelectSearchModule } from '../../shared/select-search/select-search.module';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { FilterModule } from 'src/app/pipe/filter/filter.module';
@@ -73,7 +72,6 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         MatChipsModule,
         DatePickerModule,
         InvoiceRegularNoteModule,
-        SelectSearchModule,
         MultiDatepickerModule,
         DecimalNumberModule,
         FilterModule,

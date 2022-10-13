@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
-import { SelectSearchModule } from '../../shared/select-search/select-search.module';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { MatSelectModule, MatChipsModule } from '@angular/material';
@@ -22,6 +21,7 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/invoice-export.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
 
@@ -45,7 +45,6 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        SelectSearchModule,
         DatePickerModule,
         NumberModule,
         MatSelectModule,
@@ -55,7 +54,8 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         PreviewPhoneMaskModule,
         KeyUpEnterModule,
         InvoiceExportModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        DropDownModule
     ],
 
 

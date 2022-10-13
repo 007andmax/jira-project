@@ -4,7 +4,6 @@ import { TicketAdd } from '../class/ticket-add';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketCreatedUser } from '../class/ticket-created-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { TechUserItem } from '../../../shared/tech-users/class/tech-user-item';
 import { TitleListType } from '../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -33,8 +32,8 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
 })
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP') userDP: DropDownComponent;
-  @ViewChild('techUserDP') techUserDP: SelectSearchComponent;
-  @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
+  @ViewChild('techUserDP') techUserDP: DropDownComponent;
+  @ViewChild('deviceDP') deviceDP: DropDownComponent;
   @ViewChild('companyDP') companyDP: CompanyDropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;

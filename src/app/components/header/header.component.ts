@@ -57,7 +57,15 @@ export class HeaderComponent implements OnInit {
        e.initEvent('click', true, true);
        link.dispatchEvent(e);*/
   }
-
+  checkLogo() {
+    return (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id || this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
   }

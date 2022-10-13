@@ -3,10 +3,10 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Subscription } from 'rxjs';
 import { InvoicesFilter } from '../../class/invoices-filter';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-invoices-filter',
@@ -15,7 +15,7 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
 })
 export class InvoicesFilterComponent implements OnInit {
   @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();

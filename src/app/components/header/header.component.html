@@ -79,11 +79,20 @@
                 ngbDropdownToggle
                 class="nav-header__account-info-menu qt-df qt-ai-c pointer"
             >
+                <img
+                    [src]="getCompanyLogoUrl()"
+                    class="qt-sz-36"
+                    alt
+                    *ngIf="checkLogo()"
+                    placement="bottom-right"
+                    [ngbTooltip]="tipContent"
+                >
                 <div
                     class="nav-header__account-info-avatar tooltip-max--content"
                     [textContent]="getCurrentUserName()[0]"
                     placement="bottom-right"
                     [ngbTooltip]="tipContent"
+                    *ngIf="!checkLogo()"
                 ></div>
                 <ng-template #tipContent>
                     {{getCurrentUserName()}}

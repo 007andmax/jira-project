@@ -4,7 +4,6 @@ import { TicketAddAsideComponent } from './ticket-add-aside.component';
 import { MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
-import { SelectSearchModule } from 'src/app/components/shared/select-search/select-search.module';
 import { UploadAreaComponent } from 'src/app/components/shared/upload-area/upload-area.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
@@ -27,7 +26,6 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
         MatFormFieldModule,
         FormsModule,
         DropDownModule,
-        SelectSearchModule,
         TechUsersModule,
         DisabledBtnModule,
         PreloaderTicketModule,

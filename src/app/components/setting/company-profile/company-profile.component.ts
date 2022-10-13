@@ -28,6 +28,7 @@ import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cro
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
+import { WORK_HOURS } from 'src/app/const/time';
 
 declare var google: any;
 declare var $: any;
@@ -104,6 +105,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
   new TitleListType("Office", "OFFICE"),
   new TitleListType("Fax", "FAX")];
+  workHours = WORK_HOURS;
   secondaryPhoneType;
   primaryPhoneType;
   constructor(
@@ -899,6 +901,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * @param startTime
    */
   startTimeChange(workingday: any, startTime: any) {
+    console.log("workingday", workingday);
+    console.log("startTime", startTime);
     const splitTime = startTime.split(':');
     if (!Number(splitTime[0])) {
       return;
@@ -949,8 +953,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * @param from
    */
   fromTime_convert(from) {
-    const startWith = 'from ',
-      splitWith = ' to ';
     const fromHours = Math.floor(from / 3600);
     const fromMinutes = Math.round(from / 60 - fromHours * 60);
     let fHours = '';
@@ -964,7 +966,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     const h = fHours ? fHours : Number(fromHours) ? fromHours : 0;
     const m = fMinutes ? fMinutes : Number(fromMinutes) ? fromMinutes : 0;
     const value = h + ':' + m;
-    return value;
+    return this.workHours.find(item => item.value == value);
   }
 
   /**
@@ -985,7 +987,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     const h = tHours !== '' ? tHours : toHours;
     const m = tMinutes !== '' ? tMinutes : toMinutes;
     const value = h + ':' + m;
-    return value;
+    return this.workHours.find(item => item.value == value);
   }
 
   formatOnInput(workingDay, event) {

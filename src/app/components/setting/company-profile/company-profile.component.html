@@ -638,64 +638,6 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <ngb-tab
                 title="Workspace"
                 id="workspace"
@@ -764,10 +706,7 @@
                 <ng-template ngbTabContent>
                     <!-- <div class="tab-pane__body"> -->
                     <div class="cmn-area --border-transparent">
-                        <form
-                            #workingHoursForm="ngForm"
-                            (ngSubmit)="onWorkSubmit()"
-                        >
+                        <form #workingHoursForm="ngForm">
                             <div>
                                 <div *ngFor="
                   let workingDay of this.cProfile.timeSettings.workingDays;
@@ -809,7 +748,22 @@
                                     <div class="tab-pane-input__row">
                                         <div class="qt-input-block">
                                             <div class="qt-df">
-                                                <select
+                                                <div class="qt-mr-24 qt-w50">
+                                                    <app-drop-down
+                                                        [class]="['qt-select-input-40']"
+                                                        [placeholder]="'Select Company Type'"
+                                                        [field]="'name'"
+                                                        [list]="workHours"
+                                                        [editItem]="fromTime_convert(workingDay.startTime)"
+                                                        [search]="true"
+                                                        [sort]="false"
+                                                        [change]="true"
+                                                        [isBlockClear]="true"
+                                                        [isDisabled]="!workingDay.isSelected"
+                                                        (onSelectedItem)="startTimeChange(workingDay,$event.value)"
+                                                    ></app-drop-down>
+                                                </div>
+                                                <!-- <select
                                                     #startTime
                                                     class="cmn-select form-input qt-mr-24"
                                                     [id]=" 'from-'+workingDay.dayOfWeek"
@@ -831,8 +785,23 @@
                                                     <option value="11:00">11:00 AM</option>
                                                     <option value="11:30">11:30 AM</option>
                                                     <option value="12:00">12:00 PM</option>
-                                                </select>
-                                                <select
+                                                </select> -->
+                                                <div class="qt-w50">
+                                                    <app-drop-down
+                                                        [class]="['qt-select-input-40']"
+                                                        [placeholder]="'Select Company Type'"
+                                                        [field]="'name'"
+                                                        [list]="workHours"
+                                                        [editItem]="toTime_convert(workingDay.endTime)"
+                                                        [search]="true"
+                                                        [sort]="false"
+                                                        [change]="true"
+                                                        [isBlockClear]="true"
+                                                        [isDisabled]="!workingDay.isSelected"
+                                                        (onSelectedItem)="endTimeChange(workingDay,$event.value)"
+                                                    ></app-drop-down>
+                                                </div>
+                                                <!-- <select
                                                     #endTime
                                                     class="cmn-select form-input"
                                                     (change)="endTimeChange(workingDay,endTime.value)"
@@ -848,7 +817,7 @@
                                                     <option value="19:00">19:00 PM</option>
                                                     <option value="19:30">19:30 PM</option>
                                                     <option value="20:00">20:00 PM</option>
-                                                </select>
+                                                </select> -->
                                             </div>
                                         </div>
                                     </div>
