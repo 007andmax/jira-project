@@ -20,6 +20,11 @@ export class InvoiceSettingsComponent implements OnInit {
   includeInvoiceAsAttachmentSetting: boolean = false;
   includeAccountReceivableReportAsAttachmentSetting: boolean = false;
   invoiceTerm: any;
+  primaryPhoneType;
+  secondaryPhoneType;
+  phoneTypes = [new TitleListType("Mobile", "MOBILE"),
+  new TitleListType("Office", "OFFICE"),
+  new TitleListType("Fax", "FAX")];
   invoiceTerms = [new TitleListType("15 days", "15"),
   new TitleListType("30 days", "30"),
   new TitleListType("45 days", "45"),
@@ -118,6 +123,12 @@ export class InvoiceSettingsComponent implements OnInit {
       this.getTaxNumber();*/
 
 
+  }
+  onChangePrimaryPhoneType(data) {
+    this.primaryPhoneType = data;
+    this.invoiceForm.patchValue({
+      primaryPhoneType: data.type,
+    });
   }
   public onPastMemo(value) {
     this.invoiceForm.patchValue({ conditions: value });
@@ -222,6 +233,8 @@ export class InvoiceSettingsComponent implements OnInit {
               primaryPhone: phone.number,
               primaryPhoneType: phone.typeNumber
             });
+            this.primaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
+
           }
 
           if (i === 1) {
@@ -230,6 +243,7 @@ export class InvoiceSettingsComponent implements OnInit {
               secondaryPhone: phone.number,
               secondaryPhoneType: phone.typeNumber
             });
+            this.secondaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
           }
         });
         if (phoneNumbers.length === 0) {
@@ -300,6 +314,12 @@ export class InvoiceSettingsComponent implements OnInit {
       enableContactSending: event.target.checked
     });
 
+  }
+  onChangeSecondaryPhoneType(data) {
+    this.secondaryPhoneType = data;
+    this.invoiceForm.patchValue({
+      secondaryPhoneType: data.type,
+    });
   }
   /**
    *  saved records.

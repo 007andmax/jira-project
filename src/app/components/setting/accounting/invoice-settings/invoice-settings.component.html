@@ -252,14 +252,17 @@
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block qt-input-block-100">
                         <div class="qt-df">
-                            <select
-                                class="cmn-select form-input qt-input-prefix"
-                                formControlName="primaryPhoneType"
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="phoneTypes"
+                                [editItem]="primaryPhoneType"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                [widthInput]="'110px'"
+                                (onSelectedItem)="onChangePrimaryPhoneType($event)"
                             >
-                                <option value="MOBILE">mobile</option>
-                                <option value="OFFICE">office</option>
-                                <option value="FAX">fax</option>
-                            </select>
+                            </app-drop-down>
                             <input
                                 type="text"
                                 class="form-input qt-input-prepend"
@@ -292,14 +295,17 @@
                             class="qt-df"
                             *ngIf="isAddPhone && invoiceForm.value.enableInvoiceContact"
                         >
-                            <select
-                                class="cmn-select form-input qt-input-prefix"
-                                formControlName="secondaryPhoneType"
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="phoneTypes"
+                                [editItem]="secondaryPhoneType"
+                                [field]="'title'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                [widthInput]="'110px'"
+                                (onSelectedItem)="onChangeSecondaryPhoneType($event)"
                             >
-                                <option value="MOBILE">mobile</option>
-                                <option value="OFFICE">office</option>
-                                <option value="FAX">fax</option>
-                            </select>
+                            </app-drop-down>
                             <input
                                 type="text"
                                 class="form-input qt-input-prepend"
@@ -327,6 +333,8 @@
                             Remove
                         </div>
                     </div>
+
+
 
 
 

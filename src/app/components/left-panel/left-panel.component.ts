@@ -33,6 +33,7 @@ export class LeftPanelComponent implements OnInit {
   toggleLeftPanel: boolean = false;
   state: string = '';
   page: string = '';
+  showMobTab = false;
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
@@ -214,6 +215,7 @@ export class LeftPanelComponent implements OnInit {
     if (this.page === "PASSWORD_MANAGER" && this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
   }
   onOpenPanel() {
+    this.showMobTab = !this.showMobTab;
     this.leftPanelStateService.toggleLeftPanel(false);
   }
   onToggleLeftPanel() {

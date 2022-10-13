@@ -8,7 +8,12 @@
         >
             <h6 class="qt-fw-600">Ticket Settings</h6>
             <div class="qt-df">
-                <div class="qt-button qt-ml-24 --md">Save Changes</div>
+                <div
+                    class="qt-button qt-ml-24 --md"
+                    (click)="onSubmit()"
+                >
+                    Save Changes
+                </div>
                 <div
                     class="qt-df"
                     [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
