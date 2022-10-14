@@ -1857,6 +1857,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   advancesearchClear(){
+    this.advancesearchCompanyTag = [];
     this.advancesearchOSVersion = [];
     this.advancesearchOSType=[];
     this.advancesearchHardwareTag = [];
