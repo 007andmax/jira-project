@@ -1083,7 +1083,7 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }  
 
-  public getAssetByAdvanceSearch(data) {
+  public getAssetByAdvanceSearch(data) {    
     return this.http
       .post(
         `${this.apiAgent}agent/Asset/GetByAdvancedSearch`,

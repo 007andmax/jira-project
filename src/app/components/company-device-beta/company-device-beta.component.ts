@@ -20,7 +20,6 @@ import { CommonHttpServices } from "../device/_services/common_http.service";
 import { ExcelService } from "../device/_services/download_csv.service";
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { DevicesStateService } from "src/app/states/devices/devices-state.service";
-import { advanceSearch } from "./class/advanceSearch";
 
 @Component({
   selector: "app-company-device-beta",
@@ -149,11 +148,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
   advanceSearchSoftwareItem = [];
   advanceSearchOperatingVersion = [];
   advanceSearchOperatingType = [];
-  advanceSearchCompanyList: any;
-  advanceSearchHardwareList: any;
-  advanceSearchManufacturerList: any;
-  advanceSearchModelList: any;
-  advanceSearchSoftwareList: any;
   advanceSearchTechGuid: any;
   advanceSearchMemory:number=0;
   advanceSearchDiskSpace:number=0;
@@ -172,7 +166,18 @@ export class CompanyDeviceBetaComponent implements OnInit {
       "name":"<"
     }
   ]
-  advanceSearch = new advanceSearch();
+  advancesearchCompanyTag = [];
+  advancesearchHardwareTag = [];
+  advancesearchManufacturerTag = [];
+  advancesearchModelTag = [];
+  advancesearchSoftwareTag = [];
+  advancesearchOSVersion=[];
+  advancesearchOSType=[];
+  advancesearchCompanyFilterValue: string = "";
+  advancesearchHardwareFilterValue: string = "";
+  advancesearchManufacturerFilterValue: string = "";
+  advancesearchModelFilterValue: string = "";
+  advancesearchSoftwareFilterValue: string = "";
 
 
   constructor(
@@ -1652,34 +1657,41 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   advanceSearchClosed(){
     this.isAdvSearchOpen = false;
+    this.advancesearchClear();
   }
 
   advanchSearch(){   
-    this.advanceSearch.TechCompanyGuid = this.advanceSearchTechGuid;  
-    let data:any = {};    
-    if(this.advanceSearchMemory > 0 && this.advanceSearchMemorySelect !=undefined)
-    {
-       data.ColumnName = "Memory";
-       data.Comparison = this.advanceSearchMemorySelect;
-       data.Value = this.advanceSearchMemory;
-       this.advanceSearch.searchItems.push(data);
+    let data:any = {}; 
+    let datasize : any = {}; 
+    data.TechCompanyGuid = uuidv4();
+    data.TechCompanyGuid = this.advanceSearchTechGuid;        
+    data.CompanyList = this.advancesearchCompanyTag;
+    if(this.advanceSearchMemory > 0 && this.advanceSearchMemorySelect !=undefined){
+      datasize.ColumnName = "Memory";
+      datasize.Comparison = this.advanceSearchMemorySelect;
+      datasize.Value = this.advanceSearchMemory;
+      data.searchItems.push(datasize);
     }    
-    if(this.advanceSearchDiskSpace > 0 && this.advanceSearchDiskSpaceSelect !=undefined)
-    {
-       data.ColumnName = "DiskSpace";
-       data.Comparison = this.advanceSearchDiskSpaceSelect;
-       data.Value = this.advanceSearchDiskSpace;
-       this.advanceSearch.searchItems.push(data);
+    if(this.advanceSearchDiskSpace > 0 && this.advanceSearchDiskSpaceSelect !=undefined){
+      datasize.ColumnName = "DiskSpace";
+      datasize.Comparison = this.advanceSearchDiskSpaceSelect;
+      datasize.Value = this.advanceSearchDiskSpace;
+      data.searchItems.push(datasize);
     } 
-    if(this.advanceSearchFreeSpace > 0 && this.advanceSearchFreeSpaceSelect !=undefined)
-    {
-       data.ColumnName = "FreeSpace";
-       data.Comparison = this.advanceSearchFreeSpaceSelect;
-       data.Value = this.advanceSearchFreeSpace;
-       this.advanceSearch.searchItems.push(data);
-    }  
-    this.agentService.getAssetByAdvanceSearch(this.advanceSearch).subscribe(
-      (result) => {        
+    if(this.advanceSearchFreeSpace > 0 && this.advanceSearchFreeSpaceSelect !=undefined){
+      datasize.ColumnName = "FreeSpace";
+      datasize.Comparison = this.advanceSearchFreeSpaceSelect;
+      datasize.Value = this.advanceSearchFreeSpace;
+      data.searchItems.push(datasize);
+    }          
+    data.OSVersion = this.advancesearchOSVersion;
+    data.OSType = this.advancesearchOSType;
+    data.HardwareTypesList = this.advancesearchHardwareTag;
+    data.ManufacturerList = this.advancesearchManufacturerTag;
+    data.ModelList = this.advancesearchModelTag;
+    data.SoftwareList = this.advancesearchSoftwareTag;
+    this.agentService.getAssetByAdvanceSearch(data).subscribe(
+      (result) => {                
         if (result.length > 0) {         
         }
       })       
@@ -1728,64 +1740,129 @@ export class CompanyDeviceBetaComponent implements OnInit {
       });
   }
 
-  AddCompany(){    
-    this.advanceSearch.CompanyList.push(this.advanceSearchCompanyList);
+  AdvanceSearchOSVersionName(OSVersion){
+    if(OSVersion !=undefined || OSVersion !=null){
+      this.advancesearchOSVersion.push(OSVersion);
+    }
   }
 
-  AddHardware(){
-    this.advanceSearch.HardwareTypesList.push(this.advanceSearchHardwareList);
-  }
-
-  AddManufacturer(){
-    this.advanceSearch.ManufacturerList.push(this.advanceSearchManufacturerList);
-  }
-
-  AddModel(){
-    this.advanceSearch.ModelList.push(this.advanceSearchModelList);
-  }
-
-  AddSoftware(){
-    this.advanceSearch.SoftwareList.push(this.advanceSearchSoftwareList);
-  }
-
-  AdvanceSearchCompanyName(company)
-  {
-    this.advanceSearchCompanyList = company.id;
-  }
-
-  AdvanceSearchOSVersionName(OSVersion)
-  {
-    this.advanceSearch.OSVersion.push(OSVersion);
-  }
-
-  AdvanceSearchOSType(OSType)
-  {
-    this.advanceSearch.OSType.push(OSType);
-  }
-
-  AdvanceSearchHWType(HWType){
-    this.advanceSearchHardwareList = HWType.Name;
-  }
-
-  AdvanceSearchManufacturer(Manufacturer)
-  {
-    this.advanceSearchManufacturerList = Manufacturer.Name;
-  }
-
-  AdvanceSearchModel(model){
-    this.advanceSearchModelList = model.Name;
+  AdvanceSearchOSType(OSType){
+    if(OSType !=undefined || OSType !=null){
+      this.advancesearchOSType.push(OSType);
+    }
   }
 
   AdvanceSearchMemory(memory){
-    this.advanceSearchMemorySelect = memory;
+    if(memory !=undefined || memory !=null){
+      this.advanceSearchMemorySelect = memory;
+    }
   }
 
   AdvanceSearchDiskSpace(diskSpace){
-    this.advanceSearchDiskSpaceSelect = diskSpace;
+    if(diskSpace !=undefined || diskSpace !=null){
+      this.advanceSearchDiskSpaceSelect = diskSpace;
+    }
   }
 
   AdvanceSearchFreeSpace(freeSpace){
-    this.advanceSearchFreeSpaceSelect = freeSpace;
+    if(freeSpace !=undefined || freeSpace !=null){
+      this.advanceSearchFreeSpaceSelect = freeSpace;
+    }
+  }
+
+  onCompaniesSelectTag(Tag){       
+    if(this.advancesearchCompanyTag.length>0)
+    {
+      let result = this.advancesearchCompanyTag.find(x=>x.id == Tag.id);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchCompanyTag.push(Tag);
+    this.advancesearchCompanyFilterValue = "";
+  }
+
+  searchCompanyRemove(index: number) {
+    this.advancesearchCompanyTag.splice(index, 1);
+  }
+
+  onHardwareSelectTag(Tag){
+    if(this.advancesearchHardwareTag.length>0)
+    {
+      let result = this.advancesearchHardwareTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchHardwareTag.push(Tag);
+    this.advancesearchHardwareFilterValue = "";
+  }
+
+  searchHardwareRemove(index: number){
+    this.advancesearchHardwareTag.splice(index, 1);
+  }
+
+  onManufacturerSelectTag(Tag){
+    if(this.advancesearchManufacturerTag.length>0)
+    {
+      let result = this.advancesearchManufacturerTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchManufacturerTag.push(Tag);
+    this.advancesearchManufacturerFilterValue = "";
+  }
+
+  
+  searchManufacturerRemove(index: number){
+    this.advancesearchManufacturerTag.splice(index, 1);
+  }
+
+  onModelSelectTag(Tag){
+    if(this.advancesearchModelTag.length>0)
+    {
+      let result = this.advancesearchModelTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchModelTag.push(Tag);
+    this.advancesearchModelFilterValue = "";
+  } 
+  
+  searchModelRemove(index: number){
+    this.advancesearchModelTag.splice(index, 1);
+  }
+
+  onSoftwareSelectTag(Tag){
+    if(this.advancesearchSoftwareTag.length>0)
+    {
+      let result = this.advancesearchSoftwareTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchSoftwareTag.push(Tag);
+    this.advancesearchSoftwareFilterValue = "";
+  }
+
+  searchSoftwareRemove(index: number){
+    this.advancesearchSoftwareTag.splice(index, 1);
+  }
+
+  advancesearchClear(){
+    this.advancesearchOSVersion = [];
+    this.advancesearchOSType=[];
+    this.advancesearchHardwareTag = [];
+    this.advancesearchManufacturerTag = [];
+    this.advancesearchModelTag = [];
+    this.advancesearchSoftwareTag = [];
   }
 }
 
