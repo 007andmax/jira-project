@@ -18,6 +18,7 @@
                             [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
                             placeholder="Enter Starting ticket number"
                         >
+                        <div class="qt-input-help-text qt-mt-12">Maximum 7 Number</div>
                         <div
                             *ngIf="submitted && f.invoiceCount.errors"
                             class="invalid-feedback"
