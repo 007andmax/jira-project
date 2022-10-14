@@ -10,6 +10,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { InvoiceTicketsService } from '../accounting/accounting-settings.service';
+import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 declare var $: any;
@@ -24,6 +25,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   @ViewChild('ticketSettings') ticketSettings: TicketSettingsComponent;
   @ViewChild('ticketsStatus') ticketsStatus: TicketsStatusComponent;
+  @ViewChild('cannedResponses') cannedResponses: CannedResponsesComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,

@@ -22,7 +22,7 @@
                             *ngIf="submitted && f.invoiceCount.errors"
                             class="invalid-feedback"
                         >
-                            <div *ngIf="f.invoiceCount.errors.required">Ticket Number is required</div>
+                            <div *ngIf="f.invoiceCount.errors.required">Invoice Number is required</div>
                             <div *ngIf="f.invoiceCount.errors.pattern">Only Number is allowed</div>
                         </div>
                     </div>
@@ -96,7 +96,8 @@
                             class="qt-textarea"
                             placeholder="Enter memo of invoice"
                             appTextArea
-                            [limit]="250"
+                            [limit]="400"
+                            maxlength="400"
                             (input)="onChangeMemo($event)"
                             (onPast)="onPastMemo($event)"
                         ></textarea>
@@ -238,6 +239,7 @@
                             *ngIf="submitted && f.designation.errors"
                             class="invalid-feedback"
                         >
+                            <div *ngIf="f.designation.errors.required">Role is required</div>
                             <div *ngIf="f.designation.errors.minlength">Role is tool small</div>
                             <div *ngIf="f.designation.errors.maxlength">Role is tool large</div>
                         </div>

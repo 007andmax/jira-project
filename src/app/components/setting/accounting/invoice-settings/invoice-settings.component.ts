@@ -49,7 +49,8 @@ export class InvoiceSettingsComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern(/^-?([0-9]\d*)?$/)
+          Validators.pattern(/^-?([0-9]\d*)?$/),
+          Validators.minLength(1), Validators.maxLength(7)
         ])
       ],
       invoiceTerms: ['', Validators.required],
@@ -62,12 +63,11 @@ export class InvoiceSettingsComponent implements OnInit {
       ],
       lastName: [
         '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
+        [Validators.maxLength(15)]
       ],
       taxId: [
         '',
         [
-          Validators.required,
           Validators.maxLength(30),
           Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/)
         ]
@@ -75,13 +75,12 @@ export class InvoiceSettingsComponent implements OnInit {
       taxIdDescription: [
         '',
         [
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+          Validators.maxLength(30),
+          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/)
         ]
       ],
-      conditions: [''],
-      designation: ['', [Validators.minLength(2), Validators.maxLength(15)]],
+      conditions: ['', [Validators.maxLength(400)]],
+      designation: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       email: [
         '',
         Validators.compose([

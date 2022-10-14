@@ -16,7 +16,6 @@ import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { TagsService } from "src/app/services/tags/tags.service";
-import { DataTableDirective } from "angular-datatables";
 import { ManageTagsListService } from "./services/manage-tags-list.service";
 import { TagsRealTimeService } from "src/app/states/tags/tags-real-time.service";
 import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
@@ -55,8 +54,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     paging: false,
     info: false
   };
-  @ViewChild("dataTable")
-  dtElement: DataTableDirective;
   @ViewChild("tickets") tickets: ElementRef;
   private tabSet: ViewContainerRef;
 
@@ -273,11 +270,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
 
 
-  ConfirmDelete(tID: string) {
+  ConfirmDelete(tID: string, name) {
     this.tagId = tID;
     this.confirmStateService.setConfirmAction(DELETE_MANAGE_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want to delete?`;
+    modalRef.componentInstance.message = name;
 
   }
 

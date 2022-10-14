@@ -119,6 +119,20 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     }
     this.cd.detectChanges();
   }
+  onToggleAll(event) {
+    if (event.target.checked) {
+      this.ticketsStatus.forEach(item => {
+        if (item.custom) {
+          if (!item.selected) this.ticketsStateService.getListTicketStatusForRemove().push(item);
+          item.selected = true;
+        }
+      })
+    } else {
+      this.ticketsStateService.setListTicketStatusForRemove([]);
+      this.ticketsStatus.forEach(item => (item.selected = false));
+    }
+    this.cd.detectChanges();
+  }
   resetEditTicketsStatus() {
     this.editTicketsStatus = null;
   }

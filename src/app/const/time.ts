@@ -104,91 +104,91 @@ export const WORK_HOURS = [
         value: '12:30'
     },
     {
-        name: '13:00 PM',
+        name: '1:00 PM',
         value: '13:00'
     },
     {
-        name: '13:30 PM',
+        name: '1:30 PM',
         value: '13:30'
     },
     {
-        name: '14:00 PM',
+        name: '2:00 PM',
         value: '14:00'
     },
     {
-        name: '14:30 PM',
+        name: '2:30 PM',
         value: '14:30'
     },
     {
-        name: '15:00 PM',
+        name: '3:00 PM',
         value: '15:00'
     },
     {
-        name: '15:30 PM',
+        name: '3:30 PM',
         value: '15:30'
     },
     {
-        name: '16:00 PM',
+        name: '4:00 PM',
         value: '16:00'
     },
     {
-        name: '16:30 PM',
+        name: '4:30 PM',
         value: '16:30'
     },
     {
-        name: '17:00 PM',
+        name: '5:00 PM',
         value: '17:00'
     },
     {
-        name: '17:30 PM',
+        name: '5:30 PM',
         value: '17:30'
     },
     {
-        name: '18:00 PM',
+        name: '6:00 PM',
         value: '18:00'
     },
     {
-        name: '18:30 PM',
+        name: '6:30 PM',
         value: '18:30'
     },
     {
-        name: '19:00 PM',
+        name: '7:00 PM',
         value: '19:00'
     },
     {
-        name: '19:30 PM',
+        name: '7:30 PM',
         value: '19:30'
     },
     {
-        name: '20:00 PM',
+        name: '8:00 PM',
         value: '20:00'
     },
     {
-        name: '20:30 PM',
+        name: '8:30 PM',
         value: '20:30'
     },
     {
-        name: '21:00 PM',
+        name: '9:00 PM',
         value: '21:00'
     },
     {
-        name: '21:30 PM',
+        name: '9:30 PM',
         value: '21:30'
     },
     {
-        name: '22:00 PM',
+        name: '10:00 PM',
         value: '22:00'
     },
     {
-        name: '22:30 PM',
+        name: '10:30 PM',
         value: '22:30'
     },
     {
-        name: '23:00 PM',
+        name: '11:00 PM',
         value: '23:00'
     },
     {
-        name: '23:30 PM',
+        name: '11:30 PM',
         value: '23:30'
     }
 ];

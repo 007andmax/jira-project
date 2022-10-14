@@ -48,6 +48,7 @@ export class ConfirmComponent implements OnInit {
     return this.action !== 'ARCHIVE_USER'
       && this.action !== 'ARCHIVE_COMPANY'
       && this.action !== 'DEARCHIVE_COMPANY'
+      && this.action !== 'DELETE_MANAGE_TAG'
       && !this.isSettingsPage()
   }
   public isSettingsPage() {
@@ -69,6 +70,7 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_SUBSCRIPTION_TYPIES' ||
       this.action === 'DELETE_SUBSCRIPTION_USER' ||
       this.action === 'CLOSE_SESSION'
+
   }
 
 }

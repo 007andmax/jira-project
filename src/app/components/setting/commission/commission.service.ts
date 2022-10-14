@@ -169,7 +169,7 @@ export class CommissionService {
    * get companies list
    */
   getCompanies() {
-    return this.http.get(`${this.GET_COMPANY_API}`);
+    return this.http.post(`${this.GET_COMPANY_API}`, { "needCompanyInfo": true });
   }
 
   /**

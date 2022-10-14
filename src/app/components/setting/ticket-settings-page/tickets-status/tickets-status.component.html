@@ -4,7 +4,10 @@
             <div class="tab-pane__table-row">
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                     <label class="qt-checkbox">
-                        <input type="checkbox">
+                        <input
+                            type="checkbox"
+                            (change)="onToggleAll($event)"
+                        >
                         <span></span>
                     </label>
                 </div>

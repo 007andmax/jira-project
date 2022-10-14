@@ -1,16 +1,13 @@
 <!-- Middle Wrapper -->
 <div class="page-container ticket-settings-page-container">
     <div class="page-insider invoice-ticket">
-        <div
-            class="heading qt-df qt-ai-fs qt-jc-sb"
-            [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus',
-        'heading-canned-responses':activeTab === 'cannedResponses'}"
-        >
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h6 class="qt-fw-600">Ticket Settings</h6>
             <div class="qt-df">
                 <div
                     class="qt-button qt-ml-24 --md"
                     (click)="onSubmit()"
+                    *ngIf="activeTab !== 'cannedResponses'"
                 >
                     Save Changes
                 </div>
@@ -50,11 +47,8 @@
                 </div>
             </div>
         </div>
-        <ngb-tabset
-            (tabChange)="setTab($event)"
-            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus' || activeTab === 'cannedResponses'}"
-        >
-            <!-- Ticket Settings -->
+        <ngb-tabset (tabChange)="setTab($event)">
+            <!-- Ticket Settings   [ngClass]="{'clear-padding' :activeTab === 'ticketStatus' || activeTab === 'cannedResponses'}" -->
             <ngb-tab
                 title="Ticket Settings"
                 id="ticketSettings"

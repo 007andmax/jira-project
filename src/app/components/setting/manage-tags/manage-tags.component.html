@@ -387,6 +387,10 @@
 
 
 
+
+
+
+
 <!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider manage-tags">
@@ -503,13 +507,7 @@
                         </div>
                     </div>
                     <div class="cmn-area">
-                        <div
-                            #dataTable
-                            datatable
-                            [dtTrigger]="dtTrigger"
-                            [dtOptions]="dtOptions"
-                            class="dataTable"
-                        >
+                        <div class="dataTable">
                             <div class="tab-pane__body">
                                 <div class="tab-pane__table-header">
                                     <div class="tab-pane__table-row">
@@ -555,7 +553,7 @@
                                                         href="javascript:;"
                                                         data-tooltip="Remove"
                                                         class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
-                                                        (click)="ConfirmDelete(company.id)"
+                                                        (click)="ConfirmDelete(company.id,company.word)"
                                                     >
                                                     </div>
                                                 </div>
@@ -631,130 +629,125 @@
             >
                 <ng-template ngbTabContent>
                     <div class="tab-pane-input__row company-info-block">
-                      <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
-                      <span class="qt-f-1">
-                              Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
+                        <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+                        <span class="qt-f-1">
+                            Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
                         they will automaticly be added to the tags. Tags can be used to search tickets
-                          </span>
-                      <div class="company-info-block__checkbox">
-                        <label class="qt-checkbox">
-                          <input
-                            type="checkbox"
-                            name="allowCreateTags"
-                            [(ngModel)]="allowCreateTags"
-                            (change)="saveAllowingCreateCustomTags()"
-                          >
-                          <span></span>
-                          <div class="qt-ml-8 qt-fw-400 qt-lh-1">Allow user to create custom Tags</div>
-                        </label>
-                      </div>
+                        </span>
+                        <div class="company-info-block__checkbox">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    name="allowCreateTags"
+                                    [(ngModel)]="allowCreateTags"
+                                    (change)="saveAllowingCreateCustomTags()"
+                                >
+                                <span></span>
+                                <div class="qt-ml-8 qt-fw-400 qt-lh-1">Allow user to create custom Tags</div>
+                            </label>
+                        </div>
                     </div>
                     <div class="cmn-area">
-                      <div
-                        #dataTable
-                        datatable
-                        [dtTrigger]="dtTrigger"
-                        [dtOptions]="dtOptions"
-                        class="tab-pane__table dataTable"
-                      >
-                        <div class="tab-pane__table-header">
-                          <div class="tab-pane__table-row">
-                            <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
-                              <span>Custom Tags</span>
-                              <div class="qt-table-modern__sorting--new"></div>
+                        <div class="tab-pane__table dataTable">
+                            <div class="tab-pane__table-header">
+                                <div class="tab-pane__table-row">
+                                    <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
+                                        <span>Custom Tags</span>
+                                        <div class="qt-table-modern__sorting--new"></div>
+                                    </div>
+                                    <div class="tab-pane__table-cell manage-tags-table__count pointer">
+                                        Count
+                                        <div class="qt-table-modern__sorting--new"></div>
+                                    </div>
+                                    <th class="tab-pane__table-cell manage-tags-table__action pointer"></th>
+                                </div>
                             </div>
-                            <div class="tab-pane__table-cell manage-tags-table__count pointer">
-                              Count
-                              <div class="qt-table-modern__sorting--new"></div>
-                            </div>
-                            <th class="tab-pane__table-cell manage-tags-table__action pointer"></th>
-                          </div>
-                        </div>
-                        <div class="tab-pane__table-body">
-                          <div
-                            class="tab-pane__table-row"
-                            *ngFor="
+                            <div class="tab-pane__table-body">
+                                <div
+                                    class="tab-pane__table-row"
+                                    *ngFor="
                             let ticket of ticketTags | tag: searchTag;
                             let i = index;
                             trackBy: trackByFn
-                          ">
-                            <div class="tab-pane__table-cell manage-tags-table__custom-tags">{{ ticket.word | titlecase }}</div>
-                            <div class="tab-pane__table-cell manage-tags-table__count">{{ ticket.usedCounter }}</div>
-                            <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
-                              <div class="qt-df qt-ai-c">
-                                <div
-                                  class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-                                  data-tooltip="Edit"
-                                  (click)="editTag(ticket, i)"
+                          "
                                 >
-                                </div>
-                                <div
-                                  data-tooltip="Remove"
-                                  class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
-                                  (click)="ConfirmDelete(ticket.id)"
-                                >
-                                </div>
-                              </div>
-                              <!-- Edit create Tags -->
-                              <div
-                                class="modal-content --tooltip modal-content__edit toggle-area"
-                                [ngClass]="{ opened: selectedIdx === i }"
-                              >
-                                <div class="modal-wrapper">
-                                  <div class="toggle-header">
-                                    <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Tag</h6>
-                                  </div>
-                                  <div class="">
-                                    <form
-                                      [formGroup]="compnayForm"
-                                      (ngSubmit)="onSubmit()"
-                                    >
-                                      <div class="qt-input-block qt-mb-32">
-                                        <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
+                                    <div class="tab-pane__table-cell manage-tags-table__custom-tags">{{ ticket.word | titlecase }}</div>
+                                    <div class="tab-pane__table-cell manage-tags-table__count">{{ ticket.usedCounter }}</div>
+                                    <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
+                                        <div class="qt-df qt-ai-c">
+                                            <div
+                                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                                data-tooltip="Edit"
+                                                (click)="editTag(ticket, i)"
+                                            >
+                                            </div>
+                                            <div
+                                                data-tooltip="Remove"
+                                                class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+                                                (click)="ConfirmDelete(ticket.id,ticket.word)"
+                                            >
+                                            </div>
+                                        </div>
+                                        <!-- Edit create Tags -->
                                         <div
-                                          *ngIf="submitted && f.word.errors"
-                                          class="invalid-feedback"
+                                            class="modal-content --tooltip modal-content__edit toggle-area"
+                                            [ngClass]="{ opened: selectedIdx === i }"
                                         >
-                                          <div *ngIf="f.word.errors.required">Tag Name is required</div>
+                                            <div class="modal-wrapper">
+                                                <div class="toggle-header">
+                                                    <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Tag</h6>
+                                                </div>
+                                                <div class>
+                                                    <form
+                                                        [formGroup]="compnayForm"
+                                                        (ngSubmit)="onSubmit()"
+                                                    >
+                                                        <div class="qt-input-block qt-mb-32">
+                                                            <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
+                                                            <div
+                                                                *ngIf="submitted && f.word.errors"
+                                                                class="invalid-feedback"
+                                                            >
+                                                                <div *ngIf="f.word.errors.required">Tag Name is required</div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <input
+                                                                    type="text"
+                                                                    formControlName="word"
+                                                                    class="form-input"
+                                                                    placeholder="Enter Tag Name"
+                                                                >
+                                                            </div>
+                                                            <input
+                                                                type="text"
+                                                                hidden
+                                                                formControlName="id"
+                                                                class="form-input"
+                                                            >
+                                                            <div class="qt-df qt-w100">
+                                                                <a
+                                                                    href="javascript:;"
+                                                                    class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                                                                    aria-label="Close"
+                                                                    (click)="onCancel()"
+                                                                >
+                                                                    Cancel
+                                                                </a>
+                                                                <input
+                                                                    type="submit"
+                                                                    value="Save"
+                                                                    class="qt-button qt-jc-c qt-w100"
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-row">
-                                          <input
-                                            type="text"
-                                            formControlName="word"
-                                            class="form-input"
-                                            placeholder="Enter Tag Name"
-                                          >
-                                        </div>
-                                        <input
-                                          type="text"
-                                          hidden
-                                          formControlName="id"
-                                          class="form-input"
-                                        >
-                                        <div class="qt-df qt-w100">
-                                          <a
-                                            href="javascript:;"
-                                            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                                            aria-label="Close"
-                                            (click)="onCancel()"
-                                          >
-                                            Cancel
-                                          </a>
-                                          <input
-                                            type="submit"
-                                            value="Save"
-                                            class="qt-button qt-jc-c qt-w100"
-                                          >
-                                        </div>
-                                      </div>
-                                    </form>
-                                  </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
                     </div>
                 </ng-template>
             </ngb-tab>

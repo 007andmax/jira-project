@@ -727,7 +727,7 @@
                                                 <input
                                                     type="checkbox"
                                                     id="{{ workingDay.dayOfWeek }}"
-                                                    [(ngModel)]="workingDay.isSelected"
+                                                    [(ngModel)]="!workingDay.isSelected"
                                                     name="{{ workingDay.dayOfWeek | titlecase }}"
                                                     [ngModelOptions]="{ standalone: true }"
                                                     class="qt-switch__input"
@@ -763,29 +763,6 @@
                                                         (onSelectedItem)="startTimeChange(workingDay,$event.value)"
                                                     ></app-drop-down>
                                                 </div>
-                                                <!-- <select
-                                                    #startTime
-                                                    class="cmn-select form-input qt-mr-24"
-                                                    [id]=" 'from-'+workingDay.dayOfWeek"
-                                                    (change)="startTimeChange(workingDay, startTime.value)"
-                                                    name="{{workingDay.dayOfWeek}}"
-                                                    [disabled]="!workingDay.isSelected"
-                                                    [ngModel]="fromTime_convert(workingDay.startTime)"
-                                                >
-                                                    <option value="06:00">6:00 AM</option>
-                                                    <option value="06:30">6:30 AM</option>
-                                                    <option value="07:00">07:00 AM</option>
-                                                    <option value="07:30">7:30 AM</option>
-                                                    <option value="08:00">08:00 AM</option>
-                                                    <option value="08:30">8:30 AM</option>
-                                                    <option value="09:00">9:00 AM</option>
-                                                    <option value="09:30">9:30 AM</option>
-                                                    <option value="10:00">10:00 AM</option>
-                                                    <option value="10:30">10:30 AM</option>
-                                                    <option value="11:00">11:00 AM</option>
-                                                    <option value="11:30">11:30 AM</option>
-                                                    <option value="12:00">12:00 PM</option>
-                                                </select> -->
                                                 <div class="qt-w50">
                                                     <app-drop-down
                                                         [class]="['qt-select-input-40']"
@@ -801,23 +778,6 @@
                                                         (onSelectedItem)="endTimeChange(workingDay,$event.value)"
                                                     ></app-drop-down>
                                                 </div>
-                                                <!-- <select
-                                                    #endTime
-                                                    class="cmn-select form-input"
-                                                    (change)="endTimeChange(workingDay,endTime.value)"
-                                                    [id]="'to-'+workingDay.dayOfWeek"
-                                                    name="{{workingDay.dayOfWeek+i}}"
-                                                    [disabled]="!workingDay.isSelected"
-                                                    [ngModel]="toTime_convert(workingDay.endTime)"
-                                                >
-                                                    <option value="17:00">17:00 PM</option>
-                                                    <option value="17:30">17:30 PM</option>
-                                                    <option value="18:00">18:00 PM</option>
-                                                    <option value="18:30">18:30 PM</option>
-                                                    <option value="19:00">19:00 PM</option>
-                                                    <option value="19:30">19:30 PM</option>
-                                                    <option value="20:00">20:00 PM</option>
-                                                </select> -->
                                             </div>
                                         </div>
                                     </div>

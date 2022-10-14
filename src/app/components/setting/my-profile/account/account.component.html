@@ -215,6 +215,7 @@
 
 
 
+
 <div class="cmn-area account">
     <div class="tab-pane__header">
         <div class="tab-pane__header-title">Account Info</div>
@@ -363,7 +364,7 @@
                 <a
                     href="javascript:;"
                     class="static-link"
-                    *ngIf="authenticationTypesType === 'GOOGLE_SECURE'"
+                    *ngIf="authenticationTypesType.type === 'GOOGLE_SECURE'"
                     (click)="showScratchCodes()"
                 >
                     Show scratch codes
