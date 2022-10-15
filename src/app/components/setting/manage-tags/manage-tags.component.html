@@ -432,7 +432,7 @@
                                 (ngSubmit)="onSubmit()"
                             >
                                 <div class="qt-input-block qt-mb-32">
-                                    <label>Tag Name</label>
+                                    <label class="qt-input-block__label">Tag Name</label>
                                     <div class="form-row">
                                         <input
                                             type="text"
@@ -487,7 +487,7 @@
                 id="tab1"
             >
                 <ng-template ngbTabContent>
-                    <div class="tab-pane-input__row company-info-block">
+                    <div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
                         <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
                         <span class="qt-f-1">
                             Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
@@ -502,7 +502,7 @@
                                     (change)="saveAllowingCreateCustomTags()"
                                 >
                                 <span></span>
-                                <div class="qt-ml-8 qt-fw-400 qt-lh-1">Allow user to create custom Tags</div>
+                                <div class="qt-ml-8 qt-fw-400 qt-color-gray-700">Allow user to create custom Tags</div>
                             </label>
                         </div>
                     </div>
@@ -571,7 +571,7 @@
                                                                 (ngSubmit)="onSubmit()"
                                                             >
                                                                 <div class="qt-input-block qt-mb-32">
-                                                                    <label>Tag Name</label>
+                                                                    <label class="qt-input-block__label">Tag Name</label>
                                                                     <div class="form-row">
                                                                         <input
                                                                             type="text"
@@ -628,7 +628,7 @@
                 id="tab2"
             >
                 <ng-template ngbTabContent>
-                    <div class="tab-pane-input__row company-info-block">
+                    <div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
                         <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
                         <span class="qt-f-1">
                             Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
@@ -643,7 +643,7 @@
                                     (change)="saveAllowingCreateCustomTags()"
                                 >
                                 <span></span>
-                                <div class="qt-ml-8 qt-fw-400 qt-lh-1">Allow user to create custom Tags</div>
+                                <div class="qt-ml-8 qt-fw-400 qt-color-gray-700">Allow user to create custom Tags</div>
                             </label>
                         </div>
                     </div>
@@ -703,7 +703,7 @@
                                                         (ngSubmit)="onSubmit()"
                                                     >
                                                         <div class="qt-input-block qt-mb-32">
-                                                            <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
+                                                            <label class="qt-input-block__label" *ngIf="!submitted || !f.word.errors">Tag Name</label>
                                                             <div
                                                                 *ngIf="submitted && f.word.errors"
                                                                 class="invalid-feedback"

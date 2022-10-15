@@ -1,214 +1,204 @@
 <div class="cmn-area service">
-    <div class="data-table-wrap">
-        <table
-            dataTable
-            class="display dataTable"
-            style="width:100%"
-        >
-            <thead>
-                <tr>
-                    <th class="p-name">Service Name</th>
-                    <th class="rate">Rate (%)</th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="services">
-                <tr *ngFor="
-            let service of services;
-            trackBy: service?.name;
-            let i = index
-          ">
-                    <td>{{ service.name }}</td>
-                    <td>{{ service.commissionRate }}</td>
-                    <td class="action">
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Edit"
-                            class="edit"
-                            (click)="editService(i)"
-                        >
-                            <img
-                                src="/html/assets/img/icons/edit-12.svg"
-                                alt="Edit"
-                            >
-                        </a>
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Remove"
-                            class="remove"
-                            (click)="confirmServiceDelete(i, service, false)"
-                        >
-                            <img
-                                src="/html/assets/img/icons/new-remove.svg"
-                                alt="Remove"
-                            >
-                        </a>
-                        <!-- Edit create Tags -->
-                        <div
-                            class="modal-content toggle-area"
-                            [ngClass]="{ opened: selectedIdx === i }"
-                        >
-                            <div class="modal-wrapper">
-                                <div class="toggle-header">
-                                    <h6 class="qt-fw-600 qt-color-dark qt-mb-20 qt-text-left">Edit Rate</h6>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="POST">
-                                        <div class="f-row">
-                                            <div class="f-col col-100">
-                                                <label>Commission Rate (%)</label>
-                                                <div class="form-row">
-                                                    <input
-                                                        type="text"
-                                                        class="form-input"
-                                                        name="commissionRate"
-                                                        autocomplete="off"
-                                                        #commissionRate
-                                                        value="{{ service.commissionRate }}"
-                                                        placeholder="Enter Commission Rate"
-                                                    >
-                                                </div>
-                                            </div>
-                                            <div class="m-btn-row">
-                                                <div class="m-btn-col">
-                                                    <input
-                                                        type="submit"
-                                                        (click)="
-                            confirmServiceEdit(
-                                commissionRate.value,
-                                service.versionedId.id,
-                                service,
-                                false
-                              )
-                            "
-                                                        value="Save"
-                                                        class="btn btn-primary"
-                                                    >
-                                                    <a
-                                                        href="javascript:;"
-                                                        class="btn btn-secondary"
-                                                        aria-label="Close"
-                                                        (click)="selectedIdx = -1"
-                                                    >
-                                                        Cancel
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <br>
-        <table
-            dataTable
-            class="display dataTable"
-            style="width:100%"
-        >
-            <thead>
-                <tr>
-                    <th class="p-name">Special Services</th>
-                    <th class="rate">Rate (%)</th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="specialService">
-                <tr *ngFor="
-            let service of specialService;
-            trackBy: service?.name;
-            let i = index
-          ">
-                    <td>{{ service.name }}</td>
-                    <td>{{ service.commissionRate }}</td>
-                    <td class="action">
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Edit"
-                            class="edit"
-                            (click)="editSpecService(i)"
-                        >
-                            <img
-                                src="/html/assets/img/icons/edit-12.svg"
-                                alt="Edit"
-                            >
-                        </a>
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Remove"
-                            class="remove"
-                            (click)="removeServiceRate()"
-                        >
-                            <img
-                                src="/html/assets/img/icons/new-remove.svg"
-                                alt="Remove"
-                            >
-                        </a>
-                        <!-- Edit create Tags -->
-                        <div
-                            class="modal-content toggle-area"
-                            [ngClass]="{ opened: selectedSpecIdx === i }"
-                        >
-                            <div class="modal-wrapper">
-                                <div class="toggle-header">
-                                    <h6 class="qt-fw-600 qt-color-dark qt-mb-20 qt-text-left">Edit Rate</h6>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="POST">
-                                        <div class="f-row">
-                                            <div class="f-col col-100">
-                                                <label>Commission Rate (%)</label>
-                                                <div class="form-row">
-                                                    <input
-                                                        type="text"
-                                                        class="form-input"
-                                                        name="commissionRate"
-                                                        autocomplete="off"
-                                                        #commissionRate
-                                                        value="{{ service.commissionRate }}"
-                                                        placeholder="Enter Commission Rate"
-                                                    >
-                                                </div>
-                                            </div>
-                                            <div class="m-btn-row">
-                                                <div class="m-btn-col">
-                                                    <input
-                                                        type="submit"
-                                                        (click)="
-                            confirmServiceEdit(
-                                commissionRate.value,
-                                service.id,
-                                service,
-                                true
-                              )
-                            "
-                                                        value="Save"
-                                                        class="btn btn-primary"
-                                                    >
-                                                    <a
-                                                        href="javascript:;"
-                                                        class="btn btn-secondary"
-                                                        aria-label="Close"
-                                                        (click)="selectedSpecIdx = -1"
-                                                    >
-                                                        Cancel
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  <div
+    class="tab-pane__table dataTable"
+  >
+    <div class="tab-pane__table-header">
+      <div class="tab-pane__table-row">
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+          <label class="qt-checkbox"><input type="checkbox">
+          <span></span></label>
+        </div>
+        <div class="tab-pane__table-cell commissions-service__service-name pointer">
+          Service Name
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div class="tab-pane__table-cell commissions-service__rate">Commission Rate (%)</div>
+        <div class="tab-pane__table-cell commissions-service__action"></div>
+      </div>
     </div>
+    <div class="tab-pane__table-body" *ngIf="services">
+      <div class="tab-pane__table-row" *ngFor="
+              let service of services;
+              trackBy: service?.name;
+              let i = index
+            ">
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+          <label class="qt-checkbox"><input type="checkbox">
+            <span></span></label>
+        </div>
+        <div class="tab-pane__table-cell commissions-service__service-name">{{ service.name }}</div>
+        <div class="tab-pane__table-cell commissions-service__rate">{{ service.commissionRate }}</div>
+        <div class="tab-pane__table-cell commissions-service__action qt-pos-rel">
+          <div class="qt-df">
+            <div
+              data-tooltip="Edit"
+              class="icon__edit-gray-dark qt-sz-20 qt-mr-16 qt-bg-contain pointer"
+              (click)="editService(i)"
+            >
+            </div>
+            <div
+              data-tooltip="Remove"
+              class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+              (click)="confirmServiceDelete(i, service, false)"
+            >
+            </div>
+          </div>
+          <!-- Edit create Tags -->
+          <div
+            class="modal-content --tooltip toggle-area"
+            [ngClass]="{ opened: selectedIdx === i }"
+          >
+            <div class="modal-wrapper">
+              <div class="toggle-header">
+                <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Rate</h6>
+              </div>
+              <div class="">
+                <form method="POST">
+                  <div class="qt-input-block qt-mb-32">
+                    <label class="qt-input-block__label">Commission Rate (%)</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="commissionRate"
+                      autocomplete="off"
+                      #commissionRate
+                      value="{{ service.commissionRate }}"
+                      placeholder="Enter Commission Rate"
+                    >
+                  </div>
+                  <div class="qt-df qt-w100">
+                    <a
+                      href="javascript:;"
+                      class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                      aria-label="Close"
+                      (click)="selectedIdx = -1"
+                    >
+                      Cancel
+                    </a>
+                    <input
+                      type="submit"
+                      (click)="
+                              confirmServiceEdit(
+                                  commissionRate.value,
+                                  service.versionedId.id,
+                                  service,
+                                  false
+                                )
+                              "
+                      value="Save"
+                      class="qt-button qt-jc-c qt-w100"
+                    >
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div
+    class="tab-pane__table dataTable"
+  >
+    <div class="tab-pane__table-header">
+      <div class="tab-pane__table-row">
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+          <label class="qt-checkbox"><input type="checkbox">
+            <span></span></label>
+        </div>
+        <div class="tab-pane__table-cell commissions-service__service-name pointer">
+          Service Name
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div class="tab-pane__table-cell commissions-service__rate">Commission Rate (%)</div>
+        <div class="tab-pane__table-cell commissions-service__action"></div>
+      </div>
+    </div>
+    <div class="tab-pane__table-body" *ngIf="specialService">
+      <div class="tab-pane__table-row" *ngFor="
+          let service of specialService;
+          trackBy: service?.name;
+          let i = index
+        ">
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+          <label class="qt-checkbox"><input type="checkbox">
+            <span></span></label>
+        </div>
+        <div class="tab-pane__table-cell commissions-service__service-name ">{{ service.name }}</div>
+        <div class="tab-pane__table-cell commissions-service__rate">{{ service.commissionRate }}</div>
+        <div class="tab-pane__table-cell commissions-service__action qt-pos-rel">
+          <div class="qt-df">
+            <div
+              data-tooltip="Edit"
+              class="icon__edit-gray-dark qt-sz-20 qt-mr-16 qt-bg-contain pointer"
+              (click)="editSpecService(i)"
+            >
+            </div>
+            <div
+              data-tooltip="Remove"
+              class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+              (click)="removeServiceRate()"
+            >
+            </div>
+          </div>
+          <!-- Edit create Tags -->
+          <div
+            class="modal-content --tooltip toggle-area"
+            [ngClass]="{ opened: selectedSpecIdx === i }"
+          >
+            <div class="modal-wrapper">
+              <div class="toggle-header">
+                <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Rate</h6>
+              </div>
+              <div class="">
+                <form method="POST">
+                  <div class="qt-input-block qt-mb-32">
+                    <label class="qt-input-block__label">Commission Rate (%)</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="commissionRate"
+                      autocomplete="off"
+                      #commissionRate
+                      value="{{ service.commissionRate }}"
+                      placeholder="Enter Commission Rate"
+                    >
+                  </div>
+                  <div class="m-btn-row">
+                    <div class="qt-df qt-w100">
+                      <a
+                        href="javascript:;"
+                        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                        aria-label="Close"
+                        (click)="selectedSpecIdx = -1"
+                      >
+                        Cancel
+                      </a>
+                      <input
+                        type="submit"
+                        (click)="
+                              confirmServiceEdit(
+                                  commissionRate.value,
+                                  service.id,
+                                  service,
+                                  true
+                                )
+                              "
+                        value="Save"
+                        class="qt-button qt-jc-c qt-w100"
+                      >
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>
 <div

@@ -209,52 +209,6 @@ body {
         margin-top: 64px;
       }
     }
-    .manage-tags {
-      .company-info-block {
-        margin: 16px 32px;
-      }
-
-      //.modal-content {
-      //  &.--tooltip {
-      //    position: absolute;
-      //    right: 0;
-      //    top: 50px;
-      //    background-color: #ffffff;
-      //    z-index: 1;
-      //    box-shadow: 0 2px 20px 10px rgba(0,0,0,.05);
-      //    border: solid 1px #edf2f6;
-      //    padding: 32px;
-      //    width: 504px;
-      //    display: none;
-      //    &::before {
-      //      bottom: 100%;
-      //      left: auto;
-      //      right: 20px;
-      //      border: solid transparent;
-      //      content: " ";
-      //      height: 0;
-      //      width: 0;
-      //      position: absolute;
-      //      pointer-events: none;
-      //      border-bottom-color: $white;
-      //      border-width: 7px;
-      //      margin-left: -7px;
-      //    }
-      //    &__edit {
-      //      right: 18px;
-      //      top: 39px;
-      //    }
-      //    &.opened {
-      //      display: block;
-      //    }
-      //    label {
-      //      font-weight: 500;
-      //      color: $gray-500;
-      //      line-height: 16px;
-      //    }
-      //  }
-      //}
-    }
     .modal-content {
       &.--tooltip {
         position: absolute;
@@ -597,6 +551,10 @@ body {
       &.--border-transparent {
         border-color: transparent;
       }
+    }
+
+    .company-info-block + .cmn-area {
+      margin-top: 16px;
     }
 
     //.tab-pane {
@@ -968,16 +926,20 @@ body {
       .user-dp {
         position: relative;
 
-        &::after {
-          width: 10px;
-          height: 10px;
-          border: solid 2px $white;
-          background-color: transparent;
-          content: "";
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          border-radius: 50%;
+        &.online,
+        &.offline,
+        &.away {
+          &::after {
+            width: 10px;
+            height: 10px;
+            border: solid 2px $white;
+            background-color: transparent;
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+          }
         }
 
         &.online::after {
@@ -994,8 +956,6 @@ body {
       }
 
       &-header {
-        color: $gray-500;
-        font-weight: 500;
         background-color: $gray-50;
         border-bottom: 1px solid $gray-200;
         border-radius: 8px 8px 0 0;
@@ -1007,6 +967,8 @@ body {
 
         .tab-pane__table-cell {
           padding: 0 8px;
+          color: $gray-500;
+          font-weight: 500;
 
           &.tab-pane__table-checkboxes {
             padding: 0;
@@ -1265,10 +1227,38 @@ body {
       }
     }
 
+    .commissions-product {
+      &__company-name {
+        flex: 1 1 325px;
+        padding: 0 8px;
+      }
+      &__rate {
+        flex: 1 1 100px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 56px;
+      }
+    }
+
+    .companies-sales-person-table {
+      &__company-name {
+        flex: 1 1 322px;
+        padding: 0 8px;
+      }
+      &__assigned-sales-person {
+        flex: 1 1 180px;
+        padding: 0 8px;
+      }
+      &__action {
+        flex: 0 0 40px;
+      }
+    }
+
     .company-info-block {
       display: flex;
       font-size: 14px;
-      line-height: 17px;
+      line-height: 20px;
       align-items: flex-start;
       padding: 12px;
       background-color: $gray-50;
@@ -1286,6 +1276,10 @@ body {
         padding-top: 12px;
         margin-top: 12px;
         border-top: 1px solid $gray-200;
+      }
+
+      label {
+        line-height: 17px;
       }
     }
 

@@ -1,44 +1,53 @@
+<div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
+  <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+  <span class="qt-f-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </span>
+</div>
 <div class="cmn-area companies">
-    <div class="data-table-wrap">
-        <table
-            class="display dataTable"
-            style="width:100%"
-        >
-            <thead>
-                <tr>
-                    <th class="c-name">Company</th>
-                    <th class="address">Address</th>
-                    <th class="sp">Sales Person</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let company of clientsCompanies; let i = index">
-                    <td class="c-name">
-                        <div class="c-info">
-                            <span class="c-logo">{{ displayFrstLstChar(company.name) }}</span>
-                            <div class="c-info-title">{{ company.name }}</div>
-                        </div>
-                    </td>
-                    <td class="address">
-                        {{
-              company.companyInfo.addresses[0]
-                .addressWithSuitNumberAndPostalCode
-            }}
-            {{ getClinetUrl(company) }}
-                    </td>
-                    <td class="sp">
-                        <app-tech-users
-                            [users]="activeTechUsers"
-                            [editMode]="true"
-                            [type]="'COMPANY_SETTINGS'"
-                            [selectedMode]="'SINGLE'"
-                            [editUsers]="selectedActiveTechUsers(company, i)"
-                            [isDisabled]="!getPermissions('EDIT_COMPANIES')"
-                            (usersChange)="setTechLead($event,company)"
-                        ></app-tech-users>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  <div
+    class="tab-pane__table dataTable"
+  >
+    <div class="tab-pane__table-header">
+      <div class="tab-pane__table-row">
+        <div class="tab-pane__table-cell companies-sales-person-table__company-name">
+          Company Name
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div class="tab-pane__table-cell companies-sales-person-table__assigned-sales-person">
+          Assigned Sales Person
+          <div class="qt-table-modern__sorting--new"></div>
+        </div>
+        <div class="tab-pane__table-cell companies-sales-person-table__action"></div>
+      </div>
     </div>
+    <div class="tab-pane__table-body">
+      <div class="tab-pane__table-row" *ngFor="let company of clientsCompanies; let i = index">
+        <div class="tab-pane__table-cell companies-sales-person-table__company-name">
+          {{ company.name }}
+<!--          <div class="c-info">-->
+<!--            <span class="c-logo">{{ displayFrstLstChar(company.name) }}</span>-->
+<!--            <div class="c-info-title">{{ company.name }}</div>-->
+<!--          </div>-->
+        </div>
+        <div class="tab-pane__table-cell companies-sales-person-table__assigned-sales-person">
+<!--          {{-->
+<!--          company.companyInfo.addresses[0]-->
+<!--            .addressWithSuitNumberAndPostalCode-->
+<!--          }}-->
+          {{ getClinetUrl(company) }}
+          <app-tech-users
+            [users]="activeTechUsers"
+            [editMode]="true"
+            [type]="'COMPANY_SETTINGS'"
+            [selectedMode]="'SINGLE'"
+            [editUsers]="selectedActiveTechUsers(company, i)"
+            [isDisabled]="!getPermissions('EDIT_COMPANIES')"
+            (usersChange)="setTechLead($event,company)"
+          ></app-tech-users>
+        </div>
+        <div class="tab-pane__table-cell companies-sales-person-table__action">
+          <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

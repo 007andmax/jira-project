@@ -26,13 +26,19 @@
         id="dropdownTechuser"
         ngbDropdownToggle
     >
-        <div
-            class="ticket-updates__photo-people"
-            [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
-            [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
-        >
+        <div class="user-tech-dp">
+           <div
+             class="tab-pane__table-avatar user-dp"
+             [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
+             [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
+           >
+          </div>
         </div>
-        <span [textContent]="ticketsListService.getUserName(selectedUsers[0])"></span>
+        <div class="qt-ml-12 qt-f-1 ellipsis">
+          <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis" [textContent]="ticketsListService.getUserName(selectedUsers[0])"></div>
+          <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">alma.lawson@example.com</div>
+        </div>
+
     </div>
     <app-dynamic-tooltip
         [content]="'Select User'"
