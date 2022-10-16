@@ -14,20 +14,20 @@
           </label>
         </div>
         <div
-          class="tab-pane__table-cell crm-settings-table__industry-type pointer"
+          class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
           (click)="onFilter('name')"
         >
           Industry Type
           <div class="qt-table-modern__sorting--new"></div>
         </div>
         <div
-          class="tab-pane__table-cell crm-settings-table__count pointer"
+          class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
           (click)="onFilter('count')"
         >
           Count
           <div class="qt-table-modern__sorting--new"></div>
         </div>
-        <div class="tab-pane__table-cell crm-settings-table__action"></div>
+        <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
       </div>
     </div>
     <div
@@ -57,7 +57,7 @@
           </label>
         </div>
         <div
-          class="tab-pane__table-cell crm-settings-table__industry-type"
+          class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
           [ngClass]="{'--input-error' :  item.disableUpdate  }"
         >
           <input
@@ -78,10 +78,10 @@
           </mat-error>
         </div>
         <div
-          class="tab-pane__table-cell crm-settings-table__count"
+          class="tab-pane__table-cell crm-settings-company-industry-table__count"
           [textContent]="item.usageCounter"
         ></div>
-        <div class="tab-pane__table-cell crm-settings-table__action">
+        <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
           <div class="qt-df qt-ai-c">
             <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"></div>
             <div

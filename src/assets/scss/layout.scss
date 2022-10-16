@@ -1161,22 +1161,6 @@ body {
       }
     }
 
-    .crm-settings-table {
-      &__checkboxes {
-        flex: 0 0 30px;
-      }
-      &__industry-type {
-        flex: 1 1 174px;
-      }
-      &__count {
-        flex: 1 1 305px;
-        padding: 0 8px;
-      }
-      &__action {
-        flex: 0 0 56px;
-      }
-    }
-
     .active-users-table {
       &__user-name {
         flex: 1 0 245px;
