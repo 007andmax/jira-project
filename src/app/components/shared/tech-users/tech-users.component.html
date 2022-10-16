@@ -12,13 +12,29 @@
         Assigned Users
     </div> -->
     <div
-        class="device-user pointer"
-        *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
-        id="dropdownTechuser"
-        style="margin-bottom: 10px;width: 109px;"
-        ngbDropdownToggle
+      class="device-user pointer"
+      *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
+      id="dropdownTechuser"
+      style="margin-bottom: 10px;width: 109px;"
+      ngbDropdownToggle
     >
-        Assigned Users
+      <!-- FOR RECURRING_TICEKTS -->
+      <!-- Assigned Users -->
+      <!-- FOR RECURRING_TICEKTS -->
+
+      <!-- COMPANY_SETTINGS -->
+      <div class="company-settings-user">
+        <div class="icon__user-avatar qt-sz-36 qt-circle qt-bg-contain"></div>
+        <div class="qt-ml-12 qt-f-1 ellipsis">
+          <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">Assign Sales Person</div>
+          <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-4">
+            <div class="preview-container" style="border: 1px solid #FECDCA">
+              <span class="qt-fw-500" style="color: #D92D20;">Not Assigned</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- COMPANY_SETTINGS-->
     </div>
     <div
         class="device-user pointer company-settings-user"

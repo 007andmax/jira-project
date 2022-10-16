@@ -4,6 +4,26 @@
 
 body {
   &.page-settings {
+    .preview-container {
+      height: 21px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      border: solid 1px $primary-1;
+      display: flex;
+      width: max-content;
+      align-items: center;
+      span {
+        font-size: 12px;
+        font-weight: 400;
+        text-transform: capitalize;
+        line-height: 15px;
+      }
+    }
+
+    .device-user.dropdown-toggle { // TODO delete after MAX fix
+      width: auto !important;
+      margin-bottom: unset !important;
+    }
     .notifications {
       display: flex;
       align-items: flex-start;
@@ -978,6 +998,10 @@ body {
       &-body {
         .tab-pane__table-row {
           min-height: 56px;
+
+          &--lg {
+            min-height: 75px;
+          }
         }
       }
       &-row {
@@ -988,6 +1012,10 @@ body {
 
         &:last-child:not(.add-gl-container) {
           border: none;
+
+          &.--border-bottom {
+            border-bottom: 1px solid $gray-200;
+          }
         }
 
         &:first-child {
@@ -1066,6 +1094,7 @@ body {
       }
       &__preview {
         flex: 1 1 500px;
+        padding: 0 8px;
       }
       &__action {
         flex: 0 0 20px;
