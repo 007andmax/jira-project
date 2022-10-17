@@ -9,13 +9,13 @@
                     *ngIf="getSelectedCount() > 0"
                     (click)="removeList()"
                 >
-                    <div class="icon__new-remove qt-sz-16 qt-bg-contain qt-ic-c"></div>
+                    <div class="icon__new-remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                 </div>
                 <div
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                     (click)="create()"
                 >
-                  <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                  <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                   <span
                     [textContent]="parseAddText()"
                   ></span>

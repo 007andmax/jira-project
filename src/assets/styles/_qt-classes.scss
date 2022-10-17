@@ -168,9 +168,8 @@
   cursor: pointer;
   position: relative;
 
-  &.--disabled {
-    background-color: #16a4fa80;
-    cursor: default;
+  &:hover {
+    background-color: $blue-light-500;
   }
 
   &.--outline {
@@ -183,12 +182,31 @@
     border: solid 1px $gray-200;
     color: $gray-500;
     background-color: $white;
+
+    &:hover {
+      color: $gray-600;
+
+      .qt-button-icon {
+        background-color: $gray-600;
+      }
+    }
   }
 
   &.--red {
     color: $white;
     border: solid 1px $error;
     background-color: $error;
+  }
+  &.--color-red {
+    color: $red-500;
+
+    &:hover {
+      color: $red-600;
+
+      .qt-button-icon {
+        background-color: $red-600;
+      }
+    }
   }
 
   &.--md {
@@ -241,6 +259,14 @@
     font-size: 12px;
     padding-left: 8px;
     padding-right: 8px;
+  }
+
+  &.--disabled,
+  &[disabled] {
+    background-color: $gray-300;
+    border-color: $gray-300;
+    color: $white;
+    cursor: default;
   }
 }
 

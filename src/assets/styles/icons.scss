@@ -265,7 +265,8 @@
     mask-image: url("/assets/img/icons/category-more.svg");
   }
   &__new-remove,
-  &__new-remove-red,
+  &__new-remove--red-500,
+  &__new-remove--red-600,
   &__new-remove-blue {
     background-color: $gray-500;
     -webkit-mask-position: center;
@@ -277,8 +278,11 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__new-remove-red {
+  &__new-remove--red-600 {
     background-color: $red-600;
+  }
+  &__new-remove--red-500 {
+    background-color: $red-500;
   }
   &__new-remove-blue {
     background-color: $blue-light-600;
@@ -550,6 +554,17 @@
   &__add-grey {
     background-image: url("/assets/img/icons/add-grey.svg");
   }
+  &__add--grey-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/add-grey.svg");
+    mask-image: url("/assets/img/icons/add-grey.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__company-address {
     background-image: url("/assets/img/icons/company-address.svg");
   }
@@ -608,6 +623,17 @@
   }
   &__reset {
     background-image: url("/assets/img/icons/reset.svg");
+  }
+  &__reset-gray-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/reset.svg");
+    mask-image: url("/assets/img/icons/reset.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
@@ -771,8 +797,16 @@
   &__server {
     background-image: url("/assets/img/icons/server.svg");
   }
-  &__button-server {
-    background-image: url("/assets/img/icons/button-server.svg");
+  &__button-server--gray-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/button-server.svg");
+    mask-image: url("/assets/img/icons/button-server.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__tablet {
     background-image: url("/assets/img/icons/tablet.svg");
