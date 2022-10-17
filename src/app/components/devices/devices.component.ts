@@ -148,6 +148,43 @@ export class DevicesComponent implements OnInit {
   IsCurrentConfigLoading: boolean = false;
   searchTagName:any;
   todaysDate: any;
+  isAdvSearchOpen:boolean= false;
+  advanceSearchHardware = [];
+  advanceSearchModel = [];
+  advanceSearchManufacturer = [];
+  advanceSearchSoftwareItem = [];
+  advanceSearchOperatingVersion = [];
+  advanceSearchOperatingType = [];
+  advanceSearchMemory:number=0;
+  advanceSearchDiskSpace:number=0;
+  advanceSearchFreeSpace:number=0;
+  advanceSearchMemorySelect:any;
+  advanceSearchDiskSpaceSelect:any;
+  advanceSearchFreeSpaceSelect:any;
+  advanceSearchOperation:any[]= [
+    {
+      "name": "=",      
+    },
+    {
+      "name":">"
+    },
+    {
+      "name":"<"
+    }
+  ]
+  advancesearchCompanyTag = [];
+  advancesearchHardwareTag = [];
+  advancesearchManufacturerTag = [];
+  advancesearchModelTag = [];
+  advancesearchSoftwareTag = [];
+  advancesearchOSVersion=[];
+  advancesearchOSType=[];
+  advancesearchCompanyFilterValue: string = "";
+  advancesearchHardwareFilterValue: string = "";
+  advancesearchManufacturerFilterValue: string = "";
+  advancesearchModelFilterValue: string = "";
+  advancesearchSoftwareFilterValue: string = "";
+  advancesearchPreloader: boolean = false;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -165,7 +202,7 @@ export class DevicesComponent implements OnInit {
     public draftEmailStateService: DraftEmailStateService,
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {        
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
@@ -232,6 +269,11 @@ export class DevicesComponent implements OnInit {
       req.Criteria = [];
       this.getAssets();
       this.HardwareTypeList(this.techCompnayGuid);
+      this.getManufacturers(this.techCompnayGuid);
+      this.getModels(this.techCompnayGuid);  
+      this.getSoftwarItem(this.techCompnayGuid);  
+      this.getOperatingSystemVersion(this.techCompnayGuid);
+      this.getOperatingSystemType(this.techCompnayGuid); 
     }
     else {
       this.setPreviewDataDevice();
@@ -331,6 +373,7 @@ export class DevicesComponent implements OnInit {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
+        this.advanceSearchHardware = resp.filter(x=>x.IsActive);
         this.hardwareTypes = resp;
         this.assetList.forEach((element) => {
           var ht = this.hardwareTypes.find(
@@ -1072,6 +1115,7 @@ export class DevicesComponent implements OnInit {
     }
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
+        this.advanceSearchManufacturer = resp.filter(x=>x.IsActive);  
         this.manufactureList = resp;
         if (this.asset) {
           this.selectManufacture(this.asset.ManufacturerId);
@@ -1110,6 +1154,7 @@ export class DevicesComponent implements OnInit {
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
+        this.advanceSearchModel = resp.filter(x=>x.IsActive);
         this.selectModelList = resp;
         if (this.asset) {
           this.selectModel(this.asset.ModelID);
@@ -1618,6 +1663,229 @@ export class DevicesComponent implements OnInit {
         this.toastr.error("Something went wrong please try again.");
       }
     );
+  }
+
+  openAsideAdvSearch() {
+    this.isAdvSearchOpen = true;
+    this.devices_resize=true;
+  }
+
+  advanceSearchClosed(){
+    this.isAdvSearchOpen = false;
+    this.devices_resize = false;
+    this.advancesearchPreloader = false;
+    this.advancesearchClear();
+  }
+
+  advanchSearch(){   
+    this.advancesearchPreloader = true;  
+    let data:any = {}; 
+    let datasize : any = {};         
+    data.TechCompanyGuid =  this.techCompnayGuid;        
+    data.CompanyList = this.advancesearchCompanyTag;
+    if(this.advanceSearchMemory > 0 && this.advanceSearchMemorySelect !=undefined){
+      datasize.ColumnName = "Memory";
+      datasize.Comparison = this.advanceSearchMemorySelect;
+      datasize.Value = this.advanceSearchMemory;
+      data.searchItems.push(datasize);
+    }    
+    if(this.advanceSearchDiskSpace > 0 && this.advanceSearchDiskSpaceSelect !=undefined){
+      datasize.ColumnName = "DiskSpace";
+      datasize.Comparison = this.advanceSearchDiskSpaceSelect;
+      datasize.Value = this.advanceSearchDiskSpace;
+      data.searchItems.push(datasize);
+    } 
+    if(this.advanceSearchFreeSpace > 0 && this.advanceSearchFreeSpaceSelect !=undefined){
+      datasize.ColumnName = "FreeSpace";
+      datasize.Comparison = this.advanceSearchFreeSpaceSelect;
+      datasize.Value = this.advanceSearchFreeSpace;
+      data.searchItems.push(datasize);
+    }          
+    data.OSVersion = this.advancesearchOSVersion;
+    data.OSType = this.advancesearchOSType;
+    data.HardwareTypesList = this.advancesearchHardwareTag;
+    data.ManufacturerList = this.advancesearchManufacturerTag;
+    data.ModelList = this.advancesearchModelTag;
+    data.SoftwareList = this.advancesearchSoftwareTag;
+    this.agentService.getAssetByAdvanceSearch(data).subscribe(
+      (result) => { 
+        this.advancesearchPreloader = false;                
+        if (result.length > 0) {         
+        }
+        else
+        {
+          this.advancesearchPreloader = false;
+        }
+      })       
+  }
+
+  
+  getSoftwarItem(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getSoftwarItem(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getSoftwareListByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {                              
+        this.advanceSearchSoftwareItem = resp;
+      });
+  }
+
+  getOperatingSystemVersion(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getOperatingSystemVersion(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getOperationgSystemGetVersionByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {            
+        this.advanceSearchOperatingVersion = resp;
+      });
+  }
+
+  getOperatingSystemType(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getOperatingSystemType(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService
+      .getOperationgSystemGetTypeByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {               
+        this.advanceSearchOperatingType = resp;
+      });
+  }
+
+  AdvanceSearchOSVersionName(OSVersion){
+    if(OSVersion !=undefined || OSVersion !=null){
+      this.advancesearchOSVersion.push(OSVersion);
+    }
+  }
+
+  AdvanceSearchOSType(OSType){
+    if(OSType !=undefined || OSType !=null){
+      this.advancesearchOSType.push(OSType);
+    }
+  }
+
+  AdvanceSearchMemory(memory){
+    if(memory !=undefined || memory !=null){
+      this.advanceSearchMemorySelect = memory;
+    }
+  }
+
+  AdvanceSearchDiskSpace(diskSpace){
+    if(diskSpace !=undefined || diskSpace !=null){
+      this.advanceSearchDiskSpaceSelect = diskSpace;
+    }
+  }
+
+  AdvanceSearchFreeSpace(freeSpace){
+    if(freeSpace !=undefined || freeSpace !=null){
+      this.advanceSearchFreeSpaceSelect = freeSpace;
+    }
+  }
+
+  onCompaniesSelectTag(Tag){       
+    if(this.advancesearchCompanyTag.length>0)
+    {
+      let result = this.advancesearchCompanyTag.find(x=>x.id == Tag.id);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchCompanyTag.push(Tag);
+    this.advancesearchCompanyFilterValue = "";
+  }
+
+  searchCompanyRemove(index: number) {
+    this.advancesearchCompanyTag.splice(index, 1);
+  }
+
+  onHardwareSelectTag(Tag){
+    if(this.advancesearchHardwareTag.length>0)
+    {
+      let result = this.advancesearchHardwareTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchHardwareTag.push(Tag);
+    this.advancesearchHardwareFilterValue = "";
+  }
+
+  searchHardwareRemove(index: number){
+    this.advancesearchHardwareTag.splice(index, 1);
+  }
+
+  onManufacturerSelectTag(Tag){
+    if(this.advancesearchManufacturerTag.length>0)
+    {
+      let result = this.advancesearchManufacturerTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchManufacturerTag.push(Tag);
+    this.advancesearchManufacturerFilterValue = "";
+  }
+
+  
+  searchManufacturerRemove(index: number){
+    this.advancesearchManufacturerTag.splice(index, 1);
+  }
+
+  onModelSelectTag(Tag){
+    if(this.advancesearchModelTag.length>0)
+    {
+      let result = this.advancesearchModelTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchModelTag.push(Tag);
+    this.advancesearchModelFilterValue = "";
+  } 
+  
+  searchModelRemove(index: number){
+    this.advancesearchModelTag.splice(index, 1);
+  }
+
+  onSoftwareSelectTag(Tag){    
+    if(this.advancesearchSoftwareTag.length>0)
+    {
+      let result = this.advancesearchSoftwareTag.find(x=>x.ID == Tag.ID);
+      if(result)
+      {
+        return;
+      }      
+    }
+    this.advancesearchSoftwareTag.push(Tag);
+    this.advancesearchSoftwareFilterValue = "";
+  }
+
+  searchSoftwareRemove(index: number){
+    this.advancesearchSoftwareTag.splice(index, 1);
+  }
+
+  advancesearchClear(){
+    this.advancesearchCompanyTag = [];
+    this.advancesearchOSVersion = [];
+    this.advancesearchOSType=[];
+    this.advancesearchHardwareTag = [];
+    this.advancesearchManufacturerTag = [];
+    this.advancesearchModelTag = [];
+    this.advancesearchSoftwareTag = [];
   }
 
 }

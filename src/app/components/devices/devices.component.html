@@ -28,6 +28,12 @@
                     </a>
                 </div>
             </div>
+            <span><button 
+                class="qt-button --gray"               
+                (click)="openAsideAdvSearch()"
+            >
+            Advance Search
+            </button></span>   
             <button class="qt-btn --outline-white qt-ml-8" (click)="sendEmail()">
               <span class="d-email"></span>
             </button>
@@ -44,7 +50,7 @@
     </button>      
     <button class="qt-btn --outline-white qt-ml-8" (click)="getAddDevice()">
         <span class="d-adddevice"></span>
-    </button>
+    </button>     
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
@@ -1107,6 +1113,332 @@
                     Cancel
                 </button>
             </div>
+        </div>
+    </div>
+
+    <div class="company-device-page__aside advanced-search-aside" *ngIf="isAdvSearchOpen">
+        <div class="loading" *ngIf="advancesearchPreloader"> 
+        </div>  
+        <div [hidden]="!isAdvSearchOpen" class="qt-aside-modern advanced-search-modern"> 
+            <div class="qt-aside-modern__header">
+                <div class="qt-aside-modern__header-info d-f ai-c">
+                    <div class="qt-aside__title">Advance Search</div>
+                </div>
+                <div>
+                    <div
+                        class="qt-aside__close-modal icon__close"  
+                        (click)="advanceSearchClosed()"              
+                    ></div>
+                </div>
+            </div> 
+            <div class="qt-aside-modern__content">             
+                <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
+                        <label for="dropdownCompanyTag" class="tagfontweight">Company</label>    
+                            <div class="Rectangle_device-popup">                
+                                <mat-form-field class="example-chip-list" appearance="none">                                       
+                                <mat-chip-list #chipCompanyTag>
+                                    <mat-chip *ngFor="let tag of advancesearchCompanyTag; let i=index" (removed)="searchCompanyRemove(i)">
+                                        {{tag.name}} <mat-icon matChipRemove></mat-icon>
+                                      </mat-chip>                        
+                                    <input autofocus 
+                                    id="dropdownCompanyTag"  
+                                    #searchInput  
+                                    [(ngModel)]="advancesearchCompanyFilterValue"                                             
+                                    ngbDropdownToggle                         
+                                    class="pointer"
+                                    placeholder="select Company " 
+                                    [matChipInputFor]="chipCompanyTag"                        
+                                    >
+                                </mat-chip-list>                                                 
+                                </mat-form-field>  
+                            </div>                                     
+                        <div                        
+                      class="dropdown-menu advance-search-devices"
+                      ngbDropdownMenu
+                      aria-labelledby="dropdownCompanyTag"                      
+                  >
+                      <ng-template
+                          ngFor
+                          let-item
+                          [ngForOf]="companies"
+                      >
+                          <button
+                              ngbDropdownItem
+                              class="dropdown-item"  
+                              (click)="onCompaniesSelectTag(item)"                
+                              [textContent]="item.name"
+                          ></button>
+                      </ng-template>
+                        </div>          
+                </div>  
+                
+                <div class="qt-df qt-mb-24">
+                    <div class="qt-w30">                    
+                       <app-drop-down                    
+                        [title]="'Memory'"
+                        [placeholder]="'Select Memory'"
+                        [list]="advanceSearchOperation"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"  
+                        (onSelectedItem)="AdvanceSearchMemory($event)"                   
+                    ></app-drop-down>
+                    </div>
+                    <div class="qt-w70">                     
+                        <div class="qt-input-block qt-input-advanceSearch">                        
+                            <input
+                                type="number"                            
+                                placeholder="0"
+                                name="memory"
+                                [(ngModel)]="advanceSearchMemory"
+                            >
+                        </div>                     
+                    </div>
+                </div>
+                <div class="qt-df qt-mb-24">
+                    <div class="qt-w30">                    
+                       <app-drop-down                    
+                        [title]="'Disk Space'"
+                        [placeholder]="'Select Disk Space'"
+                        [list]="advanceSearchOperation"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"  
+                        (onSelectedItem)="AdvanceSearchDiskSpace($event)"                   
+                    ></app-drop-down>
+                    </div>
+                    <div class="qt-w70">                     
+                        <div class="qt-input-block qt-input-advanceSearch">                        
+                            <input
+                                type="number"                            
+                                placeholder="0"
+                                name="diskSpace"
+                                [(ngModel)]="advanceSearchDiskSpace"
+                            >
+                        </div>                                         
+                    </div>
+                </div>
+                <div class="qt-df qt-mb-24">
+                    <div class="qt-w30">                    
+                       <app-drop-down                    
+                        [title]="'Free Space'"
+                        [placeholder]="'Select Free Space'"
+                        [list]="advanceSearchOperation"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"  
+                        (onSelectedItem)="AdvanceSearchFreeSpace($event)"                   
+                    ></app-drop-down>
+                    </div>
+                    <div class="qt-w70"> 
+                        <div class="qt-input-block qt-input-advanceSearch">                        
+                            <input
+                                type="number"                            
+                                placeholder="0"
+                                name="freeSpace"
+                                [(ngModel)]="advanceSearchFreeSpace"
+                            >
+                        </div>                       
+                    </div>
+                </div>
+                <div class="qt-df qt-mb-24">
+                    <div class="qt-w30">                    
+                       <app-drop-down                    
+                        [title]="'OS Version'"
+                        [placeholder]="'Select OS Version'"
+                        [list]="advanceSearchOperatingVersion"                    
+                        [search]="true"
+                        [change]="true"  
+                        (onSelectedItem)="AdvanceSearchOSVersionName($event)"                  
+                    ></app-drop-down>
+                    </div>                
+                    <div class="qt-w70 operatingType"> 
+                        <app-drop-down                     
+                        [placeholder]="'Select'"
+                        [list]="advanceSearchOperatingType"                    
+                        [search]="true"
+                        [change]="true"   
+                        (onSelectedItem)="AdvanceSearchOSType($event)"                                  
+                    ></app-drop-down>                 
+                    </div>            
+                </div>            
+                
+                <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
+                    <label for="dropdownHardwareTag" class="tagfontweight">HW Type</label> 
+                        <div class="Rectangle_device-popup">
+                            <mat-form-field class="example-chip-list" appearance="none">                                       
+                            <mat-chip-list #chipHardwareTag>
+                                <mat-chip *ngFor="let tag of advancesearchHardwareTag; let i=index" (removed)="searchHardwareRemove(i)">
+                                    {{tag.Name}} <mat-icon matChipRemove></mat-icon>
+                                  </mat-chip>                        
+                                <input autofocus 
+                                id="dropdownHardwareTag"  
+                                #searchInput  
+                                [(ngModel)]="advancesearchHardwareFilterValue"                                             
+                                ngbDropdownToggle                         
+                                class="pointer"
+                                placeholder="select HW" 
+                                [matChipInputFor]="chipHardwareTag"                        
+                                >
+                            </mat-chip-list>                                                 
+                            </mat-form-field>    
+                        </div>                                                   
+                    <div
+                  class="dropdown-menu advance-search-devices"
+                  ngbDropdownMenu
+                  aria-labelledby="dropdownHardwareTag"
+              >
+                  <ng-template
+                      ngFor
+                      let-item
+                      [ngForOf]="advanceSearchHardware"
+                  >
+                      <button
+                          ngbDropdownItem
+                          class="dropdown-item"  
+                          (click)="onHardwareSelectTag(item)"                
+                          [textContent]="item.Name"
+                      ></button>
+                  </ng-template>
+                    </div>          
+                </div>  
+    
+                <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
+                    <label for="dropdownManufacturerTag" class="tagfontweight">Manufacture</label> 
+                        <div class="Rectangle_device-popup">                   
+                            <mat-form-field class="example-chip-list" appearance="none">                                       
+                            <mat-chip-list #chipManufacturerTag>
+                                <mat-chip *ngFor="let tag of advancesearchManufacturerTag; let i=index" (removed)="searchManufacturerRemove(i)">
+                                    {{tag.Name}} <mat-icon matChipRemove></mat-icon>
+                                  </mat-chip>                        
+                                <input autofocus 
+                                id="dropdownManufacturerTag"  
+                                #searchInput  
+                                [(ngModel)]="advancesearchManufacturerFilterValue"                                             
+                                ngbDropdownToggle                         
+                                class="pointer"
+                                placeholder="select Manufacturer" 
+                                [matChipInputFor]="chipManufacturerTag"                        
+                                >
+                            </mat-chip-list>                                                 
+                            </mat-form-field> 
+                        </div>                                       
+                    <div
+                  class="dropdown-menu advance-search-devices"
+                  ngbDropdownMenu
+                  aria-labelledby="dropdownManufacturerTag"
+              >
+                  <ng-template
+                      ngFor
+                      let-item
+                      [ngForOf]="advanceSearchManufacturer"
+                  >
+                      <button
+                          ngbDropdownItem
+                          class="dropdown-item"  
+                          (click)="onManufacturerSelectTag(item)"                
+                          [textContent]="item.Name"
+                      ></button>
+                  </ng-template>
+                    </div>          
+                </div>  
+    
+                <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
+                    <label for="dropdownModelTag" class="tagfontweight">Model</label>  
+                        <div class="Rectangle_device-popup">                  
+                            <mat-form-field class="example-chip-list" appearance="none">                                       
+                            <mat-chip-list #chipModelTag>
+                                <mat-chip *ngFor="let tag of advancesearchModelTag; let i=index" (removed)="searchModelRemove(i)">
+                                    {{tag.Name}} <mat-icon matChipRemove></mat-icon>
+                                  </mat-chip>                        
+                                <input autofocus 
+                                id="dropdownModelTag"  
+                                #searchInput  
+                                [(ngModel)]="advancesearchModelFilterValue"                                             
+                                ngbDropdownToggle                         
+                                class="pointer"
+                                placeholder="select Model" 
+                                [matChipInputFor]="chipModelTag"                        
+                                >
+                            </mat-chip-list>                                                 
+                            </mat-form-field> 
+                        </div>                                       
+                    <div
+                  class="dropdown-menu advance-search-devices"
+                  ngbDropdownMenu
+                  aria-labelledby="dropdownModelTag"
+              >
+                  <ng-template
+                      ngFor
+                      let-item
+                      [ngForOf]="advanceSearchModel"
+                  >
+                      <button
+                          ngbDropdownItem
+                          class="dropdown-item"  
+                          (click)="onModelSelectTag(item)"                
+                          [textContent]="item.Name"
+                      ></button>
+                  </ng-template>
+                    </div>          
+                </div>  
+    
+                <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
+                    <label for="dropdownSoftwareTag" class="tagfontweight">Software</label> 
+                        <div class="Rectangle_device-popup">                    
+                            <mat-form-field class="example-chip-list" appearance="none">                                       
+                            <mat-chip-list #chipSoftwareTag>
+                                <mat-chip *ngFor="let tag of advancesearchSoftwareTag; let i=index" (removed)="searchSoftwareRemove(i)">
+                                    {{tag.DisplayName}} <mat-icon matChipRemove></mat-icon>
+                                  </mat-chip>                        
+                                <input autofocus 
+                                id="dropdownSoftwareTag"  
+                                #searchInput  
+                                [(ngModel)]="advancesearchSoftwareFilterValue"                                             
+                                ngbDropdownToggle                         
+                                class="pointer"
+                                placeholder="select Software" 
+                                [matChipInputFor]="chipSoftwareTag"                        
+                                >
+                            </mat-chip-list>                                                 
+                            </mat-form-field> 
+                        </div>                                       
+                    <div
+                  class="dropdown-menu advance-search-devices"
+                  ngbDropdownMenu
+                  aria-labelledby="dropdownSoftwareTag"
+              >
+                  <ng-template
+                      ngFor
+                      let-item
+                      [ngForOf]="advanceSearchSoftwareItem"
+                  >
+                      <button
+                          ngbDropdownItem
+                          class="dropdown-item"  
+                          (click)="onSoftwareSelectTag(item)"                
+                          [textContent]="item.DisplayName"
+                      ></button>
+                  </ng-template>
+                    </div>          
+                </div>  
+            </div> 
+            <div class="qt-aside-modern__footer">
+                <div class="qt-df">
+                    <button
+                        class="qt-button qt-mr-12"                                        
+                        (click)="advanchSearch()"
+                    >
+                        <span>Apply</span>
+                    </button>
+                    <button
+                        class="qt-button --gray"
+                        (click)="advanceSearchClosed()"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>        
         </div>
     </div>
 
