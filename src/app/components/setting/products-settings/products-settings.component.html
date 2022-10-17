@@ -35,12 +35,19 @@
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
                         <div class="data-table-wrap">
-                            <div
-                                class="tab-pane__table"
-                            >
+                            <div class="tab-pane__table">
                                 <div class="tab-pane__table-header">
                                     <div class="tab-pane__table-row">
-                                        <div class="tab-pane__table-cell product-category-table__checkboxes"></div>
+                                        <div class="tab-pane__table-cell product-category-table__checkboxes">
+                                            <label class="qt-checkbox">
+                                                <input
+                                                    id="select-all"
+                                                    type="checkbox"
+                                                    (change)="onSelectAll($event)"
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </div>
                                         <div
                                             class="tab-pane__table-cell product-category-table__category-name pointer"
                                             (click)="onFilter('name')"
@@ -93,8 +100,8 @@
                                             </label>
                                         </div>
                                         <div
-                                          class="tab-pane__table-cell product-category-table__checkboxes"
-                                          *ngIf="item.productsAmount > 0"
+                                            class="tab-pane__table-cell product-category-table__checkboxes"
+                                            *ngIf="item.productsAmount > 0"
                                         ></div>
                                         <div
                                             class="tab-pane__table-cell product-category-table__category-name"
@@ -141,29 +148,29 @@
                                         </div>
                                         <div class="tab-pane__table-cell product-category-table__action">
                                             <div class="qt-df qt-ai-c">
-                                              <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"></div>
-                                              <div
-                                                href="javascript:;"
-                                                data-tooltip="Remove"
-                                                class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
-                                                (click)="removeCategoryProduct(item)"
-                                                *ngIf="item.productsAmount === 0"
-                                              >
-                                              </div>
-                                              <app-dynamic-tooltip
-                                                [content]="'You cannot delete category with existing products'"
-                                                [position]="'top'"
-                                                #deleteTooltip
-                                              ></app-dynamic-tooltip>
-                                              <div
-                                                href="javascript:;"
-                                                (mouseenter)="deleteTooltip.show($event.target)"
-                                                (mouseleave)="deleteTooltip.hide()"
-                                                class="remove"
-                                                *ngIf="item.productsAmount > 0"
-                                              >
-                                                <div class="icon__new-remove qt-sz-20 qt-bg-contain pointer"></div>
-                                              </div>
+                                                <div
+                                                    class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                                    (click)="onEditCategory(item)"
+                                                ></div>
+                                                <div
+                                                    class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+                                                    *ngIf="item.productsAmount === 0"
+                                                    (mouseenter)="deleteTooltip.show($event.target)"
+                                                    (mouseleave)="deleteTooltip.hide()"
+                                                >
+                                                </div>
+                                                <app-dynamic-tooltip
+                                                    [content]="'You can’t delete category with existing products'"
+                                                    [position]="'top'"
+                                                    #deleteTooltip
+                                                ></app-dynamic-tooltip>
+                                                <div
+                                                    class="remove"
+                                                    *ngIf="item.productsAmount > 0"
+                                                    (click)="removeCategoryProduct(item)"
+                                                >
+                                                    <div class="icon__new-remove qt-sz-20 qt-bg-contain pointer"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

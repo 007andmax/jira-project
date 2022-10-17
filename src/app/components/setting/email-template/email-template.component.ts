@@ -17,7 +17,7 @@ declare var $: any;
   styleUrls: ["./email-template.component.scss"]
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {
-  loading = false;
+  loading = true;
   submitted = false;
   edit = false;
 
@@ -107,16 +107,16 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    * email pages
    */
   getEmailPages() {
-    this.loading = true; $(".loading").css("display", "block");
+    this.loading = true;
     this.emailService
       .getEmailPages()
       .pipe(
         map(res => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           this.emailPages = res;
         }),
         catchError(err => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           return of("");
         })
       )
@@ -132,15 +132,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templete) {
       return;
     }
-    this.getEmailPages();
     this.templeteInfo = templete.value;
-    this.loading = true; $(".loading").css("display", "block");
     this.edit = true;
     this.emailService
       .getTemplate(templete.key)
       .pipe(
         map((res: any) => {
-          this.loading = false; $(".loading").css("display", "none");
           if (res) {
             this.hideButtonTextEditor();
             this.templatesData.body = res.body;
@@ -172,6 +169,11 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+  }
+
+  public setTab(data) {
+    console.log("event", data['nextId']);
+    // this.tabSet = data['nextId'];
   }
 
   trackByTicket(index, item) {
@@ -312,7 +314,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (this.templeteForm.invalid) {
       return;
     }
-
     if (this.templeteInfo.requiredKeywordsRegExp) {
       const matches = this.templeteForm.value.subject.match(
         this.templeteInfo.requiredKeywordsRegExp
@@ -321,7 +322,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       }
       // return matches && matches.length ? { invalid_characters: matches } : null;
     }
-
     // this.templeteForm.patchValue({
     //   body: this.body.nativeElement.value,
     //   subject: this.subject.nativeElement.value
@@ -331,10 +331,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       body: document.getElementById("myEditor")['value'],
       subject: this.templeteForm.value.subject
     });
-
-
-
-    this.loading = true; $(".loading").css("display", "block");
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .pipe(
@@ -346,12 +342,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         () => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toastr.success("Saved Successfully");
           this.getEmailPages();
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toastr.error(`Error Occured  ${error}`);
         }
       );

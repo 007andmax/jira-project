@@ -66,6 +66,20 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
       : "No description"}`;
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.categoriesProducts.forEach(item => {
+        if (item.productsAmount === 0) {
+          item.selected = true;
+          this.inventoryStateService.getListCategoriesForRemove().push(item);
+        }
+      })
+    } else {
+      this.categoriesProducts.forEach(item => (item.selected = false));
+      this.inventoryStateService.setListCategoriesForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   onSelect(event, item) {
     if (event.target.checked) {
       this.inventoryStateService.getListCategoriesForRemove().push(item);
