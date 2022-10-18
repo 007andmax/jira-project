@@ -113,7 +113,7 @@
                         decimalNumber
                         [useFixed]="true"
                         placeholder="0.00"
-                        [value]="contractsBlockTime.blockRate"
+                        [value]="contractsBlockTime.blockRate_str"
                         (input)="validate.resetBlockRate()"
                         (onChange)="contractsBlockTime.blockRate=$event"
                     >
@@ -135,7 +135,7 @@
                         decimalNumber
                         [useFixed]="true"
                         placeholder="0.00"
-                        [value]="contractsBlockTime.rateExceeding"
+                        [value]="contractsBlockTime.rateExceeding_str"
                         (input)="validate.resetRateExceeding()"
                         (onChange)="contractsBlockTime.rateExceeding=$event"
                     >

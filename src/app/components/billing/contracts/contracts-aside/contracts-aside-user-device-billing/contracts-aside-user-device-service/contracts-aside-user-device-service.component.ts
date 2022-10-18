@@ -17,6 +17,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {
+    console.log("service", this.service);
     if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.getTaxes(data);
