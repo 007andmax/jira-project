@@ -910,6 +910,10 @@
 
 
 
+
+
+
+
 <!-- Middle Wrapper -->
 <div class="page-container manage-tech">
     <div class="page-insider">
@@ -926,420 +930,442 @@
                 </div>
             </div>
         </div>
-      <div class="data-table-wrap mteh-data">
-        <ngb-tabset
-          #tabset="ngbTabset"
-          [destroyOnHide]="true"
-          (tabChange)="setTab($event)"
-        >
-          <!-- Profile -->
-          <ngb-tab
-            title="Active Users"
-            id="activeUsers"
-          >
-            <ng-template ngbTabContent>
-              <div class="cmn-area">
-                <div class="tab-pane__table dataTable">
-                  <div class="tab-pane__table-header">
-                    <div class="tab-pane__table-row">
-                      <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                        <label class="qt-checkbox">
-                          <input type="checkbox">
-                          <span></span>
-                        </label>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__user-name">
-                        User Name
-                        <div class="qt-table-modern__sorting--new"></div>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__role">Role</div>
-                      <div class="tab-pane__table-cell active-users-table__last-login">Last Login</div>
-                      <div class="tab-pane__table-cell active-users-table__authentication">Authentication</div>
-                      <div class="tab-pane__table-cell active-users-table__notify-for">Notify For</div>
-                      <div class="tab-pane__table-cell active-users-table__action">&nbsp;</div>
-                    </div>
-                  </div>
-                  <div
-                    class="tab-pane__table-body"
-                    *ngIf="techUsers.length > 0"
-                  >
-                    <div
-                      class="tab-pane__table-row"
-                      *ngFor="let techUser of techUsers; let i = index"
-                    >
-                      <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                        <label class="qt-checkbox">
-                          <input type="checkbox">
-                          <span></span>
-                        </label>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__user-name">
-                        <div class="qt-df qt-ai-c">
+        <div class="data-table-wrap mteh-data">
+            <ngb-tabset
+                #tabset="ngbTabset"
+                [destroyOnHide]="true"
+                (tabChange)="setTab($event)"
+            >
+                <!-- Profile -->
+                <ngb-tab
+                    title="Active Users"
+                    id="activeUsers"
+                >
+                    <ng-template ngbTabContent>
+                        <div class="cmn-area">
+                            <div class="tab-pane__table dataTable">
+                                <div class="tab-pane__table-header">
+                                    <div class="tab-pane__table-row">
+                                        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                                            <label class="qt-checkbox">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__user-name">
+                                            User Name
+                                            <div class="qt-table-modern__sorting--new"></div>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__role">Role</div>
+                                        <div class="tab-pane__table-cell active-users-table__last-login">Last Login</div>
+                                        <div class="tab-pane__table-cell active-users-table__authentication">Authentication</div>
+                                        <div class="tab-pane__table-cell active-users-table__notify-for">Notify For</div>
+                                        <div class="tab-pane__table-cell active-users-table__action">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="tab-pane__table-body"
+                                    *ngIf="techUsers.length > 0"
+                                >
+                                    <div
+                                        class="tab-pane__table-row"
+                                        *ngFor="let techUser of techUsers; let i = index"
+                                    >
+                                        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                                            <label class="qt-checkbox">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__user-name">
+                                            <div class="qt-df qt-ai-c">
                                                 <span
-                                                  class="tab-pane__table-avatar"
-                                                  *ngIf="techUser.avatar !== null"
+                                                    class="tab-pane__table-avatar"
+                                                    *ngIf="techUser.avatar !== null"
                                                 >
                                                     <span class="user-tech-dp">
                                                         <img
-                                                          *ngIf="techUser.isEmailVerified"
-                                                          src="/users/{{ techUser.id }}/image.jpg?t={{
+                                                            *ngIf="techUser.isEmailVerified"
+                                                            src="/users/{{ techUser.id }}/image.jpg?t={{
                               techUser.avatar.updatedAt
                             }}"
-                                                          alt="user"
+                                                            alt="user"
                                                         >
                                                         <div
-                                                          class="tab-pane__table-avatar user-dp"
-                                                          [ngClass]="[techUser.online == false ? 'offline' : '', (techUser.online == true && techUser.lockScreen == false) ? 'online' : '', (techUser.online === true && techUser.lockScreen === true) ? 'away' : '']"
-                                                          style="background-color: #2BC7C6;"
-                                                          *ngIf="!techUser.isEmailVerified"
+                                                            class="tab-pane__table-avatar user-dp"
+                                                            [ngClass]="[techUser.online == false ? 'offline' : '', (techUser.online == true && techUser.lockScreen == false) ? 'online' : '', (techUser.online === true && techUser.lockScreen === true) ? 'away' : '']"
+                                                            style="background-color: #2BC7C6;"
+                                                            *ngIf="!techUser.isEmailVerified"
                                                         >
                                                             {{ displayFrstLstChar(techUser) }}
                                                         </div>
                                                     </span>
                                                 </span>
-                          <span
-                            class="tab-pane__table-avatar user-dp online"
-                            *ngIf="techUser.avatar === null"
-                          >
+                                                <span
+                                                    class="tab-pane__table-avatar user-dp online"
+                                                    *ngIf="techUser.avatar === null"
+                                                >
                                                     <img
-                                                      class="img-circle"
-                                                      src="html/assets/img/icons/upload-photo.svg"
-                                                      alt="user"
+                                                        class="img-circle"
+                                                        src="html/assets/img/icons/upload-photo.svg"
+                                                        alt="user"
                                                     >
                                                 </span>
-                          <div class="qt-ml-12 qt-f-1 ellipsis">
-                            <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">
-                              {{ techUser.firstName }} {{ techUser.lastName }}
-                            </div>
-                            <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">{{techUser.primaryEmail}}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__role">
-                        <span>{{ techUser.techRole }}</span>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__last-login">
-                        <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">10:30 AM, 14 Jun</div>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__authentication">
-                        <div class="qt-df qt-ai-c">
-                          <span class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"></span>
-                          Secure
-                        </div>
-                        <!-- Basic -->
-                        <!-- No Authentication -->
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__notify-for">
-                        <a
-                          href="javascript:;"
-                          class="email-dropdown"
-                          (click)="emailNotificationDropDown(i)"
-                        >
-                          New Device, New Ticket...
-                        </a>
-                        <div
-                          class="eml-ntl-list"
-                          [ngClass]="{ opened: selectedIdx === i }"
-                        >
-                          <div
-                            class="email-note-wrape"
-                            *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
-                          >
-                            <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
-                            <ul class="list-unstyled">
-                              <li class="cmn-checkbox">
-                                <input
-                                  type="checkbox"
-                                  readonly
-                                  [(ngModel)]="
+                                                <div class="qt-ml-12 qt-f-1 ellipsis">
+                                                    <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">
+                                                        {{ techUser.firstName }} {{ techUser.lastName }}
+                                                    </div>
+                                                    <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">{{techUser.primaryEmail}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__role">
+                                            <span>{{ techUser.techRole }}</span>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__last-login">
+                                            <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">10:30 AM, 14 Jun</div>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__authentication">
+                                            <div class="qt-df qt-ai-c">
+                                                <span class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"></span>
+                                                Secure
+                                            </div>
+                                            <!-- Basic -->
+                                            <!-- No Authentication -->
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__notify-for">
+                                            <a
+                                                href="javascript:;"
+                                                class="email-dropdown"
+                                                (click)="emailNotificationDropDown(i)"
+                                            >
+                                                New Device, New Ticket...
+                                            </a>
+                                            <div
+                                                class="eml-ntl-list"
+                                                [ngClass]="{ opened: selectedIdx === i }"
+                                            >
+                                                <div
+                                                    class="email-note-wrape"
+                                                    *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
+                                                >
+                                                    <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
+                                                    <ul class="list-unstyled">
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                type="checkbox"
+                                                                readonly
+                                                                [(ngModel)]="
                               techUseremailNotificationList[techUser.id].newDevice
                             "
-                                  id="newDevice1"
-                                >
-                                <label for="newDevice1">
-                                  When my account is logged in from a new device
-                                </label>
-                              </li>
-                              <li class="cmn-checkbox">
-                                <input
-                                  type="checkbox"
-                                  id="ticketCreated"
-                                  readonly
-                                  [(ngModel)]="
+                                                                id="newDevice1"
+                                                            >
+                                                            <label for="newDevice1">
+                                                                When my account is logged in from a new device
+                                                            </label>
+                                                        </li>
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                type="checkbox"
+                                                                id="ticketCreated"
+                                                                readonly
+                                                                [(ngModel)]="
                               techUseremailNotificationList[techUser.id]
                                 .ticketCreated
                             "
-                                >
-                                <label for="ticketCreated">When a New Ticket created</label>
-                              </li>
-                              <li class="cmn-checkbox">
-                                <input
-                                  id="myTicketUpdated"
-                                  type="checkbox"
-                                  readonly
-                                  [(ngModel)]="
+                                                            >
+                                                            <label for="ticketCreated">When a New Ticket created</label>
+                                                        </li>
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                id="myTicketUpdated"
+                                                                type="checkbox"
+                                                                readonly
+                                                                [(ngModel)]="
                               techUseremailNotificationList[techUser.id]
                                 .myTicketUpdated
                             "
-                                >
-                                <label for="myTicketUpdated">
-                                  When a ticket that is assigned to me is updated
-                                </label>
-                              </li>
-                              <li class="cmn-checkbox">
-                                <input
-                                  id="ticketCloseNotifications"
-                                  type="checkbox"
-                                  readonly
-                                  [(ngModel)]="
+                                                            >
+                                                            <label for="myTicketUpdated">
+                                                                When a ticket that is assigned to me is updated
+                                                            </label>
+                                                        </li>
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                id="ticketCloseNotifications"
+                                                                type="checkbox"
+                                                                readonly
+                                                                [(ngModel)]="
                               techUseremailNotificationList[techUser.id]
                                 .ticketCloseNotifications
                             "
-                                >
-                                <label for="ticketCloseNotifications">When any ticket is closed</label>
-                              </li>
-                            </ul>
-                          </div>
+                                                            >
+                                                            <label for="ticketCloseNotifications">When any ticket is closed</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__action">
+                                            <div class="qt-df">
+                                                <!-- <a -->
+                                                <!-- href="javascript:;" -->
+                                                <!-- data-tooltip="Reset Password" -->
+                                                <!-- class="reset" -->
+                                                <!-- *ngIf="techUser.isEmailVerified" -->
+                                                <!-- (click)="changePasswordRequest(techUser.id)" -->
+                                                <!-- > -->
+                                                <!-- <img -->
+                                                <!-- src="/html/assets/img/icons/reset-password.svg" -->
+                                                <!-- alt="Edit" -->
+                                                <!-- > -->
+                                                <!-- </a> -->
+                                                <!-- <a -->
+                                                <!-- href="javascript:;" -->
+                                                <!-- data-tooltip="Resend Email" -->
+                                                <!-- class="reset" -->
+                                                <!-- *ngIf="!(techUser.isEmailVerified && techUser.userEnabled)" -->
+                                                <!-- (click)="resendWelcomeEmail(techUser.primaryEmail)" -->
+                                                <!-- > -->
+                                                <!-- <img -->
+                                                <!-- src="/html/assets/img/icons/email-resend.svg" -->
+                                                <!-- alt="Edit" -->
+                                                <!-- > -->
+                                                <!-- </a> -->
+                                                <div
+                                                    data-tooltip="Edit"
+                                                    class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                                    *ngIf="getPermissions('EDIT_USERS')"
+                                                    (click)="editTechUser(techUser)"
+                                                >
+                                                </div>
+                                                <div class="icon__category-more qt-sz-20 qt-bg-contain pointer"></div>
+                                                <!-- <a -->
+                                                <!-- href="javascript:;" -->
+                                                <!-- data-tooltip="remove" -->
+                                                <!-- class="remove" -->
+                                                <!-- *ngIf="getPermissions('ARCHIVE_USERS')" -->
+                                                <!-- (click)="removeUserConfirm(techUser)" -->
+                                                <!-- > -->
+                                                <!-- <img -->
+                                                <!-- src="/html/assets/img/icons/new-remove.svg" -->
+                                                <!-- alt="Remove" -->
+                                                <!-- > -->
+                                                <!-- </a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__action">
-                        <div class="qt-df">
-                          <!-- <a -->
-                          <!-- href="javascript:;" -->
-                          <!-- data-tooltip="Reset Password" -->
-                          <!-- class="reset" -->
-                          <!-- *ngIf="techUser.isEmailVerified" -->
-                          <!-- (click)="changePasswordRequest(techUser.id)" -->
-                          <!-- > -->
-                          <!-- <img -->
-                          <!-- src="/html/assets/img/icons/reset-password.svg" -->
-                          <!-- alt="Edit" -->
-                          <!-- > -->
-                          <!-- </a> -->
-                          <!-- <a -->
-                          <!-- href="javascript:;" -->
-                          <!-- data-tooltip="Resend Email" -->
-                          <!-- class="reset" -->
-                          <!-- *ngIf="!(techUser.isEmailVerified && techUser.userEnabled)" -->
-                          <!-- (click)="resendWelcomeEmail(techUser.primaryEmail)" -->
-                          <!-- > -->
-                          <!-- <img -->
-                          <!-- src="/html/assets/img/icons/email-resend.svg" -->
-                          <!-- alt="Edit" -->
-                          <!-- > -->
-                          <!-- </a> -->
-                          <div
-                            data-tooltip="Edit"
-                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-                            *ngIf="getPermissions('EDIT_USERS')"
-                            (click)="editTechUser(techUser)"
-                          >
-                          </div>
-                          <div class="icon__category-more qt-sz-20 qt-bg-contain pointer"></div>
-                          <!-- <a -->
-                          <!-- href="javascript:;" -->
-                          <!-- data-tooltip="remove" -->
-                          <!-- class="remove" -->
-                          <!-- *ngIf="getPermissions('ARCHIVE_USERS')" -->
-                          <!-- (click)="removeUserConfirm(techUser)" -->
-                          <!-- > -->
-                          <!-- <img -->
-                          <!-- src="/html/assets/img/icons/new-remove.svg" -->
-                          <!-- alt="Remove" -->
-                          <!-- > -->
-                          <!-- </a> -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <!-- Account -->
-          <ngb-tab
-            title="Archived Users"
-            id="archivedUsers"
-          >
-            <ng-template ngbTabContent>
-              <div class="cmn-area">
-                <div
-                  class="tab-pane__table dataTable"
+                    </ng-template>
+                </ngb-tab>
+                <!-- Account -->
+                <ngb-tab
+                    title="Archived Users"
+                    id="archivedUsers"
                 >
-                  <div class="tab-pane__table-header">
-                    <div class="tab-pane__table-row">
-                      <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                        <label class="qt-checkbox">
-                          <input type="checkbox">
-                          <span></span>
-                        </label>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__user-name">
-                        User Name
-                        <div class="qt-table-modern__sorting--new"></div>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__role">Role</div>
-                      <div class="tab-pane__table-cell active-users-table__last-login">Last Login</div>
-                      <div class="tab-pane__table-cell active-users-table__authentication">Authenticationp</div>
-                      <div class="tab-pane__table-cell active-users-table__notify-for">Notify For</div>
-                      <div class="tab-pane__table-cell active-users-table__action"></div>
-                    </div>
-                  </div>
-                  <div
-                    class="tab-pane__table-body"
-                    *ngIf="userlist.length > 0"
-                  >
-                    <div
-                      class="tab-pane__table-row ng-star-inserted"
-                      *ngFor="let techUser of userlist; let i = index"
-                    >
-                      <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-                        <label class="qt-checkbox">
-                          <input type="checkbox">
-                          <span></span>
-                        </label>
-                      </div>
-                      <div class="tab-pane__table-cell active-users-table__user-name">
-                        <div class="qt-df qt-ai-c">
-                            <span
-                              class="tab-pane__table-avatar archiveUser"
-                              *ngIf="techUser.avatar !== null"
-                            >
-                                <span class="tab-pane__table-avatar user-dp">
-                                    <img
-                                      *ngIf="techUser.isEmailVerified"
-                                      src="/users/{{ techUser.id }}/image.jpg?t={{
+                    <ng-template ngbTabContent>
+                        <div class="cmn-area">
+                            <div class="tab-pane__table dataTable">
+                                <div class="tab-pane__table-header">
+                                    <div class="tab-pane__table-row">
+                                        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                                            <label class="qt-checkbox">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__user-name">
+                                            User Name
+                                            <div class="qt-table-modern__sorting--new"></div>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__role">Role</div>
+                                        <div class="tab-pane__table-cell active-users-table__last-login">Last Login</div>
+                                        <div class="tab-pane__table-cell active-users-table__authentication">Authenticationp</div>
+                                        <div class="tab-pane__table-cell active-users-table__notify-for">Notify For</div>
+                                        <div class="tab-pane__table-cell active-users-table__action"></div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="tab-pane__table-body"
+                                    *ngIf="userlist.length > 0"
+                                >
+                                    <div
+                                        class="tab-pane__table-row ng-star-inserted"
+                                        *ngFor="let techUser of userlist; let i = index"
+                                    >
+                                        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                                            <label class="qt-checkbox">
+                                                <input type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="tab-pane__table-cell active-users-table__user-name">
+                                            <div class="qt-df qt-ai-c">
+                                                <span
+                                                    class="tab-pane__table-avatar archiveUser"
+                                                    *ngIf="techUser.avatar !== null"
+                                                >
+                                                    <span class="tab-pane__table-avatar user-dp">
+                                                        <img
+                                                            *ngIf="techUser.isEmailVerified"
+                                                            src="/users/{{ techUser.id }}/image.jpg?t={{
                                         techUser.avatar.updatedAt
                                       }}"
-                                      alt="user"
-                                    >
-                                    <div
-                                      class="tab-pane__table-avatar simple-dp"
-                                      style="background-color: #2BC7C6;"
-                                      *ngIf="!techUser.isEmailVerified"
-                                    >
-                                        {{ displayFrstLstChar(techUser) }}
-                                    </div>
-                                </span>
-                            </span>
-                          <div class="qt-ml-12 qt-f-1 ellipsis">
-                            <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">
-                              {{ techUser.firstName }} {{ techUser.lastName }}
-                            </div>
-                            <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">
-                              {{techUser.primaryEmail}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                                                            alt="user"
+                                                        >
+                                                        <div
+                                                            class="tab-pane__table-avatar simple-dp"
+                                                            style="background-color: #2BC7C6;"
+                                                            *ngIf="!techUser.isEmailVerified"
+                                                        >
+                                                            {{ displayFrstLstChar(techUser) }}
+                                                        </div>
+                                                    </span>
+                                                </span>
+                                                <div class="qt-ml-12 qt-f-1 ellipsis">
+                                                    <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">
+                                                        {{ techUser.firstName }} {{ techUser.lastName }}
+                                                    </div>
+                                                    <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">{{techUser.primaryEmail}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                      <div class="tab-pane__table-cell active-users-table__role">
-                        {{ techUser.techRole }}
-                      </div>
 
-                      <div class="tab-pane__table-cell active-users-table__last-login">
-                        <span>10:30 AM, 14 Jun</span>
-                      </div>
 
-                      <div class="tab-pane__table-cell active-users-table__authentication">
-                        <div class="qt-df qt-ai-c">
-                          <span class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"></span>
-                          Secure
-                        </div>
-                      </div>
 
-                      <div class="tab-pane__table-cell active-users-table__notify-for">
-                        <a
-                          href="javascript:;"
-                          class="email-dropdown"
-                          (click)="emailNotificationDropDown(i)"
-                        >
-                          New Device, New Ticket...
-                        </a>
-                        <div
-                          class="eml-ntl-list"
-                          [ngClass]="{ opened: selectedIdx === i }"
-                        >
-                          <div
-                            class="email-note-wrape"
-                            *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
-                          >
-                            <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
-                            <ul class="list-unstyled">
-                              <li class="cmn-checkbox">
-                                <input
-                                  type="checkbox"
-                                  readonly
-                                  [(ngModel)]="
+
+                                        <div class="tab-pane__table-cell active-users-table__role">{{ techUser.techRole }}</div>
+
+
+
+
+
+                                        <div class="tab-pane__table-cell active-users-table__last-login">
+                                            <span>10:30 AM, 14 Jun</span>
+                                        </div>
+
+
+
+
+
+                                        <div class="tab-pane__table-cell active-users-table__authentication">
+                                            <div class="qt-df qt-ai-c">
+                                                <span class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"></span>
+                                                Secure
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="tab-pane__table-cell active-users-table__notify-for">
+                                            <a
+                                                href="javascript:;"
+                                                class="email-dropdown"
+                                                (click)="emailNotificationDropDown(i)"
+                                            >
+                                                New Device, New Ticket...
+                                            </a>
+                                            <div
+                                                class="eml-ntl-list"
+                                                [ngClass]="{ opened: selectedIdx === i }"
+                                            >
+                                                <div
+                                                    class="email-note-wrape"
+                                                    *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
+                                                >
+                                                    <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
+                                                    <ul class="list-unstyled">
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                type="checkbox"
+                                                                readonly
+                                                                [(ngModel)]="
                               archivedtechUseremailNotificationList[techUser.id]
                                 .newDevice
                             "
-                                  id="newDevice1"
-                                >
-                                <label for="newDevice1">
-                                  When my account is logged in from a new device
-                                </label>
-                              </li>
-                              <li class="cmn-checkbox">
-                                <input
-                                  type="checkbox"
-                                  id="ticketCreated"
-                                  readonly
-                                  [(ngModel)]="
+                                                                id="newDevice1"
+                                                            >
+                                                            <label for="newDevice1">
+                                                                When my account is logged in from a new device
+                                                            </label>
+                                                        </li>
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                type="checkbox"
+                                                                id="ticketCreated"
+                                                                readonly
+                                                                [(ngModel)]="
                               archivedtechUseremailNotificationList[techUser.id]
                                 .ticketCreated
                             "
-                                >
-                                <label for="ticketCreated">When a New Ticket created</label>
-                              </li>
-                              <li class="cmn-checkbox">
-                                <input
-                                  id="myTicketUpdated"
-                                  type="checkbox"
-                                  readonly
-                                  [(ngModel)]="
+                                                            >
+                                                            <label for="ticketCreated">When a New Ticket created</label>
+                                                        </li>
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                id="myTicketUpdated"
+                                                                type="checkbox"
+                                                                readonly
+                                                                [(ngModel)]="
                               archivedtechUseremailNotificationList[techUser.id]
                                 .myTicketUpdated
                             "
-                                >
-                                <label for="myTicketUpdated">
-                                  When a ticket that is assigned to me is updated
-                                </label>
-                              </li>
-                              <li class="cmn-checkbox">
-                                <input
-                                  id="ticketCloseNotifications"
-                                  type="checkbox"
-                                  readonly
-                                  [(ngModel)]="
+                                                            >
+                                                            <label for="myTicketUpdated">
+                                                                When a ticket that is assigned to me is updated
+                                                            </label>
+                                                        </li>
+                                                        <li class="cmn-checkbox">
+                                                            <input
+                                                                id="ticketCloseNotifications"
+                                                                type="checkbox"
+                                                                readonly
+                                                                [(ngModel)]="
                               archivedtechUseremailNotificationList[techUser.id]
                                 .ticketCloseNotifications
                             "
-                                >
-                                <label for="ticketCloseNotifications">When any ticket is closed</label>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
+                                                            >
+                                                            <label for="ticketCloseNotifications">When any ticket is closed</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                      <div class="tab-pane__table-cell active-users-table__action --sm">
-                        <div
-                          data-tooltip="Restore User"
-                          class="icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
-                          (click)="restoreConfirm(techUser.id)"
-                        >
+
+
+
+
+                                        <div class="tab-pane__table-cell active-users-table__action --sm">
+                                            <div
+                                                data-tooltip="Restore User"
+                                                class="icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
+                                                (click)="restoreConfirm(techUser.id)"
+                                            >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <!-- Email -->
-        </ngb-tabset>
-      </div>
+                    </ng-template>
+                </ngb-tab>
+                <!-- Email -->
+                <ngb-tab
+                    title="User Permissions"
+                    id="userPermissions"
+                >
+                    <ng-template ngbTabContent>
+                        <app-permission-manage #userPermissions></app-permission-manage>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
 </div>
@@ -1351,10 +1377,10 @@
     <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Add Tech User</div>
-<!--        <div-->
-<!--            class="qt-aside-modern__header-close icon__close"-->
-<!--            (click)="create = !create"-->
-<!--        ></div>-->
+        <!-- <div -->
+        <!-- class="qt-aside-modern__header-close icon__close" -->
+        <!-- (click)="create = !create" -->
+        <!-- ></div> -->
     </div>
     <div class="qt-aside-modern__content middle-content">
         <div class="dp-area qt-df qt-ai-c qt-mb-24">
@@ -1416,153 +1442,169 @@
             [formGroup]="techUserForm"
             (ngSubmit)="onCreateSubmit()"
         >
-          <div class="qt-input-block qt-input-line">
-            <label class="qt-input-block__label">Full Name</label>
-            <input
-              type="text"
-              class="qt-input-block__input"
-              formControlName="firstName"
-              placeholder="Enter Full Name"
-            >
-            <div
-              *ngIf="submitted && f.firstName.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.firstName.errors.required">First Name is required</div>
-              <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
-              <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Full Name</label>
+                <input
+                    type="text"
+                    class="qt-input-block__input"
+                    formControlName="firstName"
+                    placeholder="Enter Full Name"
+                >
+                <div
+                    *ngIf="submitted && f.firstName.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
+                    <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+                </div>
             </div>
-          </div>
-          <div class="qt-input-block qt-input-line">
-            <label class="qt-input-block__label">Last Name</label>
-            <input
-              type="text"
-              class="form-input"
-              formControlName="lastName"
-              placeholder="Enter Last Name"
-            >
-            <div
-              *ngIf="submitted && f.lastName.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-              <!-- <div *ngIf="f.lastName.errors.minlength">
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Last Name</label>
+                <input
+                    type="text"
+                    class="form-input"
+                    formControlName="lastName"
+                    placeholder="Enter Last Name"
+                >
+                <div
+                    *ngIf="submitted && f.lastName.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    <!-- <div *ngIf="f.lastName.errors.minlength">
               Last name is too short.
               </div> -->
-              <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+                    <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+                </div>
             </div>
-          </div>
-          <div class="qt-input-block qt-input-line">
-            <label class="qt-input-block__label">Email</label>
-            <input
-              type="text"
-              class="qt-input-block__input"
-              formControlName="primaryEmail"
-              #primaryEmail
-              (blur)="isEmailUnique(primaryEmail.value)"
-              placeholder="Enter Email Address"
-            >
-            <label
-              *ngIf="!isEmailIdUnique"
-              class="invalid-feedback"
-            >
-              This email already occupied.
-            </label>
-            <div
-              *ngIf="submitted && f.primaryEmail.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
-              <!-- <div *ngIf="f.primaryEmail.errors.email">
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Email</label>
+                <input
+                    type="text"
+                    class="qt-input-block__input"
+                    formControlName="primaryEmail"
+                    #primaryEmail
+                    (blur)="isEmailUnique(primaryEmail.value)"
+                    placeholder="Enter Email Address"
+                >
+                <label
+                    *ngIf="!isEmailIdUnique"
+                    class="invalid-feedback"
+                >
+                    This email already occupied.
+                </label>
+                <div
+                    *ngIf="submitted && f.primaryEmail.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
+                    <!-- <div *ngIf="f.primaryEmail.errors.email">
 Email must be a valid email address
 </div> -->
-              <div *ngIf="f.primaryEmail.errors.pattern">Email must be a valid email address</div>
+                    <div *ngIf="f.primaryEmail.errors.pattern">Email must be a valid email address</div>
+                </div>
             </div>
-          </div>
-          <div class="qt-input-block qt-input-line">
-            <label class="qt-input-block__label">Set Tech User Role</label>
-            <select
-              class="cmn-select form-input"
-              formControlName="techRole"
-            >
-              <option
-                *ngFor="let role of techRoles"
-                value="{{ role }}"
-              >
-                {{
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Set Tech User Role</label>
+                <select
+                    class="cmn-select form-input"
+                    formControlName="techRole"
+                >
+                    <option
+                        *ngFor="let role of techRoles"
+                        value="{{ role }}"
+                    >
+                        {{
                 role
                 }}
-              </option>
-            </select>
-          </div>
-          <div class="qt-input-line__email-notify-tech-users">
-            <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">SNotify Tech User for</div>
-            <ul class="list-unstyled">
-              <li class="qt-mb-16">
-                <label class="qt-checkbox pointer" for="account">
-                  <input
-                    type="checkbox"
-                    id="account"
-                    formControlName="newDevice"
-                  >
-                  <span></span>
-                  <div class="qt-color-gray-700 qt-ml-8">When my account is logged in from a new device</div>
-                </label>
-              </li>
-              <li class="qt-mb-16">
-                <label class="qt-checkbox pointer" for="any">
-                  <input
-                    type="checkbox"
-                    id="any"
-                    formControlName="ticketCreated"
-                  >
-                  <span></span>
-                  <div class="qt-color-gray-700 qt-ml-8">When a New Ticket created</div>
-                </label>
-              </li>
-              <li class="qt-mb-16">
-                <label for="logged" class="qt-checkbox pointer">
-                  <input
-                    id="logged"
-                    type="checkbox"
-                    formControlName="myTicketUpdated"
-                  >
-                  <span></span>
-                  <div class="qt-color-gray-700 qt-ml-8"> When a ticket that is assigned to me is updated</div>
-                </label>
-              </li>
-              <li class="">
-                <label for="is" class="qt-checkbox pointer">
-                  <input
-                    id="is"
-                    type="checkbox"
-                    formControlName="ticketCloseNotifications"
-                  >
-                  <span></span>
-                  <div class="qt-color-gray-700 qt-ml-8">When any ticket is closed</div>
-                </label>
-              </li>
-            </ul>
-          </div>
+                    </option>
+                </select>
+            </div>
+            <div class="qt-input-line__email-notify-tech-users">
+                <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">SNotify Tech User for</div>
+                <ul class="list-unstyled">
+                    <li class="qt-mb-16">
+                        <label
+                            class="qt-checkbox pointer"
+                            for="account"
+                        >
+                            <input
+                                type="checkbox"
+                                id="account"
+                                formControlName="newDevice"
+                            >
+                            <span></span>
+                            <div class="qt-color-gray-700 qt-ml-8">
+                                When my account is logged in from a new device
+                            </div>
+                        </label>
+                    </li>
+                    <li class="qt-mb-16">
+                        <label
+                            class="qt-checkbox pointer"
+                            for="any"
+                        >
+                            <input
+                                type="checkbox"
+                                id="any"
+                                formControlName="ticketCreated"
+                            >
+                            <span></span>
+                            <div class="qt-color-gray-700 qt-ml-8">When a New Ticket created</div>
+                        </label>
+                    </li>
+                    <li class="qt-mb-16">
+                        <label
+                            for="logged"
+                            class="qt-checkbox pointer"
+                        >
+                            <input
+                                id="logged"
+                                type="checkbox"
+                                formControlName="myTicketUpdated"
+                            >
+                            <span></span>
+                            <div class="qt-color-gray-700 qt-ml-8">
+                                When a ticket that is assigned to me is updated
+                            </div>
+                        </label>
+                    </li>
+                    <li class>
+                        <label
+                            for="is"
+                            class="qt-checkbox pointer"
+                        >
+                            <input
+                                id="is"
+                                type="checkbox"
+                                formControlName="ticketCloseNotifications"
+                            >
+                            <span></span>
+                            <div class="qt-color-gray-700 qt-ml-8">When any ticket is closed</div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
         </form>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
-          <button
-            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-            (click)="create = !create"
-          >
-            Cancel
-          </button>
-          <button
-              class="qt-button qt-jc-c qt-w100"
-              (onClick)="onCreateSubmit()"
-              appDisabledBtn
-              #addBtn="disabled"
-          >
-              <span *ngIf="!addBtn.isBlock()">Save</span>
-              <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-          </button>
+            <button
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                (click)="create = !create"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-jc-c qt-w100"
+                (onClick)="onCreateSubmit()"
+                appDisabledBtn
+                #addBtn="disabled"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
         </div>
     </div>
 </div>
@@ -1575,39 +1617,39 @@ Email must be a valid email address
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Tech User</div>
         <div class="qt-df">
-          <div class="qt-aside__restore-modal qt-ml-8 pointer">
-            <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
-          </div>
-          <div class="qt-aside__restore-modal qt-ml-8 pointer">
-            <div class="icon__email-send qt-sz-16 qt-bg-contain"></div>
-          </div>
-          <div class="qt-aside__restore-modal qt-ml-8 pointer">
-            <div class="icon__menu-settings--gray-500 qt-sz-16 qt-bg-contain"></div>
-          </div>
-          <div class="qt-aside__restore-modal qt-ml-8 pointer">
-            <div class="icon__new-remove--red-600 qt-sz-16 qt-bg-contain"></div>
-          </div>
+            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+                <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
+            </div>
+            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+                <div class="icon__email-send qt-sz-16 qt-bg-contain"></div>
+            </div>
+            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+                <div class="icon__menu-settings--gray-500 qt-sz-16 qt-bg-contain"></div>
+            </div>
+            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+                <div class="icon__new-remove--red-600 qt-sz-16 qt-bg-contain"></div>
+            </div>
         </div>
-<!--        <div-->
-<!--            class="qt-aside-modern__header-close icon__close"-->
-<!--            (click)="edit = !edit"-->
-<!--        ></div>-->
+        <!-- <div -->
+        <!-- class="qt-aside-modern__header-close icon__close" -->
+        <!-- (click)="edit = !edit" -->
+        <!-- ></div> -->
     </div>
     <div class="middle-content qt-aside-modern__content">
         <div
-          class="notifications --warning qt-mb-20"
-          *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified"
+            class="notifications --warning qt-mb-20"
+            *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified"
         >
-          <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
-          <p class="notifications__content">
-            User email is not verified yet to verify email click on link here
-            <a
-              href="javascript:;"
-              (click)="resendWelcomeEmail(selectedTechUser.primaryEmail);"
-            >
-              Resend Email
-            </a>
-          </p>
+            <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
+            <p class="notifications__content">
+                User email is not verified yet to verify email click on link here
+                <a
+                    href="javascript:;"
+                    (click)="resendWelcomeEmail(selectedTechUser.primaryEmail);"
+                >
+                    Resend Email
+                </a>
+            </p>
         </div>
         <div class="dp-area qt-df qt-ai-c qt-mb-24">
             <span
@@ -1694,137 +1736,153 @@ Email must be a valid email address
             (ngSubmit)="onSubmit()"
         >
             <div class="qt-input-block qt-input-line">
-              <label class="qt-input-block__label">First Name</label>
-              <input
-                type="text"
-                formControlName="firstName"
-                class="qt-input-block__input"
-              >
-              <div
-                *ngIf="submitted && f.firstName.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
-                <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
-              </div>
-            </div>
-            <div class="qt-input-block qt-input-line">
-              <label class="qt-input-block__label">Last Name</label>
-              <input
-                type="text"
-                class="qt-input-block__input"
-                formControlName="lastName"
-              >
-              <div
-                *ngIf="submitted && f.lastName.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
-                <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
-              </div>
-            </div>
-            <div class="qt-input-block qt-input-line">
-              <label class="qt-input-block__label">Email</label>
-              <input
-                type="text"
-                class="qt-input-block__input"
-                formControlName="primaryEmail"
-                #primaryEmail
-                (blur)="isEmailUnique(primaryEmail.value)"
-                formControlName="primaryEmail"
-              >
-              <div
-                *ngIf="submitted && f.primaryEmail.errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f.primaryEmail.errors.required && isEmailIdUnique">Email is required</div>
-                <div *ngIf="f.primaryEmail.errors.pattern && isEmailIdUnique">Email must be a valid email address</div>
-              </div>
-              <label
-                *ngIf="!f.primaryEmail.errors && !isEmailIdUnique"
-                class="invalid-feedback"
-              >
-                This email already occupied.
-              </label>
-            </div>
-            <div class="qt-input-block qt-input-line">
-              <label class="qt-input-block__label">Set Tech User Role</label>
-              <div class="form-row">
-                <select
-                  class="cmn-select form-input"
-                  formControlName="techRole"
+                <label class="qt-input-block__label">First Name</label>
+                <input
+                    type="text"
+                    formControlName="firstName"
+                    class="qt-input-block__input"
                 >
-                  <option
-                    *ngFor="let role of techRoles"
-                    value="{{ role }}"
-                  >
-                    {{
+                <div
+                    *ngIf="submitted && f.firstName.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
+                    <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+                </div>
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Last Name</label>
+                <input
+                    type="text"
+                    class="qt-input-block__input"
+                    formControlName="lastName"
+                >
+                <div
+                    *ngIf="submitted && f.lastName.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
+                    <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+                </div>
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Email</label>
+                <input
+                    type="text"
+                    class="qt-input-block__input"
+                    formControlName="primaryEmail"
+                    #primaryEmail
+                    (blur)="isEmailUnique(primaryEmail.value)"
+                    formControlName="primaryEmail"
+                >
+                <div
+                    *ngIf="submitted && f.primaryEmail.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.primaryEmail.errors.required && isEmailIdUnique">Email is required</div>
+                    <div *ngIf="f.primaryEmail.errors.pattern && isEmailIdUnique">Email must be a valid email address</div>
+                </div>
+                <label
+                    *ngIf="!f.primaryEmail.errors && !isEmailIdUnique"
+                    class="invalid-feedback"
+                >
+                    This email already occupied.
+                </label>
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Set Tech User Role</label>
+                <div class="form-row">
+                    <select
+                        class="cmn-select form-input"
+                        formControlName="techRole"
+                    >
+                        <option
+                            *ngFor="let role of techRoles"
+                            value="{{ role }}"
+                        >
+                            {{
                     role
                     }}
-                  </option>
-                </select>
-              </div>
+                        </option>
+                    </select>
+                </div>
             </div>
             <div class="qt-input-line__email-notify-tech-users">
-              <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">Set Email Notification for Tech User</div>
-              <ul class="list-unstyled">
-                <li class="qt-mb-16">
-                  <label for="nDevice" class="qt-checkbox pointer">
-                    <input
-                      type="checkbox"
-                      id="nDevice"
-                      formControlName="newDevice"
-                    >
-                    <span></span>
-                    <div class="qt-ml-8"> When my account is logged in from a new device</div>
-                  </label>
-                </li>
-                <li class="qt-mb-16">
-                  <label for="tCreated" class="qt-checkbox pointer">
-                    <input
-                      type="checkbox"
-                      id="tCreated"
-                      formControlName="ticketCreated"
-                    >
-                    <span></span>
-                    <div class="qt-ml-8">When a New Ticket created</div>
-                  </label>
-                </li>
-                <li class="qt-mb-16">
-                  <label for="mTicketUpdated" class="qt-checkbox pointer">
-                    <input
-                      id="mTicketUpdated"
-                      type="checkbox"
-                      formControlName="myTicketUpdated"
-                    >
-                    <span></span>
-                    <div class="qt-ml-8">When a ticket that is assigned to me is updated</div>
-                  </label>
-                </li>
-                <li class="">
-                  <label for="tCloseNotifications" class="qt-checkbox pointer">
-                    <input
-                      id="tCloseNotifications"
-                      type="checkbox"
-                      formControlName="ticketCloseNotifications"
-                    >
-                    <span></span>
-                    <div class="qt-ml-8">When any ticket is closed</div>
-                  </label>
-                </li>
-              </ul>
+                <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">Set Email Notification for Tech User</div>
+                <ul class="list-unstyled">
+                    <li class="qt-mb-16">
+                        <label
+                            for="nDevice"
+                            class="qt-checkbox pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                id="nDevice"
+                                formControlName="newDevice"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">
+                                When my account is logged in from a new device
+                            </div>
+                        </label>
+                    </li>
+                    <li class="qt-mb-16">
+                        <label
+                            for="tCreated"
+                            class="qt-checkbox pointer"
+                        >
+                            <input
+                                type="checkbox"
+                                id="tCreated"
+                                formControlName="ticketCreated"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">When a New Ticket created</div>
+                        </label>
+                    </li>
+                    <li class="qt-mb-16">
+                        <label
+                            for="mTicketUpdated"
+                            class="qt-checkbox pointer"
+                        >
+                            <input
+                                id="mTicketUpdated"
+                                type="checkbox"
+                                formControlName="myTicketUpdated"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">
+                                When a ticket that is assigned to me is updated
+                            </div>
+                        </label>
+                    </li>
+                    <li class>
+                        <label
+                            for="tCloseNotifications"
+                            class="qt-checkbox pointer"
+                        >
+                            <input
+                                id="tCloseNotifications"
+                                type="checkbox"
+                                formControlName="ticketCloseNotifications"
+                            >
+                            <span></span>
+                            <div class="qt-ml-8">When any ticket is closed</div>
+                        </label>
+                    </li>
+                </ul>
             </div>
         </form>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
             <button
-              class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-              (click)="edit = !edit"
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                (click)="edit = !edit"
             >
-              Cancel
+                Cancel
             </button>
             <button
                 class="qt-button qt-jc-c qt-w100"

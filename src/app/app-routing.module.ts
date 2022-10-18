@@ -204,11 +204,11 @@ const routes: Routes = [
     canActivate: [PermissionTicketSettingsService, PermissionTechUserService]
 
   },
-  {
-    path: ':company/setting/permission',
-    loadChildren: './components/setting/permission-manage/permission-manage.module#PermissionManageModule',
-    canActivate: [PermissionTechUserService]
-  },
+  /* {
+     path: ':company/setting/permission',
+     loadChildren: './components/setting/permission-manage/permission-manage.module#PermissionManageModule',
+     canActivate: [PermissionTechUserService]
+   },*/
   {
     path: ':company/setting/emailTemplate',
     loadChildren: './components/setting/email-template/email-template.module#EmailTemplateModule',

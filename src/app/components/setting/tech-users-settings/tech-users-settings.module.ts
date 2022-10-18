@@ -8,12 +8,14 @@ import { TechUsersSettingsComponent } from './tech-users-settings.component';
 import { TechUsersSettingsRoutingModule } from './tech-users-routing.module';
 import { MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PermissionManageComponent } from '../permission-manage/permission-manage.component';
 
 
 
 
 @NgModule({
-    declarations: [TechUsersSettingsComponent
+    declarations: [TechUsersSettingsComponent,
+        PermissionManageComponent
     ],
     imports: [
         CommonModule,
@@ -25,9 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         PreloaderTicketModule,
         MatFormFieldModule,
         NgbModule,
+
     ],
-
-
-
 })
 export class TechUsersSettingsModule { }
