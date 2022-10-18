@@ -138,9 +138,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild('dropdownServices') selectedInput: ElementRef<HTMLInputElement>;
 
   IsUpdateInstalling: boolean = false;
-  IsCurrentConfigLoading: boolean = false;  
-  devices:any[] = [];  
-  todaysDate: any;  
+  IsCurrentConfigLoading: boolean = false;
+  devices: any[] = [];
+  todaysDate: any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -160,35 +160,42 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {       
-    this.showPreloader = true;     
-    this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');    
+  ngOnInit() {
+    this.showPreloader = true;
+    this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');
     this.companiesState.onInit();
-    this.devicesStateService.onInit();    
-    this.clientName = "All Companies";    
+    this.devicesStateService.onInit();
+    this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
-    let id = this.activateRoute.snapshot.params['id']; 
-    this.getAlldevicedata(this.activateRoute.snapshot.params['id']);       
-    if (id) this.companiesStateService.setCompanyRoutingId(id);    
+    let id = this.activateRoute.snapshot.params['id'];
+    this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+    if (id) this.companiesStateService.setCompanyRoutingId(id);
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
-    });    
+    });
     let company = this.companiesStateService.getCurrentCompany();
     if (company) {
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
-    }
-    this.companiesStateService.onCurrentCompany.subscribe(data => {
-      this.currentCompany = data;
-      this.techCompnayGuid = this.currentCompany.id;
-      this.companyGuid = this.currentCompany.id;
+      if (this.devices.length == 0) {
+        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+      }      
       this.setPreviewDataDevice();
       this.getManufacturers(this.techCompnayGuid);
       this.getModels(this.techCompnayGuid);
-    });
+    }
+    //when current company changes
+    // this.companiesStateService.onCurrentCompany.subscribe(data => {
+    //   this.currentCompany = data;
+    //   this.techCompnayGuid = this.currentCompany.id;
+    //   this.companyGuid = this.currentCompany.id;
+    //   this.setPreviewDataDevice();
+    //   this.getManufacturers(this.techCompnayGuid);
+    //   this.getModels(this.techCompnayGuid);
+    // });
 
-    this.setPreviewDataDevice();
+    //this.setPreviewDataDevice();
     this.onPowerShellCommand();
     this.onAck();
     this.onInstallRemoteAgentCommand();
@@ -200,19 +207,19 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }
     });
 
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {      
+    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       this.IsCurrentConfigLoading = true;
-      this.agentService.GetCurrentConfig(this.asset.ID);      
-    });    
+      this.agentService.GetCurrentConfig(this.asset.ID);
+    });
 
     this.todaysDate = Date.now();
-  }  
+  }
 
   getCountSelected() {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  setPreviewDataDevice() {           
+  setPreviewDataDevice() {
     this.AssetDetail();
     this.CurrentUser();
   }
@@ -257,7 +264,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  AssetDetail() {              
+  AssetDetail() {
     this.operatingSystem = [];
     if (this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -265,39 +272,31 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {                           
-      if (!resp || resp.length === 0) {        
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+      if (!resp || resp.length === 0) {
         this.assetList = [];
         this.asset = {};
         if (this.cd) {
           this.cd.detectChanges();
         }
         return;
-      }     
-      if(this.devices.length>0)
-      {        
-        this.assetList = resp;
-        this.asset = resp[0];        
-        this.getDevices(this.assetList);
-        this.operatingSystemWindow(resp[0].ID);     
-        this.HardwareTypeList(resp[0].TechCompanyGuid);   
-        this.showPreloader = false;
-        this.assetList.forEach((element, index) => {
-          //element.online = false;
-          this.assetList[index].Title =
-            element.Title != "" ? element.Title : element.Name;
-          if (element.AgentVersion != null) {
-            this.GetDeviceListConfig(element.ID);
-          }
-          this.getAssetTagDropDownDetail();
+      }      
+      this.assetList = resp;
+      this.asset = resp[0];
+      this.getDevices(this.assetList);
+      this.operatingSystemWindow(resp[0].ID);
+      this.HardwareTypeList(resp[0].TechCompanyGuid);
+      this.showPreloader = false;
+      this.assetList.forEach((element, index) => {
+        //element.online = false;
+        this.assetList[index].Title =
+          element.Title != "" ? element.Title : element.Name;
+        if (element.AgentVersion != null) {
+          this.GetDeviceListConfig(element.ID);
+        }
+        this.getAssetTagDropDownDetail();
       });
-      }  
-      else
-      {
-        this.showPreloader = false;
-        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
-      }     
-    });    
+    });
   }
 
   GetDeviceListConfig(assetID: any) {
@@ -306,7 +305,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -324,15 +323,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
                 let Sec = result[6] + ' ' + result[7];
                 asset.UpTime = Sec;
               }
-              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {                
+              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
                 let Minutes = result[4] + ' ' + result[5] + ' ';
                 asset.UpTime = Minutes;
               }
-              else if (result[0] == "0" && result[2] != "0") {                
+              else if (result[0] == "0" && result[2] != "0") {
                 let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
                 asset.UpTime = Hours;
               }
-              else {                
+              else {
                 let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
                 asset.UpTime = Days;
               }
@@ -379,7 +378,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   HardwareTypeList(TechCompanyGuid: any) {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {                 
+      .subscribe((resp) => {
         this.hardwareTypes = resp;
         this.assetList.forEach((element, index) => {
           var ht = this.hardwareTypes.find(
@@ -607,14 +606,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   openAside(type, asset) {
-    this.device_beta_resize = true;    
+    this.device_beta_resize = true;
     this.open = true;
     this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
     this.assetData.Caption = this.assetData.OperatingSystem;
     this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == asset.ManufacturerId);
     this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == asset.ModelID);
-    this.operatingSystemWindow(asset.ID);  
+    this.operatingSystemWindow(asset.ID);
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
     this.getSecurityUpdate(asset.Guid);
@@ -687,11 +686,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
     return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
 
-  getNetworkDetail(asset) {    
+  getNetworkDetail(asset) {
     this.networkData = [];
-    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {      
-      if (resp.length > 0) {                
-       this.networkData = resp.find((x) => x.Gateway !== null );
+    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.networkData = resp.find((x) => x.Gateway !== null);
       }
     });
   }
@@ -829,35 +828,33 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.onFilter('CompanyName');
       this.showPreloader = false;
       this.operatingSystem = [];
-      if(this.devices.length>0)
-      {
+      if (this.devices.length > 0) {
         this.assetList = resp;
         this.HardwareTypeList(this.assetList[0].TechCompanyGuid);
         this.HardwareTypeList(this.assetList[0].CompanyGuid);
         this.getDevices(this.assetList);
         this.showPreloader = false;
         this.assetList.forEach((element, index) => {
-        //element.online = false;
-        this.assetList[index].Title =
-          element.Title != "" ? element.Title : element.Name;
-        if (element.AgentVersion != null) {
-          this.GetDeviceListConfig(element.ID)
-        }
+          //element.online = false;
+          this.assetList[index].Title =
+            element.Title != "" ? element.Title : element.Name;
+          if (element.AgentVersion != null) {
+            this.GetDeviceListConfig(element.ID)
+          }
         });
       }
-      else
-      {
+      else {
         this.showPreloader = false;
         this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
       }
-      
+
       if (this.cd) {
         this.cd.detectChanges();
       }
     });
   }
 
-  remove(index: number) {    
+  remove(index: number) {
     this.selectedTag.splice(index, 1);
     this.searchTag.splice(index, 1);
     if (this.selectedTag.length == 0) {
@@ -998,7 +995,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       return;
     }
     this.agentService.getManufactures(TechCompanyGuid)
-      .subscribe((resp) => {                
+      .subscribe((resp) => {
         this.manufactureList = resp;
         if (this.asset) {
           this.selectManufacture(this.asset.ManufacturerId);
@@ -1037,7 +1034,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
     this.agentService
       .getModels(TechCompanyGuid)
-      .subscribe((resp) => {                
+      .subscribe((resp) => {
         this.selectModelList = resp;
         if (this.asset) {
           this.selectModel(this.asset.ModelID);
@@ -1312,21 +1309,21 @@ export class CompanyDeviceBetaComponent implements OnInit {
         else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
           itemToUpdate.RebootIsRequired = "2";
         }
-        item.IsUpdateInstalling = true;        
+        item.IsUpdateInstalling = true;
         this.agentService.GetWindowUpdateList(this.asset.ID, itemToUpdate);
         this.cd.detectChanges();
       }
     }
   }
 
-  operatingSystemWindow(ID){
+  operatingSystemWindow(ID) {
     this.agentService
       .getOperatingSystemByAssetId(ID)
       .subscribe((resp) => {
         this.System = resp.filter((x) => x.IsActive);
-        if (this.System.length > 0) {   
-          this.operatingSystem = this.System[0];       
-          this.serialnumber = this.System[0].SerialNumber;          
+        if (this.System.length > 0) {
+          this.operatingSystem = this.System[0];
+          this.serialnumber = this.System[0].SerialNumber;
         }
         else {
           this.serialnumber = '';
@@ -1335,13 +1332,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
       });
   }
 
-  updateSerialNo() {    
+  updateSerialNo() {
     this.operatingSystem.SerialNumber = this.serialnumber;
     this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
-      (resp) => {        
+      (resp) => {
         this.toastr.success("Asset info save successfully.");
       },
-      (error) => {        
+      (error) => {
         this.toastr.error("Something went wrong please try again.");
       }
     );
@@ -1349,20 +1346,20 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.companiesStateService.setCompanyRoutingId(null);
-    this.kafkaStateService.onInstallWindowsUpdates.unsubscribe();    
+    this.kafkaStateService.onInstallWindowsUpdates.unsubscribe();
   }
 
   printPdf() {
     this.getPdfData();
   }
 
-  getPdfData() {    
+  getPdfData() {
     let pdfList = [];
     this.assetList.forEach((element) => {
-      pdfList.push([        
+      pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
-        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
+        element.ManufacturerName != "" && element.ManufacturerName != null ? element.ManufacturerName.replace(",", " ") : "N/A",
+        element.ModelName != "" && element.ModelName != null ? element.ModelName.replace(",", " ") : "N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -1485,7 +1482,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[3] +
-        `</td></tr>`;        
+        `</td></tr>`;
     });
     html =
       html +
@@ -1542,14 +1539,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
       );
   }
 
-  downloadCsv() {    
+  downloadCsv() {
     let downloadCsvList = [];
     this.assetList.forEach((element) => {
       downloadCsvList.push([
-        element.CompanyName.replace(",","") || "N/A",
+        element.CompanyName.replace(",", "") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
-        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
+        element.ManufacturerName != "" && element.ManufacturerName != null ? element.ManufacturerName.replace(",", " ") : "N/A",
+        element.ModelName != "" && element.ModelName != null ? element.ModelName.replace(",", " ") : "N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -1561,7 +1558,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     );
   }
 
-  sendEmail() {           
+  sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
@@ -1572,38 +1569,36 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  getDevices(assetList)
-  {         
-      assetList.forEach((element,index)=>{      
-        element.online = false;
-        element.userName = "";
-        element.idle = 0;
-        let result = this.devices.find(x=>x.agentId === element.Guid);
-        if(result)
-        {   
-          assetList[index].online = result.online;
-          assetList[index].userName = result.userName;
-          assetList[index].idle = result.timing.idle;                                            
-        }
-       });                                    
+  getDevices(assetList) {
+    assetList.forEach((element, index) => {
+      element.online = false;
+      element.userName = "";
+      element.idle = 0;
+      let result = this.devices.find(x => x.agentId === element.Guid);
+      if (result) {
+        assetList[index].online = result.online;
+        assetList[index].userName = result.userName;
+        assetList[index].idle = result.timing.idle;
+      }
+    });
   }
 
-  getAlldevicedata(id){
-    this.devicesStateService.getOnDevices().subscribe(data => {                                         
+  getAlldevicedata(id) {
+    this.devicesStateService.getOnDevices().subscribe(data => {
       if (!data[id]) return;
       if (data[id].length) {
-        data[id].forEach(item => {                     
+        data[id].forEach(item => {
           this.devices.push(item);
-        });  
-      }    
-    });    
+        });
+      }
+    });
   }
 
   getLastCheckIn(asset) {
-    if(!asset) {
+    if (!asset) {
       return;
     }
-    return asset.LastCheckInDate?  moment(asset.LastCheckInDate).fromNow() : '';
+    return asset.LastCheckInDate ? moment(asset.LastCheckInDate).fromNow() : '';
   }
 }
 

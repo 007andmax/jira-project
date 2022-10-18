@@ -146,30 +146,30 @@ export class DevicesComponent implements OnInit {
 
   IsUpdateInstalling: boolean = false;
   IsCurrentConfigLoading: boolean = false;
-  searchTagName:any;
+  searchTagName: any;
   todaysDate: any;
-  isAdvSearchOpen:boolean= false;
+  isAdvSearchOpen: boolean = false;
   advanceSearchHardware = [];
   advanceSearchModel = [];
   advanceSearchManufacturer = [];
   advanceSearchSoftwareItem = [];
   advanceSearchOperatingVersion = [];
   advanceSearchOperatingType = [];
-  advanceSearchMemory:number=0;
-  advanceSearchDiskSpace:number=0;
-  advanceSearchFreeSpace:number=0;
-  advanceSearchMemorySelect:any;
-  advanceSearchDiskSpaceSelect:any;
-  advanceSearchFreeSpaceSelect:any;
-  advanceSearchOperation:any[]= [
+  advanceSearchMemory: number = 0;
+  advanceSearchDiskSpace: number = 0;
+  advanceSearchFreeSpace: number = 0;
+  advanceSearchMemorySelect: any;
+  advanceSearchDiskSpaceSelect: any;
+  advanceSearchFreeSpaceSelect: any;
+  advanceSearchOperation: any[] = [
     {
-      "name": "=",      
+      "name": "=",
     },
     {
-      "name":">"
+      "name": ">"
     },
     {
-      "name":"<"
+      "name": "<"
     }
   ]
   advancesearchCompanyTag = [];
@@ -177,8 +177,8 @@ export class DevicesComponent implements OnInit {
   advancesearchManufacturerTag = [];
   advancesearchModelTag = [];
   advancesearchSoftwareTag = [];
-  advancesearchOSVersion=[];
-  advancesearchOSType=[];
+  advancesearchOSVersion = [];
+  advancesearchOSType = [];
   advancesearchCompanyFilterValue: string = "";
   advancesearchHardwareFilterValue: string = "";
   advancesearchManufacturerFilterValue: string = "";
@@ -202,7 +202,7 @@ export class DevicesComponent implements OnInit {
     public draftEmailStateService: DraftEmailStateService,
   ) { }
 
-  ngOnInit() {        
+  ngOnInit() {
     this.companiesState.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
@@ -244,13 +244,13 @@ export class DevicesComponent implements OnInit {
         this.add(undefined);
       })
     }
-    
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {      
+
+    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       this.IsCurrentConfigLoading = true;
-      this.agentService.GetCurrentConfig(this.asset.ID);      
-    }); 
-    
-    this.CurrentUser();    
+      this.agentService.GetCurrentConfig(this.asset.ID);
+    });
+
+    this.CurrentUser();
 
     this.todaysDate = Date.now();
   }
@@ -270,10 +270,10 @@ export class DevicesComponent implements OnInit {
       this.getAssets();
       this.HardwareTypeList(this.techCompnayGuid);
       this.getManufacturers(this.techCompnayGuid);
-      this.getModels(this.techCompnayGuid);  
-      this.getSoftwarItem(this.techCompnayGuid);  
+      this.getModels(this.techCompnayGuid);
+      this.getSoftwarItem(this.techCompnayGuid);
       this.getOperatingSystemVersion(this.techCompnayGuid);
-      this.getOperatingSystemType(this.techCompnayGuid); 
+      this.getOperatingSystemType(this.techCompnayGuid);
     }
     else {
       this.setPreviewDataDevice();
@@ -317,7 +317,7 @@ export class DevicesComponent implements OnInit {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -325,11 +325,11 @@ export class DevicesComponent implements OnInit {
       this.assetList = resp;
       this.HardwareTypeList(this.techCompnayGuid);
 
-      this.assetList.forEach((element, index) => {        
+      this.assetList.forEach((element, index) => {
         element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
-        if (element.AgentVersion != null) {          
+        if (element.AgentVersion != null) {
           this.GetDeviceListConfig(element.ID);
         }
       });
@@ -373,7 +373,7 @@ export class DevicesComponent implements OnInit {
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
-        this.advanceSearchHardware = resp.filter(x=>x.IsActive);
+        this.advanceSearchHardware = resp.filter(x => x.IsActive);
         this.hardwareTypes = resp;
         this.assetList.forEach((element) => {
           var ht = this.hardwareTypes.find(
@@ -400,12 +400,12 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  GetDeviceListConfig(assetID: any) {    
+  GetDeviceListConfig(assetID: any) {
     this.agentService.GetDeviceListConfig(assetID);
   }
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -439,11 +439,11 @@ export class DevicesComponent implements OnInit {
 
           }
           asset.online = true;
-        }   
+        }
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
-        }     
-      }      
+        }
+      }
     });
   }
 
@@ -785,7 +785,7 @@ export class DevicesComponent implements OnInit {
     window.open(connect.launchSchemeURL);
   }
 
-  sendEmail() {    
+  sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
@@ -799,15 +799,15 @@ export class DevicesComponent implements OnInit {
   printPdf() {
     this.getPdfData();
   }
-  
-  getPdfData() {    
+
+  getPdfData() {
     let pdfList = [];
     this.assetList.forEach((element) => {
       pdfList.push([
-        element.CompanyName.replace(",","") || "N/A",
+        element.CompanyName.replace(",", "") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
-        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
+        element.ManufacturerName != "" && element.ManufacturerName != null ? element.ManufacturerName.replace(",", " ") : "N/A",
+        element.ModelName != "" && element.ModelName != null ? element.ModelName.replace(",", " ") : "N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -934,7 +934,7 @@ export class DevicesComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[3] +
-        `</td>`;  
+        `</td>`;
       html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
@@ -996,14 +996,14 @@ export class DevicesComponent implements OnInit {
       );
   }
 
-  downloadCsv() {    
+  downloadCsv() {
     let downloadCsvList = [];
     this.assetList.forEach((element) => {
       downloadCsvList.push([
-        element.CompanyName.replace(",","") || "N/A",
+        element.CompanyName.replace(",", "") || "N/A",
         element.Name.replace(",", " ") || "N/A",
-        element.ManufacturerName!="" && element.ManufacturerName != null ? element.ManufacturerName.replace(","," "):"N/A",          
-        element.ModelName!="" && element.ModelName != null ? element.ModelName.replace(",", " "):"N/A",
+        element.ManufacturerName != "" && element.ManufacturerName != null ? element.ManufacturerName.replace(",", " ") : "N/A",
+        element.ModelName != "" && element.ModelName != null ? element.ModelName.replace(",", " ") : "N/A",
         element.SerialNumber || "N/A",
       ]);
     });
@@ -1115,7 +1115,7 @@ export class DevicesComponent implements OnInit {
     }
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
-        this.advanceSearchManufacturer = resp.filter(x=>x.IsActive);  
+        this.advanceSearchManufacturer = resp.filter(x => x.IsActive);
         this.manufactureList = resp;
         if (this.asset) {
           this.selectManufacture(this.asset.ManufacturerId);
@@ -1154,7 +1154,7 @@ export class DevicesComponent implements OnInit {
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
-        this.advanceSearchModel = resp.filter(x=>x.IsActive);
+        this.advanceSearchModel = resp.filter(x => x.IsActive);
         this.selectModelList = resp;
         if (this.asset) {
           this.selectModel(this.asset.ModelID);
@@ -1176,15 +1176,15 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  openAside(type, asset) {       
+  openAside(type, asset) {
     this.devices_resize = true;
     this.open = true;
-    this.tab = type;    
+    this.tab = type;
     this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
     this.assetData.Caption = this.assetData.OperatingSystem;
     this.selectManufactureNamessidebar = this.manufactureList.find(x => x.ID == asset.ManufacturerId);
-    this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == asset.ModelID);                  
-    this.operatingSystemWindow(asset); 
+    this.selectModelNameSidebar = this.selectModelList.find(x => x.ID == asset.ModelID);
+    this.operatingSystemWindow(asset);
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
     this.getSecurityUpdate(asset.Guid);
@@ -1205,9 +1205,9 @@ export class DevicesComponent implements OnInit {
 
   getNetworkDetail(asset) {
     this.networkData = [];
-    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {      
-      if (resp.length > 0) {        
-        this.networkData = resp.find((x) => x.Gateway !== null );
+    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.networkData = resp.find((x) => x.Gateway !== null);
       }
     });
   }
@@ -1601,7 +1601,7 @@ export class DevicesComponent implements OnInit {
         }
         else if (itemToUpdate.RebootIsRequired == "Can Request Reboot") {
           itemToUpdate.RebootIsRequired = "2";
-        }        
+        }
         this.IsUpdateInstalling = true;
         this.agentService.GetWindowUpdateList(this.asset.ID, itemToUpdate);
         this.cd.detectChanges();
@@ -1639,21 +1639,21 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  operatingSystemWindow(asset){    
+  operatingSystemWindow(asset) {
     this.agentService
       .getOperatingSystemByAssetId(asset.ID)
       .subscribe((resp) => {
         this.System = resp.filter((x) => x.IsActive);
-        if (this.System.length > 0) {          
-          this.serialnumber = this.System[0].SerialNumber || '';          
+        if (this.System.length > 0) {
+          this.serialnumber = this.System[0].SerialNumber || '';
         }
         else {
-          this.serialnumber = '';          
+          this.serialnumber = '';
         }
       });
   }
 
-  updateSerialNo(){
+  updateSerialNo() {
     this.operatingSystem.SerialNumber = this.serialnumber;
     this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
       (resp) => {
@@ -1667,59 +1667,113 @@ export class DevicesComponent implements OnInit {
 
   openAsideAdvSearch() {
     this.isAdvSearchOpen = true;
-    this.devices_resize=true;
+    this.devices_resize = true;
   }
 
-  advanceSearchClosed(){
+  advanceSearchClosed() {
     this.isAdvSearchOpen = false;
     this.devices_resize = false;
     this.advancesearchPreloader = false;
     this.advancesearchClear();
   }
 
-  advanchSearch(){   
-    this.advancesearchPreloader = true;  
-    let data:any = {}; 
-    let datasize : any = {};         
-    data.TechCompanyGuid =  this.techCompnayGuid;        
-    data.CompanyList = this.advancesearchCompanyTag;
-    if(this.advanceSearchMemory > 0 && this.advanceSearchMemorySelect !=undefined){
+  advanchSearch() {
+    this.advancesearchPreloader = true;
+    let data: any = {};
+    let datasize: any = {};
+    data.TechCompanyGuid = this.techCompnayGuid;
+    data.CompanyList = [];
+    data.searchItems = [];
+    if (this.advancesearchCompanyTag && this.advancesearchCompanyTag.length > 0) {
+      for (let i = 0; i < this.advancesearchCompanyTag.length; i++) {
+        data.CompanyList.push(this.advancesearchCompanyTag[i].id);
+      }
+    }
+    //data.CompanyList = this.advancesearchCompanyTag;
+    if (this.advanceSearchMemory > 0 && this.advanceSearchMemorySelect != undefined) {
       datasize.ColumnName = "Memory";
-      datasize.Comparison = this.advanceSearchMemorySelect;
+      datasize.Comparison = this.advanceSearchMemorySelect.name;
       datasize.Value = this.advanceSearchMemory;
       data.searchItems.push(datasize);
-    }    
-    if(this.advanceSearchDiskSpace > 0 && this.advanceSearchDiskSpaceSelect !=undefined){
+    }
+    if (this.advanceSearchDiskSpace > 0 && this.advanceSearchDiskSpaceSelect != undefined) {
       datasize.ColumnName = "DiskSpace";
-      datasize.Comparison = this.advanceSearchDiskSpaceSelect;
+      datasize.Comparison = this.advanceSearchDiskSpaceSelect.name;
       datasize.Value = this.advanceSearchDiskSpace;
       data.searchItems.push(datasize);
-    } 
-    if(this.advanceSearchFreeSpace > 0 && this.advanceSearchFreeSpaceSelect !=undefined){
+    }
+    if (this.advanceSearchFreeSpace > 0 && this.advanceSearchFreeSpaceSelect != undefined) {
       datasize.ColumnName = "FreeSpace";
-      datasize.Comparison = this.advanceSearchFreeSpaceSelect;
+      datasize.Comparison = this.advanceSearchFreeSpaceSelect.name;
       datasize.Value = this.advanceSearchFreeSpace;
       data.searchItems.push(datasize);
-    }          
-    data.OSVersion = this.advancesearchOSVersion;
-    data.OSType = this.advancesearchOSType;
-    data.HardwareTypesList = this.advancesearchHardwareTag;
-    data.ManufacturerList = this.advancesearchManufacturerTag;
-    data.ModelList = this.advancesearchModelTag;
-    data.SoftwareList = this.advancesearchSoftwareTag;
+    }
+    data.OSVersion = '';
+    if( this.advancesearchOSVersion)
+    {
+      data.OSVersion = this.advancesearchOSVersion;
+    }
+
+    data.OSType = '';
+    if(this.advancesearchOSType) {
+      data.OSType = this.advancesearchOSType
+    }
+    
+    data.HardwareTypesList = [];
+    if (this.advancesearchHardwareTag && this.advancesearchHardwareTag.length > 0) {
+      for (let i = 0; i < this.advancesearchHardwareTag.length; i++) {
+        data.HardwareTypesList.push(this.advancesearchHardwareTag[i].id);
+      }
+    }    
+
+    data.ManufacturerList = [];
+    if (this.advancesearchManufacturerTag && this.advancesearchManufacturerTag.length > 0) {
+      for (let i = 0; i < this.advancesearchManufacturerTag.length; i++) {
+        data.ManufacturerList.push(this.advancesearchManufacturerTag[i].id);
+      }
+    }        
+    
+    data.ModelList = [];
+    if (this.advancesearchModelTag && this.advancesearchModelTag.length > 0) {
+      for (let i = 0; i < this.advancesearchModelTag.length; i++) {
+        data.ModelList.push(this.advancesearchModelTag[i].id);
+      }
+    }    
+    
+    data.SoftwareList = [];
+    if (this.advancesearchSoftwareTag && this.advancesearchSoftwareTag.length > 0) {
+      for (let i = 0; i < this.advancesearchSoftwareTag.length; i++) {
+        data.SoftwareList.push(this.advancesearchSoftwareTag[i].id);
+      }
+    }    
+    
     this.agentService.getAssetByAdvanceSearch(data).subscribe(
-      (result) => { 
-        this.advancesearchPreloader = false;                
-        if (result.length > 0) {         
+      (result) => {
+
+        if (result && result.length > 0) {
+          this.assetList = result;
+          this.HardwareTypeList(this.techCompnayGuid);
+          this.assetList.forEach((element, index) => {
+            element.online = false;
+            this.assetList[index].Title =
+              element.Title != "" ? element.Title : element.Name;
+            if (element.AgentVersion != null) {
+              this.GetDeviceListConfig(element.ID);
+            }
+          });
+
+          if (!this.cd['destroyed']) {
+            this.cd.detectChanges();
+          }
         }
-        else
-        {
-          this.advancesearchPreloader = false;
+        else {
+          this.assetList=[];
         }
-      })       
+        this.advancesearchPreloader = false;
+      });
   }
 
-  
+
   getSoftwarItem(TechCompanyGuid: any) {
     if (this.agentService.AccessToken == '') {
       setTimeout(() => {
@@ -1729,7 +1783,7 @@ export class DevicesComponent implements OnInit {
     }
     this.agentService
       .getSoftwareListByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {                              
+      .subscribe((resp) => {
         this.advanceSearchSoftwareItem = resp;
       });
   }
@@ -1743,7 +1797,7 @@ export class DevicesComponent implements OnInit {
     }
     this.agentService
       .getOperationgSystemGetVersionByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {            
+      .subscribe((resp) => {
         this.advanceSearchOperatingVersion = resp;
       });
   }
@@ -1757,49 +1811,49 @@ export class DevicesComponent implements OnInit {
     }
     this.agentService
       .getOperationgSystemGetTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {               
+      .subscribe((resp) => {
         this.advanceSearchOperatingType = resp;
       });
   }
 
-  AdvanceSearchOSVersionName(OSVersion){
-    if(OSVersion !=undefined || OSVersion !=null){
+  AdvanceSearchOSVersionName(OSVersion) {
+    this.advancesearchOSVersion = []];
+    if (OSVersion != undefined || OSVersion != null) {
       this.advancesearchOSVersion.push(OSVersion);
     }
   }
 
-  AdvanceSearchOSType(OSType){
-    if(OSType !=undefined || OSType !=null){
+  AdvanceSearchOSType(OSType) {
+    this.advancesearchOSType = [];
+    if (OSType != undefined || OSType != null) {
       this.advancesearchOSType.push(OSType);
-    }
+    }    
   }
 
-  AdvanceSearchMemory(memory){
-    if(memory !=undefined || memory !=null){
+  AdvanceSearchMemory(memory) {
+    if (memory != undefined || memory != null) {
       this.advanceSearchMemorySelect = memory;
     }
   }
 
-  AdvanceSearchDiskSpace(diskSpace){
-    if(diskSpace !=undefined || diskSpace !=null){
+  AdvanceSearchDiskSpace(diskSpace) {
+    if (diskSpace != undefined || diskSpace != null) {
       this.advanceSearchDiskSpaceSelect = diskSpace;
     }
   }
 
-  AdvanceSearchFreeSpace(freeSpace){
-    if(freeSpace !=undefined || freeSpace !=null){
+  AdvanceSearchFreeSpace(freeSpace) {
+    if (freeSpace != undefined || freeSpace != null) {
       this.advanceSearchFreeSpaceSelect = freeSpace;
     }
   }
 
-  onCompaniesSelectTag(Tag){       
-    if(this.advancesearchCompanyTag.length>0)
-    {
-      let result = this.advancesearchCompanyTag.find(x=>x.id == Tag.id);
-      if(result)
-      {
+  onCompaniesSelectTag(Tag) {
+    if (this.advancesearchCompanyTag.length > 0) {
+      let result = this.advancesearchCompanyTag.find(x => x.id == Tag.id);
+      if (result) {
         return;
-      }      
+      }
     }
     this.advancesearchCompanyTag.push(Tag);
     this.advancesearchCompanyFilterValue = "";
@@ -1809,83 +1863,79 @@ export class DevicesComponent implements OnInit {
     this.advancesearchCompanyTag.splice(index, 1);
   }
 
-  onHardwareSelectTag(Tag){
-    if(this.advancesearchHardwareTag.length>0)
-    {
-      let result = this.advancesearchHardwareTag.find(x=>x.ID == Tag.ID);
-      if(result)
-      {
+  onHardwareSelectTag(Tag) {
+    if (this.advancesearchHardwareTag.length > 0) {
+      let result = this.advancesearchHardwareTag.find(x => x.ID == Tag.ID);
+      if (result) {
         return;
-      }      
+      }
     }
     this.advancesearchHardwareTag.push(Tag);
     this.advancesearchHardwareFilterValue = "";
   }
 
-  searchHardwareRemove(index: number){
+  searchHardwareRemove(index: number) {
     this.advancesearchHardwareTag.splice(index, 1);
   }
 
-  onManufacturerSelectTag(Tag){
-    if(this.advancesearchManufacturerTag.length>0)
-    {
-      let result = this.advancesearchManufacturerTag.find(x=>x.ID == Tag.ID);
-      if(result)
-      {
+  onManufacturerSelectTag(Tag) {
+    if (this.advancesearchManufacturerTag.length > 0) {
+      let result = this.advancesearchManufacturerTag.find(x => x.ID == Tag.ID);
+      if (result) {
         return;
-      }      
+      }
     }
     this.advancesearchManufacturerTag.push(Tag);
     this.advancesearchManufacturerFilterValue = "";
   }
 
-  
-  searchManufacturerRemove(index: number){
+
+  searchManufacturerRemove(index: number) {
     this.advancesearchManufacturerTag.splice(index, 1);
   }
 
-  onModelSelectTag(Tag){
-    if(this.advancesearchModelTag.length>0)
-    {
-      let result = this.advancesearchModelTag.find(x=>x.ID == Tag.ID);
-      if(result)
-      {
+  onModelSelectTag(Tag) {
+    if (this.advancesearchModelTag.length > 0) {
+      let result = this.advancesearchModelTag.find(x => x.ID == Tag.ID);
+      if (result) {
         return;
-      }      
+      }
     }
     this.advancesearchModelTag.push(Tag);
     this.advancesearchModelFilterValue = "";
-  } 
-  
-  searchModelRemove(index: number){
+  }
+
+  searchModelRemove(index: number) {
     this.advancesearchModelTag.splice(index, 1);
   }
 
-  onSoftwareSelectTag(Tag){    
-    if(this.advancesearchSoftwareTag.length>0)
-    {
-      let result = this.advancesearchSoftwareTag.find(x=>x.ID == Tag.ID);
-      if(result)
-      {
+  onSoftwareSelectTag(Tag) {
+    if (this.advancesearchSoftwareTag.length > 0) {
+      let result = this.advancesearchSoftwareTag.find(x => x.ID == Tag.ID);
+      if (result) {
         return;
-      }      
+      }
     }
     this.advancesearchSoftwareTag.push(Tag);
     this.advancesearchSoftwareFilterValue = "";
   }
 
-  searchSoftwareRemove(index: number){
+  searchSoftwareRemove(index: number) {
     this.advancesearchSoftwareTag.splice(index, 1);
   }
 
-  advancesearchClear(){
+  advancesearchClear() {
     this.advancesearchCompanyTag = [];
     this.advancesearchOSVersion = [];
-    this.advancesearchOSType=[];
+    this.advancesearchOSType = [];
     this.advancesearchHardwareTag = [];
     this.advancesearchManufacturerTag = [];
     this.advancesearchModelTag = [];
     this.advancesearchSoftwareTag = [];
+  }
+
+  AdvanceSearchOSVersionChange(e) {
+    debugger;
   }
 
 }
