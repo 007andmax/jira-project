@@ -24,6 +24,7 @@ export class InvoicesAsideComponent implements OnInit {
   validate: PaymentInvoice = new PaymentInvoice();
   payment: Payment = new Payment();
   amountReceived: number = 0;
+  amountReceived_str: string = "0.00";
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
   invoices: Array<Invoice> = [];
@@ -68,6 +69,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   onChangeAmountReceived(event) {
     this.amountReceived = Number(event.target.value);
+    this.amountReceived_str = event.target.value.toFixed(2);
     this.amountReceived = parseFloat((this.amountReceived).toFixed(2));
     this.isChangeAmountReceived = (this.amountReceived > 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
@@ -92,6 +94,7 @@ export class InvoicesAsideComponent implements OnInit {
         if (b.selected) return a + (b.totalSum - b.paidSum);
         return a + 0;
       }, 0);;
+      this.amountReceived_str = this.amountReceived.toFixed(2);
     }
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
@@ -100,10 +103,12 @@ export class InvoicesAsideComponent implements OnInit {
       item.paymentAmount = 0;
     })
     this.amountReceived = 0;
+    this.amountReceived_str = "0.00";
   }
   public onChangePayment(val, invoice) {
     let value = Number(val.target.value);
     invoice.paymentAmount = parseFloat((((value) * 100) / 100).toFixed(2));
+    invoice.paymentAmount_str = (((value) * 100) / 100).toFixed(2);
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
@@ -191,6 +196,7 @@ export class InvoicesAsideComponent implements OnInit {
             if (b.selected) return parseFloat((a + (b.totalSum - b.paidSum)).toFixed(2));// Math.floor((a + (b.sum - b.paidSum))*100)/100;;
             return a + 0;
           }, 0);
+          this.amountReceived_str = this.amountReceived.toFixed(2);
         }
       })
       this.selectedCompany = item;
@@ -218,6 +224,7 @@ export class InvoicesAsideComponent implements OnInit {
     this.validate = new PaymentInvoice();
     this.payment = new Payment();
     this.amountReceived = 0;
+    this.amountReceived_str = "0.00";
     this.selectedCompany = null;
     this.isChangeAmountReceived = false;
     this.selectAllInvoice = false;
