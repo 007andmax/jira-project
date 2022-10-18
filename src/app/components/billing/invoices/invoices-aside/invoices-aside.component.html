@@ -184,7 +184,7 @@
                                     *ngIf="invoice.selected"
                                     number
                                     [money]="true"
-                                    [ngModel]="invoice.paymentAmount"
+                                    [ngModel]="invoice.paymentAmount_str"
                                     (change)="onChangePayment($event,invoice)"
                                     appToFixed
                                 >

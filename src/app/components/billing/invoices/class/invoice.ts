@@ -51,6 +51,10 @@ export class Invoice {
         this.totalSum = data.totalSum;
         this.paymentAmount_str = this.paymentAmount.toFixed(2);
     }
+    public setPaymentAmount(data) {
+        this.paymentAmount = data;
+        this.paymentAmount_str = this.paymentAmount.toFixed(2);
+    }
     public getOverDueDate() {
         var dueDate = new Date(this.dueDate).getTime();
         var today = Date.now();
