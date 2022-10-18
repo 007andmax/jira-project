@@ -62,14 +62,14 @@
                                             Count
                                             <div class="qt-table-modern__sorting--new"></div>
                                         </div>
-                                        <th
+                                        <div
                                             class="tab-pane__table-cell product-category-table__gl-number pointer"
                                             (click)="onFilter('gl-number')"
                                         >
                                             GL Number
                                             <div class="qt-table-modern__sorting--new"></div>
-                                        </th>
-                                        <th class="tab-pane__table-cell product-category-table__action">&nbsp;</th>
+                                        </div>
+                                        <div class="tab-pane__table-cell product-category-table__action"></div>
                                     </div>
                                 </div>
                                 <div class="tab-pane__table-body">
@@ -165,11 +165,10 @@
                                                     #deleteTooltip
                                                 ></app-dynamic-tooltip>
                                                 <div
-                                                    class="remove"
+                                                    class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                                                     *ngIf="item.productsAmount > 0"
                                                     (click)="removeCategoryProduct(item)"
                                                 >
-                                                    <div class="icon__new-remove qt-sz-20 qt-bg-contain pointer"></div>
                                                 </div>
                                             </div>
                                         </div>

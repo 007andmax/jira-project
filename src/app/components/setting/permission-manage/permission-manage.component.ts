@@ -67,7 +67,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    // $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.allUsers = [];
     this.getPermissionManage();
@@ -81,7 +82,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    // $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
 
   /**

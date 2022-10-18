@@ -1000,6 +1000,9 @@ body {
         .tab-pane__table-row {
           min-height: 56px;
 
+          &--sm {
+            min-height: 35px;
+          }
           &--lg {
             min-height: 75px;
           }
