@@ -10,7 +10,8 @@
         class="search-company"
         #companyDp
         [placeholder]="'Select Company'"
-        [change]="false"
+        [change]="true"
+        [search]="true"
         [class]="['qt-dropdown']"
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
