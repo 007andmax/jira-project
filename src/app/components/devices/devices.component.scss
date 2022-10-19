@@ -927,3 +927,13 @@ span.qt-input-search:before {
   transform: translate(5px, 43px) !important;
 }
 
+.ads-os-name {
+  padding:0 !important;
+}
+
+/deep/ .ads-os-name>.col-md-12 {
+  padding:0 !important;
+}
+/deep/ .ads-os-name > input {
+  padding: 0 0 0 15px !important;
+}

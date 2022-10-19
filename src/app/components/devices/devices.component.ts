@@ -179,11 +179,13 @@ export class DevicesComponent implements OnInit {
   advancesearchSoftwareTag = [];
   advancesearchOSVersion = [];
   advancesearchOSType = [];
+  advancesearchOSVersionNameTag = [];
   advancesearchCompanyFilterValue: string = "";
   advancesearchHardwareFilterValue: string = "";
   advancesearchManufacturerFilterValue: string = "";
   advancesearchModelFilterValue: string = "";
   advancesearchSoftwareFilterValue: string = "";
+  advancesearchOSVersionNameFilterValue: string = "";
   advancesearchPreloader: boolean = false;
 
   constructor(
@@ -1707,17 +1709,19 @@ export class DevicesComponent implements OnInit {
       datasize.Comparison = this.advanceSearchFreeSpaceSelect.name;
       datasize.Value = this.advanceSearchFreeSpace;
       data.searchItems.push(datasize);
-    }
-    data.OSVersion = '';
-    if( this.advancesearchOSVersion)
-    {
-      data.OSVersion = this.advancesearchOSVersion;
-    }
+    }    
 
     data.OSType = '';
     if(this.advancesearchOSType) {
       data.OSType = this.advancesearchOSType
     }
+
+    data.OSVersion = [];
+    if (this.advancesearchOSVersionNameTag && this.advancesearchOSVersionNameTag.length > 0) {
+      for (let i = 0; i < this.advancesearchOSVersionNameTag.length; i++) {
+        data.OSVersion.push(this.advancesearchOSVersionNameTag[i]);
+      }
+    }    
     
     data.HardwareTypesList = [];
     if (this.advancesearchHardwareTag && this.advancesearchHardwareTag.length > 0) {
@@ -1729,14 +1733,14 @@ export class DevicesComponent implements OnInit {
     data.ManufacturerList = [];
     if (this.advancesearchManufacturerTag && this.advancesearchManufacturerTag.length > 0) {
       for (let i = 0; i < this.advancesearchManufacturerTag.length; i++) {
-        data.ManufacturerList.push(this.advancesearchManufacturerTag[i].id);
+        data.ManufacturerList.push(this.advancesearchManufacturerTag[i].ID);
       }
     }        
     
     data.ModelList = [];
     if (this.advancesearchModelTag && this.advancesearchModelTag.length > 0) {
       for (let i = 0; i < this.advancesearchModelTag.length; i++) {
-        data.ModelList.push(this.advancesearchModelTag[i].id);
+        data.ModelList.push(this.advancesearchModelTag[i].ID);
       }
     }    
     
@@ -1863,6 +1867,10 @@ export class DevicesComponent implements OnInit {
     this.advancesearchCompanyTag.splice(index, 1);
   }
 
+  searcOSVersionNameRemove( index: number) {
+    this.advancesearchOSVersionNameTag.splice(index, 1);
+  }
+
   onHardwareSelectTag(Tag) {
     if (this.advancesearchHardwareTag.length > 0) {
       let result = this.advancesearchHardwareTag.find(x => x.ID == Tag.ID);
@@ -1872,6 +1880,17 @@ export class DevicesComponent implements OnInit {
     }
     this.advancesearchHardwareTag.push(Tag);
     this.advancesearchHardwareFilterValue = "";
+  }
+
+  onOSVersionNameSelectTag(Tag) {
+    if (this.advancesearchOSVersionNameTag && this.advancesearchOSVersionNameTag.length > 0) {
+      let result = this.advancesearchOSVersionNameTag.find(x => x == Tag);
+      if (result) {
+        return;
+      }
+    }
+    this.advancesearchOSVersionNameTag.push(Tag);
+    this.advancesearchOSVersionNameFilterValue = "";
   }
 
   searchHardwareRemove(index: number) {
@@ -1911,7 +1930,7 @@ export class DevicesComponent implements OnInit {
 
   onSoftwareSelectTag(Tag) {
     if (this.advancesearchSoftwareTag.length > 0) {
-      let result = this.advancesearchSoftwareTag.find(x => x.ID == Tag.ID);
+      let result = this.advancesearchSoftwareTag.find(x => x.DisplayName == Tag.DisplayName);
       if (result) {
         return;
       }
