@@ -69,8 +69,6 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // $('body').removeClass('ng7');
-    $('body').removeClass('page-settings');
     this.sub.unsubscribe();
   }
 

@@ -3,6 +3,7 @@ export class CrmCompanyJobTitle {
     name: string;
     isInitEdit: boolean = false;
     disableUpdate: boolean = false;
+    selected: boolean = false;
     constructor(data) {
         this.id = data.id;
         this.name = data.name;

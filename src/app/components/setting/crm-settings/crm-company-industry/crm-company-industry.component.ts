@@ -43,7 +43,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
     this.industryList = this.crmStateService.getIndustryList();
     if (this.industryList.length > 0) this.showPreloader = false;
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industryList = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      this.industryList = JSON.parse(JSON.stringify(data)).map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
       this.cd.detectChanges();
@@ -55,6 +55,18 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   }
   onFilter(field) {
     this.filter.onFilter(field, this.industryList);
+  }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.industryList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListIndustriesForRemove().push(item);
+      })
+    } else {
+      this.industryList.forEach(item => (item.selected = false));
+      this.crmStateService.setListIndustriesForRemove([]);
+    }
+    this.cd.detectChanges();
   }
   onEditIndustry(item, event) {
     if (item.isInitEdit) {

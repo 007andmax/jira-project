@@ -8,6 +8,7 @@ export class MarketingSubscriptionType {
     subscribed: boolean;
     activated: boolean;
     isExist: boolean = true;
+    selected: boolean = false;
     constructor(data) {
         this.id = data.id;
         this.name = data.name;

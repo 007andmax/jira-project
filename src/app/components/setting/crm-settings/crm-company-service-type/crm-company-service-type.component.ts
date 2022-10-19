@@ -72,6 +72,18 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
         })
     }
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.serviceTypeList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListServiceTypeForRemove().push(item);
+      })
+    } else {
+      this.serviceTypeList.forEach(item => (item.selected = false));
+      this.crmStateService.setListServiceTypeForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   onRemoveServiceTypies() {
     forkJoin(this.crmStateService.getListServiceTypeForRemove().map(item => this.crmService.removeServiceType(item.id).pipe(map((res) => res),
       catchError(error => of(undefined)))))

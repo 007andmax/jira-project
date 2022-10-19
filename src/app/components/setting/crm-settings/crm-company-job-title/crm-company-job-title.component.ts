@@ -52,6 +52,18 @@ export class CrmCompanyJobTitleComponent implements OnInit {
     this.sub.add(getConfirm);
 
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.jobTitleList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListJobTitleForRemove().push(item);
+      })
+    } else {
+      this.jobTitleList.forEach(item => (item.selected = false));
+      this.crmStateService.setListJobTitleForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   public toggleShowAdd(data) {
     this.showAdd = data;
   }

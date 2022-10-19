@@ -69,6 +69,18 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
         })
     }
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.marketingSubscriptionList.forEach(item => {
+        item.selected = true;
+        this.marketingEmailStateService.getListSubscriptionTypeForRemove().push(item);
+      })
+    } else {
+      this.marketingSubscriptionList.forEach(item => (item.selected = false));
+      this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   onRemoveSubscriptions() {
     forkJoin(this.marketingEmailStateService.getListSubscriptionTypeForRemove().map(item => this.marketingEmailService.removeSubscriptionType(item.id).pipe(map((res) => res),
       catchError(error => of(undefined)))))

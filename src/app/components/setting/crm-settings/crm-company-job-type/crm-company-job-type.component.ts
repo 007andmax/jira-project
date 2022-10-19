@@ -57,6 +57,18 @@ export class CrmCompanyJobTypeComponent implements OnInit {
     this.sub.add(getConfirm);
 
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.jobTypeList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListJobTypeForRemove().push(item);
+      })
+    } else {
+      this.jobTypeList.forEach(item => (item.selected = false));
+      this.crmStateService.setListJobTypeForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   public toggleShowAdd(data) {
     this.showAdd = data;
   }

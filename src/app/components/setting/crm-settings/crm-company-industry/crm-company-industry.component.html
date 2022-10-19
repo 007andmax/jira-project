@@ -1,102 +1,105 @@
 <div class="cmn-area">
-  <div
-    class="tab-pane__table"
-    [ngClass]="{'cleat-height-dataTable':!showPreloader}"
-  >
-    <div class="tab-pane__table-header">
-      <div class="tab-pane__table-row">
-        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-          <label class="qt-checkbox">
-            <input
-              type="checkbox"
-            >
-            <span></span>
-          </label>
-        </div>
-        <div
-          class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
-          (click)="onFilter('name')"
-        >
-          Industry Type
-          <div class="qt-table-modern__sorting--new"></div>
-        </div>
-        <div
-          class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
-          (click)="onFilter('count')"
-        >
-          Count
-          <div class="qt-table-modern__sorting--new"></div>
-        </div>
-        <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
-      </div>
-    </div>
     <div
-      class="tab-pane__table-body"
-      *ngIf="!showPreloader">
-      <add-crm-company-industry
-        *ngIf="showAdd"
-        [industryList]="industryList"
-        (onClose)="showAdd = false"
-      ></add-crm-company-industry>
-      <div
-        class="tab-pane__table-row"
-        *ngFor="let item of industryList; let i = index"
-        appClickOtside
-        [init]="item.isInitEdit"
-        [ngClass]="'edit-crm-container-' + i"
-        [class]="'.edit-crm-container-' + i"
-        (onOutSide)="onEditIndustry(item,$event)"
-      >
-        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-          <label class="qt-checkbox">
-            <input
-              type="checkbox"
-              (change)="onSelect($event,item)"
-            >
-            <span></span>
-          </label>
-        </div>
-        <div
-          class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
-          [ngClass]="{'--input-error' :  item.disableUpdate  }"
-        >
-          <input
-            type="text"
-            class="form-input --editable"
-            placeholder="Enter Name Category"
-            [(ngModel)]="item.name"
-            appKeyUpEnter
-            (onChange)="onEditIndustry(item,$event)"
-            maxlength="30"
-            (input)="item.onInitEdit(true);item.checkDublicate(industryList)"
-          >
-          <mat-error
-            class="qt-tooltip-error"
-            *ngIf="item.disableUpdate"
-          >
-            This Industry is already occupied
-          </mat-error>
-        </div>
-        <div
-          class="tab-pane__table-cell crm-settings-company-industry-table__count"
-          [textContent]="item.usageCounter"
-        ></div>
-        <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
-          <div class="qt-df qt-ai-c">
-            <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"></div>
-            <div
-              data-tooltip="Remove"
-              class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
-              (click)="removeIndustry(item)"
-            >
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            (change)="onSelectAll($event)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                    (click)="onFilter('name')"
+                >
+                    Industry Type
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    (click)="onFilter('count')"
+                >
+                    Count
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
             </div>
-          </div>
         </div>
-      </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <add-crm-company-industry
+                *ngIf="showAdd"
+                [industryList]="industryList"
+                (onClose)="showAdd = false"
+            ></add-crm-company-industry>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let item of industryList; let i = index"
+                appClickOtside
+                [init]="item.isInitEdit"
+                [ngClass]="'edit-crm-container-' + i"
+                [class]="'.edit-crm-container-' + i"
+                (onOutSide)="onEditIndustry(item,$event)"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            (change)="onSelect($event,item)"
+                            [(ngModel)]="item.selected"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                    [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                >
+                    <input
+                        type="text"
+                        class="form-input --editable"
+                        placeholder="Enter Name Category"
+                        [(ngModel)]="item.name"
+                        appKeyUpEnter
+                        (onChange)="onEditIndustry(item,$event)"
+                        maxlength="30"
+                        (input)="item.onInitEdit(true);item.checkDublicate(industryList)"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="item.disableUpdate"
+                    >
+                        This Industry is already occupied
+                    </mat-error>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count"
+                    [textContent]="item.usageCounter"
+                ></div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"></div>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeIndustry(item)"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
     </div>
-    <div
-      class="loading"
-      *ngIf="showPreloader"
-    ></div>
-  </div>
 </div>

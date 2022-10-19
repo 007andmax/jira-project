@@ -4,6 +4,7 @@ export class CrmCompanyServiceType {
     usageCounter: number;
     isInitEdit: boolean = false;
     disableUpdate: boolean = false;
+    selected: boolean = false;
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
