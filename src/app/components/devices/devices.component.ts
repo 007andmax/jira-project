@@ -1817,7 +1817,7 @@ export class DevicesComponent implements OnInit {
   }
 
   AdvanceSearchOSVersionName(OSVersion) {
-    this.advancesearchOSVersion = []];
+    this.advancesearchOSVersion = [];
     if (OSVersion != undefined || OSVersion != null) {
       this.advancesearchOSVersion.push(OSVersion);
     }
