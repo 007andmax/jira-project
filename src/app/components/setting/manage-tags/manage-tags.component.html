@@ -1,397 +1,3 @@
-<!-- &lt;!&ndash; Middle Wrapper &ndash;&gt; -->
-<!-- <div class="page-container"> -->
-<!-- <div class="page-insider manage-tags"> -->
-<!-- <div class="heading qt-df qt-ai-fs qt-jc-sb"> -->
-<!-- <h5 class="qt-fw-600">Manage Tags</h5> -->
-<!-- <div class="qt-df qt-ml-12 heading-serach qt-pos-rel"> -->
-<!-- <form method="GET"> -->
-<!-- <span class="qt-input-search"> -->
-<!-- <input -->
-<!-- type="search" -->
-<!-- class="qt-input-search" -->
-<!-- [(ngModel)]="searchTag" -->
-<!-- name="searchTag" -->
-<!-- placeholder="Search Tags" -->
-<!-- (input)="onSearch()" -->
-<!-- > -->
-<!-- </span> -->
-<!-- </form> -->
-<!-- <div -->
-<!-- href="javascript:;" -->
-<!-- class="qt-button &#45;&#45;md &#45;&#45;gray qt-jc-c pointer qt-ml-12" -->
-<!-- (click)="onCreate()" -->
-<!-- > -->
-<!-- <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span> -->
-<!-- Add Tag -->
-<!-- </div> -->
-<!-- &lt;!&ndash; Modal create Tags &ndash;&gt; -->
-<!-- <div -->
-<!-- class="modal-content toggle-area" -->
-<!-- [class.opened]="create" -->
-<!-- > -->
-<!-- <div class="modal-wrapper"> -->
-<!-- <div class="toggle-header"> -->
-<!-- <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Add Tag</h6> -->
-<!-- </div> -->
-<!-- <div class=""> -->
-<!-- <form -->
-<!-- [formGroup]="compnayForm" -->
-<!-- (ngSubmit)="onSubmit()" -->
-<!-- > -->
-<!-- <div class="qt-input-block qt-mb-32"> -->
-<!-- <label>Tag Name</label> -->
-<!-- <div class="form-row"> -->
-<!-- <input -->
-<!-- type="text" -->
-<!-- formControlName="word" -->
-<!-- class="form-input" -->
-<!-- placeholder="Enter Tag Name" -->
-<!-- > -->
-<!-- <div -->
-<!-- *ngIf="submitted && f.word.errors" -->
-<!-- class="invalid-feedback" -->
-<!-- > -->
-<!-- <div *ngIf="f.word.errors.required">Tag Name is required</div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="qt-df qt-w100"> -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- class="qt-button &#45;&#45;gray qt-jc-c qt-w100 qt-mr-12" -->
-<!-- aria-label="Close" -->
-<!-- (click)="onCancel()" -->
-<!-- > -->
-<!-- Cancel -->
-<!-- </a> -->
-<!-- <input -->
-<!-- type="submit" -->
-<!-- value="Save" -->
-<!-- class="qt-button qt-jc-c qt-w100" -->
-<!-- > -->
-<!-- </div> -->
-<!-- </form> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="tag_description"> -->
-<!-- <p> -->
-<!-- Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket -->
-<!-- they will automaticly be added to the tags. Tags can be used to search tickets -->
-<!-- </p> -->
-<!-- <div class="clearfix qt-mt-12"> -->
-<!-- <label class="qt-checkbox"> -->
-<!-- <input -->
-<!-- type="checkbox" -->
-<!-- name="allowCreateTags" -->
-<!-- [(ngModel)]="allowCreateTags" -->
-<!-- (change)="saveAllowingCreateCustomTags()" -->
-<!-- > -->
-<!-- <span></span> -->
-<!-- <div class="qt-ml-8 qt-fw-400 qt-lh-1">Allow user to create custom Tags</div> -->
-<!-- </label> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <ngb-tabset -->
-<!-- (tabChange)="setTab($event)" -->
-<!-- #tabset="ngbTabset" -->
-<!-- [destroyOnHide]="false" -->
-<!-- > -->
-<!-- &lt;!&ndash; Companies &ndash;&gt; -->
-<!-- <ngb-tab -->
-<!-- title="Companies" -->
-<!-- id="tab1" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <div class="cmn-area"> -->
-<!-- <div class="data-table-wrap"> -->
-<!-- <table -->
-<!-- #dataTable -->
-<!-- datatable -->
-<!-- [dtTrigger]="dtTrigger" -->
-<!-- [dtOptions]="dtOptions" -->
-<!-- class="display dataTable" -->
-<!-- style="width:100%" -->
-<!-- > -->
-<!-- <thead> -->
-<!-- <tr> -->
-<!-- <th class="c-tag"> -->
-<!-- <span>Custom Tags</span> -->
-<!-- </th> -->
-<!-- <th class="count"> -->
-<!-- <span>Count</span> -->
-<!-- </th> -->
-<!-- <th class="action">&nbsp;</th> -->
-<!-- </tr> -->
-<!-- </thead> -->
-<!-- <tbody -->
-<!-- infiniteScroll -->
-<!-- [infiniteScrollDistance]="2" -->
-<!-- [infiniteScrollThrottle]="50" -->
-<!-- [infiniteScrollDisabled]="infiniteScrollDisabled" -->
-<!-- (scrolled)="onScroll()" -->
-<!-- > -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-company -->
-<!-- let-i="index" -->
-<!-- [ngForOf]="companyTags" -->
-<!-- [ngForTrackBy]="trackById" -->
-<!-- > -->
-<!-- <tr> -->
-<!-- <td>{{ company.word | titlecase }}</td> -->
-<!-- <td>{{ company.usedCounter }}</td> -->
-<!-- <td class="action"> -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- data-tooltip="Edit" -->
-<!-- class="edit" -->
-<!-- (click)="editTag(company, i)" -->
-<!-- > -->
-<!-- <img -->
-<!-- src="/html/assets/img/icons/edit-12.svg" -->
-<!-- alt="Edit" -->
-<!-- > -->
-<!-- </a> -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- data-tooltip="Remove" -->
-<!-- class="remove" -->
-<!-- (click)="ConfirmDelete(company.id)" -->
-<!-- > -->
-<!-- <img -->
-<!-- src="/html/assets/img/icons/new-remove.svg" -->
-<!-- alt="Remove" -->
-<!-- > -->
-<!-- </a> -->
-<!-- &lt;!&ndash; Edit create Tags &ndash;&gt; -->
-<!-- <div -->
-<!-- class="modal-content toggle-area" -->
-<!-- [ngClass]="{ opened: selectedIdx === i }" -->
-<!-- > -->
-<!-- <div class="modal-wrapper"> -->
-<!-- <div class="toggle-header"> -->
-<!-- <h2 class="h1">Edit Tag</h2> -->
-<!-- </div> -->
-<!-- <div class="modal-body"> -->
-<!-- <form -->
-<!-- [formGroup]="compnayForm" -->
-<!-- (ngSubmit)="onSubmit()" -->
-<!-- > -->
-<!-- <div class="f-row"> -->
-<!-- <div class="f-col col-100"> -->
-<!-- <label>Tag Name</label> -->
-<!-- <div class="form-row"> -->
-<!-- <input -->
-<!-- type="text" -->
-<!-- formControlName="word" -->
-<!-- class="form-input" -->
-<!-- placeholder="Enter Tag Name" -->
-<!-- > -->
-<!-- <div -->
-<!-- *ngIf="submitted && f.word.errors" -->
-<!-- class="invalid-feedback" -->
-<!-- > -->
-<!-- <div *ngIf="f.word.errors.required">Tag Name is required</div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <input -->
-<!-- type="text" -->
-<!-- hidden -->
-<!-- formControlName="id" -->
-<!-- class="form-input" -->
-<!-- > -->
-<!-- <div class="m-btn-row"> -->
-<!-- <div class="m-btn-col"> -->
-<!-- <input -->
-<!-- type="submit" -->
-<!-- value="Save" -->
-<!-- class="btn btn-primary" -->
-<!-- > -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- class="btn btn-secondary" -->
-<!-- aria-label="Close" -->
-<!-- (click)="selectedIdx = -1" -->
-<!-- > -->
-<!-- Cancel -->
-<!-- </a> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </form> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </td> -->
-<!-- </tr> -->
-<!-- </ng-template> -->
-<!-- </tbody> -->
-<!-- </table> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- &lt;!&ndash; Tickets &ndash;&gt; -->
-<!-- <ngb-tab -->
-<!-- #tickets -->
-<!-- title="Tickets" -->
-<!-- id="tab2" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <div class="cmn-area"> -->
-<!-- <div class="data-table-wrap"> -->
-<!-- <table -->
-<!-- #dataTable -->
-<!-- datatable -->
-<!-- [dtTrigger]="dtTrigger" -->
-<!-- [dtOptions]="dtOptions" -->
-<!-- class="display dataTable" -->
-<!-- style="width:100%" -->
-<!-- > -->
-<!-- <thead> -->
-<!-- <tr> -->
-<!-- <th class="c-tag"> -->
-<!-- <span>Custom Tags</span> -->
-<!-- </th> -->
-<!-- <th class="count"> -->
-<!-- <span>Count</span> -->
-<!-- </th> -->
-<!-- <th class="action">&nbsp;</th> -->
-<!-- </tr> -->
-<!-- </thead> -->
-<!-- <tbody> -->
-<!-- <tr *ngFor=" -->
-<!-- let ticket of ticketTags | tag: searchTag; -->
-<!-- let i = index; -->
-<!-- trackBy: trackByFn -->
-<!-- "> -->
-<!-- <td>{{ ticket.word | titlecase }}</td> -->
-<!-- <td>{{ ticket.usedCounter }}</td> -->
-<!-- <td class="action"> -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- class="edit" -->
-<!-- data-tooltip="Edit" -->
-<!-- (click)="editTag(ticket, i)" -->
-<!-- > -->
-<!-- <img -->
-<!-- src="/html/assets/img/icons/edit-12.svg" -->
-<!-- alt="Edit" -->
-<!-- > -->
-<!-- </a> -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- data-tooltip="Remove" -->
-<!-- class="remove" -->
-<!-- (click)="ConfirmDelete(ticket.id)" -->
-<!-- > -->
-<!-- <img -->
-<!-- src="/html/assets/img/icons/new-remove.svg" -->
-<!-- alt="Remove" -->
-<!-- > -->
-<!-- </a> -->
-<!-- &lt;!&ndash; Edit create Tags &ndash;&gt; -->
-<!-- <div -->
-<!-- class="modal-content toggle-area" -->
-<!-- [ngClass]="{ opened: selectedIdx === i }" -->
-<!-- > -->
-<!-- <div class="modal-wrapper"> -->
-<!-- <div class="toggle-header"> -->
-<!-- <h2 class="h1">Edit Tag</h2> -->
-<!-- </div> -->
-<!-- <div class="modal-body"> -->
-<!-- <form -->
-<!-- [formGroup]="compnayForm" -->
-<!-- (ngSubmit)="onSubmit()" -->
-<!-- > -->
-<!-- <div class="f-row"> -->
-<!-- <div class="f-col col-100"> -->
-<!-- <label *ngIf="!submitted || !f.word.errors">Tag Name</label> -->
-<!-- <div -->
-<!-- *ngIf="submitted && f.word.errors" -->
-<!-- class="invalid-feedback" -->
-<!-- > -->
-<!-- <div *ngIf="f.word.errors.required">Tag Name is required</div> -->
-<!-- </div> -->
-<!-- <div class="form-row"> -->
-<!-- <input -->
-<!-- type="text" -->
-<!-- formControlName="word" -->
-<!-- class="form-input" -->
-<!-- placeholder="Enter Tag Name" -->
-<!-- > -->
-<!-- </div> -->
-<!-- <input -->
-<!-- type="text" -->
-<!-- hidden -->
-<!-- formControlName="id" -->
-<!-- class="form-input" -->
-<!-- > -->
-<!-- </div> -->
-<!-- <div class="m-btn-row"> -->
-<!-- <div class="m-btn-col"> -->
-<!-- <input -->
-<!-- type="submit" -->
-<!-- value="Save" -->
-<!-- class="btn btn-primary" -->
-<!-- > -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- class="btn btn-secondary" -->
-<!-- aria-label="Close" -->
-<!-- (click)="onCancel()" -->
-<!-- > -->
-<!-- Cancel -->
-<!-- </a> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </form> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </td> -->
-<!-- </tr> -->
-<!-- </tbody> -->
-<!-- </table> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- &lt;!&ndash; Devices &ndash;&gt; -->
-<!-- <ngb-tab -->
-<!-- title="Devices" -->
-<!-- id="tab3" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <div class="cmn-area"> -->
-<!-- <div class="data-table-wrap"></div> -->
-<!-- </div> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- </ngb-tabset> -->
-<!-- &lt;!&ndash; <div class="loading" *ngIf="loading"></div> &ndash;&gt; -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- &lt;!&ndash; tag delete popup &ndash;&gt; -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider manage-tags">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
@@ -409,15 +15,14 @@
                         >
                     </span>
                 </form>
-                <div
+                <a
                     href="javascript:;"
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                     (click)="onCreate()"
                 >
-                    <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Add Tag
-                </div>
-                <!-- Modal create Tags -->
+                </a>
                 <div
                     class="modal-content --tooltip toggle-area"
                     [class.opened]="create"
@@ -481,7 +86,6 @@
             [destroyOnHide]="false"
             [hidden]="loading"
         >
-            <!-- Companies -->
             <ngb-tab
                 title="Companies"
                 id="tab1"
@@ -621,7 +225,6 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <!-- Tickets -->
             <ngb-tab
                 #tickets
                 title="Tickets"
@@ -688,7 +291,6 @@
                                             >
                                             </div>
                                         </div>
-                                        <!-- Edit create Tags -->
                                         <div
                                             class="modal-content --tooltip modal-content__edit toggle-area"
                                             [ngClass]="{ opened: selectedIdx === i }"
@@ -751,7 +353,6 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <!-- Devices -->
             <ngb-tab
                 title="Devices"
                 id="tab3"
@@ -763,7 +364,5 @@
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
-        <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
 </div>
-<!-- tag delete popup -->

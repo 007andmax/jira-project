@@ -1,42 +1,15 @@
-/*** All css files include ***/
 @import "./src/assets/styles/variable";
-@import "./src/assets/scss/mixin";
-@import "./src/assets/scss/custom";
 
-.preloader-container {
- min-height: 100px;
- position: relative;
-}
-.loading {
-    top: calc(50% - 30px);
-}
-.cmn-area {
-    padding-top: 0;
-
-    thead {
-        th {
-            padding: 10px 10px 10px 6px;
-            background-color: $gray-100--old;
-            text-transform: uppercase;
-        }
-
-        .tax-name {
-            padding-left: 0;
-        }
-    }
-    @media only screen and (max-width: 768px) {
-        padding: 25px;
-
-        table {
-            th {
-                padding-right: 5px;
-            }
-        }
-    }
-}
-.tax-name {
-    padding: 0px 15px 0px 24px !important;
-}
-.action {
-    padding: 0px 24px 0px 0px !important;
+.canned-responses-table {
+  &__template-name {
+    flex: 1 1 700px;
+    padding: 0 8px;
+  }
+  &__status {
+    flex: 1 1 150px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 92px;
+  }
 }
