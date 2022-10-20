@@ -65,7 +65,12 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     return this.usersStateService.getAllUsers().find(user => user.id === id);
   }
   getUserName(id) {
-    return (this.usersStateService.getAllUsers().find(user => user.id == id)) ? this.usersStateService.getAllUsers().find(user => user.id == id).firstName[0].toLocaleUpperCase() : '';
+    return this.usersStateService.getAllUsers().find(user => user.id == id).firstName[0].toLocaleUpperCase();
+  }
+  getUserFirstLastName(id) {
+    let user = this.usersStateService.getAllUsers().find(user => user.id == id);
+    return `${user.firstName} ${user.lastName}`;
+
   }
   getCount(count, subCount) {
     if (subCount > 1) {

@@ -94,6 +94,8 @@
                             *ngIf="item.subscribeUserIds.length > 0"
                             [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.subscribeUserIds[0]))) ? getUserAvatarUrl(getUser(item.subscribeUserIds[0])) : colors[item.subscribeUserIndexColor[0]]}"
                             [textContent]="getUserAvatarUrl(getUser(item.subscribeUserIds[0])) ? '' : getUserName(item.subscribeUserIds[0])"
+                            placement="top"
+                            [ngbTooltip]="getUserFirstLastName(item.subscribeUserIds[0])"
                         >
                         </div>
                         <div
@@ -101,6 +103,8 @@
                             *ngIf="item.subscribeUserIds.length > 1"
                             [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.subscribeUserIds[1]))) ? getUserAvatarUrl(getUser(item.subscribeUserIds[1])) : colors[item.subscribeUserIndexColor[1]]}"
                             [textContent]="getUserAvatarUrl(getUser(item.subscribeUserIds[1])) ? '' : getUserName(item.subscribeUserIds[1])"
+                            placement="top"
+                            [ngbTooltip]="getUserFirstLastName(item.subscribeUserIds[1])"
                         >
                         </div>
                         <div
@@ -117,6 +121,8 @@
                             *ngIf="item.unsubscribeUserIds.length > 0"
                             [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.unsubscribeUserIds[0]))) ? getUserAvatarUrl(getUser(item.unsubscribeUserIds[0])) : colors[item.subscribeUserIndexColor[0]]}"
                             [textContent]="getUserAvatarUrl(getUser(item.unsubscribeUserIds[0])) ? '' : getUserName(item.unsubscribeUserIds[0])"
+                            placement="top"
+                            [ngbTooltip]="getUserFirstLastName(item.unsubscribeUserIds[0])"
                         >
                         </div>
                         <div
@@ -124,6 +130,8 @@
                             *ngIf="item.unsubscribeUserIds.length > 1"
                             [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.unsubscribeUserIds[1]))) ? getUserAvatarUrl(getUser(item.unsubscribeUserIds[1])) : colors[item.subscribeUserIndexColor[1]]}"
                             [textContent]="getUserAvatarUrl(getUser(item.unsubscribeUserIds[1])) ? '' : getUserName(item.unsubscribeUserIds[1])"
+                            placement="top"
+                            [ngbTooltip]="getUserFirstLastName(item.unsubscribeUserIds[1])"
                         >
                         </div>
                         <span
