@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailSettingRoutingModule } from './email-setting-routing.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
 
@@ -24,7 +25,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         ReactiveFormsModule,
         EmailSettingRoutingModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        DropDownModule
     ],
 
 

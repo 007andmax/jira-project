@@ -49,20 +49,18 @@
                 <div class="tab-pane__subtitle">Outgoing mail server</div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
-                        <select
-                            class="cmn-select form-input"
-                            formControlName="usedEmailVia"
-                            (change)="changeEmailVia()"
-                        >
-                            <option
-                                *ngFor="let email of emailVia"
-                                value="{{ email.label }}"
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="emailVia"
+                                [editItem]="usedEmailVia"
+                                [field]="'label'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="changeEmailVia($event)"
                             >
-                                {{
-                email.label
-                }}
-                            </option>
-                        </select>
+                            </app-drop-down>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,15 +101,18 @@
                         </div>
                     </div>
                     <div class="qt-input-block encryption-input-block">
-                        <select
-                            class="cmn-select form-input"
-                            formControlName="encryptionType"
-                            (change)="changeEncryption($event.target.value)"
-                        >
-                            <option value="NONE">PLAIN</option>
-                            <option value="TLS">TLS</option>
-                            <option value="SSL">SSL</option>
-                        </select>
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="encryptionTypes"
+                                [editItem]="encryptionType"
+                                [field]="'type'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="changeEncryption($event.type)"
+                            >
+                            </app-drop-down>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -223,6 +224,18 @@
             > -->
         </form>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

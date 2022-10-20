@@ -10,6 +10,7 @@ import {
 } from "@angular/forms";
 import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
 import { AppStateService } from "src/app/states/app/app-state.service";
+import { TitleListType } from "src/app/components/tickets/tickets/tickets-header/class/title-list-type";
 
 
 @Component({
@@ -76,6 +77,10 @@ export class OutgoingEmailComponent implements OnInit {
       label: "Outlook"
     }
   ];
+  encryptionType = new TitleListType("TLS", "TLS");
+  encryptionTypes = [new TitleListType("NONE", "PLAIN"),
+  new TitleListType("TLS", "TLS"),
+  new TitleListType("SSL", "SSL")];
   emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   domainPattern = /^(((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?))|((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/;
   @Input() smtpSettingsInput: any;
@@ -186,6 +191,7 @@ export class OutgoingEmailComponent implements OnInit {
     this.savedSMTPSettings = this.savedSMTPSettingsInput;
     this.portIsEmpty = this.portIsEmptyInput;
     this.usedEmailVia = this.usedEmailViaInput;
+    console.log("this.usedEmailVia", this.usedEmailVia);
     if (!this.smtp.useSMTP || this.disableFields) {
       this.smtpForm.get("login").disable();
       this.smtpForm.get("domain").disable();
@@ -199,6 +205,7 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("encryptionType").enable();
       this.smtpForm.get("password").enable();
     }
+    this.encryptionType = this.encryptionTypes.find(itme => itme.type == this.smtp.encryptionType);
     this.smtpForm.patchValue({
       usedEmailVia: (this.usedEmailVia) ? this.usedEmailVia.label : "",
       port: this.smtp.port,
@@ -308,7 +315,11 @@ export class OutgoingEmailComponent implements OnInit {
   /**
    *isChangedEvent - notification display or not based on param 
    */
-  changeEmailVia() {
+  changeEmailVia(data) {
+    this.usedEmailVia = data;
+    this.smtpForm.patchValue({
+      usedEmailVia: data.label
+    })
     if (!this.smtpForm.value.usedEmailVia) {
       return;
     }
@@ -343,6 +354,7 @@ export class OutgoingEmailComponent implements OnInit {
    * @param value
    */
   changeEncryption(value) {
+    this.encryptionType = this.encryptionTypes.find(itme => itme.type == value);
     if (value) {
       if (this.initialized || this.portIsEmpty) {
         var port = this.portToTypes[value];

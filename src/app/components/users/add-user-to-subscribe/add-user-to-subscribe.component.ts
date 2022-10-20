@@ -48,11 +48,11 @@ export class AddUserToSubscribeComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    this.marketingSubscriptionList = JSON.parse(JSON.stringify(this.marketingEmailStateService.getListCustomSubscription())).map(item => new MarketingSubscriptionType(item));
+    this.marketingSubscriptionList = JSON.parse(JSON.stringify(this.marketingEmailStateService.getListCustomSubscription())).map(item => new MarketingSubscriptionType(item, null));
     if (this.marketingSubscriptionList.length > 0) this.showPreloader = false;
     if (this.marketingEmailStateService.isGetMarketing) this.showPreloader = false;
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
-      this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item));;
+      this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item, null));;
       this.showPreloader = false;
       this.cd.detectChanges();
     })
@@ -107,7 +107,7 @@ export class AddUserToSubscribeComponent implements OnInit {
 
   }
   onAddedSubscription(data) {
-    let subscription = new MarketingSubscriptionType(data);
+    let subscription = new MarketingSubscriptionType(data, null);
     if (this.isAddNewSubscription) {
       this.showAdd = false;
       this.onSelectSubscription(subscription);

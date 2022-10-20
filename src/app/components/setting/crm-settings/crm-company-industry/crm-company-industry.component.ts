@@ -40,7 +40,8 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    this.industryList = this.crmStateService.getIndustryList();
+    this.industryList = JSON.parse(JSON.stringify(this.crmStateService.getIndustryList())).map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     if (this.industryList.length > 0) this.showPreloader = false;
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industryList = JSON.parse(JSON.stringify(data)).map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?

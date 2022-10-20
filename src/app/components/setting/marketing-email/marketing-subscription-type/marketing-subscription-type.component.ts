@@ -8,6 +8,7 @@ import { DELETE_SUBSCRIPTION_TYPE, DELETE_SUBSCRIPTION_TYPIES } from 'src/app/co
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
 
@@ -22,12 +23,14 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   filter: MarketingSubscriptionTypeFilter = new MarketingSubscriptionTypeFilter();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
+  colors = ["#16A4FA", "#2BC7C6", "#155EEF", "#D92D20", "#7839EE", "#D92D20", "#2EC866"];
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
+    private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -58,6 +61,32 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   onFilter(field) {
     this.filter.onFilter(field, this.marketingSubscriptionList);
   }
+  getUser(id) {
+    return this.usersStateService.getAllUsers().find(user => user.id === id);
+  }
+  getUserName(id) {
+    return (this.usersStateService.getAllUsers().find(user => user.id == id)) ? this.usersStateService.getAllUsers().find(user => user.id == id).firstName[0].toLocaleUpperCase() : '';
+  }
+  getCount(count, subCount) {
+    if (subCount > 1) {
+      return count - 2;
+    } else if (subCount > 0) {
+      return count - 1;
+    }
+    return count;
+  }
+  getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return null;
+
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / cover no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+    } else {
+      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
+    }
+  };
   onEditSubscription(item, event) {
     if (item.isInitEdit) {
       if (item.length === 0 || item.disableUpdate) return;

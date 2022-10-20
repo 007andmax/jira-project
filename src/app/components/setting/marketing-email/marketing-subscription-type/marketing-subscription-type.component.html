@@ -90,41 +90,45 @@
                 <div class="tab-pane__table-cell marketing-email-table__subscribed-users">
                     <div class="qt-df">
                         <div
-                            style="background: rgb(124, 119, 203);"
                             class="tab-pane__table__circle-avatar"
+                            *ngIf="item.subscribeUserIds.length > 0"
+                            [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.subscribeUserIds[0]))) ? getUserAvatarUrl(getUser(item.subscribeUserIds[0])) : colors[item.subscribeUserIndexColor[0]]}"
+                            [textContent]="getUserAvatarUrl(getUser(item.subscribeUserIds[0])) ? '' : getUserName(item.subscribeUserIds[0])"
                         >
-                            A
                         </div>
                         <div
-                            style="background: rgb(12, 222, 170);"
                             class="tab-pane__table__circle-avatar --border --ml-6"
+                            *ngIf="item.subscribeUserIds.length > 1"
+                            [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.subscribeUserIds[1]))) ? getUserAvatarUrl(getUser(item.subscribeUserIds[1])) : colors[item.subscribeUserIndexColor[1]]}"
+                            [textContent]="getUserAvatarUrl(getUser(item.subscribeUserIds[1])) ? '' : getUserName(item.subscribeUserIds[1])"
                         >
-                            S
                         </div>
                         <div
                             class="tab-pane__table__circle-avatar --count --border --ml-6 pointer"
                             (click)="openAside(item,true)"
-                            [textContent]="item.subscribedCount"
+                            [textContent]="getCount(item.subscribedCount,item.subscribeUserIds.length)"
                         ></div>
                     </div>
                 </div>
                 <div class="tab-pane__table-cell marketing-email-table__unsubscribed-users">
                     <div class="qt-df">
                         <div
-                            style="background: rgb(124, 119, 203);"
                             class="tab-pane__table__circle-avatar"
+                            *ngIf="item.unsubscribeUserIds.length > 0"
+                            [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.unsubscribeUserIds[0]))) ? getUserAvatarUrl(getUser(item.unsubscribeUserIds[0])) : colors[item.subscribeUserIndexColor[0]]}"
+                            [textContent]="getUserAvatarUrl(getUser(item.unsubscribeUserIds[0])) ? '' : getUserName(item.unsubscribeUserIds[0])"
                         >
-                            A
                         </div>
                         <div
-                            style="background: rgb(12, 222, 170);"
                             class="tab-pane__table__circle-avatar --border --ml-6"
+                            *ngIf="item.unsubscribeUserIds.length > 1"
+                            [ngStyle]="{'background':  (getUserAvatarUrl(getUser(item.unsubscribeUserIds[1]))) ? getUserAvatarUrl(getUser(item.unsubscribeUserIds[1])) : colors[item.subscribeUserIndexColor[1]]}"
+                            [textContent]="getUserAvatarUrl(getUser(item.unsubscribeUserIds[1])) ? '' : getUserName(item.unsubscribeUserIds[1])"
                         >
-                            S
                         </div>
                         <span
                             class="tab-pane__table__circle-avatar --count --border --ml-6 pointer"
-                            [textContent]="item.unsubscribedCount"
+                            [textContent]="getCount(item.unsubscribedCount,item.unsubscribeUserIds.length)"
                             (click)="openAside(item,false)"
                         ></span>
                     </div>
