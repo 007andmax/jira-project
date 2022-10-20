@@ -3,7 +3,6 @@
     <div class="page-insider manage-tags">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Email Templates</h5>
-            <div class="qt-df qt-h36"></div>
             <!-- <div class="qt-button qt-ml-24 &#45;&#45;md">Save Changes</div> -->
         </div>
         <div
@@ -16,7 +15,7 @@
             (tabChange)="setTab($event)"
             [hidden]="loading"
         >
-            <!-- Ticket Templates -->
+
             <ngb-tab
                 title="Ticket Templates"
                 id="tab1"
@@ -95,7 +94,7 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <!-- Agent Templates -->
+
             <ngb-tab title="Agent Templates">
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
@@ -168,7 +167,7 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-            <!-- Invoice Templates -->
+
             <ngb-tab title="Invoice Templates">
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
@@ -242,34 +241,32 @@
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
-        <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
 </div>
-<!-- sidebar popup edit -->
+
 <div
     class="qt-aside-modern qt-aside-modern--page-settings sidebar-popup tmp-edit"
     [ngClass]="{ opened: edit }"
     *ngIf="templeteInfo"
 >
-    <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">{{ templeteInfo.title }}</div>
         <div class="qt-df">
-            <div class="qt-aside__restore-modal pointer">
-                <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div
-                class="qt-aside__restore-modal qt-ml-8 pointer"
+            <a
+              href="javascript:;"
+              class="qt-button --square-md --gray pointer"
+            >
+                <div class="icon__reset-gray-500 qt-sz-16 qt-button-icon"></div>
+            </a>
+            <a
+                href="javascript:;"
+                class="qt-button --square-md --gray qt-ml-8 pointer"
                 (click)="emailPreview(template)"
                 *ngIf="templeteInfo.showPreview"
             >
-                <div class="icon__view qt-sz-16 qt-bg-contain"></div>
-            </div>
+                <div class="icon__view qt-sz-16 qt-button-icon"></div>
+            </a>
         </div>
-        <!-- <div -->
-        <!-- class="qt-aside-modern__header-close icon__close" -->
-        <!-- (click)="closeTemplete()" -->
-        <!-- ></div> -->
     </div>
     <div class="qt-aside-modern__content">
         <div class="qt-input-block qt-input-line">
@@ -336,15 +333,15 @@
             </div>
             <div class="f-row">
                 <div class="f-col col-100">
-                    <div class="keywords">
+                    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
                         <label class="qt-fw-600 qt-color-gray-900">Available keywords</label>
                         <a
-                            class="qt-button --sm --gray qt-jc-c "
+                            class="qt-button --sm --gray"
                             href="javascript:;"
                             (click)="toggle()"
                         >
-                            <!-- <span class="icon__hide &#45;&#45;sm qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span> -->
-                            <span class="icon__view qt-sz-16 qt-ic-c qt-dib qt-mr-8"></span>
+<!--                            <span class="icon__hide qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>-->
+                            <span class="icon__view qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
                             {{ buttonName }}
                         </a>
                     </div>
@@ -366,18 +363,19 @@
                             {{ key.keyName }}
                         </span>
                     </div>
-                    <!-- on click hide show -->
+
                     <div
                         class="key-area"
                         *ngIf="show"
                     >
-                        <span
+                        <p
+                            class="key-area__text"
                             *ngFor="let key of keywords"
                             (mousedown)="insertAtCaret(key.keyName)"
                         >
-                            <strong>{{ key.keyName }} -</strong>
+                            <strong class="key-area__text-strong">{{ key.keyName }} -</strong>
                             {{ key.description }}
-                        </span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -397,64 +395,9 @@
             >
                 Save
             </button>
-            <!-- <div> -->
-            <!-- <button -->
-            <!-- type="button" -->
-            <!-- href="javascript:void(0)" -->
-            <!-- *ngIf="emailPages && openEmailTemplate" -->
-            <!-- class="restore qt-mr-50" -->
-            <!-- [disabled]="!emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault" -->
-            <!-- (click)="restoreDefault(openEmailTemplate)" -->
-            <!-- > -->
-            <!-- Restore Default -->
-            <!-- </button> -->
-            <!-- </div> -->
         </div>
     </div>
-    <!-- <div -->
-    <!-- class="msg" -->
-    <!-- *ngIf="templeteInfo" -->
-    <!-- > -->
-    <!-- {{ templeteInfo.description }} -->
-    <!-- </div> -->
 </div>
-<!-- Modal create Tags -->
-<!-- <ng-template -->
-<!-- #template -->
-<!-- let-modal -->
-<!-- &gt; -->
-<!-- <div class="modal-header"> -->
-<!-- <div class="modal-logo">Email Template Preview</div> -->
-<!-- <button -->
-<!-- type="button" -->
-<!-- class="close pull-right" -->
-<!-- aria-label="Close" -->
-<!-- (click)="modal.dismiss('Cross click')" -->
-<!-- > -->
-<!-- &lt;!&ndash; (click)="modalRef.hide()" &ndash;&gt; -->
-<!-- <span aria-hidden="true">&times;</span> -->
-<!-- </button> -->
-<!-- </div> -->
-<!-- <div class="modal-body"> -->
-<!-- <div [innerHTML]="emailPreviewHtml | sanitizeHtml"></div> -->
-<!-- </div> -->
-<!-- </ng-template> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <ng-template
     #template
@@ -470,7 +413,11 @@
             <p class="qt-color-gray-600">
                 You can download agent from the link given below
             </p>
-            <div class="qt-button qt-w100 qt-mt-24 qt-jc-c">Download Agent</div>
+            <a
+              href="javascript:;"
+              class="qt-button qt-w100 qt-mt-24 qt-jc-c">
+              Download Agent
+            </a>
             <div class="modal-body__address qt-color-gray-500">
                 <p class="qt-fw-500 qt-color-gray-900">John Cooper</p>
                 <p class="qt-mt-4 qt-mb-4">Activetek Information</p>

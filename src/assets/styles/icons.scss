@@ -472,10 +472,26 @@
     background-image: url("/assets/img/icons/upload-company-logo.svg");
   }
   &__view {
-    background-image: url("/assets/img/icons/view.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/view.svg");
+    mask-image: url("/assets/img/icons/view.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__hide {
-    background-image: url("/assets/img/icons/password-show.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/password-show.svg");
+    mask-image: url("/assets/img/icons/password-show.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__documents {
     background-image: url("/assets/img/icons/documents.svg");

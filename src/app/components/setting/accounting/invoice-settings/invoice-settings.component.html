@@ -10,7 +10,7 @@
             <div class="tab-pane__row">
                 <div class="tab-pane__subtitle">Starting Invoice Number</div>
                 <div class="tab-pane-input__row">
-                    <div class="qt-input-block">
+                    <div class="qt-input-block qt-input-block-100">
                         <input
                             type="text"
                             class="form-input"
@@ -18,7 +18,6 @@
                             [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
                             placeholder="Enter Starting ticket number"
                         >
-                        <div class="qt-input-help-text qt-mt-12">Maximum 7 Number</div>
                         <div
                             *ngIf="submitted && f.invoiceCount.errors"
                             class="invalid-feedback"
@@ -27,6 +26,7 @@
                             <div *ngIf="f.invoiceCount.errors.pattern">Only Number is allowed</div>
                         </div>
                     </div>
+                    <div class="qt-input-help-text qt-mt-12">Maximum 7 Number</div>
                 </div>
             </div>
             <div class="tab-pane__row">
@@ -283,7 +283,7 @@
                         class="qt-input-block qt-mt-16"
                         [hidden]="!invoiceForm.value.enableInvoiceContact"
                     >
-                        <div
+                        <a
                             href="javascript:;"
                             *ngIf="!isAddPhone && isDisable"
                             class="qt-button --gray qt-jc-c qt-w100"
@@ -291,7 +291,7 @@
                         >
                             <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                             Add Phone
-                        </div>
+                        </a>
                     </div>
                     <div class="qt-input-block qt-input-block-100 qt-mt-16">
                         <div
@@ -326,7 +326,7 @@
                         class="qt-input-block-100 qt-mt-16"
                         *ngIf="isAddPhone && invoiceForm.value.enableInvoiceContact"
                     >
-                        <div
+                        <a
                             *ngIf="isDisable"
                             href="javascript:;"
                             class="qt-button --gray qt-jc-c qt-w100 --color-red"
@@ -334,7 +334,7 @@
                         >
                             <span class="icon__new-remove--red-500 qt-sz-20 qt-bg-contain qt-mr-8 qt-button-icon"></span>
                           Remove
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -362,16 +362,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Todo check this input -->
-            <!-- <input -->
-            <!-- type="submit" -->
-            <!-- class="qt-button qt-mt-32" -->
-            <!-- value="Save Changes" -->
-            <!-- > -->
         </form>
     </div>
 </div>
-<!-- <div class="loading" *ngIf="loading"></div> -->
 <div
     class="loading-container"
     *ngIf="loading"

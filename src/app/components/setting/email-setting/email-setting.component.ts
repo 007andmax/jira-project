@@ -59,7 +59,6 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
-    // $('body').addClass('ng7');
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.SMTPSettings();
@@ -70,7 +69,6 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
     if (this.outgoingEmail) this.outgoingEmail.saveSMTP(this.outgoingEmail.smtpForm, undefined);
   }
   ngOnDestroy() {
-    // $('body').removeClass('ng7');
     $('body').removeClass('page-settings');
   }
   onBackMenu() {

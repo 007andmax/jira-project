@@ -23,7 +23,6 @@ export class AccountingYearComponent implements OnInit {
     private toaster: ToastrService,) { }
 
   ngOnInit() {
-    // $('body').addClass('ng7');
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.getAccountingStartDate();

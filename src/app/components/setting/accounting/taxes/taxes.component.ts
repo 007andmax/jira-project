@@ -40,8 +40,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   /**
    * init
    */
-  ngOnInit() {
-    // $('body').addClass('ng7');
+  ngOnInit() {;
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.taxes = this.taxesStateService.getTaxes();

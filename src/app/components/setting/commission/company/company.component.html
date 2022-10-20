@@ -23,16 +23,8 @@
       <div class="tab-pane__table-row tab-pane__table-row--lg" *ngFor="let company of clientsCompanies; let i = index">
         <div class="tab-pane__table-cell companies-sales-person-table__company-name">
           {{ company.name }}
-<!--          <div class="c-info">-->
-<!--            <span class="c-logo">{{ displayFrstLstChar(company.name) }}</span>-->
-<!--            <div class="c-info-title">{{ company.name }}</div>-->
-<!--          </div>-->
         </div>
         <div class="tab-pane__table-cell companies-sales-person-table__assigned-sales-person">
-<!--          {{-->
-<!--          company.companyInfo.addresses[0]-->
-<!--            .addressWithSuitNumberAndPostalCode-->
-<!--          }}-->
           {{ getClinetUrl(company) }}
           <app-tech-users
             [users]="activeTechUsers"

@@ -68,7 +68,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // $('body').addClass('ng7');
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.keywords = [];
@@ -81,7 +80,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // $('body').removeClass('ng7');
     $('body').removeClass('page-settings');
   }
 

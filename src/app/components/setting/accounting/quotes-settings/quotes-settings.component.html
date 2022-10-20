@@ -13,7 +13,7 @@
             <div class="tab-pane__row">
                 <div class="tab-pane__subtitle">Starting Quote Number</div>
                 <div class="tab-pane-input__row">
-                    <div class="qt-input-block">
+                    <div class="qt-input-block qt-input-block-100">
                         <input
                             type="text"
                             formControlName="count"
@@ -21,7 +21,6 @@
                             [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
                             placeholder="Enter Starting ticket number"
                         >
-                        <div class="qt-input-help-text qt-mt-12">Maximum 7 Number</div>
                         <div
                             *ngIf="submitted && f.count.errors"
                             class="invalid-feedback"
@@ -30,14 +29,9 @@
                             <div *ngIf="f.count.errors.pattern">Only Number is allowed</div>
                         </div>
                     </div>
+                    <div class="qt-input-help-text qt-mt-12">Maximum 7 Number</div>
                 </div>
             </div>
-            <!-- Todo check this input -->
-            <!-- <input -->
-            <!-- type="submit" -->
-            <!-- class="qt-button qt-mt-16" -->
-            <!-- value="Save Changes" -->
-            <!-- > -->
         </form>
     </div>
 </div>

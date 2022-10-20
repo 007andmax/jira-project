@@ -1,17 +1,5 @@
 @import "./src/assets/styles/variable";
 
-.date-area {
-    position: relative;
-    a {
-        position: absolute;
-        top: 2px;
-        right: 15px;
-        color: $primary-1;
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: 500;
-    }
-}
 input.form-control.sub-label-field,
 select.cmn-select {
     background-color: $white;

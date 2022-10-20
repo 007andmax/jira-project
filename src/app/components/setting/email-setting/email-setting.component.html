@@ -1,17 +1,17 @@
-<!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider email-insider">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Email Settings</h5>
-            <div
+            <a
+                href="javascript:;"
                 class="qt-button qt-ml-24 --md"
                 (click)="onSubmit()"
             >
                 Save Changes
-            </div>
+            </a>
         </div>
         <ngb-tabset>
-            <!-- Profile -->
+
             <ngb-tab
                 title="Incoming Email"
                 id="tab1"
@@ -25,7 +25,7 @@
                     ></app-incoming-email>
                 </ng-template>
             </ngb-tab>
-            <!-- Account -->
+
             <ngb-tab title="Outgoing Email">
                 <ng-template ngbTabContent>
                     <app-outgoing-email

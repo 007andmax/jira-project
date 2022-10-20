@@ -1,17 +1,18 @@
-<!-- Middle Wrapper -->
 <div class="page-container products-settings-page-container">
     <div class="page-insider manage-taxes">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">CRM Settings</h5>
             <div class="qt-df">
-                <div
+                <a
+                    href="javascript:;"
                     class="qt-button --md --gray button-gl-number__delete qt-ml-12"
                     *ngIf="getSelectedCount() > 0"
                     (click)="removeList()"
                 >
                     <div class="icon__new-remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
-                </div>
-                <div
+                </a>
+                <a
+                    href="javascript:;"
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                     (click)="create()"
                 >
@@ -19,7 +20,7 @@
                   <span
                     [textContent]="parseAddText()"
                   ></span>
-                </div>
+                </a>
             </div>
         </div>
         <ngb-tabset

@@ -1,89 +1,19 @@
-<!-- &lt;!&ndash; Middle Wrapper &ndash;&gt; -->
-<!-- <div class="page-container app-invoice-tickets-page-container"> -->
-<!-- <div class="page-insider invoice-ticket"> -->
-<!-- <div class="heading"> -->
-<!-- <h6 class="qt-fw-600 qt-color-dark">Accounting</h6> -->
-<!-- <div class="heading-serach add-category-container"> -->
-<!-- <div -->
-<!-- class="gl-numbers-header-buttons" -->
-<!-- *ngIf="getSelectedCount() > 0" -->
-<!-- > -->
-<!-- <div [textContent]="getSelectedCount() + ' Gl Numbers Selected'"></div> -->
-<!-- <div -->
-<!-- class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer" -->
-<!-- (click)="removeGls()" -->
-<!-- > -->
-<!-- <div class="icon__new-remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div> -->
-<!-- <div>Delete</div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <a -->
-<!-- href="javascript:;" -->
-<!-- class="btn-outline" -->
-<!-- (click)="create()" -->
-<!-- *ngIf="activeTab === 'gLNumbers'" -->
-<!-- > -->
-<!-- Add GL Number -->
-<!-- </a> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <ngb-tabset -->
-<!-- (tabChange)="setTab($event)" -->
-<!-- [destroyOnHide]="true" -->
-<!-- [ngClass]="{'clear-padding':activeTab === 'gLNumbers'}" -->
-<!-- > -->
-<!-- &lt;!&ndash; Invoice Settings &ndash;&gt; -->
-<!-- <ngb-tab -->
-<!-- title="Invoice Settings" -->
-<!-- id="invoiceSettings" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <app-invoice-settings></app-invoice-settings> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- &lt;!&ndash; Quotes Settings &ndash;&gt; -->
-<!-- <ngb-tab -->
-<!-- title="Quote settings" -->
-<!-- id="quoteSettings" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <app-quotes-settings></app-quotes-settings> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- <ngb-tab -->
-<!-- title="GL Numbers" -->
-<!-- id="gLNumbers" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <app-gl-number-settings #glNumber></app-gl-number-settings> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- <ngb-tab -->
-<!-- title="Accounting Year" -->
-<!-- id="accountingYear" -->
-<!-- > -->
-<!-- <ng-template ngbTabContent> -->
-<!-- <accounting-year></accounting-year> -->
-<!-- </ng-template> -->
-<!-- </ngb-tab> -->
-<!-- </ngb-tabset> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- Middle Wrapper -->
 <div class="page-container app-invoice-tickets-page-container">
     <div class="page-insider invoice-ticket">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Accounting</h5>
             <div class="qt-df">
-                <div
+                <a
+                    href="javascript:;"
                     class="qt-button qt-ml-24 --md"
                     (click)="onSubmit()"
                     *ngIf="activeTab !== 'gLNumbers' && activeTab !== 'taxes'"
                 >
                     Save Changes
-                </div>
-                <div class="qt-df">
-                    <div
+                </a>
+                <div class="qt-df qt-pos-rel">
+                    <a
+                        href="javascript:;"
                         class="qt-button --md --gray button-gl-number__delete qt-ml-12"
                         *ngIf="getSelectedCount() > 0"
                     >
@@ -92,23 +22,25 @@
                             (click)="removeGls()"
                         >
                         </div>
-                    </div>
-                    <div
+                    </a>
+                    <a
+                        href="javascript:;"
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                         (click)="create()"
                         *ngIf="activeTab === 'gLNumbers'"
                     >
                         <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                         Add GL Number
-                    </div>
-                    <div
+                    </a>
+                    <a
+                        href="javascript:;"
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                         (click)="toggleAddTax = !toggleAddTax"
                         *ngIf="activeTab === 'taxes'"
                     >
                         <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                         Add Tax
-                    </div>
+                    </a>
                     <taxes-add
                         *ngIf="toggleAddTax"
                         (onClose)="toggleAddTax = false"

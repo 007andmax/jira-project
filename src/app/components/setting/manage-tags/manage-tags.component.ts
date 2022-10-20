@@ -79,7 +79,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * init
    */
   ngOnInit() {
-    // $('body').addClass('ng7');
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.searchTag = "";
@@ -381,7 +380,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    // $('body').removeClass('ng7');
     $('body').removeClass('page-settings');
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
