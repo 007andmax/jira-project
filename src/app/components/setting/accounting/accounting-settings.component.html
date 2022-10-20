@@ -69,16 +69,6 @@
 <!-- </ngb-tabset> -->
 <!-- </div> -->
 <!-- </div> -->
-
-
-
-
-
-
-
-
-
-
 <!-- Middle Wrapper -->
 <div class="page-container app-invoice-tickets-page-container">
     <div class="page-insider invoice-ticket">
@@ -88,7 +78,7 @@
                 <div
                     class="qt-button qt-ml-24 --md"
                     (click)="onSubmit()"
-                    *ngIf="!glNumber"
+                    *ngIf="activeTab !== 'gLNumbers' && activeTab !== 'taxes'"
                 >
                     Save Changes
                 </div>
@@ -104,7 +94,6 @@
                         </div>
                     </div>
                     <div
-                        href="javascript:;"
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                         (click)="create()"
                         *ngIf="activeTab === 'gLNumbers'"
@@ -112,6 +101,18 @@
                         <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                         Add GL Number
                     </div>
+                    <div
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                        (click)="toggleAddTax = !toggleAddTax"
+                        *ngIf="activeTab === 'taxes'"
+                    >
+                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        Add Tax
+                    </div>
+                    <taxes-add
+                        *ngIf="toggleAddTax"
+                        (onClose)="toggleAddTax = false"
+                    ></taxes-add>
                 </div>
             </div>
         </div>

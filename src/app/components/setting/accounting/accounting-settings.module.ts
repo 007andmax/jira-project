@@ -15,6 +15,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesSettingsComponent } from './taxes/taxes.component';
+import { TaxesAddComponent } from './taxes/taxes-add/taxes-add.component';
 
 
 
@@ -26,7 +27,8 @@ import { TaxesSettingsComponent } from './taxes/taxes.component';
         AddGlNumberComponent,
         InvoiceSettingsComponent,
         QuotesSettingsComponent,
-        TaxesSettingsComponent
+        TaxesSettingsComponent,
+        TaxesAddComponent,
     ],
     imports: [
         CommonModule,

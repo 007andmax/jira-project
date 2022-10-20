@@ -28,6 +28,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   @ViewChild('accountingYear') accountingYear: AccountingYearComponent;
   @ViewChild('taxesSettings') taxesSettings: TaxesSettingsComponent;
   loading = false;
+  toggleAddTax: boolean = false;
   activeTab: string = "invoiceSettings";
   sub: Subscription = new Subscription();
   @ViewChild('glNumber') glNumber: GlNumberSettingsComponent;

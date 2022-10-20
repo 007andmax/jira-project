@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { tap } from "rxjs/operators";
+import { ToastrService } from "ngx-toastr";
+import { AppStateService } from "src/app/states/app/app-state.service";
 
 @Injectable({
   providedIn: "root"
@@ -8,7 +11,9 @@ import { environment } from "src/environments/environment";
 export class TaxesService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   /**
    * checked unique name
@@ -23,7 +28,12 @@ export class TaxesService {
    * @param tax 
    */
   saveTaxes(tax: any) {
-    return this.http.post(`${this.apiUrl}taxes`, tax);
+    return this.http.post(`${this.apiUrl}taxes`, tax).pipe(
+      tap(data => {
+        this.toastrService.success("The new tax has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

@@ -9,6 +9,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_TAX } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../../shared/confirm/confirm.component";
 import { Subscription } from "rxjs";
+import { TaxesStateService } from "src/app/states/taxes/taxes-state.service";
 declare var $: any;
 @Component({
   selector: "app-taxes-settings",
@@ -28,6 +29,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(
     private taxesService: TaxesService,
+    private taxesStateService: TaxesStateService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private settingStateService: SettingStateService,
@@ -42,7 +44,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
     // $('body').addClass('ng7');
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
-    this.taxes = [];
+    this.taxes = this.taxesStateService.getTaxes();
     this.taxForm = this.formBuilder.group({
       name: [
         "",
@@ -55,8 +57,6 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
       id: [""],
       isDefault: [""]
     });
-
-    this.getTaxes();
     this.settingStateService.setComponentName('TaxesSettingsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -66,6 +66,9 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.taxesStateService.onGetTaxes.subscribe(data => {
+
+    })
   }
 
   ngOnDestroy() {
@@ -75,24 +78,6 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   // convenience getter for easy access to form fields
   get f() {
     return this.taxForm.controls;
-  }
-
-  /**
-   * get taxes
-   */
-  getTaxes() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.taxesService
-      .getTaxes()
-      .pipe(
-        map((res: any) => {
-          if (res) {
-            this.taxes = res;
-          }
-          this.loading = false; $(".loading").css("display", "none");
-        })
-      )
-      .subscribe();
   }
 
   /**
