@@ -4,24 +4,25 @@
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Products</h5>
             <div class="qt-df">
-                <div
-                    class="qt-button --md --gray qt-ml-12"
+                <a
+                    href="javascript:;"
+                    class="qt-button --md --gray qt-ml-12 qt-pl-9 qt-pr-9"
                     *ngIf="getSelectedCount() > 0"
                 >
                     <div
-                        class="icon__new-remove qt-sz-16 qt-bg-contain qt-ic-c"
+                        class="icon__new-remove delete qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"
                         (click)="removeCategoriesStatus()"
                     >
                     </div>
-                </div>
-                <div
+                </a>
+                <a
                     href="javascript:;"
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                     (click)="create()"
                 >
-                    <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Add category
-                </div>
+                </a>
             </div>
         </div>
         <ngb-tabset

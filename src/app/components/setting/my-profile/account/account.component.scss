@@ -1,35 +1,11 @@
 @import './src/assets/styles/variable';
 
+.show-password,.hide-password {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+}
 
-.invalid-feedback {
-    // width: 100%;
-    margin-top: .25rem;
-    font-size: 80%;
-    color: $error;
-  }
-
-  input.ng-invalid.is-invalid {
-    border: 1px solid $error;
-  }
-  .authentication-type {
-    .ac-row {
-      display: flex;
-      justify-content: space-between;
-      justify-items: flex-end;
-    }
-    form {
-      width: max-content !important;
-    }
-    .static-link {
-      display: flex;
-      align-items: end;
-    }
-  }
-  .show-password,.hide-password {
-    position: absolute;
-      top: 13px;
-      right: 15px;
-  }
-  .qt-input-block {
-    position: relative;
-  }
+.qt-input-block {
+  position: relative;
+}

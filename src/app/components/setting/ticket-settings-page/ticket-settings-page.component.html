@@ -4,18 +4,20 @@
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h6 class="qt-fw-600">Ticket Settings</h6>
             <div class="qt-df">
-                <div
+                <a
+                    href="javascript:;"
                     class="qt-button qt-ml-24 --md"
                     (click)="onSubmit()"
                     *ngIf="activeTab !== 'cannedResponses'"
                 >
                     Save Changes
-                </div>
+                </a>
                 <div
                     class="qt-df"
                     [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
                 >
-                    <div
+                    <a
+                        href="javascript:;"
                         class="qt-button --md --gray button-gl-number__delete qt-ml-12"
                         *ngIf="getSelectedCount() > 0"
                     >
@@ -24,18 +26,17 @@
                             (click)="removeTicketsStatus()"
                         >
                         </div>
-                    </div>
-                    <div
+                    </a>
+                    <a
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                         *ngIf="activeTab === 'ticketStatus'"
                         href="javascript:;"
-                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                         (click)="create()"
                     >
                         <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                         Add Status
-                    </div>
-                    <div
+                    </a>
+                    <a
                         *ngIf="activeTab === 'cannedResponses' && getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
                         href="javascript:;"
                         class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
@@ -43,7 +44,7 @@
                     >
                         <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                         Create Response
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

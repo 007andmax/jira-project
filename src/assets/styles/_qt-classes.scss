@@ -172,6 +172,12 @@
     background-color: $blue-light-500;
   }
 
+  &:focus {
+    outline: none;
+    background-color: $blue-light-700;
+    color: $white;
+  }
+
   &.--outline {
     color: $primary-1;
     border: 1px solid $primary-1;
@@ -189,6 +195,11 @@
       .qt-button-icon {
         background-color: $gray-600;
       }
+    }
+
+    &:focus {
+      outline: none;
+      background-color: $gray-50;
     }
   }
 
@@ -267,6 +278,10 @@
     border-color: $gray-300;
     color: $white;
     cursor: default;
+
+    .qt-button-icon {
+      background-color: $white;
+    }
   }
 }
 
@@ -519,6 +534,9 @@
 .qt-pl-8 {
   padding-left: 8px;
 }
+.qt-pl-9 {
+  padding-left: 9px;
+}
 .qt-pl-10 {
   padding-left: 10px;
 }
@@ -567,6 +585,9 @@
 }
 .qt-pr-8 {
   padding-right: 8px;
+}
+.qt-pr-9 {
+  padding-right: 9px;
 }
 .qt-pr-10 {
   padding-right: 10px;
@@ -1027,8 +1048,8 @@
   background-repeat: no-repeat;
 }
 
-.qt-obj-contain {
-  object-fit: contain;
+.qt-img-cover {
+  object-fit: cover;
 }
 
 .qt-bgsz-16 {

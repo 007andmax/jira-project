@@ -92,36 +92,6 @@ body {
       }
     }
 
-    .tab-pane__table__circle-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      color: $white;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      font-size: 13px;
-      line-height: 16px;
-      font-weight: 500;
-
-      &.--count {
-        font-size: 12px;
-        line-height: 15px;
-        color: $gray-600;
-        background: $gray-100;
-      }
-
-      &.--border {
-        border: 1.5px solid $white;
-      }
-
-      &.--ml-6 {
-        margin-left: -6px;
-      }
-    }
-
     .assign-ticket-content--page-settings {
       .assign-ticket-header {
         padding: 32px 32px 16px;
@@ -688,7 +658,7 @@ body {
         border-radius: inherit;
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
       }
     }
     .dp-info {
@@ -805,6 +775,7 @@ body {
       padding: 32px;
       text-align: center;
     }
+
     .activity-history__table {
       &-header {
         .tab-pane__row {
@@ -1080,49 +1051,6 @@ body {
       }
     }
 
-    .ticket-status-table {
-      .ticket-status-table__status {
-        .icon__company-info {
-          transform: translateY(3px);
-        }
-      }
-      &__status {
-        flex: 1 1 240px;
-        &.--parse-status {
-          padding: 7px 8px 8px;
-          color: $gray-900;
-        }
-      }
-      &__color {
-        flex: 1 1 190px;
-      }
-      &__preview {
-        flex: 1 1 500px;
-        padding: 0 8px;
-      }
-      &__action {
-        flex: 0 0 20px;
-      }
-    }
-
-    .marketing-email-table {
-      &__subscription-type {
-        flex: 1 1 150px;
-        padding: 0 8px;
-      }
-      &__subscribed-users {
-        flex: 1 1 120px;
-        padding: 0 8px;
-      }
-      &__unsubscribed-users {
-        flex: 1 1 200px;
-        padding: 0 8px;
-      }
-      &__action {
-        flex: 0 0 56px;
-      }
-    }
-
     .gl-numbers__table {
       &-account-number {
         flex: 1 1 267px;
@@ -1135,55 +1063,6 @@ body {
       }
     }
 
-    .canned-responses-table {
-      &__template-name {
-        flex: 1 1 700px;
-        padding: 0 8px;
-      }
-      &__status {
-        flex: 1 1 150px;
-        padding: 0 8px;
-      }
-      &__action {
-        flex: 0 0 92px;
-      }
-    }
-
-    .manage-tags-table {
-      &__custom-tags {
-        flex: 1 1 150px;
-        padding: 0 8px;
-      }
-      &__count {
-        flex: 1 1 350px;
-        padding: 0 8px;
-      }
-      &__action {
-        flex: 0 0 56px;
-      }
-    }
-
-    .product-category-table {
-      &__checkboxes {
-        flex: 0 0 30px;
-        padding: 0;
-      }
-      &__category-name {
-        flex: 1 1 334px;
-      }
-      &__count {
-        flex: 1 1 70px;
-        padding: 0 8px;
-      }
-      &__gl-number {
-        flex: 1 1 75px;
-        padding: 0 8px;
-      }
-      &__action {
-        flex: 0 0 56px;
-      }
-    }
-
     .email-templates-table {
       &__template-name {
         flex: 1 1 400px;
@@ -1191,38 +1070,6 @@ body {
       }
       &__action {
         flex: 0 0 92px;
-      }
-    }
-
-    .active-users-table {
-      &__user-name {
-        flex: 1 0 245px;
-        padding: 0 8px;
-      }
-      &__role {
-        flex: 1 1 85px;
-        padding: 0 8px;
-      }
-      &__last-login {
-        flex: 1 1 75px;
-        padding: 0 8px;
-      }
-      &__authentication {
-        flex: 1 1 75px;
-        padding: 0 8px;
-      }
-      &__notify-for {
-        flex: 1 1 110px;
-        padding: 0 8px;
-        min-width: 204px;
-        position: relative;
-      }
-      &__action {
-        flex: 0 0 56px;
-
-        &.--sm {
-          flex: 0 0 20px;
-        }
       }
     }
 
