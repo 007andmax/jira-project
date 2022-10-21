@@ -231,6 +231,10 @@
       outline: none;
       background-color: $gray-50;
     }
+
+    &:active {
+      background-color: $white;
+    }
   }
 
   &.--red {

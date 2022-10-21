@@ -18,10 +18,10 @@
   &.border-bottom {
     margin-bottom: 56px;
 
-    .tab-pane__table-body {
-      .tab-pane__table-row:last-child:not(.add-gl-container) {
-        border-bottom: 1px solid $gray-200;
-      }
-    }
+    //.tab-pane__table-body {
+    //  .tab-pane__table-row:last-child:not(.add-gl-container) {
+    //    border-bottom: 1px solid $gray-200;
+    //  }
+    //}
   }
 }
