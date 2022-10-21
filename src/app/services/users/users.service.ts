@@ -34,7 +34,7 @@ export class UsersService {
    */
   public getAllusers() {
 
-    return this.http.get(this.apiUrl + 'users').pipe(
+    return this.http.post(this.apiUrl + 'users/filter', {}).pipe(
       map((data: any) => data.map((item) => new User(item))));
   }
 

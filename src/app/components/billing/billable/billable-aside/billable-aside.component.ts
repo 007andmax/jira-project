@@ -136,7 +136,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   saveAndSend() {
     this.disabledSaveBtns();
-    this.billableService.create(this.invoice.getDatForCreate(true.valueOf, this.company)).subscribe(data => {
+    this.billableService.create(this.invoice.getDatForCreate(true, this.company)).subscribe(data => {
       this.unlock();
       this.activeSaveBtns();
       this.moToBillable();
