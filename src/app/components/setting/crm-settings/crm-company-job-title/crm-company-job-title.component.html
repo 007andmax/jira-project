@@ -74,10 +74,17 @@
                     </mat-error>
                 </div>
                 <div class="tab-pane__table-cell crm-settings-table-job-title__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
                     <div
                         data-tooltip="Remove"
                         class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                         (click)="removeJobTitle(item)"
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
                     >
                     </div>
                 </div>

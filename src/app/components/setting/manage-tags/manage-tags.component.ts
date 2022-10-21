@@ -8,8 +8,8 @@ import {
   ChangeDetectorRef
 } from "@angular/core";
 
-import { forkJoin, Observable, Subject, Subscription } from "rxjs";
-import { map } from "rxjs/operators";
+import { forkJoin, Observable, of, Subject, Subscription } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,7 @@ import { TagsRealTimeService } from "src/app/states/tags/tags-real-time.service"
 import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
 import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
+import { ManageTag } from "./class/manage-tag";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -30,15 +31,13 @@ declare var $: any;
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";
-  ticketTags: any[] = [];
+  ticketTags: Array<ManageTag> = [];
   page: number = 0;
   public infiniteScrollDisabled = true;
-
-
-  companyTags: any[] = [];
-  reqcompanyTags: any[] = [];
+  companyTags: Array<ManageTag> = [];
+  reqcompanyTags: Array<ManageTag> = [];
   serviceAllTickets: Observable<any>;
-
+  showAdd: boolean = false;
   serviceCreateCustomTags: Observable<any>;
   allowCreateTags: any;
   compnayForm: FormGroup;
@@ -131,8 +130,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       .pipe(
         map(data => {
           this.loading = false;
-          this.ticketTags = data[0];
-
+          this.ticketTags = data[0].map(item => new ManageTag(item));
+          console.log("this.ticketTags 1", this.ticketTags);
           this.setDefaultScoll();
           this.onScroll();
         })
@@ -181,13 +180,29 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       return;
     }
     this.tagsService.searchManageTag(this.page, this.searchTag).subscribe((data: any) => {
-      this.companyTags = [...this.companyTags, ...data.commonTagViews];
-      this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
+      this.companyTags = [...this.companyTags, ...data.commonTagViews].map(item => new ManageTag(item));
+      this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))].map(item => new ManageTag(item));
       this.page++;
       this.infiniteScrollDisabled = false;
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
       this.loading = false;
     })
+  }
+
+  onEditTag(item) {
+    if (item.isInitEdit) {
+      if (item.word.length === 0 || item.disableUpdate) return;
+      this.tagsService
+        .setWordForTag(
+          item.id,
+          item.word,
+          this.setActiveTab
+        )
+        .pipe(map((res) => res),
+          catchError(error => of(undefined))).subscribe(data => {
+            item.onInitEdit(false);
+          })
+    }
   }
 
   /**
@@ -197,6 +212,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.serviceAllTickets.subscribe(
       res => {
         this.ticketTags = res;
+        console.log("this.ticketTags 2", this.ticketTags);
       },
       error => {
       }

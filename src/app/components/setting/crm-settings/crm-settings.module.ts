@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material';
 import { AddCrmCompanyServiceTypeComponent } from './crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
 import { AddCrmCompanyJobTitleComponent } from './crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
 import { AddCrmCompanyJobTypeComponent } from './crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 
@@ -35,7 +36,8 @@ import { AddCrmCompanyJobTypeComponent } from './crm-company-job-type/add-crm-co
         CrmSettingsRoutingModule,
         ClickOtsideModule,
         FormsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        DynamicTooltipModule
     ],
 
 

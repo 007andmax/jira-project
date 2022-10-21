@@ -86,11 +86,17 @@
                 ></div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                     <div class="qt-df qt-ai-c">
-                        <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"></div>
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
                         <div
                             data-tooltip="Remove"
                             class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                             (click)="removeIndustry(item)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
                         >
                         </div>
                     </div>

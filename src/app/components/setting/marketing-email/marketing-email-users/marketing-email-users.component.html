@@ -11,35 +11,35 @@
     <div class="qt-aside-modern__content">
         <div class="assign-ticket-content">
             <div class="assign-ticket-header">
-              <div class="qt-df qt-ai-c qt-mb-16">
-                <span class="qt-input-search__page-settings qt-f-1">
-                    <input
-                      class="qt-input-search__page-settings-input"
-                      placeholder="Search Users"
-                      autocomplete="off"
-                      [(ngModel)]="word"
-                      (input)="onSearch($event)"
+                <div class="qt-df qt-ai-c qt-mb-16">
+                    <span class="qt-input-search__page-settings qt-f-1">
+                        <input
+                            class="qt-input-search__page-settings-input"
+                            placeholder="Search Users"
+                            autocomplete="off"
+                            [(ngModel)]="word"
+                            (input)="onSearch($event)"
+                        >
+                        <span
+                            class="global-search__close icon__close-round"
+                            *ngIf="word.length > 0"
+                            (click)="clearWord()"
+                        ></span>
+                    </span>
+                    <button
+                        class="qt-button --md --padding-md --gray qt-jc-c pointer qt-ml-12"
+                        (click)="toggleShowAddUser = !toggleShowAddUser"
                     >
-                    <span
-                      class="global-search__close icon__close-round"
-                      *ngIf="word.length > 0"
-                      (click)="clearWord()"
-                    ></span>
-                </span>
-                <button
-                  class="qt-button --md --padding-md --gray qt-jc-c pointer qt-ml-12"
-                  (click)="toggleShowAddUser = !toggleShowAddUser"
-                >
-                  <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
-                  Add User
-                </button>
-              </div>
-              <marketing-email-users-add
-                *ngIf="toggleShowAddUser"
-                (onClose)="toggleShowAddUser = false"
-                #addUserDP
-                [marketingSubscription]="marketingSubscription"
-              ></marketing-email-users-add>
+                        <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        Add User
+                    </button>
+                </div>
+                <marketing-email-users-add
+                    *ngIf="toggleShowAddUser"
+                    (onClose)="toggleShowAddUser = false"
+                    #addUserDP
+                    [marketingSubscription]="marketingSubscription"
+                ></marketing-email-users-add>
             </div>
             <div class="users-list custom-scroll">
                 <ng-template
@@ -85,8 +85,14 @@
                                     [textContent]="user.email"
                                 ></div>
                             </span>
+                            <app-dynamic-tooltip
+                                [content]="'Remove'"
+                                [position]="'top'"
+                                #removeTooltip
+                            ></app-dynamic-tooltip>
                             <div
-                                data-tooltip="Remove"
+                                (mouseenter)="removeTooltip.show($event.target)"
+                                (mouseleave)="removeTooltip.hide()"
                                 class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                                 (click)="remove(user)"
                             >
@@ -98,13 +104,14 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-      <div class="qt-df qt-w100">
-        <button
-          (click)="close()"
-          class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-        >
-          Cancel
-        </button>
-        <button class="qt-button qt-jc-c qt-w100">Save</button></div>
+        <div class="qt-df qt-w100">
+            <button
+                (click)="close()"
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+            >
+                Cancel
+            </button>
+            <button class="qt-button qt-jc-c qt-w100">Save</button>
+        </div>
     </div>
 </div>

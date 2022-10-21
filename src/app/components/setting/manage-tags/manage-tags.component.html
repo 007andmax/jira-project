@@ -23,7 +23,7 @@
                     <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Add Tag
                 </a>
-                <div
+                <!-- <div
                     class="modal-content --tooltip toggle-area"
                     [class.opened]="create"
                 >
@@ -71,7 +71,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div
@@ -134,6 +134,11 @@
                                     [infiniteScrollDisabled]="infiniteScrollDisabled"
                                     (scrolled)="onScroll()"
                                 >
+                                    <manage-tags-add
+                                        *ngIf="create"
+                                        [setActiveTab]="setActiveTab"
+                                        (onClose)="create = false"
+                                    ></manage-tags-add>
                                     <ng-template
                                         ngFor
                                         let-company
@@ -141,18 +146,28 @@
                                         [ngForOf]="companyTags"
                                         [ngForTrackBy]="trackById"
                                     >
-                                        <div class="tab-pane__table-row">
-                                            <div class="tab-pane__table-cell manage-tags-table__custom-tags">{{ company.word | titlecase }}</div>
+                                        <div
+                                            class="tab-pane__table-row"
+                                            appClickOtside
+                                            [init]="company.isInitEdit"
+                                            [ngClass]="['edit-tag-container-' + i,company.selected ? '--selected' : '']"
+                                            [class]="'.edit-tag-container-' + i"
+                                            (onOutSide)="onEditTag(company)"
+                                        >
+                                            <div class="tab-pane__table-cell manage-tags-table__custom-tags">
+                                                <input
+                                                    type="text"
+                                                    class="form-input  --editable"
+                                                    placeholder="Enter Name Status"
+                                                    [(ngModel)]="company.word"
+                                                    appKeyUpEnter
+                                                    (onChange)="onEditTag(company)"
+                                                    (input)="company.onInitEdit(true)"
+                                                >
+                                            </div>
                                             <div class="tab-pane__table-cell manage-tags-table__count">{{ company.usedCounter }}</div>
                                             <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
                                                 <div class="qt-df qt-ai-c">
-                                                    <div
-                                                        href="javascript:;"
-                                                        data-tooltip="Edit"
-                                                        class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-                                                        (click)="editTag(company, i)"
-                                                    >
-                                                    </div>
                                                     <div
                                                         href="javascript:;"
                                                         data-tooltip="Remove"
@@ -266,6 +281,11 @@
                                 </div>
                             </div>
                             <div class="tab-pane__table-body">
+                                <manage-tags-add
+                                    *ngIf="create"
+                                    [setActiveTab]="setActiveTab"
+                                    (onClose)="create = false"
+                                ></manage-tags-add>
                                 <div
                                     class="tab-pane__table-row"
                                     *ngFor="
@@ -273,17 +293,26 @@
                             let i = index;
                             trackBy: trackByFn
                           "
+                                    appClickOtside
+                                    [init]="ticket.isInitEdit"
+                                    [ngClass]="['edit-tag-container-' + i,ticket.selected ? '--selected' : '']"
+                                    [class]="'.edit-tag-container-' + i"
+                                    (onOutSide)="onEditTag(ticket)"
                                 >
-                                    <div class="tab-pane__table-cell manage-tags-table__custom-tags">{{ ticket.word | titlecase }}</div>
+                                    <div class="tab-pane__table-cell manage-tags-table__custom-tags">
+                                        <input
+                                            type="text"
+                                            class="form-input  --editable"
+                                            placeholder="Enter Name Status"
+                                            [(ngModel)]="ticket.word"
+                                            appKeyUpEnter
+                                            (onChange)="onEditTag(ticket)"
+                                            (input)="ticket.onInitEdit(true)"
+                                        >
+                                    </div>
                                     <div class="tab-pane__table-cell manage-tags-table__count">{{ ticket.usedCounter }}</div>
                                     <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
                                         <div class="qt-df qt-ai-c">
-                                            <div
-                                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-                                                data-tooltip="Edit"
-                                                (click)="editTag(ticket, i)"
-                                            >
-                                            </div>
                                             <div
                                                 data-tooltip="Remove"
                                                 class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
@@ -305,7 +334,12 @@
                                                         (ngSubmit)="onSubmit()"
                                                     >
                                                         <div class="qt-input-block qt-mb-32">
-                                                            <label class="qt-input-block__label" *ngIf="!submitted || !f.word.errors">Tag Name</label>
+                                                            <label
+                                                                class="qt-input-block__label"
+                                                                *ngIf="!submitted || !f.word.errors"
+                                                            >
+                                                                Tag Name
+                                                            </label>
                                                             <div
                                                                 *ngIf="submitted && f.word.errors"
                                                                 class="invalid-feedback"

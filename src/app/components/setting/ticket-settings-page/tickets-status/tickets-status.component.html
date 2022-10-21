@@ -116,9 +116,15 @@
                     </div>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
                     <div
-                        data-tooltip="Remove"
                         class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
                     >
                     </div>
                 </div>
@@ -229,8 +235,14 @@
                     </div>
                 </div>
                 <div class="tab-pane__table-cell ticket-status-table__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
                     <div
-                        data-tooltip="Remove"
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
                         class="icon__new-remove qt-sz-20 qt-bg-contain pointer"
                         (click)="removeTicketStatus(item)"
                         *ngIf="item.custom"

@@ -86,14 +86,6 @@
         My Profile Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'permission-manage-component'}"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
-        (click)="goToState('permission-manage-component')"
-    >
-        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Permission Management
-    </li>
-    <li
         [ngClass]="{'--active':activePage === 'products-settings'}"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PRODUCT_CATEGORY_SETTINGS')"
         (click)="goToState('products-settings')"

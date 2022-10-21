@@ -6,12 +6,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TagPipe } from 'src/app/pipe/tag.pipe';
 import { ManageTagsRoutingModule } from './manage-tags-routing.module';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
 
 
 
 @NgModule({
     declarations: [ManageTagsComponent,
-        TagPipe
+        TagPipe,
+        ManageTagsAddComponent
     ],
     imports: [
         CommonModule,
@@ -19,7 +22,8 @@ import { ManageTagsRoutingModule } from './manage-tags-routing.module';
         NgbModule,
         ReactiveFormsModule,
         InfiniteScrollModule,
-        ManageTagsRoutingModule
+        ManageTagsRoutingModule,
+        ClickOtsideModule
     ],
     exports: [TagPipe]
 
