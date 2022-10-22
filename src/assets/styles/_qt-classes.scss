@@ -158,7 +158,7 @@
   font-weight: 500;
   line-height: 17px;
   border-radius: 6px;
-  background-color: $primary-1;
+  background-color: $blue-light-600;
   color: $white;
   padding: 10px 20px;
   display: flex;
@@ -191,21 +191,27 @@
     }
   }
 
-  &:hover {
-    background-color: $blue-light-500;
-  }
-
   &:not(.--gray) {
     &:hover {
       color: $white;
     }
   }
-
   &:focus {
+    outline: none;
+    background-color: $blue-light-600;
+    color: $white;
+  }
+
+  &:focus-visible {
     outline: none;
     background-color: $blue-light-700;
     color: $white;
   }
+
+  &:hover {
+    background-color: $blue-light-500;
+  }
+
 
   &.--outline {
     color: $primary-1;
@@ -229,11 +235,12 @@
 
     &:focus {
       outline: none;
-      background-color: $gray-50;
+      background: inherit;
     }
 
-    &:active {
-      background-color: $white;
+    &:focus-visible {
+      outline: none;
+      background-color: $gray-50;
     }
   }
 
