@@ -570,7 +570,8 @@
   &__add-grey {
     background-image: url("/assets/img/icons/add-grey.svg");
   }
-  &__add--grey-500 {
+  &__add--grey-500,
+  &__add--white {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
@@ -580,6 +581,9 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
+  }
+  &__add--white {
+    background-color: $white;
   }
   &__company-address {
     background-image: url("/assets/img/icons/company-address.svg");

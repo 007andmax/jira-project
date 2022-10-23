@@ -77,15 +77,14 @@
          id="dropdownBasic"
          ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-        <button ngbDropdownItem (click)="editTicket()"><i class="icn-16 icon__edit"></i>Edit</button>
-
+        <button ngbDropdownItem (click)="editTicket()"><i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-bg-contain icon__edit"></i>Edit</button>
         <button ngbDropdownItem (click)="suspendTicket()" *ngIf="!ticket.suspended"><i
-          class="icn-16 icon__archive"></i>Suspend
+          class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>Suspend
         </button>
         <button ngbDropdownItem (click)="resumeTicket()" *ngIf="ticket.suspended"><i
-          class="icn-16 icon__archive"></i>Resume
+          class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>Resume
         </button>
-        <button ngbDropdownItem (click)="removeTicket()"><i class="icn-16 icon__archive"></i>Delete</button>
+        <button ngbDropdownItem (click)="removeTicket()"><i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>Delete</button>
       </div>
     </div>
   </div>

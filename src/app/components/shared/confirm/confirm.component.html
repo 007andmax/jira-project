@@ -1,18 +1,3 @@
-<!-- <div class="confirm-modal" *ngIf="action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY'">
-  <div class="close-btn btn pull-right" (click)="closeModal()" tabindex="1" style="z-index: 1000">
-    <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
-  </div>
-  <div class="modal-body">
-    <p [textContent]="message"></p>
-  </div>
-  <div class="modal-footer">
-    <div class="btn btn-lg btn-primary"
-         data-dismiss='modal' (click)=cancelConfirm() [textContent]="btnCancel">
-
-    </div>
-    <div class="btn btn-lg btn-primary" (click)=approveConfirm() [textContent]="buttonConfirm"></div>
-  </div>
-</div> -->
 <div
     class="archive-modal"
     *ngIf="action === 'DELETE_MANAGE_TAG'"

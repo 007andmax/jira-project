@@ -39,13 +39,6 @@
   right: 40px;
   margin-left: auto;
 }
-
-.image-confirm-modal__footer .btn-new {
-  width: 100%;
-}
-.image-confirm-modal__footer .btn-primary {
-  background-color: $primary-1;
-}
 @media (max-width: 767px) {
   .image-confirm-modal {
     width: calc(100% - 32px);
@@ -56,13 +49,6 @@
     line-height: 24px;
     color: $primary-2;
     font-weight: 600;
-  }
-  .image-confirm-modal__footer .btn-new {
-    width: 100%;
-  }
-  .image-confirm-modal__footer .btn-primary {
-    order: 1;
-    margin: 0 0 0 8px;
   }
   .image-confirm-modal__overlay.--open {
     background: rgba(16, 24, 39, 0.4);

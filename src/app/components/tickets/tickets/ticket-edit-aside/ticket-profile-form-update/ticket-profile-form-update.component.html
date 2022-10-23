@@ -240,14 +240,14 @@
             <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
         </div>
         <div
-            class="qt-btn --btn40h"
+            class="qt-button"
             placement="top"
             ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
             [disableTooltip]="checkUpdateAndClose()"
             appDisabledBtn
             #update_closeBtn="disabled"
             (onClick)="updateAndClose()"
-            [ngClass]="{'disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"
+            [ngClass]="{'--disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"
         >
             <span>Update & Close</span>
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
