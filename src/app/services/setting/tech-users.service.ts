@@ -10,10 +10,10 @@ export class TechUsersService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers() {
+  getUsers(isArchived) {
     // Tech users
     // accountType: "TECH"
-    return this.http.get(`${this.apiUrl}users`);
+    return this.http.post(`${this.apiUrl}users/filter`, { accountType: "TECH", isArchived: isArchived });
   }
 
   getRoleNames() {

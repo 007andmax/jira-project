@@ -57,13 +57,6 @@
         Email Templates
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'integrations-component'}"
-        (click)="goToState('integrations-component')"
-    >
-        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Integrations
-    </li>
-    <li
         [ngClass]="{'--active':activePage === 'tech-component'}"
         (click)="goToState('tech-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
@@ -92,13 +85,6 @@
     >
         <div class="icon__menu--submenu icon__menu-products qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Products
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'subscription-component'}"
-        (click)="goToState('subscription-component')"
-    >
-        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
-        Subscription
     </li>
     <li
         [ngClass]="{'--active':activePage === 'manage-tags-component'}"

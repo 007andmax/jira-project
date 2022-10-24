@@ -8,6 +8,7 @@ import { TagPipe } from 'src/app/pipe/tag.pipe';
 import { ManageTagsRoutingModule } from './manage-tags-routing.module';
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -23,7 +24,8 @@ import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.compon
         ReactiveFormsModule,
         InfiniteScrollModule,
         ManageTagsRoutingModule,
-        ClickOtsideModule
+        ClickOtsideModule,
+        KeyUpEnterModule
     ],
     exports: [TagPipe]
 

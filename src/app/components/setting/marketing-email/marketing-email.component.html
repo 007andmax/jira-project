@@ -3,10 +3,17 @@
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Marketing Email</h5>
             <div class="qt-df qt-ml-12">
+                <app-dynamic-tooltip
+                    [content]="'Remove'"
+                    [position]="'top'"
+                    #removeTooltip
+                ></app-dynamic-tooltip>
                 <div
                     class="qt-button --md --gray button-gl-number__delete"
                     (click)="removeList()"
                     *ngIf="getSelectedCount() > 0"
+                    (mouseenter)="removeTooltip.show($event.target)"
+                    (mouseleave)="removeTooltip.hide()"
                 >
                     <div class="icon__new-remove qt-sz-16 qt-bg-contain qt-ic-c"></div>
                 </div>

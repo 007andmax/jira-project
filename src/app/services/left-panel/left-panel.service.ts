@@ -106,12 +106,10 @@ export class LeftPanelService {
       || state === 'taxes-component'
       || state === 'permission-manage-component'
       || state === 'email-template-component'
-      || state === 'integrations-component'
       || state === 'invoice-ticket-component'
       || state === 'commission-component'
       || state === 'ticket-settings'
       || state === 'crm-settings'
-      || state === 'marketing-email'
-      || state === 'subscription-component')
+      || state === 'marketing-email')
   }
 }

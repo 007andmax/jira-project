@@ -108,10 +108,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/taxes`)) this.state = 'taxes-component';
           if (window.location.href.includes(`/setting/permission`)) this.state = 'permission-manage-component';
           if (window.location.href.includes(`/setting/emailTemplate`)) this.state = 'email-template-component';
-          if (window.location.href.includes(`/setting/integration`)) this.state = 'integrations-component';
           if (window.location.href.includes(`/setting/accounting`)) this.state = 'invoice-ticket-component';
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
-          if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
           if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
@@ -266,11 +264,9 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'taxes-component') this.goToLink('setting/taxes');
       if (this.state === 'permission-manage-component') this.goToLink('setting/permission');
       if (this.state === 'email-template-component') this.goToLink('setting/emailTemplate');
-      if (this.state === 'integrations-component') this.goToLink('setting/integration');
       if (this.state === 'invoice-ticket-component') this.goToLink('setting/accounting');
       if (this.state === 'crm-settings') this.goToLink('setting/crm-settings');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
-      if (this.state === 'subscription-component') this.goToLink('setting/subscription');
       if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
       if (this.state === 'marketing-email') this.goToLink('setting/marketing-email');
       if (this.state === 'new-users') this.goToLink('users');

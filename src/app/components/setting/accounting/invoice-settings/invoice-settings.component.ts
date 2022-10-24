@@ -21,7 +21,7 @@ export class InvoiceSettingsComponent implements OnInit {
   includeAccountReceivableReportAsAttachmentSetting: boolean = false;
   invoiceTerm: any;
   primaryPhoneType;
-  secondaryPhoneType;
+  secondaryPhoneType = new TitleListType("Office", "OFFICE");
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
   new TitleListType("Office", "OFFICE"),
   new TitleListType("Fax", "FAX")];

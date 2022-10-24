@@ -11,9 +11,7 @@ import { EmailSettingComponent } from './components/setting/email-setting/email-
 import { TaxesSettingsComponent } from './components/setting/accounting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-template/email-template.component';
-import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
-import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
@@ -213,13 +211,6 @@ const routes: Routes = [
     path: ':company/setting/emailTemplate',
     loadChildren: './components/setting/email-template/email-template.module#EmailTemplateModule',
     canActivate: [PermissionEmailTemplateService, PermissionTechUserService]
-
-
-  },
-  {
-    path: ':company/setting/integration',
-    loadChildren: './components/setting/integrations/integrations.module#IntegrationsModule',
-    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/setting/marketing-email',
@@ -243,12 +234,6 @@ const routes: Routes = [
     path: ':company/setting/commission',
     loadChildren: './components/setting/commission/commission.module#CommissionModule',
     canActivate: [PermissionTechUserService]
-  },
-  {
-    path: ':company/setting/subscription',
-    loadChildren: './components/setting/subscription/subscription.module#SubscriptionModule',
-    canActivate: [PermissionTechUserService]
-
   },
   {
     path: ':company/inventory/products',

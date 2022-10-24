@@ -17,7 +17,8 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-
+import * as moment from "moment";
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 declare var $;
 
 @Component({
@@ -28,7 +29,7 @@ declare var $;
 export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;
   submitted = false;
-  loading = false;
+  loading = true;
   create = false;
   edit = false;
   currentCompanyId = null;
@@ -39,8 +40,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
-  techUseremailNotificationList: any = [];
-  archivedtechUseremailNotificationList: any = [];
   techUserForm: FormGroup;
 
   imageBase64 = '';
@@ -70,6 +69,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     private permissionsService: PermissionsService,
     private modalService: NgbModal,
     private companiesService: CompaniesService,
+    private usersRealTimeService: UsersRealTimeService
   ) {
 
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
@@ -110,8 +110,24 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       ticketCloseNotifications: [''],
       id: ['']
     });
+    let changeUsersArray = this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
+      if (newChange.data.accountType !== "TECH") return;
+      if ((newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED')) {
+        const Index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
+        if (Index === -1) this.techUsers.unshift(newChange.data);
+      }
+      if (newChange.action === 'USERS_DEARCHIVED') {
+        newChange.data.forEach(data => {
+          const Index = this.techUsers.findIndex((item) => item.id === data.id);
+          if (Index > -1) this.techUsers[Index].onUpdate(data);
+        });
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeUsersArray);
 
-    this.getUsers();
+    this.getUsers(false);
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersSettingsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -157,7 +173,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
 
   setTab(data) {
-    //is.isArchived = (data['nextId'] === "activeUsers");
+    if (data['nextId'] === "activeUsers") this.getUsers(false);
+    if (data['nextId'] === "archivedUsers") this.getUsers(true);
   }
   /**
    * get role names
@@ -174,7 +191,9 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       )
       .subscribe();
   }
-
+  getLastLoginAt(date) {
+    return moment(date).format("HH:mm A,DD MMM");
+  }
   restoreConfirm(id) {
     this.userId = id;
     this.popup = true;
@@ -183,21 +202,18 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     return this.permissionsService.isAllowed(action)
   }
   restoreUser() {
-    this.loading = true; $(".loading").css("display", "block");
     this.techUsersService.restoreUser(this.userId)
       .pipe()
       .subscribe(
         response => {
-          this.loading = false; $(".loading").css("display", "none");
           this.popup = false;
-          this.getUsers();
+          //  this.getUsers();
           this.toastr.success('User has been restore successfully.');
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           this.popup = false;
           this.toastr.error('Something wen to wrong. Please try again later');
-          this.getUsers();
+          // this.getUsers();
         }
       );
   }
@@ -205,23 +221,19 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   /**
    * get tech users from usres.
    */
-  getUsers() {
-    this.loading = true; $(".loading").css("display", "block");
+  getUsers(isArchived) {
+    this.loading = true;
     this.techUsersService
-      .getUsers()
+      .getUsers(isArchived)
       .pipe(
         map((users: any) => {
-          this.userlist = users.filter((u: any) => u.deletedAt !== null && u.accountType.toLowerCase() === 'tech');
-          return users.filter(
-            (user: any) =>
-              user.accountType.toLowerCase() === 'tech' &&
-              user.deletedAt === null
-          );
+          this.userlist = users;
+          return this.userlist;
         })
       )
       .subscribe(
         (techUsers: any) => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           let users = this.userlist.filter(user => user.accountType.toLowerCase() === 'tech');
           this.IdList = users.map(({ id }) => id);
           if (techUsers) {
@@ -231,62 +243,23 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
             if (this.techUserIdList) {
               IdList1 = this.IdList.concat(this.techUserIdList);
             }
-            this.emailNotification(this.techUserIdList);
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         }
       );
   }
 
-  /**
-   * tech User email notifications based on tech user id.
-   * @param techUserIdList
-   */
-  emailNotification(techUserIdList) {
-    this.techUsersService
-      .getUsersEmailNotifications(techUserIdList)
-      .pipe(
-        map(eNotifications => {
-          if (eNotifications) {
-            this.techUseremailNotificationList = eNotifications;
-          }
-        })
-
-      )
-      .subscribe();
+  getSecureText(twoFactorAuthType) {
+    if (twoFactorAuthType == "DISABLED") return "No Authentication";
+    if (twoFactorAuthType == "BASIC") return "Basic";
+    if (twoFactorAuthType == "SECURE") return "Secure by email";
+    if (twoFactorAuthType == "GOOGLE_SECURE") return "Secure by one time password";
+    return '';
   }
 
-  archivedemailNotification(techUserIdList) {
-    const IdList = techUserIdList.map(({ id }) => id);
-    this.techUsersService
-      .getUsersEmailNotifications(IdList)
-      .pipe(
-        map(eNotifications => {
-          if (eNotifications) {
-            this.archivedtechUseremailNotificationList = eNotifications;
-          }
-        })
-      )
-      .subscribe();
-  }
 
-  allEmailNotification(techUserIdList: any) {
-    this.techUsersService
-      .getUsersEmailNotifications(techUserIdList)
-      .pipe(
-        map(eNotifications => {
-          if (eNotifications) {
-            this.IdList.forEach(element => {
-              this.archivedtechUseremailNotificationList.push(eNotifications[element]);
-            });
-            this.techUseremailNotificationList = eNotifications;
-          }
-        })
-      )
-      .subscribe();
-  }
 
   /**
    * opened model, when click on dropdown emil notification
@@ -360,16 +333,15 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.edit = true;
     this.selectedTechUser = techUser;
     if (techUser) {
-      const notification = this.techUseremailNotificationList[techUser.id];
       this.techUserForm.patchValue({
         firstName: techUser.firstName,
         lastName: techUser.lastName,
         primaryEmail: techUser.primaryEmail,
         techRole: techUser.techRole,
-        newDevice: notification === undefined || notification.newDevice === undefined ? [''] : notification.newDevice,
-        ticketCreated: notification === undefined ? [''] : notification.ticketCreated,
-        myTicketUpdated: notification === undefined ? [''] : notification.myTicketUpdated,
-        ticketCloseNotifications: notification === undefined ? [''] : notification.ticketCloseNotifications,
+        newDevice: techUser.userEmailNotifications === undefined || techUser.userEmailNotifications.newDevice === undefined ? [''] : techUser.userEmailNotifications.newDevice,
+        ticketCreated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
+        myTicketUpdated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
+        ticketCloseNotifications: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
         id: techUser.id
       });
     }
@@ -390,12 +362,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   removeTechUser() {
     const id = this.userId.id;
     if (this.userId) {
-      this.loading = true; $(".loading").css("display", "block");
       this.techUsersService
         .archiveUser([this.userId.id])
         .pipe(
           map(archiveUser => {
-            this.loading = false; $(".loading").css("display", "none");
             // deleted techuser.
             // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
             //   this.techUsers.splice(
@@ -403,7 +373,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
             //     1
             //   );
             // }
-            this.getUsers();
+            // this.getUsers();
           })
         )
         .subscribe();
@@ -434,11 +404,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
-      this.loading = true; $(".loading").css("display", "block");
-
       this.settingService.fileAvatar(fromData).subscribe(
         (result: any) => {
-          this.loading = false; $(".loading").css("display", "none");
           if (result) {
             //    this.isCroppedImg = true;
             this.fileAvatar = result;
@@ -448,7 +415,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           this.isCroppedImg = false;
           event.target.value = null;
         }
@@ -499,7 +465,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       return;
     }
 
-    this.loading = true; $(".loading").css("display", "block");
     this.settingService
       .updateAvatar(this.selectedTechUser.id, cropImage)
       .subscribe(
@@ -508,15 +473,12 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
             this.selectedTechUser
               ? (this.selectedTechUser.avatar = avatar)
               : null;
-            this.loading = false; $(".loading").css("display", "none");
             // this.edit = false;
             // this.getUsers();
-
             this.toastr.success('Image Cropped Successfully');
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -579,15 +541,13 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         subscription: {}
       };
       if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
-      this.loading = true; $(".loading").css("display", "block");
       this.addBtn.setDisabled(true);
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
           this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
-          this.loading = false; $(".loading").css("display", "none");
           this.create = false;
-          this.getUsers();
+          //   this.getUsers();
           if (savedTechUsre && savedTechUsre.id) {
             this.saveUsersEmailNotifications(savedTechUsre.id);
           }
@@ -596,10 +556,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         error => {
           this.addBtn.setDisabled(false);
           this.create = false;
-          this.loading = false; $(".loading").css("display", "none");
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
-
         }
       );
     } else {
@@ -760,7 +718,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       ? this.selectedTechUser.company.id
       : null;
 
-    this.loading = true; $(".loading").css("display", "block");
     this.editBtn.setDisabled(true);
     this.techUsersService
       .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
@@ -770,25 +727,17 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
           this.techUserForm.reset();
-          if (this.techUserIdList) {
-            this.emailNotification(this.techUserIdList);
-          }
           this.submitted = false;
           this.selectedTechUser = null;
-          this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
-
         },
         error => {
           this.editBtn.setDisabled(false);
-          this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
-
         }
       );
-
     // this.saveUsersEmailNotifications(this.selectedTechUser.id);
   }
 

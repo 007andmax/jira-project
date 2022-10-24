@@ -15,10 +15,17 @@
             </div>
         </div>
         <div class="data-table-wrap mteh-data">
+            <div
+                class="loading-container"
+                *ngIf="loading"
+            >
+                <div class="loading"></div>
+            </div>
             <ngb-tabset
                 #tabset="ngbTabset"
                 [destroyOnHide]="true"
                 (tabChange)="setTab($event)"
+                [hidden]="loading"
             >
                 <!-- Profile -->
                 <ngb-tab
@@ -107,12 +114,20 @@
                                             <span>{{ techUser.techRole }}</span>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__last-login">
-                                            <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">10:30 AM, 14 Jun</div>
+                                            <div
+                                                class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis"
+                                                *ngIf="techUser.lastLoginAt"
+                                            >
+                                                {{getLastLoginAt(techUser.lastLoginAt)}}
+                                            </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__authentication">
                                             <div class="qt-df qt-ai-c">
-                                                <span class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"></span>
-                                                Secure
+                                                <span
+                                                    class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"
+                                                    *ngIf="techUser.twoFactorAuthType == 'SECURE' || techUser.twoFactorAuthType == 'GOOGLE_SECURE'"
+                                                ></span>
+                                                {{getSecureText(techUser.twoFactorAuthType)}}
                                             </div>
                                             <!-- Basic -->
                                             <!-- No Authentication -->
@@ -131,7 +146,7 @@
                                             >
                                                 <div
                                                     class="email-note-wrape"
-                                                    *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
+                                                    *ngIf="techUser.userEmailNotifications"
                                                 >
                                                     <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                                                     <ul class="list-unstyled">
@@ -140,7 +155,7 @@
                                                                 type="checkbox"
                                                                 readonly
                                                                 [(ngModel)]="
-                              techUseremailNotificationList[techUser.id].newDevice
+                              techUser.userEmailNotifications.newDevice
                             "
                                                                 id="newDevice1"
                                                             >
@@ -154,7 +169,7 @@
                                                                 id="ticketCreated"
                                                                 readonly
                                                                 [(ngModel)]="
-                              techUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .ticketCreated
                             "
                                                             >
@@ -166,7 +181,7 @@
                                                                 type="checkbox"
                                                                 readonly
                                                                 [(ngModel)]="
-                              techUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .myTicketUpdated
                             "
                                                             >
@@ -180,7 +195,7 @@
                                                                 type="checkbox"
                                                                 readonly
                                                                 [(ngModel)]="
-                              techUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .ticketCloseNotifications
                             "
                                                             >
@@ -208,6 +223,18 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <ngb-tab
                     title="Archived Users"
@@ -281,13 +308,21 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__role">{{ techUser.techRole }}</div>
-                                        <div class="tab-pane__table-cell active-users-table__last-login">
-                                            <span>10:30 AM, 14 Jun</span>
+                                        <div
+                                            class="tab-pane__table-cell active-users-table__last-login"
+                                            *ngIf="techUser.lastLoginAt"
+                                        >
+                                            <span>
+                                                {{getLastLoginAt(techUser.lastLoginAt)}}
+                                            </span>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__authentication">
                                             <div class="qt-df qt-ai-c">
-                                                <span class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"></span>
-                                                Secure
+                                                <span
+                                                    class="icon__secure qt-sz-16 qt-bg-contain qt-mr-4 qt-dib"
+                                                    *ngIf="techUser.twoFactorAuthType == 'SECURE' || techUser.twoFactorAuthType == 'GOOGLE_SECURE'"
+                                                ></span>
+                                                {{getSecureText(techUser.twoFactorAuthType)}}
                                             </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__notify-for">
@@ -304,7 +339,7 @@
                                             >
                                                 <div
                                                     class="email-note-wrape"
-                                                    *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
+                                                    *ngIf="techUser.userEmailNotifications"
                                                 >
                                                     <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                                                     <ul class="list-unstyled">
@@ -313,7 +348,7 @@
                                                                 type="checkbox"
                                                                 readonly
                                                                 [(ngModel)]="
-                              archivedtechUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .newDevice
                             "
                                                                 id="newDevice1"
@@ -328,7 +363,7 @@
                                                                 id="ticketCreated"
                                                                 readonly
                                                                 [(ngModel)]="
-                              archivedtechUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .ticketCreated
                             "
                                                             >
@@ -340,7 +375,7 @@
                                                                 type="checkbox"
                                                                 readonly
                                                                 [(ngModel)]="
-                              archivedtechUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .myTicketUpdated
                             "
                                                             >
@@ -354,7 +389,7 @@
                                                                 type="checkbox"
                                                                 readonly
                                                                 [(ngModel)]="
-                              archivedtechUseremailNotificationList[techUser.id]
+                              techUser.userEmailNotifications
                                 .ticketCloseNotifications
                             "
                                                             >
@@ -379,6 +414,18 @@
                     </ng-template>
                 </ngb-tab>
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <ngb-tab
                     title="User Permissions"
                     id="userPermissions"
@@ -392,10 +439,34 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
 <div
     class="qt-aside-modern qt-aside-modern--page-settings"
     *ngIf="create"
 >
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Add Tech User</div>
@@ -614,6 +685,18 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div
     class="qt-aside-modern qt-aside-modern--page-settings qt-aside-modern--page-settings__edit-tech-user  sidebar-popup role-dlt"
