@@ -22,13 +22,13 @@
                   value="Starting ticket number"
                 >
                 <mat-error
-                  class="qt-tooltip-error"
+                  class="invalid-feedback --pos-static"
                   *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
                 >
                   Starting ticket number is required
                 </mat-error>
                 <mat-error
-                  class="qt-tooltip-error"
+                  class="invalid-feedback --pos-static"
                   *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
                 >
                   Only Number is allowed
@@ -87,7 +87,7 @@
           <div class="tab-pane__row">
             <div class="tab-pane__subtitle">Timepicker Type</div>
             <div class="tab-pane-input__row">
-              <div class="qt-input-block">
+              <label class="qt-input-block">
                 <app-drop-down
                   [class]="['qt-select-input-40']"
                   [placeholder]="'Select Company Type'"
@@ -98,13 +98,13 @@
                   (onSelectedItem)="onChangeType($event)"
                 >
                 </app-drop-down>
-              </div>
+              </label>
             </div>
           </div>
           <div class="tab-pane__row">
             <div class="tab-pane__subtitle">Interval</div>
             <div class="tab-pane-input__row">
-              <div class="qt-input-block">
+              <label class="qt-input-block">
                 <app-drop-down
                   #intervalsDp
                   [class]="['qt-select-input-40']"
@@ -117,7 +117,7 @@
                   (onSelectedItem)="onChangeInterval($event)"
                 >
                 </app-drop-down>
-              </div>
+              </label>
             </div>
           </div>
         </form>

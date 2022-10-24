@@ -779,7 +779,9 @@
 .report-caret-icon {
   position: absolute;
   right: 14px;
-  top: calc(50% - 8px);
+  //top: calc(50% - 8px);
+  top: 50%;
+  transform: translateY(-50%);
   width: 20px;
   height: 20px;
   background: url("/assets/img/icons/down-arrow.svg") no-repeat center / contain;

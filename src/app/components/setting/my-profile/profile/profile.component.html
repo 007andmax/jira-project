@@ -59,12 +59,12 @@
                             <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
                             <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">Email must be a valid email address</div>
                         </div>
-                        <label
+                        <div
                             *ngIf="!uniqueEmail"
                             class="invalid-feedback"
                         >
                             This email already occupied.
-                        </label>
+                        </div>
                     </div>
                 </div>
             </div>

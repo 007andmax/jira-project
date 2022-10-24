@@ -3381,13 +3381,16 @@ ngb-typeahead-window {
 }
 
 .invalid-feedback {
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: $error;
+  position: absolute;
+  color: #D92D20;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  bottom: -23px;
 }
-
-input.ng-invalid.is-invalid {
-  border: 1px solid $error;
+.invalid-feedback.--pos-static {
+  position: static;
+  margin-top: 8px;
 }
 
 // @import './assets/styles/mobile.scss';
@@ -4528,17 +4531,21 @@ app-ticket-edit-aside-devices {
     width: fit-content;
   }
 }
-
-input.--input-error {
-  border: solid 1px $error !important;
+input.ng-invalid.is-invalid,
+input.ng-invalid.is-invalid:hover,
+input.--input-error,
+input.--input-error:hover {
+  border: solid 1px $red-600;
 }
 
 .--input-error {
-  input {
-    border: solid 1px $error !important;
+  input,
+  input:hover {
+    border: solid 1px $red-600;
   }
-  .qt-input-prefix {
-    border: solid 1px $error !important;
+  .qt-input-prefix,
+  .qt-input-prefix:hover {
+    border: solid 1px $red-600;
   }
 }
 

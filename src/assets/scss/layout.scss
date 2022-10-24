@@ -262,9 +262,30 @@ body {
           line-height: 17px;
           max-width: 200px;
           width: 100%;
+
           &::placeholder {
             color: $gray-400;
             font-weight: 400;
+          }
+
+          &:focus {
+            outline: none;
+            border-color: $blue-light-600;
+          }
+
+          &.--error,
+          &.is-invalid {
+            border-color: $red-600;
+          }
+
+          &.--disabled,
+          &[disabled] {
+            background-color: $gray-50;
+            border-color: $gray-200;
+
+            &:hover {
+              border-color: $gray-200;
+            }
           }
         }
       }
@@ -629,12 +650,12 @@ body {
       flex: 1 1 calc(82px - 24px);
     }
 
-    .invalid-feedback {
-      margin-top: 8px;
-      color: $red-600;
-      font-size: 12px;
-      line-height: 15px;
-    }
+    //.invalid-feedback {
+    //  margin-top: 8px;
+    //  color: $red-600;
+    //  font-size: 12px;
+    //  line-height: 15px;
+    //}
 
     .qt-input-prefix {
       width: 110px;
@@ -1003,6 +1024,7 @@ body {
           background-color: $gray-25;
         }
 
+        .--editable-dropdown input,
         input.--editable {
           font-size: 14px;
           line-height: 17px;
