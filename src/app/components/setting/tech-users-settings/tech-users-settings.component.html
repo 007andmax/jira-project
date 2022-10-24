@@ -207,8 +207,14 @@
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__action">
                                             <div class="qt-df">
+                                                <app-dynamic-tooltip
+                                                    [content]="'Remove'"
+                                                    [position]="'top'"
+                                                    #removeTooltip
+                                                ></app-dynamic-tooltip>
                                                 <div
-                                                    data-tooltip="Edit"
+                                                    (mouseenter)="removeTooltip.show($event.target)"
+                                                    (mouseleave)="removeTooltip.hide()"
                                                     class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
                                                     *ngIf="getPermissions('EDIT_USERS')"
                                                     (click)="editTechUser(techUser)"
@@ -223,6 +229,11 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
+
+
+
+
+
 
 
 
@@ -400,8 +411,14 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__action --sm">
+                                            <app-dynamic-tooltip
+                                                [content]="'Restore User'"
+                                                [position]="'top'"
+                                                #restoreUser
+                                            ></app-dynamic-tooltip>
                                             <div
-                                                data-tooltip="Restore User"
+                                                (mouseenter)="restoreUser.show($event.target)"
+                                                (mouseleave)="restoreUser.hide()"
                                                 class="icon__reset qt-sz-20 qt-bg-contain qt-mr-16 pointer ng-star-inserted"
                                                 (click)="restoreConfirm(techUser.id)"
                                             >
@@ -413,6 +430,11 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
+
+
+
+
+
 
 
 
@@ -451,10 +473,20 @@
 
 
 
+
+
+
+
+
 <div
     class="qt-aside-modern qt-aside-modern--page-settings"
     *ngIf="create"
 >
+
+
+
+
+
 
 
 
@@ -685,6 +717,11 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 

@@ -144,17 +144,6 @@
                 <div class="tab-pane__table-cell marketing-email-table__action">
                     <div class="qt-df">
                         <app-dynamic-tooltip
-                            [content]="'Edit'"
-                            [position]="'top'"
-                            #editTooltip
-                        ></app-dynamic-tooltip>
-                        <div
-                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-                            (click)="openAside(item,false)"
-                            (mouseenter)="editTooltip.show($event.target)"
-                            (mouseleave)="editTooltip.hide()"
-                        ></div>
-                        <app-dynamic-tooltip
                             [content]="'Remove'"
                             [position]="'top'"
                             #removeTooltip

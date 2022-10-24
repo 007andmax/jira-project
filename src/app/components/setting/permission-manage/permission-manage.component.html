@@ -16,123 +16,134 @@
             </div>
         </div>
         <div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
-          <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
-          <span class="qt-f-1">User can create maximum 5 roles, also can edit, remove roles by help of action icons</span>
+            <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+            <span class="qt-f-1">
+                User can create maximum 5 roles, also can edit, remove roles by help of action icons
+            </span>
         </div>
         <div class="cmn-area pr-area">
-          <div
-            class="tab-pane__table dataTable"
-          >
-            <div
-              class="tab-pane__table-header"
-              *ngIf="roles"
-            >
-              <div class="tab-pane__table-row">
-                <div class="tab-pane__table-cell user-permissions-table__permissions">Permissions</div>
+            <div class="tab-pane__table dataTable">
                 <div
-                  class="tab-pane__table-cell user-permissions-table__role qt-pos-rel"
-                  *ngFor="let role of roles; let i = index"
+                    class="tab-pane__table-header"
+                    *ngIf="roles"
                 >
-                  <div class="qt-df qt-jc-c">
-                    <div class="qt-mr-16">{{ role.name }}</div>
-                    <a
-                      href="javascript:;"
-                      data-tooltip="Edit"
-                      class="icon__edit-gray-dark qt-sz-16 qt-bg-contain qt-mr-16 pointer qt-fs-0"
-                      (click)="editRoleName(role, i)"
-                    >
-                    </a>
-                    <a
-                      href="javascript:;"
-                      data-tooltip="Remove"
-                      class="icon__new-remove qt-sz-16 qt-bg-contain pointer qt-fs-0"
-                      (click)="deleteRole(role.id, true);"
-                    >
-                    </a>
-                  </div>
-                  <!-- Modal create Tags -->
-                  <div
-                    class="modal-content --tooltip toggle-area"
-                    [ngClass]="{ opened: selectedRoleIndex === i }"
-                  >
-                    <div class="modal-wrapper">
-                      <div class="toggle-header">
-                        <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Role</h6>
-                      </div>
-                      <div class="">
-                        <form method="POST">
-                          <div class="qt-input-block qt-mb-32">
-                            <label class="qt-input-block__label">Role Name</label>
-                            <input
-                              type="text"
-                              class="form-input"
-                              [(ngModel)]="editData.name"
-                              [ngModelOptions]="{ standalone: true }"
-                              placeholder="Enter Role Name"
+                    <div class="tab-pane__table-row">
+                        <div class="tab-pane__table-cell user-permissions-table__permissions">Permissions</div>
+                        <div
+                            class="tab-pane__table-cell user-permissions-table__role qt-pos-rel"
+                            *ngFor="let role of roles; let i = index"
+                        >
+                            <div class="qt-df qt-jc-c">
+                                <div class="qt-mr-16">{{ role.name }}</div>
+                                <app-dynamic-tooltip
+                                    [content]="'Edit'"
+                                    [position]="'top'"
+                                    #editTooltip
+                                ></app-dynamic-tooltip>
+                                <a
+                                    href="javascript:;"
+                                    (mouseenter)="editTooltip.show($event.target)"
+                                    (mouseleave)="editTooltip.hide()"
+                                    class="icon__edit-gray-dark qt-sz-16 qt-bg-contain qt-mr-16 pointer qt-fs-0"
+                                    (click)="editRoleName(role, i)"
+                                >
+                                </a>
+                                <app-dynamic-tooltip
+                                    [content]="'Remove'"
+                                    [position]="'top'"
+                                    #removeTooltip
+                                ></app-dynamic-tooltip>
+                                <a
+                                    href="javascript:;"
+                                    (mouseenter)="removeTooltip.show($event.target)"
+                                    (mouseleave)="removeTooltip.hide()"
+                                    class="icon__new-remove qt-sz-16 qt-bg-contain pointer qt-fs-0"
+                                    (click)="deleteRole(role.id, true);"
+                                >
+                                </a>
+                            </div>
+                            <!-- Modal create Tags -->
+                            <div
+                                class="modal-content --tooltip toggle-area"
+                                [ngClass]="{ opened: selectedRoleIndex === i }"
                             >
-                          </div>
-                          <div class="qt-df qt-w100">
-                            <a
-                              href="javascript:;"
-                              class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                              aria-label="Close"
-                              (click)="editRoleName(role, i)"
-                            >
-                              Cancel
-                            </a>
-                            <input
-                              type="button"
-                              value="Save"
-                              (click)="changeRoleName()"
-                              class="qt-button qt-jc-c qt-w100"
-                            >
-                          </div>
-                        </form>
-                      </div>
+                                <div class="modal-wrapper">
+                                    <div class="toggle-header">
+                                        <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Role</h6>
+                                    </div>
+                                    <div class>
+                                        <form method="POST">
+                                            <div class="qt-input-block qt-mb-32">
+                                                <label class="qt-input-block__label">Role Name</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-input"
+                                                    [(ngModel)]="editData.name"
+                                                    [ngModelOptions]="{ standalone: true }"
+                                                    placeholder="Enter Role Name"
+                                                >
+                                            </div>
+                                            <div class="qt-df qt-w100">
+                                                <a
+                                                    href="javascript:;"
+                                                    class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                                                    aria-label="Close"
+                                                    (click)="editRoleName(role, i)"
+                                                >
+                                                    Cancel
+                                                </a>
+                                                <input
+                                                    type="button"
+                                                    value="Save"
+                                                    (click)="changeRoleName()"
+                                                    class="qt-button qt-jc-c qt-w100"
+                                                >
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="tab-pane__table-body">
-              <ng-container *ngFor="let section of sections | keyvalue">
-              <div class="tab-pane__table-row tab-pane__table-row--sm tab-pane__table-row__permissions-subheader">
-                <div
-                  class="tab-pane__table-cell user-permissions-table__permissions"
-                >
-                  <div class="user-permissions-table__permissions-text">{{ section.key }}</div>
-                </div>
-              </div>
-              <div
-                class="tab-pane__table-row"
-                *ngFor="let permission of section.value"
-              >
-                <div class="tab-pane__table-cell user-permissions-table__permissions">
-                  <div class="user-permissions-table__permissions-text">
-                    {{ userReadable(permission) }}
-                  </div>
-                </div>
-                <div
-                  class="tab-pane__table-cell user-permissions-table__role"
-                  *ngFor="let role of roles; let i = index"
-                >
-                  <label class="qt-checkbox" for="{{ permission }}_{{ role.id }}">
-                      <input
-                        type="checkbox"
-                        id="{{ permission }}_{{ role.id }}"
-                        [checked]="
+                <div class="tab-pane__table-body">
+                    <ng-container *ngFor="let section of sections | keyvalue">
+                        <div class="tab-pane__table-row tab-pane__table-row--sm tab-pane__table-row__permissions-subheader">
+                            <div class="tab-pane__table-cell user-permissions-table__permissions">
+                                <div class="user-permissions-table__permissions-text">{{ section.key }}</div>
+                            </div>
+                        </div>
+                        <div
+                            class="tab-pane__table-row"
+                            *ngFor="let permission of section.value"
+                        >
+                            <div class="tab-pane__table-cell user-permissions-table__permissions">
+                                <div class="user-permissions-table__permissions-text">{{ userReadable(permission) }}</div>
+                            </div>
+                            <div
+                                class="tab-pane__table-cell user-permissions-table__role"
+                                *ngFor="let role of roles; let i = index"
+                            >
+                                <label
+                                    class="qt-checkbox"
+                                    for="{{ permission }}_{{ role.id }}"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id="{{ permission }}_{{ role.id }}"
+                                        [checked]="
                           role.permissions.indexOf(permission) > -1 ? true : false
                         "
-                        (click)="togglePermission(role, permission)"
-                        [disabled]="isPermissionDisabled(permission, role)"
-                      >
-                      <span></span>
-                  </label>
+                                        (click)="togglePermission(role, permission)"
+                                        [disabled]="isPermissionDisabled(permission, role)"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
-              </div>
-            </ng-container>
             </div>
-          </div>
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
