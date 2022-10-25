@@ -52,18 +52,42 @@ body .left-panel-full {
   background-color: $success;
   border-color: $success;
 }
+//.icn-remove-old { // TODO check this style
+//  background-image: url("/assets/img/icons/close.svg");
+//  background-position: center;
+//  right: 12px;
+//  position: absolute;
+//  top: -5px;
+//
+//  @media (max-width: 767px) {
+//    padding: 12px;
+//    transform: translate(5px, 4px);
+//  }
+//}
+
 .icn-remove-old {
-  background-image: url("/assets/img/icons/close.svg");
-  background-position: center;
-  right: 12px;
+  width: 20px;
+  height: 20px;
+  background-color: $gray-400;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-image: url("/assets/img/icons/close.svg");
+  mask-image: url("/assets/img/icons/close.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  right: 14px;
   position: absolute;
-  top: -5px;
+  top: 50%;
+  transform: translateY(-50%);
 
   @media (max-width: 767px) {
     padding: 12px;
     transform: translate(5px, 4px);
   }
 }
+
 /* Datepicker */
 .ngb-dp-week .hidden {
   display: block !important;

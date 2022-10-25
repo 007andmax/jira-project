@@ -73,11 +73,14 @@
   &__users {
     background-image: url("/assets/img/icons/addusers.svg");
   }
-  &__close {
+  &__close { // TODO need combine icons to mask
     background-image: url("/assets/img/icons/close.svg");
     &--light-gray {
       background-image: url("/assets/img/icons/close-light-gray.svg");
     }
+  }
+  &__close-white {
+    background-image: url("/assets/img/icons/close-light.svg");
   }
   &__settings {
     &-gray {
@@ -417,9 +420,6 @@
   }
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
-  }
-  &__close-white {
-    background-image: url("/assets/img/icons/close-light.svg");
   }
   &__snapshot {
     background-image: url("/assets/img/icons/snapshot.svg");

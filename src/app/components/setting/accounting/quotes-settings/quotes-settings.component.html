@@ -23,7 +23,7 @@
                         >
                         <div
                             *ngIf="submitted && f.count.errors"
-                            class="invalid-feedback"
+                            class="invalid-feedback --pos-static"
                         >
                             <div *ngIf="f.count.errors.required">Ticket Number is required</div>
                             <div *ngIf="f.count.errors.pattern">Only Number is allowed</div>

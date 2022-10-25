@@ -20,7 +20,7 @@
                         >
                         <div
                             *ngIf="submitted && f.invoiceCount.errors"
-                            class="invalid-feedback"
+                            class="invalid-feedback --pos-static"
                         >
                             <div *ngIf="f.invoiceCount.errors.required">Invoice Number is required</div>
                             <div *ngIf="f.invoiceCount.errors.pattern">Only Number is allowed</div>
