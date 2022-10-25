@@ -43,7 +43,10 @@
                                                 <span></span>
                                             </label>
                                         </div>
-                                        <div class="tab-pane__table-cell active-users-table__user-name">
+                                        <div
+                                            class="tab-pane__table-cell active-users-table__user-name"
+                                            (click)="onFilter('name')"
+                                        >
                                             User Name
                                             <div class="qt-table-modern__sorting--new"></div>
                                         </div>
@@ -205,10 +208,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane__table-cell active-users-table__action">
+                                        <div
+                                            class="tab-pane__table-cell active-users-table__action"
+                                            ngbDropdown
+                                            container="body"
+                                        >
                                             <div class="qt-df">
                                                 <app-dynamic-tooltip
-                                                    [content]="'Remove'"
+                                                    [content]="'Edit'"
                                                     [position]="'top'"
                                                     #removeTooltip
                                                 ></app-dynamic-tooltip>
@@ -220,7 +227,42 @@
                                                     (click)="editTechUser(techUser)"
                                                 >
                                                 </div>
-                                                <div class="icon__category-more qt-sz-20 qt-bg-contain pointer"></div>
+                                                <div
+                                                    class="icon__category-more qt-sz-20 qt-bg-contain pointer"
+                                                    ngbDropdownToggle
+                                                    id="dropdown1"
+                                                ></div>
+                                                <div
+                                                    ngbDropdownMenu
+                                                    class="app-drop-down__dropdown qt-p-8"
+                                                    aria-labelledby="dropdown1"
+                                                >
+                                                    <div
+                                                        class="qt-df qt-ai-c qt-pt-6 qt-pr-12 qt-pb-6 qt-pl-8 pointer"
+                                                        (click)="resendWelcomeEmail(techUser.primaryEmail)"
+                                                        ngbDropdownToggle
+                                                    >
+                                                        <div class="icon__email-resend qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                                                        <span>Resend Email</span>
+                                                    </div>
+                                                    <div
+                                                        class="qt-df qt-ai-c qt-pt-6 qt-pr-12 qt-pb-6 qt-pl-8 pointer"
+                                                        ngbDropdownToggle
+                                                        (click)="changePasswordRequest(techUser.id)"
+                                                    >
+                                                        <div class="icon__reset qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
+                                                        <span>Reset Password</span>
+                                                    </div>
+                                                    <hr>
+                                                    <div
+                                                        class="qt-df qt-ai-c qt-pt-6 qt-pr-12 qt-pb-6 qt-pl-8 pointer"
+                                                        ngbDropdownToggle
+                                                        (click)="removeUserConfirm(techUser)"
+                                                    >
+                                                        <div class="icon__new-remove--red-600 qt-sz-20 pointer qt-bg-contain qt-mr-10 "></div>
+                                                        <span class="qt-color-red-600">Remove User</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -229,6 +271,30 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -448,6 +514,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <ngb-tab
                     title="User Permissions"
                     id="userPermissions"
@@ -478,10 +568,58 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div
     class="qt-aside-modern qt-aside-modern--page-settings"
     *ngIf="create"
 >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -717,6 +855,30 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

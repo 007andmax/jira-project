@@ -19,6 +19,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import * as moment from "moment";
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { TechUsersFilter } from './class/tech-users-filter';
 declare var $;
 
 @Component({
@@ -52,6 +53,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   userId: any;
   IdList: any;
   idUploadFile: string;
+  filter: TechUsersFilter = new TechUsersFilter();
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
@@ -228,6 +230,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       .pipe(
         map((users: any) => {
           this.userlist = users;
+          this.userlist.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
+            1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
           return this.userlist;
         })
       )
@@ -355,6 +359,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.cd.detectChanges();
   }
 
+  public onFilter(field) {
+    this.filter.onFilter(field, this.techUsers)
+
+  }
   /**
    * removed tech user
    * @param techUser

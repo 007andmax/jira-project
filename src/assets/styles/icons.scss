@@ -644,6 +644,9 @@
   &__reset {
     background-image: url("/assets/img/icons/reset.svg");
   }
+  &__email-resend {
+      background-image: url("/assets/img/icons/email-resend.svg");
+  }
   &__reset-gray-500 {
     background-color: $gray-500;
     -webkit-mask-position: center;

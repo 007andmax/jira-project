@@ -81,7 +81,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('page-settings');
+
   }
 
   /**

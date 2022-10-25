@@ -9,7 +9,7 @@ import { CompanyProfileComponent } from './components/setting/company-profile/co
 import { TechUsersSettingsComponent } from './components/setting/tech-users-settings/tech-users-settings.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/accounting/taxes/taxes.component';
-import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
+import { PermissionManageComponent } from './components/setting/tech-users-settings/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-template/email-template.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
