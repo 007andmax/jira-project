@@ -267,27 +267,27 @@
     -webkit-mask-image: url("/assets/img/icons/category-more.svg");
     mask-image: url("/assets/img/icons/category-more.svg");
   }
-  &__new-remove,
-  &__new-remove--red-500,
-  &__new-remove--red-600,
-  &__new-remove-blue {
+  &__remove,
+  &__remove--red-500,
+  &__remove--red-600,
+  &__remove--blue-light-600 {
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/new-remove.svg");
-    mask-image: url("/assets/img/icons/new-remove.svg");
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-  &__new-remove--red-600 {
+  &__remove--red-600 {
     background-color: $red-600;
   }
-  &__new-remove--red-500 {
+  &__remove--red-500 {
     background-color: $red-500;
   }
-  &__new-remove-blue {
+  &__remove--blue-light-600 {
     background-color: $blue-light-600;
   }
   &__attachment {
@@ -775,8 +775,8 @@
   &__tickets-on-time {
     background-image: url("/assets/img/icons/tickets-on-time.svg");
   }
-  &__new-tickets {
-    background-image: url("/assets/img/icons/new-tickets.svg");
+  &__tickets {
+    background-image: url("/assets/img/icons/tickets.svg");
   }
   &__on-hold-tickets {
     background-image: url("/assets/img/icons/on-hold-tickets.svg");
@@ -958,8 +958,8 @@
   &__clone-document {
     background-image: url("/assets/img/icons/clone-document.svg");
   }
-  &__new-ticket-support {
-    background-image: url("/assets/img/icons/new-ticket-support.svg");
+  &__ticket-support {
+    background-image: url("/assets/img/icons/ticket-support.svg");
   }
   &__remote-access-green {
     background-image: url("/assets/img/icons/remote-access-green.svg");
