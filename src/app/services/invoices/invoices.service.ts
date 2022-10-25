@@ -32,8 +32,8 @@ export class InvoicesService {
         return data;
       }));
   }
-  public resendInvoices(invoiceIds) {
-    return this.http.post(`${this.apiUrl}receivable/resend`, { ids: invoiceIds }).pipe(
+  public resendInvoices(invoiceIds, withPdfAttachment) {
+    return this.http.post(`${this.apiUrl}receivable/resend`, { ids: invoiceIds, withPdfAttachment: withPdfAttachment }).pipe(
       tap(data => {
         this.toastrService.success("The invoice has been successfully sent");
         this.appStateService.changeDetectorRef();

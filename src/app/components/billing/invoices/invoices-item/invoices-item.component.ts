@@ -77,8 +77,8 @@ export class InvoicesItemComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
     this.invoiceStateService.setInvoiceForemove(this.invoice);
   }
-  resendInvoices() {
-    this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {
+  resendInvoices(withPdfAttachment) {
+    this.invoicesService.resendInvoices([this.invoice.id], withPdfAttachment).subscribe(data => {
 
     })
   }
