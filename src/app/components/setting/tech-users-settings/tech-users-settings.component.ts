@@ -193,6 +193,11 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       )
       .subscribe();
   }
+  onChangeRole(data) {
+    this.techUserForm.patchValue({
+      techRole: data
+    });
+  }
   getLastLoginAt(date) {
     return moment(date).format("HH:mm A, DD MMM");
   }

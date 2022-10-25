@@ -271,48 +271,6 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <ngb-tab
                     title="Archived Users"
                     id="archivedUsers"
@@ -328,7 +286,10 @@
                                                 <span></span>
                                             </label>
                                         </div>
-                                        <div class="tab-pane__table-cell active-users-table__user-name">
+                                        <div
+                                            class="tab-pane__table-cell active-users-table__user-name"
+                                            (click)="onFilter('name')"
+                                        >
                                             User Name
                                             <div class="qt-table-modern__sorting--new"></div>
                                         </div>
@@ -496,48 +457,6 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <ngb-tab
                     title="User Permissions"
                     id="userPermissions"
@@ -550,94 +469,10 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div
     class="qt-aside-modern qt-aside-modern--page-settings"
     *ngIf="create"
 >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Add Tech User</div>
     </div>
@@ -691,10 +526,7 @@
                 <div class="qt-mt-6 dp-info-area">PNG, JPG or GIF (max. 2mb)</div>
             </div>
         </div>
-        <form
-            [formGroup]="techUserForm"
-            (ngSubmit)="onCreateSubmit()"
-        >
+        <form [formGroup]="techUserForm">
             <div class="qt-input-block qt-input-line">
                 <label class="qt-input-block__label">Full Name</label>
                 <input
@@ -754,22 +586,18 @@
             </div>
             <div class="qt-input-block qt-input-line">
                 <label class="qt-input-block__label">Set Tech User Role</label>
-                <select
-                    class="cmn-select form-input"
-                    formControlName="techRole"
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [list]="techRoles"
+                    [placeholder]="'Select'"
+                    [sort]="false"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onChangeRole($event)"
                 >
-                    <option
-                        *ngFor="let role of techRoles"
-                        value="{{ role }}"
-                    >
-                        {{
-                role
-                }}
-                    </option>
-                </select>
+                </app-drop-down>
             </div>
             <div class="qt-input-line__email-notify-tech-users">
-                <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">SNotify Tech User for</div>
+                <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">Notify Tech User for</div>
                 <ul class="list-unstyled">
                     <li class="qt-mb-16">
                         <label
@@ -839,7 +667,7 @@
         <div class="qt-df qt-w100">
             <button
                 class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                (click)="create = !create"
+                (click)="create = !create;onCreateSubmit()"
             >
                 Cancel
             </button>
@@ -855,48 +683,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div
     class="qt-aside-modern qt-aside-modern--page-settings qt-aside-modern--page-settings__edit-tech-user  sidebar-popup role-dlt"
     *ngIf="edit"

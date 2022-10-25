@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_SUBSCRIPTION_TYPE, DELETE_SUBSCRIPTION_TYPIES } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -31,6 +33,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
     private usersStateService: UsersStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -121,7 +125,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
-          this.cd.detectChanges();
+          this.toastrService.success("The subscription has been successfully removed");
+          this.appStateService.changeDetectorRef();
         },
         error => {
         }
@@ -130,7 +135,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
-      this.cd.detectChanges();
+      this.toastrService.success("The subscription has been successfully removed");
+      this.appStateService.changeDetectorRef();
     })
   }
   openAside(item, subscribed) {

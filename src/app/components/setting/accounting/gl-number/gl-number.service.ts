@@ -22,7 +22,7 @@ export class GlNumberService {
   saveGL(glDetail: any) {
     return this.http.post(`${this.apiUrl}glNumber`, glDetail).pipe(
       tap(data => {
-        this.toastrService.success("Tag successfully created");
+        this.toastrService.success("GL number successfully created");
         this.appStateService.changeDetectorRef();
         return data;
       }));

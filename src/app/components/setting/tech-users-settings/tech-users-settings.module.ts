@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PermissionManageComponent } from './permission-manage/permission-manage.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
 
@@ -28,7 +29,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         PreloaderTicketModule,
         MatFormFieldModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        DropDownModule
 
     ],
 })
