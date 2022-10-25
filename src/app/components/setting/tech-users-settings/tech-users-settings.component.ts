@@ -192,7 +192,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       .subscribe();
   }
   getLastLoginAt(date) {
-    return moment(date).format("HH:mm A,DD MMM");
+    return moment(date).format("HH:mm A, DD MMM");
   }
   restoreConfirm(id) {
     this.userId = id;
