@@ -12,6 +12,7 @@
   &__last-login {
     flex: 1 1 75px;
     padding: 0 8px;
+    min-width: 134px;
   }
   &__authentication {
     flex: 1 1 75px;
@@ -22,6 +23,22 @@
     padding: 0 8px;
     min-width: 204px;
     position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    column-gap: 4px;
+
+    &-subscription {
+      display: inline-block;
+      padding: 4px 8px 5px;
+      border-radius: 6px;
+      background-color: $gray-100;
+      color: $gray-500;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 15px;
+    }
   }
   &__action {
     flex: 0 0 56px;

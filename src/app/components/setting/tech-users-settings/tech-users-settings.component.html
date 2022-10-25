@@ -136,77 +136,15 @@
                                             <!-- No Authentication -->
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__notify-for">
-                                            <a
-                                                href="javascript:;"
-                                                class="email-dropdown"
-                                                (click)="emailNotificationDropDown(i)"
-                                            >
-                                                New Device, New Ticket...
-                                            </a>
-                                            <div
-                                                class="eml-ntl-list"
-                                                [ngClass]="{ opened: selectedIdx === i }"
-                                            >
-                                                <div
-                                                    class="email-note-wrape"
-                                                    *ngIf="techUser.userEmailNotifications"
-                                                >
-                                                    <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
-                                                    <ul class="list-unstyled">
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                type="checkbox"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications.newDevice
-                            "
-                                                                id="newDevice1"
-                                                            >
-                                                            <label for="newDevice1">
-                                                                When my account is logged in from a new device
-                                                            </label>
-                                                        </li>
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                type="checkbox"
-                                                                id="ticketCreated"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .ticketCreated
-                            "
-                                                            >
-                                                            <label for="ticketCreated">When a New Ticket created</label>
-                                                        </li>
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                id="myTicketUpdated"
-                                                                type="checkbox"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .myTicketUpdated
-                            "
-                                                            >
-                                                            <label for="myTicketUpdated">
-                                                                When a ticket that is assigned to me is updated
-                                                            </label>
-                                                        </li>
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                id="ticketCloseNotifications"
-                                                                type="checkbox"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .ticketCloseNotifications
-                            "
-                                                            >
-                                                            <label for="ticketCloseNotifications">When any ticket is closed</label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                          <div class="active-users-table__notify-for-subscription">
+                                            New Device
+                                          </div>
+                                          <div class="active-users-table__notify-for-subscription">
+                                            New Ticket
+                                          </div>
+                                          <div class="active-users-table__notify-for-subscription">
+                                            +2
+                                          </div>
                                         </div>
                                         <div
                                             class="tab-pane__table-cell active-users-table__action"
@@ -346,13 +284,15 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__role">{{ techUser.techRole }}</div>
-                                        <div
-                                            class="tab-pane__table-cell active-users-table__last-login"
+                                        <div class="tab-pane__table-cell active-users-table__last-login">
+                                          <div
+                                            class="tuser-item__email qt-color-gray-500 qt-mt-2 ellipsis"
                                             *ngIf="techUser.lastLoginAt"
-                                        >
+                                          >
                                             <span>
                                                 {{getLastLoginAt(techUser.lastLoginAt)}}
                                             </span>
+                                          </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__authentication">
                                             <div class="qt-df qt-ai-c">
@@ -364,80 +304,17 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__notify-for">
-                                            <a
-                                                href="javascript:;"
-                                                class="email-dropdown"
-                                                (click)="emailNotificationDropDown(i)"
-                                            >
-                                                New Device, New Ticket...
-                                            </a>
-                                            <div
-                                                class="eml-ntl-list"
-                                                [ngClass]="{ opened: selectedIdx === i }"
-                                            >
-                                                <div
-                                                    class="email-note-wrape"
-                                                    *ngIf="techUser.userEmailNotifications"
-                                                >
-                                                    <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
-                                                    <ul class="list-unstyled">
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                type="checkbox"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .newDevice
-                            "
-                                                                id="newDevice1"
-                                                            >
-                                                            <label for="newDevice1">
-                                                                When my account is logged in from a new device
-                                                            </label>
-                                                        </li>
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                type="checkbox"
-                                                                id="ticketCreated"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .ticketCreated
-                            "
-                                                            >
-                                                            <label for="ticketCreated">When a New Ticket created</label>
-                                                        </li>
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                id="myTicketUpdated"
-                                                                type="checkbox"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .myTicketUpdated
-                            "
-                                                            >
-                                                            <label for="myTicketUpdated">
-                                                                When a ticket that is assigned to me is updated
-                                                            </label>
-                                                        </li>
-                                                        <li class="cmn-checkbox">
-                                                            <input
-                                                                id="ticketCloseNotifications"
-                                                                type="checkbox"
-                                                                readonly
-                                                                [(ngModel)]="
-                              techUser.userEmailNotifications
-                                .ticketCloseNotifications
-                            "
-                                                            >
-                                                            <label for="ticketCloseNotifications">When any ticket is closed</label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                          <div class="active-users-table__notify-for-subscription">
+                                            New Device
+                                          </div>
+                                          <div class="active-users-table__notify-for-subscription">
+                                            New Ticket
+                                          </div>
+                                          <div class="active-users-table__notify-for-subscription">
+                                            +2
+                                          </div>
                                         </div>
-                                        <div class="tab-pane__table-cell active-users-table__action --sm">
+                                        <div class="tab-pane__table-cell active-users-table__action">
                                             <app-dynamic-tooltip
                                                 [content]="'Restore User'"
                                                 [position]="'top'"

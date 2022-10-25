@@ -293,18 +293,6 @@
                                     <div class="tab-pane__subtitle">Company URL</div>
                                     <div class="tab-pane-input__row">
                                         <div class="qt-input-block --required">
-                                            <mat-error
-                                                class="qt-tooltip-error"
-                                                *ngIf="cProfileForm.get('url').getError('incorrect')"
-                                            >
-                                                Ticket Subject is required
-                                            </mat-error>
-                                            <mat-error
-                                                class="qt-tooltip-error"
-                                                *ngIf="cProfileForm.get('url').getError('invalidate')"
-                                            >
-                                                Please enter a valid company domain.
-                                            </mat-error>
                                             <div class="qt-df">
                                                 <input
                                                     [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect') || cProfileForm.get('url').getError('invalidate')}"
@@ -316,6 +304,18 @@
                                                 >
                                                 <span class="qt-input-afterfix">.quicktech.com</span>
                                             </div>
+                                            <mat-error
+                                              class="invalid-feedback --pos-static"
+                                              *ngIf="cProfileForm.get('url').getError('incorrect')"
+                                            >
+                                              Ticket Subject is required
+                                            </mat-error>
+                                            <mat-error
+                                              class="invalid-feedback --pos-static"
+                                              *ngIf="cProfileForm.get('url').getError('invalidate')"
+                                            >
+                                              Please enter a valid company domain.
+                                            </mat-error>
                                         </div>
                                         <div class="qt-input-help-text qt-mt-12">
                                             Your workspace URL can only contain lowercase letters, numbers and dashes

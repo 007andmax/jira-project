@@ -4,6 +4,9 @@
 
 body {
   &.page-settings {
+    .qt-input-line {
+      margin-bottom: 24px;
+    }
     .preview-container {
       height: 21px;
       padding: 3px 6px;
@@ -353,13 +356,13 @@ body {
         justify-content: center;
       }
 
-      .qt-input-block {
-        label {
-          font-weight: 500;
-          color: $gray-500;
-          line-height: 16px;
-        }
-      }
+      //.qt-input-block {
+      //  label {
+      //    font-weight: 500;
+      //    color: $gray-500;
+      //    line-height: 16px;
+      //  }
+      //}
 
       .assign-ticket-content {
         .user-item {

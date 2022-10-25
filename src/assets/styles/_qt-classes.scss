@@ -58,7 +58,8 @@
   display: flex;
   flex-direction: column;
   margin-bottom: unset;
-  label {
+  //label {
+  > label {
     @include body-m__sb;
     margin-bottom: 8px;
     color: $primary-2;
@@ -468,8 +469,6 @@
   height: 40px;
   min-width: 40px;
   border-radius: 4px;
-  //border: solid 1px $gray-500--old;  // TODO check this style
-  //background-color: $gray-200--old;
   background-color: $white;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -477,10 +476,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  //font-size: 15px;
-  //font-weight: 600;
   font-size: 14px;
   line-height: 17px;
+
+  &:focus {
+    border-right: 1px solid $blue-light-600;
+  }
 }
 
 .qt-input-prepend {
