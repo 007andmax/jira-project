@@ -145,14 +145,10 @@
                                                 <div
                                                     class="active-users-table__notify-for-subscription"
                                                     [textContent]="userEmail"
-                                                    *ngIf="u < 2"
+                                                    placement="top"
+                                                    [ngbTooltip]="techUser.getTooltipsListUserEmailForTechusers()[u]"
                                                 ></div>
                                             </ng-template>
-                                            <div
-                                                class="active-users-table__notify-for-subscription"
-                                                *ngIf="techUser.getVisibleListUserEmailForTechusers().length > 2"
-                                                [textContent]="techUser.getVisibleListUserEmailForTechusers().length - 2"
-                                            ></div>
                                         </div>
                                         <div
                                             class="tab-pane__table-cell active-users-table__action"

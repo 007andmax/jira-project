@@ -1,54 +1,50 @@
 <div
-  class="tab-pane__table-row --border-bottom"
-  appClickOtside
-  #addStatusBtn="click"
-  [init]="true"
-  [class]="'.add-gl-container'"
-  (onOutSide)="onAddGL()"
+    class="tab-pane__table-row --border-bottom add-gl-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-gl-container'"
+    (onOutSide)="onAddGL()"
 >
-  <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-    <label  class="qt-checkbox">
-      <input
-        type="checkbox"
-      >
-      <span></span>
-    </label>
-  </div>
-  <div
-    class="tab-pane__table-cell gl-numbers__table-account-number"
-    [ngClass]="{'--input-error' : !validateShort || disableCreate  }"
-  >
-    <input
-      type="text"
-      class="form-input --editable"
-      placeholder="Enter GL Number"
-      [(ngModel)]="addGl.glNumber"
-      (input)="resetValidate();checkDublicate()"
-      (keyup)="onKeyUp($event)"
-      maxlength="50"
-    >
-    <mat-error
-      class="qt-tooltip-error"
-      *ngIf="!validateShort"
-    >
-      Income Account Number is too short.
-    </mat-error>
-    <mat-error
-      class="qt-tooltip-error"
-      *ngIf="disableCreate"
-    >
-      This Gl Number is already occupied
-    </mat-error>
-  </div>
-  <div class="tab-pane__table-cell gl-numbers__table-description">
-    <input
-      type="text"
-      class="form-input --editable"
-      placeholder="Enter Description"
-      [(ngModel)]="addGl.description"
-      (keyup)="onKeyUp($event)"
-      maxlength="50"
-    >
-  </div>
-  <div class="tab-pane__table-cell gl-numbers__table-action"></div>
+    <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+        <label class="qt-checkbox">
+            <input type="checkbox">
+            <span></span>
+        </label>
+    </div>
+    <div class="tab-pane__table-cell gl-numbers__table-account-number">
+        <input
+            type="text"
+            class="form-input --editable"
+            placeholder="Enter GL Number"
+            [(ngModel)]="addGl.glNumber"
+            [ngClass]="{'--input-error' : !validateShort || disableCreate  }"
+            (input)="resetValidate();checkDublicate()"
+            (keyup)="onKeyUp($event)"
+            maxlength="50"
+        >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validateShort"
+        >
+            GL number must be at least 1 character
+        </mat-error>
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="disableCreate"
+        >
+            This Gl Number is already occupied
+        </mat-error>
+    </div>
+    <div class="tab-pane__table-cell gl-numbers__table-description">
+        <input
+            type="text"
+            class="form-input --editable"
+            placeholder="Enter Description"
+            [(ngModel)]="addGl.description"
+            (click)="isInit = true"
+            maxlength="100"
+        >
+    </div>
+    <div class="tab-pane__table-cell gl-numbers__table-action"></div>
 </div>

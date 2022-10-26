@@ -11,3 +11,9 @@
     flex: 0 0 20px;
   }
 }
+.gl-numbers__table-account-number {
+  position: relative;
+}
+.--input-error {
+  border-color: $error !important;
+}

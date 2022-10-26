@@ -33,8 +33,8 @@ export class AddGlNumberComponent implements OnInit {
     }
   };
   onAddGL() {
+    if (this.addGl.glNumber.length === 0) this.validateShort = false;
     if (this.addGl.glNumber.length === 0 || this.disableCreate) return;
-    if (this.addGl.glNumber.length < 1) this.validateShort = false;
     if (!this.validateShort) return;
     this.glNumberService
       .saveGL(this.addGl.getDataForAdd()).pipe(map((res) => res),

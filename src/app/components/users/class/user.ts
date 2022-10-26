@@ -67,6 +67,18 @@ export class User {
         if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
         return outList;
     }
+    public getTooltipsListUserEmailForTechusers() {
+        let list = ["When my account is logged in from a new device",
+            "When a New Ticket created",
+            "When a ticket that is assigned to me is updated",
+            "When any ticket is closed"];
+        let outList = [];
+        if (this.userEmailNotifications.newDevice) outList.push(list[0]);
+        if (this.userEmailNotifications.ticketCreated) outList.push(list[1]);
+        if (this.userEmailNotifications.myTicketUpdated) outList.push(list[2]);
+        if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
+        return outList;
+    }
     public onUpdate(data) {
         for (const key in data) {
             this[key] = data[key];

@@ -58,6 +58,7 @@
                             class="form-input"
                             formControlName="taxIdDescription"
                             placeholder="Enter Tax ID description"
+                            maxlength="30"
                         >
                         <div
                             *ngIf="submitted && f.taxIdDescription.errors"
@@ -78,6 +79,7 @@
                             class="form-input"
                             formControlName="taxId"
                             placeholder="Enter Tax Id"
+                            maxlength="30"
                         >
                         <div
                             *ngIf="submitted && f.taxId.errors"
@@ -173,14 +175,16 @@
                             class="form-input"
                             formControlName="firstName"
                             placeholder="Enter Your First name"
+                            maxlength="15"
                         >
                         <div
                             *ngIf="submitted && f.firstName.errors"
                             class="invalid-feedback"
                         >
                             <div *ngIf="f.firstName.errors.required">First name is required</div>
-                            <div *ngIf="f.firstName.errors.minlength">First name is too small.</div>
-                            <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+                            <div *ngIf="f.firstName.errors.minlength">
+                                First name must be at least 2 characters
+                            </div>
                         </div>
                     </div>
                     <div class="qt-input-block">
@@ -189,6 +193,7 @@
                             class="form-input"
                             formControlName="lastName"
                             placeholder="Enter Your Last Name"
+                            maxlength="15"
                         >
                         <div
                             *ngIf="submitted && f.lastName.errors"
@@ -196,7 +201,6 @@
                         >
                             <div *ngIf="f.lastName.errors.required">Last name is required</div>
                             <div *ngIf="f.lastName.errors.minlength">Last name is too small.</div>
-                            <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
                         </div>
                     </div>
                 </div>
@@ -236,14 +240,14 @@
                             class="form-input"
                             formControlName="designation"
                             placeholder="Enter Your Role"
+                            maxlength="30"
                         >
                         <div
                             *ngIf="submitted && f.designation.errors"
                             class="invalid-feedback"
                         >
                             <div *ngIf="f.designation.errors.required">Role is required</div>
-                            <div *ngIf="f.designation.errors.minlength">Role is tool small</div>
-                            <div *ngIf="f.designation.errors.maxlength">Role is tool large</div>
+                            <div *ngIf="f.designation.errors.minlength">Role must be at least 3 characters</div>
                         </div>
                     </div>
                 </div>
