@@ -6,6 +6,7 @@ import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { UserDefaultSubscription } from './user-default-subscription';
 import { UserCustomSubscription } from './user-custom-subscription';
+import { UserEmailNotifications } from './user-email-notification';
 
 export class User {
     accountType: string;
@@ -45,6 +46,7 @@ export class User {
     jobTitleId: string;
     jobTypeId: string;
     userIndustryId: string;
+    userEmailNotifications: UserEmailNotifications;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -52,8 +54,18 @@ export class User {
             }
             this.defaultSubscriptions = new UserDefaultSubscription(data.defaultSubscriptions);
             this.customSubscriptions = data.customSubscriptions.map(item => new UserCustomSubscription(item));
+            this.userEmailNotifications = new UserEmailNotifications(data.userEmailNotifications);
         }
 
+    }
+    public getVisibleListUserEmailForTechusers() {
+        let list = ["New Device", "New ticket", "Ticket Updated", "Ticket Closed"];
+        let outList = [];
+        if (this.userEmailNotifications.newDevice) outList.push(list[0]);
+        if (this.userEmailNotifications.ticketCreated) outList.push(list[1]);
+        if (this.userEmailNotifications.myTicketUpdated) outList.push(list[2]);
+        if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
+        return outList;
     }
     public onUpdate(data) {
         for (const key in data) {

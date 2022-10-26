@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -38,6 +39,7 @@ export class InvoiceSettingsComponent implements OnInit {
     private invoiceTicketsService: InvoiceTicketsService,
     private toaster: ToastrService,
     private elRef: ElementRef,
+    private appStateService: AppStateService
   ) { }
 
   ngOnInit() {
@@ -376,9 +378,11 @@ export class InvoiceSettingsComponent implements OnInit {
     this.invoiceTicketsService.updateInvoiceContact(objInvoice).subscribe(
       res => {
         this.toaster.success('Saved Successfully.');
+        this.appStateService.changeDetectorRef();
       },
       error => {
         this.toaster.error('Bad Request');
+        this.appStateService.changeDetectorRef();
       }
     );
   }

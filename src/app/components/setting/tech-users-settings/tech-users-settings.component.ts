@@ -20,6 +20,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import * as moment from "moment";
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { TechUsersFilter } from './class/tech-users-filter';
+import { User } from '../../users/class/user';
 declare var $;
 
 @Component({
@@ -36,8 +37,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   currentCompanyId = null;
   isEmailIdUnique = true;
 
-  userlist: any = [];
-  techUsers: any[] = [];
+  userlist: User[] = [];
+  techUsers: User[] = [];
   techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
@@ -117,7 +118,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       if ((newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED')) {
         const Index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
-        if (Index === -1) this.techUsers.unshift(newChange.data);
+        if (Index === -1) this.techUsers.unshift(new User(newChange.data));
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
@@ -246,7 +247,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           let users = this.userlist.filter(user => user.accountType.toLowerCase() === 'tech');
           this.IdList = users.map(({ id }) => id);
           if (techUsers) {
-            this.techUsers = techUsers;
+            this.techUsers = techUsers.map(item => new User(item));
             this.techUserIdList = techUsers.map(({ id }) => id);
             var IdList1 = [];
             if (this.techUserIdList) {

@@ -53,7 +53,8 @@ export class TicketSettingsComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern(/^-?([0-9]\d*)?$/)
+          Validators.pattern(/^-?([0-9]\d*)?$/),
+          Validators.maxLength(7)
         ])
       ],
       outliersTime: ['', Validators.compose([Validators.required])],

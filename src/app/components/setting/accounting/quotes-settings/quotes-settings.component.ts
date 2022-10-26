@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-quotes-settings',
@@ -16,7 +17,8 @@ export class QuotesSettingsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   ngOnInit() {
@@ -27,7 +29,8 @@ export class QuotesSettingsComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern(/^-?([0-9]\d*)?$/)
+          Validators.pattern(/^-?([0-9]\d*)?$/),
+          Validators.maxLength(7)
         ])
       ],
       defaultTerms: ['15days'],
@@ -77,8 +80,10 @@ export class QuotesSettingsComponent implements OnInit {
       .updateQuotesSettings(objQuotes)
       .subscribe(res => {
         this.toastr.success('Saved Successfully');
+        this.appStateService.changeDetectorRef();
       }, error => {
         this.toastr.error('Bad Request');
+        this.appStateService.changeDetectorRef();
       });
   }
 }

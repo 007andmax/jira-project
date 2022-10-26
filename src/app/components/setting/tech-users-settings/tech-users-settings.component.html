@@ -136,15 +136,23 @@
                                             <!-- No Authentication -->
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__notify-for">
-                                          <div class="active-users-table__notify-for-subscription">
-                                            New Device
-                                          </div>
-                                          <div class="active-users-table__notify-for-subscription">
-                                            New Ticket
-                                          </div>
-                                          <div class="active-users-table__notify-for-subscription">
-                                            +2
-                                          </div>
+                                            <ng-template
+                                                ngFor
+                                                let-userEmail
+                                                let-u="index"
+                                                [ngForOf]="techUser.getVisibleListUserEmailForTechusers()"
+                                            >
+                                                <div
+                                                    class="active-users-table__notify-for-subscription"
+                                                    [textContent]="userEmail"
+                                                    *ngIf="u < 2"
+                                                ></div>
+                                            </ng-template>
+                                            <div
+                                                class="active-users-table__notify-for-subscription"
+                                                *ngIf="techUser.getVisibleListUserEmailForTechusers().length > 2"
+                                                [textContent]="techUser.getVisibleListUserEmailForTechusers().length - 2"
+                                            ></div>
                                         </div>
                                         <div
                                             class="tab-pane__table-cell active-users-table__action"
@@ -285,14 +293,14 @@
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__role">{{ techUser.techRole }}</div>
                                         <div class="tab-pane__table-cell active-users-table__last-login">
-                                          <div
-                                            class="tuser-item__email qt-color-gray-500 qt-mt-2 ellipsis"
-                                            *ngIf="techUser.lastLoginAt"
-                                          >
-                                            <span>
-                                                {{getLastLoginAt(techUser.lastLoginAt)}}
-                                            </span>
-                                          </div>
+                                            <div
+                                                class="tuser-item__email qt-color-gray-500 qt-mt-2 ellipsis"
+                                                *ngIf="techUser.lastLoginAt"
+                                            >
+                                                <span>
+                                                    {{getLastLoginAt(techUser.lastLoginAt)}}
+                                                </span>
+                                            </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__authentication">
                                             <div class="qt-df qt-ai-c">
@@ -304,15 +312,9 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__notify-for">
-                                          <div class="active-users-table__notify-for-subscription">
-                                            New Device
-                                          </div>
-                                          <div class="active-users-table__notify-for-subscription">
-                                            New Ticket
-                                          </div>
-                                          <div class="active-users-table__notify-for-subscription">
-                                            +2
-                                          </div>
+                                            <div class="active-users-table__notify-for-subscription">New Device</div>
+                                            <div class="active-users-table__notify-for-subscription">New Ticket</div>
+                                            <div class="active-users-table__notify-for-subscription">+2</div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__action">
                                             <app-dynamic-tooltip

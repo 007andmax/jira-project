@@ -17,6 +17,7 @@
                             formControlName="invoiceCount"
                             [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
                             placeholder="Enter Starting ticket number"
+                            maxlength="7"
                         >
                         <div
                             *ngIf="submitted && f.invoiceCount.errors"
@@ -333,7 +334,7 @@
                             (click)="onAddPhone()"
                         >
                             <span class="icon__remove--red-500 qt-sz-20 qt-bg-contain qt-mr-8 qt-button-icon"></span>
-                          Remove
+                            Remove
                         </a>
                     </div>
                 </div>
