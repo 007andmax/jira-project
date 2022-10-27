@@ -149,26 +149,29 @@
                                         </div>
                                         <div class="tab-pane__table-cell product-category-table__action">
                                             <div class="qt-df qt-ai-c">
-                                                <div
-                                                    class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-                                                    (click)="onEditCategory(item)"
-                                                ></div>
-                                                <div
-                                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                                                    *ngIf="item.productsAmount === 0"
-                                                    (mouseenter)="deleteTooltip.show($event.target)"
-                                                    (mouseleave)="deleteTooltip.hide()"
-                                                >
-                                                </div>
                                                 <app-dynamic-tooltip
-                                                    [content]="'You can’t delete category with existing products'"
+                                                    [content]="'Remove'"
                                                     [position]="'top'"
                                                     #deleteTooltip
                                                 ></app-dynamic-tooltip>
                                                 <div
                                                     class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                    *ngIf="item.productsAmount === 0"
+                                                    (mouseenter)="noDeleteTooltip.show($event.target)"
+                                                    (mouseleave)="noDeleteTooltip.hide()"
+                                                >
+                                                </div>
+                                                <app-dynamic-tooltip
+                                                    [content]="'You can’t delete category with existing products'"
+                                                    [position]="'top'"
+                                                    #noDeleteTooltip
+                                                ></app-dynamic-tooltip>
+                                                <div
+                                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
                                                     *ngIf="item.productsAmount > 0"
                                                     (click)="removeCategoryProduct(item)"
+                                                    (mouseenter)="deleteTooltip.show($event.target)"
+                                                    (mouseleave)="deleteTooltip.hide()"
                                                 >
                                                 </div>
                                             </div>

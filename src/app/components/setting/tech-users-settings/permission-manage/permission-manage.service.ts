@@ -218,10 +218,26 @@ export class PermissionManageService {
    * delete tech role based on params
    * @param roleId
    */
-  deleteTechRole(roleId: string) {
-    return this.http.delete(
-      `${this.apiUrl}settings/companyProfile/deleteTechRole/${roleId}`
-    );
+  /* deleteTechRole(roleId: string) {
+     return this.http.delete(
+       `${this.apiUrl}settings/companyProfile/deleteTechRole/${roleId}`
+     );
+   }*/
+  deleteTechRole(roleId) {
+    return new Promise((resolve, reject) => {
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", (event) => {
+        console.log("event", event);
+        if (xhr.status == 200) resolve(xhr);
+        if (xhr.status != 200) reject(xhr);
+      }, false);
+      xhr.addEventListener("error", (error) => {
+        console.log("error", error);
+        reject(error);
+      }, false);
+      xhr.open("DELETE", `${this.apiUrl}settings/companyProfile/deleteTechRole/${roleId}`);
+      xhr.send();
+    });
   }
 
   /**

@@ -723,6 +723,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
     this.selectedTechUser.techRole = this.techUserForm.value.techRole;
     this.selectedTechUser.subscription = {};
+    this.selectedTechUser.defaultSubscriptions = null;
     this.selectedTechUser.initials = [
       this.techUserForm.value.firstName,
       this.techUserForm.value.lastName

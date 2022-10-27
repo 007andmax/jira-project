@@ -77,11 +77,6 @@ export class ActivityHistoryComponent implements OnInit, OnDestroy {
       idsForDelete.push(device.id);
       this.settingService
         .closeSessions(idsForDelete)
-        .pipe(
-          map(res => {
-            this.toastr.success("Activity History Removed Successfully");
-          })
-        )
         .subscribe();
     }
   }

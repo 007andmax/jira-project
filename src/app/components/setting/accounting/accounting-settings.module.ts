@@ -17,6 +17,7 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesSettingsComponent } from './taxes/taxes.component';
 import { TaxesAddComponent } from './taxes/taxes-add/taxes-add.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -42,7 +43,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         NgxMaskModule.forRoot(),
         DropDownModule,
         TextAreaModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        KeyUpEnterModule
     ],
 })
 export class AccoutingSettingsModule { }

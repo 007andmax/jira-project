@@ -253,8 +253,10 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
       return;
     }
     // this.loading = true;$(".loading").css("display", "block");
-    this.permissionManageService.deleteTechRole(id).subscribe(
+
+    this.permissionManageService.deleteTechRole(id).then(
       (res: any) => {
+        console.log("res", res);
         this.toastrService.success('Deleted Role Successfully');
         this.loading = false; $(".loading").css("display", "none");
         if (res.length > 0) {
@@ -282,30 +284,16 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
             return el.id !== id;
           });
         }
-      },
-      (error: any) => {
+      }).catch(err => {
+        console.log("err", err);
         this.loading = false; $(".loading").css("display", "none");
-        const errorData = error ? error.error : null;
-        if (errorData && error.status === 406) {
-          this.usersToShift = errorData.map((user: any) => {
-            const newUser = this.allUsers.find(x => x.id == user.id);
-            if (newUser) {
-              if (newUser.firstName === 'Joana') {
-
-              }
-              newUser.companyId = newUser.company.id;
-              if (!newUser.subscription) {
-                newUser.subscription = {
-                  id: null,
-                  invoice: null,
-                  ticket: null,
-                  ticketManager: null
-                };
-              }
-            }
-
-            return newUser;
-          });
+        console.log("err.response", err.response);
+        console.log("err.status", err.status);
+        if (err.response && err.status == 406) {
+          let response = JSON.parse(err.response);
+          console.log("response", response);
+          this.usersToShift = response;
+          console.log("this.usersToShift", this.usersToShift);
           this.showDeleteRole = true;
           this.roleToDelete = id;
         } else {
@@ -314,9 +302,9 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
             return el.id !== id;
           });
         }
-      }
-    );
+      })
   }
+
 
   /**
    * all roles

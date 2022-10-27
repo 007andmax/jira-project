@@ -9,6 +9,7 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -25,7 +26,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         ClickOtsideModule,
         DynamicTooltipModule,
         MatFormFieldModule,
-        DropDownModule
+        DropDownModule,
+        KeyUpEnterModule
     ],
 
 

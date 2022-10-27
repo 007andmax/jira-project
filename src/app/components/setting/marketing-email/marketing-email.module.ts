@@ -15,6 +15,7 @@ import { MarketingEmailUsersItemComponent } from './marketing-email-users/market
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         InfiniteScrollModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        KeyUpEnterModule
 
     ],
 })
