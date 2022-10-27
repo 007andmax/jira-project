@@ -135,79 +135,62 @@
 </div>
 <!-- sidebar popup edit -->
 <div
-    class="sidebar-popup role-dlt opened"
+    class="qt-aside-modern qt-aside-modern--page-settings users-page__aside ng-star-inserted role-dlt --lg"
     *ngIf="showDeleteRole"
 >
     <!-- header -->
-    <div class="sidebar-header">
-        <h5 class="qt-fw-600">Delete Role?</h5>
-        <a
-            class="close"
-            href="javascript:;"
-            (click)="showDeleteRole = !showDeleteRole"
-        >
-            <img
-                src="/html/assets/img/icons/close.svg"
-                alt="close"
-            >
-        </a>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Delete Role?</div>
     </div>
-    <div class="warn-msg">
-        <img
-            src="/html/assets/img/icons/warning.svg"
-            alt="warning"
-        >
-        <p>
-            {{ usersToShift.length }} tech users belong to this group, you must assign
-      a
-            <br>
-            different group to existing users to delete the group.
+    <div class="middle-content qt-aside-modern__content">
+      <div class="notifications --warning qt-mb-20 ng-star-inserted">
+        <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
+        <p class="notifications__content">
+          {{ usersToShift.length }} tech users belong to this group, you must assign
+          a different group to existing users to delete the group.
         </p>
-    </div>
-    <div class="middle-content">
+      </div>
         <form #editForm="ngForm">
             <div class="tech-list">
-                <div class=".caption-m qt-text-upper qt-mb-16">Tech Users</div>
-                <ul class="list-unstyled">
-                    <li *ngFor="let user of usersToShift">
-                        <div class="t-user">
+<!--                <div class=".caption-m qt-text-upper qt-mb-16">Tech Users</div>-->
+                <div class="users-list custom-scroll">
+                    <div *ngFor="let user of usersToShift" class="user-item qt-df qt-jc-sb qt-ai-c">
+                        <div class="dropdown-link">
                             <span
-                                class="user-dp away"
+                                class="default-user-avatar avatar-background-color-odd"
                                 *ngIf="
-                  !user.requestToChangePassword && user.isEmailVerified
-                "
-                            >
-                                <!-- <span *ngIf="techUser.avatar !== null">
-              NN
-            </span> -->
+                                  !user.requestToChangePassword && user.isEmailVerified
+                                "
+                                                >
+                                    <!-- <span *ngIf="techUser.avatar !== null">
+                                  NN
+                                </span> -->
                                 <img
                                     *ngIf="user.avatar !== null"
                                     src="/users/{{ user.id }}/image.jpg?t={{
-                      user.avatar.updatedAt
-                    }}"
+                                      user.avatar.updatedAt
+                                    }}"
                                     alt="user"
+                                    class="img-circle avatar-26"
                                 >
                                 <span
-                                    class="simple-dp"
+                                    class="default-user-avatar avatar-background-color-odd"
                                     *ngIf="user.avatar === null"
                                 >
                                     {{ displayFrstLstChar(user) }}
                                 </span>
                             </span>
-                            <span *ngIf="
-                user.requestToChangePassword || !user.isEmailVerified
-                ">
-                                <span class="simple-dp">{{ displayFrstLstChar(user) }}</span>
+                            <span class="default-user-avatar avatar-background-color-odd"
+                              *ngIf="user.requestToChangePassword || !user.isEmailVerified">
+                              <span class="simple-dp">{{ displayFrstLstChar(user) }}</span>
                             </span>
-                            <div class="t-info">
-                                <div class="t-tile__title">
+                            <div class="qt-f-1 ellipsis">
+                                <div class="user-item__name qt-fw-600 qt-color-gray-900 ellipsis">
                                     {{ user.firstName + " " + user.lastName }}
                                 </div>
-                                <a href="mailto:{{ user.primaryEmail }}">
-                                    {{
-                  user.primaryEmail
-                }}
-                                </a>
+                                <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">
+                                    {{ user.primaryEmail }}
+                                </div>
                             </div>
                         </div>
                         <!-- <li ng-repeat="role in allTechRoles" ng-click="user.techRole = role; changeUsersRole(user)">
@@ -230,25 +213,25 @@
                             </option>
                             <!-- <option>Administrator 1</option> -->
                         </select>
-                    </li>
-                </ul>
-            </div>
-            <div class="btn-row">
-                <input
-                    type="submit"
-                    value="Delete Role"
-                    [disabled]="allRolesAreChanged(roleToDelete)"
-                    (click)="deleteRole(roleToDelete, true)"
-                    class="btn btn-primary"
-                >
-                <a
-                    href="javascrip:;"
-                    class="btn btn-secondary"
-                    (click)="showDeleteRole = !showDeleteRole"
-                >
-                    Cancel
-                </a>
+                    </div>
+                </div>
             </div>
         </form>
+    </div>
+    <div class="qt-aside-modern__footer qt-df">
+      <a
+        href="javascrip:;"
+        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+        (click)="showDeleteRole = !showDeleteRole"
+      >
+        Cancel
+      </a>
+      <input
+        type="submit"
+        value="Delete Role"
+        [disabled]="allRolesAreChanged(roleToDelete)"
+        (click)="deleteRole(roleToDelete, true)"
+        class="qt-button qt-jc-c qt-w100"
+      >
     </div>
 </div>

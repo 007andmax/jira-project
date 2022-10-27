@@ -322,6 +322,20 @@ body {
     .qt-aside-modern--page-settings {
       max-width: 480px;
 
+      &.--lg {
+        max-width: 640px;
+
+        .users-list {
+          max-width: 100%;
+          padding-right: 0;
+
+          .cmn-select {
+            height: 36px;
+            max-width: 183px;
+          }
+        }
+      }
+
       .qt-aside-modern__header-title {
         font-size: 20px;
         line-height: 24px;
@@ -356,30 +370,22 @@ body {
         justify-content: center;
       }
 
-      //.qt-input-block {
-      //  label {
-      //    font-weight: 500;
-      //    color: $gray-500;
-      //    line-height: 16px;
-      //  }
-      //}
+      //.assign-ticket-content {
+      .user-item {
+        border: unset;
+        padding: 12px 0;
 
-      .assign-ticket-content {
-        .user-item {
-          border: unset;
-          padding: 12px 0;
+        &__name {
+          font-size: 14px;
+          line-height: 17px;
+        }
 
-          &__name {
-            font-size: 14px;
-            line-height: 17px;
-          }
-
-          &__email {
-            font-size: 13px;
-            line-height: 16px;
-          }
+        &__email {
+          font-size: 13px;
+          line-height: 16px;
         }
       }
+      //}
 
       .angular-editor-textarea {
         min-height: 120px !important;
