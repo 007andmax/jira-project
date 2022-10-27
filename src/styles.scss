@@ -2775,8 +2775,15 @@ app-quotes-item {
 .new-companies-content__modal {
   .qt-aside-modern__content {
     .new-tax {
+      //left: unset !important; // Todo check this style
+      //right: 0;
+
+      max-height: initial;
+      overflow: visible;
+      transform: none !important;
+      right: -30px !important;
       left: unset !important;
-      right: 0;
+      top: 7px !important;
     }
   }
   .add-tax-dropdown:after {
