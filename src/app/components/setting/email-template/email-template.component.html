@@ -16,6 +16,7 @@
             [hidden]="loading"
         >
 
+
             <ngb-tab
                 title="Ticket Templates"
                 id="tab1"
@@ -95,6 +96,7 @@
                 </ng-template>
             </ngb-tab>
 
+
             <ngb-tab title="Agent Templates">
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
@@ -167,6 +169,7 @@
                     </div>
                 </ng-template>
             </ngb-tab>
+
 
             <ngb-tab title="Invoice Templates">
                 <ng-template ngbTabContent>
@@ -244,6 +247,7 @@
     </div>
 </div>
 
+
 <div
     class="qt-aside-modern qt-aside-modern--page-settings sidebar-popup tmp-edit"
     [ngClass]="{ opened: edit }"
@@ -253,8 +257,8 @@
         <div class="qt-aside-modern__header-title">{{ templeteInfo.title }}</div>
         <div class="qt-df">
             <a
-              href="javascript:;"
-              class="qt-button --square-md --gray pointer"
+                href="javascript:;"
+                class="qt-button --square-md --gray pointer"
             >
                 <div class="icon__reset-gray-500 qt-sz-16 qt-button-icon"></div>
             </a>
@@ -340,8 +344,11 @@
                             href="javascript:;"
                             (click)="toggle()"
                         >
-<!--                            <span class="icon__hide qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>-->
-                            <span class="icon__view qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                            <!-- <span class="icon__hide qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span> -->
+                            <span
+                                class="qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+                                [ngClass]="{'icon__view':!show, 'icon__hide':show}"
+                            ></span>
                             {{ buttonName }}
                         </a>
                     </div>
@@ -363,6 +370,7 @@
                             {{ key.keyName }}
                         </span>
                     </div>
+
 
                     <div
                         class="key-area"
@@ -399,6 +407,7 @@
     </div>
 </div>
 
+
 <ng-template
     #template
     let-modal
@@ -414,9 +423,10 @@
                 You can download agent from the link given below
             </p>
             <a
-              href="javascript:;"
-              class="qt-button qt-w100 qt-mt-24 qt-jc-c">
-              Download Agent
+                href="javascript:;"
+                class="qt-button qt-w100 qt-mt-24 qt-jc-c"
+            >
+                Download Agent
             </a>
             <div class="modal-body__address qt-color-gray-500">
                 <p class="qt-fw-500 qt-color-gray-900">John Cooper</p>

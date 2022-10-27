@@ -470,7 +470,7 @@
       background-color: $blue-light-600;
 
       &::after {
-        left: 3px;
+        left: unset;
       }
     }
   }
@@ -494,6 +494,7 @@
       top: 3px;
       bottom: 3px;
       right: 3px;
+      left: 3px;
     }
   }
 }

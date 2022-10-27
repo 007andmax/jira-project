@@ -90,11 +90,14 @@
                                                     class="profile-dp"
                                                     for="profile-dp"
                                                 >
-                                                  <a href="javascript:void(0)" class="qt-button --gray qt-mr-12">
-                                                    {{
+                                                    <a
+                                                        href="javascript:void(0)"
+                                                        class="qt-button --gray qt-mr-12"
+                                                    >
+                                                        {{
                                                     imageSrc ? "Change Logo" : "Upload Photo"
                                                     }}
-                                                  </a>
+                                                    </a>
                                                 </label>
                                                 <label
                                                     for="profile-dp"
@@ -106,7 +109,7 @@
                                                         restore-default-button
                                                         class="qt-button --gray --color-red"
                                                     >
-                                                      Remove
+                                                        Remove
                                                     </a>
                                                 </label>
                                             </div>
@@ -305,16 +308,16 @@
                                                 <span class="qt-input-afterfix">.quicktech.com</span>
                                             </div>
                                             <mat-error
-                                              class="invalid-feedback --pos-static"
-                                              *ngIf="cProfileForm.get('url').getError('incorrect')"
+                                                class="invalid-feedback --pos-static"
+                                                *ngIf="cProfileForm.get('url').getError('incorrect')"
                                             >
-                                              Ticket Subject is required
+                                                Ticket Subject is required
                                             </mat-error>
                                             <mat-error
-                                              class="invalid-feedback --pos-static"
-                                              *ngIf="cProfileForm.get('url').getError('invalidate')"
+                                                class="invalid-feedback --pos-static"
+                                                *ngIf="cProfileForm.get('url').getError('invalidate')"
                                             >
-                                              Please enter a valid company domain.
+                                                Please enter a valid company domain.
                                             </mat-error>
                                         </div>
                                         <div class="qt-input-help-text qt-mt-12">
@@ -356,7 +359,7 @@
                                                 <input
                                                     type="checkbox"
                                                     id="{{ workingDay.dayOfWeek }}"
-                                                    [(ngModel)]="!workingDay.isSelected"
+                                                    [(ngModel)]="workingDay.isSelected"
                                                     name="{{ workingDay.dayOfWeek | titlecase }}"
                                                     [ngModelOptions]="{ standalone: true }"
                                                     class="qt-switch__input"

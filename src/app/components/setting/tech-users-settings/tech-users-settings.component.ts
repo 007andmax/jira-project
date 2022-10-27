@@ -21,6 +21,7 @@ import * as moment from "moment";
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { TechUsersFilter } from './class/tech-users-filter';
 import { User } from '../../users/class/user';
+import { PermissionManageComponent } from './permission-manage/permission-manage.component';
 declare var $;
 
 @Component({
@@ -54,9 +55,11 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   userId: any;
   IdList: any;
   idUploadFile: string;
+  activeTab: string = "activeUsers";
   filter: TechUsersFilter = new TechUsersFilter();
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
+  @ViewChild('userPermissions') userPermissions: PermissionManageComponent;
   sub: Subscription = new Subscription();
   constructor(
     private techUsersService: TechUsersService,
@@ -178,6 +181,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   setTab(data) {
     if (data['nextId'] === "activeUsers") this.getUsers(false);
     if (data['nextId'] === "archivedUsers") this.getUsers(true);
+    this.activeTab = data['nextId'];
   }
   /**
    * get role names

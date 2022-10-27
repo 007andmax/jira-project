@@ -80,6 +80,9 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.settingStateService.setComponentName('PermissionManageComponent');
   }
 
+  public getRoles() {
+    return this.roles;
+  }
   ngOnDestroy() {
 
   }
@@ -147,7 +150,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   /**
    * add new role
    */
-  addNewRole() {
+  public addNewRole() {
     this.isNewRoleCreating = true;
 
     let maxNum = 0;

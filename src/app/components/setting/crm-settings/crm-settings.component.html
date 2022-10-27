@@ -3,8 +3,15 @@
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">CRM Settings</h5>
             <div class="qt-df">
+                <app-dynamic-tooltip
+                    [content]="'Remove'"
+                    [position]="'top'"
+                    #removeTooltip
+                ></app-dynamic-tooltip>
                 <a
                     href="javascript:;"
+                    (mouseenter)="removeTooltip.show($event.target)"
+                    (mouseleave)="removeTooltip.hide()"
                     class="qt-button --md --gray button-gl-number__delete qt-ml-12"
                     *ngIf="getSelectedCount() > 0"
                     (click)="removeList()"
@@ -16,10 +23,8 @@
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                     (click)="create()"
                 >
-                  <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
-                  <span
-                    [textContent]="parseAddText()"
-                  ></span>
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span [textContent]="parseAddText()"></span>
                 </a>
             </div>
         </div>
