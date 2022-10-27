@@ -3,12 +3,12 @@
     ngbDropdown
     #taxesDropDown="ngbDropdown"
 >
-    <p
-        class="label-name"
+    <div
+        class="qt-input-block__label"
         *ngIf="isLabel"
     >
         Taxes
-    </p>
+    </div>
     <div
         class="add-tax add-tax-inventory"
         *ngIf="isAdd"
@@ -140,7 +140,7 @@
         </div>
     </div>
     <div
-        class="light-dropdown new-product-gl-select qt-select-input-40"
+        class="light-dropdown new-product-gl-select qt-select-input-40 qt-dropdown-input"
         ngbDropdownToggle
     >
         <i class="icn-sm report-caret-icon"></i>
@@ -151,6 +151,7 @@
             readonly
             [attr.placeholder]="placeholder"
             id="dropdownTypeTaxes"
+            class="qt-dropdown-input"
         >
     </div>
     <ul

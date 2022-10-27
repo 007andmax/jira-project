@@ -10,7 +10,7 @@
         [textContent]="title"
     ></div>
     <mat-error
-        class="app-drop-down__error qt-tooltip-error mat-error"
+        class="invalid-feedback"
         *ngIf="!validate"
         [textContent]="errorMessage"
     >
@@ -24,6 +24,7 @@
     autocomplete="off"
     [placeholder]="placeholder"
     id="dropdown1"
+    class="qt-dropdown-input"
     [attr.maxlength]="maxlength"
     (input)="onCheckAdd($event)"
     [readonly]="!change"

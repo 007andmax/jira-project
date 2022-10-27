@@ -2219,11 +2219,11 @@ app-quotes-item {
   overflow-x: hidden;
   max-height: 150px;
   width: 100%;
-  border: 1px solid $gray-500--old;
+  border: 1px solid $gray-200;
   border-radius: 4px;
   display: flex;
   &.--input-error {
-    border-color: $error !important;
+    border-color: $red-600;
   }
   textarea {
     width: 100%;
@@ -2338,9 +2338,12 @@ app-quotes-item {
       overflow-x: hidden;
       max-height: 150px;
       width: 100%;
-      border: 1px solid $gray-500--old;
+      //border: 1px solid $gray-200;
       border-radius: 4px;
       display: flex;
+      &:hover {
+        border-color: $gray-300;
+      }
       textarea {
         width: 100%;
         border: none;
@@ -2812,9 +2815,9 @@ app-quotes-item {
     }
   }
 
-  .light-dropdown .report-caret-icon {
-    right: 12px;
-  }
+  //.light-dropdown .report-caret-icon { // Todo check this style
+  //  right: 12px;
+  //}
 
   .details-divider {
     p {
@@ -4161,24 +4164,6 @@ app-ticket-edit-aside {
       justify-content: space-between;
       flex-wrap: wrap;
     }
-
-    > div {
-      @media (max-width: 767px) {
-        margin-right: 0;
-      }
-    }
-
-    .qt-w-md-50 {
-      @media (max-width: 767px) {
-        max-width: calc(50% - 8px);
-      }
-    }
-  }
-
-  .qt-flex-md-100 {
-    @media (max-width: 767px) {
-      flex: 100%;
-    }
   }
 
   .create-product {
@@ -4358,37 +4343,37 @@ app-ticket-edit-aside-devices {
     line-height: 1.33;
   }
 
-  .new-companies-content__modal--content {
-    padding: 0;
-  }
+  //.new-companies-content__modal--content {
+  //  padding: 0;
+  //}
 
-  .create-product__col {
-    padding-left: 0;
-    margin-top: 17px !important;
-    position: relative;
+  //.create-product__col { // TODO checl this style
+  //  padding-left: 0;
+  //  margin-top: 17px !important;
+  //  position: relative;
+  //
+  //  .qt-checkbox {
+  //    width: auto;
+  //    align-items: center;
+  //  }
+  //
+  //  .mat-error {
+  //    font-size: 12px;
+  //    position: absolute;
+  //    top: calc(100% + 5px);
+  //  }
+  //}
 
-    .qt-checkbox {
-      width: auto;
-      align-items: center;
-    }
-
-    .mat-error {
-      font-size: 12px;
-      position: absolute;
-      top: calc(100% + 5px);
-    }
-  }
-
-  app-taxes {
-    .label-name {
-      margin-bottom: 8px;
-      color: $primary-2;
-    }
-
-    .new-taxes-area {
-      padding-left: 0;
-    }
-  }
+  //app-taxes {
+  //  .label-name {
+  //    margin-bottom: 8px;
+  //    color: $primary-2;
+  //  }
+  //
+  //  .new-taxes-area {
+  //    padding-left: 0;
+  //  }
+  //}
 
   .new-companies-content__modal--content-footer {
     margin-bottom: 0;
@@ -4467,27 +4452,53 @@ app-ticket-edit-aside-devices {
     @include body-m__sb;
     font-weight: 700;
   }
-  .create-product__col {
-    label {
-      margin-bottom: 0;
-    }
-  }
+  //.create-product__col { // TODO checl this style
+  //  label {
+  //    margin-bottom: 0;
+  //  }
+  //}
 }
 
 .qt-inputs-row {
   display: flex;
+  column-gap: 16px;
+  row-gap: 16px;
+  margin-bottom: 24px;
+
+  .qt-f50 {
+    flex: calc(50% - 8px);
+  }
+  .qt-f33 {
+    flex: calc(33% - 8px);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   & > div {
-    margin-right: 15px;
+    //margin-right: 15px;
     flex-grow: 1;
-    &:last-child {
-      margin-right: 0;
-    }
+    //&:last-child {
+    //  margin-right: 0;
+    //}
   }
-  p.label-name {
-    width: unset;
-  }
+  //p.label-name {
+  //  width: unset;
+  //}
   input {
     width: 100%;
+  }
+
+  .qt-w-md-50 {
+    @media (max-width: 767px) {
+      max-width: calc(50% - 8px);
+    }
+  }
+  .qt-flex-md-100 {
+    @media (max-width: 767px) {
+      flex: 100%;
+    }
   }
 }
 

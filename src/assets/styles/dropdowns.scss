@@ -40,22 +40,22 @@
     padding: 12px 24px 12px 12px;
     outline: none;
   }
-  .icn-remove-old,
-  .report-caret-icon {
-    position: absolute;
-    cursor: pointer;
-  }
-  .report-caret-icon {
-    top: calc(50% - 8px) !important;
-    right: 10px;
-  }
-  .icn-remove-old {
-    top: calc(50% - 4px) !important;
-    right: 12px;
-    @media (max-width: 767px) {
-      top: calc(50% - 14px) !important;
-    }
-  }
+  //.icn-remove-old, // Todo check this style
+  //.report-caret-icon {
+  //  position: absolute;
+  //  cursor: pointer;
+  //}
+  //.report-caret-icon {
+  //  top: calc(50% - 8px) !important;
+  //  right: 10px;
+  //}
+  //.icn-remove-old {
+  //  top: calc(50% - 4px) !important;
+  //  right: 12px;
+  //  @media (max-width: 767px) {
+  //    top: calc(50% - 14px) !important;
+  //  }
+  //}
 }
 
 .dark-dropdown {

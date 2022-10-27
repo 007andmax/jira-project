@@ -59,10 +59,16 @@ span.qt-input-search input.qt-input-search {
   position: relative;
 
   &__label {
-    @include body-m__sb;
-    color: $primary-2;
-    margin-bottom: 11px;
-    line-height: unset;
+    //@include body-m__sb; // TODO check this style
+    //color: $primary-2;
+    //margin-bottom: 11px;
+    //line-height: unset;
+
+    //font-size: 13px;
+    //line-height: 16px;
+    //font-weight: 500;
+    //color: $gray-500;
+    //margin-bottom: 8px;
   }
 
   &__input {
@@ -82,16 +88,16 @@ span.qt-input-search input.qt-input-search {
     border-radius: 4px;
     border: solid 1px $gray-500--old;
     background-color: $white;
-    &:placeholder {
+    &::placeholder {
         color: $gray-600--old;
     }
   }
 
-  .mat-error {
-      font-size: 12px;
-      position: absolute;
-      top: -17px;
-  }
+  //.mat-error { // Todo check this style
+  //    font-size: 12px;
+  //    position: absolute;
+  //    top: -17px;
+  //}
 }
 
 

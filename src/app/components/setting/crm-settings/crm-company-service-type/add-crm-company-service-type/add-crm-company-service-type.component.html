@@ -1,25 +1,19 @@
-<tr
-    class="add-crm-service-type-container"
+<div
+    class="tab-pane__table-row"
     appClickOtside
     #addStatusBtn="click"
     [init]="true"
     [class]="'.add-crm-service-type-container'"
     (onOutSide)="save()"
 >
-    <td></td>
-    <td
-        class="tax-name add-service-type-name"
+    <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
+    <div
+        class="tab-pane__table-cell crm-settings-company-type-table__service-type qt-pos-rel"
         [ngClass]="{'--input-error' : disableCreate}"
     >
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="disableCreate"
-        >
-            This industry is already occupied
-        </mat-error>
         <input
             type="text"
-            class="form-input"
+            class="form-input --editable"
             placeholder="Enter Name Category"
             [(ngModel)]="name"
             (input)="checkDublicate()"
@@ -27,7 +21,13 @@
             maxlength="30"
             required
         >
-    </td>
-    <td class="rate"></td>
-    <td class="action"></td>
-</tr>
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="disableCreate"
+        >
+          This industry is already occupied
+        </mat-error>
+    </div>
+    <div class="tab-pane__table-cell crm-settings-company-type-table__count"></div>
+    <div class="tab-pane__table-cell crm-settings-company-type-table__action"></div>
+</div>

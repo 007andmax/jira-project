@@ -1,16 +1,10 @@
 <div
-    class="qt-aside-modern__content qt-pt-0-important new-companies-content__modal--content advanced create-product"
+    class="qt-aside-modern__content new-companies-content__modal--content advanced create-product"
     [ngClass]="class"
 >
     <div class="qt-inputs-row">
-        <div class="create-product__col qt-flex-md-100 --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getManufactureIsExist()"
-            >
-                This number is already occupied
-            </mat-error>
-            <p class="label-name">Item Number</p>
+        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+            <div class="qt-input-block__label">Item Number</div>
             <input
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
@@ -19,15 +13,15 @@
                 (blur)="onCheckManufacture()"
                 placeholder="Enter Item Number"
             >
-        </div>
-        <div class="create-product__col qt-flex-md-100 --required">
             <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getILCIsExist()"
+              class="invalid-feedback"
+              *ngIf="!validate.getManufactureIsExist()"
             >
-                This number is already occupied
+              This number is already occupied
             </mat-error>
-            <p class="label-name">ILC Number</p>
+        </div>
+        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+            <div class="qt-input-block__label">ILC Number</div>
             <input
                 type="text"
                 class="qt-input-40 inventory-add-body__input"
@@ -35,11 +29,17 @@
                 (blur)="onCheckILC()"
                 placeholder="Enter ILC Number"
             >
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="!validate.getILCIsExist()"
+            >
+              This number is already occupied
+            </mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="create-product__col --required">
-            <p class="label-name">GL Number</p>
+        <div class="--required">
+            <div class="qt-input-block__label">GL Number</div>
             <app-drop-down
                 [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
                 [list]="glNumbers"
@@ -53,31 +53,33 @@
             ></app-drop-down>
         </div>
     </div>
-    <div class="create-product__col --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getDescription()"
-        >
-            Description is required
-        </mat-error>
-        <p class="label-name">Description</p>
-        <div
+    <div class="qt-inputs-row --required">
+        <div class="qt-input-block">
+          <div class="qt-input-block__label">Description</div>
+          <div
             class="editable-description"
             [ngClass]="{'--input-error' : !validate.getDescription()}"
-        >
+          >
             <textarea
-                appTextArea
-                [limit]="160"
-                id="inventory-description"
-                placeholder="Write Product Description"
-                (input)="onChangeDescription($event)"
-                (onPast)="onPastDescription($event)"
+              appTextArea
+              [limit]="160"
+              id="inventory-description"
+              placeholder="Write Product Description"
+              (input)="onChangeDescription($event)"
+              (onPast)="onPastDescription($event)"
             ></textarea>
+          </div>
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getDescription()"
+          >
+            Description is required
+          </mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="create-product__col qt-w-md-50 --required">
-            <p class="label-name">Cost</p>
+        <div class="qt-f33 qt-input-block qt-w-md-50 --required">
+            <div class="qt-input-block__label">Cost</div>
             <input
                 class="qt-input-40 inventory-add-body__input"
                 [ngClass]="{'--input-error' : !validate.getCostSale()}"
@@ -91,14 +93,14 @@
                 placeholder="Enter Cost"
             >
             <mat-error
-                class="qt-tooltip-error"
+                class="invalid-feedback"
                 *ngIf="!validate.getCostSale()"
             >
                 Cost cannot be higher than Price
             </mat-error>
         </div>
-        <div class="create-product__col qt-w-md-50 --required">
-            <p class="label-name">Markup %</p>
+        <div class="qt-f33 qt-input-block qt-w-md-50 --required">
+            <div class="qt-input-block__label">Markup %</div>
             <input
                 class="qt-input-40 inventory-add-body__input"
                 type="text"
@@ -109,14 +111,8 @@
                 placeholder="Enter Markup"
             >
         </div>
-        <div class="create-product__col qt-w-md-50 --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getSale()"
-            >
-                Price is required
-            </mat-error>
-            <p class="label-name">Price</p>
+        <div class="qt-f33 qt-input-block qt-flex-md-100 --required">
+            <div class="qt-input-block__label">Price</div>
             <input
                 class="qt-input-40 inventory-add-body__input"
                 type="text"
@@ -130,10 +126,16 @@
                 (onChange)="changeSales($event)"
                 placeholder="Enter Price"
             >
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="!validate.getSale()"
+            >
+              Price is required
+            </mat-error>
         </div>
     </div>
-    <div class="qt-inputs-row qt-mt-17">
-        <div class="create-product-taxes-select qt-flex-md-100">
+    <div class="qt-inputs-row">
+        <div class="qt-flex-md-100">
             <app-taxes
                 #taxesDp
                 [selectedTax]="defaultSelectedTax"
@@ -142,7 +144,7 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="create-product__col select-open-top --required">
+        <div class="select-open-top --required">
             <app-drop-down
                 #categoriesSelect
                 [class]="['qt-select-input-40']"
@@ -162,8 +164,8 @@
         </div>
     </div>
     <div class="qt-inputs-row">
-        <div class="create-product__col select-open-top">
-            <p class="label-name">Suppliers</p>
+        <div class="select-open-top">
+            <div class="qt-input-block__label">Suppliers</div>
             <app-drop-down
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [list]="suppliers"
@@ -174,7 +176,7 @@
             ></app-drop-down>
         </div>
     </div>
-    <div class="create-product__col qt-df qt-ai-c">
+    <div class="qt-inputs-row qt-df qt-ai-c">
         <label
             class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
             for="inventory-add-active"

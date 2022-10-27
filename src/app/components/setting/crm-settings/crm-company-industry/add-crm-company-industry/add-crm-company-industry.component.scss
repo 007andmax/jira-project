@@ -1,1 +1,14 @@
 @import "./src/assets/styles/variable";
+
+.crm-settings-company-industry-table {
+  &__industry-type {
+    flex: 1 1 174px;
+  }
+  &__count {
+    flex: 1 1 305px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 56px;
+  }
+}

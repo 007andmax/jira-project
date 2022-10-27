@@ -1,1 +1,10 @@
 @import "./src/assets/styles/variable";
+
+.crm-settings-table-job-type {
+  &__job-type {
+    flex: 1;
+  }
+  &__action {
+    flex: 0 0 20px;
+  }
+}
