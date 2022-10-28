@@ -5,10 +5,14 @@ export class CrmCompanyJobType {
     isInitEdit: boolean = false;
     disableUpdate: boolean = false;
     selected: boolean = false;
+    isInitRequest: boolean = false;
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
         this.usageCounter = data.usageCounter | 0;
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public onInitEdit(data) {
         this.isInitEdit = data;

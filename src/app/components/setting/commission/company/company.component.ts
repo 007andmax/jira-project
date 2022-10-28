@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, Pipe } from "@angular/core";
+import { Component, OnInit, ViewChild, Pipe, OnDestroy } from "@angular/core";
 
-import { ReplaySubject, forkJoin, of, throwError } from "rxjs";
+import { ReplaySubject, forkJoin, of, throwError, Subscription } from "rxjs";
 import { takeUntil, catchError, debounceTime } from "rxjs/operators";
 
 import { map } from "rxjs/operators";
@@ -10,13 +10,14 @@ import { ToastrService } from "ngx-toastr";
 import { FormControl } from "@angular/forms";
 import { UsersStateService } from "src/app/states/users/users-state.service";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 
 @Component({
   selector: "app-company-commission",
   templateUrl: "./company.component.html",
   styleUrls: ["./company.component.scss"]
 })
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, OnDestroy {
   clientsCompanies: any;
   currentCompany: any;
   currentUser: any;
@@ -28,7 +29,7 @@ export class CompanyComponent implements OnInit {
   selectedIdx = -1;
 
 
-
+  sub: Subscription = new Subscription();
   config = {
     displayKey: "firstName",
     search: true,
@@ -44,7 +45,9 @@ export class CompanyComponent implements OnInit {
     private toastrService: ToastrService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
+    private companiesStateService: CompaniesStateService
   ) { }
+
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
@@ -62,13 +65,11 @@ export class CompanyComponent implements OnInit {
   getUsers() {
     this.loading = true; $(".loading").css("display", "block");
     this.commissionService
-      .getUsers()
+      .getTechUsers()
       .pipe(
         map((users: any) => {
           return users.filter(
             (user: any) =>
-              user.accountType.toLowerCase() === "tech" &&
-              user.deletedAt === null &&
               user.userEnabled
           );
         })
@@ -77,7 +78,12 @@ export class CompanyComponent implements OnInit {
         (techUsers: any) => {
           //   this.loading = false; $(".loading").css("display", "none");
           this.activeTechUsers = techUsers;
-          this.getCompanies();
+          if (this.companiesStateService.getCompanies().length > 0) this.getCompanies(this.companiesStateService.getCompanies());
+          let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+            this.getCompanies(data);
+          })
+          this.sub.add(getOnCompanies);
+
         },
         error => {
           //  this.loading = false; $(".loading").css("display", "none");
@@ -178,31 +184,14 @@ export class CompanyComponent implements OnInit {
   /**
    * companies data
    */
-  getCompanies() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.commissionService
-      .getCompanies()
-      .pipe(
-        map((companys: any) => {
-          return companys.filter(
-            (company: any) =>
-              company.clientType.toLowerCase() !== "vendor" &&
-              company.deletedAt === null &&
-              !company.isDefault
-          );
-        })
-      )
-      .subscribe(
-        (custCompany: any) => {
-          this.loading = false; $(".loading").css("display", "none");
-          if (custCompany) {
-            this.clientsCompanies = custCompany;
-          }
-        },
-        error => {
-          this.loading = false; $(".loading").css("display", "none");
-        }
-      );
+  getCompanies(companys) {
+    this.clientsCompanies = companys.filter(
+      (company: any) =>
+        company.clientType.toLowerCase() !== "vendor" &&
+        company.deletedAt === null &&
+        !company.isDefault
+    );
+    this.loading = false; $(".loading").css("display", "none");
   }
 
   selectedDropdown(i) {
@@ -294,5 +283,8 @@ export class CompanyComponent implements OnInit {
         }
       })
       .join("");
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

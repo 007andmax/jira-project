@@ -14,6 +14,7 @@ export class AddMarketingSubscriptionTypeComponent implements OnInit {
   MODE_ADD_BY_MODAL = MODE_ADD_BY_MODAL;
   name: string = "";
   disableCreate: boolean = false;
+  isInitRequest: boolean = false;
   @Input() mode: string;
   @Input() marketingSubscriptionList: Array<MarketingSubscriptionType> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
@@ -33,15 +34,18 @@ export class AddMarketingSubscriptionTypeComponent implements OnInit {
     }
   };
   save() {
-    if (this.name.length === 0 || this.disableCreate) return;
+    if (this.name.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
     this.marketingEmailService.addSubscriptionType(this.name).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
         (data) => {
+          this.isInitRequest = false;
           this.onAdded.emit(data);
           this.onClose.emit(null);
         },
         error => {
+          this.isInitRequest = false;
         }
       );
   }

@@ -12,6 +12,7 @@ import { CrmCompanyJobTitle } from '../class/crm-company-job-title';
 export class AddCrmCompanyJobTitleComponent implements OnInit {
   name: string = "";
   disableCreate: boolean = false;
+  isInitRequest: boolean = false;
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private crmService: CrmService) { }
@@ -29,14 +30,17 @@ export class AddCrmCompanyJobTitleComponent implements OnInit {
     }
   };
   save() {
-    if (this.name.length === 0 || this.disableCreate) return;
+    if (this.name.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
     this.crmService.addJobTitle(this.name).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.isInitRequest = false;
           this.onClose.emit(null);
         },
         error => {
+          this.isInitRequest = false;
         }
       );
   }

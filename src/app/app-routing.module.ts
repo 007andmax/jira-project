@@ -219,7 +219,7 @@ const routes: Routes = [
 
   },
   {
-    path: ':company/setting/accounting',
+    path: ':company/setting/finance',
     loadChildren: './components/setting/accounting/accounting-settings.module#AccoutingSettingsModule',
     canActivate: [PermissionAccountingSettingsService, PermissionTechUserService]
 

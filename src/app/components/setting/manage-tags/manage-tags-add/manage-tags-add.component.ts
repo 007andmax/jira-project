@@ -10,6 +10,7 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 })
 export class ManageTagsAddComponent implements OnInit {
   name: string = "";
+  isInitRequest: boolean = false;
   @Input() setActiveTab: string;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private tagsService: TagsService,) { }
@@ -17,19 +18,22 @@ export class ManageTagsAddComponent implements OnInit {
   ngOnInit() {
   }
   save() {
-    if (this.name.length === 0) return;
+    if (this.name.length === 0 || this.isInitRequest) return;
     const tags = {
       colorCode: 0,
       usedCounter: 0,
       word: this.name
     };
+    this.isInitRequest = true;
     this.tagsService.tags(tags, this.setActiveTab).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.isInitRequest = false;
           this.onClose.emit(null);
         },
         error => {
+          this.isInitRequest = false;
         }
       );
   }

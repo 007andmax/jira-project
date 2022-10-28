@@ -13,6 +13,7 @@ export class MarketingSubscriptionType {
     activated: boolean;
     isExist: boolean = true;
     selected: boolean = false;
+    isInitRequest: boolean = false;
     constructor(data, randomInteger = null) {
         this.id = data.id;
         this.name = data.name;
@@ -25,6 +26,9 @@ export class MarketingSubscriptionType {
             data.subscribeUserIds.forEach(item => (this.subscribeUserIndexColor.push(randomInteger(0, 6))));
             data.unsubscribeUserIds.forEach(item => (this.unsubscribeUserIndexColor.push(randomInteger(0, 6))));
         }
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public setIsExist(data) {
         this.isExist = data;

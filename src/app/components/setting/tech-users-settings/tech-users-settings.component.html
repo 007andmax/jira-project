@@ -53,8 +53,8 @@
                                             </label>
                                         </div>
                                         <div
-                                            class="tab-pane__table-cell active-users-table__user-name"
-                                            (click)="onFilter('name')"
+                                            class="tab-pane__table-cell active-users-table__user-name pointer"
+                                            (click)="onFilter('name',techUsers)"
                                         >
                                             User Name
                                             <div class="qt-table-modern__sorting--new"></div>
@@ -238,8 +238,8 @@
                                             </label>
                                         </div>
                                         <div
-                                            class="tab-pane__table-cell active-users-table__user-name"
-                                            (click)="onFilter('name')"
+                                            class="tab-pane__table-cell active-users-table__user-name pointer"
+                                            (click)="onFilter('name',userlist)"
                                         >
                                             User Name
                                             <div class="qt-table-modern__sorting--new"></div>
@@ -675,10 +675,7 @@
                 <div class="qt-mt-6 dp-info-area">PNG, JPG or GIF (max. 2mb)</div>
             </div>
         </div>
-        <form
-            [formGroup]="techUserForm"
-            (ngSubmit)="onSubmit()"
-        >
+        <form [formGroup]="techUserForm">
             <div class="qt-input-block qt-input-line">
                 <label class="qt-input-block__label">First Name</label>
                 <input
@@ -737,21 +734,16 @@
             </div>
             <div class="qt-input-block qt-input-line">
                 <label class="qt-input-block__label">Set Tech User Role</label>
-                <div class="form-row">
-                    <select
-                        class="cmn-select form-input"
-                        formControlName="techRole"
-                    >
-                        <option
-                            *ngFor="let role of techRoles"
-                            value="{{ role }}"
-                        >
-                            {{
-                    role
-                    }}
-                        </option>
-                    </select>
-                </div>
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [list]="techRoles"
+                    [editItem]="techUserForm.value.techRole"
+                    [placeholder]="'Select'"
+                    [sort]="false"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onChangeRole($event)"
+                >
+                </app-drop-down>
             </div>
             <div class="qt-input-line__email-notify-tech-users">
                 <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">Set Email Notification for Tech User</div>

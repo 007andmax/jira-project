@@ -6,10 +6,14 @@ export class ManageTag {
     isInitEdit: boolean = false;
     disableUpdate: boolean = false;
     selected: boolean = false;
+    isInitRequest: boolean = false;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
         }
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public onInitEdit(data) {
         this.isInitEdit = data;

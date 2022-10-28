@@ -121,14 +121,17 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
   onEditGl(item) {
     if (item.isInitEdit) {
-      if (item.glNumber.length === 0 || item.disableUpdate) return;
+      if (item.glNumber.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.glNumberService
         .editGL(item.getDataForEdit())
         .subscribe(
           () => {
+            item.setIsInitRequest(false);
             this.toastrService.success("GL Number Updated Successfully");
           },
           error => {
+            item.setIsInitRequest(false);
             this.loading = false; $(".loading").css("display", "none");
           }
         );

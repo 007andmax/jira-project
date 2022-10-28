@@ -13,6 +13,8 @@ export class AddGlNumberComponent implements OnInit {
   addGl: GlNumber = new GlNumber();
   validateShort: boolean = true;
   disableCreate: boolean = false;
+  isInitRequest: boolean = false;
+  isInit: boolean = false;
   @Input() numberList: Array<GlNumber> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private glNumberService: GlNumberService,) { }
@@ -34,16 +36,21 @@ export class AddGlNumberComponent implements OnInit {
   };
   onAddGL() {
     if (this.addGl.glNumber.length === 0) this.validateShort = false;
-    if (this.addGl.glNumber.length === 0 || this.disableCreate) return;
+    if (this.addGl.glNumber.length === 0 || this.disableCreate || this.isInitRequest) return;
     if (!this.validateShort) return;
+    this.isInitRequest = true;
     this.glNumberService
       .saveGL(this.addGl.getDataForAdd()).pipe(map((res) => res),
         catchError(error => of(undefined)))
       .subscribe(() => {
         this.onClose.emit(null);
+        this.isInitRequest = false;
+      }, err => {
+        this.isInitRequest = false;
       });
   }
   onKeyUp(event) {
+    this.isInit = true;
     if (event.keyCode === 13) this.onAddGL();
   }
 }

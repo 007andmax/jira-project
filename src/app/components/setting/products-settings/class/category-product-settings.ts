@@ -14,6 +14,7 @@ export class CategoryProductSettings implements CategoryProduct {
     isInitEdit: boolean = false;
     selected: boolean = false;
     disableUpdate: boolean = false;
+    isInitRequest: boolean = false;
     constructor(data) {
         if (data) {
             for (const key in data) {
@@ -21,6 +22,9 @@ export class CategoryProductSettings implements CategoryProduct {
             }
 
         }
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public onInitEdit(data) {
         this.isInitEdit = data;

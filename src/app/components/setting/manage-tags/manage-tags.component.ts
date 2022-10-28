@@ -191,7 +191,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
 
   onEditTag(item) {
     if (item.isInitEdit) {
-      if (item.word.length === 0 || item.disableUpdate) return;
+      if (item.word.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.tagsService
         .setWordForTag(
           item.id,
@@ -200,7 +201,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         )
         .pipe(map((res) => res),
           catchError(error => of(undefined))).subscribe(data => {
+            item.setIsInitRequest(false);
             item.onInitEdit(false);
+          }, err => {
+            item.setIsInitRequest(false);
           })
     }
   }

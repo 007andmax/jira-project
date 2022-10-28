@@ -369,8 +369,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.cd.detectChanges();
   }
 
-  public onFilter(field) {
-    this.filter.onFilter(field, this.techUsers)
+  public onFilter(field, list) {
+    this.filter.onFilter(field, list)
 
   }
   /**

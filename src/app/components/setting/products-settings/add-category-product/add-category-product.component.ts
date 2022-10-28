@@ -13,7 +13,7 @@ import { GlNumber } from 'src/class/gl-number/gl-number';
   styleUrls: ['./add-category-product.component.scss']
 })
 export class AddCategoryProductComponent implements OnInit {
-
+  isInitRequest: boolean = false;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   name: string = "";
   glNumber: GlNumber;
@@ -52,10 +52,14 @@ export class AddCategoryProductComponent implements OnInit {
     }
   };
   public save() {
-    if (this.name.length === 0 || this.disableCreateCategory) return;
+    if (this.name.length === 0 || this.disableCreateCategory || this.isInitRequest) return;
+    this.isInitRequest = true;
     this.productService.addCategory(this.name, (this.glNumber) ? { id: this.glNumber.id } : null).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {
+        this.isInitRequest = false;
         this.close();
+      }, err => {
+        this.isInitRequest = false;
       })
 
   }

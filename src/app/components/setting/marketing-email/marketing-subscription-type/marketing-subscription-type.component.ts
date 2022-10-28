@@ -98,12 +98,16 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   };
   onEditSubscription(item, event) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.marketingEmailService.editSubscriptionType(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined)))
         .subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
           if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
   }
@@ -162,6 +166,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
   }
   ngOnDestroy(): void {
+    this.marketingSubscriptionList.forEach(item => (item.selected = false));
     this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
     this.sub.unsubscribe();
   }

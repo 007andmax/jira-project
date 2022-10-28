@@ -178,6 +178,9 @@ export class CommissionService {
   getUsers() {
     return this.http.get(`${this.GET_USER_API}`);
   }
+  getTechUsers() {
+    return this.http.post(`${API_URL}users/filter`, { accountType: "TECH", });
+  }
 
   /**
    * set Tech lead

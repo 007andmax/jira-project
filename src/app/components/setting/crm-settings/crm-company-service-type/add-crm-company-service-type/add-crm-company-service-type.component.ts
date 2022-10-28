@@ -12,6 +12,7 @@ import { CrmCompanyServiceType } from '../class/crm-company-service-type';
 export class AddCrmCompanyServiceTypeComponent implements OnInit {
   name: string = "";
   disableCreate: boolean = false;
+  isInitRequest: boolean = false;
   @Input() serviceTypeList: Array<CrmCompanyServiceType> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private crmService: CrmService) { }
@@ -29,14 +30,17 @@ export class AddCrmCompanyServiceTypeComponent implements OnInit {
     }
   };
   save() {
-    if (this.name.length === 0 || this.disableCreate) return;
+    if (this.name.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
     this.crmService.addServiceType(this.name).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.isInitRequest = false;
           this.onClose.emit(null);
         },
         error => {
+          this.isInitRequest = false;
         }
       );
   }
