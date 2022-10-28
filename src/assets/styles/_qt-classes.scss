@@ -54,6 +54,10 @@
   }
 }
 
+input.qt-dropdown-input {
+  padding-right: 30px;
+}
+
 .qt-dropdown-input {
   &[aria-expanded="true"] .report-caret-icon {
     transform: translateY(-50%) rotate(180deg);

@@ -201,41 +201,81 @@
     }
   }
 
+  //.qt-with-number-types { // Todo check this style
+  //  display: flex;
+  //  .dropdown-menu {
+  //    min-width: auto;
+  //    width: 100%;
+  //  }
+  //  input {
+  //    border-top-right-radius: 0;
+  //    border-bottom-right-radius: 0;
+  //  }
+  //  .primary-phone-selector {
+  //    min-width: 96px;
+  //    width: 96px;
+  //    color: $gray-800--old;
+  //    font-size: 13px;
+  //    border: 1px solid $gray-500--old;
+  //    border-left: none;
+  //    border-bottom-right-radius: 4px;
+  //    border-top-right-radius: 4px;
+  //    border-bottom-left-radius: 0;
+  //    border-top-left-radius: 0;
+  //    background: $white;
+  //    .types-btn {
+  //      width: 100%;
+  //      height: 100%;
+  //      text-align: left;
+  //      padding: 0 16px;
+  //      border: none;
+  //      border-left: none;
+  //      border-bottom-right-radius: 4px;
+  //      border-top-right-radius: 4px;
+  //      border-bottom-left-radius: 0;
+  //      border-top-left-radius: 0;
+  //      background: $white;
+  //    }
+  //  }
+  //}
+
   .qt-with-number-types {
     display: flex;
-    .dropdown-menu {
-      min-width: auto;
-      width: 100%;
+
+    &__input {
+      border-bottom-left-radius: 6px !important;
+      border-top-left-radius: 6px !important;
+      border-bottom-right-radius: 0 !important;
+      border-top-right-radius: 0 !important;
     }
-    input {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    .primary-phone-selector {
-      min-width: 96px;
-      width: 96px;
-      color: $gray-800--old;
-      font-size: 13px;
-      border: 1px solid $gray-500--old;
-      border-left: none;
-      border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      background: $white;
-      .types-btn {
-        width: 100%;
-        height: 100%;
-        text-align: left;
-        padding: 0 16px;
-        border: none;
-        border-left: none;
-        border-bottom-right-radius: 4px;
-        border-top-right-radius: 4px;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        background: $white;
+
+    &__types-btn {
+      border-bottom-right-radius: 6px;
+      border-top-right-radius: 6px;
+      border: 1px solid $gray-200;
+      border-left-color: transparent;
+      width: 100px;
+      height: 100%;
+      color: $gray-900;
+      padding: 0 30px 0 12px;
+      font-size: 14px;
+      line-height: 17px;
+      background-color: $white;
+
+      &::placeholder {
+        color: $gray-400;
       }
+      &:hover {
+        border-color: $gray-300;
+      }
+      &:focus {
+        outline: none;
+        border-color: $blue-light-600;
+      }
+    }
+
+    .report-caret-icon {
+
     }
   }
 
@@ -267,26 +307,31 @@
         &:before {
           position: absolute;
           content: "Tags";
-          @include body-m__sb;
-          color: $primary-2;
+          font-size: 13px;
+          line-height: 16px;
+          font-weight: 500;
+          color: $gray-500;
           left: 0;
           top: -28px;
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 12px 10px 10px 36px;
+        padding: 10px 10px 10px 36px;
         font-size: 13px;
-        font-weight: $fw-regular;
-        color: $gray-600--old;
-        top: 12px;
+        font-weight: 400;
+        color: $gray-900;
+        top: 10px;
       }
       .mat-form-field-infix {
-        border: 1px solid $gray-500--old;
-        border-radius: 4px;
+        border: 1px solid $gray-200;
+        border-radius: 6px;
         padding: 0;
         padding-left: 36px;
         position: relative;
         min-height: 36px;
+        &:hover {
+          border-color: $gray-300;
+        }
         &:before {
           left: 12px;
           top: 11px;
