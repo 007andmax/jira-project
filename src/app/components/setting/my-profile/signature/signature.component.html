@@ -1,0 +1,42 @@
+<div
+    class="cmn-area profile"
+    [hidden]="loading"
+>
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Signature</div>
+    </div>
+    <div class="tab-pane__body">
+        <div class="tab-pane__row">
+            <div
+                *ngIf="content"
+                [innerHTML]="content"
+            ></div>
+            <div
+                class="qt-df qt-ai-c no-content"
+                *ngIf="!content"
+                ngbDropdown
+            >
+                <img
+                    class="qt-mb-24"
+                    src="./assets/img/icons/no-signature.svg"
+                >
+                <h3 class="qt-fs-16 qt-fw-500 qt-mb-8 qt-color-gray-900">No Signature</h3>
+                <span class="qt-fs-14 qt-fw-400 qt-color-gray-500 qt-mb-24">Get started by creating a signature</span>
+                <div
+                    class="qt-button --md --gray qt-jc-c pointer  button-gl-number__add"
+                    ngbDropdownToggle
+                >
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    Create New
+                </div>
+                <add-signature ngbDropdownMenu></add-signature>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
+</div>

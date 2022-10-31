@@ -12,6 +12,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AgmCoreModule } from '@agm/core';
 import { MyProfileRoutingModule } from './my-profile-routing.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { SignatureComponent } from './signature/signature.component';
+import { AddSignatureComponent } from './signature/add-signature/add-signature.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
@@ -20,11 +23,14 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         ProfileComponent,
         AccountComponent,
         EmailNotificationsComponent,
-        ActivityHistoryComponent
+        ActivityHistoryComponent,
+        SignatureComponent,
+        AddSignatureComponent
     ],
     imports: [
         CommonModule,
         NgbModule,
+        AngularEditorModule,
         ImageCropperModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),
