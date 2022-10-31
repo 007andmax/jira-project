@@ -104,9 +104,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       if (data.action === "TAG_SAVED") {
         let index = this.ticketTags.findIndex(item => item.id === data.data.id);
         if (index > -1) {
-          this.ticketTags[index] = data.data;
+          this.ticketTags[index] = new ManageTag(data.data);
         } else {
-          this.ticketTags.push(data.data);
+          this.ticketTags.push(new ManageTag(data.data));
         }
       }
       if (data.action === "TAG_REMOVED") {
@@ -215,7 +215,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   getAllTickets() {
     this.serviceAllTickets.subscribe(
       res => {
-        this.ticketTags = res;
+        this.ticketTags = res.map(item => new ManageTag(item));
         console.log("this.ticketTags 2", this.ticketTags);
       },
       error => {
