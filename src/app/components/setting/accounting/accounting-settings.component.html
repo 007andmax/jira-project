@@ -14,14 +14,11 @@
                 <div class="qt-df qt-pos-rel">
                     <a
                         href="javascript:;"
-                        class="qt-button --md --gray button-gl-number__delete qt-ml-12"
+                        class="qt-button --md --gray button-gl-number__delete qt-ml-12 pointer"
                         *ngIf="getSelectedCount() > 0"
+                        (click)="removeGls()"
                     >
-                        <div
-                            class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"
-                            (click)="removeGls()"
-                        >
-                        </div>
+                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                     </a>
                     <a
                         href="javascript:;"
