@@ -1,193 +1,211 @@
-<div class="qt-aside-modern__content --less-padding new-companies-content__modal--content">
-    <div class="col-md-12">
-        <div class="logo-upload d-f">
-            <img
-                *ngIf="company.logo"
-                [src]="company.logo.base64"
-            >
-            <i
-                class="icon__upload-company-logo qt-sz-64 qt-bg-contain qt-mr-16"
-                *ngIf="!company.logo"
-            ></i>
-            <div>
-                <div class="new-link">
-                    <span (click)="uploadFile.click()">Upload Company logo</span>
-                    <span
-                        *ngIf="company.logo"
-                        class="remove-link pointer"
-                        (click)="removeLogo()"
-                    >
+<div class="qt-aside-modern__content new-companies-content__modal--content">
+    <div class="qt-inputs-row">
+       <div class="qt-input-block">
+         <div class="logo-upload d-f">
+           <img
+             *ngIf="company.logo"
+             [src]="company.logo.base64"
+           >
+           <i
+             class="icon__upload-company-logo qt-sz-64 qt-bg-contain qt-mr-16"
+             *ngIf="!company.logo"
+           ></i>
+           <div>
+             <div class="new-link">
+               <span (click)="uploadFile.click()">Upload Company logo</span>
+               <span
+                 *ngIf="company.logo"
+                 class="remove-link pointer"
+                 (click)="removeLogo()"
+               >
                         Remove logo
                     </span>
-                </div>
-                <p>Maximum size of 2MB. JPG, GIF, PNG</p>
-            </div>
-            <input
-                #uploadFile
-                id="upload-file"
-                type="file"
-                accept="image/gif, image/jpeg, image/png, image/jpg"
-                (input)="uploadFileOnBrower($event)"
-            >
-        </div>
+             </div>
+             <p>Maximum size of 2MB. JPG, GIF, PNG</p>
+           </div>
+           <input
+             #uploadFile
+             id="upload-file"
+             type="file"
+             accept="image/gif, image/jpeg, image/png, image/jpg"
+             (input)="uploadFileOnBrower($event)"
+           >
+         </div>
+       </div>
     </div>
-    <div class="col-md-12 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="validate.getNameIsExist()"
-        >
-            This company name already occupied
-        </mat-error>
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getName()"
-        >
-            Company name is required
-        </mat-error>
-        <p>Company Name</p>
-        <input
-            type="text"
-            [(ngModel)]="company.name"
-            [ngClass]="{'--input-error' : validate.getNameIsExist() || !validate.getName()}"
-            (blur)="onChangeName()"
-            placeholder="Write Company or Search Company"
-        >
+    <div class="qt-inputs-row --required">
+       <div class="qt-input-block">
+         <div class="qt-input-block__label">Company Name</div>
+         <input
+           type="text"
+           [(ngModel)]="company.name"
+           [ngClass]="{'--input-error' : validate.getNameIsExist() || !validate.getName()}"
+           (blur)="onChangeName()"
+           placeholder="Write Company or Search Company"
+         >
+         <mat-error
+           class="invalid-feedback"
+           *ngIf="validate.getNameIsExist()"
+         >
+           This company name already occupied
+         </mat-error>
+         <mat-error
+           class="invalid-feedback"
+           *ngIf="!validate.getName()"
+         >
+           Company name is required
+         </mat-error>
+       </div>
     </div>
-    <div class="col-md-6">
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Company Type'"
-            [field]="'title'"
-            [list]="companyTypes"
-            [search]="true"
-            [change]="true"
-            [validate]="validate.getType()"
-            [errorMessage]="'Client Type is required'"
-            [title]="'Company Type'"
-            (onSelectedItem)="onSelectCompanyTypes($event)"
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Company Type'"
+          [field]="'title'"
+          [list]="companyTypes"
+          [search]="true"
+          [change]="true"
+          [validate]="validate.getType()"
+          [errorMessage]="'Client Type is required'"
+          [title]="'Company Type'"
+          (onSelectedItem)="onSelectCompanyTypes($event)"
         >
         </app-drop-down>
-    </div>
-    <div class="col-md-6">
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Industry'"
-            [list]="industries"
-            [field]="'name'"
-            [search]="true"
-            [change]="true"
-            [title]="'Industry'"
-            (onSelectedItem)="onSelectClientIndustry($event)"
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Industry'"
+          [list]="industries"
+          [field]="'name'"
+          [search]="true"
+          [change]="true"
+          [title]="'Industry'"
+          (onSelectedItem)="onSelectClientIndustry($event)"
         >
         </app-drop-down>
+      </div>
     </div>
-    <div class="col-md-12 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getDomain()"
-        >
-            Please enter a valid domain
-        </mat-error>
-        <p>Domain Name</p>
-        <input
+    <div class="qt-inputs-row --required">
+       <div class="qt-input-block">
+         <div class="qt-input-block__label">Domain Name</div>
+         <input
+           type="text"
+           [ngClass]="{'--input-error' : !validate.getDomain()}"
+           [(ngModel)]="company.domain"
+           (blur)="onChangeDomain()"
+           placeholder="example.com"
+         >
+         <mat-error
+           class="invalid-feedback"
+           *ngIf="!validate.getDomain()"
+         >
+           Please enter a valid domain
+         </mat-error>
+       </div>
+    </div>
+    <div class="qt-inputs-row qt-inputs-row__divider">
+      <div class="qt-input-block">
+        <div class="qt-input-block__subtitle qt-mt-12">Billing Address</div>
+      </div>
+    </div>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block --required">
+          <div class="qt-input-block__label">Billing Location Name</div>
+          <input
+              type="text"
+              [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
+              [(ngModel)]="company.addresses[0].locationName"
+              (input)="validate.resetBillindAddress()"
+              placeholder="Enter Location Name"
+          >
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getBillindAddress()"
+          >
+            Billing Location Name is required
+          </mat-error>
+      </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block">
+          <div class="qt-input-block__label">Location</div>
+          <input
             type="text"
-            [ngClass]="{'--input-error' : !validate.getDomain()}"
-            [(ngModel)]="company.domain"
-            (blur)="onChangeDomain()"
-            placeholder="example.com"
+            location-is-init="false"
+            [(ngModel)]="company.addresses[0].address"
+            (focus)="onCheckGoogleAutoComplete($event,0)"
+            placeholder="Enter Location"
+          >
+        </div>
+      </div>
+    </div>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f33 qt-flex-md-100">
+        <div class="qt-input-block__label">Suite No.</div>
+        <input
+          type="text"
+          [(ngModel)]="company.addresses[0].suiteNumber"
+          placeholder="Enter Suite Number"
         >
+      </div>
+      <div class="qt-input-block qt-f33 qt-flex-md-100">
+        <div class="qt-input-block__label">Zip</div>
+        <input
+          type="text"
+          [(ngModel)]="company.addresses[0].postalCode"
+          placeholder="Enter Zip"
+        >
+      </div>
+      <div class="qt-input-block qt-f33 qt-flex-md-100 --required">
+        <div class="qt-input-block__label">Phone Number</div>
+        <input
+          type="text"
+          (input)="onChangePhoneNumber()"
+          [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+          *ngIf="company.addresses[0].phoneNumbers.length > 0"
+          [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+          placeholder="Enter Phone Number"
+          prefix="+1"
+          mask="(000) 000-0000 Ext: 999999||000-000-0000"
+          [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+          [dropSpecialCharacters]="false"
+        >
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="!validate.getPhoneNumber()"
+        >
+          Phone number is required
+        </mat-error>
+      </div>
     </div>
-    <div class="col-md-12 billing-background">
-        <div class="col-md-12 billing-divider">
-            <p>Billing Address</p>
+    <div class="qt-inputs-row qt-inputs-row__divider">
+      <div class="qt-df qt-ai-c qt-jc-sb">
+        <div class="qt-input-block__label">
+          <div class="qt-input-block__subtitle qt-mt-12">Shipping Address</div>
         </div>
-        <div class="col-md-12 --required">
-            <p>Billing Location Name</p>
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getBillindAddress()"
+        <div class="same-as-billing">
+          <div class="qt-df qt-ai-c">
+            <label
+              class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+              for="email-payment"
             >
-                Billing Location Name is required
-            </mat-error>
-            <input
-                type="text"
-                [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
-                [(ngModel)]="company.addresses[0].locationName"
-                (input)="validate.resetBillindAddress()"
-                placeholder="Enter Location Name"
-            >
+              <input
+                id="email-payment"
+                type="checkbox"
+                (change)="onSameAsBilling($event)"
+                [(ngModel)]="company.addresses[1].sameAsBilling"
+              >
+              <span></span>
+              <div class="qt-fs-12 qt-fw-600 qt-ml-8">Same as Billing Address</div>
+            </label>
+          </div>
         </div>
-        <div class="col-md-12">
-            <p>Location</p>
-            <input
-                type="text"
-                location-is-init="false"
-                [(ngModel)]="company.addresses[0].address"
-                (focus)="onCheckGoogleAutoComplete($event,0)"
-                placeholder="Enter Location"
-            >
-        </div>
-        <div class="col-md-4">
-            <p>Suite No.</p>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[0].suiteNumber"
-                placeholder="Enter Suite Number"
-            >
-        </div>
-        <div class="col-md-3">
-            <p>Zip</p>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[0].postalCode"
-                placeholder="Enter Zip"
-            >
-        </div>
-        <div class="col-md-5 --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getPhoneNumber()"
-            >
-                Phone number is required
-            </mat-error>
-            <p>Phone Number</p>
-            <input
-                type="text"
-                (input)="onChangePhoneNumber()"
-                [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
-                *ngIf="company.addresses[0].phoneNumbers.length > 0"
-                [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
-                placeholder="Enter Phone Number"
-                prefix="+1"
-                mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                [dropSpecialCharacters]="false"
-            >
-        </div>
+      </div>
     </div>
-    <div class="col-md-12 shipping-background">
-        <div class="col-md-12 billing-divider qt-df qt-ai-c qt-jc-sb">
-            <p>Shipping Address</p>
-            <div class="same-as-billing">
-                <div class="qt-df qt-ai-c">
-                    <label
-                        class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                        for="email-payment"
-                    >
-                        <input
-                            id="email-payment"
-                            type="checkbox"
-                            (change)="onSameAsBilling($event)"
-                            [(ngModel)]="company.addresses[1].sameAsBilling"
-                        >
-                        <span></span>
-                    </label>
-                    <span class="qt-fs-12 qt-fw-600">Same as Billing Address</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <p>Shipping Location Name</p>
+    <div class="qt-inputs-row shipping-background">
+        <div class="qt-input-block">
+            <div class="qt-input-block__label">Shipping Location Name</div>
             <input
                 type="text"
                 [(ngModel)]="company.addresses[1].locationName"
@@ -195,246 +213,277 @@
                 [disabled]="company.addresses[1].sameAsBilling"
             >
         </div>
-        <div class="col-md-12">
-            <p>Location</p>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[1].address"
-                location-is-init="false"
-                (focus)="onCheckGoogleAutoComplete($event,1)"
-                placeholder="Enter Location"
-                [disabled]="company.addresses[1].sameAsBilling"
-            >
+    </div>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block">
+        <div class="qt-input-block__label">Location</div>
+        <input
+          type="text"
+          [(ngModel)]="company.addresses[1].address"
+          location-is-init="false"
+          (focus)="onCheckGoogleAutoComplete($event,1)"
+          placeholder="Enter Location"
+          [disabled]="company.addresses[1].sameAsBilling"
+        >
+      </div>
+    </div>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block__label">Suite No.</div>
+        <input
+          type="text"
+          [(ngModel)]="company.addresses[1].suiteNumber"
+          placeholder="Enter Suite Number"
+          [disabled]="company.addresses[1].sameAsBilling"
+        >
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block__label">Zip</div>
+        <input
+          type="text"
+          [(ngModel)]="company.addresses[1].postalCode"
+          placeholder="Enter Zip"
+          [disabled]="company.addresses[1].sameAsBilling"
+        >
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block__label">Phone Number</div>
+        <input
+          type="text"
+          (input)="onChangeShippingPhoneNumber()"
+          [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
+          *ngIf="company.addresses[1].phoneNumbers.length > 0"
+          [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
+          placeholder="Enter Phone Number"
+          [disabled]="company.addresses[1].sameAsBilling"
+          prefix="+1"
+          mask="(000) 000-0000 Ext: 999999||000-000-0000"
+          [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+          [dropSpecialCharacters]="false"
+        >
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="!validate.getShippingPhoneNumber()"
+        >
+          Phone number is required
+        </mat-error>
+      </div>
+    </div>
+    <div class="details-background">
+      <div class="qt-inputs-row">
+        <div class="qt-input-block">
+          <div class="qt-input-block__subtitle">Contact Detail</div>
         </div>
-        <div class="col-md-4">
-            <p>Suite No.</p>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[1].suiteNumber"
-                placeholder="Enter Suite Number"
-                [disabled]="company.addresses[1].sameAsBilling"
-            >
+      </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+          <div class="qt-input-block__label">First Name</div>
+          <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getFirstName()}"
+            (input)="onChangeFirstName()"
+            [(ngModel)]="company.contacts[0].firstName"
+            placeholder="Enter First Name"
+          >
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getFirstName()"
+          >
+            First name is required
+          </mat-error>
         </div>
-        <div class="col-md-3">
-            <p>Zip</p>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[1].postalCode"
-                placeholder="Enter Zip"
-                [disabled]="company.addresses[1].sameAsBilling"
-            >
+        <div class="qt-input-block qt-f50 qt-flex-md-100">
+          <div class="qt-input-block">Last Name</div>
+          <input
+            type="text"
+            [(ngModel)]="company.contacts[0].lastName"
+            placeholder="Enter Last Name"
+          >
         </div>
-        <div class="col-md-5 --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getShippingPhoneNumber()"
-            >
-                Phone number is required
-            </mat-error>
-            <p>Phone Number</p>
-            <input
+      </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50 qt-flex-md-100">
+          <app-drop-down
+            #role
+            [class]="['qt-select-input-40']"
+            [placeholder]="'Select Job title'"
+            [list]="jobTitleList"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [title]="'Job title'"
+            [maxlength]="30"
+            [add]="true"
+            (onSelectedItem)="onSelectJobTitle($event)"
+          >
+          </app-drop-down>
+        </div>
+        <div class="qt-input-block qt-f50 qt-flex-md-100">
+          <div class="qt-input-block">
+            <div class="qt-input-block__label">Primary Phone Number</div>
+            <div class="qt-with-number-types">
+              <input
+                class="qt-with-number-types__input"
                 type="text"
-                (input)="onChangeShippingPhoneNumber()"
-                [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
-                *ngIf="company.addresses[1].phoneNumbers.length > 0"
-                [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
-                placeholder="Enter Phone Number"
-                [disabled]="company.addresses[1].sameAsBilling"
+                *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+                placeholder="Enter Primary Number"
                 prefix="+1"
                 mask="(000) 000-0000 Ext: 999999||000-000-0000"
                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                 [dropSpecialCharacters]="false"
-            >
-        </div>
-    </div>
-    <div class="col-md-12 details-background">
-        <div class="col-md-12 details-divider">
-            <p>Contact Detail</p>
-        </div>
-        <div class="col-md-6 --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getFirstName()"
-            >
-                First name is required
-            </mat-error>
-            <p>First Name</p>
-            <input
-                type="text"
-                [ngClass]="{'--input-error' : !validate.getFirstName()}"
-                (input)="onChangeFirstName()"
-                [(ngModel)]="company.contacts[0].firstName"
-                placeholder="Enter First Name"
-            >
-        </div>
-        <div class="col-md-6">
-            <p>Last Name</p>
-            <input
-                type="text"
-                [(ngModel)]="company.contacts[0].lastName"
-                placeholder="Enter Last Name"
-            >
-        </div>
-        <div class="col-md-6">
-            <app-drop-down
-                #role
-                [class]="['qt-select-input-40']"
-                [placeholder]="'Select Job title'"
-                [list]="jobTitleList"
-                [field]="'name'"
-                [search]="true"
-                [change]="true"
-                [title]="'Job title'"
-                [maxlength]="30"
-                [add]="true"
-                (onSelectedItem)="onSelectJobTitle($event)"
-            >
-            </app-drop-down>
-        </div>
-        <div class="col-md-6">
-            <p>Primary Phone Number</p>
-            <div class="with-number-types">
-                <input
-                    type="text"
-                    *ngIf="company.contacts[0].phoneNumbers.length > 0"
-                    [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-                    placeholder="Enter Primary Number"
-                    prefix="+1"
-                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                    [dropSpecialCharacters]="false"
+              >
+              <div
+                class="grey-dropdown"
+                ngbDropdown
+              >
+                <button
+                  class="qt-with-number-types__types-btn"
+                  id="dropdownBasic"
+                  *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                  ngbDropdownToggle
+                  [textContent]="company.contacts[0].phoneNumbers[0].typeNumber"
                 >
+                </button>
+                <i class="icn-sm report-caret-icon"></i>
                 <div
-                    class="grey-dropdown"
-                    ngbDropdown
+                  ngbDropdownMenu
+                  aria-labelledby="dropdownBasic"
                 >
+                  <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="phoneTypes"
+                  >
                     <button
-                        class="types-btn"
-                        id="dropdownBasic"
-                        *ngIf="company.contacts[0].phoneNumbers.length > 0"
-                        ngbDropdownToggle
-                        [textContent]="company.contacts[0].phoneNumbers[0].typeNumber"
-                    >
-                    </button>
-                    <i class="icn-sm report-caret-icon"></i>
-                    <div
-                        ngbDropdownMenu
-                        aria-labelledby="dropdownBasic"
-                    >
-                        <ng-template
-                            ngFor
-                            let-item
-                            [ngForOf]="phoneTypes"
-                        >
-                            <button
-                                ngbDropdownItem
-                                [textContent]="item"
-                                (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"
-                            ></button>
-                        </ng-template>
-                    </div>
+                      ngbDropdownItem
+                      [textContent]="item"
+                      (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"
+                    ></button>
+                  </ng-template>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-md-6 --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getPrimaryContactEmail()"
-            >
-                Please enter a valid email address
-            </mat-error>
-            <p>Primary Contact Email</p>
-            <input
-                type="text"
-                [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
-                (input)="onChangePrimaryEmail()"
-                [(ngModel)]="company.contacts[0].primaryEmail"
-                placeholder="Primary Email Address"
-            >
+      </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+          <div class="qt-input-block__label">Primary Contact Email</div>
+          <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
+            (input)="onChangePrimaryEmail()"
+            [(ngModel)]="company.contacts[0].primaryEmail"
+            placeholder="Primary Email Address"
+          >
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getPrimaryContactEmail()"
+          >
+            Please enter a valid email address
+          </mat-error>
         </div>
-        <div class="col-md-12">
-            <p>Get Subscribe</p>
-            <app-company-subscription
-                [editItem]="company.contacts[0].defaultSubscriptions"
-                (subscribeChange)="onChangeSubscribe($event)"
-            ></app-company-subscription>
+      </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block">
+          <div class="qt-input-block__label">Get Subscribe</div>
+          <app-company-subscription
+            [editItem]="company.contacts[0].defaultSubscriptions"
+            (subscribeChange)="onChangeSubscribe($event)"
+          ></app-company-subscription>
+        </div>
+      </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block">
+          <div class="qt-input-block__subtitle qt-mt-24">Settings</div>
         </div>
     </div>
-    <div class="col-md-12 details-divider">
-        <p>Settings</p>
-    </div>
-    <div class="col-md-6">
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
-    </div>
-    <div class="col-md-6">
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Payment Terms'"
-            [field]="'title'"
-            [list]="paymentTerms"
-            [search]="true"
-            [change]="true"
-            [title]="'Payment Terms'"
-            (onSelectedItem)="onSelectPaymentTerms($event)"
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Payment Terms'"
+          [field]="'title'"
+          [list]="paymentTerms"
+          [search]="true"
+          [change]="true"
+          [title]="'Payment Terms'"
+          (onSelectedItem)="onSelectPaymentTerms($event)"
         >
         </app-drop-down>
+      </div>
     </div>
-    <div class="col-md-6">
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Payment Method'"
-            [field]="'title'"
-            [list]="paymentMethods"
-            [search]="true"
-            [change]="true"
-            [title]="'Payment Method'"
-            (onSelectedItem)="onSelectPaymentMethod($event)"
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Payment Method'"
+          [field]="'title'"
+          [list]="paymentMethods"
+          [search]="true"
+          [change]="true"
+          [title]="'Payment Method'"
+          (onSelectedItem)="onSelectPaymentMethod($event)"
         >
         </app-drop-down>
-    </div>
-    <div class="col-md-6">
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            #serviceTypeDp
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Service Type'"
-            [field]="'name'"
-            [list]="serviceTypes"
-            [search]="true"
-            [change]="true"
-            [title]="'Service Type'"
-            (onSelectedItem)="onSelectServiceTypes($event)"
+          #serviceTypeDp
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Service Type'"
+          [field]="'name'"
+          [list]="serviceTypes"
+          [search]="true"
+          [change]="true"
+          [title]="'Service Type'"
+          (onSelectedItem)="onSelectServiceTypes($event)"
         >
         </app-drop-down>
+      </div>
     </div>
-    <div class="col-md-6">
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Sales Person'"
-            [field]="'name'"
-            [list]="listPersons"
-            [search]="true"
-            [change]="true"
-            [title]="'Sales Person'"
-            (onSelectedItem)="onSelectTechLead($event)"
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Sales Person'"
+          [field]="'name'"
+          [list]="listPersons"
+          [search]="true"
+          [change]="true"
+          [title]="'Sales Person'"
+          (onSelectedItem)="onSelectTechLead($event)"
         >
         </app-drop-down>
+      </div>
     </div>
-    <div class="col-md-12">
+    <div class="qt-inputs-row">
+      <div class="qt-inputs-block">
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+      </div>
     </div>
-    <div class="col-md-12">
+    <div class="qt-inputs-row">
+      <div class="qt-input-block">
         <company-associate (companiesChange)="onChangedAssociatedCompanies($event)"></company-associate>
+      </div>
     </div>
-    <div class="col-md-12 editable-field">
-        <p>Note for Company</p>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block editable-field">
+        <div class="qt-input-block__label">Note for Company</div>
         <div class="editable-description">
             <textarea
-                appTextArea
-                [limit]="250"
-                id="company-description"
-                placeholder="Write note for company"
-                (input)="onChangeDescription($event)"
+              appTextArea
+              [limit]="250"
+              id="company-description"
+              placeholder="Write note for company"
+              (input)="onChangeDescription($event)"
             ></textarea>
         </div>
+      </div>
     </div>
 </div>

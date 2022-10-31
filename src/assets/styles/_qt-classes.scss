@@ -104,6 +104,11 @@ input.qt-dropdown-input {
     margin-bottom: 8px;
   }
 
+  &__subtitle {
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
   //mat-error { // Todo check this style
   //  position: absolute;
   //  top: 6px;
@@ -186,6 +191,42 @@ input.qt-dropdown-input {
   }
   .date-picker {
     width: 100%;
+  }
+}
+
+.qt-with-number-types {
+  display: flex;
+
+  &__input {
+    border-bottom-left-radius: 6px !important;
+    border-top-left-radius: 6px !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+  &__types-btn {
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    border: 1px solid $gray-200;
+    border-left-color: transparent;
+    width: 100px;
+    height: 100%;
+    color: $gray-900;
+    padding: 0 30px 0 12px;
+    font-size: 14px;
+    line-height: 17px;
+    background-color: $white;
+
+    &::placeholder {
+      color: $gray-400;
+    }
+    &:hover {
+      border-color: $gray-300;
+    }
+    &:focus {
+      outline: none;
+      border-color: $blue-light-600;
+    }
   }
 }
 

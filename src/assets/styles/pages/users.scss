@@ -239,45 +239,41 @@
   //  }
   //}
 
-  .qt-with-number-types {
-    display: flex;
-
-    &__input {
-      border-bottom-left-radius: 6px !important;
-      border-top-left-radius: 6px !important;
-      border-bottom-right-radius: 0 !important;
-      border-top-right-radius: 0 !important;
-    }
-
-    &__types-btn {
-      border-bottom-right-radius: 6px;
-      border-top-right-radius: 6px;
-      border: 1px solid $gray-200;
-      border-left-color: transparent;
-      width: 100px;
-      height: 100%;
-      color: $gray-900;
-      padding: 0 30px 0 12px;
-      font-size: 14px;
-      line-height: 17px;
-      background-color: $white;
-
-      &::placeholder {
-        color: $gray-400;
-      }
-      &:hover {
-        border-color: $gray-300;
-      }
-      &:focus {
-        outline: none;
-        border-color: $blue-light-600;
-      }
-    }
-
-    .report-caret-icon {
-
-    }
-  }
+  //.qt-with-number-types { // Todo check this style
+  //  display: flex;
+  //
+  //  &__input {
+  //    border-bottom-left-radius: 6px !important;
+  //    border-top-left-radius: 6px !important;
+  //    border-bottom-right-radius: 0 !important;
+  //    border-top-right-radius: 0 !important;
+  //  }
+  //
+  //  &__types-btn {
+  //    border-bottom-right-radius: 6px;
+  //    border-top-right-radius: 6px;
+  //    border: 1px solid $gray-200;
+  //    border-left-color: transparent;
+  //    width: 100px;
+  //    height: 100%;
+  //    color: $gray-900;
+  //    padding: 0 30px 0 12px;
+  //    font-size: 14px;
+  //    line-height: 17px;
+  //    background-color: $white;
+  //
+  //    &::placeholder {
+  //      color: $gray-400;
+  //    }
+  //    &:hover {
+  //      border-color: $gray-300;
+  //    }
+  //    &:focus {
+  //      outline: none;
+  //      border-color: $blue-light-600;
+  //    }
+  //  }
+  //}
 
   app-company-tags {
     > .col-md-12,

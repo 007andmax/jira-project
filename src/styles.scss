@@ -640,11 +640,14 @@ documents-edit-info {
         color: $gray-600--old;
       }
       .mat-form-field-infix {
-        border: 1px solid $gray-500--old;
+        border: 1px solid $gray-200;
         border-radius: 4px;
         padding-left: 36px;
         position: relative;
         min-height: 48px;
+        &:hover {
+          border-color: $gray-300;
+        }
         &:before {
           left: 12px;
           top: 15px;
@@ -2786,19 +2789,19 @@ app-quotes-item {
     background: $white;
   }
 
-  .details-background {
-    padding: 6px 17px 30px;
-    background: $gray-100--old;
-    border-top: 1px solid $gray-400--old;
-    border-bottom: 1px solid $gray-400--old;
-    width: calc(100% + 16px);
-    margin-left: -17px;
-    margin-top: 24px;
-
-    > [class*="col-md-"] {
-      margin-top: 20px;
-    }
-  }
+  //.details-background { // Todo check this style
+  //  padding: 6px 17px 30px;
+  //  background: $gray-100--old;
+  //  border-top: 1px solid $gray-400--old;
+  //  border-bottom: 1px solid $gray-400--old;
+  //  width: calc(100% + 16px);
+  //  margin-left: -17px;
+  //  margin-top: 24px;
+  //
+  //  > [class*="col-md-"] {
+  //    margin-top: 20px;
+  //  }
+  //}
 
   //.light-dropdown .report-caret-icon { // Todo check this style
   //  right: 12px;
@@ -2829,6 +2832,7 @@ app-quotes-item {
     .mat-form-field-infix {
       min-height: 40px !important;
       padding: 0;
+      height: 40px;
 
       input {
         border: none;
@@ -2836,6 +2840,12 @@ app-quotes-item {
         @media (max-width: 767px) {
           height: 40px !important;
         }
+      }
+    }
+    .mat-form-field-infix {
+      input {
+        height: 38px !important;
+        margin: 0;
       }
     }
 
@@ -2855,7 +2865,7 @@ app-quotes-item {
     }
 
     .mat-form-field-label {
-      top: 14px;
+      top: 10px;
 
       @media (max-width: 767px) {
         top: 11px;
