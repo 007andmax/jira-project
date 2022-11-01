@@ -181,3 +181,34 @@
         </div>
     </div>
 </div>
+<div
+    class="archive-modal"
+    *ngIf="isSignaturePage()"
+>
+    <button
+        class="close-modal"
+        (click)=cancelConfirm()
+    ></button>
+    <div class="archive-modal__body">
+        <h3>Delete Signature</h3>
+        <p>
+            Are you sure that you want to delete the signature?
+        </p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="d-f qt-jc-fe">
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

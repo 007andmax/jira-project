@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { SignatureService } from 'src/app/services/signature/signature.service';
 
 @Component({
   selector: 'add-signature',
@@ -8,8 +10,6 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class AddSignatureComponent implements OnInit {
   messageContent: string = '';
-  messageHTML: string = '';
-  opened = false;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
@@ -49,9 +49,19 @@ export class AddSignatureComponent implements OnInit {
     uploadUrl: 'v1/image',
     sanitize: false,
   };
-  constructor() { }
+  @Input() signatureDrop: NgbDropdown;
+  constructor(private signatureService: SignatureService) { }
 
   ngOnInit() {
   }
-
+  close() {
+    this.messageContent = '';
+    this.signatureDrop.close();
+  }
+  save() {
+    this.signatureService.setSignature(this.messageContent).subscribe(data => {
+      this.messageContent = '';
+      this.signatureDrop.close();
+    });
+  }
 }

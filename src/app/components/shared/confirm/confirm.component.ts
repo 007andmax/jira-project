@@ -49,7 +49,11 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'ARCHIVE_COMPANY'
       && this.action !== 'DEARCHIVE_COMPANY'
       && this.action !== 'DELETE_MANAGE_TAG'
-      && !this.isSettingsPage()
+      && !this.isSignaturePage()
+      && !this.isSettingsPage();
+  }
+  public isSignaturePage() {
+    return this.action === 'DELETE_SIGNATURE';
   }
   public isSettingsPage() {
     return this.action === 'DELETE_GL_NUMBER' ||

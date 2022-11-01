@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { DELETE_SIGNATURE } from 'src/app/const/confirm';
 import { SignatureService } from 'src/app/services/signature/signature.service';
+import { SignatureStateService } from 'src/app/states/signature/signature-state.service';
+import { EditSignatureComponent } from './edit-signature/edit-signature.component';
 
 @Component({
   selector: 'signature',
@@ -9,7 +16,14 @@ import { SignatureService } from 'src/app/services/signature/signature.service';
 export class SignatureComponent implements OnInit {
   content: string;
   loading: boolean = true;
-  constructor(private signatureService: SignatureService) { }
+  sub: Subscription = new Subscription();
+  @ViewChild('signatureDrop') signatureDrop: NgbDropdown;
+  @ViewChild('signatureEditDrop') signatureEditDrop: NgbDropdown;
+  @ViewChild('editSignature') editSignature: EditSignatureComponent;
+  constructor(private signatureService: SignatureService,
+    private confirmStateService: ConfirmStateService,
+    private signatureStateService: SignatureStateService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.signatureService.getSignature().subscribe((data: any) => {
@@ -20,6 +34,26 @@ export class SignatureComponent implements OnInit {
     }, err => {
       this.loading = false;
     })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_SIGNATURE) {
+          this.onRemove();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
-
+  editContent() {
+    this.editSignature.onInitedit(this.content);
+  }
+  onRemove() {
+    this.signatureService.removeSignature().subscribe(data => {
+      this.content = null;
+    })
+  }
+  remove() {
+    this.confirmStateService.setConfirmAction(DELETE_SIGNATURE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Remove Industry`;
+  }
 }

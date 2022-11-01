@@ -13,4 +13,13 @@ export class SignatureService {
   public getSignature() {
     return this.http.get(this.apiUrl + `settings/userProfile/signature`);
   }
+  public removeSignature() {
+    return this.http.delete(this.apiUrl + `settings/userProfile/signature`);
+  }
+  public setSignature(content) {
+    return this.http.post(this.apiUrl + `settings/userProfile/signature`, { content: content });
+  }
+  public editSignature(content) {
+    return this.http.put(this.apiUrl + `settings/userProfile/signature`, { content: content });
+  }
 }

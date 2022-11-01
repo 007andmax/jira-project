@@ -2,8 +2,30 @@
     class="cmn-area profile"
     [hidden]="loading"
 >
-    <div class="tab-pane__header">
+    <div class="tab-pane__header qt-df qt-jc-sb">
         <div class="tab-pane__header-title">Signature</div>
+        <div
+            class="qt-df qt-ai-c"
+            ngbDropdown
+            #signatureEditDrop="ngbDropdown"
+        >
+            <i
+                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
+                *ngIf="content"
+                ngbDropdownToggle
+                (click)="editContent()"
+            ></i>
+            <edit-signature
+                #editSignature
+                ngbDropdownMenu
+                [signatureDrop]="signatureEditDrop"
+            ></edit-signature>
+            <i
+                class="icon__remove qt-sz-20 qt-bg-contain pointer qt-ml-24"
+                *ngIf="content"
+                (click)="remove()"
+            ></i>
+        </div>
     </div>
     <div class="tab-pane__body">
         <div class="tab-pane__row">
@@ -15,6 +37,7 @@
                 class="qt-df qt-ai-c no-content"
                 *ngIf="!content"
                 ngbDropdown
+                #signatureDrop="ngbDropdown"
             >
                 <img
                     class="qt-mb-24"
@@ -29,7 +52,10 @@
                     <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Create New
                 </div>
-                <add-signature ngbDropdownMenu></add-signature>
+                <add-signature
+                    ngbDropdownMenu
+                    [signatureDrop]="signatureDrop"
+                ></add-signature>
             </div>
         </div>
     </div>
