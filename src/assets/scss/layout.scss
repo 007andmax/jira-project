@@ -144,6 +144,52 @@ body {
       }
     }
 
+    .companies-sales-person-table__assigned-sales-person {
+      .dropdown-assign-ticket {
+        height: auto;
+        max-height: 586px;
+        width: 504px;
+        padding: 0;
+        transform: translate(0px, -36px);
+      }
+      .assign-sales-person {
+        &__header {
+          padding: 32px 32px 28px;
+
+          .qt-input-search__page-settings-input {
+            max-width: 100%;
+          }
+        }
+        &__footer {
+          box-shadow: 0px -2px 4px rgba(16, 24, 40, .05);
+          padding: 16px 32px;
+        }
+        &__scroll-pane {
+          margin-bottom: 32px;
+          overflow: auto;
+          overflow-x: hidden;
+          padding: 0 32px;
+
+          .users-list {
+            overflow: initial;
+            max-width: 100%;
+            max-height: 345px;
+
+            .user-item.active {
+              background-color: transparent;
+            }
+          }
+        }
+
+        &__title {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 22px;
+          color: $gray-900;
+        }
+      }
+    }
+
     .modal.manage-tags {
       .modal-content {
         padding: 32px;
