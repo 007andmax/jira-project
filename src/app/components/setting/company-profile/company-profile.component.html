@@ -79,6 +79,7 @@
                                         </span>
                                         <div class="dp-info">
                                             <input
+                                                #uploadFile
                                                 type="file"
                                                 id="profile-dp"
                                                 accept="image/gif, image/jpeg, image/png, image/jpg"
@@ -93,6 +94,7 @@
                                                     <a
                                                         href="javascript:void(0)"
                                                         class="qt-button --gray qt-mr-12"
+                                                        (click)="uploadFile.click()"
                                                     >
                                                         {{
                                                     imageSrc ? "Change Logo" : "Upload Photo"

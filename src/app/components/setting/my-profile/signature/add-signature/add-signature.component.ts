@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SignatureService } from 'src/app/services/signature/signature.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'add-signature',
@@ -9,6 +10,7 @@ import { SignatureService } from 'src/app/services/signature/signature.service';
   styleUrls: ['./add-signature.component.scss']
 })
 export class AddSignatureComponent implements OnInit {
+  private apiUrl = environment.apiUrl;
   messageContent: string = '';
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -46,7 +48,7 @@ export class AddSignatureComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
+    uploadUrl: 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
     sanitize: false,
   };
   @Input() signatureDrop: NgbDropdown;

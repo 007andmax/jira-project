@@ -46,7 +46,7 @@ export class EditSignatureComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
+    uploadUrl: 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
     sanitize: false,
   };
   @Input() signatureDrop: NgbDropdown;

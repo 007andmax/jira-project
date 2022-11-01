@@ -9,6 +9,7 @@ import { ManageTagsRoutingModule } from './manage-tags-routing.module';
 import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 
@@ -25,7 +26,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         InfiniteScrollModule,
         ManageTagsRoutingModule,
         ClickOtsideModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        DynamicTooltipModule
     ],
     exports: [TagPipe]
 

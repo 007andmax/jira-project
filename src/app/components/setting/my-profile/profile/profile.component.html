@@ -147,6 +147,7 @@
                     </span>
                     <div class="dp-info">
                         <input
+                            #uploadFile
                             type="file"
                             id="profile-dp"
                             (change)="onSelectFile($event)"
@@ -157,6 +158,7 @@
                                 href="javascript:;"
                                 class="qt-button --gray qt-mr-12"
                                 for="profile-dp"
+                                (click)="uploadFile.click()"
                             >
                                 {{ imageAvatar ? "Change Photo" : "Upload Photo" }}
                             </a>
@@ -269,7 +271,7 @@
                                 (click)="onAddPhone()"
                             >
                                 <div class="icon__remove--red-500 qt-sz-20 qt-bg-contain qt-mr-8 pointer qt-button-icon"></div>
-                                  Remove
+                                Remove
                             </a>
                         </div>
                     </div>

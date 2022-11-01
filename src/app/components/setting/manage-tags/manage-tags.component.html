@@ -119,9 +119,14 @@
                                             <div class="tab-pane__table-cell manage-tags-table__count">{{ company.usedCounter }}</div>
                                             <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
                                                 <div class="qt-df qt-ai-c">
+                                                    <app-dynamic-tooltip
+                                                        [content]="'Remove'"
+                                                        [position]="'top'"
+                                                        #removeTooltip
+                                                    ></app-dynamic-tooltip>
                                                     <div
-                                                        href="javascript:;"
-                                                        data-tooltip="Remove"
+                                                        (mouseenter)="removeTooltip.show($event.target)"
+                                                        (mouseleave)="removeTooltip.hide()"
                                                         class="icon__remove qt-sz-20 qt-bg-contain pointer"
                                                         (click)="ConfirmDelete(company.id,company.word)"
                                                     >
@@ -264,8 +269,14 @@
                                     <div class="tab-pane__table-cell manage-tags-table__count">{{ ticket.usedCounter }}</div>
                                     <div class="tab-pane__table-cell manage-tags-table__action qt-pos-rel">
                                         <div class="qt-df qt-ai-c">
+                                            <app-dynamic-tooltip
+                                                [content]="'Remove'"
+                                                [position]="'top'"
+                                                #removeTooltip
+                                            ></app-dynamic-tooltip>
                                             <div
-                                                data-tooltip="Remove"
+                                                (mouseenter)="removeTooltip.show($event.target)"
+                                                (mouseleave)="removeTooltip.hide()"
                                                 class="icon__remove qt-sz-20 qt-bg-contain pointer"
                                                 (click)="ConfirmDelete(ticket.id,ticket.word)"
                                             >
