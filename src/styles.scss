@@ -4154,13 +4154,6 @@ app-ticket-edit-aside {
     }
   }
 
-  .qt-inputs-row {
-    @media (max-width: 767px) {
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-  }
-
   .create-product {
     .label-name {
       @media (max-width: 767px) {
@@ -4459,6 +4452,10 @@ app-ticket-edit-aside-devices {
   column-gap: 16px;
   row-gap: 16px;
   margin-bottom: 24px;
+  @media (max-width: 767px) {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 
   .qt-f50 {
     flex: 0 1 calc(50% - 8px);

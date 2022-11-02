@@ -1,6 +1,6 @@
 <div
     *ngIf="opened"
-    class="qt-aside-modern qt-aside-modern--page-settings"
+    class="qt-aside-modern qt-aside-modern--page-settings --sm"
 >
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-info d-f ai-c">
@@ -18,18 +18,6 @@
     </div>
     <div class="qt-aside-modern__content">
         <div class="qt-input-block qt-input-line">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!noteTemplateValidate.getTitle()"
-            >
-                Title is required field
-            </mat-error>
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="noteTemplateValidate.getTitleIsExist()"
-            >
-                Title value must be unique
-            </mat-error>
             <label
                 for="add-ticket-subject"
                 class="qt-input-block__label"
@@ -46,14 +34,20 @@
                 maxlength="250"
                 placeholder="Write Ticket subject"
             >
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="!noteTemplateValidate.getTitle()"
+            >
+              Title is required field
+            </mat-error>
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="noteTemplateValidate.getTitleIsExist()"
+            >
+              Title value must be unique
+            </mat-error>
         </div>
         <div class="qt-input-block qt-w100 editor-container qt-mt-0">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!noteTemplateValidate.getNote()"
-            >
-                Description is required field
-            </mat-error>
             <label
                 for="add-ticket-subject"
                 class="qt-input-block__label"
@@ -66,6 +60,12 @@
                 [config]="editorConfig"
                 (input)="noteTemplateValidate.resetNote()"
             ></angular-editor>
+            <mat-error
+              class="invalid-feedback --pos-static"
+              *ngIf="!noteTemplateValidate.getNote()"
+            >
+              Description is required field
+            </mat-error>
         </div>
         <div class="qt-df qt-ai-c qt-mt-16">
             <label

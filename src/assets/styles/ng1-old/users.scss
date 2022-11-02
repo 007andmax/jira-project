@@ -221,6 +221,26 @@
 .ticket-drop {
   height: 30px;
 }
-.ticket-drop.has-dropdown ~ i {
-  top: 9px;
+.ticket-priority {
+ div.default-value {
+    top: 7px;
+  }
+  .has-dropdown ~ i {
+    top: 18px;
+  }
+  input {
+    border: 1px solid $gray-200;
+    color: $gray-900;
+
+    &::placeholder {
+      color: $gray-400;
+    }
+    &:hover {
+      border-color: $gray-300;
+    }
+    &:focus {
+      outline: none;
+      border-color: $blue-light-600;
+    }
+  }
 }

@@ -198,6 +198,11 @@ fieldset[disabled] .form-control {
   /* background-color: #fcfdfd; */
   opacity: 1;
 }
+.ticket-priority {
+  .form-control {
+    background-color: #fcfdfd;
+  }
+}
 .form-control::-moz-placeholder {
   color: $gray-500--old;
   opacity: 1;

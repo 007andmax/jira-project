@@ -58,9 +58,10 @@
         </div>
     </div>
     <div class="qt-aside-modern__content">
-        <div class="qt-input-block qt-input-line ticket-add-aside__priority-level-input">
-            <span class="qt-input-block__label">Priority Level</span>
-            <app-drop-down
+        <div class="qt-inputs-row ticket-add-aside__priority-level-input">
+            <div class="qt-input-block">
+              <span class="qt-input-block__label">Priority Level</span>
+              <app-drop-down
                 [class]="['qt-dropdown']"
                 [field]="'title'"
                 [isBlockClear]="true"
@@ -68,22 +69,18 @@
                 [list]="ticketPriorities"
                 (onSelectedItem)="setPriorityLevel($event)"
                 [placeholder]="'Low'"
-            ></app-drop-down>
+              ></app-drop-down>
+            </div>
         </div>
-        <div class="qt-input-block qt-input-line --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!ticketValidate.getSubject()"
-            >
-                Ticket Subject is required
-            </mat-error>
-            <label
+        <div class="qt-inputs-row --required">
+            <div class="qt-input-block">
+              <label
                 for="add-ticket-subject"
                 class="qt-input-block__label"
-            >
+              >
                 Ticket Subject
-            </label>
-            <input
+              </label>
+              <input
                 [ngClass]="{'--input-error' : !ticketValidate.getSubject()}"
                 id="add-ticket-subject"
                 class="qt-input-block__input"
@@ -91,27 +88,36 @@
                 (change)="onChangeSubject()"
                 type="text"
                 placeholder="Write Ticket subject"
-            >
+              >
+              <mat-error
+                class="invalid-feedback"
+                *ngIf="!ticketValidate.getSubject()"
+              >
+                Ticket Subject is required
+              </mat-error>
+            </div>
         </div>
-        <div class="qt-input-block qt-input-line">
-            <label
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+              <label
                 for="add-ticket-describe-issue"
                 class="qt-input-block__label"
-            >
+              >
                 Describe Issue
-            </label>
-            <div
+              </label>
+              <div
                 id="add-ticket-describe-issue"
                 class="qt-input-block__textarea"
                 contenteditable="true"
                 placeholder="Describe Issue here…"
                 (input)="onChangeNote($event)"
-            ></div>
-            <!-- <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
-                  placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea> -->
+              ></div>
+              <!-- <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
+                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea> -->
+            </div>
         </div>
-        <div class="qt-input-line">
-            <div class="qt-input-block">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <company-drop-down
                     #companyDP
                     [title]="'Company'"
@@ -126,7 +132,7 @@
                     (onSelectedItem)="onSelectCompany($event)"
                 ></company-drop-down>
             </div>
-            <div class="qt-input-block">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <app-drop-down
                     #userDP
                     [title]="'User'"
@@ -141,8 +147,8 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-input-line">
-            <div class="qt-input-block">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down
                     #techUserDP
@@ -152,7 +158,7 @@
                     [placeholder]="'Select User to assign'"
                 ></app-drop-down>
             </div>
-            <div class="qt-input-block">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <span class="qt-input-block__label">Device</span>
                 <app-drop-down
                     #deviceDP
