@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -13,7 +13,7 @@ import { EditSignatureComponent } from './edit-signature/edit-signature.componen
   templateUrl: './signature.component.html',
   styleUrls: ['./signature.component.scss']
 })
-export class SignatureComponent implements OnInit {
+export class SignatureComponent implements OnInit, OnDestroy {
   content: string;
   loading: boolean = true;
   sub: Subscription = new Subscription();
@@ -24,6 +24,7 @@ export class SignatureComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private signatureStateService: SignatureStateService,
     private modalService: NgbModal) { }
+
 
   ngOnInit() {
     this.signatureService.getSignature().subscribe((data: any) => {
@@ -55,5 +56,8 @@ export class SignatureComponent implements OnInit {
     this.confirmStateService.setConfirmAction(DELETE_SIGNATURE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Industry`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

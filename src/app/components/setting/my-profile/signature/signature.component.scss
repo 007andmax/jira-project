@@ -5,6 +5,10 @@
     flex-flow: column;
     margin: 0px auto;
 }
+.content-html {
+    max-width: 568px;
+    word-break: break-word;
+}
 add-signature,
 edit-signature {
     max-height: 422px !important;

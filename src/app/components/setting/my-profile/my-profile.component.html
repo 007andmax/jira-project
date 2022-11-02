@@ -5,7 +5,7 @@
         href="javascript:;"
         class="qt-button qt-ml-24 --md"
         (click)="onSubmit()"
-        *ngIf="!activityHistory"
+        *ngIf="activeTab !== 'history' && activeTab !== 'signature'"
     >
         Save Changes
     </a>
@@ -14,24 +14,30 @@
         *ngIf="activityHistory"
     ></div>
 </div>
-<ngb-tabset>
+<ngb-tabset (tabChange)="setTab($event)">
     <!-- Profile -->
     <ngb-tab
         title="Profile"
-        id="tab1"
+        id="profile"
     >
         <ng-template ngbTabContent>
             <app-profile #profile></app-profile>
         </ng-template>
     </ngb-tab>
     <!-- Account -->
-    <ngb-tab title="Account">
+    <ngb-tab
+        title="Account"
+        id="account"
+    >
         <ng-template ngbTabContent>
             <app-account #account></app-account>
         </ng-template>
     </ngb-tab>
     <!-- Email -->
-    <ngb-tab title="Email Notifications">
+    <ngb-tab
+        title="Email Notifications"
+        id="notifications"
+    >
         <ng-template ngbTabContent>
             <app-email-notifications #emailNotifications></app-email-notifications>
         </ng-template>
@@ -40,6 +46,7 @@
     <ngb-tab
         title="Activity History"
         class="history"
+        id="history"
     >
         <ng-template ngbTabContent>
             <app-activity-history #activityHistory></app-activity-history>
@@ -48,6 +55,7 @@
     <ngb-tab
         title="Signature"
         class="history"
+        id="signature"
     >
         <ng-template ngbTabContent>
             <signature #signature></signature>

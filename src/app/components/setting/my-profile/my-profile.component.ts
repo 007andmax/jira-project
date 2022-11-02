@@ -12,6 +12,7 @@ declare var $: any;
   styleUrls: ["./my-profile.component.scss"]
 })
 export class MyProfileComponent implements OnInit, OnDestroy {
+  activeTab: string = "profile";
   @ViewChild('profile') profile: ProfileComponent;
   @ViewChild('account') account: AccountComponent;
   @ViewChild('emailNotifications') emailNotifications: EmailNotificationsComponent;
@@ -28,6 +29,9 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     $('body').removeClass('page-settings');
     $(".loading").css({ "top": "-53px", "bottom": "0" });
+  }
+  setTab(data) {
+    this.activeTab = data['nextId'];
   }
   onSubmit() {
     if (this.profile) this.profile.onSubmit();
