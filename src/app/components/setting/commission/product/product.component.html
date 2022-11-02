@@ -1,95 +1,101 @@
 <div class="cmn-area products-area">
-  <div
-    class="tab-pane__table dataTable"
-  >
-    <div class="tab-pane__table-header">
-      <div class="tab-pane__table-row">
-        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-          <label class="qt-checkbox">
-            <input type="checkbox">
-            <span></span>
-          </label>
+    <div class="tab-pane__table dataTable">
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input type="checkbox">
+                        <span></span>
+                    </label>
+                </div>
+                <div class="tab-pane__table-cell commissions-product__company-name pointer">
+                    Product Name
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell commissions-product__rate">Commission Rate (%)</div>
+                <div class="tab-pane__table-cell commissions-product__action"></div>
+            </div>
         </div>
-        <div class="tab-pane__table-cell commissions-product__company-name pointer">
-          Product Name
-          <div class="qt-table-modern__sorting--new"></div>
-        </div>
-        <div class="tab-pane__table-cell commissions-product__rate">Commission Rate (%)</div>
-        <div class="tab-pane__table-cell commissions-product__action"></div>
-      </div>
-    </div>
-    <div class="tab-pane__table-body" *ngIf="categories">
-      <div class="tab-pane__table-row" *ngFor="let category of categories;trackBy:category?.name; let i = index">
-        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
-          <label class="qt-checkbox">
-            <input type="checkbox">
-            <span></span>
-          </label>
-        </div>
-        <div class="tab-pane__table-cell commissions-product__company-name">{{ category.name }}</div>
-        <div class="tab-pane__table-cell commissions-product__rate">{{ category.commissionRate }}</div>
-        <div class="tab-pane__table-cell commissions-product__action qt-pos-rel">
-          <div class="qt-df">
+        <div
+            class="tab-pane__table-body"
+            *ngIf="categories"
+        >
             <div
-              data-tooltip="Edit"
-              class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
-              (click)="editProduct(i)"
+                class="tab-pane__table-row"
+                *ngFor="let category of categories;trackBy:category?.name; let i = index"
             >
-            </div>
-            <div
-              data-tooltip="Remove"
-              class="icon__remove qt-sz-20 qt-bg-contain pointer"
-              (click)="confirmDelete(category)"
-            >
-            </div>
-          </div>
-          <div
-            class="modal-content --tooltip toggle-area"
-            [ngClass]="{'opened': selectedIdx === i}"
-          >
-            <div class="">
-              <div class="toggle-header">
-                <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Commission Rate</h6>
-              </div>
-              <div class="">
-                <form method="POST">
-                  <div class="qt-input-block qt-mb-32">
-                    <label class="qt-input-block__label">Commission Rate (%)</label>
-                    <input
-                      type="text"
-                      class="form-input"
-                      name="commissionRate"
-                      autocomplete="off"
-                      #commissionRate
-                      value="{{category.commissionRate}}"
-                      step="0.01"
-                      placeholder="Enter Commission Rate"
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input type="checkbox">
+                        <span></span>
+                    </label>
+                </div>
+                <div class="tab-pane__table-cell commissions-product__company-name">{{ category.name }}</div>
+                <div class="tab-pane__table-cell commissions-product__rate">{{ category.commissionRate }}</div>
+                <div class="tab-pane__table-cell commissions-product__action qt-pos-rel">
+                    <div class="qt-df">
+                        <div
+                            placement="top"
+                            ngbTooltip="Edit"
+                            class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                            (click)="editProduct(i)"
+                        >
+                        </div>
+                        <div
+                            placement="top"
+                            ngbTooltip="Remove"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="confirmDelete(category)"
+                        >
+                        </div>
+                    </div>
+                    <div
+                        class="modal-content --tooltip toggle-area"
+                        [ngClass]="{'opened': selectedIdx === i}"
                     >
-                  </div>
-                  <div class="qt-df qt-w100">
-                    <a
-                      href="javascript:;"
-                      class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                      aria-label="Close"
-                      (click)="selectedIdx = -1"
-                    >
-                      Cancel
-                    </a>
-                    <input
-                      type="submit"
-                      (click)="confirmEdit(commissionRate.value,category.id,category)"
-                      value="Save"
-                      class="qt-button qt-jc-c qt-w100"
-                    >
-                  </div>
-                </form>
-              </div>
+                        <div class>
+                            <div class="toggle-header">
+                                <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Commission Rate</h6>
+                            </div>
+                            <div class>
+                                <form method="POST">
+                                    <div class="qt-input-block qt-mb-32">
+                                        <label class="qt-input-block__label">Commission Rate (%)</label>
+                                        <input
+                                            type="text"
+                                            class="form-input"
+                                            name="commissionRate"
+                                            autocomplete="off"
+                                            #commissionRate
+                                            value="{{category.commissionRate}}"
+                                            step="0.01"
+                                            placeholder="Enter Commission Rate"
+                                        >
+                                    </div>
+                                    <div class="qt-df qt-w100">
+                                        <a
+                                            href="javascript:;"
+                                            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                                            aria-label="Close"
+                                            (click)="selectedIdx = -1"
+                                        >
+                                            Cancel
+                                        </a>
+                                        <input
+                                            type="submit"
+                                            (click)="confirmEdit(commissionRate.value,category.id,category)"
+                                            value="Save"
+                                            class="qt-button qt-jc-c qt-w100"
+                                        >
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <div
     class="img-croparea deletePopup"

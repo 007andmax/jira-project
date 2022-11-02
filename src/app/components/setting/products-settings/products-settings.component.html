@@ -156,7 +156,7 @@
                                                 ></app-dynamic-tooltip>
                                                 <div
                                                     class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                                                    *ngIf="item.productsAmount === 0"
+                                                    *ngIf="item.productsAmount > 0"
                                                     (mouseenter)="noDeleteTooltip.show($event.target)"
                                                     (mouseleave)="noDeleteTooltip.hide()"
                                                 >
@@ -168,7 +168,7 @@
                                                 ></app-dynamic-tooltip>
                                                 <div
                                                     class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                                                    *ngIf="item.productsAmount > 0"
+                                                    *ngIf="item.productsAmount === 0"
                                                     (click)="removeCategoryProduct(item)"
                                                     (mouseenter)="deleteTooltip.show($event.target)"
                                                     (mouseleave)="deleteTooltip.hide()"

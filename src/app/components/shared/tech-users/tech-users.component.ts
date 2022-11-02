@@ -21,6 +21,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   public usersList: Array<TechUserItem> = [];
   public showSelect = false;
   public selectedUsers = [];
+  @Input() container: string = null;
   @Input() selectedMode: string = MULTIPLE_SELECT;
   @Input() editUsers = [];
   @Input() editMode: boolean = false;

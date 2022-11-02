@@ -7,11 +7,15 @@
         <div
             class="qt-df qt-ai-c"
             ngbDropdown
+            placement="bottom-right"
+            container="body"
             #signatureEditDrop="ngbDropdown"
         >
             <i
                 class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
                 *ngIf="content"
+                placement="top"
+                ngbTooltip="Edit"
                 ngbDropdownToggle
                 (click)="editContent()"
             ></i>
@@ -19,10 +23,13 @@
                 #editSignature
                 ngbDropdownMenu
                 [signatureDrop]="signatureEditDrop"
+                (onEdit)="content = $event"
             ></edit-signature>
             <i
                 class="icon__remove qt-sz-20 qt-bg-contain pointer qt-ml-24"
                 *ngIf="content"
+                placement="top"
+                ngbTooltip="Remove"
                 (click)="remove()"
             ></i>
         </div>
@@ -37,11 +44,12 @@
                 class="qt-df qt-ai-c no-content"
                 *ngIf="!content"
                 ngbDropdown
+                container="body"
                 #signatureDrop="ngbDropdown"
             >
                 <img
                     class="qt-mb-24"
-                    src="./assets/img/icons/no-signature.svg"
+                    src="html/assets/img/icons/no-signature.png"
                 >
                 <h3 class="qt-fs-16 qt-fw-500 qt-mb-8 qt-color-gray-900">No Signature</h3>
                 <span class="qt-fs-14 qt-fw-400 qt-color-gray-500 qt-mb-24">Get started by creating a signature</span>
@@ -55,6 +63,7 @@
                 <add-signature
                     ngbDropdownMenu
                     [signatureDrop]="signatureDrop"
+                    (onAdd)="content = $event"
                 ></add-signature>
             </div>
         </div>

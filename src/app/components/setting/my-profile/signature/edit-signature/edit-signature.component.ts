@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SignatureService } from 'src/app/services/signature/signature.service';
@@ -50,6 +50,7 @@ export class EditSignatureComponent implements OnInit {
     sanitize: false,
   };
   @Input() signatureDrop: NgbDropdown;
+  @Output() onEdit = new EventEmitter<any>();
   constructor(private signatureService: SignatureService) { }
 
   ngOnInit() {
@@ -62,7 +63,8 @@ export class EditSignatureComponent implements OnInit {
     this.signatureDrop.close();
   }
   save() {
-    this.signatureService.editSignature(this.messageContent).subscribe(data => {
+    this.signatureService.editSignature(this.messageContent).subscribe((data: any) => {
+      this.onEdit.emit(data.content);
       this.messageContent = '';
       this.signatureDrop.close();
     });

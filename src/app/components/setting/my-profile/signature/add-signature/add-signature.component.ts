@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SignatureService } from 'src/app/services/signature/signature.service';
@@ -51,6 +51,7 @@ export class AddSignatureComponent implements OnInit {
     uploadUrl: 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
     sanitize: false,
   };
+  @Output() onAdd = new EventEmitter<any>();
   @Input() signatureDrop: NgbDropdown;
   constructor(private signatureService: SignatureService) { }
 
@@ -61,7 +62,8 @@ export class AddSignatureComponent implements OnInit {
     this.signatureDrop.close();
   }
   save() {
-    this.signatureService.setSignature(this.messageContent).subscribe(data => {
+    this.signatureService.setSignature(this.messageContent).subscribe((data: any) => {
+      this.onAdd.emit(data.content);
       this.messageContent = '';
       this.signatureDrop.close();
     });
