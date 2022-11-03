@@ -187,10 +187,10 @@
                   company-devices-table-device-name
                   qt-ff-gm qt-df qt-ai-c
                 ">
-                                            <span [textContent]="asset.Name"></span>
-                                        </div>
-                                        <span class="company-device-desc devicetitledesc"
-                                            [textContent]="asset.Title"></span>
+                                            <span 
+                                                [textContent]="asset.Title"></span>    
+                                        </div>                                        
+                                            <span class="company-device-desc devicetitledesc" [textContent]="asset.Name"></span>
                                     </div>
                                 </div>
                             </td>
@@ -436,16 +436,16 @@
                                 (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"></div>
                         </div>
                         <div>
-                            <div class="sidebar-system__info">
-                                <div class="sidebar-system__info-title">Host Name</div>
-                                <div class="sidebar-system__info-text" [textContent]="assetData.Name"></div>
-                            </div>
-                        </div>
-                        <div>
                             <div class="sidebar-system__info edit-field">
                                 <div class="sidebar-system__info-title">Display Name</div>
                                 <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Title"
                                     (blur)="updateAsset()">
+                            </div>                            
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Host Name</div>
+                                <div class="sidebar-system__info-text" [textContent]="assetData.Name"></div>
                             </div>
                         </div>
                         <div>

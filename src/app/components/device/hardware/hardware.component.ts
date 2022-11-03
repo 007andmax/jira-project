@@ -181,7 +181,7 @@ export class HardwareComponent implements OnInit {
   }
 
   computerList(Asset_ID) {
-    this.agentService.getComputer(Asset_ID).subscribe((resp) => {
+    this.agentService.getComputer(Asset_ID).subscribe((resp) => {      
       if (resp.length > 0) {
         this.computer = resp[0];
         if (this.computer.Title == "") {
@@ -189,8 +189,8 @@ export class HardwareComponent implements OnInit {
         }
         this.computer.Name =
           this.computer.Domain != ""
-            ? this.computer.Title + " " + "(" + this.computer.Domain + ")"
-            : this.computer.Title + " " + "(In workgroup)";
+            ? this.computer.Name + " " + "(" + this.computer.Domain + ")"
+            : this.computer.Name + " " + "(In workgroup)";
         this.printcsv();
       }
     });
