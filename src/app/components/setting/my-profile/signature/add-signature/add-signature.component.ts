@@ -48,7 +48,7 @@ export class AddSignatureComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT&isForSignature=true',
+    uploadUrl: 'file?isAvatar=false&isForSignature=true',
     sanitize: false,
   };
   @Output() onAdd = new EventEmitter<any>();
