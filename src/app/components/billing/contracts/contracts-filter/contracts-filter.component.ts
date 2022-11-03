@@ -21,7 +21,10 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   @ViewChild('statusDp') statusDp: DropDownComponent;
+  @ViewChild('optionsDp') optionsDp: DropDownComponent;
   public contractsFilter: ContractsFilter = new ContractsFilter();
+  listsOptions = [new ContractsFilterType('Manual create billable item', 'manualCreateBillableItem', null),
+  new ContractsFilterType('Automatically create invoice', 'enableInvoiceAutoCreate', null)];
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),
   new ContractsFilterType('Block Time', 'BLOCK_TIME', null),
   new ContractsFilterType('Service Contract/by device', 'SERVICE_CONTRACT', 'DEVICE'),
@@ -49,10 +52,12 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     this.contractsFilter.setStatus(null);
     this.contractsFilter.setType(null);
     this.contractsFilter.resetDates();
+    this.contractsFilter.clearOptions();
     this.typesDp.clearWithOutChanges();
     this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
+    this.optionsDp.clearWithOutChanges();
     this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
 
@@ -63,9 +68,18 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     if (this.contractsFilter.selectedType) count++;
     if (this.contractsFilter.selectedStartDate && this.contractsFilter.selectedEndDate) count++;
     if (this.contractsFilter.selectedStatus) count++;
+    if (this.contractsFilter.enableInvoiceAutoCreate || this.contractsFilter.manualCreateBillableItem) count++;
     this.changeCountFilter.emit(count);
   }
-
+  public onSelectOption(item) {
+    this.contractsFilter.clearOptions();
+    if (item) {
+      if (item.type == 'manualCreateBillableItem') this.contractsFilter.setManualCreateBillableItem(true);
+      if (item.type == 'enableInvoiceAutoCreate') this.contractsFilter.setEnableInvoiceAutoCreate(true);
+    }
+    this.contractsStateService.setFilter(this.contractsFilter);
+    this.onChangeCounterFilter();
+  }
   public onSelectCompany(item) {
     if (!item) {
       this.contractsFilter.setCompany(null);

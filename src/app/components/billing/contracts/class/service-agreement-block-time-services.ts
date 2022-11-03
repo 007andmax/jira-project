@@ -9,11 +9,13 @@ export class ServiceAgreementBlockTimeServices {
     taxIds: Array<string>;
     validate: boolean = true;
     validateDuplicated: boolean = true;
+    rate_str: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.rate_str = this.rate.toFixed(2);
         }
     }
     public getDataForUpdate() {

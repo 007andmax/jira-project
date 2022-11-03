@@ -41,6 +41,8 @@ export class ServiceAgreement {
     type: string;
     manualCreateBillableItem: boolean;
     enableInvoiceAutoCreate: boolean;
+    blockRate_str: string;
+    rateExceeding_str: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -57,6 +59,8 @@ export class ServiceAgreement {
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
+            this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
+            this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
             this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));

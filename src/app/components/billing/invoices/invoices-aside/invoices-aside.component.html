@@ -20,7 +20,8 @@
                         class="search-company"
                         #companyDp
                         [placeholder]="'Select Company'"
-                        [change]="false"
+                        [change]="true"
+                        [search]="true"
                         [class]="['qt-dropdown']"
                         [field]="'name'"
                         [editItem]="selectedCompany"
@@ -53,7 +54,7 @@
                         class="qt-input-prepend"
                         number
                         [money]="true"
-                        [ngModel]="amountReceived"
+                        [ngModel]="amountReceived_str"
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
@@ -183,7 +184,7 @@
                                     *ngIf="invoice.selected"
                                     number
                                     [money]="true"
-                                    [ngModel]="invoice.paymentAmount"
+                                    [ngModel]="invoice.paymentAmount_str"
                                     (change)="onChangePayment($event,invoice)"
                                     appToFixed
                                 >

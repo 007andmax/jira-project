@@ -5,11 +5,13 @@ export class ContractsUserDeviceService {
     taxIds: Array<string> = [];
     validate: boolean = true;
     validateDuplicated: boolean = true;
+    rate_str: string;
     constructor(count, name, rate, taxIds) {
         this.count = count;
         this.name = name;
         this.rate = rate;
         this.taxIds = taxIds;
+        this.rate_str = this.rate.toFixed(2);
     }
     public getDataForCreate() {
         return {

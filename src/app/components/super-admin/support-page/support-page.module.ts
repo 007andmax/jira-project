@@ -18,6 +18,7 @@ import { LeftPanelSuperAdminCategoriesActionsComponent } from '../left-panel-sup
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { SupportPageEditCategoryModule } from '../shared/support-page-edit-category/support-page-edit-category.module';
 
 
 

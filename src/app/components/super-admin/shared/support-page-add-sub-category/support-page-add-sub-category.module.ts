@@ -19,6 +19,7 @@ import { SupportPageAddSubCategoryComponent } from './support-page-add-sub-categ
         MatFormFieldModule,
         FormsModule,
     ],
+    entryComponents: [SupportPageAddSubCategoryComponent],
     exports: [SupportPageAddSubCategoryComponent]
 })
 export class SupportPageAddSubCategoryModule { }

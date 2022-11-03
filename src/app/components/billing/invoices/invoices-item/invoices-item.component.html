@@ -77,10 +77,18 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    (click)="resendInvoices()"
+                    (click)="resendInvoices(false)"
                 >
                     <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Resend
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="resendInvoices(true)"
+                >
+                    <div class="icon__email-dark qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Resend with PDF
                 </li>
                 <li
                     class="pointer"
