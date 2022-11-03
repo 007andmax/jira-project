@@ -21,13 +21,6 @@
 <!-- &lt;!&ndash; FOR RECURRING_TICEKTS &ndash;&gt; -->
 <!-- &lt;!&ndash; Assigned Users &ndash;&gt; -->
 <!-- &lt;!&ndash; FOR RECURRING_TICEKTS &ndash;&gt; -->
-
-
-
-
-
-
-
 <!-- &lt;!&ndash; COMPANY_SETTINGS &ndash;&gt; -->
 <!-- <div class="company-settings-user"> -->
 <!-- <div class="icon__user-avatar qt-sz-36 qt-circle qt-bg-contain"></div> -->
@@ -60,13 +53,6 @@
 <!-- <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis" [textContent]="ticketsListService.getUserName(selectedUsers[0])"></div> -->
 <!-- <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">alma.lawson@example.com</div> -->
 <!-- </div> -->
-
-
-
-
-
-
-
 <!-- </div> -->
 <!-- <app-dynamic-tooltip -->
 <!-- [content]="'Select User'" -->
@@ -185,14 +171,6 @@
 <!-- </div> -->
 <!-- </div> -->
 <!-- </div> -->
-
-
-
-
-
-
-
-
 <div
     ngbDropdown
     [container]="container"
@@ -206,17 +184,13 @@
         ngbDropdownToggle
     >
         <!-- FOR RECURRING_TICEKTS -->
-        <!-- Assigned Users -->
+        <span *ngIf="type === 'RECURRING_TICEKTS'">Assigned Users</span>
         <!-- FOR RECURRING_TICEKTS -->
-
-
-
-
-
-
-
         <!-- COMPANY_SETTINGS -->
-        <div class="company-settings-user">
+        <div
+            class="company-settings-user"
+            *ngIf="type === 'COMPANY_SETTINGS'"
+        >
             <div class="icon__user-avatar qt-sz-36 qt-circle qt-bg-contain"></div>
             <div class="qt-ml-12 qt-f-1 ellipsis">
                 <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">Assign Sales Person</div>
@@ -256,15 +230,11 @@
                 class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis"
                 [textContent]="ticketsListService.getUserName(selectedUsers[0])"
             ></div>
-            <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">alma.lawson@example.com</div>
+            <div
+                class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2"
+                [textContent]="selectedUsers[0].primaryEmail"
+            ></div>
         </div>
-
-
-
-
-
-
-
     </div>
     <app-dynamic-tooltip
         [content]="'Select User'"
@@ -301,13 +271,6 @@
         aria-labelledby="dropdownTechuser"
         *ngIf="!isDisabled"
     >
-
-
-
-
-
-
-
         <!-- **** Old Component Dropdown ***** -->
         <div
             class="select-wrapper dropdown-assign-ticket fixed-assign"
@@ -396,10 +359,6 @@
             </div>
         </div>
         <!-- **** Old Component Dropdown ***** -->
-
-
-
-
         <!-- **** New Component Dropdown ***** -->
         <div
             class="select-wrapper dropdown-assign-ticket fixed-assign"

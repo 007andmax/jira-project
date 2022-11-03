@@ -36,7 +36,12 @@
                     </label>
                 </div>
                 <div class="tab-pane__table-cell commissions-contract-table__product-name">
-                    Hourly Contracts
+                    <span
+                        placement="top"
+                        ngbTooltip="Hourly Contracts will use the service default commission rate."
+                    >
+                        Hourly Contracts
+                    </span>
                     <!-- <p> -->
                     <!-- Hourly Contracts will use the service default commission rate. -->
                     <!-- </p> -->
@@ -55,8 +60,13 @@
                         <span></span>
                     </label>
                 </div>
-                <div class="tab-pane__table-cell commissions-contract-table__product-name">
-                    Block Time Contracts
+                <div class="tab-pane__table-cell commissions-contract-table__product-name block-time-contract">
+                    <span
+                        placement="top"
+                        ngbTooltip="Block time contracts will be separated in two commissions rates, the first will be for the included Hours, a second rate can be set for Hours exceeding the included hours."
+                    >
+                        Block Time Contracts
+                    </span>
                     <!-- <p> -->
                     <!-- Block time contracts will be separated in two commissions rates, -->
                     <!-- the first will be for the included Hours, a second rate can be set -->
@@ -435,7 +445,12 @@
                     </label>
                 </div>
                 <div class="tab-pane__table-cell commissions-contract-table__product-name">
-                    Other Contracts
+                    <span
+                        placement="top"
+                        ngbTooltip="Сommission rate will be calculated based on their Product and Service Commissions rates set in the Product and Service Commissions."
+                    >
+                        Other Contracts
+                    </span>
                     <!-- <p> -->
                     <!-- commission rate will be calculated based on their Product and -->
                     <!-- Service Commissions rates set in the Product and Service -->

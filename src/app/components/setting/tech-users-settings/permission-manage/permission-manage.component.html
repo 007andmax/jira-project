@@ -143,26 +143,29 @@
         <div class="qt-aside-modern__header-title">Delete Role?</div>
     </div>
     <div class="middle-content qt-aside-modern__content">
-      <div class="notifications --warning qt-mb-20 ng-star-inserted">
-        <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
-        <p class="notifications__content">
-          {{ usersToShift.length }} tech users belong to this group, you must assign
+        <div class="notifications --warning qt-mb-20 ng-star-inserted">
+            <span class="icon__company-info--yellow-800 qt-sz-20 qt-mr-8 qt-fs-0"></span>
+            <p class="notifications__content">
+                {{ usersToShift.length }} tech users belong to this group, you must assign
           a different group to existing users to delete the group.
-        </p>
-      </div>
+            </p>
+        </div>
         <form #editForm="ngForm">
             <div class="tech-list">
-<!--                <div class=".caption-m qt-text-upper qt-mb-16">Tech Users</div>-->
+                <!-- <div class=".caption-m qt-text-upper qt-mb-16">Tech Users</div> -->
                 <div class="users-list custom-scroll">
-                    <div *ngFor="let user of usersToShift" class="user-item qt-df qt-jc-sb qt-ai-c">
+                    <div
+                        *ngFor="let user of usersToShift"
+                        class="user-item qt-df qt-jc-sb qt-ai-c"
+                    >
                         <div class="dropdown-link">
                             <span
                                 class="default-user-avatar avatar-background-color-odd"
                                 *ngIf="
                                   !user.requestToChangePassword && user.isEmailVerified
                                 "
-                                                >
-                                    <!-- <span *ngIf="techUser.avatar !== null">
+                            >
+                                <!-- <span *ngIf="techUser.avatar !== null">
                                   NN
                                 </span> -->
                                 <img
@@ -180,58 +183,51 @@
                                     {{ displayFrstLstChar(user) }}
                                 </span>
                             </span>
-                            <span class="default-user-avatar avatar-background-color-odd"
-                              *ngIf="user.requestToChangePassword || !user.isEmailVerified">
-                              <span class="simple-dp">{{ displayFrstLstChar(user) }}</span>
+                            <span
+                                class="default-user-avatar avatar-background-color-odd"
+                                *ngIf="user.requestToChangePassword || !user.isEmailVerified"
+                            >
+                                <span class="simple-dp">{{ displayFrstLstChar(user) }}</span>
                             </span>
                             <div class="qt-f-1 ellipsis">
                                 <div class="user-item__name qt-fw-600 qt-color-gray-900 ellipsis">
                                     {{ user.firstName + " " + user.lastName }}
                                 </div>
-                                <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">
-                                    {{ user.primaryEmail }}
-                                </div>
+                                <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">{{ user.primaryEmail }}</div>
                             </div>
                         </div>
                         <!-- <li ng-repeat="role in allTechRoles" ng-click="user.techRole = role; changeUsersRole(user)">
               <a tabindex="-1" href="javascript:void(0)"> {{ role }} </a>
             </li> -->
-                        <select
-                            class="cmn-select form-input"
-                            [(ngModel)]="user.techRole"
-                            (change)="changeUsersRole(user, $event)"
-                            [ngModelOptions]="{ standalone: true }"
-                            name="techRole"
+                        <app-drop-down
+                            [class]="['qt-select-input-40']"
+                            [list]="allTechRoles"
+                            [editItem]="user.techRole"
+                            [placeholder]="'Select'"
+                            [sort]="false"
+                            [isBlockClear]="true"
+                            (onSelectedItem)="changeUsersRole(user, $event)"
                         >
-                            <option
-                                value="{{ role }}"
-                                *ngFor="let role of allTechRoles"
-                            >
-                                {{
-                role
-              }}
-                            </option>
-                            <!-- <option>Administrator 1</option> -->
-                        </select>
+                        </app-drop-down>
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="qt-aside-modern__footer qt-df">
-      <a
-        href="javascrip:;"
-        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-        (click)="showDeleteRole = !showDeleteRole"
-      >
-        Cancel
-      </a>
-      <input
-        type="submit"
-        value="Delete Role"
-        [disabled]="allRolesAreChanged(roleToDelete)"
-        (click)="deleteRole(roleToDelete, true)"
-        class="qt-button qt-jc-c qt-w100"
-      >
+        <a
+            href="javascrip:;"
+            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+            (click)="showDeleteRole = !showDeleteRole"
+        >
+            Cancel
+        </a>
+        <input
+            type="submit"
+            value="Delete Role"
+            [disabled]="allRolesAreChanged(roleToDelete)"
+            (click)="deleteRole(roleToDelete, true)"
+            class="qt-button qt-jc-c qt-w100"
+        >
     </div>
 </div>

@@ -15,8 +15,6 @@
             (tabChange)="setTab($event)"
             [hidden]="loading"
         >
-
-
             <ngb-tab
                 title="Ticket Templates"
                 id="tab1"
@@ -95,8 +93,6 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-
-
             <ngb-tab title="Agent Templates">
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
@@ -169,8 +165,6 @@
                     </div>
                 </ng-template>
             </ngb-tab>
-
-
             <ngb-tab title="Invoice Templates">
                 <ng-template ngbTabContent>
                     <div class="cmn-area">
@@ -246,8 +240,6 @@
         </ngb-tabset>
     </div>
 </div>
-
-
 <div
     class="qt-aside-modern qt-aside-modern--page-settings sidebar-popup tmp-edit --sm"
     [ngClass]="{ opened: edit }"
@@ -259,6 +251,9 @@
             <a
                 href="javascript:;"
                 class="qt-button --square-md --gray pointer"
+                placement="top"
+                ngbTooltip="Reset Default"
+                container="body"
             >
                 <div class="icon__reset-gray-500 qt-sz-16 qt-button-icon"></div>
             </a>
@@ -267,6 +262,9 @@
                 class="qt-button --square-md --gray qt-ml-8 pointer"
                 (click)="emailPreview(template)"
                 *ngIf="templeteInfo.showPreview"
+                placement="top"
+                ngbTooltip="Show Preview"
+                container="body"
             >
                 <div class="icon__view qt-sz-16 qt-button-icon"></div>
             </a>
@@ -370,8 +368,6 @@
                             {{ key.keyName }}
                         </span>
                     </div>
-
-
                     <div
                         class="key-area"
                         *ngIf="show"
@@ -406,15 +402,16 @@
         </div>
     </div>
 </div>
-
-
 <ng-template
     #template
     let-modal
 >
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-24">
         <h6 class="email_template_preview__title qt-fw-600 qt-color-dark">Email Template Preview</h6>
-        <div class="icon__close qt-sz-20 qt-ic-c qt-fs-0 qt-ml-8 pointer"></div>
+        <div
+            class="icon__close qt-sz-20 qt-ic-c qt-fs-0 qt-ml-8 pointer"
+            (click)="modal.dismiss('Cross click')"
+        ></div>
     </div>
     <div class="modal-body">
         <div class="modal-body__header qt-mb-24">

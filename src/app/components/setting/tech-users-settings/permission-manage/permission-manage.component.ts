@@ -479,8 +479,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    * @param user
    * @param event
    */
-  changeUsersRole(user, event) {
-    user.techRole = event.target.value;
+  changeUsersRole(user, value) {
+    user.techRole = value;
 
 
     this.loading = true; $(".loading").css("display", "block");
