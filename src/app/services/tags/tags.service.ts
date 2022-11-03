@@ -3,6 +3,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
 import { Tag } from '../../interfaces/tag/tag';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,10 @@ export class TagsService {
     * @param {HttpClient} http Service to work with request
     */
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
+
   ) { }
   getAllTickets() {
     return this.http.get(`${this.apiUrl}tags/getAll`);
@@ -43,22 +48,42 @@ export class TagsService {
       return this.http.put(
         `${this.apiUrl}tags/setWordForTag?tagId=${tagId}&word=${word}`,
         {}
-      );
+      ).pipe(
+        tap(data => {
+          this.toastrService.success("The tag has been successfully updated");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
     } else {
       return this.http.put(
         `${this.apiUrl}commonTags/setWordForTag?tagId=${tagId}&word=${word}`,
         {}
-      );
+      ).pipe(
+        tap(data => {
+          this.toastrService.success("The tag has been successfully updated");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
     }
   }
 
   removeCompanyTag(tagId: string, tag: string) {
     if (tag === "ticket") {
-      return this.http.delete(`${this.apiUrl}tags/removeTag?tagId=${tagId}`);
+      return this.http.delete(`${this.apiUrl}tags/removeTag?tagId=${tagId}`).pipe(
+        tap(data => {
+          this.toastrService.success("Tag Removed Successfully");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
     }
     return this.http.delete(
       `${this.apiUrl}commonTags/removeTag?tagId=${tagId}`
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Tag Removed Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public setTagsUser(user_id, data) {
     return this.http.put(this.apiUrl + `commonTags/user/${user_id}`, data);
@@ -70,9 +95,19 @@ export class TagsService {
 
   tags(tags, tag) {
     if (tag === "ticket") {
-      return this.http.post(`${this.apiUrl}tags`, tags);
+      return this.http.post(`${this.apiUrl}tags`, tags).pipe(
+        tap(data => {
+          this.toastrService.success("The new tag has been successfully created");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
     } else {
-      return this.http.post(`${this.apiUrl}commonTags`, tags);
+      return this.http.post(`${this.apiUrl}commonTags`, tags).pipe(
+        tap(data => {
+          this.toastrService.success("The new tag has been successfully created");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
     }
   }
   public addTicketsTags(tag: Tag) {

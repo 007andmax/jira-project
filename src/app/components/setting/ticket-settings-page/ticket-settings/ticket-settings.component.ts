@@ -181,7 +181,6 @@ export class TicketSettingsComponent implements OnInit {
     };
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
-        this.toastr.success('Saved Successfully');
         if (res && res.code === 409) {
           this.nextValid = res.message;
           this.ticketForm.patchValue({

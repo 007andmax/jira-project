@@ -12,6 +12,7 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
 import { Onlynumber } from 'src/app/helpers/Onlynumber';
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -32,7 +33,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         DropDownModule,
         ClickOtsideModule,
         TicketSettingsPageRoutingModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        KeyUpEnterModule
     ],
 
 

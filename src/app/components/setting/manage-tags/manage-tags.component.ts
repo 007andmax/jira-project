@@ -306,11 +306,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       res => {
         this.tagId = null;
         this.toaster.success("Tag Removed Successfully");
-        /*  if (this.setActiveTab === "ticket") {
-            this.getAllTickets();
-          } else {
-            this.getAllCompany();
-          }*/
       },
       error => {
       }

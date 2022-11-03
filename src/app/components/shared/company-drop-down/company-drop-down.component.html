@@ -73,6 +73,7 @@
                     [textContent]="reduceItemName(item)"
                     (click)="onSelect(item)"
                     [title]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
                 ></button>
             </ng-template>
         </div>

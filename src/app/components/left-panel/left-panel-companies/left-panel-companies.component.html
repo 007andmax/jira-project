@@ -40,10 +40,10 @@
             (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
             class="qt-jc-sb"
         >
-            <span *ngIf="activePage === 'new-companies'">Clients (</span>
+            <span *ngIf="activePage === 'new-companies'">Clients</span>
             <span
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('CLIENT') +')'"
+                [textContent]="'(' + getCount('CLIENT') +')'"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Clients</span>
         </li>
@@ -59,10 +59,10 @@
             (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
             class="qt-jc-sb"
         >
-            <span *ngIf="activePage === 'new-companies'">Leads (</span>
+            <span *ngIf="activePage === 'new-companies'">Leads</span>
             <span
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('LEAD') +')'"
+                [textContent]="'(' + getCount('LEAD') +')'"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Leads</span>
         </li>
@@ -78,10 +78,10 @@
             (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
             class="qt-jc-sb"
         >
-            <span *ngIf="activePage === 'new-companies'">Vendors (</span>
+            <span *ngIf="activePage === 'new-companies'">Vendors</span>
             <span
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('VENDOR') +')'"
+                [textContent]="'(' + getCount('VENDOR') +')'"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Vendors</span>
         </li>
@@ -97,10 +97,10 @@
             (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
             class="qt-jc-sb"
         >
-            <span *ngIf="activePage === 'new-companies'">Suppliers (</span>
+            <span *ngIf="activePage === 'new-companies'">Suppliers</span>
             <span
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('SUPPLIER') +')'"
+                [textContent]="'(' + getCount('SUPPLIER') +')'"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Suppliers</span>
         </li>
