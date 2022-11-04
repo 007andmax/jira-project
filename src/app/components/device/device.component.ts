@@ -145,17 +145,17 @@ export class DeviceComponent implements OnInit, OnDestroy {
       }
       else if(result[0]=="0" && result[2]=="0" && result[4]!="0")
       {
-        let Minutes = result[4]+' '+result[5]+' '+result[6]+' '+result[7];  
+        let Minutes = result[4]+' '+result[5];  
         this.UpTime = Minutes;
       }
       else if(result[0]=="0" && result[2]!="0")
       {
-        let Hours = result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
+        let Hours = result[2]+' '+result[3];
         this.UpTime = Hours; 
       }
       else
       {
-        let Days = result[0]+' '+result[1]+' '+result[2]+' '+result[3]+' '+result[4]+' '+result[5]+' '+result[6]+' '+result[7];
+        let Days = result[0]+' '+result[1];
         this.UpTime = Days;
       }
       this.cd.detectChanges();

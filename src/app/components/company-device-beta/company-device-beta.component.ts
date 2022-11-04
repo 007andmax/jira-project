@@ -272,7 +272,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
       if (!resp || resp.length === 0) {
         this.assetList = [];
         this.asset = {};
@@ -287,7 +287,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.operatingSystemWindow(resp[0].ID);
       this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.showPreloader = false;
-      this.assetList.forEach((element, index) => {
+      this.assetList.forEach((element, index) => {        
         //element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
@@ -305,7 +305,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
 
   CurrentUser() {
-    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {
+    this.kafkaStateService.onDeviceListConfig.subscribe((resp) => {      
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
@@ -328,11 +328,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
                 asset.UpTime = Minutes;
               }
               else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
+                let Hours = result[2] + ' ' + result[3];
                 asset.UpTime = Hours;
               }
               else {
-                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
+                let Days = result[0] + ' ' + result[1];
                 asset.UpTime = Days;
               }
             }

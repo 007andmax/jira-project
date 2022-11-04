@@ -430,11 +430,11 @@ export class DevicesComponent implements OnInit {
                 asset.UpTime = Minutes;
               }
               else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
+                let Hours = result[2] + ' ' + result[3];
                 asset.UpTime = Hours;
               }
               else {
-                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5] + ' ';
+                let Days = result[0] + ' ' + result[1];
                 asset.UpTime = Days;
               }
             }
@@ -1953,8 +1953,11 @@ export class DevicesComponent implements OnInit {
     this.advancesearchSoftwareTag = [];
   }
 
-  AdvanceSearchOSVersionChange(e) {
-    debugger;
+  getLastCheckIn(asset) {
+    if (!asset) {
+      return;
+    }
+    return asset.LastCheckInDate ? moment(asset.LastCheckInDate).fromNow() : '';
   }
 
 }

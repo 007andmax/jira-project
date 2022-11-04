@@ -249,12 +249,10 @@
                                 <div class="qt-df qt-fd-c">
                                     <span>
                                         <span *ngIf="asset.IsActive && asset.online">{{  asset.UpTime }}</span>                                        
-                                    </span>
-                                    <span
-                                        *ngIf="asset.IsActive"
-                                        class="uptime-tag qt-ff-gm"
-                                        [textContent]="asset.online ? 'Online' : 'Offline'"
-                                    ></span>
+                                        <span *ngIf="asset.IsActive && !asset.online">{{ getLastCheckIn(asset)}}</span>                                        
+                                    </span>                                    
+                                     <span *ngIf="asset.IsActive && asset.online" class="uptime-tag qt-ff-gm" [textContent]="asset.online ? 'Online' : 'Offline'"></span>
+                                     <span *ngIf="asset.IsActive && !asset.online" class="uptime-tag qt-ff-gm --offline" [textContent]="asset.online ? 'Online' : 'Offline'"></span>
                                     <span
                                     *ngIf="!asset.IsActive"
                                         class="uptime-tag qt-ff-gm --offline"
