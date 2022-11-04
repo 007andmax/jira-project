@@ -459,7 +459,7 @@
                         <div>
                             <div class="sidebar-system__info">
                                 <div class="sidebar-system__info-title">Manufacturer</div>
-                                <div class="device-table__input-name">
+                                <div class="device-table__input-name computerManufacture">
                                     <app-select-search #dropdownManufacturersidebar [placeholder]="'Select manufacture'"
                                         [class]="['qt-dropdown']" [editItem]="selectManufactureNamessidebar"
                                         [field]="'Name'" [list]="manufactureList"
@@ -474,7 +474,7 @@
                         <div>
                             <div class="sidebar-system__info">
                                 <div class="sidebar-system__info-title">Computer Model</div>
-                                <div class="device-table__input-name">
+                                <div class="device-table__input-name computerModel">
                                     <app-select-search #dropdownModelSidebar [placeholder]="'Select model'"
                                         [class]="['qt-dropdown']" [editItem]="selectModelNameSidebar" [field]="'Name'"
                                         [list]="selectModelList" (onSelectedItem)="onSelectModelsidebar($event)">

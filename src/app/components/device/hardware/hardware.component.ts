@@ -189,7 +189,7 @@ export class HardwareComponent implements OnInit {
         }
         this.computer.Name =
           this.computer.Domain != ""
-            ? this.computer.Name + " " + "(" + this.computer.Domain + ")"
+            ? this.computer.Name + "." + this.computer.Domain
             : this.computer.Name + " " + "(In workgroup)";
         this.printcsv();
       }

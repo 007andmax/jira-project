@@ -1,14 +1,14 @@
 import { FilterListTop } from "src/class/list/filter-list-top";
 
 export class CompanyDeviceBetaFilter {
-  filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC")];
+  filterTop: Array<FilterListTop> = [new FilterListTop("Title", "ASC")];
   constructor() {}
 
   public onFilter(field, devicesbeta) {
     let index = this.filterTop.findIndex((item) => item.field === field);
     if (index > -1) {
       let sort = this.filterTop[index].filter;
-      if (field === "Name") {
+      if (field === "Title") {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";

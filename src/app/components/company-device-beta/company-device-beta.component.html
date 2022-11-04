@@ -351,7 +351,7 @@
                                         Remote Access
                                     </ng-template>
                                     <div
-                                        [hidden]="!(asset.online) || !(asset.CanRemoteControl)"
+                                        [hidden]="!(asset.online)"
                                         class="
                       qt-ic-c
                       icon__quick-connect
@@ -643,10 +643,10 @@
                 </div>                            
                 <div>
                     <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Manufacturer</div>
-                        <div class="device-table__input-name">
+                        <div class="sidebar-system__info-title">Manufacturer</div>                        
+                        <div class="device-table__input-name computerManufacture">
                             <app-select-search                               
-                            #dropdownManufacturersidebar          
+                            #dropdownManufacturersidebar                                
                             [placeholder]="'Select manufacture'"                
                             [class]="['qt-dropdown']"
                             [editItem]="selectManufactureNamessidebar"
@@ -666,10 +666,10 @@
                 </div>                
                 <div>
                     <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Computer Model</div>
-                        <div class="device-table__input-name">
-                            <app-select-search                   
-                            #dropdownModelSidebar
+                        <div class="sidebar-system__info-title">Computer Model</div>                        
+                        <div class="device-table__input-name computerModel">
+                            <app-select-search                                               
+                            #dropdownModelSidebar                            
                             [placeholder]="'Select model'"                
                             [class]="['qt-dropdown']"
                             [editItem]="selectModelNameSidebar"

@@ -160,7 +160,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.showPreloader = true;
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');
     this.companiesState.onInit();
@@ -272,7 +272,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {      
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {            
       if (!resp || resp.length === 0) {
         this.assetList = [];
         this.asset = {};
@@ -324,15 +324,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
                 asset.UpTime = Sec;
               }
               else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                let Minutes = result[4] + ' ' + result[5] + ' ';
+                let Minutes = result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
                 asset.UpTime = Minutes;
               }
               else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + result[3];
+                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5];
                 asset.UpTime = Hours;
               }
               else {
-                let Days = result[0] + ' ' + result[1];
+                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3];
                 asset.UpTime = Days;
               }
             }
