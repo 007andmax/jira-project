@@ -15,19 +15,19 @@
 
 
 .select-product {
-  &__input {
-    width: 100%;
-    height: 40px;
-    font-size: 13px;
-    border-radius: 3px;
-    border: solid 1px $gray-500--old;
-    background-color: $white;
-    color: $gray-800--old;
-    padding: 10px 12px;
-    &::placeholder {
-      color: $gray-600--old;
-    }
-  }
+  //&__input { // TODO check this style
+  //  width: 100%;
+  //  height: 40px;
+  //  font-size: 13px;
+  //  border-radius: 3px;
+  //  border: solid 1px $gray-500--old;
+  //  background-color: $white;
+  //  color: $gray-800--old;
+  //  padding: 10px 12px;
+  //  &::placeholder {
+  //    color: $gray-600--old;
+  //  }
+  //}
 
   &__dropdown {
     //&::-webkit-scrollbar-thumb {

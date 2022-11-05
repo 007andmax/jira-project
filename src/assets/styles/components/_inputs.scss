@@ -71,16 +71,16 @@ span.qt-input-search input.qt-input-search {
     //margin-bottom: 8px;
   }
 
-  &__input {
-    height: 40px;
-    padding: 10px 14px;
-    border-radius: 4px;
-    border: solid 1px $gray-500--old;
-    background-color: $white;
-    &::placeholder {
-      color: $gray-600--old;
-    }
-  }
+  //&__input {  // TODO check this style
+  //  height: 40px;
+  //  padding: 10px 14px;
+  //  border-radius: 4px;
+  //  border: solid 1px $gray-500--old;
+  //  background-color: $white;
+  //  &::placeholder {
+  //    color: $gray-600--old;
+  //  }
+  //}
 
   &__textarea {
     height: 64px;

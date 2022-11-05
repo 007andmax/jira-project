@@ -1015,6 +1015,9 @@ h6,
   top: 9px;
   left: 14px;
   pointer-events: none;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-900;
 }
 .priority-dot {
   display: inline-block;
@@ -1038,15 +1041,18 @@ h6,
 .dropdown-menu .subdropdown-menu > li > a,
 .dropdown-menu > .nano li a {
   display: block;
-  padding: 5px 20px;
+  //padding: 5px 20px; // TODO check this style
+  padding: 5px 7px;
   clear: both;
   font-weight: normal;
   line-height: 2;
-  color: $gray-800--old;
+  color: $gray-900;
+  font-size: 14px;
   white-space: nowrap;
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 6px;
 }
 .form-control {
   box-shadow: none;

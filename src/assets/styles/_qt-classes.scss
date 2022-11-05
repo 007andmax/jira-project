@@ -67,7 +67,8 @@ input.qt-dropdown-input {
     outline: none;
     border-color: $blue-light-600;
 
-    &[aria-expanded="true"] + .app-drop-down__right-icon .report-caret-icon {
+    &[aria-expanded="true"] + .app-drop-down__right-icon .report-caret-icon,
+    &[aria-expanded="true"] + span .report-caret-icon {
       transform: translateY(-50%) rotate(180deg);
     }
 
@@ -144,7 +145,7 @@ input.qt-dropdown-input {
       margin-top: 8px;
     }
   }
-
+  &__input,
   input {
     height: 40px;
     width: 100%;
@@ -168,7 +169,8 @@ input.qt-dropdown-input {
       outline: none;
       border-color: $blue-light-600;
 
-      &[aria-expanded="true"] + .app-drop-down__right-icon .report-caret-icon {
+      &[aria-expanded="true"] + .app-drop-down__right-icon .report-caret-icon,
+      &[aria-expanded="true"] + .report-caret-icon {
         transform: translateY(-50%) rotate(180deg);
       }
 

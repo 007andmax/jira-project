@@ -28,7 +28,15 @@
 
     /deep/ .mat-form-field-label {
       padding-left: 24px;
-      line-height: 1.5;
+      //line-height: 1.5;
+      color: $gray-900;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 400;
+    }
+    /deep/ .mat-form-field-label-wrapper {
+      height: 26px;
+      top: -21px;
     }
     /deep/
       .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
@@ -334,6 +342,19 @@
       background-color: $white;
       overflow: auto;
       height: auto;
+      color: $gray-900;
+      font-size: 14px;
+      line-height: 17px;
+      border-color: $gray-200;
+
+      &:focus {
+        outline: none;
+        border-color: $blue-light-600;
+      }
+
+      &:hover {
+        border-color: $gray-300;
+      }
 
       @media (max-width: 767px) {
         min-height: 20px;

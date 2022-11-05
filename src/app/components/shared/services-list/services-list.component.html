@@ -1,6 +1,6 @@
 
 <div class="light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown">
-  <input class="pointer" type="text" 
+  <input class="pointer qt-input-block__input qt-dropdown-input" type="text"
          [ngClass]="{'no-valid': isFormValid}"
          placeholder="Service" (input)="onSearch($event)" id="dropdownServices" ngbDropdownToggle>
   <i class="icn-sm report-caret-icon"></i>

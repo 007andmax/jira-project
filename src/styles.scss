@@ -2201,8 +2201,20 @@ app-quotes-item {
   max-height: 150px;
   width: 100%;
   border: 1px solid $gray-200;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
+  line-height: 17px;
+  font-size: 14px;
+  color: $gray-900;
+  &::placeholder {
+    color: $gray-400;
+  }
+  &:focus {
+    border-color: $blue-light-600;
+  }
+  &:hover {
+    border-color: $gray-300;
+  }
   &.--input-error {
     border-color: $red-600;
   }
@@ -2212,6 +2224,7 @@ app-quotes-item {
     padding: 12px;
     font-size: 13px;
     outline: none;
+    border-radius: inherit;
     &:last-child {
       visibility: hidden;
       display: none;
@@ -4649,14 +4662,18 @@ input.--input-error:hover {
       padding-left: 6px;
 
       input {
-        @include сaption-m;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        color: $gray-900;
+        padding: 11px 14px;
         height: 34px;
         margin: 0;
         width: 100%;
         flex: 1;
 
         &::placeholder {
-          color: $gray-600--old;
+          color: $gray-400;
           font-family: inherit;
         }
       }

@@ -25,14 +25,14 @@
             <div class="d-f">
                 <label class="product-item__serial-num-input">
                     <input
-                        class="product-item__input serial-num"
+                        class="qt-input-block__input serial-num"
                         type="text"
                         [(ngModel)]="product.serialNumber"
                     >
                 </label>
                 <label class="product-item__cost-input">
                     <input
-                        class="product-item__input cost"
+                        class="qt-input-block__input cost"
                         type="text"
                         number
                         [money]="true"
@@ -43,7 +43,7 @@
                         (ngModelChange)="onChangeCostProduct($event, i)"
                     >
                     <input
-                        class="product-item__input cost"
+                        class="qt-input-block__input cost"
                         type="text"
                         *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
                         disabled
@@ -51,7 +51,7 @@
                 </label>
                 <label class="product-item__qty-input">
                     <input
-                        class="product-item__input qty"
+                        class="qt-input-block__input qty"
                         [(ngModel)]="product.item.quantity"
                         type="text"
                     >
@@ -65,7 +65,7 @@
                 ></app-invoice-form-ticket-edit-taxes>
                 <label class="product-item__price-input">
                     <input
-                        class="product-item__input price"
+                        class="qt-input-block__input price"
                         type="text"
                         [(ngModel)]="product.item.sale"
                         [ngClass]="{'--input-error':!product.valdiateSaleCost}"
@@ -87,7 +87,7 @@
             <div class="d-f qt-mt-8">
                 <label class="product-item__discount-input qt-ml-auto">
                     <input
-                        class="product-item__input"
+                        class="qt-input-block__input"
                         [(ngModel)]="product.discountAmount"
                         type="text"
                     >
@@ -113,14 +113,14 @@
         <div class="qt-df qt-fw-wrap-md qt-jc-sb-md">
             <label class="product-item__serial-num-input">
                 <input
-                    class="product-item__input serial-num"
+                    class="qt-input-block__input serial-num"
                     [(ngModel)]="currentProduct.serialNumber"
                     type="text"
                 >
             </label>
             <label class="product-item__cost-input">
                 <input
-                    class="product-item__input cost"
+                    class="qt-input-block__input cost"
                     number
                     [money]="true"
                     [ngModel]="currentProduct.item.cost"
@@ -130,7 +130,7 @@
                     *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                 >
                 <input
-                    class="product-item__input cost"
+                    class="qt-input-block__input cost"
                     *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
                     type="text"
                     disabled
@@ -138,7 +138,7 @@
             </label>
             <label class="product-item__qty-input">
                 <input
-                    class="product-item__input qty"
+                    class="qt-input-block__input qty"
                     [(ngModel)]="currentProduct.quantity"
                 >
             </label>
@@ -150,7 +150,7 @@
             ></app-invoice-form-ticket-edit-taxes>
             <label class="product-item__price-input">
                 <input
-                    class="product-item__input price"
+                    class="qt-input-block__input price"
                     [ngClass]="{'--input-error':!currentProduct.valdiateSaleCost}"
                     number
                     [money]="true"
@@ -170,7 +170,7 @@
         <div class="qt-df qt-fw-wrap-md qt-mt-8">
             <label class="product-item__discount-input qt-ml-auto">
                 <input
-                    class="product-item__input discount"
+                    class="qt-input-block__input discount"
                     [(ngModel)]="currentProduct.discountAmount"
                     type="text"
                 >

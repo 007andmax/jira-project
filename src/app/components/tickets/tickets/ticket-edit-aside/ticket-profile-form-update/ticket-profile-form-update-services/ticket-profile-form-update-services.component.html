@@ -92,7 +92,7 @@
                 (selectedServicesItem)="selectService($event)"
             ></app-services-list>
             <mat-error
-                class="qt-tooltip-error --max-width"
+                class="invalid-feedback"
                 *ngIf="!currentService.validate"
             >
                 The Service is required

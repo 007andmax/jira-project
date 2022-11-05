@@ -3,7 +3,6 @@
     ngbDropdown
     #taxesDropDown="ngbDropdown"
 >
-    <i class="icn-sm report-caret-icon"></i>
     <input
         type="text"
         [value]="getSelectedTaxes()"
@@ -11,8 +10,10 @@
         readonly
         [attr.placeholder]="(placeholder) ? placeholder : 'Taxes'"
         id="dropdownTypeTaxes"
+        class="qt-input-block__input qt-dropdown-input"
         ngbDropdownToggle
     >
+    <i class="icn-sm report-caret-icon"></i>
     <div
         ngbDropdownMenu
         class="taxes-dropdown__dropdown"
