@@ -22,11 +22,12 @@
             <edit-signature
                 #editSignature
                 ngbDropdownMenu
+                class="--tooltip-shadow"
                 [signatureDrop]="signatureEditDrop"
                 (onEdit)="content = $event"
             ></edit-signature>
             <i
-                class="icon__remove qt-sz-20 qt-bg-contain pointer qt-ml-24"
+                class="icon__remove qt-sz-20 qt-bg-contain pointer qt-ml-16"
                 *ngIf="content"
                 placement="top"
                 ngbTooltip="Remove"
@@ -65,6 +66,7 @@
                 </div>
                 <add-signature
                     ngbDropdownMenu
+                    class="--tooltip-shadow"
                     [signatureDrop]="signatureDrop"
                     (onAdd)="content = $event"
                 ></add-signature>
