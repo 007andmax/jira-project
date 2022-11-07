@@ -1140,22 +1140,59 @@ ngb-tabset {
 
 // modal-popup end
 
-::ng-deep .qt-select-input-40 {
-    input {
-        border-width: 0 !important;
-    }
-
-    input:hover {
-        border-width: 1px !important;
-    }
-
-    .pointer {
+.computerManufacturer{
+    /deep/ .light-dropdown {
+        input{
+            border: 0px !important;            
+        }
+        .report-caret-icon {
+            display: none;
+        }      
         .icn-remove-old {
             display: none;
         }
-    
-        .icn-remove-old:hover {
-            display: inline-block;
-        }
-    }    
+    }
 }
+
+.computerManufacturer{
+    /deep/ .light-dropdown:hover{
+      input{   
+        border: 1px solid #c5cdd5 !important;       
+      }
+      .report-caret-icon {
+          display: inline-block;
+      }    
+      .icn-remove-old {
+          display: inline-block;
+      }
+    } 
+  }
+
+
+ .computerModel{
+    /deep/ .light-dropdown {
+        input{
+            border: 0px !important;            
+        }
+        .report-caret-icon {
+            display: none;
+        }      
+        .icn-remove-old {
+            display: none;
+        }
+    }
+ } 
+
+ .computerModel{
+    /deep/ .light-dropdown:hover{
+      input{   
+        border: 1px solid #c5cdd5 !important;       
+      }
+      .report-caret-icon {
+          display: inline-block;
+      }    
+      .icn-remove-old {
+          display: inline-block;
+      }
+    } 
+  }
