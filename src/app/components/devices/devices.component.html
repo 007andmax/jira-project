@@ -230,7 +230,7 @@
                             </td>
                             <td class="company-devices-table__windows">
                                 <span class="company-devices-table__ip-windows-text"
-                                    [textContent]="asset.OperatingSystem"></span>
+                                    [textContent]="removeMicrosoft(asset.OperatingSystem)"></span>
                                 <div class="company-devices-table__system-network-buttons"
                                     *ngIf="asset.AgentVersion == '' ? false : true">
                                     <div class="qt-df qt-ai-c qt-mr-20 qt-pointer" (click)="openAside('SYSTEM',asset)">
@@ -288,7 +288,7 @@
                                     <ng-template #tipRemoteAccess class="tooltip">
                                         Remote Access
                                     </ng-template>
-                                    <div [hidden]="!(asset.online) || !(asset.CanRemoteControl)" class="
+                                    <div [hidden]="!(asset.online)" class="
               qt-ic-c
               icon__quick-connect
               qt-pointer qt-sz-24 qt-bg-contain

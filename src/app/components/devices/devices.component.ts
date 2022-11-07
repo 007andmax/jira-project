@@ -247,6 +247,12 @@ export class DevicesComponent implements OnInit {
       })
     }
 
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (resp.length > 0) {
+        this.onCurrentConfig(resp)
+      }
+    });
+
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);
@@ -422,19 +428,19 @@ export class DevicesComponent implements OnInit {
               let result = this.kafkaMessage.UpTime.split(" ");
 
               if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
-                let Sec = result[6] + ' ' + result[7];
+                let Sec = result[6] + ' ' + 's';
                 asset.UpTime = Sec;
               }
               else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                let Minutes = result[4] + ' ' + result[5] + ' '+ result[6] + ' ' + result[7];
+                let Minutes = result[4] + ' ' + 'm' + ' '+ result[6] + ' ' + 's';
                 asset.UpTime = Minutes;
               }
               else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5];
+                let Hours = result[2] + ' ' + 'h' + ' ' + result[4] + ' ' + 'm';
                 asset.UpTime = Hours;
               }
               else {
-                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3];
+                let Days = result[0] + ' ' + 'd' + ' ' + result[2] + ' ' + 'h';
                 asset.UpTime = Days;
               }
             }
@@ -1526,7 +1532,7 @@ export class DevicesComponent implements OnInit {
   }
 
   onCurrentConfig(resp: any) {
-    if (resp.length > 0) {
+    if (resp.length > 0) {      
       if (this.asset.ID && this.asset.ID != 0) {
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item) {
@@ -1958,6 +1964,13 @@ export class DevicesComponent implements OnInit {
       return;
     }
     return asset.LastCheckInDate ? moment(asset.LastCheckInDate).fromNow() : '';
+  }
+
+  removeMicrosoft(assetOperationgSystem){    
+    if(!assetOperationgSystem){
+      return;
+    }
+    return assetOperationgSystem.replace("Microsoft","");
   }
 
 }
