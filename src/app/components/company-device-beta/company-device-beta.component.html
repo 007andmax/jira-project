@@ -263,7 +263,7 @@
                             <td class="company-devices-table__windows">
                               <span
                                   class="company-devices-table__ip-windows-text"
-                                  [textContent]="asset.OperatingSystem"
+                                  [textContent]="removeMicrosoft(asset.OperatingSystem)"                                  
                               ></span>
                               <div class="company-devices-table__system-network-buttons" *ngIf="asset.AgentVersion == '' ? false : true">
                                   <div
@@ -973,7 +973,7 @@
         <div class="qt-aside-modern__content">  
             <div class="qt-input-block qt-input-line">
                 <label for="add-device-company">Company</label>
-                <app-select-search id="deviceCompany" #dropdowndeviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
+                <app-select-search id="deviceCompany" #dropdowndeviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [editItem]="companyDeviceSelect" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
             </div>      
             <div class="qt-input-block qt-input-line">
                 <label

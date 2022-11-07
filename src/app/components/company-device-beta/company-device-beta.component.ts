@@ -141,6 +141,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   IsCurrentConfigLoading: boolean = false;
   devices: any[] = [];
   todaysDate: any;
+  companyDeviceSelect:any = null;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -171,7 +172,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
     if (id) this.companiesStateService.setCompanyRoutingId(id);
     this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.companies = this.getClientsList(data);
+      this.companies = this.getClientsList(data);        
     });
     let company = this.companiesStateService.getCurrentCompany();
     if (company) {
@@ -320,19 +321,19 @@ export class CompanyDeviceBetaComponent implements OnInit {
               let result = this.kafkaMessage.UpTime.split(" ");
 
               if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
-                let Sec = result[6] + ' ' + result[7];
+                let Sec = result[6] + ' ' + 's';
                 asset.UpTime = Sec;
               }
               else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                let Minutes = result[4] + ' ' + result[5] + ' ' + result[6] + ' ' + result[7];
+                let Minutes = result[4] + ' ' + 'm' + ' ' + result[6] + ' ' + 's';
                 asset.UpTime = Minutes;
               }
               else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + result[3] + ' ' + result[4] + ' ' + result[5];
+                let Hours = result[2] + ' ' + 'h' + ' ' + result[4] + ' ' + 'm';
                 asset.UpTime = Hours;
               }
               else {
-                let Days = result[0] + ' ' + result[1] + ' ' + result[2] + ' ' + result[3];
+                let Days = result[0] + ' ' + 'd' + ' ' + result[2] + ' ' + 'h';
                 asset.UpTime = Days;
               }
             }
@@ -872,8 +873,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
   }
 
-  getAddDevice() {
-    this.opened = true;
+  getAddDevice() {          
+    this.opened = true;  
+    this.companyDeviceSelect = this.companies.find(x=>x.id == this.activateRoute.snapshot.params["id"]);    
+    this.onSelectCompanyName(this.companyDeviceSelect);       
   }
 
   closed() {
@@ -1114,8 +1117,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
       );
   }
 
-  onSelectCompanyName(company) {
-    this.comapanyId = company.id;
+  onSelectCompanyName(company) {                     
+    if(company)
+    {
+      this.comapanyId = company.id;   
+      this.companyDeviceSelect = company;   
+    }  
+    else{
+      this.companyDeviceSelect = null;
+    }  
   }
 
   Deviceremove(index: number) {
@@ -1154,7 +1164,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.selectedSidebarTag = [];
     this.linkDevicesTag = [];
     this.installdatePicker.reset();
-    this.warrantydatePicker.reset();
+    this.warrantydatePicker.reset();    
   }
 
   onSelectManufactureNamesidebar(SelectManufacturerSidebar) {
@@ -1599,6 +1609,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
       return;
     }
     return asset.LastCheckInDate ? moment(asset.LastCheckInDate).fromNow() : '';
+  }
+
+  removeMicrosoft(assetOperationgSystem){    
+    if(!assetOperationgSystem){
+      return;
+    }
+    return assetOperationgSystem.replace("Microsoft","");
   }
 }
 
