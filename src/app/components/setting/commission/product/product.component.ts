@@ -6,6 +6,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { ProductsCategoryFilter } from '../../products-settings/class/products-category-filter';
 
 @Component({
   selector: 'app-product',
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit, OnDestroy {
+  filter: ProductsCategoryFilter = new ProductsCategoryFilter();
   loading = false;
   categories: any;
   edit = false;
@@ -46,6 +48,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+
+  onFilter(field) {
+    this.filter.onFilter(field, this.categories);
+  }
+
   /**
    * get categories
    */
@@ -55,7 +62,8 @@ export class ProductComponent implements OnInit, OnDestroy {
       res => {
         this.loading = false; $(".loading").css("display", "none");
         if (res && res.length > 0) {
-          this.categories = res;
+          this.categories = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
           for (const cat of this.categories) {
             if (cat && cat.commissionRate !== null) {
               cat.commissionRate = cat.commissionRate.toFixed(2);

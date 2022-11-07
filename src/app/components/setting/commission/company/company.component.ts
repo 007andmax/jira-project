@@ -11,6 +11,7 @@ import { FormControl } from "@angular/forms";
 import { UsersStateService } from "src/app/states/users/users-state.service";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { CompanyCommissionFilter } from "./class/company-commission-filter";
 
 @Component({
   selector: "app-company-commission",
@@ -27,7 +28,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   activeTechUsers: any;
   filterTechUsers = "";
   selectedIdx = -1;
-
+  filter: CompanyCommissionFilter = new CompanyCommissionFilter();
 
   sub: Subscription = new Subscription();
   config = {
@@ -58,7 +59,9 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
     this.getUsers();
   }
-
+  onFilter(field) {
+    this.filter.onFilter(field, this.clientsCompanies);
+  }
   /**
  * get users list
  */
@@ -190,7 +193,8 @@ export class CompanyComponent implements OnInit, OnDestroy {
         company.clientType.toLowerCase() !== "vendor" &&
         company.deletedAt === null &&
         !company.isDefault
-    );
+    ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.loading = false; $(".loading").css("display", "none");
   }
 
@@ -217,8 +221,9 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.commissionService
       .getClientCompaniesInfo()
       .pipe(
-        map(res => {
-          this.clientsCompanies = res;
+        map((res: any) => {
+          this.clientsCompanies = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         }),
         catchError(err => throwError(new Error("Get Client Companies")))
       )

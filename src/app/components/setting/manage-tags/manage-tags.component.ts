@@ -305,7 +305,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.tagsService.removeCompanyTag(this.tagId, this.setActiveTab).subscribe(
       res => {
         this.tagId = null;
-        this.toaster.success("Tag Removed Successfully");
       },
       error => {
       }
@@ -395,10 +394,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    $('body').removeClass('page-settings');
-    // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
     this.sub.unsubscribe();
+    $('body').removeClass('page-settings');
+    // Do not forget to unsubscribe the event
   }
   public trackById(index, item) {
     return item.id;

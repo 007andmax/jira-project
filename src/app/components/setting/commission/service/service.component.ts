@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { ServiceCommissionFilter } from './class/service-commission-filter';
 
 @Component({
   selector: 'app-service',
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./service.component.scss']
 })
 export class ServiceComponent implements OnInit, OnDestroy {
+  filter: ServiceCommissionFilter = new ServiceCommissionFilter();
   loading = false;
   selectedIdx = -1;
   selectedSpecIdx = -1;
@@ -51,6 +53,14 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
   }
 
+  onFilter(field) {
+    this.filter.onFilter(field, this.services);
+  }
+
+  onFilterSpecial(field) {
+    this.filter.onFilter(field, this.specialService);
+  }
+
   /**
    * get current company
    */
@@ -71,7 +81,8 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.commissionService.getDefaultServices().subscribe(
       res => {
         this.loading = false; $(".loading").css("display", "none");
-        this.services = res;
+        this.services = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         res.forEach(ele => {
           if (ele) {
             ele.commissionRate = ele.commissionRate
@@ -105,6 +116,8 @@ export class ServiceComponent implements OnInit, OnDestroy {
               }
             });
           });
+          this.specialService.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         }
       },
       error => {

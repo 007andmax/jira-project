@@ -8,6 +8,8 @@ import { ContractComponent } from './contract/contract.component';
 import { ServiceComponent } from './service/service.component';
 import { CommissionRoutingModule } from './commission-routing.module';
 import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
+import { CompanyTechUsersComponent } from './company/company-tech-users/company-tech-users.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 @NgModule({
@@ -15,13 +17,15 @@ import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
         CompanyComponent,
         ProductComponent,
         ContractComponent,
-        ServiceComponent
+        ServiceComponent,
+        CompanyTechUsersComponent
     ],
     imports: [
         CommonModule,
         NgbModule,
         TechUsersModule,
-        CommissionRoutingModule
+        CommissionRoutingModule,
+        DynamicTooltipModule
     ],
 
 

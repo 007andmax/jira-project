@@ -8,7 +8,10 @@
     <div class="tab-pane__table dataTable">
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
-                <div class="tab-pane__table-cell companies-sales-person-table__company-name">
+                <div
+                    class="tab-pane__table-cell companies-sales-person-table__company-name pointer"
+                    (click)="onFilter('name')"
+                >
                     Company Name
                     <div class="qt-table-modern__sorting--new"></div>
                 </div>
@@ -27,19 +30,22 @@
                 <div class="tab-pane__table-cell companies-sales-person-table__company-name">{{ company.name }}</div>
                 <div class="tab-pane__table-cell companies-sales-person-table__assigned-sales-person">
                     {{ getClinetUrl(company) }}
-                    <app-tech-users
+                    <company-tech-users
+                        #techUsersDP
                         [users]="activeTechUsers"
                         [editMode]="true"
-                        [type]="'COMPANY_SETTINGS'"
                         [selectedMode]="'SINGLE'"
                         [container]="'body'"
                         [editUsers]="selectedActiveTechUsers(company, i)"
                         [isDisabled]="!getPermissions('EDIT_COMPANIES')"
                         (usersChange)="setTechLead($event,company)"
-                    ></app-tech-users>
+                    ></company-tech-users>
                 </div>
                 <div class="tab-pane__table-cell companies-sales-person-table__action">
-                    <div class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"></div>
+                    <div
+                        class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
+                        (click)="techUsersDP.toggleDropDown(true)"
+                    ></div>
                 </div>
             </div>
         </div>

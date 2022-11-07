@@ -8,6 +8,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
+import { User } from '../users/class/user';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
@@ -30,6 +31,7 @@ import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.com
 })
 export class LeftPanelComponent implements OnInit {
   currentCompany: Company;
+  currentUser: User;
   toggleLeftPanel: boolean = false;
   state: string = '';
   page: string = '';
@@ -66,6 +68,10 @@ export class LeftPanelComponent implements OnInit {
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.getCurrentUser(data)
+    })
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -190,6 +196,9 @@ export class LeftPanelComponent implements OnInit {
          this.goToDefaultPage();
        }
      })*/
+  }
+  private getCurrentUser(data) {
+    this.currentUser = data;
   }
   goToDefaultPage() {
     this.state = 'new-tickets';
@@ -316,13 +325,8 @@ export class LeftPanelComponent implements OnInit {
     return `${this.currentCompany.name[0].toUpperCase()}`
   }
   checkLogo() {
-    return (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id || this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id)
-  }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
+    if (this.currentUser && this.currentUser.avatar) return `/users/${this.currentUser.id}/image.jpg?t=${this.currentUser.avatar.updatedAt}`;
+    return null;
   }
   public getAccessReports() {
     return this.getPermissions("VIEW_SALES_REPORT") ||

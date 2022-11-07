@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MarketingEmailUsersItemComponent } from './marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
+import { MarketingEmailUsersAddItemComponent } from './marketing-email-users/marketing-email-users-add-item/marketing-email-users-add-item.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { MarketingEmailUsersItemComponent } from './marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         MarketingSubscriptionTypeComponent,
         MarketingEmailUsersComponent,
         MarketingEmailUsersAddComponent,
+        MarketingEmailUsersAddItemComponent,
         MarketingEmailUsersItemComponent
     ],
     imports: [

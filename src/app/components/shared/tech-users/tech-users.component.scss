@@ -4,13 +4,9 @@
 .select-wrapper {
   @include dropdown-menu;
   height: 252px;
-  max-height: 252px;
+  max-height: 586px;
   overflow: hidden;
   display: block;
-  left: unset;
-  top: unset;
-  bottom: 55px;
-  right: 59px;
   width: 290px;
   .content {
     .assign-ticket-header {
@@ -53,4 +49,7 @@
   .ticket-updates__photo-people {
     margin-right: 10px;
   }
+}
+.tech-users-container {
+  max-height: 586px !important;
 }

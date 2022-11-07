@@ -42,8 +42,9 @@
         >
             <span *ngIf="activePage === 'new-companies'">Clients</span>
             <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="'(' + getCount('CLIENT') +')'"
+                [textContent]="getCount('CLIENT')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Clients</span>
         </li>
@@ -61,8 +62,9 @@
         >
             <span *ngIf="activePage === 'new-companies'">Leads</span>
             <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="'(' + getCount('LEAD') +')'"
+                [textContent]="getCount('LEAD')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Leads</span>
         </li>
@@ -80,8 +82,9 @@
         >
             <span *ngIf="activePage === 'new-companies'">Vendors</span>
             <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="'(' + getCount('VENDOR') +')'"
+                [textContent]="getCount('VENDOR')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Vendors</span>
         </li>
@@ -99,8 +102,9 @@
         >
             <span *ngIf="activePage === 'new-companies'">Suppliers</span>
             <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
                 *ngIf="activePage === 'new-companies'"
-                [textContent]="'(' + getCount('SUPPLIER') +')'"
+                [textContent]="getCount('SUPPLIER')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Suppliers</span>
         </li>

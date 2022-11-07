@@ -99,6 +99,8 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   close() {
+    this.users = [];
+    this.reqUsers = [];
     this.opened = false;
     this.marketingSubscription = null;
   }

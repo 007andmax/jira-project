@@ -8,7 +8,10 @@
                         <span></span>
                     </label>
                 </div>
-                <div class="tab-pane__table-cell commissions-service__service-name pointer">
+                <div
+                    class="tab-pane__table-cell commissions-service__service-name pointer"
+                    (click)="onFilter('name')"
+                >
                     Service Name
                     <div class="qt-table-modern__sorting--new"></div>
                 </div>
@@ -106,14 +109,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
     <div class="tab-pane__table dataTable">
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
@@ -123,7 +118,10 @@
                         <span></span>
                     </label>
                 </div>
-                <div class="tab-pane__table-cell commissions-service__service-name pointer">
+                <div
+                    class="tab-pane__table-cell commissions-service__service-name pointer"
+                    (click)="onFilterSpecial('name')"
+                >
                     Service Name
                     <div class="qt-table-modern__sorting--new"></div>
                 </div>
