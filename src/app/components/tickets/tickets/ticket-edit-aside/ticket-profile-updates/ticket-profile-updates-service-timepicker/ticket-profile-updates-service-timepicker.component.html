@@ -13,13 +13,13 @@
         class="time end qt-input-block__input"
         [ngClass]="{'--input-error':! validate}"
     >
-    <mat-error
-        class="invalid-feedback"
-        *ngIf="!validate"
-        [textContent]="errorMessage"
-    >
-    </mat-error>
 </p>
+<mat-error
+  class="invalid-feedback --pos-static"
+  *ngIf="!validate"
+  [textContent]="errorMessage"
+>
+</mat-error>
 <p
     *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
     class="start-end-timer"

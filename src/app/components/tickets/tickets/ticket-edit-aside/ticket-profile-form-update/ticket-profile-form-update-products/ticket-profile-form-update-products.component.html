@@ -19,7 +19,7 @@
                     class="product-item__btn-del "
                     (click)="removeProduct(i)"
                 >
-                    <span class="icon__close btn-icon"></span>
+                    <span class="icon__close btn-icon qt-ic-c"></span>
                 </button>
             </div>
             <div class="d-f">
@@ -77,7 +77,7 @@
                         (ngModelChange)="onChangeSaleProduct($event, i)"
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback --pos-static"
                         *ngIf="!product.valdiateSaleCost"
                     >
                         Product price can not be lower than cost
@@ -160,7 +160,7 @@
                     (ngModelChange)="onChangeSale($event)"
                 >
                 <mat-error
-                    class="qt-tooltip-error"
+                    class="invalid-feedback --pos-static"
                     *ngIf="!currentProduct.valdiateSaleCost"
                 >
                     Product price can not be lower than cost

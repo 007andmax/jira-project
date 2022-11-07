@@ -3465,19 +3465,11 @@ app-ticket-profile-updates-note {
 
   ul {
     list-style: none;
-    padding: 6px 0;
+    padding: 0;
     margin: 0;
   }
   li {
-    padding: 6px 17px;
-    color: $gray-800--old;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    height: 32px;
-    position: relative;
-    white-space: nowrap;
+    @include dropdown-item;
 
     .dropdown-input {
       margin: 0 8px 0 0;
@@ -3486,11 +3478,12 @@ app-ticket-profile-updates-note {
       margin-right: 8px;
     }
     a {
-      color: $gray-800--old;
+      //color: $gray-800--old;
+      color: inherit;
     }
-    &:hover {
-      background-color: $background;
-    }
+    //&:hover {
+    //  background-color: $background;
+    //}
   }
   &__item-icon {
     width: 16px;
@@ -3567,6 +3560,7 @@ app-ticket-profile-updates-note {
 
 app-ticket-profile-updates-service-timepicker {
   display: flex;
+  flex-direction: column;
 
   @media (max-width: 767px) {
     margin-top: 42px;
@@ -4141,10 +4135,10 @@ app-ticket-edit-aside {
         align-items: center;
       }
 
-      i {
-        margin-right: 8px;
-        margin-top: -3px;
-      }
+      //i { // Todo check this style
+      //  margin-right: 8px;
+      //  margin-top: -3px;
+      //}
     }
   }
 }

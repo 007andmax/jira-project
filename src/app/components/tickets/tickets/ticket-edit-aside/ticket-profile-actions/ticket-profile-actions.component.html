@@ -19,7 +19,7 @@
                     href="javascript:void(0)"
                     (click)="claimTicket()"
                 >
-                    <i class="icn-16 icon__claim-edit-ticket"></i>
+                    <i class="qt-sz-20 qt-bg-contain icon__claim-edit-ticket"></i>
                     Claim Ticket
                 </a>
             </li>
@@ -33,7 +33,7 @@
                     href="javascript:void(0)"
                     class="link-user"
                 >
-                    <i class="icn-16 icon__link-gray"></i>
+                    <i class="qt-sz-20 qt-bg-contain icon__link-gray"></i>
                     {{ ticketProfile.agent && ticketProfile.agent.deviceId ? 'Relink with another' : 'Link with' }}
             Agent
                 </a>
@@ -62,7 +62,7 @@
                     href="javascript:void(0)"
                     (click)="changeLinkedAgent('')"
                 >
-                    <i class="icn-16 icon__unlink"></i>
+                    <i class="qt-sz-20 qt-bg-contain icon__unlink"></i>
                     Unlink Agent
                 </a>
             </li>
@@ -73,7 +73,7 @@
                     href="javascript:void(0)"
                     (click)="moveToTrash(true)"
                 >
-                    <i class="icn-16 icon__remove"></i>
+                    <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
                     Move to Trash
                 </a>
             </li>
@@ -85,7 +85,7 @@
                     *ngIf="currentUser && currentUser.isOwner"
                     (click)="moveIntoSpam()"
                 >
-                    <i class="icn-16 icon__terminate"></i>
+                    <i class="qt-sz-20 qt-bg-contain icon__terminate"></i>
                     Mark as Spam
                 </a>
                 <a
@@ -95,7 +95,7 @@
                     *ngIf="currentUser && !currentUser.isOwner"
                     (click)="moveIntoSpam()"
                 >
-                    <i class="icn-16 icon__terminate"></i>
+                    <i class="qt-sz-20 qt-bg-contain icon__terminate"></i>
                     Report as Spam
                 </a>
             </li>

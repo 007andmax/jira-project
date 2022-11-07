@@ -12,26 +12,28 @@
     >
         <div class="service-item">
             <div class="service-item__first-line d-f relative">
-                <app-services-list
-                    class="service-item__input device"
+                <div class="service-item__input device">
+                  <app-services-list
+                    class=""
                     [ngClass]="{'--input-error':!service.validate}"
                     [type]="'TICKET'"
                     [editItem]="service.item"
                     [itemList]="servicesList"
                     (selectedServicesItem)="onSelectService($event,i)"
-                ></app-services-list>
-                <mat-error
-                    class="qt-tooltip-error --max-width"
+                  ></app-services-list>
+                  <mat-error
+                    class="invalid-feedback --pos-static"
                     *ngIf="!service.validate"
-                >
+                  >
                     The Service is required
-                </mat-error>
-                <mat-error
-                    class="qt-tooltip-error --max-width"
+                  </mat-error>
+                  <mat-error
+                    class="invalid-feedback --pos-static"
                     *ngIf="!service.validateQuantity"
-                >
+                  >
                     You have to set any time value
-                </mat-error>
+                  </mat-error>
+                </div>
                 <app-ticket-profile-updates-service-timepicker
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
                     [validate]="service.validateQuantity"
@@ -63,7 +65,7 @@
                     class="service-item__btn-del"
                     (click)="removeService(i)"
                 >
-                    <span class="icon__close btn-icon"></span>
+                    <span class="icon__close btn-icon qt-ic-c"></span>
                 </button>
             </div>
             <div>
@@ -84,19 +86,20 @@
     </ng-template>
     <div class="service-item">
         <div class="service-item__first-line qt-df qt-fw-wrap-md qt-jc-sb-md relative">
-            <app-services-list
-                class="service-item__input device"
+            <div class="service-item__input device">
+              <app-services-list
                 #serviceDP
                 [ngClass]="{'--input-error':!currentService.validate}"
                 [itemList]="servicesList"
                 (selectedServicesItem)="selectService($event)"
-            ></app-services-list>
-            <mat-error
-                class="invalid-feedback"
+              ></app-services-list>
+              <mat-error
+                class="invalid-feedback --pos-static"
                 *ngIf="!currentService.validate"
-            >
+              >
                 The Service is required
-            </mat-error>
+              </mat-error>
+            </div>
             <app-ticket-profile-updates-service-timepicker
                 #timePicker
                 [validate]="currentService.validateQuantity"
