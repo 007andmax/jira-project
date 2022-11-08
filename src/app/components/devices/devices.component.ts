@@ -430,19 +430,19 @@ export class DevicesComponent implements OnInit {
                 let result = this.kafkaMessage.UpTime.split(" ");
   
                 if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
-                  let Sec = result[6] + ' ' + 's';
+                  let Sec = result[6]+ 's';
                   asset.UpTime = Sec;
                 }
                 else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                  let Minutes = result[4] + ' ' + 'm' + ' '+ result[6] + ' ' + 's';
+                  let Minutes = result[4]+'m'+ ' ' + result[6]+'s';
                   asset.UpTime = Minutes;
                 }
                 else if (result[0] == "0" && result[2] != "0") {
-                  let Hours = result[2] + ' ' + 'h' + ' ' + result[4] + ' ' + 'm';
+                  let Hours = result[2]+'h'+ ' ' + result[4]+'m';
                   asset.UpTime = Hours;
                 }
                 else {
-                  let Days = result[0] + ' ' + 'd' + ' ' + result[2] + ' ' + 'h';
+                  let Days = result[0]+'d'+ ' ' + result[2]+'h';
                   asset.UpTime = Days;
                 }
               }
