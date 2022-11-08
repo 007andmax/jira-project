@@ -417,36 +417,39 @@ export class DevicesComponent implements OnInit {
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
-          if (asset) {
+          if (asset) {            
             this.kafkaMessage = JSON.parse(resp[0].Value);
-            asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-            if (this.kafkaMessage.IdleTime != null) {
-              let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              asset.IdelTime = Time[1] != "" ? Time[1] : "";
-            }
-            if (this.kafkaMessage.UpTime != "") {
-              let result = this.kafkaMessage.UpTime.split(" ");
-
-              if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
-                let Sec = result[6] + ' ' + 's';
-                asset.UpTime = Sec;
+            if(this.kafkaMessage.IsAgentRunning)
+            {
+              asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+              if (this.kafkaMessage.IdleTime != null) {
+                let Time = this.kafkaMessage.IdleTime.split("Idle for");
+                asset.IdelTime = Time[1] != "" ? Time[1] : "";
               }
-              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                let Minutes = result[4] + ' ' + 'm' + ' '+ result[6] + ' ' + 's';
-                asset.UpTime = Minutes;
+              if (this.kafkaMessage.UpTime != "") {
+                let result = this.kafkaMessage.UpTime.split(" ");
+  
+                if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
+                  let Sec = result[6] + ' ' + 's';
+                  asset.UpTime = Sec;
+                }
+                else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
+                  let Minutes = result[4] + ' ' + 'm' + ' '+ result[6] + ' ' + 's';
+                  asset.UpTime = Minutes;
+                }
+                else if (result[0] == "0" && result[2] != "0") {
+                  let Hours = result[2] + ' ' + 'h' + ' ' + result[4] + ' ' + 'm';
+                  asset.UpTime = Hours;
+                }
+                else {
+                  let Days = result[0] + ' ' + 'd' + ' ' + result[2] + ' ' + 'h';
+                  asset.UpTime = Days;
+                }
               }
-              else if (result[0] == "0" && result[2] != "0") {
-                let Hours = result[2] + ' ' + 'h' + ' ' + result[4] + ' ' + 'm';
-                asset.UpTime = Hours;
-              }
-              else {
-                let Days = result[0] + ' ' + 'd' + ' ' + result[2] + ' ' + 'h';
-                asset.UpTime = Days;
-              }
-            }
-
+              asset.online = true;
+            }                       
           }
-          asset.online = true;
+          //asset.online = true;
         }
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
