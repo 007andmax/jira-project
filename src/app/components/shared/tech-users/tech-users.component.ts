@@ -73,7 +73,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   /**
   * Subscribe for edit mode
   */
-  private checUsersForEdit() {
+  public checUsersForEdit() {
     let getUsersFromEdit = this.techState.getUsersFromEdit().subscribe((data: Array<RecurringTicketUser>) => {
 
       data.forEach((item) => {
@@ -90,7 +90,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   /**
   * Subscribe for clear data
   */
-  private onInitClearState() {
+  public onInitClearState() {
     let getClearState = this.techState.getClearState().subscribe(() => this.clear());
     this.sub.add(getClearState);
   }

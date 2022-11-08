@@ -121,6 +121,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
         this.toastrService.success("Techlead Changed Successfully");
+        company.techLeadId = techLeadId;
       },
       error => {
         this.toastrService.error(`Error Occured, ${error}`);

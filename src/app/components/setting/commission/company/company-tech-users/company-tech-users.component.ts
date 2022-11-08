@@ -12,8 +12,30 @@ import { SINGLE_SELECT } from 'src/app/const/users';
 })
 export class CompanyTechUsersComponent extends TechUsersComponent {
   @ViewChild('dp') dp: NgbDropdown;
-
-
+  outSelectedUsers = [];
+  ngOnInit() {
+    if (this.editMode) {
+      this.usersList.forEach(item => {
+        let index = this.editUsers.findIndex(user => user.id === item.id);
+        if (index > -1) {
+          item.selected = true;
+          this.selectedUsers.push(JSON.parse(JSON.stringify(item)));
+        }
+      })
+    }
+    this.onInitClearState();
+    this.checUsersForEdit();
+  }
+  public resetEditMode() {
+    this.selectedUsers = [];
+    this.usersList.forEach(item => {
+      let index = this.editUsers.findIndex(user => user.id === item.id);
+      if (index > -1) {
+        item.selected = true;
+        this.selectedUsers.push(JSON.parse(JSON.stringify(item)));
+      }
+    })
+  }
   public toggleDropDown(data) {
     if (data) this.dp.open();
     if (!data) this.dp.close();
@@ -25,9 +47,9 @@ export class CompanyTechUsersComponent extends TechUsersComponent {
         if (i !== index) item.selected = false;
       });
     }
-    this.selectedUsers = this.usersList.filter(item => item.selected);
+    this.outSelectedUsers = this.usersList.filter(item => item.selected);
   }
   public save() {
-    this.usersChange.emit(this.selectedUsers);
+    this.usersChange.emit(this.outSelectedUsers);
   }
 }
