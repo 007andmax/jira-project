@@ -145,6 +145,10 @@
                                                 ></p>
                                             </span>
                                         </a>
+                                        <i
+                                            *ngIf="isSelected(user)"
+                                            class="qt-sz-20 qt-bg-contain icn-label-save is-selected"
+                                        ></i>
                                     </div>
                                 </ng-template>
                             </div>
@@ -154,12 +158,14 @@
                                 <button
                                     class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
                                     (click)="toggleDropDown(false)"
+                                    ngbDropdownToggle
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     class="qt-button qt-jc-c qt-w100"
                                     (click)="save()"
+                                    ngbDropdownToggle
                                 >
                                     Save
                                 </button>

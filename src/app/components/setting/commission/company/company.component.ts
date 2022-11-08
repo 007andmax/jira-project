@@ -114,13 +114,23 @@ export class CompanyComponent implements OnInit, OnDestroy {
    * @param company
    */
   setTechLead(techLead: any, company: any) {
-    if (!techLead || !company) {
+    if (!company) {
+      return;
+    }
+    if (techLead.length == 0) {
+      this.commissionService.removeTechLead(company.id).subscribe(
+        res => {
+          company.techLeadId = null;
+        },
+        error => {
+          this.toastrService.error(`Error Occured, ${error}`);
+        }
+      );
       return;
     }
     const techLeadId = techLead[0].id;
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
-        this.toastrService.success("Techlead Changed Successfully");
         company.techLeadId = techLeadId;
       },
       error => {

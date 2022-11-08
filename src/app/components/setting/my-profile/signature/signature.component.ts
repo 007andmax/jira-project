@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -23,6 +23,7 @@ export class SignatureComponent implements OnInit, OnDestroy {
   constructor(private signatureService: SignatureService,
     private confirmStateService: ConfirmStateService,
     private signatureStateService: SignatureStateService,
+    private elRef: ElementRef,
     private modalService: NgbModal) { }
 
 
@@ -30,6 +31,7 @@ export class SignatureComponent implements OnInit, OnDestroy {
     this.signatureService.getSignature().subscribe((data: any) => {
       if (data) {
         this.content = data.content;
+        if (data.content) this.elRef.nativeElement.querySelector(".content-html").insertAdjacentHTML('afterbegin', data.content);
       }
       this.loading = false;
     }, err => {
@@ -44,12 +46,19 @@ export class SignatureComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
+  setContent(data) {
+    this.content = data;
+    this.elRef.nativeElement.querySelector(".content-html").innerHTML = '';
+    this.elRef.nativeElement.querySelector(".content-html").insertAdjacentHTML('afterbegin', data);
+  }
   editContent() {
     this.editSignature.onInitedit(this.content);
   }
   onRemove() {
     this.signatureService.removeSignature().subscribe(data => {
       this.content = null;
+      this.elRef.nativeElement.querySelector(".content-html").innerHTML = '';
+
     })
   }
   remove() {

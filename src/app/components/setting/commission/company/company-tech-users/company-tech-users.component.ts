@@ -22,6 +22,7 @@ export class CompanyTechUsersComponent extends TechUsersComponent {
           this.selectedUsers.push(JSON.parse(JSON.stringify(item)));
         }
       })
+      this.outSelectedUsers = this.usersList.filter(item => item.selected);
     }
     this.onInitClearState();
     this.checUsersForEdit();
@@ -35,6 +36,7 @@ export class CompanyTechUsersComponent extends TechUsersComponent {
         this.selectedUsers.push(JSON.parse(JSON.stringify(item)));
       }
     })
+    this.outSelectedUsers = this.usersList.filter(item => item.selected);
   }
   public toggleDropDown(data) {
     if (data) this.dp.open();
@@ -48,6 +50,9 @@ export class CompanyTechUsersComponent extends TechUsersComponent {
       });
     }
     this.outSelectedUsers = this.usersList.filter(item => item.selected);
+  }
+  public isSelected(user) {
+    return this.outSelectedUsers.find(item => item.id == user.id);
   }
   public save() {
     this.usersChange.emit(this.outSelectedUsers);

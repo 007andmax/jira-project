@@ -24,7 +24,7 @@
                 ngbDropdownMenu
                 class="--tooltip-shadow"
                 [signatureDrop]="signatureEditDrop"
-                (onEdit)="content = $event"
+                (onEdit)="setContent($event)"
             ></edit-signature>
             <i
                 class="icon__remove qt-sz-20 qt-bg-contain pointer qt-ml-16"
@@ -39,8 +39,7 @@
         <div class="tab-pane__row">
             <div
                 class="content-html"
-                *ngIf="content"
-                [innerHTML]="content"
+                [hidden]="!content"
             ></div>
             <div
                 class="qt-df qt-ai-c no-content"
@@ -68,7 +67,7 @@
                     ngbDropdownMenu
                     class="--tooltip-shadow"
                     [signatureDrop]="signatureDrop"
-                    (onAdd)="content = $event"
+                    (onAdd)="setContent($event)"
                 ></add-signature>
             </div>
         </div>

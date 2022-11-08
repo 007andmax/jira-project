@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 const API_URL = environment.apiUrl;
 
@@ -27,6 +29,8 @@ export class CommissionService {
   private SET_TECHLEAD_API = `${API_URL}`;
 
   constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -192,9 +196,28 @@ export class CommissionService {
       return;
     }
     return this.http.put(
-      `${this.SET_TECHLEAD_API}company/${cmpId}/setTechLead/${techLeadId}`,
+      `${this.SET_TECHLEAD_API}company/${cmpId}/changeTechLead?techLeadId=${techLeadId}`,
       ''
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Techlead Changed Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  removeTechLead(cmpId) {
+    if (!cmpId) {
+      return;
+    }
+    return this.http.put(
+      `${this.SET_TECHLEAD_API}company/${cmpId}/changeTechLead`,
+      ''
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Tech user has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];

@@ -6,8 +6,12 @@
     margin: 0px auto;
 }
 .content-html {
-    max-width: 568px;
+    width: 568px;
     word-break: break-word;
+}
+.profile {
+    width: 620px;
+    margin: 32px auto !important;
 }
 add-signature,
 edit-signature {
