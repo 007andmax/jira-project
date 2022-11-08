@@ -87,18 +87,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.2rem;
-    height: 1.8rem;
+    //width: 2.2rem;
+    //height: 1.8rem;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
   .ngb-dp-months {
-    padding: 0 8px 14px;
+    padding: 0 15px 14px;
   }
-  .ngb-dp-weekday {
-    color: $gray-600--old;
-  }
+  //.ngb-dp-weekday {
+  //  color: $gray-600--old;
+  //}
 }
 .date-picker {
-  overflow-x: hidden;
+  //overflow-x: hidden; // TODO check this style
   position: relative;
   i {
     position: absolute;
@@ -116,14 +126,19 @@
       border: unset;
     }
   }
+  .ngb-dp-month {
+    &:first-child .ngb-dp-week,
+    &:last-child .ngb-dp-week {
+      padding: 0;
+    }
+  }
   .ngb-dp-header,
   .ngb-dp-weekdays {
     background: $white;
-    color: $gray-600--old;
-    font-size: 12px;
-    font-weight: 600;
     .small {
-      font-size: 12px;
+      color: $gray-900;
+      font-size: 13px;
+      font-weight: 500;
       font-style: normal;
     }
   }
@@ -132,7 +147,7 @@
   }
   .ngb-dp-weekdays {
     pointer-events: none;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     border-bottom: none;
   }
   .ngb-dp-month-name {
@@ -142,14 +157,19 @@
   .custom-select {
     color: $primary-2;
     background: $white;
-    border: 1px solid $gray-400--old;
+    //border: 1px solid $gray-400--old;
+    border: 1px solid transparent;
     border-radius: 3px;
     cursor: pointer;
     outline: none;
-    font-weight: 400;
-    font-size: 13px;
+    //font-weight: 400;
+    //font-size: 13px;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: $gray-900;
     height: 2rem;
-    line-height: 20px;
+    //line-height: 20px;
     &:first-child {
       margin-right: 8px;
     }
@@ -158,6 +178,8 @@
     color: $white;
     min-width: 20px;
     text-align: left;
+    margin: 0;
+    padding: 0;
     span {
       margin-bottom: 2px;
       color: $gray-800--old;
@@ -171,13 +193,16 @@
   .ngb-dp-day {
     border: none;
     outline: none;
+    color: $gray-500;
     div {
       transition: all 0.3s;
-      border-radius: 3px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 500;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
       &:hover {
-        background: $gray-300--old;
+        color: $blue-light-600;
       }
     }
     .bg-primary {
@@ -185,6 +210,7 @@
       color: $white;
       &:hover {
         background: $primary-1;
+        color: $white;
       }
     }
   }
@@ -199,6 +225,19 @@
         margin-right: 8px;
       }
     }
+  }
+
+  .ngb-dp-navigation-chevron {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/icons/arrow-right.svg') no-repeat center / contain;
+    margin: 0;
+    padding: 0;
+    border: unset;
+    transform: rotate(180deg);
+  }
+  .right .ngb-dp-navigation-chevron {
+    transform: unset;
   }
 }
 
@@ -465,8 +504,6 @@
     font-size: 12px;
     line-height: 16px;
     font-weight: 500;
-    width: 2.2rem;
-    height: 1.8rem;
     display: flex;
     align-self: center;
     justify-content: center;
