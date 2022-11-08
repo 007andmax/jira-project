@@ -16,7 +16,7 @@ import { ServiceCommissionFilter } from './class/service-commission-filter';
 })
 export class ServiceComponent implements OnInit, OnDestroy {
   filter: ServiceCommissionFilter = new ServiceCommissionFilter();
-  loading = false;
+  loading = true;
   selectedIdx = -1;
   selectedSpecIdx = -1;
   companyId = '';
@@ -77,10 +77,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
    * get services
    */
   getServices() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getDefaultServices().subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         this.services = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         res.forEach(ele => {
@@ -92,7 +91,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
         });
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -101,10 +100,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
    * special services
    */
   getSpecialService() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getSpecialServices().subscribe(
       (res: any[]) => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res && res.length > 0) {
           res.map(el => {
             el.services.filter(service => {
@@ -121,7 +119,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -153,12 +151,10 @@ export class ServiceComponent implements OnInit, OnDestroy {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.success('Rate Changed Successfully.');
             this.service.commissionRate =
               res && res.commissionRate
@@ -170,7 +166,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
           },
           error => {
             this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
@@ -186,11 +181,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
    */
   removeServiceRate() {
     if (this.service && this.service.commissionRate) {
-      this.loading = true; $(".loading").css("display", "block");
       const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;
       this.commissionService.setServiceRate(id, '0', false).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toastrService.success('Rate Changed Successfully.');
           this.service.commissionRate = null;
 
@@ -200,7 +193,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
         },
         error => {
           this.toastrService.error(`Error Occurred, ${error}`);
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
     }

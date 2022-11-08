@@ -22,7 +22,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   clientsCompanies: any;
   currentCompany: any;
   currentUser: any;
-  loading = false;
+  loading = true;
   users: any[] = [];
   usersByCompanies = [];
   activeTechUsers: any;
@@ -66,7 +66,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
  * get users list
  */
   getUsers() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService
       .getTechUsers()
       .pipe(
@@ -79,7 +78,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (techUsers: any) => {
-          //   this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           this.activeTechUsers = techUsers;
           if (this.companiesStateService.getCompanies().length > 0) this.getCompanies(this.companiesStateService.getCompanies());
           let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -89,7 +88,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
 
         },
         error => {
-          //  this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         }
       );
   }
@@ -119,14 +118,11 @@ export class CompanyComponent implements OnInit, OnDestroy {
       return;
     }
     const techLeadId = techLead[0].id;
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastrService.success("Techlead Changed Successfully");
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastrService.error(`Error Occured, ${error}`);
       }
     );
@@ -195,7 +191,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
         !company.isDefault
     ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.loading = false; $(".loading").css("display", "none");
   }
 
   selectedDropdown(i) {

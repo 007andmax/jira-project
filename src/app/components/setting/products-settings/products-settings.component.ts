@@ -20,6 +20,7 @@ import { ProductsCategoryFilter } from './class/products-category-filter';
   styleUrls: ['./products-settings.component.scss']
 })
 export class ProductsSettingsComponent implements OnInit, OnDestroy {
+  loading: boolean = true;
   activeTab: string = "productCategories";
   showAddCategory: boolean = false;
   filter: ProductsCategoryFilter = new ProductsCategoryFilter();
@@ -58,6 +59,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     })
   }
   private sortGlNumbers(data) {
+    this.loading = false;
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }

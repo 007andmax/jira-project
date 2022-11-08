@@ -353,10 +353,10 @@ export class RecurringTicketsService {
   public checkServicesForSave(ticketForEdit: RecurringTicket, services: Array<ForCreateService>) {
     let change = false;
     if (ticketForEdit !== null) {
-
+      console.log("ticketForEdit.services", ticketForEdit.services);
       ticketForEdit.services.forEach((service, index) => {
 
-        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || service.service.versionedId.id !== services[index].versionedId.id) change = true;
+        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || services.length < index && service.service.versionedId.id !== services[index].versionedId.id) change = true;
       })
       if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
       if (ticketForEdit.services.length !== services.length) change = true;

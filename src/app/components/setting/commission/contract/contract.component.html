@@ -1,4 +1,7 @@
-<div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
+<div
+    class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
+    [hidden]="loading"
+>
     <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
     <span class="qt-f-1">
         By hovering on each contract name below, you can see decription of contract
@@ -468,6 +471,12 @@
         </div>
     </div>
     <!-- <div class="loading" *ngIf="loading"></div> -->
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>
 <div
     class="img-croparea deletePopup"

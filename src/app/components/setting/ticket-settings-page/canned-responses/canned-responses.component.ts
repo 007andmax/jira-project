@@ -16,6 +16,7 @@ import { NoteTemplate } from './class/note-template';
   styleUrls: ['./canned-responses.component.scss']
 })
 export class CannedResponsesComponent implements OnInit {
+  loading: boolean = true;
   showPreloader: boolean = true;
   sort = "ASC";
   noteTemplate: Array<NoteTemplate> = [];
@@ -34,6 +35,7 @@ export class CannedResponsesComponent implements OnInit {
       this.noteTemplate = data.map(item => new NoteTemplate(item));
       this.noteStateService.setNoteTemplate(this.noteTemplate);
       this.showPreloader = false;
+      this.loading = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

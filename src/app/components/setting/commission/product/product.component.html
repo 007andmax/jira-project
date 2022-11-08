@@ -1,4 +1,7 @@
-<div class="cmn-area products-area">
+<div
+    class="cmn-area products-area"
+    [hidden]="loading"
+>
     <div class="tab-pane__table dataTable">
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
@@ -141,4 +144,10 @@
             </div>
         </div>
     </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>

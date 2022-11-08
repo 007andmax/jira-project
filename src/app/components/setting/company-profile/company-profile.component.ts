@@ -345,7 +345,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     try {
       this.companyProfileService.getCompanyProfile().subscribe(
         (res: any) => {
-          this.loading = false;
+          // this.loading = false;
           if (res) {
             this.cProfile.address = res.addresses;
             if (this.cProfile.address.length > 0) {

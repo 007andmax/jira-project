@@ -1,12 +1,11 @@
-<div class="cmn-area canned-responses-table">
+<div
+    class="cmn-area canned-responses-table"
+    [hidden]="loading"
+>
     <div
         class="data-table-wrap"
         [ngClass]="{'preloader-container' : showPreloader}"
     >
-        <div
-            class="loading"
-            *ngIf="showPreloader"
-        ></div>
         <div
             class="tab-pane__table dataTable"
             style="width:100%"
@@ -93,4 +92,10 @@
             </div>
         </div>
     </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>

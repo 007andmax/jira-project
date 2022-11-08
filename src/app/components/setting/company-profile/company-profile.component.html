@@ -10,23 +10,23 @@
                 Save Changes
             </a>
         </div>
-        <div
-            class="loading-container"
-            *ngIf="loading"
-        >
-            <div class="loading"></div>
-        </div>
-        <ngb-tabset
-            (tabChange)="setTab($event)"
-            [hidden]="loading"
-        >
+        <ngb-tabset (tabChange)="setTab($event)">
             <!-- Profile -->
             <ngb-tab
                 title="Profile"
                 id="tab1"
             >
                 <ng-template ngbTabContent>
-                    <div class="cmn-area profile">
+                    <div
+                        class="loading-container"
+                        *ngIf="loading"
+                    >
+                        <div class="loading"></div>
+                    </div>
+                    <div
+                        class="cmn-area profile"
+                        [hidden]="loading"
+                    >
                         <div class="tab-pane__header">
                             <div class="tab-pane__header-title">Company Info</div>
                         </div>

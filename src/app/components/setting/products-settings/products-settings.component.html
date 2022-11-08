@@ -25,6 +25,12 @@
                 </a>
             </div>
         </div>
+        <div
+            class="loading-container"
+            *ngIf="loading"
+        >
+            <div class="loading"></div>
+        </div>
         <ngb-tabset
             #tabset="ngbTabset"
             [destroyOnHide]="false"
@@ -34,7 +40,10 @@
                 id="productCategories"
             >
                 <ng-template ngbTabContent>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="data-table-wrap">
                             <div class="tab-pane__table">
                                 <div class="tab-pane__table-header">

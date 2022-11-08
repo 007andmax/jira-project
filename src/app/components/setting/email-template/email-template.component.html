@@ -11,16 +11,16 @@
         >
             <div class="loading"></div>
         </div>
-        <ngb-tabset
-            (tabChange)="setTab($event)"
-            [hidden]="loading"
-        >
+        <ngb-tabset (tabChange)="setTab($event)">
             <ngb-tab
                 title="Ticket Templates"
                 id="tab1"
             >
                 <ng-template ngbTabContent>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="tab-pane__table">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
@@ -95,7 +95,10 @@
             </ngb-tab>
             <ngb-tab title="Agent Templates">
                 <ng-template ngbTabContent>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="tab-pane__table display">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
@@ -167,7 +170,10 @@
             </ngb-tab>
             <ngb-tab title="Invoice Templates">
                 <ng-template ngbTabContent>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="dataTable tab-pane__table">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">

@@ -34,7 +34,6 @@
                 #tabset="ngbTabset"
                 [destroyOnHide]="true"
                 (tabChange)="setTab($event)"
-                [hidden]="loading"
             >
                 <!-- Profile -->
                 <ngb-tab
@@ -42,7 +41,10 @@
                     id="activeUsers"
                 >
                     <ng-template ngbTabContent>
-                        <div class="cmn-area">
+                        <div
+                            class="cmn-area"
+                            [hidden]="loading"
+                        >
                             <div class="tab-pane__table dataTable">
                                 <div class="tab-pane__table-header">
                                     <div class="tab-pane__table-row">
@@ -227,7 +229,10 @@
                     id="archivedUsers"
                 >
                     <ng-template ngbTabContent>
-                        <div class="cmn-area">
+                        <div
+                            class="cmn-area"
+                            [hidden]="loading"
+                        >
                             <div class="tab-pane__table dataTable">
                                 <div class="tab-pane__table-header">
                                     <div class="tab-pane__table-row">

@@ -1,10 +1,16 @@
-<div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
+<div
+    class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
+    [hidden]="loading"
+>
     <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
     <span class="qt-f-1">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
     </span>
 </div>
-<div class="cmn-area companies">
+<div
+    class="cmn-area companies"
+    [hidden]="loading"
+>
     <div class="tab-pane__table dataTable">
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
@@ -50,4 +56,10 @@
             </div>
         </div>
     </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>

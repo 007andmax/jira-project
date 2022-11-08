@@ -15,7 +15,7 @@ import { ProductsCategoryFilter } from '../../products-settings/class/products-c
 })
 export class ProductComponent implements OnInit, OnDestroy {
   filter: ProductsCategoryFilter = new ProductsCategoryFilter();
-  loading = false;
+  loading = true;
   categories: any;
   edit = false;
   selectedIdx = -1;
@@ -57,10 +57,9 @@ export class ProductComponent implements OnInit, OnDestroy {
    * get categories
    */
   getCategories() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getCategories().subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res && res.length > 0) {
           this.categories = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
             1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -72,7 +71,7 @@ export class ProductComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -83,19 +82,16 @@ export class ProductComponent implements OnInit, OnDestroy {
    */
   removeProduct() {
     if (this.category && this.category.commissionRate) {
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.category.id, '0', false)
         .subscribe(
           res => {
             this.toastrService.success('Removed Successfully')
             this.selectedIdx = -1;
-            this.loading = false; $(".loading").css("display", "none");
             this.category.commissionRate = null;
           },
           error => {
             this.toastrService.error('Bad Request')
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
     }
@@ -128,13 +124,11 @@ export class ProductComponent implements OnInit, OnDestroy {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
             this.toastrService.success(`Commission Rate Changed Successfully`);
-            this.loading = false; $(".loading").css("display", "none");
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;
@@ -142,7 +136,6 @@ export class ProductComponent implements OnInit, OnDestroy {
           },
           error => {
             this.selectedIdx = -1;
-            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.error('Bad Request');
             this.factItem = false;
             this.confirmPopup = false;

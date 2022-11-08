@@ -35,14 +35,16 @@
             (tabChange)="setTab($event)"
             #tabset="ngbTabset"
             [destroyOnHide]="false"
-            [hidden]="loading"
         >
             <ngb-tab
                 title="Companies"
                 id="tab1"
             >
                 <ng-template ngbTabContent>
-                    <div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
+                    <div
+                        class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
+                        [hidden]="loading"
+                    >
                         <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
                         <span class="qt-f-1">
                             Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
@@ -61,7 +63,10 @@
                             </label>
                         </div>
                     </div>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="dataTable">
                             <div class="tab-pane__body">
                                 <div class="tab-pane__table-header">
@@ -202,7 +207,10 @@
                 id="tab2"
             >
                 <ng-template ngbTabContent>
-                    <div class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16">
+                    <div
+                        class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
+                        [hidden]="loading"
+                    >
                         <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
                         <span class="qt-f-1">
                             Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket
@@ -221,7 +229,10 @@
                             </label>
                         </div>
                     </div>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="tab-pane__table dataTable">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">

@@ -16,7 +16,7 @@ declare var $: any;
 export class PermissionManageComponent implements OnInit, OnDestroy {
   selectedRoleIndex = -1;
   selectedRole: string;
-  loading = false;
+  loading = true;
   isNewRoleCreating = false; // see on old code
   allTechRoles: any;
   roles: any;
@@ -112,16 +112,15 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    * permission manage
    */
   getPermissionManage() {
-    this.loading = true; $(".loading").css("display", "block");
     this.permissionManageService
       .getPermissions()
       .pipe(
         map(res => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           this.roles = res;
         }),
         catchError(err => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           throw err.message;
         })
       )
@@ -177,13 +176,13 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
       permissions: []
     };
 
-    this.loading = true; $(".loading").css("display", "block");
+    this.loading = true;
     this.permissionManageService
       .createTechRole(newRole)
       .pipe(
         map(res => {
           this.toastrService.success('Role Added Successfully');
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           this.isNewRoleCreating = false;
           if (res) {
             this.roles.push(res);
@@ -199,19 +198,15 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    * changed role name
    */
   changeRoleName() {
-    this.loading = true; $(".loading").css("display", "block");
     this.permissionManageService
       .updateTechRole(this.editData.id, this.editData.name)
       .pipe(
         map(res => {
           this.toastrService.success('Role changed successfully');
-          this.loading = false; $(".loading").css("display", "none");
           const role = this.roles.find(el => {
             return el.id === this.editData.id;
           });
-
           role.name = this.editData.name;
-
           this.editRoleName(role, -1);
         })
       )
@@ -252,13 +247,12 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     if (!id) {
       return;
     }
-    // this.loading = true;$(".loading").css("display", "block");
-
+    this.loading = true;
     this.permissionManageService.deleteTechRole(id).then(
       (res: any) => {
         console.log("res", res);
         this.toastrService.success('Deleted Role Successfully');
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res.length > 0) {
           this.usersToShift = res.map((user: any) => {
             const newUser = user.id; // this.permissionManageService.getOnebyId(user.id);
@@ -279,14 +273,14 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
 
         } else {
           this.showDeleteRole = false;
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           this.roles = this.roles.filter(el => {
             return el.id !== id;
           });
         }
       }).catch(err => {
         console.log("err", err);
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         console.log("err.response", err.response);
         console.log("err.status", err.status);
         if (err.response && err.status == 406) {
@@ -481,15 +475,10 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    */
   changeUsersRole(user, value) {
     user.techRole = value;
-
-
-    this.loading = true; $(".loading").css("display", "block");
     user.avatar.cropped = null;
     this.permissionManageService.save(user).subscribe(res => {
-      this.loading = false; $(".loading").css("display", "none");
       this.toastrService.success('Role Changed Successfully');
       const userIndex = this.usersToShift.findIndex(el => el.id === user.id);
-
       if (userIndex !== -1) {
         const newUser = this.allUsers.find(x => x.id == user.id);
         newUser.companyId = newUser.company.id;
