@@ -325,7 +325,7 @@ export class DevicesComponent implements OnInit {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {      
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -462,8 +462,8 @@ export class DevicesComponent implements OnInit {
     this.filter.onFilter(field, this.assetList);
   }
 
-  gotoDetailDevice(Guid: string) {
-    localStorage.setItem("company_id", this.companyId);
+  gotoDetailDevice(Guid: string,AssetCompanyGuid: string) {
+    localStorage.setItem("company_id", AssetCompanyGuid);
     const type = "workstation";
     var url = `/#/${this.companiesStateService
       .getCurrentCompany()
