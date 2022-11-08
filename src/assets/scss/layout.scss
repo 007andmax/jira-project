@@ -4,6 +4,13 @@
 
 body {
   &.page-settings {
+    .loading-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-height: calc(100vh - 160px);
+        bottom: 0px;
+    }
     .qt-input-line {
       margin-bottom: 24px;
     }
