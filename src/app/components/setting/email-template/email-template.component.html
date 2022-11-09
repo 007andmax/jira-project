@@ -23,10 +23,7 @@
                         <div class="tab-pane__table">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">
-                                        Template Name
-                                        <div class="qt-table-modern__sorting--new"></div>
-                                    </div>
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
                                     <div class="tab-pane__table-cell email-templates-table__action">&nbsp;</div>
                                 </div>
                             </div>
@@ -50,11 +47,6 @@
                                                 [position]="'top'"
                                                 #editTooltip
                                             ></app-dynamic-tooltip>
-                                            <app-dynamic-tooltip
-                                                [content]="'Copy'"
-                                                [position]="'top'"
-                                                #copyTooltip
-                                            ></app-dynamic-tooltip>
                                             <div
                                                 (mouseenter)="editTooltip.show($event.target)"
                                                 (mouseleave)="editTooltip.hide()"
@@ -62,11 +54,6 @@
                                                 (click)="getTemplate(template, i)"
                                             >
                                             </div>
-                                            <div
-                                                class="icon__copy qt-sz-20 qt-bg-contain qt-ml-16 pointer"
-                                                (mouseenter)="copyTooltip.show($event.target)"
-                                                (mouseleave)="copyTooltip.hide()"
-                                            ></div>
                                             <app-dynamic-tooltip
                                                 [content]="'Reset Default'"
                                                 [position]="'top'"
@@ -101,10 +88,7 @@
                         <div class="tab-pane__table display">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">
-                                        Template Name
-                                        <div class="qt-table-modern__sorting--new"></div>
-                                    </div>
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -125,11 +109,6 @@
                                                 [position]="'top'"
                                                 #editTooltip
                                             ></app-dynamic-tooltip>
-                                            <app-dynamic-tooltip
-                                                [content]="'Copy'"
-                                                [position]="'top'"
-                                                #copyTooltip
-                                            ></app-dynamic-tooltip>
                                             <div
                                                 (mouseenter)="editTooltip.show($event.target)"
                                                 (mouseleave)="editTooltip.hide()"
@@ -137,11 +116,6 @@
                                                 class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
                                             >
                                             </div>
-                                            <div
-                                                class="icon__copy qt-sz-20 qt-bg-contain qt-ml-16 pointer"
-                                                (mouseenter)="copyTooltip.show($event.target)"
-                                                (mouseleave)="copyTooltip.hide()"
-                                            ></div>
                                             <app-dynamic-tooltip
                                                 [content]="'Reset Default'"
                                                 [position]="'top'"
@@ -176,10 +150,7 @@
                         <div class="dataTable tab-pane__table">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
-                                    <div class="tab-pane__table-cell email-templates-table__template-name">
-                                        Template Name
-                                        <div class="qt-table-modern__sorting--new"></div>
-                                    </div>
+                                    <div class="tab-pane__table-cell email-templates-table__template-name">Template Name</div>
                                     <div class="tab-pane__table-cell email-templates-table__action"></div>
                                 </div>
                             </div>
@@ -200,11 +171,6 @@
                                                 [position]="'top'"
                                                 #editTooltip
                                             ></app-dynamic-tooltip>
-                                            <app-dynamic-tooltip
-                                                [content]="'Copy'"
-                                                [position]="'top'"
-                                                #copyTooltip
-                                            ></app-dynamic-tooltip>
                                             <div
                                                 (mouseenter)="editTooltip.show($event.target)"
                                                 (mouseleave)="editTooltip.hide()"
@@ -212,11 +178,6 @@
                                                 (click)="getTemplate(template, i)"
                                             >
                                             </div>
-                                            <div
-                                                class="icon__copy qt-sz-20 qt-bg-contain qt-ml-16 pointer"
-                                                (mouseenter)="copyTooltip.show($event.target)"
-                                                (mouseleave)="copyTooltip.hide()"
-                                            ></div>
                                             <app-dynamic-tooltip
                                                 [content]="'Reset Default'"
                                                 [position]="'top'"
@@ -365,7 +326,7 @@
                         *ngIf="!show"
                     >
                         <span
-                            class="tags"
+                            class="tags pointer"
                             *ngFor="let key of keywords"
                             (mousedown)="insertAtCaret(key.keyName)"
                         >

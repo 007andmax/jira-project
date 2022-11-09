@@ -35,6 +35,7 @@ import { SupportPageCategoriesRealTimeService } from 'src/app/components/super-a
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
+import { EmailTemplateRealTimeService } from 'src/app/states/email-template/email-template-real-time.service';
 
 
 /**
@@ -86,7 +87,8 @@ export class WebsocketService {
     private supportPageCategoriesRealTimeService: SupportPageCategoriesRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
     private devicesStateService: DevicesStateService,
-    private noteRealTimeService: NoteRealTimeService
+    private noteRealTimeService: NoteRealTimeService,
+    private emailTemplateRealTimeService: EmailTemplateRealTimeService,
 
   ) {
   }
@@ -129,6 +131,7 @@ export class WebsocketService {
       that.subsribeToCrm();
       that.subsribeToCustomSubscription();
       that.subsribeToNoteTemplateSubscription();
+      that.subsribeToEmailNotification();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {
@@ -196,6 +199,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToEmailNotification() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/companyEmailNotification", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.emailTemplateRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });
