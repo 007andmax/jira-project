@@ -273,7 +273,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       }, 300);
       return;
     }
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {            
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {                  
       if (!resp || resp.length === 0) {
         this.assetList = [];
         this.asset = {};
@@ -1605,11 +1605,40 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getLastCheckIn(asset) {
+    let result = '';
     if (!asset) {
       return;
     }
-    return asset.LastCheckInDate ? moment(asset.LastCheckInDate).fromNow() : '';
-  }
+    if(asset.LastCheckInDate !=null && asset.LastCheckInDate !='' && asset.LastCheckInDate !=undefined)
+    {
+      let humanData = moment.duration(moment().diff(moment(asset.LastCheckInDate)));
+      if(humanData.years()!=0)
+      {
+        result = result + humanData.years()+'y'+' '+humanData.months()+'mo';
+      }
+      if(humanData.years()==0 && humanData.months()!=0)
+      {
+        result = result + humanData.months()+'mo'+' '+humanData.days()+'d';
+      }
+      if(humanData.years()==0 && humanData.months()==0 && humanData.days()!=0)
+      {
+        result = result + humanData.days()+'d'+' '+humanData.hours()+'h';
+      }
+      if(humanData.years()==0 && humanData.months()==0 && humanData.days()==0 && humanData.hours()!=0)
+      {
+        result = result + humanData.hours()+'h'+' '+humanData.minutes()+'m';
+      }
+      if(humanData.years()==0 && humanData.months()==0 && humanData.days()==0 && humanData.hours()==0 && humanData.minutes()!=0)
+      {
+        result = result + humanData.minutes()+'m'+' '+humanData.seconds()+'s';
+      }
+      if(humanData.years()==0 && humanData.months()==0 && humanData.days()==0 && humanData.hours()==0 && humanData.minutes()==0 && humanData.seconds()!=0)
+      {
+        result = result + humanData.seconds()+'s';
+      }       
+    }    
+    return result;    
+  }  
 
   removeMicrosoft(assetOperationgSystem){    
     if(!assetOperationgSystem){
@@ -1617,6 +1646,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
     return assetOperationgSystem.replace("Microsoft","");
   }
+
 }
 
 
