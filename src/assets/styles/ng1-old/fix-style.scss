@@ -82,10 +82,10 @@ body .left-panel-full {
   top: 50%;
   transform: translateY(-50%);
 
-  @media (max-width: 767px) {
-    padding: 12px;
-    transform: translate(5px, 4px);
-  }
+  //@media (max-width: 767px) { // TODO check this style
+  //  padding: 12px;
+  //  transform: translate(5px, 4px);
+  //}
 }
 
 /* Datepicker */
@@ -430,7 +430,7 @@ p {
 }
 
 /* Custom Checkbox */
-label {
+label { // TODO check this style
   display: inline-block;
   max-width: 100%;
   margin-bottom: 2px;
@@ -439,6 +439,7 @@ label {
   font-weight: 400;
   color: $gray-800--old;
   cursor: inherit;
+  min-height: 12px;
 }
 .radio,
 .checkbox {
@@ -702,7 +703,9 @@ textarea {
 
 .password-content__modal--content {
   .date-picker-container {
-    min-width: 274px;
+    //min-width: 274px; // TODO check this style
+    width: auto;
+    max-width: initial;
   }
 }
 

@@ -293,6 +293,13 @@
       }
     }
   }
+  &.qt-aside-modern--page-settings {
+    .qt-aside__title {
+      @media (max-width: 767px) {
+        margin: 0 8px;
+      }
+    }
+  }
 }
 
 .qt-aside {
@@ -328,6 +335,7 @@
     @media (max-width: 767px) {
       color: $white;
       @include body-l__sb;
+      flex-shrink: 0;
     }
   }
 
