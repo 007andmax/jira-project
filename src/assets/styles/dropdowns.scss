@@ -87,38 +87,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    //width: 2.2rem;
-    //height: 1.8rem;
-    width: 30px;
-    height: 30px;
-    margin: 5px;
+    width: 40px;
+    height: 40px;
 
     &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
+     .custom-day:hover,
+     .custom-day.faded {
+        &:after {
+          width: 40px;
+        }
+     }
     }
   }
   .ngb-dp-months {
-    padding: 0 15px 14px;
+    padding: 0 10px 14px;
   }
-  //.ngb-dp-weekday {
-  //  color: $gray-600--old;
-  //}
 }
 .date-picker {
-  //overflow-x: hidden; // TODO check this style
   position: relative;
   i {
     position: absolute;
-    right: 12px;
-    bottom: 11px;
-    top: 11px;
+    right: 14px;
     cursor: pointer;
   }
   .icon__calendar {
     pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .dropdown-menu {
     max-height: initial;
@@ -147,7 +142,6 @@
   }
   .ngb-dp-weekdays {
     pointer-events: none;
-    //text-transform: uppercase;
     border-bottom: none;
   }
   .ngb-dp-month-name {
@@ -155,21 +149,19 @@
     margin-bottom: 6px;
   }
   .custom-select {
-    color: $primary-2;
-    background: $white;
-    //border: 1px solid $gray-400--old;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: $white url("/assets/img/icons/down-arrow.svg") no-repeat center right 8px / 16px;
     border: 1px solid transparent;
     border-radius: 3px;
     cursor: pointer;
     outline: none;
-    //font-weight: 400;
-    //font-size: 13px;
     font-size: 16px;
     line-height: 19px;
     font-weight: 600;
     color: $gray-900;
     height: 2rem;
-    //line-height: 20px;
     &:first-child {
       margin-right: 8px;
     }
@@ -201,16 +193,25 @@
       border-radius: 50%;
       width: 100%;
       height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &:hover {
         color: $blue-light-600;
       }
     }
     .bg-primary {
-      background: $primary-1;
+      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
       color: $white;
       &:hover {
-        background: $primary-1;
+        background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
         color: $white;
+      }
+    }
+    &.hidden {
+      + .ngb-dp-day .custom-day:hover::after,
+      + .ngb-dp-day .custom-day.faded::after {
+        width: 40px;
       }
     }
   }
@@ -498,7 +499,7 @@
 }
 .ngb-dp-today {
   .custom-day {
-    background: $primary-1;
+    background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
     border-radius: 6px;
     color: $white;
     font-size: 12px;
