@@ -33,7 +33,7 @@
             </div>
             <div
                 class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis"
-                [textContent]="user.email"
+                [textContent]="user.primaryEmail"
             ></div>
         </span>
         <app-dynamic-tooltip
@@ -45,7 +45,7 @@
             (mouseenter)="removeTooltip.show($event.target)"
             (mouseleave)="removeTooltip.hide()"
             class="icon__remove qt-sz-20 qt-bg-contain pointer"
-            (click)="remove(user)"
+            (click)="remove()"
         >
         </div>
     </div>
