@@ -28,8 +28,6 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
-// import { ToastrService } from 'ngx-toastr';
-
 declare var google: any;
 @Component({
   selector: 'app-profile',
@@ -53,7 +51,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public currentUser: any;
   public profileForm: FormGroup;
   idUploadFile: string;
-  // addres google map
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -81,8 +78,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private modalImageCropperStateService: ModalImageCropperStateService,
     private companiesService: CompaniesService,
   ) {
-    // this.getCurrentUser();
-    // this.getUserProfile();
   }
 
 
@@ -92,10 +87,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCurrentUser(data)
     })
-
-
     this.getUserProfile();
-
     /**
      * init form validation and declaration
      */
@@ -176,19 +168,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onChangePrimaryPhone(event) {
-    console.log("event", event);
     if (event.target.value.length >= 16) {
-      console.log("event.target.value.lenth", event.target.value.length);
-      // this.profileForm.patchValue({ primaryPhone: event.target.value });
       this.profileForm.controls['primaryPhone'].updateValueAndValidity()
       this.profileForm.controls['primaryPhone'].setErrors(null);
-
     }
-    console.log("this.profileForm", this.profileForm);
   }
 
   onChangeSecondaryPhone(event) {
-    console.log("event", event);
     if (event.target.value.length == 2) {
       this.profileForm.controls['secondaryPhone'].clearValidators();
       this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
@@ -200,8 +186,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
       this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
     }
-    console.log("event.target.value.lenth", event.target.value.length);
-    // this.profileForm.patchValue({ secondaryPhone: event.target.value });
   }
   onChangePrimaryPhoneType(data) {
     this.primaryPhoneType = data;
@@ -214,7 +198,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
    * auto complete address
    */
   getAddressAutocomplete() {
-    // load address Autocomplete
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(
         this.searchElementRef.nativeElement,
@@ -224,22 +207,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
       );
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          // get the place result
           const place = (google.maps.places.PlaceResult = autocomplete.getPlace());
-
-          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
-          // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-
           this.profileForm.patchValue({
             postalCode: ''
           });
-
           for (let i = 0, len = place.address_components.length; i < len; i++) {
             if (
               place.address_components[i].types.indexOf('postal_code') !== -1
@@ -249,7 +225,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
               });
             }
           }
-
           this.zoom = 12;
         });
       });
@@ -297,7 +272,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                   ? userProfile.signature.content
                   : ''
             });
-
             this.userProfileAddr.phoneNumbers.forEach(phone => {
               if (phone && phone.priority === 0) {
                 this.profileForm.patchValue({
@@ -308,9 +282,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     : ''
                 });
                 if (phone.typeNumber) this.primaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
-
               }
-
               if (phone && phone.priority === 1) {
                 this.isAddPhone = true;
                 this.profileForm.patchValue({
@@ -321,7 +293,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     : ''
                 });
                 if (phone.typeNumber) this.secondaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
-
               }
             });
             this.profileForm.controls['primaryPhone'].updateValueAndValidity()
@@ -349,7 +320,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.uniqueEmail = true;
       return;
     }
-
     this.settingService
       .isEmailUnique(
         this.profileForm.get('primaryEmail').value,
@@ -361,7 +331,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.uniqueEmail = res.value;
         },
         error => {
-
         }
       );
   }
@@ -372,8 +341,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   onSelectFile(event) {
     this.imageChangedEvent = event;
-    // this.isCroppedImg = true;
-
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
       if (size > 4194304) {
@@ -382,7 +349,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
-
       this.settingService.fileAvatar(fromData).subscribe(
         (result: any) => {
           if (result) {
@@ -412,11 +378,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   cropIt() {
     this.isCroppedImg = false;
-    // let cropImage = { id: '', origin: null, cropped: null, x: '', y: '', w: '', h: '', base64: '', updatedAt: '' };
     let cropImage = {};
     if (this.imageOrigin !== undefined) {
       this.imageOrigin.base64 = undefined;
-
       cropImage = {
         id: this.currentUser.id,
         origin: this.imageOrigin,
@@ -444,7 +408,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .pipe(
         map(updateAvatar => {
           this.imageAvatar = updateAvatar;
-
           if (updateAvatar) {
             const profileUser = {
               basic: {
@@ -464,7 +427,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 }
               },
               error => {
-
               }
             );
           }
@@ -472,10 +434,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         res => {
-
         },
         error => {
-
         }
       );
   }
@@ -517,8 +477,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.croppedImage = this.imageAvatar;
         this.croppedImage.base64 = base64data;
         this.imageBase64 = base64data;
-        // this is the image as dataUrl
-        // this.base64Image = 'data:image/jpg;base64,' + base64data;
       });
     }
   }
@@ -570,12 +528,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
-      // create an image object
       const img = new Image();
       img.crossOrigin = 'Anonymous';
       img.src = url;
       if (!img.complete) {
-        // This will call another method that will create image from url
         img.onload = () => {
           observer.next(this.getBase64Image(img));
           observer.complete();
@@ -613,16 +569,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   public onSubmit() {
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.profileForm.invalid) {
       return;
     }
-
     if (this.userProfile && this.userProfile.signature) {
       this.userProfile.signature.content = this.profileForm.value.aboutMe;
     }
-
     if (this.userProfile && this.userProfile.address) {
       (this.userProfile.address.suiteNumber = this.profileForm.value.suiteNumber),
         (this.userProfile.address.address = this.searchElementRef.nativeElement
@@ -631,9 +583,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           : this.profileForm.value.mailingAddress),
         (this.userProfile.address.aboutMe = this.profileForm.value.aboutMe),
         (this.userProfile.address.postalCode = this.profileForm.value.postalCode);
-
       const phoneNumbers = [];
-
       if (this.profileForm.value.primaryPhone) {
         const phone = { number: '', typeNumber: '', priority: 0, id: '' };
         phone.number = this.profileForm.value.primaryPhone;
@@ -641,7 +591,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         phone.id = this.profileForm.value.primaryId;
         (phone.priority = 0), phoneNumbers.push(phone);
       }
-
       if (this.profileForm.value.secondaryPhone) {
         const phone = { number: '', typeNumber: '', priority: 0, id: '' };
         phone.number = this.profileForm.value.secondaryPhone;
@@ -651,7 +600,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
       this.userProfile.address.phoneNumbers = phoneNumbers;
     }
-
     const profileUser = {
       basic: {
         avatar: this.currentUser.avatar,

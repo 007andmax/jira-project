@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { UsersService } from 'src/app/services/users/users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -111,19 +108,6 @@ export class PermissionManageService {
 
   constructor(private http: HttpClient) { }
 
-  // getOnebyId(id: string): any {
-  //   this.userService
-  //     .getAllusers()
-  //     .pipe(
-  //       map((users: any) => {
-  //         return users.filter(
-  //           (user: any) => user.id === id && user.deletedAt === null
-  //         );
-  //       })
-  //     )
-  //     .subscribe();
-  // }
-
   /**
    * permission on companies
    */
@@ -214,25 +198,14 @@ export class PermissionManageService {
     );
   }
 
-  /**
-   * delete tech role based on params
-   * @param roleId
-   */
-  /* deleteTechRole(roleId: string) {
-     return this.http.delete(
-       `${this.apiUrl}settings/companyProfile/deleteTechRole/${roleId}`
-     );
-   }*/
   deleteTechRole(roleId) {
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-        console.log("event", event);
         if (xhr.status == 200) resolve(xhr);
         if (xhr.status != 200) reject(xhr);
       }, false);
       xhr.addEventListener("error", (error) => {
-        console.log("error", error);
         reject(error);
       }, false);
       xhr.open("DELETE", `${this.apiUrl}settings/companyProfile/deleteTechRole/${roleId}`);
@@ -259,21 +232,4 @@ export class PermissionManageService {
   save(user) {
     return this.http.put(`${this.apiUrl}users/${user.id}`, user);
   }
-
-  // private log(message: string) {
-  //   console.error("PizzaService: " + message);
-  // }
-
-  // private handleError<T>(operation = "operation", result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     // TODO: send the error to remote logging infrastructure
-  //     console.error(error); // log to console instead
-
-  //     // TODO: better job of transforming error for user consumption
-  //     console.error(`${operation} failed: ${error.message}`);
-
-  //     // Let the app keep running by returning an empty result.
-  //     return of(result as T);
-  //   };
-  // }
 }

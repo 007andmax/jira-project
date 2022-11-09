@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from "@angular/core";
-import { SettingService } from "src/app/services/setting/setting.service";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { AccountComponent } from "./account/account.component";
 import { ActivityHistoryComponent } from "./activity-history/activity-history.component";
 import { EmailNotificationsComponent } from "./email-notifications/email-notifications.component";
 import { ProfileComponent } from "./profile/profile.component";
 declare var $: any;
+
 @Component({
   selector: "app-my-profile",
   templateUrl: "./my-profile.component.html",

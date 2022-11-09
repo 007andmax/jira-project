@@ -37,14 +37,12 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   edit = false;
   currentCompanyId = null;
   isEmailIdUnique = true;
-
   userlist: User[] = [];
   techUsers: User[] = [];
   techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
   techUserForm: FormGroup;
-
   imageBase64 = '';
   imageChangedEvent: any;
   croppedImage: any;
@@ -384,14 +382,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         .archiveUser([this.userId.id])
         .pipe(
           map(archiveUser => {
-            // deleted techuser.
-            // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
-            //   this.techUsers.splice(
-            //     this.techUsers.findIndex((x: any) => x.id === this.userId.id),
-            //     1
-            //   );
-            // }
-            // this.getUsers();
+
           })
         )
         .subscribe();
@@ -413,19 +404,12 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
 
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
-      // const size = event.target.files[0].size;
-      // if (size > 200000) {
-      //   this.toastr.info("Maximum size of 2MB");
-      //   return;
-      // }
-
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
       this.settingService.fileAvatar(fromData).subscribe(
         (result: any) => {
           if (result) {
-            //    this.isCroppedImg = true;
             this.fileAvatar = result;
             this.idUploadFile = result.id;
             this.modalImageCropperStateService.onInitOpen(new ImageCroper(result.base64, result.id));
@@ -452,7 +436,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       this.fileAvatar.base64 = undefined;
       cropImage = {
         h: this.croppedImage.height,
-        // id: this.currentCompanyId,
         origin: this.fileAvatar,
         w: this.croppedImage.width,
         x: 178, // this.croppedImage.cropperPosition.x1,
@@ -491,8 +474,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
             this.selectedTechUser
               ? (this.selectedTechUser.avatar = avatar)
               : null;
-            // this.edit = false;
-            // this.getUsers();
             this.toastr.success('Image Cropped Successfully');
           }
         },
@@ -565,7 +546,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
           this.create = false;
-          //   this.getUsers();
           if (savedTechUsre && savedTechUsre.id) {
             this.saveUsersEmailNotifications(savedTechUsre.id);
           }
@@ -614,20 +594,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           }
         };
         this.selectedTechUser.avatar = null;
-        // // this.settingService.updateProfile(profileUser).subscribe(
-        // //   res => {
-        // //     if (res) {
-        // //       if (res) {
-        // //         this.selectedTechUser.avatar = null;
-        // //         // this.toastr.success("Profile updated successfully");
-        // //         // this.imageSrc = "/assets/img/user.jpg";
-        // //       }
-        // //     }
-        // //   },
-        // //   error => {
-        // //     this.toastr.error(error);
-        // //   }
-        // // );
       },
       error => {
         this.toastr.error(error);
@@ -656,7 +622,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       const imageUrl = `/file/${this.cropAvatar.origin.id}.jpg`;
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
         this.isCroppedImg = true;
-        // this.croppedImage = this.cropAvatar.avatar.cropped;
         this.croppedImage.base64 = base64data;
         this.imageBase64 = base64data;
       });
@@ -704,7 +669,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     // Convert the drawn image to Data URL
     const dataURL = canvas.toDataURL('image/png');
     return dataURL;
-    // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
   /**
@@ -712,12 +676,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
    */
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.techUserForm.invalid) {
       return;
     }
-
     this.selectedTechUser.firstName = this.techUserForm.value.firstName;
     this.selectedTechUser.lastName = this.techUserForm.value.lastName;
     this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
@@ -742,7 +704,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
       .subscribe(
         res => {
-          // this.getUsers();
           this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
           this.techUserForm.reset();
@@ -757,7 +718,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.toastr.error(er.techRole || 'Bad Request');
         }
       );
-    // this.saveUsersEmailNotifications(this.selectedTechUser.id);
   }
 
   /**
@@ -769,8 +729,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     if (techUserId) {
       const notificationSetting = {
         newDevice: this.techUserForm.value.newDevice,
-        // scheduleChanged: this.techUseremailNotificationList[techUserId]
-        //   .scheduleChanged,
         ticketCloseNotifications: this.techUserForm.value
           .ticketCloseNotifications,
         ticketCreated: this.techUserForm.value.ticketCreated,
@@ -786,22 +744,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   ngOnDestroy(): void {
     $('body').removeClass('page-settings');
     this.sub.unsubscribe();
-    // Do not forget to unsubscribe the event
   }
 
-  // openModal(template) {
-  //   this.modalRef = this.modalService.show(
-  //     template,
-  //     Object.assign({}, { class: 'manage-tags modal-dialog-centered' })
-  //   );
-  // }
-
-  // editTag(template2) {
-  //   this.modalRef = this.modalService.show(
-  //     template2,
-  //     Object.assign({}, { class: 'manage-tags modal-dialog-centered' })
-  //   );
-  // }
   onBackMenu() {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('backMenu'); // remove the class

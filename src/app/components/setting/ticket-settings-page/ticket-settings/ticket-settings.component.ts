@@ -31,7 +31,6 @@ export class TicketSettingsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
-    private userService: UsersService,
     private toastr: ToastrService,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService
@@ -46,8 +45,6 @@ export class TicketSettingsComponent implements OnInit {
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
     })
-
-
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
         '',
@@ -60,32 +57,12 @@ export class TicketSettingsComponent implements OnInit {
       outliersTime: ['', Validators.compose([Validators.required])],
       timepickerType: ['DURATION_PICKER'],
       interval: ['FIVE_MINUTES'],
-      // taxId: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.maxLength(15),
-      //     Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
-      //   ]
-      // ],
-      // taxIdDescription: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.maxLength(15),
-      //     Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
-      //   ]
-      // ],
-      // conditions: ['']
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
-
     this.getActualNumber();
-    // this.getTaxNumber();
-    // this.getTermsAndConditions();
   }
 
   // convenience getter for easy access to form fields
@@ -93,7 +70,6 @@ export class TicketSettingsComponent implements OnInit {
     return this.ticketForm.controls;
   }
   changeOutliersTime(data) {
-    console.log("data", data);
     this.ticketForm.patchValue({ outliersTime: data });
   }
 
@@ -156,12 +132,9 @@ export class TicketSettingsComponent implements OnInit {
    */
   public onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
-    console.log("this.ticketForm", this.ticketForm);
     if (this.ticketForm.invalid) {
       return;
     }
-
     const objTicket = {
       emailSettingPageNumberFormDto: {
         count: this.ticketForm.value.ticketCount,

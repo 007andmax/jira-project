@@ -105,9 +105,6 @@ export class DraftEmailComponent implements OnInit {
       this.draftEmail = new DraftEmail();
     })
   }
-  onChangeHtml(data) {
-    console.log(data);
-  }
   close() {
     if (this.draftEmail.attachments.length > 0) {
       forkJoin(

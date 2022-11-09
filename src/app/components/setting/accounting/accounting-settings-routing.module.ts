@@ -3,9 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccountingSettingsComponent } from './accounting-settings.component';
 
 
-
-
-
 const routes: Routes = [{ path: '', component: AccountingSettingsComponent }];
 
 @NgModule({

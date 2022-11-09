@@ -8,27 +8,6 @@ import { environment } from "src/environments/environment";
 export class EmailTempleteService {
   private apiUrl = environment.apiUrl;
   private ticketTemplates = {
-    //'TU_EDITED': {
-    //  title: 'A Ticket Update is edited',
-    //  recipient: 'All persons added to Ticket Update',
-    //  description: 'This message will be sent when a ticket update is edited.',
-    //  requiredKeywords: ['$Ticket_Number'],
-    //  requiredKeywordsRegExp: /\$Ticket_Number/
-    //},
-    //'TU_DELETED': {
-    //  title: 'A Ticket Update is deleted',
-    //  recipient: 'All persons added to Ticket Update',
-    //  description: 'This message will be sent when a ticket update is deleted.',
-    //  requiredKeywords: ['$Ticket_Number'],
-    //  requiredKeywordsRegExp: /\$Ticket_Number/
-    //},
-    //'TICKET_ASSIGNED': {
-    //  title: 'A Ticket is assigned/re-assigned',
-    //  recipient: 'User',
-    //  description: 'This message will inform the client user about the ticket assignee. It may include the assignee contact details.',
-    //  requiredKeywords: ['$Ticket_Number'],
-    //  requiredKeywordsRegExp: /\$Ticket_Number/
-    //},
     TICKET_CREATED: {
       title: "A new Ticket is created",
       recipient: "User",
@@ -56,27 +35,6 @@ export class EmailTempleteService {
       requiredKeywordsRegExp: /\$Ticket_Number/,
       showPreview: true
     }
-    //'TICKET_OPENED': {
-    //  title: 'A Ticket is marked as Open',
-    //  recipient: 'User',
-    //  description: 'This message will be sent when a previously closed ticket is marked as open.',
-    //  requiredKeywords: ['$Ticket_Number'],
-    //  requiredKeywordsRegExp: /\$Ticket_Number/
-    //},
-    //'TICKET_SPAM': {
-    //  title: 'A Ticket is marked/reported as Spam',
-    //  recipient: 'User',
-    //  description: 'This message will be sent when a ticket is marked/reported as spam.',
-    //  requiredKeywords: ['$Ticket_Number'],
-    //  requiredKeywordsRegExp: /\$Ticket_Number/
-    //},
-    //'TICKET_TRASH': {
-    //  title: 'A Ticket is moved to Trash',
-    //  recipient: 'User',
-    //  description: 'This message will be sent when a ticket is moved to trash.',
-    //  requiredKeywords: ['$Ticket_Number'],
-    //  requiredKeywordsRegExp: /\$Ticket_Number/
-    //}
   };
 
   private agentTemplates = {
@@ -87,36 +45,6 @@ export class EmailTempleteService {
         "This message will be sent to client user with agent download link.",
       showPreview: true
     }
-    //'AGENT_CREATED': {
-    //  title: "A new Agent is created",
-    //  recipient: "New Agent",
-    //  description: "This message will be sent to greet the new agent. It may also include a link to verify the agent's email address."
-    //},
-    //'AGENT_ARCHIVED': {
-    //  title: "An Agent is archived",
-    //  recipient: "Agent",
-    //  description: "This message will be sent when the agent is archived."
-    //},
-    //'AGENT_CONTACT_MODIFIED': {
-    //  title: "Agent's contact information is modified",
-    //  recipient: "Agent",
-    //  description: "This message will be sent when the agent’s contact information is modified."
-    //},
-    //'AGENT_TICKET_RESTORE': {
-    //  title: "A Ticket is restored to its original folder from either Spam or Trash",
-    //  recipient: "Agent",
-    //  description: "This message will be sent when a ticket is restored from either Spam or Trash to its original folder."
-    //},
-    //'AGENT_ROLE_UPGRADED': {
-    //  title: "Agent's privilege is upgraded to either Administrator or Super Admin",
-    //  recipient: "Agent",
-    //  description: "This message will be sent when agent’s user access privileges are upgraded."
-    //},
-    //'AGENT_ROLE_DOWNGRADED': {
-    //  title: "Agent's privilege is downgraded to either Administrator or User",
-    //  recipient: "Agent",
-    //  description: "This message will be sent when agent’s access privileges are downgraded."
-    //}
   };
 
   private invoiceTemplates = {
@@ -133,12 +61,6 @@ export class EmailTempleteService {
       description: "This message will be sent when an invoice is re-sent.",
       showPreview: true
     },
-    // 'COMPANY_OVERDUE_INV_SENT': {
-    //   title: "An Overdue Invoice is sent",
-    //   recipient: "Company’s First Primary Contact",
-    //   description: "This message will be sent when an overdue invoice is re-sent.",
-    //   showPreview: true
-    // },
     COMPANY_PAYMENT_RECEIVED: {
       title: "A payment is received",
       recipient: "Company’s First Primary Contact",

@@ -156,7 +156,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.onCroppImage();
   }
   public setTab(data) {
-    console.log("event", data['nextId']);
     this.tabSet = data['nextId'];
   }
   public onCroppImage() {
@@ -260,19 +259,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     });
   }
   onChangePrimaryPhone(event) {
-    console.log("event", event);
     if (event.target.value.length >= 16) {
-      console.log("event.target.value.lenth", event.target.value.length);
-      // this.cProfileForm.patchValue({ primaryPhone: event.target.value });
       this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
       this.cProfileForm.controls['primaryPhone'].setErrors(null);
-
     }
-    console.log("this.cProfileForm", this.cProfileForm);
   }
 
   onChangeSecondaryPhone(event) {
-    console.log("event", event);
     if (event.target.value.length == 2) {
       this.cProfileForm.controls['secondaryPhone'].clearValidators();
       this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
@@ -284,8 +277,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       this.cProfileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
       this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
     }
-    console.log("event.target.value.lenth", event.target.value.length);
-    // this.cProfileForm.patchValue({ secondaryPhone: event.target.value });
   }
   /**
    * create company profile from group
@@ -293,7 +284,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   createCProfileForm() {
     this.cProfileForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      // url: new FormControl({ value: '' }, Validators.required),
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
@@ -417,7 +407,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 });
                 if (firstPhone.typeNumber) this.primaryPhoneType = this.phoneTypes.find(item => item.type == firstPhone.typeNumber.toUpperCase());
                 this.primaryPhone = firstPhone.number;
-                console.log("firstPhone.number", firstPhone.number);
               }
               if (lastPhone) {
                 this.isAddPhone = true;
@@ -565,15 +554,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    *  file selected on upload.
    */
   onSelectFile(event) {
-    console.log("event.target.files", event.target.files);
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
       if (size > 4194304) {
         this.toaster.info('Maximum size of 4MB');
         return;
       }
-      console.log("1");
-      //  this.isCroppedImg = true;
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
@@ -772,16 +758,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * saved records
    */
   onSubmit() {
-    console.log("this.tabSet", this.tabSet);
     if (this.tabSet == "tab1") this.submitCompanyProfile();
     if (this.tabSet == "workspace") this.checkDomain();
     if (this.tabSet == "operationalhours") this.onWorkSubmit();
   }
   submitCompanyProfile() {
     this.submitted = true;
-    // stop here if form is invalid
-    console.log("this.cProfileForm", this.cProfileForm);
-    console.log("this.cProfileForm.value.primaryPhone", this.cProfileForm.value.primaryPhone);
     if (this.cProfileForm.invalid) {
       return;
     }
@@ -899,8 +881,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * @param startTime
    */
   startTimeChange(workingday: any, startTime: any) {
-    console.log("workingday", workingday);
-    console.log("startTime", startTime);
     const splitTime = startTime.split(':');
     if (!Number(splitTime[0])) {
       return;

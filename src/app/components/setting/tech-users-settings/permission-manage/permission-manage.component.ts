@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PermissionManageService } from './permission-manage.service';
 import { map, catchError } from 'rxjs/operators';
 import { SettingService } from 'src/app/services/setting/setting.service';
-import { of } from 'rxjs';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 declare var $: any;
+
 @Component({
   selector: 'app-permission-manage',
   templateUrl: './permission-manage.component.html',
@@ -250,7 +250,6 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.permissionManageService.deleteTechRole(id).then(
       (res: any) => {
-        console.log("res", res);
         this.toastrService.success('Deleted Role Successfully');
         this.loading = false;
         if (res.length > 0) {
@@ -279,15 +278,10 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
           });
         }
       }).catch(err => {
-        console.log("err", err);
         this.loading = false;
-        console.log("err.response", err.response);
-        console.log("err.status", err.status);
         if (err.response && err.status == 406) {
           let response = JSON.parse(err.response);
-          console.log("response", response);
           this.usersToShift = response;
-          console.log("this.usersToShift", this.usersToShift);
           this.showDeleteRole = true;
           this.roleToDelete = id;
         } else {

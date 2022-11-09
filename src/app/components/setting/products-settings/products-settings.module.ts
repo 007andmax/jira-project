@@ -11,8 +11,6 @@ import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
-
-
 @NgModule({
     declarations: [
         ProductsSettingsComponent,

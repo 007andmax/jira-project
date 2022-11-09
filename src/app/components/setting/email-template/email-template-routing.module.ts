@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmailTempleteComponent } from './email-template.component';
 
 
-
-
 const routes: Routes = [{ path: '', component: EmailTempleteComponent }];
 
 @NgModule({

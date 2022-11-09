@@ -1,7 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -22,7 +20,6 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 })
 export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
-
   authenticationTypes = [new TitleListType("No authentication", "DISABLED"),
   new TitleListType("Basic two-factor authentication", "BASIC"),
   new TitleListType("Secure two-factor authentication - by email", "SECURE"),
@@ -39,8 +36,6 @@ export class AccountComponent implements OnInit, OnDestroy {
     private settingService: SettingService,
     private toastr: ToastrService,
     private modalService: NgbModal,
-    private elRef: ElementRef,
-    private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
   ) { }
 
@@ -52,16 +47,12 @@ export class AccountComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    /**
-     * init form validation and declaration
-     */
     this.passwordForm = this.formBuilder.group(
       {
         oldpass: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
         newpass: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
       },
     );
-
     this.get2FA();
   }
   onLogOut() {
@@ -83,7 +74,6 @@ export class AccountComponent implements OnInit, OnDestroy {
                 idsForDelete.push(deviceId);
               }
             }
-
             if (idsForDelete) {
               this.settingService
                 .closeSessions(idsForDelete)
@@ -154,8 +144,6 @@ export class AccountComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.passwordForm.invalid) {
       return;
     }

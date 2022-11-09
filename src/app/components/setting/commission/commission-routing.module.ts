@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommissionComponent } from './commission.component';
 
 
-
-
 const routes: Routes = [{ path: '', component: CommissionComponent }];
 
 @NgModule({

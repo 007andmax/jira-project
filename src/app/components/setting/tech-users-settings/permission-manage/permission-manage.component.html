@@ -133,15 +133,12 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
 </div>
-<!-- sidebar popup edit -->
 <div
     class="qt-aside-modern qt-aside-modern--page-settings users-page__aside ng-star-inserted role-dlt --lg"
     *ngIf="showDeleteRole"
 >
-    <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Delete Role?</div>
     </div>
@@ -155,7 +152,6 @@
         </div>
         <form #editForm="ngForm">
             <div class="tech-list">
-                <!-- <div class=".caption-m qt-text-upper qt-mb-16">Tech Users</div> -->
                 <div class="users-list custom-scroll">
                     <div
                         *ngFor="let user of usersToShift"
@@ -168,9 +164,6 @@
                                   !user.requestToChangePassword && user.isEmailVerified
                                 "
                             >
-                                <!-- <span *ngIf="techUser.avatar !== null">
-                                  NN
-                                </span> -->
                                 <img
                                     *ngIf="user.avatar !== null"
                                     src="/users/{{ user.id }}/image.jpg?t={{
@@ -199,9 +192,6 @@
                                 <div class="user-item__email qt-color-gray-500 qt-mt-2 ellipsis">{{ user.primaryEmail }}</div>
                             </div>
                         </div>
-                        <!-- <li ng-repeat="role in allTechRoles" ng-click="user.techRole = role; changeUsersRole(user)">
-              <a tabindex="-1" href="javascript:void(0)"> {{ role }} </a>
-            </li> -->
                         <app-drop-down
                             [class]="['qt-select-input-40']"
                             [list]="allTechRoles"

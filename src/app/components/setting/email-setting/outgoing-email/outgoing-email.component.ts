@@ -5,8 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import {
   FormGroup,
   FormBuilder,
-  Validators,
-  FormControl
+  Validators
 } from "@angular/forms";
 import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
 import { AppStateService } from "src/app/states/app/app-state.service";
@@ -191,7 +190,6 @@ export class OutgoingEmailComponent implements OnInit {
     this.savedSMTPSettings = this.savedSMTPSettingsInput;
     this.portIsEmpty = this.portIsEmptyInput;
     this.usedEmailVia = this.usedEmailViaInput;
-    console.log("this.usedEmailVia", this.usedEmailVia);
     if (!this.smtp.useSMTP || this.disableFields) {
       this.smtpForm.get("login").disable();
       this.smtpForm.get("domain").disable();

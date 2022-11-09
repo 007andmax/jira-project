@@ -131,7 +131,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         map(data => {
           this.loading = false;
           this.ticketTags = data[0].map(item => new ManageTag(item));
-          console.log("this.ticketTags 1", this.ticketTags);
           this.setDefaultScoll();
           this.onScroll();
         })
@@ -216,7 +215,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.serviceAllTickets.subscribe(
       res => {
         this.ticketTags = res.map(item => new ManageTag(item));
-        console.log("this.ticketTags 2", this.ticketTags);
       },
       error => {
       }
@@ -247,12 +245,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
     }
-
-    // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
-    //   this.setActiveTab = "ticket";
-    // } else {
-    //   this.setActiveTab = "company";
-    // }
   }
 
   // convenience getter for easy access to form fields
@@ -366,7 +358,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
                     return;
                   }
                 });
-                // this.getAllTickets();
               } else {
                 this.companyTags.filter(company => {
                   if (company.id === res.id) {
@@ -374,7 +365,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
                     return;
                   }
                 });
-                // this.getAllCompany();
               }
             }
 

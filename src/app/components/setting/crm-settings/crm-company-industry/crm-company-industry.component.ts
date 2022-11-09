@@ -6,7 +6,6 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_CRM_INDUSTRIES, DELETE_CRM_INDUSTRY } from 'src/app/const/confirm';
 import { CrmService } from 'src/app/services/crm/crm.service';
-import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from './class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from './class/crm-company-industry-filter';

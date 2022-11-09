@@ -39,7 +39,6 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
-
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -92,7 +91,6 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Status`;
-    //this.ticketsStateService.setListTicketStatusForRemove(this.ticketsStatus.ticketsStatus.filter(item => item.selected));
   }
 }
 

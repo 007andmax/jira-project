@@ -3,7 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_LIST_GL_NUMBERS } from 'src/app/const/confirm';
-
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';

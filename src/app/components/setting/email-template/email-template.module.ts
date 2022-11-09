@@ -8,9 +8,6 @@ import { EmailTemplateRoutingModule } from './email-template-routing.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
-
-
-
 @NgModule({
     declarations: [EmailTempleteComponent,
         SanitizeHtmlPipe

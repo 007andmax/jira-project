@@ -26,7 +26,6 @@ export class SignatureComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     private modalService: NgbModal) { }
 
-
   ngOnInit() {
     this.signatureService.getSignature().subscribe((data: any) => {
       if (data) {

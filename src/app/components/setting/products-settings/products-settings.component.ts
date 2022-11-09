@@ -3,8 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_CATEGORIES_PRODUCT, DELETE_CATEGORY_PRODUCT } from 'src/app/const/confirm';
-import { CategoryProduct } from 'src/app/interfaces/product/category-product';
-import { ModalEditCategoryProductComponent } from 'src/app/services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';

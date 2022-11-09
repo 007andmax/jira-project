@@ -15,7 +15,6 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
-
 @NgModule({
     declarations: [
         TicketSettingsPageComponent,
@@ -36,8 +35,5 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         DynamicTooltipModule,
         KeyUpEnterModule
     ],
-
-
-
 })
 export class TicketSettingsPageModule { }

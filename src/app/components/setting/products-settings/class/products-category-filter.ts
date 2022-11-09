@@ -1,7 +1,6 @@
 import { CompanyFilterTop } from "src/app/components/companies/class/company-filter-top";
 
 export class ProductsCategoryFilter {
-
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('name', 'ASC'),
         new CompanyFilterTop('count', '')
@@ -17,11 +16,9 @@ export class ProductsCategoryFilter {
                 if (sort === '' || sort === 'DESC') {
                     this.filter[index].filter = 'ASC';
                     this.onFilterName(list);
-                    console.log("list 1", list);
                 } else {
                     this.filter[index].filter = 'DESC';
                     list.reverse();
-                    console.log("list 2", list);
                 }
             }
             if (field === 'count') {

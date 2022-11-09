@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, Pipe, OnDestroy } from "@angular/core";
-
-import { ReplaySubject, forkJoin, of, throwError, Subscription } from "rxjs";
-import { takeUntil, catchError, debounceTime } from "rxjs/operators";
-
+import { throwError, Subscription } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { map } from "rxjs/operators";
 import { CommissionService } from "../commission.service";
 import { UsersService } from "src/app/services/users/users.service";
 import { ToastrService } from "ngx-toastr";
-import { FormControl } from "@angular/forms";
 import { UsersStateService } from "src/app/states/users/users-state.service";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";

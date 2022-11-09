@@ -8,7 +8,6 @@ import { DELETE_CRM_JOB_TITLE, DELETE_CRM_JOB_TITLIES } from 'src/app/const/conf
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
-import { CrmCompanyIndustryFilter } from '../crm-company-industry/class/crm-company-industry-filter';
 import { CrmCompanyJobTitle } from './class/crm-company-job-title';
 import { CrmCompanyJobTitleFilter } from './class/crm-company-job-title-filter';
 

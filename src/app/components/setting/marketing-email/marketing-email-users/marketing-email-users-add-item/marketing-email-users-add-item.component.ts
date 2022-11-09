@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { User } from 'src/app/components/users/class/user';
 

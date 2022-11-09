@@ -11,8 +11,6 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 
-
-
 @NgModule({
     declarations: [EmailSettingComponent,
         IncomingEmailComponent,

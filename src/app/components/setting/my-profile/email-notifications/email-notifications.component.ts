@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
-import { ToastrService } from "ngx-toastr";
 import { map } from "rxjs/operators";
 
 @Component({
@@ -13,7 +12,6 @@ export class EmailNotificationsComponent implements OnInit {
   @ViewChild('emailForm') emailForm: any;
   constructor(
     private settingService: SettingService,
-    private toastr: ToastrService
   ) { }
 
   /**

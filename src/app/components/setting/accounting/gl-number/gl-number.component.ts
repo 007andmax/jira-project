@@ -28,7 +28,6 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   constructor(
     private glNumberService: GlNumberService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder,
     private settingStateService: SettingStateService,
     private glNumberStateService: GlNumberStateService,
     public cd: ChangeDetectorRef,

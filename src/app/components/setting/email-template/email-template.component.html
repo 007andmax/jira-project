@@ -3,7 +3,6 @@
     <div class="page-insider manage-tags">
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Email Templates</h5>
-            <!-- <div class="qt-button qt-ml-24 &#45;&#45;md">Save Changes</div> -->
         </div>
         <div
             class="loading-container"
@@ -11,7 +10,7 @@
         >
             <div class="loading"></div>
         </div>
-        <ngb-tabset (tabChange)="setTab($event)">
+        <ngb-tabset>
             <ngb-tab
                 title="Ticket Templates"
                 id="tab1"
@@ -348,7 +347,6 @@
                             href="javascript:;"
                             (click)="toggle()"
                         >
-                            <!-- <span class="icon__hide qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span> -->
                             <span
                                 class="qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
                                 [ngClass]="{'icon__view':!show, 'icon__hide':show}"

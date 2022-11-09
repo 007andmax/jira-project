@@ -5,9 +5,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
-// import { AngularEditorConfig } from "@kolkov/angular-editor";
 
 declare var $: any;
 
@@ -20,12 +19,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   loading = true;
   submitted = false;
   edit = false;
-
   ticketTemplates: any;
   agentTemplates: any;
   invoiceTemplates: any;
   currentOpenTemplate = "";
-
   keywords: any[];
   templeteInfo: any;
   emailPreviewHtml: any;
@@ -41,25 +38,11 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
 
-  // config: AngularEditorConfig = {
-  //   editable: true,
-  //   spellcheck: true,
-  //   height: "15rem",
-  //   minHeight: "5rem",
-  //   placeholder: "",
-  //   translate: "no",
-  //   defaultParagraphSeparator: "p",
-  //   defaultFontName: "Arial",
-  //   toolbarPosition: "bottom"
-  //   // showToolbar:false
-  // };
-
   constructor(
     private modalService: NgbModal,
     private emailService: EmailTempleteService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private sanitizer: DomSanitizer,
     private settingStateService: SettingStateService
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
@@ -169,11 +152,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public setTab(data) {
-    console.log("event", data['nextId']);
-    // this.tabSet = data['nextId'];
-  }
-
   trackByTicket(index, item) {
     return item.value.title;
   }
@@ -206,13 +184,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       this.subject.nativeElement.selectionStart = startPos;
       this.subject.nativeElement.focus();
       $("#elem").selectRange(3);
-      // this.subject.nativeElement.blur();
     } else {
-      // this.insertDataVarables(el, text);
-      // el.parentElement.parentElement.parentElement.blur();
       this.insertAt(document.getElementById("myEditor"), text);
     }
-    // this.insertDataVarables(el, text);
   }
 
   /**
@@ -234,28 +208,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
 
       return false;
     }
-    // if (myField.selectionStart || myField.selectionStart == "0") {
-    //   var startPos = myField.selectionStart;
-    //   var endPos = myField.selectionEnd;
-    //   myField.value =
-    //     myField.value.substring(0, startPos) +
-    //     myValue +
-    //     myField.value.substring(endPos, myField.value.length);
-    //   myField.selectionStart = startPos + myValue.length;
-    //   myField.selectionEnd = startPos + myValue.length;
-    //   myField.focus();
-    // } else {
-    //   myField.value += myValue;
-    // }
-    // if (myField.name === "subject") {
-    //   this.templeteForm.patchValue({
-    //     subject: myField.value
-    //   });
-    // } else if (myField.name === "body") {
-    //   this.templeteForm.patchValue({
-    //     body: myField.value
-    //   });
-    // }
   }
 
   insertAt(element, text) {
@@ -318,14 +270,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       );
       if (matches === null) {
       }
-      // return matches && matches.length ? { invalid_characters: matches } : null;
     }
-    // this.templeteForm.patchValue({
-    //   body: this.body.nativeElement.value,
-    //   subject: this.subject.nativeElement.value
-    // });
     this.templeteForm.patchValue({
-      // body: this.templeteForm.value.body,
       body: document.getElementById("myEditor")['value'],
       subject: this.templeteForm.value.subject
     });
@@ -432,20 +378,6 @@ export class UploadAdapter {
   constructor(loader: any) {
     this.loader = loader;
   }
-
-  // upload() {
-  //   return this.loader.file.then(
-  //     file =>
-  //       new Promise((resolve, reject) => {
-  //         var myReader = new FileReader();
-  //         myReader.onloadend = e => {
-  //           resolve({ default: myReader.result });
-  //         };
-
-  //         myReader.readAsDataURL(file);
-  //       })
-  //   );
-  // }
 
   readThis(file: File): Promise<any> {
     return this.loader.file.then(

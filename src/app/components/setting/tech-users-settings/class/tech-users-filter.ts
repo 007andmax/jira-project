@@ -4,7 +4,6 @@ export class TechUsersFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC')];
     constructor() { }
     public onFilter(field, reqUsers) {
-
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
             let sort = this.filterTop[index].filter;
@@ -17,9 +16,7 @@ export class TechUsersFilter {
                     this.filterTop[index].filter = 'DESC';
                     reqUsers.reverse();
                 }
-
             }
-
         }
     }
     public clearFilter() {
