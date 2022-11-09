@@ -7,6 +7,7 @@ import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
+import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
 
 declare var $: any;
 
@@ -43,7 +44,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private emailService: EmailTempleteService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private settingStateService: SettingStateService
+    private settingStateService: SettingStateService,
+    private emailTemplateStateService: EmailTemplateStateService
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -60,6 +62,18 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
+    this.emailTemplateStateService.onChangeEmailTemplates.subscribe(data => {
+      if (data.action == "COMPANY_EMAIL_NOTIFICATION") {
+        for (const key in this.ticketTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
+
+      }
+
+    })
   }
 
   ngOnDestroy() {
@@ -277,17 +291,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     });
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
-      .pipe(
-        map(res => {
-          this.submitted = false;
-          this.edit = false;
-          this.templeteForm.reset();
-        })
-      )
       .subscribe(
         () => {
           this.toastr.success("Saved Successfully");
-          this.getEmailPages();
+          this.closeTemplete();
         },
         error => {
           this.toastr.error(`Error Occured  ${error}`);
@@ -309,13 +316,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templeteKey) {
       return;
     }
-
-    this.loading = true; $(".loading").css("display", "block");
     this.emailService
       .setToDefaultTemplete(templeteKey)
       .pipe(
         map((defaultTemplate: any) => {
-          this.loading = false; $(".loading").css("display", "none");
           if (defaultTemplate) {
             this.templeteForm.patchValue({
               subject: defaultTemplate.subject,
@@ -327,7 +331,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.toastr.success("Restored Successfully");
-          this.getEmailPages();
         },
         error => {
           this.toastr.error(`Error Occured ${error}`);

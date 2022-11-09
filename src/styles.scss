@@ -4137,7 +4137,7 @@ app-ticket-edit-aside {
   app-date-picker {
     .date-picker {
       display: block;
-      height: 24px;
+      //height: 24px; // TODO check this style
     }
   }
 
@@ -4896,3 +4896,39 @@ app-default-services-edit,app-inventory-edit-aside {
   position: relative;
   z-index: 999;
 }
+
+.ticket-edit-aside {
+  .qt-taxes-multiselect {
+    @media (max-width: 767px) {
+      position: relative;
+      width: 100%;
+      margin: 42px 0 0;
+    }
+    &::after {
+      @media (max-width: 767px) {
+        position: absolute;
+        content: "Taxes";
+        left: 0;
+        top: -28px;
+        color: #212b36;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+    }
+  }
+  .product-item {
+    .product-item__price-input {
+      @media (max-width: 767px) {
+        max-width: 100%;
+      }
+    }
+    .product-item__discount-input {
+      @media (max-width: 767px) {
+        max-width: 100% !important;
+      }
+    }
+  }
+}
+

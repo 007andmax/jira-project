@@ -14,7 +14,7 @@
         </div>
         <div class="qt-df qt-mb-16">
             <div class="qt-input-block --required qt-w25 qt-mr-16">
-                <label>Start Date</label>
+                <label class="app-drop-down__title">Start Date</label>
                 <app-date-picker
                     #startDateDP
                     [formatDate]="formatDate"
@@ -37,7 +37,7 @@
                 ></app-drop-down>
             </div>
             <div class="qt-input-block qt-w25">
-                <label>Review Date</label>
+                <label class="app-drop-down__title">Review Date</label>
                 <app-date-picker
                     #reviewDateDP
                     [formatDate]="formatDate"
@@ -50,7 +50,7 @@
         </div>
         <div>
             <div class="qt-input-block --required qt-w100">
-                <label>Description</label>
+                <label class="app-drop-down__title">Description</label>
                 <input
                     [ngClass]="{'--input-error' : !validate.getDescription()}"
                     placeholder="Write contract description"
