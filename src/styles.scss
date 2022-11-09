@@ -2449,15 +2449,6 @@ app-quotes-item {
         font-size: 12px;
         color: $gray-800--old;
         cursor: pointer;
-        &:before {
-          content: "";
-          position: absolute;
-          background: url("./assets/img/icons/upload-photo.svg") no-repeat center / cover;
-          left: -40px;
-          top: 0;
-          width: 32px;
-          height: 32px;
-        }
       }
     }
     .recurring-interval-dropdown {

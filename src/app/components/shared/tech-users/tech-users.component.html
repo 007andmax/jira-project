@@ -181,11 +181,17 @@
         class="device-user pointer"
         *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
         id="dropdownTechuser"
-        style="margin-bottom: 10px;width: 109px;"
+        style="margin-bottom: 10px;"
         ngbDropdownToggle
     >
         <!-- FOR RECURRING_TICEKTS -->
-        <span *ngIf="type === 'RECURRING_TICEKTS'">Assigned Users</span>
+        <div class="qt-df qt-ai-c">
+            <div
+                *ngIf="type === 'RECURRING_TICEKTS'"
+                class="icon__upload-avtar qt-mr-8"
+            ></div>
+            <span *ngIf="type === 'RECURRING_TICEKTS'">Assigned Users</span>
+        </div>
         <!-- FOR RECURRING_TICEKTS -->
         <!-- COMPANY_SETTINGS -->
         <div

@@ -2,7 +2,6 @@
 @import "./src/assets/styles/mixin/dropdown";
 
 .select-wrapper {
-  @include dropdown-menu;
   height: 252px;
   max-height: 586px;
   overflow: hidden;
@@ -26,6 +25,7 @@
 }
 .tech-user-body {
   overflow: visible;
+  max-height: 586px !important;
 }
 .tech__user-icon {
   width: 24px;
@@ -52,4 +52,9 @@
 }
 .tech-users-container {
   max-height: 586px !important;
+}
+.icon__upload-avtar {
+  width: 32px;
+  height: 32px;
+  background-size: cover;
 }
