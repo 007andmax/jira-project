@@ -33,9 +33,15 @@
                         </a>
                     </div>
                 </div>
-                <span><button class="qt-button --gray" (click)="openAsideAdvSearch()">
+                <span><button class="qt-button --gray qt-ml-8" (click)="openAsideAdvSearch()">
                         Advance Search
                     </button></span>
+                <span><button
+                        class="qt-button --gray qt-ml-8"
+                        (click)="getAddDevice()"
+                    >
+                        Add Device
+                </button></span>    
                 <button class="qt-btn --outline-white qt-ml-8" (click)="sendEmail()">
                     <span class="d-email"></span>
                 </button>
@@ -50,9 +56,9 @@
                         <span class="screen-Connect"></span>
                     </a>
                 </button>
-                <button class="qt-btn --outline-white qt-ml-8" (click)="getAddDevice()">
+                <!-- <button class="qt-btn --outline-white qt-ml-8" (click)="getAddDevice()">
                     <span class="d-adddevice"></span>
-                </button>
+                </button> -->                
             </div>
             <div class="qt-page-list__header-title-line--rigth">
                 <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
