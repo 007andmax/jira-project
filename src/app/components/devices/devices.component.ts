@@ -20,6 +20,7 @@ import { DropDownComponent } from '../shared/drop-down/drop-down.component';
 import { v4 as uuidv4 } from 'uuid';
 import { DatePickerComponent } from '../shared/date-picker/date-picker.component';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 
 @Component({
@@ -187,6 +188,7 @@ export class DevicesComponent implements OnInit {
   advancesearchSoftwareFilterValue: string = "";
   advancesearchOSVersionNameFilterValue: string = "";
   advancesearchPreloader: boolean = false;
+  devices: any[] = [];
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -202,10 +204,12 @@ export class DevicesComponent implements OnInit {
     private excelService: ExcelService,
     private companiesState: CompaniesStateService,
     public draftEmailStateService: DraftEmailStateService,
+    private devicesStateService: DevicesStateService
   ) { }
 
   ngOnInit() {    
     this.companiesState.onInit();
+    this.devicesStateService.onInit();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
@@ -227,7 +231,7 @@ export class DevicesComponent implements OnInit {
     });
 
     if (!this.searchSubscription) {
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {        
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
@@ -236,7 +240,7 @@ export class DevicesComponent implements OnInit {
     }
 
     if (!this.searchSubscriptionCompany) {
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {                
         this.selectedTag = [];
         if (data.name != 'undefined' && data.name != null && data.name != "") {
           this.selectedTag.push(data.name);
@@ -319,22 +323,27 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {
+  searchDeviceTag(data: any) {    
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {          
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {           
+      if(resp.length>0)
+      {
+        this.getAlldevicedata(resp[0].CompanyGuid);     
+      }      
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
       this.operatingSystem = [];
       this.assetList = resp;
+      this.getDevices(resp);
       this.HardwareTypeList(this.techCompnayGuid);
 
       this.assetList.forEach((element, index) => {
-        element.online = false;
+        //element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         if (element.AgentVersion != null) {
@@ -418,9 +427,7 @@ export class DevicesComponent implements OnInit {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
           if (asset) {            
-            this.kafkaMessage = JSON.parse(resp[0].Value);
-            if(this.kafkaMessage.IsAgentRunning)
-            {
+            this.kafkaMessage = JSON.parse(resp[0].Value);           
               asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
               if (this.kafkaMessage.IdleTime != null) {
                 let Time = this.kafkaMessage.IdleTime.split("Idle for");
@@ -446,8 +453,7 @@ export class DevicesComponent implements OnInit {
                   asset.UpTime = Days;
                 }
               }
-              asset.online = true;
-            }                       
+              //asset.online = true;                                
           }
           //asset.online = true;
         }
@@ -2003,6 +2009,31 @@ export class DevicesComponent implements OnInit {
       return;
     }
     return assetOperationgSystem.replace("Microsoft","");
+  }
+
+  getAlldevicedata(id) {
+    this.devicesStateService.getOnDevices().subscribe(data => {      
+      if (!data[id]) return;
+      if (data[id].length) {
+        data[id].forEach(item => {
+          this.devices.push(item);
+        });
+      }
+    });
+  }
+
+  getDevices(assetList) {
+    assetList.forEach((element, index) => {
+      element.online = false;
+      element.userName = "";
+      element.idle = 0;
+      let result = this.devices.find(x => x.agentId === element.Guid);
+      if (result) {
+        assetList[index].online = result.online;
+        assetList[index].userName = result.userName;
+        assetList[index].idle = result.timing.idle;
+      }
+    });
   }
 
 }
