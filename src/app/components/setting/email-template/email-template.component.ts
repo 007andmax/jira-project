@@ -70,6 +70,18 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             break;
           }
         }
+        for (const key in this.agentTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
+        for (const key in this.invoiceTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
 
       }
 

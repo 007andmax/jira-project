@@ -302,7 +302,14 @@ input.qt-dropdown-input {
       height: 28px;
     }
   }
+  &.--loading {
+    color: transparent !important;
 
+    app-preloader-ticket {
+      position: absolute !important;
+      left: calc(50% - 9px);
+    }
+  }
   &:not(.--gray) {
     &:hover {
       color: $white;
