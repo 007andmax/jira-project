@@ -849,7 +849,12 @@ h6,
   height: 26px;
   background-color: $gray-500--old;
 }
-
+.avatar-36 {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-color: $gray-500--old;
+}
 .avatar-26.remove:hover {
   background-color: #d2dae4;
 }

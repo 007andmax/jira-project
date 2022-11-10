@@ -26,11 +26,10 @@
         <div
             class="default-user-avatar qt-ml-16 ng-scope"
             *ngIf="user.avatar"
-            [ngStyle]="{'background-color':listColorNoAvatar[indexNoAvatar]}"
         >
             <img
                 ng-if="user.avatar"
-                class="img-circle avatar-26"
+                class="img-circle avatar-36"
                 style="margin: 0;"
                 [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                 alt="..."

@@ -47,6 +47,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   users = [];
   usersList = [];
   techUsersList = [];
+  namesTechUsersList = [];
   shareUsersList = [];
   selectedCompanyId: string;
   listTechUsersForAssign: Array<TechUserItem> = [];
@@ -147,6 +148,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         return item;
       }
     });
+    this.namesTechUsersList = this.getTechUserList();
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
 
   }

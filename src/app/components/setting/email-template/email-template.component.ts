@@ -70,6 +70,18 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             break;
           }
         }
+        for (const key in this.agentTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
+        for (const key in this.invoiceTemplates) {
+          if (data.data[key]) {
+            this.emailPages.activeAndNotDefault[key] = data.data[key];
+            break;
+          }
+        }
 
       }
 
@@ -293,7 +305,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .subscribe(
         () => {
-          this.toastr.success("Saved Successfully");
           this.closeTemplete();
         },
         error => {
@@ -330,7 +341,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         () => {
-          this.toastr.success("Restored Successfully");
+
         },
         error => {
           this.toastr.error(`Error Occured ${error}`);
