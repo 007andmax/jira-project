@@ -11,7 +11,7 @@
     </a>
     <div
         class="qt-df qt-h36"
-        *ngIf="activityHistory"
+        *ngIf="activeTab == 'history'"
     ></div>
 </div>
 <ngb-tabset (tabChange)="setTab($event)">
