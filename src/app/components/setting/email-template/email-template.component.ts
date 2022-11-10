@@ -342,7 +342,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         () => {
-          this.toastr.success("Restored Successfully");
+
         },
         error => {
           this.toastr.error(`Error Occured ${error}`);

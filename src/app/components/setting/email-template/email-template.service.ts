@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { ToastrService } from "ngx-toastr";
+import { AppStateService } from "src/app/states/app/app-state.service";
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -70,7 +73,9 @@ export class EmailTempleteService {
     }
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   /**
    * ticket templates
@@ -139,7 +144,12 @@ export class EmailTempleteService {
     return this.http.post(
       `${this.apiUrl}settings/emailPages/toDefaultTemplate/${type}`,
       {}
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Restored Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
