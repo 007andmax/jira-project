@@ -133,7 +133,12 @@ export class EmailTempleteService {
     return this.http.put(
       `${this.apiUrl}settings/emailPages/updateTemplate/${type}`,
       data
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

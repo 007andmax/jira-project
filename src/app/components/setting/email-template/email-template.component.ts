@@ -305,7 +305,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .subscribe(
         () => {
-          this.toastr.success("Saved Successfully");
           this.closeTemplete();
         },
         error => {
