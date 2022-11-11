@@ -189,6 +189,7 @@ export class DevicesComponent implements OnInit {
   advancesearchOSVersionNameFilterValue: string = "";
   advancesearchPreloader: boolean = false;
   devices: any[] = [];
+  tempDevices: any[] = [];
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -207,9 +208,10 @@ export class DevicesComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {       
+  ngOnInit() {         
     this.companiesState.onInit();
     this.devicesStateService.onInit();
+    this.getTempData();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
@@ -240,7 +242,7 @@ export class DevicesComponent implements OnInit {
     }
 
     if (!this.searchSubscriptionCompany) {
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {                
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {                        
         this.selectedTag = [];
         if (data.name != 'undefined' && data.name != null && data.name != "") {
           this.selectedTag.push(data.name);
@@ -261,7 +263,6 @@ export class DevicesComponent implements OnInit {
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);
     });
-
     this.CurrentUser();
 
     this.todaysDate = Date.now();
@@ -329,10 +330,10 @@ export class DevicesComponent implements OnInit {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {        
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {           
       if(resp.length>0)
-      {
-        this.getAlldevicedata(resp[0].CompanyGuid);     
+      {      
+          this.getAlldevicedata(resp[0].CompanyGuid);                     
       }      
       this.onFilter('CompanyName');
       this.showPreloader = false;
@@ -2011,18 +2012,27 @@ export class DevicesComponent implements OnInit {
     return assetOperationgSystem.replace("Microsoft","");
   }
 
-  getAlldevicedata(id) {
-    this.devicesStateService.getOnDevices().subscribe(data => {      
-      if (!data[id]) return;
-      if (data[id].length) {
-        data[id].forEach(item => {
-          this.devices.push(item);
-        });
-      }
-    });
+  getAlldevicedata(id) {    
+    if(id){
+      this.tempDevices.forEach(item=>{
+        if(item[id].length)
+        {
+          item[id].forEach(data=>{
+            this.devices.push(data);
+          })
+        }
+      })    
+    }
   }
 
-  getDevices(assetList) {
+  getTempData(){
+    this.devicesStateService.getOnDevices().subscribe(data => {   
+          this.tempDevices=[];
+          this.tempDevices.push(data);
+        });
+  }
+
+  getDevices(assetList) {    
     assetList.forEach((element, index) => {
       element.online = false;
       element.userName = "";

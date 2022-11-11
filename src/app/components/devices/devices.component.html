@@ -214,19 +214,29 @@
                                 </div>
                             </td>
                             <td class="company-devices-table__logged-user">
-                                <div class="qt-df qt-fd-c">
+                                <!-- <div class="qt-df qt-fd-c">
                                     <span class="logged-name qt-ff-gm" [textContent]="asset.CurrentUser || ''"></span>
                                     <span class="logged-time" *ngIf="asset.IdelTime">
                                         Idle:
                                         <span>{{ asset.IdelTime }}</span>
+                                    </span>
+                                </div> -->
+                                <div class="qt-df qt-fd-c" *ngIf="asset.online">                                    
+                                    <span class="logged-name qt-ff-gm"
+                                    [textContent]="asset.userName || ''"></span>                                    
+                                    <span
+                                        class="logged-time"                                        
+                                    >
+                                        Idle:
+                                        <span>{{ asset.idle }}</span>
                                     </span>
                                 </div>
                             </td>
                             <td class="company-devices-table__up-time">
                                 <div class="qt-df qt-fd-c">
                                     <span>
-                                        <span *ngIf="asset.IsActive && asset.online" class="uptime-tag qt-ff-gm">{{ asset.UpTime }}</span>
-                                        <span *ngIf="asset.IsActive && !asset.online" class="uptime-tag qt-ff-gm --offline">{{ getLastCheckIn(asset)}}</span>   
+                                        <span *ngIf="asset.IsActive && asset.online" class="companydevice-beta-online">{{ asset.UpTime }}</span>
+                                        <span *ngIf="asset.IsActive && !asset.online" class="companydevice-beta-offline">{{ getLastCheckIn(asset)}}</span>   
                                     </span>
                                     <span *ngIf="asset.IsActive && asset.online" class="uptime-tag qt-ff-gm" [textContent]="asset.online ? 'Online' : 'Offline'"></span>
                                      <span *ngIf="asset.IsActive && !asset.online" class="uptime-tag qt-ff-gm --offline" [textContent]="asset.online ? 'Online' : 'Offline'"></span>
