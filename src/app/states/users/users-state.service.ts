@@ -1,15 +1,11 @@
-import { Injectable, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { User } from '../../components/users/class/user';
-import { retry } from 'rxjs/operators';
-import { UserPipe } from '../../pipe/user/user.pipe';
-import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';
 import { UserFilter } from '../../components/users/class/user-filter';
 import { AppService } from '../app/app.service';
-import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
 import { MODE_USERS_LIST } from 'src/app/const/users';
 
 @Injectable({
@@ -44,8 +40,6 @@ export class UsersStateService {
 
   }
   public onInit() {
-
-
     this.onInitGetCurrentUser();
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
@@ -78,7 +72,6 @@ export class UsersStateService {
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     });
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
-
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
   }
@@ -181,7 +174,6 @@ export class UsersStateService {
   }
   public onInitCurrentUser(data) {
     this.onGetCurrentUser.emit(data);
-
   }
   public setAllUsers(data) {
     this.allUsers = data;

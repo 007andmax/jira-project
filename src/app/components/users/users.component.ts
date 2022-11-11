@@ -70,18 +70,30 @@ export class UsersComponent implements OnInit {
       window.scrollTo(0, 0);
       this.filter.setClientType(null);
       this.filter.clearFilter();
-      this.setDefaultScoll();
-      this.getUsersList(this.usersStateService.getAllUsers());
+      if (this.showArchivedUsers) {
+        this.showPreloader = true;
+        this.users = [];
+        this.usersService.getArchiveUsers().subscribe(res => {
+          this.setDefaultScoll();
+          this.getUsersList(res);
+        })
+      } else {
+        this.showPreloader = true;
+        this.users = [];
+        this.setDefaultScoll();
+        this.getUsersList(this.usersStateService.getAllUsers());
+      }
     })
     this.userListService.addSubscription(getOnShowArchived);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
+      this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
-      this.onScroll();
+      this.getUsersList(this.usersStateService.getAllUsers());
     })
     this.userListService.addSubscription(geLefttFilter);
 
@@ -270,10 +282,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
-
-    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
@@ -298,9 +307,7 @@ export class UsersComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-
     this.count = listFilter.length;
-
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];
@@ -311,8 +318,6 @@ export class UsersComponent implements OnInit {
     if (this.selectAll) this.users.forEach(item => item.selected = true);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-
-
   }
   public setDefaultScoll() {
     this.page_number = 0;

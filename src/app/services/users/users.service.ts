@@ -38,6 +38,11 @@ export class UsersService {
       map((data: any) => data.map((item) => new User(item))));
   }
 
+  public getArchiveUsers() {
+    return this.http.post(this.apiUrl + 'users/filter', { isArchived: true }).pipe(
+      map((data: any) => data.map((item) => new User(item))));
+  }
+
   public changeUserRole(userId, jobTypeId) {
     return this.http.put(this.apiUrl + '/users/jobType', {
       "userId": userId,

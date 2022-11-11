@@ -297,6 +297,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
             });
             this.profileForm.controls['primaryPhone'].updateValueAndValidity()
             this.profileForm.controls['primaryPhone'].setErrors(null);
+            this.profileForm.controls['secondaryPhone'].clearValidators();
             this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
             this.profileForm.controls['secondaryPhone'].setErrors(null);
           }

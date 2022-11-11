@@ -24,13 +24,13 @@
     </a>
     <li
         [ngClass]="{'--active': filter.getClientType() === 'CLIENT' && activePage === 'new-users'}"
-        (click)="goToState();onSetFilterClientType('CLIENT')"
+        (click)="goToState();setShowArchivedCompanies(false);onSetFilterClientType('CLIENT')"
     >
         Customer Users
     </li>
     <li
         [ngClass]="{'--active': filter.getClientType() === 'LEAD' && activePage === 'new-users'}"
-        (click)="goToState();onSetFilterClientType('LEAD')"
+        (click)="goToState();setShowArchivedCompanies(false);onSetFilterClientType('LEAD')"
     >
         Lead Users
     </li>

@@ -77,7 +77,9 @@ export class ActivityHistoryComponent implements OnInit, OnDestroy {
       idsForDelete.push(device.id);
       this.settingService
         .closeSessions(idsForDelete)
-        .subscribe();
+        .subscribe((data) => {
+          this.activityHistory.splice(this.activityHistory.findIndex(item => item.id == device.id), 1);
+        });
     }
   }
 
