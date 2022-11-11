@@ -98,7 +98,7 @@ export class UsersComponent implements OnInit {
       console.log("this.filter", this.filter);
       this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
-      this.onScroll();
+      this.getUsersList(this.usersStateService.getAllUsers());
     })
     this.userListService.addSubscription(geLefttFilter);
 
