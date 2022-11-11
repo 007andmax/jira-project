@@ -173,9 +173,7 @@ export class UsersStateService {
     return this.currentUser;
   }
   public onInitCurrentUser(data) {
-    console.log("onInitCurrentUser", data);
     this.onGetCurrentUser.emit(data);
-
   }
   public setAllUsers(data) {
     this.allUsers = data;

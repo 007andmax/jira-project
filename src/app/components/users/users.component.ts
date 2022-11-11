@@ -83,19 +83,14 @@ export class UsersComponent implements OnInit {
         this.setDefaultScoll();
         this.getUsersList(this.usersStateService.getAllUsers());
       }
-      console.log("data", data);
-      console.log("this.filter", this.filter);
-
     })
     this.userListService.addSubscription(getOnShowArchived);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
       this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
-      console.log("this.showArchivedUsers", this.showArchivedUsers);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
-      console.log("this.filter", this.filter);
       this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
       this.getUsersList(this.usersStateService.getAllUsers());
@@ -287,10 +282,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-    console.log("data", data);
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
-    console.log("this.reqUsers", this.reqUsers);
-    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
@@ -313,12 +305,9 @@ export class UsersComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    console.log("getUsers");
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-
     this.count = listFilter.length;
-
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];
@@ -326,12 +315,9 @@ export class UsersComponent implements OnInit {
       usersList.push(listFilter[i]);
     }
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
-    console.log("this.users", this.users);
     if (this.selectAll) this.users.forEach(item => item.selected = true);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-
-
   }
   public setDefaultScoll() {
     this.page_number = 0;

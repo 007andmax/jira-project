@@ -300,7 +300,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.profileForm.controls['secondaryPhone'].clearValidators();
             this.profileForm.controls['secondaryPhone'].updateValueAndValidity()
             this.profileForm.controls['secondaryPhone'].setErrors(null);
-            console.log("this.profileForm.controls['secondaryPhone']", this.profileForm.controls['secondaryPhone']);
           }
         })
       )
@@ -571,7 +570,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
    */
   public onSubmit() {
     this.submitted = true;
-    console.log("this.profileForm", this.profileForm);
     if (this.profileForm.invalid) {
       return;
     }
