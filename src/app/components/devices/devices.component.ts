@@ -207,7 +207,7 @@ export class DevicesComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {       
     this.companiesState.onInit();
     this.devicesStateService.onInit();
     this.clientName = "All Companies";
@@ -271,7 +271,7 @@ export class DevicesComponent implements OnInit {
     return this.assetList.filter(item => item.selected).length;
   }
 
-  load(company: any) {
+  load(company: any) {    
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
@@ -323,13 +323,13 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {    
+  searchDeviceTag(data: any) {      
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {           
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {        
       if(resp.length>0)
       {
         this.getAlldevicedata(resp[0].CompanyGuid);     
@@ -428,11 +428,11 @@ export class DevicesComponent implements OnInit {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
           if (asset) {            
             this.kafkaMessage = JSON.parse(resp[0].Value);           
-              asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-              if (this.kafkaMessage.IdleTime != null) {
-                let Time = this.kafkaMessage.IdleTime.split("Idle for");
-                asset.IdelTime = Time[1] != "" ? Time[1] : "";
-              }
+              // asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+              // if (this.kafkaMessage.IdleTime != null) {
+              //   let Time = this.kafkaMessage.IdleTime.split("Idle for");
+              //   asset.IdelTime = Time[1] != "" ? Time[1] : "";
+              // }
               if (this.kafkaMessage.UpTime != "") {
                 let result = this.kafkaMessage.UpTime.split(" ");
   
