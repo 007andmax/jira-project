@@ -58,21 +58,26 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.goToState();
     this.onShowAll();
   }
+  setShowArchivedCompanies(data) {
+    this.showArchivedCompanies = data;
+    this.usersStateService.setShowArchivedCompanies(data);
+  }
   onSetFilterClientType(data) {
     this.filter.setClientType(data);
     this.usersStateService.onInitFilter(this.filter);
   }
   onShowAll() {
     this.filter.setClientType(null);
-    this.usersStateService.setOnShowArchived(false);
     this.showArchivedCompanies = false;
     this.usersStateService.setShowArchivedCompanies(false);
+    this.usersStateService.setOnShowArchived(false);
+
   }
   onShowArchived() {
     this.filter.setClientType(null);
-    this.usersStateService.setOnShowArchived(true);
     this.showArchivedCompanies = true;
     this.usersStateService.setShowArchivedCompanies(true);
+    this.usersStateService.setOnShowArchived(true);
   }
   public trackByIndex(index, item) {
     return index;

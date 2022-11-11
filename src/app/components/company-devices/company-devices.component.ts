@@ -179,6 +179,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   }
 
   getDevice(id) {
+    console.log("getDevice", id);
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
       if (data) {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));

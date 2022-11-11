@@ -104,7 +104,6 @@ export class AppComponent implements OnInit {
     } else {
       this.main_page = PAGE_MAIN;
     }
-    this.devicesState.onInit();
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;

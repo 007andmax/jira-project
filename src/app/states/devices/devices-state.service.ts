@@ -36,6 +36,7 @@ export class DevicesStateService {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
+    console.log("onInit");
     if (this.userStateService.getCurrentUser()) this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCompanyDevices(data.company.id);
@@ -103,6 +104,7 @@ export class DevicesStateService {
     return this.isInitWebSocket;
   }
   getCompanyDevices(id) {
+    console.log("getCompanyDevices", id);
     this.devicesService.getCompanyDevices(id).subscribe((data) => {
       Object.keys(data).forEach(key => {
         if (data[key]) data[key] = data[key].map(item => new Device(item));
