@@ -45,7 +45,8 @@
 /deep/ .angular-editor-textarea {
   border-color: $gray-500--old;
   padding: 16px 15px !important;
-  min-height: 175px !important;
+  //min-height: 175px !important;
+  min-height: 175px; // TODO check this style
 }
 
 /deep/ .angular-editor-toolbar-set .fa {
