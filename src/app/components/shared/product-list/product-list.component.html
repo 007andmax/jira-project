@@ -14,6 +14,7 @@
     <input
         class="pointer qt-input-block__input qt-dropdown-input"
         type="text"
+        autocomplete="new-password"
         [ngClass]="{'--input-error' : !validate}"
         placeholder="Search or Add product"
         (input)="onSearch($event)"
