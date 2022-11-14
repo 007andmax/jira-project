@@ -35,12 +35,17 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCategories();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data != null) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_PRODUCT) {
-          this.removeProduct()
+          if (data) this.removeProduct()
         }
         if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_PRODUCT) {
-          this.factItem = true; this.setCategoryRate();
+          if (data) {
+            this.factItem = true; this.setCategoryRate();
+          }
+          if (!data) {
+            this.factItem = false; this.setCategoryRate();
+          }
         }
       }
     })
@@ -154,7 +159,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   confirmEdit(rate, id: string, category: any) {
-    console.log("category", category);
     this.rate = rate;
     this.id = id;
     this.category = category;

@@ -23,7 +23,7 @@ export class ConfirmComponent implements OnInit {
   }
   closeModal() {
     this.activeModal.close();
-    this.confirmStateService.setConfirm(false);
+    this.confirmStateService.setConfirm(null);
 
     /*  if (closeFn) closeFn();
       $uibModalInstance.dismiss();*/

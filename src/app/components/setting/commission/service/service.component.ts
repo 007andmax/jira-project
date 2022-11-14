@@ -42,13 +42,20 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.getServices();
     this.getSpecialService();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data != null) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_SERVICE) {
-          this.deleteServicePopup = false;
-          this.removeServiceRate()
+          if (data) {
+            this.deleteServicePopup = false;
+            this.removeServiceRate()
+          }
         }
         if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_SERVICE) {
-          this.factItem = true; this.setServiceRate()
+          if (data == true) {
+            this.factItem = true; this.setServiceRate()
+          }
+          if (data == false) {
+            this.factItem = false; this.setServiceRate()
+          }
         }
       }
     })
