@@ -1967,6 +1967,9 @@ export class DevicesComponent implements OnInit {
     this.advancesearchManufacturerTag = [];
     this.advancesearchModelTag = [];
     this.advancesearchSoftwareTag = [];
+    this.advanceSearchDiskSpace = 0;
+    this.advanceSearchFreeSpace = 0;
+    this.advanceSearchMemory = 0;
   }
 
   getLastCheckIn(asset) {    
