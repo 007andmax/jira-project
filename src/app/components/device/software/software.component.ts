@@ -74,6 +74,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       }, 300);
       return;
     }
+    this.loading = true;
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.asset = resp[0];
@@ -366,7 +367,6 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       fileName: "Software Summary Report",
       orientation: "PORTRAIT",
     };
-    this.loading = true;
     this.commonHttpServices
       .printPdf(data)
       .pipe()
