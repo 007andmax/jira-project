@@ -18,7 +18,6 @@ export class UsersStateService {
   userForEdit: User = null;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
-  onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onLeftPanelMarketingFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
@@ -166,9 +165,6 @@ export class UsersStateService {
   public getOnFilter() {
     return this.onFilter;
   }
-  public getOnShowArchived() {
-    return this.onShowArchived;
-  }
   public getCurrentUser() {
     return this.currentUser;
   }
@@ -190,9 +186,6 @@ export class UsersStateService {
   }
   public getAllUsers() {
     return this.allUsers;
-  }
-  public setOnShowArchived(data) {
-    this.onShowArchived.emit(data);
   }
   /**
  * Change user permissionsss

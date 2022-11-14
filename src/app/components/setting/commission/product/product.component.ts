@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommissionService, ICategory } from '../commission.service';
 import { ToastrService } from 'ngx-toastr';
-import { DELETE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
+import { CHANGE_COMMISSION_PRODUCT, DELETE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +19,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   categories: any;
   edit = false;
   selectedIdx = -1;
-  public confirmPopup = false;
   rate: any;
   id: string;
   category: any;
@@ -39,6 +38,9 @@ export class ProductComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_PRODUCT) {
           this.removeProduct()
+        }
+        if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_PRODUCT) {
+          this.factItem = true; this.setCategoryRate();
         }
       }
     })
@@ -132,13 +134,11 @@ export class ProductComponent implements OnInit, OnDestroy {
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;
-            this.confirmPopup = false;
           },
           error => {
             this.selectedIdx = -1;
             this.toastrService.error('Bad Request');
             this.factItem = false;
-            this.confirmPopup = false;
           }
         );
     } else {
@@ -154,13 +154,16 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   confirmEdit(rate, id: string, category: any) {
+    console.log("category", category);
     this.rate = rate;
     this.id = id;
     this.category = category;
     if (this.category.commissionRate === null) {
-      this.confirmPopup = true;
+      this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_PRODUCT);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+
     } else {
-      this.confirmPopup = false;
       this.factItem = false;
       this.setCategoryRate();
     }

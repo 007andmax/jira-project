@@ -51,10 +51,9 @@ export class UsersFilterComponent implements OnInit {
         this.filter.setCustomSubscriptions([data]);
       }
       this.onChangeCounterFilter();
-
-
     })
     this.sub.add(onLeftPanelMarketingFilter);
+
   }
   public onChangeTags(data) {
     this.filter.setTags(data);

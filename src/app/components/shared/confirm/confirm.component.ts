@@ -49,6 +49,8 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'ARCHIVE_COMPANY'
       && this.action !== 'DEARCHIVE_COMPANY'
       && this.action !== 'DELETE_MANAGE_TAG'
+      && this.action !== 'CHANGE_COMMISSION_PRODUCT'
+      && this.action !== 'CHANGE_COMMISSION_SERVICE'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }
@@ -74,6 +76,7 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_SUBSCRIPTION_TYPIES' ||
       this.action === 'DELETE_SUBSCRIPTION_USER' ||
       this.action === 'CLOSE_SESSION'
+
 
   }
 

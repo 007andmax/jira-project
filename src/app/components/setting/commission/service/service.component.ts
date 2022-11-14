@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
+import { CHANGE_COMMISSION_SERVICE, DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
 import { ServiceCommissionFilter } from './class/service-commission-filter';
@@ -22,7 +22,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
   companyId = '';
   services: any;
   public deleteServicePopup = false;
-  public confirmServicePopup = false;
   service: any;
   isSpecialService: boolean;
   factItem = false;
@@ -47,6 +46,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_SERVICE) {
           this.deleteServicePopup = false;
           this.removeServiceRate()
+        }
+        if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_SERVICE) {
+          this.factItem = true; this.setServiceRate()
         }
       }
     })
@@ -215,9 +217,11 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.service = service;
     this.isSpecialService = isSpecialService;
     if (this.service.commissionRate === null) {
-      this.confirmServicePopup = true;
+      this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_SERVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+
     } else {
-      this.confirmServicePopup = false;
       this.setServiceRate();
     }
   }

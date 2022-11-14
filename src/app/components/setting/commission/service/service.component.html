@@ -67,32 +67,31 @@
                             <div class="toggle-header">
                                 <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Edit Rate</h6>
                             </div>
-                            <div class>
-                                <form method="POST">
-                                    <div class="qt-input-block qt-mb-32">
-                                        <label class="qt-input-block__label">Commission Rate (%)</label>
-                                        <input
-                                            type="text"
-                                            class="form-input"
-                                            name="commissionRate"
-                                            autocomplete="off"
-                                            #commissionRate
-                                            value="{{ service.commissionRate }}"
-                                            placeholder="Enter Commission Rate"
-                                        >
-                                    </div>
-                                    <div class="qt-df qt-w100">
-                                        <a
-                                            href="javascript:;"
-                                            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                                            aria-label="Close"
-                                            (click)="selectedIdx = -1"
-                                        >
-                                            Cancel
-                                        </a>
-                                        <input
-                                            type="submit"
-                                            (click)="
+                            <div>
+                                <div class="qt-input-block qt-mb-32">
+                                    <label class="qt-input-block__label">Commission Rate (%)</label>
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        name="commissionRate"
+                                        autocomplete="off"
+                                        #commissionRate
+                                        value="{{ service.commissionRate }}"
+                                        placeholder="Enter Commission Rate"
+                                    >
+                                </div>
+                                <div class="qt-df qt-w100">
+                                    <a
+                                        href="javascript:;"
+                                        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                                        aria-label="Close"
+                                        (click)="selectedIdx = -1"
+                                    >
+                                        Cancel
+                                    </a>
+                                    <input
+                                        type="button"
+                                        (click)="
                               confirmServiceEdit(
                                   commissionRate.value,
                                   service.versionedId.id,
@@ -100,11 +99,10 @@
                                   false
                                 )
                               "
-                                            value="Save"
-                                            class="qt-button qt-jc-c qt-w100"
-                                        >
-                                    </div>
-                                </form>
+                                        value="Save"
+                                        class="qt-button qt-jc-c qt-w100"
+                                    >
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,46 +229,4 @@
     *ngIf="loading"
 >
     <div class="loading"></div>
-</div>
-<div
-    class="img-croparea deletePopup"
-    *ngIf="confirmServicePopup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <div class="message-right">
-                    <p>
-                        Do you want this commission to fact old items?
-                    </p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="factItem = false;confirmServicePopup = false;setServiceRate()"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="factItem = true;confirmServicePopup = false;setServiceRate()"
-                >
-                    Yes, I want
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="factItem = false;confirmServicePopup = false;setServiceRate()"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
 </div>

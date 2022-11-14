@@ -36,6 +36,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isUsersPage(data)) this.open = true;
     })
+    let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+    })
   }
   public close() {
     this.open = false;
@@ -68,16 +71,14 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   onShowAll() {
     this.filter.setClientType(null);
-    this.showArchivedCompanies = false;
-    this.usersStateService.setShowArchivedCompanies(false);
-    this.usersStateService.setOnShowArchived(false);
+    this.setShowArchivedCompanies(false);
+    this.usersStateService.onInitFilter(this.filter);
 
   }
   onShowArchived() {
     this.filter.setClientType(null);
-    this.showArchivedCompanies = true;
-    this.usersStateService.setShowArchivedCompanies(true);
-    this.usersStateService.setOnShowArchived(true);
+    this.setShowArchivedCompanies(true);
+    this.usersStateService.onInitFilter(this.filter);
   }
   public trackByIndex(index, item) {
     return index;
