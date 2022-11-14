@@ -63,37 +63,28 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
-    this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
+    this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
     this.filter = this.usersStateService.getFilter();
-    let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
-      this.showArchivedUsers = data;
-      window.scrollTo(0, 0);
-      this.filter.setClientType(null);
-      this.filter.clearFilter();
-      if (this.showArchivedUsers) {
-        this.showPreloader = true;
-        this.users = [];
-        this.usersService.getArchiveUsers().subscribe(res => {
-          this.setDefaultScoll();
-          this.getUsersList(res);
-        })
-      } else {
-        this.showPreloader = true;
-        this.users = [];
-        this.setDefaultScoll();
-        this.getUsersList(this.usersStateService.getAllUsers());
-      }
-    })
-    this.userListService.addSubscription(getOnShowArchived);
-
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
-      this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
-      this.selectAll = false;
-      this.reqUsers.forEach(item => item.selected = false);
-      this.setDefaultScoll();
-      this.getUsersList(this.usersStateService.getAllUsers());
+      if (this.showArchivedUsers != this.usersStateService.getShowArchivedCompanies()) {
+        this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
+        this.filter.setClientType(null);
+        this.showPreloader = true;
+        this.users = [];
+        if (this.showArchivedUsers) {
+          this.usersService.getArchiveUsers().subscribe(res => {
+            this.setFilters(data);
+            this.getUsersList(res);
+          })
+        } else {
+          this.setFilters(data);
+          this.getUsersList(this.usersStateService.getAllUsers());
+        }
+      } else {
+        this.setFilters(data);
+        this.onScroll();
+      }
     })
     this.userListService.addSubscription(geLefttFilter);
 
@@ -187,7 +178,12 @@ export class UsersComponent implements OnInit {
     })
     this.sub.add(onGetIndustry);
   }
-
+  setFilters(data) {
+    this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+    this.selectAll = false;
+    this.reqUsers.forEach(item => item.selected = false);
+    this.setDefaultScoll();
+  }
   private onArchiveUsers(ids) {
 
     let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {

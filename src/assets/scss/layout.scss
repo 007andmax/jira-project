@@ -4,6 +4,18 @@
 
 body {
   &.page-settings {
+    .manage-tags {
+      .heading {
+        .qt-input-search {
+          max-width: 200px;
+        }
+      }
+    }
+    .qt-aside-modern.draft-email-aside {
+      .qt-input-block {
+        flex: auto;
+      }
+    }
     .loading-container {
         position: absolute;
         top: 50%;
@@ -305,45 +317,45 @@ body {
         }
       }
     }
-    .heading {
-      .qt-input-search {
-        input {
-          border: 1px solid $gray-200;
-          box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
-          border-radius: 6px;
-          padding: 8px 16px 8px 44px;
-          font-size: 14px;
-          line-height: 17px;
-          max-width: 200px;
-          width: 100%;
-
-          &::placeholder {
-            color: $gray-400;
-            font-weight: 400;
-          }
-
-          &:focus {
-            outline: none;
-            border-color: $blue-light-600;
-          }
-
-          &.--error,
-          &.is-invalid {
-            border-color: $red-600;
-          }
-
-          &.--disabled,
-          &[disabled] {
-            background-color: $gray-50;
-            border-color: $gray-200;
-
-            &:hover {
-              border-color: $gray-200;
-            }
-          }
-        }
-      }
-    }
+    //.heading { // TODO check thi style
+    //  .qt-input-search {
+    //    input {
+    //      border: 1px solid $gray-200;
+    //      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    //      border-radius: 6px;
+    //      padding: 8px 16px 8px 44px;
+    //      font-size: 14px;
+    //      line-height: 17px;
+    //      max-width: 200px;
+    //      width: 100%;
+    //
+    //      &::placeholder {
+    //        color: $gray-400;
+    //        font-weight: 400;
+    //      }
+    //
+    //      &:focus {
+    //        outline: none;
+    //        border-color: $blue-light-600;
+    //      }
+    //
+    //      &.--error,
+    //      &.is-invalid {
+    //        border-color: $red-600;
+    //      }
+    //
+    //      &.--disabled,
+    //      &[disabled] {
+    //        background-color: $gray-50;
+    //        border-color: $gray-200;
+    //
+    //        &:hover {
+    //          border-color: $gray-200;
+    //        }
+    //      }
+    //    }
+    //  }
+    //}
     .qt-table-modern__sorting--new {
       position: relative;
       width: 12px;
@@ -769,9 +781,13 @@ body {
       }
     }
 
-    .authentication__content {
+    .authentication__content,
+    .quote-email-modal {
       padding: 32px;
       overflow: auto;
+    }
+
+    .authentication__content {
       height: calc(100% - 72px);
 
       .qt-input-block {
