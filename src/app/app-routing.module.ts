@@ -245,8 +245,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/deviceSetting',
-    component: DeviceSettingComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/inventory/products',
