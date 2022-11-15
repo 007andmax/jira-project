@@ -194,7 +194,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   showTooltipCompany(userCompanyTooltip, $event) {
-    if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && this.getCompany(this.ticketProfile.company.id).isUnknown) userCompanyTooltip.show($event.target)
+    if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && this.getCompany(this.ticketProfile.company.id).isUnknown) userCompanyTooltip.show($event.target)
   }
   showDetailUser() {
     if (this.appService.checkMobile() || !this.getPermissions('VIEW_USERS')) return;
