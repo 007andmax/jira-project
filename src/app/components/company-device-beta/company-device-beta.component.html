@@ -221,28 +221,19 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="company-devices-table__logged-user">
-                                <!-- <div class="qt-df qt-fd-c"> -->
+                            <td class="company-devices-table__logged-user">                                
                                 <div class="qt-df qt-fd-c" *ngIf="asset.online">
-                                    <!-- <span
+                                     <span
                                         class="logged-name qt-ff-gm"
                                         [textContent]="asset.CurrentUser || ''"
-                                    ></span> -->
-                                    <span class="logged-name qt-ff-gm"
-                                    [textContent]="asset.userName || ''"></span>
-                                    <!-- <span
-                                        class="logged-time"
-                                        *ngIf="asset.idle"
-                                    >
-                                        Idle:
-                                        <span>{{ asset.idle }}</span>
-                                    </span> -->
+                                    ></span> 
+                                    
                                     <span
                                         class="logged-time"                                        
                                     >
                                         Idle:
-                                        <span>{{ asset.idle }}</span>
-                                    </span>
+                                        <span>{{ asset.IdelTime }}</span>
+                                    </span>                                    
                                 </div>
                             </td>
                             <td class="company-devices-table__up-time">
@@ -305,10 +296,7 @@
                               </div>
                             </td>
                           <td class="company-devices-table__device-agent">
-                            <div class="qt-df qt-fd-c">  
-                                <span>
-                                    <span>{{ getLastCheckIn(asset)}}</span>                                        
-                                </span>                            
+                            <div class="qt-df qt-fd-c">                              
                                 <span *ngIf="
                                 asset.AgentVersion != '' &&
                                 asset.AgentVersion != undefined &&
@@ -1176,6 +1164,27 @@
                   ></button>
               </ng-template>
           </div>
+        </div>
+        <div class="qt-input-block qt-input-line">
+            <label for="add-device-ipaddress">
+                IP Address
+            </label>
+            <input id="add-device-ipaddress" class="qt-input-block__input" type="text" [(ngModel)]="deviceIPAddress"
+                placeholder="Enter IP Address">
+        </div>
+        <div class="qt-input-block qt-input-line">
+            <label for="add-device-macaddress">
+                MAC Address
+            </label>
+            <input id="add-device-macaddress" class="qt-input-block__input" type="text" [(ngModel)]="deviceMacAddress"
+                placeholder="Enter MAC Address">
+        </div>
+        <div class="qt-input-block qt-input-line">
+            <label for="add-device-remoteport">
+                Remote Port
+            </label>
+            <input id="add-device-remoteport" class="qt-input-block__input" type="text" [(ngModel)]="deviceRemotePort"
+                placeholder="Enter Remote Port">
         </div>
         <div class="qt-input-block qt-input-line">
           <label

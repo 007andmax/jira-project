@@ -73,8 +73,9 @@ export class DeviceSettingComponent implements OnInit {
     private companiesStateService : CompaniesStateService,
     private companiesState: CompaniesStateService) { }
 
-  ngOnInit() {      
+  ngOnInit() {         
     this.loading = true; $(".loading").css("display", "block");
+    this.companiesState.onInit();
     this.devicebutton = true;
     this.openedCounter = true;
 
@@ -117,15 +118,18 @@ export class DeviceSettingComponent implements OnInit {
       CreateDate: [""]
     })
 
-    this.settingStateService.setComponentName('DeviceSettingComponent');    
-    if(this.companiesStateService.getCurrentCompany())this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
-    this.companiesStateService.onCurrentCompany.subscribe((data) =>{                    
-        this.getCurrentCompany(data);
-        this.techCompany = data;
-        this.getDeviceTypes(this.techCompany.id);      
+    this.settingStateService.setComponentName('DeviceSettingComponent');        
+    this.companiesStateService.onCurrentCompany.subscribe((data) =>{  
+      this.loading = false; $(".loading").css("display", "none");  
+        if(data)
+        {
+          this.getCurrentCompany(data);
+          this.techCompany = data;
+          this.getDeviceTypes(this.techCompany.id);
+        }                              
     })
 
-    this.loading = false; $(".loading").css("display", "none");
+    
   }
 
   onFilter(field) {
@@ -172,11 +176,14 @@ export class DeviceSettingComponent implements OnInit {
     }
   }
 
-  getCurrentCompany(data) {    
-    this.company = data;
-    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
-      this.searches = res;
-    });
+  getCurrentCompany(data) { 
+    if(data)
+    {
+      this.company = data;
+      this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
+        this.searches = res;
+      });  
+    }       
   }
 
   getManufacturers(TechCompanyGuid: any) {    
@@ -282,7 +289,7 @@ export class DeviceSettingComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSubmit() {  
     this.submitted = true;
 
     // add
@@ -349,7 +356,7 @@ export class DeviceSettingComponent implements OnInit {
     });
   }
 
-  onSubmitManufacturer() {
+  onSubmitManufacturer() {    
     this.submitted = true;
 
     // add

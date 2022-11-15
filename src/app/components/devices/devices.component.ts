@@ -190,6 +190,9 @@ export class DevicesComponent implements OnInit {
   advancesearchPreloader: boolean = false;
   devices: any[] = [];
   tempDevices: any[] = [];
+  deviceIPAddress:string;
+  deviceMacAddress:string;
+  deviceRemotePort:string;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -429,11 +432,11 @@ export class DevicesComponent implements OnInit {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
           if (asset) {            
             this.kafkaMessage = JSON.parse(resp[0].Value);           
-              // asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-              // if (this.kafkaMessage.IdleTime != null) {
-              //   let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              //   asset.IdelTime = Time[1] != "" ? Time[1] : "";
-              // }
+              asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+              if (this.kafkaMessage.IdleTime != null) {
+                let Time = this.kafkaMessage.IdleTime.split("Idle for");
+                asset.IdelTime = Time[1] != "" ? Time[1] : "";
+              }
               if (this.kafkaMessage.UpTime != "") {
                 let result = this.kafkaMessage.UpTime.split(" ");
   
@@ -453,8 +456,7 @@ export class DevicesComponent implements OnInit {
                   let Days = result[0]+'d'+ ' ' + result[2]+'h';
                   asset.UpTime = Days;
                 }
-              }
-              //asset.online = true;                                
+              }              
           }
           //asset.online = true;
         }
@@ -1351,6 +1353,9 @@ export class DevicesComponent implements OnInit {
     data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");
     data.Tag = this.assetTagName;
     data.CompanyGuid = this.comapanyId;
+    data.IPAddress = this.deviceIPAddress;
+    data.deviceMacAddress = this.deviceMacAddress;
+    data.deviceRemotePort = this.deviceRemotePort;
     this.agentService.nonAgentAsset(data).subscribe(
       (result) => {
         if (result.length > 0) {
@@ -2037,14 +2042,10 @@ export class DevicesComponent implements OnInit {
 
   getDevices(assetList) {    
     assetList.forEach((element, index) => {
-      element.online = false;
-      element.userName = "";
-      element.idle = 0;
+      element.online = false;      
       let result = this.devices.find(x => x.agentId === element.Guid);
       if (result) {
-        assetList[index].online = result.online;
-        assetList[index].userName = result.userName;
-        assetList[index].idle = result.timing.idle;
+        assetList[index].online = result.online;        
       }
     });
   }
