@@ -35,7 +35,6 @@
                                     [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
                                     [position]="'bottom'"
                                     #userCompanyTooltip
-                                    [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && !getCompany(ticketProfile.company.id).isUnknown"
                                 ></app-dynamic-tooltip>
                                 <span
                                     class="pointer"
@@ -43,7 +42,7 @@
                                     (click)="goToCompanyDashboard()"
                                     id="dropdownCompany"
                                     ngbDropdownToggle
-                                    (mouseenter)="userCompanyTooltip.show($event.target)"
+                                    (mouseenter)="showTooltipCompany(userCompanyTooltip,$event)"
                                     (mouseleave)="userCompanyTooltip.hide()"
                                 ></span>
                                 <span
