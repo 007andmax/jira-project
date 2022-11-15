@@ -19,21 +19,19 @@ export class BreadcrumbsComponent implements OnInit {
     ngOnInit() {
         this.leftPanelStateService.onChangeState.subscribe(data => {
             this.state = data;
-            if(!this.cd['destroyed']){
-              this.cd.detectChanges();
+            if (!this.cd['destroyed']) {
+                this.cd.detectChanges();
             }
         })
         this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
             this.state = data;
-            if(!this.cd['destroyed'])
-            {
-              this.cd.detectChanges();
+            if (!this.cd['destroyed']) {
+                this.cd.detectChanges();
             }
         })
     }
     ngDoCheck() {
         if (this.companiesStateService.getCompanyRoutingId()) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId());
-
     }
     isCompanyState() {
         return this.state === 'company-dashboard'
@@ -45,8 +43,6 @@ export class BreadcrumbsComponent implements OnInit {
             || this.state === 'company-products'
             || this.state === 'company-contracts'
             || this.state === 'company-documents';
-
-
     }
     public getPath() {
         if (this.state === 'company-dashboard') return 'Dashboard';

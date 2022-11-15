@@ -1,41 +1,64 @@
-<!-- Middle Wrapper -->
-<div class="page-container">
-    <div class="page-insider profile-insider">
-        <!-- Message -->
-        <div class="heading">
-            <h5 class="qt-fw-600">My Profile Settings</h5>
-        </div>
-        <ngb-tabset>
-            <!-- Profile -->
-            <ngb-tab
-                title="Profile"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
-                    <app-profile></app-profile>
-                </ng-template>
-            </ngb-tab>
-            <!-- Account -->
-            <ngb-tab title="Account">
-                <ng-template ngbTabContent>
-                    <app-account></app-account>
-                </ng-template>
-            </ngb-tab>
-            <!-- Email -->
-            <ngb-tab title="Email Notifications">
-                <ng-template ngbTabContent>
-                    <app-email-notifications></app-email-notifications>
-                </ng-template>
-            </ngb-tab>
-            <!-- Activity History -->
-            <ngb-tab
-                title="Activity History"
-                class="history"
-            >
-                <ng-template ngbTabContent>
-                    <app-activity-history></app-activity-history>
-                </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
-    </div>
+<!-- Message -->
+<div class="heading qt-df qt-ai-fs qt-jc-sb">
+    <h5 class="qt-fw-600">My Profile Settings</h5>
+    <a
+        href="javascript:;"
+        class="qt-button qt-ml-24 --md"
+        (click)="onSubmit()"
+        *ngIf="activeTab !== 'history' && activeTab !== 'signature'"
+    >
+        Save Changes
+    </a>
+    <div
+        class="qt-df qt-h36"
+        *ngIf="activeTab == 'history'"
+    ></div>
 </div>
+<ngb-tabset (tabChange)="setTab($event)">
+    <!-- Profile -->
+    <ngb-tab
+        title="Profile"
+        id="profile"
+    >
+        <ng-template ngbTabContent>
+            <app-profile #profile></app-profile>
+        </ng-template>
+    </ngb-tab>
+    <!-- Account -->
+    <ngb-tab
+        title="Account"
+        id="account"
+    >
+        <ng-template ngbTabContent>
+            <app-account #account></app-account>
+        </ng-template>
+    </ngb-tab>
+    <!-- Email -->
+    <ngb-tab
+        title="Email Notifications"
+        id="notifications"
+    >
+        <ng-template ngbTabContent>
+            <app-email-notifications #emailNotifications></app-email-notifications>
+        </ng-template>
+    </ngb-tab>
+    <!-- Activity History -->
+    <ngb-tab
+        title="Activity History"
+        class="history"
+        id="history"
+    >
+        <ng-template ngbTabContent>
+            <app-activity-history #activityHistory></app-activity-history>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab
+        title="Signature"
+        class="history"
+        id="signature"
+    >
+        <ng-template ngbTabContent>
+            <signature #signature></signature>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

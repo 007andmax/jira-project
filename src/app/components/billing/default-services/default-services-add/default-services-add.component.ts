@@ -8,7 +8,7 @@ import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/app/interfaces/service/tax';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DefaultServicesStateService } from 'src/app/states/default-services/default-services-state.service';
 
 @Component({
@@ -39,8 +39,7 @@ export class DefaultServicesAddComponent implements OnInit {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
-      if(!this.cd['destroyed'])
-      {
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })

@@ -1,34 +1,33 @@
-import { Component, OnInit, ViewChild, Pipe } from "@angular/core";
-
-import { ReplaySubject, forkJoin, of, throwError } from "rxjs";
-import { takeUntil, catchError, debounceTime } from "rxjs/operators";
-
+import { Component, OnInit, ViewChild, Pipe, OnDestroy } from "@angular/core";
+import { throwError, Subscription } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { map } from "rxjs/operators";
 import { CommissionService } from "../commission.service";
 import { UsersService } from "src/app/services/users/users.service";
 import { ToastrService } from "ngx-toastr";
-import { FormControl } from "@angular/forms";
 import { UsersStateService } from "src/app/states/users/users-state.service";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { CompanyCommissionFilter } from "./class/company-commission-filter";
 
 @Component({
   selector: "app-company-commission",
   templateUrl: "./company.component.html",
   styleUrls: ["./company.component.scss"]
 })
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, OnDestroy {
   clientsCompanies: any;
   currentCompany: any;
   currentUser: any;
-  loading = false;
+  loading = true;
   users: any[] = [];
   usersByCompanies = [];
   activeTechUsers: any;
   filterTechUsers = "";
   selectedIdx = -1;
+  filter: CompanyCommissionFilter = new CompanyCommissionFilter();
 
-
-
+  sub: Subscription = new Subscription();
   config = {
     displayKey: "firstName",
     search: true,
@@ -44,7 +43,9 @@ export class CompanyComponent implements OnInit {
     private toastrService: ToastrService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
+    private companiesStateService: CompaniesStateService
   ) { }
+
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
@@ -55,32 +56,36 @@ export class CompanyComponent implements OnInit {
 
     this.getUsers();
   }
-
+  onFilter(field) {
+    this.filter.onFilter(field, this.clientsCompanies);
+  }
   /**
  * get users list
  */
   getUsers() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService
-      .getUsers()
+      .getTechUsers()
       .pipe(
         map((users: any) => {
           return users.filter(
             (user: any) =>
-              user.accountType.toLowerCase() === "tech" &&
-              user.deletedAt === null &&
               user.userEnabled
           );
         })
       )
       .subscribe(
         (techUsers: any) => {
-          //   this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           this.activeTechUsers = techUsers;
-          this.getCompanies();
+          if (this.companiesStateService.getCompanies().length > 0) this.getCompanies(this.companiesStateService.getCompanies());
+          let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+            this.getCompanies(data);
+          })
+          this.sub.add(getOnCompanies);
+
         },
         error => {
-          //  this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         }
       );
   }
@@ -106,18 +111,26 @@ export class CompanyComponent implements OnInit {
    * @param company
    */
   setTechLead(techLead: any, company: any) {
-    if (!techLead || !company) {
+    if (!company) {
+      return;
+    }
+    if (techLead.length == 0) {
+      this.commissionService.removeTechLead(company.id).subscribe(
+        res => {
+          company.techLeadId = null;
+        },
+        error => {
+          this.toastrService.error(`Error Occured, ${error}`);
+        }
+      );
       return;
     }
     const techLeadId = techLead[0].id;
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
-        this.toastrService.success("Techlead Changed Successfully");
+        company.techLeadId = techLeadId;
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastrService.error(`Error Occured, ${error}`);
       }
     );
@@ -178,31 +191,14 @@ export class CompanyComponent implements OnInit {
   /**
    * companies data
    */
-  getCompanies() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.commissionService
-      .getCompanies()
-      .pipe(
-        map((companys: any) => {
-          return companys.filter(
-            (company: any) =>
-              company.clientType.toLowerCase() !== "vendor" &&
-              company.deletedAt === null &&
-              !company.isDefault
-          );
-        })
-      )
-      .subscribe(
-        (custCompany: any) => {
-          this.loading = false; $(".loading").css("display", "none");
-          if (custCompany) {
-            this.clientsCompanies = custCompany;
-          }
-        },
-        error => {
-          this.loading = false; $(".loading").css("display", "none");
-        }
-      );
+  getCompanies(companys) {
+    this.clientsCompanies = companys.filter(
+      (company: any) =>
+        company.clientType.toLowerCase() !== "vendor" &&
+        company.deletedAt === null &&
+        !company.isDefault
+    ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
 
   selectedDropdown(i) {
@@ -228,8 +224,9 @@ export class CompanyComponent implements OnInit {
     this.commissionService
       .getClientCompaniesInfo()
       .pipe(
-        map(res => {
-          this.clientsCompanies = res;
+        map((res: any) => {
+          this.clientsCompanies = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         }),
         catchError(err => throwError(new Error("Get Client Companies")))
       )
@@ -294,5 +291,8 @@ export class CompanyComponent implements OnInit {
         }
       })
       .join("");
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

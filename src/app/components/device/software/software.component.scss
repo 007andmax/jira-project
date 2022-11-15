@@ -52,7 +52,7 @@ li.add-user {
     display: flex;
     align-items: center;
     a {
-        border: solid 1px $gray-400;
+        border: solid 1px $gray-400--old;
         background: $white;
         border-radius: 50%;
         display: flex;
@@ -70,7 +70,7 @@ li.add-user {
         text-align: center;
         width: 70px;
         border-radius: 3px;
-        background-color: $gray-800;
+        background-color: $gray-800--old;
         font-size: 12px;
         font-weight: 500;
         font-style: normal;
@@ -101,7 +101,7 @@ li.add-user {
         position: absolute;
         pointer-events: none;
         border-color: rgba(79, 95, 121, 0);
-        border-top-color: $gray-800;
+        border-top-color: $gray-800--old;
         border-width: 6px;
         margin-left: -6px;
         bottom: 25px;
@@ -116,7 +116,7 @@ li.add-user {
         margin-right: 8px;
         .form-input {
             padding: 7px 14px 7px 34px;
-            background: url(/assets/img/search-ico.svg) no-repeat 12px center;
+            background: url(/assets/img/icons/search.svg) no-repeat 12px center;
             font-size: 12px;
             line-height: 1.67;
             background-color: $white;

@@ -1,0 +1,43 @@
+@import "./src/assets/scss/mixin";
+@import "./src/assets/scss/custom";
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/fonts";
+
+.user-permissions-table {
+  &__permissions {
+    flex: 1;
+    min-width: 300px;
+    padding: 0 8px;
+  }
+  &__role {
+    flex: 0 1 16.6%;
+    padding: 0 8px;
+  }
+}
+
+.tab-pane__table-row__permissions-subheader {
+  background-color: $gray-25;
+
+  .user-permissions-table__permissions-text {
+    font-size: 11px;
+    line-height: 13px;
+    font-weight: 700;
+    color: $gray-500;
+  }
+}
+.user-permissions-table__permissions-text {
+  max-width: 500px;
+}
+
+.tab-pane__table-body {
+  .tab-pane__table-cell:not(.user-permissions-table__permissions) {
+    display: flex;
+    justify-content: center;
+  }
+}
+.tab-pane__table-header {
+  .tab-pane__table-row {
+    display: flex;
+    align-items: flex-start;
+  }
+}

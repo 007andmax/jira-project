@@ -46,12 +46,12 @@
             height: 40px;
             padding: 0 12px;
             font-size: 13px;
-            border: 1px solid $gray-800;
+            border: 1px solid $gray-800--old;
             border-radius: 4px;
         }
 
         textarea {
-            border: 1px solid $gray-800;
+            border: 1px solid $gray-800--old;
             border-radius: 4px;
             min-height: 80px;
             width: 100%;
@@ -63,7 +63,7 @@
 
     &-panel {
         &__subheader {
-            border-bottom: 1px solid $gray-400;
+            border-bottom: 1px solid $gray-400--old;
             display: flex;
 
             &-item {
@@ -84,21 +84,17 @@
         min-height: 40px;
         padding: 4px 4px 0;
         font-size: 13px;
-        border: 1px solid $gray-800;
+        border: 1px solid $gray-800--old;
         border-radius: 4px;
         width: 100%;
         display: flex;
         flex-flow: row wrap;
     }
 
-    .checkbox-container {
-        margin-bottom: 6px;
-    }
-
     &__document-history-item {
         display: flex;
         padding: 9px 24px;
-        //border-bottom: 1px solid $gray-400;
+        //border-bottom: 1px solid $gray-400--old;
         position: relative;
 
         &::before,
@@ -113,7 +109,7 @@
             height: calc(100% - 20px);
             transform: translate(-50%, 10px);
             width: 2px;
-            background: $gray-300;
+            background: $gray-300--old;
             border-radius: 1px;
         }
 
@@ -122,8 +118,8 @@
             transform: translate(-50%, -50%);
             width: 16px;
             height: 16px;
-            background: $gray-600;
-            border: 5px solid $gray-200;
+            background: $gray-600--old;
+            border: 5px solid $gray-200--old;
             border-radius: 50%;
         }
 
@@ -150,7 +146,7 @@
                 transform: translateY(9px);
                 width: 100%;
                 height: 1px;
-                background: $gray-400;
+                background: $gray-400--old;
             }
         }
     }
@@ -174,7 +170,7 @@
     }
     &__document-history-text {
         @include сaption-l;
-        color: $gray-700;
+        color: $gray-700--old;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -188,7 +184,7 @@
     height: 32px;
     display: flex;
     align-items: center;
-    background: $gray-100;
+    background: $gray-100--old;
     margin: 0 4px 4px 0;
 
     .icn-remove-old {

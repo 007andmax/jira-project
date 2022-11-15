@@ -2,7 +2,7 @@
 
 .quote-message-block {
   border-radius: 6px;
-  border: solid 1px $gray-400;
+  border: solid 1px $gray-400--old;
   background-color: $white;
   &.--closed {
     max-height: 40px;
@@ -17,8 +17,8 @@
 }
 .quote-message-list-item {
   border-radius: 8px;
-  border: solid 1px $gray-300;
-  background-color: $gray-100;
+  border: solid 1px $gray-300--old;
+  background-color: $gray-100--old;
   padding: 12px;
   border-top-left-radius: 0;
   margin-bottom: 4px;

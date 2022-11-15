@@ -6,17 +6,17 @@
         ></div>
         <div class="content-filters-header__title pointer">Filters</div>
     </div>
-    <app-select-search
+    <company-drop-down
         class="search-company"
         #companyDp
         [placeholder]="'Select Company'"
-        [change]="false"
+        [change]="true"
+        [search]="true"
         [class]="['qt-dropdown']"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-select-search>
-    <app-select-search
+    ></company-drop-down>
+    <app-drop-down
         class="search-users"
         #usersDp
         [placeholder]="'Select User'"
@@ -24,8 +24,8 @@
         [class]="['qt-dropdown']"
         [list]="getUserList()"
         (onSelectedItem)="onSelectUser($event)"
-    ></app-select-search>
-    <app-select-search
+    ></app-drop-down>
+    <app-drop-down
         class="search-tech-users"
         #techUsersDp
         [placeholder]="'Select Tech User'"
@@ -33,8 +33,8 @@
         [class]="['qt-dropdown']"
         [list]="getTechUserList()"
         (onSelectedItem)="onSelectTechUser($event)"
-    ></app-select-search>
-    <app-select-search
+    ></app-drop-down>
+    <app-drop-down
         class="search-status"
         #statusDp
         [placeholder]="'Select by Status'"
@@ -43,7 +43,7 @@
         [list]="ticketsStatus"
         [field]="'title'"
         (onSelectedItem)="onSelectStatus($event)"
-    ></app-select-search>
+    ></app-drop-down>
     <app-tickets-filter-tags
         #tagsDp
         [placement]="appService.checkMobile() ? 'top-left' : 'bottom-left'"

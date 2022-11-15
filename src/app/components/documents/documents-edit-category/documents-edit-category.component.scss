@@ -41,10 +41,7 @@
         line-height: 20px;
 
         &::placeholder {
-          color: $gray-600;
+          color: $gray-600--old;
         }
     }
-}
-.checkbox-container {
-  margin-bottom: 5px;
 }

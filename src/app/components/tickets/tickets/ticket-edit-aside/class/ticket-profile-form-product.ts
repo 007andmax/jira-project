@@ -22,6 +22,26 @@ export class TicketProfileFormProduct {
             this.valdiateSaleCost = data.valdiateSaleCost;
         }
     }
+    public getDataForAdd() {
+        let item = JSON.parse(JSON.stringify(this.item));
+        item.taxes = item.taxes.map(item => ({
+            id: item.id,
+            name: item.name,
+            rate: item.rate,
+        }));
+        return {
+            item: item,
+            itemOrder: this.itemOrder,
+            quantity: this.quantity,
+            serialNumber: this.serialNumber,
+            discountAmount: this.discountAmount,
+            discountType: this.discountType,
+            completed: this.completed,
+        }
+    }
+    public setTexes(data) {
+        this.item.taxes = data;
+    }
     public setData(data, index) {
         this.item = new TicketProfileFormItemProduct(data);
         this.itemOrder = index;

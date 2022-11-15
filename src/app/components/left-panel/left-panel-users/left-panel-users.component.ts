@@ -36,6 +36,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.leftPanelService.isUsersPage(data)) this.open = true;
     })
+    let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+    })
   }
   public close() {
     this.open = false;
@@ -58,21 +61,24 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.goToState();
     this.onShowAll();
   }
+  setShowArchivedCompanies(data) {
+    this.showArchivedCompanies = data;
+    this.usersStateService.setShowArchivedCompanies(data);
+  }
   onSetFilterClientType(data) {
     this.filter.setClientType(data);
     this.usersStateService.onInitFilter(this.filter);
   }
   onShowAll() {
     this.filter.setClientType(null);
-    this.usersStateService.setOnShowArchived(false);
-    this.showArchivedCompanies = false;
-    this.usersStateService.setShowArchivedCompanies(false);
+    this.setShowArchivedCompanies(false);
+    this.usersStateService.onInitFilter(this.filter);
+
   }
   onShowArchived() {
     this.filter.setClientType(null);
-    this.usersStateService.setOnShowArchived(true);
-    this.showArchivedCompanies = true;
-    this.usersStateService.setShowArchivedCompanies(true);
+    this.setShowArchivedCompanies(true);
+    this.usersStateService.onInitFilter(this.filter);
   }
   public trackByIndex(index, item) {
     return index;

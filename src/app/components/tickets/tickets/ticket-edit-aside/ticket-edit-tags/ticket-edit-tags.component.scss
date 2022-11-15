@@ -3,9 +3,9 @@
 .dropdown-menu {
     transform: translate(0, 0) !important;
     top: 35px !important;
-    width: 230px;
-  }
-
+    left: 56px !important;
+    width: 270px;
+}
 
 /deep/ .ticket-edit-tags {
   width: 100%;
@@ -30,7 +30,7 @@
     display: none;
   }
   .selected-tag-ticket {
-    background-color: $gray-100;
+    background-color: $gray-100--old;
     border-radius: 3px !important;
     border: solid 1px $background;
     padding: 8px !important;
@@ -52,13 +52,6 @@
 
   .mat-chip-remove:before {
     filter: brightness(0.8)
-  }
-
-
-  .dropdown-menu {
-    left: 56px !important;
-    width: 250px;
-    // bottom: -180px;
   }
 
  .mat-standard-chip:focus {

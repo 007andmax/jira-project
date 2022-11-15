@@ -1,55 +1,27 @@
-/*** All css files include ***/
-@import '../../../../../assets/scss/mixin';
-@import '../../../../../assets/scss/custom';
+@import "./src/assets/styles/variable";
 
+.commissions-service {
+  &__service-name {
+    flex: 1 1 325px;
+    padding: 0 8px;
+  }
+  &__rate {
+    flex: 1 1 100px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 56px;
+  }
+}
 
+.tab-pane__table {
+  &.border-bottom {
+    margin-bottom: 56px;
 
-.service{
-    .p-name{
-        width: 478px;
-        @media only screen and (max-width: 768px){
-            width: 330px;
-        }
-    }
-    .rate{
-        width: 100px;
-        @media only screen and (max-width: 768px){
-            width: 70px;
-        }
-    }
-    .action{
-        width: 70px;
-        position: relative;
-        .modal-content{
-            top: 45px;
-        }
-        @media only screen and (max-width: 768px){
-            width: 50px;
-        }
-    }
-    .f-row{
-        margin-bottom: 0;
-
-    }
-    .m-btn-row{
-        margin-top: 0;
-    }
-    .form-row{
-        margin-bottom: 20px;
-    }
-    .modal-content.toggle-area{
-        right:15px;
-        @media only screen and (max-width: 1280px){
-            right: 0;
-        }
-        .btn-primary{
-            margin-right: 0;
-        }
-    }
-    .s-title {
-        margin-top: 25px;
-        margin-bottom: 20px;
-    }
-
-
+    //.tab-pane__table-body {
+    //  .tab-pane__table-row:last-child:not(.add-gl-container) {
+    //    border-bottom: 1px solid $gray-200;
+    //  }
+    //}
+  }
 }

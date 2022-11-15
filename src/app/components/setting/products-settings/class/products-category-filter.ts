@@ -1,7 +1,6 @@
 import { CompanyFilterTop } from "src/app/components/companies/class/company-filter-top";
 
 export class ProductsCategoryFilter {
-
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('name', 'ASC'),
         new CompanyFilterTop('count', '')

@@ -3,10 +3,10 @@
 .plus-btn {
   flex-shrink: 0;
   border: none;
-  background-color: $gray-700;
+  background-color: $gray-700--old;
 
   &:hover {
-    background-color: $gray-800;
+    background-color: $gray-800--old;
   }
 }
 

@@ -10,12 +10,12 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content">
-        <div class="qt-w100 qt-mb-16">
+        <div class="qt-inputs-row">
             <div
                 class="qt-input-block"
                 [ngClass]="{'--input-error':!validate.getName()}"
             >
-                <label>Customer Name</label>
+                <div class="qt-input-block__label">Customer Name</div>
                 <input
                     [value]="'Checks & System Maintenance'"
                     placeholder="Service Name"
@@ -24,48 +24,46 @@
                     (input)="onChangeName()"
                 >
                 <mat-error
-                    class="qt-tooltip-error"
+                    class="invalid-feedback"
                     *ngIf="!validate.getName()"
                 >
                     Service name is required
                 </mat-error>
             </div>
         </div>
-        <div class="qt-df">
-            <div class="qt-w50 qt-mb-16 qt-mr-16">
-                <div
-                    class="qt-input-block"
-                    [ngClass]="{'--input-error':!validate.getRate()}"
-                >
-                    <label>Hourly Rate($)</label>
-                    <input
-                        [(ngModel)]="service.rate"
-                        type="text"
-                        number
-                        placeholder="Per Hour Rate"
-                        [money]="true"
-                        (input)="onChangeRate($event)"
-                        appToFixed
-                    >
-                    <mat-error
-                        class="qt-tooltip-error"
-                        *ngIf="!validate.getRate()"
-                    >
-                        Hour rate is required
-                    </mat-error>
-                </div>
+        <div class="qt-inputs-row">
+            <div
+              class="qt-input-block qt-w50"
+              [ngClass]="{'--input-error':!validate.getRate()}"
+            >
+              <div class="qt-input-block__label">Hourly Rate($)</div>
+              <input
+                [(ngModel)]="service.rate"
+                type="text"
+                number
+                placeholder="Per Hour Rate"
+                [money]="true"
+                (input)="onChangeRate($event)"
+                appToFixed
+              >
+              <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getRate()"
+              >
+                Hour rate is required
+              </mat-error>
             </div>
-            <div class="qt-w50 qt-mb-16">
-                <div class="create-product-taxes-select">
-                    <app-taxes
-                        [selectedTax]="defaultSelectedTax"
-                        (taxesChange)="onTaxesChange($event)"
-                    ></app-taxes>
-                </div>
+            <div class="qt-input-block qt-w50">
+              <div class="create-product-taxes-select">
+                <app-taxes
+                  [selectedTax]="defaultSelectedTax"
+                  (taxesChange)="onTaxesChange($event)"
+                ></app-taxes>
+              </div>
             </div>
         </div>
-        <div class="qt-df ">
-            <div class="qt-w100 qt-mb-16">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
                 <app-drop-down
                     [title]="'GL Number'"
                     [placeholder]="'Select GL'"
@@ -81,19 +79,19 @@
                 </app-drop-down>
             </div>
         </div>
-        <div class="qt-df qt-ai-c">
-            <label
-                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                for="email-payment"
+        <div class="qt-inputs-row">
+          <label
+            class="qt-checkbox"
+            for="email-payment"
+          >
+            <input
+              id="email-payment"
+              type="checkbox"
+              [(ngModel)]="service.billable"
             >
-                <input
-                    id="email-payment"
-                    type="checkbox"
-                    [(ngModel)]="service.billable"
-                >
-                <span></span>
-            </label>
-            <div class="qt-fs-12 qt-ml-5">Make this service billable</div>
+            <span></span>
+            <div class="qt-ml-8 qt-fw-400 qt-lh-1">Make this service billable</div>
+          </label>
         </div>
     </div>
     <div class="qt-aside-modern__footer">

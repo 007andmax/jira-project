@@ -23,7 +23,7 @@
   }
   .icon__close {
     @media (max-width: 767px) {
-      background-image: url("/assets/img/icons/close-white.svg");
+      background-image: url("/assets/img/icons/close-light.svg");
     }
   }
   .qt-input-line {
@@ -64,7 +64,7 @@
 
   &__ticket-name {
     @include сaption-l__sb;
-    color: $gray-800;
+    color: $gray-800--old;
     margin-right: 16px;
 
     @media (max-width: 767px) {
@@ -90,14 +90,14 @@
     display: flex;
   }
 
-  /deep/ #dropdownTehuser {
+  /deep/ #dropdownTechuser {
     max-height: 24px;
     max-width: 24px;
     border-radius: 50%;
     margin-right: 4px;
     overflow: hidden;
     color: transparent;
-    background-image: url("/assets/img/icons/adduser.svg");
+    background-image: url("/assets/img/icons/addusers.svg");
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -147,7 +147,7 @@
         content: "";
         width: 16px;
         height: 16px;
-        border: 1px solid $gray-500;
+        border: 1px solid $gray-500--old;
         background: $white;
         border-radius: 50%;
         bottom: -7px;

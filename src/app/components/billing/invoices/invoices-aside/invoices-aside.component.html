@@ -16,17 +16,18 @@
             <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
                 <div class="qt-input-block">
                     <label class="qt-lh-154">Customer Name</label>
-                    <app-select-search
+                    <company-drop-down
                         class="search-company"
                         #companyDp
                         [placeholder]="'Select Company'"
-                        [change]="false"
+                        [change]="true"
+                        [search]="true"
                         [class]="['qt-dropdown']"
                         [field]="'name'"
                         [editItem]="selectedCompany"
                         [list]="companies"
                         (onSelectedItem)="onSelectCompany($event)"
-                    ></app-select-search>
+                    ></company-drop-down>
                 </div>
             </div>
         </div>
@@ -53,7 +54,7 @@
                         class="qt-input-prepend"
                         number
                         [money]="true"
-                        [ngModel]="amountReceived"
+                        [ngModel]="amountReceived_str"
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
@@ -77,9 +78,8 @@
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <label class="qt-lh-154">Payment Mode</label>
-                <app-select-search
+                <app-drop-down
                     class="search-company"
-                    #statusDp
                     [placeholder]="'Select Status'"
                     [change]="false"
                     [editItem]="selectedPaymentMode"
@@ -88,7 +88,7 @@
                     [field]="'title'"
                     [list]="paymentModes"
                     (onSelectedItem)="onSelectPaymentModes($event)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="qt-input-block qt-w100">
                 <label class="qt-lh-154">Reference#</label>
@@ -184,7 +184,7 @@
                                     *ngIf="invoice.selected"
                                     number
                                     [money]="true"
-                                    [ngModel]="invoice.paymentAmount"
+                                    [ngModel]="invoice.paymentAmount_str"
                                     (change)="onChangePayment($event,invoice)"
                                     appToFixed
                                 >

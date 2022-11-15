@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -17,10 +19,9 @@ import { PasswoordManagerDevicesUsersComponent } from '../../passwoord-manager-d
   templateUrl: './passwoord-manager-filters.component.html',
   styleUrls: ['./passwoord-manager-filters.component.scss']
 })
-export class PasswoordManagerFiltersComponent implements OnInit {
+export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
 
   showAddCategory: boolean = false;
-  companies = [];
   categories: Array<PasswordRecordCategories> = [];
   disabledDevicesUsers: boolean = true;
   devicesUsers: Array<PasswordDeviceUser> = [];
@@ -28,25 +29,30 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   @Output() onChangeCountFilter = new EventEmitter<any>();
   selectedCompany: Company;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('companiesSelect') companiesSelect: DropDownComponent;
+  @ViewChild('companiesSelect') companiesSelect: CompanyDropDownComponent;
   @ViewChild('deviceUserSelect') deviceUserSelect: PasswoordManagerDevicesUsersComponent;
   @ViewChild('dateSelect') dateSelect: DropDownComponent;
   @Input() disabledCompany: boolean = false;
   @Output() onClose = new EventEmitter();
   public filter: FilterPasswordManager = new FilterPasswordManager();
+  sub: Subscription = new Subscription();
   constructor(
     private companiesState: CompaniesStateService,
     private passwordManagerStateService: PasswordManagerStateService,
     private usersStateService: UsersStateService,
     public appService: AppService,
-    private devicesStateService: DevicesStateService) { }
+    public cd: ChangeDetectorRef,
+    public devicesStateService: DevicesStateService) { }
+
 
   ngOnInit() {
     if (this.passwordManagerStateService.getSelectedCategory()) this.categoriesSelect.onSelect(this.passwordManagerStateService.getSelectedCategory());
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+    if (this.companiesState.isInitLightAllCompanies) this.getClientsList(this.companiesState.getLightCompanies());
+    if (!this.companiesState.isInitLightAllCompanies && this.companiesState.getCompanyRoutingId()) this.companiesState.onInitGetLightCompanies();
+    let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       this.getClientsList(data);
     })
+    this.sub.add(getOnCompanies);
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
@@ -54,6 +60,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     })
     this.passwordManagerStateService.onFilterByCategory.subscribe((data) => {
       this.categoriesSelect.onSelect(data);
+    })
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.cd.detectChanges();
     })
   }
   public onClearAll() {
@@ -78,15 +87,14 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.close();
   }
   getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+
     if (this.disabledCompany) {
-      this.selectedCompany = this.companies.find(item => item.id === this.companiesState.getCompanyRoutingId());
+      this.selectedCompany = data.find(item => item.id === this.companiesState.getCompanyRoutingId());
       this.filter.setCompany(this.selectedCompany);
       this.onChangeCounterFilter();
 
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let company = data.find(itemCompany => itemCompany.id === item.company.id);
         let isArchived = item.deletedAt || !company;
         return !isArchived && item.company.id === this.selectedCompany.id
       });
@@ -130,7 +138,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     }
     if (data) {
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let company = data.find(itemCompany => itemCompany.id === item.company.id);
         let isArchived = item.deletedAt || !company;
         return !isArchived && item.company.id === data.id
       });
@@ -161,5 +169,8 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     if (this.filter.selectedDate) count++;
     if (this.filter.selectedUserOrDevice) count++;
     this.onChangeCountFilter.emit(count);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

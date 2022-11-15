@@ -1,0 +1,180 @@
+<div
+    class="tech-users-container"
+    ngbDropdown
+    [container]="container"
+    [autoClose]="'outside'"
+    #dp="ngbDropdown"
+>
+    <div
+        class="device-user"
+        *ngIf="selectedUsers.length === 0"
+        id="dropdownTechuser"
+        style="margin-bottom: 10px;width: 109px;"
+        ngbDropdownAnchor
+    >
+        <div class="company-settings-user">
+            <div class="icon__user-avatar qt-sz-36 qt-circle qt-bg-contain"></div>
+            <div class="qt-ml-12 qt-f-1 ellipsis">
+                <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">Assign Sales Person</div>
+                <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-4">
+                    <div
+                        class="preview-container"
+                        style="border: 1px solid #FECDCA"
+                    >
+                        <span
+                            class="qt-fw-500"
+                            style="color: #D92D20;"
+                        >
+                            Not Assigned
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="device-user company-settings-user"
+        *ngIf="selectedUsers.length === 1"
+        id="dropdownTechuser"
+        ngbDropdownAnchor
+    >
+        <div class="user-tech-dp">
+            <div
+                class="tab-pane__table-avatar user-dp"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
+            >
+            </div>
+        </div>
+        <div class="qt-ml-12 qt-f-1 ellipsis">
+            <div
+                class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis"
+                [textContent]="ticketsListService.getUserName(selectedUsers[0])"
+            ></div>
+            <div
+                class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2"
+                [textContent]="selectedUsers[0].primaryEmail"
+            ></div>
+        </div>
+    </div>
+    <app-dynamic-tooltip
+        [content]="'Select User'"
+        [position]="'top'"
+        #selectUserTooltip
+    ></app-dynamic-tooltip>
+    <app-dynamic-tooltip
+        [content]="ticketsListService.getUserName(selectedUsers[0])"
+        [position]="'top'"
+        #techUserTooltip
+    ></app-dynamic-tooltip>
+    <div
+        class="tech-user-body"
+        ngbDropdownMenu
+        aria-labelledby="dropdownTechuser"
+        *ngIf="!isDisabled"
+    >
+        <div class="select-wrapper --tooltip-shadow dropdown-assign-ticket dropdown-assign-ticket__assigned-sales-person fixed-assign">
+            <div class="content dropdown-assign-ticket">
+                <div class="px-4 py-3">
+                    <div
+                        class="assign-ticket"
+                        assign-user
+                    >
+                        <div class="assign-sales-person__header">
+                            <div class="assign-sales-person__title qt-mb-16">Assign Sales Person</div>
+                            <div class="qt-input-search__page-settings qt-f-1">
+                                <input
+                                    class="qt-input-search__page-settings-input"
+                                    placeholder="Search Users"
+                                    value
+                                    autocomplete="off"
+                                    (input)="onSearch($event)"
+                                >
+                            </div>
+                        </div>
+                        <div class="assign-sales-person__scroll-pane">
+                            <div
+                                class="users-list"
+                                tabindex="-1"
+                            >
+                                <ng-template
+                                    ngFor
+                                    let-user
+                                    [ngForOf]="usersList"
+                                    let-i="index"
+                                    [ngForTrackBy]="trackByIndex"
+                                >
+                                    <div
+                                        class="user-item"
+                                        data-index="1"
+                                        (click)="selectUser(i)"
+                                        [ngClass]="(user.selected) ? 'active' : ''"
+                                    >
+                                        <a
+                                            href="javascript:void(0)"
+                                            [id]="user.id"
+                                            class="dropdown-link"
+                                        >
+                                            <div
+                                                class="default-user-avatar avatar-background-color-odd ng-scope"
+                                                *ngIf="!user.avatar"
+                                            >
+                                                <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
+                                                <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
+                                            </div>
+                                            <div
+                                                class="default-user-avatar avatar-background-color-odd ng-scope"
+                                                *ngIf="user.avatar"
+                                            >
+                                                <img
+                                                    ng-if="user.avatar"
+                                                    class="img-circle avatar-26"
+                                                    style="margin: 0;"
+                                                    [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                                                    alt="..."
+                                                >
+                                            </div>
+                                            <span>
+                                                <p
+                                                    class="dropdown-avatar__name"
+                                                    [textContent]="user.firstName + ' ' + user.lastName"
+                                                ></p>
+                                                <p
+                                                    class="dropdown-avatar__email"
+                                                    [textContent]="user.primaryEmail"
+                                                ></p>
+                                            </span>
+                                        </a>
+                                        <i
+                                            *ngIf="isSelected(user)"
+                                            class="qt-sz-20 qt-bg-contain icn-label-save is-selected"
+                                        ></i>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="assign-sales-person__footer">
+                            <div class="qt-df qt-w100">
+                                <button
+                                    class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                                    (click)="toggleDropDown(false)"
+                                    ngbDropdownToggle
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    class="qt-button qt-jc-c qt-w100"
+                                    (click)="save()"
+                                    ngbDropdownToggle
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- **** New Component Dropdown ***** -->
+    </div>
+</div>

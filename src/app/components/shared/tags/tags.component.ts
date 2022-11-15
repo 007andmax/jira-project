@@ -100,6 +100,10 @@ export class TagsComponent implements OnInit, OnDestroy {
     // }
   }
 
+  public isSelected(id) {
+    return this.selectedTag.find(item => item.id == id);
+  }
+
   /**
    * Remove tag from selected
    * @param index - user index

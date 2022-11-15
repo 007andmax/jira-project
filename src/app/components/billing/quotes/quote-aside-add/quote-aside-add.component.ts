@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { QUOTE_MODAL_ACTION_ADD } from 'src/app/const/quote';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
@@ -65,7 +65,7 @@ export class QuoteAsideAddComponent implements OnInit, OnDestroy {
     this.quoteAdd.onCheckValidateServicesByCompany();
     let quote: QuoteAdd = this.quoteAdd.getQuote();
     if (!this.quoteAdd.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
     let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.action = QUOTE_MODAL_ACTION_ADD;

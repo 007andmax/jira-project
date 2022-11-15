@@ -1,0 +1,15 @@
+@import "./src/assets/styles/variable";
+
+.canned-responses-table {
+  &__template-name {
+    flex: 1 1 700px;
+    padding: 0 8px;
+  }
+  &__status {
+    flex: 1 1 150px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 92px;
+  }
+}

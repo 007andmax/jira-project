@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-quotes-settings',
@@ -11,12 +12,13 @@ import { ToastrService } from 'ngx-toastr';
 export class QuotesSettingsComponent implements OnInit {
   quotesForm: FormGroup;
   submitted = false;
-  loading = false;
+  loading = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   ngOnInit() {
@@ -27,7 +29,8 @@ export class QuotesSettingsComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern(/^-?([0-9]\d*)?$/)
+          Validators.pattern(/^-?([0-9]\d*)?$/),
+          Validators.maxLength(7)
         ])
       ],
       defaultTerms: ['15days'],
@@ -44,10 +47,9 @@ export class QuotesSettingsComponent implements OnInit {
    * get quote number
    */
   getActualNumber() {
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('SALE_QUOTE').subscribe(
       (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res) {
           this.quotesForm.patchValue({
             count: res.number
@@ -55,7 +57,7 @@ export class QuotesSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -74,15 +76,14 @@ export class QuotesSettingsComponent implements OnInit {
         type: 'SALE_QUOTE'
       }
     };
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService
       .updateQuotesSettings(objQuotes)
       .subscribe(res => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.success('Saved Successfully');
+        this.appStateService.changeDetectorRef();
       }, error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error('Bad Request');
+        this.appStateService.changeDetectorRef();
       });
   }
 }

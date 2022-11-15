@@ -1,0 +1,44 @@
+<div
+    class="note-list-container"
+    ngbDropdown
+    [placement]="'top-right'"
+>
+    <div
+        class="icon__note-list-container pointer"
+        ngbDropdownToggle
+        placement="top"
+        [container]="'body'"
+        [ngbTooltip]="'Canned Responses'"
+    >
+        <i class="icon__note-list qt-sz-20 qt-bg-contain qt-dib"></i>
+    </div>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+        style="width: 584px;min-height: 120px;max-height: 304px;"
+    >
+        <div class="header-note-list">
+            <div class="header-note-list-title">Canned Responses</div>
+            <div
+                class="header-note-list-add"
+                (click)="createResponse()"
+                *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+            >
+                + Create Response
+            </div>
+        </div>
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="noteTemplate"
+            let-i="index"
+        >
+            <button
+                ngbDropdownItem
+                [textContent]="item.title"
+                (click)="onSelect(item)"
+            ></button>
+        </ng-template>
+    </div>
+</div>

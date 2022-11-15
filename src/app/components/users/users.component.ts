@@ -63,25 +63,28 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
-    this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
+    this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
     this.filter = this.usersStateService.getFilter();
-    let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
-      this.showArchivedUsers = data;
-      window.scrollTo(0, 0);
-      this.filter.setClientType(null);
-      this.filter.clearFilter();
-      this.setDefaultScoll();
-      this.getUsersList(this.usersStateService.getAllUsers());
-    })
-    this.userListService.addSubscription(getOnShowArchived);
-
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
-      this.selectAll = false;
-      this.reqUsers.forEach(item => item.selected = false);
-      this.setDefaultScoll();
-      this.onScroll();
+      if (this.showArchivedUsers != this.usersStateService.getShowArchivedCompanies()) {
+        this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
+        this.filter.setClientType(null);
+        this.showPreloader = true;
+        this.users = [];
+        if (this.showArchivedUsers) {
+          this.usersService.getArchiveUsers().subscribe(res => {
+            this.setFilters(data);
+            this.getUsersList(res);
+          })
+        } else {
+          this.setFilters(data);
+          this.getUsersList(this.usersStateService.getAllUsers());
+        }
+      } else {
+        this.setFilters(data);
+        this.onScroll();
+      }
     })
     this.userListService.addSubscription(geLefttFilter);
 
@@ -175,7 +178,12 @@ export class UsersComponent implements OnInit {
     })
     this.sub.add(onGetIndustry);
   }
-
+  setFilters(data) {
+    this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
+    this.selectAll = false;
+    this.reqUsers.forEach(item => item.selected = false);
+    this.setDefaultScoll();
+  }
   private onArchiveUsers(ids) {
 
     let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
@@ -270,10 +278,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
-
-    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
@@ -298,9 +303,7 @@ export class UsersComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-
     this.count = listFilter.length;
-
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];
@@ -311,8 +314,6 @@ export class UsersComponent implements OnInit {
     if (this.selectAll) this.users.forEach(item => item.selected = true);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-
-
   }
   public setDefaultScoll() {
     this.page_number = 0;

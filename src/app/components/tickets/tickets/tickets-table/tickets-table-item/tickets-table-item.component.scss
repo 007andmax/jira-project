@@ -4,14 +4,14 @@ tr {
   cursor: pointer;
   &:hover {
     td {
-      background: $gray-200;
+      background: $gray-200--old;
       border-color: $primary-1;
     }
   }
 }
 .--selected {
   > div {
-    @media (min-width: 767px) {
+    @media (min-width: 768px) {
       background: #f4fbff;
       border-color: $primary-1;
     }

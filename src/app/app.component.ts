@@ -29,6 +29,8 @@ import { MarketingEmailStateService } from './states/marketing-email/marketing-e
 import { PermissionsService } from './services/permissions/permissions.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { SupportPageCategoriesStateService } from './components/super-admin/state/support-page-categories/support-page-categories-state.service';
+import { NoteStateService } from './states/note/note-state.service';
+import { EmailTemplateStateService } from './states/email-template/email-template-state.service';
 
 
 /**
@@ -51,7 +53,7 @@ export class AppComponent implements OnInit {
   hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
-  main_page: string = PAGE_MAIN;
+  main_page: string;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
   state: string = '';
@@ -89,7 +91,9 @@ export class AppComponent implements OnInit {
     private appStateService: AppStateService,
     private crmStateService: CrmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
-    private supportPageCategoriesStateService: SupportPageCategoriesStateService
+    private noteStateService: NoteStateService,
+    private supportPageCategoriesStateService: SupportPageCategoriesStateService,
+    private emailTemplateStateService: EmailTemplateStateService
 
   ) { }
 
@@ -97,14 +101,11 @@ export class AppComponent implements OnInit {
    * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.router.events
-      .subscribe((event) => {
-        if (this.router.url.includes('/device') && !this.router.url.includes('/devices') && !this.router.url.includes('report') && !this.router.url.includes('/setting') && !this.router.url.includes('/device-ip-summary')) {
-          this.main_page = PAGE_DEVICE;
-        } else {
-          this.main_page = PAGE_MAIN;
-        }
-      });
+    if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary')) {
+      this.main_page = PAGE_DEVICE;
+    } else {
+      this.main_page = PAGE_MAIN;
+    }
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
@@ -122,6 +123,8 @@ export class AppComponent implements OnInit {
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
         this.kafkaStateService.onInit();
+        this.noteStateService.onInit();
+        this.emailTemplateStateService.onInit();
         if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
       } else {
@@ -195,10 +198,11 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN") this.router.navigate(
-        [`${data.name.replaceAll(' ', '')}/tickets/`]);
-
-      if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN") this.router.navigate(
+      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
+        this.router.navigate(
+          [`${data.name.replaceAll(' ', '')}/tickets/`]);
+      }
+      if (this.router.url === "/" && this.currentUser.role === "SUPER_ADMIN" && this.state == '') this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/support-page/`]);
     })
     this.appService.onToggleMobileAside.subscribe(data => {

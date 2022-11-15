@@ -115,12 +115,13 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.router.navigate(
         [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
     } else {
-      const url = this.router.serializeUrl(
-        this.router.createUrlTree(
-          [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
-
-      );
-      window.open(`#${url}`, '_blank');
+      /* const url = this.router.serializeUrl(
+         this.router.createUrlTree(
+           [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard'])
+ 
+       );*/
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/${this.company.id}/dashboard`;
+      window.open(url, '_blank');
     }
 
   }
@@ -135,7 +136,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   };
   downloadAgent() {
     this.downloadAgentStateService.setCompnay(this.company);
-    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
+    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal', backdrop: 'static', keyboard: false });
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
@@ -145,7 +146,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
   remove() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.company);
   }
@@ -172,7 +173,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
   }

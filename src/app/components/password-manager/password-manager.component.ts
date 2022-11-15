@@ -25,13 +25,12 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 export class PasswordManagerComponent implements OnInit, OnDestroy {
   public recordsData: Array<PasswordRecord> = [];
   public list_records: Array<PasswordRecord> = [];
-  showPreloader: boolean = true;
+  public showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
   public filter: FilterPasswordManager = new FilterPasswordManager();
-  selectAll: boolean = false;
-
-  sub: Subscription = new Subscription();
+  public selectAll: boolean = false;
+  public sub: Subscription = new Subscription();
   constructor(
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
@@ -66,6 +65,9 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.recordsData.push(new PasswordRecord(newChange.data));
+        this.filter.onSortList(this.recordsData);
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index < this.list_records.length) this.list_records.splice(index, 0, this.recordsData[index]);
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index].onUpdate(newChange.data);

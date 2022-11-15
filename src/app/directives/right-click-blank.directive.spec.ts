@@ -1,4 +1,4 @@
-import { RightClickBlankDirective } from './right-click-blank.directive';
+import { RightClickBlankDirective } from './right-click-blank/right-click-blank.directive';
 
 describe('RightClickBlankDirective', () => {
   it('should create an instance', () => {

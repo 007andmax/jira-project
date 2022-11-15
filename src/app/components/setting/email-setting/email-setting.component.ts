@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailSettingService } from './email-setting.service';
+import { IncomingEmailComponent } from "./incoming-email/incoming-email.component";
+import { OutgoingEmailComponent } from "./outgoing-email/outgoing-email.component";
 declare var $: any;
 @Component({
   selector: "app-email-setting",
@@ -51,18 +53,23 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       encryptionType: "TLS"
     }
   };
+  @ViewChild("incomingEmail") incomingEmail: IncomingEmailComponent;
+  @ViewChild("outgoingEmail") outgoingEmail: OutgoingEmailComponent;
   constructor(private emailSettingService: EmailSettingService,
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.SMTPSettings();
     this.settingStateService.setComponentName('EmailSettingComponent');
   }
-
+  onSubmit() {
+    if (this.incomingEmail) this.incomingEmail.saveInboxEnabled();
+    if (this.outgoingEmail) this.outgoingEmail.saveSMTP(this.outgoingEmail.smtpForm, undefined);
+  }
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
@@ -107,6 +114,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       }
       counter++;
     }
+    return this.emailVia[1];
   }
 
 }

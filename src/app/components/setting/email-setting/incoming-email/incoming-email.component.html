@@ -1,60 +1,68 @@
-<div class="cmn-area incming-email workspace">
-    <p>
-        Incoming emails sent to your default address will automaticly create a new
-    ticket. If you have a support email already setup with your existing domain
-    then you should forward it to the email address below
-    </p>
-    <form method="POST">
-        <div class="f-row">
-            <div class="f-col col-100">
-                <label>Email Domain</label>
-                <div class="form-row">
-                    <div class="custm-url">
-                        <input
-                            class="form-input"
-                            *ngIf="supportMailBox"
-                            type="text"
-                            value="{{ supportMailBox }}"
-                            disabled
-                        >
-                    </div>
-                    <span class="slug">@inbox.quicktech.com</span>
-                </div>
-                <div class="form-row">
-                    <p>
-                        Your workspace URL can only contain lowercase letters, numbers and
-            dashes (and must start with a letter or number).
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="f-row">
-            <div class="f-col">
-                <span class="cmn-checkbox">
-                    <input
-                        type="checkbox"
-                        [(ngModel)]="inboxEnabled"
-                        [ngModelOptions]="{ standalone: true }"
-                        id="incomming-email"
-                    >
-                    <label for="incomming-email">
-                        When disabled, it creates drafts from email, you could
-                        <br>
-                        proceed drafts to tickets.
-                    </label>
+<div
+    class="cmn-area incming-email"
+    [hidden]="loading"
+>
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Incoming Email</div>
+    </div>
+    <div class="tab-pane__body">
+        <div class="tab-pane__row">
+            <div class="tab-pane-input__row company-info-block">
+                <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+                <span class="qt-f-1">
+                    Incoming emails sent to your default address will automaticly create a new
+        ticket. If you have a support email already setup with your existing domain
+        then you should forward it to the email address below
                 </span>
             </div>
         </div>
-        <div class="f-row">
-            <div class="f-col">
-                <input
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="saveInboxEnabled()"
-                    value="Save Changes"
-                >
+        <form method="POST">
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Email Domain</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <div class="qt-df">
+                            <input
+                                class="qt-input-afterpend"
+                                *ngIf="supportMailBox"
+                                type="text"
+                                value="{{ supportMailBox }}"
+                                disabled
+                            >
+                            <span class="qt-input-afterfix">@inbox.quicktech.com</span>
+                        </div>
+                        <div class="qt-input-help-text qt-mt-12">
+                            Your workspace URL can only contain lowercase letters, numbers and
+              dashes (and must start with a letter or number).
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">When Disabled</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <label class="qt-checkbox">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="inboxEnabled"
+                                [ngModelOptions]="{ standalone: true }"
+                                id="incomming-email"
+                            >
+                            <span></span>
+                            <div class="qt-checkbox__text qt-ml-8">
+                                When disabled, it creates drafts from email, you could proceed drafts to tickets.
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>

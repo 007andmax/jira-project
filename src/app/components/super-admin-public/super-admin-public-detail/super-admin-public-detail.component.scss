@@ -106,7 +106,7 @@
                     left: 0;
                     right: 0;
                     height: 1px;
-                    border-bottom: dashed 1px $gray-400;
+                    border-bottom: dashed 1px $gray-400--old;
                 }
             }
         }
@@ -121,7 +121,7 @@
             height: 100%;
             overflow: auto;
             padding: 8px 0;
-            background-color: $gray-100;
+            background-color: $gray-100--old;
             width: 264px;
             position: fixed;
             left: 0;
@@ -136,7 +136,7 @@
               top: 0;
               width: 1px;
               height: 100%;
-              background-color: $gray-300;
+              background-color: $gray-300--old;
             }
             .container-categories {
               position: relative;
@@ -237,7 +237,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px dotted $gray-400;
+    border-bottom: 1px dotted $gray-400--old;
     padding-bottom: 24px;
 }
 

@@ -1,16 +1,18 @@
 <div class="invoices-page__aside qt-aside-modern --x-large">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Payment</div>
-        <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
         <div class="qt-df qt-pos-rel address-block">
             <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
                 <div class="qt-input-block">
                     <label class="qt-lh-154">Customer Name</label>
-                    <app-select-search
+                    <app-drop-down
                         class="search-company invoices-company-filter"
-                        #companyDp
                         [placeholder]="'Select Company'"
                         [change]="false"
                         [isDisabled]="true"
@@ -18,7 +20,7 @@
                         [field]="'name'"
                         [editItem]="selectedCompany"
                         [list]="companies"
-                    ></app-select-search>
+                    ></app-drop-down>
                 </div>
             </div>
         </div>
@@ -59,9 +61,8 @@
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <label class="qt-lh-154">Payment Mode</label>
-                <app-select-search
+                <app-drop-down
                     class="search-company invoices-status-filter"
-                    #statusDp
                     [placeholder]="'Select Status'"
                     [change]="false"
                     [editItem]="selectedPaymentMode"
@@ -70,7 +71,7 @@
                     [field]="'title'"
                     [list]="paymentModes"
                     (onSelectedItem)="onSelectPaymentModes($event)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="qt-input-block qt-w100">
                 <label class="qt-lh-154">Reference#</label>

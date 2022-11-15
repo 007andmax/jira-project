@@ -5,10 +5,12 @@ import { ToastrService } from "ngx-toastr";
 import {
   FormGroup,
   FormBuilder,
-  Validators,
-  FormControl
+  Validators
 } from "@angular/forms";
-import { DisabledBtnDirective } from "src/app/directives/disabled-btn.directive";
+import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
+import { AppStateService } from "src/app/states/app/app-state.service";
+import { TitleListType } from "src/app/components/tickets/tickets/tickets-header/class/title-list-type";
+
 
 @Component({
   selector: "app-outgoing-email",
@@ -22,7 +24,7 @@ export class OutgoingEmailComponent implements OnInit {
   smtpForm: FormGroup;
   testEmailForm: FormGroup;
   submitted = false;
-  loading = false;
+  loading = true;
   isSMTPLoginUnique = true;
   disableFields = false;
   portIsEmpty = false;
@@ -74,6 +76,10 @@ export class OutgoingEmailComponent implements OnInit {
       label: "Outlook"
     }
   ];
+  encryptionType = new TitleListType("TLS", "TLS");
+  encryptionTypes = [new TitleListType("NONE", "PLAIN"),
+  new TitleListType("TLS", "TLS"),
+  new TitleListType("SSL", "SSL")];
   emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   domainPattern = /^(((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?))|((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/;
   @Input() smtpSettingsInput: any;
@@ -88,7 +94,8 @@ export class OutgoingEmailComponent implements OnInit {
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -157,9 +164,10 @@ export class OutgoingEmailComponent implements OnInit {
           this.smtpForm.patchValue({
             emailAlias: this.emailAlias
           });
+          this.loading = false;
         }
       },
-      error => { }
+      error => { this.loading = false; }
     );
   }
 
@@ -195,6 +203,7 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("encryptionType").enable();
       this.smtpForm.get("password").enable();
     }
+    this.encryptionType = this.encryptionTypes.find(itme => itme.type == this.smtp.encryptionType);
     this.smtpForm.patchValue({
       usedEmailVia: (this.usedEmailVia) ? this.usedEmailVia.label : "",
       port: this.smtp.port,
@@ -203,6 +212,7 @@ export class OutgoingEmailComponent implements OnInit {
       login: this.smtp.login,
       password: this.smtp.password
     });
+
   }
   onEnableTestEmail(value) {
     this.smtp.sendTestEmail = value;
@@ -222,10 +232,8 @@ export class OutgoingEmailComponent implements OnInit {
    * smtp settings
    */
   SMTPSettings() {
-    this.loading = true; $(".loading").css("display", "block");
     this.emailSettingService.getSMTPSettings().subscribe(
       (response: any) => {
-        this.loading = false; $(".loading").css("display", "none");
         if (response) {
           this.smtp = response.smtpSettings;
           this.supportMailBox = response.supportMailBox;
@@ -260,7 +268,6 @@ export class OutgoingEmailComponent implements OnInit {
         }
       },
       (error: any) => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error(`Error Occured, ${error.errorMessage}`);
       }
     );
@@ -306,7 +313,11 @@ export class OutgoingEmailComponent implements OnInit {
   /**
    *isChangedEvent - notification display or not based on param 
    */
-  changeEmailVia() {
+  changeEmailVia(data) {
+    this.usedEmailVia = data;
+    this.smtpForm.patchValue({
+      usedEmailVia: data.label
+    })
     if (!this.smtpForm.value.usedEmailVia) {
       return;
     }
@@ -329,7 +340,11 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("password").enable();
     }
     this.setDomain(selectedEmailVia[0].label.toUpperCase());
-    this.saveSMTP(this.smtpForm, undefined);
+    this.smtpForm.patchValue({
+      login: "",
+      password: "",
+    });
+    // this.saveSMTP(this.smtpForm, undefined);
   }
 
   /**
@@ -337,6 +352,7 @@ export class OutgoingEmailComponent implements OnInit {
    * @param value
    */
   changeEncryption(value) {
+    this.encryptionType = this.encryptionTypes.find(itme => itme.type == value);
     if (value) {
       if (this.initialized || this.portIsEmpty) {
         var port = this.portToTypes[value];
@@ -360,7 +376,6 @@ export class OutgoingEmailComponent implements OnInit {
     if (!this.disableFields) {
       var domain = this.preinitializedDomains[value],
         port = this.portToTypes[this.smtp.encryptionType];
-
       if (domain) {
         for (var prop in domain) {
           this.smtp[prop] = domain[prop];
@@ -390,6 +405,11 @@ export class OutgoingEmailComponent implements OnInit {
           });
         }
       }
+      if (value == "QUICKTECH MAIL SERVER") {
+        this.smtpForm.patchValue({
+          domain: ""
+        });
+      }
     }
   }
 
@@ -411,9 +431,8 @@ export class OutgoingEmailComponent implements OnInit {
    * @param form
    * @param isTest
    */
-  saveSMTP(form, isTest) {
+  public saveSMTP(form, isTest) {
     this.submitted = true;
-
     if (this.isSMTPLoginUnique) {
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
@@ -426,10 +445,8 @@ export class OutgoingEmailComponent implements OnInit {
 
         //  this.smtp.sendTestEmail = !!isTest;
         this.smtp.testEmail = this.smtpForm.value.testEmail;
-        this.loading = true; $(".loading").css("display", "block");
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.savedSMTPSettings = this.smtp;
             this.smtp.testEmail = this.savedSMTPSettings.login;
 
@@ -438,36 +455,35 @@ export class OutgoingEmailComponent implements OnInit {
             } else {
               this.toastr.success("Saved Successfully");
             }
-
+            this.appStateService.changeDetectorRef();
             this.disableFields = false;
             this.submitted = false;
           },
           error => {
-            this.loading = false; $(".loading").css("display", "none");
             // this.toastr.error(`Error Occured, ${error}`);
           }
         );
       } else if (!this.smtp.useSMTP) {
-
         this.smtp.login = "";
         this.smtp.password = "";
+        if (this.smtpForm.value.usedEmailVia == "Quicktech mail server") this.smtp.domain = "";
         this.smtpForm.patchValue({
           login: "",
-          password: ""
+          password: "",
+          domain: this.smtp.domain
         });
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toastr.success("Saved Successfully");
+            this.appStateService.changeDetectorRef();
           },
           (error: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toastr.error(`Error Occured, ${error}`);
+            this.appStateService.changeDetectorRef();
           }
         );
       }
     } else {
-      this.loading = false; $(".loading").css("display", "none");
       this.isSMTPLoginUnique = false;
     }
   }
@@ -481,6 +497,8 @@ export class OutgoingEmailComponent implements OnInit {
       "encryptionType": this.smtpForm.value.encryptionType
     }).subscribe((data: any) => {
 
+      this.testServerBtn.setDisabled(false);
+    }, err => {
       this.testServerBtn.setDisabled(false);
     })
   }

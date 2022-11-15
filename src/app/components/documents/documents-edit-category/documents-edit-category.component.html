@@ -25,7 +25,7 @@
                 <label class="qt-df qt-ai-c">
                     Assign Category to Companies
                     <span
-                        class="icon__info-question qt-sz-12 qt-ic-c qt-ml-4"
+                        class="icon__help qt-sz-12 qt-ic-c qt-ml-4"
                         placement="bottom"
                         ngbTooltip="All new and existing companies with the appropriate type will get the quick access to the category on the company details page"
                     ></span>
@@ -43,48 +43,48 @@
             <div class="qt-df qt-w100 qt-mb-4">
                 <div class="qt-w100">
                     <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
-                        <label class="checkbox-container">
-                            <input
-                                type="checkbox"
-                                [checked]="checkSelectedType('CLIENT')"
-                                (change)="onChangedType($event,'CLIENT')"
-                            >
-                            <span class="checkbox-mark"></span>
-                        </label>
-                        <span class="qt-ml-12">All Client Companies</span>
+                      <label class="qt-checkbox">
+                        <input
+                          type="checkbox"
+                          [checked]="checkSelectedType('CLIENT')"
+                          (change)="onChangedType($event,'CLIENT')"
+                        >
+                        <span></span>
+                        <div class="qt-ml-12">All Client Companies</div>
+                      </label>
                     </div>
                     <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
-                        <label class="checkbox-container">
-                            <input
-                                type="checkbox"
-                                [checked]="checkSelectedType('VENDOR')"
-                                (change)="onChangedType($event,'VENDOR')"
-                            >
-                            <span class="checkbox-mark"></span>
-                        </label>
-                        <span class="qt-ml-12">All Vendor Companies</span>
+                      <label class="qt-checkbox">
+                        <input
+                          type="checkbox"
+                          [checked]="checkSelectedType('VENDOR')"
+                          (change)="onChangedType($event,'VENDOR')"
+                        >
+                        <span></span>
+                        <div class="qt-ml-12">All Vendor Companies</div>
+                      </label>
                     </div>
                     <div class="qt-df qt-ai-c qt-w100 qt-mb-4 item-type-company">
-                        <label class="checkbox-container">
-                            <input
-                                type="checkbox"
-                                [checked]="checkSelectedType('LEAD')"
-                                (change)="onChangedType($event,'LEAD')"
-                            >
-                            <span class="checkbox-mark"></span>
-                        </label>
-                        <span class="qt-ml-12">All Lead Companies</span>
+                      <label class="qt-checkbox">
+                        <input
+                          type="checkbox"
+                          [checked]="checkSelectedType('LEAD')"
+                          (change)="onChangedType($event,'LEAD')"
+                        >
+                        <span></span>
+                        <div class="qt-ml-12">All Lead Companies</div>
+                      </label>
                     </div>
                     <div class="qt-df qt-ai-c qt-w100 item-type-company">
-                        <label class="checkbox-container">
-                            <input
-                                type="checkbox"
-                                [checked]="checkSelectedType('SUPPLIER')"
-                                (change)="onChangedType($event,'SUPPLIER')"
-                            >
-                            <span class="checkbox-mark"></span>
-                        </label>
-                        <span class="qt-ml-12">All Supplier Companies</span>
+                      <label class="qt-checkbox">
+                        <input
+                          type="checkbox"
+                          [checked]="checkSelectedType('SUPPLIER')"
+                          (change)="onChangedType($event,'SUPPLIER')"
+                        >
+                        <span></span>
+                        <div class="qt-ml-12">All Supplier Companies</div>
+                      </label>
                     </div>
                 </div>
             </div>

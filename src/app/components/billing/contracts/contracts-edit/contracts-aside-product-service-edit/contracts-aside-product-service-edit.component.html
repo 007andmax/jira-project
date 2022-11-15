@@ -3,25 +3,25 @@
         <div class="qt-df qt-mb-16">
             <div class="qt-w50 qt-input-block qt-mr-16">
                 <label>Company Name</label>
-                <app-select-search
+                <app-drop-down
                     class="search-company"
                     [placeholder]="'Select Company'"
                     [editItem]="selectedCompany"
                     [class]="['qt-dropdown']"
                     [field]="'name'"
                     [isDisabled]="true"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="contracts-page__contract-type-name-input qt-input-block">
                 <label>Contract Type</label>
-                <app-select-search
+                <app-drop-down
                     class="search-users "
                     [isDisabled]="true"
                     [placeholder]="'Contract Type'"
                     [editItem]="selectedType"
                     [class]="['qt-dropdown']"
                     [field]="'title'"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
         </div>
         <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">
@@ -47,7 +47,7 @@
                     [title]="'Interval'"
                     [sort]="false"
                     [placeholder]="'Interval'"
-                    [dropdownHeight]="'180px'"
+                    [dropdownHeight]="'192px'"
                     [editItem]="selectedInterval"
                     [list]="intervals"
                     [isBlockClear]="true"
@@ -179,8 +179,8 @@
             At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
         </mat-error>
     </div>
-    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
-        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-16">
+        <div class="qt-df qt-jc-sb qt-ai-c">
             <div class="qt-df">
                 <div
                     class="qt-toggle  qt-mr-8"
@@ -203,6 +203,62 @@
                     [minDate]="minCustomDate"
                     (onChange)="onChangeCustomDate($event)"
                 ></app-date-picker>
+            </div>
+        </div>
+    </div>
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-16">
+        <div class="qt-df qt-jc-sb qt-ai-c">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.manualCreateBillableItem}"
+                    (click)="contractsOther.setManualCreateBillableItem(!contractsOther.manualCreateBillableItem)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <ng-template
+                    #manualContent
+                    class="tooltip"
+                >
+                    Warning, This will disable the automatic creation of a billable item for this contract. It must be manually created.
+                </ng-template>
+                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light qt-df qt-ai-c">
+                    Manual create billable item
+                    <span class="icon__automatically-create-invoice qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                    <span
+                        class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                        placement="top"
+                        [ngbTooltip]="manualContent"
+                    ></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.enableInvoiceAutoCreate}"
+                    (click)="contractsOther.setEnableInvoiceAutoCreate(!contractsOther.enableInvoiceAutoCreate)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <ng-template
+                    #tipContent
+                    class="tooltip"
+                >
+                    This option can be enabled only if the Manual create billable item option is disabled
+                </ng-template>
+                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light qt-df qt-ai-c">
+                    Automatically create and send invoice
+                    <span class="icon__manual-create-billable qt-bg-contain qt-dib qt-sz-20 qt-ml-8"></span>
+                    <span
+                        class="icon__help qt-dib qt-sz-12 qt-ic-c qt-ml-8"
+                        placement="top"
+                        [ngbTooltip]="tipContent"
+                    ></span>
+                </div>
             </div>
         </div>
     </div>

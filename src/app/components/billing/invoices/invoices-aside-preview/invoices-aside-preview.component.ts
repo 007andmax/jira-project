@@ -62,19 +62,19 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   onCreatePayment() {
     this.invoiceStateService.onOpenAsige([this.invoiceProfile.getDataForRecordPayment()]);
   }
-  resendInvoices() {
-    this.invoicesService.resendInvoices([this.invoiceId]).subscribe(data => {
+  resendInvoices(withPdfAttachment) {
+    this.invoicesService.resendInvoices([this.invoiceId], withPdfAttachment).subscribe(data => {
     })
   }
   refundPayments() {
     this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
     this.invoiceStateService.setInvoiceForRefund(this.invoiceProfile);
   }
   rollbackInvoice() {
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     let ticketsNumbers = this.invoiceProfile.tickets.map(item => item.number);
     modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoiceProfile.number}? 
     ${(ticketsNumbers && ticketsNumbers.length ? (ticketsNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
@@ -90,7 +90,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   }
   deleteInvoice() {
     this.confirmStateService.setConfirmAction(DELETE_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoiceProfile.number} ?`;
     this.invoiceStateService.setInvoiceForemove(this.invoiceProfile);
   }

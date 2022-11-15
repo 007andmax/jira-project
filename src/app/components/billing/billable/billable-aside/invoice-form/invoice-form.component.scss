@@ -2,6 +2,16 @@
 
 .invoice-item__table {
     .border-top {
-        border-top: solid 1px $gray-400;
+        border-top: solid 1px $gray-400--old;
     }
+}
+.billing-address {
+    border-right: 1px solid #dfe3e8;
+    
+}
+.address-block {
+border-bottom: 1px solid #dfe3e8;
+}
+.address-h {
+    color: $gray-600;
 }

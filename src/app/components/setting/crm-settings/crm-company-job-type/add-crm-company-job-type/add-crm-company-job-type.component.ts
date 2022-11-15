@@ -12,6 +12,7 @@ import { CrmCompanyJobType } from '../class/crm-company-job-type';
 export class AddCrmCompanyJobTypeComponent implements OnInit {
   name: string = "";
   disableCreate: boolean = false;
+  isInitRequest: boolean = false;
   @Input() jobTypeList: Array<CrmCompanyJobType> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private crmService: CrmService) { }
@@ -29,14 +30,17 @@ export class AddCrmCompanyJobTypeComponent implements OnInit {
     }
   };
   save() {
-    if (this.name.length === 0 || this.disableCreate) return;
+    if (this.name.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
     this.crmService.addJobType(this.name).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.isInitRequest = false;
           this.onClose.emit(null);
         },
         error => {
+          this.isInitRequest = false;
         }
       );
   }

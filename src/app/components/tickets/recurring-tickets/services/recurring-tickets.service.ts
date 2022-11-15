@@ -7,7 +7,7 @@ import { ForCreateService } from '../class/for-create-service';
 import { ServiceRecurringTicket } from '../interfaces/service-recurring-ticket';
 import { TagsStateService } from 'src/app/components/shared/tags/services/tags-state.service';
 import { IntervalStateService } from 'src/app/components/shared/interval/services/interval-state.service';
-import { TehUsersSateService } from 'src/app/components/shared/teh-users/services/teh-users-sate.service';
+import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceErrors } from '../class/service-errors';
@@ -21,7 +21,7 @@ export class RecurringTicketsService {
   clone: boolean = false;
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
-    private tehState: TehUsersSateService,
+    private techState: TechUsersStateService,
     private devicesState: DevicesRecurringTicketsStateService,
     private stateDatePicker: DatePickerStateService
   ) { }
@@ -98,10 +98,10 @@ export class RecurringTicketsService {
   }
 
   /**
-* Get teh users state
+* Get tech users state
 */
-  public getTehState() {
-    return this.tehState;
+  public getTechState() {
+    return this.techState;
   }
 
   /**
@@ -353,17 +353,14 @@ export class RecurringTicketsService {
   public checkServicesForSave(ticketForEdit: RecurringTicket, services: Array<ForCreateService>) {
     let change = false;
     if (ticketForEdit !== null) {
-
       ticketForEdit.services.forEach((service, index) => {
-
-        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || service.service.versionedId.id !== services[index].versionedId.id) change = true;
+        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || services.length < index && service.service.versionedId.id !== services[index].versionedId.id) change = true;
       })
       if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
       if (ticketForEdit.services.length !== services.length) change = true;
     } else {
       if (services[0].versionedId) change = true;
     }
-
     return change;
   }
 

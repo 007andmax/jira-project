@@ -28,19 +28,21 @@ export class DevicesStateService {
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
+  onInitWebSocket: EventEmitter<any> = new EventEmitter();
+  isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
-    private websocketService: WebsocketService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
-    this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
+    if (this.userStateService.getCurrentUser()) this.getCompanyDevices(this.userStateService.getCurrentUser().company.id);
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
       this.getCompanyDevices(data.company.id);
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+      if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (!this.allDevices) return;
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
         if (this.allDevices[newChange.data.clientCompanyId]) this.allDevices[newChange.data.clientCompanyId].forEach(item => {
@@ -78,7 +80,6 @@ export class DevicesStateService {
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') {
         this.closedRemoveConnecion(newChange.data.id);
       }
-      if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (newChange.action === 'DEVICE_INSTALLED') {
         let parsedData = JSON.parse(newChange.data.value);
         parsedData.device.userName = newChange.data.userName;
@@ -93,6 +94,14 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  public initWebSocket() {
+    this.isInitWebSocket = true;
+    this.onInitWebSocket.emit(null);
+  }
+
+  public getIsInitWebSocket() {
+    return this.isInitWebSocket;
   }
   getCompanyDevices(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data) => {
@@ -117,9 +126,6 @@ export class DevicesStateService {
       if (element.id === id) element.label = label;
     });
     this.onInitGetDevices(this.allDevices);
-  }
-  public subsribeToNetScan(id) {
-    this.websocketService.subsribeToNetScan(id);
   }
   public getOnSendDeviceStatus() {
     return this.onSendDeviceStatus;

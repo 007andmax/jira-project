@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-time-default-service';
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-default-service',
@@ -11,7 +12,7 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements OnInit {
   @Input() service: ContractsBlockTimeDefaultService;
   @Output() onRemove = new EventEmitter<any>();
-  @ViewChild('taxesDropDown') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {

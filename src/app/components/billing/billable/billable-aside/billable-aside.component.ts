@@ -12,7 +12,7 @@ import { BillableTaimer } from './class/billable-taimer';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { environment } from 'src/environments/environment';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
@@ -136,7 +136,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   saveAndSend() {
     this.disabledSaveBtns();
-    this.billableService.create(this.invoice.getDatForCreate(true)).subscribe(data => {
+    this.billableService.create(this.invoice.getDatForCreate(true, this.company)).subscribe(data => {
       this.unlock();
       this.activeSaveBtns();
       this.moToBillable();
@@ -144,7 +144,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   saveAndPrint() {
     this.disabledSaveBtns();
-    this.billableService.create(this.invoice.getDatForCreate(false)).subscribe((data: any) => {
+    this.billableService.create(this.invoice.getDatForCreate(false, this.company)).subscribe((data: any) => {
       var wnd = window.open('/invoice/show/' + data.id + '/pdf');
       wnd.print();
       this.unlock();
@@ -157,7 +157,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   saveAndDownload() {
     this.disabledSaveBtns();
-    this.billableService.create(this.invoice.getDatForCreate(false)).subscribe((invoice: any) => {
+    this.billableService.create(this.invoice.getDatForCreate(false, this.company)).subscribe((invoice: any) => {
       this.appService.download(`/invoice/show/${invoice.id}/pdf`, `${this.invoice.invoiceDataDto.companyName}-${this.invoiceNumber}.pdf`);
       this.unlock();
       this.activeSaveBtns();

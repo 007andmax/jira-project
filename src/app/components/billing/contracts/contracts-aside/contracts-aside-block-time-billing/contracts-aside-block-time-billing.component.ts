@@ -8,7 +8,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { TehUsersSateService } from 'src/app/components/shared/teh-users/services/teh-users-sate.service';
+import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
@@ -22,6 +22,7 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -35,7 +36,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -48,7 +49,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   toggleContractServices: boolean = false;
   toggleTimeRollover: boolean = false;
   toggleNotifyAgentsUser: boolean = false;
-
   selectedUsers = [];
   userList = [];
   taxes: Array<Tax> = [];
@@ -60,7 +60,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
     private defaultServicesService: DefaultServicesService,
-    private tehState: TehUsersSateService,
+    private techState: TechUsersStateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
     private contractsListService: ContractsListService,
@@ -132,12 +132,12 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
 
   }
   selectAllUsers() {
-    this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
+    this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
     this.selectedUsers = JSON.parse(JSON.stringify(this.userList));
     this.contractsBlockTime.setShares(this.selectedUsers.map(item => new СontractsBlockTimeShare(item.id)));
   }
   clearAllSelectedUsers() {
-    this.tehState.onInitClear();
+    this.techState.onInitClear();
     this.selectedUsers = [];
     this.contractsBlockTime.setShares([]);
   }
@@ -309,7 +309,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsBlockTime.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);

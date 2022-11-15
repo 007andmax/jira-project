@@ -4,25 +4,22 @@
 >
     <input
         type="text"
-        class="time start"
+        class="time start qt-input-block__input"
         [ngClass]="{'--input-error':!validate}"
     >
     <input
         *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
         type="text"
-        class="time end"
+        class="time end qt-input-block__input"
         [ngClass]="{'--input-error':! validate}"
     >
-    <mat-error
-        class="qt-tooltip-error --max-width"
-        *ngIf="!validate"
-        [textContent]="errorMessage"
-    >
-
-
-
-    </mat-error>
 </p>
+<mat-error
+  class="invalid-feedback --pos-static"
+  *ngIf="!validate"
+  [textContent]="errorMessage"
+>
+</mat-error>
 <p
     *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
     class="start-end-timer"

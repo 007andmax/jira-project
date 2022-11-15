@@ -19,6 +19,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   @Input() title: string;
   @Input() placeholder: string;
   list: Array<PasswordDeviceUser> = [];
+  preloader: boolean = true;
   @Output() onChange = new EventEmitter<any>();
   companies: Array<Company> = [];
   constructor(private usersStateService: UsersStateService,
@@ -28,7 +29,17 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     private devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
+    if (this.devicesStateService.getAllDevices()) this.preloader = false;
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.preloader = false;
+      this.list = [];
+      this.onGetList();
+    })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    this.list = [];
+    this.onGetList();
+  }
+  onGetList() {
     if (this.type === 'USERS') {
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);

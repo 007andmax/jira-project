@@ -9,10 +9,6 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
-
     <div class="qt-aside-modern__content">
         <div class="qt-w100 qt-mb-16">
             <div
@@ -34,10 +30,6 @@
                 </mat-error>
             </div>
         </div>
-
-
-
-
         <div class="qt-df">
             <div class="qt-w50 qt-mb-16 qt-mr-16">
                 <div
@@ -61,10 +53,6 @@
                     </mat-error>
                 </div>
             </div>
-
-
-
-
             <div class="qt-w50 qt-mb-16">
                 <div class="create-product-taxes-select">
                     <app-taxes
@@ -75,15 +63,11 @@
                 </div>
             </div>
         </div>
-
-
-
-
         <div class="qt-df">
             <div class="qt-w100 qt-mb-16">
                 <div class="qt-input-block">
                     <label>GL Number</label>
-                    <app-select-search
+                    <app-drop-down
                         [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
                         [list]="glNumbers"
                         #glNumberSelect
@@ -92,17 +76,13 @@
                         [editItem]="service.glNumber"
                         [add]="true"
                         [field]="'glNumber'"
-                        [formatter]="glDropDownItemName"
+                        [reducerItem]="glDropDownItemName"
                         (onAddItem)="onAddGlNumber($event)"
                         (onSelectedItem)="onSelectGlNumbers($event)"
-                    ></app-select-search>
+                    ></app-drop-down>
                 </div>
             </div>
         </div>
-
-
-
-
         <div class="qt-df qt-ai-c">
             <label
                 class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
@@ -115,17 +95,9 @@
                 >
                 <span></span>
             </label>
-
-
-
-
             <div class="qt-fs-12 qt-ml-5">Make this service billable</div>
         </div>
     </div>
-
-
-
-
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button

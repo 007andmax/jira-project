@@ -1,169 +1,182 @@
 <div
     class="cmn-area outgoing-email"
     *ngIf="smtp"
+    [hidden]="loading"
 >
-    <p>
-        You can specify a custom outgoing email service if you prefer to use your
-    own, or you can use our quicktech email servers. If you select customer
-    mails servers this is only for outgoing, you still need to forward your
-    email to the above incoming email address.
-    </p>
-    <form
-        [formGroup]="smtpForm"
-        (ngSubmit)="saveSMTP(smtpForm,undefined)"
-    >
-        <div class="f-row">
-            <div class="f-col col-50">
-                <label *ngIf="!submitted || !smtpForm.controls['emailAlias'].errors">Alias Name</label>
-                <div
-                    *ngIf="submitted && smtpForm.controls['emailAlias'].errors"
-                    class="invalid-feedback"
-                >
-                    <div *ngIf="smtpForm.controls['emailAlias'].errors.required">Email Alias is required</div>
-                    <div *ngIf="smtpForm.controls['emailAlias'].errors.minlength">Email Alias is too short.</div>
-                    <div *ngIf="smtpForm.controls['emailAlias'].errors.maxlength">Email Alias is too large.</div>
-                </div>
-                <div class="form-row">
-                    <input
-                        type="text"
-                        class="form-input"
-                        [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['emailAlias'].errors }"
-                        placeholder="Enter Alias Name"
-                        formControlName="emailAlias"
-                        (blur)="saveEmailAlias()"
-                    >
-                </div>
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Incoming Email</div>
+    </div>
+    <div class="tab-pane__body">
+        <div class="tab-pane__row">
+            <div class="tab-pane-input__row company-info-block">
+                <div class="icon__company-info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+                <span class="qt-f-1">
+                    You can specify a custom outgoing email service if you prefer to use your
+        own, or you can use our quicktech email servers. If you select customer
+        mails servers this is only for outgoing, you still need to forward your
+        email to the above incoming email address.
+                </span>
             </div>
-            <div class="f-col col-50">
-                <label>Outgoing mail server</label>
-                <div class="form-row">
-                    <select
-                        class="cmn-select form-input"
-                        formControlName="usedEmailVia"
-                        (change)="changeEmailVia()"
-                    >
-                        <option
-                            *ngFor="let email of emailVia"
-                            value="{{ email.label }}"
+        </div>
+        <form [formGroup]="smtpForm">
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Alias Name</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <input
+                            type="text"
+                            class="form-input"
+                            [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['emailAlias'].errors }"
+                            placeholder="Enter Alias Name"
+                            formControlName="emailAlias"
+                            (blur)="saveEmailAlias()"
                         >
-                            {{
-              email.label
-            }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="f-col col-50">
-                <label *ngIf="!submitted || !smtpForm.controls['domain'].errors">Domain</label>
-                <div
-                    *ngIf="submitted && smtpForm.controls['domain'].errors"
-                    class="invalid-feedback"
-                >
-                    <div *ngIf="smtpForm.controls['domain'].errors.required">domain is required</div>
-                    <div *ngIf="smtpForm.controls['domain'].errors.Pattern">Please enter a valid domain.</div>
-                </div>
-                <div class="form-row">
-                    <input
-                        type="text"
-                        class="form-input"
-                        placeholder="Enter Domain"
-                        [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['domain'].errors }"
-                        formControlName="domain"
-                    >
-                </div>
-            </div>
-            <div class="f-col col-25">
-                <label *ngIf="!submitted || !smtpForm.controls['port'].errors">Port</label>
-                <div
-                    *ngIf="submitted && smtpForm.controls['port'].errors"
-                    class="invalid-feedback"
-                >
-                    <div *ngIf="smtpForm.controls['port'].errors.required">port is required</div>
-                    <div *ngIf="smtpForm.controls['port'].errors.min">Value must be greater then 0.</div>
-                    <div *ngIf="smtpForm.controls['port'].errors.max">Value must be smaller then 65535.</div>
-                </div>
-                <div class="form-row">
-                    <input
-                        type="number"
-                        class="form-input"
-                        placeholder="Enter Port"
-                        formControlName="port"
-                        [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['port'].errors }"
-                    >
-                </div>
-            </div>
-            <div class="f-col col-25">
-                <label>Encryption</label>
-                <div class="form-row">
-                    <select
-                        class="cmn-select form-input"
-                        formControlName="encryptionType"
-                        (change)="changeEncryption($event.target.value)"
-                    >
-                        <option value="NONE">PLAIN</option>
-                        <option value="TLS">TLS</option>
-                        <option value="SSL">SSL</option>
-                    </select>
-                </div>
-            </div>
-            <div class="f-col col-50">
-                <label *ngIf="(!submitted || !smtpForm.controls['login'].errors) && isSMTPLoginUnique">Login</label>
-                <div
-                    *ngIf="submitted && smtpForm.controls['login'].errors"
-                    class="invalid-feedback"
-                >
-                    <div *ngIf="smtpForm.controls['login'].errors.required">Login is required</div>
-                    <div *ngIf="smtpForm.controls['login'].errors.pattern">Please enter a valid email address.</div>
-                    <div *ngIf="smtpForm.controls['login'].errors.maxlength">Email mustn't be greater then 128 chars</div>
-                </div>
-                <label *ngIf="!isSMTPLoginUnique">Login is not unique</label>
-                <div class="form-row">
-                    <input
-                        type="text"
-                        class="form-input"
-                        placeholder="Enter Login Details"
-                        formControlName="login"
-                        (blur)="checkSMTPLoginUnique()"
-                    >
-                </div>
-            </div>
-            <div class="f-col col-50">
-                <label *ngIf="!submitted || !smtpForm.controls['password'].errors">Password</label>
-                <div
-                    *ngIf="submitted && smtpForm.controls['password'].errors"
-                    class="invalid-feedback"
-                >
-                    <div *ngIf="smtpForm.controls['password'].errors.required">Password is required</div>
-                </div>
-                <div class="form-row password">
-                    <input
-                        type="{{ showPassword ? 'text' : 'password' }}"
-                        class="form-input"
-                        placeholder="Enter password"
-                        formControlName="password"
-                    >
-                    <a
-                        href="javascript:;"
-                        class="password-co"
-                        (click)="showPassword = !showPassword"
-                        [hidden]="!smtp.password"
-                    >
-                        <img
-                            *ngIf="!showPassword"
-                            src="/html/assets/img/password-show-old.svg"
-                            alt="password"
+                        <div
+                            *ngIf="submitted && smtpForm.controls['emailAlias'].errors"
+                            class="invalid-feedback"
                         >
-                        <img
-                            *ngIf="showPassword"
-                            src="/html/assets/img/password-show.svg"
-                            alt="password"
-                        >
-                    </a>
+                            <div *ngIf="smtpForm.controls['emailAlias'].errors.required">Email Alias is required</div>
+                            <div *ngIf="smtpForm.controls['emailAlias'].errors.minlength">Email Alias is too short.</div>
+                            <div *ngIf="smtpForm.controls['emailAlias'].errors.maxlength">Email Alias is too large.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="f-col col-50 send-test-email">
-                <div class="qt-df qt-mb-16">
-                    <div class="qt-df">
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Outgoing mail server</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="emailVia"
+                                [editItem]="usedEmailVia"
+                                [field]="'label'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="changeEmailVia($event)"
+                            >
+                            </app-drop-down>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Domain Settings</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block domain-input-block qt-mr-24">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Domain"
+                            [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['domain'].errors }"
+                            formControlName="domain"
+                        >
+                        <div
+                            *ngIf="submitted && smtpForm.controls['domain'].errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="smtpForm.controls['domain'].errors.required">domain is required</div>
+                            <div *ngIf="smtpForm.controls['domain'].errors.Pattern">Please enter a valid domain.</div>
+                        </div>
+                    </div>
+                    <div class="qt-input-block port-input-block qt-mr-24">
+                        <input
+                            type="number"
+                            class="form-input"
+                            placeholder="Enter Port"
+                            formControlName="port"
+                            [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['port'].errors }"
+                        >
+                        <div
+                            *ngIf="submitted && smtpForm.controls['port'].errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="smtpForm.controls['port'].errors.required">port is required</div>
+                            <div *ngIf="smtpForm.controls['port'].errors.min">Value must be greater then 0.</div>
+                            <div *ngIf="smtpForm.controls['port'].errors.max">Value must be smaller then 65535.</div>
+                        </div>
+                    </div>
+                    <div class="qt-input-block encryption-input-block">
+                        <div class="qt-w100">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [list]="encryptionTypes"
+                                [editItem]="encryptionType"
+                                [field]="'type'"
+                                [sort]="false"
+                                [isBlockClear]="true"
+                                (onSelectedItem)="changeEncryption($event.type)"
+                            >
+                            </app-drop-down>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Login Details</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block qt-mr-24">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Login Details"
+                            formControlName="login"
+                            (blur)="checkSMTPLoginUnique()"
+                        >
+                        <div
+                            *ngIf="submitted && smtpForm.controls['login'].errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="smtpForm.controls['login'].errors.required">Login is required</div>
+                            <div *ngIf="smtpForm.controls['login'].errors.pattern">Please enter a valid email address.</div>
+                            <div *ngIf="smtpForm.controls['login'].errors.maxlength">Email mustn't be greater then 128 chars</div>
+                        </div>
+                        <label *ngIf="!isSMTPLoginUnique">Login is not unique</label>
+                    </div>
+                    <div class="qt-input-block">
+                        <div class="qt-df">
+                            <input
+                                type="{{ showPassword ? 'text' : 'password' }}"
+                                class="qt-input-afterpend"
+                                placeholder="Enter password"
+                                formControlName="password"
+                            >
+                            <div
+                                class="qt-input-afterfix pointer"
+                                (click)="showPassword = !showPassword"
+                            >
+                                <div
+                                    class="qt-sz-16 qt-bg-contain "
+                                    [ngClass]="{'icon__hide': showPassword,
+                    'icon__view': !showPassword}"
+                                ></div>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="submitted && smtpForm.controls['password'].errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="smtpForm.controls['password'].errors.required">Password is required</div>
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        class="qt-button --gray qt-jc-c qt-w100 qt-mt-16"
+                        appDisabledBtn
+                        #testServerBtn="disabled"
+                        (onClick)="checkTestServer()"
+                    >
+                        <span class="icon__button-server--gray-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        <span *ngIf="!testServerBtn.isBlock()">Test Server</span>
+                        <app-preloader-ticket *ngIf="testServerBtn.isBlock()"></app-preloader-ticket>
+                    </button>
+                </div>
+            </div>
+            <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Send test Email</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
                         <div
                             class="qt-toggle qt-mr-8"
                             [ngClass]="{'--on':smtp.sendTestEmail}"
@@ -171,65 +184,43 @@
                         >
                             <div class="qt-toggle__circle"></div>
                         </div>
-                        <div>
-                            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Send test email</div>
-                        </div>
                     </div>
                 </div>
-                <div
-                    class="col-100"
-                    *ngIf="smtp.sendTestEmail"
-                >
-                    <label>Test email</label>
-                    <div
-                        *ngIf="submitted && smtpForm.controls['testEmail'].errors"
-                        class="invalid-feedback"
-                    >
-                        <div *ngIf="smtpForm.controls['testEmail'].errors.required">Test email is required</div>
-                        <div *ngIf="smtpForm.controls['testEmail'].errors.minlength">Email Alias is too short.</div>
-                        <div *ngIf="smtpForm.controls['testEmail'].errors.maxlength">Email Alias is too large.</div>
-                        <div *ngIf="smtpForm.controls['testEmail'].errors.pattern">Please enter a valid Email.</div>
-                    </div>
-                    <div class="form-row">
+            </div>
+            <div
+                class="tab-pane__row"
+                *ngIf="smtp.sendTestEmail"
+            >
+                <div class="tab-pane__subtitle">Test email</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
                         <input
                             type="text"
                             class="form-input"
-                            placeholder="Enter Domain"
+                            placeholder="Enter testing email"
                             [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['testEmail'].errors }"
                             formControlName="testEmail"
                         >
+                        <div
+                            *ngIf="submitted && smtpForm.controls['testEmail'].errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="smtpForm.controls['testEmail'].errors.required">Test email is required</div>
+                            <div *ngIf="smtpForm.controls['testEmail'].errors.minlength">Email Alias is too short.</div>
+                            <div *ngIf="smtpForm.controls['testEmail'].errors.maxlength">Email Alias is too large.</div>
+                            <div *ngIf="smtpForm.controls['testEmail'].errors.pattern">Please enter a valid Email.</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="f-col col-50 test-server">
-                <!-- <a href="javascript:;" class="btn-outline" >Test Server</a> -->
-                <button
-                    type="button"
-                    class="btn-outline"
-                    appDisabledBtn
-                    #testServerBtn="disabled"
-                    (onClick)="checkTestServer()"
-                >
-                    <span *ngIf="!testServerBtn.isBlock()">Test Server</span>
-                    <app-preloader-ticket *ngIf="testServerBtn.isBlock()"></app-preloader-ticket>
-                </button>
-                <!-- disabled="{{ !smtp.useSMTP || smtpForm.invalid || !smtp.isValid }}" -->
-            </div>
-        </div>
-        <input
-            type="submit"
-            class="btn btn-primary"
-            value="Save Changes"
-        >
-    </form>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
+        </form>
+    </div>
 </div>
 <div
     class="sidebar-popup"
     *ngIf="create"
     [ngClass]="{'opened':create}"
 >
-    <!-- header -->
     <div class="sidebar-header">
         <a
             class="close"
@@ -292,4 +283,10 @@
             </div>
         </form>
     </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
 </div>

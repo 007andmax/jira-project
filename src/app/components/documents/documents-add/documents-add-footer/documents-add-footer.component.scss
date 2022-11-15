@@ -1,9 +1,9 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     cursor: default !important;
-    color: $gray-600;
+    color: $gray-600--old;
 }
 .disabled-add-document {
     background-color: #96d4fa;

@@ -73,7 +73,10 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
         if (findIndex > -1) {
           this.list[findIndex] = new ContractItem(data.data);
         } else {
-          if (this.filter.checkFilterItem(data.data)) this.list.push(new ContractItem(data.data));
+          if (this.filter.checkFilterItem(data.data)) {
+            this.list.push(new ContractItem(data.data));
+            this.filter.onSortList(this.list);
+          }
         }
 
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {

@@ -32,43 +32,53 @@
         </div>
         <div class="col-md-12">
             <p>GL Number</p>
-            <app-select-search
+            <app-drop-down
                 [class]="['light-dropdown']"
                 [list]="glNumbers"
                 #glNumberSelect
                 [add]="true"
                 [field]="'glNumber'"
-                [formatter]="formatterGLNumber"
+                [reducerItem]="formatterGLNumber"
                 [placeholder]="'Select GL'"
                 [editItem]="inventory.glNumber"
                 (onAddItem)="onAddGlNumber($event)"
                 (onSelectedItem)="onSelectGlNumbers($event)"
-            ></app-select-search>
+            ></app-drop-down>
         </div>
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getDescription()">Description is required</mat-error>
             <p>Description</p>
-            <div
+            <!-- <div
                 placeholder="Write Product Description"
-                aria-placeholder="Write Product Description"
                 contenteditable="true"
                 id="inventory-description"
                 placeholder="Enter description here"
-            ></div>
+                (input)="onChangeDescription($event)"
+                (onPast)="onPastDescription($event)"
+            ></div> -->
+            <textarea
+                appTextArea
+                [limit]="160"
+                id="inventory-description"
+                placeholder="Write Product Description"
+                (input)="onChangeDescription($event)"
+                (onPast)="onPastDescription($event)"
+            ></textarea>
         </div>
-        <div
-            class="col-md-6"
-            *ngIf="!validate.getCostSale()"
-        >
-            <mat-error *ngIf="!validate.getCostSale()">Cost cannot be higher than Price</mat-error>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-4 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getCostSale()"
+            >
+                Cost cannot be higher than Price
+            </mat-error>
             <p>Cost</p>
             <input
                 type="text"
                 decimalNumber
                 [useFixed]="true"
                 appToFixed
+                [ngClass]="{'--input-error' : !validate.getCostSale()}"
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
                 [value]="inventory.cost"
                 (onChange)="onChangeCost($event)"
@@ -80,6 +90,7 @@
             <input
                 type="text"
                 decimalNumber
+                (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
                 (onChange)="changeMarkup($event)"
                 [value]="inventory.markup"
                 placeholder="Enter Cost"
@@ -100,9 +111,12 @@
                 placeholder="Enter Price"
             >
         </div>
-        <div class="qt-inputs-row col-md-12 taxes-container">
+        <div class="qt-inputs-row col-md-12 qt-mt-17">
             <div class="create-product-taxes-select qt-flex-md-100">
-                <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+                <app-taxes
+                    #taxesDp
+                    (taxesChange)="onTaxesChange($event)"
+                ></app-taxes>
             </div>
         </div>
         <div class="col-md-12">
@@ -127,7 +141,7 @@
         </div>
         <div class="col-md-12">
             <p>Suppliers</p>
-            <app-select-search
+            <app-drop-down
                 [class]="['light-dropdown']"
                 [list]="suppliers"
                 #suppliersSelect
@@ -135,15 +149,15 @@
                 [placeholder]="'Select Supplier'"
                 [editItem]="editSupplier"
                 (onSelectedItem)="onSelectSupplier($event)"
-            ></app-select-search>
+            ></app-drop-down>
         </div>
         <div class="col-md-12 qt-df qt-ai-c">
             <label
                 class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                for="inventory-active"
+                for="inventory-edit-active"
             >
                 <input
-                    id="inventory-active"
+                    id="inventory-edit-active"
                     type="checkbox"
                     [(ngModel)]="inventory.active"
                 >

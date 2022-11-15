@@ -55,7 +55,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
   }
   showAgentLink() {
     if (!this.appService.checkMobile()) return;
-    const modalRef = this.modalService.open(ModalAgentLinkComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ModalAgentLinkComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.devices = this.getDevicesByCompany();
     modalRef.componentInstance.ticketProfile = this.ticketProfile;
 
@@ -96,13 +96,13 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
   moveToTrash(movedWay) {
     this.movedWay = movedWay;
     this.confirmStateService.setConfirmAction(MOVE_TO_TRASH_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to move the ticket to Trash?`;
   };
 
   moveIntoSpam() {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to mark the ticket as spam?`;
   }
   ngOnDestroy(): void {

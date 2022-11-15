@@ -12,13 +12,14 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsBlockTimeValidate } from '../../contracts-aside/class/contracts-block-time-validate';
 import * as moment from "moment";
-import { TehUsersSateService } from 'src/app/components/shared/teh-users/services/teh-users-sate.service';
+import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { СontractsBlockTimeShare } from '../../contracts-aside/class/contracts-block-time-share';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { Subscription } from 'rxjs';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 
 @Component({
@@ -27,7 +28,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit {
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
@@ -53,7 +54,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     private contractsService: ContractsService,
     private taxesStateService: TaxesStateService,
     private usersStateService: UsersStateService,
-    private tehState: TehUsersSateService,
+    private techState: TechUsersStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     private contractsStateService: ContractsStateService,
@@ -140,11 +141,11 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
 
   }
   selectAllUsers() {
-    this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
+    this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
     this.selectedUsers = JSON.parse(JSON.stringify(this.userList));
   }
   clearAllSelectedUsers() {
-    this.tehState.onInitClear();
+    this.techState.onInitClear();
     this.selectedUsers = [];
   }
   getMinStartDate(interval, startDate) {
@@ -270,7 +271,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
   }
   ngOnDestroy(): void {

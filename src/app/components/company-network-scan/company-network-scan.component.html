@@ -70,24 +70,23 @@
                         <div class="circle-number__inner">2</div>
                     </div>
                     <div class="network-step__title">Select Device</div>
-                <div class="network-step__text-cred qt-mb-15">
-                    <span>You have using below credentials:</span>
-                    <br>
-                    <span
-                        class="qt-fw-600"
-                        [textContent]="networkScanInstallAgent.getCredentialText()"
-                    ></span>
-                </div>
+                    <div class="network-step__text-cred qt-mb-15">
+                        <span>You have using below credentials:</span>
+                        <br>
+                        <span
+                            class="qt-fw-600"
+                            [textContent]="networkScanInstallAgent.getCredentialText()"
+                        ></span>
+                    </div>
                 </div>
                 <button
-                class="qt-button "
-                [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
-                (click)="openAside()"
-                [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
-                [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
-            >
-            </button>
-                
+                    class="qt-button "
+                    [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
+                    (click)="openAside()"
+                    [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
+                    [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
+                >
+                </button>
             </div>
             <div class="network-step">
                 <div class="circle-number qt-mb-8">
@@ -106,7 +105,7 @@
                     Install Agent
                 </button>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="network-scan-page__table-container">
         <div
@@ -197,8 +196,10 @@
                             </label>
                         </div>
                     </td>
-                    <td class="network-scan-table__device-name"
-                       [textContent]="network.HostName">
+                    <td
+                        class="network-scan-table__device-name"
+                        [textContent]="network.HostName"
+                    >
                     </td>
                     <td
                         class="network-scan-table__os"
@@ -216,15 +217,15 @@
                         class="network-scan-table__mac-address"
                         [textContent]="network.MacAddress"
                     ></td>
-                    <td
-                        class="network-scan-table__status"                        
-                    >
-                    <div class="qt-df qt-fd-c">                              
-                        <span *ngIf="network.IsAgentInstalled" class="network-status qt-ff-gm"
-                        [textContent]="'MANAGED'"
-                        ></span>                        
-                      <span></span>          
-                  </div>                   
+                    <td class="network-scan-table__status">
+                        <div class="qt-df qt-fd-c">
+                            <span
+                                *ngIf="network.IsAgentInstalled"
+                                class="network-status qt-ff-gm"
+                                [textContent]="'MANAGED'"
+                            ></span>
+                            <span></span>
+                        </div>
                     </td>
                     <td class="network-scan-table__delete">
                         <button
@@ -232,10 +233,14 @@
                             (click)="AddAsset(network)"
                             *ngIf="network.IsAgentInstalled ==false && network.OperatingSystem != 'Windows'"
                         >
-                            <span class="icon__add-white qt-sz-16 qt-bg-contain qt-dib qt-va-m" title="Add"></span>                                                                                    
+                            <span
+                                class="icon__add-white qt-sz-16 qt-bg-contain qt-dib qt-va-m"
+                                title="Add"
+                            ></span>
                         </button>
                     </td>
                 </tr>
+
 
 
             </tbody>
@@ -263,20 +268,3 @@
     >
     </app-network-scan-credentials-aside>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

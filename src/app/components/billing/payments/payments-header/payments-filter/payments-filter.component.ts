@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { PaymentsFilter } from '../../class/payments-filter';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
 import { Subscription } from 'rxjs';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-payments-filter',
@@ -13,10 +14,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   styleUrls: ['./payments-filter.component.scss']
 })
 export class PaymentsFilterComponent implements OnInit {
-
-  companies = [];
-  @ViewChild('companyDp') companyDp: SelectSearchComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
@@ -27,20 +26,11 @@ export class PaymentsFilterComponent implements OnInit {
     private paymentsStateService: PaymentsStateService) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
   }
   onSelectStatus(status) {
     this.paymentsFilter.setStatus((status) ? status.value : null);
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
-  }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onClearAll() {
     this.companyDp.clearWithOutChanges();

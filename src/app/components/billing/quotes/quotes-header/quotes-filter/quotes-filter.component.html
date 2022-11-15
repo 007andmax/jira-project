@@ -1,15 +1,15 @@
 <div class="qt-df qt-ai-c">
-    <app-select-search
+    <company-drop-down
         class="search-company quotes-company-filter"
         #companyDp
         [placeholder]="'Select Company'"
-        [change]="false"
+        [change]="true"
+        [search]="true"
         [class]="['qt-dropdown']"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-select-search>
-    <app-select-search
+    ></company-drop-down>
+    <app-drop-down
         class="search-company quotes-status-filter"
         #statusDp
         [placeholder]="'Sort by Status'"
@@ -18,10 +18,9 @@
         [field]="'title'"
         [list]="statusTypes"
         (onSelectedItem)="onSelectStatus($event)"
-    ></app-select-search>
+    ></app-drop-down>
     <input
         type="text"
-        (blur)="onSetNumberQuote($event)"
         appKeyUpEnter
         (onChange)="onSetNumberQuote($event)"
         placeholder="Enter Quote #"

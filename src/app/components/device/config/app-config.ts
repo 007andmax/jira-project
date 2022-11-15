@@ -28,7 +28,7 @@ export const CONFIG = {
 
   // ANTIVIRUS
   getAllAntivirusListURL: BASE_URL + DEVICE + '/get_hardware',
-  
+
   // TERMINAL
   getAllTerminalListURL: BASE_URL + DEVICE + '/get_hardware',
 
@@ -39,7 +39,7 @@ export const CONFIG = {
   getAllTicketListURL: BASE_URL + 'v2/tickets/getTickets?listType=ALL',
   getActualNumberURL: BASE_URL + 'data/actualNumber?type=TICKET',
   getAllCompanyCLientURL: BASE_URL + 'company/clients',
-  getAllUsersURL: BASE_URL + 'users',
+  getAllUsersURL: BASE_URL + 'users/filter',
   createTicketURL: BASE_URL + API_V2 + '/tickets',
 
   // REMOTE CONTROL
@@ -59,7 +59,7 @@ export const CONFIG = {
   deleteCategoryURL: BASE_URL + 'cmdCommands/categories/delete/',
   updateCategoryURL: BASE_URL + 'cmdCommands/categories/edit/',
   deleteCommandURL: BASE_URL + 'cmdCommands/delete/',
-  getHistoryURL: BASE_URL + DEVICE+ '/cmdHistory/',
+  getHistoryURL: BASE_URL + DEVICE + '/cmdHistory/',
   sendCommandURL: BASE_URL + DEVICE + '/cmd',
   cloneCommandURL: BASE_URL + 'cmdCommands/clone/',
 

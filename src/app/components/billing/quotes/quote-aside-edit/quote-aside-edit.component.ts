@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Vie
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { QUOTE_MODAL_ACTION_EDIT } from 'src/app/const/quote';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
@@ -64,7 +64,7 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
   saveAndSend() {
     let quote: QuoteEdit = this.quoteEdit.getQuote();
     if (!this.quoteEdit.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
     let data = JSON.parse(JSON.stringify(quote.getDataForUpdate(true)));
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.action = QUOTE_MODAL_ACTION_EDIT;

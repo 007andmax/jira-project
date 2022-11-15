@@ -70,7 +70,7 @@
                 ngbDropdownItem
                 (click)="resend()"
             >
-                <div class="icon__email-dark qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Resend quote
             </li>
             <li
@@ -78,7 +78,7 @@
                 ngbDropdownItem
                 (click)="downloadPdf()"
             >
-                <div class="icon__download-pdf qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Export as PDF
             </li>
             <li
@@ -87,7 +87,7 @@
                 (click)="convertToInvoice()"
                 *ngIf="checkStatus(quote, ['APPROVED'])"
             >
-                <div class="icon__convert-invoice qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__convert-invoice qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Convert to Invoice
             </li>
             <li
@@ -96,7 +96,7 @@
                 (click)="convertToTicket()"
                 *ngIf="checkStatus(quote, ['APPROVED'])"
             >
-                <div class="icon__convert-ticket qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__convert-ticket qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Convert to Ticket
             </li>
             <li
@@ -105,7 +105,7 @@
                 (click)="approveQuote()"
                 *ngIf="checkStatus(quote, ['SAVED', 'READ', 'EXPIRED', 'UNREAD'])"
             >
-                <div class="icon__approve-quote qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__approve-quote qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Approve a quote
             </li>
             <li
@@ -114,7 +114,7 @@
                 (click)="markAsRead()"
                 *ngIf="checkStatus(quote, ['UNREAD'])"
             >
-                <div class="icon__mark-as-read qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Mark as Read
             </li>
             <li
@@ -123,7 +123,7 @@
                 (click)="cancelQuote()"
                 *ngIf="checkStatus(quote, ['READ','UNREAD'])"
             >
-                <div class="icon__uninstall qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__uninstall qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Cancel quote
             </li>
             <li
@@ -132,7 +132,7 @@
                 (click)="archiveQuote()"
                 *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
             >
-                <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Archive a quote
             </li>
             <li
@@ -141,7 +141,7 @@
                 (click)="convertToBillable()"
                 *ngIf="checkStatus(quote, [ 'APPROVED'])"
             >
-                <i class="icn-16 convert-to-billable-ng2 qt-mr-8"></i>
+                <i class="convert-to-billable-ng2 qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Convert to billable item
             </li>
             <li
@@ -150,7 +150,7 @@
                 (click)="goToQuoteEdit()"
                 *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
             >
-                <i class="icn-16 edit-grey-ng2 qt-mr-8"></i>
+                <i class="icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></i>
                 Edit a quote
             </li>
             <li
@@ -158,7 +158,7 @@
                 ngbDropdownItem
                 (click)="copy()"
             >
-                <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                <div class="icon__copy qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Copy a quote
             </li>
         </ul>

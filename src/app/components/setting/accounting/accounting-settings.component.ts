@@ -3,7 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_LIST_GL_NUMBERS } from 'src/app/const/confirm';
-
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -11,6 +10,11 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 import { GlNumberService } from './gl-number/gl-number.service';
 import { InvoiceTicketsService } from './accounting-settings.service';
+import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
+import { AccountingYearComponent } from './accounting-year/accounting-year.component';
+import { TaxesSettingsComponent } from './taxes/taxes.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 declare var $: any;
 @Component({
   selector: 'app-accounting-settings',
@@ -18,7 +22,12 @@ declare var $: any;
   styleUrls: ['./accounting-settings.component.scss']
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {
+  @ViewChild('invoiceSettings') invoiceSettings: InvoiceSettingsComponent;
+  @ViewChild('quotesSettings') quotesSettings: QuotesSettingsComponent;
+  @ViewChild('accountingYear') accountingYear: AccountingYearComponent;
+  @ViewChild('taxesSettings') taxesSettings: TaxesSettingsComponent;
   loading = false;
+  toggleAddTax: boolean = false;
   activeTab: string = "invoiceSettings";
   sub: Subscription = new Subscription();
   @ViewChild('glNumber') glNumber: GlNumberSettingsComponent;
@@ -28,10 +37,11 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private glNumberService: GlNumberService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
 
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
@@ -46,7 +56,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
     this.sub.unsubscribe();
   }
 
@@ -67,9 +77,18 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
         }
       );
   }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  onSubmit() {
+    if (this.invoiceSettings) this.invoiceSettings.onSubmit();
+    if (this.quotesSettings) this.quotesSettings.onSubmit();
+    if (this.accountingYear) this.accountingYear.saveAccountingDate();
+
+  }
   removeGls() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_GL_NUMBERS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Income Account Number`;
   }
   getSelectedCount() {

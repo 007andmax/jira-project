@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ProductService } from 'src/app/services/product/product.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketProfileProduct } from '../../../class/ticket-profile-product';

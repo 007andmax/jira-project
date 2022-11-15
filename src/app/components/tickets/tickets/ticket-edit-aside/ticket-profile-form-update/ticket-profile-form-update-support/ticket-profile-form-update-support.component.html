@@ -129,12 +129,13 @@
     >
         <span [innerHTML]="getMessage()"></span>
     </div>
-    <div
-        class="qt-btn --btn40h cps-block__create-connection-btn"
+    <a
+        href="javascript:;"
+        class="qt-button cps-block__create-connection-btn"
         *ngIf="!item"
         (click)="create()"
     >
-        <div class="qt-sz-16 icon__plus-white qt-mr-4"></div>
+        <div class="qt-sz-16 icon__add--white qt-mr-8"></div>
         <span>Create Connection</span>
-    </div>
+    </a>
 </div>

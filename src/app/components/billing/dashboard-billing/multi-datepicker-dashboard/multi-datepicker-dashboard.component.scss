@@ -1,9 +1,9 @@
 @import './src/assets/styles/variable';
 
 .disabled {
-    background-color: $gray-400;
+    background-color: $gray-400--old;
     cursor: default !important;
 }
-.icn-calendar-light {
+.icon__calendar {
     pointer-events:all;
 }

@@ -26,7 +26,7 @@
     &__icon {
         padding: 8px;
         border-radius: 8px;
-        background-color: $gray-200;
+        background-color: $gray-200--old;
         display: inline-block;
     }
 
@@ -47,12 +47,12 @@
         margin-left: 8px;
         margin-right: 4px;
         font-weight: $fw-medium;
-        color: $gray-700;
+        color: $gray-700--old;
     }
 
     &__description {
         @include body-m;
-        color: $gray-700;
+        color: $gray-700--old;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

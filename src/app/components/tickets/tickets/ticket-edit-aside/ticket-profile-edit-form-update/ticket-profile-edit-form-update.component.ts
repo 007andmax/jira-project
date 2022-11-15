@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DraftEmail } from 'src/app/components/shared/draft-email/class/draft-email';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { USERS_TO_EDIT_UPDATE } from 'src/app/const/add-users-notify';
@@ -21,6 +21,11 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
   service: TicketProfileService;
   note: TicketProfileUpdate;
   updateId: string;
+  @Input() set ticket(value) {
+    this.ticketProfile = value;
+    this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
+    this.addCreatedUser();
+  };
 
   ngOnInit() {
     this.tab = null;

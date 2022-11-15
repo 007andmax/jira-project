@@ -6,7 +6,7 @@ import { ContractsAsideBlockTimeEditComponent } from './contracts-aside-block-ti
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-device-edit/contracts-aside-user-device-edit.component';
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-contracts-edit',

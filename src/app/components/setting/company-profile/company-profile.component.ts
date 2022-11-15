@@ -4,7 +4,8 @@ import {
   ViewChild,
   ElementRef,
   NgZone,
-  OnDestroy
+  OnDestroy,
+  ViewContainerRef
 } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 import {
@@ -25,6 +26,9 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
+import { WORK_HOURS } from 'src/app/const/time';
 
 declare var google: any;
 declare var $: any;
@@ -34,6 +38,7 @@ declare var $: any;
   styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit, OnDestroy {
+  tabSet: string = "tab1";
   cProfileForm: FormGroup;
   accForm: FormGroup;
   workingHoursForm: FormGroup;
@@ -50,7 +55,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   fileAvatar: any;
   imageBase64 = '';
   fromGoogle = false;
-  public loading = false;
+  public loading = true;
   public currentCompany: any;
   cProfile = {
     address: [],
@@ -59,6 +64,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     timeSettings: { workingDays: [], outliersSeconds: 0 },
     supportMailBox: ''
   };
+  primaryPhone: string = '';
+  secondaryPhone: string = '';
   weekDays = [
     'MONDAY',
     'TUESDAY',
@@ -95,6 +102,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   phone: string;
   idUploadFile: string;
+  phoneTypes = [new TitleListType("Mobile", "MOBILE"),
+  new TitleListType("Office", "OFFICE"),
+  new TitleListType("Fax", "FAX")];
+  workHours = WORK_HOURS;
+  secondaryPhoneType;
+  primaryPhoneType;
   constructor(
     private companyProfileService: CompanyProfileService,
     private toaster: ToastrService,
@@ -113,7 +126,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.cProfile = {
       address: [],
@@ -142,6 +155,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.settingStateService.setComponentName('CompanyProfileComponent');
     this.onCroppImage();
   }
+  public setTab(data) {
+    this.tabSet = data['nextId'];
+  }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -164,7 +180,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
 
   getAddress(place: object) {
@@ -236,18 +252,42 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       });
     }
   }
+  onChangePrimaryPhoneType(data) {
+    this.primaryPhoneType = data;
+    this.cProfileForm.patchValue({
+      primaryPhoneType: data.type,
+    });
+  }
+  onChangePrimaryPhone(event) {
+    if (event.target.value.length >= 16) {
+      this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
+      this.cProfileForm.controls['primaryPhone'].setErrors(null);
+    }
+  }
 
+  onChangeSecondaryPhone(event) {
+    if (event.target.value.length == 2) {
+      this.cProfileForm.controls['secondaryPhone'].clearValidators();
+      this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+      this.cProfileForm.controls['secondaryPhone'].setErrors(null);
+    } else if (event.target.value.length > 2 && event.target.value.length >= 16) {
+      this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+      this.cProfileForm.controls['secondaryPhone'].setErrors(null);
+    } else if (event.target.value.length > 2 && event.target.value.length < 16) {
+      this.cProfileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
+      this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+    }
+  }
   /**
    * create company profile from group
    */
   createCProfileForm() {
     this.cProfileForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      // url: new FormControl({ value: '' }, Validators.required),
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
-      primaryPhone: new FormControl(''),
+      primaryPhone: new FormControl('', [Validators.minLength(14)]),
       primaryPhoneType: new FormControl(''),
       secondaryPhone: new FormControl(''),
       secondaryPhoneType: new FormControl(''),
@@ -255,6 +295,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       address: new FormControl(''),
       postalCode: new FormControl(''),
       locale: new FormControl('', Validators.required),
+      secondaryId: new FormControl(''),
     });
   }
 
@@ -291,11 +332,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * get company profile
    */
   getCompanyProfile() {
-    this.loading = true; $(".loading").css("display", "block");
     try {
       this.companyProfileService.getCompanyProfile().subscribe(
         (res: any) => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
           if (res) {
             this.cProfile.address = res.addresses;
             if (this.cProfile.address.length > 0) {
@@ -365,6 +405,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? firstPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                if (firstPhone.typeNumber) this.primaryPhoneType = this.phoneTypes.find(item => item.type == firstPhone.typeNumber.toUpperCase());
+                this.primaryPhone = firstPhone.number;
               }
               if (lastPhone) {
                 this.isAddPhone = true;
@@ -375,17 +417,30 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                     ? lastPhone.typeNumber.toUpperCase()
                     : ''
                 });
+                if (lastPhone.typeNumber) this.secondaryPhoneType = this.phoneTypes.find(item => item.type == lastPhone.typeNumber.toUpperCase());
+                this.secondaryPhone = lastPhone.number;
+                this.cProfileForm.controls['secondaryPhone'].setValidators([Validators.minLength(14)]);
               }
             }
+            this.cProfileForm.controls['primaryPhone'].updateValueAndValidity()
+            this.cProfileForm.controls['primaryPhone'].setErrors(null);
+            this.cProfileForm.controls['secondaryPhone'].updateValueAndValidity()
+            this.cProfileForm.controls['secondaryPhone'].setErrors(null);
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         }
       );
     } catch (error) {
-      this.loading = false; $(".loading").css("display", "none");
+      this.loading = false;
     }
+  }
+  onChangeSecondaryPhoneType(data) {
+    this.secondaryPhoneType = data;
+    this.cProfileForm.patchValue({
+      secondaryPhoneType: data.type,
+    });
   }
   checkValidateDomain() {
     var regex = /^[a-zA-Z\d\-]+$/;
@@ -403,6 +458,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   }
   checkDomain() {
+    this.checkValidateDomain();
     if (this.cProfileForm.get('url').getError('invalidate')) return;
     this.companyProfileService.checkDomain(this.cProfileForm.get(
       'url'
@@ -500,18 +556,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
-      if (size > 200000) {
-        this.toaster.info('Maximum size of 2MB');
+      if (size > 4194304) {
+        this.toaster.info('Maximum size of 4MB');
         return;
       }
-      //  this.isCroppedImg = true;
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
-      this.loading = true; $(".loading").css("display", "block");
       this.settingService.fileAvatar(fromData).subscribe(
         (result: any) => {
-          this.loading = false; $(".loading").css("display", "none");
           if (result) {
             this.fileAvatar = result;
             this.idUploadFile = result.id;
@@ -520,7 +573,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           event.target.value = null;
         }
       );
@@ -544,7 +596,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
       .removeAvatar(this.currentCompany.id)
       .subscribe(
@@ -557,7 +608,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.basic();
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -568,9 +618,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   rePositionAvatar() {
     if (this.cProfile && this.currentCompany.logo.base64 === null) {
       const imageUrl = `/file/${this.currentCompany.logo.origin.id}.jpg`;
-      this.loading = true; $(".loading").css("display", "block");
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
-        this.loading = false; $(".loading").css("display", "none");
         this.isCroppedImg = true;
         this.croppedImage = this.currentCompany.logo.cropped;
         this.croppedImage.base64 = base64data;
@@ -654,8 +702,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         base64: this.croppedImage.base64
       };
     }
-
-    this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
       .logo(this.currentCompany.id, cropImage)
       .subscribe(
@@ -670,13 +716,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 }
               },
               error => {
-                this.loading = false; $(".loading").css("display", "none");
               }
             );
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -699,14 +743,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           workingDays: selectedWorkingHours
         }
       };
-      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService.workingTime(data).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toaster.success('Records Saved Successfully');
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toaster.error('Bad Request');
         }
       );
@@ -717,8 +758,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * saved records
    */
   onSubmit() {
+    if (this.tabSet == "tab1") this.submitCompanyProfile();
+    if (this.tabSet == "workspace") this.checkDomain();
+    if (this.tabSet == "operationalhours") this.onWorkSubmit();
+  }
+  submitCompanyProfile() {
     this.submitted = true;
-    // stop here if form is invalid
     if (this.cProfileForm.invalid) {
       return;
     }
@@ -787,7 +832,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     }
     data['phoneNumbers'] = phones;
     if (this.cProfile.name !== this.cProfileForm.get('name').value) {
-      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService
         .isCompanyNameUnique(
           this.cProfile.address[0].id,
@@ -795,7 +839,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.isCompanyNameUnique = res.value;
             // true, unique companyname
             if (res && res.value) {
@@ -810,7 +853,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                   this.companiesStateService.onInitGetCurrentCompany();
                 },
                 error => {
-                  this.loading = false; $(".loading").css("display", "none");
                   this.toaster.error('Bad Request');
                 }
               );
@@ -818,20 +860,16 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             }
           },
           error => {
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
       const address = { addresses: [data] };
-      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService.addresses(address).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           if (res) {
           }
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
     }
@@ -893,8 +931,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * @param from
    */
   fromTime_convert(from) {
-    const startWith = 'from ',
-      splitWith = ' to ';
     const fromHours = Math.floor(from / 3600);
     const fromMinutes = Math.round(from / 60 - fromHours * 60);
     let fHours = '';
@@ -908,7 +944,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     const h = fHours ? fHours : Number(fromHours) ? fromHours : 0;
     const m = fMinutes ? fMinutes : Number(fromMinutes) ? fromMinutes : 0;
     const value = h + ':' + m;
-    return value;
+    return this.workHours.find(item => item.value == value);
   }
 
   /**
@@ -929,7 +965,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     const h = tHours !== '' ? tHours : toHours;
     const m = tMinutes !== '' ? tMinutes : toMinutes;
     const value = h + ':' + m;
-    return value;
+    return this.workHours.find(item => item.value == value);
   }
 
   formatOnInput(workingDay, event) {

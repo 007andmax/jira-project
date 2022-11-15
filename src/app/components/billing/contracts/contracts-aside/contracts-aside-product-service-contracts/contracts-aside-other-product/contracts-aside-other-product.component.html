@@ -20,14 +20,14 @@
             class="payment-input qt-input-in-table"
             number
             [money]="true"
-            [ngModel]="product.salePrice"
+            [ngModel]="product.salePrice_str"
             (ngModelChange)="onChangeSalePrice($event)"
             appToFixed
         >
     </td>
     <td
         class="contract-product-products-table__price"
-        [textContent]="getSubTotal() | currency"
+        [textContent]="getSubTotal()"
     ></td>
     <td>
         <div

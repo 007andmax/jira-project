@@ -6,7 +6,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { DELETE_TICKET_STATUS } from 'src/app/const/confirm';
-import { ClickOtsideDirective } from 'src/app/directives/click-otside.directive';
+import { ClickOtsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
@@ -119,12 +119,26 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     }
     this.cd.detectChanges();
   }
+  onToggleAll(event) {
+    if (event.target.checked) {
+      this.ticketsStatus.forEach(item => {
+        if (item.custom) {
+          if (!item.selected) this.ticketsStateService.getListTicketStatusForRemove().push(item);
+          item.selected = true;
+        }
+      })
+    } else {
+      this.ticketsStateService.setListTicketStatusForRemove([]);
+      this.ticketsStatus.forEach(item => (item.selected = false));
+    }
+    this.cd.detectChanges();
+  }
   resetEditTicketsStatus() {
     this.editTicketsStatus = null;
   }
   removeTicketStatus(data) {
     this.confirmStateService.setConfirmAction(DELETE_TICKET_STATUS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Ticket Status`;
     this.ticketsStateService.setTicketStatusForRemove(data);
   }
@@ -132,7 +146,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     if (this.ticketsStateService.getListStatusColor().length === 0) {
       this.leftPanelService.getColors().subscribe((data: any) => {
         this.statusColors = data.map(item => {
-          return new StatusColor(item.borderColor);
+          return new StatusColor(item.borderColor, item.textColor);
         })
       })
     } else {

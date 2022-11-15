@@ -36,31 +36,30 @@
             </div>
         </div>
         <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
-            <div class="qt-lh-154">
+            <div class="qt-lh-154 qt-pr-12 invoice-preview__billing-address">
                 <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
                 <div
                     class="qt-fs-13 qt-color-dark qt-fw-600"
-                    [textContent]="company.name"
-                ></div>
-                <div
-                    class="qt-fs-13"
-                    [textContent]="company.contacts[0].firstName + ' ' +
-        company.contacts[0].lastName"
+                    [textContent]="company.addresses[0].locationName"
                 ></div>
                 <div
                     class="qt-fs-13"
                     [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
                 ></div>
+            </div>
+            <div
+                class="qt-lh-154 qt-pr-12 invoice-preview__shipping-address"
+                *ngIf="company.addresses.length == 2"
+            >
+                <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
+                <div
+                    class="qt-fs-13 qt-color-dark qt-fw-600"
+                    [textContent]="company.addresses[1].locationName"
+                ></div>
                 <div
                     class="qt-fs-13"
-                    [textContent]="company.contacts[0].primaryEmail"
+                    [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
                 ></div>
-                <div class="qt-fs-13">
-                    <preview-phone-mask
-                        *ngIf="getContactsPhone()"
-                        [number]="getContactsPhone()"
-                    ></preview-phone-mask>
-                </div>
             </div>
             <div class="qt-fs-13 qt-text-right qt-lh-154">
                 <div
@@ -182,14 +181,25 @@
                                         [textContent]="product.item.manufacture"
                                     >
                                     </td>
-                                    <td
-                                        class="invoice-preview__col-desc"
-                                        [textContent]="product.item.description"
-                                    ></td>
-                                    <td
-                                        class="invoice-preview__col-price"
-                                        [textContent]="product.item.sale | currency"
-                                    ></td>
+                                    <td class="invoice-preview__col-desc">
+                                        <pre [textContent]="product.item.description"></pre>
+                                    </td>
+                                    <td class="invoice-preview__col-price">
+                                        <div class="qt-df qt-ai-c qt-jc-fe">
+                                            <app-dynamic-tooltip
+                                                [content]="'Applied discount - ' + product.discountAmount + ((product.discountType === 'PERCENT') ? '%' : ' amount')"
+                                                [position]="'top'"
+                                                #productTooltip
+                                            ></app-dynamic-tooltip>
+                                            <div
+                                                class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"
+                                                *ngIf="product.discountAmount"
+                                                (mouseenter)="productTooltip.show($event.target)"
+                                                (mouseleave)="productTooltip.hide()"
+                                            ></div>
+                                            {{product.item.sale | currency}}
+                                        </div>
+                                    </td>
                                     <td
                                         class="invoice-preview__col-qty"
                                         [textContent]="product.billableQuantity"

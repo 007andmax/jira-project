@@ -32,13 +32,15 @@
                 ngbTooltip="Download"
             ></div>
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove"
+                class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"
                 (click)="archiveQuote()"
                 placement="top"
                 container="body"
                 ngbTooltip="Archive"
-            ></div>
+            >
+              <div class="qt-sz-20 icon__remove"></div>
+            </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-invoice"
                 *ngIf="checkStatus(quote, ['APPROVED'])"
@@ -107,7 +109,7 @@
                     *ngIf="toggleStatus"
                 >
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
-                        <div class="step-citcle qt-mr-5 icon__invoice-check"></div>
+                        <div class="step-citcle qt-mr-5 icon__convert-invoice"></div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote Created</div>
                             <div
@@ -118,7 +120,7 @@
                         </div>
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
-                        <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
+                        <div class="step-citcle qt-mr-5 icon__email-dark"></div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote sent</div>
                             <div
@@ -129,7 +131,7 @@
                         </div>
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
-                        <div class="step-citcle qt-mr-5 icon__read-on"></div>
+                        <div class="step-citcle qt-mr-5 icon__mark-as-read"></div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Quote Read</div>
                             <div

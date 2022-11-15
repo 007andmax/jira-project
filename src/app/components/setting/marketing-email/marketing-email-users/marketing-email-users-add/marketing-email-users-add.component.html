@@ -1,16 +1,15 @@
-<div class="assign-ticket-content">
+<div class="assign-ticket-content assign-ticket-content--page-settings">
     <div class="assign-ticket-header">
-        <div class="clearfix">
-            <span class="qt-input-search">
-                <input
-                    class="form-control"
-                    placeholder="Search Users"
-                    autocomplete="off"
-                    [(ngModel)]="search"
-                    (input)="onSearch()"
-                >
-            </span>
-        </div>
+        <div class="assign-ticket-content__header-title qt-fw-600 qt-color-gray-900 qt-mb-16">Add User</div>
+        <span class="qt-input-search__page-settings qt-mb-16">
+            <input
+                class="qt-input-search__page-settings-input --max-w100"
+                placeholder="Search Users"
+                autocomplete="off"
+                [(ngModel)]="search"
+                (input)="onSearch()"
+            >
+        </span>
     </div>
     <div
         class="scroll-pane"
@@ -32,16 +31,23 @@
                 let-i="index"
                 [ngForTrackBy]="trackById"
             >
-                <marketing-email-users-item
+                <marketing-email-users-add-item
                     (onSelect)="onSelect($event)"
                     [user]="user"
-                ></marketing-email-users-item>
+                ></marketing-email-users-add-item>
             </ng-template>
         </div>
     </div>
-    <div class="qt-df qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16 qt-bg-white">
+    <div class="qt-aside-modern__footer">
         <button
-            class="qt-button qt-mr-12"
+            class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+            ngbDropdownItem
+            (click)="close()"
+        >
+            Cancel
+        </button>
+        <button
+            class="qt-button qt-jc-c qt-w100"
             ngbDropdownItem
             appDisabledBtn
             #addBtn="disabled"
@@ -49,13 +55,6 @@
         >
             <span *ngIf="!addBtn.isBlock()">Save</span>
             <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-        </button>
-        <button
-            class="qt-button --gray"
-            ngbDropdownItem
-            (click)="close()"
-        >
-            Cancel
         </button>
     </div>
 </div>

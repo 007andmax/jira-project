@@ -3,13 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
 import { DELETE_SUBSCRIPTION_USER } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
-import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
-import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from '../marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailUsers } from './class/marketing-email-user';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users-add/marketing-email-users-add.component';
@@ -88,17 +85,17 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   }
   remove(user) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove user from the subscription`;
     this.marketingEmailStateService.setSubscriptionUserForRemove(user);
-
-
   }
   onOpenChange(data) {
     this.addUserDP.checkClearSelectedUsers(data);
     this.cd.detectChanges();
   }
   close() {
+    this.users = [];
+    this.reqUsers = [];
     this.opened = false;
     this.marketingSubscription = null;
   }

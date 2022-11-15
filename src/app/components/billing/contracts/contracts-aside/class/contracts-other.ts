@@ -20,6 +20,7 @@ export class ContractsOther extends ContractsUserDevice {
         this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId, item.name));
         this.startDate = data.startDate;
         this.reviewDate = data.reviewDate;
+        if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
         this.calculateEndDate();
     }
     public getTotalAmountOther() {
@@ -53,7 +54,9 @@ export class ContractsOther extends ContractsUserDevice {
             reviewDate: this.reviewDate,
             customBillingDate: this.customBillingDate,
             type: "SERVICE_CONTRACT",
-            withCustomBillingDate: this.withCustomBillingDate
+            withCustomBillingDate: this.withCustomBillingDate,
+            manualCreateBillableItem: this.manualCreateBillableItem,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
 }

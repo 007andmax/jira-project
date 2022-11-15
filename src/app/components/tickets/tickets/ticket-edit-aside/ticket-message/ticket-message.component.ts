@@ -8,7 +8,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_FOREVER, MOVE_TO_SPAM_TICKET, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-message',
@@ -63,7 +63,7 @@ export class TicketMessageComponent implements OnInit {
   }
   deleteForever() {
     this.confirmStateService.setConfirmAction(DELETE_FOREVER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The ticket will become inaccessible. Continue with permanent deletion?`;
   }
   restoreFromSpam() {
@@ -80,7 +80,7 @@ export class TicketMessageComponent implements OnInit {
   }
   moveIntoSpam() {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_OR_REPORT_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to ${this.currentUser.isOwner ? 'mark' : 'report'} the ticket as spam?`;
   };
   getSpamMessages(userId, option) {

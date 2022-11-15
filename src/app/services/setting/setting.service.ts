@@ -104,7 +104,12 @@ export class SettingService {
   }
 
   public closeSessions(ids: any) {
-    return this.http.post(`${this.apiUrl}settings/userProfile/device`, ids);
+    return this.http.post(`${this.apiUrl}settings/userProfile/device`, ids).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Activity History Removed Successfully");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   get2FA() {
@@ -116,7 +121,12 @@ export class SettingService {
    */
 
   email(email: any) {
-    return this.http.put(`${this.apiUrl}settings/userProfile/email`, email);
+    return this.http.put(`${this.apiUrl}settings/userProfile/email`, email).pipe(
+      tap((res: any) => {
+        this.toastrService.success("Email Notification Changed Successfully");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
   emailNotifications() {

@@ -1,8 +1,6 @@
 @import './src/assets/styles/variable';
 
 .dropdown-menu {
-    transform: translate(0, 0) !important;
-    top: auto !important;
     left: 17px !important;
     width: 230px;
   }
@@ -55,7 +53,7 @@
         height: 40px;
         padding: 0 12px;
         font-size: 13px;
-        border: 1px solid $gray-500;
+        border: 1px solid $gray-500--old;
         border-radius: 4px;
         margin-bottom: 17px;
         color: rgb(64, 75, 95);
@@ -65,14 +63,14 @@
         font-size: 13px;
         margin-bottom: 11px;
         font-weight: 600;
-        color: $gray-800;
+        color: $gray-800--old;
       }
 
-      .control-label {
-        position: absolute;
-        top: 15px;
-        padding: 0;
-      }
+      //.control-label { // Todo check this style
+      //  position: absolute;
+      //  top: 15px;
+      //  padding: 0;
+      //}
   }
 
   }
@@ -100,24 +98,24 @@
         display: flex;
         position: relative;
         button {
-          color: $gray-800;
+          color: $gray-800--old;
         }
     }
   }
 
-  #dropdownTypeTaxes {
-    outline: none;
-    height: 40px;
-    padding: 0 12px;
-    font-size: 13px;
-    border: 1px solid $gray-500;
-    border-radius: 4px;
-    width: 100%;
-    background: $white;
-    &::placeholder {
-      color: $gray-600;
-    }
-  }
+  //#dropdownTypeTaxes { // TODO check this style
+  //  outline: none;
+  //  height: 40px;
+  //  padding: 0 30px 0 12px;
+  //  font-size: 13px;
+  //  border: 1px solid $gray-500--old;
+  //  border-radius: 4px;
+  //  width: 100%;
+  //  background: $white;
+  //  &::placeholder {
+  //    color: $gray-600--old;
+  //  }
+  //}
 
 .submit-tax-item {
   margin-right: 12px;
@@ -127,9 +125,12 @@
 .cancel-tax-item, .cancel-tax-item:hover {
   width: auto !important;
   background-color: $background !important;
-  color: $gray-800 !important
+  color: $gray-800--old !important
 }
 
 label.checkbox {
   font-weight: 400;
+}
+.taxes-dropdown__check-icon {
+  background-image: url("/assets/img/icons/done-blue.svg");
 }

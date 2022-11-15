@@ -21,6 +21,12 @@
         [attr.maxlength]="maxlength"
         (isPopupOpen)="isDropDownOpen()"
     >
+    <mat-error
+        class="qt-tooltip-error"
+        *ngIf="!valid"
+    >
+        Title is required
+    </mat-error>
     <span *ngIf="list">
         <i
             *ngIf="selectedItem"

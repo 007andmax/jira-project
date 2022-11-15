@@ -3,7 +3,7 @@
         <div class="qt-fs-13 qt-fw-600">
             Customer Note
             <i
-                class="icn-sm icn-help"
+                class="icn-sm icon__help"
                 placement="right"
                 ngbTooltip="Currently, the system provides up to 5 common notes on the invoice and quote page"
             ></i>
@@ -32,6 +32,7 @@
                 [class]="['light-dropdown']"
                 [field]="'title'"
                 [list]="regularNotes"
+                [valid]="validNote"
                 (onChangeInput)="onCheckUpdateTitleNote($event)"
                 (onSelectedItem)="onSelectNotes($event)"
             ></app-invoice-select-note>

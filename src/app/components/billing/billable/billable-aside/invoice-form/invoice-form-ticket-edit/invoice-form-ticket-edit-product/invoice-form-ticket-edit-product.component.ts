@@ -5,6 +5,7 @@ import { InvoiceFormTicketEditTaxesComponent } from '../invoice-form-ticket-edit
 import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-invoice-form-ticket-edit-product',
@@ -13,7 +14,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 })
 export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy {
   @Input() product: BillableProfileTicketProductExpense;
-  @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDropDown: TaxesComponent;
   valdiateSaleCost: boolean = true;
   taxes: Array<Tax> = [];
   sub: Subscription = new Subscription();

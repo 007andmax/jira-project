@@ -12,6 +12,8 @@ import { InvoiceDiscount } from '../billable-aside/invoice-form/invoice-discount
 export class InvoiceDto {
     billTo: Array<InvoiceDtoBillTo> = [];
     billingAddress: string;
+    billingLocationName: string;
+    shippingLocationName: string;
     company: InvoiceCompany;
     companyName: string;
     date: number;
@@ -39,7 +41,7 @@ export class InvoiceDto {
     termsAndConditions: string;
     tickets: Array<InvoiceProfileTicket>;
     totalSum: number;
-    invoiceDiscount:InvoiceDiscount;
+    invoiceDiscount: InvoiceDiscount;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

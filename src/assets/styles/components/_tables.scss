@@ -158,7 +158,7 @@ table.qt-table-modern {
       }
     }
 
-    @media screen and (min-width: 767px) {
+    @media screen and (min-width: 768px) {
       .qt-table-modern__row tr:hover > div {
         background: #f4fbff;
         border-color: $primary-1;
@@ -232,7 +232,7 @@ table.qt-table-modern {
       @media (max-width: 767px) {
         flex: 1 1 142px;
         order: -1;
-        color: $gray-700;
+        color: $gray-700--old;
       }
     }
 
@@ -263,7 +263,7 @@ table.qt-table-modern {
         order: 1;
         justify-content: flex-end;
         @include сaption-l;
-        color: $gray-600;
+        color: $gray-600--old;
       }
     }
   }

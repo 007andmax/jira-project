@@ -4,7 +4,7 @@ import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_SUBSCRIPTION_TYPE } from 'src/app/const/confirm';
 import { MODE_ADD_BY_MODAL } from 'src/app/const/user-subscription';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
@@ -48,11 +48,11 @@ export class AddUserToSubscribeComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    this.marketingSubscriptionList = JSON.parse(JSON.stringify(this.marketingEmailStateService.getListCustomSubscription())).map(item => new MarketingSubscriptionType(item));
+    this.marketingSubscriptionList = JSON.parse(JSON.stringify(this.marketingEmailStateService.getListCustomSubscription())).map(item => new MarketingSubscriptionType(item, null));
     if (this.marketingSubscriptionList.length > 0) this.showPreloader = false;
     if (this.marketingEmailStateService.isGetMarketing) this.showPreloader = false;
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
-      this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item));;
+      this.marketingSubscriptionList = JSON.parse(JSON.stringify(data)).map(item => new MarketingSubscriptionType(item, null));;
       this.showPreloader = false;
       this.cd.detectChanges();
     })
@@ -98,7 +98,7 @@ export class AddUserToSubscribeComponent implements OnInit {
   }
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Subscription`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
   }
@@ -107,7 +107,7 @@ export class AddUserToSubscribeComponent implements OnInit {
 
   }
   onAddedSubscription(data) {
-    let subscription = new MarketingSubscriptionType(data);
+    let subscription = new MarketingSubscriptionType(data, null);
     if (this.isAddNewSubscription) {
       this.showAdd = false;
       this.onSelectSubscription(subscription);

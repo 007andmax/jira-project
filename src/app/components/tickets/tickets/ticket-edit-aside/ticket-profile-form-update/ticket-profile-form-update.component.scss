@@ -3,7 +3,7 @@
 
 .cps-block {
   padding: 20px 40px;
-  border-top: 1px solid $gray-100;
+  border-top: 1px solid $gray-100--old;
 
   @media (max-width: 767px) {
     padding: 0;
@@ -42,13 +42,14 @@
       width: 100%;
       align-items: center;
       justify-content: center;
+      margin-bottom: 0;
     }
   }
 
   &__nav-item {
     @include body-m__sb;
     margin-right: 30px;
-    color: $gray-800;
+    color: $gray-800--old;
     cursor: pointer;
     padding-left: 25px;
     background-repeat: no-repeat;
@@ -89,13 +90,19 @@
 
   &__content-textarea {
     min-height: 104px;
+    max-height: 300px;
     width: 100%;
     border-radius: 4px;
     border: none;
     overflow: auto;
+    outline: none;
     padding: 16px;
     &:last-child {
       display: none;
+    }
+    &::placeholder {
+      opacity: 1;
+      color: $gray-600--old;
     }
   }
   .support-timeline-status__line {
@@ -112,7 +119,7 @@
     display: flex;
     align-items: center;
     border-radius: 4px;
-    background-color: $gray-100;
+    background-color: $gray-100--old;
     padding: 4px 10px;
   }
   &__create-connection-btn {
@@ -168,7 +175,7 @@
       content: "";
       width: 16px;
       height: 16px;
-      border: 1px solid $gray-500;
+      border: 1px solid $gray-500--old;
       background: $white;
       border-radius: 50%;
       bottom: -7px;
@@ -184,7 +191,7 @@
     margin-left: 4px;
   }
   &__users-linked-divider {
-    background: $gray-400;
+    background: $gray-400--old;
     width: 1px;
     margin: 0 16px;
   }
@@ -222,7 +229,7 @@
     align-items: center;
     border: dashed 1px #979797;
     margin-bottom: 1rem;
-
+    position: relative;
     img.delete {
       margin-left: 0.5rem;
       cursor: pointer;
@@ -350,4 +357,14 @@
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
+}
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  /* For Firefox */
+}
+.icn-remove-old {
+  top: 12px !important;
+  position: relative;
 }

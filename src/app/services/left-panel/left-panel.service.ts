@@ -103,14 +103,12 @@ export class LeftPanelService {
       || state === 'email-setting-component'
       || state === 'taxes-component'
       || state === 'permission-manage-component'
-      || state === 'email-templete-component'
-      || state === 'integrations-component'
+      || state === 'email-template-component'
       || state === 'invoice-ticket-component'
       || state === 'commission-component'
       || state === 'ticket-settings'
       || state === 'crm-settings'
-      || state === 'marketing-email'
-      || state === 'subscription-component')
+      || state === 'marketing-email')
   }
 
   public isDevicesPage(state) {

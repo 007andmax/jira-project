@@ -7,6 +7,7 @@ export class ContractsHourlyService {
     name: string;
     rate: number;
     taxIds: Array<String> = [];
+    rate_str: string;
     constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds) {
         this.basedOnDefault = basedOnDefault;
         this.billable = billable;
@@ -15,6 +16,7 @@ export class ContractsHourlyService {
         this.name = name;
         this.rate = rate;
         this.taxIds = taxIds;
+        this.rate_str = this.rate.toFixed(2);
 
     }
     public getDataForCreate() {

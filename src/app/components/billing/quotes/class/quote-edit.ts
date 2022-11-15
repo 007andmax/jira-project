@@ -4,6 +4,14 @@ import { QuoteProduct } from './quote-product';
 import { QuoteService } from './quote-service';
 
 export class QuoteEdit extends QuotePreview {
+    billTo: string;
+    shipTo: string;
+    public setBillTo(data) {
+        this.billTo = data;
+    }
+    public setShipTo(data) {
+        this.shipTo = data;
+    }
     public getDataForUpdate(notification) {
         return {
             companyId: this.company.id,
@@ -27,7 +35,9 @@ export class QuoteEdit extends QuotePreview {
             message: this.message,
             subject: this.subject,
             regularNote: this.regularNote,
-            sendNotification: notification
+            sendNotification: notification,
+            billTo: this.billTo,
+            shipTo: this.shipTo
         }
     }
     public getDataForPreview(company) {
@@ -35,7 +45,7 @@ export class QuoteEdit extends QuotePreview {
         totalAmount += this.services.reduce((a, b) => a + b.sum, 0);
         totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
         return {
-            company: company,
+            company: this.company,
             date: this.date,
             description: this.description,
             number: this.number,
@@ -48,7 +58,11 @@ export class QuoteEdit extends QuotePreview {
             services: this.services,
             termsAndConditions: this.termsAndConditions,
             regularNote: this.regularNote,
-            message: this.message
+            message: this.message,
+            billingAddress: this.billingAddress,
+            shippingAddress: this.shippingAddress,
+            shippingLocationName: this.shippingLocationName,
+            billingLocationName: this.billingLocationName
         }
     }
     public resetServices() {

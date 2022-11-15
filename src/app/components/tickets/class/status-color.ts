@@ -1,8 +1,10 @@
 export class StatusColor {
 
     borderColor: string;
-    constructor(borderColor) {
+    textColor: string;
+    constructor(borderColor, textColor) {
 
         this.borderColor = borderColor;
+        this.textColor = textColor;
     }
 }

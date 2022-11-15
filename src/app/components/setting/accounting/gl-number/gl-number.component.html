@@ -1,93 +1,77 @@
-<!-- Middle Wrapper -->
-<div class="page-container">
-    <div class="page-insider manage-taxes">
-        <div class="cmn-area">
-            <div class="data-table-wrap">
-                <table
-                    class="display dataTable"
-                    style="width:100%"
+<div class="page-insider manage-taxes">
+    <div class="cmn-area">
+        <div class="tab-pane__table">
+            <div class="tab-pane__table-header">
+                <div class="tab-pane__table-row">
+                    <div class="tab-pane__table-cell gl-numbers__table-account-number">Income Account Number</div>
+                    <div class="tab-pane__table-cell gl-numbers__table-description">Description</div>
+                    <div class="tab-pane__table-cell gl-numbers__table-action"></div>
+                </div>
+            </div>
+            <div class="tab-pane__table-body">
+                <add-gl-number
+                    *ngIf="showAddGl"
+                    [numberList]="numberList"
+                    (onClose)="toggleShowAddGL(false)"
+                ></add-gl-number>
+                <div
+                    class="tab-pane__table-row"
+                    *ngFor="let gl of numberList; let i = index"
+                    appClickOtside
+                    [init]="gl.isInitEdit"
+                    [ngClass]="['edit-gl-container-' + i]"
+                    [class]="'.edit-gl-container-' + i"
+                    (onOutSide)="onEditGl(gl)"
                 >
-                    <thead>
-                        <tr>
-                            <th class="checkboxes"></th>
-                            <th class="tax-name">Income Account Number</th>
-                            <th class="rate">Description</th>
-                            <th class="action">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="numberList">
-                        <add-gl-number
-                            *ngIf="showAddGl"
-                            [numberList]="numberList"
-                            (onClose)="toggleShowAddGL(false)"
-                        ></add-gl-number>
-                        <tr
-                            *ngFor="let gl of numberList; let i = index"
-                            appClickOtside
-                            [init]="gl.isInitEdit"
-                            [ngClass]="['edit-gl-container-' + i]"
-                            [class]="'.edit-gl-container-' + i"
-                            (onOutSide)="onEditGl(gl)"
+                    <div
+                        class="tab-pane__table-cell gl-numbers__table-account-number"
+                        [ngClass]="{'--input-error' :  gl.disableUpdate  }"
+                    >
+                        <input
+                            type="text"
+                            class="form-input --editable"
+                            placeholder="Enter GL Number"
+                            [(ngModel)]="gl.glNumber"
+                            appKeyUpEnter
+                            (onChange)="onEditGl(gl)"
+                            (input)="gl.onInitEdit(true);gl.checkDublicate(numberList)"
+                            maxlength="50"
                         >
-                            <td class="checkbox">
-                                <label class="qt-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        (change)="onSelect($event,gl)"
-                                    >
-                                    <span></span>
-                                </label>
-                            </td>
-                            <td
-                                class="tax-name"
-                                [ngClass]="{'--input-error' :  gl.disableUpdate  }"
-                            >
-                                <input
-                                    type="text"
-                                    class="form-input"
-                                    placeholder="Enter GL Number"
-                                    [(ngModel)]="gl.glNumber"
-                                    appKeyUpEnter
-                                    (onChange)="onEditGl(gl)"
-                                    (input)="gl.onInitEdit(true);gl.checkDublicate(numberList)"
-                                    maxlength="50"
-                                >
-                                <mat-error
-                                    class="qt-tooltip-error"
-                                    *ngIf="gl.disableUpdate"
-                                >
-                                    This Gl Number is already occupied
-                                </mat-error>
-                            </td>
-                            <td class="rate">
-                                <input
-                                    type="text"
-                                    class="form-input"
-                                    placeholder="Enter Description"
-                                    [(ngModel)]="gl.description"
-                                    (input)="gl.onInitEdit(true)"
-                                    maxlength="50"
-                                >
-                            </td>
-                            <td class="action">
-                                <a
-                                    href="javascript:;"
-                                    data-tooltip="Remove"
-                                    class="remove"
-                                    (click)="removeConfirm(gl)"
-                                >
-                                    <img
-                                        src="/html/assets/img/icons/remove.svg"
-                                        alt="Remove"
-                                    >
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="gl.disableUpdate"
+                        >
+                            This Gl Number is already occupied
+                        </mat-error>
+                    </div>
+                    <div class="tab-pane__table-cell gl-numbers__table-description">
+                        <input
+                            type="text"
+                            class="form-input --editable"
+                            placeholder="Enter Description"
+                            [(ngModel)]="gl.description"
+                            (input)="gl.onInitEdit(true)"
+                            appKeyUpEnter
+                            (onChange)="onEditGl(gl)"
+                            maxlength="50"
+                        >
+                    </div>
+                    <div class="tab-pane__table-cell gl-numbers__table-action">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeConfirm(gl)"
+                        >
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
 </div>
-<!-- tag delete popup -->

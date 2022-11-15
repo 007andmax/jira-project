@@ -3,14 +3,14 @@
     [ngClass]="{'--selected':company.selected}"
 >
     <div class="companies-table__check">
-        <label class="checkbox-container">
-            <input
-                type="checkbox"
-                [(ngModel)]="company.selected"
-                (change)="onSelectCompany($event)"
-            >
-            <span class="checkbox-mark"></span>
-        </label>
+      <label class="qt-checkbox pointer">
+        <input
+          type="checkbox"
+          [(ngModel)]="company.selected"
+          (change)="onSelectCompany($event)"
+        >
+        <span></span>
+      </label>
     </div>
     <div
         class="companies-table__name pointer"
@@ -162,7 +162,7 @@
         >
             <i
                 style="height: 19px;"
-                class="icn-16 restore-company"
+                class="icn-16 icon__payment-history"
             ></i>
         </button>
     </div>
@@ -173,7 +173,7 @@
             ngbDropdown
         >
             <i
-                class="icn-16 more-vertical-ng2 pointer"
+                class="icn-16 qt-bg-contain icon__more pointer"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             ></i>
@@ -186,7 +186,7 @@
                     (click)="edit()"
                     *ngIf="getPermissions('EDIT_COMPANIES')"
                 >
-                    <i class="icn-16 edit-grey-ng2"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__edit"></i>
                     Edit
                 </button>
                 <button
@@ -194,7 +194,7 @@
                     (click)="remove()"
                     *ngIf="getPermissions('ARCHIVE_COMPANIES')"
                 >
-                    <i class="icn-16 archive-grey-ng2"></i>
+                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain icon__archive"></i>
                     Archive
                 </button>
             </div>

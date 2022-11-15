@@ -17,133 +17,21 @@
   height: 16px;
   display: block;
 }
-
-.icn-user {
-  background: url("/assets/img/user-icn.png");
-}
-
-.icn-help {
-  background: url("/assets/img/icons/help-12.svg");
-}
-
-.icn-device {
-  background: url("/assets/img/device-icn.png");
-}
-
-.icn-search-light {
-  background: url("/assets/img/search-light.png");
-}
-
-.icn-calendar-light {
-  background: url("/assets/img/calendar-light.png");
-}
-
 .icn-attach {
-  background: url("/assets/img/attachment-blue.svg");
+  background: url("/assets/img/icons/attachment-blue.svg");
 }
-
-.icn-tags {
-  background: url("/assets/img/icons/tag-ng2.png");
-}
-.icn-delete {
-  background-image: url(/assets/img/icons/icn-remove.png) !important;
-  width: 16px;
-  height: 17px;
-  display: block;
-}
-
-.icn-remove {
-  background-image: url("/assets/img/icons/close-16.png");
-}
-.icn-report-caret {
-  background-image: url("/assets/img/icons/report-caret.png");
-}
-
-.email-ng2 {
-  background: url("/assets/img/icons/email-ng2.png");
-}
-
-.archive-blue-ng2 {
-  background: url("/assets/img/icons/archive-blue-ng2.png");
-}
-
 .export-ng2 {
-  background: url("/assets/img/icons/export-ng2.png");
-}
-
-.import-ng2 {
-  background: url("/assets/img/icons/import-ng2.png");
-}
-
-.restore-ng2 {
-  background: url("/assets/img/icons/restore-company.png");
-}
-.restore-company {
-  background: url("/assets/img/icons/restore-company.svg");
-}
-
-.upload-logo {
-  background: url("/assets/img/icons/upload-logo.png");
-}
-
-.more-vertical-ng2 {
-  background: url("/assets/img/icons/more-vertical-ng2.png") no-repeat;
-}
-
-.edit-grey-ng2 {
-  background: url("/assets/img/icons/edit-grey-ng2.png");
-}
-.edit-grey {
-  background-image: url("/assets/img/icons/edit-grey-ng2.png");
+  background: url("/assets/img/icons/export-blue.svg");
 }
 .convert-to-billable-ng2 {
   background: url("/assets/img/icons/billable.svg");
 }
-
-.send-grey-ng2 {
-  background: url("/assets/img/icons/send-grey-ng2.png");
-}
-
-.email-grey-ng2 {
-  background: url("/assets/img/icons/email-grey-ng2.png");
-}
-
-.archive-grey-ng2 {
-  background: url("/assets/img/icons/archive-grey-ng2.png");
-}
-
-.history-ng2 {
-  background: url("/assets/img/icons/history.svg") no-repeat;
-  background-size: cover;
-}
-
-.archive-red-ng2 {
-  background: url("/assets/img/icons/archive-red-ng2.png") no-repeat;
-  background-size: cover;
-}
-
 .no-valid-label {
-  background: url("/assets/img/icons/update-label.png") no-repeat;
+  background: url("/assets/img/icons/update.svg") no-repeat;
   display: block;
   width: 44px;
   height: 20px;
 }
-.home-phone-icn {
-  background: url("/assets/img/icons/home-phone.png");
-}
-
-.fax-icn {
-  background: url("/assets/img/icons/fax.png");
-}
-
-.mobile-phone-icn {
-  background: url("/assets/img/icons/mobile-phone.png");
-}
-
-.office-phone-icn {
-  background: url("/assets/img/icons/office-phone.png");
-}
-
 .add-user {
   background: url("/assets/img/icons/add-users.svg");
 }
@@ -161,20 +49,58 @@
   &__list {
     background-image: url("/assets/img/icons/list.svg");
   }
+  &__firefox {
+    background-image: url("/assets/img/icons/firefox.svg");
+  }
+  &__google-chrome {
+    background-image: url("/assets/img/icons/google-chrome.svg");
+  }
+  &__opera {
+    background-image: url("/assets/img/icons/opera.svg");
+  }
+  &__safari {
+    background-image: url("/assets/img/icons/safari.svg");
+  }
   &__task-pending {
     background-image: url("/assets/img/icons/task-pending.svg");
     &.--done {
       background-image: url("/assets/img/icons/task-completed.svg");
     }
   }
+  &__done-circle-green {
+    background-image: url("/assets/img/icons/done-circle-green.svg");
+  }
   &__users {
     background-image: url("/assets/img/icons/addusers.svg");
   }
-  &__close {
+  &__close { // TODO need combine icons to mask
     background-image: url("/assets/img/icons/close.svg");
+    &--light-gray {
+      background-image: url("/assets/img/icons/close-light-gray.svg");
+    }
   }
-  &__close-mobile {
-    background-image: url("/assets/img/icons/close-mobile.svg");
+  &__close-white {
+    background-image: url("/assets/img/icons/close-light.svg");
+  }
+  &__settings {
+    &-gray {
+      background-color: $gray-600;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    }
+  }
+  &__logout,
+  &__logout-red {
+    background-color: $red-600;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
+  }
+  &__logout-red {
+    background-color: $red-600;
   }
   &__menu {
     background-image: url("/assets/img/icons/menu.svg");
@@ -182,96 +108,187 @@
   &__menu-white {
     background-image: url("/assets/img/icons/menu-white.svg");
   }
-  &__tickets-gray {
+  &__menu-email-settings {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-email-settings.svg");
+  }
+  &__menu-email-template {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-email-template.svg");
+  }
+  &__menu-tags {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-tags.svg");
+  }
+  &__menu-my-profile-setting {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-my-profile-settings.svg");
+  }
+  &__menu-crm-settings,
+  &__menu-crm-settings-gray {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-crm-settings.svg");
+  }
+  &__menu-crm-settings-gray {
     background-color: $gray-600;
+  }
+  &__menu-commissions {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-commissions.svg");
+  }
+  &__menu-company,
+  &__menu-company-gray {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-company.svg");
+  }
+  &__menu-company-gray {
+    background-color: $gray-600;
+  }
+  &__menu-products,
+  &__menu-products-gray {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-products.svg");
+  }
+  &__menu-products-gray {
+    background-color: $gray-600;
+  }
+  &__menu-tickets,
+  &__menu-tickets-gray {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-tickets.svg");
+  }
+  &__menu-tickets-gray {
+    background-color: $gray-600;
+  }
+  &__menu-marketing {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-marketing.svg");
+  }
+  &__menu-users,
+  &__menu-users-gray {
+    background-color: $gray-300;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-users.svg");
+  }
+  &__menu-users-gray {
+    background-color: $gray-600;
+  }
+  &__tickets-gray {
+    background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/tickets-gray.svg");
     mask-image: url("/assets/img/icons/tickets-gray.svg");
   }
   &__password-manager-gray {
-    background-color: $gray-600;
+    background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-password-manager.svg");
     // background-image: url("/assets/img/icons/password-manager-gray.svg");
   }
   &__company-gray {
-    background-color: $gray-600;
+    background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
     mask-image: url("/assets/img/icons/company-gray.svg");
   }
-  &__remove {
-    background-image: url("/assets/img/icons/remove.svg");
-  }
-  &__remove-disabled {
-    background-color: $gray-600;
-    -webkit-mask-image: url("/assets/img/icons/remove.svg");
-    mask-image: url("/assets/img/icons/remove.svg");
-  }
   &__support-page {
-    background-color: $gray-600;
+    background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/support-page.svg");
     mask-image: url("/assets/img/icons/support-page.svg");
   }
   &__category-closed {
-    background-color: $gray-600;
+    background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/category-closed.svg");
     mask-image: url("/assets/img/icons/category-closed.svg");
   }
   &__add-sub-category {
-    background-color: $gray-700;
+    background-color: $gray-700--old;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
     mask-image: url("/assets/img/icons/support-page-add-sub-category.svg");
   }
   &__add-article {
-    background-color: $gray-700;
+    background-color: $gray-700--old;
     -webkit-mask-image: url("/assets/img/icons/support-page-add-article.svg");
     mask-image: url("/assets/img/icons/support-page-add-article.svg");
   }
-  &__preview-edit {
-    background-image: url("/assets/img/icons/preview-edit.svg");
-  }
   &__help-center {
     background-image: url("/assets/img/icons/help-center.svg");
-  }
-  &__annoucements-active {
-    background-image: url("/assets/img/icons/annoucements-active.svg");
   }
   &__road-map {
     background-image: url("/assets/img/icons/road-map.svg");
   }
   &__draft-content {
-    background-color: $gray-700;
+    background-color: $gray-700--old;
     -webkit-mask-image: url("/assets/img/icons/draft.svg");
     mask-image: url("/assets/img/icons/draft.svg");
   }
   &__save-support-tag {
-    background-color: $gray-700;
+    background-color: $gray-700--old;
     -webkit-mask-image: url("/assets/img/icons/save-support-tag.svg");
     mask-image: url("/assets/img/icons/save-support-tag.svg");
   }
   &__edit-category {
-    background-color: $gray-700;
+    background-color: $gray-700--old;
     -webkit-mask-image: url("/assets/img/icons/support-page-edit-category.svg");
     mask-image: url("/assets/img/icons/support-page-edit-category.svg");
   }
-  &__drag {
-    background-color: $gray-600;
-    -webkit-mask-image: url("/assets/img/icons/support-page-drag.svg");
-    mask-image: url("/assets/img/icons/support-page-drag.svg");
-  }
-  &__remove-category {
-    background-color: $gray-700;
-    -webkit-mask-image: url("/assets/img/icons/support-page-remove-category.svg");
-    mask-image: url("/assets/img/icons/support-page-remove-category.svg");
-  }
   &__category-more {
-    background-color: $gray-600;
+    background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/category-more.svg");
     mask-image: url("/assets/img/icons/category-more.svg");
   }
-  &__remove-blue {
-    background-color: $primary-1;
+  &__remove,
+  &__remove--red-500,
+  &__remove--red-600,
+  &__remove--blue-light-600 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
     -webkit-mask-image: url("/assets/img/icons/remove.svg");
     mask-image: url("/assets/img/icons/remove.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__remove--red-600 {
+    background-color: $red-600;
+  }
+  &__remove--red-500 {
+    background-color: $red-500;
+  }
+  &__remove--blue-light-600 {
+    background-color: $blue-light-600;
   }
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");
@@ -291,17 +308,11 @@
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
-  &__products-new {
-    background-image: url("/assets/img/icons/products-new.svg");
-  }
   &__service {
     background-image: url("/assets/img/icons/service.svg");
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
-  }
-  &__service-new {
-    background-image: url("/assets/img/icons/service-new.svg");
   }
   &__quick-support {
     background-image: url("/assets/img/icons/quick-support-gray.svg");
@@ -309,8 +320,21 @@
       background-image: url("/assets/img/icons/quick-support.svg");
     }
   }
-  &__quicktech-logo {
+  &__quicktech-logo { // TODO delete this icon on super admin page
     background-image: url("/assets/img/icons/quicktech-logo.svg");
+  }
+  &__quicktech-logo {
+    &--gray {
+      background-color: $gray-400;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons/quicktech-logo.svg");
+      mask-image: url("/assets/img/icons/quicktech-logo.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+    }
   }
   &__quicktech_partical_top {
     background-image: url("/assets/img/icons/quicktech-part-top-logo.svg");
@@ -319,16 +343,29 @@
     background-image: url("/assets/img/icons/quicktech-part-bottom-logo.svg");
   }
   &__attach-blue {
-    background-image: url("/assets/img/attachment-blue.svg");
+    background-image: url("/assets/img/icons/attachment-blue.svg");
   }
-  &__filters {
-    background-image: url("/assets/img/icons/filters.svg");
+  &__check {
+    background-image: url("/assets/img/icons/check.svg");
+  }
+  &__inactive {
+    background-image: url("/assets/img/icons/inactive.svg");
   }
   &__collapse-arrow {
-    background-image: url("/assets/img/icons/collapse-arrow.svg");
+    background-image: url("/assets/img/icons/collapse-arrow.svg"); // TODO replace collapse-arrow.svg and collapse-arrow-white.svg on mask
   }
-  &__company-info {
-    background-image: url("/assets/img/icons/company-info.svg");
+  &__collapse-arrow {
+    &-white {
+      background-color: $white;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons/collapse-arrow.svg");
+      mask-image: url("/assets/img/icons/collapse-arrowt.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+    }
   }
   &__devices {
     background-image: url("/assets/img/icons/devices.svg");
@@ -360,6 +397,9 @@
   &__users-gray {
     background-image: url("/assets/img/icons/users-gray.svg");
   }
+  &__note-list {
+    background-image: url("/assets/img/icons/canned-responses.svg");
+  }
   &__get-direction {
     background-image: url("/assets/img/icons/get-direction.svg");
   }
@@ -378,26 +418,11 @@
   &__export-dark {
     background-image: url("/assets/img/icons/export-dark.svg");
   }
-  &__export-blue {
-    background-image: url("/assets/img/icons/export-blue.svg");
-  }
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
   }
-  &__close {
-    background-image: url("/assets/img/icons/tag-close.svg");
-  }
-  &__document-category-subscribe {
-    background-image: url("/assets/img/icons/subscribe-document-category.svg");
-  }
-  &__close-white {
-    background-image: url("/assets/img/icons/close-white.svg");
-  }
   &__snapshot {
     background-image: url("/assets/img/icons/snapshot.svg");
-  }
-  &__more {
-    background-image: url("/assets/img/icons/more-vertical-ng2.png");
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
@@ -411,9 +436,6 @@
   &__tips {
     background-image: url("/assets/img/icons/tips.svg");
   }
-  &__invoice-check {
-    background-image: url("/assets/img/icons/invoice-check.svg");
-  }
   &__archive {
     background-image: url("/assets/img/icons/archive.svg");
   }
@@ -426,20 +448,50 @@
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
   }
-  &__manage {
-    background-image: url("/assets/img/icons/manage.svg");
+  &__email-send {
+    background-image: url("/assets/img/icons/email-send.svg");
   }
-  &__create-list {
-    background-image: url("/assets/img/icons/create-list.svg");
+  &__menu-settings--gray-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__edit-blue {
+    background-image: url("/assets/img/icons/edit-blue.svg");
+  }
+  &__create-document {
+    background-image: url("/assets/img/icons/create-document.svg");
   }
   &__upload-company-logo {
     background-image: url("/assets/img/icons/upload-company-logo.svg");
   }
   &__view {
-    background-image: url("/assets/img/icons/view.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/view.svg");
+    mask-image: url("/assets/img/icons/view.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__hide {
-    background-image: url("/assets/img/icons/hide.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/password-show.svg");
+    mask-image: url("/assets/img/icons/password-show.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__documents {
     background-image: url("/assets/img/icons/documents.svg");
@@ -453,25 +505,16 @@
     mask-image: url("/assets/img/icons/folder.svg");
   }
   &__calendar {
-    background-image: url("/assets/img/icons/calander.svg");
+    background-image: url("/assets/img/icons/calendar.svg");
   }
   &__user-grey {
     background-image: url("/assets/img/icons/user-grey.svg");
   }
   &__windows {
-    background-image: url("/assets/img/icons/windows.png");
-  }
-  &__linux {
-    background-image: url("/assets/img/icons/linux.png");
+    background-image: url("/assets/img/icons/window.svg");
   }
   &__move {
     background-image: url("/assets/img/icons/move.svg");
-  }
-  &__share-folder {
-    background-image: url("/assets/img/icons/share-folder.svg");
-  }
-  &__shared {
-    background-image: url("/assets/img/icons/shared.svg");
   }
   &__payment-received {
     background-image: url("/assets/img/icons/payment-received.svg");
@@ -494,14 +537,17 @@
   &__subscribe {
     background-image: url("/assets/img/icons/subscribe.svg");
   }
+  &__manual-create-billable {
+    background-image: url("/assets/img/icons/manual-create-billable.svg");
+  }
+  &__automatically-create-invoice {
+    background-image: url("/assets/img/icons/automatically-create-invoice.svg");
+  }
   &__mark-as-master {
     background-image: url("/assets/img/icons/mark-as-master.svg");
   }
   &__remote-access {
     background-image: url("/assets/img/icons/remote-access.svg");
-  }
-  &__remove-12 {
-    background-image: url("/assets/img/icons/remove-12.svg");
   }
   &__restart {
     background-image: url("/assets/img/icons/restart.svg");
@@ -524,17 +570,32 @@
   &__add {
     background-image: url("/assets/img/device/add.svg");
   }
+  &__secure {
+    background-image: url("/assets/img/icons/secure.svg");
+  }
+  &__quicktech-logo-mini {
+    background-image: url("/assets/img/icons-left-sidebar/quicktech-logo-mini.svg");
+  }
   &__add-product {
     background-image: url("/assets/img/icons/add-product.svg");
   }
   &__add-grey {
     background-image: url("/assets/img/icons/add-grey.svg");
   }
-  &__add-task {
-    background-image: url("/assets/img/icons/add-task.svg");
+  &__add--grey-500,
+  &__add--white {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/add-grey.svg");
+    mask-image: url("/assets/img/icons/add-grey.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
-  &__calander {
-    background-image: url("/assets/img/icons/calander.svg");
+  &__add--white {
+    background-color: $white;
   }
   &__company-address {
     background-image: url("/assets/img/icons/company-address.svg");
@@ -557,6 +618,17 @@
   &__company-info {
     background-image: url("/assets/img/icons/company-info.svg");
   }
+  &__company-info--yellow-800 {
+    background-color: $yellow-800;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/company-info.svg");
+    mask-image: url("/assets/img/icons/company-info.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
   }
@@ -565,9 +637,6 @@
   }
   &__print-blue {
     background-image: url("/assets/img/icons/print-blue.svg");
-  }
-  &__email-dark {
-    background-image: url("/assets/img/icons/email-dark.svg");
   }
   &__invoice-expired {
     background-image: url("/assets/img/icons/invoice-expired.svg");
@@ -581,37 +650,52 @@
   &__filter-active {
     background-image: url("/assets/img/icons/filter-active.svg");
   }
-
-  &__faster-payment {
-    background-image: url("/assets/img/icons/faster-payment.svg");
-  }
   &__email {
     background-image: url("/assets/img/icons/email.svg");
   }
-  &__check {
-    background-image: url("/assets/img/icons/check.png");
+  &__reset {
+    background-image: url("/assets/img/icons/reset.svg");
+  }
+  &__email-resend {
+      background-image: url("/assets/img/icons/email-resend.svg");
+  }
+  &__reset-gray-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/reset.svg");
+    mask-image: url("/assets/img/icons/reset.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__collapse-task {
     background-image: url("/assets/img/icons/collapse-task.svg");
-  }
-  &__read-on {
-    background-image: url("/assets/img/icons/read-on.svg");
-  }
-  &__invoice-email {
-    background-image: url("/assets/img/icons/invoice-email.svg");
   }
   &__get-paid {
     background-image: url("/assets/img/icons/get-paid.svg");
   }
   &__edit {
-    background-image: url("/assets/img/icons/edit.svg");
+    background-image: url("/assets/img/icons/edit-12.svg");
   }
-  &__edit-gray {
-    background-image: url("/assets/img/icons/edit-gray.svg");
+  &__edit-gray,
+  &__edit-gray-dark {
+    background-color: $gray-600--old;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/edit-gray.svg");
+    mask-image: url("/assets/img/icons/edit-gray.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
-  &__email-dark {
-    background-image: url("/assets/img/icons/email-dark.svg");
+
+  &__edit-gray-dark {
+    background-color: $gray-700--old;
   }
+
   &__expand-redactor {
     background-image: url("/assets/img/icons/expand-redactor.svg");
   }
@@ -631,7 +715,7 @@
     background-image: url("/assets/img/icons/payment_history.svg");
   }
   &__mark-as-read {
-    background-image: url("/assets/img/icons/mark_as_read.svg");
+    background-image: url("/assets/img/icons/password-show-old.svg");
   }
   &__refund-payment {
     background-image: url("/assets/img/icons/refund-payment.svg");
@@ -658,18 +742,8 @@
   &__product-contract {
     background-image: url("/assets/img/icons/product-contract.svg");
   }
-
-  &__question-help {
-    background-image: url("/assets/img/icons/question-help.svg");
-  }
-  &__info-question {
-    background-image: url("/assets/img/icons/info-question.svg");
-  }
-  &__growth {
-    background-image: url("/assets/img/icons/growth.svg");
-  }
-  &__loss {
-    background-image: url("/assets/img/icons/loss.svg");
+  &__help {
+    background: url("/assets/img/icons/help.svg");
   }
   &__quotes {
     background-image: url("/assets/img/icons/quotes.svg");
@@ -683,17 +757,14 @@
   &__unpaid-invoice {
     background-image: url("/assets/img/icons/unpaid-invoice.svg");
   }
-  &__profile-dropdown {
-    background-image: url("/assets/img/icons/profile-dropdown.svg");
+  &__user-avatar {
+    background-image: url("/assets/img/icons/user-avatar.svg");
   }
   &__message-forward {
     background-image: url("/assets/img/icons/message-forward.svg");
   }
   &__message-response {
     background-image: url("/assets/img/icons/message-response.svg");
-  }
-  &__copy-gray {
-    background-image: url("/assets/img/icons/copy-gray.svg");
   }
   &__terminate {
     background-image: url("/assets/img/icons/terminate.svg");
@@ -703,9 +774,6 @@
   }
   &__search-white {
     background-image: url("/assets/img/icons/search-white.svg");
-  }
-  &__search-gray {
-    background-image: url("/assets/img/icons/search-gray.svg");
   }
   &__templete-thumb {
     background-image: url("/assets/img/icons/templete-thumb.svg");
@@ -719,8 +787,8 @@
   &__tickets-on-time {
     background-image: url("/assets/img/icons/tickets-on-time.svg");
   }
-  &__new-tickets {
-    background-image: url("/assets/img/icons/new-tickets.svg");
+  &__tickets {
+    background-image: url("/assets/img/icons/tickets.svg");
   }
   &__on-hold-tickets {
     background-image: url("/assets/img/icons/on-hold-tickets.svg");
@@ -732,7 +800,7 @@
     background-image: url("/assets/img/icons/solved-tickets.svg");
   }
   &__no-devices-installed {
-    background-image: url("/assets/img/no-devices-installed.svg");
+    background-image: url("/assets/img/icons/no-devices-installed.svg");
   }
   &__link {
     background-image: url("/assets/img/icons/link.svg");
@@ -749,17 +817,31 @@
   &__tag-light-gray {
     background-image: url("/assets/img/icons/tag-light-gray.svg");
   }
-  &__user-light-gray {
-    background-image: url("/assets/img/icons/user-light-gray.svg");
-  }
   &__down-arrow {
     background-image: url("/assets/img/icons/down-arrow.svg");
+    &--sm {
+      background-image: url("/assets/img/icons/filter-dropdown.svg");
+    }
+  }
+  &__down-arrow__sm {
+    background-image: url("/assets/img/icons/down-arrow-sm.svg");
   }
   &__printer {
     background-image: url("/assets/img/icons/printer.svg");
   }
   &__server {
     background-image: url("/assets/img/icons/server.svg");
+  }
+  &__button-server--gray-500 {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/button-server.svg");
+    mask-image: url("/assets/img/icons/button-server.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__tablet {
     background-image: url("/assets/img/icons/tablet.svg");
@@ -775,9 +857,6 @@
   }
   &__go-to {
     background-image: url("/assets/img/icons/go-to.svg");
-  }
-  &__go-to-blue {
-    background-image: url("/assets/img/icons/go-to-blue.svg");
   }
   &__network {
     background-image: url("/assets/img/icons/network.svg");
@@ -800,23 +879,39 @@
   &__updates {
     background-image: url("/assets/img/icons/updates.svg");
   }
-  &__remove-blue {
-    background-image: url("/assets/img/icons/remove-blue.svg");
-  }
   &__restart-blue {
     background-image: url("/assets/img/icons/restart-blue.svg");
   }
   &__shutdown-blue {
     background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
-  &__connected-device {
-    background-image: url("/assets/img/icons/connected-device.svg");
-  }
-  &__more-vertical {
-    background-image: url("/assets/img/icons/more-vertical.svg");
+  &__more {
+    background-image: url("/assets/img/icons/more.svg");
   }
   &__arrow-right {
     background-image: url("/assets/img/icons/arrow-right.svg");
+  }
+  &__up-arrow-gray-400 {
+    background-color: $gray-400;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/up-arrow.svg");
+    mask-image: url("/assets/img/icons/up-arrow.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__arrow-right-gray-400 {
+    background-color: $gray-400;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/arrow-right.svg");
+    mask-image: url("/assets/img/icons/arrow-right.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__collapse {
     background-image: url("/assets/img/icons/collapse.svg");
@@ -843,16 +938,10 @@
     background-image: url("/assets/img/icons/phone-gray.svg");
   }
   &__upload-avtar {
-    background-image: url("/assets/img/icons/upload-avtar.svg");
-  }
-  &__dropdown-down {
-    background-image: url("/assets/img/icons/dropdown-down.svg");
+    background-image: url("/assets/img/icons/upload-photo.svg");
   }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");
-  }
-  &__add-white {
-    background-image: url("/assets/img/icons/add-white.svg");
   }
   &__close-round {
     background-image: url("/assets/img/icons/close-round.svg");
@@ -863,10 +952,6 @@
   &__subscribe-user {
     background-image: url("/assets/img/icons/subscribe-user.svg");
   }
-  &__create-folder {
-    background-image: url("/assets/img/icons/create-folder.svg");
-  }
-
   &__key {
     background-image: url("/assets/img/icons/key.svg");
   }
@@ -876,23 +961,17 @@
   &__copy-blue {
     background-image: url("/assets/img/icons/copy-blue.svg");
   }
-  &__templete-blue {
-    background-image: url("/assets/img/icons/templete-blue.svg");
-  }
   &__link-gray {
     background-image: url("/assets/img/icons/link-gray.svg");
   }
   &__unlink {
     background-image: url("/assets/img/icons/unlink.svg");
   }
-  &__disable {
-    background-image: url("/assets/img/icons/disable.svg");
-  }
   &__clone-document {
     background-image: url("/assets/img/icons/clone-document.svg");
   }
-  &__new-ticket-support {
-    background-image: url("/assets/img/icons/new-ticket-support.svg");
+  &__ticket-support {
+    background-image: url("/assets/img/icons/ticket-support.svg");
   }
   &__remote-access-green {
     background-image: url("/assets/img/icons/remote-access-green.svg");
@@ -988,21 +1067,21 @@
   }
 
   &.--high {
-    background-image: url("/assets/img/icons/priority-high.png");
+    background-image: url("/assets/img/icons/high-priority.svg");
 
     @media (max-width: 767px) {
       background: $error;
     }
   }
   &.--medium {
-    background-image: url("/assets/img/icons/priority-medium.png");
+    background-image: url("/assets/img/icons/medium-priority.svg");
 
     @media (max-width: 767px) {
       background: $warning;
     }
   }
   &.--low {
-    background-image: url("/assets/img/icons/priority-low.png");
+    background-image: url("/assets/img/icons/low-priority.svg");
 
     @media (max-width: 767px) {
       background: $success;

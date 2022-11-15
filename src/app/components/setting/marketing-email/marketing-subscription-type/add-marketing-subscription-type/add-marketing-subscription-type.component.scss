@@ -1,12 +1,18 @@
 @import "./src/assets/styles/variable";
 
-.tax-name {
-    width: 260px;
-    @media only screen and (max-width: 576px) {
-        width: 105px;
-    }
+.marketing-email-table {
+  &__subscription-type {
+    flex: 1 1 150px;
+  }
+  &__subscribed-users {
+    flex: 1 1 120px;
+    padding: 0 8px;
+  }
+  &__unsubscribed-users {
+    flex: 1 1 200px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 56px;
+  }
 }
-.add-industry-name {
-    width: auto;
-}
-

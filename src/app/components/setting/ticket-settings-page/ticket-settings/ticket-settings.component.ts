@@ -21,7 +21,7 @@ export class TicketSettingsComponent implements OnInit {
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
   @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
-  loading = false;
+  loading = true;
   submitted = false;
   used = false;
   ticketForm: FormGroup;
@@ -31,7 +31,6 @@ export class TicketSettingsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
-    private userService: UsersService,
     private toastr: ToastrService,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService
@@ -46,50 +45,32 @@ export class TicketSettingsComponent implements OnInit {
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
     })
-
-
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern(/^-?([0-9]\d*)?$/)
+          Validators.pattern(/^-?([0-9]\d*)?$/),
+          Validators.maxLength(7)
         ])
       ],
       outliersTime: ['', Validators.compose([Validators.required])],
       timepickerType: ['DURATION_PICKER'],
       interval: ['FIVE_MINUTES'],
-      // taxId: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.maxLength(15),
-      //     Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
-      //   ]
-      // ],
-      // taxIdDescription: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.maxLength(15),
-      //     Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
-      //   ]
-      // ],
-      // conditions: ['']
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.getCurrentCompany(res);
     })
-
     this.getActualNumber();
-    // this.getTaxNumber();
-    // this.getTermsAndConditions();
   }
 
   // convenience getter for easy access to form fields
   get f() {
     return this.ticketForm.controls;
+  }
+  changeOutliersTime(data) {
+    this.ticketForm.patchValue({ outliersTime: data });
   }
 
   /**
@@ -115,10 +96,9 @@ export class TicketSettingsComponent implements OnInit {
    * get actual number
    */
   getActualNumber() {
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('TICKET').subscribe(
       (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res) {
           this.ticketForm.patchValue({
             ticketCount: res.number
@@ -150,13 +130,11 @@ export class TicketSettingsComponent implements OnInit {
   /**
    * saved
    */
-  onSubmit() {
+  public onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
     if (this.ticketForm.invalid) {
       return;
     }
-
     const objTicket = {
       emailSettingPageNumberFormDto: {
         count: this.ticketForm.value.ticketCount,
@@ -174,11 +152,8 @@ export class TicketSettingsComponent implements OnInit {
           : null
       }
     };
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        this.toastr.success('Saved Successfully');
         if (res && res.code === 409) {
           this.nextValid = res.message;
           this.ticketForm.patchValue({
@@ -187,7 +162,6 @@ export class TicketSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error('Bad Request');
       }
     );

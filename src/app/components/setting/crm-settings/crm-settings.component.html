@@ -1,28 +1,30 @@
-<!-- Middle Wrapper -->
 <div class="page-container products-settings-page-container">
     <div class="page-insider manage-taxes">
-        <div class="heading">
-            <h6 class="qt-fw-600 qt-color-dark">CRM Settings</h6>
-            <div class="heading-serach add-category-container">
-                <div
-                    class="tickets-status-header-buttons"
-                    *ngIf="getSelectedCount() > 0"
-                >
-                    <div [textContent]="getSelectedCount() + ' Selected'"></div>
-                    <div
-                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-                        (click)="removeList()"
-                    >
-                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-                        <div>Delete</div>
-                    </div>
-                </div>
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
+            <h5 class="qt-fw-600">CRM Settings</h5>
+            <div class="qt-df">
+                <app-dynamic-tooltip
+                    [content]="'Remove'"
+                    [position]="'top'"
+                    #removeTooltip
+                ></app-dynamic-tooltip>
                 <a
                     href="javascript:;"
-                    class="btn-outline"
-                    (click)="create()"
-                    [textContent]="parseAddText()"
+                    (mouseenter)="removeTooltip.show($event.target)"
+                    (mouseleave)="removeTooltip.hide()"
+                    class="qt-button --md --gray button-gl-number__delete qt-ml-12"
+                    *ngIf="getSelectedCount() > 0"
+                    (click)="removeList()"
                 >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
+                </a>
+                <a
+                    href="javascript:;"
+                    class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                    (click)="create()"
+                >
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span [textContent]="parseAddText()"></span>
                 </a>
             </div>
         </div>

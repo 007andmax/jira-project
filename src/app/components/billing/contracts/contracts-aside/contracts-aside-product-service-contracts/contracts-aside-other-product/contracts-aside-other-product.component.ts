@@ -19,14 +19,16 @@ export class ContractsAsideOtherProductComponent implements OnInit {
   public onChangeProduct(data) {
     this.editProduct = data;
     if (data) {
-      this.product.quantity = 0;
+      this.product.quantity = 1;
       this.product.salePrice = data.sale;
+      this.product.salePrice_str = data.sale.toFixed(2);
       this.product.productId = data.versionedId.id;
       this.product.validate = true;
       this.product.description = data.description;
     } else {
       this.product.quantity = 0;
       this.product.salePrice = 0;
+      this.product.salePrice_str = "0.00";
       this.product.productId = "";
       this.product.description = null;
     }
@@ -41,7 +43,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
     this.product.salePrice = value;
   }
   getSubTotal() {
-    return this.product.quantity * this.product.salePrice;
+    return (this.product.quantity * this.product.salePrice).toFixed(2);
   }
   remove() {
     this.onRemove.emit(null);

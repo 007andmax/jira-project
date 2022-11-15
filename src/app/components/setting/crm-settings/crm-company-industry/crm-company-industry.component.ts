@@ -6,7 +6,6 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_CRM_INDUSTRIES, DELETE_CRM_INDUSTRY } from 'src/app/const/confirm';
 import { CrmService } from 'src/app/services/crm/crm.service';
-import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from './class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from './class/crm-company-industry-filter';
@@ -40,10 +39,11 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    this.industryList = this.crmStateService.getIndustryList();
+    this.industryList = JSON.parse(JSON.stringify(this.crmStateService.getIndustryList())).map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     if (this.industryList.length > 0) this.showPreloader = false;
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industryList = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      this.industryList = JSON.parse(JSON.stringify(data)).map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
       this.cd.detectChanges();
@@ -56,14 +56,30 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   onFilter(field) {
     this.filter.onFilter(field, this.industryList);
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.industryList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListIndustriesForRemove().push(item);
+      })
+    } else {
+      this.industryList.forEach(item => (item.selected = false));
+      this.crmStateService.setListIndustriesForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   onEditIndustry(item, event) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.crmService.editIndustry(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined)))
         .subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
           if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
   }
@@ -98,7 +114,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   }
   removeIndustry(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Industry`;
     this.crmStateService.setIndustryForRemove(item);
   }

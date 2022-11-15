@@ -41,10 +41,9 @@
 }
 
 .dropdown-link .default-user-avatar {
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
 }
 
 
@@ -66,29 +65,12 @@
   align-items: center;
 }
 
-.dropdown-link .default-user-avatar {
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-
-}
-
 .user-item:nth-child(even) .default-user-avatar, li:nth-child(even) .default-user-avatar {
   background-color: #ffe3af;
 }
 
 .user-item:nth-child(odd) .default-user-avatar, li:nth-child(odd) .default-user-avatar {
   background-color: #aae8e8;
-}
-.add-tax-dropdown,
-.add-category-lp-dropdown > div {
-  border-radius: 3px;
-  width: 240px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  position: relative;
-  background: $white;
-  margin: 0;
 }
 
 .add-tax-dropdown:after,
@@ -103,36 +85,33 @@
   top: -8px;
   left: 14px;
 }
-.add-tax-dropdown input,
-.add-tax-dropdown .form-control {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid $gray-400;
-  outline: none;
-  padding: 10px 0;
-  background-color: $white;
-}
+//.add-tax-dropdown input, // TODO check this style
+//.add-tax-dropdown .form-control {
+//  width: 100%;
+//  border: none;
+//  border-bottom: 1px solid $gray-400--old;
+//  outline: none;
+//  padding: 10px 0;
+//  background-color: $white;
+//}
 .add-tax-dropdown [class*='col-md-']{
   margin-bottom: 20px;
 }
 .add-tax-dropdown input::placeholder{
-  color: $gray-600;
+  color: $gray-600--old;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: .5px;
 }
-.add-tax-dropdown label {
-  color: $gray-800;
-  font-size: 13px;
-  padding-left: 25px;
-}
-.add-tax-dropdown label .control-indicator {
-  top: -1px;
-}
+//.add-tax-dropdown label { // TODO check this style
+//  color: $gray-800--old;
+//  font-size: 13px;
+//  padding-left: 25px;
+//}
 .add-category-lp-dropdown-btns .btn-default  {
   background-color: $background !important;
-  border: 1px solid $gray-500;
-  color: $gray-800;
+  border: 1px solid $gray-500--old;
+  color: $gray-800--old;
 }
 .add-category-lp-dropdown-btns .btn-success {
   background-color: $success !important;
@@ -157,8 +136,8 @@
   width: 130px;
 }
 .add-category-lp-dropdown-btns .btn-default:hover  {
-  background-color: $gray-500;
-  color: $gray-800;
+  background-color: $gray-500--old;
+  color: $gray-800--old;
 }
 .add-category-lp-dropdown-btns .btn-default {
   margin-left: 12px;
@@ -209,8 +188,8 @@
   }
 
   .btn-primary.not-active {
-    background-color: $gray-800;
-    border-color: $gray-800;
+    background-color: $gray-800--old;
+    border-color: $gray-800--old;
     cursor: default;
     pointer-events: none;
   }
@@ -223,17 +202,6 @@
   border: none;
   background-color: transparent;
 }
-.new-companies-content__modal .google-plus:before  {
-  position: absolute;
-  content: '';
-  background-image: url("/assets/img/icons/google-plus.png");
-  width: 20px;
-  height: 13px;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
 .tab-btns {
   font-size: 0;
 }
@@ -241,7 +209,7 @@
 .tab-btns .btn {
   background-color: $white;
   font-size: 13px;
-  color: $gray-800;
+  color: $gray-800--old;
   display: inline-block;
   margin: 0;
   border: 1px solid $background;
@@ -272,7 +240,7 @@
 }
 .textarea.email-text-block,
 .textarea.quote-text-block {
-  border: 1px solid $gray-500;
+  border: 1px solid $gray-500--old;
   width: 100%;
   min-height: 273px;
   outline: none;
@@ -282,7 +250,7 @@
 }
 .textarea.email-text-block::placeholder,
 .textarea.quote-text-block::placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
 }
 
 .email-text-block textarea,
@@ -291,7 +259,7 @@
   width: 100%;
   border: none;
   font-size: 13px;
-  color: $gray-800;
+  color: $gray-800--old;
   outline: none;
   padding: 8px 0;
   border-bottom: 1px solid $background;
@@ -320,14 +288,10 @@
 
 .email-text-block textarea::placeholder,
 .quote-text-block textarea::placeholder {
-  color: $gray-600;
+  color: $gray-600--old;
 }
 .location {
   position: relative;
-}
-.new-companies-content__modal .google-plus:before {
-  right: 25px;
-  top: 45px;
 }
 .company-content .avatar-create {
   margin: 0;

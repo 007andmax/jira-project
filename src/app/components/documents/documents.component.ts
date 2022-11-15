@@ -139,13 +139,13 @@ export class DocumentsComponent implements OnInit, OnDestroy {
 
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_DOCUMENT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete this category?`;
     this.documentsStateService.setCategoryForRemove(data);
   }
   onRemoveDocument(data) {
     this.confirmStateService.setConfirmAction(REMOVE_DOCUMENT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete this document?`;
     this.documentsStateService.setDocumentForRemove(data);
   }

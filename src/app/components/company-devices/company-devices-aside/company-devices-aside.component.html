@@ -43,7 +43,7 @@
             >
                 <div ngbDropdown container="body" class="qt-overflow-v">
                   <div
-                      class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                      class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more"
                       ngbDropdownToggle
                   ></div>
                   <ul
@@ -55,7 +55,7 @@
                           ngbDropdownItem
                           (click)="gotiDetailDevice()"
                       >
-                          <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
+                          <div class="qt-ic-c icon__go-to qt-pointer qt-sz-20 qt-mr-12"></div>
                           Device Detail
                       </li>
                       <li
@@ -64,7 +64,7 @@
                           *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
                           (click)="remoteAccess('PROXY')"
                       >
-                          <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-18 qt-mr-5"></div>
+                          <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
                           Remote Access
                       </li>
                       <li
@@ -72,7 +72,7 @@
                           *ngIf="currentDevice.type === 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
                           (click)="showRemoteAccess = !showRemoteAccess "
                       >
-                          <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-18 qt-mr-5"></div>
+                          <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-20 qt-mr-12"></div>
                           Remote Access
                           <ul
                               class="dropdown-menu-qt__submenu dropdown-menu"
@@ -97,7 +97,7 @@
                           (click)="turnOff('reboot')"
                           ngbDropdownItem
                       >
-                          <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          <div class="icon__restart qt-bg-contain qt-sz-20 qt-mr-12"></div>
                           Restart
                       </li>
                       <li
@@ -105,7 +105,7 @@
                           (click)="turnOff('shutdown')"
                           ngbDropdownItem
                       >
-                          <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          <div class="icon__shutdown qt-bg-contain qt-sz-20 qt-mr-12"></div>
                           Shutdown
                       </li>
                       <li
@@ -114,14 +114,14 @@
                           *ngIf="!currentDevice.master"
                           ngbDropdownItem
                       >
-                          <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          <div class="icon__master-agent qt-bg-contain qt-sz-20 qt-mr-12"></div>
                           Set as Master Agent
                       </li>
                       <li
                           class="pointer"
                           (click)="removeCurrentDevice()"
                       >
-                          <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          <div class="icon__remove pointer qt-bg-contain qt-sz-20 qt-mr-12"></div>
                           Remove
                       </li>
                   </ul>

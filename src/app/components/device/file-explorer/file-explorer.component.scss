@@ -95,7 +95,7 @@
             justify-content: center;
             font-size: 0;
             background: url(../../../../assets/img/device/search-clear.svg) no-repeat center transparent;
-            color: $gray-800;
+            color: $gray-800--old;
             height: 100%;
             width: 35px;
             z-index: 1;
@@ -228,7 +228,7 @@
             font-size: 10px;
             line-height: 1.2;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
             border-bottom: 1px solid #e1e9f5;
             padding-top: 0;
             padding-bottom: 10px;

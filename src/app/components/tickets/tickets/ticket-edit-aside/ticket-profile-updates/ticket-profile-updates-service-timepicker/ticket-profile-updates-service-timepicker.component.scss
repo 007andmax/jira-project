@@ -3,12 +3,7 @@
 .start-end-timer {
   display: flex;
   .start, .end {
-    border: solid 1px $gray-500;
-    border-radius: 3px;
-    height: 40px;
     margin-right: 8px;
-    color: $gray-800;
-    padding: 9px 12px;
     width: 90px;
 
     @media (max-width: 767px) {
@@ -37,7 +32,7 @@
 
     .ui-timepicker-duration {
       font-size: 11px;
-      color: $gray-800;
+      color: $gray-800--old;
       margin-left: 0;
     }
 
@@ -55,7 +50,7 @@
       color: $primary-2;
 
       .ui-timepicker-duration {
-        color: $gray-800;
+        color: $gray-800--old;
       }
     }
 

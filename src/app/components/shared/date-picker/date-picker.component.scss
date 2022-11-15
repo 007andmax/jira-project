@@ -5,6 +5,7 @@
   }
   .date-picker-container {
     height: min-content;
+    max-height: initial;
 
     @media (max-width: 767px) {
       top: 50% !important;

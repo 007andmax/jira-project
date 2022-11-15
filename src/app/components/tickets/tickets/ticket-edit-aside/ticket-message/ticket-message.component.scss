@@ -11,7 +11,7 @@
     &__item {
       border-radius: 10px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: dashed 1px $gray-500;
+      border: dashed 1px $gray-500--old;
       background-color: $white;
       padding: 16px;
       display: flex;
@@ -19,6 +19,22 @@
 
       @media (max-width: 767px) {
         flex-wrap: wrap;
+      }
+
+      .qt-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+          margin-left: 50px;
+          margin-top: 16px;
+        }
+
+        app-preloader-ticket {
+          position: absolute;
+        }
       }
 
       &-info {
@@ -74,33 +90,6 @@
 
       @media (max-width: 767px) {
         max-width: calc(100% - 50px);
-      }
-    }
-
-
-    &__item-btn {
-      padding: 14px 20px;
-      white-space: nowrap;
-      font-size: 13px;
-      color: $white;
-      font-weight: 600;
-      border-radius: 4px;
-      background-color: $primary-1;
-      height: 40px;
-      line-height: normal;
-      border: none;
-      margin-left: 16px;
-      justify-content: center;
-       position: relative;
-      display: flex;
-      align-items: center;
-      @media (max-width: 767px) {
-        margin-left: 50px;
-        margin-top: 16px;
-      }
-
-      app-preloader-ticket {
-        position: absolute;
       }
     }
 

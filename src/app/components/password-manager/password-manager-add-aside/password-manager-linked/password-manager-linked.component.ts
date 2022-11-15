@@ -27,7 +27,9 @@ export class PasswordManagerLinkedComponent implements OnInit {
   public usersList = [];
   public gadgets = [];
   public newGadgets: any;
+  selectedCompanyId: string;
   companies: Array<Company> = [];
+  preloader: boolean = true;
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
@@ -37,6 +39,11 @@ export class PasswordManagerLinkedComponent implements OnInit {
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
+    if (this.devicesStateService.getAllDevices()) this.preloader = false;
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.preloader = false;
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+    })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
@@ -47,23 +54,25 @@ export class PasswordManagerLinkedComponent implements OnInit {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
-  onSelectCompany(data) {
+  onSelectCompany(id) {
 
     this.usersList = [];
     this.devicesList = [];
     this.gadgets = [];
-    if (data) {
+    this.selectedCompanyId = null;
+    if (id) {
+      this.selectedCompanyId = id;
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
         let isArchived = item.deletedAt || !company;
-        return !isArchived && item.company.id === data.id
+        return !isArchived && item.company.id === id
       });
       users.forEach(item => {
         this.usersList.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
       })
       this.usersList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
+      let devices = (this.devicesStateService.getAllDevices()[id]) ? this.devicesStateService.getAllDevices()[id] : [];
       devices.forEach(item => {
         this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })

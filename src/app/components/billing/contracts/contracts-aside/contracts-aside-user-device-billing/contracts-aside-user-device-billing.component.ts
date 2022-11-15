@@ -19,6 +19,7 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
 import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
 import { Subscription } from 'rxjs';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
@@ -27,7 +28,7 @@ import { ContractsListService } from '../../services/contracts-list.service';
   providers: [ContractsListService]
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxes') taxesDP: TaxesComponent;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
@@ -77,8 +78,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-    this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-    new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
+    this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
+    new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
     this.setMinCustomDate();
   }
@@ -202,9 +203,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onSetServiceContractServicesType(event, type) {
     if (event.target.checked) {
       this.contractsUserDevice.billType = type;
-      if (type === "DEVICE") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-      new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))];
-      if (type === "USER") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed users", 0, this.defaultSelectedTax.map(item => item.id))];
+      if (type === "DEVICE") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
+      new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))];
+      if (type === "USER") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed users", 0, this.defaultSelectedTax.map(item => item.id))];
     }
   }
   setToggleMaximumAmountHours(data) {
@@ -249,7 +250,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.blockTimeServices.push(new ContractsBlockTimeService("", 0));
   }
   addServiceContractService() {
-    this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(0, "", 0, this.defaultSelectedTax.map(item => item.id)));
+    this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, "", 0, this.defaultSelectedTax.map(item => item.id)));
   }
   onRemoveServices(i) {
     this.contractsUserDevice.services.splice(i, 1);
@@ -310,7 +311,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);

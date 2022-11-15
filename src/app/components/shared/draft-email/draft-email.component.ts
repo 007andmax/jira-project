@@ -3,17 +3,18 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { DraftEmail } from './class/draft-email';
 import { FilesInfo } from './class/files-Info';
 import { FilesInfoItem } from './class/files-Info-item';
-
 import { DraftEmailService } from 'src/app/services/draft-email/draft-email.service';
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DraftEmailValidate } from './class/draft-email-validate';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { forkJoin } from 'rxjs';
 import { UploadAreaComponent } from '../upload-area/upload-area.component';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
+import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -60,7 +61,7 @@ export class DraftEmailComponent implements OnInit {
       },
     ],
     uploadUrl: 'v1/image',
-    sanitize: true,
+    sanitize: false,
   };
   action: string = null;
   tab: string = 'plain';
@@ -73,8 +74,10 @@ export class DraftEmailComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
   constructor(public draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
-    private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
+    public draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public reportsStateService: ReportsStateService,
+    public invoiceStateService: InvoiceStateService,
+    public paymentsStateService: PaymentsStateService,
     public reportsService: ReportsService,
   ) { }
 
@@ -102,7 +105,6 @@ export class DraftEmailComponent implements OnInit {
       this.draftEmail = new DraftEmail();
     })
   }
-
   close() {
     if (this.draftEmail.attachments.length > 0) {
       forkJoin(

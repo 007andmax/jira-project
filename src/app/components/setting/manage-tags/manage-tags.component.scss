@@ -1,41 +1,17 @@
-/*** All css files include ***/
-// @import "../../../../assets/scss/fonts";
 @import "./src/assets/styles/variable";;
-@import "../../../../assets/scss/mixin";
-@import "../../../../assets/scss/custom";
 
-.action {
-  position: relative;
-  .modal-content.toggle-area {
-    right: 16px;
-    top: 42px;
+.manage-tags-table {
+  &__custom-tags {
+    flex: 1 1 150px;
+    padding: 0 8px;
   }
-  .m-btn-col {
-    .btn {
-      margin-left: 0;
-      &.btn-primary {
-        margin-right: 12px;
-      }
-      &.btn.btn-secondary {
-        min-width: 108px;
-      }
-    }
+
+  &__count {
+    flex: 1 1 350px;
+    padding: 0 8px;
   }
-}
 
-.invalid-feedback {
-  margin-top: 0.25rem;
-  font-size: 80%;
-  color: $error;
-  text-align: left;
-}
-
-input.ng-invalid.is-invalid {
-  border: 1px solid $error;
-}
-
-.manage-tags {
-  .heading{
-    border-bottom:1px solid $background !important;
+  &__action {
+    flex: 0 0 56px;
   }
 }

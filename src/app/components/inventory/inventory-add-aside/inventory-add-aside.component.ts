@@ -11,8 +11,6 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Company } from 'src/app/interfaces/company/company';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ProductService } from 'src/app/services/product/product.service';
-import { InventoryValidate } from '../class/inventory-validate';
-import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { InventoryAddBodyComponent } from './inventory-add-body/inventory-add-body.component';
 
 @Component({

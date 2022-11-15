@@ -26,7 +26,7 @@
     support-page-info {
         width: 290px;
         padding: 20px;
-        background-color: $gray-200;
+        background-color: $gray-200--old;
         height: 100%;
         overflow: auto;
     }
@@ -132,7 +132,7 @@
         left: 0;
         right: 0;
         height: 1px;
-        border-bottom: dashed 1px $gray-400;
+        border-bottom: dashed 1px $gray-400--old;
     }
 }
 .category-item-category__name-text {
@@ -153,10 +153,10 @@
 }
 
 .icon__category-closed {
-    height: 11.67px;
-    width: 7.4px;
+    height: 8px;
+    width: 8px;
     flex-shrink: 0;
-    margin-top: 4px;
+    margin-top: 7px;
 
     &.toggle-category {
         transform: rotate(90deg) translate(0px, -2px);

@@ -1,3 +1,4 @@
+import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Product } from './product';
 
 export interface CategoryProduct {
@@ -8,4 +9,5 @@ export interface CategoryProduct {
     name: string;
     products: Array<Product>;
     productsAmount: number;
+    glNumber: GlNumber;
 }

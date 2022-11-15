@@ -1,6 +1,6 @@
 $header-height: 64px;
-$left-panel-width: 264px;
-$left-panel-mini-width: 56px;
+$left-panel-width: 280px;
+$left-panel-mini-width: 64px;
 
 // New Color Palette
 $primary-1: #16a4fa;
@@ -12,14 +12,48 @@ $secondary-4: #2bc7c6;
 $success: #2ec866;
 $warning: #ffb937;
 $error: #ff5263;
-$gray-800: #454f5b;
-$gray-700: #637382;
-$gray-600: #919eab;
-$gray-500: #c5cdd5;
-$gray-400: #dfe3e8;
-$gray-300: #edf0f2;
-$gray-200: #f4f6f8;
-$gray-100: #f9fafb;
+
+$blue-light-700: #1283C8;
+$blue-light-600: #16a4fa;
+$blue-light-500: #45B6FB;
+
+$gray-900: #101828;
+$gray-800: #1d2939;
+$gray-700: #344054;
+$gray-600: #475467;
+$gray-500: #667085;
+$gray-400: #98A2B3;
+$gray-300: #D0D5DD;
+$gray-200: #EAECF0;
+$gray-100: #F2F4F7;
+$gray-50: #F9FAFB;
+$gray-25: #FCFCFD;
+
+
+$purple-500: #7A5AF8;
+
+$red-600: #D92D20;
+$red-500: #F04438;
+
+$turquoise-600: #2BC7C6;
+
+$green-600: #2EC866;
+
+$yellow-25: #FFF8EB;
+$yellow-300: #FFDC9B;
+$yellow-600: #FFB937;
+$yellow-800: #996F21;
+
+// Variable for old style. They will be removed in the future
+$gray-800--old: #454f5b;
+$gray-700--old: #637382;
+$gray-600--old: #919eab;
+$gray-500--old: #c5cdd5;
+$gray-400--old: #dfe3e8;
+$gray-300--old: #edf0f2;
+$gray-200--old: #f4f6f8;
+$gray-100--old: #f9fafb;
+
 $white: #ffffff;
 $background: #edf2f6;
 

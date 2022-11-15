@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
-import { ToastrService } from "ngx-toastr";
 import { map } from "rxjs/operators";
 
 @Component({
@@ -10,10 +9,9 @@ import { map } from "rxjs/operators";
 })
 export class EmailNotificationsComponent implements OnInit {
   emailNotifications: any;
-
+  @ViewChild('emailForm') emailForm: any;
   constructor(
     private settingService: SettingService,
-    private toastr: ToastrService
   ) { }
 
   /**
@@ -34,22 +32,17 @@ export class EmailNotificationsComponent implements OnInit {
    * saved form
    * @param emailForm 
    */
-  onSubmit(emailForm) {
+  onSubmit() {
     var emailObjToSend = {
-      newDevice: emailForm.value.newDevice,
-      ticketCreated: emailForm.value.ticketCreated,
-      myTicketUpdated: emailForm.value.myTicketUpdated,
+      newDevice: this.emailForm.value.newDevice,
+      ticketCreated: this.emailForm.value.ticketCreated,
+      myTicketUpdated: this.emailForm.value.myTicketUpdated,
       ticketCloseNotifications:
-        emailForm.value.ticketCloseNotifications || false
+        this.emailForm.value.ticketCloseNotifications || false
     };
 
     this.settingService
       .email(emailObjToSend)
-      .pipe(
-        map(res => {
-          this.toastr.success("Email Notification Changed Successfully");
-        })
-      )
       .subscribe();
   }
 }

@@ -119,7 +119,9 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
     }
   }
-
+  public isSelected(primaryEmail) {
+    return this.selectedUsers.find(item => item == primaryEmail);
+  }
   /**
    * Add user to selected
    * @param event - selected user

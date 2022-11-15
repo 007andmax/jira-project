@@ -1,14 +1,13 @@
 <div class="qt-df qt-ai-c">
-    <app-drop-down
+    <company-drop-down
         class="contracts-company-filter search-company"
         [search]="true"
         #companyDp
         [placeholder]="'Select Company'"
         [change]="true"
         [field]="'name'"
-        [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
-    ></app-drop-down>
+    ></company-drop-down>
     <app-drop-down
         class="contracts-company-filter search-users "
         #typesDp
@@ -17,6 +16,15 @@
         [list]="listsTypes"
         [field]="'title'"
         (onSelectedItem)="onSelectType($event)"
+    ></app-drop-down>
+    <app-drop-down
+        class="contracts-company-filter search-users "
+        #optionsDp
+        [placeholder]="'Select by option'"
+        [change]="false"
+        [list]="listsOptions"
+        [field]="'title'"
+        (onSelectedItem)="onSelectOption($event)"
     ></app-drop-down>
     <app-multi-datepicker
         class="qt-input-block contracts-date-filter search-type"

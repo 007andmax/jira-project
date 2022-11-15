@@ -35,7 +35,7 @@ export class RecurringTicketsTableComponent implements OnInit {
   */
   public getPareDate(milisecong) {
     let date = new Date(milisecong);
-    let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+    let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTechCompany().addresses[0].timeZone.timeOffset);
     return `${startDate.getDate()} ${MONTHS_SHORT[startDate.getMonth()]} ${startDate.getFullYear()}`;
   }
 

@@ -6,18 +6,18 @@
     overflow: auto;
     height: auto;
     border-radius: 5px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     width: 100%;
     padding: 8px 12px;
     font-size: 13px;
-    color: $gray-800;
+    color: $gray-800--old;
     &:focus-visible {
         outline:none;
     }
 }
 #inventory-description[placeholder]:empty:before {
     content: attr(placeholder);
-    color: $gray-600;
+    color: $gray-600--old;
 }
 .qt-checkbox {
     width: auto;
@@ -25,4 +25,9 @@
 }
 .taxes-container {
     margin-top: 0 !important;
+}
+.mat-error {
+    font-size: 12px;
+    position: absolute;
+    top: calc(100% + 5px);
 }

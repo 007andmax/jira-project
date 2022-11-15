@@ -8,6 +8,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
+import { User } from '../users/class/user';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
@@ -31,9 +32,11 @@ import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.com
 })
 export class LeftPanelComponent implements OnInit {
   currentCompany: Company;
+  currentUser: User;
   toggleLeftPanel: boolean = false;
   state: string = '';
   page: string = '';
+  showMobTab = false;
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
@@ -67,6 +70,10 @@ export class LeftPanelComponent implements OnInit {
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.getCurrentUser(data)
+    })
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -98,6 +105,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
 
+
           if (window.location.href.includes(`/inventory/products`)) this.state = 'inventory';
           if (window.location.href.includes(`/password-manager`)) this.state = 'password-manager';
           if (window.location.href.includes(`/setting/myprofile`)) this.state = 'myprofile-component';
@@ -109,9 +117,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/emailSetting`)) this.state = 'email-setting-component';
           if (window.location.href.includes(`/setting/taxes`)) this.state = 'taxes-component';
           if (window.location.href.includes(`/setting/permission`)) this.state = 'permission-manage-component';
-          if (window.location.href.includes(`/setting/emailTemplete`)) this.state = 'email-templete-component';
-          if (window.location.href.includes(`/setting/integration`)) this.state = 'integrations-component';
-          if (window.location.href.includes(`/setting/accounting`)) this.state = 'invoice-ticket-component';
+          if (window.location.href.includes(`/setting/emailTemplate`)) this.state = 'email-template-component';
+          if (window.location.href.includes(`/setting/finance`)) this.state = 'invoice-ticket-component';
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
           if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
           if (window.location.href.includes(`/setting/deviceSetting`)) this.state = 'device-setting-component';
@@ -119,14 +126,15 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
 
+          if (window.location.href.includes(`/support-page`)) this.state = 'support-page';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
-          if (window.location.href.includes(`/tickets`)) this.state = 'new-tickets';
+          if (window.location.href.includes(`/tickets`) && !window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets';
           if (window.location.href.includes(`/recurring-tickets`)) this.state = 'recurring-tickets';
           if (window.location.href.includes(`/quickSupport`)) this.state = 'new-quickSupport';
-          if (window.location.href.includes(`/billable-tickets`)) this.state = 'new-billable-tickets';
+          if (window.location.href.includes(`/billable-tickets`) && !window.location.href.includes(`/billable`)) this.state = 'new-billable-tickets';
           if (window.location.href.includes(`/documents`)) this.state = 'new-documents';
           if (window.location.href.includes(`/documents/add`)) this.state = 'new-add-documents';
           if (window.location.href.includes(`/documents/add`) && this.companiesStateService.getCompanyRoutingId()) this.state = 'new-add-documents-company';
@@ -170,7 +178,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/devices`)) this.state = 'new-devices';
           if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
-
+          if (window.location.href.includes(`/device/`)) this.state = 'new-device';
+          if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           if (!this.cd['destroyed']) {
@@ -204,6 +213,21 @@ export class LeftPanelComponent implements OnInit {
         this.cd.detectChanges();
       }
     })
+    /* this.companiesStateService.onCurrentCompany.subscribe(data => {
+       if (this.state === '') {
+         this.leftPanelStateService.firstOpen(this.state);
+         this.leftPanelStateService.changeState(this.state);
+         this.cd.detectChanges();
+         this.goToDefaultPage();
+       }
+     })*/
+  }
+  private getCurrentUser(data) {
+    this.currentUser = data;
+  }
+  goToDefaultPage() {
+    this.state = 'new-tickets';
+    this.goToLink('tickets');
   }
   updatePage(data) {
     if (this.leftPanelService.isSupportPage(data)) this.page = "SUPPORT";
@@ -224,6 +248,7 @@ export class LeftPanelComponent implements OnInit {
     if (this.page === "PASSWORD_MANAGER" && this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
   }
   onOpenPanel() {
+    this.showMobTab = !this.showMobTab;
     this.leftPanelStateService.toggleLeftPanel(false);
   }
   onToggleLeftPanel() {
@@ -275,9 +300,8 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'email-setting-component') this.goToLink('setting/emailSetting');
       if (this.state === 'taxes-component') this.goToLink('setting/taxes');
       if (this.state === 'permission-manage-component') this.goToLink('setting/permission');
-      if (this.state === 'email-templete-component') this.goToLink('setting/emailTemplete');
-      if (this.state === 'integrations-component') this.goToLink('setting/integration');
-      if (this.state === 'invoice-ticket-component') this.goToLink('setting/accounting');
+      if (this.state === 'email-template-component') this.goToLink('setting/emailTemplate');
+      if (this.state === 'invoice-ticket-component') this.goToLink('setting/finance');
       if (this.state === 'crm-settings') this.goToLink('setting/crm-settings');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
       if (this.state === 'subscription-component') this.goToLink('setting/subscription');
@@ -296,6 +320,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-documents') this.goToLink('documents');
       if (this.state === 'new-add-documents') this.goToLink('documents/add');
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
+      if (this.state === 'support-page') this.goToLink('support-page');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
       if (this.state === 'new-devices') this.goToLink('devices');
       if (this.state === 'new-device-summary') this.goToLink('devices/reports');
@@ -346,13 +371,8 @@ export class LeftPanelComponent implements OnInit {
     return `${this.currentCompany.name[0].toUpperCase()}`
   }
   checkLogo() {
-    return (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id || this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id)
-  }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
+    if (this.currentUser && this.currentUser.avatar) return `/users/${this.currentUser.id}/image.jpg?t=${this.currentUser.avatar.updatedAt}`;
+    return null;
   }
   public getAccessReports() {
     return this.getPermissions("VIEW_SALES_REPORT") ||

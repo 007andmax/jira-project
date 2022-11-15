@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Subscription } from 'rxjs';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { DefaultServices } from '../class/default-service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
@@ -10,6 +9,7 @@ import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { DefaultServiceValidate } from '../class/default-service-validate';
 import { DefaultServicesStateService } from 'src/app/states/default-services/default-services-state.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-default-services-edit',
@@ -22,7 +22,7 @@ export class DefaultServicesEditComponent implements OnInit {
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   service: DefaultServices;
   sub: Subscription = new Subscription();
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private glNumberService: GlNumberService,
@@ -69,6 +69,7 @@ export class DefaultServicesEditComponent implements OnInit {
   save() {
     if (!this.validate.isValidate(this.service)) return;
     this.defaultServicesService.changeService(this.service.getDataForUpdate()).subscribe(data => {
+      this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
     })
   }

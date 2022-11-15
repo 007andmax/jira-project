@@ -58,7 +58,7 @@
                 <div
                     (click)="toggleItem(item)"
                     class="company-tag-item"
-                    [ngClass]="{'is-hover':item.isHover}"
+                    [ngClass]="{'is-hover':item.isHover,'--selected':isSeleted(item)}"
                     [id]="'company-' + item.id"
                 >
                     <label class="qt-checkbox pointer">

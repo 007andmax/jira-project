@@ -1,7 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -10,6 +8,10 @@ import { GoogleAuthenticatorComponent } from 'src/app/components/shared/google-a
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { LOG_OUT } from 'src/app/const/confirm';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
   selector: 'app-account',
@@ -18,8 +20,14 @@ import { GoogleAuthenticatorScratchesComponent } from 'src/app/components/shared
 })
 export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
-  authenticationTypesType = 'BASIC';
+  authenticationTypes = [new TitleListType("No authentication", "DISABLED"),
+  new TitleListType("Basic two-factor authentication", "BASIC"),
+  new TitleListType("Secure two-factor authentication - by email", "SECURE"),
+  new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
+  authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
   oldPwdCorrect = true;
+  showCurrentPassword: boolean = false;
+  showNewPassword: boolean = false;
   public passwordForm: FormGroup;
   show = false;
   sub: Subscription = new Subscription();
@@ -28,27 +36,53 @@ export class AccountComponent implements OnInit, OnDestroy {
     private settingService: SettingService,
     private toastr: ToastrService,
     private modalService: NgbModal,
-    private elRef: ElementRef,
-    private usersStateService: UsersStateService,
+    private confirmStateService: ConfirmStateService,
   ) { }
 
 
   ngOnInit() {
-    /**
-     * init form validation and declaration
-     */
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === LOG_OUT) this.onLogOut();
+      }
+    })
+    this.sub.add(getConfirm);
     this.passwordForm = this.formBuilder.group(
       {
-        oldpass: ['', [Validators.required, Validators.minLength(6)]],
-        newpass: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPass: ['', Validators.required]
+        oldpass: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
+        newpass: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
       },
-      {
-        validator: MustMatch('newpass', 'confirmPass')
-      }
     );
-
     this.get2FA();
+  }
+  onLogOut() {
+    this.settingService
+      .getActivityHistory()
+      .pipe(
+        map((res: any) => {
+          if (res) {
+            this.toastr.success('Log out other sessions successfully.');
+            const activityHistory = res;
+            const currentDevice = res.find(device => {
+              return device.current;
+            });
+
+            const idsForDelete = [];
+            for (let i = 0; i < activityHistory.length; i++) {
+              let deviceId = activityHistory[i].id;
+              if (deviceId !== currentDevice.id) {
+                idsForDelete.push(deviceId);
+              }
+            }
+            if (idsForDelete) {
+              this.settingService
+                .closeSessions(idsForDelete)
+                .subscribe(res => { });
+            }
+          }
+        })
+      )
+      .subscribe();
   }
 
   // convenience getter for easy access to form fields
@@ -62,26 +96,26 @@ export class AccountComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           if (res) {
-            this.authenticationTypesType = res.value;
+            this.authenticationTypesType = this.authenticationTypes.find(item => item.type == res.value);
           }
         })
       )
       .subscribe();
   }
   showScratchCodes() {
-    const modalRef = this.modalService.open(GoogleAuthenticatorScratchesComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(GoogleAuthenticatorScratchesComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
 
   }
   // selected auth type
   onAuthTypeChange(type: string) {
     if (type === "GOOGLE_SECURE") {
-      const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal' });
+      const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal', backdrop: 'static', keyboard: false });
       let onReset = modalRef.componentInstance.onReset.subscribe(data => {
-        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+        this.authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
       })
       let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
-        this.authenticationTypesType = type;
-        this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+        this.authenticationTypesType = this.authenticationTypes.find(item => item.type == type);
+
       })
       this.sub.add(onSetQrCode);
       return;
@@ -90,8 +124,7 @@ export class AccountComponent implements OnInit, OnDestroy {
       .twoFactorAuth(type)
       .pipe(
         map(res => {
-          this.authenticationTypesType = type;
-          this.elRef.nativeElement.querySelector(".authentication-type select").value = this.authenticationTypesType;
+          this.authenticationTypesType = this.authenticationTypes.find(item => item.type == type);
         })
       )
       .subscribe();
@@ -101,36 +134,9 @@ export class AccountComponent implements OnInit, OnDestroy {
    * logout sessions
    */
   logOutSessions() {
-    if (confirm('Are you sure to log out other sessions ')) {
-      this.settingService
-        .getActivityHistory()
-        .pipe(
-          map((res: any) => {
-            if (res) {
-              this.toastr.success('Log out other sessions successfully.');
-              const activityHistory = res;
-              const currentDevice = res.find(device => {
-                return device.current;
-              });
-
-              const idsForDelete = [];
-              for (let i = 0; i < activityHistory.length; i++) {
-                let deviceId = activityHistory[i].id;
-                if (deviceId !== currentDevice.id) {
-                  idsForDelete.push(deviceId);
-                }
-              }
-
-              if (idsForDelete) {
-                this.settingService
-                  .closeSessions(idsForDelete)
-                  .subscribe(res => { });
-              }
-            }
-          })
-        )
-        .subscribe();
-    }
+    this.confirmStateService.setConfirmAction(LOG_OUT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Are you sure to log out other sessions?`;
   }
 
   /**
@@ -138,8 +144,6 @@ export class AccountComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.passwordForm.invalid) {
       return;
     }

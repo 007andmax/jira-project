@@ -1,0 +1,15 @@
+@import "./src/assets/styles/variable";
+
+.active-note {
+    margin-bottom: 0px !important;
+}
+
+.mark-as-active {
+    color: $gray-800--old;
+    font-weight: 500;
+}
+/deep/ .--note-error {
+    .angular-editor-textarea,.angular-editor-toolbar {
+        border: 1px solid #ff5263 !important;
+    }
+}

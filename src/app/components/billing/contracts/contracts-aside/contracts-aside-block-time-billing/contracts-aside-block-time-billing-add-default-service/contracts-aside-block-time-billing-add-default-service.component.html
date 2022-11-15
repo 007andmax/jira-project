@@ -1,7 +1,7 @@
 <div
-    class="add-service-container"
+    class="add-service-container qt-pos-rel"
     ngbDropdown
-    placement="top-right"
+    placement="bottom-left"
 >
     <button
         class="qt-btn --outline --small"
@@ -12,7 +12,6 @@
     </button>
     <ul
         class="qt-dropdown-menu list-services --open-bot"
-        style="max-height: 165px;"
         ngbDropdownMenu
         aria-labelledby="dropdownBasic2"
     >
@@ -27,6 +26,7 @@
                 ngbDropdownItem
                 [textContent]="item.name"
                 (click)="select(item)"
+                [ngClass]="{'--selected':isSelected(item.versionedId.id)}"
             ></li>
         </ng-template>
     </ul>

@@ -35,7 +35,7 @@
     padding: 6px 8px;
     color: $white;
     text-align: center;
-    background-color: $gray-800;
+    background-color: $gray-800--old;
     border-radius: 0.25rem;
   }
   &.bs-tooltip-bottom .arrow,
@@ -45,7 +45,7 @@
     &::before {
       top: 0;
       border-width: 0 0.4rem 0.4rem 0.4rem;
-      border-bottom-color: $gray-800;
+      border-bottom-color: $gray-800--old;
     }
   }
   &.bs-tooltip-top .arrow {
@@ -53,7 +53,7 @@
     &::before {
       top: 0;
       border-width: 0.4rem 0.4rem 0;
-      border-top-color: $gray-800;
+      border-top-color: $gray-800--old;
     }
   }
   &.bs-tooltip-left .arrow,
@@ -64,7 +64,7 @@
     &::before {
       top: 0;
       border-width: 0.4rem 0.4rem 0.4rem 0.4rem;
-      border-left-color: $gray-800;
+      border-left-color: $gray-800--old;
     }
   }
 }

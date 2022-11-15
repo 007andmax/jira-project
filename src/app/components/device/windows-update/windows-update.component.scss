@@ -16,7 +16,7 @@
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: $gray-800;
+        color: $gray-800--old;
         padding-left: 25px;
         min-height: 16px;
         &:hover{
@@ -148,7 +148,7 @@
                 h5 {
                     margin-bottom: 4px;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                 }
                 .colum {
                     float: left;

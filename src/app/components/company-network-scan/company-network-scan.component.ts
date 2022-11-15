@@ -2,10 +2,10 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } fr
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AgentService } from 'src/app/services/agent/agent.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
-import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
@@ -54,8 +54,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   networkvalue: any[] = [];
   nets: [] = [];
   asset: any;
-  assetName: any;    
-  nonAgentVersionList: any[] = [];  
+  assetName: any;
+  nonAgentVersionList: any[] = [];
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
@@ -74,7 +74,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private toastr: ToastrService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.kafkaStateService.onNetworkScan.subscribe((resp) => {
       this.onNetworkScan(resp)
     });
@@ -85,10 +85,10 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companyId = id;
-      this.devicesStateService.subsribeToNetScan(this.companyId);
+      this.websocketService.subsribeToNetScan(this.companyId);
       this.getDevices();
     });
-     
+
   }
 
   getDevices() {
@@ -102,16 +102,16 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.AssetDetail();
   }
 
-  AssetDetail() {    
-    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {           
+  AssetDetail() {
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       if (resp.length > 0) {
         this.isGetDevices = true
         this.assetList = resp;
-        this.filteredAssetList = resp.filter(x => x.AgentVersion);                
+        this.filteredAssetList = resp.filter(x => x.AgentVersion);
         this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
         if (this.masterAgent) {
           this.masterAgent.online = true;
-        }                 
+        }
       }
       else {
         this.isGetDevices = false;
@@ -120,7 +120,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
 
-  selectMasterNetwork(Id) {      
+  selectMasterNetwork(Id) {
     this.asset = this.assetList.find((x) => x.ID == Id);
     this.assetName = this.asset.Name;
     let data: any = {};

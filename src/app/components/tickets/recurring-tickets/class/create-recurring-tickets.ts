@@ -40,7 +40,7 @@ export class CreateRecurringTickets {
     }
 
 
-    public clearTehUsers() {
+    public clearTechUsers() {
         this.assignedUsers = [];
     }
     public addAssignedUsers(item) {

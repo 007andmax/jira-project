@@ -31,8 +31,7 @@ export class LeftPanelInventoryComponent implements OnInit {
     if (this.inventoryStateService.getCategories().length > 0) this.inventoryCategoryList = this.inventoryStateService.getCategories();
     this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.inventoryCategoryList = data;
-      if(!this.cd['destroyed'])
-      {
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
@@ -55,7 +54,6 @@ export class LeftPanelInventoryComponent implements OnInit {
     });
     return count;
   };
-
   changeShowAllCategories() {
     if (this.countOfCategories === 10) {
       this.countOfCategories = this.inventoryCategoryList.length;
@@ -66,7 +64,7 @@ export class LeftPanelInventoryComponent implements OnInit {
 
   deleteCategory(category) {
     this.confirmStateService.setConfirmAction(DELETE_COMPANY);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to delete category?`;
     this.inventoryStateService.setCategoryForDelete(category);
   }

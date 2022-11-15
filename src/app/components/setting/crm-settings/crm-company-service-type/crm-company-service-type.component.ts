@@ -4,11 +4,10 @@ import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { DELETE_CRM_INDUSTRY, DELETE_CRM_INDUSTRIES, DELETE_CRM_SERVICE_TYPE, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
+import { DELETE_CRM_SERVICE_TYPE, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
-import { CrmCompanyIndustry } from '../crm-company-industry/class/crm-company-industry';
 import { CrmCompanyServiceType } from './class/crm-company-service-type';
 import { CrmCompanyServiceTypeFilter } from './class/crm-company-service-type-filter';
 
@@ -64,13 +63,29 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   }
   onEditServiceType(item, event) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.crmService.editServiceType(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
           if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
+  }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.serviceTypeList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListServiceTypeForRemove().push(item);
+      })
+    } else {
+      this.serviceTypeList.forEach(item => (item.selected = false));
+      this.crmStateService.setListServiceTypeForRemove([]);
+    }
+    this.cd.detectChanges();
   }
   onRemoveServiceTypies() {
     forkJoin(this.crmStateService.getListServiceTypeForRemove().map(item => this.crmService.removeServiceType(item.id).pipe(map((res) => res),
@@ -103,7 +118,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   }
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Service Type`;
     this.crmStateService.setServiceTypeForRemove(item);
   }

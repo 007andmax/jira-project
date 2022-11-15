@@ -39,6 +39,10 @@ export class ServiceAgreement {
     status: string;
     taxIds: Array<string> = [];
     type: string;
+    manualCreateBillableItem: boolean;
+    enableInvoiceAutoCreate: boolean;
+    blockRate_str: string;
+    rateExceeding_str: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -55,11 +59,21 @@ export class ServiceAgreement {
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
+            this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
+            this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
             this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
             this.withCustomBillingDate = this.withCustomBillingDate;
         }
+    }
+    public setManualCreateBillableItem(data) {
+        this.manualCreateBillableItem = data;
+        if (this.manualCreateBillableItem) this.enableInvoiceAutoCreate = false;
+    }
+    public setEnableInvoiceAutoCreate(data) {
+        if (this.manualCreateBillableItem) return;
+        this.enableInvoiceAutoCreate = data;
     }
     public resetCustomBillingDate() {
         this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
@@ -288,7 +302,9 @@ export class ServiceAgreement {
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
-            type: this.type
+            type: this.type,
+            manualCreateBillableItem: this.manualCreateBillableItem,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
     public getDataForUpdateBlockTime() {
@@ -312,7 +328,9 @@ export class ServiceAgreement {
             reviewDate: this.reviewDate,
             withCustomBillingDate: this.withCustomBillingDate,
             customBillingDate: this.customBillingDate,
-            type: "BLOCK_TIME"
+            type: "BLOCK_TIME",
+            manualCreateBillableItem: this.manualCreateBillableItem,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
 
@@ -331,7 +349,9 @@ export class ServiceAgreement {
             startDate: this.startDate,
             customBillingDate: this.customBillingDate,
             withCustomBillingDate: this.withCustomBillingDate,
-            type: this.type
+            type: this.type,
+            manualCreateBillableItem: this.manualCreateBillableItem,
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
     public calculateTotalAmount() {

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteFilter } from '../../class/quote-filter';
@@ -13,9 +14,8 @@ import { QuoteFilter } from '../../class/quote-filter';
   styleUrls: ['./quotes-filter.component.scss']
 })
 export class QuotesFilterComponent implements OnInit {
-  companies = [];
-  @ViewChild('companyDp') companyDp: SelectSearchComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   quotesFilter: QuoteFilter = new QuoteFilter();
@@ -30,21 +30,14 @@ export class QuotesFilterComponent implements OnInit {
     private quoteStateService: QuoteStateService) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
+
   }
   onSelectStatus(status) {
     this.quotesFilter.setStatus((status) ? status.value : null);
     this.quoteStateService.onInitFilter(this.quotesFilter);
     this.onChangeCounterFilter();
   }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
+
   public onClearAll() {
     this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();

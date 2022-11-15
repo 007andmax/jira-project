@@ -1,68 +1,19 @@
 @import "./src/assets/styles/variable";
 
-.tax-name {
-    position: relative;
+.gl-numbers__table {
+  &-account-number {
+    flex: 1 1 267px;
+  }
+  &-description {
+    flex: 1 1 700px;
+  }
+  &-action {
+    flex: 0 0 20px;
+  }
 }
-
-td {
-    padding: 0 15px 0 0 !important;
-    height: 40px;
-    background-color: #f4fbff !important;
-    vertical-align: middle;
+.gl-numbers__table-account-number {
+  position: relative;
 }
-
-.checkbox {
-    margin: 0;
-    padding: 7px 15px 7px 0 !important;
-    width: auto;
-    label {
-        margin: 0;
-        padding: 0;
-    }
-    input {
-        width: 16px;
-        height: 16px;
-        margin: 0;
-        border: solid 1px #c4cbd5;
-    }
-    span {
-        margin-top: 12px !important;
-        margin-right: 0 !important;
-    }
-}
-.tax-name {
-    width: 117px;
-    @media only screen and (max-width: 576px) {
-        width: 105px;
-    }
-    input {
-        font-weight: 500;
-        color: $gray-800;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        outline: none;
-        padding: 2px 2px 2px 8px;
-        &:hover,
-        &:focus {
-            border-color: $gray-600;
-        }
-    }
-}
-.rate {
-    width: 170px;
-    @media only screen and (max-width: 576px) {
-        width: 55px;
-    }
-    input {
-        font-weight: 500;
-        color: $primary-2;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        outline: none;
-        padding: 2px 2px 2px 8px;
-        &:hover,
-        &:focus {
-            border-color: $gray-600;
-        }
-    }
+.--input-error {
+  border-color: $error !important;
 }

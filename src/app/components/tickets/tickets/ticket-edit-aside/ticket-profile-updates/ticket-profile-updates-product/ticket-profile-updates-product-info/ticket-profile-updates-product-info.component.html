@@ -38,15 +38,15 @@
                 [type]="'ICON'"
                 (onChange)="onChangeDatePicker($event)"
             ></app-date-picker>
-            <app-teh-users
+            <app-tech-users
                 [isDisabled]="isBlockChange"
                 [type]="'TICEKTS'"
                 [editMode]="true"
                 [selectedMode]="'SINGLE'"
                 [editUsers]="userService"
-                [users]="listTehUsers"
+                [users]="listTechUsers"
                 (usersChange)="onChangeUser($event)"
-            ></app-teh-users>
+            ></app-tech-users>
         </div>
         <span
             class="tag__modern ticket-updates__service-tag-completed"
@@ -79,7 +79,7 @@
                     (click)="edit()"
                     *ngIf="!isIOSDevice()"
                 >
-                    <i class="icn-16 edit-grey-ng2"></i>
+                    <i class="icn-16 icon__edit"></i>
                     Edit
                 </li>
                 <li
@@ -87,7 +87,7 @@
                     (touchstart)="edit()"
                     *ngIf="isIOSDevice()"
                 >
-                    <i class="icn-16 edit-grey-ng2"></i>
+                    <i class="icn-16 icon__edit"></i>
                     Edit
                 </li>
                 <li

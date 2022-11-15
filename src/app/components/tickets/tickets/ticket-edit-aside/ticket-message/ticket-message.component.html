@@ -13,7 +13,7 @@
             </span>
         </div>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')"
             appDisabledBtn
             #markAsOpenBillableBtn="disabled"
@@ -35,7 +35,7 @@
             button to get the troubleshooting process started!
         </div>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             [ngClass]="{'text-transparent':isClaimTicket}"
             appDisabledBtn
             #claimTicketBtn="disabled"
@@ -85,14 +85,14 @@
             </div>
         </div>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile,null,null)"
             (click)="deleteForever()"
         >
             Delete Forever
         </button>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             (click)="moveToTrash(false)"
         >
             Restore
@@ -119,14 +119,14 @@
             </div>
         </div>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile,null,null)"
             (click)="deleteForever()"
         >
             Delete Forever
         </button>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             (click)="moveToTrash(false)"
         >
             Restore
@@ -156,21 +156,21 @@
             </div>
         </div>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile,null,null)"
             (click)="deleteForever()"
         >
             Delete Forever
         </button>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             *ngIf="currentUser && currentUser.isOwner && !ticketProfile.spamMarker"
             (click)="moveIntoSpam()"
         >
             Mark as Spam
         </button>
         <button
-            class="ticket-notify__item-btn"
+            class="qt-button"
             (click)="restoreFromSpam()"
         >
             Restore

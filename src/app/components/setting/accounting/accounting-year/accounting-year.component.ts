@@ -23,11 +23,11 @@ export class AccountingYearComponent implements OnInit {
     private toaster: ToastrService,) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.getAccountingStartDate();
   }
-  saveAccountingDate() {
+  public saveAccountingDate() {
     let data = new Date(this.accountingStartDate.month + '/' + this.accountingStartDate.day + '/' + this.accountingStartDate.year).getTime()
     this.companyProfileService.setAccountingStartDate(data).subscribe(
       (res: any) => {

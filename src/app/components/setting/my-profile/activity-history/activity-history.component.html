@@ -1,75 +1,72 @@
-<!-- map area -->
-<div class="map-area his-map-area">
-    <agm-map
-        [latitude]="selectedDevice.latitude"
-        [longitude]="selectedDevice.longitude"
-        [mapTypeControl]='true'
-        [zoom]="15"
-        [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country "
-    >
-        <agm-marker
-            [latitude]="selectedDevice.latitude"
-            [longitude]="selectedDevice.longitude"
-        ></agm-marker>
-    </agm-map>
-
-
-
-</div>
 <div class="cmn-area hs-area">
-    <div class="data-table-wrap history-data">
-        <table
-            class="display dataTable"
-            style="width:100%"
-        >
-            <thead>
-                <tr>
-                    <th class="ac-detail">Access Detail</th>
-                    <th class="last-seen">Last Seen</th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Activity History</div>
+    </div>
+    <div class="tab-pane__body">
+        <div class="tab-pane__row map-area">
+            <div class="qt-w100">
+                <agm-map
+                    [latitude]="selectedDevice.latitude"
+                    [longitude]="selectedDevice.longitude"
+                    [mapTypeControl]='true'
+                    [zoom]="15"
+                    [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country "
+                >
+                    <agm-marker
+                        [latitude]="selectedDevice.latitude"
+                        [longitude]="selectedDevice.longitude"
+                    ></agm-marker>
+                </agm-map>
+            </div>
+        </div>
+        <div class="activity-history__table">
+            <div class="activity-history__table-header">
+                <div class="tab-pane__row">
+                    <div class="activity-history__cell activity-history__cell-access-detail">Access Detail</div>
+                    <div class="activity-history__cell activity-history__cell-last-seen">Last Seen</div>
+                    <div class="activity-history__cell activity-history__cell-menu"></div>
+                </div>
+            </div>
+            <div class="activity-history__table-body">
+                <div
                     *ngFor="let device of activityHistory"
                     (click)="selectDevice(device)"
-                    class="{'selected': selectedDevice.id === device.id}"
+                    class="tab-pane__row {'selected': selectedDevice.id === device.id}"
                 >
-
-
-
-                    <td class="ac-detail">
+                    <div class="activity-history__cell activity-history__cell-access-detail qt-df qt-pr-15">
+                        <div
+                            *ngIf="device.browserName === 'Chrome'"
+                            class="icon__google-chrome qt-sz-24 qt-bg-contain qt-mr-12 qt-fs-0"
+                        ></div>
+                        <div
+                            *ngIf="device.browserName === 'Safari'"
+                            class="icon__safari qt-sz-24 qt-bg-contain qt-mr-12 qt-fs-0"
+                        ></div>
+                        <div
+                            *ngIf="device.browserName === 'Firefox'"
+                            class="icon__firefox qt-sz-24 qt-bg-contain qt-mr-12 qt-fs-0"
+                        ></div>
+                        <div
+                            *ngIf="device.browserName === 'Opera'"
+                            class="icon__opera qt-sz-24 qt-bg-contain qt-mr-12 qt-fs-0"
+                        ></div>
                         {{device.browserName}}, {{device.osName}} ({{device.city ? device.city + ',' : ''}}
             {{device.country}} {{device.ipAddress}})
-                    </td>
-                    <td class="last-seen">
+                    </div>
+                    <div class="activity-history__cell activity-history__cell-last-seen qt-pr-15">
                         {{device.current ? 'now' : (device.lastAccessDate | date) }}
-                    </td>
-                    <td class="action">
-                        <a
-                            href="javascript:;"
-                            class="block"
-                            data-tooltip="Block"
-                        >
-                            <img
-                                src="html/assets/img/block.svg"
-                                alt="block"
-                            >
-                        </a>
-                        <a
-                            href="javascript:;"
-                            class="remove"
-                            data-tooltip="Remove"
+                    </div>
+                    <div class="activity-history__cell activity-history__cell-menu qt-df">
+                        <div
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="closeSession(device)"
+                            placement="top"
+                            ngbTooltip="Remove"
                         >
-                            <img
-                                src="/html/assets/img/icons/remove.svg"
-                                alt="Remove"
-                            >
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

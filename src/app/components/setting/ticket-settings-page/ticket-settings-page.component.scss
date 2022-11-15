@@ -9,9 +9,6 @@
             padding: 0px 24px;
         }
     }
-    /deep/.heading-tickets-status {
-        padding: 24px;
-    }
 }
 .tickets-status-header-buttons {
     display: flex;
@@ -20,7 +17,7 @@
     border-radius: 4px;
     background-color: $white;
     font-size: 12px;
-    color: $gray-800;
+    color: $gray-800--old;
     line-height: 1.33;
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
 }

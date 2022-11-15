@@ -10,7 +10,7 @@
 }
 .filter-tags-body {
     padding: 0;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
     .qt-checkbox {
         .name,
         .description {
@@ -22,12 +22,12 @@
         }
 
         .name {
-            color: $gray-800;
+            color: $gray-800--old;
         }
 
         .description {
             margin-top: 6px;
-            color: $gray-700;
+            color: $gray-700--old;
             font-size: 12px;
         }
 
@@ -92,7 +92,7 @@
     .content {
         height: 170px;
         overflow: scroll;
-        padding: 0px;
+        padding: 0;
 
         .company-tag-item {
             padding: 6px 64px 6px 16px;
@@ -108,7 +108,7 @@
                 position: static;
             }
             .text-content {
-                margin: 0px 0px 0px 8px;
+                margin: 0 0 0 8px;
                 flex: 1;
                 width: max-content;
             }
@@ -122,13 +122,6 @@
                 align-items: center;
             }
         }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: #c4cbd5;
-        }
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
     }
 }
 .selected-item {
@@ -141,7 +134,7 @@
     border-radius: 6px;
     font-size: 10px;
     margin: 0 4px 4px 0;
-    .icn-remove {
+    .icon__close {
         margin: 2px 0 2px 4px;
     }
 }
@@ -162,5 +155,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
 }

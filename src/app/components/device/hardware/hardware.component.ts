@@ -54,7 +54,7 @@ export class HardwareComponent implements OnInit {
   differentMemory: any[] = [];
   graphicscardDriver: any[] = [];
   TemporaryGraphicsDriver: any[] = [];
-  wanIp:string="";
+  wanIp: string = "";
   printers: any[] = [];
 
   constructor(
@@ -88,8 +88,8 @@ export class HardwareComponent implements OnInit {
       return;
     }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-      if (resp.length > 0) {    
-        this.wanIp = resp[0].ExternalIPAddress;   
+      if (resp.length > 0) {
+        this.wanIp = resp[0].ExternalIPAddress;
         this.HardwareList(resp[0].ID);
       }
     });
@@ -121,7 +121,7 @@ export class HardwareComponent implements OnInit {
       return;
     }
     this.agentService.getPrintersByAssetId(Asset_ID).subscribe((resp) => {
-      if (resp.length > 0) {    
+      if (resp.length > 0) {
         this.printers = resp;
       }
     });
@@ -181,7 +181,7 @@ export class HardwareComponent implements OnInit {
   }
 
   computerList(Asset_ID) {
-    this.agentService.getComputer(Asset_ID).subscribe((resp) => {      
+    this.agentService.getComputer(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.computer = resp[0];
         if (this.computer.Title == "") {
@@ -235,10 +235,10 @@ export class HardwareComponent implements OnInit {
   }
 
   memoryList(Asset_ID) {
-    this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {      
+    this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.physicalmemory = resp[0];
-        this.Memory = resp.filter((x)=>x.IsActive);
+        this.Memory = resp.filter((x) => x.IsActive);
         this.Memory.forEach((element) => {
           this.memory += element.Capacity;
           if (element.DeviceLocator != "") {
@@ -263,9 +263,9 @@ export class HardwareComponent implements OnInit {
   }
 
   networkList(Asset_ID) {
-    this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {      
+    this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
-        this.networkAdapter = resp.find((x)=>x.Gateway !== null);
+        this.networkAdapter = resp.find((x) => x.Gateway !== null);
         this.printcsv();
       }
     });

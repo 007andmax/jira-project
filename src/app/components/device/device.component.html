@@ -13,34 +13,64 @@
                     <div class="head-device">
                         <h6>Device</h6>
                         <!-- <h5 id="head-label">{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5> -->
-                        <h5 id="head-label" [textContent]="deviceName"></h5>
+                        <h5
+                            id="head-label"
+                            [textContent]="deviceName"
+                        ></h5>
                     </div>
                 </div>
                 <div class="hp-device-info">
-                    <span class="device-icn" *ngIf="UpTime != ''">
+                    <span
+                        class="device-icn"
+                        *ngIf="UpTime != ''"
+                    >
                         <img
                             src="/html/assets/img/device/uptime.svg"
                             alt="device"
                         >
                     </span>
-                    <div class="head-device" *ngIf="UpTime != ''">
+                    <div
+                        class="head-device"
+                        *ngIf="UpTime != ''"
+                    >
                         <h6>Up Time</h6>
                         <h5>{{UpTime}}</h5>
                     </div>
-                    <div class="head-device" *ngIf="UpTime == ''">
-                      <h6>{{offline}}</h6>
-                  </div>
+                    <div
+                        class="head-device"
+                        *ngIf="UpTime == ''"
+                    >
+                        <h6>{{offline}}</h6>
+                    </div>
                 </div>
             </div>
             <div class="header-right">
-                <a *ngIf="asset && asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="openModal(template)">
+                <a
+                    *ngIf="asset && asset.CanRemoteControl"
+                    href="javascript:;"
+                    class="head-btn"
+                    (click)="openModal(template)"
+                >
                     Remote Control
                 </a>
-                <a *ngIf="asset && !asset.CanRemoteControl && isNonAgentDevice" href="javascript:;" class="head-btn" (click)="sendCommand('ira',asset.ID)">
+                <a
+                    *ngIf="asset && !asset.CanRemoteControl && isNonAgentDevice"
+                    href="javascript:;"
+                    class="head-btn"
+                    (click)="sendCommand('ira',asset.ID)"
+                >
                     Install Remote Control Agent
                 </a>
-                <a *ngIf="asset && asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="sendCommand('ura',asset.ID)">
-                    <img src="/html/assets/img/device/remove-terminal.svg" alt="uninstall remote aget">
+                <a
+                    *ngIf="asset && asset.CanRemoteControl"
+                    href="javascript:;"
+                    class="head-btn"
+                    (click)="sendCommand('ura',asset.ID)"
+                >
+                    <img
+                        src="/html/assets/img/device/remove-terminal.svg"
+                        alt="uninstall remote aget"
+                    >
                 </a>
                 <!-- <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="/html/assets/img/device/print-sheet.svg" alt="Print" /></a> -->
                 <!-- <a
@@ -53,29 +83,71 @@
                         alt="Tempararyrestart"
                     >
                 </a> -->
-                <a href="javascript:;" (click)="sendCommand('r',asset.ID)" class="head-btn-info btn-refresh" title="Restart" [attr.data-tooltip]="'Restart'" *ngIf="isNonAgentDevice">
-                    <img src="/html/assets/img/device/restart.svg" alt="restart">
+                <a
+                    href="javascript:;"
+                    (click)="sendCommand('r',asset.ID)"
+                    class="head-btn-info btn-refresh"
+                    title="Restart"
+                    [attr.data-tooltip]="'Restart'"
+                    *ngIf="isNonAgentDevice"
+                >
+                    <img
+                        src="/html/assets/img/device/restart.svg"
+                        alt="restart"
+                    >
                 </a>
-                <a href="javascript:;" (click)="sendCommand('s',asset.ID)" class="head-btn-info btn-shutDown" title="Shutdown" *ngIf="isNonAgentDevice">
-                    <img src="/html/assets/img/device/shutdown.svg" alt="shutdown">
+                <a
+                    href="javascript:;"
+                    (click)="sendCommand('s',asset.ID)"
+                    class="head-btn-info btn-shutDown"
+                    title="Shutdown"
+                    *ngIf="isNonAgentDevice"
+                >
+                    <img
+                        src="/html/assets/img/device/shutdown.svg"
+                        alt="shutdown"
+                    >
                 </a>
-                <a href="javascript:;" (click)="sendCommand('u',asset.ID)" class="sub-head-counter" title="Update Agent" *ngIf="isNonAgentDevice">
-                  <span class="db-update-agent"></span>
+                <a
+                    href="javascript:;"
+                    (click)="sendCommand('u',asset.ID)"
+                    class="sub-head-counter"
+                    title="Update Agent"
+                    *ngIf="isNonAgentDevice"
+                >
+                    <span class="db-update-agent"></span>
                 </a>
-                <a href="javascript:;" (click)="sendCommand('d',asset.ID)" class="sub-head-counter" title="Uninstall Agent" *ngIf="isNonAgentDevice">
-                  <span class="db-uninstall"></span>
+                <a
+                    href="javascript:;"
+                    (click)="sendCommand('d',asset.ID)"
+                    class="sub-head-counter"
+                    title="Uninstall Agent"
+                    *ngIf="isNonAgentDevice"
+                >
+                    <span class="db-uninstall"></span>
                 </a>
             </div>
         </div>
         <div class="head-counter">
             <div class="sub-head-counter pointer">
-                <img src="/html/assets/img/device/restart.svg" alt="Play" (click)="restartTimerControl()">
+                <img
+                    src="/html/assets/img/device/restart.svg"
+                    alt="Play"
+                    (click)="restartTimerControl()"
+                >
             </div>
             <div class="sub-head-counter pointer">
-                <img [src]="play_pause_path" alt="Play" (click)="timerControl()">
+                <img
+                    [src]="play_pause_path"
+                    alt="Play"
+                    (click)="timerControl()"
+                >
             </div>
             <div class="sub-head-counter">
-                <img src="/html/assets/img/device/counter.svg" alt="Print">
+                <img
+                    src="/html/assets/img/device/counter.svg"
+                    alt="Print"
+                >
                 <span id="counter">
                     {{padNumber(totalHours)}} hr : {{padNumber(totalMinutes)}} min : {{padNumber(totalSeconds)}} sec
                 </span>
@@ -90,17 +162,19 @@
     <router-outlet></router-outlet>
 </div>
 <!-- Modal create Tags -->
-<ng-template #template let-modal>
+<ng-template
+    #template
+    let-modal
+>
     <div class="modal-body">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button
+            type="button"
+            class="close pull-right"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+        >
             <span aria-hidden="true">&times;</span>
         </button>
-
-
-
-
-
-
         <div class="remote-area">
             <ul class="list-unstyled">
                 <li>
@@ -115,7 +189,10 @@
                         <p>
                             Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
                         </p>
-                        <a (click)="createConnection('CSS');" class="btn btn-primary">
+                        <a
+                            (click)="createConnection('CSS');"
+                            class="btn btn-primary"
+                        >
                             Launch Quicktech Connect
                         </a>
                     </div>
@@ -137,32 +214,53 @@
             <p>
                 You may need to download and install the viewer
             </p>
-            <a (click)="getViewer();" class="btn btn-dowanload">
+            <a
+                (click)="getViewer();"
+                class="btn btn-dowanload"
+            >
                 Download Viewer
             </a>
         </div>
     </div>
 </ng-template>
 
+
 <ng-template #templatePowersell>
     <div class="modal-content restart-modal">
         <div class="modal-header">
             <h5 class="modal-title">Confirmation</h5>
-            <button type="button" class="close" (click)="decline()" data-dismiss="modal" aria-label="Close">
+            <button
+                type="button"
+                class="close"
+                (click)="decline()"
+                data-dismiss="modal"
+                aria-label="Close"
+            >
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <p  [innerHTML]="powershellmsg"></p>
+            <p [innerHTML]="powershellmsg"></p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="Reboot(asset.ID,TemporaryCommand);">
+            <button
+                type="button"
+                class="btn btn-danger"
+                (click)="Reboot(asset.ID,TemporaryCommand);"
+            >
                 Yes
             </button>
-            <button type="button" class="btn btn-secondary" (click)="decline()">
+            <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="decline()"
+            >
                 No
             </button>
         </div>
     </div>
 </ng-template>
-<div class="loading" *ngIf="loading"></div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>

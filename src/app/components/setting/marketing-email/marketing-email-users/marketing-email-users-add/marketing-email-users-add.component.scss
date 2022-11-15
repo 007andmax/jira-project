@@ -3,7 +3,7 @@
 .scroll-pane {
   overflow: scroll;
   padding: 0;
-  height: calc(100% - 126px);
+  height: calc(100% - 193px);
 }
 .custom-scroll {
   height: 100%;
@@ -12,12 +12,12 @@
   overflow: hidden;
   border-radius: 3px;
   z-index: 9999;
-  height: 481px;
   max-height: fit-content;
-  width: 288px;
+  height: 504px;
+  width: 504px;
   position: absolute;
   top: 110px;
-  right: 103px;
+  right: 0;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   background: $white;
 }

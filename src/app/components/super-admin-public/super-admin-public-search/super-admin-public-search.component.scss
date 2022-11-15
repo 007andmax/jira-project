@@ -4,7 +4,7 @@
 .qt-page-list__search {
     input {
         height: 40px;
-        border: 1px solid $gray-400;
+        border: 1px solid $gray-400--old;
         min-width: 360px;
         border-radius: 6px;
     }
@@ -59,7 +59,7 @@
             align-items: center;
             padding: 0 12px;
             border-bottom: 2px solid transparent;
-            color: $gray-800;
+            color: $gray-800--old;
             font-size: 13px;
             transition: all 0.3s;
             font-weight: 700;
@@ -103,7 +103,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: $gray-400;
+            background-color: $gray-400--old;
         }
 
         &::-webkit-scrollbar {

@@ -4,12 +4,10 @@ import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { DELETE_CRM_INDUSTRY, DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TYPE, DELETE_CRM_JOB_TYPIES } from 'src/app/const/confirm';
+import { DELETE_CRM_JOB_TYPE, DELETE_CRM_JOB_TYPIES } from 'src/app/const/confirm';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
-import { CrmCompanyIndustry } from '../crm-company-industry/class/crm-company-industry';
-import { CrmCompanyIndustryFilter } from '../crm-company-industry/class/crm-company-industry-filter';
 import { CrmCompanyJobType } from './class/crm-company-job-type';
 import { CrmCompanyJobTypeFilter } from './class/crm-company-job-type-filter';
 
@@ -57,6 +55,18 @@ export class CrmCompanyJobTypeComponent implements OnInit {
     this.sub.add(getConfirm);
 
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.jobTypeList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListJobTypeForRemove().push(item);
+      })
+    } else {
+      this.jobTypeList.forEach(item => (item.selected = false));
+      this.crmStateService.setListJobTypeForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   public toggleShowAdd(data) {
     this.showAdd = data;
   }
@@ -65,11 +75,15 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   }
   onEditJobType(item, event) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.crmService.editJobType(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
           if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
   }
@@ -104,7 +118,7 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   }
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Job Type`;
     this.crmStateService.setJobTypeForRemove(item);
   }

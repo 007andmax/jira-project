@@ -15,7 +15,10 @@
             >
         </span>
     </div>
-    <div class="devices-aside__device-list">
+    <div
+        class="devices-aside__device-list"
+        [hidden]="showPreloader"
+    >
         <ng-template
             ngFor
             let-device
@@ -82,7 +85,7 @@
                                 ngbDropdownItem
                                 (click)="remove(device)"
                             >
-                                <span class="dropdown-menu-qt__item-icon icon__remove-12"></span>
+                                <span class="dropdown-menu-qt__item-icon icon__remove"></span>
                                 Remove
                             </li>
                             <li
@@ -98,4 +101,8 @@
             </div>
         </ng-template>
     </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
 </div>

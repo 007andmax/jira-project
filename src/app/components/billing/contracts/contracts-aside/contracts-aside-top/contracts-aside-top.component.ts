@@ -4,6 +4,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 @Component({
   selector: 'app-contracts-aside-top',
   templateUrl: './contracts-aside-top.component.html',
@@ -18,22 +19,22 @@ export class ContractsAsideTopComponent implements OnInit {
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() validateCompany: boolean = true;
   @Output() onSelectCompany = new EventEmitter<any>();
-  @ViewChild('companiesDP') companiesDP: DropDownComponent;
+  @ViewChild('companiesDP') companiesDP: CompanyDropDownComponent;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+    if (this.companiesState.getLightClientsCompanies().length > 0) this.getClientsList(this.companiesState.getLightClientsCompanies());
+    if (this.companiesState.getLightClientsCompanies().length == 0) this.companiesState.onInitGetLightCompanies();
+    let getOnCompanies = this.companiesState.onLightClientsCompanies.subscribe((data) => {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
   }
   getClientsList(data) {
-    this.companies = data.filter(item => item.clientType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    if (this.companiesState.getCompanyRoutingId()) this.companiesDP.onSelect(this.companiesState.getCompanies().find(item => item.id === this.companiesState.getCompanyRoutingId()));
+    this.companies = data;
+    if (this.companiesState.getCompanyRoutingId()) this.companiesDP.onSelect(this.companies.find(item => item.id === this.companiesState.getCompanyRoutingId()));
 
   }
   onSelectType(data) {

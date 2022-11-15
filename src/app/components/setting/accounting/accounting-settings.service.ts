@@ -1,8 +1,10 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 
 @Injectable({
@@ -10,7 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class InvoiceTicketsService {
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   /**
    * get company profile
@@ -84,7 +88,12 @@ export class InvoiceTicketsService {
     return this.http.put(
       `${this.apiUrl}settings/companyProfile/ticketSettings`,
       ticketForm
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

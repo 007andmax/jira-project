@@ -12,13 +12,12 @@ import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.s
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
-import { CompanyProfile } from '../../companies/class/company-profile';
-import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
-import { TextAreaDirective } from 'src/app/directives/text-area.directive';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TaxesComponent } from '../../shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -40,9 +39,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   cost: string;
   sale: string;
   @ViewChild('addTax') containerAddTax;
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('taxesDp') taxesDp: TaxesComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
+  @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
@@ -92,7 +92,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       })
       this.taxesStateService.setTaxesFromtEdit(taxes);
       this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
-      this.elRef.nativeElement.querySelector("#inventory-description").innerHTML = this.inventory.description;
+      this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
       this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
@@ -119,7 +119,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'supplier');
   }
   onAddCategory(data) {
-    this.productService.addCategory(data).subscribe((data: any) => {
+    this.productService.addCategory(data, null).subscribe((data: any) => {
       this.inventory.category = data;
       this.validate.resetCategory();
     })
@@ -137,8 +137,15 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   onSelectSupplier(data) {
-    if (data) this.inventory.companyId = data.id;
-    if (!data) this.inventory.companyId = null;
+    if (data) {
+      this.inventory.companyId = data.id;
+      this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
+    }
+    if (!data) {
+      this.inventory.companyId = null;
+      this.editSupplier = null;
+    }
+
   }
   onSelectGlNumbers(data) {
     if (data) this.inventory.glNumber = data;
@@ -148,7 +155,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   public onChangeDescription(event) {
     this.validate.resetDescription();
     this.inventory.description = event.target.value;
-
   }
   onChangeCost(val) {
     let value = Number(val);
@@ -200,17 +206,16 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
-    this.taxesStateService.onInitClear();
-    this.elRef.nativeElement.querySelector('#inventory-description').innerHTML = '';
+    this.taxesDp.close();
+    this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
     this.cd.detectChanges();
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
-    this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
-    this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
-      this.toastrService.success("The product has been successfully updated");
-      this.appStateService.changeDetectorRef();
+    // this.inventory.description = this.elRef.nativeElement.querySelector('#inventory-description').innerHTML;
+    this.productService.editProduct(this.inventory.getForEdit()).subscribe(data => {
+      this.glNumberStateService.refreshGlNumbersCheck();
       this.close();
     })
   }

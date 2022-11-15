@@ -7,10 +7,18 @@ import { Payment } from '../../components/billing/payments/class/payment';
 export class PaymentsStateService {
 
   paymentForRemove: Payment;
-  paymentForRollback:Payment;
-  paymentForRefund:Payment;
+  paymentForRollback: Payment;
+  paymentForRefund: Payment;
   filter: EventEmitter<any> = new EventEmitter();
+  payments: Array<Payment> = [];
+
   constructor() { }
+  public setPayments(data) {
+    this.payments = data;
+  }
+  public getPayments() {
+    return this.payments;
+  }
   public setPaymentForRefund(data) {
     this.paymentForRefund = data;
   }
@@ -18,7 +26,7 @@ export class PaymentsStateService {
     return this.paymentForRefund;
   }
 
-  
+
   public setPaymentForRollback(data) {
     this.paymentForRollback = data;
   }

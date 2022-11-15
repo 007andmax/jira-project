@@ -12,6 +12,7 @@ import { CrmCompanyIndustry } from '../class/crm-company-industry';
 export class AddCrmCompanyIndustryComponent implements OnInit {
   name: string = "";
   disableCreate: boolean = false;
+  isInitRequest: boolean = false;
   @Input() industryList: Array<CrmCompanyIndustry> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private crmService: CrmService) { }
@@ -29,14 +30,17 @@ export class AddCrmCompanyIndustryComponent implements OnInit {
     }
   };
   save() {
-    if (this.name.length === 0 || this.disableCreate) return;
+    if (this.name.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
     this.crmService.addIndustry(this.name).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.isInitRequest = false;
           this.onClose.emit(null);
         },
         error => {
+          this.isInitRequest = false;
         }
       );
   }

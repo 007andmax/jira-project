@@ -6,11 +6,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersAsideService } from './services/users-aside.service';
 import { UserValidate } from '../class/user-validate';
 import { UsersService } from 'src/app/services/users/users.service';
-import { SelectClientCompanyStateService } from '../../shared/select-client-company/services/select-client-company-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
@@ -36,7 +35,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   public opened = false;
   user: UserProfile = new UserProfile();
   jobTitleList: Array<CrmCompanyJobTitle> = [];
-  companies = [];
   MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
   validate: UserValidate = new UserValidate();
   userTypes: Array<CrmCompanyJobType> = [];
@@ -52,7 +50,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,
-    private companiesState: SelectClientCompanyStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
@@ -78,11 +75,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       if (this.opened && this.companiesStateService.getCompanyRoutingId()) this.onSelectCompany(this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getCompanyRoutingId()));
 
     })
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-
   }
   onSelectClientIndustry(item) {
     this.user.setUserIndustryId((item) ? item.id : null);
@@ -98,10 +90,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);
-  }
-  getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -189,7 +177,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.user = new UserProfile();
     this.validate = new UserValidate();
-    this.companiesState.onInitClear();
     this.selectedCompany = null;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();

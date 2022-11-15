@@ -3,10 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_CATEGORIES_PRODUCT, DELETE_CATEGORY_PRODUCT } from 'src/app/const/confirm';
-import { CategoryProduct } from 'src/app/interfaces/product/category-product';
-import { ModalEditCategoryProductComponent } from 'src/app/services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { ProductService } from 'src/app/services/product/product.service';
+import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { GlNumber } from '../../reports/class/gl-number';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CategoryProductSettings } from './class/category-product-settings';
@@ -18,20 +18,23 @@ import { ProductsCategoryFilter } from './class/products-category-filter';
   styleUrls: ['./products-settings.component.scss']
 })
 export class ProductsSettingsComponent implements OnInit, OnDestroy {
+  loading: boolean = true;
   activeTab: string = "productCategories";
   showAddCategory: boolean = false;
   filter: ProductsCategoryFilter = new ProductsCategoryFilter();
   categoriesProducts: Array<CategoryProductSettings> = [];
   sub: Subscription = new Subscription();
+  glNumbers: Array<GlNumber> = [];
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private productService: ProductService,
     public cd: ChangeDetectorRef,
+    private glNumberStateService: GlNumberStateService,
     private modalService: NgbModal,) { }
 
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.getCategories(this.inventoryStateService.getCategories());
     this.inventoryStateService.onGetCategories.subscribe(data => {
@@ -48,6 +51,33 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
+    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
+      this.glNumbers = this.sortGlNumbers(data);
+    })
+  }
+  private sortGlNumbers(data) {
+    this.loading = false;
+    return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+  }
+  glDropDownItemName(item) {
+    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
+      : "No description"}`;
+  }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.categoriesProducts.forEach(item => {
+        if (item.productsAmount === 0) {
+          item.selected = true;
+          this.inventoryStateService.getListCategoriesForRemove().push(item);
+        }
+      })
+    } else {
+      this.categoriesProducts.forEach(item => (item.selected = false));
+      this.inventoryStateService.setListCategoriesForRemove([]);
+    }
+    this.cd.detectChanges();
   }
   onSelect(event, item) {
     if (event.target.checked) {
@@ -98,26 +128,37 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
         }
       )
   }
+  onSelectGlNumbers(item, glNumber) {
+    this.productService.setGlNumberCategory(item.id, (glNumber) ? { id: glNumber.id } : null)
+      .subscribe(
+        () => {
+
+        })
+  }
   onEditCategory(item) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.productService.editCategory(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined)))
         .subscribe(
           () => {
+            item.setIsInitRequest(false);
             item.onInitEdit(false);
+          }, err => {
+            item.setIsInitRequest(false);
           })
     }
   }
   removeCategoriesStatus() {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORIES_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Product Category`;
 
   }
   removeCategoryProduct(data) {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Product Category`;
     this.inventoryStateService.setCategoryForDelete(data);
   }
@@ -125,7 +166,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
     this.inventoryStateService.setListCategoriesForRemove([]);
     this.sub.unsubscribe();
   }

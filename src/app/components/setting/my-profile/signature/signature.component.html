@@ -1,0 +1,81 @@
+<div
+    class="cmn-area profile"
+    [hidden]="loading"
+>
+    <div class="tab-pane__header qt-df qt-jc-sb">
+        <div class="tab-pane__header-title">Signature</div>
+        <div
+            class="qt-df qt-ai-c"
+            ngbDropdown
+            placement="bottom-right"
+            container="body"
+            #signatureEditDrop="ngbDropdown"
+        >
+            <i
+                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain pointer"
+                *ngIf="content"
+                placement="top"
+                ngbTooltip="Edit"
+                ngbDropdownToggle
+                (click)="editContent()"
+            ></i>
+            <edit-signature
+                #editSignature
+                ngbDropdownMenu
+                class="--tooltip-shadow"
+                [signatureDrop]="signatureEditDrop"
+                (onEdit)="setContent($event)"
+            ></edit-signature>
+            <i
+                class="icon__remove qt-sz-20 qt-bg-contain pointer qt-ml-16"
+                *ngIf="content"
+                placement="top"
+                ngbTooltip="Remove"
+                (click)="remove()"
+            ></i>
+        </div>
+    </div>
+    <div class="tab-pane__body">
+        <div class="tab-pane__row">
+            <div
+                class="content-html"
+                [hidden]="!content"
+            ></div>
+            <div
+                class="qt-df qt-ai-c no-content"
+                *ngIf="!content"
+                ngbDropdown
+                placement="bottom"
+                container="body"
+                #signatureDrop="ngbDropdown"
+            >
+                <img
+                    class="qt-mb-24"
+                    ngbDropdownAnchor
+                    src="html/assets/img/icons/no-signature.png"
+                >
+                <h3 class="qt-fs-16 qt-fw-500 qt-mb-8 qt-color-gray-900">No Signature</h3>
+                <span class="qt-fs-14 qt-fw-400 qt-color-gray-500 qt-mb-24">Get started by creating a signature</span>
+                <div
+                    class="qt-button --md --gray qt-jc-c pointer  button-gl-number__add"
+                    ngbDropdownToggle
+                >
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    Create New
+                </div>
+                <add-signature
+                    ngbDropdownMenu
+                    class="--tooltip-shadow"
+                    [signatureDrop]="signatureDrop"
+                    (onAdd)="setContent($event)"
+                ></add-signature>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
+</div>

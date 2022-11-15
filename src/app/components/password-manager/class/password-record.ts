@@ -13,11 +13,16 @@ export class PasswordRecord {
     template: PasswordRecordCategories;
     username: string;
     ssid: string;
-    key: string;
+    installationKey: string;
     url: string;
     code: string;
+    otp: string;
+    expirationDate: number;
+    authenticationKey: string = "";
     ipAdres: string;
     port: string;
+    otpEnable: boolean;
+    timeCount: number = 0;
     https: boolean = false;
     ssh: boolean = false;
     telnet: boolean = false;
@@ -25,8 +30,15 @@ export class PasswordRecord {
     description: string;
     password: string;
     selected: boolean = false;
+    resetAuthenticationKey: boolean = false;
     constructor(data) {
         this.onUpdate(data);
+    }
+    public setOtp(data) {
+        this.otp = data;
+    }
+    public setExpirationDate(data) {
+        this.expirationDate = data;
     }
     public isDefaultType() {
         return this.template.default;
@@ -46,6 +58,12 @@ export class PasswordRecord {
     public getExpiryDateByTime() {
         return new Date(this.expiredDate).getTime();
     }
+    public setResetAuthenticationKey(data) {
+        this.resetAuthenticationKey = data;
+    }
+    public setAuthenticationKey(data) {
+        this.authenticationKey = data;
+    }
     public getDataForEdit(selectedUserAndDevices: Array<PasswordDeviceUser>) {
         let data: any = {
             id: this.id,
@@ -60,8 +78,10 @@ export class PasswordRecord {
             password: (this.password && this.password.length > 0) ? this.password : undefined,
             template: this.template
         };
+        if (this.authenticationKey && this.authenticationKey.length > 0) data.authenticationKey = this.authenticationKey;
+        if (this.resetAuthenticationKey) data.authenticationKey = "";
         if (this.template.name === "OFFICE_365_ACCOUNT" || !this.isDefaultType()) {
-            data.key = this.key;
+            data.installationKey = this.installationKey;
             data.url = this.url;
             data.ssid = this.ssid;
             data.username = this.username;
@@ -108,6 +128,9 @@ export class PasswordRecord {
         }
         return data;
     }
+    public updateHistories(data) {
+        this.histories = data;
+    }
     public onUpdate(data) {
         this.companyId = data.companyId;
         this.companyName = data.companyName;
@@ -119,7 +142,7 @@ export class PasswordRecord {
         this.username = data.username;
         this.description = data.description;
         this.ssid = data.ssid;
-        this.key = data.key;
+        this.installationKey = data.installationKey;
         this.url = data.url;
         this.code = data.code;
         this.ipAdres = data.ipAdres;
@@ -128,5 +151,6 @@ export class PasswordRecord {
         this.ssh = data.ssh;
         this.telnet = data.telnet;
         this.note = data.note;
+        this.otpEnable = data.otpEnable;
     }
 }

@@ -21,10 +21,18 @@ export class QuoteAdd {
     sendNotification: boolean;
     subject: string;
     validUntil: number = new Date().getTime();
+    billTo: string;
+    shipTo: string;
     constructor() {
         let current = new Date();
         current.setMonth(current.getMonth() + 1);
         this.validUntil = current.getTime();
+    }
+    public setBillTo(data) {
+        this.billTo = data;
+    }
+    public setShipTo(data) {
+        this.shipTo = data;
     }
     public checkValidateServicesByCompany(services) {
         this.services.forEach(item => {
@@ -72,7 +80,9 @@ export class QuoteAdd {
             message: this.message,
             subject: this.subject,
             regularNote: this.regularNote,
-            sendNotification: notification
+            sendNotification: notification,
+            billTo: this.billTo,
+            shipTo: this.shipTo
         }
     }
     public getDataForPreview(company, termsAndConditions) {
@@ -93,7 +103,11 @@ export class QuoteAdd {
             services: this.services.map(item => new QuoteService({ ...item, ...item.item })),
             termsAndConditions: termsAndConditions,
             regularNote: this.regularNote,
-            message: this.message
+            message: this.message,
+            billingAddress: company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode,
+            shippingAddress: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode : null,
+            shippingLocationName: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].locationName : null,
+            billingLocationName: company.companyInfo.addresses[0].locationName
         }
     }
     public setRegulatNote(data) {

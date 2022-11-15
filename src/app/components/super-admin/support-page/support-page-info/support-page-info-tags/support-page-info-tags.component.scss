@@ -1,12 +1,13 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
 
 .profile-cmp-board {
   width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px dotted $gray-400;
+  border-bottom: 1px dotted $gray-400--old;
   padding-bottom: 24px;
 }
 .tags-area {
@@ -45,7 +46,7 @@
       @include сaption-l__m;
       font-stretch: normal;
       font-style: normal;
-      color: $gray-700;
+      color: $gray-700--old;
       .close {
         position: absolute;
         right: 5px;
@@ -65,10 +66,12 @@
 .app-drop-down__dropdown {
   min-width: 150px;
   height: 288px;
-  margin-top: 5px;
+  max-height: 288px;
+  //margin-top: 5px;
   width: 100%;
-  border: 1px solid $gray-400;
-  overflow-y: unset;
+  overflow: visible;
+  //border: 1px solid $gray-400--old;
+  //overflow-y: unset;
 }
 .list-tags-body,
 .no-exist {
@@ -79,7 +82,9 @@
   }
 }
 .list-tags-body {
-  padding: 0 6px;
+  //padding: 0 6px;
+  @include dropdown-scrollbar;
+
 }
 .no-exist {
   display: flex;
@@ -88,7 +93,7 @@
   align-items: center;
   padding: 10px 20px;
   text-align: center;
-  color: $gray-700;
+  color: $gray-700--old;
   font-size: 13px;
   line-height: 18px;
   .no-matching {
@@ -98,7 +103,7 @@
   }
 }
 .crate-tag {
-  color: $gray-700;
+  color: $gray-700--old;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
@@ -107,34 +112,35 @@
   overflow: auto;
   margin: 6px 12px 10px;
   padding: 11px 0 5px;
-  border-top: 1px solid $gray-300;
+  border-top: 1px solid $gray-300--old;
 }
 .company-tag-item {
   display: flex;
   align-items: center;
-  min-height: 30px;
+  min-height: 32px;
   max-height: 60px;
-  height: 30px;
-  padding: 7px 8px;
-  border-radius: 8px;
+  padding: 0 12px;
   margin: 4px 0;
+  height: auto;
+  border-radius: 6px;
+  color: $gray-900;
+  font-size: 14px;
+  cursor: pointer;
   .text-content {
     color: $primary-2;
   }
   &.--editing,
   &:hover {
-    background-color: $gray-200;
+    background-color: $gray-50;
     input {
-      background-color: $gray-200;
-      color: $primary-2;
-    }
-    .text-content {
-      color: $primary-1;
+      background-color: $gray-50;
     }
   }
+  &.--selected,
   &.--active {
+    background-color: $gray-50;
     .text-content {
-      color: $primary-1;
+      color: $blue-light-600;
     }
   }
   i {
@@ -147,12 +153,12 @@
       margin-left: 0;
     }
   }
-  .edit-grey,
+  .icon__edit,
   .icon__remove {
     display: none;
   }
   &:hover {
-    .edit-grey,
+    .icon__edit,
     .icon__remove {
       display: block;
     }
@@ -176,7 +182,7 @@
   }
 }
 .name {
-  margin-left: 10px;
+  margin-left: 12px;
   @include body-r;
   white-space: nowrap;
   overflow: hidden;
@@ -195,7 +201,7 @@
     border: 1px solid transparent;
     border-radius: 4px;
     outline: none;
-    padding: 2px 2px 2px 8px;
+    padding: 2px 2px 2px 10px;
     width: 170px;
   }
 }
@@ -210,13 +216,13 @@
     background-repeat: no-repeat;
   }
   input {
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 8px;
     @include body-r;
-    color: $gray-700;
+    color: $gray-700--old;
     padding: 7px 8px 7px 36px;
     &::placeholder {
-      color: $gray-700;
+      color: $gray-700--old;
     }
   }
 }

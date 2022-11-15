@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef,
+  constructor(public elRef: ElementRef,
     public cd: ChangeDetectorRef,
     public quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,

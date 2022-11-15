@@ -318,7 +318,7 @@ export class TerminalComponent implements OnInit {
   manageCategory(template) {
     this.cmdCategoryList = [];
     this.getCmdCategory();
-    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: 'cmn-terminal-modal category-modal confirm-control', centered: true }).result.then((result) => {
+    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: 'cmn-terminal-modal category-modal confirm-control', centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
@@ -483,7 +483,7 @@ export class TerminalComponent implements OnInit {
       this.deleteId = id;
       this.deleteTitle = title;
     }
-    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: 'cmn-terminal-modal confirm-control', centered: true }).result.then((result) => {
+    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: 'cmn-terminal-modal confirm-control', centered: true, backdrop: 'static', keyboard: false }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismiss(reason)}`;

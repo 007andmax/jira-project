@@ -43,7 +43,10 @@
                                         </span>
                                     </div>
                                 </div>
-                                <ul class="list-unstyled" *ngIf="isNonAgentDevice">
+                                <ul
+                                    class="list-unstyled"
+                                    *ngIf="isNonAgentDevice"
+                                >
                                     <li>
                                         <span>Host Name</span>
                                         <span
@@ -105,15 +108,15 @@
                                         <span>Manufacturer</span>
                                         <span class="edit-field computerManufacturer">
                                             <app-drop-down
-                                            #manufacturer
-                                            [class]="['light-dropdown', 'qt-select-input-40']"
-                                            [placeholder]="'Select Manufacture'"
-                                            [list]="manufactureList"
-                                            [editItem]="selectManufactureNames"
-                                            [field]="'Name'"
-                                            [search]="true"
-                                            [change]="false"
-                                            (onSelectedItem)="onSelectManufactureName($event)"                 
+                                                #manufacturer
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Manufacture'"
+                                                [list]="manufactureList"
+                                                [editItem]="selectManufactureNames"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="false"
+                                                (onSelectedItem)="onSelectManufactureName($event)"
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -146,15 +149,15 @@
                                         <span>Model</span>
                                         <span class="edit-field computerModel">
                                             <app-drop-down
-                                            #model
-                                            [class]="['light-dropdown', 'qt-select-input-40']"
-                                            [placeholder]="'Select Model'"
-                                            [list]="selectModelList"
-                                            [editItem]="selectModelName"
-                                            [field]="'Name'"
-                                            [search]="true"
-                                            [change]="true"
-                                            (onSelectedItem)="onSelectModel($event)"  
+                                                #model
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Model'"
+                                                [list]="selectModelList"
+                                                [editItem]="selectModelName"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="true"
+                                                (onSelectedItem)="onSelectModel($event)"
                                             ></app-drop-down>
                                         </span>
                                     </li>
@@ -183,109 +186,118 @@
                                     </li>
                                     <li>
                                         <span>Date</span>
-                                        <div>{{asset.VersionInstallDate | date: 'dd/MM/yyyy'}}</div>                                      
+                                        <div>
+                                            {{asset.VersionInstallDate | date: 'dd/MM/yyyy'}}
+                                        </div>
                                     </li>
                                 </ul>
 
-                                <ul class="list-unstyled" *ngIf="!isNonAgentDevice">
-                                  <li>
-                                      <span>Host Name</span>
-                                      <span
-                                          class="edit-field"
-                                          [attr.data-tooltip]="tooltip(20,asset.Name)"
-                                      >
-                                          <div>{{ displayValue(20,asset.Name) }}</div>
-                                      </span>
-                                  </li>
-                                  <li style="width:28%">
-                                      <span>Warranty Date</span>
-                                      <span class="edit-field">
-                                          <input
-                                              type="text"
-                                              class="form-control sub-label-field"
-                                              [(ngModel)]="asset.WarrantyExpires"
-                                              ngbDatepicker
-                                              #expire="ngbDatepicker"
-                                              (click)="expire.toggle()"
-                                              (dateSelect)="updateAsset()"
-                                          >
-                                      </span>
-                                  </li>
-                                  <li style="width:37%">
-                                    <span>Manufacturer</span>
-                                    <span class="edit-field">
-                                      <app-drop-down
-                                      #manufacturer
-                                      [class]="['light-dropdown', 'qt-select-input-40']"
-                                      [placeholder]="'Select Manufacture'"
-                                      [list]="manufactureList"
-                                      [field]="'Name'"
-                                      [search]="true"
-                                      [change]="true"
-                                      ></app-drop-down>
-                                    </span>
-                                </li>
-                                <li>
-                                  <span>Site</span>
-                                  <span class="edit-field">
-                                      <input
-                                          type="text"
-                                          class="form-control sub-label-field"
-                                          [(ngModel)]="asset.Site"
-                                          (blur)="updateAsset()"
-                                      >
-                                  </span>
-                              </li>
-                                <li style="width:28%">
-                                  <span>Deployment Date</span>
-                                  <span class="edit-field">
-                                      <input
-                                          type="text"
-                                          class="form-control sub-label-field"
-                                          [(ngModel)]="asset.DeploymentDate"
-                                          ngbDatepicker
-                                          #deploy="ngbDatepicker"
-                                          (click)="deploy.toggle()"
-                                          (dateSelect)="updateAsset()"
-                                      >
-                                  </span>
-                              </li>
-                              <li style="width:28%">
-                                <span>Install Date</span>
-                                <span class="edit-field">
-                                    <input
-                                        type="text"
-                                        class="form-control sub-label-field"
-                                        [(ngModel)]="asset.InstallDate"
-                                        ngbDatepicker
-                                        #install="ngbDatepicker"
-                                        (click)="install.toggle()"
-                                        (dateSelect)="updateAsset()"
-                                    >
-                                </span>
-                            </li>
-                                <li>
-                                    <span>Asset Tag</span>
-                                    <span class="edit-field">
-                                        <input
-                                            type="text"
-                                            class="form-control sub-label-field"
-                                            [(ngModel)]="asset.Tag"
-                                            (blur)="updateAsset()"
+
+                                <ul
+                                    class="list-unstyled"
+                                    *ngIf="!isNonAgentDevice"
+                                >
+                                    <li>
+                                        <span>Host Name</span>
+                                        <span
+                                            class="edit-field"
+                                            [attr.data-tooltip]="tooltip(20,asset.Name)"
                                         >
-                                    </span>
-                                </li>
-                                <li style="width:28%">
-                                  <span>Last Reboot</span>
-                                  <div>
-                                      {{ asset.LastRebootDate | date: DateTimeFormat }}
-                                  </div>
-                              </li>
-                              </ul>
+                                            <div>{{ displayValue(20,asset.Name) }}</div>
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Warranty Date</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.WarrantyExpires"
+                                                ngbDatepicker
+                                                #expire="ngbDatepicker"
+                                                (click)="expire.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:37%">
+                                        <span>Manufacturer</span>
+                                        <span class="edit-field">
+                                            <app-drop-down
+                                                #manufacturer
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Manufacture'"
+                                                [list]="manufactureList"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="true"
+                                            ></app-drop-down>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Site</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Site"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Deployment Date</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.DeploymentDate"
+                                                ngbDatepicker
+                                                #deploy="ngbDatepicker"
+                                                (click)="deploy.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Install Date</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.InstallDate"
+                                                ngbDatepicker
+                                                #install="ngbDatepicker"
+                                                (click)="install.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Asset Tag</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Tag"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Last Reboot</span>
+                                        <div>
+                                            {{ asset.LastRebootDate | date: DateTimeFormat }}
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="dashboard-row auto-marging">
-                            <div class="dashboard-col col-50 disk-drive" *ngIf="isNonAgentDevice">
+                            <div
+                                class="dashboard-col col-50 disk-drive"
+                                *ngIf="isNonAgentDevice"
+                            >
                                 <h2>Disk Drives</h2>
                                 <h4 class="d-local">Local</h4>
                                 <ul class="list-unstyled">
@@ -330,6 +342,7 @@
 
 
 
+
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
@@ -340,64 +353,73 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <h4 class="d-network" *ngIf="this.networkDisk != ''">Network Drives</h4>
+                                <h4
+                                    class="d-network"
+                                    *ngIf="this.networkDisk != ''"
+                                >
+                                    Network Drives
+                                </h4>
                                 <ul class="list-unstyled">
-                                  <li
-                                      [ngStyle]="driveBorderColor(network.percent, network.IsSystem)"
-                                      [ngClass]="driveClass(network.IsSystem, network.caption)"
-                                      *ngFor="let network of networkDisk"
-                                  >
-                                      <div
-                                          class="progress-circle p{{ network.percent }}"
-                                          [class.over50]="network.percent > 50"
-                                      >
-                                          <span>{{ network.percent }}%</span>
-                                          <div class="left-half-clipper">
-                                              <div
-                                                  class="first50-bar"
-                                                  [ngStyle]="
+                                    <li
+                                        [ngStyle]="driveBorderColor(network.percent, network.IsSystem)"
+                                        [ngClass]="driveClass(network.IsSystem, network.caption)"
+                                        *ngFor="let network of networkDisk"
+                                    >
+                                        <div
+                                            class="progress-circle p{{ network.percent }}"
+                                            [class.over50]="network.percent > 50"
+                                        >
+                                            <span>{{ network.percent }}%</span>
+                                            <div class="left-half-clipper">
+                                                <div
+                                                    class="first50-bar"
+                                                    [ngStyle]="
                           first50BarStyle(
                             network.percent,
                             network.IsSystem,
                             network.color
                           )
                         "
-                                              ></div>
-                                              <div
-                                                  class="value-bar"
-                                                  [ngStyle]="
+                                                ></div>
+                                                <div
+                                                    class="value-bar"
+                                                    [ngStyle]="
                           valueBarStyle(
                             network.percent,
                             network.IsSystem,
                             network.color
                           )
                         "
-                                              ></div>
-                                          </div>
-                                      </div>
-                                      <div class="drive-status">
-                                          <span class="drive-name">
-                                              {{ network.Caption }} ({{ network.FileSystem }} on drive)
-                                          </span>
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div class="drive-status">
+                                            <span class="drive-name">
+                                                {{ network.Caption }} ({{ network.FileSystem }} on drive)
+                                            </span>
 
 
 
 
-                                          <span
-                                              class="drive-limit"
-                                              *ngIf="network.FreeSpace != '' && network.Size != ''"
-                                          >
-                                              {{ diskSpaceDiff(network.Size, network.FreeSpace) }}GB /
+
+                                            <span
+                                                class="drive-limit"
+                                                *ngIf="network.FreeSpace != '' && network.Size != ''"
+                                            >
+                                                {{ diskSpaceDiff(network.Size, network.FreeSpace) }}GB /
                       {{ convertToGB(network.Size) }}GB
-                                          </span>
-                                      </div>
-                                  </li>
-                              </ul>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
                                 <div *ngIf="logicalDisk?.length == 0">
-                                  <span class="msg">{{'No Disk'}}</span>
+                                    <span class="msg">{{'No Disk'}}</span>
                                 </div>
                             </div>
-                            <div class="dashboard-col col-50 services" *ngIf="isNonAgentDevice">
+                            <div
+                                class="dashboard-col col-50 services"
+                                *ngIf="isNonAgentDevice"
+                            >
                                 <h2>Services</h2>
                                 <ul class="list-unstyled">
                                     <li [ngClass]="
@@ -429,21 +451,32 @@
                                             >
                                         </figure>
                                         <h4>Security Update</h4>
-                                        <span class="securityup" *ngIf="securityUpdate" (click)="getPendingWindowUpdate(template)">{{ securityUpdate }} missing Updates</span>
+                                        <span
+                                            class="securityup"
+                                            *ngIf="securityUpdate"
+                                            (click)="getPendingWindowUpdate(template)"
+                                        >
+                                            {{ securityUpdate }} missing Updates
+                                        </span>
                                         <span *ngIf="!securityUpdate">&nbsp;</span>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="dashboard-col col-50 tags" id="elementID">
+                            <div
+                                class="dashboard-col col-50 tags"
+                                id="elementID"
+                            >
                                 <div class="col-title">
                                     <h2>Tags</h2>
-                                    <span>  <a
-                                      href="javascript:;"
-                                      class="static-link"
-                                      (click)="focusMyInput()"
-                                  >
-                                      Add Tag
-                                  </a></span>
+                                    <span>
+                                        <a
+                                            href="javascript:;"
+                                            class="static-link"
+                                            (click)="focusMyInput()"
+                                        >
+                                            Add Tag
+                                        </a>
+                                    </span>
                                 </div>
                                 <div
                                     class="grey-dropdown"
@@ -460,7 +493,8 @@
                                                 <mat-icon matChipRemove>cancel</mat-icon>
                                             </mat-chip>
                                         </mat-chip-list>
-                                        <input autofocus
+                                        <input
+                                            autofocus
                                             id="dropdownServices"
                                             #searchInput
                                             [(ngModel)]="tagFilterValue"
@@ -573,7 +607,7 @@
                                     </li>
                                 </ul>
                                 <div *ngIf="assetNotes?.length==0">
-                                  <span class="msg">{{"No Notes"}}</span>
+                                    <span class="msg">{{"No Notes"}}</span>
                                 </div>
                             </div>
                         </div>
@@ -673,6 +707,7 @@
 
 
 
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -759,6 +794,7 @@
                                     Cancel
                                 </a>
 
+
                                 <button
                                     type="button"
                                     class="btn btn-danger pull-right"
@@ -773,148 +809,160 @@
             </div>
         </div>
     </div>
-  </main>
-  <div
-  class="loading"
-  *ngIf="loading"
+</main>
+<div
+    class="loading"
+    *ngIf="loading"
 ></div>
 
 
-<ng-template #template let-modal>    
-    <div class="modal-content">  
+
+<ng-template
+    #template
+    let-modal
+>
+    <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close pull-right closebtn" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <button
+                type="button"
+                class="close pull-right closebtn"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+            >
                 <span aria-hidden="true">&times;</span>
-              </button>
-        </div>         
+            </button>
+        </div>
         <div class="modal-body">
-          <div class="tabletitle">
-            <span [textContent]="asset.Title || asset.Name"></span>
-          </div>  
-          <div>             
-            <ngb-tabset [destroyOnHide]="false">
-                <ngb-tab title="Pending">
-                  <ng-template ngbTabContent>
-                   <div class="modal-body">
-              <div class="modal-table">
-                <div class="modal-table-body">
-                <div class="remote-area">
-                    <table class="fixed">
-                      <thead>
-                        <tr *ngIf="windowUpdatePendingList.length>0">
-                          <th class="tableth"></th>
-                          <th class="title">Description</th>
-                          <th class="product">Product</th>
-                          <th class="product">Class</th>
-                          <th class="product">Size</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
-                              <td class="tabletd">
-                                  <input
-                                          type="checkbox"
-                                          (change)="postWindowUpdatePendint(i)"
-                                          *ngIf="!data.loading"
-                                  />
-                                  <div class="loader" *ngIf="data.loading"></div>
-                              </td>
-                              <td class="tablespace">{{data.Title}}</td>
-                              <td class="tablespace">{{data.Product}}</td>
-                              <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
-                              <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
-                          </tr>
-                          <tr *ngIf="windowUpdatePendingList.length == 0">
-                              <td class="missing">No missing Updates</td>
-                          </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="viewer-footer" *ngIf="windowUpdatePendingList.length>0">
-                      <a  class="btn btn-dowanload footer" [ngClass]="selected==0? 'disabled': '' " (click)="InstallUpdate()">
-                        Install
-                    </a>
-                  </div>
-              </div>
+            <div class="tabletitle">
+                <span [textContent]="asset.Title || asset.Name"></span>
             </div>
-          </div>
-                  </ng-template>
-                </ngb-tab>
-                <ngb-tab title="Install">
-                    <ng-template ngbTabContent>
-                      <div class="modal-body">
-                <div class="modal-table">
-                  <div class="modal-table-body">
-                  <div class="remote-area">
-                      <table class="fixed">
-                        <thead>
-                          <tr *ngIf="installedWindowsUpdateList.length>0">
-                            <th class="title">Description</th>
-                            <th class="product">Product</th>
-                            <th class="product">Class</th>
-                            <th class="product">Size</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let install of installedWindowsUpdateList; let i = index;">
-                                <td class="tablespace">{{install.Title}}</td>
-                                <td class="tablespace">{{install.Product}}</td>
-                                <td class="tablespace">{{categoriesSep(install.Categories)}}</td>
-                                <td class="tablespace">{{sizeConvert(install.Size)}} MB</td>
-                            </tr>
-                            <tr *ngIf="installedWindowsUpdateList.length==0">
-                                <td class="missing">No InstallWindows</td>
-                            </tr>
-                        </tbody>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              </div>
-                    </ng-template>
-                  </ngb-tab>
-                  <ngb-tab title="Blocked">
-                    <ng-template ngbTabContent>
-                      <div class="modal-body">
-                        <div class="modal-table">
-                          <div class="modal-table-body">
-                          <div class="remote-area">
-                              <table class="fixed">
-                                <thead>
-                                  <tr *ngIf="blockedWindowsUpdateList.length>0">
-                                    <th class="title">Description</th>
-                                    <th class="product">Product</th>
-                                    <th class="product">Class</th>
-                                    <th class="product">Size</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let blocked of blockedWindowsUpdateList; let i = index;">
-                                        <td class="tablespace">{{blocked.Title}}</td>
-                                        <td class="tablespace">{{blocked.Product}}</td>
-                                        <td class="tablespace">{{blocked.Categories}}</td>
-                                        <td class="tablespace">{{sizeConvert(blocked.Size)}} MB</td>
-                                    </tr>
-                                    <tr *ngIf="blockedWindowsUpdateList.length==0">
-                                        <td class="missing">No BlockedWindows</td>
-                                    </tr>
-                                </tbody>
-                              </table>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                    </ng-template>
-                  </ngb-tab>
-                </ngb-tabset>                                  
-           </div>                      
-        </div>        
-    </div>    
-  </ng-template>
-
-
-
-  
-
-
-
+            <div>
+                <ngb-tabset [destroyOnHide]="false">
+                    <ngb-tab title="Pending">
+                        <ng-template ngbTabContent>
+                            <div class="modal-body">
+                                <div class="modal-table">
+                                    <div class="modal-table-body">
+                                        <div class="remote-area">
+                                            <table class="fixed">
+                                                <thead>
+                                                    <tr *ngIf="windowUpdatePendingList.length>0">
+                                                        <th class="tableth"></th>
+                                                        <th class="title">Description</th>
+                                                        <th class="product">Product</th>
+                                                        <th class="product">Class</th>
+                                                        <th class="product">Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
+                                                        <td class="tabletd">
+                                                            <input
+                                                                type="checkbox"
+                                                                (change)="postWindowUpdatePendint(i)"
+                                                                *ngIf="!data.loading"
+                                                            >
+                                                            <div
+                                                                class="loader"
+                                                                *ngIf="data.loading"
+                                                            ></div>
+                                                        </td>
+                                                        <td class="tablespace">{{data.Title}}</td>
+                                                        <td class="tablespace">{{data.Product}}</td>
+                                                        <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
+                                                        <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
+                                                    </tr>
+                                                    <tr *ngIf="windowUpdatePendingList.length == 0">
+                                                        <td class="missing">No missing Updates</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="viewer-footer"
+                                            *ngIf="windowUpdatePendingList.length>0"
+                                        >
+                                            <a
+                                                class="btn btn-dowanload footer"
+                                                [ngClass]="selected==0? 'disabled': '' "
+                                                (click)="InstallUpdate()"
+                                            >
+                                                Install
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Install">
+                        <ng-template ngbTabContent>
+                            <div class="modal-body">
+                                <div class="modal-table">
+                                    <div class="modal-table-body">
+                                        <div class="remote-area">
+                                            <table class="fixed">
+                                                <thead>
+                                                    <tr *ngIf="installedWindowsUpdateList.length>0">
+                                                        <th class="title">Description</th>
+                                                        <th class="product">Product</th>
+                                                        <th class="product">Class</th>
+                                                        <th class="product">Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let install of installedWindowsUpdateList; let i = index;">
+                                                        <td class="tablespace">{{install.Title}}</td>
+                                                        <td class="tablespace">{{install.Product}}</td>
+                                                        <td class="tablespace">{{categoriesSep(install.Categories)}}</td>
+                                                        <td class="tablespace">{{sizeConvert(install.Size)}} MB</td>
+                                                    </tr>
+                                                    <tr *ngIf="installedWindowsUpdateList.length==0">
+                                                        <td class="missing">No InstallWindows</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Blocked">
+                        <ng-template ngbTabContent>
+                            <div class="modal-body">
+                                <div class="modal-table">
+                                    <div class="modal-table-body">
+                                        <div class="remote-area">
+                                            <table class="fixed">
+                                                <thead>
+                                                    <tr *ngIf="blockedWindowsUpdateList.length>0">
+                                                        <th class="title">Description</th>
+                                                        <th class="product">Product</th>
+                                                        <th class="product">Class</th>
+                                                        <th class="product">Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let blocked of blockedWindowsUpdateList; let i = index;">
+                                                        <td class="tablespace">{{blocked.Title}}</td>
+                                                        <td class="tablespace">{{blocked.Product}}</td>
+                                                        <td class="tablespace">{{blocked.Categories}}</td>
+                                                        <td class="tablespace">{{sizeConvert(blocked.Size)}} MB</td>
+                                                    </tr>
+                                                    <tr *ngIf="blockedWindowsUpdateList.length==0">
+                                                        <td class="missing">No BlockedWindows</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</ng-template>

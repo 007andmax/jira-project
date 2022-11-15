@@ -34,17 +34,17 @@
         <span
             class="tag__modern --warning"
             *ngIf="invoice.isOverDue && !invoice.paidOn"
-            [textContent]="'Overdue by ' + getOverDueDate() + ' days'"
+            [textContent]="'Overdue by ' + invoice.getOverDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --info"
             *ngIf="!invoice.isOverDue && !invoice.paidOn"
-            [textContent]="'Due in ' + getDueDate() + ' days'"
+            [textContent]="'Due in ' + invoice.getDueDate() + ' days'"
         ></span>
         <span
             class="tag__modern --success"
             *ngIf="invoice.paidOn"
-            [textContent]="'Paid ' + getPaidOnDate() + ' days ago'"
+            [textContent]="'Paid ' + invoice.getPaidOnDate() + ' days ago'"
         ></span>
     </td>
     <td
@@ -77,10 +77,18 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    (click)="resendInvoices()"
+                    (click)="resendInvoices(false)"
+                >
+                    <div class="icon__email-dark qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    Resend
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="resendInvoices(true)"
                 >
                     <div class="icon__email-dark qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                    Resend
+                    Resend with PDF
                 </li>
                 <li
                     class="pointer"
@@ -88,7 +96,7 @@
                     *ngIf="!invoice.readedAt"
                     (click)="markAsRead()"
                 >
-                    <div class="icon__mark-as-read qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__mark-as-read qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Mark as Read
                 </li>
                 <li
@@ -96,7 +104,7 @@
                     ngbDropdownItem
                     (click)="exportAsPDF()"
                 >
-                    <div class="icon__download-pdf qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__download-pdf qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Export as PDF
                 </li>
                 <li
@@ -105,7 +113,7 @@
                     *ngIf="invoice.paidOn"
                     (click)="refundPayments()"
                 >
-                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__restart qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Refund Payments
                 </li>
                 <li
@@ -114,14 +122,14 @@
                     *ngIf="!invoice.paidOn"
                     (click)="rollbackInvoice()"
                 >
-                    <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__remove qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Rollback
                 </li>
                 <li
                     ngbDropdownItem
                     class="payment-menu-item"
                 >
-                    <div class="icon__payment-history qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    <div class="icon__payment-history qt-bg-contain qt-sz-20 qt-mr-12"></div>
                     Payment history
                     <div class="dropdown-submenu-wrapper payment-info-submenu">
                         <div class="payment-info clearfix">

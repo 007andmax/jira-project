@@ -32,7 +32,7 @@ export class ContractComponent implements OnInit, OnDestroy {
   isRateHoursModel = false;
   perUserDeviceModel = false;
 
-  loading = false;
+  loading = true;
   sub: Subscription = new Subscription();
   @ViewChild('commissionRate') commissionRate: ElementRef;
   @ViewChild('commissionRateHourInput') commissionRateHourInput: ElementRef;
@@ -62,10 +62,9 @@ export class ContractComponent implements OnInit, OnDestroy {
   }
 
   getAgreementsRates() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.agreementRates().subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         this.agreementsCommissions = res || {};
         this.oldAgreementsCommissions = Object.assign(
           {},
@@ -73,7 +72,7 @@ export class ContractComponent implements OnInit, OnDestroy {
         );
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -143,11 +142,9 @@ export class ContractComponent implements OnInit, OnDestroy {
             this.toastrService.success('Successfully Changed')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplayModel = false;
-            this.loading = false; $(".loading").css("display", "none");
           },
           error => {
             this.toastrService.error('Bad Request')
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
       } else {
@@ -156,21 +153,17 @@ export class ContractComponent implements OnInit, OnDestroy {
             this.toastrService.success('Changed Successfully')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplayModel = false;
-            this.loading = false; $(".loading").css("display", "none");
           },
           error => {
             this.toastrService.error('Bad Request')
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
       }
     } else {
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
           this.toastrService.success('Saved Successfully')
           this.isModelDisplayModel = false;
-          this.loading = false; $(".loading").css("display", "none");
           this.agreementsCommissions = res || {};
           this.oldAgreementsCommissions = Object.assign(
             {},
@@ -179,7 +172,6 @@ export class ContractComponent implements OnInit, OnDestroy {
         },
         error => {
           this.toastrService.error('Bad Request')
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
     }
@@ -214,13 +206,10 @@ export class ContractComponent implements OnInit, OnDestroy {
 
     data = Object.assign({}, data, this.agreementsFlags);
 
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.setAgreementRates(data, false).subscribe(
       res => {
         this.toastrService.success('Changed Successfully')
         this.isModelDisplayModel = false;
-        this.loading = false; $(".loading").css("display", "none");
-
         this.agreementsCommissions = res || {};
         this.oldAgreementsCommissions = Object.assign(
           {},
@@ -229,7 +218,6 @@ export class ContractComponent implements OnInit, OnDestroy {
       },
       error => {
         this.toastrService.error('Bad Request')
-        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -239,7 +227,7 @@ export class ContractComponent implements OnInit, OnDestroy {
     this.rate = rate;
     // this.deletePopup = true;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_CONTRACT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
 
   }

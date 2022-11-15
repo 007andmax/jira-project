@@ -6,7 +6,7 @@ export class CompanyFilter {
     clientType: string;
     clientIndustry: CompanyIndustry;
     tags: Array<Tag> = [];
-    tehUser: string;
+    techUser: string;
     isArchived: boolean;
     devices = [];
     users = [];
@@ -35,26 +35,27 @@ export class CompanyFilter {
         return {
             tagIds: (this.tags.length > 0) ? this.tags.map(item => item.id) : undefined,
             clientType: (this.clientType) ? this.clientType : undefined,
-            techLeadId: (this.tehUser) ? this.tehUser : undefined,
+            techLeadId: (this.techUser) ? this.techUser : undefined,
             clientIndustryId: (this.clientIndustry) ? this.clientIndustry.id : undefined,
-            isArchived: (this.isArchived) ? true : undefined
+            isArchived: this.isArchived,
+            needCompanyInfo: true,
         }
     }
     public setArchived(data) {
         this.isArchived = data;
     }
-    public setTehUser(data) {
-        this.tehUser = data;
+    public setTechUser(data) {
+        this.techUser = data;
     }
     public setFilters(data) {
         if (data.clientType !== "ARCHIVE") this.clientType = data.clientType;
         if (data.clientType === "ARCHIVE") this.clientType = null;
         this.clientIndustry = data.clientIndustry;
-        this.tehUser = data.tehUser;
+        this.techUser = data.techUser;
         this.tags = data.tags;
     }
     public isExistFilters() {
-        return this.clientType || this.clientIndustry || this.tehUser || this.tags.length > 0;
+        return this.clientType || this.clientIndustry || this.techUser || this.tags.length > 0;
     }
     public setClientIndustry(data) {
         this.clientIndustry = data;

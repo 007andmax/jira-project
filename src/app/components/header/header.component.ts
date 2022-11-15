@@ -10,6 +10,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { QuoteStateService } from '../../states/quote/quote-state.service';
 import { TicketsStateService } from '../../states/tickets/tickets-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { User } from '../users/class/user';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 export class HeaderComponent implements OnInit {
   currentCompany: Company;
   toggleLeftPanel: boolean = false;
+  currentUser: User;
   constructor(private usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService,
     // private quoteStateService: QuoteStateService,
@@ -32,9 +34,13 @@ export class HeaderComponent implements OnInit {
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+    if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.getCurrentUser(data)
+    })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
-      if(!this.cd['destroyed']){
+      if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
@@ -42,6 +48,9 @@ export class HeaderComponent implements OnInit {
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
     })
+  }
+  private getCurrentUser(data) {
+    this.currentUser = data;
   }
   onToggleLeftPanel() {
     this.toggleLeftPanel = !this.toggleLeftPanel;
@@ -57,7 +66,16 @@ export class HeaderComponent implements OnInit {
        e.initEvent('click', true, true);
        link.dispatchEvent(e);*/
   }
-
+  checkLogo() {
+    if (this.currentUser && this.currentUser.avatar) return `/users/${this.currentUser.id}/image.jpg?t=${this.currentUser.avatar.updatedAt}`;
+    return null;
+  }
+  getCompanyLogoUrl() {
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
   }

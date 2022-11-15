@@ -135,6 +135,9 @@ export class PasswordManagerService {
         return data;
       }));
   }
+  public getCodeRecords(id) {
+    return this.http.get(this.apiUrl + `google/code/otp/${id}`)
+  }
 
   public getCompanyRecords(id) {
 

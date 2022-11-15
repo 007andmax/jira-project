@@ -1,6 +1,6 @@
 <div class="qt-df qt-mb-16">
     <div class="qt-w50 qt-input-block qt-mr-16">
-        <app-drop-down
+        <company-drop-down
             #companiesDP
             [title]="'Company Name'"
             [placeholder]="'Select Company'"
@@ -11,7 +11,7 @@
             [search]="true"
             [change]="true"
             (onSelectedItem)="selectCompany($event)"
-        ></app-drop-down>
+        ></company-drop-down>
     </div>
     <app-drop-down
         [title]="'Contract Type'"

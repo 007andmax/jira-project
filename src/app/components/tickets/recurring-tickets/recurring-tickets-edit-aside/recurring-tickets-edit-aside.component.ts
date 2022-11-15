@@ -7,7 +7,6 @@ import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { ForCreateService } from '../class/for-create-service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
-import { SelectClientCompanyStateService } from '../../../shared/select-client-company/services/select-client-company-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
@@ -16,9 +15,9 @@ import { RecurringTicket } from '../class/recurring-ticket';
 import { Validate } from '../class/validate';
 import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
-import { TextAreaDirective } from 'src/app/directives/text-area.directive';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
+import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-user-item';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -37,10 +36,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public type: string = "services";
   public selectedClient: any;
   public devicesList = [];
-  public tehUsers = [];
+  public techUsers = [];
   public ticketForEdit: RecurringTicket = null;
   public validate: Validate = new Validate();
-  public listTehUsers: Array<TechUserItem> = [];
+  public listTechUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
@@ -53,8 +52,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    * @param {RecurringService} recurringService Service to work with recurring tickets
    * @param {ChangeDetectorRef} cd Service to work with change detector
    * @param {DevicesService} devicesService Service to work with devices
-   * @param {SelectClientCompanyStateService} companiesState to work companies state
-   * @param {RecurringTicketsStateService} recurringState to work recurring state
+     * @param {RecurringTicketsStateService} recurringState to work recurring state
    * @param {RecurringTicketsService} createService Service to work with create recurring ticket
    * 
    */
@@ -63,7 +61,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
     private devicesService: DevicesRecurringTicketsStateService,
-    private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
     private usersStateService: UsersStateService
@@ -88,7 +85,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  * @param data - date picker data
  */
   public onChangeDatePicker(data: ChangeDatePicker) {
-    this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+    this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTechCompany().addresses[0].timeZone.timeOffset);
   }
 
   /**
@@ -110,9 +107,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     // this.createService.setDescription(data.description);
     this.ticketForEdit = data;
-    this.tehUsers = data.assignedUsers;
-    this.selectClient({ item: data.company });
-    this.companiesState.setCompanyFromtEdit(data.company);
+    this.techUsers = data.assignedUsers;
+    this.selectClient(data.company);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
@@ -123,7 +119,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
     this.createService.setQuickClose(data.quickClose);
-    this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
+    this.createService.getTechState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
     // this.description.update();
@@ -172,13 +168,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Subscribe to change teh user
-   * @param tehusers - teh users
+   * Subscribe to change tech user
+   * @param techusers - tech users
    */
-  public onChangeTehUsers(tehusers) {
-    this.tehUsers = tehusers;
-    this.recurringState.getCreateTicket().clearTehUsers();
-    this.tehUsers.forEach((item) => {
+  public onChangeTechUsers(techusers) {
+    this.techUsers = techusers;
+    this.recurringState.getCreateTicket().clearTechUsers();
+    this.techUsers.forEach((item) => {
       this.recurringState.getCreateTicket().addAssignedUsers(item.id);
     })
 
@@ -211,7 +207,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   private onGetTechUsers(data) {
-    this.listTehUsers = data.filter(item => {
+    this.listTechUsers = data.filter(item => {
 
       if (item.accountType === 'TECH' && !item.deletedAt) {
         return new TechUserItem(item);
@@ -235,13 +231,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 */
   public selectClient(selectClient) {
     this.validate.resetCompany();
-    if (selectClient === 'null') {
+    if (selectClient == null) {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
     } else {
-      this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
-      this.selectedClient = selectClient.item;
+      this.recurringState.getCreateTicket().setCompany(selectClient.id);
+      this.selectedClient = selectClient;
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
@@ -441,11 +437,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.type = "services";
     this.selectedClient = null;
     this.devicesList = [];
-    this.tehUsers = [];
-    this.companiesState.onInitClear();
+    this.techUsers = [];
     this.createService.getDevicesState().onInitClear();
     this.createService.getTagsState().onInitClear();
-    this.createService.getTehState().onInitClear();
+    this.createService.getTechState().onInitClear();
     //  this.createService.clearData();
     this.createService.getStateDatePicker().onInitClear();
     this.createService.setDefaultDate();

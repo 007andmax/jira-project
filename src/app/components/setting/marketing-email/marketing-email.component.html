@@ -1,27 +1,28 @@
-<!-- Middle Wrapper -->
 <div class="page-container products-settings-page-container">
     <div class="page-insider page-insider-marketing-email manage-taxes">
-        <div class="heading">
-            <h6 class="qt-fw-600 qt-color-dark">Marketing Email</h6>
-            <div class="heading-serach add-category-container">
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
+            <h5 class="qt-fw-600">Marketing Email</h5>
+            <div class="qt-df qt-ml-12">
+                <app-dynamic-tooltip
+                    [content]="'Remove'"
+                    [position]="'top'"
+                    #removeTooltip
+                ></app-dynamic-tooltip>
                 <div
-                    class="tickets-status-header-buttons"
+                    class="qt-button --md --gray button-gl-number__delete"
+                    (click)="removeList()"
                     *ngIf="getSelectedCount() > 0"
+                    (mouseenter)="removeTooltip.show($event.target)"
+                    (mouseleave)="removeTooltip.hide()"
                 >
-                    <div [textContent]="getSelectedCount() + ' Selected'"></div>
-                    <div
-                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-                        (click)="removeList()"
-                    >
-                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-                        <div>Delete</div>
-                    </div>
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c"></div>
                 </div>
                 <a
                     href="javascript:;"
-                    class="btn-outline"
+                    class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
                     (click)="create()"
                 >
+                    <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     Add Subscription Type
                 </a>
             </div>

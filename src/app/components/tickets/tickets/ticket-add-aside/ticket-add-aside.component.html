@@ -1,6 +1,6 @@
 <div
     [hidden]="!opened"
-    class="qt-aside-modern ticket-add-aside"
+    class="qt-aside-modern qt-aside-modern--page-settings"
 >
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-info d-f ai-c">
@@ -58,81 +58,87 @@
         </div>
     </div>
     <div class="qt-aside-modern__content">
-        <div class="qt-input-block qt-input-line ticket-add-aside__priority-level-input">
-            <span class="qt-input-block__label">Priority Level</span>
-            <app-select-search
-                [class]="['qt-dropdown']"
-                [field]="'title'"
-                [isBlockClear]="true"
-                [editItem]="selectedTicketPriorities"
-                [list]="ticketPriorities"
-                (onSelectedItem)="setPriorityLevel($event)"
-                [placeholder]="'Low'"
-            ></app-select-search>
-        </div>
-        <div class="qt-input-block qt-input-line --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!ticketValidate.getSubject()"
-            >
-                Ticket Subject is required
-            </mat-error>
-            <label
-                for="add-ticket-subject"
-                class="qt-input-block__label"
-            >
-                Ticket Subject
-            </label>
-            <input
-                [ngClass]="{'--input-error' : !ticketValidate.getSubject()}"
-                id="add-ticket-subject"
-                class="qt-input-block__input"
-                [(ngModel)]="ticketAdd.subject"
-                (change)="onChangeSubject()"
-                type="text"
-                placeholder="Write Ticket subject"
-            >
-        </div>
-        <div class="qt-input-block qt-input-line">
-            <label
-                for="add-ticket-describe-issue"
-                class="qt-input-block__label"
-            >
-                Describe Issue
-            </label>
-            <div
-                id="add-ticket-describe-issue"
-                class="qt-input-block__textarea"
-                contenteditable="true"
-                placeholder="Describe Issue here…"
-                (input)="onChangeNote($event)"
-            ></div>
-            <!-- <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
-                  placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea> -->
-        </div>
-        <div class="qt-input-line">
+        <div class="qt-inputs-row ticket-add-aside__priority-level-input">
             <div class="qt-input-block">
+                <span class="qt-input-block__label">Priority Level</span>
                 <app-drop-down
+                    [class]="['qt-dropdown']"
+                    [field]="'title'"
+                    [isBlockClear]="true"
+                    [editItem]="selectedTicketPriorities"
+                    [list]="ticketPriorities"
+                    (onSelectedItem)="setPriorityLevel($event)"
+                    [placeholder]="'Low'"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row --required">
+            <div class="qt-input-block">
+                <label
+                    for="add-ticket-subject"
+                    class="qt-input-block__label"
+                >
+                    Ticket Subject
+                </label>
+                <input
+                    [ngClass]="{'--input-error' : !ticketValidate.getSubject()}"
+                    id="add-ticket-subject"
+                    class="qt-input-block__input"
+                    [(ngModel)]="ticketAdd.subject"
+                    (change)="onChangeSubject()"
+                    type="text"
+                    placeholder="Write Ticket subject"
+                >
+                <mat-error
+                    class="invalid-feedback"
+                    *ngIf="!ticketValidate.getSubject()"
+                >
+                    Ticket Subject is required
+                </mat-error>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <label
+                    for="add-ticket-describe-issue"
+                    class="qt-input-block__label"
+                >
+                    Describe Issue
+                </label>
+                <div
+                    id="add-ticket-describe-issue"
+                    class="qt-input-block__textarea"
+                    contenteditable="true"
+                    placeholder="Describe Issue here…"
+                    (input)="onChangeNote($event)"
+                ></div>
+                <!-- <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
+                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea> -->
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
+                <company-drop-down
                     #companyDP
                     [title]="'Company'"
                     [class]="['qt-dropdown']"
                     [placeholder]="'Select Company'"
-                    [list]="companies"
                     [validate]="ticketValidate.getCompany()"
                     [errorMessage]="'Company is required'"
+                    [clientType]="'CLIENT'"
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
                     (onSelectedItem)="onSelectCompany($event)"
-                ></app-drop-down>
+                ></company-drop-down>
             </div>
-            <div class="qt-input-block">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <app-drop-down
                     #userDP
                     [title]="'User'"
                     [class]="['qt-dropdown']"
                     [placeholder]="'Select User'"
-                    [list]="getUserList()"
+                    [list]="usersList"
                     [validate]="ticketValidate.getClientUser()"
                     [errorMessage]="'Client User is required'"
                     [search]="true"
@@ -141,27 +147,31 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-input-line">
-            <div class="qt-input-block">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <span class="qt-input-block__label">Assign To</span>
-                <app-select-search
+                <app-drop-down
                     #techUserDP
                     [class]="['qt-dropdown']"
-                    [list]="getTechUserList()"
+                    [list]="namesTechUsersList"
+                    [search]="true"
+                    [change]="true"
                     (onSelectedItem)="onSelectTechUser($event)"
                     [placeholder]="'Select User to assign'"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
-            <div class="qt-input-block">
+            <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <span class="qt-input-block__label">Device</span>
-                <app-select-search
+                <app-drop-down
                     #deviceDP
                     [class]="['qt-dropdown']"
                     [field]="'hostName'"
                     [list]="devices"
+                    [preloader]="devicesStateService.getPreloaderDevices()"
+                    [isDisabled]="devicesStateService.getPreloaderDevices()"
                     [placeholder]="'Select device'"
                     (onSelectedItem)="onSelectDevice($event)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
         </div>
         <app-upload-area
@@ -174,19 +184,19 @@
             <div class="save-template">
                 <div
                     class="device-user pointer"
-                    id="dropdownTehuser"
+                    id="dropdownTechuser"
                     *ngIf="appService.checkMobile()"
                     (click)="onAddAssignedUser()"
                 >
                 </div>
-                <app-teh-users
+                <app-tech-users
                     #techUsersDp
                     *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
                     [editMode]="true"
                     [editUsers]="shareUsersList"
                     (usersChange)="onChangeShareUsers($event)"
-                ></app-teh-users>
+                ></app-tech-users>
                 <div class="assigned-users-list">
                     <div class="assigned-users-type assigned-users-type-clients">
                         <ng-template

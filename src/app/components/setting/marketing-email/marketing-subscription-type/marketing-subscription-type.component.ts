@@ -1,13 +1,16 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_SUBSCRIPTION_TYPE, DELETE_SUBSCRIPTION_TYPIES } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
 
@@ -22,12 +25,16 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   filter: MarketingSubscriptionTypeFilter = new MarketingSubscriptionTypeFilter();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
+  colors = ["#16A4FA", "#2BC7C6", "#155EEF", "#D92D20", "#7839EE", "#D92D20", "#2EC866"];
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
+    private usersStateService: UsersStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -58,16 +65,63 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   onFilter(field) {
     this.filter.onFilter(field, this.marketingSubscriptionList);
   }
+  getUser(id) {
+    return this.usersStateService.getAllUsers().find(user => user.id === id);
+  }
+  getUserName(id) {
+    return this.usersStateService.getAllUsers().find(user => user.id == id).firstName[0].toLocaleUpperCase();
+  }
+  getUserFirstLastName(id) {
+    let user = this.usersStateService.getAllUsers().find(user => user.id == id);
+    return `${user.firstName} ${user.lastName}`;
+
+  }
+  getCount(count, subCount) {
+    if (subCount > 1) {
+      return count - 2;
+    } else if (subCount > 0) {
+      return count - 1;
+    }
+    return count;
+  }
+  getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return null;
+
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / cover no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+    } else {
+      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
+    }
+  };
   onEditSubscription(item, event) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.marketingEmailService.editSubscriptionType(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined)))
         .subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
           if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
+  }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.marketingSubscriptionList.forEach(item => {
+        item.selected = true;
+        this.marketingEmailStateService.getListSubscriptionTypeForRemove().push(item);
+      })
+    } else {
+      this.marketingSubscriptionList.forEach(item => (item.selected = false));
+      this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
+    }
+    this.cd.detectChanges();
   }
   onRemoveSubscriptions() {
     forkJoin(this.marketingEmailStateService.getListSubscriptionTypeForRemove().map(item => this.marketingEmailService.removeSubscriptionType(item.id).pipe(map((res) => res),
@@ -75,7 +129,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
-          this.cd.detectChanges();
+          this.toastrService.success("The subscription has been successfully removed");
+          this.appStateService.changeDetectorRef();
         },
         error => {
         }
@@ -84,7 +139,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
-      this.cd.detectChanges();
+      this.toastrService.success("The subscription has been successfully removed");
+      this.appStateService.changeDetectorRef();
     })
   }
   openAside(item, subscribed) {
@@ -93,26 +149,16 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   }
   select(event, item) {
     this.onSelect.emit({ event: event, item: item });
-    /* if (event.target.checked) {
-       this.marketingEmailStateService.getListSubscriptionTypeForRemove().push(selected);
-     } else {
-       let list = this.marketingEmailStateService.getListSubscriptionTypeForRemove();
-       let index = list.findIndex(item => item.id === selected.id);
-       if (index > -1) list.splice(index, 1);
-       this.marketingEmailStateService.setListSubscriptionTypeForRemove(list);
-     }
-     this.cd.detectChanges();*/
   }
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Subscription`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
   }
   ngOnDestroy(): void {
+    this.marketingSubscriptionList.forEach(item => (item.selected = false));
     this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
     this.sub.unsubscribe();
   }
-
-
 }

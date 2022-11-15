@@ -3,6 +3,7 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel();onToggleTypeCompanies()"
 >
+    <div class="icon__collapse-arrow-white qt-sz-24 qt-mr-12 qt-d-none qt-d-md-block"></div>
     <div class="app-left-panel__menu-title">Companies</div>
     <i
         class="icn-sm report-caret-icon"
@@ -37,8 +38,15 @@
         <li
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
             (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
-            [textContent]="(activePage === 'new-companies') ? 'Clients ('+getCount('CLIENT') +')' : 'Clients'"
+            class="qt-jc-sb"
         >
+            <span *ngIf="activePage === 'new-companies'">Clients</span>
+            <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
+                *ngIf="activePage === 'new-companies'"
+                [textContent]="getCount('CLIENT')"
+            ></span>
+            <span *ngIf="activePage !== 'new-companies'">Clients</span>
         </li>
     </a>
     <a
@@ -50,8 +58,15 @@
         <li
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
             (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
-            [textContent]="(activePage === 'new-companies') ? 'Leads ('+getCount('LEAD') +')' : 'Leads'"
+            class="qt-jc-sb"
         >
+            <span *ngIf="activePage === 'new-companies'">Leads</span>
+            <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
+                *ngIf="activePage === 'new-companies'"
+                [textContent]="getCount('LEAD')"
+            ></span>
+            <span *ngIf="activePage !== 'new-companies'">Leads</span>
         </li>
     </a>
     <a
@@ -63,8 +78,15 @@
         <li
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
             (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
-            [textContent]="(activePage === 'new-companies') ? 'Vendors ('+getCount('VENDOR') +')' : 'Vendors'"
+            class="qt-jc-sb"
         >
+            <span *ngIf="activePage === 'new-companies'">Vendors</span>
+            <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
+                *ngIf="activePage === 'new-companies'"
+                [textContent]="getCount('VENDOR')"
+            ></span>
+            <span *ngIf="activePage !== 'new-companies'">Vendors</span>
         </li>
     </a>
     <a
@@ -76,8 +98,15 @@
         <li
             [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
             (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
-            [textContent]="(activePage === 'new-companies') ? 'Suppliers ('+getCount('SUPPLIER') +')' : 'Suppliers'"
+            class="qt-jc-sb"
         >
+            <span *ngIf="activePage === 'new-companies'">Suppliers</span>
+            <span
+                class="qt-color-light qt-ml-6 app-left-panel__menu-expand-count"
+                *ngIf="activePage === 'new-companies'"
+                [textContent]="getCount('SUPPLIER')"
+            ></span>
+            <span *ngIf="activePage !== 'new-companies'">Suppliers</span>
         </li>
     </a>
     <a

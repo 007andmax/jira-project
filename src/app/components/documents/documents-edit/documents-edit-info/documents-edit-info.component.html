@@ -123,52 +123,27 @@
                         (tagsChange)="onSelectTags($event)"
                     ></app-company-tags>
                 </div>
-                <!-- <div class="documents-create__col checkbox-wrapper">
-                    <div class="with-checkbox">
-                        <label class="checkbox-container">
-                            <input
-                                type="checkbox"
-                                disabled
-                            >
-                            <span class="checkbox-mark"></span>
-                        </label>
-                        <p>Show in Knowledge base</p>
-                    </div>
-                </div>
-                <div class="documents-create__col">
-                    <app-drop-down
-                        class="dropdown"
-                        [placeholder]="'Select Category'"
-                        [isDisabled]="true"
-                        [list]="categories"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        heightInput="40px"
-                        widthInput="100%"
-                    ></app-drop-down>
-                </div> -->
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label
-                            class="checkbox-container"
-                            [ngClass]="{'disabled':documentEdit.documentType === 'DOCUMENT'}"
+                          class="qt-checkbox"
+                          [ngClass]="{'disabled':documentEdit.documentType === 'DOCUMENT'}"
                         >
-                            <input
-                                id
-                                type="checkbox"
-                                [disabled]="documentEdit.documentType === 'DOCUMENT'"
-                                [(ngModel)]="requiredCompanyType"
-                                (change)="onResetCompanyType()"
-                            >
-                            <span></span>
-                        </label>
-                        <p>Required by Company Type</p>
-                        <i
-                            class="icn-sm icn-help"
+                          <input
+                            id
+                            type="checkbox"
+                            [disabled]="documentEdit.documentType === 'DOCUMENT'"
+                            [(ngModel)]="requiredCompanyType"
+                            (change)="onResetCompanyType()"
+                          >
+                          <span></span>
+                          <div>Required by Company Type</div>
+                          <i
+                            class="icn-sm icon__help"
                             placement="top"
                             ngbTooltip="The required type value can be used only for templates"
-                        ></i>
+                          ></i>
+                        </label>
                     </div>
                 </div>
                 <div class="documents-create__col">
@@ -197,25 +172,6 @@
                         (onChange)="onChangeReviewDate($event)"
                     ></app-date-picker>
                 </div>
-                <!-- <div class="documents-create__col">
-                    <div class="qt-df qt-jc-sb qt-ai-c">
-                        <p class="label-name">Share Document Link</p>
-                        <div class="qt-df qt-ai-c pointer">
-                            <div class="icon__link qt-sz-16 qt-bg-contain"></div>
-                            <div class="qt-color-info qt-ff-gm qt-mr-4 qt-ml-4">Copy Link</div>
-                            <div class="qt-df">
-                                <div class="qt-toggle qt-mr-8">
-                                    <div class="qt-toggle__circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input
-                        type="text"
-                        class="qt-input-40 documents-add-body__input"
-                        placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
-                    >
-                </div> -->
             </div>
             <div
                 class="qt-pt-12 qt-pl-24 qt-pr-24"

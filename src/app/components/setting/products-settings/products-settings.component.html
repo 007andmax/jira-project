@@ -1,30 +1,35 @@
 <!-- Middle Wrapper -->
 <div class="page-container products-settings-page-container">
     <div class="page-insider manage-taxes">
-        <div class="heading">
-            <h6 class="qt-fw-600 qt-color-dark">Products</h6>
-            <div class="heading-serach add-category-container">
-                <div
-                    class="tickets-status-header-buttons"
-                    *ngIf="getSelectedCount() > 0"
-                >
-                    <div [textContent]="getSelectedCount() + ' Categories Selected'"></div>
-                    <div
-                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-                        (click)="removeCategoriesStatus()"
-                    >
-                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-                        <div>Delete</div>
-                    </div>
-                </div>
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
+            <h5 class="qt-fw-600">Products</h5>
+            <div class="qt-df">
                 <a
                     href="javascript:;"
-                    class="btn-outline"
+                    class="qt-button --md --gray qt-ml-12 qt-pl-9 qt-pr-9"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div
+                        class="icon__remove delete qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"
+                        (click)="removeCategoriesStatus()"
+                    >
+                    </div>
+                </a>
+                <a
+                    href="javascript:;"
+                    class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
                     (click)="create()"
                 >
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
                     Add category
                 </a>
             </div>
+        </div>
+        <div
+            class="loading-container"
+            *ngIf="loading"
+        >
+            <div class="loading"></div>
         </div>
         <ngb-tabset
             #tabset="ngbTabset"
@@ -35,38 +40,55 @@
                 id="productCategories"
             >
                 <ng-template ngbTabContent>
-                    <div class="cmn-area">
+                    <div
+                        class="cmn-area"
+                        [hidden]="loading"
+                    >
                         <div class="data-table-wrap">
-                            <table
-                                class="display dataTable"
-                                style="width:100%"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="checkbox-header"></th>
-                                        <th
-                                            class="tax-name pointer"
+                            <div class="tab-pane__table">
+                                <div class="tab-pane__table-header">
+                                    <div class="tab-pane__table-row">
+                                        <div class="tab-pane__table-cell product-category-table__checkboxes">
+                                            <label class="qt-checkbox">
+                                                <input
+                                                    id="select-all"
+                                                    type="checkbox"
+                                                    (change)="onSelectAll($event)"
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__category-name pointer"
                                             (click)="onFilter('name')"
                                         >
                                             Category Name
-                                            <div class="qt-table-modern__sorting"></div>
-                                        </th>
-                                        <th
-                                            class="rate pointer"
+                                            <div class="qt-table-modern__sorting--new"></div>
+                                        </div>
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__count pointer"
                                             (click)="onFilter('count')"
                                         >
                                             Count
-                                            <div class="qt-table-modern__sorting"></div>
-                                        </th>
-                                        <th class="action">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                            <div class="qt-table-modern__sorting--new"></div>
+                                        </div>
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__gl-number pointer"
+                                            (click)="onFilter('gl-number')"
+                                        >
+                                            GL Number
+                                            <div class="qt-table-modern__sorting--new"></div>
+                                        </div>
+                                        <div class="tab-pane__table-cell product-category-table__action"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane__table-body">
                                     <add-category-product
                                         *ngIf="showAddCategory"
                                         (onClose)="showAddCategory = false"
                                     ></add-category-product>
-                                    <tr
+                                    <div
+                                        class="tab-pane__table-row"
                                         *ngFor="let item of categoriesProducts; let i = index"
                                         appClickOtside
                                         [init]="item.isInitEdit"
@@ -74,8 +96,8 @@
                                         [class]="'.edit-category-container-' + i"
                                         (onOutSide)="onEditCategory(item)"
                                     >
-                                        <td
-                                            class="checkbox"
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__checkboxes"
                                             *ngIf="item.productsAmount === 0"
                                         >
                                             <label class="qt-checkbox">
@@ -86,18 +108,18 @@
                                                 >
                                                 <span></span>
                                             </label>
-                                        </td>
-                                        <td
-                                            class="checkbox"
+                                        </div>
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__checkboxes"
                                             *ngIf="item.productsAmount > 0"
-                                        ></td>
-                                        <td
-                                            class="tax-name edit-category-name"
+                                        ></div>
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__category-name"
                                             [ngClass]="{'--input-error' :  item.disableUpdate  }"
                                         >
                                             <input
                                                 type="text"
-                                                class="form-input"
+                                                class="form-input --editable"
                                                 placeholder="Enter Name Category"
                                                 [(ngModel)]="item.name"
                                                 maxlength="20"
@@ -111,39 +133,61 @@
                                             >
                                                 This Category is already occupied
                                             </mat-error>
-                                        </td>
-                                        <td
-                                            class="rate"
+                                        </div>
+                                        <div
+                                            class="tab-pane__table-cell product-category-table__count"
                                             [textContent]="item.productsAmount"
-                                        ></td>
-                                        <td class="action">
-                                            <a
-                                                href="javascript:;"
-                                                data-tooltip="Remove"
-                                                class="remove"
-                                                (click)="removeCategoryProduct(item)"
-                                                *ngIf="item.productsAmount === 0"
+                                        ></div>
+                                        <div class="tab-pane__table-cell product-category-table__gl-number">
+                                            <app-drop-down
+                                                [class]="['--small-padding','gl-number-product-settings' ,'--editable-dropdown', 'qt-input-block']"
+                                                [list]="glNumbers"
+                                                [placeholder]="'Select GL'"
+                                                [container]="'body'"
+                                                [change]="false"
+                                                [editItem]="item.glNumber"
+                                                [add]="true"
+                                                [field]="'glNumber'"
+                                                uiType="dark"
+                                                heightInput="32px"
+                                                dropdownWidth="392px"
+                                                [reducerItem]="glDropDownItemName"
+                                                (onSelectedItem)="onSelectGlNumbers(item,$event)"
                                             >
-                                                <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
-                                            </a>
-                                            <app-dynamic-tooltip
-                                                [content]="'You cannot delete category with existing products'"
-                                                [position]="'top'"
-                                                #deleteTooltip
-                                            ></app-dynamic-tooltip>
-                                            <a
-                                                href="javascript:;"
-                                                (mouseenter)="deleteTooltip.show($event.target)"
-                                                (mouseleave)="deleteTooltip.hide()"
-                                                class="remove"
-                                                *ngIf="item.productsAmount > 0"
-                                            >
-                                                <div class="icon__remove-disabled qt-sz-16 qt-bg-contain"></div>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </app-drop-down>
+                                        </div>
+                                        <div class="tab-pane__table-cell product-category-table__action">
+                                            <div class="qt-df qt-ai-c">
+                                                <app-dynamic-tooltip
+                                                    [content]="'Remove'"
+                                                    [position]="'top'"
+                                                    #deleteTooltip
+                                                ></app-dynamic-tooltip>
+                                                <div
+                                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                    *ngIf="item.productsAmount > 0"
+                                                    (mouseenter)="noDeleteTooltip.show($event.target)"
+                                                    (mouseleave)="noDeleteTooltip.hide()"
+                                                >
+                                                </div>
+                                                <app-dynamic-tooltip
+                                                    [content]="'You can’t delete category with existing products'"
+                                                    [position]="'top'"
+                                                    #noDeleteTooltip
+                                                ></app-dynamic-tooltip>
+                                                <div
+                                                    class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                                    *ngIf="item.productsAmount === 0"
+                                                    (click)="removeCategoryProduct(item)"
+                                                    (mouseenter)="deleteTooltip.show($event.target)"
+                                                    (mouseleave)="deleteTooltip.hide()"
+                                                >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ng-template>

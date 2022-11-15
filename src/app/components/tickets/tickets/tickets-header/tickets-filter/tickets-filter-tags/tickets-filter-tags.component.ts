@@ -53,6 +53,8 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   }
   onSearch(event) {
     this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value));
-
+  }
+  isSelected(id) {
+    return this.selectedTag.find(item => item.id == id);
   }
 }

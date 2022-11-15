@@ -6,6 +6,7 @@ export class GlNumber {
     serviceContract: boolean;
     isInitEdit: boolean = false;
     disableUpdate: boolean = false;
+    isInitRequest: boolean = false;
     constructor(data = null) {
         if (data) {
             this.id = data.id;
@@ -14,6 +15,9 @@ export class GlNumber {
             this.blockTime = data.blockTime;
             this.serviceContract = data.serviceContract;
         }
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public checkDublicate(list) {
         var duplicate = list.filter((item) => {

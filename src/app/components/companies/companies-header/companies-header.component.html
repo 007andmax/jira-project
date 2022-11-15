@@ -45,7 +45,7 @@
                         Selected
                     </div>
                     <div class="new-companies-selected-actions">
-                        <i class="icn-16 email-ng2"></i>
+                        <i class="icn-16 icon__email-blue"></i>
                     </div>
                 </div>
                 <button
@@ -194,10 +194,10 @@
                 <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
             <mat-chip
-                *ngIf="filter.companyFilter.tehUser"
+                *ngIf="filter.companyFilter.techUser"
                 (removed)="filter.personsDp.clearClient();refreshFilters()"
             >
-                {{getUserName(filter.companyFilter.tehUser)}}
+                {{getUserName(filter.companyFilter.techUser)}}
                 <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
             <mat-chip

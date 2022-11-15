@@ -15,12 +15,13 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
 
 
 @Component({
@@ -30,7 +31,6 @@ import { DatePickerComponent } from '../../shared/date-picker/date-picker.compon
 })
 export class PasswordManagerAddAsideComponent implements OnInit {
   showPassword: boolean = false;
-  companies: Array<Company> = [];
   categories: Array<PasswordRecordCategories> = [];
   passwordRecordAdd: PasswordRecordAdd = new PasswordRecordAdd();
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
@@ -42,7 +42,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   sub: Subscription = new Subscription();
   @ViewChild('linked') linked: PasswordManagerLinkedComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('companiesDb') companiesDb: DropDownComponent;
+  @ViewChild('companiesDb') companiesDb: CompanyDropDownComponent;
   @ViewChild('addRecord') addRecord: DisabledBtnDirective;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
   /**
@@ -74,11 +74,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
    * Initializes Password manager edit aside. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
     let onAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
       this.passwordRecordAdd = new PasswordRecordAdd();
       this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
@@ -95,6 +90,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
+      this.cd.detectChanges();
     })
     this.sub.add(onGetCategories);
   }
@@ -104,14 +100,10 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   public onPastDescription(value) {
     this.passwordRecordAdd.description = value;
   }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
   selectCompany(data) {
     this.selectedCompany = data;
     this.passwordRecordAdd.setCompany(data);
-    this.linked.onSelectCompany(data);
+    this.linked.onSelectCompany((data) ? data.id : null);
   }
   selectType(data) {
     this.passwordRecordAdd.setType(data);
@@ -120,7 +112,10 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   onChangeDatePicker(data) {
     this.passwordRecordAdd.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
   }
-
+  onChangeAuthenticationKey() {
+    this.validate.resetAuthenticationKeyLen();
+    this.validate.resetAuthenticationKeyBase32();
+  }
   public onChangeLinked(data) {
     this.selectedUserAndDevices = data;
   }

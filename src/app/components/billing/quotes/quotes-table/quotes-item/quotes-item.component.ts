@@ -5,6 +5,7 @@ import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 
 @Component({
   selector: 'app-quotes-item',
@@ -31,7 +32,8 @@ export class QuotesItemComponent implements OnInit {
   @Output() onInvoice = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
-    public ticketsListService: TicketsListService,) { }
+    public ticketsListService: TicketsListService,
+    private toastrProgressStateService: ToastrProgressStateService) { }
 
   ngOnInit() {
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
@@ -58,36 +60,50 @@ export class QuotesItemComponent implements OnInit {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   downloadPdf() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onDownloadPdf.emit(this.quote);
   }
   goToQuoteEdit() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onGoToQuoteEdit.emit(this.quote);
   }
   archiveQuote() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onArchiveQuote.emit(this.quote);
   }
   cancelQuote() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onCancelQuote.emit(this.quote);
   }
   markAsRead() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onMarkAsRead.emit(this.quote);
   }
   convertToBillable() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
+    this.toastrProgressStateService.onInit(this.quote.id);
     this.onConvertToBillable.emit(this.quote);
   }
   approveQuote() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onApproveQuote.emit(this.quote);
   }
   convertToTicket() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
+    this.toastrProgressStateService.onInit(this.quote.id);
     this.onConvertToTicket.emit(this.quote);
   }
   convertToInvoice() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
+    this.toastrProgressStateService.onInit(this.quote.id);
     this.onConvertToInvoice.emit(this.quote);
   }
   copy() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onCopy.emit(this.quote);
   }
   resend() {
+    if (this.toastrProgressStateService.check(this.quote.id)) return;
     this.onResend.emit(this.quote);
   }
   public checkStatus(quote, statusForShowingArray) {

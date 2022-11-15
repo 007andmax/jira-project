@@ -1,11 +1,11 @@
 @import "../../../../assets/styles/variable";
 
 .quotes {
-  background: $gray-200;
+  background: $gray-200--old;
   min-height: calc(100vh - #{$header-height});
   &__header {
     top: $header-height;
-    background: $gray-200;
+    background: $gray-200--old;
     padding: 24px;
     position: fixed;
     width: calc(100vw - 324px);
@@ -154,30 +154,6 @@
       padding: 5px !important;
     }
   }
-}
-
-.products-content__header--search-result {
-  position: fixed;
-  width: 224px;
-  right: calc(50% - 112px);
-  top: 98px;
-  font-size: 12px;
-  background: $gray-300;
-  border: 2px solid $gray-500;
-  border-radius: 4px;
-  color: $success;
-  padding: 6px 10px 6px 40px;
-  z-index: 999;
-}
-
-.products-content__header--search-result:before {
-  position: absolute;
-  content: '';
-  background: url("/assets/img/success-tick.svg");
-  width: 22px;
-  height: 22px;
-  left: 8px;
-  top: 6px;
 }
 
 /deep/.date-picker {

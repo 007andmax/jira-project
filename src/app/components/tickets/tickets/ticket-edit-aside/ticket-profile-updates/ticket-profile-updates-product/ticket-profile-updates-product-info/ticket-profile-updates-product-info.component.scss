@@ -3,7 +3,7 @@
 
 .ticket-updates {
   padding: 24px 32px;
-  background-color: $gray-100;
+  background-color: $gray-100--old;
   font-size: 13px;
 
   @media (max-width: 767px) {
@@ -39,7 +39,7 @@
     font-weight: 600;
   }
   &__add-note {
-    color: $gray-600;
+    color: $gray-600--old;
     cursor: pointer;
   }
   &__edit,
@@ -57,7 +57,7 @@
     margin-left: -48px;
   }
   &__people-added {
-    color: $gray-600;
+    color: $gray-600--old;
     margin-right: 8px;
   }
 
@@ -85,7 +85,7 @@
   &__ticket-body {
     padding: 8px;
     background-color: $white;
-    border: solid 1px $gray-400;
+    border: solid 1px $gray-400--old;
 
     @media (max-width: 767px) {
       align-items: center;
@@ -139,7 +139,7 @@
         content: "";
         left: 0;
         top: -14px;
-        color: $gray-600;
+        color: $gray-600--old;
         position: absolute;
         text-transform: uppercase;
       }

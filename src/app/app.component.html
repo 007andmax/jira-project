@@ -1,3 +1,4 @@
+<router-outlet *ngIf="main_page === PAGE_DEVICE"></router-outlet>
 <div
     class="main-page-container"
     *ngIf="main_page === PAGE_MAIN"
@@ -73,10 +74,12 @@
                     <router-outlet></router-outlet>
                     <users-aside-detail></users-aside-detail>
                     <app-ticket-edit-aside></app-ticket-edit-aside>
+                    <canned-responses-aside></canned-responses-aside>
                     <app-invoices-aside></app-invoices-aside>
                     <app-inventory-add-aside></app-inventory-add-aside>
                     <app-preview-attachment></app-preview-attachment>
                     <help-center-info-aside></help-center-info-aside>
+                    <app-report-send-email></app-report-send-email>
                     <!-- Mobile Style -->
                     <div class="footer-nav">
                         <ul class="footer-nav__menu">

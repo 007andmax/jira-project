@@ -7,17 +7,6 @@
     width: 300px;
   }
 
-  span.qt-input-search {
-    &:before {
-      width: 16px;
-      height: 16px;
-      background-position: center;
-      background-size: 16px;
-    }
-  }
-
-
-
   .billable-table {
 
     td, th {
@@ -54,13 +43,13 @@
 
   tr:hover {
     td {
-      background-color: $gray-100;
+      background-color: $gray-100--old;
 
     }
   }
   tr.--selected {
     td {
-      background-color: $gray-200;
+      background-color: $gray-200--old;
       border-color: $primary-1 !important;
     }
   }
@@ -113,14 +102,14 @@
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        border: solid 1px $gray-400;
+        border: solid 1px $gray-400--old;
         background-color: $white;
         padding-top: 7px;
         padding-bottom: 7px;
       }
 
       &__number {
-        background-color: $gray-700;
+        background-color: $gray-700--old;
         line-height: 1.2;
       }
 
@@ -138,8 +127,8 @@
         border-collapse: separate;
         border-spacing: 0px;
         th, td {
-          background-color: $gray-100;
-          border: solid 1px $gray-400;
+          background-color: $gray-100--old;
+          border: solid 1px $gray-400--old;
           border-left: none;
           height: 36px;
           padding: 0 12px;
@@ -156,7 +145,7 @@
             }
           }
           &:nth-child(2) {
-            border-left: solid 1px $gray-400;
+            border-left: solid 1px $gray-400--old;
           }
         }
 
@@ -240,7 +229,7 @@
     }
 
     .terms-n-conditions {
-      background-color: $gray-100;
+      background-color: $gray-100--old;
 
       &__textarea  {
         width: 541px;
@@ -253,7 +242,7 @@
     }
   }
   .address-block {
-    border-bottom: 1px solid $gray-400;
+    border-bottom: 1px solid $gray-400--old;
     &__horisontal-divider {
       position: absolute;
       right: 50%;
@@ -263,7 +252,7 @@
       margin-bottom: 30px;
       width: 1px;
       border: none;
-      border-left: 1px solid $gray-400;
+      border-left: 1px solid $gray-400--old;
     }
   }
 
@@ -291,11 +280,11 @@ app-invoice-preview {
     padding: 40px 32px;
 
     .company-logo {
-      max-width: 200;
+      max-width: 200px;
       max-height: 70px;
     }
     .company-info {
-      border-bottom: 1px solid $gray-400;
+      border-bottom: 1px solid $gray-400--old;
     }
 
     .invoice-info-value {
@@ -306,8 +295,8 @@ app-invoice-preview {
     }
 
     &__item-header {
-      border: solid 1px $gray-400;
-      background-color: $gray-100;
+      border: solid 1px $gray-400--old;
+      background-color: $gray-100--old;
       height: 32px;
     }
 
@@ -317,10 +306,10 @@ app-invoice-preview {
       border-spacing: 0px;
 
       th, td {
-        border-bottom: solid 1px $gray-400;
-        border-left: solid 1px $gray-400;
+        border-bottom: solid 1px $gray-400--old;
+        border-left: solid 1px $gray-400--old;
         &:last-child {
-          border-right: solid 1px $gray-400;
+          border-right: solid 1px $gray-400--old;
         }
       }
       th {
@@ -339,7 +328,7 @@ app-invoice-preview {
 
     &__item-header-number {
       color: $white;
-      background-color: $gray-700;
+      background-color: $gray-700--old;
       margin-left: -13px;
       height: 20px;
       line-height: 20px;
@@ -387,7 +376,7 @@ app-invoice-preview {
     }
 
     &__total-price {
-      background-color: $gray-100;
+      background-color: $gray-100--old;
       height: 40px;
     }
   }
@@ -400,6 +389,7 @@ app-invoice-preview {
 app-invoice-form {
   .dropdown-menu {
     max-height: none;
+    height: auto;
     overflow: visible;
   }
 
@@ -421,11 +411,11 @@ app-invoice-form {
       width: 100%;
     height: 40px;
     border-radius: 4px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     background-color: $white;
     font-size: 13px;
     line-height: 1.54;
-    color: $gray-800;
+    color: $gray-800--old;
     }
   }
 
@@ -464,12 +454,39 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 
 .billing-aside-cancel-mode {
   border-radius: 4px;
-  color: $gray-800;
-  border: solid 1px $gray-500;
+  color: $gray-800--old;
+  border: solid 1px $gray-500--old;
   background-color: $white;
 }
+.contracts-page__aside {
+  .service-table tr {
+    td.service-table__tax {
+      .dropdown-menu {
+        &.show {
+          max-height: 190px;
+          overflow: auto;
+          width: 100%;
+        }
+      }
 
+      input {
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
+      .dropdown-item {
+        cursor: pointer;
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
 .invoice-ticket-edit-service-product {
   td.invoice-item__col-desc {
     padding: 0;
@@ -484,7 +501,24 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
     }
   }
 
+  .new-taxes-area,
+  .invoice-item__col-tax {
+    .dropdown-menu {
+      max-height: 250px;
+      overflow: auto;
+      max-width: 120px !important;
+    }
 
+    .dropdown-item {
+      padding: 0 8px;
+      cursor: pointer;
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
 
   .invoice-item__col-price {
     max-width: 100px;
@@ -594,9 +628,9 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
           border: none;
         }
         &:hover {
-          background: $gray-100;
+          background: $gray-100--old;
           button {
-            color: $gray-800;
+            color: $gray-800--old;
           }
         }
       }

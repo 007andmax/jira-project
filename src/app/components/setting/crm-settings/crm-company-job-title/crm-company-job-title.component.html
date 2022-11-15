@@ -1,83 +1,98 @@
 <div class="cmn-area">
-    <div class="data-table-wrap">
-        <table
-            class="display dataTable"
-            style="width:100%"
-            [ngClass]="{'cleat-height-dataTable':!showPreloader}"
-        >
-            <thead>
-                <tr>
-                    <th class="checkbox-header"></th>
-                    <th
-                        class="cmn-area-header__job-title pointer"
-                        (click)="onFilter('name')"
-                    >
-                        Job Title
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="!showPreloader">
-                <add-crm-company-job-title
-                    *ngIf="showAdd"
-                    [jobTitleList]="jobTitleList"
-                    (onClose)="showAdd = false"
-                ></add-crm-company-job-title>
-                <tr
-                    *ngFor="let item of jobTitleList; let i = index"
-                    appClickOtside
-                    [init]="item.isInitEdit"
-                    [ngClass]="'edit-crm-container-' + i"
-                    [class]="'.edit-crm-container-' + i"
-                    (onOutSide)="onEditJobTitle(item,$event)"
-                >
-                    <td class="checkbox">
-                        <label class="qt-checkbox">
-                            <input
-                                type="checkbox"
-                                (change)="onSelect($event,item)"
-                            >
-                            <span></span>
-                        </label>
-                    </td>
-                    <td
-                        class="tax-name edit-category-name"
-                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
-                    >
+    <div
+        class="tab-pane__table dataTable"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
                         <input
-                            type="text"
-                            class="form-input"
-                            placeholder="Enter Name Category"
-                            [(ngModel)]="item.name"
-                            appKeyUpEnter
-                            (onChange)="onEditJobTitle(item,$event)"
-                            (input)="item.onInitEdit(true);item.checkDublicate(jobTitleList)"
-                            maxlength="30"
+                            type="checkbox"
+                            (change)="onSelectAll($event)"
                         >
-                        <mat-error
-                            class="qt-tooltip-error"
-                            *ngIf="item.disableUpdate"
-                        >
-                            This Job Title is already occupied
-                        </mat-error>
-                    </td>
-                    <td class="action">
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Remove"
-                            class="remove"
-                            (click)="removeJobTitle(item)"
-                        >
-                            <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-table-job-title__job-title pointer"
+                    (click)="onFilter('name')"
+                >
+                    Job Title
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="crm-settings-table-job-title__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <add-crm-company-job-title
+                *ngIf="showAdd"
+                [jobTitleList]="jobTitleList"
+                (onClose)="showAdd = false"
+            ></add-crm-company-job-title>
             <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-        </table>
+                class="tab-pane__table-row"
+                *ngFor="let item of jobTitleList; let i = index"
+                appClickOtside
+                [init]="item.isInitEdit"
+                [ngClass]="'edit-crm-container-' + i"
+                [class]="'.edit-crm-container-' + i"
+                (onOutSide)="onEditJobTitle(item,$event)"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="item.selected"
+                            (change)="onSelect($event,item)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-table-job-title__job-title"
+                    [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                >
+                    <input
+                        type="text"
+                        class="form-input --editable"
+                        placeholder="Enter Name Category"
+                        [(ngModel)]="item.name"
+                        appKeyUpEnter
+                        (onChange)="onEditJobTitle(item,$event)"
+                        (input)="item.onInitEdit(true);item.checkDublicate(jobTitleList)"
+                        maxlength="30"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="item.disableUpdate"
+                    >
+                        This Job Title is already occupied
+                    </mat-error>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-table-job-title__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
+                    <div
+                        data-tooltip="Remove"
+                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        (click)="removeJobTitle(item)"
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
     </div>
 </div>

@@ -8,7 +8,6 @@ import { DELETE_CRM_JOB_TITLE, DELETE_CRM_JOB_TITLIES } from 'src/app/const/conf
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
-import { CrmCompanyIndustryFilter } from '../crm-company-industry/class/crm-company-industry-filter';
 import { CrmCompanyJobTitle } from './class/crm-company-job-title';
 import { CrmCompanyJobTitleFilter } from './class/crm-company-job-title-filter';
 
@@ -52,6 +51,18 @@ export class CrmCompanyJobTitleComponent implements OnInit {
     this.sub.add(getConfirm);
 
   }
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.jobTitleList.forEach(item => {
+        item.selected = true;
+        this.crmStateService.getListJobTitleForRemove().push(item);
+      })
+    } else {
+      this.jobTitleList.forEach(item => (item.selected = false));
+      this.crmStateService.setListJobTitleForRemove([]);
+    }
+    this.cd.detectChanges();
+  }
   public toggleShowAdd(data) {
     this.showAdd = data;
   }
@@ -60,11 +71,15 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   }
   onEditJobTitle(item, event) {
     if (item.isInitEdit) {
-      if (item.length === 0 || item.disableUpdate) return;
+      if (item.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.crmService.editJobTitle(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
+          item.setIsInitRequest(false);
           item.onInitEdit(false);
           if (event) event.target.blur();
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
   }
@@ -99,7 +114,7 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   }
   removeJobTitle(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Remove Job Title`;
     this.crmStateService.setJobTitleForRemove(item);
   }

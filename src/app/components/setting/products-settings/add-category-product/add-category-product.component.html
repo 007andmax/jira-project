@@ -1,32 +1,49 @@
-<tr
-    class="add-category-container"
+<div
+    class="tab-pane__table-row"
     appClickOtside
     #addStatusBtn="click"
     [init]="true"
     [class]="'.add-category-container'"
     (onOutSide)="save()"
 >
-    <td></td>
-    <td
-        class="tax-name add-category-name"
+    <div class="tab-pane__table-cell product-category-table__checkboxes"></div>
+    <div
+        class="tab-pane__table-cell product-category-table__category-name"
         [ngClass]="{'--input-error' : disableCreateCategory}"
     >
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="disableCreateCategory"
-        >
-            This category name is already occupied
-        </mat-error>
         <input
             type="text"
-            class="form-input"
+            class="form-input --editable"
             placeholder="Enter Name Category"
             [(ngModel)]="name"
             (input)="checkDublicateCategory()"
             (keyup)="onKeyUp($event)"
             required
         >
-    </td>
-    <td class="rate"></td>
-    <td class="action"></td>
-</tr>
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="disableCreateCategory"
+        >
+          This category name is already occupied
+        </mat-error>
+    </div>
+    <div class="tab-pane__table-cell product-category-table__count"></div>
+    <div class="tab-pane__table-cell product-category-table__gl-number">
+        <app-drop-down
+            [class]="['--small-padding','gl-number-product-settings', '--editable-dropdown']"
+            [list]="glNumbers"
+            [placeholder]="'Select GL'"
+            [container]="'body'"
+            [change]="false"
+            [add]="true"
+            [field]="'glNumber'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            [reducerItem]="glDropDownItemName"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="tab-pane__table-cell product-category-table__action"></div>
+</div>

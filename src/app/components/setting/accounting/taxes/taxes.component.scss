@@ -1,0 +1,19 @@
+@import "./src/assets/styles/variable";
+
+.taxes-table {
+  &__tax-name {
+    flex: 1 1 136px;
+    padding: 0 8px;
+  }
+  &__rate {
+    flex: 1 1 370px;
+    padding: 0 8px;
+  }
+  &__set-default {
+    flex: 1 1 75px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 56px;
+  }
+}

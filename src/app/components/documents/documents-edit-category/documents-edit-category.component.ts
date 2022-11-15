@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Company } from 'src/app/interfaces/company/company';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';

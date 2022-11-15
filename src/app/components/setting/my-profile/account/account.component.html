@@ -1,40 +1,23 @@
 <div class="cmn-area account">
-    <div class="account-info">
-        <div class="ul">
-            <div class="li">
-                <div class="ac-row">
-                    <div class="ac-info">
-                        <h5>Password</h5>
-                        <div class="ac-txt">
-                            <span>Change the password for your account</span>
-                            <a
-                                (click)="show = !show"
-                                href="javascript:;"
-                                class="static-link"
-                            >
-                                Change password
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="chang-password"
-                [class.opened]="show"
-            >
+    <div class="tab-pane__header">
+        <div class="tab-pane__header-title">Account Info</div>
+    </div>
+    <div class="tab-pane__body">
+        <div class="tab-pane__row">
+            <div class="tab-pane__subtitle">Password</div>
+            <div class="tab-pane-input__row">
                 <form
                     [formGroup]="passwordForm"
                     (ngSubmit)="onSubmit()"
+                    class="qt-w100"
                 >
-                    <div class="f-row">
-                        <div class="label-area">
-                            <label>Current Password</label>
-                        </div>
-                        <div class="input-area">
+                    <div class="tab-pane-input__row qt-mb-24">
+                        <div class="qt-input-block">
                             <input
                                 class="form-input"
-                                type="password"
+                                [attr.type]="(showCurrentPassword) ? 'text' : 'password'"
                                 formControlName="oldpass"
+                                placeholder="Current Password"
                                 (keypress)="oldPwdCorrect = true"
                             >
                             <label
@@ -44,6 +27,16 @@
                                 Old Password is not correct.
                             </label>
                             <div
+                                class="qt-sz-16 qt-bg-contain icon__view show-password pointer"
+                                *ngIf="!showCurrentPassword"
+                                (click)="showCurrentPassword = !showCurrentPassword"
+                            ></div>
+                            <div
+                                class="icon__hide qt-za-16 qt-sz-16 qt-bg-contain hide-password pointer"
+                                *ngIf="showCurrentPassword"
+                                (click)="showCurrentPassword = !showCurrentPassword"
+                            ></div>
+                            <div
                                 *ngIf="submitted && f.oldpass.errors"
                                 class="invalid-feedback"
                             >
@@ -52,16 +45,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="f-row">
-                        <div class="label-area">
-                            <label>New Password</label>
-                        </div>
-                        <div class="input-area">
+                    <div class="tab-pane-input__row">
+                        <div class="qt-input-block">
                             <input
                                 class="form-input"
-                                type="password"
+                                [attr.type]="(showNewPassword) ? 'text' : 'password'"
                                 formControlName="newpass"
+                                placeholder="New Password"
                             >
+                            <div class="qt-input-info-help">Minimum 8 characters</div>
+                            <div
+                                class="qt-sz-16 qt-bg-contain icon__view show-password pointer"
+                                *ngIf="!showNewPassword"
+                                (click)="showNewPassword = !showNewPassword"
+                            ></div>
+                            <div
+                                class="icon__hide qt-za-16 qt-sz-16 qt-bg-contain hide-password pointer"
+                                *ngIf="showNewPassword"
+                                (click)="showNewPassword = !showNewPassword"
+                            ></div>
                             <div
                                 *ngIf="submitted && f.newpass.errors"
                                 class="invalid-feedback"
@@ -71,114 +73,68 @@
                             </div>
                         </div>
                     </div>
-                    <div class="f-row">
-                        <div class="label-area">
-                            <label>
-                                Confirm
-                                <br>
-                                New Password
-                            </label>
-                        </div>
-                        <div class="input-area">
-                            <input
-                                class="form-input"
-                                type="password"
-                                formControlName="confirmPass"
-                            >
-                            <div
-                                *ngIf="submitted && f.confirmPass.errors"
-                                class="invalid-feedback"
-                            >
-                                <div *ngIf="f.confirmPass.errors.required">Confirm New Password is required</div>
-                                <div *ngIf="f.confirmPass.errors.mustMatch">Passwords must match</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="f-row">
-                        <a
-                            (click)="show = !show"
-                            href="javscript:;"
-                            class="btn btn-secondary"
-                        >
-                            Cancel
-                        </a>
-                        <input
-                            type="submit"
-                            class="btn btn-primary"
-                            value="Save"
-                        >
-                    </div>
                 </form>
             </div>
-            <div class="li">
-                <div class="ac-row">
-                    <div class="ac-info">
-                        <h5>Security</h5>
-                        <div class="ac-txt">
-                            <span>
-                                Log out of all sessions except this current browser
-                            </span>
-                            <a
-                                href="javascript:;"
-                                class="static-link"
-                                (click)="logOutSessions()"
-                            >
-                                Log out other sessions
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="li">
-                <div class="ac-row">
-                    <div class="ac-info">
-                        <h5>Deactivation</h5>
-                        <div class="ac-txt">
-                            <span>
-                                Remove access to all organizations in Quicktech
-                            </span>
-                            <a
-                                href="javascript:;"
-                                class="static-link"
-                            >
-                                Deactivate account
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="li authentication-type">
-                <div class="ac-row">
-                    <form method="get">
-                        <div class="ac-info">
-                            <label>Authentication Type</label>
-                            <div class="ac-txt">
-                                <select
-                                    class="cmn-select form-input"
-                                    (change)="onAuthTypeChange($event.target.value)"
-                                    [value]="authenticationTypesType"
-                                >
-                                    <option value="DISABLED">No authentication</option>
-                                    <option value="BASIC">Basic two-factor authentication</option>
-                                    <option value="SECURE">
-                                        Secure two-factor authentication - by email
-                                    </option>
-                                    <option value="GOOGLE_SECURE">
-                                        Secure two-factor authentication - Google authenticator
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+        </div>
+        <div class="tab-pane__row">
+            <div class="tab-pane__subtitle">Security</div>
+            <div class="tab-pane-input__row">
+                <div>
                     <a
                         href="javascript:;"
-                        class="static-link"
-                        *ngIf="authenticationTypesType === 'GOOGLE_SECURE'"
-                        (click)="showScratchCodes()"
+                        class="qt-button --gray qt-dif qt-mb-12 --color-red"
+                        (click)="logOutSessions()"
                     >
-                        Show scratch codes
+                      Log out other sessions
                     </a>
+                    <div class="qt-input-help-text">
+                        Log out of all sessions except this current browser
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="tab-pane__row">
+            <div class="tab-pane__subtitle">Deactivation</div>
+            <div class="tab-pane-input__row">
+                <div>
+                    <a
+                        href="javascript:;"
+                        class="qt-button --gray qt-dif qt-mb-12 --color-red"
+                    >
+                      Deactivate account
+                    </a>
+                    <div class="qt-input-help-text">
+                        Remove access to all organizations in Quicktech
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane__row">
+            <div class="tab-pane__subtitle"></div>
+            <div
+                id="authentication-type"
+                class="tab-pane-input__row "
+            >
+                <div class="qt-w100 qt-input-block">
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [list]="authenticationTypes"
+                        [editItem]="authenticationTypesType"
+                        [field]="'title'"
+                        [sort]="false"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onAuthTypeChange($event.type)"
+                    >
+                    </app-drop-down>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-ml-24"
+                    *ngIf="authenticationTypesType.type === 'GOOGLE_SECURE'"
+                    (click)="showScratchCodes()"
+                >
+                    Show scratch codes
+                </a>
             </div>
         </div>
     </div>

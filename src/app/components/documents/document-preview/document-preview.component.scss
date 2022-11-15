@@ -12,7 +12,7 @@
 
 .documents-create-panel {
     &__subheader {
-        border-bottom: 1px solid $gray-400;
+        border-bottom: 1px solid $gray-400--old;
         display: flex;
 
         &-item {
@@ -27,11 +27,6 @@
         }
     }
 }
-
-.checkbox-container {
-    margin-bottom: 6px;
-}
-
 .checkbox-wrapper .with-checkbox label {
     margin-right: 8px;
 }
@@ -49,7 +44,7 @@
         transform: translateY(9px);
         width: 100%;
         height: 1px;
-        background: $gray-400;
+        background: $gray-400--old;
     }
 }
 
@@ -64,7 +59,7 @@
 
         .icon__close {
             padding: 6px;
-            background-color: $gray-200;
+            background-color: $gray-200--old;
             border-radius: 50%;
             background-size: 24px 24px;
             background-position: center;
@@ -78,13 +73,13 @@
     }
 
     &__description {
-        color: $gray-800;
+        color: $gray-800--old;
     }
 
     &__card-icon {
         padding: 8px;
         border-radius: 8px;
-        background-color: $gray-200;
+        background-color: $gray-200--old;
         flex-shrink: 0;
     }
 
@@ -100,7 +95,7 @@
     height: 32px;
     display: flex;
     align-items: center;
-    background: $gray-100;
+    background: $gray-100--old;
     margin: 0 4px 4px 0;
 
     .icn-remove-old {

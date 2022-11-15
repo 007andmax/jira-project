@@ -1,5 +1,6 @@
 @import './src/assets/styles/variable';
 @import './src/assets/styles/fonts';
+@import "./src/assets/styles/mixin/dropdown";
 
 .dark-dropdown,
 .light-dropdown,
@@ -8,13 +9,13 @@
   &.with-placeholder {
     height: 40px;
     border-radius: 3px;
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-500--old;
     .placeholder {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: $gray-600;
+      color: $gray-600--old;
       font-size: 13px;
       font-weight: 400;
     }
@@ -30,106 +31,55 @@
       }
     }
   }
-  &.to-left {
-    .dropdown-menu {
-      left: auto !important;
-      right: 0;
-    }
-  }
   .dropdown-menu {
-    background: $white;
-    width: 100%;
-    top: auto;
-    max-height: 190px;
-    left: 0 !important;
-    position: absolute;
     .dropdown-item {
-      outline: none;
-      background: $white;
-      width: 100%;
-      height: 38px;
-      display: block;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 20px;
-      border: none;
-      @include body-m__m;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.3s;
-      color: $primary-2;
-      &:hover {
-        color: $white;
-        background: $primary-1;
-      }
+      @include dropdown-item;
     }
   }
-  input {
-    padding: 12px 24px 12px 12px;
-    outline: none;
-  }
-  .icn-remove-old,
-  .report-caret-icon {
-    position: absolute;
-    cursor: pointer;
-  }
-  .report-caret-icon {
-    top: calc(50% - 3px) !important;
-    right: 12px;
-  }
-  .icn-remove-old {
-    top: calc(50% - 4px) !important;
-    right: 12px;
-    @media (max-width: 767px) {
-      top: calc(50% - 14px) !important;
-    }
-  }
-  &.right {
-    .dropdown-menu {
-      left: auto !important;
-      right: 0 !important;
-    }
-  }
-  &.with-icons {
-    .dropdown-item {
-      display: flex;
-      i {
-        margin-right: 10px;
-      }
-    }
-  }
+  //input { // Todo check this style
+  //  padding: 12px 24px 12px 12px;
+  //  outline: none;
+  //}
+  //.icn-remove-old,
+  //.report-caret-icon {
+  //  position: absolute;
+  //  cursor: pointer;
+  //}
+  //.report-caret-icon {
+  //  top: calc(50% - 8px) !important;
+  //  right: 10px;
+  //}
+  //.icn-remove-old {
+  //  top: calc(50% - 4px) !important;
+  //  right: 12px;
+  //  @media (max-width: 767px) {
+  //    top: calc(50% - 14px) !important;
+  //  }
+  //}
 }
 
 .dark-dropdown {
   .dropdown-menu {
-    background: $gray-800;
+    background: $gray-800--old;
     .dropdown-item {
-      background: $gray-800;
-      color: $gray-600;
+      background: $gray-800--old;
+      color: $gray-600--old;
     }
   }
 }
 
-.light-dropdown {
-  .dropdown-menu {
-    &::-webkit-scrollbar-thumb {
-      background-color: $primary-1;
-    }
+.dropdown-menu {
+  &.unique-down {
+    width: calc(100% - 30px);
+    left: 15px !important;
+    bottom: -230px;
+    top: auto !important;
+    transform: none !important;
+    min-height: 208px;
+    max-height: 228px;
   }
 }
 
-.grey-dropdown {
-  .dropdown-menu {
-    .dropdown-item {
-      &:hover {
-        background: $background;
-        color: $primary-2;
-      }
-    }
-  }
-}
 .dropdown-menu {
   .ngb-dp-day,
   .ngb-dp-week-number,
@@ -137,42 +87,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.2rem;
-    height: 1.8rem;
+    width: 40px;
+    height: 40px;
+
+    &:first-child {
+     .custom-day:hover,
+     .custom-day.faded {
+        &:after {
+          width: 40px;
+        }
+     }
+    }
   }
   .ngb-dp-months {
-    padding: 0 8px 14px;
-  }
-  .ngb-dp-weekday {
-    color: $gray-600;
+    padding: 0 10px 14px;
   }
 }
 .date-picker {
-  overflow-x: hidden;
   position: relative;
   i {
     position: absolute;
-    right: 12px;
-    bottom: 11px;
-    top: 11px;
+    right: 14px;
     cursor: pointer;
   }
-  .icn-calendar-light {
+  .icon__calendar {
     pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .dropdown-menu {
-    border-radius: 4px;
-    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400;
+    max-height: initial;
+    ngb-datepicker {
+      border: unset;
+    }
+  }
+  .ngb-dp-month {
+    &:first-child .ngb-dp-week,
+    &:last-child .ngb-dp-week {
+      padding: 0;
+    }
   }
   .ngb-dp-header,
   .ngb-dp-weekdays {
     background: $white;
-    color: $gray-600;
-    font-size: 12px;
-    font-weight: 600;
     .small {
-      font-size: 12px;
+      color: $gray-900;
+      font-size: 13px;
+      font-weight: 500;
       font-style: normal;
     }
   }
@@ -181,7 +142,6 @@
   }
   .ngb-dp-weekdays {
     pointer-events: none;
-    text-transform: uppercase;
     border-bottom: none;
   }
   .ngb-dp-month-name {
@@ -189,16 +149,19 @@
     margin-bottom: 6px;
   }
   .custom-select {
-    color: $primary-2;
-    background: $white;
-    border: 1px solid $gray-400;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: $white url("/assets/img/icons/down-arrow.svg") no-repeat center right 8px / 16px;
+    border: 1px solid transparent;
     border-radius: 3px;
     cursor: pointer;
     outline: none;
-    font-weight: 400;
-    font-size: 13px;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    color: $gray-900;
     height: 2rem;
-    line-height: 20px;
     &:first-child {
       margin-right: 8px;
     }
@@ -207,9 +170,11 @@
     color: $white;
     min-width: 20px;
     text-align: left;
+    margin: 0;
+    padding: 0;
     span {
       margin-bottom: 2px;
-      color: $gray-800;
+      color: $gray-800--old;
     }
   }
   .right {
@@ -220,20 +185,33 @@
   .ngb-dp-day {
     border: none;
     outline: none;
+    color: $gray-500;
     div {
       transition: all 0.3s;
-      border-radius: 3px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 500;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &:hover {
-        background: $gray-300;
+        color: $blue-light-600;
       }
     }
     .bg-primary {
-      background: $primary-1;
+      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
       color: $white;
       &:hover {
-        background: $primary-1;
+        background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+        color: $white;
+      }
+    }
+    &.hidden {
+      + .ngb-dp-day .custom-day:hover::after,
+      + .ngb-dp-day .custom-day.faded::after {
+        width: 40px;
       }
     }
   }
@@ -248,6 +226,19 @@
         margin-right: 8px;
       }
     }
+  }
+
+  .ngb-dp-navigation-chevron {
+    width: 20px;
+    height: 20px;
+    background: url('/assets/img/icons/arrow-right.svg') no-repeat center / contain;
+    margin: 0;
+    padding: 0;
+    border: unset;
+    transform: rotate(180deg);
+  }
+  .right .ngb-dp-navigation-chevron {
+    transform: unset;
   }
 }
 
@@ -299,23 +290,16 @@
           text-align: left;
           position: relative;
           @media (max-width: 767px) {
-            border-bottom: 1px solid $gray-400;
+            border-bottom: 1px solid $gray-400--old;
             font-weight: 400;
             padding: 8px 16px !important;
-          }
-          .report-caret-icon {
-            position: absolute;
-            right: 16px;
-            top: calc(50% - 3px) !important;
-            transform: rotate(180deg);
-            background: url("/assets/img/report-caret-right.png");
           }
           &.collapsed {
             background-color: $white;
             color: $primary-2;
             .report-caret-icon {
               transform: rotate(0);
-              background: url("/assets/img/report-caret.png");
+              background: url("/assets/img/icons/down-arrow.svg") no-repeat center / cover;
             }
           }
           &:hover {
@@ -325,10 +309,6 @@
             @media (max-width: 767px) {
               background-color: $white;
               color: $primary-2;
-            }
-
-            .report-caret-icon {
-              background: url("/assets/img/report-caret-right.png");
             }
           }
         }
@@ -343,7 +323,7 @@
             border-bottom: 1px solid $background;
           }
           &:hover {
-            background-color: $gray-200;
+            background-color: $gray-200--old;
           }
           .col-md-10 {
             width: 75%;
@@ -353,7 +333,7 @@
           }
           .title {
             font-size: 13px;
-            color: $gray-800;
+            color: $gray-800--old;
             display: inline-block;
             word-break: break-all;
             max-height: 50px;
@@ -366,7 +346,7 @@
           .col-md-12 {
             span {
               font-size: 11px;
-              color: $gray-600;
+              color: $gray-600--old;
               word-break: break-all;
               &:first-child {
                 margin-right: 15px;
@@ -393,7 +373,7 @@
   &-preview {
     height: 40px;
     border-radius: 3px;
-    border: solid 1px $gray-500;
+    border: solid 1px $gray-500--old;
     padding: 7px 12px;
     display: flex;
     background: $white;
@@ -401,7 +381,7 @@
   .dropdown-menu {
     border-radius: 4px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-    border: solid 1px $gray-400;
+    border: solid 1px $gray-400--old;
     cursor: default;
     overflow: hidden;
     top: calc(100% + -372px);
@@ -422,32 +402,9 @@
     }
     .duration-container-content {
       display: flex;
-      .arrow-top,
-      .arrow-bottom {
-        display: none;
-      }
       .duration-container-values {
         position: relative;
         width: 50%;
-        &.has-arrows {
-          .arrow-top,
-          .arrow-bottom {
-            display: block;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 16px;
-            width: 16px;
-          }
-          .arrow-top {
-            top: 7px;
-            background: url("/assets/img/icons/scroll-up.png");
-          }
-          .arrow-bottom {
-            bottom: 11px;
-            background: url("/assets/img/icons/scroll-down.png");
-          }
-        }
       }
       .duration-container-values-hours,
       .duration-container-values-minutes {
@@ -542,14 +499,12 @@
 }
 .ngb-dp-today {
   .custom-day {
-    background: $primary-1;
+    background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
     border-radius: 6px;
     color: $white;
     font-size: 12px;
     line-height: 16px;
     font-weight: 500;
-    width: 2.2rem;
-    height: 1.8rem;
     display: flex;
     align-self: center;
     justify-content: center;
@@ -558,9 +513,6 @@
 .company-time-zone-drop-down {
   .app-drop-down__dropdown {
     width: fit-content !important;
-    .dropdown-item {
-      color: $gray-800 !important;
-    }
   }
 }
 app-company-time-zone {

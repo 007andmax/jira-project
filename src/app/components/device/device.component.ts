@@ -54,13 +54,12 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService,
-    private remoteControlService: RemoteControlService,   
-    private agentService: AgentService,    
+    private remoteControlService: RemoteControlService,
+    private agentService: AgentService,
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
     private ngZone: NgZone
   ) { }
-
   lock() {
     // this.modalRef = this.modalService.show(
     //   LockScreenComponent,
@@ -68,8 +67,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     // );
   }
 
-  ngOnInit(): void {    
-    this.isNonAgentDevice = true;    
+  ngOnInit(): void {
+    this.isNonAgentDevice = true;
     this.type =
       window.location.href.split("/")[
       window.location.href.split("/").length - 2
@@ -78,7 +77,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       window.location.href.split("/")[
       window.location.href.split("/").length - 1
       ];
-    this.setPreviewDataDevice();      
+    this.setPreviewDataDevice();
     localStorage.setItem("uuid_" + this._id, uuidv4());
     this.deviceType = this.type;
     if (this.deviceType === "printer") {
@@ -113,53 +112,47 @@ export class DeviceComponent implements OnInit, OnDestroy {
       }, 300);
       return;
     }
-    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {                       
-      if(resp.length>0)
-      {
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      if (resp.length > 0) {
         this.deviceName = resp[0].Name;
         this.asset = resp[0];
 
-      if (resp[0].AgentVersion == "") {
-        this.isNonAgentDevice = false;
+        if (resp[0].AgentVersion == "") {
+          this.isNonAgentDevice = false;
+        }
       }
-      }
-      
+
     });
   }
 
-  onGetCurrentConfig(resp: any) {          
+  onGetCurrentConfig(resp: any) {
     let item = resp.find((x) => x.key == this.asset.ID);
     if (!item) {
       return;
     }
     this.kafkaMessage = JSON.parse(item.Value);
-    
-    if(this.kafkaMessage.UpTime !="")
-    {
-      let result = this.kafkaMessage.UpTime.split(" ");              
 
-      if(result[0]=="0" && result[2]=="0" && result[4]=="0")
-      {
-        let Sec = result[6]+'s';
+    if (this.kafkaMessage.UpTime != "") {
+      let result = this.kafkaMessage.UpTime.split(" ");
+
+      if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
+        let Sec = result[6] + 's';
         this.UpTime = Sec;
       }
-      else if(result[0]=="0" && result[2]=="0" && result[4]!="0")
-      {
-        let Minutes = result[4]+'m'+ ' '+ result[6]+'s';  
+      else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
+        let Minutes = result[4] + 'm' + ' ' + result[6] + 's';
         this.UpTime = Minutes;
       }
-      else if(result[0]=="0" && result[2]!="0")
-      {
-        let Hours = result[2]+'h'+ ' ' + result[4]+'m';
-        this.UpTime = Hours; 
+      else if (result[0] == "0" && result[2] != "0") {
+        let Hours = result[2] + 'h' + ' ' + result[4] + 'm';
+        this.UpTime = Hours;
       }
-      else
-      {
-        let Days = result[0]+'d'+ ' ' + result[2]+'h';
+      else {
+        let Days = result[0] + 'd' + ' ' + result[2] + 'h';
         this.UpTime = Days;
       }
       this.cd.detectChanges();
-    }  
+    }
     if (!this.deviceDetail) {
       this.deviceDetail = {};
       this.deviceDetail.id = this._id;

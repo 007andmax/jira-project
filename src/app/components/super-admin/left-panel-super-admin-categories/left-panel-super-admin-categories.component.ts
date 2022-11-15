@@ -88,7 +88,7 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
     }
   }
   add() {
-    const modalRef = this.modalService.open(SupportPageAddCategoryComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(SupportPageAddCategoryComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     this.cd.detectChanges();
   }
   onRemoveCategory(id) {

@@ -41,11 +41,26 @@ export class CompaniesService {
    * Get all companies list
    */
   public getCompaniesList() {
-    return this.http.post(this.apiUrl + 'company/clients', { "needCompanyInfo": true });
+    return this.http.post(this.apiUrl + 'company/clients', {
+      "needCompanyInfo": true,
+    });
+  }
+  public getLightClientsCompanies() {
+    return this.http.post(this.apiUrl + 'company/clients', {
+      "needCompanyInfo": false,
+      "clientType": "CLIENT",
+      isArchived: false
+    });
+  }
+  public getLightCompanies() {
+    return this.http.post(this.apiUrl + 'company/clients', {
+      "needCompanyInfo": false,
+      isArchived: false
+    });
   }
 
   public getCompaniesListByFilter(data) {
-    return this.http.post(this.apiUrl + 'company/filter', data);
+    return this.http.post(this.apiUrl + 'company/clients', data);
   }
   public getCategoriesDocuments(company_id) {
     return this.http.get(this.apiUrl + 'documents/categories/assigned?companyId=' + company_id);

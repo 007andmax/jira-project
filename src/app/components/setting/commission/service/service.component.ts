@@ -4,9 +4,10 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
+import { CHANGE_COMMISSION_SERVICE, DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { ServiceCommissionFilter } from './class/service-commission-filter';
 
 @Component({
   selector: 'app-service',
@@ -14,13 +15,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./service.component.scss']
 })
 export class ServiceComponent implements OnInit, OnDestroy {
-  loading = false;
+  filter: ServiceCommissionFilter = new ServiceCommissionFilter();
+  loading = true;
   selectedIdx = -1;
   selectedSpecIdx = -1;
   companyId = '';
   services: any;
   public deleteServicePopup = false;
-  public confirmServicePopup = false;
   service: any;
   isSpecialService: boolean;
   factItem = false;
@@ -41,14 +42,32 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.getServices();
     this.getSpecialService();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data != null) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_SERVICE) {
-          this.deleteServicePopup = false;
-          this.removeServiceRate()
+          if (data) {
+            this.deleteServicePopup = false;
+            this.removeServiceRate()
+          }
+        }
+        if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_SERVICE) {
+          if (data == true) {
+            this.factItem = true; this.setServiceRate()
+          }
+          if (data == false) {
+            this.factItem = false; this.setServiceRate()
+          }
         }
       }
     })
     this.sub.add(getConfirm);
+  }
+
+  onFilter(field) {
+    this.filter.onFilter(field, this.services);
+  }
+
+  onFilterSpecial(field) {
+    this.filter.onFilter(field, this.specialService);
   }
 
   /**
@@ -67,11 +86,11 @@ export class ServiceComponent implements OnInit, OnDestroy {
    * get services
    */
   getServices() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getDefaultServices().subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
-        this.services = res;
+        this.loading = false;
+        this.services = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         res.forEach(ele => {
           if (ele) {
             ele.commissionRate = ele.commissionRate
@@ -81,7 +100,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
         });
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -90,10 +109,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
    * special services
    */
   getSpecialService() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getSpecialServices().subscribe(
       (res: any[]) => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res && res.length > 0) {
           res.map(el => {
             el.services.filter(service => {
@@ -105,10 +123,12 @@ export class ServiceComponent implements OnInit, OnDestroy {
               }
             });
           });
+          this.specialService.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -140,12 +160,10 @@ export class ServiceComponent implements OnInit, OnDestroy {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.success('Rate Changed Successfully.');
             this.service.commissionRate =
               res && res.commissionRate
@@ -157,7 +175,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
           },
           error => {
             this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
@@ -173,11 +190,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
    */
   removeServiceRate() {
     if (this.service && this.service.commissionRate) {
-      this.loading = true; $(".loading").css("display", "block");
       const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;
       this.commissionService.setServiceRate(id, '0', false).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toastrService.success('Rate Changed Successfully.');
           this.service.commissionRate = null;
 
@@ -187,7 +202,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
         },
         error => {
           this.toastrService.error(`Error Occurred, ${error}`);
-          this.loading = false; $(".loading").css("display", "none");
         }
       );
     }
@@ -198,7 +212,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     if (this.service && this.service.commissionRate) {
       this.deleteServicePopup = true;
       this.confirmStateService.setConfirmAction(DELETE_COMMISSION_SERVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want ${this.service.name} commission rate to zero?`;
 
     }
@@ -210,9 +224,11 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.service = service;
     this.isSpecialService = isSpecialService;
     if (this.service.commissionRate === null) {
-      this.confirmServicePopup = true;
+      this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_SERVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+
     } else {
-      this.confirmServicePopup = false;
       this.setServiceRate();
     }
   }

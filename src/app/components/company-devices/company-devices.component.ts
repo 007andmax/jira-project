@@ -43,23 +43,30 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
     let id = this.activateRoute.snapshot.params['id'];
-    if (id) this.companiesStateService.setCompanyRoutingId(id);
-    let subscription = this.activateRoute.params.subscribe(params => {
-      id = params['id'];
-      if (id) this.companiesStateService.setCompanyRoutingId(id);
+    if (id) {
       this.companyId = id;
-      if (this.devicesStateService.getAllDevices()) {
-        this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];
-        this.filter.onFilterName(this.devices);
-        this.showPreloader = false;
+      this.getDevice(id);
+      this.companiesStateService.setCompanyRoutingId(id);
+    }
+    let subscription = this.activateRoute.params.subscribe(params => {
+
+      if (params['id'] && id != params['id']) {
+        id = params['id'];
+        this.companiesStateService.setCompanyRoutingId(id);
+        this.companyId = id;
+        this.getDevice(id);
       }
-      if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+
     });
     this.sub.add(subscription);
-
+    let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
+      if (this.companyId) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+    })
+    this.sub.add(onInitWebSocket);
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       //  if (this.devices.length === 0 && data[this.companyId]) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
       if (!data[this.companyId] && this.devices.length === 0) return;
+
       if (data[this.companyId].length > this.devices.length) {
         data[this.companyId].forEach(item => {
           let find = this.devices.find(device => device.id === item.id);
@@ -123,7 +130,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
-      var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === this.companyId;
+      var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
@@ -166,7 +173,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnResetDeviceTiming);
     let getOnSendDeviceStatus = this.devicesStateService.getOnSendDeviceStatus().subscribe((data: DeviceStatus) => {
-      if (this.companyId === data.companyId) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
+      if (this.companyId === data.companyId && this.devicesStateService.getIsInitWebSocket()) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
@@ -179,6 +186,17 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     });
     
   }
+
+  getDevice(id) {
+    this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
+      if (data) {
+        this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
+        this.filter.onFilterName(this.devices);
+        this.showPreloader = false;
+      }
+      if (this.devices.length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+    });
+  }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
   }
@@ -189,20 +207,20 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   onRemoveAgents() {
     let len = this.devices.filter(item => item.selected).length;
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove ${(len === 1) ? "1 device" : len + " devices"}?`;
     this.devicesStateService.setDevicesForRemove(this.devices.filter(item => item.selected));
   }
   onTurnOff(action) {
     if (action === 'reboot') {
       this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
       this.devicesStateService.setDevicesForReboot(this.devices.filter(item => item.selected));
     }
     if (action === 'shutdown') {
       this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
       this.devicesStateService.setDevicesForShutDown(this.devices.filter(item => item.selected));
     }

@@ -1,5 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
 
 .device-user-wrap {
     * {
@@ -8,65 +9,14 @@
 }
 .filter-tags-body {
     padding: 0;
-    margin-top: 0px !important;
-    .qt-checkbox {
-        .text-content {
-            @include body-m;
-            margin-top: -2px;
-            flex: 1;
-        }
-        .name,
-        .description {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: calc(298px - 23px);
-            width: 100%;
-        }
-
-        .name {
-            font-weight: $fw-medium;
-            color: $primary-2;
-        }
-
-        .description {
-            color: $gray-700;
-            @include сaption-l;
-        }
-
-        span {
-            margin-right: 8px;
-        }
-    }
-    .select-wrapper {
-        height: 260px;
-        overflow: hidden;
-        margin: 4px 0 0 !important;
-        .content {
-            height: 100%;
-
-            .company-tag-item {
-                min-height: 30px;
-                max-height: 60px;
-                height: auto;
-            }
-
-            .qt-checkbox {
-                width: 100%;
-                min-height: auto;
-                max-height: 50px;
-                height: auto;
-                align-items: flex-start;
-            }
-        }
-    }
+    margin-top: 0 !important;
 }
 .device-user {
     outline: none;
     min-height: 40px;
     padding: 4px 4px 0;
     font-size: 13px;
-    border: 1px solid $gray-400;
+    border: 1px solid $gray-400--old;
     border-radius: 4px;
     width: 100%;
     display: flex;
@@ -74,13 +24,7 @@
     background-color: $white;
 }
 .select-wrapper {
-    position: absolute;
-    width: 366px;
-    background: $white;
-    height: 220px;
-    margin-top: 5px;
-    border-radius: 3px;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+    @include dropdown-content;
     z-index: 9999;
     @media (max-width: 767px) {
         width: 100%;
@@ -97,7 +41,7 @@
             align-items: center;
             padding: 0 12px;
             border-bottom: 2px solid transparent;
-            color: $gray-800;
+            color: $gray-800--old;
             font-size: 13px;
             transition: all 0.3s;
             font-weight: 700;
@@ -108,37 +52,6 @@
             }
         }
     }
-    .content {
-        height: 170px;
-        overflow: scroll;
-        padding: 0px;
-
-        .company-tag-item {
-            font-size: 13px !important;
-            height: 30px;
-            cursor: pointer;
-            i {
-                margin: 0 0 0 auto;
-                position: static;
-            }
-            &:not(:last-child) {
-            }
-            label {
-                width: auto;
-                height: 16px;
-                @include body-m;
-                display: flex;
-                align-items: center;
-            }
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: $gray-400;
-        }
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
-    }
 }
 .selected-user {
     border: 1px solid $background;
@@ -147,14 +60,12 @@
     height: 32px;
     display: flex;
     align-items: center;
-    background: $gray-100;
+    background: $gray-100--old;
     margin: 0 4px 4px 0;
     i {
         position: static;
         margin-left: 10px;
     }
-    .icn-user,
-    .icn-device,
     .icon__devices-grey,
     .icon__user-grey {
         margin: 0 5px 0 0;
@@ -170,11 +81,5 @@
     left: calc(50% - 12px) !important;
 }
 .company-tag-item {
-    padding: 8px 16px;
-    &:hover {
-        background-color: #edf2f67a;
-    }
-}
-.is-hover {
-    background-color: #edf2f67a;
+  @include dropdown-checkbox-item;
 }

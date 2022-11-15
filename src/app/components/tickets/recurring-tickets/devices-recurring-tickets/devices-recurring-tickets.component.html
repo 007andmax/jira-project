@@ -11,7 +11,7 @@
     (focus)="focus$.next('')"
     (click)="click$.next('')"
     #instance="ngbTypeahead"
-    [disabled]="!devicesList"
+    [disabled]="!devicesList || preloader"
 >
 <span>
     <i
@@ -20,7 +20,11 @@
         (click)="clearDevices()"
     ></i>
     <i
-        *ngIf="!selectedDevice"
+        *ngIf="!selectedDevice && !preloader"
         class="icn-sm report-caret-icon"
+    ></i>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
     ></i>
 </span>

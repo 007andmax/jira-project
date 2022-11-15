@@ -54,7 +54,7 @@
             [placement]="'bottom-right'"
         >
             <div
-                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
             ></div>
@@ -70,29 +70,15 @@
                     (click)="goToAddDocumentInCategory()"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
-                    <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__add-document qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Add New Document
                 </li>
-                <!-- <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Share Folder
-                </li>
-                <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__rename qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Rename Folder
-                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="removeCategory()"
                 >
-                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Delete
                 </li>
             </ul>
@@ -102,72 +88,30 @@
                 *ngIf="!item.isCategory"
                 aria-labelledby="dropdownBasic1"
             >
-                <!-- <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Share...
-                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="goToEditDocument()"
                     *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
-                    <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__edit qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Edit
                 </li>
-
-
-
-
-
-
-
-                <!-- <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Move...
-                </li>
-                <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Copy to…
-                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="goToCloneDoucment()"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
-                    <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__clone-document qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Clone Document
                 </li>
-                <!-- <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__search-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Find within document
-                </li>
-                <li
-                    class="pointer"
-                    ngbDropdownItem
-                >
-                    <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Copy Internal Link
-                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="printPdf()"
                 >
-                    <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__print qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Print
                 </li>
                 <li
@@ -175,7 +119,7 @@
                     ngbDropdownItem
                     (click)="exportPdf()"
                 >
-                    <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__download-pdf qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Export PDF
                 </li>
                 <li
@@ -183,7 +127,7 @@
                     ngbDropdownItem
                     (click)="previewDocument()"
                 >
-                    <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__go-to qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Open in new tab
                 </li>
                 <li
@@ -193,7 +137,7 @@
                     (click)="removeDocument()"
                     *ngIf="getPermissions('DELETE_DOCUMENT')"
                 >
-                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    <div class="icon__remove qt-sz-20 qt-bg-contain qt-mr-12"></div>
                     Delete
                 </li>
             </ul>

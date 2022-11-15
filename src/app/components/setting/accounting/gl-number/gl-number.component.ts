@@ -11,6 +11,7 @@ import { ConfirmStateService } from "src/app/components/shared/confirm/services/
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_GL_NUMBER } from "src/app/const/confirm";
 import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
+import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check-use.component";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -27,7 +28,6 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   constructor(
     private glNumberService: GlNumberService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder,
     private settingStateService: SettingStateService,
     private glNumberStateService: GlNumberStateService,
     public cd: ChangeDetectorRef,
@@ -39,7 +39,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.numberList = [];
 
@@ -82,11 +82,9 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
   removeConfirm(gl: any) {
     this.gl = gl;
-    this.popup = true;
     this.confirmStateService.setConfirmAction(DELETE_GL_NUMBER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Remove Income Account Number`;
-
+    const modalRef = this.modalService.open(GlNumberCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-accounting-settings", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.glNumber = gl;
   }
 
   /**
@@ -122,14 +120,17 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
   onEditGl(item) {
     if (item.isInitEdit) {
-      if (item.glNumber.length === 0 || item.disableUpdate) return;
+      if (item.glNumber.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.glNumberService
         .editGL(item.getDataForEdit())
         .subscribe(
           () => {
+            item.setIsInitRequest(false);
             this.toastrService.success("GL Number Updated Successfully");
           },
           error => {
+            item.setIsInitRequest(false);
             this.loading = false; $(".loading").css("display", "none");
           }
         );

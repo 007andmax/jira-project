@@ -91,6 +91,7 @@ export class ProductService {
         commissionRate: category.commissionRate,
         isDefault: category.isDefault,
         default: category.default,
+        glNumber: category.glNumber,
         products: []
       }
       return item;
@@ -112,8 +113,8 @@ export class ProductService {
   /**
 * add  category
 */
-  public addCategory(name) {
-    return this.http.post(`${this.apiUrl}products/categories`, { name: name }).pipe(
+  public addCategory(name, glNumber) {
+    return this.http.post(`${this.apiUrl}products/categories`, { name: name, glNumber: glNumber }).pipe(
       tap(data => {
         this.toastrService.success("The new category has been successfully created");
         this.appStateService.changeDetectorRef();
@@ -129,14 +130,30 @@ export class ProductService {
         return data;
       }));
   }
+  public setGlNumberCategory(id, glNumber) {
+    return this.http.put(`${this.apiUrl}products/categories`, { id: id, glNumber: glNumber }).pipe(
+      tap(data => {
+        this.toastrService.success("The  category has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 
 
   /**
 * add product
 */
+
   public addProduct(data) {
     return this.http.post(`${this.apiUrl}products`, data);
   }
-
+  public editProduct(data) {
+    return this.http.post(`${this.apiUrl}products`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The product has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 
 }

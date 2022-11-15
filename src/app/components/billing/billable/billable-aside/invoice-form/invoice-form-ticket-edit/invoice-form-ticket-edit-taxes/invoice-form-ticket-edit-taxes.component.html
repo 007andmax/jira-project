@@ -2,18 +2,18 @@
     class="light-dropdown new-taxes-area-edit taxes-dropdown"
     ngbDropdown
     #taxesDropDown="ngbDropdown"
-    [container]="'body'"
 >
-    <i class="icn-sm report-caret-icon"></i>
     <input
         type="text"
         [value]="getSelectedTaxes()"
         autocomplete="new-password"
         readonly
-        placeholder="Taxes"
+        [attr.placeholder]="(placeholder) ? placeholder : 'Taxes'"
         id="dropdownTypeTaxes"
+        class="qt-input-block__input qt-dropdown-input"
         ngbDropdownToggle
     >
+    <i class="icn-sm report-caret-icon"></i>
     <div
         ngbDropdownMenu
         class="taxes-dropdown__dropdown"
@@ -32,9 +32,8 @@
             >
                 <button [textContent]="tax.name + ' ' + tax.rate + '%'"></button>
                 <i
-                    class="icn-sm icn-label-save taxes-dropdown__check-icon"
+                    class="qt-sz-20 qt-bg-contain icn-label-save taxes-dropdown__check-icon"
                     *ngIf="checkTaxIsSelected(tax)"
-                    style="right: 13px"
                 ></i>
             </div>
         </ng-template>

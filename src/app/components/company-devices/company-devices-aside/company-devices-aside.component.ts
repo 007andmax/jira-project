@@ -62,7 +62,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getOnOpenAside);
   }
   remoteAccess(connectionType) {
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.currentDevice;
     modalRef.componentInstance.companyId = this.currentDevice.companyId;
@@ -83,13 +83,13 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   turnOff(action) {
     if (action === 'reboot') {
       this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
       this.devicesStateService.setDevicesForReboot([this.currentDevice]);
     }
     if (action === 'shutdown') {
       this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
       this.devicesStateService.setDevicesForShutDown([this.currentDevice]);
     }
@@ -103,7 +103,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   }
   removeCurrentDevice() {
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove 1 device?`;
     this.devicesStateService.setDevicesForRemove([this.currentDevice]);
   }

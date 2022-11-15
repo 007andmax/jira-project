@@ -25,7 +25,7 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
   }
   parseAddText() {
@@ -45,7 +45,7 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     this.activeTab = data['nextId'];
   }
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
   getSelectedCount() {
     if (this.activeTab === "companyIndustry") return this.crmStateService.getListIndustriesForRemove().length;
@@ -57,25 +57,25 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   removeList() {
     if (this.activeTab === "companyIndustry") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRIES);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Remove Industry`;
 
     }
     if (this.activeTab === "userJobTitle") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLIES);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Remove Job Title`;
 
     }
     if (this.activeTab === "serviceType") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPIES);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Remove Service Type`;
 
     }
     if (this.activeTab === "jobType") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPIES);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Remove Job Type`;
 
     }

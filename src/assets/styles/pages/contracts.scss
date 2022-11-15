@@ -92,7 +92,7 @@
     // select contract type
     .contract-type-aside-content {
       padding: 32px;
-      background-color: $gray-100;
+      background-color: $gray-100--old;
     }
     .contract-type-select {
       border-radius: 6px;
@@ -112,7 +112,7 @@
       &__title {
         font-size: 13px;
         line-height: 1.54;
-        color: $gray-800;
+        color: $gray-800--old;
         font-weight: 600;
         margin-bottom: 4px;
       }
@@ -120,7 +120,7 @@
       &__text {
         font-size: 13px;
         line-height: 1.54;
-        color: $gray-800;
+        color: $gray-800--old;
       }
 
       &__radio {
@@ -153,7 +153,7 @@
       &__billable {
         border-top: 1px solid;
         border-bottom: 1px solid;
-        border-color: $gray-500;
+        border-color: $gray-500--old;
         min-width: 78px;
         display: flex;
         align-items: center;
@@ -198,7 +198,7 @@
         vertical-align: middle;
       }
 
-      .icon__question-help {
+      .icon__help {
         margin-left: 2px;
       }
 
@@ -231,7 +231,6 @@
         padding: 0;
 
         .dropdown-menu .dropdown-item {
-          padding: 0 !important;
           button {
             border: none;
             background: $white;
@@ -246,7 +245,7 @@
           }
         }
         .dropdown-menu.show {
-          width: 100%;
+          width: 230px;
           min-width: 0;
           left: 0 !important;
         }
@@ -347,11 +346,11 @@
       list-style: none;
       padding-left: 0;
       display: flex;
-      border-bottom: 1px solid $gray-400;
+      border-bottom: 1px solid $gray-400--old;
 
       li {
         font-size: 13px;
-        color: $gray-800;
+        color: $gray-800--old;
         font-weight: 600;
         padding-bottom: 5px;
         border-bottom: 3px solid transparent;
@@ -454,12 +453,12 @@
     // start user device billing
 
     .contract-tipe-info {
-      border: 1px dotted $gray-500;
+      border: 1px dotted $gray-500--old;
       height: 32px;
       width: 696px;
       font-size: 12px;
       line-height: 1.33;
-      color: $gray-800;
+      color: $gray-800--old;
       border-radius: 6px;
       margin-top: 12px;
     }
@@ -507,9 +506,9 @@
   }
 
   &__gray-block {
-    border-top: 1px solid $gray-400;
-    border-bottom: 1px solid $gray-400;
-    background-color: $gray-100;
+    border-top: 1px solid $gray-400--old;
+    border-bottom: 1px solid $gray-400--old;
+    background-color: $gray-100--old;
   }
   // end user device billing
 }
@@ -523,7 +522,7 @@ app-contracts-filter {
     color: $primary-2;
   }
   input::placeholder {
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 12px;
   }
 }
@@ -535,7 +534,7 @@ app-contracts-filter {
     color: $primary-2;
   }
   input::placeholder {
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 12px;
   }
 }
@@ -544,7 +543,7 @@ app-contracts-filter {
   margin-right: 8px;
   color: $primary-2;
   &::placeholder {
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 12px;
   }
 }
@@ -556,7 +555,7 @@ app-contracts-filter {
     color: $primary-2;
   }
   input::placeholder {
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 12px;
   }
   .date-picker {
@@ -578,6 +577,18 @@ app-contracts-filter {
   app-contracts-aside-other-service,
   app-ticket-profile-updates-service-duration {
     display: contents;
+  }
+
+  .qt-taxes-multiselect {
+    .light-dropdown {
+      .dropdown-item {
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
   }
 }
 
@@ -632,7 +643,7 @@ line-height: 1.54;
   align-items: self-start;
     font-family: "Inter",sans-serif;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px $gray-400;
+      border: solid 1px $gray-400--old;
   &__button {
     font-weight: 600;
     border: 1px solid $white;
@@ -677,7 +688,7 @@ line-height: 1.54;
   content: "";
 }
 .contracts-table-row-item.no-valid::before {
-  background: url("/assets/img/icons/update-label.png") no-repeat;
+  background: url("/assets/img/icons/update.svg") no-repeat;
   width: 44px;
   height: 20px;
   top: unset;

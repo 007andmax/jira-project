@@ -25,7 +25,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   selectedCategory: PasswordRecordCategories;
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
-
+  @Output() onOpenPanel = new EventEmitter();
   /**
    * Creates an instance of the LeftPanelPasswordManagerComponent with the injected services
    * @param {CompaniesService} companiesService Service to work with companies
@@ -58,6 +58,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
     })
+  }
+  public openPanel() {
+    this.onOpenPanel.emit(null);
   }
   public selectCategory(data) {
     this.selectedCategory = data;

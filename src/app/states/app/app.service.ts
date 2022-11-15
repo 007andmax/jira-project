@@ -87,7 +87,7 @@ export class AppService {
 
     // Force file download (whether supported by server).
     //            url += '?download';
-    //todo fix bug with multiple files download
+    //qt-sz-20 qt-mr-12ix bug with multiple files download
     window.open(url, '_blank');
     return true;
   }

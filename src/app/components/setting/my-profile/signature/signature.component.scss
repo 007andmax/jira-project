@@ -1,0 +1,19 @@
+@import './src/assets/styles/variable';
+
+
+.no-content {
+    flex-flow: column;
+    margin: 0px auto;
+}
+.content-html {
+    width: 568px;
+    word-break: break-word;
+}
+.profile {
+    width: 620px;
+    margin: 32px auto !important;
+}
+add-signature,
+edit-signature {
+    max-height: 474px;
+}

@@ -10,23 +10,18 @@
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <li
-        [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
-        (click)="goToState('invoice-ticket-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
+        [ngClass]="{'--active':activePage === 'myprofile-component'}"
+        (click)="goToState('myprofile-component')"
     >
-        Accounting
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'commission-component'}"
-        (click)="goToState('commission-component')"
-    >
-        Commissions
+        <div class="icon__menu--submenu icon__menu-my-profile-setting qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        My Profile Settings
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-profile-component'}"
         (click)="goToState('company-profile-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-company qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Company Profile
     </li>
     <li
@@ -34,21 +29,15 @@
         (click)="goToState('crm-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
         CRM Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'email-setting-component'}"
-        (click)="goToState('email-setting-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_SETTINGS')"
+        [ngClass]="{'--active':activePage === 'commission-component'}"
+        (click)="goToState('commission-component')"
     >
-        Email Settings
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'email-templete-component'}"
-        (click)="goToState('email-templete-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
-    >
-        Email Templetes
+        <div class="icon__menu--submenu icon__menu-commissions qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Commissions
     </li>
     <li
         [ngClass]="{'--active':activePage === 'device-setting-component'}"
@@ -57,69 +46,66 @@
         Device Setting
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'integrations-component'}"
-        (click)="goToState('integrations-component')"
+        [ngClass]="{'--active':activePage === 'email-setting-component'}"
+        (click)="goToState('email-setting-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_SETTINGS')"
     >
-        Integrations
+        <div class="icon__menu--submenu icon__menu-email-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Email Settings
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'tech-component'}"
-        (click)="goToState('tech-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
+        [ngClass]="{'--active':activePage === 'email-template-component'}"
+        (click)="goToState('email-template-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
     >
-        Manage Tech Users
+        <div class="icon__menu--submenu icon__menu-email-template qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Email Templates
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
+        (click)="goToState('invoice-ticket-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
+    >
+        <div class="icon__menu--submenu icon__menu-crm-settings qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Finance
     </li>
     <li
         [ngClass]="{'--active':activePage === 'marketing-email'}"
         (click)="goToState('marketing-email')"
     >
+        <div class="icon__menu--submenu icon__menu-marketing qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Marketing Email
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'myprofile-component'}"
-        (click)="goToState('myprofile-component')"
-    >
-        My Profile Settings
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'permission-manage-component'}"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
-        (click)="goToState('permission-manage-component')"
-    >
-        Permission Management
     </li>
     <li
         [ngClass]="{'--active':activePage === 'products-settings'}"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PRODUCT_CATEGORY_SETTINGS')"
         (click)="goToState('products-settings')"
     >
+        <div class="icon__menu--submenu icon__menu-products qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Products
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'subscription-component'}"
-        (click)="goToState('subscription-component')"
-    >
-        Subscription
     </li>
     <li
         [ngClass]="{'--active':activePage === 'manage-tags-component'}"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
         (click)="goToState('manage-tags-component')"
     >
+        <div class="icon__menu--submenu icon__menu-tags qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Tags
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'taxes-component'}"
-        (click)="goToState('taxes-component')"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAXES_SETTINGS')"
+        [ngClass]="{'--active':activePage === 'tech-component'}"
+        (click)="goToState('tech-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
     >
-        Taxes
+        <div class="icon__menu--submenu icon__menu-users qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        Tech Users
     </li>
     <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
         (click)="goToState('ticket-settings')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
     >
+        <div class="icon__menu--submenu icon__menu-tickets qt-sz-20 qt-bg-contain qt-mr-8"></div>
         Ticket Settings
     </li>
 </ul>

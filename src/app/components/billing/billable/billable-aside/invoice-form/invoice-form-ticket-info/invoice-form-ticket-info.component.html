@@ -92,14 +92,25 @@
                         [textContent]="product.item.manufacture"
                     >
                     </td>
-                    <td
-                        class="invoice-item__col-desc"
-                        [textContent]="product.item.description"
-                    ></td>
-                    <td
-                        class="invoice-item__col-price"
-                        [textContent]="product.item.sale | currency"
-                    ></td>
+                    <td class="invoice-item__col-desc">
+                        <pre [textContent]="product.item.description"></pre>
+                    </td>
+                    <td class="invoice-item__col-price">
+                        <div class="qt-df qt-ai-c qt-jc-fe">
+                            <app-dynamic-tooltip
+                                [content]="'Applied discount - ' + product.discountAmount + ((product.discountType === 'PERCENT') ? '%' : ' amount')"
+                                [position]="'top'"
+                                #productTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"
+                                *ngIf="product.discountAmount"
+                                (mouseenter)="productTooltip.show($event.target)"
+                                (mouseleave)="productTooltip.hide()"
+                            ></div>
+                            {{product.item.sale | currency}}
+                        </div>
+                    </td>
                     <td
                         class="invoice-item__col-quentity"
                         [textContent]="product.billableQuantity"

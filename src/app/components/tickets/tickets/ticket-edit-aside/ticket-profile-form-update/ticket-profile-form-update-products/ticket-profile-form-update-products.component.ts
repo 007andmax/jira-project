@@ -7,8 +7,8 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { InventoryChange } from 'src/app/components/inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-profile-form-update-products',
@@ -71,14 +71,27 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     let value = Number(val);
     this.currentProduct.item.sale = value;
   }
-  public onChangeProduct(item, i) {
+  public onChangeProduct(item, i, taxesDropDown) {
     this.addedProductList[i].setData(item, this.getItemOrger());
     this.addedProductList[i].valdiateSaleCost = true;
+    taxesDropDown.selectedTax = item.taxes;
   }
-  public selectProduct(item) {
-    if (item) this.currentProduct.setData(item, this.getItemOrger());
-    if (!item) this.currentProduct = new TicketProfileFormProduct();
+  public onTaxesChangeProduct(data, i) {
+    this.addedProductList[i].setTexes(data);
+  }
+  public selectProduct(item, taxesDropDown) {
+    if (item) {
+      this.currentProduct.setData(item, this.getItemOrger());
+      taxesDropDown.selectedTax = item.taxes;
+    }
+    if (!item) {
+      this.currentProduct = new TicketProfileFormProduct();
+      taxesDropDown.selectedTax = [];
+    }
     this.currentProduct.valdiateSaleCost = true;
+  }
+  public onTaxesChange(item) {
+    this.currentProduct.setTexes(item);
   }
   public addProduct() {
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
@@ -120,7 +133,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     return ((find) ? false : true) && this.currentProduct.valdiateSaleCost;
   }
   public getSelectedProducts() {
-    return (this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId);
+    return ((this.currentProduct.item.versionedId) ? [...this.addedProductList.filter(item => item.item.versionedId), this.currentProduct] : this.addedProductList.filter(item => item.item.versionedId)).map(item => item.getDataForAdd());
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

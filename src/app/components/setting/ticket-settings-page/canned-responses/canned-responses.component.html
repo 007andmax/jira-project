@@ -1,0 +1,100 @@
+<div
+    class="cmn-area canned-responses-table"
+    [hidden]="loading"
+>
+    <div
+        class="data-table-wrap"
+        [ngClass]="{'preloader-container' : showPreloader}"
+    >
+        <div
+            class="tab-pane__table dataTable"
+            style="width:100%"
+            *ngIf="!showPreloader"
+        >
+            <div class="tab-pane__table-header">
+                <div class="tab-pane__table-row">
+                    <div
+                        class="tab-pane__table-cell canned-responses-table__template-name pointer"
+                        (click)="sortByName()"
+                    >
+                        Template Name
+                        <div class="qt-table-modern__sorting--new"></div>
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__status">Status</div>
+                    <div class="tab-pane__table-cell canned-responses-table__action">&nbsp;</div>
+                </div>
+            </div>
+            <div class="tab-pane__table-body">
+                <div
+                    class="tab-pane__table-row"
+                    *ngFor="let item of noteTemplate; let i = index"
+                >
+                    <div
+                        class="tab-pane__table-cell canned-responses-table__template-name"
+                        [textContent]="item.title"
+                    >
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__status">
+                        <app-dynamic-tooltip
+                            [content]="'Active'"
+                            [position]="'top'"
+                            #activeTooltip
+                        ></app-dynamic-tooltip>
+                        <i
+                            class="icon__check qt-sz-20 qt-bg-contain qt-dib"
+                            *ngIf="item.active"
+                            (mouseenter)="activeTooltip.show($event.target)"
+                            (mouseleave)="activeTooltip.hide()"
+                        ></i>
+                    </div>
+                    <div class="tab-pane__table-cell canned-responses-table__action">
+                        <div class="qt-df qt-ai-c">
+                            <app-dynamic-tooltip
+                                [content]="'Copy'"
+                                [position]="'top'"
+                                #copyTooltip
+                            ></app-dynamic-tooltip>
+                            <app-dynamic-tooltip
+                                [content]="'Edit'"
+                                [position]="'top'"
+                                #editTooltip
+                            ></app-dynamic-tooltip>
+                            <app-dynamic-tooltip
+                                [content]="'Delete'"
+                                [position]="'top'"
+                                #deleteTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                *ngIf="getPermissions('EDIT_TICKET_NOTE_TEMPLATE')"
+                                class="icon__edit-gray-dark qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                (click)="editNote(item)"
+                                (mouseenter)="editTooltip.show($event.target)"
+                                (mouseleave)="editTooltip.hide()"
+                            ></div>
+                            <div
+                                *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                                class="icon__copy qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                (click)="copyNote(item)"
+                                (mouseenter)="copyTooltip.show($event.target)"
+                                (mouseleave)="copyTooltip.hide()"
+                            ></div>
+                            <div
+                                *ngIf="getPermissions('DELETE_TICKET_NOTE_TEMPLATE')"
+                                class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                                (click)="removeNote(item)"
+                                (mouseenter)="deleteTooltip.show($event.target)"
+                                (mouseleave)="deleteTooltip.hide()"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
+</div>

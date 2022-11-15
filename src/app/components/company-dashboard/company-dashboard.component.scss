@@ -1,6 +1,7 @@
 @import "../../../assets/scss/custom";
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
 
 .d-flex {
     @include flexbox;
@@ -142,11 +143,11 @@
         }
         &.btn-secondary {
             background-color: $background;
-            color: $gray-800;
+            color: $gray-800--old;
             &:hover,
             &:focus {
                 background-color: $background;
-                color: $gray-800;
+                color: $gray-800--old;
             }
         }
         &.btn-outline {
@@ -201,7 +202,7 @@
             font-stretch: normal;
             line-height: 1.54;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
             text-transform: capitalize;
             margin-bottom: 10px;
             display: flex;
@@ -216,7 +217,7 @@
             float: left;
             width: 100%;
             @include border-radius(4px);
-            border: solid 1px $gray-500;
+            border: solid 1px $gray-500--old;
             background-color: $white;
             padding: 9px 14px;
             font-size: 13px;
@@ -224,14 +225,14 @@
             font-weight: 400;
             line-height: 1.54;
             letter-spacing: normal;
-            color: $gray-800;
+            color: $gray-800--old;
             outline: none !important;
             height: auto;
             &:focus {
-                border-color: $gray-600;
+                border-color: $gray-600--old;
             }
             &:hover {
-                border-color: $gray-600;
+                border-color: $gray-600--old;
             }
             &:disabled {
                 cursor: not-allowed;
@@ -239,25 +240,25 @@
                 border-color: $background;
             }
             &.link {
-                background-image: url("/assets/img/link.svg");
+                background-image: url("/assets/img/icons/link-gray.svg");
                 background-repeat: no-repeat;
                 background-position: right 13px center;
                 padding-right: 25px;
             }
             &::-webkit-input-placeholder {
-                color: $gray-600;
+                color: $gray-600--old;
                 @include opacity(1);
             }
             &::-moz-placeholder {
-                color: $gray-600;
+                color: $gray-600--old;
                 @include opacity(1);
             }
             &:-ms-input-placeholder {
-                color: $gray-600;
+                color: $gray-600--old;
                 @include opacity(1);
             }
             &:-moz-placeholder {
-                color: $gray-600;
+                color: $gray-600--old;
                 @include opacity(1);
             }
             textarea {
@@ -266,7 +267,7 @@
         }
         select.cmn-select {
             @include app-none();
-            background: url("/assets/img/selct-arrow.svg") no-repeat right 7px center;
+            background: url("/assets/img/icons/down-arrow.svg") no-repeat right 7px center;
             padding-right: 25px;
             option {
                 padding: 10px;
@@ -295,7 +296,7 @@
                 box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
                 overflow: hidden;
                 border: none;
-                background-color: $gray-200;
+                background-color: $gray-200--old;
                 @include opacity(1);
                 @include border-radius(5px);
                 padding: 40px 32px 25px 32px;
@@ -412,7 +413,7 @@
                     font-style: normal;
                     line-height: 1.44;
                     text-align: center;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     text-transform: uppercase;
                 }
             }
@@ -433,7 +434,7 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    border-bottom: 1px dotted $gray-400;
+                    border-bottom: 1px dotted $gray-400--old;
                     padding-bottom: 24px;
 
                     @media (max-width: 767px) {
@@ -444,7 +445,7 @@
                         font-weight: 600;
                         line-height: 1.09;
                         letter-spacing: normal;
-                        color: $gray-600;
+                        color: $gray-600--old;
                         margin-bottom: 4px;
 
                         @media (max-width: 767px) {
@@ -501,7 +502,7 @@
                                 font-size: 12px;
                                 line-height: 1.33;
                                 letter-spacing: normal;
-                                color: $gray-800;
+                                color: $gray-800--old;
                             }
                             &:last-child {
                                 margin-bottom: 0;
@@ -551,7 +552,7 @@
                                     color: $primary-2;
                                 }
                                 a {
-                                    color: $gray-800;
+                                    color: $gray-800--old;
                                     font-size: 12px;
                                     line-height: 16px;
                                     margin: 1px 0;
@@ -589,7 +590,7 @@
                                 margin: 0 4px 8px 4px;
                                 border-radius: 4px;
                                 border: solid 1px $background;
-                                background-color: $gray-100;
+                                background-color: $gray-100--old;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
@@ -668,9 +669,9 @@
                         line-height: 1.54;
                         letter-spacing: normal;
                         text-align: center;
-                        color: $gray-800;
+                        color: $gray-800--old;
                         @media (max-width: 767px) {
-                            color: $gray-700;
+                            color: $gray-700--old;
                         }
                     }
                 }
@@ -694,13 +695,13 @@
                     width: auto;
                     padding-left: 15px;
                     margin-left: 13px;
-                    border-left: 1px solid $gray-400;
+                    border-left: 1px solid $gray-400--old;
                     .user-info-pt {
                         align-items: center;
                         justify-content: center;
                         @include border-radius(3px);
                         border: 1px solid $background;
-                        background-color: $gray-100;
+                        background-color: $gray-100--old;
                         padding: 5px 6px;
                         font-size: 12px;
                         font-weight: 400;
@@ -745,7 +746,7 @@
                                     font-style: normal;
                                     line-height: 1.54;
                                     letter-spacing: normal;
-                                    color: $gray-600;
+                                    color: $gray-600--old;
                                     // white-space: nowrap;
                                 }
                             }
@@ -776,7 +777,7 @@
                                     font-size: 12px;
                                     line-height: 1.33;
                                     letter-spacing: normal;
-                                    color: $gray-800;
+                                    color: $gray-800--old;
                                     @include flexbox;
                                     align-items: center;
                                     &:before {
@@ -815,7 +816,7 @@
                             .dropdown {
                                 width: 90px;
                                 padding-left: 22px;
-                                background: url("../../../assets/img/cmp-calander.svg") no-repeat left top;
+                                background: url("../../../assets/img/icons/calendar.svg") no-repeat left top;
                                 min-height: 16px;
                                 .dropdown-toggle {
                                     margin-top: 2px;
@@ -841,7 +842,7 @@
                             @include flexbox;
                             align-items: center;
                             flex-direction: row;
-                            border-top: 1px solid$gray-300;
+                            border-top: 1px solid$gray-300--old;
                             padding-top: 10px !important;
                             justify-content: center;
                             // @media only screen and (max-width: 1439px) {
@@ -860,7 +861,7 @@
                                     font-weight: normal;
                                     line-height: 1.09;
                                     letter-spacing: normal;
-                                    color: $gray-600;
+                                    color: $gray-600--old;
                                     margin-bottom: 5px;
                                 }
                                 .title-data {
@@ -916,7 +917,7 @@
                                     font-size: 12px;
                                     line-height: 1.33;
                                     text-align: center;
-                                    color: $gray-600;
+                                    color: $gray-600--old;
                                 }
                             }
                             nvd3 {
@@ -978,7 +979,7 @@
                                             font-size: 12px;
                                             line-height: 1.33;
                                             letter-spacing: normal;
-                                            color: $gray-600;
+                                            color: $gray-600--old;
                                             margin-left: 5px;
                                         }
                                     }
@@ -988,7 +989,7 @@
                                         align-items: center;
                                         overflow: hidden;
                                         @include border-radius(5.5px);
-                                        background-color: $gray-300;
+                                        background-color: $gray-300--old;
                                         height: 10px;
                                         margin: 16px 0 22px;
                                         span {
@@ -1005,12 +1006,12 @@
                                         li {
                                             width: 100%;
                                             padding: 12px 30px;
-                                            border-bottom: 1px solid$gray-300;
+                                            border-bottom: 1px solid$gray-300--old;
                                             font-size: 12px;
                                             font-weight: normal;
                                             line-height: 1.33;
                                             letter-spacing: normal;
-                                            color: $gray-800;
+                                            color: $gray-800--old;
                                             position: relative;
                                             justify-content: space-between;
                                             &::before {
@@ -1065,7 +1066,7 @@
                                                 font-weight: normal;
                                                 line-height: 1.33;
                                                 letter-spacing: normal;
-                                                color: $gray-800;
+                                                color: $gray-800--old;
                                             }
                                             b {
                                                 color: $primary-2;
@@ -1078,7 +1079,7 @@
                                         width: 100%;
                                         flex-direction: column;
                                         @include border-radius(6px);
-                                        border: 1px dashed $gray-500;
+                                        border: 1px dashed $gray-500--old;
                                         background-color: $white;
                                         padding: 10px 12px 12px;
                                         margin: 20px 0 12px 0;
@@ -1133,8 +1134,8 @@
                                         font-weight: 600;
                                         line-height: 1.2;
                                         letter-spacing: normal;
-                                        color: $gray-600;
-                                        background-color: $gray-100;
+                                        color: $gray-600--old;
+                                        background-color: $gray-100--old;
                                         padding: 6px 10px 6px 0;
                                         text-transform: uppercase;
                                         @media only screen and (max-width: 1439px) {
@@ -1153,9 +1154,9 @@
                                     font-size: 12px;
                                     line-height: 1.33;
                                     letter-spacing: normal;
-                                    color: $gray-800;
+                                    color: $gray-800--old;
                                     padding: 12px 10px 12px 0;
-                                    border-bottom: 1px solid$gray-300;
+                                    border-bottom: 1px solid$gray-300--old;
                                     @media only screen and (max-width: 1439px) {
                                         padding: 12px 7px 12px 0;
                                     }
@@ -1188,7 +1189,7 @@
                             &::after,
                             &::before {
                                 content: "";
-                                background-color: $gray-100;
+                                background-color: $gray-100--old;
                                 padding: 0;
                                 width: 24px;
                                 position: absolute;
@@ -1232,7 +1233,7 @@
                     font-style: normal;
                     line-height: 1.23;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     padding: 0 15px 0 0;
                     text-align: left;
                     background: url(/assets/img/company-details/filter-drop-down.svg) no-repeat right center $white;
@@ -1241,29 +1242,24 @@
                 }
             }
             .dropdown-menu {
-                width: 220px;
+                width: 238px;
                 height: auto;
-                max-height: 284px;
-                .item {
-                    &:last-child {
-                        justify-content: center;
-                    }
-                    &.selected,
-                    &:hover {
-                        color: $primary-2;
-                        font-weight: 600;
-                    }
-                    span {
-                        width: 80px;
-                        display: inline-block;
-                        text-align: left;
-                    }
-                }
+                max-height: 296px;
+              .dropdown-item {
+                height: auto;
+                justify-content: space-between;
+              }
+              .info-time-work,
+              .info-time-work-status {
+                width: 80px;
+                display: inline-block;
+                white-space: pre-line;
+              }
             }
             .closing-tag {
                 margin-left: 8px;
                 border-radius: 3px;
-                background-color: $gray-400;
+                background-color: $gray-400--old;
                 font-size: 9px;
                 font-weight: 500;
                 font-stretch: normal;
@@ -1295,7 +1291,7 @@
                     font-style: normal;
                     line-height: 1.23;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     padding: 0 15px 0 0;
                     text-align: left;
                     background: url(/assets/img/company-details/filter-drop-down.svg) no-repeat right center $white;
@@ -1305,48 +1301,9 @@
             }
         }
         .dropdown {
-            .dropdown-menu {
-                width: 220px;
-                height: 284px;
-                border-radius: 4px;
-                box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                border: solid 1px $gray-400;
-                background-color: $white;
-                padding: 7px 0 9px 0;
-                //z-index: 1;
-                .item {
-                    width: 100%;
-                    padding: 7px 15px;
-                    background-color: $white;
-                    outline: none;
-                    border: none;
-                    text-align: left;
-                    font-size: 13px;
-                    font-weight: normal;
-                    font-stretch: normal;
-                    font-style: normal;
-                    line-height: 1.4;
-                    letter-spacing: normal;
-                    color: $gray-800;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    &.selected,
-                    &:hover {
-                        color: $primary-2;
-                        font-weight: 600;
-                        background-color: $background;
-                    }
-                    &:last-child {
-                        background-color: $white !important;
-                    }
-                    span {
-                        width: 80px;
-                        display: inline-block;
-                        text-align: left;
-                    }
-                }
-            }
+          .dropdown-item {
+            @include dropdown-item;
+          }
         }
         .cmp-board-title-wrap {
             align-items: center;
@@ -1359,13 +1316,6 @@
                 width: 160px;
                 .dropdown-toggle {
                     font-size: 12px;
-                }
-                .dropdown-menu {
-                    width: 160px;
-                    left: auto !important;
-                    right: 0 !important;
-                    height: auto;
-                    max-height: 300px;
                 }
             }
         }
@@ -1383,7 +1333,7 @@
         @include border-radius(6px);
         @include box-shadow(0, 10px, 10px, 0 rgba(192, 199, 208, 0.2));
         @include transition(0.4s);
-        border-left: 1px solid $gray-400;
+        border-left: 1px solid $gray-400--old;
         background-color: $white;
         z-index: 999;
         &.opened {
@@ -1471,7 +1421,7 @@
                         margin-bottom: 8px;
                         text-transform: none;
                         a {
-                            color: $gray-800;
+                            color: $gray-800--old;
                             font-weight: 600;
                         }
                     }
@@ -1489,7 +1439,7 @@
             border-radius: 12px;
             @include border-radius(12px 0 0 12px);
             @include box-shadow(0, 10px, 10px, 0 rgba(192, 199, 208, 0.2));
-            border: 1px solid $gray-300;
+            border: 1px solid $gray-300--old;
             background-color: $white;
             position: absolute;
             left: -36px;
@@ -1517,7 +1467,7 @@
                     height: 40px;
                     padding: 0 12px;
                     font-size: 13px;
-                    border: 1px solid $gray-500;
+                    border: 1px solid $gray-500--old;
                     border-radius: 4px;
                     background: none;
                     &#dropdownServices {
@@ -1531,7 +1481,7 @@
                         height: 40px;
                         padding: 0 3px;
                         font-size: 13px;
-                        border: 1px solid $gray-500;
+                        border: 1px solid $gray-500--old;
                         border-radius: 4px;
                         -webkit-box-align: center;
                         align-items: center;
@@ -1562,11 +1512,11 @@
                 .types-btn {
                     width: 100%;
                     height: 100%;
-                    border: 1px solid $gray-500;
+                    border: 1px solid $gray-500--old;
                     border-right: none;
                     border-bottom-left-radius: 4px;
                     border-top-left-radius: 4px;
-                    color: $gray-800;
+                    color: $gray-800--old;
                     padding: 10px;
                     font-size: 12px;
                     text-align: left;
@@ -1593,13 +1543,13 @@
                 font-size: 12px;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
                 font-weight: 400;
-                fill: $gray-800;
+                fill: $gray-800--old;
             }
             line {
-                fill: $gray-300;
-                stroke: $gray-300;
+                fill: $gray-300--old;
+                stroke: $gray-300--old;
                 stroke-width: 0.8px;
             }
         }
@@ -1608,9 +1558,9 @@
                 font-size: 12px;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $gray-800;
+                color: $gray-800--old;
                 font-weight: 400;
-                fill: $gray-800;
+                fill: $gray-800--old;
             }
         }
         .nv-legend {
@@ -1651,7 +1601,7 @@
                 line-height: 16px;
                 padding-left: 25px;
                 font-size: 13px;
-                color: $gray-800;
+                color: $gray-800--old;
                 @media (max-width: 767px) {
                     font-weight: 600;
                 }
@@ -1705,7 +1655,7 @@
                 }
                 .modal-header {
                     padding: 14px 32px;
-                    border-bottom: 1px solid $gray-400;
+                    border-bottom: 1px solid $gray-400--old;
                     h1 {
                         font-size: 20px;
                         font-weight: 600;
@@ -1761,7 +1711,7 @@
                         //                     content: "";
                         //                     width: 12px;
                         //                     height: 1px;
-                        //                     background-color: $gray-400;
+                        //                     background-color: $gray-400--old;
                         //                     position: absolute;
                         //                     top: 0;
                         //                     bottom: 0;
@@ -1842,11 +1792,11 @@
                                                     padding: 9px 10px;
                                                     width: 100%;
                                                     border-radius: 4px;
-                                                    border: solid 1px $gray-500;
+                                                    border: solid 1px $gray-500--old;
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
                                                     height: auto;
-                                                    background: url("/assets/img/selct-arrow.svg") no-repeat right 15px
+                                                    background: url("/assets/img/icons/down-arrow.svg") no-repeat right 15px
                                                         center;
                                                     padding-right: 30px;
                                                     -webkit-appearance: none;
@@ -1866,7 +1816,7 @@
                                                     content: "";
                                                     width: 12px;
                                                     height: 1px;
-                                                    background-color: $gray-600;
+                                                    background-color: $gray-600--old;
                                                     display: inline-block;
                                                     vertical-align: middle;
                                                     position: absolute;
@@ -1904,13 +1854,13 @@
                             justify-content: center;
                             &.btn-secondary {
                                 outline: none !important;
-                                border: solid 1px $gray-500;
+                                border: solid 1px $gray-500--old;
                                 background-color: $white;
                                 font-size: 13px;
                                 font-weight: 600;
                                 line-height: normal;
                                 letter-spacing: normal;
-                                color: $gray-800;
+                                color: $gray-800--old;
                                 padding: 12px 24px;
                                 @media (max-width: 767px) {
                                     width: 100%;
@@ -1982,7 +1932,7 @@
                         top: 13px;
 
                         @media (max-width: 767px) {
-                            background-image: url("/assets/img/icons/close-white.svg");
+                            background-image: url("/assets/img/icons/close-light.svg");
                             left: 16px;
                             width: 20px;
                             height: 20px;
@@ -2066,7 +2016,7 @@
                             top: 20px;
                             left: 16px;
                             background-size: 20px;
-                            background-image: url("/assets/img/icons/close-white.svg");
+                            background-image: url("/assets/img/icons/close-light.svg");
                         }
                     }
                 }
@@ -2116,7 +2066,7 @@ app-company-dash-tags {
         width: 100%;
     }
     .mat-form-field-infix {
-        border: 1px solid $gray-500;
+        border: 1px solid $gray-500--old;
         border-radius: 4px;
         padding-left: 36px !important;
         position: relative;
@@ -2128,7 +2078,7 @@ app-company-dash-tags {
             content: "";
             width: 16px;
             height: 16px;
-            background: url("./../../../assets/img/icons/tag-ng2.png");
+            background: url("./../../../assets/img/icons/tag.svg");
         }
         input {
             margin: 0;

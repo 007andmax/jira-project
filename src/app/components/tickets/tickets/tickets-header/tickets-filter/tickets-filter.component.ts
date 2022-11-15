@@ -8,7 +8,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
@@ -17,6 +16,8 @@ import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter
 import { StatusColor } from '../../../class/status-color';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { TicketStatusFilter } from '../class/ticket-status-filter';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -24,10 +25,10 @@ import { TicketStatusFilter } from '../class/ticket-status-filter';
   styleUrls: ['./tickets-filter.component.scss']
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
-  @ViewChild('usersDp') usersDp: SelectSearchComponent;
-  @ViewChild('companyDp') companyDp: SelectSearchComponent;
-  @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('usersDp') usersDp: DropDownComponent;
+  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
+  @ViewChild('techUsersDp') techUsersDp: DropDownComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
@@ -35,7 +36,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   selectedTechUser: string = null;
   selectedStatus: string = null;
   selectedUser: string = null;
-  companies = [];
   users = [];
   techUsersList = [];
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
@@ -84,16 +84,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.onGetTechUsers(data);
     })
     this.sub.add(getOnUsers);
-
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.borderColor);
+        return new StatusColor(item.borderColor, item.textColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
     })
@@ -157,10 +150,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   close() {
     this.onClose.emit(null);
   }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
+
   public setTypeFilterWithoutChange(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);

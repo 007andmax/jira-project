@@ -1,14 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
 import { map } from "rxjs/operators";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ConfirmStateService } from "src/app/components/shared/confirm/services/confirm-state.service";
+import { CLOSE_SESSION } from "src/app/const/confirm";
+import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
+import { SettingStateService } from "src/app/states/setting/setting-state.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-activity-history",
   templateUrl: "./activity-history.component.html",
   styleUrls: ["./activity-history.component.scss"]
 })
-export class ActivityHistoryComponent implements OnInit {
+export class ActivityHistoryComponent implements OnInit, OnDestroy {
   name: string = "";
   activityHistory = [];
   selectedDevice = {
@@ -17,16 +23,29 @@ export class ActivityHistoryComponent implements OnInit {
     city: '',
     country: ''
   };
-
+  sub: Subscription = new Subscription();
   constructor(
     private settingService: SettingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
+    public settingStateService: SettingStateService,
   ) { }
+
 
   /**
    * init
    */
   ngOnInit() {
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === CLOSE_SESSION) {
+          this.onCloseSession(this.settingStateService.getSessionForRemove());
+        }
+
+      }
+    })
+    this.sub.add(getConfirm);
     this.getActivityHistory();
   }
 
@@ -52,27 +71,33 @@ export class ActivityHistoryComponent implements OnInit {
   selectDevice(device: any) {
     this.selectedDevice = device;
   }
+  onCloseSession(device) {
+    const idsForDelete = [];
+    if (device) {
+      idsForDelete.push(device.id);
+      this.settingService
+        .closeSessions(idsForDelete)
+        .subscribe((data) => {
+          this.activityHistory.splice(this.activityHistory.findIndex(item => item.id == device.id), 1);
+        });
+    }
+  }
 
   /**
    * close sessing based on device
    * @param device 
    */
   closeSession(device: any) {
-    const idsForDelete = [];
-    if (device) {
-      idsForDelete.push(device.id);
-      this.settingService
-        .closeSessions(idsForDelete)
-        .pipe(
-          map(res => {
-            this.toastr.success("Activity History Removed Successfully");
-          })
-        )
-        .subscribe();
-    }
+    this.confirmStateService.setConfirmAction(CLOSE_SESSION);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Remove Location`;
+    this.settingStateService.setSessionForRemove(device);
   }
 
   trackByDeviceFun(index, device) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

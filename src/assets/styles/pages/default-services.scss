@@ -1,8 +1,8 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
 
 .default-services-page {
   min-height: calc(100vh - #{$header-height});
-  z-index: 1050;
   position: relative;
 
   &__table-container {
@@ -18,6 +18,7 @@
     position: relative;
     top: 2px;
     left: -1px;
+    margin-left: 2px;
   }
 
   .default-service-table {
@@ -84,19 +85,19 @@
     width: 112px;
     height: 32px;
     border-radius: 4px;
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     border: none;
   }
 
   .gl-number-dropdown {
-    background: $gray-200;
+    background: $gray-200--old;
     height: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
     border-radius: 4px;
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 13px;
     position: relative;
     margin-top: 7px;
@@ -146,9 +147,6 @@
 }
 // add aside
 .default-services-page__aside {
-  .add-tax-dropdown label .control-indicator {
-    top: 2px;
-  }
   .add-tax-btn {
     line-height: 1;
     color: $primary-1;
@@ -162,7 +160,7 @@
     .label-name {
       margin-bottom: 8px;
       font-size: 13px;
-      color: $gray-800;
+      color: $gray-800--old;
       font-weight: 600;
       line-height: 20px;
     }
@@ -174,13 +172,16 @@
     }
 
     .dropdown-menu.new-tax.show {
-      border: aliceblue;
+      @include dropdown-menu;
+      max-height: initial;
+      overflow: visible;
+      transform: none !important;
       right: -30px !important;
       left: unset !important;
       top: 7px !important;
-      box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px $gray-400;
-      background-color: $white;
+      .qt-checkbox {
+        padding-left: 0;
+      }
     }
 
     .add-tax-dropdown:after,

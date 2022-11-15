@@ -2,7 +2,17 @@
 
 .quote-aside-preview-table {
   th {
-    border-top: solid 1px $gray-400;
-    background-color: $gray-100;
+    border-top: solid 1px $gray-400--old;
+    background-color: $gray-100--old;
   }
+}
+pre {
+  margin: unset;
+  font-size: unset;
+  line-height: unset;
+  color: unset;
+  background-color: unset;
+  border: unset;
+  border-radius: unset;
+  font-family: unset;
 }

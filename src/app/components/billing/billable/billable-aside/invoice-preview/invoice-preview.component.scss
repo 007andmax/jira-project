@@ -1,3 +1,17 @@
 .note {
     white-space: pre-line;
 }
+pre {
+    margin: unset;
+    font-size: unset;
+    line-height: unset;
+    color: unset;
+    background-color: unset;
+    border: unset;
+    border-radius: unset;
+    font-family: unset;
+}
+.invoice-preview__billing-address,.invoice-preview__shipping-address {
+    flex: 1 1 290px;
+    padding: 0;
+}

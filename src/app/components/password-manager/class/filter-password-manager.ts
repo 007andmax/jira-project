@@ -125,6 +125,48 @@ export class FilterPasswordManager {
             }
         }
     }
+    public onSortList(reqList) {
+        let filter = this.filterTop.find(item => item.filter !== '');
+        let sort = filter.filter;
+        if (filter.field === 'account_type') {
+
+            if (sort === 'ASC') {
+                this.onAccountType(reqList);
+            } else {
+                reqList.reverse();
+            }
+        }
+        if (filter.field === 'company') {
+
+            if (sort === 'ASC') {
+
+                this.onFilterCompany(reqList);
+            } else {
+
+                reqList.reverse();
+            }
+        }
+        if (filter.field === 'description') {
+
+            if (sort === 'ASC') {
+
+                this.onFilterDescription(reqList);
+            } else {
+
+                reqList.reverse();
+            }
+        }
+        if (filter.field === 'user_password') {
+
+            if (sort === 'ASC') {
+
+                this.onFilterUserName(reqList);
+            } else {
+
+                reqList.reverse();
+            }
+        }
+    }
     private onFilterUserName(reqList) {
         reqList.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
             1 : (b.companyName.toLowerCase() > a.companyName.toLowerCase() ? -1 : 0));

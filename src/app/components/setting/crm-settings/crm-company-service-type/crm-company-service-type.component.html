@@ -1,94 +1,109 @@
 <div class="cmn-area">
-    <div class="data-table-wrap">
-        <table
-            class="display dataTable"
-            style="width:100%"
-            [ngClass]="{'cleat-height-dataTable':!showPreloader}"
-        >
-            <thead>
-                <tr>
-                    <th class="checkbox-header"></th>
-                    <th
-                        class="tax-name pointer"
-                        (click)="onFilter('name')"
-                    >
-                        Service Type
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th
-                        class="rate pointer"
-                        (click)="onFilter('count')"
-                    >
-                        Count
-                        <div class="qt-table-modern__sorting"></div>
-                    </th>
-                    <th class="action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="!showPreloader">
-                <add-crm-company-service-type
-                    *ngIf="showAdd"
-                    [serviceTypeList]="serviceTypeList"
-                    (onClose)="showAdd = false"
-                ></add-crm-company-service-type>
-                <tr
-                    *ngFor="let item of serviceTypeList; let i = index"
-                    appClickOtside
-                    [init]="item.isInitEdit"
-                    [ngClass]="'edit-crm-container-' + i"
-                    [class]="'.edit-crm-container-' + i"
-                    (onOutSide)="onEditServiceType(item,$event)"
-                >
-                    <td class="checkbox">
-                        <label class="qt-checkbox">
-                            <input
-                                type="checkbox"
-                                (change)="onSelect($event,item)"
-                            >
-                            <span></span>
-                        </label>
-                    </td>
-                    <td
-                        class="tax-name edit-category-name"
-                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
-                    >
+    <div
+        class="tab-pane__table cleat-height-dataTable"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
                         <input
-                            type="text"
-                            class="form-input"
-                            placeholder="Enter Name Category"
-                            [(ngModel)]="item.name"
-                            appKeyUpEnter
-                            (onChange)="onEditServiceType(item,$event)"
-                            (input)="item.onInitEdit(true);item.checkDublicate(serviceTypeList)"
-                            maxlength="30"
+                            type="checkbox"
+                            (change)="onSelectAll($event)"
                         >
-                        <mat-error
-                            class="qt-tooltip-error"
-                            *ngIf="item.disableUpdate"
-                        >
-                            This Service Type is already occupied
-                        </mat-error>
-                    </td>
-                    <td
-                        class="rate"
-                        [textContent]="item.usageCounter"
-                    ></td>
-                    <td class="action">
-                        <a
-                            href="javascript:;"
-                            data-tooltip="Remove"
-                            class="remove"
-                            (click)="remove(item)"
-                        >
-                            <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-type-table__service-type pointer"
+                    (click)="onFilter('name')"
+                >
+                    Service Type
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-type-table__count pointer"
+                    (click)="onFilter('count')"
+                >
+                    Count
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-type-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <add-crm-company-service-type
+                *ngIf="showAdd"
+                [serviceTypeList]="serviceTypeList"
+                (onClose)="showAdd = false"
+            ></add-crm-company-service-type>
             <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-        </table>
+                class="tab-pane__table-row"
+                *ngFor="let item of serviceTypeList; let i = index"
+                appClickOtside
+                [init]="item.isInitEdit"
+                [ngClass]="'edit-crm-container-' + i"
+                [class]="'.edit-crm-container-' + i"
+                (onOutSide)="onEditServiceType(item,$event)"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="item.selected"
+                            (change)="onSelect($event,item)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-type-table__service-type"
+                    [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                >
+                    <input
+                        type="text"
+                        class="form-input --editable"
+                        placeholder="Enter Name Category"
+                        [(ngModel)]="item.name"
+                        appKeyUpEnter
+                        (onChange)="onEditServiceType(item,$event)"
+                        (input)="item.onInitEdit(true);item.checkDublicate(serviceTypeList)"
+                        maxlength="30"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="item.disableUpdate"
+                    >
+                        This Service Type is already occupied
+                    </mat-error>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-type-table__count"
+                    [textContent]="item.usageCounter"
+                ></div>
+                <div class="tab-pane__table-cell crm-settings-company-type-table__action">
+                    <app-dynamic-tooltip
+                        [content]="'Remove'"
+                        [position]="'top'"
+                        #removeTooltip
+                    ></app-dynamic-tooltip>
+                    <div
+                        data-tooltip="Remove"
+                        class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                        (click)="remove(item)"
+                        (mouseenter)="removeTooltip.show($event.target)"
+                        (mouseleave)="removeTooltip.hide()"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
     </div>
 </div>

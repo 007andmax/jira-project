@@ -37,7 +37,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   showFullJobDescription: boolean = false;
   validate: UserValidate = new UserValidate();
   tab: string = 'tickets';
-  companies = [];
   selectedCompany = null;
   MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
@@ -74,14 +73,9 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     this.sub.add(openDetailAside);
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.borderColor);
+        return new StatusColor(item.borderColor, item.textColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
-    })
-
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
     })
     let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
       if (!this.open) return;
@@ -176,10 +170,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     this.selectedCompany = data;
     this.user.serCompanyId(data.id);
     this.updateUser();
-  }
-  getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   getJobDescription(val) {
     let value = val;

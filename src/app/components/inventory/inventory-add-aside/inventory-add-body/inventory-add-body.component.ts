@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, EventEmitter, Output, Input } from '@angular/core';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { InventoryItem } from '../../class/inventory-item';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { Tax } from 'src/app/interfaces/service/tax';
@@ -17,6 +16,7 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -25,9 +25,10 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 })
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax') containerAddTax;
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('taxesDp') taxesDp: TaxesComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
+  @ViewChild('suppliersSelect') suppliersSelect: DropDownComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
   //opened: boolean = false;
@@ -37,7 +38,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
   suppliers: Array<Company> = [];
-  companies: Array<Company> = [];
+
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
 
@@ -100,7 +101,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'supplier');
   }
   onAddCategory(data) {
-    this.productService.addCategory(data).subscribe((data: any) => {
+    this.productService.addCategory(data, null).subscribe((data: any) => {
       this.inventory.category = data;
       this.validate.resetCategory();
     })
@@ -191,7 +192,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
     this.suppliersSelect.clearClient();
-    this.taxesStateService.onInitClear();
+    this.taxesDp.close();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
     this.onClose.emit(null);

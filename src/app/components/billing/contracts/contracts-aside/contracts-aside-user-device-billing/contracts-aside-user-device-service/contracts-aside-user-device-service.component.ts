@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsUserDeviceService } from '../../class/contracts-user-device-service';
@@ -12,7 +13,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
-  @ViewChild('taxesDropDown') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('taxesDropDown') taxesDropDown: TaxesComponent;
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {
@@ -29,6 +30,9 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
 
     });
     this.taxesDropDown.setEditItems(listTaxes);
+  }
+  onChangeCount(event) {
+    this.service.count = event;
   }
   remove() {
     this.onRemove.emit(null);

@@ -1,8 +1,23 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/fonts";
 
-.dropdown-item {
-  height: 55px !important;
-  padding: 6px 20px !important;
+.dropdown-menu {
+  width: 100%;
+  .dropdown-link {
+    width: 100%;
+    > span {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.dark-dropdown .dropdown-menu .dropdown-item,
+.light-dropdown .dropdown-menu .dropdown-item,
+.grey-dropdown .dropdown-menu .dropdown-item {
+  height: 55px;
 }
 
 .dropdown-link {
@@ -10,23 +25,29 @@
 }
 
 .report-user-name {
-  color: $gray-800;
-  font-size: 13px !important;
-  font-weight: bold;
-  margin: 0 !important;
+  @include body-r__sb;
+  color: #101828;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .report-user-email {
-  color: $gray-600;
-  font-size: 12px !important;
-  margin: -5px 0 0 !important;
+  @include body-r;
+  color: #667085;
+  margin: -5px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
+.dropdown-menu .default-user-avatar,
 .report-user-avatar {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  background-color: $gray-500;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.report-user-avatar {
+  background-color: $gray-500--old;
 }
 .filter-users-documents {
   input {
@@ -34,16 +55,14 @@
     outline: none;
     width: 100%;
     border-radius: 4px 3px 3px 4px;
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-500--old;
     background-color: $white;
 
     &::placeholder {
-      color: $gray-600;
+      color: $gray-600--old;
     }
   }
   .dropdown-menu {
-    right: 0;
-    left: unset;
     width: fit-content;
   }
 }

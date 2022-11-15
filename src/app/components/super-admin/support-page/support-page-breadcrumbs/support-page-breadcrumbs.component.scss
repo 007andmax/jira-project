@@ -8,7 +8,7 @@
     }
     > div:last-child {
       span {
-        color: $gray-700;
+        color: $gray-700--old;
       }
     }
     div {
@@ -16,13 +16,13 @@
         align-items: stretch;
 
         span {
-            color: $gray-600;
+            color: $gray-600--old;
             line-height: 15px;
         }
 
         &.breadcrumbs-path {
             span {
-                color: $gray-600;
+                color: $gray-600--old;
             }
         }
 
@@ -31,7 +31,7 @@
           margin-right: 3px;
           font-size: 17px;
           line-height: 1;
-          color: $gray-600;
+          color: $gray-600--old;
         }
     }
 }

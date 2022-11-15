@@ -2,13 +2,13 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { Subscription } from 'rxjs';
 import { TechUsersListReportComponent } from 'src/app/components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { DocumentFilter } from '../../class/document-filter';
 import * as moment from "moment";
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'documents-filter',
@@ -17,9 +17,8 @@ import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/
 })
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
-  companies = [];
   defaultDate: number = new Date().getTime();
-  @ViewChild('companyDp') companyDp: SelectSearchComponent;
+  @ViewChild('companyDp') companyDp: DropDownComponent;
   @ViewChild('usersDp') usersDp: TechUsersListReportComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
@@ -30,16 +29,7 @@ export class DocumentsFilterComponent implements OnInit {
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
-  }
 
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onClearAll() {
     if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();

@@ -8,7 +8,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { SupportService } from 'src/app/services/support/support.service';
 import { forkJoin, Subscription } from 'rxjs';
@@ -24,6 +24,10 @@ import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { NoteStateService } from 'src/app/states/note/note-state.service';
+import { NoteService } from 'src/app/services/note/note.service';
+import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
+import { TicketProfileFormUpdateNoteListComponent } from './ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -41,6 +45,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
+  @ViewChild('noteList') noteList: TicketProfileFormUpdateNoteListComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
     this.ticketProfile = value;
@@ -115,6 +120,10 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeAssignedUser);
   }
+  onSelectedNote(data) {
+    this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
+    this.ticketProfileFormUpdate.setChatMessage(data.replace(/\n/g, '<br/>'));
+  }
   onConnectRemoteAccess(data) {
     this.companyIdForSupport = data.companyId;
     if (!data.sessionId) {
@@ -127,7 +136,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.remoteSessionId = this.realSessionId;
     modalRef.componentInstance.companyId = this.companyIdForSupport;
     modalRef.componentInstance.connectionType = connectionType;
@@ -141,20 +150,35 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
-  private addCreatedUser() {
+  public addCreatedUser() {
     if (this.ticketProfile.createdUser) {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
   }
-  public onChangeChat(event) {
-    this.ticketProfileFormUpdate.setChatMessage(event.target.value.replace(/\n/g, '<br/>'));
+  onKeyPress(event) {
+    if (event.target.innerHTML.length >= 50000) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
   }
-  public onPastChat(value) {
+  public onChangeChat(event) {
+    let value = "";
+    if (event.target.innerHTML.length >= 50000) {
+      event.preventDefault();
+      event.target.innerHTML = event.target.innerHTML.substring(0, 50000);
+      value = event.target.innerHTML;
+      var range = window.getSelection(); // 创建range
+      range.selectAllChildren(event.target); // Range 选择obj下所有子内容
+      range.collapseToEnd();
+    } else {
+      value = event.target.innerHTML;
+    }
     this.ticketProfileFormUpdate.setChatMessage(value.replace(/\n/g, '<br/>'));
   }
   public reset() {
-    if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").value = "";
+    if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").innerHTML = "";
     if (!this.appService.checkMobile()) this.tab = "NOTE";
     this.files = [];
     this.showAddUpdateUser = false;
@@ -202,7 +226,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.isUpdate = false;
       if (this.tab === "NOTE") {
         this.ticketProfileFormUpdate.setChatMessage("");
-        this.elRef.nativeElement.querySelector("#chat").value = "";
+        this.elRef.nativeElement.querySelector("#chat").innerHTML = "";
       } else {
         this.ticketsStateService.onClearFormUpdate();
       }
@@ -256,7 +280,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.isUpdateAndClose = false;
       if (this.tab === "NOTE") {
         this.ticketProfileFormUpdate.setChatMessage("");
-        this.elRef.nativeElement.querySelector("#chat").value = "";
+        this.elRef.nativeElement.querySelector("#chat").innerHTML = "";
       } else {
         this.ticketsStateService.onClearFormUpdate();
       }
@@ -286,7 +310,9 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.tab = data;
     this.ticketProfileFormUpdate.setType(data);
     this.ticketProfileFormUpdate.clearShares();
+    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
   }
+
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
   }
@@ -295,7 +321,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   onToggleAddUpdateUser() {
     if (this.appService.checkMobile()) {
-      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.usersStateService.getAllUsers().filter(item => this.ticketProfileFormUpdate.shares.find(share => share.user.id === item.id))
       this.addUsersNotifyStateService.setAction(USERS_TO_ADD_UPDATE);

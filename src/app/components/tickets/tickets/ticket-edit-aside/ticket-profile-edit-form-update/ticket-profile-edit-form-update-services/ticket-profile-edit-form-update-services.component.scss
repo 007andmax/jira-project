@@ -15,7 +15,7 @@
         border-radius: 4px;
         margin-left: 8px;
         display: flex;
-        background-color: $gray-700;
+        background-color: $gray-700--old;
         align-items: center;
         justify-content: center;
 
@@ -30,14 +30,14 @@
     }
 
     &__btn-del {
-        background-color: $gray-400;
+        background-color: $gray-400--old;
     }
 
     &__input {
         position: relative;
         height: 40px;
         border-radius: 3px;
-        border: solid 1px $gray-500;
+        border: solid 1px $gray-500--old;
         margin-right: 8px;
         font-size: 13px;
         padding: 10px 12px;
@@ -61,7 +61,7 @@
         }
 
         &::placeholder {
-            color: $gray-600;
+            color: $gray-600--old;
         }
         &.description {
             width: 100%;
@@ -95,7 +95,7 @@
     /deep/ .date-picker input {
         height: 40px;
         width: 146px;
-        border: solid 1px $gray-500;
+        border: solid 1px $gray-500--old;
         border-radius: 4px;
         padding: 10px 12px;
         background: $white;

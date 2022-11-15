@@ -197,7 +197,7 @@ export class InventoryComponent implements OnInit {
     this.getProducts();
   }
   public trackById(index, item) {
-    return item.id;
+    return item.versionedId.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/dropdown";
 
 html {
   font-family: "Inter";
@@ -30,11 +31,12 @@ body {
   display: initial;
   font-family: "Inter", sans-serif;
   @include body-m;
-  color: $gray-800;
+  color: $gray-800--old;
   background-color: $white;
 }
 html body {
   line-height: 24px;
+  background-color: $background;
 }
 
 body input::-ms-clear {
@@ -50,18 +52,42 @@ body .left-panel-full {
   background-color: $success;
   border-color: $success;
 }
-.icn-remove-old {
-  background-image: url("/assets/img/icons/close-10.png");
-  background-position: center;
-  right: 12px;
-  position: absolute;
-  top: -5px;
+//.icn-remove-old { // TODO check this style
+//  background-image: url("/assets/img/icons/close.svg");
+//  background-position: center;
+//  right: 12px;
+//  position: absolute;
+//  top: -5px;
+//
+//  @media (max-width: 767px) {
+//    padding: 12px;
+//    transform: translate(5px, 4px);
+//  }
+//}
 
-  @media (max-width: 767px) {
-    padding: 12px;
-    transform: translate(5px, 4px);
-  }
+.icn-remove-old {
+  width: 20px;
+  height: 20px;
+  background-color: $gray-400;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-image: url("/assets/img/icons/close.svg");
+  mask-image: url("/assets/img/icons/close.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  right: 14px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  //@media (max-width: 767px) { // TODO check this style
+  //  padding: 12px;
+  //  transform: translate(5px, 4px);
+  //}
 }
+
 /* Datepicker */
 .ngb-dp-week .hidden {
   display: block !important;
@@ -74,7 +100,7 @@ hr {
 }
 
 .text-muted {
-  color: $gray-800;
+  color: $gray-800--old;
   font-size: 13px;
 }
 
@@ -106,7 +132,7 @@ hr {
     height: 40px;
     padding: 0 12px;
     font-size: 13px;
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-500--old;
     border-radius: 4px;
   }
   .form-group {
@@ -134,7 +160,7 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid $gray-400;
+    border-top: 1px solid $gray-400--old;
     padding: 14px 0;
     height: auto;
     width: 100%;
@@ -157,14 +183,14 @@ hr {
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
 .password-content__modal--content > [class*="col-md-"] input::placeholder {
   opacity: 1;
-  color: $gray-600;
+  color: $gray-600--old;
 }
 
 .new-companies-content__modal--content textarea::placeholder,
 .new-users-content__modal--content textarea::placeholder,
 .recurring-tickets-content__modal--content textarea::placeholder,
 .password-content__modal--content textarea::placeholder {
-  color: $gray-600;
+  color: $gray-600--old;
 }
 .form-control[disabled],
 .form-control[readonly],
@@ -172,30 +198,35 @@ fieldset[disabled] .form-control {
   /* background-color: #fcfdfd; */
   opacity: 1;
 }
+.ticket-priority {
+  .form-control {
+    background-color: #fcfdfd;
+  }
+}
 .form-control::-moz-placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
 }
 
 .form-control-search::-moz-placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
   opacity: 1;
 }
 
 .form-control-search:-ms-input-placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
 }
 
 .form-control-search::-webkit-input-placeholder {
-  color: $gray-500;
+  color: $gray-500--old;
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox,
@@ -216,14 +247,6 @@ fieldset[disabled] .form-control {
   font-weight: 400;
   margin: 0;
 }
-
-.checkbox-container {
-  position: relative;
-  min-width: 22px;
-  height: 22px;
-  margin: 0;
-  cursor: pointer;
-}
 a:hover,
 a:focus {
   color: inherit;
@@ -236,8 +259,7 @@ a:focus {
 .icn-xs,
 .icn-sm,
 .icn-md,
-.icn-lg,
-.control-indicator {
+.icn-lg {
   background-repeat: no-repeat;
   display: inline-block;
   margin: auto;
@@ -289,7 +311,7 @@ html::-webkit-scrollbar {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: $gray-500;
+  background-color: $gray-500--old;
 }
 
 .dropdown-assign-ticket .users-list::-webkit-scrollbar-thumb {
@@ -317,37 +339,8 @@ html::-webkit-scrollbar {
   margin-left: 0;
   margin-right: 0;
 }
-.dropdown-menu {
-  border: none;
 
-  .icon__download-pdf {
-    width: 16px;
-    height: 18px;
-  }
-}
 /* END BOOSTRAP FIX STYLE */
-
-.dropdown-menu,
-.uib-dropdown-menu {
-  position: absolute;
-  overflow-y: auto;
-  top: calc(100% + 10px);
-  z-index: 1000;
-  max-height: 354px;
-  display: none;
-  float: left;
-  min-width: 150px;
-  padding: 0;
-  margin: 6px 0 0;
-  list-style: none;
-  font-size: 14px;
-  text-align: left;
-  background-color: $white;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
-  box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
-  background-clip: padding-box;
-}
 
 p {
   font-size: 14px;
@@ -387,7 +380,7 @@ p {
   height: 40px;
   padding: 0 12px;
   font-size: 13px;
-  border: 1px solid $gray-500;
+  border: 1px solid $gray-500--old;
   border-radius: 4px;
 }
 
@@ -437,15 +430,16 @@ p {
 }
 
 /* Custom Checkbox */
-label {
+label { // TODO check this style
   display: inline-block;
   max-width: 100%;
   margin-bottom: 2px;
   font-size: 14px;
   line-height: 12px;
   font-weight: 400;
-  color: $gray-800;
+  color: $gray-800--old;
   cursor: inherit;
+  min-height: 12px;
 }
 .radio,
 .checkbox {
@@ -459,45 +453,13 @@ label {
   position: relative;
   display: inline-block;
   padding-left: 1.5rem;
-  color: $gray-800;
+  color: $gray-800--old;
   cursor: pointer;
   font-size: 14px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-.checkbox .control-indicator {
-  border-radius: 2px;
-}
-.control-indicator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  font-size: 65%;
-  color: $white;
-  text-align: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: $white;
-}
-.checkbox .control-indicator {
-  position: absolute;
-  left: 0;
-  //top: 2px;
-  top: 0;
-  width: 16px;
-  height: 16px;
-  background: url("/assets/img/icons/checkbox-ng2.png");
-}
-.control input:checked ~ .control-indicator {
-  background-position: 16px 0;
 }
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
@@ -521,9 +483,6 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
-}
-.checkbox .control-indicator {
-  border-radius: 3px;
 }
 /* END Custom Checkbox */
 
@@ -557,7 +516,7 @@ strong {
 
 /* Textarea */
 .password-content__modal--content textarea {
-  border: 1px solid $gray-500;
+  border: 1px solid $gray-500--old;
   border-radius: 4px;
   min-height: 80px;
   width: 100%;
@@ -604,51 +563,9 @@ textarea {
       border-top-right-radius: 4px;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
-      border-right: 1px solid $gray-500;
+      border-right: 1px solid $gray-500--old;
       border-left: none;
     }
-  }
-
-  .qt-checkbox {
-    width: 100%;
-    min-height: 30px;
-    max-height: 50px;
-    height: auto;
-    align-items: flex-start;
-    font-size: 13px;
-    display: flex;
-
-    span {
-      margin-right: 8px;
-    }
-  }
-
-  i {
-    display: block;
-    flex-shrink: 0;
-  }
-
-  .text-content {
-    flex: 1;
-  }
-
-  .name,
-  .description {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calc(298px - 23px);
-    width: 100%;
-  }
-
-  .name {
-    font-weight: $fw-medium;
-    color: $gray-800;
-  }
-
-  .description {
-    color: $gray-700;
-    font-size: 12px;
   }
 
   .mat-chip-list-wrapper .mat-standard-chip,
@@ -685,7 +602,7 @@ textarea {
   display: flex;
   justify-content: flex-start;
   padding: 8px 12px;
-  border: 1px dashed $gray-500;
+  border: 1px dashed $gray-500--old;
   border-radius: 6px;
 
   .text {
@@ -786,13 +703,15 @@ textarea {
 
 .password-content__modal--content {
   .date-picker-container {
-    min-width: 274px;
+    //min-width: 274px; // TODO check this style
+    width: auto;
+    max-width: initial;
   }
 }
 
 .form-control[disabled],
 input[disabled] {
-  background-color: $gray-400;
+  background-color: $gray-50;
 }
 
 .left-panel-filter i,
@@ -821,14 +740,14 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  color: $gray-800;
+  color: $gray-800--old;
   margin-top: revert;
   margin-bottom: revert;
   font-weight: bold;
 }
 .info-block {
   padding: 10px 10px 10px 50px;
-  background-color: $gray-200;
+  background-color: $gray-200--old;
   color: $primary-1;
   position: relative;
   border-radius: 3px;
@@ -847,14 +766,10 @@ h6,
 }
 
 .dropdown-assign-ticket .assign-ticket-header {
-  padding: 20px;
-  min-height: 60px;
-  position: absolute;
-  top: 0;
   z-index: 11111111;
   width: 100%;
   background: $white;
-  border-radius: 3px 3px 0 0;
+  border-radius: 6px;
 }
 
 .dropdown-assign-ticket .users-list {
@@ -863,9 +778,11 @@ h6,
   list-style: none;
   border-radius: 0 0 3px 3px;
   height: auto !important;
-  max-height: 204px;
+  max-height: 180px;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @include dropdown-scrollbar;
 }
 
 .default-user-avatar,
@@ -930,9 +847,14 @@ h6,
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-color: $gray-500;
+  background-color: $gray-500--old;
 }
-
+.avatar-36 {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-color: $gray-500--old;
+}
 .avatar-26.remove:hover {
   background-color: #d2dae4;
 }
@@ -954,7 +876,7 @@ h6,
 }
 
 .avatar .no-avatar {
-  background-color: $gray-500;
+  background-color: $gray-500--old;
 }
 
 .avatar > i {
@@ -1037,7 +959,7 @@ h6,
   width: 100%;
   padding: 0;
   border: none;
-  background: $gray-200;
+  background: $gray-200--old;
   box-shadow: none;
   font-weight: 600;
 }
@@ -1054,6 +976,9 @@ h6,
 }
 .company-report .content-product-list-ticket .control.checkbox {
   margin-top: 20px;
+}
+.company-report .content-product-list-ticket .qt-checkbox {
+  margin-top: 18px;
 }
 .company-report [class*="col-md-"] {
   padding: 12px 6px;
@@ -1098,6 +1023,9 @@ h6,
   top: 9px;
   left: 14px;
   pointer-events: none;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-900;
 }
 .priority-dot {
   display: inline-block;
@@ -1121,15 +1049,18 @@ h6,
 .dropdown-menu .subdropdown-menu > li > a,
 .dropdown-menu > .nano li a {
   display: block;
-  padding: 5px 20px;
+  //padding: 5px 20px; // TODO check this style
+  padding: 5px 7px;
   clear: both;
   font-weight: normal;
   line-height: 2;
-  color: $gray-800;
+  color: $gray-900;
+  font-size: 14px;
   white-space: nowrap;
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 6px;
 }
 .form-control {
   box-shadow: none;
@@ -1180,8 +1111,8 @@ h6,
   margin-bottom: 10px;
 }
 .download-agent-modal .btn-primary.not-active {
-  background-color: $gray-800;
-  border-color: $gray-800;
+  background-color: $gray-800--old;
+  border-color: $gray-800--old;
   cursor: default;
   pointer-events: none;
 }
@@ -1190,7 +1121,7 @@ h6,
   text-align: center;
   font-size: 12px;
   font-weight: $fw-medium;
-  color: $gray-600;
+  color: $gray-600--old;
   line-height: 1;
 }
 .download-agent-modal .btn span {

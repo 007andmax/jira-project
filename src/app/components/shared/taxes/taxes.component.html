@@ -1,15 +1,24 @@
 <div
-    class="col-md-6 light-dropdown new-taxes-area"
+    class="light-dropdown new-taxes-area"
     ngbDropdown
     #taxesDropDown="ngbDropdown"
 >
-    <p class="label-name">Taxes</p>
-    <div class="add-tax add-tax-inventory">
+    <div
+        class="qt-input-block__label"
+        *ngIf="isLabel"
+    >
+        Taxes
+    </div>
+    <div
+        class="add-tax add-tax-inventory"
+        *ngIf="isAdd"
+    >
         <span (click)="onInitAddTax()">+ Add Tax</span>
         <div
             class="d-inline-block "
             ngbDropdown
             #addTax="ngbDropdown"
+            placement="bottom-right"
         >
             <a
                 style="display: none;"
@@ -32,8 +41,9 @@
                         [formGroup]="taxForm"
                         novalidate
                     >
-                        <div class="add-tax-label">Tax Name</div>
-                        <input
+                        <div class="qt-input-block qt-mb-24">
+                          <div class="qt-input-block__label">Tax Name</div>
+                          <input
                             placeholder="Enter Tax Name"
                             type="text"
                             class="form-validation"
@@ -41,32 +51,31 @@
                             minlength="2"
                             maxlength="30"
                             required
-                        >
-                        <div
-                            style="position: relative"
+                          >
+                          <div
+                            class="invalid-feedback"
                             *ngIf="taxForm.controls['name'].invalid && (taxForm.controls['name'].dirty || taxForm.controls['name'].touched)"
-                        >
-                            <label
-                                class="control-label"
-                                *ngIf="taxForm.controls['name'].errors.required"
+                          >
+                            <div
+                              *ngIf="taxForm.controls['name'].errors.required"
                             >
-                                Name is required.
-                            </label>
-                            <label
-                                class="control-label"
-                                *ngIf="taxForm.controls['name'].errors.minlength"
+                              Name is required.
+                            </div>
+                            <div
+                              *ngIf="taxForm.controls['name'].errors.minlength"
                             >
-                                Name is too short.
-                            </label>
-                            <label
-                                class="control-label"
-                                *ngIf="taxForm.controls['name'].errors.maxlength"
+                              Name is too short.
+                            </div>
+                            <div
+                              *ngIf="taxForm.controls['name'].errors.maxlength"
                             >
-                                Name is too long.
-                            </label>
+                              Name is too long.
+                            </div>
+                          </div>
                         </div>
-                        <div class="add-tax-label">Rate (%)</div>
-                        <input
+                        <div class="qt-input-block qt-mb-24">
+                          <div class="qt-input-block__label">Rate (%)</div>
+                          <input
                             placeholder="Rate (%)"
                             type="number"
                             class="form-validation"
@@ -74,45 +83,39 @@
                             required
                             min="0.01"
                             max="99"
-                        >
-                        <div
-                            style="position: relative"
+                          >
+                          <div
+                            class="invalid-feedback"
                             *ngIf="taxForm.controls['rate'].invalid && (taxForm.controls['rate'].dirty || taxForm.controls['rate'].touched)"
-                        >
-                            <label
-                                style="white-space: nowrap;"
-                                class="control-label"
-                                *ngIf="taxForm.controls['rate'].errors.required"
+                          >
+                            <div
+                              *ngIf="taxForm.controls['rate'].errors.required"
                             >
-                                Field is required.
-                            </label>
-                            <label
-                                style="white-space: nowrap;"
-                                class="control-label"
-                                *ngIf="taxForm.controls['rate'].errors.min"
+                              Field is required.
+                            </div>
+                            <div
+                              *ngIf="taxForm.controls['rate'].errors.min"
                             >
-                                To small.
-                            </label>
-                            <label
-                                style="white-space: nowrap;"
-                                class="control-label"
-                                *ngIf="taxForm.controls['rate'].errors.max"
+                              To small.
+                            </div>
+                            <div
+                              *ngIf="taxForm.controls['rate'].errors.max"
                             >
-                                To large.
-                            </label>
+                              To large.
+                            </div>
+                          </div>
                         </div>
-                        <label
-                            class="control checkbox"
-                            style="margin-bottom: 20px;"
-                        >
+                        <div class="qt-input-block">
+                          <label class="qt-checkbox">
                             <input
-                                type="checkbox"
-                                formControlName="isDefault"
+                              type="checkbox"
+                              formControlName="isDefault"
                             >
-                            <span class="control-indicator"></span>
-                            Set as Default
-                        </label>
-                        <div class="d-f">
+                            <span></span>
+                            <div class="qt-ml-8">Set as Default</div>
+                          </label>
+                        </div>
+                        <div class="d-f qt-mt-24">
                             <button
                                 class="qt-button qt-mr-12"
                                 type="submit"
@@ -133,16 +136,19 @@
             </div>
         </div>
     </div>
-    <div class="light-dropdown new-product-gl-select qt-select-input-40">
+    <div
+        class="light-dropdown new-product-gl-select qt-select-input-40 qt-dropdown-input"
+        ngbDropdownToggle
+    >
         <i class="icn-sm report-caret-icon"></i>
         <input
             type="text"
             [value]="getSelectedTaxes()"
             autocomplete="new-password"
             readonly
-            placeholder="Select Taxes"
+            [attr.placeholder]="placeholder"
             id="dropdownTypeTaxes"
-            ngbDropdownToggle
+            class="qt-dropdown-input"
         >
     </div>
     <ul
@@ -160,12 +166,12 @@
                 class="dropdown-item"
                 ngbDropdownItem
                 (click)="selected(tax)"
+                [ngClass]="{'--selected':checkTaxIsSelected(tax)}"
             >
                 <span [textContent]="tax.name + ' ' + tax.rate + '%'"></span>
                 <i
-                    class="icn-sm icn-label-save"
+                    class="qt-sz-20 qt-bg-contain icn-label-save taxes-dropdown__check-icon"
                     *ngIf="checkTaxIsSelected(tax)"
-                    style="right: 13px"
                 ></i>
             </li>
         </ng-template>

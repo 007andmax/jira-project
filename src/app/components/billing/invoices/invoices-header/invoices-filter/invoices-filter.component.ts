@@ -3,9 +3,10 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Subscription } from 'rxjs';
 import { InvoicesFilter } from '../../class/invoices-filter';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
-import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-invoices-filter',
@@ -13,9 +14,8 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
   styleUrls: ['./invoices-filter.component.scss']
 })
 export class InvoicesFilterComponent implements OnInit {
-  companies = [];
-  @ViewChild('companyDp') companyDp: SelectSearchComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('companyDp') companyDp: CompanyDropDownComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
@@ -26,20 +26,11 @@ export class InvoicesFilterComponent implements OnInit {
     private invoiceStateService: InvoiceStateService) { }
 
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
   }
   onSelectStatus(status) {
     this.invoicesFilter.setStatus((status) ? status.value : null);
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
-  }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onClearAll() {
     this.companyDp.clearWithOutChanges();

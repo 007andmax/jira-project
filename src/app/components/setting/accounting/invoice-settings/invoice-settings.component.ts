@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -18,6 +20,16 @@ export class InvoiceSettingsComponent implements OnInit {
   isDisable: boolean;
   includeInvoiceAsAttachmentSetting: boolean = false;
   includeAccountReceivableReportAsAttachmentSetting: boolean = false;
+  invoiceTerm: any;
+  primaryPhoneType;
+  secondaryPhoneType = new TitleListType("Office", "OFFICE");
+  phoneTypes = [new TitleListType("Mobile", "MOBILE"),
+  new TitleListType("Office", "OFFICE"),
+  new TitleListType("Fax", "FAX")];
+  invoiceTerms = [new TitleListType("15 days", "15"),
+  new TitleListType("30 days", "30"),
+  new TitleListType("45 days", "45"),
+  new TitleListType("60 days", "60")];
   @Input() taxIdDescInput: any;
   @Input() taxIdInput: any;
   @Input() termInput: any;
@@ -25,7 +37,9 @@ export class InvoiceSettingsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private elRef: ElementRef,
+    private appStateService: AppStateService
   ) { }
 
   ngOnInit() {
@@ -37,7 +51,8 @@ export class InvoiceSettingsComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern(/^-?([0-9]\d*)?$/)
+          Validators.pattern(/^-?([0-9]\d*)?$/),
+          Validators.minLength(1), Validators.maxLength(7)
         ])
       ],
       invoiceTerms: ['', Validators.required],
@@ -50,12 +65,11 @@ export class InvoiceSettingsComponent implements OnInit {
       ],
       lastName: [
         '',
-        [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
+        [Validators.maxLength(15)]
       ],
       taxId: [
         '',
         [
-          Validators.required,
           Validators.maxLength(30),
           Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/)
         ]
@@ -63,13 +77,12 @@ export class InvoiceSettingsComponent implements OnInit {
       taxIdDescription: [
         '',
         [
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+          Validators.maxLength(30),
+          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,30}$/)
         ]
       ],
-      conditions: [''],
-      designation: ['', [Validators.minLength(2), Validators.maxLength(15)]],
+      conditions: ['', [Validators.maxLength(400)]],
+      designation: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       email: [
         '',
         Validators.compose([
@@ -80,14 +93,15 @@ export class InvoiceSettingsComponent implements OnInit {
       primaryPhone: [
         '',
         Validators.compose([
-          Validators.required
+          Validators.required,
+          Validators.minLength(14)
         ])
       ],
       primaryPhoneType: [''],
       secondaryPhone: [''],
       secondaryPhoneType: ['']
     });
-    this.loading = true; $(".loading").css("display", "block");
+    this.loading = true;
     const source = [this.invoiceTicketsService.getInvoiceContact().pipe(catchError(error => of(undefined))),
     this.invoiceTicketsService.termsAndConditions().pipe(catchError(error => of(undefined))),
     this.invoiceTicketsService.actualNumber('INVOICE').pipe(catchError(error => of(undefined))),
@@ -99,7 +113,7 @@ export class InvoiceSettingsComponent implements OnInit {
           if (data[1]) this.getTermsAndConditions(data[1]);
           if (data[2]) this.getActualNumber(data[2]);
           if (data[3]) this.getTaxNumber(data[3]);
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         },
         error => {
         }
@@ -110,6 +124,28 @@ export class InvoiceSettingsComponent implements OnInit {
       this.getTaxNumber();*/
 
 
+  }
+  onChangePrimaryPhoneType(data) {
+    this.primaryPhoneType = data;
+    this.invoiceForm.patchValue({
+      primaryPhoneType: data.type,
+    });
+  }
+  public onPastMemo(value) {
+    this.invoiceForm.patchValue({ conditions: value });
+  }
+
+  /**
+  * Subscribe to change description
+  * @param event - description event
+  */
+  public onChangeMemo(event) {
+    this.invoiceForm.patchValue({ conditions: event.target.value });
+  }
+
+  onInvoiceTermsChange(data) {
+    this.invoiceTerm = data;
+    this.invoiceForm.patchValue({ invoiceTerms: data.type });
   }
 
   // convenience getter for easy access to form fields
@@ -136,7 +172,6 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   getConditions() {
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
         this.invoiceForm.patchValue({
@@ -199,6 +234,8 @@ export class InvoiceSettingsComponent implements OnInit {
               primaryPhone: phone.number,
               primaryPhoneType: phone.typeNumber
             });
+            this.primaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
+
           }
 
           if (i === 1) {
@@ -207,6 +244,7 @@ export class InvoiceSettingsComponent implements OnInit {
               secondaryPhone: phone.number,
               secondaryPhoneType: phone.typeNumber
             });
+            this.secondaryPhoneType = this.phoneTypes.find(item => item.type == phone.typeNumber.toUpperCase());
           }
         });
         if (phoneNumbers.length === 0) {
@@ -230,6 +268,9 @@ export class InvoiceSettingsComponent implements OnInit {
         invoiceTerms: res.term,
         conditions: res.conditions
       });
+      this.invoiceTerm = this.invoiceTerms.find(item => item.type == res.term);
+      this.elRef.nativeElement.querySelector('#memo-invoice').value = res.conditions;
+
     }
   }
 
@@ -275,12 +316,17 @@ export class InvoiceSettingsComponent implements OnInit {
     });
 
   }
+  onChangeSecondaryPhoneType(data) {
+    this.secondaryPhoneType = data;
+    this.invoiceForm.patchValue({
+      secondaryPhoneType: data.type,
+    });
+  }
   /**
    *  saved records.
    */
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.invoiceForm.invalid) {
       return;
@@ -329,16 +375,14 @@ export class InvoiceSettingsComponent implements OnInit {
       phoneNumbers.push(phone);
     }
     objInvoice.invoiceContactDto.phoneNumbers = phoneNumbers;
-
-    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.updateInvoiceContact(objInvoice).subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toaster.success('Saved Successfully.');
+        this.appStateService.changeDetectorRef();
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
         this.toaster.error('Bad Request');
+        this.appStateService.changeDetectorRef();
       }
     );
   }

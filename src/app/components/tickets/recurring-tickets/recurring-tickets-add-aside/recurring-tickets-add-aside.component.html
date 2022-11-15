@@ -9,10 +9,6 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
-
     <div class="qt-aside-modern__content recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
             <p>Service Description</p>
@@ -27,26 +23,21 @@
                 ></textarea>
             </div>
         </div>
-
-
-
-
-        <div class="col-md-12">
-            <mat-error *ngIf="!validate.getCompany()">Company name is required</mat-error>
-            <p>Assign to Company</p>
-            <app-select-client-company
-                [blockEditMode]="true"
-                [valid]="validate.getCompany()"
-                style="width: 75%;"
-                class="light-dropdown"
-                [filter]="true"
-                (selectedItem)="selectClient($event)"
-            ></app-select-client-company>
+        <div class="qt-w100 qt-pl-15 qt-pr-15 qt-mt-20 recuring-assign-company">
+            <company-drop-down
+                [class]="['light-dropdown']"
+                [title]="'Assign to Company'"
+                [placeholder]="'Select Company'"
+                [editItem]="selectedClient"
+                [field]="'name'"
+                [search]="true"
+                [change]="true"
+                [validate]="validate.getCompany()"
+                [errorMessage]="'Company name is required'"
+                (onSelectedItem)="selectClient($event)"
+                heightInput="auto"
+            ></company-drop-down>
         </div>
-
-
-
-
         <div class="col-md-4">
             <p>Device Name</p>
             <app-devices-recurring-tickets
@@ -75,10 +66,6 @@
             ></app-interval>
         </div>
         <div class="col-md-12 ticket-tabs">
-
-
-
-
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
                 class="ticket-tabs-service d-f ai-c"
@@ -88,15 +75,7 @@
                 <i class="icn-20 tab-service"></i>
                 Service
             </div>
-
-
-
-
             <!-- ---------------------------------------------------------------- -->
-
-
-
-
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
                 class="ticket-tabs-product d-f ai-c"
@@ -107,15 +86,7 @@
                 Products
             </div>
             <!-- ---------------------------------------------------------------- -->
-
-
-
-
         </div>
-
-
-
-
         <!-- IF TAB IS 'PRODUCT'----------------------------------------------- -->
         <div
             class="col-md-12 product-tab-content p-0"
@@ -161,7 +132,7 @@
                             (selectedProductItem)="selectProduct($event,i)"
                         ></app-product-list>
                         <i
-                            class="icn-delete"
+                            class="icon__remove icn-16"
                             *ngIf="products.length > 1"
                             (click)="removeProduct(i)"
                         ></i>
@@ -221,10 +192,6 @@
             +Add Product
         </div>
         <!-- ------------------------------------------------------------------ -->
-
-
-
-
         <!-- IF TAB IS 'SERVICE'----------------------------------------------- -->
         <div
             class="col-md-12 service-tab-content p-0"
@@ -278,7 +245,7 @@
                             [editItem]="service.duration"
                         ></app-duration>
                         <i
-                            class="icn-delete"
+                            class="icon__remove icn-16"
                             *ngIf="services.length > 1"
                             (click)="removeService(i)"
                         ></i>
@@ -297,10 +264,6 @@
                         <!-- <input type="text" [(ngModel)]="service.description" placeholder="Write Description"> -->
                     </div>
                 </div>
-
-
-
-
             </ng-template>
         </div>
         <div
@@ -311,52 +274,40 @@
             +Add Service
         </div>
         <!-- ------------------------------------------------------------------ -->
-
-
-
-
         <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
-
-
-
-
         <div class="col-md-12 checkbox-wrapper">
             <div class="with-checkbox">
-                <label class="checkbox-container">
+                <label class="qt-checkbox pointer">
                     <input
                         id="requireUpdate-add"
                         type="checkbox"
                     >
-                    <span class="checkbox-mark"></span>
+                    <span></span>
+                    <div class="qt-ml-8">Require update Notes</div>
                 </label>
-                <p>Require update Notes</p>
             </div>
             <div class="with-checkbox">
-                <label class="checkbox-container">
+                <label class="qt-checkbox pointer">
                     <input
                         id="quickClose-add"
                         type="checkbox"
                     >
-                    <span class="checkbox-mark"></span>
+                    <span></span>
+                    <div class="qt-ml-8">Quick Close</div>
                 </label>
-                <p>Quick Close</p>
             </div>
             <div class="with-checkbox">
-                <label class="checkbox-container">
+                <label class="qt-checkbox pointer">
                     <input
                         id="createTask-add"
                         type="checkbox"
                     >
-                    <span class="checkbox-mark"></span>
+                    <span></span>
+                    <div class="qt-ml-8">Create Task for user</div>
                 </label>
-                <p>Create Task for user</p>
             </div>
         </div>
     </div>
-
-
-
-
     <div class="qt-aside-modern__footer">
         <div class="col-md-12 recurring-tickets-content__modal--content-footer">
             <div class="d-f">
@@ -380,15 +331,15 @@
                 </button>
             </div>
             <div class="save-template">
-                <app-teh-users
-                    [users]="listTehUsers"
-                    (usersChange)="onChangeTehUsers($event)"
-                ></app-teh-users>
+                <app-tech-users
+                    [users]="listTechUsers"
+                    (usersChange)="onChangeTechUsers($event)"
+                ></app-tech-users>
                 <div class="assigned-users-list">
                     <ng-template
                         ngFor
                         let-user
-                        [ngForOf]="tehUsers"
+                        [ngForOf]="techUsers"
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >

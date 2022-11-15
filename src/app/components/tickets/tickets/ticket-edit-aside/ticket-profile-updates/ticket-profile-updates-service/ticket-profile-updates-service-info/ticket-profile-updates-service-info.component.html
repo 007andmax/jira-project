@@ -40,14 +40,14 @@
                     [type]="'ICON'"
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>
-                <app-teh-users
+                <app-tech-users
                     [type]="'TICEKTS'"
                     [editMode]="true"
                     [selectedMode]="'SINGLE'"
                     [editUsers]="userService"
-                    [users]="listTehUsers"
+                    [users]="listTechUsers"
                     (usersChange)="onChangeUser($event)"
-                ></app-teh-users>
+                ></app-tech-users>
             </div>
             <div class="ticket-updates__service-subinfo">
                 <pre [textContent]="service.description">
@@ -85,7 +85,7 @@
                     (click)="edit()"
                     *ngIf="!isIOSDevice()"
                 >
-                    <i class="icn-16 edit-grey-ng2"></i>
+                    <i class="icn-16 icon__edit"></i>
                     Edit
                 </li>
                 <li
@@ -93,7 +93,7 @@
                     (touchstart)="edit()"
                     *ngIf="isIOSDevice()"
                 >
-                    <i class="icn-16 edit-grey-ng2"></i>
+                    <i class="icn-16 icon__edit"></i>
                     Edit
                 </li>
                 <li
@@ -101,7 +101,7 @@
                     (click)="removeService()"
                     *ngIf="!isIOSDevice()"
                 >
-                    <i class="icn-16 archive-grey-ng2"></i>
+                    <i class="icn-16 icon__archive"></i>
                     Delete
                 </li>
                 <li
@@ -109,7 +109,7 @@
                     (touchstart)="removeService()"
                     *ngIf="isIOSDevice()"
                 >
-                    <i class="icn-16 archive-grey-ng2"></i>
+                    <i class="icn-16 icon__archive"></i>
                     Delete
                 </li>
             </ul>

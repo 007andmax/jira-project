@@ -22,6 +22,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   realSessionId: string;
   lastCompanyId: string;
   isOpenDropDown: boolean = false;
+  showPreloader: boolean = true;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.onGetDevices();
@@ -84,16 +85,21 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   }
   onGetDevices() {
     if (this.companyId && this.lastCompanyId !== this.companyId) {
+      this.showPreloader = true;
       this.lastCompanyId = this.companyId;
     } else {
       return;
     }
-    let devices = (this.devicesStateService.getAllDevices()) ? this.devicesStateService.getAllDevices()[this.companyId] : [];
-
-    if (devices) devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
-      1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
-    this.devices = (devices) ? devices : [];
-    this.reqDevices = (devices) ? devices : [];
+    this.devicesService.getCompanyDevices(this.companyId).subscribe((data: any) => {
+      if (data) {
+        let devices = (data) ? data[this.companyId] : [];
+        if (devices) devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+          1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
+        this.devices = (devices) ? devices : [];
+        this.reqDevices = (devices) ? devices : [];
+        this.showPreloader = false;
+      }
+    });
   }
   onSearch(event) {
     if (event.target.value === "") {
@@ -103,7 +109,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value.toLowerCase()));
   }
   remoteAccess(connectionType, device) {
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = device;
     modalRef.componentInstance.companyId = this.companyId;

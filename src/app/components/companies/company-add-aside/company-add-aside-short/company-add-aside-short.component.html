@@ -1,152 +1,164 @@
-<div class="qt-aside-modern__content --less-padding new-companies-content__modal--content">
-    <div class="col-md-12 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="validate.getNameIsExist()"
-        >
-            This company name already occupied
-        </mat-error>
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getName()"
-        >
-            Company name is required
-        </mat-error>
-        <p>Company Name</p>
-        <input
+<div class="qt-aside-modern__content new-companies-content__modal--content">
+    <div class="qt-inputs-row --required">
+        <div class="qt-input-block">
+          <div class="qt-input-block__label">Company Name</div>
+          <input
             [ngClass]="{'--input-error' : validate.getNameIsExist() || !validate.getName()}"
             type="text"
             [(ngModel)]="company.name"
             placeholder="Write Company or Search Company"
             (blur)="onChangeName()"
-        >
+          >
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="validate.getNameIsExist()"
+          >
+            This company name already occupied
+          </mat-error>
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getName()"
+          >
+            Company name is required
+          </mat-error>
+        </div>
     </div>
-    <div class="col-md-6">
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
         <app-drop-down
-            [class]="['qt-select-input-40']"
-            [placeholder]="'Select Company Type'"
-            [field]="'title'"
-            [list]="companyTypes"
-            [search]="true"
-            [change]="true"
-            [validate]="validate.getType()"
-            [errorMessage]="'Client Type is required'"
-            [title]="'Company Type'"
-            (onSelectedItem)="onSelectCompanyTypes($event)"
+          [class]="['qt-select-input-40']"
+          [placeholder]="'Select Company Type'"
+          [field]="'title'"
+          [list]="companyTypes"
+          [search]="true"
+          [change]="true"
+          [validate]="validate.getType()"
+          [errorMessage]="'Client Type is required'"
+          [title]="'Company Type'"
+          (onSelectedItem)="onSelectCompanyTypes($event)"
         >
         </app-drop-down>
-    </div>
-    <div class="col-md-6 primary-number">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getPhoneNumber()"
-        >
-            Phone number is required
-        </mat-error>
-        <p>Phone Number</p>
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block__label">Phone Number</div>
         <input
-            type="text"
-            *ngIf="company.addresses[0].phoneNumbers.length > 0"
-            [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
-            [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
-            placeholder="Enter Phone Number"
-            (input)="onChangePhoneNumber()"
-            prefix="+1"
-            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-            [dropSpecialCharacters]="false"
+          type="text"
+          *ngIf="company.addresses[0].phoneNumbers.length > 0"
+          [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+          [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+          placeholder="Enter Phone Number"
+          (input)="onChangePhoneNumber()"
+          prefix="+1"
+          mask="(000) 000-0000 Ext: 999999||000-000-0000"
+          [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+          [dropSpecialCharacters]="false"
         >
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="!validate.getPhoneNumber()"
+        >
+          Phone number is required
+        </mat-error>
+      </div>
     </div>
-    <div class="col-md-12 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getDomain()"
-        >
-            Please enter a valid domain
-        </mat-error>
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="validate.getDomainIsExist()"
-        >
-            This company domain already occupied
-        </mat-error>
-        <p>Domain Name</p>
-        <input
+    <div class="qt-inputs-row --required">
+        <div class="qt-input-block">
+          <div class="qt-input-block__label">Domain Name</div>
+          <input
             type="text"
             [ngClass]="{'--input-error' : !validate.getDomain() || validate.getDomainIsExist()}"
             (blur)="onChangeDomain()"
             [(ngModel)]="company.domain"
             placeholder="example.com"
-        >
-    </div>
-    <div class="col-md-6 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getFirstName()"
-        >
-            First name is required
-        </mat-error>
-        <p>First Name</p>
-        <input
-            type="text"
-            [ngClass]="{'--input-error' : !validate.getFirstName()}"
-            [(ngModel)]="company.contacts[0].firstName"
-            (input)="onChangeFirstName()"
-            placeholder="Enter First Name"
-        >
-    </div>
-    <div class="col-md-6">
-        <p>Last Name</p>
-        <input
-            type="text"
-            [(ngModel)]="company.contacts[0].lastName"
-            placeholder="Enter Last Name"
-        >
-    </div>
-    <div class="col-md-6 --required">
-        <p>Primary Number</p>
-        <input
-            type="text"
-            [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-            placeholder="Enter Primary Phone"
-            prefix="+1"
-            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-            [dropSpecialCharacters]="false"
-        >
-    </div>
-    <div class="col-md-6 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getPrimaryContactEmail()"
-        >
-            Please enter a valid email address
-        </mat-error>
-        <p>Primary Contact Email</p>
-        <input
-            type="text"
-            [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
-            [(ngModel)]="company.contacts[0].primaryEmail"
-            (input)="onChangePrimaryEmail()"
-            placeholder="Primary Email Address"
-        >
-    </div>
-    <div class="col-md-12">
-        <div class="switch-link qt-mb-8">
-            Would you like to Create Company in Advance mode?
+          >
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getDomain()"
+          >
+            Please enter a valid domain
+          </mat-error>
+          <mat-error
+            class="invalid-feedback"
+            *ngIf="validate.getDomainIsExist()"
+          >
+            This company domain already occupied
+          </mat-error>
         </div>
-        <div class="info-section">
+    </div>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block__label">First Name</div>
+        <input
+          type="text"
+          [ngClass]="{'--input-error' : !validate.getFirstName()}"
+          [(ngModel)]="company.contacts[0].firstName"
+          (input)="onChangeFirstName()"
+          placeholder="Enter First Name"
+        >
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="!validate.getFirstName()"
+        >
+          First name is required
+        </mat-error>
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100">
+        <div class="qt-input-block__label">Last Name</div>
+        <input
+          type="text"
+          [(ngModel)]="company.contacts[0].lastName"
+          placeholder="Enter Last Name"
+        >
+      </div>
+    </div>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block__label">Primary Number</div>
+        <input
+          type="text"
+          [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+          placeholder="Enter Primary Phone"
+          prefix="+1"
+          mask="(000) 000-0000 Ext: 999999||000-000-0000"
+          [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+          [dropSpecialCharacters]="false"
+        >
+      </div>
+      <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
+        <div class="qt-input-block__label">Primary Contact Email</div>
+        <input
+          type="text"
+          [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
+          [(ngModel)]="company.contacts[0].primaryEmail"
+          (input)="onChangePrimaryEmail()"
+          placeholder="Primary Email Address"
+        >
+        <mat-error
+          class="invalid-feedback"
+          *ngIf="!validate.getPrimaryContactEmail()"
+        >
+          Please enter a valid email address
+        </mat-error>
+      </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="">
+          <div class="switch-link qt-mb-8">
+            Would you like to Create Company in Advance mode?
+          </div>
+          <div class="info-section">
             <div class="icon__tips qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
             <span class="text">
                 Advance Company mode will provide user to add more detail like Settings, Primary
         Contact detail etc…
             </span>
-        </div>
-        <button
+          </div>
+          <button
             class="btn-new btn-primary-white qt-fs-0 qt-mt-16"
             (click)="initFullVersion()"
-        >
+          >
             + Create Company in Advance Mode
-        </button>
+          </button>
+        </div>
     </div>
 </div>

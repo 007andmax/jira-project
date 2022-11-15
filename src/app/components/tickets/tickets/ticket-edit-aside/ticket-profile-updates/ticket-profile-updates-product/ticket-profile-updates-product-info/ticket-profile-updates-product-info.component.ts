@@ -25,7 +25,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
-  listTehUsers = [];
+  listTechUsers = [];
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
@@ -38,7 +38,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   ngOnInit() {
     if (!this.product.date) this.product.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
-    this.listTehUsers = this.getUsersForAssign();
+    this.listTechUsers = this.getUsersForAssign();
     if (this.product.date) this.setDateWithTimeOffset();
   }
   public getTotal(price, quantity) {
@@ -103,7 +103,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.ticketStateService.setProductForRemove(this.product);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
 
   }

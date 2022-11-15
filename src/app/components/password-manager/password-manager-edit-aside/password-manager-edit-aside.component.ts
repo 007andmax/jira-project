@@ -16,7 +16,9 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Password manager edit aside component
@@ -30,11 +32,15 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
 export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedClient: any;
   public opened: boolean = false;
+  showSecretCode: boolean = false;
+  isEditSecretKey: boolean = false;
+  isGetSecretCode: boolean = false;
+  showPassword: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
-  companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
-  showPassword: boolean = false;
+  timeCount: number = 0;
+  intervalContainer: any;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
@@ -63,15 +69,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private usersStateService: UsersStateService,
     private elRef: ElementRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
    * Initializes Password manager edit aside. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
+    if (this.companiesState.isInitLightAllCompanies && this.editItem) this.selectedClient = this.companiesState.getLightCompanies().find(item => item.id === this.editItem.companyId);
+    let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
+      if (this.editItem) this.selectedClient = data.find(item => item.id === this.editItem.companyId);
     })
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
@@ -80,6 +88,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.usersList = [];
       this.devicesList = [];
       this.gadgetsList = [];
+      if (!this.editItem.otpEnable) this.isEditSecretKey = true;
       this.editItem.links.forEach(item => {
         if (item.userId) {
           this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
@@ -95,7 +104,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         }
       })
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
+      if (!this.companiesState.isInitLightAllCompanies) this.companiesState.onInitGetLightCompanies();
       this.opened = true;
+      this.showSecretCode = false;
+      this.isEditSecretKey = false;
+      this.isGetSecretCode = false;
+      this.showPassword = false;
+      if (this.intervalContainer) clearInterval(this.intervalContainer);
     });
     this.sub.add(onEditForm);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -112,6 +127,58 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
+    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_RECORD_UPDATED' && this.editItem && newChange.data.id === this.editItem.id) this.editItem.updateHistories(newChange.data.histories);
+      if (!this.cd['destroyed']) this.cd.detectChanges();
+    })
+    this.sub.add(onChangeRealTime);
+  }
+  toggleSecretCode() {
+    this.showSecretCode = !this.showSecretCode;
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
+    if (!this.showSecretCode) this.isGetSecretCode = false;
+    if (this.showSecretCode && this.editItem.otpEnable) this.getCodeRecords();
+  }
+  onChangeAuthenticationKey(event) {
+    this.editItem.authenticationKey = event.target.value.toUpperCase();
+    this.validate.resetAuthenticationKeyLen();
+    this.validate.resetAuthenticationKeyBase32();
+    this.editItem.setResetAuthenticationKey(false)
+  }
+  clearSecretKey() {
+    this.editItem.setAuthenticationKey("");
+    this.editItem.setResetAuthenticationKey(true);
+    this.isEditSecretKey = false;
+  }
+  getCodeRecords() {
+    this.timeCount = 0;
+    this.passwordManagerService.getCodeRecords(this.editItem.id).subscribe((data: any) => {
+      this.editItem.setOtp(data.otp);
+      this.editItem.setExpirationDate(data.expirationDate);
+      this.isGetSecretCode = true;
+      let timeout = (this.editItem.expirationDate - new Date().getTime()) / 1000;
+      if (timeout > 0) {
+        this.timeCount = Math.ceil(timeout);
+        this.intervalContainer = setInterval(() => {
+          this.timeCount = (this.timeCount - 1);
+          if (this.timeCount < 0) {
+            clearInterval(this.intervalContainer);
+            this.getCodeRecords();
+          }
+          this.cd.detectChanges();
+        }, 1000);
+      }
+    })
+  }
+  getCodeProgress() {
+    return (this.timeCount / 30) * 100;
+  }
+  editSecretCode() {
+    this.isEditSecretKey = !this.isEditSecretKey;
+    this.editItem.setAuthenticationKey("");
+  }
+  getTimeProgress() {
+    return `${(this.timeCount >= 10) ? this.timeCount : '0' + this.timeCount}`
   }
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
@@ -122,10 +189,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   public onPastDescription(value) {
     this.editItem.description = value;
-  }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   selectCompany(data) {
     this.selectedClient = data;
@@ -164,6 +227,23 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       //  UserNotificationService.show('Copy failed', true);
     }
     document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
+  }
+  copySecretCode() {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = this.editItem.otp;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   public save() {
     this.selectedUserAndDevices = [...this.usersList, ...this.devicesList, ...this.gadgetsList];
@@ -198,13 +278,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.devicesList = [];
     this.usersList = [];
     this.gadgetsList = [];
+    this.showSecretCode = false;
+    this.isEditSecretKey = false;
+    if (this.intervalContainer) clearInterval(this.intervalContainer);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
   deleteRecord() {
     this.confirmStateService.setConfirmAction(REMOVE_RECORD);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }

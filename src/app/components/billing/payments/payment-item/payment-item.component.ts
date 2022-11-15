@@ -34,7 +34,7 @@ export class PaymentItemComponent implements OnInit {
 
   }
   public getDate() {
-    return moment(this.payment.createdAt).format('YYYY/MM/DD');
+    return moment(this.payment.createdAt).format('DD MMM YYYY');
   }
   showEditPayment() {
     this.onEditPayment.emit(this.payment);
@@ -61,7 +61,7 @@ export class PaymentItemComponent implements OnInit {
 
   deletePayment() {
     this.confirmStateService.setConfirmAction(DELETE_PAYMENT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the payment?`;
     this.paymentsStateService.setPaymentForemove(this.payment);
   }

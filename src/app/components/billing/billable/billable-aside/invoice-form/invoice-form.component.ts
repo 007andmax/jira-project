@@ -20,9 +20,10 @@ import { NoteService } from 'src/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 
 @Component({
   selector: 'app-invoice-form',
@@ -73,11 +74,23 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         this.company.name = data.data.name;
         this.company.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
         this.company.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.company.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
+        // this.company.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
         this.company.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+        if (data.data.companyInfo.addresses.length == 1) {
+          this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses[0]);
+        }
+        if (data.data.companyInfo.addresses.length == 2) {
+          this.company.addresses[0] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.id == this.company.addresses[0].id));
+          this.company.addresses[1] = new CompanyProfileAddress(data.data.companyInfo.addresses.find(item => item.id == this.company.addresses[1].id));
+        }
+        this.cd.detectChanges();
       }
     })
     this.sub.add(getChangeCompanies);
+  }
+  selectAddress(index, newAddress) {
+    this.company.addresses[index] = new CompanyProfileAddress(newAddress);
+
   }
   onDeleteDiscount(data) {
     this.toggleDiscount = false;
@@ -209,7 +222,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   delete(i) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to remove the ticket?`;
     this.billableStateService.setLockedTicketForRemove(this.invoice.lockedTickets[i]);
   }

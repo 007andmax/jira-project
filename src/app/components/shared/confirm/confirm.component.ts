@@ -23,7 +23,7 @@ export class ConfirmComponent implements OnInit {
   }
   closeModal() {
     this.activeModal.close();
-    this.confirmStateService.setConfirm(false);
+    this.confirmStateService.setConfirm(null);
 
     /*  if (closeFn) closeFn();
       $uibModalInstance.dismiss();*/
@@ -48,7 +48,14 @@ export class ConfirmComponent implements OnInit {
     return this.action !== 'ARCHIVE_USER'
       && this.action !== 'ARCHIVE_COMPANY'
       && this.action !== 'DEARCHIVE_COMPANY'
-      && !this.isSettingsPage()
+      && this.action !== 'DELETE_MANAGE_TAG'
+      && this.action !== 'CHANGE_COMMISSION_PRODUCT'
+      && this.action !== 'CHANGE_COMMISSION_SERVICE'
+      && !this.isSignaturePage()
+      && !this.isSettingsPage();
+  }
+  public isSignaturePage() {
+    return this.action === 'DELETE_SIGNATURE';
   }
   public isSettingsPage() {
     return this.action === 'DELETE_GL_NUMBER' ||
@@ -67,7 +74,10 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_CATEGORY_PRODUCT' ||
       this.action === 'DELETE_SUBSCRIPTION_TYPE' ||
       this.action === 'DELETE_SUBSCRIPTION_TYPIES' ||
-      this.action === 'DELETE_SUBSCRIPTION_USER'
+      this.action === 'DELETE_SUBSCRIPTION_USER' ||
+      this.action === 'CLOSE_SESSION'
+
+
   }
 
 }

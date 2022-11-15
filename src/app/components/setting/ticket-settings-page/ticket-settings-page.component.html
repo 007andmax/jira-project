@@ -1,48 +1,60 @@
 <!-- Middle Wrapper -->
 <div class="page-container ticket-settings-page-container">
     <div class="page-insider invoice-ticket">
-        <div
-            class="heading"
-            [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus'}"
-        >
-            <h6 class="qt-fw-600 qt-color-dark">Ticket Settings</h6>
-            <div
-                class="heading-serach add-category-container"
-                [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
-            >
-                <div
-                    class="tickets-status-header-buttons"
-                    *ngIf="getSelectedCount() > 0"
-                >
-                    <div [textContent]="getSelectedCount() + ' Status Selected'"></div>
-                    <div
-                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
-                        (click)="removeTicketsStatus()"
-                    >
-                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-                        <div>Delete</div>
-                    </div>
-                </div>
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
+            <h6 class="qt-fw-600">Ticket Settings</h6>
+            <div class="qt-df">
                 <a
                     href="javascript:;"
-                    class="btn-outline"
-                    (click)="create()"
+                    class="qt-button qt-ml-24 --md"
+                    (click)="onSubmit()"
+                    *ngIf="activeTab !== 'cannedResponses' && activeTab !== 'ticketStatus'"
                 >
-                   Add Status
+                    Save Changes
                 </a>
+                <div
+                    class="qt-df"
+                    [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
+                >
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray button-gl-number__delete qt-ml-12"
+                        *ngIf="getSelectedCount() > 0"
+                    >
+                        <div
+                            class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c"
+                            (click)="removeTicketsStatus()"
+                        >
+                        </div>
+                    </a>
+                    <a
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                        *ngIf="activeTab === 'ticketStatus'"
+                        href="javascript:;"
+                        (click)="create()"
+                    >
+                        <span class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        Add Status
+                    </a>
+                    <a
+                        *ngIf="activeTab === 'cannedResponses' && getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
+                        (click)="createResponse()"
+                    >
+                        <span _class="icon__add-grey qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                        Create Response
+                    </a>
+                </div>
             </div>
         </div>
-        <ngb-tabset
-            (tabChange)="setTab($event)"
-            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus'}"
-        >
-            <!-- Ticket Settings -->
+        <ngb-tabset (tabChange)="setTab($event)">
             <ngb-tab
                 title="Ticket Settings"
                 id="ticketSettings"
             >
                 <ng-template ngbTabContent>
-                    <app-ticket-settings></app-ticket-settings>
+                    <app-ticket-settings #ticketSettings></app-ticket-settings>
                 </ng-template>
             </ngb-tab>
             <ngb-tab
@@ -51,6 +63,14 @@
             >
                 <ng-template ngbTabContent>
                     <tickets-status #ticketsStatus></tickets-status>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Canned Responses"
+                id="cannedResponses"
+            >
+                <ng-template ngbTabContent>
+                    <canned-responses #cannedResponses></canned-responses>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

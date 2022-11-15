@@ -1,104 +1,25 @@
 @import './src/assets/styles/variable';
-.contract{
-    hr{
-        border-bottom: 1px solid $gray-200;
-        margin: 20px 0 20px 0;
-        padding: 0;
-        border-top: 0;
-    }
-    table{
-        -ms-box-sizing: border-box;
-        -o-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        &:first-child{
-            margin-bottom: 18px;
-            border-bottom: 1px solid $gray-200;
-            td{
-                padding: 0 15px 12px 0
-            }
-        }
-    }
-    td{
-        padding: 0 15px 0 0;
-        border-bottom: 0;
-        vertical-align: middle;
-        -ms-box-sizing: border-box;
-        -o-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        &:last-child{
-            padding-right: 0;
-        }
-        strong{
-            font-size: 12px;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.33;
-            letter-spacing: normal;
-            color: $primary-2;
-            font-weight: 600;
-        }
-        .body-m {
-          color: $gray-800;
-          margin: 6px 0;
-          max-width: 420px;
-          font-weight: 600;
-          text-transform: none;
 
-          &.headings {
-            margin-bottom: 4px;
-            margin-top:0;
-            position: relative;
-            max-width: initial;
-            font-weight: 600;
-            color: $primary-2;
-            &::before{
-              position: absolute;
-              left: -20px;
-              height: 6px;
-              width: 6px;
-              background-color: $primary-1;
-              border-radius: 50%;
-              content: "";
-              top: 7px;
-            }
-          }
-        }
-        p{
-            margin-bottom: 20px;
-            max-width: 420px;
-            font-size: 13px;
-            font-weight: normal;
-            font-style: normal;
-            line-height: 1.54;
-            letter-spacing: normal;
-            color: $gray-800;
-            &:last-child{
-                margin-bottom: 0;
-            }
-        }
-    }
-    .p-name{
-        width: 478px;
-    }
-    .rate{
-        width: 100px;
-    }
-    .action{
-        width: 70px;
-        position: relative;
-    }
+.commissions-contract-table {
+  &__product-name {
+    flex: 1 1 375px;
+    padding: 0 8px;
+  }
+  &__rate {
+    flex: 1 1 110px;
+    padding: 0 8px;
+  }
+  &__action {
+    flex: 0 0 56px;
+  }
 }
-
-.margin-bottom{
-    margin: 0px 0px 10px 0px !important;
+/deep/ .block-time-contract, /deep/ .per-user-device-contract{
+  ngb-tooltip-window .tooltip-inner {
+    max-width: 400px !important;
+  }
 }
-
-.contract .action .modal-content.toggle-area {
-    top: 35px;
-    right: 15px;
-    a.btn.btn-secondary{margin-left: 0;}
+/deep/ .other-contracts {
+  ngb-tooltip-window .tooltip-inner {
+    max-width: 450px !important;
+  }
 }

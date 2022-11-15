@@ -1,0 +1,101 @@
+<div
+    *ngIf="opened"
+    class="qt-aside-modern qt-aside-modern--page-settings --sm"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-info d-f ai-c">
+            <div
+                class="qt-aside__title"
+                [textContent]="noteTemplate.getEditMode() ? 'Edit Response' : 'Add Response'"
+            ></div>
+        </div>
+        <div>
+          <div
+            class="qt-aside__restore-modal">
+            <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
+          </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="qt-input-block qt-input-line">
+            <label
+                for="add-ticket-subject"
+                class="qt-input-block__label"
+            >
+                Response Title
+            </label>
+            <input
+                id="add-ticket-subject"
+                class="qt-input-block__input"
+                [ngClass]="{'--input-error' : !noteTemplateValidate.getTitle() || noteTemplateValidate.getTitleIsExist()}"
+                [(ngModel)]="noteTemplate.title"
+                (input)="checkTitle()"
+                type="text"
+                maxlength="250"
+                placeholder="Write Ticket subject"
+            >
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="!noteTemplateValidate.getTitle()"
+            >
+              Title is required field
+            </mat-error>
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="noteTemplateValidate.getTitleIsExist()"
+            >
+              Title value must be unique
+            </mat-error>
+        </div>
+        <div class="qt-input-block qt-w100 editor-container qt-mt-0">
+            <label
+                for="add-ticket-subject"
+                class="qt-input-block__label"
+            >
+              Template Description
+            </label>
+            <angular-editor
+                [(ngModel)]="noteTemplate.note"
+                [ngClass]="{'--note-error' : !noteTemplateValidate.getNote()}"
+                [config]="editorConfig"
+                (input)="noteTemplateValidate.resetNote()"
+            ></angular-editor>
+            <mat-error
+              class="invalid-feedback --pos-static"
+              *ngIf="!noteTemplateValidate.getNote()"
+            >
+              Description is required field
+            </mat-error>
+        </div>
+        <div class="qt-df qt-ai-c qt-mt-16">
+            <label
+                class="qt-checkbox active-note pointer"
+                for="email-payment"
+            >
+                <input
+                    id="email-payment"
+                    type="checkbox"
+                    [(ngModel)]="noteTemplate.active"
+                >
+                <span></span>
+              <div class="qt-fs-13 qt-ml-8 qt-color-gray-700">Mark as Active</div>
+            </label>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
+              class="qt-button qt-jc-c qt-w100"
+              (click)="noteTemplate.getEditMode() ? save() : add()"
+            >
+              Save
+            </button>
+        </div>
+    </div>
+</div>

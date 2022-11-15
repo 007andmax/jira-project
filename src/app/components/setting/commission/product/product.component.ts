@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommissionService, ICategory } from '../commission.service';
 import { ToastrService } from 'ngx-toastr';
-import { DELETE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
+import { CHANGE_COMMISSION_PRODUCT, DELETE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { ProductsCategoryFilter } from '../../products-settings/class/products-category-filter';
 
 @Component({
   selector: 'app-product',
@@ -13,11 +14,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit, OnDestroy {
-  loading = false;
+  filter: ProductsCategoryFilter = new ProductsCategoryFilter();
+  loading = true;
   categories: any;
   edit = false;
   selectedIdx = -1;
-  public confirmPopup = false;
   rate: any;
   id: string;
   category: any;
@@ -34,9 +35,17 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCategories();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
+      if (data != null) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_PRODUCT) {
-          this.removeProduct()
+          if (data) this.removeProduct()
+        }
+        if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_PRODUCT) {
+          if (data) {
+            this.factItem = true; this.setCategoryRate();
+          }
+          if (!data) {
+            this.factItem = false; this.setCategoryRate();
+          }
         }
       }
     })
@@ -46,16 +55,21 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+
+  onFilter(field) {
+    this.filter.onFilter(field, this.categories);
+  }
+
   /**
    * get categories
    */
   getCategories() {
-    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getCategories().subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
         if (res && res.length > 0) {
-          this.categories = res;
+          this.categories = res.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
           for (const cat of this.categories) {
             if (cat && cat.commissionRate !== null) {
               cat.commissionRate = cat.commissionRate.toFixed(2);
@@ -64,7 +78,7 @@ export class ProductComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
+        this.loading = false;
       }
     );
   }
@@ -75,19 +89,16 @@ export class ProductComponent implements OnInit, OnDestroy {
    */
   removeProduct() {
     if (this.category && this.category.commissionRate) {
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.category.id, '0', false)
         .subscribe(
           res => {
             this.toastrService.success('Removed Successfully')
             this.selectedIdx = -1;
-            this.loading = false; $(".loading").css("display", "none");
             this.category.commissionRate = null;
           },
           error => {
             this.toastrService.error('Bad Request')
-            this.loading = false; $(".loading").css("display", "none");
           }
         );
     }
@@ -120,24 +131,19 @@ export class ProductComponent implements OnInit, OnDestroy {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
             this.toastrService.success(`Commission Rate Changed Successfully`);
-            this.loading = false; $(".loading").css("display", "none");
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;
-            this.confirmPopup = false;
           },
           error => {
             this.selectedIdx = -1;
-            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.error('Bad Request');
             this.factItem = false;
-            this.confirmPopup = false;
           }
         );
     } else {
@@ -148,7 +154,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   confirmDelete(data: any) {
     this.category = data;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want ${this.category.name} commission rate to zero?`;
   }
 
@@ -157,9 +163,11 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.id = id;
     this.category = category;
     if (this.category.commissionRate === null) {
-      this.confirmPopup = true;
+      this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_PRODUCT);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+
     } else {
-      this.confirmPopup = false;
       this.factItem = false;
       this.setCategoryRate();
     }

@@ -8,20 +8,20 @@ import {
   ChangeDetectorRef
 } from "@angular/core";
 
-import { forkJoin, Observable, Subject, Subscription } from "rxjs";
-import { map } from "rxjs/operators";
+import { forkJoin, Observable, of, Subject, Subscription } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { TagsService } from "src/app/services/tags/tags.service";
-import { DataTableDirective } from "angular-datatables";
 import { ManageTagsListService } from "./services/manage-tags-list.service";
 import { TagsRealTimeService } from "src/app/states/tags/tags-real-time.service";
 import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
 import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
+import { ManageTag } from "./class/manage-tag";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -31,15 +31,13 @@ declare var $: any;
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";
-  ticketTags: any[] = [];
+  ticketTags: Array<ManageTag> = [];
   page: number = 0;
   public infiniteScrollDisabled = true;
-
-
-  companyTags: any[] = [];
-  reqcompanyTags: any[] = [];
+  companyTags: Array<ManageTag> = [];
+  reqcompanyTags: Array<ManageTag> = [];
   serviceAllTickets: Observable<any>;
-
+  showAdd: boolean = false;
   serviceCreateCustomTags: Observable<any>;
   allowCreateTags: any;
   compnayForm: FormGroup;
@@ -49,14 +47,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   selectedIdx = -1;
   setActiveTab = "company";
   private tagId: string;
-  public loading = false;
+  public loading = true;
   dtOptions: DataTables.Settings = {
     searching: false,
     paging: false,
     info: false
   };
-  @ViewChild("dataTable")
-  dtElement: DataTableDirective;
   @ViewChild("tickets") tickets: ElementRef;
   private tabSet: ViewContainerRef;
 
@@ -82,7 +78,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * init
    */
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.searchTag = "";
     this.compnayForm = this.formBuilder.group({
@@ -108,14 +104,17 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       if (data.action === "TAG_SAVED") {
         let index = this.ticketTags.findIndex(item => item.id === data.data.id);
         if (index > -1) {
-          this.ticketTags[index] = data.data;
+          this.ticketTags[index] = new ManageTag(data.data);
         } else {
-          this.ticketTags.push(data.data);
+          this.ticketTags.push(new ManageTag(data.data));
         }
       }
       if (data.action === "TAG_REMOVED") {
         let index = this.ticketTags.findIndex(item => item.id === data.data);
         if (index > -1) this.ticketTags.splice(index, 1);
+
+        let indexCompany = this.companyTags.findIndex(item => item.id === data.data);
+        if (indexCompany > -1) this.companyTags.splice(indexCompany, 1);
       }
       this.cd.detectChanges();
     })
@@ -130,13 +129,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * load all services
    */
   getAllTags() {
-    this.loading = true; $(".loading").css("display", "block");
     forkJoin([this.serviceAllTickets])
       .pipe(
         map(data => {
-          this.loading = false; $(".loading").css("display", "none");
-          this.ticketTags = data[0];
-
+          this.loading = false;
+          this.ticketTags = data[0].map(item => new ManageTag(item));
           this.setDefaultScoll();
           this.onScroll();
         })
@@ -146,7 +143,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.dtTrigger.next();
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
+          this.loading = false;
         }
       );
   }
@@ -185,35 +182,44 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       return;
     }
     this.tagsService.searchManageTag(this.page, this.searchTag).subscribe((data: any) => {
-      this.companyTags = [...this.companyTags, ...data.commonTagViews];
-      this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
+      this.companyTags = [...this.companyTags, ...data.commonTagViews].map(item => new ManageTag(item));
+      this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))].map(item => new ManageTag(item));
       this.page++;
       this.infiniteScrollDisabled = false;
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
-      this.loading = false; $(".loading").css("display", "none");
+      this.loading = false;
     })
   }
 
-  /**
-   * get all companies
-   */
-  getAllCompany() {
-    this.loading = true; $(".loading").css("display", "block");
-
+  onEditTag(item) {
+    if (item.isInitEdit) {
+      if (item.word.length === 0 || item.disableUpdate || item.isInitRequest) return;
+      item.setIsInitRequest(true);
+      this.tagsService
+        .setWordForTag(
+          item.id,
+          item.word,
+          this.setActiveTab
+        )
+        .pipe(map((res) => res),
+          catchError(error => of(undefined))).subscribe(data => {
+            item.setIsInitRequest(false);
+            item.onInitEdit(false);
+          }, err => {
+            item.setIsInitRequest(false);
+          })
+    }
   }
 
   /**
    * get all tickets
    */
   getAllTickets() {
-    this.loading = true; $(".loading").css("display", "block");
     this.serviceAllTickets.subscribe(
       res => {
-        this.loading = false; $(".loading").css("display", "none");
-        this.ticketTags = res;
+        this.ticketTags = res.map(item => new ManageTag(item));
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -228,7 +234,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
     if (data['nextId'] === 'tab1') {
-      this.loading = true; $(".loading").css("display", "block");
+      this.loading = true;
       this.setActiveTab = "company";
       this.searchTag = "";
       this.companyTags = [];
@@ -242,12 +248,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
     }
-
-    // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
-    //   this.setActiveTab = "ticket";
-    // } else {
-    //   this.setActiveTab = "company";
-    // }
   }
 
   // convenience getter for easy access to form fields
@@ -284,11 +284,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
 
 
-  ConfirmDelete(tID: string) {
+  ConfirmDelete(tID: string, name) {
     this.tagId = tID;
     this.confirmStateService.setConfirmAction(DELETE_MANAGE_TAG);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Are you sure you want to delete?`;
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = name;
 
   }
 
@@ -297,20 +297,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * @param tagId
    */
   removeCompanyTag() {
-    this.loading = true; $(".loading").css("display", "block");
     this.tagsService.removeCompanyTag(this.tagId, this.setActiveTab).subscribe(
       res => {
         this.tagId = null;
-        this.loading = false; $(".loading").css("display", "none");
-        this.toaster.success("Tag Removed Successfully");
-        /*  if (this.setActiveTab === "ticket") {
-            this.getAllTickets();
-          } else {
-            this.getAllCompany();
-          }*/
       },
       error => {
-        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -320,16 +311,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    */
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.compnayForm.invalid) {
       return;
     }
-
     this.selectedIdx = -1;
     this.create = false;
-    this.loading = true; $(".loading").css("display", "block");
-
     if (!this.edit) {
       const tags = {
         colorCode: 0,
@@ -338,7 +325,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       };
       this.tagsService.tags(tags, this.setActiveTab).subscribe(
         res => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toaster.success("Tag Saved Successfully");
           /* if (this.setActiveTab === "ticket") {
              this.getAllTickets();
@@ -350,7 +336,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.compnayForm.patchValue({ word: "" });
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
           this.toaster.error(error);
         }
       );
@@ -363,7 +348,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         )
         .subscribe(
           (res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
             this.submitted = false;
             if (res) {
               this.toaster.success("Tag Updated Successfully", null, {
@@ -377,7 +361,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
                     return;
                   }
                 });
-                // this.getAllTickets();
               } else {
                 this.companyTags.filter(company => {
                   if (company.id === res.id) {
@@ -385,14 +368,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
                     return;
                   }
                 });
-                // this.getAllCompany();
               }
             }
 
             this.compnayForm.patchValue({ word: "" });
           },
           error => {
-            this.loading = false; $(".loading").css("display", "none");
             this.toaster.error(error);
           }
         );
@@ -406,10 +387,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
-    // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
     this.sub.unsubscribe();
+    $('body').removeClass('page-settings');
+    // Do not forget to unsubscribe the event
   }
   public trackById(index, item) {
     return item.id;

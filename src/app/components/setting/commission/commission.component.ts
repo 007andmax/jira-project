@@ -11,13 +11,13 @@ export class CommissionComponent implements OnInit, OnDestroy {
   constructor(private settingStateService: SettingStateService,) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
+    $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
     this.settingStateService.setComponentName('CommissionComponent');
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+    $('body').removeClass('page-settings');
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];

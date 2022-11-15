@@ -123,8 +123,13 @@ export class QuoteService {
       &billTo=${company.companyInfo.addresses[0].id}
       &shipTo=${company.companyInfo.addresses[0].id}`,
       [quote_id]).pipe(
-        tap(data => data),
+        tap(data => {
+          this.toastrService.success("The quote has been successfully converted");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }),
         catchError(this.handleError));
+
   }
 
   /**
@@ -136,7 +141,11 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToTicket?companyId=${company.id}`,
       [quote_id]).pipe(
-        tap(data => data),
+        tap(data => {
+          this.toastrService.success("The quote has been successfully converted");
+          this.appStateService.changeDetectorRef();
+          return data;
+        }),
         catchError(this.handleError));
   }
 
@@ -173,7 +182,11 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToBillableItem?companyId=${company.id}`, [quote_id]
     ).pipe(
-      tap(data => data),
+      tap(data => {
+        this.toastrService.success("The quote has been successfully converted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }),
       catchError(this.handleError));
   }
 

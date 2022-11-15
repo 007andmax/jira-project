@@ -1,25 +1,19 @@
-<tr
-    class="add-crm-industry-container"
+<div
+    class="tab-pane__table-row --border-bottom"
     appClickOtside
     #addStatusBtn="click"
     [init]="true"
     [class]="'.add-crm-industry-container'"
     (onOutSide)="save()"
 >
-    <td *ngIf="mode !== MODE_ADD_BY_MODAL"></td>
-    <td
-        class="tax-name add-industry-name"
+    <div class="tab-pane__table-cell tab-pane__table-checkboxes" *ngIf="mode !== MODE_ADD_BY_MODAL"></div>
+    <div
+        class="tab-pane__table-cell marketing-email-table__subscription-type qt-pos-rel"
         [ngClass]="{'--input-error' : disableCreate}"
     >
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="disableCreate"
-        >
-            This industry is already occupied
-        </mat-error>
         <input
             type="text"
-            class="form-input"
+            class="form-input --editable"
             placeholder="Enter Name Category"
             [(ngModel)]="name"
             (input)="checkDublicate()"
@@ -27,17 +21,23 @@
             maxlength="30"
             required
         >
-    </td>
-    <td
+        <mat-error
+          class="qt-tooltip-error"
+          *ngIf="disableCreate"
+        >
+          This industry is already occupied
+        </mat-error>
+    </div>
+    <div
         *ngIf="mode !== MODE_ADD_BY_MODAL"
-        class="rate"
-    ></td>
-    <td
+        class="tab-pane__table-cell marketing-email-table__subscribed-users"
+    ></div>
+    <div
         *ngIf="mode !== MODE_ADD_BY_MODAL"
-        class="rate"
-    ></td>
-    <td
+        class="tab-pane__table-cell marketing-email-table__unsubscribed-users"
+    ></div>
+    <div
         *ngIf="mode !== MODE_ADD_BY_MODAL"
-        class="action"
-    ></td>
-</tr>
+        class="tab-pane__table-cell marketing-email-table__action"
+    ></div>
+</div>

@@ -1,0 +1,28 @@
+<div class="signature-modal">
+    <div class="signature-modal__header">
+        <h6 class="qt-fw-600 qt-color-dark qt-mb-24 qt-fs-18">Create Signature</h6>
+    </div>
+    <div class="signature-modal__editor">
+        <span class="qt-mb-8 qt-fs-13 qt-color-gray-500 qt-fw-500">Signature Detail</span>
+        <angular-editor
+            [(ngModel)]="messageContent"
+            [config]="editorConfig"
+        ></angular-editor>
+    </div>
+    <div class="signature-modal__footer qt-df qt-w100 qt-mt-32">
+      <a
+        href="javascript:;"
+        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+        aria-label="Close"
+        (click)="close()"
+      >
+        Cancel
+      </a>
+      <input
+        type="submit"
+        (click)="save()"
+        value="Save"
+        class="qt-button qt-jc-c qt-w100"
+      >
+    </div>
+</div>

@@ -13,12 +13,12 @@
 
   app-select-search {
     input::placeholder {
-      color: $gray-800;
+      color: $gray-800--old;
       font-size: 12px;
     }
   }
   input::placeholder {
-    color: $gray-800;
+    color: $gray-800--old;
     font-size: 12px;
   }
 }

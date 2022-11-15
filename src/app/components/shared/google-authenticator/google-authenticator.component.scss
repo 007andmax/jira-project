@@ -1,3 +1,4 @@
+@import './src/assets/styles/variable';
 .google-authenticator {
     li {
         margin: 0px !important;
@@ -7,10 +8,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 160px;
+    width: 160px;
+    margin: 24px auto 0;
     img {
-        position: absolute;
-        left: calc(50% - 100px);
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 }
 .secret-code {
@@ -21,4 +25,10 @@
 }
 .secret-code-container {
     height: 45px;
+}
+.authentication-tab__body-text strong {
+    color: $gray-900;
+}
+.quote-email-modal {
+    padding: 0px !important;
 }

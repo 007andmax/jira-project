@@ -8,7 +8,7 @@ import { CompanySetting } from '../../../companies/class/company-setting';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
 import { PaymentsService } from 'src/app/services/payments/payments.service';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-edit-payment',

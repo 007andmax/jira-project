@@ -1,5 +1,6 @@
 import { CategoryProduct } from "src/app/interfaces/product/category-product";
 import { Product } from "src/app/interfaces/product/product";
+import { GlNumber } from "src/class/gl-number/gl-number";
 
 export class CategoryProductSettings implements CategoryProduct {
     commissionRate: any;
@@ -7,11 +8,13 @@ export class CategoryProductSettings implements CategoryProduct {
     id: string;
     isDefault: boolean;
     name: string;
+    glNumber: GlNumber;
     products: Product[];
     productsAmount: number;
     isInitEdit: boolean = false;
     selected: boolean = false;
     disableUpdate: boolean = false;
+    isInitRequest: boolean = false;
     constructor(data) {
         if (data) {
             for (const key in data) {
@@ -19,6 +22,9 @@ export class CategoryProductSettings implements CategoryProduct {
             }
 
         }
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public onInitEdit(data) {
         this.isInitEdit = data;

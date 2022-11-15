@@ -1,10 +1,10 @@
 @import "./src/assets/styles/variable";
 
 .qt-aside-modern {
-  color: $gray-800;
+  color: $gray-800--old;
   background: $white;
   width: 592px;
-  border-left: 1px solid $gray-400;
+  border-left: 1px solid $gray-400--old;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   position: fixed;
   top: $header-height;
@@ -47,12 +47,16 @@
     .header-circle-icon {
       @media (max-width: 767px) {
         left: 16px;
-        width: 16px;
-        height: 16px;
         margin-right: 0;
-        background-image: url("/assets/img/icons/remove-red.svg");
-        background-color: transparent;
         border: none;
+        background: transparent;
+      }
+      .icon__remove {
+        @media (max-width: 767px) {
+          width: 20px;
+          height: 20px;
+          background-color: $red-600;
+        }
       }
     }
 
@@ -65,7 +69,7 @@
       textarea {
         @media (max-width: 767px) {
           width: 100%;
-          border: solid 1px $gray-500;
+          border: solid 1px $gray-500--old;
           margin-top: 8px;
         }
       }
@@ -122,16 +126,16 @@
 
       .icon__view,
       .icon__hide,
-      .icon__copy-gray {
+      .icon__copy {
         @media (max-width: 767px) {
-          border: 1px solid $gray-500;
+          border: 1px solid $gray-500--old;
           height: 40px;
           margin-left: 0;
           width: 40px;
           background-size: 18px;
           border-radius: 0 4px 4px 0;
           background-position: center;
-          background-color: $gray-100;
+          background-color: $gray-100--old;
         }
       }
 
@@ -142,7 +146,7 @@
         }
       }
 
-      .icon__copy-gray {
+      .icon__copy {
         @media (max-width: 767px) {
           border-radius: 0 4px 4px 0;
         }
@@ -157,7 +161,7 @@
         position: absolute;
         left: 16px;
         background-size: 20px;
-        background-image: url("/assets/img/icons/close-white.svg");
+        background-image: url("/assets/img/icons/close-light.svg");
       }
     }
   }
@@ -181,8 +185,8 @@
 
   &__header {
     height: 56px;
-    background-color: $gray-100;
-    border-bottom: 1px solid $gray-400;
+    background-color: $gray-100--old;
+    border-bottom: 1px solid $gray-400--old;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -216,8 +220,8 @@
   }
 
   &__header-close {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -231,10 +235,10 @@
   &__content {
     padding: 24px 32px;
     overflow: auto;
+    overflow-x: hidden;
     height: calc(100% - 127px);
 
     @media (max-width: 767px) {
-      height: 100%;
       padding: 16px;
       height: 100%;
     }
@@ -243,9 +247,9 @@
       height: calc(100% - 67px);
     }
 
-    &.--less-padding {
-      padding: 10px 17px;
-    }
+    //&.--less-padding { // Todo check this style
+    //  padding: 10px 17px;
+    //}
 
     &.--no-padding {
       padding: 0;
@@ -289,6 +293,13 @@
       }
     }
   }
+  &.qt-aside-modern--page-settings {
+    .qt-aside__title {
+      @media (max-width: 767px) {
+        margin: 0 8px;
+      }
+    }
+  }
 }
 
 .qt-aside {
@@ -298,14 +309,14 @@
   }
 
   &__header {
-    background-color: $gray-200;
+    background-color: $gray-200--old;
     padding: 26px 24px 26px 39px;
     display: flex;
   }
 
   &__close-modal {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background-size: contain;
     cursor: pointer;
 
@@ -324,6 +335,7 @@
     @media (max-width: 767px) {
       color: $white;
       @include body-l__sb;
+      flex-shrink: 0;
     }
   }
 

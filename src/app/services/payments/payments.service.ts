@@ -32,6 +32,9 @@ export class PaymentsService {
   public getPayments(data) {
     return this.http.post(`${this.apiUrl}payments`, data).pipe(map((res: any) => res.map(item => new Payment(item))));
   }
+  public export(type, data) {
+    return this.http.post(`${this.apiUrl}reports/payment/${type}`, data);
+  }
   public deletePayment(data) {
     return this.http.put(`${this.apiUrl}payments/delete?paymentId=${data.id}`, {}).pipe(
       tap(data => {

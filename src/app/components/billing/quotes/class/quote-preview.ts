@@ -13,6 +13,10 @@ export class QuotePreview extends Quote {
     purchaseOrder: string;
     sentAt: number;
     approvedAt: number;
+    billingAddress: string;
+    shippingAddress: string;
+    shippingLocationName: string;
+    billingLocationName: string;
     constructor(data = null) {
         super();
         if (data) {
@@ -22,7 +26,26 @@ export class QuotePreview extends Quote {
             this.products = data.products.map(item => new QuoteProduct(item));
             this.services = data.services.map(item => new QuoteService(item));
             if (data.regularNote) this.regularNote = new InvoiceNote(data.regularNote);
+            if (this.company.addresses) {
+                let billing = (this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
+                let shipping = (this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
+                this.company.addresses = [];
+                if (billing) this.company.addresses = [billing];
+                if (shipping) this.company.addresses.push(shipping);
+            }
         }
+    }
+    public setBillingAddress(data) {
+        this.billingAddress = data;
+    }
+    public setShippingAddress(data) {
+        this.shippingAddress = data;
+    }
+    public setShippingLocationName(data) {
+        this.shippingLocationName = data;
+    }
+    public setBillingLocationName(data) {
+        this.billingLocationName = data;
     }
     public getDataForUpdate(notification) {
         return {

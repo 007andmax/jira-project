@@ -19,7 +19,7 @@ export class SupportPageCategoryContent {
     public parseContent(domain) {
         var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
         let links = [];
-        let newContent = this.newContent.replace(urlRegex, function (url) {
+        let newContent = (!this.newContent) ? "" : this.newContent.replace(urlRegex, function (url) {
             var link = url.replace('\"', '').replace('/attachment', '').replace('\"', '');
             var index = link.lastIndexOf("/");
             var id = link.substring(index + 1, link.length);
