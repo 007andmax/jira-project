@@ -52,6 +52,7 @@
                             ngbTooltip="Remove"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="confirmDelete(category)"
+                            *ngIf="category.commissionRate"
                         >
                         </div>
                     </div>
