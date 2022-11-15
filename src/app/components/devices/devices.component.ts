@@ -211,7 +211,7 @@ export class DevicesComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {         
+  ngOnInit() {             
     this.companiesState.onInit();
     this.devicesStateService.onInit();
     this.getTempData();
@@ -347,7 +347,7 @@ export class DevicesComponent implements OnInit {
       this.HardwareTypeList(this.techCompnayGuid);
 
       this.assetList.forEach((element, index) => {
-        //element.online = false;
+        element.online = false;
         this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         if (element.AgentVersion != null) {
@@ -458,7 +458,7 @@ export class DevicesComponent implements OnInit {
                 }
               }              
           }
-          //asset.online = true;
+          asset.online = true;
         }
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
@@ -2042,10 +2042,10 @@ export class DevicesComponent implements OnInit {
 
   getDevices(assetList) {    
     assetList.forEach((element, index) => {
-      element.online = false;      
+      element.RemoteOnline = false;      
       let result = this.devices.find(x => x.agentId === element.Guid);
       if (result) {
-        assetList[index].online = result.online;        
+        assetList[index].RemoteOnline = result.online;        
       }
     });
   }
