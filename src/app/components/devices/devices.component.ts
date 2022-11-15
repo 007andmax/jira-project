@@ -193,6 +193,7 @@ export class DevicesComponent implements OnInit {
   deviceIPAddress:string;
   deviceMacAddress:string;
   deviceRemotePort:string;
+  deviceSuccess: number = 0;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
