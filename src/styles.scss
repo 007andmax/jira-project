@@ -4294,6 +4294,7 @@ app-ticket-edit-aside {
     top: 0;
   }
 
+  app-date-picker,
   app-tech-users {
     height: 24px;
   }
@@ -4669,6 +4670,7 @@ input.--input-error:hover {
   }
   .mat-form-field {
     background: $white;
+    border-radius: 6px;
 
     @media (max-width: 767px) {
       width: 100%;
@@ -4683,12 +4685,14 @@ input.--input-error:hover {
   }
   .mat-form-field-wrapper {
     .mat-form-field-infix {
-      border: 1px solid $gray-500--old;
-      border-radius: 4px;
-      //padding-left: 36px;
+      border: 1px solid $gray-200;
+      border-radius: 6px;
       position: relative;
       min-height: 40px;
       padding-left: 6px;
+      &:hover {
+        border: 1px solid $gray-300;
+      }
 
       input {
         font-size: 14px;

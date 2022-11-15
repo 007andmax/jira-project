@@ -1,18 +1,32 @@
-
-<div class="light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown">
-  <input class="pointer qt-input-block__input qt-dropdown-input" type="text"
-         [ngClass]="{'no-valid': isFormValid}"
-         placeholder="Service" (input)="onSearch($event)" id="dropdownServices" ngbDropdownToggle>
-  <i class="icn-sm report-caret-icon"></i>
-
-  <div class="dropdown-menu services-container" ngbDropdownMenu aria-labelledby="dropdownServices">
-    <button class="dropdown-item"
+<div
+    class="light-dropdown"
+    ngbDropdown
+    [autoClose]="'outside'"
+    #products="ngbDropdown"
+>
+    <input
+        class="pointer qt-input-block__input qt-dropdown-input"
+        type="text"
+        [ngClass]="{'no-valid': isFormValid}"
+        placeholder="Service"
+        (input)="onSearch($event)"
+        id="dropdownServices"
+        autocomplete="new-password"
+        ngbDropdownToggle
+    >
+    <i class="icn-sm report-caret-icon"></i>
+    <div
+        class="dropdown-menu services-container"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <button
+            class="dropdown-item"
             *ngFor="let item of itemList | service:searchName"
             [ngClass]="{'--selected':isSelected(item.versionedId.id)}"
             (click)="selectServicesItem(item)"
-    >
-      {{item.name}}
-    </button>
-  </div>
-
+        >
+            {{item.name}}
+        </button>
+    </div>
 </div>

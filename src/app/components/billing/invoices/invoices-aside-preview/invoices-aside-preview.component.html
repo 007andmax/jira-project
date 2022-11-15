@@ -56,7 +56,7 @@
                 ngbTooltip="Rollback"
                 container="body"
             >
-              <div class="icon__remove qt-sz-20"></div>
+                <div class="icon__remove qt-sz-20"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__restart"
@@ -102,7 +102,7 @@
                     <div class="invoice-status-timeline__line-point"></div>
                     <div
                         class="invoice-status-timeline__line-point"
-                        [ngClass]="{'not-completed-status':!invoiceProfile.readedAt}"
+                        [ngClass]="{'not-completed-status':!invoiceProfile.readAt}"
                     ></div>
                     <div
                         class="invoice-status-timeline__line-point"
@@ -136,8 +136,8 @@
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-dark ">Read on</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
-                                *ngIf="invoiceProfile.readedAt"
-                                [textContent]="getStatusDate(invoiceProfile.readedAt)"
+                                *ngIf="invoiceProfile.readAt"
+                                [textContent]="getStatusDate(invoiceProfile.readAt)"
                             ></div>
                         </div>
                     </div>

@@ -198,18 +198,15 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
     this.usersStateService.showDetailUser(user);
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
-    //  (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "3";
-
   }
   showModalAddUpdate() {
     const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update', backdrop: 'static', keyboard: false });
   }
   goToCompanyDashboard() {
-    if (!this.getPermissions('VIEW_COMPANIES') || this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts()) return;
+    if (!this.getPermissions('VIEW_COMPANIES') && this.ticketProfile.ticketSource === 'FROM_EMAIL' && !this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id).isUnknown) return;
     this.companiesStateService.setCompanyRoutingId(this.ticketProfile.company.id);
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.ticketProfile.company.id, 'dashboard']);
-
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
