@@ -3,8 +3,8 @@ import { FilterListTop } from "src/class/list/filter-list-top";
 export class ProcessesFilter {
 
   filterTop: Array<FilterListTop> = [
-    new FilterListTop("pid", "ASC"),
-    new FilterListTop("name", ""),
+    new FilterListTop("pid", ""),
+    new FilterListTop("name","ASC"),
     new FilterListTop("cpu", ""),
     new FilterListTop("ram",""),
     new FilterListTop("memory",""),
@@ -108,93 +108,93 @@ export class ProcessesFilter {
 
   public onFilterPid(service) {
     service.sort((a, b) =>
-      this.getPid(a).toLowerCase() >
-      this.getPid(b).toLowerCase()
+      this.getPid(a) >
+      this.getPid(b)
         ? 1
-        : this.getPid(b).toLowerCase() >
-          this.getPid(a).toLowerCase()
+        : this.getPid(b) >
+          this.getPid(a)
         ? -1
         : 0
     );
   }
   private getPid(service) {
-    return service.id || '';
+    return service.PID;
   }
 
   public onFilterCpu(service) {
     service.sort((a, b) =>
-      this.getCpu(a).toLowerCase() >
-      this.getCpu(b).toLowerCase()
+      this.getCpu(a) >
+      this.getCpu(b)
         ? 1
-        : this.getCpu(b).toLowerCase() >
-          this.getCpu(a).toLowerCase()
+        : this.getCpu(b) >
+          this.getCpu(a)
         ? -1
         : 0
     );
   }
   private getCpu(service) {
-    return service.id || '';
+    return service.CPU;
   }
 
   public onFilterRam(service) {
     service.sort((a, b) =>
-      this.getRam(a).toLowerCase() >
-      this.getRam(b).toLowerCase()
+      this.getRam(a) >
+      this.getRam(b)
         ? 1
-        : this.getRam(b).toLowerCase() >
-          this.getRam(a).toLowerCase()
+        : this.getRam(b) >
+          this.getRam(a)
         ? -1
         : 0
     );
   }
   private getRam(service) {
-    return service.id || '';
+    return service.MemoryMB;
   }
 
 
   public onFilterMemory(service) {
     service.sort((a, b) =>
-      this.getMemory(a).toLowerCase() >
-      this.getMemory(b).toLowerCase()
+      this.getMemory(a) >
+      this.getMemory(b)
         ? 1
-        : this.getMemory(b).toLowerCase() >
-          this.getMemory(a).toLowerCase()
+        : this.getMemory(b) >
+          this.getMemory(a)
         ? -1
         : 0
     );
   }
   private getMemory(service) {
-    return service.id || '';
+    return service.MemoryPercent;
   }
 
   public onFilterDisk(service) {
     service.sort((a, b) =>
-      this.getDisk(a).toLowerCase() >
-      this.getDisk(b).toLowerCase()
+      this.getDisk(a) >
+      this.getDisk(b)
         ? 1
-        : this.getDisk(b).toLowerCase() >
-          this.getDisk(a).toLowerCase()
+        : this.getDisk(b) >
+          this.getDisk(a)
         ? -1
         : 0
     );
   }
   private getDisk(service) {
-    return service.id || '';
+    return service.DiskMB;
   }
 
   public onFilterNetwork(service) {
     service.sort((a, b) =>
-      this.getNetwork(a).toLowerCase() >
-      this.getNetwork(b).toLowerCase()
+      this.getNetwork(a) >
+      this.getNetwork(b)
         ? 1
-        : this.getNetwork(b).toLowerCase() >
-          this.getNetwork(a).toLowerCase()
+        : this.getNetwork(b) >
+          this.getNetwork(a)
         ? -1
         : 0
     );
   }
   private getNetwork(service) {
-    return service.id || '';
+    return service.Network;
   }
 
 

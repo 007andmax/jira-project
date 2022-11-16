@@ -193,7 +193,7 @@ export class DevicesComponent implements OnInit {
   deviceIPAddress:string;
   deviceMacAddress:string;
   deviceRemotePort:string;
-  deviceSuccess: number = 0;
+  deviceSuccess: boolean;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -334,11 +334,16 @@ export class DevicesComponent implements OnInit {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {           
-      if(resp.length>0)
-      {      
-          this.getAlldevicedata(resp[0].CompanyGuid);                     
-      }      
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {                   
+      if(!this.deviceSuccess)
+      {
+        this.getTempData();
+        setTimeout(()=>{
+          this.searchDeviceTag(data);
+        },300);
+        return;        
+      }                                            
+      this.getAlldevicedata(resp[0].CompanyGuid);   
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -2037,6 +2042,7 @@ export class DevicesComponent implements OnInit {
   getTempData(){
     this.devicesStateService.getOnDevices().subscribe(data => {   
           this.tempDevices=[];
+          this.deviceSuccess = true;
           this.tempDevices.push(data);
         });
   }

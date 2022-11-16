@@ -145,7 +145,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   deviceIPAddress:string;
   deviceMacAddress:string;
   deviceRemotePort:string;
-  deviceSuccess: number = 0;
+  deviceSuccess: boolean;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -286,7 +286,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         }
         return;
       }
-      if(this.deviceSuccess == 0)
+      if(!this.deviceSuccess)
       {
         this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
         setTimeout(()=>{
@@ -1605,9 +1605,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getAlldevicedata(id) {
-    this.devicesStateService.getOnDevices().subscribe(data => {  
+    this.devicesStateService.getOnDevices().subscribe(data => { 
       this.devices = [];    
-      this.deviceSuccess = 1;
+      this.deviceSuccess = true;
       if (!data[id]) return;
       if (data[id].length) {
         data[id].forEach(item => {
