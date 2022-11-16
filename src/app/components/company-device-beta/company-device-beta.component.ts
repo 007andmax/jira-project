@@ -145,6 +145,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   deviceIPAddress:string;
   deviceMacAddress:string;
   deviceRemotePort:string;
+  deviceSuccess: boolean;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -164,11 +165,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {   
     this.showPreloader = true;
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices-beta');    
     this.companiesState.onInit();
-    this.devicesStateService.onInit();    
+    this.devicesStateService.onInit(); 
     this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
@@ -283,6 +284,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
         if (this.cd) {
           this.cd.detectChanges();
         }
+        return;
+      }
+      if(!this.deviceSuccess)
+      {
+        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+        setTimeout(()=>{
+          this.AssetDetail();
+        },300);
         return;
       }      
       this.assetList = resp;
@@ -1596,7 +1605,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getAlldevicedata(id) {
-    this.devicesStateService.getOnDevices().subscribe(data => {
+    this.devicesStateService.getOnDevices().subscribe(data => { 
+      this.devices = [];    
+      this.deviceSuccess = true;
       if (!data[id]) return;
       if (data[id].length) {
         data[id].forEach(item => {

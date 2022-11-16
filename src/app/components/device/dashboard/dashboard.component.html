@@ -115,7 +115,7 @@
                                                 [editItem]="selectManufactureNames"
                                                 [field]="'Name'"
                                                 [search]="true"
-                                                [change]="false"
+                                                [change]="true"
                                                 (onSelectedItem)="onSelectManufactureName($event)"
                                             ></app-drop-down>
                                         </span>
@@ -191,6 +191,7 @@
                                         </div>
                                     </li>
                                 </ul>
+
 
 
                                 <ul
@@ -343,6 +344,7 @@
 
 
 
+
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
@@ -397,6 +399,7 @@
                                             <span class="drive-name">
                                                 {{ network.Caption }} ({{ network.FileSystem }} on drive)
                                             </span>
+
 
 
 
@@ -708,6 +711,7 @@
 
 
 
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -795,6 +799,7 @@
                                 </a>
 
 
+
                                 <button
                                     type="button"
                                     class="btn btn-danger pull-right"
@@ -814,6 +819,7 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
 
 
 

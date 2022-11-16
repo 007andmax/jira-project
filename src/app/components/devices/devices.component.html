@@ -105,9 +105,6 @@
                         <span class="screen-Connect"></span>
                     </a>
                 </button>
-                <!-- <button class="qt-btn --outline-white qt-ml-8" (click)="getAddDevice()">
-                    <span class="d-adddevice"></span>
-                </button> -->
             </div>
             <div class="qt-page-list__header-title-line--rigth">
                 <div
@@ -226,7 +223,7 @@
                 >
                     <tbody *ngIf="!showPreloader">
                         <tr
-                            class="company-device-hover"
+                            class="company-device-hover-devices"
                             *ngFor="let asset of assetList; let i = index"
                         >
                             <td class="company-devices-table__check">
@@ -380,10 +377,7 @@
                                     class="company-devices-table__ip-windows-text"
                                     [textContent]="removeMicrosoft(asset.OperatingSystem)"
                                 ></span>
-                                <div
-                                    class="company-devices-table__system-network-buttons"
-                                    *ngIf="asset.AgentVersion == '' ? false : true"
-                                >
+                                <div class="company-devices-table__system-network-buttons">
                                     <div
                                         class="qt-df qt-ai-c qt-mr-20 qt-pointer"
                                         (click)="openAside('SYSTEM',asset)"
@@ -400,10 +394,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td
-                                class="company-devices-table__ip-address"
-                                *ngIf="asset.AgentVersion == '' ? false : true"
-                            >
+                            <td class="company-devices-table__ip-address">
                                 <span
                                     class="qt-pl-30 company-devices-table__ip-address-text"
                                     [textContent]="asset.InternalIPAddress"
@@ -792,13 +783,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar-system__info">
-                            <div class="sidebar-system__info-title">IP address</div>
-                            <div
-                                class="sidebar-system__info-text sidebarSystemInfo-text"
-                                [textContent]="assetData.InternalIPAddress"
-                            ></div>
-                        </div>
                         <div>
                             <div class="sidebar-system__info">
                                 <div class="sidebar-system__info-title">Computer Model</div>
@@ -815,6 +799,13 @@
                                     </app-drop-down>
                                 </div>
                             </div>
+                        </div>
+                        <div class="sidebar-system__info">
+                            <div class="sidebar-system__info-title">IP address</div>
+                            <div
+                                class="sidebar-system__info-text sidebarSystemInfo-text"
+                                [textContent]="assetData.InternalIPAddress"
+                            ></div>
                         </div>
                     </div>
                     <div class="qt-divider qt-mt-24 qt-mb-24"></div>
@@ -1920,6 +1911,7 @@
 
 
 
+
         <div class="remote-area">
             <ul class="list-unstyled">
                 <li>
@@ -1971,6 +1963,7 @@
         >
             <span aria-hidden="true">&times;</span>
         </button>
+
 
 
 
