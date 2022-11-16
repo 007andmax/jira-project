@@ -780,7 +780,7 @@
                             <div class="sidebar-system__info">
                                 <div class="sidebar-system__info-title">Manufacturer</div>
                                 <div class="device-table__input-name computerManufacture">
-                                    <app-select-search
+                                    <app-drop-down
                                         #dropdownManufacturersidebar
                                         [placeholder]="'Select manufacture'"
                                         [class]="['qt-dropdown']"
@@ -788,7 +788,7 @@
                                         [field]="'Name'"
                                         [list]="manufactureList"
                                         (onSelectedItem)="onSelectManufactureNamesidebar($event)"
-                                    ></app-select-search>
+                                    ></app-drop-down>
                                 </div>
                             </div>
                         </div>
@@ -803,7 +803,7 @@
                             <div class="sidebar-system__info">
                                 <div class="sidebar-system__info-title">Computer Model</div>
                                 <div class="device-table__input-name computerModel">
-                                    <app-select-search
+                                    <app-drop-down
                                         #dropdownModelSidebar
                                         [placeholder]="'Select model'"
                                         [class]="['qt-dropdown']"
@@ -812,7 +812,7 @@
                                         [list]="selectModelList"
                                         (onSelectedItem)="onSelectModelsidebar($event)"
                                     >
-                                    </app-select-search>
+                                    </app-drop-down>
                                 </div>
                             </div>
                         </div>
@@ -1147,7 +1147,7 @@
         <div class="qt-aside-modern__content">
             <div class="qt-input-block qt-input-line">
                 <label for="add-device-company">Company</label>
-                <app-select-search
+                <app-drop-down
                     id="deviceCompany"
                     #dropdowndeviceCompany
                     [placeholder]="'Select Company'"
@@ -1155,7 +1155,7 @@
                     [field]="'name'"
                     [list]="companies"
                     (onSelectedItem)="onSelectCompanyName($event)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="qt-input-block qt-input-line">
                 <label for="add-device-name">Device Name</label>
@@ -1169,7 +1169,7 @@
             </div>
             <div class="qt-input-block qt-input-line">
                 <label for="devicetype">Device Type</label>
-                <app-select-search
+                <app-drop-down
                     id="devicetype"
                     #dropdowndeviceTp
                     [placeholder]="'Select device type'"
@@ -1177,7 +1177,7 @@
                     [field]="'Name'"
                     [list]="hardwareTypes"
                     (onSelectedItem)="getDeviceName($event.ID)"
-                ></app-select-search>
+                ></app-drop-down>
             </div>
             <div class="qt-input-line">
                 <div class="qt-input-block">
@@ -1221,7 +1221,7 @@
             <div class="qt-input-line">
                 <div class="qt-input-block">
                     <label for="add-manufacture">Manufacture</label>
-                    <app-select-search
+                    <app-drop-down
                         id="manufacture"
                         #dropdownManufacturer
                         [placeholder]="'Select manufacture'"
@@ -1229,11 +1229,11 @@
                         [field]="'Name'"
                         [list]="manufactureList"
                         (onSelectedItem)="onSelectManufactureName($event)"
-                    ></app-select-search>
+                    ></app-drop-down>
                 </div>
                 <div class="qt-input-block">
                     <label for="add-model-no">Model No.</label>
-                    <app-select-search
+                    <app-drop-down
                         id="model"
                         #dropdownModel
                         [placeholder]="'Select model'"
@@ -1242,7 +1242,7 @@
                         [list]="selectModelList"
                         [isDisabled]="isDisabled"
                         (onSelectedItem)="onSelectModel($event)"
-                    ></app-select-search>
+                    ></app-drop-down>
                 </div>
             </div>
             <div
@@ -1914,6 +1914,12 @@
 
 
 
+
+
+
+
+
+
         <div class="remote-area">
             <ul class="list-unstyled">
                 <li>
@@ -1965,6 +1971,12 @@
         >
             <span aria-hidden="true">&times;</span>
         </button>
+
+
+
+
+
+
 
 
 

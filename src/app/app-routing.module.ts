@@ -359,11 +359,13 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/devices-beta',
-    component: CompanyDeviceBetaComponent,
+    loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
     path: ':company/devices',
-    component: DevicesComponent,
+    loadChildren: './components/devices/devices.module#DevicesModule',
+    canActivate: [PermissionTechUserService]
   },
   {
     path: ':company/quickSupport',
@@ -396,7 +398,8 @@ const routes: Routes = [
   },
   {
     path: ':company/devices/reports',
-    component: DevicesReportComponent,
+    loadChildren: './components/devices/devices-report/devices-report.module#DevicesReportModule',
+    canActivate: [PermissionTechUserService]
   },
 
 

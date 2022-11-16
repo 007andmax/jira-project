@@ -35,7 +35,7 @@
                                     [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
                                     [position]="'bottom'"
                                     #userCompanyTooltip
-                                    [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && !getCompany(ticketProfile.company.id).isUnknown"
+                                    [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && ticketProfile.company && !getCompany(ticketProfile.company.id).isUnknown"
                                 ></app-dynamic-tooltip>
                                 <span
                                     class="pointer"
@@ -52,7 +52,7 @@
                                     (click)="showDetailUser()"
                                 ></span>
                                 <div
-                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id).isUnknown"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && ticketProfile.company && getCompany(ticketProfile.company.id).isUnknown"
                                     ngbDropdownMenu
                                     aria-labelledby="dropdownCompany"
                                 >

@@ -26,6 +26,19 @@ import { ItemReportRoutingModule } from './item-report-routing.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ToFixedPipeModule } from 'src/app/pipe/to-fixed/to-fixed.module';
 import { PaymentsReportComponent } from '../reports/payments-report/payments-report.component';
+import { ReportDeviceSummaryModule } from '../reports/report-device-summary/report-device-summary.module';
+import { SoftwareSummaryReport1Component } from '../reports/software-summary-report1/software-summary-report1.component';
+import { ReportDeviceWarrantyComponent } from '../reports/report-device-warranty/report-device-warranty.component';
+import { ReportDeviceAntivirusComponent } from '../reports/report-device-antivirus/report-device-antivirus.component';
+import { NetworkIpReportComponent } from '../reports/network-ip-report/network-ip-report.component';
+import { NetworkDetailReportComponent } from '../reports/network-detail-report/network-detail-report.component';
+import { NetworkAdapterReportComponent } from '../reports/network-adapter-report/network-adapter-report.component';
+import { ReportDeviceDeploymentwarrantyComponent } from '../reports/report-device-deploymentwarranty/report-device-deploymentwarranty.component';
+import { ReportDeviceProcessorramComponent } from '../reports/report-device-processorram/report-device-processorram.component';
+import { ReportDeviceDiskspaceComponent } from '../reports/report-device-diskspace/report-device-diskspace.component';
+import { ApplicationbycompanyReportComponent } from '../reports/applicationbycompany-report/applicationbycompany-report.component';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { ReportSendEmailModule } from '../report-additional-actions/report-send-email/report-send-email.module';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -47,7 +60,17 @@ import { PaymentsReportComponent } from '../reports/payments-report/payments-rep
         TechServiceReportComponent,
         AccountingReportComponent,
         OverviewReportComponent,
-        PaymentsReportComponent
+        PaymentsReportComponent,
+        SoftwareSummaryReport1Component,
+        ReportDeviceWarrantyComponent,
+        ReportDeviceAntivirusComponent,
+        NetworkIpReportComponent,
+        NetworkDetailReportComponent,
+        NetworkAdapterReportComponent,
+        ReportDeviceDeploymentwarrantyComponent,
+        ReportDeviceProcessorramComponent,
+        ReportDeviceDiskspaceComponent,
+        ApplicationbycompanyReportComponent
     ],
     imports: [
         CommonModule,
@@ -57,6 +80,9 @@ import { PaymentsReportComponent } from '../reports/payments-report/payments-rep
         ToFixedModule,
         ItemReportRoutingModule,
         ToFixedPipeModule,
+        ReportDeviceSummaryModule,
+        DropDownModule,
+        ReportSendEmailModule
     ],
 })
 export class ItemReportModule { }

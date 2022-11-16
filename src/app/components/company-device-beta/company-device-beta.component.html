@@ -1,103 +1,149 @@
 <div class="qt-page-list company-devices-page">
     <div class="qt-page-list__header">
         <div class="qt-page-list__header-title-line">
-        <div class="qt-page-list__header-title-line--left">
-            <h3
-                class="qt-page-list__header-title"
-                [textContent]="'Devices'"
-            ></h3>
-            <div class="Rectangle">
-              <span class="qt-input-search"></span>
-            <div class="SearchRectangle">
-              <mat-form-field class="example-chip-list" appearance="none">
-                <mat-chip-list #chipList>
-                    <mat-chip *ngFor="let tag of selectedTag; let i=index" (removed)="remove(i)">
-                      {{tag}} <mat-icon matChipRemove></mat-icon>
-                    </mat-chip>
-                    <input #dropdownServices
-                  autofocus
-                  [formControl]="selectedCtrl"
-                  [(ngModel)]="tagFilterValue"
-                  [matAutocomplete]="auto"
-                  class="pointer"
-                  placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
-                  [matChipInputFor]="chipList"
-                  (keyup.enter)="add($event.target.value)"
-                  (keyup)="onSearchTag($event.target.value)"
-              >
-                </mat-chip-list>
-                <mat-autocomplete class="extended" #auto="matAutocomplete" (optionSelected)="selectedSearch($event)">
-                    <mat-option class="SubRectangle" *ngFor="let search of autosearchDevice">
-                      {{search.Result}} <span class="opt-icon" [ngClass]="search.Type" [title]="search.Type"></span>
-                    </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+            <div class="qt-page-list__header-title-line--left">
+                <h3
+                    class="qt-page-list__header-title"
+                    [textContent]="'Devices'"
+                ></h3>
+                <div class="Rectangle">
+                    <span class="qt-input-search"></span>
+                    <div class="SearchRectangle">
+                        <mat-form-field
+                            class="example-chip-list"
+                            appearance="none"
+                        >
+                            <mat-chip-list #chipList>
+                                <mat-chip
+                                    *ngFor="let tag of selectedTag; let i=index"
+                                    (removed)="remove(i)"
+                                >
+                                    {{tag}}
+                                    <mat-icon matChipRemove></mat-icon>
+                                </mat-chip>
+                                <input
+                                    #dropdownServices
+                                    autofocus
+                                    [formControl]="selectedCtrl"
+                                    [(ngModel)]="tagFilterValue"
+                                    [matAutocomplete]="auto"
+                                    class="pointer"
+                                    placeholder="Input at least 3 characters to start searching by companies, devices, work stations etc. "
+                                    [matChipInputFor]="chipList"
+                                    (keyup.enter)="add($event.target.value)"
+                                    (keyup)="onSearchTag($event.target.value)"
+                                >
+                            </mat-chip-list>
+                            <mat-autocomplete
+                                class="extended"
+                                #auto="matAutocomplete"
+                                (optionSelected)="selectedSearch($event)"
+                            >
+                                <mat-option
+                                    class="SubRectangle"
+                                    *ngFor="let search of autosearchDevice"
+                                >
+                                    {{search.Result}}
+                                    <span
+                                        class="opt-icon"
+                                        [ngClass]="search.Type"
+                                        [title]="search.Type"
+                                    ></span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <span>
+                    <button
+                        class="qt-btn --outline-blue"
+                        (click)="getAddDevice()"
+                    >
+                        Add Device
+                    </button>
+                </span>
+                <button
+                    class="qt-btn --outline-white qt-ml-8 dm"
+                    (click)="sendEmail()"
+                >
+                    <span class="d-email"></span>
+                </button>
+                <button
+                    class="qt-btn --outline-white qt-ml-8 dm"
+                    (click)="printPdf()"
+                >
+                    <span class="d-print"></span>
+                </button>
+                <button
+                    class="qt-btn --outline-white qt-ml-8 dm"
+                    (click)="downloadCsv()"
+                >
+                    <span class="d-exportdark"></span>
+                </button>
             </div>
-          </div>          
-          <span><button
-            class="qt-btn --outline-blue"
-            (click)="getAddDevice()"
-        >
-            Add Device
-        </button></span>
-        <button class="qt-btn --outline-white qt-ml-8 dm" (click)="sendEmail()">
-            <span class="d-email"></span>
-          </button>
-          <button class="qt-btn --outline-white qt-ml-8 dm" (click)="printPdf()">
-            <span class="d-print"></span>
-        </button>
-          <button class="qt-btn --outline-white qt-ml-8 dm" (click)="downloadCsv()">
-            <span class="d-exportdark"></span> 
-    </button>
-        </div>
 
-        <div class="qt-page-list__header-title-line--rigth">
-            <div class="company-devices-page__list-header-buttons" *ngIf="getCountSelected() > 0">
-              <div class="company-device-textheader" [textContent]="getCountSelected() + ' Devices Selected'"></div>              
-            <div
-            class="qt-df qt-ai-c"
-        >
-            <div ngbDropdown container="body" class="qt-overflow-v">
-              <div
-                  class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
-                  ngbDropdownToggle
-              ></div>
-              <ul
-                  class="qt-dropdown-menu --open-bot qt-overflow-v"
-                  ngbDropdownMenu
-              >                  
-                  <li
-                      class="pointer"
-                      ngbDropdownItem
-                      *ngIf="!isOfflineDeviceSelected" 
-                      (click)="sendCommandHeader('r')"  
-                  >
-                      <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Restart
-                  </li>
-                  <li
-                      class="pointer"
-                      ngbDropdownItem
-                      *ngIf="!isOfflineDeviceSelected"   
-                      (click)="sendCommandHeader('s')" 
-                  >
-                      <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Shutdown
-                  </li>                  
-                  <li
-                      class="pointer"
-                      (click)="sendCommandHeader('ar')" 
-                  >
-                      <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Remove Agent
-                  </li>
-              </ul>
-            </div>            
-            </div>                      
+
+
+
+
+            <div class="qt-page-list__header-title-line--rigth">
+                <div
+                    class="company-devices-page__list-header-buttons"
+                    *ngIf="getCountSelected() > 0"
+                >
+                    <div
+                        class="company-device-textheader"
+                        [textContent]="getCountSelected() + ' Devices Selected'"
+                    ></div>
+                    <div class="qt-df qt-ai-c">
+                        <div
+                            ngbDropdown
+                            container="body"
+                            class="qt-overflow-v"
+                        >
+                            <div
+                                class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                                ngbDropdownToggle
+                            ></div>
+                            <ul
+                                class="qt-dropdown-menu --open-bot qt-overflow-v"
+                                ngbDropdownMenu
+                            >
+                                <li
+                                    class="pointer"
+                                    ngbDropdownItem
+                                    *ngIf="!isOfflineDeviceSelected"
+                                    (click)="sendCommandHeader('r')"
+                                >
+                                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    Restart
+                                </li>
+                                <li
+                                    class="pointer"
+                                    ngbDropdownItem
+                                    *ngIf="!isOfflineDeviceSelected"
+                                    (click)="sendCommandHeader('s')"
+                                >
+                                    <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    Shutdown
+                                </li>
+                                <li
+                                    class="pointer"
+                                    (click)="sendCommandHeader('ar')"
+                                >
+                                    <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                    Remove Agent
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-        <div class="qt-page-list__header-thead-container" [ngClass]="{'Resize': device_beta_resize}">
+        <div
+            class="qt-page-list__header-thead-container"
+            [ngClass]="{'Resize': device_beta_resize}"
+        >
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
                     <tr>
@@ -136,34 +182,50 @@
                 </thead>
             </table>
         </div>
-    </div>    
-     <div class="qt-df qt-fd-c qt-jc-sb">        
-            <div class="qt-page-list__body-table-container" [ngClass]="{'Resize': device_beta_resize}">
-                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="assetList && assetList.length >0">
-                    <tbody>
-                        <tr class="company-device-hover" *ngFor="let asset of assetList | beta: search; let i = index">
-                            <td class="company-devices-table__check">
-                                <div class="d-f">
-                                    <label class="qt-checkbox">
-                                        <input
-                                            type="checkbox"
-                                            [(ngModel)]="asset.selected"
-                                            (change)="onSelectDevice(i,$event.target.checked)"
-                                        >
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </td>
-                            <td class="company-devices-table__device-master-agent" title="Master Agent">
-                                <div *ngIf="asset.IsMasterAgent" class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8" title="Master Agent"></div>
-                            </td>
-                            <td class="company-devices-table__device-type">
-                                <div
-                                    ngbDropdown
-                                    placement="bottom-left"
-                                    container="body"
-                                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                                    [ngClass]="{
+    </div>
+    <div class="qt-df qt-fd-c qt-jc-sb">
+        <div
+            class="qt-page-list__body-table-container"
+            [ngClass]="{'Resize': device_beta_resize}"
+        >
+            <table
+                class="qt-page-list__body-tbody qt-table-modern company-devices-table"
+                *ngIf="assetList && assetList.length >0"
+            >
+                <tbody>
+                    <tr
+                        class="company-device-hover"
+                        *ngFor="let asset of assetList | beta: search; let i = index"
+                    >
+                        <td class="company-devices-table__check">
+                            <div class="d-f">
+                                <label class="qt-checkbox">
+                                    <input
+                                        type="checkbox"
+                                        [(ngModel)]="asset.selected"
+                                        (change)="onSelectDevice(i,$event.target.checked)"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td
+                            class="company-devices-table__device-master-agent"
+                            title="Master Agent"
+                        >
+                            <div
+                                *ngIf="asset.IsMasterAgent"
+                                class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"
+                                title="Master Agent"
+                            ></div>
+                        </td>
+                        <td class="company-devices-table__device-type">
+                            <div
+                                ngbDropdown
+                                placement="bottom-left"
+                                container="body"
+                                class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                                [ngClass]="{
                     icon__computer:
                     asset.iconName === 'Workstation' || !asset.iconName,
                     icon__tablet: asset.iconName === 'Networking Hardware',
@@ -172,24 +234,24 @@
                     icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',                                        
                     '--ofline': !asset.online
                   }"
-                                    ngbDropdownToggle
-                                >
-                                    <div ngbDropdownMenu>
-                                        <ul class="
+                                ngbDropdownToggle
+                            >
+                                <div ngbDropdownMenu>
+                                    <ul class="
                         icon-list
                         qt-dropdown-menu
                         --dropdown-icons
                         device-type-dropdown
                       ">
-                                            <li
-                                                *ngFor="let hardwar of hardwareTypes"
-                                                (click)="setIcon(asset.ID, hardwar.ID)"
-                                            >
-                                                <span>
-                                                    <i
-                                                        class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                                                        ngbDropdownItem
-                                                        [ngClass]="{
+                                        <li
+                                            *ngFor="let hardwar of hardwareTypes"
+                                            (click)="setIcon(asset.ID, hardwar.ID)"
+                                        >
+                                            <span>
+                                                <i
+                                                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                                                    ngbDropdownItem
+                                                    [ngClass]="{
                               icon__computer:
                                 hardwar.Name === 'Workstation' || !hardwar.Name,
                               icon__tablet:
@@ -198,293 +260,348 @@
                               icon__server: hardwar.Name === 'Server',
                               icon__documents: hardwar.Name !== 'Workstation' || hardwar.Name !== 'Networking Hardware' || hardwar.Name !== 'Printer' || hardwar.Name !== 'Server'
                             }"
-                                                    ></i>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                ></i>
+                                            </span>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </td>
-                            <td class="company-devices-table__device-name">
-                                <div>
-                                    <div class="qt-df qt-fd-c">
-                                        <div class="
+                            </div>
+                        </td>
+                        <td class="company-devices-table__device-name">
+                            <div>
+                                <div class="qt-df qt-fd-c">
+                                    <div class="
                         company-devices-table-device-name
                         qt-ff-gm qt-df qt-ai-c
-                      ">                                            
-                                            <span [textContent]="asset.Title"></span>
-                                        </div>                                        
-                                        <span    
-                                            class="company-device-desc"                                        
-                                            [textContent]="asset.Name"
-                                        ></span>
+                      ">
+                                        <span [textContent]="asset.Title"></span>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="company-devices-table__logged-user">                                
-                                <div class="qt-df qt-fd-c" *ngIf="asset.online">
-                                     <span
-                                        class="logged-name qt-ff-gm"
-                                        [textContent]="asset.CurrentUser || ''"
-                                    ></span> 
-                                    
                                     <span
-                                        class="logged-time"                                        
-                                    >
-                                        Idle:
-                                        <span>{{ asset.IdelTime }}</span>
-                                    </span>                                    
-                                </div>
-                            </td>
-                            <td class="company-devices-table__up-time">
-                                <div class="qt-df qt-fd-c">
-                                    <span>
-                                        <span *ngIf="asset.IsActive && asset.online" class="companydevice-beta-online">{{  asset.UpTime }}</span>                                        
-                                        <span *ngIf="asset.IsActive && !asset.online" class="companydevice-beta-offline">{{ getLastCheckIn(asset)}}</span>                                        
-                                    </span>                                    
-                                     <span *ngIf="asset.IsActive && asset.online" class="uptime-tag qt-ff-gm" [textContent]="asset.online ? 'Online' : 'Offline'"></span>
-                                     <span *ngIf="asset.IsActive && !asset.online" class="uptime-tag qt-ff-gm --offline" [textContent]="asset.online ? 'Online' : 'Offline'"></span>
-                                    <span
-                                    *ngIf="!asset.IsActive"
-                                        class="uptime-tag qt-ff-gm --offline"
-                                        [textContent]="'Uninstalled'"
+                                        class="company-device-desc"
+                                        [textContent]="asset.Name"
                                     ></span>
                                 </div>
-                            </td>
-                            <td class="company-devices-table__windows">
-                              <span
-                                  class="company-devices-table__ip-windows-text"
-                                  [textContent]="removeMicrosoft(asset.OperatingSystem)"                                  
-                              ></span>
-                              <div class="company-devices-table__system-network-buttons" *ngIf="asset.AgentVersion == '' ? false : true">
-                                  <div
-                                      class="qt-df qt-ai-c qt-mr-20 qt-pointer"
-                                      (click)="openAside('SYSTEM',asset)"
-                                  >
-                                      <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
-                                      <div>System</div>
-                                  </div>
-                                  <div
-                                      class="qt-df qt-ai-c qt-pointer"
-                                      (click)="openAside('NETWORK',asset)"
-                                  >
-                                      <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
-                                      <div>Network</div>
-                                  </div>
-                              </div>
-                            </td>
-                            <td class="company-devices-table__ip-address" *ngIf="asset.AgentVersion == '' ? false : true">
-                              <span
-                                  class="qt-pl-30 company-devices-table__ip-address-text"
-                                  [textContent]="asset.InternalIPAddress"
-                              ></span>
-                              <div class="company-devices-table__ip-address-buttons qt-pl-15">
-                                  <div
-                                      class="qt-df qt-ai-c qt-mr-20 qt-pointer"
-                                      (click)="openAside('SOFTWARE',asset)"
-                                  >
-                                      <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
-                                      <div>Software</div>
-                                  </div>
-                                  <div
-                                      class="qt-df qt-ai-c qt-pointer"
-                                      (click)="openAside('UPDATES',asset)"
-                                  >
-                                      <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
-                                      <div>Updates</div>
-                                  </div>
-                              </div>
-                            </td>
-                          <td class="company-devices-table__device-agent">
-                            <div class="qt-df qt-fd-c">                              
-                                <span *ngIf="
+                            </div>
+                        </td>
+                        <td class="company-devices-table__logged-user">
+                            <div
+                                class="qt-df qt-fd-c"
+                                *ngIf="asset.online"
+                            >
+                                <span
+                                    class="logged-name qt-ff-gm"
+                                    [textContent]="asset.CurrentUser || ''"
+                                ></span>
+
+
+
+
+
+                                <span class="logged-time">
+                                    Idle:
+                                    <span>{{ asset.IdelTime }}</span>
+                                </span>
+                            </div>
+                        </td>
+                        <td class="company-devices-table__up-time">
+                            <div class="qt-df qt-fd-c">
+                                <span>
+                                    <span
+                                        *ngIf="asset.IsActive && asset.online"
+                                        class="companydevice-beta-online"
+                                    >
+                                        {{  asset.UpTime }}
+                                    </span>
+                                    <span
+                                        *ngIf="asset.IsActive && !asset.online"
+                                        class="companydevice-beta-offline"
+                                    >
+                                        {{ getLastCheckIn(asset)}}
+                                    </span>
+                                </span>
+                                <span
+                                    *ngIf="asset.IsActive && asset.online"
+                                    class="uptime-tag qt-ff-gm"
+                                    [textContent]="asset.online ? 'Online' : 'Offline'"
+                                ></span>
+                                <span
+                                    *ngIf="asset.IsActive && !asset.online"
+                                    class="uptime-tag qt-ff-gm --offline"
+                                    [textContent]="asset.online ? 'Online' : 'Offline'"
+                                ></span>
+                                <span
+                                    *ngIf="!asset.IsActive"
+                                    class="uptime-tag qt-ff-gm --offline"
+                                    [textContent]="'Uninstalled'"
+                                ></span>
+                            </div>
+                        </td>
+                        <td class="company-devices-table__windows">
+                            <span
+                                class="company-devices-table__ip-windows-text"
+                                [textContent]="removeMicrosoft(asset.OperatingSystem)"
+                            ></span>
+                            <div
+                                class="company-devices-table__system-network-buttons"
+                                *ngIf="asset.AgentVersion == '' ? false : true"
+                            >
+                                <div
+                                    class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                                    (click)="openAside('SYSTEM',asset)"
+                                >
+                                    <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>System</div>
+                                </div>
+                                <div
+                                    class="qt-df qt-ai-c qt-pointer"
+                                    (click)="openAside('NETWORK',asset)"
+                                >
+                                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>Network</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td
+                            class="company-devices-table__ip-address"
+                            *ngIf="asset.AgentVersion == '' ? false : true"
+                        >
+                            <span
+                                class="qt-pl-30 company-devices-table__ip-address-text"
+                                [textContent]="asset.InternalIPAddress"
+                            ></span>
+                            <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                                <div
+                                    class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                                    (click)="openAside('SOFTWARE',asset)"
+                                >
+                                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>Software</div>
+                                </div>
+                                <div
+                                    class="qt-df qt-ai-c qt-pointer"
+                                    (click)="openAside('UPDATES',asset)"
+                                >
+                                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>Updates</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="company-devices-table__device-agent">
+                            <div class="qt-df qt-fd-c">
+                                <span
+                                    *ngIf="
                                 asset.AgentVersion != '' &&
                                 asset.AgentVersion != undefined &&
                                 asset.AgentVersion != null &&
                                 !asset.IsAgentCurrent
-                              " class="agent-tag qt-ff-gm --offline">{{asset.AgentVersion}}</span>
-                              <span *ngIf="
+                              "
+                                    class="agent-tag qt-ff-gm --offline"
+                                >
+                                    {{asset.AgentVersion}}
+                                </span>
+                                <span
+                                    *ngIf="
                                 asset.AgentVersion != '' &&
                                 asset.AgentVersion != undefined &&
                                 asset.AgentVersion != null &&
                                 asset.IsAgentCurrent
-                              " class="agent-tag qt-ff-gm">{{asset.AgentVersion}}</span>          
-                            </div>
-                            
-                          </td>
-                            <td class="company-devices-table__go-to">                                
-                                <app-dynamic-tooltip
-                                    [content]="'Device Detail'"
-                                    [position]="'top'"
-                                    #tipDeviceDetailTooltip
-                                ></app-dynamic-tooltip>     
-                                <div
-                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"                                    
-                                    *ngIf="asset.ID"
-                                    (mouseenter)="tipDeviceDetailTooltip.show($event.target)" 
-                                    (mouseleave)="tipDeviceDetailTooltip.hide()"                                    
-                                    (click)="gotoDetailDevice(asset.Guid)"
-                                ></div>
-                            </td>
-                            <td class="company-devices-table__connect">
-                                <div
-                                    ngbDropdown
-                                    container="body"
-                                    placement="bottom-right"
+                              "
+                                    class="agent-tag qt-ff-gm"
                                 >
-                                    <ng-template
-                                        #tipRemoteAccess
-                                        class="tooltip"
-                                    >
-                                        Remote Access
-                                    </ng-template>
-                                    <div
-                                        [hidden]="!(asset.RemoteOnline)"
-                                        class="
+                                    {{asset.AgentVersion}}
+                                </span>
+                            </div>
+
+
+
+
+
+                        </td>
+                        <td class="company-devices-table__go-to">
+                            <app-dynamic-tooltip
+                                [content]="'Device Detail'"
+                                [position]="'top'"
+                                #tipDeviceDetailTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                *ngIf="asset.ID"
+                                (mouseenter)="tipDeviceDetailTooltip.show($event.target)"
+                                (mouseleave)="tipDeviceDetailTooltip.hide()"
+                                (click)="gotoDetailDevice(asset.Guid)"
+                            ></div>
+                        </td>
+                        <td class="company-devices-table__connect">
+                            <div
+                                ngbDropdown
+                                container="body"
+                                placement="bottom-right"
+                            >
+                                <ng-template
+                                    #tipRemoteAccess
+                                    class="tooltip"
+                                >
+                                    Remote Access
+                                </ng-template>
+                                <div
+                                    [hidden]="!(asset.RemoteOnline)"
+                                    class="
                       qt-ic-c
                       icon__quick-connect
                       qt-pointer qt-sz-24 qt-bg-contain
                     "
-                                        placement="top"
-                                        container="body"
-                                        [ngbTooltip]="tipRemoteAccess"
-                                        ngbDropdownToggle
-                                    >
-                                        <div ngbDropdownMenu>
-                                            <ul class="qt-dropdown-menu">
-                                                <li
-                                                    (click)="remoteAccess('CSS', asset.Guid)"
-                                                    ngbDropdownItem
-                                                >
-                                                    QuickTech Connect
-                                                </li>
-                                                <li
-                                                    (click)="remoteAccess('RDP', asset.Guid)"
-                                                    ngbDropdownItem
-                                                >
-                                                    Remote Desktop
-                                                </li>
-                                            </ul>
-                                        </div>
+                                    placement="top"
+                                    container="body"
+                                    [ngbTooltip]="tipRemoteAccess"
+                                    ngbDropdownToggle
+                                >
+                                    <div ngbDropdownMenu>
+                                        <ul class="qt-dropdown-menu">
+                                            <li
+                                                (click)="remoteAccess('CSS', asset.Guid)"
+                                                ngbDropdownItem
+                                            >
+                                                QuickTech Connect
+                                            </li>
+                                            <li
+                                                (click)="remoteAccess('RDP', asset.Guid)"
+                                                ngbDropdownItem
+                                            >
+                                                Remote Desktop
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </td>
-                            <td class="company-devices-table__menu">
+                            </div>
+                        </td>
+                        <td class="company-devices-table__menu">
+                            <div
+                                class="company-devices-table__menu-body"
+                                ngbDropdown
+                                placement="bottom-right"
+                                container="body"
+                            >
                                 <div
-                                    class="company-devices-table__menu-body"
-                                    ngbDropdown
-                                    placement="bottom-right"
-                                    container="body"
+                                    class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                                    ngbDropdownToggle
+                                ></div>
+                                <ul
+                                    class="qt-dropdown-menu invoice-items-dropdown"
+                                    ngbDropdownMenu
                                 >
-                                    <div
-                                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
-                                        ngbDropdownToggle
-                                    ></div>
-                                    <ul
-                                        class="qt-dropdown-menu invoice-items-dropdown"
-                                        ngbDropdownMenu
+                                    <li
+                                        *ngIf="asset.online"
+                                        class="pointer"
+                                        ngbDropdownItem
+                                        (click)="sendCommand('r', asset.ID)"
                                     >
-                                        <li
-                                            *ngIf="asset.online"
-                                            class="pointer"
-                                            ngbDropdownItem
-                                            (click)="sendCommand('r', asset.ID)"
-                                        >
-                                            <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                                            Restart
-                                        </li>
-                                        <li
-                                            *ngIf="asset.online"
-                                            class="pointer"
-                                            ngbDropdownItem
-                                            (click)="sendCommand('s', asset.ID)"
-                                        >
-                                            <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                                            Shutdown
-                                        </li>
-                                        <li
-                                            *ngIf="asset.online"
-                                            class="pointer"
-                                            ngbDropdownItem
-                                            (click)="sendCommand('m', asset.Guid)"
-                                        >
-                                            <div class="
+                                        <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        Restart
+                                    </li>
+                                    <li
+                                        *ngIf="asset.online"
+                                        class="pointer"
+                                        ngbDropdownItem
+                                        (click)="sendCommand('s', asset.ID)"
+                                    >
+                                        <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        Shutdown
+                                    </li>
+                                    <li
+                                        *ngIf="asset.online"
+                                        class="pointer"
+                                        ngbDropdownItem
+                                        (click)="sendCommand('m', asset.Guid)"
+                                    >
+                                        <div class="
                           icon__master-agent
                           qt-bg-contain qt-sz-16 qt-mr-8
                         "></div>
-                                            Set as Master Agent
-                                        </li>
-                                        <li
-                                            class="pointer"
-                                            (click)="sendCommand('ar', asset.ID)"
-                                            ngbDropdownItem
-                                        >
-                                            <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                                            Remove
-                                        </li>
-                                        <li
-                                          *ngIf="!asset.CanRemoteControl && asset.online"
-                                          class="pointer"
-                                          (click)="sendCommand('ira', asset.ID)"
-                                          ngbDropdownItem
-                                        >
-                                          <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                                          Install Remote Agent
-                                      </li>
-                                        <li
-                                          *ngIf="asset.CanRemoteControl && asset.online"
-                                          class="pointer"
-                                          (click)="sendCommand('ura', asset.ID)"
-                                          ngbDropdownItem
-                                        >
+                                        Set as Master Agent
+                                    </li>
+                                    <li
+                                        class="pointer"
+                                        (click)="sendCommand('ar', asset.ID)"
+                                        ngbDropdownItem
+                                    >
+                                        <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        Remove
+                                    </li>
+                                    <li
+                                        *ngIf="!asset.CanRemoteControl && asset.online"
+                                        class="pointer"
+                                        (click)="sendCommand('ira', asset.ID)"
+                                        ngbDropdownItem
+                                    >
+                                        <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        Install Remote Agent
+                                    </li>
+                                    <li
+                                        *ngIf="asset.CanRemoteControl && asset.online"
+                                        class="pointer"
+                                        (click)="sendCommand('ura', asset.ID)"
+                                        ngbDropdownItem
+                                    >
                                         <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                         Uninstall Remote Agent
-                                      </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="!assetList || assetList.length == 0">
-                    <tbody>
-                        <tr>
-                            <td colspan="10" class="text-center">No devices to show</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>        
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table
+                class="qt-page-list__body-tbody qt-table-modern company-devices-table"
+                *ngIf="!assetList || assetList.length == 0"
+            >
+                <tbody>
+                    <tr>
+                        <td
+                            colspan="10"
+                            class="text-center"
+                        >
+                            No devices to show
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
     </div>
 
-<div
-    class="company-devices-page__aside company-device-aside"
-    *ngIf="open"
->
+
+
+
+
     <div
-        class="loading"
-        *ngIf="Preloader"
-    ></div>
-    <div *ngIf="!Preloader">
-        <div class="company-device-aside__menu">
-        <div
-        class="company-device-aside__menu-item qt-pointer"
-        [ngClass]="{'--active': assetData.ID === assetData.ID}"
+        class="company-devices-page__aside company-device-aside"
+        *ngIf="open"
     >
-        <ng-template
-            #asideMenuItem
-            class="tooltip"
-        >
-            {{assetData.Title || assetData.Name}}
-        </ng-template>
         <div
-            placement="left"
-            [ngbTooltip]="asideMenuItem"
-            class="qt-sz-24"
-            [ngClass]="{ icon__computer:
+            class="loading"
+            *ngIf="Preloader"
+        ></div>
+        <div *ngIf="!Preloader">
+            <div class="company-device-aside__menu">
+                <div
+                    class="company-device-aside__menu-item qt-pointer"
+                    [ngClass]="{'--active': assetData.ID === assetData.ID}"
+                >
+                    <ng-template
+                        #asideMenuItem
+                        class="tooltip"
+                    >
+                        {{assetData.Title || assetData.Name}}
+                    </ng-template>
+                    <div
+                        placement="left"
+                        [ngbTooltip]="asideMenuItem"
+                        class="qt-sz-24"
+                        [ngClass]="{ icon__computer:
               assetData.iconName === 'Workstation' || !assetData.iconName,
             icon__tablet: assetData.iconName === 'Networking Hardware',
             icon__printer: assetData.iconName === 'Printer',
@@ -492,14 +609,14 @@
             icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',                                        
             '--offline': !assetData.online,
             '--online':assetData.online }"
-        ></div>
-    </div>
-        </div>
-        <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
-        <div class="qt-df qt-ai-c">
-          <div
-          class="icon qt-sz-24 qt-mr-12"
-          [ngClass]="{ icon__computer:
+                    ></div>
+                </div>
+            </div>
+            <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
+                <div class="qt-df qt-ai-c">
+                    <div
+                        class="icon qt-sz-24 qt-mr-12"
+                        [ngClass]="{ icon__computer:
             assetData.iconName === 'Workstation' || !assetData.iconName,
           icon__tablet: assetData.iconName === 'Networking Hardware',
           icon__printer: assetData.iconName === 'Printer',
@@ -507,468 +624,545 @@
           icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',                                        
           '--offline': !assetData.online,
           '--online':assetData.online }"
-      ></div>
-      <div
-      class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title"
-      [textContent]="assetData.Title || assetData.Name"
-    >
-    </div>
-        </div>
+                    ></div>
+                    <div
+                        class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title"
+                        [textContent]="assetData.Title || assetData.Name"
+                    >
+                    </div>
+                </div>
 
-        <div
-            class="qt-df qt-ai-c"
-        >
-            <div ngbDropdown container="body" class="qt-overflow-v">
-              <div
-                  class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
-                  ngbDropdownToggle
-              ></div>
-              <ul
-                  class="qt-dropdown-menu --open-bot qt-overflow-v"
-                  ngbDropdownMenu
-              >
-                  <li
-                      class="pointer"
-                      ngbDropdownItem
-                      (click)="gotiDetailDevice(assetData.Guid)"
-                  >
-                      <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
-                      Device Detail
-                  </li>
-                  <li
-                      class="pointer"
-                      ngbDropdownItem
-                      (click)="sendCommand('r', assetData.ID)"
-                  >
-                      <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Restart
-                  </li>
-                  <li
-                      class="pointer"
-                      ngbDropdownItem
-                      (click)="sendCommand('s', assetData.ID)"
-                  >
-                      <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Shutdown
-                  </li>
-                  <li
-                      class="pointer"
-                      ngbDropdownItem
-                  >
-                      <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Set as Master Agent
-                  </li>
-                  <li
-                      class="pointer"
-                      (click)="sendCommand('ar', assetData.ID)"
-                  >
-                      <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                      Remove
-                  </li>
-              </ul>
-            </div>
-            <div
-                class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
-                (click)="menuclose()"
-            ></div>
-        </div>
-        </div>
-        <div class="company-device-aside__subheader">
-            <div
-                class="company-device-aside__subheader-item subheader-item-system"
-                [ngClass]="{'--active':tab === 'SYSTEM'}"
-                (click)="tab = 'SYSTEM'"
-            ></div>
-            <div
-                class="company-device-aside__subheader-item subheader-item-network"
-                [ngClass]="{'--active':tab === 'NETWORK'}"
-                (click)="tab = 'NETWORK'"
-            ></div>
-            <div
-                class="company-device-aside__subheader-item subheader-item-software"
-                [ngClass]="{'--active':tab === 'SOFTWARE'}"
-                (click)="tab = 'SOFTWARE'"
-            ></div>
-            <div
-                class="company-device-aside__subheader-item subheader-item-updates"
-                [ngClass]="{'--active':tab === 'UPDATES'}"
-                (click)="tab = 'UPDATES'"
-            ></div>
-        </div>
-        <div class="company-device-aside__body">
-          <div *ngIf="tab==='SYSTEM'" class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-            <div
-                class="company-device-aside__info-block"
-                [ngClass]="{'--collapsed' :toggleDeviceSpecifications}"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
+
+
+
+
+                <div class="qt-df qt-ai-c">
                     <div
-                        class="company-device-aside__expand-collapse qt-sz-16"
-                        (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"
-                    ></div>
-                </div>
-                <div>
-                    <div class="sidebar-system__info edit-field">
-                        <div class="sidebar-system__info-title">Display Name</div>
-                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Title" (blur)="updateAsset()">
-                    </div>                    
-                  </div>
-                  <div>
-                     <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Host Name</div>
+                        ngbDropdown
+                        container="body"
+                        class="qt-overflow-v"
+                    >
                         <div
-                            class="sidebar-system__info-text sidebarSystemInfo-text"
-                            [textContent]="assetData.Name"
-                        ></div>                     
-                        </div>                     
-                     </div>              
-                  <div>
-                    <div class="sidebar-system__info edit-field">
-                        <div class="sidebar-system__info-title">Serial Number</div>
-                        <input type="text" class="device-table__input-name" [(ngModel)]="serialnumber" (blur)="updateSerialNo()">
-                    </div>
-                </div>                            
-                <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Manufacturer</div>                        
-                        <div class="device-table__input-name computerManufacture">
-                            <app-select-search                               
-                            #dropdownManufacturersidebar                                
-                            [placeholder]="'Select manufacture'"                
-                            [class]="['qt-dropdown']"
-                            [editItem]="selectManufactureNamessidebar"
-                            [field]="'Name'"        
-                            [list]="manufactureList"  
-                            (onSelectedItem)="onSelectManufactureNamesidebar($event)"                      
-                            ></app-select-search>                           
-                        </div>                        
-                    </div>
-                </div>
-                <div class="sidebar-system__info">
-                    <div class="sidebar-system__info-title">IP address</div>
-                    <div
-                        class="sidebar-system__info-text sidebarSystemInfo-text"
-                        [textContent]="assetData.InternalIPAddress"
-                    ></div>
-                </div>                
-                <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Computer Model</div>                        
-                        <div class="device-table__input-name computerModel">
-                            <app-select-search                                               
-                            #dropdownModelSidebar                            
-                            [placeholder]="'Select model'"                
-                            [class]="['qt-dropdown']"
-                            [editItem]="selectModelNameSidebar"
-                            [field]="'Name'"                    
-                            [list]="selectModelList"                       
-                            (onSelectedItem)="onSelectModelsidebar($event)"
-                            ></app-select-search>                        
-                        </div>                        
-                    </div>
-                </div>
-            </div>
-            <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-            <div
-                class="company-device-aside__info-block"
-                [ngClass]="{'--collapsed' :toggleWindowSpecifications}"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
-                    <div
-                        class="company-device-aside__expand-collapse qt-sz-16"
-                        (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
-                    ></div>
-                </div>
-                <div class="sidebar-system__info warranty-info">
-                    <div class="sidebar-system__info-title">Warranty</div>
-                    <app-date-picker
-                    [type]="'INPUT'"
-                    [editMode]="true"
-                    [editDate]="assetData.WarrantyExpires || getToDayDate()"
-                    [useMinDate]="false"
-                    [placement]="'top-right'"
-                    (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Warranty')"
-                ></app-date-picker>
-                </div>
-                <div class="sidebar-system__info">
-                    <div class="sidebar-system__info-title">Windows Info</div>
-                    <div
-                        class="sidebar-system__info-text sidebarSystemInfo-text"
-                        [textContent]="removeMicrosoft(assetData.Caption)"
-                    ></div>
-                </div>
-                <div class="sidebar-system__info installed-info">
-                    <div class="sidebar-system__info-title">Installed on</div>
-                    <app-date-picker
-                    [type]="'INPUT'"
-                    [editMode]="true"
-                    [editDate]="assetData.InstallDate || getToDayDate()"
-                    [useMinDate]="false"
-                    [placement]="'top-right'"
-                    (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Install')"
-                ></app-date-picker>
-                </div>
-                <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">System Type</div>
-                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.OSArchitecture" (blur)="updateOperationgSystem(assetData.ID,assetData)">
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div *ngIf="tab==='NETWORK'" class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-            <div
-                class="company-device-aside__info-block"
-                [ngClass]="{'--collapsed' :toggleIpSettings}"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
-                    <div
-                        class="company-device-aside__expand-collapse qt-sz-16"
-                        (click)="toggleIpSettings = !toggleIpSettings"
-                    ></div>
-                </div>                                
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Model(s):</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Name)"
+                            class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                            ngbDropdownToggle
                         ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">IP:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.IPAddress)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Subnet Mask:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Subnet)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DNS 1:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.DNS1)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DNS 2:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.DNS2)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Gateway:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Gateway)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Link Speed:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">MAC:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="formatMacAddress(networkData.MACAddress)"
+                        <ul
+                            class="qt-dropdown-menu --open-bot qt-overflow-v"
+                            ngbDropdownMenu
                         >
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="gotiDetailDevice(assetData.Guid)"
+                            >
+                                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
+                                Device Detail
+                            </li>
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="sendCommand('r', assetData.ID)"
+                            >
+                                <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Restart
+                            </li>
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="sendCommand('s', assetData.ID)"
+                            >
+                                <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Shutdown
+                            </li>
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                            >
+                                <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Set as Master Agent
+                            </li>
+                            <li
+                                class="pointer"
+                                (click)="sendCommand('ar', assetData.ID)"
+                            >
+                                <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Remove
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
+                        (click)="menuclose()"
+                    ></div>
+                </div>
+            </div>
+            <div class="company-device-aside__subheader">
+                <div
+                    class="company-device-aside__subheader-item subheader-item-system"
+                    [ngClass]="{'--active':tab === 'SYSTEM'}"
+                    (click)="tab = 'SYSTEM'"
+                ></div>
+                <div
+                    class="company-device-aside__subheader-item subheader-item-network"
+                    [ngClass]="{'--active':tab === 'NETWORK'}"
+                    (click)="tab = 'NETWORK'"
+                ></div>
+                <div
+                    class="company-device-aside__subheader-item subheader-item-software"
+                    [ngClass]="{'--active':tab === 'SOFTWARE'}"
+                    (click)="tab = 'SOFTWARE'"
+                ></div>
+                <div
+                    class="company-device-aside__subheader-item subheader-item-updates"
+                    [ngClass]="{'--active':tab === 'UPDATES'}"
+                    (click)="tab = 'UPDATES'"
+                ></div>
+            </div>
+            <div class="company-device-aside__body">
+                <div
+                    *ngIf="tab==='SYSTEM'"
+                    class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                >
+                    <div
+                        class="company-device-aside__info-block"
+                        [ngClass]="{'--collapsed' :toggleDeviceSpecifications}"
+                    >
+                        <div class="qt-df qt-jc-sb">
+                            <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
+                            <div
+                                class="company-device-aside__expand-collapse qt-sz-16"
+                                (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"
+                            ></div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info edit-field">
+                                <div class="sidebar-system__info-title">Display Name</div>
+                                <input
+                                    type="text"
+                                    class="device-table__input-name"
+                                    [(ngModel)]="assetData.Title"
+                                    (blur)="updateAsset()"
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Host Name</div>
+                                <div
+                                    class="sidebar-system__info-text sidebarSystemInfo-text"
+                                    [textContent]="assetData.Name"
+                                ></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info edit-field">
+                                <div class="sidebar-system__info-title">Serial Number</div>
+                                <input
+                                    type="text"
+                                    class="device-table__input-name"
+                                    [(ngModel)]="serialnumber"
+                                    (blur)="updateSerialNo()"
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Manufacturer</div>
+                                <div class="device-table__input-name computerManufacture">
+                                    <app-drop-down
+                                        #dropdownManufacturersidebar
+                                        [placeholder]="'Select manufacture'"
+                                        [class]="['qt-dropdown']"
+                                        [editItem]="selectManufactureNamessidebar"
+                                        [field]="'Name'"
+                                        [list]="manufactureList"
+                                        (onSelectedItem)="onSelectManufactureNamesidebar($event)"
+                                    ></app-drop-down>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-system__info">
+                            <div class="sidebar-system__info-title">IP address</div>
+                            <div
+                                class="sidebar-system__info-text sidebarSystemInfo-text"
+                                [textContent]="assetData.InternalIPAddress"
+                            ></div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Computer Model</div>
+                                <div class="device-table__input-name computerModel">
+                                    <app-drop-down
+                                        #dropdownModelSidebar
+                                        [placeholder]="'Select model'"
+                                        [class]="['qt-dropdown']"
+                                        [editItem]="selectModelNameSidebar"
+                                        [field]="'Name'"
+                                        [list]="selectModelList"
+                                        (onSelectedItem)="onSelectModelsidebar($event)"
+                                    ></app-drop-down>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DHCP:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="networkData.DHCPEnabled"
-                        ></div>
+                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+                    <div
+                        class="company-device-aside__info-block"
+                        [ngClass]="{'--collapsed' :toggleWindowSpecifications}"
+                    >
+                        <div class="qt-df qt-jc-sb">
+                            <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
+                            <div
+                                class="company-device-aside__expand-collapse qt-sz-16"
+                                (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
+                            ></div>
+                        </div>
+                        <div class="sidebar-system__info warranty-info">
+                            <div class="sidebar-system__info-title">Warranty</div>
+                            <app-date-picker
+                                [type]="'INPUT'"
+                                [editMode]="true"
+                                [editDate]="assetData.WarrantyExpires || getToDayDate()"
+                                [useMinDate]="false"
+                                [placement]="'top-right'"
+                                (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Warranty')"
+                            ></app-date-picker>
+                        </div>
+                        <div class="sidebar-system__info">
+                            <div class="sidebar-system__info-title">Windows Info</div>
+                            <div
+                                class="sidebar-system__info-text sidebarSystemInfo-text"
+                                [textContent]="removeMicrosoft(assetData.Caption)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-system__info installed-info">
+                            <div class="sidebar-system__info-title">Installed on</div>
+                            <app-date-picker
+                                [type]="'INPUT'"
+                                [editMode]="true"
+                                [editDate]="assetData.InstallDate || getToDayDate()"
+                                [useMinDate]="false"
+                                [placement]="'top-right'"
+                                (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Install')"
+                            ></app-date-picker>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">System Type</div>
+                                <input
+                                    type="text"
+                                    class="device-table__input-name"
+                                    [(ngModel)]="assetData.OSArchitecture"
+                                    (blur)="updateOperationgSystem(assetData.ID,assetData)"
+                                >
+                            </div>
+                        </div>
                     </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DHCP Server:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="networkData.DHCPServer"
-                        ></div>
-                    </div>                    
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">WAN IP:</div>
-                        <div
-                            class="sidebar-network__info-text" [textContent]="asset.ExternalIPAddress"
-                        ></div>
-                    </div>                    
-            </div>        
-            <div class="qt-divider qt-mt-24 qt-mb-24"></div>                                   
-          </div>
-          <div *ngIf="tab==='SOFTWARE'" class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-          <div class="qt-df qt-jc-sb">
-              <div class="sidebar-software__title qt-ff-sb">Softwares</div>
-          </div>
-          <ng-template
-              ngFor
-              let-item
-              [ngForOf]="softwareList"
-          >
-              <div class="sidebar-software__row">
-                  <div>
-                      <div
-                          class="sidebar-software__row-title"
-                          [textContent]="item.DisplayName"
-                      ></div>
-                      <div
-                          class="sidebar-software__date"
-                          [textContent]="getDate(item.InstallDate) + getVersion(item.DisplayVersion)"
-                      ></div>
-                  </div>
-              </div>                        
-          </ng-template>
-          <div  *ngIf="!softwareList || softwareList.length == 0 || softwareList==undefined">
-            <div class="software-text-center">                    
-                    <span>No software to show</span>                    
-            </div>
-        </div>
-          </div>
-          <div *ngIf="tab==='UPDATES'" class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-            <div class="qt-df qt-jc-sb">
-                <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
-                <div *ngIf="getSecurityCountSelected() > 1">
-                    <button
-                    class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"   
-                    (click)="InstallUpdate()"  [disabled]="IsUpdateInstalling"                                    
+                </div>
+                <div
+                    *ngIf="tab==='NETWORK'"
+                    class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
                 >
-                    <i class="install-security-Update qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6" *ngIf="!IsUpdateInstalling"></i>
-                    <div class="loader"  *ngIf="IsUpdateInstalling"></div>
-                    Install Updates
-                </button>
-                </div>
-            </div>
-            <div class="sidebar-updates__items">
-                <div class="sidebar-updates__item">
                     <div
-                        class="sidebar-updates__icon icon__virus-protection icon "
-                        [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
-                    ></div>
-                    <div class="sidebar-updates__title">Virus Protection</div>
-                    <div class="sidebar-updates__subtitle">Up-to-date</div>
-                </div>
-                <div class="sidebar-updates__security-update-item">
-                    <div
-                        class="sidebar-updates__icon icon__security-update icon "
-                        [ngClass]="{'--updated': assetData.WindowsUpdatesPending == true, '--alert': assetData.WindowsUpdatesPending == false}"
-                    ></div>
-                    <div class="sidebar-updates__title">Security Updates</div>
-                    <div class="sidebar-updates__subtitle">Install {{securityUpdate}} Updates</div>
-                </div>
-                <div class="sidebar-updates__item">
-                    <div
-                        class="sidebar-updates__icon icon__drivers-missing icon "
-                        [ngClass]="{'--updated': true == true, '--alert': true == false}"
-                    ></div>
-                    <div class="sidebar-updates__title">Drivers Missing</div>
-                    <div class="sidebar-updates__subtitle">Up-to-date</div>
-                </div>
-            </div>              
-
-            <div class="qt-page-list__header-thead-container">
-                <table class="qt-table-modern qt-page-list__header-thead security-Update-list-header-thead">
-                   <thead>
-                        <tr>
-                            <th class="company-devices-table__check">
-                                <div class="d-f">
-                                    <label class="qt-checkbox">
-                                        <input
-                                            type="checkbox" 
-                                            [(ngModel)]="selectAllSecurityDevices"
-                                            (change)="toogleSecurityDevices()"                                            
-                                        >
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </th>                            
-                            <th
-                                class="company-devices-table__device-name pointer"                                
+                        class="company-device-aside__info-block"
+                        [ngClass]="{'--collapsed' :toggleIpSettings}"
+                    >
+                        <div class="qt-df qt-jc-sb">
+                            <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
+                            <div
+                                class="company-device-aside__expand-collapse qt-sz-16"
+                                (click)="toggleIpSettings = !toggleIpSettings"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Model(s):</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.Name)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">IP:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.IPAddress)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Subnet Mask:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.Subnet)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DNS 1:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.DNS1)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DNS 2:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.DNS2)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Gateway:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.Gateway)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Link Speed:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">MAC:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="formatMacAddress(networkData.MACAddress)"
                             >
-                                Description                               
-                            </th>
-                            <th class="company-devices-table__go-to"></th>
-                        </tr>    
-                   </thead>                     
-                </table> 
-                
-                <div class="qt-df qt-fd-c qt-jc-sb">        
-                    <div class="qt-page-list__body-table-container">
-                        <table class="qt-page-list__body-tbody qt-table-modern company-devices-table security-Update-list-header-thead">
-                            <tbody>
-                                <tr class="company-device-hover" *ngFor="let windowUpdate of windowUpdatePendingList; let i = index">
-                                    <td class="company-devices-table__check">
+                            </div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DHCP:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="networkData.DHCPEnabled"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DHCP Server:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="networkData.DHCPServer"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">WAN IP:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="asset.ExternalIPAddress"
+                            ></div>
+                        </div>
+                    </div>
+                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+                </div>
+                <div
+                    *ngIf="tab==='SOFTWARE'"
+                    class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                >
+                    <div class="qt-df qt-jc-sb">
+                        <div class="sidebar-software__title qt-ff-sb">Softwares</div>
+                    </div>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="softwareList"
+                    >
+                        <div class="sidebar-software__row">
+                            <div>
+                                <div
+                                    class="sidebar-software__row-title"
+                                    [textContent]="item.DisplayName"
+                                ></div>
+                                <div
+                                    class="sidebar-software__date"
+                                    [textContent]="getDate(item.InstallDate) + getVersion(item.DisplayVersion)"
+                                ></div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div *ngIf="!softwareList || softwareList.length == 0 || softwareList==undefined">
+                        <div class="software-text-center">
+                            <span>No software to show</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    *ngIf="tab==='UPDATES'"
+                    class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                >
+                    <div class="qt-df qt-jc-sb">
+                        <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
+                        <div *ngIf="getSecurityCountSelected() > 1">
+                            <button
+                                class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"
+                                (click)="InstallUpdate()"
+                                [disabled]="IsUpdateInstalling"
+                            >
+                                <i
+                                    class="install-security-Update qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"
+                                    *ngIf="!IsUpdateInstalling"
+                                ></i>
+                                <div
+                                    class="loader"
+                                    *ngIf="IsUpdateInstalling"
+                                ></div>
+                                Install Updates
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sidebar-updates__items">
+                        <div class="sidebar-updates__item">
+                            <div
+                                class="sidebar-updates__icon icon__virus-protection icon "
+                                [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
+                            ></div>
+                            <div class="sidebar-updates__title">Virus Protection</div>
+                            <div class="sidebar-updates__subtitle">Up-to-date</div>
+                        </div>
+                        <div class="sidebar-updates__security-update-item">
+                            <div
+                                class="sidebar-updates__icon icon__security-update icon "
+                                [ngClass]="{'--updated': assetData.WindowsUpdatesPending == true, '--alert': assetData.WindowsUpdatesPending == false}"
+                            ></div>
+                            <div class="sidebar-updates__title">Security Updates</div>
+                            <div class="sidebar-updates__subtitle">Install {{securityUpdate}} Updates</div>
+                        </div>
+                        <div class="sidebar-updates__item">
+                            <div
+                                class="sidebar-updates__icon icon__drivers-missing icon "
+                                [ngClass]="{'--updated': true == true, '--alert': true == false}"
+                            ></div>
+                            <div class="sidebar-updates__title">Drivers Missing</div>
+                            <div class="sidebar-updates__subtitle">Up-to-date</div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="qt-page-list__header-thead-container">
+                        <table class="qt-table-modern qt-page-list__header-thead security-Update-list-header-thead">
+                            <thead>
+                                <tr>
+                                    <th class="company-devices-table__check">
                                         <div class="d-f">
                                             <label class="qt-checkbox">
                                                 <input
-                                                    type="checkbox"  
-                                                    [(ngModel)]="windowUpdate.selected"   
-                                                    (change)="onSelectSecurityDevice()"                                             
+                                                    type="checkbox"
+                                                    [(ngModel)]="selectAllSecurityDevices"
+                                                    (change)="toogleSecurityDevices()"
                                                 >
                                                 <span></span>
                                             </label>
                                         </div>
-                                    </td>
-
-                                    <td class="company-devices-table__device-name">
-                                        <div>
-                                            <span [textContent]="windowUpdate.Title"></span>
-                                        </div>
-                                    </td>
-                                    <td class="company-devices-table__go-to">
-                                        <a href="javascript:;" (click)="SecurityUpdate(i,windowUpdate.UpdateID)" title="Install">
-                                            <span class="install-Update"  *ngIf="!windowUpdate.IsUpdateInstalling"></span>
-                                            <div class="loader"  *ngIf="windowUpdate.IsUpdateInstalling"></div>
-                                          </a>
-                                    </td>
+                                    </th>
+                                    <th class="company-devices-table__device-name pointer">Description</th>
+                                    <th class="company-devices-table__go-to"></th>
                                 </tr>
-                            </tbody>
-                        </table>  
-                        <div class="loading" *ngIf="IsCurrentConfigLoading"></div>                                                            
-                </div>                                                 
+                            </thead>
+                        </table>
+
+
+
+
+
+                        <div class="qt-df qt-fd-c qt-jc-sb">
+                            <div class="qt-page-list__body-table-container">
+                                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table security-Update-list-header-thead">
+                                    <tbody>
+                                        <tr
+                                            class="company-device-hover"
+                                            *ngFor="let windowUpdate of windowUpdatePendingList; let i = index"
+                                        >
+                                            <td class="company-devices-table__check">
+                                                <div class="d-f">
+                                                    <label class="qt-checkbox">
+                                                        <input
+                                                            type="checkbox"
+                                                            [(ngModel)]="windowUpdate.selected"
+                                                            (change)="onSelectSecurityDevice()"
+                                                        >
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+
+
+
+
+
+                                            <td class="company-devices-table__device-name">
+                                                <div>
+                                                    <span [textContent]="windowUpdate.Title"></span>
+                                                </div>
+                                            </td>
+                                            <td class="company-devices-table__go-to">
+                                                <a
+                                                    href="javascript:;"
+                                                    (click)="SecurityUpdate(i,windowUpdate.UpdateID)"
+                                                    title="Install"
+                                                >
+                                                    <span
+                                                        class="install-Update"
+                                                        *ngIf="!windowUpdate.IsUpdateInstalling"
+                                                    ></span>
+                                                    <div
+                                                        class="loader"
+                                                        *ngIf="windowUpdate.IsUpdateInstalling"
+                                                    ></div>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div
+                                    class="loading"
+                                    *ngIf="IsCurrentConfigLoading"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-          </div>
-        </div>
     </div>
-    </div>
-    
-    <div [hidden]="!opened" class="qt-aside-modern">
+
+
+
+
+
+    <div
+        [hidden]="!opened"
+        class="qt-aside-modern"
+    >
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-info d-f ai-c">
                 <div class="qt-aside__title">Create New Device</div>
             </div>
             <div>
                 <div
-                    class="qt-aside__close-modal icon__close"  
-                    (click)="closed()"              
+                    class="qt-aside__close-modal icon__close"
+                    (click)="closed()"
                 ></div>
             </div>
         </div>
-        <div class="qt-aside-modern__content">  
+        <div class="qt-aside-modern__content">
             <div class="qt-input-block qt-input-line">
                 <label for="add-device-company">Company</label>
-                <app-select-search id="deviceCompany" #dropdowndeviceCompany [placeholder]="'Select Company'" [class]="['qt-dropdown']" [field]="'name'" [editItem]="companyDeviceSelect" [list]="companies" (onSelectedItem)="onSelectCompanyName($event)" ></app-select-search>
-            </div>      
+                <app-drop-down
+                    id="deviceCompany"
+                    #dropdowndeviceCompany
+                    [placeholder]="'Select Company'"
+                    [class]="['qt-dropdown']"
+                    [field]="'name'"
+                    [editItem]="companyDeviceSelect"
+                    [list]="companies"
+                    (onSelectedItem)="onSelectCompanyName($event)"
+                ></app-drop-down>
+            </div>
             <div class="qt-input-block qt-input-line">
-                <label
-                    for="add-device-name"                
-                >
-                    Device Name
-                </label>
+                <label for="add-device-name">Device Name</label>
                 <input
                     id="add-device-name"
                     class="qt-input-block__input"
@@ -978,234 +1172,247 @@
                 >
             </div>
             <div class="qt-input-block qt-input-line">
-                <label                
-                    for="devicetype"
+                <label for="devicetype">Device Type</label>
+                <app-drop-down
+                    id="devicetype"
+                    #dropdowndeviceTp
+                    [placeholder]="'Select device type'"
+                    [class]="['qt-dropdown']"
+                    [field]="'Name'"
+                    [list]="hardwareTypes"
+                    (onSelectedItem)="getDeviceName($event.ID)"
+                ></app-drop-down>
+            </div>
+            <div class="qt-input-line">
+                <div class="qt-input-block">
+                    <label for="add-asset-tag">Asset Tag</label>
+                    <input
+                        id="add-asset-tag"
+                        class="qt-input-block__input"
+                        type="text"
+                        placeholder="Enter asset tag"
+                        [(ngModel)]="assetTagName"
+                    >
+                </div>
+            </div>
+
+
+
+
+
+            <div class="qt-input-line">
+                <div class="qt-input-block">
+                    <label for="add-Install-Date">Install Date</label>
+                    <app-date-picker
+                        #installdatePicker
+                        [type]="'INPUT'"
+                        [editDate]="installDate"
+                        [placement]="'top'"
+                        [editMode]="true"
+                        [useMinDate]="false"
+                        (onChange)="getDateInstalled($event)"
+                    ></app-date-picker>
+                </div>
+                <div class="qt-input-block">
+                    <label for="add-Install-Date">Warranty Date</label>
+                    <app-date-picker
+                        #warrantydatePicker
+                        [type]="'INPUT'"
+                        [editDate]="warrantyDate"
+                        [placement]="'top'"
+                        [editMode]="true"
+                        [useMinDate]="false"
+                        (onChange)="getDateWarranty($event)"
+                    ></app-date-picker>
+                </div>
+            </div>
+            <div class="qt-input-line">
+                <div class="qt-input-block">
+                    <label for="add-manufacture">Manufacture</label>
+                    <app-drop-down
+                        id="manufacture"
+                        #dropdownManufacturer
+                        [placeholder]="'Select manufacture'"
+                        [class]="['qt-dropdown']"
+                        [field]="'Name'"
+                        [list]="manufactureList"
+                        (onSelectedItem)="onSelectManufactureName($event)"
+                    ></app-drop-down>
+                </div>
+                <div class="qt-input-block">
+                    <label for="add-model-no">Model No.</label>
+                    <app-drop-down
+                        id="model"
+                        #dropdownModel
+                        [placeholder]="'Select model'"
+                        [class]="['qt-dropdown']"
+                        [field]="'Name'"
+                        [list]="selectModelList"
+                        [isDisabled]="isDisabled"
+                        (onSelectedItem)="onSelectModel($event)"
+                    ></app-drop-down>
+                </div>
+            </div>
+            <div
+                class="grey-dropdown sidebarchiptag"
+                ngbDropdown
+                #products="ngbDropdown"
+            >
+                <label
+                    for="dropdownLinkedService"
+                    class="tagfontweight"
                 >
-                    Device Type
-                </label>            
-            <app-select-search       
-            id="devicetype"
-            #dropdowndeviceTp
-            [placeholder]="'Select device type'"                
-            [class]="['qt-dropdown']"
-            [field]="'Name'"              
-            [list]="hardwareTypes"
-            (onSelectedItem)="getDeviceName($event.ID)"
-        ></app-select-search>
-            </div>
-            <div class="qt-input-line">
-                <div class="qt-input-block">
-                  <label
-                  for="add-asset-tag"              
-              >
-                  Asset Tag
-              </label>
-              <input
-              id="add-asset-tag"
-              class="qt-input-block__input"
-              type="text"
-              placeholder="Enter asset tag"
-              [(ngModel)]="assetTagName"
-          >
-                </div>            
-            </div>
-    
-            <div class="qt-input-line">
-                <div class="qt-input-block">
-                    <label
-                  for="add-Install-Date"              
-              >Install Date</label>                     
-                    <app-date-picker  
-                    #installdatePicker              
-                    [type]="'INPUT'"    
-                    [editDate]="installDate"            
-                    [placement]="'top'"
-                    [editMode]="true"
-                    [useMinDate]="false"                
-                    (onChange)="getDateInstalled($event)"
-                ></app-date-picker>
-                </div>
-                <div class="qt-input-block">
-                    <label
-                    for="add-Install-Date"              
-                >Warranty Date</label>                        
-                    <app-date-picker   
-                    #warrantydatePicker             
-                    [type]="'INPUT'"
-                    [editDate]="warrantyDate"
-                    [placement]="'top'"
-                    [editMode]="true"
-                    [useMinDate]="false"                
-                    (onChange)="getDateWarranty($event)"
-                ></app-date-picker>
-                </div>
-            </div>
-            <div class="qt-input-line">
-                <div class="qt-input-block">
-                    <label
-                  for="add-manufacture"              
-              >Manufacture</label>     
-              <app-select-search       
-              id="manufacture"
-              #dropdownManufacturer          
-              [placeholder]="'Select manufacture'"                
-              [class]="['qt-dropdown']"
-              [field]="'Name'"        
-              [list]="manufactureList"
-              (onSelectedItem)="onSelectManufactureName($event)"
-          ></app-select-search>                           
-                </div>
-                <div class="qt-input-block">
-                    <label
-                    for="add-model-no"              
-                >Model No.</label>                        
-                <app-select-search       
-                id="model"
-                #dropdownModel
-                [placeholder]="'Select model'"                
-                [class]="['qt-dropdown']"
-                [field]="'Name'"                    
-                [list]="selectModelList"   
-                [isDisabled]="isDisabled"         
-                (onSelectedItem)="onSelectModel($event)"
-            ></app-select-search>                           
-                </div>
-            </div>          
-            <div class="grey-dropdown sidebarchiptag" ngbDropdown #products="ngbDropdown">
-                <label for="dropdownLinkedService" class="tagfontweight">Linked Devices</label>
+                    Linked Devices
+                </label>
                 <div class="Rectangle_device-popup">
-                    <mat-form-field appearance="none">                                       
+                    <mat-form-field appearance="none">
                         <mat-chip-list #chipdeviceTag>
-                            <mat-chip *ngFor="let tag of linkDevicesTag; let i=index" (removed)="Deviceremove(i)">
-                                {{tag.Name}} <mat-icon matChipRemove></mat-icon>
-                              </mat-chip>                        
-                            <input autofocus 
-                            id="dropdownServices"  
-                            #searchInput  
-                            [(ngModel)]="linkDevicesFilterValue"                                             
-                            ngbDropdownToggle                         
-                            class="pointer"
-                            placeholder="Enter Devices" 
-                            [matChipInputFor]="chipdeviceTag"                        
-                            (keyup)="onSearchLinkDevices($event.target.value)">
-                        </mat-chip-list>                                                 
-                    </mat-form-field>                
-                </div>  
+                            <mat-chip
+                                *ngFor="let tag of linkDevicesTag; let i=index"
+                                (removed)="Deviceremove(i)"
+                            >
+                                {{tag.Name}}
+                                <mat-icon matChipRemove></mat-icon>
+                            </mat-chip>
+                            <input
+                                autofocus
+                                id="dropdownServices"
+                                #searchInput
+                                [(ngModel)]="linkDevicesFilterValue"
+                                ngbDropdownToggle
+                                class="pointer"
+                                placeholder="Enter Devices"
+                                [matChipInputFor]="chipdeviceTag"
+                                (keyup)="onSearchLinkDevices($event.target.value)"
+                            >
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
                 <div
-              class="dropdown-menu"
-              ngbDropdownMenu
-              aria-labelledby="dropdownLinkedService"
-          >
-              <ng-template
-                  ngFor
-                  let-item
-                  [ngForOf]="autosearchCompanyDevice"
-              >
-                  <button
-                      ngbDropdownItem
-                      class="dropdown-item"  
-                      (click)="onLinkDeviceSelectTag(item)"                
-                      [textContent]="item.Name"
-                  ></button>
-              </ng-template>
-                </div>          
-            </div>        
-                 
-          <div
-          class="grey-dropdown sidebarchiptag"
-          ngbDropdown
-          #products="ngbDropdown"
-      >  
-      <label
-      for="dropdownServices" 
-      class="tagfontweight" 
-    >
-      Tag
-    </label>
-    <div class="Rectangle_device-popup">
-          <mat-form-field appearance="none">
-              <mat-chip-list #chipTag>
-                  <mat-chip
-                      *ngFor="let tag of selectedSidebarTag; let i = index"  (removed)="onTagRemove(i)"                  
-                  >
-                      {{ tag.Name }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                  <input autofocus
-                      id="dropdownServices"
-                      #searchInput
-                      [(ngModel)]="sidetagFilterValue"
-                      ngbDropdownToggle
-                      class="pointer"
-                      placeholder="Enter tag"
-                      [matChipInputFor]="chipTag"
-                      (blur)="addTags($event.target.value)"
-                      (keyup.enter)="addTags($event.target.value)"
-                      (keyup)="onSidebarSearchTag($event.target.value)"
-                  >
-              </mat-chip-list>
-          </mat-form-field>
-    </div>
-          <div
-              class="dropdown-menu"
-              ngbDropdownMenu
-              aria-labelledby="dropdownServices"
-          >
-              <ng-template
-                  ngFor
-                  let-tag
-                  [ngForOf]="filteredSidebarTag"
-              >
-                  <button
-                      ngbDropdownItem
-                      class="dropdown-item"
-                      (click)="onSidebarSelectTag(tag)"
-                      [textContent]="tag.Name"
-                  ></button>
-              </ng-template>
-          </div>
-        </div>
-        <div class="qt-input-block qt-input-line">
-            <label for="add-device-ipaddress">
-                IP Address
-            </label>
-            <input id="add-device-ipaddress" class="qt-input-block__input" type="text" [(ngModel)]="deviceIPAddress"
-                placeholder="Enter IP Address">
-        </div>
-        <div class="qt-input-block qt-input-line">
-            <label for="add-device-macaddress">
-                MAC Address
-            </label>
-            <input id="add-device-macaddress" class="qt-input-block__input" type="text" [(ngModel)]="deviceMacAddress"
-                placeholder="Enter MAC Address">
-        </div>
-        <div class="qt-input-block qt-input-line">
-            <label for="add-device-remoteport">
-                Remote Port
-            </label>
-            <input id="add-device-remoteport" class="qt-input-block__input" type="text" [(ngModel)]="deviceRemotePort"
-                placeholder="Enter Remote Port">
-        </div>
-        <div class="qt-input-block qt-input-line">
-          <label
-              for="add-note"          
-          >
-              Note
-          </label>
-         <textarea
-          id="add-note"
-          #searchnote
-         class="terms-n-conditions__textarea qt-textarea "
-         placeholder="Write note for device"
-         maxlength="300"
-         [(ngModel)]="note"
-         cols="40"
-         rows="2">
-         </textarea>
-         <span class="Max-300-Words-limit Caption-L">
-          Max 300 Words limit
-        </span>
-        </div>
+                    class="dropdown-menu"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownLinkedService"
+                >
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="autosearchCompanyDevice"
+                    >
+                        <button
+                            ngbDropdownItem
+                            class="dropdown-item"
+                            (click)="onLinkDeviceSelectTag(item)"
+                            [textContent]="item.Name"
+                        ></button>
+                    </ng-template>
+                </div>
+            </div>
+
+
+
+
+
+            <div
+                class="grey-dropdown sidebarchiptag"
+                ngbDropdown
+                #products="ngbDropdown"
+            >
+                <label
+                    for="dropdownServices"
+                    class="tagfontweight"
+                >
+                    Tag
+                </label>
+                <div class="Rectangle_device-popup">
+                    <mat-form-field appearance="none">
+                        <mat-chip-list #chipTag>
+                            <mat-chip
+                                *ngFor="let tag of selectedSidebarTag; let i = index"
+                                (removed)="onTagRemove(i)"
+                            >
+                                {{ tag.Name }}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input
+                                autofocus
+                                id="dropdownServices"
+                                #searchInput
+                                [(ngModel)]="sidetagFilterValue"
+                                ngbDropdownToggle
+                                class="pointer"
+                                placeholder="Enter tag"
+                                [matChipInputFor]="chipTag"
+                                (blur)="addTags($event.target.value)"
+                                (keyup.enter)="addTags($event.target.value)"
+                                (keyup)="onSidebarSearchTag($event.target.value)"
+                            >
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+                <div
+                    class="dropdown-menu"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownServices"
+                >
+                    <ng-template
+                        ngFor
+                        let-tag
+                        [ngForOf]="filteredSidebarTag"
+                    >
+                        <button
+                            ngbDropdownItem
+                            class="dropdown-item"
+                            (click)="onSidebarSelectTag(tag)"
+                            [textContent]="tag.Name"
+                        ></button>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-ipaddress">IP Address</label>
+                <input
+                    id="add-device-ipaddress"
+                    class="qt-input-block__input"
+                    type="text"
+                    [(ngModel)]="deviceIPAddress"
+                    placeholder="Enter IP Address"
+                >
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-macaddress">MAC Address</label>
+                <input
+                    id="add-device-macaddress"
+                    class="qt-input-block__input"
+                    type="text"
+                    [(ngModel)]="deviceMacAddress"
+                    placeholder="Enter MAC Address"
+                >
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label for="add-device-remoteport">Remote Port</label>
+                <input
+                    id="add-device-remoteport"
+                    class="qt-input-block__input"
+                    type="text"
+                    [(ngModel)]="deviceRemotePort"
+                    placeholder="Enter Remote Port"
+                >
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label for="add-note">Note</label>
+                <textarea
+                    id="add-note"
+                    #searchnote
+                    class="terms-n-conditions__textarea qt-textarea "
+                    placeholder="Write note for device"
+                    maxlength="300"
+                    [(ngModel)]="note"
+                    cols="40"
+                    rows="2"
+                >
+                </textarea>
+                <span class="Max-300-Words-limit Caption-L">Max 300 Words limit</span>
+            </div>
         </div>
         <div class="qt-aside-modern__footer">
             <div class="qt-df">
@@ -1227,6 +1434,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 <ng-template #templatePowersell>
     <div class="modal-content restart-modal">
@@ -1263,6 +1474,10 @@
         </div>
     </div>
 </ng-template>
+
+
+
+
 
 
 <ng-template #templateConnection>
@@ -1316,7 +1531,14 @@
     </div>
 
 
+
+
+
+
 </ng-template>
 
-<app-report-send-email></app-report-send-email>
 
+
+
+
+<app-report-send-email></app-report-send-email>
