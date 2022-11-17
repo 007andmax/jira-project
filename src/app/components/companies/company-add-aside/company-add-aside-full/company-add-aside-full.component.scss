@@ -55,22 +55,3 @@
 //        width: 30px;
 //    }
 //}
-
-
-.details-background {
-  padding: 24px 32px 24px;
-  background: $gray-100--old;
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  width: calc(100% + 64px);
-  margin-left: -32px;
-  margin-top: 24px;
-}
-
-.qt-inputs-row__divider {
-  border-top: 1px solid $gray-200;
-  padding: 4px 32px 0;
-  margin-top: 8px;
-  width: calc(100% + 64px);
-  margin-left: -32px;
-}

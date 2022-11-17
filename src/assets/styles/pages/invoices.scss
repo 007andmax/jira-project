@@ -361,6 +361,12 @@ app-invoices-item,app-payment-item {
 .invoices-page__aside {
   &.aside-preview {
     width: 940px;
+
+    .documents-page .documents-table__title {
+      max-width: 190px;
+      width: 190px;
+      min-width: 190px;
+    }
   }
 
   .new-taxes-area {

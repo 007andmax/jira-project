@@ -1933,9 +1933,13 @@ app-quotes-item {
         padding: 0;
         background-color: $white;
         z-index: 1;
-        border: 1px solid $gray-500--old;
+        border: 1px solid $gray-200;
         border-radius: 4px;
         padding-left: 36px;
+
+        &:hover {
+          border-color: $gray-300;
+        }
       }
       .dropdown-toggle {
         .mat-form-field-wrapper {
@@ -2896,6 +2900,7 @@ app-quotes-item {
       input {
         height: 38px !important;
         margin: 0;
+        padding: 11px 14px;
       }
     }
 
@@ -4537,6 +4542,25 @@ app-ticket-edit-aside-devices {
       flex: 100%;
     }
   }
+
+  &-background {
+    padding: 24px 32px 24px;
+    background: $gray-100--old;
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+    width: calc(100% + 64px);
+    margin-left: -32px;
+    margin-top: 24px;
+  }
+
+  &__divider {
+    border-top: 1px solid $gray-200;
+    padding: 4px 32px 0;
+    margin-top: 8px;
+    width: calc(100% + 64px);
+    margin-left: -32px;
+  }
+
 }
 
 .create-product-taxes-select {

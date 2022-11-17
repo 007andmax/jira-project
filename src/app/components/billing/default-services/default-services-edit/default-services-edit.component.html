@@ -10,12 +10,12 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content">
-        <div class="qt-w100 qt-mb-16">
+        <div class="qt-inputs-row qt-mb-16">
             <div
                 class="qt-input-block"
                 [ngClass]="{'--input-error':!validate.getName()}"
             >
-                <label>Customer Name</label>
+                <div class="qt-input-block__label">Customer Name</div>
                 <input
                     [value]="'Checks & System Maintenance'"
                     [(ngModel)]="service.name"
@@ -23,20 +23,20 @@
                     (input)="onChangeName()"
                 >
                 <mat-error
-                    class="qt-tooltip-error"
+                    class="invalid-feedback"
                     *ngIf="!validate.getName()"
                 >
                     Service name is required
                 </mat-error>
             </div>
         </div>
-        <div class="qt-df">
-            <div class="qt-w50 qt-mb-16 qt-mr-16">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-w50">
                 <div
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getRate()}"
                 >
-                    <label>Hourly Rate($)</label>
+                    <div class="qt-input-block__label">Hourly Rate($)</div>
                     <input
                         [(ngModel)]="service.rate"
                         type="text"
@@ -46,14 +46,14 @@
                         appToFixed
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getRate()"
                     >
                         Hour rate is required
                     </mat-error>
                 </div>
             </div>
-            <div class="qt-w50 qt-mb-16">
+            <div class="qt-input-block qt-w50">
                 <div class="create-product-taxes-select">
                     <app-taxes
                         #taxSelect
@@ -63,10 +63,10 @@
                 </div>
             </div>
         </div>
-        <div class="qt-df">
-            <div class="qt-w100 qt-mb-16">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
                 <div class="qt-input-block">
-                    <label>GL Number</label>
+                    <div class="qt-input-block__label">GL Number</div>
                     <app-drop-down
                         [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
                         [list]="glNumbers"
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="qt-df qt-ai-c">
+        <div class="qt-inputs-row">
             <label
                 class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
                 for="email-payment"
@@ -94,8 +94,8 @@
                     [(ngModel)]="service.billable"
                 >
                 <span></span>
+                <div class="qt-ml-8 qt-fw-400 qt-lh-1">Make this service billable</div>
             </label>
-            <div class="qt-fs-12 qt-ml-5">Make this service billable</div>
         </div>
     </div>
     <div class="qt-aside-modern__footer">

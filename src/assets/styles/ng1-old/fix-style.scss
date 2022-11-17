@@ -360,39 +360,39 @@ p {
   margin-bottom: 8px;
 }
 
-.new-companies-content__modal--content > [class*="col-md-"],
-.new-users-content__modal--content > [class*="col-md-"],
-.recurring-tickets-content__modal--content > [class*="col-md-"],
-.recurring-tickets-content__modal--content app-interval > [class*="col-md-"],
-.new-users-content__modal--content app-interval > [class*="col-md-"],
-.password-content__modal--content > [class*="col-md-"] {
-  margin-top: 20px;
-}
+//.new-companies-content__modal--content > [class*="col-md-"],
+//.new-users-content__modal--content > [class*="col-md-"],
+//.recurring-tickets-content__modal--content > [class*="col-md-"],
+//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"],
+//.new-users-content__modal--content app-interval > [class*="col-md-"],
+//.password-content__modal--content > [class*="col-md-"] {
+//  margin-top: 20px; // TODO check this style
+//}
 
-.new-users-content__modal--content > [class*="col-md-"] input,
-.recurring-tickets-content__modal--content > [class*="col-md-"] input,
-.new-companies-content__modal--content > [class*="col-md-"] input,
-.new-users-content__modal--content app-interval > [class*="col-md-"] input,
-.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
-.password-content__modal--content > [class*="col-md-"] input,
-.documents-create .input-group.date-picker input {
-  outline: none;
-  height: 40px;
-  padding: 0 12px;
-  font-size: 13px;
-  border: 1px solid $gray-500--old;
-  border-radius: 4px;
-}
+//.new-users-content__modal--content > [class*="col-md-"] input,
+//.recurring-tickets-content__modal--content > [class*="col-md-"] input,
+//.new-companies-content__modal--content > [class*="col-md-"] input,
+//.new-users-content__modal--content app-interval > [class*="col-md-"] input,
+//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
+//.password-content__modal--content > [class*="col-md-"] input,
+//.documents-create .input-group.date-picker input {
+//  outline: none;
+//  height: 40px;
+//  padding: 0 12px;
+//  font-size: 13px;
+//  border: 1px solid $gray-500--old;
+//  border-radius: 4px; // TODO check this style
+//}
 
-.new-companies-content__modal--content > [class*="col-md-"] input,
-.recurring-tickets-content__modal--content > [class*="col-md-"] input,
-.new-users-content__modal--content > [class*="col-md-"] input,
-.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
-.new-users-content__modal--content app-interval > [class*="col-md-"] input,
-.password-content__modal--content > [class*="col-md-"] input,
-.documents-create .input-group.date-picker input {
-  width: 100%;
-}
+//.new-companies-content__modal--content > [class*="col-md-"] input,
+//.recurring-tickets-content__modal--content > [class*="col-md-"] input,
+//.new-users-content__modal--content > [class*="col-md-"] input,
+//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
+//.new-users-content__modal--content app-interval > [class*="col-md-"] input,
+//.password-content__modal--content > [class*="col-md-"] input,
+//.documents-create .input-group.date-picker input {
+//  width: 100%; // TODO check this style
+//}
 
 .recurring-tickets-content__modal .new-link,
 .new-companies-content__modal .new-link,
