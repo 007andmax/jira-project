@@ -458,7 +458,8 @@ app-left-panel-tags {
 }
 .user-subscription {
   display: flex;
-  height: 40px;
+  flex-wrap: wrap;
+  min-height: 40px;
   padding: 0 30px 0 3px;
   color: $gray-900;
   font-size: 14px;
@@ -473,12 +474,14 @@ app-left-panel-tags {
   }
 
   > div {
+    display: flex;
+    align-items: center;
     font-size: 12px;
     padding: 3px 8px;
     background: $gray-100--old;
     border: 1px solid $background;
     border-radius: 3px;
-    margin-right: 4px;
+    margin: 2px 4px 2px 0;
   }
 }
 .user-detail-info {
@@ -606,7 +609,8 @@ documents-edit-info {
   draft-email-user-recipients {
     > .col-md-12,
     .col-md-6 {
-      margin-top: 40px;
+      //margin-top: 40px; // TODO check this style
+      margin-top: 12px;
       .mat-form-field {
         width: 100%;
         margin-top: 15px;
@@ -624,13 +628,11 @@ documents-edit-info {
         &:before {
           position: absolute;
           content: "Tags";
-          font-weight: 600;
-          font-size: 13px;
+          line-height: 16px;
+          font-weight: 500;
+          color: $gray-500;
           left: 0;
           top: -28px;
-          @media (max-width: 767px) {
-            color: $primary-2;
-          }
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {

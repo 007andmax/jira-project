@@ -129,8 +129,12 @@
         padding: 0;
         background-color: $white;
         z-index: 1;
-        border: 1px solid #c4cbd5;
-        border-radius: 4px;
+        border: 1px solid $gray-200;
+        border-radius: 6px;
+
+        &:hover {
+          border-color: $gray-300;
+        }
       }
       .mat-form-field-label {
         padding: 7px 10px 9px 12px;
@@ -308,7 +312,8 @@
           font-weight: 500;
           color: $gray-500;
           left: 0;
-          top: -28px;
+          //top: -28px; // TODO check this style
+          top: -24px;
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {

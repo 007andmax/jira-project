@@ -45,13 +45,13 @@
                 (input)="uploadFileOnBrower($event)"
             >
         </div>
-        <div class="qt-df qt-mb-24">
-            <div class="qt-w50 qt-mr-16">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
                 <div
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getFirstName()}"
                 >
-                    <label>First Name</label>
+                    <label class="qt-input-block__label">First Name</label>
                     <input
                         type="text"
                         minlength="2"
@@ -60,16 +60,16 @@
                         placeholder="Enter First Name"
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getFirstName()"
                     >
                         Please enter first name
                     </mat-error>
                 </div>
             </div>
-            <div class="qt-w50">
+            <div class="qt-input-block qt-f50">
                 <div class="qt-input-block">
-                    <label>Last Name</label>
+                    <label class="qt-input-block__label">Last Name</label>
                     <input
                         type="text"
                         [(ngModel)]="user.lastName"
@@ -78,13 +78,13 @@
                 </div>
             </div>
         </div>
-        <div class="qt-df qt-mb-24">
-            <div class="qt-w50 qt-mr-16">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
                 <div
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
                 >
-                    <label>Email</label>
+                    <label class="qt-input-block__label">Email</label>
                     <input
                         type="text"
                         [(ngModel)]="user.primaryEmail"
@@ -92,20 +92,20 @@
                         placeholder="Enter Email"
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getPrimaryContactEmail()"
                     >
                         Please enter a valid email address
                     </mat-error>
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getExistPrimaryContactEmail()"
                     >
                         The email address is already occupied
                     </mat-error>
                 </div>
             </div>
-            <div class="qt-w50">
+            <div class="qt-input-block qt-f50">
                 <app-drop-down
                     #jobTitleDp
                     [title]="'Job Title'"
@@ -119,8 +119,8 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-df qt-mb-24">
-            <div class="qt-w50">
+        <div class="qt-inputs-row">
+            <div class="qt-f50">
                 <app-drop-down
                     #jobIndustryDp
                     [class]="['qt-select-input-40']"
@@ -135,9 +135,9 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-df qt-mb-24">
+        <div class="qt-inputs-row">
             <div class="qt-input-block job-description">
-                <label>Job Description</label>
+                <label class="qt-input-block__label">Job Description</label>
                 <textarea
                     id="description-global-note"
                     [ngModel]="user.jobDescription"
@@ -152,8 +152,9 @@
                 ></textarea>
             </div>
         </div>
-        <div class="qt-w100 qt-mb-24">
-            <company-drop-down
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+              <company-drop-down
                 [placeholder]="'Company'"
                 [validate]="validate.getCompany()"
                 [errorMessage]="'The company name is required'"
@@ -163,17 +164,18 @@
                 [change]="true"
                 [editItem]="selectedCompany"
                 (onSelectedItem)="onSelectCompany($event)"
-            >
-            </company-drop-down>
+              >
+              </company-drop-down>
+            </div>
         </div>
-        <div class="qt-df qt-mb-24">
-            <div class="qt-w50 qt-mr-16 with-new-link">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50 with-new-link">
                 <div
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
                 >
                     <div class="qt-df qt-jc-sb qt-ai-c">
-                        <label>Primary Phone</label>
+                        <label class="qt-input-block__label">Primary Phone</label>
                         <span
                             class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
                             (click)="addPhoneNumber()"
@@ -182,10 +184,10 @@
                             + Add Phone
                         </span>
                     </div>
-                    <div class="qt-with-number-types right">
+                    <div class="qt-with-number-types">
                         <input
                             type="text"
-                            class="qt-w100"
+                            class="qt-with-number-types__input"
                             [(ngModel)]="user.phoneNumbers[0].number"
                             (input)="onCheckPhoneNumber(0)"
                             placeholder="Enter Primary Phone"
@@ -199,7 +201,7 @@
                             ngbDropdown
                         >
                             <button
-                                class="types-btn"
+                                class="qt-with-number-types__types-btn dropdown-toggle"
                                 id="dropdownBasic0"
                                 ngbDropdownToggle
                                 [textContent]="user.phoneNumbers[0].typeNumber"
@@ -224,90 +226,12 @@
                         </div>
                     </div>
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getPhoneNumber(0)"
                     >
                         Phone number is required
                     </mat-error>
                 </div>
-                <ng-template
-                    ngFor
-                    let-phone
-                    *ngIf="user.phoneNumbers.length > 1"
-                    [ngForOf]="user.phoneNumbers"
-                    [ngForTrackBy]="trackById"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
-                >
-                    <div
-                        *ngIf="i > 0"
-                        style="margin-top: 20px;"
-                        class="with-new-link"
-                        ngbDropdown
-                    >
-                        <div
-                            class="qt-input-block"
-                            [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
-                        >
-                            <div class="qt-df qt-jc-sb qt-ai-c">
-                                <label>Additional phone</label>
-                                <span
-                                    class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
-                                    (click)="removePhoneNumber(i)"
-                                >
-                                    Remove Phone
-                                </span>
-                            </div>
-                            <div class="qt-with-number-types right">
-                                <input
-                                    type="text"
-                                    class="qt-w100"
-                                    [(ngModel)]="phone.number"
-                                    (input)="onCheckPhoneNumber(i)"
-                                    placeholder="Enter Primary Phone"
-                                    prefix="+1"
-                                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                    [dropSpecialCharacters]="false"
-                                >
-                                <div
-                                    class="grey-dropdown primary-phone-selector"
-                                    ngbDropdown
-                                >
-                                    <button
-                                        class="types-btn"
-                                        [id]="'dropdownBasic' + i"
-                                        ngbDropdownToggle
-                                        [textContent]="phone.typeNumber"
-                                    ></button>
-                                    <i class="icn-sm report-caret-icon"></i>
-                                    <div
-                                        ngbDropdownMenu
-                                        [attr.aria-labelledby]="'dropdownBasic' + i"
-                                    >
-                                        <ng-template
-                                            ngFor
-                                            let-item
-                                            [ngForOf]="phoneTypes"
-                                        >
-                                            <button
-                                                ngbDropdownItem
-                                                [textContent]="item"
-                                                (click)="phone.typeNumber = item.toUpperCase()"
-                                            ></button>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                                <mat-error
-                                    class="qt-tooltip-error"
-                                    *ngIf="!validate.getPhoneNumber(i)"
-                                >
-                                    Phone number is required
-                                </mat-error>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
             </div>
             <div class="qt-w50">
                 <app-drop-down
@@ -322,27 +246,112 @@
                 ></app-drop-down>
             </div>
         </div>
-        <div class="qt-w100 qt-input-block qt-mb-24">
-            <label>Subscription</label>
+        <ng-template
+          ngFor
+          let-phone
+          *ngIf="user.phoneNumbers.length > 1"
+          [ngForOf]="user.phoneNumbers"
+          [ngForTrackBy]="trackById"
+          let-i="index"
+          [ngForTrackBy]="trackByIndex"
+        >
+          <div
+            *ngIf="i > 0"
+            class="with-new-link qt-inputs-row"
+            ngbDropdown
+          >
+            <div
+              class="qt-input-block qt-f50"
+              [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
+            >
+              <div class="qt-df qt-jc-sb qt-ai-c">
+                <label class="qt-input-block__label">Additional phone</label>
+                <span
+                  class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                  (click)="removePhoneNumber(i)"
+                >
+                                      Remove Phone
+                                  </span>
+              </div>
+              <div class="qt-with-number-types right">
+                <input
+                  type="text"
+                  class="qt-with-number-types__input"
+                  [(ngModel)]="phone.number"
+                  (input)="onCheckPhoneNumber(i)"
+                  placeholder="Enter Primary Phone"
+                  prefix="+1"
+                  mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                  [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                  [dropSpecialCharacters]="false"
+                >
+                <div
+                  class="grey-dropdown primary-phone-selector"
+                  ngbDropdown
+                >
+                  <button
+                    class="qt-with-number-types__types-btn"
+                    [id]="'dropdownBasic' + i"
+                    ngbDropdownToggle
+                    [textContent]="phone.typeNumber"
+                  ></button>
+                  <i class="icn-sm report-caret-icon"></i>
+                  <div
+                    ngbDropdownMenu
+                    [attr.aria-labelledby]="'dropdownBasic' + i"
+                  >
+                    <ng-template
+                      ngFor
+                      let-item
+                      [ngForOf]="phoneTypes"
+                    >
+                      <button
+                        ngbDropdownItem
+                        [textContent]="item"
+                        (click)="phone.typeNumber = item.toUpperCase()"
+                      ></button>
+                    </ng-template>
+                  </div>
+                </div>
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="!validate.getPhoneNumber(i)"
+                >
+                  Phone number is required
+                </mat-error>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <div class="qt-inputs-row">
+          <div class="qt-input-block">
+            <label class="qt-input-block__label">Subscription</label>
             <user-default-subscription
-                [mode]="MODE_EDIT_SUBSCRIPTION"
-                [defaultSubscriptions]="user.defaultSubscriptions"
-                (onChange)="onChangeDefaultSubscriptions($event)"
+              [mode]="MODE_EDIT_SUBSCRIPTION"
+              [defaultSubscriptions]="user.defaultSubscriptions"
+              (onChange)="onChangeDefaultSubscriptions($event)"
             ></user-default-subscription>
+          </div>
         </div>
-        <div class="qt-w100 qt-input-block qt-mb-24">
-            <label>Marketing Subscription</label>
+        <div class="qt-inputs-row">
+          <div class="qt-input-block">
+            <label class="qt-input-block__label">Marketing Subscription</label>
             <user-custom-subscription
-                [customSubscriptions]="user.customSubscriptions"
-                (onChange)="onChangeCustomSubscriptions($event)"
+              [customSubscriptions]="user.customSubscriptions"
+              (onChange)="onChangeCustomSubscriptions($event)"
             ></user-custom-subscription>
+          </div>
         </div>
-        <app-company-tags
-            #companyTags
-            [placement]="'top'"
-            [blockUserTag]="true"
-            (tagsChange)="onChangeTags($event)"
-        ></app-company-tags>
+        <div class="qt-inputs-row">
+          <div class="qt-input-block">
+            <app-company-tags
+              #companyTags
+              [placement]="'top'"
+              [blockUserTag]="true"
+              (tagsChange)="onChangeTags($event)"
+            ></app-company-tags>
+          </div>
+        </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
