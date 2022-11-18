@@ -4,9 +4,11 @@
 .app-left-panel {
   display: block;
   height: 100%;
-  width: $left-panel-width;
+  width: auto;// $left-panel-width;
   z-index: 1050;
-  position: fixed;
+  @media (max-width: 767px) {
+    position: fixed;
+  }
   top: 0;
   left: 0;
   background-color: $gray-800;
