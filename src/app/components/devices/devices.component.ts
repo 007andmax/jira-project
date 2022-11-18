@@ -190,9 +190,9 @@ export class DevicesComponent implements OnInit {
   advancesearchPreloader: boolean = false;
   devices: any[] = [];
   tempDevices: any[] = [];
-  deviceIPAddress:string;
-  deviceMacAddress:string;
-  deviceRemotePort:string;
+  deviceIPAddress: string;
+  deviceMacAddress: string;
+  deviceRemotePort: string;
   deviceSuccess: boolean;
 
   constructor(
@@ -212,7 +212,7 @@ export class DevicesComponent implements OnInit {
     private devicesStateService: DevicesStateService
   ) { }
 
-  ngOnInit() {             
+  ngOnInit() {
     this.companiesState.onInit();
     this.devicesStateService.onInit();
     this.getTempData();
@@ -237,7 +237,7 @@ export class DevicesComponent implements OnInit {
     });
 
     if (!this.searchSubscription) {
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {        
+      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
         this.selectedTag = JSON.parse(data.Json) || [];
         this.searchTag = this.selectedTag;
         localStorage.removeItem("currentSearch");
@@ -246,7 +246,7 @@ export class DevicesComponent implements OnInit {
     }
 
     if (!this.searchSubscriptionCompany) {
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {                        
+      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {
         this.selectedTag = [];
         if (data.name != 'undefined' && data.name != null && data.name != "") {
           this.selectedTag.push(data.name);
@@ -275,8 +275,10 @@ export class DevicesComponent implements OnInit {
   getCountSelected() {
     return this.assetList.filter(item => item.selected).length;
   }
-
-  load(company: any) {    
+  parseDateFromDatePicker(value) {
+    return moment(new Date(value.year, value.month - 1, value.day)).format('YYYY/MM/DD');
+  }
+  load(company: any) {
     this.company = company;
     this.currentCompany = company;
     this.techCompnayGuid = this.currentCompany.id;
@@ -328,22 +330,21 @@ export class DevicesComponent implements OnInit {
     this.CurrentUser();
   }
 
-  searchDeviceTag(data: any) {      
+  searchDeviceTag(data: any) {
     this.showPreloader = true;
     if (!this.selectedTag) {
       this.autosearchDevice = [];
       data.Criteria = [];
     }
-    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {                   
-      if(!this.deviceSuccess)
-      {
+    this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
+      if (!this.deviceSuccess) {
         this.getTempData();
-        setTimeout(()=>{
+        setTimeout(() => {
           this.searchDeviceTag(data);
-        },300);
-        return;        
-      }                                            
-      this.getAlldevicedata(resp[0].CompanyGuid);   
+        }, 300);
+        return;
+      }
+      this.getAlldevicedata(resp[0].CompanyGuid);
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -436,33 +437,33 @@ export class DevicesComponent implements OnInit {
       if (resp.length > 0) {
         if (resp[0].Value != "Unknown message type received : GetDeviceListConfig:") {
           let asset = this.assetList.find((x) => x.ID === resp[0].key);
-          if (asset) {            
-            this.kafkaMessage = JSON.parse(resp[0].Value);           
-              asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
-              if (this.kafkaMessage.IdleTime != null) {
-                let Time = this.kafkaMessage.IdleTime.split("Idle for");
-                asset.IdelTime = Time[1] != "" ? Time[1] : "";
+          if (asset) {
+            this.kafkaMessage = JSON.parse(resp[0].Value);
+            asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+            if (this.kafkaMessage.IdleTime != null) {
+              let Time = this.kafkaMessage.IdleTime.split("Idle for");
+              asset.IdelTime = Time[1] != "" ? Time[1] : "";
+            }
+            if (this.kafkaMessage.UpTime != "") {
+              let result = this.kafkaMessage.UpTime.split(" ");
+
+              if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
+                let Sec = result[6] + 's';
+                asset.UpTime = Sec;
               }
-              if (this.kafkaMessage.UpTime != "") {
-                let result = this.kafkaMessage.UpTime.split(" ");
-  
-                if (result[0] == "0" && result[2] == "0" && result[4] == "0") {
-                  let Sec = result[6]+ 's';
-                  asset.UpTime = Sec;
-                }
-                else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
-                  let Minutes = result[4]+'m'+ ' ' + result[6]+'s';
-                  asset.UpTime = Minutes;
-                }
-                else if (result[0] == "0" && result[2] != "0") {
-                  let Hours = result[2]+'h'+ ' ' + result[4]+'m';
-                  asset.UpTime = Hours;
-                }
-                else {
-                  let Days = result[0]+'d'+ ' ' + result[2]+'h';
-                  asset.UpTime = Days;
-                }
-              }              
+              else if (result[0] == "0" && result[2] == "0" && result[4] != "0") {
+                let Minutes = result[4] + 'm' + ' ' + result[6] + 's';
+                asset.UpTime = Minutes;
+              }
+              else if (result[0] == "0" && result[2] != "0") {
+                let Hours = result[2] + 'h' + ' ' + result[4] + 'm';
+                asset.UpTime = Hours;
+              }
+              else {
+                let Days = result[0] + 'd' + ' ' + result[2] + 'h';
+                asset.UpTime = Days;
+              }
+            }
           }
           asset.online = true;
         }
@@ -477,7 +478,7 @@ export class DevicesComponent implements OnInit {
     this.filter.onFilter(field, this.assetList);
   }
 
-  gotoDetailDevice(Guid: string,AssetCompanyGuid: string) {
+  gotoDetailDevice(Guid: string, AssetCompanyGuid: string) {
     localStorage.setItem("company_id", AssetCompanyGuid);
     const type = "workstation";
     var url = `/#/${this.companiesStateService
@@ -1553,7 +1554,7 @@ export class DevicesComponent implements OnInit {
   }
 
   onCurrentConfig(resp: any) {
-    if (resp.length > 0) {      
+    if (resp.length > 0) {
       if (this.asset.ID && this.asset.ID != 0) {
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item) {
@@ -1736,10 +1737,10 @@ export class DevicesComponent implements OnInit {
       datasize.Comparison = this.advanceSearchFreeSpaceSelect.name;
       datasize.Value = this.advanceSearchFreeSpace;
       data.searchItems.push(datasize);
-    }    
+    }
 
     data.OSType = '';
-    if(this.advancesearchOSType) {
+    if (this.advancesearchOSType) {
       data.OSType = this.advancesearchOSType
     }
 
@@ -1748,36 +1749,36 @@ export class DevicesComponent implements OnInit {
       for (let i = 0; i < this.advancesearchOSVersionNameTag.length; i++) {
         data.OSVersion.push(this.advancesearchOSVersionNameTag[i]);
       }
-    }    
-    
+    }
+
     data.HardwareTypesList = [];
     if (this.advancesearchHardwareTag && this.advancesearchHardwareTag.length > 0) {
       for (let i = 0; i < this.advancesearchHardwareTag.length; i++) {
         data.HardwareTypesList.push(this.advancesearchHardwareTag[i].id);
       }
-    }    
+    }
 
     data.ManufacturerList = [];
     if (this.advancesearchManufacturerTag && this.advancesearchManufacturerTag.length > 0) {
       for (let i = 0; i < this.advancesearchManufacturerTag.length; i++) {
         data.ManufacturerList.push(this.advancesearchManufacturerTag[i].ID);
       }
-    }        
-    
+    }
+
     data.ModelList = [];
     if (this.advancesearchModelTag && this.advancesearchModelTag.length > 0) {
       for (let i = 0; i < this.advancesearchModelTag.length; i++) {
         data.ModelList.push(this.advancesearchModelTag[i].ID);
       }
-    }    
-    
+    }
+
     data.SoftwareList = [];
     if (this.advancesearchSoftwareTag && this.advancesearchSoftwareTag.length > 0) {
       for (let i = 0; i < this.advancesearchSoftwareTag.length; i++) {
         data.SoftwareList.push(this.advancesearchSoftwareTag[i].id);
       }
-    }    
-    
+    }
+
     this.agentService.getAssetByAdvanceSearch(data).subscribe(
       (result) => {
 
@@ -1798,7 +1799,7 @@ export class DevicesComponent implements OnInit {
           }
         }
         else {
-          this.assetList=[];
+          this.assetList = [];
         }
         this.advancesearchPreloader = false;
       });
@@ -1858,7 +1859,7 @@ export class DevicesComponent implements OnInit {
     this.advancesearchOSType = [];
     if (OSType != undefined || OSType != null) {
       this.advancesearchOSType.push(OSType);
-    }    
+    }
   }
 
   AdvanceSearchMemory(memory) {
@@ -1894,7 +1895,7 @@ export class DevicesComponent implements OnInit {
     this.advancesearchCompanyTag.splice(index, 1);
   }
 
-  searcOSVersionNameRemove( index: number) {
+  searcOSVersionNameRemove(index: number) {
     this.advancesearchOSVersionNameTag.splice(index, 1);
   }
 
@@ -1983,76 +1984,68 @@ export class DevicesComponent implements OnInit {
     this.advanceSearchMemory = 0;
   }
 
-  getLastCheckIn(asset) {    
+  getLastCheckIn(asset) {
     let result = '';
     if (!asset) {
       return;
     }
-    if(asset.LastCheckInDate !=null && asset.LastCheckInDate !='' && asset.LastCheckInDate !=undefined)
-    {
-      let humanData = moment.duration(moment().diff(moment(asset.LastCheckInDate)));      
-      if(humanData.years()!=0)
-      {
-        result = result + humanData.years()+'y'+' '+humanData.months()+'mo';
+    if (asset.LastCheckInDate != null && asset.LastCheckInDate != '' && asset.LastCheckInDate != undefined) {
+      let humanData = moment.duration(moment().diff(moment(asset.LastCheckInDate)));
+      if (humanData.years() != 0) {
+        result = result + humanData.years() + 'y' + ' ' + humanData.months() + 'mo';
       }
-      if(humanData.years()==0 && humanData.months()!=0)
-      {
-        result = result + humanData.months()+'mo'+' '+humanData.days()+'d';
+      if (humanData.years() == 0 && humanData.months() != 0) {
+        result = result + humanData.months() + 'mo' + ' ' + humanData.days() + 'd';
       }
-      if(humanData.years()==0 && humanData.months()==0 && humanData.days()!=0)
-      {
-        result = result + humanData.days()+'d'+' '+humanData.hours()+'h';
+      if (humanData.years() == 0 && humanData.months() == 0 && humanData.days() != 0) {
+        result = result + humanData.days() + 'd' + ' ' + humanData.hours() + 'h';
       }
-      if(humanData.years()==0 && humanData.months()==0 && humanData.days()==0 && humanData.hours()!=0)
-      {
-        result = result + humanData.hours()+'h'+' '+humanData.minutes()+'m';
+      if (humanData.years() == 0 && humanData.months() == 0 && humanData.days() == 0 && humanData.hours() != 0) {
+        result = result + humanData.hours() + 'h' + ' ' + humanData.minutes() + 'm';
       }
-      if(humanData.years()==0 && humanData.months()==0 && humanData.days()==0 && humanData.hours()==0 && humanData.minutes()!=0)
-      {
-        result = result + humanData.minutes()+'m'+' '+humanData.seconds()+'s';
+      if (humanData.years() == 0 && humanData.months() == 0 && humanData.days() == 0 && humanData.hours() == 0 && humanData.minutes() != 0) {
+        result = result + humanData.minutes() + 'm' + ' ' + humanData.seconds() + 's';
       }
-      if(humanData.years()==0 && humanData.months()==0 && humanData.days()==0 && humanData.hours()==0 && humanData.minutes()==0 && humanData.seconds()!=0)
-      {
-        result = result + humanData.seconds()+'s';
-      }       
-    }       
-    return result    
+      if (humanData.years() == 0 && humanData.months() == 0 && humanData.days() == 0 && humanData.hours() == 0 && humanData.minutes() == 0 && humanData.seconds() != 0) {
+        result = result + humanData.seconds() + 's';
+      }
+    }
+    return result
   }
 
-  removeMicrosoft(assetOperationgSystem){    
-    if(!assetOperationgSystem){
+  removeMicrosoft(assetOperationgSystem) {
+    if (!assetOperationgSystem) {
       return;
     }
-    return assetOperationgSystem.replace("Microsoft","");
+    return assetOperationgSystem.replace("Microsoft", "");
   }
 
-  getAlldevicedata(id) {    
-    if(id){
-      this.tempDevices.forEach(item=>{
-        if(item[id].length)
-        {
-          item[id].forEach(data=>{
+  getAlldevicedata(id) {
+    if (id) {
+      this.tempDevices.forEach(item => {
+        if (item[id].length) {
+          item[id].forEach(data => {
             this.devices.push(data);
           })
         }
-      })    
+      })
     }
   }
 
-  getTempData(){
-    this.devicesStateService.getOnDevices().subscribe(data => {   
-          this.tempDevices=[];
-          this.deviceSuccess = true;
-          this.tempDevices.push(data);
-        });
+  getTempData() {
+    this.devicesStateService.getOnDevices().subscribe(data => {
+      this.tempDevices = [];
+      this.deviceSuccess = true;
+      this.tempDevices.push(data);
+    });
   }
 
-  getDevices(assetList) {    
+  getDevices(assetList) {
     assetList.forEach((element, index) => {
-      element.RemoteOnline = false;      
+      element.RemoteOnline = false;
       let result = this.devices.find(x => x.agentId === element.Guid);
       if (result) {
-        assetList[index].RemoteOnline = result.online;        
+        assetList[index].RemoteOnline = result.online;
       }
     });
   }

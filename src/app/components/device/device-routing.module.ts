@@ -1,80 +1,69 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PermissionTechUserService } from 'src/app/services/users/permission-tech-user.service';
-import { AntivirusComponent } from './antivirus/antivirus.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeviceComponent } from './device.component';
-import { FileComponent } from './file-explorer/file-explorer.component';
-import { HardwareComponent } from './hardware/hardware.component';
-import { PasswordComponent } from './password/password.component';
-import { ProcessesComponent } from './processes/processes.component';
-import { ServicesComponent } from './services/services.component';
-import { SoftwareComponent } from './software/software.component';
-import { StartupComponent } from './startup-programes/startup-programes.component';
-import { TerminalComponent } from './terminal/terminal.component';
-import { WindowUpdatesComponent } from './window-updates/window-updates.component';
-import { WindowsComponent } from './windows-update/windows-update.component';
 
 const routes: Routes = [{
     path: '', component: DeviceComponent, children: [
         {
             path: 'dashboard/:type/:id',
-            component: DashboardComponent,
+            loadChildren: './dashboard/dashboard.module#DashboardModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'hardware/:type/:id',
-            component: HardwareComponent,
+            loadChildren: './hardware/hardware.module#HardwareModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'software/:type/:id',
-            component: SoftwareComponent,
+            loadChildren: './software/software.module#SoftwareModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'service/:type/:id',
-            component: ServicesComponent,
+            loadChildren: './services/services.module#ServicesModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'antivirus/:type/:id',
-            component: AntivirusComponent,
+            loadChildren: './antivirus/antivirus.module#AntivirusModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'terminal/:type/:id',
-            component: TerminalComponent,
+            loadChildren: './terminal/terminal.module#TerminalModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'password/:type/:id',
-            component: PasswordComponent,
+            loadChildren: './password/password.module#PasswordModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'window/:type/:id',
-            component: WindowsComponent,
+            loadChildren: './windows-update/windows-update.module#WindowsModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'startup/:type/:id',
-            component: StartupComponent,
+            loadChildren: './startup-programes/startup-programes.module#StartupModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'file/:type/:id',
-            component: FileComponent,
+            loadChildren: './file-explorer/file-explorer.module#FileModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'windows/:type/:id',
-            component: WindowUpdatesComponent,
+            loadChildren: './window-updates/window-updates.module#WindowUpdatesModule',
             canActivate: [PermissionTechUserService]
         },
         {
             path: 'processes/:type/:id',
-            component: ProcessesComponent
+            loadChildren: './processes/processes.module#ProcessesModule',
+
         },
     ]
 },];

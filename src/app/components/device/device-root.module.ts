@@ -26,18 +26,6 @@ import { WindowsComponent } from './windows-update/windows-update.component';
 @NgModule({
     declarations: [DeviceComponent,
         NavComponent,
-        DashboardComponent,
-        AntivirusComponent,
-        FileComponent,
-        HardwareComponent,
-        PasswordComponent,
-        ProcessesComponent,
-        ServicesComponent,
-        SoftwareComponent,
-        StartupComponent,
-        TerminalComponent,
-        WindowUpdatesComponent,
-        WindowsComponent
     ],
     imports: [
         CommonModule,

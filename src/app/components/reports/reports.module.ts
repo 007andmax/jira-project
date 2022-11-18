@@ -4,21 +4,20 @@ import { ReportsComponent } from './reports.component';
 import { ReportListItemComponent } from './report-list-item/report-list-item.component';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+import { ReportListItemModule } from './report-list-item/report-list-item.module';
 
 
 
 @NgModule({
-    declarations: [ReportsComponent,
-        ReportListItemComponent
+    declarations: [ReportsComponent
     ],
     imports: [
         CommonModule,
         ReportsRoutingModule,
-        ToFixedModule
+        ToFixedModule,
+        ReportListItemModule
 
     ],
-
-
 
 })
 export class ReportsModule { }
