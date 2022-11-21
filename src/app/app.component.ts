@@ -151,6 +151,7 @@ export class AppComponent implements OnInit {
       };
 
       if (localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+      if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
       if (this.appService.isMobile) {
         $("#aside-left-panel").width("auto");
       }
@@ -214,7 +215,13 @@ export class AppComponent implements OnInit {
 
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (data) $("#aside-left-panel").width("");
+      if (!data && localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+      if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
       this.toggleLeftPanel = data;
+
+      console.log("data", data);
+
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
@@ -223,6 +230,7 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
       this.hideleLeftPanel = data;
+      console.log("this.hideleLeftPanel", this.hideleLeftPanel);
       this.cd.detectChanges();
     })
     this.appService.onLockScreen.subscribe(data => {

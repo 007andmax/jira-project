@@ -232,7 +232,7 @@ html {
   }
 }
 .main-container:nth-child(2) {
-  display: none;
+ // display: none;
 }
 .ng-sidebar {
   position: fixed !important;
@@ -3355,10 +3355,6 @@ app-quotes-item {
 
 @import "./assets/styles/dropdowns.scss";
 @import "./assets/styles/icons.scss";
-
-.main-container:nth-child(2) {
-  display: none;
-}
 
 .ng-sidebar {
   position: fixed !important;

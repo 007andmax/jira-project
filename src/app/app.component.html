@@ -4,12 +4,6 @@
     *ngIf="main_page === PAGE_MAIN"
 >
     <aside id="aside-left-panel">
-        <app-header
-            [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
-            class="nav-header"
-            [ngClass]="{'--small-with':toggleLeftPanel,
-    '--full-width':hideleLeftPanel}"
-        ></app-header>
         <app-left-panel
             [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
             class="app-left-panel"
@@ -29,6 +23,12 @@
         [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
     ></left-panel-super-admin>
     <main>
+        <app-header
+            [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
+            class="nav-header"
+            [ngClass]="{'--small-with':toggleLeftPanel,
+    '--full-width':hideleLeftPanel}"
+        ></app-header>
         <div
             class="main-container supper-admin-container"
             *ngIf="currentUser && currentUser.role === 'SUPER_ADMIN'"
