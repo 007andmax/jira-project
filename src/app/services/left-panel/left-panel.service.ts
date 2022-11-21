@@ -93,7 +93,7 @@ export class LeftPanelService {
       state === 'service-report' ||
       state === 'income-accounts')
   }
-  public isSettingsPage(state) {
+  public isSettingsPage(state) {    
     return (state === 'myprofile-component'
       || state === 'manage-tags-component'
       || state === 'products-settings'
@@ -108,7 +108,8 @@ export class LeftPanelService {
       || state === 'commission-component'
       || state === 'ticket-settings'
       || state === 'crm-settings'
-      || state === 'marketing-email')
+      || state === 'marketing-email'
+      || state === 'device-setting-component')
   }
 
   public isDevicesPage(state) {

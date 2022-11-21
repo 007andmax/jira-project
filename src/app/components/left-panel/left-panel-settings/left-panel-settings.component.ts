@@ -28,23 +28,23 @@ export class LeftPanelSettingsComponent implements OnInit {
     private usersStateService: UsersStateService) {
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.componentName = this.settingStateService.getComponentName();
     this.currentUser = this.usersStateService.getCurrentUser();
-    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {      
       if (data) this.open = false;
     })
-    this.leftPanelStateService.onChangeState.subscribe(state => {
+    this.leftPanelStateService.onChangeState.subscribe(state => {      
       if (!this.leftPanelService.isSettingsPage(state)) this.open = false
     })
-    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {      
       if (this.leftPanelService.isSettingsPage(data)) this.open = true;
     })
   }
   public close() {
     this.open = false;
   }
-  public isSettingsPage(state) {
+  public isSettingsPage(state) {    
     return (state === 'myprofile-component'
       || state === 'manage-tags-component'
       || state === 'products-settings'
@@ -62,12 +62,13 @@ export class LeftPanelSettingsComponent implements OnInit {
       || state === 'device-setting-component'
       || state === 'ticket-settings'
       || state === 'crm-settings'
-      || state === 'marketing-email')
+      || state === 'marketing-email'
+      || state === 'device-setting-component')
   }
   openPanel() {
     this.onOpenPanel.emit(null);
   }
-  public goToState(state) {
+  public goToState(state) {    
     this.onChangeState.emit(state);
   }
   public getPermissions(action) {

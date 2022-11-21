@@ -101,7 +101,7 @@ export class AppComponent implements OnInit {
    * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary')) {
+    if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary') && !window.location.href.includes('/deviceSetting')) {
       this.main_page = PAGE_DEVICE;
     } else {
       this.main_page = PAGE_MAIN;
