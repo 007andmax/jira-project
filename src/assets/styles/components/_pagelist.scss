@@ -69,7 +69,8 @@
     }
     &.--sticky {
       position: sticky;
-      top: $header-height;
+      //top: $header-height;
+      top: 0;
       padding-top: 24px;
       margin-top: -24px;
 

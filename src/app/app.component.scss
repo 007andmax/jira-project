@@ -35,9 +35,9 @@
     margin-left: 0 !important;
 }
 .main-page-container {
-    height: 100%;
+    //height: 100vh;
     overflow: hidden;
-    background-color: $white;
+    //background-color: $white;
 }
 
 // Flexbox setup.
@@ -79,19 +79,13 @@
     }
 
     &>main {
-        -webkit-order: 0;
-        -ms-flex-order: 0;
         order: 0;
-        -webkit-flex: 1 1 auto;
-        -ms-flex: 1 1 auto;
         flex: 1 1 auto;
-        -webkit-align-self: auto;
-        -ms-flex-item-align: auto;
         align-self: auto;
     }
 }
 
-.main-page-container>aside,
+//.main-page-container>aside,
 .main-page-container>main {
     overflow: auto;
 }
@@ -133,7 +127,8 @@ aside {
         height: 100vh;
         width: 3px;
         margin-top: -18px / 2;
-        border-left-color: $gray-300--old;
+        //border-left-color: $gray-300--old;
+        border-left-color: transparent;
         border-left-width: 2px;
         border-left-style: solid;
     }
