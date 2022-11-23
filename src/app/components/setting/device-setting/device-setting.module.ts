@@ -7,11 +7,19 @@ import { MatChipsModule, MatFormFieldModule, MatIconModule, MatSelectModule } fr
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModelPipe } from 'src/app/pipe/model.pipe';
+import { AddDeviceTypeComponent } from './add-device-type/add-device-type.component';
+import { AddManufactureComponent } from './add-manufacture/add-manufacture.component';
+import { AddModelComponent } from './add-model/add-model.component';
+import { DeviceSettingAsideComponent } from './device-setting-aside/device-setting-aside.component';
 
 @NgModule({
     declarations: [
         DeviceSettingComponent,
-        ModelPipe
+        ModelPipe,
+        AddDeviceTypeComponent,
+        AddManufactureComponent,
+        AddModelComponent,
+        DeviceSettingAsideComponent
     ],
     imports: [
         CommonModule,

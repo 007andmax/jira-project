@@ -1,0 +1,45 @@
+<div
+    class="qt-aside-modern qt-aside-modern--page-settings users-page__aside"
+    *ngIf="opened"
+>
+    <div class="qt-aside-modern__header">
+        <div
+            class="qt-aside-modern__header-title"
+            [textContent]="name"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="assign-ticket-content">
+            <div class="users-list custom-scroll">
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="list"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <div class="device-setting__row">
+                        <div
+                            class="device-setting__row-title"
+                            [textContent]="item.Name"
+                        ></div>
+                        <div
+                            class="device-setting__name"
+                            [textContent]="item.CompanyName"
+                        ></div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button qt-jc-c qt-w100"
+                (click)="opened = false"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,526 +1,418 @@
 <!-- Middle Wrapper -->
 <div class="page-container">
-  <div class="page-insider manage-tags">
-      <div class="heading">          
-          <h6 class="qt-fw-600">Device Settings</h6>
-          <span>
-          <div class="heading-serach" *ngIf="devicebutton">
-            <a
-                href="javascript:;"
-                class="btn-outline"
-                (click)="openModel(true, 0)"
-            >
-                Add Device Type
-            </a>
-
-             <!-- Modal create Device Type -->
-             <div
-             class="modal-content toggle-area"
-             [class.opened]="create"
-         >
-             <div class="modal-wrapper">
-                 <div class="toggle-header">
-                     <h2 class="h1">Add Device Type</h2>
-                 </div>
-                 <div class="modal-body">
-                     <form
-                         [formGroup]="deviceForm"
-                         (ngSubmit)="onSubmit()"
-                     >
-                         <div class="f-row">
-                             <div class="f-col col-100">
-                                 <label>Device Name</label>
-                                 <div class="form-row">
-                                     <input
-                                         type="text"
-                                         class="form-input"
-                                         formControlName="Name"
-                                         placeholder="Enter Device Type Name"
-                                         #Name
-                                         [ngClass]="{ 'is-invalid': submitted && f.Name.errors }"
-                                     >
-                                 </div>
-                                 <div
-                                                *ngIf="submitted && f.Name.errors"
-                                                class="invalid-feedback"
-                                            >
-                                                <div *ngIf="f.Name.errors.required">Name is required</div>
-                                            </div>
-                             </div>
-                             <div class="m-btn-row">
-                                 <div class="m-btn-col">
-                                     <input
-                                         type="submit"
-                                         value="Save"
-                                         class="btn btn-primary"
-                                     >
-                                     <a
-                                         href="javascript:;"
-                                         class="btn btn-secondary"
-                                         aria-label="Close"
-                                         (click)="create = !create"
-                                     >
-                                         Cancel
-                                     </a>
-                                 </div>
-                             </div>
-                         </div>
-                     </form>
-                 </div>
-             </div>
-         </div>
+    <div class="page-insider manage-tags">
+        <div class="heading qt-df qt-ai-fs qt-jc-sb">
+            <h5 class="qt-fw-600">Device Settings</h5>
+            <div class="qt-df">
+                <a
+                    href="javascript:;"
+                    class="qt-button qt-ml-24 --md"
+                    (click)="onSubmit()"
+                    *ngIf="activeTab !== 'gLNumbers' && activeTab !== 'taxes'"
+                >
+                    Save Changes
+                </a>
+                <div class="qt-df qt-pos-rel">
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                        (click)="openModel(true, 0)"
+                        *ngIf="devicebutton"
+                    >
+                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        Add Device Type
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                        (click)="openModelManufacture(true, 0)"
+                        *ngIf="manufacturebutton"
+                    >
+                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        Add Manufacture
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                        (click)="openModelPopup(true, 0)"
+                        *ngIf="modelbutton"
+                    >
+                        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                        Add Model
+                    </a>
+                    <add-device-type
+                        *ngIf="addDeviceType"
+                        [techCompany]="techCompany"
+                        (onClose)="onClosedAddDeviceType()"
+                        (onAdded)="onAddDeviceType()"
+                    ></add-device-type>
+                    <add-manufacture
+                        *ngIf="addManufacture"
+                        [techCompany]="techCompany"
+                        (onClose)="onClosedAddManufacture()"
+                        (onAdded)="onAddManufacture()"
+                    ></add-manufacture>
+                    <add-model
+                        *ngIf="addModel"
+                        [manufactureId]="manufactureId"
+                        (onClose)="onClosedAddModel()"
+                        (onAdded)="onAddModel()"
+                    ></add-model>
+                </div>
+            </div>
         </div>
-
-        <div class="heading-serach" *ngIf="manufacturebutton">
-          <a
-              href="javascript:;"
-              class="btn-outline"
-              (click)="openModelManufacture(true, 0)"
-          >
-              Add Manufacture
-          </a>
-
-          <div
-          class="modal-content toggle-area"
-          [class.opened]="create"
-      >
-          <div class="modal-wrapper">
-              <div class="toggle-header">
-                  <h2 class="h1">Add Manufacture</h2>
-              </div>
-              <div class="modal-body">
-                  <form
-                      [formGroup]="manufactureForm"
-                      (ngSubmit)="onSubmitManufacturer()"
-                  >
-                      <div class="f-row">
-                          <div class="f-col col-100">
-                              <label>Manufacture Name</label>
-                              <div class="form-row">
-                                  <input
-                                      type="text"
-                                      class="form-input"
-                                      formControlName="Name"
-                                      placeholder="Enter Manufacture Name"
-                                      #Name
-                                      [ngClass]="{ 'is-invalid': submitted && f1.Name.errors }"
-                                  >
-                              </div>
-                              <div
-                                             *ngIf="submitted && f1.Name.errors"
-                                             class="invalid-feedback"
-                                         >
-                                             <div *ngIf="f1.Name.errors.required">Name is required</div>
-                                         </div>
-                          </div>
-                          <div class="m-btn-row">
-                              <div class="m-btn-col">
-                                  <input
-                                      type="submit"
-                                      value="Save"
-                                      class="btn btn-primary"
-                                  >
-                                  <a
-                                      href="javascript:;"
-                                      class="btn btn-secondary"
-                                      aria-label="Close"
-                                      (click)="create = !create"
-                                  >
-                                      Cancel
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
-      </div>
-      </span>
-      </div>
-              <ngb-tabset  (tabChange)="toggle($event)">
-          <!-- Device Type -->
-          <ngb-tab
-              title="Device Type"
-              id="tab1"
-          >
-              <ng-template ngbTabContent >
-                  <div class="cmn-area">
-                      <div class="data-table-wrap">
-                        <table class="qt-table-modern qt-page-list__header-thead">
-                          <thead>
-                              <tr>
-                                  <th class="company-devices-table__check">
-                                      <div class="d-f">
-                                          <label class="qt-checkbox">
-                                            <input
-                                                type="checkbox"
-
-                                            >
-                                            <span></span>
-                                        </label>
-                                      </div>
-                                  </th>
-                                  <th class="device-type pointer" (click)="onFilter('Name')">
-                                      Device Type
-                                      <span class="qt-table-modern__sorting"></span>
-                                  </th>
-                                  <th class="count pointer" (click)="onFilter('Counter')">
-                                      Count
-                                      <span class="qt-table-modern__sorting"></span>
-                                  </th>
-                                  <th class="delete"></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="company-device-hover" *ngFor="let deviceType of deviceTypeList">
-                               <td class="company-devices-table__check">
-                                     <div class="d-f">
-                                         <label class="qt-checkbox">
-                                           <input
-                                               type="checkbox"
-                                               [(ngModel)]="deviceType.IsActive"
-
-                                           >
-                                           <span></span>
-                                       </label>
-                                     </div>
-                                 </td>
-                                 <td class="company-devices-table__go-to">
-                                   {{deviceType.Name}}
-                                 </td>
-                                 <td class="company-devices-table__go-to count-setting">
-                                   <div *ngIf="deviceType.Counter != 0">
-                                     <a
-                                     href="javascript:;"
-                                     (click)="counterPopup(templatecounter, deviceType)"
-                                     > {{deviceType.Counter}}
-                                     </a>
-                                   </div>
-                                   <div *ngIf="deviceType.Counter == 0">
-                                    {{deviceType.Counter}}
-                                   </div>
-                                 </td>
-                                 <td class="company-devices-table__go-to delete">
-                                   <a
-                                       href="javascript:;"
-                                       data-tooltip="Remove"
-                                       class="remove"
-                                       (click)="removeConfirm(deviceType)"
-                                   >
-                                       <img
-                                           src="/html/assets/img/icons/remove.svg"
-                                           alt="Remove"
-                                       >
-                                   </a>
-                               </td>
-                            </tr>
-                        </tbody>
-                      </table>
-                      <table class="qt-table-modern qt-page-list__header-thead" *ngIf="!deviceTypeList || deviceTypeList.length == 0">
-                        <tbody>
-                            <tr>
-                                <td colspan="10" class="text-center">No devices type to show</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                      </div>
-                    </div>            
-              </ng-template>
-          </ngb-tab>
-          <!-- Manufacture -->
-          <ngb-tab title="Manufacture" id="tab2">
-              <ng-template ngbTabContent>
-                  <div class="cmn-area">
-                      <div class="data-table-wrap">
-                        <table class="qt-table-modern qt-page-list__header-thead">
-                          <thead>
-                              <tr>
-                                  <th class="company-devices-table__check">
-                                      <div class="d-f">
-                                          <label class="qt-checkbox">
-                                            <input
-                                                type="checkbox"
-
-                                            >
-                                            <span></span>
-                                        </label>
-                                      </div>
-                                  </th>
-                                  <th class="device-type pointer" (click)="onFilterManufacturer('Name')">
-                                      Manufacture
-                                      <span class="qt-table-modern__sorting"></span>
-                                  </th>
-                                  <th class="count pointer" (click)="onFilterManufacturer('Count')">
-                                      Count
-                                      <span class="qt-table-modern__sorting"></span>
-                                  </th>
-                                  <th class="delete"></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="company-device-hover" *ngFor="let manufacture of manufactureIsActiveList">
-                                <td class="company-devices-table__check">
-                                    <div class="d-f">
-                                        <label class="qt-checkbox">
-                                          <input
-                                              type="checkbox"
-                                              [(ngModel)]="manufacture.IsActive"
-
-                                          >
-                                          <span></span>
-                                      </label>
-                                    </div>
-                                </td>
-                                <td class="company-devices-table__go-to">
-                                  {{manufacture.Name}}
-                                </td>
-                                <td class="company-devices-table__go-to count-setting">
-                                  <div *ngIf="manufacture.Counter != 0">
-                                    <a
-                                    href="javascript:;"
-                                    (click)="counterPopupManufactuer(templatecounterManufactuer, manufacture)"
-                                    > {{manufacture.Counter}}
-                                    </a>
-                                  </div>
-                                  <div *ngIf="manufacture.Counter == 0">
-                                   {{manufacture.Counter}}
-                                  </div>
-                                </td>
-                                <td class="company-devices-table__go-to">
-                                  <a
-                                      href="javascript:;"
-                                      data-tooltip="Remove"
-                                      class="remove"
-                                      (click)="removeConfirmManufacturer(manufacture)"
-                                  >
-                                      <img
-                                          src="/html/assets/img/icons/remove.svg"
-                                          alt="Remove"
-                                      >
-                                  </a>
-                              </td>
-                            </tr>
-                        </tbody>
-                      </table>
-                      <table class="qt-table-modern qt-page-list__header-thead" *ngIf="!manufactureIsActiveList || manufactureIsActiveList.length == 0">
-                        <tbody>
-                            <tr>
-                                <td colspan="10" class="text-center">No manufacture to show</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                      </div>
-                  </div>                  
-              </ng-template>
-          </ngb-tab>
-          <!-- Model -->
-          <ngb-tab title="Model" id="tab3">
-              <ng-template ngbTabContent>
-                  <div class="cmn-area">
-                      <div class="data-table-wrap">
-                        <div class="row">
-                          <div class="col-md-5">
-                            <th>
-                              <div class="qt-input-block qt-input-line">
-                                <app-drop-down
-                                #manufacturer
-                                [class]="['light-dropdown', 'qt-select-input-40']"
-                                [placeholder]="'Select Manufacture'"
-                                [list]="manufactureIsActiveList"
-                                [field]="'Name'"
-                                [search]="true"
-                                [change]="true"
-                                (onSelectedItem)="onSelectManufactureName($event)"
-                                ></app-drop-down>
-                            </div>
-                            </th>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="search"
-                              ngbDropdown
-                              [autoClose]="'outside'"
-                              #modelSearch="ngbDropdown">
-                              <div ngbDropdownAnchor>
-                                <form class="ng7 form">
-                                    <span class="qt-input-search">
-                                        <input
-                                            id="modelsearch"
-                                            type="text"
-                                            class="search__input"
-                                            placeholder="Please search"
-                                            [(ngModel)]="searchModel"
-                                            name="searchModel"
+        <ngb-tabset (tabChange)="toggle($event)">
+            <!-- Device Type -->
+            <ngb-tab
+                title="Device Type"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table class="qt-table-modern qt-page-list__header-thead">
+                                <thead>
+                                    <tr>
+                                        <th class="company-devices-table__check">
+                                            <div class="d-f">
+                                                <label class="qt-checkbox">
+                                                    <input type="checkbox">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </th>
+                                        <th
+                                            class="device-type pointer"
+                                            (click)="onFilter('Name')"
                                         >
-                                        <span
-                                            class="global-search__close icon__close-round"
-                                        ></span>
-                                    </span>
-                                </form>
-                            </div>
-                          </div>
-                          </div>
-                          <div class="col-md-3">
-                            <div class="model-popup" *ngIf="modelbutton">
-                              <a
-                                  href="javascript:;"
-                                  class="btn-outline"
-                                  (click)="openModelPopup(true, 0)"
-                              >
-                                  Add Model
-                              </a>
-
-                              <div
-                              class="modal-content toggle-area"
-                              [class.opened]="create"
-                          >
-                              <div class="modal-wrapper">
-                                  <div class="toggle-header">
-                                      <h2 class="h1">Add Model</h2>
-                                  </div>
-                                  <div class="modal-body">
-                                      <form
-                                          [formGroup]="modelForm"
-                                          (ngSubmit)="onSubmitModel()"
-                                      >
-                                          <div class="f-row">
-                                              <div class="f-col col-100">
-                                                  <label>Model Name</label>
-                                                  <div class="form-row">
-                                                      <input
-                                                          type="text"
-                                                          class="form-input"
-                                                          formControlName="Name"
-                                                          placeholder="Enter Model Name"
-                                                          #Name
-                                                          [ngClass]="{ 'is-invalid': submitted && f2.Name.errors }"
-                                                      >
-                                                  </div>
-                                                  <div
-                                                                 *ngIf="submitted && f2.Name.errors"
-                                                                 class="invalid-feedback"
-                                                             >
-                                                                 <div *ngIf="f2.Name.errors.required">Name is required</div>
-                                                             </div>
-                                              </div>
-                                              <div class="m-btn-row">
-                                                  <div class="m-btn-col">
-                                                      <input
-                                                          type="submit"
-                                                          value="Save"
-                                                          class="btn btn-primary"
-                                                      >
-                                                      <a
-                                                          href="javascript:;"
-                                                          class="btn btn-secondary"
-                                                          aria-label="Close"
-                                                          (click)="create = !create"
-                                                      >
-                                                          Cancel
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                          </div>
-                          </div>
-                          </div>
-                        </div>
-                        <table class="qt-table-modern qt-page-list__header-thead">
-                          <thead>
-                              <tr>
-                                <th class="company-devices-table__check">
-                                  <div class="d-f">
-                                    <label class="qt-checkbox">
-                                      <input
-                                      type="checkbox"
-                                      >
-                                      <span></span>
-                                    </label>
-                                  </div>
-                                </th>
-                                <th class="manufacture pointer" (click)="onFilterModel('ManufactureName')">
-                                  Manufacture
-                                  <span class="qt-table-modern__sorting"></span>
-                              </th>
-                                  <th class="model-list pointer" (click)="onFilterModel('Name')">
-                                      Model
-                                      <span class="qt-table-modern__sorting"></span>
-                                  </th>
-                                  <th class="count pointer" (click)="onFilterModel('Count')">
-                                      Count
-                                      <span class="qt-table-modern__sorting"></span>
-                                  </th>
-                                  <th class="delete"></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="company-device-hover" *ngFor="let model of selectManufactureList | modelFilter: searchModel">
-                              <td class="company-devices-table__check">
-                                <div class="d-f">
-                                  <label class="qt-checkbox">
-                                    <input
-                                    type="checkbox"
-                                    [(ngModel)]="model.IsActive"
-
+                                            Device Type
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th
+                                            class="count pointer"
+                                            (click)="onFilter('Counter')"
+                                        >
+                                            Count
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th class="delete"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        class="company-device-hover"
+                                        *ngFor="let deviceType of deviceTypeList"
                                     >
-                                    <span></span>
-                                  </label>
+                                        <td class="company-devices-table__check">
+                                            <div class="d-f">
+                                                <label class="qt-checkbox">
+                                                    <input
+                                                        type="checkbox"
+                                                        [(ngModel)]="deviceType.IsActive"
+                                                    >
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="company-devices-table__go-to">{{deviceType.Name}}</td>
+                                        <td class="company-devices-table__go-to count-setting">
+                                            <div *ngIf="deviceType.Counter != 0">
+                                                <a
+                                                    href="javascript:;"
+                                                    (click)="counterPopup(templatecounter, deviceType)"
+                                                >
+                                                    {{deviceType.Counter}}
+                                                </a>
+                                            </div>
+                                            <div *ngIf="deviceType.Counter == 0">{{deviceType.Counter}}</div>
+                                        </td>
+                                        <td class="company-devices-table__go-to delete">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Remove"
+                                                class="remove"
+                                                (click)="removeConfirm(deviceType)"
+                                            >
+                                                <img
+                                                    src="/html/assets/img/icons/remove.svg"
+                                                    alt="Remove"
+                                                >
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table
+                                class="qt-table-modern qt-page-list__header-thead"
+                                *ngIf="!deviceTypeList || deviceTypeList.length == 0"
+                            >
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            colspan="10"
+                                            class="text-center"
+                                        >
+                                            No devices type to show
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Manufacture -->
+            <ngb-tab
+                title="Manufacture"
+                id="tab2"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table class="qt-table-modern qt-page-list__header-thead">
+                                <thead>
+                                    <tr>
+                                        <th class="company-devices-table__check">
+                                            <div class="d-f">
+                                                <label class="qt-checkbox">
+                                                    <input type="checkbox">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </th>
+                                        <th
+                                            class="device-type pointer"
+                                            (click)="onFilterManufacturer('Name')"
+                                        >
+                                            Manufacture
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th
+                                            class="count pointer"
+                                            (click)="onFilterManufacturer('Count')"
+                                        >
+                                            Count
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th class="delete"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        class="company-device-hover"
+                                        *ngFor="let manufacture of manufactureIsActiveList"
+                                    >
+                                        <td class="company-devices-table__check">
+                                            <div class="d-f">
+                                                <label class="qt-checkbox">
+                                                    <input
+                                                        type="checkbox"
+                                                        [(ngModel)]="manufacture.IsActive"
+                                                    >
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="company-devices-table__go-to">{{manufacture.Name}}</td>
+                                        <td class="company-devices-table__go-to count-setting">
+                                            <div *ngIf="manufacture.Counter != 0">
+                                                <a
+                                                    href="javascript:;"
+                                                    (click)="counterPopupManufactuer(templatecounterManufactuer, manufacture)"
+                                                >
+                                                    {{manufacture.Counter}}
+                                                </a>
+                                            </div>
+                                            <div *ngIf="manufacture.Counter == 0">{{manufacture.Counter}}</div>
+                                        </td>
+                                        <td class="company-devices-table__go-to">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Remove"
+                                                class="remove"
+                                                (click)="removeConfirmManufacturer(manufacture)"
+                                            >
+                                                <img
+                                                    src="/html/assets/img/icons/remove.svg"
+                                                    alt="Remove"
+                                                >
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table
+                                class="qt-table-modern qt-page-list__header-thead"
+                                *ngIf="!manufactureIsActiveList || manufactureIsActiveList.length == 0"
+                            >
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            colspan="10"
+                                            class="text-center"
+                                        >
+                                            No manufacture to show
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Model -->
+            <ngb-tab
+                title="Model"
+                id="tab3"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <th>
+                                        <div class="qt-input-block qt-input-line">
+                                            <app-drop-down
+                                                #manufacturer
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Manufacture'"
+                                                [list]="manufactureIsActiveList"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="true"
+                                                (onSelectedItem)="onSelectManufactureName($event)"
+                                            ></app-drop-down>
+                                        </div>
+                                    </th>
                                 </div>
-                              </td>
-                              <td>
-                                {{model.ManufactureName}}
-                              </td>
-                                <td class="model">
-                                  {{model.Name}}
-                                </td>
-                                <td class="company-devices-table__go-to count-setting">
-                                  <div *ngIf="model.Counter != 0">
-                                    <a
-                                    href="javascript:;"
-                                    (click)="counterPopupModel(templatecounterModel, model)"
-                                    > {{model.Counter}}
-                                    </a>
-                                  </div>
-                                  <div *ngIf="model.Counter == 0">
-                                   {{model.Counter}}
-                                  </div>
-                                </td>
-                                <td class="company-devices-table__go-to">
-                                  <a
-                                      href="javascript:;"
-                                      data-tooltip="Remove"
-                                      class="remove"
-                                      (click)="removeConfirmModel(model)"
-                                  >
-                                      <img
-                                          src="/html/assets/img/icons/remove.svg"
-                                          alt="Remove"
-                                      >
-                                  </a>
-                              </td>
-                            </tr>
-                        </tbody>
-                      </table>
-                      <table class="qt-table-modern qt-page-list__header-thead" *ngIf="!selectManufactureList || selectManufactureList.length == 0">
-                        <tbody>
-                            <tr>
-                                <td colspan="10" class="text-center">No model to show</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                      </div>
-                  </div>                  
-              </ng-template>
-          </ngb-tab>
-      </ngb-tabset>
-  </div>
+                                <div class="col-md-4">
+                                    <div
+                                        class="search"
+                                        ngbDropdown
+                                        [autoClose]="'outside'"
+                                        #modelSearch="ngbDropdown"
+                                    >
+                                        <div ngbDropdownAnchor>
+                                            <form class="ng7 form">
+                                                <span class="qt-input-search">
+                                                    <input
+                                                        id="modelsearch"
+                                                        type="text"
+                                                        class="search__input"
+                                                        placeholder="Please search"
+                                                        [(ngModel)]="searchModel"
+                                                        name="searchModel"
+                                                    >
+                                                    <span class="global-search__close icon__close-round"></span>
+                                                </span>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <table class="qt-table-modern qt-page-list__header-thead">
+                                <thead>
+                                    <tr>
+                                        <th class="company-devices-table__check">
+                                            <div class="d-f">
+                                                <label class="qt-checkbox">
+                                                    <input type="checkbox">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </th>
+                                        <th
+                                            class="manufacture pointer"
+                                            (click)="onFilterModel('ManufactureName')"
+                                        >
+                                            Manufacture
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th
+                                            class="model-list pointer"
+                                            (click)="onFilterModel('Name')"
+                                        >
+                                            Model
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th
+                                            class="count pointer"
+                                            (click)="onFilterModel('Count')"
+                                        >
+                                            Count
+                                            <span class="qt-table-modern__sorting"></span>
+                                        </th>
+                                        <th class="delete"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        class="company-device-hover"
+                                        *ngFor="let model of selectManufactureList | modelFilter: searchModel"
+                                    >
+                                        <td class="company-devices-table__check">
+                                            <div class="d-f">
+                                                <label class="qt-checkbox">
+                                                    <input
+                                                        type="checkbox"
+                                                        [(ngModel)]="model.IsActive"
+                                                    >
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>{{model.ManufactureName}}</td>
+                                        <td class="model">{{model.Name}}</td>
+                                        <td class="company-devices-table__go-to count-setting">
+                                            <div *ngIf="model.Counter != 0">
+                                                <a
+                                                    href="javascript:;"
+                                                    (click)="counterPopupModel(templatecounterModel, model)"
+                                                >
+                                                    {{model.Counter}}
+                                                </a>
+                                            </div>
+                                            <div *ngIf="model.Counter == 0">{{model.Counter}}</div>
+                                        </td>
+                                        <td class="company-devices-table__go-to">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Remove"
+                                                class="remove"
+                                                (click)="removeConfirmModel(model)"
+                                            >
+                                                <img
+                                                    src="/html/assets/img/icons/remove.svg"
+                                                    alt="Remove"
+                                                >
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table
+                                class="qt-table-modern qt-page-list__header-thead"
+                                *ngIf="!selectManufactureList || selectManufactureList.length == 0"
+                            >
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            colspan="10"
+                                            class="text-center"
+                                        >
+                                            No model to show
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
 </div>
-
-
-
 <div
     class="img-croparea deletePopup"
     *ngIf="popup"
@@ -568,8 +460,6 @@
         </div>
     </div>
 </div>
-
-
 <div
     class="img-croparea deletePopup"
     *ngIf="popupManufacturer"
@@ -617,7 +507,6 @@
         </div>
     </div>
 </div>
-
 <div
     class="img-croparea deletePopup"
     *ngIf="popupModel"
@@ -665,103 +554,100 @@
         </div>
     </div>
 </div>
-
+<device-setting-aside></device-setting-aside>
 <ng-template #templatecounter>
-  <div
-    class="qt-aside-modern device-add-aside"
->
-    <div class="qt-aside-modern__header">
-        <div class="d-f ai-c">
-            <div class="qt-aside__title"> {{deviceName}}</div>
+    <div class="qt-aside-modern device-add-aside">
+        <div class="qt-aside-modern__header">
+            <div class="d-f ai-c">
+                <div class="qt-aside__title">{{deviceName}}</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal icon__close"
+                    (click)="closed()"
+                ></div>
+            </div>
         </div>
-        <div>
-          <div
-              class="qt-aside__close-modal icon__close"
-              (click)="closed()"
-          ></div>
-      </div>
+        <div *ngFor="let item of AssetbyHardwaretypeList">
+            <div class="device-setting__row">
+                <div
+                    class="device-setting__row-title"
+                    [textContent]="item.Name"
+                ></div>
+                <div
+                    class="device-setting__name"
+                    [textContent]="item.CompanyName"
+                ></div>
+            </div>
+        </div>
+        <div *ngIf="AssetbyHardwaretypeList.length<= 0">
+            <h4 class="not-found">No Data Found</h4>
+        </div>
     </div>
-    <div *ngFor="let item of AssetbyHardwaretypeList">
-      <div class="device-setting__row">
-          <div
-              class="device-setting__row-title"
-              [textContent]="item.Name"
-          ></div>
-          <div
-              class="device-setting__name"
-              [textContent]="item.CompanyName"
-          ></div>
-      </div>
-  </div>
-  <div *ngIf="AssetbyHardwaretypeList.length<= 0">
-    <h4 class="not-found">No Data Found</h4>
-  </div>
-</div>
 </ng-template>
-
-<ng-template #templatecounterManufactuer class="modal-content">
-  <div
-    class="heading-manufacture"
+<ng-template
+    #templatecounterManufactuer
+    class="modal-content"
 >
-    <div class="qt-aside-modern__header">
-        <div class="d-f ai-c">
-            <div class="qt-aside__title">{{manufactureName}}</div>
+    <div class="heading-manufacture">
+        <div class="qt-aside-modern__header">
+            <div class="d-f ai-c">
+                <div class="qt-aside__title">{{manufactureName}}</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal icon__close"
+                    (click)="closed()"
+                ></div>
+            </div>
         </div>
-        <div>
-          <div
-              class="qt-aside__close-modal icon__close"
-              (click)="closed()"
-          ></div>
-      </div>
+        <div *ngFor="let item of AssetbyManufactureList">
+            <div class="device-setting__row">
+                <div
+                    class="device-setting__row-title"
+                    [textContent]="item.Name"
+                ></div>
+                <div
+                    class="device-setting__name"
+                    [textContent]="item.CompanyName"
+                ></div>
+            </div>
+        </div>
+        <div *ngIf="AssetbyManufactureList.length<= 0">
+            <h4 class="not-found">No Data Found</h4>
+        </div>
     </div>
-    <div *ngFor="let item of AssetbyManufactureList">
-      <div class="device-setting__row">
-          <div
-              class="device-setting__row-title"
-              [textContent]="item.Name"
-          ></div>
-          <div
-              class="device-setting__name"
-              [textContent]="item.CompanyName"
-          ></div>
-      </div>
-  </div>
-  <div *ngIf="AssetbyManufactureList.length<= 0">
-    <h4 class="not-found">No Data Found</h4>
-  </div>
-</div>
 </ng-template>
-
-
-<ng-template #templatecounterModel class="modal-content">
-  <div
-    class="qt-aside-modern device-add-aside"
+<ng-template
+    #templatecounterModel
+    class="modal-content"
 >
-    <div class="qt-aside-modern__header">
-        <div class="d-f ai-c">
-            <div class="qt-aside__title"> {{modelName}}</div>
+    <div class="qt-aside-modern device-add-aside">
+        <div class="qt-aside-modern__header">
+            <div class="d-f ai-c">
+                <div class="qt-aside__title">{{modelName}}</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal icon__close"
+                    (click)="closed()"
+                ></div>
+            </div>
         </div>
-        <div>
-          <div
-              class="qt-aside__close-modal icon__close"
-              (click)="closed()"
-          ></div>
-      </div>
+        <div *ngFor="let model of AssetbyModelList">
+            <div class="device-setting__row">
+                <div
+                    class="device-setting__row-title"
+                    [textContent]="model.Name"
+                ></div>
+                <div
+                    class="device-setting__name"
+                    [textContent]="model.CompanyName"
+                ></div>
+            </div>
+        </div>
+        <div *ngIf="AssetbyModelList.length<= 0">
+            <h4 class="not-found">No Data Found</h4>
+        </div>
     </div>
-    <div *ngFor="let model of AssetbyModelList">
-      <div class="device-setting__row">
-          <div
-              class="device-setting__row-title"
-              [textContent]="model.Name"
-          ></div>
-          <div
-              class="device-setting__name"
-              [textContent]="model.CompanyName"
-          ></div>
-      </div>
-  </div>
-  <div *ngIf="AssetbyModelList.length<= 0">
-    <h4 class="not-found">No Data Found</h4>
-  </div>
-</div>
 </ng-template>

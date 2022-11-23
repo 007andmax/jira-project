@@ -1,9 +1,11 @@
 import { WebsocketService } from "src/app/services/websocket/websocket.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import * as CryptoJS from "crypto-js";
+import { ToastrService } from "ngx-toastr";
+import { AppStateService } from "src/app/states/app/app-state.service";
 
 @Injectable({
   providedIn: "root",
@@ -20,7 +22,9 @@ export class AgentService {
    */
   public constructor(
     private http: HttpClient,
-    private wsService: WebsocketService
+    private wsService: WebsocketService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) {
     this.ensureAccessToken();
   }
@@ -114,7 +118,11 @@ export class AgentService {
           responseType: "text",
         }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) => data), tap(data => {
+        this.toastrService.success("Device Type Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public addManufacturer(manufacturer) {
@@ -127,7 +135,11 @@ export class AgentService {
           responseType: "text",
         }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) => data), tap(data => {
+        this.toastrService.success("Manufacturer Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public addModel(model) {
@@ -140,7 +152,11 @@ export class AgentService {
           responseType: "text",
         }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) => data), tap(data => {
+        this.toastrService.success("Model Saved Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public GetWindowUpdateList(ID, datas) {
@@ -1058,7 +1074,7 @@ export class AgentService {
 
   public getSoftwareListByTechCompanyGuid(guid) {
     return this.http
-      .get(`${this.apiAgent}agent/SoftwareItem/techcompany/${guid}`, {        
+      .get(`${this.apiAgent}agent/SoftwareItem/techcompany/${guid}`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -1067,7 +1083,7 @@ export class AgentService {
 
   public getOperationgSystemGetVersionByTechCompanyGuid(guid) {
     return this.http
-      .get(`${this.apiAgent}agent/OperatingSystem/GetVersionByTechCompany?techcompanyGuid=${guid}`, {              
+      .get(`${this.apiAgent}agent/OperatingSystem/GetVersionByTechCompany?techcompanyGuid=${guid}`, {
         headers: this.getHeader(),
         responseType: "text",
       })
@@ -1076,14 +1092,14 @@ export class AgentService {
 
   public getOperationgSystemGetTypeByTechCompanyGuid(guid) {
     return this.http
-      .get(`${this.apiAgent}agent/OperatingSystem/GetTypeByTechCompany?techcompanyGuid=${guid}`, {              
+      .get(`${this.apiAgent}agent/OperatingSystem/GetTypeByTechCompany?techcompanyGuid=${guid}`, {
         headers: this.getHeader(),
         responseType: "text",
       })
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
-  }  
+  }
 
-  public getAssetByAdvanceSearch(data) {    
+  public getAssetByAdvanceSearch(data) {
     return this.http
       .post(
         `${this.apiAgent}agent/Asset/GetByAdvancedSearch`,
