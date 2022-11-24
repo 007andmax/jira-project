@@ -7,6 +7,8 @@ import { MatChipsModule, MatFormFieldModule, MatIconModule, MatSelectModule } fr
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModelPipe } from 'src/app/pipe/model.pipe';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 @NgModule({
     declarations: [
@@ -24,6 +26,8 @@ import { ModelPipe } from 'src/app/pipe/model.pipe';
         DropDownModule,
         MatFormFieldModule,
         NgbModule,
+        DynamicTooltipModule,
+        ClickOtsideModule
     ],
 })
 export class DeviceSettingModule { }
