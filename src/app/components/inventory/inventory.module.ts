@@ -19,8 +19,6 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { TaxesModule } from '../shared/taxes/taxes.module';
 
 
-
-
 @NgModule({
     declarations: [InventoryComponent,
         InventoryHeaderComponent,

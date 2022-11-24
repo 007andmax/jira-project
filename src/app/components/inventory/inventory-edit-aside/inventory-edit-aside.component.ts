@@ -46,6 +46,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
+  selectedItem: any;
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -101,6 +102,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getInventoryFromEdit);
+  }
+  formatterSelectedItemText() {
+    return this.selectedItem ? `${this.selectedItem.glNumber} - ${this.selectedItem.description}` : "";
   }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {

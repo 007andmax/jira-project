@@ -14,10 +14,10 @@
                 placeholder="Enter Item Number"
             >
             <mat-error
-              class="invalid-feedback"
-              *ngIf="!validate.getManufactureIsExist()"
+                class="invalid-feedback"
+                *ngIf="!validate.getManufactureIsExist()"
             >
-              This number is already occupied
+                This number is already occupied
             </mat-error>
         </div>
         <div class="qt-input-block qt-f50 qt-flex-md-100 --required">
@@ -30,19 +30,21 @@
                 placeholder="Enter ILC Number"
             >
             <mat-error
-              class="invalid-feedback"
-              *ngIf="!validate.getILCIsExist()"
+                class="invalid-feedback"
+                *ngIf="!validate.getILCIsExist()"
             >
-              This number is already occupied
+                This number is already occupied
             </mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
         <div class="--required">
             <div class="qt-input-block__label">GL Number</div>
-            <app-drop-down
+            <gl-numbers-drop-down
                 [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
                 [list]="glNumbers"
+                [search]="true"
+                [change]="true"
                 [reducerItem]="formatterGLNumber"
                 #glNumberSelect
                 [placeholder]="'Select GL'"
@@ -50,31 +52,31 @@
                 [field]="'glNumber'"
                 (onAddItem)="onAddGlNumber($event)"
                 (onSelectedItem)="onSelectGlNumbers($event)"
-            ></app-drop-down>
+            ></gl-numbers-drop-down>
         </div>
     </div>
     <div class="qt-inputs-row --required">
         <div class="qt-input-block">
-          <div class="qt-input-block__label">Description</div>
-          <div
-            class="editable-description"
-            [ngClass]="{'--input-error' : !validate.getDescription()}"
-          >
-            <textarea
-              appTextArea
-              [limit]="160"
-              id="inventory-description"
-              placeholder="Write Product Description"
-              (input)="onChangeDescription($event)"
-              (onPast)="onPastDescription($event)"
-            ></textarea>
-          </div>
-          <mat-error
-            class="invalid-feedback"
-            *ngIf="!validate.getDescription()"
-          >
-            Description is required
-          </mat-error>
+            <div class="qt-input-block__label">Description</div>
+            <div
+                class="editable-description"
+                [ngClass]="{'--input-error' : !validate.getDescription()}"
+            >
+                <textarea
+                    appTextArea
+                    [limit]="160"
+                    id="inventory-description"
+                    placeholder="Write Product Description"
+                    (input)="onChangeDescription($event)"
+                    (onPast)="onPastDescription($event)"
+                ></textarea>
+            </div>
+            <mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getDescription()"
+            >
+                Description is required
+            </mat-error>
         </div>
     </div>
     <div class="qt-inputs-row">
@@ -127,10 +129,10 @@
                 placeholder="Enter Price"
             >
             <mat-error
-              class="invalid-feedback"
-              *ngIf="!validate.getSale()"
+                class="invalid-feedback"
+                *ngIf="!validate.getSale()"
             >
-              Price is required
+                Price is required
             </mat-error>
         </div>
     </div>
