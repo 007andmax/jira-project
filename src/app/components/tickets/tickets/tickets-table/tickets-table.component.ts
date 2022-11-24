@@ -28,7 +28,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
-  container;
+  container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -36,7 +36,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    this.container = document.body.querySelector(".main-container");
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     this.ticketsFilter.setListType(this.ticketsStateService.getListType());

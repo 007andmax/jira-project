@@ -34,6 +34,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   public page_number: number = 0;
   public infiniteScrollDisabled = true;
   sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
   constructor(private quotesListService: QuotesListService,
     private quoteRealTimeService: QuoteRealTimeService,
     public cd: ChangeDetectorRef,

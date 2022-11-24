@@ -36,6 +36,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   selectedInvoices: Array<Invoice> = [];
   //@ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
     private invoiceRealTimeService: InvoiceRealTimeService,

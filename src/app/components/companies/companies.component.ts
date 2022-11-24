@@ -35,7 +35,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   left_filter: string;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-
+  container = document.body.querySelector(".main-container");
   constructor(private companiesService: CompaniesService,
     private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService,

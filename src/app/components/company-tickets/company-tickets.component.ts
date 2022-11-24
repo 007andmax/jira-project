@@ -34,7 +34,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
   ticketsStatus: Array<TicketStatus> = [];
-
+  container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,

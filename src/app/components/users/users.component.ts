@@ -47,6 +47,7 @@ export class UsersComponent implements OnInit {
   sub: Subscription = new Subscription();
   industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
+  container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,

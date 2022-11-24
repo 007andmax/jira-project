@@ -36,7 +36,6 @@ export class MarketingComponent implements OnInit {
   reqUsers: Array<User> = [];
   showPreloader: boolean = true;
   filter: UserFilter = new UserFilter();
-
   selectAll: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -46,6 +45,7 @@ export class MarketingComponent implements OnInit {
   sub: Subscription = new Subscription();
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   industries: Array<CrmCompanyIndustry> = [];
+  container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,

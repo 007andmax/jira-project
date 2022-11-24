@@ -43,6 +43,7 @@ export class PaymentsComponent implements OnInit {
   selectedPayments: Array<Payment> = [];
   // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
   constructor(private paymentsService: PaymentsService,
     public cd: ChangeDetectorRef,
     private invoiceStateService: InvoiceStateService,
@@ -174,6 +175,7 @@ export class PaymentsComponent implements OnInit {
     return item.id;
   }
   public onScroll() {
+    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getInvoices();
   }

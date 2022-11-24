@@ -12,7 +12,7 @@ import { REMOVE_RECORD } from '../../const/confirm';
   providers: [PasswordManagerListService]
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
-
+  container = document.body.querySelector(".main-container");
   companyId: string;
   ngOnInit() {
     window.scrollTo(0, 0);
