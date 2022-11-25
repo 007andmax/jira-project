@@ -27,7 +27,7 @@ import { ClickOtsideModule } from 'src/app/directives/click-otside/click-otside.
         MatFormFieldModule,
         NgbModule,
         DynamicTooltipModule,
-        ClickOtsideModule
+        ClickOtsideModule            
     ],
 })
 export class DeviceSettingModule { }

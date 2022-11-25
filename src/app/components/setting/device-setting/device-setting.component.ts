@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
-import { DeviceFilter } from '../../devices/class/devices';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { DeviceSettingFilter } from './Class/devicesetting-filter';
 
 @Component({
   selector: 'device-setting',
@@ -46,7 +46,6 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   popupModel:boolean;
   model:any;
   manufacturerIsActiveList:any[]=[];
-  filter: DeviceFilter = new DeviceFilter();
   closeResult: string = '';
   openedCounter: boolean = false;
   @ViewChild("templatecounter") templatecounter;
@@ -65,9 +64,14 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   searches : any[];
   removeDevice:any = undefined;
   deviceTypeName: string = "";
+  deviceTypeManufacturer: string = "";
+  deviceTypeModel: string = "";
   disableCreate: boolean = false;
   isInitRequest: boolean = false;
   showAdd: boolean = false;
+  showModel: boolean = false;
+  public filter: DeviceSettingFilter = new DeviceSettingFilter();
+ 
 
   constructor(private agentService: AgentService,
     private formBuilder: FormBuilder,
@@ -134,16 +138,16 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     
   }
 
-  onFilter(field) {
+  onFilter(field) {    
     this.filter.onFilter(field, this.deviceTypeList);
   }
 
   onFilterManufacturer(field){
-    this.filter.onFilter(field, this.manufactureIsActiveList)
+    this.filter.onFilter(field, this.manufacturerList)
   }
 
-  onFilterModel(field){
-    this.filter.onFilter(field, this.selectManufactureList)
+  onFilterModel(field){    
+    this.filter.onFilter(field, this.modelList)
   }
 
   getCurrentCompany(data) { 
@@ -184,7 +188,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     }
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
-      .subscribe((resp) => {                        
+      .subscribe((resp) => {                              
         this.deviceTypeList = [];
         this.hardwareTypes = resp;
 
@@ -205,16 +209,12 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     }
     this.agentService
       .getModels(TechCompanyGuid)
-      .subscribe((resp) => {                
-        //this.selectManufactureList = resp;
-        //this.selectManufactureList[0].manufacture = this.manufacturerList;
+      .subscribe((resp) => {         
         this.modelList = [];
         this.modelIsActiveList = resp;
-        
-
+      
         this.modelIsActiveList.forEach(element =>{
-          if(element.IsActive == true ){
-            //this.selectManufactureList.push(element);
+          if(element.IsActive == true ){            
             this.modelList.push(element);
           }
         })
@@ -222,17 +222,17 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSelectManufactureName(SelectManufacturer) {
-    if (SelectManufacturer) {
-      this.manufactureId = SelectManufacturer.ID;
-      this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-        this.selectManufactureList = resp;
-      })
-    }
-    else{
-      this.getModels(this.techCompany.id);
-    }
-  }
+  // onSelectManufactureName(SelectManufacturer) {
+  //   if (SelectManufacturer) {
+  //     this.manufactureId = SelectManufacturer.ID;
+  //     this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
+  //       this.selectManufactureList = resp;
+  //     })
+  //   }
+  //   else{
+  //     this.getModels(this.techCompany.id);
+  //   }
+  // }
 
   openModel(isCreated: boolean, index: number) {
     this.submitted = false;
@@ -530,7 +530,8 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     return "";
   }
 
-  setTab(data) {
+  setTab(data) {    
+    this.showAdd = false;
     this.activeTab = data['nextId'];
   }
 
@@ -556,39 +557,65 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     }  
   } 
 
-  checkDublicateDeviceType() {
-    var duplicateDeviceType = this.deviceTypeList.filter((item) => {
-      return item.name.toLowerCase() === this.deviceTypeName.toLowerCase();
-    });
-    if (duplicateDeviceType && duplicateDeviceType[0]) {
-      return this.disableCreate = true;      
-    } else {
-      return this.disableCreate = false;
+  onKeyUp(event,type) {    
+    if(type == "DeviceType")
+    {
+      if (event.keyCode === 13) this.deviceTypeSave();
     }
-  };
-
-  onKeyUp(event) {
-    if (event.keyCode === 13) this.save();
+    if(type == "Manufacturer")
+    {
+      if (event.keyCode === 13) this.deviceManufacturerSave();
+    }
+    if(type == "Model")
+    {
+      if (event.keyCode === 13) this.deviceModelSave();
+    }
   }
 
-  save() {    
+  deviceTypeSave() {    
     if (this.deviceTypeName.length === 0 || this.disableCreate || this.isInitRequest) return;
     this.isInitRequest = true;
     let device: any ={};   
     device.Name = this.deviceTypeName;
-    device.TechCompanyID = this.techCompany.id;     
-    this.agentService.addHardwareType(device)
-      .pipe(
-        map((res: any) => {                    
-          this.isInitRequest = false;
-        })
-      )
-      .subscribe(
-        () => {          
-          this.toastrService.success("Device Type Saved Successfully");
-          this.getDeviceTypes(this.techCompany.id)
-        }
-      );  
+    device.TechCompanyGuid = this.techCompany.id;     
+    this.agentService.addHardwareType(device).subscribe((res)=>{
+      this.deviceTypeName = "";
+      this.isInitRequest = false;
+      this.showAdd = false;
+      this.getDeviceTypes(this.techCompany.id);
+      this.toastrService.success("Device Type Saved Successfully");      
+    });       
+  }
+
+  deviceManufacturerSave(){
+    if (this.deviceTypeManufacturer.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
+    let deviceManufacturer: any ={};   
+    deviceManufacturer.Name = this.deviceTypeManufacturer;
+    deviceManufacturer.TechCompanyGuid = this.techCompany.id;   
+    this.agentService.addManufacturer(deviceManufacturer).subscribe((res)=>{
+      this.deviceTypeManufacturer = "";
+      this.isInitRequest = false;
+      this.showAdd = false;    
+      this.getManufacturers(this.techCompany.id);
+      this.toastrService.success("Manufacturer Saved Successfully");      
+    });       
+  }
+
+  deviceModelSave(){    
+    if (this.deviceTypeModel.length === 0 || this.disableCreate || this.isInitRequest) return;
+    this.isInitRequest = true;
+    let deviceModel: any ={};   
+    deviceModel.Name = this.deviceTypeModel;
+    deviceModel.ManufacturerID = this.manufactureId;   
+    deviceModel.IsActive = true;    
+    this.agentService.addModel(deviceModel).subscribe((res)=>{
+      this.isInitRequest = false;
+      this.showAdd = false;   
+      this.showModel = false; 
+      this.getModels(this.techCompany.id);
+      this.toastrService.success("Model Saved Successfully");     
+    })          
   }
 
   public toggleShowAdd(data) {
@@ -600,4 +627,17 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     if (this.activeTab === "deviceManufacturer") this.toggleShowAdd(true);
     if (this.activeTab === "deviceModel") this.toggleShowAdd(true);    
   }
+
+  onSelectManufactureName(data){
+    if(data)
+    {
+      this.showModel = true;
+      this.manufactureId = data.ID;      
+    }
+    else
+    {
+      this.showModel = false;
+    }
+  }
+  
 }

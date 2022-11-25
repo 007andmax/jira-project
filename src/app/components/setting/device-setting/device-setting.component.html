@@ -55,14 +55,14 @@
                                     </div>
                                     <div
                                         class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
-                                        
+                                        (click)="onFilter('name')"
                                     >
                                         Device Type
                                         <div class="qt-table-modern__sorting--new"></div>
                                     </div>
                                     <div
                                         class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
-                                        
+                                        (click)="onFilter('count')"
                                     >
                                         Count
                                         <div class="qt-table-modern__sorting--new"></div>
@@ -80,7 +80,7 @@
     #addStatusBtn="click"
     [init]="true"
     [class]="'.add-crm-industry-container'"
-    (onOutSide)="save()"
+    (onOutSide)="deviceTypeSave()"
 >
     <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
     <div
@@ -91,10 +91,8 @@
             type="text"
             class="form-input --editable"
             placeholder="Enter Name DeviceType"
-            [(ngModel)]="deviceTypeName"
-            (input)="checkDublicateDeviceType()"
-            (keyup)="onKeyUp($event)"
-            maxlength="30"
+            [(ngModel)]="deviceTypeName"            
+            (keyup)="onKeyUp($event,DeviceType)"            
             required
         >
         <mat-error
@@ -125,23 +123,8 @@
                                         </label>
                                     </div>
                                     <div
-                                        class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"                                        
-                                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
-                                    >   
-                                        <input
-                                            type="text"
-                                            class="form-input --editable"
-                                            placeholder="Enter DeviceType Name"
-                                            [(ngModel)]="item.Name"
-                                            appKeyUpEnter                                            
-                                            maxlength="30"                                            
-                                >
-                                <mat-error
-                                    class="qt-tooltip-error"
-                                    *ngIf="item.disableUpdate"
-                                >
-                                    This DeviceType is already exists.
-                                </mat-error>                                     
+                                        class="tab-pane__table-cell crm-settings-company-industry-table__industry-type crm-pd-l"
+                                        [textContent]="item.Name">                                                                                          
                                     </div>
                                     <div
                                         class="tab-pane__table-cell crm-settings-company-industry-table__count"
@@ -157,7 +140,7 @@
                                             <div
                                                 data-tooltip="Remove"
                                                 class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                                                (click)="removeDeviceType(item)"
+                                                (click)="removeDeviceType(item,tag)"
                                                 (mouseenter)="removeTooltip.show($event.target)"
                                                 (mouseleave)="removeTooltip.hide()"
                                             >
@@ -196,14 +179,14 @@
                                 </div>
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
-                                    
+                                    (click)="onFilterManufacturer('name')"
                                 >
                                     Manufacturer
                                     <div class="qt-table-modern__sorting--new"></div>
                                 </div>
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
-                                    
+                                    (click)="onFilterManufacturer('count')"
                                 >
                                     Count
                                     <div class="qt-table-modern__sorting--new"></div>
@@ -214,7 +197,38 @@
                         <div
                             class="tab-pane__table-body"
                             *ngIf="!showPreloader"
-                        >                               
+                        >     
+                        <div *ngIf="showAdd"
+                        class="tab-pane__table-row"
+                        appClickOtside
+                        #addStatusBtn="click"
+                        [init]="true"
+                        [class]="'.add-crm-industry-container'"
+                        (onOutSide)="deviceManufacturerSave()"
+                    >
+                        <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
+                        <div
+                            class="tab-pane__table-cell crm-settings-company-industry-table__industry-type qt-pos-rel"
+                            [ngClass]="{'--input-error' : disableCreate}"
+                        >
+                            <input
+                                type="text"
+                                class="form-input --editable"
+                                placeholder="Enter Name Manufacturer"
+                                [(ngModel)]="deviceTypeManufacturer"                                
+                                (keyup)="onKeyUp($event,Manufcaturer)"            
+                                required
+                            >
+                            <mat-error
+                              class="invalid-feedback"
+                              *ngIf="disableCreate"
+                            >
+                              This Manufacture is already exists.
+                            </mat-error>
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__count"></div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+                    </div>                            
                             <div
                                 class="tab-pane__table-row"                                   
                                 *ngFor="let item of manufacturerList; let i = index"
@@ -233,23 +247,8 @@
                                     </label>
                                 </div>
                                 <div
-                                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"                                        
-                                    [ngClass]="{'--input-error' :  item.disableUpdate  }"
-                                >     
-                                    <input
-                                        type="text"
-                                        class="form-input --editable"
-                                        placeholder="Enter Nanufacturer Name"
-                                        [(ngModel)]="item.Name"
-                                        appKeyUpEnter                                            
-                                        maxlength="30"                                            
-                                >
-                                <mat-error
-                                    class="qt-tooltip-error"
-                                    *ngIf="item.disableUpdate"
-                                >
-                                    This Manufacturer is already exists.
-                                </mat-error>                                                  
+                                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type crm-pd-l"
+                                    [textContent]="item.Name">                                                                                                                                                                                                  
                                 </div>
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__count"
@@ -302,16 +301,22 @@
                                         <span></span>
                                     </label>
                                 </div>
+                                <div class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                                    (click)="onFilterModel('manufacturer')"
+                                >
+                                    Manufacturer
+                                    <div class="qt-table-modern__sorting--new"></div>
+                                </div>
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
-                                    
+                                    (click)="onFilterModel('name')"    
                                 >
                                     Model
                                     <div class="qt-table-modern__sorting--new"></div>
                                 </div>
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
-                                    
+                                    (click)="onFilterModel('count')"
                                 >
                                     Count
                                     <div class="qt-table-modern__sorting--new"></div>
@@ -322,7 +327,44 @@
                         <div
                             class="tab-pane__table-body"
                             *ngIf="!showPreloader"
-                        >                               
+                        >        
+                        <div *ngIf="showAdd"
+                        class="tab-pane__table-row"
+                        appClickOtside
+                        #addStatusBtn="click"
+                        [init]="true"
+                        [class]="'.add-crm-industry-container'"
+                        (onOutSide)="deviceModelSave()"
+                    >
+                        <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
+                        <div
+                            class="tab-pane__table-cell crm-settings-company-industry-table__industry-type qt-pos-rel"                            
+                        >
+                        <app-drop-down
+                                #manufacturer
+                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                [placeholder]="'Select Manufacture'"
+                                [list]="manufacturerList"
+                                [field]="'Name'"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="onSelectManufactureName($event)"
+                                ></app-drop-down>        
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__count">   
+                            <span *ngIf="showModel">                         
+                            <input
+                            type="text"
+                            class="form-input --editable"
+                            placeholder="Enter Name Model"
+                            [(ngModel)]="deviceTypeModel"                                
+                            (keyup)="onKeyUp($event,Model)"            
+                            required
+                        >                          
+                    </span>
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+                    </div>                         
                             <div
                                 class="tab-pane__table-row"  
                                 *ngFor="let item of modelList; let i = index"
@@ -340,24 +382,13 @@
                                         <span></span>
                                     </label>
                                 </div>
+                                <div class="tab-pane__table-cell crm-settings-company-industry-table__industry-type crm-pd-l"
+                                    [textContent]="item.ManufactureName">
+
+                                </div>
                                 <div
-                                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"  
-                                    [ngClass]="{'--input-error' :  item.disableUpdate  }"                                      
-                                > 
-                                    <input
-                                        type="text"
-                                        class="form-input --editable"
-                                        placeholder="Enter Model Name"
-                                        [(ngModel)]="item.Name"
-                                        appKeyUpEnter                                            
-                                        maxlength="30"                                            
-                                >
-                                <mat-error
-                                    class="qt-tooltip-error"
-                                    *ngIf="item.disableUpdate"
-                                >
-                                    This Model is already exists.
-                                </mat-error>                                                      
+                                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                                    [textContent]="item.Name">                                                                                                                           
                                 </div>
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__count"
@@ -394,51 +425,4 @@
     </div>
 </div>
 
-<div
-    class="img-croparea deletePopup"
-    *ngIf="popup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h2 class="h1">Delete DeviceType</h2>
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="popup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="remove()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="popup = false"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
