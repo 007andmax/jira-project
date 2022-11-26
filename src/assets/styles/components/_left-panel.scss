@@ -13,7 +13,7 @@
   left: 0;
   background-color: $gray-800;
   color: $white;
-  transition: width 300ms;
+  //transition: width 300ms; // TODO check this style
 
   .header-mobile-close {
     width: 32px;
