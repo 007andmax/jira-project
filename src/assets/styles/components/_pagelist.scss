@@ -4,6 +4,8 @@
   padding: 24px;
   background-color: $background;
   min-height: calc(100vh - #{$header-height});
+  min-width: fit-content;
+  min-width: -moz-fit-content;
 
   @media (max-width: 767px) {
     padding: 8px 0;

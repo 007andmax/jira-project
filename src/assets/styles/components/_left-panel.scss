@@ -4,7 +4,7 @@
 .app-left-panel {
   display: block;
   height: 100%;
-  width: auto;// $left-panel-width;
+  width: auto;
   z-index: 1050;
   @media (max-width: 767px) {
     position: fixed;
@@ -13,7 +13,6 @@
   left: 0;
   background-color: $gray-800;
   color: $white;
-  //transition: width 300ms; // TODO check this style
 
   .header-mobile-close {
     width: 32px;
@@ -83,13 +82,11 @@
     border-top: 1px solid rgba(255,255,255,.08);
     display: flex;
     align-items: flex-start;
-    //height: calc(100% - 80px);
     height: 100%;
     &-icon,
     &-menu {
       overflow: auto;
       height: 100%;
-      //padding-top: 7px;
     }
     &-icon {
       display: flex;
@@ -140,7 +137,6 @@
   &__header-resize-btn {
     position: absolute;
     top: 0px;
-    //left: 246px;
     right: 0;
     width: 20px;
     height: 20px;
@@ -173,13 +169,6 @@
       height: 40px;
     }
   }
-
-  //&__menu-arrow {
-  //  width: 16px;
-  //  height: 16px;
-  //  background-image: url("/assets/img/icons-left-sidebar/dropdown-arrow-down.svg");
-  //  margin-left: auto;
-  //}
 
   &__menu-title {
     font-size: 18px;

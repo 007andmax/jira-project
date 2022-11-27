@@ -1,14 +1,9 @@
 @import './src/assets/styles/variable';
 
 .nav-header {
- /* position: fixed;*/
-  z-index: 1050;
-  /*top: 0;
-  right: 0;*/
   height: $header-height;
   border-bottom: 1px solid $gray-200;
   background-color: $white;
-/*  width: calc(100% - #{$left-panel-width});*/
   transition: width 300ms;
   display: flex;
   align-items: center;
@@ -28,9 +23,6 @@
     padding: 13px 24px 13px 32px;
   }
 
-  app-global-search {
-    width: 552px;
-  }
 
   &__rigth-side {
     display: flex;
