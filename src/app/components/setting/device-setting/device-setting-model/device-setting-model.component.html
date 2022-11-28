@@ -1,0 +1,155 @@
+<div class="cmn-area">
+    <div
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            (change)="onSelectAll($event)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                    (click)="onFilterModel('ManufactureName')"
+                >
+                    Manufacture
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    (click)="onFilterModel('Name')"
+                >
+                    Model
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    (click)="onFilterModel('Count')"
+                >
+                    Count
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <div
+                class="text-center"
+                *ngIf="!selectManufactureList || selectManufactureList.length == 0"
+            >
+                No model to show
+            </div>
+            <div
+                class="row"
+                *ngIf="selectManufactureList.length != 0"
+            >
+                <div class="col-md-5">
+                    <th>
+                        <div class="qt-input-block qt-input-line">
+                            <app-drop-down
+                                #manufacturer
+                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                [placeholder]="'Select Manufacture'"
+                                [list]="manufactureIsActiveList"
+                                [field]="'Name'"
+                                [search]="true"
+                                [change]="true"
+                                (onSelectedItem)="onSelectManufactureName($event)"
+                            ></app-drop-down>
+                        </div>
+                    </th>
+                </div>
+                <div class="col-md-4">
+                    <div
+                        class="search"
+                        ngbDropdown
+                        [autoClose]="'outside'"
+                        #modelSearch="ngbDropdown"
+                    >
+                        <div ngbDropdownAnchor>
+                            <form class="ng7 form">
+                                <span class="qt-input-search">
+                                    <input
+                                        id="modelsearch"
+                                        type="text"
+                                        class="search__input"
+                                        placeholder="Please search"
+                                        [(ngModel)]="searchModel"
+                                        name="searchModel"
+                                    >
+                                    <span class="global-search__close icon__close-round"></span>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let model of selectManufactureList | modelFilter: searchModel"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="model.IsActive"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                    [textContent]="model.ManufactureName"
+                ></div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count"
+                    [textContent]="model.Name"
+                >
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__count">
+                    <div
+                        *ngIf="model.Counter != 0"
+                        (click)="counterPopupModel(templatecounterModel, model)"
+                        [textContent]="model.Counter"
+                    >
+                    </div>
+                    <div
+                        *ngIf="model.Counter == 0"
+                        [textContent]="model.Counter"
+                    ></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeConfirmModel(model)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+    </div>
+</div>

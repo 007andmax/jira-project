@@ -718,34 +718,49 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public deleteHardwareType(data) {
+  public deleteHardwareType(res: any) {
     return this.http
       .post(
         `${this.apiAgent}agent/HardwareType`,
-        this.encrypt128(this.key, JSON.stringify(data)),
+        this.encrypt128(this.key, JSON.stringify(res)),
         { headers: this.getHeader(), responseType: "text" }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) => data),
+        tap(data => {
+          this.toastrService.success(`${res.Name} is Deleted Successfully.`);
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
   }
 
-  public deleteManufacturer(data) {
+  public deleteManufacturer(res) {
     return this.http
       .post(
         `${this.apiAgent}agent/Manufacturer`,
-        this.encrypt128(this.key, JSON.stringify(data)),
+        this.encrypt128(this.key, JSON.stringify(res)),
         { headers: this.getHeader(), responseType: "text" }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) => data),
+        tap(data => {
+          this.toastrService.success(`${res.Name} is Deleted Successfully.`);
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
   }
 
-  public deleteModel(data) {
+  public deleteModel(res) {
     return this.http
       .post(
         `${this.apiAgent}agent/Model`,
-        this.encrypt128(this.key, JSON.stringify(data)),
+        this.encrypt128(this.key, JSON.stringify(res)),
         { headers: this.getHeader(), responseType: "text" }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) => data),
+        tap(data => {
+          this.toastrService.success(`${res.Name} is Deleted Successfully.`);
+          this.appStateService.changeDetectorRef();
+          return data;
+        }));
   }
 
   public overrideAsset(data) {

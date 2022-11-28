@@ -11,6 +11,10 @@ import { AddDeviceTypeComponent } from './add-device-type/add-device-type.compon
 import { AddManufactureComponent } from './add-manufacture/add-manufacture.component';
 import { AddModelComponent } from './add-model/add-model.component';
 import { DeviceSettingAsideComponent } from './device-setting-aside/device-setting-aside.component';
+import { DeviceSettingDeviceTypeComponent } from './device-setting-device-type/device-setting-device-type.component';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { DeviceSettingManufactureComponent } from './device-setting-manufacture/device-setting-manufacture.component';
+import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +23,10 @@ import { DeviceSettingAsideComponent } from './device-setting-aside/device-setti
         AddDeviceTypeComponent,
         AddManufactureComponent,
         AddModelComponent,
-        DeviceSettingAsideComponent
+        DeviceSettingAsideComponent,
+        DeviceSettingDeviceTypeComponent,
+        DeviceSettingManufactureComponent,
+        DeviceSettingModelComponent
     ],
     imports: [
         CommonModule,
@@ -32,6 +39,7 @@ import { DeviceSettingAsideComponent } from './device-setting-aside/device-setti
         DropDownModule,
         MatFormFieldModule,
         NgbModule,
+        DynamicTooltipModule
     ],
 })
 export class DeviceSettingModule { }

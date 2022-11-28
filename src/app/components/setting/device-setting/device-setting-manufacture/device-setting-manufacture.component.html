@@ -1,0 +1,97 @@
+<div class="cmn-area">
+    <div
+        class="tab-pane__table"
+        [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+    >
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            (change)="onSelectAll($event)"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                    (click)="onFilterManufacturer('Name')"
+                >
+                    Manufacture
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    (click)="onFilterManufacturer('Count')"
+                >
+                    Count
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="!showPreloader"
+        >
+            <div
+                class="text-center"
+                *ngIf="!manufactureIsActiveList || manufactureIsActiveList.length == 0"
+            >
+                No manufacture to show
+            </div>
+            <div
+                class="tab-pane__table-row"
+                *ngFor="let manufacture of manufactureIsActiveList; let i = index"
+            >
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="manufacture.IsActive"
+                        >
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                    [textContent]="manufacture.Name"
+                ></div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__count">
+                    <div
+                        *ngIf="manufacture.Counter != 0"
+                        (click)="counterPopupManufactuer(manufacture)"
+                        [textContent]="manufacture.Counter"
+                    >
+                    </div>
+                    <div
+                        *ngIf="manufacture.Counter == 0"
+                        [textContent]="manufacture.Counter"
+                    ></div>
+                </div>
+                <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                    <div class="qt-df qt-ai-c">
+                        <app-dynamic-tooltip
+                            [content]="'Remove'"
+                            [position]="'top'"
+                            #removeTooltip
+                        ></app-dynamic-tooltip>
+                        <div
+                            data-tooltip="Remove"
+                            class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                            (click)="removeConfirmManufacturer(manufacture)"
+                            (mouseenter)="removeTooltip.show($event.target)"
+                            (mouseleave)="removeTooltip.hide()"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+    </div>
+</div>
