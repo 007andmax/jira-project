@@ -215,15 +215,14 @@ export class AppComponent implements OnInit {
 
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
-
-      if (data) $("#aside-left-panel").width("");
-      console.log($("#aside-left-panel").width());
-      if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
-      if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+      if (!this.appService.isMobile) {
+        if (data) $("#aside-left-panel").width("");
+        console.log($("#aside-left-panel").width());
+        if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+        if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+      }
       this.toggleLeftPanel = data;
-
       console.log("data", data);
-
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
