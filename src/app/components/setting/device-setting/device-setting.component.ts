@@ -2,12 +2,10 @@ import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { DeviceSettingFilter } from './Class/devicesetting-filter';
 
 @Component({
@@ -17,24 +15,12 @@ import { DeviceSettingFilter } from './Class/devicesetting-filter';
 })
 export class DeviceSettingComponent implements OnInit, OnDestroy {
   activeTab: string = "deviceType";
-  devicebutton: boolean = false;
-  manufacturebutton: boolean;
-  modelbutton: boolean;
   hardwareTypes: any[] = [];
-  companyId: any;
   techCompany: any;
   deviceType: any;
   popup: boolean;
-  popupManufacturer:boolean;
-  loading = false;
-  create = false;
-  deviceForm: FormGroup;
-  submitted = false;
-  selectedIdx = -1;
   Name: string;
-  manufactureForm: FormGroup;
   manufacturerList: any[] = [];
-  modelForm: FormGroup;
   modelList: any[] = [];
   modelIsActiveList:any[]=[];
   selectManufactureList:any[]=[];
@@ -48,7 +34,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   manufacturerIsActiveList:any[]=[];
   closeResult: string = '';
   openedCounter: boolean = false;
-  @ViewChild("templatecounter") templatecounter;
+  @ViewChild("templatecounterDevice") templatecounterDevice;
   @ViewChild("templatecounterManufactuer") templatecounterManufactuer;
   @ViewChild("templatecounterModel") templatecounterModel;
   deviceTypeId : number;
@@ -76,56 +62,18 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
  
 
-  constructor(private agentService: AgentService,
-    private formBuilder: FormBuilder,
+  constructor(private agentService: AgentService,    
     private toastrService: ToastrService,
     private ngZone: NgZone,
     private modalService: NgbModal,    
     private companiesStateService : CompaniesStateService,
-    private companiesState: CompaniesStateService,
-    private confirmStateService: ConfirmStateService) { }
+    private companiesState: CompaniesStateService) { }
 
   ngOnInit() {             
     this.companiesState.onInit();    
 
     $('body').addClass('page-settings');        
     $('body').removeClass('backMenu');
-    
-    this.deviceForm = this.formBuilder.group({
-      Name: [
-        "",
-        [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
-      ],
-      ID: [""],
-      TechCompanyID: [""],
-      TechCompanyGuid: [""],
-      Counter:[""]
-
-    });
-
-    this.manufactureForm = this.formBuilder.group({
-      Name: [
-        "",
-        [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
-      ],
-      ID: [""],
-      TechCompanyID: [""],
-      TechCompanyGuid: [""],
-      IsActive :[""],
-      CreateDate: [""]
-    })
-
-    this.modelForm = this.formBuilder.group({
-      Name: [
-        "",
-        [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
-      ],
-      ID: [""],
-      ManufacturerID:[""],
-      ManufactureName: [""],
-      IsActive: [""],
-      CreateDate: [""]
-    })
     
     this.companiesStateService.onCurrentCompany.subscribe((data) =>{        
         if(data)
@@ -226,166 +174,14 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
       });
   }
 
-  openModel(isCreated: boolean, index: number) {
-    this.submitted = false;
-    this.deviceForm.reset();
-    this.create = isCreated;
-
-
-    this.selectedIdx = index;
-    let device:any ={};
-    this.deviceForm.patchValue({
-      ID: device.Id,
-      Name: device.Name,
-      TechCompanyID: device.TechCompanyID,
-      TechCompanyGuid: this.techCompany.id,
-      Counter:device.Counter
-    });
-  }
-
-  get f() {
-    return this.deviceForm.controls;
-  }
-
-
-  onSubmit() {  
-    this.submitted = true;
-
-    // add
-    this.loading = true; $(".loading").css("display", "block");
-    this.agentService.addHardwareType(this.deviceForm.value)
-      .pipe(
-        map((res: any) => {
-          this.loading = false; $(".loading").css("display", "none");
-          this.hardwareTypes.push(res);
-          this.create = false;
-        })
-      )
-      .subscribe(
-        () => {
-          this.toastrService.success("Device Type Saved Successfully");
-          this.getDeviceTypes(this.techCompany.id)
-        },
-        error => {
-          this.loading = false; $(".loading").css("display", "none");
-        }
-      );
-
-  }
-
-
-  openModelManufacture(isCreated: boolean, index: number) {
-    this.submitted = false;
-    this.manufactureForm.reset();
-    this.create = isCreated;
-
-
-    this.selectedIdx = index;
-    let manufacture : any = {};
-    this.manufactureForm.patchValue({
-      ID: manufacture.Id,
-      Name: manufacture.Name,
-      TechCompanyID: manufacture.TechCompanyID,
-      TechCompanyGuid: this.techCompany.id,
-      IsActive : manufacture.IsActive,
-      CreateDate: manufacture.CreateDate
-    });
-  }
-
-  onSubmitManufacturer() {    
-    this.submitted = true;
-
-    // add
-    this.loading = true; $(".loading").css("display", "block");
-    this.agentService.addManufacturer(this.manufactureForm.value)
-      .pipe(
-        map((res: any) => {
-          this.loading = false; $(".loading").css("display", "none");
-          this.manufacturerList.push(res);
-          this.create = false;
-        })
-      )
-      .subscribe(
-        () => {
-          this.toastrService.success("Manufacturer Saved Successfully");
-          this.getManufacturers(this.techCompany.id)
-        },
-        error => {
-          this.loading = false; $(".loading").css("display", "none");
-        }
-      );
-  }
-
-  get f1() {
-    return this.manufactureForm.controls;
-  }
-
-
-  removeConfirmManufacturer(manufacturer: any) {
-    this.manufacturer = manufacturer;
-    this.popupManufacturer = true;
-  }
-
-  openModelPopup(isCreated: boolean, index: number) {
-    this.submitted = false;
-    this.modelForm.reset();
-    this.create = isCreated;
-
-
-    this.selectedIdx = index;
-    let model:any ={};
-    this.modelForm.patchValue({
-      ID: model.Id,
-      Name: model.Name,
-      ManufacturerID: this.manufactureId,
-      ManufactureName: model.ManufactureName,
-      IsActive: model.IsActive,
-      CreateDate:model.CreateDate
-    });
-  }
-
-  get f2() {
-    return this.modelForm.controls;
-  }
-
-  onSubmitModel() {
-    this.submitted = true;
-
-    // add
-    this.loading = true; $(".loading").css("display", "block");
-    this.agentService.addModel(this.modelForm.value)
-      .pipe(
-        map((res: any) => {
-          this.loading = false; $(".loading").css("display", "none");
-          this.modelList.push(res);
-          this.create = false;
-        })
-      )
-      .subscribe(
-        () => {
-          this.toastrService.success("Model Saved Successfully");
-          this.getModels(this.techCompany.id)
-        },
-        error => {
-          this.loading = false; $(".loading").css("display", "none");
-        }
-      );
-  }
-
-  removeConfirmModel(model: any) {
-    this.model = model;
-    this.popupModel = true;
-  }
-
-
-  counterPopup(templatecounter, deviceType) {    
-    this.loading = true; $(".loading").css("display", "block");
+  counterPopup(templatecounterDevice, deviceType) {      
+    this.AssetbyHardwaretypeList = [];     
     this.deviceTypeId = deviceType.ID;
     this.deviceName = deviceType.Name;
     this.getAssetbyTechCompanyAndHardwareType(this.techCompany.id, this.deviceTypeId)
     this.ngZone.run(() => {
       this.modalService
-        .open(templatecounter, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
+        .open(templatecounterDevice, { ariaLabelledBy: "modal-basic-title", centered: true, size: 'lg', },
         )
         .result.then(
           (result) => {
@@ -412,8 +208,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll("Cross click");
   }
 
-  counterPopupManufactuer(templatecounterManufactuer, manufacture) {    
-    this.loading = true; $(".loading").css("display", "block");
+  counterPopupManufactuer(templatecounterManufactuer, manufacture) {        
     this.manufacturerId = manufacture.ID;
     this.manufactureName = manufacture.Name;
     this.getAssetbyTechCompanyAndManufacture(this.techCompany.id, this.manufacturerId)
@@ -432,8 +227,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     });
   }
 
-  counterPopupModel(templatecounterModel, model) {    
-    this.loading = true; $(".loading").css("display", "block");
+  counterPopupModel(templatecounterModel, model) {        
     this.modelId = model.ID;
     this.modelName = model.Name;
     this.getAssetbyTechCompanyAndModel(this.techCompany.id, this.modelId)
@@ -454,24 +248,21 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
 
   getAssetbyTechCompanyAndHardwareType(TechCompanyGuid, DeviceTypeId){
     this.agentService.getHardwareTypeAssetByTechCompanyGuidAndHardwareType(TechCompanyGuid, DeviceTypeId)
-      .subscribe((resp) => {        
-        this.loading = false; $(".loading").css("display", "none");
+      .subscribe((resp) => {                
         this.AssetbyHardwaretypeList = resp;
       });
   }
 
   getAssetbyTechCompanyAndManufacture(TechCompanyGuid, ManufactureId){
     this.agentService.getManufacturerAssetByTechCompanyGuidAndManufacturer(TechCompanyGuid, ManufactureId)
-    .subscribe((resp)=>{    
-    this.loading = false; $(".loading").css("display", "none");
+    .subscribe((resp)=>{        
     this.AssetbyManufactureList= resp;
     })
   }
 
   getAssetbyTechCompanyAndModel(TechCompanyGuid, modelId){
     this.agentService.getModelAssetByTechCompanyGuidAndModel(TechCompanyGuid, modelId)
-    .subscribe((resp)=>{    
-    this.loading = false; $(".loading").css("display", "none");
+    .subscribe((resp)=>{        
      this.AssetbyModelList = resp;
     })
   }

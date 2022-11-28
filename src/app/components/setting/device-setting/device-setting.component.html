@@ -140,6 +140,7 @@
                                     <div
                                         class="tab-pane__table-cell crm-settings-company-industry-table__count"
                                         [textContent]="item.Counter"
+                                        (click)="counterPopup(templatecounterDevice, item)"                                        
                                     ></div>
                                     <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                                         <div class="qt-df qt-ai-c">
@@ -264,6 +265,7 @@
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__count"
                                     [textContent]="item.Counter"
+                                    (click)="counterPopupManufactuer(templatecounterManufactuer, item)"
                                 ></div>
                                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                                     <div class="qt-df qt-ai-c">
@@ -404,6 +406,7 @@
                                 <div
                                     class="tab-pane__table-cell crm-settings-company-industry-table__count"
                                     [textContent]="item.Counter"
+                                    (click)="counterPopupModel(templatecounterModel, item)"
                                 ></div>
                                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                                     <div class="qt-df qt-ai-c">
@@ -467,5 +470,96 @@
     </div>
 </div>
 
+
+<ng-template #templatecounterDevice>
+    <div
+      class="qt-aside-modern device-setting-ngtemplate-model-center"
+  >
+      <div class="qt-aside-modern__header">
+          <div class="d-f ai-c">
+              <div class="qt-aside__title"> {{deviceName}}</div>
+          </div>
+          <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+      </div>
+      <div *ngFor="let item of AssetbyHardwaretypeList">
+        <div class="device-setting__row device-qt-p">
+            <div
+                class="device-setting__row-title"
+                [textContent]="item.Name"
+            ></div>
+            <div
+                class="device-setting__name"
+                [textContent]="item.CompanyName"
+            ></div>
+        </div>
+    </div>    
+  </div>
+  </ng-template>
+  
+  <ng-template #templatecounterManufactuer>
+    <div
+      class="qt-aside-modern device-setting-ngtemplate-model-center"
+  >
+      <div class="qt-aside-modern__header">
+          <div class="d-f ai-c">
+              <div class="qt-aside__title">{{manufactureName}}</div>
+          </div>
+          <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+      </div>
+      <div *ngFor="let item of AssetbyManufactureList">
+        <div class="device-setting__row device-qt-p">
+            <div
+                class="device-setting__row-title"
+                [textContent]="item.Name"
+            ></div>
+            <div
+                class="device-setting__name"
+                [textContent]="item.CompanyName"
+            ></div>
+        </div>
+    </div>    
+  </div>
+  </ng-template>
+  
+  
+  <ng-template #templatecounterModel>
+    <div
+      class="qt-aside-modern device-setting-ngtemplate-model-center"
+  >
+      <div class="qt-aside-modern__header">
+          <div class="d-f ai-c">
+              <div class="qt-aside__title"> {{modelName}}</div>
+          </div>
+          <div>
+            <div
+                class="qt-aside__close-modal icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+      </div>
+      <div *ngFor="let model of AssetbyModelList">
+        <div class="device-setting__row device-qt-p">
+            <div
+                class="device-setting__row-title"
+                [textContent]="model.Name"
+            ></div>
+            <div
+                class="device-setting__name"
+                [textContent]="model.CompanyName"
+            ></div>
+        </div>
+    </div>    
+  </div>
+  </ng-template>
 
 
