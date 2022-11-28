@@ -13,8 +13,7 @@
                     (mouseenter)="removeTooltip.show($event.target)"
                     (mouseleave)="removeTooltip.hide()"
                     class="qt-button --md --gray button-gl-number__delete qt-ml-12"
-                    
-                    
+                    *ngIf="getSelectedCount() > 0"                    
                 >
                     <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                 </a>
@@ -59,7 +58,9 @@
                                     <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                                         <label class="qt-checkbox">
                                             <input
-                                                type="checkbox"                                               
+                                                type="checkbox"  
+                                                [(ngModel)]="selectAllDevices"   
+                                                (change)="toogleDevices($event.target.checked)"                                                                                         
                                             >
                                             <span></span>
                                         </label>
@@ -128,7 +129,8 @@
                                         <label class="qt-checkbox">
                                             <input
                                                 type="checkbox"                                                 
-                                                [(ngModel)]="item.selected"                                              
+                                                [(ngModel)]="item.selected"                                                  
+                                                (change)="onSelectDeviceType(i,$event.target.checked)"                                                                                                                      
                                             >
                                             <span></span>
                                         </label>
@@ -184,7 +186,9 @@
                                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                                     <label class="qt-checkbox">
                                         <input
-                                            type="checkbox"                                               
+                                            type="checkbox"                                              
+                                            [(ngModel)]="selectAllManufacturer"   
+                                            (change)="toogleManufacturer($event.target.checked)"                                            
                                         >
                                         <span></span>
                                     </label>
@@ -253,7 +257,8 @@
                                     <label class="qt-checkbox">
                                         <input
                                             type="checkbox" 
-                                            [(ngModel)]="item.selected"                                              
+                                            [(ngModel)]="item.selected" 
+                                            (change)="onSelectManufacturer(i,$event.target.checked)"                                              
                                         >
                                         <span></span>
                                     </label>
@@ -309,7 +314,9 @@
                                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                                     <label class="qt-checkbox">
                                         <input
-                                            type="checkbox"                                               
+                                            type="checkbox"                                             
+                                            [(ngModel)]="selectAllModel"   
+                                            (change)="toogleModel($event.target.checked)"                                               
                                         >
                                         <span></span>
                                     </label>
@@ -390,7 +397,8 @@
                                     <label class="qt-checkbox">
                                         <input
                                             type="checkbox" 
-                                            [(ngModel)]="item.selected"                                               
+                                            [(ngModel)]="item.selected"                                              
+                                            (change)="onSelectModel(i,$event.target.checked)"                                                
                                         >
                                         <span></span>
                                     </label>

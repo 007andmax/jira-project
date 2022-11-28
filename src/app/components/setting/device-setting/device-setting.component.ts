@@ -1,11 +1,9 @@
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DeviceSettingFilter } from './Class/devicesetting-filter';
 
 @Component({
@@ -60,6 +58,12 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   message: string = "";
   removeType: string = "";
   showPreloader: boolean = true;
+  selectedDeviceType: any[] = [];
+  selectedDeviceManufacturer: any[] = [];
+  selectedDeviceModel: any[] = [];
+  selectAllDevices: boolean = false;
+  selectAllManufacturer: boolean = false;
+  selectAllModel: boolean = false;
  
 
   constructor(private agentService: AgentService,    
@@ -281,6 +285,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   setTab(data) {    
     this.showAdd = false;
     this.searchAll = "";
+    this.checkedSelected();     
     this.activeTab = data['nextId'];
   }
 
@@ -452,5 +457,103 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
         });
       }
     }    
+  }
+
+ 
+
+  getSelectedCount() {
+    if (this.activeTab === "deviceType") return this.selectedDeviceType.length;
+    if (this.activeTab === "deviceManufacturer") return this.selectedDeviceManufacturer.length;
+    if (this.activeTab === "deviceModel") return this.selectedDeviceModel.length;
+  }
+
+  toogleDevices(isChecked: boolean) {
+    this.deviceTypeList.forEach((item) => {
+      item.selected = this.selectAllDevices ? true : false;
+    });   
+    if (isChecked) {
+      this.deviceTypeList.forEach((element, index) => {
+        this.selectedDeviceType.push(this.deviceTypeList[index]);
+      })
+    }
+    else {
+      this.selectedDeviceType = [];
+    }
+  }
+
+  onSelectDeviceType(index: number, isChecked: boolean) {
+    let find = this.deviceTypeList.find((item) => !item.selected);
+    this.selectAllDevices = find ? false : true;    
+    if (isChecked) {
+      this.selectedDeviceType.push(this.deviceTypeList[index]);
+    } else {
+      let Id = this.deviceTypeList[index].ID;
+      let Index = this.selectedDeviceType.findIndex(item => item.ID == Id);
+      this.selectedDeviceType.splice(Index, 1);
+    }
+  }
+
+  toogleManufacturer(isChecked: boolean){
+    this.manufacturerList.forEach((item) => {
+      item.selected = this.selectAllManufacturer ? true : false;
+    });   
+    if (isChecked) {
+      this.manufacturerList.forEach((element, index) => {
+        this.selectedDeviceManufacturer.push(this.manufacturerList[index]);
+      })
+    }
+    else {
+      this.selectedDeviceManufacturer = [];
+    }
+  }
+
+  onSelectManufacturer(index: number, isChecked: boolean){
+    let find = this.manufacturerList.find((item) => !item.selected);
+    this.selectAllManufacturer = find ? false : true;    
+    if (isChecked) {
+      this.selectedDeviceManufacturer.push(this.manufacturerList[index]);
+    } else {
+      let Id = this.manufacturerList[index].ID;
+      let Index = this.selectedDeviceManufacturer.findIndex(item => item.ID == Id);
+      this.selectedDeviceManufacturer.splice(Index, 1);
+    }
+  }
+
+  toogleModel(isChecked: boolean){
+    this.modelList.forEach((item) => {
+      item.selected = this.selectAllModel ? true : false;
+    });   
+    if (isChecked) {
+      this.modelList.forEach((element, index) => {
+        this.selectedDeviceModel.push(this.modelList[index]);
+      })
+    }
+    else {
+      this.selectedDeviceModel = [];
+    }
+  }
+
+  onSelectModel(index: number, isChecked: boolean){
+    let find = this.modelList.find((item) => !item.selected);
+    this.selectAllModel = find ? false : true;    
+    if (isChecked) {
+      this.selectedDeviceModel.push(this.modelList[index]);
+    } else {
+      let Id = this.modelList[index].ID;
+      let Index = this.selectedDeviceModel.findIndex(item => item.ID == Id);
+      this.selectedDeviceModel.splice(Index, 1);
+    }
+  }
+
+  checkedSelected(){
+    this.selectAllDevices = false;
+    this.selectAllManufacturer = false;
+    this.selectAllModel = false;
+    this.deviceTypeList.forEach(item => (item.selected = false));
+    this.selectedDeviceType = [];  
+    this.manufacturerList.forEach(item => (item.selected = false));
+    this.selectedDeviceManufacturer = []; 
+    this.modelList.forEach(item => (item.selected = false));
+    this.selectedDeviceModel = [];   
   }
 }
