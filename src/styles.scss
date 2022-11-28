@@ -923,10 +923,6 @@ ngb-typeahead-window {
 .has-error {
   border-color: $error !important;
 }
-.avoid-clicks {
-  pointer-events: none;
-  background: $gray-400--old;
-}
 .device-user.has-placeholder {
   position: relative;
   &:before {
@@ -3397,7 +3393,9 @@ ngb-typeahead-window {
 
 .avoid-clicks {
   pointer-events: none;
-  background: $gray-400--old;
+  background: $gray-50;
+  border: 1px solid $gray-200;
+  box-shadow: inset 0 1px 2px rgba(16, 24, 40, 0.05);
 }
 
 .device-user.has-placeholder {
@@ -3406,11 +3404,12 @@ ngb-typeahead-window {
   &:before {
     position: absolute;
     content: "";
-    left: 10px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 13px;
-    color: $gray-600--old;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-400;
     width: auto;
   }
 }
@@ -4490,7 +4489,7 @@ app-ticket-edit-aside-devices {
     @include body-m__sb;
     font-weight: 700;
   }
-  //.create-product__col { // TODO checl this style
+  //.create-product__col { // TODO check this style
   //  label {
   //    margin-bottom: 0;
   //  }
@@ -4505,6 +4504,12 @@ app-ticket-edit-aside-devices {
   @media (max-width: 767px) {
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+  &:empty {
+    margin-bottom: 0;
+  }
+  &--column {
+    flex-direction: column;
   }
 
   .qt-f50 {

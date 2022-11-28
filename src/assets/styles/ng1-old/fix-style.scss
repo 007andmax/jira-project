@@ -349,16 +349,16 @@ p {
   font-weight: 400;
 }
 
-.new-companies-content__modal--content > [class*="col-md-"] p,
-.new-users-content__modal--content > [class*="col-md-"] p,
-.recurring-tickets-content__modal--content > [class*="col-md-"] p,
-.new-users-content__modal--content app-interval > [class*="col-md-"] p,
-.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
-.password-content__modal--content > [class*="col-md-"] p {
-  @include body-m__sb;
-  color: $primary-2;
-  margin-bottom: 8px;
-}
+//.new-companies-content__modal--content > [class*="col-md-"] p,
+//.new-users-content__modal--content > [class*="col-md-"] p,
+//.recurring-tickets-content__modal--content > [class*="col-md-"] p,
+//.new-users-content__modal--content app-interval > [class*="col-md-"] p,
+//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
+//.password-content__modal--content > [class*="col-md-"] p {
+//  @include body-m__sb;  // TODO check this style
+//  color: $primary-2;
+//  margin-bottom: 8px;
+//}
 
 //.new-companies-content__modal--content > [class*="col-md-"],
 //.new-users-content__modal--content > [class*="col-md-"],
@@ -515,15 +515,15 @@ strong {
 }
 
 /* Textarea */
-.password-content__modal--content textarea {
-  border: 1px solid $gray-500--old;
-  border-radius: 4px;
-  min-height: 80px;
-  width: 100%;
-  padding: 15px;
-  font-size: 13px;
-  outline: none;
-}
+//.password-content__modal--content textarea { // TODO check this style
+//  border: 1px solid $gray-500--old;
+//  border-radius: 4px;
+//  min-height: 80px;
+//  width: 100%;
+//  padding: 15px;
+//  font-size: 13px;
+//  outline: none;
+//}
 textarea {
   resize: none;
 }
@@ -695,11 +695,11 @@ textarea {
   }
 }
 
-.recurring-tickets-content__modal--content,
-.new-users-content__modal--content,
-.password-content__modal--content {
-  padding: 0 15px 20px;
-}
+//.recurring-tickets-content__modal--content, // TODO check this style
+//.new-users-content__modal--content,
+//.password-content__modal--content {
+//  padding: 0 15px 20px;
+//}
 
 .password-content__modal--content {
   .date-picker-container {
@@ -714,13 +714,13 @@ input[disabled] {
   background-color: $gray-50;
 }
 
-.left-panel-filter i,
-.new-users-content__modal--content i,
-.recurring-tickets-content__modal--content i,
-.password-content__modal--content i {
-  position: absolute;
-  right: 12px;
-}
+//.left-panel-filter i,
+//.new-users-content__modal--content i,
+//.recurring-tickets-content__modal--content i,
+//.password-content__modal--content i {
+//  position: absolute; // TODO check this style
+//  right: 12px;
+//}
 
 h3,
 .h3 {

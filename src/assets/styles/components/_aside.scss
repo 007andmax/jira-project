@@ -95,11 +95,11 @@
             width: 100%;
           }
 
-          i {
-            @media (max-width: 767px) {
-              top: 19px;
-            }
-          }
+          //i { // TODO check this style
+          //  @media (max-width: 767px) {
+          //    top: 19px;
+          //  }
+          //}
         }
       }
     }

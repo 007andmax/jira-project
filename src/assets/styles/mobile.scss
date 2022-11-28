@@ -49,15 +49,15 @@
     opacity: 1;
     visibility: visible;
   }
-  .password-content__modal--content .col-md-3.mob-w-100 {
-    width: 100% !important;
-    .input-group {
-      width: 100%;
-      .dropdown-menu {
-        width: 100%;
-      }
-    }
-  }
+  //.password-content__modal--content .col-md-3.mob-w-100 { // TODO check this style
+  //  width: 100% !important;
+  //  .input-group {
+  //    width: 100%;
+  //    .dropdown-menu {
+  //      width: 100%;
+  //    }
+  //  }
+  //}
   .password-content__modal .password-modal-actions button {
     background-color: $white !important;
   }
