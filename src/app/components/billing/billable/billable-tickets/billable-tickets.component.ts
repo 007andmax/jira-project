@@ -50,7 +50,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.setBillingPage('new-billable-tickets');
     this.currentUser = this.usersStateService.getCurrentUser();
     if (this.companiesStateService.getCurrentCompany().addresses.length === 0) this.isCurrentCompanyAddressEmpty = false;

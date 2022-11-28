@@ -39,7 +39,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.companiesStateService.setCompanyRoutingId(null);
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {

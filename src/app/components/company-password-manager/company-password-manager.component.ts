@@ -15,7 +15,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
   container = document.body.querySelector(".main-container");
   companyId: string;
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-password-manager');
     this.companyId = this.activateRoute.snapshot.params['id'];
     if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
@@ -34,7 +34,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     })
     this.sub.add(getConfirm);
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setFilter(data);
       this.setDefaultScoll();
       this.onScroll();

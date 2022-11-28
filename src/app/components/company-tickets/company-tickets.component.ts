@@ -83,7 +83,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
