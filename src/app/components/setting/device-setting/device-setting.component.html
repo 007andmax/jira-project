@@ -7,7 +7,7 @@
                     [content]="'Remove'"
                     [position]="'top'"
                     #removeTooltip
-                ></app-dynamic-tooltip>
+                ></app-dynamic-tooltip>            
                 <a
                     href="javascript:;"
                     (mouseenter)="removeTooltip.show($event.target)"
@@ -18,6 +18,17 @@
                 >
                     <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                 </a>
+                <form method="GET" class="qt-ml-12">
+                    <span class="qt-input-search">
+                        <input
+                            type="search"
+                            class="qt-input-search"
+                            [(ngModel)]="searchAll"
+                            name="searchAll"
+                            placeholder="Search"                            
+                        >
+                    </span>
+                </form>
                 <a
                     href="javascript:;"
                     class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
@@ -107,7 +118,7 @@
 </div>                         
                                 <div
                                     class="tab-pane__table-row"   
-                                    *ngFor="let item of deviceTypeList; let i = index"
+                                    *ngFor="let item of deviceTypeList | modelFilter: searchAll; let i = index"
                                     appClickOtside
                                     [init]="item.isInitEdit"
                                     [ngClass]="'edit-crm-container-' + i"
@@ -231,7 +242,7 @@
                     </div>                            
                             <div
                                 class="tab-pane__table-row"                                   
-                                *ngFor="let item of manufacturerList; let i = index"
+                                *ngFor="let item of manufacturerList | modelFilter: searchAll; let i = index"
                                 appClickOtside
                                 [init]="item.isInitEdit"
                                 [ngClass]="'edit-crm-container-' + i"
@@ -264,7 +275,7 @@
                                         <div
                                             data-tooltip="Remove"
                                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                                            (click)="removeIndustry(item)"
+                                            (click)="removeManufacturer(item)"
                                             (mouseenter)="removeTooltip.show($event.target)"
                                             (mouseleave)="removeTooltip.hide()"
                                         >
@@ -367,7 +378,7 @@
                     </div>                         
                             <div
                                 class="tab-pane__table-row"  
-                                *ngFor="let item of modelList; let i = index"
+                                *ngFor="let item of modelList | modelFilter: searchAll; let i = index"
                                 appClickOtside
                                 [init]="item.isInitEdit"
                                 [ngClass]="'edit-crm-container-' + i"
@@ -404,7 +415,7 @@
                                         <div
                                             data-tooltip="Remove"
                                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
-                                            (click)="removeIndustry(item)"
+                                            (click)="removeModel(item)"
                                             (mouseenter)="removeTooltip.show($event.target)"
                                             (mouseleave)="removeTooltip.hide()"
                                         >
@@ -424,5 +435,37 @@
         </ngb-tabset>
     </div>
 </div>
+
+
+<div
+    class="archive-modal device-setting-center"
+    *ngIf="popup"
+>
+    <button
+        class="close-modal device-setting-close-model"
+        (click)=closeModal()
+    ></button>
+    <div class="archive-modal__body">
+        <h3 [textContent]="message"></h3>
+        <p>Are you sure want to delete?</p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="d-f qt-jc-fe">
+            <button
+                class="btn-new btn-primary"
+                (click)="removeConfirm(removeType)"
+            >
+                Yes, I am sure
+            </button>
+            <button
+                class="btn-new disabled"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
 
 

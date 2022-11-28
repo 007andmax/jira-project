@@ -42,7 +42,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   manufacturer:any;
   deviceTypeList: any[] = [];
   manufactureIsActiveList: any[]=[];
-  searchModel:string;
+  searchAll:string;
   popupModel:boolean;
   model:any;
   manufacturerIsActiveList:any[]=[];
@@ -71,6 +71,9 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
   showAdd: boolean = false;
   showModel: boolean = false;
   public filter: DeviceSettingFilter = new DeviceSettingFilter();
+  message: string = "";
+  removeType: string = "";
+  showPreloader: boolean = true;
  
 
   constructor(private agentService: AgentService,
@@ -132,6 +135,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
           this.getDeviceTypes(this.techCompany.id);
           this.getManufacturers(this.techCompany.id);
           this.getModels(this.techCompany.id);
+          this.showPreloader = false;
         }                              
     })
 
@@ -168,7 +172,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
       return;
     }
     this.agentService.getManufactures(TechCompanyGuid)
-      .subscribe((resp) => {               
+      .subscribe((resp) => {                    
         this.manufacturerList = [];
         this.manufactureIsActiveList = resp;
 
@@ -222,18 +226,6 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
       });
   }
 
-  // onSelectManufactureName(SelectManufacturer) {
-  //   if (SelectManufacturer) {
-  //     this.manufactureId = SelectManufacturer.ID;
-  //     this.agentService.getModelsByManufacturer(this.manufactureId).subscribe((resp)=>{
-  //       this.selectManufactureList = resp;
-  //     })
-  //   }
-  //   else{
-  //     this.getModels(this.techCompany.id);
-  //   }
-  // }
-
   openModel(isCreated: boolean, index: number) {
     this.submitted = false;
     this.deviceForm.reset();
@@ -279,11 +271,6 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
         }
       );
 
-  }
-
-  removeConfirm(deviceType: any) {
-    this.deviceType = deviceType;
-    this.popup = true;
   }
 
 
@@ -339,22 +326,6 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     this.popupManufacturer = true;
   }
 
-  removeManufacturer() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.manufacturer.IsActive = false;
-
-    this.agentService
-      .deleteManufacturer(this.manufacturer)
-      .subscribe((resp) => {
-        this.toastrService.success(`${this.manufacturer.Name} is Deleted Successfully.`);
-        this.popupManufacturer = false;
-        this.getManufacturers(this.techCompany.id)
-        this.loading = false; $(".loading").css("display", "none");
-      }, (error) => {
-        this.toastrService.error("Something went wrong please try again.");
-      });
-  }
-
   openModelPopup(isCreated: boolean, index: number) {
     this.submitted = false;
     this.modelForm.reset();
@@ -406,20 +377,6 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     this.popupModel = true;
   }
 
-  removeModel() {
-    this.model.IsActive = false;
-
-    this.agentService
-      .deleteModel(this.model)
-      .subscribe((resp) => {
-        this.toastrService.success(`${this.model.Name} is Deleted Successfully.`);
-        this.getModels(this.techCompany.id)
-        this.popupModel = false;
-        this.loading = false; $(".loading").css("display", "none");
-      }, (error) => {
-        this.toastrService.error("Something went wrong please try again.");
-      });
-  }
 
   counterPopup(templatecounter, deviceType) {    
     this.loading = true; $(".loading").css("display", "block");
@@ -532,30 +489,33 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
 
   setTab(data) {    
     this.showAdd = false;
+    this.searchAll = "";
     this.activeTab = data['nextId'];
   }
 
-  removeDeviceType(item) {
+  removeDeviceType(item) {        
+    this.removeDevice = [];
     this.removeDevice = item;
+    this.message = "Remove DeviceType";
     this.popup = true;
+    this.removeType = "DeviceType";
+  } 
+
+  removeManufacturer(item){    
+    this.removeDevice = [];
+    this.removeDevice = item;
+    this.message = "Remove Manufacturer";
+    this.popup = true;
+    this.removeType = "DeviceManufacturer";
   }
 
-  remove() {
-    if(this.removeDevice != undefined)
-    {
-      this.removeDevice.IsActive = false;
-      this.agentService
-      .deleteHardwareType(this.removeDevice)
-      .subscribe((resp) => {
-        this.toastrService.success(`${this.removeDevice.Name} is Deleted Successfully.`);
-        //this.getDeviceTypes(this.techCompany.id);
-        this.popup = false;        
-
-      }, (error) => {
-        this.toastrService.error("Something went wrong please try again.");
-      });
-    }  
-  } 
+  removeModel(item){
+    this.removeDevice = [];
+    this.removeDevice = item;
+    this.message = "Remove Model";
+    this.popup = true;
+    this.removeType = "DeviceModel";
+  }
 
   onKeyUp(event,type) {    
     if(type == "DeviceType")
@@ -639,5 +599,67 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
       this.showModel = false;
     }
   }
+
+  closeModal(){
+    this.removeDevice = [];
+    this.popup = false;
+  }
+
+  cancelConfirm(){
+    this.removeDevice = [];
+    this.popup = false;
+  }
+
+  removeConfirm(data){     
+    this.popup = false;  
+    if(data == "DeviceType")
+    {
+      if(this.removeDevice != undefined)
+      {
+        this.removeDevice.IsActive = false;
+        this.agentService
+        .deleteHardwareType(this.removeDevice)
+        .subscribe((resp) => {                    
+          this.toastrService.success(`${this.removeDevice.Name} is Deleted Successfully.`);                            
+          this.getDeviceTypes(this.techCompany.id);
   
+        }, (error) => {
+          this.toastrService.error("Something went wrong please try again.");
+        });
+      }  
+    }
+
+    if(data == "DeviceManufacturer")
+    {
+      if(this.removeDevice != undefined)
+      {
+        this.removeDevice.IsActive = false;
+        this.removeDevice.TechCompanyGuid = this.techCompany.id;
+        this.agentService
+        .deleteManufacturer(this.removeDevice)
+        .subscribe((resp) => {
+          this.toastrService.success(`${this.removeDevice.Name} is Deleted Successfully.`);        
+          this.getManufacturers(this.techCompany.id);        
+          }, (error) => {
+            this.toastrService.error("Something went wrong please try again.");
+        });
+      }     
+    }
+
+    if(data == "DeviceModel"){
+      if(this.removeDevice != undefined)
+      {
+        this.removeDevice.IsActive = false;
+
+      this.agentService
+        .deleteModel(this.removeDevice)
+        .subscribe((resp) => {
+        this.toastrService.success(`${this.model.Name} is Deleted Successfully.`);
+        this.getModels(this.techCompany.id);                
+        }, (error) => {
+          this.toastrService.error("Something went wrong please try again.");
+        });
+      }
+    }    
+  }
 }

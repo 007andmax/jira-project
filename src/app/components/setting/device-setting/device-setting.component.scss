@@ -153,3 +153,23 @@
     padding-left: 8px;
 }
 
+.modal-body {
+    padding: 0px;
+}
+
+.device-setting-center {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+  }
+
+ .device-setting-close-model{
+    background-image: url(/assets/img/icons/close.svg);
+    position: absolute !important;
+    right: 24px !important;
+    top: 24px !important;
+    background-size: cover !important;
+    z-index: 1 !important;
+ } 
+
