@@ -34,11 +34,11 @@
 .clear-margin-left {
     margin-left: 0 !important;
 }
-.main-page-container {
-    //height: 100vh;
-    overflow: hidden;
-    //background-color: $white;
-}
+//.main-page-container {
+//    //height: 100vh;
+//    overflow: hidden;
+//    //background-color: $white;
+//}
 
 // Flexbox setup.
 .main-page-container {
@@ -48,7 +48,8 @@
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
-    min-width: calc(1280px + 280px);
+    overflow: hidden;
+    overflow-x: auto;
 
     &>aside {
         order: 0;
@@ -68,6 +69,10 @@
         order: 0;
         flex: 1 1 auto;
         align-self: auto;
+
+        @media (min-width: 768px) {
+          min-width: calc(1280px + 280px);
+        }
     }
 }
 
