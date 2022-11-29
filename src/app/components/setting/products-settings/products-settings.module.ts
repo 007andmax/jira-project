@@ -10,6 +10,7 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { MatFormFieldModule } from '@angular/material';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         DynamicTooltipModule,
         MatFormFieldModule,
         DropDownModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        GlNumbersDropDownModule
     ],
 
 
