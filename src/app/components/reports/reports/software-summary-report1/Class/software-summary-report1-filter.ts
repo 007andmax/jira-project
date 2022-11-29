@@ -70,7 +70,7 @@ export class SoftwareSummaryReportFilter {
     );
   }
   private getVersionSoftware(software) {
-    return software.AssetNames;
+    return software.AssetNames || '';
   }
 
   private onFilterPulisher(software) {
@@ -85,7 +85,7 @@ export class SoftwareSummaryReportFilter {
     );
   }
   private getPublisherSoftware(software) {
-    return software.Publisher;
+    return software.Publisher || '';
   }
 
   public onFilterName(software) {
@@ -100,7 +100,7 @@ export class SoftwareSummaryReportFilter {
     );
   }
   private getNameSoftware(software) {
-    return software.DisplayName;
+    return software.DisplayName || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -119,6 +119,6 @@ export class SoftwareSummaryReportFilter {
   }
 
   private getNameCompanyName(software) {
-    return software.CompanyName;
+    return software.CompanyName || '';
   }
 }

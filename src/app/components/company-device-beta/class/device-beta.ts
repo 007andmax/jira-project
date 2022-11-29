@@ -4,8 +4,7 @@ export class CompanyDeviceBetaFilter {
   filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC")];
   constructor() {}
 
-  public onFilter(field, devicesbeta) {
-    debugger;
+  public onFilter(field, devicesbeta) {    
     let index = this.filterTop.findIndex((item) => item.field === field);
     if (index > -1) {
       let sort = this.filterTop[index].filter;
@@ -32,7 +31,7 @@ export class CompanyDeviceBetaFilter {
     );
   }
   private getNameDevice(devicebeta) {
-    return devicebeta.Name;
+    return devicebeta.Name || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));

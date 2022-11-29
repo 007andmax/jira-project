@@ -57,7 +57,7 @@ export class DeviceWarrantyReportFilter {
     );
   }
   private getDeviceModel(Device) {
-    return Device.Model;
+    return Device.Model || '';
   }
 
   private onFilterManufacturer(Device) {
@@ -72,7 +72,7 @@ export class DeviceWarrantyReportFilter {
     );
   }
   private getManufacturer(Device) {
-    return Device.Manufacturer;
+    return Device.Manufacturer || '';
   }
 
   public onFilterName(Device) {
@@ -86,7 +86,7 @@ export class DeviceWarrantyReportFilter {
     );
   }
   private getNameDevice(Device) {
-    return Device.Name;
+    return Device.Name || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
