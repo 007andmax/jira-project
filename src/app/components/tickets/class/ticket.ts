@@ -25,6 +25,7 @@ export class Ticket {
     unread: boolean;
     userCompanies: Array<string>;
     customStatus: string;
+    isCompanyDeleted: boolean;
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -52,6 +53,7 @@ export class Ticket {
         this.unread = data.unread;
         this.userCompanies = data.userCompanies;
         this.customStatus = data.customStatus;
+        this.isCompanyDeleted = data.isCompanyDeleted;
     }
     public setAssignedUserId(id) {
         this.assignedUserId = id;

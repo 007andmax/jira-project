@@ -46,6 +46,12 @@
                                     (mouseleave)="userCompanyTooltip.hide()"
                                 ></span>
                                 <span
+                                    class="qt-color-red-600"
+                                    *ngIf="ticketProfile.company.isCompanyDeleted"
+                                >
+                                    Archived
+                                </span>
+                                <span
                                     class="pointer"
                                     [textContent]="' - ' + getNameCreateUser()"
                                     (click)="showDetailUser()"
