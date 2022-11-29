@@ -18,6 +18,6 @@ export class GlNumbersDropDownComponent extends DropDownComponent {
     }
   }
   getSelectedItemText() {
-    return (this.selectedItem) ? `${this.selectedItem["glNumber"]} - ${this.selectedItem["description"]}` : "";
+    return (this.selectedItem) ? `${this.selectedItem["glNumber"]} - ${(this.selectedItem["description"]) ? this.selectedItem["description"] : "No description"}` : "";
   }
 }
