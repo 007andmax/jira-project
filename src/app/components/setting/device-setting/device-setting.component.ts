@@ -445,7 +445,7 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     if(data == "DeviceModel"){
       if(this.removeDevice != undefined)
       {
-        this.removeDevice.IsActive = false;
+        this.removeDevice.IsActive = false;        
 
       this.agentService
         .deleteModel(this.removeDevice)
@@ -555,5 +555,50 @@ export class DeviceSettingComponent implements OnInit, OnDestroy {
     this.selectedDeviceManufacturer = []; 
     this.modelList.forEach(item => (item.selected = false));
     this.selectedDeviceModel = [];   
+  }
+
+  removeList(){    
+    if(this.activeTab == "deviceType")
+    {
+      this.showPreloader = true;
+      this.selectedDeviceType.forEach(item=>{        
+        item.IsActive = false;
+        this.agentService.deleteHardwareType(item).subscribe((resp)=>{
+        },(error)=>{
+          this.toastrService.error("Something went wrong please try again.");
+        });               
+      });
+      this.getDeviceTypes(this.techCompany.id);
+      this.showPreloader = false;            
+    }
+    if (this.activeTab === "deviceManufacturer") 
+    {   
+      this.showPreloader = true;
+      this.selectedDeviceManufacturer.forEach(item=>{
+        item.IsActive = false;
+        item.TechCompanyGuid = this.techCompany.id;        
+        this.agentService
+        .deleteManufacturer(item)
+        .subscribe((resp) => {                          
+          }, (error) => {
+            this.toastrService.error("Something went wrong please try again.");
+        });
+      });   
+      this.getManufacturers(this.techCompany.id); 
+      this.showPreloader = false;       
+    }
+    if (this.activeTab === "deviceModel")
+    {
+      this.showPreloader = true;
+      this.selectedDeviceModel.forEach(item=>{
+        item.IsActive = false;
+        this.agentService.deleteModel(item).subscribe((resp)=>{
+        },(error)=>{
+          this.toastrService.error("Something went wrong please try again.");
+        });
+      });
+      this.getModels(this.techCompany.id);   
+      this.showPreloader = false;                   
+    }
   }
 }
