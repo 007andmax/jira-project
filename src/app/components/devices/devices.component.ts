@@ -464,8 +464,8 @@ export class DevicesComponent implements OnInit {
                 asset.UpTime = Days;
               }
             }
-          }
-          asset.online = true;
+            asset.online = true;
+          }          
         }
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
