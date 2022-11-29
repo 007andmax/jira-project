@@ -81,16 +81,6 @@
                     <span class="d-exportdark"></span>
                 </button>
             </div>
-
-
-
-
-
-
-
-
-
-
             <div class="qt-page-list__header-title-line--rigth">
                 <div
                     class="company-devices-page__list-header-buttons"
@@ -273,12 +263,6 @@
                             </div>
                         </td>
                         <td class="company-devices-table__device-name">
-
-
-
-
-
-
                             <div class="qt-df qt-fd-c">
                                 <div class="
                         company-devices-table-device-name
@@ -291,7 +275,55 @@
                                     [textContent]="asset.Name"
                                 ></span>
                             </div>
+                        </td>                    
+                        <td class="company-devices-table__logged-user">
+                            <div
+                                class="qt-df qt-fd-c"
+                                *ngIf="asset.online"
+                            >
+                                <span
+                                    class="logged-name qt-ff-gm"
+                                    [textContent]="asset.userName || ''"
+                                ></span>
+                                <span class="logged-time">
+                                    Idle:
+                                    <span>{{ asset.IdelTime }}</span>
+                                </span>
+                            </div>
                         </td>
+                        <td class="company-devices-table__up-time">
+                            <div class="qt-df qt-fd-c">
+                                <span>
+                                    <span
+                                        *ngIf="asset.IsActive && asset.online"
+                                        class="companydevice-beta-online"
+                                    >
+                                        {{ asset.UpTime }}
+                                    </span>
+                                    <span
+                                        *ngIf="asset.IsActive && !asset.online"
+                                        class="companydevice-beta-offline"
+                                    >
+                                        {{ getLastCheckIn(asset)}}
+                                    </span>
+                                </span>
+                                <span
+                                    *ngIf="asset.IsActive && asset.online"
+                                    class="uptime-tag qt-ff-gm"
+                                    [textContent]="asset.online ? 'Online' : 'Offline'"
+                                ></span>
+                                <span
+                                    *ngIf="asset.IsActive && !asset.online"
+                                    class="uptime-tag qt-ff-gm --offline"
+                                    [textContent]="asset.online ? 'Online' : 'Offline'"
+                                ></span>
+                                <span
+                                    *ngIf="!asset.IsActive"
+                                    class="uptime-tag qt-ff-gm --offline"
+                                    [textContent]="'Uninstalled'"
+                                ></span>
+                            </div>
+                        </td>    
                         <td class="company-devices-table__windows">
                             <span
                                 class="company-devices-table__ip-windows-text"
@@ -361,16 +393,6 @@
                                     {{asset.AgentVersion}}
                                 </span>
                             </div>
-
-
-
-
-
-
-
-
-
-
                         </td>
                         <td class="company-devices-table__go-to">
                             <app-dynamic-tooltip
@@ -527,16 +549,6 @@
             *ngIf="showPreloader"
         ></div>
     </div>
-
-
-
-
-
-
-
-
-
-
     <div
         class="company-devices-page__aside company-device-aside"
         *ngIf="open"
@@ -566,7 +578,7 @@
             icon__tablet: assetData.iconName === 'Networking Hardware',
             icon__printer: assetData.iconName === 'Printer',
             icon__server: assetData.iconName === 'Server',
-            icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',                                        
+            icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',                                        
             '--offline': !assetData.online,
             '--online':assetData.online }"
                     ></div>
@@ -581,7 +593,7 @@
           icon__tablet: assetData.iconName === 'Networking Hardware',
           icon__printer: assetData.iconName === 'Printer',
           icon__server: assetData.iconName === 'Server',
-          icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',                                        
+          icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',                                        
           '--offline': !assetData.online,
           '--online':assetData.online }"
                     ></div>
@@ -591,16 +603,6 @@
                     >
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
                 <div class="qt-df qt-ai-c">
                     <div
                         ngbDropdown
@@ -608,625 +610,475 @@
                         class="qt-overflow-v"
                     >
                         <div
-                            class="sidebar-system__info-text sidebarSystemInfo-text"
-                            [textContent]="assetData.Name"
+                            class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                            ngbDropdownToggle
                         ></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="sidebar-system__info edit-field">
-                        <div class="sidebar-system__info-title">Serial Number</div>
-                        <input
-                            type="text"
-                            class="device-table__input-name"
-                            [(ngModel)]="serialnumber"
-                            (blur)="updateSerialNo()"
+                        <ul
+                            class="qt-dropdown-menu --open-bot qt-overflow-v"
+                            ngbDropdownMenu
                         >
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="gotiDetailDevice(assetData.Guid)"
+                            >
+                                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
+                                Device Detail
+                            </li>
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="sendCommand('r', assetData.ID)"
+                            >
+                                <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Restart
+                            </li>
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="sendCommand('s', assetData.ID)"
+                            >
+                                <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Shutdown
+                            </li>
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                            >
+                                <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Set as Master Agent
+                            </li>
+                            <li
+                                class="pointer"
+                                (click)="sendCommand('ar', assetData.ID)"
+                            >
+                                <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                Remove
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Manufacturer</div>
-                        <div class="device-table__input-name computerManufacture">
-                            <app-drop-down
-                                #dropdownManufacturersidebar
-                                [placeholder]="'Select manufacture'"
-                                [class]="['qt-dropdown']"
-                                [editItem]="selectManufactureNamessidebar"
-                                [field]="'Name'"
-                                [list]="manufactureList"
-                                (onSelectedItem)="onSelectManufactureNamesidebar($event)"
-                            ></app-drop-down>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Computer Model</div>
-                        <div class="device-table__input-name computerModel">
-                            <app-drop-down
-                                #dropdownModelSidebar
-                                [placeholder]="'Select model'"
-                                [class]="['qt-dropdown']"
-                                [editItem]="selectModelNameSidebar"
-                                [field]="'Name'"
-                                [list]="selectModelList"
-                                (onSelectedItem)="onSelectModelsidebar($event)"
-                            ></app-drop-down>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-system__info">
-                    <div class="sidebar-system__info-title">IP address</div>
                     <div
-                        class="sidebar-system__info-text sidebarSystemInfo-text"
-                        [textContent]="assetData.InternalIPAddress"
+                        class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
+                        (click)="menuclose()"
                     ></div>
                 </div>
             </div>
-            <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-            <div
-                class="company-device-aside__info-block"
-                [ngClass]="{'--collapsed' :toggleWindowSpecifications}"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
-                    <div
-                        class="company-device-aside__expand-collapse qt-sz-16"
-                        (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
-                    ></div>
-                </div>
-                <div class="sidebar-system__info warranty-info">
-                    <div class="sidebar-system__info-title">Warranty</div>
-                    <app-date-picker
-                        [type]="'INPUT'"
-                        [editMode]="true"
-                        [editDate]="assetData.WarrantyExpires || getToDayDate()"
-                        [useMinDate]="false"
-                        [placement]="'top-right'"
-                        (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Warranty')"
-                    ></app-date-picker>
-                </div>
-                <div class="sidebar-system__info">
-                    <div class="sidebar-system__info-title">Windows Info</div>
-                    <div
-                        class="sidebar-system__info-text sidebarSystemInfo-text"
-                        [textContent]="removeMicrosoft(assetData.Caption)"
-                    ></div>
-                </div>
-                <div class="sidebar-system__info installed-info">
-                    <div class="sidebar-system__info-title">Installed on</div>
-                    <app-date-picker
-                        [type]="'INPUT'"
-                        [editMode]="true"
-                        [editDate]="assetData.InstallDate || getToDayDate()"
-                        [useMinDate]="false"
-                        [placement]="'top-right'"
-                        (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Install')"
-                    ></app-date-picker>
-                </div>
-                <div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">System Type</div>
-                        <input
-                            type="text"
-                            class="device-table__input-name"
-                            [(ngModel)]="assetData.OSArchitecture"
-                            (blur)="updateOperationgSystem(assetData.ID,assetData)"
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div
-            *ngIf="tab==='NETWORK'"
-            class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-        >
-            <div
-                class="company-device-aside__info-block"
-                [ngClass]="{'--collapsed' :toggleIpSettings}"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
-                    <div
-                        class="company-device-aside__expand-collapse qt-sz-16"
-                        (click)="toggleIpSettings = !toggleIpSettings"
-                    ></div>
-                </div>
-                <div class="sidebar-network__info">
-                    <div class="sidebar-network__info-title">Model(s):</div>
-                    <div
-                        class="sidebar-network__info-text"
-                        [textContent]="chackDefaultValue(networkData.Name)"
-                    ></div>
-                    <ul
-                        class="qt-dropdown-menu --open-bot qt-overflow-v"
-                        ngbDropdownMenu
-                    >
-                        <li
-                            class="pointer"
-                            ngbDropdownItem
-                            (click)="gotiDetailDevice(assetData.Guid)"
-                        >
-                            <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
-                            Device Detail
-                        </li>
-                        <li
-                            class="pointer"
-                            ngbDropdownItem
-                            (click)="sendCommand('r', assetData.ID)"
-                        >
-                            <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                            Restart
-                        </li>
-                        <li
-                            class="pointer"
-                            ngbDropdownItem
-                            (click)="sendCommand('s', assetData.ID)"
-                        >
-                            <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                            Shutdown
-                        </li>
-                        <li
-                            class="pointer"
-                            ngbDropdownItem
-                        >
-                            <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                            Set as Master Agent
-                        </li>
-                        <li
-                            class="pointer"
-                            (click)="sendCommand('ar', assetData.ID)"
-                        >
-                            <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                            Remove
-                        </li>
-                    </ul>
-                </div>
+            <div class="company-device-aside__subheader">
                 <div
-                    class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
-                    (click)="menuclose()"
+                    class="company-device-aside__subheader-item subheader-item-system"
+                    [ngClass]="{'--active':tab === 'SYSTEM'}"
+                    (click)="tab = 'SYSTEM'"
+                ></div>
+                <div
+                    class="company-device-aside__subheader-item subheader-item-network"
+                    [ngClass]="{'--active':tab === 'NETWORK'}"
+                    (click)="tab = 'NETWORK'"
+                ></div>
+                <div
+                    class="company-device-aside__subheader-item subheader-item-software"
+                    [ngClass]="{'--active':tab === 'SOFTWARE'}"
+                    (click)="tab = 'SOFTWARE'"
+                ></div>
+                <div
+                    class="company-device-aside__subheader-item subheader-item-updates"
+                    [ngClass]="{'--active':tab === 'UPDATES'}"
+                    (click)="tab = 'UPDATES'"
                 ></div>
             </div>
-        </div>
-        <div class="company-device-aside__subheader">
-            <div
-                class="company-device-aside__subheader-item subheader-item-system"
-                [ngClass]="{'--active':tab === 'SYSTEM'}"
-                (click)="tab = 'SYSTEM'"
-            ></div>
-            <div
-                class="company-device-aside__subheader-item subheader-item-network"
-                [ngClass]="{'--active':tab === 'NETWORK'}"
-                (click)="tab = 'NETWORK'"
-            ></div>
-            <div
-                class="company-device-aside__subheader-item subheader-item-software"
-                [ngClass]="{'--active':tab === 'SOFTWARE'}"
-                (click)="tab = 'SOFTWARE'"
-            ></div>
-            <div
-                class="company-device-aside__subheader-item subheader-item-updates"
-                [ngClass]="{'--active':tab === 'UPDATES'}"
-                (click)="tab = 'UPDATES'"
-            ></div>
-        </div>
-        <div class="company-device-aside__body">
-            <div
-                *ngIf="tab==='SYSTEM'"
-                class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-            >
+            <div class="company-device-aside__body">
                 <div
-                    class="company-device-aside__info-block"
-                    [ngClass]="{'--collapsed' :toggleDeviceSpecifications}"
+                    *ngIf="tab==='SYSTEM'"
+                    class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
                 >
-                    <div class="qt-df qt-jc-sb">
-                        <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
-                        <div
-                            class="company-device-aside__expand-collapse qt-sz-16"
-                            (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"
-                        ></div>
-                    </div>
-                    <div>
-                        <div class="sidebar-system__info edit-field">
-                            <div class="sidebar-system__info-title">Display Name</div>
-                            <input
-                                type="text"
-                                class="device-table__input-name"
-                                [(ngModel)]="assetData.Title"
-                                (blur)="updateAsset()"
-                            >
+                    <div
+                        class="company-device-aside__info-block"
+                        [ngClass]="{'--collapsed' :toggleDeviceSpecifications}"
+                    >
+                        <div class="qt-df qt-jc-sb">
+                            <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
+                            <div
+                                class="company-device-aside__expand-collapse qt-sz-16"
+                                (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"
+                            ></div>
                         </div>
-                    </div>
-                    <div>
+                        <div>
+                            <div class="sidebar-system__info edit-field">
+                                <div class="sidebar-system__info-title">Display Name</div>
+                                <input
+                                    type="text"
+                                    class="device-table__input-name"
+                                    [(ngModel)]="assetData.Title"
+                                    (blur)="updateAsset()"
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Host Name</div>
+                                <div
+                                    class="sidebar-system__info-text sidebarSystemInfo-text"
+                                    [textContent]="assetData.Name"
+                                ></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info edit-field">
+                                <div class="sidebar-system__info-title">Serial Number</div>
+                                <input
+                                    type="text"
+                                    class="device-table__input-name"
+                                    [(ngModel)]="serialnumber"
+                                    (blur)="updateSerialNo()"
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Manufacturer</div>
+                                <div class="device-table__input-name computerManufacture">
+                                    <app-drop-down
+                                        #dropdownManufacturersidebar
+                                        [placeholder]="'Select manufacture'"
+                                        [class]="['qt-dropdown']"
+                                        [editItem]="selectManufactureNamessidebar"
+                                        [field]="'Name'"
+                                        [list]="manufactureList"
+                                        (onSelectedItem)="onSelectManufactureNamesidebar($event)"
+                                    ></app-drop-down>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">Computer Model</div>
+                                <div class="device-table__input-name computerModel">
+                                    <app-drop-down
+                                        #dropdownModelSidebar
+                                        [placeholder]="'Select model'"
+                                        [class]="['qt-dropdown']"
+                                        [editItem]="selectModelNameSidebar"
+                                        [field]="'Name'"
+                                        [list]="selectModelList"
+                                        (onSelectedItem)="onSelectModelsidebar($event)"
+                                    >
+                                    </app-drop-down>
+                                </div>
+                            </div>
+                        </div>
                         <div class="sidebar-system__info">
-                            <div class="sidebar-system__info-title">Host Name</div>
+                            <div class="sidebar-system__info-title">IP address</div>
                             <div
                                 class="sidebar-system__info-text sidebarSystemInfo-text"
-                                [textContent]="assetData.Name"
+                                [textContent]="assetData.InternalIPAddress"
                             ></div>
                         </div>
                     </div>
-                    <div>
-                        <div class="sidebar-system__info edit-field">
-                            <div class="sidebar-system__info-title">Serial Number</div>
-                            <input
-                                type="text"
-                                class="device-table__input-name"
-                                [(ngModel)]="serialnumber"
-                                (blur)="updateSerialNo()"
+                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+                    <div
+                        class="company-device-aside__info-block"
+                        [ngClass]="{'--collapsed' :toggleWindowSpecifications}"
+                    >
+                        <div class="qt-df qt-jc-sb">
+                            <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
+                            <div
+                                class="company-device-aside__expand-collapse qt-sz-16"
+                                (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
+                            ></div>
+                        </div>
+                        <div class="sidebar-system__info warranty-info">
+                            <div class="sidebar-system__info-title">Warranty</div>
+                            <app-date-picker
+                                [type]="'INPUT'"
+                                [editMode]="true"
+                                [editDate]="assetData.WarrantyExpires || getToDayDate()"
+                                [useMinDate]="false"
+                                [placement]="'top-right'"
+                                (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Warranty')"
                             >
+                            </app-date-picker>
                         </div>
-                    </div>
-                    <div>
                         <div class="sidebar-system__info">
-                            <div class="sidebar-system__info-title">Manufacturer</div>
-                            <div class="device-table__input-name computerManufacture">
-                                <app-drop-down
-                                    #dropdownManufacturersidebar
-                                    [placeholder]="'Select manufacture'"
-                                    [class]="['qt-dropdown']"
-                                    [editItem]="selectManufactureNamessidebar"
-                                    [field]="'Name'"
-                                    [list]="manufactureList"
-                                    (onSelectedItem)="onSelectManufactureNamesidebar($event)"
-                                ></app-drop-down>
-                            </div>
+                            <div class="sidebar-system__info-title">Windows Info</div>
+                            <div
+                                class="sidebar-system__info-text sidebarSystemInfo-text"
+                                [textContent]="removeMicrosoft(assetData.Caption)"
+                            ></div>
                         </div>
-                    </div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">IP address</div>
-                        <div
-                            class="sidebar-system__info-text sidebarSystemInfo-text"
-                            [textContent]="assetData.InternalIPAddress"
-                        ></div>
-                    </div>
-                    <div>
-                        <div class="sidebar-system__info">
-                            <div class="sidebar-system__info-title">Computer Model</div>
-                            <div class="device-table__input-name computerModel">
-                                <app-drop-down
-                                    #dropdownModelSidebar
-                                    [placeholder]="'Select model'"
-                                    [class]="['qt-dropdown']"
-                                    [editItem]="selectModelNameSidebar"
-                                    [field]="'Name'"
-                                    [list]="selectModelList"
-                                    (onSelectedItem)="onSelectModelsidebar($event)"
-                                ></app-drop-down>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-                <div
-                    class="company-device-aside__info-block"
-                    [ngClass]="{'--collapsed' :toggleWindowSpecifications}"
-                >
-                    <div class="qt-df qt-jc-sb">
-                        <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
-                        <div
-                            class="company-device-aside__expand-collapse qt-sz-16"
-                            (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
-                        ></div>
-                    </div>
-                    <div class="sidebar-system__info warranty-info">
-                        <div class="sidebar-system__info-title">Warranty</div>
-                        <app-date-picker
-                            [type]="'INPUT'"
-                            [editMode]="true"
-                            [editDate]="assetData.WarrantyExpires || getToDayDate()"
-                            [useMinDate]="false"
-                            [placement]="'top-right'"
-                            (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Warranty')"
-                        ></app-date-picker>
-                    </div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Windows Info</div>
-                        <div
-                            class="sidebar-system__info-text sidebarSystemInfo-text"
-                            [textContent]="removeMicrosoft(assetData.Caption)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-system__info installed-info">
-                        <div class="sidebar-system__info-title">Installed on</div>
-                        <app-date-picker
-                            [type]="'INPUT'"
-                            [editMode]="true"
-                            [editDate]="assetData.InstallDate || getToDayDate()"
-                            [useMinDate]="false"
-                            [placement]="'top-right'"
-                            (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Install')"
-                        ></app-date-picker>
-                    </div>
-                    <div>
-                        <div class="sidebar-system__info">
-                            <div class="sidebar-system__info-title">System Type</div>
-                            <input
-                                type="text"
-                                class="device-table__input-name"
-                                [(ngModel)]="assetData.OSArchitecture"
-                                (blur)="updateOperationgSystem(assetData.ID,assetData)"
+                        <div class="sidebar-system__info installed-info">
+                            <div class="sidebar-system__info-title">Installed on</div>
+                            <app-date-picker
+                                [type]="'INPUT'"
+                                [editMode]="true"
+                                [editDate]="assetData.InstallDate || getToDayDate()"
+                                [useMinDate]="false"
+                                [placement]="'top-right'"
+                                (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Install')"
                             >
+                            </app-date-picker>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                *ngIf="tab==='NETWORK'"
-                class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-            >
-                <div
-                    class="company-device-aside__info-block"
-                    [ngClass]="{'--collapsed' :toggleIpSettings}"
-                >
-                    <div class="qt-df qt-jc-sb">
-                        <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
-                        <div
-                            class="company-device-aside__expand-collapse qt-sz-16"
-                            (click)="toggleIpSettings = !toggleIpSettings"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Model(s):</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Name)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">IP:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.IPAddress)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Subnet Mask:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Subnet)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DNS 1:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.DNS1)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DNS 2:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.DNS2)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Gateway:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="chackDefaultValue(networkData.Gateway)"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">Link Speed:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">MAC:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="formatMacAddress(networkData.MACAddress)"
-                        >
-                        </div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DHCP:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="networkData.DHCPEnabled"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">DHCP Server:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="networkData.DHCPServer"
-                        ></div>
-                    </div>
-                    <div class="sidebar-network__info">
-                        <div class="sidebar-network__info-title">WAN IP:</div>
-                        <div
-                            class="sidebar-network__info-text"
-                            [textContent]="asset.ExternalIPAddress"
-                        ></div>
-                    </div>
-                </div>
-                <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-            </div>
-            <div
-                *ngIf="tab==='SOFTWARE'"
-                class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-software__title qt-ff-sb">Softwares</div>
-                </div>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="softwareList"
-                >
-                    <div class="sidebar-software__row">
                         <div>
+                            <div class="sidebar-system__info">
+                                <div class="sidebar-system__info-title">System Type</div>
+                                <input
+                                    type="text"
+                                    class="device-table__input-name"
+                                    [(ngModel)]="assetData.OSArchitecture"
+                                    (blur)="updateOperationgSystem(assetData.ID,assetData)"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    *ngIf="tab==='NETWORK'"
+                    class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                >
+                    <div
+                        class="company-device-aside__info-block"
+                        [ngClass]="{'--collapsed' :toggleIpSettings}"
+                    >
+                        <div class="qt-df qt-jc-sb">
+                            <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
                             <div
-                                class="sidebar-software__row-title"
-                                [textContent]="item.DisplayName"
+                                class="company-device-aside__expand-collapse qt-sz-16"
+                                (click)="toggleIpSettings = !toggleIpSettings"
                             ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Model(s):</div>
                             <div
-                                class="sidebar-software__date"
-                                [textContent]="getDate(item.InstallDate) + getVersion(item.DisplayVersion)"
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.Name)"
+                            >
+                            </div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">IP:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.IPAddress)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Subnet Mask:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.Subnet)"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DNS 1:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.DNS1)"
+                            >
+                            </div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DNS 2:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="chackDefaultValue(networkData.DNS2)"
+                            >
+                            </div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Gateway:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="networkData.Gateway"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">Link Speed:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">MAC:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="formatMacAddress(networkData.MACAddress)"
+                            >
+                            </div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DHCP:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="networkData.DHCPEnabled"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">DHCP Server:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="networkData.DHCPServer"
+                            ></div>
+                        </div>
+                        <div class="sidebar-network__info">
+                            <div class="sidebar-network__info-title">WAN IP:</div>
+                            <div
+                                class="sidebar-network__info-text"
+                                [textContent]="assetData.ExternalIPAddress"
                             ></div>
                         </div>
                     </div>
-                </ng-template>
-                <div *ngIf="!softwareList || softwareList.length == 0 || softwareList==undefined">
-                    <div class="software-text-center">
-                        <span>No software to show</span>
+                    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+                </div>
+                <div
+                    *ngIf="tab==='SOFTWARE'"
+                    class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                >
+                    <div class="qt-df qt-jc-sb">
+                        <div class="sidebar-software__title qt-ff-sb">Softwares</div>
+                    </div>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="softwareList"
+                    >
+                        <div class="sidebar-software__row">
+                            <div>
+                                <div
+                                    class="sidebar-software__row-title"
+                                    [textContent]="item.DisplayName"
+                                ></div>
+                                <div
+                                    class="sidebar-software__date"
+                                    [textContent]="getDate(item.InstallDate) + getVersion(item.DisplayVersion)"
+                                ></div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div *ngIf="!softwareList || softwareList.length == 0 || softwareList==undefined">
+                        <div class="software-text-center">
+                            <span>No software to show</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                *ngIf="tab==='UPDATES'"
-                class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-            >
-                <div class="qt-df qt-jc-sb">
-                    <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
-                    <div *ngIf="getSecurityCountSelected() > 1">
-                        <button
-                            class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"
-                            (click)="InstallUpdate()"
-                            [disabled]="IsUpdateInstalling"
-                        >
-                            <i
-                                class="install-security-Update qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"
-                                *ngIf="!IsUpdateInstalling"
-                            ></i>
+                <div
+                    *ngIf="tab==='UPDATES'"
+                    class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                >
+                    <div class="qt-df qt-jc-sb">
+                        <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
+                        <div *ngIf="getSecurityCountSelected() > 1">
+                            <button
+                                class="qt-btn --outline-blue qt-mr-8 qt-d-md-none"
+                                (click)="InstallUpdate()"
+                                [disabled]="IsUpdateInstalling"
+                            >
+                                <i
+                                    class="install-security-Update qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"
+                                    *ngIf="!IsUpdateInstalling"
+                                ></i>
+                                <div
+                                    class="loader"
+                                    *ngIf="IsUpdateInstalling"
+                                ></div>
+                                Install Updates
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sidebar-updates__items">
+                        <div class="sidebar-updates__item">
                             <div
-                                class="loader"
-                                *ngIf="IsUpdateInstalling"
-                            ></div>
-                            Install Updates
-                        </button>
-                    </div>
-                </div>
-                <div class="sidebar-updates__items">
-                    <div class="sidebar-updates__item">
-                        <div
-                            class="sidebar-updates__icon icon__virus-protection icon "
-                            [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
-                        ></div>
-                        <div class="sidebar-updates__title">Virus Protection</div>
-                        <div class="sidebar-updates__subtitle">Up-to-date</div>
-                    </div>
-                    <div class="sidebar-updates__security-update-item">
-                        <div
-                            class="sidebar-updates__icon icon__security-update icon "
-                            [ngClass]="{'--updated': assetData.WindowsUpdatesPending == true, '--alert': assetData.WindowsUpdatesPending == false}"
-                        ></div>
-                        <div class="sidebar-updates__title">Security Updates</div>
-                        <div class="sidebar-updates__subtitle">Install {{securityUpdate}} Updates</div>
-                    </div>
-                    <div class="sidebar-updates__item">
-                        <div class="sidebar-updates__icon icon__drivers-missing icon --updated"></div>
-
-
-                        <div class="sidebar-updates__title">Drivers Missing</div>
-                        <div class="sidebar-updates__subtitle">Up-to-date</div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-                <div class="qt-page-list__header-thead-container">
-                    <table class="qt-table-modern qt-page-list__header-thead security-Update-list-header-thead">
-                        <thead>
-                            <tr>
-                                <th class="company-devices-table__check">
-                                    <div class="d-f">
-                                        <label class="qt-checkbox">
-                                            <input
-                                                type="checkbox"
-                                                [(ngModel)]="selectAllSecurityDevices"
-                                                (change)="toogleSecurityDevices()"
-                                            >
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </th>
-                                <th class="company-devices-table__device-name pointer">Description</th>
-                                <th class="company-devices-table__go-to"></th>
-                            </tr>
-                        </thead>
-                    </table>
-
-
-
-
-
-
-
-
-
-
-                    <div class="qt-df qt-fd-c qt-jc-sb">
-                        <div class="qt-page-list__body-table-container">
-                            <table class="qt-page-list__body-tbody qt-table-modern company-devices-table security-Update-list-header-thead">
-                                <tbody>
-                                    <tr
-                                        class="company-device-hover"
-                                        *ngFor="let windowUpdate of windowUpdatePendingList; let i = index"
-                                    >
-                                        <td class="company-devices-table__check">
-                                            <div class="d-f">
-                                                <label class="qt-checkbox">
-                                                    <input
-                                                        type="checkbox"
-                                                        [(ngModel)]="windowUpdate.selected"
-                                                        (change)="onSelectSecurityDevice()"
-                                                    >
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                        </td>
-
-
-
-
-
-
-
-
-
-
-                                        <td class="company-devices-table__device-name">
-                                            <div>
-                                                <span [textContent]="windowUpdate.Title"></span>
-                                            </div>
-                                        </td>
-                                        <td class="company-devices-table__go-to">
-                                            <a
-                                                href="javascript:;"
-                                                (click)="SecurityUpdate(i,windowUpdate.UpdateID)"
-                                                title="Install"
-                                            >
-                                                <span
-                                                    class="install-Update"
-                                                    *ngIf="!windowUpdate.IsUpdateInstalling"
-                                                ></span>
-                                                <div
-                                                    class="loader"
-                                                    *ngIf="windowUpdate.IsUpdateInstalling"
-                                                ></div>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                class="sidebar-updates__icon icon__virus-protection icon "
+                                [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
+                            >
+                            </div>
+                            <div class="sidebar-updates__title">Virus Protection</div>
+                            <div class="sidebar-updates__subtitle">Up-to-date</div>
+                        </div>
+                        <div class="sidebar-updates__security-update-item">
                             <div
-                                class="loading"
-                                *ngIf="IsCurrentConfigLoading"
-                            ></div>
+                                class="sidebar-updates__icon icon__security-update icon "
+                                [ngClass]="{'--updated': assetData.WindowsUpdatesPending == true, '--alert': assetData.WindowsUpdatesPending == false}"
+                            >
+                            </div>
+                            <div class="sidebar-updates__title">Security Updates</div>
+                            <div class="sidebar-updates__subtitle">Install {{securityUpdate}} Updates</div>
+                        </div>
+                        <div class="sidebar-updates__item">
+                            <div class="sidebar-updates__icon icon__drivers-missing icon --updated"></div>
+                            <div class="sidebar-updates__title">Drivers Missing</div>
+                            <div class="sidebar-updates__subtitle">Up-to-date</div>
+                        </div>
+                    </div>
+                    <div class="qt-page-list__header-thead-container">
+                        <table class="qt-table-modern qt-page-list__header-thead security-Update-list-header-thead">
+                            <thead>
+                                <tr>
+                                    <th class="company-devices-table__check">
+                                        <div class="d-f">
+                                            <label class="qt-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    [(ngModel)]="selectAllSecurityDevices"
+                                                    (change)="toogleSecurityDevices()"
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th class="company-devices-table__device-name pointer">Description</th>
+                                    <th class="company-devices-table__go-to"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="qt-df qt-fd-c qt-jc-sb">
+                            <div class="qt-page-list__body-table-container">
+                                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table security-Update-list-header-thead">
+                                    <tbody>
+                                        <tr
+                                            class="company-device-hover"
+                                            *ngFor="let windowUpdate of windowUpdatePendingList; let i = index"
+                                        >
+                                            <td class="company-devices-table__check">
+                                                <div class="d-f">
+                                                    <label class="qt-checkbox">
+                                                        <input
+                                                            type="checkbox"
+                                                            [(ngModel)]="windowUpdate.selected"
+                                                            (change)="onSelectSecurityDevice()"
+                                                        >
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="company-devices-table__device-name">
+                                                <div>
+                                                    <span [textContent]="windowUpdate.Title"></span>
+                                                </div>
+                                            </td>
+                                            <td class="company-devices-table__go-to">
+                                                <a
+                                                    href="javascript:;"
+                                                    (click)="SecurityUpdate(i,windowUpdate.UpdateID)"
+                                                    [ngClass]="{'security-button-disabled': !windowUpdate.selected}"
+                                                    title="Install"
+                                                >
+                                                    <span
+                                                        class="install-Update"
+                                                        *ngIf="!windowUpdate.IsUpdateInstalling"
+                                                    ></span>
+                                                    <div
+                                                        class="loader"
+                                                        *ngIf="windowUpdate.IsUpdateInstalling"
+                                                    ></div>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div
+                                    class="loading"
+                                    *ngIf="IsCurrentConfigLoading"
+                                ></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1234,15 +1086,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 <div
     [hidden]="!opened"
@@ -1307,16 +1150,6 @@
                 >
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
         <div class="qt-input-line">
             <div class="qt-input-block">
                 <label for="add-Install-Date">Install Date</label>
@@ -1424,16 +1257,6 @@
                 </ng-template>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
         <div
             class="grey-dropdown sidebarchiptag"
             ngbDropdown
@@ -1556,15 +1379,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
 <ng-template #templatePowersell>
     <div class="modal-content restart-modal">
         <div class="modal-header">
@@ -1600,16 +1414,6 @@
         </div>
     </div>
 </ng-template>
-
-
-
-
-
-
-
-
-
-
 
 <ng-template #templateConnection>
     <div class="qt-modal company-devices-beta-remote-modal">
@@ -1660,26 +1464,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 </ng-template>
-
-
-
-
-
-
-
-
-
 
 <app-report-send-email></app-report-send-email>
