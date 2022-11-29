@@ -48,6 +48,7 @@
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
+    min-width: calc(1280px + 280px);
 
     &>aside {
         order: 0;
