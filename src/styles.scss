@@ -4752,7 +4752,7 @@ input.--input-error:hover {
   }
 }
 
-.company-devices-page {
+  .company-devices-page {
     .company-devices-table__check {
       width: 16px;
     }
@@ -4772,14 +4772,14 @@ input.--input-error:hover {
       min-width: 38px;
     }
     .company-devices-table__ip-address {
-      width: 185px;
-      max-width: 185px;
-      min-width: 185px;
+      width: 190px;
+      max-width: 190px;
+      min-width: 190px;
     }
     .company-devices-table__windows {
-      width: 170px;
-      max-width: 170px;
-      min-width: 170px;
+      width: 164px;
+      max-width: 164px;
+      min-width: 164px;
     }
     .company-devices-table__up-time {
       width: 100px;
@@ -4797,23 +4797,26 @@ input.--input-error:hover {
       min-width: 150px;
     }
     .company-devices-table__device-type {
-      width: 36px;
-      max-width: 36px;
-      min-width: 36px;
+      width: 32px;
+      max-width: 32px;
+      min-width: 32px;
     }
     .company-devices-table__device-agent {
-      width: 96px;
-      max-width: 96px;
-      min-width: 96px;
+      width: 101px;
+      max-width: 101px;
+      min-width: 101px;
     }
     .company-devices-table__device-master-agent{
       width:30px;
       max-width: 30px;
       min-width: 30px;
     }
+    .company-devices-table__company-name {
+      max-width: 158px;
+      width: max-content;
+      min-width: 158px;
+    }
   }
-
-
 
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;
