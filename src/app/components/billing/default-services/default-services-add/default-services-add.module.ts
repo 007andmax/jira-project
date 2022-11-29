@@ -8,6 +8,7 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
+import { GlNumbersDropDownModule } from 'src/app/components/inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
         TaxesModule,
         DropDownModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        GlNumbersDropDownModule
     ],
     exports: [DefaultServicesAddComponent]
 
