@@ -1,11 +1,7 @@
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
-import { SettingStateService } from 'src/app/states/setting/setting-state.service';
-import { DeviceFilter } from '../../devices/class/devices';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -13,6 +9,8 @@ import { DeviceSettingStateService } from 'src/app/states/device-setting/device-
 import { DeviceSettingDeviceTypeComponent } from './device-setting-device-type/device-setting-device-type.component';
 import { DeviceSettingManufactureComponent } from './device-setting-manufacture/device-setting-manufacture.component';
 import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
+import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'device-setting',

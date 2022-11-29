@@ -278,8 +278,9 @@
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
       mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
     }
-    &.--devices{
-      background-image: url("/assets/img/icons-left-sidebar/devices.svg");
+    &.--devices{      
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
     }
     &.--logout {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
