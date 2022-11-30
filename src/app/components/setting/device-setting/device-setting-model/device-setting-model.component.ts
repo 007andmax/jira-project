@@ -15,7 +15,9 @@ import { DeviceSettingStateService } from 'src/app/states/device-setting/device-
   styleUrls: ['./device-setting-model.component.scss']
 })
 export class DeviceSettingModelComponent implements OnInit {
+  selectAllDevices: boolean = false;
   selectManufactureList: any[] = [];
+  selectedDeviceModel: any[] = [];
   modelList: any[] = [];
   showPreloader: boolean = true;
   techCompany: any;
@@ -46,6 +48,36 @@ export class DeviceSettingModelComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+  }
+  getSelectedCount() {
+    return this.selectedDeviceModel.length;
+  }
+  getSelectedDeviceModel() {
+    return this.selectedDeviceModel;
+  }
+  toogleDevices(isChecked: boolean) {
+    this.modelList.forEach((item) => {
+      item.selected = this.selectAllDevices ? true : false;
+    });
+    if (isChecked) {
+      this.modelList.forEach((element, index) => {
+        this.selectedDeviceModel.push(this.modelList[index]);
+      })
+    }
+    else {
+      this.selectedDeviceModel = [];
+    }
+  }
+  onSelect(index: number, isChecked: boolean) {
+    let find = this.modelList.find((item) => !item.selected);
+    this.selectAllDevices = find ? false : true;
+    if (isChecked) {
+      this.selectedDeviceModel.push(this.modelList[index]);
+    } else {
+      let Id = this.modelList[index].ID;
+      let Index = this.selectedDeviceModel.findIndex(item => item.ID == Id);
+      this.selectedDeviceModel.splice(Index, 1);
+    }
   }
   addModel(data) {
     this.modelList.push(data);

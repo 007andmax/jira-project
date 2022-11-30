@@ -749,6 +749,7 @@ export class AgentService {
   }
 
   public deleteModel(res) {
+    console.log("res", res);
     return this.http
       .post(
         `${this.apiAgent}agent/Model`,

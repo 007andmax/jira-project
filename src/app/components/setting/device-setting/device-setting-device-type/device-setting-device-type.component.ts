@@ -17,9 +17,11 @@ import { DeviceSettingStateService } from 'src/app/states/device-setting/device-
 export class DeviceSettingDeviceTypeComponent implements OnInit {
   hardwareTypes: any[] = [];
   deviceTypeList: any[] = [];
+  selectedDeviceType: any[] = [];
   filter: DeviceFilter = new DeviceFilter();
   techCompany: any;
   showPreloader: boolean = true;
+  selectAllDevices: boolean = false;
   deviceType: any;
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
@@ -46,6 +48,37 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
   }
   addDeviceType(data) {
     this.hardwareTypes.push(data);
+  }
+  toogleDevices(isChecked: boolean) {
+    this.deviceTypeList.forEach((item) => {
+      item.selected = this.selectAllDevices ? true : false;
+    });
+    if (isChecked) {
+      this.deviceTypeList.forEach((element, index) => {
+        this.selectedDeviceType.push(this.deviceTypeList[index]);
+      })
+    }
+    else {
+      this.selectedDeviceType = [];
+    }
+  }
+  getSelectedDeviceType() {
+    return this.selectedDeviceType;
+  }
+  onSelect(index: number, isChecked: boolean) {
+    let find = this.deviceTypeList.find((item) => !item.selected);
+    this.selectAllDevices = find ? false : true;
+    if (isChecked) {
+      this.selectedDeviceType.push(this.deviceTypeList[index]);
+    } else {
+      let Id = this.deviceTypeList[index].ID;
+      let Index = this.selectedDeviceType.findIndex(item => item.ID == Id);
+      this.selectedDeviceType.splice(Index, 1);
+    }
+  }
+
+  public getSelectedCount() {
+    return this.selectedDeviceType.length;
   }
   removeDeviceType() {
     this.deviceType.IsActive = false;

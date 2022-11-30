@@ -16,7 +16,9 @@ import { DeviceSettingStateService } from 'src/app/states/device-setting/device-
 })
 export class DeviceSettingManufactureComponent implements OnInit {
   manufactureIsActiveList: any[] = [];
+  selectedDeviceManufacturer: any[] = [];
   techCompany: any;
+  selectAllDevices: boolean = false;
   showPreloader: boolean = true;
   manufacturerList: any[] = [];
   manufacturer: any;
@@ -43,6 +45,36 @@ export class DeviceSettingManufactureComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+  }
+  public getSelectedDeviceManufacturer() {
+    return this.selectedDeviceManufacturer;
+  }
+  toogleDevices(isChecked: boolean) {
+    this.manufactureIsActiveList.forEach((item) => {
+      item.selected = this.selectAllDevices ? true : false;
+    });
+    if (isChecked) {
+      this.manufactureIsActiveList.forEach((element, index) => {
+        this.selectedDeviceManufacturer.push(this.manufactureIsActiveList[index]);
+      })
+    }
+    else {
+      this.selectedDeviceManufacturer = [];
+    }
+  }
+  onSelect(index: number, isChecked: boolean) {
+    let find = this.manufactureIsActiveList.find((item) => !item.selected);
+    this.selectAllDevices = find ? false : true;
+    if (isChecked) {
+      this.selectedDeviceManufacturer.push(this.manufactureIsActiveList[index]);
+    } else {
+      let Id = this.manufactureIsActiveList[index].ID;
+      let Index = this.selectedDeviceManufacturer.findIndex(item => item.ID == Id);
+      this.selectedDeviceManufacturer.splice(Index, 1);
+    }
+  }
+  public getSelectedCount() {
+    return this.selectedDeviceManufacturer.length;
   }
   addManufacture(data) {
     this.manufacturerList.push(data);

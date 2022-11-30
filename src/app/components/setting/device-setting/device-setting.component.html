@@ -4,6 +4,21 @@
         <div class="heading qt-df qt-ai-fs qt-jc-sb">
             <h5 class="qt-fw-600">Device Settings</h5>
             <div class="qt-df">
+                <app-dynamic-tooltip
+                    [content]="'Remove'"
+                    [position]="'top'"
+                    #removeTooltip
+                ></app-dynamic-tooltip>
+                <a
+                    href="javascript:;"
+                    (mouseenter)="removeTooltip.show($event.target)"
+                    (mouseleave)="removeTooltip.hide()"
+                    class="qt-button --md --gray button-gl-number__delete qt-ml-12"
+                    *ngIf="getSelectedCount() > 0"
+                    (click)="removeList()"
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
+                </a>
                 <div class="qt-df qt-pos-rel">
                     <a
                         href="javascript:;"
@@ -53,11 +68,14 @@
                 </div>
             </div>
         </div>
-        <ngb-tabset (tabChange)="toggle($event)">
+        <ngb-tabset
+            (tabChange)="toggle($event)"
+            [destroyOnHide]="true"
+        >
             <!-- Device Type -->
             <ngb-tab
                 title="Device Type"
-                id="tab1"
+                id="deviceType"
             >
                 <ng-template ngbTabContent>
                     <device-setting-device-type #deviceType></device-setting-device-type>
@@ -66,7 +84,7 @@
             <!-- Manufacture -->
             <ngb-tab
                 title="Manufacture"
-                id="tab2"
+                id="manufacture"
             >
                 <ng-template ngbTabContent>
                     <device-setting-manufacture #manufacture></device-setting-manufacture>
@@ -75,7 +93,7 @@
             <!-- Model -->
             <ngb-tab
                 title="Model"
-                id="tab3"
+                id="model"
             >
                 <ng-template ngbTabContent>
                     <device-setting-model

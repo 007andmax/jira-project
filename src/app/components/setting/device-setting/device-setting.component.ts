@@ -11,6 +11,8 @@ import { DeviceSettingManufactureComponent } from './device-setting-manufacture/
 import { DeviceSettingModelComponent } from './device-setting-model/device-setting-model.component';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { FormBuilder } from '@angular/forms';
+import { forkJoin, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'device-setting',
@@ -29,7 +31,7 @@ export class DeviceSettingComponent implements OnInit {
   addDeviceType: boolean = false;
   addManufacture: boolean = false;
   addModel: boolean = false;
-  activeTab: string = "tab1";
+  activeTab: string = "deviceType";
   constructor(private settingStateService: SettingStateService,
     private agentService: AgentService,
     private formBuilder: FormBuilder,
@@ -74,30 +76,77 @@ export class DeviceSettingComponent implements OnInit {
   }
   toggle(evt: any) {
     this.activeTab = evt['nextId'];
-    if (evt.nextId == "tab1") {
+    if (evt.nextId == "deviceType") {
       this.devicebutton = true;
     }
     else {
       this.devicebutton = false
     }
-    if (evt.nextId == "tab2") {
+    if (evt.nextId == "manufacture") {
       this.manufacturebutton = true;
     }
     else {
       this.manufacturebutton = false
     }
-    if (evt.nextId == "tab3") {
+    if (evt.nextId == "model") {
       this.modelbutton = true;
     }
     else {
       this.modelbutton = false
     }
   }
-
+  getSelectedCount() {
+    if (this.deviceType) return this.deviceType.getSelectedCount();
+    if (this.manufacture) return this.manufacture.getSelectedCount();
+    if (this.model) return this.model.getSelectedCount();
+  }
   openModel() {
     this.addDeviceType = true;
   }
-
+  removeList() {
+    if (this.activeTab == "deviceType") {
+      this.deviceType.showPreloader = true;
+      forkJoin(this.deviceType.getSelectedDeviceType().map(item => this.agentService.deleteHardwareType(item).pipe(map((res) => res),
+        catchError(error => of(undefined)))))
+        .subscribe(
+          () => {
+            this.deviceType.selectedDeviceType = [];
+            this.deviceType.getDeviceTypes(this.techCompany.id);
+          },
+          error => {
+            this.toastrService.error("Something went wrong please try again.");
+          }
+        );
+    }
+    if (this.activeTab == "manufacture") {
+      this.manufacture.showPreloader = true;
+      forkJoin(this.manufacture.getSelectedDeviceManufacturer().map(item => this.agentService.deleteManufacturer(item).pipe(map((res) => res),
+        catchError(error => of(undefined)))))
+        .subscribe(
+          () => {
+            this.manufacture.selectedDeviceManufacturer = [];
+            this.manufacture.getManufacturers(this.techCompany.id);
+          },
+          error => {
+            this.toastrService.error("Something went wrong please try again.");
+          }
+        );
+    }
+    if (this.activeTab == "model") {
+      this.model.showPreloader = true;
+      forkJoin(this.model.getSelectedDeviceModel().map(item => this.agentService.deleteModel(item).pipe(map((res) => res),
+        catchError(error => of(undefined)))))
+        .subscribe(
+          () => {
+            this.model.selectedDeviceModel = [];
+            this.model.getModels(this.techCompany.id);
+          },
+          error => {
+            this.toastrService.error("Something went wrong please try again.");
+          }
+        );
+    }
+  }
   openModelManufacture() {
     this.addManufacture = true;
   }

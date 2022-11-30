@@ -9,7 +9,8 @@
                     <label class="qt-checkbox">
                         <input
                             type="checkbox"
-                            (change)="onSelectAll($event)"
+                            [(ngModel)]="selectAllDevices"
+                            (change)="toogleDevices($event.target.checked)"
                         >
                         <span></span>
                     </label>
@@ -49,60 +50,15 @@
                 No model to show
             </div>
             <div
-                class="row"
-                *ngIf="false"
-            >
-                <div class="col-md-5">
-                    <th>
-                        <div class="qt-input-block qt-input-line">
-                            <app-drop-down
-                                #manufacturer
-                                [class]="['light-dropdown', 'qt-select-input-40']"
-                                [placeholder]="'Select Manufacture'"
-                                [list]="manufactureIsActiveList"
-                                [field]="'Name'"
-                                [search]="true"
-                                [change]="true"
-                                (onSelectedItem)="onSelectManufactureName($event)"
-                            ></app-drop-down>
-                        </div>
-                    </th>
-                </div>
-                <div class="col-md-4">
-                    <div
-                        class="search"
-                        ngbDropdown
-                        [autoClose]="'outside'"
-                        #modelSearch="ngbDropdown"
-                    >
-                        <div ngbDropdownAnchor>
-                            <form class="ng7 form">
-                                <span class="qt-input-search">
-                                    <input
-                                        id="modelsearch"
-                                        type="text"
-                                        class="search__input"
-                                        placeholder="Please search"
-                                        [(ngModel)]="searchModel"
-                                        name="searchModel"
-                                    >
-                                    <span class="global-search__close icon__close-round"></span>
-                                </span>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div
                 class="tab-pane__table-row"
-                *ngFor="let model of selectManufactureList | modelFilter: searchModel"
+                *ngFor="let model of selectManufactureList | modelFilter: searchModel; let i = index"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
                     <label class="qt-checkbox">
                         <input
                             type="checkbox"
-                            [(ngModel)]="model.IsActive"
+                            [(ngModel)]="model.selected"
+                            (change)="onSelect(i,$event.target.checked)"
                         >
                         <span></span>
                     </label>

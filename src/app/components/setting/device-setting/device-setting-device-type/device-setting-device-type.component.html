@@ -9,7 +9,8 @@
                     <label class="qt-checkbox">
                         <input
                             type="checkbox"
-                            (change)="onSelectAll($event)"
+                            [(ngModel)]="selectAllDevices"
+                            (change)="toogleDevices($event.target.checked)"
                         >
                         <span></span>
                     </label>
@@ -49,7 +50,8 @@
                     <label class="qt-checkbox">
                         <input
                             type="checkbox"
-                            [(ngModel)]="deviceType.IsActive"
+                            [(ngModel)]="deviceType.selected"
+                            (change)="onSelect(i,$event.target.checked)"
                         >
                         <span></span>
                     </label>
