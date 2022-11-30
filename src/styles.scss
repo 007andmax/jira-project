@@ -608,6 +608,7 @@ documents-edit-info {
   app-draft-email-recipients,
   draft-email-user-recipients {
     > .col-md-12,
+    > .qt-temporary-col-fix, // TODO change this temporary class (this class create for remove bootstrap col class)
     .col-md-6 {
       //margin-top: 40px; // TODO check this style
       margin-top: 12px;
@@ -643,7 +644,7 @@ documents-edit-info {
       }
       .mat-form-field-infix {
         border: 1px solid $gray-200;
-        border-radius: 4px;
+        border-radius: 6px;
         padding-left: 36px;
         position: relative;
         min-height: 48px;
@@ -662,6 +663,23 @@ documents-edit-info {
         input {
           height: 42px;
           margin: 0;
+        }
+      }
+    }
+
+    > .qt-temporary-col-fix {
+      .qt-input-block__input, // Fix input style
+      .qt-input-block input {
+        border-color: transparent;
+        box-shadow: unset;
+      }
+      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
+      .mat-form-field {
+        margin-top: 0;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        &:before {
+          display: none;
         }
       }
     }

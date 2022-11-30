@@ -265,11 +265,11 @@
       padding: 0;
     }
   }
-  .app-drop-down__right-icon {
-    .icn-remove-old {
-      top: calc(50% - 8px) !important;
-    }
-  }
+  //.app-drop-down__right-icon { // TODO check this style
+  //  .icn-remove-old {
+  //    top: calc(50% - 8px) !important;
+  //  }
+  //}
 
   .fr-box {
     width: 794px;
@@ -347,9 +347,9 @@ document-preview,
   }
 }
 .documents-create {
-  .mat-form-field-wrapper {
-    margin-top: 17px;
-  }
+  //.mat-form-field-wrapper { // TODO check this style
+  //  margin-top: 17px;
+  //}
   .documents-filter-tags {
     .mat-form-field-infix {
       min-height: 40px;

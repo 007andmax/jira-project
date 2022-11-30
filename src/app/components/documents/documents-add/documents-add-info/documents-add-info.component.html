@@ -37,21 +37,10 @@
                 class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
                 *ngIf="tab === 'DOCUMENT_INFO'"
             >
-                <div class="documents-create__col --required">
-                    <p class="label-name">Document Title</p>
-                    <mat-error
-                        class="qt-tooltip-error"
-                        *ngIf="!documentValidate.getTitle()"
-                        [textContent]="'Document title is required'"
-                    >
-                    </mat-error>
-                    <mat-error
-                        class="qt-tooltip-error"
-                        *ngIf="!documentValidate.getUniqueTittle()"
-                        [textContent]="'Document title value must be unique'"
-                    >
-                    </mat-error>
-                    <input
+                <div class="qt-inputs-row --required">
+                    <div class="qt-input-block">
+                      <div class="qt-input-block__label">Document Title</div>
+                      <input
                         type="text"
                         class="qt-input-40 documents-add-body__input"
                         placeholder="Printer Installation Guide"
@@ -60,31 +49,48 @@
                         (blur)="onChangeTitle()"
                         min="1"
                         max="250"
-                    >
+                      >
+                      <mat-error
+                        class="invalid-feedback"
+                        *ngIf="!documentValidate.getTitle()"
+                        [textContent]="'Document title is required'"
+                      >
+                      </mat-error>
+                      <mat-error
+                        class="invalid-feedback"
+                        *ngIf="!documentValidate.getUniqueTittle()"
+                        [textContent]="'Document title value must be unique'"
+                      >
+                      </mat-error>
+                    </div>
                 </div>
-                <div class="documents-create__col --required">
-                    <p class="label-name">Document Description</p>
-                    <textarea
+                <div class="qt-inputs-row --required">
+                    <div class="qt-input-block">
+                      <div class="qt-input-block__label">Document Description</div>
+                      <textarea
+                        class="qt-input-block__textarea"
                         appTextArea
                         [limit]="160"
                         minlength="1"
                         maxlength="1000"
                         placeholder="Write Description"
                         [(ngModel)]="documentAdd.description"
-                    ></textarea>
-                </div>
-                <div class="documents-create__col --required">
-                    <div class="qt-df qt-jc-sb">
-                        <p class="label-name">Document Category</p>
-                        <p
-                            class="qt-color-info"
-                            (click)="toggleEditCategories = true"
-                            *ngIf="getPermissions('EDIT_CATEGORY')"
-                        >
-                            Edit
-                        </p>
+                      ></textarea>
                     </div>
-                    <app-drop-down
+                </div>
+                <div class="qt-inputs-row --required">
+                    <div class="qt-input-block">
+                      <div class="qt-df qt-jc-sb">
+                        <div class="qt-input-block__label">Document Category</div>
+                        <div
+                          class="qt-fs-13 qt-lh-133 qt-color-info ng-star-inserted"
+                          (click)="toggleEditCategories = true"
+                          *ngIf="getPermissions('EDIT_CATEGORY')"
+                        >
+                          Edit
+                        </div>
+                      </div>
+                      <app-drop-down
                         #categoriesDp
                         [class]="['qt-select-input-40']"
                         [placeholder]="'Select Category'"
@@ -97,25 +103,31 @@
                         [change]="true"
                         (onSelectedItem)="onSelectCategory($event)"
                         (onAddItem)="onAddCategory($event)"
-                    >
-                    </app-drop-down>
+                      >
+                      </app-drop-down>
+                    </div>
                 </div>
-                <div class="documents-create__col">
-                    <documents-linked
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block">
+                      <documents-linked
                         #linked
                         [isDisabled]="templateId"
                         [editItems]="documentAdd.linked"
                         (onSelectedItem)="onChangeLinked($event)"
-                    ></documents-linked>
+                      ></documents-linked>
+                    </div>
                 </div>
-                <div class="documents-create__col">
-                    <app-company-tags
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block">
+                      <div class="qt-input-block__label">Tags</div>
+                      <app-company-tags
                         class="documents-filter-tags"
                         [selectedTag]="documentAdd.tags"
                         (tagsChange)="onSelectTags($event)"
-                    ></app-company-tags>
+                      ></app-company-tags>
+                    </div>
                 </div>
-                <div class="documents-create__col checkbox-wrapper">
+                <div class="qt-inputs-row checkbox-wrapper">
                     <div class="with-checkbox">
                         <label
                           class="qt-checkbox"
@@ -138,32 +150,36 @@
                         </label>
                     </div>
                 </div>
-                <div class="documents-create__col">
-                    <app-drop-down
-                        #companyTypeDp
-                        class="dropdown"
-                        [placeholder]="'Select Company Type'"
-                        [editItem]="getSelectedClientType()"
-                        [list]="companyTypes"
-                        [field]="'title'"
-                        [search]="true"
-                        [change]="true"
-                        [isDisabled]="!requiredCompanyType"
-                        heightInput="40px"
-                        widthInput="100%"
-                        (onSelectedItem)="onSelectCompanyType($event)"
-                    ></app-drop-down>
+                <div class="qt-inputs-row">
+                   <div class="qt-input-block">
+                     <app-drop-down
+                       #companyTypeDp
+                       class="dropdown"
+                       [placeholder]="'Select Company Type'"
+                       [editItem]="getSelectedClientType()"
+                       [list]="companyTypes"
+                       [field]="'title'"
+                       [search]="true"
+                       [change]="true"
+                       [isDisabled]="!requiredCompanyType"
+                       heightInput="40px"
+                       widthInput="100%"
+                       (onSelectedItem)="onSelectCompanyType($event)"
+                     ></app-drop-down>
+                   </div>
                 </div>
-                <div class="documents-create__col qt-input-block qt-w50">
-                    <p class="label-name">Document Review Date</p>
-                    <app-date-picker
+                <div class="qt-inputs-row">
+                    <div class="qt-input-block qt-f50 qt-flex-md-100">
+                      <div class="qt-input-block__label">Document Review Date</div>
+                      <app-date-picker
                         #reviewDp
                         [editDate]="documentAdd.parseReviewDate()"
                         [placement]="'top'"
                         [editMode]="true"
                         [useMinDate]="false"
                         (onChange)="onChangeReviewDate($event)"
-                    ></app-date-picker>
+                      ></app-date-picker>
+                    </div>
                 </div>
             </div>
             <div

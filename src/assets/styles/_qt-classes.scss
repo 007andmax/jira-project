@@ -196,6 +196,36 @@ input.qt-dropdown-input {
   }
 }
 
+.qt-editable-dropdown input,
+.qt-editable-input {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: $gray-900;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 7px 8px 8px;
+  outline: none;
+  width: 100%;
+
+  &::placeholder {
+    color: $gray-400;
+    font-weight: 400;
+  }
+
+  &:hover {
+    border-color: $gray-200;
+  }
+
+  &:focus {
+    border-color: transparent;
+  }
+}
+
+.qt-editable-dropdown input:hover {
+  background-color: $gray-50;
+}
+
 .qt-with-number-types {
   display: flex;
 
