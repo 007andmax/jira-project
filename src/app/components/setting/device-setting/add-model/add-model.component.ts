@@ -9,9 +9,11 @@ import { AgentService } from 'src/app/services/agent/agent.service';
   styleUrls: ['./add-model.component.scss']
 })
 export class AddModelComponent implements OnInit {
-  @Input() manufactureId: string;
+  manufactureId: string;
   modelForm: FormGroup;
   submitted: boolean = false;
+  manufactureIsActiveList: any[] = [];
+  @Input() techCompany: any;
   @Output() onClose = new EventEmitter();
   @Output() onAdded = new EventEmitter();
   constructor(private formBuilder: FormBuilder,
@@ -28,13 +30,52 @@ export class AddModelComponent implements OnInit {
     this.modelForm.patchValue({
       ManufacturerID: this.manufactureId,
     });
+    this.getManufacturers(this.techCompany.id);
+  }
+  onSelectManufactureName(SelectManufacturer) {
+    if (SelectManufacturer) {
+      this.manufactureId = SelectManufacturer.ID;
+      this.modelForm.patchValue({
+        ManufacturerID: this.manufactureId,
+      });
+      /* this.agentService.getModelsByManufacturer(SelectManufacturer.ID).subscribe((resp) => {
+         this.selectManufactureList = resp;
+       })*/
+    }
+    else {
+      this.modelForm.patchValue({
+        ManufacturerID: null,
+        Name: ""
+      });
+      // this.getModels(this.techCompany.id);
+    }
+  }
+  getManufacturers(TechCompanyGuid: any) {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getManufacturers(TechCompanyGuid);
+      }, 300);
+      return;
+    }
+    this.agentService.getManufactures(TechCompanyGuid)
+      .subscribe((resp) => {
+        this.manufactureIsActiveList = [];
+        resp.forEach(element => {
+          if (element.IsActive == true)
+            this.manufactureIsActiveList.push(element)
+        })
+      });
   }
   onSubmitModel() {
     this.submitted = true;
     this.agentService.addModel(this.modelForm.value)
       .pipe(
         map((res: any) => {
-          this.onAdded.emit(res);
+          this.onAdded.emit({
+            ...this.modelForm.value, IsActive: true,
+            ManufactureName: this.manufactureIsActiveList.find(item => item.ID === this.manufactureId).Name,
+            Counter: 0
+          });
         })
       )
       .subscribe(

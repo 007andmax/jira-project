@@ -36,19 +36,19 @@
                         *ngIf="addDeviceType"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddDeviceType()"
-                        (onAdded)="onAddDeviceType()"
+                        (onAdded)="onAddDeviceType($event)"
                     ></add-device-type>
                     <add-manufacture
                         *ngIf="addManufacture"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddManufacture()"
-                        (onAdded)="onAddManufacture()"
+                        (onAdded)="onAddManufacture($event)"
                     ></add-manufacture>
                     <add-model
                         *ngIf="addModel"
-                        [manufactureId]="manufactureId"
+                        [techCompany]="techCompany"
                         (onClose)="onClosedAddModel()"
-                        (onAdded)="onAddModel()"
+                        (onAdded)="onAddModel($event)"
                     ></add-model>
                 </div>
             </div>

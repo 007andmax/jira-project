@@ -22,7 +22,6 @@ export class DeviceSettingModelComponent implements OnInit {
   model: any;
   manufactureId;
   searchModel: string;
-  manufactureIsActiveList: any[] = [];
   sub: Subscription = new Subscription();
   filter: DeviceFilter = new DeviceFilter();
   @Output() onSelectManufactureId = new EventEmitter();
@@ -36,12 +35,10 @@ export class DeviceSettingModelComponent implements OnInit {
     if (this.companiesStateService.getCurrentCompany()) {
       this.techCompany = this.companiesStateService.getCurrentCompany();
       this.getModels(this.companiesStateService.getCurrentCompany().id);
-      this.getManufacturers(this.techCompany.id);
     }
     this.companiesStateService.onCurrentCompany.subscribe((data) => {
       this.techCompany = data;
       this.getModels(this.techCompany.id);
-      this.getManufacturers(this.techCompany.id);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -52,33 +49,6 @@ export class DeviceSettingModelComponent implements OnInit {
   }
   addModel(data) {
     this.modelList.push(data);
-  }
-  getManufacturers(TechCompanyGuid: any) {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getManufacturers(TechCompanyGuid);
-      }, 300);
-      return;
-    }
-    this.agentService.getManufactures(TechCompanyGuid)
-      .subscribe((resp) => {
-        this.manufactureIsActiveList = [];
-        resp.forEach(element => {
-          if (element.IsActive == true)
-            this.manufactureIsActiveList.push(element)
-        })
-      });
-  }
-  onSelectManufactureName(SelectManufacturer) {
-    if (SelectManufacturer) {
-      this.onSelectManufactureId.emit(SelectManufacturer.ID);
-      this.agentService.getModelsByManufacturer(SelectManufacturer.ID).subscribe((resp) => {
-        this.selectManufactureList = resp;
-      })
-    }
-    else {
-      this.getModels(this.techCompany.id);
-    }
   }
   removeModel() {
     this.model.IsActive = false;

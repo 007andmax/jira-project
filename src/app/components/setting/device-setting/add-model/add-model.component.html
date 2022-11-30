@@ -4,11 +4,23 @@
             <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Add Model</h6>
         </div>
         <div>
-            <form
-                [formGroup]="modelForm"
-                (ngSubmit)="onSubmitModel()"
-            >
+            <form [formGroup]="modelForm">
                 <div class="qt-input-block qt-mb-24">
+                    <app-drop-down
+                        #manufacturer
+                        [class]="['light-dropdown', 'qt-select-input-40']"
+                        [placeholder]="'Select Manufacture'"
+                        [list]="manufactureIsActiveList"
+                        [field]="'Name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectManufactureName($event)"
+                    ></app-drop-down>
+                </div>
+                <div
+                    class="qt-input-block qt-mb-24"
+                    *ngIf="manufactureId"
+                >
                     <label class="qt-input-block__label">Model Name</label>
                     <input
                         type="text"
@@ -37,6 +49,8 @@
                     <input
                         type="submit"
                         value="Save"
+                        (click)="onSubmitModel()"
+                        [disabled]="!manufactureId"
                         class="qt-button qt-jc-c qt-w100"
                     >
                 </div>
