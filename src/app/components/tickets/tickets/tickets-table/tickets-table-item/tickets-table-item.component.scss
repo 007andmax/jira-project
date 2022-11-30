@@ -17,3 +17,12 @@ tr {
     }
   }
 }
+.is-archive {
+  position: relative;
+  &::before {
+    content: "-";
+    position: absolute;
+    top: 0px;
+    left: -10px;
+  }
+}

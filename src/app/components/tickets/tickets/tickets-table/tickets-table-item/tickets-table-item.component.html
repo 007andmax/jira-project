@@ -25,11 +25,12 @@
     <div class="ticket-table__company">
         <div
             class="ellipsis"
+            [ngClass]="{'qt-color-red-600':ticket.isCompanyDeleted}"
             [textContent]="getCompanyName()"
         >
         </div>
         <div
-            class="qt-color-red-600"
+            class="qt-color-red-600 is-archive qt-ml-10"
             *ngIf="ticket.isCompanyDeleted"
         >
             Archived
