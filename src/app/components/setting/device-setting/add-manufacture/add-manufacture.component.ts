@@ -23,11 +23,7 @@ export class AddManufactureComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID: [""],
-      TechCompanyID: [""],
       TechCompanyGuid: [""],
-      IsActive: [""],
-      CreateDate: [""]
     })
     this.manufactureForm.patchValue({
       TechCompanyGuid: this.techCompany.id,

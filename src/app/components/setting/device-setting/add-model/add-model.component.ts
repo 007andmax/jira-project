@@ -23,11 +23,7 @@ export class AddModelComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID: [""],
       ManufacturerID: [""],
-      ManufactureName: [""],
-      IsActive: [""],
-      CreateDate: [""]
     })
     this.modelForm.patchValue({
       ManufacturerID: this.manufactureId,

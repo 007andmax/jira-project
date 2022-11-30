@@ -23,11 +23,7 @@ export class AddDeviceTypeComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(2), Validators.maxLength(30)]
       ],
-      ID: [""],
-      TechCompanyID: [""],
       TechCompanyGuid: [""],
-      Counter: [""]
-
     });
     this.deviceForm.patchValue({
       TechCompanyGuid: this.techCompany.id,
@@ -35,6 +31,7 @@ export class AddDeviceTypeComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
+    console.log("this.deviceForm.value", this.deviceForm.value);
     this.agentService.addHardwareType(this.deviceForm.value)
       .pipe(
         map((res: any) => {
