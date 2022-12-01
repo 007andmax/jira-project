@@ -150,7 +150,7 @@
   &__header-thead-container,
   &__body-table-container {
     width: 100%;
-    overflow: auto;
+    //overflow: auto; // TODO check this style
   }
   &__header-thead-container {
     @media (max-width: 767px) {

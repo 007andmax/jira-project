@@ -51,7 +51,10 @@
     overflow: hidden;
     overflow-x: auto;
     height: 100vh;
-
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
     &>aside {
         order: 0;
         flex: 0 0 auto;
@@ -71,9 +74,9 @@
         flex: 1 1 auto;
         align-self: auto;
 
-        @media (min-width: 768px) {
-          min-width: calc(1280px + 280px);
-        }
+        //@media (min-width: 768px) {
+        //  min-width: calc(1280px + 280px);
+        //}
     }
 }
 

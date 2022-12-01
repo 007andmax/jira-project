@@ -1995,7 +1995,7 @@ app-quotes-item {
       }
     }
     &__name {
-      flex: 2 0 290px;
+      flex: 2 1 290px;
 
       @media only screen and (max-width: 768px) {
         max-width: calc(100% - 30px);
@@ -2028,7 +2028,7 @@ app-quotes-item {
       }
     }
     &__address {
-      flex: 1 0 210px;
+      flex: 1 1 210px;
       line-height: 20px;
 
       @media screen and (min-width: 2048px) {
@@ -2040,11 +2040,11 @@ app-quotes-item {
       }
 
       @media screen and (max-width: 1600px) {
-        flex: 1 0 260px;
+        flex: 1 1 260px;
       }
     }
     &__primary-contact {
-      flex: 1 0 160px;
+      flex: 1 1 160px;
 
       @media screen and (min-width: 2048px) {
         flex: 1 0 230px;
@@ -2055,7 +2055,7 @@ app-quotes-item {
       }
 
       @media screen and (max-width: 1600px) {
-        flex: 1 0 210px;
+        flex: 1 1 210px;
         max-width: 100%;
       }
 
@@ -2109,7 +2109,7 @@ app-quotes-item {
       }
     }
     &__email-address {
-      flex: 1 0 180px;
+      flex: 1 1 180px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -2123,7 +2123,7 @@ app-quotes-item {
       }
 
       @media screen and (max-width: 1600px) {
-        flex: 1 0 230px;
+        flex: 1 1 230px;
       }
     }
     &__tickets {

@@ -3,7 +3,9 @@
   background-color: $white;
   //min-height: 100vh;
   height: calc(100vh - 64px);
-  overflow: auto;
+  //overflow: auto;
+  overflow-y: auto;
+  overflow-x: clip;
 
   @media (max-width: 767px) {
     padding-top: 0;
