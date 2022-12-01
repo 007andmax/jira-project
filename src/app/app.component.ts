@@ -152,7 +152,7 @@ export class AppComponent implements OnInit {
 
       if (localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
       if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
-      if (this.appService.isMobile) {
+      if (this.appService.isMobile || this.currentUser.role === "SUPER_ADMIN" || this.state === 'help-center') {
         $("#aside-left-panel").width("auto");
       }
       $(document.body).on('mousedown', '.resize-handle--x', null, (event) => {
@@ -215,7 +215,7 @@ export class AppComponent implements OnInit {
 
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
-      if (!this.appService.isMobile) {
+      if (!this.appService.isMobile && this.state !== 'help-center') {
         if (data) $("#aside-left-panel").width("");
         console.log($("#aside-left-panel").width());
         if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
