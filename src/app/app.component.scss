@@ -77,7 +77,23 @@
         //@media (min-width: 768px) {
         //  min-width: calc(1280px + 280px);
         //}
+        @media (max-width: 767px) {
+          width: 100%;
+        }
     }
+
+  &.--help-center,
+  &.--super-admin {
+    .main-container {
+      height: 100vh;
+    }
+    > aside {
+      display: none;
+    }
+    .resize-handle--x {
+      display: none;
+    }
+  }
 }
 
 //.main-page-container>aside,
@@ -110,6 +126,10 @@ aside {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
 
     &:before {
         content: "";
