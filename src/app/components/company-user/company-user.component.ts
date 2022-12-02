@@ -64,6 +64,7 @@ export class CompanyUserComponent implements OnInit {
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-user');
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     let id = this.activateRoute.snapshot.params['id'];

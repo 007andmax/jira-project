@@ -39,7 +39,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   ngOnInit() {
-
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
     let id = this.activateRoute.snapshot.params['id'];
     if (id) {

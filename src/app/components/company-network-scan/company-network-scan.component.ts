@@ -59,6 +59,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
