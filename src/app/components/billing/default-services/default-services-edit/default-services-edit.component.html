@@ -64,22 +64,22 @@
             </div>
         </div>
         <div class="qt-inputs-row">
-          <div class="qt-input-block">
-            <div class="qt-input-block__label">GL Number</div>
-            <app-drop-down
-              [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
-              [list]="glNumbers"
-              #glNumberSelect
-              [placeholder]="'Select GL'"
-              [container]="'body'"
-              [editItem]="service.glNumber"
-              [add]="true"
-              [field]="'glNumber'"
-              [reducerItem]="glDropDownItemName"
-              (onAddItem)="onAddGlNumber($event)"
-              (onSelectedItem)="onSelectGlNumbers($event)"
-            ></app-drop-down> <!-- TODO delete [container]="'body'" -->
-          </div>
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">GL Number</div>
+                <app-drop-down
+                    [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+                    [list]="glNumbers"
+                    #glNumberSelect
+                    [placeholder]="'Select GL'"
+                    [editItem]="service.glNumber"
+                    [add]="true"
+                    [field]="'glNumber'"
+                    [reducerItem]="glDropDownItemName"
+                    (onAddItem)="onAddGlNumber($event)"
+                    (onSelectedItem)="onSelectGlNumbers($event)"
+                ></app-drop-down>
+                <!-- TODO delete [container]="'body'" -->
+            </div>
         </div>
         <div class="qt-inputs-row">
             <label
