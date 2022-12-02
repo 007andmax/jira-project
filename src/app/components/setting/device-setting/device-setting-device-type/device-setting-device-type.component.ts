@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { DeviceFilter } from 'src/app/components/devices/class/devices';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_DEVICE_TYPE } from 'src/app/const/confirm';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DeviceSettingStateService } from 'src/app/states/device-setting/device-setting-state.service';
+import { DeviceSettingFilter } from '../Class/devicesetting-filter';
 
 @Component({
   selector: 'device-setting-device-type',
@@ -18,7 +18,7 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
   hardwareTypes: any[] = [];
   deviceTypeList: any[] = [];
   selectedDeviceType: any[] = [];
-  filter: DeviceFilter = new DeviceFilter();
+  filter: DeviceSettingFilter = new DeviceSettingFilter();
   techCompany: any;
   showPreloader: boolean = true;
   selectAllDevices: boolean = false;
@@ -89,6 +89,7 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
       });
   }
   onFilter(field) {
+    debugger;
     this.filter.onFilter(field, this.deviceTypeList);
   }
   getDeviceTypes(TechCompanyGuid: any) {

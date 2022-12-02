@@ -3,17 +3,18 @@ import { FilterListTop } from "src/class/list/filter-list-top";
 export class DeviceSettingFilter {
 
   filterTop: Array<FilterListTop> = [
-    new FilterListTop("name","ASC"),
-    new FilterListTop("count", ""),
-    new FilterListTop("manufacturer",""),    
+    new FilterListTop("Name","ASC"),
+    new FilterListTop("Counter", ""),
+    new FilterListTop("ManufactureName",""),    
   ];
   constructor() {}
 
-  public onFilter(field, service) {    
+  public onFilter(field, service) {  
+    debugger;  
     let index = this.filterTop.findIndex((item) => item.field === field);
     if (index > -1) {
       let sort = this.filterTop[index].filter;
-      if (field === "count") {
+      if (field === "Counter") {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
@@ -23,7 +24,7 @@ export class DeviceSettingFilter {
           service.reverse();
         }
       }
-      if (field === "name") {        
+      if (field === "Name") {        
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
@@ -33,7 +34,7 @@ export class DeviceSettingFilter {
           service.reverse();
         }
       }   
-      if (field === "manufacturer") {        
+      if (field === "ManufactureName") {        
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
