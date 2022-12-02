@@ -156,7 +156,8 @@
     }
 
     app-invoice-regular-note .dropdown-menu {
-      min-height: 190px;
+      //min-height: 190px; // TODO check this style
+      width: 100%;
       app-invoice-select-note {
         min-width: 100%;
       }
@@ -171,23 +172,6 @@
       margin-right: -30px;
       padding-left: 30px;
       padding-right: 30px;
-    }
-
-    .company-info-left-side {
-      border-right: 1px solid $gray-400--old;
-    }
-
-    .company-info-description {
-      min-height: 40px;
-      border-radius: 4px;
-      border: solid 1px $gray-500--old;
-      background-color: $white;
-      padding: 9px 14px;
-      font-size: 13px;
-      line-height: 1.54;
-      &::placeholder {
-        color: $gray-600--old;
-      }
     }
 
     app-product-item-quote,
@@ -277,9 +261,6 @@
     app-invoice-regular-note {
       .summary-info__notes {
         width: 447px;
-        textarea {
-          min-height: 72px;
-        }
       }
     }
 

@@ -37,21 +37,21 @@
             </mat-error>
         </div>
     </div>
-    <div class="qt-inputs-row">
-        <div class="--required">
-            <div class="qt-input-block__label">GL Number</div>
-            <app-drop-down
-                [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
-                [list]="glNumbers"
-                [reducerItem]="formatterGLNumber"
-                #glNumberSelect
-                [placeholder]="'Select GL'"
-                [add]="true"
-                [field]="'glNumber'"
-                (onAddItem)="onAddGlNumber($event)"
-                (onSelectedItem)="onSelectGlNumbers($event)"
-            ></app-drop-down>
-        </div>
+    <div class="qt-inputs-row --required">
+      <div class="qt-input-block">
+        <div class="qt-input-block__label">GL Number</div>
+        <app-drop-down
+          [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+          [list]="glNumbers"
+          [reducerItem]="formatterGLNumber"
+          #glNumberSelect
+          [placeholder]="'Select GL'"
+          [add]="true"
+          [field]="'glNumber'"
+          (onAddItem)="onAddGlNumber($event)"
+          (onSelectedItem)="onSelectGlNumbers($event)"
+        ></app-drop-down>
+      </div>
     </div>
     <div class="qt-inputs-row --required">
         <div class="qt-input-block">

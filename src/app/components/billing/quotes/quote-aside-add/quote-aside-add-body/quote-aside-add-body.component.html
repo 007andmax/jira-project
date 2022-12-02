@@ -16,7 +16,7 @@
             >
             </app-drop-down>
             <textarea
-                class="company-info-description qt-mt-8 qt-w100"
+                class="qt-input-block__textarea qt-mt-8 qt-w100"
                 [(ngModel)]="quote.description"
                 placeholder="Quote description in short words"
                 appTextArea
@@ -76,6 +76,7 @@
             <div
                 ngbDropdownMenu
                 aria-labelledby="dropdownForm1"
+                class="edit-customer__dropdown-menu"
             >
                 <app-invoice-form-edit-customer
                     #companyEdit
@@ -117,17 +118,17 @@
     </div>
     <div class="qt-df qt-mb-16 qt-mt-16">
         <div class="qt-input-block qt-mr-16 qt-w100">
-            <label class="qt-lh-154">Quote#</label>
+            <label class="qt-input-block__label">Quote#</label>
             <div class="qt-df">
                 <input
-                    class="qt-input-prepend"
+                    class="qt-input-block__input"
                     decimalNumber
                     [ngClass]="{'--input-error' : !validate.getNumber()}"
                     [value]="quote.number"
                     (onChange)="onChangeQuoteNumber($event)"
                 >
                 <mat-error
-                    class="qt-tooltip-error"
+                    class="invalid-feedback"
                     *ngIf="!validate.getNumber()"
                 >
                     Quote number is required
@@ -135,17 +136,17 @@
             </div>
         </div>
         <div class="qt-input-block qt-mr-16 qt-w100">
-            <label class="qt-lh-154">PO#</label>
+            <label class="qt-input-block__label">PO#</label>
             <div class="qt-df">
                 <input
-                    class="qt-input-prepend"
+                    class="qt-input-block__input"
                     [(ngModel)]="quote.purchaseOrder"
                     type="text"
                 >
             </div>
         </div>
         <div class="qt-input-block qt-mr-16 qt-w100">
-            <label class="qt-lh-154">Quote Date</label>
+            <label class="qt-input-block__label">Quote Date</label>
             <app-date-picker
                 [formatDate]="formatDate"
                 [editMode]="true"
@@ -155,7 +156,7 @@
             ></app-date-picker>
         </div>
         <div class="qt-input-block qt-w100">
-            <label class="qt-lh-154">Expiry Date</label>
+            <label class="qt-input-block__label">Expiry Date</label>
             <app-date-picker
                 #expiryDate
                 [placement]="'bottom-right'"
@@ -268,7 +269,7 @@
         </div>
     </div>
     <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
-        <div class="qt-fs-13 qt-fw-600 qt-mb-12">Terms & Conditions</div>
+        <div class="qt-input-block__label">Terms & Conditions</div>
         <div
             class="qt-fs-12 qt-color-info qt-fw-600 pointer"
             *ngIf="changeGlobalNote"

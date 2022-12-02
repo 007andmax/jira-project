@@ -1,7 +1,7 @@
 <div class="summary-info__notes">
-    <div class="qt-df qt-jc-sb qt-mb-12">
-        <div class="qt-fs-13 qt-fw-600">
-            Customer Note
+    <div class="qt-df qt-jc-sb qt-mb-8">
+        <div class="qt-input-block__label --without-offset qt-df qt-ai-c">
+            <span class="qt-mr-6">Customer Note</span>
             <i
                 class="icn-sm icon__help"
                 placement="right"
@@ -19,7 +19,7 @@
     </div>
     <div>
         <div
-            class="qt-mb-16 qt-df"
+            class="qt-mb-16 qt-df qt-input-block"
             style="display: flex !important;"
             *ngIf="toogleCustomerNote"
             ngbDropdown
@@ -64,7 +64,7 @@
         <textarea
             (input)="onCheckUpdateDescriptionNote()"
             (blur)="onChangeRegularNote()"
-            class="summary-info__textarea qt-textarea"
+            class="summary-info__textarea qt-input-block__textarea"
             placeholder="Type your custom note here"
             name
             id="description-regular-note"
