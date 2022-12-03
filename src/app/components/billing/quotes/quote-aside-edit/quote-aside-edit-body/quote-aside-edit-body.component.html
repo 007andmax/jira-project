@@ -2,8 +2,9 @@
     class="qt-pos-rel"
     *ngIf="quote"
 >
-    <div class="qt-df qt-jc-sb qt-pb-24 company-info">
-        <div class="qt-w50 qt-pr-24">
+    <div class="company-info">
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50">
             <app-drop-down
                 #companyDp
                 [title]="'Company Name'"
@@ -17,14 +18,19 @@
                 [change]="true"
                 [isDisabled]="true"
             ></app-drop-down>
-            <textarea
-                class="qt-input-block__textarea qt-mt-8 qt-w100"
-                [(ngModel)]="quote.description"
-                placeholder="Quote description in short words"
-                appTextArea
-                maxlength="255"
-            ></textarea>
         </div>
+      </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50">
+          <textarea
+            class="qt-input-block__textarea qt-mt-8 qt-w100"
+            [(ngModel)]="quote.description"
+            placeholder="Quote description in short words"
+            appTextArea
+            maxlength="255"
+          ></textarea>
+        </div>
+      </div>
     </div>
     <div
         class="qt-df address-block"

@@ -172,6 +172,7 @@
       margin-right: -30px;
       padding-left: 30px;
       padding-right: 30px;
+      padding-bottom: 24px;
     }
 
     app-product-item-quote,
@@ -300,7 +301,11 @@
     .mat-form-field-wrapper {
       padding: 0;
       border-radius: 4px;
-      border: solid 1px $gray-500--old;
+      border: solid 1px $gray-200;
+
+      &:hover {
+        border: solid 1px $gray-300;
+      }
     }
     .mat-form-field-infix {
       padding: 0;
@@ -359,17 +364,17 @@
       filter: brightness(0.5);
     }
   }
-  .quote-text-block {
-    border-radius: 4px;
-    border: solid 1px $gray-500--old;
-    background-color: $white;
-    padding: 10px 14px;
-    font-size: 13px;
-    min-height: 104px;
-    &::placeholder {
-      color: $gray-600--old;
-    }
-  }
+  //.quote-text-block { // TODO check this style
+  //  border-radius: 4px;
+  //  border: solid 1px $gray-500--old;
+  //  background-color: $white;
+  //  padding: 10px 14px;
+  //  font-size: 13px;
+  //  min-height: 104px;
+  //  &::placeholder {
+  //    color: $gray-600--old;
+  //  }
+  //}
 }
 
 .quote-email-dropdown {

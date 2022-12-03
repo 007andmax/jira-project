@@ -4523,7 +4523,7 @@ app-ticket-edit-aside-devices {
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  &:empty {
+  &:empty:not(.qt-inputs-row__divider) {
     margin-bottom: 0;
   }
   &--column {
@@ -4537,7 +4537,7 @@ app-ticket-edit-aside-devices {
     flex: 0 1 calc(33% - 8px);
   }
 
-  &:last-child {
+  &:last-child{
     margin-bottom: 0;
   }
 

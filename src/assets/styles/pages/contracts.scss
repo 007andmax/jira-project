@@ -337,6 +337,11 @@
     .notify-to-agents-assign-icon {
       margin-top: -4px;
       margin-bottom: -4px;
+      width: calc(33% - 12px);
+
+      app-date-picker {
+        width: 100%;
+      }
     }
 
     // end block time nilling aside
@@ -505,7 +510,7 @@
     width: 280px;
   }
 
-  &__gray-block {
+  &__gray-block { // TODO check this style
     border-top: 1px solid $gray-400--old;
     border-bottom: 1px solid $gray-400--old;
     background-color: $gray-100--old;
