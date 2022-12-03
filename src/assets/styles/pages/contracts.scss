@@ -502,13 +502,13 @@
     }
   }
 
-  &__company-name-input {
-    width: 400px;
-  }
-
-  &__contract-type-name-input {
-    width: 280px;
-  }
+  //&__company-name-input { // TODO check this style
+  //  width: 400px;
+  //}
+  //
+  //&__contract-type-name-input {
+  //  width: 280px;
+  //}
 
   &__gray-block { // TODO check this style
     border-top: 1px solid $gray-400--old;
