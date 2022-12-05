@@ -76,14 +76,13 @@
             </mat-error>
             <p>Cost</p>
             <input
-                type="text"
-                decimalNumber
-                [useFixed]="true"
+                number
+                [money]="true"
+                [ngModel]="inventory.cost_str"
+                (change)="onChangeCost($event)"
                 appToFixed
                 [ngClass]="{'--input-error' : !validate.getCostSale()}"
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
-                [value]="inventory.cost"
-                (onChange)="onChangeCost($event)"
                 placeholder="Enter Cost"
             >
         </div>
@@ -102,14 +101,13 @@
             <mat-error *ngIf="!validate.getSale()">Price is required</mat-error>
             <p>Price</p>
             <input
-                type="text"
-                decimalNumber
-                [useFixed]="true"
+                number
+                [money]="true"
+                [ngModel]="inventory.sale_str"
+                (change)="onChangeSale($event)"
                 appToFixed
-                [value]="inventory.sale"
                 (input)="validate.resetSale()"
                 (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
-                (onChange)="onChangeSale($event)"
                 placeholder="Enter Price"
             >
         </div>

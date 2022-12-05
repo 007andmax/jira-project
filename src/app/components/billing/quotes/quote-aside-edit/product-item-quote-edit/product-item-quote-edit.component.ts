@@ -25,13 +25,15 @@ export class ProductItemQuoteEditComponent implements OnInit {
     return this.product.taxes.reduce((a, b) => a + ((b.rate / 100) * this.product.sale * this.product.quantity), 0);;
   }
   changeSales(val) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.product.sale = value;
+    this.product.sale_str = value.toFixed(2);
     this.product.markup = this.getMarkups();
   }
   changeCost(val) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.product.cost = value;
+    this.product.cost_str = value.toFixed(2);
     this.product.markup = this.getMarkups();
   }
   public getMarkups() {
@@ -41,6 +43,7 @@ export class ProductItemQuoteEditComponent implements OnInit {
   changeMarkup(val) {
     let value = Number(val);
     this.product.sale = Number(this.quoteStateService.roundToTwo((value * this.product.cost / 100 + this.product.cost)));
+    this.product.sale_str = this.product.sale.toFixed(2);
     this.product.markup = this.roundingMarkup(value);
   }
   removeProduct() {

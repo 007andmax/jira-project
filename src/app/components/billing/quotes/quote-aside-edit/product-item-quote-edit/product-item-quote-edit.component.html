@@ -10,13 +10,14 @@
     <td class="new-quote-table__col-unit-price with-dollar">
         <input
             class="qt-input-in-table"
-            decimalNumber
+            number
+            [money]="true"
+            [ngModel]="product.cost_str"
+            (change)="changeCost($event)"
             appToFixed
             placeholder="0.00"
-            [value]="product.cost"
             (blur)="onCheckSaleCost()"
             *ngIf="getPermissions('VIEW_PRODUCT_COST')"
-            (onChange)="changeCost($event)"
         >
         <input
             class="qt-input-in-table"
@@ -38,11 +39,12 @@
         <input
             class="qt-input-in-table"
             [ngClass]="{'--input-error':!product.validateSaleCost}"
-            decimalNumber
+            number
+            [money]="true"
+            [ngModel]="product.sale_str"
+            (change)="changeSales($event)"
             appToFixed
             placeholder="0.00"
-            [value]="product.sale"
-            (onChange)="changeSales($event)"
             (blur)="onCheckSaleCost()"
         >
         <mat-error

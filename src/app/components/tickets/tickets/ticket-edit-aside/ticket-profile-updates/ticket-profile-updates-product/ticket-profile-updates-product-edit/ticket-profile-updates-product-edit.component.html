@@ -23,10 +23,10 @@
                     [ngClass]="{'--input-error':!valdiateSaleCost}"
                     number
                     [money]="true"
-                    [ngModel]="editProduct.item.sale"
+                    [ngModel]="editProduct.item.sale_str"
+                    (change)="onChangeSale($event)"
                     appToFixed
                     (blur)="onValidateSaleCost()"
-                    (ngModelChange)="onChangeSale($event)"
                     [disabled]="!getPermissions('MANAGE_PRODUCTS')"
                 >
                 <mat-error

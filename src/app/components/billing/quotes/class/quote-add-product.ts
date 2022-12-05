@@ -12,6 +12,8 @@ export class QuoteAddProduct {
     constructor(discountType, item, itemOrder, quantity, markup) {
         this.discountType = discountType;
         this.item = item;
+        this.item.cost_str = this.item.cost.toFixed(2);
+        this.item.sale_str = this.item.sale.toFixed(2);
         this.itemOrder = itemOrder;
         this.quantity = quantity;
         this.markup = markup;

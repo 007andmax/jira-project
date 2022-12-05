@@ -7,7 +7,9 @@ export class TicketProfileFormItemProduct implements Product {
     deletedAt: number;
     company: any;
     cost: number = 0;
+    cost_str: string = "0.00";
     sale: number = 0;
+    sale_str: string = "0.00";
     category: import("../../../../../interfaces/product/category").Category;
     ilc: string;
     glNumber: number;
@@ -22,6 +24,8 @@ export class TicketProfileFormItemProduct implements Product {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.cost_str = this.cost.toFixed(2);
+            this.sale_str = this.sale.toFixed(2);
         }
     }
 }

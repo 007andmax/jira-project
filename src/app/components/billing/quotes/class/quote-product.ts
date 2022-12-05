@@ -11,6 +11,8 @@ export class QuoteProduct implements Product {
     company: any;
     cost: number;
     sale: number;
+    cost_str: string;
+    sale_str: string;
     category: Category;
     ilc: string;
     glNumber: number;
@@ -38,6 +40,8 @@ export class QuoteProduct implements Product {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.cost_str = this.cost.toFixed(2);
+            this.sale_str = this.sale.toFixed(2);
         }
 
     }
@@ -53,6 +57,8 @@ export class QuoteProduct implements Product {
             company: this.company,
             cost: this.cost,
             sale: this.sale,
+            cost_str: this.cost.toFixed(2),
+            sale_str: this.sale.toFixed(2),
             category: this.category,
             ilc: this.ilc,
             glNumber: this.glNumber,

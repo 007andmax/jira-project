@@ -13,6 +13,7 @@ export class DefaultServices implements Service {
     name: string;
     oldVersion: boolean;
     rate: number = 0;
+    rate_str: string = "0.00";
     serviceAgreement: ServiceAgreement;
     serviceContractServiceAgreement: any;
     taxes: import("../../../../interfaces/service/tax").Tax[];
@@ -32,6 +33,7 @@ export class DefaultServices implements Service {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.rate_str = this.rate.toFixed(2);
         }
 
     }
@@ -40,6 +42,7 @@ export class DefaultServices implements Service {
         this.isDefault = true;
         this.name = "";
         this.rate = 0;
+        this.rate_str = "0.00";
         this.taxes = [];
     }
 
