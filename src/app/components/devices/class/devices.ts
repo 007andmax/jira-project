@@ -4,7 +4,7 @@ export class DeviceFilter {
   filterTop: Array<FilterListTop> = [new FilterListTop("Name", "ASC"),new FilterListTop("CompanyName", "ASC"), new FilterListTop("ManufactureName", "ASC")];
   constructor() {}
 
-  public onFilter(field, devices) {
+  public onFilter(field, devices) {    
     let index = this.filterTop.findIndex((item) => item.field === field);
     if (index > -1) {
       let sort = this.filterTop[index].filter;
@@ -51,7 +51,7 @@ export class DeviceFilter {
     );
   }
   private getNameDevice(devicebeta) {
-    return devicebeta.Name;
+    return devicebeta.Name||'';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -79,10 +79,10 @@ export class DeviceFilter {
     );
   }
   private getManufactureName(manufacture) {
-    return manufacture.ManufactureName;
+    return manufacture.ManufactureName||'';
   }
 
   private getCompanyNameDevice(devicebeta) {
-    return devicebeta.CompanyName;
+    return devicebeta.CompanyName||'';
   }
 }

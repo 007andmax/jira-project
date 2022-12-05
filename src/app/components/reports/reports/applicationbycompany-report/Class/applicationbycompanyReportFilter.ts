@@ -34,7 +34,7 @@ export class ApplicationByCompanyReportFilter {
     );
   }
   private getNameDevice(Device) {
-    return Device.AssetNames;
+    return Device.AssetNames||'';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));

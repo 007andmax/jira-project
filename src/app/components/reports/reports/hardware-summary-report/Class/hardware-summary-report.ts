@@ -46,7 +46,7 @@ export class HardwareSummaryReportFilter {
     );
   }
   private getNameDevice(Device) {
-    return Device.CompanyName;
+    return Device.CompanyName||'';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -64,6 +64,6 @@ export class HardwareSummaryReportFilter {
   }
 
   private getDevice(Device) {
-    return Device.Name;
+    return Device.Name||'';
   }
 }

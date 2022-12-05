@@ -34,7 +34,7 @@ export class DeviceAntivirusReportFilter {
     );
   }
   private getNameDevice(Device) {
-    return Device.Name;
+    return Device.Name||'';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));

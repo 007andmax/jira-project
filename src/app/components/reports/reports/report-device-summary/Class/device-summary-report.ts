@@ -70,7 +70,7 @@ export class DeviceSummaryReportFilter {
     );
   }
   private getDeviceModel(Device) {
-    return Device.Model;
+    return Device.Model||'';
   }
 
   private onFilterManufacturer(Device) {
@@ -85,7 +85,7 @@ export class DeviceSummaryReportFilter {
     );
   }
   private getManufacturer(Device) {
-    return Device.Manufacturer;
+    return Device.Manufacturer||'';
   }
 
   public onFilterName(Device) {
@@ -100,7 +100,7 @@ export class DeviceSummaryReportFilter {
     );
   }
   private getNameDevice(Device) {
-    return Device.Name;
+    return Device.Name||'';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -119,6 +119,6 @@ export class DeviceSummaryReportFilter {
   }
 
   private getCompanyName(Device) {
-    return Device.CompanyName;
+    return Device.CompanyName||'';
   }
 }
