@@ -293,6 +293,18 @@
       margin: 10px 0px 0px 0px;
     }
   }
+  &__serial-number {
+    border: none;
+    font-size: 12px;
+    padding: 5px 6px 5px 36px;
+    font-weight: 600;
+    color: #212b36;
+    text-transform: unset;
+    font-family: "Inter", sans-serif;
+    pre {
+      margin: 0px;
+    }
+  }
 
   &__ticket-info-container {
     .dropdown {
