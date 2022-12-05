@@ -650,9 +650,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  getlabel(title?: string, domain?: string, name?: string) {    
+  getlabel(title?: string, domain?: string, name?: string) {        
     this.asset.Title = title;      
-    this.label = domain!=""?(title!=""&&title!=null)? title + " " + "(" + domain + ")":name+ " " + "(" + domain + ")" :(title!="" && title!=null)? title +" " + "(" + "In workgroup" + ")": name + " " + "(" + "In workgroup" + ")";
+    this.label = (domain!=""&&domain!=null)?(title!=""&&title!=null)? title + " " + "(" + domain + ")":name+ " " + "(" + domain + ")" :(title!="" && title!=null)? title +" " + "(" + "In workgroup" + ")": name + " " + "(" + "In workgroup" + ")";
   }
 
   convertToGB(value) {
