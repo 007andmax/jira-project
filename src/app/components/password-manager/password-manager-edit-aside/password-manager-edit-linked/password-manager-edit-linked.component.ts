@@ -33,6 +33,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     this.devicesStateService.getOnDevices().subscribe(data => {
       this.preloader = false;
       this.list = [];
+      console.log("PasswordManagerEditLinkedComponent - getOnDevices");
       this.onGetList();
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
@@ -65,6 +66,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public getGadgets() {
+    console.log("PasswordManagerEditLinkedComponent - getGadgets");
     this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.list = res.map(item => new PasswordDeviceUser(item.id, item.name, 'GADGET'));
     });
