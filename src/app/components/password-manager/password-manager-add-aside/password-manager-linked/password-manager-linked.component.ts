@@ -43,7 +43,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     this.devicesStateService.getOnDevices().subscribe(data => {
       this.preloader = false;
       console.log("PasswordManagerLinkedComponent - getOnDevices");
-      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
+      if (this.selectedCompanyId && this.devicesStateService.getAllDevices()) this.onSelectCompany(this.selectedCompanyId);
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
