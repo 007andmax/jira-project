@@ -43,7 +43,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
     this.devicesStateService.getOnDevices().subscribe(data => {
       this.preloader = false;
       console.log("PasswordManagerLinkedComponent - getOnDevices");
-      if (this.selectedCompanyId && this.devicesStateService.getAllDevices()) this.onSelectCompany(this.selectedCompanyId);
+      if (this.selectedCompanyId) this.onSelectCompany(this.selectedCompanyId);
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
@@ -73,13 +73,13 @@ export class PasswordManagerLinkedComponent implements OnInit {
       })
       this.usersList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      let devices = (this.devicesStateService.getAllDevices()[id]) ? this.devicesStateService.getAllDevices()[id] : [];
+      let devices = (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[id]) ? this.devicesStateService.getAllDevices()[id] : [];
       devices.forEach(item => {
         this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
       this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      this.getGadgets();
+      if (this.gadgets.length === 0) this.getGadgets();
       console.log("PasswordManagerLinkedComponent - onSelectCompany");
     }
     this.validate.resetCompany();
