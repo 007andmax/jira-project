@@ -31,17 +31,17 @@
     class="devices-categories"
     *ngIf="toggleTypePinnedSearch"
 >    
-    <span *ngFor="let item of searches">                                       
-            <li       
+    <span *ngFor="let item of searches">                                                                                                                                 
+        <li>
+            <span>
+                <i class="qt-sz-16 .qt-ai-c devices-ping-remove" (click)="deletePinnedSearch(item)"></i>
+            </span>
+            <span
                 [ngClass]="{'--active':currentActivePinnedPageChild === item.ID}"
-                 class="menu-item-inner"         
-                (click)="onFilter1('Dashboard', item)"
-            >
-            <i
-            class="qt-sz-16 .qt-ai-c devices-ping-remove" (click)="deletePinnedSearch(item)"      
-            ></i>                              
-                {{item.Name}}         
-            </li>                                                                   
+                class="menu-item-inner device-pinched-padding"         
+                (click)="onFilter1('Dashboard', item)">{{item.Name}}
+            </span>
+        </li>                         
     </span>          
 </ul>
     
