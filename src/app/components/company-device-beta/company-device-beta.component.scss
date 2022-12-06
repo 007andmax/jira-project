@@ -69,7 +69,7 @@ img.Online-Search {
   font-size: 12px;
 }
 
-::ng-deep .mat-autocomplete-panel.extended {
+::ng-deep .mat-autocomplete-panel.extended.mat-autocomplete-visible {
   width: 670px;
   height: 387px;
   margin: -12px 40px 0 -18px;
