@@ -36,7 +36,7 @@
                         number
                         [money]="true"
                         [ngModel]="product.item.cost_str"
-                        (change)="onChangeCostProduct($event)"
+                        (change)="onChangeCostProduct($event,i)"
                         appToFixed
                         *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                         (blur)="onValidateSaleCostProduct(i)"
@@ -69,7 +69,7 @@
                         number
                         [money]="true"
                         [ngModel]="product.item.sale_str"
-                        (change)="onChangeSaleProduct($event)"
+                        (change)="onChangeSaleProduct($event,i)"
                         appToFixed
                         (blur)="onValidateSaleCostProduct(i)"
                     >
