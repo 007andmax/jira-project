@@ -198,32 +198,40 @@
             </a>
         </div>
         <div class="other-info-col d-flex">
-            <div class="small-title">Working Hours</div>
+            <div
+                class="small-title"
+                (click)="showWorkingHours = !showWorkingHours"
+            >
+                Working Hours
+            </div>
             <div class="working-hrs d-flex">
-                <div
-                    ngbDropdown
-                    class="d-flex"
-                >
-                    <button
+                <div class="d-flex">
+                    <span
                         class="selected-item"
-                        id="dropdownBasic1"
-                        ngbDropdownToggle
+                        *ngIf="!showWorkingHours"
+                        (click)="showWorkingHours = !showWorkingHours"
                     >
                         {{companyOpen}}
-                    </button>
-                    <div
-                        ngbDropdownMenu
-                        aria-labelledby="dropdownBasic1"
-                    >
-                        <button
+                    </span>
+                    <div *ngIf="showWorkingHours">
+                        <div
                             class="item"
-                            ngbDropdownItem
                             *ngFor="let hours of workingDays"
                         >
                             {{hours.dayOfWeek}}
-                            <span class="info-time-work" *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span>
-                            <span class="info-time-work-status" *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span>
-                        </button>
+                            <span
+                                class="info-time-work"
+                                *ngIf="hours.startTime !== 0 && hours.endTime !== 0"
+                            >
+                                {{hours.timing}}
+                            </span>
+                            <span
+                                class="info-time-work-status"
+                                *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)"
+                            >
+                                Close
+                            </span>
+                        </div>
                         <div
                             class="item qt-df qt-jc-c qt-mt-12 qt-mb-12"
                             *ngIf="getPermissions('EDIT_COMPANIES')"
