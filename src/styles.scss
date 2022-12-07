@@ -508,8 +508,8 @@ app-company-tags,
 company-associate {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
-      /* position: absolute; */
-      width: calc(100% - 36px);
+      /* position: absolute; */ // TODO check this style
+      //width: calc(100% - 36px);
       /* height: 100%; */
       top: 0;
       flex: 1;
@@ -682,6 +682,12 @@ documents-edit-info {
           display: none;
         }
       }
+    }
+  }
+  app-tags {
+    > .qt-temporary-col-fix .mat-form-field-infix input {
+      border-color: transparent;
+      box-shadow: unset;
     }
   }
   company-associate {
@@ -3111,14 +3117,14 @@ app-quotes-item {
     padding: 0 !important;
   }
 }
-.recurring-tickets-content__modal,
-.new-users-content__modal {
-  .mat-error {
-    position: absolute;
-    top: -17px;
-    font-size: 12px;
-  }
-}
+//.recurring-tickets-content__modal, // TODO check this style
+//.new-users-content__modal {
+//  .mat-error {
+//    position: absolute;
+//    top: -17px;
+//    font-size: 12px;
+//  }
+//}
 // LEFT PANEL
 .left-panel-ng2 {
   [class*="left-panel-ng2__content"] {
@@ -4554,6 +4560,14 @@ app-ticket-edit-aside-devices {
     width: fit-content;
   }
 }
+.qt-input-block__input.ng-invalid.is-invalid,
+.qt-input-block__input.ng-invalid.is-invalid:hover,
+.qt-input-block__input.--input-error,
+.qt-input-block__input.--input-error:hover,
+.qt-input-block input.ng-invalid.is-invalid,
+.qt-input-block input.ng-invalid.is-invalid:hover,
+.qt-input-block input.--input-error,
+.qt-input-block input.--input-error:hover,
 input.ng-invalid.is-invalid,
 input.ng-invalid.is-invalid:hover,
 input.--input-error,

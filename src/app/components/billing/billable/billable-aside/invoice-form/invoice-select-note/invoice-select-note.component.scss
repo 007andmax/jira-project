@@ -81,14 +81,14 @@
     position: absolute;
     cursor: pointer;
   }
-  .report-caret-icon {
-    top: calc(50% - 2px) !important;
-    right: 12px;
-  }
-  .icn-remove-old {
-    top: calc(50% - 5px) !important;
-    right: 12px;
-  }
+  //.report-caret-icon { // TODO check this style
+  //  top: calc(50% - 2px) !important;
+  //  right: 12px;
+  //}
+  //.icn-remove-old {
+  //  top: calc(50% - 5px) !important;
+  //  right: 12px;
+  //}
   &.right {
     .dropdown-menu {
       left: auto !important;

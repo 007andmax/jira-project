@@ -9,22 +9,26 @@
             (click)="close()"
         ></div>
     </div>
-    <div class="qt-aside-modern__content recurring-tickets-content__modal--content clearfix">
-        <div class="col-md-12">
-            <p>Service Description</p>
-            <div class="editable-description">
+    <div class="qt-aside-modern__content recurring-tickets-content__modal--content">
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+              <div class="qt-input-block__label">Service Description</div>
+              <div class="editable-description">
                 <textarea
-                    appTextArea
-                    [limit]="250"
-                    id="service-description"
-                    placeholder="Write Description"
-                    (input)="onChangeDescription($event)"
-                    (onPast)="onPastDescription($event)"
+                  appTextArea
+                  [limit]="250"
+                  id="service-description"
+                  placeholder="Write Description"
+                  (input)="onChangeDescription($event)"
+                  (onPast)="onPastDescription($event)"
+                  class="qt-input-block__textarea"
                 ></textarea>
+              </div>
             </div>
         </div>
-        <div class="qt-w100 qt-pl-15 qt-pr-15 qt-mt-20 recuring-assign-company">
-            <company-drop-down
+        <div class="qt-inputs-row recuring-assign-company">
+            <div class="qt-input-block">
+              <company-drop-down
                 [class]="['light-dropdown']"
                 [title]="'Assign to Company'"
                 [placeholder]="'Select Company'"
@@ -36,34 +40,36 @@
                 [errorMessage]="'Company name is required'"
                 (onSelectedItem)="selectClient($event)"
                 heightInput="auto"
-            ></company-drop-down>
+              ></company-drop-down>
+            </div>
         </div>
-        <div class="col-md-4">
-            <p>Device Name</p>
+        <div class="qt-inputs-row">
+          <div class="qt-f33 qt-input-block qt-w-md-100">
+            <div class="qt-input-block__label">Device Name</div>
             <app-devices-recurring-tickets
-                style="width: 75%;"
-                class="light-dropdown w-150"
-                [companyId]="(selectedClient) ? selectedClient.id : ''"
-                (selectedItem)="selectDevice($event)"
+              class="light-dropdown w-150"
+              [companyId]="(selectedClient) ? selectedClient.id : ''"
+              (selectedItem)="selectDevice($event)"
             >
             </app-devices-recurring-tickets>
-        </div>
-        <div class="col-md-4">
-            <p>Date</p>
+          </div>
+          <div class="qt-f33 qt-input-block qt-w-md-100">
+            <div class="qt-input-block__label">Date</div>
             <app-date-picker
-                [formatDate]="formatDate"
-                [editMode]="true"
-                [editDate]="recurringState.getCreateTicket().startDate"
-                (onChange)="onChangeDatePicker($event)"
+              [formatDate]="formatDate"
+              [editMode]="true"
+              [editDate]="recurringState.getCreateTicket().startDate"
+              (onChange)="onChangeDatePicker($event)"
             ></app-date-picker>
-        </div>
-        <div class="col-md-4">
-            <mat-error *ngIf="!validate.getInterval()">Interval is required</mat-error>
-            <p>Set Interval</p>
+          </div>
+          <div class="qt-f33 qt-input-block qt-w-md-100">
+            <div class="qt-input-block__label">Set Interval</div>
             <app-interval
-                [valid]="validate.getInterval()"
-                (cronChange)="onChangeCron($event)"
+              [valid]="validate.getInterval()"
+              (cronChange)="onChangeCron($event)"
             ></app-interval>
+            <mat-error *ngIf="!validate.getInterval()">Interval is required</mat-error>
+          </div>
         </div>
         <div class="col-md-12 ticket-tabs">
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
@@ -208,60 +214,65 @@
                     [ngClass]="{'separator-hr': services.length > 1}"
                     class="row service-tab-content__item"
                 >
-                    <div class="col-md-12">
-                        <div
+                    <div class="qt-inputs-row">
+                        <div class="qt-input-block">
+                          <div
                             class="service-errors"
                             *ngIf="service.noValid"
-                        >
+                          >
                             <ng-template
-                                ngFor
-                                let-error
-                                [ngForOf]="service.errors"
+                              ngFor
+                              let-error
+                              [ngForOf]="service.errors"
                             >
-                                <p
-                                    [textContent]="error"
-                                    style="color: red;"
-                                ></p>
+                              <p
+                                [textContent]="error"
+                                style="color: red;"
+                              ></p>
                             </ng-template>
+                          </div>
                         </div>
                     </div>
-                    <div
-                        class="col-md-8"
+                    <div class="qt-inputs-row">
+                      <div
+                        class="qt-input-block"
                         [ngClass]="(service.noValid) ? 'no-valid-service' : ''"
-                    >
-                        <p>Service</p>
+                      >
+                        <div class="qt-input-block__label">Service</div>
                         <app-services-list
-                            [editItem]="service"
-                            [itemList]="servicesList"
-                            (selectedServicesItem)="setService($event,i)"
+                          [editItem]="service"
+                          [itemList]="servicesList"
+                          (selectedServicesItem)="setService($event,i)"
                         ></app-services-list>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Duration</p>
+                      </div>
+                      <div class="qt-input-block qt-f33 qt-flex-md-100">
+                        <div class="qt-input-block__label">Duration</div>
                         <app-duration
-                            style="width: 75%;"
-                            class="light-dropdown"
-                            (selectedDucation)="selectDuration($event,i)"
-                            [editItem]="service.duration"
+                          class="light-dropdown"
+                          (selectedDucation)="selectDuration($event,i)"
+                          [editItem]="service.duration"
                         ></app-duration>
                         <i
-                            class="icon__remove icn-16"
-                            *ngIf="services.length > 1"
-                            (click)="removeService(i)"
+                          class="icon__remove icn-16"
+                          *ngIf="services.length > 1"
+                          (click)="removeService(i)"
                         ></i>
+                      </div>
                     </div>
-                    <div class="col-md-12 mt-20">
-                        <p>Description</p>
-                        <div class="editable-description">
+                    <div class="qt-inputs-row">
+                        <div class="qt-input-block">
+                          <div class="qt-input-block__label">Description</div>
+                          <div class="editable-description">
                             <textarea
-                                appTextArea
-                                [limit]="250"
-                                [(ngModel)]="service.description"
-                                placeholder="Write Description"
-                                (onPast)="onPastDescriptionService($event,i)"
+                              appTextArea
+                              [limit]="250"
+                              [(ngModel)]="service.description"
+                              placeholder="Write Description"
+                              (onPast)="onPastDescriptionService($event,i)"
+                              class="qt-input-block__textarea"
                             ></textarea>
+                          </div>
                         </div>
-                        <!-- <input type="text" [(ngModel)]="service.description" placeholder="Write Description"> -->
                     </div>
                 </div>
             </ng-template>
@@ -274,9 +285,13 @@
             +Add Service
         </div>
         <!-- ------------------------------------------------------------------ -->
-        <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
-        <div class="col-md-12 checkbox-wrapper">
-            <div class="with-checkbox">
+        <div class="qt-inputs-row">
+          <div class="qt-input-block">
+            <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
+          </div>
+        </div>
+        <div class="qt-inputs-row checkbox-wrapper">
+            <div class="qt-f33 qt-input-block with-checkbox">
                 <label class="qt-checkbox pointer">
                     <input
                         id="requireUpdate-add"
@@ -286,7 +301,7 @@
                     <div class="qt-ml-8">Require update Notes</div>
                 </label>
             </div>
-            <div class="with-checkbox">
+            <div class="qt-f33 qt-input-block with-checkbox">
                 <label class="qt-checkbox pointer">
                     <input
                         id="quickClose-add"
@@ -296,7 +311,7 @@
                     <div class="qt-ml-8">Quick Close</div>
                 </label>
             </div>
-            <div class="with-checkbox">
+            <div class="qt-f33 qt-input-block with-checkbox">
                 <label class="qt-checkbox pointer">
                     <input
                         id="createTask-add"

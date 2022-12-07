@@ -228,8 +228,8 @@ input.qt-dropdown-input {
       margin-top: 8px;
     }
   }
-  &__input,
-  input {
+  &__input:not(.qt-editable-input),
+  input:not(.qt-editable-input) {
     height: 40px;
     width: 100%;
     padding: 11px 14px;
@@ -269,6 +269,12 @@ input.qt-dropdown-input {
       &:hover {
         border-color: $gray-200;
       }
+    }
+  }
+  &.qt-editable-dropdown {
+    input {
+      border-color: transparent;
+      box-shadow: unset;
     }
   }
   &.h36 {
