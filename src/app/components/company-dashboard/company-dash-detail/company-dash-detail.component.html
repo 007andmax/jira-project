@@ -198,8 +198,8 @@
             </a>
         </div>
         <div
-            class="qt-w100 d-flex"
-            [ngClass]="{'qt-ai-c':!showWorkingHours,
+            class="working-hrs-container qt-w100 d-flex qt-mb-16"
+            [ngClass]="{'qt-ai-fs':!showWorkingHours,
     'qt-ai-fs':showWorkingHours}"
         >
             <span
@@ -225,10 +225,10 @@
                 *ngIf="showWorkingHours"
             >
                 <div
-                    class="d-flex"
+                    class="d-flex working-hrs-wrap"
                     (click)="showWorkingHours = !showWorkingHours"
                 >
-                    <div>
+                    <div class="working-hrs-wrap-inner">
                         <div
                             class="item"
                             *ngFor="let hours of workingDays"
@@ -252,10 +252,11 @@
                             *ngIf="getPermissions('EDIT_COMPANIES')"
                         >
                             <button
-                                class="btn btn-outline"
+                                class="btn-new btn-primary-white qt-w100"
                                 (click)="open(contentHour)"
                             >
                                 <img
+                                    class="qt-mr-4"
                                     src="html/assets/img/company-details/edit-blue.svg"
                                     alt="user"
                                 >
