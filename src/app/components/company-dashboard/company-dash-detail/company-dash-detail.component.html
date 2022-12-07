@@ -215,11 +215,19 @@
             >
                 {{companyOpen}}
             </span>
+            <i
+                class="icn-sm report-caret-icon qt-ml-8"
+                *ngIf="!showWorkingHours"
+                (click)="showWorkingHours = !showWorkingHours"
+            ></i>
             <div
                 class="working-hrs d-flex qt-ml-8"
                 *ngIf="showWorkingHours"
             >
-                <div class="d-flex">
+                <div
+                    class="d-flex"
+                    (click)="showWorkingHours = !showWorkingHours"
+                >
                     <div>
                         <div
                             class="item"
