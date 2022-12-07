@@ -22,6 +22,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   preloader: boolean = true;
   @Output() onChange = new EventEmitter<any>();
   companies: Array<Company> = [];
+  isInitGetGadgets: boolean = false;
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
     private gadgetsService: GadgetsService,
@@ -59,13 +60,14 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     }
     this.list.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
       1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-    if (this.type === 'GADGETS') this.getGadgets();
+    if (this.type === 'GADGETS' && !this.isInitGetGadgets) this.getGadgets();
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public getGadgets() {
+    this.isInitGetGadgets = true;
     console.log("PasswordManagerEditLinkedComponent - getGadgets");
     this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.list = res.map(item => new PasswordDeviceUser(item.id, item.name, 'GADGET'));
