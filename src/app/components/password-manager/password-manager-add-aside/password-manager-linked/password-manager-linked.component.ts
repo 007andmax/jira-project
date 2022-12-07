@@ -30,6 +30,7 @@ export class PasswordManagerLinkedComponent implements OnInit {
   selectedCompanyId: string;
   companies: Array<Company> = [];
   preloader: boolean = true;
+  isInitGetGadgets: boolean = false;
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
@@ -79,13 +80,14 @@ export class PasswordManagerLinkedComponent implements OnInit {
       })
       this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      if (this.gadgets.length === 0) this.getGadgets();
+      if (!this.isInitGetGadgets) this.getGadgets();
       console.log("PasswordManagerLinkedComponent - onSelectCompany");
     }
     this.validate.resetCompany();
   }
   public getGadgets() {
     console.log("PasswordManagerLinkedComponent - getGadgets");
+    this.isInitGetGadgets = true;
     this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = res.map(item => new PasswordDeviceUser(item.id, item.name, 'GADGET'));
     });
