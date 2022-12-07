@@ -22,6 +22,7 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { TechUsersFilter } from './class/tech-users-filter';
 import { User } from '../../users/class/user';
 import { PermissionManageComponent } from './permission-manage/permission-manage.component';
+import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-reassign.component';
 declare var $;
 
 @Component({
@@ -361,10 +362,16 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
 
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
+
     this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
+    const modalRef = this.modalService.open(TechUsersReassignComponent, { windowClass: 'xs-modal user-modal', container: "app-tech-users-settings", backdrop: 'static', keyboard: false });
+
+
+
+  /*  this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
-    this.cd.detectChanges();
+  */  this.cd.detectChanges();
   }
 
   public onFilter(field, list) {
