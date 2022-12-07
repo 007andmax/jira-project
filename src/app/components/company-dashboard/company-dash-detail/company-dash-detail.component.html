@@ -197,23 +197,30 @@
                 Get Direction
             </a>
         </div>
-        <div class="other-info-col d-flex">
-            <div
-                class="small-title"
+        <div
+            class="qt-w100 d-flex"
+            [ngClass]="{'qt-ai-c':!showWorkingHours,
+    'qt-ai-fs':showWorkingHours}"
+        >
+            <span
+                class="small-title clear-margin-botom"
                 (click)="showWorkingHours = !showWorkingHours"
             >
                 Working Hours
-            </div>
-            <div class="working-hrs d-flex">
+            </span>
+            <span
+                class="selected-item qt-ml-8"
+                *ngIf="!showWorkingHours"
+                (click)="showWorkingHours = !showWorkingHours"
+            >
+                {{companyOpen}}
+            </span>
+            <div
+                class="working-hrs d-flex qt-ml-8"
+                *ngIf="showWorkingHours"
+            >
                 <div class="d-flex">
-                    <span
-                        class="selected-item"
-                        *ngIf="!showWorkingHours"
-                        (click)="showWorkingHours = !showWorkingHours"
-                    >
-                        {{companyOpen}}
-                    </span>
-                    <div *ngIf="showWorkingHours">
+                    <div>
                         <div
                             class="item"
                             *ngFor="let hours of workingDays"

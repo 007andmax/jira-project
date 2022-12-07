@@ -1217,7 +1217,6 @@
             }
         }
         .working-hrs {
-            width: 100%;
             align-items: center;
             flex-direction: row;
             .dropdown {
@@ -2097,4 +2096,7 @@ app-company-dash-tags {
 }
 app-company-dash-contract {
     margin-bottom: 16px;
+}
+.clear-margin-botom {
+    margin-bottom: 0px !important;
 }
