@@ -33,6 +33,7 @@
                 class="btn-new btn-primary"
                 (click)=approveConfirm()
                 [disabled]="!selectedUser"
+                [ngClass]="{'disabled-reassign':!selectedUser}"
             >
                 Yes, I am sure
             </button>

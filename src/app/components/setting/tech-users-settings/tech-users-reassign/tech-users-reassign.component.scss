@@ -140,3 +140,13 @@
     left: calc(50% - 25px) !important;
     right: unset;
 }
+.disabled-reassign {
+    background-color: #96d4fa !important;
+    cursor: default !important;
+    color: #ffffff;
+    &:hover {
+        background-color: #96d4fa !important;
+        cursor: default !important;
+        color: #ffffff;
+    }
+}

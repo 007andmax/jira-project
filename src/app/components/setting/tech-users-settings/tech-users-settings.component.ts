@@ -7,7 +7,7 @@ import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { DELETE_TECH_USER } from 'src/app/const/confirm';
+import { DELETE_TECH_USER, RESTORE_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -50,7 +50,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   isCroppedImg = false;
   cropAvatar: any;
   fileAvatar: any = null; // return result when first time image upload
-  popup: boolean;
   userId: any;
   IdList: any;
   idUploadFile: string;
@@ -131,7 +130,14 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       this.cd.detectChanges();
     })
     this.sub.add(changeUsersArray);
-
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === RESTORE_USER) {
+          this.restoreUser();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
     this.getUsers(false);
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersSettingsComponent');
@@ -199,7 +205,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
   restoreConfirm(id) {
     this.userId = id;
-    this.popup = true;
+    this.confirmStateService.setConfirmAction(RESTORE_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -209,12 +216,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       .pipe()
       .subscribe(
         response => {
-          this.popup = false;
           //  this.getUsers();
           this.toastr.success('User has been restore successfully.');
         },
         error => {
-          this.popup = false;
           this.toastr.error('Something wen to wrong. Please try again later');
           // this.getUsers();
         }
