@@ -47,4 +47,7 @@ export class DeviceSettingAsideComponent implements OnInit {
     })
     this.sub.add(openAside);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

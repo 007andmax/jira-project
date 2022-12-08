@@ -52,11 +52,7 @@
                                     (click)="showDetailUser()"
                                 ></span>
                                 <div
-<<<<<<< HEAD
-                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && ticketProfile.company && getCompany(ticketProfile.company.id).isUnknown"
-=======
                                     *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown"
->>>>>>> QT-686
                                     ngbDropdownMenu
                                     aria-labelledby="dropdownCompany"
                                 >
