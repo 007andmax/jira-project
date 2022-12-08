@@ -5,52 +5,34 @@
     ></button>
     <div class="archive-modal__body">
         <h3>Are you sure you want to delete?</h3>
-        <div
-            class="no-exist-agreements"
-            *ngIf="!showPreloader && valid"
-        >
+        <div class="no-exist-agreements">
             <span class="no-exist-agreements__info">
                 You must select another tech user to re-assign all regular tickets and recurring tickets of the archived tech user.
             </span>
-            <div class="info-product">
-                <h3 [textContent]="glNumber.glNumber"></h3>
-                <span>
-                    Associate with no products, services, categories
-                </span>
-            </div>
         </div>
-        <div
-            class="exist-agreements"
-            *ngIf="!showPreloader && !valid"
-        >
+        <div class="exist-agreements qt-mt-5">
             <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <span class="qt-input-block__label">Assign To</span>
                 <app-drop-down
                     #techUserDP
                     [class]="['qt-dropdown']"
+                    [dropdownWidth]="'440px'"
                     [list]="namesTechUsersList"
                     [search]="true"
                     [change]="true"
+                    [container]="'body'"
                     (onSelectedItem)="onSelectTechUser($event)"
                     [placeholder]="'Select User to assign'"
                 ></app-drop-down>
             </div>
         </div>
-        <div
-            class="preloader-container"
-            *ngIf="showPreloader"
-        >
-            <div class="loading"></div>
-        </div>
     </div>
-    <div
-        class="archive-modal__footer"
-        *ngIf="!showPreloader && valid"
-    >
+    <div class="archive-modal__footer">
         <div class="d-f qt-jc-fe">
             <button
                 class="btn-new btn-primary"
                 (click)=approveConfirm()
+                [disabled]="!selectedUser"
             >
                 Yes, I am sure
             </button>

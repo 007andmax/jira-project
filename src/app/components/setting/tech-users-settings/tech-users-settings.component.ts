@@ -135,14 +135,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.getUsers(false);
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersSettingsComponent');
-    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
-          this.removeTechUser();
-        }
-      }
-    })
-    this.sub.add(getConfirm);
     this.onCroppImage();
   }
   public onCroppImage() {
@@ -365,7 +357,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
 
     this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
     const modalRef = this.modalService.open(TechUsersReassignComponent, { windowClass: 'xs-modal user-modal', container: "app-tech-users-settings", backdrop: 'static', keyboard: false });
-
+    modalRef.componentInstance.techUser = techuser;
 
 
   /*  this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
@@ -378,23 +370,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.filter.onFilter(field, list)
 
   }
-  /**
-   * removed tech user
-   * @param techUser
-   */
-  removeTechUser() {
-    const id = this.userId.id;
-    if (this.userId) {
-      this.techUsersService
-        .archiveUser([this.userId.id])
-        .pipe(
-          map(archiveUser => {
 
-          })
-        )
-        .subscribe();
-    }
-  }
 
   /**
    * current comapny

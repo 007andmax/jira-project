@@ -57,10 +57,13 @@ export class TechUsersService {
     return this.http.post(`${this.apiUrl}users`, techUser);
   }
 
-  archiveUser(ids: any[]) {
+  archiveUser(archivedUserId, newAssignedUserId) {
     // Do you want to archive Test Test New?
     // {"ids":["d3937811-0f88-4d0c-a0d2-dc1494affb7d"]}
-    return this.http.post(`${this.apiUrl}users/archive`, { ids });
+    return this.http.post(`${this.apiUrl}users/archive`, {
+      "archivedUserId": archivedUserId,
+      "newAssignedUserId": newAssignedUserId
+    });
   }
 
   restoreUser(userId) {

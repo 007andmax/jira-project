@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { ARCHIVE_USER, DEARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { Company } from 'src/app/interfaces/company/company';
@@ -160,11 +160,11 @@ export class MarketingComponent implements OnInit {
   }
 
   private onArchiveUsers(ids) {
-
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
-
-    })
-    this.userListService.addSubscription(archiveUser);
+    forkJoin(
+      ids.map(item => this.usersService.onArchiveUsers(item))
+    )
+      .subscribe(res => {
+      });
   }
   setIdDetailUser(data) {
     this.idDetailUser = data;
@@ -225,18 +225,15 @@ export class MarketingComponent implements OnInit {
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
   }
   private onDeArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let Dearchiveusers = this.usersService.onDeArchiveUsers(ids).subscribe(data => {
+    let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
 
 
     })
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+
+    let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
       if (this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
@@ -9,7 +13,12 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 export class TechUsersReassignComponent implements OnInit {
   namesTechUsersList = [];
   techUsersList = [];
-  constructor(private usersStateService: UsersStateService,) { }
+  @Input() techUser;
+  selectedUser;
+  constructor(private usersStateService: UsersStateService,
+    public activeModal: NgbActiveModal,
+    private confirmStateService: ConfirmStateService,
+    private techUsersService: TechUsersService,) { }
 
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
@@ -19,7 +28,7 @@ export class TechUsersReassignComponent implements OnInit {
   }
   onGetTechUsers(data) {
     this.techUsersList = data.filter(item => {
-      if (item.accountType === 'TECH' && !item.deletedAt) {
+      if (item.accountType === 'TECH' && !item.deletedAt && item.id != this.techUser.id) {
         return item;
       }
     });
@@ -31,13 +40,26 @@ export class TechUsersReassignComponent implements OnInit {
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
-  onSelectTechUser(item) {
-    if (item) {
+  cancelConfirm() {
+    this.activeModal.close();
+    this.confirmStateService.setConfirm(false);
+  };
+  approveConfirm() {
+    console.log("this.techUser", this.techUser);
+    console.log("this.selectedUser", this.selectedUser);
 
-
-    } else {
-
+    let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === this.selectedUser);
+    if (indexTechUser > -1) {
+      this.techUsersService
+        .archiveUser(this.techUser.id, this.techUsersList[indexTechUser].id)
+        .subscribe((data) => {
+          this.activeModal.close();
+          this.confirmStateService.setConfirm(true);
+        });
     }
+  };
+  onSelectTechUser(item) {
+    this.selectedUser = item;
   }
 
 }
