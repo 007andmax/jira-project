@@ -40,7 +40,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     public resize:boolean = false;
 
   ngOnInit() {
-
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
     let id = this.activateRoute.snapshot.params['id'];
     if (id) {

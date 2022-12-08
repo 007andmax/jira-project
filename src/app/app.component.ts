@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
   PAGE_DEVICE = PAGE_DEVICE;
   state: string = '';
   currentUser: CurrentUser;
+
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -136,6 +137,65 @@ export class AppComponent implements OnInit {
         this.showPreloader = false;
         this.cd.detectChanges();
       }
+      const selectTarget = (fromElement, selector) => {
+        if (!(fromElement instanceof HTMLElement)) {
+          return null;
+        }
+        return fromElement.querySelector(selector);
+      };
+      const resizeData = {
+        tracking: false,
+        startWidth: null,
+        startCursorScreenX: null,
+        handleWidth: 10,
+        resizeTarget: null,
+        parentElement: null,
+        maxWidth: null,
+      };
+
+      if (localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+      if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+      if (this.appService.isMobile || this.currentUser.role === "SUPER_ADMIN" || this.state === 'help-center') {
+        $("#aside-left-panel").width("auto");
+      }
+      $(document.body).on('mousedown', '.resize-handle--x', null, (event) => {
+        if (event.button !== 0) {
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        const handleElement = event.currentTarget;
+        if (!handleElement.parentElement) {
+          console.error(new Error("Parent element not found."));
+          return;
+        }
+        // Use the target selector on the handle to get the resize target.
+        const targetSelector = handleElement.getAttribute('data-target');
+        const targetElement = selectTarget(handleElement.parentElement, targetSelector);
+        if (!targetElement) {
+          console.error(new Error("Resize target element not found."));
+          return;
+        }
+        resizeData.startWidth = $(targetElement).outerWidth();
+        resizeData.startCursorScreenX = event.screenX;
+        resizeData.resizeTarget = targetElement;
+        resizeData.parentElement = handleElement.parentElement;
+        resizeData.maxWidth = $(handleElement.parentElement).innerWidth() - resizeData.handleWidth;
+        resizeData.tracking = true;
+      });
+      $(window).on('mousemove', null, null, (event) => {
+        if (resizeData.tracking) {
+          const cursorScreenXDelta = event.screenX - resizeData.startCursorScreenX;
+          const newWidth = Math.min(resizeData.startWidth + cursorScreenXDelta, resizeData.maxWidth);
+          if (newWidth >= 280 && newWidth <= 560) $(resizeData.resizeTarget).outerWidth(newWidth);
+        }
+      });
+      $(window).on('mouseup', null, null, (event) => {
+        if (resizeData.tracking) {
+          resizeData.tracking = false;
+          localStorage.setItem("width-left-aside", String($(resizeData.resizeTarget).width()));
+        }
+      });
     })
 
     //  this.userService.getCurrentUser();
@@ -158,7 +218,14 @@ export class AppComponent implements OnInit {
 
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (!this.appService.isMobile && this.state !== 'help-center') {
+        if (data) $("#aside-left-panel").width("");
+        console.log($("#aside-left-panel").width());
+        if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+        if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+      }
       this.toggleLeftPanel = data;
+      console.log("data", data);
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
@@ -167,6 +234,7 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
       this.hideleLeftPanel = data;
+      console.log("this.hideleLeftPanel", this.hideleLeftPanel);
       this.cd.detectChanges();
     })
     this.appService.onLockScreen.subscribe(data => {

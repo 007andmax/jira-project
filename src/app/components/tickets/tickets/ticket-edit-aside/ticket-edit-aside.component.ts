@@ -103,6 +103,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
+        if (!this.rightPanel.toggleRightPanel) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
     this.sub.add(getOnEditTicket);
@@ -192,6 +193,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketStateService.onEditUpdate.subscribe(data => {
       this.openedMobileEditUpdate = true;
     })
+  }
+  showTooltipCompany(userCompanyTooltip, $event) {
+    if (this.ticketProfile.ticketSource === 'FROM_EMAIL' && this.checkExistServicesProducts() && this.getCompany(this.ticketProfile.company.id) && this.getCompany(this.ticketProfile.company.id).isUnknown) userCompanyTooltip.show($event.target)
   }
   showDetailUser() {
     if (this.appService.checkMobile() || !this.getPermissions('VIEW_USERS')) return;

@@ -47,7 +47,7 @@ export class InventoryComponent implements OnInit {
     public contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.inventoryStateService.getSortCategoty()) this.filter.setSortCategoty(this.inventoryStateService.getSortCategoty());
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -72,7 +72,7 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setSortCategoty(data);
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
@@ -82,7 +82,7 @@ export class InventoryComponent implements OnInit {
     this.sub.add(getOnSortCategory);
     let onSortActive = this.inventoryStateService.onSortActive.subscribe(data => {
       this.filter.setActive(data);
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
       this.inventoryList = [];

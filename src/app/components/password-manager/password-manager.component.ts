@@ -31,6 +31,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public filter: FilterPasswordManager = new FilterPasswordManager();
   public selectAll: boolean = false;
   public sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
   constructor(
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
@@ -47,7 +48,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
    * Initializes Password manager data table. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.getRecords();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -56,7 +57,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setFilter(data);
       this.setDefaultScoll();
       this.onScroll();
@@ -85,7 +86,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
   }
   onSearch(value) {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -110,6 +111,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.recordsData);
+    console.log("listFilter", listFilter);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let list_records = [];
@@ -119,6 +121,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
+    console.log("this.passwordManagerListService.getBlockList()", this.passwordManagerListService.getBlockList());
   }
   onSelectRecord(record) {
     this.recordsData.find(item => item.id === record.id).selected = record.selected;

@@ -31,6 +31,7 @@ export class CompanyProductsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     let subscription = this.activateRoute.params.subscribe(params => {
       if (params['id']) this.companiesStateService.setCompanyRoutingId(params['id']);
     });

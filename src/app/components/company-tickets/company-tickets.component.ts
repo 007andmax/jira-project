@@ -34,7 +34,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
   ticketsStatus: Array<TicketStatus> = [];
-
+  container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -47,7 +47,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate('company-tickets');
     this.ticketStateService.getOnTicketClosed().subscribe(data => {
       this.idEditTicket = '';
@@ -83,7 +83,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })

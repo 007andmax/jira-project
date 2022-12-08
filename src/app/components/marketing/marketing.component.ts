@@ -36,7 +36,6 @@ export class MarketingComponent implements OnInit {
   reqUsers: Array<User> = [];
   showPreloader: boolean = true;
   filter: UserFilter = new UserFilter();
-
   selectAll: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -46,6 +45,7 @@ export class MarketingComponent implements OnInit {
   sub: Subscription = new Subscription();
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
   industries: Array<CrmCompanyIndustry> = [];
+  container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -60,11 +60,11 @@ export class MarketingComponent implements OnInit {
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_MARKETING_USERS_LIST);
     this.filter = this.usersStateService.getFilter();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions, data.tags);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);

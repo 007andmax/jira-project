@@ -1,8 +1,8 @@
 .content-container {
-  margin-left: $left-panel-width;
-  &.--large {
-    margin-left: $left-panel-mini-width;
-  }
+ // margin-left: $left-panel-width;
+ // &.--large { // TODO check this style
+ //   margin-left: $left-panel-mini-width;
+ // }
   @media (max-width: 767px) {
     margin-left: 0;
     padding: 64px 8px 0;

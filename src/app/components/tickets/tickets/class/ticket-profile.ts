@@ -17,7 +17,7 @@ export class TicketProfile {
     billable: false;
     closedAt: number;
     closedBy: number;
-    company: CurrentUserCompany;
+    company: CurrentUserCompany = new CurrentUserCompany();
     companyId: string;
     createdAt: number;
     createdUser: CurrentUser;

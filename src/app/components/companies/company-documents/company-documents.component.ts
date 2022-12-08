@@ -14,6 +14,7 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
   @ViewChild('header') header: DocumentsHeaderComponent;
 
   ngOnInit() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.companyId = this.activateRoute.snapshot.params['id'];
     if (this.companyId) this.companiesStateService.setCompanyRoutingId(this.companyId);
     let subscription = this.activateRoute.params.subscribe(params => {
