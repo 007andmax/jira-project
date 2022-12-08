@@ -197,11 +197,7 @@
                 Get Direction
             </a>
         </div>
-        <div
-            class="working-hrs-container qt-w100 d-flex qt-mb-16"
-            [ngClass]="{'qt-ai-fs':!showWorkingHours,
-    'qt-ai-fs':showWorkingHours}"
-        >
+        <div class="working-hrs-container qt-w100 d-flex qt-mb-16 qt-ai-fs">
             <span
                 class="small-title clear-margin-botom"
                 (click)="showWorkingHours = !showWorkingHours"
@@ -209,7 +205,7 @@
                 Working Hours
             </span>
             <span
-                class="selected-item qt-ml-8"
+                class="selected-item qt-ml-8 qt-fs-11"
                 *ngIf="!showWorkingHours"
                 (click)="showWorkingHours = !showWorkingHours"
             >
