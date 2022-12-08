@@ -234,11 +234,13 @@ fieldset[disabled] .form-control {
 .new-users-content__modal .checkbox-wrapper .with-checkbox,
 .documents-create .checkbox-wrapper .with-checkbox,
 .documents-create-aside-categories .checkbox-wrapper .with-checkbox {
-  display: -webkit-box;
+  //display: -webkit-box; // TODO check this style
+  //display: flex;
+  //-webkit-box-align: center;
+  //align-items: center;
+  //margin-right: 20px;
   display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  margin-right: 20px;
+  flex-grow: unset;
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox p,
@@ -412,7 +414,8 @@ p {
 .recurring-tickets-content__modal .new-link,
 .new-users-content__modal .new-link {
   margin: 0 !important;
-  padding: 0 !important;
+  //padding: 0 !important; // TODO check this style
+  padding: 12px 0 6px !important;
 }
 
 .new-link {

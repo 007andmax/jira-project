@@ -71,7 +71,7 @@
             <mat-error *ngIf="!validate.getInterval()">Interval is required</mat-error>
           </div>
         </div>
-        <div class="col-md-12 ticket-tabs">
+        <div class="qt-inputs-row ticket-tabs">
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
                 class="ticket-tabs-service d-f ai-c"
@@ -95,7 +95,7 @@
         </div>
         <!-- IF TAB IS 'PRODUCT'----------------------------------------------- -->
         <div
-            class="col-md-12 product-tab-content p-0"
+            class="product-tab-content"
             *ngIf="type === 'products'"
         >
             <!-- <div class="error-products" *ngIf="errors.products.show"><p [textContent]="errors.products.text"></p></div> -->
@@ -110,82 +110,94 @@
                     [ngClass]="{'separator-hr': products.length > 1}"
                     class="row product-tab-content__item"
                 >
-                    <div class="col-md-12">
-                        <div
-                            class="product-errors"
-                            *ngIf="product.noValid"
-                        >
+                    <div
+                      class="qt-inputs-row"
+                      *ngIf="product.noValid"
+                    >
+                        <div class="qt-input-block">
+                          <div class="product-errors">
                             <ng-template
-                                ngFor
-                                let-error
-                                [ngForOf]="product.errors"
+                              ngFor
+                              let-error
+                              [ngForOf]="product.errors"
                             >
-                                <p
-                                    [textContent]="error"
-                                    style="color:red;"
-                                ></p>
+                              <p
+                                [textContent]="error"
+                                style="color:red;"
+                              ></p>
                             </ng-template>
+                          </div>
                         </div>
                     </div>
                     <div
-                        class="col-md-12"
+                        class="qt-inputs-row"
                         [ngClass]="(product.noValid) ? 'no-valid-product' : ''"
                     >
-                        <p>Search Product</p>
-                        <app-product-list
+                        <div class="qt-input-block">
+                          <div class="qt-input-block__label">Search Product</div>
+                          <app-product-list
                             [type]="'RECURRING-TICKET'"
                             [editItem]="product"
                             (selectedProductItem)="selectProduct($event,i)"
-                        ></app-product-list>
-                        <i
+                          ></app-product-list>
+                        </div>
+                        <div
+                          class="qt-input-block--icon qt-f33"
+                          *ngIf="products.length > 1"
+                        >
+                          <i
                             class="icon__remove icn-16"
-                            *ngIf="products.length > 1"
                             (click)="removeProduct(i)"
-                        ></i>
+                          ></i>
+                        </div>
                     </div>
-                    <div class="col-md-4 mt-20">
-                        <p>Serial No.</p>
+                    <div class="qt-inputs-row">
+                      <div class="qt-f33 qt-input-block">
+                        <div class="qt-input-block__label">Serial No.</div>
                         <input
-                            type="text"
-                            [(ngModel)]="product.manufacture"
-                            placeholder="Write Serial No."
+                          type="text"
+                          [(ngModel)]="product.manufacture"
+                          placeholder="Write Serial No."
                         >
+                      </div>
+                      <div class="qt-f33 qt-input-block">
+                        <div class="qt-input-block__label">Product Cost</div>
+                        <input
+                          type="text"
+                          number
+                          [money]="'true'"
+                          [(ngModel)]="product.cost"
+                          placeholder="Write Product Cost"
+                        >
+                      </div>
+                      <div class="qt-f33 qt-input-block">
+                        <div class="qt-input-block__label">Quantity</div>
+                        <input
+                          type="text"
+                          [(ngModel)]="product.quantity"
+                          placeholder="Write Quantity"
+                        >
+                      </div>
                     </div>
-                    <div class="col-md-4 mt-20">
-                        <p>Product Cost</p>
+                    <div class="qt-inputs-row">
+                      <div class="qt-f33 qt-input-block">
+                        <div class="qt-input-block__label">Product Price</div>
                         <input
-                            type="text"
-                            number
-                            [money]="'true'"
-                            [(ngModel)]="product.cost"
-                            placeholder="Write Product Cost"
+                          type="text"
+                          number
+                          [money]="'true'"
+                          [(ngModel)]="product.sale"
+                          placeholder="Write Product Price"
                         >
-                    </div>
-                    <div class="col-md-4 mt-20">
-                        <p>Quantity</p>
+                      </div>
+                      <div class="qt-f33 qt-input-block">
+                        <div class="qt-input-block__label">Discount</div>
                         <input
-                            type="text"
-                            [(ngModel)]="product.quantity"
-                            placeholder="Write Quantity"
+                          type="text"
+                          [(ngModel)]="product.discount"
+                          placeholder="Write Discount"
                         >
-                    </div>
-                    <div class="col-md-4 mt-20">
-                        <p>Product Price</p>
-                        <input
-                            type="text"
-                            number
-                            [money]="'true'"
-                            [(ngModel)]="product.sale"
-                            placeholder="Write Product Price"
-                        >
-                    </div>
-                    <div class="col-md-4 mt-20">
-                        <p>Discount</p>
-                        <input
-                            type="text"
-                            [(ngModel)]="product.discount"
-                            placeholder="Write Discount"
-                        >
+                      </div>
                     </div>
                 </div>
             </ng-template>
@@ -200,7 +212,7 @@
         <!-- ------------------------------------------------------------------ -->
         <!-- IF TAB IS 'SERVICE'----------------------------------------------- -->
         <div
-            class="col-md-12 service-tab-content p-0"
+            class="service-tab-content"
             *ngIf="type === 'services'"
         >
             <ng-template
@@ -214,11 +226,13 @@
                     [ngClass]="{'separator-hr': services.length > 1}"
                     class="row service-tab-content__item"
                 >
-                    <div class="qt-inputs-row">
+                    <div
+                      class="qt-inputs-row"
+                      *ngIf="service.noValid"
+                    >
                         <div class="qt-input-block">
                           <div
                             class="service-errors"
-                            *ngIf="service.noValid"
                           >
                             <ng-template
                               ngFor
@@ -252,9 +266,13 @@
                           (selectedDucation)="selectDuration($event,i)"
                           [editItem]="service.duration"
                         ></app-duration>
+                      </div>
+                      <div
+                        class="qt-input-block--icon qt-f33"
+                        *ngIf="services.length > 1"
+                      >
                         <i
                           class="icon__remove icn-16"
-                          *ngIf="services.length > 1"
                           (click)="removeService(i)"
                         ></i>
                       </div>
@@ -278,11 +296,11 @@
             </ng-template>
         </div>
         <div
-            class="new-link"
-            *ngIf="type === 'services'"
-            (click)="addService()"
+          class="new-link"
+          *ngIf="type === 'services'"
+          (click)="addService()"
         >
-            +Add Service
+          +Add Service
         </div>
         <!-- ------------------------------------------------------------------ -->
         <div class="qt-inputs-row">
@@ -291,7 +309,7 @@
           </div>
         </div>
         <div class="qt-inputs-row checkbox-wrapper">
-            <div class="qt-f33 qt-input-block with-checkbox">
+            <div class="qt-input-block with-checkbox">
                 <label class="qt-checkbox pointer">
                     <input
                         id="requireUpdate-add"
@@ -301,7 +319,7 @@
                     <div class="qt-ml-8">Require update Notes</div>
                 </label>
             </div>
-            <div class="qt-f33 qt-input-block with-checkbox">
+            <div class="qt-input-block with-checkbox">
                 <label class="qt-checkbox pointer">
                     <input
                         id="quickClose-add"
@@ -311,7 +329,7 @@
                     <div class="qt-ml-8">Quick Close</div>
                 </label>
             </div>
-            <div class="qt-f33 qt-input-block with-checkbox">
+            <div class="qt-input-block with-checkbox">
                 <label class="qt-checkbox pointer">
                     <input
                         id="createTask-add"
@@ -324,7 +342,7 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="col-md-12 recurring-tickets-content__modal--content-footer">
+        <div class="recurring-tickets-content__modal--content-footer qt-w100">
             <div class="d-f">
                 <button
                     class="qt-button qt-mr-12"

@@ -751,16 +751,21 @@ documents-edit-info {
       float: left;
       position: relative;
       &.separator-hr:not(:last-child) {
-        margin-bottom: 10px;
-        padding-bottom: 20px;
+        //margin-bottom: 10px; // TODO check this style
+        //padding-bottom: 20px;
+        margin-bottom: 22px;
+        padding-bottom: 26px;
         &:after {
           position: absolute;
           content: "";
-          left: 15px;
+          //left: 15px; // TODO check this style
+          left: 0;
           bottom: 0;
           height: 1px;
-          width: 95%;
-          background: $gray-500--old;
+          //width: 95%;
+          width: 100%;
+          //background: $gray-500--old;
+          background: $gray-200;
         }
       }
     }
@@ -782,6 +787,42 @@ documents-edit-info {
         top: 50%;
         transform: translateY(-50%);
         width: auto;
+      }
+    }
+  }
+}
+.recurring-tickets-content__modal {
+  .app-drop-down__right-icon {
+    bottom: 20px;
+  }
+
+  .qt-temporary-col-fix {
+    .mat-form-field-wrapper {
+      .mat-form-field-flex {
+        .mat-form-field-infix {
+          height: 40px;
+          min-height: 40px;
+        }
+        .mat-form-field-infix {
+          &:before {
+            top: 11px;
+          }
+          input {
+            height: 34px;
+          }
+        }
+        .mat-chip-list-wrapper .mat-standard-chip,
+        .mat-chip-list-wrapper input.mat-input-element {
+          margin: 2px;
+        }
+        .mat-chip-list-wrapper {
+          margin: -6px;
+        }
+        .mat-form-field-label {
+          top: calc(50% + 4px);
+          transform: translateY(-50%);
+          height: 43px;
+        }
       }
     }
   }
@@ -2383,7 +2424,7 @@ app-quotes-item {
         content: "";
         position: absolute;
         background: $gray-800--old;
-        width: 94%;
+        width: 100%;
         height: 1px;
         bottom: 0;
       }
@@ -2398,6 +2439,7 @@ app-quotes-item {
         font-size: 12px;
         font-weight: 600;
         cursor: pointer;
+        flex-grow: initial;  // TODO check this style
         .tab-product,
         .tab-service {
           position: static;
@@ -2448,14 +2490,14 @@ app-quotes-item {
       .with-checkbox {
         display: flex;
         align-items: center;
-        margin-right: 20px;
-        p {
-          font-weight: 400;
-          margin: 0;
-        }
-        label {
-          margin-right: 8px;
-        }
+        //margin-right: 20px; // TODO check this style
+        //p {
+        //  font-weight: 400; // TODO check this style
+        //  margin: 0;
+        //}
+        //label {
+        //  margin-right: 8px; // TODO check this style
+        //}
       }
     }
     &--content-footer {
@@ -2772,7 +2814,8 @@ app-quotes-item {
     }
     .new-link {
       margin: 0 !important;
-      padding: 0 !important;
+      //padding: 0 !important; // TODO check this style
+      padding: 12px 0 6px !important;
     }
   }
   .logo-upload {

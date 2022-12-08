@@ -28,3 +28,10 @@
 //    top: 52px;
 //  }
 //}
+.qt-input-block--icon {
+  display: flex;
+  align-items: flex-end;
+  flex: 0 0 16px;
+  transform: translateY(-13px);
+}
+
