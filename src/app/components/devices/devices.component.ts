@@ -1360,9 +1360,9 @@ export class DevicesComponent implements OnInit {
     data.Warrantry = moment(this.warrantyDate).format("YYYY-MM-DD");
     data.Tag = this.assetTagName;
     data.CompanyGuid = this.comapanyId;
-    data.IPAddress = this.deviceIPAddress;
-    data.deviceMacAddress = this.deviceMacAddress;
-    data.deviceRemotePort = this.deviceRemotePort;
+    data.InternalIPAddress = this.deviceIPAddress;
+    data.MacAddress = this.deviceMacAddress;
+    data.Port = this.deviceRemotePort;    
     this.agentService.nonAgentAsset(data).subscribe(
       (result) => {
         if (result.length > 0) {
