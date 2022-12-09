@@ -928,22 +928,22 @@ documents-edit-info {
     }
   }
 }
-.recurring-tickets-content__modal--content-footer,
-.new-users-content__modal--content-footer {
-  .assigned-users-list {
-    display: flex;
-    margin-left: -39px;
-    max-width: 148px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    .default-user-avatar,
-    .avatar-26 {
-      width: 32px;
-      height: 32px;
-      margin-right: 5px;
-    }
-  }
-}
+//.recurring-tickets-content__modal--content-footer, // TODO check this style
+//.new-users-content__modal--content-footer {
+//  .assigned-users-list {
+//    display: flex;
+//    margin-left: -39px;
+//    max-width: 148px;
+//    overflow-x: scroll;
+//    overflow-y: hidden;
+//    .default-user-avatar,
+//    .avatar-26 {
+//      width: 32px;
+//      height: 32px;
+//      margin-right: 5px;
+//    }
+//  }
+//}
 .mat-chip.mat-standard-chip {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
@@ -2501,10 +2501,10 @@ app-quotes-item {
       }
     }
     &--content-footer {
-      margin: 60px 0 130px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      //margin: 60px 0 130px; // TODO check this style
+      //display: flex;
+      //justify-content: space-between;
+      //align-items: center;
       .btn-primary {
         margin-right: 16px;
       }
