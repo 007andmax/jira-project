@@ -71,7 +71,7 @@ export class TicketProfileProduct {
                 id: this.id,
                 item: this.item,
                 quantity: this.quantity,
-                serialNumber: null,
+                serialNumber: this.serialNumber,
                 user: user,
             },
             ticketUpdateId: id
