@@ -123,9 +123,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     this.reqUsers = (users) ? users : [];
   }
   private onArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+    let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
       let index = this.users.findIndex(item => item.id === id);
       if (index > -1) this.users.splice(index, 1);
       let indexReq = this.reqUsers.findIndex(item => item.id === id);
