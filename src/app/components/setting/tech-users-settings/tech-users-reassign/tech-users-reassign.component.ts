@@ -45,9 +45,6 @@ export class TechUsersReassignComponent implements OnInit {
     this.confirmStateService.setConfirm(false);
   };
   approveConfirm() {
-    console.log("this.techUser", this.techUser);
-    console.log("this.selectedUser", this.selectedUser);
-
     let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === this.selectedUser);
     if (indexTechUser > -1) {
       this.techUsersService

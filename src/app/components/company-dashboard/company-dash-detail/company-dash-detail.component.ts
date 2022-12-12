@@ -386,7 +386,6 @@ export class CompanyDashDetailComponent implements OnInit {
     this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
     this.tags = this.companyDetailing.tags;
     let day = moment(new Date()).format('dddd');
-    console.log("day", day);
     this.workingDays = data.workingDays;
     if (this.workingDays.length !== 0) {
       this.workingDays.forEach((element, index) => {
@@ -406,9 +405,7 @@ export class CompanyDashDetailComponent implements OnInit {
         }
       });
       let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
-      console.log("arr", arr);
       if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
-        console.log("arr[0].timing", arr[0].timing);
         this.companyOpen = (arr[0].timing) ? `Opens ${arr[0].timing}` : 'Opens';
       } else {
         this.companyOpen = `Close`;
