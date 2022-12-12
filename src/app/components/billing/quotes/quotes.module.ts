@@ -35,6 +35,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { InvoiceChangeAddressModule } from '../billable/billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
 import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-aside-add-change-address/quote-aside-add-change-address.component';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { NumberModule } from 'src/app/directives/number/number.module';
 
 
 
@@ -79,7 +80,8 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         PreviewPhoneMaskModule,
         KeyUpEnterModule,
         InvoiceChangeAddressModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        NumberModule
     ],
 
 

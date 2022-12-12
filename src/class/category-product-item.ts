@@ -20,11 +20,13 @@ export class CategoryProductitem implements CategoryProduct {
         this.products = data.products.map((item) => {
             let product: Product = {
                 cost: (item.cost) ? item.cost : 0,
+                cost_str: (item.cost) ? item.cost.toFixed(2) : "0.00",
                 description: item.description,
                 glNumber: item.glNumber,
                 ilc: item.ilc,
                 manufacture: item.manufacture,
                 sale: (item.sale) ? item.sale : 0,
+                sale_str: (item.sale) ? item.sale.toFixed(2) : "0.00",
                 taxes: item.taxes,
                 versionedId: item.versionedId,
                 createdAt: null,

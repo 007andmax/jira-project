@@ -56,20 +56,24 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     this.updateMobileBtn.setDisabled(false);
   }
   public onChangeSaleProduct(val, index) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.addedProductList[index].item.sale = value;
+    this.addedProductList[index].item.sale_str = value.toFixed(2);
   }
   public onChangeCostProduct(val, index) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.addedProductList[index].item.cost = value;
+    this.addedProductList[index].item.cost.str = value.toFixed(2);
   }
   public onChangeCost(val) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.currentProduct.item.cost = value;
+    this.currentProduct.item.cost_str = value.toFixed(2);
   }
   public onChangeSale(val) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.currentProduct.item.sale = value;
+    this.currentProduct.item.sale_str = value.toFixed(2);
   }
   public onChangeProduct(item, i, taxesDropDown) {
     this.addedProductList[i].setData(item, this.getItemOrger());

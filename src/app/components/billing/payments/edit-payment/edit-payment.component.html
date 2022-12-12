@@ -47,7 +47,7 @@
                         class="qt-input-prepend"
                         number
                         [money]="true"
-                        [ngModel]="amountReceived"
+                        [ngModel]="amountReceived_str"
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
@@ -135,8 +135,8 @@
                                     class="payment-input"
                                     number
                                     [money]="true"
-                                    [ngModel]="invoice.paidAmount"
-                                    (ngModelChange)="onChangePayment($event,invoice)"
+                                    [ngModel]="invoice.paidAmount_str"
+                                    (change)="onChangePayment($event,invoice)"
                                     appToFixed
                                 >
                             </td>

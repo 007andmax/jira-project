@@ -38,6 +38,8 @@ export class TicketProfileProduct {
             for (const key in data) {
                 this[key] = data[key];
             }
+            this.item.sale_str = this.item.sale.toFixed(2);
+            this.item.cost_str = this.item.cost.toFixed(2);
         }
     }
     public setUser(data) {
@@ -69,7 +71,7 @@ export class TicketProfileProduct {
                 id: this.id,
                 item: this.item,
                 quantity: this.quantity,
-                serialNumber: null,
+                serialNumber: this.serialNumber,
                 user: user,
             },
             ticketUpdateId: id

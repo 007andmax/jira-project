@@ -73,11 +73,12 @@
                             >
                                 <strong>
                                     <label class="qt-checkbox">
-                                      <input
-                                        type="checkbox"
-                                        [(ngModel)]="generalCheckbox"
-                                        (change)="changeGeneralCheckbox()" />
-                                      <span></span>
+                                        <input
+                                            type="checkbox"
+                                            [(ngModel)]="generalCheckbox"
+                                            (change)="changeGeneralCheckbox()"
+                                        >
+                                        <span></span>
                                     </label>
                                 </strong>
                             </div>
@@ -107,13 +108,19 @@
                                 Description
                             </div>
                             <div
+                                class="col-md-1"
+                                (click)="onFilter('serialNumber')"
+                            >
+                                Serial number
+                            </div>
+                            <div
                                 class="col-md-2"
                                 (click)="onFilter('ticketNumber')"
                             >
                                 Ticket number
                             </div>
                             <div
-                                class="col-md-2"
+                                class="col-md-1"
                                 (click)="onFilter('invoiceNumber')"
                             >
                                 Invoice number
@@ -159,11 +166,12 @@
                                         class="col-md-1"
                                     >
                                         <label class="qt-checkbox">
-                                          <input
-                                            type="checkbox"
-                                            [(ngModel)]="product.isChecked"
-                                            (change)="selectLine()" />
-                                          <span></span>
+                                            <input
+                                                type="checkbox"
+                                                [(ngModel)]="product.isChecked"
+                                                (change)="selectLine()"
+                                            >
+                                            <span></span>
                                         </label>
                                     </div>
                                     <div class="col-md-1">{{product.date}}</div>
@@ -177,6 +185,10 @@
                                     <div class="col-md-3">
                                         <pre>{{product.description}}</pre>
                                     </div>
+                                    <div class="col-md-1">
+                                        {{product.serialNumber
+              }}
+                                    </div>
                                     <div
                                         class="col-md-2"
                                         [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}"
@@ -185,7 +197,7 @@
               }}
                                     </div>
                                     <div
-                                        class="col-md-2"
+                                        class="col-md-1"
                                         [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}"
                                     >
                                         {{product.invoiceNumber }}

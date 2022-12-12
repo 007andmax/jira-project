@@ -61,10 +61,12 @@ export class User {
     public getVisibleListUserEmailForTechusers() {
         let list = ["New Device", "New ticket", "Ticket Updated", "Ticket Closed"];
         let outList = [];
-        if (this.userEmailNotifications.newDevice) outList.push(list[0]);
-        if (this.userEmailNotifications.ticketCreated) outList.push(list[1]);
-        if (this.userEmailNotifications.myTicketUpdated) outList.push(list[2]);
-        if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
+        if (this.userEmailNotifications) {
+            if (this.userEmailNotifications.newDevice) outList.push(list[0]);
+            if (this.userEmailNotifications.ticketCreated) outList.push(list[1]);
+            if (this.userEmailNotifications.myTicketUpdated) outList.push(list[2]);
+            if (this.userEmailNotifications.ticketCloseNotifications) outList.push(list[3]);
+        }
         return outList;
     }
     public getTooltipsListUserEmailForTechusers() {

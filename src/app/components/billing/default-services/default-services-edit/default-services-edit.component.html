@@ -38,11 +38,10 @@
                 >
                     <label>Hourly Rate($)</label>
                     <input
-                        [(ngModel)]="service.rate"
-                        type="text"
                         number
                         [money]="true"
-                        (input)="onChangeRate($event)"
+                        [ngModel]="service.rate_str"
+                        (change)="onChangeRate($event)"
                         appToFixed
                     >
                     <mat-error

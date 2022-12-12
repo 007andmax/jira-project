@@ -1216,10 +1216,29 @@
                 box-shadow: unset;
             }
         }
+        .working-hrs-container {
+          .selected-item {
+            margin-top: -2px;
+          }
+          .report-caret-icon {
+            transform: translateY(-3px);
+          }
+        }
         .working-hrs {
-            width: 100%;
             align-items: center;
             flex-direction: row;
+            flex: 1;
+
+            &-wrap {
+              flex: 1;
+
+              &-inner {
+                flex: 1;
+              }
+            }
+            .btn-new {
+              height: 28px;
+            }
             .dropdown {
                 position: relative;
                 width: 115px;
@@ -1274,6 +1293,20 @@
                 min-height: 20px;
                 min-width: 74px;
             }
+
+          .item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin-bottom: 5px;
+            @media (min-width: 1361px) {
+              font-size: 11px;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
         }
         .cmp-board-tickets,
         .cmp-board-revenue {
@@ -2097,4 +2130,7 @@ app-company-dash-tags {
 }
 app-company-dash-contract {
     margin-bottom: 16px;
+}
+.clear-margin-botom {
+    margin-bottom: 0px !important;
 }

@@ -197,42 +197,62 @@
                 Get Direction
             </a>
         </div>
-        <div class="other-info-col d-flex">
-            <div class="small-title">Working Hours</div>
-            <div class="working-hrs d-flex">
+        <div class="working-hrs-container qt-w100 d-flex qt-mb-16 qt-ai-fs">
+            <span
+                class="small-title clear-margin-botom"
+                (click)="showWorkingHours = !showWorkingHours"
+            >
+                Working Hours
+            </span>
+            <span
+                class="selected-item qt-ml-8 qt-fs-11"
+                *ngIf="!showWorkingHours"
+                (click)="showWorkingHours = !showWorkingHours"
+            >
+                {{companyOpen}}
+            </span>
+            <i
+                class="icn-sm report-caret-icon qt-ml-8"
+                *ngIf="!showWorkingHours"
+                (click)="showWorkingHours = !showWorkingHours"
+            ></i>
+            <div
+                class="working-hrs d-flex qt-ml-8"
+                *ngIf="showWorkingHours"
+            >
                 <div
-                    ngbDropdown
-                    class="d-flex"
+                    class="d-flex working-hrs-wrap"
+                    (click)="showWorkingHours = !showWorkingHours"
                 >
-                    <button
-                        class="selected-item"
-                        id="dropdownBasic1"
-                        ngbDropdownToggle
-                    >
-                        {{companyOpen}}
-                    </button>
-                    <div
-                        ngbDropdownMenu
-                        aria-labelledby="dropdownBasic1"
-                    >
-                        <button
+                    <div class="working-hrs-wrap-inner">
+                        <div
                             class="item"
-                            ngbDropdownItem
                             *ngFor="let hours of workingDays"
                         >
                             {{hours.dayOfWeek}}
-                            <span class="info-time-work" *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span>
-                            <span class="info-time-work-status" *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span>
-                        </button>
+                            <span
+                                class="info-time-work"
+                                *ngIf="hours.startTime !== 0 && hours.endTime !== 0"
+                            >
+                                {{hours.timing}}
+                            </span>
+                            <span
+                                class="info-time-work-status"
+                                *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)"
+                            >
+                                Close
+                            </span>
+                        </div>
                         <div
                             class="item qt-df qt-jc-c qt-mt-12 qt-mb-12"
                             *ngIf="getPermissions('EDIT_COMPANIES')"
                         >
                             <button
-                                class="btn btn-outline"
+                                class="btn-new btn-primary-white qt-w100"
                                 (click)="open(contentHour)"
                             >
                                 <img
+                                    class="qt-mr-4"
                                     src="html/assets/img/company-details/edit-blue.svg"
                                     alt="user"
                                 >

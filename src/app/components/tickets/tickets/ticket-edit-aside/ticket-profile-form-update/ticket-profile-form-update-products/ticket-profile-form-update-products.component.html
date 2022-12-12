@@ -33,14 +33,13 @@
                 <label class="product-item__cost-input">
                     <input
                         class="qt-input-block__input cost"
-                        type="text"
                         number
                         [money]="true"
-                        [ngModel]="product.item.cost"
+                        [ngModel]="product.item.cost_str"
+                        (change)="onChangeCostProduct($event,i)"
                         appToFixed
                         *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                         (blur)="onValidateSaleCostProduct(i)"
-                        (ngModelChange)="onChangeCostProduct($event, i)"
                     >
                     <input
                         class="qt-input-block__input cost"
@@ -66,15 +65,13 @@
                 <label class="product-item__price-input">
                     <input
                         class="qt-input-block__input price"
-                        type="text"
-                        [(ngModel)]="product.item.sale"
                         [ngClass]="{'--input-error':!product.valdiateSaleCost}"
                         number
                         [money]="true"
-                        [ngModel]="product.item.sale"
-                        (blur)="onValidateSaleCostProduct(i)"
+                        [ngModel]="product.item.sale_str"
+                        (change)="onChangeSaleProduct($event,i)"
                         appToFixed
-                        (ngModelChange)="onChangeSaleProduct($event, i)"
+                        (blur)="onValidateSaleCostProduct(i)"
                     >
                     <mat-error
                         class="invalid-feedback --pos-static"
@@ -123,10 +120,10 @@
                     class="qt-input-block__input cost"
                     number
                     [money]="true"
-                    [ngModel]="currentProduct.item.cost"
-                    (blur)="onValidateSaleCost()"
+                    [ngModel]="currentProduct.item.cost_str"
+                    (change)="onChangeCost($event)"
                     appToFixed
-                    (ngModelChange)="onChangeCost($event)"
+                    (blur)="onValidateSaleCost()"
                     *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                 >
                 <input
@@ -154,10 +151,10 @@
                     [ngClass]="{'--input-error':!currentProduct.valdiateSaleCost}"
                     number
                     [money]="true"
-                    [ngModel]="currentProduct.item.sale"
-                    (blur)="onValidateSaleCost()"
+                    [ngModel]="currentProduct.item.sale_str"
+                    (change)="onChangeSale($event)"
                     appToFixed
-                    (ngModelChange)="onChangeSale($event)"
+                    (blur)="onValidateSaleCost()"
                 >
                 <mat-error
                     class="invalid-feedback --pos-static"

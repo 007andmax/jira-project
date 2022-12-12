@@ -54,6 +54,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Remove"
+                            *ngIf="service.commissionRate"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="confirmServiceDelete(i, service, false)"
                         >
@@ -86,7 +87,6 @@
                                         class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
                                         aria-label="Close"
                                         (click)="selectedIdx = -1"
-                                        *ngIf="service.commissionRate"
                                     >
                                         Cancel
                                     </a>
@@ -163,6 +163,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Remove"
+                            *ngIf="service.commissionRate"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="removeServiceRate()"
                         >
