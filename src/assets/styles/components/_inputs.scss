@@ -159,8 +159,12 @@
     border: solid 1px $gray-200;
     background-color: $white;
 
+    &--lg {
+      min-height: 80px;
+    }
+
     &::placeholder {
-        color: $gray-400;
+      color: $gray-400;
     }
     &:hover {
       border-color: $gray-300;

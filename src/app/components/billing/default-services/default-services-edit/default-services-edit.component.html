@@ -18,12 +18,13 @@
                 <div class="qt-input-block__label">Customer Name</div>
                 <input
                     [value]="'Checks & System Maintenance'"
+                    placeholder="Service Name"
                     [(ngModel)]="service.name"
                     type="text"
                     (input)="onChangeName()"
                 >
                 <mat-error
-                    class="invalid-feedback"
+                    class="invalid-feedback --pos-static"
                     *ngIf="!validate.getName()"
                 >
                     Service name is required

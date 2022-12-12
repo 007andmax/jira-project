@@ -614,7 +614,7 @@ documents-edit-info {
       margin-top: 12px;
       .mat-form-field {
         width: 100%;
-        margin-top: 15px;
+        //margin-top: 15px; // TODO check this style
       }
       .mat-form-field-infix {
         border: none;
@@ -626,15 +626,15 @@ documents-edit-info {
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
         position: relative;
-        &:before {
-          position: absolute;
-          content: "Tags";
-          line-height: 16px;
-          font-weight: 500;
-          color: $gray-500;
-          left: 0;
-          top: -28px;
-        }
+        //&:before { // TODO check this style
+        //  position: absolute;
+        //  content: "Tags";
+        //  line-height: 16px;
+        //  font-weight: 500;
+        //  color: $gray-500;
+        //  left: 0;
+        //  top: -28px;
+        //}
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 12px 10px 10px 36px;
@@ -691,9 +691,9 @@ documents-edit-info {
     }
   }
   company-associate {
-    .mat-form-field-wrapper {
+    .mat-form-field-wrapper { // TODO check this style
       &:before {
-        content: "Associated Companies" !important;
+        display: none;
       }
     }
     .mat-form-field-infix {
@@ -2967,9 +2967,9 @@ app-quotes-item {
       }
     }
 
-    .mat-form-field-wrapper {
-      margin-top: 17px;
-    }
+    //.mat-form-field-wrapper { // TODO check this style
+    //  margin-top: 17px;
+    //}
 
     .mat-standard-chip {
       margin: 2px;
@@ -4611,6 +4611,8 @@ app-ticket-edit-aside-devices {
 .qt-input-block input.ng-invalid.is-invalid:hover,
 .qt-input-block input.--input-error,
 .qt-input-block input.--input-error:hover,
+.qt-input-block.--input-error input,
+.qt-input-block.--input-error input:hover,
 input.ng-invalid.is-invalid,
 input.ng-invalid.is-invalid:hover,
 input.--input-error,

@@ -492,6 +492,7 @@
         </div>
         <div class="qt-inputs-row">
           <div class="qt-inputs-block">
+            <div class="qt-input-block__label">Tags</div>
             <app-company-tags
               #companyTags
               (tagsChange)="onChangeTags($event)"
@@ -500,6 +501,7 @@
         </div>
         <div class="qt-inputs-row">
           <div class="qt-inputs-block">
+            <div class="qt-input-block__label">Associated Companies</div>
             <company-associate
               *ngIf="opened"
               #companyAssociate

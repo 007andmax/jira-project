@@ -286,7 +286,7 @@
       margin-top: 40px;
       .mat-form-field {
         width: 100%;
-        margin-top: 15px;
+        //margin-top: 15px; // TODO check this style
       }
       .mat-form-field-infix {
         border: none;
@@ -305,17 +305,17 @@
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
         position: relative;
-        &:before {
-          position: absolute;
-          content: "Tags";
-          font-size: 13px;
-          line-height: 16px;
-          font-weight: 500;
-          color: $gray-500;
-          left: 0;
-          //top: -28px; // TODO check this style
-          top: -24px;
-        }
+        //&:before { // TODO check this style
+        //  position: absolute;
+        //  content: "Tags";
+        //  font-size: 13px;
+        //  line-height: 16px;
+        //  font-weight: 500;
+        //  color: $gray-500;
+        //  left: 0;
+        //  //top: -28px; // TODO check this style
+        //  top: -24px;
+        //}
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 10px 10px 10px 36px;
