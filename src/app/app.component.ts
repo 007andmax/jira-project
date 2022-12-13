@@ -30,6 +30,8 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { SupportPageCategoriesStateService } from './components/super-admin/state/support-page-categories/support-page-categories-state.service';
 import { NoteStateService } from './states/note/note-state.service';
 import { EmailTemplateStateService } from './states/email-template/email-template-state.service';
+import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -57,6 +59,7 @@ export class AppComponent implements OnInit {
   PAGE_DEVICE = PAGE_DEVICE;
   state: string = '';
   currentUser: CurrentUser;
+  sub: Subscription = new Subscription();
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -107,6 +110,7 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
+      if (this.currentUser.twoFactorAuthType === "GOOGLE_SECURE" && !this.currentUser.userTOTP.confirmed) this.onCheckGoogleAuthenticator();
       if (this.appService.getIsInit()) return;
       if (data.role !== "SUPER_ADMIN") {
         this.devicesState.onInit();
@@ -212,6 +216,16 @@ export class AppComponent implements OnInit {
     this.leftPanelStateService.onChangeState.subscribe(data => {
       this.state = data;
     })
+  }
+  onCheckGoogleAuthenticator() {
+    const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
+    /* let onReset = modalRef.componentInstance.onReset.subscribe(data => {
+     })
+     let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
+ 
+     })
+     this.sub.add(onSetQrCode);
+     this.sub.add(onReset);*/
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');

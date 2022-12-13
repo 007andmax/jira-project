@@ -44,6 +44,7 @@ export class CurrentUser {
     default: boolean;
     jobTitleId: string;
     jobTypeId: string;
+    userTOTP: any;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

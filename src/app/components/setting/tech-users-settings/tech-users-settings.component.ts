@@ -23,6 +23,7 @@ import { TechUsersFilter } from './class/tech-users-filter';
 import { User } from '../../users/class/user';
 import { PermissionManageComponent } from './permission-manage/permission-manage.component';
 import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-reassign.component';
+import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 declare var $;
 
 @Component({
@@ -55,6 +56,11 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   idUploadFile: string;
   activeTab: string = "activeUsers";
   filter: TechUsersFilter = new TechUsersFilter();
+  authenticationTypes = [new TitleListType("Password only", "DISABLED"),
+  new TitleListType("Basic two-factor authentication", "BASIC"),
+  new TitleListType("Secure two-factor authentication - by email", "SECURE"),
+  new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
+  authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   @ViewChild('userPermissions') userPermissions: PermissionManageComponent;
@@ -112,7 +118,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       ticketCreated: [''],
       myTicketUpdated: [''],
       ticketCloseNotifications: [''],
-      id: ['']
+      id: [''],
+      twoFactorAuthType: ['']
     });
     let changeUsersArray = this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.data.accountType !== "TECH") return;
@@ -225,6 +232,11 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         }
       );
   }
+  onAuthTypeChange(data) {
+    this.techUserForm.patchValue({
+      twoFactorAuthType: data
+    });
+  }
 
   /**
    * get tech users from usres.
@@ -262,7 +274,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
 
   getSecureText(twoFactorAuthType) {
-    if (twoFactorAuthType == "DISABLED") return "No Authentication";
+    if (twoFactorAuthType == "DISABLED") return "Password only";
     if (twoFactorAuthType == "BASIC") return "Basic";
     if (twoFactorAuthType == "SECURE") return "Secure by email";
     if (twoFactorAuthType == "GOOGLE_SECURE") return "Secure by one time password";
@@ -343,6 +355,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.edit = true;
     this.selectedTechUser = techUser;
     if (techUser) {
+      console.log("techUser", techUser);
+      this.authenticationTypesType = this.authenticationTypes.find(item => item.type == techUser.twoFactorAuthType);
       this.techUserForm.patchValue({
         firstName: techUser.firstName,
         lastName: techUser.lastName,
@@ -352,7 +366,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         ticketCreated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
         myTicketUpdated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
         ticketCloseNotifications: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
-        id: techUser.id
+        id: techUser.id,
+        twoFactorAuthType: techUser.twoFactorAuthType,
       });
     }
   }
@@ -525,7 +540,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         lastName: this.techUserForm.value.lastName,
         primaryEmail: this.techUserForm.value.primaryEmail,
         companyId: this.currentCompanyId,
-        subscription: {}
+        subscription: {},
+        twoFactorAuthType: this.techUserForm.value.twoFactorAuthType,
       };
       if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
       this.addBtn.setDisabled(true);
@@ -672,6 +688,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.selectedTechUser.lastName = this.techUserForm.value.lastName;
     this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
     this.selectedTechUser.techRole = this.techUserForm.value.techRole;
+    this.selectedTechUser.twoFactorAuthType = this.techUserForm.value.twoFactorAuthType;
     this.selectedTechUser.subscription = {};
     this.selectedTechUser.defaultSubscriptions = null;
     this.selectedTechUser.initials = [

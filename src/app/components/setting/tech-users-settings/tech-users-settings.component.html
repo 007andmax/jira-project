@@ -485,6 +485,19 @@
                 >
                 </app-drop-down>
             </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Set authentication type</label>
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [list]="authenticationTypes"
+                    [editItem]="authenticationTypesType"
+                    [field]="'title'"
+                    [sort]="false"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onAuthTypeChange($event.type)"
+                >
+                </app-drop-down>
+            </div>
             <div class="qt-input-line__email-notify-tech-users">
                 <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">Notify Tech User for</div>
                 <ul class="list-unstyled">
@@ -747,6 +760,19 @@
                     [sort]="false"
                     [isBlockClear]="true"
                     (onSelectedItem)="onChangeRole($event)"
+                >
+                </app-drop-down>
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Set authentication type</label>
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [list]="authenticationTypes"
+                    [editItem]="authenticationTypesType"
+                    [field]="'title'"
+                    [sort]="false"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onAuthTypeChange($event.type)"
                 >
                 </app-drop-down>
             </div>
