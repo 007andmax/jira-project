@@ -1,0 +1,42 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+@mixin input {
+  height: 40px;
+  width: 100%;
+  padding: 11px 14px;
+  background-color: $white;
+  border: 1px solid $gray-200;
+  box-shadow: inset 0 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 6px;
+  color: $gray-900;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+
+  &::placeholder {
+    color: $gray-400;
+  }
+  &:hover {
+    border-color: $gray-300;
+  }
+  &:focus {
+    outline: none;
+    border-color: $blue-light-600;
+  }
+}
+
+// Add style for pre in table
+@mixin input-pre {
+  font-family: "Inter", sans-serif;
+  margin: unset;
+  @include input;
+  padding: 10px 0;
+  height: auto;
+  border-color: transparent;
+  box-shadow: unset;
+
+  &:hover {
+    border-color: transparent;
+  }
+}

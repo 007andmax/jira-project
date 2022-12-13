@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/input";
 
 .contracts-page {
   .contracts-list-header,
@@ -153,7 +154,7 @@
       &__billable {
         border-top: 1px solid;
         border-bottom: 1px solid;
-        border-color: $gray-500--old;
+        border-color: $gray-200;
         min-width: 78px;
         display: flex;
         align-items: center;
@@ -385,12 +386,19 @@
 
         .date-picker {
           height: 100%;
-          input.dropdown-toggle {
-            height: 100%;
-            border-color: transparent;
-            font-size: 13px;
-            padding-top: 3px;
+          .icon__calendar {
+            display: none;
           }
+          input.dropdown-toggle  {
+            padding: 10px;
+            height: 100%;
+          }
+          //input.dropdown-toggle { // TODO check this style
+          //  height: 100%;
+          //  border-color: transparent;
+          //  font-size: 13px;
+          //  padding-top: 3px;
+          //}
         }
       }
 
@@ -409,6 +417,7 @@
       &__description {
         padding: 0 12px !important;
         input {
+          @include input;
           height: 100%;
         }
       }
@@ -418,7 +427,10 @@
         width: 223px;
         input {
           height: 100%;
-          border-color: transparent;
+          //border-color: transparent;
+        }
+        .app-drop-down__right-icon {
+          position: static;
         }
       }
       .--editable {
@@ -447,6 +459,10 @@
         width: 109px;
         padding: 0 12px !important;
         text-align: right !important;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        color: $gray-900;
         &.--editable {
           padding: 0 !important;
         }

@@ -448,9 +448,12 @@ app-invoices-item,app-payment-item {
         height: 32px;
       }
       td {
-        font-size: 12px;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        color: $gray-900;
         height: 40px;
-        padding: 10px 12px;
+        padding: 10px;
         vertical-align: middle;
       }
     }
@@ -493,6 +496,11 @@ app-invoices-item,app-payment-item {
     &__col-amount {
       text-align: right;
       width: 89px;
+
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 400;
+      color: $gray-900;
     }
 
     &__col-price {

@@ -1,17 +1,20 @@
 .with-dollar,.with-percent {
     position: relative;
     &:before {
-        left: 10px;
-        top: calc(50% - 8px);
+        left: 9px;
+        top: calc(50% - 9px);
+        font-size: 14px;
+        font-weight: 400;
     }
 }
 pre {
-    margin: unset;
-    font-size: unset;
-    line-height: unset;
-    color: unset;
-    background-color: unset;
-    border: unset;
-    border-radius: unset;
-    font-family: unset;
+  margin: unset;
+  font-size: unset;
+  line-height: unset;
+  color: unset;
+  background-color: unset;
+  border: unset;
+  border-radius: unset;
+  font-family: unset;
+  padding: 10px 0;
 }
