@@ -320,11 +320,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   resendWelcomeEmail(userEmail: string) {
     this.techUsersService
       .verifyUserEmail(userEmail)
-      .pipe(
-        map(res => {
-          this.toastr.success(`Resend Welcome Email Sent Successfully`);
-        })
-      )
       .subscribe();
   }
 
@@ -364,10 +359,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         lastName: techUser.lastName,
         primaryEmail: techUser.primaryEmail,
         techRole: techUser.techRole,
-        newDevice: techUser.userEmailNotifications === undefined || techUser.userEmailNotifications.newDevice === undefined ? [''] : techUser.userEmailNotifications.newDevice,
-        ticketCreated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
-        myTicketUpdated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
-        ticketCloseNotifications: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
+        newDevice: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.newDevice,
+        ticketCreated: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
+        myTicketUpdated: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
+        ticketCloseNotifications: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
         id: techUser.id,
         twoFactorAuthType: techUser.twoFactorAuthType,
       });
@@ -693,6 +688,12 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.selectedTechUser.twoFactorAuthType = this.techUserForm.value.twoFactorAuthType;
     this.selectedTechUser.subscription = {};
     this.selectedTechUser.defaultSubscriptions = null;
+    this.selectedTechUser.userEmailNotifications = {
+      newDevice: this.techUserForm.value.newDevice,
+      ticketCreated: this.techUserForm.value.ticketCreated,
+      myTicketUpdated: this.techUserForm.value.myTicketUpdated,
+      ticketCloseNotifications: this.techUserForm.value.ticketCloseNotifications,
+    }
     this.selectedTechUser.initials = [
       this.techUserForm.value.firstName,
       this.techUserForm.value.lastName

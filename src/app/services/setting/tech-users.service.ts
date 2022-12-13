@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { ToastrService } from "ngx-toastr";
+import { AppStateService } from "src/app/states/app/app-state.service";
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -8,7 +11,9 @@ import { environment } from "src/environments/environment";
 export class TechUsersService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   getUsers(isArchived) {
     // Tech users
@@ -82,7 +87,12 @@ export class TechUsersService {
     // {"email":"test@test.com"}
     return this.http.post(`${this.apiUrl}resend/verifyUserEmail`, {
       email: userEmail
-    });
+    }).pipe(
+      tap(data => {
+        this.toastrService.success("Resend Welcome Email Sent Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
 
