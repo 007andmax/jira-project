@@ -60,7 +60,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   new TitleListType("Basic two-factor authentication", "BASIC"),
   new TitleListType("Secure two-factor authentication - by email", "SECURE"),
   new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
-  authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
+  authenticationTypesType = new TitleListType("Password only", "DISABLED");
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   @ViewChild('userPermissions') userPermissions: PermissionManageComponent;
@@ -233,6 +233,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       );
   }
   onAuthTypeChange(data) {
+    this.authenticationTypesType = this.authenticationTypes.find(item => item.type == data);
     this.techUserForm.patchValue({
       twoFactorAuthType: data
     });
@@ -331,6 +332,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
    * opened creat tech user Model
    */
   creatTechUsr() {
+    this.authenticationTypesType = new TitleListType("Password only", "DISABLED");
     this.fileAvatar = null;
     this.selectedTechUser = null;
     this.create = !this.create;
