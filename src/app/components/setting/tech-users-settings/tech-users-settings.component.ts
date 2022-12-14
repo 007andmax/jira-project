@@ -537,7 +537,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         lastName: this.techUserForm.value.lastName,
         primaryEmail: this.techUserForm.value.primaryEmail,
         companyId: this.currentCompanyId,
-        subscription: {},
+
         twoFactorAuthType: this.techUserForm.value.twoFactorAuthType,
       };
       if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
@@ -681,39 +681,58 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     if (this.techUserForm.invalid) {
       return;
     }
-    this.selectedTechUser.firstName = this.techUserForm.value.firstName;
-    this.selectedTechUser.lastName = this.techUserForm.value.lastName;
-    this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
-    this.selectedTechUser.techRole = this.techUserForm.value.techRole;
-    this.selectedTechUser.twoFactorAuthType = this.techUserForm.value.twoFactorAuthType;
-    this.selectedTechUser.subscription = {};
-    this.selectedTechUser.defaultSubscriptions = null;
-    this.selectedTechUser.userEmailNotifications = {
-      newDevice: this.techUserForm.value.newDevice,
-      ticketCreated: this.techUserForm.value.ticketCreated,
-      myTicketUpdated: this.techUserForm.value.myTicketUpdated,
-      ticketCloseNotifications: this.techUserForm.value.ticketCloseNotifications,
-    }
-    this.selectedTechUser.initials = [
-      this.techUserForm.value.firstName,
-      this.techUserForm.value.lastName
-    ]
-      .map(function (s) {
-        return s.charAt(0).toUpperCase();
-      })
-      .join('');
+    let dataFotUpdate =
+    {
 
-    this.selectedTechUser.companyId = this.selectedTechUser.company
-      ? this.selectedTechUser.company.id
-      : null;
+      "phoneNumbers": this.selectedTechUser.phoneNumbers,
+      "id": this.selectedTechUser.id,
+      "avatar": this.selectedTechUser.avatar,
+      // "jobTitleId": this.selectedTechUser.jobTitleId,
+      "firstName": this.techUserForm.value.firstName,
+      "lastName": this.techUserForm.value.lastName,
+      "jobDescription": this.selectedTechUser.jobDescription,
+      "priority": this.selectedTechUser.priority,
+      "primaryEmail": this.techUserForm.value.primaryEmail,
+      "secondaryEmail": this.selectedTechUser.secondaryEmail,
+      "status": this.selectedTechUser.status,
+      "techRole": this.techUserForm.value.techRole,
+      "userEnabled": this.selectedTechUser.userEnabled,
+      //  "jobTypeId": this.selectedTechUser.jobTypeId,
+      "userIndustryId": this.selectedTechUser.userIndustryId,
+      // "defaultSubscriptions": this.selectedTechUser.defaultSubscriptions,
+      //"customSubscriptions": this.selectedTechUser.customSubscriptions,
+      "twoFactorAuthType": this.techUserForm.value.twoFactorAuthType,
+      "companyId": this.selectedTechUser.companyId,
+    }
+
+
+    /* this.selectedTechUser.firstName = this.techUserForm.value.firstName;
+     this.selectedTechUser.lastName = this.techUserForm.value.lastName;
+     this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
+     this.selectedTechUser.techRole = this.techUserForm.value.techRole;
+     this.selectedTechUser.twoFactorAuthType = this.techUserForm.value.twoFactorAuthType;
+     this.selectedTechUser.defaultSubscriptions = null;
+     this.selectedTechUser.initials = [
+       this.techUserForm.value.firstName,
+       this.techUserForm.value.lastName
+     ]
+       .map(function (s) {
+         return s.charAt(0).toUpperCase();
+       })
+       .join('');*/
+
+    /* this.selectedTechUser.companyId = this.selectedTechUser.company
+       ? this.selectedTechUser.company.id
+       : null;*/
 
     this.editBtn.setDisabled(true);
     this.techUsersService
-      .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
+      .updateTechUsers(this.selectedTechUser.id, dataFotUpdate)
       .subscribe(
         res => {
           this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
+          this.saveUsersEmailNotifications(this.selectedTechUser.id);
           this.techUserForm.reset();
           this.submitted = false;
           this.selectedTechUser = null;
