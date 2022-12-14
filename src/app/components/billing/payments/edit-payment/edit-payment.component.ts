@@ -20,6 +20,7 @@ export class EditPaymentComponent implements OnInit {
   @Output() onClose = new EventEmitter<any>();
   validate: PaymentInvoice = new PaymentInvoice();
   amountReceived: number = 0;
+  amountReceived_str: string = "0.00";
   paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
@@ -43,6 +44,7 @@ export class EditPaymentComponent implements OnInit {
     this.amountReceived = this.editPayment.paymentData.reduce((a, b) => {
       return parseFloat((a + b.paidAmount).toFixed(2))
     }, 0);;
+    this.amountReceived_str = parseFloat(this.amountReceived.toString()).toFixed(2);
     this.sub.add(getOnCompanies);
   }
   private getClientsList(data) {
@@ -55,6 +57,7 @@ export class EditPaymentComponent implements OnInit {
   }
   onChangeAmountReceived(event) {
     this.amountReceived = Number(event.target.value);
+    this.amountReceived_str = this.amountReceived.toFixed(2);
     this.amountReceived = parseFloat((this.amountReceived).toFixed(2));
     this.isChangeAmountReceived = (this.amountReceived > 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceivedEditAside(this.amountReceived, this.editPayment.paymentData);
@@ -72,6 +75,7 @@ export class EditPaymentComponent implements OnInit {
       item.paidAmount = 0;
     })
     this.amountReceived = 0;
+    this.amountReceived_str = "0.00";
   }
   getSubtotal() {
     let subTotal = 0;
@@ -81,8 +85,9 @@ export class EditPaymentComponent implements OnInit {
     return subTotal;
   }
   public onChangePayment(val, invoice) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     invoice.paidAmount = value;
+    invoice.paidAmount_str = value.toFixed(2);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceivedEditAside(this.amountReceived, this.editPayment.paymentData);
   }
   getDate(date) {

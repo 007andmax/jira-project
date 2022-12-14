@@ -7,60 +7,72 @@
             <div class="ticket-updates__ticket-header-total">Total</div>
         </div>
         <div
-            class="d-f ai-c ticket-updates__ticket-body"
+            class="ticket-updates__ticket-body"
             [ngClass]="{'--done':editProduct.completed}"
         >
-            <div class="ticket-updates__done-status icon__task-pending"></div>
-            <app-product-list
-                [type]="'TICKET'"
-                [editItem]="editProduct.item"
-                class="product-item__prodect-list"
-                (selectedProductItem)="onChangeProduct($event)"
-            ></app-product-list>
-            <div style="position: relative;">
+            <div class="d-f ai-c ">
+                <div class="ticket-updates__done-status icon__task-pending"></div>
+                <app-product-list
+                    [type]="'TICKET'"
+                    [editItem]="editProduct.item"
+                    class="product-item__prodect-list"
+                    (selectedProductItem)="onChangeProduct($event)"
+                ></app-product-list>
+                <div style="position: relative;">
+                    <input
+                        class="input-default input-price"
+                        [ngClass]="{'--input-error':!valdiateSaleCost}"
+                        number
+                        [money]="true"
+                        [ngModel]="editProduct.item.sale_str"
+                        (change)="onChangeSale($event)"
+                        appToFixed
+                        (blur)="onValidateSaleCost()"
+                        [disabled]="!getPermissions('MANAGE_PRODUCTS')"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!valdiateSaleCost"
+                    >
+                        Product price can not be lower than cost
+                    </mat-error>
+                </div>
                 <input
-                    class="input-default input-price"
-                    [ngClass]="{'--input-error':!valdiateSaleCost}"
-                    number
-                    [money]="true"
-                    [ngModel]="editProduct.item.sale"
-                    appToFixed
-                    (blur)="onValidateSaleCost()"
-                    (ngModelChange)="onChangeSale($event)"
+                    class="input-default input-qty"
+                    [(ngModel)]="editProduct.quantity"
+                >
+                <div
+                    class="ticket-updates__ticket-total"
+                    [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"
+                ></div>
+                <div class="ticket-updates__date-icon icon__assign-date"></div>
+                <div
+                    class="ticket-updates__photo-people"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(editProduct.user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(editProduct.user)}"
+                ></div>
+            </div>
+            <div
+                style="position: relative;"
+                class="qt-mt-8 qt-ml-30"
+            >
+                <input
+                    class="input-default"
+                    [(ngModel)]="editProduct.serialNumber"
                     [disabled]="!getPermissions('MANAGE_PRODUCTS')"
                 >
-                <mat-error
-                    class="qt-tooltip-error"
-                    *ngIf="!valdiateSaleCost"
-                >
-                    Product price can not be lower than cost
-                </mat-error>
             </div>
-            <input
-                class="input-default input-qty"
-                [(ngModel)]="editProduct.quantity"
-            >
-            <div
-                class="ticket-updates__ticket-total"
-                [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"
-            ></div>
-            <div class="ticket-updates__date-icon icon__assign-date"></div>
-            <div
-                class="ticket-updates__photo-people"
-                [textContent]="ticketsListService.getAssignedUserNameForAvatar(editProduct.user)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(editProduct.user)}"
-            ></div>
+            <span
+                class="tag__modern ticket-updates__service-tag-completed"
+                *ngIf="editProduct.completed"
+                [textContent]="'Completed on ' + getDate(editProduct.date)"
+            ></span>
+            <span
+                class="tag__modern ticket-updates__service-tag-completed"
+                *ngIf="!editProduct.completed && editProduct.date"
+                [textContent]="'Due date - ' + getDate(editProduct.date)"
+            ></span>
         </div>
-        <span
-            class="tag__modern ticket-updates__service-tag-completed"
-            *ngIf="editProduct.completed"
-            [textContent]="'Completed on ' + getDate(editProduct.date)"
-        ></span>
-        <span
-            class="tag__modern ticket-updates__service-tag-completed"
-            *ngIf="!editProduct.completed && editProduct.date"
-            [textContent]="'Due date - ' + getDate(editProduct.date)"
-        ></span>
     </div>
     <div class="right-side-icons">
         <i

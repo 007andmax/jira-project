@@ -48,6 +48,12 @@
                 (usersChange)="onChangeUser($event)"
             ></app-tech-users>
         </div>
+        <div
+            class="tag__modern ticket-updates__serial-number qt-mt-5"
+            *ngIf="product.serialNumber"
+        >
+            <pre [textContent]="'Serial Number - ' + product.serialNumber"></pre>
+        </div>
         <span
             class="tag__modern ticket-updates__service-tag-completed"
             *ngIf="product.completed"

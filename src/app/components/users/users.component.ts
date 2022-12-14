@@ -15,7 +15,7 @@ import { MODE_MARKETING_USERS_LIST, MODE_USERS_LIST, TYPE_LIST_ALL_USERS } from 
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { UserCustomSubscription } from './class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UserDefaultSubscription } from './class/user-default-subscription';
@@ -186,15 +186,11 @@ export class UsersComponent implements OnInit {
     this.setDefaultScoll();
   }
   private onArchiveUsers(ids) {
-
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
-      /* if (!this.showArchivedUsers && this.filter.getClientType()) {
-         let index = this.users.findIndex(item => item.id === id);
-         if (index > -1) this.users.splice(index, 1);
-       }*/
-
-    })
-    this.userListService.addSubscription(archiveUser);
+    forkJoin(
+      ids.map(item => this.usersService.onArchiveUsers(item))
+    )
+      .subscribe(res => {
+      });
   }
   setIdDetailUser(data) {
     this.idDetailUser = data;
@@ -255,9 +251,7 @@ export class UsersComponent implements OnInit {
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
   }
   private onDeArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let Dearchiveusers = this.usersService.onDeArchiveUsers(ids).subscribe(data => {
+    let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
       if (this.showArchivedUsers) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
@@ -267,9 +261,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+    let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
       if (!this.showArchivedUsers && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

@@ -36,8 +36,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editSupplier: Company = null;
-  cost: string;
-  sale: string;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('taxesDp') taxesDp: TaxesComponent;
   @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
@@ -46,6 +44,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
+  selectedItem: any;
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -94,13 +93,14 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
-      this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
-      this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
       this.inventory.markup = this.getMarkups();
       //   this.description.update();
       this.cd.detectChanges();
     })
     this.sub.add(getInventoryFromEdit);
+  }
+  formatterSelectedItemText() {
+    return this.selectedItem ? `${this.selectedItem.glNumber} - ${this.selectedItem.description}` : "";
   }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {
@@ -157,13 +157,15 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.description = event.target.value;
   }
   onChangeCost(val) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.inventory.cost = value;
+    this.inventory.cost_str = value.toFixed(2);
     this.inventory.markup = this.getMarkups();
   }
   changeMarkup(val) {
     let value = Number(val);
     this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
+    this.inventory.sale_str = this.inventory.sale.toFixed(2);
     this.inventory.markup = this.roundingMarkup(value);
   }
   formatterGLNumber = (result: string) => {
@@ -181,8 +183,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     return 0;
   }
   onChangeSale(val) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     this.inventory.sale = value;
+    this.inventory.sale_str = value.toFixed(2);
     this.inventory.markup = this.getMarkups();
   }
   public onPastDescription(value) {

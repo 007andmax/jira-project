@@ -112,16 +112,19 @@ export class UsersService {
         return data;
       }));
   }
-  public onArchiveUsers(ids) {
-    return this.http.post(this.apiUrl + `users/archive`, { ids: ids }).pipe(
+  public onArchiveUsers(archivedUserId) {
+    return this.http.post(this.apiUrl + `users/archive`, {
+      "archivedUserId": archivedUserId,
+
+    }).pipe(
       tap(data => {
         this.toastrService.success("The user has been successfully archived");
         this.appStateService.changeDetectorRef();
         return data;
       }));
   }
-  public onDeArchiveUsers(ids) {
-    return this.http.post(this.apiUrl + `users/dearchive`, { ids: ids });
+  public onDeArchiveUsers(archivedUserId) {
+    return this.http.post(this.apiUrl + `users/dearchive`, { "archivedUserId": archivedUserId });
   }
 
 }

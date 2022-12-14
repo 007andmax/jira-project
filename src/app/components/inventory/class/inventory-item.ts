@@ -5,7 +5,9 @@ import { reqInventoryEdit } from 'src/app/interfaces/inventory/req-inventory-edi
 export class InventoryItem {
     versionedId: import("../../../interfaces/versioned-id").VersionedId;
     cost: number = 0;
+    cost_str: string = "0.00";
     sale: number = 0;
+    sale_str: string = "0.00";
     ilc: string;
     manufacture: string;
     glNumber: GlNumber;
@@ -31,6 +33,8 @@ export class InventoryItem {
             this.billable = data.billable;
             this.taxIds = data.taxIds;
             this.active = data.active;
+            if (this.cost) this.cost_str = this.cost.toFixed(2);
+            if (this.sale) this.sale_str = this.sale.toFixed(2);
         }
     }
     public setIsEdit(data) {

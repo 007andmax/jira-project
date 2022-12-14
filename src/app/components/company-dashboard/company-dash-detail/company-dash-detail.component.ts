@@ -64,6 +64,7 @@ export class CompanyDashDetailComponent implements OnInit {
   workingDays = [];
   closingSoon: boolean = false;
   tagSaved: boolean = false;
+  showWorkingHours: boolean = false;
   sub: Subscription = new Subscription();
   tags = [];
   tab: string = "dashboard";
@@ -387,12 +388,6 @@ export class CompanyDashDetailComponent implements OnInit {
     let day = moment(new Date()).format('dddd');
     this.workingDays = data.workingDays;
     if (this.workingDays.length !== 0) {
-      let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
-      if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
-        this.companyOpen = 'Opens';
-      } else {
-        this.companyOpen = 'Close';
-      }
       this.workingDays.forEach((element, index) => {
         element.checked = false;
         let e1: any, s1: any;
@@ -409,6 +404,12 @@ export class CompanyDashDetailComponent implements OnInit {
           }
         }
       });
+      let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
+      if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
+        this.companyOpen = (arr[0].timing) ? `Opens ${arr[0].timing}` : 'Opens';
+      } else {
+        this.companyOpen = `Close`;
+      }
     }
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
@@ -726,7 +727,7 @@ export class CompanyDashDetailComponent implements OnInit {
 
   filterTime(time) {
     let data = this.workingHoursList.filter(val => val.value == time);
-    return data[0].name;
+    return (data[0]) ? data[0].name : '';
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

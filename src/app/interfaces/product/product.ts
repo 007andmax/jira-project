@@ -9,7 +9,9 @@ export interface Product {
     deletedAt: number;
     company: any;
     cost: number;
+    cost_str: string;
     sale: number;
+    sale_str: string;
     category: Category;
     ilc: string;
     glNumber: number;

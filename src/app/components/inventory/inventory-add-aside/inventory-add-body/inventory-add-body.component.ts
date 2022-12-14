@@ -38,7 +38,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
   suppliers: Array<Company> = [];
-
+  selectedItem: any;
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
 
@@ -105,6 +105,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       this.inventory.category = data;
       this.validate.resetCategory();
     })
+  }
+  formatterSelectedItemText() {
+    return this.selectedItem ? `${this.selectedItem.glNumber} - ${this.selectedItem.description}` : "";
   }
   onSelectCategory(data) {
     if (data) {
@@ -206,7 +209,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       this.close();
     })
   }
-  formatterGLNumber = (result: string) => {
+  formatterGLNumber = (result) => {
     return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}`;
   };

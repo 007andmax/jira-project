@@ -233,9 +233,7 @@ export class CompanyUserComponent implements OnInit {
     }, 3000);
   }
   private onDeArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let Dearchiveusers = this.usersService.onDeArchiveUsers(ids).subscribe(data => {
+    let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
       if (this.showArchivedUsers) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
@@ -245,9 +243,7 @@ export class CompanyUserComponent implements OnInit {
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+    let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
       if (!this.showArchivedUsers && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

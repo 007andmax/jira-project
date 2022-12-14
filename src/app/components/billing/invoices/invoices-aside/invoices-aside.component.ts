@@ -69,7 +69,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   onChangeAmountReceived(event) {
     this.amountReceived = Number(event.target.value);
-    this.amountReceived_str = event.target.value.toFixed(2);
+    this.amountReceived_str = this.amountReceived.toFixed(2);
     this.amountReceived = parseFloat((this.amountReceived).toFixed(2));
     this.isChangeAmountReceived = (this.amountReceived > 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
@@ -114,7 +114,7 @@ export class InvoicesAsideComponent implements OnInit {
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   create() {
-    if (!this.validate.isValidate(this.amountReceived, this.invoices)) return;
+    if (!this.selectedCompany || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices)) return;
     this.invoices.forEach(item => {
       if (item.selected) {
         this.payment.addInvoiceId(item.id);

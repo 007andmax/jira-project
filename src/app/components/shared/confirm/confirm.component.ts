@@ -51,6 +51,7 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'DELETE_MANAGE_TAG'
       && this.action !== 'CHANGE_COMMISSION_PRODUCT'
       && this.action !== 'CHANGE_COMMISSION_SERVICE'
+      && this.action !== 'RESTORE_USER'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }

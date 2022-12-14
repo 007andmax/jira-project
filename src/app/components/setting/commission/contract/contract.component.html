@@ -101,6 +101,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Remove"
+                            *ngIf="agreementsCommissions && agreementsCommissions.blockTimeContractCommission"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="
                   confirmDelete(
@@ -186,6 +187,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Remove"
+                            *ngIf="agreementsCommissions && agreementsCommissions.blockTimeContractCommissionExceeding"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="
                 confirmDelete(
@@ -289,6 +291,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Remove"
+                            *ngIf="agreementsCommissions && agreementsCommissions.userOrDeviceContractCommission"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="
                 confirmDelete(
@@ -372,6 +375,7 @@
                         <div
                             placement="top"
                             ngbTooltip="Remove"
+                            *ngIf="agreementsCommissions && agreementsCommissions.userOrDeviceContractCommissionExceeding"
                             class="icon__remove qt-sz-20 qt-bg-contain pointer"
                             (click)="
                 confirmDelete(

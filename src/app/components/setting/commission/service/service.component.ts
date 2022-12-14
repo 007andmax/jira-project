@@ -164,7 +164,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.toastrService.success('Rate Changed Successfully.');
             this.service.commissionRate =
               res && res.commissionRate
                 ? res.commissionRate.toFixed(2)
@@ -193,9 +192,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
       const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;
       this.commissionService.setServiceRate(id, '0', false).subscribe(
         res => {
-          this.toastrService.success('Rate Changed Successfully.');
           this.service.commissionRate = null;
-
           this.isSpecialService
             ? (this.selectedSpecIdx = -1)
             : (this.selectedIdx = -1);

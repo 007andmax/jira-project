@@ -145,6 +145,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     return total;
   }
+  getTotalBalanceDue() {
+    let total = 0;
+    this.invoices.forEach(item => {
+      total += ((item.totalSum || item.sum) - item.paidSum);
+    })
+    return total;
+  }
   onCreatePayment() {
     this.selectedInvoices = [];
     if (this.selectedCompanyId) {

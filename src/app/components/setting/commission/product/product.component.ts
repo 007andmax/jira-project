@@ -93,7 +93,6 @@ export class ProductComponent implements OnInit, OnDestroy {
         .setCategoryRate(this.category.id, '0', false)
         .subscribe(
           res => {
-            this.toastrService.success('Removed Successfully')
             this.selectedIdx = -1;
             this.category.commissionRate = null;
           },
@@ -135,7 +134,6 @@ export class ProductComponent implements OnInit, OnDestroy {
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.toastrService.success(`Commission Rate Changed Successfully`);
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;

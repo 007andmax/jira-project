@@ -52,6 +52,7 @@ export class DefaultServicesEditComponent implements OnInit {
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
+    this.service.rate_str = Number(event.target.value).toFixed(2);
     if (this.service.rate >= 0) this.validate.resetRate();
   }
   onTaxesChange(data) {
