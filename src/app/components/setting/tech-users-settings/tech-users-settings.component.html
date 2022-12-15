@@ -419,12 +419,12 @@
         </div>
         <form [formGroup]="techUserForm">
             <div class="qt-input-block qt-input-line">
-                <label class="qt-input-block__label">Full Name</label>
+                <label class="qt-input-block__label">First Name</label>
                 <input
                     type="text"
                     class="qt-input-block__input"
                     formControlName="firstName"
-                    placeholder="Enter Full Name"
+                    placeholder="Enter First Name"
                 >
                 <div
                     *ngIf="submitted && f.firstName.errors"
@@ -571,7 +571,7 @@
         <div class="qt-df qt-w100">
             <button
                 class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                (click)="create = !create;onCreateSubmit()"
+                (click)="create = !create"
             >
                 Cancel
             </button>
