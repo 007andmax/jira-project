@@ -127,6 +127,11 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         const Index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
         if (Index === -1) this.techUsers.unshift(new User(newChange.data));
+
+      }
+      if (newChange.action === 'USER_ARCHIVED') {
+        const index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
+        if (index > -1) this.techUsers.splice(index, 1);
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
@@ -138,9 +143,16 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     })
     this.sub.add(changeUsersArray);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === RESTORE_USER) {
           this.restoreUser();
+        }
+        if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
+          if (this.techUserForm) this.techUserForm.reset();
+          this.submitted = false;
+          this.selectedTechUser = null;
+          this.edit = false;
         }
       }
     })
@@ -702,7 +714,9 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       // "defaultSubscriptions": this.selectedTechUser.defaultSubscriptions,
       //"customSubscriptions": this.selectedTechUser.customSubscriptions,
       "twoFactorAuthType": this.techUserForm.value.twoFactorAuthType,
-      "companyId": this.selectedTechUser.companyId,
+      "companyId": this.selectedTechUser.company
+        ? this.selectedTechUser.company.id
+        : null
     }
 
 
