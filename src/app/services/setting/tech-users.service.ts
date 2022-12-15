@@ -68,12 +68,22 @@ export class TechUsersService {
     return this.http.post(`${this.apiUrl}users/archive`, {
       "archivedUserId": archivedUserId,
       "newAssignedUserId": newAssignedUserId
-    });
+    }).pipe(
+      tap(data => {
+        this.toastrService.success('The tech user has been successfully archived');
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   restoreUser(userId) {
     // {"userId":"d3937811-0f88-4d0c-a0d2-dc1494affb7d"}
-    return this.http.post(`${this.apiUrl}users/restore`, { userId });
+    return this.http.post(`${this.apiUrl}users/restore`, { userId }).pipe(
+      tap(data => {
+        this.toastrService.success('User has been restore successfully.');
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   changePasswordRequest(userId: string) {

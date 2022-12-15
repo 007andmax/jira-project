@@ -125,8 +125,15 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       if (newChange.data.accountType !== "TECH") return;
       if ((newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED')) {
         const Index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
         if (Index === -1) this.techUsers.unshift(new User(newChange.data));
+        if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
+        if (newChange.action === 'USER_SAVED' && !newChange.data.deletedAt) {
+          const indexArchived = this.userlist.findIndex(item => item.id == newChange.data.id);
+          if (indexArchived > -1 && this.userlist[indexArchived].deletedAt) this.userlist.splice(indexArchived, 1);
+        }
+
+        /*  const indexArchived = this.userlist.findIndex(item => item.id == newChange.data.id);
+          if (indexArchived > -1) this.userlist.splice(indexArchived, 1);*/
 
       }
       if (newChange.action === 'USER_ARCHIVED') {
@@ -232,17 +239,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
   restoreUser() {
     this.techUsersService.restoreUser(this.userId)
-      .pipe()
       .subscribe(
         response => {
           //  this.getUsers();
-          this.toastr.success('User has been restore successfully.');
-        },
-        error => {
-          this.toastr.error('Something wen to wrong. Please try again later');
-          // this.getUsers();
-        }
-      );
+        });
   }
   onAuthTypeChange(data) {
     this.authenticationTypesType = this.authenticationTypes.find(item => item.type == data);
