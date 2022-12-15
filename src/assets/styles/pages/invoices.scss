@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/input";
 
 .invoices-page {
   .pengind-loading {
@@ -190,13 +191,11 @@
       color: $primary-2;
 
       .payment-input {
-        width: 100%;
-        // border: none;
-        border-radius: 0;
-        border-width: 1px;
-        padding: 0 12px;
+        //border-radius: 0; // TODO check this style
+        //border-width: 1px;
+        //padding: 0 12px;
+        @include input;
         height: 100%;
-        // box-shadow: inset 0px 0px 4px 0px #dfe3e9;
       }
 
       th {
@@ -240,12 +239,18 @@
       td {
         border: solid 1px $gray-400--old;
         height: 36px;
-        font-size: 12px;
         padding: 0 12px;
         border-right: none;
         border-bottom: none;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        color: $gray-900;
         &:last-child {
           border-right: solid 1px $gray-400--old;
+        }
+        &.unpaid-table__payment {
+          padding: 0;
         }
       }
 

@@ -200,19 +200,17 @@
               <span></span>
             </label>
           </td>
-          <td class="track-and-bill-table__tax --editable">
-            <input
-              class="qt-input-prepend"
+          <td class="track-and-bill-table__tax">
+            <span
               [hidden]="!service.billable"
-              [value]="getSelectedTaxes(service.taxIds)"
-              readonly
-            >
+              [textContent]="getSelectedTaxes(service.taxIds)">
+            </span>
           </td>
-          <td class="track-and-bill-table__hourly-rate --editable">
-                                <span
-                                  *ngIf="service.billable"
-                                  [textContent]="parseWithFixed(service.rate)"
-                                ></span>
+          <td class="track-and-bill-table__hourly-rate">
+              <span
+                *ngIf="service.billable"
+                [textContent]="parseWithFixed(service.rate)"
+              ></span>
           </td>
           <td></td>
         </tr>

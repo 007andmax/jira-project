@@ -13,6 +13,7 @@
 .disabled {
     background-color: $gray-400--old;
     cursor: default !important;
+    border-radius: 6px;
 }
 .device-user {
     outline: none;
