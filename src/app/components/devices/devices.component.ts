@@ -213,15 +213,16 @@ export class DevicesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.companiesState.onInit();
-    this.devicesStateService.onInit();
+    // this.companiesState.onInit();
+    //this.devicesStateService.onInit();
     this.getTempData();
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.companies = this.getClientsList(data);
-    });
+      this.getClientsList(data);
+    })
     this.sub.add(getOnCompanies);
     this.onPowerShellCommand();
 
@@ -236,11 +237,14 @@ export class DevicesComponent implements OnInit {
       //  this.getModels(data.id);
     });
     this.sub.add(onCurrentCompany);
-    this.agentService.onSetAccessToken.subscribe(data => {
-      if (this.currentCompany) this.getManufacturers(this.techCompnayGuid);
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      if (this.currentCompany) this.getManufacturers(data.id);
       if (this.currentCompany) this.getModels(data.id);
+      if (this.currentCompany) this.getSoftwarItem(data.id);
+      if (this.currentCompany) this.getOperatingSystemVersion(data.id);
+      if (this.currentCompany) this.getOperatingSystemType(data.id);
     })
-
+    this.sub.add(onSetAccessToken);
     if (!this.searchSubscription) {
       this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
         this.selectedTag = JSON.parse(data.Json) || [];
@@ -294,12 +298,13 @@ export class DevicesComponent implements OnInit {
       req.TechCompanyGuid = this.techCompnayGuid;
       req.Criteria = [];
       this.getAssets();
+      console.log("load");
       this.HardwareTypeList(this.techCompnayGuid);
       if (this.agentService.hasAccessToken()) this.getManufacturers(this.techCompnayGuid);
       if (this.agentService.hasAccessToken()) this.getModels(this.techCompnayGuid);
-      this.getSoftwarItem(this.techCompnayGuid);
-      this.getOperatingSystemVersion(this.techCompnayGuid);
-      this.getOperatingSystemType(this.techCompnayGuid);
+      if (this.agentService.hasAccessToken()) this.getSoftwarItem(this.techCompnayGuid);
+      if (this.agentService.hasAccessToken()) this.getOperatingSystemVersion(this.techCompnayGuid);
+      if (this.agentService.hasAccessToken()) this.getOperatingSystemType(this.techCompnayGuid);
     }
     else {
       this.setPreviewDataDevice();
@@ -358,6 +363,7 @@ export class DevicesComponent implements OnInit {
       this.operatingSystem = [];
       this.assetList = resp;
       this.getDevices(resp);
+      console.log("searchDeviceWithTag");
       this.HardwareTypeList(this.techCompnayGuid);
 
       this.assetList.forEach((element, index) => {
@@ -1782,7 +1788,7 @@ export class DevicesComponent implements OnInit {
 
     this.agentService.getAssetByAdvanceSearch(data).subscribe(
       (result) => {
-
+        console.log("getAssetByAdvanceSearch");
         if (result && result.length > 0) {
           this.assetList = result;
           this.HardwareTypeList(this.techCompnayGuid);
@@ -1808,12 +1814,6 @@ export class DevicesComponent implements OnInit {
 
 
   getSoftwarItem(TechCompanyGuid: any) {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getSoftwarItem(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService
       .getSoftwareListByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
@@ -1822,12 +1822,6 @@ export class DevicesComponent implements OnInit {
   }
 
   getOperatingSystemVersion(TechCompanyGuid: any) {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getOperatingSystemVersion(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService
       .getOperationgSystemGetVersionByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
@@ -1836,12 +1830,6 @@ export class DevicesComponent implements OnInit {
   }
 
   getOperatingSystemType(TechCompanyGuid: any) {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getOperatingSystemType(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService
       .getOperationgSystemGetTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
