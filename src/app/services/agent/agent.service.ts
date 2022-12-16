@@ -1,6 +1,6 @@
 import { WebsocketService } from "src/app/services/websocket/websocket.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import * as CryptoJS from "crypto-js";
@@ -16,6 +16,7 @@ export class AgentService {
   key: string = "DD2B2B8B6EAE91C7";
   INITIALIZATION_VECTOR: string = "0000000000000000";
   AccessToken: string = "";
+  onSetAccessToken: EventEmitter<any> = new EventEmitter();
   /**
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
@@ -33,16 +34,13 @@ export class AgentService {
     return this.AccessToken == "" ? false : true;
   }
 
-  ensureAccessToken(callback = null) {
+  ensureAccessToken() {
     this.getAgentToken(
       "QuickTech",
       "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
     )
       .subscribe((data) => {
         this.setAccessToken(data.AccessToken);
-        if (callback) {
-          callback();
-        }
       });
   }
 
@@ -86,6 +84,7 @@ export class AgentService {
 
   public setAccessToken(data) {
     this.AccessToken = data;
+    this.onSetAccessToken.emit(data);
   }
 
   public autoComplete(data) {

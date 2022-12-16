@@ -194,7 +194,7 @@ export class DevicesComponent implements OnInit {
   deviceMacAddress: string;
   deviceRemotePort: string;
   deviceSuccess: boolean;
-
+  sub: Subscription = new Subscription();
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
@@ -219,10 +219,10 @@ export class DevicesComponent implements OnInit {
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
-    this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });
-
+    this.sub.add(getOnCompanies);
     this.onPowerShellCommand();
 
     this.company = this.companiesStateService.getCurrentCompany();
@@ -230,11 +230,16 @@ export class DevicesComponent implements OnInit {
     if (this.company) {
       this.load(this.company);
     }
-    this.companiesStateService.onCurrentCompany.subscribe(data => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.load(data);
-      this.getManufacturers(data.id);
-      this.getModels(data.id);
+      // this.getManufacturers(data.id);
+      //  this.getModels(data.id);
     });
+    this.sub.add(onCurrentCompany);
+    this.agentService.onSetAccessToken.subscribe(data => {
+      if (this.currentCompany) this.getManufacturers(this.techCompnayGuid);
+      if (this.currentCompany) this.getModels(data.id);
+    })
 
     if (!this.searchSubscription) {
       this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
@@ -257,16 +262,18 @@ export class DevicesComponent implements OnInit {
       })
     }
 
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+    let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
         this.onCurrentConfig(resp)
       }
     });
+    this.sub.add(onCurrentConfig);
 
-    this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
+    let onInstallWindowsUpdates = this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
       this.IsCurrentConfigLoading = true;
       this.agentService.GetCurrentConfig(this.asset.ID);
     });
+    this.sub.add(onInstallWindowsUpdates);
     this.CurrentUser();
 
     this.todaysDate = Date.now();
@@ -288,8 +295,8 @@ export class DevicesComponent implements OnInit {
       req.Criteria = [];
       this.getAssets();
       this.HardwareTypeList(this.techCompnayGuid);
-      this.getManufacturers(this.techCompnayGuid);
-      this.getModels(this.techCompnayGuid);
+      if (this.agentService.hasAccessToken()) this.getManufacturers(this.techCompnayGuid);
+      if (this.agentService.hasAccessToken()) this.getModels(this.techCompnayGuid);
       this.getSoftwarItem(this.techCompnayGuid);
       this.getOperatingSystemVersion(this.techCompnayGuid);
       this.getOperatingSystemType(this.techCompnayGuid);
@@ -1134,7 +1141,7 @@ export class DevicesComponent implements OnInit {
   }
 
   getManufacturers(TechCompanyGuid: any) {
-    if (this.agentService.AccessToken == '') {
+    if (this.agentService.hasAccessToken()) {
       setTimeout(() => {
         this.getManufacturers(TechCompanyGuid);
       }, 300);
@@ -1172,12 +1179,6 @@ export class DevicesComponent implements OnInit {
   }
 
   getModels(TechCompanyGuid: any) {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getModels(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {

@@ -3,14 +3,13 @@ import { FilterListTop } from "src/class/list/filter-list-top";
 export class DeviceSettingFilter {
 
   filterTop: Array<FilterListTop> = [
-    new FilterListTop("Name","ASC"),
+    new FilterListTop("Name", "ASC"),
     new FilterListTop("Counter", ""),
-    new FilterListTop("ManufactureName",""),    
+    new FilterListTop("ManufactureName", ""),
   ];
-  constructor() {}
+  constructor() { }
 
-  public onFilter(field, service) {  
-    debugger;  
+  public onFilter(field, service) {
     let index = this.filterTop.findIndex((item) => item.field === field);
     if (index > -1) {
       let sort = this.filterTop[index].filter;
@@ -24,7 +23,7 @@ export class DeviceSettingFilter {
           service.reverse();
         }
       }
-      if (field === "Name") {        
+      if (field === "Name") {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
@@ -33,8 +32,8 @@ export class DeviceSettingFilter {
           this.filterTop[index].filter = "DESC";
           service.reverse();
         }
-      }   
-      if (field === "ManufactureName") {        
+      }
+      if (field === "ManufactureName") {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";
@@ -43,57 +42,57 @@ export class DeviceSettingFilter {
           this.filterTop[index].filter = "DESC";
           service.reverse();
         }
-      }       
+      }
     }
   }
 
-  
 
-  private onFilterName(service) {    
+
+  private onFilterName(service) {
     service.sort((a, b) =>
       this.getName(a).toLowerCase() >
-      this.getName(b).toLowerCase()
+        this.getName(b).toLowerCase()
         ? 1
         : this.getName(b).toLowerCase() >
           this.getName(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
 
-  private getName(service) {    
-    return service.Name||'';
+  private getName(service) {
+    return service.Name || '';
   }
 
   public onFilterCount(service) {
     service.sort((a, b) =>
       this.getCount(a) >
-      this.getCount(b)
+        this.getCount(b)
         ? 1
         : this.getCount(b) >
           this.getCount(a)
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getCount(service) {
     return service.Counter;
   }
 
-  private onFilterDeviceManufacturer(service) {    
+  private onFilterDeviceManufacturer(service) {
     service.sort((a, b) =>
       this.getManufacturerName(a).toLowerCase() >
-      this.getManufacturerName(b).toLowerCase()
+        this.getManufacturerName(b).toLowerCase()
         ? 1
         : this.getManufacturerName(b).toLowerCase() >
           this.getManufacturerName(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
 
-  private getManufacturerName(service) {    
-    return service.ManufactureName||'';
+  private getManufacturerName(service) {
+    return service.ManufactureName || '';
   }
 
 

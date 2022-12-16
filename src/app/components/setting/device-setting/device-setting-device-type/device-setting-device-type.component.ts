@@ -89,7 +89,6 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
       });
   }
   onFilter(field) {
-    debugger;
     this.filter.onFilter(field, this.deviceTypeList);
   }
   getDeviceTypes(TechCompanyGuid: any) {
