@@ -77,8 +77,6 @@ export class DevicesComponent implements OnInit {
   deviceSummaryList: any = [];
   modalReference: any;
   favouriteName: string;
-  searchSubscription: any;
-  searchSubscriptionCompany: any;
   screenConnectList: any[] = [];
   userName: any;
   password: any;
@@ -245,26 +243,27 @@ export class DevicesComponent implements OnInit {
       if (this.currentCompany) this.getOperatingSystemType(data.id);
     })
     this.sub.add(onSetAccessToken);
-    if (!this.searchSubscription) {
-      this.searchSubscription = this.leftPanelStateService.onSearchChange.subscribe(data => {
-        this.selectedTag = JSON.parse(data.Json) || [];
-        this.searchTag = this.selectedTag;
-        localStorage.removeItem("currentSearch");
-        this.add(undefined);
-      });
-    }
 
-    if (!this.searchSubscriptionCompany) {
-      this.searchSubscriptionCompany = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {
-        this.selectedTag = [];
-        if (data.name != 'undefined' && data.name != null && data.name != "") {
-          this.selectedTag.push(data.name);
-        }
-        this.searchTag = this.selectedTag;
-        localStorage.removeItem("currentSearchCompany");
-        this.add(undefined);
-      })
-    }
+    let onSearchChange = this.leftPanelStateService.onSearchChange.subscribe(data => {
+      this.selectedTag = JSON.parse(data.Json) || [];
+      this.searchTag = this.selectedTag;
+      localStorage.removeItem("currentSearch");
+      this.add(undefined);
+    });
+    this.sub.add(onSearchChange);
+
+
+    let onSearchCompanyChange = this.leftPanelStateService.onSearchCompanyChange.subscribe(data => {
+      this.selectedTag = [];
+      if (data.name != 'undefined' && data.name != null && data.name != "") {
+        this.selectedTag.push(data.name);
+      }
+      this.searchTag = this.selectedTag;
+      localStorage.removeItem("currentSearchCompany");
+      this.add(undefined);
+    })
+    this.sub.add(onSearchCompanyChange);
+
 
     let onCurrentConfig = this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
@@ -318,8 +317,7 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-    this.searchSubscriptionCompany.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   setPreviewDataDevice() {

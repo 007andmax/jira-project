@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -14,7 +14,7 @@ import { DeviceSettingFilter } from '../Class/devicesetting-filter';
   templateUrl: './device-setting-model.component.html',
   styleUrls: ['./device-setting-model.component.scss']
 })
-export class DeviceSettingModelComponent implements OnInit {
+export class DeviceSettingModelComponent implements OnInit, OnDestroy {
   selectAllDevices: boolean = false;
   selectManufactureList: any[] = [];
   selectedDeviceModel: any[] = [];
@@ -36,12 +36,17 @@ export class DeviceSettingModelComponent implements OnInit {
   ngOnInit() {
     if (this.companiesStateService.getCurrentCompany()) {
       this.techCompany = this.companiesStateService.getCurrentCompany();
-      this.getModels(this.companiesStateService.getCurrentCompany().id);
+      if (this.agentService.hasAccessToken()) this.getModels(this.companiesStateService.getCurrentCompany().id);
     }
-    this.companiesStateService.onCurrentCompany.subscribe((data) => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe((data) => {
       this.techCompany = data;
-      this.getModels(this.techCompany.id);
+      if (this.agentService.hasAccessToken()) this.getModels(this.techCompany.id);
     })
+    this.sub.add(onCurrentCompany);
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      if (this.techCompany) this.getModels(this.techCompany.id);
+    })
+    this.sub.add(onSetAccessToken);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_MODEL) this.removeModel();
@@ -93,12 +98,6 @@ export class DeviceSettingModelComponent implements OnInit {
   }
   getModels(TechCompanyGuid: any) {
     this.showPreloader = true;
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getModels(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService
       .getModels(TechCompanyGuid)
       .subscribe((resp) => {
@@ -128,5 +127,8 @@ export class DeviceSettingModelComponent implements OnInit {
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_MODEL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Delete Model`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

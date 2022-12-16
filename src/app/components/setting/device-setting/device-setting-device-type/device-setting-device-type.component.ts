@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -14,7 +14,7 @@ import { DeviceSettingFilter } from '../Class/devicesetting-filter';
   templateUrl: './device-setting-device-type.component.html',
   styleUrls: ['./device-setting-device-type.component.scss']
 })
-export class DeviceSettingDeviceTypeComponent implements OnInit {
+export class DeviceSettingDeviceTypeComponent implements OnInit, OnDestroy {
   hardwareTypes: any[] = [];
   deviceTypeList: any[] = [];
   selectedDeviceType: any[] = [];
@@ -33,12 +33,17 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
   ngOnInit() {
     if (this.companiesStateService.getCurrentCompany()) {
       this.techCompany = this.companiesStateService.getCurrentCompany();
-      this.getDeviceTypes(this.companiesStateService.getCurrentCompany().id);
+      if (this.agentService.hasAccessToken()) this.getDeviceTypes(this.companiesStateService.getCurrentCompany().id);
     }
-    this.companiesStateService.onCurrentCompany.subscribe((data) => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe((data) => {
       this.techCompany = data;
-      this.getDeviceTypes(this.techCompany.id);
+      if (this.agentService.hasAccessToken()) this.getDeviceTypes(this.techCompany.id);
     })
+    this.sub.add(onCurrentCompany);
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      if (this.techCompany) this.getDeviceTypes(this.techCompany.id);
+    })
+    this.sub.add(onSetAccessToken);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_TYPE) this.removeDeviceType();
@@ -93,12 +98,6 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
   }
   getDeviceTypes(TechCompanyGuid: any) {
     this.showPreloader = true;
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getDeviceTypes(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
@@ -125,5 +124,8 @@ export class DeviceSettingDeviceTypeComponent implements OnInit {
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Delete DeviceType`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

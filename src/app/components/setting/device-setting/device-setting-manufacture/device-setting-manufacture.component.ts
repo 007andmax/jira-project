@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -14,7 +14,7 @@ import { DeviceSettingFilter } from '../Class/devicesetting-filter';
   templateUrl: './device-setting-manufacture.component.html',
   styleUrls: ['./device-setting-manufacture.component.scss']
 })
-export class DeviceSettingManufactureComponent implements OnInit {
+export class DeviceSettingManufactureComponent implements OnInit, OnDestroy {
   manufactureIsActiveList: any[] = [];
   selectedDeviceManufacturer: any[] = [];
   techCompany: any;
@@ -29,16 +29,20 @@ export class DeviceSettingManufactureComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private agentService: AgentService,) { }
-
   ngOnInit() {
     if (this.companiesStateService.getCurrentCompany()) {
       this.techCompany = this.companiesStateService.getCurrentCompany();
-      this.getManufacturers(this.companiesStateService.getCurrentCompany().id);
+      if (this.agentService.hasAccessToken()) this.getManufacturers(this.companiesStateService.getCurrentCompany().id);
     }
-    this.companiesStateService.onCurrentCompany.subscribe((data) => {
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe((data) => {
       this.techCompany = data;
-      this.getManufacturers(this.techCompany.id);
+      if (this.agentService.hasAccessToken()) this.getManufacturers(this.techCompany.id);
     })
+    this.sub.add(onCurrentCompany);
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      if (this.techCompany) this.getManufacturers(this.techCompany.id);
+    })
+    this.sub.add(onSetAccessToken);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_MANUFACTURE) this.removeManufacturer();
@@ -84,12 +88,6 @@ export class DeviceSettingManufactureComponent implements OnInit {
   }
   getManufacturers(TechCompanyGuid: any) {
     this.showPreloader = true;
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getManufacturers(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService.getManufactures(TechCompanyGuid)
       .subscribe((resp) => {
         this.showPreloader = false;
@@ -121,5 +119,8 @@ export class DeviceSettingManufactureComponent implements OnInit {
       .subscribe((resp) => {
         this.getManufacturers(this.techCompany.id)
       });
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
