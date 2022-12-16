@@ -8,6 +8,8 @@ import * as moment from "moment";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { DatePipe } from "@angular/common";
+import { Subscription } from "rxjs";
+import { OnDestroy } from "@angular/core";
 
 declare var $: any;
 @Component({
@@ -15,7 +17,7 @@ declare var $: any;
   templateUrl: "./hardware.component.html",
   styleUrls: ["./hardware.component.scss"],
 })
-export class HardwareComponent implements OnInit {
+export class HardwareComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   printSystem: Array<Array<string>>;
   printMotherBoard: Array<Array<string>>;
@@ -56,7 +58,7 @@ export class HardwareComponent implements OnInit {
   TemporaryGraphicsDriver: any[] = [];
   wanIp: string = "";
   printers: any[] = [];
-
+  sub: Subscription = new Subscription();
   constructor(
     private toastr: ToastrService,
     private commonHttpServices: CommonHttpServices,
@@ -77,16 +79,15 @@ export class HardwareComponent implements OnInit {
           .name.replaceAll(" ", "")}/device/dashboard/${this.type}/${this._id}`,
       ]);
     }
-    this.setPreviewDataDevice();
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onSetAccessToken);
+
   }
 
   setPreviewDataDevice() {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.setPreviewDataDevice();
-      }, 300);
-      return;
-    }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.wanIp = resp[0].ExternalIPAddress;
@@ -957,5 +958,8 @@ export class HardwareComponent implements OnInit {
 
   getLinkSpeed(value) {
     return ((value != 0 && value != undefined)) ? (Number(value / 1000000)) : 0;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

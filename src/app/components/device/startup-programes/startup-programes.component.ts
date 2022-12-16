@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ExcelService } from '../_services/download_csv.service';
 import { CommonHttpServices } from '../_services/common_http.service';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 
 @Component({
@@ -14,7 +16,7 @@ import * as moment from 'moment';
   templateUrl: './startup-programes.component.html',
   styleUrls: ['./startup-programes.component.scss']
 })
-export class StartupComponent implements OnInit {
+export class StartupComponent implements OnInit, OnDestroy {
 
   searchname = "";
   public startupList: any[] = [];
@@ -24,11 +26,11 @@ export class StartupComponent implements OnInit {
   public asset: any;
   public pdfUrl: string;
   public filter: StartupFilter = new StartupFilter();
-  startup : number = 0;
-  searchstartup = false; 
-  public startupview:boolean = false;
-  public kafkaresponse:boolean = false;
-
+  startup: number = 0;
+  searchstartup = false;
+  public startupview: boolean = false;
+  public kafkaresponse: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
     private kafkaStateService: KafkaStateService,
@@ -40,64 +42,60 @@ export class StartupComponent implements OnInit {
 
   }
 
-  ngOnInit() {    
-    this.Id = this.activateRoute.snapshot.params["id"];  
-    this.loading = true;      
-    this.kafkaStateService.onGetStartupPrograms.subscribe((resp)=>{
-      if(resp.length>0)
-      {
+  ngOnInit() {
+    this.Id = this.activateRoute.snapshot.params["id"];
+    this.loading = true;
+    this.kafkaStateService.onGetStartupPrograms.subscribe((resp) => {
+      if (resp.length > 0) {
         this.kafkaresponse = true;
-        this.onGetStartupPrograms(resp)        
-      }      
-    })    
-    this.GetStartupPrograms();
+        this.onGetStartupPrograms(resp)
+      }
+    })
+    if (this.agentService.hasAccessToken()) this.GetStartupPrograms();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.GetStartupPrograms();
+    })
+    this.sub.add(onSetAccessToken);
     this.time();
   }
 
   public GetStartupPrograms() {
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.GetStartupPrograms();
-      }, 300);
-      return;
-    }
-      this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
-        this.asset = resp[0];
-        this.assetId = this.asset.ID;
-        this.agentService.GetStartupPrograms(this.assetId);
-      });
+    this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
+      this.asset = resp[0];
+      this.assetId = this.asset.ID;
+      this.agentService.GetStartupPrograms(this.assetId);
+    });
   }
 
-  public time(){
-    setTimeout(()=>{
-      if(this.kafkaresponse == false)
-      {
+  public time() {
+    setTimeout(() => {
+      if (this.kafkaresponse == false) {
         this.loading = false;
         this.startupview = true;
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
-      }      
-    },60000);
-    
+      }
+    }, 60000);
+
   }
 
 
-  public onGetStartupPrograms(resp: any) {        
+  public onGetStartupPrograms(resp: any) {
     this.startup = resp.length;
-    if(resp.length>0){
+    if (resp.length > 0) {
       this.loading = false;
-      this.searchstartup= true;
+      this.searchstartup = true;
     }
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.startupList = JSON.parse(item.Value);
-    }    
-    if (!this.cd['destroyed']) this.cd.detectChanges();    
+    }
+    if (!this.cd['destroyed']) this.cd.detectChanges();
     this.getPdfData();
   }
 
-  public onGetStartupProgramsError(error: any) {       
+  public onGetStartupProgramsError(error: any) {
     console.log(error);
   }
 
@@ -301,5 +299,9 @@ export class StartupComponent implements OnInit {
 
   printPdf() {
     window.open(this.pdfUrl, "_blank");
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

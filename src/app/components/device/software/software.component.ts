@@ -5,7 +5,7 @@ import { CommonHttpServices } from "./../_services/common_http.service";
 import { ExcelService } from "./../_services/download_csv.service";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import * as moment from "moment";
 import { environment } from "./../../../../environments/environment";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
@@ -38,7 +38,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   softwaretoggle: boolean = false;
   filter: SoftwareFilter = new SoftwareFilter();
   asset: any = undefined;
-
+  sub: Subscription = new Subscription();
   constructor(
     private toastr: ToastrService,
     private router: Router,
@@ -64,16 +64,14 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     this.deviceDetail = JSON.parse(
       localStorage.getItem("deviceDetail_" + this._id)
     );
-    this.setPreviewDataDevice();
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onSetAccessToken);
   }
 
   setPreviewDataDevice() {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.setPreviewDataDevice();
-      }, 300);
-      return;
-    }
     this.loading = true;
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
@@ -181,6 +179,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
     this.dtTrigger.unsubscribe();
   }
 

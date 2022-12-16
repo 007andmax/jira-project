@@ -10,6 +10,7 @@ import { first } from "rxjs/operators";
 import { v4 as uuidv4 } from "uuid";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
+import { Subscription } from "rxjs";
 
 declare var $: any;
 @Component({
@@ -46,7 +47,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   currentCommand: string;
   isNonAgentDevice: boolean;
   offline: string = "Offline";
-
+  sub: Subscription = new Subscription();
   constructor(
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
@@ -77,7 +78,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
       window.location.href.split("/")[
       window.location.href.split("/").length - 1
       ];
-    this.setPreviewDataDevice();
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onSetAccessToken);
     localStorage.setItem("uuid_" + this._id, uuidv4());
     this.deviceType = this.type;
     if (this.deviceType === "printer") {
@@ -106,12 +111,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.setPreviewDataDevice();
-      }, 300);
-      return;
-    }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.deviceName = resp[0].Name;
@@ -481,6 +480,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.deviceDetailService.setDevice(null);
   }
 

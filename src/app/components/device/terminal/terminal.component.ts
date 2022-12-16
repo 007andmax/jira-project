@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, NgZone, OnDestroy } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
@@ -22,7 +22,7 @@ import { element } from '@angular/core/src/render3';
   encapsulation: ViewEncapsulation.None,
   providers: [UserListService]
 })
-export class TerminalComponent implements OnInit {
+export class TerminalComponent implements OnInit, OnDestroy {
   create = false;
   closeResult = '';
   submitted = false;
@@ -84,7 +84,7 @@ export class TerminalComponent implements OnInit {
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
-  commandShoot:boolean = false;  
+  commandShoot: boolean = false;
   count = -1;
   @ViewChild('editor') editorElement: ElementRef;
   code = '';
@@ -98,8 +98,8 @@ export class TerminalComponent implements OnInit {
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   asset: any = undefined;
   kafkaMessage: any;
-  htmldata: string = ''; 
-  tempcommand: string = ''; 
+  htmldata: string = '';
+  tempcommand: string = '';
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
@@ -111,19 +111,22 @@ export class TerminalComponent implements OnInit {
     private agentService: AgentService,
     private kafkaStateService: KafkaStateService
   ) { }
-
-  ngOnInit() {       
+  ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // this.socketService.initializeWebSocketConnection();
-    this.setPreviewDataDevice();
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onSetAccessToken);
     this.onTerminalCommand();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
     this.onTerminalPowershall();
     // this.socketService.subsribeToCmdShellOutput();
-    $('#cmd textarea').scroll(function () {      
+    $('#cmd textarea').scroll(function () {
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
@@ -131,67 +134,58 @@ export class TerminalComponent implements OnInit {
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
-  setPreviewDataDevice() {    
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.setPreviewDataDevice();
-      }, 300);
-      return;
-    }
-      this.agentService.getAssetByGuid(this._id).subscribe((resp) => {        
-        this.asset = resp[0];        
-      });
-  }  
-
-  clearTerminal() {
-    this.splitCommand = ["C:\\>"];    
-    this.cd.detectChanges();      
+  setPreviewDataDevice() {
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      this.asset = resp[0];
+    });
   }
 
-  onTerminalPowershall()
-  {    
+  clearTerminal() {
+    this.splitCommand = ["C:\\>"];
+    this.cd.detectChanges();
+  }
+
+  onTerminalPowershall() {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       console.log("OnTerminalCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
-        if(!item.Value.startsWith("Executing"))
-        {
+        if (!item.Value.startsWith("Executing")) {
           this.splitCommand.push(this.tempcommand);
           let arr = item.Value.split(/\r*\n/)
           let arr1 = this.splitCommand.concat(arr);
           this.splitCommand = arr1;
-          this.splitCommand.push("line");  
-          this.htmldata = `<hr style="border:1px dotted white;"/>`;            
+          this.splitCommand.push("line");
+          this.htmldata = `<hr style="border:1px dotted white;"/>`;
           this.count = -1;
           this.commandShoot = false;
-          this.cd.detectChanges();          
+          this.cd.detectChanges();
         }
       }
     });
   }
 
-  onTerminalCommand() {    
-    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {      
-        console.log("OnTerminalCommand");
-        let item = resp.find((x) => x.key == this.asset.ID);
-        if (item) {
-          if(!item.Value.startsWith("Executing"))
-          {             
-            this.splitCommand.push(this.tempcommand);          
-            let arr = item.Value.split(/\r*\n/);                                    
-            let arr1 = this.splitCommand.concat(arr);            
-            this.splitCommand = arr1; 
-            this.splitCommand.push("line");                                                                   
-            this.htmldata = `<hr style="border:1px dotted white;"/>`; 
-            this.count = -1;
-            this.commandShoot = false;
-            this.cd.detectChanges();
-          }
+  onTerminalCommand() {
+    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
+      console.log("OnTerminalCommand");
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        if (!item.Value.startsWith("Executing")) {
+          this.splitCommand.push(this.tempcommand);
+          let arr = item.Value.split(/\r*\n/);
+          let arr1 = this.splitCommand.concat(arr);
+          this.splitCommand = arr1;
+          this.splitCommand.push("line");
+          this.htmldata = `<hr style="border:1px dotted white;"/>`;
+          this.count = -1;
+          this.commandShoot = false;
+          this.cd.detectChanges();
         }
-      });
+      }
+    });
   }
 
-  getCommandList() {      
+  getCommandList() {
     this.terminalService.getCommand()
       .pipe(first())
       .subscribe(data => {
@@ -221,10 +215,10 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  getHistory() {       
+  getHistory() {
     this.terminalService.getHistory(this._id)
       .pipe(first())
-      .subscribe(data => {              
+      .subscribe(data => {
         if (Object.keys(data).length > 0) {
           let obj = data[this._id]
           this.his = obj;
@@ -297,7 +291,7 @@ export class TerminalComponent implements OnInit {
         });
   }
 
-  getCmdCategoryRead() {    
+  getCmdCategoryRead() {
     this.terminalService.getCmdCategory()
       .pipe(first())
       .subscribe(data => {
@@ -621,7 +615,7 @@ export class TerminalComponent implements OnInit {
             if (this.sessionId === data.data.sessionId) {
               let arr = data.data.output.split(/\r*\n/)
               let arr1 = this.splitCommand.concat(arr);
-              this.splitCommand = arr1;              
+              this.splitCommand = arr1;
               this.cd.detectChanges();
               setTimeout(() => {
                 $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
@@ -719,27 +713,23 @@ export class TerminalComponent implements OnInit {
     this.openEditCommand(cmd, type);
   }
 
-  copyToTerminalFunc(editCmd,i) {    
+  copyToTerminalFunc(editCmd, i) {
     this.count = i;
-    if(i != -1)
-    {
-      if(this.commandShoot == true)
-      {
+    if (i != -1) {
+      if (this.commandShoot == true) {
         return;
-      }    
-      this.commandShoot = true;       
-    }        
+      }
+      this.commandShoot = true;
+    }
     this.tempcommand = editCmd;
     let data: any = {};
-    if(this.scriptTyped=="cmd")
-    {
+    if (this.scriptTyped == "cmd") {
       data.AssetID = this.asset.ID;
       data.MessageType = "RunDOSCommand";
       data.Value = editCmd;
       this.agentService.TerminalShellCommand(data);
     }
-    if(this.scriptTyped=="powershell")
-    {
+    if (this.scriptTyped == "powershell") {
       data.AssetID = this.asset.ID;
       data.MessageType = "RunPowerShellCommand";
       data.Value = editCmd;
@@ -793,5 +783,9 @@ export class TerminalComponent implements OnInit {
     this.scriptDetail = !this.scriptDetail;
     this.submitted = false;
     this.openEditCommand(data, type);
-  }    
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

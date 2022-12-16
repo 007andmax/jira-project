@@ -7,13 +7,15 @@ import { ExcelService } from '../_services/download_csv.service';
 import { CommonHttpServices } from '../_services/common_http.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss']
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent implements OnInit, OnDestroy {
 
   public search: string;
   public serviceList: any[] = [];
@@ -23,9 +25,9 @@ export class ServicesComponent implements OnInit {
   public asset: any;
   public filter: ServiceFilter = new ServiceFilter();
   pdfUrl = "";
-  public kafkaresponse:boolean = false;
-  public servicesview:boolean = false;
-
+  public kafkaresponse: boolean = false;
+  public servicesview: boolean = false;
+  sub: Subscription = new Subscription();
 
   constructor(
     private agentService: AgentService,
@@ -39,54 +41,49 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit() {
     this.Id = this.activateRoute.snapshot.params["id"];
-    this.loading = true;    
-    this.kafkaStateService.onGetService.subscribe((resp)=>{
-      if(resp.length>0)
-      {
+    this.loading = true;
+    this.kafkaStateService.onGetService.subscribe((resp) => {
+      if (resp.length > 0) {
         this.kafkaresponse = true;
-        this.onGetService(resp)        
-      }      
-    })    
-    this.getAllServicesList();
+        this.onGetService(resp)
+      }
+    })
+    if (this.agentService.hasAccessToken()) this.getAllServicesList();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.getAllServicesList();
+    })
+    this.sub.add(onSetAccessToken);
     this.time();
   }
 
-  public time(){
-    setTimeout(()=>{
-      if(this.kafkaresponse == false)
-      {
+  public time() {
+    setTimeout(() => {
+      if (this.kafkaresponse == false) {
         this.loading = false;
         this.servicesview = true;
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
-      }      
-    },60000);
-    
+      }
+    }, 60000);
+
   }
 
   public getAllServicesList() {
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getAllServicesList();
-      }, 300);
-      return;
-    }
-      this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
-        this.asset = resp[0];
-        this.assetId = this.asset.ID;
-        this.agentService.GetService(this.assetId);
-        this.getReload(null);
-      });
+    this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
+      this.asset = resp[0];
+      this.assetId = this.asset.ID;
+      this.agentService.GetService(this.assetId);
+      this.getReload(null);
+    });
   }
 
-  public onGetService(resp: any) {    
+  public onGetService(resp: any) {
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
-      this.serviceList = JSON.parse(item.Value);      
-      for(let i=0;i<this.serviceList.length;i++)
-      {
-        this.serviceList[i] = Object.assign(this.serviceList[i],{Loaded:'False',RestartLoaded:'False',StopLoaded:'False'});
+      this.serviceList = JSON.parse(item.Value);
+      for (let i = 0; i < this.serviceList.length; i++) {
+        this.serviceList[i] = Object.assign(this.serviceList[i], { Loaded: 'False', RestartLoaded: 'False', StopLoaded: 'False' });
       }
     }
     this.loading = false;
@@ -109,8 +106,8 @@ export class ServicesComponent implements OnInit {
     this.serviceList.forEach((element) => {
       downloadCsvList.push([
         (element.DisplayName ? element.DisplayName.replace(",", " ") : "N/A"),
-        (element.Description ? element.Description.replaceAll(",", " ") :""),
-        (element.started==true ? "Running" : "Stopped"),
+        (element.Description ? element.Description.replaceAll(",", " ") : ""),
+        (element.started == true ? "Running" : "Stopped"),
         (element.StartMode ? element.StartMode.replace(",", " ") : "N/A"),
         (element.startName ? element.startName.replace(",", " ") : "N/A")
       ]);
@@ -124,8 +121,8 @@ export class ServicesComponent implements OnInit {
     this.serviceList.forEach((element) => {
       pdfList.push([
         element.DisplayName.replace(",", " ") || "N/A",
-        element.Description? element.Description.replace(",", " ") : "N/A",
-        element.started==true ? "Running" : "Stopped",
+        element.Description ? element.Description.replace(",", " ") : "N/A",
+        element.started == true ? "Running" : "Stopped",
         element.StartMode ? element.StartMode.replace(",", " ") : "N/A",
         element.startName ? element.startName.replace(",", " ") : "N/A"
       ]);
@@ -246,12 +243,12 @@ export class ServicesComponent implements OnInit {
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
         element[2] +
         `</td>`
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
         element[3] +
         `</td>`
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 22%;vertical-align: top;">` +
         element[4] +
@@ -317,9 +314,8 @@ export class ServicesComponent implements OnInit {
     window.open(this.pdfUrl, "_blank");
   }
 
-  public getReload(res:any){
-    if(res!=null)
-    {
+  public getReload(res: any) {
+    if (res != null) {
       this.serviceList = res;
     }
     if (this.cd) {
@@ -327,8 +323,8 @@ export class ServicesComponent implements OnInit {
     }
   }
 
-  servicePlay(serviceName:string,index:number){
-    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True',RestartLoaded:'False',StopLoaded:'False'});
+  servicePlay(serviceName: string, index: number) {
+    this.serviceList[index] = Object.assign(this.serviceList[index], { Loaded: 'True', RestartLoaded: 'False', StopLoaded: 'False' });
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "StartService";
@@ -338,8 +334,8 @@ export class ServicesComponent implements OnInit {
     this.getAllServicesList();
   }
 
-  serviceRestart(serviceName:string,index:number){
-    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True',RestartLoaded:'True',StopLoaded:'False'});
+  serviceRestart(serviceName: string, index: number) {
+    this.serviceList[index] = Object.assign(this.serviceList[index], { Loaded: 'True', RestartLoaded: 'True', StopLoaded: 'False' });
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "RestartService";
@@ -349,8 +345,8 @@ export class ServicesComponent implements OnInit {
     this.getAllServicesList();
   }
 
-  servicePause(serviceName:string,index:number){
-    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True',RestartLoaded:'False',StopLoaded:'True' });
+  servicePause(serviceName: string, index: number) {
+    this.serviceList[index] = Object.assign(this.serviceList[index], { Loaded: 'True', RestartLoaded: 'False', StopLoaded: 'True' });
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "StopService";
@@ -360,8 +356,10 @@ export class ServicesComponent implements OnInit {
     this.getAllServicesList();
   }
 
-  trackByMethod(index:number, service:any): string {
+  trackByMethod(index: number, service: any): string {
     return service.Name;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

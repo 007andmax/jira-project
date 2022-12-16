@@ -29,7 +29,7 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) expire: NgbDatepicker;
   @ViewChild('searchInput') private searchInput: ElementRef;
-  @ViewChild('Tagproducts') Tagproducts : NgbDropdown;
+  @ViewChild('Tagproducts') Tagproducts: NgbDropdown;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   DateFormats = CONFIGCONSTANTS.DateFormat;
@@ -76,29 +76,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isOverlay = false;
   installUpdateModal: NgbModalRef;
   categoriesName: string = "";
-  isNonAgentDevice:boolean;
+  isNonAgentDevice: boolean;
   tab = "PendingWindows";
   installedWindowsUpdateList: any[] = [];
-  installUpdate : number;
-  blockedWindowsUpdateList : any [] = [];
-  blockedNumber : number;
+  installUpdate: number;
+  blockedWindowsUpdateList: any[] = [];
+  blockedNumber: number;
   categories: number;
   networkDisk: any = [];
-  manufactureList: any[]=[];
+  manufactureList: any[] = [];
   loading: boolean;
   techCompany: any;
   allModelList: any[] = [];
-  modelList : any[]=[];
+  modelList: any[] = [];
   manufactureId: any = undefined;
-  selectModelList: any[]=[];
-  modelId:any = undefined;
-  model : any;
-  manufacturename : string;
-  modelName : string;
-  selectManufactureNames : any;
-  selectModelName : any;
-  company : any;
-  searches : any[];
+  selectModelList: any[] = [];
+  modelId: any = undefined;
+  model: any;
+  manufacturename: string;
+  modelName: string;
+  selectManufactureNames: any;
+  selectModelName: any;
+  company: any;
+  searches: any[];
   noteId: any;
 
   constructor(
@@ -121,17 +121,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.isNonAgentDevice = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
-
-    this.setPreviewDataDevice();
-    this.getAssetDetail()
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+      if (this.techCompany) this.getManufacturers(this.techCompany.id);
+      if (this.techCompany) this.getModels(this.techCompany.id);
+    })
+    this.sub.add(onSetAccessToken);
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), this.loading = false, (e) => this.onCurrentConfigError(e));
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => this.onInstallWindowsUpdates(resp), (e) => this.onInstallWindowsUpdatesError(e));
-    if(this.companyStateService.getCurrentCompany())this.getCurrentCompany(this.companyStateService.getCurrentCompany());
-    this.companyStateService.onCurrentCompany.subscribe((data) =>{
+    if (this.companyStateService.getCurrentCompany()) this.getCurrentCompany(this.companyStateService.getCurrentCompany());
+    this.companyStateService.onCurrentCompany.subscribe((data) => {
       this.getCurrentCompany(data);
       this.techCompany = data;
-      this.getManufacturers(this.techCompany.id);
-      this.getModels(this.techCompany.id);
+      if (this.agentService.hasAccessToken()) this.getManufacturers(this.techCompany.id);
+      if (this.agentService.hasAccessToken()) this.getModels(this.techCompany.id);
     })
   }
 
@@ -142,17 +146,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.kafkaMessage = JSON.parse(item.Value);
 
         this.installUpdate = this.kafkaMessage.InstalledWindowsUpdates.length;
-        if(this.installUpdate > 0){
+        if (this.installUpdate > 0) {
           this.installedWindowsUpdateList = [];
-          for(let i=0; i< this.installUpdate ; i++){
-            let install : any = {};
+          for (let i = 0; i < this.installUpdate; i++) {
+            let install: any = {};
             install.UpdateID = this.kafkaMessage.InstalledWindowsUpdates[i].UpdateID;
             install.Title = this.kafkaMessage.InstalledWindowsUpdates[i].Title;
             install.Size = this.kafkaMessage.InstalledWindowsUpdates[i].Size;
             this.categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories.length;
-            if(this.categories >0)
-            {
-              for(let j=0; j<this.categories; j++){
+            if (this.categories > 0) {
+              for (let j = 0; j < this.categories; j++) {
                 install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[j].Name
               }
             }
@@ -161,10 +164,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
 
         this.blockedNumber = this.kafkaMessage.BlockedWindowsUpdates.length;
-        if(this.blockedNumber > 0){
+        if (this.blockedNumber > 0) {
           this.blockedWindowsUpdateList = [];
-          for(let i=0; i< this.blockedNumber ; i++){
-            let blocked : any = {};
+          for (let i = 0; i < this.blockedNumber; i++) {
+            let blocked: any = {};
             blocked.UpdateID = this.kafkaMessage.BlockedWindowsUpdates[i].UpdateID;
             blocked.Title = this.kafkaMessage.BlockedWindowsUpdates[i].Title;
             blocked.Size = this.kafkaMessage.BlockedWindowsUpdates[i].Size;
@@ -183,9 +186,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
             data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
             this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
-            if(this.categories >0)
-            {
-              for(let j=0; j<this.categories; j++){
+            if (this.categories > 0) {
+              for (let j = 0; j < this.categories; j++) {
                 data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
               }
             }
@@ -204,7 +206,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
         this.getNetworkDriveDetail(this.kafkaMessage.NetworkDrives);
 
-        if (!this.cd['destroyed']){
+        if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
       }
@@ -237,17 +239,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setPreviewDataDevice() {
     this.currentUser = localStorage.getItem("currentUser");
-      this.getAssetDetail();
+    this.getAssetDetail();
   }
 
   getAssetDetail() {
     this.loading = true;
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getAssetDetail();
-      }, 300);
-      return;
-    }
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.loading = false;
@@ -274,16 +270,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.asset.LastRebootDate = "";
         }
 
-        if(this.asset.AgentVersion == ""){
+        if (this.asset.AgentVersion == "") {
           this.isNonAgentDevice = false;
         }
 
         this.model = this.asset.ModelID;
         this.selectManufacture(this.asset.ManufacturerId)
-        this.selectModel(this.asset.ModelID);        
+        this.selectModel(this.asset.ModelID);
         this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
         this.getOprationSystemDetail();
-        if(resp[0].VirusProtectionProducts != null){
+        if (resp[0].VirusProtectionProducts != null) {
           this.getVirusProtection(resp[0].VirusProtectionProducts);
         }
         this.getDiskDriveDetail();
@@ -327,7 +323,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  addAssetNote() {    
+  addAssetNote() {
     this.noteAdd.AssetID = this.asset.ID;
     this.noteAdd.IsActive = true;
     this.agentService.addAssetNotes(this.noteAdd).subscribe(
@@ -365,7 +361,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   deleteNote() {
-    let note:any = {};
+    let note: any = {};
     note.ID = this.noteId;
     note.AssetID = this.asset.ID;
     this.agentService.deleteAssetNotes(note).subscribe(response => {
@@ -375,7 +371,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSearchTag(value: string) {        
+  onSearchTag(value: string) {
     let filter = value.toLowerCase();
 
     if (filter != "" && this.filteredTag.length > 0) {
@@ -547,7 +543,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  getNetworkDriveDetail(resp:any) {
+  getNetworkDriveDetail(resp: any) {
     let colors = ["#0057a8", "#00d8e7", "#16a4fa", "#0CB2B2", "#485EF0"];
     let count = 0;
     this.networkDisk = resp;
@@ -594,20 +590,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onDateChange(newDate: Date) { }
 
-  updateAsset() {    
+  updateAsset() {
     this.asset.InstallDate = this.asset.InstallDate || '0001-01-01';
     this.asset.LastRebootDate = this.asset.LastRebootDate || '0001-01-01';
     this.asset.DeploymentDate = this.asset.DeploymentDate || '0001-01-01';
     this.asset.WarrantyExpires = this.asset.WarrantyExpires || '0001-01-01';
-    if(this.manufactureId != undefined)
-    {
+    if (this.manufactureId != undefined) {
       this.asset.ManufacturerId = this.manufactureId;
     }
-    if(this.modelId != undefined)
-    {
+    if (this.modelId != undefined) {
       this.asset.ModelID = this.modelId;
     }
-    
+
 
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
@@ -650,9 +644,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  getlabel(title?: string, domain?: string, name?: string) {        
-    this.asset.Title = title;      
-    this.label = (domain!=""&&domain!=null)?(title!=""&&title!=null)? title + " " + "(" + domain + ")":name+ " " + "(" + domain + ")" :(title!="" && title!=null)? title +" " + "(" + "In workgroup" + ")": name + " " + "(" + "In workgroup" + ")";
+  getlabel(title?: string, domain?: string, name?: string) {
+    this.asset.Title = title;
+    this.label = (domain != "" && domain != null) ? (title != "" && title != null) ? title + " " + "(" + domain + ")" : name + " " + "(" + domain + ")" : (title != "" && title != null) ? title + " " + "(" + "In workgroup" + ")" : name + " " + "(" + "In workgroup" + ")";
   }
 
   convertToGB(value) {
@@ -827,7 +821,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return (parseFloat(val1)).toFixed(2);
   }
 
-  categoriesSep(name:string){
+  categoriesSep(name: string) {
     this.categoriesName = "";
     if (name.length > 0) {
       let finalname = name.split(",");
@@ -848,75 +842,57 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getManufacturers(TechCompanyGuid: any) {
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getManufacturers(TechCompanyGuid);
-      }, 300);
-      return;
-    }
     this.agentService.getManufactures(TechCompanyGuid)
-      .subscribe((resp) => {        
+      .subscribe((resp) => {
         this.manufactureList = resp;
-        if(this.asset){
+        if (this.asset) {
           this.selectManufacture(this.asset.ManufacturerId);
         }
       });
-    }
+  }
 
-    selectManufacture(manufactureId){      
-        this.selectManufactureNames = this.manufactureList.find(x=>x.ID == manufactureId);
-    }
+  selectManufacture(manufactureId) {
+    this.selectManufactureNames = this.manufactureList.find(x => x.ID == manufactureId);
+  }
 
-  getModels(TechCompanyGuid: any) {    
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getModels(TechCompanyGuid);
-      }, 300);
-      return;
-    }
+  getModels(TechCompanyGuid: any) {
     this.agentService
       .getModels(TechCompanyGuid)
-      .subscribe((resp) => {        
+      .subscribe((resp) => {
         this.selectModelList = resp;
         this.allModelList = resp;
-        if(this.asset){
+        if (this.asset) {
           this.selectModel(this.asset.ModelID);
         }
       });
   }
 
-  
+
   getModelsByManufacturer() {
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getModelsByManufacturer();
-      }, 300);
-      return;
-    }
     this.agentService
       .getModelsByManufacturer(this.manufactureId)
       .subscribe((resp) => {
         this.selectModelList = resp;
         this.allModelList = resp;
-        if(this.asset){
+        if (this.asset) {
           this.selectModel(this.asset.ModelID);
         }
       });
   }
 
-  selectModel(modelId){    
-    this.selectModelName = this.selectModelList.find(x=>x.ID == modelId);
- }
+  selectModel(modelId) {
+    this.selectModelName = this.selectModelList.find(x => x.ID == modelId);
+  }
 
   onSelectManufactureName(SelectManufacturer) {
     if (SelectManufacturer) {
       this.manufactureId = SelectManufacturer.ID;
-      this.selectManufactureNames = this.manufactureList.find(x=>x.ID == this.manufactureId);
+      this.selectManufactureNames = this.manufactureList.find(x => x.ID == this.manufactureId);
       this.getModelsByManufacturer();
       this.selectModelName = '';
-      this.updateAsset();      
+      this.updateAsset();
     }
-    else{
+    else {
       this.getModels(this.techCompany.id);
       this.selectManufactureNames = "";
       this.updateAsset();
@@ -926,10 +902,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onSelectModel(SelectModel) {
     if (SelectModel) {
       this.modelId = SelectModel.ID;
-      this.selectModelName = this.selectModelList.find(x=>x.ID == this.modelId);
+      this.selectModelName = this.selectModelList.find(x => x.ID == this.modelId);
       this.updateAsset();
     }
-    else{
+    else {
       this.selectModelName = "";
       this.updateAsset();
     }
