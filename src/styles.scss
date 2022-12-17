@@ -49,7 +49,7 @@ h6,
   @include body-l__sb;
 }
   //COMMON STYLES ----------------------------
-.d-f {
+.d-f { // TODO need replace for qt-classes
   display: flex;
 }
 .jc-fs {
@@ -508,9 +508,6 @@ app-company-tags,
 company-associate {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
-      /* position: absolute; */ // TODO check this style
-      //width: calc(100% - 36px);
-      /* height: 100%; */
       top: 0;
       flex: 1;
       height: 30px;
@@ -537,7 +534,7 @@ documents-filter {
       }
     }
     .mat-form-field {
-      margin-top: 0px !important;
+      margin-top: 0 !important;
       height: 100%;
     }
     .mat-form-field-infix {
@@ -610,11 +607,9 @@ documents-edit-info {
     > .col-md-12,
     > .qt-temporary-col-fix, // TODO change this temporary class (this class create for remove bootstrap col class)
     .col-md-6 {
-      //margin-top: 40px; // TODO check this style
       margin-top: 12px;
       .mat-form-field {
         width: 100%;
-        //margin-top: 15px; // TODO check this style
       }
       .mat-form-field-infix {
         border: none;
@@ -626,15 +621,6 @@ documents-edit-info {
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
         position: relative;
-        //&:before { // TODO check this style
-        //  position: absolute;
-        //  content: "Tags";
-        //  line-height: 16px;
-        //  font-weight: 500;
-        //  color: $gray-500;
-        //  left: 0;
-        //  top: -28px;
-        //}
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 12px 10px 10px 36px;
@@ -692,7 +678,7 @@ documents-edit-info {
     }
   }
   company-associate {
-    .mat-form-field-wrapper { // TODO check this style
+    .mat-form-field-wrapper {
       &:before {
         display: none;
       }
@@ -752,20 +738,15 @@ documents-edit-info {
       float: left;
       position: relative;
       &.separator-hr:not(:last-child) {
-        //margin-bottom: 10px; // TODO check this style
-        //padding-bottom: 20px;
         margin-bottom: 22px;
         padding-bottom: 26px;
         &:after {
           position: absolute;
           content: "";
-          //left: 15px; // TODO check this style
           left: 0;
           bottom: 0;
           height: 1px;
-          //width: 95%;
           width: 100%;
-          //background: $gray-500--old;
           background: $gray-200;
         }
       }
@@ -929,22 +910,6 @@ documents-edit-info {
     }
   }
 }
-//.recurring-tickets-content__modal--content-footer, // TODO check this style
-//.new-users-content__modal--content-footer {
-//  .assigned-users-list {
-//    display: flex;
-//    margin-left: -39px;
-//    max-width: 148px;
-//    overflow-x: scroll;
-//    overflow-y: hidden;
-//    .default-user-avatar,
-//    .avatar-26 {
-//      width: 32px;
-//      height: 32px;
-//      margin-right: 5px;
-//    }
-//  }
-//}
 .mat-chip.mat-standard-chip {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
@@ -2440,7 +2405,7 @@ app-quotes-item {
         font-size: 12px;
         font-weight: 600;
         cursor: pointer;
-        flex-grow: initial;  // TODO check this style
+        flex-grow: initial;
         .tab-product,
         .tab-service {
           position: static;
@@ -2491,21 +2456,9 @@ app-quotes-item {
       .with-checkbox {
         display: flex;
         align-items: center;
-        //margin-right: 20px; // TODO check this style
-        //p {
-        //  font-weight: 400; // TODO check this style
-        //  margin: 0;
-        //}
-        //label {
-        //  margin-right: 8px; // TODO check this style
-        //}
       }
     }
     &--content-footer {
-      //margin: 60px 0 130px; // TODO check this style
-      //display: flex;
-      //justify-content: space-between;
-      //align-items: center;
       .btn-primary {
         margin-right: 16px;
       }
@@ -2815,7 +2768,6 @@ app-quotes-item {
     }
     .new-link {
       margin: 0 !important;
-      //padding: 0 !important; // TODO check this style
       padding: 12px 0 6px !important;
     }
   }
@@ -2874,9 +2826,6 @@ app-quotes-item {
 .new-companies-content__modal {
   .qt-aside-modern__content {
     .new-tax {
-      //left: unset !important; // Todo check this style
-      //right: 0;
-
       max-height: initial;
       overflow: visible;
       transform: none !important;
@@ -2906,24 +2855,6 @@ app-quotes-item {
   .user-subscription {
     background: $white;
   }
-
-  //.details-background { // Todo check this style
-  //  padding: 6px 17px 30px;
-  //  background: $gray-100--old;
-  //  border-top: 1px solid $gray-400--old;
-  //  border-bottom: 1px solid $gray-400--old;
-  //  width: calc(100% + 16px);
-  //  margin-left: -17px;
-  //  margin-top: 24px;
-  //
-  //  > [class*="col-md-"] {
-  //    margin-top: 20px;
-  //  }
-  //}
-
-  //.light-dropdown .report-caret-icon { // Todo check this style
-  //  right: 12px;
-  //}
 
   .details-divider {
     p {
@@ -2967,10 +2898,6 @@ app-quotes-item {
         padding: 11px 14px;
       }
     }
-
-    //.mat-form-field-wrapper { // TODO check this style
-    //  margin-top: 17px;
-    //}
 
     .mat-standard-chip {
       margin: 2px;
@@ -3161,14 +3088,6 @@ app-quotes-item {
     padding: 0 !important;
   }
 }
-//.recurring-tickets-content__modal, // TODO check this style
-//.new-users-content__modal {
-//  .mat-error {
-//    position: absolute;
-//    top: -17px;
-//    font-size: 12px;
-//  }
-//}
 // LEFT PANEL
 .left-panel-ng2 {
   [class*="left-panel-ng2__content"] {
@@ -4211,7 +4130,6 @@ app-ticket-edit-aside {
   app-date-picker {
     .date-picker {
       display: block;
-      //height: 24px; // TODO check this style
     }
   }
 
@@ -4243,11 +4161,6 @@ app-ticket-edit-aside {
         display: flex;
         align-items: center;
       }
-
-      //i { // Todo check this style
-      //  margin-right: 8px;
-      //  margin-top: -3px;
-      //}
     }
   }
 }
@@ -4448,45 +4361,12 @@ app-ticket-edit-aside-devices {
     line-height: 1.33;
   }
 
-  //.new-companies-content__modal--content {
-  //  padding: 0;
-  //}
-
-  //.create-product__col { // TODO checl this style
-  //  padding-left: 0;
-  //  margin-top: 17px !important;
-  //  position: relative;
-  //
-  //  .qt-checkbox {
-  //    width: auto;
-  //    align-items: center;
-  //  }
-  //
-  //  .mat-error {
-  //    font-size: 12px;
-  //    position: absolute;
-  //    top: calc(100% + 5px);
-  //  }
-  //}
-
-  //app-taxes {
-  //  .label-name {
-  //    margin-bottom: 8px;
-  //    color: $primary-2;
-  //  }
-  //
-  //  .new-taxes-area {
-  //    padding-left: 0;
-  //  }
-  //}
-
   .new-companies-content__modal--content-footer {
     margin-bottom: 0;
     margin-top: 24px !important;
   }
 
   #inventory-description {
-    //  height: 40px !important;
     padding: 8px 14px;
   }
 
@@ -4521,10 +4401,6 @@ app-ticket-edit-aside-devices {
     }
   }
 
-  //.dropdown-menu { // Todo check this style
-  //  max-width: 100%;
-  //}
-
   .icn-product-save {
     position: absolute;
     top: calc(50% - 4px) !important;
@@ -4557,11 +4433,6 @@ app-ticket-edit-aside-devices {
     @include body-m__sb;
     font-weight: 700;
   }
-  //.create-product__col { // TODO check this style
-  //  label {
-  //    margin-bottom: 0;
-  //  }
-  //}
 }
 
 .create-product-taxes-select {

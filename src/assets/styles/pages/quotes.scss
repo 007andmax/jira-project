@@ -156,7 +156,6 @@
     }
 
     app-invoice-regular-note .dropdown-menu {
-      //min-height: 190px; // TODO check this style
       width: 100%;
       app-invoice-select-note {
         min-width: 100%;
@@ -370,17 +369,6 @@
       filter: brightness(0.5);
     }
   }
-  //.quote-text-block { // TODO check this style
-  //  border-radius: 4px;
-  //  border: solid 1px $gray-500--old;
-  //  background-color: $white;
-  //  padding: 10px 14px;
-  //  font-size: 13px;
-  //  min-height: 104px;
-  //  &::placeholder {
-  //    color: $gray-600--old;
-  //  }
-  //}
 }
 
 .quote-email-dropdown {

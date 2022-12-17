@@ -85,15 +85,6 @@
   top: -8px;
   left: 14px;
 }
-//.add-tax-dropdown input, // TODO check this style
-//.add-tax-dropdown .form-control {
-//  width: 100%;
-//  border: none;
-//  border-bottom: 1px solid $gray-400--old;
-//  outline: none;
-//  padding: 10px 0;
-//  background-color: $white;
-//}
 .add-tax-dropdown [class*='col-md-']{
   margin-bottom: 20px;
 }
@@ -103,11 +94,6 @@
   font-weight: 500;
   letter-spacing: .5px;
 }
-//.add-tax-dropdown label { // TODO check this style
-//  color: $gray-800--old;
-//  font-size: 13px;
-//  padding-left: 25px;
-//}
 .add-category-lp-dropdown-btns .btn-default  {
   background-color: $background !important;
   border: 1px solid $gray-500--old;
@@ -232,7 +218,6 @@
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
-//.quote-text-block, // TODO check this style
 .email-text-block {
   border: 1px solid $background;
   border-radius: 4px;

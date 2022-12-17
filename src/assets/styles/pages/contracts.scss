@@ -399,12 +399,6 @@
             padding: 10px;
             height: 100%;
           }
-          //input.dropdown-toggle { // TODO check this style
-          //  height: 100%;
-          //  border-color: transparent;
-          //  font-size: 13px;
-          //  padding-top: 3px;
-          //}
         }
       }
 
@@ -535,21 +529,6 @@
       bottom: 35px !important;
     }
   }
-
-  //&__company-name-input { // TODO check this style
-  //  width: 400px;
-  //}
-  //
-  //&__contract-type-name-input {
-  //  width: 280px;
-  //}
-
-  &__gray-block { // TODO check this style
-    //border-top: 1px solid $gray-400--old;
-    //border-bottom: 1px solid $gray-400--old;
-    //background-color: $gray-100--old;
-  }
-  // end user device billing
 }
 app-contracts-filter {
   width: 100%;
@@ -731,7 +710,6 @@ line-height: 1.54;
   width: 44px;
   height: 20px;
   top: unset;
-  left: unset;
   bottom: unset !important;
   left: unset !important;
   padding-left: 5px;

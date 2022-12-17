@@ -7,7 +7,6 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
-  //overflow-x: hidden;
   overflow-x: auto;
   min-width: 1280px;
   font-size: 16px;
@@ -52,18 +51,6 @@ body .left-panel-full {
   background-color: $success;
   border-color: $success;
 }
-//.icn-remove-old { // TODO check this style
-//  background-image: url("/assets/img/icons/close.svg");
-//  background-position: center;
-//  right: 12px;
-//  position: absolute;
-//  top: -5px;
-//
-//  @media (max-width: 767px) {
-//    padding: 12px;
-//    transform: translate(5px, 4px);
-//  }
-//}
 
 .icn-remove-old {
   width: 20px;
@@ -81,11 +68,6 @@ body .left-panel-full {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-
-  //@media (max-width: 767px) { // TODO check this style
-  //  padding: 12px;
-  //  transform: translate(5px, 4px);
-  //}
 }
 
 /* Datepicker */
@@ -234,11 +216,6 @@ fieldset[disabled] .form-control {
 .new-users-content__modal .checkbox-wrapper .with-checkbox,
 .documents-create .checkbox-wrapper .with-checkbox,
 .documents-create-aside-categories .checkbox-wrapper .with-checkbox {
-  //display: -webkit-box; // TODO check this style
-  //display: flex;
-  //-webkit-box-align: center;
-  //align-items: center;
-  //margin-right: 20px;
   display: flex;
   flex-grow: unset;
 }
@@ -282,9 +259,6 @@ body .topNavbar strong span {
 }
 html::-webkit-scrollbar {
   height: 8px;
-}
-::-webkit-scrollbar-track {
-  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
 }
 
 ::-webkit-scrollbar-thumb {
@@ -351,51 +325,6 @@ p {
   font-weight: 400;
 }
 
-//.new-companies-content__modal--content > [class*="col-md-"] p,
-//.new-users-content__modal--content > [class*="col-md-"] p,
-//.recurring-tickets-content__modal--content > [class*="col-md-"] p,
-//.new-users-content__modal--content app-interval > [class*="col-md-"] p,
-//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
-//.password-content__modal--content > [class*="col-md-"] p {
-//  @include body-m__sb;  // TODO check this style
-//  color: $primary-2;
-//  margin-bottom: 8px;
-//}
-
-//.new-companies-content__modal--content > [class*="col-md-"],
-//.new-users-content__modal--content > [class*="col-md-"],
-//.recurring-tickets-content__modal--content > [class*="col-md-"],
-//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"],
-//.new-users-content__modal--content app-interval > [class*="col-md-"],
-//.password-content__modal--content > [class*="col-md-"] {
-//  margin-top: 20px; // TODO check this style
-//}
-
-//.new-users-content__modal--content > [class*="col-md-"] input,
-//.recurring-tickets-content__modal--content > [class*="col-md-"] input,
-//.new-companies-content__modal--content > [class*="col-md-"] input,
-//.new-users-content__modal--content app-interval > [class*="col-md-"] input,
-//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
-//.password-content__modal--content > [class*="col-md-"] input,
-//.documents-create .input-group.date-picker input {
-//  outline: none;
-//  height: 40px;
-//  padding: 0 12px;
-//  font-size: 13px;
-//  border: 1px solid $gray-500--old;
-//  border-radius: 4px; // TODO check this style
-//}
-
-//.new-companies-content__modal--content > [class*="col-md-"] input,
-//.recurring-tickets-content__modal--content > [class*="col-md-"] input,
-//.new-users-content__modal--content > [class*="col-md-"] input,
-//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
-//.new-users-content__modal--content app-interval > [class*="col-md-"] input,
-//.password-content__modal--content > [class*="col-md-"] input,
-//.documents-create .input-group.date-picker input {
-//  width: 100%; // TODO check this style
-//}
-
 .recurring-tickets-content__modal .new-link,
 .new-companies-content__modal .new-link,
 .new-users-content__modal .new-link {
@@ -414,7 +343,6 @@ p {
 .recurring-tickets-content__modal .new-link,
 .new-users-content__modal .new-link {
   margin: 0 !important;
-  //padding: 0 !important; // TODO check this style
   padding: 12px 0 6px !important;
 }
 
@@ -433,7 +361,7 @@ p {
 }
 
 /* Custom Checkbox */
-label { // TODO check this style
+label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 2px;
@@ -515,17 +443,6 @@ strong {
 .p-0 {
   padding: 0 !important;
 }
-
-/* Textarea */
-//.password-content__modal--content textarea { // TODO check this style
-//  border: 1px solid $gray-500--old;
-//  border-radius: 4px;
-//  min-height: 80px;
-//  width: 100%;
-//  padding: 15px;
-//  font-size: 13px;
-//  outline: none;
-//}
 textarea {
   resize: none;
 }
@@ -697,15 +614,8 @@ textarea {
   }
 }
 
-//.recurring-tickets-content__modal--content, // TODO check this style
-//.new-users-content__modal--content,
-//.password-content__modal--content {
-//  padding: 0 15px 20px;
-//}
-
 .password-content__modal--content {
   .date-picker-container {
-    //min-width: 274px; // TODO check this style
     width: auto;
     max-width: initial;
   }
@@ -715,14 +625,6 @@ textarea {
 input[disabled] {
   background-color: $gray-50;
 }
-
-//.left-panel-filter i,
-//.new-users-content__modal--content i,
-//.recurring-tickets-content__modal--content i,
-//.password-content__modal--content i {
-//  position: absolute; // TODO check this style
-//  right: 12px;
-//}
 
 h3,
 .h3 {
@@ -1051,7 +953,6 @@ h6,
 .dropdown-menu .subdropdown-menu > li > a,
 .dropdown-menu > .nano li a {
   display: block;
-  //padding: 5px 20px; // TODO check this style
   padding: 5px 7px;
   clear: both;
   font-weight: normal;
@@ -1144,7 +1045,6 @@ h6,
   border-radius: 4px;
   border: 1px solid $primary-1;
   text-align: center;
-  font-weight: $fw-medium;
   font-size: 15px;
   font-weight: 500;
   -webkit-transition: all 0.3s;

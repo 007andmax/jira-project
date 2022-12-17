@@ -191,9 +191,6 @@
       color: $primary-2;
 
       .payment-input {
-        //border-radius: 0; // TODO check this style
-        //border-width: 1px;
-        //padding: 0 12px;
         @include input;
         height: 100%;
       }

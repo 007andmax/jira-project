@@ -43,7 +43,7 @@ body {
       }
     }
 
-    .device-user.dropdown-toggle { // TODO delete after MAX fix
+    .device-user.dropdown-toggle {
       width: auto !important;
       margin-bottom: unset !important;
     }
@@ -317,45 +317,6 @@ body {
         }
       }
     }
-    //.heading { // TODO check thi style
-    //  .qt-input-search {
-    //    input {
-    //      border: 1px solid $gray-200;
-    //      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
-    //      border-radius: 6px;
-    //      padding: 8px 16px 8px 44px;
-    //      font-size: 14px;
-    //      line-height: 17px;
-    //      max-width: 200px;
-    //      width: 100%;
-    //
-    //      &::placeholder {
-    //        color: $gray-400;
-    //        font-weight: 400;
-    //      }
-    //
-    //      &:focus {
-    //        outline: none;
-    //        border-color: $blue-light-600;
-    //      }
-    //
-    //      &.--error,
-    //      &.is-invalid {
-    //        border-color: $red-600;
-    //      }
-    //
-    //      &.--disabled,
-    //      &[disabled] {
-    //        background-color: $gray-50;
-    //        border-color: $gray-200;
-    //
-    //        &:hover {
-    //          border-color: $gray-200;
-    //        }
-    //      }
-    //    }
-    //  }
-    //}
     .qt-table-modern__sorting--new {
       position: relative;
       width: 12px;
