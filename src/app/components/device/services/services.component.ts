@@ -72,8 +72,10 @@ export class ServicesComponent implements OnInit, OnDestroy {
   public getAllServicesList() {
     this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
       this.asset = resp[0];
-      this.assetId = this.asset.ID;
-      this.agentService.GetService(this.assetId);
+      if (resp.length > 0) {
+        this.assetId = this.asset.ID;
+        this.agentService.GetService(this.assetId);
+      }
       this.getReload(null);
     });
   }

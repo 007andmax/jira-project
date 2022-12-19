@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { CommonHttpServices } from '../_services/common_http.service';
@@ -13,7 +14,7 @@ import { ProcessesFilter } from './Class/processes-filter';
   templateUrl: './processes.component.html',
   styleUrls: ['./processes.component.scss']
 })
-export class ProcessesComponent implements OnInit {
+export class ProcessesComponent implements OnInit, OnDestroy {
   public processesList: any[] = [];
   public loading: boolean;
   public Id: string;
@@ -21,11 +22,11 @@ export class ProcessesComponent implements OnInit {
   public asset: any;
   pdfUrl = "";
   public search: string;
-  public processId : number;
+  public processId: number;
   public filter: ProcessesFilter = new ProcessesFilter();
-  public kafkaresponse:boolean = false;
-  public processview:boolean = false;
-
+  public kafkaresponse: boolean = false;
+  public processview: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
@@ -38,30 +39,32 @@ export class ProcessesComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.Id = this.activateRoute.snapshot.params["id"];    
-    this.kafkaStateService.GetProcesses.subscribe((resp)=>{
-      if(resp.length>0)
-      {
+    this.Id = this.activateRoute.snapshot.params["id"];
+    this.kafkaStateService.GetProcesses.subscribe((resp) => {
+      if (resp.length > 0) {
         this.kafkaresponse = true;
-        this.onGetProcess(resp)        
-      }      
-    })    
-    this.getAllServicesList();
+        this.onGetProcess(resp)
+      }
+    })
+    if (this.agentService.hasAccessToken()) this.getAllServicesList();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.getAllServicesList();
+    })
+    this.sub.add(onSetAccessToken);
     this.time();
   }
 
-  public time(){
-    setTimeout(()=>{
-      if(this.kafkaresponse == false)
-      {
+  public time() {
+    setTimeout(() => {
+      if (this.kafkaresponse == false) {
         this.loading = false;
         this.processview = true;
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
-      }      
-    },60000);
-    
+      }
+    }, 60000);
+
   }
 
   public onGetProcessError(error: any) {
@@ -72,17 +75,13 @@ export class ProcessesComponent implements OnInit {
     this.filter.onFilter(field, this.processesList);
   }
   public getAllServicesList() {
-    if(this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getAllServicesList();
-      }, 300);
-      return;
-    }
-      this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
-        this.asset = resp[0];
+    this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
+      this.asset = resp[0];
+      if (resp.length > 0) {
         this.assetId = this.asset.ID;
         this.agentService.GetProcesses(this.assetId);
-      });
+      }
+    });
   }
 
   public onGetProcess(resp: any) {
@@ -90,9 +89,8 @@ export class ProcessesComponent implements OnInit {
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.processesList = JSON.parse(item.Value);
-      for(let i=0;i<this.processesList.length;i++)
-      {
-        this.processesList[i] = Object.assign(this.processesList[i],{Loaded:'False',RestartLoaded:'False',StopLoaded:'False'});
+      for (let i = 0; i < this.processesList.length; i++) {
+        this.processesList[i] = Object.assign(this.processesList[i], { Loaded: 'False', RestartLoaded: 'False', StopLoaded: 'False' });
         this.processId = this.processesList[i].PID;
       }
     }
@@ -103,11 +101,11 @@ export class ProcessesComponent implements OnInit {
     this.getPdfData();
   }
 
-  stopProcesses(process){
-     this.agentService.KillProcesses(this.assetId, process.PID);
+  stopProcesses(process) {
+    this.agentService.KillProcesses(this.assetId, process.PID);
   }
 
-  public downloadCsv(){
+  public downloadCsv() {
     let downloadCsvList = [];
     this.processesList.forEach((element) => {
       downloadCsvList.push([
@@ -134,7 +132,7 @@ export class ProcessesComponent implements OnInit {
     this.processesList.forEach((element) => {
       pdfList.push([
         element.PID == null ? "N/A" : element.PID,
-        element.Name? element.Name.replace(",", " ") : "N/A",
+        element.Name ? element.Name.replace(",", " ") : "N/A",
         element.CPU == null ? "N/A" : element.CPU,
         element.MemoryMB == null ? "N/A" : element.MemoryMB,
         element.MemoryPercent == null ? "N/A" : element.MemoryPercent,
@@ -260,22 +258,22 @@ export class ProcessesComponent implements OnInit {
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[2] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[3] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[4] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[5] +
         `</td>`;
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
         element[6] +
@@ -337,7 +335,10 @@ export class ProcessesComponent implements OnInit {
       );
   }
 
-  trackByMethod(index:number, service:any): string {
+  trackByMethod(index: number, service: any): string {
     return service.Name;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

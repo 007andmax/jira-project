@@ -11,7 +11,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class LeftPanelDevicesComponent implements OnInit {
   type: string = 'Dashboard';
-  open: boolean = false;  
+  open: boolean = false;
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
@@ -20,23 +20,23 @@ export class LeftPanelDevicesComponent implements OnInit {
   company: any;
   toggleTypeCompanies: boolean = false;
   toggleTypePinnedSearch: boolean = false;
-  toggleTypeReport:boolean = false;
+  toggleTypeReport: boolean = false;
   companyReportList: any;
-  companyList:any;
+  companyList: any;
   currentActivePage: string = "new-devices";
   currentActiveReportPageChild: string = "";
   currentActivePinnedPageChild: string = "";
   currentActiveCompanyPageChild: string = "";
 
 
-  constructor(private leftPanelStateService: LeftPanelStateService,    
+  constructor(private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
     private companiesState: CompaniesStateService,
-    ) { }
+  ) { }
 
-  ngOnInit() {      
-    this.companiesState.onInit();
+  ngOnInit() {
+    //  this.companiesState.onInit();
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     this.companiesStateService.onCurrentCompany.subscribe(data => {
       this.getCurrentCompany(data);
@@ -56,22 +56,22 @@ export class LeftPanelDevicesComponent implements OnInit {
         this.open = true;
       }
     })
-    this.leftPanelStateService.onSearchItemAdded.subscribe(data => {      
+    this.leftPanelStateService.onSearchItemAdded.subscribe(data => {
       this.getCurrentCompany(this.company);
     });
 
     this.companiesState.getOnCompanies().subscribe(data => {
-      this.companyReportList= this.getCompaniesNames(data);
+      this.companyReportList = this.getCompaniesNames(data);
       this.companyList = this.companyReportList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
     })
 
-    this.leftPanelStateService.onPageActive.subscribe(data=>{
+    this.leftPanelStateService.onPageActive.subscribe(data => {
       this.currentActiveReportPageChild = data;
     })
   }
-  getCurrentCompany(data) {        
+  getCurrentCompany(data) {
     this.company = data;
-    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {                 
+    this.agentService.getByTechCompany(this.company.id).subscribe((res) => {
       this.searches = res;
     });
   }
@@ -101,16 +101,15 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.open = false;
   }
 
-  onFilter1(active, data) {       
+  onFilter1(active, data) {
     localStorage.setItem("currentSearch", JSON.stringify(data));
     this.type = active;
     this.goToState('new-devices');
     this.leftPanelStateService.onSearchChanged(data);
-    this.currentActivePinnedPageChild = data.ID;    
+    this.currentActivePinnedPageChild = data.ID;
   }
 
-  onFilterCompany(active, data)
-  {                  
+  onFilterCompany(active, data) {
     localStorage.setItem("currentSearchCompany", JSON.stringify(data));
     this.type = active;
     this.goToState('new-devices');
@@ -118,12 +117,12 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.currentActiveCompanyPageChild = data.name;
   }
 
-  onSearchReport(state,page){ 
-    localStorage.setItem('report', state); 
-    this.leftPanelStateService.goToState(state); 
-    this.currentActiveReportPageChild = page;                 
+  onSearchReport(state, page) {
+    localStorage.setItem('report', state);
+    this.leftPanelStateService.goToState(state);
+    this.currentActiveReportPageChild = page;
   }
-  
+
   private getCompaniesNames(list) {
 
     const filteredArray = [];
@@ -135,7 +134,7 @@ export class LeftPanelDevicesComponent implements OnInit {
     });
     return filteredArray;
   }
-  goToAll(){
+  goToAll() {
     this.goToState('new-devices');
     this.type = 'Dashboard'
     this.currentActivePage = 'new-devices';
@@ -144,53 +143,48 @@ export class LeftPanelDevicesComponent implements OnInit {
     this.currentActiveReportPageChild = '';
     this.toggleTypePinnedSearch = false;
     this.toggleTypeCompanies = false;
-    this.toggleTypeReport = false;      
-  }  
-
-  pagesActive(page)
-  {        
-    this.currentActivePage = page;
-    if(page == 'new-devices')
-    { 
-      this.currentActiveCompanyPageChild = '';
-      this.currentActivePinnedPageChild = '';
-      this.currentActiveReportPageChild = '';      
-      this.toggleTypePinnedSearch = false;
-      this.toggleTypeCompanies = false;
-      this.toggleTypeReport = false;      
-    }
-    if(page == 'devicesReports')
-    {    
-      this.currentActiveCompanyPageChild = '';  
-      this.currentActivePinnedPageChild = '';
-      this.toggleTypeCompanies = false;
-      this.toggleTypePinnedSearch = false;
-    }
-    if(page == 'devicesCompanies')
-    {
-      this.currentActivePinnedPageChild = '';
-      this.currentActiveReportPageChild = '';
-      this.toggleTypePinnedSearch = false;
-      this.toggleTypeReport = false;      
-    }
-    if(page == 'pinnedSearches')
-    {
-      this.currentActiveCompanyPageChild = '';
-      this.currentActiveReportPageChild = '';
-      this.toggleTypeCompanies = false;
-      this.toggleTypeReport = false;       
-    }    
+    this.toggleTypeReport = false;
   }
 
-  deletePinnedSearch(data){    
+  pagesActive(page) {
+    this.currentActivePage = page;
+    if (page == 'new-devices') {
+      this.currentActiveCompanyPageChild = '';
+      this.currentActivePinnedPageChild = '';
+      this.currentActiveReportPageChild = '';
+      this.toggleTypePinnedSearch = false;
+      this.toggleTypeCompanies = false;
+      this.toggleTypeReport = false;
+    }
+    if (page == 'devicesReports') {
+      this.currentActiveCompanyPageChild = '';
+      this.currentActivePinnedPageChild = '';
+      this.toggleTypeCompanies = false;
+      this.toggleTypePinnedSearch = false;
+    }
+    if (page == 'devicesCompanies') {
+      this.currentActivePinnedPageChild = '';
+      this.currentActiveReportPageChild = '';
+      this.toggleTypePinnedSearch = false;
+      this.toggleTypeReport = false;
+    }
+    if (page == 'pinnedSearches') {
+      this.currentActiveCompanyPageChild = '';
+      this.currentActiveReportPageChild = '';
+      this.toggleTypeCompanies = false;
+      this.toggleTypeReport = false;
+    }
+  }
+
+  deletePinnedSearch(data) {
     const pinnedSearch: any = {
       ID: data.ID,
       TechCompanyGuid: data.TechCompanyGuid,
       IsActive: true,
       Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
-    };    
-    this.agentService.deleteAssetSearch(pinnedSearch).subscribe((res) => { 
-      this.getCurrentCompany(this.company);             
+    };
+    this.agentService.deleteAssetSearch(pinnedSearch).subscribe((res) => {
+      this.getCurrentCompany(this.company);
     });
   }
 }

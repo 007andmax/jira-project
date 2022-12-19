@@ -17,6 +17,8 @@ export class AgentService {
   INITIALIZATION_VECTOR: string = "0000000000000000";
   AccessToken: string = "";
   onSetAccessToken: EventEmitter<any> = new EventEmitter();
+  onAssetByGuid: EventEmitter<any> = new EventEmitter();
+  assetByGuid: any;
   /**
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
@@ -32,6 +34,12 @@ export class AgentService {
 
   public hasAccessToken() {
     return this.AccessToken == "" ? false : true;
+  }
+  public getDataAssetByGuid() {
+    return this.assetByGuid;
+  }
+  public setAssetByGuid(data) {
+    this.onAssetByGuid.emit(data);
   }
 
   ensureAccessToken() {

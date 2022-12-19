@@ -121,9 +121,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.isNonAgentDevice = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
-    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    //if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+
+    this.currentUser = localStorage.getItem("currentUser");
+    // if (!this.agentService.getDataAssetByGuid()) this.getAssetDetail();
+    this.agentService.onAssetByGuid.subscribe(data => {
+      console.log("data", data);
+      if (!this.agentService.getDataAssetByGuid()) this.getAssetDetail(data);
+    })
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
-      this.setPreviewDataDevice();
+      // this.setPreviewDataDevice();
       if (this.techCompany) this.getManufacturers(this.techCompany.id);
       if (this.techCompany) this.getModels(this.techCompany.id);
     })
@@ -237,57 +244,52 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.toastr.error("Something went wrong installing updates");
   }
 
-  setPreviewDataDevice() {
-    this.currentUser = localStorage.getItem("currentUser");
-    this.getAssetDetail();
-  }
-
-  getAssetDetail() {
+  getAssetDetail(resp) {
     this.loading = true;
-    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-      if (resp.length > 0) {
-        this.loading = false;
-        this.asset = resp[0];
-        localStorage.setItem(
-          "deviceDetail_" + this._id,
-          JSON.stringify(this.asset)
-        );
-        this.asset.IsUpdated = true;
+    console.log("getAssetDetail");
+    if (resp.length > 0) {
+      this.loading = false;
+      this.asset = resp[0];
+      localStorage.setItem(
+        "deviceDetail_" + this._id,
+        JSON.stringify(this.asset)
+      );
+      this.asset.IsUpdated = true;
 
-        if (this.minDate(this.asset.WarrantyExpires)) {
-          this.asset.WarrantyExpires = "";
-        }
-
-        if (this.minDate(this.asset.InstallDate)) {
-          this.asset.InstallDate = "";
-        }
-
-        if (this.minDate(this.asset.DeploymentDate)) {
-          this.asset.DeploymentDate = "";
-        }
-
-        if (this.minDate(this.asset.LastRebootDate)) {
-          this.asset.LastRebootDate = "";
-        }
-
-        if (this.asset.AgentVersion == "") {
-          this.isNonAgentDevice = false;
-        }
-
-        this.model = this.asset.ModelID;
-        this.selectManufacture(this.asset.ManufacturerId)
-        this.selectModel(this.asset.ModelID);
-        this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
-        this.getOprationSystemDetail();
-        if (resp[0].VirusProtectionProducts != null) {
-          this.getVirusProtection(resp[0].VirusProtectionProducts);
-        }
-        this.getDiskDriveDetail();
-        this.getAssetTagDropDownDetail();
-        this.getAssetNotesDetail();
-        this.agentService.GetCurrentConfig(this.asset.ID);
+      if (this.minDate(this.asset.WarrantyExpires)) {
+        this.asset.WarrantyExpires = "";
       }
-    });
+
+      if (this.minDate(this.asset.InstallDate)) {
+        this.asset.InstallDate = "";
+      }
+
+      if (this.minDate(this.asset.DeploymentDate)) {
+        this.asset.DeploymentDate = "";
+      }
+
+      if (this.minDate(this.asset.LastRebootDate)) {
+        this.asset.LastRebootDate = "";
+      }
+
+      if (this.asset.AgentVersion == "") {
+        this.isNonAgentDevice = false;
+      }
+
+      this.model = this.asset.ModelID;
+      this.selectManufacture(this.asset.ManufacturerId)
+      this.selectModel(this.asset.ModelID);
+      this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
+      this.getOprationSystemDetail();
+      if (resp[0].VirusProtectionProducts != null) {
+        this.getVirusProtection(resp[0].VirusProtectionProducts);
+      }
+      this.getDiskDriveDetail();
+      this.getAssetTagDropDownDetail();
+      this.getAssetNotesDetail();
+      this.agentService.GetCurrentConfig(this.asset.ID);
+    }
+
   }
 
   AddTags(Tag) {
