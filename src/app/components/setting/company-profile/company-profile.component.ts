@@ -341,7 +341,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             if (this.cProfile.address.length > 0) {
               if (res.addresses.length > 0 && res.addresses[0].timeZone) {
                 let find = this.timezones.find(item => item.second === res.addresses[0].timeZone.name);
-                this.cProfile.address[0].timeZone = new TimeZone(find);
+                if (find) this.cProfile.address[0].timeZone = new TimeZone(find);
               }
               this.cProfileForm.patchValue({
                 locale: res.addresses[0].timeZone.second
