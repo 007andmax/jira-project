@@ -120,10 +120,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     })
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     if (this.ticketsFilter.listType !== "RECURRING_TICKETS") this.getTickets();
-
   }
   public setDefaultScoll() {
     this.page_number = 0;

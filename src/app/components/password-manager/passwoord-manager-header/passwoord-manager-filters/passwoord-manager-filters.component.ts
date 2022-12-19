@@ -92,9 +92,7 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
       this.selectedCompany = data.find(item => item.id === this.companiesState.getCompanyRoutingId());
       this.filter.setCompany(this.selectedCompany);
       this.onChangeCounterFilter();
-
       let users = this.usersStateService.getAllUsers().filter(item => {
-        console.log("data", data);
         let company = data.find(itemCompany => itemCompany.id === item.company.id);
         let isArchived = item.deletedAt || !company;
         return !isArchived && item.company.id === this.selectedCompany.id

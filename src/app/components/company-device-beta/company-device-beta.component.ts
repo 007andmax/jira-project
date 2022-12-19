@@ -362,7 +362,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
 
   onAck() {
     this.kafkaStateService.onAck.subscribe((resp) => {
-      console.log("OnAck");
       let asset = this.assetList.find((x) => x.ID === resp.data.AssetID);
       if (asset) {
         this.ngZone.run(() => {
@@ -587,7 +586,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
 
   onInstallRemoteAgentCommand() {
     this.kafkaStateService.onInstallRemoteAgent.subscribe((resp) => {
-      console.log("onInstallRemoteAgent");
       let item = resp.find((x) => x.key == this.assetId);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -602,7 +600,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
 
   onUninstallRemoteAgentCommand() {
     this.kafkaStateService.onUninstallRemoteAgent.subscribe((resp) => {
-      console.log("onUninstallRemoteAgent");
       let item = resp.find((x) => x.key == this.assetId);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -769,7 +766,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   onSearchTag(Tag) {
-    console.log('onSearchTag fired');
     if ((Tag || '').length <= 2) {
       return;
     }
@@ -794,7 +790,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   selectedSearch(event: MatAutocompleteSelectedEvent): void {
     let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
     if (!data) {
-      console.log('selected fired');
       this.selectedTag.push(event.option.viewValue);
       this.searchTag.push(event.option.viewValue);
       this.selectedInput.nativeElement.value = '';
@@ -805,7 +800,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   add(Tag): void {
-    console.log('add event fired');
     this.tagFilterValue = "";
     this.selectedInput.nativeElement.value = '';
     this.selectedCtrl.setValue(null);
@@ -916,7 +910,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
 
 
   selectedSearchTag(event: MatAutocompleteSelectedEvent): void {
-    console.log('selected fired');
     this.selectedTagdevicelist.push(event.option.viewValue);
     this.tagSearch.push(event.option.viewValue);
     this.selectedInput.nativeElement.value = '';
@@ -1148,7 +1141,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   onSearchLinkDevices(Tag) {
-    console.log('onSearchLinkDevices fired');
     if ((Tag || '').length <= 2) {
       return;
     }

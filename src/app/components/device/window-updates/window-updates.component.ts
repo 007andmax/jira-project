@@ -12,9 +12,9 @@ import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 export class WindowUpdatesComponent implements OnInit {
   kafkaMessage: any = "";
   installedWindowsUpdateList: any[] = [];
-  installUpdate : number;
-  blockedWindowsUpdateList : any [] = [];
-  blockedNumber : number;
+  installUpdate: number;
+  blockedWindowsUpdateList: any[] = [];
+  blockedNumber: number;
   windowUpdatePendingList: any[] = [];
   securityUpdate: number;
   asset: any = undefined;
@@ -22,12 +22,12 @@ export class WindowUpdatesComponent implements OnInit {
   _id = "";
   categories: number
   check: any[] = [];
-  selectednum = false ;
+  selectednum = false;
   reloadWindowUpdatePendingList: any[] = [];
   isOverlay = false;
   selected: number = 0;
-  public kafkaresponse:boolean = false;
-  public windowupdateview:boolean = false;
+  public kafkaresponse: boolean = false;
+  public windowupdateview: boolean = false;
   public loading: boolean;
 
   constructor(
@@ -42,79 +42,74 @@ export class WindowUpdatesComponent implements OnInit {
     this._id = this.activateRoute.snapshot.params["id"];
     this.loading = true;
     this.getAssetId();
-    this.kafkaStateService.onCurrentConfig.subscribe((resp)=>{
-      if(resp.length>0)
-      {
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (resp.length > 0) {
         this.kafkaresponse = true;
-        this.onCurrentConfig(resp)        
-      }      
+        this.onCurrentConfig(resp)
+      }
     });
-    this.time();       
+    this.time();
     this.kafkaStateService.onInstallWindowsUpdates.subscribe((resp) => {
-      if(resp.length>0)
-      {
+      if (resp.length > 0) {
         this.loading = true;
-        this.agentService.GetCurrentConfig(this.asset.ID);      
-      }      
+        this.agentService.GetCurrentConfig(this.asset.ID);
+      }
     });
   }
 
-  public time(){
-    setTimeout(()=>{
-      if(this.kafkaresponse == false)
-      {     
-        this.loading = false;   
+  public time() {
+    setTimeout(() => {
+      if (this.kafkaresponse == false) {
+        this.loading = false;
         this.windowupdateview = true;
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
         }
-      }      
-    },60000);
-    
+      }
+    }, 60000);
+
   }
 
-  onCurrentConfig(resp: any) {    
-    if(resp.length>0)
-    {
-      this.loading=false;
+  onCurrentConfig(resp: any) {
+    if (resp.length > 0) {
+      this.loading = false;
       if (this.asset.ID && this.asset.ID != 0) {
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item) {
           this.kafkaMessage = JSON.parse(item.Value);
-  
+
           this.installUpdate = this.kafkaMessage.InstalledWindowsUpdates.length;
-          if(this.installUpdate > 0){
+          if (this.installUpdate > 0) {
             this.installedWindowsUpdateList = [];
-            for(let i=0; i< this.installUpdate ; i++){
-              let install : any = {};
+            for (let i = 0; i < this.installUpdate; i++) {
+              let install: any = {};
               install.UpdateID = this.kafkaMessage.InstalledWindowsUpdates[i].UpdateID;
               install.Title = this.kafkaMessage.InstalledWindowsUpdates[i].Title;
               install.Size = this.kafkaMessage.InstalledWindowsUpdates[i].Size;
               this.categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories.length;
-              if(this.categories >0)
-              {
-                for(let j=0; j<this.categories; j++){
+              if (this.categories > 0) {
+                for (let j = 0; j < this.categories; j++) {
                   install.Categories = this.kafkaMessage.InstalledWindowsUpdates[i].Categories[j].Name
                 }
               }
               this.installedWindowsUpdateList.push(install);
             }
           }
-  
+
           this.blockedNumber = this.kafkaMessage.BlockedWindowsUpdates.length;
-          if(this.blockedNumber > 0){
+          if (this.blockedNumber > 0) {
             this.blockedWindowsUpdateList = [];
-            for(let i=0; i< this.blockedNumber ; i++){
-              let blocked : any = {};
+            for (let i = 0; i < this.blockedNumber; i++) {
+              let blocked: any = {};
               blocked.UpdateID = this.kafkaMessage.BlockedWindowsUpdates[i].UpdateID;
               blocked.Title = this.kafkaMessage.BlockedWindowsUpdates[i].Title;
               blocked.Size = this.kafkaMessage.BlockedWindowsUpdates[i].Size;
-  
+
               this.blockedWindowsUpdateList.push(blocked);
             }
           }
           this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-  
+
           if (this.securityUpdate > 0) {
             this.windowUpdatePendingList = [];
             for (let i = 0; i < this.securityUpdate; i++) {
@@ -123,9 +118,8 @@ export class WindowUpdatesComponent implements OnInit {
               data.Title = this.kafkaMessage.PendingWindowsUpdates[i].Title;
               data.Size = this.kafkaMessage.PendingWindowsUpdates[i].Size;
               this.categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories.length;
-              if(this.categories >0)
-              {
-                for(let j=0; j<this.categories; j++){
+              if (this.categories > 0) {
+                for (let j = 0; j < this.categories; j++) {
                   data.Categories = this.kafkaMessage.PendingWindowsUpdates[i].Categories[j].Name
                 }
               }
@@ -142,23 +136,22 @@ export class WindowUpdatesComponent implements OnInit {
               this.windowUpdatePendingList.push(data);
             }
           }
-  
-          if(!this.cd['destroyed']){
+
+          if (!this.cd['destroyed']) {
             this.cd.detectChanges();
           }
         }
       }
     }
-    
+
   }
 
   onCurrentConfigError(err: any) {
-    console.log('on current config error');
     this.toastr.error("Something went wrong getting real time data");
   }
 
   getAssetId() {
-    if(this.agentService.AccessToken == '') {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getAssetId();
       }, 300);
@@ -177,7 +170,7 @@ export class WindowUpdatesComponent implements OnInit {
     return (parseFloat(val1)).toFixed(2);
   }
 
-  categoriesSep(name:string){
+  categoriesSep(name: string) {
     this.categoriesName = "";
     if (name.length > 0) {
       let finalname = name.split(",");
@@ -195,7 +188,7 @@ export class WindowUpdatesComponent implements OnInit {
     if (!find) {
       this.check.push(index);
       this.selected = this.selected + 1;
-      if(this.check.length>0){
+      if (this.check.length > 0) {
         this.selectednum = true;
       }
       this.reloadWindowUpdatePendingList.push(this.windowUpdatePendingList[i]);
@@ -203,14 +196,14 @@ export class WindowUpdatesComponent implements OnInit {
     else {
       this.check.splice(indexs, 1);
       this.selected = this.selected - 1;
-      if(this.check.length==0){
+      if (this.check.length == 0) {
         this.selectednum = false
       }
       this.reloadWindowUpdatePendingList.splice(indexs, 1);
-    }  
-    if (!this.cd['destroyed']){
+    }
+    if (!this.cd['destroyed']) {
       this.cd.detectChanges();
-    }  
+    }
   }
 
   InstallUpdate() {
@@ -246,5 +239,5 @@ export class WindowUpdatesComponent implements OnInit {
         this.isOverlay = false;
       }, 3000)
     }
-  }  
+  }
 }

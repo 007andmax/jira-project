@@ -111,7 +111,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.recordsData);
-    console.log("listFilter", listFilter);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let list_records = [];
@@ -121,7 +120,6 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
-    console.log("this.passwordManagerListService.getBlockList()", this.passwordManagerListService.getBlockList());
   }
   onSelectRecord(record) {
     this.recordsData.find(item => item.id === record.id).selected = record.selected;

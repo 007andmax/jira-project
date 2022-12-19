@@ -194,7 +194,6 @@ export class AgentService {
 
   public servicePauseCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending servicepause command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -205,7 +204,6 @@ export class AgentService {
 
   public serviceRestartCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending servicerestart command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -216,7 +214,6 @@ export class AgentService {
 
   public serviceStartCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending servicestart command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -454,9 +451,7 @@ export class AgentService {
       AssetID: assetId,
       MessageType: "UninstallAgent",
     };
-
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending UninstallAgent command:" + data.MessageType);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -466,7 +461,6 @@ export class AgentService {
   }
   public TerminalShellCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending terminal command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -655,7 +649,6 @@ export class AgentService {
 
   public SendPowerShellCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending powershell command:" + data.Value);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -666,7 +659,6 @@ export class AgentService {
 
   public SendNetworkCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending network command:" + data);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -677,7 +669,6 @@ export class AgentService {
 
   public SendSetMasterAgent(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log("sending network command:" + data);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => { });
@@ -756,7 +747,6 @@ export class AgentService {
   }
 
   public deleteModel(res) {
-    console.log("res", res);
     return this.http
       .post(
         `${this.apiAgent}agent/Model`,

@@ -68,7 +68,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   public onGetProcessError(error: any) {
-    console.log(error);
   }
 
   public onFilter(field: string) {

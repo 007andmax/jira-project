@@ -342,7 +342,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onAck() {
     this.kafkaStateService.onAck.subscribe((resp) => {
-      console.log("OnAck");
       if (resp.data.AssetID == this.asset.ID) {
         this.ngZone.run(() => {
           this.toastr.success(
@@ -355,7 +354,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onPowerShellCommand() {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
-      console.log("OnPowerShellCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -486,7 +484,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onUninstallAgent() {
     this.kafkaStateService.onUninstallAgent.subscribe((resp) => {
-      console.log("onUninstallAgent");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -504,7 +501,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onUpdateAgent() {
     this.kafkaStateService.onUpdateAgent.subscribe((resp) => {
-      console.log("onUpdateAgent");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -518,7 +514,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onInstallRemoteAgentCommand() {
     this.kafkaStateService.onInstallRemoteAgent.subscribe((resp) => {
-      console.log("onInstallRemoteAgent");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;
@@ -533,7 +528,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onUninstallRemoteAgentCommand() {
     this.kafkaStateService.onUninstallRemoteAgent.subscribe((resp) => {
-      console.log("onUninstallRemoteAgent");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         this.kafkaMessage = item.Value;

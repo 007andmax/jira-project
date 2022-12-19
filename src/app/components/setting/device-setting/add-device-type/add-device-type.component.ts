@@ -31,7 +31,6 @@ export class AddDeviceTypeComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    console.log("this.deviceForm.value", this.deviceForm.value);
     this.agentService.addHardwareType(this.deviceForm.value)
       .pipe(
         map((res: any) => {

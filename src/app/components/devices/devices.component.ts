@@ -297,7 +297,6 @@ export class DevicesComponent implements OnInit {
       req.TechCompanyGuid = this.techCompnayGuid;
       req.Criteria = [];
       this.getAssets();
-      console.log("load");
       this.HardwareTypeList(this.techCompnayGuid);
       if (this.agentService.hasAccessToken()) this.getManufacturers(this.techCompnayGuid);
       if (this.agentService.hasAccessToken()) this.getModels(this.techCompnayGuid);
@@ -361,9 +360,7 @@ export class DevicesComponent implements OnInit {
       this.operatingSystem = [];
       this.assetList = resp;
       this.getDevices(resp);
-      console.log("searchDeviceWithTag");
       this.HardwareTypeList(this.techCompnayGuid);
-
       this.assetList.forEach((element, index) => {
         element.online = false;
         this.assetList[index].Title =
@@ -653,7 +650,6 @@ export class DevicesComponent implements OnInit {
   }
 
   onSearchTag(Tag) {
-    console.log('onSearchTag fired');
     if ((Tag || '').length <= 2) {
       return;
     }
@@ -677,7 +673,6 @@ export class DevicesComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     let data = this.selectedTag.find(x => x.toLowerCase() == event.option.viewValue.toLocaleLowerCase());
     if (!data) {
-      console.log('selected fired');
       this.selectedTag.push(event.option.viewValue);
       this.searchTag = [];
       this.searchTag = this.selectedTag;
@@ -709,7 +704,6 @@ export class DevicesComponent implements OnInit {
   }
 
   add(Tag): void {
-    console.log('add event fired');
     this.tagFilterValue = "";
 
     this.selectedInput.nativeElement.value = '';
@@ -1484,9 +1478,7 @@ export class DevicesComponent implements OnInit {
   addLinkDevices(Tag) {
     if (!Tag) {
       return;
-
     }
-    console.log('addLinkedDevices fired');
     this.linkDevicesTag.push(Tag);
     this.linkDevicesFilterValue = "";
   }
@@ -1496,7 +1488,6 @@ export class DevicesComponent implements OnInit {
   }
 
   onSearchLinkDevices(Tag) {
-    console.log('onSearchLinkDevices fired');
     if ((Tag || '').length <= 2) {
       return;
     }
@@ -1786,7 +1777,6 @@ export class DevicesComponent implements OnInit {
 
     this.agentService.getAssetByAdvanceSearch(data).subscribe(
       (result) => {
-        console.log("getAssetByAdvanceSearch");
         if (result && result.length > 0) {
           this.assetList = result;
           this.HardwareTypeList(this.techCompnayGuid);

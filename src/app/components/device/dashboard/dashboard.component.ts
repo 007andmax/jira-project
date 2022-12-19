@@ -126,7 +126,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.currentUser = localStorage.getItem("currentUser");
     // if (!this.agentService.getDataAssetByGuid()) this.getAssetDetail();
     this.agentService.onAssetByGuid.subscribe(data => {
-      console.log("data", data);
       if (!this.agentService.getDataAssetByGuid()) this.getAssetDetail(data);
     })
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
@@ -221,7 +220,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onCurrentConfigError(err: any) {
-    console.log('on current config error');
     this.toastr.error("Something went wrong getting real time data");
   }
 
@@ -240,13 +238,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onInstallWindowsUpdatesError(error: any) {
-    console.log('onInstallWindowsUpdatesError');
     this.toastr.error("Something went wrong installing updates");
   }
 
   getAssetDetail(resp) {
     this.loading = true;
-    console.log("getAssetDetail");
     if (resp.length > 0) {
       this.loading = false;
       this.asset = resp[0];

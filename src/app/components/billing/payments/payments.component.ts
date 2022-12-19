@@ -175,7 +175,6 @@ export class PaymentsComponent implements OnInit {
     return item.id;
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getInvoices();
   }

@@ -61,7 +61,6 @@ export class StartupComponent implements OnInit, OnDestroy {
 
   public GetStartupPrograms() {
     this.agentService.getAssetByGuid(this.Id).subscribe((resp) => {
-      console.log("GetStartupPrograms", resp);
       this.asset = resp[0];
       if (resp.length > 0) {
         this.assetId = this.asset.ID;
@@ -99,7 +98,6 @@ export class StartupComponent implements OnInit, OnDestroy {
   }
 
   public onGetStartupProgramsError(error: any) {
-    console.log(error);
   }
 
 

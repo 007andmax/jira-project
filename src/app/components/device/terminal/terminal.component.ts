@@ -147,7 +147,6 @@ export class TerminalComponent implements OnInit, OnDestroy {
 
   onTerminalPowershall() {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
-      console.log("OnTerminalCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         if (!item.Value.startsWith("Executing")) {
@@ -167,7 +166,6 @@ export class TerminalComponent implements OnInit, OnDestroy {
 
   onTerminalCommand() {
     this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
-      console.log("OnTerminalCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item) {
         if (!item.Value.startsWith("Executing")) {

@@ -96,7 +96,6 @@ export class ServicesComponent implements OnInit, OnDestroy {
   }
 
   public onGetServiceError(error: any) {
-    console.log(error);
   }
 
   public onFilter(field: string) {
