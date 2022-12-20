@@ -115,11 +115,18 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       ],
       techRole: [''],
       newDevice: [''],
+      userEmailNotificationId: [''],
       ticketCreated: [''],
       myTicketUpdated: [''],
       ticketCloseNotifications: [''],
       id: [''],
-      twoFactorAuthType: ['']
+      twoFactorAuthType: [''],
+      userEmailNotifications: {
+        newDevice: [false],
+        ticketCreated: [false],
+        myTicketUpdated: [false],
+        ticketCloseNotifications: [false],
+      }
     });
     let changeUsersArray = this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.data.accountType !== "TECH") return;
@@ -347,7 +354,13 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUserForm.reset();
     if (this.create) {
       this.techUserForm.patchValue({
-        techRole: this.techRoles[0]
+        techRole: this.techRoles[0],
+        userEmailNotifications: {
+          newDevice: false,
+          ticketCreated: false,
+          myTicketUpdated: false,
+          ticketCloseNotifications: false,
+        }
       });
     }
   }
@@ -375,6 +388,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         ticketCreated: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
         myTicketUpdated: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
         ticketCloseNotifications: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
+        userEmailNotificationId: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.id,
         id: techUser.id,
         twoFactorAuthType: techUser.twoFactorAuthType,
       });
@@ -549,7 +563,12 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         lastName: this.techUserForm.value.lastName,
         primaryEmail: this.techUserForm.value.primaryEmail,
         companyId: this.currentCompanyId,
-
+        "userEmailNotifications": {
+          "newDevice": (this.techUserForm.value.newDevice != null) ? this.techUserForm.value.newDevice : false,
+          "ticketCreated": (this.techUserForm.value.ticketCreated != null) ? this.techUserForm.value.ticketCreated : false,
+          "myTicketUpdated": (this.techUserForm.value.myTicketUpdated != null) ? this.techUserForm.value.myTicketUpdated : false,
+          "ticketCloseNotifications": (this.techUserForm.value.ticketCloseNotifications != null) ? this.techUserForm.value.ticketCloseNotifications : false
+        },
         twoFactorAuthType: this.techUserForm.value.twoFactorAuthType,
       };
       if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
@@ -559,10 +578,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
           this.create = false;
-          if (savedTechUsre && savedTechUsre.id) {
-            this.saveUsersEmailNotifications(savedTechUsre.id);
-          }
-
         },
         error => {
           this.addBtn.setDisabled(false);
@@ -716,10 +731,16 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       "twoFactorAuthType": this.techUserForm.value.twoFactorAuthType,
       "companyId": this.selectedTechUser.company
         ? this.selectedTechUser.company.id
-        : null
+        : null,
+      "userEmailNotifications": {
+        "newDevice": this.techUserForm.value.newDevice,
+        "ticketCreated": this.techUserForm.value.ticketCreated,
+        "myTicketUpdated": this.techUserForm.value.myTicketUpdated,
+        "ticketCloseNotifications": this.techUserForm.value
+          .ticketCloseNotifications,
+        "id": this.techUserForm.value.userEmailNotificationId
+      }
     }
-
-
     /* this.selectedTechUser.firstName = this.techUserForm.value.firstName;
      this.selectedTechUser.lastName = this.techUserForm.value.lastName;
      this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
@@ -746,7 +767,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         res => {
           this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
-          this.saveUsersEmailNotifications(this.selectedTechUser.id);
           this.techUserForm.reset();
           this.submitted = false;
           this.selectedTechUser = null;
@@ -759,27 +779,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.toastr.error(er.techRole || 'Bad Request');
         }
       );
-  }
-
-  /**
-   * saved tech user email notification based on id.
-   * @param techUserId
-   */
-
-  saveUsersEmailNotifications(techUserId: string) {
-    if (techUserId) {
-      const notificationSetting = {
-        newDevice: this.techUserForm.value.newDevice,
-        ticketCloseNotifications: this.techUserForm.value
-          .ticketCloseNotifications,
-        ticketCreated: this.techUserForm.value.ticketCreated,
-        myTicketUpdated: this.techUserForm.value.myTicketUpdated
-      };
-      this.techUsersService
-        .saveUsersEmailNotifications(techUserId, notificationSetting)
-        .pipe(map(() => { }))
-        .subscribe();
-    }
   }
 
   ngOnDestroy(): void {

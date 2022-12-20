@@ -47,15 +47,6 @@ export class TechUsersService {
     return this.http.put(`${this.apiUrl}users/${uId}`, techUser);
   }
 
-  saveUsersEmailNotifications(uId: string, emailNotification) {
-    // checked save notification button (dev url)
-    // {"newDevice":true,"scheduleChanged":false,"clientCompanyUpdated":false,"ticketCreated":true,"myTicketUpdated":true}
-    return this.http.put(
-      `${this.apiUrl}settings/userProfile/saveUsersEmailNotifications?userId=${uId}`,
-      emailNotification
-    );
-  }
-
   createUser(techUser: any) {
     // {"techRole":"Help desk user","firstName":"Today Test","lastName":"Test","primaryEmail":"today@test.com","companyId":"73221c72-f87c-4519-8235-c4b57ad1cc19","subscription":{}}
     // {"techRole":"Tech user","firstName":"Test","lastName":"Test New","primaryEmail":"test@newtest.com","companyId":"73221c72-f87c-4519-8235-c4b57ad1cc19","subscription":{}}
