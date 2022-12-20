@@ -156,10 +156,11 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
-            (click)="changePage('DEVICES');onOpenPanel();panelDevices.goToAll()"            
+            (click)="changePage('DEVICES');onOpenPanel();panelDevices.goToAll()"
             [ngClass]="{'--active':page === 'DEVICES' }"
             placement="right"
             ngbTooltip="Devices"
+            *ngIf="currentCompany && (currentCompany.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || currentCompany.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
         >
             <div class="app-left-panel__menu-icon --devices"></div>
         </div>

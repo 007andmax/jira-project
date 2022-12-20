@@ -65,7 +65,7 @@
                 [listStates]="getListStates('REMOTE_ACCESS',searchText)"
             ></app-report-list-item>
             <app-report-list-item
-                *ngIf="getPermissions('VIEW_DEVICES_REPORTS')"
+                *ngIf="getPermissions('VIEW_DEVICES_REPORTS') && companiesStateService.getCurrentCompany() && (companiesStateService.getCurrentCompany().id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || companiesStateService.getCurrentCompany().id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
                 [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
                 [title]="'Devices'"
                 [listTitles]="getListTitles('DEVICES',searchText)"

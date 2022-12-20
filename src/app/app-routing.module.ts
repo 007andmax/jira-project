@@ -93,6 +93,7 @@ import { SuperAdminPublicComponent } from './components/super-admin-public/super
 import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
 import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
 import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
+import { TestPermissionService } from './services/test-permission/test-permission.service';
 
 const routes: Routes = [
 
@@ -246,7 +247,8 @@ const routes: Routes = [
   {
     path: ':company/setting/deviceSetting',
     loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
-    canActivate: [PermissionTechUserService]
+    // canActivate: [PermissionTechUserService]
+    canActivate: [TestPermissionService]
   },
   {
     path: ':company/inventory/products',
@@ -329,6 +331,7 @@ const routes: Routes = [
   {
     path: ':company/device',
     loadChildren: './components/device/device-root.module#DeviceModule',
+    canActivate: [TestPermissionService]
 
   },
   {
@@ -360,12 +363,14 @@ const routes: Routes = [
   {
     path: ':company/company/:id/devices-beta',
     loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    //canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [TestPermissionService]
   },
   {
     path: ':company/devices',
     loadChildren: './components/devices/devices.module#DevicesModule',
-    canActivate: [PermissionTechUserService]
+    // canActivate: [PermissionTechUserService],
+    canActivate: [TestPermissionService]
   },
   {
     path: ':company/quickSupport',
@@ -399,7 +404,8 @@ const routes: Routes = [
   {
     path: ':company/devices/reports',
     loadChildren: './components/devices/devices-report/devices-report.module#DevicesReportModule',
-    canActivate: [PermissionTechUserService]
+    //canActivate: [PermissionTechUserService]
+    canActivate: [TestPermissionService]
   },
 
 

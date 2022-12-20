@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { values } from "d3";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
 import { LeftPanelStateService } from "../../states/left-panel/left-panel-state.service";
 import { QuoteStateService } from "../../states/quote/quote-state.service";
@@ -66,7 +67,8 @@ export class ReportsComponent implements OnInit {
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private quoteStateService: QuoteStateService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    public companiesStateService: CompaniesStateService,
   ) { }
 
   ngOnInit() { }
