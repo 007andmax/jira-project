@@ -143,6 +143,7 @@ import { CompanyDropDownComponent } from './components/shared/company-drop-down/
 import { NgxMaskModule } from 'ngx-mask';
 import { GoogleAuthenticatorModule } from './components/shared/google-authenticator/google-authenticator.module';
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
+import { TestPermissionService } from './services/test-permission/test-permission.service';
 declare var $: any;
 
 /**
@@ -276,7 +277,8 @@ declare var $: any;
     PermissionSupportService,
     PermissionReportsService,
     PermissionTechUserService,
-    PermissionSuperAdminService
+    PermissionSuperAdminService,
+    TestPermissionService
   ],
   bootstrap: [AppComponent]
 })

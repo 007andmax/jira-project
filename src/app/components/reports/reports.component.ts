@@ -61,6 +61,9 @@ export class ReportsComponent implements OnInit {
       name: "Income account report",
       address: "income-accounts",
     },
+    { type: "DEVICES", name: "Software Summary report", address: "software-summary" },
+    { type: "DEVICES", name: "Hardware Summary reports", address: "hardware-summary" },
+    { type: "DEVICES", name: "Device IP Summary report", address: "device-ip-summary" },
   ];
   searchText: string = "";
   title: string = "Reports";
@@ -91,7 +94,17 @@ export class ReportsComponent implements OnInit {
           .map((x) => x.name)
         : this.reportList.filter((x) => x.type === "SALES").map((x) => x.name);
     }
-
+    if (type === "DEVICES") {
+      return searchs !== ""
+        ? this.reportList
+          .filter(
+            (x) =>
+              x.type === "DEVICES" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.name)
+        : this.reportList.filter((x) => x.type === "DEVICES").map((x) => x.name);
+    }
     if (type === "TAXES") {
       return searchs !== ""
         ? this.reportList
@@ -200,7 +213,19 @@ export class ReportsComponent implements OnInit {
           .filter((x) => x.type === "SALES")
           .map((x) => x.address);
     }
-
+    if (type === "DEVICES") {
+      return searchs !== ""
+        ? this.reportList
+          .filter(
+            (x) =>
+              x.type === "DEVICES" &&
+              x.name.toLowerCase().indexOf(searchs.toLowerCase()) > -1
+          )
+          .map((x) => x.address)
+        : this.reportList
+          .filter((x) => x.type === "DEVICES")
+          .map((x) => x.address);
+    }
     if (type === "TAXES") {
       return searchs !== ""
         ? this.reportList

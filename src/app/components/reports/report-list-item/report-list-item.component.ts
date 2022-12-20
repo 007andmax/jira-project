@@ -12,10 +12,11 @@ export class ReportListItemComponent implements OnInit {
   @Input() img: string;
   @Input() listTitles: Array<string> = [];
   @Input() listStates: Array<string> = [];
-  @Input() class:string;
+  @Input() class: string;
   constructor(private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
+    console.log("listStates", this.listStates);
   }
   public goToState(state) {
     localStorage.setItem('report', state);

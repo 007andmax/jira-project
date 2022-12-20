@@ -5,7 +5,7 @@
 }
 .qt-aside-modern__content {
     padding: 0;
-    height: calc(100% - 32px);
+    height: fit-content;
     overflow: unset !important;
     &::-webkit-scrollbar {
         width: 5px;
