@@ -174,7 +174,11 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
-    this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+    if (this.devicesStateService.getAllDevices()) this.getAlldevicedata(this.devicesStateService.getAllDevices(), this.activateRoute.snapshot.params['id']);
+    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
+      this.getAlldevicedata(data, this.activateRoute.snapshot.params['id']);
+    });
+    this.sub.add(getOnDevices);
     if (id) this.companiesStateService.setCompanyRoutingId(id);
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
@@ -186,9 +190,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
-      if (this.devices.length == 0) {
-        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
-      }
       if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
       this.getManufacturers(this.techCompnayGuid);
       this.getModels(this.techCompnayGuid);
@@ -288,14 +289,9 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
         }
         return;
       }
-      if (!this.deviceSuccess) {
-        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
-        setTimeout(() => {
-          this.AssetDetail();
-        }, 300);
-        return;
-      }
+
       this.assetList = resp;
+      console.log("this.assetList", this.assetList);
       this.asset = resp[0];
       this.getDevices(this.assetList);
       this.operatingSystemWindow(resp[0].ID);
@@ -308,8 +304,8 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
         if (element.AgentVersion != null) {
           this.GetDeviceListConfig(element.ID);
         }
-        this.getAssetTagDropDownDetail();
       });
+      this.getAssetTagDropDownDetail();
     });
   }
 
@@ -853,7 +849,7 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
       }
       else {
         this.showPreloader = false;
-        this.getAlldevicedata(this.activateRoute.snapshot.params['id']);
+        this.getAlldevicedata(this.devicesStateService.getAllDevices(), this.activateRoute.snapshot.params['id']);
       }
 
       if (this.cd) {
@@ -892,8 +888,11 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   getAssetTagDropDownDetail() {
+    console.log("getAssetTagDropDownDetail");
     this.agentService.getAssetTag().subscribe((resp) => {
+      console.log("resp", resp);
       this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+        console.log("res", res);
         this.selectedTagDevice = res;
 
         if (this.selectedTagDevice.length !== 0) {
@@ -1597,17 +1596,15 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAlldevicedata(id) {
-    this.devicesStateService.getOnDevices().subscribe(data => {
-      this.devices = [];
-      this.deviceSuccess = true;
-      if (!data[id]) return;
-      if (data[id].length) {
-        data[id].forEach(item => {
-          this.devices.push(item);
-        });
-      }
-    });
+  getAlldevicedata(data, id) {
+    this.devices = [];
+    this.deviceSuccess = true;
+    if (!data[id]) return;
+    if (data[id].length) {
+      data[id].forEach(item => {
+        this.devices.push(item);
+      });
+    }
   }
 
   getLastCheckIn(asset) {

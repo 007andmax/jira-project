@@ -213,7 +213,12 @@ export class DevicesComponent implements OnInit {
   ngOnInit() {
     // this.companiesState.onInit();
     //this.devicesStateService.onInit();
-    this.getTempData();
+
+    if (this.devicesStateService.getAllDevices()) this.getTempData(this.devicesStateService.getAllDevices());
+    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
+      this.getTempData(data);
+    });
+    this.sub.add(getOnDevices);
     this.clientName = "All Companies";
     this.leftPanelStateService.changeStateWithoutNavigate('new-devices');
 
@@ -347,13 +352,14 @@ export class DevicesComponent implements OnInit {
     }
     this.agentService.searchDeviceWithTag(data).subscribe((resp) => {
       if (!this.deviceSuccess) {
-        this.getTempData();
+        this.getTempData(this.devicesStateService.getAllDevices());
         setTimeout(() => {
           this.searchDeviceTag(data);
         }, 300);
         return;
       }
-      this.getAlldevicedata(resp[0].CompanyGuid);
+      console.log("resp", resp);
+      if (resp.length > 0) this.getAlldevicedata(resp[0].CompanyGuid);
       this.onFilter('CompanyName');
       this.showPreloader = false;
 
@@ -2009,12 +2015,10 @@ export class DevicesComponent implements OnInit {
     }
   }
 
-  getTempData() {
-    this.devicesStateService.getOnDevices().subscribe(data => {
-      this.tempDevices = [];
-      this.deviceSuccess = true;
-      this.tempDevices.push(data);
-    });
+  getTempData(data) {
+    this.tempDevices = [];
+    this.deviceSuccess = true;
+    this.tempDevices.push(data);
   }
 
   getDevices(assetList) {
