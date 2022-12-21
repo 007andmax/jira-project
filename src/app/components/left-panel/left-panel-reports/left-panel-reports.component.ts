@@ -32,7 +32,7 @@ export class LeftPanelReportsComponent implements OnInit {
     new ReportsLeftMenuItemReport('Hardware Summary reports', 'hardware-summary'),
     new ReportsLeftMenuItemReport('Device IP Summary report', 'device-ip-summary')], this.getPermissions('VIEW_DEVICES_REPORTS')));
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
-      this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
+      if ((data.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || data.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')) this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
       new ReportsLeftMenuItemReport('Hardware Summary reports', 'hardware-summary'),
       new ReportsLeftMenuItemReport('Device IP Summary report', 'device-ip-summary')], this.getPermissions('VIEW_DEVICES_REPORTS')));
     })
