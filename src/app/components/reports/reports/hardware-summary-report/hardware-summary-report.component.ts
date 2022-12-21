@@ -68,7 +68,7 @@ export class HardwareSummaryReportComponent implements OnInit {
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
+    //this.companiesState.onInit();
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);

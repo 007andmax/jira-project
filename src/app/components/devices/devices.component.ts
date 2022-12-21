@@ -358,11 +358,9 @@ export class DevicesComponent implements OnInit {
         }, 300);
         return;
       }
-      console.log("resp", resp);
       if (resp.length > 0) this.getAlldevicedata(resp[0].CompanyGuid);
       this.onFilter('CompanyName');
       this.showPreloader = false;
-
       this.operatingSystem = [];
       this.assetList = resp;
       this.getDevices(resp);

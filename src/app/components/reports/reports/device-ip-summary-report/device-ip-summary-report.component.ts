@@ -66,7 +66,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
+    //  this.companiesState.onInit();
     this.setPreviewDataDevice();
   }
   public parseHTML(data) {
@@ -74,6 +74,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     return parser.parseFromString(data, 'text/html');
   }
   setPreviewDataDevice() {
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
     });

@@ -65,14 +65,15 @@ export class SoftwareSummaryReport1Component implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    //  this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.loading = false;
-      this.companies = this.getClientsList(data);      
+      this.companies = this.getClientsList(data);
     });
   }
   getClientsList(data) {
@@ -217,8 +218,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
       });
   }
 
-  onSelectSoftware(data) {  
-    this.loading = true;  
+  onSelectSoftware(data) {
+    this.loading = true;
     this.softwareSummaryReport.setSoftwareSoft(data ? data : null);
     if (data) {
       if (
@@ -294,7 +295,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     this.loading = false;
   }
 
-  onSelectDevice(data) {    
+  onSelectDevice(data) {
     this.loading = true;
     this.softwareSummaryReport.setDeviceName(data ? data : null);
     if (data) {
@@ -321,7 +322,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
       ) {
         this.softwareReportList = this.tempReport.filter(
           (x) => x.AssetNames == this.softwareSummaryReport.deviceName
-        );        
+        );
         this.tempararySoftwareList = this.softwareReportList;
         this.tempSoftware = [];
         for (let i = 0; i < this.tempararySoftwareList.length; i++) {

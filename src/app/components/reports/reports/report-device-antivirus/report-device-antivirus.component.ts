@@ -21,7 +21,7 @@ import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
   styleUrls: ["./report-device-antivirus.component.scss"],
 })
 export class ReportDeviceAntivirusComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceAntivirusList: any = [];
@@ -51,28 +51,29 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    //  this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-  getDeviceAntivirusList(){
-    if(this.agentService.AccessToken == '') {
+  getDeviceAntivirusList() {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getDeviceAntivirusList();
       }, 300);
       return;
     }
-    this.agentService.getDeviceAntivirus().subscribe((resp) =>{
+    this.agentService.getDeviceAntivirus().subscribe((resp) => {
       this.deviceAntivirusList = resp;
       this.loading = false;
     });
@@ -98,8 +99,8 @@ export class ReportDeviceAntivirusComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -115,7 +116,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceAntivirusList = [];      
+      this.deviceAntivirusList = [];
     }
   }
 
@@ -138,7 +139,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     }
   }
 
-  getReportByDeviceAntivirus() {}
+  getReportByDeviceAntivirus() { }
 
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
@@ -161,7 +162,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       pdfList.push([
         element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
-        (element.VirusProtectionProducts ?  element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
+        (element.VirusProtectionProducts ? element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
       ]);
     });
     let html =
@@ -227,8 +228,8 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -268,16 +269,16 @@ export class ReportDeviceAntivirusComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-          html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
-        element[1] +
-        `</td>`
-        html =
+      html =
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
-      element[2] +
-      `</td>
+        element[1] +
+        `</td>`
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+        element[2] +
+        `</td>
         </tr>`;
     });
     html =
@@ -341,7 +342,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       downloadCsvList.push([
         element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
-        (element.VirusProtectionProducts ?  element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
+        (element.VirusProtectionProducts ? element.VirusProtectionProducts.split('|')[0].replace(",", " ") : '')
       ]);
     });
     let fileName = "Device Antivirus Report List";

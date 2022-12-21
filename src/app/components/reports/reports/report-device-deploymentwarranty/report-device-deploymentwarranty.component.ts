@@ -21,7 +21,7 @@ import { DeviceDeploymentWarrantyReportFilter } from './Class/report-device-depl
   styleUrls: ['./report-device-deploymentwarranty.component.scss']
 })
 export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceDeploymentWarrantyList: any = [];
@@ -55,28 +55,29 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    // this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-getDeviceDeplyomentList(){
-  if(this.agentService.AccessToken == ''){
-    setTimeout(() => {
-      this.getDeviceDeplyomentList();
-    }, 300);
-    return;
+  getDeviceDeplyomentList() {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
+        this.getDeviceDeplyomentList();
+      }, 300);
+      return;
+    }
+    this.agentService.getDeviceDeploymentWarranty().subscribe((resp) => {
+      this.deviceDeploymentWarrantyList = resp;
+      this.loading = false;
+    })
   }
-  this.agentService.getDeviceDeploymentWarranty().subscribe((resp) =>{
-    this.deviceDeploymentWarrantyList = resp;
-    this.loading = false;
-  })
-}
   getAllCompanyList(id) {
     this.deviceDeploymentWarrantyList = [];
     this.agentService.getDeviceDeploymentWarrantyByGuid(id).subscribe((resp) => {
@@ -98,8 +99,8 @@ getDeviceDeplyomentList(){
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -115,7 +116,7 @@ getDeviceDeplyomentList(){
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceDeploymentWarrantyList = [];      
+      this.deviceDeploymentWarrantyList = [];
     }
   }
 
@@ -138,11 +139,11 @@ getDeviceDeplyomentList(){
     }
   }
 
-  getReportByDeviceDeploymentWarranty(){
+  getReportByDeviceDeploymentWarranty() {
 
   }
 
-  sendEmail(){
+  sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
@@ -153,7 +154,7 @@ getDeviceDeplyomentList(){
     });
   }
 
-  printPdf(){
+  printPdf() {
     this.getPdfData();
   }
 
@@ -233,8 +234,8 @@ getDeviceDeplyomentList(){
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -278,9 +279,9 @@ getDeviceDeplyomentList(){
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
@@ -364,13 +365,13 @@ getDeviceDeplyomentList(){
       );
   }
 
-  downloadCsv(){
+  downloadCsv() {
     let downloadCsvList = [];
     this.deviceDeploymentWarrantyList.forEach((element) => {
       downloadCsvList.push([
         element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
-        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(","," "),
+        element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
         element.Model == null ? "N/A" : element.Model.replace(",", " "),
         this.pipe.transform(element.InstallDate, "dd/MM/yyyy") || "N/A",
         this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
@@ -385,7 +386,7 @@ getDeviceDeplyomentList(){
     );
   }
 
-  goToReportList(){
+  goToReportList() {
     this.leftPanelStateService.goToState("new-device-summary");
   }
 

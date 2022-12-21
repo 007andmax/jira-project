@@ -50,7 +50,6 @@ export class LeftPanelReportsComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   public goToState(state) {
-    console.log("state", state);
     localStorage.setItem('report', state);
     this.leftPanelStateService.goToState(state);
   }

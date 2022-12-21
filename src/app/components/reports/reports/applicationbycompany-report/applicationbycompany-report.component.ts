@@ -21,13 +21,13 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
   styleUrls: ["./applicationbycompany-report.component.scss"],
 })
 export class ApplicationbycompanyReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   // @ViewChild("templatecounterApplication") templatecounterApplication;
 
   clientName: string;
   companies = [];
   application = [];
-  temparyApplicationList=[];
+  temparyApplicationList = [];
   applicationByCompanyList: any = [];
   applicationByCompanyReport: DeviceApplictionByCompanyReport =
     new DeviceApplictionByCompanyReport();
@@ -43,11 +43,11 @@ export class ApplicationbycompanyReportComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "applicationbyCompany-report";
   accountType = "CLIENT";
-  applicationLoading : boolean;
+  applicationLoading: boolean;
   closeResult: string = '';
-  applicationAssetNameList : any[];
+  applicationAssetNameList: any[];
   displayName: string;
-  assetNameList : any [];
+  assetNameList: any[];
   opened: boolean = false;
   constructor(
     private agentService: AgentService,
@@ -61,18 +61,19 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     public elRef: ElementRef,
     private ngZone: NgZone,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    // this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
   getClientsList(data) {
@@ -82,14 +83,14 @@ export class ApplicationbycompanyReportComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
-  getCompanyApplicationList(){
-    if(this.agentService.AccessToken == ''){
-      setTimeout(() =>{
+  getCompanyApplicationList() {
+    if (this.agentService.AccessToken == '') {
+      setTimeout(() => {
         this.getCompanyApplicationList();
       }, 300);
       return;
@@ -114,7 +115,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
           this.loading = false;
           this.applicationByCompanyList = resp;
           this.temparyApplicationList = resp;
-          this.application = this.temparyApplicationList.map((item)=>item.DisplayName).filter((value,index,self)=>self.indexOf(value)=== index);
+          this.application = this.temparyApplicationList.map((item) => item.DisplayName).filter((value, index, self) => self.indexOf(value) === index);
         } else {
           this.applicationByCompanyList = [];
         }
@@ -134,7 +135,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       this.application = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.applicationByCompanyList = [];      
+      this.applicationByCompanyList = [];
     }
   }
 
@@ -157,7 +158,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     }
   }
 
-  getReportApplicationByCompany() {}
+  getReportApplicationByCompany() { }
 
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
@@ -175,7 +176,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.applicationByCompanyList.forEach((element) => {
       pdfList.push([
         element.Assets[0].CompanyName.replace(",", " ") || "N/A",
-        element.DisplayName.replace(","," ") || "N/A",
+        element.DisplayName.replace(",", " ") || "N/A",
         element.DisplayVersion || "N/A",
         element.AssetCount || "N/A",
       ]);
@@ -243,8 +244,8 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -285,9 +286,9 @@ export class ApplicationbycompanyReportComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 60%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 60%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
@@ -365,7 +366,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.applicationByCompanyList.forEach((element) => {
       downloadCsvList.push([
         element.Assets[0].CompanyName.replace(",", " ") || "N/A",
-        element.DisplayName.replace(","," ") || "N/A",
+        element.DisplayName.replace(",", " ") || "N/A",
         element.DisplayVersion || "N/A",
         element.AssetCount || "N/A",
       ]);
@@ -386,13 +387,13 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.filter.onFilter(field, this.applicationByCompanyList);
   }
 
-  counterPopupApplication(applicationByCompany) {    
-    this.opened = true;    
+  counterPopupApplication(applicationByCompany) {
+    this.opened = true;
     this.displayName = applicationByCompany.DisplayName;
 
-    for(var i=0; i<applicationByCompany.Assets.length; i++){
-       this.applicationAssetNameList = applicationByCompany.Assets;
-      }
+    for (var i = 0; i < applicationByCompany.Assets.length; i++) {
+      this.applicationAssetNameList = applicationByCompany.Assets;
+    }
   }
 
   private getDismiss(reason: any): string {
@@ -409,7 +410,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.modalService.dismissAll("Cross click");
   }
 
-  applicationclosed(){
+  applicationclosed() {
     this.opened = false;
   }
 }

@@ -20,7 +20,7 @@ import { DeviceProcessorRamReportFilter } from "./Class/device-processorram-repo
   styleUrls: ["./report-device-processorram.component.scss"],
 })
 export class ReportDeviceProcessorramComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceProcessorRamList: any = [];
@@ -48,29 +48,30 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    // this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-  getDeviceProcessorRamList(){
-    if(this.agentService.AccessToken == '') {
+  getDeviceProcessorRamList() {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getDeviceProcessorRamList();
       }, 300);
       return;
     }
-    this.agentService.getDeviceProcessorRam().subscribe((data) =>{
-      this.deviceProcessorRamList =data;
+    this.agentService.getDeviceProcessorRam().subscribe((data) => {
+      this.deviceProcessorRamList = data;
       this.loading = false;
     })
   }
@@ -95,8 +96,8 @@ export class ReportDeviceProcessorramComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -112,7 +113,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceProcessorRamList = [];      
+      this.deviceProcessorRamList = [];
     }
   }
 
@@ -135,7 +136,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     }
   }
 
-  getReportByNetworkDetail() {}
+  getReportByNetworkDetail() { }
 
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
@@ -223,8 +224,8 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -267,9 +268,9 @@ export class ReportDeviceProcessorramComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 18%;vertical-align: top;">` +
         element[0] +
         `</td>`
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =

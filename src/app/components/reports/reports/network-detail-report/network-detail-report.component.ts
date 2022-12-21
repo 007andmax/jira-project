@@ -20,7 +20,7 @@ import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
   styleUrls: ["./network-detail-report.component.scss"],
 })
 export class NetworkDetailReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   networkDetailList: any = [];
@@ -50,28 +50,29 @@ export class NetworkDetailReportComponent implements OnInit {
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    // this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-  getDeviceNetworkList(){
-    if(this.agentService.AccessToken == '') {
+  getDeviceNetworkList() {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getDeviceNetworkList();
       }, 300);
       return;
     }
-    this.agentService.getDeviceNetworkDetail().subscribe((resp) =>{
+    this.agentService.getDeviceNetworkDetail().subscribe((resp) => {
       this.networkDetailList = resp;
       this.loading = false;
     })
@@ -97,8 +98,8 @@ export class NetworkDetailReportComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -114,7 +115,7 @@ export class NetworkDetailReportComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.networkDetailList = [];      
+      this.networkDetailList = [];
     }
   }
 
@@ -137,9 +138,9 @@ export class NetworkDetailReportComponent implements OnInit {
     }
   }
 
-  getReportByNetworkDetail() {}
+  getReportByNetworkDetail() { }
 
-  sendEmail() {        
+  sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
@@ -235,8 +236,8 @@ export class NetworkDetailReportComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -285,9 +286,9 @@ export class NetworkDetailReportComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 17%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
@@ -398,7 +399,7 @@ export class NetworkDetailReportComponent implements OnInit {
 
   addNewlines(str) {
     var result = "";
-    if(str != null){
+    if (str != null) {
       while (str.length > 0) {
         result += str.substring(0, 7) + "\n";
         str = str.substring(7);

@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { Subscription } from "rxjs";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 
 declare var $: any;
 @Component({
@@ -59,6 +60,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private agentService: AgentService,
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
+    private companiesState: CompaniesStateService,
     private ngZone: NgZone
   ) { }
   lock() {
@@ -100,11 +102,14 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.onUpdateAgent();
     this.onInstallRemoteAgentCommand();
     this.onUninstallRemoteAgentCommand();
-
+    if (this.companiesState.getCurrentCompany()) this.getDevicesByCompany();
+    let onCurrentCompany = this.companiesState.onCurrentCompany.subscribe(data => {
+      this.getDevicesByCompany();
+    });
+    this.sub.add(onCurrentCompany);
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     $("body").addClass("ng7-device");
-    this.getCurrentCompany();
     this.interval = setInterval(() => {
       this.updateTime();
     }, 1000);
@@ -157,20 +162,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
       this.deviceDetail.id = this._id;
     }
     this.deviceDetail.online = true;
-  }
-
-  getCurrentCompany() {
-    this.commonHttpServices
-      .getCurrentCompany()
-      .pipe(first())
-      .subscribe(
-        (resp) => {
-          //this.getDevicesByCompany();
-        },
-        (error) => {
-          this.toastr.error("Something went wrong please try again.");
-        }
-      );
   }
 
   getDeviceDetail() {

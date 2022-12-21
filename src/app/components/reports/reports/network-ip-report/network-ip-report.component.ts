@@ -21,7 +21,7 @@ import { NetworkIPReportFilter } from "./Class/network-ip-report";
   styleUrls: ["./network-ip-report.component.scss"],
 })
 export class NetworkIpReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   networkipList: any = [];
@@ -51,28 +51,29 @@ export class NetworkIpReportComponent implements OnInit {
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    //  this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-  getDeviceNetworkIpList(){
-    if(this.agentService.AccessToken == '') {
+  getDeviceNetworkIpList() {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getDeviceNetworkIpList();
       }, 300);
       return;
     }
-    this.agentService.getDeviceNetworkIP().subscribe((resp) =>{
+    this.agentService.getDeviceNetworkIP().subscribe((resp) => {
       this.networkipList = resp;
       this.loading = false;
     })
@@ -98,8 +99,8 @@ export class NetworkIpReportComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -114,7 +115,7 @@ export class NetworkIpReportComponent implements OnInit {
       this.deviceNetworkIpReport.setDeviceName(null);
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
-      this.clientName = "All Companies";      
+      this.clientName = "All Companies";
       this.networkipList = [];
     }
   }
@@ -138,7 +139,7 @@ export class NetworkIpReportComponent implements OnInit {
     }
   }
 
-  getReportByNetworkIP() {}
+  getReportByNetworkIP() { }
 
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
@@ -227,8 +228,8 @@ export class NetworkIpReportComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -272,9 +273,9 @@ export class NetworkIpReportComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =

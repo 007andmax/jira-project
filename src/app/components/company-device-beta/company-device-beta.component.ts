@@ -289,9 +289,7 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
         }
         return;
       }
-
       this.assetList = resp;
-      console.log("this.assetList", this.assetList);
       this.asset = resp[0];
       this.getDevices(this.assetList);
       this.operatingSystemWindow(resp[0].ID);
@@ -888,13 +886,9 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   getAssetTagDropDownDetail() {
-    console.log("getAssetTagDropDownDetail");
     this.agentService.getAssetTag().subscribe((resp) => {
-      console.log("resp", resp);
       this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
-        console.log("res", res);
         this.selectedTagDevice = res;
-
         if (this.selectedTagDevice.length !== 0) {
           this.assetTag = resp;
           this.filteredTag = resp;

@@ -21,7 +21,7 @@ import { DeviceWarrantyReportFilter } from "./Class/device-warranty-report";
   styleUrls: ["./report-device-warranty.component.scss"],
 })
 export class ReportDeviceWarrantyComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceWarrantyList: any = [];
@@ -51,22 +51,23 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     private excelService: ExcelService,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    //  this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-  getDeviceWarrantyList(){
-    if(this.agentService.AccessToken == ''){
+  getDeviceWarrantyList() {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getDeviceWarrantyList();
       }, 300);
@@ -99,8 +100,8 @@ export class ReportDeviceWarrantyComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -116,7 +117,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.deviceWarrantyList = [];      
+      this.deviceWarrantyList = [];
     }
   }
 
@@ -139,7 +140,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     }
   }
 
-  getReportByDeviceWarranty() {}
+  getReportByDeviceWarranty() { }
 
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
@@ -159,10 +160,10 @@ export class ReportDeviceWarrantyComponent implements OnInit {
         element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
-        element.HardwareType == null ? "N/A" :  element.HardwareType.replace(",", " "),
+        element.HardwareType == null ? "N/A" : element.HardwareType.replace(",", " "),
         element.Model == null ? "N/A" : element.Model.replace(",", " ") || "N/A",
         this.addNewlines(element.SerialNumber) || "N/A",
-        element.WarrantyExpires == null || "-infinity"  ? "N/A" : this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy"),
+        element.WarrantyExpires == null || "-infinity" ? "N/A" : this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy"),
       ]);
     });
     let html =
@@ -228,8 +229,8 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -273,9 +274,9 @@ export class ReportDeviceWarrantyComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
@@ -361,7 +362,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
 
   addNewlines(str) {
     var result = "";
-    if(str !=null){
+    if (str != null) {
       while (str.length > 0) {
         result += str.substring(0, 14) + "\n";
         str = str.substring(14);
@@ -381,10 +382,10 @@ export class ReportDeviceWarrantyComponent implements OnInit {
         element.CompanyName == null ? "N/A" : element.CompanyName.replace(",", " "),
         element.Name.replace(",", " ") || "N/A",
         element.Manufacturer == null ? "N/A" : element.Manufacturer.replace(",", " "),
-        element.HardwareType == null ? "N/A" :  element.HardwareType.replace(",", " "),
+        element.HardwareType == null ? "N/A" : element.HardwareType.replace(",", " "),
         element.Model == null ? "N/A" : element.Model.replace(",", " ") || "N/A",
         element.SerialNumber || "N/A",
-        element.WarrantyExpires == null || "-infinity"  ? "N/A" : this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy"),
+        element.WarrantyExpires == null || "-infinity" ? "N/A" : this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy"),
       ]);
     });
     let fileName = "Device Warranty Report List";

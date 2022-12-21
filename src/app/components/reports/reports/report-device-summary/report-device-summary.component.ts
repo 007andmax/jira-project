@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
+import { Subscription } from "rxjs";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
 import { CommonHttpServices } from "src/app/components/device/_services/common_http.service";
 import { ExcelService } from "src/app/components/device/_services/download_csv.service";
@@ -21,7 +22,7 @@ import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
   styleUrls: ["./report-device-summary.component.scss"],
 })
 export class ReportDeviceSummaryComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   tempararyDeviceList: any = [];
   tempararyDevice: any = [];
   deviceSummaryList: any = [];
@@ -42,7 +43,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "device-summary-report";
   accountType = "CLIENT";
-
+  sub: Subscription = new Subscription();
   constructor(
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
@@ -54,28 +55,30 @@ export class ReportDeviceSummaryComponent implements OnInit {
     private modalService: NgbModal,
     public elRef: ElementRef,
     public draftEmailStateService: DraftEmailStateService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    //this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
+    this.sub.add(getOnCompanies);
   }
 
-  getSummaryList(){
-    if(this.agentService.AccessToken == '') {
+  getSummaryList() {
+    if (this.agentService.AccessToken == '') {
       setTimeout(() => {
         this.getSummaryList();
       }, 300);
       return;
     }
-    this.agentService.getDeviceSummary().subscribe((resp) =>{
+    this.agentService.getDeviceSummary().subscribe((resp) => {
       this.deviceSummaryList = resp;
       this.loading = false;
     })
@@ -97,8 +100,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -167,8 +170,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
       this.deviceSummaryReport.setDeviceName(null);
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
-      this.clientName = "All Companies";      
-      this.deviceSummaryList = [];      
+      this.clientName = "All Companies";
+      this.deviceSummaryList = [];
     }
   }
 
@@ -250,8 +253,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -293,9 +296,9 @@ export class ReportDeviceSummaryComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-          html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =

@@ -20,7 +20,7 @@ import { DeviceNetworkAdapterReportFilter } from './Class/network-adapter-report
   styleUrls: ['./network-adapter-report.component.scss']
 })
 export class NetworkAdapterReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   networkAdapterList: any = [];
@@ -53,18 +53,19 @@ export class NetworkAdapterReportComponent implements OnInit {
 
   ngOnInit() {
     this.clientName = "All Companies";
-    this.companiesState.onInit();
-    this.setPreviewDataDevice();    
+    //  this.companiesState.onInit();
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
-        this.companies = this.getClientsList(data);
-      });
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.companies = this.getClientsList(data);
+    });
   }
 
-  getDeviceNetworkAdapterList(){
-    this.agentService.getDeviceNetworkAdapter().subscribe((resp) =>{
+  getDeviceNetworkAdapterList() {
+    this.agentService.getDeviceNetworkAdapter().subscribe((resp) => {
       this.networkAdapterList = resp;
       this.loading = false;
     });
@@ -91,8 +92,8 @@ export class NetworkAdapterReportComponent implements OnInit {
         a.name.toLowerCase() > b.name.toLowerCase()
           ? 1
           : b.name.toLowerCase() > a.name.toLowerCase()
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
   }
 
@@ -108,7 +109,7 @@ export class NetworkAdapterReportComponent implements OnInit {
       this.devices = [];
       this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
-      this.networkAdapterList = [];      
+      this.networkAdapterList = [];
     }
   }
 
@@ -131,11 +132,11 @@ export class NetworkAdapterReportComponent implements OnInit {
     }
   }
 
-  getReportByNetworkAdapter(){
+  getReportByNetworkAdapter() {
 
   }
 
-  sendEmail(){
+  sendEmail() {
     this.draftEmailStateService.toogleAsideAddReport({
       selectedClient: this.selectedClient,
       orientation: this.orientation,
@@ -146,7 +147,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     });
   }
 
-  printPdf(){
+  printPdf() {
     this.getPdfData();
   }
 
@@ -224,8 +225,8 @@ export class NetworkAdapterReportComponent implements OnInit {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -267,9 +268,9 @@ export class NetworkAdapterReportComponent implements OnInit {
         <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[0] +
         `</td>`;
-        html =
-         html +
-          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
@@ -343,7 +344,7 @@ export class NetworkAdapterReportComponent implements OnInit {
       );
   }
 
-  downloadCsv(){
+  downloadCsv() {
     let downloadCsvList = [];
     this.networkAdapterList.forEach((element) => {
       downloadCsvList.push([
@@ -362,11 +363,11 @@ export class NetworkAdapterReportComponent implements OnInit {
     );
   }
 
-  goToReportList(){
+  goToReportList() {
     this.leftPanelStateService.goToState("new-device-summary");
   }
 
-  onFilter(field){
+  onFilter(field) {
     this.filter.onFilter(field, this.networkAdapterList);
   }
 
