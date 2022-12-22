@@ -115,22 +115,11 @@ export class HardwareComponent implements OnInit, OnDestroy {
   }
 
   getPrinters(Asset_ID) {
-    if (this.agentService.AccessToken == '') {
-      setTimeout(() => {
-        this.getPrinters(Asset_ID);
-      }, 300);
-      return;
-    }
     this.agentService.getPrintersByAssetId(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.printers = resp;
       }
     });
-  }
-
-  printcsv() {
-    this.setData();
-    this.getPdfData();
   }
 
   graphicscard(Asset_ID) {
@@ -158,7 +147,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
             screenresolution[0] + "x" + screenresolution[1];
           this.graphicsCard.ColorDepth = screenresolution[2];
         }
-        this.printcsv();
       }
     });
   }
@@ -167,7 +155,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getPointingDevice(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.mouse = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -176,7 +163,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getDesktopMonitor(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.desktop = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -192,7 +178,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
           this.computer.Domain != ""
             ? this.computer.Name + "." + this.computer.Domain
             : this.computer.Name + " " + "(In workgroup)";
-        this.printcsv();
       }
     });
   }
@@ -201,7 +186,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getOperatingSystem(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.systemTypes = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -210,7 +194,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getMotherBoard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.motherBoards = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -221,7 +204,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
         this.bio = resp[0];
         let date = this.bio.ReleaseDate.split("+");
         this.bio.ReleaseDate = date[0];
-        this.printcsv();
       }
     });
   }
@@ -230,7 +212,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getProcessor(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.processor = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -258,7 +239,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
         this.physicalmemory.DeviceLocator = different
           .toString()
           .replace(/,/g, " ");
-        this.printcsv();
       }
     });
   }
@@ -267,7 +247,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.networkAdapter = resp.find((x) => x.Gateway !== null);
-        this.printcsv();
       }
     });
   }
@@ -276,7 +255,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getHardDisk(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.diskDrive = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -285,7 +263,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getKeyboard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.keyboards = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -294,7 +271,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getsoundCard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.soundCards = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -303,7 +279,6 @@ export class HardwareComponent implements OnInit, OnDestroy {
     this.agentService.getOperatingSystem(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.operatingSystems = resp[0];
-        this.printcsv();
       }
     });
   }
@@ -462,6 +437,7 @@ export class HardwareComponent implements OnInit, OnDestroy {
   }
 
   downloadCsv() {
+    this.setData();
     let downloadCsvList = [];
     downloadCsvList.push({ label: "Computer", value: "" });
     this.printSystem.forEach((element) => {
@@ -527,8 +503,10 @@ export class HardwareComponent implements OnInit, OnDestroy {
   }
 
   getPdfData() {
-    let html =
-      `
+    return new Promise((resolve, reject) => {
+      this.setData();
+      let html =
+        `
     <style>
     * {
       padding: 0;
@@ -590,22 +568,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
           <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
               <img src="/file/${localStorage.getItem(
-        "imId"
-      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+          "imId"
+        )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
             <th style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
                <div class="reports-head" style="width:585px;text-align:center;color: #364656;margin-left:-105px;">
                     <p style="margin:0;line-height:1.2;color:#364656;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` +
-      localStorage.getItem("currentCompanyName") +
-      ` - Hardware Summary Report</p>
+        localStorage.getItem("currentCompanyName") +
+        ` - Hardware Summary Report</p>
                     <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
-      this.computer.Name +
-      ` hardware installed (9 items)</p>
+        this.computer.Name +
+        ` hardware installed (9 items)</p>
                     <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
-      moment(new Date()).format("LL") +
-      ` @ ` +
-      moment(new Date()).format("LT") +
-      `</p>
+        moment(new Date()).format("LL") +
+        ` @ ` +
+        moment(new Date()).format("LT") +
+        `</p>
                </div>
             </th>
           </tr>
@@ -620,22 +598,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printSystem.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printSystem.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -644,22 +622,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printMotherBoard.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printMotherBoard.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -668,22 +646,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printProcessor.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printProcessor.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -692,22 +670,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printMouse.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printMouse.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
             <thead>
@@ -716,22 +694,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
               </tr>
             </thead>
             <tbody>`;
-    this.printMemory.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printMemory.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -740,22 +718,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printNetwork.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printNetwork.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -764,22 +742,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printGraphic.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printGraphic.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -788,22 +766,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printDisplay.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printDisplay.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -812,22 +790,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printDisk.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printDisk.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
               <thead>
@@ -836,22 +814,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                   </tr>
               </thead>
               <tbody>`;
-    this.printKeyBoard.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printKeyBoard.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
                 </table>
                 <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                 <thead>
@@ -860,22 +838,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                     </tr>
                 </thead>
                 <tbody>`;
-    this.printSoundCard.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printSoundCard.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
                 </table>
                 <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                 <thead>
@@ -884,22 +862,22 @@ export class HardwareComponent implements OnInit, OnDestroy {
                     </tr>
                 </thead>
                 <tbody>`;
-    this.printOS.forEach((element) => {
-      html = html + `<tr style="width: 100%;">`;
+      this.printOS.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
-        element[1] +
-        `</td></tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+        `</tbody>
             </table>
      </td>
    </tr>
@@ -911,11 +889,11 @@ export class HardwareComponent implements OnInit, OnDestroy {
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` +
-      localStorage.getItem("currentUser") +
-      `</td>
+        localStorage.getItem("currentUser") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size:12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: center;vertical-align: middle;">` +
-      localStorage.getItem("currentCompanyName") +
-      `</td>
+        localStorage.getItem("currentCompanyName") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
@@ -925,35 +903,40 @@ export class HardwareComponent implements OnInit, OnDestroy {
  </table>
         </div>
         </body>`;
-    let data = {
-      content: html,
-      id: "",
-      fileName: "Hardware Summary Report",
-      orientation: "PORTRAIT",
-    };
-    this.loading = true;
-    this.commonHttpServices
-      .printPdf(data)
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.loading = false;
-          this.pdfUrl = data.url;
-        },
-        (error) => {
-          this.loading = false;
-          const statusError = error;
-          if (statusError && statusError.meta) {
-            this.toastr.error(statusError.meta.message);
-          } else {
-            this.toastr.error("Something went wrong please try again.");
+      let data = {
+        content: html,
+        id: "",
+        fileName: "Hardware Summary Report",
+        orientation: "PORTRAIT",
+      };
+      this.loading = true;
+      this.commonHttpServices
+        .printPdf(data)
+        .pipe()
+        .subscribe(
+          (data) => {
+            this.loading = false;
+            this.pdfUrl = data.url;
+            resolve(this.pdfUrl);
+          },
+          (error) => {
+            this.loading = false;
+            const statusError = error;
+            if (statusError && statusError.meta) {
+              this.toastr.error(statusError.meta.message);
+            } else {
+              this.toastr.error("Something went wrong please try again.");
+            }
+            reject(null);
           }
-        }
-      );
+        );
+    });
   }
 
   printPdf() {
-    window.open(this.pdfUrl, "_blank");
+    this.getPdfData().then(data => {
+      window.open(this.pdfUrl, "_blank");
+    })
   }
 
   getLinkSpeed(value) {

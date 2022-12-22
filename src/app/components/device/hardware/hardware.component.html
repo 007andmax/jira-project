@@ -202,14 +202,17 @@
                                     <li>
                                         <span>DNS2:</span>
                                         {{networkAdapter.DNS2 || "N/A"}}
-                                    </li>                                    
+                                    </li>
                                     <li>
                                         <span>Gateway:</span>
                                         {{networkAdapter.Gateway || "N/A"}}
                                     </li>
                                     <li>
                                         <span>Link Speed:</span>
-                                        <span id="networkSpeed" [textContent]="getLinkSpeed(networkAdapter.Speed) + ' (MegaBit)'"></span>
+                                        <span
+                                            id="networkSpeed"
+                                            [textContent]="getLinkSpeed(networkAdapter.Speed) + ' (MegaBit)'"
+                                        ></span>
                                     </li>
                                     <li>
                                         <span>WAN IP:</span>
@@ -404,9 +407,7 @@
                                     <h3>Printers</h3>
                                 </div>
                                 <ul class="list-unstyled">
-                                    <li>
-                                        
-                                    </li>
+                                    <li></li>
                                     <li *ngFor="let printer of printers">
                                         <span>Name:</span>
                                         {{printer.Name}}
