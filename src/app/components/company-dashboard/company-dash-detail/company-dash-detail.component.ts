@@ -443,7 +443,7 @@ export class CompanyDashDetailComponent implements OnInit {
       var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
       return hoursToReturn + ':' + minutesToreturn;
     } else {
-      return 0;
+      return "12:00";
     }
   }
 
@@ -464,7 +464,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (time && time > 0) {
       var timeInHour = time / 3600;
       // var timeInHour = time / 60;
-      if (timeInHour <= 12) {
+      if (timeInHour < 12) {
         return 'AM';
       } else {
         return 'PM';
