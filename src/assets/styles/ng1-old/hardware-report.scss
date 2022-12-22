@@ -731,20 +731,16 @@
   @include h6__sb;
   position: relative;
   margin-bottom: 20px;
-  margin-left: 40px;
-  height: 26px;
-  font-family: Inter;
 }
 
 .reports-all .report p:after {
-  width: 230px;
-    height: 2px;
-    content: '';
-    position: absolute;
-    bottom: -9px;
-    left: -40px;
-    border-top: 1px dashed #ebebeb;
-
+  width: 44px;
+  height: 2px;
+  background-color: #4ba9df;
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 0;
 }
 
 .reports-all .col-sm-4:last-child .report {
@@ -753,21 +749,22 @@
 
 .reports-all .report img {
   position: absolute;
-  top: -3px;
-  width: 24px;
-  height: 24px;
+  right: 22px;
+  top: 23px;
+  width: 30px;
 }
 
 .reports-all .report ul {
   list-style: none;
   padding: 0 0 0 25px;
   margin: 0;
-  font-family: Inter;
-  line-height: 1.43;
 }
 
 .reports-all .report ul li {
-  @include body-r;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
   margin-bottom: 12px;
   cursor: pointer;
   position: relative;
@@ -783,14 +780,14 @@
 
 .reports-all .report ul li:before {
   content: '';
-  width: 5px;
-  height: 5px;
-  border: 2px solid #4ba9df;
-  background-color: #fff;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #c2c5cb;
+  background-color: #ffffff;
   border-radius: 50%;
   position: absolute;
-  left: -15px;
-  top: 8px;
+  left: -25px;
+  top: 5px;
 }
 .icn-sm {
   width: 12px;

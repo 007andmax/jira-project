@@ -41,18 +41,14 @@ export class DownloadAgentComponent implements OnInit {
   downloadAgent() {
     var link = document.createElement('a');
     link.target = "_blank";
-    link.href = `data/downloadNewInstaller?companyId=${this.downloadAgentStateService.getCompany().id}&doForce=false`;
-    //link.download = data.link.substring(data.link.lastIndexOf('/') + 1, data.link.length);;
+    link.href = `data/downloadAgentV2?companyId=${this.downloadAgentStateService.getCompany().id}`;
     link.click();
   }
   downloadDemoAgent() {
-    // this.downloadAgentService.downloadDemo(this.downloadAgentStateService.getCompany().id).subscribe((data: any) => {
     var link = document.createElement('a');
     link.target = "_blank";
-    link.href = `data/downloadAgentV2?companyId=${this.downloadAgentStateService.getCompany().id}`;
-    //  link.download = data.link.substring(data.link.lastIndexOf('/') + 1, data.link.length);;
+    link.href = `data/downloadNewInstaller?companyId=${this.downloadAgentStateService.getCompany().id}&doForce=false`;
     link.click();
-    //  })
   }
 
 }
