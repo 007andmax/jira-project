@@ -232,13 +232,13 @@
                             {{hours.dayOfWeek}}
                             <span
                                 class="info-time-work"
-                                *ngIf="hours.startTime !== 0 && hours.endTime !== 0"
+                                *ngIf="hours.isSelected"
                             >
                                 {{hours.timing}}
                             </span>
                             <span
                                 class="info-time-work-status"
-                                *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)"
+                                *ngIf="!hours.isSelected"
                             >
                                 Close
                             </span>

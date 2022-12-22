@@ -403,7 +403,7 @@ export class CompanyDashDetailComponent implements OnInit {
         }
       });
       let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
-      if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
+      if (arr.length !== 0 && arr[0].isSelected) {
         this.companyOpen = (arr[0].timing) ? `Opens ${arr[0].timing}` : 'Opens';
       } else {
         this.companyOpen = `Close`;
