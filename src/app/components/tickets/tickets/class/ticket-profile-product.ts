@@ -38,8 +38,8 @@ export class TicketProfileProduct {
             for (const key in data) {
                 this[key] = data[key];
             }
-            this.item.sale_str = this.item.sale.toFixed(2);
-            this.item.cost_str = this.item.cost.toFixed(2);
+            this.item.sale_str = (this.item.sale) ? this.item.sale.toFixed(2) : "0.00";
+            this.item.cost_str = (this.item.cost) ? this.item.cost.toFixed(2) : "0.00";
         }
     }
     public setUser(data) {
