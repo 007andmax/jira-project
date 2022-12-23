@@ -74,7 +74,7 @@
         <div class="qt-inputs-row ticket-tabs">
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
-                class="ticket-tabs-service d-f ai-c"
+                class="ticket-tabs-service qt-df qt-ai-c"
                 (click)="type = 'services'"
                 [ngClass]="(type === 'services') ? 'active-tab' : ''"
             >
@@ -84,7 +84,7 @@
             <!-- ---------------------------------------------------------------- -->
             <!-- ONCLICK ADD CLASS 'active-tab'---------------------------------- -->
             <div
-                class="ticket-tabs-product d-f ai-c"
+                class="ticket-tabs-product qt-df qt-ai-c"
                 (click)="type = 'products'"
                 [ngClass]="(type === 'products') ? 'active-tab' : ''"
             >
@@ -343,7 +343,7 @@
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
-            <div class="d-f">
+            <div class="qt-df">
                 <button
                     class="qt-button qt-mr-12"
                     (click)="onInitAddAndCopy()"

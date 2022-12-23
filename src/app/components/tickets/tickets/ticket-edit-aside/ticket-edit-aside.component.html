@@ -1,5 +1,5 @@
 <div
-    class="ticket-edit-aside qt-aside d-f"
+    class="ticket-edit-aside qt-aside qt-df"
     [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
     [hidden]="!opened"
 >
@@ -15,7 +15,7 @@
             <div class="loading"></div>
         </div>
         <div class="qt-aside__body ticket-edit-aside__body">
-            <div class="ticket-edit-aside__header d-f jc-sb ai-c">
+            <div class="ticket-edit-aside__header qt-df jc-sb qt-ai-c">
                 <div class="ticket-edit-aside__header-client-info">
                     <div
                         class="ticket-edit-aside__header-avatar"
@@ -23,7 +23,7 @@
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
                     ></div>
                     <div>
-                        <div class="d-f ai-c">
+                        <div class="qt-df qt-ai-c">
                             <div
                                 class="ticket-edit-aside__header-company"
                                 ngbDropdown
@@ -155,7 +155,7 @@
                     <span [textContent]="ticketProfile.subject"></span>
                 </div>
                 <div
-                    class="ticket-edit-aside__ticket-subject-edit d-f ai-c"
+                    class="ticket-edit-aside__ticket-subject-edit qt-df qt-ai-c"
                     [hidden]="modeSubject === 'view'"
                     appClickOtside
                     [init]="modeSubject === 'edit'"

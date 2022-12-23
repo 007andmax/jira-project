@@ -48,36 +48,9 @@ h6,
 .body-l__sb {
   @include body-l__sb;
 }
-  //COMMON STYLES ----------------------------
-.d-f { // TODO need replace for qt-classes
-  display: flex;
-}
-.jc-fs {
-  justify-content: flex-start;
-}
-.jc-c {
-  justify-content: center;
-}
-.jc-fe {
-  justify-content: flex-end;
-}
-.ai-c {
-  align-items: center;
-}
-.ff-g-m {
-  font-weight: 600;
-}
-.fw-600 {
-  font-weight: 600;
-}
-.p-0 {
+//COMMON STYLES ----------------------------
+.p-0 { // TODO replace class for qt
   padding: 0 !important;
-}
-.mt-20 {
-  margin-top: 20px;
-}
-.mb-5 {
-  margin-bottom: 5px;
 }
 .pl-0 {
   padding-left: 0 !important;

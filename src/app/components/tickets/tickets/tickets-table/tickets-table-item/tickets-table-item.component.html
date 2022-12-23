@@ -3,7 +3,7 @@
     class="qt-table-modern__row"
 >
     <div class="ticket-table__requested-by">
-        <div class="d-f ai-c">
+        <div class="qt-df qt-ai-c">
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
@@ -34,7 +34,7 @@
         class="ticket-table__assignee"
         *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"
     >
-        <div class="d-f">
+        <div class="qt-df">
             <ng-template
                 ngFor
                 let-user
@@ -57,7 +57,7 @@
         class="ticket-table__assignee"
         *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
     >
-        <div class="d-f">
+        <div class="qt-df">
             <div
                 class="qt-table-modern__circle-avatar"
                 [textContent]="getAssignedUserNameForAvatar(assignedUser)"

@@ -11,25 +11,25 @@
           <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
           [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
           <div [textContent]="getUserName(user)"></div>
-         
+
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </div>
-       
+
       </mat-chip>
       <input
         #userInput
         class="pointer"
         [formControl]="userCtrl"
-       
+
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         (input)="onSearchUser($event)"
         id="dropdown" ngbDropdownToggle
         >
     </mat-chip-list>
-   
+
     <div class="autocomplete-user-tags" ngbDropdownMenu aria-labelledby="dropdown" >
-       <mat-option class="ai-c" *ngFor="let user of users" [value]="user" (click)="selected(user)">
+       <mat-option class="qt-ai-c" *ngFor="let user of users" [value]="user" (click)="selected(user)">
         <div class="assigne-user-item">
         <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>

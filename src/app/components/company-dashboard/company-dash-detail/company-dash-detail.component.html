@@ -1,9 +1,9 @@
-<div class="cmp-dboard-col m-0 d-flex">
+<div class="cmp-dboard-col m-0 qt-df">
     <div
         class="collapse-arrow icon__close"
         (click)="back()"
     ></div>
-    <div class="profile-cmp-board d-flex">
+    <div class="profile-cmp-board qt-df">
         <img
             [src]="getCompanyLogoUrl()"
             class="qwe"
@@ -11,12 +11,12 @@
             *ngIf="checkLogo()"
         >
         <div
-            class="cmp-profile-dp d-flex"
+            class="cmp-profile-dp qt-df"
             *ngIf="!checkLogo()"
         >
-            <figure class="d-flex">{{getCharacter(companyDetailing.name)}}</figure>
+            <figure class="qt-dflex">{{getCharacter(companyDetailing.name)}}</figure>
         </div>
-        <div class="cmp-profile-user d-flex">
+        <div class="cmp-profile-user qt-df">
             <h4>{{companyDetailing.name}}</h4>
             <a
                 href="https://{{companyDetailing.domain}}"
@@ -25,8 +25,8 @@
                 {{companyDetailing.domain}}
             </a>
         </div>
-        <div class="cmp-dboard-rating d-flex">
-            <span class="d-flex">
+        <div class="cmp-dboard-rating qt-df">
+            <span class="qt-dflex">
                 <img
                     *ngFor="let item of arrayOne(selectedRating); let i = index;"
                     class="pointer"
@@ -42,15 +42,15 @@
                     (click)="changeRating(i, 'unselected')"
                 >
             </span>
-            <div class="cmp-user-info d-flex">
+            <div class="cmp-user-info qt-df">
                 <span
-                    class="user-info-pt d-flex"
+                    class="user-info-pt qt-df"
                     *ngIf="companyDetailing?.clientType"
                 >
                     {{companyDetailing.clientType}}
                 </span>
                 <span
-                    class="user-info-pt d-flex"
+                    class="user-info-pt qt-df"
                     *ngIf="companyDetailing.serviceType !== '' "
                 >
                     {{serviceTypesMap[companyDetailing.serviceType]}}
@@ -143,10 +143,10 @@
         </div>
     </div>
     <div
-        class="profile-cmp-board other-info d-flex"
+        class="profile-cmp-board other-info qt-df"
         *ngIf="tab === 'dashboard'"
     >
-        <div class="other-info-col d-flex">
+        <div class="other-info-col qt-df">
             <div class="small-title">Billing Address</div>
             <span class="qt-fs-13 qt-fw-600">
                 {{companyDetailing.billingLocationName}}
@@ -170,7 +170,7 @@
             </a>
         </div>
         <div
-            class="other-info-col d-flex"
+            class="other-info-col qt-df"
             *ngIf="companyDetailing.addresses.length == 2"
         >
             <div class="small-title">Shipping Address</div>
@@ -197,12 +197,12 @@
                 Get Direction
             </a>
         </div>
-        <div class="other-info-col d-flex">
+        <div class="other-info-col qt-df">
             <div class="small-title">Working Hours</div>
-            <div class="working-hrs d-flex">
+            <div class="working-hrs qt-df">
                 <div
                     ngbDropdown
-                    class="d-flex"
+                    class="qt-dflex"
                 >
                     <button
                         class="selected-item"
@@ -250,14 +250,14 @@
             </div>
         </div>
         <div
-            class="other-info-col d-flex"
+            class="other-info-col qt-df"
             *ngIf="companyDetailing?.clientIndustry !== undefined && companyDetailing?.clientIndustry !== null && companyDetailing?.clientIndustry !== ''"
         >
             <div class="small-title">Industry</div>
             <p>{{companyDetailing.clientIndustry}}</p>
         </div>
         <div
-            class="other-info-col d-flex"
+            class="other-info-col qt-df"
             *ngIf="companyDetailing?.description !== undefined && companyDetailing?.description !== null && companyDetailing?.description !== ''"
         >
             <div class="small-title">Notes</div>
@@ -265,15 +265,15 @@
         </div>
     </div>
     <div
-        class="profile-cmp-board primary-contact d-flex"
+        class="profile-cmp-board primary-contact qt-df"
         *ngIf="companyDetailing?.primaryContact && tab === 'dashboard'"
     >
         <div class="small-title">Primary Contact</div>
-        <div class="contact-info d-flex">
-            <figure class="d-flex no-user-init uppercase">
+        <div class="contact-info qt-df">
+            <figure class="qt-dflex no-user-init uppercase">
                 {{getCharacter(companyDetailing?.primaryContact.firstName)}}
             </figure>
-            <div class="primary-contact-info d-flex">
+            <div class="primary-contact-info qt-df">
                 <div class="h5">
                     {{companyDetailing?.primaryContact.firstName}} {{companyDetailing?.primaryContact.lastName}}
                 </div>
@@ -293,10 +293,10 @@
         </div>
     </div>
     <div
-        class="profile-cmp-board tags-area d-flex"
+        class="profile-cmp-board tags-area qt-df"
         *ngIf="tab === 'dashboard'"
     >
-        <div class="small-title d-flex">
+        <div class="small-title qt-df">
             Tags
             <a
                 href="javascript:;"
@@ -306,7 +306,7 @@
                 +Add
             </a>
         </div>
-        <div class="tags-tab d-flex">
+        <div class="tags-tab qt-df">
             <span
                 class="tag"
                 *ngFor="let tag of tags; let i = index;"
@@ -327,7 +327,7 @@
         </div>
     </div>
     <div
-        class="btn-row d-flex"
+        class="btn-row qt-df"
         *ngIf="tab === 'dashboard'"
     >
         <a
@@ -354,7 +354,7 @@
     #contentHour
     let-modal
 >
-    <div class="modal-header d-flex">
+    <div class="modal-header qt-df">
         <h1>Edit Hours</h1>
         <button
             type="button"
@@ -365,15 +365,15 @@
             close
         </button>
     </div>
-    <div class="modal-body d-flex">
+    <div class="modal-body qt-df">
         <h5>Select days with correct hours</h5>
         <form
             method="post"
-            class="d-flex"
+            class="qt-dflex"
         >
-            <ul class="list-unstyled d-flex">
+            <ul class="list-unstyled qt-df">
                 <li
-                    class="d-flex"
+                    class="qt-dflex"
                     *ngFor="let work of workingDays; let i = index;"
                 >
                     <div class="cmn-checkbox">
@@ -399,7 +399,7 @@
                     </select> -->
                             <div
                                 ngbDropdown
-                                class="d-flex working-hour"
+                                class="qt-dflex working-hour"
                             >
                                 <button
                                     class="selected-item"
@@ -433,7 +433,7 @@
                     </select> -->
                             <div
                                 ngbDropdown
-                                class="d-flex working-hour"
+                                class="qt-dflex working-hour"
                             >
                                 <button
                                     class="selected-item"
@@ -463,7 +463,7 @@
                 </li>
             </ul>
         </form>
-        <div class="footer-area-modal d-flex">
+        <div class="footer-area-modal qt-df">
             <button
                 type="button"
                 class="btn btn-secondary"
@@ -496,7 +496,7 @@
     >
         close
     </button>
-    <div class="modal-body d-flex">
+    <div class="modal-body qt-df">
         <div class="h1">Get Direction</div>
         <iframe
             frameborder="0"
@@ -513,7 +513,7 @@
     let-modal
     class="map-modal"
 >
-    <div class="modal-title tag d-flex">
+    <div class="modal-title tag qt-df">
         <div class="h1">Add Tags</div>
         <button
             type="button"
@@ -524,12 +524,12 @@
             close
         </button>
     </div>
-    <div class="modal-body tag d-flex company-dashboard-add-tag">
+    <div class="modal-body tag qt-df company-dashboard-add-tag">
         <app-company-tags
             (tagsChange)="onChangeTags($event)"
             [selectedTag]="tags"
         ></app-company-tags>
-        <div class="footer-area-modal d-flex">
+        <div class="footer-area-modal qt-df">
             <button
                 type="button"
                 class="btn btn-secondary"

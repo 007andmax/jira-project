@@ -85,7 +85,7 @@
         <hr class="company-info-aside__divider">
         <div class="company-info-aside__primary-contacts">
             <div class="company-info-aside__primary-contacts-title">PRIMARY CONTACT(S)</div>
-            <div class="company-info-aside__primary-contact d-f">
+            <div class="company-info-aside__primary-contact qt-df">
                 <div
                     class="company-info-aside__primary-contact-avatar"
                     [textContent]="ticketsListService.getAssignedUserNameForAvatar(primaryContact)"
@@ -126,7 +126,7 @@
             *ngIf="createdUser"
         >
             <div class="company-info-aside__ticket-created-title">Ticket Created by</div>
-            <div class="d-f">
+            <div class="qt-df">
                 <div
                     class="company-info-aside__ticket-created-avatar"
                     [textContent]="ticketsListService.getAssignedUserNameForAvatar(createdUser)"

@@ -8,7 +8,7 @@
         [ngForTrackBy]="trackByIndex"
     >
         <div class="product-item">
-            <div class="product-item__first-line d-f">
+            <div class="product-item__first-line qt-df">
                 <app-product-list
                     [type]="'TICKET'"
                     [editItem]="product.item"
@@ -22,7 +22,7 @@
                     <span class="icon__close btn-icon qt-ic-c"></span>
                 </button>
             </div>
-            <div class="d-f">
+            <div class="qt-df">
                 <label class="product-item__serial-num-input">
                     <input
                         class="qt-input-block__input serial-num"
@@ -84,7 +84,7 @@
                     </mat-error>
                 </label>
             </div>
-            <div class="d-f qt-mt-8">
+            <div class="qt-df qt-mt-8">
                 <label class="product-item__discount-input qt-ml-auto">
                     <input
                         class="qt-input-block__input"
@@ -96,7 +96,7 @@
         </div>
     </ng-template>
     <div class="product-item">
-        <div class="product-item__first-line d-f">
+        <div class="product-item__first-line qt-df">
             <app-product-list
                 [type]="'TICKET'"
                 #productDP
