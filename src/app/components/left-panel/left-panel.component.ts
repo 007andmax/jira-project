@@ -100,6 +100,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices`)) this.state = 'company-devices';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices-beta`)) this.state = 'company-devices-beta';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`network-scan`)) this.state = 'company-network-scan';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`network-scan-old`)) this.state = 'company-network-scan-old';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`password-manager`)) this.state = 'company-password-manager';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
@@ -286,6 +287,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'company-user') this.goToLink('company/user');
       if (this.state === 'company-devices') this.goToLink('company/devices');
       if (this.state === 'company-network-scan') this.goToLink('company/network-scan');
+      if (this.state === 'company-network-scan-old') this.goToLink('company/network-scan-old');
       if (this.state === 'company-password-manager') this.goToLink('company/password-manager');
       if (this.state === 'company-products') this.goToLink('company/products');
       if (this.state === 'company-contracts') this.goToLink('company/contracts');

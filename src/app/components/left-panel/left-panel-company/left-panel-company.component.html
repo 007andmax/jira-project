@@ -97,6 +97,19 @@
     </a>
     <a
         href
+        [link]="getLinkSection('network-scan-old')"
+        target="_blank"
+        appRightClickBlank
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'company-network-scan-old'}"
+            (click)="goToCompanySection('network-scan-old')"
+        >
+            Network Scan old
+        </li>
+    </a>
+    <a
+        href
         [link]="getLinkSection('password-manager')"
         target="_blank"
         appRightClickBlank

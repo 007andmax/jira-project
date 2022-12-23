@@ -75,6 +75,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private toastr: ToastrService) { }
 
   ngOnInit() {
+    if (this.kafkaStateService.getAssetConfigMessage().length > 0) this.onNetworkScan(this.kafkaStateService.getAssetConfigMessage());
     this.kafkaStateService.onNetworkScan.subscribe((resp) => {
       this.onNetworkScan(resp)
     });

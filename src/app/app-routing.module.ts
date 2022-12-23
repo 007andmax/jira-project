@@ -356,6 +356,11 @@ const routes: Routes = [
     canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {
+    path: ':company/company/:id/network-scan-old',
+    loadChildren: './components/company-network-scan-old/company-network-scan-old.module#CompanyNetworkScanOldModule',
+    canActivate: [PermissionCompanyService, PermissionTechUserService]
+  },
+  {
     path: ':company/company/:id/devices',
     loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule',
     canActivate: [PermissionCompanyService, PermissionTechUserService]

@@ -44,6 +44,7 @@ export class LeftPanelService {
       || state == 'company-user'
       || state == 'company-devices'
       || state == 'company-network-scan'
+      || state == 'company-network-scan-old'
       || state == 'company-password-manager'
       || state == 'company-products'
       || state == 'company-contracts'
@@ -85,7 +86,7 @@ export class LeftPanelService {
       state === 'accounts-receivable' ||
       state === 'accounting-report' ||
       state === 'payments-report' ||
-      state === 'remote-access' ||      
+      state === 'remote-access' ||
       state === 'tech-sales' ||
       state === 'tech-ticket' ||
       state === 'tech-service' ||
@@ -93,7 +94,7 @@ export class LeftPanelService {
       state === 'service-report' ||
       state === 'income-accounts')
   }
-  public isSettingsPage(state) {    
+  public isSettingsPage(state) {
     return (state === 'myprofile-component'
       || state === 'manage-tags-component'
       || state === 'products-settings'
@@ -113,13 +114,13 @@ export class LeftPanelService {
   }
 
   public isDevicesPage(state) {
-    return (state === 'new-devices' 
+    return (state === 'new-devices'
       || state === 'report-device-summary'
       || state === 'report-device-warranty'
       || state === 'report-device-antivirus'
       || state === 'hardware-summary'
       || state === 'report-device-processorram'
-      || state === 'report-device-diskspace' 
+      || state === 'report-device-diskspace'
       || state === 'device-ip-summary'
       || state === 'network-ip-report'
       || state === 'network-detail-report'

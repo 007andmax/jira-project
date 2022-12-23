@@ -144,6 +144,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { GoogleAuthenticatorModule } from './components/shared/google-authenticator/google-authenticator.module';
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
+import { CompanyNetworkScanOldComponent } from './components/company-network-scan-old/company-network-scan-old.component';
 declare var $: any;
 
 /**
