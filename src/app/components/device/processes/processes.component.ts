@@ -40,12 +40,13 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = true;
     this.Id = this.activateRoute.snapshot.params["id"];
-    this.kafkaStateService.GetProcesses.subscribe((resp) => {
+    let GetProcesses = this.kafkaStateService.GetProcesses.subscribe((resp) => {
       if (resp.length > 0) {
         this.kafkaresponse = true;
         this.onGetProcess(resp)
       }
     })
+    this.sub.add(GetProcesses);
     if (this.agentService.hasAccessToken()) this.getAllServicesList();
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
       this.getAllServicesList();
@@ -93,11 +94,9 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.processId = this.processesList[i].PID;
       }
     }
-
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
-    this.getPdfData();
   }
 
   stopProcesses(process) {
@@ -122,25 +121,27 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   printPdf() {
-    window.open(this.pdfUrl, "_blank");
-    this.getPdfData();
+    this.getPdfData().then(data => {
+      window.open(this.pdfUrl, "_blank");
+    })
   }
 
   public getPdfData() {
-    let pdfList = [];
-    this.processesList.forEach((element) => {
-      pdfList.push([
-        element.PID == null ? "N/A" : element.PID,
-        element.Name ? element.Name.replace(",", " ") : "N/A",
-        element.CPU == null ? "N/A" : element.CPU,
-        element.MemoryMB == null ? "N/A" : element.MemoryMB,
-        element.MemoryPercent == null ? "N/A" : element.MemoryPercent,
-        element.DiskMB == null ? "N/A" : element.DiskMB,
-        element.Network == null ? "N/A" : element.Network
-      ]);
-    });
-    let html =
-      `
+    return new Promise((resolve, reject) => {
+      let pdfList = [];
+      this.processesList.forEach((element) => {
+        pdfList.push([
+          element.PID == null ? "N/A" : element.PID,
+          element.Name ? element.Name.replace(",", " ") : "N/A",
+          element.CPU == null ? "N/A" : element.CPU,
+          element.MemoryMB == null ? "N/A" : element.MemoryMB,
+          element.MemoryPercent == null ? "N/A" : element.MemoryPercent,
+          element.DiskMB == null ? "N/A" : element.DiskMB,
+          element.Network == null ? "N/A" : element.Network
+        ]);
+      });
+      let html =
+        `
     <style>
     * {
       padding: 0;
@@ -202,24 +203,24 @@ export class ProcessesComponent implements OnInit, OnDestroy {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-        "imId"
-      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+          "imId"
+        )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
                   <p style="margin:0;line-height:1.2;color:#364656;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` +
-      localStorage.getItem("currentCompanyName") +
-      ` - Process Report</p>
+        localStorage.getItem("currentCompanyName") +
+        ` - Process Report</p>
                   <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
-      (this.asset.Title || this.asset.Name) +
-      ` Processes(` +
-      pdfList.length +
-      ` items)</p>
+        (this.asset.Title || this.asset.Name) +
+        ` Processes(` +
+        pdfList.length +
+        ` items)</p>
                   <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
-      moment(new Date()).format("LL") +
-      ` @ ` +
-      moment(new Date()).format("LT") +
-      `</p>
+        moment(new Date()).format("LL") +
+        ` @ ` +
+        moment(new Date()).format("LT") +
+        `</p>
             </div>
           </th>
       </tr>
@@ -240,48 +241,48 @@ export class ProcessesComponent implements OnInit, OnDestroy {
                         </tr>
                     </thead>
                     <tbody>`;
-    pdfList.forEach((element) => {
-      html =
-        html +
-        `<tr style="width: 100%;">
+      pdfList.forEach((element) => {
+        html =
+          html +
+          `<tr style="width: 100%;">
           <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
-        element[1] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
-        element[2] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
-        element[3] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
-        element[4] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
-        element[5] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
-        element[6] +
-        `</td>
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
+          element[1] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+          element[2] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+          element[3] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+          element[4] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+          element[5] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 14%;vertical-align: top;">` +
+          element[6] +
+          `</td>
         </tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+      });
+      html =
+        html +
+        `</tbody>
         </table>
      </td>
    </tr>
@@ -293,11 +294,11 @@ export class ProcessesComponent implements OnInit, OnDestroy {
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` +
-      localStorage.getItem("currentUser") +
-      `</td>
+        localStorage.getItem("currentUser") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size:11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: center;vertical-align: middle;">` +
-      localStorage.getItem("currentCompanyName") +
-      `</td>
+        localStorage.getItem("currentCompanyName") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
@@ -307,31 +308,34 @@ export class ProcessesComponent implements OnInit, OnDestroy {
  </table>
         </div>
         </body>`;
-    let data = {
-      content: html,
-      id: "",
-      fileName: "Processes Report",
-      orientation: "PORTRAIT",
-    };
-    this.loading = true;
-    this.commonHttpServices
-      .printPdf(data)
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.loading = false;
-          this.pdfUrl = data.url;
-        },
-        (error) => {
-          this.loading = false;
-          const statusError = error;
-          if (statusError && statusError.meta) {
-            this.toastr.error(statusError.meta.message);
-          } else {
-            this.toastr.error("Something went wrong please try again.");
+      let data = {
+        content: html,
+        id: "",
+        fileName: "Processes Report",
+        orientation: "PORTRAIT",
+      };
+      this.loading = true;
+      this.commonHttpServices
+        .printPdf(data)
+        .pipe()
+        .subscribe(
+          (data) => {
+            this.loading = false;
+            this.pdfUrl = data.url;
+            resolve(this.pdfUrl);
+          },
+          (error) => {
+            this.loading = false;
+            const statusError = error;
+            if (statusError && statusError.meta) {
+              this.toastr.error(statusError.meta.message);
+            } else {
+              this.toastr.error("Something went wrong please try again.");
+            }
+            reject(null);
           }
-        }
-      );
+        );
+    });
   }
 
   trackByMethod(index: number, service: any): string {

@@ -121,15 +121,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.isNonAgentDevice = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
-    //if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
-
     this.currentUser = localStorage.getItem("currentUser");
-    // if (!this.agentService.getDataAssetByGuid()) this.getAssetDetail();
+    if (this.agentService.getDataAssetByGuid()) this.getAssetDetail(this.agentService.getDataAssetByGuid());
     this.agentService.onAssetByGuid.subscribe(data => {
-      if (!this.agentService.getDataAssetByGuid()) this.getAssetDetail(data);
+      this.getAssetDetail(data);
     })
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
-      // this.setPreviewDataDevice();
       if (this.techCompany) this.getManufacturers(this.techCompany.id);
       if (this.techCompany) this.getModels(this.techCompany.id);
     })

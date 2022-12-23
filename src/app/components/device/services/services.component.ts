@@ -42,12 +42,13 @@ export class ServicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.Id = this.activateRoute.snapshot.params["id"];
     this.loading = true;
-    this.kafkaStateService.onGetService.subscribe((resp) => {
+    let onGetService = this.kafkaStateService.onGetService.subscribe((resp) => {
       if (resp.length > 0) {
         this.kafkaresponse = true;
         this.onGetService(resp)
       }
     })
+    this.sub.add(onGetService);
     if (this.agentService.hasAccessToken()) this.getAllServicesList();
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
       this.getAllServicesList();
@@ -92,7 +93,6 @@ export class ServicesComponent implements OnInit, OnDestroy {
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
-    this.getPdfData();
   }
 
   public onGetServiceError(error: any) {
@@ -118,18 +118,19 @@ export class ServicesComponent implements OnInit, OnDestroy {
   }
 
   public getPdfData() {
-    let pdfList = [];
-    this.serviceList.forEach((element) => {
-      pdfList.push([
-        element.DisplayName.replace(",", " ") || "N/A",
-        element.Description ? element.Description.replace(",", " ") : "N/A",
-        element.started == true ? "Running" : "Stopped",
-        element.StartMode ? element.StartMode.replace(",", " ") : "N/A",
-        element.startName ? element.startName.replace(",", " ") : "N/A"
-      ]);
-    });
-    let html =
-      `
+    return new Promise((resolve, reject) => {
+      let pdfList = [];
+      this.serviceList.forEach((element) => {
+        pdfList.push([
+          element.DisplayName.replace(",", " ") || "N/A",
+          element.Description ? element.Description.replace(",", " ") : "N/A",
+          element.started == true ? "Running" : "Stopped",
+          element.StartMode ? element.StartMode.replace(",", " ") : "N/A",
+          element.startName ? element.startName.replace(",", " ") : "N/A"
+        ]);
+      });
+      let html =
+        `
     <style>
     * {
       padding: 0;
@@ -191,24 +192,24 @@ export class ServicesComponent implements OnInit, OnDestroy {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-        "imId"
-      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+          "imId"
+        )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
                   <p style="margin:0;line-height:1.2;color:#364656;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` +
-      localStorage.getItem("currentCompanyName") +
-      ` - Services Summary Report</p>
+        localStorage.getItem("currentCompanyName") +
+        ` - Services Summary Report</p>
                   <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
-      (this.asset.Title || this.asset.Name) +
-      ` services(` +
-      pdfList.length +
-      ` items)</p>
+        (this.asset.Title || this.asset.Name) +
+        ` services(` +
+        pdfList.length +
+        ` items)</p>
                   <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
-      moment(new Date()).format("LL") +
-      ` @ ` +
-      moment(new Date()).format("LT") +
-      `</p>
+        moment(new Date()).format("LL") +
+        ` @ ` +
+        moment(new Date()).format("LT") +
+        `</p>
             </div>
           </th>
       </tr>
@@ -227,38 +228,38 @@ export class ServicesComponent implements OnInit, OnDestroy {
                         </tr>
                     </thead>
                     <tbody>`;
-    pdfList.forEach((element) => {
-      html =
-        html +
-        `<tr style="width: 100%;">
+      pdfList.forEach((element) => {
+        html =
+          html +
+          `<tr style="width: 100%;">
           <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
-        element[0] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
-        element[1] +
-        `</td>`;
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
-        element[2] +
-        `</td>`
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
-        element[3] +
-        `</td>`
-      html =
-        html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 22%;vertical-align: top;">` +
-        element[4] +
-        `</td>
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+          element[1] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
+          element[2] +
+          `</td>`
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 12%;vertical-align: top;">` +
+          element[3] +
+          `</td>`
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 22%;vertical-align: top;">` +
+          element[4] +
+          `</td>
         </tr>`;
-    });
-    html =
-      html +
-      `</tbody>
+      });
+      html =
+        html +
+        `</tbody>
         </table>
      </td>
    </tr>
@@ -270,11 +271,11 @@ export class ServicesComponent implements OnInit, OnDestroy {
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` +
-      localStorage.getItem("currentUser") +
-      `</td>
+        localStorage.getItem("currentUser") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size:11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: center;vertical-align: middle;">` +
-      localStorage.getItem("currentCompanyName") +
-      `</td>
+        localStorage.getItem("currentCompanyName") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
@@ -284,35 +285,40 @@ export class ServicesComponent implements OnInit, OnDestroy {
  </table>
         </div>
         </body>`;
-    let data = {
-      content: html,
-      id: "",
-      fileName: "Services Summary Report",
-      orientation: "PORTRAIT",
-    };
-    this.loading = true;
-    this.commonHttpServices
-      .printPdf(data)
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.loading = false;
-          this.pdfUrl = data.url;
-        },
-        (error) => {
-          this.loading = false;
-          const statusError = error;
-          if (statusError && statusError.meta) {
-            this.toastr.error(statusError.meta.message);
-          } else {
-            this.toastr.error("Something went wrong please try again.");
+      let data = {
+        content: html,
+        id: "",
+        fileName: "Services Summary Report",
+        orientation: "PORTRAIT",
+      };
+      this.loading = true;
+      this.commonHttpServices
+        .printPdf(data)
+        .pipe()
+        .subscribe(
+          (data) => {
+            this.loading = false;
+            this.pdfUrl = data.url;
+            resolve(this.pdfUrl);
+          },
+          (error) => {
+            this.loading = false;
+            const statusError = error;
+            if (statusError && statusError.meta) {
+              this.toastr.error(statusError.meta.message);
+            } else {
+              this.toastr.error("Something went wrong please try again.");
+            }
+            reject(null);
           }
-        }
-      );
+        );
+    });
   }
 
   printPdf() {
-    window.open(this.pdfUrl, "_blank");
+    this.getPdfData().then(data => {
+      window.open(this.pdfUrl, "_blank");
+    })
   }
 
   public getReload(res: any) {

@@ -39,6 +39,7 @@ export class AgentService {
     return this.assetByGuid;
   }
   public setAssetByGuid(data) {
+    this.assetByGuid = data;
     this.onAssetByGuid.emit(data);
   }
 
