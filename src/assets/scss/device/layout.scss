@@ -2,6 +2,7 @@
 
 body {
     &.ng7-device {
+        overflow: auto;
         padding: 0;
         margin: 0;
         @include body-font;
