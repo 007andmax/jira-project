@@ -24,7 +24,7 @@
 }
 
 // Prevent the focus on the dropdown toggle when closing dropdowns
-.dropdown-toggle:focus {
+.dropdown-toggle:focus { // TODO 2 include in device page
   outline: 0;
 }
 
