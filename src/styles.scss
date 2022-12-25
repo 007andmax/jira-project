@@ -49,15 +49,15 @@ h6,
   @include body-l__sb;
 }
 //COMMON STYLES ----------------------------
-.p-0 { // TODO replace class for qt
-  padding: 0 !important;
-}
-.pl-0 {
-  padding-left: 0 !important;
-}
-.pr-0 {
-  padding-right: 0 !important;
-}
+//.p-0 { // TODO replace class for qt
+//  padding: 0 !important;
+//}
+//.pl-0 {
+//  padding-left: 0 !important;
+//}
+//.pr-0 {
+//  padding-right: 0 !important;
+//}
 .with-dollar,
 .with-percent {
   position: relative;
@@ -1153,25 +1153,25 @@ app-quotes-item {
 .new-users-content {
   padding: 21px 24px 80px 24px;
 }
-.products-content__header,
-.new-users-content__header,
-.recurring-tickets-content__header,
-.new-companies-content__header,
-.password-content__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  position: relative;
-  &--search {
-    display: flex;
-    align-items: center;
-    .icon__email-blue {
-      margin-right: 40px;
-      cursor: pointer;
-    }
-  }
-}
+//.products-content__header, // TODO check this style
+//.new-users-content__header,
+//.recurring-tickets-content__header,
+//.new-companies-content__header,
+//.password-content__header {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//  margin-bottom: 15px;
+//  position: relative;
+//  &--search {
+//    display: flex;
+//    align-items: center;
+//    .icon__email-blue {
+//      margin-right: 40px;
+//      cursor: pointer;
+//    }
+//  }
+//}
 .download-modal {
   .modal-dialog {
     width: 450px;
@@ -1447,10 +1447,10 @@ app-quotes-item {
 .password-content__list--header {
   padding: 15px 0;
 }
+//.recurring-tickets-content__list--item, // TODO check this selector, replace
 .products-content__list--item,
 .new-companies-content__list--item,
 .new-users-content__list--item,
-.recurring-tickets-content__list--item,
 .password-content__list--item {
   border-radius: 4px;
   margin-bottom: 2px;
@@ -1459,10 +1459,10 @@ app-quotes-item {
   position: relative;
   display: flex;
 }
-.new-companies-content__list--item,
-.recurring-tickets-content__list--item {
-  padding: 16px 0;
-}
+//.new-companies-content__list--item, // TODO check this style
+//.recurring-tickets-content__list--item {
+//  padding: 16px 0;
+//}
 .new-users-content__list--item {
   padding: 12px 0;
   display: flex;
@@ -1529,7 +1529,7 @@ app-quotes-item {
     font-size: 12px;
   }
 }
-.new-companies-content__header--search,
+.new-companies-content__header--search, // TODO replace for qt-df
 .recurring-tickets-content__header--search,
 .new-users-content__header--search,
 .password-content__header--search {
@@ -1657,10 +1657,10 @@ app-quotes-item {
     width: 21%;
   }
 }
-.new-users-content .new-users__list--header,
-.new-companies-content .new-companies__list--header {
-  display: flex;
-}
+//.new-users-content .new-users__list--header, // TODO check this style
+//.new-companies-content .new-companies__list--header {
+//  display: flex;
+//}
 .companies-page {
   background: $background;
 
@@ -2245,87 +2245,88 @@ app-quotes-item {
     }
   }
 }
+// TODO check this style
 .recurring-tickets-content,
 .new-companies-content,
 .new-users-content {
-  .company-edit-icn {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-  }
-  .recurring-tickets__list,
-  .new-companies__list,
-  .new-users__list {
-    &--header {
-      margin-bottom: 15px;
-      .with-checkbox {
-        display: flex;
-        align-items: center;
-      }
-      [class*="col-md-"],
-      [class*="col-md-"] p {
-        @include сaption-m__sb;
-        color: $primary-2;
-        text-transform: uppercase;
-      }
-    }
-  }
-  &__list--item {
-    [class*="col-md-"] {
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-    }
-    .circle-avatar {
-      margin: 0 15px;
-      @media (max-width: 1366px) {
-        margin: 0 3px;
-      }
-    }
-    .assigned-container {
-      > .default-user-avatar,
-      > .default-user-avatar .qwe {
-        width: 36px;
-        height: 36px;
-        border: 2px solid $white;
-      }
-      > .default-user-avatar {
-        &:not(:last-child) {
-          margin-left: -15px;
-        }
-      }
-    }
-    .grey-dropdown.right {
-      position: absolute;
-      right: 10px;
-    }
-    .new-link {
-      margin-left: 5px !important;
-      position: relative;
-    }
-    .dropdown-assign-ticket {
-      position: absolute;
-      top: 50px;
-      right: 0;
-      box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
-      z-index: 2;
-      .users-list {
-        border-radius: 3px;
-        .users-list {
-          border-radius: 3px;
-        }
-      }
-    }
-    .assigned-container {
-      .grey-dropdown {
-        > .icn-16 {
-          width: 8px;
-        }
-      }
-    }
-  }
+  //.company-edit-icn {
+  //  position: absolute;
+  //  right: 15px;
+  //  top: 50%;
+  //  transform: translateY(-50%);
+  //  z-index: 1;
+  //}
+  //.recurring-tickets__list,
+  //.new-companies__list,
+  //.new-users__list {
+  //  &--header {
+  //    margin-bottom: 15px;
+  //    .with-checkbox {
+  //      display: flex;
+  //      align-items: center;
+  //    }
+  //    [class*="col-md-"],
+  //    [class*="col-md-"] p {
+  //      @include сaption-m__sb;
+  //      color: $primary-2;
+  //      text-transform: uppercase;
+  //    }
+  //  }
+  //}
+  //&__list--item {
+  //  [class*="col-md-"] {
+  //    min-height: 40px;
+  //    display: flex;
+  //    align-items: center;
+  //  }
+  //  .circle-avatar {
+  //    margin: 0 15px;
+  //    @media (max-width: 1366px) {
+  //      margin: 0 3px;
+  //    }
+  //  }
+  //  .assigned-container {
+  //    > .default-user-avatar,
+  //    > .default-user-avatar .qwe {
+  //      width: 36px;
+  //      height: 36px;
+  //      border: 2px solid $white;
+  //    }
+  //    > .default-user-avatar {
+  //      &:not(:last-child) {
+  //        margin-left: -15px;
+  //      }
+  //    }
+  //  }
+  //  .grey-dropdown.right {
+  //    position: absolute;
+  //    right: 10px;
+  //  }
+  //  .new-link {
+  //    margin-left: 5px !important;
+  //    position: relative;
+  //  }
+  //  .dropdown-assign-ticket {
+  //    position: absolute;
+  //    top: 50px;
+  //    right: 0;
+  //    box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
+  //    z-index: 2;
+  //    .users-list {
+  //      border-radius: 3px;
+  //      .users-list {
+  //        border-radius: 3px;
+  //      }
+  //    }
+  //  }
+  //  .assigned-container {
+  //    .grey-dropdown {
+  //      > .icn-16 {
+  //        width: 8px;
+  //      }
+  //    }
+  //  }
+  //}
   &__modal {
     .no-valid-service,
     .no-valid-product {

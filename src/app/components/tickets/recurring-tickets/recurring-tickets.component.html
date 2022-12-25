@@ -1,31 +1,43 @@
-<div class="recurring-tickets-content">
-  <app-recurring-tickets-header></app-recurring-tickets-header>
-  <div class="recurring-tickets__list">
-    <div class="recurring-tickets__list--header clearfix">
-      <div class="col-md-3 pointer with-checkbox">
-        <p (click)="sortBy('company_name')">Company Name</p>
+<div class="qt-page-list recurring-tickets-page">
+  <div class="qt-page-list__header --sticky">
+    <app-recurring-tickets-header></app-recurring-tickets-header>
+    <div class="qt-page-list__header-thead-container">
+      <div class="qt-table-modern qt-page-list__header-thead">
+        <div class="qt-page-list__header-thead__row">
+          <div class="recurring-tickets__company-name pointer" (click)="sortBy('company_name')">
+            Company Name
+          </div>
+          <div class="recurring-tickets__device pointer" (click)="sortBy('agent_label')">Device</div>
+          <div class="recurring-tickets__description pointer" (click)="sortBy('description')">Description</div>
+          <div class="recurring-tickets__start-date pointer" (click)="sortBy('startDate')">Start Date</div>
+          <div class="recurring-tickets__interval">Interval</div>
+          <div class="recurring-tickets__assigned-user">Assigned User</div>
+          <div class="recurring-tickets__menu"></div>
+        </div>
       </div>
-      <div class="col-md-2 pointer" (click)="sortBy('agent_label')">Device</div>
-      <div class="col-md-3 pointer" (click)="sortBy('description')">Description</div>
-      <div class="col-md-1 pointer" (click)="sortBy('startDate')">Start Date</div>
-      <div class="col-md-1">Interval</div>
-      <div class="col-md-2">Assigned User</div>
     </div>
-    <div class="ticket-content"
-         infiniteScroll
-         [infiniteScrollDistance]="2"
-         [infiniteScrollThrottle]="50"
-         [infiniteScrollDisabled]="infiniteScrollDisabled"
-         (scrolled)="onScroll()">
-      <ng-template ngFor let-ticket
-                   [ngForOf]="ticketList"
-                   [ngForTrackBy]="trackById">
-        <app-recurring-tickets-table
-          [ticket]="ticket">
-        </app-recurring-tickets-table>
-      </ng-template>
+  </div>
+  <div class="qt-page-list__body">
+    <div class="qt-page-list__body-table-container">
+      <div class="qt-page-list__body-tbody qt-table-modern">
+        <div
+             infiniteScroll
+             [infiniteScrollDistance]="2"
+             [infiniteScrollThrottle]="50"
+             [infiniteScrollDisabled]="infiniteScrollDisabled"
+             (scrolled)="onScroll()"
+        >
+          <ng-template ngFor let-ticket
+                       [ngForOf]="ticketList"
+                       [ngForTrackBy]="trackById">
+            <app-recurring-tickets-table
+              [ticket]="ticket">
+            </app-recurring-tickets-table>
+          </ng-template>
+        </div>
+        <div class="loading" *ngIf="showPreloader"></div>
+      </div>
     </div>
-    <div class="loading" *ngIf="showPreloader"></div>
   </div>
 </div>
 <app-recurring-tickets-edit-aside></app-recurring-tickets-edit-aside>
