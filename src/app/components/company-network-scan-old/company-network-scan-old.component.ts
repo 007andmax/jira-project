@@ -58,7 +58,7 @@ export class CompanyNetworkScanOldComponent implements OnInit {
     private websocketService: WebsocketService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-    this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
+    this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan-old');
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);
     let subscription = this.activateRoute.params.subscribe(params => {

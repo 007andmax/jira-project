@@ -12,18 +12,14 @@ import { CompanyNetworkScanItemTooltipComponent } from './company-network-scan-i
 import { NetworkScanCredentialsAddComponent } from './network-scan-credentials-add/network-scan-credentials-add.component';
 import { NetworkScanCredentialsAsideItemComponent } from './network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 import { CompanyNetworkScanRoutingModule } from './company-network-scan-routing.module';
+import { CompanyNetworkScanNoExistDevicesModule } from './company-network-scan-no-exist-devices/company-network-scan-no-exist-devices.module';
+import { CompanyNetworkScanItemModule } from './company-network-scan-item/company-network-scan-item.module';
+import { NetworkScanCredentialsAsideModule } from './network-scan-credentials-aside/network-scan-credentials-aside.module';
 
 
 @NgModule({
     declarations: [
         CompanyNetworkScanComponent,
-        CompanyNetworkScanNoExistDevicesComponent,
-        CompanyNetworkScanItemComponent,
-        NetworkScanCredentialsAsideComponent,
-        CompanyNetworkScanItemTooltipComponent,
-        NetworkScanCredentialsAddComponent,
-        NetworkScanCredentialsAsideItemComponent
-
     ],
     imports: [
         CommonModule,
@@ -31,10 +27,10 @@ import { CompanyNetworkScanRoutingModule } from './company-network-scan-routing.
         DisabledBtnModule,
         FormsModule,
         CompanyDevicesEditLabelModule,
-        CompanyNetworkScanRoutingModule
+        CompanyNetworkScanRoutingModule,
+        CompanyNetworkScanNoExistDevicesModule,
+        CompanyNetworkScanItemModule,
+        NetworkScanCredentialsAsideModule
     ],
-
-
-
 })
 export class CompanyNetworkScanModule { }

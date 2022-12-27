@@ -46,8 +46,10 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
       this.companyId = data;
     })
     this.activePage = this.leftPanelStateService.activePage;
+    console.log("this.activePage", this.activePage);
     let getOnBillingPage = this.leftPanelStateService.getOnCompanyPage().subscribe(data => {
       this.activePage = data;
+      console.log("this.activePage", this.activePage);
     })
     this.sub.add(getOnBillingPage);
     let queryParams = this.activateRoute.queryParams.subscribe(
