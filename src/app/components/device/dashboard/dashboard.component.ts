@@ -118,6 +118,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
     this.isNonAgentDevice = true;
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];

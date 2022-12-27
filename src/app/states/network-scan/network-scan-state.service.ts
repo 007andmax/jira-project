@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { NetworkScanCredential } from '../../components/company-network-scan/class/network-scan-credential';
-import { NetworkScanDevice } from '../../components/company-network-scan/class/network-scan-device';
+import { NetworkScanCredential } from 'src/app/components/company-network-scan-beta/class/network-scan-credential';
+import { NetworkScanDevice } from 'src/app/components/company-network-scan-beta/class/network-scan-device';
 
 @Injectable({
   providedIn: 'root'

@@ -33,7 +33,7 @@ export class DeviceSettingDeviceTypeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.companiesStateService.getCurrentCompany()) {
       this.techCompany = this.companiesStateService.getCurrentCompany();
-      if (this.agentService.hasAccessToken()) this.getDeviceTypes(this.companiesStateService.getCurrentCompany().id);
+      if (this.agentService.hasAccessToken()) this.getDeviceTypes(this.techCompany.id);
     }
     let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe((data) => {
       this.techCompany = data;

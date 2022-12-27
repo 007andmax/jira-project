@@ -38,8 +38,8 @@ export class BreadcrumbsComponent implements OnInit {
             || this.state === 'company-tickets'
             || this.state === 'company-user'
             || this.state === 'company-devices'
+            || this.state === 'company-network-scan-beta'
             || this.state === 'company-network-scan'
-            || this.state === 'company-network-scan-old'
             || this.state === 'company-password-manager'
             || this.state === 'company-products'
             || this.state === 'company-contracts'
@@ -50,8 +50,8 @@ export class BreadcrumbsComponent implements OnInit {
         if (this.state === 'company-tickets') return 'Tickets';
         if (this.state === 'company-user') return 'Users';
         if (this.state === 'company-devices') return 'Devices';
+        if (this.state === 'company-network-scan-beta') return 'Network scan beta';
         if (this.state === 'company-network-scan') return 'Network Scan';
-        if (this.state === 'company-network-scan-old') return 'Network Scan Old';
         if (this.state === 'company-password-manager') return 'Password Manager';
         if (this.state === 'company-products') return 'Products';
         if (this.state === 'company-contracts') return 'Service Agreements';

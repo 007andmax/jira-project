@@ -47,7 +47,6 @@ import { DashboardBillingComponent } from './components/billing/dashboard-billin
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
-import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 import { SupportComponent } from './components/support/support.component';
 import { DocumentsComponent } from './components/documents/documents.component';
@@ -351,13 +350,14 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService]
   },
   {
-    path: ':company/company/:id/network-scan',
-    loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule',
-    canActivate: [PermissionCompanyService, PermissionTechUserService]
+    path: ':company/company/:id/network-scan-beta',
+    loadChildren: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
+    // canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [TestPermissionService]
   },
   {
-    path: ':company/company/:id/network-scan-old',
-    loadChildren: './components/company-network-scan-old/company-network-scan-old.module#CompanyNetworkScanOldModule',
+    path: ':company/company/:id/network-scan',
+    loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule',
     canActivate: [PermissionCompanyService, PermissionTechUserService]
   },
   {

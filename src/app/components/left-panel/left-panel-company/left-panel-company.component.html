@@ -91,6 +91,20 @@
     </a>
     <a
         href
+        [link]="getLinkSection('network-scan-beta')"
+        target="_blank"
+        appRightClickBlank
+        *ngIf="companiesStateService.getCurrentCompany() && (companiesStateService.getCurrentCompany().id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || companiesStateService.getCurrentCompany().id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'company-network-scan-beta'}"
+            (click)="goToCompanySection('network-scan-beta')"
+        >
+            Network scan beta
+        </li>
+    </a>
+    <a
+        href
         [link]="getLinkSection('network-scan')"
         target="_blank"
         appRightClickBlank
@@ -100,19 +114,6 @@
             (click)="goToCompanySection('network-scan')"
         >
             Network Scan
-        </li>
-    </a>
-    <a
-        href
-        [link]="getLinkSection('network-scan-old')"
-        target="_blank"
-        appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-network-scan-old'}"
-            (click)="goToCompanySection('network-scan-old')"
-        >
-            Network Scan old
         </li>
     </a>
     <a

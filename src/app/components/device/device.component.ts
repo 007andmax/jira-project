@@ -117,7 +117,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   setPreviewDataDevice() {
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-      console.log("resp", resp);
       this.agentService.setAssetByGuid(resp);
       if (resp.length > 0) {
         this.deviceName = resp[0].Name;

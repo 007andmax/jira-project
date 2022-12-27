@@ -10,6 +10,7 @@ app-company-network-scan-item {
 
 .cursor-default {
     cursor: default;
+
     .button-menu {
         cursor: pointer;
     }
@@ -22,46 +23,5 @@ app-company-network-scan-item {
 }
 
 .offline-device {
-    color: $gray-700;
+    color: $gray-500--old;
 }
-
-.online-device{
-    color: #000000;
-}
-
-.sub-label-field {
-    border-width: 0;
-    &:hover,
-    &:focus {
-        border: solid 1px #c4cbd5;
-        border-width: 1px;
-        outline: 0;
-    }
-}
-
-.network-scan-table__delete {
-    width: 60px;
-    max-width: 60px;
-    min-width: 60px;
-}
-
-.btn.btn-sm {
-    min-width: 24px;
-    width:24px;
-    height: 24px;
-    min-height: 24px;
-    padding:0 !important;
-}
-
-.network-status {
-    border: solid 1px $success;
-    line-height: 1;
-    width: fit-content;
-    padding: 2px 4px;
-    border-radius: 3px;
-    color: $success;
-    background-color: $white;
-    letter-spacing: 0.3px;
-    font-size: 8px;
-    text-transform: uppercase;    
-  }

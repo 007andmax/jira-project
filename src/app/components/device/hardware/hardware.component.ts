@@ -70,6 +70,10 @@ export class HardwareComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
     this._id = this.activateRoute.snapshot.params["id"];
     this.type = this.activateRoute.snapshot.params["type"];
     if (this.type === "printer") {
