@@ -10,7 +10,6 @@ import { DevicesService } from '../../services/devices/devices.service';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { WebsocketService } from '../../services/websocket/websocket.service';
-import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
@@ -60,7 +59,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
     private networkScanStateService: NetworkScanStateService,
-    private devicesRealTimeService: DevicesRealTimeService,
     private passwordManagerService: PasswordManagerService,
     public activateRoute: ActivatedRoute,
     private confirmStateService: ConfirmStateService,
@@ -87,7 +85,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companyId = id;
-      this.websocketService.subsribeToNetScan(this.companyId);
       this.getDevices();
     });
 
