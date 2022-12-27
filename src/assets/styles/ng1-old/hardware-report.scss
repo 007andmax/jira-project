@@ -167,27 +167,27 @@
   margin-bottom: 0;
 }
 
-.product-list-ticket li.content-product-list-ticket {
-  line-height: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  min-height: 65px;
-  border-bottom: 1px solid $gray-400--old;
-}
+//.product-list-ticket li.content-product-list-ticket { // TODO check this style
+//  line-height: 15px;
+//  font-weight: 600;
+//  cursor: pointer;
+//  min-height: 65px;
+//  border-bottom: 1px solid $gray-400--old;
+//}
 
-.product-list-ticket li.content-product-list-ticket [class*=col-md-] {
-  height: auto;
-  word-wrap: break-word;
-}
-
-.product-list-ticket li.remote-desktop-connections [class*=col-md-] {
-  word-wrap: normal;
-}
-
-.product-list-ticket [class*=col-md-] {
-  padding: 19px 6px;
-  line-height: 30px;
-}
+//.product-list-ticket li.content-product-list-ticket [class*=col-md-] {
+//  height: auto;
+//  word-wrap: break-word;
+//}
+//
+//.product-list-ticket li.remote-desktop-connections [class*=col-md-] {
+//  word-wrap: normal;
+//}
+//
+//.product-list-ticket [class*=col-md-] {
+//  padding: 19px 6px;
+//  line-height: 30px;
+//}
 
 .hardware-summary .product-list-ticket [class*=col-md-] {
   line-height: 15px;
@@ -206,13 +206,13 @@
   min-height: auto;
 }
 
-.product-list-ticket [class*=col-md-].detailed-by-customer {
-  padding: 6px;
-}
+//.product-list-ticket [class*=col-md-].detailed-by-customer { // TODO check this style
+//  padding: 6px;
+//}
 
-.top-product-list-ticket [class*=col-md-] {
-  padding: 10px 6px 17px;
-}
+//.top-product-list-ticket [class*=col-md-] { // TODO check this style
+//  padding: 10px 6px 17px;
+//}
 
 .product-list-ticket li.product-list-ticket-grid {
   cursor: default;
@@ -1172,9 +1172,9 @@
   .run-report-content .content {
     max-width: 160px;
   }
-  .product-list-report {
-    padding: 30px 10px;
-  }
+  //.product-list-report { // TODO check this style
+  //  padding: 30px 10px;
+  //}
 }
 
 .new-reports-reverse__loader .loading {

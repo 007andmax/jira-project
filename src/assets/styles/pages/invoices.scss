@@ -335,12 +335,17 @@
 
 .invoice-items-dropdown {
   .payment-info-submenu {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: .15s opacity ease-in, .15s visibility ease-in;
+    border-radius: 6px;
   }
   .payment-menu-item {
+    overflow: unset;
     &:hover {
       .payment-info-submenu {
-        display: block;
+        visibility: visible;
+        opacity: 1;
       }
     }
   }
