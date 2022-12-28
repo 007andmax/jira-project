@@ -43,13 +43,15 @@ export class LeftPanelService {
       || state == 'company-tickets'
       || state == 'company-user'
       || state == 'company-devices'
+      || state == 'company-network-scan-beta'
       || state == 'company-network-scan'
       || state == 'company-password-manager'
       || state == 'company-products'
       || state == 'company-contracts'
       || state == 'company-documents'
       || state == 'new-edit-documents-company'
-      || state == 'new-add-documents-company')
+      || state == 'new-add-documents-company'
+      || state == 'company-devices-beta')
   }
   isBillingState(state) {
     return (state === 'billing-dashboard'
@@ -85,9 +87,6 @@ export class LeftPanelService {
       state === 'accounting-report' ||
       state === 'payments-report' ||
       state === 'remote-access' ||
-      state === 'software-summary' ||
-      state === 'hardware-summary' ||
-      state === 'device-ip-summary' ||
       state === 'tech-sales' ||
       state === 'tech-ticket' ||
       state === 'tech-service' ||
@@ -110,6 +109,26 @@ export class LeftPanelService {
       || state === 'commission-component'
       || state === 'ticket-settings'
       || state === 'crm-settings'
-      || state === 'marketing-email')
+      || state === 'marketing-email'
+      || state === 'device-setting-component')
+  }
+
+  public isDevicesPage(state) {
+    return (state === 'new-devices'
+      || state === 'report-device-summary'
+      || state === 'report-device-warranty'
+      || state === 'report-device-antivirus'
+      || state === 'hardware-summary-device'
+      || state === 'report-device-processorram'
+      || state === 'report-device-diskspace'
+      || state === 'device-ip-summary-device'
+      || state === 'network-ip-report'
+      || state === 'network-detail-report'
+      || state === 'network-adapter-report'
+      || state === 'software-summary-device'
+      || state === 'report-device-antivirus'
+      || state === 'applicationbycompany-report'
+      || state === 'report-device-warranty'
+      || state === 'report-device-deploymentwarranty');
   }
 }

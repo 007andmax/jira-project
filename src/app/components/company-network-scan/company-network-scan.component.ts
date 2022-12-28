@@ -1,34 +1,34 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NETWORK_REMOVE_DEVICE } from 'src/app/const/confirm';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { DevicesService } from 'src/app/services/devices/devices.service';
+import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
-import { DevicesService } from '../../services/devices/devices.service';
-import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
-import { PermissionsService } from '../../services/permissions/permissions.service';
-import { WebsocketService } from '../../services/websocket/websocket.service';
-import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
-import { DevicesStateService } from '../../states/devices/devices-state.service';
-import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
-import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
+import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { NetworkScanStateService } from 'src/app/states/network-scan/network-scan-state.service';
 import { Device } from '../company-devices/class/device';
+import { NetworkScanDevice } from '../company-network-scan-beta/class/network-scan-device';
+import { NetworkScanDevices } from '../company-network-scan-beta/class/network-scan-devices';
+import { NetworkScanFilter } from '../company-network-scan-beta/class/network-scan-filter';
+import { NetworkScanInstallAgent } from '../company-network-scan-beta/class/network-scan-install-agent';
+import { NetworkScanSomeInfoForDevice } from '../company-network-scan-beta/class/network-scan-some-info-for-devices';
+import { installationStatuses } from '../company-network-scan-beta/const/const';
+import { CompanyNetworkScanService } from '../company-network-scan-beta/services/company-network-scan.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { NetworkScanDevice } from './class/network-scan-device';
-import { NetworkScanDevices } from './class/network-scan-devices';
-import { NetworkScanFilter } from './class/network-scan-filter';
-import { NetworkScanInstallAgent } from './class/network-scan-install-agent';
-import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
-import { installationStatuses } from './const/const';
-import { CompanyNetworkScanService } from './services/company-network-scan.service';
 
 @Component({
-  selector: 'app-company-network-scan',
+  selector: 'company-network-scan',
   templateUrl: './company-network-scan.component.html',
   styleUrls: ['./company-network-scan.component.scss'],
   providers: [CompanyNetworkScanService]
 })
-export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
+export class CompanyNetworkScanComponent implements OnInit {
   @ViewChild('btnInstallAgent') btnInstallAgent: DisabledBtnDirective;
   devices: Array<Device> = [];
   networkScanInstallAgent: NetworkScanInstallAgent = new NetworkScanInstallAgent();
@@ -57,7 +57,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private websocketService: WebsocketService,
     public cd: ChangeDetectorRef,) { }
-
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
     let id = this.activateRoute.snapshot.params['id'];
@@ -227,10 +226,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.devicesService.getSomeInfoForDevices(this.companyId).subscribe(data => {
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         resolve(true);
-
       })
     });
-
   }
   selectMasterAgent(device) {
     this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
@@ -254,4 +251,5 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.websocketService.unSubsribeNetScan();
     this.companiesStateService.setCompanyRoutingId(null);
   }
+
 }

@@ -28,6 +28,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
+  container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -68,7 +69,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -121,7 +122,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   public onScroll() {
     this.infiniteScrollDisabled = true;
     if (this.ticketsFilter.listType !== "RECURRING_TICKETS") this.getTickets();
-
   }
   public setDefaultScoll() {
     this.page_number = 0;

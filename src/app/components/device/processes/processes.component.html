@@ -1,0 +1,133 @@
+<main class="mainSidebar">
+  <div class="cmn-wrapper">
+      <div class="device-container">
+          <div class="page-container software-list">
+              <!-- Page Title -->
+              <div class="page-header">
+                  <h3>Processes</h3>
+                  <div class="page-header-opt">
+                  </div>
+                  <div class="download-print">
+                      <form method="GET">
+                          <input
+                              type="search"
+                              class="form-input"
+                              [(ngModel)]="search"
+                              name="search"
+                              placeholder="Search Processes…"
+                              autocomplete="off"
+                          >
+                      </form>
+                      <a
+                          (click)="printPdf();"
+                          data-tooltip="Print"
+                      >
+                          <img src="/html/assets/img/device/print.svg">
+                      </a>
+                      <a
+                          (click)="downloadCsv();"
+                          data-tooltip="Download CSV"
+                      >
+                          <img src="/html/assets/img/device/download_csv.svg">
+                      </a>
+                  </div>
+              </div>
+              <!-- Page Content -->
+              <div class="contant-area">
+                  <div class="table-wrap">
+                      <table                         
+                          class="dataTable cmn-tab-head"
+                      >
+                          <thead>
+                              <tr>
+                                  <th
+                                      class="pid main-processname"
+                                      (click)="onFilter('pid')"
+                                  >
+                                      PID
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                      class="name"
+                                      (click)="onFilter('name')"
+                                  >
+                                      Name
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                      class="cpu"
+                                      (click)="onFilter('cpu')"
+                                  >
+                                      CPU
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                     class="ram"
+                                     (click)="onFilter('ram')"
+                                  >
+                                    Ram
+                                    <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                  class="memory"
+                                  (click)="onFilter('memory')"
+                               >
+                                 Memory
+                                 <span class="qt-table-modern__sorting"></span>
+                               </th>
+                               <th
+                               class="disk"
+                               (click)="onFilter('disk')"
+                            >
+                              Disk
+                              <span class="qt-table-modern__sorting"></span>
+                            </th>
+                            <th
+                            class="network"
+                            (click)="onFilter('network')"
+                         >
+                           Network
+                           <span class="qt-table-modern__sorting"></span>
+                         </th>
+                         <th
+                         class="action"
+                      >
+                        Action
+                      </th>
+                              </tr>
+                          </thead>
+                          <tbody class="service-table">
+                              <tr *ngFor="let process of processesList | process: search; let i = index; trackBy:trackByMethod">
+                                  <td class="pid">
+                                      <h5>{{process.PID || 'N/A'}}</h5>
+                                  </td>
+                                  <td class="name">{{process.Name || 'N/A'}}</td>
+                                  <td class="cpu">{{process.CPU}}</td>
+                                  <td class="ram">{{process.MemoryMB}}</td>
+                                  <td class="memory">{{process.MemoryPercent}}</td>
+                                  <td class="disk">{{process.DiskMB}}</td>
+                                  <td class="network">{{process.Network}}</td>
+                                  <td class="action">
+                                    <img src="assets/img/icons/stop.svg" (click)="stopProcesses(process)">                                    
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="Rectangle" *ngIf="processview">
+        <div class="offlineImg">
+        </div>
+        <div class="device-offline">
+          Device Offline
+        </div>
+      </div>
+  </div>
+</main>
+<div
+  class="loading"
+  *ngIf="loading"
+></div>
+

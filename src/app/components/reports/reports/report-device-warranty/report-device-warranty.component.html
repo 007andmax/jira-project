@@ -1,0 +1,154 @@
+<div>
+    <div class="report-menu">
+        <div class="run-report-content col-md-11 left">
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'All Companies'"
+                    [list]="companies"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content custom-width dropdown-height">
+                <app-drop-down
+                    #dropdownDevice
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [placeholder]="'All devices'"
+                    [isDisabled]="!deviceWarrantyReport.companyId"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></app-drop-down>
+            </div>
+            <button
+                class="qt-btn --outline-blue qt-ml-8"
+                (click)="getReportByDeviceWarranty()"
+            >
+                Get Report
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
+            icon__email-dark
+            qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+            summaryemail
+          "
+                    (click)="sendEmail()"
+                ></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="downloadCsv()"
+            >
+                <i class="
+            icon__download
+            qt-za-16 qt-sz-16 qt-dib qt-bg-contain
+            summarydownload
+          "></i>
+            </button>
+        </div>
+        <div class="run-report-content col-md-1 right">
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
+        </div>
+    </div>
+</div>
+<div id="product-list-ticket-data">
+    <div class="device-header">
+        <div>
+            <span>{{ clientName }}</span>
+        </div>
+        <div>
+            <span>
+                <b>{{ "Device Warranty Report" }}</b>
+            </span>
+        </div>
+        <div>
+            <span>
+                {{ "As on" + " " + (date | date: DateFormat) }}
+            </span>
+        </div>
+    </div>
+
+    <div class="contant-area">
+        <div class="table-wrap tablepadding">
+            <table class="dataTable cmn-tab-head">
+                <thead>
+                    <tr>
+                      <th
+                            class="company"
+                            (click)="onFilter('name')"
+                        >
+                            COMPANY NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="device"
+                            (click)="onFilter('name')"
+                        >
+                            DEVICE NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="manufacturer"
+                            (click)="onFilter('manufacturer')"
+                        >
+                            MANUFACTURER
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="devicetype">DEVICE TYPE</th>
+                        <th
+                            class="model"
+                            (click)="onFilter('model')"
+                        >
+                            MODEL
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="serial">SERIAL NUMBER</th>
+                        <th class="warranty">WARRANTY DATE</th>
+                    </tr>
+                </thead>
+                <tbody class="device-warranty-report-table">
+                    <tr *ngFor="let deviceWarranty of deviceWarrantyList">
+                        <td class="company">{{deviceWarranty.CompanyName}}</td>
+                        <td class="device">{{ deviceWarranty.Name }}</td>
+                        <td class="manufacturer">{{ deviceWarranty.Manufacturer }}</td>
+                        <td>{{deviceWarranty.HardwareType}}</td>
+                        <td class="model">{{ deviceWarranty.Model }}</td>
+                        <td class="serial">
+                            {{ addNewlines(deviceWarranty.SerialNumber) }}
+                        </td>
+                        <td>
+                            {{deviceWarranty.WarrantyExpires | date: DateFormat}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="deviceWarrantyList.length == 0">
+                <tbody>
+                    <tr>
+                        <td colspan="10" class="text-center report-device-warranty-table">Data Not Available</td>
+                    </tr>
+                </tbody>
+            </table>     
+        </div>
+    </div>
+</div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>
+<app-report-send-email></app-report-send-email>

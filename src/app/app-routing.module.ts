@@ -1,3 +1,5 @@
+import { ProcessesComponent } from './components/device/processes/processes.component';
+import { DeviceSettingComponent } from './components/setting/device-setting/device-setting.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
@@ -45,7 +47,6 @@ import { DashboardBillingComponent } from './components/billing/dashboard-billin
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
-import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 import { SupportComponent } from './components/support/support.component';
 import { DocumentsComponent } from './components/documents/documents.component';
@@ -55,6 +56,12 @@ import { DocumentsTemplatesComponent } from './components/documents/documents-te
 import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
+import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
+import { DeviceComponent } from './components/device/device.component';
+import { DevicesComponent } from './components/devices/devices.component';
+import { DevicesReportComponent } from './components/devices/devices-report/devices-report.component';
+import { WindowUpdatesComponent } from './components/device/window-updates/window-updates.component';
+
 import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
 //import { HomeComponent } from './components/home/home.component';
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
@@ -85,6 +92,7 @@ import { SuperAdminPublicComponent } from './components/super-admin-public/super
 import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
 import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
 import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
+import { TestPermissionService } from './services/test-permission/test-permission.service';
 
 const routes: Routes = [
 
@@ -236,6 +244,12 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService]
   },
   {
+    path: ':company/setting/deviceSetting',
+    loadChildren: './components/setting/device-setting/device-setting.module#DeviceSettingModule',
+    // canActivate: [PermissionTechUserService]
+    canActivate: [TestPermissionService]
+  },
+  {
     path: ':company/inventory/products',
     loadChildren: './components/inventory/inventory.module#InventoryModule',
     canActivate: [PermissionTechUserService]
@@ -316,6 +330,7 @@ const routes: Routes = [
   {
     path: ':company/device',
     loadChildren: './components/device/device-root.module#DeviceModule',
+    canActivate: [TestPermissionService]
 
   },
   {
@@ -335,6 +350,12 @@ const routes: Routes = [
     canActivate: [PermissionTechUserService]
   },
   {
+    path: ':company/company/:id/network-scan-beta',
+    loadChildren: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
+    // canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [TestPermissionService]
+  },
+  {
     path: ':company/company/:id/network-scan',
     loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule',
     canActivate: [PermissionCompanyService, PermissionTechUserService]
@@ -343,6 +364,18 @@ const routes: Routes = [
     path: ':company/company/:id/devices',
     loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule',
     canActivate: [PermissionCompanyService, PermissionTechUserService]
+  },
+  {
+    path: ':company/company/:id/devices-beta',
+    loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
+    //canActivate: [PermissionCompanyService, PermissionTechUserService]
+    canActivate: [TestPermissionService]
+  },
+  {
+    path: ':company/devices',
+    loadChildren: './components/devices/devices.module#DevicesModule',
+    // canActivate: [PermissionTechUserService],
+    canActivate: [TestPermissionService]
   },
   {
     path: ':company/quickSupport',
@@ -372,6 +405,12 @@ const routes: Routes = [
   {
     path: ':company/help-center/:id',
     loadChildren: './components/super-admin-public/super-admin-public-category/super-admin-public-category.module#SuperAdminPublicCategoryModule'
+  },
+  {
+    path: ':company/devices/reports',
+    loadChildren: './components/devices/devices-report/devices-report.module#DevicesReportModule',
+    //canActivate: [PermissionTechUserService]
+    canActivate: [TestPermissionService]
   },
 
 

@@ -4,14 +4,15 @@
 .app-left-panel {
   display: block;
   height: 100%;
-  width: $left-panel-width;
+  width: auto;
   z-index: 1050;
-  position: fixed;
+  @media (max-width: 767px) {
+    position: fixed;
+  }
   top: 0;
   left: 0;
   background-color: $gray-800;
   color: $white;
-  transition: width 300ms;
 
   .header-mobile-close {
     width: 32px;
@@ -81,13 +82,11 @@
     border-top: 1px solid rgba(255,255,255,.08);
     display: flex;
     align-items: flex-start;
-    //height: calc(100% - 80px);
     height: 100%;
     &-icon,
     &-menu {
       overflow: auto;
       height: 100%;
-      //padding-top: 7px;
     }
     &-icon {
       display: flex;
@@ -105,6 +104,7 @@
     &-menu {
       width: 100%;
       margin: 0;
+      position: relative;
       @media (min-width: 768px) {
         margin: 24px 16px 0 8px;
       }
@@ -135,14 +135,15 @@
   }
 
   &__header-resize-btn {
-    position: fixed;
-    top: 22px;
-    left: 246px;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 20px;
     height: 20px;
     cursor: pointer;
     background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
     transition: transform 300ms, left 300ms;
+    z-index: 9999;
   }
 
   &__header-open-btn {
@@ -168,13 +169,6 @@
       height: 40px;
     }
   }
-
-  //&__menu-arrow {
-  //  width: 16px;
-  //  height: 16px;
-  //  background-image: url("/assets/img/icons-left-sidebar/dropdown-arrow-down.svg");
-  //  margin-left: auto;
-  //}
 
   &__menu-title {
     font-size: 18px;
@@ -205,6 +199,7 @@
       align-items: center;
       justify-content: flex-start;
       margin: 0 16px 8px;
+      flex-shrink: 0;
       @media (max-width: 767px) {
         padding: 12px 16px;
         background-color: $gray-700
@@ -277,6 +272,10 @@
     &.--documents {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
       mask-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
+    }
+    &.--devices{      
+      -webkit-mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
+      mask-image: url("/assets/img/icons-left-sidebar/devices.svg");
     }
     &.--logout {
       -webkit-mask-image: url("/assets/img/icons-left-sidebar/logout.svg");
@@ -443,6 +442,8 @@
 
     &__header-resize-btn {
       left: 24px;
+      top: 22px;
+      position: fixed;
       transform: rotate(180deg);
     }
 
@@ -530,6 +531,7 @@
   100% {
     opacity: 1;
     max-height: 100%;
+    max-block-size: fit-content;
   }
 }
 @keyframes hideExpandPanel {

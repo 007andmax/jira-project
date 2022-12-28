@@ -1,0 +1,69 @@
+<div>
+  <div class="report-page qt-page-list__header --sticky">
+      <div class="qt-page-list__header-title-line">
+          <div class="qt-page-list__header-title-line--left">
+              <h3
+                  class="qt-page-list__header-title"
+                  [textContent]="title"
+              ></h3>
+          </div>
+          <div class="qt-page-list__header-title-line--rigth">
+              <div class="d-f ai-c">
+                  <div class="qt-page-list__search qt-ml-8 search-container">
+                      <input
+                          type="text"
+                          placeholder="Search Reports"
+                          (input)="search($event)"
+                      >
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="outsideheader">
+  <div class="reports-all">
+      <div
+          class="col-sm-3">
+      <app-report-list-item
+          class="d-device"
+          [title]="'Device'"
+          [listTitles]="getListTitles('DEVICE',searchText)"
+          [listStates]="getListStates('DEVICE',searchText)"
+      ></app-report-list-item>
+      <app-report-list-item
+      class="d-warranty"
+      [title]="'Warranty'"
+      [listTitles]="getListTitles('WARRANTY',searchText)"
+      [listStates]="getListStates('WARRANTY',searchText)"
+      ></app-report-list-item>
+      </div>
+      <div class="col-sm-3">
+        <app-report-list-item
+        class="d-hardware"
+        [title]="'Hardware'"
+        [listTitles]="getListTitles('HARDWARE',searchText)"
+        [listStates]="getListStates('HARDWARE',searchText)"
+    ></app-report-list-item>
+      </div>
+      <div
+          class="col-sm-3"
+      >
+        <app-report-list-item
+        class="d-network"
+        [title]="'Network'"
+        [listTitles]="getListTitles('NETWORK',searchText)"
+         [listStates]="getListStates('NETWORK',searchText)"
+         ></app-report-list-item>
+      </div>
+      <div class="col-sm-3">
+        <app-report-list-item
+        class="d-software"
+        [title]="'Software'"
+        [listTitles]="getListTitles('SOFTWARE',searchText)"
+        [listStates]="getListStates('SOFTWARE',searchText)"
+    ></app-report-list-item>
+      </div>
+
+    </div>
+</div>

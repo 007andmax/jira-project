@@ -7,7 +7,7 @@ import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { DELETE_TECH_USER } from 'src/app/const/confirm';
+import { DELETE_TECH_USER, RESTORE_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -22,6 +22,8 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { TechUsersFilter } from './class/tech-users-filter';
 import { User } from '../../users/class/user';
 import { PermissionManageComponent } from './permission-manage/permission-manage.component';
+import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-reassign.component';
+import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 declare var $;
 
 @Component({
@@ -49,12 +51,16 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   isCroppedImg = false;
   cropAvatar: any;
   fileAvatar: any = null; // return result when first time image upload
-  popup: boolean;
   userId: any;
   IdList: any;
   idUploadFile: string;
   activeTab: string = "activeUsers";
   filter: TechUsersFilter = new TechUsersFilter();
+  authenticationTypes = [new TitleListType("Password only", "DISABLED"),
+  new TitleListType("Basic two-factor authentication", "BASIC"),
+  new TitleListType("Secure two-factor authentication - by email", "SECURE"),
+  new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
+  authenticationTypesType = new TitleListType("Password only", "DISABLED");
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('editBtn') editBtn: DisabledBtnDirective;
   @ViewChild('userPermissions') userPermissions: PermissionManageComponent;
@@ -109,17 +115,37 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       ],
       techRole: [''],
       newDevice: [''],
+      userEmailNotificationId: [''],
       ticketCreated: [''],
       myTicketUpdated: [''],
       ticketCloseNotifications: [''],
-      id: ['']
+      id: [''],
+      twoFactorAuthType: [''],
+      userEmailNotifications: {
+        newDevice: [false],
+        ticketCreated: [false],
+        myTicketUpdated: [false],
+        ticketCloseNotifications: [false],
+      }
     });
     let changeUsersArray = this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.data.accountType !== "TECH") return;
       if ((newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED')) {
         const Index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
         if (Index === -1) this.techUsers.unshift(new User(newChange.data));
+        if (Index > -1) this.techUsers[Index].onUpdate(newChange.data);
+        if (newChange.action === 'USER_SAVED' && !newChange.data.deletedAt) {
+          const indexArchived = this.userlist.findIndex(item => item.id == newChange.data.id);
+          if (indexArchived > -1 && this.userlist[indexArchived].deletedAt) this.userlist.splice(indexArchived, 1);
+        }
+
+        /*  const indexArchived = this.userlist.findIndex(item => item.id == newChange.data.id);
+          if (indexArchived > -1) this.userlist.splice(indexArchived, 1);*/
+
+      }
+      if (newChange.action === 'USER_ARCHIVED') {
+        const index = this.techUsers.findIndex((item) => item.id === newChange.data.id);
+        if (index > -1) this.techUsers.splice(index, 1);
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
@@ -130,18 +156,23 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       this.cd.detectChanges();
     })
     this.sub.add(changeUsersArray);
-
-    this.getUsers(false);
-    this.getRoleNames();
-    this.settingStateService.setComponentName('TechUsersSettingsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
+        if (this.confirmStateService.getConfirmAction() === RESTORE_USER) {
+          this.restoreUser();
+        }
         if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
-          this.removeTechUser();
+          if (this.techUserForm) this.techUserForm.reset();
+          this.submitted = false;
+          this.selectedTechUser = null;
+          this.edit = false;
         }
       }
     })
     this.sub.add(getConfirm);
+    this.getUsers(false);
+    this.getRoleNames();
+    this.settingStateService.setComponentName('TechUsersSettingsComponent');
     this.onCroppImage();
   }
   public onCroppImage() {
@@ -206,26 +237,24 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
   restoreConfirm(id) {
     this.userId = id;
-    this.popup = true;
+    this.confirmStateService.setConfirmAction(RESTORE_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
   restoreUser() {
     this.techUsersService.restoreUser(this.userId)
-      .pipe()
       .subscribe(
         response => {
-          this.popup = false;
           //  this.getUsers();
-          this.toastr.success('User has been restore successfully.');
-        },
-        error => {
-          this.popup = false;
-          this.toastr.error('Something wen to wrong. Please try again later');
-          // this.getUsers();
-        }
-      );
+        });
+  }
+  onAuthTypeChange(data) {
+    this.authenticationTypesType = this.authenticationTypes.find(item => item.type == data);
+    this.techUserForm.patchValue({
+      twoFactorAuthType: data
+    });
   }
 
   /**
@@ -264,7 +293,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
 
   getSecureText(twoFactorAuthType) {
-    if (twoFactorAuthType == "DISABLED") return "No Authentication";
+    if (twoFactorAuthType == "DISABLED") return "Password only";
     if (twoFactorAuthType == "BASIC") return "Basic";
     if (twoFactorAuthType == "SECURE") return "Secure by email";
     if (twoFactorAuthType == "GOOGLE_SECURE") return "Secure by one time password";
@@ -309,11 +338,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   resendWelcomeEmail(userEmail: string) {
     this.techUsersService
       .verifyUserEmail(userEmail)
-      .pipe(
-        map(res => {
-          this.toastr.success(`Resend Welcome Email Sent Successfully`);
-        })
-      )
       .subscribe();
   }
 
@@ -321,6 +345,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
    * opened creat tech user Model
    */
   creatTechUsr() {
+    this.authenticationTypesType = new TitleListType("Password only", "DISABLED");
     this.fileAvatar = null;
     this.selectedTechUser = null;
     this.create = !this.create;
@@ -328,7 +353,13 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUserForm.reset();
     if (this.create) {
       this.techUserForm.patchValue({
-        techRole: this.techRoles[0]
+        techRole: this.techRoles[0],
+        userEmailNotifications: {
+          newDevice: false,
+          ticketCreated: false,
+          myTicketUpdated: false,
+          ticketCloseNotifications: false,
+        }
       });
     }
   }
@@ -345,49 +376,42 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.edit = true;
     this.selectedTechUser = techUser;
     if (techUser) {
+      this.authenticationTypesType = this.authenticationTypes.find(item => item.type == techUser.twoFactorAuthType);
       this.techUserForm.patchValue({
         firstName: techUser.firstName,
         lastName: techUser.lastName,
         primaryEmail: techUser.primaryEmail,
         techRole: techUser.techRole,
-        newDevice: techUser.userEmailNotifications === undefined || techUser.userEmailNotifications.newDevice === undefined ? [''] : techUser.userEmailNotifications.newDevice,
-        ticketCreated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
-        myTicketUpdated: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
-        ticketCloseNotifications: techUser.userEmailNotifications === undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
-        id: techUser.id
+        newDevice: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.newDevice,
+        ticketCreated: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.ticketCreated,
+        myTicketUpdated: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.myTicketUpdated,
+        ticketCloseNotifications: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.ticketCloseNotifications,
+        userEmailNotificationId: techUser.userEmailNotifications == undefined ? [''] : techUser.userEmailNotifications.id,
+        id: techUser.id,
+        twoFactorAuthType: techUser.twoFactorAuthType,
       });
     }
   }
 
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
+
     this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
+    const modalRef = this.modalService.open(TechUsersReassignComponent, { windowClass: 'xs-modal user-modal', container: "app-tech-users-settings", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.techUser = techuser;
+
+
+  /*  this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
-    this.cd.detectChanges();
+  */  this.cd.detectChanges();
   }
 
   public onFilter(field, list) {
     this.filter.onFilter(field, list)
 
   }
-  /**
-   * removed tech user
-   * @param techUser
-   */
-  removeTechUser() {
-    const id = this.userId.id;
-    if (this.userId) {
-      this.techUsersService
-        .archiveUser([this.userId.id])
-        .pipe(
-          map(archiveUser => {
 
-          })
-        )
-        .subscribe();
-    }
-  }
 
   /**
    * current comapny
@@ -537,7 +561,13 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
         lastName: this.techUserForm.value.lastName,
         primaryEmail: this.techUserForm.value.primaryEmail,
         companyId: this.currentCompanyId,
-        subscription: {}
+        "userEmailNotifications": {
+          "newDevice": (this.techUserForm.value.newDevice != null) ? this.techUserForm.value.newDevice : false,
+          "ticketCreated": (this.techUserForm.value.ticketCreated != null) ? this.techUserForm.value.ticketCreated : false,
+          "myTicketUpdated": (this.techUserForm.value.myTicketUpdated != null) ? this.techUserForm.value.myTicketUpdated : false,
+          "ticketCloseNotifications": (this.techUserForm.value.ticketCloseNotifications != null) ? this.techUserForm.value.ticketCloseNotifications : false
+        },
+        twoFactorAuthType: this.techUserForm.value.twoFactorAuthType,
       };
       if (this.cropAvatar) objTechUser.avatar = this.cropAvatar;
       this.addBtn.setDisabled(true);
@@ -546,10 +576,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
           this.create = false;
-          if (savedTechUsre && savedTechUsre.id) {
-            this.saveUsersEmailNotifications(savedTechUsre.id);
-          }
-
         },
         error => {
           this.addBtn.setDisabled(false);
@@ -680,28 +706,61 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     if (this.techUserForm.invalid) {
       return;
     }
-    this.selectedTechUser.firstName = this.techUserForm.value.firstName;
-    this.selectedTechUser.lastName = this.techUserForm.value.lastName;
-    this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
-    this.selectedTechUser.techRole = this.techUserForm.value.techRole;
-    this.selectedTechUser.subscription = {};
-    this.selectedTechUser.defaultSubscriptions = null;
-    this.selectedTechUser.initials = [
-      this.techUserForm.value.firstName,
-      this.techUserForm.value.lastName
-    ]
-      .map(function (s) {
-        return s.charAt(0).toUpperCase();
-      })
-      .join('');
+    let dataFotUpdate =
+    {
 
-    this.selectedTechUser.companyId = this.selectedTechUser.company
-      ? this.selectedTechUser.company.id
-      : null;
+      "phoneNumbers": this.selectedTechUser.phoneNumbers,
+      "id": this.selectedTechUser.id,
+      "avatar": this.selectedTechUser.avatar,
+      // "jobTitleId": this.selectedTechUser.jobTitleId,
+      "firstName": this.techUserForm.value.firstName,
+      "lastName": this.techUserForm.value.lastName,
+      "jobDescription": this.selectedTechUser.jobDescription,
+      "priority": this.selectedTechUser.priority,
+      "primaryEmail": this.techUserForm.value.primaryEmail,
+      "secondaryEmail": this.selectedTechUser.secondaryEmail,
+      "status": this.selectedTechUser.status,
+      "techRole": this.techUserForm.value.techRole,
+      "userEnabled": this.selectedTechUser.userEnabled,
+      //  "jobTypeId": this.selectedTechUser.jobTypeId,
+      "userIndustryId": this.selectedTechUser.userIndustryId,
+      // "defaultSubscriptions": this.selectedTechUser.defaultSubscriptions,
+      //"customSubscriptions": this.selectedTechUser.customSubscriptions,
+      "twoFactorAuthType": this.techUserForm.value.twoFactorAuthType,
+      "companyId": this.selectedTechUser.company
+        ? this.selectedTechUser.company.id
+        : null,
+      "userEmailNotifications": {
+        "newDevice": this.techUserForm.value.newDevice,
+        "ticketCreated": this.techUserForm.value.ticketCreated,
+        "myTicketUpdated": this.techUserForm.value.myTicketUpdated,
+        "ticketCloseNotifications": this.techUserForm.value
+          .ticketCloseNotifications,
+        "id": this.techUserForm.value.userEmailNotificationId
+      }
+    }
+    /* this.selectedTechUser.firstName = this.techUserForm.value.firstName;
+     this.selectedTechUser.lastName = this.techUserForm.value.lastName;
+     this.selectedTechUser.primaryEmail = this.techUserForm.value.primaryEmail;
+     this.selectedTechUser.techRole = this.techUserForm.value.techRole;
+     this.selectedTechUser.twoFactorAuthType = this.techUserForm.value.twoFactorAuthType;
+     this.selectedTechUser.defaultSubscriptions = null;
+     this.selectedTechUser.initials = [
+       this.techUserForm.value.firstName,
+       this.techUserForm.value.lastName
+     ]
+       .map(function (s) {
+         return s.charAt(0).toUpperCase();
+       })
+       .join('');*/
+
+    /* this.selectedTechUser.companyId = this.selectedTechUser.company
+       ? this.selectedTechUser.company.id
+       : null;*/
 
     this.editBtn.setDisabled(true);
     this.techUsersService
-      .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
+      .updateTechUsers(this.selectedTechUser.id, dataFotUpdate)
       .subscribe(
         res => {
           this.editBtn.setDisabled(false);
@@ -718,27 +777,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.toastr.error(er.techRole || 'Bad Request');
         }
       );
-  }
-
-  /**
-   * saved tech user email notification based on id.
-   * @param techUserId
-   */
-
-  saveUsersEmailNotifications(techUserId: string) {
-    if (techUserId) {
-      const notificationSetting = {
-        newDevice: this.techUserForm.value.newDevice,
-        ticketCloseNotifications: this.techUserForm.value
-          .ticketCloseNotifications,
-        ticketCreated: this.techUserForm.value.ticketCreated,
-        myTicketUpdated: this.techUserForm.value.myTicketUpdated
-      };
-      this.techUsersService
-        .saveUsersEmailNotifications(techUserId, notificationSetting)
-        .pipe(map(() => { }))
-        .subscribe();
-    }
   }
 
   ngOnDestroy(): void {

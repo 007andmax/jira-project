@@ -35,7 +35,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   left_filter: string;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-
+  container = document.body.querySelector(".main-container");
   constructor(private companiesService: CompaniesService,
     private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService,
@@ -50,7 +50,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.left_filter = this.leftPanelStateService.getFilter();
     if (this.companiesStateService.getCompanies().length > 0 && !this.left_filter) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -59,7 +59,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     if (this.left_filter) {
       if (this.left_filter !== "ARCHIVE") this.companyFilter.setClientType(this.left_filter);
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.showArchivedCompanies = (this.left_filter === "ARCHIVE");
       this.companyFilter.setShowArchivedCompanies(this.showArchivedCompanies);
@@ -93,7 +93,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     let filter = this.companiesStateService.filter.subscribe(data => {
       this.showPreloader = true;
       this.companyFilter.setFilters(data);
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
       this.setDefaultScoll();
       this.showArchivedCompanies = (data.clientType === "ARCHIVE");

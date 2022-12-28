@@ -12,6 +12,7 @@ import { User } from '../users/class/user';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
+import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devices.component';
 import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-documents.component';
 import { LeftPanelInventoryComponent } from './left-panel-inventory/left-panel-inventory.component';
 import { LeftPanelMarketingComponent } from './left-panel-marketing/left-panel-marketing.component';
@@ -43,6 +44,7 @@ export class LeftPanelComponent implements OnInit {
   @ViewChild('panelSupport') panelSupport: LeftPanelSupportComponent;
   @ViewChild('panelTickets') panelTickets: LeftPanelTicketsComponent;
   @ViewChild('panelUsers') panelUsers: LeftPanelUsersComponent;
+  @ViewChild('panelDevices') panelDevices: LeftPanelDevicesComponent;
   @ViewChild('panelInventory') panelInventory: LeftPanelInventoryComponent;
   @ViewChild('panelMarketing') panelMarketing: LeftPanelMarketingComponent;
   @ViewChild('panelPasswordManager') panelPasswordManager: LeftPanelPasswordManagerComponent;
@@ -75,11 +77,12 @@ export class LeftPanelComponent implements OnInit {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
-    })
+    });
 
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
-    })
+    });
+
     this.router.events
       .subscribe((event) => {
         if (this.state === '') {
@@ -95,6 +98,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices`)) this.state = 'company-devices';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices-beta`)) this.state = 'company-devices-beta';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`network-scan-beta`)) this.state = 'company-network-scan-beta';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`network-scan`)) this.state = 'company-network-scan';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`password-manager`)) this.state = 'company-password-manager';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
@@ -116,6 +121,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/emailTemplate`)) this.state = 'email-template-component';
           if (window.location.href.includes(`/setting/finance`)) this.state = 'invoice-ticket-component';
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
+          if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
+          if (window.location.href.includes(`/setting/deviceSetting`)) this.state = 'device-setting-component';
           if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
           if (window.location.href.includes(`/setting/crm-settings`)) this.state = 'crm-settings';
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
@@ -150,24 +157,41 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/payments-report`)) this.state = 'payments-report';
           if (window.location.href.includes(`/report/remote-access`)) this.state = 'remote-access';
           if (window.location.href.includes(`/report/software-summary`)) this.state = 'software-summary';
+          if (window.location.href.includes(`/report/software-summary-device`)) this.state = 'software-summary-device';
           if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
+          if (window.location.href.includes(`/report/hardware-summary-device`)) this.state = 'hardware-summary-device';
+          if (window.location.href.includes(`/report/report-device-warranty`)) this.state = 'report-device-warranty';
+          if (window.location.href.includes(`/report/report-device-antivirus`)) this.state = 'report-device-antivirus';
+          if (window.location.href.includes(`/report/network-ip-report`)) this.state = 'network-ip-report';
           if (window.location.href.includes(`/report/device-ip-summary`)) this.state = 'device-ip-summary';
+          if (window.location.href.includes(`/report/device-ip-summary-device`)) this.state = 'device-ip-summary-device';
+          if (window.location.href.includes(`/report/report-device-summary`)) this.state = 'report-device-summary';
+          if (window.location.href.includes(`/report/network-detail-report`)) this.state = 'network-detail-report';
+          if (window.location.href.includes(`/report/network-adapter-report`)) this.state = 'network-adapter-report';
+          if (window.location.href.includes(`/report/report-device-deploymentwarranty`)) this.state = 'report-device-deploymentwarranty';
+          if (window.location.href.includes(`/report/report-device-processorram`)) this.state = 'report-device-processorram';
+          if (window.location.href.includes(`/report/report-device-diskspace`)) this.state = 'report-device-diskspace';
+          if (window.location.href.includes(`/report/applicationbycompany-report`)) this.state = 'applicationbycompany-report';
           if (window.location.href.includes(`/report/tech-sales`)) this.state = 'tech-sales';
           if (window.location.href.includes(`/report/tech-ticket`)) this.state = 'tech-ticket';
           if (window.location.href.includes(`/report/tech-service`)) this.state = 'tech-service';
           if (window.location.href.includes(`/report/ticket-report`)) this.state = 'ticket-report';
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
+          if (window.location.href.includes(`/devices`)) this.state = 'new-devices';
+          if (window.location.href.includes(`/devices/reports`)) this.state == 'new-device-summary';
           if (window.location.href.includes(`/help-center`)) this.state = 'help-center';
           if (window.location.href.includes(`/device/`)) this.state = 'new-device';
           if (this.state === '' && this.companiesStateService.getCurrentCompany() && this.usersStateService.getCurrentUser().role !== "SUPER_ADMIN") this.goToDefaultPage();
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
-          this.cd.detectChanges();
-          this.updatePage(this.state);
+          if (!this.cd['destroyed']) {
+            this.cd.detectChanges();
+            this.updatePage(this.state);
+          }
         }
-
       });
+
     this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
     })
@@ -179,14 +203,17 @@ export class LeftPanelComponent implements OnInit {
       this.panelTickets.close();
       this.panelUsers.close();
       this.panelDocuments.close();
+      this.panelDevices.close();
 
       this.panelCompanies.openPanel();
       this.panelCompanies.togglePanel(true);
     })
     this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
       this.state = data;
-      this.updatePage(this.state);
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.updatePage(this.state);
+        this.cd.detectChanges();
+      }
     })
     /* this.companiesStateService.onCurrentCompany.subscribe(data => {
        if (this.state === '') {
@@ -216,6 +243,7 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isDocumentsState(data)) this.page = "DOCUMENTS";
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
+    if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
   }
   changePage(page) {
     this.page = page;
@@ -228,7 +256,9 @@ export class LeftPanelComponent implements OnInit {
   onToggleLeftPanel() {
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
-    this.cd.detectChanges();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   onToggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(false);
@@ -257,6 +287,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'company-tickets') this.goToLink('company/tickets');
       if (this.state === 'company-user') this.goToLink('company/user');
       if (this.state === 'company-devices') this.goToLink('company/devices');
+      if (this.state === 'company-network-scan-beta') this.goToLink('company/network-scan-beta');
       if (this.state === 'company-network-scan') this.goToLink('company/network-scan');
       if (this.state === 'company-password-manager') this.goToLink('company/password-manager');
       if (this.state === 'company-products') this.goToLink('company/products');
@@ -276,8 +307,11 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'invoice-ticket-component') this.goToLink('setting/finance');
       if (this.state === 'crm-settings') this.goToLink('setting/crm-settings');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
+      if (this.state === 'subscription-component') this.goToLink('setting/subscription');
+      if (this.state === 'device-setting-component') this.goToLink('setting/deviceSetting');
       if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
       if (this.state === 'marketing-email') this.goToLink('setting/marketing-email');
+
       if (this.state === 'new-users') this.goToLink('users');
       if (this.state === 'marketing') this.goToLink('marketing');
       if (this.state === 'new-reports') this.goToLink('reports');
@@ -291,6 +325,8 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-template-documents') this.goToLink('documents/templates');
       if (this.state === 'support-page') this.goToLink('support-page');
       if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getCompanyRoutingId()}/documents`);
+      if (this.state === 'new-devices') this.goToLink('devices');
+      if (this.state === 'new-device-summary') this.goToLink('devices/reports');
 
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
@@ -302,18 +338,33 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'payments-report' ||
         this.state === 'remote-access' ||
         this.state === 'software-summary' ||
+        this.state === 'software-summary-device' ||
         this.state === 'hardware-summary' ||
+        this.state === 'hardware-summary-device' ||
         this.state === 'device-ip-summary' ||
+        this.state === 'device-ip-summary-device' ||
+        this.state === 'report-device-summary' ||
+        this.state === 'report-device-warranty' ||
+        this.state === 'report-device-antivirus' ||
+        this.state === 'network-ip-report' ||
+        this.state === 'network-detail-report' ||
+        this.state === 'network-adapter-report' ||
+        this.state === 'report-device-deploymentwarranty' ||
+        this.state === 'report-device-processorram' ||
+        this.state === 'applicationbycompany-report' ||
         this.state === 'tech-sales' ||
         this.state === 'tech-ticket' ||
         this.state === 'tech-service' ||
         this.state === 'ticket-report' ||
         this.state === 'service-report' ||
+        this.state === 'report-device-diskspace' ||
         this.state === 'income-accounts') this.goToLink('report/' + this.state);
 
       this.updatePage(this.state);
       this.leftPanelStateService.changeState(this.state);
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     }
   }
   public getCurrentUserName() {

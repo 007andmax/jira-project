@@ -1,11 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { LogicalDisk } from './../../../device/hardware/class/system';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 
 @Component({
   selector: 'hardware-summary-report',
   templateUrl: './hardware-summary-report.component.html',
-  styleUrls: ['./hardware-summary-report.component.css']
+  styleUrls: ['./hardware-summary-report.component.scss']
 })
 export class HardwareSummaryReportComponent implements OnInit {
 
@@ -15,9 +16,7 @@ export class HardwareSummaryReportComponent implements OnInit {
   hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
-
   ngOnInit() {
-
   }
   public getReport(data) {
     this.loadingInProgress = true;
@@ -28,7 +27,6 @@ export class HardwareSummaryReportComponent implements OnInit {
       this.onInit = true;
       this.loadingInProgress = false;
       this.cd.detectChanges();
-
     }, 1000);
   }
   getRamSize(slots) {
@@ -56,5 +54,6 @@ export class HardwareSummaryReportComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+
 
 }

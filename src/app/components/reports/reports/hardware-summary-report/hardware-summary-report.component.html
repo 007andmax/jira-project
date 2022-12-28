@@ -13,7 +13,7 @@
     id="product-list-ticket-data"
 >
     <div
-        class=""
+        class
         *ngIf="!loadingInProgress"
     >
         <div
@@ -24,105 +24,89 @@
             <h6 class="qt-fw-600 qt-color-dark">Hardware Summary Report</h6>
         </div>
         <table
-          class="qt-report__body-table-body"
-          *ngIf="onInit"
+            class="qt-report__body-table-body"
+            *ngIf="onInit"
         >
-          <thead>
-            <tr>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
-              >
-                Device
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
-              >
-                Operating System
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
-              >
-                CPU
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
-              >
-                RAM
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
-              >
-                DISK
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
-              >
-                WARRANTY
-              </th>
-              <th
-                class="qt-fw-600 qt-color-dark"
-                *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
-              >
-                Serial Number
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-template
-              ngFor
-              let-device
-              [ngForOf]="hardwareSummaryReport.list"
-              let-i="index"
-              [ngForTrackBy]="trackByIndex"
-            >
-              <tr
-                class="qt-report__body-row"
-                *ngIf="device.report"
-              >
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+            <thead>
+                <tr>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+                    >
+                        Device
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                    >
+                        Operating System
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
+                    >
+                        CPU
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
+                    >
+                        RAM
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
+                    >
+                        DISK
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                    >
+                        WARRANTY
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                    >
+                        Serial Number
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template
+                    ngFor
+                    let-device
+                    [ngForOf]="hardwareSummaryReport.list"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
                 >
-                  {{device.label || device.hostName}}
-                </td>
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
-                >
-                  {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
-                </td>
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
-                >
-                  {{device.report && device.report.processors && device.report.processors.length > 0 && device.report.processors[0].name}}
-                </td>
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
-                >
-                  {{device.report && device.report.ram && getRamSize(device.report.ram.slots)}}
-                </td>
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
-                >
-                  {{device.report && getDiskSize(device.report.logicalDisks)}}
-                </td>
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
-                >
-                  {{device.report && device.report.variant && device.report.variant.warrantyDate}}
-                </td>
-                <td
-                  *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
-                >
-                  {{device.report && device.report.system && device.report.system.serial_number}}
-                </td>
-              </tr>
-            </ng-template>
-          </tbody>
+                    <tr
+                        class="qt-report__body-row"
+                        *ngIf="device.report"
+                    >
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice">{{device.label || device.hostName}}</td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem">
+                            {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu">
+                            {{device.report && device.report.processors && device.report.processors.length > 0 && device.report.processors[0].name}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithRam">
+                            {{device.report && device.report.ram && getRamSize(device.report.ram.slots)}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk">
+                            {{device.report && getDiskSize(device.report.logicalDisks)}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty">
+                            {{device.report && device.report.variant && device.report.variant.warrantyDate}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber">
+                            {{device.report && device.report.system && device.report.system.serial_number}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
         </table>
     </div>
 </div>

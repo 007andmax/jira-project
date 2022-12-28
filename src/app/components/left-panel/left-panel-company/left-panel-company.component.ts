@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -30,10 +29,10 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   constructor(//private quoteStateService: QuoteStateService,
     public router: Router,
     private permissionsService: PermissionsService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     public activateRoute: ActivatedRoute,
-    private companiesService: CompaniesService,
-    private leftPanelStateService: LeftPanelStateService) { }
+    private leftPanelStateService: LeftPanelStateService,
+  ) { }
 
   ngOnInit() {
     this.companyId = this.companiesStateService.getCompanyRoutingId();
@@ -99,5 +98,21 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  /**
+   * Get companies list
+   * @param list
+   */
+  private getCompaniesNames(list) {
+
+    const filteredArray = [];
+    list.map((item) => {
+      filteredArray.push({
+        companyId: item.id,
+        name: item.name
+      })
+    });
+    return filteredArray;
   }
 }

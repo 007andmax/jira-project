@@ -139,12 +139,13 @@
                                             [textContent]="item.productsAmount"
                                         ></div>
                                         <div class="tab-pane__table-cell product-category-table__gl-number">
-                                            <app-drop-down
+                                            <gl-numbers-drop-down
                                                 [class]="['--small-padding','gl-number-product-settings' ,'--editable-dropdown', 'qt-input-block']"
                                                 [list]="glNumbers"
                                                 [placeholder]="'Select GL'"
                                                 [container]="'body'"
-                                                [change]="false"
+                                                [search]="true"
+                                                [change]="true"
                                                 [editItem]="item.glNumber"
                                                 [add]="true"
                                                 [field]="'glNumber'"
@@ -154,7 +155,7 @@
                                                 [reducerItem]="glDropDownItemName"
                                                 (onSelectedItem)="onSelectGlNumbers(item,$event)"
                                             >
-                                            </app-drop-down>
+                                            </gl-numbers-drop-down>
                                         </div>
                                         <div class="tab-pane__table-cell product-category-table__action">
                                             <div class="qt-df qt-ai-c">

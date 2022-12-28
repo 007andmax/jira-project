@@ -1,0 +1,105 @@
+.active {
+    background: #3e4b61;
+    color: #16a4fa;
+    border-left: 2px solid #16a4fa;
+}
+
+.category-name {
+    color: white;
+}
+
+.category-item {
+    &:hover {
+        color: #16a4fa;
+    }
+}
+
+.devices-categories {
+    padding-left: 10px !important;    
+  }
+
+li.child-menu {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+}
+
+.app-left-panel__menu-expand li .menu-inner {
+    list-style: none;
+    padding-left: 15px;
+    padding-top: 15px;
+    margin-left: -15px;
+}
+
+.menu-inner .fav {
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+    background-image: url(/assets/img/icons/favourite.svg);
+}
+
+.menu-inner li {
+    padding-left: 15px;
+}
+
+.expand-search {
+    background-image: url('/assets/img/icons/expand1.svg');
+    background-repeat: no-repeat;
+    margin-top:-17px;
+    width:16px;
+    height:16px;
+    margin-left: auto;
+}
+
+.collapse-search {
+    background-image: url('/assets/img/icons/collapse1.svg');
+    background-repeat: no-repeat;
+    margin-top:-17px;
+    width:16px;
+    height:16px;
+    margin-left: auto;
+}
+
+.favr {
+  height: 14px;
+  margin-right: 4px;
+  background-image: url(/assets/img/icons/favourite.svg);
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  background-position: center;
+}
+
+.device-caret-icon-rotate {
+    transform: rotate(90deg);
+    top:5px;
+}
+
+.compinesicon{
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    background-position: center;
+    opacity: 0.5;
+    background-image: url(/assets/img/icons-left-sidebar/menu-company.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.devices-ping-remove{
+    display: flex;
+    background-image: url(/assets/img/icons/remove.svg);
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;    
+    background-position: center;
+}
+
+.device-pinched-padding{
+    padding-left:10px;
+}
+
+
+

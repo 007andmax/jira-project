@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ReportsLeftMenuItem } from './class/reports-left-menu-item';
 import { ReportsLeftMenuItemReport } from './class/reports-left-menu-item-report';
@@ -14,6 +15,7 @@ export class LeftPanelReportsComponent implements OnInit {
   @Input() activePage: string = "";
   list: Array<ReportsLeftMenuItem> = [];
   constructor(private leftPanelStateService: LeftPanelStateService,
+    public companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
@@ -26,9 +28,14 @@ export class LeftPanelReportsComponent implements OnInit {
     new ReportsLeftMenuItemReport('Accounting report', 'accounting-report'),
     new ReportsLeftMenuItemReport('Payments report', 'payments-report')], this.getPermissions('VIEW_FINANCIAL_REPORT')));
     this.list.push(new ReportsLeftMenuItem("icon__remote-access", "REMOTE ACCESS", [new ReportsLeftMenuItemReport('Remote connection report', 'remote-access')], this.getPermissions('VIEW_REMOTE_ACCESS_REPORT')));
-    this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
+    if (this.companiesStateService.getCurrentCompany() && (this.companiesStateService.getCurrentCompany().id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || this.companiesStateService.getCurrentCompany().id === '72381bff-127c-4a63-9d2e-6e952350dcbd')) this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
     new ReportsLeftMenuItemReport('Hardware Summary reports', 'hardware-summary'),
     new ReportsLeftMenuItemReport('Device IP Summary report', 'device-ip-summary')], this.getPermissions('VIEW_DEVICES_REPORTS')));
+    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+      if ((data.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || data.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')) this.list.push(new ReportsLeftMenuItem("icon__devices", "DEVICES", [new ReportsLeftMenuItemReport('Software Summary report', 'software-summary'),
+      new ReportsLeftMenuItemReport('Hardware Summary reports', 'hardware-summary'),
+      new ReportsLeftMenuItemReport('Device IP Summary report', 'device-ip-summary')], this.getPermissions('VIEW_DEVICES_REPORTS')));
+    })
     this.list.push(new ReportsLeftMenuItem("icon__performance", "PERFORMANCE", [new ReportsLeftMenuItemReport('Tech sales report', 'tech-sales'),
     new ReportsLeftMenuItemReport('Tech ticket report', 'tech-ticket'),
     new ReportsLeftMenuItemReport('Tech service report', 'tech-service')], this.getPermissions('VIEW_PERFORMANCE_REPORT')));

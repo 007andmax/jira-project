@@ -1,0 +1,632 @@
+@import "../../../assets/scss/device/variable";
+@import "../../../assets/scss/device/mixin";
+@import "../../../assets/scss/device/custom";
+@import "../../../assets/scss/device/_modals.scss";
+@import "./src/assets/styles/variable";
+
+.form-input-search {
+  padding: 7px 14px 7px 34px;
+  background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
+  font-size: 12px;
+  line-height: 1.67;
+  background-color: #ffffff;
+  width: 500px;
+}
+
+.device-beta-search {
+  height: 32px;
+  border-radius: 4px;
+  border: solid 1px #edf2f6;
+  background-color: #f8f9fa;
+  margin: 0 25px 0 27px;
+}
+
+.Rectangle {
+  width: 670px;
+  height: 36px;
+  margin: 24px 4px 24px 30px;
+  padding: 4px 4px 4px 11px;
+  @include border-radius(4px);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+img.Online-Search {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  margin-top: 4px;
+}
+
+.SearchRectangle {
+  width: 625px;
+  height: 30px;
+  margin: -3px 0px 0px 30px;
+  padding: 2px 4px 2px 11px;
+  border-radius: 4px;  
+  background-color: #fff;
+}
+
+.SearchRectangletag {
+  width: 705px;
+  height: 30px;
+  margin: -3px 0px 0px -49px;
+  padding: 2px 4px 2px 11px;
+  border-radius: 4px;  
+  background-color: #fff;
+}
+
+.example-chip-list {
+  width: 94%;
+}
+
+.SubRectangle {
+  width: 744px;
+  height: 32px;
+  margin: 0 1px 0 0;
+  padding: 6px 15px 4px;
+  background-color: #fff;
+  font-size: 12px;
+}
+
+::ng-deep .mat-autocomplete-panel.extended.mat-autocomplete-visible {
+  width: 670px;
+  height: 387px;
+  margin: -12px 40px 0 -18px;
+}
+
+::ng-deep .opt-icon {
+  margin: 4px;
+  margin-top: 16px;
+  height: 32px;
+  width: 32px;
+  float: right;
+  color: #212b36;
+
+}
+
+.icon-list i {
+  display: block;
+}
+
+.company-devices-table__menu-body {
+  position: relative;
+}
+
+.company-device-beta-hover:hover {
+  td {
+    background-color: #f9fafb;
+
+    .company-devices-table__ip-address-text,
+    .company-devices-table__ip-windows-text {
+      opacity: 0;
+    }   
+    .company-devices-table__system-network-buttons,
+    .company-devices-table__ip-address-buttons {
+      position: absolute;
+      top: 7px;
+      display: flex;      
+    }
+
+    .company-devices-table__system-network-buttons,
+    .company-devices-table__ip-address-buttons {      
+      padding-top: 14px
+    }
+
+    .device-name-edit-marker {
+      display: flex;
+    }
+
+    input.name-text-input {
+      background-color: #f9fafb;
+    }
+  }
+}
+
+.sidebar-system__info-text-input {
+  background-color: orange;
+}
+
+.restart-modal .modal-title {
+  font-size: 18px;
+  padding: $modal-title-padding;
+  @include clearfix;
+}
+
+.restart-modal .modal-body p {
+  padding: 15px;
+}
+
+.restart-modal .close {
+  margin-top: -40px;
+  margin-right: 15px;
+}
+
+.restart-modal .modal-footer .btn-danger {
+  background-color: #ff0000;
+}
+
+.restart-modal .modal-footer .btn-secondary {
+  color: #4f5f79;
+}
+
+.company-devices-beta-remote-modal {
+  .qt-modal__body {
+    padding: 20px 40px 56px 40px;
+  }
+
+  .qt-modal__close.icon__close {
+    right: 24px;
+    top: 24px;
+  }
+
+  &__title {
+    margin-bottom: 2px;
+  }
+
+  &__button {
+    min-width: 153px;
+  }
+
+  .remote-desctop-icon {
+    background-image: url(/assets/img/remote-desktop.svg);
+    width: 66px;
+    min-width: 66px;
+    height: 66px;
+  }
+
+  .connect-icon {
+    background-image: url(/assets/img/quicktech-connect.svg);
+    width: 66px;
+    min-width: 66px;
+    height: 66px;
+  }
+}
+
+.qt-list-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: none;
+
+  .loader {
+    margin: 0px 0px 0px 20px;
+  }
+}
+
+.device-table__input-name {
+  width: 100%;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  outline: none;
+  border-color: transparent;
+
+  &:hover,
+  &:focus {
+    border-color: #dfe3e8;
+    outline: none;
+  }
+}
+
+.mat-form-field {
+  margin: -19px 0 0 -9px;
+}
+
+input.mat-chip-input {
+  margin: 1px 0px 0px 15px;
+  flex: 1 0 150px;
+  height: 38px;
+  font-size: 12px;
+}
+
+::ng-deep .cdk-overlay-pane {
+  width: 766px !important;
+  min-width: 766px;
+  left: -24px !important;
+}
+
+.opt-icon.Company.Name {
+  background-image: url(/assets/img/auto/office-account.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Software {
+  background-image: url(/assets/img/auto/software.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Asset.Tag,
+.opt-icon.Tag {
+  background-image: url(/assets/img/auto/tag.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Manufacturer {
+  background-image: url(/assets/img/auto/manufacturer.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Asset.Name,
+.opt-icon.Asset.Title {
+  background-image: url(/assets/img/auto/devices.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.OS {
+  background-image: url(/assets/img/auto/os.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.OS.Version {
+  background-image: url(/assets/img/auto/os-version.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.Model {
+  background-image: url(/assets/img/auto/model.svg);
+  background-repeat: no-repeat;
+}
+
+.opt-icon.CPU {
+  background-image: url(/assets/img/auto/cpu.svg);
+  background-repeat: no-repeat;
+}
+
+span.qt-input-search:before {
+  width: 25px;
+  height: 25px;
+  margin-top: 15px;
+  background-image: url(/assets/img/icons/search.svg);
+  background-repeat: no-repeat;
+
+}
+
+.qt-btn.--outline-blue {
+  margin-left: 5px !important;
+}
+
+.Max-300-Words-limit {
+  width: 117px;
+  height: 16px;
+  margin: 8px 0 0 380px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: var(--gray-600);
+}
+
+.mat-chip-list-wrapper {
+  display: contents !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  width: 520px !important;
+  position: relative !important;
+}
+
+::ng-deep .modal-content {
+  border: none !important;
+}
+
+.Rectangle_device-popup {
+  height: 39px;
+  padding: 3px 4px 4px 11px;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border: solid 1px #c5cdd5;
+}
+
+.grey-dropdown .dropdown-menu {
+  background: #ffffff;
+  width: 100%;
+  top: auto;
+  max-height: 190px;
+  position: absolute;
+  top: 23px !important;
+  margin-left: -10px;
+}
+
+.company-device-textheader{
+  padding-top: 4px;
+  padding-right:25px;
+}
+
+.tagfontweight{
+  font-weight: 600 !important;
+}
+
+table.qt-table-modern tbody tr td {
+  vertical-align: middle !important;
+}
+
+.sidebarchiptag{
+  margin-bottom: 16px !important;
+}
+
+.software-text-center{
+  text-align: center !important;
+}
+
+.security-Update-table {
+  th {
+   white-space: nowrap;
+  }
+ td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: white;
+  }
+  tr {
+    td {
+      background: #ffffff;
+      padding: 0 8px 0 8px;
+      height: 48px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      vertical-align: middle;
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.install-Update{
+  display: flex;
+  background-image: url(/assets/img/icons/install.svg);
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  background-position: center;
+}
+
+.install-security-Update{
+  display: flex;
+  background-image: url(/assets/img/icons/install.svg);
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;  
+  background-position: center;
+}
+
+.sidebar-updates{
+  &__security-update-item {
+    padding: 16px;
+    width: 140px !important;
+    height: 120px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: $gray-100;
+    @media (max-width: 1920px) {      
+      width: 175px !important;
+    }      
+  }
+}
+
+.security-Update-list-header-thead{
+  min-width: 0px !important;
+}
+
+.security-button-disabled {
+  opacity: 0.6;  
+  pointer-events: none;
+}
+
+.loader {
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border: 0.35rem solid rgba(0, 0, 0, 0.2);
+  border-top-color: black;
+  animation: spin 1s infinite linear;
+  margin-right: 8px
+}
+
+.Resize{
+  @media only screen and (min-width: 1920px) {
+    width:74% !important;
+    margin-left: 0 !important;
+  }     
+
+  .company-device-hover:hover {
+    td {
+      .company-devices-table__system-network-buttons {
+        @media  only screen and (min-width:1920px) {
+          margin-left:40px;    
+        }
+      }        
+    }
+  }
+}
+.company-device-hover:hover {
+  td {
+    .company-devices-table__system-network-buttons {
+      @media  only screen and (min-width:1920px) {
+        margin-left:120px;    
+      }
+
+      @media only screen and (max-width: 1920) {
+        margin-left: 40px;
+      }
+    }
+    .company-devices-table__ip-address-buttons {
+      margin-left:-5px;
+    }
+  }
+}
+
+.dm {
+  width: 36px;
+  height: 36px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  color:#364656;
+  font-size: 12px;
+}
+
+.d-email{  
+  background-image: url(/assets/img/icons/email-dark.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+}
+
+.d-print{  
+  background-image: url(/assets/img/icons/print.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+}
+
+.d-exportdark{
+  background-image: url(/assets/img/icons/export-dark.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+}
+
+
+/deep/.date-picker {
+  .icn-calendar-light {
+    display: none;
+  }
+}
+
+/deep/.date-picker:hover {
+  .icn-calendar-light {
+    display: inline-block;
+  }
+}
+
+.qt-page-list__header {
+  width: 100% !important;
+}
+
+.qt-page-list__header-title-line {
+  width: 85%;
+  margin: 0 auto !important;
+}
+
+.qt-btn {  
+  &.--outline-gray {
+    background-color: #f4f6f8 !important;  
+    top:28px;
+  }
+}
+
+.computerModel
+{
+  /deep/ .qt-dropdown{
+    input{
+      border: 0px !important;
+      padding: 10px 4px!important; 
+      height:25px !important;   
+    }
+    .report-caret-icon {
+        display: none;
+        top:7px;
+    }      
+    .icn-remove-old {
+        display: none;
+        top:7px;
+      }
+  }
+}
+  
+
+.computerModel {
+  /deep/ .qt-dropdown:hover{
+    input{   
+      border: 1px #c5cdd5 !important;
+      padding: 10px 4px!important;
+      height:25px !important;
+    }
+    .report-caret-icon {
+        display: inline-block;
+    }    
+    .icn-remove-old {
+        display: inline-block;
+    }
+  } 
+} 
+
+.computerManufacture{
+  /deep/ .qt-dropdown{
+    input{
+      border: 0px !important;
+      padding: 10px 4px!important; 
+      height:25px !important;   
+    }
+    .report-caret-icon {
+        display: none;
+        top:7px;
+    }      
+    .icn-remove-old {
+        display: none;
+        top:7px;
+      }
+  }
+}
+
+.computerManufacture{
+  /deep/ .qt-dropdown:hover{
+    input{   
+      border: 1px #c5cdd5 !important;
+      padding: 10px 4px!important;
+      height:25px !important;
+    }
+    .report-caret-icon {
+        display: inline-block;
+    }    
+    .icn-remove-old {
+        display: inline-block;
+    }
+  } 
+}
+
+.sidebarSystemInfo-text{
+  padding-left: 4px;
+}
+
+.companydevice-beta-offline{
+  color:#ff5263; 
+}
+
+.companydevice-beta-online{
+  color: #2ec866;
+}
+
+
+
+  

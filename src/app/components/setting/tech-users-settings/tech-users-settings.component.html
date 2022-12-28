@@ -194,6 +194,7 @@
                                                         class="qt-df qt-ai-c qt-pt-6 qt-pr-12 qt-pb-6 qt-pl-8 pointer"
                                                         (click)="resendWelcomeEmail(techUser.primaryEmail)"
                                                         ngbDropdownToggle
+                                                        *ngIf="!techUser.isEmailVerified"
                                                     >
                                                         <div class="icon__email-resend qt-sz-20 qt-bg-contain pointer qt-mr-10"></div>
                                                         <span>Resend Email</span>
@@ -211,9 +212,10 @@
                                                         class="qt-df qt-ai-c qt-pt-6 qt-pr-12 qt-pb-6 qt-pl-8 pointer"
                                                         ngbDropdownToggle
                                                         (click)="removeUserConfirm(techUser)"
+                                                        *ngIf="!techUser.isOwner"
                                                     >
                                                         <div class="icon__remove--red-600 qt-sz-20 pointer qt-bg-contain qt-mr-10 "></div>
-                                                        <span class="qt-color-red-600">Remove User</span>
+                                                        <span class="qt-color-red-600">Archive User</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -417,12 +419,12 @@
         </div>
         <form [formGroup]="techUserForm">
             <div class="qt-input-block qt-input-line">
-                <label class="qt-input-block__label">Full Name</label>
+                <label class="qt-input-block__label">First Name</label>
                 <input
                     type="text"
                     class="qt-input-block__input"
                     formControlName="firstName"
-                    placeholder="Enter Full Name"
+                    placeholder="Enter First Name"
                 >
                 <div
                     *ngIf="submitted && f.firstName.errors"
@@ -482,6 +484,19 @@
                     [sort]="false"
                     [isBlockClear]="true"
                     (onSelectedItem)="onChangeRole($event)"
+                >
+                </app-drop-down>
+            </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Set authentication type</label>
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [list]="authenticationTypes"
+                    [editItem]="authenticationTypesType"
+                    [field]="'title'"
+                    [sort]="false"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onAuthTypeChange($event.type)"
                 >
                 </app-drop-down>
             </div>
@@ -556,7 +571,7 @@
         <div class="qt-df qt-w100">
             <button
                 class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
-                (click)="create = !create;onCreateSubmit()"
+                (click)="create = !create"
             >
                 Cancel
             </button>
@@ -579,16 +594,36 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Tech User</div>
         <div class="qt-df">
-            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+            <div
+                class="qt-aside__restore-modal qt-ml-8 pointer"
+                (click)="changePasswordRequest(selectedTechUser.id)"
+                ngbTooltip="Reset Password"
+                placement="top"
+                container="body"
+            >
                 <div class="icon__reset qt-sz-16 qt-bg-contain"></div>
             </div>
-            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+            <div
+                class="qt-aside__restore-modal qt-ml-8 pointer"
+                *ngIf="!selectedTechUser.isEmailVerified"
+                (click)="resendWelcomeEmail(selectedTechUser.primaryEmail);"
+                ngbTooltip="Resend Email"
+                placement="top"
+                container="body"
+            >
                 <div class="icon__email-send qt-sz-16 qt-bg-contain"></div>
             </div>
             <div class="qt-aside__restore-modal qt-ml-8 pointer">
                 <div class="icon__menu-settings--gray-500 qt-sz-16 qt-bg-contain"></div>
             </div>
-            <div class="qt-aside__restore-modal qt-ml-8 pointer">
+            <div
+                class="qt-aside__restore-modal qt-ml-8 pointer"
+                *ngIf="!selectedTechUser.isOwner"
+                (click)="removeUserConfirm(selectedTechUser)"
+                ngbTooltip="Archive User"
+                placement="top"
+                container="body"
+            >
                 <div class="icon__remove--red-600 qt-sz-16 qt-bg-contain"></div>
             </div>
         </div>
@@ -750,6 +785,19 @@
                 >
                 </app-drop-down>
             </div>
+            <div class="qt-input-block qt-input-line">
+                <label class="qt-input-block__label">Set authentication type</label>
+                <app-drop-down
+                    [class]="['qt-select-input-40']"
+                    [list]="authenticationTypes"
+                    [editItem]="authenticationTypesType"
+                    [field]="'title'"
+                    [sort]="false"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onAuthTypeChange($event.type)"
+                >
+                </app-drop-down>
+            </div>
             <div class="qt-input-line__email-notify-tech-users">
                 <div class="qt-fw-600 qt-color-gray-900 qt-mb-24">Set Email Notification for Tech User</div>
                 <ul class="list-unstyled">
@@ -834,53 +882,6 @@
                 <span *ngIf="!editBtn.isBlock()">Save</span>
                 <app-preloader-ticket *ngIf="editBtn.isBlock()"></app-preloader-ticket>
             </button>
-        </div>
-    </div>
-</div>
-<div
-    class="img-croparea deletePopup"
-    *ngIf="popup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h1>Restore User</h1>
-                    <p>Are you sure you want to restore user?</p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="popup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="restoreUser()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="popup = false"
-                >
-                    Cancel
-                </button>
-            </div>
         </div>
     </div>
 </div>

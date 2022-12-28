@@ -1,0 +1,186 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-title">Devices</div>
+</div>
+<ul
+    class="app-left-panel__menu-expand"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        [ngClass]="{'--active':type === 'Dashboard'  && currentActivePage === 'new-devices'}"
+        (click)="onFilter('Dashboard'); pagesActive('new-devices')"
+    >
+        Dashboard
+    </li>
+    <li
+        [ngClass]="{'--active':currentActivePage === 'pinnedSearches'}"
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="toggleTypePinnedSearch = ! toggleTypePinnedSearch;pagesActive('pinnedSearches')"
+    >
+        <span>Pinned Searches</span>
+        <div>
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'device-caret-icon-rotate':toggleTypePinnedSearch}"
+            ></i>
+        </div>
+    </li>
+    <ul
+        class="devices-categories"
+        *ngIf="toggleTypePinnedSearch"
+    >
+        <span *ngFor="let item of searches">
+            <li>
+                <span>
+                    <i
+                        class="qt-sz-16 .qt-ai-c devices-ping-remove"
+                        (click)="deletePinnedSearch(item)"
+                    ></i>
+                </span>
+                <span
+                    [ngClass]="{'--active':currentActivePinnedPageChild === item.ID}"
+                    class="menu-item-inner device-pinched-padding"
+                    (click)="onFilter1('Dashboard', item)"
+                >
+                    {{item.Name}}
+                </span>
+            </li>
+        </span>
+    </ul>
+    <li
+        [ngClass]="{'--active':currentActivePage === 'devicesCompanies'}"
+        (click)="toggleTypeCompanies = !toggleTypeCompanies;pagesActive('devicesCompanies')"
+    >
+        <span>Companies</span>
+        <div class="qt-ml-auto qt-sz-20">
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'device-caret-icon-rotate':toggleTypeCompanies}"
+            ></i>
+        </div>
+    </li>
+    <ul
+        class="devices-categories"
+        *ngIf="toggleTypeCompanies"
+    >
+        <li
+            *ngFor="let items of companyList"
+            [ngClass]="{'--active':currentActiveCompanyPageChild === items.name}"
+            (click)="onFilterCompany('Dashboard',items)"
+        >
+            {{items.name}}
+        </li>
+    </ul>
+    <li
+        [ngClass]="{'--active':currentActivePage === 'devicesReports'}"
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="toggleTypeReport = ! toggleTypeReport;pagesActive('devicesReports')"
+    >
+        <span>Reports</span>
+        <div>
+            <i
+                class="icn-sm report-caret-icon"
+                [ngClass]="{'device-caret-icon-rotate':toggleTypeReport}"
+            ></i>
+        </div>
+    </li>
+    <ul
+        class="devices-categories"
+        *ngIf="toggleTypeReport"
+    >
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceSummary' || currentActiveReportPageChild=== 'report-device-summary'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('report-device-summary','reportDeviceSummary')"
+        >
+            Device Summary Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportHardwareSummary' || currentActiveReportPageChild=== 'hardware-summary-device'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('hardware-summary-device','reportHardwareSummary')"
+        >
+            Hardware Summary Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceProcessRam' || currentActiveReportPageChild=== 'report-device-processorram'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('report-device-processorram','reportDeviceProcessRam')"
+        >
+            Device Processor Ram Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceDisk' || currentActiveReportPageChild=== 'report-device-diskspace'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('report-device-diskspace','reportDeviceDisk')"
+        >
+            Device Disk Space Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceIPSummary' || currentActiveReportPageChild=== 'device-ip-summary-device'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('device-ip-summary-device','reportDeviceIPSummary')"
+        >
+            Device IP Summary Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportNetworkIPSummary' || currentActiveReportPageChild=== 'network-ip-report'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('network-ip-report','reportNetworkIPSummary')"
+        >
+            Network IP Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportNetwrokDetail' || currentActiveReportPageChild=== 'network-detail-report'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('network-detail-report','reportNetwrokDetail')"
+        >
+            Network Detail Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportNetworkAdapter' || currentActiveReportPageChild=== 'network-adapter-report'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('network-adapter-report','reportNetworkAdapter')"
+        >
+            Network Adapter Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportSoftwareSummary' || currentActiveReportPageChild=== 'software-summary-device'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('software-summary-device','reportSoftwareSummary')"
+        >
+            Software Summary Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceAntivirus' || currentActiveReportPageChild=== 'report-device-antivirus'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('report-device-antivirus','reportDeviceAntivirus')"
+        >
+            Device Antivirus Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportApplicationByCompany' || currentActiveReportPageChild=== 'applicationbycompany-report'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('applicationbycompany-report','reportApplicationByCompany')"
+        >
+            Application By Company Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceWarranty' || currentActiveReportPageChild=== 'report-device-warranty'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('report-device-warranty','reportDeviceWarranty')"
+        >
+            Device Warranty Report
+        </li>
+        <li
+            [ngClass]="{'--active':currentActiveReportPageChild === 'reportDeviceDeploymentWarranty' || currentActiveReportPageChild=== 'report-device-deploymentwarranty'}"
+            class="menu-item-inner"
+            (click)="onSearchReport('report-device-deploymentwarranty','reportDeviceDeploymentWarranty')"
+        >
+            Device Deployment Warranty Report
+        </li>
+    </ul>
+</ul>

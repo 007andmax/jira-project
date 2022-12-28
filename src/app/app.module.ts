@@ -121,6 +121,8 @@ import { SuperAdminPublicCategoryComponent } from './components/super-admin-publ
 import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
 import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
+import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component'
+import { ProcessesPipe } from './pipe/processes.pipe';
 import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
 import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
 import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
@@ -141,6 +143,7 @@ import { CompanyDropDownComponent } from './components/shared/company-drop-down/
 import { NgxMaskModule } from 'ngx-mask';
 import { GoogleAuthenticatorModule } from './components/shared/google-authenticator/google-authenticator.module';
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
+import { TestPermissionService } from './services/test-permission/test-permission.service';
 declare var $: any;
 
 /**
@@ -274,7 +277,8 @@ declare var $: any;
     PermissionSupportService,
     PermissionReportsService,
     PermissionTechUserService,
-    PermissionSuperAdminService
+    PermissionSuperAdminService,
+    TestPermissionService
   ],
   bootstrap: [AppComponent]
 })

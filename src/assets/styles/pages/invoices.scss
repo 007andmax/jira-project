@@ -169,12 +169,6 @@
     border-top: 1px solid $gray-400--old;
   }
 
-  @media (min-width: 1920px) {
-    .total-info {
-      width: 85%;
-    }
-  }
-
   &__aside {
     .address-block {
       border-bottom: 1px solid $gray-400--old;

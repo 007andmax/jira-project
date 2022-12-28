@@ -1,3 +1,119 @@
-<p>
-  services works!
-</p>
+<main class="mainSidebar">
+  <div class="cmn-wrapper">
+      <div class="device-container">
+          <div class="page-container software-list">
+              <!-- Page Title -->
+              <div class="page-header">
+                  <h3>Services</h3>
+                  <div class="page-header-opt">
+                  </div>
+                  <div class="download-print">
+                      <form method="GET">
+                          <input
+                              type="search"
+                              class="form-input"
+                              [(ngModel)]="search"
+                              name="search"
+                              placeholder="Search service…"
+                              autocomplete="off"
+                          >
+                      </form>
+                      <a
+                          (click)="printPdf();"
+                          data-tooltip="Print"
+                      >
+                          <img src="/html/assets/img/device/print.svg">
+                      </a>
+                      <a
+                          (click)="downloadCsv();"
+                          data-tooltip="Download CSV"
+                      >
+                          <img src="/html/assets/img/device/download_csv.svg">
+                      </a>
+                  </div>
+              </div>
+              <!-- Page Content -->
+              <div class="contant-area">
+                  <div class="table-wrap">
+                      <table                         
+                          *ngIf="serviceList"
+                          class="dataTable cmn-tab-head"
+                      >
+                          <thead>
+                              <tr>
+                                  <th
+                                      class="s-name main-servicename"
+                                      (click)="onFilter('Name')"
+                                  >
+                                      Service Name
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                      class="description"
+                                      (click)="onFilter('Description')"
+                                  >
+                                      Description
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                      class="status"
+                                      (click)="onFilter('Status')"
+                                  >
+                                      Status
+                                      <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                     class="starttype"
+                                     (click)="onFilter('Startup')"
+                                  >
+                                    Type
+                                    <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th
+                                     class="accountName"
+                                     (click)="onFilter('AccountName')"
+                                  >
+                                    Account Name
+                                    <span class="qt-table-modern__sorting"></span>
+                                  </th>
+                                  <th class="action"></th>
+                              </tr>
+                          </thead>
+                          <tbody class="service-table">
+                              <tr *ngFor="let service of serviceList | serv: search; let i = index; trackBy:trackByMethod">
+                                  <td class="s-name">
+                                      <h5>{{service.DisplayName || 'N/A'}}</h5>
+                                  </td>
+                                  <td class="description">{{service.Description || 'N/A'}}</td>
+                                  <td class="status">{{ (service.started==true ? 'Running' : 'Stopped')}}</td>
+                                  <td class="starttype">{{service.StartMode}}</td>
+                                  <td class="accountName">{{service.startName}}</td>                                  
+                                  <td class="action">
+                                    <div *ngIf="service.started==false">
+                                      <div *ngIf="service.started==false" [ngClass]="service.Loaded=='False' ? 'icon__start qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
+                                    </div>
+                                    <div *ngIf="service.started==true">
+                                      <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.RestartLoaded=='False' ? 'icon__restart qt-bg-contain qt-sz-16 qt-mr-8 service-button' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8 service-button'" (click)="serviceRestart(service.Name,i)"></div>
+                                      <div *ngIf="service.started==true" [ngClass]="service.Loaded=='False' || service.StopLoaded=='False' ? 'icon__stop qt-bg-contain qt-sz-16 qt-mr-8' : 'service-loader qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePause(service.Name,i)"></div>
+                                    </div>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="Rectangle" *ngIf="servicesview">
+        <div class="offlineImg">
+        </div>
+        <div class="device-offline">
+          Device Offline
+        </div>
+      </div>
+  </div>
+</main>
+<div
+  class="loading"
+  *ngIf="loading"
+></div>

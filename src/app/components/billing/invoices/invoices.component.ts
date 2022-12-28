@@ -36,6 +36,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   selectedInvoices: Array<Invoice> = [];
   //@ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
     private invoiceRealTimeService: InvoiceRealTimeService,
@@ -48,7 +49,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onScroll();
@@ -63,7 +64,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.invoicesFilter = data;
       this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -144,6 +145,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     return total;
   }
+  getTotalBalanceDue() {
+    let total = 0;
+    this.invoices.forEach(item => {
+      total += ((item.totalSum || item.sum) - item.paidSum);
+    })
+    return total;
+  }
   onCreatePayment() {
     this.selectedInvoices = [];
     if (this.selectedCompanyId) {
@@ -180,7 +188,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.sort = sort;
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.setDefaultScoll();
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
   }
   onSelectInvoice() {

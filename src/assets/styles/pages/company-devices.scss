@@ -58,9 +58,9 @@
         &__device-name {
           padding: 12px 8px 12px 8px;
           vertical-align: top;
-          max-width: 345px;
+          max-width: 150px;
           width: max-content;
-          min-width: 345px;
+          min-width: 150px;
           .company-devices-table-device-name {
             color: $primary-2;
             text-overflow: ellipsis;
@@ -123,9 +123,9 @@
           }
         }
         &__up-time {
-          width: 105px;
-          max-width: 105px;
-          min-width: 105px;
+          width: 100px;
+          max-width: 100px;
+          min-width: 100px;
           padding: 12px 8px 12px 8px;
           color: $gray-800--old;
           vertical-align: top;
@@ -147,9 +147,9 @@
           }
         }
         &__windows {
-          width: 195px;
-          max-width: 195px;
-          min-width: 195px;
+          width: 170px;
+          max-width: 170px;
+          min-width: 170px;
           padding: 12px 0px 12px 8px;
           color: $gray-800--old;
           vertical-align: top;
@@ -157,9 +157,9 @@
           position: relative;
         }
         &__ip-address {
-          width: 218px;
-          max-width: 218px;
-          min-width: 218px;
+          width: 185px;
+          max-width: 185px;
+          min-width: 185px;
           padding: 12px 8px 12px 0px;
           color: $gray-800--old;
           vertical-align: top;
@@ -167,6 +167,30 @@
           white-space: nowrap;
           overflow: hidden;
           position: relative;
+        }
+        &__device-agent {
+          width: 105px;
+          max-width: 105px;
+          min-width: 105px;
+          padding: 12px 8px 12px 8px;
+          color: #4f5f79;
+          vertical-align: top;
+          .agent-tag {
+            border: solid 1px #2ec866;
+            line-height: 1;
+            width: fit-content;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #2ec866;
+            background-color: #ffffff;
+            letter-spacing: 0.3px;
+            font-size: 8px;
+            text-transform: uppercase;
+            &.--offline {
+              color: #ff5263;
+              border: solid 1px #ff5263;
+            }
+          }
         }
         &__go-to {
           width: 30px;
@@ -197,7 +221,7 @@
         vertical-align: middle !important;
         .company-devices-table {
           &__check, &__device-type, &__device-name, &__logged-user,
-          &__up-time, &__windows, &__ip-address, &__go-to, &__connect, &__menu {
+          &__up-time, &__windows, &__ip-address, &__device-agent, &__go-to, &__connect, &__menu {
             padding-top: 4px;
             padding-bottom: 4px;
             vertical-align: middle;
@@ -242,13 +266,16 @@
   &__aside{
     background: $white;
     position: fixed;
-    width: 480px;
+    width: 480px;   
     top: $header-height;
     right: 0;
     border-left: 1px solid $gray-400--old;
     height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+    @media screen and (min-width: 1920px) {      
+      width: 591px;
+    }
   }
 
   .company-device-aside {
@@ -398,7 +425,7 @@
           }
         }
         .icon__calendar {
-          top: 5px;
+          top: 50%;
         }
       }
     }
@@ -504,6 +531,9 @@
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100--old;
+      @media (max-width: 1920px) {      
+        width: 175px;
+      }      
     }
     &__icon {
       width: 40px;

@@ -1,114 +1,124 @@
 <router-outlet *ngIf="main_page === PAGE_DEVICE"></router-outlet>
 <div
     class="main-page-container"
+    [ngClass]="{'--help-center':state === 'help-center',
+'--super-admin': currentUser && currentUser.role == 'SUPER_ADMIN'}"
     *ngIf="main_page === PAGE_MAIN"
 >
-    <app-header
-        [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
-        class="nav-header"
-        [ngClass]="{'--small-with':toggleLeftPanel,
-    '--full-width':hideleLeftPanel}"
-    ></app-header>
-    <app-left-panel
-        [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
-        class="app-left-panel"
-        [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
-        [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
-    ></app-left-panel>
+    <aside id="aside-left-panel">
+        <app-left-panel
+            [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
+            class="app-left-panel"
+            [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
+            [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
+        ></app-left-panel>
+        <hr>
+    </aside>
+    <div
+        class="resize-handle--x"
+        data-target="aside"
+    ></div>
     <left-panel-super-admin
         [hidden]="!(currentUser && currentUser.role === 'SUPER_ADMIN')"
         class="app-left-panel-super-admin"
         [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
         [ngClass]="{'--mini':toggleLeftPanel,'--open':toggMobileleLeftPanel}"
     ></left-panel-super-admin>
-    <div
-        class="main-container supper-admin-container"
-        *ngIf="currentUser && currentUser.role === 'SUPER_ADMIN'"
-    >
-        <div>
-            <div
-                class="content-container"
-                [ngClass]="{'--large': toggleLeftPanel,
+    <main>
+        <app-header
+            [hidden]="!(currentUser && currentUser.role !== 'SUPER_ADMIN' && state !== 'help-center')"
+            class="nav-header"
+            [ngClass]="{'--small-with':toggleLeftPanel,
+    '--full-width':hideleLeftPanel}"
+        ></app-header>
+        <div
+            class="main-container supper-admin-container"
+            *ngIf="currentUser && currentUser.role === 'SUPER_ADMIN'"
+        >
+            <div class="row">
+                <div
+                    class="content-container"
+                    [ngClass]="{'--large': toggleLeftPanel,
             'xx-small' : hideleLeftPanel}"
-            >
-                <div class="content-wrapper">
-                    <div
-                        class="loading"
-                        style="display: none;"
-                    ></div>
-                    <router-outlet></router-outlet>
+                >
+                    <div class="content-wrapper">
+                        <div
+                            class="loading"
+                            style="display: none;"
+                        ></div>
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div
-        class="main-container"
-        [ngClass]="{'clear-padding-top': state === 'help-center'}"
-        *ngIf=" currentUser && currentUser.role !== 'SUPER_ADMIN'"
-    >
-        <div>
-            <div
-                class="content-container"
-                [ngClass]="{'--large': toggleLeftPanel,
+        <div
+            class="main-container"
+            [ngClass]="{'clear-padding-top': state === 'help-center'}"
+            *ngIf="currentUser && currentUser.role !== 'SUPER_ADMIN'"
+        >
+            <div class="row">
+                <div
+                    class="content-container"
+                    [ngClass]="{'--large': toggleLeftPanel,
                 'clear-margin-left':state === 'help-center',
             'xx-small' : hideleLeftPanel}"
-            >
-                <div class="content-wrapper">
-                    <breadcrumbs></breadcrumbs>
-                    <div
-                        class="loading"
-                        style="display: none;"
-                    ></div>
-                    <app-map-modal></app-map-modal>
-                    <modal-image-cropper></modal-image-cropper>
-                    <app-draft-email></app-draft-email>
-                    <app-main></app-main>
-                    <app-ticket-add-aside></app-ticket-add-aside>
-                    <app-users-aside></app-users-aside>
-                    <app-company-add-aside></app-company-add-aside>
-                    <app-default-services-add></app-default-services-add>
-                    <users-aside-edit></users-aside-edit>
-                    <app-default-services-edit></app-default-services-edit>
-                    <app-inventory-edit-aside></app-inventory-edit-aside>
-                    <app-invoices-aside-preview></app-invoices-aside-preview>
-                    <router-outlet></router-outlet>
-                    <users-aside-detail></users-aside-detail>
-                    <app-ticket-edit-aside></app-ticket-edit-aside>
-                    <canned-responses-aside></canned-responses-aside>
-                    <app-invoices-aside></app-invoices-aside>
-                    <app-inventory-add-aside></app-inventory-add-aside>
-                    <app-preview-attachment></app-preview-attachment>
-                    <help-center-info-aside></help-center-info-aside>
-                    <app-report-send-email></app-report-send-email>
-                    <!-- Mobile Style -->
-                    <div class="footer-nav">
-                        <ul class="footer-nav__menu">
-                            <li
-                                class="footer-nav__list"
-                                [ngClass]="{'--active':state === 'new-tickets'}"
-                                (click)="goToTickets()"
-                            >
-                                <a
-                                    href="javascript:;"
-                                    class="footer-nav__link"
+                >
+                    <div class="content-wrapper">
+                        <breadcrumbs></breadcrumbs>
+                        <div
+                            class="loading"
+                            style="display: none;"
+                        ></div>
+                        <app-map-modal></app-map-modal>
+                        <modal-image-cropper></modal-image-cropper>
+                        <app-draft-email></app-draft-email>
+                        <app-main></app-main>
+                        <app-ticket-add-aside></app-ticket-add-aside>
+                        <app-users-aside></app-users-aside>
+                        <app-company-add-aside></app-company-add-aside>
+                        <app-default-services-add></app-default-services-add>
+                        <users-aside-edit></users-aside-edit>
+                        <app-default-services-edit></app-default-services-edit>
+                        <app-inventory-edit-aside></app-inventory-edit-aside>
+                        <app-invoices-aside-preview></app-invoices-aside-preview>
+                        <router-outlet></router-outlet>
+                        <users-aside-detail></users-aside-detail>
+                        <app-ticket-edit-aside></app-ticket-edit-aside>
+                        <canned-responses-aside></canned-responses-aside>
+                        <app-invoices-aside></app-invoices-aside>
+                        <app-inventory-add-aside></app-inventory-add-aside>
+                        <app-preview-attachment></app-preview-attachment>
+                        <help-center-info-aside></help-center-info-aside>
+                        <app-report-send-email></app-report-send-email>
+                        <!-- Mobile Style -->
+                        <div class="footer-nav">
+                            <ul class="footer-nav__menu">
+                                <li
+                                    class="footer-nav__list"
+                                    [ngClass]="{'--active':state === 'new-tickets'}"
+                                    (click)="goToTickets()"
                                 >
-                                    <span class="icon__tickets-gray qt-sz-24 qt-bg-contain qt-dib"></span>
-                                </a>
-                            </li>
-                            <li
-                                class="footer-nav__list"
-                                [ngClass]="{'--active':state === 'new-companies'}"
-                                (click)="goToCompanies()"
-                                *ngIf="getPermissions('VIEW_COMPANIES')"
-                            >
-                                <a
-                                    href="javascript:;"
-                                    class="footer-nav__link"
+                                    <a
+                                        href="javascript:;"
+                                        class="footer-nav__link"
+                                    >
+                                        <span class="icon__tickets-gray qt-sz-24 qt-bg-contain qt-dib"></span>
+                                    </a>
+                                </li>
+                                <li
+                                    class="footer-nav__list"
+                                    [ngClass]="{'--active':state === 'new-companies'}"
+                                    (click)="goToCompanies()"
+                                    *ngIf="getPermissions('VIEW_COMPANIES')"
                                 >
-                                    <span class="icon__company-gray qt-sz-24 qt-bg-contain qt-dib"></span>
-                                </a>
-                            </li>
-                            <!-- <li class="footer-nav__list">
+                                    <a
+                                        href="javascript:;"
+                                        class="footer-nav__link"
+                                    >
+                                        <span class="icon__company-gray qt-sz-24 qt-bg-contain qt-dib"></span>
+                                    </a>
+                                </li>
+                                <!-- <li class="footer-nav__list">
                                 <a
                                     href="javascript:;"
                                     class="footer-nav__link"
@@ -116,7 +126,7 @@
                                     <span class="icon__users-gray qt-sz-24 qt-bg-contain qt-dib"></span>
                                 </a>
                             </li> -->
-                            <!-- <li class="footer-nav__list">
+                                <!-- <li class="footer-nav__list">
                                 <a
                                     href="javascript:;"
                                     class="footer-nav__link"
@@ -124,20 +134,20 @@
                                     <span class="icon__billing-gray qt-sz-24 qt-bg-contain qt-dib"></span>
                                 </a>
                             </li> -->
-                            <li
-                                class="footer-nav__list"
-                                [ngClass]="{'--active':state === 'password-manager'}"
-                                (click)="goToPasswordManager()"
-                                *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
-                            >
-                                <a
-                                    href="javascript:;"
-                                    class="footer-nav__link"
+                                <li
+                                    class="footer-nav__list"
+                                    [ngClass]="{'--active':state === 'password-manager'}"
+                                    (click)="goToPasswordManager()"
+                                    *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
                                 >
-                                    <span class="icon__password-manager-gray qt-sz-24 qt-bg-contain qt-dib"></span>
-                                </a>
-                            </li>
-                            <!-- <li class="footer-nav__list">
+                                    <a
+                                        href="javascript:;"
+                                        class="footer-nav__link"
+                                    >
+                                        <span class="icon__password-manager-gray qt-sz-24 qt-bg-contain qt-dib"></span>
+                                    </a>
+                                </li>
+                                <!-- <li class="footer-nav__list">
                                 <a
                                     href="javascript:;"
                                     class="footer-nav__link"
@@ -145,13 +155,17 @@
                                     <span class="icon__inventory-gray qt-sz-24 qt-bg-contain qt-dib"></span>
                                 </a>
                             </li> -->
-                        </ul>
+                            </ul>
+                        </div>
+                        <!-- End Mobile Style -->
                     </div>
-                    <!-- End Mobile Style -->
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+</div>
+<div *ngIf="main_page === PAGE_DEVICE">
+    <router-outlet></router-outlet>
 </div>
 <modal-lock-screen
     #contentLockScreenModal

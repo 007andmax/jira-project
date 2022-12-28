@@ -1,16 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NetworkAdapterReport } from './../../class/network-adapter-report';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DeviceIpSummary } from '../../class/device-ip-summary';
-import * as moment from "moment";
+
 
 @Component({
   selector: 'device-ip-summary-report',
   templateUrl: './device-ip-summary-report.component.html',
-  styleUrls: ['./device-ip-summary-report.component.css']
+  styleUrls: ['./device-ip-summary-report.component.scss']
 })
 export class DeviceIpSummaryReportComponent implements OnInit {
-
   loadingInProgress: boolean = false;
   onInit: boolean = false;
   company: any;
@@ -18,9 +20,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   constructor(public cd: ChangeDetectorRef,
     private domSanitizer: DomSanitizer,
     private companiesStateService: CompaniesStateService) { }
-
   ngOnInit() {
-
   }
   public getReport(data) {
     this.loadingInProgress = true;
@@ -30,7 +30,6 @@ export class DeviceIpSummaryReportComponent implements OnInit {
       this.onInit = true;
       this.loadingInProgress = false;
       this.cd.detectChanges();
-
     }, 1000);
   }
   public parseHTML(data) {

@@ -55,6 +55,7 @@ export class TicketProfile {
     updates: Array<TicketProfileUpdate> = [];
     userCompanies: Array<string> = [];
     customStatus: string;
+    isCompanyDeleted: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

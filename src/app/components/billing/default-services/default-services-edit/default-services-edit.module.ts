@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { GlNumbersDropDownModule } from 'src/app/components/inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
 
 @NgModule({
     declarations: [DefaultServicesEditComponent
@@ -17,7 +18,8 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
         MatFormFieldModule,
         NumberModule,
         TaxesModule,
-        DropDownModule
+        DropDownModule,
+        GlNumbersDropDownModule
     ],
     exports: [DefaultServicesEditComponent]
 

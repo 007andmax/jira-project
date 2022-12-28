@@ -12,6 +12,8 @@ import { DeviceDetailService } from '../_services/device_detail.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -77,13 +79,14 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   idEditTicket: string = '';
   type: string = '';
   _id: string = '';
-
+  sub: Subscription = new Subscription();
   constructor(private ticketService: TicketService,
     private toastr: ToastrService,
     public commonService: CommonServices,
     private deviceDetailService: DeviceDetailService,
     private ticketsService: TicketsService,
-    private ticketsStateService: TicketsStateService) {
+    private ticketsStateService: TicketsStateService,
+    private usersStateService: UsersStateService) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
@@ -95,7 +98,11 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.myDateValue = new Date();
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
-    this.getAllUsers();
+    if (this.usersStateService.getAllUsers().length > 0) this.getAllUsers(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe(data => {
+      this.getAllUsers(data);
+    })
+    this.sub.add(getOnUsers);
   }
 
   onUploadOutput(output: UploadOutput): void {
@@ -235,7 +242,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
       this.linkedAgentList = this.deviceDetailService.getDeviceList();
       this.getActualNumber();
       this.getAllCompanyClient();
-      this.getAllUsers();
+      this.getAllUsers(this.usersStateService.getAllUsers());
       this.openPopup = 'open_ticket';
     } else if (this.tabSet['activeId'] === 'ngb-tab-1') {
       this.openPopup = 'open_task';
@@ -270,24 +277,16 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
         });
   }
 
-  getAllUsers() {
-    this.ticketService.getAllUsers()
-      .pipe(first())
-      .subscribe(data => {
-        this.allUsersList = data;
-        this.assignToList = this.allUsersList.filter(value => (value.accountType === 'TECH' && value.deletedAt === null));
-        this.assignToList.forEach(element => {
-          element.selected = false;
-        });
-        if (this.initial === true) {
-          this.getAllTicketList();
-        }
-        this.initial = false;
-      },
-        error => {
-          const statusError = error;
-
-        });
+  getAllUsers(data) {
+    this.allUsersList = data;
+    this.assignToList = this.allUsersList.filter(value => (value.accountType === 'TECH' && value.deletedAt === null));
+    this.assignToList.forEach(element => {
+      element.selected = false;
+    });
+    if (this.initial === true) {
+      this.getAllTicketList();
+    }
+    this.initial = false;
   }
 
   setUserList(data) {
@@ -399,6 +398,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $("body").removeClass("expandTicket");
   }
 

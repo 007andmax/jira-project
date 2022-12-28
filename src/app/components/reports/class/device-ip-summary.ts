@@ -5,6 +5,7 @@ export class DeviceIpSummary {
     list = [];
     date = new Date();
     preloaderDevices: boolean = false;
+    deviceName: string;
 
     deviceIpSummaryWithDevice = true;
     deviceIpSummaryWithNetworkName = true;
@@ -39,6 +40,11 @@ export class DeviceIpSummary {
             }
             this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
         }
+
+        if (data != null) {
+            this.companyId = data.companyId;
+            this.deviceName = data.deviceName;
+          }
     }
 
     public setPreloaderDevices(data) {
@@ -52,5 +58,8 @@ export class DeviceIpSummary {
     }
     public setDeviceId(data) {
         this.deviceId = data;
-    }
+    }       
+      public setDeviceName(data) {
+        this.deviceName = data;
+      }
 }

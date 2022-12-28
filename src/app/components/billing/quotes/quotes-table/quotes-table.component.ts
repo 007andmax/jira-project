@@ -34,6 +34,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   public page_number: number = 0;
   public infiniteScrollDisabled = true;
   sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
   constructor(private quotesListService: QuotesListService,
     private quoteRealTimeService: QuoteRealTimeService,
     public cd: ChangeDetectorRef,
@@ -46,13 +47,13 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
       this.filter.setData(data);
       this.filter.clearSortBy();
       this.showPreloader = true;
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -91,7 +92,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   public sortBy(value) {
     this.showPreloader = true;
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
     this.getQuotes()

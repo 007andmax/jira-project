@@ -10,7 +10,7 @@ import { FileRoutingModule } from './file-explorer-routing.module';
     imports: [
         CommonModule,
         TicketTaskModule,
-        FileRoutingModule
+        FileRoutingModule,
     ],
 
 

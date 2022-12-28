@@ -92,7 +92,6 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
       this.selectedCompany = data.find(item => item.id === this.companiesState.getCompanyRoutingId());
       this.filter.setCompany(this.selectedCompany);
       this.onChangeCounterFilter();
-
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = data.find(itemCompany => itemCompany.id === item.company.id);
         let isArchived = item.deletedAt || !company;
@@ -138,7 +137,7 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     }
     if (data) {
       let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = data.find(itemCompany => itemCompany.id === item.company.id);
+        let company = data.id === item.company.id;
         let isArchived = item.deletedAt || !company;
         return !isArchived && item.company.id === data.id
       });

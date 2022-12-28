@@ -205,7 +205,7 @@ html {
   }
 }
 .main-container:nth-child(2) {
-  display: none;
+ // display: none;
 }
 .ng-sidebar {
   position: fixed !important;
@@ -1731,7 +1731,7 @@ app-quotes-item {
     }
   }
 
-  app-drop-down.filter-category,company-drop-down.filter-category {
+  app-drop-down.filter-category,gl-numbers-drop-down.filter-category,company-drop-down.filter-category {
     > div::before {
       @media (max-width: 767px) {
         content: "Category";
@@ -2005,7 +2005,7 @@ app-quotes-item {
       }
     }
     &__name {
-      flex: 2 0 290px;
+      flex: 2 1 290px;
 
       @media only screen and (max-width: 768px) {
         max-width: calc(100% - 30px);
@@ -2038,7 +2038,7 @@ app-quotes-item {
       }
     }
     &__address {
-      flex: 1 0 210px;
+      flex: 1 1 210px;
       line-height: 20px;
 
       @media screen and (min-width: 2048px) {
@@ -2050,11 +2050,11 @@ app-quotes-item {
       }
 
       @media screen and (max-width: 1600px) {
-        flex: 1 0 260px;
+        flex: 1 1 260px;
       }
     }
     &__primary-contact {
-      flex: 1 0 160px;
+      flex: 1 1 160px;
 
       @media screen and (min-width: 2048px) {
         flex: 1 0 230px;
@@ -2065,7 +2065,7 @@ app-quotes-item {
       }
 
       @media screen and (max-width: 1600px) {
-        flex: 1 0 210px;
+        flex: 1 1 210px;
         max-width: 100%;
       }
 
@@ -2119,7 +2119,7 @@ app-quotes-item {
       }
     }
     &__email-address {
-      flex: 1 0 180px;
+      flex: 1 1 180px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -2133,7 +2133,7 @@ app-quotes-item {
       }
 
       @media screen and (max-width: 1600px) {
-        flex: 1 0 230px;
+        flex: 1 1 230px;
       }
     }
     &__tickets {
@@ -3323,10 +3323,6 @@ app-quotes-item {
 
 @import "./assets/styles/dropdowns.scss";
 @import "./assets/styles/icons.scss";
-
-.main-container:nth-child(2) {
-  display: none;
-}
 
 .ng-sidebar {
   position: fixed !important;
@@ -4638,56 +4634,71 @@ input.--input-error:hover {
   }
 }
 
-.company-devices-page {
-  .company-devices-table__check {
-    width: 16px;
+  .company-devices-page {
+    .company-devices-table__check {
+      width: 16px;
+    }
+    .company-devices-table__menu {
+      width: 34px;
+      max-width: 34px;
+      min-width: 34px;
+    }
+    .company-devices-table__go-to {
+      width: 30px;
+      max-width: 30px;
+      min-width: 30px;
+    }
+    .company-devices-table__connect {
+      width: 38px;
+      max-width: 38px;
+      min-width: 38px;
+    }
+    .company-devices-table__ip-address {
+      width: 190px;
+      max-width: 190px;
+      min-width: 190px;
+    }
+    .company-devices-table__windows {
+      width: 164px;
+      max-width: 164px;
+      min-width: 164px;
+    }
+    .company-devices-table__up-time {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+    }
+    .company-devices-table__logged-user {
+      width: 148px;
+      max-width: 148px;
+      min-width: 148px;
+    }
+    .company-devices-table__device-name {
+      max-width: 150px;
+      width: max-content;
+      min-width: 150px;
+    }
+    .company-devices-table__device-type {
+      width: 32px;
+      max-width: 32px;
+      min-width: 32px;
+    }
+    .company-devices-table__device-agent {
+      width: 101px;
+      max-width: 101px;
+      min-width: 101px;
+    }
+    .company-devices-table__device-master-agent{
+      width:30px;
+      max-width: 30px;
+      min-width: 30px;
+    }
+    .company-devices-table__company-name {
+      max-width: 158px;
+      width: max-content;
+      min-width: 158px;
+    }
   }
-  .company-devices-table__menu {
-    width: 34px;
-    max-width: 34px;
-    min-width: 34px;
-  }
-  .company-devices-table__go-to {
-    width: 30px;
-    max-width: 30px;
-    min-width: 30px;
-  }
-  .company-devices-table__connect {
-    width: 38px;
-    max-width: 38px;
-    min-width: 38px;
-  }
-  .company-devices-table__ip-address {
-    width: 224px;
-    max-width: 224px;
-    min-width: 222px;
-  }
-  .company-devices-table__windows {
-    width: 195px;
-    max-width: 195px;
-    min-width: 195px;
-  }
-  .company-devices-table__up-time {
-    width: 96px;
-    max-width: 96px;
-    min-width: 96px;
-  }
-  .company-devices-table__logged-user {
-    width: 148px;
-    max-width: 148px;
-    min-width: 148px;
-  }
-  .company-devices-table__device-name {
-    max-width: 345px;
-    width: max-content;
-    min-width: 345px;
-  }
-  .company-devices-table__device-type {
-    width: 36px;
-    max-width: 36px;
-    min-width: 36px;
-  }
-}
 
 .quotes-page .qt-page-list__header-filters .dropdown-menu {
   right: 0;

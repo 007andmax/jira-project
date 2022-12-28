@@ -12,6 +12,7 @@ export class ReportListItemComponent implements OnInit {
   @Input() img: string;
   @Input() listTitles: Array<string> = [];
   @Input() listStates: Array<string> = [];
+  @Input() class: string;
   constructor(private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class ReportListItemComponent implements OnInit {
   public goToState(state) {
     localStorage.setItem('report', state);
     this.leftPanelStateService.goToState(state);
+    this.leftPanelStateService.onActivePageReport(state);
   }
   public trackByIndex(index, item) {
     return index;

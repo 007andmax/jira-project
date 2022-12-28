@@ -329,6 +329,11 @@
                                             </td>
                                             <td class="invoice-preview__col-desc">
                                                 <pre [textContent]="product.item.description"></pre>
+                                                <span
+                                                    *ngIf="product.serialNumber"
+                                                    class="qt-pt-5"
+                                                    [textContent]="'Serial Number - ' + product.serialNumber"
+                                                ></span>
                                             </td>
                                             <td class="invoice-preview__col-price">
                                                 <div class="qt-df qt-ai-c qt-jc-fe">

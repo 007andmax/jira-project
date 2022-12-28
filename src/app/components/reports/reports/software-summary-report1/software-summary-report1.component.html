@@ -1,0 +1,159 @@
+<div>
+    <div class="report-menu">
+        <div class="run-report-content col-md-11 left">
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'Select Company'"
+                    [list]="companies"
+                    [validate]="validate.getCompany()"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content custom-width dropdown-height">
+                <app-drop-down
+                    #dropdownDevice
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [placeholder]="'All devices'"
+                    [isDisabled]="!softwareSummaryReport.companyId"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content">
+                <app-drop-down
+                    #dropdownSoftware
+                    [sort]="true"
+                    [placeholder]="'Search software / publisher'"
+                    [dropdownHeight]="'300px'"
+                    [search]="true"
+                    [change]="true"
+                    [isDisabled]="!softwareSummaryReport.companyId"
+                    [list]="software"
+                    (onSelectedItem)="onSelectSoftware($event)"
+                ></app-drop-down>
+            </div>
+            <button
+                class="qt-btn --outline-blue qt-ml-8"
+                (click)="getReportBySoftwareSummary()"
+            >
+                Get Report
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i class="
+                icon__email-dark
+                qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+                summaryemail
+              " (click)="sendEmail()"></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="downloadCsv()"
+            >
+                <i class="
+                icon__download
+                qt-za-16 qt-sz-16 qt-dib qt-bg-contain
+                summarydownload
+              "></i>
+            </button>
+        </div>
+        <div class="run-report-content col-md-1 right">
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
+        </div>
+    </div>
+</div>
+<div id="product-list-ticket-data">
+    <div class="Software-header">
+        <div>
+            <span>{{ clientName }}</span>
+        </div>
+        <div>
+            <span>
+                <b>{{ "Software Summary Report" }}</b>
+            </span>
+        </div>
+        <div>
+            <span>
+                {{ "As on" + " " + (date | date: DateFormat) }}
+            </span>
+        </div>
+    </div>
+
+    <div class="contant-area">
+        <div class="table-wrap tablepadding">
+            <table class="dataTable cmn-tab-head">
+                <thead>
+                    <tr>
+                      <th
+                      class="company"
+                      (click)="onFilter('companyName')"
+                  >
+                      COMPANY NAME
+                      <span class="qt-table-modern__sorting"></span>
+                  </th>
+                        <th
+                            class="device"
+                            (click)="onFilter('device')"
+                        >
+                            Device Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="s-name"
+                            (click)="onFilter('name')"
+                        >
+                            Software Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="pulisher"
+                            (click)="onFilter('pulisher')"
+                        >
+                            Publisher
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="version">Version</th>
+                        <th class="install">Installed on</th>
+                    </tr>
+                </thead>
+                <tbody class="software-summary-report-table">
+                    <tr *ngFor="let softwareReportList of softwareReportList">
+                       <td class="company">{{softwareReportList.CompanyName}}</td>
+                        <td class="device">{{ softwareReportList.AssetNames }}</td>
+                        <td class="s-name">{{ softwareReportList.DisplayName }}</td>
+                        <td class="pulisher">{{ softwareReportList.Publisher }}</td>
+                        <td class="version">{{ softwareReportList.DisplayVersion }}</td>
+                        <td class="install"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="softwareReportList.length == 0">
+                <tbody>
+                    <tr>
+                        <td colspan="10" class="text-center software-summary-table">Data Not Available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>
+<app-report-send-email></app-report-send-email>

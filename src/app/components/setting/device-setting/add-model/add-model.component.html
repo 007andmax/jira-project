@@ -1,0 +1,60 @@
+<div class="modal-content --tooltip toggle-area opened">
+    <div class="modal-wrapper">
+        <div class="toggle-header">
+            <h6 class="qt-fw-600 qt-color-dark qt-mb-24">Add Model</h6>
+        </div>
+        <div>
+            <form [formGroup]="modelForm">
+                <div class="qt-input-block qt-mb-24">
+                    <app-drop-down
+                        #manufacturer
+                        [class]="['light-dropdown', 'qt-select-input-40']"
+                        [placeholder]="'Select Manufacture'"
+                        [list]="manufactureIsActiveList"
+                        [field]="'Name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectManufactureName($event)"
+                    ></app-drop-down>
+                </div>
+                <div
+                    class="qt-input-block qt-mb-24"
+                    *ngIf="manufactureId"
+                >
+                    <label class="qt-input-block__label">Model Name</label>
+                    <input
+                        type="text"
+                        class="form-input"
+                        formControlName="Name"
+                        placeholder="Enter Model Name"
+                        #Name
+                        [ngClass]="{ 'is-invalid': submitted && f2.Name.errors }"
+                    >
+                    <div
+                        *ngIf="submitted && f2.Name.errors"
+                        class="invalid-feedback error-text-align"
+                    >
+                        <div *ngIf="f2.Name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="qt-df qt-w100 qt-mt-32">
+                    <a
+                        href="javascript:;"
+                        class="qt-button --gray qt-jc-c qt-w100 qt-mr-12"
+                        aria-label="Close"
+                        (click)="closed()"
+                    >
+                        Cancel
+                    </a>
+                    <input
+                        type="submit"
+                        value="Save"
+                        (click)="onSubmitModel()"
+                        [disabled]="!manufactureId"
+                        class="qt-button qt-jc-c qt-w100"
+                    >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -8,33 +8,33 @@ import { CONFIG } from '../config/app-config';
 })
 
 export class CommonHttpServices {
-    constructor (private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    getDevicesByCompany (uuid: string, agentId) {
+    getDevicesByCompany(uuid: string, agentId) {
         return this.http.get<any>(CONFIG.getVirusInfoURL + uuid + '&agentId=' + agentId)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 
-    getCurrentCompany () {
+    getCurrentCompany() {
         return this.http.get<any>(CONFIG.getCurrentCompanyURL)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 
-    getCurrentUser () {
+    getCurrentUser() {
         return this.http.get<any>(CONFIG.getCurrentUserURL)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 
-    printPdf (data: any) {
+    printPdf(data: any) {
         return this.http.post<any>(CONFIG.printPdfURL, data)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 }

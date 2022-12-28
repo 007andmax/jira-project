@@ -6,3 +6,6 @@
 .header-tooltip-t {
     color: $gray-400;
 }
+ /deep/ .nav-header__left-side app-global-search {
+    width: 552px;
+}

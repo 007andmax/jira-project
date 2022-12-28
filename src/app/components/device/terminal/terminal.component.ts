@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, NgZone, OnDestroy } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
@@ -11,6 +11,9 @@ import { UserListService } from '../../users/services/user-list.service';
 import { CompaniesRealTimeService } from 'src/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
+import { AgentService } from 'src/app/services/agent/agent.service';
+import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-terminal',
@@ -19,7 +22,7 @@ import { command, script, commandModal, scriptModal } from './../class/device';
   encapsulation: ViewEncapsulation.None,
   providers: [UserListService]
 })
-export class TerminalComponent implements OnInit {
+export class TerminalComponent implements OnInit, OnDestroy {
   create = false;
   closeResult = '';
   submitted = false;
@@ -81,6 +84,8 @@ export class TerminalComponent implements OnInit {
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
+  commandShoot: boolean = false;
+  count = -1;
   @ViewChild('editor') editorElement: ElementRef;
   code = '';
   config = {
@@ -91,6 +96,10 @@ export class TerminalComponent implements OnInit {
   _id: string = '';
   type: string = '';
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
+  asset: any = undefined;
+  kafkaMessage: any;
+  htmldata: string = '';
+  tempcommand: string = '';
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
@@ -99,15 +108,23 @@ export class TerminalComponent implements OnInit {
     private companiesRealTimeService: CompaniesRealTimeService,
     private shellStateService: ShellStateService,
     public cd: ChangeDetectorRef,
+    private agentService: AgentService,
+    private kafkaStateService: KafkaStateService
   ) { }
-
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // this.socketService.initializeWebSocketConnection();
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onSetAccessToken);
+    this.onTerminalCommand();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
+    this.onTerminalPowershall();
     // this.socketService.subsribeToCmdShellOutput();
     $('#cmd textarea').scroll(function () {
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
@@ -115,6 +132,55 @@ export class TerminalComponent implements OnInit {
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
+  }
+
+  setPreviewDataDevice() {
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      this.asset = resp[0];
+    });
+  }
+
+  clearTerminal() {
+    this.splitCommand = ["C:\\>"];
+    this.cd.detectChanges();
+  }
+
+  onTerminalPowershall() {
+    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        if (!item.Value.startsWith("Executing")) {
+          this.splitCommand.push(this.tempcommand);
+          let arr = item.Value.split(/\r*\n/)
+          let arr1 = this.splitCommand.concat(arr);
+          this.splitCommand = arr1;
+          this.splitCommand.push("line");
+          this.htmldata = `<hr style="border:1px dotted white;"/>`;
+          this.count = -1;
+          this.commandShoot = false;
+          this.cd.detectChanges();
+        }
+      }
+    });
+  }
+
+  onTerminalCommand() {
+    this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        if (!item.Value.startsWith("Executing")) {
+          this.splitCommand.push(this.tempcommand);
+          let arr = item.Value.split(/\r*\n/);
+          let arr1 = this.splitCommand.concat(arr);
+          this.splitCommand = arr1;
+          this.splitCommand.push("line");
+          this.htmldata = `<hr style="border:1px dotted white;"/>`;
+          this.count = -1;
+          this.commandShoot = false;
+          this.cd.detectChanges();
+        }
+      }
+    });
   }
 
   getCommandList() {
@@ -224,7 +290,6 @@ export class TerminalComponent implements OnInit {
   }
 
   getCmdCategoryRead() {
-
     this.terminalService.getCmdCategory()
       .pipe(first())
       .subscribe(data => {
@@ -529,28 +594,12 @@ export class TerminalComponent implements OnInit {
 
   }
 
-  copyToTerminal(cmd, type, file) {
-    if (JSON.parse(localStorage.getItem('deviceDetail_' + this._id)).online === true) {
-      this.finalCommand = cmd;
-      // let arr = cmd.split(/\r*\n/)
-      // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
-      // if (arr.splice(0, 1).length > 0) {
-      //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
-      // }
-      this.sessionId = localStorage.getItem('uuid_' + this._id);
-      this.sendCommand(type, file);
-    } else {
-      this.toastr.error('The device is offline');
-    }
-
-  }
-
   sendCommand(type, file) {
     let data: command = {
       "companyId": localStorage.getItem('company_id'),
       "agentId": this._id,
       "sessionId": this.sessionId,
-      "scriptType": type === '' ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
+      "scriptType": type === '' || type === null ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
       "file": file,
       "keepOpen": true
@@ -662,9 +711,30 @@ export class TerminalComponent implements OnInit {
     this.openEditCommand(cmd, type);
   }
 
-  copyToTerminalFunc(editCmd, type, file) {
-    this.copyToTerminal(editCmd, type, file);
-    this.editCmd = ''
+  copyToTerminalFunc(editCmd, i) {
+    this.count = i;
+    if (i != -1) {
+      if (this.commandShoot == true) {
+        return;
+      }
+      this.commandShoot = true;
+    }
+    this.tempcommand = editCmd;
+    let data: any = {};
+    if (this.scriptTyped == "cmd") {
+      data.AssetID = this.asset.ID;
+      data.MessageType = "RunDOSCommand";
+      data.Value = editCmd;
+      this.agentService.TerminalShellCommand(data);
+    }
+    if (this.scriptTyped == "powershell") {
+      data.AssetID = this.asset.ID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = editCmd;
+      this.agentService.TerminalShellCommand(data);
+    }
+    //this.copyToTerminal(editCmd, type, file);
+    //this.editCmd = ''
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     document.getElementById("editCmd").style.height = '120px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
@@ -712,4 +782,8 @@ export class TerminalComponent implements OnInit {
     this.submitted = false;
     this.openEditCommand(data, type);
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

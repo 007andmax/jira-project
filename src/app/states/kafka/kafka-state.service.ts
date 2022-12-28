@@ -1,0 +1,314 @@
+import { EventEmitter, Injectable } from "@angular/core";
+import { KafkaRealTimeService } from "./kafka-real-time.service";
+
+@Injectable({
+  providedIn: "root",
+})
+export class KafkaStateService {
+  assetConfigMessage = [];
+
+  onCurrentConfig: EventEmitter<any> = new EventEmitter();
+  onPowerShellCommand: EventEmitter<any> = new EventEmitter();
+  onAck: EventEmitter<any> = new EventEmitter();
+  onTerminalCommand: EventEmitter<any> = new EventEmitter();
+  onUninstallAgent: EventEmitter<any> = new EventEmitter();
+  onUpdateAgent: EventEmitter<any> = new EventEmitter();
+  onUninstallRemoteAgent: EventEmitter<any> = new EventEmitter();
+  onInstallRemoteAgent: EventEmitter<any> = new EventEmitter();
+  onNetworkScan: EventEmitter<any> = new EventEmitter();
+  onGetService: EventEmitter<any> = new EventEmitter();
+  onGetStartupPrograms: EventEmitter<any> = new EventEmitter();
+  onInstallWindowsUpdates: EventEmitter<any> = new EventEmitter();
+  onDeviceListConfig: EventEmitter<any> = new EventEmitter();
+  GetProcesses: EventEmitter<any> = new EventEmitter();
+  onGetKillProcess: EventEmitter<any> = new EventEmitter();
+
+  constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
+
+  public onInit() {
+    this.kafkaRealTimeService.changeKafkarray.subscribe((newChange) => {
+      if (!(newChange && newChange.data && newChange.data.MessageType)) {
+        return;
+      }
+      switch (newChange.data.MessageType) {
+
+        case "GetCurrentConfig":
+          this.handleGetCurrentConfig(newChange);
+          break;
+        case "RunPowerShellCommand":
+          this.handleRunPowershellCommand(newChange);
+          break;
+        case "Ack":
+          this.handleAck(newChange);
+          break;
+        case "RunDOSCommand":
+          this.handleRunDosCommand(newChange);
+          break;
+        case "UninstallAgent":
+          this.handleUninstallAgentCommand(newChange);
+          break;
+        case "UpdateAgent":
+          this.handleUpdateAgentCommand(newChange);
+          break;
+        case "InstallRemoteAgent":
+          this.handleInstallRemoteAgent(newChange);
+          break;
+        case "UninstallRemoteAgent":
+          this.handleUninstallRemoteAgent(newChange);
+          break;
+        case "NetworkScan":
+          this.handleNetworkScanCommand(newChange);
+          break;
+        case "GetServices":
+          this.handleGetService(newChange);
+          break;
+        case "GetStartupPrograms":
+          this.handleGetStartupPrograms(newChange);
+          break;
+        case "InstallWindowsUpdates":
+          this.handleInstallWindowsUpdates(newChange);
+          break;
+        case "GetDeviceListConfig":
+          this.handleGetDeviceListConfig(newChange);
+          break;
+        case "GetProcesses":
+          this.handleGetProcess(newChange);
+          break;
+        case "onGetKillProcess":
+          this.handleGetKillProcess(newChange);
+          break;
+      }
+    });
+  }
+
+  private handleGetCurrentConfig(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onCurrentConfig.emit(this.assetConfigMessage);
+  }
+
+  private handleGetDeviceListConfig(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onDeviceListConfig.emit(this.assetConfigMessage);
+  }
+
+  private handleRunPowershellCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onPowerShellCommand.emit(this.assetConfigMessage);
+  }
+
+  private handleAck(newChange: any) {
+    this.onAck.emit(newChange);
+  }
+
+  private handleRunDosCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onTerminalCommand.emit(this.assetConfigMessage);
+  }
+
+  private handleUninstallAgentCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onUninstallAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleUpdateAgentCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onUpdateAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleInstallRemoteAgent(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onInstallRemoteAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleUninstallRemoteAgent(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onUninstallRemoteAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleNetworkScanCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onNetworkScan.emit(this.assetConfigMessage);
+  }
+
+  private handleGetService(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onGetService.emit(this.assetConfigMessage);
+  }
+
+  private handleGetProcess(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.GetProcesses.emit(this.assetConfigMessage);
+  }
+
+  private handleGetKillProcess(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onGetKillProcess.emit(this.assetConfigMessage);
+  }
+
+  private handleGetStartupPrograms(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onGetStartupPrograms.emit(this.assetConfigMessage);
+  }
+
+  private handleInstallWindowsUpdates(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onInstallWindowsUpdates.emit(this.assetConfigMessage);
+  }
+  public getAssetConfigMessage() {
+    return this.assetConfigMessage;
+  }
+}

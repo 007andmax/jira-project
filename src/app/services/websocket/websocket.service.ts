@@ -24,6 +24,7 @@ import { AppService } from '../../states/app/app.service';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
+import { KafkaRealTimeService } from 'src/app/states/kafka/kafka-real-time.service';
 import { Stomp } from '@stomp/stompjs';
 import { environment } from 'src/environments/environment';
 import * as SockJS from 'sockjs-client';
@@ -49,6 +50,8 @@ export class WebsocketService {
   private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
+  public IsKafkaConnected: boolean = false;
+
   isResetWebSocket: boolean = false;
   ws;
   /**
@@ -80,6 +83,7 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
+    private kafkaRealTimeService: KafkaRealTimeService,
     private constantsService: ConstantsService,
     private crmRealTimeService: CrmRealTimeService,
     private marketingEmailRealTimeService: MarketingEmailRealTimeService,
@@ -104,6 +108,7 @@ export class WebsocketService {
     this.onConnect();
     let that = this;
     this.stompClient.onConnect = (data) => {
+      that.subsribeToKafka();
       that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
@@ -180,7 +185,6 @@ export class WebsocketService {
       }
     }, 1000);
   }
-
   private subsribeToDevices() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
@@ -569,16 +573,25 @@ export class WebsocketService {
   }
 
   public subsribeToTags() {
-
     setTimeout(() => {
-
       this.stompClient.subscribe(`/user/watch/tagManagement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.tagsRealTimeService.handleRealTimeChanges(newChange);
-
       });
 
     }, 3000);
+  }
+  public subsribeToKafka() {
+    if (this.stompClient.connected) {
+      this.stompClient.subscribe(`/user/watch/kafka`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.kafkaRealTimeService.handleRealTimeChanges(newChange);
+      });
+      this.IsKafkaConnected = true;
+    }
+    else {
+      setTimeout(() => this.subsribeToKafka(), 3000);
+    }
   }
 
   public subsribeToCustomSubscription() {
@@ -621,3 +634,4 @@ export class WebsocketService {
     return this.stompClient;
   }
 }
+

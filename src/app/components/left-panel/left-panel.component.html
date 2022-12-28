@@ -46,7 +46,7 @@
                     *ngIf="checkLogo()"
                 >
                 <div
-                    class="app-left-panel__systems-info-avatar qt-sz-32 qt-circle"
+                    class="app-left-panel__systems-info-avatar qt-sz-32 qt-circle qt-df qt-ai-c qt-jc-c"
                     style="background-color: #7A5AF8; color: #fff"
                     *ngIf="!checkLogo()"
                     [textContent]="getShortCompanyName()"
@@ -156,6 +156,16 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
+            (click)="changePage('DEVICES');onOpenPanel();panelDevices.goToAll()"
+            [ngClass]="{'--active':page === 'DEVICES' }"
+            placement="right"
+            ngbTooltip="Devices"
+            *ngIf="currentCompany && (currentCompany.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || currentCompany.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
+        >
+            <div class="app-left-panel__menu-icon --devices"></div>
+        </div>
+        <div
+            class="app-left-panel__menu-icon-wrap qt-d-md-none pointer"
             (click)="changePage('REPORTS');onChangeState('new-reports')"
             [ngClass]="{'--active':page === 'REPORTS' }"
             placement="right"
@@ -262,6 +272,15 @@
             class="qt-d-md-none"
             [hidden]="page !== 'DOCUMENTS'"
         ></app-left-panel-documents>
+        <app-left-panel-devices
+            #panelDevices
+            (onOpenPanel)="onOpenPanel()"
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+            class="qt-d-md-none"
+            [hidden]="page !== 'DEVICES'"
+        >
+        </app-left-panel-devices>
         <app-left-panel-reports
             *ngIf="getAccessReports()"
             [activePage]="state"

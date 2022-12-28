@@ -1,0 +1,162 @@
+<div>
+    <div class="report-menu">
+        <div class="run-report-content col-md-11 left">
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'All Companies'"
+                    [list]="companies"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content custom-width dropdown-height">
+                <app-drop-down
+                    #dropdownDevice
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [placeholder]="'All devices'"
+                    [isDisabled]="!deviceNetworkDetailReport.companyId"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></app-drop-down>
+            </div>
+            <button
+                class="qt-btn --outline-blue qt-ml-8"
+                (click)="getReportByNetworkDetail()"
+            >
+                Get Report
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
+            icon__email-dark
+            qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+            summaryemail
+          "
+                    (click)="sendEmail()"
+                ></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="downloadCsv()"
+            >
+                <i class="
+            icon__download
+            qt-za-16 qt-sz-16 qt-dib qt-bg-contain
+            summarydownload
+          "></i>
+            </button>
+        </div>
+        <div class="run-report-content col-md-1 right">
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
+        </div>
+    </div>
+</div>
+<div id="product-list-ticket-data">
+    <div class="device-header">
+        <div>
+            <span>{{ clientName }}</span>
+        </div>
+        <div>
+            <span>
+                <b>{{ "Network Detail Report" }}</b>
+            </span>
+        </div>
+        <div>
+            <span>
+                {{ "As on" + " " + (date | date: DateFormat) }}
+            </span>
+        </div>
+    </div>
+
+    <div class="contant-area">
+        <div class="table-wrap tablepadding">
+            <div class="qt-page-list__header-thead-container">
+                <table class="dataTable cmn-tab-head">
+                    <thead>
+                        <tr>
+                          <th
+                                class="device"
+                                (click)="onFilter('name')"
+                            >
+                                COMPANY NAME
+                                <span class="qt-table-modern__sorting"></span>
+                            </th>
+                            <th
+                                class="device"
+                                (click)="onFilter('name')"
+                            >
+                                DEVICE NAME
+                                <span class="qt-table-modern__sorting"></span>
+                            </th>
+                            <th class="domain">DOMAIN</th>
+                            <th class="manufacturer">MANF(NIC)</th>
+                            <th class="type">TYPE</th>
+                            <th class="mac">MAC</th>
+                            <th class="ip">IP</th>
+                            <th class="subnet">SUBNET</th>
+                            <th class="gateway">GATEWAY</th>
+                            <th class="dns1">DNS1</th>
+                            <th class="dns2">DNS2</th>
+                            <th class="extIP">EXT IP</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="table-wrap">
+                <div class="qt-page-list__body-table-container">
+                    <table class="qt-page-list__body-tbody">
+                        <tbody class="network-ip-report-table">
+                            <tr *ngFor="let networkDetail of networkDetailList">
+                                <td class="device">{{networkDetail.CompanyName}}</td>
+                                <td class="device">{{ networkDetail.Name }}</td>
+                                <td class="domain">{{ networkDetail.Domain }}</td>
+                                <td class="manufacturer">{{ networkDetail.NicName }}</td>
+                                <td class="type">{{ networkDetail.NicType }}</td>
+                                <td class="mac">{{ networkDetail.MACAddress }}</td>
+                                <td class="ip">
+                                    {{ addNewlines(networkDetail.IPAddress) }}
+                                </td>
+                                <td class="subnet">
+                                    {{ addNewlines(networkDetail.SubnetMask) }}
+                                </td>
+                                <td class="gateway">
+                                    {{ addNewlines(networkDetail.Gateway) }}
+                                </td>
+                                <td class="dns1">{{ addNewlines(networkDetail.DNS1) }}</td>
+                                <td class="dns2">{{ addNewlines(networkDetail.DNS2) }}</td>
+                                <td class="extIP"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="networkDetailList.length == 0">
+                        <tbody>
+                            <tr>
+                                <td colspan="10" class="text-center report-network-detail-table">Data Not Available</td>
+                            </tr>
+                        </tbody>
+                    </table>      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>
+<app-report-send-email></app-report-send-email>

@@ -105,7 +105,7 @@ export class SuperAdminPublicDetailComponent implements OnInit {
       this.supportPageCategoryContent.setTags(content.tags);
       this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").innerHTML = "";
       this.elRef.nativeElement.querySelector(".topic-detail-page__body-content #content").insertAdjacentHTML('afterbegin', this.supportPageCategoryContent.parseContent(`${environment.apiUrl}/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/help-center`));
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
     })
   }
   showPreview(data) {

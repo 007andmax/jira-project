@@ -7,217 +7,426 @@
                     <h3>Dashboard</h3>
                 </div>
                 <!-- Page Content All update -->
-                <div class="contant-area">
+                <div
+                    class="contant-area"
+                    *ngIf="asset != undefined"
+                >
                     <div class="dashboard-list">
                         <div class="dashboard-row">
-                            <div class="dashboard-col  work-group">
+                            <div class="dashboard-col work-group">
                                 <div class="col-title">
                                     <span class="hardware-ico">
                                         <img
-                                            src="/html/assets/img/icons/computer-blue.svg"
+                                            src="/html/assets/img/device/computer.svg"
                                             alt="computer"
-                                        >
+                                        >                                        
                                     </span>
-                                    <!-- <h3 (mouseenter)="showInput = true;" [ngStyle]="{'display':showInput === true ? 'none' : 'block' }">{{label}}</h3> -->
-                                    <span class="edit-field">
-                                        <input
-                                            type="text"
-                                            class="form-control label-field"
-                                            [(ngModel)]="label"
-                                            (blur)="saveLabel();"
-                                        >
-                                    </span>
-
-
-
-
+                                    <div class="computer">
+                                        <span class="edit-field ok">
+                                            <input
+                                                type="text"
+                                                class="form-control label-field"
+                                                [(ngModel)]="asset.Title"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                        <span class="edit-field showme">
+                                            <input
+                                                type="text"
+                                                class="form-control label-field"
+                                                [ngModel]="label"
+                                            >
+                                        </span>
+                                    </div>
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul
+                                    class="list-unstyled"
+                                    *ngIf="isNonAgentDevice"
+                                >
                                     <li>
                                         <span>Host Name</span>
-                                        <div>{{hostName || 'N/A'}}</div>
+                                        <span
+                                            class="edit-field"
+                                            [attr.data-tooltip]="tooltip(20,asset.Name)"
+                                        >
+                                            <div>{{ displayValue(20,asset.Name) }}</div>
+                                        </span>
                                     </li>
-                                    <li>
-                                        <span>Warranty</span>
-                                        <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
+                                    <li style="width:28%">
+                                        <span>Warranty Date</span>
                                         <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="system.warranty"
-                                                (dateSelect)="updateDashboard('warranty')"
+                                                [(ngModel)]="asset.WarrantyExpires"
                                                 ngbDatepicker
-                                                #warranty="ngbDatepicker"
-                                                (click)="warranty.toggle()"
+                                                #expire="ngbDatepicker"
+                                                (click)="expire.toggle()"
+                                                (dateSelect)="updateAsset()"
                                             >
                                         </span>
                                     </li>
+                                    <li style="width:37%">
+                                        <span>Window Version</span>
+                                        <span
+                                            class="edit-field"
+                                            [attr.data-tooltip]="tooltip(27,caption)"
+                                        >
+                                            <div style="width: 140%;">{{ displayValue(27,caption) }}</div>
+                                        </span>
+                                    </li>
                                     <li>
-                                        <span>Windows Info</span>
-                                        <div>{{windows_info || 'N/A'}}</div>
-
-
-
-
+                                        <span>Site</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Site"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Deployment Date</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.DeploymentDate"
+                                                ngbDatepicker
+                                                #deploy="ngbDatepicker"
+                                                (click)="deploy.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:37%">
+                                        <span>Manufacturer</span>
+                                        <span class="edit-field computerManufacturer">
+                                            <app-drop-down
+                                                #manufacturer
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Manufacture'"
+                                                [list]="manufactureList"
+                                                [editItem]="selectManufactureNames"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="true"
+                                                (onSelectedItem)="onSelectManufactureName($event)"
+                                            ></app-drop-down>
+                                        </span>
                                     </li>
                                     <li>
                                         <span>Asset Tag</span>
-                                        <!-- <div>{{system?.asset_tag || 'N/A'}}</div> -->
-                                        <span
-                                            id="tag"
-                                            class="edit-field"
-                                            data-tooltip
-                                        >
+                                        <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="system.asset_tag"
-                                                (blur)="updateDashboard('asset_tag')"
+                                                [(ngModel)]="asset.Tag"
+                                                (blur)="updateAsset()"
                                             >
                                         </span>
                                     </li>
-                                    <li>
-                                        <span>Manufacturer</span>
-                                        <!-- <div>{{system?.manufacturer || 'N/A'}}</div> -->
-                                        <span
-                                            id="manufacture"
-                                            class="edit-field"
-                                            data-tooltip
-                                        >
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="system.manufacturer"
-                                                (blur)="updateDashboard('manufacturer')"
-                                            >
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>IP</span>
-                                        <div>{{networkAdapters.ip_address || 'N/A'}}</div>
-                                    </li>
-                                    <li>
+                                    <li style="width:28%">
                                         <span>Install Date</span>
-                                        <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
-                                        <!-- <ngb-datepicker class="dropdown-menu p-0"
-                    [class.show]="visible">
-                  </ngb-datepicker> -->
                                         <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="system.install_date"
+                                                [(ngModel)]="asset.InstallDate"
                                                 ngbDatepicker
-                                                #d="ngbDatepicker"
-                                                (click)="d.toggle()"
-                                                (dateSelect)="updateDashboard('install_date')"
+                                                #install="ngbDatepicker"
+                                                (click)="install.toggle()"
+                                                (dateSelect)="updateAsset()"
                                             >
                                         </span>
                                     </li>
-                                    <!-- <li>
-                    <span>Warranty Date</span>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #dWarranty="ngbDatepicker" (click)="dWarranty.toggle()">
-                    </span>
-                  </li> -->
+                                    <li style="width:37%">
+                                        <span>Model</span>
+                                        <span class="edit-field computerModel">
+                                            <app-drop-down
+                                                #model
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Model'"
+                                                [list]="selectModelList"
+                                                [editItem]="selectModelName"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="true"
+                                                (onSelectedItem)="onSelectModel($event)"
+                                            ></app-drop-down>
+                                        </span>
+                                    </li>
                                     <li>
-                                        <span>Computer Model</span>
-                                        <!-- <div>{{system?.model || 'N/A'}}</div> -->
+                                        <span>Agent Version</span>
+                                        <span class="edit-field">
+                                            <div>{{ asset.AgentVersion }}</div>
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Last Reboot</span>
+                                        <div>
+                                            {{ asset.LastRebootDate | date: DateTimeFormat }}
+                                        </div>
+                                    </li>
+                                    <li style="width:37%">
+                                        <span>Serial Number</span>
                                         <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="system.model"
-                                                (blur)="updateDashboard('model')"
+                                                [(ngModel)]="serialnumber"
+                                                (blur)="updateSerialNo()"
                                             >
                                         </span>
                                     </li>
-                                    <!-- <li>
-                    <span>Site</span>
-                    <div>N/A</div>
-                  </li> -->
-                                    <!-- <li>
-                    <span>Bought Date</span>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" (dateSelect)="updateDashboard('install_date')" ngbDatepicker #dInstall="ngbDatepicker" (click)="dInstall.toggle()">
-                    </span>
-                  </li> -->
                                     <li>
-                                        <span>System Type</span>
-                                        <!-- <div *ngIf="system?.architecture != undefined && system?.architecture != ''">({{system?.architecture}}) system</div>
-                    <div *ngIf="system?.architecture == undefined || system?.architecture == ''">N/A</div> -->
+                                        <span>Date</span>
+                                        <div>
+                                            {{asset.VersionInstallDate | date: 'dd/MM/yyyy'}}
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+
+                                <ul
+                                    class="list-unstyled"
+                                    *ngIf="!isNonAgentDevice"
+                                >
+                                    <li>
+                                        <span>Host Name</span>
+                                        <span
+                                            class="edit-field"
+                                            [attr.data-tooltip]="tooltip(20,asset.Name)"
+                                        >
+                                            <div>{{ displayValue(20,asset.Name) }}</div>
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Warranty Date</span>
                                         <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="system.architecture"
-                                                (blur)="updateDashboard('architecture')"
+                                                [(ngModel)]="asset.WarrantyExpires"
+                                                ngbDatepicker
+                                                #expire="ngbDatepicker"
+                                                (click)="expire.toggle()"
+                                                (dateSelect)="updateAsset()"
                                             >
                                         </span>
                                     </li>
-                                    <!-- <li>
-                    <span>Time Zone</span>
-                    <div>(UTC +08:00) Perth</div>
-                  </li> -->
-                                    <!-- <li>
-                    <span>Expire Date</span>
-                    <div>2019-03-12</div>
-                  </li> -->
-
-
-
-
+                                    <li style="width:37%">
+                                        <span>Manufacturer</span>
+                                        <span class="edit-field">
+                                            <app-drop-down
+                                                #manufacturer
+                                                [class]="['light-dropdown', 'qt-select-input-40']"
+                                                [placeholder]="'Select Manufacture'"
+                                                [list]="manufactureList"
+                                                [field]="'Name'"
+                                                [search]="true"
+                                                [change]="true"
+                                            ></app-drop-down>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Site</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Site"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Deployment Date</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.DeploymentDate"
+                                                ngbDatepicker
+                                                #deploy="ngbDatepicker"
+                                                (click)="deploy.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Install Date</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.InstallDate"
+                                                ngbDatepicker
+                                                #install="ngbDatepicker"
+                                                (click)="install.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Asset Tag</span>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Tag"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                    </li>
+                                    <li style="width:28%">
+                                        <span>Last Reboot</span>
+                                        <div>
+                                            {{ asset.LastRebootDate | date: DateTimeFormat }}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="dashboard-row auto-marging">
-                            <div class="dashboard-col col-50 disk-drive">
+                            <div
+                                class="dashboard-col col-50 disk-drive"
+                                *ngIf="isNonAgentDevice"
+                            >
                                 <h2>Disk Drives</h2>
+                                <h4 class="d-local">Local</h4>
                                 <ul class="list-unstyled">
                                     <li
-                                        [ngClass]="{'e-drive':drive.is_system == false,'c-drive':drive.is_system == true, 'd-drive':drive.is_system == false && drive.device_id == 'D:', 'f-drive':drive.is_system == false && drive.device_id == 'F:'}"
+                                        [ngStyle]="driveBorderColor(drive.percent, drive.IsSystem)"
+                                        [ngClass]="driveClass(drive.IsSystem, drive.caption)"
                                         *ngFor="let drive of logicalDisk"
                                     >
-
-
-
-
                                         <div
-                                            class="progress-circle p{{drive.percent}}"
-                                            [ngClass]="{'over50': drive.percent >= 50}"
+                                            class="progress-circle p{{ drive.percent }}"
+                                            [class.over50]="drive.percent > 50"
                                         >
-                                            <span>{{drive.percent}}%</span>
+                                            <span>{{ drive.percent }}%</span>
                                             <div class="left-half-clipper">
-                                                <div class="first50-bar"></div>
+                                                <div
+                                                    class="first50-bar"
+                                                    [ngStyle]="
+                            first50BarStyle(
+                              drive.percent,
+                              drive.IsSystem,
+                              drive.color
+                            )
+                          "
+                                                ></div>
                                                 <div
                                                     class="value-bar"
-                                                    [ngStyle]="{'border-color': drive.color}"
+                                                    [ngStyle]="
+                            valueBarStyle(
+                              drive.percent,
+                              drive.IsSystem,
+                              drive.color
+                            )
+                          "
                                                 ></div>
                                             </div>
                                         </div>
                                         <div class="drive-status">
                                             <span class="drive-name">
-                                                {{drive.device_id}} ({{drive.file_system}} on drive {{drive.disk_index + 1}})
+                                                {{ drive.Caption }} ({{ drive.FileSystem }} on drive)
                                             </span>
-                                            <!-- <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{convertToGB(drive.size) - convertToGB(drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span> -->
+
+
+
+
+
+
                                             <span
                                                 class="drive-limit"
-                                                *ngIf="drive.free_space != '' && drive.size != ''"
+                                                *ngIf="drive.FreeSpace != '' && drive.Size != ''"
                                             >
-                                                {{diskSpaceDiff(drive.size, drive.free_space)}}GB / {{convertToGB(drive.size)}}GB
+                                                {{ diskSpaceDiff(drive.Size, drive.FreeSpace) }}GB /
+                        {{ convertToGB(drive.Size) }}GB
                                             </span>
                                         </div>
                                     </li>
-
-
-
-
                                 </ul>
+                                <h4
+                                    class="d-network"
+                                    *ngIf="this.networkDisk != ''"
+                                >
+                                    Network Drives
+                                </h4>
+                                <ul class="list-unstyled">
+                                    <li
+                                        [ngStyle]="driveBorderColor(network.percent, network.IsSystem)"
+                                        [ngClass]="driveClass(network.IsSystem, network.caption)"
+                                        *ngFor="let network of networkDisk"
+                                    >
+                                        <div
+                                            class="progress-circle p{{ network.percent }}"
+                                            [class.over50]="network.percent > 50"
+                                        >
+                                            <span>{{ network.percent }}%</span>
+                                            <div class="left-half-clipper">
+                                                <div
+                                                    class="first50-bar"
+                                                    [ngStyle]="
+                          first50BarStyle(
+                            network.percent,
+                            network.IsSystem,
+                            network.color
+                          )
+                        "
+                                                ></div>
+                                                <div
+                                                    class="value-bar"
+                                                    [ngStyle]="
+                          valueBarStyle(
+                            network.percent,
+                            network.IsSystem,
+                            network.color
+                          )
+                        "
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div class="drive-status">
+                                            <span class="drive-name">
+                                                {{ network.Caption }} ({{ network.FileSystem }} on drive)
+                                            </span>
+
+
+
+
+
+
+                                            <span
+                                                class="drive-limit"
+                                                *ngIf="network.FreeSpace != '' && network.Size != ''"
+                                            >
+                                                {{ diskSpaceDiff(network.Size, network.FreeSpace) }}GB /
+                      {{ convertToGB(network.Size) }}GB
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div *ngIf="logicalDisk?.length == 0">
+                                    <span class="msg">{{'No Disk'}}</span>
+                                </div>
                             </div>
-                            <div class="dashboard-col col-50 services">
+                            <div
+                                class="dashboard-col col-50 services"
+                                *ngIf="isNonAgentDevice"
+                            >
                                 <h2>Services</h2>
                                 <ul class="list-unstyled">
-                                    <li [ngClass]="{'updated': virusInfo?.isUpToDate == true, 'alert': virusInfo?.isUpToDate == false}">
+                                    <li [ngClass]="
+                      serviceClass(
+                        asset.VirusProtectionInstalled,
+                        !asset.VirusProtectionInstalled
+                      )
+                    ">
                                         <figure>
                                             <img
                                                 src="/html/assets/img/device/virus-protection.svg"
@@ -225,10 +434,15 @@
                                             >
                                         </figure>
                                         <h4>Virus Protection</h4>
-                                        <span *ngIf="virusInfo?.isUpToDate == true">Up-to-date</span>
-                                        <span *ngIf="virusInfo?.isUpToDate == false">Out-of-date</span>
+                                        <span *ngIf="virusprotection !=''">{{ virusprotection }}</span>
+                                        <span *ngIf="virusprotection ==''">&nbsp;</span>
                                     </li>
-                                    <li class="alert">
+                                    <li [ngClass]="
+                      serviceClass(
+                        !asset.WindowsUpdatesPending,
+                        asset.WindowsUpdatesPending
+                      )
+                    ">
                                         <figure>
                                             <img
                                                 src="/html/assets/img/device/security-update.svg"
@@ -236,269 +450,80 @@
                                             >
                                         </figure>
                                         <h4>Security Update</h4>
-                                        <span>7 missing Updates</span>
+                                        <span
+                                            class="securityup"
+                                            *ngIf="securityUpdate"
+                                            (click)="getPendingWindowUpdate(template)"
+                                        >
+                                            {{ securityUpdate }} missing Updates
+                                        </span>
+                                        <span *ngIf="!securityUpdate">&nbsp;</span>
                                     </li>
-
-
-
-
-                                    <li class="updated">
-                                        <figure>
-                                            <img
-                                                src="/html/assets/img/device/drivers-missing.svg"
-                                                alt="drivers-missing"
-                                            >
-                                        </figure>
-                                        <h4>Drivers Missing</h4>
-                                        <span>Up-to-date</span>
-                                    </li>
-
-
-
-
-
                                 </ul>
                             </div>
-                            <div class="dashboard-col col-50 tags">
+                            <div
+                                class="dashboard-col col-50 tags"
+                                id="elementID"
+                            >
                                 <div class="col-title">
                                     <h2>Tags</h2>
-                                    <a
-                                        click
-                                        class="static-link disabled"
-                                    >
-                                        +Add Tags
-                                    </a>
+                                    <span>
+                                        <a
+                                            href="javascript:;"
+                                            class="static-link"
+                                            (click)="focusMyInput()"
+                                        >
+                                            Add Tag
+                                        </a>
+                                    </span>
                                 </div>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <span class="tag">Server Exchange Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
+                                <div
+                                    class="grey-dropdown"
+                                    ngbDropdown
+                                    #Tagproducts="ngbDropdown"
+                                >
+                                    <mat-form-field appearance="none">
+                                        <mat-chip-list #chipList>
+                                            <mat-chip
+                                                *ngFor="let tag of selectedTag; let i = index"
+                                                (removed)="onRemoveTag(i)"
                                             >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">DNS</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
+                                                {{ tag.Name }}
+                                                <mat-icon matChipRemove>cancel</mat-icon>
+                                            </mat-chip>
+                                        </mat-chip-list>
+                                        <input
+                                            autofocus
+                                            id="dropdownServices"
+                                            #searchInput
+                                            [(ngModel)]="tagFilterValue"
+                                            ngbDropdownToggle
+                                            class="pointer"
+                                            [matChipInputFor]="chipList"
+                                            (blur)="AddTags($event.target.value)"
+                                            (keyup.enter)="AddTags($event.target.value)"
+                                            (keyup)="onSearchTag($event.target.value)"
                                         >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
+                                    </mat-form-field>
+                                    <div
+                                        class="dropdown-menu"
+                                        ngbDropdownMenu
+                                        aria-labelledby="dropdownServices"
+                                    >
+                                        <ng-template
+                                            ngFor
+                                            let-tag
+                                            [ngForOf]="filteredTag"
                                         >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">FIle Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Support Files</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Carestream</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Cleardent</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL Master</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Exchange Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">DNS</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">FIle Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Support Files</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Carestream</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Cleardent</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL Master</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Carestream</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Cleardent</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL Master</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                </ul>
+                                            <button
+                                                ngbDropdownItem
+                                                class="dropdown-item"
+                                                (click)="onSelectTag(tag)"
+                                                [textContent]="tag.Name"
+                                            ></button>
+                                        </ng-template>
+                                    </div>
+                                </div>
                             </div>
                             <div class="dashboard-col col-50 recent-activity">
                                 <h2>Recent Activity</h2>
@@ -542,38 +567,30 @@
                                 <div class="col-title">
                                     <h2>Notes</h2>
                                     <a
-                                        href="#javascript:;"
-                                        class="static-link disabled"
-                                        (click)="create=create"
+                                        href="javascript:;"
+                                        class="static-link"
+                                        (click)="openNotes()"
                                     >
                                         +Add Notes
                                     </a>
                                 </div>
                                 <ul class="list-unstyled">
-                                    <li (click)="editNote=!editNote">
-                                        <a
-                                            href="javascript:;"
-                                            class="attashmnets"
+                                    <li
+                                        *ngFor="let note of assetNotes"
+                                        (click)="editNotes(note.ID)"
+                                    >
+                                        <span
+                                            class="notes-title"
+                                            [attr.data-tooltip]="tooltip(17,note.Title)"
                                         >
-                                            <img
-                                                src="/html/assets/img/device/attachment-12.svg"
-                                                alt="attachment"
-                                            >
-                                        </a>
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
+                                            <h5>{{ displayValue(17,note.Title)}}</h5>
+                                        </span>
+                                        <span
+                                            class="notes-description"
+                                            [attr.data-tooltip]="tooltip(61,note.Description)"
                                         >
-                                            +2 more
-                                        </a>
+                                            <p>{{displayValue(61,note.Description)}}</p>
+                                        </span>
                                         <div class="notes-by">
                                             <figure>
                                                 <img
@@ -582,158 +599,17 @@
                                                 >
                                             </figure>
                                             <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote=!editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote=!editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote=!editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote=!editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote=!editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
+                                                <span class="name">{{currentUser}}</span>
+                                                <span class="date">{{note.CreateDate | date: DateFormats}}</span>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
+                                <div *ngIf="assetNotes?.length==0">
+                                    <span class="msg">{{"No Notes"}}</span>
+                                </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -750,7 +626,7 @@
                     <a
                         class="close"
                         href="javascript:;"
-                        (click)="create=!create"
+                        (click)="closeNotes()"
                     >
                         <img
                             src="/html/assets/img/icons/close.svg"
@@ -759,7 +635,10 @@
                     </a>
                 </div>
                 <div class="middle-content">
-                    <form method="POST">
+                    <form
+                        (ngSubmit)="addAssetNote()"
+                        #assetNotesForm="ngForm"
+                    >
                         <div class="f-row">
                             <div class="f-col col-100">
                                 <label>Note Subject</label>
@@ -767,8 +646,20 @@
                                     <input
                                         type="text"
                                         placeholder="Write Ticket subject"
+                                        required
                                         class="form-input"
+                                        [(ngModel)]="noteAdd.Title"
+                                        id="title"
+                                        name="title"
+                                        #title="ngModel"
+                                        maxlength="60"
                                     >
+                                    <div
+                                        [hidden]="title.valid || title.pristine"
+                                        class="alert alert-danger"
+                                    >
+                                        Title is required
+                                    </div>
                                 </div>
                             </div>
                             <div class="f-col col-100">
@@ -777,290 +668,303 @@
                                     <textarea
                                         class="form-input"
                                         placeholder="Write Description here…"
+                                        required
+                                        [(ngModel)]="noteAdd.Description"
+                                        id="description"
+                                        name="description"
+                                        #description="ngModel"
+                                        maxlength="500"
                                     ></textarea>
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <label>Add Tags</label>
-                                <div class="form-row">
-                                    <input
-                                        type="text"
-                                        class="form-input"
-                                        placeholder="Start typing tags. Hit tab, comma, or return to complete."
+                                    <div
+                                        [hidden]="description.valid || description.pristine"
+                                        class="alert alert-danger"
                                     >
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <!-- File Uploader -->
-                                <div class="upload-box">
-                                    <div class="upload-box-content">
-                                        <div
-                                            class="drop-container"
-                                            ngFileDrop
-                                            [options]="options"
-                                            (uploadOutput)="onUploadOutput($event)"
-                                            [uploadInput]="uploadInput"
-                                        >
-                                            <p>
-                                                <img
-                                                    src="/html/assets/img/device/attachment.svg"
-                                                    alt="attach"
-                                                >
-                                                <span>Drag your file here or</span>
-                                                <label class="upload-button">
-                                                    <input
-                                                        type="file"
-                                                        ngFileSelect
-                                                        [options]="options"
-                                                        (uploadOutput)="onUploadOutput($event)"
-                                                        [uploadInput]="uploadInput"
-                                                        multiple
-                                                    >
-                                                    Upload manually
-                                                </label>
-                                            </p>
-                                        </div>
-                                        <div class="upload-item">
-                                            <div
-                                                class="add-file-raw"
-                                                style="display: none;"
-                                            >
-                                                <a
-                                                    href="javascript:;"
-                                                    class="add-files"
-                                                    title="Add Files"
-                                                >
-                                                    <img
-                                                        src="/html/assets/img/device/addmore.svg"
-                                                        alt="Add More"
-                                                    >
-                                                </a>
-                                            </div>
-                                            <div
-                                                class="upload-item-content"
-                                                *ngFor="let f of files; let i = index;"
-                                            >
-
-
-
-
-                                                <span class="f-name">{{ f.name }}</span>
-                                                <i
-                                                    class="ionicon ion-close-round"
-                                                    (click)="cancelUpload(f.id)"
-                                                    title="Close Tag"
-                                                ></i>
-
-
-
-
-                                                <!-- File Upload progress content -->
-                                                <!-- <div class="progress-content">
-                                  <div class="progress">
-                                    <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
-                                  </div>
-                                </div> -->
-
-
-
-
-                                                <!-- <div class="progress-text-content">
-                                  <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
-                                    <span>{{ f.progress?.data?.percentage }}% </span>
-                                    <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
-                                    <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
-                                  </span>
-                                  <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
-                                    <span>{{ f.progress?.data?.speedHuman }} </span>
-                                    <span>ETA {{ f.progress?.data?.etaHuman }}</span>
-                                  </span>
-                                </div> -->
-                                            </div>
-                                        </div>
+                                        Title is required
                                     </div>
                                 </div>
-                                <!-- End of File Uploader -->
                             </div>
                         </div>
                         <div class="btn-row">
-                            <input
+                            <button
                                 type="submit"
-                                value="Create Note"
                                 class="btn btn-primary"
+                                [disabled]="!assetNotesForm.form.valid"
                             >
+                                Create Note
+                            </button>
                             <a
-                                href="javascrip:;"
+                                href="javascript:;"
                                 class="btn btn-secondary"
-                                (click)="create=!create"
+                                (click)="closeNotes()"
                             >
                                 Cancel
                             </a>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div
-                class="sidebar-popup note"
-                [class.opened]="editNote"
-            >
-                <!-- header -->
-                <div class="sidebar-header">
-                    <div class="sidebar-title">
-                        <div class="h1">Edit Note</div>
-                    </div>
-                    <a
-                        class="close"
-                        href="javascript:;"
-                        (click)="editNote=!editNote"
-                    >
-                        <img
-                            src="/html/assets/img/icons/close.svg"
-                            alt="close"
+
+
+
+
+
+
+                <div
+                    class="sidebar-popup note"
+                    [class.opened]="editNote"
+                >
+                    <!-- header -->
+                    <div class="sidebar-header">
+                        <div class="sidebar-title">
+                            <div class="h1">Edit Note</div>
+                        </div>
+                        <a
+                            class="close"
+                            href="javascript:;"
+                            (click)="editCloseNotes()"
                         >
-                    </a>
-                </div>
-                <div class="middle-content">
-                    <form method="POST">
-                        <div class="f-row">
-                            <div class="f-col col-100">
-                                <label>Note Subject</label>
-                                <div class="form-row">
-                                    <input
-                                        type="text"
-                                        value="Driver Install guide"
-                                        class="form-input"
-                                    >
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <label>Description</label>
-                                <div class="form-row">
-                                    <textarea
-                                        class="form-input"
-                                        value="There are many variations of passages of Lorem Ipsum available, but themajority have suffered alteration in some form, by injected humour."
-                                    >
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <label>Add Tags</label>
-                                <div class="form-row">
-                                    <input
-                                        type="text"
-                                        class="form-input"
-                                        placeholder="Start typing tags. Hit tab, comma, or return to complete."
-                                    >
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <!-- File Uploader -->
-                                <div class="upload-box">
-                                    <div class="upload-box-content">
-                                        <div
-                                            class="drop-container"
-                                            ngFileDrop
-                                            [options]="options"
-                                            (uploadOutput)="onUploadOutput($event)"
-                                            [uploadInput]="uploadInput"
+                            <img
+                                src="/html/assets/img/icons/close.svg"
+                                alt="close"
+                            >
+                        </a>
+                    </div>
+                    <div class="middle-content">
+                        <form
+                            (ngSubmit)="editAssetNote()"
+                            #editassetNotesForm="ngForm"
+                        >
+                            <div class="f-row">
+                                <div class="f-col col-100">
+                                    <label>Note Subject</label>
+                                    <div class="form-row">
+                                        <input
+                                            type="text"
+                                            placeholder="Write Ticket subject"
+                                            required
+                                            class="form-input"
+                                            [(ngModel)]="notesTitle"
+                                            id="title"
+                                            name="title"
+                                            #title="ngModel"
+                                            maxlength="60"
                                         >
-                                            <p>
-                                                <img
-                                                    src="/html/assets/img/device/attachment.svg"
-                                                    alt="attach"
-                                                >
-                                                <span>Drag your file here or</span>
-                                                <label class="upload-button">
-                                                    <input
-                                                        type="file"
-                                                        ngFileSelect
-                                                        [options]="options"
-                                                        (uploadOutput)="onUploadOutput($event)"
-                                                        [uploadInput]="uploadInput"
-                                                        multiple
-                                                    >
-                                                    Upload manually
-                                                </label>
-                                            </p>
-                                        </div>
-                                        <div class="upload-item">
-                                            <div
-                                                class="add-file-raw"
-                                                style="display: none;"
-                                            >
-                                                <a
-                                                    href="javascript:;"
-                                                    class="add-files"
-                                                    title="Add Files"
-                                                >
-                                                    <img
-                                                        src="/html/assets/img/device/addmore.svg"
-                                                        alt="Add More"
-                                                    >
-                                                </a>
-                                            </div>
-                                            <div
-                                                class="upload-item-content"
-                                                *ngFor="let f of files; let i = index;"
-                                            >
-
-
-
-
-                                                <span class="f-name">{{ f.name }}</span>
-                                                <i
-                                                    class="ionicon ion-close-round"
-                                                    (click)="cancelUpload(f.id)"
-                                                    title="Close Tag"
-                                                ></i>
-
-
-
-
-                                                <!-- File Upload progress content -->
-                                                <!-- <div class="progress-content">
-                                  <div class="progress">
-                                    <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
-                                  </div>
-                                </div> -->
-
-
-
-
-                                                <!-- <div class="progress-text-content">
-                                  <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
-                                    <span>{{ f.progress?.data?.percentage }}% </span>
-                                    <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
-                                    <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
-                                  </span>
-                                  <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
-                                    <span>{{ f.progress?.data?.speedHuman }} </span>
-                                    <span>ETA {{ f.progress?.data?.etaHuman }}</span>
-                                  </span>
-                                </div> -->
-                                            </div>
+                                        <div
+                                            [hidden]="title.valid || title.pristine"
+                                            class="alert alert-danger"
+                                        >
+                                            Title is required
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End of File Uploader -->
+                                <div class="f-col col-100">
+                                    <label>Description</label>
+                                    <div class="form-row">
+                                        <textarea
+                                            class="form-input"
+                                            placeholder="Write Description here…"
+                                            required
+                                            [(ngModel)]="notesDescription"
+                                            id="description"
+                                            name="description"
+                                            #description="ngModel"
+                                            maxlength="500"
+                                        ></textarea>
+                                        <div
+                                            [hidden]="description.valid || description.pristine"
+                                            class="alert alert-danger"
+                                        >
+                                            Title is required
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="btn-row">
-                            <input
-                                type="submit"
-                                value="Edit Note"
-                                class="btn btn-primary"
-                            >
-                            <a
-                                href="javascrip:;"
-                                class="btn btn-secondary"
-                                (click)="editNote=!editNote"
-                            >
-                                Cancel
-                            </a>
-                        </div>
-                    </form>
+                            <div class="btn-row">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    [disabled]="!editassetNotesForm.form.valid"
+                                >
+                                    Edit Note
+                                </button>
+                                <a
+                                    href="javascript:;"
+                                    class="btn btn-secondary"
+                                    (click)="editCloseNotes()"
+                                >
+                                    Cancel
+                                </a>
+
+
+
+                                <button
+                                    type="button"
+                                    class="btn btn-danger pull-right"
+                                    (click)="deleteNote()"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>
+
+
+
+
+<ng-template
+    #template
+    let-modal
+>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button
+                type="button"
+                class="close pull-right closebtn"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="tabletitle">
+                <span [textContent]="asset.Title || asset.Name"></span>
+            </div>
+            <div>
+                <ngb-tabset [destroyOnHide]="false">
+                    <ngb-tab title="Pending">
+                        <ng-template ngbTabContent>
+                            <div class="modal-body">
+                                <div class="modal-table">
+                                    <div class="modal-table-body">
+                                        <div class="remote-area">
+                                            <table class="fixed">
+                                                <thead>
+                                                    <tr *ngIf="windowUpdatePendingList.length>0">
+                                                        <th class="tableth"></th>
+                                                        <th class="title">Description</th>
+                                                        <th class="product">Product</th>
+                                                        <th class="product">Class</th>
+                                                        <th class="product">Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
+                                                        <td class="tabletd">
+                                                            <input
+                                                                type="checkbox"
+                                                                (change)="postWindowUpdatePendint(i)"
+                                                                *ngIf="!data.loading"
+                                                            >
+                                                            <div
+                                                                class="loader"
+                                                                *ngIf="data.loading"
+                                                            ></div>
+                                                        </td>
+                                                        <td class="tablespace">{{data.Title}}</td>
+                                                        <td class="tablespace">{{data.Product}}</td>
+                                                        <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
+                                                        <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
+                                                    </tr>
+                                                    <tr *ngIf="windowUpdatePendingList.length == 0">
+                                                        <td class="missing">No missing Updates</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="viewer-footer"
+                                            *ngIf="windowUpdatePendingList.length>0"
+                                        >
+                                            <a
+                                                class="btn btn-dowanload footer"
+                                                [ngClass]="selected==0? 'disabled': '' "
+                                                (click)="InstallUpdate()"
+                                            >
+                                                Install
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Install">
+                        <ng-template ngbTabContent>
+                            <div class="modal-body">
+                                <div class="modal-table">
+                                    <div class="modal-table-body">
+                                        <div class="remote-area">
+                                            <table class="fixed">
+                                                <thead>
+                                                    <tr *ngIf="installedWindowsUpdateList.length>0">
+                                                        <th class="title">Description</th>
+                                                        <th class="product">Product</th>
+                                                        <th class="product">Class</th>
+                                                        <th class="product">Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let install of installedWindowsUpdateList; let i = index;">
+                                                        <td class="tablespace">{{install.Title}}</td>
+                                                        <td class="tablespace">{{install.Product}}</td>
+                                                        <td class="tablespace">{{categoriesSep(install.Categories)}}</td>
+                                                        <td class="tablespace">{{sizeConvert(install.Size)}} MB</td>
+                                                    </tr>
+                                                    <tr *ngIf="installedWindowsUpdateList.length==0">
+                                                        <td class="missing">No InstallWindows</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Blocked">
+                        <ng-template ngbTabContent>
+                            <div class="modal-body">
+                                <div class="modal-table">
+                                    <div class="modal-table-body">
+                                        <div class="remote-area">
+                                            <table class="fixed">
+                                                <thead>
+                                                    <tr *ngIf="blockedWindowsUpdateList.length>0">
+                                                        <th class="title">Description</th>
+                                                        <th class="product">Product</th>
+                                                        <th class="product">Class</th>
+                                                        <th class="product">Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let blocked of blockedWindowsUpdateList; let i = index;">
+                                                        <td class="tablespace">{{blocked.Title}}</td>
+                                                        <td class="tablespace">{{blocked.Product}}</td>
+                                                        <td class="tablespace">{{blocked.Categories}}</td>
+                                                        <td class="tablespace">{{sizeConvert(blocked.Size)}} MB</td>
+                                                    </tr>
+                                                    <tr *ngIf="blockedWindowsUpdateList.length==0">
+                                                        <td class="missing">No BlockedWindows</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</ng-template>

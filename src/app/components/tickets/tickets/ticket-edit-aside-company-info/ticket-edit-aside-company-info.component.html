@@ -85,7 +85,10 @@
         <hr class="company-info-aside__divider">
         <div class="company-info-aside__primary-contacts">
             <div class="company-info-aside__primary-contacts-title">PRIMARY CONTACT(S)</div>
-            <div class="company-info-aside__primary-contact qt-df">
+            <div
+                class="company-info-aside__primary-contact d-f"
+                *ngIf="primaryContact"
+            >
                 <div
                     class="company-info-aside__primary-contact-avatar"
                     [textContent]="ticketsListService.getAssignedUserNameForAvatar(primaryContact)"

@@ -47,10 +47,8 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
     this.settingStateService.setComponentName('GlNumberSettingsComponent');
     this.loading = true; $(".loading").css("display", "block");
-    if (this.glNumberStateService.getGLNumbers().length > 0) {
-      this.numberList = this.glNumberStateService.getGLNumbers().sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
-      this.loading = false; $(".loading").css("display", "none");
-    }
+    this.numberList = this.glNumberStateService.getGLNumbers().sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
+    this.loading = false; $(".loading").css("display", "none");
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe(data => {
       this.numberList = data.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
       this.loading = false; $(".loading").css("display", "none");

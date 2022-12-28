@@ -1,11 +1,9 @@
-
 /*** All css files include ***/
+
 @import "./src/assets/styles/variable";
 @import '../../../assets/scss/device/mixin';
 @import '../../../assets/scss/device/custom';
-
-
-
+@import '../../../assets/scss/device/_modals.scss';
 .remote-area {
     padding: 70px 48px 25px 48px;
     display: -ms-flexbox;
@@ -38,10 +36,10 @@
                 justify-content: center;
                 align-items: center;
             }
-
         }
     }
 }
+
 .remote-info {
     float: right;
     width: calc(100% - 86px);
@@ -58,7 +56,6 @@
         display: inline-block;
         height: auto;
         line-height: 1;
-
     }
 }
 
@@ -80,11 +77,9 @@
     p {
         margin-bottom: 0;
         max-width: 326px;
-        font-size:13px;
+        font-size: 13px;
     }
 }
-
-
 
 .btn-dowanload {
     @include border-radius(4px);
@@ -99,10 +94,51 @@
     text-align: center;
     min-width: 134px;
     @include transition(0.4s);
-        &:hover{
-            background-color: $primary-1;
-            border-color: $primary-1;
-            color: $white;
-        }
+    &:hover {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $white-color;
+    }
 }
 
+.restart-modal .modal-title {
+    font-size: 18px;
+    padding: $modal-title-padding;
+    border-bottom: 1px solid $modal-header-border-color;
+    @include clearfix;
+}
+
+.restart-modal .modal-body p {
+    padding:15px
+}
+
+.restart-modal .close {
+    margin-top:-10px;
+}
+
+.restart-modal .modal-footer .btn{
+  background-color: #FF0000;
+}
+.btn-update, .btn-uninstall {
+    background-color:#e8e8e8 !important;
+}
+.db-update-agent{
+    display: flex;
+    background-image: url(/assets/img/device/install-gray.svg);
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    background-position: center;
+}
+.db-uninstall{
+    display: flex;
+    background-image: url(/assets/img/device/remove-remote-agent-gray.svg);
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    background-position: center;
+}

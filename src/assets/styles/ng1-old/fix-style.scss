@@ -6,9 +6,11 @@ html {
   font-weight: 400;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  overflow-y: scroll;
-  overflow-x: auto;
-  min-width: 1280px;
+  //overflow-y: scroll;
+  //overflow-x: hidden;
+  //overflow-x: auto;
+  //min-width: 1280px;
+  //min-width: calc(1280px + 280px);
   font-size: 16px;
 
   @media (max-width: 767px) {

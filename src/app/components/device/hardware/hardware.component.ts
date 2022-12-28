@@ -1,228 +1,516 @@
-import { Component, OnInit } from '@angular/core';
-import { HardwareService } from './../_services/hardware.service';
-import { DeviceDetailService } from './../_services/device_detail.service';
-import { first } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { CommonHttpServices } from '../_services/common_http.service';
-import { ExcelService } from '../_services/download_csv.service';
-import { CONFIGCONSTANTS } from '../config/app-constants';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { CommonHttpServices } from "../_services/common_http.service";
+import { ExcelService } from "../_services/download_csv.service";
+import { CONFIGCONSTANTS } from "../config/app-constants";
+import { ActivatedRoute, Router } from "@angular/router";
 import * as moment from "moment";
-import { System, Graphics, Motherboard, Bios, Processor, Display, LogicalDisk, Memory, Adapter, DeviceDetail } from './class/system';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { AgentService } from "src/app/services/agent/agent.service";
+import { DatePipe } from "@angular/common";
+import { Subscription } from "rxjs";
+import { OnDestroy } from "@angular/core";
+
 declare var $: any;
 @Component({
-  selector: 'app-hardware',
-  templateUrl: './hardware.component.html',
-  styleUrls: ['./hardware.component.scss']
+  selector: "app-hardware",
+  templateUrl: "./hardware.component.html",
+  styleUrls: ["./hardware.component.scss"],
 })
-export class HardwareComponent implements OnInit {
-
-  companyUuid: string = '';
-  hardwareDetail: object = {};
-  system: System;
-  graphics: Graphics;
-  motherBoard: Motherboard;
-  bios: Bios;
-  display: Display;
-  logicalDisks: LogicalDisk;
-  memory: Memory;
-  networkAdapters: Adapter;
-  processors: Processor;
-  deviceName: string = '';
-  externalIp: string = '';
-  deviceDetail: DeviceDetail;
+export class HardwareComponent implements OnInit, OnDestroy {
   loading: boolean = false;
-  limit: number = 15;
   printSystem: Array<Array<string>>;
   printMotherBoard: Array<Array<string>>;
   printProcessor: Array<Array<string>>;
+  printMouse: Array<Array<string>>;
   printMemory: Array<Array<string>>;
   printNetwork: Array<Array<string>>;
   printGraphic: Array<Array<string>>;
   printDisplay: Array<Array<string>>;
   printDisk: Array<Array<string>>;
+  printKeyBoard: Array<Array<string>>;
+  printSoundCard: Array<Array<string>>;
   printOS: Array<Array<string>>;
-  pdfUrl: string = '';
-  _id: string = '';
-  type: string = '';
+  pdfUrl: string = "";
+  _id: string = "";
+  type: string = "";
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
-  constructor(private hardwareService: HardwareService, private toastr: ToastrService,
+  DateFormats = CONFIGCONSTANTS.DateFormat2;
+  motherBoards: any = [];
+  bio: any = [];
+  processor: any = [];
+  physicalmemory: any = [];
+  networkAdapter: any = [];
+  diskDrive: any = [];
+  keyboards: any = [];
+  soundCards: any = [];
+  operatingSystems: any = [];
+  computer: any = [];
+  systemTypes: any = [];
+  desktop: any = [];
+  mouse: any = [];
+  graphicsCard: any = [];
+  pipe = new DatePipe("en-US");
+  memory: number = 0;
+  Memory: any[] = [];
+  differentMemory: any[] = [];
+  graphicscardDriver: any[] = [];
+  TemporaryGraphicsDriver: any[] = [];
+  wanIp: string = "";
+  printers: any[] = [];
+  sub: Subscription = new Subscription();
+  constructor(
+    private toastr: ToastrService,
     private commonHttpServices: CommonHttpServices,
-    private deviceDetailService: DeviceDetailService,
     private router: Router,
     private companiesStateService: CompaniesStateService,
-    private excelService: ExcelService) { }
+    private excelService: ExcelService,
+    private agentService: AgentService,
+    public activateRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
-    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-    // $('main').css('margin-right', '64px')
-    if (this.type === 'printer') {
-      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.type}/${this._id}`]);
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
+    this._id = this.activateRoute.snapshot.params["id"];
+    this.type = this.activateRoute.snapshot.params["type"];
+    if (this.type === "printer") {
+      this.router.navigate([
+        `${this.companiesStateService
+          .getCurrentCompany()
+          .name.replaceAll(" ", "")}/device/dashboard/${this.type}/${this._id}`,
+      ]);
     }
-    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
-    this.hardwareDetail = this.deviceDetailService.getDevice();
-    if (Object.keys(this.hardwareDetail).length === 0) {
-      this.getDeviceDetail();
-    } else {
-      this.setData();
-      this.getPdfData();
-    }
+    if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onSetAccessToken);
 
   }
 
-  getDeviceDetail() {
+  setPreviewDataDevice() {
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.wanIp = resp[0].ExternalIPAddress;
+        this.HardwareList(resp[0].ID);
+      }
+    });
+  }
 
-    this.loading = true;
-    this.hardwareService.getAllHardwareList(localStorage.getItem('company_id'), this.deviceDetail['agentId'])
-      .pipe(first())
-      .subscribe(
-        resp => {
-          this.deviceDetailService.addDevice(resp);
-          this.hardwareDetail = this.deviceDetailService.getDevice();
-          this.setData();
-          this.getPdfData();
-          this.loading = false;
-        },
-        error => {
-          this.loading = false;
-          this.toastr.error('Something went wrong please try again.');
+  HardwareList(Asset_ID) {
+    this.computerList(Asset_ID);
+    this.systemType(Asset_ID);
+    this.motherBoardList(Asset_ID);
+    this.biosList(Asset_ID);
+    this.processorsList(Asset_ID);
+    this.pointingDevice(Asset_ID);
+    this.memoryList(Asset_ID);
+    this.networkList(Asset_ID);
+    this.graphicscard(Asset_ID);
+    this.desktopMonitor(Asset_ID);
+    this.hardDisk(Asset_ID);
+    this.keyboard(Asset_ID);
+    this.soundCard(Asset_ID);
+    this.operatingSystem(Asset_ID);
+    this.getPrinters(Asset_ID);
+  }
+
+  getPrinters(Asset_ID) {
+    this.agentService.getPrintersByAssetId(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.printers = resp;
+      }
+    });
+  }
+
+  graphicscard(Asset_ID) {
+    this.agentService.getGraphicsCard(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.graphicsCard = resp[0];
+        let driver = this.graphicsCard.InstalledDisplayDrivers.split(",");
+        if (driver.length > 0) {
+          this.graphicscardDriver = driver;
+          this.graphicscardDriver.forEach((element) => {
+            let rock = element.split("\\");
+            let pieces = rock[rock.length - 1];
+            this.TemporaryGraphicsDriver.push(pieces);
+          });
+          this.graphicsCard.InstalledDisplayDrivers =
+            this.TemporaryGraphicsDriver +
+            " " +
+            "version " +
+            this.graphicsCard.DriverVersion;
         }
-      );
+        if (this.graphicsCard.VideoModeDescription != "") {
+          let screenresolution =
+            this.graphicsCard.VideoModeDescription.split("x");
+          this.graphicsCard.Resolution =
+            screenresolution[0] + "x" + screenresolution[1];
+          this.graphicsCard.ColorDepth = screenresolution[2];
+        }
+      }
+    });
+  }
+
+  pointingDevice(Asset_ID) {
+    this.agentService.getPointingDevice(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.mouse = resp[0];
+      }
+    });
+  }
+
+  desktopMonitor(Asset_ID) {
+    this.agentService.getDesktopMonitor(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.desktop = resp[0];
+      }
+    });
+  }
+
+  computerList(Asset_ID) {
+    this.agentService.getComputer(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.computer = resp[0];
+        if (this.computer.Title == "") {
+          this.computer.Title = this.computer.Name;
+        }
+        this.computer.Name =
+          this.computer.Domain != ""
+            ? this.computer.Name + "." + this.computer.Domain
+            : this.computer.Name + " " + "(In workgroup)";
+      }
+    });
+  }
+
+  systemType(Asset_ID) {
+    this.agentService.getOperatingSystem(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.systemTypes = resp[0];
+      }
+    });
+  }
+
+  motherBoardList(Asset_ID) {
+    this.agentService.getMotherBoard(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.motherBoards = resp[0];
+      }
+    });
+  }
+
+  biosList(Asset_ID) {
+    this.agentService.getBios(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.bio = resp[0];
+        let date = this.bio.ReleaseDate.split("+");
+        this.bio.ReleaseDate = date[0];
+      }
+    });
+  }
+
+  processorsList(Asset_ID) {
+    this.agentService.getProcessor(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.processor = resp[0];
+      }
+    });
+  }
+
+  memoryList(Asset_ID) {
+    this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.physicalmemory = resp[0];
+        this.Memory = resp.filter((x) => x.IsActive);
+        this.Memory.forEach((element) => {
+          this.memory += element.Capacity;
+          if (element.DeviceLocator != "") {
+            this.differentMemory.push(
+              element.DeviceLocator +
+              ":" +
+              " " +
+              +element.Capacity / 1024 / 1024 +
+              " " +
+              "MB RAM"
+            );
+          }
+        });
+        this.physicalmemory.Capacity = this.memory;
+        let different = this.differentMemory;
+        this.physicalmemory.DeviceLocator = different
+          .toString()
+          .replace(/,/g, " ");
+      }
+    });
+  }
+
+  networkList(Asset_ID) {
+    this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.networkAdapter = resp.find((x) => x.Gateway !== null);
+      }
+    });
+  }
+
+  hardDisk(Asset_ID) {
+    this.agentService.getHardDisk(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.diskDrive = resp[0];
+      }
+    });
+  }
+
+  keyboard(Asset_ID) {
+    this.agentService.getKeyboard(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.keyboards = resp[0];
+      }
+    });
+  }
+
+  soundCard(Asset_ID) {
+    this.agentService.getsoundCard(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.soundCards = resp[0];
+      }
+    });
+  }
+
+  operatingSystem(Asset_ID) {
+    this.agentService.getOperatingSystem(Asset_ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.operatingSystems = resp[0];
+      }
+    });
   }
 
   setData() {
-    this.system = this.hardwareDetail['reports'][0].system || {};
-    this.deviceName = this.hardwareDetail['reports'][0].deviceName;
-    this.graphics = this.hardwareDetail['reports'][0].videoCards[0] || {};
-    this.motherBoard = this.hardwareDetail['reports'][0].motherboard || {};
-    this.bios = this.hardwareDetail['reports'][0].bios || {};
-    this.display = this.hardwareDetail['reports'][0].monitors[0] || {};
-    this.logicalDisks = this.hardwareDetail['reports'][0].logicalDisks.filter(value => value.is_system === true)[0] || {};
-    this.processors = this.hardwareDetail['reports'][0].processors[0] || {};
-    this.memory = this.hardwareDetail['reports'][0].ram.slots[0] || {};
-    this.networkAdapters = this.hardwareDetail['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
-    this.externalIp = this.hardwareDetail['reports'][0].externalIp || {};
-
     this.printSystem = [
-      ['Manufacturer', this.system['manufacturer'] || 'N/A'],
-      ['Computer Model', this.system['model'] || 'N/A'],
-      ['Computer Name', this.deviceName || 'N/A'],
-      ['System Type', this.system['architecture'] != undefined ? '(' + this.system['architecture'] + ') system' : 'N/A'],
-      ['Warranty', this.system['warranty'] || 'N/A']
+      ["Manufacturer", this.computer["Manufacturer"] || "N/A"],
+      ["Computer Model", this.computer["Model"] || "N/A"],
+      ["Computer Name", this.computer["Name"] || "N/A"],
+      [
+        "System Type",
+        this.systemTypes["OSArchitecture"] != undefined
+          ? this.systemTypes["OSArchitecture"]
+          : "N/A",
+      ],
+      [
+        "Warranty",
+        this.computer["WarrantyExpires"] != undefined
+          ? "Expires :" + this.computer["WarrantyExpires"]
+          : "N/A",
+      ],
     ];
+
     this.printMotherBoard = [
-      ['Manufacturer', this.motherBoard['manufacturer'] || 'N/A'],
-      ['Model', this.motherBoard['serial_number'] || 'N/A'],
-      ['BIOS Manufacturer', this.bios['manufacturer'] || 'N/A'],
-      ['BIOS Model', 'BIOS Date ' + (this.bios['release_date'] || 'N/A') + ' Version: ' + (this.bios['version'] || 'N/A')]
+      ["Manufacturer", this.motherBoards["Manufacturer"] || "N/A"],
+      ["Model", this.motherBoards["Product"] || "N/A"],
+      ["BIOS Manufacturer", this.bio["Manufacturer"] || "N/A"],
+      [
+        "BIOS Model",
+        "BIOS Date " +
+        this.pipe.transform(
+          this.bio["ReleaseDate"],
+          this.DateTimeFormat || "N/A"
+        ) +
+        "Ver:" +
+        (this.bio["SMBIOSBIOSVersion"] || "N/A") +
+        " Version: " +
+        (this.bio["Version"] || "N/A"),
+      ],
     ];
+
     this.printProcessor = [
-      ['Model', this.processors['name'] || 'N/A'],
-      ['Clock Speed', 'N/A'],
-      ['Socket & Cache(s)', 'N/A']
+      ["Model", this.processor["Name"] || "N/A"],
+      ["Clock Speed", this.processor["MaxClockSpeed"] + " " + "MHz" || "N/A"],
     ];
+
+    this.printMouse = [
+      ["Manufacturer", this.mouse["Manufacturer"] || "N/A"],
+      ["Model", this.mouse["Caption"] || "N/A"],
+    ];
+
     this.printMemory = [
-      ['Memory', this.memory['capacity'] != undefined ? (this.memory['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
+      [
+        "Memory",
+        this.physicalmemory["Capacity"] != undefined
+          ? this.physicalmemory["Capacity"] / 1024 / 1024 + " MB RAM"
+          : "N/A",
+      ],
+      [
+        "",
+        this.physicalmemory["DeviceLocator"] != undefined
+          ? this.physicalmemory["DeviceLocator"]
+          : "",
+      ],
     ];
+
     this.printNetwork = [
-      ['Model(s)', this.networkAdapters['description'] || 'N/A'],
-      ['IP', this.networkAdapters['ip_address'] || 'N/A'],
-      ['Subnet Mask', this.networkAdapters['subnet'] || 'N/A'],
-      ['Preferred DNS Server', this.networkAdapters['dns'] || 'N/A'],
-      ['Link Speed', this.networkAdapters['speed'] != undefined ? (this.networkAdapters['speed'] / 1000000) + ' (MegaBit)' : 'N/A'],
-      ['External IP', this.externalIp || 'N/A'],
-      ['MAC', this.formatMacAddress(this.networkAdapters['mac']) || 'N/A'],
-      ['DHCP', this.networkAdapters['dhcp_server'] || 'N/A'],
+      ["Model(s)", this.networkAdapter["Name"] || "N/A"],
+      ["IP", this.networkAdapter["IPAddress"] || "N/A"],
+      ["MAC", this.networkAdapter["MACAddress"] || "N/A"],
+      ["DHCP", this.networkAdapter["DHCPEnabled"]],
+      ["DHCP Server", this.networkAdapter["DHCPServer"] || "N/A"],
+      ["Subnet", this.networkAdapter["Subnet"] || "N/A"],
+      ["DNS1", this.networkAdapter["DNS1"] || "N/A"],
+      ["DNS2", this.networkAdapter["DNS2"] || "N/A"],
+      ["Gateway", this.networkAdapter["Gateway"] || "N/A"],
+      ["Link Speed", this.getLinkSpeed(this.networkAdapter["Speed"]) + "(MegaBit)"],
+      ["WAN IP", this.wanIp || "N/A"]
     ];
+
     this.printGraphic = [
-      ['Model', this.graphics['hardwareDeviceName'] || 'N/A'],
-      ['Video Processor', 'N/A'],
-      ['Memory Size', this.graphics['memory'] != undefined ? (this.graphics['memory'] / 1024 / 1024) + ' MB VRAM' : 'N/A'],
-      ['Driver', 'version ' + this.graphics['driverVersion']]
+      ["Model", this.graphicsCard["Caption"] || "N/A"],
+      ["Video Processor", "N/A"],
+      [
+        "Memory Size",
+        this.graphicsCard["AdapterRAM"] != undefined
+          ? this.graphicsCard["AdapterRAM"] / 1024 / 1024 + " MB VRAM"
+          : "N/A",
+      ],
+      ["Driver", this.graphicsCard["InstalledDisplayDrivers"] || "N/A"],
     ];
+
     this.printDisplay = [
-      ['Manufacturer', this.display['manufacturer'] || 'N/A'],
-      ['Model', this.display['name'] || 'N/A'],
-      ['Color Depth', 'N/A'],
-      ['Refresh Rate', 'N/A']
+      ["Manufacturer", this.desktop["MonitorManufacturer"] || "N/A"],
+      ["Model", this.desktop["Caption"] || "N/A"],
+      ["Screen Resolution", this.graphicsCard["Resolution"] || "N/A"],
+      ["Color Depth", this.graphicsCard["ColorDepth"] || "N/A"],
+      ["Refresh Rate", "N/A"],
     ];
+
     this.printDisk = [
-      ['Model', this.logicalDisks['device_id'] || 'N/A'],
-      ['File Format(s)', 'NTFS ' + this.logicalDisks['device_id']],
-      ['Size', this.logicalDisks['size'] != undefined ? (this.logicalDisks['size'] / 1024 / 1024) + ' GB' : 'N/A'],
-      ['Free Space', this.logicalDisks['free_space'] != undefined ? (this.logicalDisks['free_space'] / 1024 / 1024) + ' GB' : 'N/A']
+      ["Model(s)", this.diskDrive["Model"] || "N/A"],
+      [
+        "File Format(s)",
+        this.diskDrive["FileSystem"] + "(" + this.diskDrive["Caption"] + ")",
+      ],
+      [
+        "Size",
+        this.diskDrive["Size"] != undefined
+          ? (this.diskDrive["Size"] / 1024 / 1024 / 1024).toFixed(2) +
+          " GB" +
+          " " +
+          "(" +
+          (this.diskDrive["Size"] / 1024 / 1024 / 1024).toFixed(2) +
+          " GB" +
+          " " +
+          "(" +
+          this.diskDrive["Caption"] +
+          ")" +
+          ")"
+          : "N/A",
+      ],
+      [
+        "Free Space",
+        this.diskDrive["FreeSpace"] != undefined
+          ? (this.diskDrive["FreeSpace"] / 1024 / 1024 / 1024).toFixed(2) +
+          " GB" +
+          " " +
+          "(" +
+          (this.diskDrive["FreeSpace"] / 1024 / 1024 / 1024).toFixed(2) +
+          " GB" +
+          " " +
+          "(" +
+          this.diskDrive["Caption"] +
+          ")" +
+          ")"
+          : "N/A",
+      ],
     ];
+
+    this.printKeyBoard = [
+      ["Model", this.keyboards["Description"] || "N/A"],
+      ["Type", this.keyboards["Caption"] || "N/A"],
+    ];
+
+    this.printSoundCard = [
+      ["Manufacturer", this.soundCards["Manufacturer"] || "N/A"],
+      ["Model", this.soundCards["Caption"] || "N/A"],
+    ];
+
     this.printOS = [
-      ['Name', this.system['caption'] || 'N/A'],
-      ['IP', this.networkAdapters['ip_address'] || 'N/A'],
-      ['Version', this.system['version'] || 'N/A'],
-      ['Service Pack', this.system['service_pack'] || 'N/A']
+      ["Name", this.operatingSystems["Caption"] || "N/A"],
+      ["Version", this.operatingSystems["Version"] || "N/A"],
+      ["Service Pack", this.operatingSystems["Version"] || "N/A"],
     ];
   }
 
-  formatMacAddress = function (mac: any) {
-    if (mac) {
-      return mac.match(/.{1,2}/g).join(' ');
-    } else {
-      return 'N/A';
-    }
-
-  };
-
   downloadCsv() {
+    this.setData();
     let downloadCsvList = [];
-    downloadCsvList.push({ label: 'Computer', value: '' });
-    this.printSystem.forEach(element => {
+    downloadCsvList.push({ label: "Computer", value: "" });
+    this.printSystem.forEach((element) => {
       downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Motherboard', value: '' });
-    this.printMotherBoard.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Motherboard", value: "" });
+    this.printMotherBoard.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Processor', value: '' });
-    this.printProcessor.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Processor", value: "" });
+    this.printProcessor.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Memory', value: '' });
-    this.printMemory.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Mouse", value: "" });
+    this.printMouse.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Network Card', value: '' });
-    this.printNetwork.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Memory", value: "" });
+    this.printMemory.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Graphics Card', value: '' });
-    this.printGraphic.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Network Card", value: "" });
+    this.printNetwork.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Display', value: '' });
-    this.printDisplay.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Graphics Card", value: "" });
+    this.printGraphic.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Hard Disk', value: '' });
-    this.printDisk.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Display", value: "" });
+    this.printDisplay.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({ label: '', value: '' });
-    downloadCsvList.push({ label: 'Operating System', value: '' });
-    this.printOS.forEach(element => {
-      downloadCsvList.push({ label: element[0], value: element[1] })
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Hard Disk", value: "" });
+    this.printDisk.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    let fileName = 'Hardware Detail';
-    this.excelService.generateExcel(downloadCsvList, fileName, 'hardware');
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Keyboard", value: "" });
+    this.printKeyBoard.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
+    });
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Sound Card", value: "" });
+    this.printSoundCard.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
+    });
+    downloadCsvList.push({ label: "", value: "" });
+    downloadCsvList.push({ label: "Operating System", value: "" });
+    this.printOS.forEach((element) => {
+      downloadCsvList.push({ label: element[0], value: element[1] });
+    });
+    let fileName = "Hardware Detail";
+    this.excelService.generateExcel(downloadCsvList, fileName, "hardware");
   }
 
   getPdfData() {
-    let html = `
+    return new Promise((resolve, reject) => {
+      this.setData();
+      let html =
+        `
     <style>
     * {
       padding: 0;
@@ -283,13 +571,23 @@ export class HardwareComponent implements OnInit {
         <thead style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
-              <img src="/file/${localStorage.getItem('imId')}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+              <img src="/file/${localStorage.getItem(
+          "imId"
+        )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
             <th style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
-               <div class="reports-head" style="width:585px;text-align:center;color: $primary-2;margin-left:-105px;">
-                    <p style="margin:0;line-height:1.2;color:$primary-2;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` + localStorage.getItem('currentCompanyName') + ` - Hardware Summary Report</p>
-                    <p style="line-height:1.5;color:$primary-2;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` + this.deviceName + ` hardware installed (9 items)</p>
-                    <p style="margin:0;line-height:1;color:$gray-800--old;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` + moment(new Date()).format('LL') + ` @ ` + moment(new Date()).format('LT') + `</p>
+               <div class="reports-head" style="width:585px;text-align:center;color: #364656;margin-left:-105px;">
+                    <p style="margin:0;line-height:1.2;color:#364656;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` +
+        localStorage.getItem("currentCompanyName") +
+        ` - Hardware Summary Report</p>
+                    <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
+        this.computer.Name +
+        ` hardware installed (9 items)</p>
+                    <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
+        moment(new Date()).format("LL") +
+        ` @ ` +
+        moment(new Date()).format("LT") +
+        `</p>
                </div>
             </th>
           </tr>
@@ -303,13 +601,23 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Computer</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printSystem.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printSystem.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -317,13 +625,23 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Motherboard</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printMotherBoard.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printMotherBoard.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -331,27 +649,71 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Processor</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printProcessor.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printProcessor.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Memory</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Mouse</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printMemory.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printMouse.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
+            </table>
+            <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
+            <thead>
+              <tr>
+                  <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Memory</th>
+              </tr>
+            </thead>
+            <tbody>`;
+      this.printMemory.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -359,13 +721,23 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Network Card</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printNetwork.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printNetwork.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -373,13 +745,23 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Graphics Card</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printGraphic.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printGraphic.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -387,13 +769,23 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Display</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printDisplay.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printDisplay.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -401,27 +793,95 @@ export class HardwareComponent implements OnInit {
                       <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Hard Disk</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printDisk.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printDisk.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
               <thead>
                   <tr>
-                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: $primary-2;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Operating System</th>
+                      <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Keyboard</th>
                   </tr>
               </thead>
-              <tbody>`
-    this.printOS.forEach(element => {
-      html = html + `<tr style="width: 100%;">`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800--old;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-    });
-    html = html + `</tbody>
+              <tbody>`;
+      this.printKeyBoard.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
+                </table>
+                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Sound Card</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+      this.printSoundCard.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
+                </table>
+                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 100%;" colspan="2">Operating System</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+      this.printOS.forEach((element) => {
+        html = html + `<tr style="width: 100%;">`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` +
+          element[0] +
+          `</td>`;
+        html =
+          html +
+          `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` +
+          element[1] +
+          `</td></tr>`;
+      });
+      html =
+        html +
+        `</tbody>
             </table>
      </td>
    </tr>
@@ -432,9 +892,13 @@ export class HardwareComponent implements OnInit {
             <td style="width: 100%;" colspan="2">
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
-                  <td style="width: 33.33%;color: $gray-800--old;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` + localStorage.getItem('currentUser') + `</td>
-                  <td style="width: 33.33%;color: $gray-800--old;font-size:12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: center;vertical-align: middle;">` + localStorage.getItem('currentCompanyName') + `</td>
-                  <td style="width: 33.33%;color: $gray-800--old;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
+                  <td style="width: 33.33%;color: #4f5f79;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` +
+        localStorage.getItem("currentUser") +
+        `</td>
+                  <td style="width: 33.33%;color: #4f5f79;font-size:12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: center;vertical-align: middle;">` +
+        localStorage.getItem("currentCompanyName") +
+        `</td>
+                  <td style="width: 33.33%;color: #4f5f79;font-size: 12px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;line-height: 1.33;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
             </td>
@@ -443,54 +907,46 @@ export class HardwareComponent implements OnInit {
  </table>
         </div>
         </body>`;
-    let data = {
-      content: html,
-      id: '',
-      fileName: 'Hardware Summary Report',
-      orientation: 'PORTRAIT'
-    };
-    this.loading = true;
-    this.commonHttpServices.printPdf(data)
-      .pipe()
-      .subscribe(data => {
-        this.loading = false;
-        this.pdfUrl = data.url;
-      },
-        error => {
-          this.loading = false;
-          const statusError = error;
-          if (statusError && statusError.meta) {
-            this.toastr.error(statusError.meta.message);
-          } else {
-            this.toastr.error('Something went wrong please try again.');
+      let data = {
+        content: html,
+        id: "",
+        fileName: "Hardware Summary Report",
+        orientation: "PORTRAIT",
+      };
+      this.loading = true;
+      this.commonHttpServices
+        .printPdf(data)
+        .pipe()
+        .subscribe(
+          (data) => {
+            this.loading = false;
+            this.pdfUrl = data.url;
+            resolve(this.pdfUrl);
+          },
+          (error) => {
+            this.loading = false;
+            const statusError = error;
+            if (statusError && statusError.meta) {
+              this.toastr.error(statusError.meta.message);
+            } else {
+              this.toastr.error("Something went wrong please try again.");
+            }
+            reject(null);
           }
-        });
+        );
+    });
   }
 
   printPdf() {
-    window.open(this.pdfUrl, '_blank');
+    this.getPdfData().then(data => {
+      window.open(this.pdfUrl, "_blank");
+    })
   }
 
-  saveLabel() {
-    this.deviceName = this.deviceName.toUpperCase();
-    const data = {
-      agentId: this._id,
-      companyId: localStorage.getItem('company_id'),
-      newLabelValue: this.deviceName
-    }
-    this.hardwareService.saveDeviceName(data)
-      .pipe(first())
-      .subscribe(
-        resp => {
-          $('#head-label').text(this.deviceName);
-          let obj = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
-          obj.label = this.deviceName;
-          localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(obj));
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
+  getLinkSpeed(value) {
+    return ((value != 0 && value != undefined)) ? (Number(value / 1000000)) : 0;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

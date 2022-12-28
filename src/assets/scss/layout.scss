@@ -3,7 +3,7 @@
 /*** Angular one css conflcit resolved ***/
 
 body {
-  &.page-settings {
+  &.page-settings,.page-settings {
     .manage-tags {
       .heading {
         .qt-input-search {
@@ -549,7 +549,7 @@ body {
     }
 
     .main-container {
-      padding-top: 92px;
+      padding-top: 32px;
       background-color: $white;
     }
 
@@ -734,12 +734,6 @@ body {
       font-size: 12px;
       line-height: 15px;
       color: $gray-400;
-    }
-
-    .quote-send-modal {
-      .authenticaton-tab {
-        height: 504px;
-      }
     }
 
     .authentication__content,
@@ -1165,5 +1159,11 @@ body {
     margin-top: 32px;
     padding-top: 24px;
     border-top: 1px solid $gray-200;
+  }
+}
+
+.modal {
+  .modal-lg {
+    max-width: 870px !important;
   }
 }

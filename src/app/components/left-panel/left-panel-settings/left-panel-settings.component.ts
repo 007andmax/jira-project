@@ -6,6 +6,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-left-panel-settings',
@@ -25,6 +26,7 @@ export class LeftPanelSettingsComponent implements OnInit {
     private settingStateService: SettingStateService,
     private leftPanelStateService: LeftPanelStateService,
     private leftPanelService: LeftPanelService,
+    public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService) {
   }
 
@@ -44,7 +46,27 @@ export class LeftPanelSettingsComponent implements OnInit {
   public close() {
     this.open = false;
   }
-
+  public isSettingsPage(state) {
+    return (state === 'myprofile-component'
+      || state === 'manage-tags-component'
+      || state === 'products-settings'
+      || state === 'glnumber-component'
+      || state === 'company-profile-component'
+      || state === 'tech-component'
+      || state === 'email-setting-component'
+      || state === 'taxes-component'
+      || state === 'permission-manage-component'
+      || state === 'email-templete-component'
+      || state === 'integrations-component'
+      || state === 'invoice-ticket-component'
+      || state === 'commission-component'
+      || state === 'subscription-component'
+      || state === 'device-setting-component'
+      || state === 'ticket-settings'
+      || state === 'crm-settings'
+      || state === 'marketing-email'
+      || state === 'device-setting-component')
+  }
   openPanel() {
     this.onOpenPanel.emit(null);
   }

@@ -2,6 +2,7 @@
 
 body {
     &.ng7-device {
+        overflow: auto;
         padding: 0;
         margin: 0;
         @include body-font;
@@ -456,6 +457,15 @@ body {
                         &:hover {
                             @include opacity(0.9);
                         }
+                    }
+                    h5 {
+                        font-size: 12px;
+                        font-weight: 500;
+                        font-style: normal;
+                        line-height: 1.33;
+                        letter-spacing: normal;
+                        color: #ffffff;
+                        margin: 0;
                     }
                     .head-btn-info {
                         display: -webkit-flex;

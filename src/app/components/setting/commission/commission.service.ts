@@ -57,7 +57,12 @@ export class CommissionService {
       {
         commissionRate: commissionRate
       }
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Commission Rate Changed Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -65,7 +70,7 @@ export class CommissionService {
    * @param data 
    * @param setForOldExpenses 
    */
-  setAgreementRates(data: any, setForOldExpenses: boolean) {
+  setAgreementRates(data: any, setForOldExpenses: boolean, textNotification) {
     return this.http
       .post(
         `${this.SET_AGREEMENT_RATES_API}?setForOldExpenses=${setForOldExpenses}`,
@@ -89,8 +94,14 @@ export class CommissionService {
             }
           });
           return agreementsCommissions;
+        }),
+        tap(data => {
+          this.toastrService.success(textNotification);
+          this.appStateService.changeDetectorRef();
+          return data;
         })
-      );
+      )
+
   }
 
   /**
@@ -151,7 +162,12 @@ export class CommissionService {
       {
         commissionRate: commissionRate
       }
-    );
+    ).pipe(
+      tap(data => {
+        this.toastrService.success("Rate Changed Successfully.");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

@@ -14,7 +14,6 @@ const routes: Routes = [{
             path: 'hardware/:type/:id',
             loadChildren: './hardware/hardware.module#HardwareModule',
             canActivate: [PermissionTechUserService]
-
         },
         {
             path: 'software/:type/:id',
@@ -22,12 +21,12 @@ const routes: Routes = [{
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'service',
+            path: 'service/:type/:id',
             loadChildren: './services/services.module#ServicesModule',
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'antivirus',
+            path: 'antivirus/:type/:id',
             loadChildren: './antivirus/antivirus.module#AntivirusModule',
             canActivate: [PermissionTechUserService]
         },
@@ -37,27 +36,35 @@ const routes: Routes = [{
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'password',
+            path: 'password/:type/:id',
             loadChildren: './password/password.module#PasswordModule',
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'window',
+            path: 'window/:type/:id',
             loadChildren: './windows-update/windows-update.module#WindowsModule',
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'startup',
+            path: 'startup/:type/:id',
             loadChildren: './startup-programes/startup-programes.module#StartupModule',
             canActivate: [PermissionTechUserService]
-
         },
         {
-            path: 'file',
+            path: 'file/:type/:id',
             loadChildren: './file-explorer/file-explorer.module#FileModule',
             canActivate: [PermissionTechUserService]
+        },
+        {
+            path: 'windows/:type/:id',
+            loadChildren: './window-updates/window-updates.module#WindowUpdatesModule',
+            canActivate: [PermissionTechUserService]
+        },
+        {
+            path: 'processes/:type/:id',
+            loadChildren: './processes/processes.module#ProcessesModule',
 
-        }
+        },
     ]
 },];
 

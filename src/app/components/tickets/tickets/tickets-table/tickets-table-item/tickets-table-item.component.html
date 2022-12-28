@@ -22,14 +22,20 @@
             <span [ngClass]="getClassType()"></span>
         </div>
     </div>
-    <div
-        class="ticket-table__company">
-          <div
+    <div class="ticket-table__company">
+        <div
             class="ellipsis"
+            [ngClass]="{'qt-color-red-600':ticket.isCompanyDeleted}"
             [textContent]="getCompanyName()"
-          >
-          </div>
+        >
         </div>
+        <div
+            class="qt-color-red-600 qt-ml-8"
+            *ngIf="ticket.isCompanyDeleted"
+        >
+            Archived
+        </div>
+    </div>
     <div
         class="ticket-table__assignee"
         *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"

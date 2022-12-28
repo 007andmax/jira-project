@@ -2,10 +2,14 @@
     <tech-ticket-report *ngIf="report === 'tech-ticket'"></tech-ticket-report>
     <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
+    <report-device-summary *ngIf="report === 'report-device-summary'"></report-device-summary>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
+    <device-ip-summary-device-report *ngIf="report === 'device-ip-summary-device'"></device-ip-summary-device-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
     <software-summary-report *ngIf="report === 'software-summary'"></software-summary-report>
+    <software-summary-report1 *ngIf="report === 'software-summary-device'"></software-summary-report1>
     <hardware-summary-report *ngIf="report === 'hardware-summary'"></hardware-summary-report>
+    <hardware-summary-device-report *ngIf="report === 'hardware-summary-device'"></hardware-summary-device-report>
     <app-accounts-receivable *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
     <app-taxes-report *ngIf="report === 'byTaxes'"></app-taxes-report>
     <app-product-sales-report *ngIf="report === 'byProducts'"></app-product-sales-report>
@@ -16,5 +20,14 @@
     <app-service-report *ngIf="report === 'service-report'"></app-service-report>
     <app-tech-service-report *ngIf="report === 'tech-service'"></app-tech-service-report>
     <app-accounting-report *ngIf="report === 'accounting-report'"></app-accounting-report>
+    <report-device-warranty *ngIf="report === 'report-device-warranty'"></report-device-warranty>
+    <report-device-antivirus *ngIf="report === 'report-device-antivirus'"></report-device-antivirus>
+    <network-ip-report *ngIf="report === 'network-ip-report'"></network-ip-report>
+    <network-detail-report *ngIf="report === 'network-detail-report'"></network-detail-report>
+    <network-adapter-report *ngIf="report === 'network-adapter-report'"></network-adapter-report>
+    <report-device-deploymentwarranty *ngIf="report === 'report-device-deploymentwarranty'"></report-device-deploymentwarranty>
+    <report-device-processorram *ngIf="report === 'report-device-processorram'"></report-device-processorram>
+    <report-device-diskspace *ngIf="report === 'report-device-diskspace'"></report-device-diskspace>
+    <applicationbycompany-report *ngIf="report === 'applicationbycompany-report'"></applicationbycompany-report>
     <payments-report *ngIf="report === 'payments-report'"></payments-report>
 </div>

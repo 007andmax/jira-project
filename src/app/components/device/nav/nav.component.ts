@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonHttpServices } from './../_services/common_http.service';
 import { CommonServices } from './../_services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
 
   appTitle = 'quickHtml';
   currentUser = '';
@@ -20,37 +22,37 @@ export class NavComponent implements OnInit {
   deviceType = '';
   _id: string = '';
   type: string = '';
+  sub: Subscription = new Subscription();
   constructor(private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     public router: Router,
     public companiesStateService: CompaniesStateService,
+    private usersStateService: UsersStateService,
     public commonServices: CommonServices) { }
+
 
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.deviceType = this.type;
     // this.deviceType = 'printer';
-    this.getCurrentUser();
-    this.getCurrentCompany();
+    if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.getCurrentUser(data);
+    });
+    this.sub.add(getOnGetCurrentuser);
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(data => {
+      this.getCurrentCompany(data);
+    });
+    this.sub.add(onCurrentCompany);
   }
 
-  getCurrentUser() {
-
-    this.commonHttpServices.getCurrentUser()
-      .pipe(first())
-      .subscribe(
-        resp => {
-
-          this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
-          localStorage.setItem('currentUser', this.currentUser);
-          localStorage.setItem('imId', resp.avatar === null ? '' : resp.avatar.cropped.id);
-          this.imgUrl = resp.avatar === null ? '' : `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
+  getCurrentUser(resp) {
+    this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
+    localStorage.setItem('currentUser', this.currentUser);
+    localStorage.setItem('imId', resp.avatar === null ? '' : resp.avatar.cropped.id);
+    this.imgUrl = resp.avatar === null ? '' : `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
   }
   goToDashboard() {
     this.router.navigate(
@@ -64,23 +66,49 @@ export class NavComponent implements OnInit {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/software/${this.type}/${this._id}`]);
   }
+  goToStartProgrames() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/startup/${this.type}/${this._id}`]);
+  }
+  goToServices() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/service/${this.type}/${this._id}`]);
+  }
+  goToAntivirus() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/antivirus/${this.type}/${this._id}`]);
+  }
   goToTerminal() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/terminal/${this.type}/${this._id}`]);
   }
-  getCurrentCompany() {
+  goToWindowUpdate() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/window/${this.type}/${this._id}`]);
+  }
+  goToFileExplorer() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/file/${this.type}/${this._id}`]);
+  }
+  goToPasswords() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/password/${this.type}/${this._id}`]);
+  }
+  goToWindowUpdates() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/windows/${this.type}/${this._id}`]);
+  }
 
-    this.commonHttpServices.getCurrentCompany()
-      .pipe(first())
-      .subscribe(
-        resp => {
-          this.currentCompany = resp.name;
-          localStorage.setItem('currentCompanyName', this.currentCompany);
-        },
-        error => {
-          this.toastr.error('Something went wrong please try again.');
-        }
-      );
+  goToProcesses() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/processes/${this.type}/${this._id}`]);
+  }
+  getCurrentCompany(resp) {
+    this.currentCompany = resp.name;
+    localStorage.setItem('currentCompanyName', this.currentCompany);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

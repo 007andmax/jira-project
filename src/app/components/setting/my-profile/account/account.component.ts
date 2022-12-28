@@ -20,7 +20,7 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 })
 export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
-  authenticationTypes = [new TitleListType("No authentication", "DISABLED"),
+  authenticationTypes = [new TitleListType("Password only", "DISABLED"),
   new TitleListType("Basic two-factor authentication", "BASIC"),
   new TitleListType("Secure two-factor authentication - by email", "SECURE"),
   new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];

@@ -11,7 +11,7 @@ export class SoftwarePipe implements PipeTransform {
     args = args.toLowerCase();
 
     return items.filter(it => {
-      return it.softName.toLowerCase().includes(args);
+      return it.DisplayName.toLowerCase().includes(args);
     });
   }
 }

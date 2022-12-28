@@ -4,6 +4,8 @@
   padding: 24px;
   background-color: $background;
   min-height: calc(100vh - #{$header-height});
+  min-width: fit-content;
+  min-width: -moz-fit-content;
 
   @media (max-width: 767px) {
     padding: 8px 0;
@@ -69,7 +71,8 @@
     }
     &.--sticky {
       position: sticky;
-      top: $header-height;
+      //top: $header-height;
+      top: 0;
       padding-top: 24px;
       margin-top: -24px;
 
@@ -147,7 +150,7 @@
   &__header-thead-container,
   &__body-table-container {
     width: 100%;
-    overflow: auto;
+    //overflow: auto; // TODO check this style
   }
   &__header-thead-container {
     @media (max-width: 767px) {
@@ -220,7 +223,6 @@
       font-size: 13px;
       outline: none;
       position: relative;
-
       &::placeholder {
         color: $gray-600--old;
         opacity: 1;

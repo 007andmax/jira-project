@@ -1,0 +1,16 @@
+@import "./src/assets/styles/variable";
+
+.disabled {
+    background: $gray-200--old;
+    color: $gray-600--old;
+
+    &::placeholder {
+        color: $gray-600--old;
+    }
+}
+
+.icon__active_subscription {
+    background-size: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,152 @@
+.table-wrap {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    .company{
+      width: 14% !important;
+      padding: 0 18px 0 18px;
+    }
+    .device {
+      width: 25% !important;
+      padding: 0 18px 0 18px;
+      background-color: white;
+      height: 40px;
+    }
+    .domain {
+      width: 14% !important;
+      padding: 0px;
+    }
+    .ipAddress {
+      width: 15% !important;
+      padding: 0px;
+    }
+    .subnet {
+      width: 10% !important;
+      padding: 0px;
+    }
+    .gateway {
+      width: 15% !important;
+      padding: 0px;
+    }
+    .externalIP {
+      width: 21% !important;
+      padding: 0px;
+    }
+    thead {
+      th {
+        background-color: #f4f6f8 !important;
+      }
+    }
+  }
+}
+
+.device-header {
+  text-align: center;
+  padding: 75px 0px 10px 0px;
+  h6 {
+    font-size: 12px !important;
+  }
+}
+
+.network-ip-report-table {
+  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+  }
+  tr {
+    td {
+      background: #ffffff;
+      padding: 0 8px 0 8px;
+      height: 48px;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+      vertical-align: middle;
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.qt-btn {
+  &.--outline-blue {
+    height: 40px !important;
+    background-color: #ffffff !important;
+    margin-right: 260px !important;
+  }
+  &.--outline-white {
+    background-color: #edf2f6 !important;
+  }
+}
+
+.product-report-btn {
+  border-radius: 0px !important;
+}
+
+.summaryemail {
+  right: 3px !important;
+  top: 9px !important;
+}
+
+.summaryprint {
+  right: 0px !important;
+  top: 9px !important;
+}
+.summarydownload {
+  right: 8px !important;
+  top: 9px !important;
+}
+
+.header-close {
+  height: 24px;
+  width: 24px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: 7px 0px 0px 0px;
+}
+
+.run-report-content {
+  border-bottom: none !important;
+  margin-top: 0px !important;
+  padding-left: 24px !important;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  height: 60px;
+  padding-top: 11px;
+  border-left: 1px solid #edf0f2;
+}
+
+.run-report-content {
+  &.left {
+    width: 96%;
+  }
+}
+
+.run-report-content {
+  &.right {
+    width: 4%;
+  }
+}
+
+.report-network-ip-table{
+  background-color: #f4f6f8 !important;
+}
+
+.tablepadding{
+  padding-right: 20px;
+  padding-left: 20px
+}

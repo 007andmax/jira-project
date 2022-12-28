@@ -11,13 +11,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PermissionManageComponent } from './permission-manage/permission-manage.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-reassign.component';
 
 
 
 
 @NgModule({
     declarations: [TechUsersSettingsComponent,
-        PermissionManageComponent
+        PermissionManageComponent,
+        TechUsersReassignComponent
     ],
     imports: [
         CommonModule,
@@ -33,5 +35,6 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         DropDownModule
 
     ],
+    entryComponents: [TechUsersReassignComponent]
 })
 export class TechUsersSettingsModule { }

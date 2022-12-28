@@ -8,6 +8,7 @@
             <table class="qt-table-modern qt-page-list__body-tbody ticket-table company-tickets-table">
                 <tbody
                     infiniteScroll
+                    [infiniteScrollContainer]="container"
                     [infiniteScrollDistance]="2"
                     [infiniteScrollThrottle]="15"
                     [infiniteScrollDisabled]="infiniteScrollDisabled"

@@ -1,0 +1,44 @@
+.--sticky {
+  margin-top: 0px !important;
+  padding: 24px 24px 0px 24px !important;
+}
+.search-clear {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 12px;
+  top: calc(50% - 6px);
+  cursor: pointer;
+}
+.search-container {
+  position: relative;
+}
+.report-page {
+width: 100%;
+max-width: unset;
+}
+
+.outsideheader{
+  padding: 30px;
+  background-color:#edf2f6;
+  padding-right: 17px;
+  padding-left: 16px;
+}
+
+.reports-all{
+  border-radius: 15px;
+   height: auto !important;
+  padding-top: 32px !important;
+  padding-left: 1px;
+}
+
+.qt-page-list__search input{
+  width: 360px !important;
+  box-shadow: 0 1px 1px 0 #e9e9e9;
+}
+
+
+
+
+
+

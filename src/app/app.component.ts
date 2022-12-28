@@ -23,6 +23,7 @@ import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
 import { TagsStateService } from './states/tags/tags-state.service';
 import { DocumentsStateService } from './states/documents/documents-state.service';
 import { AppStateService } from './states/app/app-state.service';
+import { KafkaStateService } from './states/kafka/kafka-state.service';
 import { CrmStateService } from './states/crm/crm-state.service';
 import { MarketingEmailStateService } from './states/marketing-email/marketing-email-state.service';
 import { PermissionsService } from './services/permissions/permissions.service';
@@ -30,6 +31,8 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { SupportPageCategoriesStateService } from './components/super-admin/state/support-page-categories/support-page-categories-state.service';
 import { NoteStateService } from './states/note/note-state.service';
 import { EmailTemplateStateService } from './states/email-template/email-template-state.service';
+import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -57,6 +60,7 @@ export class AppComponent implements OnInit {
   PAGE_DEVICE = PAGE_DEVICE;
   state: string = '';
   currentUser: CurrentUser;
+  sub: Subscription = new Subscription();
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -84,6 +88,7 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
+    private kafkaStateService: KafkaStateService,
     private appRef: ApplicationRef,
     private permissionsService: PermissionsService,
     private appStateService: AppStateService,
@@ -99,7 +104,7 @@ export class AppComponent implements OnInit {
    * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary')) {
+    if (window.location.href.includes('/device') && !window.location.href.includes('/devices') && !window.location.href.includes('/device-ip-summary-device') && !window.location.href.includes('/deviceSetting')) {
       this.main_page = PAGE_DEVICE;
     } else {
       this.main_page = PAGE_MAIN;
@@ -107,6 +112,7 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
+      if (this.currentUser.twoFactorAuthType === "GOOGLE_SECURE" && !this.currentUser.userTOTP.confirmed) this.onCheckGoogleAuthenticator();
       if (this.appService.getIsInit()) return;
       if (data.role !== "SUPER_ADMIN") {
         this.devicesState.onInit();
@@ -120,6 +126,7 @@ export class AppComponent implements OnInit {
         this.documentsStateService.onInit();
         this.crmStateService.onInit();
         this.marketingEmailStateService.onInit();
+        this.kafkaStateService.onInit();
         this.noteStateService.onInit();
         this.emailTemplateStateService.onInit();
         if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
@@ -133,6 +140,65 @@ export class AppComponent implements OnInit {
         this.showPreloader = false;
         this.cd.detectChanges();
       }
+      const selectTarget = (fromElement, selector) => {
+        if (!(fromElement instanceof HTMLElement)) {
+          return null;
+        }
+        return fromElement.querySelector(selector);
+      };
+      const resizeData = {
+        tracking: false,
+        startWidth: null,
+        startCursorScreenX: null,
+        handleWidth: 10,
+        resizeTarget: null,
+        parentElement: null,
+        maxWidth: null,
+      };
+
+      if (localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+      if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+      if (this.appService.isMobile || this.currentUser.role === "SUPER_ADMIN" || this.state === 'help-center') {
+        $("#aside-left-panel").width("auto");
+      }
+      $(document.body).on('mousedown', '.resize-handle--x', null, (event) => {
+        if (event.button !== 0) {
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        const handleElement = event.currentTarget;
+        if (!handleElement.parentElement) {
+          console.error(new Error("Parent element not found."));
+          return;
+        }
+        // Use the target selector on the handle to get the resize target.
+        const targetSelector = handleElement.getAttribute('data-target');
+        const targetElement = selectTarget(handleElement.parentElement, targetSelector);
+        if (!targetElement) {
+          console.error(new Error("Resize target element not found."));
+          return;
+        }
+        resizeData.startWidth = $(targetElement).outerWidth();
+        resizeData.startCursorScreenX = event.screenX;
+        resizeData.resizeTarget = targetElement;
+        resizeData.parentElement = handleElement.parentElement;
+        resizeData.maxWidth = $(handleElement.parentElement).innerWidth() - resizeData.handleWidth;
+        resizeData.tracking = true;
+      });
+      $(window).on('mousemove', null, null, (event) => {
+        if (resizeData.tracking) {
+          const cursorScreenXDelta = event.screenX - resizeData.startCursorScreenX;
+          const newWidth = Math.min(resizeData.startWidth + cursorScreenXDelta, resizeData.maxWidth);
+          if (newWidth >= 280 && newWidth <= 560) $(resizeData.resizeTarget).outerWidth(newWidth);
+        }
+      });
+      $(window).on('mouseup', null, null, (event) => {
+        if (resizeData.tracking) {
+          resizeData.tracking = false;
+          localStorage.setItem("width-left-aside", String($(resizeData.resizeTarget).width()));
+        }
+      });
     })
 
     //  this.userService.getCurrentUser();
@@ -155,6 +221,11 @@ export class AppComponent implements OnInit {
 
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (!this.appService.isMobile && this.state !== 'help-center') {
+        if (data) $("#aside-left-panel").width("");
+        if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+        if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+      }
       this.toggleLeftPanel = data;
       this.cd.detectChanges();
     })
@@ -195,6 +266,7 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
+      if (!this.currentUser) return;
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
         this.router.navigate(
           [`${data.name.replaceAll(' ', '')}/tickets/`]);
@@ -212,6 +284,16 @@ export class AppComponent implements OnInit {
     this.leftPanelStateService.onChangeState.subscribe(data => {
       this.state = data;
     })
+  }
+  onCheckGoogleAuthenticator() {
+    const modalRef = this.modalService.open(GoogleAuthenticatorComponent, { windowClass: 'quote-send-modal page-settings', backdrop: 'static', keyboard: false });
+    /* let onReset = modalRef.componentInstance.onReset.subscribe(data => {
+     })
+     let onSetQrCode = modalRef.componentInstance.onSetQrCode.subscribe(data => {
+ 
+     })
+     this.sub.add(onSetQrCode);
+     this.sub.add(onReset);*/
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');

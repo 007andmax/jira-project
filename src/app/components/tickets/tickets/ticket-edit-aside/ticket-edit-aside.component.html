@@ -35,6 +35,7 @@
                                     [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
                                     [position]="'bottom'"
                                     #userCompanyTooltip
+                                    [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company) && !getCompany(ticketProfile.company.id).isUnknown"
                                 ></app-dynamic-tooltip>
                                 <span
                                     class="pointer"
@@ -45,6 +46,12 @@
                                     (mouseenter)="showTooltipCompany(userCompanyTooltip,$event)"
                                     (mouseleave)="userCompanyTooltip.hide()"
                                 ></span>
+                                <span
+                                    class="qt-color-red-600"
+                                    *ngIf="ticketProfile.company.isCompanyDeleted"
+                                >
+                                    - Archived
+                                </span>
                                 <span
                                     class="pointer"
                                     [textContent]="' - ' + getNameCreateUser()"

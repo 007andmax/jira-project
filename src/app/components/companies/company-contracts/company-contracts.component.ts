@@ -11,6 +11,7 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
   companyContracts: Company = null;
   showNotificationReview: boolean = false;
   ngOnInit() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.leftPanelStateService.changeStateWithoutNavigate("company-contracts");
     let id = this.activateRoute.snapshot.params['id'];
     if (id) this.companiesStateService.setCompanyRoutingId(id);

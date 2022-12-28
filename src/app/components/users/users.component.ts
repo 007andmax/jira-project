@@ -15,7 +15,7 @@ import { MODE_MARKETING_USERS_LIST, MODE_USERS_LIST, TYPE_LIST_ALL_USERS } from 
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { UserCustomSubscription } from './class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UserDefaultSubscription } from './class/user-default-subscription';
@@ -47,6 +47,7 @@ export class UsersComponent implements OnInit {
   sub: Subscription = new Subscription();
   industries: Array<CrmCompanyIndustry> = [];
   listCustomSubscription: Array<MarketingSubscriptionType> = [];
+  container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -61,12 +62,12 @@ export class UsersComponent implements OnInit {
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
     this.filter = this.usersStateService.getFilter();
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      window.scrollTo(0, 0);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       if (this.showArchivedUsers != this.usersStateService.getShowArchivedCompanies()) {
         this.showArchivedUsers = JSON.parse(JSON.stringify(this.usersStateService.getShowArchivedCompanies()));
         this.filter.setClientType(null);
@@ -185,15 +186,11 @@ export class UsersComponent implements OnInit {
     this.setDefaultScoll();
   }
   private onArchiveUsers(ids) {
-
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
-      /* if (!this.showArchivedUsers && this.filter.getClientType()) {
-         let index = this.users.findIndex(item => item.id === id);
-         if (index > -1) this.users.splice(index, 1);
-       }*/
-
-    })
-    this.userListService.addSubscription(archiveUser);
+    forkJoin(
+      ids.map(item => this.usersService.onArchiveUsers(item))
+    )
+      .subscribe(res => {
+      });
   }
   setIdDetailUser(data) {
     this.idDetailUser = data;
@@ -254,9 +251,7 @@ export class UsersComponent implements OnInit {
     this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
   }
   private onDeArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let Dearchiveusers = this.usersService.onDeArchiveUsers(ids).subscribe(data => {
+    let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
       if (this.showArchivedUsers) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
@@ -266,9 +261,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
-    let ids = [];
-    ids.push(id);
-    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+    let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
       if (!this.showArchivedUsers && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

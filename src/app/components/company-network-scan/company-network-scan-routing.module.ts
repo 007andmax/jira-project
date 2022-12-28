@@ -4,7 +4,6 @@ import { CompanyNetworkScanComponent } from './company-network-scan.component';
 
 
 
-
 const routes: Routes = [{ path: '', component: CompanyNetworkScanComponent }];
 
 @NgModule({

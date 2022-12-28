@@ -1,22 +1,47 @@
 @mixin linear-gradient($direction, $color-stops...) {
     // Direction has been omitted and happens to be a color-stop
-    @if is-direction($direction) == false {
-      $color-stops: $direction, $color-stops;
-      $direction: 180deg;
+    @if is-direction($direction)==false {
+        $color-stops: $direction, $color-stops;
+        $direction: 180deg;
     }
-  
     background: nth(nth($color-stops, 1), 1);
-    background: -webkit-linear-gradient(
-      legacy-direction($direction),
-      $color-stops
-    );
+    background: -webkit-linear-gradient( legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
-  }
-  
-  @mixin rotate($degrees) {
+}
+
+@mixin rotate($degrees) {
     -webkit-transform: rotate($degrees);
     -moz-transform: rotate($degrees);
     -ms-transform: rotate($degrees);
     -o-transform: rotate($degrees);
-    transform: rotate($degrees); 
+    transform: rotate($degrees);
+}
+
+@mixin translate($x, $y) {
+    -webkit-transform: translate($x, $y);
+    -ms-transform: translate($x, $y); // IE9 only
+    -o-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+@mixin transition-transform($transition...) {
+  -webkit-transition: -webkit-transform $transition;
+     -moz-transition: -moz-transform $transition;
+       -o-transition: -o-transform $transition;
+          transition: transform $transition;
+}
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+          box-shadow: $shadow;
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    display: table; // 2
+    content: " "; // 1
   }
+  &:after {
+    clear: both;
+  }
+}

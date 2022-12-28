@@ -36,7 +36,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').addClass('page-settings');
     $('body').removeClass('backMenu');
-    this.getCategories(this.inventoryStateService.getCategories());
+    if (this.inventoryStateService.getCategories().length > 0) this.getCategories(this.inventoryStateService.getCategories());
     this.inventoryStateService.onGetCategories.subscribe(data => {
       this.getCategories(data);
     })
@@ -51,7 +51,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
+    this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })

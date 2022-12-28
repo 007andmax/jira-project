@@ -5,6 +5,7 @@ export class CompanyproductsFilter {
     new FilterListTop('client', ''),
     new FilterListTop('mfg', ''),
     new FilterListTop('description', ''),
+    new FilterListTop('serialNumber', ''),
     new FilterListTop('ticketNumber', ''),
     new FilterListTop('invoiceNumber', ''),
     new FilterListTop('purchaseCost', ''),
@@ -73,6 +74,16 @@ export class CompanyproductsFilter {
                     lines.reverse();
                 }
             }
+            if (field === 'serialNumber') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                    this.onFilterSerialNumber(lines);
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                    lines.reverse();
+                }
+            }
             if (field === 'invoiceNumber') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
@@ -122,6 +133,10 @@ export class CompanyproductsFilter {
     private onFilterTicketNumber(lines) {
         lines.sort((a, b) => (a.ticketNumber.toLowerCase() > b.ticketNumber.toLowerCase()) ?
             1 : ((b.ticketNumber.toLowerCase() > a.ticketNumber.toLowerCase()) ? -1 : 0));
+    }
+    private onFilterSerialNumber(lines) {
+        lines.sort((a, b) => (a.serialNumber.toLowerCase() > b.serialNumber.toLowerCase()) ?
+            1 : ((b.serialNumber.toLowerCase() > a.serialNumber.toLowerCase()) ? -1 : 0));
     }
     private onFilterDescription(lines) {
         lines.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
