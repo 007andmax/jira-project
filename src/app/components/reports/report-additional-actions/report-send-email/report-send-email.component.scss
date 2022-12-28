@@ -184,10 +184,3 @@
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
-/deep/ .send-email-report {
-    draft-email-user-recipients {
-        .col-md-12 {
-            margin-top: 0px;
-        }
-    }
-}

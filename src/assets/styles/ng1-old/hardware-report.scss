@@ -175,90 +175,23 @@
 //  border-bottom: 1px solid $gray-400--old;
 //}
 
-//.product-list-ticket li.content-product-list-ticket [class*=col-md-] {
-//  height: auto;
-//  word-wrap: break-word;
-//}
-//
-//.product-list-ticket li.remote-desktop-connections [class*=col-md-] {
-//  word-wrap: normal;
-//}
-//
-//.product-list-ticket [class*=col-md-] {
-//  padding: 19px 6px;
-//  line-height: 30px;
-//}
-
-.hardware-summary .product-list-ticket [class*=col-md-] {
-  line-height: 15px;
-}
-
 .hardware-summary .top-product-list-ticket {
   height: auto;
-}
-
-.hardware-summary .top-product-list-ticket [class*=col-md-],
-.hardware-summary .product-list-ticket [class*=col-md-] {
-  padding: 25px 6px;
 }
 
 .hardware-summary .product-list-ticket li.content-product-list-ticket {
   min-height: auto;
 }
 
-//.product-list-ticket [class*=col-md-].detailed-by-customer { // TODO check this style
-//  padding: 6px;
-//}
-
-//.top-product-list-ticket [class*=col-md-] { // TODO check this style
-//  padding: 10px 6px 17px;
-//}
-
 .product-list-ticket li.product-list-ticket-grid {
   cursor: default;
 }
-
-.product-list-ticket-deposit .col-md-3 {
-  width: 46%;
-}
-
-
-.con-col .col-md-2 {
-  width: 16%;
-}
-
-.con-col .col-md-3 {
-  width: 18%;
-}
-
-.con-col .col-md-1 {
-  width: 10%;
-}
-
 
 .product-report-total-sales p {
   float: right;
   font-size: 16px;
   padding: 15px 0;
   text-align: right;
-}
-
-.product-report-total-sales.acc-col .col-md-2 {
-  width: 15.3%;
-}
-
-.product-report-total-sales .col-md-1 span,
-.product-report-total-sales .col-md-2 span {
-  font-size: 16px;
-}
-
-.product-report-total-sales .col-md-1,
-.product-report-total-sales .col-md-2 {
-  line-height: 18px;
-}
-
-.product-report-total-sales .col-md-2 {
-  width: 10.1%;
 }
 
 // New Style for report
@@ -470,11 +403,12 @@
   position: fixed;
   bottom: 0;
   z-index: -1;
-  .col-md-3  {
+  &__total  {
     bottom: 5px;
     width: 100%;
     margin-left: auto;
     text-align: right;
+    padding: 5px 0;
   }
 }
 .product-list__ticket-customer-sales-report {
@@ -632,11 +566,6 @@
   cursor: pointer;
 }
 
-.top-product-list-ticket .col-md-2,
-.top-product-list-ticket .col-md-1 {
-  position: relative;
-}
-
 .top-product-list-ticket i {
   position: absolute;
   top: 10px;
@@ -696,26 +625,33 @@
   background-color: $background;
   display: flex;
   justify-content: center;
+  row-gap: 30px;
+  column-gap: 30px;
+
+  .report-column {
+    width: 270px;
+
+    .report {
+      background-color: $white;
+      border-radius: 2px 3px 3px 2px;
+      margin: 0 30px 30px 0;
+      width: 100%;
+      height: 186px;
+      padding: 30px 30px;
+      transition: all .3s;
+      position: relative;
+
+      &:hover {
+        box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    &:last-child .report {
+      margin-right: 0;
+    }
+  }
 }
 
-.reports-all .col-sm-4 {
-  width: 300px;
-}
-
-.reports-all .col-sm-4 .report {
-  background-color: $white;
-  border-radius: 2px 3px 3px 2px;
-  margin: 0 30px 30px 0;
-  width: 100%;
-  height: 186px;
-  padding: 30px 30px;
-  transition: all .3s;
-  position: relative;
-}
-
-.reports-all .col-sm-4 .report:hover {
-  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
-}
 
 .reports-all .report p {
   @include h6__sb;
@@ -731,10 +667,6 @@
   position: absolute;
   bottom: -7px;
   left: 0;
-}
-
-.reports-all .col-sm-4:last-child .report {
-  margin-right: 0;
 }
 
 .reports-all .report img {
@@ -1087,10 +1019,6 @@
   font-weight: 400;
 }
 
-.details-content [class*=col-md-] {
-  line-height: 20px;
-}
-
 .details-header > div,
 .details-content > div {
   padding: 0 6px !important;
@@ -1151,10 +1079,6 @@
 @media screen and (max-width: 1600px) {
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -60px;
-  }
-
-  .product-list-ticket-deposit .col-md-3 {
-    width: 45%;
   }
 }
 

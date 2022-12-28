@@ -705,26 +705,26 @@ documents-edit-info {
       }
     }
   }
-  .service-tab-content,
-  .product-tab-content {
-    &__item {
-      float: left;
-      position: relative;
-      &.separator-hr:not(:last-child) {
-        margin-bottom: 22px;
-        padding-bottom: 26px;
-        &:after {
-          position: absolute;
-          content: "";
-          left: 0;
-          bottom: 0;
-          height: 1px;
-          width: 100%;
-          background: $gray-200;
-        }
-      }
-    }
-  }
+  //.service-tab-content, // TODO check this style
+  //.product-tab-content {
+  //  &__item {
+  //    float: left;
+  //    position: relative;
+  //    &.separator-hr:not(:last-child) {
+  //      margin-bottom: 22px;
+  //      padding-bottom: 26px;
+  //      &:after {
+  //        position: absolute;
+  //        content: "";
+  //        left: 0;
+  //        bottom: 0;
+  //        height: 1px;
+  //        width: 100%;
+  //        background: $gray-200;
+  //      }
+  //    }
+  //  }
+  //}
   .service-tab-content,
   .product-tab-content {
     .icon__remove {
@@ -1663,6 +1663,10 @@ app-quotes-item {
 //}
 .companies-page {
   background: $background;
+
+  .new-companies-content__header--search .btn-new {
+    height: 36px;
+  }
 
   .qt-page-list__header-filters {
     align-items: flex-start;

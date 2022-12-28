@@ -12,10 +12,7 @@ companies-filter {
   }
 }
 company-associate {
-  //> .col-md-12, // TODO check this style
-  > .filter-tags-body,
-  .col-md-6 {
-    //margin-top: 40px; // TODO check this style
+  > .filter-tags-body {
     .mat-form-field {
       width: 100%;
     }

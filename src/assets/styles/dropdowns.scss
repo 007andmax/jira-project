@@ -323,16 +323,6 @@
             color: $primary-2;
             @include сaption-l;
           }
-          .col-md-12 {
-            span {
-              font-size: 11px;
-              color: $gray-600--old;
-              word-break: break-all;
-              &:first-child {
-                margin-right: 15px;
-              }
-            }
-          }
         }
       }
     }

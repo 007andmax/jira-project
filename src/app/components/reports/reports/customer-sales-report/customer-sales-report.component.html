@@ -49,7 +49,7 @@
                 class="product-report-detail-customer clearfix"
                 *ngIf="customerSalesReport.type === 'DETAILED'"
             >
-                <div class="col-md-3 pull-right">
+                <div class="product-report-detail-customer__total">
                     <strong>
                         Total Sales:
                         <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span>
