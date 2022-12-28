@@ -39,10 +39,13 @@ export class DownloadAgentComponent implements OnInit {
     document.body.removeChild(textArea);
   }
   downloadAgent() {
-    var link = document.createElement('a');
-    link.target = "_blank";
-    link.href = `data/downloadAgentV2?companyId=${this.downloadAgentStateService.getCompany().id}`;
-    link.click();
+    this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
+      var link = document.createElement('a');
+      link.target = "_blank";
+      link.href = data.link;
+      link.download = data.link.substring(data.link.lastIndexOf('/') + 1, data.link.length);;
+      link.click();
+    })
   }
   downloadDemoAgent() {
     var link = document.createElement('a');
