@@ -1,6 +1,14 @@
+@import "./src/assets/styles/variable";
+
 .track-and-bill-table__service-name {
     position: relative;
     .qt-tooltip-error {
         max-width: fit-content !important;
     }
+}
+td.track-and-bill-table__service-name {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: $gray-900;
 }

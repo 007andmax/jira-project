@@ -10,7 +10,7 @@
         <div class="qt-df qt-pos-rel address-block">
             <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
                 <div class="qt-input-block">
-                    <label class="qt-lh-154">Customer Name</label>
+                    <div class="qt-input-block__label">Customer Name</div>
                     <app-drop-down
                         class="search-company invoices-company-filter"
                         [placeholder]="'Select Company'"
@@ -26,7 +26,7 @@
         </div>
         <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-16">
             <div class="qt-input-block qt-mr-16 qt-w100">
-                <label class="qt-lh-154">Payment Date</label>
+                <div class="qt-input-block__label">Payment Date</div>
                 <app-date-picker
                     [formatDate]="formatDate"
                     [editMode]="true"
@@ -37,7 +37,7 @@
                 ></app-date-picker>
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">
-                <label class="qt-lh-154">Amount Received</label>
+                <div class="qt-input-block__label">Amount Received</div>
                 <div
                     class="qt-df"
                     [ngClass]="{'--input-error':!validate.getAmountReceived()}"
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">
-                <label class="qt-lh-154">Payment Mode</label>
+                <div class="qt-input-block__label">Payment Mode</div>
                 <app-drop-down
                     class="search-company invoices-status-filter"
                     [placeholder]="'Select Status'"
@@ -74,7 +74,7 @@
                 ></app-drop-down>
             </div>
             <div class="qt-input-block qt-w100">
-                <label class="qt-lh-154">Reference#</label>
+                <div class="qt-input-block__label">Reference#</div>
                 <input
                     type="text"
                     [(ngModel)]="editPayment.reference"
@@ -154,7 +154,7 @@
                     </div>
                     <div>
                         <textarea
-                            class="summary-info__textarea qt-textarea"
+                            class="summary-info__textarea qt-input-block__textarea qt-input-block__textarea--lg"
                             [(ngModel)]="editPayment.note"
                             placeholder="Type your custom note here"
                             appTextArea

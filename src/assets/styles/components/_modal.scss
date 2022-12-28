@@ -27,11 +27,6 @@
     display: flex;
     justify-content: flex-end;
   }
-
-  .qt-modal-bot-error {
-    font-size: 12px;
-    color: $error;
-  }
 }
 .quote-send-modal,.lock-screen-modal {
   .modal-dialog {

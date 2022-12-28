@@ -1,10 +1,19 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/dropdown";
+
 .add-tax-dropdown {
+  @include dropdown-menu;
+  display: block;
   width: 388px;
   top: 100%;
   transform: translateY(14px);
-  padding: 29px 24px;
+  max-height: initial;
+  overflow: visible;
   position: absolute;
   z-index: 1000;
+}
+.add-tax-dropdown__category {
+  padding: 24px;
 }
 .add-tax-dropdown .add-tax-label {
   font-size: 13px;

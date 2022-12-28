@@ -1,26 +1,28 @@
-<div class="qt-df qt-mb-16">
-    <div class="qt-w50 qt-input-block qt-mr-16">
-        <company-drop-down
-            #companiesDP
-            [title]="'Company Name'"
-            [placeholder]="'Select Company'"
-            [list]="companies"
-            [validate]="validateCompany"
-            [errorMessage]="'Company is required'"
-            [field]="'name'"
-            [search]="true"
-            [change]="true"
-            (onSelectedItem)="selectCompany($event)"
-        ></company-drop-down>
-    </div>
+<div class="qt-inputs-row">
+  <div class="qt-input-block qt-f50">
+    <company-drop-down
+      #companiesDP
+      [title]="'Company Name'"
+      [placeholder]="'Select Company'"
+      [list]="companies"
+      [validate]="validateCompany"
+      [errorMessage]="'Company is required'"
+      [field]="'name'"
+      [search]="true"
+      [change]="true"
+      (onSelectedItem)="selectCompany($event)"
+    ></company-drop-down>
+  </div>
+  <div class="qt-input-block qt-f50">
     <app-drop-down
-        [title]="'Contract Type'"
-        [placeholder]="'Contract Type'"
-        [widthInput]="'280px'"
-        [isBlockClear]="true"
-        [editItem]="selectedType"
-        [list]="listsTypes"
-        [field]="'title'"
-        (onSelectedItem)="onSelectType($event)"
+      [title]="'Contract Type'"
+      [placeholder]="'Contract Type'"
+      [isBlockClear]="true"
+      [editItem]="selectedType"
+      [list]="listsTypes"
+      [field]="'title'"
+      (onSelectedItem)="onSelectType($event)"
     ></app-drop-down>
+  </div>
+
 </div>

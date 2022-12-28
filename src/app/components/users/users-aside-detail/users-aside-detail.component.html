@@ -58,8 +58,8 @@
             </div>
             <hr class="user-detail-aside__divider">
             <div class="user-detail__row-info">
-                <div class="qt-input-block qt-mb-16">
-                    <label class="qt-mb-4">Company</label>
+                <div class="qt-input-block qt-editable-dropdown qt-mb-16">
+                    <label class="qt-input-block__label">Company</label>
                     <div
                         class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
@@ -82,12 +82,13 @@
                     class="qt-input-block qt-mb-16"
                     [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
                 >
-                    <label class="qt-mb-4">Email Address</label>
+                    <label class="qt-input-block__label">Email Address</label>
                     <div
                         class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                     <input
+                        class="qt-editable-input"
                         type="text"
                         [(ngModel)]="user.primaryEmail"
                         (blur)="onCheckEmail()"
@@ -95,13 +96,13 @@
                         [disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getPrimaryContactEmail()"
                     >
                         Please enter a valid email address
                     </mat-error>
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getExistPrimaryContactEmail()"
                     >
                         The email address is already occupied
@@ -111,14 +112,14 @@
                     class="qt-input-block"
                     [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
                 >
-                    <label class="qt-mb-4">Contact No.</label>
+                    <label class="qt-input-block__label">Contact No.</label>
                     <div
                         class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
                         *ngIf="getPermissions('EDIT_USERS')"
                     ></div>
                     <input
                         type="text"
-                        class="qt-w100"
+                        class="qt-editable-input qt-w100"
                         [(ngModel)]="user.phoneNumbers[0].number"
                         (input)="onCheckPhoneNumber(0)"
                         (blur)="onUpdatePhoneNumber()"
@@ -130,7 +131,7 @@
                         [disabled]="!getPermissions('EDIT_USERS')"
                     >
                     <mat-error
-                        class="qt-tooltip-error"
+                        class="invalid-feedback"
                         *ngIf="!validate.getPhoneNumber(0)"
                     >
                         Phone number is required
@@ -140,7 +141,7 @@
             <hr class="user-detail-aside__divider">
             <div class="user-detail__row-info">
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
-                    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
+                    <div class="qt-df qt-jc-sb qt-ai-c">
                         <div class="user-detail__row-info-label">Updates</div>
                         <div
                             class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
@@ -155,7 +156,7 @@
                     ></user-default-subscription>
                 </div>
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
-                    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
+                    <div class="qt-df qt-jc-sb qt-ai-c">
                         <div class="user-detail__row-info-label">Marketing</div>
                         <div
                             class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"
@@ -170,7 +171,7 @@
                     ></user-custom-subscription>
                 </div>
                 <div class="user-detail__row-info-line">
-                    <div class="user-detail__row-info-label qt-mb-4">Job description</div>
+                    <div class="user-detail__row-info-label">Job description</div>
                     <div
                         class="user-detail__row-info-value"
                         [ngClass]="{'container':!showFullJobDescription}"
@@ -193,7 +194,7 @@
                             [value]="user.jobDescription"
                             (input)="onChangeJobDescription($event)"
                             (blur)="updateUser()"
-                            class="terms-n-conditions__textarea qt-textarea"
+                            class="terms-n-conditions__textarea qt-input-block__textarea"
                             placeholder="Enter job description"
                             appTextArea
                             cols="30"

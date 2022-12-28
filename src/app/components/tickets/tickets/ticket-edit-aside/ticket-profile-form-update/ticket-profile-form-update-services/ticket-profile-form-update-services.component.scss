@@ -37,10 +37,7 @@
   &__input {
     position: relative;
     height: 40px;
-    //border-radius: 3px; // TODO check this style
-    //border: solid 1px $gray-500--old;
     margin-right: 8px;
-    //font-size: 13px;
     padding: 10px 12px;
     flex-grow: 1;
     outline: none;
@@ -73,13 +70,6 @@
     &.device {
       width: 243px;
       padding: 0;
-      ///deep/ .dropdown-toggle { // TODO check this style
-      //  width: 100%;
-      //  background: $white;
-      //  border: none;
-      //  height: 38px;
-      //  border-radius: 3px;
-      //}
     }
     &.time {
       width: 148px;

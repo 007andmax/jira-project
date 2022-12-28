@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/input";
 
 .contracts-page {
   .contracts-list-header,
@@ -153,7 +154,7 @@
       &__billable {
         border-top: 1px solid;
         border-bottom: 1px solid;
-        border-color: $gray-500--old;
+        border-color: $gray-200;
         min-width: 78px;
         display: flex;
         align-items: center;
@@ -223,7 +224,7 @@
 
       &__tax {
         width: 110px;
-        padding: 0 12px;
+        padding: 10px;
         text-align: right;
         vertical-align: middle;
       }
@@ -274,14 +275,20 @@
       }
 
       &.--preview {
+        td {
+          color: $gray-900;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 17px;
+        }
         td.service-table__name {
-          padding: 0 14px;
+          padding: 10px;
         }
         td.service-table__tax {
-          padding: 0 14px;
+          padding: 10px;
         }
         td.service-table__rate {
-          padding: 0 14px;
+          padding: 10px;
         }
       }
     }
@@ -337,6 +344,11 @@
     .notify-to-agents-assign-icon {
       margin-top: -4px;
       margin-bottom: -4px;
+      width: calc(33% - 12px);
+
+      app-date-picker {
+        width: 100%;
+      }
     }
 
     // end block time nilling aside
@@ -380,11 +392,12 @@
 
         .date-picker {
           height: 100%;
-          input.dropdown-toggle {
+          .icon__calendar {
+            display: none;
+          }
+          input.dropdown-toggle  {
+            padding: 10px;
             height: 100%;
-            border-color: transparent;
-            font-size: 13px;
-            padding-top: 3px;
           }
         }
       }
@@ -404,6 +417,7 @@
       &__description {
         padding: 0 12px !important;
         input {
+          @include input;
           height: 100%;
         }
       }
@@ -413,7 +427,10 @@
         width: 223px;
         input {
           height: 100%;
-          border-color: transparent;
+          //border-color: transparent;
+        }
+        .app-drop-down__right-icon {
+          position: static;
         }
       }
       .--editable {
@@ -422,28 +439,37 @@
     }
 
     .contract-product-products-table {
+      td {
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+        font-weight: 400;
+      }
+    }
+
+    .contract-product-products-table {
       &__name {
-        padding: 0 12px !important;
+        padding: 0 10px;
         &.--editable {
-          padding: 0 !important;
+          padding: 0;
         }
       }
 
       &__quantity {
         width: 110px;
-        padding: 0 12px !important;
-        text-align: right !important;
+        padding: 0 10px;
+        text-align: right;
         &.--editable {
-          padding: 0 !important;
+          padding: 0;
         }
       }
 
       &__price {
         width: 109px;
-        padding: 0 12px !important;
-        text-align: right !important;
+        padding: 0 10px;
+        text-align: right;
         &.--editable {
-          padding: 0 !important;
+          padding: 0;
         }
       }
     }
@@ -465,6 +491,12 @@
 
     .table-last-icon-wrapper {
       margin-right: -20px;
+      td {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        color: $gray-900;
+      }
     }
 
     .col-price {
@@ -474,6 +506,7 @@
     .col-tax {
       width: 109px;
       text-align: right;
+      padding: 10px;
     }
     .col-count {
       width: 84px;
@@ -496,21 +529,6 @@
       bottom: 35px !important;
     }
   }
-
-  &__company-name-input {
-    width: 400px;
-  }
-
-  &__contract-type-name-input {
-    width: 280px;
-  }
-
-  &__gray-block {
-    border-top: 1px solid $gray-400--old;
-    border-bottom: 1px solid $gray-400--old;
-    background-color: $gray-100--old;
-  }
-  // end user device billing
 }
 app-contracts-filter {
   width: 100%;
@@ -692,7 +710,6 @@ line-height: 1.54;
   width: 44px;
   height: 20px;
   top: unset;
-  left: unset;
   bottom: unset !important;
   left: unset !important;
   padding-left: 5px;

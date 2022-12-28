@@ -30,7 +30,7 @@
             <label class="qt-lh-154">Note Description</label>
             <textarea
                 [ngClass]="{'--input-error':!validate.getLine1()}"
-                class="qt-textarea"
+                class="qt-input-block__textarea"
                 [(ngModel)]="createNote.line1"
                 (blur)="validate.checkValidLine1(createNote.line1)"
                 placeholder="Write Note Description"

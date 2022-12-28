@@ -1,6 +1,8 @@
+@import "./src/assets/styles/mixin/dropdown";
+
 .item-selected-address {
-    padding: 16px 23px;
-    &:hover {
-        background-color: rgba(22, 164, 250, 0.05);
-    }
+  @include dropdown-item;
+  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
 }

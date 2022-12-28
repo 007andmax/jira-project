@@ -7,7 +7,7 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 @Component({
   selector: 'inventory-add-category',
   templateUrl: './inventory-add-category.component.html',
-  styleUrls: ['./inventory-add-category.component.css']
+  styleUrls: ['./inventory-add-category.component.scss']
 })
 export class InventoryAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();

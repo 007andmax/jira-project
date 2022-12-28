@@ -24,48 +24,8 @@
       margin: 0;
     }
   }
-
-  .label-name {
-    font-size: 13px !important;
-    margin-bottom: 8px !important;
-    font-weight: 600;
-  }
-
-  &__col {
-    margin-top: 17px;
-    position: relative;
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    input {
-      width: 100%;
-      outline: none;
-      height: 40px;
-      padding: 0 12px;
-      font-size: 13px;
-      border: 1px solid $gray-800--old;
-      border-radius: 4px;
-
-      &::placeholder {
-        color: $gray-600--old;
-      }
-    }
-
-    textarea {
-      border: 1px solid $gray-800--old;
-      border-radius: 4px;
-      min-height: 80px;
-      width: 100%;
-      padding: 15px;
-      font-size: 13px;
-      outline: none;
-
-      &::placeholder {
-        color: $gray-600--old;
-      }
-    }
+  .qt-input-block__textarea {
+    min-height: 80px;
   }
 
   &-panel {
@@ -225,7 +185,7 @@
 .disabled {
   input,
   span {
-    background: rgb(235, 235, 228) !important;
+    background: $gray-50;
     cursor: not-allowed;
   }
 }

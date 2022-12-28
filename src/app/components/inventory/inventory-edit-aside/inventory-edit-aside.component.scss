@@ -6,11 +6,19 @@
     overflow: auto;
     height: auto;
     border-radius: 5px;
-    border: solid 1px $gray-500--old;
+    border: solid 1px $gray-200;
     width: 100%;
     padding: 8px 12px;
-    font-size: 13px;
-    color: $gray-800--old;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-900;
+
+    &::placeholder {
+      color: $gray-400;
+    }
+    &:hover {
+      border-color: $gray-300;
+    }
     &:focus-visible {
         outline:none;
     }

@@ -1,9 +1,9 @@
 <div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24 billable-edit-customer qt-pos-rel">
     <div class="qt-popup-arrow"></div>
     <div class="qt-mb-16 qt-fs-15 qt-fw-600">Edit Customer</div>
-    <div class="qt-mb-16">
+    <div class="qt-inputs-row">
         <div class="qt-input-block">
-            <label>Company Name</label>
+            <div class="qt-input-block__label">Company Name</div>
             <input
                 type="text"
                 [(ngModel)]="company.name"
@@ -14,9 +14,9 @@
             <mat-error *ngIf="!validate.getName()">Company name is required</mat-error>
         </div>
     </div>
-    <div class="qt-mb-16">
+    <div class="qt-inputs-row">
         <div class="qt-input-block">
-            <label>Location</label>
+            <div class="qt-input-block__label">Location</div>
             <input
                 type="text"
                 #addresstext
@@ -26,17 +26,17 @@
             >
         </div>
     </div>
-    <div class="qt-df qt-mb-16">
-        <div class="qt-input-block qt-w100 qt-mr-16">
-            <label>Suite No.</label>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block__label">Suite No.</div>
             <input
                 type="text"
                 [(ngModel)]="company.addresses[0].suiteNumber"
                 placeholder="Enter Suite Number"
             >
         </div>
-        <div class="qt-input-block qt-w100">
-            <label>Postal/Zip code</label>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block__label">Postal/Zip code</div>
             <input
                 type="text"
                 [(ngModel)]="company.addresses[0].postalCode"
@@ -44,9 +44,9 @@
             >
         </div>
     </div>
-    <div class="qt-df qt-mb-16">
-        <div class="qt-input-block qt-w100 qt-mr-16">
-            <label>First Name</label>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block__label">First Name</div>
             <input
                 type="text"
                 [(ngModel)]="company.contacts[0].firstName"
@@ -55,8 +55,8 @@
             >
             <mat-error *ngIf="!validate.getFirstName()">First name is required</mat-error>
         </div>
-        <div class="qt-input-block qt-w100">
-            <label>Last Name</label>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block__label">Last Name</div>
             <input
                 type="text"
                 [(ngModel)]="company.contacts[0].lastName"
@@ -66,30 +66,34 @@
             <mat-error *ngIf="!validate.getLastName()">Last name is required</mat-error>
         </div>
     </div>
-    <div class="qt-input-block qt-w100 qt-mb-16">
-        <label>Primary Contact Email</label>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block">
+        <div class="qt-input-block__label">Primary Contact Email</div>
         <input
-            type="text"
-            [(ngModel)]="company.contacts[0].primaryEmail"
-            (input)="onChangePrimaryEmail()"
-            placeholder="Primary Email Address"
+          type="text"
+          [(ngModel)]="company.contacts[0].primaryEmail"
+          (input)="onChangePrimaryEmail()"
+          placeholder="Primary Email Address"
         >
         <mat-error *ngIf="!validate.getPrimaryContactEmail()">Please enter a valid email address</mat-error>
+      </div>
     </div>
-    <div class="qt-input-block qt-w100 qt-mb-24">
-        <label>Phone Number</label>
+    <div class="qt-inputs-row">
+      <div class="qt-input-block">
+        <div class="qt-input-block__label">Phone Number</div>
         <input
-            type="text"
-            *ngIf="company.contacts[0].phoneNumbers.length > 0"
-            [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-            placeholder="Enter Phone Number"
-            (input)="onChangePhoneNumber()"
-            prefix="+1"
-            mask="(000) 000-0000 Ext: 999999||000-000-0000"
-            [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-            [dropSpecialCharacters]="false"
+          type="text"
+          *ngIf="company.contacts[0].phoneNumbers.length > 0"
+          [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+          placeholder="Enter Phone Number"
+          (input)="onChangePhoneNumber()"
+          prefix="+1"
+          mask="(000) 000-0000 Ext: 999999||000-000-0000"
+          [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+          [dropSpecialCharacters]="false"
         >
         <mat-error *ngIf="!validate.getPhoneNumber()">Phone number is required</mat-error>
+      </div>
     </div>
     <div class="qt-df">
         <button

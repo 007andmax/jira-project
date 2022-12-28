@@ -129,8 +129,12 @@
         padding: 0;
         background-color: $white;
         z-index: 1;
-        border: 1px solid #c4cbd5;
-        border-radius: 4px;
+        border: 1px solid $gray-200;
+        border-radius: 6px;
+
+        &:hover {
+          border-color: $gray-300;
+        }
       }
       .mat-form-field-label {
         padding: 7px 10px 9px 12px;
@@ -201,87 +205,13 @@
     }
   }
 
-  //.qt-with-number-types { // Todo check this style
-  //  display: flex;
-  //  .dropdown-menu {
-  //    min-width: auto;
-  //    width: 100%;
-  //  }
-  //  input {
-  //    border-top-right-radius: 0;
-  //    border-bottom-right-radius: 0;
-  //  }
-  //  .primary-phone-selector {
-  //    min-width: 96px;
-  //    width: 96px;
-  //    color: $gray-800--old;
-  //    font-size: 13px;
-  //    border: 1px solid $gray-500--old;
-  //    border-left: none;
-  //    border-bottom-right-radius: 4px;
-  //    border-top-right-radius: 4px;
-  //    border-bottom-left-radius: 0;
-  //    border-top-left-radius: 0;
-  //    background: $white;
-  //    .types-btn {
-  //      width: 100%;
-  //      height: 100%;
-  //      text-align: left;
-  //      padding: 0 16px;
-  //      border: none;
-  //      border-left: none;
-  //      border-bottom-right-radius: 4px;
-  //      border-top-right-radius: 4px;
-  //      border-bottom-left-radius: 0;
-  //      border-top-left-radius: 0;
-  //      background: $white;
-  //    }
-  //  }
-  //}
-
-  //.qt-with-number-types { // Todo check this style
-  //  display: flex;
-  //
-  //  &__input {
-  //    border-bottom-left-radius: 6px !important;
-  //    border-top-left-radius: 6px !important;
-  //    border-bottom-right-radius: 0 !important;
-  //    border-top-right-radius: 0 !important;
-  //  }
-  //
-  //  &__types-btn {
-  //    border-bottom-right-radius: 6px;
-  //    border-top-right-radius: 6px;
-  //    border: 1px solid $gray-200;
-  //    border-left-color: transparent;
-  //    width: 100px;
-  //    height: 100%;
-  //    color: $gray-900;
-  //    padding: 0 30px 0 12px;
-  //    font-size: 14px;
-  //    line-height: 17px;
-  //    background-color: $white;
-  //
-  //    &::placeholder {
-  //      color: $gray-400;
-  //    }
-  //    &:hover {
-  //      border-color: $gray-300;
-  //    }
-  //    &:focus {
-  //      outline: none;
-  //      border-color: $blue-light-600;
-  //    }
-  //  }
-  //}
-
   app-company-tags {
     > .col-md-12,
-    .col-md-6 {
+    .col-md-6,
+    .qt-temporary-col-fix {
       margin-top: 40px;
       .mat-form-field {
         width: 100%;
-        margin-top: 15px;
       }
       .mat-form-field-infix {
         border: none;
@@ -300,16 +230,6 @@
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding: 0;
         position: relative;
-        &:before {
-          position: absolute;
-          content: "Tags";
-          font-size: 13px;
-          line-height: 16px;
-          font-weight: 500;
-          color: $gray-500;
-          left: 0;
-          top: -28px;
-        }
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 10px 10px 10px 36px;
@@ -435,8 +355,6 @@ app-users-table {
   }
 
   &__select-users-container {
-    margin-left: -15px;
-    margin-right: -15px;
 
     .mat-form-field-infix,
     .mat-input-element {
@@ -547,6 +465,10 @@ app-users-table {
 .draft-email-aside {
   .angular-editor-wrapper .angular-editor-textarea {
     margin-top: 0;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    color: $gray-900;
   }
 
   .dropdown-menu.unique-down {
@@ -567,6 +489,7 @@ app-users-table {
   .mat-form-field-wrapper {
     .mat-form-field-infix {
       padding: 0 !important;
+      min-height: 40px !important;
 
       &::before {
         display: none;
@@ -591,13 +514,14 @@ app-users-table {
 
       input.mat-input-element {
         padding: 2px 3px;
+        border-color: transparent;
+        box-shadow: unset;
       }
     }
   }
 }
 
 .remove-user-dialog {
-  //width: 552px;
   height: 216px;
   padding: 24px;
   border-radius: 6px;

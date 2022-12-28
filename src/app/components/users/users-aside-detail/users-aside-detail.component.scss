@@ -34,8 +34,11 @@
 .user-detail__row-info-line {
   margin-bottom: 16px;
   .user-detail__row-info-label {
-    @include сaption-l;
-    color: $gray-600--old;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    color: $gray-500;
+    margin-bottom: 8px;
   }
   .user-detail__row-info-value {
     @include body-m__m;
@@ -126,44 +129,10 @@ users-aside-detail-messages {
   outline: none;
 }
 .qt-input-block {
-  label {
-    color: $gray-600--old;
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-  }
-  input {
-    height: 30px;
-    width: 100%;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    outline: none;
-    padding: 2px 2px 2px 0;
-    &:focus,
-    &:hover {
-      border: solid 1px $gray-500--old;
-      outline: none;
-    }
-  }
   .icon__edit-gray {
     position: absolute;
     top: 0;
     right: 0;
-  }
-}
-/deep/.user-detail-edit-company {
-  .dropdown input {
-    padding: 4px 24px 4px 0;
-    border: unset;
-  }
-  .dropdown:hover input {
-    &:hover {
-      background: $gray-200--old;
-    }
-  }
-  .app-drop-down__right-icon {
-    right: 5px;
   }
 }
 .user-detail__row-info {

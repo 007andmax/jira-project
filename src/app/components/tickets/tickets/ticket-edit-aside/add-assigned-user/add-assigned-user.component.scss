@@ -67,9 +67,13 @@
   }
 
   .mat-chip-list-wrapper {
-    border-radius: 4px;
-    border: solid 1px $gray-600--old;
+    border-radius: 6px;
+    border: solid 1px $gray-200;
     background-color: $white;
+
+    &:hover {
+      border-color: $gray-300;
+    }
   }
 
     .mat-chip-remove  {

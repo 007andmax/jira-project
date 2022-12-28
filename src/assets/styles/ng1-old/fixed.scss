@@ -86,7 +86,8 @@
 }
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
-  background-color: $primary-1;
+  color: $blue-light-600;
+  background-color: $gray-50;
 }
 
 .dropdown-assign-ticket.fixed-assign .assign-ticket-header .form-group {
