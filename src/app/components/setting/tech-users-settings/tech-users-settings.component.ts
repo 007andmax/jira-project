@@ -157,7 +157,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     })
     this.sub.add(changeUsersArray);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === RESTORE_USER) {
           this.restoreUser();
@@ -377,7 +376,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.edit = true;
     this.selectedTechUser = techUser;
     if (techUser) {
-      console.log("techUser", techUser);
       this.authenticationTypesType = this.authenticationTypes.find(item => item.type == techUser.twoFactorAuthType);
       this.techUserForm.patchValue({
         firstName: techUser.firstName,

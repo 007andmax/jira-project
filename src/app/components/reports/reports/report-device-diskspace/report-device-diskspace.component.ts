@@ -58,10 +58,8 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
 
   setPreviewDataDevice() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.getClientsList(this.companiesStateService.getCompanies());
-    console.log("this.companies", this.companies);
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
-      console.log("this.companies", this.companies);
     });
   }
 
@@ -93,7 +91,6 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
   }
 
   getClientsList(data) {
-    console.log("data", data);
     return data
       .filter((item) => item.accountType === "CLIENT" && !item.deletedAt)
       .sort((a, b) =>
