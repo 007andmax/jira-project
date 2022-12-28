@@ -4,9 +4,12 @@
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
     <report-device-summary *ngIf="report === 'report-device-summary'"></report-device-summary>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
+    <device-ip-summary-device-report *ngIf="report === 'device-ip-summary-device'"></device-ip-summary-device-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
-    <software-summary-report1 *ngIf="report === 'software-summary'"></software-summary-report1>
+    <software-summary-report *ngIf="report === 'software-summary'"></software-summary-report>
+    <software-summary-report1 *ngIf="report === 'software-summary-device'"></software-summary-report1>
     <hardware-summary-report *ngIf="report === 'hardware-summary'"></hardware-summary-report>
+    <hardware-summary-device-report *ngIf="report === 'hardware-summary-device'"></hardware-summary-device-report>
     <app-accounts-receivable *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
     <app-taxes-report *ngIf="report === 'byTaxes'"></app-taxes-report>
     <app-product-sales-report *ngIf="report === 'byProducts'"></app-product-sales-report>

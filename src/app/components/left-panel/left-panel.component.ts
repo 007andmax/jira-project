@@ -157,12 +157,14 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/payments-report`)) this.state = 'payments-report';
           if (window.location.href.includes(`/report/remote-access`)) this.state = 'remote-access';
           if (window.location.href.includes(`/report/software-summary`)) this.state = 'software-summary';
-          if (window.location.href.includes(`/report/software-summary1`)) this.state = 'software-summary1';
+          if (window.location.href.includes(`/report/software-summary-device`)) this.state = 'software-summary-device';
           if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
+          if (window.location.href.includes(`/report/hardware-summary-device`)) this.state = 'hardware-summary-device';
           if (window.location.href.includes(`/report/report-device-warranty`)) this.state = 'report-device-warranty';
           if (window.location.href.includes(`/report/report-device-antivirus`)) this.state = 'report-device-antivirus';
           if (window.location.href.includes(`/report/network-ip-report`)) this.state = 'network-ip-report';
           if (window.location.href.includes(`/report/device-ip-summary`)) this.state = 'device-ip-summary';
+          if (window.location.href.includes(`/report/device-ip-summary-device`)) this.state = 'device-ip-summary-device';
           if (window.location.href.includes(`/report/report-device-summary`)) this.state = 'report-device-summary';
           if (window.location.href.includes(`/report/network-detail-report`)) this.state = 'network-detail-report';
           if (window.location.href.includes(`/report/network-adapter-report`)) this.state = 'network-adapter-report';
@@ -336,9 +338,11 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'payments-report' ||
         this.state === 'remote-access' ||
         this.state === 'software-summary' ||
-        this.state === 'software-summary1' ||
+        this.state === 'software-summary-device' ||
         this.state === 'hardware-summary' ||
+        this.state === 'hardware-summary-device' ||
         this.state === 'device-ip-summary' ||
+        this.state === 'device-ip-summary-device' ||
         this.state === 'report-device-summary' ||
         this.state === 'report-device-warranty' ||
         this.state === 'report-device-antivirus' ||

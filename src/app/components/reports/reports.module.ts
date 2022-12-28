@@ -7,7 +7,6 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ReportListItemModule } from './report-list-item/report-list-item.module';
 
 
-
 @NgModule({
     declarations: [ReportsComponent
     ],

@@ -186,7 +186,7 @@
             ></div>
         </div>
     </div>
-    <div *ngIf="report === 'device-ip-summary'">
+    <div *ngIf="report === 'device-ip-summary' || report === 'device-ip-summary-device'">
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -334,7 +334,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="report === 'hardware-summary'">
+    <div *ngIf="report === 'hardware-summary' || report === 'hardware-summary-device'">
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">
@@ -458,7 +458,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="report === 'software-summary'">
+    <div *ngIf="report === 'software-summary' || report === 'software-summary-device'">
         <div class="qt-report__header">
             <div class="qt-df qt-ai-fs">
                 <div class="qt-report__header-content">

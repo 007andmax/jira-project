@@ -39,6 +39,8 @@ import { ReportDeviceDiskspaceComponent } from '../reports/report-device-diskspa
 import { ApplicationbycompanyReportComponent } from '../reports/applicationbycompany-report/applicationbycompany-report.component';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { ReportSendEmailModule } from '../report-additional-actions/report-send-email/report-send-email.module';
+import { HardwareSummaryDeviceReportComponent } from '../reports/hardware-summary-device-report/hardware-summary-device-report.component';
+import { DeviceIpSummaryDeviceReportComponent } from '../reports/device-ip-summary-device-report/device-ip-summary-device-report.component';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -49,8 +51,10 @@ import { ReportSendEmailModule } from '../report-additional-actions/report-send-
         GlNumberComponent,
         SoftwareSummaryReportComponent,
         HardwareSummaryReportComponent,
+        HardwareSummaryDeviceReportComponent,
         AccountsReceivableComponent,
         TaxesReportComponent,
+        DeviceIpSummaryDeviceReportComponent,
         ProductSalesReportComponent,
         DetailedCommissionsReportComponent,
         CommonCommissionsReportComponent,

@@ -1,0 +1,234 @@
+<div>
+    <div class="report-menu">
+        <div class="run-report-content col-md-11 left">
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'All Companies'"
+                    [list]="companies"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content custom-width dropdown-height">
+                <app-drop-down
+                    #dropdownDevice
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [placeholder]="'All devices'"
+                    [isDisabled]="!deviceSummaryReport.companyId"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></app-drop-down>
+            </div>
+            <button class="qt-btn --outline-blue qt-ml-8">Get Report</button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
+          icon__email-dark
+          qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+          summaryemail"
+                    (click)="sendEmail()"
+                ></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
+          icon__download
+          qt-za-16 qt-sz-16 qt-dib qt-bg-contain
+          summarydownload
+        "
+                    (click)="downloadCsv()"
+                ></i>
+            </button>
+        </div>
+        <div class="run-report-content col-md-0 right">
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
+        </div>
+    </div>
+</div>
+<div id="product-list-ticket-data">
+    <div class="device-header">
+        <div>
+            <span>{{ clientName }}</span>
+        </div>
+        <div>
+            <span>
+                <b>{{ "Hardware Summary Report" }}</b>
+            </span>
+        </div>
+        <div>
+            <span>
+                {{ "As on" + " " + (date | date: DateFormat) }}
+            </span>
+        </div>
+    </div>
+    <div class="contant-area">
+        <div class="table-wrap tablepadding">
+            <table class="dataTable cmn-tab-head">
+                <thead>
+                    <tr>
+                        <th
+                            class="company"
+                            (click)="onFilter('company')"
+                        >
+                            COMPANY NAME
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="device"
+                            (click)="onFilter('device')"
+                        >
+                            DEVICE
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="operatingSystem">
+                            OPERATING SYSTEM
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="cpu">
+                            CPU
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="ram">RAM</th>
+                        <th class="disk">DISK</th>
+                        <th class="warranty">WARRANTY</th>
+                        <th class="serialnumber">SERIAL NUMBER</th>
+                    </tr>
+                </thead>
+                <tbody class="device-summary-report-table">
+                    <tr *ngFor="let device of hardwareSummaryReport">
+                        <td class="company">{{device.CompanyName}}</td>
+                        <td class="device">{{device.Name}}</td>
+                        <td class="operatingSystem">{{device.OperatingSystem}}</td>
+                        <td class="cpu">{{device.CPU}}</td>
+                        <td class="ram">{{device.Ram}}</td>
+                        <td class="disk">{{getDiskSize(device.TotalDiskSpace)}}</td>
+                        <td class="warranty">{{device.Warranty}}</td>
+                        <td class="serialnumber">{{device.SerialNumber}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>
+<div
+    class="qt-report__body"
+    id="product-list-ticket-data"
+>
+    <div
+        class
+        *ngIf="!loadingInProgress"
+    >
+        <div
+            class="qt-report__body-header"
+            *ngIf="onInit"
+        >
+            <div class="body-m-sb qt-color-dark">{{company.name || 'All companies'}}</div>
+            <h6 class="qt-fw-600 qt-color-dark">Hardware Summary Report</h6>
+        </div>
+        <table
+            class="qt-report__body-table-body"
+            *ngIf="onInit"
+        >
+            <thead>
+                <tr>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+                    >
+                        Device
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                    >
+                        Operating System
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
+                    >
+                        CPU
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
+                    >
+                        RAM
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
+                    >
+                        DISK
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                    >
+                        WARRANTY
+                    </th>
+                    <th
+                        class="qt-fw-600 qt-color-dark"
+                        *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                    >
+                        Serial Number
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template
+                    ngFor
+                    let-device
+                    [ngForOf]="hardwareSummaryReport.list"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <tr
+                        class="qt-report__body-row"
+                        *ngIf="device.report"
+                    >
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice">{{device.label || device.hostName}}</td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem">
+                            {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu">
+                            {{device.report && device.report.processors && device.report.processors.length > 0 && device.report.processors[0].name}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithRam">
+                            {{device.report && device.report.ram && getRamSize(device.report.ram.slots)}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk">
+                            {{device.report && getDiskSize(device.report.logicalDisks)}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty">
+                            {{device.report && device.report.variant && device.report.variant.warrantyDate}}
+                        </td>
+                        <td *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber">
+                            {{device.report && device.report.system && device.report.system.serial_number}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-report-send-email></app-report-send-email>

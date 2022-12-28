@@ -10,7 +10,7 @@ export class ReportsStateService {
   serviceReport: EventEmitter<any> = new EventEmitter();
   accountsReceivable: EventEmitter<any> = new EventEmitter();
   exportCSV: EventEmitter<any> = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
   public onChangeExportCSV(data) {
     this.exportCSV.emit(data);
@@ -25,7 +25,7 @@ export class ReportsStateService {
     this.accountsReceivable.emit(data);
   }
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report" || report == "device-diskspace-report" || report == "device-deploymentwarranty-report") {
+    if (report == "software-summary" || report == "software-summary-device" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report == "device-processorram-report" || report == "network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report" || report == "device-diskspace-report" || report == "device-deploymentwarranty-report") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -33,48 +33,42 @@ export class ReportsStateService {
       var total = column.length / row.length;
       var clientName = target.find("span");
       let installed = "";
-      if (report == "software-summary") {
+      if (report == "software-summary" || report == "software-summary-device") {
         installed = "Softwares";
       }
       if (report == "report-device-summary") {
         installed = "Devices";
       }
-      if (report =="report-warranty-summary"){
-        installed ="Warrantys";
+      if (report == "report-warranty-summary") {
+        installed = "Warrantys";
       }
-      if (report =="report-antivirus-summary"){
-        installed ="Antivirus";
+      if (report == "report-antivirus-summary") {
+        installed = "Antivirus";
       }
-      if (report =="network-ip-report"){
-        installed ="NetworkIP";
+      if (report == "network-ip-report") {
+        installed = "NetworkIP";
       }
-      if (report =="device-processorram-report")
-      {
-        installed ="ProcessorRam";
+      if (report == "device-processorram-report") {
+        installed = "ProcessorRam";
       }
-      if (report =="network-adapter-report")
-      {
-        installed ="Network Adapter";
+      if (report == "network-adapter-report") {
+        installed = "Network Adapter";
       }
-      if (report =="network-detail-report")
-      {
-        installed ="Network Detail";
+      if (report == "network-detail-report") {
+        installed = "Network Detail";
       }
-      if (report =="applicationbyCompany-report")
-      {
-        installed ="Application By Company";
+      if (report == "applicationbyCompany-report") {
+        installed = "Application By Company";
       }
-      if (report =="device-diskspace-report")
-      {
-        installed ="Disk Space";
+      if (report == "device-diskspace-report") {
+        installed = "Disk Space";
       }
-      if (report =="device-deploymentwarranty-report")
-      {
-        installed ="Deployment/Warranty";
+      if (report == "device-deploymentwarranty-report") {
+        installed = "Deployment/Warranty";
       }
 
       let html =
-      `
+        `
     <style>
     * {
       padding: 0;
@@ -164,19 +158,19 @@ export class ReportsStateService {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">                    
                     <thead>
                                             <tr>`;
-                        for (let i = 0; i < row.length; i++) {
-                          html =
-                            html +
-                            `<th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;">` +
-                            row[i].innerHTML +
-                            `</th>`;
-                        }
-                        html =
-                          html +
-                          `</tr>
+      for (let i = 0; i < row.length; i++) {
+        html =
+          html +
+          `<th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;">` +
+          row[i].innerHTML +
+          `</th>`;
+      }
+      html =
+        html +
+        `</tr>
                                         </thead>
                     <tbody>`;
-                    html = html + `<tr style="width: 100%;">`;
+      html = html + `<tr style="width: 100%;">`;
       for (let j = 0; j < column.length; j++) {
         if (j != 0) {
           if (j % row.length == 0) {
@@ -190,10 +184,10 @@ export class ReportsStateService {
           column[j].innerHTML +
           `</td>`;
       }
-      html = html + `</tr>`;    
-    html =
-      html +
-      `</tbody>
+      html = html + `</tr>`;
+      html =
+        html +
+        `</tbody>
         </table>
      </td>
    </tr>
@@ -205,11 +199,11 @@ export class ReportsStateService {
               <table style="width: 100%;border-collapse: collapse;table-layout:fixed;">
                 <tr>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: left;vertical-align: middle;">Report Prepare by: ` +
-      localStorage.getItem("currentUser") +
-      `</td>
+        localStorage.getItem("currentUser") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size:11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: center;vertical-align: middle;">` +
-      localStorage.getItem("currentCompanyName") +
-      `</td>
+        localStorage.getItem("currentCompanyName") +
+        `</td>
                   <td style="width: 33.33%;color: #4f5f79;font-size: 11px;font-family: Arial, Helvetica, sans-serif;padding: 8px 24px;background-color: #fff;text-align: right;vertical-align: middle;">Quicktech 2020 ©. All rights reserved</td>
                </tr>
               </table>
@@ -218,8 +212,8 @@ export class ReportsStateService {
         </tfoot>
  </table>
         </div>
-        </body>`;            
-      return html;      
+        </body>`;
+      return html;
     }
     //  disableOpenPdfBtn();    
     var selectedHtml;
