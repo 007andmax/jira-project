@@ -389,15 +389,13 @@ export class CompanyDashDetailComponent implements OnInit {
     this.workingDays = data.workingDays;
     if (this.workingDays.length !== 0) {
       this.workingDays.forEach((element, index) => {
-        element.checked = false;
         let e1: any, s1: any;
-        if (element.startTime !== 0 && element.endTime !== 0) {
+        if (element.isSelected) {
           element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
           s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
           element.sTime = new Date('01/01/1990 ' + s1)
           e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
           element.eTime = new Date('01/01/1990 ' + e1)
-          element.checked = true
           let current = parseInt(moment(new Date()).format('hh'));
           if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
             this.closingSoon = true;
@@ -405,7 +403,7 @@ export class CompanyDashDetailComponent implements OnInit {
         }
       });
       let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
-      if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
+      if (arr.length !== 0 && arr[0].isSelected) {
         this.companyOpen = (arr[0].timing) ? `Opens ${arr[0].timing}` : 'Opens';
       } else {
         this.companyOpen = `Close`;
@@ -445,7 +443,7 @@ export class CompanyDashDetailComponent implements OnInit {
       var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
       return hoursToReturn + ':' + minutesToreturn;
     } else {
-      return 0;
+      return "12:00";
     }
   }
 
@@ -466,7 +464,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (time && time > 0) {
       var timeInHour = time / 3600;
       // var timeInHour = time / 60;
-      if (timeInHour <= 12) {
+      if (timeInHour < 12) {
         return 'AM';
       } else {
         return 'PM';
@@ -481,8 +479,9 @@ export class CompanyDashDetailComponent implements OnInit {
     this.workingDays.forEach(element => {
       data.push({
         dayOfWeek: element.dayOfWeek,
-        startTime: element.checked === true ? element.startTime : 0,
-        endTime: element.checked === true ? element.endTime : 0
+        startTime: element.isSelected === true ? element.startTime : 0,
+        endTime: element.isSelected === true ? element.endTime : 0,
+        isSelected: element.isSelected
       });
     });
     this.companyDetail.workingDays = data;
@@ -555,8 +554,8 @@ export class CompanyDashDetailComponent implements OnInit {
 
 
   resetTime(index: number) {
-    this.workingDays[index].checked = !this.workingDays[index].checked;
-    if (this.workingDays[index].checked === false) {
+    this.workingDays[index].isSelected = !this.workingDays[index].isSelected;
+    if (this.workingDays[index].isSelected === false) {
       this.workingDays[index].sTime = 0;
       this.workingDays[index].eTime = 0;
     }
