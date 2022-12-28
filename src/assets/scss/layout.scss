@@ -3,7 +3,7 @@
 /*** Angular one css conflcit resolved ***/
 
 body {
-  &.page-settings {
+  &.page-settings,.page-settings {
     .manage-tags {
       .heading {
         .qt-input-search {
@@ -773,12 +773,6 @@ body {
       font-size: 12px;
       line-height: 15px;
       color: $gray-400;
-    }
-
-    .quote-send-modal {
-      .authenticaton-tab {
-        height: 504px;
-      }
     }
 
     .authentication__content,

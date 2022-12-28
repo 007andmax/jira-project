@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { ToastrService } from "ngx-toastr";
+import { AppStateService } from "src/app/states/app/app-state.service";
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -8,7 +11,9 @@ import { environment } from "src/environments/environment";
 export class TechUsersService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   getUsers(isArchived) {
     // Tech users
@@ -42,15 +47,6 @@ export class TechUsersService {
     return this.http.put(`${this.apiUrl}users/${uId}`, techUser);
   }
 
-  saveUsersEmailNotifications(uId: string, emailNotification) {
-    // checked save notification button (dev url)
-    // {"newDevice":true,"scheduleChanged":false,"clientCompanyUpdated":false,"ticketCreated":true,"myTicketUpdated":true}
-    return this.http.put(
-      `${this.apiUrl}settings/userProfile/saveUsersEmailNotifications?userId=${uId}`,
-      emailNotification
-    );
-  }
-
   createUser(techUser: any) {
     // {"techRole":"Help desk user","firstName":"Today Test","lastName":"Test","primaryEmail":"today@test.com","companyId":"73221c72-f87c-4519-8235-c4b57ad1cc19","subscription":{}}
     // {"techRole":"Tech user","firstName":"Test","lastName":"Test New","primaryEmail":"test@newtest.com","companyId":"73221c72-f87c-4519-8235-c4b57ad1cc19","subscription":{}}
@@ -63,12 +59,22 @@ export class TechUsersService {
     return this.http.post(`${this.apiUrl}users/archive`, {
       "archivedUserId": archivedUserId,
       "newAssignedUserId": newAssignedUserId
-    });
+    }).pipe(
+      tap(data => {
+        this.toastrService.success('The tech user has been successfully archived');
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   restoreUser(userId) {
     // {"userId":"d3937811-0f88-4d0c-a0d2-dc1494affb7d"}
-    return this.http.post(`${this.apiUrl}users/restore`, { userId });
+    return this.http.post(`${this.apiUrl}users/restore`, { userId }).pipe(
+      tap(data => {
+        this.toastrService.success('User has been restore successfully.');
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   changePasswordRequest(userId: string) {
@@ -82,7 +88,12 @@ export class TechUsersService {
     // {"email":"test@test.com"}
     return this.http.post(`${this.apiUrl}resend/verifyUserEmail`, {
       email: userEmail
-    });
+    }).pipe(
+      tap(data => {
+        this.toastrService.success("Resend Welcome Email Sent Successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
 

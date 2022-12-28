@@ -232,13 +232,13 @@
                             {{hours.dayOfWeek}}
                             <span
                                 class="info-time-work"
-                                *ngIf="hours.startTime !== 0 && hours.endTime !== 0"
+                                *ngIf="hours.isSelected"
                             >
                                 {{hours.timing}}
                             </span>
                             <span
                                 class="info-time-work-status"
-                                *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)"
+                                *ngIf="!hours.isSelected"
                             >
                                 Close
                             </span>
@@ -400,7 +400,7 @@
                         <input
                             type="checkbox"
                             id="{{ work.dayOfWeek }}"
-                            [(ngModel)]="work.checked"
+                            [(ngModel)]="work.isSelected"
                             name="{{ work.dayOfWeek | titlecase }}"
                             [ngModelOptions]="{ standalone: true }"
                         >
@@ -423,7 +423,7 @@
                             >
                                 <button
                                     class="selected-item"
-                                    [disabled]="!work.checked"
+                                    [disabled]="!work.isSelected"
                                     [id]=" 'from-'+work.dayOfWeek"
                                     ngbDropdownToggle
                                 >
@@ -457,7 +457,7 @@
                             >
                                 <button
                                     class="selected-item"
-                                    [disabled]="!work.checked"
+                                    [disabled]="!work.isSelected"
                                     [id]="'to-'+work.dayOfWeek"
                                     ngbDropdownToggle
                                 >
