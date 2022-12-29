@@ -68,6 +68,9 @@ pre {
     line-height: 30px;
     overflow: auto;
   }
+  &__serial-number {
+    flex: 1 1 150px;
+  }
   &__number {
     flex: 1 1 200px;
   }
