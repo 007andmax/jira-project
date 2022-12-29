@@ -28,7 +28,7 @@
     >
         <div
             class="report-menu-item"
-            *ngIf="report.permissions"
+            *ngIf="report.permissions ? getPermissions(report.permissions) : true"
         >
             <div class="report-menu-item-header">
                 <h3

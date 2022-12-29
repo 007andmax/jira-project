@@ -4,8 +4,8 @@ export class ReportsLeftMenuItem {
     icon: string;
     category: string;
     subcategories: Array<ReportsLeftMenuItemReport> = [];
-    permissions: boolean = true;
-    constructor(icon, category, subcategories, permissions = true) {
+    permissions: string;
+    constructor(icon, category, subcategories, permissions = null) {
         this.icon = icon;
         this.category = category;
         this.subcategories = subcategories;

@@ -25,7 +25,7 @@ export class ReportsStateService {
     this.accountsReceivable.emit(data);
   }
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "software-summary-device" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report == "device-processorram-report" || report == "network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report" || report == "device-diskspace-report" || report == "device-deploymentwarranty-report") {
+    if (report == "software-summary-device" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report == "device-processorram-report" || report == "network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report" || report == "device-diskspace-report" || report == "device-deploymentwarranty-report") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -33,7 +33,7 @@ export class ReportsStateService {
       var total = column.length / row.length;
       var clientName = target.find("span");
       let installed = "";
-      if (report == "software-summary" || report == "software-summary-device") {
+      if (report == "software-summary-device") {
         installed = "Softwares";
       }
       if (report == "report-device-summary") {
