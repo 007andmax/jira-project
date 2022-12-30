@@ -67,6 +67,7 @@ pre {
     word-wrap: break-word;
     line-height: 30px;
     overflow: auto;
+    max-width: 450px;
   }
   &__serial-number {
     flex: 1 1 150px;

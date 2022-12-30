@@ -15,15 +15,16 @@
   border-left: 1px solid #edf0f2;
 }
 
-.run-report-content{
-  &.left{
-  width:96%
-  }
+.report-menu {
+  display: flex;
 }
-
 .run-report-content {
-  &.right{
-    width:4%
+  &.left {
+    width: 96%;
+  }
+  &.right {
+    width: 4%;
+    padding-right: 14px;
   }
 }
 
@@ -64,7 +65,7 @@
 }
 
 .device-header {
-  text-align: center;  
+  text-align: center;
   h6 {
     font-size: 12px !important;
   }

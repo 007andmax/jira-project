@@ -160,15 +160,15 @@ hr {
   }
 }
 
-.new-companies-content__modal--content > [class*="col-md-"] input::placeholder,
-.new-users-content__modal--content > [class*="col-md-"] input::placeholder,
-.recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
-.new-users-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
-.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
-.password-content__modal--content > [class*="col-md-"] input::placeholder {
-  opacity: 1;
-  color: $gray-600--old;
-}
+//.new-companies-content__modal--content > [class*="col-md-"] input::placeholder, // TODO check this style
+//.new-users-content__modal--content > [class*="col-md-"] input::placeholder,
+//.recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
+//.new-users-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
+//.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
+//.password-content__modal--content > [class*="col-md-"] input::placeholder {
+//  opacity: 1;
+//  color: $gray-600--old;
+//}
 
 .new-companies-content__modal--content textarea::placeholder,
 .new-users-content__modal--content textarea::placeholder,
@@ -1051,9 +1051,4 @@ h6,
   font-weight: 500;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-}
-@media (min-width: 992px) {
-  .col-md-12 {
-    width: 100%;
-  }
 }

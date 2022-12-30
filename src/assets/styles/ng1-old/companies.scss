@@ -17,7 +17,13 @@ company-associate {
       width: 100%;
     }
     .mat-form-field-infix {
-      border: none;
+      border: 1px solid $gray-200;
+      &:hover {
+        border-color: $gray-300;
+      }
+      input {
+        border: unset;
+      }
     }
     .mat-form-field-appearance-legacy .mat-form-field-underline,
     .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {

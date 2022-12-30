@@ -32,8 +32,8 @@
     background-color: #f9fafb;
     .company-devices-table__ip-address-text,
     .company-devices-table__ip-windows-text {
-      opacity: 0;    
-    }    
+      opacity: 0;
+    }
 
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
@@ -42,7 +42,7 @@
       display: flex;
     }
     .company-devices-table__system-network-buttons,
-    .company-devices-table__ip-address-buttons {      
+    .company-devices-table__ip-address-buttons {
       padding-top: 14px
     }
     .device-name-edit-marker {
@@ -504,7 +504,7 @@ span.qt-input-search:before {
 
 }
 
-.d-email{  
+.d-email{
   background-image: url(/assets/img/icons/email-dark.svg);
   background-repeat: no-repeat;
   display: inline-block;
@@ -515,7 +515,7 @@ span.qt-input-search:before {
   background-position: center;
 }
 
-.d-print{  
+.d-print{
   background-image: url(/assets/img/icons/print.svg);
   background-repeat: no-repeat;
   display: inline-block;
@@ -597,7 +597,7 @@ span.qt-input-search:before {
     border: none !important;
   }
 
-  .onetime-code{    
+  .onetime-code{
     height: 20px;
     margin: 0 169px 6px 0;
     font-family: Inter;
@@ -611,7 +611,7 @@ span.qt-input-search:before {
   }
 
   .company-device-devicesheader{
-    padding-top: 4px;    
+    padding-top: 4px;
     margin-left: 5px
   }
 
@@ -650,7 +650,7 @@ span.qt-input-search:before {
     vertical-align: middle !important;
   }
 
-  .d-adddevice{    
+  .d-adddevice{
     background-image: url(/assets/img/icons/add-grey.svg);
     background-repeat: no-repeat;
     display: inline-block;
@@ -702,7 +702,7 @@ span.qt-input-search:before {
       }
     }
   }
-  
+
   .install-Update{
     display: flex;
     background-image: url(/assets/img/icons/install.svg);
@@ -719,10 +719,10 @@ span.qt-input-search:before {
     background-image: url(/assets/img/icons/install.svg);
     background-repeat: no-repeat;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     background-position: center;
   }
-  
+
   .sidebar-updates{
     &__security-update-item {
       padding: 16px;
@@ -731,9 +731,9 @@ span.qt-input-search:before {
       padding: 16px;
       border-radius: 8px;
       background-color: $gray-100;
-      @media (max-width: 1920px) {      
+      @media (max-width: 1920px) {
         width: 175px !important;
-      }      
+      }
     }
   }
 
@@ -742,10 +742,10 @@ span.qt-input-search:before {
   }
 
   .security-button-disabled {
-    opacity: 0.6;  
+    opacity: 0.6;
     pointer-events: none;
   }
-  
+
 
 
   .loader {
@@ -758,31 +758,31 @@ span.qt-input-search:before {
     margin-right: 8px
   }
 
-  .Resize{    
+  .Resize{
     @media only screen and (min-width: 1920px) {
       width:78% !important;
       margin-left:-85px;
 
 
     }
-    
+
     .company-device-hover:hover {
       td {
         .company-devices-table__system-network-buttons {
           @media  only screen and (min-width:1920px) {
-            margin-left:40px;    
+            margin-left:40px;
           }
-        }        
+        }
       }
-    }    
+    }
   }
-  
-  
+
+
 .company-device-hover:hover {
   td {
     .company-devices-table__system-network-buttons {
       @media  only screen and (min-width:1920px) {
-        margin-left:120px;    
+        margin-left:120px;
       }
 
       @media only screen and (min-width: 1600) {
@@ -808,15 +808,15 @@ span.qt-input-search:before {
   @media only screen and (min-width: 1920px) {
     width:85% !important;
     margin-left:-150px;
-  }     
+  }
 
   .company-device-hover:hover {
     td {
       .company-devices-table__system-network-buttons {
         @media  only screen and (min-width:1920px) {
-          margin-left:40px;    
+          margin-left:40px;
         }
-      }        
+      }
     }
   }
 }
@@ -824,7 +824,7 @@ span.qt-input-search:before {
   td {
     .company-devices-table__system-network-buttons {
       @media  only screen and (min-width:1920px) {
-        margin-left:0 !important;    
+        margin-left:0 !important;
       }
 
       @media only screen and (max-width: 1920) {
@@ -860,18 +860,14 @@ span.qt-input-search:before {
   left: 10px;
 }
 
-.advance-search-devices{  
+.advance-search-devices{
   top: 15px !important;
   left: -5px  !important;
   transform: translate(5px, 43px) !important;
 }
 
 .ads-os-name {
-  padding:0 !important;
-}
-
-/deep/ .ads-os-name>.col-md-12 {
-  padding:0 !important;
+  width: 100%;
 }
 /deep/ .ads-os-name > input {
   padding: 0 0 0 15px !important;
@@ -882,48 +878,48 @@ span.qt-input-search:before {
   /deep/ .qt-dropdown{
     input{
       border: 0px !important;
-      padding: 10px 4px!important; 
-      height:25px !important;   
+      padding: 10px 4px!important;
+      height:25px !important;
     }
     .report-caret-icon {
         display: none;
         top:7px;
-    }      
+    }
     .icn-remove-old {
         display: none;
         top:7px;
       }
   }
 }
-  
+
 
 .computerModel {
   /deep/ .qt-dropdown:hover{
-    input{   
+    input{
       border: 1px #c5cdd5 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
     .report-caret-icon {
         display: inline-block;
-    }    
+    }
     .icn-remove-old {
         display: inline-block;
     }
-  } 
-} 
+  }
+}
 
 .computerManufacture{
   /deep/ .qt-dropdown{
     input{
       border: 0px !important;
-      padding: 10px 4px!important; 
-      height:25px !important;   
+      padding: 10px 4px!important;
+      height:25px !important;
     }
     .report-caret-icon {
         display: none;
         top:7px;
-    }      
+    }
     .icn-remove-old {
         display: none;
         top:7px;
@@ -933,18 +929,18 @@ span.qt-input-search:before {
 
 .computerManufacture{
   /deep/ .qt-dropdown:hover{
-    input{   
+    input{
       border: 1px #c5cdd5 !important;
       padding: 10px 4px!important;
       height:25px !important;
     }
     .report-caret-icon {
         display: inline-block;
-    }    
+    }
     .icn-remove-old {
         display: inline-block;
     }
-  } 
+  }
 }
 
 .sidebarSystemInfo-text{
@@ -952,7 +948,7 @@ span.qt-input-search:before {
 }
 
 .companydevice-beta-offline{
-  color:#ff5263; 
+  color:#ff5263;
 }
 
 .companydevice-beta-online{
