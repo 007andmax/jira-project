@@ -652,11 +652,11 @@
   }
 }
 
-.reports-all .col-sm-4 {
-  width: 300px;
+.reports-all .reports-col {
+  width: 270px;
 }
 
-.reports-all .col-sm-3 .report {
+.reports-all .reports-all__column .report {
   background-color: #fff;
   border-radius: 2px 3px 3px 2px;
   margin: 1px 30px 30px;
@@ -666,7 +666,7 @@
   position: relative;
 }
 
-.reports-all .col-sm-4 .report {
+.reports-all .reports-col .report {
   background-color: $white;
   border-radius: 2px 3px 3px 2px;
   margin: 0 30px 30px 0;
@@ -677,7 +677,7 @@
   position: relative;
 }
 
-.reports-all .col-sm-4 .report:hover {
+.reports-all .reports-col .report:hover {
   box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
