@@ -117,9 +117,9 @@
     margin-left: -1px;
   }
   // and override it for block buttons as well
-  .btn-block + .btn-block {
-    margin-left: 0;
-  }
+  //.btn-block + .btn-block { // TODO check this style
+  //  margin-left: 0;
+  //}
 }
 
 // Measure scrollbar width for padding body during modal show/hide

@@ -1,0 +1,152 @@
+.fade {
+  opacity: 0;
+  transition: opacity 0.15s linear;
+  &.in {
+    opacity: 1;
+  }
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  user-select: none;
+
+  &:hover,
+  &:focus,
+  &.focus {
+    color: #333;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.13);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+  }
+}
+
+a.btn {
+  &.disabled,
+  fieldset[disabled] & {
+    pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+  }
+}
+
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  &:hover {
+    color: #333;
+    background-color: #e6e5e5;
+    border-color: #adadad;
+  }
+}
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+
+  &:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+  }
+}
+.btn-success {
+  background-color: #2ec866;
+  border-color: #2ec866;
+
+  &:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+  }
+}
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+
+  &:hover {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+  }
+}
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+
+  &:hover {
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512;
+  }
+}
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+
+  &:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+  }
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.btn-xs,
+.btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}

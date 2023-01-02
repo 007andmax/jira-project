@@ -146,22 +146,22 @@
       margin-right: 8px;
     }
   }
-  .btn.btn-link {
-    color: $white;
-    min-width: 20px;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    span {
-      margin-bottom: 2px;
-      color: $gray-800--old;
-    }
-  }
-  .right {
-    .btn.btn-link {
-      text-align: right;
-    }
-  }
+  //.btn.btn-link { // TODO check this style
+  //  color: $white;
+  //  min-width: 20px;
+  //  text-align: left;
+  //  margin: 0;
+  //  padding: 0;
+  //  span {
+  //    margin-bottom: 2px;
+  //    color: $gray-800--old;
+  //  }
+  //}
+  //.right {
+  //  .btn.btn-link {
+  //    text-align: right;
+  //  }
+  //}
   .ngb-dp-day {
     border: none;
     outline: none;
