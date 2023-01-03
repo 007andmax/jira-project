@@ -373,7 +373,7 @@
                         <div *ngIf="user.avatar">
                             <img
                                 ng-if="user.avatar"
-                                class="img-circle avatar-26"
+                                class="qt-circle avatar-26"
                                 [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                                 alt="..."
                             >

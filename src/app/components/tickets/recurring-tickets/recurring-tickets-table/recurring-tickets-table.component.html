@@ -16,7 +16,7 @@
         <span [textContent]="user.lastName[0].toUpperCase()"></span>
       </div>
       <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar && i < 3">
-        <img class="img-circle qwe"
+        <img class="qt-circle qwe"
              style="margin: 0;"
              [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
              alt="...">
@@ -48,7 +48,7 @@
                     <span [textContent]="user.lastName[0].toUpperCase()"></span>
                   </div>
                   <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
-                    <img ng-if="user.avatar" class="img-circle qwe"
+                    <img ng-if="user.avatar" class="qt-circle qwe"
                          style="margin: 0;"
                          [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                          alt="...">
