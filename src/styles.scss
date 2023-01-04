@@ -925,7 +925,7 @@ ngb-typeahead-window {
   }
 }
 .has-error {
-  border-color: $error !important;
+  border-color: $error;
 }
 .device-user.has-placeholder {
   position: relative;
@@ -3348,7 +3348,7 @@ ngb-typeahead-window {
 }
 
 .has-error {
-  border-color: $error !important;
+  border-color: $error;
 }
 
 .avoid-clicks {

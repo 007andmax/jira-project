@@ -180,14 +180,14 @@
         color: $blue-light-600;
       }
     }
-    .bg-primary {
-      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
-      color: $white;
-      &:hover {
-        background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
-        color: $white;
-      }
-    }
+    //.bg-primary { // TODO check this style
+    //  background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+    //  color: $white;
+    //  &:hover {
+    //    background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
+    //    color: $white;
+    //  }
+    //}
     &.hidden {
       + .ngb-dp-day .custom-day:hover::after,
       + .ngb-dp-day .custom-day.faded::after {

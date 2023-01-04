@@ -21,21 +21,6 @@
                 >
             </div>
             <div class="qt-input-block qt-f50 qt-flex-md-100">
-                <div class="qt-input-block__label">ILC Number</div>
-                <input
-                    type="text"
-                    [(ngModel)]="inventory.ilc"
-                    (blur)="onCheckILC()"
-                    placeholder="Enter ILC Number"
-                >
-              <mat-error
-                class="invalid-feedback"
-                *ngIf="!validate.getILCIsExist()"
-              >
-                This number is already occupied
-              </mat-error>
-            </div>
-            <div class="qt-input-block qt-f50 qt-flex-md-100">
               <div class="qt-input-block__label">ILC Number</div>
               <input
                 number
