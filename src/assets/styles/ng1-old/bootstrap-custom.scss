@@ -552,6 +552,95 @@ fieldset[disabled] input[type="checkbox"] {
 //  }
 //}
 
+// _button-groups
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  > .btn {
+    position: relative;
+    float: left;
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
+    }
+  }
+}
+
+.btn-group {
+  .btn + .btn,
+  .btn + .btn-group,
+  .btn-group + .btn,
+  .btn-group + .btn-group {
+    margin-left: -1px;
+  }
+}
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.btn-group > .btn:first-child {
+  margin-left: 0;
+  &:not(:last-child):not(.dropdown-toggle) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child:not(:last-child) {
+  > .btn:last-child,
+  > .dropdown-toggle {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.btn-group > .btn + .dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.btn-group.open .dropdown-toggle {
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+
+  &.btn-link {
+    box-shadow: none;
+  }
+}
+[data-toggle="buttons"] {
+  > .btn,
+  > .btn-group > .btn {
+    input[type="radio"],
+    input[type="checkbox"] {
+      position: absolute;
+      clip: rect(0,0,0,0);
+      pointer-events: none;
+    }
+  }
+}
+
 // _buttons.scss
 .btn {
   display: inline-block;
@@ -596,7 +685,7 @@ fieldset[disabled] input[type="checkbox"] {
 a.btn {
   &.disabled,
   fieldset[disabled] & {
-    pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    pointer-events: none;
   }
 }
 
@@ -688,12 +777,107 @@ a.btn {
   border-radius: 3px;
 }
 
-// Specificity overrides
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   &.btn-block {
     width: 100%;
+  }
+}
+.btn-link, .btn-link:active, .btn-link.active, .btn-link[disabled], fieldset[disabled] .btn-link {
+  background-color: transparent;
+  box-shadow: none;
+}
+// _navs
+
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+
+  > li {
+    position: relative;
+    display: block;
+
+    > a {
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        background-color: #eee;
+      }
+    }
+
+    &.disabled > a {
+      color: #777;
+
+      &:hover,
+      &:focus {
+        color: #777;
+        text-decoration: none;
+        background-color: transparent;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .open > a {
+    &,
+    &:hover,
+    &:focus {
+      background-color: #eee;
+      border-color: #337ab7;
+    }
+  }
+  > li > a > img {
+    max-width: none;
+  }
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+  > li {
+    float: left;
+    margin-bottom: -1px;
+    > a {
+      margin-right: 2px;
+      line-height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px 4px 0 0;
+      &:hover {
+        border-color: #eee #eee #ddd;
+      }
+    }
+
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
   }
 }
 
@@ -721,4 +905,34 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+}
+
+// _utilities.scss
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.hidden {
+  display: none !important;
 }
