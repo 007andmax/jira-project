@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/input";
 
 .durationoverlay__content {
   pointer-events: all;
@@ -263,16 +264,7 @@
   }
 }
 .duration-container-input {
-  height: 40px;
-  width: 100%;
-  border: solid 1px $gray-500--old;
-  border-radius: 4px;
-  padding: 10px 12px;
-  background: $white;
-}
-.icn-remove-old {
-  top: calc(50% - 6px);
-  @media (max-width: 767px) {
-    top: calc(50% - 14px);
-  }
+  @include input;
+  height: 100%;
+  padding: 10px;
 }

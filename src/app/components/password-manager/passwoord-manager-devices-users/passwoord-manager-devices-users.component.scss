@@ -1,5 +1,11 @@
 @import './src/assets/styles/variable';
 
 .disabled {
-    background-color: $gray-400--old !important;
+    background: $gray-50 !important; // TODO delete important
+    border: 1px solid $gray-200 !important;
+    color: $gray-400 !important;
+
+    &::placeholder {
+      color: $gray-400 !important;
+    }
 }

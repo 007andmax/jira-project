@@ -51,27 +51,12 @@ company-drop-down {
   }
 
   &__title {
-    //@include body-m__sb; // Todo check this style
-    //color: $primary-2;
-    //margin-bottom: 8px;
-
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
     color: $gray-500;
     margin-bottom: 8px;
   }
-
-  //&__error { // Todo check this style
-  //  position: absolute;
-  //  font-size: 11px;
-  //  bottom: 35px;
-  //
-  //  @media (max-width: 767px) {
-  //    bottom: unset;
-  //  }
-  //}
-
 
   &__dropdown {
     button {

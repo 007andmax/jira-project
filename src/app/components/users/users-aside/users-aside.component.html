@@ -130,7 +130,7 @@
                 <textarea
                     id="description-global-note"
                     (input)="onChangeJobDescription($event)"
-                    class="terms-n-conditions__textarea qt-textarea"
+                    class="terms-n-conditions__textarea qt-input-block__textarea"
                     placeholder="Enter job description"
                     appTextArea
                     maxlength="500"
@@ -329,6 +329,7 @@
         </div>
         <div class="qt-inputs-row">
           <div class="qt-input-block">
+            <div class="qt-input-block__label">Tags</div>
             <app-company-tags
               class="users-filter-tags"
               [placement]="'top'"

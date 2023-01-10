@@ -12,13 +12,13 @@
             (onSelectedItem)="selectService($event)"
         ></app-drop-down>
         <mat-error
-            class="qt-tooltip-error"
+            class="invalid-feedback"
             *ngIf="!validate.getValidate() || !validate.getDuplicateName()"
         >
             Duplicate Service
         </mat-error>
         <mat-error
-            class="qt-tooltip-error"
+            class="invalid-feedback"
             *ngIf="!validate.getName()"
         >
             Service name is required

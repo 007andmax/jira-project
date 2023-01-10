@@ -13,6 +13,7 @@
 .disabled {
     background-color: $gray-400--old;
     cursor: default !important;
+    border-radius: 6px;
 }
 .device-user {
     outline: none;
@@ -124,13 +125,9 @@
         margin-right: 0.5rem;
     }
 }
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-}
+
 .icon__help {
-    margin: 0px 0px 0px 4px;
+    margin: 0 0 8px 4px;
     cursor: pointer;
 }
 /deep/.documents-linkeds-body {
@@ -151,6 +148,8 @@
         input {
             height: 38px !important;
             text-indent: 15px;
+            box-shadow: unset;
+            border-color: transparent;
         }
     }
     .mat-chip-list-wrapper {
@@ -164,6 +163,6 @@
     }
     .mat-form-field-label {
         top: 12px;
-        padding: 12px 10px 10px 10px !important;
+        padding: 8px 10px 9px 10px !important;
     }
 }

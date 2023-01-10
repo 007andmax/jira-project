@@ -38,14 +38,9 @@
                           >
                           <span></span>
                         </label>
-                        <div class="qt-w100 qt-df qt-jc-sb --required">
-                            <mat-error
-                                class="qt-tooltip-error"
-                                *ngIf="!editCategory.getValidate() && editCategory.isEditMode(item.id)"
-                                [textContent]="'This category name is already occupied'"
-                            >
-                            </mat-error>
+                        <div class="qt-w100 qt-fw-wrap qt-df qt-jc-sb --required">
                             <input
+                                class="qt-input-block__input"
                                 *ngIf="editCategory.isEditMode(item.id)"
                                 type="text"
                                 [(ngModel)]="editCategory.newName"
@@ -55,6 +50,12 @@
                                 min="1"
                                 max="100"
                             >
+                            <mat-error
+                              class="invalid-feedback --pos-static"
+                              *ngIf="!editCategory.getValidate() && editCategory.isEditMode(item.id)"
+                              [textContent]="'This category name is already occupied'"
+                            >
+                            </mat-error>
                             <p
                                 *ngIf="!editCategory.isEditMode(item.id)"
                                 class="pointer"
@@ -77,14 +78,9 @@
                 *ngIf="toggleAddCategory"
             >
                 <div class="with-checkbox">
-                    <div class="qt-w100 qt-df qt-jc-sb --required">
-                        <mat-error
-                            class="qt-tooltip-error"
-                            *ngIf="!addCategory.getValidate()"
-                            [textContent]="'This category name is already occupied'"
-                        >
-                        </mat-error>
+                    <div class="qt-w100 qt-fw-wrap qt-df qt-jc-sb --required">
                         <input
+                            class="qt-input-block__input"
                             type="text"
                             [(ngModel)]="addCategory.categoryName"
                             (input)="onCheckNameCategory()"
@@ -94,6 +90,12 @@
                             max="100"
                             (keyup)="onAddCategoryByEnter($event)"
                         >
+                        <mat-error
+                          class="invalid-feedback --pos-static"
+                          *ngIf="!addCategory.getValidate()"
+                          [textContent]="'This category name is already occupied'"
+                        >
+                        </mat-error>
                     </div>
                 </div>
             </div>

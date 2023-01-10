@@ -10,39 +10,44 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content new-companies-content__modal--content">
-        <div
+        <div class="qt-inputs-row">
+          <div
             class="qt-input-block"
             [ngClass]="{'--input-error':!validate.getSubject()}"
-        >
-            <label>Subject</label>
+          >
+            <label class="qt-input-block__label">Subject</label>
             <input
-                [(ngModel)]="draftEmail.subject"
-                type="text"
-                maxlength="250"
-                placeholder="Write Subject line"
-                (input)="validate.resetSubject()"
+              [(ngModel)]="draftEmail.subject"
+              type="text"
+              maxlength="250"
+              placeholder="Write Subject line"
+              (input)="validate.resetSubject()"
             >
             <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getSubject()"
+              class="invalid-feedback"
+              *ngIf="!validate.getSubject()"
             >
-                Subject is required
+              Subject is required
             </mat-error>
+          </div>
         </div>
-        <div class="draft-email-sidebar__select-users-container">
+        <div class="qt-inputs-row">
+          <div class="qt-input-block">
+            <div class="qt-input-block__label">Add Recipient</div>
             <app-draft-email-recipients
-                [companiesSelected]="companiesSelected"
-                *ngIf="action === 'COMPANIES'"
-                (onCompanyEmails)="onChangeCompanyEmails($event)"
+              [companiesSelected]="companiesSelected"
+              *ngIf="action === 'COMPANIES'"
+              (onCompanyEmails)="onChangeCompanyEmails($event)"
             ></app-draft-email-recipients>
             <draft-email-user-recipients
-                [usersSelected]="usersSelected"
-                *ngIf="action === 'USERS'"
-                (onCompanyEmails)="onChangeCompanyEmails($event)"
+              [usersSelected]="usersSelected"
+              *ngIf="action === 'USERS'"
+              (onCompanyEmails)="onChangeCompanyEmails($event)"
             ></draft-email-user-recipients>
+          </div>
         </div>
         <div class="draft-email-container">
-            <div class="qt-pt-24 qt-w100 draft-email-sidebar__editor-tab">
+            <div class="qt-w100 draft-email-sidebar__editor-tab">
                 <div
                     class="draft-email-sidebar__editor-tab-item"
                     [ngClass]="{active: tab == 'plain'}"

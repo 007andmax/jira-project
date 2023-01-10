@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/input";
 
 .invoices-page {
   .pengind-loading {
@@ -169,143 +170,140 @@
   }
 
   &__aside {
+    .address-block {
+      border-bottom: 1px solid $gray-400--old;
+    }
 
-  .address-block {
-    border-bottom: 1px solid $gray-400--old;
-  }
+    .receive-full-amount-check {
+      margin-bottom: 0;
+    }
 
-  .receive-full-amount-check {
-    margin-bottom: 0;
-  }
-
-  .unpaid-table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: initial;
-    color: $primary-2;
-
-    .payment-input {
+    .unpaid-table {
       width: 100%;
-      // border: none;
-      border-radius: 0;
-      border-width: 1px;
-      padding: 0 12px;
-      height: 100%;
-      // box-shadow: inset 0px 0px 4px 0px #dfe3e9;
-    }
+      border-spacing: 0;
+      border-collapse: initial;
+      color: $primary-2;
 
-    th {
-      border: solid 1px $gray-400--old;
-      border-right: none;
-      border-bottom: none;
-      background-color: $gray-100--old;
-      height: 36px;
-      font-size: 11px;
-      padding: 0 12px;
-      font-weight: 600;
-      &:first-child {
-        border-top-left-radius: 4px;
+      .payment-input {
+        @include input;
+        height: 100%;
       }
-      &:last-child {
-        border-top-right-radius: 4px;
-        border-right: solid 1px $gray-400--old;
-      }
-    }
-    tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-    tbody {
-      display: block;
-      max-height: 162px;
-      overflow-y: scroll;
-      border-bottom: 1px solid #dfe3e9;
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
-      &::-webkit-scrollbar {
-        width: 0;
-      }
-      tr:last-child {
-        td {
-          border-bottom: none;
+
+      th {
+        border: solid 1px $gray-400--old;
+        border-right: none;
+        border-bottom: none;
+        background-color: $gray-100--old;
+        height: 36px;
+        font-size: 11px;
+        padding: 0 12px;
+        font-weight: 600;
+        &:first-child {
+          border-top-left-radius: 4px;
+        }
+        &:last-child {
+          border-top-right-radius: 4px;
+          border-right: solid 1px $gray-400--old;
         }
       }
-    }
-    td {
-      border: solid 1px $gray-400--old;
-      height: 36px;
-      font-size: 12px;
-      padding: 0 12px;
-      border-right: none;
-      border-bottom: none;
-      &:last-child {
-        border-right: solid 1px $gray-400--old;
+      tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
       }
-    }
-
-    tr {
-      &:last-child {
-        td {
-          border-bottom: solid 1px $gray-400--old;
-
-          &:first-child {
-            border-bottom-left-radius: 4px;
-          }
-          &:last-child {
-            border-bottom-right-radius: 4px;
+      tbody {
+        display: block;
+        max-height: 162px;
+        overflow-y: scroll;
+        border-bottom: 1px solid #dfe3e9;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        &::-webkit-scrollbar {
+          width: 0;
+        }
+        tr:last-child {
+          td {
+            border-bottom: none;
           }
         }
       }
-    }
+      td {
+        border: solid 1px $gray-400--old;
+        height: 36px;
+        padding: 0 12px;
+        border-right: none;
+        border-bottom: none;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        color: $gray-900;
+        &:last-child {
+          border-right: solid 1px $gray-400--old;
+        }
+        &.unpaid-table__payment {
+          padding: 0;
+        }
+      }
 
-    &__check {
-      width: 36px;
-      // padding: 0 9px;
-      label {
-        display: flex;
+      tr {
+        &:last-child {
+          td {
+            border-bottom: solid 1px $gray-400--old;
+
+            &:first-child {
+              border-bottom-left-radius: 4px;
+            }
+            &:last-child {
+              border-bottom-right-radius: 4px;
+            }
+          }
+        }
+      }
+
+      &__check {
+        width: 36px;
+        // padding: 0 9px;
+        label {
+          display: flex;
+        }
+      }
+
+      &__date {
+        width: 156px;
+      }
+
+      &__amount {
+        width: 156px;
+      }
+
+      &__due {
+        width: 156px;
+      }
+
+      &__payment {
+        width: 161px;
+        &.--checked {
+          padding: 0;
+        }
       }
     }
 
-    &__date {
-      width: 156px;
-    }
-
-    &__amount {
-      width: 156px;
-    }
-
-    &__due {
-      width: 156px;
-    }
-
-    &__payment {
-      width: 161px;
-      &.--checked {
-        padding: 0;
+    .summary-info {
+      &__notes {
+        width: 447px;
       }
     }
-  }
 
-  .summary-info {
-    &__notes {
-      width: 447px;
-    }
-    &__textarea {
-      min-height: 80px;
-    }
-  }
+    .invoice-total {
+      width: 275px;
+      border-radius: 6px;
+      border: dashed 1px #637381;
+      padding: 15px 20px;
 
-  .invoice-total {
-    width: 275px;
-    border-radius: 6px;
-    border: dashed 1px #637381;
-    padding: 15px 20px;
-
-    &__total-line {
-      border-top: dashed 1px #637381;
+      &__total-line {
+        border-top: dashed 1px #637381;
+      }
     }
-  }
 
   }
 
@@ -355,6 +353,12 @@ app-invoices-item,app-payment-item {
 .invoices-page__aside {
   &.aside-preview {
     width: 940px;
+
+    .documents-page .documents-table__title {
+      max-width: 190px;
+      width: 190px;
+      min-width: 190px;
+    }
   }
 
   .new-taxes-area {
@@ -440,9 +444,12 @@ app-invoices-item,app-payment-item {
         height: 32px;
       }
       td {
-        font-size: 12px;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+        color: $gray-900;
         height: 40px;
-        padding: 10px 12px;
+        padding: 10px;
         vertical-align: middle;
       }
     }
@@ -485,6 +492,11 @@ app-invoices-item,app-payment-item {
     &__col-amount {
       text-align: right;
       width: 89px;
+
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 400;
+      color: $gray-900;
     }
 
     &__col-price {

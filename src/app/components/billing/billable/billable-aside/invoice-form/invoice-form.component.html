@@ -89,7 +89,7 @@
 </div>
 <div class="infoice-info-row qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-24 ">
     <div class="qt-input-block qt-mr-16 qt-w100">
-        <label>Invoice#</label>
+        <div class="qt-input-block__label">Invoice#</div>
         <input
             [ngClass]="{'--input-error':!validate.getNumber()}"
             [(ngModel)]="invoiceNumber"
@@ -97,7 +97,7 @@
             type="text"
         >
         <mat-error
-            class="qt-tooltip-error"
+            class="invalid-feedback"
             *ngIf="!validate.getNumber()"
             [textContent]="'Invoice with number ' + invoiceNumber + ' is already occupied'"
         >
@@ -107,7 +107,7 @@
         class="qt-input-block qt-mr-16 qt-w100"
         *ngIf="invoiceTaxNumber"
     >
-        <label [textContent]="invoiceTaxNumber.taxIdDescription"></label>
+        <div class="qt-input-block__label" [textContent]="invoiceTaxNumber.taxIdDescription"></div>
         <input
             [(ngModel)]="invoiceTaxNumber.taxId"
             (blur)="onChangeTax()"
@@ -115,7 +115,7 @@
         >
     </div>
     <div class="qt-input-block qt-mr-16 qt-w100 input_inside_white_important">
-        <label>Invoice Date</label>
+        <div class="qt-input-block__label">Invoice Date</div>
         <app-date-picker
             [formatDate]="formatDate"
             [editMode]="true"
@@ -125,7 +125,7 @@
         ></app-date-picker>
     </div>
     <div class="qt-input-block qt-w100 input_inside_white_important">
-        <label>Due Date</label>
+        <div class="qt-input-block__label">Due Date</div>
         <app-date-picker
             [placement]="'bottom-right'"
             [formatDate]="formatDate"
@@ -259,7 +259,7 @@
     <textarea
         id="description-global-note"
         (input)="onCheckUpdateGlobalNote()"
-        class="terms-n-conditions__textarea qt-textarea"
+        class="terms-n-conditions__textarea qt-input-block__textarea"
         placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
         appTextArea
         maxlength="250"

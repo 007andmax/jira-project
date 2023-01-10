@@ -156,7 +156,7 @@
     }
 
     app-invoice-regular-note .dropdown-menu {
-      min-height: 190px;
+      width: 100%;
       app-invoice-select-note {
         min-width: 100%;
       }
@@ -171,23 +171,7 @@
       margin-right: -30px;
       padding-left: 30px;
       padding-right: 30px;
-    }
-
-    .company-info-left-side {
-      border-right: 1px solid $gray-400--old;
-    }
-
-    .company-info-description {
-      min-height: 40px;
-      border-radius: 4px;
-      border: solid 1px $gray-500--old;
-      background-color: $white;
-      padding: 9px 14px;
-      font-size: 13px;
-      line-height: 1.54;
-      &::placeholder {
-        color: $gray-600--old;
-      }
+      padding-bottom: 24px;
     }
 
     app-product-item-quote,
@@ -204,6 +188,12 @@
       th {
         padding-left: 10px;
         padding-right: 10px;
+      }
+      td {
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+        font-weight: 400;
       }
       &__move {
         width: 16px;
@@ -277,9 +267,6 @@
     app-invoice-regular-note {
       .summary-info__notes {
         width: 447px;
-        textarea {
-          min-height: 72px;
-        }
       }
     }
 
@@ -319,7 +306,11 @@
     .mat-form-field-wrapper {
       padding: 0;
       border-radius: 4px;
-      border: solid 1px $gray-500--old;
+      border: solid 1px $gray-200;
+
+      &:hover {
+        border: solid 1px $gray-300;
+      }
     }
     .mat-form-field-infix {
       padding: 0;
@@ -376,17 +367,6 @@
       height: 18px;
       background-size: contain;
       filter: brightness(0.5);
-    }
-  }
-  .quote-text-block {
-    border-radius: 4px;
-    border: solid 1px $gray-500--old;
-    background-color: $white;
-    padding: 10px 14px;
-    font-size: 13px;
-    min-height: 104px;
-    &::placeholder {
-      color: $gray-600--old;
     }
   }
 }

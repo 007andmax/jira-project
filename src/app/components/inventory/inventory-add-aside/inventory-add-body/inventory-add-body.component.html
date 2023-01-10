@@ -37,14 +37,12 @@
             </mat-error>
         </div>
     </div>
-    <div class="qt-inputs-row">
-        <div class="--required">
+    <div class="qt-inputs-row --required">
+        <div class="qt-input-block">
             <div class="qt-input-block__label">GL Number</div>
-            <gl-numbers-drop-down
+            <app-drop-down
                 [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
                 [list]="glNumbers"
-                [search]="true"
-                [change]="true"
                 [reducerItem]="formatterGLNumber"
                 #glNumberSelect
                 [placeholder]="'Select GL'"
@@ -52,7 +50,7 @@
                 [field]="'glNumber'"
                 (onAddItem)="onAddGlNumber($event)"
                 (onSelectedItem)="onSelectGlNumbers($event)"
-            ></gl-numbers-drop-down>
+            ></app-drop-down>
         </div>
     </div>
     <div class="qt-inputs-row --required">
@@ -95,7 +93,7 @@
                 placeholder="Enter Cost"
             >
             <mat-error
-                class="invalid-feedback"
+                class="invalid-feedback --pos-static"
                 *ngIf="!validate.getCostSale()"
             >
                 Cost cannot be higher than Price

@@ -269,7 +269,7 @@
         </mat-error>
       </div>
     </div>
-    <div class="details-background">
+    <div class="qt-inputs-row-background">
       <div class="qt-inputs-row">
         <div class="qt-input-block">
           <div class="qt-input-block__subtitle">Contact Detail</div>
@@ -464,11 +464,13 @@
     </div>
     <div class="qt-inputs-row">
       <div class="qt-inputs-block">
+        <div class="qt-input-block__label">Tags</div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
       </div>
     </div>
     <div class="qt-inputs-row">
       <div class="qt-input-block">
+        <div class="qt-input-block__label">Associated Companies</div>
         <company-associate (companiesChange)="onChangedAssociatedCompanies($event)"></company-associate>
       </div>
     </div>

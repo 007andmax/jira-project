@@ -1,25 +1,25 @@
 <div class="add-tax-dropdown">
-    <div class="d-inline-block">
+    <div class="add-tax-dropdown__category">
         <div class="tax-title">Add Category</div>
-        <div class="add-tax-label">Category Name</div>
         <div
-            class="add-category-input qt-mb-24"
+            class="qt-input-block qt-mb-24"
             [ngClass]="{'--input-error' : disableCreateCategory}"
         >
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="disableCreateCategory"
-            >
-                This category name is already occupied
-            </mat-error>
+            <div class="qt-input-block__label">Category Name</div>
             <input
                 placeholder="Enter category name"
                 type="text"
-                class="qt-input-40 input"
+                class="qt-input-block__input"
                 [(ngModel)]="name"
                 (input)="checkDublicateCategory()"
                 required
             >
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="disableCreateCategory"
+            >
+              This category name is already occupied
+            </mat-error>
         </div>
         <div class="d-f">
             <button

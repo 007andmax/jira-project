@@ -361,8 +361,8 @@
 [contenteditable="true"]:empty:before {
   content: attr(placeholder);
   pointer-events: none;
-  display: block;
-  /* For Firefox */
+  display: block; /* For Firefox */
+  color: $gray-400;
 }
 .icn-remove-old {
   top: 12px !important;

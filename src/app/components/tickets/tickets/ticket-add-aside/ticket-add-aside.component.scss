@@ -185,6 +185,7 @@
   content: attr(placeholder);
   pointer-events: none;
   display: block; /* For Firefox */
+  color: $gray-400;
 }
 .device-user {
   width: 24px;

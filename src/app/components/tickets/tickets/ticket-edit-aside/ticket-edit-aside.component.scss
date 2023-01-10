@@ -846,6 +846,7 @@ app-ticket-edit-aside-right-panel {
   content: attr(placeholder);
   pointer-events: none;
   display: block; /* For Firefox */
+  color: $gray-400;
 }
 .mobile-action-btn {
   display: none;
