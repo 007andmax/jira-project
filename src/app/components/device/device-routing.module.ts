@@ -26,33 +26,13 @@ const routes: Routes = [{
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'antivirus/:type/:id',
-            loadChildren: './antivirus/antivirus.module#AntivirusModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
             path: 'terminal/:type/:id',
             loadChildren: './terminal/terminal.module#TerminalModule',
             canActivate: [PermissionTechUserService]
         },
         {
-            path: 'password/:type/:id',
-            loadChildren: './password/password.module#PasswordModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'window/:type/:id',
-            loadChildren: './windows-update/windows-update.module#WindowsModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
             path: 'startup/:type/:id',
             loadChildren: './startup-programes/startup-programes.module#StartupModule',
-            canActivate: [PermissionTechUserService]
-        },
-        {
-            path: 'file/:type/:id',
-            loadChildren: './file-explorer/file-explorer.module#FileModule',
             canActivate: [PermissionTechUserService]
         },
         {

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { TicketTaskModule } from '../ticket-task/ticket-task.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/material';
 
@@ -22,7 +21,6 @@ import { MatChipsModule, MatIconModule, MatSelectModule } from '@angular/materia
         NgbModule,
         DashboardRoutingModule,
         ReactiveFormsModule,
-        TicketTaskModule,
         DropDownModule,
         MatSelectModule,
         MatChipsModule,

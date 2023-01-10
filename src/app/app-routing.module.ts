@@ -37,12 +37,8 @@ import { DashboardComponent } from './components/device/dashboard/dashboard.comp
 import { HardwareComponent } from './components/device/hardware/hardware.component';
 import { SoftwareComponent } from './components/device/software/software.component';
 import { ServicesComponent } from './components/device/services/services.component';
-import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
 import { TerminalComponent } from './components/device/terminal/terminal.component';
-import { PasswordComponent } from './components/device/password/password.component';
-import { WindowsComponent } from './components/device/windows-update/windows-update.component';
 import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
-import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
