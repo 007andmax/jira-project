@@ -146,22 +146,6 @@
       margin-right: 8px;
     }
   }
-  //.btn.btn-link { // TODO check this style
-  //  color: $white;
-  //  min-width: 20px;
-  //  text-align: left;
-  //  margin: 0;
-  //  padding: 0;
-  //  span {
-  //    margin-bottom: 2px;
-  //    color: $gray-800--old;
-  //  }
-  //}
-  //.right {
-  //  .btn.btn-link {
-  //    text-align: right;
-  //  }
-  //}
   .ngb-dp-day {
     border: none;
     outline: none;
@@ -180,14 +164,6 @@
         color: $blue-light-600;
       }
     }
-    //.bg-primary { // TODO check this style
-    //  background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
-    //  color: $white;
-    //  &:hover {
-    //    background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
-    //    color: $white;
-    //  }
-    //}
     &.hidden {
       + .ngb-dp-day .custom-day:hover::after,
       + .ngb-dp-day .custom-day.faded::after {

@@ -1,7 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 @import "./src/assets/styles/mixin/dropdown";
-// TODO Clear comment
 
 .disabled {
   background: $gray-200--old;
@@ -14,7 +13,7 @@
 }
 .filter-tags-body {
   padding: 0;
-  margin-top: 0px !important;
+  margin-top: 0 !important;
   /deep/.mat-form-field-label {
     top: 8px;
   }

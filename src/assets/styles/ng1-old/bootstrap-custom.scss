@@ -285,7 +285,7 @@ hr {
   border-top: 1px solid #eee;
 }
 
-.sr-only { // TODO check this style
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -542,16 +542,6 @@ fieldset[disabled] input[type="checkbox"] {
   cursor: not-allowed;
 }
 
-// _component-animations.scss
-
-//.fade { // TODO check this style
-//  opacity: 0;
-//  transition: opacity 0.15s linear;
-//  &.in {
-//    opacity: 1;
-//  }
-//}
-
 // _dropdowns.scss
 .dropup,
 .dropdown {
@@ -571,59 +561,7 @@ fieldset[disabled] input[type="checkbox"] {
     right: 0;
     left: auto;
   }
-
-  //> li > a { // TODO check this style
-  //  display: block;
-  //  padding: 3px 20px;
-  //  clear: both;
-  //  font-weight: normal;
-  //  line-height: 1.42857143;
-  //  color: #333333;
-  //  white-space: nowrap;
-  //}
 }
-//.dropdown-menu > li > a { // TODO check this style
-//  &:hover,
-//  &:focus {
-//    text-decoration: none;
-//    color: #262626;
-//    background-color: #f5f5f5;
-//  }
-//}
-//.dropdown-menu > .active > a { // TODO check this style
-//  &,
-//  &:hover,
-//  &:focus {
-//    color: #fff;
-//    text-decoration: none;
-//    outline: 0;
-//    background-color: #337ab7;
-//  }
-//}
-//.dropdown-menu > .disabled > a { // TODO check this style
-//  &,
-//  &:hover,
-//  &:focus {
-//    color: #777777;
-//  }
-//
-//  &:hover,
-//  &:focus {
-//    text-decoration: none;
-//    background-color: transparent;
-//    background-image: none;
-//    cursor: not-allowed;
-//  }
-//}
-//.open {
-//  > .dropdown-menu {
-//    display: block;
-//  }
-//
-//  > a {
-//    outline: 0;
-//  }
-//}
 
 .pull-right > .dropdown-menu {
   right: 0;
