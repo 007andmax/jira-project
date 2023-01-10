@@ -131,10 +131,12 @@ export class CompanyProfile {
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
+        let addresses = [this.addresses[0]];
+        if (this.addresses.length == 2 && this.addresses[1].checkForAdd()) addresses.push(this.addresses[1]);
         return {
             associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,
-            addresses: this.addresses,
+            addresses: addresses,
             agentLinkToEmail: this.agentLinkToEmail,
             clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : { name: this.clientIndustry.name },
             clientType: this.clientType,
