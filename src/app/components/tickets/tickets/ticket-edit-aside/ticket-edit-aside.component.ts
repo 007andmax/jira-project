@@ -103,7 +103,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-        if (!this.rightPanel.toggleRightPanel) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
+        if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
     this.sub.add(getOnEditTicket);
