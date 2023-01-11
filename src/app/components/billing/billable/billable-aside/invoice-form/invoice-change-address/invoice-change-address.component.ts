@@ -16,6 +16,12 @@ export class InvoiceChangeAddressComponent implements OnInit {
 
   ngOnInit() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.quoteCompany.id);
+    console.log("company.companyInfo.addresses", this.company);
+  }
+  checkShippingAddress() {
+    if (this.company.companyInfo.addresses.length == 1) return false;
+    if (this.company.companyInfo.addresses[1].locationName.length == 0 || this.company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode.length == 0) return false;
+    return true;
   }
   selectAddress(data) {
     this.onSelectAddress.emit(data)
