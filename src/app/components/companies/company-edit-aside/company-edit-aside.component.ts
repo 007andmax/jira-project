@@ -166,6 +166,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onCheckGoogleAutoComplete(event, index) {
     if (event.target.getAttribute("location-is-init") == "false") this.getPlaceAutocomplete(event, index);
   }
+  onCheckShippingAddress() {
+    if (this.company.addresses[1].address.length == 0) this.company.addresses[1].addressWithSuitNumberAndPostalCode = "";
+  }
   close() {
     this.opened = false;
     this.locationIsinit = false;
