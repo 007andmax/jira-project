@@ -199,14 +199,6 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    (click)="delete()"
-                >
-                    <div class="icon__archive qt-bg-contain qt-sz-20 qt-mr-12"></div>
-                    Delete
-                </li>
-                <li
-                    class="pointer"
-                    ngbDropdownItem
                     (click)="setActive(false)"
                     *ngIf="inventory.active"
                 >
@@ -219,6 +211,14 @@
                     *ngIf="!inventory.active"
                 >
                     Mark active
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    (click)="delete()"
+                >
+                    <div class="icon__archive qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    Delete
                 </li>
             </ul>
         </div>
