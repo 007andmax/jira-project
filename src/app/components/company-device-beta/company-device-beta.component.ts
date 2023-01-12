@@ -344,8 +344,8 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
                 asset.UpTime = Days;
               }
             }
+            asset.online = true;
           }
-          asset.online = true;
         }
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();

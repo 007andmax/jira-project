@@ -226,13 +226,15 @@ export class DeviceComponent implements OnInit, OnDestroy {
           let index = deviceList.findIndex(
             (value) => value.agentId === this._id
           );
-          this.deviceDetail = deviceList[index];
-          localStorage.setItem(
-            "deviceDetail_" + this._id,
-            JSON.stringify(deviceList[index])
-          );
-          localStorage.setItem("company_id", deviceList[index].company_id);
-          this.deviceDetailService.setDevice(JSON.stringify(deviceList[index]));
+          if (index > -1) {
+            this.deviceDetail = deviceList[index];
+            localStorage.setItem(
+              "deviceDetail_" + this._id,
+              JSON.stringify(deviceList[index])
+            );
+            localStorage.setItem("company_id", deviceList[index].company_id);
+            this.deviceDetailService.setDevice(JSON.stringify(deviceList[index]));
+          }
           // this.getDeviceDetail();
         },
         (error) => {
