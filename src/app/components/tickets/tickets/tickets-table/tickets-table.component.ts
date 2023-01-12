@@ -24,7 +24,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   tickets: Array<Ticket> = [];
   sub: Subscription = new Subscription();
   listColors: Array<StatusColor> = [];
-  offset: number = 15;
+  offset: number = 30;
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
@@ -104,7 +104,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       return;
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
-
+    this.ticketsFilter.setSize(30);
+    //this.ticketsFilter.onSetSizeAll();
 
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
