@@ -1,14 +1,14 @@
-<div class="recurring-tickets-content__list--item clearfix" [ngClass]="(ticket.noValid) ? 'no-valid' : ''">
-  <div class="col-md-3">
-    <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
+<div class="qt-table-modern__row qt-table-modern__row--lg" [ngClass]="(ticket.noValid) ? 'no-valid' : ''">
+  <div class="recurring-tickets__company-name">
+    <div class="circle-avatar qt-ml-16 qt-mr-16" [textContent]="getParseShortName(ticket.company.name)"></div>
     <p [textContent]="ticket.company.name"></p>
   </div>
-  <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent.label : ''"></div>
-  <div class="col-md-3" [textContent]="ticket.description"></div>
-  <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
-  <div class="col-md-1" *ngIf="!ticket.suspended" [textContent]="recurringState.getTypeCron(ticket.cronExpression)"></div>
-  <div class="col-md-1" *ngIf="ticket.suspended">Suspend</div>
-  <div class="col-md-2 assigned-container">
+  <div class="recurring-tickets__device" [textContent]="(ticket.agent) ? ticket.agent.label : ''"></div>
+  <div class="recurring-tickets__description" [textContent]="ticket.description"></div>
+  <div class="recurring-tickets__start-date" [textContent]="getPareDate(ticket.startDate)"></div>
+  <div class="recurring-tickets__interval" *ngIf="!ticket.suspended" [textContent]="recurringState.getTypeCron(ticket.cronExpression)"></div>
+  <div class="recurring-tickets__interval" *ngIf="ticket.suspended">Suspend</div>
+  <div class="recurring-tickets__assigned-user assigned-container">
 
     <ng-template ngFor let-user [ngForOf]="ticket.assignedUsers" let-i="index" [ngForTrackBy]="trackByIndex">
       <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar && i < 3">
@@ -16,7 +16,7 @@
         <span [textContent]="user.lastName[0].toUpperCase()"></span>
       </div>
       <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar && i < 3">
-        <img class="img-circle qwe"
+        <img class="qt-circle qwe"
              style="margin: 0;"
              [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
              alt="...">
@@ -48,7 +48,7 @@
                     <span [textContent]="user.lastName[0].toUpperCase()"></span>
                   </div>
                   <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
-                    <img ng-if="user.avatar" class="img-circle qwe"
+                    <img ng-if="user.avatar" class="qt-circle qwe"
                          style="margin: 0;"
                          [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                          alt="...">
@@ -59,23 +59,21 @@
                               </span>
                 </a></div>
               </ng-template>
-
-
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
 
     <div class="assigned-wrapper"></div>
-
+  </div>
+  <div class="recurring-tickets__menu">
     <div class="grey-dropdown right with-icons"
          ngbDropdown>
-      <i class="icn-16 icon__more pointer"
+      <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain pointer"
          id="dropdownBasic"
-         ngbDropdownToggle></i>
+         ngbDropdownToggle>
+      </div>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
         <button ngbDropdownItem (click)="editTicket()"><i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-bg-contain icon__edit"></i>Edit</button>
         <button ngbDropdownItem (click)="suspendTicket()" *ngIf="!ticket.suspended"><i

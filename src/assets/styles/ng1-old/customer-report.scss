@@ -28,14 +28,6 @@ html.no-d3-tooltip .nvtooltip .value {
   background: transparent;
 }
 
-.commission-customer .col-md-2 {
-  width: 13.666667%;
-}
-
-.commission-customer .col-md-4 {
-  width: 45.333333%;
-}
-
 .commission-customer .details-content .row:not(:last-child) {
   border-bottom: 1px solid #f1f5f8;
 }
@@ -56,10 +48,6 @@ html.no-d3-tooltip .nvtooltip .value {
 .customer-ticket__report .services.border {
   border: 1px dashed #d0edfe;
   border-radius: 5px;
-}
-
-.commission-report .col-md-1 {
-  width: 11.4%;
 }
 
 .customer-ticket__report .products.border {
@@ -105,9 +93,6 @@ html.no-d3-tooltip .nvtooltip .value {
 
 .customer-report-modal {
   padding: 15px;
-  h2.col-sm-12 {
-    margin-top: 0;
-  }
 }
 
 .details-futures-info {
@@ -116,9 +101,6 @@ html.no-d3-tooltip .nvtooltip .value {
   width: 100%;
   position: relative;
   border-radius: 4px;
-  [class*='col-md-'] {
-    padding: 0 5px !important;
-  }
 }
 
 .report-info-point {

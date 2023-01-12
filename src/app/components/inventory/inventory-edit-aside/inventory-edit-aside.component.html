@@ -19,12 +19,6 @@
                     (blur)="onCheckManufacture()"
                     placeholder="Enter Item Number"
                 >
-                <mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getManufactureIsExist()"
-                >
-                    This number is already occupied
-                </mat-error>
             </div>
             <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <div class="qt-input-block__label">ILC Number</div>
@@ -43,6 +37,44 @@
                     *ngIf="!validate.getILCIsExist()"
                 >
                     This number is already occupied
+                </mat-error>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <p>GL Number</p>
+                <gl-numbers-drop-down
+                    [class]="['light-dropdown']"
+                    [list]="glNumbers"
+                    #glNumberSelect
+                    [add]="true"
+                    [search]="true"
+                    [change]="true"
+                    [field]="'glNumber'"
+                    [reducerItem]="formatterGLNumber"
+                    [placeholder]="'Select GL'"
+                    [editItem]="inventory.glNumber"
+                    (onAddItem)="onAddGlNumber($event)"
+                    (onSelectedItem)="onSelectGlNumbers($event)"
+                ></gl-numbers-drop-down>
+            </div>
+        </div>
+        <div class="qt-inputs-row">
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Description</div>
+                <textarea
+                    appTextArea
+                    [limit]="160"
+                    id="inventory-description"
+                    placeholder="Write Product Description"
+                    (input)="onChangeDescription($event)"
+                    (onPast)="onPastDescription($event)"
+                ></textarea>
+                <mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getDescription()"
+                >
+                    Description is required
                 </mat-error>
             </div>
         </div>
@@ -196,7 +228,7 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="d-f">
+        <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
                 (click)="save()"

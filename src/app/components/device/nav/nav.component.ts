@@ -82,23 +82,10 @@ export class NavComponent implements OnInit, OnDestroy {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/terminal/${this.type}/${this._id}`]);
   }
-  goToWindowUpdate() {
-    this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/window/${this.type}/${this._id}`]);
-  }
-  goToFileExplorer() {
-    this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/file/${this.type}/${this._id}`]);
-  }
-  goToPasswords() {
-    this.router.navigate(
-      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/password/${this.type}/${this._id}`]);
-  }
   goToWindowUpdates() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/windows/${this.type}/${this._id}`]);
   }
-
   goToProcesses() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/processes/${this.type}/${this._id}`]);

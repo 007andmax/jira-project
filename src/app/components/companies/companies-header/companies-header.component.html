@@ -1,13 +1,15 @@
 <div class="qt-page-list__header --sticky">
-    <div class="new-companies-content__header">
-        <div
+    <div class="qt-page-list__header-title-line qt-mb-16">
+        <div class="qt-page-list__header-title-line--left">
+          <div
             _ngcontent-otb-c83
             class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"
             (click)="toggleMobileLeftPanel()"
-        ></div>
-        <h6 class="qt-page-list__header-title">
+          ></div>
+          <h6 class="qt-page-list__header-title">
             All Companies ({{calculateCount.getCurrent()}})
-        </h6>
+          </h6>
+        </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div
                 class="new-companies-content__header-buttons"
@@ -56,7 +58,7 @@
                     Clear All
                 </button>
                 <button
-                    class="qt-btn btn-filter qt-mr-8 qt-ml-8 d-f"
+                    class="qt-btn btn-filter qt-mr-8 qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"
@@ -108,7 +110,7 @@
         <div class="qt-table-modern qt-page-list__header-thead">
             <div class="qt-page-list__header-thead__row">
                 <div class="companies-table__check">
-                    <div class="d-f qt-jc-fe">
+                    <div class="qt-df qt-jc-fe">
                         <label class="qt-checkbox">
                             <input
                                 type="checkbox"

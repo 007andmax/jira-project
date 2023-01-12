@@ -11,7 +11,7 @@
             ></h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">
-            <div class="d-f ai-c">
+            <div class="qt-df qt-ai-c">
                 <span
                     class="qt-input-search"
                     [hidden]="true"
@@ -32,7 +32,7 @@
                     Clear all
                 </button>
                 <button
-                    class="qt-btn filter-button qt-mr-8 d-f"
+                    class="qt-btn filter-button qt-mr-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                 'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"
@@ -88,7 +88,7 @@
 </div>
 <div
     class="list-filters"
-    *ngIf="ticketsFilter.selectedCompany || 
+    *ngIf="ticketsFilter.selectedCompany ||
     ticketsFilter.selectedTechUser ||
     ticketsFilter.selectedUser ||
     ticketsFilter.selectedStatus ||

@@ -80,7 +80,14 @@
 .modal-header {
   padding: $modal-title-padding;
   border-bottom: 1px solid $modal-header-border-color;
-  @include clearfix;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
 }
 // Close icon
 .modal-header .close {
@@ -103,26 +110,25 @@
 // Footer (for actions)
 .modal-footer {
   padding: $modal-inner-padding;
-  text-align: right; // right align buttons
+  text-align: right;
   border-top: 1px solid $modal-footer-border-color;
-  @include clearfix; // clear it in case folks use .pull-* classes on buttons
-
-  // Properly space out buttons
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
   .btn + .btn {
-    margin-bottom: 0; // account for input[type="submit"] which gets the bottom margin like all other inputs
+    margin-bottom: 0;
     margin-left: 5px;
   }
-  // but override that for button groups
   .btn-group .btn + .btn {
     margin-left: -1px;
   }
-  // and override it for block buttons as well
-  .btn-block + .btn-block {
-    margin-left: 0;
-  }
 }
 
-// Measure scrollbar width for padding body during modal show/hide
 .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;
@@ -131,9 +137,7 @@
   overflow: scroll;
 }
 
-// Scale up the modal
 @media (min-width: $screen-sm-min) {
-  // Automatically set modal's width for larger viewports
   .modal-dialog {
     width: $modal-md;
     margin: 30px auto;
@@ -142,7 +146,6 @@
     @include box-shadow(0 5px 15px rgba(0, 0, 0, .5));
   }
 
-  // Modal sizes
   .modal-sm { width: $modal-sm; }
 }
 

@@ -1,0 +1,49 @@
+@import "./src/assets/styles/variable";
+
+.recurring-tickets {
+  &__list--header {
+    display: flex;
+
+    > div {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      font-size: 11px;
+      line-height: 16px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  &__company-name {
+    width: 25%;
+
+    &-text {
+      padding: 8px;
+      font-size: 11px;
+      line-height: 16px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+  }
+  &__device {
+    width: 16.66666667%
+  }
+  &__description {
+    width: 25%;
+  }
+  &__start-date {
+    width: 8.33333333%;
+  }
+  &__interval {
+    width: 8.33333333%;
+  }
+  &__assigned-user {
+    width: 16.66666667%
+  }
+  &__menu {
+    flex: 0 0 42px;
+  }
+}

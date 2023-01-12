@@ -24,7 +24,7 @@
 <div class="outsideheader">
   <div class="reports-all">
       <div
-          class="col-sm-3">
+          class="reports-all__column">
       <app-report-list-item
           class="d-device"
           [title]="'Device'"
@@ -38,7 +38,7 @@
       [listStates]="getListStates('WARRANTY',searchText)"
       ></app-report-list-item>
       </div>
-      <div class="col-sm-3">
+      <div class="reports-all__column">
         <app-report-list-item
         class="d-hardware"
         [title]="'Hardware'"
@@ -47,7 +47,7 @@
     ></app-report-list-item>
       </div>
       <div
-          class="col-sm-3"
+          class="reports-all__column"
       >
         <app-report-list-item
         class="d-network"
@@ -56,7 +56,7 @@
          [listStates]="getListStates('NETWORK',searchText)"
          ></app-report-list-item>
       </div>
-      <div class="col-sm-3">
+      <div class="reports-all__column">
         <app-report-list-item
         class="d-software"
         [title]="'Software'"

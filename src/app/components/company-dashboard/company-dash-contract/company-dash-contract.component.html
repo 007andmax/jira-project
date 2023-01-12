@@ -1,21 +1,21 @@
-<div class="d-flex">
-   <div class="cmp-board-contract cmn-box d-flex">
-         <div class="progress-contract d-flex">
-               <div class="progress-count d-flex">
+<div class="qt-dflex">
+   <div class="cmp-board-contract cmn-box qt-df">
+         <div class="progress-contract qt-df">
+               <div class="progress-count qt-df">
                  <h4 class="">{{statisticsCount}} hr</h4>
                  <span class="st-hrs">Hours Spent</span>
                </div>
-               <div class="cmp-board-progresbbar d-flex">
+               <div class="cmp-board-progresbbar qt-df">
                    <span *ngFor="let stat of statistics; let i = index;" [style.backgroundColor]="stat.color" [style.width]="stat.width">{{i}}</span>
 
                </div>
-               <ul class="list-unstyled d-flex">
-                   <li class="d-flex color{{i}}" *ngFor="let stat of statistics; let i = index;">
+               <ul class="list-unstyled qt-df">
+                   <li class="qt-dflex color{{i}}" *ngFor="let stat of statistics; let i = index;">
                        <span>{{stat.itemName}}</span>
                        <b>{{stat.quantity}} hr</b>
                    </li>
                </ul>
-               <div class="contract-info d-flex">
+               <div class="contract-info qt-df">
                      <div class="caption-l">Hourly Contract</div>
                      <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
                </div>

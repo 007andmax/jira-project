@@ -1,6 +1,6 @@
 <div>
   <div class="report-menu">
-      <div class="run-report-content col-md-11 left">
+      <div class="run-report-content left">
           <div class="grey-dropdown form-group content select-users-list">
               <app-drop-down
                   [placeholder]="'All Companies'"
@@ -58,7 +58,7 @@
       "></i>
           </button>
       </div>
-      <div class="run-report-content col-md-1 right">
+      <div class="run-report-content right">
           <div
               class="header-close icon__close"
               (click)="goToReportList()"
@@ -124,10 +124,10 @@
           <table class="qt-page-list__body-tbody qt-table-modern" *ngIf="deviceDeploymentWarrantyList.length == 0">
             <tbody>
                 <tr>
-                    <td colspan="10" class="text-center report-device-deploymentwarranty-table">Data Not Available</td>
+                    <td colspan="10" class="qt-text-center report-device-deploymentwarranty-table">Data Not Available</td>
                 </tr>
             </tbody>
-        </table>         
+        </table>
       </div>
   </div>
 </div>

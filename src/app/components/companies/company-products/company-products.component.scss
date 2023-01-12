@@ -49,3 +49,61 @@ pre {
   border-radius: unset;
   font-family: unset;
 }
+
+.product-list-ticket {
+  &__check {
+    flex: 0 0 48px
+  }
+  &__date,
+  &__client, {
+    flex: 1 1 110px;
+  }
+  &__mfg {
+    flex: 1 1 110px;
+  }
+  &__description {
+    flex: 1 1 310px;
+    height: auto;
+    word-wrap: break-word;
+    line-height: 30px;
+    overflow: auto;
+    max-width: 450px;
+  }
+  &__serial-number {
+    flex: 1 1 150px;
+  }
+  &__number {
+    flex: 1 1 200px;
+  }
+  &__invoice-number {
+    flex: 1 1 200px;
+  }
+  &__purchase-cost {
+    flex: 1 1 110px;
+  }
+  &__sale-price {
+    flex: 1 1 150px;
+  }
+}
+
+.qt-table-modern__row--lg {
+  min-height: 66px;
+  height: auto;
+  width: calc(100% + 2px);
+
+  > div {
+    cursor: default;
+  }
+}
+
+.product-report-total-sales {
+  > div:first-child {
+    padding-left: 16px;
+  }
+  > div:last-child {
+    padding-right: 16px;
+  }
+  > div {
+    padding: 0 8px 0 8px;
+  }
+}

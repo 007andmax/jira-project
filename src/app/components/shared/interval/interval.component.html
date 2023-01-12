@@ -60,7 +60,7 @@
             class="recurring-interval-dropdown__content clearfix"
             *ngIf="activeTab === 'daily'"
         >
-            <div class="col-md-6 p-0">
+            <div class="qt-w50 qt-mr-12">
                 <label class="qt-checkbox qt-mb-16">
                     <input
                         type="checkbox"
@@ -106,7 +106,7 @@
                     <div class="qt-ml-8">Thursday</div>
                 </label>
             </div>
-            <div class="col-md-6 p-0">
+            <div class="qt-w50">
                 <label class="qt-checkbox qt-mb-16">
                     <input
                         type="checkbox"
@@ -148,7 +148,7 @@
             class="recurring-interval-dropdown__content clearfix"
             *ngIf="activeTab === 'weekly'"
         >
-            <div class="col-md-6 p-0">
+            <div class="qt-w50 qt-mr-12">
                 <label class="qt-checkbox qt-mb-16">
                     <input
                         type="radio"
@@ -194,7 +194,7 @@
                     <div class="qt-ml-8">Thursday</div>
                 </label>
             </div>
-            <div class="col-md-6 p-0">
+            <div class="qt-w50">
                 <label class="qt-checkbox qt-mb-16">
                     <input
                         type="radio"
@@ -244,7 +244,7 @@
                 [startDate]="datepicker"
                 [ngModelOptions]="{standalone: true}"
             ></ngb-datepicker>
-            <div class="date-picker-actions d-f">
+            <div class="date-picker-actions qt-df">
                 <button
                     class="btn-new btn-primary-white qt-fs-0"
                     (click)="selectStartMonth();"

@@ -4,25 +4,25 @@
         *ngIf="showPreloader"
     ></div>
     <div
-        class="cmp-dboard-container d-flex"
+        class="cmp-dboard-container qt-df"
         [hidden]="showPreloader"
     >
-        <div class="cmp-dboard-row d-flex">
+        <div class="cmp-dboard-row qt-df">
             <app-company-dash-detail
-                class="cmp-dboard-col left-profilebar cmn-box d-flex"
+                class="cmp-dboard-col left-profilebar cmn-box qt-df"
                 (companyNameChanged)="companyNameChangedHandler($event)"
                 (totalTicketsChanged)="totalTicketsChangedHandler($event)"
                 (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"
                 (companyChanged)="onCompanyChanged($event)"
             ></app-company-dash-detail>
             <div
-                class="cmp-dboard-col right-stasticsbar d-flex"
+                class="cmp-dboard-col right-stasticsbar qt-df"
                 *ngIf="company && (company.clientType === 'VENDOR' || company.clientType === 'SUPPLIER') && !appService.checkMobile()"
             >
                 <company-dash-associate [company]="company"></company-dash-associate>
             </div>
             <div
-                class="cmp-dboard-col right-stasticsbar d-flex"
+                class="cmp-dboard-col right-stasticsbar qt-df"
                 *ngIf="company && company.clientType !== 'VENDOR' && company.clientType !== 'SUPPLIER' && !appService.checkMobile()"
             >
                 <app-company-dash-stats
@@ -30,22 +30,22 @@
                     [averageResponseTime]="averageResponseTime"
                 ></app-company-dash-stats>
                 <app-company-dash-ticket></app-company-dash-ticket>
-                <div class="cmp-board-information d-flex">
-                    <div class="cmp-board-info-row d-flex">
-                        <div class="cmp-board-info-col d-flex">
+                <div class="cmp-board-information qt-df">
+                    <div class="cmp-board-info-row qt-df">
+                        <div class="cmp-board-info-col qt-df">
                             <app-company-dash-revenue
                                 *ngIf="getPermissions('VIEW_ACCOUNTING')"
-                                class="cmp-board-revenue cmn-box d-flex"
+                                class="cmp-board-revenue cmn-box qt-df"
                             ></app-company-dash-revenue>
                             <app-company-dash-invoice
                                 *ngIf="getPermissions('VIEW_ACCOUNTING')"
                                 [companyName]="companyName"
                             ></app-company-dash-invoice>
                         </div>
-                        <div class="cmp-board-info-col d-flex">
+                        <div class="cmp-board-info-col qt-df">
                             <app-company-dash-contract *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"></app-company-dash-contract>
                             <company-dash-associate-info
-                                class="d-flex"
+                                class="qt-dflex"
                                 [company]="company"
                             ></company-dash-associate-info>
                         </div>

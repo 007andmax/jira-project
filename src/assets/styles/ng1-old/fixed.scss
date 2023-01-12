@@ -1,7 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 @import "./src/assets/styles/mixin/dropdown";
-// TODO Clear comment
 
 .btn.btn-new,
 .btn-new {
@@ -11,7 +10,6 @@
   font-size: 13px;
   font-weight: 500;
   border-radius: 4px;
-  /*border: none;*/
   cursor: pointer;
   transition: all 0.3s;
   display: flex;

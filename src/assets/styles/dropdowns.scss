@@ -146,22 +146,6 @@
       margin-right: 8px;
     }
   }
-  .btn.btn-link {
-    color: $white;
-    min-width: 20px;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    span {
-      margin-bottom: 2px;
-      color: $gray-800--old;
-    }
-  }
-  .right {
-    .btn.btn-link {
-      text-align: right;
-    }
-  }
   .ngb-dp-day {
     border: none;
     outline: none;
@@ -178,14 +162,6 @@
       align-items: center;
       &:hover {
         color: $blue-light-600;
-      }
-    }
-    .bg-primary {
-      background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
-      color: $white;
-      &:hover {
-        background: radial-gradient(circle at center, $blue-light-600 15px, #fff 16px);
-        color: $white;
       }
     }
     &.hidden {
@@ -305,12 +281,6 @@
           &:hover {
             background-color: $gray-200--old;
           }
-          .col-md-10 {
-            width: 75%;
-          }
-          .col-md-2 {
-            width: 17%;
-          }
           .title {
             font-size: 13px;
             color: $gray-800--old;
@@ -322,16 +292,6 @@
           .total-count {
             color: $primary-2;
             @include сaption-l;
-          }
-          .col-md-12 {
-            span {
-              font-size: 11px;
-              color: $gray-600--old;
-              word-break: break-all;
-              &:first-child {
-                margin-right: 15px;
-              }
-            }
           }
         }
       }

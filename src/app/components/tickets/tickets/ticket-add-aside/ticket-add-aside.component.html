@@ -3,7 +3,7 @@
     class="qt-aside-modern qt-aside-modern--page-settings"
 >
     <div class="qt-aside-modern__header">
-        <div class="qt-aside-modern__header-info d-f ai-c">
+        <div class="qt-aside-modern__header-info qt-df qt-ai-c">
             <div class="qt-aside__title">Create New Ticket</div>
             <div
                 class="qt-aside__ticket-name"
@@ -214,7 +214,7 @@
                                 <div *ngIf="user.avatar">
                                     <img
                                         ng-if="user.avatar"
-                                        class="img-circle default-user-avatar"
+                                        class="qt-circle default-user-avatar"
                                         [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                                         alt="..."
                                     >
@@ -251,7 +251,7 @@
                                 <div *ngIf="user.avatar">
                                     <img
                                         ng-if="user.avatar"
-                                        class="img-circle default-user-avatar"
+                                        class="qt-circle default-user-avatar"
                                         [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                                         alt="..."
                                     >

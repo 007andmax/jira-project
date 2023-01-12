@@ -225,8 +225,8 @@
                     asset.iconName === 'Workstation' || !asset.iconName,
                     icon__tablet: asset.iconName === 'Networking Hardware',
                     icon__printer: asset.iconName === 'Printer',
-                    icon__server: asset.iconName === 'Server', 
-                    icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',                                        
+                    icon__server: asset.iconName === 'Server',
+                    icon__documents: asset.iconName !== 'Workstation' || asset.iconName !== 'Networking Hardware' || asset.iconName !== 'Printer' || asset.iconName !== 'Server',
                     '--ofline': !asset.online
                   }"
                                 ngbDropdownToggle
@@ -275,7 +275,7 @@
                                     [textContent]="asset.Name"
                                 ></span>
                             </div>
-                        </td>                    
+                        </td>
                         <td class="company-devices-table__logged-user">
                             <div
                                 class="qt-df qt-fd-c"
@@ -323,7 +323,7 @@
                                     [textContent]="'Uninstalled'"
                                 ></span>
                             </div>
-                        </td>    
+                        </td>
                         <td class="company-devices-table__windows">
                             <span
                                 class="company-devices-table__ip-windows-text"
@@ -536,7 +536,7 @@
                     <tr>
                         <td
                             colspan="10"
-                            class="text-center"
+                            class="qt-text-center"
                         >
                             No devices to show
                         </td>
@@ -578,7 +578,7 @@
             icon__tablet: assetData.iconName === 'Networking Hardware',
             icon__printer: assetData.iconName === 'Printer',
             icon__server: assetData.iconName === 'Server',
-            icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',                                        
+            icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
             '--offline': !assetData.online,
             '--online':assetData.online }"
                     ></div>
@@ -593,7 +593,7 @@
           icon__tablet: assetData.iconName === 'Networking Hardware',
           icon__printer: assetData.iconName === 'Printer',
           icon__server: assetData.iconName === 'Server',
-          icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',                                        
+          icon__documents: assetData.iconName !== 'Workstation' || assetData.iconName !== 'Networking Hardware' || assetData.iconName !== 'Printer' || assetData.iconName !== 'Server',
           '--offline': !assetData.online,
           '--online':assetData.online }"
                     ></div>

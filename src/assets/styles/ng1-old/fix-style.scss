@@ -6,9 +6,11 @@ html {
   font-weight: 400;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  overflow-y: scroll;
-  overflow-x: auto;
-  min-width: 1280px;
+  //overflow-y: scroll;
+  //overflow-x: hidden;
+  //overflow-x: auto;
+  //min-width: 1280px;
+  //min-width: calc(1280px + 280px);
   font-size: 16px;
 
   @media (max-width: 767px) {
@@ -158,16 +160,6 @@ hr {
   }
 }
 
-.new-companies-content__modal--content > [class*="col-md-"] input::placeholder,
-.new-users-content__modal--content > [class*="col-md-"] input::placeholder,
-.recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
-.new-users-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
-.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
-.password-content__modal--content > [class*="col-md-"] input::placeholder {
-  opacity: 1;
-  color: $gray-600--old;
-}
-
 .new-companies-content__modal--content textarea::placeholder,
 .new-users-content__modal--content textarea::placeholder,
 .recurring-tickets-content__modal--content textarea::placeholder,
@@ -177,7 +169,6 @@ hr {
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  /* background-color: #fcfdfd; */
   opacity: 1;
 }
 .ticket-priority {
@@ -310,12 +301,6 @@ html::-webkit-scrollbar {
 }
 /* END SCROLLBAR */
 
-/* BOOSTRAP FIX STYLE */
-.row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 /* END BOOSTRAP FIX STYLE */
 
 p {
@@ -439,14 +424,9 @@ strong {
 strong {
   font-weight: 600;
 }
-
-.p-0 {
-  padding: 0 !important;
-}
 textarea {
   resize: none;
 }
-/* End Textarea */
 
 .new-companies-content__modal {
   .switch-link {
@@ -867,29 +847,6 @@ h6,
   box-shadow: none;
   font-weight: 600;
 }
-
-.company-report li.content-product-list-ticket {
-  background-color: $white;
-  margin-bottom: 2px;
-  border: none !important;
-  border-radius: 5px;
-  box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
-  padding: 5px 15px 0;
-  cursor: default !important;
-  min-height: 50px;
-}
-.company-report .content-product-list-ticket .control.checkbox {
-  margin-top: 20px;
-}
-.company-report .content-product-list-ticket .qt-checkbox {
-  margin-top: 18px;
-}
-.company-report [class*="col-md-"] {
-  padding: 12px 6px;
-}
-.company-report .top-product-list-ticket [class*="col-md-"] {
-  @include сaption-m__sb;
-}
 .list-of-product .report-title {
   left: 30px;
 }
@@ -1049,9 +1006,4 @@ h6,
   font-weight: 500;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-}
-@media (min-width: 992px) {
-  .col-md-12 {
-    width: 100%;
-  }
 }

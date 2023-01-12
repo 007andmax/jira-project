@@ -12,14 +12,18 @@ companies-filter {
   }
 }
 company-associate {
-  > .col-md-12,
-  .col-md-6 {
-    margin-top: 40px;
+  > .filter-tags-body {
     .mat-form-field {
       width: 100%;
     }
     .mat-form-field-infix {
-      border: none;
+      border: 1px solid $gray-200;
+      &:hover {
+        border-color: $gray-300;
+      }
+      input {
+        border: unset;
+      }
     }
     .mat-form-field-appearance-legacy .mat-form-field-underline,
     .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
@@ -32,13 +36,10 @@ company-associate {
     .mat-form-field-appearance-legacy .mat-form-field-label {
       padding: 12px 10px 10px 36px;
       font-size: 13px;
-      font-family: "Graphik-Regular", sans-serif;
       color: #9ca5b6;
     }
     .mat-form-field-infix {
-      /* border: 1px solid #c4cbd5;*/
       border-radius: 4px;
-      /* padding-left: 36px;*/
       position: relative;
       min-height: 48px;
       input {

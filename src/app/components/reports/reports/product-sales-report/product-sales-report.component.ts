@@ -42,7 +42,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers.push("Discount");
 
 
-    /*this.classes.push("col-md-1");
+    /*this.classes.push("1");
     if (this.productSalesReport.type === 'SUMMARY') this.classes.push("col-md-1");
     this.classes.push("col-md-1");
     if (this.productSalesReport.type === 'SUMMARY') {

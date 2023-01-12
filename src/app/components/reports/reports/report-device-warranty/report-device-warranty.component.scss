@@ -130,15 +130,16 @@
   border-left: 1px solid #edf0f2;
 }
 
+.report-menu {
+  display: flex;
+}
 .run-report-content {
   &.left {
     width: 96%;
   }
-}
-
-.run-report-content {
   &.right {
     width: 4%;
+    padding-right: 14px;
   }
 }
 
