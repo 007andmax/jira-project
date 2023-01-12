@@ -1,14 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, NgZone } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import {
   UpgradeModule,
 } from '@angular/upgrade/static';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
@@ -20,10 +18,9 @@ import { AlertComponent } from './components/shared/alert/alert.component';
 import { ConfirmComponent } from './components/shared/confirm/confirm.component';
 import { DownloadAgentComponent } from './components/companies/download-agent/download-agent.component';
 import { ImageCropperComponent } from './components/shared/image-cropper/image-cropper.component';
-import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 /**
- * declare angular
- */
+* declare angular
+*/
 declare var angular: any;
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsConfirmComponent } from './components/billing/contracts/contracts-confirm/contracts-confirm.component';
@@ -97,50 +94,18 @@ import { PermissionReportsService } from './components/reports/permission-report
 import { PermissionSupportService } from './components/support/permission-support.service';
 import { PermissionUsersService } from './components/users/permission-users.service';
 
-import { SupportPageComponent } from './components/super-admin/support-page/support-page.component';
-import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 import { PermissionTechUserService } from './services/users/permission-tech-user.service';
 import { PermissionSuperAdminService } from './services/users/permission-super-admin.service';
-import { LeftPanelSuperAdminCategoriesComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories.component';
-import { SupportPageAddCategoryComponent } from './components/super-admin/shared/support-page-add-category/support-page-add-category.component';
-import { SupportPageAddSubCategoryComponent } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.component';
-import { SupportPageEditCategoryComponent } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.component';
-import { LeftPanelSuperAdminCategoriesActionsComponent } from './components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
-import { SupportPageBreadcrumbsComponent } from './components/super-admin/support-page/support-page-breadcrumbs/support-page-breadcrumbs.component';
-import { SupportPageHeaderComponent } from './components/super-admin/support-page/support-page-header/support-page-header.component';
-import { SupportPageBodyComponent } from './components/super-admin/support-page/support-page-body/support-page-body.component';
-import { SupportPageInfoComponent } from './components/super-admin/support-page/support-page-info/support-page-info.component';
-import { SupportPageInfoTagsComponent } from './components/super-admin/support-page/support-page-info/support-page-info-tags/support-page-info-tags.component';
-import { SuperAdminPublicComponent } from './components/super-admin-public/super-admin-public.component';
 import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
-import { SuperAdminPublicDetailComponent } from './components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component';
-import { SuperAdminPublicSearchComponent } from './components/super-admin-public/super-admin-public-search/super-admin-public-search.component';
-import { SupportPageHelpCenterComponent } from './components/super-admin/support-page/support-page-help-center/support-page-help-center.component';
-import { SupportPageCategoryComponent } from './components/super-admin/support-page/support-page-category/support-page-category.component';
-import { SuperAdminPublicCategoryComponent } from './components/super-admin-public/super-admin-public-category/super-admin-public-category.component';
-import { SuperAdminPublicHeaderComponent } from './components/super-admin-public/super-admin-public-header/super-admin-public-header.component';
-import { SortTagsPipe } from './components/super-admin/support-page/support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
 import { InventoryCheckUseComponent } from './components/inventory/inventory-check-use/inventory-check-use.component';
-import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component'
-import { ProcessesPipe } from './pipe/processes.pipe';
-import { ContractsReviewComponent } from './components/billing/contracts/contracts-review/contracts-review.component';
-import { PaymentsReportComponent } from './components/reports/reports/payments-report/payments-report.component';
 import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 import { SupportPageAddCategoryModule } from './components/super-admin/shared/support-page-add-category/support-page-add-category.module';
 import { LeftPanelSuperAdminModule } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.module';
 import { SupportPageAddSubCategoryModule } from './components/super-admin/shared/support-page-add-sub-category/support-page-add-sub-category.module';
-import { PreviewPhoneMaskComponent } from './components/shared/preview-phone-mask/preview-phone-mask.component';
-import { DocumentsEditCategoryComponent } from './components/documents/documents-edit-category/documents-edit-category.component';
-import { DocumentsEditCategoryItemComponent } from './components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component';
-import { GoogleAuthenticatorComponent } from './components/shared/google-authenticator/google-authenticator.component';
 import { GoogleAuthenticatorScratchesComponent } from './components/shared/google-authenticator-scratches/google-authenticator-scratches.component';
 import { GlNumberCheckUseComponent } from './components/setting/accounting/gl-number/gl-number-check-use/gl-number-check-use.component';
-import { CannedResponsesComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses.component';
 import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
-import { TicketProfileFormUpdateNoteListComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { ReportSendEmailModule } from './components/reports/report-additional-actions/report-send-email/report-send-email.module';
-import { CompanyDropDownComponent } from './components/shared/company-drop-down/company-drop-down.component';
-import { NgxMaskModule } from 'ngx-mask';
 import { GoogleAuthenticatorModule } from './components/shared/google-authenticator/google-authenticator.module';
 import { SupportPageEditCategoryModule } from './components/super-admin/shared/support-page-edit-category/support-page-edit-category.module';
 import { TestPermissionService } from './services/test-permission/test-permission.service';
@@ -159,7 +124,6 @@ declare var $: any;
     ConfirmComponent,
     DownloadAgentComponent,
     ImageCropperComponent,
-    //  ReportSendEmailComponent,
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
@@ -168,11 +132,6 @@ declare var $: any;
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
-    // SupportPageEditCategoryComponent,
-    // LeftPanelSuperAdminComponent,
-    // SupportPageAddCategoryComponent,
-    // LeftPanelSuperAdminCategoriesActionsComponent,
-    // SupportPageAddSubCategoryComponent,
     HelpCenterInfoAsideComponent,
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
@@ -245,13 +204,9 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     ModalEditCategoryProductComponent,
     AddUserToSubscribeComponent,
-    // SupportPageAddCategoryComponent,
-    //  SupportPageAddSubCategoryComponent,
-    // SupportPageEditCategoryComponent,
     InventoryCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    // RecurringTicketsComponent
   ],
   providers: [
     {

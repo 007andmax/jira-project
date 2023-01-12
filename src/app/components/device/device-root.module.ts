@@ -5,18 +5,6 @@ import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { DateFormatModule } from 'src/app/pipe/dateFormat/date-format.module';
 import { DeviceRoutingModule } from './device-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxUploaderModule } from 'ngx-uploader';
-import { HardwareComponent } from './hardware/hardware.component';
-import { ProcessesComponent } from './processes/processes.component';
-import { ServicesComponent } from './services/services.component';
-import { SoftwareComponent } from './software/software.component';
-import { StartupComponent } from './startup-programes/startup-programes.component';
-import { TerminalComponent } from './terminal/terminal.component';
-import { WindowUpdatesComponent } from './window-updates/window-updates.component';
-
 
 @NgModule({
     declarations: [DeviceComponent,
@@ -27,8 +15,6 @@ import { WindowUpdatesComponent } from './window-updates/window-updates.componen
         RouterModule,
         DateFormatModule,
         DeviceRoutingModule,
-
-        // DashboardModule
     ],
 
 })
