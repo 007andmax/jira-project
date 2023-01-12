@@ -29,7 +29,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   tickets: Array<Ticket> = [];
   sub: Subscription = new Subscription();
   listColors: Array<StatusColor> = [];
-  offset: number = 15;
+  offset: number = 30;
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
@@ -139,6 +139,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       return;
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
+    this.ticketsFilter.setSize(30);
 
 
     if (this.page_number > 0) this.showPendingPreloader = true;

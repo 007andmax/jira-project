@@ -21,7 +21,6 @@ export class TicketsFilter {
     selectedTechUser: User = null;
     selectedUser: User = null;
     selectedStatus: string = null;
-    size: number = 15;
     customStatus: boolean = false;
     constructor() {
         this.onInitUser();
@@ -35,9 +34,6 @@ export class TicketsFilter {
         this.selectedTechUser = data.selectedTechUser;
         this.selectedUser = data.selectedUser;
         this.selectedStatus = data.selectedStatus;
-    }
-    public setSize(data) {
-        this.size = data;
     }
     public setStatus(data) {
         this.selectedStatus = data;
@@ -108,6 +104,20 @@ export class TicketsFilter {
         if (this.listType === "IN_PROGRESS") this.payloadInProgress.offset = offset;
 
     }
+    public setSize(size) {
+        if (this.listType === "ALL") this.payloadAll.size = size;
+        if (this.listType === "UNASSIGNED") this.payloadUnassigned.size = size;
+        if (this.listType === "OPEN") this.payloadOpen.size = size;
+        if (this.listType === "CLOSED") this.payloadClosed.size = size;
+        if (this.listType === "ON_HOLD") this.payloadOnhold.size = size;
+        if (this.listType === "TRASH") this.payloadTrash.size = size;
+        if (this.listType === "SPAM") this.payloadSpam.size = size;
+        if (this.listType === "USERS") this.payloadUser.size = size;
+        if (this.listType === "RECURRING_TICKETS_OPEN") this.payloadRecurringTicketsOpen.size = size;
+        if (this.listType === "RECURRING_TICKETS_CLOSED") this.payloadRecurringTicketsClosed.size = size;
+        if (this.listType === "COMPLETED") this.payloadCompleted.size = size;
+        if (this.listType === "IN_PROGRESS") this.payloadInProgress.size = size;
+    }
     public getDataForRequest() {
         let payload = null;
         if (this.listType === "ALL") payload = JSON.parse(JSON.stringify(this.payloadAll));
@@ -174,9 +184,6 @@ export class TicketsFilter {
     public onInitAll() {
         this.payloadAll = this.getAllPayLoad();
         this.payloadAll.offset = 0;
-    }
-    public onSetSizeAll() {
-        this.payloadAll.size = this.size;
     }
     public onInitUnassigned() {
         this.payloadUnassigned = this.getUnassignedPayLoad();

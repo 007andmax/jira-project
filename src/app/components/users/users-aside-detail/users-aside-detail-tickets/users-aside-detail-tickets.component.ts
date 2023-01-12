@@ -44,12 +44,10 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     if (this.getWidth() >= 1920) {
       this.offset = 25;
       this.ticketsFilter.setSize(25);
-      this.ticketsFilter.onSetSizeAll();
     }
     if (this.getWidth() >= 3200) {
       this.offset = 35;
       this.ticketsFilter.setSize(35);
-      this.ticketsFilter.onSetSizeAll();
     }
     this.listColors = this.ticketsStateService.getListStatusColor();
 
