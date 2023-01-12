@@ -126,6 +126,11 @@ export class InventoryTableComponent implements OnInit {
     }
 
   }
+  setActive(data) {
+    this.inventory.setActive(data);
+    this.inventory.setIsEdit(true);
+    this.save();
+  }
   onBlurMarkup() {
     if (this.inventory.isEdit) {
       this.validate.checkPriceCost(this.inventory.sale, this.inventory.cost);
