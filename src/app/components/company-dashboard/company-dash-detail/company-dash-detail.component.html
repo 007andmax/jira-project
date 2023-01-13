@@ -322,8 +322,7 @@
             [showLabel]="false"
             [selectedTag]="companyDetail.tags"
             [placement]="'top'"
-            [blockUserTag]="true"
-            [isDisabled]="!getPermissions('EDIT_USERS')"
+            [isDisabled]="!getPermissions('EDIT_COMPANIES')"
             (tagsChange)="onChangeTags($event)"
         ></app-company-tags>
     </div>
@@ -507,44 +506,5 @@
             [src]="mapUrl()"
         >
         </iframe>
-    </div>
-</ng-template>
-<ng-template
-    #tag
-    let-modal
-    class="map-modal"
->
-    <div class="modal-title tag qt-df">
-        <div class="h1">Add Tags</div>
-        <button
-            type="button"
-            class="close"
-            aria-label="Close"
-            (click)="modal.dismiss()"
-        >
-            close
-        </button>
-    </div>
-    <div class="modal-body tag qt-df company-dashboard-add-tag">
-        <app-company-tags
-            (tagsChange)="onChangeTags($event)"
-            [selectedTag]="tags"
-        ></app-company-tags>
-        <div class="footer-area-modal qt-df">
-            <button
-                type="button"
-                class="btn btn-secondary"
-                (click)="modal.dismiss()"
-            >
-                Cancel
-            </button>
-            <button
-                type="button"
-                class="btn btn-primary"
-                (click)="saveTags();modal.dismiss()"
-            >
-                Save Changes
-            </button>
-        </div>
     </div>
 </ng-template>
