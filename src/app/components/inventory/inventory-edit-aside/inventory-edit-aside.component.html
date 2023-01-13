@@ -23,14 +23,10 @@
             <div class="qt-input-block qt-f50 qt-flex-md-100">
                 <div class="qt-input-block__label">ILC Number</div>
                 <input
-                    number
-                    [money]="true"
-                    [ngModel]="inventory.cost_str"
-                    (change)="onChangeCost($event)"
-                    appToFixed
-                    [ngClass]="{'--input-error' : !validate.getCostSale()}"
-                    (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
-                    placeholder="Enter Cost"
+                    type="text"
+                    [(ngModel)]="inventory.ilc"
+                    (blur)="onCheckILC()"
+                    placeholder="Enter ILC Number"
                 >
                 <mat-error
                     class="invalid-feedback"
@@ -138,14 +134,12 @@
             <div class="qt-f33 qt-input-block qt-w-md-50 --required">
                 <div class="qt-input-block__label">Markup %</div>
                 <input
-                    number
-                    [money]="true"
-                    [ngModel]="inventory.sale_str"
-                    (change)="onChangeSale($event)"
-                    appToFixed
-                    (input)="validate.resetSale()"
+                    type="text"
+                    decimalNumber
                     (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
-                    placeholder="Enter Price"
+                    (onChange)="changeMarkup($event)"
+                    [value]="inventory.markup"
+                    placeholder="Enter Cost"
                 >
             </div>
             <div class="qt-f33 qt-input-block qt-flex-md-100 --required">

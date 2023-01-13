@@ -157,7 +157,8 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.inventory.description = event.target.value;
   }
   onChangeCost(val) {
-    let value = Number(val.target.value);
+    console.log("val", val);
+    let value = Number(val);
     this.inventory.cost = value;
     this.inventory.cost_str = value.toFixed(2);
     this.inventory.markup = this.getMarkups();
@@ -183,7 +184,8 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     return 0;
   }
   onChangeSale(val) {
-    let value = Number(val.target.value);
+    console.log("val", val);
+    let value = Number(val);
     this.inventory.sale = value;
     this.inventory.sale_str = value.toFixed(2);
     this.inventory.markup = this.getMarkups();
