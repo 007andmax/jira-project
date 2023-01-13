@@ -9,9 +9,11 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 })
 export class CompanyDashAssociateComponent implements OnInit {
   @Input() company: any;
+  associatedCompaniesIds = [];
   constructor(private companiesService: CompaniesService) { }
 
   ngOnInit() {
+    this.associatedCompaniesIds = this.getAssociatedCompaniesIds();
   }
   getAssociatedCompaniesIds() {
     return this.company.associatedCompanies.map(item => item.id);

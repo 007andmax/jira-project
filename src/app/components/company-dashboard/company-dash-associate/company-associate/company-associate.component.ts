@@ -76,12 +76,14 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   onCheckEditItem() {
+    this.clearWithOutChanges();
     if (this.editItems) this.editItems.forEach(item => {
       let find = this.companies.find(tag => tag.id === item);
       if (find) this.selectedCompanies.push(find);
     })
   }
   public setEditItems(data) {
+    this.clearWithOutChanges();
     this.editItems = data;
     this.editItems.forEach(item => {
       let find = this.companies.find(tag => tag.id === item);
@@ -89,7 +91,6 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
     })
   }
   public clearWithOutChanges() {
-
     this.selectedCompanies = [];
   }
 
