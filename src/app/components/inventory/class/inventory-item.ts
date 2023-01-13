@@ -55,6 +55,9 @@ export class InventoryItem {
         }
         return item;
     }
+    public setActive(data) {
+        this.active = data;
+    }
     public getForEdit() {
         let item: reqInventoryEdit = {
             versionedId: this.versionedId,
