@@ -416,8 +416,19 @@ export class CompanyDashDetailComponent implements OnInit {
 
   public onChangeTags(tags) {
     this.companyDetail.tags = tags;
-  }
+    this.companiesService.updateCompany(this.companyDetail.getDataForUpdate()).subscribe(data => {
 
+      this.cd.detectChanges();
+    })
+  }
+  /* onChangeTags(data) {
+     let ids = data.map(item => {
+       return { id: item.id }
+     });
+     this.tagsService.setTagsUser(this.user.id, ids).subscribe(data => {
+ 
+     })
+   }*/
   saveTags() {
     this.tagSaved = true;
     this.saveCompany();

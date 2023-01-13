@@ -316,35 +316,16 @@
         class="profile-cmp-board tags-area qt-df"
         *ngIf="tab === 'dashboard'"
     >
-        <div class="small-title qt-df">
-            Tags
-            <a
-                href="javascript:;"
-                (click)="open(tag)"
-                *ngIf="getPermissions('EDIT_COMPANIES')"
-            >
-                +Add
-            </a>
-        </div>
-        <div class="tags-tab qt-df">
-            <span
-                class="tag"
-                *ngFor="let tag of tags; let i = index;"
-            >
-                {{tag.word}}
-                <a
-                    href="javascript:;"
-                    (click)="deleteTag(i)"
-                    class="close"
-                    *ngIf="getPermissions('EDIT_COMPANIES')"
-                >
-                    <img
-                        src="html/assets/img/company-details/tag-close-12.svg"
-                        alt="tags"
-                    >
-                </a>
-            </span>
-        </div>
+        <div class="small-title qt-df">Tags</div>
+        <app-company-tags
+            #companyTags
+            [showLabel]="false"
+            [selectedTag]="companyDetail.tags"
+            [placement]="'top'"
+            [blockUserTag]="true"
+            [isDisabled]="!getPermissions('EDIT_USERS')"
+            (tagsChange)="onChangeTags($event)"
+        ></app-company-tags>
     </div>
     <div
         class="btn-row qt-df"
