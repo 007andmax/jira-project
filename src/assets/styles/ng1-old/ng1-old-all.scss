@@ -1,0 +1,19 @@
+// _common.right
+.no-exist-devices {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.no-exist-devices p {
+  font-size: 20px;
+}
+
+// _common.ticket.list
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
