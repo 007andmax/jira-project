@@ -1,17 +1,17 @@
 @import './src/assets/styles/variable';
 
 @media (max-width: 414px) {
-  .mob-filters-header.desktop-hidden {
-    background: $primary-2;
-    height: 56px;
-    display: flex !important;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px !important;
-    color: $white;
-    width: 100vw;
-    font-size: 16px;
-  }
+  //.mob-filters-header.desktop-hidden { // TODO check this style
+  //  background: $primary-2;
+  //  height: 56px;
+  //  display: flex !important;
+  //  justify-content: flex-start;
+  //  align-items: center;
+  //  padding: 20px !important;
+  //  color: $white;
+  //  width: 100vw;
+  //  font-size: 16px;
+  //}
   .left-panel-full-wrapper .date-picker .dropdown-menu {
     width: 100%;
     left: 0 !important;
@@ -37,18 +37,18 @@
   .ng-sidebar {
     width: 100vw;
   }
-  .mob-filters-btn.apply-filters {
-    opacity: 0;
-    visibility: hidden;
-    transition: all .3s;
-    &:after {
-      display: none;
-    }
-  }
-  .show .mob-filters-btn.apply-filters {
-    opacity: 1;
-    visibility: visible;
-  }
+  //.mob-filters-btn.apply-filters { // TODO check this style
+  //  opacity: 0;
+  //  visibility: hidden;
+  //  transition: all .3s;
+  //  &:after {
+  //    display: none;
+  //  }
+  //}
+  //.show .mob-filters-btn.apply-filters { // TODO check this style
+  //  opacity: 1;
+  //  visibility: visible;
+  //}
   .password-content__modal .password-modal-actions button {
     background-color: $white !important;
   }

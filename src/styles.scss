@@ -2670,9 +2670,9 @@ app-quotes-item {
   }
 }
 // LEFT PANEL
-.mob-filters-btn {
-  z-index: 2;
-}
+//.mob-filters-btn { // Todo check this style
+//  z-index: 2;
+//}
 .left-panel-ng2 {
   @media (max-width: 414px) {
     margin-bottom: 110px;
