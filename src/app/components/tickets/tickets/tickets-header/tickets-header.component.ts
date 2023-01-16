@@ -42,11 +42,11 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     /* START */
     this.selectedListType = this.titleListTypes.find(item => item.type === this.ticketsStateService.getListType());
     /* END */
-    this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
+    this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${(this.count) ? this.count : 0})`;
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter.setFilter(data);
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
-      if (this.selectedListType) this.title = `${this.selectedListType.title} (${this.count})`
+      if (this.selectedListType) this.title = `${this.selectedListType.title} (${(this.count) ? this.count : 0})`
     })
     this.sub.add(getOnInitFilter);
     this.ticketsStateService.getOnInitCount().subscribe(data => {
@@ -69,7 +69,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.appService.toggleMobileAside(true);
   }
   onSetCount() {
-    this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
+    this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${(this.count) ? this.count : 0})`;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
@@ -97,7 +97,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.countFilter = data;
   }
   public setTitle(title) {
-    this.title = `${title} (${this.count})`;
+    this.title = `${title} (${(this.count) ? this.count : 0})`;
   }
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
