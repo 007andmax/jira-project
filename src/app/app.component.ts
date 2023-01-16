@@ -274,6 +274,10 @@ export class AppComponent implements OnInit {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage);
       }
+      if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == 'new-tickets' && this.main_page == PAGE_MAIN && !this.ticketsStateService.getListType()) {
+        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage);
+        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage);
+      }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
         this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage);
         this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage);
