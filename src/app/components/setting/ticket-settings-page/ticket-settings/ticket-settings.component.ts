@@ -7,6 +7,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
   selector: 'app-ticket-settings',
@@ -20,6 +21,15 @@ export class TicketSettingsComponent implements OnInit {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
+  listDefaultPages = [new TitleListType("All", "ALL"),
+  new TitleListType("Unassigned", "UNASSIGNED"),
+  new TitleListType("My Tickets", "MY_TICKETS"),
+  //new TitleListType("Shared", "SHARED"),
+  new TitleListType("Open", "OPEN"),
+  new TitleListType("Closed", "CLOSED"),
+  new TitleListType("Trash", "TRASH"),
+  new TitleListType("Spam", "SPAM")];
+  selectedDefaulPage = new TitleListType("All", "ALL");
   @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
   loading = true;
   submitted = false;
@@ -33,7 +43,8 @@ export class TicketSettingsComponent implements OnInit {
     private invoiceTicketsService: InvoiceTicketsService,
     private toastr: ToastrService,
     private companiesStateService: CompaniesStateService,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private usersService: UsersService
   ) { }
 
   /**
@@ -41,9 +52,13 @@ export class TicketSettingsComponent implements OnInit {
    */
   ngOnInit() {
     // get current user
-    if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
+    if (this.usersStateService.getCurrentUser()) {
+      this.currentUser = this.usersStateService.getCurrentUser();
+      this.selectedDefaulPage = this.listDefaultPages.find(item => item.type == this.currentUser.startPage);
+    }
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
+      this.selectedDefaulPage = this.listDefaultPages.find(item => item.type == this.currentUser.startPage);
     })
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
@@ -109,7 +124,6 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
-
   onChangeType(data) {
     this.ticketForm.patchValue({
       timepickerType: data.value,
@@ -126,6 +140,11 @@ export class TicketSettingsComponent implements OnInit {
   }
   getSelectedTimepickerType() {
     return this.timepickerTypes.find(item => item.value === this.ticketForm.value.timepickerType);
+  }
+  onChangeDefaultPage(data) {
+    this.usersService.setDefaultPage(data.type).subscribe(res => {
+
+    })
   }
   /**
    * saved

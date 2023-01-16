@@ -145,6 +145,7 @@ export class TicketsStateService {
   public onChangeTypeFilter(data) {
     this.listType = data;
     this.typeFilter.emit(data);
+    console.log("data", data);
   }
   public getOnChangeTypeFilter() {
     return this.typeFilter;

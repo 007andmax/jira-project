@@ -267,7 +267,16 @@ export class AppComponent implements OnInit {
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
       if (!this.currentUser) return;
+      console.log('this.router.url', this.router.url);
+      console.log("this.state", this.state);
+      if (this.router.url.includes("tickets") && (this.state == "new-tickets" || this.state == '')) {
+        console.log("this.currentUser.startPage", this.currentUser.startPage);
+        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage);
+        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage);
+      }
       if (this.router.url === "/" && this.currentUser.role !== "SUPER_ADMIN" && this.state == '' && this.main_page == PAGE_MAIN) {
+        this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage);
+        this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage);
         this.router.navigate(
           [`${data.name.replaceAll(' ', '')}/tickets/`]);
       }
