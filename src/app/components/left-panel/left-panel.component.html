@@ -78,7 +78,7 @@
         </div>
         <div
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('TICKETS');onOpenPanel();setDefaultTypeFilter();"
+            (click)="setDefaultTypeFilter();changePage('TICKETS');onOpenPanel()"
             [ngClass]="{'--active':page === 'TICKETS' }"
             placement="right"
             ngbTooltip="Tickets"

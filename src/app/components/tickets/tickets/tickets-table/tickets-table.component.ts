@@ -67,7 +67,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     });
 
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      if (!this.showPreloader) return;
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -75,7 +74,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-    this.onScroll();
+    if (this.ticketsStateService.getListType()) this.onScroll();
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })

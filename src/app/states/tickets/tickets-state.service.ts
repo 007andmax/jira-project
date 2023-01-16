@@ -13,7 +13,7 @@ import { StatusColor } from 'src/app/components/tickets/class/status-color';
   providedIn: 'root'
 })
 export class TicketsStateService {
-  listType: string = "USERS";
+  listType: string;
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
   ticketStatusForRemove: TicketStatus = null;
