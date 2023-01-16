@@ -21,14 +21,14 @@ export class TicketSettingsComponent implements OnInit {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
-  listDefaultPages = [new TitleListType("All", "ALL"),
-  new TitleListType("Unassigned", "UNASSIGNED"),
+  listDefaultPages = [new TitleListType("All Tickets", "ALL"),
+  new TitleListType("Unassigned Tickets", "UNASSIGNED"),
   new TitleListType("My Tickets", "MY_TICKETS"),
   //new TitleListType("Shared", "SHARED"),
-  new TitleListType("Open", "OPEN"),
-  new TitleListType("Closed", "CLOSED"),
-  new TitleListType("Trash", "TRASH"),
-  new TitleListType("Spam", "SPAM")];
+  new TitleListType("Open Tickets", "OPEN"),
+  new TitleListType("Closed Tickets", "CLOSED"),
+  new TitleListType("Trash Tickets", "TRASH"),
+  new TitleListType("Spam Tickets", "SPAM")];
   selectedDefaulPage = new TitleListType("All", "ALL");
   @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
   loading = true;
@@ -38,6 +38,7 @@ export class TicketSettingsComponent implements OnInit {
   nextValid: '';
   public currentUser: any;
   currentCompany: any;
+  hasChange: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -119,6 +120,11 @@ export class TicketSettingsComponent implements OnInit {
             ticketCount: res.number
           });
         }
+        const initialValue = this.ticketForm.value
+        this.ticketForm.valueChanges.subscribe(value => {
+          this.hasChange = Object.keys(initialValue).some(key => value[key] !=
+            initialValue[key])
+        });
       },
       error => { }
     );
@@ -142,9 +148,7 @@ export class TicketSettingsComponent implements OnInit {
     return this.timepickerTypes.find(item => item.value === this.ticketForm.value.timepickerType);
   }
   onChangeDefaultPage(data) {
-    this.usersService.setDefaultPage(data.type).subscribe(res => {
-
-    })
+    this.selectedDefaulPage = data;
   }
   /**
    * saved
@@ -171,18 +175,24 @@ export class TicketSettingsComponent implements OnInit {
           : null
       }
     };
-    this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
+    if (this.hasChange) this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
         if (res && res.code === 409) {
           this.nextValid = res.message;
           this.ticketForm.patchValue({
             count: this.ticketForm.value.ticketCount
           });
+          this.hasChange = false;
         }
       },
       error => {
         this.toastr.error('Bad Request');
       }
     );
+    if (this.selectedDefaulPage.type != this.currentUser.startPage) {
+      this.usersService.setDefaultPage(this.selectedDefaulPage.type).subscribe(res => {
+
+      })
+    }
   }
 }
