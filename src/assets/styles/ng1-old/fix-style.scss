@@ -6,11 +6,6 @@ html {
   font-weight: 400;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  //overflow-y: scroll;
-  //overflow-x: hidden;
-  //overflow-x: auto;
-  //min-width: 1280px;
-  //min-width: calc(1280px + 280px);
   font-size: 16px;
 
   @media (max-width: 767px) {
@@ -49,10 +44,10 @@ body .left-panel-full {
   font-weight: 600;
 }
 
-.btn-success {
-  background-color: $success;
-  border-color: $success;
-}
+//.btn-success { // TODO check this style
+//  background-color: $success;
+//  border-color: $success;
+//}
 
 .icn-remove-old {
   width: 20px;
@@ -78,10 +73,10 @@ body .left-panel-full {
 }
 /* End Datepicker */
 
-hr {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
+//hr { // TODO check this style
+//  margin-top: 4px;
+//  margin-bottom: 4px;
+//}
 
 .text-muted {
   color: $gray-800--old;
@@ -235,13 +230,13 @@ a:focus {
   margin: auto;
 }
 
-body .topNavbar {
-  font-weight: 600;
-}
-
-body .topNavbar strong span {
-  font-weight: 600;
-}
+//body .topNavbar { // TODO check this style
+//  font-weight: 600;
+//}
+//
+//body .topNavbar strong span {
+//  font-weight: 600;
+//}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar {
@@ -509,34 +504,34 @@ textarea {
   }
 }
 
-.payment-status,
-.network-scan-status,
-.invoice-status,
-.quote-status {
-  padding: 0 10px;
-  font-size: 11px;
-  border-radius: 3px;
-  font-weight: 600;
-  border: none;
-  text-align: center;
-  width: auto;
-  height: 22px;
-}
+//.payment-status, // TODO check this style
+//.network-scan-status,
+//.invoice-status,
+//.quote-status {
+//  padding: 0 10px;
+//  font-size: 11px;
+//  border-radius: 3px;
+//  font-weight: 600;
+//  border: none;
+//  text-align: center;
+//  width: auto;
+//  height: 22px;
+//}
 
-.status-in-progress {
-  background-color: #d0edfe;
-  color: $primary-1;
-  display: inline-block;
-}
+//.status-in-progress { // TODO check this style
+//  background-color: #d0edfe;
+//  color: $primary-1;
+//  display: inline-block;
+//}
 
-.payment-status.paid,
-.status-success,
-.dashboard-network-scan-list .success-status,
-.invoices .success-status {
-  background-color: #d5f4e0;
-  color: $success;
-  display: inline-block;
-}
+//.payment-status.paid, // TODO check this style
+//.status-success,
+//.dashboard-network-scan-list .success-status,
+//.invoices .success-status {
+//  background-color: #d5f4e0;
+//  color: $success;
+//  display: inline-block;
+//}
 
 /* TABS */
 .nav-tabs > li > a:hover {
@@ -629,25 +624,25 @@ h6,
   margin-bottom: revert;
   font-weight: bold;
 }
-.info-block {
-  padding: 10px 10px 10px 50px;
-  background-color: $gray-200--old;
-  color: $primary-1;
-  position: relative;
-  border-radius: 3px;
-  width: 88%;
-}
-.info-block:before {
-  position: absolute;
-  content: "i";
-  width: 20px;
-  height: 20px;
-  background-color: $primary-1;
-  border-radius: 50%;
-  color: $white;
-  left: 17px;
-  text-align: center;
-}
+//.info-block { // TODO check this style
+//  padding: 10px 10px 10px 50px;
+//  background-color: $gray-200--old;
+//  color: $primary-1;
+//  position: relative;
+//  border-radius: 3px;
+//  width: 88%;
+//}
+//.info-block:before {
+//  position: absolute;
+//  content: "i";
+//  width: 20px;
+//  height: 20px;
+//  background-color: $primary-1;
+//  border-radius: 50%;
+//  color: $white;
+//  left: 17px;
+//  text-align: center;
+//}
 
 .dropdown-assign-ticket .assign-ticket-header {
   z-index: 11111111;
@@ -697,28 +692,12 @@ h6,
 
 .avatar .radius {
   border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -o-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -webkit-transition: border-radius 0.3s ease-out;
-  -moz-transition: border-radius 0.3s ease-out;
-  -o-transition: border-radius 0.3s ease-out;
-  -ms-ransition: border-radius 0.3s ease-out;
   transition: border-radius 0.3s ease-out;
 }
 
 .avatar .radius:hover,
 .open.avatar .radius {
   border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -webkit-transition: border-radius 0.3s ease-out;
-  -moz-transition: border-radius 0.3s ease-out;
-  -o-transition: border-radius 0.3s ease-out;
-  -ms-ransition: border-radius 0.3s ease-out;
   transition: border-radius 0.3s ease-out;
 }
 
@@ -726,10 +705,6 @@ h6,
 .open.avatar .radius + i.right.transition {
   top: -7px;
   right: -7px;
-  -webkit-transition: top 0.3s ease-out, right 0.3s ease-out;
-  -moz-transition: top 0.3s ease-out, right 0.3s ease-out;
-  -o-transition: top 0.3s ease-out, right 0.3s ease-out;
-  -ms-ransition: top 0.3s ease-out, right 0.3s ease-out;
   transition: top 0.3s ease-out, right 0.3s ease-out;
 }
 
@@ -749,25 +724,25 @@ h6,
   background-color: #d2dae4;
 }
 
-.avatar-40 {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-}
+//.avatar-40 { // TODO check this style
+//  display: inline-block;
+//  width: 40px;
+//  height: 40px;
+//}
+//
+//.avatar-50 { // TODO check this style
+//  display: inline-block;
+//  width: 50px;
+//}
 
-.avatar-50 {
-  display: inline-block;
-  width: 50px;
-}
+//.avatar-120 { // TODO check this style
+//  display: inline-block;
+//  width: 120px;
+//}
 
-.avatar-120 {
-  display: inline-block;
-  width: 120px;
-}
-
-.avatar .no-avatar {
-  background-color: $gray-500--old;
-}
+//.avatar .no-avatar { // TODO check this style
+//  background-color: $gray-500--old;
+//}
 
 .avatar > i {
   position: absolute;
@@ -831,9 +806,9 @@ h6,
   background-color: #ffa726;
 }
 
-.avatar-background-color-even {
-  background-color: #ffe3af;
-}
+//.avatar-background-color-even { // TODO check this style
+//  background-color: #ffe3af;
+//}
 
 .avatar-background-color-odd {
   background-color: #aae8e8;
