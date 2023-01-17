@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../class/status-color';
+import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 @Component({
@@ -33,6 +35,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
+    private appService: AppService,
+    private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -91,13 +95,18 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   }
 
   editTicket(id) {
-    this.idEditTicket = id;
-    let ticket = this.tickets.find(item => item.id === id);
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      data.setUserCompanies(ticket.userCompanies);
-      this.ticketsStateService.onEditTicket(data);
-    })
+    if (!this.appService.isMobile) {
+      this.ticketStateService.setTicketRoutingId(id);
+      this.leftPanelStateService.goToState("ticket-detail");
+    } else {
+      this.idEditTicket = id;
+      let ticket = this.tickets.find(item => item.id === id);
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        data.setUserCompanies(ticket.userCompanies);
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
   }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {

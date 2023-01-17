@@ -22,11 +22,18 @@ export class TicketStateService {
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   servicesForTicket = [];
+  ticketRoutingId: string;
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setTicketRoutingId(data) {
+    this.ticketRoutingId = data;
+  }
+  public getTicketRoutingId() {
+    return this.ticketRoutingId;
   }
   public setEditUpdate(data) {
     this.onEditUpdate.emit(data);

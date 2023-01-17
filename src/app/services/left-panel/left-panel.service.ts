@@ -31,6 +31,9 @@ export class LeftPanelService {
       || state === 'new-tickets-dashboard'
       || state === 'recurring-tickets')
   }
+  isTicketDetailPage(state) {
+    return (state === 'ticket-detail')
+  }
   isUsersPage(state) {
     return (state === 'new-users')
   }

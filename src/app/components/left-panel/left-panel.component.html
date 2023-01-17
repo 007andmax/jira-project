@@ -196,6 +196,7 @@
         [ngClass]="{'--open':showMobTab}"
     >
         <div
+            *ngIf="showBtnLeftPanel"
             class="app-left-panel__header-resize-btn qt-d-md-none"
             (click)="onToggleLeftPanel()"
         ></div>

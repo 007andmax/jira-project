@@ -156,11 +156,7 @@ export class AppComponent implements OnInit {
         maxWidth: null,
       };
 
-      if (localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
-      if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
-      if (this.appService.isMobile || this.currentUser.role === "SUPER_ADMIN" || this.state === 'help-center') {
-        $("#aside-left-panel").width("auto");
-      }
+
       $(document.body).on('mousedown', '.resize-handle--x', null, (event) => {
         if (event.button !== 0) {
           return;
@@ -222,6 +218,7 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (!this.appService.isMobile && this.state !== 'help-center') {
+        console.log("data", data);
         if (data) $("#aside-left-panel").width("");
         if (!data && localStorage.getItem("width-left-aside") && $("#aside-left-panel").width() == (64 || 280)) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
         if (!data && !localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
@@ -280,6 +277,18 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.state = data;
+      console.log("this.state", this.state);
+      if (this.state === "ticket-detail") {
+        console.log("this.state", this.state);
+        this.leftPanelStateService.toggleLeftPanel(true);
+        $("#aside-left-panel").width("");
+      } else {
+        if (localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(localStorage.getItem("width-left-aside"));
+        if (!localStorage.getItem("width-left-aside")) $("#aside-left-panel").outerWidth(280);
+        if (this.appService.isMobile || this.currentUser.role === "SUPER_ADMIN" || this.state === 'help-center') {
+          $("#aside-left-panel").width("auto");
+        }
+      }
     })
     this.leftPanelStateService.onChangeState.subscribe(data => {
       this.state = data;
