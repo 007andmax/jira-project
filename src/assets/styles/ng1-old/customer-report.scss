@@ -1,49 +1,49 @@
 @import "./src/assets/styles/variable";
 
-.customer-ticket p {
-  font-weight: 600;
-}
+//.customer-ticket p { // TODO check this style
+//  font-weight: 600;
+//}
 
 html.no-d3-tooltip .nvtooltip .value {
   display: none;
 }
 
-.commission-customer .details-content .row {
-  padding: 0;
-}
+//.commission-customer .details-content .row {
+//  padding: 0;
+//}
 
-.commission-customer .details-content {
-  border-bottom: none;
-  padding-top: 0;
-  padding-bottom: 0;
-}
+//.commission-customer .details-content {
+//  border-bottom: none;
+//  padding-top: 0;
+//  padding-bottom: 0;
+//}
 
-.commission-customer .details-content h3 {
-  padding: 10px 60px;
-  background: $gray-200--old;
-  margin: 15px -60px;
-}
+//.commission-customer .details-content h3 {
+//  padding: 10px 60px;
+//  background: $gray-200--old;
+//  margin: 15px -60px;
+//}
 
-.commission-customer .details-content:nth-child(2) h3 {
-  background: transparent;
-}
-
-.commission-customer .details-content .row:not(:last-child) {
-  border-bottom: 1px solid #f1f5f8;
-}
+//.commission-customer .details-content:nth-child(2) h3 {
+//  background: transparent;
+//}
+//
+//.commission-customer .details-content .row:not(:last-child) {
+//  border-bottom: 1px solid #f1f5f8;
+//}
 
 .customer-ticket__report {
   width: 100%;
 }
 
-.customer-ticket__report--details {
-  padding: 15px;
-}
+//.customer-ticket__report--details {
+//  padding: 15px;
+//}
 
-.commission-product.customer-ticket__report--details,
-.commission-customer.customer-ticket__report--details {
-  padding-top: 0 !important;
-}
+//.commission-product.customer-ticket__report--details,
+//.commission-customer.customer-ticket__report--details {
+//  padding-top: 0 !important;
+//}
 
 .customer-ticket__report .services.border {
   border: 1px dashed #d0edfe;
@@ -65,73 +65,73 @@ html.no-d3-tooltip .nvtooltip .value {
   border-spacing: 0 10px;
 }
 
-.customer-ticket__report--summary .details-futures-info, .customer-ticket__report--details-plus .details-futures-info {
-  border: 1px solid $gray-400--old;
-  min-height: 50px;
-  padding: 5px;
-}
+//.customer-ticket__report--summary .details-futures-info, .customer-ticket__report--details-plus .details-futures-info { // TODO check this style
+//  border: 1px solid $gray-400--old;
+//  min-height: 50px;
+//  padding: 5px;
+//}
 
-.customer-ticket__report--summary {
-  .summary-chart {
-    width: 75%;
-  }
-  .time-info {
-    border: 1px solid #eee;
-    text-align: center;
-    p {
-      margin: 5px 0;
-    }
-    h4 {
-      margin: 10px 0;
-    }
-  }
-}
+//.customer-ticket__report--summary {
+//  .summary-chart {
+//    width: 75%;
+//  }
+//  .time-info {
+//    border: 1px solid #eee;
+//    text-align: center;
+//    p {
+//      margin: 5px 0;
+//    }
+//    h4 {
+//      margin: 10px 0;
+//    }
+//  }
+//}
 
-.customer-ticket__report--details-plus {
-  border-bottom: none;
-}
+//.customer-ticket__report--details-plus {
+//  border-bottom: none;
+//}
 
-.customer-report-modal {
-  padding: 15px;
-}
+//.customer-report-modal {
+//  padding: 15px;
+//}
 
-.details-futures-info {
-  border: 1px solid $gray-400--old;
-  display: inline-block;
-  width: 100%;
-  position: relative;
-  border-radius: 4px;
-}
+//.details-futures-info {
+//  border: 1px solid $gray-400--old;
+//  display: inline-block;
+//  width: 100%;
+//  position: relative;
+//  border-radius: 4px;
+//}
+//
+//.report-info-point {
+//  border-bottom: 1px solid $gray-400--old;
+//}
 
-.report-info-point {
-  border-bottom: 1px solid $gray-400--old;
-}
+//.legend-customer {
+//  list-style-type: none;
+//  padding-left: 10px;
+//  li {
+//    float: left;
+//    font-size: 16px;
+//    &:before {
+//      font-size: 120px;
+//      content: ".";
+//    }
+//    &.resolved:before {
+//      color: #4caf50;
+//    }
+//    &.unresolved:before {
+//      color: #0071bc;
+//    }
+//  }
+//}
 
-.legend-customer {
-  list-style-type: none;
-  padding-left: 10px;
-  li {
-    float: left;
-    font-size: 16px;
-    &:before {
-      font-size: 120px;
-      content: ".";
-    }
-    &.resolved:before {
-      color: #4caf50;
-    }
-    &.unresolved:before {
-      color: #0071bc;
-    }
-  }
-}
-
-.fz-13 {
-  font-size: 13px;
-}
-
-.fz-12 {
-  font-size: 12px;
-}
+//.fz-13 {
+//  font-size: 13px;
+//}
+//
+//.fz-12 {
+//  font-size: 12px;
+//}
 
 

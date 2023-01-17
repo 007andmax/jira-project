@@ -176,6 +176,10 @@
     cursor: default;
     pointer-events: none;
   }
+  .primary-default.btn:hover {
+      background-color: $primary-1;
+      color: $white;
+    }
 }
 .download-agent-modal .close-modal {
   outline: none;

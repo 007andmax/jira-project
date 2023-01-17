@@ -1724,9 +1724,9 @@ app-quotes-item {
         border: none;
 
         &.with-logo img {
-          margin: 0;
+          //margin: 0; // TODO check this style
           border: none;
-          float: unset;
+          //float: unset;
         }
       }
 

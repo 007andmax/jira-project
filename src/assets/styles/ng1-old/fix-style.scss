@@ -679,6 +679,12 @@ h6,
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &__logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
 }
 
 /* Avatars start */
