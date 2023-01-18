@@ -169,6 +169,13 @@
                 </div>
 
             </div>
+            <ticket-detail-profile-updates
+                #ticketProfileUpdates
+                [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
+                (onFetchUpdates)="onFetchUpdates($event)"
+                [ticketProfile]="ticketProfile"
+                [updates]="ticketProfile.updates"
+            ></ticket-detail-profile-updates>
             <!-- <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"
                 (tagsChange)="onChangeTags($event)"
@@ -193,13 +200,7 @@
                 [ticketProfile]="ticketProfile"
             ></app-ticket-message>
             <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-            <app-ticket-profile-updates
-                #ticketProfileUpdates
-                [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
-                (onFetchUpdates)="onFetchUpdates($event)"
-                [ticketProfile]="ticketProfile"
-                [updates]="ticketProfile.updates"
-            ></app-ticket-profile-updates>
+          
             <app-ticket-profile-form-update
                 [ngClass]="{'--open':openedMobileUpdate}"
                 (onClosed)="close()"

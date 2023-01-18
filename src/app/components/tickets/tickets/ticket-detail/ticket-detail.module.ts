@@ -26,12 +26,34 @@ import { TicketProfileAttachmentsModule } from '../ticket-edit-aside/ticket-prof
 import { TicketProfileUpdatesServiceDurationModule } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
 import { TicketProfileUpdatesServiceTimepickerModule } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
 import { TicketChangeStatusModule } from '../ticket-edit-aside/ticket-change-status/ticket-change-status.module';
+import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
+import { TicketDetailProfileUpdatesNoteComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note.component';
+import { TicketDetailProfileUpdatesNoteItemComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-item/ticket-detail-profile-updates-note-item.component';
+import { TicketDetailProfileUpdatesNoteInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-info/ticket-detail-profile-updates-note-info.component';
+import { TicketDetailProfileUpdatesNoteEditComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-edit/ticket-detail-profile-updates-note-edit.component';
+import { TicketDetailProfileUpdatesHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component';
+import { TicketDetailProfileUpdatesProductComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product.component';
+import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-item/ticket-detail-profile-updates-product-item.component';
+import { TicketDetailProfileUpdatesProductInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component';
+import { TicketDetailProfileUpdatesProductEditComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component';
+import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component';
 
 
 
 @NgModule({
     declarations: [
-        TicketDetailComponent
+        TicketDetailComponent,
+        TicketDetailProfileUpdatesComponent,
+        TicketDetailProfileUpdatesNoteComponent,
+        TicketDetailProfileUpdatesNoteItemComponent,
+        TicketDetailProfileUpdatesNoteInfoComponent,
+        TicketDetailProfileUpdatesNoteEditComponent,
+        TicketDetailProfileUpdatesHeaderInfoComponent,
+        TicketDetailProfileUpdatesProductComponent,
+        TicketDetailProfileUpdatesProductItemComponent,
+        TicketDetailProfileUpdatesProductInfoComponent,
+        TicketDetailProfileUpdatesProductEditComponent,
+        TicketDetailProfileUpdatesProductHeaderInfoComponent
 
     ],
     imports: [

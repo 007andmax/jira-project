@@ -30,6 +30,7 @@ import { TicketProfileEditFormUpdateComponent } from '../ticket-edit-aside/ticke
 import { TicketProfileFormUpdateComponent } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
 import { TicketProfileUpdatesComponent } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
 import * as moment from "moment";
+import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -43,7 +44,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
-  @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketProfileUpdatesComponent;
+  @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
   openedMobileUpdate = false;
@@ -80,10 +81,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getTicket(this.activateRoute.snapshot.params['id']);
-    let subscription = this.activateRoute.params.subscribe(params => {
-      this.getTicket(params['id']);
-    });
-    this.sub.add(subscription);
     this.listColors = this.ticketsStateService.getListStatusColor();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

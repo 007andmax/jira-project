@@ -40,7 +40,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name === name);
     return {
-      'border-color': (this.listColors && find) ? this.listColors[find.color].textColor : null,
+      'border-color': (this.listColors && find && this.listColors[find.color]) ? this.listColors[find.color].textColor : null,
       'background-color': (this.listColors && find) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors && find) ? this.listColors[find.color].textColor : null
     }
   }

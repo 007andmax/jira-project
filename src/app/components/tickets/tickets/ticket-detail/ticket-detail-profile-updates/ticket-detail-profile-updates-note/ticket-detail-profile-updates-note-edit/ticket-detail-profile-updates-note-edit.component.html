@@ -1,0 +1,20 @@
+<div class="ticket-updates__message-line qt-df jc-sb ai-fs">
+    <div class="editable-description">
+        <div
+            class="editable-description-note"
+            contenteditable="true"
+            id="note-description"
+            placeholder="Write ticket conversation here…"
+        ></div>
+    </div>
+    <div class="right-side-icons">
+        <i
+            (click)="saveService()"
+            class="icn-20 icon__active_subscription save-ticket-note pointer"
+        ></i>
+        <i
+            (click)="cancelService()"
+            class="icn-20 icon__close pointer"
+        ></i>
+    </div>
+</div>
