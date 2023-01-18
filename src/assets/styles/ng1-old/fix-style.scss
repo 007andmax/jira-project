@@ -44,11 +44,6 @@ body .left-panel-full {
   font-weight: 600;
 }
 
-//.btn-success { // TODO check this style
-//  background-color: $success;
-//  border-color: $success;
-//}
-
 .icn-remove-old {
   width: 20px;
   height: 20px;
@@ -72,11 +67,6 @@ body .left-panel-full {
   display: block !important;
 }
 /* End Datepicker */
-
-//hr { // TODO check this style
-//  margin-top: 4px;
-//  margin-bottom: 4px;
-//}
 
 .text-muted {
   color: $gray-800--old;
@@ -229,14 +219,6 @@ a:focus {
   display: inline-block;
   margin: auto;
 }
-
-//body .topNavbar { // TODO check this style
-//  font-weight: 600;
-//}
-//
-//body .topNavbar strong span {
-//  font-weight: 600;
-//}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar {
@@ -504,35 +486,6 @@ textarea {
   }
 }
 
-//.payment-status, // TODO check this style
-//.network-scan-status,
-//.invoice-status,
-//.quote-status {
-//  padding: 0 10px;
-//  font-size: 11px;
-//  border-radius: 3px;
-//  font-weight: 600;
-//  border: none;
-//  text-align: center;
-//  width: auto;
-//  height: 22px;
-//}
-
-//.status-in-progress { // TODO check this style
-//  background-color: #d0edfe;
-//  color: $primary-1;
-//  display: inline-block;
-//}
-
-//.payment-status.paid, // TODO check this style
-//.status-success,
-//.dashboard-network-scan-list .success-status,
-//.invoices .success-status {
-//  background-color: #d5f4e0;
-//  color: $success;
-//  display: inline-block;
-//}
-
 /* TABS */
 .nav-tabs > li > a:hover {
   border-color: #eeeeee #eeeeee #dddddd;
@@ -624,25 +577,6 @@ h6,
   margin-bottom: revert;
   font-weight: bold;
 }
-//.info-block { // TODO check this style
-//  padding: 10px 10px 10px 50px;
-//  background-color: $gray-200--old;
-//  color: $primary-1;
-//  position: relative;
-//  border-radius: 3px;
-//  width: 88%;
-//}
-//.info-block:before {
-//  position: absolute;
-//  content: "i";
-//  width: 20px;
-//  height: 20px;
-//  background-color: $primary-1;
-//  border-radius: 50%;
-//  color: $white;
-//  left: 17px;
-//  text-align: center;
-//}
 
 .dropdown-assign-ticket .assign-ticket-header {
   z-index: 11111111;
@@ -724,26 +658,6 @@ h6,
   background-color: #d2dae4;
 }
 
-//.avatar-40 { // TODO check this style
-//  display: inline-block;
-//  width: 40px;
-//  height: 40px;
-//}
-//
-//.avatar-50 { // TODO check this style
-//  display: inline-block;
-//  width: 50px;
-//}
-
-//.avatar-120 { // TODO check this style
-//  display: inline-block;
-//  width: 120px;
-//}
-
-//.avatar .no-avatar { // TODO check this style
-//  background-color: $gray-500--old;
-//}
-
 .avatar > i {
   position: absolute;
   top: 0;
@@ -753,10 +667,6 @@ h6,
   margin: 2px;
   border: 2px solid $white;
   border-radius: 100%;
-  -webkit-transition: top 0.3s ease-out, right 0.3s ease-out;
-  -moz-transition: top 0.3s ease-out, right 0.3s ease-out;
-  -o-transition: top 0.3s ease-out, right 0.3s ease-out;
-  -ms-ransition: top 0.3s ease-out, right 0.3s ease-out;
   transition: top 0.3s ease-out, right 0.3s ease-out;
   display: none;
 }
@@ -805,10 +715,6 @@ h6,
 .avatar > i.away {
   background-color: #ffa726;
 }
-
-//.avatar-background-color-even { // TODO check this style
-//  background-color: #ffe3af;
-//}
 
 .avatar-background-color-odd {
   background-color: #aae8e8;

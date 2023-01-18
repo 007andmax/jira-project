@@ -4,142 +4,18 @@
   max-width: 400px;
 }
 
-//.users-list .user-card { // TODO check this style
-//  border: 1px solid $gray-300--old;
-//  float: left;
-//  height: 236px;
-//  margin-left: 30px;
-//  margin-bottom: 30px;
-//  width: calc(100% / 3 - 30px);
-//  -webkit-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
-//  -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
-//  transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
-//}
-//
-//.users-list .user-card:hover { // TODO check this style
-//  border: 1px solid $white;
-//  box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
-//}
-//
-//.users-list .user-card .avatar img { // TODO check this style
-//  border-radius: 0px;
-//  margin-left: -30px;
-//  width: 236px;
-//}
-//
-//.users-list .user-card .avatar { // TODO check this style
-//  width: 169px;
-//  overflow: hidden;
-//  float: right;
-//  border-radius: 0px;
-//  height: 234px;
-//}
-
-//.users-list .user-card .avatar.no-avatar { // TODO check this style
-//  background: $gray-300--old;
-//  text-align: center;
-//  vertical-align: middle;
-//}
-
-//.users-list .user-card .avatar.no-avatar img { // TODO check this style
-//  width: auto;
-//  margin-left: 0px;
-//  max-width: 120px;
-//}
-
-//.users-list .user-card .content { // TODO check this style
-//  width: calc(100% - 169px);
-//  float: left;
-//  padding: 27px 0;
-//  position: relative;
-//}
-//
-//.users-list .user-card .title { // TODO check this style
-//  width: 100%;
-//  padding: 0 28px 0 30px;
-//}
-
-//@-moz-document url-prefix() {
-//  .users-list .user-card.agent-card .title {
-//    padding: 0 28px 1px 30px;
-//  }
-//}
-//
-//.users-list .user-card .content h3 {
-//  font-size: 14px;
-//  font-weight: bold;
-//  margin: 0 8px 0 0;
-//  color: #1f2a37;
-//  line-height: 16px;
-//  max-width: calc(100% - 24px);
-//  -ms-text-overflow: ellipsis;
-//  text-overflow: ellipsis;
-//  overflow: hidden;
-//  white-space: nowrap;
-//}
-
-//@-moz-document url-prefix() {
-//  .users-list .user-card .content h3 {
-//    line-height: 15px;
-//  }
-//}
-//
-//.users-list .user-card .content .title span {
-//  margin-left: 10px;
-//  margin-top: 2px;
-//  line-height: 0;
-//}
-
-//.users-list .user-badges { // TODO check this style
-//  position: absolute;
-//  right: 10px;
-//  top: 10px;
-//}
-//
-//.users-list .user-badges li { // TODO check this style
-//  width: 12px;
-//  height: 12px;
-//  position: relative;
-//  float: left;
-//  margin-left: 10px;
-//}
-//
-//.users-list .user-badges li.badge-admin { // TODO check this style
-//  width: 10px;
-//}
-
 .users-list .status {
   width: 100%;
   margin-top: 7px;
   padding: 0 30px;
 }
-//.users-list .user-actions { // TODO check this style
-//  margin-top: 10px;
-//  padding: 0 30px;
-//}
-//
-//.users-list .user-actions .btn { // TODO check this style
-//  margin-right: 10px;
-//}
+
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {
   .users-list .user-card {
     min-width: 370px !important;
   }
-
-  //.users-list .user-actions .btn-user-chat { // TODO check this style
-  //  display: none;
-  //}
 }
-//@media only screen and (min-width: 1380px) and (max-width: 1500px) { // TODO check this style
-//
-//  .users-list .user-actions .btn-user-chat {
-//    display: none;
-//  }
-//}
 
-//.status .user-company { // TODO check this style
-//  padding: 0;
-//}
 .form-row + .form-row, .phone-number-form .form-row {
   margin-top: 13px;
 }
@@ -167,10 +43,6 @@
   }
 }
 
-//.settings-main-wrapper .form-row .form-group.full-width.no-label { // TODO check this style
-//  margin-top: 17px;
-//}
-
 .form-row .form-group.full-width {
   max-width: none;
 }
@@ -193,7 +65,6 @@
 
 @-moz-document url-prefix() {
   .form-row .form-group.no-label {
-    /*margin-top: 22px;*/
     transform: translateY(50%);
   }
   .settings-main-wrapper .form-row .form-group.full-width.no-label {
@@ -205,12 +76,6 @@
   margin-left: 10px;
   max-width: 50%;
 }
-
-
-//.btn-primary.btn-create { // TODO check this style
-//  line-height: 34px;
-//  width: 190px;
-//}
 
 .ticket-drop {
   height: 30px;
