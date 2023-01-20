@@ -31,13 +31,13 @@
                 [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             >
             </ticket-detail-profile-updates-product>
-            <!-- <app-ticket-profile-updates-service
+            <ticket-detail-profile-updates-service
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'SERVICE'"
                 [update]="update"
                 [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             >
-            </app-ticket-profile-updates-service> -->
+            </ticket-detail-profile-updates-service>
         </ng-template>
     </div>
     <div

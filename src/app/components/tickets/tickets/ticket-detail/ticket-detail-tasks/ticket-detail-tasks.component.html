@@ -1,0 +1,189 @@
+<div class="qt-df">
+    <h3>Tasks</h3>
+    <div
+        class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+        (click)="create()"
+    >
+        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+        Add Task
+    </div>
+</div>
+<div class="tab-pane__table-body">
+    <div
+        *ngIf="showAddStatus"
+        class="add-task-container tab-pane__table-row --selected"
+        appClickOtside
+        #addStatusBtn="click"
+        [init]="true"
+        [class]="'.add-ticket-container'"
+        (onOutSide)="onAddTicketStatus()"
+    >
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes"></div>
+        <div
+            class="tab-pane__table-cell ticket-status-table__status"
+            [ngClass]="{'--input-error' : addStatus.disableCreate}"
+        >
+            <input
+                type="text"
+                class="form-input --editable"
+                placeholder="Enter Name Status"
+                [(ngModel)]="addStatus.name"
+                (keyup)="onKeyUp($event)"
+                (input)="addStatus.checkDublicate(ticketsStatus)"
+                maxlength="20"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="addStatus.disableCreate"
+            >
+                This Ticket Status is already occupied
+            </mat-error>
+        </div>
+        <div class="tab-pane__table-cell"></div>
+        <div class="tab-pane__table-cell ticket-status-table__preview">
+            <div
+                class="preview-container"
+                [ngStyle]="{'border-color':  statusColors[addStatus.color].textColor,'background-color':statusColors[addStatus.color].borderColor}"
+            >
+                <span
+                    [ngStyle]="{'color':  statusColors[addStatus.color].textColor}"
+                    [textContent]="addStatus.name"
+                ></span>
+            </div>
+        </div>
+        <div class="tab-pane__table-cell ticket-status-table__action">
+            <app-dynamic-tooltip
+                [content]="'Remove'"
+                [position]="'top'"
+                #removeTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                (mouseenter)="removeTooltip.show($event.target)"
+                (mouseleave)="removeTooltip.hide()"
+            >
+            </div>
+        </div>
+    </div>
+    <div
+        class="tab-pane__table-row"
+        *ngFor="let item of ticketsStatus; let i = index"
+        appClickOtside
+        [init]="item.isInitEdit"
+        [ngClass]="['edit-ticket-container-' + i,item.selected ? '--selected' : '']"
+        [class]="'.edit-ticket-container-' + i"
+        (onOutSide)="onEditTicketStatus(item)"
+    >
+        <div
+            class="ab-pane__table-cell tab-pane__table-checkboxes"
+            *ngIf="!item.custom"
+        >
+        </div>
+        <div
+            class="tab-pane__table-cell tab-pane__table-checkboxes"
+            *ngIf="item.custom"
+        >
+            <label class="qt-checkbox">
+                <input
+                    type="checkbox"
+                    [(ngModel)]="item.selected"
+                    (change)="onSelect($event,item)"
+                >
+                <span></span>
+            </label>
+        </div>
+        <div
+            class="tab-pane__table-cell ticket-status-table__status"
+            *ngIf="item.custom"
+            [ngClass]="{'--input-error' :  item.disableUpdate  }"
+        >
+            <input
+                type="text"
+                class="form-input  --editable"
+                placeholder="Enter Name Status"
+                [(ngModel)]="item.name"
+                maxlength="20"
+                appKeyUpEnter
+                (onChange)="onEditTicketStatus(item)"
+                (input)="item.onInitEdit(true);item.checkDublicateUpdate(ticketsStatus)"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="item.disableUpdate"
+            >
+                This Ticket Status is already occupied
+            </mat-error>
+        </div>
+        <div
+            class="tab-pane__table-cell ticket-status-table__status --parse-status"
+            [textContent]="parseStatus(item.name)"
+            *ngIf="!item.custom"
+        >
+        </div>
+        <div class="tab-pane__table-cell ticket-status-table__color">
+            <div
+                class="form-row tag-color-container"
+                ngbDropdown
+            >
+                <div
+                    id="dropdownBasic1"
+                    ngbDropdownToggle
+                    class="pointer"
+                >
+                    <i
+                        class="tag-color"
+                        [ngStyle]="{'background-color':statusColors[item.color].textColor ,
+                            'border-color': statusColors[item.color].textColor}"
+                    ></i>
+                </div>
+                <div
+                    ngbDropdownMenu
+                    class="status-container-db"
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <div class="status-container">
+                        <div
+                            class="tag-color-item"
+                            *ngFor="let tagColor of statusColors; let i = index"
+                            (click)="editColor(i,item)"
+                            ngbDropdownItem
+                        >
+                            <i
+                                class="tag-color"
+                                [ngClass]="{'--active':item.color == i}"
+                                [ngStyle]="{'background-color':tagColor.textColor ,
+                            'border-color': tagColor.textColor}"
+                            ></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane__table-cell ticket-status-table__preview">
+            <div
+                class="preview-container"
+                [ngStyle]="{'border-color':  statusColors[item.color].textColor,'background-color':statusColors[item.color].borderColor}"
+            >
+                <span
+                    [ngStyle]="{'color':  statusColors[item.color].textColor}"
+                    [textContent]="parseStatus(item.name)"
+                ></span>
+            </div>
+        </div>
+        <div class="tab-pane__table-cell ticket-status-table__action">
+            <app-dynamic-tooltip
+                [content]="'Remove'"
+                [position]="'top'"
+                #removeTooltip
+            ></app-dynamic-tooltip>
+            <div
+                (mouseenter)="removeTooltip.show($event.target)"
+                (mouseleave)="removeTooltip.hide()"
+                class="icon__remove qt-sz-20 qt-bg-contain pointer"
+                (click)="removeTicketStatus(item)"
+                *ngIf="item.custom"
+            >
+            </div>
+        </div>
+    </div>
+</div>

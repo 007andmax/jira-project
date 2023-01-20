@@ -37,6 +37,12 @@ import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-
 import { TicketDetailProfileUpdatesProductInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component';
 import { TicketDetailProfileUpdatesProductEditComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component';
 import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component';
+import { TicketDetailProfileUpdatesServiceComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service.component';
+import { TicketDetailProfileUpdatesServiceItemComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-item/ticket-detail-profile-updates-service-item.component';
+import { TicketDetailProfileUpdatesServiceInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-info/ticket-detail-profile-updates-service-info.component';
+import { TicketDetailProfileUpdatesServiceEditComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-edit/ticket-detail-profile-updates-service-edit.component';
+import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component';
+import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 
 
 
@@ -53,7 +59,13 @@ import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-d
         TicketDetailProfileUpdatesProductItemComponent,
         TicketDetailProfileUpdatesProductInfoComponent,
         TicketDetailProfileUpdatesProductEditComponent,
-        TicketDetailProfileUpdatesProductHeaderInfoComponent
+        TicketDetailProfileUpdatesProductHeaderInfoComponent,
+        TicketDetailProfileUpdatesServiceComponent,
+        TicketDetailProfileUpdatesServiceItemComponent,
+        TicketDetailProfileUpdatesServiceInfoComponent,
+        TicketDetailProfileUpdatesServiceEditComponent,
+        TicketDetailProfileUpdatesServiceHeaderInfoComponent,
+        TicketDetailTasksComponent
 
     ],
     imports: [

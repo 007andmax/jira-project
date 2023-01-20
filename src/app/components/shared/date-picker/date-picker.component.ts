@@ -6,6 +6,7 @@ import { ChangeDatePicker } from './class/change-date-picker';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DatePickerService } from './services/date-picker.service';
 import { TYPE_INPUT, FORMAT_DATE_1 } from 'src/app/const/date-picker';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-date-picker',
@@ -104,6 +105,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
 
   public geTextDate() {
+    if (this.type === 'DETAIL_TICKET') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
     return this.date.getTitle();
   }
   /**

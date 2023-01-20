@@ -5,6 +5,19 @@
     #date="ngbDropdown"
     [placement]="placement"
 >
+    <div *ngIf="type === 'DETAIL_TICKET'">
+        <i class="icn-16 icon__calendar pointer"></i>
+        <input
+            [disabled]="disabled"
+            type="text"
+            class="pointer qt-input-block__input"
+            placeholder="Select Date"
+            ngbDropdownToggle
+            id="dropdownDate"
+            [value]="geTextDate()"
+            readonly
+        >
+    </div>
     <input
         *ngIf="type === 'INPUT'"
         [disabled]="disabled"

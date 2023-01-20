@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileUpdatesProductInfoComponent } from '../../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-info/ticket-profile-updates-product-info.component';
 
 @Component({
@@ -8,6 +8,6 @@ import { TicketProfileUpdatesProductInfoComponent } from '../../../../ticket-edi
 })
 export class TicketDetailProfileUpdatesProductInfoComponent extends TicketProfileUpdatesProductInfoComponent {
 
-
+  @Input() showCompleteLabel: boolean = false;
 
 }

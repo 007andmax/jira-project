@@ -1,182 +1,21 @@
-<!-- <div -->
-<!-- ngbDropdown -->
-<!-- [autoClose]="'outside'" -->
-<!-- &gt; -->
-<!-- &lt;!&ndash; <div -->
-<!-- class="device-user pointer" -->
-<!-- *ngIf="type === 'RECURRING_TICEKTS'" -->
-<!-- id="dropdownTechuser" -->
-<!-- style="margin-bottom: 10px;width: 109px;" -->
-<!-- ngbDropdownToggle -->
-<!-- > -->
-<!-- Assigned Users -->
-<!-- </div> &ndash;&gt; -->
-<!-- <div -->
-<!-- class="device-user pointer" -->
-<!-- *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0" -->
-<!-- id="dropdownTechuser" -->
-<!-- style="margin-bottom: 10px;width: 109px;" -->
-<!-- ngbDropdownToggle -->
-<!-- > -->
-<!-- &lt;!&ndash; FOR RECURRING_TICEKTS &ndash;&gt; -->
-<!-- &lt;!&ndash; Assigned Users &ndash;&gt; -->
-<!-- &lt;!&ndash; FOR RECURRING_TICEKTS &ndash;&gt; -->
-<!-- &lt;!&ndash; COMPANY_SETTINGS &ndash;&gt; -->
-<!-- <div class="company-settings-user"> -->
-<!-- <div class="icon__user-avatar qt-sz-36 qt-circle qt-bg-contain"></div> -->
-<!-- <div class="qt-ml-12 qt-f-1 ellipsis"> -->
-<!-- <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis">Assign Sales Person</div> -->
-<!-- <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-4"> -->
-<!-- <div class="preview-container" style="border: 1px solid #FECDCA"> -->
-<!-- <span class="qt-fw-500" style="color: #D92D20;">Not Assigned</span> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- &lt;!&ndash; COMPANY_SETTINGS&ndash;&gt; -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="device-user pointer company-settings-user" -->
-<!-- *ngIf="type === 'COMPANY_SETTINGS' && selectedUsers.length === 1" -->
-<!-- id="dropdownTechuser" -->
-<!-- ngbDropdownToggle -->
-<!-- > -->
-<!-- <div class="user-tech-dp"> -->
-<!-- <div -->
-<!-- class="tab-pane__table-avatar user-dp" -->
-<!-- [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])" -->
-<!-- [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}" -->
-<!-- > -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="qt-ml-12 qt-f-1 ellipsis"> -->
-<!-- <div class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis" [textContent]="ticketsListService.getUserName(selectedUsers[0])"></div> -->
-<!-- <div class="tab-pane__table-user-item-email qt-color-gray-500 ellipsis qt-mt-2">alma.lawson@example.com</div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <app-dynamic-tooltip -->
-<!-- [content]="'Select User'" -->
-<!-- [position]="'top'" -->
-<!-- #selectUserTooltip -->
-<!-- ></app-dynamic-tooltip> -->
-<!-- <div -->
-<!-- class="tech__user-icon icon__assign-user pointer" -->
-<!-- *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'" -->
-<!-- id="dropdownTechuser" -->
-<!-- (mouseenter)="selectUserTooltip.show($event.target)" -->
-<!-- (mouseleave)="selectUserTooltip.hide()" -->
-<!-- ngbDropdownToggle -->
-<!-- ></div> -->
-<!-- <app-dynamic-tooltip -->
-<!-- [content]="ticketsListService.getUserName(selectedUsers[0])" -->
-<!-- [position]="'top'" -->
-<!-- #techUserTooltip -->
-<!-- ></app-dynamic-tooltip> -->
-<!-- <button -->
-<!-- class="ticket-updates__photo-people" -->
-<!-- *ngIf="type === 'TICEKTS' && selectedUsers.length === 1" -->
-<!-- [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])" -->
-<!-- [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}" -->
-<!-- id="dropdownTechuser" -->
-<!-- ngbDropdownToggle -->
-<!-- [disabled]="isDisabled" -->
-<!-- (mouseenter)="techUserTooltip.show($event.target)" -->
-<!-- (mouseleave)="techUserTooltip.hide()" -->
-<!-- ></button> -->
-<!-- <div -->
-<!-- class="tech-user-body" -->
-<!-- ngbDropdownMenu -->
-<!-- aria-labelledby="dropdownTechuser" -->
-<!-- *ngIf="!isDisabled" -->
-<!-- > -->
-<!-- <div class="select-wrapper dropdown-assign-ticket fixed-assign"> -->
-<!-- <div class="content"> -->
-<!-- <form class="px-4 py-3"> -->
-<!-- <div -->
-<!-- class="assign-ticket" -->
-<!-- assign-user -->
-<!-- > -->
-<!-- <div class="assign-ticket-content"> -->
-<!-- <div class="assign-ticket-header"> -->
-<!-- <div class="clearfix"> -->
-<!-- <div class="form-group"> -->
-<!-- <input -->
-<!-- class="form-control" -->
-<!-- placeholder="Search Users" -->
-<!-- value -->
-<!-- autocomplete="off" -->
-<!-- (input)="onSearch($event)" -->
-<!-- > -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="scroll-pane"> -->
-<!-- <div class="users-list" tabindex="-1"> -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-user -->
-<!-- [ngForOf]="usersList" -->
-<!-- let-i="index" -->
-<!-- [ngForTrackBy]="trackByIndex" -->
-<!-- > -->
-<!-- <div -->
-<!-- class="user-item" -->
-<!-- data-index="1" -->
-<!-- (click)="selectUser(i)" -->
-<!-- [ngClass]="(user.selected) ? 'active' : ''" -->
-<!-- > -->
-<!-- <a -->
-<!-- href="javascript:void(0)" -->
-<!-- [id]="user.id" -->
-<!-- class="dropdown-link" -->
-<!-- > -->
-<!-- <div -->
-<!-- class="default-user-avatar avatar-background-color-odd ng-scope" -->
-<!-- *ngIf="!user.avatar" -->
-<!-- > -->
-<!-- <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span> -->
-<!-- <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="default-user-avatar avatar-background-color-odd ng-scope" -->
-<!-- *ngIf="user.avatar" -->
-<!-- > -->
-<!-- <img -->
-<!-- ng-if="user.avatar" -->
-<!-- class="qt-circle avatar-26" -->
-<!-- style="margin: 0;" -->
-<!-- [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')" -->
-<!-- alt="..." -->
-<!-- > -->
-<!-- </div> -->
-<!-- <span> -->
-<!-- <p -->
-<!-- class="dropdown-avatar__name" -->
-<!-- [textContent]="user.firstName + ' ' + user.lastName" -->
-<!-- ></p> -->
-<!-- <p -->
-<!-- class="dropdown-avatar__email" -->
-<!-- [textContent]="user.primaryEmail" -->
-<!-- ></p> -->
-<!-- </span> -->
-<!-- </a> -->
-<!-- </div> -->
-<!-- </ng-template> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </form> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
 <div
     class="tech-users-container"
     ngbDropdown
     [container]="container"
     [autoClose]="'outside'"
 >
+    <div
+        class="device-user pointer"
+        *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 0"
+        id="dropdownTechuser"
+        style="margin-bottom: 10px;"
+        ngbDropdownToggle
+    >
+        <div class="qt-df qt-ai-c">
+            <div class="add-user qt-sz-36 qt-circle qt-bg-contain qt-mr-8"></div>
+            <span>Assigned Users</span>
+        </div>
+    </div>
     <div
         class="device-user pointer"
         *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
@@ -217,6 +56,27 @@
             </div>
         </div>
         <!-- COMPANY_SETTINGS -->
+    </div>
+    <div
+        class="device-user pointer company-settings-user"
+        *ngIf="type === 'DETAIL_TICKET' && selectedUsers.length === 1"
+        id="dropdownTechuser"
+        ngbDropdownToggle
+    >
+        <div class="user-tech-dp">
+            <div
+                class="tab-pane__table-avatar user-dp"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
+            >
+            </div>
+        </div>
+        <div class="qt-ml-12 qt-f-1 ellipsis">
+            <div
+                class="tab-pane__table-user-item-name qt-fw-600 qt-color-gray-900 ellipsis"
+                [textContent]="ticketsListService.getUserName(selectedUsers[0])"
+            ></div>
+        </div>
     </div>
     <div
         class="device-user pointer company-settings-user"

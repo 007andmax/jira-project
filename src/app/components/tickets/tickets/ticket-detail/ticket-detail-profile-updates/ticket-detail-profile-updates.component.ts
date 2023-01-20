@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { TicketProfileUpdatesComponent } from '../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
 
@@ -9,4 +9,5 @@ import { TicketProfileUpdatesComponent } from '../../ticket-edit-aside/ticket-pr
   providers: [TicketsPermissionsService]
 })
 export class TicketDetailProfileUpdatesComponent extends TicketProfileUpdatesComponent {
+
 }

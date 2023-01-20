@@ -43,6 +43,9 @@
   &__assign-user {
     background-image: url("/assets/img/icons/assign-user.svg");
   }
+   &__ticket-note {
+    background-image: url("/assets/img/icons/ticket-note.svg");
+  }
   &__remove-user {
     background-image: url("/assets/img/icons/remove-user.svg");
   }
@@ -358,6 +361,9 @@
   &__inactive {
     background-image: url("/assets/img/icons/inactive.svg");
   }
+   &__active {
+    background-image: url("/assets/img/icons/active.svg");
+  }
   &__collapse-arrow {
     background-image: url("/assets/img/icons/collapse-arrow.svg"); // TODO replace collapse-arrow.svg and collapse-arrow-white.svg on mask
   }
@@ -659,6 +665,17 @@
   }
   &__email {
     background-image: url("/assets/img/icons/email.svg");
+  }
+  &__description-ticket {
+     background-color: $gray-500;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: url("/assets/img/icons/email.svg");
+      mask-image: url("/assets/img/icons/email.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+      mask-size: contain;
   }
   &__reset {
     background-image: url("/assets/img/icons/reset.svg");

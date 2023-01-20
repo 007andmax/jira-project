@@ -4,6 +4,7 @@
     *ngIf="!editMode"
     (onEdit)="editMode = true"
     [product]="product"
+    [showCompleteLabel]="showCompleteLabel"
 ></ticket-detail-profile-updates-product-info>
 <ticket-detail-profile-updates-product-edit
     [update]="update"
