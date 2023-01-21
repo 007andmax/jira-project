@@ -43,6 +43,17 @@
   &__assign-user {
     background-image: url("/assets/img/icons/assign-user.svg");
   }
+  &__assign-user-plus {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/assign-user-plus.svg");
+    mask-image: url("/assets/img/icons/assign-user-plus.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
    &__ticket-note {
     background-image: url("/assets/img/icons/ticket-note.svg");
   }
@@ -276,6 +287,10 @@
     background-color: $gray-600--old;
     -webkit-mask-image: url("/assets/img/icons/category-more.svg");
     mask-image: url("/assets/img/icons/category-more.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__remove,
   &__remove--red-500,
@@ -307,19 +322,43 @@
     background-image: url("/assets/img/icons/selected.svg");
   }
   &__chat {
-    background-image: url("/assets/img/icons/chat.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/chat.svg");
+    mask-image: url("/assets/img/icons/chat.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
     &.active {
       background-image: url("/assets/img/icons/chat-blue.svg");
     }
   }
   &__products {
-    background-image: url("/assets/img/icons/products.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/products.svg");
+    mask-image: url("/assets/img/icons/products.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
     &.active {
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
   &__service {
-    background-image: url("/assets/img/icons/service.svg");
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/service.svg");
+    mask-image: url("/assets/img/icons/service.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
@@ -329,6 +368,17 @@
     &.active {
       background-image: url("/assets/img/icons/quick-support.svg");
     }
+  }
+  &__quick-support-strip {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/quick-support-strip.svg");
+    mask-image: url("/assets/img/icons/quick-support-strip.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__quicktech-logo { // TODO delete this icon on super admin page
     background-image: url("/assets/img/icons/quicktech-logo.svg");
@@ -357,6 +407,17 @@
   }
   &__check {
     background-image: url("/assets/img/icons/check.svg");
+  }
+  &__check--white {
+    background-color: $white;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/check.svg");
+    mask-image: url("/assets/img/icons/check.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__inactive {
     background-image: url("/assets/img/icons/inactive.svg");
@@ -443,6 +504,17 @@
   &__claim-edit-ticket {
     background-image: url("/assets/img/icons/claim-edit-ticket.svg");
   }
+  &__tags {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/tags.svg");
+    mask-image: url("/assets/img/icons/tags.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__ticket-status {
     background: url("/assets/img/icons/ticket-status.svg");
   }
@@ -470,6 +542,17 @@
     mask-position: center;
     -webkit-mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
     mask-image: url("/assets/img/icons-left-sidebar/menu-settings.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  &__merge {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons-left-sidebar/merge.svg");
+    mask-image: url("/assets/img/icons-left-sidebar/merge.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -621,6 +704,17 @@
   }
   &__timer-counter {
     background-image: url("/assets/img/icons/timer-counter.svg");
+  }
+  &__timer {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/timer.svg");
+    mask-image: url("/assets/img/icons/timer.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__move-light {
     background-image: url("/assets/img/icons/move-light.svg");

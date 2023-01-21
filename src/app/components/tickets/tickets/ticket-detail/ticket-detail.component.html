@@ -1,7 +1,82 @@
 <div
-    class="qt-df"
+    class="ticket-detail-page"
     [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
 >
+    <div class="ticket-detail-page__header">
+      <div
+        class="breadcrumbs"
+      >
+        <div class="breadcrumbs-location qt-fs-0 pointer">
+          All Tickets
+          <div class="breadcrumb-separator">/</div>
+        </div>
+        <div
+          class="breadcrumbs-attribute qt-fs-0"
+        >
+          <span>Tkt #9765</span>
+        </div>
+      </div>
+      <div class="qt-df qt-ai-c">
+        <div class="qt-button --gray pointer qt-ml-12">
+          <span class="icon__timer qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+          1 hr : 23 min : 56 sec
+        </div>
+        <div class="qt-button qt-ml-12">
+          <span class="icon__check--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+          Close Ticket
+        </div>
+      </div>
+    </div>
+    <div class="ticket-detail-page__panel">
+      <div class="qt-df qt-ai-c">
+        <img
+          src="/html/assets/img/screenConnect.png"
+          class="чqt-sz-36 qt-img-cover qt-circle qt-mr-16"
+          alt
+        >
+        <div class="qt-button --gray --md pointer qt-mr-8">
+          <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Chat
+        </div>
+        <div class="qt-button --gray --md pointer qt-mr-8">
+          <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Products
+        </div>
+        <div class="qt-button --gray --md pointer qt-mr-8">
+          <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Service
+        </div>
+        <div class="qt-button --gray --md pointer qt-mr-8">
+          <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Quick Support
+        </div>
+        <div class="qt-button --gray --md pointer qt-mr-8">
+          <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Merge Ticket
+        </div>
+      </div>
+      <div class="qt-df qt-ai-c">
+        <div class="qt-button --gray --md pointer qt-ml-8">
+          <div class="icon__assign-user-plus qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Assign User
+        </div>
+        <div class="qt-button --gray --md pointer qt-ml-8">
+          <div class="icon__tags qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Link Agent
+        </div>
+        <div class="qt-button --gray --md pointer qt-ml-8">
+          <div class="icon__category-more qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+          Add Tag
+        </div>
+        <div class="qt-button --square-md --gray pointer qt-ml-8">
+          <div class="icon__category-more qt-sz-16 qt-bg-contain"></div>
+        </div>
+        <div class="ticket-detail-page__separator"></div>
+        <div class="qt-button --square-md --gray pointer">
+          <div class="icon__panel-open qt-sz-16 qt-bg-contain"></div>
+        </div>
+      </div>
+    </div>
     <div
         class="collapse-arrow icon__close"
         (click)="close()"
@@ -201,7 +276,7 @@
                 [ticketProfile]="ticketProfile"
             ></app-ticket-message>
             <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-          
+
             <app-ticket-profile-form-update
                 [ngClass]="{'--open':openedMobileUpdate}"
                 (onClosed)="close()"
