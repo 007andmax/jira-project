@@ -77,180 +77,186 @@
         </div>
       </div>
     </div>
-    <div
-        class="collapse-arrow icon__close"
-        (click)="close()"
-    ></div>
-    <div class="ticket-edit-aside__ticket-info">
-        <div
+<!--    <div-->
+<!--        class="collapse-arrow icon__close"-->
+<!--        (click)="close()"-->
+<!--    ></div>-->
+    <div class="ticket-detail-page-content">
+      <div class="ticket-detail-page-content-main">
+        <div class="ticket-detail-page-content__body">
+          <div
             class="prelaoder-body"
             *ngIf="showPreloader"
-        >
+          >
             <div class="loading"></div>
-        </div>
-        <div class="qt-aside__body ticket-edit-aside__body">
+          </div>
+          <div class="">
             <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
-            <div class="ticket-edit-aside__ticket-text">
-                <div
-                    class="ticket-edit-aside__ticket-subject"
-                    [hidden]="modeSubject === 'edit'"
-                    (click)="toggleSubject()"
+            <div class="ticket-detail-page-title qt-mt-10 qt-mb-16">
+              <div
+                class="ticket-detail-page-title__text"
+                [hidden]="modeSubject === 'edit'"
+                (click)="toggleSubject()"
+              >
+                <span [textContent]="ticketProfile.subject"></span>
+              </div>
+              <div
+                class=""
+                [hidden]="modeSubject === 'view'"
+                appClickOtside
+                [init]="modeSubject === 'edit'"
+                [class]="'.ticket-detail-page-title'"
+                (onOutSide)="toggleSubject()"
+              >
+                <input
+                  id="ticket-subject"
+                  class="--editable ticket-detail-page-title__input"
+                  [value]="ticketProfile.subject"
+                  [readonly]="appService.checkMobile()"
                 >
-                    <span [textContent]="ticketProfile.subject"></span>
-                </div>
-                <div
-                    class="ticket-edit-aside__ticket-subject-edit qt-df qt-ai-c"
-                    [hidden]="modeSubject === 'view'"
-                    appClickOtside
-                    [init]="modeSubject === 'edit'"
-                    [class]="'.ticket-edit-aside__ticket-text'"
-                    (onOutSide)="toggleSubject()"
-                >
-                    <input
-                        id="ticket-subject"
-                        [value]="ticketProfile.subject"
-                        [readonly]="appService.checkMobile()"
-                    >
-                </div>
+              </div>
             </div>
-            <div class="ticket-edit-aside__header qt-df jc-sb qt-ai-c">
-                <div class="ticket-edit-aside__header-client-info">
+            <div class="ticket-detail-page-content__body-header">
+              <div class="qt-df qt-ai-fs">
+                <div
+                  class="ticket-edit-aside__header-avatar"
+                  [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+                  [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+                ></div>
+                <div>
+                  <div class="qt-df qt-ai-c">
                     <div
-                        class="ticket-edit-aside__header-avatar"
-                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
-                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
-                    ></div>
-                    <div>
-                        <div class="qt-df qt-ai-c">
-                            <div
-                                class="ticket-edit-aside__header-company"
-                                ngbDropdown
-                                (openChange)="onOpenCompaniesDropDown()"
-                                placement="bottom-left"
-                            >
+                      class=""
+                      ngbDropdown
+                      (openChange)="onOpenCompaniesDropDown()"
+                      placement="bottom-left"
+                    >
                                 <span
-                                    class="pointer"
-                                    [textContent]="getNameCreateUser()"
-                                    (click)="showDetailUser()"
+                                  class="pointer"
+                                  [textContent]="getNameCreateUser()"
+                                  (click)="showDetailUser()"
                                 ></span>
-                                <div class="ticket-edit-aside__header-info">
-                                    <span [textContent]="parseTicketSource() + getAgentName()"></span>
-                                </div>
-                                <app-dynamic-tooltip
-                                    class="user-companies-tooltip"
-                                    [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
-                                    [position]="'bottom'"
-                                    #userCompanyTooltip
-                                    [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company) && !getCompany(ticketProfile.company.id).isUnknown"
-                                ></app-dynamic-tooltip>
-                                <span [textContent]="getCreatAt()"></span>
-                                <span
-                                    class="pointer"
-                                    [textContent]="getCompanyName()"
-                                    (click)="goToCompanyDashboard()"
-                                    id="dropdownCompany"
-                                    ngbDropdownToggle
-                                    (mouseenter)="showTooltipCompany(userCompanyTooltip,$event)"
-                                    (mouseleave)="userCompanyTooltip.hide()"
-                                ></span>
-                                <span
-                                    class="qt-color-red-600"
-                                    *ngIf="ticketProfile.company.isCompanyDeleted"
-                                >
+                      <div class="ticket-detail-page-content__body-header-info qt-mb-6">
+                        <span [textContent]="parseTicketSource() + getAgentName()"></span>
+                        <span class="ticket-detail-page-content__body-header-info-email">sent from email</span>
+                      </div>
+                      <app-dynamic-tooltip
+                        class="user-companies-tooltip"
+                        [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
+                        [position]="'bottom'"
+                        #userCompanyTooltip
+                        [disableTooltip]="ticketProfile.ticketSource !== 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company) && !getCompany(ticketProfile.company.id).isUnknown"
+                      ></app-dynamic-tooltip>
+                       <div class="ticket-detail-page-content__body-header-data">
+                         <span [textContent]="getCreatAt()"></span>
+                         <div class="ticket-detail-page-content__body-header-data-divider"></div>
+                         <span
+                           class="pointer"
+                           [textContent]="getCompanyName()"
+                           (click)="goToCompanyDashboard()"
+                           id="dropdownCompany"
+                           ngbDropdownToggle
+                           (mouseenter)="showTooltipCompany(userCompanyTooltip,$event)"
+                           (mouseleave)="userCompanyTooltip.hide()"
+                         ></span>
+                       </div>
+                      <span
+                        class="qt-color-red-600"
+                        *ngIf="ticketProfile.company.isCompanyDeleted"
+                      >
                                     - Archived
                                 </span>
-                                <div
-                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown"
-                                    ngbDropdownMenu
-                                    aria-labelledby="dropdownCompany"
-                                >
-                                    <div class="dropdown-menu-qt">
-                                        <ul>
-                                            <ng-template
-                                                ngFor
-                                                let-item
-                                                [ngForOf]="getClientsList()"
-                                                let-i="index"
-                                            >
-                                                <li
-                                                    ngbDropdownItem
-                                                    [textContent]="item.name"
-                                                    (click)="changeTicketCompany(item.id)"
-                                                ></li>
-                                            </ng-template>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
+                      <div
+                        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts() && getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown"
+                        ngbDropdownMenu
+                        aria-labelledby="dropdownCompany"
+                      >
+                        <div class="dropdown-menu-qt">
+                          <ul>
+                            <ng-template
+                              ngFor
+                              let-item
+                              [ngForOf]="getClientsList()"
+                              let-i="index"
+                            >
+                              <li
+                                ngbDropdownItem
+                                [textContent]="item.name"
+                                (click)="changeTicketCompany(item.id)"
+                              ></li>
+                            </ng-template>
+                          </ul>
                         </div>
+                      </div>
+                    </div>
 
-                    </div>
+                  </div>
+
                 </div>
-                <div class="ticket-edit-aside__ticket-text">
-                    <i class="icon__description-ticket icn-16"></i>
-                    <div
-                        class="ticket-edit-aside__ticket-description-edit"
-                        appClickOtside
-                        [init]="modeDescription === 'edit'"
-                        [class]="'.ticket-edit-aside__ticket-text'"
-                        (onOutSide)="toggleNote()"
-                    >
-                        <div
-                            class="form-control editor"
-                            [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
-                            (blur)="modeDescription = 'edit'"
-                            [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
-                            id="ticket-note"
-                            placeholder="Enter description here"
-                        ></div>
-                    </div>
+              </div>
+              <div class="ticket-edit-aside__ticket-text">
+                <div
+                  class="ticket-edit-aside__ticket-description-edit"
+                  appClickOtside
+                  [init]="modeDescription === 'edit'"
+                  [class]="'.ticket-edit-aside__ticket-text'"
+                  (onOutSide)="toggleNote()"
+                >
+                  <div
+                    class="form-control editor"
+                    [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
+                    (blur)="modeDescription = 'edit'"
+                    [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
+                    id="ticket-note"
+                    placeholder="Enter description here"
+                  ></div>
                 </div>
-                <div class="ticket-edit-aside__header-menu">
+              </div>
+              <div class="ticket-edit-aside__header-menu">
+                <div
+                  class="ticket-edit-aside__more-users-title"
+                  *ngIf="listAssignedUser.length > 3"
+                  [textContent]="'+' + (listAssignedUser.length- 3) + ' more'"
+                >
+                </div>
+                <div class="more-users-avatars">
+                  <ng-template
+                    class="assigned-ticket-user"
+                    ngFor
+                    let-user
+                    [ngForOf]="listAssignedUser"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                  >
                     <div
-                        class="ticket-edit-aside__more-users-title"
-                        *ngIf="listAssignedUser.length > 3"
-                        [textContent]="'+' + (listAssignedUser.length- 3) + ' more'"
-                    >
-                    </div>
-                    <div class="more-users-avatars">
-                        <ng-template
-                            class="assigned-ticket-user"
-                            ngFor
-                            let-user
-                            [ngForOf]="listAssignedUser"
-                            let-i="index"
-                            [ngForTrackBy]="trackByIndex"
-                        >
-                            <div
-                                class="more-users-avatars__avatar"
-                                *ngIf="i < 3"
-                                [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
-                            ></div>
-                        </ng-template>
-                    </div>
-                    <div
-                        class="qt-modal-circle-button add-user toggle-select-user"
-                        (click)="onToggleAddAssignedUser()"
-                        placement="top"
-                        ngbTooltip="Assign"
+                      class="more-users-avatars__avatar"
+                      *ngIf="i < 3"
+                      [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                      [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
-                    <!-- <app-ticket-profile-actions
-                        (onClaimTicket)="claimTicket()"
-                        [ticketProfile]="ticketProfile"
-                        placement="top"
-                        ngbTooltip="Settings"
-                    ></app-ticket-profile-actions> -->
+                  </ng-template>
                 </div>
+                <div
+                  class="qt-modal-circle-button add-user toggle-select-user"
+                  (click)="onToggleAddAssignedUser()"
+                  placement="top"
+                  ngbTooltip="Assign"
+                ></div>
+                <!-- <app-ticket-profile-actions
+                    (onClaimTicket)="claimTicket()"
+                    [ticketProfile]="ticketProfile"
+                    placement="top"
+                    ngbTooltip="Settings"
+                ></app-ticket-profile-actions> -->
+              </div>
 
             </div>
             <ticket-detail-profile-updates
-                #ticketProfileUpdates
-                [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
-                (onFetchUpdates)="onFetchUpdates($event)"
-                [ticketProfile]="ticketProfile"
-                [updates]="ticketProfile.updates"
+              #ticketProfileUpdates
+              [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
+              (onFetchUpdates)="onFetchUpdates($event)"
+              [ticketProfile]="ticketProfile"
+              [updates]="ticketProfile.updates"
             ></ticket-detail-profile-updates>
             <!-- <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"
@@ -293,7 +299,12 @@
                 [ticket]="ticketProfile"
                 [lisUpdateUser]="lisUpdateUser"
             ></ticket-profile-edit-form-update> -->
+          </div>
         </div>
+
+        <div class="ticket-detail-page-content__sidebar-preview"></div>
+      </div>
+      <div class="ticket-detail-page-content__sidebar-info"></div>
     </div>
     <!-- <app-ticket-edit-aside-right-panel
         #rightPanel
