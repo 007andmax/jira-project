@@ -150,6 +150,7 @@
                        <div class="ticket-detail-page-content__body-header-data">
                          <span [textContent]="getCreatAt()"></span>
                          <div class="ticket-detail-page-content__body-header-data-divider"></div>
+                         <span class="icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
                          <span
                            class="pointer"
                            [textContent]="getCompanyName()"
@@ -189,67 +190,36 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </div>
-              <div class="ticket-edit-aside__ticket-text">
-                <div
-                  class="ticket-edit-aside__ticket-description-edit"
-                  appClickOtside
-                  [init]="modeDescription === 'edit'"
-                  [class]="'.ticket-edit-aside__ticket-text'"
-                  (onOutSide)="toggleNote()"
-                >
+              <div class="qt-df qt-ai-fs qt-mt-24 qt-mb-24">
+                <div class="ticket-detail-page__desc-icon qt-mr-16">
+                  <span class="icon__email qt-sz-16 qt-dib"></span>
+<!--                  <span class="icon__monitor qt-sz-16 qt-dib"></span>-->
+<!--                  <span class="icon__globe qt-sz-16 qt-dib"></span>-->
+<!--                  <span class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"></span>-->
+<!--                  <span class="icon__receipt qt-sz-16 qt-dib"></span>-->
+                </div>
+                <div class="ticket-detail-page__edit-wrap">
                   <div
-                    class="form-control editor"
-                    [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
-                    (blur)="modeDescription = 'edit'"
-                    [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
-                    id="ticket-note"
-                    placeholder="Enter description here"
-                  ></div>
-                </div>
-              </div>
-              <div class="ticket-edit-aside__header-menu">
-                <div
-                  class="ticket-edit-aside__more-users-title"
-                  *ngIf="listAssignedUser.length > 3"
-                  [textContent]="'+' + (listAssignedUser.length- 3) + ' more'"
-                >
-                </div>
-                <div class="more-users-avatars">
-                  <ng-template
-                    class="assigned-ticket-user"
-                    ngFor
-                    let-user
-                    [ngForOf]="listAssignedUser"
-                    let-i="index"
-                    [ngForTrackBy]="trackByIndex"
+                    class="ticket-detail-page__edit"
+                    appClickOtside
+                    [init]="modeDescription === 'edit'"
+                    [class]="'.ticket-detail-page__edit-wrap'"
+                    (onOutSide)="toggleNote()"
                   >
                     <div
-                      class="more-users-avatars__avatar"
-                      *ngIf="i < 3"
-                      [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-                      [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                      class="ticket-detail-page__editor"
+                      [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
+                      (blur)="modeDescription = 'edit'"
+                      [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"
+                      id="ticket-note"
+                      placeholder="Enter description here"
                     ></div>
-                  </ng-template>
+                  </div>
                 </div>
-                <div
-                  class="qt-modal-circle-button add-user toggle-select-user"
-                  (click)="onToggleAddAssignedUser()"
-                  placement="top"
-                  ngbTooltip="Assign"
-                ></div>
-                <!-- <app-ticket-profile-actions
-                    (onClaimTicket)="claimTicket()"
-                    [ticketProfile]="ticketProfile"
-                    placement="top"
-                    ngbTooltip="Settings"
-                ></app-ticket-profile-actions> -->
               </div>
-
             </div>
             <ticket-detail-profile-updates
               #ticketProfileUpdates
@@ -302,7 +272,45 @@
           </div>
         </div>
 
-        <div class="ticket-detail-page-content__sidebar-preview"></div>
+        <div class="ticket-detail-page-content__sidebar-preview">
+          <div class="ticket-edit-aside__header-menu">
+            <div
+              class="ticket-edit-aside__more-users-title"
+              *ngIf="listAssignedUser.length > 3"
+              [textContent]="'+' + (listAssignedUser.length- 3) + ' more'"
+            >
+            </div>
+            <div class="more-users-avatars">
+              <ng-template
+                class="assigned-ticket-user"
+                ngFor
+                let-user
+                [ngForOf]="listAssignedUser"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+              >
+                <div
+                  class="more-users-avatars__avatar"
+                  *ngIf="i < 3"
+                  [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                  [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+              </ng-template>
+            </div>
+            <div
+              class="qt-modal-circle-button add-user toggle-select-user"
+              (click)="onToggleAddAssignedUser()"
+              placement="top"
+              ngbTooltip="Assign"
+            ></div>
+            <!-- <app-ticket-profile-actions
+                (onClaimTicket)="claimTicket()"
+                [ticketProfile]="ticketProfile"
+                placement="top"
+                ngbTooltip="Settings"
+            ></app-ticket-profile-actions> -->
+          </div>
+        </div>
       </div>
       <div class="ticket-detail-page-content__sidebar-info"></div>
     </div>

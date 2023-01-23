@@ -152,8 +152,8 @@
     }
 
     &__header-avatar {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         margin-right: 16px;
         background-position: center !important;
         background-size: cover !important;
@@ -335,55 +335,55 @@
         margin-left: -22px;
     }
 
-    &__ticket-description {
-        font-size: 13px;
-        color: $gray-800--old;
-    }
-
-    &__ticket-description-edit {
-        margin-left: -12px;
-        margin-right: -12px;
-
-        textarea,
-        #ticket-note {
-            height: 76px;
-            border-radius: 5px;
-            border: solid 1px $gray-600--old;
-            width: 100%;
-            padding: 8px 12px;
-            font-size: 13px;
-            color: $gray-800--old;
-        }
-
-        #ticket-note {
-            min-height: 92px;
-            max-height: 400px;
-            background-color: $white;
-            overflow: auto;
-            height: auto;
-            color: $gray-900;
-            font-size: 14px;
-            line-height: 17px;
-            border-color: $gray-200;
-
-            &:focus {
-                outline: none;
-                border-color: $blue-light-600;
-            }
-
-            &:hover {
-                border-color: $gray-300;
-            }
-
-            @media (max-width: 767px) {
-                min-height: 20px;
-                padding: 0;
-                border: none;
-                line-height: 20px;
-                color: $primary-2;
-            }
-        }
-    }
+    //&__ticket-description {
+    //    font-size: 13px;
+    //    color: $gray-800--old;
+    //}
+    //
+    //&__ticket-description-edit {
+    //    margin-left: -12px;
+    //    margin-right: -12px;
+    //
+    //    textarea,
+    //    #ticket-note {
+    //        height: 76px;
+    //        border-radius: 5px;
+    //        border: solid 1px $gray-600--old;
+    //        width: 100%;
+    //        padding: 8px 12px;
+    //        font-size: 13px;
+    //        color: $gray-800--old;
+    //    }
+    //
+    //    #ticket-note {
+    //        min-height: 92px;
+    //        max-height: 400px;
+    //        background-color: $white;
+    //        overflow: auto;
+    //        height: auto;
+    //        color: $gray-900;
+    //        font-size: 14px;
+    //        line-height: 17px;
+    //        border-color: $gray-200;
+    //
+    //        &:focus {
+    //            outline: none;
+    //            border-color: $blue-light-600;
+    //        }
+    //
+    //        &:hover {
+    //            border-color: $gray-300;
+    //        }
+    //
+    //        @media (max-width: 767px) {
+    //            min-height: 20px;
+    //            padding: 0;
+    //            border: none;
+    //            line-height: 20px;
+    //            color: $primary-2;
+    //        }
+    //    }
+    //}
 
     &__claimed-info {
         position: relative;
@@ -1020,7 +1020,7 @@ app-ticket-edit-aside-right-panel {
             display: inline-block;
             width: 1px;
             height: 12px;
-            background-color: $gray-500;
+            background-color: $gray-300;
             margin-left: 8px;
             margin-right: 8px;
           }
@@ -1077,6 +1077,28 @@ app-ticket-edit-aside-right-panel {
           border-color: transparent;
         }
       }
+    }
+  }
+
+  &__desc {
+    &-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: $gray-100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__editor {
+    font-size: 14px;
+    line-height: 20px;
+    color: $gray-900;
+
+    &:focus {
+      outline: none;
     }
   }
 
