@@ -31,6 +31,7 @@ import { TicketProfileFormUpdateComponent } from '../ticket-edit-aside/ticket-pr
 import { TicketProfileUpdatesComponent } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
 import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
+import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -45,6 +46,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
+  @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
   openedMobileUpdate = false;
@@ -173,14 +175,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.updateLisUpdateUser();
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
-      this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
-      this.ticketMessage.reset();
+      if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
+      this.ticketTasks.getTicketTasks(id);
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
         if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
+      this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
     })
   }
   onSelectAssignedUser(data) {

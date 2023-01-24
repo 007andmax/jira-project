@@ -6,6 +6,7 @@ import { TicketProfileService } from '../../class/ticket-profile-service';
 import { TicketProfileProduct } from '../../class/ticket-profile-product';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { TicketProfileTask } from '../../class/ticket-profile-task';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,18 @@ export class TicketStateService {
   areTicketsTerminated: boolean = false;
   servicesForTicket = [];
   ticketRoutingId: string;
+  taskForRemove: TicketProfileTask;
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setTaskForRemove(data) {
+    this.taskForRemove = data;
+  }
+  public getTaskForRemove() {
+    return this.taskForRemove;
   }
   public setTicketRoutingId(data) {
     this.ticketRoutingId = data;

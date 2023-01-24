@@ -23,6 +23,25 @@ export class TicketsService {
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }
+  public getTicketTasks(id) {
+    return this.http.get(this.apiUrl + `v2/tickets/task?ticketId=${id}`);
+  }
+  public removeTicketTask(id) {
+    return this.http.delete(this.apiUrl + `v2/tickets/task/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public addTicketTasks(data) {
+    return this.http.post(this.apiUrl + `v2/tickets/task`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getDashboard(frequency) {
     return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
   }
@@ -146,6 +165,15 @@ export class TicketsService {
     return this.http.post(this.apiUrl + `ticket/status`, { name: name, color: color }).pipe(
       tap(data => {
         this.toastrService.success("Status created successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editTicketTask(data) {
+
+    return this.http.put(this.apiUrl + `v2/tickets/task`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;
       }));
