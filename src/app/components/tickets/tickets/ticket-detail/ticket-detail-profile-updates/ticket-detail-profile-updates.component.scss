@@ -9,8 +9,29 @@
         padding: 16px;
     }
 
-    &__count {
-        font-weight: 600;
+    &__title {
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: $blue-light-800;
+
+      &-line {
+        flex: 1 1 auto;
+        height: 1px;
+        background-color: $gray-200;
+      }
+      &-info {
+        display: flex;
+        align-items: center;
+        background-color: $blue-light-25;
+        border: 1px solid $blue-light-100;
+        padding: 4px 11px;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 76px;
+        color: $blue-light-800;
+      }
     }
 
     &__ticket-photo {
