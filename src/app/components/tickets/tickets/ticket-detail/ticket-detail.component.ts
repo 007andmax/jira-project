@@ -185,7 +185,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-        if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
+        //  if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
     })
   }
@@ -331,10 +331,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
-    this.rightPanel.close();
+    // this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
-    this.ticketMessage.reset();
+    //  this.ticketMessage.reset();
     this.appService.toggleMobileAside(false);
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     if (!this.cd['destroyed']) {
