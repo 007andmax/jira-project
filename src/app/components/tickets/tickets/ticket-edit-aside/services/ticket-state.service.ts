@@ -64,6 +64,9 @@ export class TicketStateService {
   public subsribeToTicket(id) {
     this.websocketService.subsribeToTicket(id);
   }
+  public subsribeToTicketTasks(id) {
+    this.websocketService.subsribeToTicketTasks(id);
+  }
   public unsubscribeTicket() {
     this.ticketsRealTimeService.unsubscribeTicket();
   }

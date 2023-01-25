@@ -32,6 +32,7 @@ import { TicketProfileUpdatesComponent } from '../ticket-edit-aside/ticket-profi
 import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'ticket-detail',
@@ -78,6 +79,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     private devicesStateService: DevicesStateService,
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     public activateRoute: ActivatedRoute,
+    public websocketService: WebsocketService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -106,12 +108,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-
-    this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
-
-      if (this.ticketProfile.id === data.id) this.close();
-
-    });
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
       if (this.ticketProfile.id === data.id) {
         if (data.field === "agent.deviceId") {
@@ -162,11 +158,19 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketStateService.onEditUpdate.subscribe(data => {
       this.openedMobileEditUpdate = true;
     })
+    if (this.websocketService.isInit) {
+      this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
+      this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
+    }
+    let onInit = this.websocketService.onInit.subscribe(data => {
+      this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
+      this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
+    })
+    this.sub.add(onInit);
   }
   getTicket(id) {
     this.ticketsService.getTicket(id).subscribe(data => {
       // data.setUserCompanies(ticket.userCompanies);
-      this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       if (this.updateForm) this.updateForm.noteList.onGetNoteList()
       this.ticketProfile = data;
@@ -183,15 +187,12 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
         if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
       }
-      this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
     })
   }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
-  ngOnDestroy(): void {
-    this.leftPanelStateService.toggleShowBtnLeftPanel(true);
-  }
+
   onDeleteForever() {
     this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
     })
@@ -322,7 +323,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
   }
-  close() {
+  ngOnDestroy(): void {
     if (this.updateForm) this.updateForm.removeAllAttachments();
     this.ticketProfile = new TicketProfile();
     this.modeSubject = 'view';

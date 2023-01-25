@@ -196,7 +196,6 @@
         [ngClass]="{'--open':showMobTab}"
     >
         <div
-            *ngIf="showBtnLeftPanel"
             class="app-left-panel__header-resize-btn qt-d-md-none"
             (click)="onToggleLeftPanel()"
         ></div>
@@ -214,7 +213,7 @@
             (onOpenPanel)="onOpenPanel()"
             (onChangeState)="onChangeState($event)"
             [activePage]="state"
-            [hidden]="page !== 'TICKETS'"
+            [hidden]="page !== 'TICKETS' && page !== 'TICKET-DETAIL'"
         ></app-left-panel-tickets>
         <app-left-panel-users
             *ngIf="getPermissions('VIEW_USERS')"

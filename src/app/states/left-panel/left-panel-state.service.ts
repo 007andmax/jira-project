@@ -13,7 +13,6 @@ export class LeftPanelStateService {
   onDocumentsPage: EventEmitter<any> = new EventEmitter();
   onOpenCompanyPage: EventEmitter<any> = new EventEmitter();
   onToggleLeftPanel: EventEmitter<any> = new EventEmitter();
-  onShowBtnLeftPanel: EventEmitter<any> = new EventEmitter();
   onToggleMobileLeftPanel: EventEmitter<any> = new EventEmitter();
   onHideLeftPanel: EventEmitter<any> = new EventEmitter();
   onGoToState: EventEmitter<any> = new EventEmitter();
@@ -32,9 +31,6 @@ export class LeftPanelStateService {
   }
   public getFilter() {
     return this.filter;
-  }
-  public toggleShowBtnLeftPanel(data) {
-    this.onShowBtnLeftPanel.emit(data);
   }
   toggleMobileLeftPanel(data) {
     this.onToggleMobileLeftPanel.emit(data);

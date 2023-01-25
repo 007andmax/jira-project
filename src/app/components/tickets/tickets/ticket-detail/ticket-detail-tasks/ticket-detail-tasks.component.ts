@@ -12,13 +12,15 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { REMOVE_TASK_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'ticket-detail-tasks',
   templateUrl: './ticket-detail-tasks.component.html',
   styleUrls: ['./ticket-detail-tasks.component.scss']
 })
-export class TicketDetailTasksComponent implements OnInit {
+export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   showAdd: boolean = false;
   list: Array<TicketProfileTask> = [];
   addTask: TicketProfileTask = new TicketProfileTask();
@@ -30,6 +32,7 @@ export class TicketDetailTasksComponent implements OnInit {
     private ticketStateService: TicketStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private ticketsRealTimeService: TicketsRealTimeService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -46,6 +49,19 @@ export class TicketDetailTasksComponent implements OnInit {
       this.listTechUsers = this.getUsersForAssign();
     })
     this.sub.add(getOnUsers);
+    let changeTicketTasks = this.ticketsRealTimeService.changeTicketTasks.subscribe(data => {
+      console.log("data", data);
+      if (data.action == "TASK_EDITED") {
+        let index = this.list.findIndex(item => item.id == data.data.id);
+        this.list[index] = new TicketProfileTask(data.data);
+      }
+      if (data.action == "TASK_SAVED") this.list.push(new TicketProfileTask(data.data));
+      if (data.action == "TASK_REMOVED") {
+        let index = this.list.findIndex(item => item.id == data.data);
+        this.list.splice(index, 1);
+      }
+    })
+    this.sub.add(changeTicketTasks);
   }
   public getTicketTasks(id) {
     this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
@@ -104,5 +120,8 @@ export class TicketDetailTasksComponent implements OnInit {
           item.onInitEdit(false);
         })
     }
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

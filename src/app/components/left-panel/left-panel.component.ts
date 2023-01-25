@@ -38,7 +38,6 @@ export class LeftPanelComponent implements OnInit {
   state: string = '';
   page: string = '';
   showMobTab = false;
-  showBtnLeftPanel: boolean = true;
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
@@ -138,7 +137,6 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/tickets`) && !window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets';
           if (window.location.href.includes(`/ticket/`)) {
             this.state = 'ticket-detail';
-            this.showBtnLeftPanel = false;
           }
           if (window.location.href.includes(`/recurring-tickets`)) this.state = 'recurring-tickets';
           if (window.location.href.includes(`/quickSupport`)) this.state = 'new-quickSupport';
@@ -202,9 +200,6 @@ export class LeftPanelComponent implements OnInit {
 
     this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
-    })
-    this.leftPanelStateService.onShowBtnLeftPanel.subscribe(data => {
-      this.showBtnLeftPanel = data;
     })
     this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
       this.panelBilling.close();
@@ -339,7 +334,6 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'ticket-detail') {
         this.goToLink(`ticket/${this.ticketStateService.getTicketRoutingId()}`);
         this.onHideLeftPanel();
-        this.showBtnLeftPanel = false;
       }
       if (this.state === 'recurring-tickets') this.goToLink('recurring-tickets');
       if (this.state === 'new-quickSupport') this.goToLink('quickSupport');

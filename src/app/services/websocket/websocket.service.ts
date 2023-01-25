@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
@@ -51,7 +51,8 @@ export class WebsocketService {
   private stompClient;
   private netScanSub;
   public IsKafkaConnected: boolean = false;
-
+  onInit: EventEmitter<any> = new EventEmitter();
+  isInit: boolean = false;
   isResetWebSocket: boolean = false;
   ws;
   /**
@@ -138,6 +139,8 @@ export class WebsocketService {
       that.subsribeToNoteTemplateSubscription();
       that.subsribeToEmailNotification();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
+      that.onInit.emit(true);
+      that.isInit = true;
     }
     this.stompClient.debug = (data) => {
       console.log("debug", data);
@@ -387,6 +390,16 @@ export class WebsocketService {
     this.ticketsRealTimeService.ticketSubscription = this.stompClient.subscribe(`/user/watch/ticketUpdates/${id}`, (message) => {
       var newChange = JSON.parse(message.body);
       this.ticketsRealTimeService.handleRealTimeChangesTicket(newChange);
+
+    });
+
+
+  }
+  public subsribeToTicketTasks(id) {
+
+    this.ticketsRealTimeService.ticketTaskSubscription = this.stompClient.subscribe(`/user/watch/ticketTasks`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.ticketsRealTimeService.handleRealTimeChangesTicketTasks(newChange);
 
     });
 
