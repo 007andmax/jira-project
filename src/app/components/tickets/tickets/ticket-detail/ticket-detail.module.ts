@@ -43,6 +43,7 @@ import { TicketDetailProfileUpdatesServiceInfoComponent } from './ticket-detail-
 import { TicketDetailProfileUpdatesServiceEditComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-edit/ticket-detail-profile-updates-service-edit.component';
 import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
+import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 
 
 
@@ -65,7 +66,8 @@ import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-
         TicketDetailProfileUpdatesServiceInfoComponent,
         TicketDetailProfileUpdatesServiceEditComponent,
         TicketDetailProfileUpdatesServiceHeaderInfoComponent,
-        TicketDetailTasksComponent
+        TicketDetailTasksComponent,
+        TicketDetailHeaderComponent
 
     ],
     imports: [

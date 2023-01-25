@@ -1,0 +1,56 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+.breadcrumbs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    color: $gray-900;
+
+    &-separator {
+        padding: 0 8px;
+    }
+
+    &-location {
+        display: inline-flex;
+    }
+
+    &-attribute {
+        font-weight: 500;
+    }
+}
+.ticket-detail-page {
+    height: 100vh;
+    background-color: $white;
+    min-width: calc(1600px - 64px);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+        padding: 0 16px;
+    }
+
+    &__panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0 10px 24px;
+        background-color: $gray-50;
+        border-top: 1px solid $gray-200;
+        border-bottom: 1px solid $gray-200;
+
+        .qt-button:not(.--square-md) {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+
+    &__separator {
+        width: 1px;
+        height: 24px;
+        background-color: $gray-200;
+        margin: 0 16px;
+    }
+
+}

@@ -248,7 +248,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       result = '';
     for (var i = 0, len = words.length; i < len; i++) {
       var word = words[i];
-      result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+      result += word[0].toLowerCase() + word.slice(1).toLowerCase();
       if (i !== len - 1) {
         result += ' ';
       }

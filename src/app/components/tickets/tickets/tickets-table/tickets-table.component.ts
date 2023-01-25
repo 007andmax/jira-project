@@ -10,6 +10,8 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { StatusColor } from '../../class/status-color';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { Router } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 
 @Component({
@@ -36,6 +38,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
     private appService: AppService,
+    private router: Router,
+    private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
 
@@ -97,7 +101,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   editTicket(id) {
     if (!this.appService.isMobile) {
       this.ticketStateService.setTicketRoutingId(id);
-      this.leftPanelStateService.goToState("ticket-detail");
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      window.open(url, '_blank');
     } else {
       this.idEditTicket = id;
       let ticket = this.tickets.find(item => item.id === id);

@@ -912,25 +912,6 @@ app-ticket-edit-aside-right-panel {
     padding-bottom: 0px !important;
 }
 
-.breadcrumbs {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  color: $gray-900;
-
-  &-separator {
-    padding: 0 8px;
-  }
-
-  &-location {
-    display: inline-flex;
-  }
-
-  &-attribute {
-    font-weight: 500;
-  }
-}
-
 .breadcrumb-separator {
   padding: 0 8px;
 }

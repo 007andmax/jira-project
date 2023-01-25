@@ -2,90 +2,23 @@
     class="ticket-detail-page"
     [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
 >
-    <div class="ticket-detail-page__header">
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-location qt-fs-0 pointer">
-                All Tickets
-                <div class="breadcrumb-separator">/</div>
-            </div>
-            <div class="breadcrumbs-attribute qt-fs-0">
-                <span [textContent]="'Tkt #' + ticketProfile.number"></span>
-            </div>
-        </div>
-        <div class="qt-df qt-ai-c">
-            <div class="qt-button --gray pointer qt-ml-12">
-                <span class="icon__timer qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
-                1 hr : 23 min : 56 sec
-            </div>
-            <div class="qt-button qt-ml-12">
-                <span class="icon__check--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
-                Close Ticket
-            </div>
-        </div>
-    </div>
-    <div class="ticket-detail-page__panel">
-        <div class="qt-df qt-ai-c">
-            <img
-                src="/html/assets/img/screenConnect.png"
-                class="чqt-sz-36 qt-img-cover qt-circle qt-mr-16"
-                alt
-            >
-            <div class="qt-button --gray --md pointer qt-mr-8">
-                <div class="icon__chat qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Chat
-            </div>
-            <div class="qt-button --gray --md pointer qt-mr-8">
-                <div class="icon__products qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Products
-            </div>
-            <div class="qt-button --gray --md pointer qt-mr-8">
-                <div class="icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Service
-            </div>
-            <div class="qt-button --gray --md pointer qt-mr-8">
-                <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Quick Support
-            </div>
-            <div class="qt-button --gray --md pointer qt-mr-8">
-                <div class="icon__quick-support-strip qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Merge Ticket
-            </div>
-        </div>
-        <div class="qt-df qt-ai-c">
-            <div class="qt-button --gray --md pointer qt-ml-8">
-                <div class="icon__assign-user-plus qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Assign User
-            </div>
-            <div class="qt-button --gray --md pointer qt-ml-8">
-                <div class="icon__tags qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Link Agent
-            </div>
-            <div class="qt-button --gray --md pointer qt-ml-8">
-                <div class="icon__category-more qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                Add Tag
-            </div>
-            <div class="qt-button --square-md --gray pointer qt-ml-8">
-                <div class="icon__category-more qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="ticket-detail-page__separator"></div>
-            <div class="qt-button --square-md --gray pointer">
-                <div class="icon__panel-open qt-sz-16 qt-bg-contain"></div>
-            </div>
-        </div>
-    </div>
+    <ticket-detail-header
+        *ngIf="!showPreloader"
+        [ticketProfile]="ticketProfile"
+    ></ticket-detail-header>
     <!-- <div -->
     <!-- class="collapse-arrow icon__close" -->
     <!-- (click)="close()" -->
     <!-- ></div> -->
+    <div
+        class="prelaoder-body"
+        *ngIf="showPreloader"
+    >
+        <div class="loading"></div>
+    </div>
     <div class="ticket-detail-page-content">
         <div class="ticket-detail-page-content-main">
             <div class="ticket-detail-page-content__body">
-                <div
-                    class="prelaoder-body"
-                    *ngIf="showPreloader"
-                >
-                    <div class="loading"></div>
-                </div>
                 <div class>
                     <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
                     <div class="ticket-detail-page-title qt-mt-10 qt-mb-16">
@@ -127,14 +60,17 @@
                                         (openChange)="onOpenCompaniesDropDown()"
                                         placement="bottom-left"
                                     >
-                                        <span
-                                            class="pointer"
-                                            [textContent]="getNameCreateUser()"
-                                            (click)="showDetailUser()"
-                                        ></span>
+                                        <!-- <span [textContent]="parseTicketSource() + getAgentName()"></span> -->
                                         <div class="ticket-detail-page-content__body-header-info qt-mb-6">
-                                            <span [textContent]="parseTicketSource() + getAgentName()"></span>
-                                            <span class="ticket-detail-page-content__body-header-info-email">sent from email</span>
+                                            <span
+                                                class="pointer"
+                                                [textContent]="getNameCreateUser()"
+                                                (click)="showDetailUser()"
+                                            ></span>
+                                            <span
+                                                class="ticket-detail-page-content__body-header-info-email"
+                                                [textContent]="'sent ' + parseTicketSource()"
+                                            ></span>
                                         </div>
                                         <app-dynamic-tooltip
                                             class="user-companies-tooltip"
@@ -191,11 +127,26 @@
                         </div>
                         <div class="qt-df qt-ai-fs qt-mt-24 qt-mb-24">
                             <div class="ticket-detail-page__desc-icon qt-mr-16">
-                                <span class="icon__email qt-sz-16 qt-dib"></span>
-                                <!-- <span class="icon__monitor qt-sz-16 qt-dib"></span> -->
-                                <!-- <span class="icon__globe qt-sz-16 qt-dib"></span> -->
-                                <!-- <span class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"></span> -->
-                                <!-- <span class="icon__receipt qt-sz-16 qt-dib"></span> -->
+                                <span
+                                    class="icon__email qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
+                                ></span>
+                                <span
+                                    class="icon__monitor qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_AGENT'"
+                                ></span>
+                                <span
+                                    class="icon__globe qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_WEB'"
+                                ></span>
+                                <span
+                                    class="icon__calendar-recurring-ticket qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_RECURRING_TICKET'"
+                                ></span>
+                                <span
+                                    class="icon__receipt qt-sz-16 qt-dib"
+                                    *ngIf="ticketProfile.ticketSource === 'FROM_SALE_QUOTE'"
+                                ></span>
                             </div>
                             <div class="ticket-detail-page__edit-wrap">
                                 <div
