@@ -397,7 +397,7 @@ export class WebsocketService {
   }
   public subsribeToTicketTasks(id) {
 
-    this.ticketsRealTimeService.ticketTaskSubscription = this.stompClient.subscribe(`/user/watch/ticketTasks`, (message) => {
+    this.ticketsRealTimeService.ticketTaskSubscription = this.stompClient.subscribe(`/user/watch/ticketTasks/${id}`, (message) => {
       var newChange = JSON.parse(message.body);
       this.ticketsRealTimeService.handleRealTimeChangesTicketTasks(newChange);
 
