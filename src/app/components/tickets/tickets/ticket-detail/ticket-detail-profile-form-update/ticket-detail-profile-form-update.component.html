@@ -1,0 +1,198 @@
+<div class="cps-block">
+    <div class="cps-block__header">
+        <div class="qt-df">
+            <div
+                class="cps-block__photo"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
+            ></div>
+            <ticket-detail-profile-form-update-visible-users (onChangeType)="onChangeType($event)"></ticket-detail-profile-form-update-visible-users>
+        </div>
+        <app-add-assigned-user
+            #addAssignedUser
+            [type]="'DETAIL-TICKET'"
+            [userList]="usersForUpdate"
+            [selectedUsers]="selectedUsers"
+            (onSelected)="onSelectUpdateUser($event)"
+        ></app-add-assigned-user>
+    </div>
+    <div class="cps-block__content">
+        <div
+            class="cps-block__chat-block"
+            [hidden]="tab !== 'NOTE'"
+            appDnd
+            (fileDropped)="fileBrowseHandler($event)"
+        >
+            <div class="editable-description editable-chat">
+                <div class="file-background">
+                    <div class="file-background-mask"></div>
+                    <div class="file-background-footer">
+                        <p>Drop to Attach file</p>
+                    </div>
+                </div>
+                <div
+                    contenteditable="true"
+                    *ngIf="tab === 'NOTE'"
+                    id="chat"
+                    name="cps-chat"
+                    class="cps-block__content-textarea"
+                    placeholder="Write ticket conversation here…"
+                    (input)="onChangeChat($event)"
+                    (keypress)="onKeyPress($event)"
+                ></div>
+            </div>
+            <div class="files-list">
+                <div
+                    class="single-file"
+                    *ngFor="let file of files; let i = index"
+                >
+                    <div class="info">
+                        <h4 class="name">{{ file?.name }}</h4>
+                        <p class="size">
+                            {{ formatBytes(file?.size,2) }}
+                            <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+                        </p>
+                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    </div>
+                    <i
+                        class="icn-sm icn-remove-old"
+                        (click)="deleteFile(i)"
+                    ></i>
+                </div>
+            </div>
+        </div>
+        <!-- <app-ticket-profile-form-update-products
+            #selectProducts
+            *ngIf="tab === 'PRODUCT'"
+            (onUpdateMobile)="updateMobile()"
+            (onAddMoreMobile)="update()"
+        ></app-ticket-profile-form-update-products>
+        <app-ticket-profile-form-update-services
+            #selectServices
+            [ticketProfile]="ticketProfile"
+            *ngIf="tab === 'SERVICE'"
+            (onUpdateMobile)="updateMobile()"
+            (onAddMoreMobile)="update()"
+        ></app-ticket-profile-form-update-services>
+        <app-ticket-profile-form-update-support
+            *ngIf="tab === 'QUICK_SUPPORT'"
+            (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"
+            [item]="remoteSession"
+            (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
+        ></app-ticket-profile-form-update-support> -->
+    </div>
+</div>
+<div class="qt-aside__buttons jc-sb qt-ai-c">
+    <div class="qt-df ticket-edit-aside-bottom-part-users-attack">
+        <ticket-profile-form-update-note-list
+            #noteList
+            class="ticket-detail-form-update-note-list"
+            (onSelected)="onSelectedNote($event)"
+        ></ticket-profile-form-update-note-list>
+        <div
+            class="ticket-edit-aside__attach icon__attachment"
+            placement="top"
+            ngbTooltip="Add Attachment"
+            *ngIf="tab === 'NOTE'"
+        >
+            <input
+                type="file"
+                #fileDropRef
+                id="fileDropRef"
+                multiple
+                (change)="fileBrowseHandler($event.target.files)"
+            >
+        </div>
+        <!-- <div
+            class="ticket-edit-aside__users  icon__assign-user toggle-select-user"
+            *ngIf="!showAddUpdateUser"
+            (click)="onToggleAddUpdateUser()"
+            placement="top"
+            ngbTooltip="Add User"
+        ></div>
+        <app-add-assigned-user
+            [userList]="getUsersForUpdate()"
+            [selectedUsers]="lisUpdateUser"
+            (onSelected)="onSelectUpdateUser($event)"
+            (hidden)="onToggleAddUpdateUser()"
+            *ngIf="showAddUpdateUser"
+        ></app-add-assigned-user> -->
+        <!-- <div class="ticket-edit-aside__users-linked qt-df qt-d-md-none">
+            <ng-template
+                class="assigned-ticket-user"
+                ngFor
+                let-user
+                [ngForOf]="lisUpdateUser"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <ng-template #tipContent>
+                    <div [textContent]="ticketsListService.getUserName(user)"></div>
+                    <div [textContent]="user.primaryEmail"></div>
+                </ng-template>
+                <div
+                    class="ticket-edit-aside__users-linked-author pointer"
+                    placement="top"
+                    [ngbTooltip]="tipContent"
+                    [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}"
+                    (click)="ticketProfileFormUpdate.toggleShares(user)"
+                    *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+            </ng-template>
+            <div
+                class="ticket-edit-aside__users-linked-divider"
+                *ngIf="!showAddUpdateUser"
+            ></div>
+            <ng-template
+                class="assigned-ticket-user"
+                ngFor
+                let-user
+                [ngForOf]="lisUpdateUser"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <ng-template #tipContent>
+                    <div [textContent]="ticketsListService.getUserName(user)"></div>
+                    <div [textContent]="user.primaryEmail"></div>
+                </ng-template>
+                <div
+                    class="ticket-edit-aside__users-linked-author pointer"
+                    placement="top"
+                    [ngbTooltip]="tipContent"
+                    [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}"
+                    (click)="ticketProfileFormUpdate.toggleShares(user)"
+                    *ngIf="user.accountType === 'TECH' && !showAddUpdateUser"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+            </ng-template>
+        </div> -->
+    </div>
+    <div class="qt-df qt-d-md-none">
+        <div
+            class="qt-btn --btn40h --outline-blue update-ticket-btn"
+            [ngClass]="{'--loading':isUpdate}"
+            appDisabledBtn
+            #updateBtn="disabled"
+            (onClick)="update()"
+        >
+            <span>Update</span>
+            <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+        </div>
+        <div
+            class="qt-button"
+            placement="top"
+            ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
+            [disableTooltip]="checkUpdateAndClose()"
+            appDisabledBtn
+            #update_closeBtn="disabled"
+            (onClick)="updateAndClose()"
+            [ngClass]="{'--disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"
+        >
+            <span>Update & Close</span>
+            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
+        </div>
+    </div>
+</div>

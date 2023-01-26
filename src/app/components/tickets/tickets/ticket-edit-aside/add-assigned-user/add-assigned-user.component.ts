@@ -23,7 +23,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Input() selectedUsers = [];
   @Input() userList = [];
   @Input() placement = 'top-left';
-
+  @Input() type: string;
   users = [];
   reqUsers = [];
   currentUsers = [];
@@ -58,6 +58,12 @@ export class AddAssignedUserComponent implements OnInit {
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
   }
 
+  public resetList(data) {
+    this.userList = data;
+    this.users = JSON.parse(JSON.stringify(this.userList));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList));
+  }
+
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (event.target.classList.contains('toggle-select-user')) return;
@@ -69,7 +75,7 @@ export class AddAssignedUserComponent implements OnInit {
    * @param index - user index
    */
   public remove(index): void {
-    if (index >= 0 && this.selectedUsers.length > 1) {
+    if (index >= 0 && this.selectedUsers.length > 1 && this.type != "DETAIL-TICKET" || this.type == "DETAIL-TICKET") {
       this.selectedUsers.splice(index, 1);
       this.onSelected.emit(this.selectedUsers);
     }

@@ -33,6 +33,7 @@ import * as moment from "moment";
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -42,7 +43,6 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
@@ -50,7 +50,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
-  openedMobileUpdate = false;
+  showFormUpdate: boolean = false;
+  tabFormUpdate: string;
   openedMobileEditUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
@@ -152,9 +153,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onChangeAssignedUser);
-    this.ticketStateService.onSetTabUpdate.subscribe(data => {
-      this.openedMobileUpdate = (data !== null);
-    })
+
     this.ticketStateService.onEditUpdate.subscribe(data => {
       this.openedMobileEditUpdate = true;
     })
@@ -168,11 +167,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onInit);
   }
+  onAddUpdate(data) {
+    this.tabFormUpdate = data;
+    this.showFormUpdate = true;
+  }
   getTicket(id) {
     this.ticketsService.getTicket(id).subscribe(data => {
       // data.setUserCompanies(ticket.userCompanies);
-      if (this.updateForm) this.updateForm.reset();
-      if (this.updateForm) this.updateForm.noteList.onGetNoteList()
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = (this.ticketProfile.note) ? this.ticketProfile.note : "";
       this.updateListAssignedUser();
@@ -324,7 +325,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
   }
   ngOnDestroy(): void {
-    if (this.updateForm) this.updateForm.removeAllAttachments();
     this.ticketProfile = new TicketProfile();
     this.modeSubject = 'view';
     this.modeDescription = 'view';

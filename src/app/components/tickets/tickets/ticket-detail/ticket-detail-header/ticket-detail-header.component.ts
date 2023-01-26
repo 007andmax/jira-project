@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
@@ -13,6 +13,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 })
 export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
+  @Output() onAddUpdate = new EventEmitter();
   currentUser: CurrentUser;
   date: Date = new Date();
   dateTxt: string = "";
@@ -36,6 +37,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   }
   parseDate(data) {
     return (data < 0) ? `0${data}` : data;
+  }
+  addUpdate(type) {
+    this.onAddUpdate.emit(type);
   }
   ngOnDestroy(): void {
     if (this.interval) clearInterval(this.interval);

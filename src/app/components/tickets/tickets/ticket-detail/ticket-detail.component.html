@@ -5,6 +5,7 @@
     <ticket-detail-header
         *ngIf="!showPreloader"
         [ticketProfile]="ticketProfile"
+        (onAddUpdate)="onAddUpdate($event)"
     ></ticket-detail-header>
     <!-- <div -->
     <!-- class="collapse-arrow icon__close" -->
@@ -179,6 +180,12 @@
                         [ticketProfile]="ticketProfile"
                         [updates]="ticketProfile.updates"
                     ></ticket-detail-profile-updates>
+                    <ticket-detail-profile-form-update
+                        (onClosed)="close()"
+                        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate"
+                        [ticket]="ticketProfile"
+                        [lisUpdateUser]="lisUpdateUser"
+                    ></ticket-detail-profile-form-update>
                     <!-- <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"
                 (tagsChange)="onChangeTags($event)"
@@ -202,14 +209,7 @@
                 [ticketProfile]="ticketProfile"
             ></app-ticket-message>
             <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-            <app-ticket-profile-form-update
-                [ngClass]="{'--open':openedMobileUpdate}"
-                (onClosed)="close()"
-                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                #updateForm
-                [ticket]="ticketProfile"
-                [lisUpdateUser]="lisUpdateUser"
-            ></app-ticket-profile-form-update>
+           
             <ticket-profile-edit-form-update
                 [ngClass]="{'--open':openedMobileEditUpdate}"
                 (onClosed)="openedMobileEditUpdate = false"

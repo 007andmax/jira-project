@@ -44,6 +44,10 @@ import { TicketDetailProfileUpdatesServiceEditComponent } from './ticket-detail-
 import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
+import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
+import { AddAssignedUserModule } from '../ticket-edit-aside/add-assigned-user/add-assigned-user.module';
+import { TicketDetailProfileFormUpdateVisibleUsersComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-visible-users/ticket-detail-profile-form-update-visible-users.component';
+import { TicketProfileFormUpdateNoteListModule } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
 
 
 
@@ -67,7 +71,9 @@ import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detai
         TicketDetailProfileUpdatesServiceEditComponent,
         TicketDetailProfileUpdatesServiceHeaderInfoComponent,
         TicketDetailTasksComponent,
-        TicketDetailHeaderComponent
+        TicketDetailHeaderComponent,
+        TicketDetailProfileFormUpdateComponent,
+        TicketDetailProfileFormUpdateVisibleUsersComponent
 
     ],
     imports: [
@@ -99,7 +105,9 @@ import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detai
         TicketProfileAttachmentsModule,
         PreviewPhoneMaskModule,
         InvoiceFormTicketEditTaxesModule,
-        TicketChangeStatusModule
+        TicketChangeStatusModule,
+        AddAssignedUserModule,
+        TicketProfileFormUpdateNoteListModule
     ],
 
 

@@ -2,6 +2,7 @@ import { TicketProfileFormProduct } from './ticket-profile-form-product';
 import { TicketProfileFormService } from './ticket-profile-form-service';
 
 export class TicketProfileFormUpdate {
+    noteType: string = "PUBLIC";
     note: string = "";
     type: string = "NOTE";
     shares = [];
@@ -10,6 +11,9 @@ export class TicketProfileFormUpdate {
     products: Array<TicketProfileFormProduct> = [];
     services: Array<TicketProfileFormService> = [];
     constructor() { }
+    public setNoteType(data) {
+        this.noteType = data;
+    }
     public setChatMessage(data) {
         this.note = data;
     }
@@ -24,6 +28,7 @@ export class TicketProfileFormUpdate {
     }
     public getDataForUpdateNote() {
         return {
+            noteType: this.noteType,
             note: this.note,
             type: this.type,
             shares: this.shares,
@@ -90,7 +95,10 @@ export class TicketProfileFormUpdate {
     public setServices(data) {
         this.services = data;
     }
-
+    public setShares(users) {
+        this.shares = [];
+        users.forEach(item => (this.shares.push({ user: { id: item.id } })));
+    }
     public toggleShares(user) {
         let findIndex = this.shares.findIndex(item => item.user.id === user.id);
         if (findIndex > -1) this.shares.splice(findIndex, 1);
