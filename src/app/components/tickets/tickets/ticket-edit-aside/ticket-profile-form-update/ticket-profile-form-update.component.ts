@@ -61,7 +61,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   isUpdateMobile: boolean = false;
   isUpdateAndClose: boolean = false;
   files: any[] = [];
-  tab: string = "NOTE";
+  @Input() tab: string = "NOTE";
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
   constructor(public ticketsStateService: TicketsStateService,

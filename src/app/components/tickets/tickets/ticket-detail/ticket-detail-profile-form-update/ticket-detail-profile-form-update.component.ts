@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { User } from 'src/app/components/users/class/user';
 import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketProfileFormUpdateComponent } from '../../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
+import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update',
@@ -13,8 +14,10 @@ import { TicketProfileFormUpdateComponent } from '../../ticket-edit-aside/ticket
 })
 export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpdateComponent {
   @ViewChild('addAssignedUser') addAssignedUser: AddAssignedUserComponent;
+  @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
   selectedUsers: Array<CurrentUser> = [];
   usersForUpdate: Array<User> = [];
+  @Output() onCloseForm = new EventEmitter();
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.onGetCurrentUser.subscribe(data => {
@@ -53,6 +56,7 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     })
     this.sub.add(onChangeAssignedUser);
     this.usersForUpdate = this.getUsersForUpdate();
+    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
   }
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);
@@ -71,5 +75,21 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
     if (this.ticketProfileFormUpdate.noteType == "PUBLIC") return [...techusers, ...clientUsers];
     if (this.ticketProfileFormUpdate.noteType == "PRIVATE") return [...techusers];
+  }
+  onUpdateTicket(data) {
+    console.log("onUpdateTicket");
+    this.updateBtn.setDisabled(true);
+    this.isUpdate = true;
+    this.ticketsService.updateTicket(data).subscribe(data => {
+      this.isUpdate = false;
+      this.updateBtn.setDisabled(false);
+      this.close();
+    }, err => {
+      this.isUpdate = false;
+      this.updateBtn.setDisabled(false);
+    })
+  }
+  close() {
+    this.onCloseForm.emit(null);
   }
 }

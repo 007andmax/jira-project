@@ -95,6 +95,9 @@ export class AddAssignedUserComponent implements OnInit {
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
   }
+  isSelected(data) {
+    return this.selectedUsers.find(item => item.id === data.id);
+  }
 
   onSearchUser(event) {
     if (event.target.value.length > 0) {

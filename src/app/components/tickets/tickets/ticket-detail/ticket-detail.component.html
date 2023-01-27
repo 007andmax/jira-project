@@ -181,10 +181,11 @@
                         [updates]="ticketProfile.updates"
                     ></ticket-detail-profile-updates>
                     <ticket-detail-profile-form-update
-                        (onClosed)="close()"
+                        (onCloseForm)="showFormUpdate = false"
                         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate"
                         [ticket]="ticketProfile"
                         [lisUpdateUser]="lisUpdateUser"
+                        [tab]="tabFormUpdate"
                     ></ticket-detail-profile-form-update>
                     <!-- <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"

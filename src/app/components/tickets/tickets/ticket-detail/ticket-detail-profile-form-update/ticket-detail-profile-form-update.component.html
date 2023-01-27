@@ -17,50 +17,11 @@
         ></app-add-assigned-user>
     </div>
     <div class="cps-block__content">
-        <div
-            class="cps-block__chat-block"
-            [hidden]="tab !== 'NOTE'"
-            appDnd
-            (fileDropped)="fileBrowseHandler($event)"
-        >
-            <div class="editable-description editable-chat">
-                <div class="file-background">
-                    <div class="file-background-mask"></div>
-                    <div class="file-background-footer">
-                        <p>Drop to Attach file</p>
-                    </div>
-                </div>
-                <div
-                    contenteditable="true"
-                    *ngIf="tab === 'NOTE'"
-                    id="chat"
-                    name="cps-chat"
-                    class="cps-block__content-textarea"
-                    placeholder="Write ticket conversation here…"
-                    (input)="onChangeChat($event)"
-                    (keypress)="onKeyPress($event)"
-                ></div>
-            </div>
-            <div class="files-list">
-                <div
-                    class="single-file"
-                    *ngFor="let file of files; let i = index"
-                >
-                    <div class="info">
-                        <h4 class="name">{{ file?.name }}</h4>
-                        <p class="size">
-                            {{ formatBytes(file?.size,2) }}
-                            <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-                        </p>
-                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
-                    </div>
-                    <i
-                        class="icn-sm icn-remove-old"
-                        (click)="deleteFile(i)"
-                    ></i>
-                </div>
-            </div>
-        </div>
+        <ticket-detail-profile-form-update-note
+            *ngIf="tab === 'NOTE'"
+            #selectNote
+            [ticketProfileFormUpdate]="ticketProfileFormUpdate"
+        ></ticket-detail-profile-form-update-note>
         <!-- <app-ticket-profile-form-update-products
             #selectProducts
             *ngIf="tab === 'PRODUCT'"
@@ -85,7 +46,9 @@
 <div class="qt-aside__buttons jc-sb qt-ai-c">
     <div class="qt-df ticket-edit-aside-bottom-part-users-attack">
         <ticket-profile-form-update-note-list
+            [hidden]="tab !== 'NOTE'"
             #noteList
+            [placement]="'top-left'"
             class="ticket-detail-form-update-note-list"
             (onSelected)="onSelectedNote($event)"
         ></ticket-profile-form-update-note-list>
@@ -100,7 +63,7 @@
                 #fileDropRef
                 id="fileDropRef"
                 multiple
-                (change)="fileBrowseHandler($event.target.files)"
+                (change)="selectNote.fileBrowseHandler($event.target.files)"
             >
         </div>
         <!-- <div
@@ -173,15 +136,21 @@
     <div class="qt-df qt-d-md-none">
         <div
             class="qt-btn --btn40h --outline-blue update-ticket-btn"
+            (click)="close()"
+        >
+            <span>Cancel</span>
+        </div>
+        <div
+            class="qt-btn --btn40h --outline-blue update-ticket-btn"
             [ngClass]="{'--loading':isUpdate}"
             appDisabledBtn
             #updateBtn="disabled"
             (onClick)="update()"
         >
-            <span>Update</span>
+            <span>Post</span>
             <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
         </div>
-        <div
+        <!-- <div
             class="qt-button"
             placement="top"
             ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
@@ -193,6 +162,6 @@
         >
             <span>Update & Close</span>
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
-        </div>
+        </div> -->
     </div>
 </div>
