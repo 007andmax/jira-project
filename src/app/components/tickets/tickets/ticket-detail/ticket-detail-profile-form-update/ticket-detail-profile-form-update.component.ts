@@ -6,6 +6,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketProfileFormUpdateComponent } from '../../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
+import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update',
@@ -15,6 +16,7 @@ import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-prof
 export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpdateComponent {
   @ViewChild('addAssignedUser') addAssignedUser: AddAssignedUserComponent;
   @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
+  @ViewChild('selectServices') selectServices: TicketDetailProfileFormUpdateServicesComponent;
   selectedUsers: Array<CurrentUser> = [];
   usersForUpdate: Array<User> = [];
   @Output() onCloseForm = new EventEmitter();
@@ -56,7 +58,8 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     })
     this.sub.add(onChangeAssignedUser);
     this.usersForUpdate = this.getUsersForUpdate();
-    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList()
+    if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
+    this.ticketProfileFormUpdate.setType(this.tab);
   }
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);

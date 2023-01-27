@@ -6,7 +6,10 @@
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
             ></div>
-            <ticket-detail-profile-form-update-visible-users (onChangeType)="onChangeType($event)"></ticket-detail-profile-form-update-visible-users>
+            <ticket-detail-profile-form-update-visible-users
+                *ngIf="tab === 'NOTE'"
+                (onChangeType)="onChangeType($event)"
+            ></ticket-detail-profile-form-update-visible-users>
         </div>
         <app-add-assigned-user
             #addAssignedUser
@@ -22,6 +25,13 @@
             #selectNote
             [ticketProfileFormUpdate]="ticketProfileFormUpdate"
         ></ticket-detail-profile-form-update-note>
+        <ticket-detail-profile-form-update-services
+            #selectServices
+            [ticketProfile]="ticketProfile"
+            *ngIf="tab === 'SERVICE'"
+            (onUpdateMobile)="updateMobile()"
+            (onAddMoreMobile)="update()"
+        ></ticket-detail-profile-form-update-services>
         <!-- <app-ticket-profile-form-update-products
             #selectProducts
             *ngIf="tab === 'PRODUCT'"

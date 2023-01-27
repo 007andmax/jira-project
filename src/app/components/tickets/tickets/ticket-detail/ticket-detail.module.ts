@@ -49,6 +49,7 @@ import { AddAssignedUserModule } from '../ticket-edit-aside/add-assigned-user/ad
 import { TicketDetailProfileFormUpdateVisibleUsersComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-visible-users/ticket-detail-profile-form-update-visible-users.component';
 import { TicketProfileFormUpdateNoteListModule } from '../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
+import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 
 
 
@@ -75,7 +76,8 @@ import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-prof
         TicketDetailHeaderComponent,
         TicketDetailProfileFormUpdateComponent,
         TicketDetailProfileFormUpdateVisibleUsersComponent,
-        TicketDetailProfileFormUpdateNoteComponent
+        TicketDetailProfileFormUpdateNoteComponent,
+        TicketDetailProfileFormUpdateServicesComponent
 
     ],
     imports: [
