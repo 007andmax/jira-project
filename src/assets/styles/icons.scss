@@ -87,6 +87,15 @@
   &__done-circle-green {
     background-image: url("/assets/img/icons/done-circle-green.svg");
   }
+  &__user {
+    background-color: $gray-600--old;
+    -webkit-mask-image: url("/assets/img/icons/user.svg");
+    mask-image: url("/assets/img/icons/user.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__users {
     background-image: url("/assets/img/icons/addusers.svg");
   }
