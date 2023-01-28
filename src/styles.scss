@@ -2997,22 +2997,26 @@ ngb-typeahead-window {
   margin: 2px 6px;
   display: inline-block;
 }
+.divider-line {
+  width: 1px;
+  height: 12px;
+  background-color: $gray-300;
+  margin: 0 8px;
+  display: inline-block;
+}
 //  ticket edit aside
-.ticket-updates__service-tag-completed {
-  margin-left: auto;
-  margin-right: 0 !important;
-  margin-top: 8px;
-  display: flex;
-  width: fit-content;
-  margin-bottom: -28px;
-
-  @media (max-width: 767px) {
-    margin: 0;
-  }
-}
-.ticket-updates__add-note {
-  color: $gray-600--old;
-}
+//.ticket-updates__service-tag-completed { // TODO check this style
+//  margin-left: auto;
+//  margin-right: 0 !important;
+//  margin-top: 8px;
+//  display: flex;
+//  width: fit-content;
+//  margin-bottom: -28px;
+//
+//  @media (max-width: 767px) {
+//    margin: 0;
+//  }
+//}
 app-ticket-profile-updates-note {
   .ticket-updates__author-line {
     width: 100%;
@@ -3076,11 +3080,17 @@ app-ticket-profile-updates-note {
   text-align: center;
   color: $white;
 }
-.ticket-updates__author {
-  font-weight: 600;
-  //line-height: 2.5;
-  font-size: 12px;
-  line-height: 16px;
+.ticket-updates__author { // TODO move to component ?
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-900;
+}
+.ticket-updates__add-note { // TODO move to component ?
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: $gray-500;
 }
 
 .ticket-updates__ticket-photo,
@@ -3455,38 +3465,38 @@ app-ticket-profile-form-update {
   margin-bottom: 15px;
 }
 
-.ticket-updates {
-  &__update-block {
-    position: relative;
-    border-bottom: 1px solid $gray-400--old;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-    @media (max-width: 767px) {
-      flex-wrap: wrap;
-    }
-  }
+//.ticket-updates { // TODO check this style
+//  &__update-block {
+//    position: relative;
+//    border-bottom: 1px solid $gray-400--old;
+//    padding-bottom: 16px;
+//    margin-bottom: 16px;
+//    @media (max-width: 767px) {
+//      flex-wrap: wrap;
+//    }
+//  }
+//
+//  &__author-line {
+//    @media (max-width: 767px) {
+//      width: calc(100% - 32px);
+//      padding-left: 44px;
+//    }
+//  }
+//
+//  app-date-picker {
+//    @media (max-width: 767px) {
+//      margin-left: auto;
+//    }
+//  }
+//}
 
-  &__author-line {
-    @media (max-width: 767px) {
-      width: calc(100% - 32px);
-      padding-left: 44px;
-    }
-  }
-
-  app-date-picker {
-    @media (max-width: 767px) {
-      margin-left: auto;
-    }
-  }
-}
-
-.ticket-updates .ticket-updates__ticket-item {
-  &:last-child {
-    .ticket-updates__update-block {
-      border-bottom: none;
-    }
-  }
-}
+//.ticket-updates .ticket-updates__ticket-item { // TODO check this style
+//  &:last-child {
+//    .ticket-updates__update-block {
+//      border-bottom: none;
+//    }
+//  }
+//}
 
 .ticket-updates__delete {
   width: 24px;

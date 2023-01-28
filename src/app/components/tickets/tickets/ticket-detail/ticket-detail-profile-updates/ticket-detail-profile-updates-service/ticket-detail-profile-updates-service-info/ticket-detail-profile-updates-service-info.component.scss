@@ -11,8 +11,8 @@
     }
 
     &__ticket-photo {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         background-position: center;
         background-size: cover;
         border-radius: 50%;
@@ -50,6 +50,21 @@
     &__update-info {
         font-size: 12px;
     }
+    &__ticket-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $gray-100;
+      border-radius: 50%;
+    }
+    &__ticket-line {
+      flex: 1;
+      width: 2px;
+      height: 100%;
+      background-color: $gray-200;
+    }
 
     &__people-added {
         color: $gray-600--old;
@@ -66,7 +81,7 @@
     }
 
     &__ticket-info-container {
-        margin: 15px 0 8px -48px;
+        width: 100%;
 
         @media (max-width: 767px) {
             margin: 0;
@@ -82,33 +97,76 @@
     }
 
     &__ticket-info {
-        flex-grow: 1;
-        @include сaption-l;
-        margin-right: 8px;
+      border-radius: 8px;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    }
 
-        @media (max-width: 767px) {
-            margin-right: 0;
-        }
+    &__ticket-header {
+      display: flex;
+      align-items: center;
+      padding: 0 24px 0 16px;
+      background-color: $gray-50;
+      border-bottom: 1px solid $gray-200;
+    }
+    &__service-header-name,
+    &__service-header-price,
+    &__service-header-qty,
+    &__service-header-total {
+      padding: 12px 8px 12px 0;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      color: $gray-500;
+    }
+
+    &__service-header-name {
+      flex: 100%;
+    }
+    &__service-header-price {
+      flex: 1 0 90px;
+    }
+    &__service-header-qty {
+      flex: 1 0 90px;
+    }
+    &__service-header-total {
+      flex: 1 0 66px;
+      padding-left: 0;
     }
 
     &__ticket-body {
-        padding: 8px;
-        background-color: $white;
-        border: solid 1px $gray-400--old;
-
-        @media (max-width: 767px) {
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 12px 8px;
-        }
+      padding: 16px 24px 16px 16px;
+    }
+    &__service-title,
+    &__service-time-in,
+    &__service-time-out,
+    &__service-duration {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
     }
 
-    &__done-status {
-        width: 24px;
-        height: 24px;
-        margin-right: 4px;
-        flex-shrink: 0;
+    &__service-title {
+      flex: 100%;
     }
+    &__service-time-in {
+      flex: 1 0 90px;
+    }
+    &__service-time-out {
+      flex: 1 0 90px;
+    }
+    &__service-duration {
+      flex: 1 0 66px;
+      padding-left: 0;
+    }
+
+    //&__done-status { // TODO check this style
+    //    width: 24px;
+    //    height: 24px;
+    //    margin-right: 4px;
+    //    flex-shrink: 0;
+    //}
 
     &__ticket-title {
         width: 290px;
@@ -139,14 +197,6 @@
         height: 24px;
         cursor: pointer;
         margin-right: 8px;
-    }
-
-    &__ticket-header {
-        font-weight: 600;
-
-        @media (max-width: 767px) {
-            display: none;
-        }
     }
 
     &__ticket-data {
@@ -196,25 +246,25 @@
         }
     }
 
-    &__service-header-name {
-        width: 339px;
-        margin-right: 8px;
-    }
-
-    &__service-header-price {
-        margin-right: 8px;
-        width: 70px;
-    }
-
-    &__service-header-qty {
-        margin-right: 8px;
-        width: 70px;
-    }
-
-    &__service-header-total {
-        margin-right: 8px;
-        width: 70px;
-    }
+    //&__service-header-name { // TODO check this style
+    //    width: 339px;
+    //    margin-right: 8px;
+    //}
+    //
+    //&__service-header-price {
+    //    margin-right: 8px;
+    //    width: 70px;
+    //}
+    //
+    //&__service-header-qty {
+    //    margin-right: 8px;
+    //    width: 70px;
+    //}
+    //
+    //&__service-header-total {
+    //    margin-right: 8px;
+    //    width: 70px;
+    //}
 
     &__service-title {
         width: 304px;
@@ -248,70 +298,50 @@
         }
     }
 
-    &__service-time-in {
-        width: 70px;
-        margin-right: 8px;
-
-        &::after {
-            @media (max-width: 767px) {
-                content: "Time In";
-            }
-        }
-    }
-
-    &__service-time-out {
-        width: 70px;
-        margin-right: 8px;
-
-        &::after {
-            @media (max-width: 767px) {
-                content: "Time OUT";
-            }
-        }
-    }
-
-    &__service-duration {
-        width: 70px;
-        margin-right: 8px;
-
-        &::after {
-            @media (max-width: 767px) {
-                content: "Duration";
-            }
-        }
-    }
+    //&__service-time-in { // TODO check this style
+    //    width: 70px;
+    //    margin-right: 8px;
+    //
+    //    &::after {
+    //        @media (max-width: 767px) {
+    //            content: "Time In";
+    //        }
+    //    }
+    //}
+    //
+    //&__service-time-out {
+    //    width: 70px;
+    //    margin-right: 8px;
+    //
+    //    &::after {
+    //        @media (max-width: 767px) {
+    //            content: "Time OUT";
+    //        }
+    //    }
+    //}
+    //
+    //&__service-duration {
+    //    width: 70px;
+    //    margin-right: 8px;
+    //
+    //    &::after {
+    //        @media (max-width: 767px) {
+    //            content: "Duration";
+    //        }
+    //    }
+    //}
 
     &__service-subinfo {
-        position: relative;
-        @include сaption-l__sb;
-        color: $primary-2;
-        margin-top: 3px;
-        margin-left: 28px;
-
-        @media (max-width: 767px) {
-            margin-top: 24px;
-        }
-
-        &::after {
-            @include label-l__sb;
-
-            @media (max-width: 767px) {
-                content: "Description";
-                left: 0;
-                top: -14px;
-                color: $gray-600--old;
-                position: absolute;
-                text-transform: uppercase;
-            }
-        }
-
-        pre {
-            margin: 0;
+        pre:not(:empty) {
+            margin-top: 12px;
+            color: $gray-900;
             font-weight: 400;
             text-overflow: unset;
             overflow: auto;
-            max-width: 602px;
             white-space: pre-wrap;
+        }
+        pre:empty {
+          margin: 0;
         }
     }
 
@@ -330,4 +360,53 @@
     }
 
     // /deep/
+}
+
+/deep/ .tech-users-container .add-user {
+  width: 16px;
+  height: 16px;
+  background: url('/assets/img/icons/assign-user-plus.svg') no-repeat center / contain;
+  margin-right: 6px;
+}
+
+/deep/ .tech-users-container .device-user {
+  margin-bottom: 0 !important;
+  border: 1px solid $gray-200;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: $gray-500;
+  padding: 5px 8px;
+}
+
+/deep/ .button-mark-complete {
+  padding: 0 10px;
+}
+
+/deep/ .ticket-updates__ticket-info-container .input-group {
+  width: 130px;
+  padding: 1px 8px;
+  border: 1px solid $gray-200;
+  border-radius: 6px;
+  margin: 0 0 0 8px;
+}
+/deep/ .ticket-updates__ticket-info-container .icon__calendar {
+  display: inline-block;
+  position: static;
+  margin: 0;
+  transform: translateY(3px);
+}
+/deep/ .ticket-updates__ticket-info-container .qt-input-block__input {
+  width: 90px;
+  padding: 0;
+  border: unset;
+  box-shadow: unset;
+  height: auto;
+  margin-left: 6px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: $gray-500;
 }
