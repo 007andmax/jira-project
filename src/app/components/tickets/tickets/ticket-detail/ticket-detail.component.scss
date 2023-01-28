@@ -1,5 +1,6 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
+@import "./src/assets/styles/mixin/dropdown";
 
 .qt-aside {
     &__body {
@@ -912,10 +913,6 @@ app-ticket-edit-aside-right-panel {
     padding-bottom: 0px !important;
 }
 
-.breadcrumb-separator {
-  padding: 0 8px;
-}
-
 .ticket-detail-page {
   height: 100vh;
   background-color: $white;
@@ -973,6 +970,7 @@ app-ticket-edit-aside-right-panel {
       overflow: auto;
       height: 100%;
       border-right: 1px solid $gray-200;
+      @include dropdown-scrollbar;
 
       &-header {
         &-info {

@@ -4,7 +4,7 @@
         class="qt-button --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
         (click)="showAdd = true"
     >
-        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+        <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
         Add Task
     </div>
 </div>
@@ -18,15 +18,15 @@
         [class]="'.add-task-container'"
         (onOutSide)="onAddTicketTask()"
     >
-        <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+        <div class="tab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
             <i
                 [hidden]="addTask.status != 'INCOMPLETED'"
-                class="icon__active icn-16"
+                class="icon__active icn-20"
                 (click)="setStatus(addTask,'COMPLETED')"
             ></i>
             <i
                 [hidden]="addTask.status != 'COMPLETED'"
-                class="icon__task-pending icn-16"
+                class="icon__task-pending icn-20"
                 (click)="setStatus(addTask,'INCOMPLETED')"
             ></i>
         </div>
@@ -69,12 +69,12 @@
         <div class="ab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
             <i
                 [hidden]="item.status != 'INCOMPLETED'"
-                class="icon__active icn-16"
+                class="icon__active icn-20"
                 (click)="setStatus(item,'COMPLETED')"
             ></i>
             <i
                 [hidden]="item.status != 'COMPLETED'"
-                class="icon__task-pending icn-16"
+                class="icon__task-pending icn-20"
                 (click)="setStatus(item,'INCOMPLETED')"
             ></i>
         </div>
@@ -90,9 +90,6 @@
                 (input)="item.onInitEdit(true)"
             >
         </div>
-        <div class="tab-pane__table-cell ticket-status-table__status --parse-status"></div>
-        <div class="tab-pane__table-cell ticket-status-table__color"></div>
-        <div class="tab-pane__table-cell ticket-status-table__preview"></div>
         <div class="tab-pane__table-cell ticket-status-table__action">
             <app-date-picker
                 [editMode]="true"

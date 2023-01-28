@@ -27,7 +27,18 @@
     .ticket-status-table__status {
       input {
         background-color: $gray-50;
+
+        &::placeholder {
+          font-weight: 400;
+          color: $gray-400;
+        }
       }
+    }
+  }
+
+  &.--completed {
+    .ticket-status-table__status:not(.--parse-status) input {
+      color: $gray-400;
     }
   }
 }
@@ -53,7 +64,10 @@
     display: flex;
     align-items: center;
   }
-
+}
+/deep/ .button-gl-number__add {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 /deep/ .date-picker {
   margin-right: 8px;
@@ -92,4 +106,32 @@
 }
 /deep/ .icon__active {
   background-size: contain;
+}
+/deep/ .tag__modern {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: capitalize;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+/deep/ .tech-users-container .tech-user-body .select-wrapper {
+  width: 440px;
+  height: 360px;
+}
+/deep/ .dropdown-assign-ticket .users-list {
+  max-width: 440px;
+  max-height: 298px;
+}
+/deep/ .qt-input-search input {
+  box-shadow: unset;
+}
+/deep/ .qt-input-search input::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-400;
+}
+/deep/ .assign-ticket .assign-ticket-content .assign-ticket-header {
+  padding: 0;
 }

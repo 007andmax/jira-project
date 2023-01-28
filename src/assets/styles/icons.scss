@@ -585,8 +585,8 @@
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons-left-sidebar/merge.svg");
-    mask-image: url("/assets/img/icons-left-sidebar/merge.svg");
+    -webkit-mask-image: url("/assets/img/icons/merge.svg");
+    mask-image: url("/assets/img/icons/merge.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -1171,6 +1171,17 @@
   }
   &__link-gray {
     background-image: url("/assets/img/icons/link-gray.svg");
+  }
+  &__link-agent {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/link-agent.svg");
+    mask-image: url("/assets/img/icons/link-agent.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
   &__unlink {
     background-image: url("/assets/img/icons/unlink.svg");
