@@ -27,6 +27,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   @Input() editMode: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() type: string = RECURRING_TICEKTS;
+  @Input() placement: string;
   users: Array<TechUserItem> = [];
   sub = new Subscription();
   @Output() usersChange = new EventEmitter();

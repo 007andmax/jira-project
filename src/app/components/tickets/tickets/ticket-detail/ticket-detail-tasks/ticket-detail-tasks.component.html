@@ -11,6 +11,7 @@
 <div class="tab-pane__table-body qt-mb-16">
     <div
         *ngIf="showAdd"
+        [ngClass]="[addTask.status == 'COMPLETED' ? '--completed' : '']"
         class="add-task-container tab-pane__table-row --selected"
         appClickOtside
         #addTaskBtn="click"
@@ -54,6 +55,7 @@
                 [selectedMode]="'SINGLE'"
                 [users]="listTechUsers"
                 (usersChange)="onChangeUser($event,addTask)"
+                [placement]="'bottom-right'"
             ></app-tech-users>
         </div>
     </div>
@@ -62,7 +64,7 @@
         *ngFor="let item of list; let i = index"
         appClickOtside
         [init]="item.isInitEdit"
-        [ngClass]="['edit-ticket-container-' + i,item.isInitEdit ? '--selected' : '']"
+        [ngClass]="['edit-ticket-container-' + i,item.isInitEdit ? '--selected' : '',item.status == 'COMPLETED' ? '--completed' : '']"
         [class]="'.edit-ticket-container-' + i"
         (onOutSide)="onEditTicketTask(item)"
     >
@@ -106,6 +108,7 @@
                 [selectedMode]="'SINGLE'"
                 [users]="listTechUsers"
                 (usersChange)="onChangeUser($event,item)"
+                [placement]="'bottom-right'"
             ></app-tech-users>
             <div
                 class="ticket-updates__delete icon__remove"

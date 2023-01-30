@@ -1,3 +1,4 @@
+import { User } from 'src/app/components/users/class/user';
 import { TicketProfileFormProduct } from './ticket-profile-form-product';
 import { TicketProfileFormService } from './ticket-profile-form-service';
 
@@ -10,12 +11,19 @@ export class TicketProfileFormUpdate {
     attachments: any = [];
     products: Array<TicketProfileFormProduct> = [];
     services: Array<TicketProfileFormService> = [];
+    techUser: User;
     constructor() { }
     public setNoteType(data) {
         this.noteType = data;
     }
     public setChatMessage(data) {
         this.note = data;
+    }
+    public setTechUser(data) {
+        this.techUser = data;
+    }
+    public getTechUser() {
+        return this.techUser;
     }
     public getDataForClose() {
         return {
@@ -46,6 +54,7 @@ export class TicketProfileFormUpdate {
         }
     }
     public getDataForUpdateService() {
+        this.services[0].user = { id: this.techUser.id };
         return {
             services: this.services,
             type: this.type,

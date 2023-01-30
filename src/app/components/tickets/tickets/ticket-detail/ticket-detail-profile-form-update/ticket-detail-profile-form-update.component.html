@@ -1,24 +1,10 @@
 <div class="cps-block">
-    <div class="cps-block__header">
-        <div class="qt-df">
-            <div
-                class="cps-block__photo"
-                [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
-            ></div>
-            <ticket-detail-profile-form-update-visible-users
-                *ngIf="tab === 'NOTE'"
-                (onChangeType)="onChangeType($event)"
-            ></ticket-detail-profile-form-update-visible-users>
-        </div>
-        <app-add-assigned-user
-            #addAssignedUser
-            [type]="'DETAIL-TICKET'"
-            [userList]="usersForUpdate"
-            [selectedUsers]="selectedUsers"
-            (onSelected)="onSelectUpdateUser($event)"
-        ></app-add-assigned-user>
-    </div>
+    <ticket-detail-profile-form-update-header
+        [ticketProfileFormUpdate]="ticketProfileFormUpdate"
+        [currentUser]="currentUser"
+        [tab]="tab"
+        [ticketProfile]="ticketProfile"
+    ></ticket-detail-profile-form-update-header>
     <div class="cps-block__content">
         <ticket-detail-profile-form-update-note
             *ngIf="tab === 'NOTE'"

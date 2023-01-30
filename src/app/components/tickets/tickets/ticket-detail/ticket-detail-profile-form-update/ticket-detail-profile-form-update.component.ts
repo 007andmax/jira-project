@@ -14,11 +14,8 @@ import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-
   styleUrls: ['./ticket-detail-profile-form-update.component.scss']
 })
 export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpdateComponent {
-  @ViewChild('addAssignedUser') addAssignedUser: AddAssignedUserComponent;
   @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
   @ViewChild('selectServices') selectServices: TicketDetailProfileFormUpdateServicesComponent;
-  selectedUsers: Array<CurrentUser> = [];
-  usersForUpdate: Array<User> = [];
   @Output() onCloseForm = new EventEmitter();
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -57,28 +54,12 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
       }
     })
     this.sub.add(onChangeAssignedUser);
-    this.usersForUpdate = this.getUsersForUpdate();
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
   }
-  public onChangeType(data) {
-    this.ticketProfileFormUpdate.setNoteType(data);
-    this.usersForUpdate = this.getUsersForUpdate();
-    console.log("this.usersForUpdate", this.usersForUpdate);
-    this.addAssignedUser.resetList(this.usersForUpdate);
-  }
-  onSelectUpdateUser(data) {
-    this.selectedUsers = data;
-    this.ticketProfileFormUpdate.setShares(data);
-  }
-  getUsersForUpdate() {
-    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
-      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
-    let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
-    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
-    if (this.ticketProfileFormUpdate.noteType == "PUBLIC") return [...techusers, ...clientUsers];
-    if (this.ticketProfileFormUpdate.noteType == "PRIVATE") return [...techusers];
-  }
+
+
+
   onUpdateTicket(data) {
     console.log("onUpdateTicket");
     this.updateBtn.setDisabled(true);

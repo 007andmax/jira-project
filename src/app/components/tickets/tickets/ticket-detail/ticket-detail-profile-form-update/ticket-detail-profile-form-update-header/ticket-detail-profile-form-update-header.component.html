@@ -1,0 +1,54 @@
+<div class="cps-block__header">
+    <div class="qt-df">
+        <div ngbDropdown>
+            <div
+                class="cps-block__photo"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
+                *ngIf="tab === 'NOTE'"
+            ></div>
+            <div
+                class="cps-block__photo"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
+                ngbDropdownToggle
+                *ngIf="tab === 'SERVICE'"
+            ></div>
+            <div ngbDropdownMenu>
+                <ng-template
+                    class="assigned-ticket-user"
+                    ngFor
+                    let-user
+                    [ngForOf]="listTechUsers"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <div
+                        class="qt-df"
+                        ngbDropdownItem
+                        (click)="selectUser(user)"
+                    >
+                        <div
+                            class="cps-block__photo"
+                            [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                        ></div>
+                        <span [textContent]="getUserName(user)"></span>
+                        <span [textContent]="user.primaryEmail"></span>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <ticket-detail-profile-form-update-visible-users
+            *ngIf="tab === 'NOTE'"
+            (onChangeType)="onChangeType($event)"
+        ></ticket-detail-profile-form-update-visible-users>
+    </div>
+    <app-add-assigned-user
+        #addAssignedUser
+        [type]="'DETAIL-TICKET'"
+        [userList]="usersForUpdate"
+        [selectedUsers]="selectedUsers"
+        (onSelected)="onSelectUpdateUser($event)"
+    ></app-add-assigned-user>
+</div>
