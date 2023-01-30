@@ -20,15 +20,29 @@
         (onOutSide)="onAddTicketTask()"
     >
         <div class="tab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
+            <app-dynamic-tooltip
+                [content]="'Mark task as incomplete'"
+                [position]="'right'"
+                #incomplete
+            ></app-dynamic-tooltip>
+            <app-dynamic-tooltip
+                [content]="'Mark task as completed'"
+                [position]="'right'"
+                #complete
+            ></app-dynamic-tooltip>
             <i
                 [hidden]="addTask.status != 'INCOMPLETED'"
                 class="icon__active icn-20"
                 (click)="setStatus(addTask,'COMPLETED')"
+                (mouseenter)="complete.show($event.target)"
+                (mouseleave)="complete.hide()"
             ></i>
             <i
                 [hidden]="addTask.status != 'COMPLETED'"
                 class="icon__task-pending icn-20"
                 (click)="setStatus(addTask,'INCOMPLETED')"
+                (mouseenter)="incomplete.show($event.target)"
+                (mouseleave)="incomplete.hide()"
             ></i>
         </div>
         <div class="tab-pane__table-cell ticket-status-table__status">
@@ -69,15 +83,29 @@
         (onOutSide)="onEditTicketTask(item)"
     >
         <div class="ab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
+            <app-dynamic-tooltip
+                [content]="'Mark task as incomplete'"
+                [position]="'right'"
+                #incomplete
+            ></app-dynamic-tooltip>
+            <app-dynamic-tooltip
+                [content]="'Mark task as completed'"
+                [position]="'right'"
+                #complete
+            ></app-dynamic-tooltip>
             <i
                 [hidden]="item.status != 'INCOMPLETED'"
                 class="icon__active icn-20"
                 (click)="setStatus(item,'COMPLETED')"
+                (mouseenter)="complete.show($event.target)"
+                (mouseleave)="complete.hide()"
             ></i>
             <i
                 [hidden]="item.status != 'COMPLETED'"
                 class="icon__task-pending icn-20"
                 (click)="setStatus(item,'INCOMPLETED')"
+                (mouseenter)="incomplete.show($event.target)"
+                (mouseleave)="incomplete.hide()"
             ></i>
         </div>
         <div class="tab-pane__table-cell ticket-status-table__status">

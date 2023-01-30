@@ -190,8 +190,10 @@
                                                     class="default-user-avatar avatar-background-color-odd ng-scope"
                                                     *ngIf="!user.avatar"
                                                 >
-                                                    <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
-                                                    <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
+                                                    <span
+                                                        class="qt-color-white qt-fs-16"
+                                                        [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"
+                                                    ></span>
                                                 </div>
                                                 <div
                                                     class="default-user-avatar avatar-background-color-odd ng-scope"
@@ -276,8 +278,10 @@
                                                 class="default-user-avatar avatar-background-color-odd ng-scope"
                                                 *ngIf="!user.avatar"
                                             >
-                                                <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
-                                                <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
+                                                <span
+                                                    class="qt-color-white qt-fs-16"
+                                                    [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"
+                                                ></span>
                                             </div>
                                             <div
                                                 class="default-user-avatar avatar-background-color-odd ng-scope"

@@ -12,10 +12,13 @@
 
     &-location {
         display: inline-flex;
+        font-size: 14px;
+        color: $gray-500;
     }
 
     &-attribute {
         font-weight: 500;
+        font-size: 14px;
     }
 }
 .breadcrumb-separator {

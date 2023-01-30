@@ -1040,20 +1040,14 @@ app-ticket-edit-aside-right-panel {
 
     &__input {
       &.--editable {
+        border-color: $gray-200;
         border-radius: 6px;
         outline: none;
+        width: 100%;
 
         &::placeholder {
           color: $gray-400;
           font-weight: 400;
-        }
-
-        &:hover {
-          border-color: $gray-200;
-        }
-
-        &:focus {
-          border-color: transparent;
         }
       }
     }

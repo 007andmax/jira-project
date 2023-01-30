@@ -14,6 +14,7 @@ export class TicketProfileTask {
                 this[key] = data[key];
             }
         }
+
     }
     public setStatus(data) {
         this.status = data;

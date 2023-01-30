@@ -191,6 +191,7 @@
   .dropdown-avatar__email {
     color: $gray-500;
     margin-top: 2px;
+    font-size: 13px;
   }
 
   @include dropdown-item-hover;

@@ -62,6 +62,8 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(changeTicketTasks);
+    let date = new Date();
+    this.addTask.setDate(moment(date).format('YYYY/MM/DD'));
   }
   public getTicketTasks(id) {
     this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
