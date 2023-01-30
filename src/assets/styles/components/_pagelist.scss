@@ -96,6 +96,7 @@
     @media (max-width: 767px) {
       color: $white;
       @include body-l__sb;
+      margin: 0 auto;
     }
   }
 
@@ -107,6 +108,11 @@
     &--left, &--rigth {
       display: flex;
       align-items: center;
+    }
+    &--left {
+      @media (max-width: 767px) {
+        width: 100%;
+      }
     }
 
     @media (max-width: 767px) {

@@ -1,4 +1,4 @@
-<div class="qt-df jc-sb ai-fs ticket-updates__ticket-info-container ticket-update-product-edit">
+<div class="qt-df qt-jc-sb qt-ai-fs ticket-updates__ticket-info-container ticket-update-product-edit">
     <div class="ticket-updates__ticket-info">
         <div class="ticket-updates__ticket-header qt-df">
             <div class="ticket-updates__ticket-header-name">Product Name</div>
@@ -10,8 +10,8 @@
             class="ticket-updates__ticket-body"
             [ngClass]="{'--done':editProduct.completed}"
         >
-            <div class="d-f ai-c ">
-                <div class="ticket-updates__done-status icon__task-pending"></div>
+            <div class="qt-df qt-ai-c">
+                <div class="ticket-updates__done-status icon__task-pending qt-df qt-ai-c"></div>
                 <app-product-list
                     [type]="'TICKET'"
                     [editItem]="editProduct.item"

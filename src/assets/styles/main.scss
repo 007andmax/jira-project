@@ -20,6 +20,7 @@
 @import './pages/billable.scss';
 @import './pages/invoices.scss';
 @import './pages/billing-payments.scss';
+@import './pages/company.scss';
 @import './pages/billing-dashboard.scss';
 @import './pages/default-services.scss';
 @import './pages/contracts.scss';
@@ -34,25 +35,11 @@
 @import './pages/documents.scss';
 
 // Old ng1 styles
-@import './ng1-old/welcome-wizard.scss';
-@import './ng1-old/admin-tickets.scss';
-@import './ng1-old/button-with-loading-indicator.scss';
-@import './ng1-old/common.left.scss';
-@import './ng1-old/common.right.scss';
-@import './ng1-old/common.tables.scss';
-@import './ng1-old/common.ticket.list.scss';
-@import './ng1-old/companies.scss';
-@import './ng1-old/company-profile.scss';
-@import './ng1-old/customer-report.scss';
-@import './ng1-old/fixed.scss';
-@import './ng1-old/loading-indicator.scss';
+@import './ng1-old/ng1-old-all.scss';
 @import './ng1-old/modal-popup.scss';
-@import './ng1-old/new-style.scss';
 @import './ng1-old/nv.d3.scss';
-@import './ng1-old/hardware-report.scss';
-@import './ng1-old/tracking-devices.scss';
+@import './ng1-old/report.scss';
 @import './ng1-old/users.scss';
-@import './ng1-old/settings.scss';
 @import './ng1-old/bootstrap-custom';
 @import './ng1-old/fix-style.scss';
 

@@ -1724,14 +1724,11 @@ app-quotes-item {
         border: none;
 
         &.with-logo img {
-          margin: 0;
           border: none;
-          float: unset;
         }
       }
 
       p {
-        //@include body-m__m;
         font-weight: 500;
         color: $primary-2;
 
@@ -2669,10 +2666,7 @@ app-quotes-item {
     }
   }
 }
-// LEFT PANEL
-.mob-filters-btn {
-  z-index: 2;
-}
+
 .left-panel-ng2 {
   @media (max-width: 414px) {
     margin-bottom: 110px;

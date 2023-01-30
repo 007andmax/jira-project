@@ -311,10 +311,6 @@ span.qt-input-search:before {
     }
   }
 }
-//::ng-deep .mat-form-field-flex { // TODO check this style
-//  width: 520px !important;
-//  position: relative !important;
-//}
 
 ::ng-deep .modal-content {
   border: none !important;
@@ -332,7 +328,6 @@ span.qt-input-search:before {
 .grey-dropdown .dropdown-menu {
   background: #ffffff;
   width: 100%;
-  top: auto;
   max-height: 190px;
   position: absolute;
   top: 23px !important;
