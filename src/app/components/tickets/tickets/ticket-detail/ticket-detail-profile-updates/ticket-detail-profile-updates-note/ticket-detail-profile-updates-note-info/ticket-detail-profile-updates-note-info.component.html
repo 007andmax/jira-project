@@ -1,23 +1,22 @@
-<i class="icon__ticket-note icn-16"></i>
 <div class="ticket-updates__message-line qt-df jc-sb qt-ai-c">
-    <div>
+  <div>
         <span
-            class="ticket-updates__message"
-            [innerHTML]="note"
+          class="ticket-updates__message"
+          [innerHTML]="note"
         ></span>
-    </div>
-    <div
-        class="ticket-updates__edit icon__edit"
-        *ngIf="update.type === 'NOTE' && !isBlockChange && !isIOSDevice()"
-        (click)="edit()"
-        placement="top"
-        ngbTooltip="Edit Update"
-    ></div>
-    <div
-        class="ticket-updates__edit icon__edit"
-        *ngIf="update.type === 'NOTE' && !isBlockChange && isIOSDevice()"
-        (touchstart)="edit()"
-        placement="top"
-        ngbTooltip="Edit Update"
-    ></div>
+  </div>
+  <div
+    class="ticket-updates__edit icon__edit"
+    *ngIf="update.type === 'NOTE' && !isBlockChange && !isIOSDevice()"
+    (click)="edit()"
+    placement="top"
+    ngbTooltip="Edit Update"
+  ></div>
+  <div
+    class="ticket-updates__edit icon__edit"
+    *ngIf="update.type === 'NOTE' && !isBlockChange && isIOSDevice()"
+    (touchstart)="edit()"
+    placement="top"
+    ngbTooltip="Edit Update"
+  ></div>
 </div>

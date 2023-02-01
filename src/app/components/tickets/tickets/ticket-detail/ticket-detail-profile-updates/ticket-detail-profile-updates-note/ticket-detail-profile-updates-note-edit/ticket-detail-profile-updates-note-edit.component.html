@@ -1,4 +1,4 @@
-<div class="ticket-updates__message-line qt-df jc-sb ai-fs">
+<div class="ticket-updates__message-line">
     <div class="editable-description">
         <div
             class="editable-description-note"
@@ -7,14 +7,23 @@
             placeholder="Write ticket conversation here…"
         ></div>
     </div>
-    <div class="right-side-icons">
-        <i
-            (click)="saveService()"
-            class="icn-20 icon__active_subscription save-ticket-note pointer"
-        ></i>
-        <i
-            (click)="cancelService()"
-            class="icn-20 icon__close pointer"
-        ></i>
+    <div class="editable-description__footer">
+      <div class="qt-button-square pointer">
+        <div class="icon__attachments qt-sz-16"></div>
+      </div>
+      <div class="qt-df">
+        <div
+          class="qt-button --md --gray qt-mr-12"
+          (click)="cancelService()"
+        >
+          Cancel
+        </div>
+        <div
+          class="qt-button --md"
+          (click)="saveService()"
+        >
+          Update
+        </div>
+      </div>
     </div>
 </div>

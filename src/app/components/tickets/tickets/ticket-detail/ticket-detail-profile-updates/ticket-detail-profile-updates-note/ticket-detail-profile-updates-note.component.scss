@@ -10,40 +10,23 @@
     }
 
     &__ticket-photo {
-        width: 32px;
-        height: 32px;
-        background-position: center !important;
-        background-size: cover !important;
+        width: 36px;
+        height: 36px;
+        background-position: center;
+        background-size: cover;
         border-radius: 50%;
         margin-right: 16px;
     }
 
     &__content {
         flex-grow: 1;
+        margin-bottom: 16px;
     }
 
     &__author-line,
     &__message-line {
         margin-bottom: 8px;
-    }
-
-    &__author {
-        font-weight: 600;
-    }
-
-    &__add-note {
-        color: $gray-600--old;
-        cursor: pointer;
-    }
-
-    &__edit,
-    &__delete {
-        width: 24px;
-        height: 24px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 16px;
-        cursor: pointer;
+      flex: 1;
     }
 
     &__update-info {

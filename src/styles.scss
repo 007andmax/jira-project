@@ -3092,7 +3092,49 @@ app-ticket-profile-updates-note {
   line-height: 17px;
   color: $gray-500;
 }
+.ticket-updates__update-info {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-500;
+}
+.ticket-updates__ticket-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $gray-100;
+  border-radius: 50%;
+}
+.ticket-updates__ticket-line {
+  flex: 1;
+  width: 2px;
+  height: 100%;
+  background-color: $gray-200;
+}
+.qt-button-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: $white;
+  border-radius: 6px;
+  border: 1px solid $gray-200;
 
+  &__prepend {
+    border-radius: 6px 0 0 6px;
+  }
+  &__afterpend {
+    border-left: unset;
+    border-radius: 0 6px 6px 0;
+  }
+  &-wrap {
+    display: flex;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  }
+}
 .ticket-updates__ticket-photo,
 .cps-block__photo {
   display: flex;

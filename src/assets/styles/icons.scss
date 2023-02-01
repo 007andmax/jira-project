@@ -352,6 +352,17 @@
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");
   }
+  &__attachments {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/attchements.svg");
+    mask-image: url("/assets/img/icons/attchements.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__selected {
     background-image: url("/assets/img/icons/selected.svg");
   }

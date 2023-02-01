@@ -244,13 +244,37 @@
     }
 }
 
-.editable-description-note {
-    width: 100%;
-    height: 144px;
-    padding: 12px;
-    font-size: 13px;
-    border: none;
-    visibility: visible;
-    outline: none;
-    overflow: auto;
+.editable-description-note { // TODO check this style
+    //width: 100%;
+    //height: 144px;
+    //padding: 12px;
+    //font-size: 13px;
+    //border: none;
+    //visibility: visible;
+    //outline: none;
+    //overflow: auto;
+    height: 100%;
+    &:focus {
+      outline: none;
+    }
+}
+.editable-description__footer {
+  padding: 10px 16px;
+  background-color: $gray-50;
+  border: 1px solid $gray-200;
+  border-top: unset;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 8px 8px;
+}
+.editable-description {
+  border-radius: 8px 8px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: $gray-900;
+  padding: 16px;
+  height: 200px;
+  max-height: 200px;
 }
