@@ -230,13 +230,14 @@
     }
 
     &__service-tag-completed {
-        height: 20px;
-        line-height: 12px;
-        color: $success;
-        font-size: 10px;
-        border-color: $success;
-        background: $white;
-        margin-right: 32px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: $gray-500;
+
+      &.--completed {
+        color: $green-700;
+      }
     }
 
 }

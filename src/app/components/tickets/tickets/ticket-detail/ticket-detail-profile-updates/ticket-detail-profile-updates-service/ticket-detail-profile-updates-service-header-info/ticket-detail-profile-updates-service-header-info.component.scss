@@ -220,7 +220,11 @@
       font-weight: 400;
       font-size: 12px;
       line-height: 15px;
-      color: $green-700;
+      color: $gray-500;
+
+      &.--completed {
+        color: $green-700;
+      }
     }
 
 }

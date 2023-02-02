@@ -78,26 +78,19 @@
     }
 
     &__ticket-info {
-        flex-grow: 1;
-        @include сaption-l;
-        margin-right: 8px;
-
-        @media (max-width: 767px) {
-            margin-right: 0;
-            width: 100%;
-        }
+      border-radius: 8px;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px rgba(16, 24, 40,.05);
     }
-
+    &__ticket-header {
+      display: flex;
+      align-items: center;
+      padding: 0 24px 0 16px;
+      background-color: #F9FAFB;
+      border-bottom: 1px solid #EAECF0;
+    }
     &__ticket-body {
-        padding: 8px;
-        background-color: $white;
-        border: solid 1px $gray-400--old;
-
-        @media (max-width: 767px) {
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 12px 8px;
-        }
+      padding: 16px 24px 16px 16px;
     }
 
     &__done-status {
@@ -107,87 +100,48 @@
     }
 
     &__ticket-title {
+        width: 100%;
         display: flex;
         align-items: center;
-        width: 342px;
-        font-weight: 600;
         margin-right: 8px;
 
-        @media (max-width: 767px) {
-            max-width: calc(100% - 94px);
-            width: auto;
+        pre:not(:empty) {
+          font-family: "Inter", sans-serif;
+          color: $gray-900;
+          font-size: 14px;
+          line-height: 17px;
+          font-weight: 400;
+          text-overflow: unset;
+          overflow: auto;
+          white-space: pre-wrap;
+          margin: 0;
         }
-
-        pre {
-            @include сaption-l__sb;
-            color: $primary-2;
-            margin: 0;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-    }
-
-    &__ticket-data {
-        display: flex;
-
-        @media (max-width: 767px) {
-            width: 100%;
-            margin-top: 20px;
-            padding-left: 28px;
-            order: 1;
+        pre:empty {
+          margin: 0;
         }
     }
 
+    &__service-title,
     &__ticket-price,
     &__ticket-qty,
     &__ticket-total {
-        position: relative;
-
-        &::after {
-            @include label-l__sb;
-
-            @media (max-width: 767px) {
-                content: "";
-                left: 0;
-                top: -14px;
-                color: $gray-600--old;
-                position: absolute;
-                text-transform: uppercase;
-            }
-        }
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
     }
 
     &__ticket-price {
-        width: 65px;
-        margin-right: 8px;
-
-        &::after {
-            @media (max-width: 767px) {
-                content: "Price";
-            }
-        }
+      flex: 1 0 90px;
     }
 
     &__ticket-qty {
-        width: 42px;
-        margin-right: 8px;
-
-        &::after {
-            @media (max-width: 767px) {
-                content: "Qty";
-            }
-        }
+      flex: 1 0 90px;
     }
 
     &__ticket-total {
-        margin-right: 8px;
-        width: 65px;
-
-        &::after {
-            @media (max-width: 767px) {
-                content: "Total";
-            }
-        }
+      flex: 1 0 66px;
+      padding-left: 0;
     }
 
     &__date-icon {
@@ -196,37 +150,32 @@
         cursor: pointer;
         margin-right: 8px;
     }
-
-    &__ticket-header {
-        font-weight: 600;
-
-        @media (max-width: 767px) {
-            display: none;
-        }
+    &__ticket-header-name,
+    &__ticket-header-price,
+    &__ticket-header-qty,
+    &__ticket-header-total {
+      padding: 12px 8px 12px 0;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      color: $gray-500;
     }
 
     &__ticket-header-name {
-        width: 378px;
-        margin-right: 8px;
-
-        @media (max-width: 767px) {
-            width: auto;
-        }
+      flex: 100%;
     }
 
     &__ticket-header-price {
-        margin-right: 8px;
-        width: 65px;
+      flex: 1 0 90px;
     }
 
     &__ticket-header-qty {
-        margin-right: 8px;
-        width: 42px;
+      flex: 1 0 90px;
     }
 
     &__ticket-header-total {
-        margin-right: 8px;
-        width: 65px;
+      flex: 1 0 66px;
+      padding-left: 0;
     }
 
     &__more {

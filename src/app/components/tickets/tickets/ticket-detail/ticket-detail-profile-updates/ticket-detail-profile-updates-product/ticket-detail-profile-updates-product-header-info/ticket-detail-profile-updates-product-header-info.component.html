@@ -3,7 +3,7 @@
         class="ticket-updates__date"
         [textContent]="getDate()"
     ></span>
-    <span class="divider-point"></span>
+    <span class="divider-line"></span>
     <div class="ticket-updates__photo-row">
         <ng-template
             ngFor
@@ -29,13 +29,15 @@
         class="ticket-updates__people-added"
         [textContent]="' ' + shares.length + ' people added to this update'"
     ></span>
+    <span class="divider-line"></span>
+    <div class="icn-16 icon__calendar pointer qt-mr-8"></div>
     <span
-        class="tag__modern ticket-updates__service-tag-completed"
+        class="ticket-updates__service-tag-completed --completed"
         *ngIf="product.completed"
         [textContent]="'Completed on ' + getDateProduct(product.date)"
     ></span>
     <span
-        class="tag__modern ticket-updates__service-tag-completed"
+        class="ticket-updates__service-tag-completed"
         *ngIf="!product.completed && product.date"
         [textContent]="'Due date - ' + getDateProduct(product.date)"
     ></span>

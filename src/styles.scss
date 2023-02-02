@@ -3539,7 +3539,16 @@ app-ticket-profile-form-update {
 //    }
 //  }
 //}
-
+.ticket-updates__update-block {
+  .qt-button-square-wrap {
+    display: none;
+  }
+  &:hover {
+    .qt-button-square-wrap {
+      display: flex;
+    }
+  }
+}
 .ticket-updates__delete {
   width: 24px;
   height: 24px;

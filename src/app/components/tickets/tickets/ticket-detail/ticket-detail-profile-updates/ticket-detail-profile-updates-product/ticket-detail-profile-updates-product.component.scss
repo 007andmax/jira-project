@@ -10,8 +10,8 @@
     }
 
     &__ticket-photo {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         background-position: center;
         background-size: cover;
         border-radius: 50%;
@@ -211,13 +211,10 @@
     }
 
     &__service-tag-completed {
-        height: 20px;
-        line-height: 12px;
-        color: $success;
-        font-size: 10px;
-        border-color: $success;
-        background: $white;
-        margin-right: 32px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: $green-700;
     }
 }
 

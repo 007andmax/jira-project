@@ -67,10 +67,7 @@
 
     &__ticket-info-container {
         width: 100%;
-
-        @media (max-width: 767px) {
-            margin: 0;
-        }
+        max-width: calc(100% - 52px);
 
         .dropdown {
             @media (max-width: 767px) {
@@ -222,38 +219,13 @@
         background-position: center;
         cursor: pointer;
         position: relative;
-        top: 32px;
-
-        @media (max-width: 767px) {
-            position: relative;
-            top: 1px;
-            background-position: right;
-        }
     }
 
-    //&__service-header-name { // TODO check this style
-    //    width: 339px;
-    //    margin-right: 8px;
-    //}
-    //
-    //&__service-header-price {
-    //    margin-right: 8px;
-    //    width: 70px;
-    //}
-    //
-    //&__service-header-qty {
-    //    margin-right: 8px;
-    //    width: 70px;
-    //}
-    //
-    //&__service-header-total {
-    //    margin-right: 8px;
-    //    width: 70px;
-    //}
-
     &__service-title {
-        width: 304px;
-        font-weight: 600;
+        color: $gray-900;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -318,8 +290,11 @@
 
     &__service-subinfo {
         pre:not(:empty) {
-            margin-top: 12px;
+            font-family: "Inter", sans-serif;
+            margin: 12px 0 0;
             color: $gray-900;
+            font-size: 14px;
+            line-height: 17px;
             font-weight: 400;
             text-overflow: unset;
             overflow: auto;

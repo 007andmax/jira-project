@@ -1,65 +1,11 @@
-<!--<div class="qt-df ticket-updates__update-block">-->
-<!--    <div-->
-<!--        class="ticket-updates__ticket-photo"-->
-<!--        [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"-->
-<!--        [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"-->
-<!--    ></div>-->
-<!--    <div class="ticket-updates__content">-->
-<!--        <div class="ticket-updates__author-line qt-df jc-sb qt-ai-c ">-->
-<!--            <div>-->
-<!--                <span-->
-<!--                    class="ticket-updates__author"-->
-<!--                    [textContent]="ticketsListService.getUserName(update.user)"-->
-<!--                ></span>-->
-<!--                <span class="ticket-updates__add-note">&nbsp;added a service</span>-->
-<!--            </div>-->
-<!--            <ticket-detail-profile-updates-service-header-info-->
-<!--                [date]="update.createdAt"-->
-<!--                [shares]="update.shares"-->
-<!--                [service]="update.services[0]"-->
-<!--            ></ticket-detail-profile-updates-service-header-info>-->
-<!--            <app-dynamic-tooltip-->
-<!--                [content]="'Delete Update'"-->
-<!--                [position]="'top'"-->
-<!--                #deleteTooltip-->
-<!--            ></app-dynamic-tooltip>-->
-<!--            <div-->
-<!--                class="ticket-updates__delete icon__remove"-->
-<!--                *ngIf="!isBlockChange"-->
-<!--                (click)="remove()"-->
-<!--                (mouseenter)="deleteTooltip.show($event.target)"-->
-<!--                (mouseleave)="deleteTooltip.hide()"-->
-<!--            ></div>-->
-<!--        </div>-->
-<!--        <ng-template-->
-<!--            ngFor-->
-<!--            let-service-->
-<!--            [ngForOf]="update.services"-->
-<!--            let-i="index"-->
-<!--            [ngForTrackBy]="trackById"-->
-<!--        >-->
-<!--            <ticket-detail-profile-updates-service-item-->
-<!--                [update]="update"-->
-<!--                [service]="service"-->
-<!--                [isBlockChange]="isBlockChange"-->
-<!--                [showCompleteLabel]="i > 0"-->
-<!--            ></ticket-detail-profile-updates-service-item>-->
-<!--        </ng-template>-->
-<!--        &lt;!&ndash; <app-ticket-profile-updates-footer-->
-<!--            [date]="update.createdAt"-->
-<!--            [shares]="update.shares"-->
-<!--        ></app-ticket-profile-updates-footer> &ndash;&gt;-->
-<!--    </div>-->
-<!--</div>-->
-
-<div class="ticket-updates__update-block">
+<div class="ticket-updates__update-block qt-mb-16">
   <div class="qt-df qt-ai-c qt-mb-16">
     <div
       class="ticket-updates__ticket-photo"
       [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
       [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
     ></div>
-   <div>
+   <div class="qt-f-1">
      <div class="qt-mb-4">
         <span
           class="ticket-updates__author"
@@ -73,19 +19,26 @@
        [service]="update.services[0]"
      ></ticket-detail-profile-updates-service-header-info>
    </div>
+    <div class="qt-button-square-wrap">
+      <div class="qt-button-square qt-button-square__prepend pointer">
+        <div class="icon__edit qt-sz-16"></div>
+      </div>
+      <div
+        class="qt-button-square qt-button-square__afterpend pointer"
+        *ngIf="!isBlockChange"
+        (click)="remove()"
+        (mouseenter)="deleteTooltip.show($event.target)"
+        (mouseleave)="deleteTooltip.hide()"
+      >
+        <div class="icon__remove qt-sz-16"></div>
+      </div>
+    </div>
   </div>
   <app-dynamic-tooltip
     [content]="'Delete Update'"
     [position]="'top'"
     #deleteTooltip
   ></app-dynamic-tooltip>
-  <div
-    class="ticket-updates__delete icon__remove"
-    *ngIf="!isBlockChange"
-    (click)="remove()"
-    (mouseenter)="deleteTooltip.show($event.target)"
-    (mouseleave)="deleteTooltip.hide()"
-  ></div>
   <ng-template
     ngFor
     let-service
