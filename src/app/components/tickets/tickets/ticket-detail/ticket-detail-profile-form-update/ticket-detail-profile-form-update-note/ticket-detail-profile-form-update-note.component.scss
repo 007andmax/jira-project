@@ -94,7 +94,7 @@
     }
 
     &__content-textarea {
-        min-height: 104px;
+        min-height: 208px;
         max-height: 300px;
         width: 100%;
         border-radius: 4px;
@@ -102,6 +102,10 @@
         overflow: auto;
         outline: none;
         padding: 16px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: $gray-900;
 
         &:last-child {
             display: block !important;
@@ -109,7 +113,7 @@
 
         &::placeholder {
             opacity: 1;
-            color: $gray-600--old;
+            color: $gray-400;
         }
     }
 
@@ -300,4 +304,8 @@
 .icn-remove-old {
     top: 12px !important;
     position: relative;
+}
+/deep/ .editable-description {
+  border-radius: 0;
+  border: unset;
 }
