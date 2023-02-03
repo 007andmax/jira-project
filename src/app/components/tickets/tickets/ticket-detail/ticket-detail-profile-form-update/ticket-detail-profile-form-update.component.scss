@@ -160,13 +160,22 @@
     }
 
     &__attach {
-        background-size: 16px;
-        margin-right: 16px;
-        width: 16px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-mask-size: 16px;
+        mask-size: 16px;
+        background-position: center;
+        z-index: -1;
         overflow: hidden;
 
-        input[type="file"] {
+        &-button {
+          position: relative;
+          z-index: 1;
+          input[type="file"] {
+            height: 100%;
             opacity: 0;
+          }
         }
     }
 
@@ -218,10 +227,6 @@
     &__users-linked-partner {
         margin-right: 4px;
     }
-}
-
-.update-ticket-btn {
-    margin-right: 12px;
 }
 
 .ticket-edit-aside-bottom-part-users-attack {
@@ -408,4 +413,8 @@
         bottom: unset;
         right: unset;
     }
+}
+.ticket-detail-profile-form-update__footer {
+  padding: 10px 16px;
+  background-color: $gray-50;
 }

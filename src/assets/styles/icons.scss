@@ -356,8 +356,8 @@
     background-color: $gray-500;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url("/assets/img/icons/attchements.svg");
-    mask-image: url("/assets/img/icons/attchements.svg");
+    -webkit-mask-image: url("/assets/img/icons/attachements.svg");
+    mask-image: url("/assets/img/icons/attachements.svg");
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -488,6 +488,9 @@
   }
   &__devices {
     background-image: url("/assets/img/icons/devices.svg");
+  }
+  &__devices-computer {
+    background-image: url("/assets/img/icons/devices-computer.svg");
   }
   &__devices-grey {
     background-image: url("/assets/img/icons/devices-grey.svg");

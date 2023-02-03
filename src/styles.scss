@@ -3671,27 +3671,27 @@ app-ticket-edit-aside {
       }
     }
 
-    .qt-aside__buttons {
-      @media (max-width: 767px) {
-        padding: 0 16px;
-        position: relative;
-        margin-top: 28px;
-      }
-
-      &::after {
-        @media (max-width: 767px) {
-          content: "Add Users to notify";
-          position: absolute;
-          left: 16px;
-          top: -28px;
-          color: $primary-2;
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          font-weight: 600;
-        }
-      }
-    }
+    //.qt-aside__buttons { // TODO check this style
+    //  @media (max-width: 767px) {
+    //    padding: 0 16px;
+    //    position: relative;
+    //    margin-top: 28px;
+    //  }
+    //
+    //  &::after {
+    //    @media (max-width: 767px) {
+    //      content: "Add Users to notify";
+    //      position: absolute;
+    //      left: 16px;
+    //      top: -28px;
+    //      color: $primary-2;
+    //      font-size: 13px;
+    //      line-height: 20px;
+    //      letter-spacing: 0;
+    //      font-weight: 600;
+    //    }
+    //  }
+    //}
 
     .qt-aside-modern__footer {
       display: none;

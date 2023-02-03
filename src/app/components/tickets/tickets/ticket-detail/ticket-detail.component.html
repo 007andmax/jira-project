@@ -210,7 +210,7 @@
                 [ticketProfile]="ticketProfile"
             ></app-ticket-message>
             <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-           
+
             <ticket-profile-edit-form-update
                 [ngClass]="{'--open':openedMobileEditUpdate}"
                 (onClosed)="openedMobileEditUpdate = false"
@@ -262,6 +262,20 @@
             </div>
         </div>
         <div class="ticket-detail-page-content__sidebar-info"></div>
+        <div class="ticket-detail-page-content__sidebar-menu">
+          <div class="ticket-detail-page-content__sidebar-menu-button">
+            <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
+          </div>
+          <div class="ticket-detail-page-content__sidebar-menu-button">
+            <div class="icon__locked qt-sz-20 qt-bg-contain"></div>
+          </div>
+          <div class="ticket-detail-page-content__sidebar-menu-button">
+            <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
+          </div>
+          <div class="ticket-detail-page-content__sidebar-menu-button">
+            <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+          </div>
+        </div>
     </div>
     <!-- <app-ticket-edit-aside-right-panel
         #rightPanel

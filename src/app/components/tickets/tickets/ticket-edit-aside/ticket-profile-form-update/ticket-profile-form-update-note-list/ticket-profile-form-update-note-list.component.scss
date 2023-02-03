@@ -7,10 +7,7 @@
 }
 
 .icon__note-list-container {
-    padding: 6px;
-    border-radius: 4px;
-    background-color: $gray-200--old;
-    height: 32px;
+    display: flex;
 }
 .header-note-list-title {
     font-size: 11px;

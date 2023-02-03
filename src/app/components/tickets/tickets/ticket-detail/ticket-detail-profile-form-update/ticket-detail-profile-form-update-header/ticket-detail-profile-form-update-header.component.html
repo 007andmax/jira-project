@@ -1,5 +1,5 @@
 <div class="cps-block__header">
-    <div class="qt-df">
+    <div class="qt-df qt-ai-c">
         <div ngbDropdown>
             <div
                 class="cps-block__photo"
@@ -39,6 +39,7 @@
                 </ng-template>
             </div>
         </div>
+        <div class="divider-line"></div>
         <ticket-detail-profile-form-update-visible-users
             *ngIf="tab === 'NOTE'"
             (onChangeType)="onChangeType($event)"
