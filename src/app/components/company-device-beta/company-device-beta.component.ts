@@ -23,6 +23,7 @@ import { DevicesStateService } from "src/app/states/devices/devices-state.servic
 import { Subscription } from "rxjs";
 import { DeviceCompany } from "../company-devices/class/device-company";
 import { DevicesService } from "src/app/services/devices/devices.service";
+import { CompanyDevicesRemoteAccessComponent } from "../company-devices/company-devices-remote-access/company-devices-remote-access.component";
 
 @Component({
   selector: "app-company-device-beta",
@@ -31,7 +32,6 @@ import { DevicesService } from "src/app/services/devices/devices.service";
 })
 export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell") template;
-  @ViewChild("templateConnection") templateconnection;
   @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
   @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
   @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
@@ -501,12 +501,11 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   remoteAccess(connectionType, guid) {
-    this.guid = guid;
-    this.connectionType = connectionType;
-    this.modalService.open(this.templateconnection, {
-      windowClass: "modal-md",
-      centered: true,
-    });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.companyId = this.companyId;
+    modalRef.componentInstance.guid = guid;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE_BETA';
   }
 
   close() {
@@ -1602,7 +1601,6 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
       if (data) {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
-        this.showPreloader = false;
         this.deviceSuccess = true;
       }
       if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
