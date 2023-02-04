@@ -6,7 +6,7 @@
     }
 
     &__first-line {
-        margin-bottom: 8px;
+      padding: 16px 16px 8px;
     }
 
     &__btn-add,
@@ -37,12 +37,12 @@
     }
 
     &__input {
-        position: relative;
-        height: 40px;
-        margin-right: 8px;
-        padding: 10px 12px;
-        flex-grow: 1;
-        outline: none;
+        //position: relative; // TODO check this style
+        //height: 40px;
+        //margin-right: 8px;
+        //padding: 10px 12px;
+        //flex-grow: 1;
+        //outline: none;
 
         @media (max-width: 767px) {
             margin-right: 0;
@@ -70,11 +70,6 @@
             width: 100%;
         }
 
-        &.device {
-            width: 243px;
-            padding: 0;
-        }
-
         &.time {
             width: 148px;
         }
@@ -84,18 +79,60 @@
             margin: 0;
         }
     }
+    .editable-description {
+      margin: 0 16px 32px;
+    }
 
     .cps-block__content-textarea {
-        min-height: 56px;
+        min-height: 64px;
         display: block;
         visibility: visible;
-    }
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
 
-    /deep/ .date-picker input {
-        width: 146px;
-
-        @media (max-width: 767px) {
-            width: 100%;
+        &::placeholder {
+          color: $gray-400;
         }
     }
+    /deep/ .date-picker {
+      margin-right: 0;
+      position: relative;
+      &:before {
+        position: absolute;
+        content: "Select Date";
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-400;
+      }
+
+      .icon__calendar {
+        right: 14px;
+        transform: translateY(-50%);
+      }
+
+      input {
+        padding-right: 36px;
+        text-align: right;
+        padding-left: 100px;
+      }
+    }
+}
+
+/deep/ .service-item__first-line app-ticket-profile-updates-service-duration {
+  width: 50%;
+}
+/deep/ .service-item__first-line app-date-picker {
+  width: 50%;
+}
+/deep/ ticket-detail-profile-form-update-header {
+  .qt-button {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }

@@ -86,7 +86,7 @@
     </ng-template>
     <div class="service-item">
         <div class="service-item__first-line relative">
-            <div class="service-item__input device">
+            <div class="service-item__input device qt-mb-8">
                 <app-services-list
                     #serviceDP
                     [ngClass]="{'--input-error':!currentService.validate}"
@@ -132,7 +132,7 @@
                 </button> -->
             </div>
         </div>
-        <div>
+        <div class="qt-df">
             <div class="editable-description editable-chat">
                 <textarea
                     name="cps-chat"
@@ -159,7 +159,7 @@
             >
                 <span *ngIf="!isUpdate">Add More</span>
                 <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
-            </button> 
+            </button>
             <button
                 class="qt-button"
                 [ngClass]="{'--loading':isUpdate}"

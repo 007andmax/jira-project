@@ -41,9 +41,11 @@
 </div>
 <div class="ticket-detail-profile-form-update__footer qt-df jc-sb qt-ai-c">
     <div class="qt-df ticket-edit-aside-bottom-part-users-attack">
-        <div class="qt-button-square pointer qt-mr-12">
+        <div
+          class="qt-button-square pointer qt-mr-12"
+          [hidden]="tab !== 'NOTE'"
+        >
           <ticket-profile-form-update-note-list
-            [hidden]="tab !== 'NOTE'"
             #noteList
             [placement]="'top-left'"
             class="ticket-detail-form-update-note-list"
