@@ -144,49 +144,56 @@
     max-height: 500px;
 }
 .files-list {
-    margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid $gray-200;
+  padding: 4px 16px;
+  position: relative;
 
-    .single-file {
-        display: flex;
-        padding: 0.5rem;
-        justify-content: space-between;
-        align-items: center;
-        border: dashed 1px #979797;
-        margin-bottom: 1rem;
-        position: relative;
+  &__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    padding: 13px 0;
+  }
 
-        img.delete {
-            margin-left: 0.5rem;
-            cursor: pointer;
-            align-self: flex-end;
-        }
+ .single-file {
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px $gray-200;
+    margin: 4px;
+    position: relative;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-900;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 6px;
+  }
+  .size {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray-500;
+    margin-left: 2px;
+  }
+  /deep/ .progress-cont {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: transparent;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
 
-        display: flex;
-        flex-grow: 1;
-
-        .name {
-            font-size: 14px;
-            font-weight: 500;
-            color: #353f4a;
-            margin: 0;
-        }
-
-        .size {
-            font-size: 12px;
-            font-weight: 500;
-            color: #a4a4a4;
-            margin: 0;
-            margin-bottom: 0.25rem;
-
-            .file-error {
-                color: $error;
-            }
-        }
-
-        .info {
-            width: 100%;
-        }
+    .progress {
+      background-color: $green-600 !important;
+      position: static;
     }
+  }
 }
 
 .fileover {
@@ -302,8 +309,11 @@
 }
 
 .icn-remove-old {
-    top: 12px !important;
-    position: relative;
+  position: static;
+  transform: unset;
+  margin-left: 2px;
+  width: 12px;
+  height: 12px;
 }
 /deep/ .editable-description {
   border-radius: 0;

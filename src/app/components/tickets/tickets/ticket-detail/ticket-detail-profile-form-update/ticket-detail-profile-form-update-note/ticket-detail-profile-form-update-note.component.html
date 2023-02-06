@@ -20,23 +20,24 @@
             (keypress)="onKeyPress($event)"
         ></div>
     </div>
-    <div class="files-list">
+    <div class="files-list ">
+        <div class="files-list__title qt-mr-4">Attachments:</div>
         <div
             class="single-file"
             *ngFor="let file of files; let i = index"
         >
-            <div class="info">
-                <h4 class="name">{{ file?.name }}</h4>
-                <p class="size">
-                    {{ formatBytes(file?.size,2) }}
+            <div class="info qt-df qt-ai-c">
+                <div class="name">{{ file?.name }}</div>
+                <div class="size">
+                    ({{ formatBytes(file?.size,2) }})
                     <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-                </p>
-                <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                </div>
             </div>
             <i
                 class="icn-sm icn-remove-old"
                 (click)="deleteFile(i)"
             ></i>
+            <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
         </div>
     </div>
 </div>
