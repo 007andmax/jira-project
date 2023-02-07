@@ -129,7 +129,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
       this.toggleNotifyAgentsUser = true;
     }
-
   }
   selectAllUsers() {
     this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
