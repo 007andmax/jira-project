@@ -20,7 +20,10 @@
             (keypress)="onKeyPress($event)"
         ></div>
     </div>
-    <div class="files-list ">
+    <div
+        class="files-list "
+        *ngIf="files.length > 0"
+    >
         <div class="files-list__title qt-mr-4">Attachments:</div>
         <div
             class="single-file"

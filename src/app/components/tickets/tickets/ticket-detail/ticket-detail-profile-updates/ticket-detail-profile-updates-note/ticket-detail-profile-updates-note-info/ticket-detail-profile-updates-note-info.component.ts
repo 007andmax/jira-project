@@ -25,15 +25,12 @@ export class TicketDetailProfileUpdatesNoteInfoComponent implements OnInit {
   ngOnChanges() {
     this.note = (this.update) ? this.getHtml(this.update.note) : '';
   }
-  edit() {
+  public edit() {
     if (this.appService.checkMobile()) {
       this.ticketStateService.setEditUpdate({ updateId: this.update.id, update: this.update, type: this.update.type });
       return;
     }
     this.onEdit.emit(null);
-  }
-  isIOSDevice() {
-    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
   public getHtml(value) {
     return this.sanitized.bypassSecurityTrustHtml(value);

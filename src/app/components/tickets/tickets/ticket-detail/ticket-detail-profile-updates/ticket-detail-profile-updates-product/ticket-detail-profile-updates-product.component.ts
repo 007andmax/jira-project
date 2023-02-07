@@ -9,5 +9,7 @@ import { TicketProfileUpdatesProductComponent } from '../../../ticket-edit-aside
 export class TicketDetailProfileUpdatesProductComponent extends TicketProfileUpdatesProductComponent {
 
 
-
+  isIOSDevice() {
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
 }

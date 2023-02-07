@@ -64,22 +64,6 @@
                 <ul>
                     <li
                         ngbDropdownItem
-                        (click)="edit()"
-                        *ngIf="!isIOSDevice()"
-                    >
-                        <i class="icn-16 icon__edit"></i>
-                        Edit
-                    </li>
-                    <li
-                        ngbDropdownItem
-                        (touchstart)="edit()"
-                        *ngIf="isIOSDevice()"
-                    >
-                        <i class="icn-16 icon__edit"></i>
-                        Edit
-                    </li>
-                    <li
-                        ngbDropdownItem
                         (click)="removeService()"
                         *ngIf="!isIOSDevice()"
                     >

@@ -45,6 +45,7 @@ export class TicketProfileFormUpdate {
         }
     }
     public getDataForUpdateProduct() {
+        this.products.forEach(item => (item.user = { id: this.techUser.id }));
         return {
             products: this.products,
             type: this.type,
@@ -54,7 +55,7 @@ export class TicketProfileFormUpdate {
         }
     }
     public getDataForUpdateService() {
-        this.services[0].user = { id: this.techUser.id };
+        this.services.forEach(item => (item.user = { id: this.techUser.id }));
         return {
             services: this.services,
             type: this.type,

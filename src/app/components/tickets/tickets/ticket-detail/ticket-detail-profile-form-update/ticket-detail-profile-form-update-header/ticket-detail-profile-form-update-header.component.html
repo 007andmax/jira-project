@@ -5,14 +5,14 @@
                 class="cps-block__photo"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
-                *ngIf="tab === 'NOTE' || tab === 'PRODUCT'"
+                *ngIf="tab === 'NOTE'"
             ></div>
             <div
                 class="cps-block__photo"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
                 ngbDropdownToggle
-                *ngIf="tab === 'SERVICE'"
+                *ngIf="tab === 'SERVICE' || tab === 'PRODUCT'"
             ></div>
             <div ngbDropdownMenu>
                 <ng-template

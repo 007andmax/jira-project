@@ -15,5 +15,7 @@ export class TicketDetailProfileUpdatesNoteItemComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public edit() {
+    this.editMode = true;
+  }
 }

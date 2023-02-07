@@ -1,135 +1,119 @@
 <div class="qt-df">
-  <div class="qt-df qt-fd-c qt-ai-c qt-mr-16">
-    <div class="ticket-updates__ticket-icon qt-mb-4">
-      <i class="icon__products icn-16"></i>
+    <div class="qt-df qt-fd-c qt-ai-c qt-mr-16">
+        <div class="ticket-updates__ticket-icon qt-mb-4">
+            <i class="icon__products icn-16"></i>
+        </div>
+        <div class="ticket-updates__ticket-line"></div>
     </div>
-    <div class="ticket-updates__ticket-line"></div>
-  </div>
-  <span
-    class="tag__modern ticket-updates__service-tag-completed"
-    *ngIf="product.completed && showCompleteLabel"
-    [textContent]="'Completed on ' + getDate(product.date)"
-  ></span>
-  <span
-    class="tag__modern ticket-updates__service-tag-completed"
-    *ngIf="!product.completed && product.date && showCompleteLabel"
-    [textContent]="'Due date - ' + getDate(product.date)"
-  ></span>
-  <div class="ticket-updates__ticket-info-container qt-w100">
-    <div class="ticket-updates__ticket-info">
-      <div class="ticket-updates__ticket-header qt-df">
-        <div class="ticket-updates__ticket-header-name">Product Name</div>
-        <div class="ticket-updates__ticket-header-price">SN.</div>
-        <div class="ticket-updates__ticket-header-price">Price</div>
-        <div class="ticket-updates__ticket-header-qty">Qty</div>
-        <div class="ticket-updates__ticket-header-total">Total</div>
-      </div>
-      <div class="qt-df ticket-updates__ticket-body">
-        <div class="ticket-updates__ticket-title">
-          <pre [textContent]="product.item.description"></pre>
+    <span
+        class="tag__modern ticket-updates__service-tag-completed"
+        *ngIf="product.completed && showCompleteLabel"
+        [textContent]="'Completed on ' + getDate(product.date)"
+    ></span>
+    <span
+        class="tag__modern ticket-updates__service-tag-completed"
+        *ngIf="!product.completed && product.date && showCompleteLabel"
+        [textContent]="'Due date - ' + getDate(product.date)"
+    ></span>
+    <div class="ticket-updates__ticket-info-container qt-w100">
+        <div class="ticket-updates__ticket-info">
+            <div class="ticket-updates__ticket-header qt-df">
+                <div class="ticket-updates__ticket-header-name">Product Name</div>
+                <div class="ticket-updates__ticket-header-price">SN.</div>
+                <div class="ticket-updates__ticket-header-price">Price</div>
+                <div class="ticket-updates__ticket-header-qty">Qty</div>
+                <div class="ticket-updates__ticket-header-total">Total</div>
+            </div>
+            <div class="qt-df ticket-updates__ticket-body">
+                <div class="ticket-updates__ticket-title">
+                    <pre [textContent]="product.item.description"></pre>
+                </div>
+                <div
+                    class="ticket-updates__ticket-price"
+                    [textContent]="product.serialNumber"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-price"
+                    [textContent]="'$' + getPrice()"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-qty"
+                    [textContent]="product.quantity"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-total"
+                    [textContent]="'$' + getTotal(product.price,product.quantity)"
+                ></div>
+            </div>
         </div>
         <div
-          class="ticket-updates__ticket-price"
-          [textContent]="product.serialNumber"
-        ></div>
-        <div
-          class="ticket-updates__ticket-price"
-          [textContent]="'$' + getPrice()"
-        ></div>
-        <div
-          class="ticket-updates__ticket-qty"
-          [textContent]="product.quantity"
-        ></div>
-        <div
-          class="ticket-updates__ticket-total"
-          [textContent]="'$' + getTotal(product.price,product.quantity)"
-        ></div>
-      </div>
+            ngbDropdown
+            *ngIf="!isBlockChange"
+        >
+            <div
+                class="ticket-updates__more icon__more"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            ></div>
+            <div
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+                class="dropdown-menu-qt"
+            >
+                <ul>
+                    <li
+                        ngbDropdownItem
+                        (click)="removeProduct()"
+                        *ngIf="!isIOSDevice()"
+                    >
+                        <i class="icn-16 icon__remove"></i>
+                        Delete
+                    </li>
+                    <li
+                        ngbDropdownItem
+                        (touchstart)="removeProduct()"
+                        *ngIf="isIOSDevice()"
+                    >
+                        <i class="icn-16 icon__remove"></i>
+                        Delete
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="qt-df qt-jc-fe qt-ai-c qt-mt-8">
+            <app-tech-users
+                [isDisabled]="isBlockChange"
+                [type]="'DETAIL_TICKET'"
+                [editMode]="true"
+                [selectedMode]="'SINGLE'"
+                [editUsers]="userService"
+                [users]="listTechUsers"
+                [placement]="'top-end'"
+                (usersChange)="onChangeUser($event)"
+            ></app-tech-users>
+            <app-date-picker
+                [isDisabled]="isBlockChange"
+                [placement]="'bottom-right'"
+                [useMinDate]="false"
+                [editMode]="true"
+                [editDate]="product.date"
+                [type]="'DETAIL_TICKET'"
+                (onChange)="onChangeDatePicker($event)"
+            ></app-date-picker>
+            <div
+                class="qt-button --sm --gray qt-ml-8 button-mark-complete"
+                (click)="setComplete()"
+            >
+                <i
+                    class="icon__inactive qt-bg-contain qt-mr-6 icn-16"
+                    *ngIf="!product.completed"
+                ></i>
+                <i
+                    class="icon__active qt-bg-contain qt-mr-6 icn-16"
+                    *ngIf="product.completed"
+                ></i>
+                <span [textContent]="(product.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
+            </div>
+        </div>
     </div>
-    <div
-      ngbDropdown
-      *ngIf="!isBlockChange"
-    >
-      <div
-        class="ticket-updates__more icon__more"
-        id="dropdownBasic1"
-        ngbDropdownToggle
-      ></div>
-      <div
-        ngbDropdownMenu
-        aria-labelledby="dropdownBasic1"
-        class="dropdown-menu-qt"
-      >
-        <ul>
-          <li
-            ngbDropdownItem
-            (click)="edit()"
-            *ngIf="!isIOSDevice()"
-          >
-            <i class="icn-16 icon__edit"></i>
-            Edit
-          </li>
-          <li
-            ngbDropdownItem
-            (touchstart)="edit()"
-            *ngIf="isIOSDevice()"
-          >
-            <i class="icn-16 icon__edit"></i>
-            Edit
-          </li>
-          <li
-            ngbDropdownItem
-            (click)="removeProduct()"
-            *ngIf="!isIOSDevice()"
-          >
-            <i class="icn-16 icon__remove"></i>
-            Delete
-          </li>
-          <li
-            ngbDropdownItem
-            (touchstart)="removeProduct()"
-            *ngIf="isIOSDevice()"
-          >
-            <i class="icn-16 icon__remove"></i>
-            Delete
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="qt-df qt-jc-fe qt-ai-c qt-mt-8">
-      <app-tech-users
-        [isDisabled]="isBlockChange"
-        [type]="'DETAIL_TICKET'"
-        [editMode]="true"
-        [selectedMode]="'SINGLE'"
-        [editUsers]="userService"
-        [users]="listTechUsers"
-        [placement]="'top-end'"
-        (usersChange)="onChangeUser($event)"
-      ></app-tech-users>
-      <app-date-picker
-        [isDisabled]="isBlockChange"
-        [placement]="'bottom-right'"
-        [useMinDate]="false"
-        [editMode]="true"
-        [editDate]="product.date"
-        [type]="'DETAIL_TICKET'"
-        (onChange)="onChangeDatePicker($event)"
-      ></app-date-picker>
-      <div
-        class="qt-button --sm --gray qt-ml-8 button-mark-complete"
-        (click)="setComplete()"
-      >
-        <i
-          class="icon__inactive qt-bg-contain qt-mr-6 icn-16"
-          *ngIf="!product.completed"
-        ></i>
-        <i
-          class="icon__active qt-bg-contain qt-mr-6 icn-16"
-          *ngIf="product.completed"
-        ></i>
-        <span [textContent]="(product.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
-      </div>
-    </div>
-  </div>
 </div>
