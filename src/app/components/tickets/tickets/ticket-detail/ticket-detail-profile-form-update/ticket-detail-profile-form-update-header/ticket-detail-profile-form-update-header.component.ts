@@ -20,6 +20,8 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @Input() currentUser: CurrentUser;
   @Input() tab: string;
+  @Output() onAddProduct = new EventEmitter();
+  @Output() onAddService = new EventEmitter();
   usersForUpdate: Array<User> = [];
   selectedUsers: Array<CurrentUser> = [];
   listTechUsers: Array<User> = [];
@@ -31,7 +33,7 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
-    if (this.tab == "SERVICE") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
+    if (this.tab == "SERVICE" || this.tab == "PRODUCT") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
   }
   getUserName(user) {
     return `${user.firstName} ${user.lastName}`;
@@ -56,5 +58,11 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   onSelectUpdateUser(data) {
     this.selectedUsers = data;
     this.ticketProfileFormUpdate.setShares(data);
+  }
+  addProduct() {
+    this.onAddProduct.emit(null);
+  }
+  addService() {
+    this.onAddService.emit(null);
   }
 }

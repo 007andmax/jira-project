@@ -6,6 +6,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketProfileFormUpdateComponent } from '../../ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
+import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 
 @Component({
@@ -16,6 +17,7 @@ import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-
 export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpdateComponent {
   @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
   @ViewChild('selectServices') selectServices: TicketDetailProfileFormUpdateServicesComponent;
+  @ViewChild('selectProducts') selectProducts: TicketDetailProfileFormUpdateProductsComponent;
   @Output() onCloseForm = new EventEmitter();
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();

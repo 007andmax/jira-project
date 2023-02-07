@@ -4,6 +4,8 @@
         [currentUser]="currentUser"
         [tab]="tab"
         [ticketProfile]="ticketProfile"
+        (onAddProduct)="selectProducts.addProduct()"
+        (onAddService)="selectServices.addService();"
     ></ticket-detail-profile-form-update-header>
     <div class="cps-block__content">
         <ticket-detail-profile-form-update-note
@@ -18,6 +20,12 @@
             (onUpdateMobile)="updateMobile()"
             (onAddMoreMobile)="update()"
         ></ticket-detail-profile-form-update-services>
+        <ticket-detail-profile-form-update-products
+            #selectProducts
+            *ngIf="tab === 'PRODUCT'"
+            (onUpdateMobile)="updateMobile()"
+            (onAddMoreMobile)="update()"
+        ></ticket-detail-profile-form-update-products>
         <!-- <app-ticket-profile-form-update-products
             #selectProducts
             *ngIf="tab === 'PRODUCT'"
@@ -42,33 +50,30 @@
 <div class="ticket-detail-profile-form-update__footer qt-df jc-sb qt-ai-c">
     <div class="qt-df ticket-edit-aside-bottom-part-users-attack">
         <div
-          class="qt-button-square pointer qt-mr-12"
-          [hidden]="tab !== 'NOTE'"
+            class="qt-button-square pointer qt-mr-12"
+            [hidden]="tab !== 'NOTE'"
         >
-          <ticket-profile-form-update-note-list
-            #noteList
-            [placement]="'top-left'"
-            class="ticket-detail-form-update-note-list"
-            (onSelected)="onSelectedNote($event)"
-          ></ticket-profile-form-update-note-list>
+            <ticket-profile-form-update-note-list
+                #noteList
+                [placement]="'top-left'"
+                class="ticket-detail-form-update-note-list"
+                (onSelected)="onSelectedNote($event)"
+            ></ticket-profile-form-update-note-list>
         </div>
         <div
-          class="qt-button-square pointer ticket-edit-aside__attach-button"
-          placement="top"
-          ngbTooltip="Add Attachment"
-          *ngIf="tab === 'NOTE'"
+            class="qt-button-square pointer ticket-edit-aside__attach-button"
+            placement="top"
+            ngbTooltip="Add Attachment"
+            *ngIf="tab === 'NOTE'"
         >
-          <input
-            type="file"
-            #fileDropRef
-            id="fileDropRef"
-            multiple
-            (change)="selectNote.fileBrowseHandler($event.target.files)"
-          >
-          <div
-            class="ticket-edit-aside__attach icon__attachments"
-          >
-          </div>
+            <input
+                type="file"
+                #fileDropRef
+                id="fileDropRef"
+                multiple
+                (change)="selectNote.fileBrowseHandler($event.target.files)"
+            >
+            <div class="ticket-edit-aside__attach icon__attachments"></div>
         </div>
         <!-- <div
             class="ticket-edit-aside__users  icon__assign-user toggle-select-user"

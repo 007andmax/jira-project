@@ -5,7 +5,7 @@
                 class="cps-block__photo"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
-                *ngIf="tab === 'NOTE'"
+                *ngIf="tab === 'NOTE' || tab === 'PRODUCT'"
             ></div>
             <div
                 class="cps-block__photo"
@@ -44,9 +44,21 @@
             *ngIf="tab === 'NOTE'"
             (onChangeType)="onChangeType($event)"
         ></ticket-detail-profile-form-update-visible-users>
-        <div class="qt-button --gray --sm pointer qt-ml-auto">
-          <div class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></div>
-          Add Service
+        <div
+            class="qt-button --gray --sm pointer qt-ml-auto"
+            *ngIf="tab === 'SERVICE'"
+            (click)="addService()"
+        >
+            <div class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></div>
+            Add Service
+        </div>
+        <div
+            class="qt-button --gray --sm pointer qt-ml-auto"
+            *ngIf="tab === 'PRODUCT'"
+            (click)="addProduct()"
+        >
+            <div class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></div>
+            Add Product
         </div>
     </div>
     <app-add-assigned-user

@@ -113,6 +113,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.products_dropDown.close();
     this.selectedProductItem.next(productItem);
     this.selectedItem = true;
+    this.elRef.nativeElement.querySelector("#search-drop-down").value = "";
   }
   togglePanel(data, event) {
     event.target.closest('.card').classList.toggle('opened-card');

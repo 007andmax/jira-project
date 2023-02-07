@@ -38,13 +38,26 @@
         aria-labelledby="dropdownProducts"
     >
         <div class="select-product__header">
-            <div class="select-product__header-title">Product list</div>
-            <div
-                class="select-product__header-add-product"
-                (click)="onCreateProduct()"
-                *ngIf="getPermissions('MANAGE_PRODUCTS')"
-            >
-                + Create Product
+            <div class="qt-df">
+                <div class="select-product__header-title">Product list</div>
+                <div
+                    class="select-product__header-add-product"
+                    (click)="onCreateProduct()"
+                    *ngIf="getPermissions('MANAGE_PRODUCTS')"
+                >
+                    + Create Product
+                </div>
+            </div>
+            <div class>
+                <input
+                    class="pointer qt-input-block__input qt-dropdown-input"
+                    type="text"
+                    autocomplete="new-password"
+                    [ngClass]="{'--input-error' : !validate}"
+                    placeholder="Search Products"
+                    (input)="onSearch($event)"
+                    id="search-drop-down"
+                >
             </div>
         </div>
         <ngb-accordion

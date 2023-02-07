@@ -51,6 +51,7 @@ import { TicketProfileFormUpdateNoteListModule } from '../ticket-edit-aside/tick
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
+import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
 
 
 
@@ -79,7 +80,8 @@ import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-pr
         TicketDetailProfileFormUpdateVisibleUsersComponent,
         TicketDetailProfileFormUpdateNoteComponent,
         TicketDetailProfileFormUpdateServicesComponent,
-        TicketDetailProfileFormUpdateHeaderComponent
+        TicketDetailProfileFormUpdateHeaderComponent,
+        TicketDetailProfileFormUpdateProductsComponent
 
     ],
     imports: [
