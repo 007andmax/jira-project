@@ -58,8 +58,15 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
     this.sub.add(onChangeAssignedUser);
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
+    //   console.log($(".ticket-detail-page-content__body").width() + 50);
+    console.log($(".ticket-detail-page-content__body").offset());
+    $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
+    //  $("ticket-detail-profile-form-update").width($(".ticket-detail-page-content__body").width() + 50);
+    window.addEventListener('resize', this.resize);
   }
-
+  resize = () => {
+    $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
+  }
 
 
   onUpdateTicket(data) {
@@ -77,5 +84,9 @@ export class TicketDetailProfileFormUpdateComponent extends TicketProfileFormUpd
   }
   close() {
     this.onCloseForm.emit(null);
+  }
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', this.resize);
+    this.sub.unsubscribe();
   }
 }
