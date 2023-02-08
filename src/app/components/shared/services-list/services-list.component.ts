@@ -42,6 +42,12 @@ export class ServicesListComponent implements OnInit {
     this.searchName = (event.target.value.length > 0) ? event.target.value : null
   }
 
+  public setEditItem(data) {
+    this.editItem = data;
+    this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+    console.log("this.editItem", this.editItem);
+    this.cd.detectChanges();
+  }
 
   /**
   * Get name serivce / produuct

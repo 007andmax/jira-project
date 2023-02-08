@@ -15,12 +15,6 @@
                     class="product-item__prodect-list"
                     (selectedProductItem)="onChangeProduct($event,i,taxesDropDown)"
                 ></app-product-list>
-                <button
-                    class="product-item__btn-del "
-                    (click)="removeProduct(i)"
-                >
-                    <span class="icon__close btn-icon qt-ic-c"></span>
-                </button>
             </div>
             <div class="qt-df">
                 <div class="qt-df">
@@ -92,6 +86,13 @@
                     </label>
                 </div>
             </div>
+            <button
+                class="product-item__btn-del qt-button --gray --md qt-jc-c"
+                (click)="removeProduct(i)"
+            >
+                <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+                <span class="qt-color-red-600 qt-fw-500">Remove</span>
+            </button>
         </div>
     </ng-template>
     <div class="product-item">
@@ -171,6 +172,14 @@
                 </label>
             </div>
         </div>
+        <button
+            class="product-item__btn-del qt-button --gray --md qt-jc-c"
+            (click)="clearForm(taxesDropDown)"
+            *ngIf="addedProductList.length > 0"
+        >
+            <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+            <span class="qt-color-red-600 qt-fw-500">Remove</span>
+        </button>
     </div>
     <!-- <div class="qt-aside-modern__footer">
         <div class="qt-df">

@@ -11,8 +11,7 @@
         flex-basis: 100%;
     }
 
-    &__btn-add,
-    &__btn-del {
+    &__btn-add {
         border: none;
         width: 40px;
         height: 40px;
@@ -33,9 +32,10 @@
         }
     }
 
-    &__btn-del {
-        background-color: $gray-400--old;
-    }
+   &__btn-del {
+       margin: 8px 16px 14px;
+       width: calc(100% - 32px);
+   }
 }
 
 .product-item__discount-input {

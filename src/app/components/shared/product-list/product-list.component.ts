@@ -87,6 +87,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
 
   }
+  public setEditItem(data) {
+    this.editItem = data;
+    let value = this.getNameOrDescription(this.editItem);
+    this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
+    if (value !== '') this.selectedItem = true;
+
+  }
 
 
   onCreateProduct() {

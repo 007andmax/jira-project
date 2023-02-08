@@ -118,6 +118,14 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       })
     });
   }
+  public setEditItem(start, end) {
+    this.start = start;
+    this.end = end;
+    let startDate = new Date(this.start);
+    let endDate = new Date(this.end);
+    this.timePickerStart.timepicker('setTime', startDate);
+    this.timePickerEnd.timepicker('setTime', endDate);
+  }
   private onSetPosition() {
     let topInput = $(this.inputTarget).offset().top;
     let height = $(".ui-timepicker-wrapper").height();

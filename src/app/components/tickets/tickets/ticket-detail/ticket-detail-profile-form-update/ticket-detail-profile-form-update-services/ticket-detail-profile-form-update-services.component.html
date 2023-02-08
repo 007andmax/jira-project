@@ -14,7 +14,6 @@
             <div class="service-item__first-line relative">
                 <div class="service-item__input device qt-mb-8">
                     <app-services-list
-                        class
                         [ngClass]="{'--input-error':!service.validate}"
                         [type]="'TICKET'"
                         [editItem]="service.item"
@@ -35,33 +34,33 @@
                     </mat-error>
                 </div>
                 <div class="qt-df">
-                  <app-ticket-profile-updates-service-timepicker
-                    *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
-                    [validate]="service.validateQuantity"
-                    [errorMessage]="'You have to set any time value'"
-                    (onChangeStart)="onChangeStartTimePickerService($event,i)"
-                    (onChangeEnd)="onChangeEndTimePickerSerice($event,i)"
-                    #editTimePicker
-                    [quantity]="service.quantity"
-                    [editMode]="true"
-                    [start]="service.durationStart"
-                    [end]="service.durationEnd"
-                  ></app-ticket-profile-updates-service-timepicker>
-                  <app-ticket-profile-updates-service-duration
-                    [validate]="service.validateQuantity"
-                    [errorMessage]="'You have to set any time value'"
-                    (onChange)="onChangeDurationService($event,i)"
-                    [hour]="getHours(service)"
-                    [minute]="getMinutes(service)"
-                    *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
-                  ></app-ticket-profile-updates-service-duration>
-                  <app-date-picker
-                    [placement]="'top'"
-                    [editMode]="true"
-                    [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
-                    [useMinDate]="false"
-                    (onChange)="onChangeDatePickerService($event,i)"
-                  ></app-date-picker>
+                    <app-ticket-profile-updates-service-timepicker
+                        *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+                        [validate]="service.validateQuantity"
+                        [errorMessage]="'You have to set any time value'"
+                        (onChangeStart)="onChangeStartTimePickerService($event,i)"
+                        (onChangeEnd)="onChangeEndTimePickerSerice($event,i)"
+                        #editTimePicker
+                        [quantity]="service.quantity"
+                        [editMode]="true"
+                        [start]="service.durationStart"
+                        [end]="service.durationEnd"
+                    ></app-ticket-profile-updates-service-timepicker>
+                    <app-ticket-profile-updates-service-duration
+                        [validate]="service.validateQuantity"
+                        [errorMessage]="'You have to set any time value'"
+                        (onChange)="onChangeDurationService($event,i)"
+                        [hour]="getHours(service)"
+                        [minute]="getMinutes(service)"
+                        *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
+                    ></app-ticket-profile-updates-service-duration>
+                    <app-date-picker
+                        [placement]="'top'"
+                        [editMode]="true"
+                        [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
+                        [useMinDate]="false"
+                        (onChange)="onChangeDatePickerService($event,i)"
+                    ></app-date-picker>
                 </div>
             </div>
             <div class="qt-df">
@@ -78,6 +77,13 @@
                     ></textarea>
                 </div>
             </div>
+            <button
+                class="service-item__btn-del qt-button --gray --md qt-jc-c"
+                (click)="removeService(i)"
+            >
+                <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+                <span class="qt-color-red-600 qt-fw-500">Remove</span>
+            </button>
         </div>
     </ng-template>
     <div class="service-item">
@@ -138,13 +144,14 @@
             </div>
         </div>
         <button
-          class="service-item__btn-del qt-button --gray --md qt-jc-c"
-          (click)="removeService(i)"
+            class="service-item__btn-del qt-button --gray --md qt-jc-c"
+            (click)="clearForm()"
+            *ngIf="addedServiceList.length > 0"
         >
-          <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
-          <span class="qt-color-red-600 qt-fw-500">Remove</span>
+            <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+            <span class="qt-color-red-600 qt-fw-500">Remove</span>
         </button>
-      </div>
+    </div>
     <!-- <div class="qt-aside-modern__footer">
         <div class="qt-df">
           <button
