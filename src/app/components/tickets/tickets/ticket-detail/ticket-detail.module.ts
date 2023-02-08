@@ -52,6 +52,7 @@ import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-prof
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
+import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 
 
 
@@ -81,7 +82,8 @@ import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-
         TicketDetailProfileFormUpdateNoteComponent,
         TicketDetailProfileFormUpdateServicesComponent,
         TicketDetailProfileFormUpdateHeaderComponent,
-        TicketDetailProfileFormUpdateProductsComponent
+        TicketDetailProfileFormUpdateProductsComponent,
+        TicketDetailProfileFormUpdateSupportComponent
 
     ],
     imports: [
