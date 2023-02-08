@@ -11,8 +11,8 @@
         [ngForTrackBy]="trackByIndex"
     >
         <div class="service-item">
-            <div class="service-item__first-line qt-df relative">
-                <div class="service-item__input device">
+            <div class="service-item__first-line relative">
+                <div class="service-item__input device qt-mb-8">
                     <app-services-list
                         class
                         [ngClass]="{'--input-error':!service.validate}"
@@ -34,7 +34,8 @@
                         You have to set any time value
                     </mat-error>
                 </div>
-                <app-ticket-profile-updates-service-timepicker
+                <div class="qt-df">
+                  <app-ticket-profile-updates-service-timepicker
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
                     [validate]="service.validateQuantity"
                     [errorMessage]="'You have to set any time value'"
@@ -45,30 +46,25 @@
                     [editMode]="true"
                     [start]="service.durationStart"
                     [end]="service.durationEnd"
-                ></app-ticket-profile-updates-service-timepicker>
-                <app-ticket-profile-updates-service-duration
+                  ></app-ticket-profile-updates-service-timepicker>
+                  <app-ticket-profile-updates-service-duration
                     [validate]="service.validateQuantity"
                     [errorMessage]="'You have to set any time value'"
                     (onChange)="onChangeDurationService($event,i)"
                     [hour]="getHours(service)"
                     [minute]="getMinutes(service)"
                     *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
-                ></app-ticket-profile-updates-service-duration>
-                <app-date-picker
+                  ></app-ticket-profile-updates-service-duration>
+                  <app-date-picker
                     [placement]="'top'"
                     [editMode]="true"
                     [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
                     [useMinDate]="false"
                     (onChange)="onChangeDatePickerService($event,i)"
-                ></app-date-picker>
-                <button
-                    class="service-item__btn-del"
-                    (click)="removeService(i)"
-                >
-                    <span class="icon__close btn-icon qt-ic-c"></span>
-                </button>
+                  ></app-date-picker>
+                </div>
             </div>
-            <div>
+            <div class="qt-df">
                 <div class="editable-description editable-chat">
                     <textarea
                         name="cps-chat"
@@ -124,12 +120,6 @@
                     [useMinDate]="false"
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>
-                <!-- <button
-                    class="service-item__btn-add"
-                    (click)="addService()"
-                >
-                    <span class="icon__plus-white btn-icon"></span>
-                </button> -->
             </div>
         </div>
         <div class="qt-df">
@@ -147,7 +137,14 @@
                 ></textarea>
             </div>
         </div>
-    </div>
+        <button
+          class="service-item__btn-del qt-button --gray --md qt-jc-c"
+          (click)="removeService(i)"
+        >
+          <span class="icon__remove--red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
+          <span class="qt-color-red-600 qt-fw-500">Remove</span>
+        </button>
+      </div>
     <!-- <div class="qt-aside-modern__footer">
         <div class="qt-df">
           <button

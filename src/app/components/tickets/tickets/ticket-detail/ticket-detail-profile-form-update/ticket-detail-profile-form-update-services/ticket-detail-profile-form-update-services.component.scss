@@ -1,16 +1,24 @@
 @import './src/assets/styles/variable';
 
 .service-item {
+    &:only-of-type {
+      margin-bottom: 32px;
+    }
     +.service-item {
-        margin-top: 16px;
+        margin: 16px 0;
+        padding-top: 8px;
+        border-top: 1px solid $gray-200;
+
+      .service-item__first-line {
+        padding-top: 8px;
+      }
     }
 
     &__first-line {
       padding: 16px 16px 8px;
     }
 
-    &__btn-add,
-    &__btn-del {
+    &__btn-add {
         border: none;
         width: 40px;
         min-width: 40px;
@@ -33,7 +41,8 @@
     }
 
     &__btn-del {
-        background-color: $gray-400--old;
+        margin: 8px 16px 14px;
+        width: calc(100% - 32px);
     }
 
     &__input {
@@ -80,7 +89,7 @@
         }
     }
     .editable-description {
-      margin: 0 16px 32px;
+      margin: 0 16px;
     }
 
     .cps-block__content-textarea {
