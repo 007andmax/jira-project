@@ -21,7 +21,7 @@
         <div class="ticket-detail-page-content-main">
             <div class="ticket-detail-page-content__body">
                 <div class>
-                    <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
+                    <ticket-detail-info-status [ticketProfile]="ticketProfile"></ticket-detail-info-status>
                     <div class="ticket-detail-page-title qt-mt-10 qt-mb-16">
                         <div
                             class="ticket-detail-page-title__text"
@@ -200,8 +200,7 @@
                 (hidden)="onToggleAddAssignedUser()"
                 *ngIf="showAddAssignedUser"
             ></app-add-assigned-user> -->
-                    <!-- <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
-            <app-ticket-message
+                    <!-- <app-ticket-message
                 #ticketMessage
                 (onMoveToTrash)="moveToTrash($event)"
                 (onRestoreFromSpam)="restoreFromSpam()"
@@ -222,6 +221,8 @@
                 </div>
             </div>
             <div class="ticket-detail-page-content__sidebar-preview">
+                <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
+                <ticket-detail-change-status [ticketProfile]="ticketProfile"></ticket-detail-change-status>
                 <div class="ticket-edit-aside__header-menu">
                     <div
                         class="ticket-edit-aside__more-users-title"
@@ -263,18 +264,18 @@
         </div>
         <div class="ticket-detail-page-content__sidebar-info"></div>
         <div class="ticket-detail-page-content__sidebar-menu">
-          <div class="ticket-detail-page-content__sidebar-menu-button">
-            <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
-          </div>
-          <div class="ticket-detail-page-content__sidebar-menu-button">
-            <div class="icon__locked qt-sz-20 qt-bg-contain"></div>
-          </div>
-          <div class="ticket-detail-page-content__sidebar-menu-button">
-            <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
-          </div>
-          <div class="ticket-detail-page-content__sidebar-menu-button">
-            <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
-          </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__company-info qt-sz-20 qt-bg-contain"></div>
+            </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__locked qt-sz-20 qt-bg-contain"></div>
+            </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__devices-computer qt-sz-20 qt-bg-contain"></div>
+            </div>
+            <div class="ticket-detail-page-content__sidebar-menu-button">
+                <div class="icon__documents qt-sz-20 qt-bg-contain"></div>
+            </div>
         </div>
     </div>
     <!-- <app-ticket-edit-aside-right-panel

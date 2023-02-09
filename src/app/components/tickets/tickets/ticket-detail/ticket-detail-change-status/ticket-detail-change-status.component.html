@@ -1,0 +1,55 @@
+<div ngbDropdown>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus((ticketProfile.customStatus) ? ticketProfile.customStatus : ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'IN_PROGRESS'"
+        ngbDropdownToggle
+    >
+        {{(!ticketProfile.customStatus) ? 'In Progress' : parseStatus(ticketProfile.customStatus)}}
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'COMPLETED'"
+    >
+        Completed
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus('UNASSIGNED')"
+        *ngIf="ticketProfile.status === null"
+    >
+        Unassigned
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'ON_HOLD'"
+        ngbDropdownToggle
+    >
+        On Hold
+    </span>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+    >
+        <div class="dropdown-menu-qt">
+            <ul>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="ticketsStatus"
+                    let-i="index"
+                >
+                    <li
+                        ngbDropdownItem
+                        class
+                        [textContent]="parseStatus(item.name)"
+                        *ngIf="item.name !== 'COMPLETED' && item.name !== 'UNASSIGNED'"
+                        (click)="changeTicketStatus(item)"
+                    ></li>
+                </ng-template>
+            </ul>
+        </div>
+    </div>
+</div>

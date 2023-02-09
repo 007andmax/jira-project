@@ -54,6 +54,9 @@ import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-pr
 import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
 import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+import { TicketDetailClaimInfoComponent } from './ticket-detail-claim-info/ticket-detail-claim-info.component';
+import { TicketDetailInfoStatusComponent } from './ticket-detail-info-status/ticket-detail-info-status.component';
+import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
 
 
 
@@ -84,7 +87,10 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
         TicketDetailProfileFormUpdateServicesComponent,
         TicketDetailProfileFormUpdateHeaderComponent,
         TicketDetailProfileFormUpdateProductsComponent,
-        TicketDetailProfileFormUpdateSupportComponent
+        TicketDetailProfileFormUpdateSupportComponent,
+        TicketDetailClaimInfoComponent,
+        TicketDetailInfoStatusComponent,
+        TicketDetailChangeStatusComponent
 
     ],
     imports: [

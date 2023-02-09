@@ -38,6 +38,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
           this.second = 0;
         } else {
           this.minute += 1;
+          this.second = 0;
         }
       } else {
         this.second += 1;
