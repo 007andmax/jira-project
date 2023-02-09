@@ -8,6 +8,7 @@ export class TicketProfileTask {
     "assignedUser": CurrentUser;
     selected: boolean = false;
     isInitEdit: boolean = false;
+    dateForDatePicker: number = new Date().getTime();
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -23,6 +24,7 @@ export class TicketProfileTask {
         this.assignedUser = data;
     }
     public setDate(data) {
+        this.dateForDatePicker = new Date(data).getTime();
         this.date = data;
     }
     public getDataForUpdate() {

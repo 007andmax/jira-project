@@ -85,6 +85,10 @@
 }
 .date-picker {
   position: relative;
+  .bg-primary {
+    --bs-bg-opacity: 1;
+    color: $primary-1;
+  }
   i {
     position: absolute;
     right: 14px;

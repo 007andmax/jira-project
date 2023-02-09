@@ -36,3 +36,18 @@
             height: 56px;
         }
 }
+.support-timeline-status__step2 {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-size: 20px;
+    .icon__connection-green,.icon__connection {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+}
+.support-timeline-status__step1,.support-timeline-status__step3 {
+    width: 16px !important;
+    height: 16px !important;
+}

@@ -53,6 +53,7 @@ import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
 import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 
 
@@ -117,7 +118,8 @@ import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-p
         InvoiceFormTicketEditTaxesModule,
         TicketChangeStatusModule,
         AddAssignedUserModule,
-        TicketProfileFormUpdateNoteListModule
+        TicketProfileFormUpdateNoteListModule,
+        KeyUpEnterModule
     ],
 
 

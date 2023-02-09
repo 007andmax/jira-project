@@ -264,7 +264,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     let date = new Date(this.ticketProfile.createdAt);
     let hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours();
     let type = (date.getHours() >= 12) ? 'PM' : 'AM';
-    return `${moment(date).format('DD MMM YYYY')}, ${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`
+    return `${moment(date).format('DD MMM YYYY')} at ${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`
   }
   getCompanyName() {
     if (!this.ticketProfile.company) return '';

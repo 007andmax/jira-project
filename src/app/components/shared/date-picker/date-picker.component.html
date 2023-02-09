@@ -6,6 +6,15 @@
     [placement]="placement"
 >
     <div *ngIf="type === 'DETAIL_TICKET'">
+        <app-dynamic-tooltip
+            [content]="'Add a due date to this task'"
+            [position]="'top'"
+            #dateTooltip
+        ></app-dynamic-tooltip>
+        <span
+            class="detail-ticket-txt"
+            [textContent]="geTextDate()"
+        ></span>
         <i class="icn-16 icon__calendar pointer"></i>
         <input
             [disabled]="disabled"
@@ -16,6 +25,8 @@
             id="dropdownDate"
             [value]="geTextDate()"
             readonly
+            (mouseenter)="dateTooltip.show($event.target)"
+            (mouseleave)="dateTooltip.hide()"
         >
     </div>
     <input
