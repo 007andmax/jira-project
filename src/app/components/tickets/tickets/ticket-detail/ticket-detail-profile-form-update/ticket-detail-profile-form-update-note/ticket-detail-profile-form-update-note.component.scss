@@ -142,6 +142,7 @@
 }
 .editable-chat {
     max-height: 500px;
+    border: unset;
 }
 .files-list {
   display: flex;
@@ -315,7 +316,7 @@
   width: 12px;
   height: 12px;
 }
-/deep/ .editable-description {
-  border-radius: 0;
-  border: unset;
-}
+///deep/ .editable-description { // TODO check this style
+//  border-radius: 0;
+//  border: unset;
+//}

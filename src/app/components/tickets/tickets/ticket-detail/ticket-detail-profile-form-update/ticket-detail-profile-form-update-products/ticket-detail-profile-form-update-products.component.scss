@@ -1,11 +1,19 @@
 @import './src/assets/styles/variable';
 
 .product-item {
-    margin-bottom: 16px;
-
-    &__first-line {
-        margin-bottom: 8px;
+    &:first-child {
+      margin: 16px;
     }
+    &:only-of-type {
+      margin: 16px 16px 56px;
+    }
+
+    +.product-item {
+      margin: 0 16px 56px;
+      padding-top: 16px;
+      border-top: 1px solid $gray-200;
+    }
+
 
     &__prodect-list {
         flex-basis: 100%;
@@ -32,10 +40,15 @@
         }
     }
 
-   &__btn-del {
-       margin: 8px 16px 14px;
-       width: calc(100% - 32px);
-   }
+  .qt-input-block {
+    .qt-input-prefix {
+      width: max-content;
+      white-space: nowrap;
+      background: transparent;
+      flex-shrink: 0;
+      padding: 0 14px;
+    }
+  }
 }
 
 .product-item__discount-input {

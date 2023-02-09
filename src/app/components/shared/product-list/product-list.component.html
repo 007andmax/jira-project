@@ -38,19 +38,19 @@
         aria-labelledby="dropdownProducts"
     >
         <div class="select-product__header">
-            <div class="qt-df">
+            <div class="qt-df qt-jc-sb qt-mb-8 qt-ai-c">
                 <div class="select-product__header-title">Product list</div>
                 <div
-                    class="select-product__header-add-product"
+                    class="qt-button --gray --sm select-product__header-add-product"
                     (click)="onCreateProduct()"
                     *ngIf="getPermissions('MANAGE_PRODUCTS')"
                 >
                     + Create Product
                 </div>
             </div>
-            <div class>
+            <div class="qt-input-search">
                 <input
-                    class="pointer qt-input-block__input qt-dropdown-input"
+                    class="pointer qt-input-search qt-dropdown-input"
                     type="text"
                     autocomplete="new-password"
                     [ngClass]="{'--input-error' : !validate}"
@@ -79,7 +79,7 @@
                             {{item.name}}
                             <span *ngIf="item.products.length">({{item.products.length}})</span>
                         </div>
-                        <div class="select-product__expand icon__expand"></div>
+                        <div class="icon__add-grey qt-sz-16"></div>
                     </button>
                 </ng-template>
                 <ng-template ngbPanelContent>
@@ -89,16 +89,18 @@
                         (click)="setProduct(productItem)"
                     >
                         <div class="qt-df category-product__main-info">
-                            <div class="qt-df qt-ai-c jc-sb category-product__title-price">
+                            <div class="category-product__title-price">
                                 <div class="title">{{productItem.description}}</div>
-                                <div class="qt-text-right total-count">{{ productItem.sale | currency: '$' }}</div>
+                                <div class="total-count qt-mt-4">{{ productItem.sale | currency: '$' }}</div>
                             </div>
                             <div class="manufacture">
                                 <span *ngIf="productItem.ilc">ILC: {{ productItem.ilc }}</span>
                                 <span *ngIf="productItem.manufacture">P/N: {{ productItem.manufacture }}</span>
                             </div>
                         </div>
-                        <div class="button-add">Add this</div>
+                        <div class="qt-button-square pointer qt-ml-20 qt-bg-white">
+                          <div class="icon__add-grey qt-sz-16 qt-bg-contain"></div>
+                        </div>
                     </div>
                 </ng-template>
             </ngb-panel>
