@@ -4,10 +4,9 @@
         *ngIf="item"
     >
         <div
-            class="support-item-menu --big qt-mr-16"
+            class="support-item-menu --big"
             *ngIf="item.status === 'URL_GENERATED' || item.status === 'URL_OPENED'"
         >
-            <div class="support-item-menu__key icon__key"></div>
             <div
                 class="support-item-menu__number"
                 [textContent]="item.key"
@@ -42,7 +41,7 @@
             <div
                 (mouseenter)="copySupportTooltip.show($event.target)"
                 (mouseleave)="copySupportTooltip.hide()"
-                class="support-item-menu__button icon__link-gray pointer"
+                class="support-item-menu__button icon__link-agent pointer"
                 (click)="copyLink()"
             ></div>
         </div>
@@ -53,7 +52,7 @@
                 #performerTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-timeline-status__step1"
+                class="support-timeline-status__step1 qt-fs-0"
                 [ngClass]="{'icon__monitor-green' : item.status === 'CONNECTED',
                 'icon__monitor' : item.status !== 'CONNECTED'}"
                 (mouseenter)="performerTooltip.show($event.target)"
@@ -71,7 +70,7 @@
             ></app-dynamic-tooltip>
             <div
                 *ngIf="item.status === 'CONNECTED' && item.online"
-                class="support-timeline-status__step2"
+                class="support-timeline-status__step2 qt-fs-0"
                 (mouseenter)="agentConnectedTooltip.show($event.target)"
                 (mouseleave)="agentConnectedTooltip.hide()"
             >
@@ -79,7 +78,7 @@
             </div>
             <div
                 *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
-                class="support-timeline-status__step2 icon__connection"
+                class="support-timeline-status__step2 icon__connection qt-fs-0"
             ></div>
             <div
                 *ngIf="item.status === 'INSTALLED' && item.online"
@@ -118,7 +117,7 @@
                 #userNameTooltip
             ></app-dynamic-tooltip>
             <div
-                class="support-timeline-status__step3"
+                class="support-timeline-status__step3 qt-fs-0"
                 [ngClass]="{'icon__monitor-green' : item.status === 'CONNECTED' && item.online,
                 'icon__monitor' : item.status !== 'CONNECTED' || !item.online}"
                 (mouseenter)="userNameTooltip.show($event.target)"
@@ -127,25 +126,26 @@
         </div>
     </div>
     <div
-        class="csp-block-support__status-msg"
+        class="tab-pane-input__row company-info-block company-info-block__yellow qt-mr-16 qt-ml-16 qt-mt-16 qt-mb-30"
         *ngIf="item"
     >
-        <span [innerHTML]="getMessage()"></span>
+        <div class="icon__company-info--yellow-800 qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0"></div>
+        <span class="qt-f-1" [innerHTML]="getMessage()"></span>
     </div>
     <div
-        class="qt-df qt-ai-c qt-fd-c init-connection"
+        class="qt-df qt-ai-c qt-fd-c init-connection qt-pb-30 qt-pt-30"
         *ngIf="!item"
     >
-        <div class="icon__connection"></div>
-        <h3>No Connection Establish</h3>
-        <p>Click button to create new one</p>
+        <div class="icon__connection qt-sz-24 qt-mb-16"></div>
+        <div class="csp-block-support__title qt-mb-8">No Connection Establish</div>
+        <p class="csp-block-support__text qt-mb-16">Click button to create new one</p>
         <a
             href="javascript:;"
-            class="qt-button cps-block__create-connection-btn"
+            class="qt-button --gray --md pointer cps-block__create-connection-btn"
             (click)="create()"
         >
-            <div class="qt-sz-16 icon__add--white qt-mr-8"></div>
-            <span>Create Connection</span>
+          <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+          Create Connection
         </a>
     </div>
 </div>
