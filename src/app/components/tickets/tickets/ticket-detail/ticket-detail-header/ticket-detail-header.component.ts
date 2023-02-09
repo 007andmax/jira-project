@@ -15,9 +15,11 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onAddUpdate = new EventEmitter();
   currentUser: CurrentUser;
-  date: Date = new Date();
   dateTxt: string = "";
   interval;
+  hour: number = 0;
+  minute: number = 0;
+  second: number = 0;
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService,) { }
@@ -29,9 +31,18 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
       this.currentUser = data;
     })
     this.interval = setInterval(() => {
-      let current = new Date().getTime();
-      let newDate = new Date(current - this.date.getTime());
-      this.dateTxt = `${this.parseDate(newDate.getHours() - 1)} hr : ${this.parseDate(newDate.getMinutes())} min : ${this.parseDate(newDate.getSeconds())} sec`;
+      if (this.second == 59) {
+        if (this.minute == 59) {
+          this.hour += 1;
+          this.minute = 0;
+          this.second = 0;
+        } else {
+          this.minute += 1;
+        }
+      } else {
+        this.second += 1;
+      }
+      this.dateTxt = `${this.parseDate(this.hour)} hr : ${this.parseDate(this.minute)} min : ${this.parseDate(this.second)} sec`;
       this.cd.detectChanges();
     }, 1000);
   }
