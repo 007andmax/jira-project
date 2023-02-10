@@ -1,0 +1,14 @@
+<div class="qt-input-block">
+    <company-drop-down
+        #companyDP
+        [title]="'Company'"
+        [class]="['qt-dropdown']"
+        [placeholder]="'Select Company'"
+        [clientType]="'CLIENT'"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        [editItem]="selectedCompany"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></company-drop-down>
+</div>

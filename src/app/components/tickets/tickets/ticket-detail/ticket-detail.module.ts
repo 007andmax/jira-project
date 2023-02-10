@@ -57,6 +57,13 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { TicketDetailClaimInfoComponent } from './ticket-detail-claim-info/ticket-detail-claim-info.component';
 import { TicketDetailInfoStatusComponent } from './ticket-detail-info-status/ticket-detail-info-status.component';
 import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
+import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { TicketDetailChangePriorityComponent } from './ticket-detail-change-priority/ticket-detail-change-priority.component';
+import { TicketDetailChangeCompanyComponent } from './ticket-detail-change-company/ticket-detail-change-company.component';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+import { TicketDetailAddAssignedUserComponent } from './ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component';
+import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
+import { TicketDetailAttachmentsComponent } from './ticket-detail-attachments/ticket-detail-attachments.component';
 
 
 
@@ -90,7 +97,12 @@ import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status
         TicketDetailProfileFormUpdateSupportComponent,
         TicketDetailClaimInfoComponent,
         TicketDetailInfoStatusComponent,
-        TicketDetailChangeStatusComponent
+        TicketDetailChangeStatusComponent,
+        TicketDetailChangePriorityComponent,
+        TicketDetailChangeCompanyComponent,
+        TicketDetailAddAssignedUserComponent,
+        TicketDetailEditTagsComponent,
+        TicketDetailAttachmentsComponent
 
     ],
     imports: [
@@ -125,7 +137,9 @@ import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status
         TicketChangeStatusModule,
         AddAssignedUserModule,
         TicketProfileFormUpdateNoteListModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        DropDownModule,
+        CompanyDropDownModule
     ],
 
 

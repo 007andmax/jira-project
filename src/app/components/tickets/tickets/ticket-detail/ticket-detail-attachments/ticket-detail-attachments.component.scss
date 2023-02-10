@@ -1,0 +1,168 @@
+@import "./src/assets/styles/variable";
+
+.attachment-component {
+    padding: 0 32px;
+
+    @media (max-width: 767px) {
+        padding: 0 16px;
+    }
+
+    .attached-files-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: -8px;
+
+        @media (max-width: 767px) {
+            display: flex !important;
+        }
+    }
+
+    .attachment-item {
+        max-width: 100%;
+        display: flex;
+        margin-right: 8px;
+        height: 30px;
+        border-radius: 16px;
+        border: solid 1px $gray-400--old;
+        background-color: $white;
+        padding: 5px 13px 5px 5px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-top: 8px;
+        font-size: 12px;
+
+        p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        &__header {
+            border-bottom: 1px solid $gray-400--old;
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+
+            @media (max-width: 767px) {
+                border: none;
+                margin-bottom: 12px;
+            }
+        }
+
+        &__count-items {
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 10px;
+            color: $primary-2;
+            line-height: 12px;
+        }
+
+        &__show-hide-btn {
+            width: 32px;
+            height: 32px;
+            border: solid 1px $gray-400--old;
+            background-color: $white;
+            border-radius: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("/assets/img/icons/download.svg");
+
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        &__type {
+            margin-right: 6px;
+            background: #2170bb;
+            border-radius: 11px;
+            font-size: 10px;
+            font-weight: 600;
+            color: $white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 8px;
+            text-transform: uppercase;
+            height: 20px;
+        }
+
+        &__download {
+            position: absolute;
+            display: none;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-image: url("/assets/img/icons/download-blue.svg");
+            background-size: 20px;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            background-position: center;
+        }
+
+        &:hover {
+            border: solid 1px $primary-1;
+            background-color: $gray-200--old;
+
+            .attachment-item {
+                &__download {
+                    display: block;
+                }
+            }
+        }
+
+        &.text\/plain {
+            .attachment-item {
+                &__type {
+                    background: $gray-600--old;
+                }
+            }
+        }
+
+        &.image\/png {
+            .attachment-item {
+                &__type {
+                    background: $secondary-4;
+                }
+            }
+        }
+
+        &.image\/jpg,
+        &.image\/jpeg {
+            .attachment-item {
+                &__type {
+                    background: $secondary-3;
+                }
+            }
+        }
+
+        &.application\/pdf {
+            .attachment-item {
+                &__type {
+                    background: $error;
+                }
+            }
+        }
+
+        &.archive\/zip {
+            .attachment-item {
+                &__type {
+                    background: $error;
+                }
+            }
+        }
+
+        &.image\/bmp {
+            .attachment-item {
+                &__type {
+                    background: $secondary-3;
+                }
+            }
+        }
+    }
+}

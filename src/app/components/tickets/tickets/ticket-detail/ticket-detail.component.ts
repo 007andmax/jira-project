@@ -297,6 +297,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
     return true;
   }
+
   onOpenCompaniesDropDown() {
     this.cd.detectChanges();
   }

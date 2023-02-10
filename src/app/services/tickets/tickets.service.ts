@@ -187,6 +187,15 @@ export class TicketsService {
         return data;
       }));
   }
+  public changePriority(data, number) {
+
+    return this.http.put(this.apiUrl + `v2/tickets/priority`, data).pipe(
+      tap(data => {
+        this.toastrService.success(`The tickets “${number}” priorty has been changed`);
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getTicketStatus() {
 
     return this.http.get(this.apiUrl + `ticket/status`);

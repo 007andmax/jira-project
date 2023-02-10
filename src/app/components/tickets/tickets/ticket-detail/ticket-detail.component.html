@@ -191,15 +191,7 @@
                 [selectedTag]="ticketProfile.tags"
                 (tagsChange)="onChangeTags($event)"
                 [hidden]="showAddAssignedUser"
-            ></app-ticket-edit-tags>
-            <app-add-assigned-user
-                [placement]="'bottom-left'"
-                [userList]="getUsersForAssign()"
-                [selectedUsers]="listAssignedUser"
-                (onSelected)="onSelectAssignedUser($event)"
-                (hidden)="onToggleAddAssignedUser()"
-                *ngIf="showAddAssignedUser"
-            ></app-add-assigned-user> -->
+            ></app-ticket-edit-tags> -->
                     <!-- <app-ticket-message
                 #ticketMessage
                 (onMoveToTrash)="moveToTrash($event)"
@@ -220,46 +212,38 @@
             ></ticket-profile-edit-form-update> -->
                 </div>
             </div>
-            <div class="ticket-detail-page-content__sidebar-preview">
+            <div
+                class="ticket-detail-page-content__sidebar-preview"
+                *ngIf="!showPreloader"
+            >
                 <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
                 <ticket-detail-change-status [ticketProfile]="ticketProfile"></ticket-detail-change-status>
-                <div class="ticket-edit-aside__header-menu">
-                    <div
-                        class="ticket-edit-aside__more-users-title"
-                        *ngIf="listAssignedUser.length > 3"
-                        [textContent]="'+' + (listAssignedUser.length- 3) + ' more'"
-                    >
-                    </div>
-                    <div class="more-users-avatars">
-                        <ng-template
-                            class="assigned-ticket-user"
-                            ngFor
-                            let-user
-                            [ngForOf]="listAssignedUser"
-                            let-i="index"
-                            [ngForTrackBy]="trackByIndex"
-                        >
-                            <div
-                                class="more-users-avatars__avatar"
-                                *ngIf="i < 3"
-                                [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-                                [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
-                            ></div>
-                        </ng-template>
-                    </div>
-                    <div
-                        class="qt-modal-circle-button add-user toggle-select-user"
-                        (click)="onToggleAddAssignedUser()"
-                        placement="top"
-                        ngbTooltip="Assign"
-                    ></div>
-                    <!-- <app-ticket-profile-actions
+                <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
+                <ticket-detail-change-company [ticketProfile]="ticketProfile"></ticket-detail-change-company>
+                <ticket-detail-add-assigned-user [listAssignedUser]="listAssignedUser"></ticket-detail-add-assigned-user>
+                <ticket-detail-edit-tags
+                    [selectedTag]="ticketProfile.tags"
+                    (tagsChange)="onChangeTags($event)"
+                ></ticket-detail-edit-tags>
+                <ticket-detail-attachments [attachments]="ticketProfile.attachments"></ticket-detail-attachments>
+                <!-- <div class="qt-input-block">
+                    <span class="qt-input-block__label">Priority Level</span>
+                    <app-drop-down
+                        [class]="['qt-dropdown']"
+                        [field]="'title'"
+                        [isBlockClear]="true"
+                        [editItem]="selectedTicketPriorities"
+                        [list]="ticketPriorities"
+                        (onSelectedItem)="setPriorityLevel($event)"
+                        [placeholder]="'Low'"
+                    ></app-drop-down>
+                </div> -->
+                <!-- <app-ticket-profile-actions
                 (onClaimTicket)="claimTicket()"
                 [ticketProfile]="ticketProfile"
                 placement="top"
                 ngbTooltip="Settings"
             ></app-ticket-profile-actions> -->
-                </div>
             </div>
         </div>
         <div class="ticket-detail-page-content__sidebar-info"></div>

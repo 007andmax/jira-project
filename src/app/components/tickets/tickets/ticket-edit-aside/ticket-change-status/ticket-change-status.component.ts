@@ -21,10 +21,10 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   new TitleListType('On Hold', 'ON_HOLD')];
   ticketsStatus: Array<TicketStatus> = [];
   sub: Subscription = new Subscription();
-  constructor(private ticketsStateService: TicketsStateService,
-    private toastrService: ToastrService,
-    private appStateService: AppStateService,
-    private ticketsService: TicketsService,) { }
+  constructor(public ticketsStateService: TicketsStateService,
+    public toastrService: ToastrService,
+    public appStateService: AppStateService,
+    public ticketsService: TicketsService,) { }
 
 
   ngOnInit() {
@@ -54,6 +54,8 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   parseStatus(name) {
     if (name === "IN_PROGRESS") return "In progress";
     if (name === "ON_HOLD") return "On hold";
+    if (name === "COMPLETED") return "Completed";
+    if (name === "UNASSIGNED") return "Unassigned";
     return name;
   }
   ngOnDestroy(): void {
