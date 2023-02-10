@@ -1,8 +1,10 @@
 <div
-    class="ticket-edit-aside__claimed-info qt-df at-c qt-jc-c"
+    class="ticket-edit-aside__claimed-info qt-df qt-ai-c qt-jc-c qt-mb-16"
     *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'MY_TICKET',null)"
 >
-    <div class="ticket-edit-aside__claimed-info-lines"></div>
+    <div class="qt-sz-36 ticket-edit-aside__claimed-icon qt-circle qt-mr-8 qt-df qt-ai-c qt-jc-c qt-fs-0">
+      <div class="icon__claim qt-sz-20"></div>
+    </div>
     <div class="ticket-edit-aside__claimed-date">
         <strong>You</strong>
         Claimed this ticket on {{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}

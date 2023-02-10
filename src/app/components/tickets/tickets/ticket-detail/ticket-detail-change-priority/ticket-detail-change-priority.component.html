@@ -19,7 +19,7 @@
         </mat-error>
         <input
             type="text"
-            [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+            [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '32px' }"
             [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
             [disabled]="isDisabled"
             [value]="getSelectedItemText()"
@@ -35,7 +35,7 @@
         <span
             class="app-drop-down__right-icon pointer"
             *ngIf="list && !isDisabled"
-            [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+            [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '16px' }"
         >
             <i
                 *ngIf="selectedItem && !isAdd && !isBlockClear"
@@ -52,6 +52,7 @@
                 class="icn-sm icn-product-save icon__active_subscription"
             ></i>
         </span>
+        <div class="qt-input-block__dot priority-dot medium"></div>
         <i
             class="loading xs"
             *ngIf="preloader"
@@ -68,14 +69,18 @@
                 [ngForOf]="list"
                 let-i="index"
             >
-                <span class="priority-dot {{ item.type.toLowerCase() }}"></span>
                 <button
-                    ngbDropdownItem
+                  class="qt-df qt-ai-c"
+                  ngbDropdownItem
+                  (click)="onSelect(item)"
+                  [title]="reduceItemName(item)"
+                  [ngClass]="{'--selected':isSelected(item)}"
+                >
+                  <span class="priority-dot {{ item.type.toLowerCase() }} qt-mr-8"></span>
+                  <span
                     [textContent]="reduceItemName(item)"
-                    (click)="onSelect(item)"
-                    [title]="reduceItemName(item)"
-                    [ngClass]="{'--selected':isSelected(item)}"
-                ></button>
+                  ></span>
+                </button>
             </ng-template>
         </div>
     </div>

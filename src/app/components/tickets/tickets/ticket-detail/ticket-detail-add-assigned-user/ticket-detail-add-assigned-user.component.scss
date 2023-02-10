@@ -1,0 +1,29 @@
+@import "./src/assets/styles/variable";
+
+/deep/ .ticket-detail-page-content__sidebar-preview {
+  .ticket-edit-user-tags {
+    width: 100%;
+    padding: 0;
+    font-size: 12px;
+
+    .selected-tag-user {
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 6px !important;
+      border: solid 1px $gray-200;
+      background-color: $white;
+    }
+    .assigne-user-avatar {
+      width: 20px;
+      height: 20px;
+      margin-right: 4px;
+    }
+
+    .mat-chip.mat-standard-chip .mat-chip-remove:before {
+      width: 12px;
+      height: 12px;
+      top: 3px;
+      right: 0;
+    }
+  }
+}
+
