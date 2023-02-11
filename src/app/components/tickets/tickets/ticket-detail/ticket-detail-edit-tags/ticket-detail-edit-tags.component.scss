@@ -8,9 +8,7 @@
 }
 
 /deep/ .ticket-edit-tags {
-    width: 100%;
-    padding: 0 28px;
-    font-size: 12px;
+    padding: 0;
 
     input.mat-chip-input {
         width: 20px;
@@ -32,20 +30,25 @@
     }
 
     .selected-tag-ticket {
-        background-color: $gray-100--old;
-        border-radius: 3px !important;
-        border: solid 1px $background;
-        padding: 8px !important;
+        background-color: $gray-100;
+        border-radius: 6px !important;
+        border: unset;
+        padding: 4px 6px !important;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+        color: $gray-600;
+        margin: 0;
     }
 
     .tag-icon {
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-        background: url('/assets/img/icons/tag.svg') no-repeat;
-        background-size: contain;
-        width: 16px;
-        margin-left: 4px;
+      display: none;
+    }
+    .mat-chip.mat-standard-chip .mat-chip-remove:before {
+      top: 1px;
+      right: 0;
+      width: 16px;
+      height: 16px;
     }
 
     .mat-chip-remove {
@@ -55,8 +58,22 @@
     .mat-chip-remove:before {
         filter: brightness(0.8)
     }
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      padding: 0;
+    }
 
     .mat-standard-chip:focus {
         box-shadow: none;
     }
+    .mat-form-field-label-wrapper {
+      display: none;
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+      gap: 8px;
+    }
+    input.mat-chip-input {
+      display: none;
+    }
 }
+

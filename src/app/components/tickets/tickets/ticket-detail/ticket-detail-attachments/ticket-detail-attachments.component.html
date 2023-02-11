@@ -6,8 +6,11 @@
         ></div>
         <div
             (click)="hiddenAttachments = !hiddenAttachments"
-            class="attachment-item__show-hide-btn pointer"
-        ></div>
+            class="qt-button --sm --gray attachment-item__show-hide-btn pointer"
+        >
+          <div class="icon__download qt-bg-contain qt-sz-16 qt-mr-4"></div>
+          Download
+        </div>
     </div>
 
     <div
@@ -24,19 +27,28 @@
                 class="attachment-item"
                 [ngClass]="attachment.file.contentType"
             >
-                <div
-                    class="attachment-item__type"
-                    [textContent]="getTypeFile(attachment.file.name)"
-                ></div>
-                <p
+                <div class="qt-sz-36 attachment-item__icon qt-circle qt-mr-8 qt-df qt-ai-c qt-jc-c qt-fs-0">
+                  <div class="icon__attachments qt-sz-16"></div>
+                </div>
+                <div class="qt-w100 ellipsis">
+                  <div
+                    class="attachment-item__text"
                     [textContent]="attachment.file.name"
                     (click)="preview(attachment.file.id,attachment.file.contentType)"
-                ></p>
-
-                <div
-                    class="attachment-item__download pointer"
-                    (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
-                ></div>
+                  ></div>
+                  <div
+                    class="attachment-item__type"
+                  >
+                    <span [textContent]="getTypeFile(attachment.file.name)"></span>
+                    <span class="divider-point"></span>
+                    Download
+                  </div>
+                </div>
+                <div class="icon__category-more qt-pointer qt-sz-16 qt-bg-contain qt-ml-8 qt-fs-0"></div>
+<!--                <div-->
+<!--                    class="attachment-item__download pointer"-->
+<!--                    (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"-->
+<!--                ></div>-->
             </div>
         </ng-template>
     </div>

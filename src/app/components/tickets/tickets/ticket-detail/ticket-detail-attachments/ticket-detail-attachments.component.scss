@@ -1,17 +1,9 @@
 @import "./src/assets/styles/variable";
 
 .attachment-component {
-    padding: 0 32px;
-
-    @media (max-width: 767px) {
-        padding: 0 16px;
-    }
-
     .attached-files-container {
         display: flex;
         flex-wrap: wrap;
-        margin-top: -8px;
-
         @media (max-width: 767px) {
             display: flex !important;
         }
@@ -19,24 +11,29 @@
 
     .attachment-item {
         max-width: 100%;
+        width: 100%;
         display: flex;
-        margin-right: 8px;
-        height: 30px;
         border-radius: 16px;
         border: solid 1px $gray-400--old;
         background-color: $white;
-        padding: 5px 13px 5px 5px;
-        display: flex;
+        padding: 9.5px 12px;
         align-items: center;
+        justify-content: space-between;
         position: relative;
-        margin-top: 8px;
         font-size: 12px;
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
 
-        p {
+        &__text {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 16px;
+            color: $gray-900;
         }
 
         &__header {
@@ -54,41 +51,27 @@
         }
 
         &__count-items {
-            text-transform: uppercase;
-            font-weight: 600;
-            font-size: 10px;
-            color: $primary-2;
-            line-height: 12px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          color: $gray-700;
         }
 
         &__show-hide-btn {
-            width: 32px;
-            height: 32px;
-            border: solid 1px $gray-400--old;
-            background-color: $white;
-            border-radius: 50%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url("/assets/img/icons/download.svg");
-
-            @media (max-width: 767px) {
-                display: none;
-            }
+          padding-left: 8px;
+          padding-right: 8px;
         }
 
         &__type {
-            margin-right: 6px;
-            background: #2170bb;
-            border-radius: 11px;
-            font-size: 10px;
-            font-weight: 600;
-            color: $white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 8px;
-            text-transform: uppercase;
-            height: 20px;
+          margin-top: 4px;
+          border-radius: 11px;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 15px;
+          color: $gray-500;
+          display: flex;
+          align-items: center;
+          text-transform: uppercase;
         }
 
         &__download {
@@ -105,64 +88,8 @@
             background-position: center;
         }
 
-        &:hover {
-            border: solid 1px $primary-1;
-            background-color: $gray-200--old;
-
-            .attachment-item {
-                &__download {
-                    display: block;
-                }
-            }
-        }
-
-        &.text\/plain {
-            .attachment-item {
-                &__type {
-                    background: $gray-600--old;
-                }
-            }
-        }
-
-        &.image\/png {
-            .attachment-item {
-                &__type {
-                    background: $secondary-4;
-                }
-            }
-        }
-
-        &.image\/jpg,
-        &.image\/jpeg {
-            .attachment-item {
-                &__type {
-                    background: $secondary-3;
-                }
-            }
-        }
-
-        &.application\/pdf {
-            .attachment-item {
-                &__type {
-                    background: $error;
-                }
-            }
-        }
-
-        &.archive\/zip {
-            .attachment-item {
-                &__type {
-                    background: $error;
-                }
-            }
-        }
-
-        &.image\/bmp {
-            .attachment-item {
-                &__type {
-                    background: $secondary-3;
-                }
-            }
+        &__icon {
+          background-color: $gray-100;
         }
     }
 }

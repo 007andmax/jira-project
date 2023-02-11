@@ -351,6 +351,10 @@
   border: 1px solid $gray-200;
   border-radius: 6px;
   margin: 0 0 0 8px;
+
+  .detail-ticket-txt {
+    display: none;
+  }
 }
 /deep/ .ticket-updates__ticket-info-container .icon__calendar {
   display: inline-block;
