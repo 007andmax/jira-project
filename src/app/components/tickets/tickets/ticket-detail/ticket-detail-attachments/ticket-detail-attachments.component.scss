@@ -24,6 +24,9 @@
         &:not(:last-child) {
           margin-bottom: 8px;
         }
+        &:hover {
+          border-color: $gray-400;
+        }
 
         &__text {
             white-space: nowrap;
