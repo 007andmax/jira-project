@@ -432,7 +432,7 @@
   border-radius: unset !important;
   padding-left: 108px;
   border-color: $gray-200;
-  background: $gray-50;
+  background-color: $white;
   border-left: unset !important;
   border-right: unset !important;
   margin-right: 0;
@@ -440,6 +440,7 @@
 
   &:hover {
     border-color: $gray-200 !important;
+    background-color: $gray-50;
   }
 }
 
@@ -461,8 +462,38 @@
 /deep/ .mat-standard-chip .mat-chip-remove.mat-icon {
   width: 14px;
 }
-/deep/ div.autocomplete-user-tags {
-  width: 793px !important;
+/deep/ div.cps-block__visible-user {
+  div.autocomplete-user-tags {
+    width: 240px !important;
+
+    .dropdown-item {
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+
+      p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+        margin-bottom: 4px;
+      }
+      span {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 16px;
+        color: $gray-600 !important;
+        padding-left: 32px;
+        flex: 100%;
+      }
+      .icon__globe,
+      .icon__private {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+      }
+    }
+  }
 }
 /deep/ div.mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
   background: $white;

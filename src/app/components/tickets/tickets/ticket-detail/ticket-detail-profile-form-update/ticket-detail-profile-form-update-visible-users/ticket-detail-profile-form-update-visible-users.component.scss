@@ -15,4 +15,8 @@
   font-size: 14px;
   line-height: 17px;
   color: $gray-500;
+
+  &.show {
+    display: flex !important;
+  }
 }

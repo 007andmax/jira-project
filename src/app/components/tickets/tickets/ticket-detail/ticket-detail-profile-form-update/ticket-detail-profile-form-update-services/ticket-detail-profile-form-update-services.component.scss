@@ -145,3 +145,11 @@
     padding-right: 8px;
   }
 }
+/deep/ app-ticket-profile-updates-service-timepicker {
+  width: 100%;
+
+  .start-end-timer .start,
+  .start-end-timer .end {
+    width: 100% !important;
+  }
+}

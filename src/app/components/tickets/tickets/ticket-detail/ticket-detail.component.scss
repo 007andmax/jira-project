@@ -1011,6 +1011,9 @@ app-ticket-edit-aside-right-panel {
       padding: 16px;
       overflow: auto;
       height: 100%;
+      border-right: 1px solid $gray-200;
+
+      @include dropdown-scrollbar;
     }
     &__sidebar-info {
       width: 360px;
@@ -1022,8 +1025,9 @@ app-ticket-edit-aside-right-panel {
     &__sidebar-menu {
       width: 56px;
       padding: 16px 8px;
-      background-color: $white;
-      overflow: auto;
+      background-color: $gray-50;
+      overflow-x: hidden;
+      overflow-y: auto;
       height: 100%;
       border-left: 1px solid $gray-200;
 
