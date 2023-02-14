@@ -52,7 +52,10 @@
                 class="icn-sm icn-product-save icon__active_subscription"
             ></i>
         </span>
-        <div class="qt-input-block__dot priority-dot medium"></div>
+        <div
+            class="qt-input-block__dot priority-dot"
+            [ngClass]="editItem.type.toLowerCase()"
+        ></div>
         <i
             class="loading xs"
             *ngIf="preloader"
@@ -70,16 +73,14 @@
                 let-i="index"
             >
                 <button
-                  class="qt-df qt-ai-c"
-                  ngbDropdownItem
-                  (click)="onSelect(item)"
-                  [title]="reduceItemName(item)"
-                  [ngClass]="{'--selected':isSelected(item)}"
+                    class="qt-df qt-ai-c"
+                    ngbDropdownItem
+                    (click)="onSelect(item)"
+                    [title]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
                 >
-                  <span class="priority-dot {{ item.type.toLowerCase() }} qt-mr-8"></span>
-                  <span
-                    [textContent]="reduceItemName(item)"
-                  ></span>
+                    <span class="priority-dot {{ item.type.toLowerCase() }} qt-mr-8"></span>
+                    <span [textContent]="reduceItemName(item)"></span>
                 </button>
             </ng-template>
         </div>

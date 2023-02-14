@@ -64,6 +64,7 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
 import { TicketDetailAddAssignedUserComponent } from './ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component';
 import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 import { TicketDetailAttachmentsComponent } from './ticket-detail-attachments/ticket-detail-attachments.component';
+import { TicketDetailLinkedAgentsComponent } from './ticket-detail-linked-agents/ticket-detail-linked-agents.component';
 
 
 
@@ -102,7 +103,8 @@ import { TicketDetailAttachmentsComponent } from './ticket-detail-attachments/ti
         TicketDetailChangeCompanyComponent,
         TicketDetailAddAssignedUserComponent,
         TicketDetailEditTagsComponent,
-        TicketDetailAttachmentsComponent
+        TicketDetailAttachmentsComponent,
+        TicketDetailLinkedAgentsComponent
 
     ],
     imports: [

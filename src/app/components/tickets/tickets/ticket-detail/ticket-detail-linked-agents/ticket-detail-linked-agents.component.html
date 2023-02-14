@@ -1,0 +1,55 @@
+<div
+    class="qt-input-block --required"
+    ngbDropdown
+>
+    <div class="qt-input-block__label">Linked Agents</div>
+    <div
+        class="device-user pointer"
+        [ngClass]="{'has-placeholder': !selectedDevice}"
+        ngbDropdownToggle
+    >
+        <div
+            class="selected-user"
+            *ngIf="selectedDevice"
+        >
+            <i class="icon__devices-grey qt-sz-16 qt-bg-contain"></i>
+            {{getLabelDevice(selectedDevice)}}
+            <i
+                class="icn-sm icon__close--light-gray"
+                (click)="removeItem()"
+            ></i>
+        </div>
+    </div>
+    <div
+        class="select-wrapper"
+        ngbDropdownMenu
+    >
+        <input
+            type="text"
+            autocomplete="off"
+            class="qt-dropdown-input"
+            (input)="onSearch($event)"
+        >
+        <div class="content">
+            <div>
+                <div
+                    class="dropdown-item"
+                    *ngFor="let item of devicesList; let i = index"
+                    (click)="selected(item)"
+                    ngbDropdownItem
+                >
+                    <label class="qt-checkbox pointer">
+                        <div
+                            class="name"
+                            [textContent]="getLabelDevice(item)"
+                        ></div>
+                        <i
+                            *ngIf="isSeleted(item)"
+                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                        ></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

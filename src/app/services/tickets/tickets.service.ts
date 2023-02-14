@@ -229,7 +229,12 @@ export class TicketsService {
   }
   public linkedAgentToTicket(id, value) {
     let data = { value: value };
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/linkedAgent`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/linkedAgent`, data).pipe(
+      tap(data => {
+        this.toastrService.success((value === "") ? "The agent has been successfully unlinked" : "The agent has been successfully linked");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public assignUserToTicket(id, value) {
     let data = { value: value };
