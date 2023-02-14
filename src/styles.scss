@@ -2138,7 +2138,7 @@ app-quotes-item {
       color: $primary-2;
       background: transparent;
       z-index: -1;
-      &::after {
+      &::after { // TODO check this style
         content: '';
         position: absolute;
         width: 62px;

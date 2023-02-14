@@ -101,6 +101,9 @@
           }
           .qt-button-square {
             display: none;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
           }
           &:hover {
             border: solid 1px $primary-1 !important;

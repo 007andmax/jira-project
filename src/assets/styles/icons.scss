@@ -783,6 +783,17 @@
   &__timer-counter {
     background-image: url("/assets/img/icons/timer-counter.svg");
   }
+  &__time {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/time.svg");
+    mask-image: url("/assets/img/icons/time.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__timer {
     background-color: $gray-500;
     -webkit-mask-position: center;

@@ -537,6 +537,7 @@
 /deep/ .cps-block__visible-user {
   .dropdown-menu {
     width: 537px;
+    border-radius: 6px;
     .cps-block__photo {
       width: 20px;
       height: 20px;
@@ -544,8 +545,8 @@
     }
     .dropdown-item {
       height: 36px;
-      margin-bottom: 4px;
-      padding: 8px;
+      //margin-bottom: 4px; // TODO check this style
+      padding: 6.5px 8px;
       border-radius: 6px;
       align-items: center;
       cursor: pointer;

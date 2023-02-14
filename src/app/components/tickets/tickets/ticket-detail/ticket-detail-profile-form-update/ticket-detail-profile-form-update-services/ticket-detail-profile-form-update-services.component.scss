@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
 
 .service-item {
     &:only-of-type {
@@ -147,9 +148,59 @@
 }
 /deep/ app-ticket-profile-updates-service-timepicker {
   width: 100%;
-
+  .start-end-timer__label {
+    width: 100%;
+    position: relative;
+  }
+  .icon__time {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 14px;
+  }
   .start-end-timer .start,
   .start-end-timer .end {
     width: 100% !important;
+    margin-right: 0;
+  }
+}
+
+/deep/ .ui-timepicker-wrapper.ui-timepicker-with-duration,
+/deep/ .ui-timepicker-wrapper.ui-timepicker-positioned-top {
+  width: 281px;
+  min-height: 156px;
+  background: $white;
+  border-radius: 6px;
+  padding: 8px;
+
+  .ui-timepicker-pm,
+  .ui-timepicker-duration {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-900;
+  }
+  .ui-timepicker-pm {
+    padding: 7px 12px;
+    background-color: $white;
+    border-radius: 6px;
+    height: 32px;
+    margin-bottom: 4px;
+    @include dropdown-scrollbar;
+
+    &:hover {
+      background-color: $gray-50;
+    }
+  }
+  .ui-timepicker-list li {
+    padding: 7px 12px;
+    background-color: $white;
+    border-radius: 6px;
+    height: 32px;
+    margin-bottom: 4px;
+
+    &:hover {
+      background-color: $gray-50;
+    }
   }
 }

@@ -44,11 +44,17 @@
     .tag-icon {
       display: none;
     }
-    .mat-chip.mat-standard-chip .mat-chip-remove:before {
-      top: 1px;
-      right: 0;
-      width: 16px;
-      height: 16px;
+    .mat-chip.mat-standard-chip .mat-chip-remove {
+      width: 12px;
+      height: 12px;
+      margin-left: 4px;
+
+      &:before {
+        top: 1px;
+        right: 0;
+        width: 12px;
+        height: 14px;
+      }
     }
 
     .mat-chip-remove {
