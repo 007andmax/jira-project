@@ -8,4 +8,9 @@ import { TicketProfileAttachmentsComponent } from '../../ticket-edit-aside/ticke
 })
 export class TicketDetailAttachmentsComponent extends TicketProfileAttachmentsComponent {
 
+  deleteFile(id) {
+    this.ticketsService.deleteFile(id).subscribe(data => {
+
+    })
+  }
 }

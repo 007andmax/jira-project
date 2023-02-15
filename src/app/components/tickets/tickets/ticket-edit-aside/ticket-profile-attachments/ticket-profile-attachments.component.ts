@@ -12,7 +12,7 @@ import { PreviewAttachmentStateService } from '../preview-attachment/services/pr
 export class TicketProfileAttachmentsComponent implements OnInit {
   @Input() attachments: Array<TicketProfileAttachment> = [];
   hiddenAttachments: boolean = true;
-  constructor(private ticketsService: TicketsService,
+  constructor(public ticketsService: TicketsService,
     private previewAttachmentStateService: PreviewAttachmentStateService) { }
 
   ngOnInit() { }

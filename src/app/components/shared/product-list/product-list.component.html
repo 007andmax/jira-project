@@ -45,8 +45,8 @@
                     (click)="onCreateProduct()"
                     *ngIf="getPermissions('MANAGE_PRODUCTS')"
                 >
-                  <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
-                  Create Product
+                    <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+                    Create Product
                 </div>
             </div>
             <div class="qt-input-search">
@@ -100,7 +100,16 @@
                             </div>
                         </div>
                         <div class="qt-button-square pointer qt-ml-20 qt-bg-white">
-                          <div class="icon__add-grey qt-sz-16 qt-bg-contain"></div>
+                            <app-dynamic-tooltip
+                                [content]="'Click to add'"
+                                [position]="'top'"
+                                #pointerTooltip
+                            ></app-dynamic-tooltip>
+                            <div
+                                class="icon__add-grey qt-sz-16 qt-bg-contain"
+                                (mouseenter)="pointerTooltip.show($event.target)"
+                                (mouseleave)="pointerTooltip.hide()"
+                            ></div>
                         </div>
                     </div>
                 </ng-template>

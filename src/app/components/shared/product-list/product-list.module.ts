@@ -4,6 +4,7 @@ import { ProductListComponent } from './product-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipsModule, MatSelectModule } from '@angular/material';
 import { FilterModule } from 'src/app/pipe/filter/filter.module';
+import { DynamicTooltipModule } from '../dynamic-tooltip/dynamic-tooltip.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FilterModule } from 'src/app/pipe/filter/filter.module';
         NgbModule,
         MatSelectModule,
         MatChipsModule,
-        FilterModule
+        FilterModule,
+        DynamicTooltipModule
     ],
     exports: [ProductListComponent]
 

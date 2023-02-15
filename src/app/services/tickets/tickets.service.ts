@@ -124,6 +124,14 @@ export class TicketsService {
     }).pipe(
       tap(data => data));
   }
+  public deleteFile(fileID) {
+    return this.http.delete(this.apiUrl + `v2/tickets/attachment/${fileID}`).pipe(
+      tap(data => {
+        this.toastrService.success("The attachment has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public deleteUpdate(id, updateId) {
 
     return this.http.delete(this.apiUrl + `v2/tickets/${id}/updates/${updateId}`).pipe(
