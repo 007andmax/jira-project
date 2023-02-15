@@ -5,17 +5,17 @@
         </div>
         <div class="ticket-updates__ticket-line"></div>
     </div>
-    <span
-        class="tag__modern ticket-updates__service-tag-completed"
-        *ngIf="product.completed && showCompleteLabel"
-        [textContent]="'Completed on ' + getDate(product.date)"
-    ></span>
-    <span
-        class="tag__modern ticket-updates__service-tag-completed"
-        *ngIf="!product.completed && product.date && showCompleteLabel"
-        [textContent]="'Due date - ' + getDate(product.date)"
-    ></span>
     <div class="ticket-updates__ticket-info-container qt-w100">
+         <span
+           class="tag__modern ticket-updates__service-tag-completed qt-dib qt-mb-16"
+           *ngIf="product.completed && showCompleteLabel"
+           [textContent]="'Completed on ' + getDate(product.date)"
+         ></span>
+        <span
+          class="tag__modern ticket-updates__service-tag-completed qt-dib qt-mb-16"
+          *ngIf="!product.completed && product.date && showCompleteLabel"
+          [textContent]="'Due date - ' + getDate(product.date)"
+        ></span>
         <div class="ticket-updates__ticket-info">
             <div class="ticket-updates__ticket-header qt-df">
                 <div class="ticket-updates__ticket-header-name">Product Name</div>

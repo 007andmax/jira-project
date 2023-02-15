@@ -87,6 +87,11 @@
   color: transparent;
 }
 
+/deep/ .tab-pane__table-cell .tech-users-container .ticket-updates__photo-people {
+  width: 28px;
+  height: 28px;
+}
+
 /deep/ .tab-pane__table-cell .tech-users-container .tech__user-icon {
   width: 28px;
   height: 28px;
@@ -102,7 +107,6 @@
 /deep/ .ticket-updates__delete {
   -webkit-mask-size: 16px;
   mask-size: 16px;
-  margin-right: 8px;
 }
 /deep/ .icon__task-pending {
   background-size: contain;

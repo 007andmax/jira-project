@@ -10,37 +10,41 @@
 
 .device-user {
     outline: none;
-    min-height: 40px;
-    padding: 4px 4px 0;
-    color: $gray-900;
-    font-size: 14px;
-    line-height: 17px;
-    border: 1px solid $gray-200;
-    border-radius: 6px;
-    width: 100%;
+    min-height: 32px;
     display: flex;
     flex-flow: row wrap;
-
-    &::placeholder {
-        color: $gray-400;
-    }
-
-    &:hover {
-        border-color: $gray-300;
-    }
-
-    &:focus {
-        outline: none;
-        border-color: $blue-light-600;
-    }
+    gap: 8px;
 }
 
 .select-wrapper {
     @include dropdown-menu;
     @include dropdown-content;
     overflow: hidden;
-    height: 228px;
+    width: 288px;
+    height: 235px;
     left: unset;
+
+    .content {
+      padding: 2px 8px 0;
+    }
+
+    .qt-input-search {
+      margin: 8px 8px 0;
+      height: 36px;
+
+      input {
+        padding-left: 40px;
+        height: 100%;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+
+        &::placeholder {
+          color: $gray-400;
+        }
+      }
+    }
 
     .dropdown-item {
         @include dropdown-checkbox-item;
@@ -115,24 +119,27 @@
 }
 
 .selected-user {
-    border: 1px solid $background;
-    border-radius: 3px;
-    padding: 0 5px;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    padding: 8px;
     height: 32px;
     display: flex;
     align-items: center;
-    background: $gray-100--old;
-    margin: 0 4px 4px 0;
+    background-color: $white;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
 
     i {
         position: static;
-        margin-left: 4px;
 
-        @media (max-width: 767px) {
-            padding: 12px;
-            margin-left: 4px;
-            transform: translateY(0);
-        }
+        //@media (max-width: 767px) { // TODO check this style
+        //    padding: 12px;
+        //    margin-left: 4px;
+        //    transform: translateY(0);
+        //}
+
+      &.icon__close--light-gray  {
+        margin-left: 4px;
+      }
     }
 
     .icon__devices-grey,
