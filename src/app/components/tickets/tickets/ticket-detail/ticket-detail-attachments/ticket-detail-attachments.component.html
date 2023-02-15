@@ -4,7 +4,11 @@
             class="attachment-item__count-items"
             [textContent]="attachments.length + ' Attachments'"
         ></div>
-        <div class="qt-button --sm --gray attachment-item__show-hide-btn pointer">
+        <div
+            class="qt-button --sm --gray attachment-item__show-hide-btn pointer"
+            (click)="downloadAll()"
+            *ngIf="attachments.length > 0"
+        >
             <div class="icon__download qt-bg-contain qt-sz-16 qt-mr-4"></div>
             Download
         </div>
@@ -18,7 +22,7 @@
             [ngForTrackBy]="trackById"
         >
             <div
-                class="attachment-item"
+                class="attachment-item pointer"
                 [ngClass]="attachment.file.contentType"
                 ngbDropdown
                 [container]="'body'"

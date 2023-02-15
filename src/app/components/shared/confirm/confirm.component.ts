@@ -53,6 +53,7 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'CHANGE_COMMISSION_SERVICE'
       && this.action !== 'RESTORE_USER'
       && this.action !== 'REMOVE_TASK_TICKET'
+      && this.action !== 'REMOVE_ATTACHMENT'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }

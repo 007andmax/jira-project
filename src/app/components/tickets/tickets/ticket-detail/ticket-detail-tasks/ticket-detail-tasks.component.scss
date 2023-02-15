@@ -23,6 +23,9 @@
 
   &.--selected {
     background-color: $gray-50;
+    /deep/ .detail-ticket-txt {
+      color: #98A2B3 !important;
+    }
 
     .ticket-status-table__status {
       input {

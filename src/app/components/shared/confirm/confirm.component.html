@@ -126,6 +126,38 @@
     </div>
 </div>
 <div
+    class="remove-user-dialog"
+    *ngIf="action === 'REMOVE_ATTACHMENT'"
+>
+    <div
+        class="remove-user-dialog__close qt-sz-16 icon__close"
+        (click)=closeModal()
+    ></div>
+    <div class="remove-user-dialog__body">
+        <div class="remove-user-dialog__title qt-fw-600 qt-mb-5">Delete Attachment</div>
+        <div
+            class="remove-user-dialog__subtitle"
+            [textContent]="message"
+        ></div>
+    </div>
+    <div class="remove-user-dialog__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="qt-button --red qt-mr-12"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<div
     class="archive-modal"
     *ngIf="action === 'ARCHIVE_COMPANY'"
 >

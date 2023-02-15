@@ -85,6 +85,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    (<any>document.body.querySelector(".nav-header")).style.display = "none";
     this.getTicket(this.activateRoute.snapshot.params['id']);
     this.listColors = this.ticketsStateService.getListStatusColor();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -325,6 +326,29 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
   }
+  claimTicket() {
+    let currentUser = this.usersStateService.getCurrentUser();
+    var indexUser = this.ticketProfile.multiAssignedUsers.findIndex(user => user.id === currentUser.id);
+    var value = [];
+    this.ticketProfile.multiAssignedUsers.forEach(user => {
+      value.push(user.id);
+    })
+
+    if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== currentUser.id && indexUser === -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+      value.push(currentUser.id);
+    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== currentUser.id && indexUser > -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id === currentUser.id && indexUser === -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+    } else if (!this.ticketProfile.assignedUser && indexUser === -1) {
+      value.push(currentUser.id);
+    }
+    this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
+      // this.ticketMessage.isClaimTicket = false;
+    })
+
+  };
   ngOnDestroy(): void {
     this.ticketProfile = new TicketProfile();
     this.modeSubject = 'view';
@@ -338,6 +362,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     //  this.ticketMessage.reset();
     this.appService.toggleMobileAside(false);
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
+    (<any>document.body.querySelector(".nav-header")).style.display = "flex";
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
