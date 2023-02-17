@@ -23,7 +23,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   showLoadMoreUpdates = true;
   showPreloader: boolean = false;
   constructor(private ticketsService: TicketsService,
-    private confirmStateService: ConfirmStateService,
+    public confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
     public ticketsPermissionsService: TicketsPermissionsService,) { }
@@ -46,6 +46,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   }
 
   removeService() {
+    console.log("removeService");
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
     })
   }

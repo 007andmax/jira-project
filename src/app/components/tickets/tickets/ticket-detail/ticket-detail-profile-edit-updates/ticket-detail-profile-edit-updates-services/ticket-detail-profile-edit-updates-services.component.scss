@@ -1,0 +1,218 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+
+.service-item {
+    &:only-of-type {
+        margin-bottom: 32px;
+    }
+
+    +.service-item {
+        margin: 16px 0;
+        padding-top: 8px;
+        border-top: 1px solid $gray-200;
+
+        .service-item__first-line {
+            padding-top: 8px;
+        }
+    }
+
+    &__first-line {
+        padding: 16px 16px 8px;
+    }
+
+    &__btn-add {
+        border: none;
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        margin-left: 8px;
+        display: flex;
+        background-color: $gray-700--old;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &__btn-del {
+        margin: 8px 16px 14px;
+        width: calc(100% - 32px);
+    }
+
+    &__input {
+        //position: relative; // TODO check this style
+        //height: 40px;
+        //margin-right: 8px;
+        //padding: 10px 12px;
+        //flex-grow: 1;
+        //outline: none;
+
+        @media (max-width: 767px) {
+            margin-right: 0;
+            margin-top: 42px;
+        }
+
+        @media (max-width: 767px) {
+            &::after {
+                position: absolute;
+                content: "Service";
+                left: 0;
+                top: -28px;
+                color: $primary-2;
+                font-size: 13px;
+                line-height: 20px;
+                letter-spacing: 0;
+                font-weight: 600;
+            }
+        }
+
+        //&::placeholder {
+        //  color: $gray-600--old;
+        //}
+        &.description {
+            width: 100%;
+        }
+
+        &.time {
+            width: 148px;
+        }
+
+        &.date {
+            width: 146px;
+            margin: 0;
+        }
+    }
+
+    .editable-description {
+        margin: 0 16px;
+    }
+
+    .cps-block__content-textarea {
+        min-height: 64px;
+        display: block;
+        visibility: visible;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+
+        &::placeholder {
+            color: $gray-400;
+        }
+    }
+
+    /deep/ .date-picker {
+        margin-right: 0;
+        position: relative;
+
+        &:before {
+            position: absolute;
+            content: "Select Date";
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $gray-400;
+        }
+
+        .icon__calendar {
+            right: 14px;
+            transform: translateY(-50%);
+        }
+
+        input {
+            padding-right: 36px;
+            text-align: right;
+            padding-left: 100px;
+        }
+    }
+}
+
+/deep/ .service-item__first-line app-ticket-profile-updates-service-duration {
+    width: 50%;
+}
+
+/deep/ .service-item__first-line app-date-picker {
+    width: 50%;
+}
+
+/deep/ ticket-detail-profile-form-update-header {
+    .qt-button {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+/deep/ app-ticket-profile-updates-service-timepicker {
+    width: 100%;
+
+    .start-end-timer__label {
+        width: 100%;
+        position: relative;
+    }
+
+    .icon__time {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 14px;
+    }
+
+    .start-end-timer .start,
+    .start-end-timer .end {
+        width: 100% !important;
+        margin-right: 0;
+    }
+}
+
+/deep/ .ui-timepicker-wrapper.ui-timepicker-with-duration,
+/deep/ .ui-timepicker-wrapper.ui-timepicker-positioned-top {
+    width: 281px;
+    min-height: 156px;
+    background: $white;
+    border-radius: 6px;
+    padding: 8px;
+
+    .ui-timepicker-pm,
+    .ui-timepicker-duration {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-900;
+    }
+
+    .ui-timepicker-pm {
+        padding: 7px 12px;
+        background-color: $white;
+        border-radius: 6px;
+        height: 32px;
+        margin-bottom: 4px;
+        @include dropdown-scrollbar;
+
+        &:hover {
+            background-color: $gray-50;
+        }
+    }
+
+    .ui-timepicker-list li {
+        padding: 7px 12px;
+        background-color: $white;
+        border-radius: 6px;
+        height: 32px;
+        margin-bottom: 4px;
+
+        &:hover {
+            background-color: $gray-50;
+        }
+    }
+}

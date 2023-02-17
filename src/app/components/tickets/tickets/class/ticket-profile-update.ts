@@ -18,6 +18,7 @@ export class TicketProfileUpdate {
     updateSource: string;
     updatedAt: number;
     user: CurrentUser;
+    userUpdate: CurrentUser;
     constructor(data) {
         this.attachments = data.attachments;
         this.createdAt = data.createdAt;
@@ -39,5 +40,11 @@ export class TicketProfileUpdate {
         this.updateSource = data.updateSource;
         this.updatedAt = data.updatedAt;
         this.user = new CurrentUser(data.user);
+        if (this.services.length > 0) this.userUpdate = new CurrentUser(this.services[0].user);
+        if (this.products.length > 0) this.userUpdate = new CurrentUser(this.products[0].user);
+
+    }
+    public setUserUpdate(data) {
+        this.userUpdate = data;
     }
 }

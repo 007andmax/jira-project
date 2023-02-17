@@ -27,13 +27,13 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   userService = [];
   listTechUsers = [];
   constructor(public ticketsListService: TicketsListService,
-    private confirmStateService: ConfirmStateService,
-    private ticketStateService: TicketStateService,
+    public confirmStateService: ConfirmStateService,
+    public ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     private appService: AppService,
-    private modalService: NgbModal) { }
+    public modalService: NgbModal) { }
 
   ngOnInit() {
     if (!this.product.date) this.product.date = new Date().getTime();

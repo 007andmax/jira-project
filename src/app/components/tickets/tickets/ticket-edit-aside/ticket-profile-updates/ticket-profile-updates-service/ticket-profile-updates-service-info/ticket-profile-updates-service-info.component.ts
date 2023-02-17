@@ -28,19 +28,19 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   listTechUsers = [];
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
-    private confirmStateService: ConfirmStateService,
-    private ticketStateService: TicketStateService,
+    public confirmStateService: ConfirmStateService,
+    public ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService,
     private appService: AppService,
-    private modalService: NgbModal) { }
+    public modalService: NgbModal) { }
 
   ngOnInit() {
     if (this.service.user) this.userService = [this.service.user];
     this.listTechUsers = this.getUsersForAssign();
     if (this.service.date) this.setDateWithTimeOffset();
   }
-  edit() {
+  public edit() {
     if (this.appService.checkMobile()) {
       this.ticketStateService.setEditUpdate({ updateId: this.update.id, update: this.service, type: this.update.type });
       return;
@@ -72,7 +72,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
       minutes = Math.round(timeInMinutes - (hours * 60));
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
   }
-  isIOSDevice() {
+  public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
   setComplete() {

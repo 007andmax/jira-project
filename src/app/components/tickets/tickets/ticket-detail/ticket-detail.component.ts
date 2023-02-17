@@ -51,6 +51,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
+  showEditUpdate: boolean = false;
   tabFormUpdate: string;
   openedMobileEditUpdate = false;
   modeSubject = 'view';
@@ -167,6 +168,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
     })
     this.sub.add(onInit);
+    let onEditUpdateByForm = this.ticketStateService.onEditUpdateByForm.subscribe(data => {
+      this.showEditUpdate = true;
+    })
+    this.sub.add(onEditUpdateByForm);
   }
   onAddUpdate(data) {
     this.tabFormUpdate = data;

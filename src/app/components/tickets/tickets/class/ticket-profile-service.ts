@@ -32,6 +32,7 @@ export class TicketProfileService {
     totalSum: number;
     updatedAt: number;
     user: CurrentUser;
+    validateQuantity: boolean = true;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -54,6 +55,12 @@ export class TicketProfileService {
             this.date = finalDate.getTime();
         }
     }
+    public setComplated(day, month, year) {
+        let current = new Date();
+        let dateDP = new Date(year, month - 1, day);
+        if (current.getDate() === dateDP.getDate() && current.getMonth() === dateDP.getMonth() || dateDP.getTime() < current.getTime()) this.completed = true;
+        if (dateDP.getTime() > current.getTime()) this.completed = false;
+    }
     public setDurationStart(data) {
         this.durationStart = data;
     }
@@ -69,6 +76,16 @@ export class TicketProfileService {
     public setCompleted(data) {
         this.completed = data;
     }
+    public calculateQuantity() {
+        let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
+        if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
+        this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
+        if (this.quantity > 24) this.quantity -= 24;
+        this.setValidateQuantity(true);
+    }
+    public setValidateQuantity(data) {
+        this.validateQuantity = data;
+    }
     public getDateTimeWithTimeOffset(currentCompany) {
         // getting milliseconds of a date, after calculating timeOffSet of the tech user and timeOffset of the technical company
         let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
@@ -77,6 +94,9 @@ export class TicketProfileService {
         companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
         let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
         return new Date(this.date).getTime() + timeOffset;
+    }
+    public setItem(data) {
+        this.item = data;
     }
     public getDateForUpdate(id) {
         let user = (!this.user) ? { id: "" } : this.user;

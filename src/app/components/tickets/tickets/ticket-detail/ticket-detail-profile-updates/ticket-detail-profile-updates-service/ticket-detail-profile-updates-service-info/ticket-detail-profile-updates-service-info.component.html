@@ -7,14 +7,14 @@
     </div>
     <div class="ticket-updates__ticket-info-container">
         <span
-          class="tag__modern ticket-updates__service-tag-completed qt-dib qt-mb-16"
-          *ngIf="service.completed && showCompleteLabel"
-          [textContent]="'Completed on ' + getDate(service.date)"
+            class="tag__modern ticket-updates__service-tag-completed qt-dib qt-mb-16"
+            *ngIf="service.completed && showCompleteLabel"
+            [textContent]="'Completed on ' + getDate(service.date)"
         ></span>
         <span
-          class="tag__modern ticket-updates__service-tag-completed qt-dib qt-mb-16"
-          *ngIf="!service.completed && service.date && showCompleteLabel"
-          [textContent]="'Due date - ' + getDate(service.date)"
+            class="tag__modern ticket-updates__service-tag-completed qt-dib qt-mb-16"
+            *ngIf="!service.completed && service.date && showCompleteLabel"
+            [textContent]="'Due date - ' + getDate(service.date)"
         ></span>
         <div class="ticket-updates__ticket-info">
             <div class="ticket-updates__ticket-header qt-df">
@@ -45,40 +45,6 @@
                 <div class="ticket-updates__service-subinfo">
                     <pre [textContent]="service.description"></pre>
                 </div>
-            </div>
-        </div>
-        <div
-            ngbDropdown
-            *ngIf="!isBlockChange"
-        >
-            <div
-                class="ticket-updates__more icon__more"
-                id="dropdownBasic1"
-                ngbDropdownToggle
-            ></div>
-            <div
-                ngbDropdownMenu
-                aria-labelledby="dropdownBasic1"
-                class="dropdown-menu-qt"
-            >
-                <ul>
-                    <li
-                        ngbDropdownItem
-                        (click)="removeService()"
-                        *ngIf="!isIOSDevice()"
-                    >
-                        <i class="icn-16 icon__archive"></i>
-                        Delete
-                    </li>
-                    <li
-                        ngbDropdownItem
-                        (touchstart)="removeService()"
-                        *ngIf="isIOSDevice()"
-                    >
-                        <i class="icn-16 icon__archive"></i>
-                        Delete
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="qt-df qt-jc-fe qt-ai-c qt-mt-8">
@@ -115,5 +81,37 @@
                 <span [textContent]="(service.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
             </div>
         </div>
+    </div>
+    <div
+        class="qt-button-square-wrap"
+        *ngIf="!isBlockChange"
+    >
+        <div
+            class="qt-button-square qt-button-square__prepend pointer"
+            (click)="edit()"
+            *ngIf="!isIOSDevice()"
+        >
+            <div class="icon__edit qt-sz-16"></div>
+        </div>
+        <div
+            class="qt-button-square qt-button-square__prepend pointer"
+            (touchstart)="edit()"
+            *ngIf="isIOSDevice()"
+        >
+            <div class="icon__edit qt-sz-16"></div>
+        </div>
+        <div
+            class="qt-button-square qt-button-square__afterpend pointer"
+            (click)="removeService()"
+            (mouseenter)="deleteTooltip.show($event.target)"
+            (mouseleave)="deleteTooltip.hide()"
+        >
+            <div class="icon__remove qt-sz-16"></div>
+        </div>
+        <app-dynamic-tooltip
+            [content]="'Delete Service'"
+            [position]="'top'"
+            #deleteTooltip
+        ></app-dynamic-tooltip>
     </div>
 </div>

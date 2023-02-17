@@ -16,9 +16,9 @@ export class TicketProfileUpdatesServiceComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
   constructor(public ticketsListService: TicketsListService,
-    private confirmStateService: ConfirmStateService,
-    private ticketStateService: TicketStateService,
-    private modalService: NgbModal) { }
+    public confirmStateService: ConfirmStateService,
+    public ticketStateService: TicketStateService,
+    public modalService: NgbModal) { }
 
   ngOnInit() {
   }

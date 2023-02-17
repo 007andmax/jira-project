@@ -16,6 +16,7 @@ export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdate: EventEmitter<any> = new EventEmitter();
+  onEditUpdateByForm: EventEmitter<any> = new EventEmitter();
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
   closedTicket: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
@@ -27,11 +28,19 @@ export class TicketStateService {
   ticketRoutingId: string;
   taskForRemove: TicketProfileTask;
   attachmentForRemove: TicketProfileAttachment;
+  updateForEdit: TicketProfileUpdate;
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public editUpdateByFrom(data) {
+    this.updateForEdit = data;
+    this.onEditUpdateByForm.emit(data);
+  }
+  public getUpdateForEdit() {
+    return this.updateForEdit;
   }
   public setAttachmentForRemove(data) {
     this.attachmentForRemove = data;

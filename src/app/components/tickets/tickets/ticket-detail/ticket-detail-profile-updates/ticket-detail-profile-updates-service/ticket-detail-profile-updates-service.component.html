@@ -19,24 +19,12 @@
                 [service]="update.services[0]"
             ></ticket-detail-profile-updates-service-header-info>
         </div>
-        <div class="qt-button-square-wrap">
-            <div
-                class="qt-button-square qt-button-square__prepend pointer"
-                (click)="edit()"
-                *ngIf="!isIOSDevice()"
-            >
-                <div class="icon__edit qt-sz-16"></div>
-            </div>
-            <div
-                class="qt-button-square qt-button-square__prepend pointer"
-                (touchstart)="edit()"
-                *ngIf="isIOSDevice()"
-            >
-                <div class="icon__edit qt-sz-16"></div>
-            </div>
+        <div
+            class="qt-button-square-wrap"
+            *ngIf="!isBlockChange"
+        >
             <div
                 class="qt-button-square qt-button-square__afterpend pointer"
-                *ngIf="!isBlockChange"
                 (click)="remove()"
                 (mouseenter)="deleteTooltip.show($event.target)"
                 (mouseleave)="deleteTooltip.hide()"

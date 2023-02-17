@@ -6,9 +6,3 @@
     [service]="service"
     [showCompleteLabel]="showCompleteLabel"
 ></ticket-detail-profile-updates-service-info>
-<ticket-detail-profile-updates-service-edit
-    [update]="update"
-    *ngIf="editMode"
-    (onEdit)="editMode = false"
-    [service]="service"
-></ticket-detail-profile-updates-service-edit>

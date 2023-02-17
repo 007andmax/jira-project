@@ -188,6 +188,10 @@
                         [lisUpdateUser]="lisUpdateUser"
                         [tab]="tabFormUpdate"
                     ></ticket-detail-profile-form-update>
+                    <ticket-detail-profile-edit-updates
+                        (onCloseForm)="showEditUpdate = false"
+                        *ngIf="showEditUpdate"
+                    ></ticket-detail-profile-edit-updates>
                     <!-- <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"
                 (tagsChange)="onChangeTags($event)"

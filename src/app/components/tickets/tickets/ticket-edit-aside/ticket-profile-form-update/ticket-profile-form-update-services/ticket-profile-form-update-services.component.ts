@@ -43,7 +43,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     private elRef: ElementRef,
     private ticketsStateService: TicketsStateService,
     public companiesStateService: CompaniesStateService,
-    private ticketStateService: TicketStateService) { }
+    public ticketStateService: TicketStateService) { }
 
 
   ngOnInit() {
@@ -86,7 +86,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.addMoreMobileBtn.setDisabled(false);
     this.updateMobileBtn.setDisabled(false);
   }
-  private getServices() {
+  public getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
     this.areTicketsPresented = this.ticketStateService.isTicketsTerminated();
     this.areTicketsPresented = this.ticketStateService.isTicketsPresented();

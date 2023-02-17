@@ -40,7 +40,6 @@ import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-d
 import { TicketDetailProfileUpdatesServiceComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service.component';
 import { TicketDetailProfileUpdatesServiceItemComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-item/ticket-detail-profile-updates-service-item.component';
 import { TicketDetailProfileUpdatesServiceInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-info/ticket-detail-profile-updates-service-info.component';
-import { TicketDetailProfileUpdatesServiceEditComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-edit/ticket-detail-profile-updates-service-edit.component';
 import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component';
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
@@ -65,6 +64,9 @@ import { TicketDetailAddAssignedUserComponent } from './ticket-detail-add-assign
 import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 import { TicketDetailAttachmentsComponent } from './ticket-detail-attachments/ticket-detail-attachments.component';
 import { TicketDetailLinkedAgentsComponent } from './ticket-detail-linked-agents/ticket-detail-linked-agents.component';
+import { TicketDetailProfileEditUpdatesComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component';
+import { TicketDetailProfileEditUpdatesHeaderComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-header/ticket-detail-profile-edit-updates-header.component';
+import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component';
 
 
 
@@ -85,7 +87,6 @@ import { TicketDetailLinkedAgentsComponent } from './ticket-detail-linked-agents
         TicketDetailProfileUpdatesServiceComponent,
         TicketDetailProfileUpdatesServiceItemComponent,
         TicketDetailProfileUpdatesServiceInfoComponent,
-        TicketDetailProfileUpdatesServiceEditComponent,
         TicketDetailProfileUpdatesServiceHeaderInfoComponent,
         TicketDetailTasksComponent,
         TicketDetailHeaderComponent,
@@ -104,7 +105,10 @@ import { TicketDetailLinkedAgentsComponent } from './ticket-detail-linked-agents
         TicketDetailAddAssignedUserComponent,
         TicketDetailEditTagsComponent,
         TicketDetailAttachmentsComponent,
-        TicketDetailLinkedAgentsComponent
+        TicketDetailLinkedAgentsComponent,
+        TicketDetailProfileEditUpdatesComponent,
+        TicketDetailProfileEditUpdatesHeaderComponent,
+        TicketDetailProfileEditUpdatesServicesComponent
 
     ],
     imports: [
