@@ -34,6 +34,7 @@ import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-upd
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
+import { TicketProfileUpdate } from '../class/ticket-profile-update';
 
 @Component({
   selector: 'ticket-detail',
@@ -354,6 +355,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
 
   };
+  onFetchUpdates(resp) {
+    let updates = this.ticketProfile.updates || [];
+    updates = [...updates, ...resp.map(item => {
+      return new TicketProfileUpdate(item);
+    })];
+    this.ticketProfile.updates = updates;
+    this.cd.detectChanges();
+  }
   ngOnDestroy(): void {
     this.ticketProfile = new TicketProfile();
     this.modeSubject = 'view';

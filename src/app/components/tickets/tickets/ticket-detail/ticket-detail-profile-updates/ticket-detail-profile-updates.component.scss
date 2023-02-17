@@ -245,12 +245,13 @@
     cursor: pointer;
     margin: 0 auto;
     font-weight: 600;
+    padding-bottom: 15px;
 
     .loading {
         width: 20px;
         height: 20px;
         right: -28px;
         left: unset;
-        top: calc(50% - 10px);
+        top: calc(50% - 15px);
     }
 }
