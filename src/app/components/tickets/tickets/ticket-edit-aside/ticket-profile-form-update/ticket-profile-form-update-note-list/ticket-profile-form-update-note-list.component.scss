@@ -4,16 +4,28 @@
     position: absolute;
     bottom: 8px;
     right: 8px;
+
+  .dropdown-menu {
+    padding: 0;
+    overflow-x: clip;
+  }
+
+  .app-drop-down__dropdown {
+    button {
+      margin: 0 4px 4px;
+      padding: 7px 12px;
+    }
+  }
 }
 
 .icon__note-list-container {
     display: flex;
 }
 .header-note-list-title {
-    font-size: 11px;
     font-weight: 600;
-    text-transform: uppercase;
-    color: $primary-2;
+    font-size: 16px;
+    line-height: 19px;
+    color: $gray-900;
 }
 .header-note-list-add {
     font-size: 12px;
@@ -22,13 +34,14 @@
     cursor: pointer;
 }
 .header-note-list {
-    padding: 20px 24px;
+    padding: 10px 16px;
+    margin-bottom: 4px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     z-index: 99;
     background: $white;
     top: 0;
-    border-bottom: 1px solid $gray-400--old;
-    box-shadow: 0 0 7px 1px $gray-500--old;
-    justify-content: space-between;
+    border-bottom: 1px solid $gray-200;
 }

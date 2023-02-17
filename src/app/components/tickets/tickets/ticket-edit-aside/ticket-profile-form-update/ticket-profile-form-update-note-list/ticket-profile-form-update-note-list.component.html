@@ -16,7 +16,7 @@
         ngbDropdownMenu
         aria-labelledby="dropdown1"
         class="app-drop-down__dropdown"
-        style="width: 584px;min-height: 120px;max-height: 304px;"
+        style="width: 560px; min-height: 236px; max-height: 236px;"
     >
         <div class="header-note-list">
             <div class="header-note-list-title">Canned Responses</div>
@@ -25,7 +25,10 @@
                 (click)="createResponse()"
                 *ngIf="getPermissions('CREATE_TICKET_NOTE_TEMPLATE')"
             >
-                + Create Response
+              <div class="qt-button --gray --sm select-product__header-add-product ng-star-inserted">
+                <span class="icon__add--grey-500 qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+                Create Product
+              </div>
             </div>
         </div>
         <ng-template

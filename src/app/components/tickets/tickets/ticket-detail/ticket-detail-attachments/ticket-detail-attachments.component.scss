@@ -100,7 +100,7 @@
     }
 }
 
-/deep/ .app-drop-down__dropdown {
+.app-drop-down__dropdown-attachments {
   width: 240px;
   height: 89px;
   padding: 8px;
@@ -113,6 +113,12 @@
     font-size: 14px;
     line-height: 17px;
     color: $gray-900;
+    cursor: pointer;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: $gray-50;
+    }
 
     &:first-child {
       position: relative;

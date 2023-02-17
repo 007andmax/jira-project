@@ -1004,6 +1004,17 @@
   &__search-white {
     background-image: url("/assets/img/icons/search-white.svg");
   }
+  &__spam {
+    background-color: $gray-500;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("/assets/img/icons/spam.svg");
+    mask-image: url("/assets/img/icons/spam.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   &__templete-thumb {
     background-image: url("/assets/img/icons/templete-thumb.svg");
   }

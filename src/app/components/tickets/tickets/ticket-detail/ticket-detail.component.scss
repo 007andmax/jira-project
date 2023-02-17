@@ -964,13 +964,18 @@ app-ticket-edit-aside-right-panel {
 
     &__body {
       width: 900px;
-      padding: 24px;
       overflow: auto;
       height: 100%;
       border-left: 1px solid $gray-200;
       border-right: 1px solid $gray-200;
       background-color: $white;
       @include dropdown-scrollbar;
+
+      &-inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
 
       &-header {
         &-info {
@@ -1104,10 +1109,13 @@ app-ticket-edit-aside-right-panel {
 }
 
 ticket-detail-profile-form-update {
-  position: absolute;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: sticky;
   bottom: 0;
   left: 0;
-  width: 900px;
   background: $white;
   z-index: 3;
 }
