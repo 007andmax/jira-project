@@ -33,6 +33,7 @@ export class TicketProfileProduct {
     updatedAt: number;
     user: CurrentUser;
     serialNumber: string;
+    valdiateSaleCost: boolean = true;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -40,6 +41,7 @@ export class TicketProfileProduct {
             }
             this.item.sale_str = (this.item.sale) ? this.item.sale.toFixed(2) : "0.00";
             this.item.cost_str = (this.item.cost) ? this.item.cost.toFixed(2) : "0.00";
+            if (!this.item.taxes) this.item.taxes = [];
         }
     }
     public setUser(data) {
@@ -77,4 +79,12 @@ export class TicketProfileProduct {
             ticketUpdateId: id
         }
     }
+    public setData(data, index) {
+        this.item = data;
+        this.itemOrder = index;
+    }
+    public setTexes(data) {
+        this.item.taxes = data;
+    }
+
 }

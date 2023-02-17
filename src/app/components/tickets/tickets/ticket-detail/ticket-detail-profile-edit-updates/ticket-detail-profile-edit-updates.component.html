@@ -9,12 +9,11 @@
             [update]="update"
             *ngIf="update.type === 'SERVICE'"
         ></ticket-detail-profile-edit-updates-services>
-        <ticket-detail-profile-form-update-products
+        <ticket-detail-profile-edit-updates-products
             #selectProducts
             *ngIf="update.type === 'PRODUCT'"
-            (onUpdateMobile)="updateMobile()"
-            (onAddMoreMobile)="update()"
-        ></ticket-detail-profile-form-update-products>
+            [update]="update"
+        ></ticket-detail-profile-edit-updates-products>
         <ticket-detail-profile-form-update-support
             *ngIf="update.type === 'QUICK_SUPPORT'"
             (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"

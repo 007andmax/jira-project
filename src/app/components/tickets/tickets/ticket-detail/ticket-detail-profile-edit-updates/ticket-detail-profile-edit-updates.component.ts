@@ -3,6 +3,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
+import { TicketDetailProfileEditUpdatesProductsComponent } from './ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component';
 import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component';
 
 @Component({
@@ -13,6 +14,8 @@ import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail
 export class TicketDetailProfileEditUpdatesComponent implements OnInit {
   @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketDetailProfileEditUpdatesServicesComponent;
+  @ViewChild('selectProducts') selectProducts: TicketDetailProfileEditUpdatesProductsComponent;
+
   @Output() onCloseForm = new EventEmitter();
   update: TicketProfileUpdate;
   isUpdate: boolean = false;
@@ -23,11 +26,17 @@ export class TicketDetailProfileEditUpdatesComponent implements OnInit {
     this.update = this.ticketStateService.getUpdateForEdit();
   }
   save() {
-    /*  if (this.update.type === "PRODUCT") {
-        this.onChangeProducts(this.selectProducts.getSelectedProducts());
-        if (!this.ticketProfileFormUpdate.isValidateProduct() || !this.selectProducts.onValidateProducts()) return;
-        this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
-      }*/
+    if (this.update.type === "PRODUCT") {
+      this.selectProducts.product.valdiateSaleCost = (this.selectProducts.product.item.sale < this.selectProducts.product.item.cost) ? false : true;
+      if (!this.selectProducts.product.valdiateSaleCost) return;
+      this.isUpdate = true;
+      this.updateBtn.setDisabled(true);
+      this.ticketsService.updateExpense(this.selectProducts.product.getDateForUpdate(this.update.id)).subscribe(data => {
+        this.isUpdate = false;
+        this.updateBtn.setDisabled(false);
+        this.close();
+      })
+    }
     if (this.update.type === "SERVICE") {
       this.isUpdate = true;
       this.updateBtn.setDisabled(true);

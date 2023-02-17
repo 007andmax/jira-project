@@ -67,6 +67,7 @@ import { TicketDetailLinkedAgentsComponent } from './ticket-detail-linked-agents
 import { TicketDetailProfileEditUpdatesComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component';
 import { TicketDetailProfileEditUpdatesHeaderComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-header/ticket-detail-profile-edit-updates-header.component';
 import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component';
+import { TicketDetailProfileEditUpdatesProductsComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component';
 
 
 
@@ -108,7 +109,8 @@ import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail
         TicketDetailLinkedAgentsComponent,
         TicketDetailProfileEditUpdatesComponent,
         TicketDetailProfileEditUpdatesHeaderComponent,
-        TicketDetailProfileEditUpdatesServicesComponent
+        TicketDetailProfileEditUpdatesServicesComponent,
+        TicketDetailProfileEditUpdatesProductsComponent
 
     ],
     imports: [

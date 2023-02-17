@@ -1,0 +1,97 @@
+<div class="cps-block__products-block">
+    <div class="product-item">
+        <div class="product-item__first-line qt-df qt-mb-8">
+            <app-product-list
+                [type]="'TICKET'"
+                [editItem]="product.item"
+                #productDP
+                class="product-item__prodect-list"
+                (selectedProductItem)="selectProduct($event,taxesDropDown)"
+            ></app-product-list>
+        </div>
+        <div>
+            <div class="qt-df qt-jc-sb-md qt-mb-8">
+                <label class="qt-input-block qt-w100 qt-mr-8">
+                    <div class="qt-df">
+                        <span class="qt-input-prefix">Serial No.</span>
+                        <input
+                            class="qt-input-block__input serial-num qt-input-prepend"
+                            [(ngModel)]="product.serialNumber"
+                            type="text"
+                        >
+                    </div>
+                </label>
+                <label class="qt-input-block qt-w100 qt-mr-8">
+                    <span class="qt-df">
+                        <span class="qt-input-prefix">Cost</span>
+                        <input
+                            class="qt-input-block__input cost qt-input-prepend"
+                            number
+                            [money]="true"
+                            [ngModel]="product.item.cost_str"
+                            (change)="onChangeCost($event)"
+                            appToFixed
+                            (blur)="onValidateSaleCost()"
+                            *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                        >
+                        <input
+                            class="qt-input-block__input cost qt-input-prepend"
+                            *ngIf="!getPermissions('VIEW_PRODUCT_COST')"
+                            type="text"
+                            disabled
+                        >
+                    </span>
+                </label>
+                <label class="qt-input-block qt-w100">
+                    <span class="qt-df">
+                        <span class="qt-input-prefix">Qty</span>
+                        <input
+                            class="qt-input-block__input qty qt-input-prepend"
+                            [(ngModel)]="product.quantity"
+                        >
+                    </span>
+                </label>
+            </div>
+            <div class="qt-df qt-jc-sb-md">
+                <app-invoice-form-ticket-edit-taxes
+                    class="qt-taxes-multiselect qt-mr-8 qt-w100"
+                    #taxesDropDown
+                    [selectedTax]="product.item.taxes"
+                    [placeholder]="(product.item.taxes && product.item.taxes.length === 0) ? 'No taxes' : null"
+                    (taxesChange)="onTaxesChange($event)"
+                ></app-invoice-form-ticket-edit-taxes>
+                <label class="qt-input-block qt-w100 qt-mr-8">
+                    <span class="qt-df">
+                        <span class="qt-input-prefix">Price</span>
+                        <input
+                            class="qt-input-block__input price qt-input-prepend"
+                            [ngClass]="{'--input-error':!product.valdiateSaleCost}"
+                            number
+                            [money]="true"
+                            [ngModel]="product.item.sale_str"
+                            (change)="onChangeSale($event)"
+                            appToFixed
+                            (blur)="onValidateSaleCost()"
+                        >
+                        <mat-error
+                            class="invalid-feedback --pos-static"
+                            *ngIf="!product.valdiateSaleCost"
+                        >
+                            Product price can not be lower than cost
+                        </mat-error>
+                    </span>
+                </label>
+                <label class="qt-input-block qt-w100">
+                    <span class="qt-df">
+                        <span class="qt-input-prefix">Discount (%)</span>
+                        <input
+                            class="qt-input-block__input discount qt-input-prepend"
+                            [(ngModel)]="product.discountAmount"
+                            type="text"
+                        >
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
