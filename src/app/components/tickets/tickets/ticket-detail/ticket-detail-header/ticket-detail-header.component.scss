@@ -35,9 +35,6 @@
         align-items: center;
         height: 64px;
         padding: 0 16px;
-        .qt-button {
-            cursor: default;
-        }
     }
 
     &__panel {
@@ -62,4 +59,39 @@
         margin: 0 16px;
     }
 
+}
+
+.ticket-detail-page__dropdown-category-more {
+  &.show {
+    display: flex !important;
+  }
+}
+
+.icon__category-more-dropdown {
+  width: 200px;
+  padding: 8px;
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+
+    i {
+      display: block;
+      flex-shrink: 0;
+      margin-right: 12px;
+    }
+  }
+  li {
+    height: 36px;
+    padding: 10px 6px;
+    margin: 0;
+  }
+  .trash-user-list {
+    color: $red-600;
+    border-top: 1px solid $gray-200;
+
+    i {
+      background-color: $red-600;
+    }
+  }
 }
