@@ -1,5 +1,5 @@
 <div class="ticket-updates__update-block qt-mb-16">
-    <div class="qt-df qt-ai-c qt-mb-16">
+    <div class="qt-df qt-ai-c qt-mb-16 ticket-updates__update-block__inner">
         <div
             class="ticket-updates__ticket-photo"
             [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
@@ -24,12 +24,27 @@
             *ngIf="!isBlockChange"
         >
             <div
-                class="qt-button-square qt-button-square__afterpend pointer"
+              class="qt-button-square qt-button-square__prepend pointer"
+            >
+              <div class="icon__edit qt-sz-16"></div>
+            </div>
+            <div
+              class="qt-button-square qt-button-square__prepend pointer"
+            >
+              <div class="icon__edit qt-sz-16"></div>
+            </div>
+            <div
+              class="qt-button-square qt-button-square__afterpend pointer"
+            >
+              <div class="icon__remove qt-sz-16"></div>
+            </div>
+            <div
+                class="qt-button-square qt-ml-24 pointer"
                 (click)="remove()"
                 (mouseenter)="deleteTooltip.show($event.target)"
                 (mouseleave)="deleteTooltip.hide()"
             >
-                <div class="icon__remove qt-sz-16"></div>
+                <div class="icon__remove--red-600 qt-sz-16"></div>
             </div>
         </div>
     </div>

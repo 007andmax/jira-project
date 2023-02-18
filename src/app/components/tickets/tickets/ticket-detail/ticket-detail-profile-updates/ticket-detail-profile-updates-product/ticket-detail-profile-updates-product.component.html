@@ -1,43 +1,60 @@
 <div class="ticket-updates__update-block qt-mb-16">
-    <div class="qt-df qt-ai-c qt-mb-16">
+    <div>
+      <div class="qt-df qt-ai-c qt-mb-16 ticket-updates__update-block__inner">
         <div
-            class="ticket-updates__ticket-photo"
-            [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
-            [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+          class="ticket-updates__ticket-photo"
+          [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
+          [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
         ></div>
         <div class="qt-f-1">
-            <div class="qt-mb-4">
+          <div class="qt-mb-4">
                 <span
-                    class="ticket-updates__author"
-                    [textContent]="ticketsListService.getUserName(update.user)"
+                  class="ticket-updates__author"
+                  [textContent]="ticketsListService.getUserName(update.user)"
                 >
                 </span>
-                <span class="ticket-updates__add-note">&nbsp;added a product</span>
-            </div>
-            <ticket-detail-profile-updates-product-header-info
-                [date]="update.createdAt"
-                [shares]="update.shares"
-                [product]="update.products[0]"
-            ></ticket-detail-profile-updates-product-header-info>
-            <app-dynamic-tooltip
-                [content]="'Delete Update'"
-                [position]="'top'"
-                #deleteTooltip
-            ></app-dynamic-tooltip>
+            <span class="ticket-updates__add-note">&nbsp;added a product</span>
+          </div>
+          <ticket-detail-profile-updates-product-header-info
+            [date]="update.createdAt"
+            [shares]="update.shares"
+            [product]="update.products[0]"
+          ></ticket-detail-profile-updates-product-header-info>
+          <app-dynamic-tooltip
+            [content]="'Delete Update'"
+            [position]="'top'"
+            #deleteTooltip
+          ></app-dynamic-tooltip>
         </div>
         <div
-            class="qt-button-square-wrap"
-            *ngIf="!isBlockChange"
+          class="qt-button-square-wrap"
+          *ngIf="!isBlockChange"
         >
-            <div
-                class="qt-button-square qt-button-square__afterpend pointer"
-                (click)="remove()"
-                (mouseenter)="deleteTooltip.show($event.target)"
-                (mouseleave)="deleteTooltip.hide()"
-            >
-                <div class="icon__remove qt-sz-16"></div>
-            </div>
+          <div
+            class="qt-button-square qt-button-square__prepend pointer"
+          >
+            <div class="icon__edit qt-sz-16"></div>
+          </div>
+          <div
+            class="qt-button-square qt-button-square__prepend pointer"
+          >
+            <div class="icon__edit qt-sz-16"></div>
+          </div>
+          <div
+            class="qt-button-square qt-button-square__afterpend pointer"
+          >
+            <div class="icon__remove qt-sz-16"></div>
+          </div>
+          <div
+            class="qt-button-square pointer qt-ml-24"
+            (click)="remove()"
+            (mouseenter)="deleteTooltip.show($event.target)"
+            (mouseleave)="deleteTooltip.hide()"
+          >
+            <div class="icon__remove--red-600 qt-sz-16"></div>
+          </div>
         </div>
+      </div>
     </div>
     <ng-template
         ngFor

@@ -81,6 +81,7 @@
                 <li *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)">
                     <a
                         tabindex="-1"
+                        class="dropdown-item"
                         href="javascript:void(0)"
                         (click)="claimTicket()"
                     >
