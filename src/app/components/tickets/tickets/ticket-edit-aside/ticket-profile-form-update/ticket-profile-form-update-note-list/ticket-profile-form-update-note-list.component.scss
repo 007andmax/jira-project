@@ -27,6 +27,7 @@
     line-height: 19px;
     color: $gray-900;
 }
+
 .header-note-list-add {
     font-size: 12px;
     font-weight: 600;
@@ -44,4 +45,9 @@
     background: $white;
     top: 0;
     border-bottom: 1px solid $gray-200;
+
+    .qt-button {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
 }
