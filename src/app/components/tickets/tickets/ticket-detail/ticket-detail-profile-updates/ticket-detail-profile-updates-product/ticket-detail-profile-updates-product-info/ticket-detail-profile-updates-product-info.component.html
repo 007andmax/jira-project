@@ -6,7 +6,10 @@
         <div class="ticket-updates__ticket-line"></div>
     </div>
     <div class="ticket-updates__ticket-info-container qt-w100">
-        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16 ticket-updates-tag__modern-row">
+        <div
+            class="qt-df qt-jc-sb qt-ai-c qt-mb-16 ticket-updates-tag__modern-row"
+            *ngIf="index > 0"
+        >
             <span
                 class="tag__modern ticket-updates__service-tag-completed qt-dib"
                 *ngIf="product.completed && showCompleteLabel"
@@ -25,6 +28,8 @@
                     class="qt-button-square qt-button-square__prepend pointer"
                     (click)="edit()"
                     *ngIf="!isIOSDevice()"
+                    (mouseenter)="editTooltip.show($event.target)"
+                    (mouseleave)="editTooltip.hide()"
                 >
                     <div class="icon__edit qt-sz-16"></div>
                 </div>
@@ -32,6 +37,8 @@
                     class="qt-button-square qt-button-square__prepend pointer"
                     (touchstart)="edit()"
                     *ngIf="isIOSDevice()"
+                    (mouseenter)="editTooltip.show($event.target)"
+                    (mouseleave)="editTooltip.hide()"
                 >
                     <div class="icon__edit qt-sz-16"></div>
                 </div>
@@ -47,6 +54,11 @@
                     [content]="'Delete Product'"
                     [position]="'top'"
                     #deleteTooltip
+                ></app-dynamic-tooltip>
+                <app-dynamic-tooltip
+                    [content]="'Edit'"
+                    [position]="'top'"
+                    #editTooltip
                 ></app-dynamic-tooltip>
             </div>
         </div>
@@ -112,7 +124,7 @@
                     class="icon__active qt-bg-contain qt-mr-6 icn-16"
                     *ngIf="product.completed"
                 ></i>
-                <span [textContent]="(product.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
+                <span [textContent]="(!product.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
             </div>
         </div>
     </div>

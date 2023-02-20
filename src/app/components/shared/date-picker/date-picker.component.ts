@@ -105,7 +105,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
 
   public geTextDate() {
-    if (this.type === 'DETAIL_TICKET') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
+    if (this.type === 'DETAIL_TICKET' || this.type === 'DETAIL_TICKET_UPDATE') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
     return this.date.getTitle();
   }
   /**

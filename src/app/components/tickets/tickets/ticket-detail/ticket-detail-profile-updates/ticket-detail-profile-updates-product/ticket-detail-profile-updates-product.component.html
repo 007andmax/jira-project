@@ -35,6 +35,8 @@
                     class="qt-button-square qt-button-square__prepend pointer"
                     (click)="edit()"
                     *ngIf="!isIOSDevice()"
+                    (mouseenter)="editTooltip.show($event.target)"
+                    (mouseleave)="editTooltip.hide()"
                 >
                     <div class="icon__edit qt-sz-16"></div>
                 </div>
@@ -42,6 +44,8 @@
                     class="qt-button-square qt-button-square__prepend pointer"
                     (touchstart)="edit()"
                     *ngIf="isIOSDevice()"
+                    (mouseenter)="editTooltip.show($event.target)"
+                    (mouseleave)="editTooltip.hide()"
                 >
                     <div class="icon__edit qt-sz-16"></div>
                 </div>
@@ -57,6 +61,11 @@
                     [content]="'Delete Product'"
                     [position]="'top'"
                     #deleteProduct
+                ></app-dynamic-tooltip>
+                <app-dynamic-tooltip
+                    [content]="'Edit'"
+                    [position]="'top'"
+                    #editTooltip
                 ></app-dynamic-tooltip>
                 <div
                     class="qt-button-square pointer qt-ml-24"
