@@ -7,26 +7,48 @@
     </div>
     <div class="ticket-updates__ticket-info-container qt-w100">
         <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16 ticket-updates-tag__modern-row">
-           <span
-             class="tag__modern ticket-updates__service-tag-completed qt-dib"
-             *ngIf="product.completed && showCompleteLabel"
-             [textContent]="'Completed on ' + getDate(product.date)"
-           ></span>
-          <span
-            class="tag__modern ticket-updates__service-tag-completed qt-dib"
-            *ngIf="!product.completed && product.date && showCompleteLabel"
-            [textContent]="'Due date - ' + getDate(product.date)"
-          ></span>
-          <div class="qt-button-square-wrap qt-button-square-wrap__edit qt-mr-24">
-            <div class="qt-button-square qt-button-square__prepend pointer">
-              <div class="icon__edit qt-sz-16"></div>
+            <span
+                class="tag__modern ticket-updates__service-tag-completed qt-dib"
+                *ngIf="product.completed && showCompleteLabel"
+                [textContent]="'Completed on ' + getDate(product.date)"
+            ></span>
+            <span
+                class="tag__modern ticket-updates__service-tag-completed qt-dib"
+                *ngIf="!product.completed && product.date && showCompleteLabel"
+                [textContent]="'Due date - ' + getDate(product.date)"
+            ></span>
+            <div
+                class="qt-button-square-wrap qt-button-square-wrap__edit qt-mr-24"
+                *ngIf="!isBlockChange && update.products.length > 1"
+            >
+                <div
+                    class="qt-button-square qt-button-square__prepend pointer"
+                    (click)="edit()"
+                    *ngIf="!isIOSDevice()"
+                >
+                    <div class="icon__edit qt-sz-16"></div>
+                </div>
+                <div
+                    class="qt-button-square qt-button-square__prepend pointer"
+                    (touchstart)="edit()"
+                    *ngIf="isIOSDevice()"
+                >
+                    <div class="icon__edit qt-sz-16"></div>
+                </div>
+                <div
+                    class="qt-button-square qt-button-square__afterpend pointer"
+                    (click)="removeProduct()"
+                    (mouseenter)="deleteTooltip.show($event.target)"
+                    (mouseleave)="deleteTooltip.hide()"
+                >
+                    <div class="icon__remove qt-sz-16"></div>
+                </div>
+                <app-dynamic-tooltip
+                    [content]="'Delete Product'"
+                    [position]="'top'"
+                    #deleteTooltip
+                ></app-dynamic-tooltip>
             </div>
-            <div class="qt-button-square qt-button-square__prepend pointer">
-              <div class="icon__edit qt-sz-16"></div>
-            </div>
-            <div class="qt-button-square qt-button-square__afterpend pointer">
-              <div class="icon__remove qt-sz-16"></div></div>
-          </div>
         </div>
         <div class="ticket-updates__ticket-info">
             <div class="ticket-updates__ticket-header qt-df">
@@ -94,36 +116,4 @@
             </div>
         </div>
     </div>
-<!--    <div-->
-<!--        class="qt-button-square-wrap"-->
-<!--        *ngIf="!isBlockChange"-->
-<!--    >-->
-<!--        <div-->
-<!--            class="qt-button-square qt-button-square__prepend pointer"-->
-<!--            (click)="edit()"-->
-<!--            *ngIf="!isIOSDevice()"-->
-<!--        >-->
-<!--            <div class="icon__edit qt-sz-16"></div>-->
-<!--        </div>-->
-<!--        <div-->
-<!--            class="qt-button-square qt-button-square__prepend pointer"-->
-<!--            (touchstart)="edit()"-->
-<!--            *ngIf="isIOSDevice()"-->
-<!--        >-->
-<!--            <div class="icon__edit qt-sz-16"></div>-->
-<!--        </div>-->
-<!--        <div-->
-<!--            class="qt-button-square qt-button-square__afterpend pointer"-->
-<!--            (click)="removeProduct()"-->
-<!--            (mouseenter)="deleteTooltip.show($event.target)"-->
-<!--            (mouseleave)="deleteTooltip.hide()"-->
-<!--        >-->
-<!--            <div class="icon__remove qt-sz-16"></div>-->
-<!--        </div>-->
-<!--        <app-dynamic-tooltip-->
-<!--            [content]="'Delete Product'"-->
-<!--            [position]="'top'"-->
-<!--            #deleteTooltip-->
-<!--        ></app-dynamic-tooltip>-->
-<!--    </div>-->
 </div>

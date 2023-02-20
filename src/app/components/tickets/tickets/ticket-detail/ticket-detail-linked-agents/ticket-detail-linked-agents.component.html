@@ -1,11 +1,14 @@
 <div
     class="qt-input-block --required"
     ngbDropdown
+    container="body"
 >
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
-      <span class="qt-input-block__label">Linked Agents</span>
-      <div class="qt-button --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add">
-        <span class="icon__link-agent qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span> Add </div>
+        <span class="qt-input-block__label">Linked Agents</span>
+        <div class="qt-button --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add">
+            <span class="icon__link-agent qt-sz-16 qt-bg-contain qt-dib qt-mr-4 qt-button-icon"></span>
+            Add
+        </div>
     </div>
     <div
         class="device-user pointer"
@@ -29,13 +32,13 @@
         ngbDropdownMenu
     >
         <div class="qt-input-search">
-          <input
-            type="text"
-            autocomplete="off"
-            class="qt-dropdown-input"
-            placeholder="Search Agents"
-            (input)="onSearch($event)"
-          >
+            <input
+                type="text"
+                autocomplete="off"
+                class="qt-dropdown-input"
+                placeholder="Search Agents"
+                (input)="onSearch($event)"
+            >
         </div>
         <div class="content">
             <div>

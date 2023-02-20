@@ -22,27 +22,42 @@
         <div
             class="qt-button-square-wrap"
             *ngIf="!isBlockChange"
+            [ngClass]="classActions"
         >
             <div
-              class="qt-button-square qt-button-square__prepend pointer"
+                class="qt-button-square qt-button-square__prepend pointer"
+                (click)="edit()"
+                *ngIf="!isIOSDevice() && update.services.length == 1"
             >
-              <div class="icon__edit qt-sz-16"></div>
+                <div class="icon__edit qt-sz-16"></div>
             </div>
             <div
-              class="qt-button-square qt-button-square__prepend pointer"
+                class="qt-button-square qt-button-square__prepend pointer"
+                (touchstart)="edit()"
+                *ngIf="isIOSDevice() && update.services.length == 1"
             >
-              <div class="icon__edit qt-sz-16"></div>
+                <div class="icon__edit qt-sz-16"></div>
             </div>
             <div
-              class="qt-button-square qt-button-square__afterpend pointer"
+                class="qt-button-square qt-button-square__afterpend pointer"
+                (click)="removeService()"
+                *ngIf="update.services.length == 1"
+                (mouseenter)="deleteTooltip.show($event.target)"
+                (mouseleave)="deleteTooltip.hide()"
             >
-              <div class="icon__remove qt-sz-16"></div>
+                <div class="icon__remove qt-sz-16"></div>
             </div>
+            <app-dynamic-tooltip
+                [content]="'Delete Service'"
+                [position]="'top'"
+                #deleteTooltip
+            >
+            </app-dynamic-tooltip>
             <div
                 class="qt-button-square qt-ml-24 pointer"
                 (click)="remove()"
-                (mouseenter)="deleteTooltip.show($event.target)"
-                (mouseleave)="deleteTooltip.hide()"
+                (mouseenter)="deleteUpdate.show($event.target)"
+                (mouseleave)="deleteUpdate.hide()"
             >
                 <div class="icon__remove--red-600 qt-sz-16"></div>
             </div>
@@ -51,7 +66,7 @@
     <app-dynamic-tooltip
         [content]="'Delete Update'"
         [position]="'top'"
-        #deleteTooltip
+        #deleteUpdate
     ></app-dynamic-tooltip>
     <ng-template
         ngFor
@@ -65,6 +80,8 @@
             [service]="service"
             [isBlockChange]="isBlockChange"
             [showCompleteLabel]="i > 0"
+            (mouseenter)="setClassForActions('--show')"
+            (mouseleave)="setClassForActions('')"
         ></ticket-detail-profile-updates-service-item>
     </ng-template>
     <!-- <app-ticket-profile-updates-footer

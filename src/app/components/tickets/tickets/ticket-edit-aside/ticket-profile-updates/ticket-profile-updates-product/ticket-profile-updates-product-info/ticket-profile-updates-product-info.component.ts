@@ -79,7 +79,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.ticketsService.updateExpense(this.product.getDateForUpdate(this.update.id)).subscribe(data => {
     })
   }
-  isIOSDevice() {
+  public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
   public onChangeUser(data) {
