@@ -8,4 +8,5 @@ import { TicketProfileUpdatesServiceItemComponent } from '../../../../ticket-edi
 })
 export class TicketDetailProfileUpdatesServiceItemComponent extends TicketProfileUpdatesServiceItemComponent {
   @Input() showCompleteLabel: boolean = false;
+  @Input() index: number;
 }

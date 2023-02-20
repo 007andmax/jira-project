@@ -34,8 +34,8 @@ export class TicketDetailProfileUpdatesServiceComponent extends TicketProfileUpd
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
-  setClassForActions(data) {
-    this.classActions = data;
+  setClassForActions(i, data) {
+    if (i == 0) this.classActions = data;
   }
 
 }

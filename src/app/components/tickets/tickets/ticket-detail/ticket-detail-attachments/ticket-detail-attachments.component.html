@@ -29,13 +29,13 @@
             >
                 <div
                     class="qt-sz-36 attachment-item__icon qt-circle qt-mr-8 qt-df qt-ai-c qt-jc-c qt-fs-0"
-                    (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
+                    (click)="preview(attachment.file.id,attachment.file.contentType)"
                 >
                     <div class="icon__attachments qt-sz-16"></div>
                 </div>
                 <div
                     class="qt-w100 ellipsis"
-                    (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
+                    (click)="preview(attachment.file.id,attachment.file.contentType)"
                 >
                     <div
                         class="attachment-item__text"

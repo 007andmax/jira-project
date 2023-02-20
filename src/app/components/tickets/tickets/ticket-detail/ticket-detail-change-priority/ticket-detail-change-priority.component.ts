@@ -12,9 +12,9 @@ import { TitleListType } from '../../tickets-header/class/title-list-type';
 })
 export class TicketDetailChangePriorityComponent extends DropDownComponent {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  list: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
+  list: Array<TitleListType> = [new TitleListType('High Priority', 'HIGH'),
   new TitleListType('Medium Priority', 'MEDIUM'),
-  new TitleListType('High Priority', 'HIGH')];
+  new TitleListType('Low Priority', 'LOW')];
   constructor(public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
     public ticketsService: TicketsService) {
@@ -25,6 +25,7 @@ export class TicketDetailChangePriorityComponent extends DropDownComponent {
     this.class = ['qt-dropdown'];
     this.field = 'title';
     this.isBlockClear = true;
+    this.sort = false;
     this.selectedItem = this.list.find(item => item.type == this.ticketProfile.priorityLevel);
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);

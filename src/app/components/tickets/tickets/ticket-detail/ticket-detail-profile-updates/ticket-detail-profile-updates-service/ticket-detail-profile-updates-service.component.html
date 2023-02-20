@@ -27,21 +27,20 @@
             <div
                 class="qt-button-square qt-button-square__prepend pointer"
                 (click)="edit()"
-                *ngIf="!isIOSDevice() && update.services.length == 1"
+                *ngIf="!isIOSDevice()"
             >
                 <div class="icon__edit qt-sz-16"></div>
             </div>
             <div
                 class="qt-button-square qt-button-square__prepend pointer"
                 (touchstart)="edit()"
-                *ngIf="isIOSDevice() && update.services.length == 1"
+                *ngIf="isIOSDevice()"
             >
                 <div class="icon__edit qt-sz-16"></div>
             </div>
             <div
                 class="qt-button-square qt-button-square__afterpend pointer"
                 (click)="removeService()"
-                *ngIf="update.services.length == 1"
                 (mouseenter)="deleteTooltip.show($event.target)"
                 (mouseleave)="deleteTooltip.hide()"
             >
@@ -80,8 +79,9 @@
             [service]="service"
             [isBlockChange]="isBlockChange"
             [showCompleteLabel]="i > 0"
-            (mouseenter)="setClassForActions('--show')"
-            (mouseleave)="setClassForActions('')"
+            [index]="i"
+            (mouseenter)="setClassForActions(i,'--show')"
+            (mouseleave)="setClassForActions(i,'')"
         ></ticket-detail-profile-updates-service-item>
     </ng-template>
     <!-- <app-ticket-profile-updates-footer

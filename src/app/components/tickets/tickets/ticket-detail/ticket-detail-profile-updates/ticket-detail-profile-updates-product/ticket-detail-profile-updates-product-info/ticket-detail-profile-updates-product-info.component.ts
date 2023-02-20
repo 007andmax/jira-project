@@ -11,7 +11,7 @@ import { TicketProfileUpdatesProductInfoComponent } from '../../../../ticket-edi
   styleUrls: ['./ticket-detail-profile-updates-product-info.component.scss']
 })
 export class TicketDetailProfileUpdatesProductInfoComponent extends TicketProfileUpdatesProductInfoComponent {
-
+  @Input() index: number;
   @Input() showCompleteLabel: boolean = false;
 
   edit() {

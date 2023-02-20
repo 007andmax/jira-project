@@ -35,7 +35,7 @@ export class TicketDetailProfileUpdatesProductComponent extends TicketProfileUpd
     update.products = [new TicketProfileProduct(JSON.parse(JSON.stringify(this.update.products[0])))];
     this.ticketStateService.editUpdateByFrom(update);
   }
-  setClassForActions(data) {
-    this.classActions = data;
+  setClassForActions(i, data) {
+    if (i == 0) this.classActions = data;
   }
 }

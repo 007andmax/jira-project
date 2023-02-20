@@ -7,6 +7,7 @@
         [isBlockClear]="true"
         [editItem]="selectedTicketStatus"
         [list]="list"
+        [sort]="true"
         [isDisabled]="ticketProfile.status === 'COMPLETED' || ticketProfile.status === null"
         (onSelectedItem)="changeTicketStatus($event)"
     ></app-drop-down>

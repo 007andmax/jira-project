@@ -12,6 +12,7 @@ import { TicketProfileUpdatesServiceInfoComponent } from '../../../../ticket-edi
 })
 export class TicketDetailProfileUpdatesServiceInfoComponent extends TicketProfileUpdatesServiceInfoComponent {
   @Input() showCompleteLabel: boolean = false;
+  @Input() index: number;
 
 
   edit() {
