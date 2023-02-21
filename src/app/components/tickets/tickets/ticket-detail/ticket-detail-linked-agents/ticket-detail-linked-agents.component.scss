@@ -7,13 +7,21 @@
         width: 100%;
     }
 }
-
+/deep/ ticket-detail-linked-agents .qt-input-block  .device-user {
+  &.has-placeholder:before {
+    content: unset;
+  }
+}
 .device-user {
     outline: none;
     min-height: 32px;
     display: flex;
     flex-flow: row wrap;
     gap: 8px;
+
+  @media (max-width: 767px) {
+    padding: 0 16px 14px 16px;
+  }
 }
 
 .select-wrapper {

@@ -10,18 +10,21 @@
             class="qt-df qt-jc-sb qt-ai-c qt-mb-16 ticket-updates-tag__modern-row"
             *ngIf="index > 0"
         >
-            <span
-                class="tag__modern ticket-updates__service-tag-completed qt-dib"
+            <div class="qt-df qt-ai-c">
+              <div class="icn-16 icon__calendar pointer qt-mr-8 qt-fs-0"></div>
+              <span
+                class="ticket-updates__tag-completed --completed"
                 *ngIf="product.completed && showCompleteLabel"
                 [textContent]="'Completed on ' + getDate(product.date)"
-            ></span>
-            <span
-                class="tag__modern ticket-updates__service-tag-completed qt-dib"
+              ></span>
+              <span
+                class="ticket-updates__tag-completed"
                 *ngIf="!product.completed && product.date && showCompleteLabel"
                 [textContent]="'Due date - ' + getDate(product.date)"
-            ></span>
+              ></span>
+            </div>
             <div
-                class="qt-button-square-wrap qt-button-square-wrap__edit qt-mr-24"
+                class="qt-button-square-wrap qt-button-square-wrap__edit"
                 *ngIf="!isBlockChange && index > 0"
             >
                 <div

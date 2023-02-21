@@ -346,7 +346,7 @@
 }
 
 /deep/ .ticket-updates__ticket-info-container .input-group {
-  width: 130px;
+  width: 126px;
   padding: 1px 8px;
   border: 1px solid $gray-200;
   border-radius: 6px;
@@ -356,14 +356,14 @@
     display: none;
   }
 }
-/deep/ .ticket-updates__ticket-info-container .icon__calendar {
+/deep/ app-date-picker .ticket-updates__ticket-info-container .icon__calendar {
   display: inline-block;
   position: static;
   margin: 0;
   transform: translateY(3px);
 }
 /deep/ .ticket-updates__ticket-info-container .qt-input-block__input {
-  width: 90px;
+  width: 85px;
   padding: 0;
   border: unset;
   box-shadow: unset;
@@ -373,4 +373,23 @@
   font-size: 13px;
   line-height: 16px;
   color: $gray-500;
+}
+/deep/ .ticket-updates__tag-completed {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: $gray-500;
+
+  &.--completed {
+    color: $green-700;
+  }
+}
+.ticket-updates-tag__modern-row {
+  min-height: 36px;
+}
+/deep/ .ticket-updates__ticket-info-container app-date-picker .icon__calendar {
+  display: inline-block;
+  position: static;
+  margin: 0;
+  transform: translateY(3px);
 }
