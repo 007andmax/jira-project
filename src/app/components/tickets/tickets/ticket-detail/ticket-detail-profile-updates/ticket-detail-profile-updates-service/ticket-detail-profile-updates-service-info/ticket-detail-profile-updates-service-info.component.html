@@ -11,17 +11,17 @@
             *ngIf="index > 0"
         >
             <div class="qt-df qt-ai-c">
-              <div class="icn-16 icon__calendar pointer qt-mr-8 qt-fs-0"></div>
-              <span
-                class="ticket-updates__tag-completed --completed"
-                *ngIf="service.completed && showCompleteLabel"
-                [textContent]="'Completed on ' + getDate(service.date)"
-              ></span>
-              <span
-                class="ticket-updates__tag-completed"
-                *ngIf="!service.completed && service.date && showCompleteLabel"
-                [textContent]="'Due date - ' + getDate(service.date)"
-              ></span>
+                <div class="icn-16 icon__calendar pointer qt-mr-8 qt-fs-0"></div>
+                <span
+                    class="ticket-updates__tag-completed --completed"
+                    *ngIf="service.completed && showCompleteLabel"
+                    [textContent]="'Completed on ' + getDate(service.date)"
+                ></span>
+                <span
+                    class="ticket-updates__tag-completed"
+                    *ngIf="!service.completed && service.date && showCompleteLabel"
+                    [textContent]="'Due date - ' + getDate(service.date)"
+                ></span>
             </div>
             <div
                 class="qt-button-square-wrap"
@@ -121,11 +121,11 @@
             >
                 <i
                     class="icon__inactive qt-bg-contain icn-16 qt-mr-6"
-                    *ngIf="!service.completed"
+                    *ngIf="service.completed"
                 ></i>
                 <i
                     class="icon__active qt-bg-contain icn-16 qt-mr-6"
-                    *ngIf="service.completed"
+                    *ngIf="!service.completed"
                 ></i>
                 <span [textContent]="(!service.completed) ? 'Mark Completed' : 'Mark Incomplete'"></span>
             </div>

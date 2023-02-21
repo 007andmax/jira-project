@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 
 
@@ -24,6 +24,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Input() userList = [];
   @Input() placement = 'top-left';
   @Input() type: string;
+  @Input() container: string;
   users = [];
   reqUsers = [];
   currentUsers = [];
@@ -33,6 +34,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Output() onSelected = new EventEmitter<any>();
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

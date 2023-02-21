@@ -4,6 +4,8 @@
         ngbDropdown
         [autoClose]="'outside'"
         [placement]="placement"
+        #assignedUserDp="ngbDropdown"
+        [container]="container"
     >
         <mat-chip-list
             #chipList
@@ -33,6 +35,7 @@
                 </div>
             </mat-chip>
             <input
+                *ngIf="type != 'DETAIL_TICKET_ASSIGNED_USER'"
                 #userInput
                 class="pointer"
                 [formControl]="userCtrl"
@@ -48,32 +51,43 @@
             ngbDropdownMenu
             aria-labelledby="dropdown"
         >
-            <mat-option
-                class="qt-ai-c"
-                *ngFor="let user of users"
-                [value]="user"
-                (click)="selected(user)"
+            <input
+                *ngIf="type == 'DETAIL_TICKET_ASSIGNED_USER'"
+                #userInput
+                class="pointer"
+                [formControl]="userCtrl"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (input)="onSearchUser($event)"
             >
-                <div class="assigne-user-item">
-                    <div
-                        class="assigne-user-avatar"
-                        [textContent]="getAssignedUserNameForAvatar(user)"
-                        [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
-                    ></div>
-                    <div
-                        class="assigne-user-name"
-                        [textContent]="getUserName(user)"
-                    ></div>
-                    <span
-                        class="assigne-user-email"
-                        [textContent]="user.primaryEmail"
-                    ></span>
-                    <i
-                        *ngIf="isSelected(user)"
-                        class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-                    ></i>
-                </div>
-            </mat-option>
+            <div class="autocomplete-container">
+                <mat-option
+                    class="qt-ai-c"
+                    *ngFor="let user of users"
+                    [value]="user"
+                    (click)="selected(user)"
+                >
+                    <div class="assigne-user-item">
+                        <div
+                            class="assigne-user-avatar"
+                            [textContent]="getAssignedUserNameForAvatar(user)"
+                            [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
+                        ></div>
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(user)"
+                        ></div>
+                        <span
+                            class="assigne-user-email"
+                            [textContent]="user.primaryEmail"
+                        ></span>
+                        <i
+                            *ngIf="isSelected(user)"
+                            class="icon__assign-user-check qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                        ></i>
+                    </div>
+                </mat-option>
+            </div>
         </div>
     </mat-form-field>
 </div>

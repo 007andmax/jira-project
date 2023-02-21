@@ -9,5 +9,14 @@ import { TicketEditTagsComponent } from '../../ticket-edit-aside/ticket-edit-tag
 export class TicketDetailEditTagsComponent extends TicketEditTagsComponent {
 
 
+  public selected(tag): void {
+    // this.init = true;
+    let find = this.selectedTag.find(item => item.id === tag.id);
+    if (!find) {
+      this.selectedTag.push(tag);
+    }
+    this.isChangeInput = false;
+    this.tagsChange.emit(this.selectedTag);
+  }
 
 }

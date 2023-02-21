@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
 
 .dropdown-menu {
     transform: translate(0, 0) !important;
@@ -6,7 +7,11 @@
     left: 56px !important;
     width: 270px;
 }
-
+/deep/ .ticket-tags-container {
+  .dropdown-item {
+    @include dropdown-item;
+  }
+}
 /deep/ .ticket-edit-tags {
     padding: 0;
 

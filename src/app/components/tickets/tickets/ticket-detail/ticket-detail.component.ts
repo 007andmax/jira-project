@@ -35,6 +35,7 @@ import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
+import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 
 @Component({
   selector: 'ticket-detail',
@@ -83,6 +84,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     private addUsersNotifyStateService: AddUsersNotifyStateService,
     public activateRoute: ActivatedRoute,
     public websocketService: WebsocketService,
+    private datePickerStateService: DatePickerStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -104,6 +106,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
+      console.log("ticket", ticket);
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
@@ -139,6 +142,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
             this.ticketProfile.addAttachment(attachments[i]);
           }
         }
+        this.cd.detectChanges();
+        this.datePickerStateService.onInitReset();
       }
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
@@ -191,6 +196,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       this.ticketTasks.getTicketTasks(id);
       if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
+      // this.ticketProfileUpdates.
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
         //  if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
@@ -200,7 +206,20 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
+  onChangeTags(data) {
+    this.ticketProfile.tags = data;
+    let tags = this.ticketProfile.tags.map(item => {
+      return {
+        id: item.id,
+        word: item.word,
+        colorCode: 0,
+        usedCounter: item.usedCounter,
+      }
+    })
+    this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
 
+    })
+  }
   onDeleteForever() {
     this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
     })
