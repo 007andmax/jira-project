@@ -28,7 +28,7 @@
                     <ticket-detail-info-status [ticketProfile]="ticketProfile"></ticket-detail-info-status>
                     <div class="ticket-detail-page-title qt-mt-10 qt-mb-16 qt-mr-24 qt-ml-24">
                         <div
-                            class="ticket-detail-page-title__text"
+                            class="ticket-detail-page-title__text pointer"
                             [hidden]="modeSubject === 'edit'"
                             (click)="toggleSubject()"
                         >
@@ -162,7 +162,7 @@
                                     (onOutSide)="toggleNote()"
                                 >
                                     <div
-                                        class="ticket-detail-page__editor"
+                                        class="ticket-detail-page__editor pointer"
                                         [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS')}"
                                         (blur)="modeDescription = 'edit'"
                                         [attr.contenteditable]="!appService.checkMobile() && getPermissions('EDIT_TICKETS')"

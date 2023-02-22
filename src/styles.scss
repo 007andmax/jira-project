@@ -3792,6 +3792,10 @@ app-ticket-edit-aside {
     width: calc(100% - 32px);
     padding-left: 44px;
 
+    + app-ticket-profile-updates-footer .ticket-updates__update-info {
+      margin-top: 8px;
+    }
+
     .ticket-updates__delete {
       @media (max-width: 767px) {
         display: none;

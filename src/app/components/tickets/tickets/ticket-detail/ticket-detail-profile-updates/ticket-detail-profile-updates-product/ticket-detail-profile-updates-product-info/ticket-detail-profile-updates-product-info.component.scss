@@ -276,7 +276,7 @@
             }
         }
         /deep/ .input-group {
-          width: 131px;
+          //width: 131px; // TODO check this style
           padding: 1px 12px;
           border: 1px solid $gray-200;
           border-radius: 6px;

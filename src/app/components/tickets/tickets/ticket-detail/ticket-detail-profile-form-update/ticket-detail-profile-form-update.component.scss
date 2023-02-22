@@ -508,9 +508,13 @@
 /deep/ div.autocomplete-user-tags .mat-option:hover {
   background-color: $gray-50 !important;
 }
-/deep/ .dropdown-menu {
+/deep/ ticket-detail-profile-form-update .dropdown-menu {
   padding: 8px;
   max-height: 174px;
+}
+/deep/ .ticket-detail-page-content__sidebar-preview .autocomplete-user-tags {
+  max-height: 292px;
+  min-height: 292px;
 }
 /deep/ div.autocomplete-user-tags .mat-option .assigne-user-name {
   font-weight: 500;
