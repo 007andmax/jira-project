@@ -12,7 +12,9 @@
                         class="ticket-updates__author"
                         [textContent]="ticketsListService.getUserName(update.user)"
                     ></span>
-                    <span class="ticket-updates__add-note">&nbsp;added a note</span>
+                    <span class="ticket-updates__add-note">
+                        &nbsp;added a {{update.noteType === 'PRIVATE' ? 'private' : 'public'}} note
+                    </span>
                     <ticket-detail-profile-updates-header-info
                         [date]="update.createdAt"
                         [shares]="update.shares"

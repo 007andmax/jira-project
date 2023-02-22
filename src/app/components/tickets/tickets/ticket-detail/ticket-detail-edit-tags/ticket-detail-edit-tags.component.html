@@ -60,12 +60,13 @@
             aria-labelledby="dropdownServices"
         >
             <div class="qt-input-search">
-              <input
-                placeholder="Search Tags"
-                class="pointer"
-                autocomplete="new-password"
-                (input)="onSearch($event)"
-              >
+                <input
+                    id="search-dropdown"
+                    placeholder="Search Tags"
+                    class="pointer"
+                    autocomplete="new-password"
+                    (input)="onSearch($event)"
+                >
             </div>
             <div class="ticket-tags-container">
                 <ng-template

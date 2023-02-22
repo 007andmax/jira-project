@@ -41,7 +41,8 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     public tagsService: TagsService,
     private tagsState: TagsStateService,
     public tagsRealTimeService: TagsRealTimeService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public elRef: ElementRef
   ) { }
 
   /**

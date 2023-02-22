@@ -12,16 +12,6 @@
         <div>
             <div class="qt-df qt-jc-sb-md qt-mb-8">
                 <label class="qt-input-block qt-w100 qt-mr-8">
-                    <div class="qt-df">
-                        <span class="qt-input-prefix">Serial No.</span>
-                        <input
-                            class="qt-input-block__input serial-num qt-input-prepend"
-                            [(ngModel)]="product.serialNumber"
-                            type="text"
-                        >
-                    </div>
-                </label>
-                <label class="qt-input-block qt-w100 qt-mr-8">
                     <span class="qt-df">
                         <span class="qt-input-prefix">Cost</span>
                         <input
@@ -42,7 +32,7 @@
                         >
                     </span>
                 </label>
-                <label class="qt-input-block qt-w100">
+                <label class="qt-input-block qt-w100 qt-mr-8">
                     <span class="qt-df">
                         <span class="qt-input-prefix">Qty</span>
                         <input
@@ -51,16 +41,7 @@
                         >
                     </span>
                 </label>
-            </div>
-            <div class="qt-df qt-jc-sb-md">
-                <app-invoice-form-ticket-edit-taxes
-                    class="qt-taxes-multiselect qt-mr-8 qt-w100"
-                    #taxesDropDown
-                    [selectedTax]="product.item.taxes"
-                    [placeholder]="(product.item.taxes && product.item.taxes.length === 0) ? 'No taxes' : null"
-                    (taxesChange)="onTaxesChange($event)"
-                ></app-invoice-form-ticket-edit-taxes>
-                <label class="qt-input-block qt-w100 qt-mr-8">
+                <label class="qt-input-block qt-w100">
                     <span class="qt-df">
                         <span class="qt-input-prefix">Price</span>
                         <input
@@ -81,7 +62,19 @@
                         </mat-error>
                     </span>
                 </label>
-                <label class="qt-input-block qt-w100">
+            </div>
+            <div class="qt-df qt-jc-sb-md">
+                <label class="qt-input-block qt-w100 qt-mr-8">
+                    <div class="qt-df">
+                        <span class="qt-input-prefix">Serial No.</span>
+                        <input
+                            class="qt-input-block__input serial-num qt-input-prepend"
+                            [(ngModel)]="product.serialNumber"
+                            type="text"
+                        >
+                    </div>
+                </label>
+                <label class="qt-input-block qt-w100 qt-mr-8">
                     <span class="qt-df">
                         <span class="qt-input-prefix">Discount (%)</span>
                         <input
@@ -91,6 +84,13 @@
                         >
                     </span>
                 </label>
+                <app-invoice-form-ticket-edit-taxes
+                    class="qt-taxes-multiselect qt-mr-8 qt-w100"
+                    #taxesDropDown
+                    [selectedTax]="product.item.taxes"
+                    [placeholder]="(product.item.taxes && product.item.taxes.length === 0) ? 'No taxes' : null"
+                    (taxesChange)="onTaxesChange($event)"
+                ></app-invoice-form-ticket-edit-taxes>
             </div>
         </div>
     </div>

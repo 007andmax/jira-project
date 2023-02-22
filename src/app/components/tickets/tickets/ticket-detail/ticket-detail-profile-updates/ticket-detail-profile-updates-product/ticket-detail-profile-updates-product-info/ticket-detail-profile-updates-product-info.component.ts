@@ -17,6 +17,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent extends TicketProfil
   edit() {
     let update = new TicketProfileUpdate(JSON.parse(JSON.stringify(this.update)));
     update.products = [new TicketProfileProduct(JSON.parse(JSON.stringify(this.product)))];
+    update.setUserUpdate(this.product.user);
     this.ticketStateService.editUpdateByFrom(update);
   }
   removeProduct() {

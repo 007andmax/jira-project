@@ -50,7 +50,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
 
     })
   }
-  isSeleted(item) {
-    return this.selectedUserAndDevices.find(element => element.id === item.id);
+  isSeletedDevice(item) {
+    return this.selectedDevice && this.selectedDevice.id === item.id;
   }
 }

@@ -18,6 +18,7 @@ export class TicketDetailProfileUpdatesServiceInfoComponent extends TicketProfil
   edit() {
     let update = new TicketProfileUpdate(JSON.parse(JSON.stringify(this.update)));
     update.services = [new TicketProfileService(JSON.parse(JSON.stringify(this.service)))];
+    update.setUserUpdate(this.service.user);
     this.ticketStateService.editUpdateByFrom(update);
   }
   removeService() {
