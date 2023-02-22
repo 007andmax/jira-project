@@ -55,16 +55,18 @@
             </mat-chip-list>
         </mat-form-field>
         <div
-            class="dropdown-menu"
+            class="dropdown-menu ticket-detail-tag__dropdown-menu"
             ngbDropdownMenu
             aria-labelledby="dropdownServices"
         >
-            <input
-                placeholder="Type characters and hit tab"
+            <div class="qt-input-search">
+              <input
+                placeholder="Search Tags"
                 class="pointer"
                 autocomplete="new-password"
                 (input)="onSearch($event)"
-            >
+              >
+            </div>
             <div class="ticket-tags-container">
                 <ng-template
                     ngFor

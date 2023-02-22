@@ -1071,6 +1071,7 @@ app-quotes-item {
 
     .qt-checkbox {
       span {
+        min-width: 16px;
         width: 16px;
         height: 16px;
         line-height: 0;
@@ -3005,18 +3006,13 @@ ngb-typeahead-window {
   display: inline-block;
 }
 //  ticket edit aside
-//.ticket-updates__service-tag-completed { // TODO check this style
-//  margin-left: auto;
-//  margin-right: 0 !important;
-//  margin-top: 8px;
-//  display: flex;
-//  width: fit-content;
-//  margin-bottom: -28px;
-//
-//  @media (max-width: 767px) {
-//    margin: 0;
-//  }
-//}
+.ticket-updates__service-tag-completed { // TODO check this style
+  @media (max-width: 767px) {
+    display: flex;
+    width: fit-content;
+    margin: 0;
+  }
+}
 app-ticket-profile-updates-note {
   .ticket-updates__author-line {
     width: 100%;
@@ -3085,12 +3081,22 @@ app-ticket-profile-updates-note {
   font-size: 14px;
   line-height: 17px;
   color: $gray-900;
+
+  @media (max-width: 767px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 .ticket-updates__add-note { // TODO move to component ?
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: $gray-500;
+
+  @media (max-width: 767px) {
+    font-size: 13px;
+    line-height: 24px;
+  }
 }
 .ticket-updates__update-info {
     font-weight: 400;
@@ -3507,38 +3513,38 @@ app-ticket-profile-form-update {
   margin-bottom: 15px;
 }
 
-//.ticket-updates { // TODO check this style
-//  &__update-block {
-//    position: relative;
-//    border-bottom: 1px solid $gray-400--old;
-//    padding-bottom: 16px;
-//    margin-bottom: 16px;
-//    @media (max-width: 767px) {
-//      flex-wrap: wrap;
-//    }
-//  }
-//
-//  &__author-line {
-//    @media (max-width: 767px) {
-//      width: calc(100% - 32px);
-//      padding-left: 44px;
-//    }
-//  }
-//
-//  app-date-picker {
-//    @media (max-width: 767px) {
-//      margin-left: auto;
-//    }
-//  }
-//}
+.ticket-updates { // TODO check this style
+  &__update-block {
+    position: relative;
+    border-bottom: 1px solid $gray-400--old;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+    }
+  }
 
-//.ticket-updates .ticket-updates__ticket-item { // TODO check this style
-//  &:last-child {
-//    .ticket-updates__update-block {
-//      border-bottom: none;
-//    }
-//  }
-//}
+  &__author-line {
+    @media (max-width: 767px) {
+      width: calc(100% - 32px);
+      padding-left: 44px;
+    }
+  }
+
+  app-date-picker {
+    @media (max-width: 767px) {
+      margin-left: auto;
+    }
+  }
+}
+
+.ticket-updates .ticket-updates__ticket-item { // TODO check this style
+  &:last-child {
+    .ticket-updates__update-block {
+      border-bottom: none;
+    }
+  }
+}
 .ticket-updates__update-block {
   .qt-button-square-wrap {
     display: none;
@@ -3594,13 +3600,33 @@ app-ticket-edit-aside {
           }
         }
       }
-
+      .start-end-timer .start,
+      .start-end-timer .end {
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+      }
+      .start-end-timer__label:first-child {
+        @media (max-width: 767px) {
+          margin-right: 8px;
+        }
+      }
       label {
         @media (max-width: 767px) {
-          margin-top: 42px;
+          //margin-top: 42px; // TODO check this style
           width: 100%;
           max-width: 100%;
           margin-right: 0;
+          position: relative;
+        }
+
+        .icon__time {
+          @media (max-width: 767px) {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 14px;
+          }
         }
 
         &::before {
@@ -3648,6 +3674,12 @@ app-ticket-edit-aside {
         }
       }
 
+      .cps-block__products-block label {
+        @media (max-width: 767px) {
+          margin-top: 42px;
+        }
+      }
+
       .product-dropdown-new-ng {
         @media (max-width: 767px) {
           margin-top: 42px;
@@ -3678,27 +3710,27 @@ app-ticket-edit-aside {
       }
     }
 
-    //.qt-aside__buttons { // TODO check this style
-    //  @media (max-width: 767px) {
-    //    padding: 0 16px;
-    //    position: relative;
-    //    margin-top: 28px;
-    //  }
-    //
-    //  &::after {
-    //    @media (max-width: 767px) {
-    //      content: "Add Users to notify";
-    //      position: absolute;
-    //      left: 16px;
-    //      top: -28px;
-    //      color: $primary-2;
-    //      font-size: 13px;
-    //      line-height: 20px;
-    //      letter-spacing: 0;
-    //      font-weight: 600;
-    //    }
-    //  }
-    //}
+    .qt-aside__buttons { // TODO check this style
+      @media (max-width: 767px) {
+        padding: 0 16px;
+        position: relative;
+        margin-top: 28px;
+      }
+
+      &::after {
+        @media (max-width: 767px) {
+          content: "Add Users to notify";
+          position: absolute;
+          left: 16px;
+          top: -28px;
+          color: $primary-2;
+          font-size: 13px;
+          line-height: 20px;
+          letter-spacing: 0;
+          font-weight: 600;
+        }
+      }
+    }
 
     .qt-aside-modern__footer {
       display: none;
@@ -3757,6 +3789,9 @@ app-ticket-edit-aside {
   }
 
   .ticket-updates__author-line {
+    width: calc(100% - 32px);
+    padding-left: 44px;
+
     .ticket-updates__delete {
       @media (max-width: 767px) {
         display: none;

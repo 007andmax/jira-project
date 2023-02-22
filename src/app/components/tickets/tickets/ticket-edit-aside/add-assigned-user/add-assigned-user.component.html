@@ -51,7 +51,8 @@
             ngbDropdownMenu
             aria-labelledby="dropdown"
         >
-            <input
+            <div class="qt-input-search">
+              <input
                 *ngIf="type == 'DETAIL_TICKET_ASSIGNED_USER'"
                 #userInput
                 class="pointer"
@@ -59,7 +60,8 @@
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (input)="onSearchUser($event)"
-            >
+              >
+            </div>
             <div class="autocomplete-container">
                 <mat-option
                     class="qt-ai-c"

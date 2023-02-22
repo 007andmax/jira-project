@@ -275,18 +275,15 @@
                 right: 0;
             }
         }
-        .button-mark-complete {
-          padding: 0 10px;
-        }
         /deep/ .input-group {
-          width: 114px;
-          padding: 1px 8px;
+          width: 131px;
+          padding: 1px 12px;
           border: 1px solid $gray-200;
           border-radius: 6px;
           margin: 0 0 0 8px;
 
           .qt-input-block__input {
-            width: 73px;
+            width: 83px;
             padding: 0;
             border: unset;
             box-shadow: unset;
@@ -314,7 +311,7 @@
           font-size: 13px;
           line-height: 16px;
           color: $gray-500;
-          padding: 5px 8px;
+          padding: 5px 12px;
 
           .add-user {
             width: 16px;

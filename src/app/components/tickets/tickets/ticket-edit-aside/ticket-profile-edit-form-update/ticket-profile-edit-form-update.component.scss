@@ -41,6 +41,7 @@
             width: 100%;
             align-items: center;
             justify-content: center;
+            margin: 0;
         }
     }
 
@@ -60,6 +61,8 @@
             border: none;
             padding: 0;
             margin: 0;
+            -webkit-mask-image: unset;
+            mask-image: unset;
         }
 
         &.active {

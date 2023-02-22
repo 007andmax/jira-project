@@ -1,6 +1,6 @@
 @import './src/assets/styles/variable';
 
-.start-end-timer {
+/deep/  .start-end-timer {
   display: flex;
   .start, .end {
     margin-right: 8px;
