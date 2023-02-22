@@ -14,6 +14,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { TicketStatus } from '../setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../tickets/class/status-color';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'company-tickets',
@@ -42,6 +43,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     private leftPanelService: LeftPanelService,
     private usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
+    private appService: AppService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
@@ -127,11 +129,19 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     })
   }
   editTicket(id) {
-    this.idEditTicket = id;
-    this.ticketsStateService.onOpenTicket();
-    this.ticketsService.getTicket(id).subscribe(data => {
-      this.ticketsStateService.onEditTicket(data);
-    })
+    if (!this.appService.isMobile) {
+      this.ticketStateService.setTicketRoutingId(id);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${id}`;
+      window.open(url, '_blank');
+    } else {
+      this.idEditTicket = id;
+      let ticket = this.tickets.find(item => item.id === id);
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(id).subscribe(data => {
+        data.setUserCompanies(ticket.userCompanies);
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
   }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {

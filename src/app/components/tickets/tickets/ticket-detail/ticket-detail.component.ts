@@ -205,6 +205,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
+    if (this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
+      let ids = this.listAssignedUser.map(item => {
+        return item.id;
+      })
+      this.ticketsService.addAssignUsers(this.ticketProfile.id, ids).subscribe(data => {
+
+      })
+    }
   }
   onChangeTags(data) {
     this.ticketProfile.tags = data;

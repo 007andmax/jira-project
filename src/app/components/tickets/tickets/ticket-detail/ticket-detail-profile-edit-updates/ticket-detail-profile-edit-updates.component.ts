@@ -48,6 +48,10 @@ export class TicketDetailProfileEditUpdatesComponent implements OnInit {
       })
     }
   }
+  onSelectUser(data) {
+    if (this.update.type === "PRODUCT") this.selectProducts.product.setUser(data);
+    if (this.update.type === "SERVICE") this.selectServices.service.setUser(data);
+  }
   close() {
     this.onCloseForm.emit(null);
   }

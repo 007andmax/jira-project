@@ -14,7 +14,7 @@
                 <span class="ticket-updates__add-note">&nbsp;added a service</span>
             </div>
             <ticket-detail-profile-updates-service-header-info
-                *ngIf="update.services.lengthh > 0"
+                *ngIf="update.services.length > 0"
                 [date]="update.createdAt"
                 [shares]="update.shares"
                 [service]="update.services[0]"
@@ -28,7 +28,7 @@
             <div
                 class="qt-button-square qt-button-square__prepend pointer"
                 (click)="edit()"
-                *ngIf="!isIOSDevice() && update.services.lengthh > 0"
+                *ngIf="!isIOSDevice() && update.services.length > 0"
                 (mouseenter)="editTooltip.show($event.target)"
                 (mouseleave)="editTooltip.hide()"
             >
@@ -37,7 +37,7 @@
             <div
                 class="qt-button-square qt-button-square__prepend pointer"
                 (touchstart)="edit()"
-                *ngIf="isIOSDevice() && update.services.lengthh > 0"
+                *ngIf="isIOSDevice() && update.services.length > 0"
                 (mouseenter)="editTooltip.show($event.target)"
                 (mouseleave)="editTooltip.hide()"
             >
@@ -46,7 +46,7 @@
             <div
                 class="qt-button-square qt-button-square__afterpend pointer"
                 (click)="removeService()"
-                *ngIf="update.services.lengthh > 0"
+                *ngIf="update.services.length > 0"
                 (mouseenter)="deleteTooltip.show($event.target)"
                 (mouseleave)="deleteTooltip.hide()"
             >

@@ -2,6 +2,7 @@
     <ticket-detail-profile-edit-updates-header
         *ngIf="update.type !== 'QUICK_SUPPORT'"
         [update]="update"
+        (onSelectUser)="onSelectUser($event)"
     ></ticket-detail-profile-edit-updates-header>
     <div class="cps-block__content">
         <ticket-detail-profile-edit-updates-services

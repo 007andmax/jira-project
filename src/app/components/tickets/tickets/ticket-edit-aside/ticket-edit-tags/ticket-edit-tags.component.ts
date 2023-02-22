@@ -38,7 +38,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    * @param {TagsStateService} tagsState to work with tags state
    */
   public constructor(
-    private tagsService: TagsService,
+    public tagsService: TagsService,
     private tagsState: TagsStateService,
     public tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef

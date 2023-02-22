@@ -18,7 +18,10 @@
     >
         <div class="loading"></div>
     </div>
-    <div class="ticket-detail-page-content">
+    <div
+        class="ticket-detail-page-content"
+        [hidden]="showPreloader"
+    >
         <div class="ticket-detail-page-content-main">
             <div class="ticket-detail-page-content__body">
                 <div class="ticket-detail-page-content__body-inner">

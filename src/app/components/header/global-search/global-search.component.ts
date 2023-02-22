@@ -16,6 +16,8 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'app-global-search',
@@ -43,6 +45,8 @@ export class GlobalSearchComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     public ticketsListService: TicketsListService,
     private permissionsService: PermissionsService,
+    private appService: AppService,
+    private ticketStateService: TicketStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -79,10 +83,16 @@ export class GlobalSearchComponent implements OnInit {
 
     }
     if (item.type === 'TICKETS') {
-      this.ticketsStateService.onOpenTicket();
-      this.ticketsService.getTicket(item.id).subscribe(data => {
-        this.ticketsStateService.onEditTicket(data);
-      })
+      if (!this.appService.isMobile) {
+        this.ticketStateService.setTicketRoutingId(item.id);
+        const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/ticket/${item.id}`;
+        window.open(url, '_blank');
+      } else {
+        this.ticketsStateService.onOpenTicket();
+        this.ticketsService.getTicket(item.id).subscribe(data => {
+          this.ticketsStateService.onEditTicket(data);
+        })
+      }
     }
     if (item.type === 'USERS') {
       let user = this.getUserById(item.id);
