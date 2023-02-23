@@ -50,7 +50,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
   @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
-
+  isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
   showEditUpdate: boolean = false;
@@ -90,9 +90,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     (<any>document.body.querySelector(".nav-header")).style.display = "none";
-    if (this.activateRoute.snapshot.params['id']) this.getTicket(this.activateRoute.snapshot.params['id']);
+    if (this.activateRoute.snapshot.params['id'] && !this.isInit) this.getTicket(this.activateRoute.snapshot.params['id']);
     let subscription = this.activateRoute.params.subscribe(params => {
-      if (params['id']) this.getTicket(this.activateRoute.snapshot.params['id']);
+      if (params['id'] && !this.isInit) this.getTicket(this.activateRoute.snapshot.params['id']);
     });
     this.sub.add(subscription);
     this.listColors = this.ticketsStateService.getListStatusColor();
@@ -212,6 +212,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.showFormUpdate = true;
   }
   getTicket(id) {
+    this.isInit = true;
     this.ticketsService.getTicket(id).subscribe(data => {
       // data.setUserCompanies(ticket.userCompanies);
       this.ticketProfile = data;
