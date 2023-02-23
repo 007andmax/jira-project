@@ -170,6 +170,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketStateService.onEditUpdate.subscribe(data => {
       this.openedMobileEditUpdate = true;
     })
+
+    let onEditUpdateByForm = this.ticketStateService.onEditUpdateByForm.subscribe(data => {
+      this.showEditUpdate = true;
+    })
+    this.sub.add(onEditUpdateByForm);
+  }
+  onInitRealTimes() {
     if (this.websocketService.isInit) {
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
@@ -179,10 +186,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.ticketStateService.subsribeToTicketTasks(this.ticketProfile.id);
     })
     this.sub.add(onInit);
-    let onEditUpdateByForm = this.ticketStateService.onEditUpdateByForm.subscribe(data => {
-      this.showEditUpdate = true;
-    })
-    this.sub.add(onEditUpdateByForm);
   }
   onMoveToTrash(data) {
     this.ticketsService.trashTicket(this.ticketProfile.id, data).subscribe(res => {
@@ -220,8 +223,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       this.ticketTasks.getTicketTasks(id);
-      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
-      // this.ticketProfileUpdates.
+      this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
         //  if (!this.rightPanel.toggleRightPanel && !this.appService.isMobile) this.rightPanel.toggleTypeOnPanel('COMPANY_INFO');
