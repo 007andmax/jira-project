@@ -13,9 +13,23 @@
             <span class="icon__timer qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon qt-fs-0"></span>
             {{dateTxt}}
         </div>
-        <div class="qt-button qt-ml-12">
-            <span class="icon__check--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
-            Close Ticket
+        <div
+            [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+            class="qt-button qt-ml-12"
+            placement="bottom"
+            ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
+            [disableTooltip]="checkClose()"
+            appDisabledBtn
+            #update_closeBtn="disabled"
+            (onClick)="close()"
+            [ngClass]="{'--disabled':!checkClose(), '--loading':isUpdateAndClose}"
+        >
+            <span
+                class="icon__check--white qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"
+                *ngIf="!isUpdateAndClose"
+            ></span>
+            <span>Close Ticket</span>
+            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
         </div>
     </div>
 </div>
@@ -111,16 +125,19 @@
                         Report as Spam
                     </a>
                 </li>
-                <li class="trash-user-list" *ngIf="ticketsPermissionsService.isActionVisible('send_to_trash', ticketProfile,null,null)">
-                  <a
-                    tabindex="-1"
-                    class="dropdown-item trash-user"
-                    href="javascript:void(0)"
-                    (click)="moveToTrash(true)"
-                  >
-                    <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
-                    Move to Trash
-                  </a>
+                <li
+                    class="trash-user-list"
+                    *ngIf="ticketsPermissionsService.isActionVisible('send_to_trash', ticketProfile,null,null)"
+                >
+                    <a
+                        tabindex="-1"
+                        class="dropdown-item trash-user"
+                        href="javascript:void(0)"
+                        (click)="moveToTrash(true)"
+                    >
+                        <i class="qt-sz-20 qt-bg-contain icon__remove"></i>
+                        Move to Trash
+                    </a>
                 </li>
             </ul>
         </div>

@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { User } from 'src/app/components/users/class/user';
-import { MOVE_TO_SPAM_TICKET, MOVE_TO_TRASH_TICKET } from 'src/app/const/confirm';
+import { MOVE_TO_SPAM_TICKET_DETAIL, MOVE_TO_TRASH_TICKET_DETAIL } from 'src/app/const/confirm';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
@@ -22,6 +23,8 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onAddUpdate = new EventEmitter();
   @Output() onClaimTicket = new EventEmitter();
+  @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
+  isUpdateAndClose: boolean = false;
   currentUser: CurrentUser;
   dateTxt: string = "";
   interval;
@@ -62,10 +65,10 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     }, 1000);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_TICKET) {
+        if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_TICKET_DETAIL) {
           this.onMoveToSpam();
         }
-        if (this.confirmStateService.getConfirmAction() === MOVE_TO_TRASH_TICKET) {
+        if (this.confirmStateService.getConfirmAction() === MOVE_TO_TRASH_TICKET_DETAIL) {
           this.onMoveToTrash();
         }
       }
@@ -82,14 +85,48 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
       })
     }
   }
+  checkClose() {
+    if (this.ticketProfile.updates.length === 0) return true;
+    let completeServices = true;
+    let completeProducts = true;
+    this.ticketProfile.updates.forEach(update => {
+      if (update.type !== 'MIXED') {
+        if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
+        if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
+      }
+    });
+    return completeServices && completeProducts;
+  }
+  close() {
+    if (!this.checkClose()) return;
+    this.update_closeBtn.setDisabled(true);
+    this.isUpdateAndClose = true;
+    this.ticketsService.updateTicket(this.getDataForClose(), true).subscribe(data => {
+      this.isUpdateAndClose = false;
+      //   this.onClosed.emit(null);
+      this.update_closeBtn.setDisabled(false);
+    }, err => {
+      this.isUpdateAndClose = false;
+      this.update_closeBtn.setDisabled(false);
+    })
+  }
+  public getDataForClose() {
+    return {
+      note: "Ticket has been closed",
+      type: "NOTE",
+      shares: [],
+      ticket: { id: this.ticketProfile.id },
+      attachments: []
+    }
+  }
   moveIntoSpam() {
-    this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET);
+    this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET_DETAIL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to mark the ticket as spam?`;
   }
   moveToTrash(movedWay) {
     this.movedWay = movedWay;
-    this.confirmStateService.setConfirmAction(MOVE_TO_TRASH_TICKET);
+    this.confirmStateService.setConfirmAction(MOVE_TO_TRASH_TICKET_DETAIL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Do you want to move the ticket to Trash?`;
   };

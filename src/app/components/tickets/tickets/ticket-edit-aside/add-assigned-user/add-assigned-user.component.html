@@ -47,20 +47,22 @@
             >
         </mat-chip-list>
         <div
-            class="autocomplete-user-tags 123123123123"
+            class="autocomplete-user-tags"
             ngbDropdownMenu
             aria-labelledby="dropdown"
         >
-            <div class="qt-input-search">
-              <input
+            <div
+                class="qt-input-search"
                 *ngIf="type == 'DETAIL_TICKET_ASSIGNED_USER'"
-                #userInput
-                class="pointer"
-                [formControl]="userCtrl"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (input)="onSearchUser($event)"
-              >
+            >
+                <input
+                    #userInput
+                    class="pointer"
+                    [formControl]="userCtrl"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (input)="onSearchUser($event)"
+                >
             </div>
             <div class="autocomplete-container">
                 <mat-option
