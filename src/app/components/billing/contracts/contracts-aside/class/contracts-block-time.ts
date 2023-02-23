@@ -39,7 +39,8 @@ export class ContractsBlockTime {
         this.enableTimeRollover = data.enableTimeRollover;
         this.endDate = data.endDate;
         this.withCustomBillingDate = data.withCustomBillingDate;
-        this.customBillingDate = data.customBillingDate;
+        if (this.withCustomBillingDate) this.customBillingDate = data.customBillingDate;
+        if (!this.withCustomBillingDate) this.customBillingDate = undefined;
         this.includedHours = String(data.includedHours);
         this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : null;
         if (data.interval) {

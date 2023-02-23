@@ -49,7 +49,8 @@ export class ContractsUserDevice {
         this.description = data.description;
         this.endDate = data.endDate;
         this.withCustomBillingDate = data.withCustomBillingDate;
-        this.customBillingDate = data.customBillingDate;
+        if (this.withCustomBillingDate) this.customBillingDate = data.customBillingDate;
+        if (!this.withCustomBillingDate) this.customBillingDate = undefined;
         this.invoiceAsSingleItem = data.invoiceAsSingleItem;
         this.includedHours = String(data.includedHours);
         if (data.interval) {
