@@ -119,11 +119,9 @@
     }
 }
 .profile-cmp-board {
-    .qwe {
+    &__image {
         border-radius: 50%;
-        margin: 0;
         border: none;
-        float: unset;
         object-fit: cover;
         height: 56px;
         width: 56px;
@@ -223,7 +221,7 @@
     top: unset;
     right: unset;
     transform: none;
-    margin: 0px 0px 0px 8px;
+    margin: 0 0 0 8px;
 }
 /deep/ .tags-area {
     app-company-tags {

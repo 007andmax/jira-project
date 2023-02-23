@@ -82,7 +82,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-    this.onScroll();
+    if (this.ticketsStateService.getListType()) this.onScroll();
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })

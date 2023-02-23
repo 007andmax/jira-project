@@ -13,7 +13,7 @@ import { StatusColor } from 'src/app/components/tickets/class/status-color';
   providedIn: 'root'
 })
 export class TicketsStateService {
-  listType: string = "USERS";
+  listType: string;
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
   ticketStatusForRemove: TicketStatus = null;
@@ -145,6 +145,7 @@ export class TicketsStateService {
   public onChangeTypeFilter(data) {
     this.listType = data;
     this.typeFilter.emit(data);
+    console.log("data", data);
   }
   public getOnChangeTypeFilter() {
     return this.typeFilter;

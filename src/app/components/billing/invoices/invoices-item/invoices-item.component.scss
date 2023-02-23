@@ -29,3 +29,49 @@ tr.--selected {
   min-width: max-content;
   overflow: unset;
 }
+
+.payment-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
+  width: 400px;
+  min-height: 56px;
+  padding: 10px 22px;
+  background: $white;
+  border-radius: 6px;
+}
+
+.payment-info__cheque {
+  row-gap: 4px;
+  column-gap: 4px;
+  padding: 7px 0;
+}
+.payment-info__data {
+  width: 45%;
+}
+.payment-info__payment {
+  width: 27.5%;
+}
+.payment-info__amount {
+  width: 27.5%;
+  text-align: right;
+}
+.payment-info__total {
+  padding: 7px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 55%;
+  margin-left: auto;
+
+  span {
+    width: 50%;
+  }
+
+  &-price {
+    text-align: right;
+  }
+}

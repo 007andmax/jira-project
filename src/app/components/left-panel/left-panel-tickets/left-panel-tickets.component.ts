@@ -17,7 +17,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   open: boolean = false;
   @ViewChild('usersDp') usersDp: DropDownComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
-  listType: string = "USERS";
+  listType: string;
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   @Input() activePage: string = "";

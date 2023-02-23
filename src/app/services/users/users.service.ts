@@ -72,6 +72,14 @@ export class UsersService {
   public setDefaultSubscriptions(id, subscriptions) {
     return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
   }
+  public setDefaultPage(startPage) {
+    return this.http.put(this.apiUrl + `settings/userProfile/misc`, { startPage: startPage }).pipe(
+      tap(data => {
+        this.toastrService.success("The default page has been successfully set");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public setSubscriptions(id, subscriptions) {
     return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
   }

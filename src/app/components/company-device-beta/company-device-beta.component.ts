@@ -21,6 +21,9 @@ import { ExcelService } from "../device/_services/download_csv.service";
 import { DraftEmailStateService } from "src/app/states/draft-email/draft-email-state.service";
 import { DevicesStateService } from "src/app/states/devices/devices-state.service";
 import { Subscription } from "rxjs";
+import { DeviceCompany } from "../company-devices/class/device-company";
+import { DevicesService } from "src/app/services/devices/devices.service";
+import { CompanyDevicesRemoteAccessComponent } from "../company-devices/company-devices-remote-access/company-devices-remote-access.component";
 
 @Component({
   selector: "app-company-device-beta",
@@ -29,7 +32,6 @@ import { Subscription } from "rxjs";
 })
 export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell") template;
-  @ViewChild("templateConnection") templateconnection;
   @ViewChild('dropdownModel') dropdownModel: DropDownComponent;
   @ViewChild('dropdowndeviceCompany') dropdowndeviceCompany: DropDownComponent;
   @ViewChild('dropdowndeviceTp') dropdowndeviceTp: DropDownComponent;
@@ -163,7 +165,8 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     private commonHttpServices: CommonHttpServices,
     private excelService: ExcelService,
     public draftEmailStateService: DraftEmailStateService,
-    private devicesStateService: DevicesStateService
+    private devicesStateService: DevicesStateService,
+    private devicesService: DevicesService,
   ) { }
 
   ngOnInit() {
@@ -174,11 +177,15 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     this.clientName = "All Companies";
     this.companyId = this.activateRoute.snapshot.params["id"];
     let id = this.activateRoute.snapshot.params['id'];
-    if (this.devicesStateService.getAllDevices()) this.getAlldevicedata(this.devicesStateService.getAllDevices(), this.activateRoute.snapshot.params['id']);
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      this.getAlldevicedata(data, this.activateRoute.snapshot.params['id']);
+    if (id) this.getAlldevicedata(id);
+    let subscription = this.activateRoute.params.subscribe(params => {
+      if (params['id'] && id != params['id']) {
+        id = params['id'];
+        this.companiesStateService.setCompanyRoutingId(id);
+        this.companyId = id;
+      }
     });
-    this.sub.add(getOnDevices);
+    this.sub.add(subscription);
     if (id) this.companiesStateService.setCompanyRoutingId(id);
     this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = this.getClientsList(data);
@@ -190,13 +197,12 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
       this.currentCompany = company;
       this.techCompnayGuid = company.id;
       this.companyGuid = company.id;
-      if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
       this.getManufacturers(this.techCompnayGuid);
       this.getModels(this.techCompnayGuid);
     }
 
     let onSetAccessToken = this.agentService.onSetAccessToken.subscribe(data => {
-      if (company) this.setPreviewDataDevice();
+      if (company && this.deviceSuccess) this.setPreviewDataDevice();
     })
     this.sub.add(onSetAccessToken);
     //when current company changes
@@ -495,12 +501,11 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   }
 
   remoteAccess(connectionType, guid) {
-    this.guid = guid;
-    this.connectionType = connectionType;
-    this.modalService.open(this.templateconnection, {
-      windowClass: "modal-md",
-      centered: true,
-    });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.companyId = this.companyId;
+    modalRef.componentInstance.guid = guid;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE_BETA';
   }
 
   close() {
@@ -847,7 +852,7 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
       }
       else {
         this.showPreloader = false;
-        this.getAlldevicedata(this.devicesStateService.getAllDevices(), this.activateRoute.snapshot.params['id']);
+        this.getAlldevicedata(this.comapanyId);
       }
 
       if (this.cd) {
@@ -1590,15 +1595,16 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAlldevicedata(data, id) {
+  getAlldevicedata(id) {
     this.devices = [];
-    this.deviceSuccess = true;
-    if (!data[id]) return;
-    if (data[id].length) {
-      data[id].forEach(item => {
-        this.devices.push(item);
-      });
-    }
+    this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
+      if (data) {
+        this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
+        this.filter.onFilterName(this.devices);
+        this.deviceSuccess = true;
+      }
+      if (this.agentService.hasAccessToken()) this.setPreviewDataDevice();
+    });
   }
 
   getLastCheckIn(asset) {

@@ -6,6 +6,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
@@ -65,6 +66,7 @@ export class LeftPanelComponent implements OnInit {
     private permissionsService: PermissionsService,
     private leftPanelService: LeftPanelService,
     public cd: ChangeDetectorRef,
+    private ticketsStateService: TicketsStateService,
     private passwordManagerStateService: PasswordManagerStateService,
   ) { }
 
@@ -251,6 +253,11 @@ export class LeftPanelComponent implements OnInit {
     if (this.leftPanelService.isReportsState(data)) this.page = "REPORTS";
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
+  }
+  setDefaultTypeFilter() {
+    this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage)
+    this.ticketsStateService.onChangeTypeFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
+    this.ticketsStateService.onChangeLeftPanelFilter(this.currentUser.startPage == "MY_TICKETS" ? "USERS" : this.currentUser.startPage);
   }
   changePage(page) {
     this.page = page;
